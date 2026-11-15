@@ -1,0 +1,12 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "588ccb226f74710acf26faf1d7eab6950c3edd8f",
+  "read_on": "2026-11-15",
+  "counts": [{"n":977,"start":[{"label":"beyond-horizon row couzo-issue763-2026-10-23","holders":"couzo-issue763-2026-10-23","side":"31.765989508190","exact":true}],"steps":[{"report":"#992","kind":"issue","reported_at":"2026-11-15T06:03:49Z","side":"31.8492424049","exact":false,"verdict":"not recorded","reason":"above","decided_against":["beyond-horizon row couzo-issue763-2026-10-23"],"difference":"above by at least 8.33e-02","first_committed":"2026-11-15T06:00:25Z"}],"best_now":[{"label":"beyond-horizon row couzo-issue763-2026-10-23","holders":"couzo-issue763-2026-10-23","side":"31.765989508190","exact":true}],"publication_dependent":[]}],
+  "summary": {"counts":1,"claims":1,"recorded_new":0,"recorded_new_continuing":0,"recorded_refinement":0,"recorded_unclassified":0,"recorded_by_exception":0,"not_recorded":1,"undecided":0},
+  "cross_check": [],
+  "reports": [{"report":"#992","url":"https://github.com/jlevy/squares/issues/992","kind":"issue","holders":"Miguel Lara","reported_at":"2026-11-15T06:03:49Z","bead":"think-ud9e","counts":[977],"recorded":[],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[{"n":977,"reason":"above","held_by":"beyond-horizon row couzo-issue763-2026-10-23"}],"undecided":[]}],
+  "owner_decisions": {"exact_ties":[],"first_commit_before_report":[],"undecided":[],"publication_dependent":[],"unknown_times":[],"refinement_chains":[],"key_reason_candidates":[],"measured_identity":[]},
+  "other_items": [],
+  "rulings": [{"ruling":"restatement","decided":"2026-10-23","bead":"think-fwa9","text":"A side below an earlier report at its count by less than one unit in the 12th place, with both rounding up to the same 12-place print, restates that report: the earlier report stays the row, and the later side is not recorded.","not_recorded":[],"awaiting_owner":[]},{"ruling":"classical-constructions","decided":"2026-10-23","bead":"think-8krd","text":"Göbel's classical constructions are earlier reports beyond n = 324: at each count the least side of the three families the Kingbird catalogue states, at that count or by deleting squares from a larger one, joins the start, so a side at or above it is not recorded.","start":[],"not_recorded":[]}]
+}

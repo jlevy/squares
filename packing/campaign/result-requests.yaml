@@ -34801,3 +34801,137 @@ issues:
       the issue is closed with it, and that answers are welcome at any time. The issue was
       closed as completed at 06:39:57Z. The issue has no comment but the reply, and
       read_through moves to it.
+  - number: 992
+    title: Upper Bound for Packing 977 Unit Squares — Construction by Miguel Lara
+    author: larasmiguel
+    opened: '2026-11-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Miguel Lara (larasmiguel), in the account's first contribution, reports s(977) <= 17 +
+      21/sqrt(2), about 31.8492424049, below the 32 x 32 grid's 32, by a construction his
+      repository larasmiguel/square-s977 states in prose: 441 unit squares in a 21 x 21 array
+      turned 45 degrees in the centre and four corner staircases of 134 axis-aligned squares.
+      Its coordinates are a floating-point CSV at the relaxed side 31.85, checked with Shapely;
+      there is no exact certificate, and the issue names no commit. Commits after the issue say
+      the bound is not a new record: Göbel's square (15, 21) of 921 with an L-shaped border
+      holds 982 at the same side. Triaged and retained on 15 November 2026 in lane L175
+      (think-ud9e), at the head, 26d5695; the source states no licence (think-cnn7's
+      presumption, think-cszb). devtools.construction_checker cannot read the recipe, whose side
+      is irrational and which builds on no replayed certificate, so devtools.diamond_staircases
+      writes the stated construction exactly over Q(sqrt 2), and both maintained exact routes
+      over a number field accept it at contact and refuse its two gross and three sharp controls
+      as stated in advance. Not recorded: the ledger of 15 November reads Francisco Couzo's #763
+      row at 977, 31.765989508190, published on 23 October, 8.33e-2 below the claim.
+      devtools.goebel_construction reads Göbel's construction at 977 as 17 + 11 sqrt 2, about
+      32.556, which is above the grid's 32, so it decides nothing at this count; the module
+      applies no L-border, and the L-bordered Göbel square (15, 21) reaches the claim's side
+      exactly (think-7j3i). The 15 November stage 4 review (lane L174, think-u58c), written
+      blind in a separate lane, accepts the bound with its own clean-room exact checker, nothing
+      blocking, and finds it not recordable for the same reason; it proposes S1. OpenAI ChatGPT
+      assistance disclosed.
+    read_through: '2026-11-15T06:03:49Z'
+    results:
+    - key: n977-diamond-staircases
+      claim: >-
+        s(977) <= 17 + 21/sqrt(2), about 31.8492424049, by the construction
+        certificates/n977_certificate.md at larasmiguel/square-s977 26d5695 states: a 21 x 21
+        diamond of 441 squares turned 45 degrees and four corner staircases of 134 axis-aligned
+        squares.
+      source: body
+      not_registered: >-
+        Beyond the n <= 324 corpus and above an earlier report. The ledger of 15 November for
+        this issue (upper-bounds-992-20261115), walked from starts frozen at main 588ccb226 with
+        Göbel's construction beside the row, reads Francisco Couzo's #763 certificate at 977
+        (couzo-issue763-2026-10-23), 31.765989508190, the count's current row since 23 October,
+        8.33e-2 below the claim, so by the report-order rule the claim is not recorded and takes
+        no row of source-coverage.yaml. The construction is decided exactly all the same, since
+        the source has no exact certificate and the reply owes the author whether the bound
+        holds, on both maintained routes over Q(sqrt 2) with the controls stated in advance
+        (receipts/exact-decision.json in the lara-s977-upper-bound-2026-11-15 packet), and the
+        stage 4 review (docs/project/reviews/review-2026-11-15-lara-992.md) decided it again by
+        two methods of its own; no evidence entry is written, since no row or entry rests on
+        either.
+      queued: false
+      bead: think-ud9e
+    beads:
+    - think-ud9e
+    - think-u58c
+    - think-cszb
+    - think-7j3i
+    answer_bead: think-ud9e
+    replies: []
+    close_when: >-
+      The import and its disposition are on main, and the reply on main says why the claim is not
+      recorded, what was decided and what the review found; nothing the author asked for is queued.
+    notes: >-
+      Read on 15 November 2026 from main 588ccb226; no comment on the issue, which carried the
+      intake label from 06:55:24Z, its only event. The account's first contribution: #992 is its
+      only issue on this repository. The credit name, Miguel Lara, is the issue's and the
+      repository's, and no contributor profile exists; nothing is registered, so no census span is
+      added, and the identity stays unresolved. The record credits people, not AI agents
+      (attribution.md): the issue, README.md and SUBMISSION.md say OpenAI ChatGPT was used
+      extensively for exploratory geometry, generating and debugging C++ and Python, writing the
+      verification code and drafting the reasoning and documentation, with Miguel Lara directing
+      the investigation, and that assistance is stated, not credited. The repository's eight
+      commits from 8b91a7e (06:00:25Z) to 3e9b410 (06:00:38Z) each add a file, the side first in
+      README.md, 3 minutes 24 seconds before the issue; the packet pins the head, 26d5695
+      (06:24:28Z), whose three commits after the issue add to README.md, SUBMISSION.md and the
+      certificate an acknowledgement of Frits Göbel's construction, citing Göbel (1979) and
+      Friedman's DS7, and ask that Miguel Lara be credited for this reconstruction, its
+      coordinates, code, checking and documentation, not as discoverer of the bound; the
+      construction, the CSV and the checker are unchanged. GitHub's activity log was not read.
+      No source program ran: the CSV, at the relaxed side 31.85 and not the claim's, and the
+      Shapely checker are retained as data and decide nothing here, and the SVG drawing of the CSV
+      is pinned by digest only. The repository states no licence; the account submitted it in the
+      issue, so the presumption of permission of 24 October 2026 (think-cnn7) applies, with
+      think-cszb the follow-up.
+
+      Decided exactly in lane L175 (devtools.diamond_staircases): the certificate's own
+      statement, 441 turned squares centred at (L/2 + (u - v) sqrt(2)/2, L/2 + (u + v)
+      sqrt(2)/2) and the bottom-left staircase's rows 15, 15, 14, ..., 2 with its quarter turns,
+      written as a Witness/v2 over Q(sqrt 2) at side 17 + (21/2) sqrt 2, nothing taken from the
+      CSV. sqpack.witness.exact_verify and devtools.check_algebraic_witness_independent each
+      accept it with squares touching walls and each other exactly, and refuse a duplicated
+      square, a cell past row 1 inside the diamond, the side lowered by 1e-30, the diamond moved
+      1e-30 toward a staircase and a basis lengthened by 1e-50, each as the plan hashed at
+      07:05:48Z before any run states (SHA-256 7cbe1f46...0c891, retained beside the receipt).
+      Measured against Göbel's families exactly: the claim's side is the L-border of the Göbel
+      square (15, 21) of 921, which holds 982, as the source's later commits say; the author's
+      own layout is instead the (16, 21) arrangement, outside the family's condition (15 > (21/2)
+      sqrt 2), with each staircase cut from 136 cells to 134 so that neighbouring staircases
+      clear. devtools.goebel_construction applies no L-border, so it reads 17 + 11 sqrt 2 at 977
+      (the Göbel square of 1028), sqrt(2)/2 above the claim; whether L-border extensions of
+      Göbel's members join Göbel's construction is think-7j3i's question for the owner, beside
+      think-zkxy and the 23aff0c index's 27 held L-border extensions of Göbel's squares, which
+      state the same side, 31.849242404918, at 981 and 982. Every report the record holds at
+      977, from Couzo's packet of 14 October on, is below the claim.
+
+      The stage 4 review (docs/project/reviews/review-2026-11-15-lara-992.md, lane L174,
+      think-u58c), written blind in a separate lane, froze its checker and controls plan and
+      then its findings before reading the record. This lane committed and pushed its own
+      determination first: the packet, the exact decision, the ledger and this entry, by 07:40Z.
+      It read the review's final head at 07:40Z and merged it in the same minute, then mapped it
+      (the document map and the synopsis table, and the common-doc footer the documentation
+      check asks for). The two agree: the review decided the same recipe by separating axes in
+      Z[sqrt 2] and by exact clipping in GMP rationals, all 476,776 pairs, and finds 3,540
+      touching pairs, as both routes here do, and 120 wall contacts on 116 squares, which is
+      sqpack's 240 corner coordinates on the boundary, two per contact; its eight controls, like
+      this lane's six, came out as stated. It finds the claim not recordable under the rule of
+      14 October against Couzo's #763 row (F8); the (16, 21) arrangement overlapping in exactly
+      four pairs, the two end cells of colliding staircases, with #992 that arrangement less the
+      eight end cells, square for square (F10); and 981 squares fitting at the same side (F6,
+      A981), which this lane did not check. Its F11, from its retained border audit, goes to
+      think-7j3i: L-borders on Göbel's members undercut devtools.goebel_construction at 910 of
+      the 1,676 counts from 325 to 2000, and four current rows, 534, 581, 741 and 796, lie
+      within 6.2e-11 above a bordered side. Its F12 agrees that devtools.construction_checker
+      cannot read the recipe; its remark that the record maintains no checker over Q(sqrt 2) is
+      mistaken, since Witness/v2 states number-field scalars and both maintained routes decide
+      them, as they did here; what was missing was a reader of this recipe, which
+      devtools.diamond_staircases now is for its shape. It retained none of the source's bytes,
+      having found no licence; this lane retained them under think-cnn7's presumption, and its
+      question 4 is think-cszb's. Its six questions for the author (the pin, two sentences for
+      the argument, an exact coordinate file, the licence, why 977, and whether Couzo's
+      certificate was known) go into the stage 7 reply and hold nothing open. It proposes S1, a
+      routine consequence of a classical construction.

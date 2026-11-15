@@ -1,0 +1,53 @@
+{
+ "results": [
+  {
+   "control": "K0",
+   "as_stated": true,
+   "differences": [],
+   "receipt_sha256_file": "1cbff5e34c79dd29462cb1a12f3f9445a6056cb3f6e67669c55e9793d5b4cf9f"
+  },
+  {
+   "control": "C1",
+   "as_stated": true,
+   "differences": [],
+   "receipt_sha256_file": "40c63f10a62f6ffe83708be6a85813f674b26705c1a77f27692aebba39bfe23a"
+  },
+  {
+   "control": "C2",
+   "as_stated": true,
+   "differences": [],
+   "receipt_sha256_file": "96033d6416b3bd06f54c70077c3e79b5069d40d9f3b7f16cb72d14b0000ef353"
+  },
+  {
+   "control": "C3",
+   "as_stated": true,
+   "differences": [],
+   "receipt_sha256_file": "72c33f31eeb043e821bcb6a1203299c5e737d5d482974b92372a42a227c37233"
+  },
+  {
+   "control": "C4",
+   "as_stated": true,
+   "differences": [],
+   "receipt_sha256_file": "9b6255261c8424d6e86dcf88062dc6923464300a04f8fc9fba6fa98ad5bbc9a8"
+  },
+  {
+   "control": "C5",
+   "as_stated": true,
+   "differences": [],
+   "receipt_sha256_file": "f0431c16e82ea967b492cad6018d20b5ebd8d0cd143cce55af865b15d194558b"
+  },
+  {
+   "control": "C6",
+   "as_stated": true,
+   "differences": [],
+   "receipt_sha256_file": "a5c2cb3e1e2f9d622faef05198f6f8da3b6c66801a6a762fb87281fe4886e264"
+  },
+  {
+   "control": "C7",
+   "as_stated": true,
+   "differences": [],
+   "receipt_sha256_file": "694e2294bd044cb782f832bf5bef080a88f96663597ec85ec988d64238eeb9a8"
+  }
+ ],
+ "every_control_as_stated": true
+}

@@ -1,0 +1,40 @@
+{
+ "signs": {
+  "cases": 14801,
+  "mismatches": 0
+ },
+ "pairs": {
+  "cases": 25,
+  "failures": []
+ },
+ "walls": {
+  "cases": 9,
+  "failures": []
+ },
+ "miniature": {
+  "got": {
+   "n": 21,
+   "A": [
+    40,
+    0
+   ],
+   "B": [
+    40,
+    0
+   ],
+   "walls_touching": 16,
+   "agree": true
+  },
+  "as_derived": true
+ },
+ "reader": {
+  "results": {
+   "good": "accepted",
+   "angle-30": "refused",
+   "non-canonical": "refused",
+   "count": "refused"
+  },
+  "as_expected": true
+ },
+ "passed": true
+}

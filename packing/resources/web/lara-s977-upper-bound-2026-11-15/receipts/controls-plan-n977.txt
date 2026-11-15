@@ -1,0 +1,38 @@
+# Controls plan, n = 977, jlevy/squares#992 (lane L175, think-ud9e)
+
+Stated before any run of the construction on either route.
+
+Subject: the construction larasmiguel/square-s977 at 26d5695abca2f8a005856e3c1ddc47171d661e9b
+states in certificates/n977_certificate.md, built exactly over Q(sqrt 2) as a Witness/v2
+(center-basis, minimal polynomial x^2 - 2, isolating interval (1, 2)):
+
+- side L = 17 + (21/2) sqrt 2;
+- 441 squares turned 45 degrees: for i, j in 0..20, u = i - 10, v = j - 10, centre
+  (L/2 + (u - v) sqrt(2)/2, L/2 + (u + v) sqrt(2)/2), basis (sqrt(2)/2, sqrt(2)/2);
+- 134 axis-aligned squares in the bottom-left staircase, lower-left corner (c, r) for
+  0 <= r < 15 and 0 <= c < w_r, w = 15 15 14 13 12 11 10 9 8 7 6 5 4 3 2;
+- the other three staircases its images under quarter turns of 90, 180 and 270 degrees
+  about (L/2, L/2).
+
+Routes: sqpack.witness.exact_verify and devtools.check_algebraic_witness_independent.
+
+Expected verdicts, each on both routes:
+
+1. P0, the construction as stated: accepted; least wall clearance 0 and least pair gap 0
+   (squares touch walls and each other).
+2. G1, gross: square 977 replaced by a copy of square 1: refused, overlap.
+3. G2, gross: square 977 replaced by an axis-aligned square with lower-left corner (15, 1),
+   one cell past row 1 of the bottom-left staircase, whose corner (16, 2) lies inside the
+   diamond: refused, overlap.
+4. S1, sharp: the side lowered by 10^-30, every square kept: refused, container.
+5. S2, sharp: the 441 turned squares moved by (-10^-30, -10^-30), toward the bottom-left
+   staircase, whose cells with c + r = 15 touch the diamond's edge x + y = 17 at a corner:
+   refused, overlap.
+6. S3, sharp: square 1's basis first component lengthened by 10^-50 (no longer a unit
+   vector): refused, shape.
+
+Göbel comparison stated in advance, exactly: devtools.goebel_construction.side(977) is
+17 + 11 sqrt 2, the Göbel square of 1028; the Göbel square (a, b) = (15, 21) packs 921 at
+16 + (21/2) sqrt 2, and one L-border around it holds 921 + 2 floor(16 + (21/2) sqrt 2) + 1 =
+982 at 17 + (21/2) sqrt 2, the claim's side exactly; (16, 21) lies outside the family's
+condition (a - 1 = 15 > (21/2) sqrt 2).

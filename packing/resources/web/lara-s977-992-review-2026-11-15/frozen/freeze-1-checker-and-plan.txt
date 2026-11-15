@@ -1,0 +1,35 @@
+# Lane L174 freeze 1 (checker, construction, controls plan, CSV expectation), written 2026-11-15T07:11:30Z.
+# Stated before any construction or control file was decided by l174_decide.py, before l174_compare.py or l174_csv_check.py ran,
+# and before the author's verify_977.py, n977_verification.json or n977.svg, this repository's devtools (goebel_construction,
+# beyond_horizon_replay, construction_checker), source-coverage.yaml, the frontier README, or import lane L175 were opened.
+# Read so far: issue #992; README.md, SUBMISSION.md, requirements.txt, certificates/n977_certificate.md (head and 3e9b410), the CSV's first five lines.
+# source files (clone of larasmiguel/square-s977 at 26d5695abca2f8a005856e3c1ddc47171d661e9b):
+b73d1946060625d550ee3e85b4cb6a3c28b3e67f9db676cc67ed5984c2e74129  26d5695:certificates/n977_certificate.md
+a939ed2c0126118c8f2ae3e5fe4914dd01425a7734713a87f55b8cd2cb465035  26d5695:certificates/n977_coordinates.csv
+# the issue as fetched:
+6062b29d68def54906d5943278362c89f73c96e90ebf944a8ea9d88022b1e884  programs/issue-992.json
+# programs:
+f97c9df07a19729fbb737d59e770af655806451277b76fe5fdcc4b3067464908  programs/l174_reader.py
+aaf5f7a17df87d87a0f891f29e6b8b5e46ed8d8bc60d17366cd81af9d727ded4  programs/l174_construct.py
+bf2971c526bd275ac35fd4b7154c2b8bd8e1af746cf40fae2a8dad8a0147bd28  programs/l174_method_a.py
+eecfc74b3e802f2e55092740aaa1c74f00833ed4ebbbc33ff4908bda4daca000  programs/l174_method_b.py
+0026e7ead236c18e4ab90513fb4a4f0d4dd2e2e9e24a99a409bf19886ef60301  programs/l174_decide.py
+2f7f5c1f7a881f858644940cbd61bb5b381956d2009781323ffccaa5e60845a4  programs/l174_selftest.py
+316b675d8f9769b9a926d24fd9df9c2aecd0ac0671df7c323e203760b2979444  programs/l174_make_plan.py
+424afe235b7b3f08c845d65e27e7b348c80a2572b262ef193d483bbd7eefa90d  programs/l174_compare.py
+de63f57cc115cd25b35a2b07c345377405c6dbb9d27e96c37ab2b9fe6b11252b  programs/l174_csv_check.py
+# controls plan, its facts, the CSV expectation:
+3d921de04b8f4d0b9e6c940af26c2e42ffb42198fd5a6ed4d9b0d9e83700a091  programs/controls-plan.json
+881cc5e7ee4b02a72bfbc783bcb1d76ebc6a163abfc9097eab99686977a8792a  out/plan-facts.json
+981635c8811255265bad6fd322cf0c81df3220be4de252f71a7a16eb098ebbd1  programs/csv-expectation.json
+# construction files written by l174_construct.py:
+40c63f10a62f6ffe83708be6a85813f674b26705c1a77f27692aebba39bfe23a  out/constructions/construction-C1.json
+96033d6416b3bd06f54c70077c3e79b5069d40d9f3b7f16cb72d14b0000ef353  out/constructions/construction-C2.json
+72c33f31eeb043e821bcb6a1203299c5e737d5d482974b92372a42a227c37233  out/constructions/construction-C3.json
+9b6255261c8424d6e86dcf88062dc6923464300a04f8fc9fba6fa98ad5bbc9a8  out/constructions/construction-C4.json
+f0431c16e82ea967b492cad6018d20b5ebd8d0cd143cce55af865b15d194558b  out/constructions/construction-C5.json
+a5c2cb3e1e2f9d622faef05198f6f8da3b6c66801a6a762fb87281fe4886e264  out/constructions/construction-C6.json
+694e2294bd044cb782f832bf5bef080a88f96663597ec85ec988d64238eeb9a8  out/constructions/construction-C7.json
+1cbff5e34c79dd29462cb1a12f3f9445a6056cb3f6e67669c55e9793d5b4cf9f  out/constructions/construction-K0.json
+# self-test receipt (hand-derived cases only; no construction file):
+794096fc01df34a8aac75c22555040d7d6bb95072234147ec04ab0de4741b721  out/selftest.json

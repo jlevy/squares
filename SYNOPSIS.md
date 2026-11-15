@@ -869,6 +869,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-983-20261114/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-989-20261115/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-992-20261115/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
@@ -1100,6 +1101,7 @@ case or experiment separately.
 | [Özden’s Certificate of #983: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ozden-983.md) | dated review record | record | retained | — |
 | [Ono’s Certificates of #984 and #985: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ono-984-985.md) | dated review record | record | retained | — |
 | [The Certificate of #989 by jazivxt: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-jazivxt-989.md) | dated review record | record | retained | — |
+| [The Construction of #992 by Miguel Lara: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-lara-992.md) | dated review record | record | retained | — |
 | [Proof Review: Khalili and Gharabaghi’s `s(k² − 5) = k` for Every `k ≥ 7`](docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md) | dated review record | record | retained | — |
 | [De Winter’s Packings at 132 and 157: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-dewinter-132-157.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #959: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-12-ozden-959.md) | dated review record | record | retained | — |
