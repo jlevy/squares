@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 324
+version: 325
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -113,7 +113,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T08:06:40.302Z
+updated_at: 2026-11-15T08:23:57.261Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -290,3 +290,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~07:00Z: NEW #992 (Miguel Lara, s(977) <= 17+21/sqrt2 ~ 31.849, beyond horizon; goebel side(977)=17+11sqrt2 ~32.556 > grid 32; no exact certificate, float CSV at 31.85). Intake; import think-ud9e (L175), blind review think-u58c (L174). L173 records PR (#989, #973 answers, DOIs) still running.
 2026-11-15 ~07:40Z: L173 = #993 (records #989 final, #973 answers + ack, k2m5 0e28e8a, DOIs on T-298); CI red only on D-509 pdf flake (run 43688482102); occurrence noted on think-6dle; #993 waits for main to move (no rerun, no empty commit). L174 review of #992: exact packing accepted but record already holds 31.765989508190 at 977 (Couzo #763) < claim 31.849; classical (Goebel (16,21) less squares; Friedman L-border at 982); S1; not recordable as a row. Goebel module lacks L-border extension (bordered members undercut module at 910 counts 325-2000) -> owner decision think-zkxy.
 2026-11-15 ~08:05Z: L175 = #994 (#992 not recordable: Couzo #763 row 31.765989508190 < claim; packet retained, review mapped, new devtools.diamond_staircases builds the construction over Q(sqrt2), both number-field routes accept; beads think-cszb licence, think-7j3i owner decision L-border Goebel (overlaps think-zkxy), think-526p NumberField.decimal bug). CI green. L176 senior review running. Then merge #994, merge main into #993 for a fresh run, reply on #992.
+2026-11-15 ~08:40Z: L176 senior review of #994: no B; S1 Goebel wording, S2 vacuous check, S3 dated note in review, S4 beads. Coordinator did S4 (think-7j3i retitled with F11 measurement, linked to think-zkxy as one two-part owner question) and N9; labels S2+intake. L177 addressing S1-S3, N1-N8, N10.
