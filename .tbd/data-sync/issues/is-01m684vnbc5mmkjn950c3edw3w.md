@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 307
+version: 308
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -104,7 +104,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T01:54:20.089Z
+updated_at: 2026-11-15T02:35:47.507Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -273,3 +273,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-14 21:17Z: #986 merged 473577f42 21:06Z (T-300 house at 228, stamped 11-14). Deploy ok (run 43640967893). #983 final reply posted (issuecomment-6884336616) and closed; recording folded into L164 (#984/#985 import). #987 formatting-only rewrap of #986 runs README (hook-less worktree edit), CI running.
 2026-11-14 ~22:55Z: L163 review of #984/#985 landed (6d1e3383e; both accepted, all notes, S3 each, RV-3 n/a, 147 beats conjectured optimum 7+4sqrt2). L164 import running (adoption in a 2026-11-15 pass). #987 rewrap merged ed7aff650.
 2026-11-15 ~01:55Z: L164 import = #988 (T-301 at 228 superseding T-300; T-302 at 147 below 7+4sqrt2; 2026-11-15 pass, stamped 11-15, pin 9860e55f7). Coordinator added t-180 page budget 525,000 (28c795cbc, measured, precedent chain, think-v4me). Labels S3+intake. L166 senior review running. think-jlsq filed (moh63-dev k2m5-family v1.1).
+2026-11-15 ~02:40Z: L166 senior review of #988 (B1 PR body; S1 T-302 closed-form sentence; S2 leaderboard wording; notes) applied by coordinator (4ba79fa24, re-pin a2ca37157); #988 merged a4f36ae70 (T-301 house at 228 superseding T-300; T-302 at 147, first below 7+4sqrt2). Deploy ok (run 43667638495). Replies on #984, #985 posted and closed; #983 follow-up (T-300 superseded) posted. L168 records PR (+ think-jlsq moh63-dev v1.1 read) in progress. Then close think-17ex, think-jbwm, think-jlsq.
