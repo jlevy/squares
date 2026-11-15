@@ -4,9 +4,9 @@ The stated recipe at 977 is checked against the certificate's own words: 441 squ
 45 degrees, four staircases of 134, every bottom-left cell inside x + y <= 17. A small
 recipe of the same shape, 41 squares at 5 + (3/2) sqrt 2, is decided on both exact routes
 with every planned control, in a second. The 977 decision is the packet's receipt, which
-`devtools.diamond_staircases decide --check` reproduces in about an hour; here it is held
-to its plan and its stated outcomes. The Göbel comparison is exact, and its family test
-agrees with `cases.gobel_family`'s.
+`devtools.diamond_staircases decide --check` reproduces in about ten minutes at two jobs;
+here it is held to its plan and its stated outcomes. The Göbel comparison is exact, and
+its family test agrees with `cases.gobel_family`'s.
 """
 
 from __future__ import annotations
@@ -68,7 +68,6 @@ def test_the_goebel_comparison_is_exact() -> None:
     assert (border["a"], border["b"], border["admitted"]) == (15, 21, True)
     assert (border["count"], border["layer_adds"], border["capacity"]) == (921, 61, 982)
     assert border["side"] == "16 + 21/2*sqrt(2)"
-    assert border["equals_recipe_side"]
     deeper = found["deeper_arrangement"]
     assert (deeper["a"], deeper["admitted"], deeper["count"]) == (16, False, 985)
     assert (deeper["staircase"], deeper["recipe_staircase"]) == (136, 134)

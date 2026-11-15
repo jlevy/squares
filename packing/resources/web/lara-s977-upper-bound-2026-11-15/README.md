@@ -119,11 +119,14 @@ Both routes refused each control as stated:
 - **Sharp.** The side lowered by 10⁻³⁰ with every square kept (container); the 441
   turned squares moved by (−10⁻³⁰, −10⁻³⁰), toward the staircase cells whose corners
   touch the diamond’s edge x + y = 17 (overlap); and square 1’s basis lengthened by
-  10⁻⁵⁰ (shape).
+  10⁻⁵⁰ (shape; sqpack also names an overlap, its touching pairs falling from 3,540 to
+  3,537).
 
-The six decisions took 1,034 route CPU-seconds, almost all of it sqpack’s, which decides
-every pair; `decide --write --jobs 2` wrote the receipt from 07:18Z to 07:28Z, and
-`decide --check` decides every control again and compares it.
+The six decisions took 1,019 route CPU-seconds, almost all of it sqpack’s, which decides
+every pair; `decide --write --jobs 2` wrote the receipt from 07:18Z to 07:28Z, and again
+from 08:26Z to 08:34Z after the senior review (L176) took out of its Göbel section a key
+that was true by construction, every decision unchanged; `decide --check` decides every
+control again and compares it.
 `tests/test_diamond_staircases.py` decides a 41-square recipe of the same shape with
 every control and holds the receipt to its plan.
 sqpack prints a small nonzero margin without its exponent (think-526p), so the receipt
@@ -136,8 +139,9 @@ them.
 (`goebel` in the receipt):
 
 - `devtools.goebel_construction` reads Göbel’s construction at 977 as 17 + 11√2, about
-  32.556, the Göbel square (16, 22) of 1028; the claim is √2/2 below it, so it is not
-  marked above a classical construction.
+  32.556, the Göbel square (16, 22) of 1028, which is above the grid’s 32; the claim is
+  √2/2 below it, so it is not marked above a classical construction, but that reading
+  decides nothing at 977.
 - The claim’s side is the Göbel square (15, 21) of 921, at 16 + (21/2)√2, with one
   L-border, which adds 2⌊16 + (21/2)√2⌋ + 1 = 61 for 982, as the source’s later commits
   say. Friedman’s DS7 states that L lemma beside Göbel’s family.
@@ -188,9 +192,10 @@ It also finds what this lane did not check or did not measure:
   that is for think-7j3i and think-zkxy, and changes nothing here.
 
 Its F12 agrees that `devtools.construction_checker` cannot read the recipe.
-Its remark that the record maintains no checker over Q(√2) was written blind of the two
-maintained routes this lane used; what was missing was a reader of this recipe, which
-`devtools.diamond_staircases` is for its shape.
+Its remark that the record maintains no checker over Q(√2) is mistaken, since Witness/v2
+states number-field scalars and both maintained routes decide them, as they did here;
+what was missing was a reader of this recipe, which `devtools.diamond_staircases` is for
+its shape.
 It retained none of the source’s bytes, finding no licence; this packet retains them
 under think-cnn7’s presumption, and the review’s question 4 is think-cszb’s.
 Its F8 is the ledger’s verdict, not recorded, and it proposes S1, a routine consequence of

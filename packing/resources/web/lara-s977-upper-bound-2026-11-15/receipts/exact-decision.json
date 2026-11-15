@@ -65,7 +65,7 @@
      "touching_pairs": 3540,
      "wall_contacts": 240,
      "zero_margins": true,
-     "cpu_seconds": 167.885
+     "cpu_seconds": 169.781
     },
     "independent": {
      "passed": true,
@@ -74,7 +74,7 @@
      "touching_pairs": 3540,
      "wall": "0.000000e+00",
      "gap": "0.000000e+00",
-     "cpu_seconds": 1.264
+     "cpu_seconds": 1.352
     }
    },
    "as_expected": true
@@ -97,7 +97,7 @@
      "touching_pairs": 3538,
      "wall_contacts": 240,
      "zero_margins": false,
-     "cpu_seconds": 167.707
+     "cpu_seconds": 170.722
     },
     "independent": {
      "passed": false,
@@ -108,7 +108,7 @@
      "touching_pairs": 3538,
      "wall": "0.000000e+00",
      "gap": "-1.000000e+00",
-     "cpu_seconds": 1.032
+     "cpu_seconds": 1.157
     }
    },
    "as_expected": true
@@ -131,7 +131,7 @@
      "touching_pairs": 3537,
      "wall_contacts": 240,
      "zero_margins": false,
-     "cpu_seconds": 167.996
+     "cpu_seconds": 161.072
     },
     "independent": {
      "passed": false,
@@ -142,7 +142,7 @@
      "touching_pairs": 3537,
      "wall": "0.000000e+00",
      "gap": "-7.071068e-01",
-     "cpu_seconds": 1.297
+     "cpu_seconds": 1.247
     }
    },
    "as_expected": true
@@ -165,7 +165,7 @@
      "touching_pairs": 3540,
      "wall_contacts": 120,
      "zero_margins": false,
-     "cpu_seconds": 169.308
+     "cpu_seconds": 163.272
     },
     "independent": {
      "passed": false,
@@ -176,7 +176,7 @@
      "touching_pairs": 3540,
      "wall": "-1.000000e-30",
      "gap": "0.000000e+00",
-     "cpu_seconds": 1.393
+     "cpu_seconds": 1.291
     }
    },
    "as_expected": true
@@ -199,7 +199,7 @@
      "touching_pairs": 3512,
      "wall_contacts": 240,
      "zero_margins": false,
-     "cpu_seconds": 181.935
+     "cpu_seconds": 176.653
     },
     "independent": {
      "passed": false,
@@ -210,7 +210,7 @@
      "touching_pairs": 3512,
      "wall": "0.000000e+00",
      "gap": "-1.414214e-30",
-     "cpu_seconds": 1.109
+     "cpu_seconds": 1.355
     }
    },
    "as_expected": true
@@ -234,7 +234,7 @@
      "touching_pairs": 3537,
      "wall_contacts": 240,
      "zero_margins": false,
-     "cpu_seconds": 171.597
+     "cpu_seconds": 169.393
     },
     "independent": {
      "passed": false,
@@ -245,7 +245,7 @@
      "touching_pairs": 3539,
      "wall": "0.000000e+00",
      "gap": "0.000000e+00",
-     "cpu_seconds": 1.191
+     "cpu_seconds": 1.33
     }
    },
    "as_expected": true
@@ -268,8 +268,7 @@
    "side": "16 + 21/2*sqrt(2)",
    "layer_adds": 61,
    "capacity": 982,
-   "capacity_side": "17 + 21/2*sqrt(2)",
-   "equals_recipe_side": true
+   "capacity_side": "17 + 21/2*sqrt(2)"
   },
   "deeper_arrangement": {
    "a": 16,

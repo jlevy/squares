@@ -119,14 +119,10 @@ STATED = Recipe(
 )
 
 
-def _text(value: Fraction) -> str:
-    return str(value)
-
-
 def element(value: Element) -> str | list[str]:
     """A Witness/v2 scalar: a rational string, or [a, b] for a + b sqrt 2."""
     a, b = value
-    return _text(a) if b == 0 else [_text(a), _text(b)]
+    return str(a) if b == 0 else [str(a), str(b)]
 
 
 def _add(left: Element, right: Element) -> Element:
@@ -399,8 +395,9 @@ def run_control(control: Control, recipe: Recipe) -> dict[str, Any]:
 
 def _at_contact(found: Mapping[str, Mapping[str, Any]]) -> bool:
     """Whether both routes decided contacts exactly: sqpack's least wall clearance and pair
-    gap exactly zero, and the independent route's touching pairs decided zero exactly with
-    its least wall clearance printed as zero."""
+    gap exactly zero, and the independent route's touching pairs decided by exact sign,
+    and its least wall clearance's float approximation zero (sqpack's zero is the exact
+    one)."""
     first, second = found["exact_verify"], found["independent"]
     return (
         bool(first["zero_margins"])
@@ -421,7 +418,7 @@ def floor_root_two(p: Fraction, q: Fraction) -> int:
 def goebel_admits(a: int, b: int) -> bool:
     """Göbel's condition a - 1 < (b/2) sqrt 2 < a + 1, exactly, by squaring."""
     half = Fraction(b * b, 2)
-    return a >= 1 and (a - 1 < 0 or (a - 1) ** 2 < half) and half < (a + 1) ** 2
+    return a >= 1 and (a - 1) ** 2 < half < (a + 1) ** 2
 
 
 def goebel_comparison(recipe: Recipe = STATED) -> dict[str, Any]:
@@ -462,7 +459,6 @@ def goebel_comparison(recipe: Recipe = STATED) -> dict[str, Any]:
             "layer_adds": layer,
             "capacity": member + layer,
             "capacity_side": goebel.Form(member_side[0] + 1, member_side[1], "", 0).text(),
-            "equals_recipe_side": (member_side[0] + 1, member_side[1]) == recipe.side,
         },
         "deeper_arrangement": {
             "a": deeper,
@@ -529,7 +525,7 @@ def _stable(value: Any) -> Any:
 
 
 def problems(found: Mapping[str, Any]) -> list[str]:
-    """What a receipt fails: the plan's digest, a control not as stated, a decision off."""
+    """What a receipt fails: the plan's presence, a control not as stated, a decision off."""
     out: list[str] = []
     if not PLAN.is_file() or found["plan"]["stated_at"] != PLAN_STATED_AT:
         out.append("the plan stated before any run is not retained beside the receipt")
@@ -538,8 +534,11 @@ def problems(found: Mapping[str, Any]) -> list[str]:
         for control in found["controls"]
         if not control["as_expected"]
     )
-    if not found["goebel"]["l_border_of_member"]["equals_recipe_side"]:
-        out.append("the L-border of the Göbel member is not at the recipe's side")
+    border = found["goebel"]["l_border_of_member"]
+    if not (border["admitted"] and border["capacity"] >= found["recipe"]["n"]):
+        out.append(
+            "no admitted Göbel member with one L-border holds the count at the recipe's side"
+        )
     return out
 
 
