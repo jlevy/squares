@@ -1,0 +1,123 @@
+{
+ "file": "construction-G985.json",
+ "file_sha256": "519171e0f0dfc2edac4204237d1cdca3bb65f1fe37ed0f90dffdcdeedcda68c7",
+ "name": "G985",
+ "container": [
+  "17",
+  "21/2"
+ ],
+ "n": 985,
+ "angles": {
+  "0": 544,
+  "45": 441
+ },
+ "families": {
+  "diamond": 441,
+  "stair-BL": 136,
+  "stair-BR": 136,
+  "stair-TR": 136,
+  "stair-TL": 136
+ },
+ "A": {
+  "method": "A: separating axes on e1..e4 in Z[sqrt 2], exact integer signs",
+  "pairs": 484620,
+  "apart": 481060,
+  "touching": 3556,
+  "overlapping": 4,
+  "overlapping_pairs": [
+   [
+    "BL(15,0)",
+    "BR(0,15)"
+   ],
+   [
+    "BL(0,15)",
+    "TL(15,0)"
+   ],
+   [
+    "BR(15,0)",
+    "TR(0,15)"
+   ],
+   [
+    "TR(15,0)",
+    "TL(0,15)"
+   ]
+  ],
+  "touching_pairs_sha256": "5c4f42d445d95eb179d128ef3eda41c80139afd715d3a1e2e634d9efd28d4154",
+  "pair_class_sha256": "fb80877e3377d2ac1d62e4d01a129d2d04916d709563313fb2fc4ed05b9b1b30",
+  "wall_class_sha256": "856f3436f70623a37d12647b0c4dc5c52fe5043397c7f4393216f1ef2b3ad2e6",
+  "wall_touching": 128,
+  "wall_touching_squares": 124,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": []
+ },
+ "B": {
+  "method": "B: exact convex clipping in Q(sqrt 2) over gmpy2.mpq, signs by Pell brackets",
+  "pairs": 484620,
+  "apart": 481060,
+  "touching": 3556,
+  "overlapping": 4,
+  "overlapping_pairs": [
+   [
+    "BL(15,0)",
+    "BR(0,15)"
+   ],
+   [
+    "BL(0,15)",
+    "TL(15,0)"
+   ],
+   [
+    "BR(15,0)",
+    "TR(0,15)"
+   ],
+   [
+    "TR(15,0)",
+    "TL(0,15)"
+   ]
+  ],
+  "touching_pairs_sha256": "5c4f42d445d95eb179d128ef3eda41c80139afd715d3a1e2e634d9efd28d4154",
+  "pair_class_sha256": "fb80877e3377d2ac1d62e4d01a129d2d04916d709563313fb2fc4ed05b9b1b30",
+  "wall_class_sha256": "856f3436f70623a37d12647b0c4dc5c52fe5043397c7f4393216f1ef2b3ad2e6",
+  "wall_touching": 128,
+  "wall_touching_squares": 124,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": [],
+  "overlap_areas": [
+   [
+    "15",
+    "-21/2"
+   ],
+   [
+    "15",
+    "-21/2"
+   ],
+   [
+    "15",
+    "-21/2"
+   ],
+   [
+    "15",
+    "-21/2"
+   ]
+  ],
+  "not_inside_by_area": []
+ },
+ "agree": {
+  "pair_classes": true,
+  "touching_pairs": true,
+  "overlapping_pairs": true,
+  "walls": true,
+  "unit": true
+ },
+ "all_agree": true,
+ "verdict_A": "not a packing",
+ "verdict_B": "not a packing",
+ "seconds": {
+  "A": 0.17,
+  "B": 18.34
+ },
+ "python": "3.14.7"
+}

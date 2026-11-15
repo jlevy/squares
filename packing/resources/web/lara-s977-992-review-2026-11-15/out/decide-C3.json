@@ -1,0 +1,87 @@
+{
+ "file": "construction-C3.json",
+ "file_sha256": "72c33f31eeb043e821bcb6a1203299c5e737d5d482974b92372a42a227c37233",
+ "name": "C3",
+ "container": [
+  "17",
+  "21/2"
+ ],
+ "n": 977,
+ "angles": {
+  "0": 536,
+  "45": 441
+ },
+ "families": {
+  "diamond": 441,
+  "stair-BL": 134,
+  "stair-BR": 134,
+  "stair-TR": 134,
+  "stair-TL": 134
+ },
+ "A": {
+  "method": "A: separating axes on e1..e4 in Z[sqrt 2], exact integer signs",
+  "pairs": 476776,
+  "apart": 473239,
+  "touching": 3536,
+  "overlapping": 1,
+  "overlapping_pairs": [
+   [
+    "D(0,1)",
+    "BL(14,1)"
+   ]
+  ],
+  "touching_pairs_sha256": "ddef44d15e1671c06564f3827f509d3323eb7c0fdcd9420247aa43ba72032603",
+  "pair_class_sha256": "301becf6a1ea3a75ff8a23845462c0a756a81cd822d182e14ec9ec4e6a1fd19e",
+  "wall_class_sha256": "c2573362ce4e5ca02f51823fc1d557311f85bed3be446341049aadcb7b06efad",
+  "wall_touching": 120,
+  "wall_touching_squares": 116,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": []
+ },
+ "B": {
+  "method": "B: exact convex clipping in Q(sqrt 2) over gmpy2.mpq, signs by Pell brackets",
+  "pairs": 476776,
+  "apart": 473239,
+  "touching": 3536,
+  "overlapping": 1,
+  "overlapping_pairs": [
+   [
+    "D(0,1)",
+    "BL(14,1)"
+   ]
+  ],
+  "touching_pairs_sha256": "ddef44d15e1671c06564f3827f509d3323eb7c0fdcd9420247aa43ba72032603",
+  "pair_class_sha256": "301becf6a1ea3a75ff8a23845462c0a756a81cd822d182e14ec9ec4e6a1fd19e",
+  "wall_class_sha256": "c2573362ce4e5ca02f51823fc1d557311f85bed3be446341049aadcb7b06efad",
+  "wall_touching": 120,
+  "wall_touching_squares": 116,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": [],
+  "overlap_areas": [
+   [
+    "1/2000000000000",
+    "0"
+   ]
+  ],
+  "not_inside_by_area": []
+ },
+ "agree": {
+  "pair_classes": true,
+  "touching_pairs": true,
+  "overlapping_pairs": true,
+  "walls": true,
+  "unit": true
+ },
+ "all_agree": true,
+ "verdict_A": "not a packing",
+ "verdict_B": "not a packing",
+ "seconds": {
+  "A": 0.17,
+  "B": 18.43
+ },
+ "python": "3.14.7"
+}
