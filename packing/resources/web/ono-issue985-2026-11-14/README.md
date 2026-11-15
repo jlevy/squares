@@ -192,7 +192,8 @@ What the review adds:
 - **A new arrangement** relative to T-101, T-155 and the house, which is the 148 house
   less one corner square, so s(148) is not moved; the case’s listed conjectured optimum,
   7 + 4√2, is beaten, as the catalogue’s values at 260 and 299 were (F12). No s(m) + k
-  is the side within 10⁻⁹ but the old record itself, s(66) + 4 and s(124) + 1.
+  is the side within 10⁻⁹; the nearest, s(66) + 4 and s(124) + 1, are the old record
+  7 + 4√2 itself, 5.81 × 10⁻³ above it.
 - T-101, the earlier exact certificate of the house’s packing, has margin 1.27 × 10⁻¹⁹,
   and RV-3 does not apply (F11).
 
@@ -210,7 +211,7 @@ withdrawn. Both strong generators ran on the new witness
 ([the runs](../../../cases/regularized_drawings/think-17ex-2026-11-15/README.md)), and
 the selection draws grid-slack’s 0.5-degree view, admitted at row 10. Daniel’s
 regularizer solved the witness to a certified KKT point 3.415 × 10⁻⁹ below the side,
-1.16 of the certificate’s own contraction margin (2.934 × 10⁻⁹) and beyond it, held at
+1.16 times the certificate’s own contraction margin (2.934 × 10⁻⁹) and beyond it, held at
 row 3 as a register candidate and not admitted (RV-3). Its side agrees with the
 side-only leaderboard entry the issue quotes first, Nevska’s
 12.651043553172632772258400…, at all 24 printed places.

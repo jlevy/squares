@@ -5591,8 +5591,9 @@ sources:
       certificate of centres and half-angle tangents from the harness's run of 11 November
       2026, made from Francisco Couzo's packing of 404 squares as this registry retains it
       (couzo-issue763-2026-10-23) by cutting five periods of its band, then a penalty step, an
-      exact-constraint sequential-LP polish and basin hopping; a new arrangement relative to the
-      house's packing (T-300, Doğa Özden's column-band packing) and to T-174. Registration was
+      exact-constraint sequential-LP polish and basin hopping; a new arrangement relative to
+      T-300's packing (Doğa Özden's column-band packing, the house it replaced at 228) and to
+      T-174. Registration was
       requested in jlevy/squares#984, the account's first contribution; the issue says the
       packing was found, certified and checked by an AI coding agent (Claude, by Anthropic)
       working in the harness, directed by a person. It discloses first two side-only Kaggle

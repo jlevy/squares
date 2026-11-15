@@ -267,8 +267,9 @@ grid-slack’s views at 0.5, 1 and 5 degrees go to review at row 7, two per-squa
 falling while no total does, and Evan Daniel’s same-side view is refused at row 7, so
 the axis tool’s view of the new witness stays drawn and the count is decided no better
 on it. Daniel’s regularizer solved the witness to a KKT point, a local minimum 4.289 ×
-10⁻⁹ below the side, 1.23 of the certificate’s own contraction margin (3.488 × 10⁻⁹) and
-beyond it; its rational certificate did not validate, and it is held at row 3 as a
+10⁻⁹ below the side, 1.23 times the certificate’s own contraction margin
+(3.488 × 10⁻⁹) and beyond it; its rational certificate did not validate, and it is held
+at row 3 as a
 register candidate and not admitted (RV-3). Its side agrees with the side-only
 leaderboard entry the issue quotes first, Nevska’s 15.596043116631669919627353…, at all
 24 printed places.

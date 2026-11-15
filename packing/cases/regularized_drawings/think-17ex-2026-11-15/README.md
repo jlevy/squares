@@ -71,15 +71,15 @@ shared sides (house and stage), against the axis tool’s view of the new witnes
   `default_drawings.SETTLED` decides the count no better on T-301’s witness, naming
   these four runs.
 - **The KKT solves.** At 147 the driver certified a KKT point 3.415 × 10⁻⁹ below the
-  side, 1.16 of the certificate’s own contraction margin (2.934 × 10⁻⁹), beyond it; at
-  228 it reached a local minimum of the side, strict modulo 129 exact flat motions,
-  4.289 × 10⁻⁹ below the side, 1.23 of the margin (3.488 × 10⁻⁹), beyond it, whose
+  side, 1.16 times the certificate’s own contraction margin (2.934 × 10⁻⁹), beyond it;
+  at 228 it reached a local minimum of the side, strict modulo 129 exact flat motions,
+  4.289 × 10⁻⁹ below the side, 1.23 times the margin (3.488 × 10⁻⁹), beyond it, whose
   rational certificate did not validate.
   Both are held at row 3 as register candidates and not admitted; registering them is
   RV-3’s question (think-ruu2, think-ikku).
   Each side agrees with the side-only leaderboard entry its issue quotes first
-  (Nevska’s, at both counts) at all 24 printed places, so those entries are, to their
-  printed precision, the local optima of these two arrangements.
+  (Nevska’s, at both counts) at all 24 printed places; those entries state no packing
+  and stay context only.
 - The record’s comparison with the base branch (`default_drawings --compare`): at 147
   the catalogue’s 45-degree witness was regular as published, its house drawing (no
   uneven or near-axis square, 506 full shared sides); the new witness draws grid-slack’s

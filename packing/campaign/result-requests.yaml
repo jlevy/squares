@@ -34169,19 +34169,20 @@ issues:
       reply on main says what was retained and replayed, what the review found and that the
       case adopted it.
     notes: >-
-      Read on 14 November 2026 from main 473577f42; no comment on the issue, which carried the
-      intake label from 20:55:17Z, its only event. The account's only issues on this repository
-      are this one and #985, posted one second later; neither had a comment, so this is its
-      first contribution, and no contributor profile exists for Ono: the census spans the
-      registration adds stay unresolved for identity review. The issue names fce076f
-      (20:10:31Z), 54 seconds before it; the packet pins the repository's main, b5636fd, whose
-      one commit past fce076f records the posting, the certificate unchanged. The certificate
-      was first committed on 11 November (be713b7); the run's FOLLOWUP.md says the branch was
-      pushed at fce076f before the issues were posted, and GitHub's activity log was not read,
-      so the issue dates the claim. The issue's "15.60460147572967429 (Francisco Couzo,
-      improved by PingYou Ltd, 2026-10-13)" is T-174's side, the registry it read at main
-      fa980f8e; its gain on it, 0.008558354808882, is the exact gap's floor, and the gap it
-      states to #983's side, 0.004758613890, is the exact gap to T-300's. #983 became T-300
+      Read on 14 November 2026 from main 473577f42; no comment on the issue, which carried
+      the intake label from 20:55:17Z, its only event. The account's only issues on this
+      repository are this one and #985, posted one second later; neither had a comment, so
+      this is its first contribution, and no contributor profile exists for Ono: the census
+      spans the registration adds stay unresolved for identity review. The issue names
+      fce076f (20:10:31Z), 54 seconds before it; the packet pins the repository's main,
+      b5636fd, whose one commit past fce076f records the posting, the certificate unchanged.
+      The certificate was first committed on 11 November (be713b7); the run's FOLLOWUP.md
+      says the branch was pushed at fce076f before the issues were posted, and GitHub's
+      activity log was not read, so the issue dates the claim. The issue's
+      "15.60460147572967429 (Francisco Couzo, improved by PingYou Ltd, 2026-10-13)" is
+      T-174's side, the registry it read at main fa980f8e; its gain on it,
+      0.008558354808882, is the exact gap's floor, and the gap it states to #983's side,
+      0.004758613890, is the floor of the exact gap to T-300's side (F14). #983 became T-300
       and the house at 228 in #986, merged at 21:06Z, after this issue was posted; the reply
       on #983 names this report.
 
@@ -34229,7 +34230,7 @@ issues:
       certificate as history. Both strong generators ran on the new witness: grid-slack's
       views go to review at row 7 and Evan Daniel's same-side view is refused, so the axis
       tool's view stays drawn and the count is decided no better on it. Evan Daniel's KKT
-      solve, a local minimum 4.289e-09 below the side, 1.23 of the certificate's own
+      solve, a local minimum 4.289e-09 below the side, 1.23 times the certificate's own
       contraction margin and beyond it, its certificate not validating, is held at row 3 for
       RV-3 (think-ruu2, think-ikku); its side agrees with Nevska's side-only entry at all 24
       printed places. The posters hold Ono's name off their credit block until the next
@@ -34321,7 +34322,7 @@ issues:
       the first adoption at 147, with Roberto Ono the finder of a packing from a band cut of
       Evan Daniel's n = 229 packing, the first below 7 + 4*sqrt(2); the conjectured optimum is
       withdrawn. Both strong generators ran on the new witness, and grid-slack's 0.5-degree
-      view is drawn. Evan Daniel's certified KKT solve, 3.415e-09 below the side, 1.16 of the
+      view is drawn. Evan Daniel's certified KKT solve, 3.415e-09 below the side, 1.16 times the
       certificate's own contraction margin and beyond it, is held at row 3 for RV-3
       (think-ruu2, think-ikku); its side agrees with Nevska's side-only entry at all 24
       printed places.
