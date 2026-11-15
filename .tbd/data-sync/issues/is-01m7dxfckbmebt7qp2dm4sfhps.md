@@ -5,7 +5,7 @@ title: "Import #984 (s(228) <= 15.596043120921, supersedes T-300) and #985 (s(14
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l164
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-14T20:55:08.650Z
-updated_at: 2026-11-14T21:59:33.239Z
+updated_at: 2026-11-15T00:51:14.470Z
 started_at: 2026-11-14T21:06:10.385Z
 ---
 
@@ -26,3 +26,5 @@ L164 (bold-ritchie-l164), 2026-11-14: controls plans stated before any run, in s
 Packets ono-issue984-2026-11-14 and ono-issue985-2026-11-14 pin main b5636fd6694d2cc7aa5811ae33f441268b81b714 (fce076f's descendant; certificates identical). Recorded #983's final reply in its own commit ef0f8bb1b (coordinator's request). Intake commit 3f0976140 (21:29:42Z): replay on both routes, 3 gross and 11 sharp controls per count, all as stated in the plans above; contraction margins (T-300 2.949e-12, gain 1.61e9 times it; T-174 0; T-155 view at 147 0; own 3.49e-9 and 2.93e-9), identity, L-step scans, ledger upper-bounds-984-985-20261114. Registered T-301 (228) and T-302 (147) in fcce6be56 (21:44:47Z). Read L163's frozen review (8504d8e04, frozen 21:17:04Z) at 21:45:20Z, after both commits: both accepted, 40 of 40 controls, F1-F8 notes (F5: three walls, not four). Adoption waits for 2026-11-15 UTC (228 already moved on 14 November).
 
 Read L163's final head (6d1e3383e, 21:54Z) at 21:56Z; merged it (71ee1243e) and mapped it (385617986): V-ono-984-985-review-check, E-ono-984/985-review-exact-feasibility, external_review on the reports and replays, T-301/T-302 adversarial accepted reviews; S3 each, 14 notes F1-F14; no disagreement with the replay, controls, margins or identity. T-301/T-302 read pending adoption at V3/C3. Adoption prepared in the working tree for the pass of 2026-11-15 ({147, 228}), not run before 00:00Z.
+
+Adopted T-301 at 228 and T-302 at 147 in the pass of 2026-11-15 (adopt_houses at 00:01Z), commit 7006d0924; runs in packing/cases/regularized_drawings/think-17ex-2026-11-15 (147 grid-slack 0.5-degree view drawn; 228 decided no better, axis view kept); KKT solves held at row 3 for RV-3 (147 certified 3.415e-9 below, 228 local minimum 4.289e-9 below, certificate invalid; both equal Nevska's leaderboard sides at 24 places). Stamped landed 2026-11-15 (9860e55f7), re-pinned (b75bd8205). Draft PR jlevy/squares#988. Merge must be on 2026-11-15 UTC. Replies owed on #984 and #985, and #983's promised follow-up, after merge.
