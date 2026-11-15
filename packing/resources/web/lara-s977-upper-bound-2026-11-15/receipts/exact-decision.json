@@ -1,0 +1,287 @@
+{
+ "format": "diamond-staircase-decision-v1",
+ "packet": "lara-s977-upper-bound-2026-11-15",
+ "source": "https://github.com/larasmiguel/square-s977/tree/26d5695abca2f8a005856e3c1ddc47171d661e9b",
+ "statement": "certificates/n977_certificate.md",
+ "recipe": {
+  "n": 977,
+  "block": 21,
+  "offset": 17,
+  "widths": [
+   15,
+   15,
+   14,
+   13,
+   12,
+   11,
+   10,
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2
+  ],
+  "turned": 441,
+  "axis_aligned": 536,
+  "side": [
+   "17",
+   "21/2"
+  ]
+ },
+ "field": {
+  "minimal_polynomial": [
+   "1",
+   "0",
+   "-2"
+  ],
+  "isolating_interval": [
+   "1",
+   "2"
+  ]
+ },
+ "plan": {
+  "path": "packing/resources/web/lara-s977-upper-bound-2026-11-15/receipts/controls-plan-n977.txt",
+  "stated_at": "2026-11-15T07:05:48Z"
+ },
+ "routes": [
+  "exact_verify",
+  "independent"
+ ],
+ "controls": [
+  {
+   "control": "P0",
+   "kind": "positive",
+   "statement": "the construction as stated",
+   "expected": "accepted",
+   "expected_failures": [],
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "failures": [],
+     "pairs_tested": 476776,
+     "touching_pairs": 3540,
+     "wall_contacts": 240,
+     "zero_margins": true,
+     "cpu_seconds": 167.885
+    },
+    "independent": {
+     "passed": true,
+     "failures": [],
+     "pairs_tested": 4414,
+     "touching_pairs": 3540,
+     "wall": "0.000000e+00",
+     "gap": "0.000000e+00",
+     "cpu_seconds": 1.264
+    }
+   },
+   "as_expected": true
+  },
+  {
+   "control": "G1",
+   "kind": "gross",
+   "statement": "the last square replaced by a copy of square 1",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "overlap"
+     ],
+     "pairs_tested": 476776,
+     "touching_pairs": 3538,
+     "wall_contacts": 240,
+     "zero_margins": false,
+     "cpu_seconds": 167.707
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "overlap"
+     ],
+     "pairs_tested": 4418,
+     "touching_pairs": 3538,
+     "wall": "0.000000e+00",
+     "gap": "-1.000000e+00",
+     "cpu_seconds": 1.032
+    }
+   },
+   "as_expected": true
+  },
+  {
+   "control": "G2",
+   "kind": "gross",
+   "statement": "the last square replaced by an axis-aligned square with lower-left corner (w_1, 1), one cell past row 1 of the bottom-left staircase, inside the diamond",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "overlap"
+     ],
+     "pairs_tested": 476776,
+     "touching_pairs": 3537,
+     "wall_contacts": 240,
+     "zero_margins": false,
+     "cpu_seconds": 167.996
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "overlap"
+     ],
+     "pairs_tested": 4413,
+     "touching_pairs": 3537,
+     "wall": "0.000000e+00",
+     "gap": "-7.071068e-01",
+     "cpu_seconds": 1.297
+    }
+   },
+   "as_expected": true
+  },
+  {
+   "control": "S1",
+   "kind": "sharp",
+   "statement": "the side lowered by 10^-30, every square kept",
+   "expected": "refused",
+   "expected_failures": [
+    "container"
+   ],
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "container"
+     ],
+     "pairs_tested": 476776,
+     "touching_pairs": 3540,
+     "wall_contacts": 120,
+     "zero_margins": false,
+     "cpu_seconds": 169.308
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "container"
+     ],
+     "pairs_tested": 4414,
+     "touching_pairs": 3540,
+     "wall": "-1.000000e-30",
+     "gap": "0.000000e+00",
+     "cpu_seconds": 1.393
+    }
+   },
+   "as_expected": true
+  },
+  {
+   "control": "S2",
+   "kind": "sharp",
+   "statement": "the b^2 turned squares moved by (-10^-30, -10^-30), toward the bottom-left staircase, whose cells with c + r = p - 2 touch the diamond's edge at a corner",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "overlap"
+     ],
+     "pairs_tested": 476776,
+     "touching_pairs": 3512,
+     "wall_contacts": 240,
+     "zero_margins": false,
+     "cpu_seconds": 181.935
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "overlap"
+     ],
+     "pairs_tested": 4414,
+     "touching_pairs": 3512,
+     "wall": "0.000000e+00",
+     "gap": "-1.414214e-30",
+     "cpu_seconds": 1.109
+    }
+   },
+   "as_expected": true
+  },
+  {
+   "control": "S3",
+   "kind": "sharp",
+   "statement": "square 1's basis first component lengthened by 10^-50",
+   "expected": "refused",
+   "expected_failures": [
+    "shape"
+   ],
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "failures": [
+      "overlap",
+      "shape"
+     ],
+     "pairs_tested": 476776,
+     "touching_pairs": 3537,
+     "wall_contacts": 240,
+     "zero_margins": false,
+     "cpu_seconds": 171.597
+    },
+    "independent": {
+     "passed": false,
+     "failures": [
+      "shape"
+     ],
+     "pairs_tested": 4414,
+     "touching_pairs": 3539,
+     "wall": "0.000000e+00",
+     "gap": "0.000000e+00",
+     "cpu_seconds": 1.191
+    }
+   },
+   "as_expected": true
+  }
+ ],
+ "goebel": {
+  "side": "17 + 21/2*sqrt(2)",
+  "goebel_construction": {
+   "side": "17 + 11*sqrt(2)",
+   "family": "G\u00f6bel square",
+   "count": 1028,
+   "relation": "below",
+   "difference": "0 + 1/2*sqrt(2)"
+  },
+  "l_border_of_member": {
+   "a": 15,
+   "b": 21,
+   "admitted": true,
+   "count": 921,
+   "side": "16 + 21/2*sqrt(2)",
+   "layer_adds": 61,
+   "capacity": 982,
+   "capacity_side": "17 + 21/2*sqrt(2)",
+   "equals_recipe_side": true
+  },
+  "deeper_arrangement": {
+   "a": 16,
+   "b": 21,
+   "admitted": false,
+   "count": 985,
+   "staircase": 136,
+   "recipe_staircase": 134
+  },
+  "grid": {
+   "side": 32,
+   "recipe_below": true
+  }
+ }
+}
