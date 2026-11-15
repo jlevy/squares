@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 337
+version: 338
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -117,7 +117,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T17:57:42.707Z
+updated_at: 2026-11-15T18:19:34.235Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -303,3 +303,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~13:40Z: L182 addendum on fa53fb0 landed (83ac8ceec): accepted; 26 controls as stated (4 re-targeted); step 9.09e-8 from #996 is 9,539x #996 padding (genuine re-optimization); gain on T-303 3.857e8x its margin, RV-3 n/a; F15: take lineage text from REGISTRATION.md at 6c0ad56. L181 told (no summary).
 2026-11-15 ~17:00Z: #973 authors comment 6897938053 + commit 355f83e: full Lean build log (12 modules, 14 min, 5.96 GB peak per module); the 24 GB host premise is void. Lean subset of think-0h7r is under the owner 40 CPU-h item cap (development.md blocked:compute) -> lane L183 (think-o79q) builds k2m5_of_valid11 here, timebox 3 CPU-h / 9 GB disk; Valid11 replay stays owner-held.
 2026-11-15 ~18:15Z: L183 = #999: Lean build NOT run (disk plan 9.54 GB > 9 GB cap; Sqpack.Bentz needs ~13 GB + swap, so the 24 GB premise stands for that module; coordinator was wrong to call it void). Records #973 comment + 355f83e read; adds devtools.lean_disk_price + integrity-ceremony allowlist entry. think-0h7r re-priced (Lean 0.5 CPU-h, ~11 GB disk, swap or 24 GB). L184 senior review of #999 (tool and allowlist scrutiny). Sequence: #998 (11-16) then #999.
+2026-11-15 ~19:00Z: L184 review of #999: keep a slimmed lean_disk_price (OR-1, cited numbers), DROP the integrity allowlist entry (no independent pin; added to pass a gate), B1 truncation guard fix, S1-S3 memory/disk wording (2 Oct packet: 16 GB free should need no swap). L185 addressing. #999 merges after #998 (11-16).
