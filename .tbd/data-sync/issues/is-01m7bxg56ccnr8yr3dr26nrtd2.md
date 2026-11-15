@@ -5,14 +5,14 @@ title: "Price and run the full replay of #973's Valid11 and Lean reduction (k2m5
 kind: task
 status: open
 priority: 2
-version: 9
+version: 10
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-14T02:17:04.972Z
-updated_at: 2026-11-15T03:00:26.718Z
+updated_at: 2026-11-15T06:54:03.011Z
 ---
 Priced full replay of Mohsen Khalili and Sara Gharabaghi's s(k^2 - 5) = k (jlevy/squares#973), held above the import lane's budget; the import is think-2vgx (lane L145, 14 November 2026).
 
@@ -42,4 +42,15 @@ blocked_on: the owner's budget decision
 (5) Lean. lean/build_inst.sh would log each module's wall time and peak memory to build_full.log, but runs /home/claude/lean/mk.sh, outside the release, and no build_full.log is published, so the build's price stays the review's estimate.
 (6) Tight-Tile jobs, nearly all of the price: unchanged. Their outputs still lack K and name no ttbox or run_tt.py revision (#973's question 3, unanswered), and versions.txt gives only Python 3.13.0, for the control run, its numpy and scipy line failing.
 (7) 9ccfe82 (02:56:10Z), the head at 02:59Z, read after the above, changes only .zenodo.json, CITATION.cff, README.md and SHA256SUMS_ALL, giving the paper's DOI, 10.5281/zenodo.24237740; nothing above changes, and intake-watch.yaml reads through 9ccfe82.
+blocked_on: the owner's budget decision
+
+2026-11-15 06:53Z bold-ritchie-l173 (lane L173, think-hisc): the authors answered all fifteen of #973's questions in a comment (issuecomment-6889513117, 05:03:46Z), recorded in the #973 requests entry and the packet README (section The Authors' Comment). 0e28e8a (03:41:17Z), the head, one commit past 9ccfe82, changes only README.md and SHA256SUMS_ALL, adding the archive DOI 10.5281/zenodo.24237941; every file this replay stages from the packet is unchanged (457 of the 466 pinned digests hold, cov.tar.xz among them; the nine that change are L168's nine). The price stands: about 145 to 180 CPU-hours, up to about 320, with the Lean build on a host with at least 24 GB. What bears on the replay:
+(1) verify.sh --full. The authors say steps 6b (root 9632) and 9 (the 75 coverage dumps) are new and have not been run end to end. They do not mention that step 6b changes into build/square-packing/qx2, which evand/square-packing lacks at 659ee62 (qx2_zm.py is search/qx2_zm.py; L168's item 4), so --full would still stop at 6b, before the sweep. Keep to devtools.replay_k2m5_family.
+(2) Coverage dumps. In v1.0 run_cov.sh left B and NP unset, a slip of the authors' assembly script; the shipped dumps (cov.tar.xz) were made with B the board and NP 6, six at a time, which is why the review's dump factor (0.75 to 0.79 of the recorded CPU) is the one to use. A dumps subcommand mirroring the fixed run_cov.sh reproduces their settings.
+(3) Tight-Tile revision. run_tt.py prints K since 11 November, when the checker changed after the authors' own adversarial review: safety asserts became exceptions, the area term's apex range became [0, apex_w], and K is printed. The main batch (out/ and out_u2000/, 9 and 10 November) ran on the earlier revision, which the release does not hold, so the replay runs the shipped revision and compares job for job with K aside, as L145's 26 jobs did (all equal). Read at 0e28e8a: only the one output of out_u2000_fix/ carries K. The two out_fix/ reruns lack it, though the comment says they ran after the revision, and they are the only recorded outputs with ray zones (RAY charts), the only charts whose apex_w is not the default 1 (ttbox.py lines 582 and 589). So the change the authors name touches exactly the charts of those two reruns, about 390 CPU-s each at the source. Rerunning them under the shipped revision (run_tt.py COVER 3.5 1 line 3.5, and with sign -1), about 0.2 CPU-hours, is a cheap first subset, and its chart lines, not the recorded ones, are the comparison that bears on the ray zones. docs/TIGHT_TILE_PROOF.md section 11, which the authors cite for the changes, is not in the release; paper/tight_tile_report.tex, unchanged since 2c0b1b9, names no apex-range change.
+(4) Versions. The jobs ran under Python 3.10.12, numpy 1.26.1 and scipy 1.11.4; the release's controls (out_controls/) under Python 3.13.0 with the standard library alone. ttbox.py calls scipy's linprog (HiGHS) inside a try that passes on ImportError, only to propose the convex weights it then verifies exactly (lines 311 to 324), so the cell path, and the cells and seconds in an output, can depend on whether scipy is present and on its version (the review's F8); soundness does not. The project interpreter here has numpy 2.5.2 and scipy 1.17.1 (uv.lock), with which L145's 26 jobs equalled the source line for line. Receipts should record the versions, and a job whose chart lines differ only in cells or seconds should be rerun under the source's versions before it is called a mismatch. The board's control took 169 cells in the release's standard-library run and 155 with scipy here (L145) and in the paper, which fits the LP step being skipped; this lane's 20-second run to test that, with and without scipy, was refused by the session's permission check. Run the control receipts both ways and say which is which.
+(5) Controls. The paper's 1,190 refused ctl_rise cells came from a 6,000-cell cap (CAP=6000 in run_controls.sh); at 2,000 the release reproduces L145's 443 and 6. A CAP=6000 run of ctl_rise.txt, if time grows with the cells, takes about three times the 273 CPU-s it took here at 2,000, about 0.25 CPU-hours.
+(6) Lean. No full build log yet: it will follow the authors' next rebuild, which they also say needs at least 24 GB. The build's price stays the review's estimate.
+(7) Root 9632 and the axis face. crop_cover.py is the authors' rewrite (the original is lost) and writes c9632.txt byte for byte, so nothing changes for root 9632's run, which used the retained c9632.txt. The Lemma Z and 7,717-corner programs are lost; axis_exact.py (about 3 CPU-s) is the axis-face check the replay can cite.
+(8) F1 stands (the authors did not review Lemmas U and V and know of no review; held on think-kn13), and F2 is unchanged.
 blocked_on: the owner's budget decision
