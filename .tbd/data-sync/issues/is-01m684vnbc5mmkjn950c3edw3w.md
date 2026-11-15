@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 341
+version: 342
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -117,7 +117,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T19:54:25.980Z
+updated_at: 2026-11-15T20:54:47.537Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -307,3 +307,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~19:10Z: #999 merged f46b05370 (L185 applied L184: slim tool, allowlist dropped, B1 fix, memory/disk wording); think-o79q closed. Remaining: #998 (#996/#997, adopt 11-16; must merge main first).
 - 2026-11-15T18:55Z renewal (intake298): main f46b05370. 3 unowned items (#996, #997, de Winter repo at 6c0ad56) are all carried by #998 (L181, think-32cl), which reads through 6c0ad56 and waits for 16 November UTC to adopt T-304, stamp and pin. #973 comment and k2m5-family 355f83e read on main via #999. Nothing else new.
 - 2026-11-15T19:53Z renewal (intake299): no change since 18:55Z; #998 (L181) waits for 16 November UTC.
+- 2026-11-15T20:53Z renewal (intake300): no change; #998 (L181) waits for 16 November UTC.
