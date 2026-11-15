@@ -1,18 +1,18 @@
 ---
 type: is
 id: is-01m7f0hg627vw4aek919dahv50
-title: "Göbel's construction omits L-border extensions of its own members: at 977 the Göbel square (15, 21) of 921 plus one L-border gives 17 + (21/2) sqrt 2, below devtools.goebel_construction's 17 + 11 sqrt 2 (#992)"
+title: "Decide: do L-border extensions of Göbel's members join Göbel's construction beyond 324 (#613 follow-up, beside think-zkxy)? Four current rows (534, 581, 741, 796) lie within 6.2e-11 above a bordered side (#992 review F11)"
 kind: task
 status: open
 priority: 3
-version: 2
+version: 3
 labels:
   - result-import
   - decision
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-15T07:07:58.018Z
-updated_at: 2026-11-15T07:42:34.286Z
+updated_at: 2026-11-15T08:23:04.964Z
 ---
 Found in the import of jlevy/squares#992 (lane L175, think-ud9e). `devtools.goebel_construction` takes Göbel's side at a count as the least member of the three Kingbird families at that count or above, deletion included. It applies no L-border. Friedman's survey DS7 (packing/resources/web/friedman-ds7-survey-2009-html.md, section 2) states, beside Göbel's family, that n + 2s(n) + 1 squares pack in side s(n) + 1 by an L around a packing of n, and builds 82 from Göbel's 65 that way.
 
@@ -22,7 +22,11 @@ Found in the import of jlevy/squares#992 (lane L175, think-ud9e). `devtools.goeb
 
 **The question, the owner's.** #613's answer (think-8krd) named "Goebel's classical constructions", and the record reads it as the three families. Do L-border extensions of Göbel's members, one layer or more, join Göbel's construction? If yes, the module grows an L-border closure, proved final as now, and every count beyond 324 whose side falls is read again: a row above the new side is marked above-classical-construction, and walks read from that day start from the new side. If no, nothing changes, and the 27 held recipes stay with D2 and think-zkxy.
 
-**Not measured.** How many counts from 325 the closure lowers, and whether any current row lies between the two sides. Measure with a tool before the owner is asked (OR-1); nothing in lane L175 measured it.
+**Measured once** by the #992 review's program (F11, docs/project/reviews/review-2026-11-15-lara-992.md): with 0 to 3 L-borders, bordered members undercut the module's side at 910 of the 1,676 counts from 325 to 2000, and four current rows (534, 581, 741, 796, couzo-index-2026-10-15) lie within 6.2e-11 above a bordered side, so a yes would mark them above a classical construction. Measure again with a maintained tool before the owner is asked (OR-1).
+
+**Neither answer releases the 27 held recipes by itself.** A no leaves them with D2 and think-zkxy, and `devtools.construction_checker` refuses a classical parent either way.
+
+**Beside think-zkxy, not a duplicate.** think-zkxy asks about Friedman's off-centre family; it lists the 27 L-border extensions of Göbel squares under where the question arises, but its question does not cover them. Put the two to the owner as one two-part question.
 
 ## Notes
 

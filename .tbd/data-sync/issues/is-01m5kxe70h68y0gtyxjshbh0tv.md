@@ -5,14 +5,14 @@ title: "Decide: do Friedman's off-centre constructions count as earlier reports 
 kind: task
 status: open
 priority: 3
-version: 2
+version: 3
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T08:18:33.105Z
-updated_at: 2026-10-24T08:28:45.853Z
+updated_at: 2026-11-15T08:23:14.393Z
 ---
 **The question.** The owner answered #613 on 23 October (think-8krd): Göbel's classical constructions are earlier reports beyond n = 324, so a rational row above Göbel's exact side at its count is not recorded. Do Erich Friedman's off-centre constructions count the same way?
 
@@ -26,3 +26,7 @@ updated_at: 2026-10-24T08:28:45.853Z
 
 2026-10-24 coord-intake-1024: #730 merged. The question above is the owner's (listed in the pass's owner questions).
 blocked_on: none
+
+
+
+2026-11-15 coordinator: linked to think-7j3i (#992 review F11, L176 S4). A yes on think-7j3i decides the 27 L-border extensions of Göbel's squares listed here; the Friedman question stays here. If both are yes, the L-border closure applies to Friedman's members too. Put the two to the owner as one two-part question.
