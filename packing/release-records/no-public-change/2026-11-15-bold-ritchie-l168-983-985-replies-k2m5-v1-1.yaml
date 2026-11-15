@@ -1,0 +1,25 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane L168 of 15 November: the three replies jlevy posted after #988 merged as
+  a4f36ae70 are recorded. #984's final reply (02:35:07Z) states T-301 at V3/C3, confirmed
+  and current, and #985's (02:35:10Z) T-302 at V3/C3, confirmed and current, each naming
+  its three evidence ids, recorded under reported with their statuses (#900), the two
+  review entries added to their results' evidence lists; both issues are closed on 15
+  November and read through their replies. #983's follow-up (02:35:12Z) states T-300 at
+  V3/C3, confirmed and superseded, and names no reply in corrects. Mohsen Khalili and Sara
+  Gharabaghi's commits 85279d2 and 9ccfe82, v1.1 of the k2m5-family release and the
+  paper's DOI, which answer seven of the fifteen questions of #973's final reply and five
+  in part, are read in campaign/intake-watch.yaml and into #973's entry and the packet's
+  README, and not retained: the certificate and every file of certificate/ are unchanged. No result, rung,
+  side, bound, mark, score, credit holder, pin or block changes; T-298 stays at V0/C1.
+  Against origin/main a4f36ae70 (#988): devtools.compare_paper_renders rendered the methods
+  survey into empty site directories, the math passes in /usr/bin/google-chrome
+  (SQPACK_CHROMIUM), twice from this tree and once with that main's result-requests.yaml
+  swapped in: its 43 files were byte-identical across the three. No PDF was printed; it
+  prints from that HTML. The survey keeps its version, v0.2.7.

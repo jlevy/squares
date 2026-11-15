@@ -2087,3 +2087,99 @@ repositories:
       of the 22 and estimated at 8.4e-9 to 4.6e-8 for 754, 637, 684 and 805, and how the descent
       runs chose the 22. Those are statements about #941's and #942's certificates, which their
       requests entries take in (lane L103); no bound changes. Nothing else to import.
+  # Lane L168 of 15 November 2026 (think-jlsq).
+  - url: https://github.com/moh63-dev/k2m5-family
+    read_through: 9ccfe825fe04cd9f3770b4e76892364ceb50322c
+    read_on: '2026-11-15'
+    note: >-
+      Read through 9ccfe82 (02:56:10Z on 15 November), the head at 02:59Z, two commits past
+      2c0b1b9, the commit the moh63-dev-k2m5-family-2026-11-13 packet pins and T-298 cites,
+      tagged v1.0; neither new commit carries a tag. 85279d2 (00:22:20Z on 15 November,
+      16:22:20 on 14 November at the commit's own offset of -08:00), "v1.1: Lemma 7 sentence,
+      crop_cover, axis_exact, zmx2 logs, controls, LICENSE, run_cov fix", and 9ccfe82, the
+      same message with ", paper DOI", answer by commit seven of the fifteen questions of
+      jlevy/squares#973's final reply (issuecomment-6873382321), 1, 2, 6, 8, 11, 12 and 13,
+      and five more in part, 4, 5, 7, 14 and 15; 3, 9 and 10 have no answer. The #973
+      requests entry and the packet's README record each answer. The certificate is
+      unchanged: certificate/sol_exact_box11.txt keeps SHA-256 d259fed5...12099, the issue's,
+      and no file of certificate/ changes. Of the 466 files the packet's manifest pins
+      (acquisition/upstream-subtree.sha256), 457 hold their digests at the head,
+      tight_tile/cov.tar.xz among them, and none is removed; nine change, each first in
+      85279d2: LICENSE, README.md, SHA256SUMS_ALL, docs/CHECKING.md, paper/k2m5.tex and
+      paper/k2m5.pdf, tight_tile/README.md, tight_tile/run_cov.sh and
+      verification/verify.sh, with .gitignore, which the packet does not pin. 85279d2 adds 66
+      files. At the head every one of the 532 lines of SHA256SUMS_ALL holds, and it lists
+      every file but itself; at 85279d2 it left out the four of tight_tile/out_controls/,
+      which 9ccfe82 adds to it.
+
+      What changes. paper/k2m5.tex (and its PDF): Lemma 7's definition now says that every
+      segment of nu and omega is an elementary piece of the 1/10 grid, axis-parallel and of
+      length 1/10, checked on all 13,244 segments of mu_11, so that none crosses the grid
+      lines x = R and x = k - R, and in Lemma 7's proof a segment of omega that meets the open
+      strip lies in the closed one (the review's F5); the theta = 0 item names axis_exact.py
+      at the 10,000 limit corners in place of "an independent exact evaluation at 7,717
+      corners", says that the Lemma Z run at the same corners is not part of the release, and
+      calls the untilted mass piecewise bilinear rather than piecewise affine; the account of
+      Nagamochi and Karakus is reworded, Karakus's counterexample to the scoring step of
+      Nagamochi's Lemma 1 leaving the bound not disproved, and his proof of s(k^2 - 1) = k
+      not establishing s(k^2 - 2) = k; the date drops "Draft"; and the repository citation
+      names release v1.1. verification/axis_exact.py evaluates exactly, in integers, the
+      bilinear mass of every 1/10 cell of untilted centres at its four limit corners, and
+      verify.sh's new step 2b runs it on the board and on the two scaled controls.
+      verification/r9632/crop_cover.py writes the cropped cover c9632.txt, and verify.sh's
+      fast mode compares the two byte for byte. verification/logs/zmx2_box11/col00.log to
+      col54.log are zmx2's --log files for the 55 columns of the first-order sweep: 12,100
+      ROOT lines, each root's boxes, certified, empty, uncertified, deepest level, capped and
+      milliseconds, and 2,508 UNCERT lines. tight_tile/ctl_mutants.py writes the two
+      Tight-Tile controls the release lacked, mut_all099.txt (every weight times 99/100,
+      rounded down, 13,244 segments changed) and mut_x2_099.txt (the 106 segments on x = 2
+      times 99/100), and tight_tile/run_controls.sh runs ctl_rise.py on the board and the
+      three mutants at a cap of 2,000 cells (out_controls/controls_cap2000.out): the board
+      169 cells, 85 certified, none refused; ctl_rise.txt 2,083 cells, 443 refused, 6
+      containing the face point (1, 1), as lane L145's run at that cap; mut_all099.txt 1,029
+      refused of 2,057, 2 at the face point; mut_x2_099.txt 1,038 of 2,081, 6 there.
+      out_controls/versions.txt gives Python 3.13.0 for that run, and its numpy and scipy line
+      fails on a missing scipy. Lane L145's run of the board without a cap, on the same
+      ctl_rise.py and ttbox.py, took 155 cells, 78 certified, none refused
+      (receipts/controls/tight-ctl-rise-real.log); the difference is not explained here.
+      docs/CHECKING.md's theta = 0 row names axis_exact.py, and its ctl_rise row says the
+      1,190 refused cells came from a run stopped at a cap of 6,000 cells, the count
+      depending on the cap; run_controls.sh says CAP=6000 reproduces them, citing
+      docs/TIGHT_TILE_PROOF.md, which is not in the release. LICENSE grants MIT for the code
+      and CC BY 4.0 for the text and data, naming the files each covers, and leaves Evan
+      Daniel's code that verify.sh downloads under its own MIT licence; it no longer names
+      search/cover_loop.py and search/tilesep.py. README.md adds a Citing section, and
+      .zenodo.json and CITATION.cff (version 1.1, released 14 November) describe the
+      deposit. 9ccfe82 changes only those three files and SHA256SUMS_ALL: it gives the
+      paper's DOI, 10.5281/zenodo.24237740, in all three, and says that the software DOI of
+      the release will be added once minted. Neither doi.org nor zenodo.org was reachable
+      from this session, whose proxy refuses both, so the DOI was not resolved here.
+      tight_tile/run_cov.sh sets B and NP outside the
+      comment and writes to OUTD, by default cov. verification/verify.sh stops when
+      zmx2_print_all.patch fails to apply, unless it is already applied, where it went on
+      through || true, and --full adds step 6b, root 9632's dump with --uncert-cap 100000000,
+      qx2_zm.py on c9632.txt and check_9632.py, and step 9, the 75 coverage dumps regenerated
+      by run_cov.sh into build/cov_regen and checked by cov_check.py. As committed, step 6b
+      runs qx2_zm.py in build/square-packing/qx2, a directory evand/square-packing does not
+      have at 659ee62, where qx2_zm.py is search/qx2_zm.py, so under the script's set -euo
+      pipefail --full would stop there, before the sweep; this was read, not run.
+      lean/build_inst.sh builds each module of lean/K2m5 in its own process and writes
+      build_full.log with each module's wall time and peak memory, through
+      /home/claude/lean/mk.sh, a path outside the release; no build_full.log is published.
+
+      Checked at this read, from 85279d2's bytes with the project's Python 3.14.7 and -I,
+      and not retained: the ROOT lines of each of the 55 logs sum to its column's census in
+      colNN.out, and their milliseconds to 45,367 seconds against the 45,366 CPU-seconds
+      recorded; the 30 columns lane L145 ran here, the packet's receipts/zmx2/colNN_roots.log,
+      equal the release's logs line for line, 6,600 ROOT lines with their UNCERT lines, each
+      root's milliseconds left out; crop_cover.py writes c9632.txt byte for byte, the
+      retained copy's bytes; ctl_mutants.py writes both mutant boards byte for byte; and
+      axis_exact.py prints AXIS-FACE-OK, minimum exactly 1 at 750 of the 10,000 corners, in
+      about 3 CPU-seconds, and AXIS-FACE-FAILED on both scaled controls, at minima
+      0.998999999958 and 0.9929999999575. A re-run of the board's Tight-Tile control at the
+      cap of 2,000 was refused by this session's permission check, so the 155 against 169
+      cells stays unexplained. These files are the same at 9ccfe82. No packet retains either
+      commit: they add no bound, certificate or claim and change no certificate file, T-298
+      stands at V0/C1 as recorded, and the packet keeps its pin. A full replay (think-0h7r) that compares root for root retains
+      the logs it compares with. Lane L168 records the answers in the #973 requests entry
+      and the packet's README, and the replay's price on think-0h7r. Nothing to import.
