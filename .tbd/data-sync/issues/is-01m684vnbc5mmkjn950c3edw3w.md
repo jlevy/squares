@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 322
+version: 323
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -113,7 +113,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T07:11:08.242Z
+updated_at: 2026-11-15T07:39:50.320Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -288,3 +288,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~05:40Z: L170 import = #991 (T-303 at 90, first below the 10x10 grid; 11-15 pass {90,147,228}; stamped 11-15). L171 senior review: B1 padding double-counts wall slack; S1 finding count; S2 timing; S3 X-008 stale (BC-024 tilted residue at 51 and 90) -> addendum + 2 owner points (grammar conclusion; 37/63 calibration constants move with adoptions); S4 licence bead think-86c1. L172 addressing; merge by 23:59Z.
 2026-11-15 ~06:45Z: L172 applied L171 (B1 padding, S1-S4, notes; X-008 addendum; owner points in #991 body) ; #991 merged 588ccb226 (T-303, first below the 10x10 grid at 90). Deploy ok (run 43685575655). #989 reply posted and closed. #973 authors answered all 15 (05:03Z), acknowledged 05:54Z. L173 records PR for #989 + #973 + k2m5-family 0e28e8a + DOIs (think-hisc).
 2026-11-15 ~07:00Z: NEW #992 (Miguel Lara, s(977) <= 17+21/sqrt2 ~ 31.849, beyond horizon; goebel side(977)=17+11sqrt2 ~32.556 > grid 32; no exact certificate, float CSV at 31.85). Intake; import think-ud9e (L175), blind review think-u58c (L174). L173 records PR (#989, #973 answers, DOIs) still running.
+2026-11-15 ~07:40Z: L173 = #993 (records #989 final, #973 answers + ack, k2m5 0e28e8a, DOIs on T-298); CI red only on D-509 pdf flake (run 43688482102); occurrence noted on think-6dle; #993 waits for main to move (no rerun, no empty commit). L174 review of #992: exact packing accepted but record already holds 31.765989508190 at 977 (Couzo #763) < claim 31.849; classical (Goebel (16,21) less squares; Friedman L-border at 982); S1; not recordable as a row. Goebel module lacks L-border extension (bordered members undercut module at 910 counts 325-2000) -> owner decision think-zkxy.
