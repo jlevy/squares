@@ -5,7 +5,7 @@ title: "Import #989: jazivxt's s(90) <= 9.998277166926 (below the 10 x 10 side; 
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l170
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T03:09:06.500Z
-updated_at: 2026-11-15T04:38:14.961Z
+updated_at: 2026-11-15T05:17:03.463Z
 started_at: 2026-11-15T03:09:08.001Z
 ---
 
@@ -28,3 +28,5 @@ Intake commit 77dfd138a (03:25:49Z): packet jazivxt-s90-upper-bound-2026-11-15 p
 Read L169's frozen findings (d20230eb6, frozen 03:28:11Z) at 03:33Z, after both commits above; merged (083c57b38), mapped (3d88e55b9, 03:40Z): accepted, 23/23 controls, F1-F7 notes; no disagreement with replay, controls, margins or identity. Adoption written at 03:42Z (pass of 2026-11-15, LATER_PASSES {90,147,228}). Read L169's final head (22949a12e, 03:57Z) at 03:58Z; merged (3e5c54168): 14 findings, all notes, S3; lineage reproduces (F11); c70defa n157 file = retained blob 079d4cb1 (measured here). Adoption, regularization (evand same-side view admitted row 10; KKT 1.108e-11 below, ~1.01x own margin, held row 3) and derived records committed ddc209f9d (04:18Z); merged origin/main a3e4ea0c5 (#990) in 3bf7dc347; branch pushed.
 
 Records tier on 6bf1356d7: 55/55 after fixing the synopsis row, RESULTS/VERIFIERS views and the chunk census/profile/taxonomy (90 is the first count of n=1..100 off the grid; profile constants 36/64 -> 37/63; BC-024 taxonomy gains 90's tilted interior component). Stamp ac00f8485 (T-303 and house at 90 landed 2026-11-15, 04:35Z); re-pin 6316c38e5 (DATA_REVISION ac00f848). Draft PR https://github.com/jlevy/squares/pull/991 head 6316c38e5; merge must be on 2026-11-15 UTC or stamp/re-pin rerun. Reply on #989 owed after merge (think-i8y9), with the review's six questions.
+
+Hosted on 6316c38e5: four pins failed (gate text 36->37 chunk cases; grid first counts 90->91 in test_known_best_grid_transitions and test_overview; test_catalogue_precision 151->152; workbench check_animation_editor 155->154 grid fills); fixed in 6fb38e8dd (no data; stamp_landed --apply unchanged, release_pin --check: pin still ac00f8485). Hosted on 6fb38e8dd: 31 passed, 28 skipped, 0 failed; mergeable clean (runs 43679018452, 43679018425, 43679015526). PR #991 draft, not merged. Owed after merge: reply on #989 with the review's six questions.
