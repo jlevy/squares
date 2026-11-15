@@ -1,0 +1,25 @@
+# Lane L182 controls plan for the replacement certificate of #997, stated at 2026-11-15T13:03:56Z, before l180_controls.py was run on it. Run before it: l180_selftest.py, l180_check.py, l182_plan_facts.py (running l180_plan_facts.py unchanged), l182_make_plan.py (running l180_make_plan.py unchanged), and one read-only exploration with l180_reader and l180_geom that decided nothing. Not read: the author's n90/README.md, REGISTRATION.md, SHA256SUMS contents, verify_exact.py, check_area.py or figures at any commit; this repository's witness, verifier or promotion code; import lane L181 or its branch.
+# source files (clone of JoostdeWinter/square-packing at fa53fb0d734fbf438bcfb73c1434a15894bb2bc5; the same blobs at head 6c0ad56a13346abda6debd73afab7892072896c7):
+85840c5563e023790ae32af68c62d636e041a7d34f01c0f772979450dd188a2a  fa53fb0:n90/n90_exact.json
+c9aa917fa0abc9bfe4ddfdd73ec391b20e474fb0c5c97252a7819ad7152c1628  fa53fb0:n90/n90_witness.yaml
+# L180's programs, each equal to its digest in L180's frozen lists, used unchanged:
+54678a2eb8f49c0b20ea77549f44383512b66c7663cdf7c196ab33fee79479ad  ../programs/l180_reader.py
+c7d9fcd2a181fa4d9b0841ee6b3f80fa8ffc86881e65e3faa8bfcf2247216a8a  ../programs/l180_axes.py
+c654769f886ca6f1b21985bf8b1bdcbf7c44fd4dd109d0417f03471254e8b8d8  ../programs/l180_clip.py
+8431d0cd0a5e115767af62dfda322b9881b5dad3679e3b65eef13aea8050aa16  ../programs/l180_decide.py
+0e78fe1580713dd7c8e5620eb0c6753b48a2c2f8793f857d2c9786c9975703f2  ../programs/l180_check.py
+1403e7b8f8b1248b408cc54ce65f4ae1049372075d0d73def899d4f7ec61d0b1  ../programs/l180_geom.py
+09d450bbf981ec03ab8597de286019fcf9ad80fc27d2ef42eeef5fc27d374055  ../programs/l180_selftest.py
+c6fb615bb2663777d07879c8ec342d9a21e4e15aed1fe8740fa58c23dbe84308  ../programs/l180_plan_facts.py
+4e8100f474df8ea9669836ec1140daa9bffb9bd6c61c4b9ab9e12edefa3a1dd9  ../programs/l180_make_plan.py
+37abb13791e588f42284161b30497d5ffd3f24fd5f225aa4826c3e60e1e688a0  ../programs/l180_controls.py
+efae6bd3fcfd44aed6049eca0fc2f2e2995b481aaa9ad5b7ea02b8458ab18be8  ../programs/l180_describe.py
+31a2b55110de9600dc8889648e738caf9c62fe7d4c6d67e491b08203bc0364b2  ../programs/controls-plan.json
+# L182's plan programs:
+d792ce016031636a122d7cd6903bb9580cba7d241f5e0e8626f17477edc52669  programs/l182_plan_facts.py
+183c264852a8dc59e6ed511e34b5829ef43f8d7a315d767d598bcd14ca913766  programs/l182_make_plan.py
+# receipts and the plan:
+cc3b82e33de26ef66d7e3b4a7c481372f31714231c6781fc8d50c2ab43a783e2  out/selftest.json
+bf8544902b6ea7d939c9c81f1c47ec301eaaacbf671ab0eb0c1116208bf3a7e6  out/check-n90-997.json
+aa261a412df2c1eda3739cd2ea1d0e02c0e1b6b08010335458b52b1bcd96cb41  out/plan-facts-n90-997.json
+34853d02311825905f592a1f74cf0c84c23e3e20928e89dcb0a9e1ac385ebcf7  programs/controls-plan-997.json
