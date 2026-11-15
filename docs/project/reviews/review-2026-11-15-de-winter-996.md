@@ -65,6 +65,32 @@ It is not a human oversight record.
   $9.20 \times 10^{-12}$: 195 pairs, and then none below $5.8 \times 10^{-6}$. Your
   “smallest gap of 1e-12 between squares” holds.
 
+*Added after the findings were frozen*, from the checks the lane’s brief orders after
+the freeze ([After the Freeze](#after-the-freeze)):
+
+- **Your arithmetic holds.** The claim is the side’s 12-place ceiling, and the gain on
+  T-303 is exactly 0.00423830938030479085, your 0.00424 to three figures; your 202 close
+  pairs reproduce (F13).
+- **None of it is padding.** T-303’s certificate has $1.0988 \times 10^{-11}$ of
+  padding, and your gain is about $3.9 \times 10^8$ times that: RV-3 does not apply
+  (F8).
+- **T-303 improved, square for square.** Each of your squares pairs with T-303’s square
+  of the same number under the identity; six move beyond 0.1 and sixteen turn beyond 1°.
+  Four of T-303’s turned squares become upright at the left (43, 57, 58, 60), and twelve
+  turn further clockwise by 1.0° to 4.9° (F9). Your count of 49 leaning squares for
+  T-303 reproduces; 37 for the new packing does not (F10).
+- **This repository’s corner adapter refuses your twin**, though its witness validation
+  accepts it: the schema is named by URL, the ids are strings, and the corners start at
+  the $(+1/2, +1/2)$ corner.
+  With those three changed the adapter reads your poses exactly (F11).
+- **Custody and licence hold.** The certificate’s blobs are unchanged to the head, every
+  `SHA256SUMS` digest holds, the issue was opened 167 seconds after the pin, and the
+  repository is MIT-licensed.
+  The pin’s README credited the local search to “OpenAI Codex (GPT-6 Astra)”; the head
+  and the issue say GPT-6.1 Sol Max (F12).
+- **Significance.** S3: a step of $4.24 \times 10^{-3}$ on the house, about 225 times
+  T-226’s at the low end of S3, in a continued arrangement of T-303.
+
 ## Scope
 
 **Read.**
@@ -511,6 +537,280 @@ That reads as confirmed, independently re-implemented, clean room, by a Claude a
 `V4` and `C4` would need a second accepted adversarial review by a distinct reviewer and
 a human oversight record.
 
+## After the Freeze
+
+Everything in this section was written after the findings were frozen at
+2026-11-15T12:23:58Z and pushed as `4622bdfb8`. It follows the lane’s brief, which puts
+the claim’s arithmetic, the contraction margin and RV-3, the identity against T-303 and
+the grid, closed forms, the licence, the dating, questions for the author and the
+significance after the freeze.
+
+**The record.** `main` was at `91acf2022` throughout; nothing at 90 moved while this
+review ran, and the issue had no comments when last fetched.
+At 90 the house is T-303, jazivxt’s packing of #989, adopted on 15 November: reported
+and verified upper bound $4999138583463/500000000000 = 9.998277166926$, witness
+`W-known-best-n090`, whose side equals the case record’s exact form.
+Its register entry scores it S3. The lower bound is 9.73, reported and verified (T-091).
+
+**Read after the freeze.**
+
+- The author’s `n90/README.md`, `REGISTRATION.md` and `SHA256SUMS` at the head,
+  `verify_exact.py` and `check_area.py` at the pin, and the repository’s `README.md` and
+  `LICENSE`; the diffs from the pin to the head.
+- On `main`: the front matter and opening of `n-090.md`; the register entries T-303,
+  T-299, T-292, T-287, T-239, T-226 and T-198 (headline and significance); the
+  significance scale in `epistemics.md` and the refinement rule of stage 1 in
+  `result-import.md`; the front matter of every case record (through `l180_sides.py`);
+  the house witness at 90 (through programs and devtools); the help texts of
+  `devtools.contraction_margin` and `devtools.measure_identity`; and, in
+  `devtools/upper_bound_reports.py`, the `witness_corners` adapter, its constants, the
+  certificate constructor and the fields of the legacy `Certificate` and `Pose`, to see
+  why the adapter refuses the twin (F11).
+
+Still unread: `check_rational_witness_independent`, the import lane L181 and its branch,
+this repository’s verifier and promotion code, and the reviews of T-303’s import beyond
+the model.
+
+### The Sides and the Prints
+
+`l180_sides.py` does the arithmetic exactly (`out/sides.json`).
+
+| Quantity | Value |
+| --- | --- |
+| The side $S$ | $199880777150913904183/20000000000000000000 = 9.99403885754569520915$ |
+| 12-place ceiling; floor; the claim | 9.994038857546; 9.994038857545; the ceiling |
+| Claim less side | $3.0479085 \times 10^{-13}$ |
+| T-303’s side | $4999138583463/500000000000 = 9.998277166926$, the case record’s exact form and the house witness’s side |
+| Gain on T-303, exact | $84766187606095817/20000000000000000000 = 0.00423830938030479085$ |
+| Relative to T-303 | $4.239 \times 10^{-4}$ |
+| Claim to claim, as printed | $9.998277166926 - 9.994038857546 = 0.004238309380$ |
+| The issue’s and README’s print | 0.00424, the gain to three figures |
+| Below the grid’s 10 | 0.00596114245430479085 |
+| Below the public submission 9.998277166917 (context) | 0.00423830937130479085; that submission is $9 \times 10^{-12}$ below T-303 |
+| Pairs with centres closer than $\sqrt 2$ | 202, the issue’s count |
+
+- **The claim** is the side’s 12-place ceiling, as printed, and the side is a 20-place
+  decimal (F3, F4).
+- **The gain** is 0.00424 to three figures, as the issue and README say.
+- **The public submission** the issue cites, 9.998277166917 for 90, lies
+  $9 \times 10^{-12}$ below T-303’s print; the issue gives no packing for it and it does
+  not bear on the claim.
+
+### Is the Improvement Real?
+
+`devtools.contraction_margin`, run read-only with its receipts written to this review’s
+packet, contracts a certificate uniformly about the origin to its first contact and
+decides the contracted certificate on both maintained exact routes.
+It read T-303’s house witness through `witness-center-basis` and the new certificate’s
+JSON file through `center-direction-json`.
+
+| Certificate | First contact, $1 - \lambda^*$, pair | Side margin | Against the claim |
+| --- | --- | --- | --- |
+| T-303, the house (`W-known-best-n090`) | $1.194485 \times 10^{-12}$, (79, 81) | $1.098813 \times 10^{-11}$ | gain $4.238309 \times 10^{-3}$, $3.857 \times 10^8$ times the margin, `within_margin: false` |
+| #996 | $1.059921 \times 10^{-12}$, (2, 40) | $9.532970 \times 10^{-12}$ | — |
+
+- **RV-3**, the owner’s open question whether a gain inside a certificate’s padding
+  counts, does not apply.
+  T-303’s padding is $1.0988 \times 10^{-11}$, the value the review of #989 measured,
+  and the gain is about $3.9 \times 10^8$ times larger; no part of the improvement lies
+  inside it.
+- **The new certificate’s own padding.** Contracted, it is accepted by both routes at a
+  side $9.53 \times 10^{-12}$ below its own, and it carries the separate right and top
+  slack of $5.07 \times 10^{-21}$ (F4). RV-3 bears only on sides like those, about
+  $4 \times 10^8$ times smaller than the gain, and this review registers nothing.
+- **The maintained routes on the certificate itself** accept it as given: their least
+  wall clearance is 0 and their least gap is this review’s least margin, exactly.
+
+### Identity and Lineage
+
+`devtools.measure_identity` (`out/identity-n90.json`) measured the certificate against
+T-303’s house witness and against the grid, which `l180_grid.py` writes as nine rows of
+ten upright squares in $[0, 10] \times [0, 9]$ (`out/grid-n90.txt`). `l180_lineage.py`
+(`out/lineage-n90.json`) pairs the squares with T-303’s by the same optimal assignment
+and lists each pair.
+
+| Reference | Nearest centres one to one | Optimal assignment: beyond $10^{-3}$, $10^{-2}$, $10^{-1}$; largest move | Box-centred: total squared, runner-up; turned beyond 1° | Tilted squares |
+| --- | --- | --- | --- | --- |
+| T-303 | under no symmetry | 89, 34, 6; 0.646 (the identity) | 1.155 under the identity, 11.53 next; 16 | all 40 paired with tilted squares of the same sign |
+| The grid | under no symmetry | 90, 57, 56; 1.184 | 38.54, tied under two symmetries; 40 | all 40 paired with upright squares |
+
+- **T-303’s arrangement, improved.** Under the identity the optimal assignment pairs
+  every square $k$ with T-303’s square $k$: the author kept T-303’s numbering.
+  84 squares move less than 0.1, and the box-centred alignment prefers the identity by a
+  factor of ten in summed squared moves.
+  Nearest centres pair no symmetry one to one; the two largest moves, 0.646 and 0.565 at
+  the upper left, exceed half a square.
+- **What changed.** Four of T-303’s turned squares are now upright: 57, 58 and 60, which
+  move onto the left wall by 0.565, 0.235 and 0.171, and 43 beside them at $x = 1.5$,
+  which moves 0.646. T-303’s four slightly turned squares, 63 (0.020°, on the left
+  wall), 70, 86 and 89 (0.003° to 0.062°), take the common direction of the other
+  near-upright squares.
+  Twelve squares turned in both turn further clockwise, by 1.03° to 4.89°: 4, 5, 17, 21,
+  42 and 54 in the upper part of the cluster ($y$ from 7.0 to 8.7), and 19, 24, 64, 65,
+  72 and 80 lower down.
+  The six squares that move beyond 0.1 are 43, 57, 5 (0.463), 87 (0.320), 58 and 60.
+- **The issue’s counts.** T-303 has 49 squares that are not exactly upright, 44 turned
+  beyond 1° and five within 0.07°: that is the issue’s 49. By the same count the new
+  packing has 90, since its 50 near-upright squares are turned by $1.83 \times 10^{-10}$
+  degrees; beyond $10^{-9}$ degrees or beyond 1° it has 40. No count gives 37 (F10).
+  Five squares on the left are made axis-aligned, 43, 57, 58, 60 and 63, if 43 at
+  $x = 1.5$ counts as along the wall; six in the upper part take a new angle, and which
+  seven the issue means is a question for the author.
+- **Relative to the grid**, the record’s house at 90 before T-303, it is a new
+  arrangement, as T-303 was: 56 squares lie beyond a tenth and every turned square pairs
+  with an upright one.
+
+So the certificate is T-303’s packing modified by a local search, square for square, and
+by the stage 1 rule a refinement is recorded like a new packing and credited to its
+finder after the finder of the packing it refines: Joost de Winter, after jazivxt, whose
+packing came from a crop of de Winter’s 157 (T-293). That is the credit the issue asks
+for (F9).
+
+### Closed Forms
+
+`l180_sides.py` computes $S - (s(m) + j)$ for every reported $s(m)$ with $m < 90$ and
+every integer $j \ge 0$, reading the 324 case records.
+
+- **No closed form.** None lies within $10^{-3}$ of the side; the nearest is 10 itself
+  ($s(1) + 9$), $5.96 \times 10^{-3}$ above.
+- **The L steps from the new side.** Widths 1 to 8 carry 90 to 109, 130, 153, 178, 205,
+  234, 265 and 298, at sides 0.044 to 0.216 above the record there: the certificate
+  moves no other count.
+- **Monotonicity.** No reported $s(m)$ with $m < 90$ lies above $S$ ($s(89)$ is
+  9.949747), and none with $m > 90$ lies below it: nothing else moves.
+
+### Custody, Dating and Licence
+
+`l180_custody.py` (`out/custody.json`) ran read-only plumbing (`rev-parse`, `log`,
+`ls-tree`, `show`, `diff`, `status`, `merge-base`) on the clone made for this review.
+It records author names and times, not addresses.
+
+- **Commits.** The repository holds 22 commits on `main`, all by Joost de Winter.
+  Three are of 15 November: the pin `64d5ee7` (11:27:26Z, “Add a packing of 90 unit
+  squares with side 9.994038857546”), `0c9bcd2` (11:27:49Z, the registration request and
+  checksums) and the head `9cafa33` (11:29:27Z, “Name GPT-6.1 Sol Max as the model that
+  ran the local search for n = 90”). The pin is an ancestor of the head, the clone’s
+  working tree equals the pin, and the two certificate blobs, `620a72b7` and `52ccc234`,
+  are the same at both: “later commits leave these files unchanged” holds.
+- **Dates.** Issue #996 was opened at 11:30:13Z, 167 seconds after the pin was committed
+  and 46 seconds after the head, and labelled `intake` at 11:58:00Z. It had no comments
+  when last fetched. Git dates are the author’s own, and push times were not checked.
+  T-303’s issue, #989, was opened at 03:00:53Z the same day.
+- **Digests.** `SHA256SUMS` at the head lists eight files, and every digest holds.
+- **Licence.** `LICENSE` (blob `17e795f2`, the same at the pin and the head, added at
+  `9bf5d9b` on 17 October 2026) is the MIT licence, “Copyright (c) 2026 Joost de
+  Winter”, and the repository README says “All files are released under the MIT licence
+  (see `LICENSE`).” The certificate is the author’s own, licensed as the record can
+  retain it. Its seed, T-303, came from a repository that states no licence for its own
+  files (the review of #989, F12); the record already holds T-303.
+- **The AI credit.** At the pin, `n90/README.md` said the local search “was run with
+  OpenAI Codex (GPT-6 Astra)”, and the repository README “OpenAI Codex”; the head, 2
+  minutes later, says GPT-6.1 Sol Max (OpenAI), as the issue does (F12).
+
+Custody holds.
+
+### The Author’s Checks
+
+The author’s two checkers were read after the freeze and not run.
+
+- **`verify_exact.py`** checks $c^2 + s^2 = 1$ and every corner inside $[0, S]^2$, and,
+  for every pair whose centres are closer than $\sqrt 2$, separation along one of the
+  four edge directions with contact allowed, in `Fraction`s. **`check_area.py`** checks
+  the same unit vectors and containment and each square’s area, and clips one square of
+  each such pair against the other with closed half-planes, requiring zero area.
+- **Their filter is sound**: a unit square lies in the closed disc of radius
+  $\sqrt 2 / 2$ about its centre.
+  The count they report, 202, is the number of pairs with centres closer than $\sqrt 2$
+  (table above).
+- **They raise rather than assert.** Both stop through a `require` that raises
+  `SystemExit`, “unlike assert, this also runs under python -O”, which answers F15 of
+  the review of #977. Neither checks the JSON’s keys or canonical form or reads the
+  twin; their messages number squares from 0.
+- **What they share.** One author and model, `Fraction`, the same corner formula and the
+  same filter; their pair tests differ, as the issue says.
+  This review’s checker shares none of their code.
+
+The issue’s third checker, `check_rational_witness_independent` at `ed7aff6`, was not
+read or run here. That it reads the twin while this repository’s `witness-corners`
+adapter does not (F11) was not investigated.
+
+### The Twin and This Repository’s Tools
+
+`l180_witness_read.py` (`out/witness-read.json`) runs two of this repository’s readers,
+read-only, on the twin.
+
+- **`sqpack.witness.validate_witness_document`** accepts it: the schema and its semantic
+  checks hold, as the issue’s “jsonschema, 0 errors” says.
+- **The `witness-corners` adapter** of `devtools.upper_bound_reports`, which the
+  contraction and identity tools use, refuses it: “a corner witness names
+  witness.schema.yaml as its schema”.
+  The twin names the schema by its GitHub URL; the adapter also requires integer ids,
+  where the twin writes `square-1` to `square-90`, and corners listed from the frame’s
+  $(-1/2, -1/2)$ corner, where the twin starts at $(+1/2, +1/2)$.
+- **A copy with exactly those three changes** (the schema by its file name, ids 1 to 90,
+  each listing turned by two) is read by the adapter, and the poses it recovers equal
+  the JSON file’s exactly.
+  The copy is kept in scratch space, not here.
+
+Nothing in the bound depends on it: the JSON file reads through `center-direction-json`,
+and the reviewed twin equals it (F11).
+
+### Significance
+
+**S3**, a substantive case result.
+
+- **The anchor.** The record draws its S2/S3 line by the size of the step, between
+  T-198’s $1.15 \times 10^{-5}$ (S2) and T-226’s $1.88 \times 10^{-5}$ (S3), as T-239’s
+  rationale gives it, and scores new and continued arrangements above it S3 alike.
+  This step on the house, $4.238 \times 10^{-3}$, is about 225 times T-226’s, beside
+  T-292’s $9.63 \times 10^{-3}$, T-287’s $2.11 \times 10^{-3}$ and the author’s own
+  T-299, $9.62 \times 10^{-4}$, each S3.
+- **A continued arrangement.** It is T-303’s packing improved square for square, the
+  kind of result T-239 is, but T-239’s step of $9.89 \times 10^{-6}$ fell below the line
+  and scored S2; this one is about 430 times larger.
+  It is 2.46 times T-303’s own step below the grid ($1.72 \times 10^{-3}$), and takes
+  the case $5.96 \times 10^{-3}$ below 10.
+- **Not S4.** A local search on a known packing, at one count: no technique is new, no L
+  step from it moves another count, and no bound family or disputed value is resolved.
+  Not S5: no lower bound or optimum.
+- **What it does not change.** T-303 already showed $s(k^2 - k) < k$ at $k = 10$; this
+  result widens that margin and adds no new threshold.
+
+### Findings Added After the Freeze
+
+| Id | Severity | Where | Finding |
+| --- | --- | --- | --- |
+| F8 | note (records) | the contraction | T-303’s contraction margin is $1.098813 \times 10^{-11}$ (first contact $1.194485 \times 10^{-12}$ at (79, 81)), the #989 review’s value; the gain is $3.86 \times 10^8$ times it and RV-3 does not apply; the new certificate contracts by $9.53 \times 10^{-12}$ in side and has $5.07 \times 10^{-21}$ of right and top slack, sides only RV-3 could register |
+| F9 | note (records, at adoption) | identity and lineage | T-303’s packing improved square for square: each square $k$ pairs with T-303’s square $k$ under the identity, 6 move beyond 0.1 (largest 0.646) and 16 turn beyond 1°; four turned squares made upright at the left, twelve turned further by 1.0° to 4.9°; a new arrangement relative to the grid; credit to de Winter as a refinement of jazivxt’s packing, after de Winter’s 157 |
+| F10 | note (author) | the issue, “Lineage and credit”; `n90/README.md`, Construction | T-303’s 49 leaning squares reproduce (not exactly upright); the new packing’s 37 does not: by the same count 90, and 40 beyond $10^{-9}$ degrees or beyond 1° |
+| F11 | note (records; author) | `n90/n90_witness.yaml`, lines 3 and 23 to 922 | `sqpack.witness` accepts the twin, but the `witness-corners` adapter refuses it (the schema named by URL, string ids, corners listed from $(+1/2, +1/2)$); with those three changed it reads the twin back to the JSON poses exactly; the import reads the JSON file through `center-direction-json` |
+| F12 | note (author) | `n90/README.md` at the pin; `README.md` | the pin’s READMEs credit the local search to “OpenAI Codex (GPT-6 Astra)” and “OpenAI Codex”; the head and the issue say GPT-6.1 Sol Max (OpenAI); the record should credit as the issue asks |
+| F13 | note | the claim, the gain, the prints | the claim is the side’s 12-place ceiling; the gain on T-303 is exactly 0.00423830938030479085, “0.00424” to three figures; no closed form within $10^{-3}$, no L step and nothing by monotonicity moves another count; the author’s 202 close pairs reproduce |
+
+None changes a verdict.
+F10 to F12 bear on the author’s words or files, and F8, F9 and F11 on the record’s.
+
+### Questions for the Author
+
+1. How are the 49 and 37 leaning squares counted?
+   T-303 has 49 squares that are not exactly upright; by that count the new packing has
+   90, its 50 near-upright squares being turned by $1.83 \times 10^{-10}$ degrees, and
+   beyond any larger threshold 40 (F10).
+2. Which are the seven squares in the upper left with a new angle, and the five along
+   the left wall? This review finds 4, 5, 17, 21, 42 and 54 turned further in the upper
+   part, and 43, 57, 58, 60 and 63 made upright on the left (F9).
+3. The 50 near-upright squares share the direction of $t = -799/(5 \times 10^{14})$, a
+   turn of $1.83 \times 10^{-10}$ degrees.
+   Was that turn chosen for the rational certificate, or left by the optimization?
+4. Would you write the twin in the form this repository’s corner adapter reads (the
+   schema by its file name, ids 1 to 90, corners from the $(-1/2, -1/2)$ corner), or
+   name the box and the sense of the angle in the JSON `format` line (F7, F11)?
+5. The pin’s README credited the local search to “OpenAI Codex (GPT-6 Astra)”; the head
+   and the issue say GPT-6.1 Sol Max.
+   Is the issue’s the credit to record (F12)?
+6. Would you publish the local search and the linear program behind “no first-order
+   improvement larger than 4e-10”, or their outputs?
+
 ## What I Ran
 
 All with CPython 3.14.7 (`uv run --frozen --all-extras --group dev python -I -B`, from
@@ -545,6 +845,86 @@ What went wrong along the way, and was redone before the freeze it precedes:
   second run.
 - The pre-commit hook could not run in this worktree (`lefthook` is not on its `PATH`);
   the commits went through without it.
+
+*Added after the freeze*, none of them a decider of the certificate, run from `packing/`
+of this review’s worktree (`main` at `91acf2022`), one at a time; the README lists the
+commands. The devtools, and `l180_witness_read.py`, which imports this repository’s
+witness readers, were run with `python -B` (not `-I`, which leaves `packing/` off the
+module path); they are this repository’s own, run read-only, writing only to this
+review’s packet.
+
+| Program | Receipt | CPU |
+| --- | --- | ---: |
+| `devtools.contraction_margin`, T-303’s house against the certificate | `out/contraction-t303-house-n90.json`: margin $1.098813 \times 10^{-11}$, `within_margin: false` | 2.3 s |
+| the same, the certificate alone | `out/contraction-new-n90.json`: $1 - \lambda^* = 1.059921 \times 10^{-12}$, routes accept | 2.9 s |
+| `l180_grid.py` | `out/grid-n90.txt` | under 1 s |
+| `devtools.measure_identity`, against T-303 and the grid | `out/identity-n90.json` | under 4 s |
+| `l180_lineage.py` | `out/lineage-n90.json` | under 5 s |
+| `l180_sides.py` | `out/sides.json` | under 5 s |
+| `l180_witness_read.py` | `out/witness-read.json` | under 5 s |
+| `l180_custody.py` | `out/custody.json`, with `programs/issue-996.json` | under 1 s |
+| `l180_digests.py` | `out/program-digests.json`: `ALL_FROZEN_DIGESTS_HOLD` (27 digests), `RERUN_REPRODUCES_EVERY_RECEIPT` | 35 s |
+
+The frozen chain (self-test, check, plan facts, plan, controls, description), rerun into
+scratch space after the freeze with the controls reading the kept plan, reproduced every
+kept receipt in everything but its CPU seconds, and the rerun plan byte for byte.
+
+What went wrong after the freeze, and was redone:
+
+- `devtools.contraction_margin` refused the twin through `witness-corners` (F11); no
+  receipt of that tool keeps the refusal, and `out/witness-read.json` records it.
+- `l180_witness_read.py` first stopped on import (a script’s own directory, not
+  `packing/`, is on its module path) and then named a field of the adapter’s certificate
+  wrongly; both were corrected before the run kept.
+- A `jq` summary of the identity receipt failed on a key with a hyphen; it read a file
+  and wrote nothing.
+- `packing-validate --edit --jobs 2` (408 s wall) failed two steps of 71 and passed the
+  rest. The browser floor failed because `npm ci` was not run in this worktree; no
+  JavaScript changed here.
+  The documentation check names this review an unmapped durable document: the document
+  map is the import lane’s to update, as it was for the model reviews, and this lane
+  makes no records edits.
+
+## Relation to Earlier Reviews
+
+- **The models**, L169’s review of #989 and L153’s review of #977 and #979, concern
+  rational certificates.
+  Their texts and READMEs, all three of the #989 packet’s frozen digest lists and the
+  head of the #977 packet’s checker list were read before any program here was written;
+  their programs, plans and receipts were not opened.
+  This review follows their layout, their two methods’ ideas and their list of controls,
+  adapted: method B reads the twin’s own corners, G5 is a rotation at a square on a
+  wall, G7 is four controls of the twin, S1 reaches the claim and its floor, and S5
+  closes every pair.
+- **The review of #989 reviewed T-303’s certificate.** Where it and this review measured
+  the same object they agree: T-303’s contraction margin ($1.0988 \times 10^{-11}$) and
+  first contact (79, 81), and its tilts (44 turned beyond 1°, five within 0.07°, 41
+  exactly upright).
+- **The review of #977 and #979** asked the author to make his checkers raise rather
+  than assert (its F15); these do.
+  Its F8 was a twin that this repository’s witness reader refused; this twin passes that
+  reader and is refused only by the devtools adapter (F11).
+- **No earlier review of this certificate exists**, and the import lane’s work (L181)
+  was not read.
+
+## Frozen Findings
+
+The checker was frozen at 2026-11-15T12:12:15Z: `frozen/checker-frozen-digests.txt`
+(list SHA-256 `7c9550a0…`) holds the two source files’ digests, the seven checker files’
+and the two receipts they had written, pushed as `ab95e0514`. The controls plan was
+stated at 12:15:57Z: `frozen/controls-plan-digest.txt` (list SHA-256 `391c434d…`, plan
+`31a2b551…`), pushed as `9b269d936`. The findings were frozen at 12:23:58Z, before the
+author’s README, registration, checksums, checkers or figures, the repository’s README
+or licence, the case record, register entries and house witness at 90, T-303’s
+certificate, any import lane’s work or this repository’s verifier, promotion, witness,
+identity and contraction code was opened: `frozen/findings-frozen-digest.txt` (list
+SHA-256 `6e54e489…`). The frozen text is kept beside the programs as
+`frozen/review-2026-11-15-de-winter-996.frozen.md`: 551 lines and 38,893 bytes, SHA-256
+`6926820061e3abf79e727389f7c7b92316652872724aa21115a896fe822c1a9a`, committed and pushed
+as `4622bdfb8` before anything after it was written.
+That text is everything here but the passages marked as added after the freeze, the
+sections After the Freeze, Relation to Earlier Reviews and Frozen Findings, and the
+closing comment.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
