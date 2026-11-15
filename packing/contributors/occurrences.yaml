@@ -33251,6 +33251,42 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[jazivxt s90 upper bound 2026-11-15]'
+    field: /authors/0
+  expected_text: jazivxt
+  start: 0
+  end: 7
+  label: jazivxt
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[jazivxt s90 upper bound 2026-11-15]'
+    field: /credit
+  expected_text: jazivxt after de Winter
+  start: 0
+  end: 7
+  label: jazivxt
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[jazivxt s90 upper bound 2026-11-15]'
+    field: /credit
+  expected_text: jazivxt after de Winter
+  start: 14
+  end: 23
+  label: de Winter
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

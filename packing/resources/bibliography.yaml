@@ -5626,6 +5626,32 @@ sources:
       project: the harness reads its starting packings from this registry's witnesses. Licensed
       MIT by LICENSE at the pin, which web/ono-issue984-2026-11-14/ retains. Retained in
       web/ono-issue985-2026-11-14/.
+  - key: '[jazivxt s90 upper bound 2026-11-15]'
+    authors:
+    - jazivxt
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-15'
+    lineage: independent
+    credit: 'jazivxt after de Winter'
+    note: >-
+      dpre4ai/n90-square-packing at f9b31b4ebddb278a128b6cb5c43836a305a24dca
+      (2026-11-15T03:10:54Z), whose parent 179fcba7f0e91e2c3d3e92525e0738b6da0f8dd5 the issue
+      names, the certificate for s(90) <= 4999138583463/500000000000 = 9.998277166926 (exact
+      at 12 places), below the 10 x 10 grid's 10, the first packing below the grid at 90 the
+      record holds, first committed at e5c2ecc365b5a0d4783e0b7e2fe580fca2cc76b5
+      (2026-11-15T03:00:02Z), 51 seconds before jlevy/squares#989, which requested its
+      registration, the account dpre4ai's first contribution: Evan Daniel's text format of
+      rational centres and half-angle tangents, a packing the issue says was made from a crop of
+      Joost de Winter's n = 157 packing (JoostdeWinter/square-packing c70defa,
+      n157/n157_exact.json, T-293), copies of the crop offset by one unit and a square window
+      across two of them holding 90 squares, then fitted and made exact. The issue asks for credit to
+      'jazivxt and GPT-6 Astra Ultra', jazivxt's Kaggle profile named, and says GPT-6 Astra
+      Ultra was the AI collaborator on the search and verification; the README says the
+      arrangement was found during Kaggle's Squares in Squares competition. No optimality
+      claim. The repository states no licence; the account submitted it in the issue
+      (presumption of permission, think-cnn7), and DONOR-LICENSE.txt is de Winter's MIT notice
+      for the donor. Retained in web/jazivxt-s90-upper-bound-2026-11-15/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
@@ -5684,3 +5710,4 @@ credited_names:
   ntumlnoob: ntumlnoob
   unnir: unnir
   Roberto Ono: Ono
+  jazivxt: jazivxt

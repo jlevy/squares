@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-14'
+last_reviewed: '2026-11-15'
 results:
   - id: T-001
     kind: lower-bound
@@ -47502,6 +47502,159 @@ results:
       verdict: accepted
       covers:
       - T-302
+  - id: T-303
+    kind: upper-bound
+    registered: '2026-11-15'
+    landed: '2026-11-15'
+    headline: >-
+      jazivxt's packing at 90 from a crop of de Winter's 157, the first below the grid's 10, by 1.72e-03
+    claim: >-
+      One complete rational certificate proves s(90) <= 4999138583463/500000000000 =
+      9.998277166926, the side terminating at 12 places, as #989 prints it.
+
+      It is 1.72e-03 below the 10 x 10 grid's 10, which the case holds in both lanes, exactly the
+      0.001722833074 the issue states; it is the first packing of 90 squares below the grid on
+      record.
+      Measured here it is a new arrangement, not one to one with the grid's 90 squares under any
+      symmetry of the box by nearest centres: the optimal assignment moves 52 squares beyond a tenth.
+      Since 90 = 10^2 - 10, it shows s(k^2 - k) < k at k = 10, the smallest k at which the record
+      holds it; k = 11 to 18 (110 to 306) were already below their grids, and k = 4 to 9 (12 to 72)
+      stay at them.
+
+      Both maintained exact routes accept the certificate; the stage 4 review is a separate lane,
+      blind to this one (think-176a).
+
+      The issue and README say Francisco Couzo's public checker verify_bound_certificate.py, at
+      franciscouzo/square-packing 712c6a6 ('based on Evan Daniel's verifier'), accepted the
+      certificate in strict mode, positive clearance from each wall and separation between every
+      pair, and that a separate exact-arithmetic check tested all four walls per square and all
+      4,005 pairs, both in rational arithmetic by the separating-axis criterion, the least pair
+      separation on a certifying axis about 1.19448e-12. Neither check's output is published, nor
+      the second checker. No optimality, KKT or rigidity claim is made; the issue says the exact
+      optimum remains open. Those statements are the author's; no source program ran here.
+
+      Credit jazivxt, whom the issue and README name for the packing, after Joost de Winter, whose
+      n = 157 packing (T-293) supplied the motif: the issue says a rectangular crop of it, about
+      12.993303 by 9.353384, had its successive copies offset horizontally by one unit so that they
+      fit at a vertical pitch of 9.019403 in place of about 9.353384, and that a square window
+      across two copies held 90 squares, whose positions and orientations were then tightened and
+      made exact. The README says the arrangement was found during Kaggle's Squares in Squares
+      competition.
+
+      The issue asks for credit to 'jazivxt and GPT-6 Astra Ultra' and says GPT-6 Astra Ultra was
+      the AI collaborator on the search and verification; the source's first published README
+      (e5c2ecc) named it 'Codex Astra Ultra'. The issue was opened by the account dpre4ai, whose
+      commits name 'Daniel'; whether that account is jazivxt is not established here.
+
+      Measured here, 44 squares turn beyond a degree, 22.6 to 31.6 degrees, all one way; five more
+      lie within 0.07 degrees of upright and 41 are exactly upright.
+    scope:
+      n_values:
+      - 90
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A count whose best known packing was the trivial grid now has one below it, as T-293 at
+        157, T-220 at 183 and T-057 at 211 (each S3). 90 = 10^2 - 10: the record held s(k^2 - k) <
+        k at k = 11 to 18 and the grid at k = 4 to 9 and 10, so the smallest k shown drops from 11
+        to 10, and the case's conjectured integer optimum is beaten. S3 by the anchor 'a substantive
+        case result'; the margin, about 0.0017, carries to no other count, and a window of shifted
+        copies of a crop of a known packing continues a known construction, so no technique is new
+        and it is not S4. No lower bound or optimum.
+      scored: '2026-11-15'
+      by: think-i8y9 jazivxt import (intake lane L170), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[jazivxt s90 upper bound 2026-11-15]'
+      published: '2026-11-15'
+    evidence:
+    - E-jazivxt-989-certificate-report
+    - E-jazivxt-989-exact-feasibility
+    artifacts:
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/README.md
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/claims.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/source/n90.cert
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/exact-certification.json.xz
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/identity.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/contraction-n090.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/contraction-n090-own.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-989-20261115/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_l170_1115.py
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 90: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 24030 pair decisions; summed over the 3 jobs, the receipt records 2.76 route CPU
+      seconds and 2.77 job wall seconds. No square touches the box: every positive clears every
+      wall by at least 2.1000000001021e-15 (square 28) and every pair by at least 1.194e-12
+      (squares 79 and 81), the separation the issue states. The replay is
+      E-jazivxt-989-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), stated before they ran, lowered
+      the side by the least far-wall clearance (about 2.377e-13), closed the least-gap pair (square
+      81 toward square 79) by its gap and moved every square toward the nearer near wall by its
+      least clearance: both routes accepted each at exact contact, margin 0, and refused each 1e-30
+      past it. They refused square 81 enlarged to its pair and square 28 enlarged to its wall at
+      contact for their shape alone, refused each 1e-30 past it for the overlap or the wall as
+      well, and refused a duplicated square.
+
+      At n = 90 the certificate is below the case's ceiling (the trivial grid, 10) by 1.72e-03;
+      smallest: this certificate. No register bound was pending adoption at 90, and no other report
+      reached it. The ledger of 15 November for this lane
+      (campaign/issue-intake/upper-bounds-989-20261115) records this claim as a new packing. The
+      lower bounds at 90, the verified 973/100 (T-091) and the reported 489/50 (T-212), lie below
+      it. No register entry claims s(90) = 10: T-084, T-086, T-064, T-081 and T-298 (k^2 - 1 to k^2
+      - 5) do not reach 90, and T-124 and T-261, which list 90, claim local minimality of their own
+      source configurations and no global bound.
+
+      Measured against padding (RV-3, think-ruu2): the grid, contracted uniformly about the origin,
+      has margin 0, its squares touching (measure/contraction-n090.json, which reads the house
+      witness witnesses/known-best/n-090.yaml), so the whole gain of 1.7228e-03 lies outside any
+      padding. A packing below the grid is no re-certification of it, and RV-3 does not reach it.
+      This certificate's own margin is 1.099e-11 (1 - lambda* about 1.194e-12, the binding pair
+      squares 79 and 81; measure/contraction-n090-own.json); contracted so, both routes accept it
+      at a side about 1.1e-11 smaller, which nobody reported and which is not registered (RV-3).
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): no
+      symmetry of the box pairs it one to one with the grid's squares by nearest centres; the
+      optimal assignment moves every square beyond 1e-3, 54 beyond a hundredth and 52 beyond a
+      tenth (largest 1.332) and turns 48. The 157 packing the issue names as the start is at another
+      count, which the measurement cannot pair.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side stood in for
+      90's ceiling, finds the L-step improvements and monotonicity consequences main finds, and one
+      fewer L extension: the grid at 111 was the L step from the grid at 90; from this side the step
+      lands at 109 at 10.998277166926, above 109's ceiling, and monotonicity carries nothing, s(89)
+      being below this side already. So the bound carries to no other count.
+
+      The crop and window from de Winter's 157 are the issue's account; this lane did not rebuild
+      them. The 157 packing named, JoostdeWinter/square-packing c70defa n157/n157_exact.json, is the
+      same Git blob as the copy the de-winter-s157-upper-bound-2026-11-11 packet retains for T-293.
+
+      The source's own checkers were not run here. The two maintained routes share this
+      repository's evand-cert reader, whose line filter and corner construction are transcribed
+      from Evan Daniel's checkers, from which the checker the issue names descends, as well as
+      half-angle conversion, Fraction arithmetic and the separating-axis method. The repository
+      states no licence; the account submitted it in the issue, so the presumption of permission of
+      24 October 2026 (think-cnn7) applies, and DONOR-LICENSE.txt is de Winter's MIT notice for the
+      donor. No human oversight or optimality is claimed.
+    next_rung: >-
+      Independently review the certificate (stage 4, a separate lane blind to this one, under
+      think-176a): its mathematics, a clean-room exact checker with sharp controls, the identity
+      against the grid and the construction the source states, mapped as an adversarial review,
+      whose acceptance the house rule waits on. Then adopt it at 90, first adopted here, in place of
+      the grid under the house rule, with both strong generators' regularization, measured against
+      the new witness, and the flip of the new house in the same change.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

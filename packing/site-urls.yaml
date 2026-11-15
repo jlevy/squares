@@ -7811,7 +7811,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-15'
   status: live
 - path: cases/91.html
   canonical: cases/91.html
@@ -24640,6 +24640,42 @@ urls:
     - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n147.json
     - docs/project/reviews/review-2026-11-14-ono-984-985.md
     - packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-303.html
+  canonical: result/t-303.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-15'
+  lastmod: '2026-11-15'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 90
+    established: null
+    attribution:
+      source_keys:
+      - '[jazivxt s90 upper bound 2026-11-15]'
+      published: '2026-11-15'
+    builds_on: null
+    evidence:
+    - E-jazivxt-989-certificate-report
+    - E-jazivxt-989-exact-feasibility
+    artifacts:
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/README.md
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/claims.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/source/n90.cert
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/exact-certification.json.xz
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/identity.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/contraction-n090.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/contraction-n090-own.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-989-20261115/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py

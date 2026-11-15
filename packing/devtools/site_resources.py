@@ -394,6 +394,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/dpre4ai/n90-square-packing",
+        "jazivxt",
+        (
+            "A packing at 90 from shifted copies of a crop of Joost de Winter's 157, the first"
+            " below the grid of side 10, 1.72e-3 below it (T-303)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (
