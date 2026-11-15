@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 313
+version: 314
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -107,7 +107,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T05:35:15.758Z
+updated_at: 2026-11-15T05:35:56.829Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -279,3 +279,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~02:40Z: L166 senior review of #988 (B1 PR body; S1 T-302 closed-form sentence; S2 leaderboard wording; notes) applied by coordinator (4ba79fa24, re-pin a2ca37157); #988 merged a4f36ae70 (T-301 house at 228 superseding T-300; T-302 at 147, first below 7+4sqrt2). Deploy ok (run 43667638495). Replies on #984, #985 posted and closed; #983 follow-up (T-300 superseded) posted. L168 records PR (+ think-jlsq moh63-dev v1.1 read) in progress. Then close think-17ex, think-jbwm, think-jlsq.
 2026-11-15 ~03:50Z: #990 (records of #983 follow-up, #984/#985 finals; k2m5-family v1.1 read) merged a3e4ea0c5; think-17ex, think-jbwm, think-jlsq closed. NEW #989 (jazivxt via dpre4ai, s(90) <= 9.998277166926 < 10): intake; import think-i8y9 (L170), blind review think-176a (L169). Deferred: cite #973 paper DOI 10.5281/zenodo.24237740 on T-298 next change.
 2026-11-15 ~04:55Z: L169 review of #989 landed (22949a12e; accepted, all notes, S3 proposed; no family claims s(90)=10; first s(n^2-n)<n at n=10; author repo states no licence for its files). L170 import running. k2m5-family 0e28e8a (README: software DOI) to read in the next records PR.
+2026-11-15 ~05:40Z: L170 import = #991 (T-303 at 90, first below the 10x10 grid; 11-15 pass {90,147,228}; stamped 11-15). L171 senior review: B1 padding double-counts wall slack; S1 finding count; S2 timing; S3 X-008 stale (BC-024 tilted residue at 51 and 90) -> addendum + 2 owner points (grammar conclusion; 37/63 calibration constants move with adoptions); S4 licence bead think-86c1. L172 addressing; merge by 23:59Z.
