@@ -5,14 +5,14 @@ title: "Price and run the full replay of #973's Valid11 and Lean reduction (k2m5
 kind: task
 status: open
 priority: 2
-version: 10
+version: 11
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-14T02:17:04.972Z
-updated_at: 2026-11-15T06:54:03.011Z
+updated_at: 2026-11-15T17:15:03.530Z
 ---
 Priced full replay of Mohsen Khalili and Sara Gharabaghi's s(k^2 - 5) = k (jlevy/squares#973), held above the import lane's budget; the import is think-2vgx (lane L145, 14 November 2026).
 
@@ -54,3 +54,11 @@ blocked_on: the owner's budget decision
 (7) Root 9632 and the axis face. crop_cover.py is the authors' rewrite (the original is lost) and writes c9632.txt byte for byte, so nothing changes for root 9632's run, which used the retained c9632.txt. The Lemma Z and 7,717-corner programs are lost; axis_exact.py (about 3 CPU-s) is the axis-face check the replay can cite.
 (8) F1 stands (the authors did not review Lemmas U and V and know of no review; held on think-kn13), and F2 is unchanged.
 blocked_on: the owner's budget decision
+
+2026-11-15 17:20Z bold-ritchie-l183 (lane L183, think-o79q): Run's part (5), the Lean build, was started as the subset under the item cap and stopped at its measurement, before any toolchain or cache was written. Not built; T-298 unchanged at V0/C1.
+(1) The authors' 355f83e (16:48:53Z; their comment on #973, issuecomment-6897938053, 16:52:03Z; read in intake-watch.yaml) adds lean/build_full.log: the twelve lean/K2m5 modules, one per process with lean -o, on Lean 4.33.1, 2 cores, 7 GB, no swap; every module exit 0, 857.2 s wall and 511.9 CPU-s over the module lines (the totals line says 863.6 s and 517.5), peak 5.96 GB (InstC6), and the three standard axioms. lean/K2m5 is unchanged since 2c0b1b9, so it is the build T-298 cites. Its header: Daniel's project and Mathlib were already built and are not counted. timed_build.py passes -DmaxHeartbeats=0 (no time limit; the kernel check is unchanged).
+(2) What the log leaves out is what the record's 24 GB was priced from. Grid10 and Fam10 import Sqpack.Bentz, and its closure at 659ee62 (Bentz, MixedMeasure, BentzData, S32, S32Data, Cover, D4, ZeroMargin, Basic, Chord) and the three lake files have the Git blobs of the 2eb15455 tree built here on 3 October (E-k2m4-evand-bentz4-lean-build): Sqpack/Bentz.lean took 1,487 s at about 13 GB resident with up to 9.6 GB of swap in use, and on 2 October two builds of it were killed on a 16 GB host without swap. Whether 15 GB without swap is enough for it alone is not measured: the killed runs' conditions were not kept, and the 3 October run shared its host (load 6.5 at the start). This host: 16,087 MB, no swap.
+(3) Disk, where it stopped. Sqpack/Basic.lean imports Mathlib whole, so the build needs the full 0df444a3 cache, about 6.5 GB by the record's figure. The toolchain, measured from its release stream without unpacking (devtools.lean_disk_price; receipts/lean-price/toolchain.json in the moh63-dev-k2m5-family-2026-11-13 packet): 570,405,234 bytes compressed, SHA-256 890afd18...f235, the same on two downloads, and 3,037,354,159 unpacked. The plan (receipts/lean-price/plan.json): 9.54 GB before Mathlib's sources, the compressed downloads and any output, against the lane's 9 GB cap and 9.75 GB free: DOES-NOT-FIT.
+(4) The Lean part re-priced: about 0.5 CPU-hours, down from 1 to 2 (Daniel's closure at most 1,240 CPU-s, the whole 3 October build; the twelve modules 512 CPU-s at the source; the cache tool's build and the download a few minutes). Disk about 10 GB, so a cap of about 11 GB with that much free. Memory about 6 GB for every module but Sqpack.Bentz, which needs swap beside 16 GB, or about 24 GB. Recipe: from a scratch directory, with the toolchain and MATHLIB_CACHE_DIR under it, lake exe cache get and env LEAN_NUM_THREADS=1 lake build Sqpack.Bentz in Daniel's lean/ at 659ee62, then the twelve modules in the authors' order, one lean -o per process under devtools.replay_receipt, then #print axioms; check the closure's blobs against stage_evand_bentz4_lean's UPSTREAM first.
+(5) The rest of the replay is unchanged: about 145 to 180 CPU-hours, up to about 320, nearly all of it the Tight-Tile jobs. With the Lean part done, T-298 would still be V0: a built reduction without a replayed Valid11 raises no rung.
+blocked_on: the owner's budget decision; for the Lean subset, about 11 GB of disk and swap or about 24 GB of memory for Sqpack.Bentz
