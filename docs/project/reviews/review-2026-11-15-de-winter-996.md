@@ -926,6 +926,374 @@ That text is everything here but the passages marked as added after the freeze, 
 sections After the Freeze, Relation to Earlier Reviews and Frozen Findings, and the
 closing comment.
 
+## Addendum, 15 November 2026: The Replacement Certificate of #997 (lane L182)
+
+Everything above this section is unchanged; this section was written after it, from
+12:56Z, by lane L182 (`tbd-strong`, separately prompted).
+At 12:08:33Z the author opened issue
+[#997](https://github.com/jlevy/squares/issues/997): “a smaller packing replaces the one
+in this request”, at
+[JoostdeWinter/square-packing@fa53fb0](https://github.com/JoostdeWinter/square-packing/tree/fa53fb0d734fbf438bcfb73c1434a15894bb2bc5),
+exact side $99940387666098521323/10^{19}$, claim $s(90) \le 9.994038766610$, with the
+request to pin that commit and disregard the earlier one.
+The record registers only the replacement.
+This addendum decides it with L180’s frozen checker, run unchanged, repeats the 26
+controls for it, and compares it with the certificate of `64d5ee7` reviewed above.
+Its programs, receipts and frozen digest lists are in
+[`addendum-997/`](../../../packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/README.md)
+of the packet.
+
+**Verdict on #997’s bound: accepted.** No finding is blocking or major.
+
+| n | Issue | Squares | Pairs | Wall contacts | Least pair gap | Least positive wall clearance | Verdict |
+| ---: | --- | ---: | ---: | --- | --- | --- | --- |
+| 90 | #997 | 90 | 4,005 | 17 (8 left, 9 bottom), each along an edge | $2.02641 \times 10^{-12}$ (2, 40) | $2.51390 \times 10^{-22}$ (16 squares, right and top) | accept |
+
+- **The certificate.** L180’s checker, its seven files equal to their frozen digests,
+  decided both files of `fa53fb0` by both methods over every square, wall and pair:
+  `ACCEPT`. The twin holds the JSON file’s packing exactly, and every pair is strictly
+  apart.
+- **Controls.** All 26 came out as stated, in a plan hashed and pushed before any of
+  them ran. Four were re-targeted: S1e and S1f to the new claim and floor, G7b’s text,
+  and G5a, because square 10 now lies on the bottom wall along an edge, so a turn either
+  way pushes it out.
+- **The claim.** 9.994038766610 is the side’s 12-place ceiling,
+  $1.478677 \times 10^{-13}$ above it.
+  The squares are accepted in that box (S1e) and refused in the box of the floor,
+  9.994038766609 (S1f).
+- **Against `64d5ee7`.** The side is lower by exactly
+  $1818716861537/(2 \times 10^{19}) = 9.093584307685 \times 10^{-8}$. It is the same
+  arrangement, re-optimized: square $k$ pairs with square $k$, the largest move is
+  0.0142 (square 24), the 50 near-upright squares are now exactly upright, and each of
+  the 40 turned squares turns, square 24 by 1.17° and the rest by at most 0.22°.
+- **Padding.** The step is 9,539 times #996’s own contraction margin
+  ($9.53 \times 10^{-12}$), so it is not padding taken off #996: squares moved relative
+  to one another. It is $2.1 \times 10^{-5}$ of the gain on T-303, which is now exactly
+  0.00423840031614786770, still 0.00424 to three figures and $3.86 \times 10^8$ times
+  T-303’s margin. RV-3 does not apply.
+- **The findings.** F1 to F5, F7 to F9, F11 and F13 hold with #997’s values; F6 changes
+  (50 squares are exactly upright); the author’s text at the new pin answers F10 and
+  F12. Two notes are added (F14, F15).
+
+### Scope and Custody of #997
+
+**Read before the controls ran:** issue #997 through GitHub (fetched at 12:56:59Z and
+13:06:57Z with the same body; no comments; its one event the label `intake` at
+12:55:17Z); the clone’s commit list, the file lists of the pin and the head with blob
+ids, and the names of the files that differ; the two certificate files, as data; this
+review, its packet’s README and L180’s programs, which are this review’s own code.
+**Read after the controls ran:** the diffs of the author’s `n90/README.md`,
+`n90/REGISTRATION.md` and repository `README.md` from `9cafa33` to the pin and the head,
+and the help texts of `devtools.contraction_margin` and `devtools.measure_identity`.
+
+**Not read:** the author’s `verify_exact.py` and `check_area.py` (the blobs of
+`64d5ee7`, which L180 read after its freeze) and figures;
+`check_rational_witness_independent`; this repository’s witness, verifier and promotion
+code; the import lane L181 and its branch.
+
+**Custody** (`l180_custody.py`, unchanged, `out/custody-997.json`) holds:
+
+- **The files.** At the pin `fa53fb0`, `n90/n90_exact.json` has SHA-256
+  `85840c5563e023790ae32af68c62d636e041a7d34f01c0f772979450dd188a2a` (blob `9f411d47`,
+  15,519 bytes) and `n90/n90_witness.yaml`
+  `c9aa917fa0abc9bfe4ddfdd73ec391b20e474fb0c5c97252a7819ad7152c1628` (blob `08f0c095`,
+  62,979 bytes). The head `6c0ad56` holds the same blobs, the pin is its ancestor, and
+  only `n90/REGISTRATION.md` and `n90/SHA256SUMS` differ between them.
+- **Commits and dates.** The repository holds 24 commits, all by Joost de Winter.
+  The pin (“Replace the n = 90 packing by one with side 9.994038766610”) and the head
+  (“Pin the n = 90 registration request to the new certificate”) are both dated
+  12:07:15Z, and #997 was opened 78 seconds later.
+  Git dates are the author’s own.
+- **Digests and licence.** Every digest of `SHA256SUMS` at the head holds, for eight
+  files. The two checkers are the blobs of `64d5ee7`, and the licence is the same MIT
+  blob, `17e795f2`.
+- **The record.** `main` stayed at `91acf2022`; the house at 90 is still T-303.
+
+### The Replacement Decided
+
+| Quantity | #997 (`fa53fb0`) | #996 (`64d5ee7`), above |
+| --- | --- | --- |
+| The side | $99940387666098521323/10^{19}$, exactly 9.9940387666098521323 | $199880777150913904183/(2 \times 10^{19})$ |
+| The twin | the JSON file’s packing exactly; all 90 listed counterclockwise from $C + (u + v)/2$ | the same |
+| Pairs | 4,005 of 4,005 apart by both methods; none touches; overlap area exactly 0 | the same |
+| Least pair margin | $2.02641179076 \times 10^{-12}$, squares 2 and 40 | $1.06410355706 \times 10^{-12}$, squares 2 and 40 |
+| Positive pairs below $10^{-12}$, $10^{-11}$, $10^{-6}$, $10^{-3}$, $10^{-1}$ | 0, 197, 197, 205, 242 | 0, 195, 195, 201, 243 |
+| Wall contacts | 17, each along an edge: left 58 to 63, 71 and 88; bottom 10, 23, 28, 32, 33, 47, 48, 59 and 75 (59 at both) | 18, each at one corner: the same and 57 at the left |
+| Least positive clearance | left $1.087 \times 10^{-4}$ (57); bottom 0.594 (45); right and top $2.51389952000 \times 10^{-22}$ (right 11, 31, 34, 35, 47, 49, 55, 67 and 83; top 82 to 86 and 88 to 90) | left 0.644 (56); bottom 0.594 (45); right and top $5.07389735200 \times 10^{-21}$, the same squares without 67 |
+| Tilts | 50 exactly upright; 40 turned clockwise by 22.896807° to 30.993323°, in 12 angles to six places and 13 exact orientations | 50 at $-1.831 \times 10^{-10}$ degrees; 40 turned clockwise by 22.896830° to 30.993239°, in 12 angles and 13 orientations |
+| Near pairs | 197 from $2.026 \times 10^{-12}$ to $4.041 \times 10^{-12}$; median and commonest exactly $3 \times 10^{-12}$ (72 pairs); next $9.47 \times 10^{-6}$ (19, 40) | 195 from $1.064 \times 10^{-12}$ to $9.197 \times 10^{-12}$; next $5.85 \times 10^{-6}$ (5, 18) |
+| Verdict | `ACCEPT` | `ACCEPT` |
+
+`l180_selftest.py`, rerun unchanged in this worktree, passes its 31,771 checks, and its
+three broken copies fail as before.
+
+### The Controls on #997
+
+The plan was written by `l182_plan_facts.py` and `l182_make_plan.py`, which run
+`l180_plan_facts.py` and `l180_make_plan.py` unchanged and then replace only the values
+they list, from the check receipt and the closed form; neither method ran on a modified
+file. It was hashed into `addendum-997/frozen/controls-plan-digest.txt` (list SHA-256
+`2836c29d…`, plan `34853d02…`) at 13:03:56Z and pushed as `c670153b9` at 13:04:11Z.
+`l180_controls.py`, unchanged, ran at 13:04:17Z: `EVERY_CONTROL_AS_STATED`, 26 of 26.
+
+The plan differs from L180’s in three ways.
+
+- **Re-targeted by L182**, where L180’s programs print a value of #996’s certificate as
+  a constant or assume a premise #997 does not meet:
+  - S1e and S1f take #997’s claim 9.994038766610 and its floor 9.994038766609, in the
+    plan facts (six S1 fields, each kept beside L180’s value) and in the texts.
+  - G7b’s text names the raised numerator as …327, not …187.
+  - G5a. L180’s rule picks square 10 again, the lowest-numbered square on exactly one
+    wall, but its plan program expects the turn by $+10^{-30}$ to be accepted and the
+    turn by $-10^{-30}$ refused, which holds at a single-corner contact.
+    Square 10 now lies upright on the bottom wall along an edge, and the closed form
+    gives both turns the same clearance, $-(10^{30} - 1)/(10^{60} + 1)$. G5a’s
+    expectation now follows the sign of the closed form’s clearance for its turn:
+    refused, square 10 across the bottom wall.
+    On #996’s facts the same rule gives L180’s G5a and G5b exactly; the program was run
+    there to check this before the plan was written.
+- **Re-derived by L180’s own rules**, the same squares and statements with #997’s
+  values: G2’s clearance, G6’s overlapping pairs, S1a to S1d’s 17 square–wall pairs, S4
+  (the pair (2, 40) with square 40 moving, as before), S5’s digest, and every contact
+  list and margin digest.
+- **Unchanged in full:** G3, G4, G7a, G12 and S6.
+
+| Control | Stated for #997 | Outcome |
+| --- | --- | --- |
+| G1. Square 90 given square 1’s pose | refused: exactly (1, 90) overlapping, margin $-1$, area 1; wall contacts unchanged | as stated |
+| G2. Square 1 translated by $(S, 0)$ | refused: square 1 across the right wall by both, clearance $-6.99403876660$, its area inside 0 | as stated |
+| G3. Square 90’s entry deleted | the reader refuses: 89 entries | as stated |
+| G4. The side written as $2p/2q$ | the reader refuses: not in lowest terms | as stated |
+| G5a. Square 10 turned by $t = +10^{-30}$ (re-targeted) | refused: square 10 across the bottom wall by exactly $(10^{30} - 1)/(10^{60} + 1)$; no pair changes class | as stated |
+| G5b. The same with $t = -10^{-30}$ | refused, by the same clearance | as stated |
+| G6. Every $(c, s)$ read as $(c, -s)$ | refused for exactly the plan’s 54 overlapping pairs, none touching; the clearance list unchanged | as stated |
+| G7a. The twin’s first corner of square 1 moved by $10^{-30}$ | the twin differs at square 1 alone; method B refuses square 1 | as stated |
+| G7b. The twin’s side numerator raised by 4 (…327) | read; the twin differs in its side | as stated |
+| G7c. Every square of the twin listed clockwise | the twin agrees; accepted, lists unchanged, all 90 clockwise by B | as stated |
+| G7d. Every square of the twin listed from its second corner | the twin agrees; accepted, lists unchanged | as stated |
+| G8. Every square transposed | accepted, margins unchanged, clearances transposed | as stated |
+| G9. Every edge direction replaced by $(-s, c)$ | accepted, margin and clearance lists unchanged | as stated |
+| G10. Every edge direction negated | the same | as stated |
+| G11. The packing turned a quarter about the box centre | accepted, margins unchanged, clearances turned | as stated |
+| G12. Square 1’s $s$ raised by $10^{-30}$ | refused: square 1 not a unit square by either method | as stated |
+| S1a. The side lowered by $10^{-19}$, one unit of its last place | refused: exactly the 17 right and top clearances of $2.51 \times 10^{-22}$ crossing | as stated |
+| S1b. The side lowered by $10^{-30}$ | accepted, no new contact | as stated |
+| S1c. The side lowered by the least right-or-top clearance | accepted, exactly those 17 touching, with the 17 at the left and bottom | as stated |
+| S1d. That, less $10^{-30}$ more | refused, exactly those 17 crossing | as stated |
+| S1e. The side set to the claim, 9.994038766610 (re-targeted) | accepted; contacts only at the left and bottom | as stated |
+| S1f. The side set to its floor, 9.994038766609 (re-targeted) | refused: the 17 of S1a crossing | as stated |
+| S4c. Square 40 closed on square 2 to exact contact | that pair alone touching, margin exactly 0, B area 0; accepted | as stated |
+| S4p. The same, $10^{-30}$ past | that pair alone overlapping, margin exactly $-10^{-30}$ | as stated |
+| S5. Every pair closed along its centre line | contact and $10^{-30}$ past by both; the closing times’ digest the plan’s | 4,005 of 4,005 |
+| S6. Every square moved to its nearest wall | contact at, crossing past, by both | 90 of 90 |
+
+- **G5 and the rotation sense.** Every wall contact of #997 is an edge, so no square
+  touches a wall at a single corner, and no turn at a wall decides the sense of the
+  angle. G6 decides it: 54 pairs overlap with the rotation read the other way (52 for
+  #996), the least at (22, 56), $-0.285$.
+- **S1.** The side’s denominator is $10^{19}$; one unit of its last place is about 400
+  times the right and top slack.
+  The claim is $1.478677 \times 10^{-13}$ above the side and the floor
+  $8.521323 \times 10^{-13}$ below it.
+- **S4.** Square 40’s closing move is $2.05 \times 10^{-12}$, its next margin
+  $3.13 \times 10^{-12}$ and its least clearance 1.0.
+- **S6.** The nearest walls are the left for 22 squares, the bottom for 23, the right
+  for 24 and the top for 21, as for #996; 16 squares already touch theirs.
+
+### Against the Certificate of 64d5ee7
+
+`l182_compare.py` (`out/compare-997-996.json`) reads both files with L180’s reader and
+both check receipts.
+`devtools.measure_identity` (`out/identity-n90-997.json`) measured #997 against #996,
+T-303 and the grid.
+
+- **The side** is lower by
+  $1818716861537/(2 \times 10^{19}) = 9.093584307685 \times 10^{-8}$ exactly, the
+  issue’s “9e-8” to one figure.
+  The printed claims differ by 0.000000090936, and #997’s side lies
+  $9.0935 \times 10^{-8}$ below #996’s 12-place floor.
+- **The identity.** Each square’s nearest centre in the other file carries its own
+  number, both ways, decided exactly.
+  `measure_identity` pairs square $k$ with square $k$ under the identity, nearest
+  centres one to one, and the box-centred alignment prefers the identity by a factor of
+  $10^4$ in summed squared moves (0.00104 against 10.5).
+
+**Moves.** No square keeps its pose.
+
+| Move from #996 | Squares |
+| --- | --- |
+| 0.0107 to 0.0142 | eight tilted squares of the cluster, 24, 4, 64, 42, 3, 16, 72 and 5, most of them up and to the right by about 0.011 |
+| $10^{-3}$ to $10^{-2}$ | 2 and 18 (0.00116), 43 (0.00111), 40 (0.00109), and 69, 77 and 68 (0.00108 to 0.00104), upright squares of the row at $y = 3.5$, which move right |
+| $10^{-6}$ to $10^{-3}$ | 20: 67 ($9.9 \times 10^{-4}$, the last of that row, into the right wall’s slack), 17, 70, 66 and 19 ($7.0$ to $9.6 \times 10^{-4}$), 57 ($1.09 \times 10^{-4}$, off the left wall), and 14 more, down to $1.0 \times 10^{-6}$ |
+| $10^{-9}$ to $10^{-6}$ | 48, from $1.9 \times 10^{-8}$ to $8.2 \times 10^{-7}$; 23 of them are upright squares that shift left or down by about the step, $9.09 \times 10^{-8}$ |
+| below $10^{-9}$ | seven on the left and bottom walls, 58, 63, 71, 61, 33, 62 and 59, by $2 \times 10^{-12}$ to $1.7 \times 10^{-11}$ |
+
+- **Turns.** The 50 near-upright squares of #996, all in the direction of
+  $t = -799/(5 \times 10^{14})$, turn by exactly $t = 799/(5 \times 10^{14})$, that is
+  $1.831 \times 10^{-10}$ degrees counterclockwise, to $(1, 0)$: they are exactly
+  upright, the 16 squares on the walls among them.
+  Every one of the 40 turned squares turns: 24 by +1.174°, from −25.220522°, where it
+  sat with 6 and 9, to −24.046839°, the angle to which the seven squares at −24.051775°
+  move; 40 by +0.212°, 17 by +0.081° and 4 by −0.0136°; eleven more by $10^{-3}$ to
+  $10^{-2}$ degrees; and the 14 at −22.8968° by $+2.25 \times 10^{-5}$ degrees.
+  Squares 21 and 42 again share a six-place angle, −25.118421°, under two exact
+  orientations.
+- **Walls.** #996’s 18 contacts were single corners written exactly as 0; #997’s 17 are
+  edges, two corners of each on the wall.
+  Square 57 leaves the left wall and clears it by $1.087 \times 10^{-4}$. The right and
+  top slack falls from $5.07 \times 10^{-21}$ to $2.51 \times 10^{-22}$, and square 67
+  joins the eight squares at the right.
+- **Near pairs.** The least pair is (2, 40) in both, opened from $1.064 \times 10^{-12}$
+  to $2.026 \times 10^{-12}$. Of the pairs below $10^{-9}$, 189 are common to both, 184
+  of them narrower in #997 and 5 wider, by factors from 0.33 to 1.90. Six leave the set,
+  (19, 40), (19, 64), (43, 57), (43, 60), (43, 88) and (64, 66), and eight join it, (19,
+  72), (30, 77), (34, 68), (55, 68), (67, 68), (68, 77), (69, 76) and (69, 77). The
+  widest falls from $9.20 \times 10^{-12}$ to $4.04 \times 10^{-12}$.
+- **Centres closer than $\sqrt 2$:** 199 pairs, the author’s count, against 202; five
+  pairs leave and two join.
+- **Against T-303** (`l180_lineage.py`, unchanged, and `measure_identity`): the identity
+  again, with 87, 32 and 6 squares beyond $10^{-3}$, $10^{-2}$ and $10^{-1}$, the
+  largest 0.645 (43), 16 turned beyond 1°, and a box-centred total of 1.141 against
+  11.55. The same four of T-303’s turned squares are upright (43, 57, 58, 60), the same
+  twelve turn further, by 1.05° to 4.89°, and T-303’s four slightly turned squares (63,
+  70, 86, 89) are now exactly upright.
+  Against the grid it is a new arrangement, as #996 was.
+
+### The Claim and the Padding of #997
+
+`l182_sides.py` (`out/sides-997.json`) does the arithmetic exactly.
+The margins come from `devtools.contraction_margin`, run read-only, which contracts a
+certificate about the origin to its first contact and decides the result on both
+maintained exact routes.
+
+| Quantity | Value |
+| --- | --- |
+| The side $S$ | $99940387666098521323/10^{19} = 9.9940387666098521323$ |
+| 12-place ceiling; floor; the claim | 9.994038766610; 9.994038766609; the ceiling |
+| Claim less side | $1.478677 \times 10^{-13}$ |
+| The packing’s extent | $S - 2.51389952000 \times 10^{-22}$; $S$ is the extent rounded up at 19 places, its own last place |
+| Step from #996 | $1818716861537/(2 \times 10^{19}) = 9.093584307685 \times 10^{-8}$ |
+| Gain on T-303, exact | $42384003161478677/10^{19} = 0.00423840031614786770$; 0.00424 to three figures; relative $4.239 \times 10^{-4}$ |
+| Claim to claim, as printed | $9.998277166926 - 9.994038766610 = 0.004238400316$ |
+| Below the grid’s 10 | 0.00596123339014786770 |
+
+| Certificate | First contact, $1 - \lambda^*$, pair | Side margin | Against #997 |
+| --- | --- | --- | --- |
+| T-303, the house | $1.194485 \times 10^{-12}$, (79, 81) | $1.098813 \times 10^{-11}$ | the gain, $4.238400 \times 10^{-3}$, is $3.857 \times 10^8$ times the margin; `within_margin: false` |
+| #996 (`64d5ee7`) | $1.059921 \times 10^{-12}$, (2, 40) | $9.532970 \times 10^{-12}$ | the step, $9.093584 \times 10^{-8}$, is 9,539 times the margin; `within_margin: false` |
+| #997 (`fa53fb0`) | $2.022155 \times 10^{-12}$, (2, 40) | $1.818734 \times 10^{-11}$ | — |
+
+- **T-303 and RV-3, unchanged.** T-303’s margin is the value measured above and in the
+  review of #989. The gain on it grows by the step and stays $3.86 \times 10^8$ times
+  the margin: RV-3 does not apply.
+- **#997’s own padding.** Contracted, #997 is accepted by both routes at a side
+  $1.82 \times 10^{-11}$ below its own, about twice #996’s, as its least gap is about
+  twice; the right and top slack of $2.51 \times 10^{-22}$ is separate (F4). Both routes
+  accept it as given, with least wall clearance 0 and least gap this review’s.
+- **The step is not padding.** #996 could be shrunk uniformly by only
+  $9.53 \times 10^{-12}$ in side before squares 2 and 40 touch; #997’s side is
+  $9.09 \times 10^{-8}$ lower, 9,539 times that.
+  So #997 is not #996 with its padding removed: reaching it took squares moving relative
+  to one another, a few by about 0.01 and one turning by 1.17°. The step is also small
+  beside the result: $2.1 \times 10^{-5}$ of the gain on T-303.
+- **What this means for the record: nothing turns on it.** The record registers only
+  #997, against T-303. #996’s certificate is never registered, so no RV-3 question
+  arises between the two, and the gain on T-303 lies far outside T-303’s padding either
+  way.
+- **Closed forms, L steps, monotonicity.** As for #996: no $s(m) + j$ lies within
+  $10^{-3}$ of the side, no L step from it improves a count, and nothing moves by
+  monotonicity.
+- **Significance.** S3, unchanged: the step on the house is $4.238 \times 10^{-3}$.
+
+### F1 to F13 on the Replacement
+
+| Id | On #997 | Status |
+| --- | --- | --- |
+| F1 | an exact packing at its side by both methods, every wall and pair; every pair strictly apart; the twin the JSON file’s packing exactly; 17 wall contacts, each along an edge, where #996 had 18 at single corners | holds; its contacts change |
+| F2 | 26 of 26 as stated; G5a, G7b, S1e and S1f re-targeted; G5 no longer decides the rotation sense at a wall, and G6 does | holds |
+| F3 | the claim 9.994038766610 is the side’s 12-place ceiling, accepted in its box (S1e); the floor refused (S1f) | holds, new values |
+| F4 | 16 squares clear the right and top by $2.51389952000 \times 10^{-22}$ (67 added); the squares fit the box of side $S - 2.51 \times 10^{-22}$ (S1c), not $10^{-30}$ less (S1d); the side is the extent rounded up at 19 places | holds, new values |
+| F5 | 197 near pairs from $2.026 \times 10^{-12}$ to $4.041 \times 10^{-12}$, then $9.47 \times 10^{-6}$; the README’s new “smallest gap of 2e-12” holds as a lower bound; the wall contacts are exact | holds, new values |
+| F6 | 50 squares are exactly upright, not turned by $1.83 \times 10^{-10}$ degrees; 40 turned clockwise by 22.90° to 30.99°. Erratum to the Tilts paragraph of The Certificate Decided: the 40 lie in 12 angles to six places, not 13, in both certificates (13 with the near-upright or upright direction), and “14 exact orientations in all” is right | changes |
+| F7 | the JSON `format` line still names neither the box nor the sense of the angle; the twin fixes both; G6 shows the sense matters (54 pairs) | holds |
+| F8 | T-303’s margin unchanged, the gain $3.86 \times 10^8$ times it; #997 contracts by $1.82 \times 10^{-11}$ in side, with $2.51 \times 10^{-22}$ of right and top slack | holds, new values |
+| F9 | T-303’s packing improved square for square under the identity: 6 beyond 0.1 (largest 0.645), 16 turned beyond 1°, the same four upright and twelve turned further; credit as before | holds |
+| F10 | the head’s README and REGISTRATION now say 44 leaning squares for T-303 and 40 for the new packing; both reproduce as the squares turned beyond 1°, and 40 is also the count not exactly upright | answered by the author |
+| F11 | `sqpack.witness` accepts the twin; the `witness-corners` adapter refuses it as published for the same three reasons, and reads it back to the JSON poses exactly once they are changed | holds |
+| F12 | the READMEs at the new pin and head credit GPT-6.1 Sol Max, as the issue does | answered at the new pin |
+| F13 | the claim is the ceiling; the gain on T-303 is exactly 0.00423840031614786770, “0.00424”; no closed form, L step or monotonicity moves another count; the author’s 199 close pairs reproduce | holds, new values |
+
+### Findings Added in the Addendum
+
+| Id | Severity | Where | Finding |
+| --- | --- | --- | --- |
+| F14 | note (records) | #997 against #996 | the replacement is #996’s arrangement re-optimized: square $k$ pairs with square $k$, largest move 0.0142, the 50 near-upright squares made exactly upright, one square turned 1.17°; the step of $9.093584 \times 10^{-8}$ is 9,539 times #996’s contraction margin and is not padding; it changes no credit or significance, and only the replacement is registered |
+| F15 | note (author; records) | #997’s body; `n90/REGISTRATION.md` at `6c0ad56` | #997 says the arrangement, lineage and credit are “as stated above”, in #996’s text (49 and 37 leaning squares, seven squares with a new angle and five made axis-aligned); the REGISTRATION it names as the full text says 44 and 40, four squares upright in the upper left, four at the top with a new angle and one square 0.32 lower. The REGISTRATION’s statements reproduce (43, 57, 58 and 60; 5, 21, 42 and 54, from about −22.9° to −27.80° and −25.12°; 87); the record should take them from it |
+
+None changes a verdict.
+
+### Questions for the Author on #997
+
+1. #997 says the arrangement, lineage and credit are as stated in #996, but
+   `REGISTRATION.md` at `6c0ad56` changes the counts.
+   Is the REGISTRATION’s text the one to record (F15)?
+2. The 50 squares turned by $1.83 \times 10^{-10}$ degrees in #996 are exactly upright
+   in #997, and every wall contact is now an edge.
+   Was #996’s turn left by the rational rounding?
+   That would answer L180’s question 3.
+3. The README now says that the linear program found no first-order improvement above
+   4e-10 at both sides, and that the test covers one set of contacts.
+   What produced the step: a further local-search move, or a new optimization of the
+   same contacts? Six near pairs leave the set below $10^{-9}$ and eight join it; are
+   those the contacts that changed?
+4. L180’s questions 4 (the twin’s form and the `format` line, F7 and F11) and 6
+   (publishing the search and the linear program) stand.
+   The text at the new pin answers 1, 2 and 5.
+
+### What L182 Ran
+
+All with CPython 3.14.7 from `packing/` of a worktree of this review’s branch at
+`95ad4bc8a` (`main` `91acf2022` beneath it), under `nice -n 19`, one process at a time.
+L180’s programs ran with `python -I -B`, unchanged, after their digests were checked
+against L180’s frozen lists; the devtools and `l180_witness_read.py` ran with
+`python -B`, read-only, writing only to the addendum’s directory.
+The addendum’s README lists the commands.
+
+| Program | Receipt | CPU |
+| --- | --- | ---: |
+| `l180_selftest.py` | `out/selftest.json`: `PASSED`, 31,771 checks | 4.4 s |
+| `l180_check.py` | `out/check-n90-997.json`: `ACCEPT` | 0.5 s |
+| `l182_plan_facts.py` | `out/plan-facts-n90-997.json` | 3.1 s |
+| `l182_make_plan.py` | `programs/controls-plan-997.json` | under 1 s |
+| `l180_controls.py` | `out/controls-n90-997.json`: 26 of 26 as stated | 12.4 s |
+| `l180_describe.py` | `out/describe-n90-997.json` | under 1 s |
+| `devtools.contraction_margin`, three runs | `out/contraction-t303-house-n90-997.json`, `out/contraction-new-n90-997.json`, `out/contraction-996-against-997.json` | 2.4, 2.0, 2.9 s |
+| `devtools.measure_identity` | `out/identity-n90-997.json` | under 5 s |
+| `l182_compare.py`, `l182_sides.py` | `out/compare-997-996.json`, `out/sides-997.json` | under 2 s each |
+| `l180_lineage.py`, `l180_witness_read.py`, `l180_custody.py` | `out/lineage-n90-997.json`, `out/witness-read-997.json`, `out/custody-997.json` with `programs/issue-997.json` | under 5 s each |
+| `l182_digests.py` | `out/addendum-digests.json`: `ALL_FROZEN_DIGESTS_HOLD` (47 digests, L180’s 27 among them), `RERUN_REPRODUCES_EVERY_RECEIPT` | 24 s |
+
+What went wrong along the way:
+
+- The first plan `l182_make_plan.py` wrote, before it had the G5 rule, stated G5a as
+  accepted with a negative clearance, which contradicts itself.
+  It was caught on reading the plan before hashing, and was never hashed, committed or
+  run. The rule was added and checked on #996’s facts, and the plan written again.
+- One read-only exploration with L180’s reader and closed form, which decided and wrote
+  nothing, found the 50 upright squares and the edge contacts behind that.
+- A first contraction run was started through `/usr/bin/time`, which is not installed;
+  nothing ran, and it was run again under the shell’s `time`.
+- The pre-commit hook could not run in this worktree (`lefthook` is not on its `PATH`);
+  the commits went through without it.
+
+**Frozen files.** `addendum-997/frozen/controls-plan-digest.txt` (list SHA-256
+`2836c29d…`, 13:03:56Z, pushed as `c670153b9`) fixes the source files, L180’s programs
+used unchanged, L182’s plan programs, the self-test and check receipts, the plan facts
+and the plan, before any control ran.
+`addendum-997/frozen/addendum-frozen-digests.txt` (list SHA-256 `ffd8a5e8…`, 13:18:44Z)
+fixes the source files, the plan list, and every program and receipt of the addendum,
+before its commit; the full digests are in the two lists.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

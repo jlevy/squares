@@ -1,0 +1,112 @@
+{
+ "program": "l180_custody.py",
+ "lane": "L180",
+ "checked_out": "fa53fb0d734fbf438bcfb73c1434a15894bb2bc5",
+ "working_tree_clean": true,
+ "remote_head": "6c0ad56a13346abda6debd73afab7892072896c7",
+ "commit_count": 24,
+ "authors": [
+  "Joost de Winter"
+ ],
+ "commits_of_15_november": [
+  {
+   "sha": "6c0ad56a13346abda6debd73afab7892072896c7",
+   "authored": "2026-11-15T13:07:15+01:00",
+   "committed": "2026-11-15T13:07:15+01:00",
+   "author": "Joost de Winter",
+   "subject": "Pin the n = 90 registration request to the new certificate"
+  },
+  {
+   "sha": "fa53fb0d734fbf438bcfb73c1434a15894bb2bc5",
+   "authored": "2026-11-15T13:07:15+01:00",
+   "committed": "2026-11-15T13:07:15+01:00",
+   "author": "Joost de Winter",
+   "subject": "Replace the n = 90 packing by one with side 9.994038766610"
+  },
+  {
+   "sha": "9cafa33d43f60423e51058f51dbdf042077c7cc2",
+   "authored": "2026-11-15T12:29:27+01:00",
+   "committed": "2026-11-15T12:29:27+01:00",
+   "author": "Joost de Winter",
+   "subject": "Name GPT-6.1 Sol Max as the model that ran the local search for n = 90"
+  },
+  {
+   "sha": "0c9bcd27444084f33aa3c7d36467a596784df538",
+   "authored": "2026-11-15T12:27:49+01:00",
+   "committed": "2026-11-15T12:27:49+01:00",
+   "author": "Joost de Winter",
+   "subject": "Add the registration request and checksums for n = 90"
+  },
+  {
+   "sha": "64d5ee762a1159248d375973fb33825d51da637d",
+   "authored": "2026-11-15T12:27:26+01:00",
+   "committed": "2026-11-15T12:27:26+01:00",
+   "author": "Joost de Winter",
+   "subject": "Add a packing of 90 unit squares with side 9.994038857546"
+  }
+ ],
+ "pin_is_ancestor_of_head": true,
+ "n90_blobs": {
+  "pin": {
+   "n90/README.md": "7816928420244a7e9a8864e8dd97df6e920dee4b",
+   "n90/REGISTRATION.md": "5b76049403b87a66053df8a1f606d4751d95c16f",
+   "n90/SHA256SUMS": "47a3907988fc5e8ff3f487155917da79d147c6c7",
+   "n90/check_area.py": "87d48575a3cc103dc052188eb78762c18d5c9dc7",
+   "n90/n90_before_after.png": "c4fa184e6cc21eee63b9c3a9c70f86552df63d9a",
+   "n90/n90_exact.json": "9f411d47979dcbf1f997b87b16ba8d1f361206a2",
+   "n90/n90_record.png": "a3383dab80efb933bc0dfc464c4c18481f376e5f",
+   "n90/n90_witness.yaml": "08f0c095cef963180d3eb8ed96b69bf896371a5e",
+   "n90/verify_exact.py": "e33049d69f19d2ad7970f3aa445f3d90d2efcf38"
+  },
+  "head": {
+   "n90/README.md": "7816928420244a7e9a8864e8dd97df6e920dee4b",
+   "n90/REGISTRATION.md": "d399adf8d6339bf3cb8a431060c3d36498e8e447",
+   "n90/SHA256SUMS": "38da41974b6f854384d786fa4023cbc10391cf10",
+   "n90/check_area.py": "87d48575a3cc103dc052188eb78762c18d5c9dc7",
+   "n90/n90_before_after.png": "c4fa184e6cc21eee63b9c3a9c70f86552df63d9a",
+   "n90/n90_exact.json": "9f411d47979dcbf1f997b87b16ba8d1f361206a2",
+   "n90/n90_record.png": "a3383dab80efb933bc0dfc464c4c18481f376e5f",
+   "n90/n90_witness.yaml": "08f0c095cef963180d3eb8ed96b69bf896371a5e",
+   "n90/verify_exact.py": "e33049d69f19d2ad7970f3aa445f3d90d2efcf38"
+  }
+ },
+ "certificate_blobs_unchanged": true,
+ "changed_pin_to_head": [
+  "n90/REGISTRATION.md",
+  "n90/SHA256SUMS"
+ ],
+ "sha256sums_at_head": {
+  "n90_exact.json": true,
+  "n90_witness.yaml": true,
+  "n90_record.png": true,
+  "n90_before_after.png": true,
+  "verify_exact.py": true,
+  "check_area.py": true,
+  "REGISTRATION.md": true,
+  "README.md": true
+ },
+ "sha256sums_hold": true,
+ "dating": {
+  "issue_opened": "2026-11-15T12:08:33Z",
+  "pin_committed": "2026-11-15T13:07:15+01:00",
+  "head_committed": "2026-11-15T13:07:15+01:00",
+  "issue_after_pin_seconds": 78,
+  "issue_after_head_seconds": 78,
+  "issue_labels": [
+   "intake"
+  ],
+  "issue_comments": 0
+ },
+ "licence": {
+  "blob": "17e795f2a70c232c04633f4d7318191f7c198abe",
+  "blob_at_head": "17e795f2a70c232c04633f4d7318191f7c198abe",
+  "first_line": "MIT License",
+  "copyright": "Copyright (c) 2026 Joost de Winter",
+  "readme_statement": "All files are released under the MIT licence (see `LICENSE`).",
+  "added_in": "9bf5d9b 2026-10-17T16:27:31+02:00"
+ },
+ "n90_readme_search_credit": {
+  "pin": "The local search that found the arrangement was run with GPT-6.1 Sol Max (OpenAI). The local optimization, rational certificate, checking and figures were produced with Claude Fable 5.2 (Anthropic). Both worked under the direction of Joost de Winter.",
+  "head": "The local search that found the arrangement was run with GPT-6.1 Sol Max (OpenAI). The local optimization, rational certificate, checking and figures were produced with Claude Fable 5.2 (Anthropic). Both worked under the direction of Joost de Winter."
+ }
+}

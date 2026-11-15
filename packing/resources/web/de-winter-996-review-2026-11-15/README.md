@@ -167,6 +167,14 @@ They printed:
 | `frozen/findings-frozen-digest.txt` | the frozen review text and the receipts at the freeze | 2026-11-15T12:23:58Z |
 | `frozen/review-2026-11-15-de-winter-996.frozen.md` | the review as frozen, before the author’s README, checkers, the record at 90 or T-303’s certificate were read | 2026-11-15T12:23:58Z |
 
+## Addendum on #997
+
+Issue [#997](https://github.com/jlevy/squares/issues/997) replaces this certificate by a
+smaller one, at `fa53fb0d734fbf438bcfb73c1434a15894bb2bc5`. Lane L182’s addendum decides
+it with the programs here, unchanged, and keeps its own programs, plan, receipts and
+frozen digest lists in [`addendum-997/`](addendum-997/README.md).
+In this packet it changed nothing outside that directory but this section.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
