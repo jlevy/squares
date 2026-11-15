@@ -34805,7 +34805,8 @@ issues:
     title: Upper Bound for Packing 977 Unit Squares — Construction by Miguel Lara
     author: larasmiguel
     opened: '2026-11-15'
-    state: open
+    state: closed
+    closed: '2026-11-15'
     kind: result-report
     triage: done
     summary: >-
@@ -34831,7 +34832,7 @@ issues:
       blind in a separate lane, accepts the bound with its own clean-room exact checker, nothing
       blocking, and finds it not recordable for the same reason; it proposes S1. OpenAI ChatGPT
       assistance disclosed.
-    read_through: '2026-11-15T06:03:49Z'
+    read_through: '2026-11-15T09:30:33Z'
     results:
     - key: n977-diamond-staircases
       claim: >-
@@ -34861,7 +34862,13 @@ issues:
     - think-cszb
     - think-7j3i
     answer_bead: think-ud9e
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/992#issuecomment-6892360714
+      date: '2026-11-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n977-diamond-staircases
     close_when: >-
       The import and its disposition are on main, and the reply on main says why the claim is not
       recorded, what was decided and what the review found; nothing the author asked for is queued.
@@ -34935,3 +34942,53 @@ issues:
       the argument, an exact coordinate file, the licence, why 977, and whether Couzo's
       certificate was known) go into the stage 7 reply and hold nothing open. It proposes S1, a
       routine consequence of a classical construction.
+
+      Closed on 15 November 2026 with the final reply (issuecomment-6892360714, posted by
+      jlevy at 09:30:33Z), after #994 merged as 538b7833a at 09:09:27Z with the packet, the
+      exact decision, the ledger and the mapped stage 4 review, and after that merge's Pages
+      deploy and verify-deployment passed (run 43697866071); recorded in lane L179. It says
+      that the bound holds exactly, 977 unit squares in a square of side exactly 17 + 21/sqrt
+      2, decided over Q(sqrt 2) from the construction's own description and not from the CSV,
+      two ways: by both maintained exact routes, every square, wall and pair, 3,540 touching
+      pairs with margins exactly zero at contact and every control stated in advance refused,
+      among them the side shrunk, one cell moved and the diamond enlarged; and by the blind
+      stage 4 review's own exact checker, separating axes over Z[sqrt 2] and exact clipping,
+      with all eight of its controls as stated (F1, F2), the review linked on main. It passes
+      on two of the review's notes for the author: the CSV is the same recipe rebuilt at side
+      31.85, matching row for row (F5), and the float checker, at 31.85 with an area
+      tolerance, cannot see the 56 diamond contacts that make the side tight and would accept
+      the construction about 4.4e-6 below the exact side (F9).
+
+      It says why the claim is not recorded: Francisco Couzo's exact certificate from #763,
+      31.765989508190, the row at 977 since 23 October 2026 and replayed exactly here, is
+      0.0833 below the claim; lower reports at 977 go back to 14 October; and the record keeps
+      only the lower of two reports at a count (F8). It says that this corrects the issue's
+      statement that no published bound at 977 had been established (F7), that no credit is
+      recorded since nothing is registered, and that the record notes the AI assistance as
+      stated. It says where the side comes from, as the author's later commits note: Göbel's
+      square (15, 21) of 921 at 16 + 21/sqrt 2 with one L-border, the construction in
+      Friedman's survey, holds 982 at exactly the claim's side, and the author's layout is
+      the (16, 21) member less eight end cells, with room for four more, 981 at the same side
+      (F10, F6). It says that the record's model of Göbel's construction applies no L-border,
+      and that whether such extensions count as part of Göbel's construction beyond n = 324
+      is now open for the maintainer and changes nothing at 977 (F11); that question is
+      think-7j3i's, which the reply does not name.
+
+      It names no register or evidence id: Couzo's #763 certificate is named as the standing
+      row at the count, not as this issue's result, and the exact decision and the review are
+      named as files, so n977-diamond-staircases is recorded as spoken of, with no id, as
+      #979's and #942's results are (#900). It names no bead, so the reply records none;
+      think-cszb, the licence follow-up behind its question 4, stays among the entry's beads.
+      It asks the review's six questions and says that none holds anything open, so none is
+      recorded under awaiting_author: whether 26d5695 is the commit to cite; whether the
+      argument would add two sentences, that the diamond's squares are interior-disjoint as
+      one turned grid and that the diamond is invariant under the quarter turn, with a note
+      that 56 squares touch the diamond at the exact side (F4); whether an exact coordinate
+      file would be published, each coordinate as a + b sqrt 2; under what licence the
+      project may retain the files, which the record has retained on the presumption that an
+      author who submits them permits it; why 977, when the construction holds 981 and
+      Göbel's square with an L-border 982; and whether Couzo's certificate at
+      31.765989508190 was known. It says that the packet, the exact decision and the review
+      are on main and that nothing the author asked for is still queued, so the issue is
+      closed with it, and that answers are welcome at any time. The issue was closed as
+      completed at 09:30:34Z; it has no comment but the reply, and read_through moves to it.
