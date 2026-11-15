@@ -509,6 +509,54 @@ The coordinator acknowledged the answers on #973
 T-298 stays at V0/C1, and this packet keeps its pin and retains nothing of `0e28e8a`.
 What the answers change for a full replay is on `think-0h7r`.
 
+### The Authors’ Lean Build Log
+
+Item 14 was answered later the same day, in a comment on #973
+([issuecomment-6897938053](https://github.com/jlevy/squares/issues/973#issuecomment-6897938053),
+16:52:03Z) and in commit
+[`355f83e`](https://github.com/moh63-dev/k2m5-family/commit/355f83e9147b310b581b72cf91baf56d7ad36625)
+(16:48:53Z), read in [campaign/intake-watch.yaml](../../../campaign/intake-watch.yaml)
+and not retained.
+Its `lean/build_full.log` records a build of the twelve `lean/K2m5` modules one per
+process with `lean -o` on Lean 4.33.1, on a Linux host with 2 cores and 7 GB
+and no swap.
+Every module exits 0. The module lines sum to 857.2 s of wall and 511.9 CPU-seconds (the
+totals line, 863.6 s and 517.5, presumably counts the axiom print too), the largest peak
+is 5.96 GB, and `k2m5_of_valid11` depends on `propext`, `Classical.choice` and
+`Quot.sound`. The `lean/K2m5` sources are as at this packet’s pin.
+
+The log’s header says Daniel’s project and Mathlib were already built and are not
+counted. `Grid10.lean` and `Fam10.lean` import `Sqpack.Bentz`, and its closure at
+`659ee62`, ten modules and the three lake files, has the Git blobs of the `2eb15455`
+tree the record built on 3 October 2026
+([3 October evand packet](../evand-square-packing-2026-10-03/README.md)).
+There `Sqpack/Bentz.lean` took 1,487 s with `LEAN_NUM_THREADS=1` and a 10 GB swapfile,
+at about 13 GB resident, with up to 9.6 GB of swap in use host-wide on a host shared
+with other work (load 6.5 at the start; sampled outside the receipt).
+On 2 October, on a 16 GB host without swap, two builds of it were killed, the second
+with one thread; with the swapfile it then built in 1,183 s on a quiet host, and that
+packet judged that a host with at least 16 GB of free memory should not need swap
+([2 October evand packet](../evand-square-packing-2026-10-01/README.md)).
+That module is where the record’s “at least 24 GB of memory or swap” comes from, as the
+authors say, and their log leaves it out.
+
+**Not built here.** Lane L183 (`think-o79q`) stopped at the disk measurement, before
+writing a toolchain or cache. `Sqpack/Basic.lean` imports all of Mathlib, so the build
+needs the whole `0df444a3` cache, about 6.5 GB by the record’s figure.
+[`devtools.lean_disk_price`](../../../devtools/lean_disk_price.py) measured the
+toolchain from its release stream without unpacking it: 570,405,234 bytes compressed and
+3,037,354,159 unpacked
+([`receipts/lean-price/toolchain.json`](receipts/lean-price/toolchain.json)).
+Together that is 9.54 GB before Mathlib’s sources, the compressed downloads or any
+output: over the 9 GB of disk the lane was given, and within 0.21 GB of the host’s free
+disk, so it would not fit there either once the rest is added
+([`receipts/lean-price/plan.json`](receipts/lean-price/plan.json)).
+Priced from these, the build is about 0.5 CPU-hours and more than 9.54 GB of disk, about
+11 GB by estimate with Mathlib’s sources and downloads, with about 6 GB of memory for
+every module but `Sqpack.Bentz`, which on a 16 GB host also needs a swapfile (10 GB in
+both earlier builds) on the same disk; the price is on `think-0h7r`, against the
+review’s 1 to 2 CPU-hours in the table above.
+
 ## Compressed Files
 
 Data files of more than 1,000 lines are stored as deterministic gzip made by `gzip -9n`,

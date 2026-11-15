@@ -2232,3 +2232,42 @@ repositories:
       the #973 requests entry, on T-298's credit, in the bibliography, the resources index
       and the packet's README, and what they change for the replay on think-0h7r. Nothing to
       import.
+  # Lane L183 of 15 November 2026 (think-o79q).
+  - url: https://github.com/moh63-dev/k2m5-family
+    read_through: 355f83e9147b310b581b72cf91baf56d7ad36625
+    read_on: '2026-11-15'
+    note: >-
+      Read through 355f83e (16:48:53Z on 15 November, 08:48:53 at the commit's own offset of
+      -08:00), "Lean: full build log with timings; portable build script", the head at 17:13Z,
+      one commit past 0e28e8a, which lane L173 read; the authors' comment on jlevy/squares#973
+      (issuecomment-6897938053, 16:52:03Z) names it for item 14. It changes six files.
+      lean/build_full.log and lean/timed_build.py are new; lean/build_inst.sh takes
+      K2M5_DIR, LEAN_BIN and LEAN_PATH_EXTRA from the environment in place of
+      /home/claude/lean/mk.sh and runs timed_build.py for each module; lean/README.md adds a
+      section on rebuilding with timings; .gitignore keeps build_full.log; and SHA256SUMS_ALL
+      changes those lines. build_full.log, headed as the full build of release v1.1's
+      lean/K2m5 on 14 November with Lean 4.33.1 on a Linux host of 2 cores and 7 GB with no
+      swap, gives each of the twelve modules' exit, wall, CPU and peak resident memory, each
+      exit 0 with no error, and the axiom line [propext, Classical.choice, Quot.sound] for
+      k2m5_of_valid11. Its totals line gives 863.6 s of wall, 517.5 CPU-s and a peak of 5.96
+      GB (InstC6), where the twelve module lines sum to 857.2 s and 511.9 CPU-s; the rest is
+      presumably the axiom print, which has no line of its own. Its header says Evan Daniel's
+      project and Mathlib were already built and are not counted, and that the peaks include
+      the mapped Mathlib .olean files. timed_build.py compiles each module with lean
+      -DmaxHeartbeats=0, which lifts the elaboration time limit and leaves the kernel check as
+      it is.
+
+      Checked at this read from the head's bytes, and not retained: certificate/ and
+      lean/K2m5/ are as at 2c0b1b9, the pin of the moh63-dev-k2m5-family-2026-11-13 packet, so
+      the log builds the Lean sources T-298 cites; of the 466 files the packet's manifest pins,
+      456 hold their digests, tight_tile/cov.tar.xz among them, the ten that change being the
+      nine lanes L168 and L173 listed and lean/README.md; and all 534 lines of SHA256SUMS_ALL
+      hold, listing every file but itself. lean/K2m5's imports from Daniel's project at
+      evand/square-packing 659ee62 reach ten modules through Sqpack.Bentz, and those ten and
+      the three lake files have the Git blobs of the 2eb15455 tree the record built on 3
+      October (E-k2m4-evand-bentz4-lean-build), read from 659ee62's tree listing. So the
+      module the record's "at least 24 GB" was priced from, Sqpack.Bentz, is one the log
+      leaves out, as the comment says. Lane L183 records the comment in the #973 requests
+      entry and the packet's README, and the Lean build's price on think-0h7r. The commit adds
+      no bound, certificate or claim, nothing of it is retained, and the packet keeps its pin;
+      T-298 stays at V0/C1. Nothing to import.

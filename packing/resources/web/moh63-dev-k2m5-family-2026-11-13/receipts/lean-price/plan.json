@@ -1,0 +1,23 @@
+{
+  "kind": "lean-disk-price-plan/1",
+  "items": [
+    {
+      "label": "toolchain",
+      "bytes": 3037354159,
+      "basis": "measured: leanprover/lean4:v4.33.1, lean-4.33.1-linux.tar.zst from the GitHub release, sha256 890afd185370f85666025b883914ab4f4b339136f8c96167b69cfb62aecaf235"
+    },
+    {
+      "label": "mathlib-0df444a3-cache",
+      "bytes": 6500000000,
+      "basis": "stated"
+    }
+  ],
+  "total_bytes": 9537354159,
+  "cap_bytes": 9000000000,
+  "free_bytes": 9748963328,
+  "margin_to_cap_bytes": -537354159,
+  "margin_to_free_bytes": 211609169,
+  "verdict": "DOES-NOT-FIT",
+  "disk": "the session scratchpad's filesystem, shared with the worktrees",
+  "priced": "2026-11-15T17:11:33Z"
+}
