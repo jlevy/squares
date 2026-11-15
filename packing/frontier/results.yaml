@@ -46986,7 +46986,7 @@ results:
   - id: T-301
     kind: upper-bound
     registered: '2026-11-14'
-    landed: '2026-11-14'
+    landed: '2026-11-15'
     headline: >-
       Ono's packing at 228, five band periods cut from Couzo's 404, 4.76e-03 below T-300
     claim: >-
@@ -47252,7 +47252,7 @@ results:
   - id: T-302
     kind: upper-bound
     registered: '2026-11-14'
-    landed: '2026-11-14'
+    landed: '2026-11-15'
     headline: >-
       Ono's packing at 147, one band period cut from Daniel's 229, 5.81e-03 below 7 + 4*sqrt(2)
     claim: >-
