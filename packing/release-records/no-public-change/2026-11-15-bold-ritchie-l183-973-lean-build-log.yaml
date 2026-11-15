@@ -1,0 +1,20 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane L183 of 15 November (think-o79q): Mohsen Khalili and Sara Gharabaghi's
+  comment on #973 (16:52:03Z), which answers the reply's item 14 with a full Lean build log
+  in their commit 355f83e, is recorded and #973 is read through it; the commit is read in
+  campaign/intake-watch.yaml and not retained. The lane stopped its build of the Lean
+  reduction at the disk measurement, which the k2m5 packet's README and receipts record, so
+  no evidence entry is added. No result, row, rung, side, bound, mark, score, credit holder,
+  landing date, pin or block changes; T-298 stays at V0/C1. Against origin/main 91acf2022
+  (#995): devtools.compare_paper_renders rendered the methods survey into empty site
+  directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
+  tree and once with that main's result-requests.yaml swapped in: its 43 files were
+  byte-identical across the three. No PDF was printed; it prints from that HTML. The survey
+  keeps its version, v0.2.7.

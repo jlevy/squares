@@ -1,0 +1,21 @@
+{
+  "kind": "lean-disk-price-toolchain/1",
+  "label": "leanprover/lean4:v4.33.1, lean-4.33.1-linux.tar.zst from the GitHub release",
+  "compressed_bytes": 570405234,
+  "sha256": "890afd185370f85666025b883914ab4f4b339136f8c96167b69cfb62aecaf235",
+  "files": 17493,
+  "unpacked_bytes": 3037354159,
+  "by_directory": {
+    "lib/lean": 2830983303,
+    "lib": 162761400,
+    "src/lean": 28631934,
+    "bin": 10334631,
+    "lib/glibc": 4011296,
+    "lib/clang": 284716,
+    "include/lean": 177867,
+    ".": 91014,
+    "include/clang": 72866,
+    "share/lean": 5132
+  },
+  "measured": "2026-11-15T17:11:01Z"
+}
