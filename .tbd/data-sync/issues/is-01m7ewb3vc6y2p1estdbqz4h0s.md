@@ -3,9 +3,9 @@ type: is
 id: is-01m7ewb3vc6y2p1estdbqz4h0s
 title: "Record #973's answer comment (issuecomment-6889513117, 05:03Z), the coordinator's acknowledgement, and the k2m5-family README DOI commit 0e28e8a; cite paper DOI 10.5281/zenodo.24237740 and archive DOI 10.5281/zenodo.24237941 on T-298 (V0/C1 unchanged)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: bold-ritchie-l173
 labels:
   - intake
@@ -14,8 +14,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T05:54:34.476Z
-updated_at: 2026-11-15T07:23:43.092Z
+updated_at: 2026-11-15T09:31:31.896Z
 started_at: 2026-11-15T06:39:58.823Z
+closed_at: 2026-11-15T09:31:31.895Z
+close_reason: "#973 answers, acknowledgement, k2m5-family 0e28e8a and both DOIs recorded in #993 (942c1271f)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

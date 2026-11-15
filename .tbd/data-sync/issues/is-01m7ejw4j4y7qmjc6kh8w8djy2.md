@@ -3,9 +3,9 @@ type: is
 id: is-01m7ejw4j4y7qmjc6kh8w8djy2
 title: "Import #989: jazivxt's s(90) <= 9.998277166926 (below the 10 x 10 side; crop of de Winter's 157 with shifted copies)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l170
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T03:09:06.500Z
-updated_at: 2026-11-15T05:17:03.463Z
+updated_at: 2026-11-15T09:31:31.135Z
 started_at: 2026-11-15T03:09:08.001Z
+closed_at: 2026-11-15T09:31:31.133Z
+close_reason: "#989 imported as T-303 (#991, 588ccb226), answered and closed; reply recorded in #993 (942c1271f)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
