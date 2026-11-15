@@ -23,8 +23,10 @@ GitHub’s activity log was not readable from this session, so the push time of 
 is not read; no other report reached 90 in the 2 minutes 47 seconds before the issue, so
 the ledger dates the claim by the issue, with the first commit kept.
 
-Intake lane L181 (think-32cl) retained it, replayed it and measured it on 15 November
-2026\. The stage 4 review is a separate lane, blind to this one.
+Intake lane L181 (think-32cl) retained it, replayed it, measured it and registered it on
+15 November 2026 as **T-304**. The blind stage 4 review of lane L180 accepted it the
+same day, so it is at V3/C3; the adoption at 90 waits for a pass of 16 November, since
+the pass of 15 November already moved 90.
 
 ## What the Source Claims
 
@@ -175,6 +177,49 @@ side stood in for 90’s ceiling: it finds the same L-step and monotonicity cons
 as on `main`. From 90 the L step lands at 109 at this side plus one, 10.994038857546,
 still above 109’s ceiling (10.9497…), and s(89) ≤ 9.9497… is already below this side, so
 the bound carries to no other count.
+
+## Stage 4 Review
+
+The stage 4 review of 15 November 2026
+([review-2026-11-15-de-winter-996.md](../../../../docs/project/reviews/review-2026-11-15-de-winter-996.md),
+lane L180, under think-uhav), written blind to this lane, accepts the certificate with
+seven findings, all notes, none blocking.
+Its clean-room checker decides every square, wall and all 4,005 pairs twice, by
+separating axes in Python integers from the JSON’s poses and by exact clipping of the
+twin’s own corners in GMP rationals, and all 26 of its controls were decided as stated.
+Its programs and receipts are in the review-only directory
+`de-winter-996-review-2026-11-15`.
+
+This lane read its frozen findings at 12:39Z on 15 November, after its own replay,
+controls and measurements (12:17Z) and registration (12:38Z) were committed.
+Read against this packet’s receipts, the review’s least pair margin (1.06410355706 ×
+10⁻¹², squares 2 and 40) is the replay’s exactly.
+Its 18 wall contacts, nine at the left and nine at the bottom, square 10 among them, are
+the replay’s contacts, square 10 the one the sharp controls grew by 0. Its right and top
+clearance,
+9909955765625015940074994030630443123/1953125000000000000000004987507812500000000000000000000000,
+is the amount the sharp controls lowered the side by.
+
+Its twin, listed counterclockwise from the corner at C + (u + v)/2 of each JSON pose, is
+the half turn [measure/identity.json](measure/identity.json)’s `twin` row reads, no
+square moved.
+Its tilts (50 squares sharing one direction 1.831 × 10⁻¹⁰ degrees clockwise
+of upright, 40 turned clockwise by 22.90 to 30.99 degrees) are the identity
+measurement’s, which counts the 50 within 10⁻³ degrees of upright.
+No disagreement.
+
+What the review adds:
+
+- **The claim’s box** (F3): the squares are accepted in the box of the printed side,
+  9.994038857546, and refused in the box of its 12-place floor.
+- **The side and the extent** (F4): the left and bottom are touched and the right and
+  top cleared by 5.07389735200 × 10⁻²¹, so the side is the packing’s extent rounded up
+  at 20 places. The smaller box is the owner’s RV-3 question and is not registered.
+- **A contact arrangement opened by about 10⁻¹²** (F5): 195 pairs from 1.0641 × 10⁻¹² to
+  9.1968 × 10⁻¹², then none below 5.85 × 10⁻⁶.
+- **For the author** (F6, F7): no threshold counts the issue’s 37 leaning squares, since
+  no square is exactly upright; and the JSON names neither the box nor the rotation
+  sense, which read the other way overlaps 52 pairs and which the twin fixes.
 
 ## What Is Not Established
 

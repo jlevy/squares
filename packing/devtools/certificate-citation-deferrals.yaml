@@ -95,3 +95,12 @@ deferrals:
       case record cites it when the house adopts T-304, after its stage 4 review (think-uhav), in a
       pass of 16 November 2026, since the pass of 15 November already moved 90 and a day's archive
       holds one prior state a count; this entry is removed in that change.
+  - evidence: E-de-winter-996-review-exact-feasibility
+    results:
+    - T-304
+    bead: think-32cl
+    blocked_on: think-32cl
+    recorded: '2026-11-15'
+    reason: The stage 4 review's clean-room run on the same certificate (lane L180, think-uhav),
+      cited with the replay when the house adopts T-304 in a pass of 16 November 2026, since the
+      pass of 15 November already moved 90; this entry is removed in that change.

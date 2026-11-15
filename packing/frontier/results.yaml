@@ -47784,8 +47784,8 @@ results:
       squares beyond a tenth, and each of its 40 tilted squares pairs with one T-303 tilts the
       same way.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate lane,
-      blind to this one (think-uhav).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 15 November
+      2026 accepts it, its clean-room checker independently re-implemented.
 
       The issue says verify_exact.py (separating axes) and check_area.py (the area of each close
       pair's clipped intersection), both Python's fractions.Fraction and its standard library
@@ -47839,6 +47839,7 @@ results:
     evidence:
     - E-de-winter-996-certificate-report
     - E-de-winter-996-exact-feasibility
+    - E-de-winter-996-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/README.md
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/acquisition/claims.json
@@ -47853,10 +47854,15 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-15-de-winter-996.md
+    - packing/resources/web/de-winter-996-review-2026-11-15/out/check-n90.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/out/controls-n90.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/out/describe-n90.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l181_1115.py
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/out/controls-n90.json
     notes: >-
       A separate complete repository replay is retained for n = 90: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -47911,13 +47917,61 @@ results:
       this repository's centre-direction reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method. Licensed MIT by LICENSE at the pin. No
       human oversight or optimality is claimed.
+
+      The stage 4 review of 15 November 2026
+      (docs/project/reviews/review-2026-11-15-de-winter-996.md, lane L180, under think-uhav),
+      written in a separate lane blind to this one, accepts the certificate with seven
+      findings, all notes, none blocking. Its clean-room checker decides every square, wall and
+      all 4,005 pairs by separating axes in Python integers from the JSON's poses and by exact
+      clipping of the twin's own corners in gmpy2.mpq, with no distance filter: every pair
+      strictly apart, 18 single-corner wall contacts, nine at the left and nine at the bottom,
+      and the least pair margin 1.06410355706e-12, at squares 2 and 40, the replay's exactly.
+
+      This lane read the review's frozen findings after its replay, controls, measurements and
+      registration were committed. The review's 26 controls, stated beforehand, were each
+      decided as stated, among them the rotation read the other way (52 pairs overlap), square
+      10 turned by 1e-30 either way at its wall, the side lowered by one unit of its last place
+      (the 15 squares at the right and top cross) and every one of the 4,005 pairs closed to
+      exact contact and 1e-30 past it (E-de-winter-996-review-exact-feasibility).
+
+      The review's findings for the record, which hold no rung: the twin is the JSON's packing
+      corner for corner (F1); the claim's 12-place box is accepted and its floor refused (F3);
+      the side is the packing's extent rounded up at 20 places, the right and top cleared by
+      5.07389735200e-21 by 15 squares (F4), the amount the packet's sharp controls lowered the
+      side by; the near pairs are a contact arrangement opened by about 1e-12, 195 pairs from
+      1.0641e-12 to 9.1968e-12 and then none below 5.85e-6 (F5).
+
+      For the author: no square is exactly upright, 50 sharing one direction turned clockwise
+      by 1.831e-10 degrees and 40 turned clockwise by 22.90 to 30.99 degrees, so no threshold
+      counts the issue's 37 leaning squares (F6), as this lane's identity measurement found; and
+      the JSON names neither the box nor the rotation sense, which the twin fixes (F7).
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-uhav): its mathematics, a clean-room exact checker with sharp controls, the identity
-      against T-303 and the local search the source states, mapped as an adversarial review.
-      Then adopt it at 90 in place of T-303 under the house rule, in a pass of 16 November 2026,
-      since the pass of 15 November already moved 90, with both strong generators'
-      regularization of the new house and the flip of the new house in the same change.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 15 November, is
+      retained. It is the smallest validated side at 90; the case adopts it there in place of
+      T-303 under the house rule in a pass of 16 November 2026, since the pass of 15 November
+      already moved 90, with both strong generators' regularization of the new house. The
+      review's questions for the author hold no rung, and the smaller side its F4 measures is
+      the owner's RV-3 question, not registered.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-15-de-winter-996.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 996 (L180,
+        under think-uhav), prompted separately from the import lane (L181, think-32cl) and blind
+        to its work throughout
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-15'
+      scope: >-
+        Finite feasibility of the centre-direction certificate of issue 996 (90) and its
+        Witness/v2 twin, decided again by a clean-room exact checker frozen before any producer
+        or witness code was read, by two methods, with 26 controls stated in advance and a
+        self-test of 31,771 checks; the claim's arithmetic, the side against the packing's
+        extent, the near pairs, the tilts and the rotation sense.
+      verdict: accepted
+      covers:
+      - T-304
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

@@ -35015,8 +35015,11 @@ issues:
       the certificate and refuse its gross and sharp controls; measured, it is T-303's
       arrangement moved by the local search, 6 squares beyond a tenth under the identity, and
       the twin is the same packing. T-303's contraction margin is 1.0988e-11, so the gain lies
-      wholly outside its padding. The ledger of 15 November records it. Its stage 4 review is a
-      separate lane, blind to this one (think-uhav).
+      wholly outside its padding. The ledger of 15 November records it. The 15 November stage 4
+      review, written blind in a separate lane (lane L180, think-uhav), accepts it with seven
+      findings, all notes; its clean-room checker decided it and its twin again, so the entry
+      is confirmed, independently re-implemented, at V3/C3. The adoption at 90 waits for a pass
+      of 16 November, since the pass of 15 November already moved 90.
     read_through: '2026-11-15T11:30:13Z'
     results:
     - key: n90-local-search
@@ -35030,6 +35033,7 @@ issues:
       evidence:
       - E-de-winter-996-certificate-report
       - E-de-winter-996-exact-feasibility
+      - E-de-winter-996-review-exact-feasibility
     beads:
     - think-32cl
     - think-uhav
@@ -35065,4 +35069,17 @@ issues:
       one way, each paired with a square T-303 tilts the same way, and 50 lie within 1e-3
       degrees of upright; the issue counts 37 leaning squares here and 49 in T-303, where the
       measurement finds 40 and 44 tilted beyond a degree, T-303's five near-upright squares
-      making 49. No reply has been posted.
+      making 49.
+
+      The review measured the issue's statements: the claim's 12-place box is accepted and its
+      floor refused (F3); every pair is strictly apart, 18 squares touch the left or bottom
+      wall at one corner, and the least pair margin is 1.06410355706e-12 at squares 2 and 40,
+      the replay's, so the issue's smallest gap of 1e-12 holds (F1, F5); the side is the
+      packing's extent rounded up at 20 places, the right and top cleared by 5.07e-21 (F4); the
+      twin is the JSON's packing exactly (F1). For the author: no threshold counts 37 leaning
+      squares, 50 sharing one direction 1.831e-10 degrees from upright and 40 turned 22.90 to
+      30.99 degrees (F6); the JSON names neither the box nor the rotation sense, which read the
+      other way overlaps 52 pairs and which the twin fixes (F7).
+
+      This lane read the review's frozen findings at 12:39Z, after its replay, controls and
+      measurements (12:17Z) and registration (12:38Z) were committed. No reply has been posted.

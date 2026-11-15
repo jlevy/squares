@@ -63567,6 +63567,24 @@ evidence:
       arithmetic and the separating-axis method; the source's own checkers were not run here.
       The linear program's first-order statement is not replayed. No human oversight or
       optimality is claimed.
+    external_review:
+      state: informally-verified
+      date: '2026-11-15'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 996
+        (L180, under think-uhav), prompted separately from the import lane (L181, think-32cl)
+        and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-15-de-winter-996.md accepted the certificate with
+        seven findings, all notes, none blocking: F1 on feasibility (every pair strictly apart,
+        18 single-corner wall contacts at the left and bottom, the twin the JSON's packing
+        exactly), F2 on the review's own 26 controls, F3 (the claim's 12-place box accepted and
+        its floor refused), F4 and F5 for the records (the side is the packing's extent rounded
+        up at 20 places, the right and top cleared by 5.07e-21; a contact arrangement opened by
+        about 1e-12 to 9.2e-12), F6 and F7 for the author (the issue's count of 37 leaning
+        squares against the file's 40; the JSON names neither the box nor the rotation sense).
+        Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
+        E-de-winter-996-exact-feasibility.
   - id: E-de-winter-996-exact-feasibility
     claim: upper-bound
     scope:
@@ -63638,4 +63656,111 @@ evidence:
       longest job 1.39 seconds. In every positive squares touch the box, a least wall clearance
       of exactly 0, and every pair clears by at least 1.0641e-12. The receipt's controls are
       gross, and the packet's sharp controls meet those margins. Finite feasibility only.
+    source_reviewed: '2026-11-15'
+    external_review:
+      state: informally-verified
+      date: '2026-11-15'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 996
+        (L180, under think-uhav), prompted separately from the import lane (L181, think-32cl)
+        and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-15-de-winter-996.md accepted the certificate with
+        seven findings, all notes, none blocking: F1 on feasibility (every pair strictly apart,
+        18 single-corner wall contacts at the left and bottom, the twin the JSON's packing
+        exactly), F2 on the review's own 26 controls, F3 (the claim's 12-place box accepted and
+        its floor refused), F4 and F5 for the records (the side is the packing's extent rounded
+        up at 20 places, the right and top cleared by 5.07e-21; a contact arrangement opened by
+        about 1e-12 to 9.2e-12), F6 and F7 for the author (the issue's count of 37 leaning
+        squares against the file's 40; the JSON names neither the box nor the rotation sense).
+        Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
+        E-de-winter-996-exact-feasibility.
+  - id: E-de-winter-996-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 90
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s90 upper bound 2026-11-15]'
+    certificate: packing/resources/web/de-winter-s90-upper-bound-2026-11-15/source/n90/n90_exact.json
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B on a shared host at nice 19,
+      15 November 2026, from the review-only directory de-winter-996-review-2026-11-15
+      (programs/): l180_check.py on n90_exact.json and its Witness/v2 twin (out/check-n90.json,
+      ACCEPT), deciding every format hypothesis, every square a unit square, every wall and all
+      4,005 pairs by separating axes in Python integers over per-square denominators from the
+      JSON's poses and again by exact convex clipping of the twin's own corners in gmpy2.mpq,
+      with containment by area, with no distance filter, in 0.65 CPU seconds: 18 exact wall
+      contacts (9 left, 9 bottom), the right and top cleared by 5.07389735200e-21, no pair
+      touching, and the least pair margin 1.06410355706e-12, at squares 2 and 40.
+      l180_controls.py decided the 26 controls the plan stated beforehand, by both methods or
+      the reader (out/controls-n90.json), all 26 as stated; among them the squares accepted in
+      the box of the claim's own side, 9.994038857546, and refused in the box of its 12-place
+      floor, the rotation read the other way refused for 52 overlapping pairs, and every one of
+      the 4,005 pairs closed along its centre line to exact contact and 1e-30 past it;
+      l180_selftest.py passed 31,771 checks.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-996-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 90 and its twin: every square, every wall and every pair, by
+          two exact methods in two arithmetic libraries that share only the reader, with the
+          stated controls decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issue 996 (L180, under think-uhav), strong
+          tier
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the certificate, the checks and the figures were produced with Claude
+          Fable 5.2 (Anthropic), and the local search with GPT-6.1 Sol Max (OpenAI), under Joost
+          de Winter's direction. The checker was written from the mathematics, the Witness/v2
+          schema text and the certificate and frozen at 2026-11-15T12:12:15Z, before its author
+          read the author's checkers or this repository's witness, verifier or promotion code;
+          it shares no code with the source's checkers, this repository's maintained routes or
+          any earlier review's programs.
+    independence_record: docs/project/reviews/review-2026-11-15-de-winter-996.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-15'
+      reviewed_by: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 996
+        (L180, under think-uhav), prompted separately from the import lane (L181, think-32cl)
+        and blind to its work throughout
+      note: >-
+        docs/project/reviews/review-2026-11-15-de-winter-996.md accepted the certificate with
+        seven findings, all notes, none blocking: F1 on feasibility (every pair strictly apart,
+        18 single-corner wall contacts at the left and bottom, the twin the JSON's packing
+        exactly), F2 on the review's own 26 controls, F3 (the claim's 12-place box accepted and
+        its floor refused), F4 and F5 for the records (the side is the packing's extent rounded
+        up at 20 places, the right and top cleared by 5.07e-21; a contact arrangement opened by
+        about 1e-12 to 9.2e-12), F6 and F7 for the author (the issue's count of 37 leaning
+        squares against the file's 40; the JSON names neither the box nor the rotation sense).
+        Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
+        E-de-winter-996-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, which share its reader. Finite feasibility only.
     source_reviewed: '2026-11-15'

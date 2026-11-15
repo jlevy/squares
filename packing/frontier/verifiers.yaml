@@ -8864,3 +8864,67 @@ verifiers:
       and kept with its receipts in the review-only directory jazivxt-s90-989-review-2026-11-15
       beside the import lane's packet. l169_plan_facts.py, l169_make_plan.py and
       l169_describe.py, kept beside them, decide no certificate and are not registered.
+  - id: V-de-winter-996-review-check
+    program: l180_check.py with l180_reader.py, l180_axes.py, l180_clip.py, l180_decide.py and l180_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 15 November stage 4 review's exact checker of Joost de Winter's rational
+      centre-direction certificate of issue 996 (90) and its corner Witness/v2 twin, with a
+      strict reader of its own (l180_reader.py: the JSON's five keys only, every scalar a
+      canonical integer or p/q in lowest terms, floats, constants, duplicate keys, tabs and
+      carriage returns refused; the twin one YAML document of strings, integers, mappings and
+      sequences with no anchors, aliases or tags, its keys inside the schema's lists, held to
+      the JSON's n, side and squares corner for corner): every square a unit square, every wall
+      and every pair twice with no distance filter, by separating axes over the four edge
+      normals in Python integers over per-square denominators, from the JSON's poses
+      (l180_axes.py, method A), and by exact Sutherland-Hodgman clipping in gmpy2.mpq of the
+      twin's own corners, each square a unit square by its sides and diagonals, each pair
+      clipped both ways round and each wall classed by the intersection exactly, containment
+      decided by area (l180_clip.py, method B); l180_decide.py runs both and requires their
+      classes to agree. l180_geom.py holds the closed-form margins and constructions the
+      self-test and controls use; l180_controls.py decides 26 controls stated in a plan hashed
+      before it existed; l180_selftest.py holds both methods and the reader to 31,771 checks.
+    source:
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_check.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_reader.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_axes.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_clip.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_decide.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_geom.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_selftest.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_controls.py
+    independence_record: docs/project/reviews/review-2026-11-15-de-winter-996.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 996 (L180, under think-uhav), strong
+            tier, prompted separately from the import lane (L181, think-32cl)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the local optimization, the rational certificate, the checks and the
+          figures were produced with Claude Fable 5.2 (Anthropic), and the local search with
+          GPT-6.1 Sol Max (OpenAI), under Joost de Winter's direction. The seven checker files
+          were frozen at 2026-11-15T12:12:15Z (frozen/checker-frozen-digests.txt), before their
+          author read the author's README, registration, checksums or checkers, or this
+          repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source and reuse no code of any earlier review, lanes L169's and
+          L153's reviews, the models for its method, among them, whose programs it did not
+          open.
+    note: >-
+      Written and run on 15 November 2026 for
+      docs/project/reviews/review-2026-11-15-de-winter-996.md, and kept with its receipts in the
+      review-only directory de-winter-996-review-2026-11-15 beside the import lane's packet.
+      l180_plan_facts.py, l180_make_plan.py and l180_describe.py, kept beside them, decide no
+      certificate and are not registered.
