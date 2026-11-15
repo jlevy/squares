@@ -63,14 +63,6 @@ allowlist:
       over the per-blob ceiling), from a path outside the repository; the file is held to
       the packet manifest's digest before it is staged. The retained files are read from
       Git and compared with nothing; their custody is acquire_source --check's.
-  - path: packing/devtools/lean_disk_price.py
-    kind: download
-    boundary: >-
-      `toolchain` reads a Lean toolchain release asset as it downloads, a .tar.zst of
-      several hundred MB that the repository never retains (lean-4.33.1-linux.tar.zst is
-      570 MB), and `--expect-sha256` holds the stream to a digest the caller pins, so that
-      the size it prices is the size of the named release and not of a cut-off or
-      substituted download. It reads no file of the repository.
   - path: packing/devtools/evand_s29_replay.py
     kind: download
     boundary: >-

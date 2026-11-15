@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import random
 import tarfile
 from pathlib import Path
 
@@ -37,7 +38,6 @@ def test_sizes_and_digest_come_from_the_stream() -> None:
         io.BytesIO(blob),
         label="test",
         expect_bytes=len(blob),
-        expect_sha256=hashlib.sha256(blob).hexdigest(),
     )
     assert record["compressed_bytes"] == len(blob)
     assert record["sha256"] == hashlib.sha256(blob).hexdigest()
@@ -46,26 +46,30 @@ def test_sizes_and_digest_come_from_the_stream() -> None:
     assert record["by_directory"] == {"lib/lean": 5000, "bin": 700, ".": 11}
 
 
-@pytest.mark.parametrize(
-    ("expect_bytes", "expect_sha256", "reason"),
-    [(1, None, "expected 1"), (None, "0" * 64, "SHA-256")],
-)
-def test_a_stream_that_is_not_the_named_one_is_refused(
-    expect_bytes: int | None, expect_sha256: str | None, reason: str
-) -> None:
-    with pytest.raises(price.PriceRefusedError, match=reason):
-        price.measure_toolchain(
-            io.BytesIO(_archive()),
-            label="test",
-            expect_bytes=expect_bytes,
-            expect_sha256=expect_sha256,
-        )
+def test_a_stream_of_another_length_is_refused() -> None:
+    with pytest.raises(price.PriceRefusedError, match="expected 1"):
+        price.measure_toolchain(io.BytesIO(_archive()), label="test", expect_bytes=1)
 
 
 def test_a_cut_off_archive_is_refused_and_not_priced_small() -> None:
     blob = _archive()
     with pytest.raises(price.PriceRefusedError, match="does not read to its end"):
         price.measure_toolchain(io.BytesIO(blob[: len(blob) // 2]), label="test")
+
+
+def test_a_stream_cut_inside_a_member_header_is_refused() -> None:
+    rng = random.Random(0)
+    out = io.BytesIO()
+    with tarfile.open(fileobj=out, mode="w:zst") as archive:
+        for i in range(3):
+            data = rng.randbytes(50_000)
+            info = tarfile.TarInfo(f"lean-9.9.9-linux/lib/lean/M{i}.olean")
+            info.size = len(data)
+            archive.addfile(info, io.BytesIO(data))
+    blob = out.getvalue()
+    for cut in range(50_000, 52_000, 13):
+        with pytest.raises(price.PriceRefusedError):
+            price.measure_toolchain(io.BytesIO(blob[:cut]), label="test")
 
 
 def test_the_command_writes_its_receipt(tmp_path: Path) -> None:

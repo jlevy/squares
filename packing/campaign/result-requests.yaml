@@ -33769,21 +33769,23 @@ issues:
       minutes of wall, 8.6 CPU-minutes, at most 5.96 GB a module, and the same three axioms;
       build_inst.sh and timed_build.py now take their paths from environment variables. The
       comment says the record's "at least 24 GB" came from the Bentz precedent and that the
-      run confirms the review's figure of about 6 GB a module. Both hold: the 24 GB is what
-      the record's builds of Daniel's Sqpack.Bentz needed in memory and swap, and the log by
-      its header leaves out Daniel's project and Mathlib, already built. Sqpack.Bentz is in
-      lean/K2m5's import closure, and at 659ee62 it is byte for byte the module built here on
-      3 October at about 13 GB resident with swap in use.
+      run confirms the review's figure of about 6 GB a module. Both hold: the 24 GB is the
+      review's reading of the record's builds of Daniel's Sqpack.Bentz, about 13 GB resident
+      with swap in use (killed twice on a 16 GB host without swap on 2 October, and judged
+      then to need no swap with 16 GB free), and the log by its header leaves out Daniel's
+      project and Mathlib, already built. Sqpack.Bentz is in lean/K2m5's import closure, and
+      at 659ee62 it is byte for byte the module built here on 3 October at about 13 GB
+      resident with swap in use.
 
       Lane L183 was to build the reduction here and stopped at the disk measurement, before
-      writing a toolchain or cache. The toolchain, streamed and not unpacked, is 3,037,354,159
-      bytes unpacked (devtools.lean_disk_price, with receipts in the packet's
-      receipts/lean-price/), and Sqpack.Basic imports all of Mathlib, so the whole 0df444a3
-      cache comes with it, about 6.5 GB by the record's figure: 9.54 GB before any source or
-      output, over the lane's 9 GB cap and 0.21 GB under this host's free disk. T-298 stays at
-      V0/C1, reviewed. The comment asks nothing, so no reply is owed for it; the follow-up
-      promised when T-298's levels change still stands. The Lean build's price is restated on
-      think-0h7r.
+      writing a toolchain or cache. The toolchain's release archive, read as a stream and not
+      unpacked, holds 3,037,354,159 bytes of files (devtools.lean_disk_price, with receipts in
+      the packet's receipts/lean-price/), and Sqpack.Basic imports all of Mathlib, so the
+      whole 0df444a3 cache comes with it, about 6.5 GB by the record's figure: 9.54 GB before
+      any source or output, over the lane's 9 GB cap and 0.21 GB under this host's free disk.
+      T-298 stays at V0/C1, reviewed. No reply is due: the comment was read on the day of the
+      last reply, the follow-up of 05:54:33Z, and asks nothing; the follow-up promised when
+      T-298's levels change still stands. The Lean build's price is restated on think-0h7r.
   - number: 977
     title: 'Lowered upper bound for n = 297 (side 17.739455558289): registration request'
     author: JoostdeWinter

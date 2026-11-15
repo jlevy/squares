@@ -8,9 +8,9 @@ tool answers the disk question first, writing nothing but its receipt.
     Read a ``.tar.zst`` toolchain archive as a stream (``-`` for standard input, so that
     ``curl -sSL URL |`` can feed it), and report its compressed bytes and SHA-256 and the
     unpacked bytes of its regular files, in total and by directory. Nothing is unpacked.
-    It refuses (exit 1) an archive that does not decompress or list to its end, and a
-    stream whose length or digest is not the one ``--expect-bytes`` or ``--expect-sha256``
-    names, so a cut-off download cannot pass for a small toolchain.
+    It refuses (exit 1) an archive whose zstd frame or tar listing does not read to its
+    end, and a stream whose length is not the one ``--expect-bytes`` names, so a cut-off
+    download cannot pass for a small toolchain.
 ``plan --item LABEL=BYTES|LABEL=@RECEIPT ... --cap BYTES --disk PATH``
     Add the items, each a stated figure or a ``toolchain`` receipt's measured unpacked
     bytes, and compare the total with the cap and with the free bytes of the filesystem
@@ -86,7 +86,6 @@ def measure_toolchain(
     *,
     label: str,
     expect_bytes: int | None = None,
-    expect_sha256: str | None = None,
 ) -> dict[str, object]:
     """Stream a ``.tar.zst`` archive and return its sizes; refuse a short or unreadable one."""
     counted = _Counted(raw)
@@ -94,11 +93,16 @@ def measure_toolchain(
     by_directory: Counter[str] = Counter()
     files = 0
     try:
-        with tarfile.open(fileobj=stream, mode="r|zst") as archive:
+        # ZstdFile refuses a frame cut short; tarfile's "r|zst" reader does not, and a cut
+        # inside a member's header block would end the listing quietly.
+        unpacked = zstd.ZstdFile(stream)
+        with tarfile.open(fileobj=unpacked, mode="r|") as archive:
             for member in archive:
                 if member.isfile():
                     by_directory[_directory(member.name)] += member.size
                     files += 1
+        while unpacked.read(_CHUNK):
+            pass
     except (tarfile.TarError, EOFError, zstd.ZstdError) as error:
         raise PriceRefusedError(f"archive does not read to its end: {error}") from error
     while stream.read(_CHUNK):
@@ -106,8 +110,6 @@ def measure_toolchain(
     sha256 = counted.digest.hexdigest()
     if expect_bytes is not None and counted.count != expect_bytes:
         raise PriceRefusedError(f"stream is {counted.count} bytes, expected {expect_bytes}")
-    if expect_sha256 is not None and sha256 != expect_sha256.lower():
-        raise PriceRefusedError(f"stream SHA-256 is {sha256}, expected {expect_sha256}")
     if files == 0:
         raise PriceRefusedError("archive lists no regular file")
     return {
@@ -128,7 +130,12 @@ def parse_item(text: str) -> tuple[str, int, str]:
     if not sep or not label:
         raise PriceRefusedError(f"item {text!r} is not LABEL=BYTES or LABEL=@RECEIPT")
     if value.startswith("@"):
-        receipt = json.loads(Path(value[1:]).read_text(encoding="utf-8"))
+        try:
+            receipt = json.loads(Path(value[1:]).read_text(encoding="utf-8"))
+        except (OSError, ValueError) as error:
+            raise PriceRefusedError(
+                f"{value[1:]} does not read as a receipt: {error}"
+            ) from error
         if receipt.get("kind") != TOOLCHAIN_KIND:
             raise PriceRefusedError(f"{value[1:]} is not a {TOOLCHAIN_KIND} receipt")
         basis = f"measured: {receipt.get('label', '?')}, sha256 {receipt.get('sha256', '?')}"
@@ -180,7 +187,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     tool.add_argument("source", help="the archive's path, or - for standard input")
     tool.add_argument("--label", required=True, help="what the archive is, for the receipt")
     tool.add_argument("--expect-bytes", type=int, help="refuse a stream of another length")
-    tool.add_argument("--expect-sha256", help="refuse a stream with another digest")
     tool.add_argument("--json", type=Path, help="write the receipt here")
     plan = commands.add_parser("plan", help="test a build's disk plan against a cap")
     plan.add_argument(
@@ -204,7 +210,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                     sys.stdin.buffer,
                     label=args.label,
                     expect_bytes=args.expect_bytes,
-                    expect_sha256=args.expect_sha256,
                 )
             else:
                 with Path(args.source).open("rb") as raw:
@@ -212,7 +217,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                         raw,
                         label=args.label,
                         expect_bytes=args.expect_bytes,
-                        expect_sha256=args.expect_sha256,
                     )
             _write(args.json, record)
             print(
@@ -222,16 +226,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             return 0
         items = [parse_item(text) for text in args.item]
-        record = price_plan(items, cap=args.cap, free=shutil.disk_usage(args.disk).free)
+        free = shutil.disk_usage(args.disk).free
+        record = price_plan(items, cap=args.cap, free=free)
         record["disk"] = args.disk_label or str(args.disk)
         record["priced"] = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
         _write(args.json, record)
         for label, size, basis in items:
             print(f"  {label}: {_gb(size)} ({basis})")
-        total, cap, free = (
-            int(str(record[k])) for k in ("total_bytes", "cap_bytes", "free_bytes")
-        )
-        print(f"{record['verdict']}: total {_gb(total)}, cap {_gb(cap)}, free {_gb(free)}")
+        total = sum(size for _, size, _ in items)
+        print(f"{record['verdict']}: total {_gb(total)}, cap {_gb(args.cap)}, free {_gb(free)}")
         return 0 if record["verdict"] == "FITS" else 2
     except PriceRefusedError as error:
         print(f"REFUSED: {error}", file=sys.stderr)
