@@ -47830,7 +47830,10 @@ results:
         9.74e-03 at 269. A local search over small groups of squares of a recorded packing is no
         new technique, so not S4. No lower bound or optimum.
       scored: '2026-11-15'
-      by: think-32cl Joost de Winter import (intake lane L181), a draft for the stage 4 review
+      by: >-
+        think-32cl Joost de Winter import (intake lane L181), confirmed by the stage 4 review of
+        15 November (lane L180), which measures the step as about 225 times T-226's at the low
+        end of S3 and a continued arrangement of T-303
     novelty: previously-published
     attribution:
       source_keys:
@@ -47945,14 +47948,34 @@ results:
       by 1.831e-10 degrees and 40 turned clockwise by 22.90 to 30.99 degrees, so no threshold
       counts the issue's 37 leaning squares (F6), as this lane's identity measurement found; and
       the JSON names neither the box nor the rotation sense, which the twin fixes (F7).
+
+      After its findings were frozen the review measured the record, the padding and the
+      lineage, each agreeing with this lane where both measured. T-303's contraction margin is
+      1.098813e-11 at squares 79 and 81 and the gain 3.86e8 times it, so RV-3 does not apply;
+      the certificate's own contracts by 9.53e-12 (F8). The gain is exactly
+      0.00423830938030479085, the issue's 0.00424, and no closed form, L step or monotonicity
+      moves another count (F13).
+
+      Against T-303 each square k pairs with T-303's square k under the identity, 6 beyond a
+      tenth (largest 0.646) and 16 turned beyond a degree: four turned squares made upright at
+      the left (43, 57, 58 and 60) and twelve turned further by 1.0 to 4.9 degrees. It is
+      T-303's packing improved square for square, and a new arrangement relative to the grid
+      (F9). T-303's 49 leaning squares reproduce, the new packing's 37 do not (F10).
+
+      The witness-corners adapter refused the twin on its schema address, its square-k ids and
+      its corner order (F11): this lane's adapter now accepts the address and the ids and reads
+      the order as a half turn, a square's symmetry, so the twin measures as the JSON's packing.
+      The pin's README named the local search's model 'OpenAI Codex (GPT-6 Astra)' and the head
+      and the issue GPT-6.1 Sol Max (F12). The review proposes S3. This lane read its final head
+      after mapping the frozen findings; its six questions for the author hold no rung.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 15 November, is
       retained. It is the smallest validated side at 90; the case adopts it there in place of
       T-303 under the house rule in a pass of 16 November 2026, since the pass of 15 November
       already moved 90, with both strong generators' regularization of the new house. The
-      review's questions for the author hold no rung, and the smaller side its F4 measures is
-      the owner's RV-3 question, not registered.
+      review's six questions for the author hold no rung, and the smaller sides its F4 and F8
+      measure are the owner's RV-3 question, not registered.
     reviews:
     - path: docs/project/reviews/review-2026-11-15-de-winter-996.md
       kind: adversarial

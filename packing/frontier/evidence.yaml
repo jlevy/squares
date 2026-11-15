@@ -63576,14 +63576,15 @@ evidence:
         and blind to its work throughout
       note: >-
         docs/project/reviews/review-2026-11-15-de-winter-996.md accepted the certificate with
-        seven findings, all notes, none blocking: F1 on feasibility (every pair strictly apart,
-        18 single-corner wall contacts at the left and bottom, the twin the JSON's packing
-        exactly), F2 on the review's own 26 controls, F3 (the claim's 12-place box accepted and
-        its floor refused), F4 and F5 for the records (the side is the packing's extent rounded
-        up at 20 places, the right and top cleared by 5.07e-21; a contact arrangement opened by
-        about 1e-12 to 9.2e-12), F6 and F7 for the author (the issue's count of 37 leaning
-        squares against the file's 40; the JSON names neither the box nor the rotation sense).
-        Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
+        thirteen findings, all notes, none blocking: F1 on feasibility (every pair strictly
+        apart, 18 single-corner wall contacts at the left and bottom, the twin the JSON's
+        packing exactly), F2 on the review's own 26 controls, F3 and F13 (the claim's 12-place
+        box accepted and its floor refused; the gain exactly 0.00423830938030479085), F4, F5, F8,
+        F9 and F11 for the records (the side the extent rounded up at 20 places; a contact
+        arrangement opened by about 1e-12; RV-3 not applying; T-303's packing improved square
+        for square; the corner adapter's refusal of the twin), F6, F7, F10 and F12 for the
+        author (the 37 leaning squares; the box and rotation sense; the AI named at the pin),
+        and S3. Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
         E-de-winter-996-exact-feasibility.
   - id: E-de-winter-996-exact-feasibility
     claim: upper-bound
@@ -63666,14 +63667,15 @@ evidence:
         and blind to its work throughout
       note: >-
         docs/project/reviews/review-2026-11-15-de-winter-996.md accepted the certificate with
-        seven findings, all notes, none blocking: F1 on feasibility (every pair strictly apart,
-        18 single-corner wall contacts at the left and bottom, the twin the JSON's packing
-        exactly), F2 on the review's own 26 controls, F3 (the claim's 12-place box accepted and
-        its floor refused), F4 and F5 for the records (the side is the packing's extent rounded
-        up at 20 places, the right and top cleared by 5.07e-21; a contact arrangement opened by
-        about 1e-12 to 9.2e-12), F6 and F7 for the author (the issue's count of 37 leaning
-        squares against the file's 40; the JSON names neither the box nor the rotation sense).
-        Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
+        thirteen findings, all notes, none blocking: F1 on feasibility (every pair strictly
+        apart, 18 single-corner wall contacts at the left and bottom, the twin the JSON's
+        packing exactly), F2 on the review's own 26 controls, F3 and F13 (the claim's 12-place
+        box accepted and its floor refused; the gain exactly 0.00423830938030479085), F4, F5, F8,
+        F9 and F11 for the records (the side the extent rounded up at 20 places; a contact
+        arrangement opened by about 1e-12; RV-3 not applying; T-303's packing improved square
+        for square; the corner adapter's refusal of the twin), F6, F7, F10 and F12 for the
+        author (the 37 leaning squares; the box and rotation sense; the AI named at the pin),
+        and S3. Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
         E-de-winter-996-exact-feasibility.
   - id: E-de-winter-996-review-exact-feasibility
     claim: upper-bound
@@ -63751,14 +63753,15 @@ evidence:
         and blind to its work throughout
       note: >-
         docs/project/reviews/review-2026-11-15-de-winter-996.md accepted the certificate with
-        seven findings, all notes, none blocking: F1 on feasibility (every pair strictly apart,
-        18 single-corner wall contacts at the left and bottom, the twin the JSON's packing
-        exactly), F2 on the review's own 26 controls, F3 (the claim's 12-place box accepted and
-        its floor refused), F4 and F5 for the records (the side is the packing's extent rounded
-        up at 20 places, the right and top cleared by 5.07e-21; a contact arrangement opened by
-        about 1e-12 to 9.2e-12), F6 and F7 for the author (the issue's count of 37 leaning
-        squares against the file's 40; the JSON names neither the box nor the rotation sense).
-        Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
+        thirteen findings, all notes, none blocking: F1 on feasibility (every pair strictly
+        apart, 18 single-corner wall contacts at the left and bottom, the twin the JSON's
+        packing exactly), F2 on the review's own 26 controls, F3 and F13 (the claim's 12-place
+        box accepted and its floor refused; the gain exactly 0.00423830938030479085), F4, F5, F8,
+        F9 and F11 for the records (the side the extent rounded up at 20 places; a contact
+        arrangement opened by about 1e-12; RV-3 not applying; T-303's packing improved square
+        for square; the corner adapter's refusal of the twin), F6, F7, F10 and F12 for the
+        author (the 37 leaning squares; the box and rotation sense; the AI named at the pin),
+        and S3. Its clean-room run is E-de-winter-996-review-exact-feasibility, and the replay
         E-de-winter-996-exact-feasibility.
     limitations: >-
       A clean-room decision of the one retained certificate and its twin by two exact methods

@@ -221,6 +221,35 @@ What the review adds:
   no square is exactly upright; and the JSON names neither the box nor the rotation
   sense, which read the other way overlaps 52 pairs and which the twin fixes.
 
+After its findings were frozen the review measured the record, the padding and the
+lineage, and this lane read its final head at 12:43Z, after it had mapped the frozen
+findings.
+Where both measured they agree: T-303’s contraction margin (1.098813 × 10⁻¹¹ at
+squares 79 and 81) and the certificate’s own (1 − λ\* = 1.059921 × 10⁻¹² at 2 and 40)
+are [measure/](measure/)’s, and its identity against T-303 (89, 34 and 6 squares beyond
+a thousandth, a hundredth and a tenth, largest 0.646, 16 turned beyond a degree) is
+[measure/identity.json](measure/identity.json)’s.
+
+- **Padding** (F8): the gain is 3.86 × 10⁸ times T-303’s margin, so RV-3 does not apply.
+- **T-303 improved, square for square** (F9): each square k pairs with T-303’s square k;
+  four turned squares become upright at the left (43, 57, 58 and 60), and twelve turn
+  further clockwise by 1.0 to 4.9 degrees.
+  The review proposes the credit to de Winter as an improvement of jazivxt’s packing.
+- **The counts** (F10): T-303’s 49 leaning squares reproduce, the new packing’s 37 do
+  not.
+- **The twin and the adapter** (F11): `witness-corners` refused the twin on its schema
+  address, its ids and its corner order.
+  This lane’s change reads the address and the ids, and measures the corner order as a
+  half turn, so the twin and the review agree.
+- **The AI named at the pin** (F12) and **the arithmetic** (F13): the gain is exactly
+  0.00423830938030479085, and nothing moves another count.
+- **Significance**: S3.
+
+Its six questions for the author hold nothing open: how the leaning squares are counted;
+which seven and five squares the issue means; whether the near-upright turn of 1.83 ×
+10⁻¹⁰ degrees was chosen; the twin’s form; the AI credit; and whether the local search
+and the linear program will be published.
+
 ## What Is Not Established
 
 - **The linear program’s first-order statement** and any optimality: not replayed here.

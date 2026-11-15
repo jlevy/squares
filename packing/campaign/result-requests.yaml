@@ -35016,8 +35016,8 @@ issues:
       arrangement moved by the local search, 6 squares beyond a tenth under the identity, and
       the twin is the same packing. T-303's contraction margin is 1.0988e-11, so the gain lies
       wholly outside its padding. The ledger of 15 November records it. The 15 November stage 4
-      review, written blind in a separate lane (lane L180, think-uhav), accepts it with seven
-      findings, all notes; its clean-room checker decided it and its twin again, so the entry
+      review, written blind in a separate lane (lane L180, think-uhav), accepts it with
+      thirteen findings, all notes, and proposes S3; its clean-room checker decided it and its twin again, so the entry
       is confirmed, independently re-implemented, at V3/C3. The adoption at 90 waits for a pass
       of 16 November, since the pass of 15 November already moved 90.
     read_through: '2026-11-15T11:30:13Z'
@@ -35081,5 +35081,16 @@ issues:
       30.99 degrees (F6); the JSON names neither the box nor the rotation sense, which read the
       other way overlaps 52 pairs and which the twin fixes (F7).
 
+      After the freeze the review found T-303's contraction margin 1.0988e-11 and the gain
+      3.86e8 times it, so RV-3 does not apply (F8); T-303's packing improved square for square,
+      6 squares beyond a tenth, four made upright at the left and twelve turned further (F9);
+      T-303's 49 leaning squares reproduced and the 37 not (F10); the corner adapter's refusal
+      of the twin, which this lane's adapter now reads (F11); the AI named at the pin (F12); the
+      gain exactly 0.00423830938030479085 (F13); and S3. Its six questions for the author hold
+      nothing open: how the leaning squares are counted, which seven and five squares the issue
+      means, whether the near-upright turn of 1.83e-10 degrees was chosen, the twin's form, the
+      AI credit, and whether the local search and the linear program will be published.
+
       This lane read the review's frozen findings at 12:39Z, after its replay, controls and
-      measurements (12:17Z) and registration (12:38Z) were committed. No reply has been posted.
+      measurements (12:17Z) and registration (12:38Z) were committed, and its final head at
+      12:43Z, after mapping the frozen findings. No reply has been posted.
