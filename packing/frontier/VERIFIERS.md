@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **265** programs: **57** external and **208** first-party; **182** decide claims and **83** check premises.
-- **768** of **988** evidence entries name the programs that verified them: 371 independently re-implemented, 322 reproduced with the producer’s code, 53 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
+- **264** programs: **57** external and **207** first-party; **181** decide claims and **83** check premises.
+- **767** of **987** evidence entries name the programs that verified them: 370 independently re-implemented, 322 reproduced with the producer’s code, 53 re-implemented, sharing the producer’s components, 22 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -296,7 +296,6 @@ second implementation agrees.
 | [`V-ozden-983-review-check`](#v-ozden-983-review-check) | l159_check.py with l159_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-ono-984-985-review-check`](#v-ono-984-985-review-check) | l163_check.py with l163_reader.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-jazivxt-989-review-check`](#v-jazivxt-989-review-check) | l169_check.py with l169_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-de-winter-996-review-check`](#v-de-winter-996-review-check) | l180_check.py with l180_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -1614,7 +1613,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-ono-984-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 228 that T-301 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-301 |
 | `E-ono-985-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 147 that T-302 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-302 |
 | `E-jazivxt-989-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 90 that T-303 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-303 |
-| `E-de-winter-996-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 90 that T-304 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-304 |
+| `E-de-winter-997-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 90 that T-304 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-304 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1758,7 +1757,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-ono-984-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 228 that T-301 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-301 |
 | `E-ono-985-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 147 that T-302 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-302 |
 | `E-jazivxt-989-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 90 that T-303 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-303 |
-| `E-de-winter-996-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 90 that T-304 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-304 |
+| `E-de-winter-997-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 90 that T-304 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-304 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -3798,7 +3797,7 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-ono-984-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 228 that T-301 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-301 |
 | `E-ono-985-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 147 that T-302 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-302 |
 | `E-jazivxt-989-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 90 that T-303 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-303 |
-| `E-de-winter-996-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 90 that T-304 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-304 |
+| `E-de-winter-997-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 90 that T-304 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-304 |
 
 ### `V-algebraic-witness-reports`
 
@@ -3945,7 +3944,7 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-ono-984-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 228 that T-301 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-301 |
 | `E-ono-985-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 147 that T-302 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-302 |
 | `E-jazivxt-989-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: the certificate at n = 90 that T-303 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-303 |
-| `E-de-winter-996-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 90 that T-304 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-304 |
+| `E-de-winter-997-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 90 that T-304 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-304 |
 
 ### `V-rehwaldt-n68-verify`
 
@@ -5371,22 +5370,6 @@ The 15 November stage 4 review's exact checker of jazivxt's centre and half-angl
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-jazivxt-989-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 90: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-303 |
-
-### `V-de-winter-996-review-check`
-
-**l180_check.py with l180_reader.py, l180_axes.py, l180_clip.py, l180_decide.py and l180_geom.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
-
-The 15 November stage 4 review's exact checker of Joost de Winter's rational centre-direction certificate of issue 996 (90) and its corner Witness/v2 twin, with a strict reader of its own (l180_reader.py: the JSON's five keys only, every scalar a canonical integer or p/q in lowest terms, floats, constants, duplicate keys, tabs and carriage returns refused; the twin one YAML document of strings, integers, mappings and sequences with no anchors, aliases or tags, its keys inside the schema's lists, held to the JSON's n, side and squares corner for corner): every square a unit square, every wall and every pair twice with no distance filter, by separating axes over the four edge normals in Python integers over per-square denominators, from the JSON's poses (l180_axes.py, method A), and by exact Sutherland-Hodgman clipping in gmpy2.mpq of the twin's own corners, each square a unit square by its sides and diagonals, each pair clipped both ways round and each wall classed by the intersection exactly, containment decided by area (l180_clip.py, method B); l180_decide.py runs both and requires their classes to agree. l180_geom.py holds the closed-form margins and constructions the self-test and controls use; l180_controls.py decides 26 controls stated in a plan hashed before it existed; l180_selftest.py holds both methods and the reader to 31,771 checks.
-
-- Source: [`packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_check.py`](../../packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_check.py), [`packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_reader.py`](../../packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_reader.py), [`packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_axes.py`](../../packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_axes.py), [`packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_clip.py`](../../packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_clip.py), [`packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_decide.py`](../../packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_decide.py), [`packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_geom.py`](../../packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_geom.py), [`packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_selftest.py`](../../packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_selftest.py), [`packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_controls.py`](../../packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_controls.py)
-- Versions run: this repository's commits, which Git holds
-- What its authors read and used: [`docs/project/reviews/review-2026-11-15-de-winter-996.md`](../../docs/project/reviews/review-2026-11-15-de-winter-996.md)
-- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 996 (L180, under think-uhav), strong tier, prompted separately from the import lane (L181, think-32cl)), with its own prompt and code; authorship in common with the producer’s: system-family, The issue says the local optimization, the rational certificate, the checks and the figures were produced with Claude Fable 5.2 (Anthropic), and the local search with GPT-6.1 Sol Max (OpenAI), under Joost de Winter's direction. The seven checker files were frozen at 2026-11-15T12:12:15Z (frozen/checker-frozen-digests.txt), before their author read the author's README, registration, checksums or checkers, or this repository's witness, verifier or promotion code; they import nothing from this repository or the source and reuse no code of any earlier review, lanes L169's and L153's reviews, the models for its method, among them, whose programs it did not open.
-- Note: Written and run on 15 November 2026 for docs/project/reviews/review-2026-11-15-de-winter-996.md, and kept with its receipts in the review-only directory de-winter-996-review-2026-11-15 beside the import lane's packet. l180_plan_facts.py, l180_make_plan.py and l180_describe.py, kept beside them, decide no certificate and are not registered.
-
-| evidence | run | code | coverage | results |
-| --- | --- | --- | --- | --- |
-| `E-de-winter-996-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 90 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-304 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

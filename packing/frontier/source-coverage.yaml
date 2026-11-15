@@ -13424,9 +13424,9 @@ sources:
     records it as a new packing.
     All 3 native jobs have full outcomes.
 - id: de-winter-s90-upper-bound-2026-11-15
-  title: Joost de Winter's packing of 90 squares at JoostdeWinter/square-packing 64d5ee7, issue 996
+  title: Joost de Winter's packing of 90 squares at JoostdeWinter/square-packing fa53fb0, issues 996 and 997
   role: source-repository
-  url: https://github.com/JoostdeWinter/square-packing/tree/64d5ee762a1159248d375973fb33825d51da637d
+  url: https://github.com/JoostdeWinter/square-packing/tree/fa53fb0d734fbf438bcfb73c1434a15894bb2bc5
   local: resources/web/de-winter-s90-upper-bound-2026-11-15/
   source_key: '[de Winter s90 upper bound 2026-11-15]'
   scope:
@@ -13440,18 +13440,22 @@ sources:
   - frontier/results.yaml
   - resources/web/de-winter-s90-upper-bound-2026-11-15/acquisition/claims.json
   evidence:
-  - E-de-winter-996-certificate-report
-  - E-de-winter-996-exact-feasibility
+  - E-de-winter-997-certificate-report
+  - E-de-winter-997-exact-feasibility
   notes: >-
-    The n = 90 centre-direction certificate, its Witness/v2 twin, the author's two checkers and
-    the READMEs are retained for jlevy/squares#996 at 64d5ee7, the commit the issue names, the
-    certificate admitted only where its exact side rounds up to the side the issue prints; the
-    licence, the same bytes the 227, 229 and 260 packet retains, and the two figures are pinned.
-    Licensed MIT by LICENSE at the pin. T-304 records the in-horizon report, 4.24e-03 below
-    T-303, jazivxt's packing and the house at 90, which the issue says a local search improved;
-    its stage 4 review is a separate lane blind to this one (think-uhav). The ledger of 15
-    November for this lane (campaign/issue-intake/upper-bounds-996-20261115) records it,
-    continuing T-303's packing. All 3 native jobs have full outcomes.
+    The n = 90 centre-direction certificate, its Witness/v2 twin, the READMEs, the registration
+    request and the pin's checksums are retained for jlevy/squares#997 at fa53fb0, the commit
+    the issue names, the certificate admitted only where its exact side rounds up to the side
+    the issue prints and the twin held to it as the same packing; the licence, the two
+    checkers, the same bytes the 227, 229 and 260 packet and the 64d5ee7 packet retain, and the
+    two figures are pinned. Licensed MIT by LICENSE at the pin. #997 replaces the certificate
+    #996 named at 64d5ee7, 9.09e-8 larger, which the de-winter-s90-64d5ee7-2026-11-15 packet
+    retains as superseded by its author and no entry registers. T-304 records the in-horizon
+    report, 4.24e-03 below T-303, jazivxt's packing and the house at 90, which the issue says a
+    local search improved; the stage 4 review's addendum on it is a separate lane
+    (think-uhav). The ledger of 15 November for this lane
+    (campaign/issue-intake/upper-bounds-996-997-20261115) records it, continuing T-303's
+    packing. All 3 native jobs have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

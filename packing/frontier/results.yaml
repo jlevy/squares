@@ -47772,9 +47772,9 @@ results:
     headline: >-
       de Winter's local-search improvement of jazivxt's packing at 90, 4.24e-03 below T-303
     claim: >-
-      One complete rational certificate proves s(90) <= 199880777150913904183/20000000000000000000
-      = 9.99403885754569520915, the side terminating at 20 places; #996 prints it rounded up at 12
-      places, 9.994038857546.
+      One complete rational certificate proves s(90) <= 99940387666098521323/10000000000000000000
+      = 9.9940387666098521323, the side terminating at 19 places; #997 prints it rounded up at 12
+      places, 9.994038766610.
 
       It is 4.24e-03 below T-303 (jazivxt's packing of #989, from shifted copies of a crop of
       Joost de Winter's 157), the case's house in both lanes since the pass of 15 November 2026,
@@ -47784,38 +47784,44 @@ results:
       squares beyond a tenth, and each of its 40 tilted squares pairs with one T-303 tilts the
       same way.
 
-      Both maintained exact routes accept the certificate, and the stage 4 review of 15 November
-      2026 accepts it, its clean-room checker independently re-implemented.
+      The author first reported a certificate of the same arrangement in #996, at a side 9.09e-8
+      larger, and replaced it in #997 38 minutes later, asking that the earlier commit be
+      disregarded; this certificate is one to one with that one by nearest centres, no square
+      moved beyond 0.0142. Only this one is registered. Both maintained exact routes accept it;
+      the stage 4 review accepted the replaced certificate, and its addendum on this one is a
+      separate lane (think-uhav).
 
-      The issue says verify_exact.py (separating axes) and check_area.py (the area of each close
+      #997 says verify_exact.py (separating axes) and check_area.py (the area of each close
       pair's clipped intersection), both Python's fractions.Fraction and its standard library
-      only, have one author and read the same input file but share no code, and each reports 90
-      squares and 202 close pairs; that this repository's check_rational_witness_independent.py
-      reports 'VERIFIED: 90 squares, 4005 pairs' on the Witness/v2 file; and that the witness
-      validates against this repository's witness.schema.yaml.
+      only, each report 90 squares and 199 close pairs on the new files, that this repository's
+      check_rational_witness_independent.py reports 'VERIFIED: 90 squares, 4005 pairs' on the
+      Witness/v2 file, and that the witness validates against this repository's
+      witness.schema.yaml; #996 says the two checkers have one author and read the same input
+      file but share no code.
 
-      It says a linear program over all 90 squares, with every contact linearized, found no
-      first-order improvement larger than 4e-10, that the certificate keeps a smallest gap of
-      1e-12 between squares, and that a proof of local or global optimality is missing. Those
-      statements are the author's; no source program ran here.
+      The source's README says a linear program over all 90 squares, with every contact
+      linearized, found no first-order improvement larger than 4e-10, that the replaced
+      certificate passed the same test at a side 9e-8 larger, so the test covers one set of
+      contacts, that the certificate keeps a smallest gap of 2e-12 between squares, and that
+      local optimality has no formal proof. Those statements are the author's; no source program
+      ran here.
 
       Credit jazivxt, T-303's finder, whose packing this is, and Joost de Winter, who improved
-      it, as the issue asks ('as an improvement of jazivxt's packing'): the issue says a local
+      it, as the issues ask ('as an improvement of jazivxt's packing'): the source says a local
       search changed small groups of squares in position and angle, optimized the packing again
-      after each change and kept the changes that gave a smaller side, that seven squares in the
-      upper left of the cluster have a new angle and five along the left wall are axis-aligned.
-      T-303 was itself built from a crop of de Winter's n = 157 packing (T-293).
+      after each change and kept the changes that gave a smaller side; that four squares in the
+      upper left of the cluster are axis-aligned, four at the top lean by 25.1 and 27.8 degrees
+      where T-303 has 22.9, and one axis-aligned square at the top wall lies 0.32 lower. T-303
+      was itself built from a crop of de Winter's n = 157 packing (T-293).
 
-      The issue says the local search was run with GPT-6.1 Sol Max (OpenAI) and the local
+      #996 and #997 say the local search was run with GPT-6.1 Sol Max (OpenAI) and the local
       optimization, rational certificate, checks and figures were produced with Claude Fable 5.2
-      (Anthropic), both under his direction; at the revision the issue names, the source's README
-      named the search's model 'OpenAI Codex (GPT-6 Astra)', which the next commit but one
-      renames.
+      (Anthropic), both under his direction; at the revision #996 named, the source's README
+      named the search's model 'OpenAI Codex (GPT-6 Astra)', which a later commit renames.
 
       Measured here, 40 squares turn beyond a degree, 22.90 to 30.99 degrees, all one way, and the
-      other 50 lie within 1e-3 degrees of upright; the issue counts 37 leaning squares here and 49
-      in T-303, where the measurement finds 44 turned beyond a degree and five within 0.07
-      degrees.
+      other 50 are exactly upright, the 40 leaning squares the source counts; T-303 has 44 turned
+      beyond a degree and five within 0.07 degrees of upright.
     scope:
       n_values:
       - 90
@@ -47828,21 +47834,18 @@ results:
         line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3),
         where new and continued arrangements are S3: beside T-301's 4.76e-03 at 228 and T-297's
         9.74e-03 at 269. A local search over small groups of squares of a recorded packing is no
-        new technique, so not S4. No lower bound or optimum.
+        new technique, so not S4. No lower bound or optimum. The stage 4 review proposes S3 for
+        the replaced certificate, 9.09e-8 above this one.
       scored: '2026-11-15'
-      by: >-
-        think-32cl Joost de Winter import (intake lane L181), confirmed by the stage 4 review of
-        15 November (lane L180), which measures the step as about 225 times T-226's at the low
-        end of S3 and a continued arrangement of T-303
+      by: think-32cl Joost de Winter import (intake lane L181), a draft for the stage 4 review
     novelty: previously-published
     attribution:
       source_keys:
       - '[de Winter s90 upper bound 2026-11-15]'
       published: '2026-11-15'
     evidence:
-    - E-de-winter-996-certificate-report
-    - E-de-winter-996-exact-feasibility
-    - E-de-winter-996-review-exact-feasibility
+    - E-de-winter-997-certificate-report
+    - E-de-winter-997-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/README.md
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/acquisition/claims.json
@@ -47851,71 +47854,73 @@ results:
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/identity.json
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090-996.json
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090-own.json
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/l-step-scan.json
-    - packing/campaign/issue-intake/upper-bounds-996-20261115/README.md
+    - packing/resources/web/de-winter-s90-64d5ee7-2026-11-15/README.md
+    - packing/campaign/issue-intake/upper-bounds-996-997-20261115/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
-    - docs/project/reviews/review-2026-11-15-de-winter-996.md
-    - packing/resources/web/de-winter-996-review-2026-11-15/out/check-n90.json
-    - packing/resources/web/de-winter-996-review-2026-11-15/out/controls-n90.json
-    - packing/resources/web/de-winter-996-review-2026-11-15/out/describe-n90.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l181_1115.py
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
-    - packing/resources/web/de-winter-996-review-2026-11-15/out/controls-n90.json
     notes: >-
       A separate complete repository replay is retained for n = 90: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 24030 pair decisions; summed over the 3 jobs, the receipt records 3.89 route CPU
-      seconds and 3.92 job wall seconds. Squares touch the left or bottom wall exactly, a least
-      wall clearance of 0, the least clearance from the top or right wall about 5.07e-21, and
-      every pair clears by at least 1.0641e-12 (squares 2 and 40), the gap of 1e-12 the source
-      states. The replay is E-de-winter-996-exact-feasibility.
+      routes, 24030 pair decisions; summed over the 3 jobs, the receipt records 2.36 route CPU
+      seconds and 2.38 job wall seconds. Squares touch the left or bottom wall exactly, a least
+      wall clearance of 0, the least clearance from the top or right wall about 2.51e-22, and
+      every pair clears by at least 2.0264e-12 (squares 2 and 40), the gap of 2e-12 the source
+      states. The replay is E-de-winter-997-exact-feasibility.
 
-      The packet's sharp controls (receipts/sharp-controls.json), stated before any route ran,
-      lowered the side to the packing's extent (about 5.07e-21), closed the least-gap pair (square
-      40 toward square 2) by its gap and moved every square toward the nearer near wall by the
-      least clearance, 0: both routes accepted each at exact contact, margin 0, and refused each
-      1e-30 past it. They refused square 40 enlarged to its pair at contact for its shape alone
-      and 1e-30 past it for the overlap as well; square 10, already at its wall, enlarged by 0
-      was accepted and 1e-30 past it refused for the wall and its shape, the branch stated in
-      advance; and they refused a duplicated square.
+      The packet's sharp controls (receipts/sharp-controls.json), stated before any program read
+      this certificate, lowered the side to the packing's extent (about 2.51e-22), closed the
+      least-gap pair (square 40 toward square 2) by its gap and moved every square toward the
+      nearer near wall by the least clearance, 0: both routes accepted each at exact contact,
+      margin 0, and refused each 1e-30 past it. They refused square 40 enlarged to its pair at
+      contact for its shape alone and 1e-30 past it for the overlap as well; square 10, already
+      at its wall, enlarged by 0 was accepted and 1e-30 past it refused for the wall and its
+      shape, the branch stated in advance; and they refused a duplicated square.
 
       At n = 90 the certificate is below the case's ceiling (jazivxt, T-303) by 4.24e-03;
-      smallest: this certificate. No register bound was pending adoption at 90, and no other report
-      reached it. The ledger of 15 November for this lane
-      (campaign/issue-intake/upper-bounds-996-20261115) records this claim, continuing T-303's
-      packing. The lower bounds at 90, the verified 973/100 (T-091) and the reported 489/50
-      (T-212), lie below it. The side the issue quotes from a public merged Kaggle submission,
-      9.998277166917, is above it.
+      smallest: this certificate. No register bound was pending adoption at 90. The ledger of 15
+      November for this lane (campaign/issue-intake/upper-bounds-996-997-20261115) records #997's
+      claim, continuing T-303's packing, and lists #996's as replaced by its author. The lower
+      bounds at 90, the verified 973/100 (T-091) and the reported 489/50 (T-212), lie below it.
+      The side the issues quote from a public merged Kaggle submission, 9.998277166917, is above
+      it.
 
       Measured against padding (RV-3, think-ruu2): T-303's certificate, contracted uniformly about
-      the origin and boxed, has margin 1.0988e-11, wall slack included (1 - lambda* about
-      1.1945e-12, the binding pair squares 79 and 81; measure/contraction-n090.json), so the gain
-      of 4.2383e-03, about 3.9e8 times that margin, lies wholly outside T-303's padding, and RV-3
-      does not reach it. This certificate's own margin is 9.533e-12 (1 - lambda* about
-      1.0599e-12, the binding pair squares 2 and 40; measure/contraction-n090-own.json);
-      contracted so, both routes accept it at a side about 9.5e-12 smaller, which nobody reported
-      and which is not registered (RV-3).
+      the origin and boxed, has margin 1.0988e-11, wall slack included (the binding pair squares
+      79 and 81; measure/contraction-n090.json), so the gain of 4.2384e-03, about 3.9e8 times that
+      margin, lies wholly outside T-303's padding, and RV-3 does not reach it. The replaced
+      certificate's margin is 9.533e-12 (squares 2 and 40; measure/contraction-n090-996.json),
+      and the step from it, 9.09e-8, is about 9.5e3 times that.
+
+      This certificate's own margin is 1.8187e-11 (1 - lambda* about 2.0222e-12, the binding pair
+      squares 2 and 40; measure/contraction-n090-own.json); contracted so, both routes accept it
+      at a side about 1.8e-11 smaller, which nobody reported and which is not registered (RV-3).
 
       Measured pose by pose (measure/identity.json; a measurement, which decides nothing): no
       symmetry of the box pairs it one to one with T-303's packing by nearest centres; the optimal
-      assignment, under the identity, moves 89 squares beyond 1e-3, 34 beyond a hundredth and 6
-      beyond a tenth (largest 0.646), and turns 48 squares by more than 1e-6 radians, by up to
+      assignment, under the identity, moves 87 squares beyond 1e-3, 32 beyond a hundredth and 6
+      beyond a tenth (largest 0.645), and turns 48 squares by more than 1e-6 radians, by up to
       22.91 degrees; aligned by box centres, 16 turn by more than a degree and none reverses its
       tilt. The house witness measures as T-303's packet, and its regularized view nearly so.
-      The source's corner witness is the JSON's packing square for square, its corners listed from
-      the opposite vertex.
+
+      Against the replaced certificate of #996 it is one to one by nearest centres under the
+      identity: 8 squares move beyond a hundredth and none beyond 0.0142, and 19 turn by more than
+      1e-6 radians, by up to 1.17 degrees. The source's corner witness is the JSON's packing pose
+      for pose, its corners read from the vertex they start at (witness-corners-opposite).
 
       The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side stood in
       for 90's ceiling, finds the L-step improvements, extensions and monotonicity consequences
-      main finds: from this side the step lands at 109 at 10.994038857546, above 109's ceiling,
+      main finds: from this side the step lands at 109 at 10.994038766610, above 109's ceiling,
       and s(89) is below this side already. So the bound carries to no other count.
 
-      The local search's groups and order are the issue's account; this lane did not rebuild
+      The local search's groups and order are the source's account; this lane did not rebuild
       them. The source's own checkers were not run or opened here. The two maintained routes share
       this repository's centre-direction reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method. Licensed MIT by LICENSE at the pin. No
@@ -47923,78 +47928,17 @@ results:
 
       The stage 4 review of 15 November 2026
       (docs/project/reviews/review-2026-11-15-de-winter-996.md, lane L180, under think-uhav),
-      written in a separate lane blind to this one, accepts the certificate with seven
-      findings, all notes, none blocking. Its clean-room checker decides every square, wall and
-      all 4,005 pairs by separating axes in Python integers from the JSON's poses and by exact
-      clipping of the twin's own corners in gmpy2.mpq, with no distance filter: every pair
-      strictly apart, 18 single-corner wall contacts, nine at the left and nine at the bottom,
-      and the least pair margin 1.06410355706e-12, at squares 2 and 40, the replay's exactly.
-
-      This lane read the review's frozen findings after its replay, controls, measurements and
-      registration were committed. The review's 26 controls, stated beforehand, were each
-      decided as stated, among them the rotation read the other way (52 pairs overlap), square
-      10 turned by 1e-30 either way at its wall, the side lowered by one unit of its last place
-      (the 15 squares at the right and top cross) and every one of the 4,005 pairs closed to
-      exact contact and 1e-30 past it (E-de-winter-996-review-exact-feasibility).
-
-      The review's findings for the record, which hold no rung: the twin is the JSON's packing
-      corner for corner (F1); the claim's 12-place box is accepted and its floor refused (F3);
-      the side is the packing's extent rounded up at 20 places, the right and top cleared by
-      5.07389735200e-21 by 15 squares (F4), the amount the packet's sharp controls lowered the
-      side by; the near pairs are a contact arrangement opened by about 1e-12, 195 pairs from
-      1.0641e-12 to 9.1968e-12 and then none below 5.85e-6 (F5).
-
-      For the author: no square is exactly upright, 50 sharing one direction turned clockwise
-      by 1.831e-10 degrees and 40 turned clockwise by 22.90 to 30.99 degrees, so no threshold
-      counts the issue's 37 leaning squares (F6), as this lane's identity measurement found; and
-      the JSON names neither the box nor the rotation sense, which the twin fixes (F7).
-
-      After its findings were frozen the review measured the record, the padding and the
-      lineage, each agreeing with this lane where both measured. T-303's contraction margin is
-      1.098813e-11 at squares 79 and 81 and the gain 3.86e8 times it, so RV-3 does not apply;
-      the certificate's own contracts by 9.53e-12 (F8). The gain is exactly
-      0.00423830938030479085, the issue's 0.00424, and no closed form, L step or monotonicity
-      moves another count (F13).
-
-      Against T-303 each square k pairs with T-303's square k under the identity, 6 beyond a
-      tenth (largest 0.646) and 16 turned beyond a degree: four turned squares made upright at
-      the left (43, 57, 58 and 60) and twelve turned further by 1.0 to 4.9 degrees. It is
-      T-303's packing improved square for square, and a new arrangement relative to the grid
-      (F9). T-303's 49 leaning squares reproduce, the new packing's 37 do not (F10).
-
-      The witness-corners adapter refused the twin on its schema address, its square-k ids and
-      its corner order (F11): this lane's adapter now accepts the address and the ids and reads
-      the order as a half turn, a square's symmetry, so the twin measures as the JSON's packing.
-      The pin's README named the local search's model 'OpenAI Codex (GPT-6 Astra)' and the head
-      and the issue GPT-6.1 Sol Max (F12). The review proposes S3. This lane read its final head
-      after mapping the frozen findings; its six questions for the author hold no rung.
+      written blind to this lane, reviewed the certificate #996 named and accepted it with
+      thirteen findings, all notes; this lane's replay of that certificate agreed with it
+      everywhere both measured (the superseded certificate's packet README). Its addendum,
+      which runs the same frozen checker and controls on this certificate, has not been read
+      here.
     next_rung: >-
-      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
-      reviewer and a retained human oversight record; one AI review, of 15 November, is
-      retained. It is the smallest validated side at 90; the case adopts it there in place of
-      T-303 under the house rule in a pass of 16 November 2026, since the pass of 15 November
-      already moved 90, with both strong generators' regularization of the new house. The
-      review's six questions for the author hold no rung, and the smaller sides its F4 and F8
-      measure are the owner's RV-3 question, not registered.
-    reviews:
-    - path: docs/project/reviews/review-2026-11-15-de-winter-996.md
-      kind: adversarial
-      reviewer: >-
-        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 996 (L180,
-        under think-uhav), prompted separately from the import lane (L181, think-32cl) and blind
-        to its work throughout
-      reviewer_kind: ai
-      relation: project
-      date: '2026-11-15'
-      scope: >-
-        Finite feasibility of the centre-direction certificate of issue 996 (90) and its
-        Witness/v2 twin, decided again by a clean-room exact checker frozen before any producer
-        or witness code was read, by two methods, with 26 controls stated in advance and a
-        self-test of 31,771 checks; the claim's arithmetic, the side against the packing's
-        extent, the near pairs, the tilts and the rotation sense.
-      verdict: accepted
-      covers:
-      - T-304
+      The stage 4 review's addendum on this certificate (think-uhav), mapped as an adversarial
+      review covering T-304. Then adopt it at 90 in place of T-303 under the house rule, in a pass
+      of 16 November 2026, since the pass of 15 November already moved 90, with both strong
+      generators' regularization of the new house and the flip of the new house in the same
+      change.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

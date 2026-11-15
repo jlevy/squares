@@ -19,11 +19,12 @@ outputs:
   - papers/square-packing-methods-survey.html
   - papers/square-packing-methods-survey.md
 reason: >-
-  Intake lane L181 of 15 November (think-32cl): Joost de Winter's issue 996 is retained,
-  replayed and registered as T-304, read by the existing center-direction-json adapter, whose
-  corner-witness sibling now also accepts the schema's address and square-k ids so that the
-  source's twin can be measured; the importer gains the packet's house reader, the
-  other-projects card a sentence, the requests entry for #996 and the coverage text follow. No
+  Intake lane L181 of 15 November (think-32cl): Joost de Winter's issues 996 and 997 are
+  retained and replayed, and #997's certificate, which replaces #996's, is registered as
+  T-304, read by the existing center-direction-json adapter; the corner readers accept the
+  twin's schema address and square-k ids, and a new witness-corners-opposite reader holds the
+  twin to it. The importer gains the packet's house reader, the other-projects card a
+  sentence, and the requests entries for #996 and #997 and the coverage text follow. No
   paper prints that count's record, these records or that card. Against origin/main 91acf2022
   (#995): devtools.compare_paper_renders rendered each paper into empty site directories, the
   math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with

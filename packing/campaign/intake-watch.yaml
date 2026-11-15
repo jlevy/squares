@@ -1992,26 +1992,27 @@ repositories:
   # L154 (think-g2ax), L157 (think-2h88) and L158 of 14 November; lane L181 of 15 November
   # (think-32cl).
   - url: https://github.com/JoostdeWinter/square-packing
-    read_through: 9cafa33d43f60423e51058f51dbdf042077c7cc2
+    read_through: 6c0ad56a13346abda6debd73afab7892072896c7
     read_on: '2026-11-15'
     note: >-
-      Read through 9cafa33 (11:29:27Z on 15 November), the head at 12:01Z and 12:04Z, three
-      commits past the 66849f2 read. 64d5ee7 (11:27:26Z), "Add a packing of 90 unit squares
-      with side 9.994038857546", adds n90/, a packing of 90 squares that jlevy/squares#996
-      (11:30:13Z) reports, and a row and a paragraph of the root README; the
-      de-winter-s90-upper-bound-2026-11-15 packet pins 64d5ee7, the commit the issue names,
-      and retains n90/. 0c9bcd2 (11:27:49Z), "Add the registration request and checksums for
-      n = 90", adds n90/REGISTRATION.md, the issue's text in the registration template's form,
-      and n90/SHA256SUMS, whose digests of the seven other files of n90/ at the pin match.
-      9cafa33, "Name GPT-6.1 Sol Max as the model that ran the local search for n = 90",
-      changes the model named for the local search from "OpenAI Codex (GPT-6 Astra)" in
-      n90/README.md and "OpenAI Codex" in the root README to "GPT-6.1 Sol Max (OpenAI)", the
-      name the issue gives, in both and in n90/REGISTRATION.md, and updates n90/SHA256SUMS.
-      Neither later commit changes the certificate, the witness, the checkers or the figures,
-      each the same Git blob at the pin and the head. No packet retains them: they add no
-      bound, certificate or method, and the issue states what REGISTRATION.md does. Lane L181
-      records the model's renaming in the packet's README and the #996 requests entry.
-      Nothing more to import.
+      Read through 6c0ad56 (12:07:15Z on 15 November), the head at 12:55Z, five commits past
+      the 66849f2 read. 64d5ee7 (11:27:26Z), "Add a packing of 90 unit squares with side
+      9.994038857546", adds n90/, a packing of 90 squares that jlevy/squares#996 (11:30:13Z)
+      reports, and a row and a paragraph of the root README; the
+      de-winter-s90-64d5ee7-2026-11-15 packet pins it and retains n90/ as superseded by its
+      author. 0c9bcd2 (11:27:49Z) adds n90/REGISTRATION.md, the issue's text in the
+      registration template's form, and n90/SHA256SUMS; 9cafa33 (11:29:27Z) renames the model
+      named for the local search from "OpenAI Codex (GPT-6 Astra)" to "GPT-6.1 Sol Max
+      (OpenAI)", the name the issue gives. fa53fb0 (12:07:15Z), "Replace the n = 90 packing by
+      one with side 9.994038766610", replaces the certificate, the witness and the figures by
+      a packing 9e-8 smaller that jlevy/squares#997 (12:08:33Z) reports in place of #996's,
+      and corrects the README's counts of leaning squares; the de-winter-s90-upper-bound-2026-11-15
+      packet pins it, the commit the issue names, and retains n90/. 6c0ad56 (12:07:15Z), "Pin
+      the n = 90 registration request to the new certificate", changes only
+      n90/REGISTRATION.md, which now names fa53fb0, and n90/SHA256SUMS, whose digests match
+      fa53fb0's files; no packet retains it, and it adds no bound, certificate or method. Lane
+      L181 (think-32cl) records the replacement in both requests entries and both packets'
+      READMEs. Nothing more to import.
 
       The read of 14 November (lane L158) was through 66849f2 (15:33:56Z on 14 November), the
       head at 16:05Z, one commit past

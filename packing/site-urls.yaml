@@ -24704,9 +24704,8 @@ urls:
       published: '2026-11-15'
     builds_on: null
     evidence:
-    - E-de-winter-996-certificate-report
-    - E-de-winter-996-exact-feasibility
-    - E-de-winter-996-review-exact-feasibility
+    - E-de-winter-997-certificate-report
+    - E-de-winter-997-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/README.md
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/acquisition/claims.json
@@ -24715,16 +24714,14 @@ urls:
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/identity.json
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090-996.json
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090-own.json
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/l-step-scan.json
-    - packing/campaign/issue-intake/upper-bounds-996-20261115/README.md
+    - packing/resources/web/de-winter-s90-64d5ee7-2026-11-15/README.md
+    - packing/campaign/issue-intake/upper-bounds-996-997-20261115/README.md
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
-    - docs/project/reviews/review-2026-11-15-de-winter-996.md
-    - packing/resources/web/de-winter-996-review-2026-11-15/out/check-n90.json
-    - packing/resources/web/de-winter-996-review-2026-11-15/out/controls-n90.json
-    - packing/resources/web/de-winter-996-review-2026-11-15/out/describe-n90.json
 - path: results.html
   canonical: results.html
   kind: page
