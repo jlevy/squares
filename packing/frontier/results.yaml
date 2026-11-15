@@ -47542,10 +47542,12 @@ results:
       made exact. The README says the arrangement was found during Kaggle's Squares in Squares
       competition.
 
-      The issue asks for credit to 'jazivxt and GPT-6 Astra Ultra' and says GPT-6 Astra Ultra was
-      the AI collaborator on the search and verification; the source's first published README, 40
-      seconds earlier, named it 'Codex Astra Ultra'. The issue was opened by the account dpre4ai, whose
-      commits name 'Daniel'; whether that account is jazivxt is not established here.
+      The issue asks for credit to 'jazivxt and GPT-6 Astra Ultra' and says GPT-6 Astra Ultra
+      was the AI collaborator on the search and verification; the source's first published
+      README, 40 seconds before the revision the issue names, named it 'Codex Astra Ultra'. The
+      issue was opened by the account dpre4ai, whose commits name 'Daniel' (nothing ties that
+      name to Evan Daniel or to jazivxt); whether that account is jazivxt is not established
+      here.
 
       Measured here, 44 squares turn beyond a degree, 22.6 to 31.6 degrees, all one way; five more
       lie within 0.07 degrees of upright and 41 are exactly upright.
@@ -47558,12 +47560,12 @@ results:
       score: 3
       rationale: >-
         A count whose best known packing was the trivial grid now has one below it, as T-293 at
-        157, T-220 at 183 and T-057 at 211 (each S3). 90 = 10^2 - 10: the record held s(k^2 - k) <
-        k at k = 11 to 18 and the grid at k = 4 to 9 and 10, so the smallest k shown drops from 11
-        to 10, and the case's conjectured integer optimum is beaten. S3 by the anchor 'a substantive
-        case result'; the margin, about 0.0017, carries to no other count, and a window of shifted
-        copies of a crop of a known packing continues a known construction, so no technique is new
-        and it is not S4. No lower bound or optimum.
+        157, T-220 at 183, T-057 at 211 and T-135 at 308 (each S3). 90 = 10^2 - 10: the record
+        held s(k^2 - k) < k at k = 11 to 18 and the grid at k = 4 to 9 and 10, so the smallest
+        k shown drops from 11 to 10, and the case's conjectured integer optimum is beaten. S3
+        by the anchor 'a substantive case result'; the margin, about 0.0017, carries to no
+        other count, and a window of shifted copies of a crop of a known packing continues a
+        known construction, so no technique is new and it is not S4. No lower bound or optimum.
       scored: '2026-11-15'
       by: >-
         think-i8y9 jazivxt import (intake lane L170), confirmed by the stage 4 review of 15
@@ -47662,17 +47664,22 @@ results:
 
       The stage 4 review of 15 November 2026
       (docs/project/reviews/review-2026-11-15-jazivxt-989.md, lane L169, under think-176a),
-      written in a separate lane blind to this one, accepts the certificate with seven findings,
-      all notes, none blocking. Its clean-room checker decides every square, wall and all 4,005
-      pairs by separating axes in Python integers and by exact clipping in gmpy2.mpq, with no
-      distance filter: every pair strictly apart, no square touching a wall, the least clearance
-      2.1000000001021e-15 (squares 28, 33 and 75 at the bottom, 61, 62 and 71 at the left), and
-      the least pair margin 1.194484972e-12, at squares 79 and 81, the replay's exactly.
+      written in a separate lane blind to this one, accepts the certificate with fourteen
+      findings, seven frozen and seven after the freeze, all notes, none blocking. Its
+      clean-room checker decides every square, wall and all 4,005 pairs by separating axes in
+      Python integers and by exact clipping in gmpy2.mpq, with no distance filter: every pair
+      strictly apart, no square touching a wall, the least clearance 2.1000000001021e-15
+      (squares 28, 33 and 75 at the bottom, 61, 62 and 71 at the left), and the least pair
+      margin 1.194484972e-12, at squares 79 and 81, the replay's exactly.
 
-      Its 23 controls, stated beforehand, were each decided as stated, among them the rotation read the
-      other way (66 pairs overlap), the side lowered by one unit of its last place (13 squares
-      cross the right and top walls) and every one of the 4,005 pairs closed to exact contact and
-      1e-30 past it (E-jazivxt-989-review-exact-feasibility).
+      This lane read the review's frozen findings after its replay, controls, measurements and
+      registration were committed, wrote the adoption on that verdict, and read and merged the
+      final head before mapping it.
+
+      The review's 23 controls, stated beforehand, were each decided as stated, among them the
+      rotation read the other way (66 pairs overlap), the side lowered by one unit of its last
+      place (13 squares cross the right and top walls) and every one of the 4,005 pairs closed
+      to exact contact and 1e-30 past it (E-jazivxt-989-review-exact-feasibility).
 
       The review's findings for the record, which hold no rung: the side is the claim exactly
       (F3); the side is not the packing's extent, the left and bottom cleared by 2.1e-15 and the
@@ -47692,15 +47699,18 @@ results:
       case's conjectured integer optimum and its prose that nothing beats the grid are refuted
       (F9).
 
-      The grid has no contraction margin, so RV-3 does not apply; the certificate contracts
-      by 1.0988e-11 and has a further 2.398e-13 of wall slack (F10), the replay's margins
-      exactly. The construction reproduces from de Winter's 157 as the T-293 packet retains it:
-      the crop to the top of his square 103 is 9.3533845 high, a copy shifted by one unit clears
-      it at pitch 9.019403129, and the certificate pairs one to one with the 90 squares of a
-      side-10 window across the two copies under the identity, no square moving beyond 0.146 or
-      turning beyond 4.02 degrees; where the window sat the README does not say (F11). This lane
-      measured that the file the issue links is the same Git blob as that copy, which the review
-      could not compare.
+      The grid has no contraction margin, so RV-3 does not apply; the certificate contracts by
+      1.0988e-11 (F10), the replay's margin exactly, which already contains F4's 2.398e-13 of
+      wall slack, since the measurement boxes the contracted packing; contraction alone takes
+      off 1.0748e-11.
+
+      The construction reproduces from de Winter's 157 as the T-293 packet retains it: the crop
+      to the top of his square 103 is 9.3533845 high, a copy shifted by one unit clears it at
+      pitch 9.019403129, and the certificate pairs one to one with the 90 squares of a side-10
+      window across the two copies under the identity, no square moving beyond 0.146 or turning
+      beyond 4.02 degrees; where the window sat the README does not say (F11). This lane
+      measured that the file the issue links is the same Git blob as that copy, which the
+      review could not compare.
 
       Its CSV equals the certificate to 8.2e-16. For the author: no licence for the author's own
       files (F12), and the commit before the pin credited Codex Astra Ultra (F13). The review's
@@ -47726,12 +47736,12 @@ results:
       think-ikku); no report states that side.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
-      reviewer and a retained human oversight record; one AI review, of 15 November, is retained.
-      It is the smallest validated side at 90, and the case adopts it there, the first adoption at
-      90, in the pass of 15 November 2026 under the house rule, in place of the 10 x 10 grid, with
-      both strong generators' regularization of the new house; the grid keeps its replay as
-      history. The review's question for the author holds no rung, and the contracted side its
-      F4 measures is the owner's RV-3 question, not registered.
+      reviewer and a retained human oversight record; one AI review, of 15 November, is
+      retained. It is the smallest validated side at 90, and the case adopts it there, the
+      first adoption at 90, in the pass of 15 November 2026 under the house rule, in place of
+      the 10 x 10 grid, with both strong generators' regularization of the new house; the grid
+      keeps its replay as history. The review's six questions for the author hold no rung, and
+      the smaller sides its F4 and F10 measure are the owner's RV-3 question, not registered.
     reviews:
     - path: docs/project/reviews/review-2026-11-15-jazivxt-989.md
       kind: adversarial

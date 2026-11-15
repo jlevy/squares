@@ -4,10 +4,12 @@ These are the strong generators’ runs on the witness that the adoption of jazi
 issue 989 wrote at 90 in the pass of 15 November 2026, under
 [the house rule](../../../campaign/result-import.md#the-house-rule), on the accepted
 verdict of the stage 4 review of 15 November 2026
-([review-2026-11-15-jazivxt-989.md](../../../../docs/project/reviews/review-2026-11-15-jazivxt-989.md)),
-whose frozen findings this lane read at 03:33Z and whose final head it read at 03:58Z on
-15 November, after its own replay, controls, measurements and registration were
-committed:
+([review-2026-11-15-jazivxt-989.md](../../../../docs/project/reviews/review-2026-11-15-jazivxt-989.md))
+as its frozen findings gave it.
+This lane read those findings at 03:33Z on 15 November, after its own replay, controls,
+measurements and registration were committed, wrote the adoption at 03:42Z and ran these
+generators on that verdict, and read the review’s final head, the checks after the
+freeze, at 03:58Z, as the driver’s run finished:
 
 | n | House | Replaces | Adopted |
 | ---: | --- | --- | --- |

@@ -34538,26 +34538,26 @@ issues:
     triage: done
     summary: >-
       The account dpre4ai, in its first contribution, asks for the registration of s(90) <=
-      4999138583463/500000000000 = 9.998277166926, the exact rational side of n90.cert, which
-      terminates at 12 places, 1.72e-03 below the 10 x 10 grid's 10, the case's house in both
-      lanes: an exact rational certificate of centres and half-angle tangents in Evan Daniel's
-      text format, the issue says made from a crop of Joost de Winter's n = 157 packing whose
-      copies, offset horizontally by one unit, fit at a smaller pitch, a square window across
-      two copies holding 90 squares, then tightened and made exact. It asks for credit to
-      'jazivxt and GPT-6 Astra Ultra', names jazivxt's Kaggle profile and says GPT-6 Astra
-      Ultra was the AI collaborator on the search and verification. It reports Francisco
-      Couzo's checker accepting the certificate in strict mode and a separate exact check of
-      every wall and all 4,005 pairs, least separation about 1.19e-12. Triaged, retained and
-      registered on 15 November 2026 in lane L170 (think-i8y9) as T-303: the stated digest
-      holds, the print is the exact side, and both maintained exact routes accept the
-      certificate and refuse its gross and sharp controls; measured, it is a new arrangement,
-      the first packing below the grid at 90 on record, 52 squares beyond a tenth of the
-      grid's. The grid's contraction margin is 0, so the gain lies wholly outside any padding.
-      The ledger of 15 November records it. The 15 November stage 4 review, written blind in
-      a separate lane (lane L169, think-176a), accepts it with seven findings, all notes; its
-      clean-room checker decided it again, so the entry is confirmed, independently
-      re-implemented, at V3/C3, and the case adopted it as its house at 90 in the pass of 15
-      November.
+      4999138583463/500000000000 = 9.998277166926, the exact rational side of n90.cert,
+      which terminates at 12 places, 1.72e-03 below the 10 x 10 grid's 10, the case's house
+      in both lanes: an exact rational certificate of centres and half-angle tangents in
+      Evan Daniel's text format, the issue says made from a crop of Joost de Winter's n =
+      157 packing whose copies, offset horizontally by one unit, fit at a smaller pitch, a
+      square window across two copies holding 90 squares, then tightened and made exact. It
+      asks for credit to 'jazivxt and GPT-6 Astra Ultra', names jazivxt's Kaggle profile and
+      says GPT-6 Astra Ultra was the AI collaborator on the search and verification. It
+      reports Francisco Couzo's checker accepting the certificate in strict mode and a
+      separate exact check of every wall and all 4,005 pairs, least separation about
+      1.19e-12. Triaged, retained and registered on 15 November 2026 in lane L170
+      (think-i8y9) as T-303: the stated digest holds, the print is the exact side, and both
+      maintained exact routes accept the certificate and refuse its gross and sharp
+      controls; measured, it is a new arrangement, the first packing below the grid at 90 on
+      record, 52 squares beyond a tenth of the grid's. The grid's contraction margin is 0,
+      so the gain lies wholly outside any padding. The ledger of 15 November records it. The
+      15 November stage 4 review, written blind in a separate lane (lane L169, think-176a),
+      accepts it with fourteen findings, all notes; its clean-room checker decided it again,
+      so the entry is confirmed, independently re-implemented, at V3/C3, and the case
+      adopted it as its house at 90 in the pass of 15 November.
     read_through: '2026-11-15T03:00:53Z'
     results:
     - key: n90-shifted-window
@@ -34581,23 +34581,24 @@ issues:
       reply on main says what was retained and replayed, what the review found and that the
       case adopted it.
     notes: >-
-      Read on 15 November 2026 from main a4f36ae70; no comment on the issue, which carried the
-      intake label from 03:09:15Z, its only event. The account dpre4ai's only issue on this
-      repository is this one, with no comment, so this is its first contribution; its commits
-      name 'Daniel', and the issue asks that jazivxt be credited, whose Kaggle profile it
-      links. Whether the account is jazivxt is not established, and no contributor profile
-      exists for either: the census spans the registration adds stay unresolved for identity
-      review. The record credits people, not AI agents (attribution.md), so the credit is
-      jazivxt's, after de Winter, and GPT-6 Astra Ultra is named as the AI collaborator in
-      the source's words; the source's first README, e5c2ecc, 40 seconds before 179fcba,
-      named it 'Codex Astra Ultra'. The issue names 179fcba (03:00:42Z), 11 seconds before it;
-      the packet pins the repository's main, f9b31b4, whose one commit past 179fcba adds a
-      construction figure, the certificate unchanged. The certificate was first committed in
-      e5c2ecc (03:00:02Z), and GitHub's activity log was not read, so the issue dates the
-      claim. The issue's improvement, 0.001722833074, is the exact gap to the grid's 10. The
-      repository states no licence; the account submitted it in the issue, so the presumption
-      of permission of 24 October 2026 (think-cnn7) applies, and DONOR-LICENSE.txt is de
-      Winter's MIT notice for the donor.
+      Read on 15 November 2026 from main a4f36ae70; no comment on the issue, which carried
+      the intake label from 03:09:15Z, its only event. The account dpre4ai's only issue on
+      this repository is this one, with no comment, so this is its first contribution; its
+      commits name 'Daniel' (nothing ties that name to Evan Daniel or to jazivxt), and the
+      issue asks that jazivxt be credited, whose Kaggle profile it links. Whether the
+      account is jazivxt is not established, and no contributor profile exists for either:
+      the census spans the registration adds stay unresolved for identity review. The record
+      credits people, not AI agents (attribution.md), so the credit is jazivxt's, after de
+      Winter, and GPT-6 Astra Ultra is named as the AI collaborator in the source's words;
+      the source's first README, e5c2ecc, 40 seconds before 179fcba, named it 'Codex Astra
+      Ultra'. The issue names 179fcba (03:00:42Z), 11 seconds before it; the packet pins the
+      repository's main, f9b31b4, whose one commit past 179fcba adds a construction figure,
+      the certificate unchanged. The certificate was first committed in e5c2ecc (03:00:02Z),
+      and GitHub's activity log was not read, so the issue dates the claim. The issue's
+      improvement, 0.001722833074, is the exact gap to the grid's 10. The repository states
+      no licence; the account submitted it in the issue, so the presumption of permission of
+      24 October 2026 (think-cnn7) applies, and DONOR-LICENSE.txt is de Winter's MIT notice
+      for the donor.
 
       Measured against padding, the grid at 90 has margin 0 (squares 1 and 2 touch), so none
       of the gain is a predecessor's padding and RV-3 (think-ruu2) does not reach this entry.
@@ -34613,20 +34614,23 @@ issues:
 
       The review measured the issue's statements: the side is the claim exactly (F3); every
       pair is strictly apart and no square touches a wall, the least pair margin
-      1.194484972e-12 at squares 79 and 81, the replay's, and the issue's "exceeded 1.19e-12"
-      holds (F1, F5); the side is not the packing's extent, the squares fitting a box
-      2.398e-13 smaller (F4); the file states neither the box nor the rotation sense, which
-      read clockwise overlaps 66 pairs, the one question for the author, which holds nothing
-      open (F6), which the source's README answers (F14). After its freeze the review found
-      nothing in the record claiming s(90) = 10 (F8), the case's conjectured integer optimum
-      refuted (F9), RV-3 not applying (F10), the construction reproduced from de Winter's 157
-      as the T-293 packet retains it, the window's place unstated (F11), no licence for the
-      author's own files (F12) and the earlier credit to Codex Astra Ultra (F13); it scores S3,
-      the smallest n with s(n^2 - n) < n falling from 11 to 10. This lane read the review's
+      1.194484972e-12 at squares 79 and 81, the replay's, and the issue's "exceeded
+      1.19e-12" holds (F1, F5); the side is not the packing's extent, the squares fitting a
+      box 2.398e-13 smaller (F4); the file states neither the box nor the rotation sense,
+      which read clockwise overlaps 66 pairs, a question for the author (F6), which the
+      source's README answers (F14). After its freeze the review found nothing in the record
+      claiming s(90) = 10 (F8), the case's conjectured integer optimum refuted (F9), RV-3
+      not applying (F10), the construction reproduced from de Winter's 157 as the T-293
+      packet retains it, the window's place unstated (F11), no licence for the author's own
+      files (F12) and the earlier credit to Codex Astra Ultra (F13); it scores S3, the
+      smallest n with s(n^2 - n) < n falling from 11 to 10. This lane read the review's
       frozen findings at 03:33Z, after its replay, controls, measurements and registration
       were committed, and its final head at 03:58Z, after it had written the adoption, and
       found c70defa's n157_exact.json the same blob as the retained copy, which the review
-      could not compare. The review's six questions for the author hold nothing open.
+      could not compare. The review's six questions for the author hold nothing open. Its
+      F13 suggests crediting 'jazivxt and GPT-6 Astra Ultra', as the issue asks; the record
+      declines the AI credit under attribution.md, which credits people, not AI agents, and
+      names GPT-6 Astra Ultra as the AI collaborator in the source's words.
 
       Adopted at 90 in the pass of 15 November 2026 (written at 03:42Z) under the house rule,
       the first adoption at 90, in place of the 10 x 10 grid, with jazivxt the finder after de

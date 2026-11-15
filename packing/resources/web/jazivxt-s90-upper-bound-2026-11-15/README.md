@@ -96,7 +96,8 @@ November 2026), through the `evand-cert` reader:
   − 2), T-064 (k² − 3), T-081 (k² − 4) and T-298 (k² − 5) do not reach 90 = 10² − 10,
   and the local-minimum claims of T-124 and T-261 that list 90 are about their own
   source configurations and claim no global bound.
-  The case’s conjectured optimum is the integer, 10, which this side is below.
+  The case’s conjectured optimum was the integer, 10, which this side is below; the
+  adoption withdrew it.
 
 ## Report Order
 
@@ -114,7 +115,7 @@ The optimal assignment moves every square beyond 10⁻³, 54 beyond 0.01 and 52 
 (largest 1.33219), and turns 48 squares by more than 10⁻⁶ radians.
 Tilted beyond a degree: 44, at 22.61 to 31.56 degrees, all clockwise; five more are
 within 0.07 degrees of upright, and 41 are exactly upright (t = 0). So it is a new
-arrangement relative to the grid, as the issue says.
+arrangement relative to the grid.
 The 157 packing it starts from is at another count, which the measurement cannot pair.
 
 ## Exact Replay
@@ -214,6 +215,10 @@ lineage, each agreeing with this packet where both measured:
 - **RV-3 does not apply** (F10): the grid’s contraction margin is 0 (squares 1 and 2),
   and the certificate’s own, 1.0988 × 10⁻¹¹ (squares 79 and 81), equals
   [measure/contraction-n090-own.json](measure/contraction-n090-own.json)’s.
+  The review’s “further 2.398 × 10⁻¹³ of wall slack” (F10) is inside that margin, not
+  beyond it: `contraction_margin` boxes the contracted packing, and contraction alone
+  takes off 1.0748 × 10⁻¹¹. The KKT side’s 1.108 × 10⁻¹¹ lies 9.2 × 10⁻¹⁴ beyond all
+  the padding measured.
 - **Identity**: against the grid its optimal assignment moves 90, 54 and 52 squares
   beyond 10⁻³, 10⁻² and 10⁻¹, largest 1.332, as
   [measure/identity.json](measure/identity.json) does.
@@ -257,9 +262,9 @@ against the grid’s 10, and 15 separate, against none.
 - **Optimality** of any kind.
 - **The lineage** the source states, beyond what the measurement above shows; the crop
   and window from de Winter’s 157 were not rebuilt here.
-- **Identity.** Whether the account `dpre4ai`, whose commits name “Daniel”, is jazivxt
-  or posts for jazivxt is not established; the record credits the name the issue asks
-  for.
+- **Identity.** Whether the account `dpre4ai`, whose commits name “Daniel” (nothing
+  ties that name to Evan Daniel or to jazivxt), is jazivxt or posts for jazivxt is not
+  established; the record credits the name the issue asks for.
 
 ## Credit and Licence
 
@@ -269,8 +274,9 @@ The issue names GPT-6 Astra Ultra as the AI collaborator on the search and verif
 The bibliography key is **[jazivxt s90 upper bound 2026-11-15]**. The repository states
 no licence for its own data or prose; the account submitted it in the issue, so the
 owner’s ruling of 24 October 2026 (think-cnn7) gives a presumption of permission to
-retain and import it, and the certificate is factual data under the owner decision of 9
-October 2026 as well.
+retain and import it; the licence follow-up is think-86c1, and the stage 7 reply asks
+the author (the review’s question 1).
+The certificate is factual data under the owner decision of 9 October 2026 as well.
 `DONOR-LICENSE.txt` is Joost de Winter’s MIT notice for the donor packing.
 
 ## Commands
@@ -285,6 +291,8 @@ python -m devtools.upper_bound_reports $P check-claims --write
 python -m devtools.upper_bound_reports $P certify --jobs-dir "$TMPDIR/jobs" --workers 2
 python -m devtools.upper_bound_reports $P check --replay
 python -m devtools.upper_bound_reports $P sharp-controls
+# The next two commands read the grid's witnesses/known-best/n-090.yaml
+# (at a3e4ea0c5, before the adoption).
 python -m devtools.measure_identity --n 90 "JAZIVXT=packet:$P" \
   'grid=witness-corners:witnesses/known-best/n-090.yaml' \
   --out resources/web/$P/measure/identity.json

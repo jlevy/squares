@@ -4,9 +4,9 @@
 imported `n <= 100` corpus, and what the residue has in common. The radical n51 strip
 has two tilted components the grammar does not express, and since 15 November 2026
 jazivxt's packing at 90 (T-303, adopted in place of the 10 x 10 grid) has one, of seven
-squares at 67.09 degrees, interior; the remaining residue consists of axis-aligned
-polyominoes. Every other tilted component is a singleton, a bar, an L or a rectangle, all
-expressible.
+squares at 67.09 degrees (-22.91 degrees modulo a quarter turn, F7's -22.914477),
+interior; the remaining residue consists of axis-aligned polyominoes. Every other tilted
+component is a singleton, a bar, an L or a rectangle, all expressible.
 
 These assertions exist because that is a load-bearing claim for the partition-instrument
 design, and because it is exactly the kind of clean result that should be pinned before it
@@ -57,9 +57,9 @@ def test_only_the_radical_strip_and_the_90_window_have_tilted_unexpressed_compon
     angles = {
         str(component["angle_degrees"])
         for entry in band()
-        if entry["n"] not in {51, 90}
         for component in entry["components"]
         if component["shape"] == "other-polyomino"
+        if not is_tilted(str(component["angle_degrees"]))
     }
     # Axis-aligned to within 1e-9 degrees. The one residual is n = 68's corner block, in
     # Francisco Couzo's numerically optimized pose since 2026-09-29, at 3.2e-10 degrees.
