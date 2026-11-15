@@ -19736,6 +19736,18 @@ occurrences:
     credit. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-147.md
+    record_key: '147'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Roberto Ono
+  start: 0
+  end: 11
+  label: Roberto Ono
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-148.md
     record_key: '148'
     field: /reported_lower_bound/proved_by/0
@@ -21775,10 +21787,10 @@ occurrences:
     path: packing/frontier/n-228.md
     record_key: '228'
     field: /reported_upper_bound/found_by/0
-  expected_text: Doğa Özden
+  expected_text: Roberto Ono
   start: 0
-  end: 10
-  label: Doğa Özden
+  end: 11
+  label: Roberto Ono
   role: construction-finder
   disposition: unresolved
   evidence: []

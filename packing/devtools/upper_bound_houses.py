@@ -698,8 +698,15 @@ def _sources() -> dict[str, Source]:
         packet_source("T-299", "de-winter-s297-upper-bound-2026-11-14"),
         # Lane L160 of 14 November 2026 (think-14i2) moved 228 from T-174 to Doğa Özden's issue
         # 983 (T-300), a new arrangement relative to T-174's packing from his lab's column-band
-        # proposal designer; T-174 still houses other counts.
-        packet_source("T-300", "ozden-s228-upper-bound-2026-11-14"),
+        # proposal designer; T-174 still houses other counts. Lane L164 (think-17ex) moved 228
+        # on to Roberto Ono's issue 984 (T-301) in the pass of 15 November 2026, five band
+        # periods cut from Francisco Couzo's n = 404 packing, a new arrangement relative to
+        # T-300's packing. 228 was T-300's only count, so T-300 is no source here now.
+        packet_source("T-301", "ono-issue984-2026-11-14"),
+        # The same lane moved 147, first adopted here, from the case record's own house (the
+        # Kingbird catalogue's 45-degree packing, verified by T-155's exact ceiling) to his
+        # issue 985 (T-302), one band period cut from Evan Daniel's n = 229 packing.
+        packet_source("T-302", "ono-issue985-2026-11-14"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -791,6 +798,11 @@ def _sources() -> dict[str, Source]:
 #: packing, de Winter its finder; T-174 still houses other counts. Lane L160 (think-14i2)
 #: adopted Doğa Özden's issue 983 (T-300) at 228 from T-174 in the same pass, a new
 #: arrangement relative to T-174's packing, Özden its finder; T-174 still houses other counts.
+#: Lane L164 (think-17ex) adopted Roberto Ono's issue 984 (T-301) at 228 in place of T-300 in
+#: the pass of 15 November 2026, five band periods cut from Francisco Couzo's n = 404
+#: packing, a new arrangement relative to T-300's packing, Ono its finder, and his issue 985
+#: (T-302) at 147, first adopted here, from the case record's own house, one band period cut
+#: from Evan Daniel's n = 229 packing, Ono its finder; T-300 keeps no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -810,6 +822,7 @@ ADOPTED: dict[int, str] = {
     131: "T-174",
     132: "T-292",
     146: "T-187",
+    147: "T-302",
     153: "T-174",
     154: "T-222",
     155: "T-197",
@@ -832,7 +845,7 @@ ADOPTED: dict[int, str] = {
     210: "T-174",
     211: "T-188",
     227: "T-225",
-    228: "T-300",
+    228: "T-301",
     229: "T-225",
     232: "T-275",
     236: "T-218",
@@ -992,6 +1005,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: The same day's lane L160 (think-3guf, think-14i2) adopted T-300 at 228, Doğa Özden's issue
 #: 983, from T-174, whose house 228 had also been since the pass of 17 October; 228 is
 #: another count, so that day's archive takes a row for it beside 297's.
+#: The pass of 15 November 2026 (think-3guf, think-17ex) adopted T-301 at 228, Roberto Ono's
+#: issue 984, from T-300: the pass of 14 November had already moved 228 (lane L160), and a
+#: day's archive holds one prior state a count, as at 179, 260, 268 and 269. The same pass
+#: adopted T-302 at 147, his issue 985, from the case record's own house, which no pass had
+#: adopted before. Lane L164 made both on 14 November and adopted them on 15 November.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1080,6 +1098,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-12": frozenset({179, 237, 269}),
     "2026-11-13": frozenset({269}),
     "2026-11-14": frozenset({228, 297}),
+    "2026-11-15": frozenset({147, 228}),
 }
 
 

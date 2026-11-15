@@ -721,7 +721,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/144.html | cases/144.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/145.html | cases/145.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/146.html | cases/146.html | record | overview | 2026-10-03 | 2026-11-04 | live |
-| cases/147.html | cases/147.html | record | overview | 2026-10-03 | 2026-11-14 | live |
+| cases/147.html | cases/147.html | record | overview | 2026-10-03 | 2026-11-15 | live |
 | cases/148.html | cases/148.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/149.html | cases/149.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/15.html | cases/15.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -811,7 +811,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/225.html | cases/225.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/226.html | cases/226.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/227.html | cases/227.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/228.html | cases/228.html | record | overview | 2026-10-03 | 2026-11-14 | live |
+| cases/228.html | cases/228.html | record | overview | 2026-10-03 | 2026-11-15 | live |
 | cases/229.html | cases/229.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/23.html | cases/23.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/230.html | cases/230.html | record | overview | 2026-10-03 | 2026-10-31 | live |

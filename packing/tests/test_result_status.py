@@ -472,6 +472,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # the house, is superseded once lane L154 adopted Joost de Winter's issue-977
         # certificate (T-299) there in the pass of 14 November 2026, 9.62e-04 below it.
         "T-247",
+        # Lane L164 took 228, the only house of Doğa Özden's issue-983 certificate (T-300), to
+        # Roberto Ono's issue-984 certificate (T-301) in the pass of 15 November 2026.
+        "T-300",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -547,7 +550,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # supersedes it. The pass of 13 November took 269, T-296's only house, on to his
     # issue-967 certificate (T-297), which supersedes it. The pass of 14 November took 297 to
     # Joost de Winter's issue-977 certificate (T-299), which supersedes T-247 there; T-174
-    # keeps its other houses.
+    # keeps its other houses. The pass of 15 November took 228, T-300's only house, to Roberto
+    # Ono's issue-984 certificate (T-301), which supersedes it, and 147, first adopted, to his
+    # issue-985 certificate (T-302).
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

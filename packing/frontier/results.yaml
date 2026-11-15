@@ -46955,10 +46955,11 @@ results:
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 14 November, is
-      retained. It is the smallest validated side at 228, and the case adopted it there in the
-      pass of 14 November 2026 under the house rule, in place of T-174, with both strong
-      generators' regularization of the new house; T-174, T-128, T-098, T-092 and T-056 keep
-      their certificates as history. The review's questions for the author hold no rung, and the
+      retained. The case adopted it at 228 in the pass of 14 November 2026 under the house
+      rule, in place of T-174, with both strong generators' regularization of the new house,
+      and Roberto Ono's packing of #984, T-301, replaced it there in the pass of 15 November;
+      it keeps its certificate as history, as T-174, T-128, T-098, T-092 and T-056 do. The
+      review's questions for the author hold no rung, and the
       contracted side its F5 measures and the regularizer's KKT side are the owner's RV-3
       question, not registered.
     reviews:
@@ -46995,15 +46996,17 @@ results:
       #984 prints it.
 
       It is 4.76e-03 below T-300 (Doğa Özden's column-band packing), the case's house best
-      packing since the pass of 14 November, and 8.56e-03 below T-174 (Francisco Couzo's
-      packing, improved by PingYou Ltd), the house before it. Measured here it is a new
+      packing from the pass of 14 November until this adoption, and 8.56e-03 below T-174
+      (Francisco Couzo's packing, improved by PingYou Ltd), the house before it. Measured here it is a new
       arrangement relative to both, not one to one with either under any symmetry of the box by
       nearest centres: the optimal assignment moves 96 squares beyond a tenth of T-300's and 89
       of T-174's.
 
       Both maintained exact routes accept the certificate, and the stage 4 review of 14
       November 2026 accepts it, its clean-room checker independently re-implemented, and
-      accepts the same squares in the box of the claim's own side, 15.596043120921 (F4).
+      accepts the same squares in the box of the claim's own side, 15.596043120921 (F4); the
+      case adopted it as its house in the pass of 15 November under the house rule, in place
+      of T-300.
 
       The issue says the repository's frozen verifier, verify.py (exact Fraction arithmetic,
       separating axes, all 25878 pairs), reports VALID; that search/indep_check.py, exact
@@ -47187,13 +47190,43 @@ results:
       (F6); whether two checkers would raise rather than assert, and verify.py refuse a missing
       t and unknown keys (F13); whether the strict JSON's digests would be stated (F7); and
       whether the diagonal-period sweep's near misses will be published.
+
+      Adopted at 228 in the pass of 15 November 2026 under the house rule, in place of T-300,
+      which the pass of 14 November had adopted there; one day's archive holds one prior
+      state a count, so the adoption waited for 15 November, and this lane wrote it at 00:01Z.
+      The packing's credit goes to Roberto Ono, its finder, from a band cut of Francisco
+      Couzo's n = 404 packing, below Doğa Özden's column-band packing, as the issue asks, with
+      both strong generators' regularization of the new house, measured against the new
+      witness, in the same change. T-300 keeps its certificate as history, a verified bound
+      at V3/C3, and houses no other count.
+
+      The rigidity block was derived again on the new witness and stays not rigid: 110 of its
+      228 squares translate, 76 of them separating, against T-300's 123 and 80. Both strong
+      generators ran on the new witness (packing/cases/regularized_drawings/think-17ex-2026-11-15/):
+      grid-slack's views at 0.5, 1 and 5 degrees go to review at row 7, two per-square counts
+      falling while no total does, and Evan Daniel's same-side view is refused at row 7, a
+      total of shared sides falling, so the axis tool's view of the new witness stays drawn and
+      the count is decided no better on it (default_drawings.SETTLED).
+
+      Evan Daniel's regularizer solved the witness to a KKT point, a local minimum of the side
+      strict modulo 129 exact flat motions, 4.289e-09 below its side: 1.23 of the
+      certificate's own contraction margin (3.488e-09), beyond it. Its rational certificate did
+      not validate, and the solve is held at row 3 as a register candidate and not admitted;
+      its registration waits on RV-3 (think-ruu2, think-ikku). Its side agrees with the
+      side-only leaderboard entry the issue quotes first, 15.596043116631669919627353 (Nevska),
+      at all 24 printed places.
+
+      The atlas posters, drawn for the v0.7.0 edition, hold Ono's name off their credit block
+      at 228 and 147 (PRINT_CREDIT_HELD, think-tj4o) until the next infographics cut redraws
+      them; the case records, their pages and their bound citations credit him now.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 14 November, is
-      retained. It is the smallest validated side at 228; adopt it there in place of T-300
-      under the house rule, with both strong generators' regularization, measured against the
-      new witness, and the flip of the new house in the same change. The review's questions
-      for the author hold no rung, and the contracted side its F11 measures is the owner's RV-3
+      retained. It is the smallest validated side at 228, and the case adopted it there in the
+      pass of 15 November 2026 under the house rule, in place of T-300, with both strong
+      generators' runs on the new house; T-300, T-174, T-128, T-098, T-092 and T-056 keep
+      their certificates as history. The review's questions for the author hold no rung, and
+      the contracted side its F11 measures and the regularizer's KKT side are the owner's RV-3
       question, not registered.
     reviews:
     - path: docs/project/reviews/review-2026-11-14-ono-984-985.md
@@ -47229,14 +47262,16 @@ results:
       #985 prints it.
 
       It is 5.81e-03 below 7 + 4*sqrt(2), the Kingbird catalogue's 45-degree packing that 147
-      shares with 148, the case's house best packing, which T-155's exact ceiling verifies; no
-      packing at 147 had been recorded below it. Measured here it is a new arrangement relative
+      shares with 148, the case's house best packing until this adoption, which T-155's exact
+      ceiling verifies; no packing at 147 had been recorded below it. Measured here it is a new arrangement relative
       to the house's packing, not one to one with it under any symmetry of the box by nearest
       centres: the optimal assignment moves 92 squares beyond a tenth.
 
       Both maintained exact routes accept the certificate, and the stage 4 review of 14
       November 2026 accepts it, its clean-room checker independently re-implemented, and
-      accepts the same squares in the box of the claim's own side, 12.651043556588 (F4).
+      accepts the same squares in the box of the claim's own side, 12.651043556588 (F4); the
+      case adopted it as its house in the pass of 15 November under the house rule, the first
+      adoption at 147.
 
       The issue says the repository's frozen verifier, verify.py (all 10731 pairs), reports
       VALID; that search/indep_check.py (exact rational polygon clipping, 328 close pairs)
@@ -47407,14 +47442,42 @@ results:
       disagreement.
 
       Its questions for the author, shared with #984's entry, hold no rung.
+
+      Adopted at 147 in the pass of 15 November 2026 under the house rule, the first
+      adoption at 147, in place of the case record's own house, the Kingbird catalogue's
+      45-degree packing, which T-155's exact ceiling verifies; this lane wrote it at 00:01Z,
+      beside T-301 at 228. The packing's credit goes to Roberto Ono, its finder, from a band
+      cut of Evan Daniel's n = 229 packing, the first below 7 + 4*sqrt(2), as the issue asks,
+      and the case's conjectured optimum, 7 + 4*sqrt(2), is withdrawn, as at 260 and 299. T-155
+      and T-101 keep their certificates as history.
+
+      The rigidity block was derived again on the new witness and stays not rigid: 61 of its
+      147 squares translate, 37 of them separating, against the catalogue packing's 10 and 0.
+      Both strong generators ran on the new witness
+      (packing/cases/regularized_drawings/think-17ex-2026-11-15/), and the selection, measured
+      against the axis tool's drawing of this witness, draws grid-slack's 0.5-degree view,
+      admitted at row 10: light, uneven, near-axis squares, angle classes and hues 5, 39, 0,
+      8 and 8 against 3, 20, 0, 8 and 8, and full shared sides (house and stage) 349 and 377
+      against 377 and 385. Evan Daniel's same-side view is refused at row 7, a total of shared
+      sides falling.
+
+      Evan Daniel's regularizer solved the witness to a certified KKT point 3.415e-09 below
+      its side, 1.16 of the certificate's own contraction margin (2.934e-09), beyond it, held
+      at row 3 as a register candidate and not admitted; its registration waits on RV-3
+      (think-ruu2, think-ikku). Its side agrees with the side-only leaderboard entry the issue
+      quotes first, 12.651043553172632772258400 (Nevska), at all 24 printed places.
+
+      The atlas posters hold Ono's name off their credit block at 147, as at 228
+      (PRINT_CREDIT_HELD, think-tj4o).
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 14 November, is
-      retained. It is the smallest validated side at 147; adopt it there, first adopted here, in
-      place of the case record's own house under the house rule, with both strong generators'
-      regularization, measured against the new witness, and the flip of the new house in the
-      same change. The review's questions for the author hold no rung, and the contracted side
-      its F11 measures is the owner's RV-3 question, not registered.
+      retained. It is the smallest validated side at 147, and the case adopted it there, the
+      first adoption at 147, in the pass of 15 November 2026 under the house rule, in place of
+      the case record's own house, with both strong generators' regularization of the new
+      house; T-155 and T-101 keep their certificates as history. The review's questions for
+      the author hold no rung, and the contracted side its F11 measures and the regularizer's
+      KKT side are the owner's RV-3 question, not registered.
     reviews:
     - path: docs/project/reviews/review-2026-11-14-ono-984-985.md
       kind: adversarial
@@ -47848,6 +47911,20 @@ regularized_drawings:
         max_move: 0.4783856
         max_turn_deg: 1.06929
       view: packing/atlas/known-best/regularized/n-146-regularized.yaml.gz
+    - n: 147
+      of: T-302
+      by: project
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 39
+        max_move: 0.04882875
+        max_turn_deg: 0.00314012
+      view: packing/atlas/known-best/regularized/n-147-regularized.yaml.gz
     - n: 152
       of: T-098
       by: project
@@ -48238,18 +48315,17 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-227-regularized.yaml.gz
     - n: 228
-      of: T-300
+      of: T-301
       by: project
-      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 78
-        max_move: 0.1220707
-        max_turn_deg: 0.963406
+        moved: 48
+        max_move: 0.290442
+        max_turn_deg: 0.0032148
       view: packing/atlas/known-best/regularized/n-228-regularized.yaml.gz
     - n: 229
       of: T-225

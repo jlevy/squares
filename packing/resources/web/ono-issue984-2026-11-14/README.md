@@ -253,6 +253,28 @@ Its six questions for the author, informational and holding nothing open:
 5. Would the `.strict.json` digests be stated beside the `.strict.cert` ones (F7)?
 6. Will the diagonal-period sweep’s table of near misses be published?
 
+## Adoption
+
+The case adopted the certificate as its house at 228 in the pass of 15 November 2026
+under the house rule, as T-301, in place of T-300, which the pass of 14 November had
+adopted there and which keeps its certificate as history; this lane wrote the adoption
+at 00:01Z, since one day’s archive holds one prior state a count.
+Roberto Ono is the packing’s finder, from a band cut of Francisco Couzo’s packing of 404
+squares, below Doğa Özden’s column-band packing, as the issue asks.
+Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-17ex-2026-11-15/README.md)):
+grid-slack’s views at 0.5, 1 and 5 degrees go to review at row 7, two per-square counts
+falling while no total does, and Evan Daniel’s same-side view is refused at row 7, so
+the axis tool’s view of the new witness stays drawn and the count is decided no better
+on it. Daniel’s regularizer solved the witness to a KKT point, a local minimum 4.289 ×
+10⁻⁹ below the side, 1.23 of the certificate’s own contraction margin (3.488 × 10⁻⁹) and
+beyond it; its rational certificate did not validate, and it is held at row 3 as a
+register candidate and not admitted (RV-3). Its side agrees with the side-only
+leaderboard entry the issue quotes first, Nevska’s 15.596043116631669919627353…, at all
+24 printed places.
+The rigidity block, derived again on the new witness, stays not rigid:
+110 of its 228 squares translate, against 123 of T-300’s.
+
 ## What Is Not Established
 
 - **Human oversight.** One AI review is retained; no human oversight record.

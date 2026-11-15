@@ -198,6 +198,25 @@ What the review adds:
 
 Its questions for the author are shared with #984 and listed in the 228 packet’s README.
 
+## Adoption
+
+The case adopted the certificate as its house at 147 in the pass of 15 November 2026
+under the house rule, as T-302, the first adoption at 147, in place of the case record’s
+own house, the Kingbird catalogue’s 45-degree packing (T-155’s exact ceiling, which
+keeps its certificate as history, as T-101 does); this lane wrote the adoption at
+00:01Z. Roberto Ono is the packing’s finder, from a band cut of Evan Daniel’s packing of
+229 squares, the first below 7 + 4√2, and the case’s conjectured optimum, 7 + 4√2, is
+withdrawn. Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-17ex-2026-11-15/README.md)), and
+the selection draws grid-slack’s 0.5-degree view, admitted at row 10. Daniel’s
+regularizer solved the witness to a certified KKT point 3.415 × 10⁻⁹ below the side,
+1.16 of the certificate’s own contraction margin (2.934 × 10⁻⁹) and beyond it, held at
+row 3 as a register candidate and not admitted (RV-3). Its side agrees with the
+side-only leaderboard entry the issue quotes first, Nevska’s
+12.651043553172632772258400…, at all 24 printed places.
+The rigidity block, derived again on the new witness, stays not rigid: 61 of its 147
+squares translate, against 10 of the catalogue packing’s.
+
 ## What Is Not Established
 
 - **Human oversight.** One AI review is retained; no human oversight record.
