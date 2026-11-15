@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#989","kind":"issue","number":989,"url":"https://github.com/jlevy/squares/issues/989","author":"dpre4ai","created_at":"2026-11-15T03:00:53Z","state":"open","closed_at":null,"title":"90 unit squares in side 9.998277166926 — upper-bound registration request"}]
+}

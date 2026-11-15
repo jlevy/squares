@@ -268,6 +268,11 @@ L160_1114 = "ozden-s228-upper-bound-2026-11-14"
 #: and #985 at 147, one period cut from Evan Daniel's 229, below 7 + 4 sqrt(2); the source's
 #: harness JSON, read by ``ono-json``, under MIT.
 L164_1114 = ("ono-issue984-2026-11-14", "ono-issue985-2026-11-14")
+#: The intake pass's lane L170 of 15 November 2026 (`test_upper_bound_reports_l170_1115`):
+#: jazivxt's #989 at 90, a window of shifted copies of a crop of Joost de Winter's 157, the
+#: first below the 10 x 10 grid; Evan Daniel's text certificate, read by ``evand-cert``, its
+#: repository with no licence, submitted by the account dpre4ai.
+L170_1115 = "jazivxt-s90-upper-bound-2026-11-15"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -339,6 +344,7 @@ EVERY = (
     *L154_1114,
     L160_1114,
     *L164_1114,
+    L170_1115,
 )
 
 
@@ -1719,6 +1725,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L154_1114[0]: "2026-11-14",
         L160_1114: "2026-11-14",
         **dict.fromkeys(L164_1114, "2026-11-11"),
+        L170_1115: "2026-11-15",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

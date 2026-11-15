@@ -1801,6 +1801,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # 229; one repository, squares-in-square b5636fd, and a packet for each issue.
     "[Ono issue 984 2026-11-14]": _import("ono-issue984-2026-11-14"),
     "[Ono issue 985 2026-11-14]": _import("ono-issue985-2026-11-14"),
+    # Lane L170 of 15 November (think-i8y9): jazivxt's issue 989 at 90, posted by the account
+    # dpre4ai, a window of copies of a crop of Joost de Winter's 157 (T-293), the first below
+    # the 10 x 10 grid; one repository and one packet, its certificate in Evan Daniel's text.
+    "[jazivxt s90 upper bound 2026-11-15]": _import("jazivxt-s90-upper-bound-2026-11-15"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
