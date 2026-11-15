@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 333
+version: 334
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -116,7 +116,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T12:55:49.126Z
+updated_at: 2026-11-15T13:20:52.599Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -299,3 +299,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~12:00Z: NEW #996 (de Winter, s(90) <= 9.994038857546, -4.24e-3 vs T-303 adopted this morning; local search from T-303). Intake; import think-32cl (L181; adoption in a 2026-11-16 pass, stamps and merge on 11-16), blind review think-uhav (L180). de Winter repo 3 new commits (9cafa33) to read.
 2026-11-15 ~12:45Z: L180 review of #996 landed (95ad4bc8a): accepted, 13 notes; RV-3 n/a (T-303 margin 1.0988e-11, gain 3.86e8 times); identity: T-303 arrangement improved square for square (credit de Winter after jazivxt); S3 proposed; F11 witness-corners adapter refuses the twin (read the JSON via center-direction-json). L181 told (no summary).
 2026-11-15 ~13:00Z: #997 (de Winter, 12:08Z): replacement certificate fa53fb0 for #996, side 9.994038766610 (9e-8 lower); author asks to disregard 64d5ee7. L181 redirected to import fa53fb0 only (one T-id, #996+#997). Review addendum lane L182 (think-h69d) reruns L180 frozen checker on fa53fb0. Adoption 2026-11-16.
+2026-11-15 ~13:40Z: L182 addendum on fa53fb0 landed (83ac8ceec): accepted; 26 controls as stated (4 re-targeted); step 9.09e-8 from #996 is 9,539x #996 padding (genuine re-optimization); gain on T-303 3.857e8x its margin, RV-3 n/a; F15: take lineage text from REGISTRATION.md at 6c0ad56. L181 told (no summary).
