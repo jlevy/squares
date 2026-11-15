@@ -5,14 +5,14 @@ title: "Explainer PDF: one KaTeX glyph's baseline moves between page loads, past
 kind: bug
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: ci-followups
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-09-27T08:02:16.543Z
-updated_at: 2026-10-24T13:29:20.785Z
+updated_at: 2026-11-15T07:25:05.477Z
 started_at: 2026-10-23T04:52:09.582Z
 ---
 PR 235 pull_request run 36126482461 (attempt 1, head de282a855, records-only) failed the Pages `pdf` job at `render_explainer_pdf --check-artifact`: `849931 then 849931 bytes, normalised; length delta 0 ... first difference at byte 514532, in object 144`, inside a FlateDecode stream. The unchanged rerun (attempt 2) passed, and `pages-required` then refused the partial rerun as unmeasurable, by design. D-509 records it; it recurs D-490 (think-ptit, think-a5qp).
@@ -32,3 +32,6 @@ Coordinator authorized exactly one targeted retry on unchanged head after the wo
 Follow-on first-attempt outcome: disposition-only head 4f00b6f70e41a934ccada5438d9fb02ba8508107 passed the entire PDF job 120248890432 in Certificate page run 39902903136, including Draw PDF and check-artifact; the workflow's pages-required aggregate also passed. Job: https://github.com/jlevy/squares/actions/runs/39902903136/job/120248890432 . No retry or PDF/gate source change was made on this head. This passing observation does not resolve the concrete three-distinct-load failure above or its underlying cause.
 
 2026-10-24 coord-intake-1024: recurred on main's post-merge Pages run for #789's merge 2ec489d1e (run 40097882450, attempt 1, job 120884242250 pdf): 'no two of 3 page loads agreed' (887804, 887804 and 887805 normalised bytes; first differences at object 171 and object 88), so deploy and verify-deployment were skipped. The PR's own CI passed the pdf job at 0329f73d6; the change touched no explainer input. Failed jobs re-run once (attempt 2).
+
+
+2026-11-15 coordinator: a hosted occurrence. PR #993 (records only; compare_paper_renders byte-identical to main) at head 39c8a8ab9, Certificate page run 43688482102, pdf job 132734291961: render_n11_lower_bounds_explainer_pdf --check-artifact refused, "No fresh page load reproduced the stored artifact, in 2 drawn" (899,277 and 899,281 normalised bytes). Failed closed as designed; the PR waits for a genuine new run (no rerun, no empty commit).
