@@ -38,6 +38,11 @@ OUTPUT = ATLAS_ROOT / "chunk-evidence-profile.json"
 SCHEMA = ATLAS_ROOT / "chunk-evidence-profile.schema.yaml"
 EVIDENCE_ROOT = ATLAS_ROOT / "evidence"
 RENDERING = EVIDENCE_ROOT / "non-grid-chunk-evidence-profile.svg"
+#: The calibration corpus's non-grid and exact-grid counts. Each was 36 and 64 until lane
+#: L170 (think-i8y9) adopted jazivxt's packing at 90 (T-303) on 15 November 2026, the
+#: first count of n = 1..100 to leave the exact grid since the profile was written.
+NON_GRID_CASES = 37
+EXCLUDED_GRID_CASES = 63
 GENERATOR = "python -m devtools.profile_known_best_chunks"
 PRIMARY_SWEEP = "registered-angle-contact"
 SENSITIVITY_SWEEP = "regularized-angle-contact"
@@ -117,7 +122,7 @@ def _partition_label(partition: dict[str, Any]) -> str:
 
 
 def render_profile(profile: dict[str, Any]) -> str:
-    """Render the 36-case table as a house-style descriptive evidence overview."""
+    """Render the non-grid case table as a house-style descriptive evidence overview."""
     root = element(
         "svg",
         {
@@ -142,7 +147,7 @@ def render_profile(profile: dict[str, Any]) -> str:
         root,
         {
             "artifact-kind": "known-best-non-grid-contact-evidence-profile",
-            "case-count": "36",
+            "case-count": str(NON_GRID_CASES),
             "claim-status": "calibration-only-descriptive-no-hypothesis-verdict",
             "generator": GENERATOR,
             "primary-sweep": PRIMARY_SWEEP,
@@ -170,7 +175,8 @@ def render_profile(profile: dict[str, Any]) -> str:
         value=(
             f"{summary['structured_square_count']:,}/{summary['square_count']:,} squares "
             f"in {summary['contact_component_count']} same-angle contact components · "
-            f"{summary['within_six_components_and_three_free_cases']}/36 cases within C≤6, F≤3"
+            f"{summary['within_six_components_and_three_free_cases']}/{NON_GRID_CASES} "
+            "cases within C≤6, F≤3"
         ),
         size=16,
         fill=PAPER_THEME.muted,
@@ -417,8 +423,8 @@ def profile_errors(profile: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     rows = profile["cases"]
     ns = [row["n"] for row in rows]
-    if ns != sorted(ns) or len(ns) != 36 or len(set(ns)) != 36:
-        errors.append("case n values must be 36 unique ordered non-grid counts")
+    if ns != sorted(ns) or len(ns) != NON_GRID_CASES or len(set(ns)) != NON_GRID_CASES:
+        errors.append(f"case n values must be {NON_GRID_CASES} unique ordered non-grid counts")
     for row in rows:
         primary = row["primary"]
         if row["square_count"] != row["n"]:
@@ -770,8 +776,8 @@ def expected_outputs() -> tuple[dict[str, Any], str]:
             "semantics": "descriptive-document-table-no-packing-geometry",
         },
         "scope": {
-            "excluded_exact_grid_cases": 64,
-            "non_grid_cases": 36,
+            "excluded_exact_grid_cases": EXCLUDED_GRID_CASES,
+            "non_grid_cases": NON_GRID_CASES,
             "range": CALIBRATION_CORPUS.label,
         },
     }
@@ -796,7 +802,10 @@ def update() -> None:
     with atomic_output_file(OUTPUT) as temporary:
         temporary.write_text(_json_text(document), encoding="utf-8")
     write_svg_atomic(RENDERING, rendering)
-    print("known-best chunk evidence profile updated: 36 non-grid calibration cases")
+    print(
+        "known-best chunk evidence profile updated: "
+        f"{NON_GRID_CASES} non-grid calibration cases"
+    )
 
 
 def check() -> None:
@@ -808,7 +817,10 @@ def check() -> None:
     unexpected = {path.name for path in EVIDENCE_ROOT.glob("*.svg")} - {RENDERING.name}
     if unexpected:
         raise ValueError(f"unexpected known-best evidence renderings: {sorted(unexpected)}")
-    print("known-best chunk evidence profile check passed: 36 non-grid calibration cases")
+    print(
+        "known-best chunk evidence profile check passed: "
+        f"{NON_GRID_CASES} non-grid calibration cases"
+    )
 
 
 def main() -> int:

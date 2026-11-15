@@ -6,7 +6,7 @@
     <sqpack:profile version="8">
       <sqpack:coordinates>document-table-layout; svg-y-down; no-packing-coordinates</sqpack:coordinates>
       <sqpack:value name="artifact-kind">known-best-non-grid-contact-evidence-profile</sqpack:value>
-      <sqpack:value name="case-count">36</sqpack:value>
+      <sqpack:value name="case-count">37</sqpack:value>
       <sqpack:value name="claim-status">calibration-only-descriptive-no-hypothesis-verdict</sqpack:value>
       <sqpack:value name="generator">python -m devtools.profile_known_best_chunks</sqpack:value>
       <sqpack:value name="primary-sweep">registered-angle-contact</sqpack:value>
@@ -14,14 +14,14 @@
   </metadata>
   <rect width="1500" height="1120" fill="#ffffff" />
   <text x="40" y="44" fill="#17202a" font-size="27" font-weight="700" text-anchor="start">Non-grid contact-assembly profile · n = 1…100 calibration</text>
-  <text x="40" y="73" fill="#5c6673" font-size="16" font-weight="400" text-anchor="start">1,779/1,860 squares in 163 same-angle contact components · 27/36 cases within C≤6, F≤3</text>
+  <text x="40" y="73" fill="#5c6673" font-size="16" font-weight="400" text-anchor="start">1,857/1,950 squares in 173 same-angle contact components · 27/37 cases within C≤6, F≤3</text>
   <text x="1460" y="44" fill="#d95f02" font-size="14" font-weight="700" text-anchor="end">DESCRIPTIVE · NO VERDICT</text>
   <rect x="40" y="92" width="700" height="66" rx="12" fill="#f7f8fa" stroke="#1faa8e" stroke-width="2" />
   <text x="56" y="118" fill="#1faa8e" font-size="16" font-weight="700" text-anchor="start">Broad contact assembly</text>
-  <text x="56" y="143" fill="#17202a" font-size="14" font-weight="400" text-anchor="start">9 fully covered · 27 at least 90% · 33 at least 75% · 35 at least 50%</text>
+  <text x="56" y="143" fill="#17202a" font-size="14" font-weight="400" text-anchor="start">9 fully covered · 27 at least 90% · 34 at least 75% · 36 at least 50%</text>
   <rect x="760" y="92" width="700" height="66" rx="12" fill="#f7f8fa" stroke="#d95f02" stroke-width="2" />
   <text x="776" y="118" fill="#d95f02" font-size="16" font-weight="700" text-anchor="start">Narrow bars / Ls / rectangles</text>
-  <text x="776" y="143" fill="#17202a" font-size="14" font-weight="400" text-anchor="start">3 inside budget · 2 outside · 24 absent · 7 search-capped</text>
+  <text x="776" y="143" fill="#17202a" font-size="14" font-weight="400" text-anchor="start">3 inside budget · 2 outside · 25 absent · 7 search-capped</text>
   <text x="52" y="183" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">n · src</text>
   <text x="144" y="183" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">contact-covered squares</text>
   <text x="432" y="183" fill="#5c6673" font-size="11" font-weight="400" text-anchor="start">C</text>
