@@ -47787,9 +47787,9 @@ results:
       The author first reported a certificate of the same arrangement in #996, at a side 9.09e-8
       larger, and replaced it in #997 38 minutes later, asking that the earlier commit be
       disregarded; this certificate is one to one with that one by nearest centres, no square
-      moved beyond 0.0142. Only this one is registered. Both maintained exact routes accept it;
-      the stage 4 review accepted the replaced certificate, and its addendum on this one is a
-      separate lane (think-uhav).
+      moved beyond 0.0142. Only this one is registered. Both maintained exact routes accept it,
+      and the stage 4 review of 15 November 2026, which accepted the replaced certificate,
+      accepts this one in its addendum, its clean-room checker independently re-implemented.
 
       #997 says verify_exact.py (separating axes) and check_area.py (the area of each close
       pair's clipped intersection), both Python's fractions.Fraction and its standard library
@@ -47834,10 +47834,13 @@ results:
         line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3),
         where new and continued arrangements are S3: beside T-301's 4.76e-03 at 228 and T-297's
         9.74e-03 at 269. A local search over small groups of squares of a recorded packing is no
-        new technique, so not S4. No lower bound or optimum. The stage 4 review proposes S3 for
-        the replaced certificate, 9.09e-8 above this one.
+        new technique, so not S4. No lower bound or optimum. The stage 4 review confirms S3.
       scored: '2026-11-15'
-      by: think-32cl Joost de Winter import (intake lane L181), a draft for the stage 4 review
+      by: >-
+        think-32cl Joost de Winter import (intake lane L181), confirmed by the stage 4 review of
+        15 November (lane L180) and its addendum on this certificate (lane L182), which measure
+        the step as about 225 times T-226's at the low end of S3 and a continued arrangement of
+        T-303
     novelty: previously-published
     attribution:
       source_keys:
@@ -47846,6 +47849,7 @@ results:
     evidence:
     - E-de-winter-997-certificate-report
     - E-de-winter-997-exact-feasibility
+    - E-de-winter-997-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/README.md
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/acquisition/claims.json
@@ -47862,10 +47866,15 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-15-de-winter-996.md
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/check-n90-997.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/controls-n90-997.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/compare-997-996.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l181_1115.py
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/controls-n90-997.json
     notes: >-
       A separate complete repository replay is retained for n = 90: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -47928,17 +47937,61 @@ results:
 
       The stage 4 review of 15 November 2026
       (docs/project/reviews/review-2026-11-15-de-winter-996.md, lane L180, under think-uhav),
-      written blind to this lane, reviewed the certificate #996 named and accepted it with
-      thirteen findings, all notes; this lane's replay of that certificate agreed with it
-      everywhere both measured (the superseded certificate's packet README). Its addendum,
-      which runs the same frozen checker and controls on this certificate, has not been read
-      here.
+      written blind to this lane, accepted the certificate #996 named with thirteen findings,
+      all notes. Its addendum of the same day (lane L182) ran the review's frozen checker
+      unchanged on this certificate and its twin: every square, wall and all 4,005 pairs by
+      separating axes in Python integers and by exact clipping in gmpy2.mpq, every pair
+      strictly apart, 17 wall contacts each along an edge, and the least pair margin
+      2.02641179076e-12, at squares 2 and 40, the replay's exactly.
+
+      Its 26 controls, stated in a plan hashed beforehand, were each decided as stated, among
+      them the rotation read the other way (54 pairs overlap), the claim's 12-place box
+      accepted and its floor refused, and every one of the 4,005 pairs closed to exact contact
+      and 1e-30 past it (E-de-winter-997-review-exact-feasibility). This lane read the addendum
+      after its own replay, controls, measurements and records for this certificate were
+      committed.
+
+      The addendum's measurements equal this lane's: the right and top clearance 2.51389952e-22,
+      the amount the sharp controls lowered the side by; 50 squares exactly upright and 40
+      turned 22.90 to 30.99 degrees; the margins of T-303 (1.098813e-11), of #996's certificate
+      (9.532970e-12, the step 9,539 times it) and its own (1.818734e-11); the identity against
+      T-303 (87, 32 and 6 squares beyond 1e-3, 1e-2 and 0.1, largest 0.645) and against #996's
+      certificate (one to one, largest move 0.0142). No disagreement.
+
+      It adds F14, that the replacement is #996's arrangement re-optimized, squares moving
+      relative to one another, not padding taken off it, and F15, that the counts to record are
+      the registration request's at the head (44 and 40 leaning squares, four upright in the
+      upper left, four at the top turned further, one 0.32 lower), which the record takes. F11,
+      the corner adapter's refusal of the twin, is what witness-corners-opposite answers. Its
+      questions for the author hold no rung.
     next_rung: >-
-      The stage 4 review's addendum on this certificate (think-uhav), mapped as an adversarial
-      review covering T-304. Then adopt it at 90 in place of T-303 under the house rule, in a pass
-      of 16 November 2026, since the pass of 15 November already moved 90, with both strong
-      generators' regularization of the new house and the flip of the new house in the same
-      change.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 15 November with its
+      addendum, is retained. It is the smallest validated side at 90; the case adopts it there in
+      place of T-303 under the house rule in a pass of 16 November 2026, since the pass of 15
+      November already moved 90, with both strong generators' regularization of the new house.
+      The review's questions for the author hold no rung, and the smaller sides its F4 and F8
+      measure are the owner's RV-3 question, not registered.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-15-de-winter-996.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier), the stage 4 mathematical review lane of issue 996 (L180,
+        under think-uhav) and its addendum lane on issue 997 (L182), prompted separately from the
+        import lane (L181, think-32cl) and blind to its work throughout
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-15'
+      scope: >-
+        Finite feasibility of #997's centre-direction certificate of 90 and its Witness/v2 twin,
+        decided by the review's clean-room exact checker, frozen before any producer or witness
+        code was read and run unchanged by the addendum, by two methods, with 26 controls stated
+        in advance; the claim's arithmetic, the side against the packing's extent, the near
+        pairs, the tilts, the padding and the identity against T-303 and against #996's
+        replaced certificate, which the review accepted before the replacement.
+      verdict: accepted
+      covers:
+      - T-304
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

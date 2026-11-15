@@ -92,8 +92,8 @@ Its findings that outlive the replacement: the corner adapter’s refusal of the
 (F11), which the readers `witness-corners` and `witness-corners-opposite` now answer;
 the JSON naming neither the box nor the rotation sense (F7); the counts of leaning
 squares (F6, F10), which the author corrected at `fa53fb0` to 44 and 40; and the AI
-named at the pin (F12). An addendum that runs the review’s frozen checker and controls
-on the fa53fb0 certificate is pending.
+named at the pin (F12). Its addendum (lane L182) ran the frozen checker and controls on
+the fa53fb0 certificate and accepts it; the fa53fb0 packet’s README reconciles it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

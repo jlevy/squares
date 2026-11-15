@@ -24706,6 +24706,7 @@ urls:
     evidence:
     - E-de-winter-997-certificate-report
     - E-de-winter-997-exact-feasibility
+    - E-de-winter-997-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/README.md
     - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/acquisition/claims.json
@@ -24722,6 +24723,10 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-15-de-winter-996.md
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/check-n90-997.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/controls-n90-997.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/compare-997-996.json
 - path: results.html
   canonical: results.html
   kind: page

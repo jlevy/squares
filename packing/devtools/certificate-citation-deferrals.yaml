@@ -89,10 +89,19 @@ deferrals:
     results:
     - T-304
     bead: think-32cl
-    blocked_on: think-uhav
+    blocked_on: think-32cl
     recorded: '2026-11-15'
     reason: Joost de Winter's certificate of issue 997 at 90, which replaces his issue 996's,
-      4.24e-03 below T-303, the house. The case record cites it when the house adopts T-304, after
-      the stage 4 review's addendum on this certificate (think-uhav), in a pass of 16 November
-      2026, since the pass of 15 November already moved 90 and a day's archive holds one prior
-      state a count; this entry is removed in that change.
+      4.24e-03 below T-303, the house, confirmed by the stage 4 review's addendum (think-uhav). The
+      case record cites it when the house adopts T-304 in a pass of 16 November 2026, since the
+      pass of 15 November already moved 90 and a day's archive holds one prior state a count; this
+      entry is removed in that change.
+  - evidence: E-de-winter-997-review-exact-feasibility
+    results:
+    - T-304
+    bead: think-32cl
+    blocked_on: think-32cl
+    recorded: '2026-11-15'
+    reason: The stage 4 review's clean-room run on the same certificate (its addendum, lane L182,
+      under think-uhav), cited with the replay when the house adopts T-304 in a pass of 16 November
+      2026; this entry is removed in that change.

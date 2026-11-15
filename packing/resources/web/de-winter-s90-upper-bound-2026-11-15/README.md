@@ -26,6 +26,9 @@ dates the claim by the issue, with the first commit kept.
 
 Intake lane L181 (think-32cl) retained it, replayed it and measured it on 15 November
 2026 and registers it as **T-304**, the only result of the two issues.
+The blind stage 4 review of lane L180 and its addendum (lane L182) accepted it the same
+day, so it is at V3/C3; the adoption at 90 waits for a pass of 16 November, since the
+pass of 15 November already moved 90.
 
 ## What the Source Claims
 
@@ -190,12 +193,48 @@ bound carries to no other count.
 
 The stage 4 review of 15 November 2026
 ([review-2026-11-15-de-winter-996.md](../../../../docs/project/reviews/review-2026-11-15-de-winter-996.md),
-lane L180, under think-uhav), written blind to this lane, reviewed the certificate #996
-named, before the author replaced it, and accepted it; the
+lane L180, under think-uhav), written blind to this lane, accepted the certificate #996
+named before the author replaced it; the
 [64d5ee7 packet](../de-winter-s90-64d5ee7-2026-11-15/README.md) reconciles it with this
 lane’s replay of that certificate.
-An addendum that runs the review’s frozen checker and controls on this certificate is
-pending, and the review’s mapping onto T-304 waits on it.
+Its addendum of the same day (lane L182, the review’s last section, with its programs
+and receipts under `addendum-997/` of the review-only directory
+`de-winter-996-review-2026-11-15`) ran the review’s frozen checker unchanged on this
+certificate and its twin, and accepts it: every square, wall and all 4,005 pairs decided
+twice, by separating axes in Python integers and by exact clipping in GMP rationals, and
+26 of 26 controls as stated in a plan hashed before they ran.
+
+This lane read the addendum at 13:21Z on 15 November, after its own replay, controls and
+measurements of this certificate (13:08Z) and its records for it (13:21Z) were
+committed. Read against this packet’s receipts, the addendum’s least pair margin
+(2.02641179076 × 10⁻¹², squares 2 and 40) is the replay’s exactly; its right and top
+clearance, 2.51389952 × 10⁻²², is the amount the sharp controls lowered the side by; its
+17 wall contacts, each along an edge, include square 10, the one the sharp controls grew
+by 0. Its tilts (50 squares exactly upright, 40 turned 22.90 to 30.99 degrees), its
+contraction margins (T-303 1.098813 × 10⁻¹¹, #996’s certificate 9.532970 × 10⁻¹², its
+own 1.818734 × 10⁻¹¹) and its identity against T-303 (87, 32 and 6 squares beyond a
+thousandth, a hundredth and a tenth, largest 0.645) and against #996’s certificate
+(square k with square k, largest move 0.0142) are [measure/](measure/)’s. No
+disagreement.
+
+What the addendum adds:
+
+- **F14**: the replacement is #996’s arrangement re-optimized, squares moving relative
+  to one another; the step is 9,539 times #996’s contraction margin, so it is not
+  padding taken off #996.
+- **F15**: #997 says the arrangement is as #996 states, but the registration request at
+  the head gives the corrected counts (44 and 40 leaning squares, four upright in the
+  upper left, four at the top turned further, one 0.32 lower), which reproduce and which
+  the record takes.
+- **F11 on the twin**: the corner adapter refused the twin as published; this lane’s
+  `witness-corners-opposite` reads it back to the JSON’s poses, as the addendum’s
+  modified copy did.
+- F1 to F13 otherwise hold with this certificate’s values, F10 and F12 answered by the
+  author’s text at the pin, and the significance stays S3.
+
+Its questions for the author hold nothing open: which text to record; whether #996’s
+near-upright turn was the rational rounding; what produced the step; and L180’s
+questions on the twin’s form and on publishing the search and the linear program.
 
 ## What Is Not Established
 
