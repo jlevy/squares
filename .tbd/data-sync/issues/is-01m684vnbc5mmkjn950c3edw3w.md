@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 343
+version: 344
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -117,7 +117,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T21:54:33.009Z
+updated_at: 2026-11-15T22:54:39.788Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -309,3 +309,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-15T19:53Z renewal (intake299): no change since 18:55Z; #998 (L181) waits for 16 November UTC.
 - 2026-11-15T20:53Z renewal (intake300): no change; #998 (L181) waits for 16 November UTC.
 - 2026-11-15T21:53Z renewal (intake301): no change; #998 (L181) waits for 16 November UTC.
+- 2026-11-15T22:53Z renewal (intake302): no change; #998 (L181) waits for 16 November UTC.
