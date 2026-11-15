@@ -47,15 +47,15 @@
  "routes_accept": true,
  "against": {
   "certificate": {
-   "label": "dewinter-996",
+   "label": "dewinter-997",
    "input": "packet",
    "packet": "de-winter-s90-upper-bound-2026-11-15"
   },
-  "side": "199880777150913904183/20000000000000000000",
-  "gain": "84766187606095817/20000000000000000000",
-  "gain_float": "4.238309e-03",
-  "gain_over_margin": "385717087.7501",
+  "side": "99940387666098521323/10000000000000000000",
+  "gain": "42384003161478677/10000000000000000000",
+  "gain_float": "4.238400e-03",
+  "gain_over_margin": "385725363.5755",
   "within_margin": false
  },
- "cpu_seconds": 2.33
+ "cpu_seconds": 2.36
 }

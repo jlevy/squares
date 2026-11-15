@@ -1,12 +1,12 @@
 {
   "format": "upper-bound-report-declaration-v1",
-  "issue": "https://github.com/jlevy/squares/issues/996",
+  "issue": "https://github.com/jlevy/squares/issues/997",
   "author": "Joost de Winter",
   "source_key": "[de Winter s90 upper bound 2026-11-15]",
-  "report_evidence": "E-de-winter-996-certificate-report",
-  "receipt_format": "de-winter-996-exact-replay-v1",
-  "witness_prefix": "W-de-winter-996-n",
-  "claim_limitations": "Complete 2026-11-15 exact rational centre-direction certificate at 90, read exactly from the retained source file n90/n90_exact.json, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#996 names: a local-search improvement of T-303, jazivxt's packing of issue 989. Finite construction feasibility only; the linear program's first-order statement, local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "report_evidence": "E-de-winter-997-certificate-report",
+  "receipt_format": "de-winter-997-exact-replay-v1",
+  "witness_prefix": "W-de-winter-997-n",
+  "claim_limitations": "Complete 2026-11-15 exact rational centre-direction certificate at 90, read exactly from the retained source file n90/n90_exact.json at fa53fb0, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#997 names in place of #996's 64d5ee7: a local-search improvement of T-303, jazivxt's packing of issue 989. Finite construction feasibility only; the linear program's first-order statement, local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
   "read_on": "2026-11-15",
   "read_at_main": "91acf2022a69531da3421889810a3bc53aa89753",
   "certificates": [
@@ -14,9 +14,15 @@
       "n": 90,
       "path": "n90/n90_exact.json",
       "format": "center-direction-json",
-      "offered": "9.994038857546",
-      "printed_in": "https://github.com/jlevy/squares/issues/996",
-      "first_committed": "2026-11-15T11:27:26Z"
+      "offered": "9.994038766610",
+      "printed_in": "https://github.com/jlevy/squares/issues/997",
+      "first_committed": "2026-11-15T12:07:15Z",
+      "same_packing": [
+        {
+          "path": "n90/n90_witness.yaml",
+          "format": "witness-corners-opposite"
+        }
+      ]
     }
   ],
   "requested": [
@@ -42,10 +48,10 @@
   ],
   "pending": [],
   "register": {
-    "title": "Joost de Winter's packing of 90 squares at JoostdeWinter/square-packing 64d5ee7, issue 996",
+    "title": "Joost de Winter's packing of 90 squares at JoostdeWinter/square-packing fa53fb0, issues 996 and 997",
     "headline": "PLACEHOLDER",
     "significance": 3,
-    "source_checks": "The issue says verify_exact.py (separating axes) and check_area.py (the area of each close pair's clipped intersection), both Python's fractions.Fraction and its standard library only, have one author and read the same input file but share no code, and each reports 90 squares and 202 close pairs; that this repository's check_rational_witness_independent.py at ed7aff6 reports 'VERIFIED: 90 squares, 4005 pairs' on the Witness/v2 file; and that the witness validates against this repository's witness.schema.yaml. It says a linear program over all 90 squares, with every contact linearized, found no first-order improvement larger than 4e-10, that the certificate keeps a smallest gap of 1e-12 between squares, and that a proof of local or global optimality is missing. Those statements are the author's; no source program ran here.",
+    "source_checks": "PLACEHOLDER",
     "credit": "PLACEHOLDER",
     "next_rung": "PLACEHOLDER",
     "bead": "think-32cl",

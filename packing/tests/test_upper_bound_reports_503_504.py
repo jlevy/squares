@@ -196,6 +196,24 @@ def test_a_corner_witness_may_name_the_schema_by_its_address_and_its_ids_by_name
         reports.parse_certificate(_bytes(document), 2, "witness-corners")
 
 
+def test_corners_listed_from_the_opposite_vertex_read_back_by_their_own_adapter() -> None:
+    """Joost de Winter's twins of #996 and #997 list each square from its third corner:
+    `witness-corners-opposite` reads them back to the poses exactly. Either adapter reads the
+    other's listing a half turn on, so each refuses the upright square 1 there, whose first
+    edge is then (-1, 0)."""
+    document = _corners(_expected())
+    for square in document["witness"]["squares"]:
+        corners = square["corners"]
+        square["corners"] = corners[2:] + corners[:2]
+    raw = _bytes(document)
+    assert reports.parse_certificate(raw, 2, "witness-corners-opposite") == _expected()
+    with pytest.raises(reports.ReportError, match="square 1: no finite half-angle"):
+        reports.parse_certificate(raw, 2, "witness-corners")
+    unturned = _bytes(_corners(_expected()))
+    with pytest.raises(reports.ReportError, match="square 1: no finite half-angle"):
+        reports.parse_certificate(unturned, 2, "witness-corners-opposite")
+
+
 def test_corners_listed_from_another_vertex_read_as_another_packing() -> None:
     document = _corners(_expected())
     corners = document["witness"]["squares"][1]["corners"]

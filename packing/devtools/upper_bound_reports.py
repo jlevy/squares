@@ -710,6 +710,28 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
     reads them as another packing.
     """
     _no_options(options, "witness-corners")
+    return _corner_witness(raw, n, start=0)
+
+
+def witness_corners_opposite(
+    raw: bytes, n: int, options: Mapping[str, str]
+) -> legacy.Certificate:
+    """`witness_corners` for a witness whose corners start at the opposite vertex (#996, #997).
+
+    Joost de Winter's corner twins of #996 and #997 list each square's corners
+    counterclockwise from the corner at ``C + (u + v) / 2`` of its centre ``C`` and edge
+    directions ``u`` and ``v = u`` turned a quarter, the vertex opposite the one
+    `pose_corners` starts from. Read by `witness_corners`, each square is the same square a
+    half turn on, and an upright one has no finite half-angle there. This reads the list
+    from its third corner, so each pose is the one the source's own centre-direction JSON
+    states, and every other rule of `witness_corners` holds.
+    """
+    _no_options(options, "witness-corners-opposite")
+    return _corner_witness(raw, n, start=2)
+
+
+def _corner_witness(raw: bytes, n: int, *, start: int) -> legacy.Certificate:
+    """`witness_corners`, its corner lists read from their corner ``start`` (0 to 3)."""
     try:
         document = load_yaml(_text(raw))
     except yaml.YAMLError as error:
@@ -740,7 +762,8 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
             square["id"] in (index, f"square-{index}"),
             f"{where}: squares are not numbered 1..n in order",
         )
-        corners = [(_literal(x, where), _literal(y, where)) for x, y in square["corners"]]
+        listed = [(_literal(x, where), _literal(y, where)) for x, y in square["corners"]]
+        corners = listed[start:] + listed[:start]
         c, s = corners[1][0] - corners[0][0], corners[1][1] - corners[0][1]
         _require(c != -1, f"{where}: no finite half-angle")
         x = sum((x for x, _ in corners), Fraction(0)) / 4
@@ -1305,6 +1328,7 @@ ADAPTERS: dict[str, Adapter] = {
     "squish-json": squish_json,
     "pingyou-json": pingyou_json,
     "witness-corners": witness_corners,
+    "witness-corners-opposite": witness_corners_opposite,
     "witness-center-basis": witness_center_basis,
     "witness-center-basis-bare": witness_center_basis_bare,
     "witness-center-basis-unreplayed": witness_center_basis_unreplayed,

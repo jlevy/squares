@@ -22,3 +22,17 @@ counts:
       - '9.9982771669260000'
       - 4999138583463/500000000000
       - ''
+  - label: register T-304, pending adoption
+    kind: register
+    holders: '[de Winter s90 upper bound 2026-11-15]'
+    model: exact
+    low: 199880777150913904183/20000000000000000000
+    high: 199880777150913904183/20000000000000000000
+    open_low: false
+    open_high: false
+    shown: '9.994038857546'
+    decide: ''
+    lanes: []
+    stated:
+    - 199880777150913904183/20000000000000000000
+    - '0'

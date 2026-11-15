@@ -1586,6 +1586,7 @@ jobs:
             /packing/resources/web/ono-issue985-2026-11-14/
             /packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/
             /packing/resources/web/de-winter-s90-upper-bound-2026-11-15/
+            /packing/resources/web/de-winter-s90-64d5ee7-2026-11-15/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg

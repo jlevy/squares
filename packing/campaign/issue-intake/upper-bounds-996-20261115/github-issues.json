@@ -1,4 +1,0 @@
-{
-  "format": "intake-ledger-github-v1",
-  "items": [{"report":"#996","kind":"issue","number":996,"url":"https://github.com/jlevy/squares/issues/996","author":"JoostdeWinter","created_at":"2026-11-15T11:30:13Z","state":"open","closed_at":null,"title":"Lowered upper bound for n = 90 (side 9.994038857546): registration request<claim>: registration request"}]
-}

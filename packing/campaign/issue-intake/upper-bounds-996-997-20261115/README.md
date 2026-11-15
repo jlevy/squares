@@ -28,7 +28,7 @@ Exact sides marked as a lane's come from its `acquisition/claims.json` (and `alg
 
 | Report | Holder | Reported | Counts claimed | Recorded: new packing | Recorded: refinement (whose packing) | Recorded: unclassified | Not recorded (held by) | Undecided | Bead |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [#996](https://github.com/jlevy/squares/issues/996) | Joost de Winter | 2026-11-15 11:30:13Z | 90 | 90 | - | - | - | - | think-32cl |
+| [#997](https://github.com/jlevy/squares/issues/997) | Joost de Winter | 2026-11-15 12:08:33Z | 90 | 90 | - | - | - | - | think-32cl |
 
 ## Per Count
 
@@ -36,7 +36,7 @@ Each report at the count in report order, with its side and verdict; a verdict n
 
 | n | Record on main | Reports in order | Best now |
 | ---: | --- | --- | --- |
-| 90 | 9.998277166926 (record T-303; jazivxt) | #996 9.994038857546: recorded (new packing, continuing jazivxt's packing of 90 squares (T-303), by a local search over small groups of its squares) (below by 4.24e-03; measured: no symmetry of the box pairs it one to one with T-303's packing by nearest centres; the optimal assignment, under the identity of the box, moves 89 squares beyond 1e-3, 34 beyond 1e-2 and 6 beyond 0.1 (largest 0.646081) and turns 48 squares by more than 1e-6 radians, by up to 22.91 degrees; aligned by box centres, 16 squares turn by more than a degree and none reverses its tilt; 40 squares are tilted beyond a degree, 22.90 to 30.99 degrees, all turned the same way and each paired with a square T-303 tilts the same way, and the other 50 lie within 1e-3 degrees of upright, against T-303's 44 tilted beyond a degree (22.61 to 31.56) and five more within 0.07 degrees; the house witness measures as T-303; a further arrangement of T-303's packing, as the source says, not a new one) | #996 9.994038857546 |
+| 90 | 9.994038857546 (register T-304, pending adoption; [de Winter s90 upper bound 2026-11-15]) | #997 9.994038766610: recorded (new packing, continuing jazivxt's packing of 90 squares (T-303), by a local search over small groups of its squares) (below by 9.09e-08; measured: no symmetry of the box pairs it one to one with T-303's packing by nearest centres; the optimal assignment, under the identity of the box, moves 87 squares beyond 1e-3, 32 beyond 1e-2 and 6 beyond 0.1 (largest 0.645009) and turns 48 squares by more than 1e-6 radians, by up to 22.91 degrees; aligned by box centres, 16 squares turn by more than a degree and none reverses its tilt; 40 squares are tilted beyond a degree, 22.90 to 30.99 degrees, all turned the same way and each paired with a square T-303 tilts the same way, and the other 50 are exactly upright, against T-303's 44 tilted beyond a degree (22.61 to 31.56) and five more within 0.07 degrees; the house witness measures as T-303; a further arrangement of T-303's packing, as the source says, not a new one; against the certificate) | #997 9.994038766610 |
 
 ## Owner Decisions Needed
 
@@ -60,7 +60,7 @@ Claims whose certificate a measurement compares with another packing. The measur
 
 | n | Report | Verdict | The source says | Measured against | Finding | Measured by |
 | ---: | --- | --- | --- | --- | --- | --- |
-| 90 | #996 | recorded | a new packing seeded from jazivxt's packing of 90 squares (T-303), by a local search over small groups of its squares | T-303 | no symmetry of the box pairs it one to one with T-303's packing by nearest centres; the optimal assignment, under the identity of the box, moves 89 squares beyond 1e-3, 34 beyond 1e-2 and 6 beyond 0.1 (largest 0.646081) and turns 48 squares by more than 1e-6 radians, by up to 22.91 degrees; aligned by box centres, 16 squares turn by more than a degree and none reverses its tilt; 40 squares are tilted beyond a degree, 22.90 to 30.99 degrees, all turned the same way and each paired with a square T-303 tilts the same way, and the other 50 lie within 1e-3 degrees of upright, against T-303's 44 tilted beyond a degree (22.61 to 31.56) and five more within 0.07 degrees; the house witness measures as T-303; a further arrangement of T-303's packing, as the source says, not a new one | packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/identity.json |
+| 90 | #997 | recorded | a new packing seeded from jazivxt's packing of 90 squares (T-303), by a local search over small groups of its squares | T-303 | no symmetry of the box pairs it one to one with T-303's packing by nearest centres; the optimal assignment, under the identity of the box, moves 87 squares beyond 1e-3, 32 beyond 1e-2 and 6 beyond 0.1 (largest 0.645009) and turns 48 squares by more than 1e-6 radians, by up to 22.91 degrees; aligned by box centres, 16 squares turn by more than a degree and none reverses its tilt; 40 squares are tilted beyond a degree, 22.90 to 30.99 degrees, all turned the same way and each paired with a square T-303 tilts the same way, and the other 50 are exactly upright, against T-303's 44 tilted beyond a degree (22.61 to 31.56) and five more within 0.07 degrees; the house witness measures as T-303; a further arrangement of T-303's packing, as the source says, not a new one; against the certificate | packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/identity.json |
 
 ### Refinement Chains
 
@@ -96,8 +96,8 @@ From `ledger.yaml`; a note that several claims share is one row.
 
 | Report | Counts | Note |
 | --- | --- | --- |
-| #996 | all | The issue names 64d5ee7, committed at 2026-11-15T11:27:26Z, 2 minutes 47 seconds before it, the first commit to hold the certificate; 0c9bcd2 (11:27:49Z) adds n90/REGISTRATION.md and n90/SHA256SUMS, and 9cafa33 (11:29:27Z) renames the model that ran the local search from 'OpenAI Codex (GPT-6 Astra)' to 'GPT-6.1 Sol Max', the name the issue gives, without changing the certificate. The issue asks for credit to Joost de Winter as an improvement of jazivxt's packing, names the record's T-303 at 9.998277166926 and no other report at 90, and says the local search ran with GPT-6.1 Sol Max (OpenAI) and the optimization, certificate, checks and figures were produced with Claude Fable 5.2 (Anthropic) under his direction. |
-| #996 | 90 | T-303's uniform-contraction margin is 1.0988e-11, its squares 79 and 81 binding, wall slack included, so the gain, 4.2383e-3, is about 3.9e8 times that margin and lies wholly outside T-303's padding (packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090.json); RV-3 (think-ruu2) does not reach it. |
+| #997 | all | #997 names fa53fb0, committed at 2026-11-15T12:07:15Z, 78 seconds before it, which replaces the certificate #996 named (64d5ee7) by one 9e-8 smaller and asks that fa53fb0 be pinned and the earlier one disregarded; the head, 6c0ad56 (12:07:15Z), changes only n90/REGISTRATION.md and n90/SHA256SUMS, the certificate unchanged. It says the arrangement, lineage, credit and AI assistance are as #996 states: credit to Joost de Winter as an improvement of jazivxt's packing, the local search run with GPT-6.1 Sol Max (OpenAI) and the optimization, certificate, checks and figures produced with Claude Fable 5.2 (Anthropic) under his direction. |
+| #997 | 90 | T-303's uniform-contraction margin is 1.0988e-11, its squares 79 and 81 binding, wall slack included, so the gain, 4.2384e-3, is about 3.9e8 times that margin and lies wholly outside T-303's padding (packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090.json); RV-3 (think-ruu2) does not reach it. The step from #996's certificate, 9.09e-8, is about 9.5e3 times that certificate's own margin, 9.53e-12 (measure/contraction-n090-996.json). |
 
 ## Lane Cross-Check
 
@@ -109,6 +109,7 @@ None.
 
 | Issue | Holder | Kind | Bead | Disposition |
 | --- | --- | --- | --- | --- |
+| [#996](https://github.com/jlevy/squares/issues/996) | Joost de Winter | replaced by its author | think-32cl | The claim s(90) <= 199880777150913904183/20000000000000000000 = 9.994038857546 at 64d5ee7, replaced by the author 38 minutes later in #997 by the certificate at fa53fb0, 9.09e-8 smaller, with the request that the earlier commit be disregarded: not walked and not recorded. The superseded certificate is retained in the de-winter-s90-64d5ee7-2026-11-15 packet; both maintained exact routes accepted it, and the stage 4 review of 15 November accepted it. |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
