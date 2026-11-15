@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 323
+version: 324
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -113,7 +113,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T07:39:50.320Z
+updated_at: 2026-11-15T08:06:40.302Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -289,3 +289,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~06:45Z: L172 applied L171 (B1 padding, S1-S4, notes; X-008 addendum; owner points in #991 body) ; #991 merged 588ccb226 (T-303, first below the 10x10 grid at 90). Deploy ok (run 43685575655). #989 reply posted and closed. #973 authors answered all 15 (05:03Z), acknowledged 05:54Z. L173 records PR for #989 + #973 + k2m5-family 0e28e8a + DOIs (think-hisc).
 2026-11-15 ~07:00Z: NEW #992 (Miguel Lara, s(977) <= 17+21/sqrt2 ~ 31.849, beyond horizon; goebel side(977)=17+11sqrt2 ~32.556 > grid 32; no exact certificate, float CSV at 31.85). Intake; import think-ud9e (L175), blind review think-u58c (L174). L173 records PR (#989, #973 answers, DOIs) still running.
 2026-11-15 ~07:40Z: L173 = #993 (records #989 final, #973 answers + ack, k2m5 0e28e8a, DOIs on T-298); CI red only on D-509 pdf flake (run 43688482102); occurrence noted on think-6dle; #993 waits for main to move (no rerun, no empty commit). L174 review of #992: exact packing accepted but record already holds 31.765989508190 at 977 (Couzo #763) < claim 31.849; classical (Goebel (16,21) less squares; Friedman L-border at 982); S1; not recordable as a row. Goebel module lacks L-border extension (bordered members undercut module at 910 counts 325-2000) -> owner decision think-zkxy.
+2026-11-15 ~08:05Z: L175 = #994 (#992 not recordable: Couzo #763 row 31.765989508190 < claim; packet retained, review mapped, new devtools.diamond_staircases builds the construction over Q(sqrt2), both number-field routes accept; beads think-cszb licence, think-7j3i owner decision L-border Goebel (overlaps think-zkxy), think-526p NumberField.decimal bug). CI green. L176 senior review running. Then merge #994, merge main into #993 for a fresh run, reply on #992.
