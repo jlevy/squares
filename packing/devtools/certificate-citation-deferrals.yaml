@@ -85,3 +85,13 @@ deferrals:
     reason: The same configuration at 297 decided on sqpack's exact verifier over its field (route 1
       of route B, think-ozx8); cited with route B's verify_exact.py run when the house adopts T-247
       (think-vv1q owns that adoption).
+  - evidence: E-de-winter-996-exact-feasibility
+    results:
+    - T-304
+    bead: think-32cl
+    blocked_on: think-uhav
+    recorded: '2026-11-15'
+    reason: Joost de Winter's certificate of issue 996 at 90, 4.24e-03 below T-303, the house. The
+      case record cites it when the house adopts T-304, after its stage 4 review (think-uhav), in a
+      pass of 16 November 2026, since the pass of 15 November already moved 90 and a day's archive
+      holds one prior state a count; this entry is removed in that change.

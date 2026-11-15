@@ -1444,6 +1444,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-301.html | result/t-301.html | result | overview | 2026-11-14 | 2026-11-14 | live |
 | result/t-302.html | result/t-302.html | result | overview | 2026-11-14 | 2026-11-14 | live |
 | result/t-303.html | result/t-303.html | result | overview | 2026-11-15 | 2026-11-15 | live |
+| result/t-304.html | result/t-304.html | result | overview | 2026-11-15 | 2026-11-15 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |

@@ -5660,6 +5660,32 @@ sources:
       claim. The repository states no licence; the account submitted it in the issue
       (presumption of permission, think-cnn7), and DONOR-LICENSE.txt is de Winter's MIT notice
       for the donor. Retained in web/jazivxt-s90-upper-bound-2026-11-15/.
+  - key: '[de Winter s90 upper bound 2026-11-15]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-15'
+    lineage: builds-on-project
+    credit: de Winter after jazivxt, Levy
+    short_credit: de Winter after jazivxt et al.
+    note: >-
+      JoostdeWinter/square-packing at 64d5ee762a1159248d375973fb33825d51da637d
+      (2026-11-15T11:27:26Z), Joost de Winter's certificate for s(90) <=
+      199880777150913904183/20000000000000000000 = 9.99403885754569520915 (printed
+      9.994038857546, rounded up at 12 places), 2 minutes 47 seconds before
+      jlevy/squares#996, which requested its registration: a rational centre-direction JSON
+      (n90/n90_exact.json) and the same packing as a corner Witness/v2 (n90/n90_witness.yaml).
+      The packing is T-303, jazivxt's packing of jlevy/squares#989 ([jazivxt s90 upper bound
+      2026-11-15]), built from a crop of the source's own n = 157 packing, improved by a local
+      search over small groups of squares and optimized again after each change, 4.24e-3 below
+      it; a further arrangement of T-303's packing, as the issue says. The issue asks for
+      credit to de Winter as an improvement of jazivxt's packing, and says the local search was
+      run with GPT-6.1 Sol Max (OpenAI) and the optimization, certificate, checks and figures
+      were produced with Claude Fable 5.2 (Anthropic) under his direction. No local or global
+      optimality claim is proved. The lineage builds on this project: the start is the
+      record's T-303. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s90-upper-bound-2026-11-15/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
