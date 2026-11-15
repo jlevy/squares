@@ -159,3 +159,40 @@ reads Francisco Couzo’s #763 certificate at 977 (couzo-issue763-2026-10-23),
 so by the report-order rule the claim is not recorded and takes no row.
 Every report the record holds at 977, from Couzo’s packet of 14 October on, is below it.
 No evidence entry is written, since no row or entry rests on this decision.
+
+## The Stage 4 Review
+
+The [stage 4 review of 15 November](../../../../docs/project/reviews/review-2026-11-15-lara-992.md)
+(lane L174, think-u58c) was written blind in a separate lane, with its checker, controls
+plan and findings frozen before it read the record; its programs and receipts are in
+[lara-s977-992-review-2026-11-15/](../lara-s977-992-review-2026-11-15/README.md).
+This lane committed and pushed its own determination, this packet, the exact decision,
+the ledger and the requests entry, by 07:40Z, then read the review’s final head at 07:40Z
+and merged it in the same minute.
+
+It accepts the bound, nothing blocking, by two clean-room methods of its own, separating
+axes in Z[√2] and exact clipping in GMP rationals, over all 476,776 pairs.
+The two lanes agree: 3,540 touching pairs, as both routes here find, and 120 wall contacts
+on 116 squares, which is sqpack’s 240 corner coordinates on the boundary, two to a
+contact; its eight controls, like the six here, came out as stated.
+It also finds what this lane did not check or did not measure:
+
+- **981 fit** at the same side (F6, A981): each side’s outer row leaves L − 30 ≈ 1.849
+  free between two staircases, below the diamond.
+- **The (16, 21) arrangement** overlaps in exactly four pairs, the end cells of
+  neighbouring staircases, and #992 is it less those eight cells, square for square
+  (F10, G985); the L-bordered Göbel square (15, 21) of 982 is a packing (G982).
+- **The border audit** (F11): L-borders on Göbel’s members undercut
+  `devtools.goebel_construction` at 910 of the 1,676 counts from 325 to 2000, and four
+  current rows, at 534, 581, 741 and 796, lie within 6.2 × 10⁻¹¹ above a bordered side;
+  that is for think-7j3i and think-zkxy, and changes nothing here.
+
+Its F12 agrees that `devtools.construction_checker` cannot read the recipe.
+Its remark that the record maintains no checker over Q(√2) was written blind of the two
+maintained routes this lane used; what was missing was a reader of this recipe, which
+`devtools.diamond_staircases` is for its shape.
+It retained none of the source’s bytes, finding no licence; this packet retains them
+under think-cnn7’s presumption, and the review’s question 4 is think-cszb’s.
+Its F8 is the ledger’s verdict, not recorded, and it proposes S1, a routine consequence of
+a classical construction.
+Its six questions for the author go into the stage 7 reply and hold nothing open.
