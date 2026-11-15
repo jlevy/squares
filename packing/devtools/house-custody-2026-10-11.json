@@ -5,11 +5,11 @@
   "command": "python -m devtools.upper_bound_houses custody",
   "runtime": "CPython 3.14.7",
   "host": "vm",
-  "setup_seconds": 14.99,
-  "call_seconds": 41.59,
+  "setup_seconds": 20.25,
+  "call_seconds": 47.27,
   "child_timeout_seconds": 120,
   "snapshot_cap_bytes": 536870912,
-  "snapshot_source_bytes": 359594481,
+  "snapshot_source_bytes": 359630346,
   "fresh_geometric_deciders": false,
   "houses": {
     "29": "T-195",
@@ -350,7 +350,7 @@
     {"path":"packing/resources/web/ono-issue985-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json","bytes":45156,"sha256":"fce8c8c20bf3812173c76c6a2c1295541a72b23a9c948bdf380cc905d2038135"},
     {"path":"packing/resources/web/ono-issue985-2026-11-14/receipts/exact-certification.json.xz","bytes":12332,"sha256":"4e945943923acf233122303a3871ad7155a2ff9b92e65483544ddc1002bc8618"},
     {"path":"packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/report.json","bytes":4812,"sha256":"e8e74faf30633d61b38b6ce243b89d18cd90c240d9ebcfaa85517e2e60cc1a04"},
-    {"path":"packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/sources.json","bytes":6884,"sha256":"18fba5ea77c2bd1c240cbfc7e7baa3a5fdf2705ec0724257bbb01d6784cc1770"},
+    {"path":"packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/sources.json","bytes":6986,"sha256":"d98b6b61bd743abd1313feb7bb3fc38aa9dfd130923fe69890d438d4193365a4"},
     {"path":"packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/upstream-subtree.sha256","bytes":561,"sha256":"dd237980824b5a8c430d5cca235d5ffbdfe012df3fae8af8c33163d2634e8e5e"},
     {"path":"packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/source/n90.cert","bytes":11975,"sha256":"88c93b2f1d1f3061d1e6815f790d13f3d8f174dd3431f50d8d4d9d4383b3d466"},
     {"path":"packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/exact-certification.json.xz","bytes":3140,"sha256":"d6cb5e9f0d4acf2047bde3c6887ca36616ff11aea92a41e87e4ad529e76fd7f0"}
