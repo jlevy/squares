@@ -5,7 +5,7 @@ title: "Import #984 (s(228) <= 15.596043120921, supersedes T-300) and #985 (s(14
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: bold-ritchie-l164
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-14T20:55:08.650Z
-updated_at: 2026-11-15T00:51:14.470Z
+updated_at: 2026-11-15T01:13:27.106Z
 started_at: 2026-11-14T21:06:10.385Z
 ---
 
@@ -28,3 +28,5 @@ Packets ono-issue984-2026-11-14 and ono-issue985-2026-11-14 pin main b5636fd6694
 Read L163's final head (6d1e3383e, 21:54Z) at 21:56Z; merged it (71ee1243e) and mapped it (385617986): V-ono-984-985-review-check, E-ono-984/985-review-exact-feasibility, external_review on the reports and replays, T-301/T-302 adversarial accepted reviews; S3 each, 14 notes F1-F14; no disagreement with the replay, controls, margins or identity. T-301/T-302 read pending adoption at V3/C3. Adoption prepared in the working tree for the pass of 2026-11-15 ({147, 228}), not run before 00:00Z.
 
 Adopted T-301 at 228 and T-302 at 147 in the pass of 2026-11-15 (adopt_houses at 00:01Z), commit 7006d0924; runs in packing/cases/regularized_drawings/think-17ex-2026-11-15 (147 grid-slack 0.5-degree view drawn; 228 decided no better, axis view kept); KKT solves held at row 3 for RV-3 (147 certified 3.415e-9 below, 228 local minimum 4.289e-9 below, certificate invalid; both equal Nevska's leaderboard sides at 24 places). Stamped landed 2026-11-15 (9860e55f7), re-pinned (b75bd8205). Draft PR jlevy/squares#988. Merge must be on 2026-11-15 UTC. Replies owed on #984 and #985, and #983's promised follow-up, after merge.
+
+CI on b75bd8205 (runs 43660226126, 43660226180): suite-b (PR 574 frozen algebraic claim record, 147 row) and suite-d (SCREEN_FINDINGS n=1..200) fixed in 6687cec27 (pushed 01:12Z 2026-11-15); stamp_landed --apply and release_pin --update re-run at 01:11Z: no change (pin already last data commit 9860e55f7). overview/pages-required fail on result/t-180.html 501,700 bytes vs 500,000 budget (499,424 on #986 head 4544c4c96): HELD for owner (think-v4me), ceiling not raised.
