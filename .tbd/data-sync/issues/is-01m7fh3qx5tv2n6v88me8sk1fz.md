@@ -5,7 +5,7 @@ title: "Import #996/#997: Joost de Winter's s(90) <= 9.994038766610 (fa53fb0, re
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l181
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T11:57:32.962Z
-updated_at: 2026-11-15T12:55:18.894Z
+updated_at: 2026-11-15T12:57:07.632Z
 started_at: 2026-11-15T11:57:34.424Z
 ---
 
@@ -26,3 +26,5 @@ L181 (bold-ritchie-l181), 2026-11-15: controls plan stated before any run of the
 Intake commit 35e33e184 (12:17:43Z): packet de-winter-s90-upper-bound-2026-11-15 pinned at 64d5ee7; replay on both routes (24,030 pair decisions), 3 gross and 11 sharp controls all as stated (the touching-square branch taken: square 10 grown by 0); left/bottom wall contacts exact, far wall 5.07e-21, least pair gap 1.0641e-12 (2, 40); T-303 contraction margin 1.0988e-11 (79, 81), own 9.533e-12 (2, 40); identity vs T-303: not 1:1 by nearest centres, identity assignment 6 beyond 0.1 (largest 0.646), all 40 tilted paired same sign -> T-303's arrangement improved; twin = JSON (witness-corners now accepts the schema URL and square-k ids); L step carries nowhere; ledger upper-bounds-996-20261115. Registered T-304 (V3/C3 on the replay, S3 draft) in b1e8f98ab (12:38:45Z). Nothing of L180 read before these commits.
 
 Read L180's frozen findings (4622bdfb8) at 12:39Z; merged (249a0dd08), mapped (d1e0283f7): accepted, 26/26 controls, F1-F7 notes, no disagreement. Read final head (95ad4bc8a) at 12:43Z; merged (8f15a2305), mapped (8cd27803b): F8-F13 notes, S3, six questions for the author; agrees with packet measurements. Adoption (pass of 2026-11-16, LATER_PASSES {90}), regularization, stamps and re-pin wait for 16 November UTC.
+
+Change of input (coordinator, 12:55Z): de Winter's #997 (12:08:33Z) replaces #996's certificate with fa53fb0d734fbf438bcfb73c1434a15894bb2bc5 (side 99940387666098521323/10000000000000000000 = 9.994038766610 at 12 places, 9e-8 below), asking to pin it and disregard 64d5ee7. Head 6c0ad56 (12:07:15Z) changes only n90/REGISTRATION.md (the commit named) and n90/SHA256SUMS (the new digests). New controls plan stated before any run of the fa53fb0 certificate: scratch l181-notes/controls-plan-n90-fa53fb0.md SHA-256 88b26ff1b8fb96a7ee5bf9909193b237f85fc0808cc494bb0ec0e36364ef8cf2, hashed 12:56:59Z; 3 gross and 11 sharp controls, the touching-square branch stated in advance.
