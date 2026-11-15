@@ -5,14 +5,14 @@ title: "Göbel's construction omits L-border extensions of its own members: at 9
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - result-import
   - decision
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-15T07:07:58.018Z
-updated_at: 2026-11-15T07:07:58.018Z
+updated_at: 2026-11-15T07:42:34.286Z
 ---
 Found in the import of jlevy/squares#992 (lane L175, think-ud9e). `devtools.goebel_construction` takes Göbel's side at a count as the least member of the three Kingbird families at that count or above, deletion included. It applies no L-border. Friedman's survey DS7 (packing/resources/web/friedman-ds7-survey-2009-html.md, section 2) states, beside Göbel's family, that n + 2s(n) + 1 squares pack in side s(n) + 1 by an L around a packing of n, and builds 82 from Göbel's 65 that way.
 
@@ -23,3 +23,7 @@ Found in the import of jlevy/squares#992 (lane L175, think-ud9e). `devtools.goeb
 **The question, the owner's.** #613's answer (think-8krd) named "Goebel's classical constructions", and the record reads it as the three families. Do L-border extensions of Göbel's members, one layer or more, join Göbel's construction? If yes, the module grows an L-border closure, proved final as now, and every count beyond 324 whose side falls is read again: a row above the new side is marked above-classical-construction, and walks read from that day start from the new side. If no, nothing changes, and the 27 held recipes stay with D2 and think-zkxy.
 
 **Not measured.** How many counts from 325 the closure lowers, and whether any current row lies between the two sides. Measure with a tool before the owner is asked (OR-1); nothing in lane L175 measured it.
+
+## Notes
+
+2026-11-15 L175 (bold-ritchie-l175): the blind stage 4 review of #992 (lane L174, think-u58c; docs/project/reviews/review-2026-11-15-lara-992.md, F11) measured what this bead says was not measured, with its own retained program (packing/resources/web/lara-s977-992-review-2026-11-15/programs/l174_border_audit.py, out/border-audit.json): zero to three L-borders on every member undercut devtools.goebel_construction's side at 910 of the 1,676 counts from 325 to 2000, 975 to 982 among them (17 + 21/sqrt 2 against 2 + 43 sqrt(2)/2 at 975 and 17 + 11 sqrt 2 at 976 to 982). 28 rows of source-coverage.yaml lie at or above a bordered side and below the module's: 24 superseded, among them Couzo's 981 and 982 of 14 and 15 October, and four current, couzo-index-2026-10-15 at 534, 581, 741 and 796, each within 6.2e-11 above a bordered Göbel side. A yes here would mark those four above a classical construction. The audit is a review program, not a maintained tool: measure again with one before the owner is asked (OR-1).
