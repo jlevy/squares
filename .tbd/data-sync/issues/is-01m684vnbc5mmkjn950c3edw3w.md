@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 318
+version: 319
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -110,7 +110,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T06:55:16.671Z
+updated_at: 2026-11-15T06:56:07.968Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -284,3 +284,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~04:55Z: L169 review of #989 landed (22949a12e; accepted, all notes, S3 proposed; no family claims s(90)=10; first s(n^2-n)<n at n=10; author repo states no licence for its files). L170 import running. k2m5-family 0e28e8a (README: software DOI) to read in the next records PR.
 2026-11-15 ~05:40Z: L170 import = #991 (T-303 at 90, first below the 10x10 grid; 11-15 pass {90,147,228}; stamped 11-15). L171 senior review: B1 padding double-counts wall slack; S1 finding count; S2 timing; S3 X-008 stale (BC-024 tilted residue at 51 and 90) -> addendum + 2 owner points (grammar conclusion; 37/63 calibration constants move with adoptions); S4 licence bead think-86c1. L172 addressing; merge by 23:59Z.
 2026-11-15 ~06:45Z: L172 applied L171 (B1 padding, S1-S4, notes; X-008 addendum; owner points in #991 body) ; #991 merged 588ccb226 (T-303, first below the 10x10 grid at 90). Deploy ok (run 43685575655). #989 reply posted and closed. #973 authors answered all 15 (05:03Z), acknowledged 05:54Z. L173 records PR for #989 + #973 + k2m5-family 0e28e8a + DOIs (think-hisc).
+2026-11-15 ~07:00Z: NEW #992 (Miguel Lara, s(977) <= 17+21/sqrt2 ~ 31.849, beyond horizon; goebel side(977)=17+11sqrt2 ~32.556 > grid 32; no exact certificate, float CSV at 31.85). Intake; import think-ud9e (L175), blind review think-u58c (L174). L173 records PR (#989, #973 answers, DOIs) still running.
