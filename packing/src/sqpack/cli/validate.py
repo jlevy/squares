@@ -274,11 +274,16 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: 37 and 61 against the catalogue packing's 0 and 10, so 147 joins the records with a
 #: square that separates, 126 of them, and n=1..324 has 2,716 separating squares and 6,655
 #: translating ones; at n=1..200, 68 records, 761 separating squares and 2,366
-#: translating ones, against 67, 724 and 2,315.
+#: translating ones, against 67, 724 and 2,315. Lane L170 (think-i8y9) moved 90 from the
+#: 10 x 10 grid to jazivxt's certificate of issue 989 (T-303) in the same pass, a new
+#: arrangement: separating and translating squares 15 and 31 against the grid's 0 and 10,
+#: so 90 joins the records with a square that separates: n=1..100 has 29 such records, 126
+#: separating squares and 598 translating ones; n=1..200 69, 776 and 2,387; and n=1..324
+#: 127, 2,731 and 6,676.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (68, 761, 182, 2366),
-    "n=1..324": (126, 2716, 302, 6655),
+    "n=1..100": (29, 126, 86, 598),
+    "n=1..200": (69, 776, 182, 2387),
+    "n=1..324": (127, 2731, 302, 6676),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

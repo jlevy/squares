@@ -134,7 +134,9 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: (review F4 of #935 and #936).
 #: The pass of 15 November 2026 (think-17ex) moved it at 147 and 228, to Roberto Ono's
 #: certificates (T-302, T-301), each opened from contact by about 3e-10 between pairs and
-#: touching three walls: both joined.
+#: touching three walls: both joined. The same pass (think-i8y9) moved it at 90, from the
+#: grid to jazivxt's certificate (T-303), a contact arrangement opened by about 1.2e-12
+#: between pairs and 2.1e-15 from the left and bottom walls: 90 joined.
 #: Re-screening the adopted counts with the screen's own `--update --n` rebuilds the
 #: retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -143,12 +145,17 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
+        # 90 joined on 15 November 2026 with jazivxt's certificate there (T-303,
+        # think-i8y9): its least pair margin, 1.2e-12, lies between the screen's
+        # tolerances.
+        90,
     ],
     "n=1..200": [
         68,
         84,
         86,
         88,
+        90,
         105,
         106,
         129,
@@ -175,6 +182,7 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
+        90,
         105,
         106,
         129,

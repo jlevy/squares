@@ -8836,7 +8836,7 @@ verifiers:
       - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_geom.py
       - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_selftest.py
       - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_controls.py
-    independence_record: docs/project/reviews/review-2026-11-15-jazivxt-989.md
+    independence_record: packing/resources/web/jazivxt-s90-989-review-2026-11-15/README.md
     independence:
       read: [mathematics, specification, certificate-format, producer-output]
       clean_room: true

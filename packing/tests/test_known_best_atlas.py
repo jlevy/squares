@@ -109,19 +109,21 @@ GOLDEN_UNITSQUARE: dict[str, set[int]] = {
 #: How the corpus splits by source kind at each corpus; a case switching kind fails here.
 GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # 29 moved from Kingbird to PR #622's packet (T-195) on 17 October 2026, the first
-    # adoption under the house rule (think-30n2).
+    # adoption under the house rule (think-30n2), and 90 from the grid to jazivxt's issue 989
+    # packet on 15 November 2026 (T-303).
     "n=1..100": {
-        "exact-grid": 64,
+        "exact-grid": 63,
         "kingbird-derived-facts": 29,
-        "packet-derived-facts": 7,
+        "packet-derived-facts": 8,
     },
     # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4),
     # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-220), and 157
-    # from the grid to Joost de Winter's issue 958 packet on 11 November (T-293).
+    # from the grid to Joost de Winter's issue 958 packet on 11 November (T-293), and 90 from
+    # the grid to jazivxt's issue 989 packet on 15 November (T-303).
     "n=1..200": {
-        "exact-grid": 112,
+        "exact-grid": 111,
         "kingbird-derived-facts": 50,
-        "packet-derived-facts": 38,
+        "packet-derived-facts": 39,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
@@ -134,11 +136,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # to Francisco Couzo's issue 678 packet (T-223, think-xu4d), and on 31 October 293 and
     # 299 (both from Kingbird), to Evan Daniel's issue 845 and issue 824 update packets, and
     # on 11 November 157 (from the grid), to Joost de Winter's issue 958 packet (T-293), and
-    # on 15 November 147 (from Kingbird), to Roberto Ono's issue 985 packet (T-302).
+    # on 15 November 147 (from Kingbird), to Roberto Ono's issue 985 packet (T-302), and 90
+    # (from the grid), to jazivxt's issue 989 packet (T-303).
     "n=1..324": {
-        "exact-grid": 173,
+        "exact-grid": 172,
         "kingbird-derived-facts": 69,
-        "packet-derived-facts": 82,
+        "packet-derived-facts": 83,
     },
 }
 
@@ -1238,11 +1241,11 @@ def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
         for card in cards:
             if card.attrib["data-segment"] == "grid":
                 drawn.setdefault(int(card.attrib["data-row"]) + 1, int(card.attrib["data-n"]))
-        # Only row 13 differs from the current layout: 157 left the grid on 11 November
-        # 2026 (T-293). A count that leaves or joins the grid before the redraw adds its
-        # row here, on purpose.
+        # Only rows 10 and 13 differ from the current layout: 157 left the grid on 11
+        # November 2026 (T-293), and 90 on 15 November 2026 (T-303). A count that leaves or
+        # joins the grid before the redraw adds its row here, on purpose.
         moved = sorted(row for row, first in drawn.items() if by_row[row].first_grid_n != first)
-        assert moved == [13], moved
+        assert moved == [10, 13], moved
         by_row = {row: GridTransition(row, first) for row, first in drawn.items()}
     assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 325))
     for card in cards:
@@ -2493,8 +2496,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # (T-300), one more source with no new name, Özden held off the block; PingYou Ltd's PR
     # 574 certificates still hold other counts. Lane L164 draws 228 and 147 from Roberto Ono's
     # two packets (T-301, T-302), and no longer from Özden's issue 983 packet, which held
-    # nothing else: two sources more and one fewer, Ono held off the block.
-    assert len(expected_sources) == 46
+    # nothing else: two sources more and one fewer, Ono held off the block. Lane L170 of 15
+    # November draws 90 from jazivxt's issue 989 packet (T-303), one more source, where the
+    # grid was, jazivxt held off the block.
+    assert len(expected_sources) == 47
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2648,13 +2653,16 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     the finder at 228 (T-300, in the pass of 14 November), held alike. Lane L164 (think-17ex)
     credits Roberto Ono, a new name, as the finder at 228 (T-301) in Özden's place and at 147
     (T-302), in the pass of 15 November, so the hold holds Ono at both and Özden no longer
-    at 228; released, the block gains both names."""
+    at 228; released, the block gains both names. Lane L170 (think-i8y9) credits jazivxt, a
+    new name, as the finder at 90 (T-303) in the same pass, where the grid credited no one,
+    held alike; released, the block gains that name too."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
             (156, 172, 179, 180, 199, 232, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
         ),
         **dict.fromkeys((147, 228), ("Roberto Ono",)),
+        90: ("jazivxt",),
     }
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
@@ -2664,6 +2672,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (179, ["Doğa Özden"], []),
         (180, ["Doğa Özden"], []),
         (199, ["Evan Daniel"], ["Doğa Özden"]),
+        (90, ["jazivxt"], []),
         (147, ["Roberto Ono"], []),
         (228, ["Roberto Ono"], []),
         (232, ["Alex Chilton"], ["Francisco Couzo", "Doğa Özden"]),
@@ -2706,11 +2715,13 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     finally:
         monkeypatch.undo()
         printed()
-    assert released - names == {"Özden", "Ono"}
+    assert released - names == {"Özden", "Ono", "jazivxt"}
     assert "Özden" not in lines
     assert "Ono" not in lines
+    assert "jazivxt" not in lines
     assert "Özden" in released_lines
     assert "Ono" in released_lines
+    assert "jazivxt" in released_lines
     assert "Yim" not in released_lines
     assert released_lines != lines
     drawn = ET.fromstring((ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8"))

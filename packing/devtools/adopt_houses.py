@@ -157,9 +157,10 @@ VERIFIER_TABLE = re.compile(
 #: 155, 258, 263 and 302 and the grid prose at 308, and the pass of 19 October 2026 the
 #: intake's staging paragraph, grid sentence and packing section at 183 (T-220), and lane
 #: L104's pass of 11 November 2026 the grid sentence and packing section at 157 (T-293) and
-#: the packing section's opening at 132 (T-292), review F14 of #958. Only their owned parts
-#: are the writer's.
-HAND_MARKED = frozenset({132, 155, 157, 183, 258, 263, 302, 308})
+#: the packing section's opening at 132 (T-292), review F14 of #958, and lane L170's pass of
+#: 15 November 2026 the grid sentence and packing section at 90 (T-303), as at 157. Only
+#: their owned parts are the writer's.
+HAND_MARKED = frozenset({90, 132, 155, 157, 183, 258, 263, 302, 308})
 #: The first pass whose writer also marks the closing sentence of a T-155 view's section as
 #: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
 VIEW_SECTION_FROM = "2026-10-19"
@@ -2719,6 +2720,41 @@ RESULTS: dict[str, Prose] = {
         ),
         diversity="by a Claude agent, a system family that also produced the certificate",
     ),
+    "T-303": Prose(
+        author="jazivxt",
+        reported="on [jlevy/squares#989](https://github.com/jlevy/squares/issues/989)",
+        producer_route=False,
+        ai=(
+            "Issue 989 and the source’s README say GPT-6 Astra Ultra was the AI collaborator "
+            "on the search and verification; the source’s first published README named it "
+            "Codex Astra Ultra. The issue was opened by the account dpre4ai and asks for "
+            "credit to jazivxt and GPT-6 Astra Ultra; this record credits the person."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the checker the issue says accepted it, "
+            "Francisco Couzo’s, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says the packing was made from a rectangular crop, about 12.993303 by "
+            "9.353384, of Joost de Winter’s packing of 157 squares (T-293), whose successive "
+            "copies, offset horizontally by one unit, fit at a vertical pitch of 9.019403; a "
+            "square window across two copies held 90 squares, whose positions and "
+            "orientations were then tightened and made exact. It is the first packing of 90 "
+            "squares below the 10 × 10 grid on record: no symmetry pairs it one to one with "
+            "the grid’s squares, the optimal assignment moving 52 beyond a tenth, and its 44 "
+            "tilted squares turn 22.6 to 31.6 degrees, all one way. So jazivxt is the "
+            "packing’s finder, after de Winter’s 157; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 15 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by "
+            "exact clipping in GMP rationals over every square, wall and pair; its 23 "
+            "controls, each stated beforehand, were each decided as stated"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2739,6 +2775,7 @@ NTUMLNOOB = "ntumlnoob"
 OZDEN = "Doğa Özden"
 YIM = "Kaelan Yim"
 ONO = "Roberto Ono"
+JAZIVXT = "jazivxt"
 
 
 @dataclass(frozen=True)
@@ -2847,6 +2884,19 @@ CREDITS: dict[int, Credit] = {
         (XU,),
         (COUZO, PINGYOU),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
+    # T-303 (adopted in the pass of 15 November 2026, the first adoption at 90), jazivxt's
+    # issue 989, posted by the account dpre4ai: a window of shifted copies of a crop of Joost
+    # de Winter's n = 157 packing (T-293), the first packing of 90 squares below the grid, 52
+    # squares beyond a tenth of it. The phrase names the packing the crop was taken from, as
+    # the 147 phrase names Daniel's 229, and the grid it is the first below, as the 157 one.
+    # It opens with "the packing" because the writer capitalizes a phrase's first letter, and
+    # the handle keeps its own case (attribution.md).
+    90: Credit(
+        (JAZIVXT,),
+        (),
+        "the packing jazivxt found from shifted copies of a crop of Joost de Winter’s n = 157 "
+        "packing, the first below the 10 × 10 grid",
     ),
     # Evan Daniel's exact form (T-193, of T-174 by its item) of PingYou Ltd's tighter
     # certificate of his own display regularization of Ryan Xu's packing (T-174, of T-146,

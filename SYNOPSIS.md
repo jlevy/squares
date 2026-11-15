@@ -868,6 +868,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-977-979-20261114/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-983-20261114/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-989-20261115/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
@@ -1024,6 +1025,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issue 977 (think-g2ax)](packing/cases/regularized_drawings/think-g2ax-2026-11-14/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 983 (think-14i2)](packing/cases/regularized_drawings/think-14i2-2026-11-14/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issues 984 and 985 (think-17ex)](packing/cases/regularized_drawings/think-17ex-2026-11-15/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption of Issue 989 (think-i8y9)](packing/cases/regularized_drawings/think-i8y9-2026-11-15/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 958 (think-bcfs)](packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 959 (think-89i7)](packing/cases/regularized_drawings/think-89i7-2026-11-12/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 960 (think-my76)](packing/cases/regularized_drawings/think-my76-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
@@ -1097,6 +1099,7 @@ case or experiment separately.
 | [De Winter’s Certificates of #977 and #979: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-de-winter-977-979.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #983: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ozden-983.md) | dated review record | record | retained | — |
 | [Ono’s Certificates of #984 and #985: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ono-984-985.md) | dated review record | record | retained | — |
+| [The Certificate of #989 by jazivxt: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-jazivxt-989.md) | dated review record | record | retained | — |
 | [Proof Review: Khalili and Gharabaghi’s `s(k² − 5) = k` for Every `k ≥ 7`](docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md) | dated review record | record | retained | — |
 | [De Winter’s Packings at 132 and 157: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-dewinter-132-157.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #959: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-12-ozden-959.md) | dated review record | record | retained | — |

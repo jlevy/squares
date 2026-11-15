@@ -18233,6 +18233,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-090.md
+    record_key: '90'
+    field: /reported_upper_bound/found_by/0
+  expected_text: jazivxt
+  start: 0
+  end: 7
+  label: jazivxt
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-091.md
     record_key: '91'
     field: /reported_lower_bound/proved_by/0

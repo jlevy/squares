@@ -63318,14 +63318,15 @@ evidence:
         (L169, under think-176a), prompted separately from the import lane (L170, think-i8y9)
         and blind to its work throughout
       note: >-
-        docs/project/reviews/review-2026-11-15-jazivxt-989.md accepted the certificate with seven
-        findings, all notes, none blocking: F1 on feasibility (every pair strictly apart, no
-        square touching a wall), F2 on the review's own 23 controls, F3 (the side is the claim
-        exactly), F4 and F5 for the records (the side is not the packing's extent, the squares
-        fitting a box 2.398e-13 smaller; a contact arrangement opened by about 1.2e-12), F6 for
-        the author (the file states neither the box nor the rotation sense) and F7 (the
-        tilts). Its clean-room run is E-jazivxt-989-review-exact-feasibility, and the replay
-        E-jazivxt-989-exact-feasibility.
+        docs/project/reviews/review-2026-11-15-jazivxt-989.md accepted the certificate with
+        fourteen findings, all notes, none blocking: F1 on feasibility (every pair strictly
+        apart, no square touching a wall), F2 on the review's own 23 controls, F3 (the side is
+        the claim exactly), F4, F5, F7 and F8 to F11 for the records (the side is not the
+        packing's extent, the squares fitting a box 2.398e-13 smaller; a contact arrangement
+        opened by about 1.2e-12; the tilts; nothing in the record claims s(90) = 10; the
+        conjectured integer optimum refuted; RV-3 not applying; the construction reproduced
+        from de Winter's 157), F6 and F12 to F14 for the author, and S3. Its clean-room run is
+        E-jazivxt-989-review-exact-feasibility, and the replay E-jazivxt-989-exact-feasibility.
     source_reviewed: '2026-11-15'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at f9b31b4,
@@ -63420,14 +63421,15 @@ evidence:
         (L169, under think-176a), prompted separately from the import lane (L170, think-i8y9)
         and blind to its work throughout
       note: >-
-        docs/project/reviews/review-2026-11-15-jazivxt-989.md accepted the certificate with seven
-        findings, all notes, none blocking: F1 on feasibility (every pair strictly apart, no
-        square touching a wall), F2 on the review's own 23 controls, F3 (the side is the claim
-        exactly), F4 and F5 for the records (the side is not the packing's extent, the squares
-        fitting a box 2.398e-13 smaller; a contact arrangement opened by about 1.2e-12), F6 for
-        the author (the file states neither the box nor the rotation sense) and F7 (the
-        tilts). Its clean-room run is E-jazivxt-989-review-exact-feasibility, and the replay
-        E-jazivxt-989-exact-feasibility.
+        docs/project/reviews/review-2026-11-15-jazivxt-989.md accepted the certificate with
+        fourteen findings, all notes, none blocking: F1 on feasibility (every pair strictly
+        apart, no square touching a wall), F2 on the review's own 23 controls, F3 (the side is
+        the claim exactly), F4, F5, F7 and F8 to F11 for the records (the side is not the
+        packing's extent, the squares fitting a box 2.398e-13 smaller; a contact arrangement
+        opened by about 1.2e-12; the tilts; nothing in the record claims s(90) = 10; the
+        conjectured integer optimum refuted; RV-3 not applying; the construction reproduced
+        from de Winter's 157), F6 and F12 to F14 for the author, and S3. Its clean-room run is
+        E-jazivxt-989-review-exact-feasibility, and the replay E-jazivxt-989-exact-feasibility.
     limitations: >-
       A replay of the one retained certificate by two maintained exact routes that share this
       repository's evand-cert reader (certificate parsing and half-angle conversion), Fraction
@@ -63508,7 +63510,7 @@ evidence:
           2026-11-15T03:19:25Z, before its author read the source's README, Francisco Couzo's
           checker, or this repository's witness, verifier or promotion code; it shares no code
           with the source, this repository's maintained routes or any earlier review's programs.
-    independence_record: docs/project/reviews/review-2026-11-15-jazivxt-989.md
+    independence_record: packing/resources/web/jazivxt-s90-989-review-2026-11-15/README.md
     external_review:
       state: informally-verified
       date: '2026-11-15'
@@ -63517,14 +63519,15 @@ evidence:
         (L169, under think-176a), prompted separately from the import lane (L170, think-i8y9)
         and blind to its work throughout
       note: >-
-        docs/project/reviews/review-2026-11-15-jazivxt-989.md accepted the certificate with seven
-        findings, all notes, none blocking: F1 on feasibility (every pair strictly apart, no
-        square touching a wall), F2 on the review's own 23 controls, F3 (the side is the claim
-        exactly), F4 and F5 for the records (the side is not the packing's extent, the squares
-        fitting a box 2.398e-13 smaller; a contact arrangement opened by about 1.2e-12), F6 for
-        the author (the file states neither the box nor the rotation sense) and F7 (the
-        tilts). Its clean-room run is E-jazivxt-989-review-exact-feasibility, and the replay
-        E-jazivxt-989-exact-feasibility.
+        docs/project/reviews/review-2026-11-15-jazivxt-989.md accepted the certificate with
+        fourteen findings, all notes, none blocking: F1 on feasibility (every pair strictly
+        apart, no square touching a wall), F2 on the review's own 23 controls, F3 (the side is
+        the claim exactly), F4, F5, F7 and F8 to F11 for the records (the side is not the
+        packing's extent, the squares fitting a box 2.398e-13 smaller; a contact arrangement
+        opened by about 1.2e-12; the tilts; nothing in the record claims s(90) = 10; the
+        conjectured integer optimum refuted; RV-3 not applying; the construction reproduced
+        from de Winter's 157), F6 and F12 to F14 for the author, and S3. Its clean-room run is
+        E-jazivxt-989-review-exact-feasibility, and the replay E-jazivxt-989-exact-feasibility.
     limitations: >-
       A clean-room decision of the one retained certificate by two exact methods in one program,
       which share its reader. Finite feasibility only.

@@ -4,7 +4,7 @@
   "generated_by": "python -m devtools.flip_regularization --update",
   "policy_document": "docs/project/policies/regularization-policy.md",
   "rule": "docs/project/policies/regularization-policy.md#13-flip-regularization",
-  "totals": {"counts":324,"identity":247,"turned":77,"decided_by":{"quadrants":253,"grid-4":50,"grid-8":18,"grid-16":3,"squares":0},"poses":[{"rotate":0,"flip":false,"reads_as":"unchanged","counts":247},{"rotate":90,"flip":false,"reads_as":"quarter turn counter-clockwise","counts":11},{"rotate":180,"flip":false,"reads_as":"half turn","counts":3},{"rotate":270,"flip":false,"reads_as":"quarter turn clockwise","counts":25},{"rotate":0,"flip":true,"reads_as":"mirror across the falling diagonal","counts":14},{"rotate":90,"flip":true,"reads_as":"mirror left-right","counts":4},{"rotate":180,"flip":true,"reads_as":"mirror across the rising diagonal","counts":8},{"rotate":270,"flip":true,"reads_as":"mirror top-bottom","counts":12}]},
+  "totals": {"counts":324,"identity":246,"turned":78,"decided_by":{"quadrants":253,"grid-4":50,"grid-8":18,"grid-16":3,"squares":0},"poses":[{"rotate":0,"flip":false,"reads_as":"unchanged","counts":246},{"rotate":90,"flip":false,"reads_as":"quarter turn counter-clockwise","counts":11},{"rotate":180,"flip":false,"reads_as":"half turn","counts":3},{"rotate":270,"flip":false,"reads_as":"quarter turn clockwise","counts":25},{"rotate":0,"flip":true,"reads_as":"mirror across the falling diagonal","counts":15},{"rotate":90,"flip":true,"reads_as":"mirror left-right","counts":4},{"rotate":180,"flip":true,"reads_as":"mirror across the rising diagonal","counts":8},{"rotate":270,"flip":true,"reads_as":"mirror top-bottom","counts":12}]},
   "entries": [
     {"n":1,"drawn":"house","rendering":"packing/atlas/known-best/rendering/n-001.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[1.0,1.0,1.0,1.0]},
     {"n":2,"drawn":"house","rendering":"packing/atlas/known-best/rendering/n-002.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[1.0,1.0,0.0,0.0]},
@@ -95,7 +95,7 @@
     {"n":87,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-087.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[0.979815,0.830947,0.960417,0.823778]},
     {"n":88,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-088.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[0.986532,0.836872,0.949902,0.830931]},
     {"n":89,"drawn":"house","rendering":"packing/atlas/known-best/rendering/n-089.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[0.899013,0.899013,0.899013,0.899013]},
-    {"n":90,"drawn":"house","rendering":"packing/atlas/known-best/rendering/n-090.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[1.0,1.0,0.8,0.8]},
+    {"n":90,"drawn":"view","rendering":"packing/atlas/known-best/regularized/rendering/n-090.svg","rotate":0,"flip":true,"decided_by":"quadrants","quadrants":[0.960037,0.894389,0.866205,0.88061]},
     {"n":91,"drawn":"house","rendering":"packing/atlas/known-best/rendering/n-091.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[1.0,1.0,0.84,0.8]},
     {"n":92,"drawn":"house","rendering":"packing/atlas/known-best/rendering/n-092.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[1.0,1.0,0.88,0.8]},
     {"n":93,"drawn":"house","rendering":"packing/atlas/known-best/rendering/n-093.svg","rotate":0,"flip":false,"decided_by":"quadrants","quadrants":[1.0,1.0,0.92,0.8]},

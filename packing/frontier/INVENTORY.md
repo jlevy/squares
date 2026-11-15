@@ -200,10 +200,10 @@ results, it is a statement about what this repository has itself examined.
 | `E-friedman-ds7-table2-opaque-lower` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | unknown | not recorded | - |
 | `E-n017-maciver-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published | unknown | not recorded | *none held* |
 | `E-green26-reported-lower` | 0 | lower-bound | reported | - | - | defect-found | previously-published | unknown | not recorded | - |
-| `E-kingbird-upper-register` | 149 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
+| `E-kingbird-upper-register` | 148 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
 | `E-kingbird-grid-completeness` | 93 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
 | `E-unitsquare-release1-report` | 0 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-basic-grid-upper` | 173 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
+| `E-basic-grid-upper` | 172 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-basic-area-lower` | 18 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-nagamochi-lower` | 26 | lower-bound | reported | - | elsewhere | defect-found | previously-published | no code | not recorded | - |
 | `E-karakus-strip-lower` | 197 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | not recorded | - |
@@ -1005,9 +1005,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-ono-985-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 147 that T-302 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
 | `E-ono-984-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 228: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | `V-ono-984-985-review-check` |
 | `E-ono-985-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 147: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | `V-ono-984-985-review-check` |
-| `E-jazivxt-989-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
-| `E-jazivxt-989-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 1 of 1: the certificate at n = 90 that T-303 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
-| `E-jazivxt-989-review-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 90: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | `V-jazivxt-989-review-check` |
+| `E-jazivxt-989-certificate-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-jazivxt-989-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | shared components | full, 1 of 1: the certificate at n = 90 that T-303 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-jazivxt-989-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 90: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | `V-jazivxt-989-review-check` |
 
 ## What the register rests on
 
@@ -1074,7 +1074,7 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | --- | ---: | --- | --- |
 | `E-karakus-strip-lower` | 197 | elsewhere | informally-verified |
 | `E-karakus-strip-measure-interval` | 197 | here | - |
-| `E-basic-grid-upper` | 173 | here | - |
+| `E-basic-grid-upper` | 172 | here | - |
 | `E-regularized-bounds-2026-10-12-exact-decision` | 50 | here | - |
 | `E-evand-exact-ceilings-2026-10-05-exact-replay` | 30 | here | - |
 

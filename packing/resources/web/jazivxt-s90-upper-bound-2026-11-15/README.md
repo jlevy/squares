@@ -174,21 +174,21 @@ So the bound carries to no other count.
 
 The stage 4 review of 15 November 2026
 ([review-2026-11-15-jazivxt-989.md](../../../../docs/project/reviews/review-2026-11-15-jazivxt-989.md),
-lane L169), written blind to this lane, accepts the certificate with seven findings, all
-notes, none blocking.
-Its clean-room checker decides every square, wall and all 4,005 pairs twice, by
-separating axes in Python integers and by exact clipping in GMP rationals, and all 23 of
-its controls were decided as stated.
+lane L169), written blind to this lane, accepts the certificate with fourteen findings,
+all notes, none blocking, and scores it S3. Its clean-room checker decides every square,
+wall and all 4,005 pairs twice, by separating axes in Python integers and by exact
+clipping in GMP rationals, and all 23 of its controls were decided as stated.
 This lane read its frozen findings at 03:33Z on 15 November, after its own replay,
-controls and measurements (03:25Z) and registration (03:32Z) were committed.
-Read against this packet’s receipts, the review’s least pair margin (1.194484972 ×
-10⁻¹², squares 79 and 81) is the replay’s exactly; its least wall clearance,
-2.1000000001021 × 10⁻¹⁵, at squares 28, 33 and 75 (bottom) and 61, 62 and 71 (left), is
-the replay’s, and square 28, which the sharp controls grew at its wall, is one of them;
-its right and top clearance, 928604816731/3906250000000000000000000, is the amount the
-sharp controls lowered the side by; and its tilts (41 upright, 44 turned clockwise by
-22.6 to 31.6 degrees, five within 0.07 degrees) are
-[measure/identity.json](measure/identity.json)’s. No disagreement.
+controls and measurements (03:25Z) and registration (03:32Z) were committed, and its
+final head at 03:58Z, after it had written the adoption (03:42Z). Read against this
+packet’s receipts, the review’s least pair margin (1.194484972 × 10⁻¹², squares 79 and
+81\) is the replay’s exactly; its least wall clearance, 2.1000000001021 × 10⁻¹⁵, at
+squares 28, 33 and 75 (bottom) and 61, 62 and 71 (left), is the replay’s, and square 28,
+which the sharp controls grew at its wall, is one of them; its right and top clearance,
+928604816731/3906250000000000000000000, is the amount the sharp controls lowered the
+side by; and its tilts (41 upright, 44 turned clockwise by 22.6 to 31.6 degrees, five
+within 0.07 degrees) are [measure/identity.json](measure/identity.json)’s. No
+disagreement.
 
 What the review adds:
 
@@ -201,9 +201,56 @@ What the review adds:
 - **The tilts** (F7): 25 squares at −22.914477 degrees under seven values of t spanning
   1.24 × 10⁻¹².
 
-Its question for the author (F6): the file states neither the box nor the sense of the
-rotation; read clockwise, 66 pairs overlap.
-A comment line saying “[0, S]², θ counterclockwise with y up” would settle it.
+Its first question for the author (F6), that the file states neither the box nor the
+sense of the rotation, which read clockwise overlaps 66 pairs, the source’s README
+answers: the origin lower left and θ counterclockwise (F14).
+
+After its findings were frozen the review measured the record, the padding and the
+lineage, each agreeing with this packet where both measured:
+
+- **Nothing in the record conflicts** (F8): the families at k = 10 have deficits 1 to 5,
+  and no entry claims s(90) = 10; the case’s conjectured integer optimum and its prose
+  that nothing beats the grid are refuted (F9).
+- **RV-3 does not apply** (F10): the grid’s contraction margin is 0 (squares 1 and 2),
+  and the certificate’s own, 1.0988 × 10⁻¹¹ (squares 79 and 81), equals
+  [measure/contraction-n090-own.json](measure/contraction-n090-own.json)’s.
+- **Identity**: against the grid its optimal assignment moves 90, 54 and 52 squares
+  beyond 10⁻³, 10⁻² and 10⁻¹, largest 1.332, as
+  [measure/identity.json](measure/identity.json) does.
+- **The construction reproduces** (F11) from de Winter’s 157 as the T-293 packet retains
+  it: the crop to the top of his square 103 is 9.3533845 high, a copy shifted by one
+  unit clears it at pitch 9.019403129, and the certificate pairs one to one with the 90
+  squares of a side-10 window across the two copies, no square moving beyond 0.146 or
+  turning beyond 4.02 degrees.
+  Where the window sat the README does not say.
+  The review could not compare the file at `c70defa` with the retained copy; this lane
+  found them the same Git blob (`079d4cb1`).
+- **Custody** holds; the CSV equals the certificate to 8.2 × 10⁻¹⁶. The review’s clone
+  predates `f9b31b4`, which adds only the construction figure.
+- **For the author**: no licence for the author’s own files (F12), and the commit before
+  `179fcba` credited Codex Astra Ultra (F13).
+
+Its six questions for the author hold nothing open: a licence for the author’s files;
+whether the credit is the issue’s; where the window sat; whether de Winter’s file at
+`c70defa` is the retained one (it is, above); whether the wall offsets were chosen for
+strict mode; and whether the fitting step will be published and the leaderboard at 90
+shows a smaller side.
+
+## Adoption
+
+The case adopted the certificate as its house at 90 in the pass of 15 November 2026
+under the house rule, as T-303, the first adoption at 90, in place of the 10 × 10 grid,
+which keeps its replay as history; this lane wrote the adoption at 03:42Z. jazivxt is
+the packing’s finder, after Joost de Winter’s 157, and the case’s conjectured integer
+optimum is withdrawn, its grid prose marked as history by hand, as at 157 and 183. Both
+strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-i8y9-2026-11-15/README.md)), and
+the selection draws Evan Daniel’s same-side view, admitted at row 10. His driver also
+solved the witness to a certified KKT local minimum 1.108 × 10⁻¹¹ below the side, about
+1.01 times the certificate’s own contraction margin (1.0988 × 10⁻¹¹) and just beyond it,
+held at row 3 as a register candidate and not admitted (RV-3). The rigidity block,
+derived again on the new witness, stays not rigid: 31 of its 90 squares translate,
+against the grid’s 10, and 15 separate, against none.
 
 ## What Is Not Established
 

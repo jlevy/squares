@@ -34353,7 +34353,8 @@ issues:
       The ledger of 15 November records it. The 15 November stage 4 review, written blind in
       a separate lane (lane L169, think-176a), accepts it with seven findings, all notes; its
       clean-room checker decided it again, so the entry is confirmed, independently
-      re-implemented, at V3/C3.
+      re-implemented, at V3/C3, and the case adopted it as its house at 90 in the pass of 15
+      November.
     read_through: '2026-11-15T03:00:53Z'
     results:
     - key: n90-shifted-window
@@ -34413,5 +34414,21 @@ issues:
       holds (F1, F5); the side is not the packing's extent, the squares fitting a box
       2.398e-13 smaller (F4); the file states neither the box nor the rotation sense, which
       read clockwise overlaps 66 pairs, the one question for the author, which holds nothing
-      open (F6). This lane read the review's frozen findings at 03:33Z, after its replay,
-      controls, measurements and registration were committed. No reply has been posted.
+      open (F6), which the source's README answers (F14). After its freeze the review found
+      nothing in the record claiming s(90) = 10 (F8), the case's conjectured integer optimum
+      refuted (F9), RV-3 not applying (F10), the construction reproduced from de Winter's 157
+      as the T-293 packet retains it, the window's place unstated (F11), no licence for the
+      author's own files (F12) and the earlier credit to Codex Astra Ultra (F13); it scores S3,
+      the smallest n with s(n^2 - n) < n falling from 11 to 10. This lane read the review's
+      frozen findings at 03:33Z, after its replay, controls, measurements and registration
+      were committed, and its final head at 03:58Z, after it had written the adoption, and
+      found c70defa's n157_exact.json the same blob as the retained copy, which the review
+      could not compare. The review's six questions for the author hold nothing open.
+
+      Adopted at 90 in the pass of 15 November 2026 (written at 03:42Z) under the house rule,
+      the first adoption at 90, in place of the 10 x 10 grid, with jazivxt the finder after de
+      Winter's 157; the conjectured integer optimum is withdrawn. Both strong generators ran on
+      the new witness, and Evan Daniel's same-side view is drawn. His certified KKT solve,
+      1.108e-11 below the side, about 1.01 times the certificate's own contraction margin and
+      just beyond it, is held at row 3 for RV-3 (think-ruu2, think-ikku). No reply has been
+      posted.
