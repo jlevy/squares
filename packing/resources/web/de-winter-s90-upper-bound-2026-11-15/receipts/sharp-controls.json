@@ -1,0 +1,394 @@
+{
+ "format": "upper-bound-sharp-controls-v1",
+ "packet": "de-winter-s90-upper-bound-2026-11-15",
+ "n": 90,
+ "certificate": "packing/resources/web/de-winter-s90-upper-bound-2026-11-15/source/n90/n90_exact.json",
+ "side": "199880777150913904183/20000000000000000000",
+ "epsilon": "1/1000000000000000000000000000000",
+ "routes": [
+  "exact_verify",
+  "independent"
+ ],
+ "controls": [
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "lowered_by": "9909955765625015940074994030630443123/1953125000000000000000004987507812500000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.308
+  },
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container"
+   ],
+   "detail": {
+    "lowered_by": "253694867650000408065919847184139471629/50000000000000000000000127680200000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": [
+      "container"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": [
+      "container"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.291
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "square": 40,
+    "partner": 2,
+    "moved_by": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "0",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "0",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.599
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "detail": {
+    "square": 40,
+    "partner": 2,
+    "moved_by": "288761713351615961801119258890118700584165142866200148520812017457177704374209/271366176192135063557454551725536876213683592626086142203841000000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "overlap"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "overlap"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.502
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "moved_by": "0"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.646
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container"
+   ],
+   "detail": {
+    "moved_by": "1/1000000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": [
+      "container"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": [
+      "container"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.364
+  },
+  {
+   "control": "square-enlarged-past-pair-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "shape"
+   ],
+   "detail": {
+    "square": 40,
+    "partner": 2,
+    "pair_gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+    "half_edge_grown_by": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+    "edge": "66251507859548971431679146398583101166767470678745010592315021129056215051187056426841/66251507859407974501331677667367401419356345855978062061484619140625000000000000000000",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "0",
+     "failures": [
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "0",
+     "failures": [
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.506
+  },
+  {
+   "control": "square-enlarged-past-pair-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "window",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap",
+    "shape"
+   ],
+   "detail": {
+    "square": 40,
+    "partner": 2,
+    "pair_gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+    "half_edge_grown_by": "288761713351615961801119258890118700584165142866200148520812017457177704374209/271366176192135063557454551725536876213683592626086142203841000000000000000000000000000000",
+    "edge": "135683088096356293492078891824569557365731915013627236244786700148520812017457177704374209/135683088096067531778727275862768438106841796313043071101920500000000000000000000000000000",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-135683088096356293492078891824569557365731915013627236244786700148520812017457177704374209/135683088096067531778727275862768438106841796313043071101920500000000000000000000000000000000000000000000000000000000000",
+     "failures": [
+      "overlap",
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-135683088096356293492078891824569557365731915013627236244786700148520812017457177704374209/135683088096067531778727275862768438106841796313043071101920500000000000000000000000000000000000000000000000000000000000",
+     "failures": [
+      "overlap",
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.299
+  },
+  {
+   "control": "square-enlarged-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "square": 10,
+    "wall_clearance": "0",
+    "half_edge_grown_by": "0",
+    "edge": "1",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.567
+  },
+  {
+   "control": "square-enlarged-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container",
+    "shape"
+   ],
+   "detail": {
+    "square": 10,
+    "wall_clearance": "0",
+    "half_edge_grown_by": "250000000000000000000000638401/250000000000798999999999361599000000000000000000000000000000",
+    "edge": "125000000000399499999999680799750000000000000000000000638401/125000000000399499999999680799500000000000000000000000000000",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": [
+      "container",
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "140996930347468731215699747411124822766948530830401988431215051187056426841/132503015718815949002663355334734802838712691711956124122969238281250000000000000000000",
+     "failures": [
+      "container",
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.358
+  },
+  {
+   "control": "duplicate-square",
+   "where": "gross",
+   "margin": "gap",
+   "expected_margin": "-1",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "detail": {
+    "square": 2,
+    "copy_of": 1
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1",
+     "failures": [
+      "overlap"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1",
+     "failures": [
+      "overlap"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 1.184
+  }
+ ],
+ "all_as_expected": true
+}

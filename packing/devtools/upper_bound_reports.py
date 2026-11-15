@@ -666,12 +666,22 @@ def pingyou_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
 #: state from `atlas/known-best/regularized/`, which the review of 9 November 2026 asked the
 #: reader to accept so that the 307 view could be measured (F14), or the path the house
 #: witnesses state from `witnesses/known-best/`, so that a grid house, which has no packet,
-#: can be measured (think-bcfs, at 157). Either way the document is validated against this
-#: repository's schema file.
+#: can be measured (think-bcfs, at 157), or the schema's address on this repository's main
+#: branch, which Joost de Winter's corner witness of issue 996 names, so that it can be
+#: measured against his JSON of the same packing (think-32cl). Either way the document is
+#: validated against this repository's schema file.
 CORNER_FRAME = {"origin": "lower-left", "axes": "x-right-y-up", "angle_unit": "not-applicable"}
 CORNER_SCHEMA = "witness.schema.yaml"
+CORNER_SCHEMA_URL = (
+    "https://github.com/jlevy/squares/blob/main/packing/witnesses/witness.schema.yaml"
+)
 CORNER_SCHEMAS = frozenset(
-    {CORNER_SCHEMA, "../../../witnesses/witness.schema.yaml", "../witness.schema.yaml"}
+    {
+        CORNER_SCHEMA,
+        "../../../witnesses/witness.schema.yaml",
+        "../witness.schema.yaml",
+        CORNER_SCHEMA_URL,
+    }
 )
 #: Corners as ``sqpack.witness`` materializes a centre and basis, in half-diagonal units.
 CORNER_ORDER = ((-1, -1), (1, -1), (1, 1), (-1, 1))
@@ -691,7 +701,8 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
     The document must name the witness schema by its file name, or by the path the
     regularized atlas's views name it by (`CORNER_SCHEMAS`), which is read from this
     repository, pass it and its semantic checks, state ``n`` unit squares numbered 1 to
-    ``n`` in order in the lower-left frame, and list each square's corners in the order
+    ``n`` in order in the lower-left frame, each id the number or ``square-`` and the number
+    (Joost de Winter's form, #996), and list each square's corners in the order
     `pose_corners` writes them. A pose is recovered as the corners' mean and
     ``t = s / (1 + c)`` from the first edge ``(c, s)``, and the four corners must be
     exactly that pose's, which holds only for a unit square in that order. Corners listed
@@ -725,7 +736,10 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
     rows = []
     for index, square in enumerate(witness["squares"], start=1):
         where = f"n={n} square {index}"
-        _require(square["id"] == index, f"{where}: squares are not numbered 1..n in order")
+        _require(
+            square["id"] in (index, f"square-{index}"),
+            f"{where}: squares are not numbered 1..n in order",
+        )
         corners = [(_literal(x, where), _literal(y, where)) for x, y in square["corners"]]
         c, s = corners[1][0] - corners[0][0], corners[1][1] - corners[0][1]
         _require(c != -1, f"{where}: no finite half-angle")
@@ -1805,6 +1819,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # dpre4ai, a window of copies of a crop of Joost de Winter's 157 (T-293), the first below
     # the 10 x 10 grid; one repository and one packet, its certificate in Evan Daniel's text.
     "[jazivxt s90 upper bound 2026-11-15]": _import("jazivxt-s90-upper-bound-2026-11-15"),
+    # Lane L181 of 15 November (think-32cl): Joost de Winter's issue 996 at 90, which a local
+    # search found from jazivxt's T-303; his watched repository, its centre-direction JSON.
+    "[de Winter s90 upper bound 2026-11-15]": _import("de-winter-s90-upper-bound-2026-11-15"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

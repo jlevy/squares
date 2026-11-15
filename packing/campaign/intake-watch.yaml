@@ -1989,12 +1989,32 @@ repositories:
       Bui's paper and build on it, so think-0fa1 decides whether the note bears on any
       record. Nothing under theorem-a/, composites/ or the strip folders changes.
   # Lane L104 of 11 November 2026 (think-bcfs); lane L136 of 12 November (think-c3p2); lanes
-  # L154 (think-g2ax), L157 (think-2h88) and L158 of 14 November.
+  # L154 (think-g2ax), L157 (think-2h88) and L158 of 14 November; lane L181 of 15 November
+  # (think-32cl).
   - url: https://github.com/JoostdeWinter/square-packing
-    read_through: 66849f2bd41502a989b091b01d9b0da71c2ab7c9
-    read_on: '2026-11-14'
+    read_through: 9cafa33d43f60423e51058f51dbdf042077c7cc2
+    read_on: '2026-11-15'
     note: >-
-      Read through 66849f2 (15:33:56Z on 14 November), the head at 16:05Z, one commit past
+      Read through 9cafa33 (11:29:27Z on 15 November), the head at 12:01Z and 12:04Z, three
+      commits past the 66849f2 read. 64d5ee7 (11:27:26Z), "Add a packing of 90 unit squares
+      with side 9.994038857546", adds n90/, a packing of 90 squares that jlevy/squares#996
+      (11:30:13Z) reports, and a row and a paragraph of the root README; the
+      de-winter-s90-upper-bound-2026-11-15 packet pins 64d5ee7, the commit the issue names,
+      and retains n90/. 0c9bcd2 (11:27:49Z), "Add the registration request and checksums for
+      n = 90", adds n90/REGISTRATION.md, the issue's text in the registration template's form,
+      and n90/SHA256SUMS, whose digests of the seven other files of n90/ at the pin match.
+      9cafa33, "Name GPT-6.1 Sol Max as the model that ran the local search for n = 90",
+      changes the model named for the local search from "OpenAI Codex (GPT-6 Astra)" in
+      n90/README.md and "OpenAI Codex" in the root README to "GPT-6.1 Sol Max (OpenAI)", the
+      name the issue gives, in both and in n90/REGISTRATION.md, and updates n90/SHA256SUMS.
+      Neither later commit changes the certificate, the witness, the checkers or the figures,
+      each the same Git blob at the pin and the head. No packet retains them: they add no
+      bound, certificate or method, and the issue states what REGISTRATION.md does. Lane L181
+      records the model's renaming in the packet's README and the #996 requests entry.
+      Nothing more to import.
+
+      The read of 14 November (lane L158) was through 66849f2 (15:33:56Z on 14 November), the
+      head at 16:05Z, one commit past
       the 6760360 read: "Answer the review of the n = 297, 332 and 409 packings", which
       answers by commit five of the six questions of the stage 4 review of jlevy/squares#977
       and #979 (docs/project/reviews/review-2026-11-14-de-winter-977-979.md), as #977's final

@@ -273,6 +273,10 @@ L164_1114 = ("ono-issue984-2026-11-14", "ono-issue985-2026-11-14")
 #: first below the 10 x 10 grid; Evan Daniel's text certificate, read by ``evand-cert``, its
 #: repository with no licence, submitted by the account dpre4ai.
 L170_1115 = "jazivxt-s90-upper-bound-2026-11-15"
+#: The intake pass's lane L181 of 15 November 2026 (`test_upper_bound_reports_l181_1115`):
+#: Joost de Winter's #996 at 90, a local-search improvement of jazivxt's T-303; his
+#: centre-direction JSON, read by ``center-direction-json``, under MIT.
+L181_1115 = "de-winter-s90-upper-bound-2026-11-15"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -345,6 +349,7 @@ EVERY = (
     L160_1114,
     *L164_1114,
     L170_1115,
+    L181_1115,
 )
 
 
@@ -1395,7 +1400,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
     # to #931, #935, #936, #938, #943 to #947, #954, #959, #960 and #962, Yim's #895 and de
-    # Winter's #958, #977 and #979 touches the box. Couzo's #672 touches at 229 and clears
+    # Winter's #958, #977, #979 and #996 touches the box. Couzo's #672 touches at 229 and clears
     # every wall at 227, so its walls mix, as de Winter's #941 does, whose borders touch the
     # box and whose other certificates clear it; every other source's clear it.
     walls = {
@@ -1424,6 +1429,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         *L154_1114,
         L160_1114,
         *L164_1114,
+        L181_1115,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1726,6 +1732,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L160_1114: "2026-11-14",
         **dict.fromkeys(L164_1114, "2026-11-11"),
         L170_1115: "2026-11-15",
+        L181_1115: "2026-11-15",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

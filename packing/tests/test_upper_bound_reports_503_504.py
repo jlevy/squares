@@ -182,6 +182,20 @@ def test_a_corner_witness_reads_back_to_the_poses_it_draws() -> None:
     assert reports.parse_certificate(_bytes(document), 2, "witness-corners") == _expected()
 
 
+def test_a_corner_witness_may_name_the_schema_by_its_address_and_its_ids_by_name() -> None:
+    """Joost de Winter's witness of #996 names the schema by its address on main and its
+    squares ``square-1`` to ``square-n``; the same squares in order read back the same."""
+    document = _corners(_expected())
+    document["softschema"]["schema"] = reports.CORNER_SCHEMA_URL
+    for index, square in enumerate(document["witness"]["squares"], start=1):
+        square["id"] = f"square-{index}"
+    assert reports.parse_certificate(_bytes(document), 2, "witness-corners") == _expected()
+    document["witness"]["squares"][0]["id"] = "square-2"
+    document["witness"]["squares"][1]["id"] = "square-1"
+    with pytest.raises(reports.ReportError, match=r"numbered 1\.\.n"):
+        reports.parse_certificate(_bytes(document), 2, "witness-corners")
+
+
 def test_corners_listed_from_another_vertex_read_as_another_packing() -> None:
     document = _corners(_expected())
     corners = document["witness"]["squares"][1]["corners"]

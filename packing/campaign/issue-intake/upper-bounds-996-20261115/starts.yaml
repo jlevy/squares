@@ -1,0 +1,24 @@
+format: intake-ledger-starts-v2
+read_at_main: 91acf2022a69531da3421889810a3bc53aa89753
+counts:
+- n: 90
+  members:
+  - label: record T-303
+    kind: record
+    holders: jazivxt
+    model: exact
+    low: 4999138583463/500000000000
+    high: 4999138583463/500000000000
+    open_low: false
+    open_high: false
+    shown: '9.998277166926'
+    decide: ''
+    lanes:
+    - - reported
+      - '9.9982771669260000'
+      - 4999138583463/500000000000
+      - ''
+    - - verified
+      - '9.9982771669260000'
+      - 4999138583463/500000000000
+      - ''
