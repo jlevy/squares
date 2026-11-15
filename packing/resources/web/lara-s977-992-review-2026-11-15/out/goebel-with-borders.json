@@ -1,0 +1,212 @@
+{
+ "970": {
+  "least_with_L_borders": "G\u00f6bel strip n=795 side 28 + 1/2*sqrt(2) + 3 L",
+  "its_side": "31 + 1/2*sqrt(2)",
+  "its_value": 31.707106781186546,
+  "its_count": 972,
+  "module_side": "31 + 1/2*sqrt(2)",
+  "module_family": "G\u00f6bel strip",
+  "module_count": 974,
+  "module_value": 31.707106781186546
+ },
+ "971": {
+  "least_with_L_borders": "G\u00f6bel strip n=795 side 28 + 1/2*sqrt(2) + 3 L",
+  "its_side": "31 + 1/2*sqrt(2)",
+  "its_value": 31.707106781186546,
+  "its_count": 972,
+  "module_side": "31 + 1/2*sqrt(2)",
+  "module_family": "G\u00f6bel strip",
+  "module_count": 974,
+  "module_value": 31.707106781186546
+ },
+ "972": {
+  "least_with_L_borders": "G\u00f6bel strip n=795 side 28 + 1/2*sqrt(2) + 3 L",
+  "its_side": "31 + 1/2*sqrt(2)",
+  "its_value": 31.707106781186546,
+  "its_count": 972,
+  "module_side": "31 + 1/2*sqrt(2)",
+  "module_family": "G\u00f6bel strip",
+  "module_count": 974,
+  "module_value": 31.707106781186546
+ },
+ "973": {
+  "least_with_L_borders": "G\u00f6bel strip n=853 side 29 + 1/2*sqrt(2) + 2 L",
+  "its_side": "31 + 1/2*sqrt(2)",
+  "its_value": 31.707106781186546,
+  "its_count": 973,
+  "module_side": "31 + 1/2*sqrt(2)",
+  "module_family": "G\u00f6bel strip",
+  "module_count": 974,
+  "module_value": 31.707106781186546
+ },
+ "974": {
+  "least_with_L_borders": "G\u00f6bel strip n=974 side 31 + 1/2*sqrt(2)",
+  "its_side": "31 + 1/2*sqrt(2)",
+  "its_value": 31.707106781186546,
+  "its_count": 974,
+  "module_side": "31 + 1/2*sqrt(2)",
+  "module_family": "G\u00f6bel strip",
+  "module_count": 974,
+  "module_value": 31.707106781186546
+ },
+ "975": {
+  "least_with_L_borders": "G\u00f6bel square n=861 side 15 + 21/2*sqrt(2) + 2 L",
+  "its_side": "17 + 21/2*sqrt(2)",
+  "its_value": 31.849242404917497,
+  "its_count": 981,
+  "module_side": "2 + 43/2*sqrt(2)",
+  "module_family": "corner-touching G\u00f6bel strip",
+  "module_count": 975,
+  "module_value": 32.40559159102155
+ },
+ "976": {
+  "least_with_L_borders": "G\u00f6bel square n=861 side 15 + 21/2*sqrt(2) + 2 L",
+  "its_side": "17 + 21/2*sqrt(2)",
+  "its_value": 31.849242404917497,
+  "its_count": 981,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "977": {
+  "least_with_L_borders": "G\u00f6bel square n=861 side 15 + 21/2*sqrt(2) + 2 L",
+  "its_side": "17 + 21/2*sqrt(2)",
+  "its_value": 31.849242404917497,
+  "its_count": 981,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "978": {
+  "least_with_L_borders": "G\u00f6bel square n=861 side 15 + 21/2*sqrt(2) + 2 L",
+  "its_side": "17 + 21/2*sqrt(2)",
+  "its_value": 31.849242404917497,
+  "its_count": 981,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "979": {
+  "least_with_L_borders": "G\u00f6bel square n=861 side 15 + 21/2*sqrt(2) + 2 L",
+  "its_side": "17 + 21/2*sqrt(2)",
+  "its_value": 31.849242404917497,
+  "its_count": 981,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "980": {
+  "least_with_L_borders": "G\u00f6bel square n=861 side 15 + 21/2*sqrt(2) + 2 L",
+  "its_side": "17 + 21/2*sqrt(2)",
+  "its_value": 31.849242404917497,
+  "its_count": 981,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "981": {
+  "least_with_L_borders": "G\u00f6bel square n=861 side 15 + 21/2*sqrt(2) + 2 L",
+  "its_side": "17 + 21/2*sqrt(2)",
+  "its_value": 31.849242404917497,
+  "its_count": 981,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "982": {
+  "least_with_L_borders": "G\u00f6bel square n=921 side 16 + 21/2*sqrt(2) + 1 L",
+  "its_side": "17 + 21/2*sqrt(2)",
+  "its_value": 31.849242404917497,
+  "its_count": 982,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "983": {
+  "least_with_L_borders": "G\u00f6bel square n=820 side 15 + 10*sqrt(2) + 3 L",
+  "its_side": "18 + 10*sqrt(2)",
+  "its_value": 32.14213562373095,
+  "its_count": 1003,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "984": {
+  "least_with_L_borders": "G\u00f6bel square n=820 side 15 + 10*sqrt(2) + 3 L",
+  "its_side": "18 + 10*sqrt(2)",
+  "its_value": 32.14213562373095,
+  "its_count": 1003,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "985": {
+  "least_with_L_borders": "G\u00f6bel square n=820 side 15 + 10*sqrt(2) + 3 L",
+  "its_side": "18 + 10*sqrt(2)",
+  "its_value": 32.14213562373095,
+  "its_count": 1003,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "986": {
+  "least_with_L_borders": "G\u00f6bel square n=820 side 15 + 10*sqrt(2) + 3 L",
+  "its_side": "18 + 10*sqrt(2)",
+  "its_value": 32.14213562373095,
+  "its_count": 1003,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "987": {
+  "least_with_L_borders": "G\u00f6bel square n=820 side 15 + 10*sqrt(2) + 3 L",
+  "its_side": "18 + 10*sqrt(2)",
+  "its_value": 32.14213562373095,
+  "its_count": 1003,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "988": {
+  "least_with_L_borders": "G\u00f6bel square n=820 side 15 + 10*sqrt(2) + 3 L",
+  "its_side": "18 + 10*sqrt(2)",
+  "its_value": 32.14213562373095,
+  "its_count": 1003,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "989": {
+  "least_with_L_borders": "G\u00f6bel square n=820 side 15 + 10*sqrt(2) + 3 L",
+  "its_side": "18 + 10*sqrt(2)",
+  "its_value": 32.14213562373095,
+  "its_count": 1003,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ },
+ "990": {
+  "least_with_L_borders": "G\u00f6bel square n=820 side 15 + 10*sqrt(2) + 3 L",
+  "its_side": "18 + 10*sqrt(2)",
+  "its_value": 32.14213562373095,
+  "its_count": 1003,
+  "module_side": "17 + 11*sqrt(2)",
+  "module_family": "G\u00f6bel square",
+  "module_count": 1028,
+  "module_value": 32.55634918610404
+ }
+}

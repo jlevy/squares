@@ -1,0 +1,111 @@
+{
+ "file": "construction-C4.json",
+ "file_sha256": "9b6255261c8424d6e86dcf88062dc6923464300a04f8fc9fba6fa98ad5bbc9a8",
+ "name": "C4",
+ "container": [
+  "17",
+  "21/2"
+ ],
+ "n": 977,
+ "angles": {
+  "0": 536,
+  "45": 441
+ },
+ "families": {
+  "diamond": 441,
+  "stair-BL": 134,
+  "stair-BR": 134,
+  "stair-TR": 134,
+  "stair-TL": 134
+ },
+ "A": {
+  "method": "A: separating axes on e1..e4 in Z[sqrt 2], exact integer signs",
+  "pairs": 476776,
+  "apart": 473241,
+  "touching": 3532,
+  "overlapping": 3,
+  "overlapping_pairs": [
+   [
+    "D(10,9)",
+    "D(10,10)"
+   ],
+   [
+    "D(10,10)",
+    "D(11,9)"
+   ],
+   [
+    "D(10,10)",
+    "D(11,10)"
+   ]
+  ],
+  "touching_pairs_sha256": "113e91da3bac104aead2395c408abbf15f3f60144dfe703a7b11f212b5e61c16",
+  "pair_class_sha256": "4dddb966114b54c6d4166c197eb9202d86595b2f7d9581c58c7e2d3d09778fb7",
+  "wall_class_sha256": "c2573362ce4e5ca02f51823fc1d557311f85bed3be446341049aadcb7b06efad",
+  "wall_touching": 120,
+  "wall_touching_squares": 116,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": []
+ },
+ "B": {
+  "method": "B: exact convex clipping in Q(sqrt 2) over gmpy2.mpq, signs by Pell brackets",
+  "pairs": 476776,
+  "apart": 473241,
+  "touching": 3532,
+  "overlapping": 3,
+  "overlapping_pairs": [
+   [
+    "D(10,9)",
+    "D(10,10)"
+   ],
+   [
+    "D(10,10)",
+    "D(11,9)"
+   ],
+   [
+    "D(10,10)",
+    "D(11,10)"
+   ]
+  ],
+  "touching_pairs_sha256": "113e91da3bac104aead2395c408abbf15f3f60144dfe703a7b11f212b5e61c16",
+  "pair_class_sha256": "4dddb966114b54c6d4166c197eb9202d86595b2f7d9581c58c7e2d3d09778fb7",
+  "wall_class_sha256": "c2573362ce4e5ca02f51823fc1d557311f85bed3be446341049aadcb7b06efad",
+  "wall_touching": 120,
+  "wall_touching_squares": 116,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": [],
+  "overlap_areas": [
+   [
+    "-1/2000000000000",
+    "1/2000000"
+   ],
+   [
+    "1/2000000000000",
+    "0"
+   ],
+   [
+    "-1/2000000000000",
+    "1/2000000"
+   ]
+  ],
+  "not_inside_by_area": []
+ },
+ "agree": {
+  "pair_classes": true,
+  "touching_pairs": true,
+  "overlapping_pairs": true,
+  "walls": true,
+  "unit": true
+ },
+ "all_agree": true,
+ "verdict_A": "not a packing",
+ "verdict_B": "not a packing",
+ "seconds": {
+  "A": 0.18,
+  "B": 19.02
+ },
+ "python": "3.14.7"
+}

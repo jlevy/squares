@@ -1,0 +1,73 @@
+{
+ "file": "construction-A981.json",
+ "file_sha256": "65d33e84b5b2536734387ced96f347d72ba97c27e7a4428cdd7ce0aa935c2071",
+ "name": "A981",
+ "container": [
+  "17",
+  "21/2"
+ ],
+ "n": 981,
+ "angles": {
+  "0": 540,
+  "45": 441
+ },
+ "families": {
+  "diamond": 441,
+  "stair-BL": 134,
+  "stair-BR": 134,
+  "stair-TR": 134,
+  "stair-TL": 134,
+  "border-middle": 4
+ },
+ "A": {
+  "method": "A: separating axes on e1..e4 in Z[sqrt 2], exact integer signs",
+  "pairs": 480690,
+  "apart": 477150,
+  "touching": 3540,
+  "overlapping": 0,
+  "overlapping_pairs": [],
+  "touching_pairs_sha256": "ac42d802fcb4c3a1f4f3296702efd44b8c45688be08c6bf68d6624c109bf0286",
+  "pair_class_sha256": "98099fd34cb714766932f1133eb6971d5321da48f27d5c09027a2f911690014c",
+  "wall_class_sha256": "f126c68f5c1f0b7a1e25f619692624188f984919765df538b4fc6b24607464ce",
+  "wall_touching": 124,
+  "wall_touching_squares": 120,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": []
+ },
+ "B": {
+  "method": "B: exact convex clipping in Q(sqrt 2) over gmpy2.mpq, signs by Pell brackets",
+  "pairs": 480690,
+  "apart": 477150,
+  "touching": 3540,
+  "overlapping": 0,
+  "overlapping_pairs": [],
+  "touching_pairs_sha256": "ac42d802fcb4c3a1f4f3296702efd44b8c45688be08c6bf68d6624c109bf0286",
+  "pair_class_sha256": "98099fd34cb714766932f1133eb6971d5321da48f27d5c09027a2f911690014c",
+  "wall_class_sha256": "f126c68f5c1f0b7a1e25f619692624188f984919765df538b4fc6b24607464ce",
+  "wall_touching": 124,
+  "wall_touching_squares": 120,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": [],
+  "overlap_areas": [],
+  "not_inside_by_area": []
+ },
+ "agree": {
+  "pair_classes": true,
+  "touching_pairs": true,
+  "overlapping_pairs": true,
+  "walls": true,
+  "unit": true
+ },
+ "all_agree": true,
+ "verdict_A": "packing",
+ "verdict_B": "packing",
+ "seconds": {
+  "A": 0.19,
+  "B": 17.5
+ },
+ "python": "3.14.7"
+}

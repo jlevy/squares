@@ -1,0 +1,18 @@
+# Lane L174 findings frozen at 2026-11-15T07:15:34Z, before the author's verify_977.py, n977_verification.json or n977.svg, this repository's
+# devtools.goebel_construction, beyond_horizon_replay or construction_checker, source-coverage.yaml, the frontier README, Göbel's paper,
+# Friedman's survey, or import lane L175 and its branch were opened.
+be1eb0585a1d84f354c0b354dd38808f52fd0ea80fb7136f2cc2865bd5ca474d  frozen/review-2026-11-15-lara-992.frozen.md
+# lines and bytes: 367 23537
+# freeze-1 list:
+fdeb7c247bd5f95a5ff3b38efcb7a76c30a6b56b8eec4e4bc90a3525ec3f07f2  frozen/freeze-1-checker-and-plan.txt
+# receipts at the freeze:
+9febea8bab8328b7926adc018432353b643b4b4ca1ad7d8bca3820a49df14219  out/decide-C1.json
+c207172cbe5713aa22ea82230823fd04afd32ee8ff1a48a30621131a1c377158  out/decide-C2.json
+11ebc830e1475bb158716b3bfb42887f1676be6adca56690656d4d0bc3af6adb  out/decide-C3.json
+91ac035c5de965b8558e7de8797c87a77d0b4735c1e49873cc59ac6d53091627  out/decide-C4.json
+d3647d8ad742416d0b1a409193326386517240f27896d114bb836d3adfec17f5  out/decide-C5.json
+d890c379a1ca6be19fa1784f250149fe5c6cd5f66e4449210fe8d13071132e70  out/decide-C6.json
+a60937cafd388f8266659503633e627640e198dc8638cdf7f48aa75cf53976f8  out/decide-C7.json
+b8db1ff7a80a439019d1122e0088fbdc8c16480b360581a1492aaee250d95d89  out/decide-K0.json
+fcac3293f02b554e81c549b66a10611dbc4bccd356d75109bef814033aabc471  out/controls.json
+fd79c72fc1cc8e65befe4af1b2e434410997eba338907c374e4e30cbd550ddfb  out/csv-check.json

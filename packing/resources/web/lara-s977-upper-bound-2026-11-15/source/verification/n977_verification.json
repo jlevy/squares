@@ -1,0 +1,18 @@
+{
+  "n": 977,
+  "middle": 441,
+  "corners": 536,
+  "side_checked": 31.85,
+  "side_less_than_32": true,
+  "outside_count": 0,
+  "overlapping_pairs": 0,
+  "candidate_pairs_tested": 2932,
+  "all_possible_pairs": 476776,
+  "area_tolerance": 1e-11,
+  "valid_numerically": true,
+  "arithmetic": "IEEE-754 double precision with Shapely floating-point predicates",
+  "python_version": "3.13.5",
+  "shapely_version": "2.1.2",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "elapsed_seconds": 0.07576
+}

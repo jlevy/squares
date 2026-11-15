@@ -112,6 +112,7 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-983-20261114/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-989-20261115/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-992-20261115/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}
@@ -343,6 +344,7 @@ documents:
   - {path: docs/project/reviews/review-2026-11-14-ozden-983.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-14-ono-984-985.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-15-jazivxt-989.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-15-lara-992.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-dewinter-132-157.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-12-ozden-959.md, role: review, authority: record, lifecycle: retained}

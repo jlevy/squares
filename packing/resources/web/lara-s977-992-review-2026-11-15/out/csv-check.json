@@ -1,0 +1,58 @@
+{
+ "csv_sha256": "a939ed2c0126118c8f2ae3e5fe4914dd01425a7734713a87f55b8cd2cb465035",
+ "header": [
+  "id",
+  "n",
+  "square_id",
+  "x",
+  "y",
+  "angle"
+ ],
+ "rows": 977,
+ "n_column": [
+  977
+ ],
+ "ids_in_order": true,
+ "square_ids_in_order": true,
+ "angle_classes": {
+  "45": 441,
+  "0": 536,
+  "other": 0
+ },
+ "max_angle_deviation_from_pi_4": "3.096E-16",
+ "max_angle_deviation_from_0": "0.000E+3",
+ "box_extent": {
+  "x_min_centre": "0.500000000000000",
+  "x_max_centre": "31.350000000000001"
+ },
+ "references": {
+  "C7_rebuilt_at_31.85": {
+   "one_to_one": true,
+   "max_centre_deviation": "2.866E-15",
+   "at_row": 315
+  },
+  "K0_exact_side": {
+   "one_to_one": true,
+   "max_centre_deviation": "7.576E-4",
+   "at_row": 575
+  },
+  "K0_scaled_to_31.85": {
+   "one_to_one": true,
+   "max_centre_deviation": "3.449E-4",
+   "at_row": 707
+  }
+ },
+ "row_order_vs_C7": {
+  "first_rows": [
+   "D(0,0)",
+   "D(0,1)",
+   "D(0,2)"
+  ],
+  "rows_441_443": [
+   "BL(0,0)",
+   "BL(1,0)",
+   "BL(2,0)"
+  ],
+  "same_order_as_l174_ids": true
+ }
+}
