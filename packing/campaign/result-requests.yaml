@@ -33430,7 +33430,7 @@ issues:
       replay (F2); mapped, it puts T-298 at C1. The authors state AI assistance (Claude,
       Anthropic) and build on Evan Daniel's linear program, format, checkers and Lean
       reduction.
-    read_through: '2026-11-14T07:26:34Z'
+    read_through: '2026-11-15T05:03:46Z'
     results:
     - key: k2m5-family
       claim: >-
@@ -33487,6 +33487,16 @@ issues:
         id: E-khalili-973-review-replay-sample
         status: recorded
       beads: [think-0h7r, think-kn13]
+    - url: https://github.com/jlevy/squares/issues/973#issuecomment-6890009039
+      date: '2026-11-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: k2m5-family
+        id: T-298
+        verification: V0
+        confirmation: C1
+        status: reviewed
     close_when: >-
       T-298 is on main with the stage 4 review mapped, and the reply on main says what was
       retained and run, what the review found, and that the full replay is priced and owned
@@ -33676,6 +33686,80 @@ issues:
       certificate or a claim. The replay held on think-0h7r keeps its price, about 145 to 180
       CPU-hours, up to about 320; that bead's notes say what the new files change for it.
       read_through stays at the final reply, since the answers came by commit.
+
+      Read on 15 November 2026 in lane L173 (think-hisc): the authors answered all fifteen
+      questions in a comment (issuecomment-6889513117, moh63-dev, 05:03:46Z), and
+      read_through moves to it. It names release v1.1, tag v1.1 at 9ccfe82, and one README
+      commit after it that adds the archive DOI, 0e28e8a (03:41:17Z), which is read in
+      campaign/intake-watch.yaml: it changes only README.md and SHA256SUMS_ALL, and the
+      certificate and every pinned file stand as at 9ccfe82. The comment bears out what lane
+      L168 read from the commits and adds to it. 1: steps 6b and 9 of verify.sh --full are
+      new and have not been run end to end; the comment does not mention the qx2/ directory
+      step 6b changes into, which evand/square-packing lacks at 659ee62, so that finding
+      stands. 3 and 9: run_tt.py prints K since 11 November, when the authors changed the
+      checker after their own adversarial review, safety asserts becoming exceptions and the
+      area term's apex range becoming [0, apex_w]; the main batch, run on 9 and 10 November,
+      ran on the earlier revision, which the release does not hold, and out_fix/ and
+      out_u2000_fix/ after it; SHA256SUMS_ALL gives every shipped checker file's digest; and
+      the review's findings and the fixes are in docs/TIGHT_TILE_PROOF.md section 11, with
+      no separate report. Read here at 0e28e8a: docs/TIGHT_TILE_PROOF.md is not in the
+      release, whose paper/tight_tile_report.tex, unchanged since 2c0b1b9, has an
+      independent-review section naming two bookkeeping findings in the coverage step and no
+      apex-range change; and of the 326 recorded job outputs only out_u2000_fix/'s one
+      carries K, while the two of out_fix/, the only ones with ray zones, the charts whose
+      apex range is not the default, lack it, as the 323 of out/ and out_u2000/ do.
+
+      4: in v1.0 the assembly script turned the end of line 6 of run_cov.sh into a comment,
+      so B and NP were unset there; in the authors' working copy B was the board and NP 6,
+      which is how the shipped dumps were run, and the assembler now refuses to build
+      without them. 5: the Tight-Tile jobs ran under Python 3.10.12, numpy 1.26.1 and scipy
+      1.11.4, and the controls in out_controls/ under Python 3.13.0 with the standard
+      library alone, which versions.txt's failed numpy and scipy line records. ttbox.py
+      imports numpy and scipy only inside a try, for the floating LP that proposes weights
+      an exact check then verifies, and skips that step without them, so a run on the
+      standard library alone can take another cell path (the review's F8); that would
+      account for the release's control run of the board taking 169 cells where the import
+      lane, with scipy, took 155, as the paper reports, but a run to test it, with and
+      without scipy, was refused by this session's permission check. 6: the
+      original crop_cover.py is lost, and the release's is a rewrite from the rule in
+      c9632.txt's header, which reproduces that file byte for byte, 632 of 13,244 segments.
+      7: the Lemma Z and 7,717-corner programs are no longer in the authors' working tree,
+      and axis_exact.py replaces them. 8: at a cap of 2,000 cells ctl_rise reproduces the
+      import lane's 443 refused cells and the 6 at (1, 1), and the paper's 1,190 came from a
+      run stopped at 6,000 cells. 10: zmx2 was used unmodified but for the output-only
+      patch, the authors did not review Lemmas U and V, their checks are on zmx2's outputs,
+      and they know of no independent review, so F1 stands. 14: not yet done; the whole
+      log will follow the next rebuild, which needs at least 24 GB. 15: the archive DOI is
+      10.5281/zenodo.24237941 and the paper's 10.5281/zenodo.24237740. 2, 11, 12 and 13
+      restate what the commits did, 11 adding the corrected account of Karakus. The comment
+      ends that F2 is unchanged.
+
+      The answers change no result: T-298 stays at V0/C1, reviewed and current, with F1 and
+      F2 standing, and since the questions were informational and no awaiting_author was
+      recorded, nothing is cleared. The record now cites both DOIs, on T-298's credit, in
+      the bibliography and the resources index, and in the packet's README, which records
+      the answers; neither DOI resolved from this session, whose proxy refuses doi.org and
+      zenodo.org. T-298's levels and landing date do not change, the packet keeps its pin,
+      and nothing is retained. What the answers change for the replay held on think-0h7r is
+      in that bead's notes.
+
+      The follow-up of 05:54:33Z on 15 November 2026 (issuecomment-6890009039), posted by
+      jlevy and recorded in lane L173, acknowledges the authors' answers, so read_through
+      stays at their comment. It thanks them for answering all fifteen and says the answers
+      agree with what was found on reading v1.1 and the README commit: the cropped cover's
+      rewrite reproduces c9632.txt byte for byte; axis_exact.py gives a minimum of exactly 1
+      at 750 corners and refuses both scaled controls; ctl_mutants.py writes both mutant
+      boards byte for byte; and at a 2,000-cell cap ctl_rise reproduces the 443 refused
+      cells and the 6 at (1, 1), the note on the 6,000-cell cap explaining the paper's
+      count. It says that the answers and the two DOIs go into the record in the next
+      records change, this one, and that T-298 will cite them. It states T-298 at V0/C1,
+      reviewed, and no position, so the final reply's stands; it says that F1 and F2 stand,
+      that the full replay, the Lean build and a review of those lemmas remain with the
+      maintainer, that the full Lean build log would help price the rebuild, and that a
+      further follow-up will be posted if T-298's levels change. It names no evidence id and
+      no bead. As #939's and #946's of 14 November, which acknowledged their author's
+      answers, it is recorded as a follow-up, with no reply in corrects, since no earlier
+      reply here carries an outdated statement.
   - number: 977
     title: 'Lowered upper bound for n = 297 (side 17.739455558289): registration request'
     author: JoostdeWinter
@@ -34533,7 +34617,8 @@ issues:
     title: '90 unit squares in side 9.998277166926 — upper-bound registration request'
     author: dpre4ai
     opened: '2026-11-15'
-    state: open
+    state: closed
+    closed: '2026-11-15'
     kind: result-report
     triage: done
     summary: >-
@@ -34558,7 +34643,7 @@ issues:
       accepts it with fourteen findings, all notes; its clean-room checker decided it again,
       so the entry is confirmed, independently re-implemented, at V3/C3, and the case
       adopted it as its house at 90 in the pass of 15 November.
-    read_through: '2026-11-15T03:00:53Z'
+    read_through: '2026-11-15T06:39:56Z'
     results:
     - key: n90-shifted-window
       claim: >-
@@ -34571,11 +34656,33 @@ issues:
       evidence:
       - E-jazivxt-989-certificate-report
       - E-jazivxt-989-exact-feasibility
+      - E-jazivxt-989-review-exact-feasibility
     beads:
     - think-i8y9
     - think-176a
+    - think-86c1
     answer_bead: think-i8y9
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/989#issuecomment-6890481405
+      date: '2026-11-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n90-shifted-window
+        id: T-303
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n90-shifted-window
+        id: E-jazivxt-989-exact-feasibility
+        status: confirmed
+      - result: n90-shifted-window
+        id: E-jazivxt-989-certificate-report
+        status: reviewed
+      - result: n90-shifted-window
+        id: E-jazivxt-989-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-303 is on main with its stage 4 review mapped and adopted as the house at 90, and the
       reply on main says what was retained and replayed, what the review found and that the
@@ -34639,3 +34746,58 @@ issues:
       1.108e-11 below the side, about 1.01 times the certificate's own contraction margin and
       just beyond it, is held at row 3 for RV-3 (think-ruu2, think-ikku). No reply has been
       posted.
+
+      Closed on 15 November 2026 with the final reply (issuecomment-6890481405, posted by
+      jlevy at 06:39:56Z), after #991 merged as 588ccb226 at 06:28:10Z with the import, the
+      replay, the mapped stage 4 review and the adoption at 90, and after that merge's Pages
+      deploy and verify-deployment passed (run 43685575655); recorded in lane L173
+      (think-hisc). It states T-303, s(90) <= 4999138583463/500000000000 = 9.998277166926,
+      exactly the certificate's side, 1.7228e-3 below 10, at V3/C3, confirmed, significance
+      S3, and adopted as the case's house in place of the grid, the case's conjectured
+      integer optimum withdrawn; that is its position, current. It names
+      E-jazivxt-989-exact-feasibility, confirmed, E-jazivxt-989-certificate-report, the
+      author's report, and E-jazivxt-989-review-exact-feasibility, confirmed, so all three
+      are recorded under reported with check_requests' statuses, the report's reviewed
+      (#900). The review's entry, registered in #991 with the mapped review, was missing from
+      this result's evidence list, which now names it, as at #984 and #985. T-293, Joost de
+      Winter's packing of 157, is named as the crop the packing is built from, not as this
+      issue's result, and is not recorded under reported. It credits jazivxt as the finder,
+      and says that the record names GPT-6 Astra Ultra as the AI collaborator, in the
+      author's words, and does not credit it, since the record credits people.
+
+      It says why the packing matters: it moves the smallest k known to have s(k^2 - k) < k
+      from 11 to 10; no family the record holds says s(90) = 10, its k^2 - c families
+      stopping at c = 5, so nothing is contradicted; and every lower bound at 90 stays below
+      the side, the verified one 9.73. It says what was checked: both of the record's
+      maintained exact routes accept the certificate, and all 11 sharp controls stated in
+      advance came out as stated; the blind stage 4 review's own exact checker, separating
+      axes in integers and clipping exactly in rationals with no distance filter, accepted
+      the packing with nothing blocking, its 23 pre-stated controls as stated; no square
+      touches a wall, the least clearance 2.1e-15, and the least pair gap is 1.194e-12, at
+      squares 79 and 81, as the issue says; the grid's contraction margin is 0, so the gain
+      is real, and the certificate's own margin is 1.0988e-11, its wall slack included; Evan
+      Daniel's KKT solve, 1.108e-11 below the side and just beyond that margin, is held and
+      not registered while the maintainer decides how the record treats such sides (RV-3);
+      and the packing reproduces exactly from de Winter's 157, the crop height 9.3533845 and
+      the pitch 9.019403129 as the author's README says, the certificate one to one with
+      that seed, no square moving more than 0.146, and de Winter's file at c70defa the file
+      the record retains.
+
+      It asks five questions, informational and holding nothing open, so none is recorded
+      under awaiting_author: a licence for the certificate, the CSV, the figure and the
+      README, the record having proceeded on the presumption that an author who submits a
+      certificate permits its use (think-cnn7, the review's F12); whether jazivxt is the name
+      to credit and GPT-6 Astra Ultra the right name for the AI collaborator, the commit
+      before the pin naming Codex Astra Ultra (F13); where the side-10 window sat, the box at
+      the placement that fits the certificate holding 91 centres and a window 0.113 to 0.503
+      to the right holding the 90 (F11); whether the wall offsets, 2.1e-15 at left and
+      bottom and 2.377e-13 at right and top, were chosen for the strict checker; and whether
+      the fitting step will be published, and whether the Kaggle leaderboard shows a side
+      below this one at 90. The licence question's follow-up is think-86c1, which the
+      packet's declaration names and the reply does not; it is listed under the entry's
+      beads and not the reply's, as think-0so3 is on #890 and think-mdxq on #893, since a
+      reply's beads are those its text names. The reply links RESULTS.md and n-090.md on
+      main and names no bead. It says that nothing the author asked for is still queued, so
+      the issue is closed with it, and that answers are welcome at any time. The issue was
+      closed as completed at 06:39:57Z. The issue has no comment but the reply, and
+      read_through moves to it.

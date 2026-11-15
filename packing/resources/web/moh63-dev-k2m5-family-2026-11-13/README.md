@@ -31,6 +31,7 @@ is in [Checks Made Here](#checks-made-here).
 | Retained here | 465 files, 8,475,699 bytes, byte-identical at their upstream paths under [`k2m5-family/`](k2m5-family/); ten data files of more than 1,000 lines are stored as deterministic gzip ([Compressed Files](#compressed-files)) |
 | Pinned by digest only | `tight_tile/cov.tar.xz`, 8,693,760 bytes, SHA-256 `9d57475533d054ad73b75273defc716f88c271cf22fca67f06962a1c62fce535`: the `zmx2` dumps of every uncertified box in the 75 tight-tile roots, over the 5 MiB per-blob ceiling of OR-18. The replay here read it from the pinned commit after checking that digest. A hosted data release is owed before a full replay cites receipts compared with it (`think-0h7r`) |
 | Board | `certificate/sol_exact_box11.txt`, SHA-256 `d259fed5c9d5eb02c6fed85f5d1070e86d48f5717305f9e056c9a88adbd12099`, the issue’s and `certificate/SHA256SUMS`’s |
+| Archive | Zenodo, as the authors give it on #973 and in `README.md` at `0e28e8a547c742fb1e120da22dc8d7275f1a6f52`: the paper [10.5281/zenodo.24237740](https://doi.org/10.5281/zenodo.24237740), and release v1.1, tag `v1.1` at `9ccfe825fe04cd9f3770b4e76892364ceb50322c`, [10.5281/zenodo.24237941](https://doi.org/10.5281/zenodo.24237941). Release v1.1 keeps the certificate and every file of `certificate/` as at this pin, and this packet keeps the pin. Neither DOI was resolved from the session that recorded them (lane L173, 15 November), whose proxy refuses doi.org and zenodo.org |
 | The issue | [#973](https://github.com/jlevy/squares/issues/973), labelled `intake`; no comment when read |
 
 Evan Daniel’s checkers are not in the tree.
@@ -434,6 +435,79 @@ The checks at lane L168’s read ran from the bytes of `85279d2`, the same files
 `9ccfe82`, with Python 3.14.7 and `-I`, and their outputs are not retained, since nothing
 is registered from them.
 What the new files change for a full replay is on `think-0h7r`.
+
+### The Authors’ Comment
+
+On 15 November 2026 the authors answered all fifteen questions in a comment on #973
+([issuecomment-6889513117](https://github.com/jlevy/squares/issues/973#issuecomment-6889513117),
+05:03:46Z), numbered as the reply numbers them.
+It names release v1.1 as tag `v1.1` at `9ccfe82` “plus one README commit that adds the
+archive DOI”,
+[`0e28e8a`](https://github.com/moh63-dev/k2m5-family/commit/0e28e8a547c742fb1e120da22dc8d7275f1a6f52)
+(03:41:17Z), read in [campaign/intake-watch.yaml](../../../campaign/intake-watch.yaml).
+That commit changes `README.md`, which now gives the archive DOI, and its line in
+`SHA256SUMS_ALL`, and nothing else: the certificate and every file of `certificate/` are
+as at this pin, 457 of the 466 pinned files hold their digests, and the nine that change
+are the nine above.
+Where the comment adds to what the commits said:
+
+- **1, the dump’s command.** The new steps 6b and 9 of `verify.sh --full` have not been
+  run end to end. The comment does not mention the `qx2/` directory step 6b changes
+  into, which evand/square-packing lacks at `659ee62`, so that reading stands.
+- **3, the Tight-Tile outputs.** `run_tt.py` prints `K` since 11 November, when the
+  authors changed the checker after their own adversarial review: safety asserts became
+  exceptions, and the area term’s apex range became `[0, apex_w]`.
+  The main batch, run on 9 and 10 November, ran on the earlier revision, which the
+  release does not hold, and `out_fix/` and `out_u2000_fix/` after it.
+  `SHA256SUMS_ALL` gives the digest of every shipped checker file.
+  Read against the release at `0e28e8a`: of the 326 recorded job outputs only the one in
+  `out_u2000_fix/` carries `K`.
+  The two in `out_fix/`, the only ones with ray zones, the charts whose apex range is not
+  the default, lack it, as the 323 in `out/` and `out_u2000/` do.
+- **4, `run_cov.sh`.** In v1.0 the assembly script turned the end of line 6 into a
+  comment, so `B` and `NP` were unset; in the authors’ working copy `B` was the board and
+  `NP` 6, which is how the shipped dumps ran.
+  The assembler now refuses to build without them.
+- **5, versions.** The Tight-Tile jobs ran under Python 3.10.12, numpy 1.26.1 and scipy
+  1.11.4, and the controls in `out_controls/` under Python 3.13.0 with the standard
+  library alone, which the failed line of `versions.txt` records.
+  `ttbox.py` imports numpy and scipy inside a `try`, for a floating LP that proposes
+  weights an exact check then verifies, and skips that step without them, so a run on the
+  standard library alone can take another cell path (the review’s F8).
+  That would account for the release’s control run of the board taking 169 cells where
+  the import lane, with scipy, took 155, as the paper reports.
+  A run to test it was refused by lane L173’s session.
+- **6, the cropped cover.** The original `crop_cover.py` is lost; the release’s is a
+  rewrite from the rule in the header of `c9632.txt`, and reproduces that file byte for
+  byte, 632 of 13,244 segments.
+- **7, the axis face.** The Lemma Z and 7,717-corner programs are no longer in the
+  authors’ working tree; `axis_exact.py` replaces them.
+- **8, the Tight-Tile controls.** At a cap of 2,000 cells `ctl_rise.txt` gives the import
+  lane’s 443 refused cells and 6 at $(1, 1)$, and the paper’s 1,190 came from a run
+  stopped at 6,000 cells.
+- **9, the Tight-Tile review.** Its findings and the fixes are in
+  `docs/TIGHT_TILE_PROOF.md` §11, with no separate report.
+  That file is not in the release.
+  `paper/tight_tile_report.tex`, unchanged since the pin, has an independent-review
+  section that names two bookkeeping findings in the coverage step and no apex-range
+  change.
+- **10, Lemmas U and V.** `zmx2` was used unmodified but for the output-only patch; the
+  authors did not review Lemmas U and V, their checks are on its outputs, and they know of
+  no independent review, so F1 stands.
+- **14, the Lean build.** Not yet done: the whole log will follow the next rebuild, which
+  needs at least 24 GB.
+- **15, the Zenodo record.** The archive DOI is
+  [10.5281/zenodo.24237941](https://doi.org/10.5281/zenodo.24237941) and the paper’s
+  [10.5281/zenodo.24237740](https://doi.org/10.5281/zenodo.24237740); both are in
+  [Source and Pin](#source-and-pin), and T-298 cites them.
+
+Items 2, 11, 12 and 13 restate what the commits did, and the comment ends that F2 is
+unchanged.
+The coordinator acknowledged the answers on #973
+([issuecomment-6890009039](https://github.com/jlevy/squares/issues/973#issuecomment-6890009039),
+05:54:33Z).
+T-298 stays at V0/C1, and this packet keeps its pin and retains nothing of `0e28e8a`.
+What the answers change for a full replay is on `think-0h7r`.
 
 ## Compressed Files
 
