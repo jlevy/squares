@@ -89,8 +89,8 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
 
         # The census, observed as the steps whose duration shrinks by the page's speed-up. A
         # simple step lies inside k^2 - k .. k^2 - 1 for k = ceil(sqrt(n + 1)), and that range
-        # holds 170 steps of the corpus; fifteen of them change the container, because their
-        # best packing is tilted, and play at full length. So 155 play sped up, and the page's
+        # holds 170 steps of the corpus; sixteen of them change the container, because their
+        # best packing is tilted, and play at full length. So 154 play sped up, and the page's
         # own count agrees. The twelfth is 211 -> 212 since the #227 intake: de Winter's tilted
         # n = 211 at side 14.998 replaced the 15 x 15 grid, so the grid resumes at 212. The
         # thirteenth is 308 -> 309 since the house adoption of 11 October 2026 (think-fvz4):
@@ -99,7 +99,9 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
         # Evan Daniel's tilted n = 183 (T-220) replaced the 14 x 14 grid's fill, so the grid
         # resumes at 184. The fifteenth is 157 -> 158 since lane L104's adoption of 11 November
         # 2026 (think-bcfs): Joost de Winter's tilted n = 157 (T-293) replaced the 13 x 13
-        # grid's fill, so the grid resumes at 158.
+        # grid's fill, so the grid resumes at 158. The sixteenth is 90 -> 91 since lane L170's
+        # adoption of 15 November 2026 (think-i8y9): jazivxt's tilted n = 90 (T-303) replaced
+        # the 10 x 10 grid's fill, so the grid resumes at 91.
         def grid_fill_range(n: int) -> bool:
             k = math.isqrt(n) + 1  # ceil(sqrt(n + 1))
             return k * k - k <= n <= k * k - 1
@@ -108,6 +110,7 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
         sped = {row["n"] for row in census if row["sped"]}
         in_range = {row["n"] for row in census if grid_fill_range(row["n"])}
         full_length = {
+            90,
             110,
             132,
             156,
@@ -125,9 +128,9 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
             308,
         }
         require(
-            call("continuous")["simplePairs"] == len(sped) == 155
+            call("continuous")["simplePairs"] == len(sped) == 154
             and sped == in_range - full_length,
-            f"the simple steps are not the 155 grid fills: page count "
+            f"the simple steps are not the 154 grid fills: page count "
             f"{call('continuous')['simplePairs']}, sped up {len(sped)}, outside the range "
             f"{sorted(sped - in_range)}, missing {sorted(in_range - full_length - sped)}",
         )

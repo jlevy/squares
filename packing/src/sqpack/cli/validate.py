@@ -2664,12 +2664,14 @@ def _known_best_atlas(context: Context) -> str:
         f"n={KNOWN_BEST_CORPUS.first_n}), {KNOWN_BEST_CORPUS.count} manifest entries, "
         f"sources, links, and {len(KNOWN_BEST_COMPOSITES)} composite"
         f"{'' if len(KNOWN_BEST_COMPOSITES) == 1 else 's'}",
-        # Five strata and thirty-six non-grid cases are calibration facts, not corpus
+        # Five strata and thirty-seven non-grid cases are calibration facts, not corpus
         # facts: `D4` pins both layers at CALIBRATION_CORPUS, so neither moves when the
         # atlas widens. They stay literal because the numbers are findings about the
-        # inspected hundred rather than counts of it.
+        # inspected hundred rather than counts of it. The non-grid cases were 36 until
+        # lane L170 (think-i8y9) adopted jazivxt's packing at 90 (T-303) on 15 November
+        # 2026, moving 90 off the grid inside the hundred.
         "known-best contact overlay check passed: 5 house-rendered calibration strata",
-        "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
+        "known-best chunk evidence profile check passed: 37 non-grid calibration cases",
         "bound citations check passed",
         "contact enumeration pricing check passed",
         "contact full-cell control check passed",

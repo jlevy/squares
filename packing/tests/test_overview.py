@@ -960,7 +960,8 @@ def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(
         42,
         56,
         72,
-        90,
+        # 90 left the grid for a packet house on 15 November 2026 (think-i8y9, T-303).
+        91,
         111,
         133,
         # 157 left the grid for a packet house on 11 November 2026 (think-bcfs, T-293).

@@ -88,7 +88,9 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
     # Row 14's is 184 since the adoption of 19 October 2026 (think-jh4w): Evan Daniel's
     # tilted n = 183 (T-220) replaced the 14 x 14 grid there. Row 13's is 158 since lane
     # L104's adoption of 11 November 2026 (think-bcfs): Joost de Winter's tilted n = 157
-    # (T-293) replaced the 13 x 13 grid there.
+    # (T-293) replaced the 13 x 13 grid there. Row 10's is 91 since lane L170's adoption of
+    # 15 November 2026 (think-i8y9): jazivxt's tilted n = 90 (T-303) replaced the 10 x 10
+    # grid there.
     assert [item.first_grid_n for item in found] == [
         1,
         2,
@@ -99,7 +101,7 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
         42,
         56,
         72,
-        90,
+        91,
         111,
         133,
         158,
@@ -109,6 +111,8 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
         274,
         309,
     ]
+    assert entries[89]["source"]["kind"] == "packet-derived-facts"
+    assert found[9] == GridTransition(10, 91)
     assert entries[156]["source"]["kind"] == "packet-derived-facts"
     assert found[12] == GridTransition(13, 158)
     assert entries[182]["source"]["kind"] == "packet-derived-facts"
