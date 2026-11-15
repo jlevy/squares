@@ -1,0 +1,112 @@
+{
+ "program": "l169_custody.py",
+ "pin": "179fcba7f0e91e2c3d3e92525e0738b6da0f8dd5",
+ "head": "179fcba7f0e91e2c3d3e92525e0738b6da0f8dd5",
+ "working_tree_clean": true,
+ "commits": [
+  {
+   "commit": "179fcba7f0e91e2c3d3e92525e0738b6da0f8dd5",
+   "author_name": "Daniel",
+   "author_date": "2026-11-14T19:00:42-08:00",
+   "commit_date": "2026-11-14T19:00:42-08:00",
+   "subject": "Publish the exact 90-square packing by jazivxt and GPT-6 Astra Ultra",
+   "files": [
+    "17e795f2a70c232c04633f4d7318191f7c198abe 1072 DONOR-LICENSE.txt",
+    "f0e90edb8a3c36d8aa7a883b6f586c211c57fba6 2459 README.md",
+    "813cf4f6301054621d4bd454b5c20c5f30442549 383 SHA256SUMS",
+    "9a070723bb0b0776ed7b122ef638f6852d74565e 11975 n90.cert",
+    "c859fd323563537bd8de8bb550f17b1ec1696c11 4775 n90.csv",
+    "9f284f8686b46b897291e0b98e8003ddaaa1f21d 120546 n90.png"
+   ]
+  },
+  {
+   "commit": "e5c2ecc365b5a0d4783e0b7e2fe580fca2cc76b5",
+   "author_name": "Daniel",
+   "author_date": "2026-11-14T19:00:02-08:00",
+   "commit_date": "2026-11-14T19:00:02-08:00",
+   "subject": "Publish the exact 90-square packing by jazivxt and Codex Astra Ultra",
+   "files": [
+    "17e795f2a70c232c04633f4d7318191f7c198abe 1072 DONOR-LICENSE.txt",
+    "e371a7676e81d4e4842e6706956173d047ec46c6 2459 README.md",
+    "1249fe2ad479a6ed45f34c6b55b5fa99df74d50d 383 SHA256SUMS",
+    "9a070723bb0b0776ed7b122ef638f6852d74565e 11975 n90.cert",
+    "c859fd323563537bd8de8bb550f17b1ec1696c11 4775 n90.csv",
+    "9f284f8686b46b897291e0b98e8003ddaaa1f21d 120546 n90.png"
+   ]
+  },
+  {
+   "commit": "85ad92e627cec81c4ce24e26f7bc0d8fd7ce6a05",
+   "author_name": "Daniel",
+   "author_date": "2026-11-14T18:59:56-08:00",
+   "commit_date": "2026-11-14T18:59:56-08:00",
+   "subject": "Initial commit",
+   "files": [
+    "9e5480a5dd7bedeb3d30a18df74e7679094e55a7 160 README.md"
+   ]
+  }
+ ],
+ "pin_changes_from_parent": [
+  "M\tREADME.md",
+  "M\tSHA256SUMS"
+ ],
+ "pin_parent_readme_changed_lines": [
+  "-Credit for the 90-square result goes to **jazivxt and Codex Astra Ultra**. Codex Astra Ultra was the AI collaborator on the geometric search and verification. The diagonal band comes from Joost de Winter\u2019s earlier 157-square packing. [Joost de Winter\u2019s exact 157-square coordinates](https://github.com/JoostdeWinter/square-packing/blob/c70defaf39af47db220d1e7c2922590637ffb664/n157/n157_exact.json)",
+  "+Credit for the 90-square result goes to **jazivxt and GPT-6 Astra Ultra**. GPT-6 Astra Ultra was the AI collaborator on the geometric search and verification. The diagonal band comes from Joost de Winter\u2019s earlier 157-square packing. [Joost de Winter\u2019s exact 157-square coordinates](https://github.com/JoostdeWinter/square-packing/blob/c70defaf39af47db220d1e7c2922590637ffb664/n157/n157_exact.json)"
+ ],
+ "sha256sums": [
+  {
+   "file": "README.md",
+   "stated": "bbf6660a0a96dbf9ed575f75be08f16f167daf4b29cf2b65116b7ea92f870153",
+   "actual": "bbf6660a0a96dbf9ed575f75be08f16f167daf4b29cf2b65116b7ea92f870153",
+   "holds": true
+  },
+  {
+   "file": "n90.cert",
+   "stated": "88c93b2f1d1f3061d1e6815f790d13f3d8f174dd3431f50d8d4d9d4383b3d466",
+   "actual": "88c93b2f1d1f3061d1e6815f790d13f3d8f174dd3431f50d8d4d9d4383b3d466",
+   "holds": true
+  },
+  {
+   "file": "n90.csv",
+   "stated": "181a51b9c0c23b47bf8d203cedd98076d79f9714e42b6e991d6f1a10c87ca774",
+   "actual": "181a51b9c0c23b47bf8d203cedd98076d79f9714e42b6e991d6f1a10c87ca774",
+   "holds": true
+  },
+  {
+   "file": "n90.png",
+   "stated": "81eaae7e8196587c0b3ea28ee8fec955630483344e3b3714a64e3922e7e3093e",
+   "actual": "81eaae7e8196587c0b3ea28ee8fec955630483344e3b3714a64e3922e7e3093e",
+   "holds": true
+  },
+  {
+   "file": "DONOR-LICENSE.txt",
+   "stated": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+   "actual": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+   "holds": true
+  }
+ ],
+ "licence_files": [
+  "DONOR-LICENSE.txt"
+ ],
+ "csv": {
+  "header": [
+   "square_id",
+   "x_center",
+   "y_center",
+   "angle_degrees_ccw"
+  ],
+  "rows": 90,
+  "ids_in_certificate_order": true,
+  "largest_centre_difference": 8.22833083338e-16,
+  "largest_angle_difference_deg": 0.0
+ },
+ "issue": {
+  "number": 989,
+  "created_at": "2026-11-15T03:00:53Z",
+  "seconds_after_pin_commit": 11.0,
+  "labels": [
+   "intake"
+  ],
+  "comments": 0
+ }
+}
