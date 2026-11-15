@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 315
+version: 316
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -108,7 +108,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T05:54:34.476Z
+updated_at: 2026-11-15T06:40:29.785Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -281,3 +281,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~03:50Z: #990 (records of #983 follow-up, #984/#985 finals; k2m5-family v1.1 read) merged a3e4ea0c5; think-17ex, think-jbwm, think-jlsq closed. NEW #989 (jazivxt via dpre4ai, s(90) <= 9.998277166926 < 10): intake; import think-i8y9 (L170), blind review think-176a (L169). Deferred: cite #973 paper DOI 10.5281/zenodo.24237740 on T-298 next change.
 2026-11-15 ~04:55Z: L169 review of #989 landed (22949a12e; accepted, all notes, S3 proposed; no family claims s(90)=10; first s(n^2-n)<n at n=10; author repo states no licence for its files). L170 import running. k2m5-family 0e28e8a (README: software DOI) to read in the next records PR.
 2026-11-15 ~05:40Z: L170 import = #991 (T-303 at 90, first below the 10x10 grid; 11-15 pass {90,147,228}; stamped 11-15). L171 senior review: B1 padding double-counts wall slack; S1 finding count; S2 timing; S3 X-008 stale (BC-024 tilted residue at 51 and 90) -> addendum + 2 owner points (grammar conclusion; 37/63 calibration constants move with adoptions); S4 licence bead think-86c1. L172 addressing; merge by 23:59Z.
+2026-11-15 ~06:45Z: L172 applied L171 (B1 padding, S1-S4, notes; X-008 addendum; owner points in #991 body) ; #991 merged 588ccb226 (T-303, first below the 10x10 grid at 90). Deploy ok (run 43685575655). #989 reply posted and closed. #973 authors answered all 15 (05:03Z), acknowledged 05:54Z. L173 records PR for #989 + #973 + k2m5-family 0e28e8a + DOIs (think-hisc).
