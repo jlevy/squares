@@ -31,7 +31,7 @@ reason: >-
   the stage 4 review of them (L163) is mapped, and the cases adopt them at 228 in place of
   T-300 and at 147, first adopted there, in the pass of 15 November, with their credits, the
   house writer's prose and sources, the settlement at 228 and the admitted view at 147, the
-  poster credit hold, the bound citations, the composite figure, the gate's rigidity totals,
+  poster credit hold, the bound citations, the composite figure, the gate's screen totals,
   the importer's packets, the other-projects card, the requests entries for #984 and #985,
   the final reply on #983 and the coverage text that follow. No paper prints those counts,
   these records or that card. Against origin/main ed7aff650 (#987):
@@ -49,5 +49,8 @@ reason: >-
   none of which is in the 1 to 100 composite the explainer reads. So the change is the live
   register count,
   which follows the site's data and is not a revision of the paper, as the L71 to L160
-  records say. No PDF was printed; each prints from that HTML. Every paper keeps its
+  records say. The gate's n = 1 to 200 screen totals in validate.py were corrected after
+  that comparison, from 67, 724, 182 and 2,315 to 68, 761, 182 and 2,366 now that 147's
+  house has squares that separate; the explainer's template and scripts read no screen
+  totals. No PDF was printed; each prints from that HTML. Every paper keeps its
   version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

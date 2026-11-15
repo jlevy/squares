@@ -273,10 +273,11 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: T-300's 80 and 123; and 147 to his certificate of issue 985 (T-302), a new arrangement:
 #: 37 and 61 against the catalogue packing's 0 and 10, so 147 joins the records with a
 #: square that separates, 126 of them, and n=1..324 has 2,716 separating squares and 6,655
-#: translating ones.
+#: translating ones; at n=1..200, 68 records, 761 separating squares and 2,366
+#: translating ones, against 67, 724 and 2,315.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 724, 182, 2315),
+    "n=1..200": (68, 761, 182, 2366),
     "n=1..324": (126, 2716, 302, 6655),
 }
 UNDETERMINED_BY_MISS = (28,)
