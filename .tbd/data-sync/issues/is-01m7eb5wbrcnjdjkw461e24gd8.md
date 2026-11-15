@@ -3,9 +3,9 @@ type: is
 id: is-01m7eb5wbrcnjdjkw461e24gd8
 title: "Read moh63-dev/k2m5-family v1.1 (85279d2, 14 Nov): Lemma 7 sentence, crop_cover, axis_exact, zmx2 logs, controls, LICENSE, run_cov fix, answering #973's questions; record in intake-watch and #973 notes; re-price think-0h7r if the zmx2 logs change F4"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: bold-ritchie-l168
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T00:54:37.176Z
-updated_at: 2026-11-15T03:07:33.698Z
+updated_at: 2026-11-15T03:21:44.329Z
 started_at: 2026-11-15T02:35:34.862Z
+closed_at: 2026-11-15T03:21:44.329Z
+close_reason: "k2m5-family v1.1 (85279d2, 9ccfe82) read in #990: answers #973 Q1,2,6,8,11,12,13 fully, 4,5,7,14,15 in part; think-0h7r price unchanged."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

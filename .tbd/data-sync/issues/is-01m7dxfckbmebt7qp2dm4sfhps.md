@@ -3,9 +3,9 @@ type: is
 id: is-01m7dxfckbmebt7qp2dm4sfhps
 title: "Import #984 (s(228) <= 15.596043120921, supersedes T-300) and #985 (s(147) <= 12.651043556588, below 7 + 4*sqrt(2)): Roberto Ono, first contribution"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 10
 delegate: bold-ritchie-l164
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-14T20:55:08.650Z
-updated_at: 2026-11-15T01:46:21.212Z
+updated_at: 2026-11-15T03:21:43.566Z
 started_at: 2026-11-14T21:06:10.385Z
+closed_at: 2026-11-15T03:21:43.566Z
+close_reason: "#984 (T-301 at 228) and #985 (T-302 at 147) imported in #988 (a4f36ae70), answered and closed; recorded in #990 (a3e4ea0c5)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
