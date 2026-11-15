@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 325
+version: 326
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -113,7 +113,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-15T08:23:57.261Z
+updated_at: 2026-11-15T09:32:15.790Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -291,3 +291,4 @@ started_at: 2026-10-31T08:37:28.427Z
 2026-11-15 ~07:40Z: L173 = #993 (records #989 final, #973 answers + ack, k2m5 0e28e8a, DOIs on T-298); CI red only on D-509 pdf flake (run 43688482102); occurrence noted on think-6dle; #993 waits for main to move (no rerun, no empty commit). L174 review of #992: exact packing accepted but record already holds 31.765989508190 at 977 (Couzo #763) < claim 31.849; classical (Goebel (16,21) less squares; Friedman L-border at 982); S1; not recordable as a row. Goebel module lacks L-border extension (bordered members undercut module at 910 counts 325-2000) -> owner decision think-zkxy.
 2026-11-15 ~08:05Z: L175 = #994 (#992 not recordable: Couzo #763 row 31.765989508190 < claim; packet retained, review mapped, new devtools.diamond_staircases builds the construction over Q(sqrt2), both number-field routes accept; beads think-cszb licence, think-7j3i owner decision L-border Goebel (overlaps think-zkxy), think-526p NumberField.decimal bug). CI green. L176 senior review running. Then merge #994, merge main into #993 for a fresh run, reply on #992.
 2026-11-15 ~08:40Z: L176 senior review of #994: no B; S1 Goebel wording, S2 vacuous check, S3 dated note in review, S4 beads. Coordinator did S4 (think-7j3i retitled with F11 measurement, linked to think-zkxy as one two-part owner question) and N9; labels S2+intake. L177 addressing S1-S3, N1-N8, N10.
+2026-11-15 ~09:35Z: L177 applied L176; #994 merged 538b7833a (#992 not recorded; diamond_staircases). Deploy ok (run 43697866071). Merged main into #993 (a08ccd897, conflict resolved additively) -> fresh run green incl. D-509 pdf; #993 merged 942c1271f. #992 final reply posted and closed (09:30Z). Closed think-i8y9, think-176a, think-hisc, think-u58c. think-ud9e re-delegated L175->L179 (L175 ended); L179 records PR for #992 reply.
