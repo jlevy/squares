@@ -1,0 +1,10 @@
+{
+ "stated_by": "lane L174, before l174_csv_check.py was run and before the CSV was read beyond its first five lines",
+ "expectation": {
+  "rows": 977,
+  "angle_classes": {"45": 441, "0": 536, "other": 0},
+  "C7_rebuilt_at_31.85": "one to one; largest centre deviation below 1e-13; angles within 1e-15 of pi/4 or exactly 0",
+  "K0_exact_side": "one to one by nearest centre, but deviations near 7.6e-4 = 31.85 - L at the right and top staircases and 3.8e-4 in the diamond",
+  "K0_scaled_to_31.85": "one to one by nearest centre, deviations of order 1e-4 to 7e-4, so the CSV is the construction rebuilt at 31.85, not scaled"
+ }
+}
