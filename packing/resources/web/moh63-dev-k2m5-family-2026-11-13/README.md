@@ -334,6 +334,107 @@ These hold no rung; they are for the reply on #973.
    Could the release say which version of `ttbox` and `run_tt.py` ran each job, and
    whether anything but the output changed?
 
+### The Authors’ Answers
+
+The final reply on #973
+([issuecomment-6873382321](https://github.com/jlevy/squares/issues/973#issuecomment-6873382321))
+asked fifteen questions: its 1, 3, 6, 7, 8, 12, 13, 14 and 15 are 1, 9, 2, 3, 4, 5, 6, 7
+and 8 above, and its 2, 3, 4, 5, 9, 10 and 11 are the stage 4 review’s.
+The authors answered by commit, not by comment, on 15 November 2026:
+[`85279d2`](https://github.com/moh63-dev/k2m5-family/commit/85279d2a425992c64549c7aaede70ac5e774ac80)
+(00:22:20Z), “v1.1: Lemma 7 sentence, crop_cover, axis_exact, zmx2 logs, controls,
+LICENSE, run_cov fix”, and
+[`9ccfe82`](https://github.com/moh63-dev/k2m5-family/commit/9ccfe825fe04cd9f3770b4e76892364ceb50322c)
+(02:56:10Z), which adds the paper’s DOI; both are read in
+[campaign/intake-watch.yaml](../../../campaign/intake-watch.yaml).
+The certificate and every file of `certificate/` are unchanged, and so are 457 of the 466
+files the manifest pins, `cov.tar.xz` among them; the nine that change are `LICENSE`,
+`README.md`, `SHA256SUMS_ALL`, `docs/CHECKING.md`, `paper/k2m5.tex` and its PDF,
+`tight_tile/README.md`, `tight_tile/run_cov.sh` and `verification/verify.sh`.
+This packet keeps its pin and retains nothing of either commit, which add no bound,
+certificate or claim, and the answers change no result: T-298 stays at V0/C1.
+In the reply’s numbering:
+
+1. **The dump’s command** (1 above). Answered. `verify.sh --full` gains a step that
+   regenerates root 9632’s dump with `--uncert-cap 100000000`, saying that at the
+   default of 200 it stops at 226 boxes, then runs `qx2_zm.py` and `check_9632.py`, and
+   a step that regenerates the 75 coverage dumps with `run_cov.sh` and checks them with
+   `cov_check.py`. As committed, the root-9632 step runs `qx2_zm.py` in
+   `build/square-packing/qx2`, a directory evand/square-packing does not have at
+   `659ee62`, where the program is `search/qx2_zm.py`; under the script’s
+   `set -euo pipefail` the full mode would stop there, before the sweep.
+   That was read, not run.
+2. **The `zmx2` logs.** Answered. `verification/logs/zmx2_box11/col00.log` to `col54.log`
+   hold 12,100 `ROOT` lines, one per root with its boxes, certified, empty and
+   uncertified counts, deepest level and milliseconds, and 2,508 `UNCERT` lines.
+   Each column’s roots sum to its census in `colNN.out`, and their times to 45,367
+   seconds against the 45,366 recorded. The 30 columns run here
+   ([`receipts/zmx2/`](receipts/zmx2/), `colNN_roots.log`) equal them line for line,
+   timings aside.
+3. **The Tight-Tile outputs** (9 above). No answer: the outputs, `run_tt.py` and
+   `ttbox.py` are unchanged.
+4. **`run_cov.sh`.** In part. The script now sets `B` and `NP` outside the comment and
+   writes to `OUTD`; it does not say how the shipped dumps were run.
+5. **Versions and the `ctl_rise` log.** In part. The new control run’s
+   `tight_tile/out_controls/versions.txt` gives Python 3.13.0, and its line for numpy and
+   scipy fails on a missing scipy, so neither version is given, and nothing is said of
+   the jobs. `docs/CHECKING.md` now says that the paper’s 1,190 refused cells came from a
+   run stopped at a cap of 6,000 cells, the count depending on the cap, which accounts for
+   the counts that did not reproduce here. A log at a cap of 2,000 is published, and its
+   `ctl_rise.txt` result, 443 of 2,083 cells refused and 6 of them containing the face
+   point, is the import lane’s. The run at 6,000 is not published.
+6. **The cropped cover** (2 above). Answered: `verification/r9632/crop_cover.py` keeps
+   the board’s segments that meet the eight images of the root’s window of centres,
+   enlarged by 3/4. Run on the board at lane L168’s read, it writes `c9632.txt` byte for
+   byte, and the fast `verify.sh` now checks the same.
+7. **The axis face** (3 above). In part. `verification/axis_exact.py` evaluates the
+   untilted mass exactly, in integers, at the four corners of every 1/10 cell of centres,
+   10,000 corners in all, and the fast `verify.sh` runs it on the board and on both scaled
+   controls. Run at lane L168’s read, it prints a minimum of exactly 1 at 750 corners and
+   refuses both controls, about 3 CPU-seconds each. The paper names it in place of the
+   evaluation at 7,717 corners, and says that the Lemma Z run at the same corners is not
+   part of the release.
+8. **The Tight-Tile controls** (4 above). Answered. `tight_tile/ctl_mutants.py` writes
+   the two that were missing, every weight times 99/100 rounded down and the 106 segments
+   on $x = 2$ times 99/100, and `run_controls.sh` runs `ctl_rise.py` on the board and the
+   three mutants at a cap of 2,000 cells. Run at lane L168’s read, `ctl_mutants.py` writes
+   both mutant files byte for byte. In the published log the board certifies with none
+   refused, and the mutants refuse 443, 1,029 and 1,038 cells.
+   The board’s run there takes 169 cells, 85 certified, where the import lane’s run
+   without a cap took 155, 78 certified, on the same `ctl_rise.py` and `ttbox.py`
+   ([`receipts/controls/tight-ctl-rise-real.log`](receipts/controls/tight-ctl-rise-real.log)).
+   Lane L168’s session was not permitted to re-run it at the cap, so the difference is
+   not explained.
+9. **The Tight-Tile review.** No answer.
+10. **Lemmas U and V.** No answer.
+11. **Elementary pieces.** Answered. The paper now says, where Lemma 7 uses it, that every
+    segment of $\nu$ and $\omega$ is an elementary piece of the 1/10 grid, of length 1/10,
+    checked on all 13,244 segments of $\mu_{11}$, so that none crosses the grid lines
+    $x = R$ and $x = k - R$ (the review’s F5).
+12. **The licence** (5 above). Answered. `LICENSE` grants MIT for the code and CC BY 4.0
+    for the text and data, names the files each covers, and leaves Evan Daniel’s code
+    under its own MIT licence; it no longer names `search/cover_loop.py` or
+    `search/tilesep.py`. Both grants permit retention.
+13. **The patch step** (6 above). Answered. `verify.sh --full` now stops when
+    `zmx2_print_all.patch` fails to apply, unless it is already applied.
+14. **The Lean build** (7 above). In part. `lean/build_inst.sh` builds each module in its
+    own process and writes each one’s wall time and peak memory to `build_full.log`,
+    through `/home/claude/lean/mk.sh`, which is not in the release. No such log is
+    published, and `lean/build.log` is unchanged.
+15. **The Zenodo record** (8 above). In part. `.zenodo.json` and `CITATION.cff`
+    (version 1.1, released 14 November) describe the deposit, and `9ccfe82` gives the
+    paper’s DOI, [10.5281/zenodo.24237740](https://doi.org/10.5281/zenodo.24237740), in
+    them and in the README, which says that the release’s software DOI will be added once
+    minted. Lane L168’s session could not reach doi.org or zenodo.org, so the DOI was not
+    resolved there; the record can cite it when T-298 next changes.
+
+`85279d2` also rewords the paper’s account of Nagamochi and Karakuş, and calls the
+untilted mass piecewise bilinear rather than piecewise affine.
+The checks at lane L168’s read ran from the bytes of `85279d2`, the same files at
+`9ccfe82`, with Python 3.14.7 and `-I`, and their outputs are not retained, since nothing
+is registered from them.
+What the new files change for a full replay is on `think-0h7r`.
+
 ## Compressed Files
 
 Data files of more than 1,000 lines are stored as deterministic gzip made by `gzip -9n`,

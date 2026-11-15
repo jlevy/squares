@@ -33624,6 +33624,58 @@ issues:
       be posted whenever T-298's levels, status or position change. The issue has no comment
       but the reply, and read_through moves to it. The issue was closed as completed at
       06:51:14Z.
+
+      Read on 15 November 2026 in lane L168 (think-jlsq): the authors answered by commit, not
+      by comment, in 85279d2 (00:22:20Z on 15 November), "v1.1: Lemma 7 sentence,
+      crop_cover, axis_exact, zmx2 logs, controls, LICENSE, run_cov fix", and 9ccfe82
+      (02:56:10Z), which adds the paper's DOI, both read in campaign/intake-watch.yaml; no
+      comment has followed the reply here. Of the reply's fifteen questions they answer
+      seven, 1, 2, 6, 8, 11, 12 and 13, and five in part, 4, 5, 7, 14 and 15. 1: verify.sh --full now regenerates root 9632's dump, with --uncert-cap
+      100000000 and a comment that the default cap of 200 stops at 226 boxes, its qx2_zm.py
+      run and the closure check (step 6b), and the 75 coverage dumps (step 9), rather than
+      reading them; as committed, step 6b runs qx2_zm.py in a qx2/ directory that
+      evand/square-packing lacks at 659ee62, where it is search/qx2_zm.py, so --full would
+      stop there. 2: verification/logs/zmx2_box11/col00.log to col54.log are the zmx2 --log
+      files, 12,100 ROOT lines; each column's roots sum to its census, and the 30 columns run
+      here equal them root for root, timings aside. 4, in part: run_cov.sh now sets B and NP
+      outside the comment, which mends the script but does not say how the shipped dumps
+      were run. 5, in part: the new control run's versions.txt gives Python 3.13.0, its
+      numpy and scipy line failing on a missing scipy, so neither version is given, and
+      nothing is said of the jobs; docs/CHECKING.md now says the paper's 1,190 refused cells
+      came from a ctl_rise run stopped at a cap of 6,000 cells, the count depending on the
+      cap, which accounts for the counts that did not reproduce here, and a log at a cap of
+      2,000 is published, its ctl_rise line the import lane's exactly; the run at 6,000 is
+      not. 6: verification/r9632/crop_cover.py, which writes c9632.txt byte for byte, as
+      checked here. 7, in part: verification/axis_exact.py evaluates the untilted mass
+      exactly, in integers, at the 10,000 limit corners, and here prints minimum exactly 1 at
+      750 of them and refuses both scaled controls; the paper names it in place of the
+      evaluation at 7,717 corners, and says the Lemma Z run is not part of the release. 8:
+      tight_tile/ctl_mutants.py and run_controls.sh, with their outputs: both mutants are
+      refused at a cap of 2,000 cells, 1,029 and 1,038 cells refused, where the board
+      certifies; the board's run there takes 169 cells, 85 certified, against 155 and 78 in
+      the import lane's run without a cap, which is not explained. 11: the paper now states,
+      where Lemma 7 uses it, that every segment is an elementary 1/10 piece, checked on all
+      13,244 segments of mu_11 (the review's F5). 12: LICENSE grants MIT for the code and CC
+      BY 4.0 for the text and data, naming the files each covers. 13: verify.sh stops when
+      the patch fails to apply. 14, in part: lean/build_inst.sh builds each module in its
+      own process and logs its wall time and peak memory to build_full.log, through a helper
+      outside the release; no such log is published, and lean/build.log is unchanged. 15, in
+      part: 9ccfe82 gives the paper's DOI, 10.5281/zenodo.24237740, in the README,
+      .zenodo.json and CITATION.cff, and says that the release's software DOI will be added
+      once minted; neither doi.org nor zenodo.org was reachable from this session, so the DOI
+      was not resolved here, and the record can cite it when T-298 next changes. 3 (the
+      Tight-Tile revision, the K field and the checker digests), 9 (the reviewing agent's
+      report) and 10 (any review of Lemmas U and V) have no answer.
+
+      The certificate and every file of certificate/ are unchanged, and 457 of the 466 files
+      the packet pins hold their digests; the nine that change are text, scripts, the
+      release's checksum list and the paper. The questions were informational and no
+      awaiting_author was recorded, so nothing is cleared. The answers change no result:
+      T-298 stays at V0/C1, reviewed and current, the packet keeps its pin and records the
+      answers in its README, and nothing is retained, since neither commit adds a bound, a
+      certificate or a claim. The replay held on think-0h7r keeps its price, about 145 to 180
+      CPU-hours, up to about 320; that bead's notes say what the new files change for it.
+      read_through stays at the final reply, since the answers came by commit.
   - number: 977
     title: 'Lowered upper bound for n = 297 (side 17.739455558289): registration request'
     author: JoostdeWinter
@@ -34014,6 +34066,17 @@ issues:
       - result: n228-column-band
         id: E-ozden-983-review-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/983#issuecomment-6888015472
+      date: '2026-11-15'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-column-band
+        id: T-300
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-300 is on main at V3/C3 as the house at 228, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -34114,11 +34177,28 @@ issues:
       open, and names no bead. It says that nothing the author asked for is still queued, so
       the issue is closed with it, and that answers are welcome at any time. The issue was
       closed as completed at 21:17:33Z.
+
+      The follow-up of 02:35:12Z on 15 November 2026 (issuecomment-6888015472), posted by
+      jlevy after #988 merged as a4f36ae70 at 02:24:27Z and after that merge's Pages deploy
+      and verify-deployment passed (run 43667638495), and recorded in lane L168, is the one
+      the final reply promised. It says that on 15 November #984 (Roberto Ono) was
+      registered as T-301 and adopted at 228, 4.7586e-3 below this packing (#988); that
+      T-300 itself is unchanged, at V3/C3, confirmed; that its position is now superseded;
+      and that it stays in the record as the house it was on 14 November. T-301 is #984's
+      result, named as context, and is not recorded under reported (#900); the follow-up
+      names no evidence id and no bead. It says that nothing else in the earlier reply
+      changes and that the issue stays closed. It is recorded as a follow-up, as #804's of 14
+      November is, and names no reply in `corrects`: a moved position is a field the
+      register shows, which `reported` records, while `outdated` is kept for statements gone
+      out of date for a reason the register cannot show, and the final reply carries none.
+      check_requests --draft 983 lists the move under its heading "Corrections to earlier
+      replies", which it uses for every moved field. read_through stays at the final reply.
   - number: 984
     title: 's(228) ≤ 15.596043120921: first public packing at the leaderboard side (registration request)'
     author: RobertoOno
     opened: '2026-11-14'
-    state: open
+    state: closed
+    closed: '2026-11-15'
     kind: result-report
     triage: done
     summary: >-
@@ -34145,7 +34225,7 @@ issues:
       blind in a separate lane, accepts it with #985's, fourteen findings, all notes, and scores
       each S3; its clean-room checker decided it again, so the entry is confirmed,
       independently re-implemented, at V3/C3.
-    read_through: '2026-11-14T20:11:25Z'
+    read_through: '2026-11-15T02:35:07Z'
     results:
     - key: n228-band-cut
       claim: >-
@@ -34159,11 +34239,32 @@ issues:
       evidence:
       - E-ono-984-certificate-report
       - E-ono-984-exact-feasibility
+      - E-ono-984-review-exact-feasibility
     beads:
     - think-17ex
     - think-jbwm
     answer_bead: think-17ex
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/984#issuecomment-6888014636
+      date: '2026-11-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n228-band-cut
+        id: T-301
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n228-band-cut
+        id: E-ono-984-exact-feasibility
+        status: confirmed
+      - result: n228-band-cut
+        id: E-ono-984-certificate-report
+        status: reviewed
+      - result: n228-band-cut
+        id: E-ono-984-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-301 is on main with its stage 4 review mapped and adopted as the house at 228, and the
       reply on main says what was retained and replayed, what the review found and that the
@@ -34236,11 +34337,58 @@ issues:
       printed places. The posters hold Ono's name off their credit block until the next
       infographics cut (think-tj4o). #983's final reply promised a follow-up there once T-300
       is superseded, which this adoption does; it is owed after the merge.
+
+      Closed on 15 November 2026 with the final reply (issuecomment-6888014636, posted by
+      jlevy at 02:35:07Z), after #988 merged as a4f36ae70 at 02:24:27Z with the import, the
+      replay, the mapped stage 4 review and the adoption at 228, and after that merge's Pages
+      deploy and verify-deployment passed (run 43667638495); recorded in lane L168. It states
+      T-301, s(228) <= 15.596043120921, the 12-place ceiling of the certificate's exact side,
+      at V3/C3, confirmed, significance S3, and adopted as the case's house in place of
+      T-300, Doğa Özden's packing from #983 adopted one day earlier, 4.7586e-3 below it and
+      8.5584e-3 below T-174; that is its position, current. It names
+      E-ono-984-exact-feasibility, confirmed, E-ono-984-certificate-report, reviewed, and
+      E-ono-984-review-exact-feasibility, confirmed, so all three are recorded under reported
+      (#900). The review's entry, registered in #988 with the mapped review, was missing from
+      this result's evidence list, which now names it, as #983's names its review's entry.
+      T-300 and T-174 are named as the houses it is measured against, not as this issue's
+      results, and neither is recorded under reported. It credits the author as the finder.
+
+      It says what was checked: both of the record's maintained exact routes accept the
+      certificate and all 11 sharp controls stated in advance came out as stated; the blind
+      stage 4 review's own exact checker, separating axes in integers and clipping exactly in
+      rationals with no distance filter, accepted the packing with nothing blocking, its 20
+      pre-stated controls at this count as stated; T-300's contraction margin is 2.949e-12,
+      so the whole gain lies far beyond any padding; the arrangement is new against all six
+      packings the record holds at 228, with 89 to 96 squares moved by more than a tenth;
+      Evan Daniel's regularizer finds a local minimum 4.289e-9 below the side, 1.23 times
+      the certificate's own contraction margin, held and not registered while the
+      maintainer decides how the record treats such sides, its rational certificate not
+      validating; and the side-only leaderboard entries equal that minimum to all 24 printed
+      places and stay context only, since they state no packing.
+
+      It asks the review's six questions, which cover #985 too and hold nothing open, so none
+      is recorded under awaiting_author: which mirror was applied to Couzo's packing of 404,
+      and whether the two squares whose centres land at -0.5 after the shift were deleted
+      (F9); whether "touches the four walls" would be corrected, each packing touching three,
+      the top missed by 1.77e-12 at 228 and the right by 1.92e-13 at 147, as the author's
+      indep_check output at 228 already prints (F5); whether the format would state the box
+      [0, S]^2 and the sense of theta, or cite Evan Daniel's .cert convention (F6); whether
+      indep_check.py and fu_strict_check.py would raise rather than assert, and verify.py
+      refuse a missing t and unknown or duplicate keys (F13); whether the .strict.json
+      digests would be stated beside the .strict.cert ones (F7); and whether the table of
+      near misses from the diagonal-period closure, which swept the whole record and about
+      7,800 public packings, would be published, so that the record can hold the negative
+      results beside the two hits. It links RESULTS.md and n-228.md on main and names no
+      bead. It says that nothing the author asked for is still queued, so the issue is
+      closed with it, and that answers are welcome at any time. The issue was closed as
+      completed at 02:35:08Z. The issue has no comment but the reply, and read_through moves
+      to it.
   - number: 985
     title: 's(147) ≤ 12.651043556588: first public packing below 7 + 4√2 (registration request)'
     author: RobertoOno
     opened: '2026-11-14'
-    state: open
+    state: closed
+    closed: '2026-11-15'
     kind: result-report
     triage: done
     summary: >-
@@ -34262,7 +34410,7 @@ issues:
       November records it. The 14 November stage 4 review, written blind in a separate lane
       (lane L163, think-jbwm), accepts it with #984's and scores it S3; its clean-room checker
       decided it again, so the entry is confirmed, independently re-implemented, at V3/C3.
-    read_through: '2026-11-14T20:11:26Z'
+    read_through: '2026-11-15T02:35:10Z'
     results:
     - key: n147-band-cut
       claim: >-
@@ -34276,11 +34424,32 @@ issues:
       evidence:
       - E-ono-985-certificate-report
       - E-ono-985-exact-feasibility
+      - E-ono-985-review-exact-feasibility
     beads:
     - think-17ex
     - think-jbwm
     answer_bead: think-17ex
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/985#issuecomment-6888015045
+      date: '2026-11-15'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n147-band-cut
+        id: T-302
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n147-band-cut
+        id: E-ono-985-exact-feasibility
+        status: confirmed
+      - result: n147-band-cut
+        id: E-ono-985-certificate-report
+        status: reviewed
+      - result: n147-band-cut
+        id: E-ono-985-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-302 is on main with its stage 4 review mapped and adopted as the house at 147, and the
       reply on main says what was retained and replayed, what the review found and that the
@@ -34326,6 +34495,40 @@ issues:
       certificate's own contraction margin and beyond it, is held at row 3 for RV-3
       (think-ruu2, think-ikku); its side agrees with Nevska's side-only entry at all 24
       printed places.
+
+      Closed on 15 November 2026 with the final reply (issuecomment-6888015045, posted by
+      jlevy at 02:35:10Z), after #988 merged as a4f36ae70 at 02:24:27Z with the import, the
+      replay, the mapped stage 4 review and the adoption at 147, and after that merge's Pages
+      deploy and verify-deployment passed (run 43667638495); recorded in lane L168. It states
+      T-302, s(147) <= 12.651043556588, the 12-place ceiling of the certificate's exact side,
+      5.8107e-3 below 7 + 4*sqrt(2), at V3/C3, confirmed, significance S3, and the first
+      adoption at 147, in place of the 45-degree packing it shares with 148; that is its
+      position, current. It says that the case's listed conjectured optimum, 7 + 4*sqrt(2),
+      is cleared, as at 260 and 299 when their closed forms were beaten, and that s(148) is
+      unchanged. It names E-ono-985-exact-feasibility, confirmed,
+      E-ono-985-certificate-report, reviewed, and E-ono-985-review-exact-feasibility,
+      confirmed, so all three are recorded under reported (#900); the review's entry was
+      missing from this result's evidence list, as at #984, and is added. It credits the
+      author as the finder, with Evan Daniel's packing of 229 named as the start, as he asked.
+
+      It says what was checked: both of the record's maintained exact routes accept the
+      certificate and all 11 sharp controls stated in advance came out as stated; the blind
+      stage 4 review accepted it with nothing blocking, by the same two exact methods as at
+      228; the 45-degree packing's contraction margin is 0, so the gain is real and not
+      padding; the arrangement is new, with 92 squares moved by more than a tenth; it
+      reproduces exactly from Daniel's 229 with one band period cut (147 squares, deepest
+      overlap 0.00978), and the certificate refines that seed one to one, no square moving
+      more than 0.046; no closed form fits, the nearest, s(66) + 4 and s(124) + 1, being
+      7 + 4*sqrt(2) itself, and the cut is a construction the record had not described; and
+      Evan Daniel's regularizer finds a certified KKT point 3.415e-9 below the side, 1.16
+      times the certificate's own margin, held and not registered for the same open question
+      as at 228, with the side-only leaderboard entry equal to it to 24 places and context
+      only. It says that the review's questions, which cover this packing too, are on #984,
+      and names their subjects, the walls touched, the format's box and theta, the checkers'
+      asserts, the strict digests and the sweep's near misses; they hold nothing open. It
+      links n-147.md on main and names no bead. It says that nothing the author asked for is
+      still queued, so the issue is closed with it. The issue was closed as completed at
+      02:35:11Z. The issue has no comment but the reply, and read_through moves to it.
   - number: 989
     title: '90 unit squares in side 9.998277166926 — upper-bound registration request'
     author: dpre4ai
