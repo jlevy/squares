@@ -2183,3 +2183,31 @@ repositories:
       stands at V0/C1 as recorded, and the packet keeps its pin. A full replay (think-0h7r) that compares root for root retains
       the logs it compares with. Lane L168 records the answers in the #973 requests entry
       and the packet's README, and the replay's price on think-0h7r. Nothing to import.
+  # Lane L173 of 15 November 2026 (think-hisc).
+  - url: https://github.com/moh63-dev/k2m5-family
+    read_through: 0e28e8a547c742fb1e120da22dc8d7275f1a6f52
+    read_on: '2026-11-15'
+    note: >-
+      Read through 0e28e8a (03:41:17Z on 15 November, 19:41:17 on 14 November at the
+      commit's own offset of -08:00), "README: software DOI", the head at 06:42Z and still
+      at 06:51Z, one commit past 9ccfe82, which lane L168 read; the repository's tag v1.1
+      now names 9ccfe82, and the authors' comment on jlevy/squares#973
+      (issuecomment-6889513117, 05:03:46Z) calls it release v1.1 "plus one README commit
+      that adds the archive DOI", this one. It
+      changes two files: README.md's Citing section replaces "software DOI to be added here
+      once minted" with the archive DOI, 10.5281/zenodo.24237941, and SHA256SUMS_ALL changes
+      README.md's line to match. .zenodo.json and CITATION.cff are unchanged and still give
+      only the paper's DOI, 10.5281/zenodo.24237740. Checked at this read from the head's
+      bytes with the project's Python 3.14.7 and -I, and not retained: the Git diff from
+      9ccfe82 is those two files; the certificate and every file of certificate/ are as at
+      2c0b1b9, the pin of the moh63-dev-k2m5-family-2026-11-13 packet; of the 466 files its
+      manifest (acquisition/upstream-subtree.sha256) pins, 457 hold their digests,
+      tight_tile/cov.tar.xz among them, none is removed, and the nine that change are the
+      nine L168 listed, README.md among them; and all 532 lines of SHA256SUMS_ALL hold,
+      listing every file but itself. Neither DOI was resolved, since this session's proxy
+      refuses doi.org and zenodo.org. The commit adds no bound, certificate or claim and
+      changes no pinned file but README.md, so no packet retains it and the packet keeps its
+      pin; T-298 stays at V0/C1. Lane L173 records the comment's answers and both DOIs in
+      the #973 requests entry, on T-298's credit, in the bibliography, the resources index
+      and the packet's README, and what they change for the replay on think-0h7r. Nothing to
+      import.

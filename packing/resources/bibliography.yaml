@@ -4445,6 +4445,14 @@ sources:
       (LICENSE); the README adds CC BY 4.0 for text and data. Retained but for .gitignore
       and the 8.7 MB tight_tile/cov.tar.xz, pinned by digest, in
       web/moh63-dev-k2m5-family-2026-11-13/. Dated by that revision, 2026-11-13 UTC.
+      The paper is archived as DOI 10.5281/zenodo.24237740 and release v1.1 (tag v1.1 =
+      9ccfe825fe04cd9f3770b4e76892364ceb50322c, committed 2026-11-15T02:56:10Z, the
+      certificate and every file of certificate/ unchanged from the pin) as DOI
+      10.5281/zenodo.24237941, as the
+      authors give them on jlevy/squares#973 (comment 6889513117) and in README.md at
+      0e28e8a547c742fb1e120da22dc8d7275f1a6f52; v1.1 states MIT for the code and CC BY 4.0
+      for the text and data in LICENSE. Neither DOI was resolved from the session that
+      recorded them, whose proxy refuses doi.org and zenodo.org.
   - key: '[evand square-packing 2026-10-24]'
     authors: [Daniel]
     year: 2026

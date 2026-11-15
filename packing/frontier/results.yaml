@@ -46193,6 +46193,10 @@ results:
 
       Mohsen Khalili and Sara Gharabaghi,
       [k2m5-family](https://github.com/moh63-dev/k2m5-family/tree/2c0b1b9979bcb67d92eb215366dc5ee19286c1d8),
+      with the paper archived as
+      [Zenodo 10.5281/zenodo.24237740](https://doi.org/10.5281/zenodo.24237740) and release
+      1.1, whose certificate is the same, as
+      [Zenodo 10.5281/zenodo.24237941](https://doi.org/10.5281/zenodo.24237941),
       building on Evan Daniel's families for k^2 - 3 and k^2 - 4, his linear program,
       format, checkers and Lean reduction, at the request of jlevy/squares#973. The paper
       says the search, the certificate, the Tight-Tile checker and its proof, and the
