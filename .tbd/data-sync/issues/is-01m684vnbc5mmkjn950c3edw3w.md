@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 357
+version: 358
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -119,7 +119,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T08:56:12.205Z
+updated_at: 2026-11-16T09:54:57.012Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -323,3 +323,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-16T06:57Z renewal (intake310): no new items. L186 (think-skt8) review of #1001 landed on its branch at 1b9dc0976 (frozen 06:18Z); L187 told it landed, not summarized. L187 import in progress.
 - 2026-11-16T07:56Z renewal (intake311): no change; L187 (#1001 import) active, not yet pushed.
 - 2026-11-16T08:55Z renewal (intake312): no new items. L187 handed back draft #1002 at 50a6ee5a1 (T-305..T-309 at 127/204/232/264/305, adopted in the 16 November pass, CI green); senior review running; must merge on 16 Nov.
+- 2026-11-16T09:54Z renewal (intake313): no new items. #1002 senior review: merge-ready, S1 (upstream rewritten to 0aac839e, same tree; issue edited 06:38Z) and N1 being fixed by an addressing pass; labelled intake, S3.
