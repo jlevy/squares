@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 369
+version: 370
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -122,7 +122,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T15:57:21.494Z
+updated_at: 2026-11-16T15:58:20.027Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -335,3 +335,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-16T12:58Z renewal (intake316): 0 unowned items, 0 closeable; queue empty, no lanes.
 - 2026-11-16T13:57Z renewal (intake317): no change; queue empty, no lanes.
 - 2026-11-16T14:56Z renewal (intake318): no change; queue empty, no lanes.
+- 2026-11-16T16:00Z renewal (intake319): new #1005 (Özden, s(292) <= 17.590104218682, 15:27Z) and #1006 (de Winter, s(292) <= 17.590016442847, 15:39Z, lower). Both labelled intake; beads think-qag8 (import, L193) and think-p3g8 (blind review, L192); both lanes launched. The de Winter watched-repo row (fe13d47) is in L193's scope.
