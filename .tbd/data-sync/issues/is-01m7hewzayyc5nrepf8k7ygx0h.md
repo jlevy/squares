@@ -5,15 +5,15 @@ title: "Import #1001: JoeGun's five upper bounds on Kodaj's packings (s(127), s(
 kind: task
 status: in_progress
 priority: 1
-version: 9
-delegate: bold-ritchie-1002fix
+version: 10
+delegate: bold-ritchie-l191
 labels: []
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-16T05:57:22.906Z
-updated_at: 2026-11-16T10:24:42.267Z
+updated_at: 2026-11-16T11:58:10.366Z
 started_at: 2026-11-16T05:58:26.297Z
 ---
 
