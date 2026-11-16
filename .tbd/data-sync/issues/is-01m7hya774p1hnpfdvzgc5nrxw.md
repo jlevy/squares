@@ -5,7 +5,7 @@ title: "Intake: record JonathanGun 5971b95 local-minimum/ section and #1001 comm
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l188
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-16T10:26:45.603Z
-updated_at: 2026-11-16T11:12:13.698Z
+updated_at: 2026-11-16T11:28:39.797Z
 started_at: 2026-11-16T10:26:49.172Z
 ---
 
@@ -37,3 +37,5 @@ Incident: a compare_paper_renders run was stopped (TaskStop) mid-run after the f
 
 Commits (16 November UTC): 02b091536 packet + test; cf6b7ed38 corrections; 2ef66f7a6 #914/#927 follow-ups; 90a62fbc1 no-public-change record; fe39ec54d release: re-pin DATA_REVISION to cf6b7ed3 (stamp_landed --apply: nothing to stamp). Pushed claude/bold-ritchie-xo28us-l188; draft PR https://github.com/jlevy/squares/pull/1003.
 Final local validation on fe39ec54d: --edit 71/71, --records 55/55, 16 touched modules 1,276 passed 1 skipped, check_release_impact all dispositioned, release_pin --check ok, both packets PACKET_MATCHES_ITS_CONTRACT.
+
+Hosted CI on fe39ec54d: Packing validation 43855599070 failed only in suite-c, test_house_adoption::test_the_receipt_of_the_custody_run_names_every_input_and_house: devtools/house-custody-2026-10-11.json pins joegun-upper-bounds-2026-11-16/acquisition/sources.json, which cf6b7ed38 edited (claim sentence). Certificate page 43855599187 and Branch mergeability 43855430264 passed. Fix 1b4595192 (11:28Z): declaration.json and sources.json back to main's bytes (the record states what the source said at its pin, still true); the README, evidence, register prose, bibliography and requests entry carry the correction. test_house_adoption + test_acquire_source + lane module 151 passed locally; release_pin --check ok (pin cf6b7ed38, no data change after). Not a D-509 flake.
