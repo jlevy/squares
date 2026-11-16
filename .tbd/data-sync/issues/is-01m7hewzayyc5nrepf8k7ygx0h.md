@@ -5,7 +5,7 @@ title: "Import #1001: JoeGun's five upper bounds on Kodaj's packings (s(127), s(
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l187
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-16T05:57:22.906Z
-updated_at: 2026-11-16T08:11:25.800Z
+updated_at: 2026-11-16T08:48:15.924Z
 started_at: 2026-11-16T05:58:26.297Z
 ---
 
@@ -29,3 +29,4 @@ L186 review read at 06:56Z (after b3a0c1b01 06:34Z and 041e58334 06:45Z); merged
 
 Adoption 3de8505d4 (07:50:22Z): ADOPTED 127 T-305, 204 T-306, 232 T-307, 264 T-308, 305 T-309; LATER_PASSES 2026-11-16 {90,127,204,232,264,305}; prior states added to house-adoption-prior-state-2026-11-16.json.xz; found_by Tomáš Kodaj, improved_by JoeGun; T-268 and T-275 superseded (no house). Regularization in packing/cases/regularized_drawings/think-0y9m-2026-11-16/: grid-slack views drawn at all five (127 deg1, 204 deg5, 232 deg05, 264 deg1, 305 deg05; row 10); evand driver KKT local minima HELD at row 3 (RV-3, think-ruu2): 127 1.2175e-10 below side (~1.006x own margin), 232 4.0164e-9 (~273x), 264 1.9066e-11 (~1.007x), 305 1.9146e-10 (~1.004x), each beyond its margin; 204 exact solve failed (no view). 127's old SETTLED entry removed. check-state: 5 houses moved, 0 pending. apply_closed_form restored closed-form paragraph order. Derived: escape screen (SCREEN_FINDINGS 1..200 846/2443, 1..324 3210/7167), rigidity x5, composite, bound citations, X049 censuses, certificate reach, exact-side register, house custody (76 houses, 94 mutations), contributor census, print-credit hold (Kodaj, JoeGun at the five; Özden off 232). result/t-174.html 353,877 bytes adopted; ceiling 350,000 -> 375,000 (measured; timing owed think-v4me).
 Release record 11c00338b (compare_paper_renders over 14 paths: 3 papers identical, explainer count 309 vs 304 only). Stamps 711d1bd09 (stamp_landed --apply 07:53:45Z: T-305..T-309 landed 2026-11-16; houses at the five dated 2026-11-16); re-pin 4b77cb701 (DATA_REVISION 711d1bd0); suite admission 24916b094 (not data; release_pin --check ok). Local on head: records 55/55, edit 71/71, 31 touched modules 2139 passed 2 skipped, ruff/basedpyright clean. Pushed claude/bold-ritchie-xo28us-l187 at 24916b094; draft PR https://github.com/jlevy/squares/pull/1002 (not labelled; S3 owed by owner/coordinator). Owner holds: Kodaj-alone credit offer at 204/232; RV-3 on four KKT candidates; think-71uq licence (holds nothing). Stage 7 reply on #1001 owed after merge.
+Hosted on 24916b094: Packing validation 43829225521 failure (suite-a test_upper_bound_reports_l51_1105 MOVED_LATER at 204; suite-b test_case_pages cases/204.html 437,573 > 430,000; suite-d test_render_colors golden n=1..324 now (131, 305)), Certificate page 43829225469 failure (overview: cases/204.html 437,813 > 430,000), Branch mergeability 43828956718 success. Fix 50a6ee5a1: cases/204.html ceiling 430,000 -> 475,000 (measured, 27,429 bytes more than after T-268; timing not re-measured, think-rp0d), l51 MOVED_LATER 204 T-306, render_colors golden. Not data (release_pin --check names 711d1bd0). Hosted on head 50a6ee5a1: Packing validation 43831859877 success, Certificate page 43831860073 success, Branch mergeability 43831851264 success; no D-509 flake; nothing cancelled or re-run. PR #1002 description updated 08:47Z with hosted results; still draft, unlabelled, mergeable clean on origin/main 31ddae6fe. Merge must land 16 Nov UTC or re-run stamp_landed --apply and release_pin --update. Bead stays open for the S3 label, owner holds and the stage 7 reply. Lane L187 ends; worktree removed.
