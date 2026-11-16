@@ -5,8 +5,8 @@ title: "Import #996/#997: Joost de Winter's s(90) <= 9.994038766610 (fa53fb0, re
 kind: task
 status: in_progress
 priority: 1
-version: 12
-delegate: bold-ritchie-998fix
+version: 13
+delegate: bold-ritchie-l185
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T11:57:32.962Z
-updated_at: 2026-11-16T02:32:32.178Z
+updated_at: 2026-11-16T02:54:55.626Z
 started_at: 2026-11-15T11:57:34.424Z
 ---
 
