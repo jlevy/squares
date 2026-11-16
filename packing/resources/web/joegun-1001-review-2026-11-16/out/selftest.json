@@ -1,0 +1,14 @@
+{
+ "status": "PASSED",
+ "cases": 73784,
+ "failed": 0,
+ "failures": [],
+ "broken_copies_failures": {
+  "A with only square i's normals": 376,
+  "A counting a zero margin as apart": 2486,
+  "B clipping with open half-planes": 7703
+ },
+ "python": "3.14.7 (main, Sep 29 2026, 15:01:40) [Clang 22.1.3 ]",
+ "method_B": "gmpy2 2.3.1, GMP 6.3.0",
+ "cpu_seconds": 11.0
+}
