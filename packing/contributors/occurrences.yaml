@@ -18245,6 +18245,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-090.md
+    record_key: '90'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-091.md
     record_key: '91'
     field: /reported_lower_bound/proved_by/0
