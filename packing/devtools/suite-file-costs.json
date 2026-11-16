@@ -357,6 +357,7 @@
     "packing/tests/test_known_best_grid_transitions.py": 0.007,
     "packing/tests/test_known_best_n011_rational_control.py": 0.459,
     "packing/tests/test_known_best_squish.py": 6.327,
+    "packing/tests/test_lean_disk_price.py": 0.029,
     "packing/tests/test_lifted_q7_history.py": 0.291,
     "packing/tests/test_lint_floor_contract.py": 0.122,
     "packing/tests/test_log_rollup.py": 0.011,
@@ -786,6 +787,7 @@
     "packing/tests/test_upper_bound_reports_l154_1114.py": 2.216,
     "packing/tests/test_upper_bound_reports_l160_1114.py": 6.045,
     "packing/tests/test_upper_bound_reports_l164_1114.py": 6.135,
+    "packing/tests/test_upper_bound_reports_l181_1115.py": 0.068,
     "packing/tests/test_upper_bound_reports_l65_1109.py": 3.397,
     "packing/tests/test_upper_bound_reports_n204.py": 0.429,
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 7.404,
@@ -1040,6 +1042,34 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-l164-1114-2026-11-14.json",
           "provenance": {},
           "tests": 19
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_l181_1115.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-l181-1115-2026-11-15.json",
+          "provenance": {},
+          "tests": 8
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_lean_disk_price.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/lean-disk-price-l181-2026-11-16.json",
+          "provenance": {},
+          "tests": 8
         }
       ]
     }

@@ -1,0 +1,1196 @@
+{
+ "program": "l180_controls.py",
+ "lane": "L180",
+ "plan_sha256": "31a2b55110de9600dc8889648e738caf9c62fe7d4c6d67e491b08203bc0364b2",
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "as_stated": 26,
+ "controls": 26,
+ "results": {
+  "G1": {
+   "stated": "Square 90 given square 1's centre and direction: refused, exactly the pair (1, 90) overlapping, margin -1, method B area 1; no other pair touches or overlaps (every margin (1, j) is positive); wall contacts unchanged (neither square 1 nor square 90 touches a wall).",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [
+     [
+      1,
+      90
+     ]
+    ],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "9f472e3e6d3f17aa1dcb2fc2382275d79f79d3471a9c3007eec650fbc912a75b",
+    "clearance_sha256": "a1b7d1f073f36be4b0bdb96ee64fbd468e70db64b0af854d5a8178180bfb8e5e",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      1,
+      90
+     ],
+     "approx": "-1.00000000000e+0"
+    }
+   }
+  },
+  "G2": {
+   "stated": "Square 1 translated by (S, 0): refused, square 1 across the right wall by both methods (right clearance -6.99403885753e+0, the plan's exact value), its area inside the box 0; no pair touching or overlapping (its least margin is 5.99403885752e+0).",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [
+      1
+     ],
+     "top": []
+    },
+    "margin_sha256": "afecfd301742f07adcf9f9b66e9e34ab136c0fc7d48695206d6d39eabefcb76c",
+    "clearance_sha256": "910618251c34e50c1aef65ffca9d6b28775beabd89bac2199d3bd5d9f078c176",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "G3": {
+   "stated": "Square 90's entry deleted: the reader refuses (n is 90, 89 entries).",
+   "as_stated": true,
+   "observed": {
+    "verdict": "READER_REFUSES",
+    "reason": "n is 90 but squares has 89 entries"
+   }
+  },
+  "G4": {
+   "stated": "The side written as 2p/2q: the reader refuses (not in lowest terms).",
+   "as_stated": true,
+   "observed": {
+    "verdict": "READER_REFUSES",
+    "reason": "scalar not in lowest terms: '399761554301827808366/40000000000000000000'"
+   }
+  },
+  "G5a": {
+   "stated": "Square 10, the lowest-numbered square touching exactly one wall (bottom), turned about its centre by t = tan(phi/2) = +1e-30: accepted, its bottom clearance exactly the plan's 9.99999999997e-31; that contact gone and no other class changed.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "a79a4357c7f6551da0e30d29b0500cecba5cb56096e7951cd54c392703bc316e",
+    "clearance_sha256": "3a7342522d3984cc06fdecfb23a02e845fbab2d90683ea78ca538bd6d379838a",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "G5b": {
+   "stated": "The same with t = -1e-30: refused, square 10 across the bottom wall by exactly the plan's -9.99999999997e-31, not inside by method B's area; no pair changes class.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [
+      10
+     ],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "192c6e5797f06e4abbf6c557c158631921ae20a28636cc24dcb66eb9098152ad",
+    "clearance_sha256": "b2b408aae9eadc9234d29fa4a4648b370d7cb84f350420c77376c1f80033f3e4",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "G6": {
+   "stated": "Every (c, s) read as (c, -s), each square reflected in its own horizontal centre line (the rotation read the other way): refused for exactly the plan's 52 overlapping pairs, none touching; the exact clearance list unchanged.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": {
+     "count": 52,
+     "first": [
+      [
+       2,
+       15
+      ],
+      [
+       2,
+       18
+      ],
+      [
+       2,
+       40
+      ],
+      [
+       2,
+       56
+      ],
+      [
+       3,
+       15
+      ],
+      [
+       3,
+       16
+      ]
+     ]
+    },
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "08bb451a9b243189420add6f34a127a6b5b0ad4da355cc21b2d816c2cf9c815d",
+    "clearance_sha256": "de3e57b531b8133c6fa91dcede8f4ac77daf6da3bf06f98a64c52dea9bb9e160",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      22,
+      56
+     ],
+     "approx": "-2.85226691980e-1"
+    }
+   }
+  },
+  "G7a": {
+   "stated": "The twin's first corner of square 1 moved by 1e-30 in x: the twin differs from the JSON at square 1 alone, and method B refuses square 1 of the twin as not a unit square.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "twin_agree": false,
+    "twin_problems": [
+     "square 1: corners differ"
+    ],
+    "listings": {
+     "start 0, sense +": 89
+    },
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [
+     1
+    ],
+    "sense_b": {
+     "counterclockwise": 89,
+     "clockwise": 0
+    }
+   }
+  },
+  "G7b": {
+   "stated": "The twin's side numerator raised by 4 in its last digit (...187, still in lowest terms): the reader reads it and the twin differs from the JSON in its side.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "twin_agree": false,
+    "twin_problems": [
+     "side differs",
+     "side text differs"
+    ],
+    "listings": {
+     "start 0, sense +": 90
+    }
+   }
+  },
+  "G7c": {
+   "stated": "Every square of the twin listed clockwise: the twin agrees (each listing the JSON's corners from its fourth, reversed) and the certificate is accepted with the margin and clearance lists unchanged; method B reads all 90 listings as clockwise.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "twin_agree": true,
+    "twin_problems": [],
+    "listings": {
+     "start 3, sense -": 90
+    },
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "sense_b": {
+     "counterclockwise": 0,
+     "clockwise": 90
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "de3e57b531b8133c6fa91dcede8f4ac77daf6da3bf06f98a64c52dea9bb9e160"
+   }
+  },
+  "G7d": {
+   "stated": "Every square of the twin listed from its second corner: the twin agrees and the certificate is accepted with the lists unchanged.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "twin_agree": true,
+    "twin_problems": [],
+    "listings": {
+     "start 1, sense +": 90
+    },
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "sense_b": {
+     "counterclockwise": 90,
+     "clockwise": 0
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "de3e57b531b8133c6fa91dcede8f4ac77daf6da3bf06f98a64c52dea9bb9e160"
+   }
+  },
+  "G8": {
+   "stated": "Every square transposed, (x, y, c, s) -> (y, x, s, c): accepted, the margin list unchanged, the clearances transposed (left and bottom exchanged, right and top exchanged).",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "bottom": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "05ebe37b11c3866b5960ce6c3a0962ae3be9c13510a5df369e570af786fcf940",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "G9": {
+   "stated": "Every edge direction replaced by the other, (c, s) -> (-s, c): accepted, margin and clearance lists unchanged.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "de3e57b531b8133c6fa91dcede8f4ac77daf6da3bf06f98a64c52dea9bb9e160",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "G10": {
+   "stated": "Every edge direction negated, (c, s) -> (-c, -s): accepted, margin and clearance lists unchanged.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "de3e57b531b8133c6fa91dcede8f4ac77daf6da3bf06f98a64c52dea9bb9e160",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "G11": {
+   "stated": "The packing turned a quarter about the box centre, (x, y, c, s) -> (S - y, x, -s, c): accepted, the margin list unchanged, the clearances turned (new left, bottom, right, top = old top, left, bottom, right).",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [],
+     "bottom": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "right": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "96bd447b53eb47dce3a87100436c956519b735712f3d43aafb43a62fa059211c",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "G12": {
+   "stated": "Square 1's sin raised by 1e-30: refused, square 1 not a unit square by either method.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [
+     1
+    ],
+    "not_unit_b": [
+     1
+    ]
+   }
+  },
+  "S1a": {
+   "stated": "The side lowered by 1/q = 1/20000000000000000000, one unit of its own last place: refused, exactly the 16 right and top clearances of 5.07389735200e-21 crossing; the left and bottom contacts unchanged.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [
+      11,
+      31,
+      34,
+      35,
+      47,
+      49,
+      55,
+      83
+     ],
+     "top": [
+      82,
+      83,
+      84,
+      85,
+      86,
+      88,
+      89,
+      90
+     ]
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "61e441a87b0cb7ded983f33f35e3636a102cba59538bcfe6c02e5d20c7b643ba",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "S1b": {
+   "stated": "The side lowered by 1e-30: accepted, no new contact (no positive right or top clearance is below 1e-30).",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "0b08a2e74f5294f8c623d2972a26001e7ff8475f786218d37f3b6237262ffd81",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "S1c": {
+   "stated": "The side lowered by the least right-or-top clearance, to the packing's extent: accepted, exactly those 16 square-wall pairs touching, with the left and bottom contacts.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [
+      11,
+      31,
+      34,
+      35,
+      47,
+      49,
+      55,
+      83
+     ],
+     "top": [
+      82,
+      83,
+      84,
+      85,
+      86,
+      88,
+      89,
+      90
+     ]
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "f9325c617a354f49dbce6fff85e990f4eea6fc3770000ec001e88067f6b56de2",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "S1d": {
+   "stated": "That, less 1e-30 more: refused, exactly those square-wall pairs crossing.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [
+      11,
+      31,
+      34,
+      35,
+      47,
+      49,
+      55,
+      83
+     ],
+     "top": [
+      82,
+      83,
+      84,
+      85,
+      86,
+      88,
+      89,
+      90
+     ]
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "e5f21e76f39520d3e0bae10bc0dfc3d3bfa8c4be6ab44ab810af01f051dfcf62",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "S1e": {
+   "stated": "The side set to the claim 4997019428773/500000000000 = 9.994038857546, 3.04790850000e-13 above the side: accepted, wall contacts only at the left and bottom.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "94efa37e46cfabada29ae9423d654860e95857838b29ebdc7ccbf14833a3eaff",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "S1f": {
+   "stated": "The side set to its 12-place floor 9.994038857545, 6.95209150000e-13 below the side: refused, exactly the right and top square-wall pairs of S1a crossing.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [
+      11,
+      31,
+      34,
+      35,
+      47,
+      49,
+      55,
+      83
+     ],
+     "top": [
+      82,
+      83,
+      84,
+      85,
+      86,
+      88,
+      89,
+      90
+     ]
+    },
+    "margin_sha256": "ee3683a70c2f88ce4d63adf574293c92d98c86d9ac3eeab7b20a520666bc966b",
+    "clearance_sha256": "94885f98b8eea1b1d2f0745f254ecd59e42363fc20e6b7ea30cf4aee4e75e109",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "1.06410355706e-12"
+    }
+   }
+  },
+  "S4c": {
+   "stated": "Square 40 moved toward square 2 along their centre line to exact contact: that pair alone touching by both methods, margin exactly 0, method B area 0; accepted.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "ACCEPT",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [],
+    "touching": [
+     [
+      2,
+      40
+     ]
+    ],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "3a1d05d72e5f396b5d3b758a689664cc0e13e23a026a0170e6454828ceccbabd",
+    "clearance_sha256": "de91a41e5d2dfdf9f9fb28bd4672a9a34f27fd53375eaa578cc1a14b79ecc7f8",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "0"
+    }
+   }
+  },
+  "S4p": {
+   "stated": "The same, 1e-30 past contact: that pair alone overlapping by both methods, margin exactly -1e-30.",
+   "as_stated": true,
+   "differences": [],
+   "observed": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping": [
+     [
+      2,
+      40
+     ]
+    ],
+    "touching": [],
+    "contacts": {
+     "left": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      71,
+      88
+     ],
+     "bottom": [
+      10,
+      23,
+      28,
+      32,
+      33,
+      47,
+      48,
+      59,
+      75
+     ],
+     "right": [],
+     "top": []
+    },
+    "crossings": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    },
+    "margin_sha256": "c0d57917fa47bba168ed685adfed3baa56e56791e858df29f89b4604b14843a9",
+    "clearance_sha256": "f861ac5f9d6d40b22d799614fc6e7693c3ea03e7818f0b42c19321192ef322c2",
+    "classes_agree": true,
+    "method_b_both_orders_agree": true,
+    "least_margin": {
+     "pair": [
+      2,
+      40
+     ],
+     "approx": "-1.00000000000e-30"
+    }
+   }
+  },
+  "S5": {
+   "stated": "Every pair (4,005) closed along its centre line, the higher-numbered square moving: touching at contact by both methods with margin exactly 0 by method A and the closed form, overlapping 1e-30 past with margin exactly -1e-30; the closing times' digest the plan's.",
+   "as_stated": true,
+   "observed": {
+    "pairs_as_stated": 4005,
+    "closing_times_sha256": "992b61176ddbd069b89f74e90b639fe1a019d0b5db13ee7bf2f3a1ef7b6a90c1",
+    "first_failures": []
+   }
+  },
+  "S6": {
+   "stated": "Every square moved to its nearest wall by its clearance: contact at, crossing 1e-30 past, by both methods; clearance exactly 0 and -1e-30; inside by method B's area at contact, not past.",
+   "as_stated": true,
+   "observed": {
+    "squares_as_stated": 90,
+    "nearest_wall_counts": {
+     "left": 22,
+     "bottom": 23,
+     "right": 24,
+     "top": 21
+    },
+    "first_failures": []
+   }
+  }
+ },
+ "cpu_seconds": 23.32
+}

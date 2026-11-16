@@ -18245,6 +18245,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-090.md
+    record_key: '90'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-091.md
     record_key: '91'
     field: /reported_lower_bound/proved_by/0
@@ -33295,6 +33307,54 @@ occurrences:
   start: 14
   end: 23
   label: de Winter
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s90 upper bound 2026-11-15]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s90 upper bound 2026-11-15]'
+    field: /credit
+  expected_text: de Winter after jazivxt, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s90 upper bound 2026-11-15]'
+    field: /credit
+  expected_text: de Winter after jazivxt, Levy
+  start: 16
+  end: 23
+  label: jazivxt
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s90 upper bound 2026-11-15]'
+    field: /credit
+  expected_text: de Winter after jazivxt, Levy
+  start: 25
+  end: 29
+  label: Levy
   role: prerequisite
   disposition: unresolved
   evidence: []

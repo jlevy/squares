@@ -1,0 +1,120 @@
+{
+ "program": "l180_sides.py",
+ "lane": "L180",
+ "side": {
+  "exact": "199880777150913904183/20000000000000000000",
+  "places_30": "9.994038857545695209150000000000",
+  "ceil_12": "9.994038857546",
+  "floor_12": "9.994038857545",
+  "claim": "9.994038857546",
+  "claim_is_ceil_12": true,
+  "claim_minus_side": "3.04790850000e-13",
+  "side_is_ceil_20_of_itself": true
+ },
+ "t303": {
+  "house_witness_side": "4999138583463/500000000000",
+  "case_record_exact_form": "4999138583463/500000000000",
+  "case_record_side_equal": true,
+  "print": "9.998277166926"
+ },
+ "gain": {
+  "on_t303_exact": "84766187606095817/20000000000000000000",
+  "on_t303_decimal": "0.00423830938030479085",
+  "on_t303_approx": "4.23830938030e-3",
+  "relative": "4.23903969608e-4",
+  "on_t303_print_claim_to_claim": "0.004238309380",
+  "issue_print": "0.00424",
+  "issue_print_is_gain_to_three_figures": true,
+  "on_grid_10": "0.00596114245430479085",
+  "below_public_submission_9.998277166917": "0.00423830937130479085",
+  "public_submission_below_t303_by": "9.00000000000e-12"
+ },
+ "pairs_with_centres_closer_than_sqrt2": 202,
+ "record_90": {
+  "side": "4999138583463/500000000000",
+  "read_from": "exact_form",
+  "exact_form": "4999138583463/500000000000",
+  "value": "9.9982771669260000"
+ },
+ "closed_forms": {
+  "within_1e-3": [],
+  "nearest": {
+   "m": 1,
+   "j": 9,
+   "difference": "-5.96114245430e-3"
+  },
+  "cases_read": 324
+ },
+ "l_steps": [
+  {
+   "width": 1,
+   "count": 109,
+   "side": "10.994038857545",
+   "reported": "10.949747468305",
+   "improves": false,
+   "above_record_by": "4.42913892399e-2"
+  },
+  {
+   "width": 2,
+   "count": 130,
+   "side": "11.994038857545",
+   "reported": "11.902430645982",
+   "improves": false,
+   "above_record_by": "9.16082115634e-2"
+  },
+  {
+   "width": 3,
+   "count": 153,
+   "side": "12.994038857545",
+   "reported": "12.870013850404",
+   "improves": false,
+   "above_record_by": "1.24025007141e-1"
+  },
+  {
+   "width": 4,
+   "count": 178,
+   "side": "13.994038857545",
+   "reported": "13.846667192843",
+   "improves": false,
+   "above_record_by": "1.47371664702e-1"
+  },
+  {
+   "width": 5,
+   "count": 205,
+   "side": "14.994038857545",
+   "reported": "14.824451146124",
+   "improves": false,
+   "above_record_by": "1.69587711422e-1"
+  },
+  {
+   "width": 6,
+   "count": 234,
+   "side": "15.994038857545",
+   "reported": "15.822875655532",
+   "improves": false,
+   "above_record_by": "1.71163202013e-1"
+  },
+  {
+   "width": 7,
+   "count": 265,
+   "side": "16.994038857545",
+   "reported": "16.778174593052",
+   "improves": false,
+   "above_record_by": "2.15864264494e-1"
+  },
+  {
+   "width": 8,
+   "count": 298,
+   "side": "17.994038857545",
+   "reported": "17.778174593052",
+   "improves": false,
+   "above_record_by": "2.15864264494e-1"
+  }
+ ],
+ "monotonicity": {
+  "below_90_reported_above_S": [],
+  "above_90_reported_below_S": [],
+  "s89": "9.949747468305",
+  "s91": "10.000000000000"
+ }
+}

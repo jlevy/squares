@@ -1,0 +1,25 @@
+{
+ "program": "l180_selftest.py",
+ "lane": "L180",
+ "verdict": "PASSED",
+ "cases": 31771,
+ "failed": 0,
+ "first_failures": [],
+ "groups": {
+  "unit": 49,
+  "edge": 13824,
+  "corner": 6912,
+  "vertex_on_edge": 4608,
+  "overlap": 960,
+  "walls": 1152,
+  "random": 4200,
+  "reader": 60,
+  "whole_file": 6
+ },
+ "broken_copies_failures": {
+  "method A with only square i's normals": 640,
+  "method A counting a zero margin as apart": 1408,
+  "method B clipping with open half-planes": 1472
+ },
+ "cpu_seconds": 4.77
+}

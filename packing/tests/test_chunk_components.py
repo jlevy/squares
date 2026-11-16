@@ -93,7 +93,9 @@ def test_retained_census_reports_source_stratified_coverage() -> None:
     # 59, 71 and 50. The source-stratified total gains 48 squares; n84 and n86 now fit
     # the six-chunk, three-free budget as well. jazivxt's packing at 90 (T-303, 15 November
     # 2026) joins the non-grid records, 78 of its 90 squares structured, outside the budget.
-    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1857, 1950)
+    # de Winter's improvement of it (T-304, 16 November 2026) structures 87 of the 90 in
+    # 13 contact chunks with 3 free squares, still outside the budget, so the total gains 9.
+    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1866, 1950)
     assert non_grid["within_six_chunks_and_three_free"] == 27
 
     # The relaxed sweep structures three more squares and merges two angle classes

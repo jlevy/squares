@@ -1170,7 +1170,7 @@ census into 37 source-stratified rows.
 Its [`house-rendered overview`](evidence/non-grid-chunk-evidence-profile.svg) shows
 contact coverage, component count, free squares, largest component, internal slide
 degrees, the narrow partition disposition, and the broad-budget flag for every case.
-Nine cases are fully covered, 27 cover at least 90 percent, 34 cover at least 75
+Nine cases are fully covered, 28 cover at least 90 percent, 34 cover at least 75
 percent, and 36 cover at least half; $n = 5$ is the lone zero-contact outlier.
 Orange row outlines identify the only registered-to-regularized changes ($n = 68$, $69$,
 and $71$) instead of hiding tolerance sensitivity in an aggregate.

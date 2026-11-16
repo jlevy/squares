@@ -2655,7 +2655,9 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     (T-302), in the pass of 15 November, so the hold holds Ono at both and Özden no longer
     at 228; released, the block gains both names. Lane L170 (think-i8y9) credits jazivxt, a
     new name, as the finder at 90 (T-303) in the same pass, where the grid credited no one,
-    held alike; released, the block gains that name too."""
+    held alike; released, the block gains that name too. Lane L181 (think-32cl) credits
+    Joost de Winter as the improver at 90 (T-304, in the pass of 16 November), a name the
+    block already prints, so the hold still holds jazivxt alone there."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
@@ -2672,7 +2674,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (179, ["Doğa Özden"], []),
         (180, ["Doğa Özden"], []),
         (199, ["Evan Daniel"], ["Doğa Özden"]),
-        (90, ["jazivxt"], []),
+        (90, ["jazivxt"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], []),
         (228, ["Roberto Ono"], []),
         (232, ["Alex Chilton"], ["Francisco Couzo", "Doğa Özden"]),

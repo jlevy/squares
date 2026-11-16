@@ -1989,12 +1989,33 @@ repositories:
       Bui's paper and build on it, so think-0fa1 decides whether the note bears on any
       record. Nothing under theorem-a/, composites/ or the strip folders changes.
   # Lane L104 of 11 November 2026 (think-bcfs); lane L136 of 12 November (think-c3p2); lanes
-  # L154 (think-g2ax), L157 (think-2h88) and L158 of 14 November.
+  # L154 (think-g2ax), L157 (think-2h88) and L158 of 14 November; lane L181 of 15 November
+  # (think-32cl).
   - url: https://github.com/JoostdeWinter/square-packing
-    read_through: 66849f2bd41502a989b091b01d9b0da71c2ab7c9
-    read_on: '2026-11-14'
+    read_through: 6c0ad56a13346abda6debd73afab7892072896c7
+    read_on: '2026-11-15'
     note: >-
-      Read through 66849f2 (15:33:56Z on 14 November), the head at 16:05Z, one commit past
+      Read through 6c0ad56 (12:07:15Z on 15 November), the head at 12:55Z, five commits past
+      the 66849f2 read. 64d5ee7 (11:27:26Z), "Add a packing of 90 unit squares with side
+      9.994038857546", adds n90/, a packing of 90 squares that jlevy/squares#996 (11:30:13Z)
+      reports, and a row and a paragraph of the root README; the
+      de-winter-s90-64d5ee7-2026-11-15 packet pins it and retains n90/ as superseded by its
+      author. 0c9bcd2 (11:27:49Z) adds n90/REGISTRATION.md, the issue's text in the
+      registration template's form, and n90/SHA256SUMS; 9cafa33 (11:29:27Z) renames the model
+      named for the local search from "OpenAI Codex (GPT-6 Astra)" to "GPT-6.1 Sol Max
+      (OpenAI)", the name the issue gives. fa53fb0 (12:07:15Z), "Replace the n = 90 packing by
+      one with side 9.994038766610", replaces the certificate, the witness and the figures by
+      a packing 9e-8 smaller that jlevy/squares#997 (12:08:33Z) reports in place of #996's,
+      and corrects the README's counts of leaning squares; the de-winter-s90-upper-bound-2026-11-15
+      packet pins it, the commit the issue names, and retains n90/. 6c0ad56 (12:07:15Z), "Pin
+      the n = 90 registration request to the new certificate", changes only
+      n90/REGISTRATION.md, which now names fa53fb0, and n90/SHA256SUMS, whose digests match
+      fa53fb0's files; no packet retains it, and it adds no bound, certificate or method. Lane
+      L181 (think-32cl) records the replacement in both requests entries and both packets'
+      READMEs. Nothing more to import.
+
+      The read of 14 November (lane L158) was through 66849f2 (15:33:56Z on 14 November), the
+      head at 16:05Z, one commit past
       the 6760360 read: "Answer the review of the n = 297, 332 and 409 packings", which
       answers by commit five of the six questions of the stage 4 review of jlevy/squares#977
       and #979 (docs/project/reviews/review-2026-11-14-de-winter-977-979.md), as #977's final

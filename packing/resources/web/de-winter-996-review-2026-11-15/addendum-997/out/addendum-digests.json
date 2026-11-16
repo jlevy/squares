@@ -1,0 +1,124 @@
+{
+ "program": "l182_digests.py",
+ "lane": "L182",
+ "frozen_digests": {
+  "checker-frozen-digests.txt: 64d5ee7:n90/n90_exact.json": true,
+  "checker-frozen-digests.txt: 64d5ee7:n90/n90_witness.yaml": true,
+  "checker-frozen-digests.txt: l180_reader.py": true,
+  "checker-frozen-digests.txt: l180_axes.py": true,
+  "checker-frozen-digests.txt: l180_clip.py": true,
+  "checker-frozen-digests.txt: l180_decide.py": true,
+  "checker-frozen-digests.txt: l180_check.py": true,
+  "checker-frozen-digests.txt: l180_geom.py": true,
+  "checker-frozen-digests.txt: l180_selftest.py": true,
+  "checker-frozen-digests.txt: out/selftest.json": true,
+  "checker-frozen-digests.txt: out/check-n90.json": true,
+  "controls-plan-digest.txt: programs/controls-plan.json": true,
+  "controls-plan-digest.txt: out/plan-facts-n90.json": true,
+  "controls-plan-digest.txt: out/check-n90.json": true,
+  "controls-plan-digest.txt: programs/l180_plan_facts.py": true,
+  "controls-plan-digest.txt: programs/l180_make_plan.py": true,
+  "findings-frozen-digest.txt: frozen/review-2026-11-15-de-winter-996.frozen.md": true,
+  "findings-frozen-digest.txt: frozen/checker-frozen-digests.txt": true,
+  "findings-frozen-digest.txt: frozen/controls-plan-digest.txt": true,
+  "findings-frozen-digest.txt: out/selftest.json": true,
+  "findings-frozen-digest.txt: out/check-n90.json": true,
+  "findings-frozen-digest.txt: out/plan-facts-n90.json": true,
+  "findings-frozen-digest.txt: out/controls-n90.json": true,
+  "findings-frozen-digest.txt: out/describe-n90.json": true,
+  "findings-frozen-digest.txt: programs/controls-plan.json": true,
+  "findings-frozen-digest.txt: programs/l180_controls.py": true,
+  "findings-frozen-digest.txt: programs/l180_describe.py": true,
+  "controls-plan-digest.txt: fa53fb0:n90/n90_exact.json": true,
+  "controls-plan-digest.txt: fa53fb0:n90/n90_witness.yaml": true,
+  "controls-plan-digest.txt: ../programs/l180_reader.py": true,
+  "controls-plan-digest.txt: ../programs/l180_axes.py": true,
+  "controls-plan-digest.txt: ../programs/l180_clip.py": true,
+  "controls-plan-digest.txt: ../programs/l180_decide.py": true,
+  "controls-plan-digest.txt: ../programs/l180_check.py": true,
+  "controls-plan-digest.txt: ../programs/l180_geom.py": true,
+  "controls-plan-digest.txt: ../programs/l180_selftest.py": true,
+  "controls-plan-digest.txt: ../programs/l180_plan_facts.py": true,
+  "controls-plan-digest.txt: ../programs/l180_make_plan.py": true,
+  "controls-plan-digest.txt: ../programs/l180_controls.py": true,
+  "controls-plan-digest.txt: ../programs/l180_describe.py": true,
+  "controls-plan-digest.txt: ../programs/controls-plan.json": true,
+  "controls-plan-digest.txt: programs/l182_plan_facts.py": true,
+  "controls-plan-digest.txt: programs/l182_make_plan.py": true,
+  "controls-plan-digest.txt: out/selftest.json": true,
+  "controls-plan-digest.txt: out/check-n90-997.json": true,
+  "controls-plan-digest.txt: out/plan-facts-n90-997.json": true,
+  "controls-plan-digest.txt: programs/controls-plan-997.json": true
+ },
+ "l180_frozen_digests_hold": true,
+ "all_frozen_digests_hold": true,
+ "rerun_exits": [
+  {
+   "program": "l180_selftest.py",
+   "exit": 0
+  },
+  {
+   "program": "l180_check.py",
+   "exit": 0
+  },
+  {
+   "program": "l182_plan_facts.py",
+   "exit": 0
+  },
+  {
+   "program": "l182_make_plan.py",
+   "exit": 0
+  },
+  {
+   "program": "l180_controls.py",
+   "exit": 0
+  },
+  {
+   "program": "l180_describe.py",
+   "exit": 0
+  },
+  {
+   "program": "l182_compare.py",
+   "exit": 0
+  },
+  {
+   "program": "l182_sides.py",
+   "exit": 0
+  }
+ ],
+ "rerun_equals_kept": {
+  "selftest.json": true,
+  "check-n90-997.json": true,
+  "plan-facts-n90-997.json": true,
+  "controls-n90-997.json": true,
+  "describe-n90-997.json": true,
+  "compare-997-996.json": true,
+  "sides-997.json": true,
+  "controls-plan-997.json": true
+ },
+ "rerun_reproduces_every_receipt": true,
+ "addendum_files": {
+  "programs/controls-plan-997.json": "34853d02311825905f592a1f74cf0c84c23e3e20928e89dcb0a9e1ac385ebcf7",
+  "programs/issue-997.json": "31cd96bbf2faff98066cbc76f164422279abfd5a3aade313b05a4aa9252aa91f",
+  "programs/l182_compare.py": "b9f67bb603ebec9dc03f7e90d3670bbe024242048fbfc1a8d355fc19fa2bba44",
+  "programs/l182_digests.py": "5c222acdca3977196d7d7343d22116bea0f5196b8262200738b09a68aa751b24",
+  "programs/l182_make_plan.py": "183c264852a8dc59e6ed511e34b5829ef43f8d7a315d767d598bcd14ca913766",
+  "programs/l182_plan_facts.py": "d792ce016031636a122d7cd6903bb9580cba7d241f5e0e8626f17477edc52669",
+  "programs/l182_sides.py": "e579fb7abb45aa9a1d342dde9b933db18169718073f59643a8dec8e057fd436b",
+  "out/check-n90-997.json": "bf8544902b6ea7d939c9c81f1c47ec301eaaacbf671ab0eb0c1116208bf3a7e6",
+  "out/compare-997-996.json": "e84c8a11b814c09a980febb817115b51a56c7ce5d17387d2979fc5baf9be44d7",
+  "out/contraction-996-against-997.json": "3393829d63c1cce1b06111656ed2b9d2af99709f2878fe515469e09058b3d52f",
+  "out/contraction-new-n90-997.json": "14a652346e5f370d9f82a413399a3eb1102635253cc3e7b0b2b39e40329f9ca5",
+  "out/contraction-t303-house-n90-997.json": "c3e950a30706c31313e90326c7f054a08a73a385e490de95355ec1b893b4d99c",
+  "out/controls-n90-997.json": "7be8cc2af65c287a992afd73ccb9103eefad41973525607bd009e449b32ff2b2",
+  "out/custody-997.json": "b74f3b4f14c815b685c8ecfc5fd01e15d9b569393fb34c4ae0c9fd5616f9825f",
+  "out/describe-n90-997.json": "2deef272a49a5d11335bd2146d32802333436ce0c786232ffd35a249904cab7f",
+  "out/identity-n90-997.json": "c437755e28a49234be29f15e1a16cd2be10a6cce33096439093099a91d64ceda",
+  "out/lineage-n90-997.json": "4d3f450dfcb2f84465e92a75b56df23247a06a9822c25f4d872f66c6fe74125b",
+  "out/plan-facts-n90-997.json": "aa261a412df2c1eda3739cd2ea1d0e02c0e1b6b08010335458b52b1bcd96cb41",
+  "out/selftest.json": "cc3b82e33de26ef66d7e3b4a7c481372f31714231c6781fc8d50c2ab43a783e2",
+  "out/sides-997.json": "9c585bd4bfa2d701571e1e22725d86d4b4fc6c6ba997f0002e21f562e9c4a051",
+  "out/witness-read-997.json": "6fa0b04e81429eebfc5d4c88e2e7eafa207d5ab52ce49a5e89ff9c837b80e3e0",
+  "frozen/controls-plan-digest.txt": "2836c29de7284da54a7f1e9a1554c7fa7881668134264fd0bf2eed0d1ec8ea90"
+ }
+}

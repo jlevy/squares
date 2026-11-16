@@ -1765,6 +1765,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 228 to Özden's certificate of issue 983 (T-300) in the same pass. Lane L164 moved 228 on
     # to Roberto Ono's certificate of issue 984 (T-301) in the pass of 15 November, and lane
     # L170 90 from the grid to jazivxt's certificate of issue 989 (T-303) in the same pass.
+    # Lane L181 moved 90 on to Joost de Winter's certificate of issue 997 (T-304), T-303's
+    # packing improved, in the pass of 16 November.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1799,7 +1801,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         237: "T-295",
         297: "T-299",
         228: "T-301",
-        90: "T-303",
+        90: "T-304",
     }
     before = {
         **houses.ADOPTED,

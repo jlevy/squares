@@ -35018,3 +35018,169 @@ issues:
       are on main and that nothing the author asked for is still queued, so the issue is
       closed with it, and that answers are welcome at any time. The issue was closed as
       completed at 09:30:34Z; it has no comment but the reply, and read_through moves to it.
+  - number: 996
+    title: 'Lowered upper bound for n = 90 (side 9.994038857546): registration request<claim>: registration request'
+    author: JoostdeWinter
+    opened: '2026-11-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asked for the registration of s(90) <= 199880777150913904183/20000000000000000000
+      = 9.99403885754569520915, printed 9.994038857546, 4.24e-03 below T-303, jazivxt's packing of
+      #989 and the case's house since the pass of 15 November: an exact rational centre-direction
+      certificate with a corner Witness/v2 twin, in his watched repository at 64d5ee7, which the
+      issue says a local search found from T-303. He replaced it 38 minutes later in #997 by a
+      certificate of the same arrangement 9.09e-8 smaller, at fa53fb0, asking that the earlier
+      commit be disregarded, so this claim is not registered: #997's is, as T-304. Triaged,
+      retained and replayed on 15 November 2026 in lane L181 (think-32cl) before #997 was read:
+      both maintained exact routes accepted the certificate and refused its gross and sharp
+      controls, and the 15 November stage 4 review (lane L180, think-uhav), written blind,
+      accepted it with thirteen findings, all notes. The superseded certificate is retained in
+      the de-winter-s90-64d5ee7-2026-11-15 packet.
+    read_through: '2026-11-15T11:30:13Z'
+    results:
+    - key: n90-local-search-64d5ee7
+      claim: >-
+        s(90) <= 199880777150913904183/20000000000000000000 = 9.99403885754569520915 (the exact
+        rational side of n90/n90_exact.json at JoostdeWinter/square-packing 64d5ee7), T-303's
+        packing improved by a local search over small groups of squares.
+      source: body
+      not_registered: >-
+        Replaced by its author in #997, which asks that fa53fb0 be pinned and 64d5ee7 disregarded,
+        by a certificate of the same arrangement 9.09e-8 smaller, one to one with this one by
+        nearest centres; T-304 registers that one. The superseded certificate is retained in the
+        de-winter-s90-64d5ee7-2026-11-15 packet, and the ledger of 15 November
+        (upper-bounds-996-997-20261115) lists it as replaced by its author.
+      queued: false
+    beads:
+    - think-32cl
+    - think-uhav
+    answer_bead: think-32cl
+    replies: []
+    close_when: >-
+      T-304, #997's certificate, is on main with its review mapped and adopted as the house at 90,
+      and the reply on main says that this issue's certificate was replaced at the author's request
+      and what was checked of it.
+    notes: >-
+      Read on 15 November 2026 from main 91acf2022; no comment on the issue, which carried the
+      intake label from 11:58:00Z. The credit name, Joost de Winter, is the issue's, and his
+      contributor profile exists. The record credits people, not AI agents (attribution.md): the
+      issue says the local search was run with GPT-6.1 Sol Max (OpenAI) and the local
+      optimization, rational certificate, checks and figures were produced with Claude Fable 5.2
+      (Anthropic), both under his direction; at 64d5ee7, n90/README.md named the search's model
+      'OpenAI Codex (GPT-6 Astra)', which 9cafa33 (11:29:27Z) renames. The issue names 64d5ee7
+      (11:27:26Z), 2 minutes 47 seconds before it. Licensed MIT by LICENSE at the pin.
+
+      Before #997 was read, lane L181 replayed this certificate (receipts committed at 12:17Z)
+      and registered it (12:38Z), then read the stage 4 review's frozen findings at 12:39Z and its
+      final head at 12:43Z; the review agreed with the replay everywhere both measured: the least
+      pair margin 1.06410355706e-12 at squares 2 and 40, 18 single-corner wall contacts at the
+      left and bottom, the right and top cleared by 5.07e-21, T-303's contraction margin
+      1.0988e-11 and the gain 3.9e8 times it, and the identity against T-303 (6 squares beyond a
+      tenth, T-303's packing improved square for square).
+
+      The review's findings for the author: the counts of 37 leaning squares and of the seven and
+      five squares named (F6, F10), which the author corrected at fa53fb0 to 40 and four; the JSON
+      naming neither the box nor the rotation sense (F7); the twin, which this repository's corner
+      reader refused (F11) and which witness-corners-opposite now reads; and the AI named at the
+      pin (F12). Its six questions for the author hold nothing open. Its addendum (lane L182)
+      decides #997's replacement and compares the two certificates: the same arrangement,
+      re-optimized, the step 9,539 times this certificate's contraction margin (F14). The case
+      adopted #997's certificate (T-304) at 90 in the pass of 16 November. No reply has been
+      posted; the coordinator relayed #997 at 12:55Z.
+  - number: 997
+    title: 'Lowered upper bound for n = 90 (side 9.994038766610): registration request'
+    author: JoostdeWinter
+    opened: '2026-11-15'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter replaces the certificate of #996 by one 9.09e-8 smaller and asks for the
+      registration of s(90) <= 99940387666098521323/10000000000000000000 = 9.9940387666098521323,
+      printed 9.994038766610 rounded up at 12 places, 4.24e-03 below T-303, jazivxt's packing of
+      #989 and the case's house in both lanes since the pass of 15 November: an exact rational
+      centre-direction certificate, n90/n90_exact.json, with a corner Witness/v2 twin, in his
+      watched repository at fa53fb0, which the issue asks to be pinned in place of #996's 64d5ee7.
+      It says the arrangement, lineage, credit and AI assistance are as #996 states: a local search
+      from T-303, credit to him as an improvement of jazivxt's packing. It reports his two exact
+      checkers and this repository's independent rational checker accepting it. Triaged, retained
+      and registered on 15 November 2026 in lane L181 (think-32cl) as T-304: the print rounds up
+      from the exact side, and both maintained exact routes accept the certificate and refuse its
+      gross and sharp controls; measured, it is T-303's arrangement moved by the local search, 6
+      squares beyond a tenth under the identity, and #996's certificate refined, no square moved
+      beyond 0.0142. T-303's contraction margin is 1.0988e-11, so the gain lies wholly outside its
+      padding. The ledger of 15 November records it. The 15 November stage 4 review (lane L180,
+      think-uhav), which accepted #996's certificate, accepts this one in its addendum (lane
+      L182), its frozen checker run unchanged and 26 of 26 controls as stated, so the entry is
+      confirmed, independently re-implemented, at V3/C3, S3, and the case adopted it as its
+      house at 90 in the pass of 16 November, in place of T-303, since the pass of 15 November
+      had already moved 90.
+    read_through: '2026-11-15T12:08:33Z'
+    results:
+    - key: n90-local-search
+      claim: >-
+        s(90) <= 99940387666098521323/10000000000000000000 = 9.9940387666098521323 (the exact
+        rational side of n90/n90_exact.json at JoostdeWinter/square-packing fa53fb0), T-303's
+        packing improved by a local search over small groups of squares.
+      source: body
+      register:
+      - T-304
+      evidence:
+      - E-de-winter-997-certificate-report
+      - E-de-winter-997-exact-feasibility
+      - E-de-winter-997-review-exact-feasibility
+    beads:
+    - think-32cl
+    - think-uhav
+    answer_bead: think-32cl
+    replies: []
+    close_when: >-
+      T-304 is on main with its stage 4 review mapped and adopted as the house at 90, and the
+      reply on main says what was retained and replayed, what the review found and that the case
+      adopted it.
+    notes: >-
+      Read on 15 November 2026 from main 91acf2022; no comment on the issue, which carried the
+      intake label when read. The issue names fa53fb0 (12:07:15Z), 78 seconds before it, and
+      asks that it be pinned and #996's commit disregarded; the head, 6c0ad56 (12:07:15Z),
+      changes only n90/REGISTRATION.md and n90/SHA256SUMS, the certificate unchanged, and the
+      packet pins fa53fb0, whose own SHA256SUMS still states 9cafa33's digests. GitHub's
+      activity log was not read, so the issue dates the claim. The record credits people, not
+      AI agents (attribution.md): the assistance #996 states, GPT-6.1 Sol Max for the local
+      search and Claude Fable 5.2 for the optimization, certificate, checks and figures, is
+      stated and not credited. Licensed MIT by LICENSE at the pin.
+
+      Measured against padding, T-303 at 90 has margin 1.0988e-11, wall slack included
+      (squares 79 and 81), so the gain, about 3.9e8 times it, is no predecessor's padding and
+      RV-3 (think-ruu2) does not reach this entry; the step from #996's certificate, 9.09e-8, is
+      about 9.5e3 times that certificate's margin, 9.533e-12. This certificate's own margin is
+      1.8187e-11 (squares 2 and 40, the least-gap pair); its contracted side is the owner's RV-3
+      question and is not registered. The L-step scan finds that this bound carries to no other
+      count. The lower bounds at 90 (973/100 verified, 489/50 reported) lie below the side.
+
+      Measured pose by pose, 40 squares are tilted beyond a degree, 22.90 to 30.99 degrees, all
+      one way, each paired with a square T-303 tilts the same way, and 50 are exactly upright,
+      the 40 leaning squares the corrected README counts. The twin is held to the JSON as the
+      same packing by witness-corners-opposite.
+
+      The review's addendum agrees with the replay everywhere both measured: the least pair
+      margin 2.02641179076e-12 at squares 2 and 40; 17 wall contacts, each along an edge; the
+      right and top cleared by 2.51e-22; the margins of T-303, of #996's certificate and its
+      own; and the identity against T-303 and #996's certificate. It finds F1 to F13 holding
+      with new values, the author's text at the new pin answering F10 and F12, and adds F14 (the
+      replacement is #996's arrangement re-optimized, not padding) and F15 (the registration
+      request at the head states the counts the record takes). Its questions for the author
+      hold nothing open: which text to record, whether #996's near-upright turn was the rational
+      rounding, what produced the step, and L180's questions on the twin's form and on
+      publishing the search.
+
+      This lane read the addendum at 13:21Z, after its own replay, controls and measurements of
+      this certificate (13:08Z) and its records for it (13:21Z) were committed.
+
+      Adopted at 90 in the pass of 16 November 2026 (written at 00:01Z that day) under the house
+      rule, in place of T-303, with jazivxt the packing's finder and Joost de Winter its
+      improver. Both strong generators ran on the new witness, and Evan Daniel's same-side view
+      is drawn; his certified KKT solve, 2.698e-11 below the side, about 1.48 times the
+      certificate's own contraction margin, is held at row 3 for RV-3 (think-ruu2,
+      think-ikku). No reply has been posted.

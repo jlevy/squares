@@ -2755,6 +2755,50 @@ RESULTS: dict[str, Prose] = {
             "controls, each stated beforehand, were each decided as stated"
         ),
     ),
+    "T-304": Prose(
+        author="Joost de Winter",
+        reported=(
+            "on [jlevy/squares#997](https://github.com/jlevy/squares/issues/997), which "
+            "replaces the certificate of "
+            "[jlevy/squares#996](https://github.com/jlevy/squares/issues/996)"
+        ),
+        producer_route=True,
+        ai=(
+            "Issues 996 and 997 say the local search was run with GPT-6.1 Sol Max (OpenAI) "
+            "and the local optimization, rational certificate, checks and figures were "
+            "produced with Claude Fable 5.2 (Anthropic), both under Joost de Winter’s "
+            "direction."
+        ),
+        routes=(
+            "One maintained route, the independent rational corner checker, is the checker "
+            "the source reports running, on its Witness/v2 twin, so the maintained routes’ "
+            "independent re-implementation rests on `sqpack`’s exact verifier. No route here "
+            "is the source’s own code, and the review’s checker shares no code with either "
+            "maintained route or the source."
+        ),
+        lineage=(
+            "The issues say the packing starts from T-303, jazivxt’s packing, which jazivxt "
+            "built from a crop of de Winter’s own packing of 157 squares, and that a local "
+            "search changed small groups of squares in position and angle, optimized the "
+            "packing again after each change and kept the changes that gave a smaller side. "
+            "Against T-303’s packing, this case’s house best packing before this adoption, it "
+            "is a further arrangement: no symmetry pairs nearest centres one to one, but under "
+            "the identity the optimal assignment moves 6 squares beyond a tenth, at most "
+            "0.645, and each of its 40 tilted squares pairs with one T-303 tilts the same way. "
+            "Issue 996’s certificate, 9.09e-8 larger, which issue 997 replaced, is the same "
+            "arrangement, no square moved beyond 0.0142. So jazivxt stays the packing’s "
+            "finder and Joost de Winter is its improver, as the issues ask."
+        ),
+        third_route=(
+            ", and the 15 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read and run unchanged on this certificate by its addendum, "
+            "decided it and its Witness/v2 twin again by separating axes in integers and by "
+            "exact clipping in GMP rationals over every square, wall and pair; its 26 "
+            "controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2888,15 +2932,19 @@ CREDITS: dict[int, Credit] = {
     # T-303 (adopted in the pass of 15 November 2026, the first adoption at 90), jazivxt's
     # issue 989, posted by the account dpre4ai: a window of shifted copies of a crop of Joost
     # de Winter's n = 157 packing (T-293), the first packing of 90 squares below the grid, 52
-    # squares beyond a tenth of it. The phrase names the packing the crop was taken from, as
-    # the 147 phrase names Daniel's 229, and the grid it is the first below, as the 157 one.
-    # It opens with "the packing" because the writer capitalizes a phrase's first letter, and
-    # the handle keeps its own case (attribution.md).
+    # squares beyond a tenth of it. T-304 (adopted in the pass of 16 November 2026), Joost de
+    # Winter's issue 997, which replaced his issue 996's certificate: T-303's packing as his
+    # local search improved it, a further arrangement of it, 6 squares beyond a tenth under
+    # the identity and each tilted square paired with one T-303 tilts the same way (the 15
+    # November review's F9 and its addendum). jazivxt stays the finder and de Winter is the
+    # improver, as the issues ask, in the "X's packing as Y improved it" form. The phrase opens
+    # with "the packing" because the writer capitalizes a phrase's first letter, and the
+    # handle keeps its own case (attribution.md).
     90: Credit(
         (JAZIVXT,),
-        (),
+        (DE_WINTER,),
         "the packing jazivxt found from shifted copies of a crop of Joost de Winter’s n = 157 "
-        "packing, the first below the 10 × 10 grid",
+        "packing, as de Winter improved it by a local search",
     ),
     # Evan Daniel's exact form (T-193, of T-174 by its item) of PingYou Ltd's tighter
     # certificate of his own display regularization of Ryan Xu's packing (T-174, of T-146,
