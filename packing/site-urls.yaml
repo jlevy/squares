@@ -24749,6 +24749,7 @@ urls:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -24763,6 +24764,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
 - path: result/t-306.html
   canonical: result/t-306.html
   kind: result
@@ -24785,6 +24788,7 @@ urls:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -24799,6 +24803,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
 - path: result/t-307.html
   canonical: result/t-307.html
   kind: result
@@ -24821,6 +24827,7 @@ urls:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -24835,6 +24842,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
 - path: result/t-308.html
   canonical: result/t-308.html
   kind: result
@@ -24857,6 +24866,7 @@ urls:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -24871,6 +24881,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
 - path: result/t-309.html
   canonical: result/t-309.html
   kind: result
@@ -24893,6 +24905,7 @@ urls:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -24907,6 +24920,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
 - path: results.html
   canonical: results.html
   kind: page

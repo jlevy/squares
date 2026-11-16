@@ -2423,7 +2423,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # 5 November 2026 and 260 on 6 November 2026 from Evan Daniel's own packings and
     # credits him alone there, so Özden at 204 and Yim at 260 are credited no more, and
     # Lavrentev's and Tymchishin's names, which only 268, 303 and 304 credited, leave it.
-    assert len(expected_names) == 28
+    # The pass of 16 November 2026 (think-0y9m) draws 127, 204, 232, 264 and 305 from
+    # JoeGun's packings of Tomáš Kodaj's, two new names the print holds back
+    # (think-tj4o), and Chilton's name, which only 232 credited, leaves it.
+    assert len(expected_names) == 27
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
     # re-housed still holds another count. The adoption of 20 October draws from three
@@ -2525,7 +2528,6 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Hajba",
         "Schadt",
         "Chaoweeraprasit",
-        "Chilton",
         "Couzo",
         "Daniel",
         "de Winter",
@@ -2657,14 +2659,18 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     new name, as the finder at 90 (T-303) in the same pass, where the grid credited no one,
     held alike; released, the block gains that name too. Lane L181 (think-32cl) credits
     Joost de Winter as the improver at 90 (T-304, in the pass of 16 November), a name the
-    block already prints, so the hold still holds jazivxt alone there."""
+    block already prints, so the hold still holds jazivxt alone there. Lane L187
+    (think-0y9m) credits Tomáš Kodaj as the finder and JoeGun as the improver at 127, 204,
+    232, 264 and 305 (T-305 to T-309, in the same pass), two new names, held alike, and
+    Özden no longer at 232; released, the block gains both."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
-            (156, 172, 179, 180, 199, 232, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
+            (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
         ),
         **dict.fromkeys((147, 228), ("Roberto Ono",)),
         90: ("jazivxt",),
+        **dict.fromkeys((127, 204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
     }
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
@@ -2677,7 +2683,11 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (90, ["jazivxt"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], []),
         (228, ["Roberto Ono"], []),
-        (232, ["Alex Chilton"], ["Francisco Couzo", "Doğa Özden"]),
+        (127, ["Tomáš Kodaj"], ["JoeGun"]),
+        (204, ["Tomáš Kodaj"], ["JoeGun"]),
+        (232, ["Tomáš Kodaj"], ["JoeGun"]),
+        (264, ["Tomáš Kodaj"], ["JoeGun"]),
+        (305, ["Tomáš Kodaj"], ["JoeGun"]),
         (237, ["Doğa Özden"], []),
         (268, ["Doğa Özden"], []),
         (269, ["Doğa Özden"], []),
@@ -2689,7 +2699,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert (reported["found_by"], reported["improved_by"]) == (found, improved), n
     assert citations[299]["upper"]["text"] == "Daniel & Özden, GitHub"
-    for n in (204, 260):
+    for n in (260,):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert reported["found_by"] == ["Evan Daniel"]
         assert reported["improved_by"] == []
@@ -2717,18 +2727,25 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     finally:
         monkeypatch.undo()
         printed()
-    assert released - names == {"Özden", "Ono", "jazivxt"}
+    assert released - names == {"Özden", "Ono", "jazivxt", "Kodaj", "JoeGun"}
     assert "Özden" not in lines
     assert "Ono" not in lines
     assert "jazivxt" not in lines
+    assert "Kodaj" not in lines
+    assert "JoeGun" not in lines
     assert "Özden" in released_lines
     assert "Ono" in released_lines
     assert "jazivxt" in released_lines
+    assert "Kodaj" in released_lines
+    assert "JoeGun" in released_lines
     assert "Yim" not in released_lines
     assert released_lines != lines
     drawn = ET.fromstring((ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8"))
     assert drawn.get("height") == str(height)
-    assert released_height == height
+    # Measured on 16 November 2026: with the hold the 1-100 canvas keeps its drawn height,
+    # 3,898; released, the block's lines, with Kodaj's and JoeGun's names and without
+    # Chilton's, lay the canvas out at 3,869, a difference the next infographics cut draws.
+    assert (height, released_height) == (3898, 3869)
 
 
 def test_the_print_credit_hold_cannot_outlive_its_edition(
@@ -4829,12 +4846,12 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 30 since the adoption at 232 and 307 of 31 October 2026, and 28 since the adoption of
-    # issue 914 of 5 November 2026 took Lavrentev's and Tymchishin's names off (see the
-    # credits test above).
+    # 30 since the adoption at 232 and 307 of 31 October 2026, 28 since the adoption of
+    # issue 914 of 5 November 2026 took Lavrentev's and Tymchishin's names off, and 27 since
+    # the pass of 16 November 2026 took Chilton's off at 232 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 28
+        == 27
     )
 
 

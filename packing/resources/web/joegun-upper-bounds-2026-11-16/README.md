@@ -14,7 +14,8 @@ the claims by the issue, with the first commit kept.
 Intake lane L187 (think-0y9m) retained it, replayed it and measured it on 16 November
 2026 and registers it as **T-305** to **T-309**, one result a count.
 The blind stage 4 review of lane L186 (think-skt8) accepted all five the same day, so
-they are at V3/C3.
+they are at V3/C3, and each case adopted its certificate as its house in the pass of 16
+November 2026 under the house rule.
 
 ## What the Source Claims
 
@@ -219,6 +220,24 @@ What the review adds:
 Its seven questions for the author hold nothing open: Kodaj’s parent packings, his
 notebook’s licence, what the fault-line programme moved at 204 and 232, the export’s push
 factor, the side’s slack, `check.py`’s `assert`, and the programme itself.
+
+## Adoption
+
+Each case adopted its certificate as its house best packing in the pass of 16 November
+2026 under the house rule: T-305 at 127 and T-309 at 305 in place of T-174, T-306 at
+204 in place of T-268, T-307 at 232 in place of T-275, and T-308 at 264 in place of
+T-186, each earlier house keeping its certificate as history. The same day’s pass had
+moved only 90, so a day’s archive holds one prior state for each of the five counts.
+Tomáš Kodaj is each packing’s finder and JoeGun its improver.
+
+Both strong generators ran on the five new witnesses
+([the runs](../../../cases/regularized_drawings/think-0y9m-2026-11-16/README.md)), and the
+selection draws grid-slack’s same-side view at every count, admitted at row 10. Evan
+Daniel’s driver certified a KKT local minimum below the side at 127, 232, 264 and 305,
+1.2175 × 10⁻¹⁰, 4.0164 × 10⁻⁹, 1.9066 × 10⁻¹¹ and 1.9146 × 10⁻¹⁰ below it, about 1.006,
+273, 1.007 and 1.004 times the certificate’s own contraction margin and beyond it at
+each; each is held at row 3 as a register candidate and not admitted (RV-3). At 204 its
+exact solve failed, so it drew no view there.
 
 ## What Is Not Established
 
