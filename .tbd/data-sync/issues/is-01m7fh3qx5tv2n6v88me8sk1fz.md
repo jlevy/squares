@@ -5,7 +5,7 @@ title: "Import #996/#997: Joost de Winter's s(90) <= 9.994038766610 (fa53fb0, re
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: bold-ritchie-l181
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T11:57:32.962Z
-updated_at: 2026-11-15T13:52:31.564Z
+updated_at: 2026-11-16T01:00:22.923Z
 started_at: 2026-11-15T11:57:34.424Z
 ---
 
@@ -32,3 +32,5 @@ Change of input (coordinator, 12:55Z): de Winter's #997 (12:08:33Z) replaces #99
 fa53fb0 intake 48bf8278b (13:08:49Z): packet de-winter-s90-upper-bound-2026-11-15 now pins fa53fb0 (head 6c0ad56 differs only in REGISTRATION.md, SHA256SUMS); 64d5ee7 moved to retention-only packet de-winter-s90-64d5ee7-2026-11-15 (superseded by author). Replay: 24,030 pair decisions, 3 gross + 11 sharp all as stated (plan 88b26ff1, 12:56:59Z); edge contacts at left/bottom, far wall 2.51e-22, least gap 2.0264e-12 (2,40). Identity: vs T-303 6 beyond 0.1 (0.645), all 40 tilted same sign -> T-303 improved (found_by jazivxt, improved_by de Winter at adoption); vs #996 one-to-one, largest 0.0142. Margins: T-303 1.0988e-11 (gain 3.86e8x), #996 9.533e-12 (step 9539x), own 1.8187e-11. New reader witness-corners-opposite holds the twin as same packing. Ledger renamed upper-bounds-996-997-20261115 (#997 recorded, #996 other item: replaced by author). Records 20c8c89e4 (13:21:03Z): T-304 = fa53fb0, evidence E-de-winter-997-*, #996 entry not_registered, #997 entry T-304. Addendum (L182, 83ac8ceec) read 13:21Z after those commits; merged 86ce0aa8d; mapped 09a290837: accepted, 26/26, F14 F15, S3; no disagreement. Re-pin 2f0da862a. Adoption, regularization, stamps on 16 Nov.
 
 Pushed claude/bold-ritchie-xo28us-l181 at 2f0da862a; draft PR https://github.com/jlevy/squares/pull/998 (13:32Z). Hosted run 43719521961: every job passed but suite-c, whose 19 failures are all test_house_adoption, from the pending adoption at 90 (T-304 is the smallest validated side and 90 cannot move again on 15 November); they resolve with the adoption in the pass of 16 November. Certificate page 43719522039 success, mergeability 43719460473 success. Waiting for 00:00Z on 16 November to adopt, regularize, stamp and re-pin.
+
+Merged origin/main f46b05370 (#999) as c4173b17d, both sides kept. Adoption ff5f74f40 (00:46:06Z, 16 Nov; adopt_houses ran 00:01:17Z): LATER_PASSES["2026-11-16"] = {90}, ADOPTED 90 T-304, prior state house-adoption-prior-state-2026-11-16.json.xz (T-303's case file), credit found_by jazivxt, improved_by Joost de Winter; T-303 superseded (no longer a house source). Regularization in packing/cases/regularized_drawings/think-32cl-2026-11-16/: grid-slack 0.5/1/5 deg each row 10; evand driver same-side view drawn, row 10 (0,0,0,13,13 -> 0,0,0,12,12; shared 174,180 -> 176,180), flip mirror across falling diagonal. HELD for RV-3 (think-ruu2): driver's certified KKT local minimum 2.698e-11 below the side, ~1.48x own contraction margin 1.8187e-11, row 3, not admitted. Screen at 90: 12 translate, 0 separate. Page room: results.html 1,628,290 bytes after adoption (ceiling 1,700,000, no budget raised). Records tier 55/55 before commit and on final head. Stamps d999a32e2 (stamp_landed --apply 00:54:49Z: T-304 landed 2026-11-16, house 90 T-304 2026-11-16), re-pin 7cbfc954d (00:54:56Z, DATA_REVISION d999a32e). Pushed 7cbfc954d 00:58Z; PR #998 body updated. Owed after merge: stage 7 replies on #996 and #997 with the review's questions to the author.
