@@ -3,9 +3,9 @@ type: is
 id: is-01m7fh3qx5tv2n6v88me8sk1fz
 title: "Import #996/#997: Joost de Winter's s(90) <= 9.994038766610 (fa53fb0, replacing #996's 64d5ee7 certificate; T-303's arrangement improved); adopt in a 2026-11-16 pass"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 15
+version: 16
 delegate: bold-ritchie-l185
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T11:57:32.962Z
-updated_at: 2026-11-16T03:35:25.236Z
+updated_at: 2026-11-16T03:37:21.828Z
 started_at: 2026-11-15T11:57:34.424Z
+closed_at: 2026-11-16T03:37:21.828Z
+close_reason: "Done: #998 merged (T-304 registered and adopted at 90 on 16 Nov), replies posted on #996/#997/#989 and recorded in #1000 (merged 31ddae6fe)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
