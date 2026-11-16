@@ -5,7 +5,7 @@ title: "Import #1001: JoeGun's five upper bounds on Kodaj's packings (s(127), s(
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: bold-ritchie-l187
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-16T05:57:22.906Z
-updated_at: 2026-11-16T07:03:45.421Z
+updated_at: 2026-11-16T08:11:25.800Z
 started_at: 2026-11-16T05:58:26.297Z
 ---
 
@@ -26,3 +26,6 @@ Intake commit b3a0c1b01 (06:34:00Z): packet joegun-upper-bounds-2026-11-16 (whol
 
 Registration 041e58334 (06:45:29Z): T-305 (127), T-306 (204), T-307 (232), T-308 (264), T-309 (305), V3/C3 on the replay, S3 draft each; credit found_by Tomáš Kodaj, improved_by JoeGun at all five (the issue's offer of Kodaj alone at 204/232 left to the owner); key [JoeGun upper bounds 2026-11-16], 'JoeGun after Kodaj, Daniel, Levy', builds-on-project; E-joegun-1001-certificate-report, E-joegun-1001-exact-feasibility (independent-implementation; V-sqpack-verify is the producer's verify/promote package, independence rests on V-check-rational-witness-independent). result/t-174.html 348,784 (main) -> 353,469 bytes; ceiling 350,000 -> 375,000 as a measured choice, timing owed under think-v4me. No-public-change record 34df676d6 (compare_paper_renders: three papers byte-identical; explainer differs only in the register count 309 vs 304).
 L186 review read at 06:56Z (after b3a0c1b01 06:34Z and 041e58334 06:45Z); merged 1dc61d960 (origin/claude/bold-ritchie-xo28us-l186 at 1b9dc0976); mapped 531843f2a (07:00:55Z): accepted all five, F1-F15 notes, 160/160 controls, S3 each; reviewer tier tbd-strong (not -max). No disagreement with the replay (least gaps, wall contacts, margins, identity all equal). V-joegun-1001-review-check, E-joegun-1001-review-exact-feasibility (clean room, independence_record the review); external_review on report and replay (no independence_record on the replay). Adoption written by adopt_houses at 07:01:40Z (LATER_PASSES 2026-11-16 = {90, 127, 204, 232, 264, 305}); regularization runs started 07:02Z.
+
+Adoption 3de8505d4 (07:50:22Z): ADOPTED 127 T-305, 204 T-306, 232 T-307, 264 T-308, 305 T-309; LATER_PASSES 2026-11-16 {90,127,204,232,264,305}; prior states added to house-adoption-prior-state-2026-11-16.json.xz; found_by Tomáš Kodaj, improved_by JoeGun; T-268 and T-275 superseded (no house). Regularization in packing/cases/regularized_drawings/think-0y9m-2026-11-16/: grid-slack views drawn at all five (127 deg1, 204 deg5, 232 deg05, 264 deg1, 305 deg05; row 10); evand driver KKT local minima HELD at row 3 (RV-3, think-ruu2): 127 1.2175e-10 below side (~1.006x own margin), 232 4.0164e-9 (~273x), 264 1.9066e-11 (~1.007x), 305 1.9146e-10 (~1.004x), each beyond its margin; 204 exact solve failed (no view). 127's old SETTLED entry removed. check-state: 5 houses moved, 0 pending. apply_closed_form restored closed-form paragraph order. Derived: escape screen (SCREEN_FINDINGS 1..200 846/2443, 1..324 3210/7167), rigidity x5, composite, bound citations, X049 censuses, certificate reach, exact-side register, house custody (76 houses, 94 mutations), contributor census, print-credit hold (Kodaj, JoeGun at the five; Özden off 232). result/t-174.html 353,877 bytes adopted; ceiling 350,000 -> 375,000 (measured; timing owed think-v4me).
+Release record 11c00338b (compare_paper_renders over 14 paths: 3 papers identical, explainer count 309 vs 304 only). Stamps 711d1bd09 (stamp_landed --apply 07:53:45Z: T-305..T-309 landed 2026-11-16; houses at the five dated 2026-11-16); re-pin 4b77cb701 (DATA_REVISION 711d1bd0); suite admission 24916b094 (not data; release_pin --check ok). Local on head: records 55/55, edit 71/71, 31 touched modules 2139 passed 2 skipped, ruff/basedpyright clean. Pushed claude/bold-ritchie-xo28us-l187 at 24916b094; draft PR https://github.com/jlevy/squares/pull/1002 (not labelled; S3 owed by owner/coordinator). Owner holds: Kodaj-alone credit offer at 204/232; RV-3 on four KKT candidates; think-71uq licence (holds nothing). Stage 7 reply on #1001 owed after merge.
