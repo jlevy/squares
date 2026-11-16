@@ -1,0 +1,20 @@
+== n-127-input.txt: n = 127, S_in = 11.80175389048649
+  contacts: 299 candidate incidences (|gap| < 1e-06), 3 vertex-vertex touches set aside; jam-LP dual residual 0.0e+00; load-bearing set 297 contacts on 88 squares; free squares (rattlers / force-free): [19, 26, 33, 34, 36, 37, 38, 39, 40, 41, 44, 56, 57, 58, 59, 66, 71, 72, 73, 83, 84, 85, 86, 87, 90, 93, 94, 97, 107, 108, 109, 110, 111, 112, 113, 114, 116, 117, 118]
+  projection onto 214 independent of 299 contact equations: max |g| 7.1e-07 -> 7.8e-72 (6 steps)
+  KKT: |A| = 299 contacts, independent |B| = 213, variables 265 (52 frozen flat), system 426x426, cond ~ 1.0e+03
+  Newton: 5 residual evaluations, residual 7.8e-16 -> 5.2e-75
+  free squares re-placed: min clearance 7.56e-5; 0 with clearance < 1e-12
+  2 weakly active (force-free) contacts kept closed
+  redundant contacts (86): max |g| = 5.7e-76; frozen flat variables (52): max |dL/dv| = 1.1e-75
+  S = 11.801753890364738880529387958519684547332524445423356321963120406   (input 11.80175389048649, shift -1.22e-10)
+  multipliers: equilibrium residual 0.0e+00; best strictly positive choice over the 297 load-bearing contacts: min lambda = 6.664e-08, max 3.475e-01
+  zero modes: 52 of 52 realised by exact motions at fixed S (step 1e-3 both ways, projection residual <= 4.9e-61, correction <= 5.6e-12 t^2, |dS| <= 2.0e-61)
+  second order: rank J_A = 213, dim null(J_A) = 52; reduced Hessian: #neg 0, #zero 52, min eig -4.552013571675218e-16, min positive None
+    => local minimum of S, strict modulo 52 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated
+  first-order rigid squares: 36 of 88 load-bearing; squares in zero modes: [0, 2, 8, 11, 15, 20, 21, 22, 23, 24, 25, 30, 31, 32, 35, 42, 45, 46, 48, 49, 50, 51, 52, 53, 60, 61, 64, 65, 68, 69, 70, 75, 79, 80, 82, 89, 96, 98, 99, 101, 102, 103, 105, 106, 115, 119, 120, 121, 122, 123, 125, 126]
+  corner-corner branches (3 touches as disjunctions, MILP): min first-order dS = 0.00e+00 => jammed in every branch
+  feasibility (mp SAT): active pairs min gap -5.95e-76; non-active pairs min -1.63e-79 (0, 67); vertex-vertex min -1.2e-77; non-active walls min 7.56e-5
+  154 pairs/walls touch (|SAT gap| < 1e-12; load-bearing, weakly active or corner-corner); every other pair/wall is separated by >= 7.56e-5 (118, 'R')
+  weakly active (|gap| < 1e-12, not load-bearing): [('-1.6e-79', 0, 67), ('1.2e-77', 77, 92), ('-1.2e-77', 78, 91), ('-7.4e-78', 81, 92)]
+  certificate (n-127-input.cert): exact check VALID; S' = 11.801753890364738880647405497424 (S' - S = 1.18e-19); exact min wall 5.00e-21, min pair 1.00e-20
+  done in 5.7 s
