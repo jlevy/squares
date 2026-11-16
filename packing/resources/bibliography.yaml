@@ -5713,9 +5713,13 @@ sources:
       8.390e-5 and 5.358e-4 of the gains, and that credit to Kodaj alone is fair at 204 and 232.
       The exact coordinates are made by this repository's packing-witness promote --strategy
       robust-rational from the decimal poses, and AI agents wrote and ran the search code, the
-      checker and the filing under JoeGun's direction. No optimality, rigidity or KKT claim. The
-      lineage builds on this project: the exact coordinates are made with this repository's
-      promotion tool. Licensed CC BY 4.0 (witnesses, poses, outputs, text) and MIT (check.py) by
+      checker and the filing under JoeGun's direction. At the pin it makes no optimality,
+      rigidity or KKT claim. A later commit the same day, 5971b95, adds a numerical check with
+      Evan Daniel's exactsolve.py, which the author says is not a proof: a KKT point and a local
+      minimum, strict up to flat motions and so not rigid, at the exact touching point near the
+      certificate at 127, 232, 264 and 305, and no result at 204, the lower sides unclaimed;
+      it is retained in web/joegun-local-minimum-2026-11-16/. The lineage builds on this
+      project: the exact coordinates are made with this repository's promotion tool. Licensed CC BY 4.0 (witnesses, poses, outputs, text) and MIT (check.py) by
       LICENSE.md at the pin, which says it covers JoeGun's contribution and not Kodaj's terms; the
       licence of Kodaj's notebook is unchecked (think-71uq). Retained in
       web/joegun-upper-bounds-2026-11-16/.

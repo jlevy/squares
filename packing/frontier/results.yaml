@@ -48048,12 +48048,17 @@ results:
       repository's main, reports VERIFIED (exact-algebraic, 8001 pairs), and that check.py, an
       exact checker the author wrote apart from this repository's code in Fraction arithmetic
       with no tolerance and no distance filter, reports VALID; both outputs are retained. This
-      repository's packing-witness promote --strategy robust-rational --max-side-increase
-      1e-11 made the exact coordinates from a binary64 pose whose centres the author first
-      pushed away from the centroid by a factor of at least 1 + 1e-12, so packing-witness
-      verify does not check the rounding independently, as the issue says. No
-      local-optimality, rigidity or KKT claim is made. Those statements are the author's; no
+      repository's packing-witness promote --strategy robust-rational --max-side-increase 1e-11
+      made the exact coordinates from a binary64 pose whose centres the author first pushed away
+      from the centroid by a factor of at least 1 + 1e-12, so packing-witness verify does not
+      check the rounding independently, as the issue says. Those statements are the author's; no
       source program ran here.
+
+      When filed, the issue claimed no local optimality, rigidity or KKT point. Later on 16
+      November the author added a numerical check with Evan Daniel's exactsolve.py, at 80
+      digits: it reports the exact touching point near the certificate, 1.2175e-10 below its
+      side, a KKT point and a local minimum of the side, strict up to 52 flat motions, so not
+      rigid. The author says the check is not a proof and claims no lower side.
 
       Credit Tomáš Kodaj (https://www.kaggle.com/tomkodaj) as the packing's finder and JoeGun
       (https://github.com/JonathanGun/square-packing-upper-bounds) as its improver, as the
@@ -48181,13 +48186,18 @@ results:
       1.006 times the certificate's own contraction margin and beyond it, held at row 3 as a
       register candidate and not admitted (RV-3, think-ruu2).
 
+      The author's own run of the same solver, added after the filing from the binary64 pose,
+      reaches the same point, equal to the driver's in every digit both print, with the same
+      second-order verdict (packing/resources/web/joegun-local-minimum-2026-11-16). That is
+      context for RV-3, not a registration.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
       exact verifier, is the packing-witness verify the source ran, from the package whose
       promotion made the coordinates. Licensed CC BY 4.0 by LICENSE.md at the pin, which
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
-      think-71uq, which holds no import. No human oversight or optimality is claimed.
+      think-71uq, which holds no import. No human oversight or global optimality is claimed.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 16 November, is
@@ -48245,15 +48255,20 @@ results:
       of T-268.
 
       The issue says this repository's packing-witness verify, run unmodified from this
-      repository's main, reports VERIFIED (exact-algebraic, 20706 pairs), and that check.py,
-      an exact checker the author wrote apart from this repository's code in Fraction
-      arithmetic with no tolerance and no distance filter, reports VALID; both outputs are
-      retained. This repository's packing-witness promote --strategy robust-rational
-      --max-side-increase 1e-11 made the exact coordinates from a binary64 pose whose centres
-      the author first pushed away from the centroid by a factor of at least 1 + 1e-12, so
-      packing-witness verify does not check the rounding independently, as the issue says. No
-      local-optimality, rigidity or KKT claim is made. Those statements are the author's; no
+      repository's main, reports VERIFIED (exact-algebraic, 20706 pairs), and that check.py, an
+      exact checker the author wrote apart from this repository's code in Fraction arithmetic
+      with no tolerance and no distance filter, reports VALID; both outputs are retained. This
+      repository's packing-witness promote --strategy robust-rational --max-side-increase 1e-11
+      made the exact coordinates from a binary64 pose whose centres the author first pushed away
+      from the centroid by a factor of at least 1 + 1e-12, so packing-witness verify does not
+      check the rounding independently, as the issue says. Those statements are the author's; no
       source program ran here.
+
+      When filed, the issue claimed no local optimality, rigidity or KKT point. Later on 16
+      November the author added a numerical check with Evan Daniel's exactsolve.py, at 80
+      digits, which gave no result at 204: the load rests on 30 corner-on-corner touches, the
+      solver found no smooth equilibrium and its Newton step diverged, so the author claims
+      nothing either way at this count.
 
       Credit Tomáš Kodaj (https://www.kaggle.com/tomkodaj) as the packing's finder and JoeGun
       (https://github.com/JonathanGun/square-packing-upper-bounds) as its improver, as the
@@ -48385,13 +48400,16 @@ results:
       could not solve the witness, at 80 or at 100 digits, so it drew no view and states no
       candidate.
 
+      The author's own run of the same solver, added after the filing from the binary64 pose,
+      also fails at 204 (packing/resources/web/joegun-local-minimum-2026-11-16).
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
       exact verifier, is the packing-witness verify the source ran, from the package whose
       promotion made the coordinates. Licensed CC BY 4.0 by LICENSE.md at the pin, which
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
-      think-71uq, which holds no import. No human oversight or optimality is claimed.
+      think-71uq, which holds no import. No human oversight or global optimality is claimed.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 16 November, is
@@ -48448,15 +48466,21 @@ results:
       of T-275.
 
       The issue says this repository's packing-witness verify, run unmodified from this
-      repository's main, reports VERIFIED (exact-algebraic, 26796 pairs), and that check.py,
-      an exact checker the author wrote apart from this repository's code in Fraction
-      arithmetic with no tolerance and no distance filter, reports VALID; both outputs are
-      retained. This repository's packing-witness promote --strategy robust-rational
-      --max-side-increase 1e-11 made the exact coordinates from a binary64 pose whose centres
-      the author first pushed away from the centroid by a factor of at least 1 + 1e-12, so
-      packing-witness verify does not check the rounding independently, as the issue says. No
-      local-optimality, rigidity or KKT claim is made. Those statements are the author's; no
+      repository's main, reports VERIFIED (exact-algebraic, 26796 pairs), and that check.py, an
+      exact checker the author wrote apart from this repository's code in Fraction arithmetic
+      with no tolerance and no distance filter, reports VALID; both outputs are retained. This
+      repository's packing-witness promote --strategy robust-rational --max-side-increase 1e-11
+      made the exact coordinates from a binary64 pose whose centres the author first pushed away
+      from the centroid by a factor of at least 1 + 1e-12, so packing-witness verify does not
+      check the rounding independently, as the issue says. Those statements are the author's; no
       source program ran here.
+
+      When filed, the issue claimed no local optimality, rigidity or KKT point. Later on 16
+      November the author added a numerical check with Evan Daniel's exactsolve.py, at 80
+      digits: it reports the exact touching point near the certificate, 4.0164e-9 below its
+      side, a KKT point and a local minimum of the side, strict up to 110 flat motions, so not
+      rigid. At this count it moved 22 loose squares into the contact system. The author says
+      the check is not a proof and claims no lower side.
 
       Credit Tomáš Kodaj (https://www.kaggle.com/tomkodaj) as the packing's finder and JoeGun
       (https://github.com/JonathanGun/square-packing-upper-bounds) as its improver, as the
@@ -48591,13 +48615,18 @@ results:
       times the certificate's own contraction margin, held at row 3 as a register candidate
       and not admitted (RV-3, think-ruu2).
 
+      The author's own run of the same solver, added after the filing from the binary64 pose,
+      reaches the same point, equal to the driver's in every digit both print, with the same
+      second-order verdict (packing/resources/web/joegun-local-minimum-2026-11-16). That is
+      context for RV-3, not a registration.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
       exact verifier, is the packing-witness verify the source ran, from the package whose
       promotion made the coordinates. Licensed CC BY 4.0 by LICENSE.md at the pin, which
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
-      think-71uq, which holds no import. No human oversight or optimality is claimed.
+      think-71uq, which holds no import. No human oversight or global optimality is claimed.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 16 November, is
@@ -48655,15 +48684,20 @@ results:
       of T-186.
 
       The issue says this repository's packing-witness verify, run unmodified from this
-      repository's main, reports VERIFIED (exact-algebraic, 34716 pairs), and that check.py,
-      an exact checker the author wrote apart from this repository's code in Fraction
-      arithmetic with no tolerance and no distance filter, reports VALID; both outputs are
-      retained. This repository's packing-witness promote --strategy robust-rational
-      --max-side-increase 1e-11 made the exact coordinates from a binary64 pose whose centres
-      the author first pushed away from the centroid by a factor of at least 1 + 1e-12, so
-      packing-witness verify does not check the rounding independently, as the issue says. No
-      local-optimality, rigidity or KKT claim is made. Those statements are the author's; no
+      repository's main, reports VERIFIED (exact-algebraic, 34716 pairs), and that check.py, an
+      exact checker the author wrote apart from this repository's code in Fraction arithmetic
+      with no tolerance and no distance filter, reports VALID; both outputs are retained. This
+      repository's packing-witness promote --strategy robust-rational --max-side-increase 1e-11
+      made the exact coordinates from a binary64 pose whose centres the author first pushed away
+      from the centroid by a factor of at least 1 + 1e-12, so packing-witness verify does not
+      check the rounding independently, as the issue says. Those statements are the author's; no
       source program ran here.
+
+      When filed, the issue claimed no local optimality, rigidity or KKT point. Later on 16
+      November the author added a numerical check with Evan Daniel's exactsolve.py, at 80
+      digits: it reports the exact touching point near the certificate, 1.9066e-11 below its
+      side, a KKT point and a local minimum of the side, strict up to 155 flat motions, so not
+      rigid. The author says the check is not a proof and claims no lower side.
 
       Credit Tomáš Kodaj (https://www.kaggle.com/tomkodaj) as the packing's finder and JoeGun
       (https://github.com/JonathanGun/square-packing-upper-bounds) as its improver, as the
@@ -48794,13 +48828,18 @@ results:
       1.007 times the certificate's own contraction margin and beyond it, held at row 3 as a
       register candidate and not admitted (RV-3, think-ruu2).
 
+      The author's own run of the same solver, added after the filing from the binary64 pose,
+      reaches the same point, equal to the driver's in every digit both print, with the same
+      second-order verdict (packing/resources/web/joegun-local-minimum-2026-11-16). That is
+      context for RV-3, not a registration.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
       exact verifier, is the packing-witness verify the source ran, from the package whose
       promotion made the coordinates. Licensed CC BY 4.0 by LICENSE.md at the pin, which
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
-      think-71uq, which holds no import. No human oversight or optimality is claimed.
+      think-71uq, which holds no import. No human oversight or global optimality is claimed.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 16 November, is
@@ -48859,15 +48898,20 @@ results:
       of T-174.
 
       The issue says this repository's packing-witness verify, run unmodified from this
-      repository's main, reports VERIFIED (exact-algebraic, 46360 pairs), and that check.py,
-      an exact checker the author wrote apart from this repository's code in Fraction
-      arithmetic with no tolerance and no distance filter, reports VALID; both outputs are
-      retained. This repository's packing-witness promote --strategy robust-rational
-      --max-side-increase 1e-11 made the exact coordinates from a binary64 pose whose centres
-      the author first pushed away from the centroid by a factor of at least 1 + 1e-12, so
-      packing-witness verify does not check the rounding independently, as the issue says. No
-      local-optimality, rigidity or KKT claim is made. Those statements are the author's; no
+      repository's main, reports VERIFIED (exact-algebraic, 46360 pairs), and that check.py, an
+      exact checker the author wrote apart from this repository's code in Fraction arithmetic
+      with no tolerance and no distance filter, reports VALID; both outputs are retained. This
+      repository's packing-witness promote --strategy robust-rational --max-side-increase 1e-11
+      made the exact coordinates from a binary64 pose whose centres the author first pushed away
+      from the centroid by a factor of at least 1 + 1e-12, so packing-witness verify does not
+      check the rounding independently, as the issue says. Those statements are the author's; no
       source program ran here.
+
+      When filed, the issue claimed no local optimality, rigidity or KKT point. Later on 16
+      November the author added a numerical check with Evan Daniel's exactsolve.py, at 80
+      digits: it reports the exact touching point near the certificate, 1.9146e-10 below its
+      side, a KKT point and a local minimum of the side, strict up to 132 flat motions, so not
+      rigid. The author says the check is not a proof and claims no lower side.
 
       Credit Tomáš Kodaj (https://www.kaggle.com/tomkodaj) as the packing's finder and JoeGun
       (https://github.com/JonathanGun/square-packing-upper-bounds) as its improver, as the
@@ -48998,13 +49042,18 @@ results:
       1.004 times the certificate's own contraction margin and beyond it, held at row 3 as a
       register candidate and not admitted (RV-3, think-ruu2).
 
+      The author's own run of the same solver, added after the filing from the binary64 pose,
+      reaches the same point, equal to the driver's in every digit both print, with the same
+      second-order verdict (packing/resources/web/joegun-local-minimum-2026-11-16). That is
+      context for RV-3, not a registration.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
       exact verifier, is the packing-witness verify the source ran, from the package whose
       promotion made the coordinates. Licensed CC BY 4.0 by LICENSE.md at the pin, which
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
-      think-71uq, which holds no import. No human oversight or optimality is claimed.
+      think-71uq, which holds no import. No human oversight or global optimality is claimed.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 16 November, is

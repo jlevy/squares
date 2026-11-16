@@ -19,6 +19,10 @@ differing. The issue was edited at 06:38:44Z, and its only change names `0aac839
 place of `bc10ce4`.
 So the files retained here are the tree both commits hold, and the pin stays `bc10ce4`,
 the commit the lane read, which is on no branch now.
+A later commit, `5971b95` (09:28:39Z), adds the author’s numerical local-minimum check
+and leaves every file retained here unchanged; the
+[joegun-local-minimum-2026-11-16 packet](../joegun-local-minimum-2026-11-16/README.md)
+retains it (lane L188, think-664l).
 
 Intake lane L187 (think-0y9m) retained it, replayed it and measured it on 16 November
 2026 and registers it as **T-305** to **T-309**, one result a count.
@@ -60,9 +64,15 @@ November 2026 under the house rule.
   five, and refused three broken copies of the n = 127 witness. The README says the
   promotion used this repository’s tool, so `packing-witness verify` does not check the
   rounding independently and `check.py` does. Neither ran here.
-- **Not claimed.** No local-optimality, rigidity or KKT analysis, no proof-assistant
-  check, no human review outside this project, and no measurement of the least pair or
-  contraction margin.
+- **Not claimed at the pin.** No local-optimality, rigidity or KKT analysis, no
+  proof-assistant check, no human review outside this project, and no measurement of the
+  least pair or contraction margin. Later on 16 November the author added a numerical
+  check with Evan Daniel’s `exactsolve.py`, which the
+  [local-minimum packet](../joegun-local-minimum-2026-11-16/README.md) retains: it
+  reports the exact touching point near the certificate at 127, 232, 264 and 305 a KKT
+  point and a local minimum, strict up to flat motions, so not rigid, and no result at
+  204. The author says the check is numerical, at 80 digits, and not a proof, and claims
+  no lower side.
 - **Other public values.** The Kaggle per-puzzle leaderboard (read 16 November 04:38 UTC)
   lists side-only entries below the claims at all five counts, which state no packing.
   Kodaj’s notebook also holds n = 270 at 16.927469594094, below the record’s
@@ -247,13 +257,18 @@ Daniel’s driver certified a KKT local minimum below the side at 127, 232, 264 
 273, 1.007 and 1.004 times the certificate’s own contraction margin and beyond it at
 each; each is held at row 3 as a register candidate and not admitted (RV-3). At 204 its
 exact solve failed, so it drew no view there.
+The author’s own run of the same solver, added after the filing, reaches the same four
+points, equal in every digit both print, and fails at 204 too
+([the comparison](../joegun-local-minimum-2026-11-16/README.md#against-the-record)).
 
 ## What Is Not Established
 
 - **Kodaj’s packings and JoeGun’s steps**: the issue’s account; the notebook was not
   reachable here, and the fault-line DP’s donors were not recorded by the source.
-- **Local optimality, rigidity or KKT**: not claimed by the source and not established
-  here.
+- **Local optimality, rigidity or KKT**: not claimed by the source at the pin. Its later
+  revision reports a numerical KKT point and local minimum at four of the five counts,
+  which it says is not a proof, and the record’s driver reached the same points; the
+  record registers none of it, and RV-3 holds the four points.
 - **Human oversight**: no record is retained.
 
 ## Credit and Licence
@@ -268,7 +283,8 @@ words. The bibliography key is **[JoeGun upper bounds 2026-11-16]**.
 under CC BY 4.0 and `check.py` under MIT, copyright 2026 JoeGun; it says it covers the
 author’s own contribution and does not change the terms of Kodaj’s work.
 `make-pose.py` is named by no licence line and is retained under the presumption of
-permission for a source its author submitted (think-cnn7).
+permission for a source its author submitted (think-cnn7); `LICENSE.md` at the later
+revision licenses it under MIT.
 The licence of Kodaj’s notebook was not checked by the source and could not be read here;
 whether a seeded packing needs a notice of its own is the owner’s question think-71uq,
 which holds no import.
