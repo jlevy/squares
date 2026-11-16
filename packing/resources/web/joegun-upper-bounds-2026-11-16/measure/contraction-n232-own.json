@@ -1,0 +1,49 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 232,
+ "certificate": {
+  "label": "joegun-1001",
+  "input": "packet",
+  "packet": "joegun-upper-bounds-2026-11-16"
+ },
+ "side": "15759531627556573/1000000000000000",
+ "lambda_star": "1000000000000000/1000000000000997",
+ "one_minus_lambda_star": "9.970000e-13",
+ "binding_pair": [
+  188,
+  197
+ ],
+ "contracted_side": "15759531627557570/1000000000000997",
+ "margin": "14715253032673903281/1000000000000997000000000000000",
+ "margin_float": "1.471525e-11",
+ "certificate_routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "997/1000000000000000",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "997/1000000000000000",
+   "failures": []
+  }
+ },
+ "routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes_accept": true,
+ "cpu_seconds": 14.61
+}

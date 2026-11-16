@@ -2815,13 +2815,17 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: name, as the finder at 90 (T-303), in the same pass, where the grid credited no one, so
 #: the hold holds jazivxt there. Lane L181 (think-32cl) credits Joost de Winter as the
 #: improver at 90 (T-304, in the pass of 16 November), a name the block already prints, so
-#: the hold still holds jazivxt alone there.
+#: the hold still holds jazivxt alone there. Lane L187 (think-0y9m) credits Tomáš Kodaj as
+#: the finder and JoeGun as the improver at 127, 204, 232, 264 and 305 (T-305 to T-309, in
+#: the same pass), two new names, so the hold holds both there, and Özden no longer at 232,
+#: where no case record names him now.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(
-        (156, 172, 179, 180, 199, 232, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
+        (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
     ),
     **dict.fromkeys((147, 228), ("Roberto Ono",)),
     90: ("jazivxt",),
+    **dict.fromkeys((127, 204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
 }
 #: The infographic edition the hold was set under. While the hold is not empty, a version
 #: bump or a poster drawn for any other edition fails the pull-request suite

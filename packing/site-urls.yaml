@@ -5547,7 +5547,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/128.html
   canonical: cases/128.html
@@ -6235,7 +6235,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-05'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -6483,7 +6483,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-09'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/233.html
   canonical: cases/233.html
@@ -6763,7 +6763,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/265.html
   canonical: cases/265.html
@@ -7131,7 +7131,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/306.html
   canonical: cases/306.html
@@ -24727,6 +24727,201 @@ urls:
     - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/check-n90-997.json
     - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/controls-n90-997.json
     - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/compare-997-996.json
+- path: result/t-305.html
+  canonical: result/t-305.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 127
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-127-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n127.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n127.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n127.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n127-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-306.html
+  canonical: result/t-306.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-204-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n204.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n204.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n204.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n204-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-307.html
+  canonical: result/t-307.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 232
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-232-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n232.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n232.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n232.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n232-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-308.html
+  canonical: result/t-308.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 264
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-264-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n264.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n264.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n264.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n264-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-309.html
+  canonical: result/t-309.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 305
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-305-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n305.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n305.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n305.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n305-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
 - path: results.html
   canonical: results.html
   kind: page

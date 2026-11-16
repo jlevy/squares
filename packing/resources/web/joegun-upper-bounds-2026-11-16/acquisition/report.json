@@ -1,0 +1,44 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1001",
+  "author": "JoeGun",
+  "source_key": "[JoeGun upper bounds 2026-11-16]",
+  "report_evidence": "E-joegun-1001-certificate-report",
+  "receipt_format": "joegun-1001-exact-replay-v1",
+  "witness_prefix": "W-joegun-1001-n",
+  "claim_limitations": "Complete 2026-11-16 exact rational corner certificates at 127, 204, 232, 264 and 305, read exactly from the retained source files n-NNN-candidate.yaml at bc10ce4 in JonathanGun/square-packing-upper-bounds, the commit jlevy/squares#1001 named when filed, whose tree 0aac839e re-commits: JoeGun's improvements of Tomas Kodaj's public Kaggle packings, their exact coordinates made by this repository's packing-witness promote. Finite construction feasibility only; local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-16",
+  "read_at_main": "31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba",
+  "certificates": [
+    {"n": 127, "path": "n-127-candidate.yaml", "format": "witness-corners", "offered": "11.801753890487", "first_committed": "2026-11-16T05:31:52Z"},
+    {"n": 204, "path": "n-204-candidate.yaml", "format": "witness-corners", "offered": "14.802646843107", "first_committed": "2026-11-16T05:31:52Z"},
+    {"n": 232, "path": "n-232-candidate.yaml", "format": "witness-corners", "offered": "15.759531627557", "first_committed": "2026-11-16T05:31:52Z"},
+    {"n": 264, "path": "n-264-candidate.yaml", "format": "witness-corners", "offered": "16.773807598002", "first_committed": "2026-11-16T05:31:52Z"},
+    {"n": 305, "path": "n-305-candidate.yaml", "format": "witness-corners", "offered": "17.945762359659", "first_committed": "2026-11-16T05:31:52Z"}
+  ],
+  "requested": [127, 204, 232, 264, 305],
+  "replayed": [127, 204, 232, 264, 305],
+  "houses": [
+    {"n": 127, "reader": "[PingYou PR 574 certificates 2026-10-13]", "source_key": "[PingYou PR 574 certificates 2026-10-13]", "holders": "Ryan Xu, improved by Francisco Couzo and PingYou Ltd", "result": "T-174", "reported_value": "11.81087878758917984", "verified_value": "11.81087878758917984", "evidence": ["E-pingyou-574-exact-feasibility"]},
+    {"n": 204, "reader": "[Daniel issue 914 2026-11-05]", "source_key": "[Daniel issue 914 2026-11-05]", "holders": "Evan Daniel", "result": "T-268", "reported_value": "14.8043613836518588", "verified_value": "14.8043613836518588", "evidence": ["E-evand-914-exact-feasibility", "E-evand-914-review-exact-feasibility"]},
+    {"n": 232, "reader": "[Özden s232 upper bound 2026-11-09]", "source_key": "[Özden s232 upper bound 2026-11-09]", "holders": "Alex Chilton, improved by Francisco Couzo and Doğa Özden", "result": "T-275", "reported_value": "15.7614096448817244", "verified_value": "15.7614096448817244", "evidence": ["E-ozden-927-exact-feasibility", "E-ozden-927-review-exact-feasibility"]},
+    {"n": 264, "reader": "[Mishapolk KKT refinements 2026-10-14]", "source_key": "[Mishapolk KKT refinements 2026-10-14]", "holders": "Daniil Ostashev, improved by PingYou Ltd and Mishapolk", "result": "T-186", "reported_value": "16.77473513238783285", "verified_value": "16.77473513238783285", "evidence": ["E-mishapolk-70a033f-exact-feasibility"]},
+    {"n": 305, "reader": "[PingYou PR 574 certificates 2026-10-13]", "source_key": "[PingYou PR 574 certificates 2026-10-13]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo and PingYou Ltd", "result": "T-174", "reported_value": "17.95046648213771228", "verified_value": "17.95046648213771228", "evidence": ["E-pingyou-574-exact-feasibility"]}
+  ],
+  "pending": [],
+  "register": {
+    "title": "PLACEHOLDER",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-0y9m",
+    "bibliography": {
+      "authors": ["JoeGun"],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER"
+    }
+  }
+}

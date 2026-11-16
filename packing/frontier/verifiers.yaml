@@ -8931,3 +8931,67 @@ verifiers:
       the addendum's under addendum-997/. l180_plan_facts.py, l180_make_plan.py,
       l180_describe.py and the addendum's l182 programs, kept beside them, decide no
       certificate and are not registered.
+  - id: V-joegun-1001-review-check
+    program: l186_check.py with l186_reader.py, l186_sat.py, l186_clip.py, l186_decide.py and l186_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 16 November stage 4 review's exact checker of JoeGun's five rational corner
+      Witness/v2 certificates of issue 1001 (127, 204, 232, 264 and 305), with a strict reader
+      of its own (l186_reader.py: one YAML document with no anchors, aliases, tags, duplicate
+      keys, tabs or carriage returns; the softschema envelope and the Witness/v2 keys; corners,
+      rational scalars, the lower-left origin; ids 1 to n in order; every scalar p or p/q, its
+      canonical form recorded): every square a unit square, every wall and every pair twice
+      with no distance filter, by separating axes on each square's corners written over one
+      integer denominator, in Python integers (l186_sat.py, method A), and by exact
+      Sutherland-Hodgman clipping in gmpy2.mpq, each square a unit square by its sides and
+      diagonals, each pair clipped both ways round and each wall classed by clipping against
+      its outer half-plane, containment decided by area (l186_clip.py, method B);
+      l186_decide.py runs both and requires their classes to agree, and l186_check.py adds the
+      file's digest and the claim's 12-place arithmetic. l186_geom.py holds the closed form by
+      centres and half-extents the self-test and controls use; l186_controls.py decides 32
+      controls a count stated as rules in a plan hashed before any certificate was read;
+      l186_selftest.py holds both methods and the reader to 73,784 checks.
+    source:
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_check.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_reader.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_sat.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_clip.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_decide.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_geom.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_selftest.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_controls.py
+    independence_record: docs/project/reviews/review-2026-11-16-joegun-1001.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 1001 (L186, under think-skt8),
+            strong tier (tbd-strong, not the tbd-strong-max tier the runbook names), prompted
+            separately from the import lane (L187, think-0y9m)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1001 says AI agents wrote and ran the search code, the checker and the filing
+          under JoeGun's direction, and that this repository's packing-witness promote made the
+          exact coordinates. The eight checker files and the controls plan were frozen at
+          2026-11-16T06:18:03Z (frozen/checker-frozen-digests.txt), before their author read the
+          author's README, check.py, outputs or decimal poses, or this repository's witness,
+          verifier or promotion code; they import nothing from this repository or the source and
+          reuse no code of any earlier review, lane L180's, the model for its method, among
+          them, whose programs it did not open.
+    note: >-
+      Written and run on 16 November 2026 for
+      docs/project/reviews/review-2026-11-16-joegun-1001.md, and kept with its receipts in the
+      review-only directory joegun-1001-review-2026-11-16 beside the import lane's packet.
+      l186_describe.py, l186_custody.py, l186_author_outputs.py and l186_sides.py, kept beside
+      them, decide no certificate and are not registered.

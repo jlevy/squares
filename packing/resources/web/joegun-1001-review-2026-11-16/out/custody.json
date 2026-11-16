@@ -1,0 +1,181 @@
+{
+ "pin": "bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+ "head": "bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+ "remote_head": "bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+ "pin_is_remote_head": true,
+ "pin_is_ancestor_of_remote_head": true,
+ "commits": [
+  {
+   "hash": "bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+   "author_time": "2026-11-16T12:31:52+07:00",
+   "committer_time": "2026-11-16T12:31:52+07:00",
+   "subject": "exact witnesses for s(127), s(204), s(232), s(264), s(305)"
+  }
+ ],
+ "tree_at_pin": [
+  {
+   "path": "LICENSE-evand-square-packing.txt",
+   "kind": "blob",
+   "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "size": 1068
+  },
+  {
+   "path": "LICENSE.md",
+   "kind": "blob",
+   "blob": "2c971d4e54f4271fa1f43d213d987964d248437f",
+   "size": 1761
+  },
+  {
+   "path": "README.md",
+   "kind": "blob",
+   "blob": "91667ef3cb484419309745ef1dd31f81d857d598",
+   "size": 6986
+  },
+  {
+   "path": "check-output.txt",
+   "kind": "blob",
+   "blob": "6816ab8810537082e043cc2c3639188b351bae75",
+   "size": 582
+  },
+  {
+   "path": "check.py",
+   "kind": "blob",
+   "blob": "e1a2c00e25002813899ab93c5ddf21bda95dc20c",
+   "size": 2377
+  },
+  {
+   "path": "make-pose.py",
+   "kind": "blob",
+   "blob": "2f807ee53395a145e143fdbe93e00237f7fd3d2c",
+   "size": 1705
+  },
+  {
+   "path": "n-127-candidate.yaml",
+   "kind": "blob",
+   "blob": "52e23a6100cc3763007de7456317aac006f7e2bd",
+   "size": 372780
+  },
+  {
+   "path": "n-127-decimal-pose.yaml",
+   "kind": "blob",
+   "blob": "4bdc363866ed624ed3b5400c5a6277cb26ece82a",
+   "size": 14438
+  },
+  {
+   "path": "n-204-candidate.yaml",
+   "kind": "blob",
+   "blob": "35f53a50758760f2b3045f2f6ced7f91553e16e9",
+   "size": 601168
+  },
+  {
+   "path": "n-204-decimal-pose.yaml",
+   "kind": "blob",
+   "blob": "292f91faf4f5926ca28f432db0c1cc50aad23b16",
+   "size": 22817
+  },
+  {
+   "path": "n-232-candidate.yaml",
+   "kind": "blob",
+   "blob": "9cd6b1db2a484f745c9c0d950c9bfc341b4359b0",
+   "size": 190549
+  },
+  {
+   "path": "n-232-decimal-pose.yaml",
+   "kind": "blob",
+   "blob": "445295c859541c042cb9e04c47f2711af0959364",
+   "size": 23129
+  },
+  {
+   "path": "n-264-candidate.yaml",
+   "kind": "blob",
+   "blob": "ff75da55f46611124806e99d0535cf3685dedfec",
+   "size": 552782
+  },
+  {
+   "path": "n-264-decimal-pose.yaml",
+   "kind": "blob",
+   "blob": "e80e1b532c8afba3fb71f3ad135152624fbb0a6a",
+   "size": 28288
+  },
+  {
+   "path": "n-305-candidate.yaml",
+   "kind": "blob",
+   "blob": "c33b57cc2f90e0810df685bcc556889f7134d3b3",
+   "size": 807561
+  },
+  {
+   "path": "n-305-decimal-pose.yaml",
+   "kind": "blob",
+   "blob": "fd3fc9dfd68f349e49f254474d9a39c744116ad4",
+   "size": 33635
+  },
+  {
+   "path": "packing-witness-verify.txt",
+   "kind": "blob",
+   "blob": "5209a39ba404c46c3dda1e0afefd215e959c7b40",
+   "size": 2685
+  }
+ ],
+ "files_differing_pin_to_remote_head": [],
+ "candidates": {
+  "127": {
+   "path": "n-127-candidate.yaml",
+   "sha256_at_pin": "9bde48b76afce9ab7d20d6d180650d0a6bbe46b7f106573f8155dfe9ed9d06f0",
+   "issue_sha256": "9bde48b76afce9ab7d20d6d180650d0a6bbe46b7f106573f8155dfe9ed9d06f0",
+   "matches_issue": true,
+   "sha256_at_every_commit": {
+    "bc10ce471c9d": "9bde48b76afce9ab7d20d6d180650d0a6bbe46b7f106573f8155dfe9ed9d06f0"
+   },
+   "unchanged_at_every_commit": true
+  },
+  "204": {
+   "path": "n-204-candidate.yaml",
+   "sha256_at_pin": "1daa0e09b5b403e4e47048104c760f3d8a9b6997d77d26a30930bf1e257ea90c",
+   "issue_sha256": "1daa0e09b5b403e4e47048104c760f3d8a9b6997d77d26a30930bf1e257ea90c",
+   "matches_issue": true,
+   "sha256_at_every_commit": {
+    "bc10ce471c9d": "1daa0e09b5b403e4e47048104c760f3d8a9b6997d77d26a30930bf1e257ea90c"
+   },
+   "unchanged_at_every_commit": true
+  },
+  "232": {
+   "path": "n-232-candidate.yaml",
+   "sha256_at_pin": "93d856c25c9f75842ca5e36552ccb726e87884440689c9ce4100d2a58d5a279d",
+   "issue_sha256": "93d856c25c9f75842ca5e36552ccb726e87884440689c9ce4100d2a58d5a279d",
+   "matches_issue": true,
+   "sha256_at_every_commit": {
+    "bc10ce471c9d": "93d856c25c9f75842ca5e36552ccb726e87884440689c9ce4100d2a58d5a279d"
+   },
+   "unchanged_at_every_commit": true
+  },
+  "264": {
+   "path": "n-264-candidate.yaml",
+   "sha256_at_pin": "14fef8f163b2cdb9062f714cdd41d81dce2447691a2de55e3797810cdcd676ee",
+   "issue_sha256": "14fef8f163b2cdb9062f714cdd41d81dce2447691a2de55e3797810cdcd676ee",
+   "matches_issue": true,
+   "sha256_at_every_commit": {
+    "bc10ce471c9d": "14fef8f163b2cdb9062f714cdd41d81dce2447691a2de55e3797810cdcd676ee"
+   },
+   "unchanged_at_every_commit": true
+  },
+  "305": {
+   "path": "n-305-candidate.yaml",
+   "sha256_at_pin": "14d2e37e22218defb238e0b0e657f139bab0c2873cc3d05f781b0f3b13a75494",
+   "issue_sha256": "14d2e37e22218defb238e0b0e657f139bab0c2873cc3d05f781b0f3b13a75494",
+   "matches_issue": true,
+   "sha256_at_every_commit": {
+    "bc10ce471c9d": "14d2e37e22218defb238e0b0e657f139bab0c2873cc3d05f781b0f3b13a75494"
+   },
+   "unchanged_at_every_commit": true
+  }
+ },
+ "issue": {
+  "number": 1001,
+  "created_at": "2026-11-16T05:33:07Z",
+  "fetched_at": "2026-11-16T06:35:25Z",
+  "comments": 0,
+  "labels": [
+   "intake"
+  ]
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "127": {
+  "verify_verdict": "VERIFIED",
+  "verify_side_equals_exact_side": true,
+  "verify_pairs": 8001,
+  "check_py_verdict": "VALID",
+  "check_py_side_float": "11.801753890486488",
+  "check_py_side_float_equals_float_of_side": true,
+  "check_py_pairs": 8001,
+  "pairs_here": 8001
+ },
+ "204": {
+  "verify_verdict": "VERIFIED",
+  "verify_side_equals_exact_side": true,
+  "verify_pairs": 20706,
+  "check_py_verdict": "VALID",
+  "check_py_side_float": "14.802646843106611",
+  "check_py_side_float_equals_float_of_side": true,
+  "check_py_pairs": 20706,
+  "pairs_here": 20706
+ },
+ "232": {
+  "verify_verdict": "VERIFIED",
+  "verify_side_equals_exact_side": true,
+  "verify_pairs": 26796,
+  "check_py_verdict": "VALID",
+  "check_py_side_float": "15.759531627556573",
+  "check_py_side_float_equals_float_of_side": true,
+  "check_py_pairs": 26796,
+  "pairs_here": 26796
+ },
+ "264": {
+  "verify_verdict": "VERIFIED",
+  "verify_side_equals_exact_side": true,
+  "verify_pairs": 34716,
+  "check_py_verdict": "VALID",
+  "check_py_side_float": "16.773807598001998",
+  "check_py_side_float_equals_float_of_side": true,
+  "check_py_pairs": 34716,
+  "pairs_here": 34716
+ },
+ "305": {
+  "verify_verdict": "VERIFIED",
+  "verify_side_equals_exact_side": true,
+  "verify_pairs": 46360,
+  "check_py_verdict": "VALID",
+  "check_py_side_float": "17.945762359658971",
+  "check_py_side_float_equals_float_of_side": true,
+  "check_py_pairs": 46360,
+  "pairs_here": 46360
+ }
+}

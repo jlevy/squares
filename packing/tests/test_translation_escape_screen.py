@@ -137,6 +137,10 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: touching three walls: both joined. The same pass (think-i8y9) moved it at 90, from the
 #: grid to jazivxt's certificate (T-303), a contact arrangement opened by about 1.2e-12
 #: between pairs and 2.1e-15 from the left and bottom walls: 90 joined.
+#: The pass of 16 November 2026 (think-0y9m) moved it at 127 and 305 from T-174, at 204
+#: from T-268, 232 from T-275 and 264 from T-186, to JoeGun's certificates (T-305 to T-309),
+#: each opened from contact by about 1e-11 or 1e-12 between pairs and touching three walls:
+#: 127 and 305 joined, and 204, 232 and 264 stayed.
 #: Re-screening the adopted counts with the screen's own `--update --n` rebuilds the
 #: retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -158,6 +162,11 @@ GOLDEN_UNSTABLE = {
         90,
         105,
         106,
+        # 127 joined on 16 November 2026 with JoeGun's certificate there (T-305,
+        # think-0y9m), a near-contact arrangement opened by about 1.1e-11; 204, 232 and
+        # 264 stayed with his certificates there (T-306 to T-308), and 305 joined with
+        # T-309, opened the same way.
+        127,
         129,
         # 132 left on 11 November 2026: Joost de Winter's certificate there (T-292,
         # think-bcfs) is stable across tolerances.
@@ -185,6 +194,11 @@ GOLDEN_UNSTABLE = {
         90,
         105,
         106,
+        # 127 joined on 16 November 2026 with JoeGun's certificate there (T-305,
+        # think-0y9m), a near-contact arrangement opened by about 1.1e-11; 204, 232 and
+        # 264 stayed with his certificates there (T-306 to T-308), and 305 joined with
+        # T-309, opened the same way.
+        127,
         129,
         # 132 left on 11 November 2026: Joost de Winter's certificate there (T-292,
         # think-bcfs) is stable across tolerances.
@@ -237,6 +251,7 @@ GOLDEN_UNSTABLE = {
         # 303 left on 9 November 2026: Doğa Özden's certificate there (T-278, think-463r)
         # is stable across tolerances.
         304,
+        305,
         307,
     ],
 }

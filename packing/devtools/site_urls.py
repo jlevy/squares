@@ -116,7 +116,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "cases/204.html": (
-        430_000,
+        475_000,
         (
             "Twelve verified certificates and a section for each of the eight that have "
             "been the house, each listing every other side; prepared HTML measures "
@@ -132,7 +132,11 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "adoption at 204 moves the ceiling as its own measured choice (think-w64i's "
             "candidate, above T-268's side, is no longer one). Its timing was not "
             "re-measured. How a page that grows with every adoption scales is the question "
-            "think-rp0d asks of result/t-046.html and of these case pages."
+            "think-rp0d asks of result/t-046.html and of these case pages. The adoption of "
+            "T-306 (#1001, think-0y9m) on 16 November 2026 took it to 437,813 bytes in the "
+            "hosted published build (run 43829225469), 27,429 bytes more, past 430,000, so "
+            "the ceiling moves to 475,000 as a measured choice for one more adoption at that "
+            "growth; its timing was not re-measured."
         ),
     ),
     "result/t-007.html": (
@@ -247,12 +251,17 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-174.html": (
-        350_000,
+        375_000,
         (
             "The complete 68-case result and its 89-step history with prepared math "
             "measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS "
             "checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and "
-            "blocking <=123 ms."
+            "blocking <=123 ms. Main measures 348,784 bytes on 16 November 2026 "
+            "(31ddae6fe), and 353,469 once T-305 and T-309 (#1001) are listed at 127 and "
+            "305, about 2.3 KB a result, past the 350,000 ceiling, and 353,877 once they "
+            "are adopted there in T-174's place, so the ceiling moves to 375,000 as a "
+            "measured choice, room for about 9 more listed results. Those are byte "
+            "measurements only; the timing is owed under think-v4me."
         ),
     ),
     "result/t-180.html": (

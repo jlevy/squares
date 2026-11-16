@@ -788,6 +788,7 @@
     "packing/tests/test_upper_bound_reports_l160_1114.py": 6.045,
     "packing/tests/test_upper_bound_reports_l164_1114.py": 6.135,
     "packing/tests/test_upper_bound_reports_l181_1115.py": 0.068,
+    "packing/tests/test_upper_bound_reports_l187_1116.py": 10.412,
     "packing/tests/test_upper_bound_reports_l65_1109.py": 3.397,
     "packing/tests/test_upper_bound_reports_n204.py": 0.429,
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 7.404,
@@ -1070,6 +1071,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/lean-disk-price-l181-2026-11-16.json",
           "provenance": {},
           "tests": 8
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_l187_1116.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-l187-1116-2026-11-16.json",
+          "provenance": {},
+          "tests": 12
         }
       ]
     }

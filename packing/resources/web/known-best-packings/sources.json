@@ -750,19 +750,19 @@
       "url": "https://github.com/evand/square-packing/blob/268af529546176a25224ea3b2c7d29cef8d9e911/search/trio126/n126_xu.cert"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n127.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-127-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         127
       ],
       "n": 127,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-127.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-127-candidate.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-16",
       "source_n": 127,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n127.cert.json"
+      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-127-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1334,19 +1334,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-203a.svg"
     },
     {
-      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/bb4cc78e5b35103c1f177db55e9cf08974e66563/search/packer/candidates/s204_trig1.cert at bb4cc78e5b35103c1f177db55e9cf08974e66563",
+      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-204-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         204
       ],
       "n": 204,
-      "path": "resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s204_trig1.cert",
+      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-204-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-05",
+      "retrieved": "2026-11-16",
       "source_n": 204,
-      "url": "https://github.com/evand/square-packing/blob/bb4cc78e5b35103c1f177db55e9cf08974e66563/search/packer/candidates/s204_trig1.cert"
+      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-204-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1540,19 +1540,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-231.svg"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s232-upper-bound/blob/09e324f447d20e10b79de410ad9950a2772c955d/n-232-candidate.yaml at 09e324f447d20e10b79de410ad9950a2772c955d",
+      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-232-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
       "kind": "packet-derived-facts",
-      "license_status": "CC-BY-4.0",
+      "license_status": "no-licence-published",
       "listed_n": [
         232
       ],
       "n": 232,
-      "path": "resources/web/ozden-s232-upper-bound-2026-11-09/source/n-232-candidate.yaml",
+      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-232-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-09",
+      "retrieved": "2026-11-16",
       "source_n": 232,
-      "url": "https://github.com/kenaznia-doga/s232-upper-bound/blob/09e324f447d20e10b79de410ad9950a2772c955d/n-232-candidate.yaml"
+      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-232-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1791,19 +1791,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n263.cert.json"
     },
     {
-      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n264.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-264-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         264
       ],
       "n": 264,
-      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-264.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-264-candidate.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-16",
       "source_n": 264,
-      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n264.cert"
+      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-264-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -2163,19 +2163,19 @@
       "url": "https://github.com/evand/square-packing/blob/bb4cc78e5b35103c1f177db55e9cf08974e66563/search/packer/candidates/s304_1105.cert"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n305.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-305-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         305
       ],
       "n": 305,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-305.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-305-candidate.yaml",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-16",
       "source_n": 305,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n305.cert.json"
+      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-305-candidate.yaml"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n306.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

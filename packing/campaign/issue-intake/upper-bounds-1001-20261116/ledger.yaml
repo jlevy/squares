@@ -1,0 +1,188 @@
+format: intake-ledger-v1
+read_at_main: 31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba
+read_on: '2026-11-16'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l187
+  branch: claude/bold-ritchie-xo28us-l187
+  commit: 31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba
+  note: The packet's claim record, written on the lane's branch from main 31ddae6fe and read
+    here by path.
+reports:
+- report: '#1001'
+  url: https://github.com/jlevy/squares/issues/1001
+  kind: issue
+  holders: JoeGun
+  reported_at: '2026-11-16T05:33:07Z'
+  bead: think-0y9m
+  claims:
+  - n: 127
+    printed: '11.801753890487'
+    rounding: up
+    exact: 368804809077457982551017198167347779750094696668821068814871800313247114202264862111075465879336305616808374656763389551386033794503461566463280498575770254175114333271171918646511474353/31249999999979261899021210916765976993221943323624580072898874796714503274737688886542022813067352330315985743578748912216578649229374453938789999255502236591051359160810000000000000000
+    exact_from: packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l187@31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba
+    first_committed: '2026-11-16T05:31:52Z'
+    measured:
+      against: T-174
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves 123 squares
+        beyond 1e-3, 105 beyond 1e-2 and 70 beyond 0.1 (largest 0.954869) and turns squares
+        by up to 34.87 degrees; 56 squares are tilted beyond a degree, 26.42 to 31.83 degrees,
+        all turned the same way, against T-174's 48 (7.30 to 34.87); the house witness and
+        its regularized view measure as T-174; a new arrangement relative to the record's
+        packing
+      source: packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n127.json
+    new_packing:
+      source: '#1001: ''Each packing below is a public Kaggle packing by Tomáš Kodaj (tomkodaj)
+        that we improved further. Please credit him as the finder.'' Its step at 127: fault-line
+        DP, 2026-11-13 10:42 UTC.'
+      continues: Tomáš Kodaj's public Kaggle packing of 127 squares (his Kaggle notebook squares-in-squares-22-1636),
+        11.801765635430 as the issue quotes it, by JoeGun's fault-line DP
+    note: T-174's uniform-contraction margin at 127 is 0, its squares 33 and 42 touching,
+      so the gain, 9.1249e-3, lies wholly outside any padding (packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n127.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 1.2099e-10 (squares
+      89 and 93; contraction-n127-own.json), and the source says JoeGun's step from Kodaj's
+      side is 1.174e-5, about 9.7e4 times it.
+  - n: 204
+    printed: '14.802646843107'
+    rounding: up
+    exact: 37006617107763534914381969496642325090313922292189244598162441802514930384141697918601013363876301972168260049832223152529132990760926895687358737464701143836389/2499999999999797653843391556716939166342334689359543674751234334074845094565549368200731770467367112211656055765377908426348009547706423924908102500000000000000
+    exact_from: packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l187@31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba
+    first_committed: '2026-11-16T05:31:52Z'
+    measured:
+      against: T-268
+      finding: no symmetry of the box pairs it one to one with T-268's packing by nearest
+        centres; the optimal assignment (symmetry 5) moves 199 squares beyond 1e-3, 112 beyond
+        1e-2 and 73 beyond 0.1 (largest 1.09835) and turns squares by up to 28.87 degrees;
+        99 squares are tilted beyond a degree, 1.38 to 27.72 degrees, all turned the same
+        way, against T-268's 63 (25.39 to 31.24) turned the other way; against T-264, the
+        house before it, 44 beyond 0.1 under the identity; the house witness and its regularized
+        view measure as T-268; a new arrangement relative to the record's packings
+      source: packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n204.json
+    new_packing:
+      source: '#1001: ''Each packing below is a public Kaggle packing by Tomáš Kodaj (tomkodaj)
+        that we improved further. Please credit him as the finder.'' Its step at 204: fault-line
+        DP, 2026-11-13 10:42 UTC.'
+      continues: Tomáš Kodaj's public Kaggle packing of 204 squares (his Kaggle notebook squares-in-squares-22-1636),
+        14.802646907234 as the issue quotes it, by JoeGun's fault-line DP
+    note: T-268's uniform-contraction margin is 1.4804e-19, its squares 126 and 134 binding,
+      wall slack included, so the gain, 1.7145e-3, about 1.2e16 times it, lies wholly outside
+      T-268's padding (packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n204.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 1.5463e-10 (squares
+      8 and 109; contraction-n204-own.json), and the source says JoeGun's step from Kodaj's
+      side is 6.41e-8, about 415 times it; Kodaj's packing is not in hand, so its margin is
+      not measured.
+  - n: 232
+    printed: '15.759531627557'
+    rounding: up
+    exact: 15759531627556573/1000000000000000
+    exact_from: packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l187@31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba
+    first_committed: '2026-11-16T05:31:52Z'
+    measured:
+      against: T-275
+      finding: no symmetry of the box pairs it one to one with T-275's packing by nearest
+        centres; the optimal assignment (symmetry 7) moves 221 squares beyond 1e-3, 98 beyond
+        1e-2 and 35 beyond 0.1 (largest 1.15939) and turns squares by up to 38.71 degrees,
+        with 25 tilts beyond a degree reversed; 65 squares are tilted beyond a degree, 24.72
+        to 31.72 degrees, 40 one way and 25 the other, against T-275's 80 all one way (1.46
+        to 32.00); against T-256, the house before it, 39 beyond 0.1; the house witness and
+        its regularized view measure as T-275; a new arrangement relative to the record's
+        packings
+      source: packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n232.json
+    new_packing:
+      source: '#1001: ''Each packing below is a public Kaggle packing by Tomáš Kodaj (tomkodaj)
+        that we improved further. Please credit him as the finder.'' Its step at 232: fault-line
+        DP, 2026-11-13 10:42 UTC.'
+      continues: Tomáš Kodaj's public Kaggle packing of 232 squares (his Kaggle notebook squares-in-squares-22-1636),
+        15.759531732104 as the issue quotes it, by JoeGun's fault-line DP
+    note: T-275's uniform-contraction margin is 2.9978e-12, its squares 48 and 165 binding,
+      wall slack included, so the gain, 1.8780e-3, about 6.3e8 times it, lies wholly outside
+      T-275's padding (packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n232.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 1.4715e-11 (squares
+      188 and 197, the least-gap pair; contraction-n232-own.json), and the source says JoeGun's
+      step from Kodaj's side is 1.045e-7, about 7.1e3 times it; Kodaj's packing is not in
+      hand, so its margin is not measured.
+  - n: 264
+    printed: '16.773807598002'
+    rounding: up
+    exact: 1048362974875124931200045135165846110458139868651210718423626556399934406292049263215086241095736335587279162207436980729666772855226622435076783155619594773642655806836365008121431358257863038539839030649644483414811/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000
+    exact_from: packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l187@31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba
+    first_committed: '2026-11-16T05:31:52Z'
+    measured:
+      against: T-186
+      finding: no symmetry of the box pairs it one to one with T-186's packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves 244 squares
+        beyond 1e-3, 115 beyond 1e-2 and 44 beyond 0.1 (largest 0.774758) and turns squares
+        by up to 35.77 degrees, with 26 tilts beyond a degree reversed; 71 squares are tilted
+        beyond a degree, 5.82 to 29.30 degrees, 26 one way and 45 the other, against T-186's
+        78 all one way (3.55 to 31.62); the house witness and its regularized view measure
+        as T-186; a new arrangement relative to the record's packing
+      source: packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n264.json
+    new_packing:
+      source: '#1001: ''Each packing below is a public Kaggle packing by Tomáš Kodaj (tomkodaj)
+        that we improved further. Please credit him as the finder.'' Its step at 264: a 600
+        s quench with Evan Daniel''s code, 2026-11-14 09:42 UTC.'
+      continues: Tomáš Kodaj's public Kaggle packing of 264 squares (his Kaggle notebook squares-in-squares-22-1636),
+        16.773891500852 as the issue quotes it, by a quench with Evan Daniel's code
+    note: T-186's uniform-contraction margin is 1.677e-99, its squares 6 and 18 binding, wall
+      slack included, so the gain, 9.2753e-4, lies wholly outside T-186's padding (packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n264.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 1.8929e-11 (squares
+      255 and 256; contraction-n264-own.json), and the source says JoeGun's step from Kodaj's
+      side is 8.390e-5.
+  - n: 305
+    printed: '17.945762359659'
+    rounding: up
+    exact: 22432202949573659991942173956529152808577153681031809496468978191991097019864450272196946216427200390472679174243901295485002015812113258834366472573101561652792664711496616817728103461/1249999999999997100960847885460054098104996389860412855010210414522198707530904713369930874290708839072633382353381813917631394494089640876600195017526602824665719927690000000000000000
+    exact_from: packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l187@31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba
+    first_committed: '2026-11-16T05:31:52Z'
+    measured:
+      against: T-174
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves 289 squares
+        beyond 1e-3, 179 beyond 1e-2 and 113 beyond 0.1 (largest 1.09202) and turns squares
+        by up to 44.82 degrees, with 32 tilts beyond a degree reversed; 92 squares are tilted
+        beyond a degree, 1.64 to 33.44 degrees, all turned the same way, against T-174's 89
+        (4.46 to 33.38), 48 one way and 41 the other; the house witness and its regularized
+        view measure as T-174; a new arrangement relative to the record's packing
+      source: packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n305.json
+    new_packing:
+      source: '#1001: ''Each packing below is a public Kaggle packing by Tomáš Kodaj (tomkodaj)
+        that we improved further. Please credit him as the finder.'' Its steps at 305: two
+        quench runs with Evan Daniel''s code (2026-11-13 13:41 UTC) and the fault-line DP
+        (23:40 UTC).'
+      continues: Tomáš Kodaj's public Kaggle packing of 305 squares (his Kaggle notebook squares-in-squares-22-1636),
+        17.946298110350 as the issue quotes it, by quenches with Evan Daniel's code and JoeGun's
+        fault-line DP
+    note: T-174's uniform-contraction margin at 305 is 0, its squares 290 and 291 touching,
+      so the gain, 4.7041e-3, lies wholly outside any padding (packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n305.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 1.9066e-10 (squares
+      130 and 137; contraction-n305-own.json), and the source says JoeGun's step from Kodaj's
+      side is 5.358e-4.
+  note: '#1001 named bc10ce4 when filed, committed at 2026-11-16T05:31:52Z, 75 seconds before
+    it, then the repository''s only commit and its head; an edit at 06:38Z names 0aac839e,
+    a re-commit of the same tree, in its place. It asks for credit to Tomáš Kodaj as the finder
+    at all five counts, improved by JoeGun, and the quench to Evan Daniel, and says credit
+    to Kodaj alone is fair at 204 and 232, where JoeGun''s part is below 2e-7. It says the
+    exact coordinates come from this repository''s packing-witness promote, and that AI agents
+    wrote and ran the search code, the checker and the filing, under JoeGun''s direction.'
+exceptions: []
+key_reason_candidates: []
+other_items:
+- issue: '#1001'
+  url: https://github.com/jlevy/squares/issues/1001
+  holders: Tomáš Kodaj
+  kind: quoted side, not claimed
+  bead: think-0y9m
+  disposition: 'The issue quotes Kodaj''s notebook holding n = 270 at 16.927469594094, below
+    the record''s 16.928148603343 (T-283), and says JoeGun did not improve it, so it is not
+    claimed. No packing is in hand: the notebook was not reachable from this session, so nothing
+    is walked or registered at 270.'
+cross_check: []

@@ -35311,3 +35311,166 @@ issues:
       names no bead. It says that nothing the author asked for is still queued, so the issue
       is closed with it, and that answers are welcome at any time. The issue was closed as
       completed at 02:51:58Z; it has no comment but the reply, and read_through moves to it.
+  - number: 1001
+    title: "s(127), s(204), s(232), s(264), s(305): lowered upper bounds on Tomáš Kodaj's public packings: registration request"
+    author: JonathanGun
+    opened: '2026-11-16'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      JoeGun asks for the registration of five upper bounds, s(127), s(204), s(232), s(264) and
+      s(305), printed 11.801753890487, 14.802646843107, 15.759531627557, 16.773807598002 and
+      17.945762359659, each rounded up at 12 places from the exact rational side of a corner
+      Witness/v2 certificate in JonathanGun/square-packing-upper-bounds at bc10ce4, made by this
+      repository's packing-witness promote, and each below the record at 31ddae6: 9.12e-3 below
+      T-174 at 127, 1.71e-3 below T-268 at 204, 1.88e-3 below T-275 at 232, 9.28e-4 below T-186
+      at 264 and 4.70e-3 below T-174 at 305. It says each packing is a public Kaggle packing by
+      Tomáš Kodaj that JoeGun improved further, by a fault-line DP of his own and by quenches with
+      Evan Daniel's code, and asks that Kodaj be credited as the finder, JoeGun as the improver
+      and Evan Daniel for the quench, with credit to Kodaj alone fair at 204 and 232, where
+      JoeGun's part is below 2e-7. It quotes Kodaj's n = 270, below the record, as not claimed.
+      Triaged, retained and registered on 16 November 2026 in lane L187 (think-0y9m) as T-305 to
+      T-309: each print rounds up from its exact side, both maintained exact routes accept each
+      certificate and refuse its gross and sharp controls, and each is a new arrangement relative
+      to its house's packing, measured. The stage 4 review of 16 November (lane L186,
+      think-skt8) accepts all five with fifteen findings, all notes, and 160 of 160 controls
+      as stated, so each entry is confirmed, independently re-implemented, at V3/C3, S3, and the
+      cases adopted them as their houses in the pass of 16 November.
+    read_through: '2026-11-16T05:33:07Z'
+    results:
+    - key: n127-kodaj-improved
+      claim: >-
+        s(127) <= 11.801753890487 rounded up at 12 places (the exact rational side of
+        n-127-candidate.yaml at JonathanGun/square-packing-upper-bounds bc10ce4), Tomáš Kodaj's
+        public Kaggle packing improved by JoeGun's fault-line DP.
+      source: body
+      register:
+      - T-305
+      evidence:
+      - E-joegun-1001-certificate-report
+      - E-joegun-1001-exact-feasibility
+      - E-joegun-1001-review-exact-feasibility
+    - key: n204-kodaj-improved
+      claim: >-
+        s(204) <= 14.802646843107 rounded up at 12 places (the exact rational side of
+        n-204-candidate.yaml at bc10ce4), Tomáš Kodaj's public Kaggle packing improved by
+        JoeGun's fault-line DP.
+      source: body
+      register:
+      - T-306
+      evidence:
+      - E-joegun-1001-certificate-report
+      - E-joegun-1001-exact-feasibility
+      - E-joegun-1001-review-exact-feasibility
+    - key: n232-kodaj-improved
+      claim: >-
+        s(232) <= 15.759531627556573 (the exact side of n-232-candidate.yaml at bc10ce4, printed
+        15.759531627557), Tomáš Kodaj's public Kaggle packing improved by JoeGun's fault-line DP.
+      source: body
+      register:
+      - T-307
+      evidence:
+      - E-joegun-1001-certificate-report
+      - E-joegun-1001-exact-feasibility
+      - E-joegun-1001-review-exact-feasibility
+    - key: n264-kodaj-improved
+      claim: >-
+        s(264) <= 16.773807598002 rounded up at 12 places (the exact rational side of
+        n-264-candidate.yaml at bc10ce4), Tomáš Kodaj's public Kaggle packing improved by a
+        quench with Evan Daniel's code.
+      source: body
+      register:
+      - T-308
+      evidence:
+      - E-joegun-1001-certificate-report
+      - E-joegun-1001-exact-feasibility
+      - E-joegun-1001-review-exact-feasibility
+    - key: n305-kodaj-improved
+      claim: >-
+        s(305) <= 17.945762359659 rounded up at 12 places (the exact rational side of
+        n-305-candidate.yaml at bc10ce4), Tomáš Kodaj's public Kaggle packing improved by
+        quenches with Evan Daniel's code and JoeGun's fault-line DP.
+      source: body
+      register:
+      - T-309
+      evidence:
+      - E-joegun-1001-certificate-report
+      - E-joegun-1001-exact-feasibility
+      - E-joegun-1001-review-exact-feasibility
+    - key: n270-kodaj-quoted
+      claim: >-
+        Kodaj's notebook holds n = 270 at 16.927469594094, below the record's 16.928148603343
+        (T-283), which the issue quotes and does not claim.
+      source: body
+      not_registered: >-
+        Not claimed by the issue, and no packing is in hand: Kodaj's notebook was not reachable
+        from this session. Nothing is walked or registered at 270.
+      queued: false
+    beads:
+    - think-0y9m
+    - think-skt8
+    answer_bead: think-0y9m
+    replies: []
+    close_when: >-
+      T-305 to T-309 are on main with the stage 4 review mapped and each adopted as its case's
+      house, and the reply on main says what was retained, replayed and reviewed and that the
+      cases adopted them.
+    notes: >-
+      Read on 16 November 2026 from main 31ddae6fe; no comment on the issue, which carried the
+      intake label when read. The issue named bc10ce4 (05:31:52Z), 75 seconds before it, then
+      the repository's only commit and its head at 06:01Z; the five certificates have the
+      SHA-256 digests the issue lists. GitHub's activity log was not read, so the issue dates
+      the claims. The history was rewritten later that day: 0aac839e (06:37:41Z), a re-commit
+      of the same tree, took its place, and the issue was edited at 06:38Z, its only change
+      naming 0aac839e in place of bc10ce4. The packet keeps bc10ce4, the commit read,
+      as its pin, on no branch now.
+
+      The record credits people, not AI agents (attribution.md): the issue says AI
+      agents wrote and ran the search code, the checker and the filing under JoeGun's direction,
+      which is stated and not credited. Licensed CC BY 4.0 (witnesses, poses, outputs, text) and
+      MIT (check.py) by LICENSE.md at the pin, which leaves Kodaj's terms unchanged; the licence
+      of Kodaj's notebook was not checked by the source and could not be read here, since
+      www.kaggle.com was refused by this session's proxy, and whether a seeded packing needs a
+      notice of its own is the owner's question think-71uq, which holds no import.
+
+      Measured against padding, each house's uniform-contraction margin is 0 at 127 and 305,
+      1.48e-19 at 204, 3.00e-12 at 232 and 1.68e-99 at 264, wall slack included, so every gain,
+      9.3e-4 or more, is no predecessor's padding and RV-3 (think-ruu2) does not reach these
+      entries. Each certificate's own margin, 1.47e-11 to 1.91e-10, is the owner's RV-3 question
+      and is not registered. The L-step scan finds that no bound carries to another count.
+
+      Measured pose by pose, each certificate is a new arrangement relative to its house's
+      packing: no symmetry pairs them one to one by nearest centres, and the optimal assignment
+      moves 35 to 113 squares beyond a tenth. Kodaj's packings are not in hand, so the steps the
+      issue attributes to JoeGun (1.174e-5, 6.41e-8, 1.045e-7, 8.390e-5 and 5.358e-4) are its
+      account. At 204 and 232 the issue says credit to Kodaj alone would be fair; the record
+      keeps JoeGun as the improver there too, since each certified side is his and nothing here
+      measures Kodaj's, and leaves that offer to the owner.
+
+      The side-only Kaggle leaderboard entries the issue quotes below each claim state no packing
+      and are no reports.
+
+      The stage 4 review (docs/project/reviews/review-2026-11-16-joegun-1001.md, lane L186,
+      think-skt8) agrees with the replay everywhere both measured: the least pair margins
+      (1.12027e-11 at 127, 1.12031e-11 at 204, 997/10^15 at 232, 1.2e-12 at 264 and
+      1.12509e-11 at 305, at the same pairs), the exact wall contacts, the margins of each house
+      and certificate and the identity against each house. It adds that each side is the
+      packing's extent in one direction, the other short by 3.9e-16 to 5.3e-15 (F4), that the
+      near pairs are opened by about 1e-11 or 1e-12 (F5), the files' own provenance words (F7)
+      and the custody (F8), and finds check.py sound, its format check an assert that python -O
+      strips (F12). Its seven questions for the author hold no rung: Kodaj's parent packings,
+      his notebook's licence, what the fault-line programme moved at 204 and 232, the export's
+      push factor, the side's slack, check.py's assert and the programme itself. The review was
+      written by the strong tier, not the strong-max tier the runbook names.
+
+      This lane read the review at 06:56Z, after its own replay, controls, measurements (06:34Z)
+      and registration (06:45Z) were committed.
+
+      Adopted at 127 and 305 (from T-174), 204 (from T-268), 232 (from T-275) and 264 (from
+      T-186) in the pass of 16 November 2026 under the house rule, with Tomáš Kodaj each
+      packing's finder and JoeGun its improver. Both strong generators ran on the new
+      witnesses, and grid-slack's same-side view is drawn at every count; Evan Daniel's certified
+      KKT solves below the side at 127, 232, 264 and 305, each beyond the certificate's own
+      contraction margin, are held at row 3 for RV-3 (think-ruu2, think-ikku), and his driver
+      could not solve 204. No reply has been posted.

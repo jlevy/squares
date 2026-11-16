@@ -635,7 +635,8 @@ def _sources() -> dict[str, Source]:
             packet_source("T-267", "evand-issue914-2026-11-05"),
             "[Daniel issue 914 n175 2026-11-05]",
         ),
-        packet_source("T-268", "evand-issue914-2026-11-05"),
+        # The pass of 16 November 2026 (think-0y9m) moved 204, T-268's only house, to JoeGun's
+        # T-306, so T-268 is no source here now.
         _keyed(
             packet_source("T-269", "evand-issue914-2026-11-05"),
             "[Daniel issue 914 n260 2026-11-05]",
@@ -646,7 +647,8 @@ def _sources() -> dict[str, Source]:
         # T-270, 299 from T-263 and 303 from T-272 to Doğa Özden's further arrangements of
         # issues 927 to 931, T-275 to T-279, one packet each; T-256, T-263, T-270 and T-272
         # keep no house here now.
-        packet_source("T-275", "ozden-s232-upper-bound-2026-11-09"),
+        # The pass of 16 November 2026 (think-0y9m) moved 232, T-275's only house, to JoeGun's
+        # T-307, so T-275 is no source here now.
         packet_source("T-277", "ozden-s299-upper-bound-2026-11-09"),
         packet_source("T-278", "ozden-s303-upper-bound-2026-11-09"),
         packet_source("T-279", "ozden-s307-upper-bound-2026-11-09"),
@@ -715,6 +717,16 @@ def _sources() -> dict[str, Source]:
         # his local search improved it, jazivxt its finder. 90 was T-303's only count, so
         # T-303 is no source here now.
         packet_source("T-304", "de-winter-s90-upper-bound-2026-11-15"),
+        # Lane L187 (think-0y9m) moved 127 and 305 from T-174, 204 from T-268, 232 from T-275
+        # and 264 from T-186 to JoeGun's issue 1001 in the pass of 16 November 2026: Tomáš
+        # Kodaj's public Kaggle packings as JoeGun improved them, each a new arrangement
+        # relative to the house it replaces, one result a count read from one packet. T-174
+        # and T-186 keep their other houses.
+        packet_source("T-305", "joegun-upper-bounds-2026-11-16"),
+        packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
+        packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
+        packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
+        packet_source("T-309", "joegun-upper-bounds-2026-11-16"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -816,7 +828,12 @@ def _sources() -> dict[str, Source]:
 #: the first packing below the grid at 90, jazivxt its finder after de Winter. Lane L181
 #: (think-32cl) adopted Joost de Winter's issue 997 (T-304) at 90 in place of T-303 in the
 #: pass of 16 November 2026, T-303's packing as his local search improved it, jazivxt its
-#: finder and de Winter its improver; T-303 keeps no house here.
+#: finder and de Winter its improver; T-303 keeps no house here. Lane L187 (think-0y9m)
+#: adopted JoeGun's issue 1001 in the same pass, Tomáš Kodaj's public Kaggle packings as
+#: JoeGun improved them, Kodaj their finder and JoeGun their improver, each a new arrangement
+#: relative to the house it replaces: T-305 at 127 and T-309 at 305 from T-174, T-306 at 204
+#: from T-268, T-307 at 232 from T-275 and T-308 at 264 from T-186; T-268 and T-275 keep no
+#: house here, and T-174 and T-186 still house other counts.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -831,7 +848,7 @@ ADOPTED: dict[int, str] = {
     110: "T-174",
     123: "T-193",
     126: "T-139",
-    127: "T-174",
+    127: "T-305",
     129: "T-186",
     130: "T-259",
     131: "T-174",
@@ -852,7 +869,7 @@ ADOPTED: dict[int, str] = {
     182: "T-243",
     183: "T-220",
     199: "T-284",
-    204: "T-268",
+    204: "T-306",
     206: "T-174",
     207: "T-174",
     208: "T-174",
@@ -862,7 +879,7 @@ ADOPTED: dict[int, str] = {
     227: "T-225",
     228: "T-301",
     229: "T-225",
-    232: "T-275",
+    232: "T-307",
     236: "T-218",
     237: "T-295",
     238: "T-174",
@@ -874,7 +891,7 @@ ADOPTED: dict[int, str] = {
     260: "T-269",
     261: "T-174",
     263: "T-174",
-    264: "T-186",
+    264: "T-308",
     267: "T-134",
     268: "T-289",
     269: "T-297",
@@ -890,7 +907,7 @@ ADOPTED: dict[int, str] = {
     302: "T-193",
     303: "T-278",
     304: "T-273",
-    305: "T-174",
+    305: "T-309",
     306: "T-174",
     307: "T-279",
     308: "T-221",
@@ -1032,7 +1049,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: Winter's issue 997, which replaced his issue 996's certificate, from T-303: the pass of 15
 #: November had already moved 90 (lane L170), and a day's archive holds one prior state a
 #: count, as at 179, 228, 260, 268 and 269. Lane L181 made the import on 15 November and the
-#: adoption on 16 November.
+#: adoption on 16 November. The same pass (think-3guf, think-0y9m, lane L187) adopted JoeGun's
+#: issue 1001, Tomáš Kodaj's public Kaggle packings as JoeGun improved them, at 127 and 305
+#: from T-174 (T-305, T-309), 204 from T-268 (T-306), 232 from T-275 (T-307) and 264 from
+#: T-186 (T-308); none of the five had moved that day, so the day's archive takes a row for
+#: each beside 90's.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1122,7 +1143,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-13": frozenset({269}),
     "2026-11-14": frozenset({228, 297}),
     "2026-11-15": frozenset({90, 147, 228}),
-    "2026-11-16": frozenset({90}),
+    "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
 }
 
 

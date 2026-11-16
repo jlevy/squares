@@ -1847,6 +1847,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # replaced his issue 996's certificate, a local search's improvement of jazivxt's T-303;
     # his watched repository, its centre-direction JSON.
     "[de Winter s90 upper bound 2026-11-15]": _import("de-winter-s90-upper-bound-2026-11-15"),
+    # Lane L187 of 16 November (think-0y9m): JoeGun's issue 1001 at 127, 204, 232, 264 and
+    # 305, his improvements of Tomas Kodaj's public Kaggle packings; corner Witness/v2 files
+    # made by this repository's promotion tool, in one repository and one packet.
+    "[JoeGun upper bounds 2026-11-16]": _import("joegun-upper-bounds-2026-11-16"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
