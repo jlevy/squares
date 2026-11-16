@@ -29015,6 +29015,17 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/914#issuecomment-6914444483
+      date: '2026-11-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204-daniel
+        id: T-268
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-267 to T-273 are on main and the reply on main says what was retained, replayed and
       reviewed, that the seven are adopted, and that nothing the author asked for is queued.
@@ -29060,6 +29071,20 @@ issues:
       issue's results and are not recorded under reported. It follows #894's and #895's
       supersession follow-ups of 6 November, and the posted text is lane L67's draft but
       for a blank line before the footer; the issue stays closed.
+
+      The follow-up of 16 November 2026 (issuecomment-6914444483, posted by jlevy at
+      10:55:42Z), after #1002 merged with T-305 to T-309's import, review and adoption, is
+      recorded in lane L188 (think-664l). It answers the final reply's statement of T-268 as
+      current. It says that on 16 November #1001 (JoeGun, improving a public packing by Tomáš
+      Kodaj) was registered as T-306 and adopted at 204, 1.7145e-3 below this packing (#1002);
+      that T-268 itself is unchanged, at V3/C3, confirmed; that its position is now
+      superseded; and that it stays in the record as the house it was until 16 November.
+      T-306 is #1001's result, named as context, and is not recorded under reported; the
+      follow-up names no evidence id and no bead. It says that nothing else in the earlier
+      reply changes and that the issue stays closed. It names no reply in `corrects`, as
+      #989's follow-up of the same day does: T-268's moved position is a field the register
+      shows, which `reported` records, and the final reply was not wrong when made.
+      read_through stays at the author's last comment.
   - number: 918
     title: ': registration request'
     author: adnuubhai-ux
@@ -29357,6 +29382,17 @@ issues:
       - result: n232-from-t256
         id: E-ozden-927-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/927#issuecomment-6914444869
+      date: '2026-11-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n232-from-t256
+        id: T-275
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-275 is on main at V3/C3 as the house at 232, and the reply on main says what was retained and
       replayed, what the review found and that the case adopted it.
@@ -29404,6 +29440,20 @@ issues:
       and changes nothing. The comment ends that this result is the best published packing with
       a certificate, not the smallest side anyone has scored. The same correction was committed
       to the repository's README as f76f2d0 (20:53:15Z), read in campaign/intake-watch.yaml.
+
+      The follow-up of 16 November 2026 (issuecomment-6914444869, posted by jlevy at
+      10:55:43Z), after #1002 merged with T-305 to T-309's import, review and adoption, is
+      recorded in lane L188 (think-664l). It answers the final reply's statement of T-275 as
+      current. It says that on 16 November #1001 (JoeGun, improving a public packing by Tomáš
+      Kodaj) was registered as T-307 and adopted at 232, 1.8780e-3 below this packing (#1002);
+      that T-275 itself is unchanged, at V3/C3, confirmed; that its position is now
+      superseded; and that it stays in the record as the house it was until 16 November.
+      T-307 is #1001's result, named as context, and is not recorded under reported; the
+      follow-up names no evidence id and no bead. It says that nothing else in the earlier
+      reply changes and that the issue stays closed. It names no reply in `corrects`, as
+      #989's follow-up of the same day does: T-275's moved position is a field the register
+      shows, which `reported` records, and the final reply was not wrong when made.
+      read_through stays at the author's last comment.
   - number: 928
     title: 's(268) ≤ 16.872469897837: improved packing (registration request)'
     author: kenaznia-doga
