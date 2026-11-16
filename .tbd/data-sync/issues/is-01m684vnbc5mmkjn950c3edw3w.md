@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 364
+version: 365
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -120,7 +120,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T12:31:19.183Z
+updated_at: 2026-11-16T12:58:31.023Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -330,3 +330,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-16T11:57Z: #1003 (L188: #1001's local-minimum source read, 'no KKT claim' statements corrected, #914/#927 follow-ups recorded) merged at 67cf4484d; Pages verified (43860362355). #1001 final reply posted (issuecomment-6915717106) and issue closed. Records lane L191 opened for it; think-0y9m and think-664l close after it merges.
 - 2026-11-16T11:58Z renewal (intake315): only the #1001 reply/close rows, owned by L191. Nothing else new.
 - 2026-11-16T12:45Z: #1004 (L191 records of the #1001 reply) merged at f9ddfeeef; think-0y9m and think-664l closed after check_bead_tree. #1001 complete; intake queue empty again.
+- 2026-11-16T12:58Z renewal (intake316): 0 unowned items, 0 closeable; queue empty, no lanes.
