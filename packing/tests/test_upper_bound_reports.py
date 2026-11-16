@@ -274,8 +274,9 @@ L164_1114 = ("ono-issue984-2026-11-14", "ono-issue985-2026-11-14")
 #: repository with no licence, submitted by the account dpre4ai.
 L170_1115 = "jazivxt-s90-upper-bound-2026-11-15"
 #: The intake pass's lane L181 of 15 November 2026 (`test_upper_bound_reports_l181_1115`):
-#: Joost de Winter's #996 at 90, a local-search improvement of jazivxt's T-303; his
-#: centre-direction JSON, read by ``center-direction-json``, under MIT.
+#: Joost de Winter's #997 at 90, which replaced his #996's certificate, a local-search
+#: improvement of jazivxt's T-303; his centre-direction JSON, read by
+#: ``center-direction-json``, under MIT.
 L181_1115 = "de-winter-s90-upper-bound-2026-11-15"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
@@ -1400,7 +1401,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
     # to #931, #935, #936, #938, #943 to #947, #954, #959, #960 and #962, Yim's #895 and de
-    # Winter's #958, #977, #979 and #996 touches the box. Couzo's #672 touches at 229 and clears
+    # Winter's #958, #977, #979 and #997 touches the box. Couzo's #672 touches at 229 and clears
     # every wall at 227, so its walls mix, as de Winter's #941 does, whose borders touch the
     # box and whose other certificates clear it; every other source's clear it.
     walls = {

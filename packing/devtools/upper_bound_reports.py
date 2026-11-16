@@ -1843,8 +1843,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # dpre4ai, a window of copies of a crop of Joost de Winter's 157 (T-293), the first below
     # the 10 x 10 grid; one repository and one packet, its certificate in Evan Daniel's text.
     "[jazivxt s90 upper bound 2026-11-15]": _import("jazivxt-s90-upper-bound-2026-11-15"),
-    # Lane L181 of 15 November (think-32cl): Joost de Winter's issue 996 at 90, which a local
-    # search found from jazivxt's T-303; his watched repository, its centre-direction JSON.
+    # Lane L181 of 15 November (think-32cl): Joost de Winter's issue 997 at 90, which
+    # replaced his issue 996's certificate, a local search's improvement of jazivxt's T-303;
+    # his watched repository, its centre-direction JSON.
     "[de Winter s90 upper bound 2026-11-15]": _import("de-winter-s90-upper-bound-2026-11-15"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
