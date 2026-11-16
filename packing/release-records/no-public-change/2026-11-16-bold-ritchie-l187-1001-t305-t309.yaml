@@ -4,12 +4,20 @@ components:
   - paper:n11-threshold-bound-review
   - paper:square-packing-methods-survey
 paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
   - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
+  - packing/devtools/default_drawings.py
   - packing/devtools/site_resources.py
   - packing/devtools/site_urls.py
+  - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
+  - packing/frontier/n-127.md
   - packing/frontier/results.yaml
   - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
 outputs:
   - papers/n11-lower-bounds-explainer.html
   - papers/n11-lower-bounds-explainer.md
@@ -21,21 +29,26 @@ outputs:
   - papers/square-packing-methods-survey.md
 reason: >-
   Intake lane L187 of 16 November (think-0y9m): JoeGun's issue 1001 is retained and replayed,
-  and its five certificates are registered as T-305 to T-309, read by the existing
-  witness-corners adapter; the importer gains the packet's house reader, and the requests
-  entry for #1001, the coverage source, an other-projects card and result/t-174.html's page
-  budget, measured, follow. No paper prints these counts' records, these entries, that card or
-  that budget. Against origin/main 31ddae6fe (#1000): devtools.compare_paper_renders
-  rendered each paper into empty site directories, the math passes in /usr/bin/google-chrome
-  (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of the six paths
-  above swapped in. The optimality review, the threshold-bound review and the methods survey
-  are byte-identical across the three, 43 files each. The explainer's 55 files are
-  deterministic, and only its Markdown and HTML differ from the baseline; rendered again by
-  hand from this tree and from a checkout of main, the one difference in each is the register
-  count the explainer reads (registered_results, "one of N results the framework has
-  registered so far"), 309 here and 304 on main. The novelty count is unchanged (T-305 to
-  T-309 are previously-published), and the bound citation it reads is n = 11's, which this
-  change does not touch. So the change is the live register count, which follows the site's
-  data and is not a revision of the paper, as the L71 to L181 records say. No PDF was
-  printed; each prints from that HTML. Every paper keeps its version: v0.4.35, v0.1.11,
-  v0.1.4 and v0.2.7.
+  its five certificates are registered as T-305 to T-309, read by the existing
+  witness-corners adapter, the stage 4 review is mapped, and the cases adopt them at 127, 204,
+  232, 264 and 305 in the pass of 16 November, in place of T-174, T-268, T-275, T-186 and
+  T-174. The importer gains the packet's house reader; the house writer gains the five
+  results' prose and credits, their sources and the pass; the regularization record takes
+  127's earlier settlement off; and the requests entry, the coverage source, an other-projects
+  card, the bound citations, the composite figure, the gate's screen totals, the print-credit
+  hold and result/t-174.html's measured page budget follow. No paper prints those counts'
+  records, these entries, that card or that budget. Against origin/main 31ddae6fe (#1000):
+  devtools.compare_paper_renders rendered each paper into empty site directories, the math
+  passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that
+  main's copies of the fourteen paths above swapped in. The optimality review, the
+  threshold-bound review and the methods survey are byte-identical across the three, 43 files
+  each. The explainer's 55 files are deterministic, and only its Markdown and HTML differ from
+  the baseline; rendered again by hand from this tree and from a checkout of main, the one
+  difference in each is the register count the explainer reads (registered_results, "one of N
+  results the framework has registered so far"), 309 here and 304 on main. The novelty count
+  is unchanged (T-305 to T-309 are previously-published), the bound citation it reads is
+  n = 11's, which this change does not touch, and the composite figure's entries at the five
+  counts change without reaching the explainer's text, as the renders show. So the change is
+  the live register count, which follows the site's data and is not a revision of the paper,
+  as the L71 to L181 records say. No PDF was printed; each prints from that HTML. Every paper
+  keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
