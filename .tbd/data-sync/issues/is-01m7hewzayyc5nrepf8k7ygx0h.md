@@ -5,7 +5,7 @@ title: "Import #1001: JoeGun's five upper bounds on Kodaj's packings (s(127), s(
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: bold-ritchie-l187
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-16T05:57:22.906Z
-updated_at: 2026-11-16T06:34:48.395Z
+updated_at: 2026-11-16T07:03:45.421Z
 started_at: 2026-11-16T05:58:26.297Z
 ---
 
@@ -23,3 +23,6 @@ L187 (bold-ritchie-l187), 2026-11-16: claimed 05:58Z (claimed [think-0y9m], skip
 Controls plan stated before any program decided any certificate: scratch l187-notes/controls-plan-1001.md SHA-256 6c25dc71c13eb471a0d2d6118c9f1131bbf8aa9a87839dab1b9624991b6cad35, hashed 06:03:24Z; 15 gross jobs (3 per count) and 55 sharp rows (11 per count), with the touching-wall branch (expected at 232) and the touching-pair branch stated in advance.
 
 Intake commit b3a0c1b01 (06:34:00Z): packet joegun-upper-bounds-2026-11-16 (whole tree, 16 retained + Evan Daniel's notice pinned; CC BY 4.0 / MIT; check.py, make-pose.py never run). Replay: 15 jobs on both routes, 819,474 pair decisions, 252 route CPU-s, check --replay re-decided all 15 (4.9 min); all 55 sharp controls as stated (plan 6c25dc71, 06:03:24Z), touching-wall branch at every count; least wall clearance 0, least pair gaps 1.1203e-11 (127: 50,54), 1.1203e-11 (204: 8,109), 9.97e-13 (232: 188,197), 1.2e-12 (264: 255,256), 1.1251e-11 (305: 130,137). Gains below houses: 127 T-174 9.1249e-3; 204 T-268 1.7145e-3; 232 T-275 1.8780e-3; 264 T-186 9.2753e-4; 305 T-174 4.7041e-3. Identity: not 1:1 with any house; 70/73/35/44/113 squares beyond 0.1 -> new arrangements relative to the record. House margins 0, 1.48e-19, 3.00e-12, 1.68e-99, 0 (RV-3 does not reach); own margins 1.21e-10, 1.55e-10, 1.47e-11, 1.89e-11, 1.91e-10. L-step scan = main's. Ledger upper-bounds-1001-20261116 records #1001 at all five; Kodaj's quoted 270 listed as other item, not claimed. Nothing of L186 read.
+
+Registration 041e58334 (06:45:29Z): T-305 (127), T-306 (204), T-307 (232), T-308 (264), T-309 (305), V3/C3 on the replay, S3 draft each; credit found_by Tomáš Kodaj, improved_by JoeGun at all five (the issue's offer of Kodaj alone at 204/232 left to the owner); key [JoeGun upper bounds 2026-11-16], 'JoeGun after Kodaj, Daniel, Levy', builds-on-project; E-joegun-1001-certificate-report, E-joegun-1001-exact-feasibility (independent-implementation; V-sqpack-verify is the producer's verify/promote package, independence rests on V-check-rational-witness-independent). result/t-174.html 348,784 (main) -> 353,469 bytes; ceiling 350,000 -> 375,000 as a measured choice, timing owed under think-v4me. No-public-change record 34df676d6 (compare_paper_renders: three papers byte-identical; explainer differs only in the register count 309 vs 304).
+L186 review read at 06:56Z (after b3a0c1b01 06:34Z and 041e58334 06:45Z); merged 1dc61d960 (origin/claude/bold-ritchie-xo28us-l186 at 1b9dc0976); mapped 531843f2a (07:00:55Z): accepted all five, F1-F15 notes, 160/160 controls, S3 each; reviewer tier tbd-strong (not -max). No disagreement with the replay (least gaps, wall contacts, margins, identity all equal). V-joegun-1001-review-check, E-joegun-1001-review-exact-feasibility (clean room, independence_record the review); external_review on report and replay (no independence_record on the replay). Adoption written by adopt_houses at 07:01:40Z (LATER_PASSES 2026-11-16 = {90, 127, 204, 232, 264, 305}); regularization runs started 07:02Z.
