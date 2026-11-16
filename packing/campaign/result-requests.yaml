@@ -29015,6 +29015,17 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/914#issuecomment-6914444483
+      date: '2026-11-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204-daniel
+        id: T-268
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-267 to T-273 are on main and the reply on main says what was retained, replayed and
       reviewed, that the seven are adopted, and that nothing the author asked for is queued.
@@ -29060,6 +29071,20 @@ issues:
       issue's results and are not recorded under reported. It follows #894's and #895's
       supersession follow-ups of 6 November, and the posted text is lane L67's draft but
       for a blank line before the footer; the issue stays closed.
+
+      The follow-up of 16 November 2026 (issuecomment-6914444483, posted by jlevy at
+      10:55:42Z), after #1002 merged with T-305 to T-309's import, review and adoption, is
+      recorded in lane L188 (think-664l). It answers the final reply's statement of T-268 as
+      current. It says that on 16 November #1001 (JoeGun, improving a public packing by Tomáš
+      Kodaj) was registered as T-306 and adopted at 204, 1.7145e-3 below this packing (#1002);
+      that T-268 itself is unchanged, at V3/C3, confirmed; that its position is now
+      superseded; and that it stays in the record as the house it was until 16 November.
+      T-306 is #1001's result, named as context, and is not recorded under reported; the
+      follow-up names no evidence id and no bead. It says that nothing else in the earlier
+      reply changes and that the issue stays closed. It names no reply in `corrects`, as
+      #989's follow-up of the same day does: T-268's moved position is a field the register
+      shows, which `reported` records, and the final reply was not wrong when made.
+      read_through stays at the author's last comment.
   - number: 918
     title: ': registration request'
     author: adnuubhai-ux
@@ -29357,6 +29382,17 @@ issues:
       - result: n232-from-t256
         id: E-ozden-927-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/927#issuecomment-6914444869
+      date: '2026-11-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n232-from-t256
+        id: T-275
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-275 is on main at V3/C3 as the house at 232, and the reply on main says what was retained and
       replayed, what the review found and that the case adopted it.
@@ -29404,6 +29440,20 @@ issues:
       and changes nothing. The comment ends that this result is the best published packing with
       a certificate, not the smallest side anyone has scored. The same correction was committed
       to the repository's README as f76f2d0 (20:53:15Z), read in campaign/intake-watch.yaml.
+
+      The follow-up of 16 November 2026 (issuecomment-6914444869, posted by jlevy at
+      10:55:43Z), after #1002 merged with T-305 to T-309's import, review and adoption, is
+      recorded in lane L188 (think-664l). It answers the final reply's statement of T-275 as
+      current. It says that on 16 November #1001 (JoeGun, improving a public packing by Tomáš
+      Kodaj) was registered as T-307 and adopted at 232, 1.8780e-3 below this packing (#1002);
+      that T-275 itself is unchanged, at V3/C3, confirmed; that its position is now
+      superseded; and that it stays in the record as the house it was until 16 November.
+      T-307 is #1001's result, named as context, and is not recorded under reported; the
+      follow-up names no evidence id and no bead. It says that nothing else in the earlier
+      reply changes and that the issue stays closed. It names no reply in `corrects`, as
+      #989's follow-up of the same day does: T-275's moved position is a field the register
+      shows, which `reported` records, and the final reply was not wrong when made.
+      read_through stays at the author's last comment.
   - number: 928
     title: 's(268) ≤ 16.872469897837: improved packing (registration request)'
     author: kenaznia-doga
@@ -35336,8 +35386,10 @@ issues:
       to its house's packing, measured. The stage 4 review of 16 November (lane L186,
       think-skt8) accepts all five with fifteen findings, all notes, and 160 of 160 controls
       as stated, so each entry is confirmed, independently re-implemented, at V3/C3, S3, and the
-      cases adopted them as their houses in the pass of 16 November.
-    read_through: '2026-11-16T05:33:07Z'
+      cases adopted them as their houses in the pass of 16 November. Later that day the
+      author added a numerical local-minimum check, in a comment and in the edited body, which
+      claims no bound; lane L188 (think-664l) retained it and registers nothing.
+    read_through: '2026-11-16T09:29:26Z'
     results:
     - key: n127-kodaj-improved
       claim: >-
@@ -35407,9 +35459,25 @@ issues:
         Not claimed by the issue, and no packing is in hand: Kodaj's notebook was not reachable
         from this session. Nothing is walked or registered at 270.
       queued: false
+    - key: local-minimum-check
+      claim: >-
+        By a numerical check with Evan Daniel's exactsolve.py at 80 digits, the exact touching
+        point near the certificate at 127, 232, 264 and 305 is a KKT point and a local minimum
+        of the side, strict up to 52, 110, 155 and 132 flat motions, so none is rigid; at 204
+        the solver's Newton step diverged and there is no result either way. The author says
+        the check is not a proof and does not claim the lower sides of the solver's own
+        certificates of those points.
+      source: https://github.com/jlevy/squares/issues/1001#issuecomment-6912585795
+      not_registered: >-
+        No bound is claimed, and a numerical local-minimum analysis is no rung here. The four
+        points are those the regularization driver reached from the same certificates and
+        holds at row 3 for RV-3 (think-ruu2), equal in every digit both print; the
+        joegun-local-minimum-2026-11-16 packet retains the check and the comparison.
+      queued: false
     beads:
     - think-0y9m
     - think-skt8
+    - think-664l
     answer_bead: think-0y9m
     replies: []
     close_when: >-
@@ -35474,3 +35542,15 @@ issues:
       KKT solves below the side at 127, 232, 264 and 305, each beyond the certificate's own
       contraction margin, are held at row 3 for RV-3 (think-ruu2, think-ikku), and his driver
       could not solve 204. No reply has been posted.
+
+      The author's comment of 09:29:26Z (6912585795) and an edit of the body at 09:29:27Z add
+      a local-minimum check, the files of which are in local-minimum/ at 5971b95 (09:28:39Z),
+      the only child of 0aac839e; the edit drops the body's "We make no optimality, rigidity
+      or KKT claim." The witnesses and their digests are unchanged, as the comment says, and
+      the certificate line still names 0aac839e. Lane L188 (think-664l) retained 5971b95 as
+      the joegun-local-minimum-2026-11-16 packet and corrected the record's statements that
+      the source makes no such claim. Its four exact points are the driver's held solves:
+      the same exact side in every digit both print, the same rational certificate side and
+      the same second-order verdict, from the binary64 poses at evand/square-packing 6067db5
+      where the driver started from the certificates at 675a5ea; both fail at 204. Nothing
+      is registered, and no rung, house or credit changes.

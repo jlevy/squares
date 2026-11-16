@@ -8,12 +8,17 @@ up at 12 places. The general importer's checks run on the packet through
 ``test_upper_bound_reports``; these hold what is particular to it: the digests the issue
 lists, each print against its exact side, the house each is compared with and the gain,
 the ledger's verdicts, the retained sharp controls, the identity measurements, the
-contraction margins and the L-step scan the register's notes cite. Every test reads the
-packet and the ledger only; none needs the network.
+contraction margins and the L-step scan the register's notes cite. The source's later
+revision adds a numerical local-minimum check, which the ``joegun-local-minimum-2026-11-16``
+packet retains; one test holds it against the regularization driver's solves of the same
+five witnesses. Every test reads the packets, the ledger and the driver's retained reports
+only; none needs the network.
 """
 
 from __future__ import annotations
 
+import gzip
+import hashlib
 import json
 from decimal import ROUND_CEILING, Decimal
 from fractions import Fraction
@@ -23,6 +28,7 @@ from typing import Any
 import pytest
 
 from devtools import evand_arrangement_reports as kernel
+from devtools import regularize_evand as evand
 from devtools import upper_bound_reports as reports
 from devtools import upper_bound_sharp_controls as sharp
 
@@ -203,3 +209,65 @@ def test_the_l_step_scan_stands_the_sides_in_and_carries_them_nowhere() -> None:
     steps = record["l_step"]["improves"] + record["l_step"]["extensions"]
     assert not [row for row in steps if row["n"] in COUNTS or row["from"] in COUNTS]
     assert record["monotonicity"]["improves"] == []
+
+
+#: The source's later revision, which adds `local-minimum/`: Evan Daniel's exactsolve.py
+#: run by the author on each binary64 pose, with its inputs, logs, reports and certificates.
+LOCAL_MINIMUM = "joegun-local-minimum-2026-11-16"
+#: The regularization driver's run on the five new houses (think-0y9m), whose KKT solves
+#: the record holds at row 3 for RV-3 (think-ruu2).
+DRIVER = (
+    reports.ROOT
+    / "cases/regularized_drawings/think-0y9m-2026-11-16/adopt-2026-11-16-n127-305-evand"
+)
+#: The fields of the driver's solve block (`regularize_evand.solve_block`) that say how a
+#: solve went and what it found; timings, attempts and rungs are the run's own.
+SOLVE_FIELDS = (
+    "status",
+    "gate",
+    "newton_converged",
+    "cert_valid",
+    "S_exact",
+    "S_cert",
+    "free",
+    "promoted",
+    "second_order",
+    "vv_milp_dS",
+)
+#: The flat motions the source reports at each exact point, and how far below each
+#: certificate's exact side the point lies, at the four significant figures the register's
+#: notes print for the driver's held solves.
+FLAT_MOTIONS = {127: 52, 232: 110, 264: 155, 305: 132}
+HELD_BELOW = {127: "1.2175e-10", 232: "4.0164e-09", 264: "1.9066e-11", 305: "1.9146e-10"}
+
+
+def test_the_sources_local_minimum_check_reaches_the_points_the_driver_holds() -> None:
+    """#1001's local-minimum check, added after the filing, against the driver's solves.
+
+    The author ran exactsolve.py at one pin of evand/square-packing from each binary64
+    pose; the driver ran it at another from each exact certificate, so no input is shared.
+    Read through the driver's own `solve_block`, the two agree wherever they solve, in
+    every digit both print and in the second-order verdict, and both fail at 204. This is
+    context for RV-3 (think-ruu2): nothing here registers a point or changes a rung."""
+    retained = reports.packet_path(LOCAL_MINIMUM) / "source/local-minimum"
+    receipt = {row["n"]: row for row in _json(DRIVER / "receipt.json")["counts"]}
+    sides = _sides()
+    for n in COUNTS:
+        source = evand.solve_block(_json(retained / f"n-{n}-input.json"))
+        report = json.loads(gzip.decompress((DRIVER / f"n-{n}/report.json.gz").read_bytes()))
+        held = report["solve"]
+        assert {key: source[key] for key in SOLVE_FIELDS} == {
+            key: held[key] for key in SOLVE_FIELDS
+        }
+        written = hashlib.sha256((retained / f"n-{n}-input.txt").read_bytes()).hexdigest()
+        assert written != report["input"]["sha256"]
+        if n == 204:
+            assert source["status"] == held["status"] == "solve failed"
+            assert receipt[n]["decision"] == "no-view"
+            continue
+        assert (source["status"], source["gate"]) == ("KKT local min", "certified")
+        assert (receipt[n]["row"], receipt[n]["decision"]) == (3, "held")
+        assert f"strict modulo {FLAT_MOTIONS[n]} exact flat motions" in source["second_order"]
+        assert Fraction(source["S_cert"]) == Fraction(report["outputs"]["solved"]["side_exact"])
+        below = sides[n] - Fraction(source["S_exact"])
+        assert f"{float(below):.4e}" == HELD_BELOW[n]

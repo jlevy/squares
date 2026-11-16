@@ -13492,7 +13492,9 @@ sources:
     Kaggle packings, each below its count's house: T-174 at 127 and 305, T-268 at 204, T-275
     at 232 and T-186 at 264. The ledger of 16 November for this lane
     (campaign/issue-intake/upper-bounds-1001-20261116) records all five. All 15 native jobs
-    have full outcomes.
+    have full outcomes. A later commit the same day, 5971b95, adds the author's numerical
+    local-minimum check and leaves the certificates unchanged; the
+    joegun-local-minimum-2026-11-16 packet retains it, and it claims no bound.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

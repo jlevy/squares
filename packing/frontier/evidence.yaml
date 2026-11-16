@@ -63823,8 +63823,15 @@ evidence:
 
       The two maintained routes, the sqpack rational witness verifier and the independent
       rational corner checker, share certificate parsing, half-angle conversion, Fraction
-      arithmetic and the separating-axis method. No local optimality, KKT, rigidity, human
-      oversight or optimality is claimed.
+      arithmetic and the separating-axis method. At the pin the source claims no local
+      optimality, KKT point or rigidity. A later commit of 16 November (5971b95, retained in
+      packing/resources/web/joegun-local-minimum-2026-11-16/), with the issue's comment and
+      edited body, reports a numerical check by Evan Daniel's exactsolve.py at 80 digits,
+      which the author says is not a proof: a KKT point and a local minimum, strict up to
+      flat motions and so not rigid, at the exact touching point near the certificate at
+      127, 232, 264 and 305, and no result at 204. Those are the points the regularization
+      driver reached and holds at row 3 for RV-3 (think-ruu2); this atom records the
+      upper-bound report alone. No human oversight or global optimality is claimed.
   - id: E-joegun-1001-exact-feasibility
     claim: upper-bound
     scope:
