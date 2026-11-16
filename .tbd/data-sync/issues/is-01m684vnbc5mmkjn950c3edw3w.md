@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 359
+version: 360
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -120,7 +120,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T10:26:45.603Z
+updated_at: 2026-11-16T10:39:16.989Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -325,3 +325,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-16T07:56Z renewal (intake311): no change; L187 (#1001 import) active, not yet pushed.
 - 2026-11-16T08:55Z renewal (intake312): no new items. L187 handed back draft #1002 at 50a6ee5a1 (T-305..T-309 at 127/204/232/264/305, adopted in the 16 November pass, CI green); senior review running; must merge on 16 Nov.
 - 2026-11-16T09:54Z renewal (intake313): no new items. #1002 senior review: merge-ready, S1 (upstream rewritten to 0aac839e, same tree; issue edited 06:38Z) and N1 being fixed by an addressing pass; labelled intake, S3.
+- 2026-11-16T10:50Z: #1002 merged at d451e3d83 (T-305..T-309, adopted at 127/204/232/264/305 in the 16 November pass) after senior review and an addressing pass (rewritten upstream 0aac839e, '1 degree'); Pages deployed and verified (run 43848738239). think-skt8 closed. The author then added a KKT/local-minimum section (upstream 5971b95, issue edit 09:29Z, comment 6912585795); lane L188 reads it and corrects the record's 'no KKT claim' statements. The #1001 reply waits for L188 so it can address both.
