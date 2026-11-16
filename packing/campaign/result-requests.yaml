@@ -34709,6 +34709,17 @@ issues:
       - result: n90-shifted-window
         id: E-jazivxt-989-review-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/989#issuecomment-6905946318
+      date: '2026-11-16'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n90-shifted-window
+        id: T-303
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-303 is on main with its stage 4 review mapped and adopted as the house at 90, and the
       reply on main says what was retained and replayed, what the review found and that the
@@ -34827,6 +34838,23 @@ issues:
       the issue is closed with it, and that answers are welcome at any time. The issue was
       closed as completed at 06:39:57Z. The issue has no comment but the reply, and
       read_through moves to it.
+
+      The follow-up of 16 November 2026 (issuecomment-6905946318, posted by jlevy at
+      02:51:54Z), after #998 merged at 02:33:37Z with T-304's import, review and adoption at
+      90, and after that merge's Pages deploy and verify-deployment passed (run
+      43792910636), is recorded in lane L185 (think-32cl). It answers the final reply's
+      statement of T-303 as current. It says that on 16 November #997 (Joost de Winter) was
+      registered as T-304 and adopted at 90, 4.2384e-3 below this packing, which it improves
+      (#998), and that T-304 credits jazivxt as the finder of the packing it improves.
+
+      It says that T-303 itself is unchanged, at V3/C3, confirmed; that its position is now
+      superseded; and that it stays in the record as the house it was on 15 November. T-304
+      is #997's result, named as context, and is not recorded under reported (#900); the
+      follow-up names no evidence id and no bead. It says that nothing else in the earlier
+      reply changes and that the issue stays closed. It is recorded as a follow-up, as #983's
+      of 15 November is, and names no reply in `corrects`: T-303's moved position is a field
+      the register shows, which `reported` records, and the final reply's statements were not
+      wrong when made. read_through stays at the final reply.
   - number: 992
     title: Upper Bound for Packing 977 Unit Squares — Construction by Miguel Lara
     author: larasmiguel
@@ -35022,7 +35050,8 @@ issues:
     title: 'Lowered upper bound for n = 90 (side 9.994038857546): registration request<claim>: registration request'
     author: JoostdeWinter
     opened: '2026-11-15'
-    state: open
+    state: closed
+    closed: '2026-11-16'
     kind: result-report
     triage: done
     summary: >-
@@ -35038,7 +35067,7 @@ issues:
       controls, and the 15 November stage 4 review (lane L180, think-uhav), written blind,
       accepted it with thirteen findings, all notes. The superseded certificate is retained in
       the de-winter-s90-64d5ee7-2026-11-15 packet.
-    read_through: '2026-11-15T11:30:13Z'
+    read_through: '2026-11-16T02:51:53Z'
     results:
     - key: n90-local-search-64d5ee7
       claim: >-
@@ -35057,7 +35086,13 @@ issues:
     - think-32cl
     - think-uhav
     answer_bead: think-32cl
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/996#issuecomment-6905946113
+      date: '2026-11-16'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n90-local-search-64d5ee7
     close_when: >-
       T-304, #997's certificate, is on main with its review mapped and adopted as the house at 90,
       and the reply on main says that this issue's certificate was replaced at the author's request
@@ -35089,11 +35124,31 @@ issues:
       re-optimized, the step 9,539 times this certificate's contraction margin (F14). The case
       adopted #997's certificate (T-304) at 90 in the pass of 16 November. No reply has been
       posted; the coordinator relayed #997 at 12:55Z.
+
+      Closed on 16 November 2026 with the final reply (issuecomment-6905946113, posted by
+      jlevy at 02:51:53Z), after #998 merged at 02:33:37Z with T-304's import, the mapped
+      stage 4 review and its addendum, and the adoption at 90, and after that merge's Pages
+      deploy and verify-deployment passed (run 43792910636); recorded in lane L185
+      (think-32cl). It says that, as the author asked in #997, this certificate is not
+      registered, that #997's replacement is, as T-304 (#998), and that the reply on #997
+      gives what was registered and checked.
+
+      It says that this certificate stays in the record, retained at the commit this issue
+      named, and that the blind stage 4 review accepted it before the replacement arrived,
+      with nothing blocking, the review linked on main. It names no register or evidence id
+      of this result: T-304 is #997's result, named as the replacement, so the issue's one
+      result is recorded as spoken of, with no id, as #992's result is (#900). It names no bead. It says that the review's questions, which cover this
+      certificate too, are on #997, so none is recorded under awaiting_author here.
+
+      It says that nothing the author asked for is still queued, so the issue is closed with
+      it. The issue was closed as completed at 02:52:00Z; it has no comment but the reply,
+      and read_through moves to it.
   - number: 997
     title: 'Lowered upper bound for n = 90 (side 9.994038766610): registration request'
     author: JoostdeWinter
     opened: '2026-11-15'
-    state: open
+    state: closed
+    closed: '2026-11-16'
     kind: result-report
     triage: done
     summary: >-
@@ -35117,7 +35172,7 @@ issues:
       confirmed, independently re-implemented, at V3/C3, S3, and the case adopted it as its
       house at 90 in the pass of 16 November, in place of T-303, since the pass of 15 November
       had already moved 90.
-    read_through: '2026-11-15T12:08:33Z'
+    read_through: '2026-11-16T02:51:52Z'
     results:
     - key: n90-local-search
       claim: >-
@@ -35135,7 +35190,27 @@ issues:
     - think-32cl
     - think-uhav
     answer_bead: think-32cl
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/997#issuecomment-6905945943
+      date: '2026-11-16'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n90-local-search
+        id: T-304
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n90-local-search
+        id: E-de-winter-997-exact-feasibility
+        status: confirmed
+      - result: n90-local-search
+        id: E-de-winter-997-certificate-report
+        status: reviewed
+      - result: n90-local-search
+        id: E-de-winter-997-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-304 is on main with its stage 4 review mapped and adopted as the house at 90, and the
       reply on main says what was retained and replayed, what the review found and that the case
@@ -35184,3 +35259,55 @@ issues:
       is drawn; his certified KKT solve, 2.698e-11 below the side, about 1.48 times the
       certificate's own contraction margin, is held at row 3 for RV-3 (think-ruu2,
       think-ikku). No reply has been posted.
+
+      Closed on 16 November 2026 with the final reply (issuecomment-6905945943, posted by
+      jlevy at 02:51:52Z), after #998 merged at 02:33:37Z with the import, the replay, the
+      mapped stage 4 review and its addendum, and the adoption at 90, and after that merge's
+      Pages deploy and verify-deployment passed (run 43792910636); recorded in lane L185
+      (think-32cl). It states T-304, s(90) <= 99940387666098521323/10^19, printed
+      9.994038766610, at V3/C3, confirmed, significance S3, and adopted as the case's house
+      in place of T-303, jazivxt's packing from #989, 4.2384e-3 below it; that is its
+      position, current.
+
+      It names E-de-winter-997-exact-feasibility, confirmed,
+      E-de-winter-997-certificate-report, the author's report, and
+      E-de-winter-997-review-exact-feasibility, confirmed, so all three are recorded under
+      reported with check_requests' statuses, the report's reviewed (#900). T-303 is named as
+      the house replaced, not as this issue's result, and is not recorded under reported. It
+      credits jazivxt as the finder of the packing it improves and the author as its
+      improver, and names GPT-6.1 Sol Max and Claude Fable 5.2 as the AI tools, in the
+      author's words, without crediting them, since the record credits people. It says that
+      #996's certificate is not registered, as #997 asks, and is retained.
+
+      It says what was checked: both maintained exact routes accept the certificate and all
+      11 sharp controls stated in advance came out as stated, and since one route is the
+      corner checker the author ran on the twin, the replay's independence rests on sqpack's
+      exact verifier; the blind stage 4 review's clean-room checker, separating axes in
+      integers and exact clipping in rationals with no distance filter, accepted #996's
+      certificate and, in its addendum, this one, with nothing blocking; and the least pair
+      gap is 2.0264e-12, at squares 2 and 40, as the author's README says.
+
+      It says that T-303's contraction margin is 1.0988e-11 and the gain about 3.9e8 times
+      it, and the step from #996's certificate, 9.09e-8, 9,539 times that certificate's
+      margin, so neither is padding; that the certificate is one to one with #996's, no
+      square moving more than 0.0142, and that against T-303 under the identity 6 squares
+      move beyond a tenth, each of the 40 tilted squares paired with one T-303 tilts the same
+      way; and that Evan Daniel's KKT solve, a certified local minimum 2.698e-11 below the
+      side, about 1.48 times the certificate's own contraction margin, is held and not
+      registered while the maintainer decides how the record treats such sides.
+
+      It asks the review's five questions, which cover #996 too and hold nothing open, so
+      none is recorded under awaiting_author: whether the counts REGISTRATION.md gives at the
+      head (44 and 40 leaning squares, four made upright, four with a new angle, one square
+      0.32 lower), which reproduce here and which the record takes, are the text to record;
+      whether #996's near-upright turn of 1.83e-10 degrees was left by the rational rounding;
+      and what produced the step from #996, and whether the six near pairs that leave the set
+      below 1e-9 and the eight that join it are the contacts that changed.
+
+      The other two: whether the twin would be written in the form this repository's corner
+      adapter reads, or name the box and the sense of the angle in its format line; and
+      whether the local search and the linear program behind the issue's first-order claim,
+      or their outputs, would be published. It links RESULTS.md and n-090.md on main and
+      names no bead. It says that nothing the author asked for is still queued, so the issue
+      is closed with it, and that answers are welcome at any time. The issue was closed as
+      completed at 02:51:58Z; it has no comment but the reply, and read_through moves to it.
