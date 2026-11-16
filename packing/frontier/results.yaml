@@ -47770,7 +47770,7 @@ results:
   - id: T-304
     kind: upper-bound
     registered: '2026-11-15'
-    landed: '2026-11-15'
+    landed: '2026-11-16'
     headline: >-
       de Winter's local-search improvement of jazivxt's packing at 90, 4.24e-03 below T-303
     claim: >-
