@@ -3,9 +3,9 @@ type: is
 id: is-01m7hya774p1hnpfdvzgc5nrxw
 title: "Intake: record JonathanGun 5971b95 local-minimum/ section and #1001 comment 6912585795; correct no-KKT-claim statements for T-305..T-309; compare with held KKT candidates"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: bold-ritchie-l188
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-16T10:26:45.603Z
-updated_at: 2026-11-16T11:42:51.333Z
+updated_at: 2026-11-16T12:31:18.388Z
 started_at: 2026-11-16T10:26:49.172Z
+closed_at: 2026-11-16T12:31:18.388Z
+close_reason: "Done: #1002 (T-305..T-309 at 127/204/232/264/305) and #1003 (local-minimum read, corrections) merged; #1001 reply posted and recorded in #1004 (merged f9ddfeeef)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
