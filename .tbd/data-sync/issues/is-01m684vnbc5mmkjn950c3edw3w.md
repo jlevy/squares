@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 361
+version: 362
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -120,7 +120,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T10:55:56.650Z
+updated_at: 2026-11-16T11:56:16.704Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -327,3 +327,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-16T09:54Z renewal (intake313): no new items. #1002 senior review: merge-ready, S1 (upstream rewritten to 0aac839e, same tree; issue edited 06:38Z) and N1 being fixed by an addressing pass; labelled intake, S3.
 - 2026-11-16T10:50Z: #1002 merged at d451e3d83 (T-305..T-309, adopted at 127/204/232/264/305 in the 16 November pass) after senior review and an addressing pass (rewritten upstream 0aac839e, '1 degree'); Pages deployed and verified (run 43848738239). think-skt8 closed. The author then added a KKT/local-minimum section (upstream 5971b95, issue edit 09:29Z, comment 6912585795); lane L188 reads it and corrects the record's 'no KKT claim' statements. The #1001 reply waits for L188 so it can address both.
 - 2026-11-16T10:57Z renewal (intake314): superseded follow-ups posted on #914 (T-268 -> T-306 at 204) and #927 (T-275 -> T-307 at 232); recording added to L188's records PR, which also reads #1001's 5971b95 and comment. #1001 reply waits for L188.
+- 2026-11-16T11:57Z: #1003 (L188: #1001's local-minimum source read, 'no KKT claim' statements corrected, #914/#927 follow-ups recorded) merged at 67cf4484d; Pages verified (43860362355). #1001 final reply posted (issuecomment-6915717106) and issue closed. Records lane L191 opened for it; think-0y9m and think-664l close after it merges.
