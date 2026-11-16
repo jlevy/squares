@@ -2,14 +2,23 @@
 
 This packet retains
 [JonathanGun/square-packing-upper-bounds](https://github.com/JonathanGun/square-packing-upper-bounds/tree/bc10ce471c9d7841b9a53b383dae87d23dbe5a99)
-at `bc10ce471c9d7841b9a53b383dae87d23dbe5a99` (committed 2026-11-16T05:31:52Z), the
-repository’s only commit, which
-[issue #1001](https://github.com/jlevy/squares/issues/1001) names.
-The issue was opened at 05:33:07Z, 75 seconds later.
+at `bc10ce471c9d7841b9a53b383dae87d23dbe5a99` (committed 2026-11-16T05:31:52Z), then
+the repository’s only commit, which
+[issue #1001](https://github.com/jlevy/squares/issues/1001) named when it was opened at
+05:33:07Z, 75 seconds later.
 The lane fetched the repository at 06:01Z on 16 November, when `git ls-remote` read the
 same head. GitHub’s activity log was not readable from this session, so the push time is
 not read; no other report reached these counts in those 75 seconds, so the ledger dates
 the claims by the issue, with the first commit kept.
+
+The history was rewritten after that fetch.
+Read again at 09:16Z that day, the repository’s only branch head was
+`0aac839e551fd8cb7d7717c20494b095429131a1`, a root commit of 06:37:41Z with `bc10ce4`’s
+message and tree (`2faf49af`), only its author and committer address and time
+differing. The issue was edited at 06:38:44Z, and its only change names `0aac839e` in
+place of `bc10ce4`.
+So the files retained here are the tree both commits hold, and the pin stays `bc10ce4`,
+the commit the lane read, which is on no branch now.
 
 Intake lane L187 (think-0y9m) retained it, replayed it and measured it on 16 November
 2026 and registers it as **T-305** to **T-309**, one result a count.

@@ -166,8 +166,9 @@ reports:
       RV-3 (think-ruu2) does not reach it. The certificate's own margin is 1.9066e-10 (squares
       130 and 137; contraction-n305-own.json), and the source says JoeGun's step from Kodaj's
       side is 5.358e-4.
-  note: '#1001 names bc10ce4, committed at 2026-11-16T05:31:52Z, 75 seconds before it, the
-    repository''s only commit and its head. It asks for credit to Tomáš Kodaj as the finder
+  note: '#1001 named bc10ce4 when filed, committed at 2026-11-16T05:31:52Z, 75 seconds before
+    it, then the repository''s only commit and its head; an edit at 06:38Z names 0aac839e,
+    a re-commit of the same tree, in its place. It asks for credit to Tomáš Kodaj as the finder
     at all five counts, improved by JoeGun, and the quench to Evan Daniel, and says credit
     to Kodaj alone is fair at 204 and 232, where JoeGun''s part is below 2e-7. It says the
     exact coordinates come from this repository''s packing-witness promote, and that AI agents

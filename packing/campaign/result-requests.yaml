@@ -35418,10 +35418,15 @@ issues:
       cases adopted them.
     notes: >-
       Read on 16 November 2026 from main 31ddae6fe; no comment on the issue, which carried the
-      intake label when read. The issue names bc10ce4 (05:31:52Z), 75 seconds before it, the
-      repository's only commit and its head at 06:01Z; the five certificates have the SHA-256
-      digests the issue lists. GitHub's activity log was not read, so the issue dates the
-      claims. The record credits people, not AI agents (attribution.md): the issue says AI
+      intake label when read. The issue named bc10ce4 (05:31:52Z), 75 seconds before it, then
+      the repository's only commit and its head at 06:01Z; the five certificates have the
+      SHA-256 digests the issue lists. GitHub's activity log was not read, so the issue dates
+      the claims. The history was rewritten later that day: 0aac839e (06:37:41Z), a re-commit
+      of the same tree, took its place, and the issue was edited at 06:38Z, its only change
+      naming 0aac839e in place of bc10ce4. The packet keeps bc10ce4, the commit read,
+      as its pin, on no branch now.
+
+      The record credits people, not AI agents (attribution.md): the issue says AI
       agents wrote and ran the search code, the checker and the filing under JoeGun's direction,
       which is stated and not credited. Licensed CC BY 4.0 (witnesses, poses, outputs, text) and
       MIT (check.py) by LICENSE.md at the pin, which leaves Kodaj's terms unchanged; the licence

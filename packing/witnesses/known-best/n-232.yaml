@@ -1645,10 +1645,10 @@ witness:
     method: exact-algebraic
     limitations: 'Complete 2026-11-16 exact rational corner certificates at 127, 204, 232, 264 and 305,
       read exactly from the retained source files n-NNN-candidate.yaml at bc10ce4 in JonathanGun/square-packing-upper-bounds,
-      which jlevy/squares#1001 names: JoeGun''s improvements of Tomas Kodaj''s public Kaggle packings,
-      their exact coordinates made by this repository''s packing-witness promote. Finite construction
-      feasibility only; local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality
-      are not replayed here.'
+      the commit jlevy/squares#1001 named when filed, whose tree 0aac839e re-commits: JoeGun''s improvements
+      of Tomas Kodaj''s public Kaggle packings, their exact coordinates made by this repository''s packing-witness
+      promote. Finite construction feasibility only; local optimum, KKT, rigidity, same-packing, novelty,
+      priority and global optimality are not replayed here.'
   source:
     key: '[JoeGun upper bounds 2026-11-16]'
     path: resources/web/joegun-upper-bounds-2026-11-16/source/n-232-candidate.yaml

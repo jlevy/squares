@@ -5699,8 +5699,10 @@ sources:
     short_credit: JoeGun after Kodaj et al.
     note: >-
       JonathanGun/square-packing-upper-bounds at bc10ce471c9d7841b9a53b383dae87d23dbe5a99
-      (2026-11-16T05:31:52Z), the repository's only commit, 75 seconds before jlevy/squares#1001,
-      which requested the registration: JoeGun's five rational corner Witness/v2 certificates,
+      (2026-11-16T05:31:52Z), then the repository's only commit, which jlevy/squares#1001 named
+      when it requested the registration 75 seconds later. The history was rewritten the same
+      day: 0aac839e re-commits the same tree, the issue was edited to name it, and bc10ce4 is on
+      no branch. The tree holds JoeGun's five rational corner Witness/v2 certificates,
       s(127) <= 11.801753890487, s(204) <= 14.802646843107, s(232) <= 15.759531627557, s(264) <=
       16.773807598002 and s(305) <= 17.945762359659, each its exact side rounded up at 12 places,
       with the binary64 decimal pose each was made from. The source says each packing is a public

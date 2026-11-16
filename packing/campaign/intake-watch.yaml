@@ -2273,12 +2273,16 @@ repositories:
       T-298 stays at V0/C1. Nothing to import.
   # Lane L187 of 16 November 2026 (think-0y9m).
   - url: https://github.com/JonathanGun/square-packing-upper-bounds
-    read_through: bc10ce471c9d7841b9a53b383dae87d23dbe5a99
+    read_through: 0aac839e551fd8cb7d7717c20494b095429131a1
     read_on: '2026-11-16'
     note: >-
-      Read through bc10ce4 (05:31:52Z on 16 November), the head at 06:01Z and the repository's
-      only commit, which jlevy/squares#1001 (05:33:07Z) names: five exact corner certificates
-      at 127, 204, 232, 264 and 305 with their decimal poses, the author's checker and its
-      output, and packing-witness verify's output. The joegun-upper-bounds-2026-11-16 packet
-      pins it and retains the whole tree but Evan Daniel's MIT notice, which it pins against
-      a byte-identical copy. Nothing more to import.
+      Read through 0aac839e (06:37:41Z on 16 November), the head at 09:16Z and then the
+      repository's only commit: a root commit with the message and tree of bc10ce4 (05:31:52Z), the
+      joegun-upper-bounds-2026-11-16 packet's pin, only its author and committer address and
+      time differing. bc10ce4 was the head and the only commit when lane L187 read it at
+      06:01Z, and jlevy/squares#1001 (05:33:07Z) named it; the issue was edited at 06:38Z, its
+      only change naming 0aac839e in its place. The pin is on no branch since the history was
+      rewritten, and the tree is unchanged: five exact corner certificates at 127, 204, 232,
+      264 and 305 with their decimal poses, the author's checker and its output, and
+      packing-witness verify's output, which the packet retains whole but for Evan Daniel's
+      MIT notice, pinned against a byte-identical copy. Nothing more to import.

@@ -13483,7 +13483,8 @@ sources:
   notes: >-
     The five corner Witness/v2 certificates, their decimal poses, the README, the licence, the
     author's checker and its output and packing-witness verify's output are retained for
-    jlevy/squares#1001 at bc10ce4, the repository's only commit, which the issue names; each
+    jlevy/squares#1001 at bc10ce4, the commit the issue named when filed, whose tree 0aac839e
+    re-commits since the history was rewritten the same day; each
     certificate is admitted only where its exact side rounds up to the side the issue prints.
     Evan Daniel's MIT notice is pinned against a byte-identical copy. Licensed CC BY 4.0
     (witnesses, poses, outputs, text) and MIT (check.py) by LICENSE.md at the pin. T-305 to

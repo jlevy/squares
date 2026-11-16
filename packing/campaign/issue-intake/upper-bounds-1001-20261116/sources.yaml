@@ -1,7 +1,9 @@
 # What `python -m devtools.intake_ledger gather` reads: the five upper bounds at n <= 324 that lane L187 of the
 # intake pass takes in on 16 November 2026 (think-0y9m), JoeGun's packings of 127, 204, 232, 264 and 305 squares,
-# which #1001 (05:33:07Z) reports, 75 seconds after bc10ce4 (05:31:52Z), the commit the issue names and the only
-# commit of JonathanGun/square-packing-upper-bounds, which first committed all five certificates. GitHub's
+# which #1001 (05:33:07Z) reports, 75 seconds after bc10ce4 (05:31:52Z), the commit the issue named when filed and
+# then the only commit of JonathanGun/square-packing-upper-bounds, which first committed all five certificates (the
+# history was rewritten that day: 0aac839e, 06:37:41Z, re-commits the same tree, and an edit of the issue at
+# 06:38Z names it in place of bc10ce4, which is on no branch now). GitHub's
 # activity log was not readable from this session, so no push time is recorded: by the owner's rule of 14 October
 # bc10ce4 would date the claims if its push came first, but no other report reached these counts in those 75
 # seconds, so the issue dates the claims, with the first commit kept, and the verdicts are the same either way.
@@ -143,8 +145,8 @@ reports:
       certificate's own margin is 1.9066e-10 (squares 130 and 137; contraction-n305-own.json), and the source
       says JoeGun's step from Kodaj's side is 5.358e-4.
   note: >-
-    #1001 names bc10ce4, committed at 2026-11-16T05:31:52Z, 75 seconds before it, the repository's only commit and
-    its head. It asks for credit to Tomáš Kodaj as the finder at all five counts, improved by JoeGun, and the quench
+    #1001 named bc10ce4 when filed, committed at 2026-11-16T05:31:52Z, 75 seconds before it, then the repository's
+    only commit and its head; an edit at 06:38Z names 0aac839e, a re-commit of the same tree, in its place. It asks for credit to Tomáš Kodaj as the finder at all five counts, improved by JoeGun, and the quench
     to Evan Daniel, and says credit to Kodaj alone is fair at 204 and 232, where JoeGun's part is below 2e-7. It says
     the exact coordinates come from this repository's packing-witness promote, and that AI agents wrote and ran the
     search code, the checker and the filing, under JoeGun's direction.
