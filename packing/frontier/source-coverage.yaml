@@ -13457,6 +13457,41 @@ sources:
     in the pass of 16 November, in place of T-303. The ledger of 15 November for this lane
     (campaign/issue-intake/upper-bounds-996-997-20261115) records it, continuing T-303's
     packing. All 3 native jobs have full outcomes.
+- id: joegun-upper-bounds-2026-11-16
+  title: JoeGun's packings of 127, 204, 232, 264 and 305 squares at JonathanGun/square-packing-upper-bounds bc10ce4, issue 1001
+  role: source-repository
+  url: https://github.com/JonathanGun/square-packing-upper-bounds/tree/bc10ce471c9d7841b9a53b383dae87d23dbe5a99
+  local: resources/web/joegun-upper-bounds-2026-11-16/
+  source_key: '[JoeGun upper bounds 2026-11-16]'
+  scope:
+    n_values:
+    - 127
+    - 204
+    - 232
+    - 264
+    - 305
+  reviewed: '2026-11-16'
+  source_date: '2026-11-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+  evidence:
+  - E-joegun-1001-certificate-report
+  - E-joegun-1001-exact-feasibility
+  notes: >-
+    The five corner Witness/v2 certificates, their decimal poses, the README, the licence, the
+    author's checker and its output and packing-witness verify's output are retained for
+    jlevy/squares#1001 at bc10ce4, the repository's only commit, which the issue names; each
+    certificate is admitted only where its exact side rounds up to the side the issue prints.
+    Evan Daniel's MIT notice is pinned against a byte-identical copy. Licensed CC BY 4.0
+    (witnesses, poses, outputs, text) and MIT (check.py) by LICENSE.md at the pin. T-305 to
+    T-309 record the five in-horizon reports, JoeGun's improvements of Tomáš Kodaj's public
+    Kaggle packings, each below its count's house: T-174 at 127 and 305, T-268 at 204, T-275
+    at 232 and T-186 at 264. The ledger of 16 November for this lane
+    (campaign/issue-intake/upper-bounds-1001-20261116) records all five. All 15 native jobs
+    have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

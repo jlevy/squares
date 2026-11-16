@@ -402,6 +402,15 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/JonathanGun/square-packing-upper-bounds",
+        "JoeGun",
+        (
+            "Five packings at 127, 204, 232, 264 and 305, Tomáš Kodaj's public Kaggle packings"
+            " that JoeGun improved further, each a new arrangement 9.3e-4 to 9.1e-3 below its"
+            " house (T-305 to T-309)."
+        ),
+    ),
+    (
         "https://github.com/vitamoon/vitamoon",
         "Kaelan Yim",
         (

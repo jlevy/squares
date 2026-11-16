@@ -33359,6 +33359,66 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[JoeGun upper bounds 2026-11-16]'
+    field: /authors/0
+  expected_text: JoeGun
+  start: 0
+  end: 6
+  label: JoeGun
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[JoeGun upper bounds 2026-11-16]'
+    field: /credit
+  expected_text: JoeGun after Kodaj, Daniel, Levy
+  start: 0
+  end: 6
+  label: JoeGun
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[JoeGun upper bounds 2026-11-16]'
+    field: /credit
+  expected_text: JoeGun after Kodaj, Daniel, Levy
+  start: 13
+  end: 18
+  label: Kodaj
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[JoeGun upper bounds 2026-11-16]'
+    field: /credit
+  expected_text: JoeGun after Kodaj, Daniel, Levy
+  start: 20
+  end: 26
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[JoeGun upper bounds 2026-11-16]'
+    field: /credit
+  expected_text: JoeGun after Kodaj, Daniel, Levy
+  start: 28
+  end: 32
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

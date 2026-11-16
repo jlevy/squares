@@ -5688,6 +5688,35 @@ sources:
       direction. No local or global optimality claim is proved. The lineage builds on this
       project: the start is the record's T-303. Licensed MIT by LICENSE at the pin. Retained in
       web/de-winter-s90-upper-bound-2026-11-15/.
+  - key: '[JoeGun upper bounds 2026-11-16]'
+    authors:
+    - JoeGun
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-16'
+    lineage: builds-on-project
+    credit: JoeGun after Kodaj, Daniel, Levy
+    short_credit: JoeGun after Kodaj et al.
+    note: >-
+      JonathanGun/square-packing-upper-bounds at bc10ce471c9d7841b9a53b383dae87d23dbe5a99
+      (2026-11-16T05:31:52Z), the repository's only commit, 75 seconds before jlevy/squares#1001,
+      which requested the registration: JoeGun's five rational corner Witness/v2 certificates,
+      s(127) <= 11.801753890487, s(204) <= 14.802646843107, s(232) <= 15.759531627557, s(264) <=
+      16.773807598002 and s(305) <= 17.945762359659, each its exact side rounded up at 12 places,
+      with the binary64 decimal pose each was made from. The source says each packing is a public
+      Kaggle packing by Tomáš Kodaj, from his notebook 'Squares in Squares | [22.1636]', improved
+      further by JoeGun, by a fault-line DP of his own at 127, 204, 232 and 305 and by quenches
+      with Evan Daniel's code (evand/square-packing at 6067db5, MIT) at 264 and 305, and asks that
+      Kodaj be credited as the finder; it says JoeGun's part is 1.174e-5, 6.41e-8, 1.045e-7,
+      8.390e-5 and 5.358e-4 of the gains, and that credit to Kodaj alone is fair at 204 and 232.
+      The exact coordinates are made by this repository's packing-witness promote --strategy
+      robust-rational from the decimal poses, and AI agents wrote and ran the search code, the
+      checker and the filing under JoeGun's direction. No optimality, rigidity or KKT claim. The
+      lineage builds on this project: the exact coordinates are made with this repository's
+      promotion tool. Licensed CC BY 4.0 (witnesses, poses, outputs, text) and MIT (check.py) by
+      LICENSE.md at the pin, which says it covers JoeGun's contribution and not Kodaj's terms; the
+      licence of Kodaj's notebook is unchecked (think-71uq). Retained in
+      web/joegun-upper-bounds-2026-11-16/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
@@ -5747,3 +5776,5 @@ credited_names:
   unnir: unnir
   Roberto Ono: Ono
   jazivxt: jazivxt
+  Tomáš Kodaj: Kodaj
+  JoeGun: JoeGun
