@@ -5,7 +5,7 @@ title: "Import #996/#997: Joost de Winter's s(90) <= 9.994038766610 (fa53fb0, re
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 delegate: bold-ritchie-l185
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-15T11:57:32.962Z
-updated_at: 2026-11-16T03:18:57.675Z
+updated_at: 2026-11-16T03:35:25.236Z
 started_at: 2026-11-15T11:57:34.424Z
 ---
 
@@ -40,3 +40,4 @@ Senior-review addressing pass (bold-ritchie-998fix, 16 Nov, worktree off 50e2d89
 
 
 L185 (bold-ritchie-l185, 16 Nov): stage 7 replies recorded. Worktree off origin/main f4aa747e1 (#998 merged 02:33:37Z; Pages deploy + verify-deployment run 43792910636 success). Replies read back via REST: #997 final issuecomment-6905945943 (02:51:52Z; closed completed 02:51:58Z) names T-304 + E-de-winter-997-exact-feasibility / -certificate-report / -review-exact-feasibility -> reported T-304 V3/C3 confirmed current, E ids confirmed/reviewed/confirmed; #996 final issuecomment-6905946113 (02:51:53Z; closed completed 02:52:00Z) names no id of its result -> reported spoken of, no id (as #992); #989 follow-up issuecomment-6905946318 (02:51:54Z) -> reported T-303 V3/C3 confirmed superseded, no corrects, read_through unchanged. #996/#997 state closed, closed 2026-11-16, read_through to their replies. No-public-change record 2026-11-16-bold-ritchie-l185-996-997-989-replies.yaml (methods survey 43 files byte-identical vs f4aa747e1). Not data; no re-pin (release_pin --check: a335205982a1). Commit df6a45301 (03:17:02Z). check_requests --report: reply due yes -> no on #989/#996/#997; --github 0 differences; intake_sweep: all #989/#996/#997 rows gone (6 -> 0 unowned, 2 -> 0 closeable open). Local: records 55/55, edit 71/71 (after npm ci --ignore-scripts in the worktree), 544 tests passed 1 skipped, check_prose_ceremony clean. Draft PR #1000 (label intake). Beads not closed: coordinator closes think-32cl, think-uhav, think-h69d after merge.
+L185 hosted on df6a45301 (PR #1000, draft, label intake, mergeable clean): Packing validation 43797385426 success (12 success, 12 skipped), Certificate page 43797385316 success (3 success, 17 skipped), Branch mergeability 43797273622 success; nothing cancelled or re-run. Lane done; awaiting owner merge, then the coordinator closes think-32cl, think-uhav, think-h69d.
