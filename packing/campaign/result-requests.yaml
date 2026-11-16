@@ -35365,7 +35365,8 @@ issues:
     title: "s(127), s(204), s(232), s(264), s(305): lowered upper bounds on Tomáš Kodaj's public packings: registration request"
     author: JonathanGun
     opened: '2026-11-16'
-    state: open
+    state: closed
+    closed: '2026-11-16'
     kind: result-report
     triage: done
     summary: >-
@@ -35389,7 +35390,7 @@ issues:
       cases adopted them as their houses in the pass of 16 November. Later that day the
       author added a numerical local-minimum check, in a comment and in the edited body, which
       claims no bound; lane L188 (think-664l) retained it and registers nothing.
-    read_through: '2026-11-16T09:29:26Z'
+    read_through: '2026-11-16T11:55:53Z'
     results:
     - key: n127-kodaj-improved
       claim: >-
@@ -35479,7 +35480,89 @@ issues:
     - think-skt8
     - think-664l
     answer_bead: think-0y9m
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1001#issuecomment-6915717106
+      date: '2026-11-16'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n127-kodaj-improved
+        id: T-305
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n127-kodaj-improved
+        id: E-joegun-1001-exact-feasibility
+        status: confirmed
+      - result: n127-kodaj-improved
+        id: E-joegun-1001-certificate-report
+        status: reviewed
+      - result: n127-kodaj-improved
+        id: E-joegun-1001-review-exact-feasibility
+        status: confirmed
+      - result: n204-kodaj-improved
+        id: T-306
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n204-kodaj-improved
+        id: E-joegun-1001-exact-feasibility
+        status: confirmed
+      - result: n204-kodaj-improved
+        id: E-joegun-1001-certificate-report
+        status: reviewed
+      - result: n204-kodaj-improved
+        id: E-joegun-1001-review-exact-feasibility
+        status: confirmed
+      - result: n232-kodaj-improved
+        id: T-307
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n232-kodaj-improved
+        id: E-joegun-1001-exact-feasibility
+        status: confirmed
+      - result: n232-kodaj-improved
+        id: E-joegun-1001-certificate-report
+        status: reviewed
+      - result: n232-kodaj-improved
+        id: E-joegun-1001-review-exact-feasibility
+        status: confirmed
+      - result: n264-kodaj-improved
+        id: T-308
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n264-kodaj-improved
+        id: E-joegun-1001-exact-feasibility
+        status: confirmed
+      - result: n264-kodaj-improved
+        id: E-joegun-1001-certificate-report
+        status: reviewed
+      - result: n264-kodaj-improved
+        id: E-joegun-1001-review-exact-feasibility
+        status: confirmed
+      - result: n305-kodaj-improved
+        id: T-309
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n305-kodaj-improved
+        id: E-joegun-1001-exact-feasibility
+        status: confirmed
+      - result: n305-kodaj-improved
+        id: E-joegun-1001-certificate-report
+        status: reviewed
+      - result: n305-kodaj-improved
+        id: E-joegun-1001-review-exact-feasibility
+        status: confirmed
+      - result: n270-kodaj-quoted
+      - result: local-minimum-check
     close_when: >-
       T-305 to T-309 are on main with the stage 4 review mapped and each adopted as its case's
       house, and the reply on main says what was retained, replayed and reviewed and that the
@@ -35554,3 +35637,55 @@ issues:
       the same second-order verdict, from the binary64 poses at evand/square-packing 6067db5
       where the driver started from the certificates at 675a5ea; both fail at 204. Nothing
       is registered, and no rung, house or credit changes.
+
+      Closed on 16 November 2026 with the final reply (issuecomment-6915717106, posted by jlevy at
+      11:55:53Z), after #1002 merged at 10:25:40Z with T-305 to T-309, the mapped stage 4 review
+      and the adoptions at the five counts, and #1003 at 11:44:13Z with the local-minimum check
+      retained, and after that merge's Pages deploy and verify-deployment passed (run
+      43860362355); recorded in lane L191 (think-0y9m). It states T-305 to T-309 at V3/C3,
+      confirmed, significance S3, each adopted as its case's house; that is each one's position,
+      current.
+
+      It names E-joegun-1001-exact-feasibility, confirmed, E-joegun-1001-certificate-report, the
+      author's report, and E-joegun-1001-review-exact-feasibility, confirmed, so all three are
+      recorded under reported for each of the five results they map to, with check_requests'
+      statuses, the report's reviewed (#900). T-174, T-268, T-275 and T-186 are named as the
+      houses replaced, each with the gain below it, not as this issue's results, and none is
+      recorded under reported.
+
+      It credits Tomáš Kodaj as the finder and the author as the improver at all five counts, and
+      keeps both names at 204 and 232, where the issue offered credit to Kodaj alone, since each
+      certified side is the author's and nothing here measures Kodaj's, leaving that choice to the
+      maintainer. It names Evan Daniel's quench where it was used, and notes the author's AI
+      assistance as stated, without crediting it.
+
+      It says that Kodaj's n = 270 side is context only, with no packing in hand and nothing
+      registered there, and that the author's exact touching points at 127, 232, 264 and 305 equal
+      those Evan Daniel's driver reached here in every printed digit, with the same second-order
+      verdict, and lie beyond each certificate's own contraction margin, held and not registered
+      while the maintainer decides how the record treats such sides. It names no id of either, so
+      n270-kodaj-quoted and local-minimum-check are recorded as spoken of, with no id, as #996's
+      result is.
+
+      It says what was checked: both maintained exact routes accept all five certificates and all
+      55 sharp controls stated in advance came out as stated, the replay's independence resting on
+      the independent rational corner checker, since the other route is the check the author ran;
+      the blind stage 4 review's clean-room checker accepted all five with nothing blocking and
+      its 160 controls as stated; no pair touches, the least gaps 1.12e-11 at 127, 204 and 305,
+      9.97e-13 at 232 and 1.2e-12 at 264; each side is the packing's extent in one direction; the
+      padding of the five houses replaced is at most 3.0e-12, every gain far beyond it; and each
+      certificate is new against its house, 35 to 113 squares moved beyond a tenth.
+
+      It says that the author's repository history was rewritten after the filing and that the
+      record keeps the commit the issue first named, noting the re-commit of the same tree. It
+      asks the review's seven questions, which hold nothing open, so none is recorded under
+      awaiting_author: Kodaj's five parent packings with their digests; his notebook's licence and
+      whether he has been told; what the fault-line step did at 204 and 232; the export's push
+      factor at 127, 204 and 305; whether each side's being the packing's extent is the
+      promotion's doing or the decimal pose's; check.py's format check raising rather than
+      asserting; and the fault-line programme.
+
+      It links RESULTS.md and the five case pages on main and names no bead. It says that nothing
+      the author asked for is still queued, so the issue is closed with it, and that answers are
+      welcome at any time. The issue was closed as completed at 11:55:54Z; it has no comment after
+      the reply, and read_through moves to it.
