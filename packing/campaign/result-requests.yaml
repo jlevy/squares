@@ -35333,7 +35333,9 @@ issues:
       Triaged, retained and registered on 16 November 2026 in lane L187 (think-0y9m) as T-305 to
       T-309: each print rounds up from its exact side, both maintained exact routes accept each
       certificate and refuse its gross and sharp controls, and each is a new arrangement relative
-      to its house's packing, measured. The stage 4 review is lane L186 (think-skt8).
+      to its house's packing, measured. The stage 4 review of 16 November (lane L186,
+      think-skt8) accepts all five with fifteen findings, all notes, and 160 of 160 controls
+      as stated, so each entry is confirmed, independently re-implemented, at V3/C3, S3.
     read_through: '2026-11-16T05:33:07Z'
     results:
     - key: n127-kodaj-improved
@@ -35347,8 +35349,7 @@ issues:
       evidence:
       - E-joegun-1001-certificate-report
       - E-joegun-1001-exact-feasibility
-      validation:
-      - think-skt8
+      - E-joegun-1001-review-exact-feasibility
     - key: n204-kodaj-improved
       claim: >-
         s(204) <= 14.802646843107 rounded up at 12 places (the exact rational side of
@@ -35360,8 +35361,7 @@ issues:
       evidence:
       - E-joegun-1001-certificate-report
       - E-joegun-1001-exact-feasibility
-      validation:
-      - think-skt8
+      - E-joegun-1001-review-exact-feasibility
     - key: n232-kodaj-improved
       claim: >-
         s(232) <= 15.759531627556573 (the exact side of n-232-candidate.yaml at bc10ce4, printed
@@ -35372,8 +35372,7 @@ issues:
       evidence:
       - E-joegun-1001-certificate-report
       - E-joegun-1001-exact-feasibility
-      validation:
-      - think-skt8
+      - E-joegun-1001-review-exact-feasibility
     - key: n264-kodaj-improved
       claim: >-
         s(264) <= 16.773807598002 rounded up at 12 places (the exact rational side of
@@ -35385,8 +35384,7 @@ issues:
       evidence:
       - E-joegun-1001-certificate-report
       - E-joegun-1001-exact-feasibility
-      validation:
-      - think-skt8
+      - E-joegun-1001-review-exact-feasibility
     - key: n305-kodaj-improved
       claim: >-
         s(305) <= 17.945762359659 rounded up at 12 places (the exact rational side of
@@ -35398,8 +35396,7 @@ issues:
       evidence:
       - E-joegun-1001-certificate-report
       - E-joegun-1001-exact-feasibility
-      validation:
-      - think-skt8
+      - E-joegun-1001-review-exact-feasibility
     - key: n270-kodaj-quoted
       claim: >-
         Kodaj's notebook holds n = 270 at 16.927469594094, below the record's 16.928148603343
@@ -35447,3 +35444,19 @@ issues:
 
       The side-only Kaggle leaderboard entries the issue quotes below each claim state no packing
       and are no reports.
+
+      The stage 4 review (docs/project/reviews/review-2026-11-16-joegun-1001.md, lane L186,
+      think-skt8) agrees with the replay everywhere both measured: the least pair margins
+      (1.12027e-11 at 127, 1.12031e-11 at 204, 997/10^15 at 232, 1.2e-12 at 264 and
+      1.12509e-11 at 305, at the same pairs), the exact wall contacts, the margins of each house
+      and certificate and the identity against each house. It adds that each side is the
+      packing's extent in one direction, the other short by 3.9e-16 to 5.3e-15 (F4), that the
+      near pairs are opened by about 1e-11 or 1e-12 (F5), the files' own provenance words (F7)
+      and the custody (F8), and finds check.py sound, its format check an assert that python -O
+      strips (F12). Its seven questions for the author hold no rung: Kodaj's parent packings,
+      his notebook's licence, what the fault-line programme moved at 204 and 232, the export's
+      push factor, the side's slack, check.py's assert and the programme itself. The review was
+      written by the strong tier, not the strong-max tier the runbook names.
+
+      This lane read the review at 06:56Z, after its own replay, controls, measurements (06:34Z)
+      and registration (06:45Z) were committed.

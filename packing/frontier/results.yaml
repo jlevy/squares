@@ -48038,8 +48038,9 @@ results:
       and turns squares by up to 34.87 degrees. It has 56 squares tilted beyond a degree,
       26.42 to 31.83 degrees, all one way, where T-174 has 48, 7.30 to 34.87 degrees.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-skt8).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 16
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair by
+      two exact methods, so the bound is confirmed, independently re-implemented.
 
       The issue says this repository's packing-witness verify, run unmodified from this
       repository's main, reports VERIFIED (exact-algebraic, 8001 pairs), and that check.py, an
@@ -48073,9 +48074,13 @@ results:
         the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's
         1.88e-05 (S3), where new and continued arrangements are S3: beside T-304's 4.24e-03
         at 90 and T-301's 4.76e-03 at 228. A fault-line DP and a quench on a public Kaggle
-        packing are no new technique, so not S4. No lower bound or optimum.
+        packing are no new technique, so not S4. No lower bound or optimum. The stage 4
+        review confirms S3.
       scored: '2026-11-16'
-      by: think-0y9m JoeGun import (intake lane L187), a draft for the stage 4 review
+      by: >-
+        think-0y9m JoeGun import (intake lane L187), confirmed by the stage 4 review of 16
+        November (lane L186), which measures the step as 49 to 485 times T-226's and a new
+        arrangement relative to the house
     novelty: previously-published
     attribution:
       source_keys:
@@ -48084,6 +48089,7 @@ results:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -48098,10 +48104,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l187_1116.py
     - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n127.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/check-n127.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/controls-n127.json
     notes: >-
       A separate complete repository replay is retained for n = 127, in the receipt of the
       release's five certificates (receipts/exact-certification.json.xz): the positive and its
@@ -48143,6 +48153,21 @@ results:
       stood in for their ceilings, finds the L-step improvements, extensions and monotonicity
       consequences main finds, so the bound carries to no other count.
 
+      The 16 November review's clean-room checker (E-joegun-1001-review-exact-feasibility)
+      decided every wall and all 8001 pairs of the certificate by separating axes in Python
+      integers and again by exact clipped areas in GMP rationals, with no distance filter,
+      every pair strictly apart and every square inside by both methods; its least margin and
+      the squares that touch the walls equal the replay's, and its 32 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and refused in that of its 12-place floor.
+
+      It finds no blocking or major defect (F1 to F15, all notes), measures each house's
+      padding far below its gain (F10) and the certificate a new arrangement relative to its
+      house (F11), and asks the author questions that hold no rung.
+
+      This lane read the review at 06:56Z, after its own replay, controls, measurements and
+      registration were committed.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
@@ -48151,12 +48176,30 @@ results:
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
       think-71uq, which holds no import. No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-skt8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-174, mapped as an adversarial review. Then adopt it at 127 in place
-      of T-174 under the house rule in the pass of 16 November 2026, with both strong
-      generators' regularization of the new house and the flip of the new house in the same
-      change.
+      Adopt it at 127 in place of T-174 under the house rule in the pass of 16 November 2026,
+      with both strong generators' regularization of the new house and the flip of the new
+      house in the same change. V4 and C4 then need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-16-joegun-1001.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of
+        issue 1001 (L186, under think-skt8), prompted separately from the import lane (L187,
+        think-0y9m) and blind to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-16'
+      scope: >-
+        Finite feasibility of #1001's five corner Witness/v2 certificates, decided by the
+        review's clean-room exact checker, frozen before any producer, witness or verifier
+        code was read, by two methods, with 32 controls a count stated in advance as rules;
+        the claims' arithmetic, the sides against the packings' extents, the near pairs, the
+        tilts, the padding of each house and certificate, the identity against each house,
+        closed forms, custody and the author's checker.
+      verdict: accepted
+      covers:
+      - T-305
   - id: T-306
     kind: upper-bound
     registered: '2026-11-16'
@@ -48179,8 +48222,9 @@ results:
       where T-268 has 63, 25.39 to 31.24 degrees; against T-264, the house before T-268, the
       identity moves 44 squares beyond a tenth.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-skt8).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 16
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair by
+      two exact methods, so the bound is confirmed, independently re-implemented.
 
       The issue says this repository's packing-witness verify, run unmodified from this
       repository's main, reports VERIFIED (exact-algebraic, 20706 pairs), and that check.py,
@@ -48218,9 +48262,13 @@ results:
         the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's
         1.88e-05 (S3), where new and continued arrangements are S3: beside T-304's 4.24e-03
         at 90 and T-301's 4.76e-03 at 228. A fault-line DP and a quench on a public Kaggle
-        packing are no new technique, so not S4. No lower bound or optimum.
+        packing are no new technique, so not S4. No lower bound or optimum. The stage 4
+        review confirms S3.
       scored: '2026-11-16'
-      by: think-0y9m JoeGun import (intake lane L187), a draft for the stage 4 review
+      by: >-
+        think-0y9m JoeGun import (intake lane L187), confirmed by the stage 4 review of 16
+        November (lane L186), which measures the step as 49 to 485 times T-226's and a new
+        arrangement relative to the house
     novelty: previously-published
     attribution:
       source_keys:
@@ -48229,6 +48277,7 @@ results:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -48243,10 +48292,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l187_1116.py
     - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n204.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/check-n204.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/controls-n204.json
     notes: >-
       A separate complete repository replay is retained for n = 204, in the receipt of the
       release's five certificates (receipts/exact-certification.json.xz): the positive and its
@@ -48289,6 +48342,21 @@ results:
       stood in for their ceilings, finds the L-step improvements, extensions and monotonicity
       consequences main finds, so the bound carries to no other count.
 
+      The 16 November review's clean-room checker (E-joegun-1001-review-exact-feasibility)
+      decided every wall and all 20706 pairs of the certificate by separating axes in Python
+      integers and again by exact clipped areas in GMP rationals, with no distance filter,
+      every pair strictly apart and every square inside by both methods; its least margin and
+      the squares that touch the walls equal the replay's, and its 32 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and refused in that of its 12-place floor.
+
+      It finds no blocking or major defect (F1 to F15, all notes), measures each house's
+      padding far below its gain (F10) and the certificate a new arrangement relative to its
+      house (F11), and asks the author questions that hold no rung.
+
+      This lane read the review at 06:56Z, after its own replay, controls, measurements and
+      registration were committed.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
@@ -48297,12 +48365,30 @@ results:
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
       think-71uq, which holds no import. No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-skt8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-268, mapped as an adversarial review. Then adopt it at 204 in place
-      of T-268 under the house rule in the pass of 16 November 2026, with both strong
-      generators' regularization of the new house and the flip of the new house in the same
-      change.
+      Adopt it at 204 in place of T-268 under the house rule in the pass of 16 November 2026,
+      with both strong generators' regularization of the new house and the flip of the new
+      house in the same change. V4 and C4 then need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-16-joegun-1001.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of
+        issue 1001 (L186, under think-skt8), prompted separately from the import lane (L187,
+        think-0y9m) and blind to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-16'
+      scope: >-
+        Finite feasibility of #1001's five corner Witness/v2 certificates, decided by the
+        review's clean-room exact checker, frozen before any producer, witness or verifier
+        code was read, by two methods, with 32 controls a count stated in advance as rules;
+        the claims' arithmetic, the sides against the packings' extents, the near pairs, the
+        tilts, the padding of each house and certificate, the identity against each house,
+        closed forms, custody and the author's checker.
+      verdict: accepted
+      covers:
+      - T-306
   - id: T-307
     kind: upper-bound
     registered: '2026-11-16'
@@ -48324,8 +48410,9 @@ results:
       and 25 the other, where T-275 has 80, 1.46 to 32.00 degrees, all one way; against T-256,
       the house before T-275, 39 squares move beyond a tenth.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-skt8).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 16
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair by
+      two exact methods, so the bound is confirmed, independently re-implemented.
 
       The issue says this repository's packing-witness verify, run unmodified from this
       repository's main, reports VERIFIED (exact-algebraic, 26796 pairs), and that check.py,
@@ -48363,9 +48450,13 @@ results:
         the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's
         1.88e-05 (S3), where new and continued arrangements are S3: beside T-304's 4.24e-03
         at 90 and T-301's 4.76e-03 at 228. A fault-line DP and a quench on a public Kaggle
-        packing are no new technique, so not S4. No lower bound or optimum.
+        packing are no new technique, so not S4. No lower bound or optimum. The stage 4
+        review confirms S3.
       scored: '2026-11-16'
-      by: think-0y9m JoeGun import (intake lane L187), a draft for the stage 4 review
+      by: >-
+        think-0y9m JoeGun import (intake lane L187), confirmed by the stage 4 review of 16
+        November (lane L186), which measures the step as 49 to 485 times T-226's and a new
+        arrangement relative to the house
     novelty: previously-published
     attribution:
       source_keys:
@@ -48374,6 +48465,7 @@ results:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -48388,10 +48480,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l187_1116.py
     - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n232.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/check-n232.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/controls-n232.json
     notes: >-
       A separate complete repository replay is retained for n = 232, in the receipt of the
       release's five certificates (receipts/exact-certification.json.xz): the positive and its
@@ -48436,6 +48532,21 @@ results:
       stood in for their ceilings, finds the L-step improvements, extensions and monotonicity
       consequences main finds, so the bound carries to no other count.
 
+      The 16 November review's clean-room checker (E-joegun-1001-review-exact-feasibility)
+      decided every wall and all 26796 pairs of the certificate by separating axes in Python
+      integers and again by exact clipped areas in GMP rationals, with no distance filter,
+      every pair strictly apart and every square inside by both methods; its least margin and
+      the squares that touch the walls equal the replay's, and its 32 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and refused in that of its 12-place floor.
+
+      It finds no blocking or major defect (F1 to F15, all notes), measures each house's
+      padding far below its gain (F10) and the certificate a new arrangement relative to its
+      house (F11), and asks the author questions that hold no rung.
+
+      This lane read the review at 06:56Z, after its own replay, controls, measurements and
+      registration were committed.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
@@ -48444,12 +48555,30 @@ results:
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
       think-71uq, which holds no import. No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-skt8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-275, mapped as an adversarial review. Then adopt it at 232 in place
-      of T-275 under the house rule in the pass of 16 November 2026, with both strong
-      generators' regularization of the new house and the flip of the new house in the same
-      change.
+      Adopt it at 232 in place of T-275 under the house rule in the pass of 16 November 2026,
+      with both strong generators' regularization of the new house and the flip of the new
+      house in the same change. V4 and C4 then need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-16-joegun-1001.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of
+        issue 1001 (L186, under think-skt8), prompted separately from the import lane (L187,
+        think-0y9m) and blind to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-16'
+      scope: >-
+        Finite feasibility of #1001's five corner Witness/v2 certificates, decided by the
+        review's clean-room exact checker, frozen before any producer, witness or verifier
+        code was read, by two methods, with 32 controls a count stated in advance as rules;
+        the claims' arithmetic, the sides against the packings' extents, the near pairs, the
+        tilts, the padding of each house and certificate, the identity against each house,
+        closed forms, custody and the author's checker.
+      verdict: accepted
+      covers:
+      - T-307
   - id: T-308
     kind: upper-bound
     registered: '2026-11-16'
@@ -48472,8 +48601,9 @@ results:
       squares tilted beyond a degree, 5.82 to 29.30 degrees, 26 one way and 45 the other,
       where T-186 has 78, 3.55 to 31.62 degrees, all one way.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-skt8).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 16
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair by
+      two exact methods, so the bound is confirmed, independently re-implemented.
 
       The issue says this repository's packing-witness verify, run unmodified from this
       repository's main, reports VERIFIED (exact-algebraic, 34716 pairs), and that check.py,
@@ -48509,9 +48639,13 @@ results:
         the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's
         1.88e-05 (S3), where new and continued arrangements are S3: beside T-304's 4.24e-03
         at 90 and T-301's 4.76e-03 at 228. A fault-line DP and a quench on a public Kaggle
-        packing are no new technique, so not S4. No lower bound or optimum.
+        packing are no new technique, so not S4. No lower bound or optimum. The stage 4
+        review confirms S3.
       scored: '2026-11-16'
-      by: think-0y9m JoeGun import (intake lane L187), a draft for the stage 4 review
+      by: >-
+        think-0y9m JoeGun import (intake lane L187), confirmed by the stage 4 review of 16
+        November (lane L186), which measures the step as 49 to 485 times T-226's and a new
+        arrangement relative to the house
     novelty: previously-published
     attribution:
       source_keys:
@@ -48520,6 +48654,7 @@ results:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -48534,10 +48669,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l187_1116.py
     - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n264.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/check-n264.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/controls-n264.json
     notes: >-
       A separate complete repository replay is retained for n = 264, in the receipt of the
       release's five certificates (receipts/exact-certification.json.xz): the positive and its
@@ -48580,6 +48719,21 @@ results:
       stood in for their ceilings, finds the L-step improvements, extensions and monotonicity
       consequences main finds, so the bound carries to no other count.
 
+      The 16 November review's clean-room checker (E-joegun-1001-review-exact-feasibility)
+      decided every wall and all 34716 pairs of the certificate by separating axes in Python
+      integers and again by exact clipped areas in GMP rationals, with no distance filter,
+      every pair strictly apart and every square inside by both methods; its least margin and
+      the squares that touch the walls equal the replay's, and its 32 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and refused in that of its 12-place floor.
+
+      It finds no blocking or major defect (F1 to F15, all notes), measures each house's
+      padding far below its gain (F10) and the certificate a new arrangement relative to its
+      house (F11), and asks the author questions that hold no rung.
+
+      This lane read the review at 06:56Z, after its own replay, controls, measurements and
+      registration were committed.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
@@ -48588,12 +48742,30 @@ results:
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
       think-71uq, which holds no import. No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-skt8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-186, mapped as an adversarial review. Then adopt it at 264 in place
-      of T-186 under the house rule in the pass of 16 November 2026, with both strong
-      generators' regularization of the new house and the flip of the new house in the same
-      change.
+      Adopt it at 264 in place of T-186 under the house rule in the pass of 16 November 2026,
+      with both strong generators' regularization of the new house and the flip of the new
+      house in the same change. V4 and C4 then need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-16-joegun-1001.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of
+        issue 1001 (L186, under think-skt8), prompted separately from the import lane (L187,
+        think-0y9m) and blind to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-16'
+      scope: >-
+        Finite feasibility of #1001's five corner Witness/v2 certificates, decided by the
+        review's clean-room exact checker, frozen before any producer, witness or verifier
+        code was read, by two methods, with 32 controls a count stated in advance as rules;
+        the claims' arithmetic, the sides against the packings' extents, the near pairs, the
+        tilts, the padding of each house and certificate, the identity against each house,
+        closed forms, custody and the author's checker.
+      verdict: accepted
+      covers:
+      - T-308
   - id: T-309
     kind: upper-bound
     registered: '2026-11-16'
@@ -48617,8 +48789,9 @@ results:
       degrees, all one way, where T-174 has 89, 4.46 to 33.38 degrees, 48 one way and 41 the
       other.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-skt8).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 16
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair by
+      two exact methods, so the bound is confirmed, independently re-implemented.
 
       The issue says this repository's packing-witness verify, run unmodified from this
       repository's main, reports VERIFIED (exact-algebraic, 46360 pairs), and that check.py,
@@ -48654,9 +48827,13 @@ results:
         the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's
         1.88e-05 (S3), where new and continued arrangements are S3: beside T-304's 4.24e-03
         at 90 and T-301's 4.76e-03 at 228. A fault-line DP and a quench on a public Kaggle
-        packing are no new technique, so not S4. No lower bound or optimum.
+        packing are no new technique, so not S4. No lower bound or optimum. The stage 4
+        review confirms S3.
       scored: '2026-11-16'
-      by: think-0y9m JoeGun import (intake lane L187), a draft for the stage 4 review
+      by: >-
+        think-0y9m JoeGun import (intake lane L187), confirmed by the stage 4 review of 16
+        November (lane L186), which measures the step as 49 to 485 times T-226's and a new
+        arrangement relative to the house
     novelty: previously-published
     attribution:
       source_keys:
@@ -48665,6 +48842,7 @@ results:
     evidence:
     - E-joegun-1001-certificate-report
     - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
     artifacts:
     - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
     - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
@@ -48679,10 +48857,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l187_1116.py
     - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n305.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/check-n305.json
+    - packing/resources/web/joegun-1001-review-2026-11-16/out/controls-n305.json
     notes: >-
       A separate complete repository replay is retained for n = 305, in the receipt of the
       release's five certificates (receipts/exact-certification.json.xz): the positive and its
@@ -48725,6 +48907,21 @@ results:
       stood in for their ceilings, finds the L-step improvements, extensions and monotonicity
       consequences main finds, so the bound carries to no other count.
 
+      The 16 November review's clean-room checker (E-joegun-1001-review-exact-feasibility)
+      decided every wall and all 46360 pairs of the certificate by separating axes in Python
+      integers and again by exact clipped areas in GMP rationals, with no distance filter,
+      every pair strictly apart and every square inside by both methods; its least margin and
+      the squares that touch the walls equal the replay's, and its 32 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and refused in that of its 12-place floor.
+
+      It finds no blocking or major defect (F1 to F15, all notes), measures each house's
+      padding far below its gain (F10) and the certificate a new arrangement relative to its
+      house (F11), and asks the author questions that hold no rung.
+
+      This lane read the review at 06:56Z, after its own replay, controls, measurements and
+      registration were committed.
+
       The source's own check.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's
@@ -48733,13 +48930,30 @@ results:
       leaves Kodaj's terms unchanged; the licence of his notebook is the owner's question
       think-71uq, which holds no import. No human oversight or optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-skt8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-174, mapped as an adversarial review. Then adopt it at 305 in place
-      of T-174 under the house rule in the pass of 16 November 2026, with both strong
-      generators' regularization of the new house and the flip of the new house in the same
-      change.
-
+      Adopt it at 305 in place of T-174 under the house rule in the pass of 16 November 2026,
+      with both strong generators' regularization of the new house and the flip of the new
+      house in the same change. V4 and C4 then need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-16-joegun-1001.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of
+        issue 1001 (L186, under think-skt8), prompted separately from the import lane (L187,
+        think-0y9m) and blind to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-16'
+      scope: >-
+        Finite feasibility of #1001's five corner Witness/v2 certificates, decided by the
+        review's clean-room exact checker, frozen before any producer, witness or verifier
+        code was read, by two methods, with 32 controls a count stated in advance as rules;
+        the claims' arithmetic, the sides against the packings' extents, the near pairs, the
+        tilts, the padding of each house and certificate, the identity against each house,
+        closed forms, custody and the author's checker.
+      verdict: accepted
+      covers:
+      - T-309
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:

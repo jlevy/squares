@@ -63787,6 +63787,22 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-16'
+    external_review:
+      state: informally-verified
+      date: '2026-11-16'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of issue
+        1001 (L186, under think-skt8), prompted separately from the import lane (L187,
+        think-0y9m) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-16-joegun-1001.md accepted all five certificates
+        with fifteen findings, all notes, and 160 of 160 controls as stated, 32 a count, in a
+        plan hashed before any program read a certificate: each claim is its side's 12-place
+        ceiling, accepted in the box of the claim and refused in that of its floor; no pair
+        touches; each house's padding is far below its gain, so RV-3 does not apply; each
+        certificate is a new arrangement relative to its house, credited to Kodaj as finder
+        and JoeGun as improver; S3 at each count. Its clean-room run is
+        E-joegun-1001-review-exact-feasibility, and the replay E-joegun-1001-exact-feasibility.
     limitations: >-
       This atom records the source author's report, in issue 1001, of 5 exact rational corner
       Witness/v2 certificates at bc10ce4, n-NNN-candidate.yaml at 127, 204, 232, 264 and 305,
@@ -63802,7 +63818,8 @@ evidence:
       CPU seconds and 254.93 job wall seconds, the longest job 34.98 seconds. In every positive
       squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
       least 9.97e-13. The packet's sharp controls meet those margins on both routes. The replay
-      is E-joegun-1001-exact-feasibility.
+      is E-joegun-1001-exact-feasibility, and the stage 4 review's clean-room run
+      E-joegun-1001-review-exact-feasibility.
 
       The two maintained routes, the sqpack rational witness verifier and the independent
       rational corner checker, share certificate parsing, half-angle conversion, Fraction
@@ -63889,4 +63906,112 @@ evidence:
       squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
       least 9.97e-13. The receipt's controls are gross, and the packet's sharp controls meet
       those margins. Finite feasibility only.
+    source_reviewed: '2026-11-16'
+    external_review:
+      state: informally-verified
+      date: '2026-11-16'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of issue
+        1001 (L186, under think-skt8), prompted separately from the import lane (L187,
+        think-0y9m) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-16-joegun-1001.md accepted all five certificates
+        with fifteen findings, all notes, and 160 of 160 controls as stated, 32 a count, in a
+        plan hashed before any program read a certificate: each claim is its side's 12-place
+        ceiling, accepted in the box of the claim and refused in that of its floor; no pair
+        touches; each house's padding is far below its gain, so RV-3 does not apply; each
+        certificate is a new arrangement relative to its house, credited to Kodaj as finder
+        and JoeGun as improver; S3 at each count. Its clean-room run is
+        E-joegun-1001-review-exact-feasibility, and the replay E-joegun-1001-exact-feasibility.
+  - id: E-joegun-1001-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+      - 204
+      - 232
+      - 264
+      - 305
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[JoeGun upper bounds 2026-11-16]'
+    certificate: packing/resources/web/joegun-upper-bounds-2026-11-16/source/
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B at nice 19 on a shared host,
+      16 November 2026, from the review-only directory joegun-1001-review-2026-11-16: lane L186
+      ran its frozen l186_check.py on each of #1001's five corner Witness/v2 files at bc10ce4
+      (out/check-nNNN.json, ACCEPT at all five), deciding every format hypothesis, every square
+      a unit square, every wall and all 136,579 pairs by separating axes in Python integers
+      over each square's own denominator and again by exact convex clipping in gmpy2.mpq, with
+      containment by area and no distance filter: every pair strictly apart, the least margins
+      1.12027011549e-11 (127, squares 50 and 54), 1.12031111062e-11 (204, 8 and 109),
+      997/10^15 (232, nine pairs), 1.20000001261e-12 (264, 255 and 256) and 1.12508984333e-11
+      (305, 130 and 137); 3, 3, 21, 9 and 3 exact wall contacts, the side the packing's extent
+      in one direction. l186_controls.py decided the 32 controls a count a plan hashed
+      beforehand stated (out/controls-nNNN.json), all 160 as stated; among them the squares
+      accepted in the box of the claim's own side and refused in that of its 12-place floor,
+      and every one of the 136,579 pairs closed along its centre line to exact contact and
+      1e-30 past it. l186_selftest.py passed 73,784 checks.
+    replay_status: passed
+    verifiers:
+    - V-joegun-1001-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the five certificates: every square, every wall and every pair, by two exact methods
+          in two arithmetic libraries that share only the reader, with the stated controls
+          decided by both
+        checked: 5
+        of: 5
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issue 1001 (L186, under think-skt8), strong
+          tier (tbd-strong)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1001 says AI agents wrote and ran the search code, the checker and the filing
+          under JoeGun's direction, and that this repository's packing-witness promote made the
+          coordinates. The checker was written from the mathematics, the Witness/v2 schema text
+          and the five files, and frozen at 2026-11-16T06:18:03Z, before its author read the
+          author's README, check.py, outputs or decimal poses or this repository's witness,
+          verifier or promotion code; it shares no code with the source's checker, this
+          repository's maintained routes or promotion, or any earlier review's programs.
+    independence_record: docs/project/reviews/review-2026-11-16-joegun-1001.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-16'
+      reviewed_by: >-
+        AI agent (Claude, strong tier tbd-strong), the stage 4 mathematical review lane of issue
+        1001 (L186, under think-skt8), prompted separately from the import lane (L187,
+        think-0y9m) and blind to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-16-joegun-1001.md accepted all five certificates
+        with fifteen findings, all notes, and 160 of 160 controls as stated, 32 a count, in a
+        plan hashed before any program read a certificate: each claim is its side's 12-place
+        ceiling, accepted in the box of the claim and refused in that of its floor; no pair
+        touches; each house's padding is far below its gain, so RV-3 does not apply; each
+        certificate is a new arrangement relative to its house, credited to Kodaj as finder
+        and JoeGun as improver; S3 at each count. Its clean-room run is
+        E-joegun-1001-review-exact-feasibility, and the replay E-joegun-1001-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the five retained certificates by two exact methods in one
+      program, which share its reader. The review ran on its own clone of the source at the
+      pin; the five files' digests equal the packet's. Finite feasibility only.
     source_reviewed: '2026-11-16'

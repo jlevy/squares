@@ -13,7 +13,8 @@ the claims by the issue, with the first commit kept.
 
 Intake lane L187 (think-0y9m) retained it, replayed it and measured it on 16 November
 2026 and registers it as **T-305** to **T-309**, one result a count.
-The blind stage 4 review is lane L186 (think-skt8), written apart from this lane.
+The blind stage 4 review of lane L186 (think-skt8) accepted all five the same day, so
+they are at V3/C3.
 
 ## What the Source Claims
 
@@ -175,6 +176,49 @@ receipts:
 [measure/l-step-scan.json](measure/l-step-scan.json) is `devtools.l_step_scan` with the
 five sides stood in for their ceilings: it finds the same L-step and monotonicity
 consequences as on `main`, so no bound carries to another count.
+
+## Stage 4 Review
+
+The stage 4 review of 16 November 2026
+([review-2026-11-16-joegun-1001.md](../../../../docs/project/reviews/review-2026-11-16-joegun-1001.md),
+lane L186, under think-skt8), written blind to this lane until its findings were frozen,
+accepts all five certificates with fifteen findings, all notes. Its clean-room checker,
+kept in the review-only directory
+[joegun-1001-review-2026-11-16](../joegun-1001-review-2026-11-16/README.md), decided
+every square, wall and all 136,579 pairs twice, by separating axes in Python integers and
+by exact clipping in GMP rationals, with no distance filter, and 160 of 160 controls,
+stated beforehand as rules, came out as stated.
+It was written by the strong tier, not the strong-max tier the runbook names.
+
+This lane read the review at 06:56Z on 16 November, after its own replay, controls and
+measurements (06:34Z) and its records for them (06:45Z) were committed.
+Read against this packet’s receipts, the review’s least pair margins (squares 50 and 54
+at 127, 8 and 109 at 204, nine pairs at 997/10¹⁵ at 232, 255 and 256 at 264, 130 and 137
+at 305) are the replay’s exactly; its wall contacts include each square the sharp controls
+grew by 0 (44, 47, 108, 124 and 27); and its contraction margins of each house and
+certificate and its identity against each house are this packet’s
+[measure/](measure/) receipts, from the same tools. No disagreement.
+
+What the review adds:
+
+- **F3**: each claim is its side’s 12-place ceiling; the squares are accepted in the box
+  of the claim and refused in that of its floor.
+- **F4**: each side is the packing’s extent in one direction; the other is short by 3.9 ×
+  10⁻¹⁶ to 5.3 × 10⁻¹⁵, slack the record registers nothing for.
+- **F5**: no pair touches; each packing is a contact arrangement opened by about 10⁻¹¹
+  (127, 204, 305) or 10⁻¹² (232, 264).
+- **F7**: the files call their coordinates `verified`; those are the promotion tool’s
+  words, and the record states its own provenance.
+- **F8 to F11, F13 and F15**: custody, the issue’s arithmetic, the padding (RV-3 does not
+  apply), new arrangements credited to Kodaj and JoeGun, no closed form, and the
+  maintained routes’ agreement.
+- **F12**: `check.py` is sound; its format check is an `assert`, which `python -O`
+  strips.
+- **F14**: Kodaj’s notebook and its licence were not read (think-71uq).
+
+Its seven questions for the author hold nothing open: Kodaj’s parent packings, his
+notebook’s licence, what the fault-line programme moved at 204 and 232, the export’s push
+factor, the side’s slack, `check.py`’s `assert`, and the programme itself.
 
 ## What Is Not Established
 

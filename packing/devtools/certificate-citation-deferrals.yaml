@@ -99,3 +99,16 @@ deferrals:
       305, T-268 at 204, T-275 at 232, T-186 at 264). The case records cite them when the houses
       adopt T-305 to T-309, after their stage 4 review (think-skt8), in the pass of 16 November
       2026; this entry is removed in that change.
+  - evidence: E-joegun-1001-review-exact-feasibility
+    results:
+    - T-305
+    - T-306
+    - T-307
+    - T-308
+    - T-309
+    bead: think-0y9m
+    blocked_on: think-skt8
+    recorded: '2026-11-16'
+    reason: The 16 November review's clean-room run on JoeGun's five certificates of issue 1001.
+      The case records cite it when the houses adopt T-305 to T-309 in the pass of 16 November
+      2026, in the change after this one; this entry is removed in that change.

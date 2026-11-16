@@ -1111,6 +1111,7 @@ case or experiment separately.
 | [Ono’s Certificates of #984 and #985: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ono-984-985.md) | dated review record | record | retained | — |
 | [The Certificate of #989 by jazivxt: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-jazivxt-989.md) | dated review record | record | retained | — |
 | [De Winter’s Certificate of #996: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-de-winter-996.md) | dated review record | record | retained | — |
+| [JoeGun’s Five Certificates of #1001: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-16-joegun-1001.md) | dated review record | record | retained | — |
 | [The Construction of #992 by Miguel Lara: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-lara-992.md) | dated review record | record | retained | — |
 | [Proof Review: Khalili and Gharabaghi’s `s(k² − 5) = k` for Every `k ≥ 7`](docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md) | dated review record | record | retained | — |
 | [De Winter’s Packings at 132 and 157: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-dewinter-132-157.md) | dated review record | record | retained | — |
