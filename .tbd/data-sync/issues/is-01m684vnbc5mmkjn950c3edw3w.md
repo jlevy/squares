@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 346
+version: 347
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -117,7 +117,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T00:54:37.235Z
+updated_at: 2026-11-16T01:54:19.657Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -312,3 +312,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-15T22:53Z renewal (intake302): no change; #998 (L181) waits for 16 November UTC.
 - 2026-11-15T23:54Z renewal (intake303): no change; L181 alive, adopts T-304 on #998 at 00:00Z 16 November.
 - 2026-11-16T00:53Z renewal (intake304): no new items (day rollover only); L181 is working the 16 November adoption on #998 locally.
+- 2026-11-16T01:53Z renewal (intake305): no new items. L181 handed back #998 at 50e2d897e (T-304 adopted at 90 in the 16 November pass, CI green); senior review running.
