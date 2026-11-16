@@ -63642,10 +63642,13 @@ evidence:
           The issues say the local optimization, rational certificate, checks and figures were
           produced with Claude Fable 5.2 (Anthropic) under Joost de Winter's direction, and the
           local search with GPT-6.1 Sol Max (OpenAI); the project's routes are Claude's too,
-          written from prompts of their own long before this certificate. No route here is the
-          source's code, and this lane never opened the source's verify_exact.py or
-          check_area.py. The routes' authors read other sources' formats and, in earlier lanes,
-          other sources' checkers, so the record does not call them clean room.
+          written from prompts of their own long before this certificate. One maintained route,
+          the independent rational corner checker (V-check-rational-witness-independent), is the
+          checker the source reports running, on its Witness/v2 twin, so the independence rests
+          on sqpack's exact verifier (V-sqpack-verify). Neither route is the source's
+          verify_exact.py or check_area.py, which this lane never opened. The routes' authors
+          read other sources' formats and, in earlier lanes, other sources' checkers, so the
+          record does not call them clean room.
     limitations: >-
       A replay of the one retained certificate by two maintained exact routes that share this
       repository's centre-direction reader (certificate parsing and half-angle conversion),

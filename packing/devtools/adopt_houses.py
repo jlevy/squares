@@ -2762,12 +2762,19 @@ RESULTS: dict[str, Prose] = {
             "replaces the certificate of "
             "[jlevy/squares#996](https://github.com/jlevy/squares/issues/996)"
         ),
-        producer_route=False,
+        producer_route=True,
         ai=(
             "Issues 996 and 997 say the local search was run with GPT-6.1 Sol Max (OpenAI) "
             "and the local optimization, rational certificate, checks and figures were "
             "produced with Claude Fable 5.2 (Anthropic), both under Joost de Winter’s "
             "direction."
+        ),
+        routes=(
+            "One maintained route, the independent rational corner checker, is the checker "
+            "the source reports running, on its Witness/v2 twin, so the maintained routes’ "
+            "independent re-implementation rests on `sqpack`’s exact verifier. No route here "
+            "is the source’s own code, and the review’s checker shares no code with either "
+            "maintained route or the source."
         ),
         lineage=(
             "The issues say the packing starts from T-303, jazivxt’s packing, which jazivxt "
