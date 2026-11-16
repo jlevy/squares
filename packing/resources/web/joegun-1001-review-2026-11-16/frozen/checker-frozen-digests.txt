@@ -1,0 +1,20 @@
+# Lane L186 checker and controls plan, frozen at 2026-11-16T06:18:03Z, before any program of this lane read a certificate, and before the source's README.md, check.py, check-output.txt, packing-witness-verify.txt, make-pose.py, LICENSE files or n-NNN-decimal-pose.yaml files, this repository's witness, verifier or promotion code, the register entries, case records or witnesses at 127, 204, 232, 264 or 305, Kodaj's notebook, or any import lane's work was read.
+# Read before the freeze: issue #1001's body (REST), result-import.md stage 4, the review of #996 (L180) and its packet README and frozen digest list, packing/witnesses/witness.schema.yaml, and the five candidate files' structure (keys, scalar forms, line kinds) by grep, as needed to parse.
+# source files (clone of JonathanGun/square-packing-upper-bounds at bc10ce471c9d7841b9a53b383dae87d23dbe5a99, its only commit; digests by sha256sum, compared with the issue's list in the check receipts):
+9bde48b76afce9ab7d20d6d180650d0a6bbe46b7f106573f8155dfe9ed9d06f0  bc10ce4:n-127-candidate.yaml
+1daa0e09b5b403e4e47048104c760f3d8a9b6997d77d26a30930bf1e257ea90c  bc10ce4:n-204-candidate.yaml
+93d856c25c9f75842ca5e36552ccb726e87884440689c9ce4100d2a58d5a279d  bc10ce4:n-232-candidate.yaml
+14fef8f163b2cdb9062f714cdd41d81dce2447691a2de55e3797810cdcd676ee  bc10ce4:n-264-candidate.yaml
+14d2e37e22218defb238e0b0e657f139bab0c2873cc3d05f781b0f3b13a75494  bc10ce4:n-305-candidate.yaml
+# checker programs, the controls program and the controls plan:
+1f6cd4de7b2af33b6be119cb9f2118b8f07e110bb87d3814ca6e9aae44d21b82  l186_reader.py
+008e2fcf22576ed8d668b9a7208e71c3d73e3a3d227bea94f487c6743e224e7d  l186_sat.py
+623e932a79aa49d0f60c549a17309c99ffcb6557b1ac8845f1969e31dbcb9929  l186_clip.py
+91619d6ca4f249275cab3529eea3116d84b8bd601d184dad3aa0de0fab2deb9a  l186_decide.py
+89ac32af65d9c408036e19a49732371ff942bb0bba9f3ed9b85c79a7e4d1ef18  l186_geom.py
+328d68b70f9ec8f306c55a94b806c5231a4b4f400a267f878a59d103c16c3d3b  l186_check.py
+87987971c51e898bd17fea631d89e31f3fbcc8cfa300427981805f8280869403  l186_selftest.py
+23dadb528f2c52018e80e36cd8ced4e6aac9253758109ab25ceb6b8bc12ad7e0  l186_controls.py
+f5e6f80f1c8f010580f4901d126da2d646eef09bcd8764bfd72a66da5d834967  controls-plan.json
+# receipt written by the frozen self-test (it reads no certificate):
+a45935b8adbcfa2db33cdf5a6c7cde41b6e4bcb0f26fd8c71329d52f1c1f7288  out/selftest.json
