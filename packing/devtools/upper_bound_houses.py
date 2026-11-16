@@ -710,7 +710,11 @@ def _sources() -> dict[str, Source]:
         # Lane L170 (think-i8y9) moved 90, first adopted here, from the 10 x 10 grid to
         # jazivxt's issue 989 (T-303), posted by the account dpre4ai: a window of shifted copies
         # of a crop of Joost de Winter's 157 (T-293), the first packing below the grid at 90.
-        packet_source("T-303", "jazivxt-s90-upper-bound-2026-11-15"),
+        # Lane L181 (think-32cl) moved 90 on to Joost de Winter's issue 997 (T-304) in the pass
+        # of 16 November 2026, which replaced his issue 996's certificate: T-303's packing as
+        # his local search improved it, jazivxt its finder. 90 was T-303's only count, so
+        # T-303 is no source here now.
+        packet_source("T-304", "de-winter-s90-upper-bound-2026-11-15"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -809,14 +813,17 @@ def _sources() -> dict[str, Source]:
 #: from Evan Daniel's n = 229 packing, Ono its finder; T-300 keeps no house here. Lane L170
 #: (think-i8y9) adopted jazivxt's issue 989 (T-303) at 90 in the same pass, first adopted
 #: here, from the 10 x 10 grid, a window of shifted copies of a crop of Joost de Winter's 157,
-#: the first packing below the grid at 90, jazivxt its finder after de Winter.
+#: the first packing below the grid at 90, jazivxt its finder after de Winter. Lane L181
+#: (think-32cl) adopted Joost de Winter's issue 997 (T-304) at 90 in place of T-303 in the
+#: pass of 16 November 2026, T-303's packing as his local search improved it, jazivxt its
+#: finder and de Winter its improver; T-303 keeps no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
     70: "T-174",
     84: "T-174",
     86: "T-174",
-    90: "T-303",
+    90: "T-304",
     102: "T-193",
     103: "T-174",
     105: "T-229",
@@ -1021,6 +1028,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: Lane L170 (think-3guf, think-i8y9) adopted T-303 at 90 in the same pass of 15 November,
 #: jazivxt's issue 989, from the 10 x 10 grid, which no pass had adopted before; 90 is another
 #: count, so that day's archive takes a row for it beside 147's and 228's.
+#: The pass of 16 November 2026 (think-3guf, think-32cl) adopted T-304 at 90, Joost de
+#: Winter's issue 997, which replaced his issue 996's certificate, from T-303: the pass of 15
+#: November had already moved 90 (lane L170), and a day's archive holds one prior state a
+#: count, as at 179, 228, 260, 268 and 269. Lane L181 made the import on 15 November and the
+#: adoption on 16 November.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1110,6 +1122,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-13": frozenset({269}),
     "2026-11-14": frozenset({228, 297}),
     "2026-11-15": frozenset({90, 147, 228}),
+    "2026-11-16": frozenset({90}),
 }
 
 

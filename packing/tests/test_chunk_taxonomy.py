@@ -37,7 +37,7 @@ def _record() -> dict:
     return json.loads(RECORD.read_text(encoding="utf-8"))
 
 
-def test_only_the_radical_strip_and_the_90_window_have_tilted_unexpressed_components() -> None:
+def test_only_the_radical_strip_has_tilted_unexpressed_components() -> None:
     """The finding, stated as sharply as the data allows.
 
     Checked from the census directly rather than from the taxonomy record, so this fails if
@@ -51,9 +51,11 @@ def test_only_the_radical_strip_and_the_90_window_have_tilted_unexpressed_compon
         and is_tilted(str(component["angle_degrees"]))
     ]
 
-    # n = 90 joined on 15 November 2026: jazivxt's packing (T-303) holds one tilted interior
-    # component of seven squares the grammar does not express (think-i8y9).
-    assert tilted_and_unexpressed == [(51, "45"), (51, "45"), (90, "67.08552337")]
+    # n = 90 joined on 15 November 2026: jazivxt's packing (T-303) held one tilted interior
+    # component of seven squares the grammar does not express (think-i8y9). It left on 16
+    # November with Joost de Winter's improvement of that packing (T-304, think-32cl), whose
+    # residue at 90 is two corner blocks seated on two walls each.
+    assert tilted_and_unexpressed == [(51, "45"), (51, "45")]
     angles = {
         str(component["angle_degrees"])
         for entry in band()
@@ -99,18 +101,20 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
     three. The radical n51 strip adds two tilted interior components. T-174's adopted
     witnesses at 68, 84 and 86 have two, three and two corner blocks respectively; all
     touch two walls, including both of 68's, which end the former one-wall exception.
-    jazivxt's packing at 90 (T-303, 15 November 2026) adds two corner blocks touching two
-    walls and one tilted interior component touching none.
+    jazivxt's packing at 90 (T-303, 15 November 2026) added two corner blocks touching two
+    walls and one tilted interior component touching none; Joost de Winter's improvement of
+    it (T-304, 16 November 2026) has two corner blocks touching two walls, of 23 and 11
+    squares, and no interior component.
     """
     residue = _record()["residue"]
 
-    assert residue["walls_touched"] == {"0": 3, "2": 72, "4": 44}
+    assert residue["walls_touched"] == {"0": 2, "2": 72, "4": 44}
     assert residue["by_source"] == {
         "exact-grid": 44,
         "kingbird-derived-facts": 56,
-        "packet-derived-facts": 19,
+        "packet-derived-facts": 18,
     }
-    assert residue["tilted"] == 3
+    assert residue["tilted"] == 2
     assert residue["whole_record"] == 44
 
     for item in residue["detail"]:
@@ -134,9 +138,8 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
                 (86, 37, 2),
                 (88, 16, 2),
                 (88, 25, 2),
-                (90, 7, 0),
                 (90, 11, 2),
-                (90, 18, 2),
+                (90, 23, 2),
             }, item
         else:
             assert item["walls_touched"] == 2, item

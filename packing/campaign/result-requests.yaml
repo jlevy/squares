@@ -35086,8 +35086,9 @@ issues:
       reader refused (F11) and which witness-corners-opposite now reads; and the AI named at the
       pin (F12). Its six questions for the author hold nothing open. Its addendum (lane L182)
       decides #997's replacement and compares the two certificates: the same arrangement,
-      re-optimized, the step 9,539 times this certificate's contraction margin (F14). No reply
-      has been posted; the coordinator relayed #997 at 12:55Z.
+      re-optimized, the step 9,539 times this certificate's contraction margin (F14). The case
+      adopted #997's certificate (T-304) at 90 in the pass of 16 November. No reply has been
+      posted; the coordinator relayed #997 at 12:55Z.
   - number: 997
     title: 'Lowered upper bound for n = 90 (side 9.994038766610): registration request'
     author: JoostdeWinter
@@ -35113,8 +35114,9 @@ issues:
       padding. The ledger of 15 November records it. The 15 November stage 4 review (lane L180,
       think-uhav), which accepted #996's certificate, accepts this one in its addendum (lane
       L182), its frozen checker run unchanged and 26 of 26 controls as stated, so the entry is
-      confirmed, independently re-implemented, at V3/C3, S3. The adoption at 90 waits for a
-      pass of 16 November, since the pass of 15 November already moved 90.
+      confirmed, independently re-implemented, at V3/C3, S3, and the case adopted it as its
+      house at 90 in the pass of 16 November, in place of T-303, since the pass of 15 November
+      had already moved 90.
     read_through: '2026-11-15T12:08:33Z'
     results:
     - key: n90-local-search
@@ -35174,5 +35176,11 @@ issues:
       publishing the search.
 
       This lane read the addendum at 13:21Z, after its own replay, controls and measurements of
-      this certificate (13:08Z) and its records for it (13:21Z) were committed. No reply has
-      been posted.
+      this certificate (13:08Z) and its records for it (13:21Z) were committed.
+
+      Adopted at 90 in the pass of 16 November 2026 (written at 00:01Z that day) under the house
+      rule, in place of T-303, with jazivxt the packing's finder and Joost de Winter its
+      improver. Both strong generators ran on the new witness, and Evan Daniel's same-side view
+      is drawn; his certified KKT solve, 2.698e-11 below the side, about 1.48 times the
+      certificate's own contraction margin, is held at row 3 for RV-3 (think-ruu2,
+      think-ikku). No reply has been posted.

@@ -27,8 +27,8 @@ dates the claim by the issue, with the first commit kept.
 Intake lane L181 (think-32cl) retained it, replayed it and measured it on 15 November
 2026 and registers it as **T-304**, the only result of the two issues.
 The blind stage 4 review of lane L180 and its addendum (lane L182) accepted it the same
-day, so it is at V3/C3; the adoption at 90 waits for a pass of 16 November, since the
-pass of 15 November already moved 90.
+day, so it is at V3/C3, and the case adopted it as its house at 90 in the pass of 16
+November 2026 under the house rule, in place of T-303.
 
 ## What the Source Claims
 
@@ -235,6 +235,23 @@ What the addendum adds:
 Its questions for the author hold nothing open: which text to record; whether #996’s
 near-upright turn was the rational rounding; what produced the step; and L180’s
 questions on the twin’s form and on publishing the search and the linear program.
+
+## Adoption
+
+The case adopted the certificate as its house at 90 in the pass of 16 November 2026
+under the house rule, as T-304, in place of T-303, jazivxt’s packing, which keeps its
+certificate as history.
+The pass of 15 November had already moved 90, and a day’s archive holds one prior state
+a count, so this lane wrote the adoption at 00:01Z on 16 November.
+jazivxt is the packing’s finder and Joost de Winter its improver.
+Both strong generators ran on the new witness
+([the runs](../../../cases/regularized_drawings/think-32cl-2026-11-16/README.md)), and
+the selection draws Evan Daniel’s same-side view, admitted at row 10. His driver also
+solved the witness to a certified KKT local minimum 2.698 × 10⁻¹¹ below the side, about
+1.48 times the certificate’s own contraction margin (1.8187 × 10⁻¹¹) and beyond it, held
+at row 3 as a register candidate and not admitted (RV-3). The translation-escape screen,
+derived again on the new witness, finds 12 of its 90 squares translating and none
+separating, against T-303’s 31 and 15.
 
 ## What Is Not Established
 

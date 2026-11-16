@@ -357,6 +357,7 @@
     "packing/tests/test_known_best_grid_transitions.py": 0.007,
     "packing/tests/test_known_best_n011_rational_control.py": 0.459,
     "packing/tests/test_known_best_squish.py": 6.327,
+    "packing/tests/test_lean_disk_price.py": 0.029,
     "packing/tests/test_lifted_q7_history.py": 0.291,
     "packing/tests/test_lint_floor_contract.py": 0.122,
     "packing/tests/test_log_rollup.py": 0.011,
@@ -1053,6 +1054,20 @@
       "reports": [
         {
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-l181-1115-2026-11-15.json",
+          "provenance": {},
+          "tests": 8
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_lean_disk_price.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/lean-disk-price-l181-2026-11-16.json",
           "provenance": {},
           "tests": 8
         }

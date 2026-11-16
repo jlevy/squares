@@ -13452,8 +13452,9 @@ sources:
     #996 named at 64d5ee7, 9.09e-8 larger, which the de-winter-s90-64d5ee7-2026-11-15 packet
     retains as superseded by its author and no entry registers. T-304 records the in-horizon
     report, 4.24e-03 below T-303, jazivxt's packing and the house at 90, which the issue says a
-    local search improved; the stage 4 review's addendum on it is a separate lane
-    (think-uhav). The ledger of 15 November for this lane
+    local search improved, confirmed at V3/C3 by the replay and the stage 4 review of 15
+    November 2026 with its addendum (lanes L180 and L182), and the case adopted it as its house
+    in the pass of 16 November, in place of T-303. The ledger of 15 November for this lane
     (campaign/issue-intake/upper-bounds-996-997-20261115) records it, continuing T-303's
     packing. All 3 native jobs have full outcomes.
 selected_overrides:
@@ -13499,11 +13500,11 @@ selected_overrides:
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
 - n: 90
-  source_id: jazivxt-s90-upper-bound-2026-11-15
-  value: '9.9982771669260000'
-  evidence: E-jazivxt-989-certificate-report
+  source_id: de-winter-s90-upper-bound-2026-11-15
+  value: '9.9940387666098522'
+  evidence: E-de-winter-997-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-15 (T-303).
+    a replay here and an accepted review, adopted on 2026-11-16 (T-304).
 - n: 102
   source_id: evand-exact-cur-2026-10-16
   value: '10.60582869643157837'
@@ -16591,6 +16592,12 @@ superseded_reports:
   reason: The house from 2026-11-14 until 2026-11-15; its certificate stays retained and verified,
     and T-301's exact side is smaller.
   superseded_by: ono-issue984-2026-11-14
+- n: 90
+  source_id: jazivxt-s90-upper-bound-2026-11-15
+  value: '9.9982771669260000'
+  reason: The house from 2026-11-15 until 2026-11-16; its certificate stays retained and verified,
+    and T-304's exact side is smaller.
+  superseded_by: de-winter-s90-upper-bound-2026-11-15
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

@@ -2364,12 +2364,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"4999138583463/500000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"99940387666098521323/10000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":false,"display":"s(90) ≥ 9.730000","evidence":["E-n090-wand125-mixed-973-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.73"},
         "n": 90,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"9.9982771669260000","source_url":"https://github.com/dpre4ai/n90-square-packing/blob/f9b31b4ebddb278a128b6cb5c43836a305a24dca/n90.cert","witness_id":"W-known-best-n090","witness_path":"packing/witnesses/known-best/n-090.yaml"},
+          "assessed_geometry": {"reported_side":"9.9940387666098522","source_url":"https://github.com/JoostdeWinter/square-packing/blob/fa53fb0d734fbf438bcfb73c1434a15894bb2bc5/n90/n90_exact.json","witness_id":"W-known-best-n090","witness_path":"packing/witnesses/known-best/n-090.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -2386,7 +2386,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(90) ≤ 9.998278","provenance":"frontier","relation":"upper-bound","value":"9.9982771669260000"}
+        "side": {"display":"s(90) ≤ 9.994039","provenance":"frontier","relation":"upper-bound","value":"9.9940387666098522"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

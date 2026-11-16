@@ -517,19 +517,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-89.svg"
     },
     {
-      "attribution": "jazivxt, https://github.com/dpre4ai/n90-square-packing/blob/f9b31b4ebddb278a128b6cb5c43836a305a24dca/n90.cert at f9b31b4ebddb278a128b6cb5c43836a305a24dca",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/fa53fb0d734fbf438bcfb73c1434a15894bb2bc5/n90/n90_exact.json at fa53fb0d734fbf438bcfb73c1434a15894bb2bc5",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         90
       ],
       "n": 90,
-      "path": "resources/web/jazivxt-s90-upper-bound-2026-11-15/source/n90.cert",
+      "path": "resources/web/de-winter-s90-upper-bound-2026-11-15/source/n90/n90_exact.json",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
       "retrieved": "2026-11-15",
       "source_n": 90,
-      "url": "https://github.com/dpre4ai/n90-square-packing/blob/f9b31b4ebddb278a128b6cb5c43836a305a24dca/n90.cert"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/fa53fb0d734fbf438bcfb73c1434a15894bb2bc5/n90/n90_exact.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

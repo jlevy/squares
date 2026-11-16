@@ -3,9 +3,9 @@
     "by_source": {
       "exact-grid": 44,
       "kingbird-derived-facts": 56,
-      "packet-derived-facts": 19
+      "packet-derived-facts": 18
     },
-    "components": 119,
+    "components": 118,
     "detail": [
       {
         "is_the_whole_record": true,
@@ -866,7 +866,7 @@
       {
         "is_the_whole_record": false,
         "n": 90,
-        "size": 18,
+        "size": 23,
         "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
@@ -878,14 +878,6 @@
         "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
-      },
-      {
-        "is_the_whole_record": false,
-        "n": 90,
-        "size": 7,
-        "source": "packet-derived-facts",
-        "tilted": true,
-        "walls_touched": 0
       },
       {
         "is_the_whole_record": true,
@@ -968,11 +960,11 @@
       "14": 5,
       "15": 6,
       "16": 2,
-      "18": 5,
+      "18": 4,
       "19": 2,
       "21": 7,
       "22": 2,
-      "23": 1,
+      "23": 2,
       "24": 1,
       "25": 2,
       "28": 5,
@@ -998,7 +990,7 @@
       "61": 1,
       "62": 1,
       "63": 1,
-      "7": 3,
+      "7": 2,
       "73": 1,
       "74": 1,
       "75": 1,
@@ -1018,9 +1010,9 @@
       "98": 1,
       "99": 1
     },
-    "tilted": 3,
+    "tilted": 2,
     "walls_touched": {
-      "0": 3,
+      "0": 2,
       "2": 72,
       "4": 44
     },
@@ -1032,11 +1024,12 @@
       "3": 23,
       "4": 6,
       "5": 2,
+      "7": 1,
       "8": 1
     },
     "bar": {
-      "2": 84,
-      "3": 16,
+      "2": 86,
+      "3": 17,
       "4": 1,
       "5": 1,
       "6": 1,
@@ -1052,11 +1045,11 @@
       "14": 5,
       "15": 6,
       "16": 2,
-      "18": 5,
+      "18": 4,
       "19": 2,
       "21": 7,
       "22": 2,
-      "23": 1,
+      "23": 2,
       "24": 1,
       "25": 2,
       "28": 5,
@@ -1082,7 +1075,7 @@
       "61": 1,
       "62": 1,
       "63": 1,
-      "7": 3,
+      "7": 2,
       "73": 1,
       "74": 1,
       "75": 1,
@@ -1122,7 +1115,7 @@
       "9": 2
     },
     "singleton": {
-      "1": 306
+      "1": 294
     }
   },
   "strata": {
@@ -1151,16 +1144,16 @@
       "tilted_components": 181
     },
     "packet-derived-facts": {
-      "components": 214,
+      "components": 205,
       "records": 8,
       "shapes": {
-        "L": 6,
-        "bar": 38,
-        "other-polyomino": 19,
+        "L": 7,
+        "bar": 41,
+        "other-polyomino": 18,
         "rectangle": 1,
-        "singleton": 150
+        "singleton": 138
       },
-      "tilted_components": 154
+      "tilted_components": 150
     }
   },
   "subject": {
@@ -1211,17 +1204,17 @@
   "wall_seating_by_shape": {
     "L": {
       "0": 4,
-      "2": 27,
+      "2": 28,
       "4": 1
     },
     "bar": {
-      "0": 93,
-      "1": 6,
-      "2": 6,
+      "0": 96,
+      "1": 5,
+      "2": 7,
       "3": 1
     },
     "other-polyomino": {
-      "0": 3,
+      "0": 2,
       "2": 72,
       "4": 44
     },
@@ -1231,8 +1224,8 @@
       "4": 9
     },
     "singleton": {
-      "0": 218,
-      "1": 49,
+      "0": 212,
+      "1": 43,
       "2": 38,
       "4": 1
     }

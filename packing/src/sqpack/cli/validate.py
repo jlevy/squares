@@ -279,11 +279,15 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: arrangement: separating and translating squares 15 and 31 against the grid's 0 and 10,
 #: so 90 joins the records with a square that separates: n=1..100 has 29 such records, 126
 #: separating squares and 598 translating ones; n=1..200 69, 776 and 2,387; and n=1..324
-#: 127, 2,731 and 6,676.
+#: 127, 2,731 and 6,676. Lane L181 (think-32cl) moved 90 on to Joost de Winter's certificate
+#: of issue 997 (T-304) in the pass of 16 November, T-303's packing improved: separating and
+#: translating squares 0 and 12 against T-303's 15 and 31, so 90 leaves the records with a
+#: square that separates: n=1..100 has 28 such records, 111 separating squares and 579
+#: translating ones; n=1..200 68, 761 and 2,368; and n=1..324 126, 2,716 and 6,657.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (29, 126, 86, 598),
-    "n=1..200": (69, 776, 182, 2387),
-    "n=1..324": (127, 2731, 302, 6676),
+    "n=1..100": (28, 111, 86, 579),
+    "n=1..200": (68, 761, 182, 2368),
+    "n=1..324": (126, 2716, 302, 6657),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
