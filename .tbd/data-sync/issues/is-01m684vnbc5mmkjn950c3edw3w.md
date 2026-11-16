@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 355
+version: 356
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -119,7 +119,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T06:56:44.430Z
+updated_at: 2026-11-16T07:56:02.376Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -321,3 +321,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-16T04:54Z renewal (intake308): no change; queue empty, no lanes.
 - 2026-11-16T06:00Z renewal (intake309): new #1001 (JoeGun: s(127), s(204), s(232), s(264), s(305) on Kodaj's Kaggle packings, Witness/v2 at bc10ce4). Labelled intake; beads think-0y9m (import, lane L187) and think-skt8 (blind stage 4 review, lane L186) created and both lanes launched in parallel.
 - 2026-11-16T06:57Z renewal (intake310): no new items. L186 (think-skt8) review of #1001 landed on its branch at 1b9dc0976 (frozen 06:18Z); L187 told it landed, not summarized. L187 import in progress.
+- 2026-11-16T07:56Z renewal (intake311): no change; L187 (#1001 import) active, not yet pushed.
