@@ -35311,3 +35311,27 @@ issues:
       names no bead. It says that nothing the author asked for is still queued, so the issue
       is closed with it, and that answers are welcome at any time. The issue was closed as
       completed at 02:51:58Z; it has no comment but the reply, and read_through moves to it.
+  - number: 1001
+    title: "s(127), s(204), s(232), s(264), s(305): lowered upper bounds on Tomáš Kodaj's public packings: registration request"
+    author: JonathanGun
+    opened: '2026-11-16'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      JoeGun asks for the registration of five upper bounds, s(127), s(204), s(232), s(264) and
+      s(305), printed 11.801753890487, 14.802646843107, 15.759531627557, 16.773807598002 and
+      17.945762359659, each rounded up at 12 places from the exact rational side of a corner
+      Witness/v2 certificate in JonathanGun/square-packing-upper-bounds at bc10ce4, and each below
+      the record at 31ddae6. It says each packing is a public Kaggle packing by Tomáš Kodaj that
+      JoeGun improved further, and asks that Kodaj be credited as the finder. Triage pending in
+      lane L187 (think-0y9m).
+    read_through: '2026-11-16T05:33:07Z'
+    results: []
+    beads:
+    - think-0y9m
+    answer_bead: think-0y9m
+    replies: []
+    close_when: >-
+      The five bounds are triaged, retained and registered on main, and the reply on main says
+      what was registered, replayed and reviewed.
