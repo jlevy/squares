@@ -71,3 +71,75 @@ $PY $R/programs/l186_controls.py $SRC/n-127-candidate.yaml $R/programs/controls-
 $PY $R/programs/l186_describe.py $SRC/n-127-candidate.yaml $R/out/check-n127.json \
   $R/out/describe-n127.json
 ```
+
+## What They Printed
+
+- `l186_selftest.py`: `PASSED 73784 cases 0 failed`; method A with only square $i$’s
+  normals fails 376, method A counting a zero margin as apart 2,486, and method B with
+  open half-planes 7,703.
+- `l186_check.py`: `ACCEPT` at all five, every pair apart by both methods (8,001,
+  20,706, 26,796, 34,716 and 46,360 pairs), least margins $1.12027 \times 10^{-11}$,
+  $1.12031 \times 10^{-11}$, $9.97 \times 10^{-13}$, $1.20000 \times 10^{-12}$ and
+  $1.12509 \times 10^{-11}$; each claim the side’s 12-place ceiling.
+- `l186_controls.py`: `EVERY_CONTROL_AS_STATED`, 32 of 32 at each count.
+- `l186_describe.py`: the tilts, the near pairs and how each wall contact is made.
+
+## After the Freeze
+
+Written and run after the findings were frozen at 06:34:58Z, none of them a decider of
+the certificates:
+
+| Program | What it measures | Reads | Writes |
+| --- | --- | --- | --- |
+| `l186_custody.py` | read-only Git plumbing on the clone: commits and times, the pin’s tree, each candidate’s SHA-256 at every commit against the issue’s list; no names or addresses | the clone, `programs/issue-1001.json` | `out/custody.json` |
+| `l186_author_outputs.py` | the author’s printed outputs (`packing-witness-verify.txt`, `check-output.txt`) against this lane’s check receipts | those two files, `out/check-nNNN.json` | `out/author-outputs.json` |
+| `l186_sides.py` | the gains on the case records’ exact sides, the issue’s printed values, Kodaj’s sides as printed, $s(m) + j$ near each side, the L steps, monotonicity | `packing/frontier/n-*.md` front matter, `programs/issue-1001.json`, the check receipts | `out/sides.json` |
+
+`programs/issue-1001.json` is the issue as fetched at 06:35:25Z, with the digests it
+states.
+
+Two of this repository’s devtools were run read-only, writing only here, with
+`python -B` from `packing/`. With `SRC`, `R` and `PY` as above, for each count `N`:
+
+```bash
+DT="nice -n 19 uv run --frozen --all-extras --group dev python -B -m"
+H="house=witness-center-basis:witnesses/known-best/n-$N.yaml"
+C="#1001=witness-corners:$SRC/n-$N-candidate.yaml"
+$DT devtools.contraction_margin --n $N "$H" --against "$C" --out $R/out/contraction-house-n$N.json
+$DT devtools.contraction_margin --n $N "$C" --out $R/out/contraction-new-n$N.json
+$DT devtools.measure_identity --n $N "$C" "$H" --out $R/out/identity-n$N.json
+$PY $R/programs/l186_custody.py $SRC bc10ce471c9d7841b9a53b383dae87d23dbe5a99 \
+  $R/programs/issue-1001.json $R/out/custody.json
+$PY $R/programs/l186_author_outputs.py $SRC/packing-witness-verify.txt $SRC/check-output.txt \
+  $R/out/author-outputs.json $R/out/check-n127.json $R/out/check-n204.json \
+  $R/out/check-n232.json $R/out/check-n264.json $R/out/check-n305.json
+$PY $R/programs/l186_sides.py frontier $R/programs/issue-1001.json $R/out/sides.json \
+  $R/out/check-n127.json $R/out/check-n204.json $R/out/check-n232.json \
+  $R/out/check-n264.json $R/out/check-n305.json
+```
+
+They printed:
+
+- **Contraction.** The houses at 127 and 305 first touch at $1 - \lambda^* = 0$ (a pair
+  at exact contact); those at 204, 232 and 264 at $10^{-20}$, $2.03 \times 10^{-13}$ and
+  $10^{-100}$, side margins $1.48 \times 10^{-19}$, $3.00 \times 10^{-12}$ and
+  $1.68 \times 10^{-99}$. Every gain is `within_margin: false`. The certificates first
+  touch at $1.12 \times 10^{-11}$, $1.12 \times 10^{-11}$, $9.97 \times 10^{-13}$,
+  $1.2 \times 10^{-12}$ and $1.13 \times 10^{-11}$, side margins $1.21 \times 10^{-10}$,
+  $1.55 \times 10^{-10}$, $1.47 \times 10^{-11}$, $1.89 \times 10^{-11}$ and
+  $1.91 \times 10^{-10}$; both maintained routes accept each as given, with wall
+  clearance 0 and least gap equal to `l186_check.py`’s least margin.
+- **Identity.** Against each house no symmetry pairs nearest centres one to one; the
+  optimal assignment moves 70, 73, 35, 44 and 113 squares beyond $10^{-1}$.
+- **Custody.** One commit, the pin, which is the remote head; the five blobs equal the
+  issue’s digests and are unchanged at every commit.
+- **Sides.** The gains $9.124897 \times 10^{-3}$, $1.714541 \times 10^{-3}$,
+  $1.878017 \times 10^{-3}$, $9.275344 \times 10^{-4}$ and $4.704122 \times 10^{-3}$;
+  Kodaj’s printed sides less the exact sides equal the issue’s “our part” to its
+  figures; no closed form within $10^{-3}$ at four counts and two near coincidences at
+  305; no L step or monotonicity moves another count.
+
+After the freeze the eight frozen programs and the plan were checked against
+`frozen/checker-frozen-digests.txt` (all `OK`), and the self-test and the five checks,
+rerun into scratch space, reproduced every kept receipt in everything but its CPU
+seconds.
