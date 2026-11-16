@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 350
+version: 351
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -117,7 +117,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T03:55:17.678Z
+updated_at: 2026-11-16T04:56:56.932Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -316,3 +316,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-16T02:55Z: #998 merged at f4aa747e1 (T-304 adopted at 90 in the 16 November pass) after senior review and an addressing pass (S1 independence note, N4 comments); Pages deployed and verified; replies posted on #997, #996 (both closed) and a superseded follow-up on #989. Records lane L185 opened for the replies; beads think-32cl, think-uhav, think-h69d close after it merges.
 - 2026-11-16T03:45Z: #1000 (L185 records of the #996/#997/#989 replies) merged at 31ddae6fe; think-32cl, think-uhav, think-h69d closed after check_bead_tree --before-close. Intake queue is empty of new items; only owner decisions remain.
 - 2026-11-16T03:55Z renewal (intake307): 0 unowned items; the one resolved blocker is think-4ul6 (#953, T-142/T-143), held for the owner. Open PRs all held (#953, #909, #908 owner; #809, #744, #599, #574 as before). No lanes running.
+- 2026-11-16T04:54Z renewal (intake308): no change; queue empty, no lanes.
