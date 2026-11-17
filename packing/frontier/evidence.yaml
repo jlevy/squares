@@ -37381,8 +37381,9 @@ evidence:
         least-bound box centres at or above the source's certified bounds, reproduced the
         31 oblique 197/200 control witnesses' exact captures digit for digit, and found no
         capture below 1.00079 in a seeded search at 33 directions. The axis gap of 2.15e-9
-        lies within the source sweep's own enclosure at that vertex, which #892's rule
-        judges correctly. Four minor findings in the source's README, manifest, receipt
+        is the source sweep's own slack at that vertex, present in its original run and
+        its control, and the refusal has an exact witness, so #892's rule judges it
+        correctly. Four minor findings in the source's README, manifest, receipt
         wording and pre-publication receipt do not touch the mathematics. Coverage at the
         rotated directions rests on the source's run until the census.
     source_reviewed: '2026-10-10'
