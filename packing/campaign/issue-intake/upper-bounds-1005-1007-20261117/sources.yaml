@@ -4,10 +4,12 @@
 # only commit of kenaznia-doga/s292-upper-bound, which first committed the certificate; and Joost de Winter's
 # #1006 (15:39:16Z), 133 seconds after 796ff3b (15:37:03Z), the commit it names in his watched repository
 # JoostdeWinter/square-packing, which first committed his. Then de Winter's #1007 (21:28:27Z) at 262 and 295,
-# 132 seconds after 853b92e (21:26:15Z), which first committed both. GitHub's activity log was not readable from
-# this session, so no push time is recorded: by the owner's rule of 14 October each first commit would date its
-# claim if its push came first, but at 292 dec930b and #1005 both precede 796ff3b and #1006, and no other report
-# reached 262 or 295 in those 132 seconds, so the issues date the claims, with the first commits kept, and the
+# 132 seconds after 853b92e (21:26:15Z), which first committed both. GitHub's activity log, read on 17 November
+# for review A9 of #1011, gives the pushes: kenaznia-doga/s292-upper-bound's branch was created at dec930b at
+# 15:27:24Z, 14 seconds before #1005; 796ff3b and fe13d47 were pushed together at 15:37:06Z, 130 seconds before
+# #1006; and 853b92e at 21:26:18Z, 129 seconds before #1007. By the owner's rule of 14 October each push would
+# date its claim, but at 292 dec930b's push and #1005 both precede 796ff3b's push and #1006, and no other report
+# reached 262 or 295 in those 129 seconds, so the issues date the claims, with the first commits kept, and the
 # verdicts are the same either way. The starts are frozen at main f9ddfeeef (#1004's merge): at 292 T-146 (Nate
 # Chaoweeraprasit's packing as Evan Daniel improved it), in both lanes, with T-193's 292, pending adoption 1.76e-19
 # below it; at 262 the Kingbird catalogue's 16 + sqrt(2)/2, verified by T-155's rational ceiling; at 295 T-193's
@@ -94,8 +96,10 @@ reports:
       source: '#1006: ''The packing has one continuous ribbon of 59 tilted squares along the diagonal and 233
         axis-aligned squares. The ribbon extends the ribbon of 37 tilted squares in the packing of 146 squares with
         side 12.583782190152, which your record credits to David W. Cantrell (2025).'''
-      continues: the ribbon of David W. Cantrell's packing of 146 squares, two copies joined into a ribbon of 59, with
-        axis-aligned squares placed by an integer program
+      continues: the ribbon of the record's packing of 146 squares, T-187, Evan Daniel's from a chain search started
+        from Ryan Xu's, which the issue credits to David W. Cantrell and which measures as Xu's arrangement, not
+        Cantrell's (packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity-n146-lineage.json);
+        two copies joined into a ribbon of 59, with axis-aligned squares placed by an integer program
     note: >-
       T-146's uniform-contraction margin at 292 is 1.7591e-19 (squares 68 and 69), so the gain on it, 1.3617e-3,
       lies wholly outside T-146's padding (packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292.json);

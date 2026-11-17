@@ -49232,11 +49232,11 @@ results:
       described, not retained. Licensed CC BY 4.0 and MIT by LICENSE.md at the pin. No human
       oversight or optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-p3g8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-146, mapped as an adversarial review. The case's house then moves to
-      the smallest validated side at 292, T-311's 8.78e-05 below this one, in the pass dated the
-      day this change merges, and this entry stays as the first report at 292 in the walk.
+      Stays as the first report at 292 in the walk. The stage 4 review accepted in #1013
+      (R1, think-p3g8) is mapped onto this entry by think-i38n together with #1009's review
+      (#1014), and think-i38n adopts the smallest validated packing at 292 with #1009's
+      import; T-311 is 8.78e-05 below this side and #1009's claim below both, so this one is
+      adopted at no count.
   - id: T-311
     kind: upper-bound
     registered: '2026-11-17'
@@ -49272,14 +49272,21 @@ results:
       smallest gap of 3e-12, so an exact solution of the contact equations would be smaller by
       an amount of that order. Those statements are the author's; no source program ran here.
 
-      Credit Joost de Winter (Delft University of Technology), as an extension of David W.
-      Cantrell's ribbon, as the issue asks: one continuous ribbon of 59 tilted squares along the
-      diagonal, two copies of the 37-square ribbon of a packing of 146 squares with side
-      12.583782190152, shifted by (5, 5) and sharing 15 squares, beside 233 axis-aligned squares
-      an integer program placed, then a numerical optimization of all 292 rounded to exact
-      rationals. It says the record credits that 146 packing to Cantrell (2025) and that its
-      coordinates came from a public Kaggle notebook (sigmaborov, 'Squares in Squares: certified
-      contact polish', Apache License 2.0, as included in areebbb's 'merge 28' notebook).
+      Credit Joost de Winter (Delft University of Technology), after Evan Daniel and Ryan
+      Xu: one continuous ribbon of 59 tilted squares along the diagonal, two copies of the
+      37-square ribbon of the record's packing of 146 squares, T-187 (side 12.583782190152,
+      Daniel's packing from a chain search started from Xu's), shifted by (5, 5) and sharing
+      15 squares, beside 233 axis-aligned squares an integer program placed, then a
+      numerical optimization of all 292 rounded to exact rationals.
+
+      The issue asks for credit as an extension of David W. Cantrell's ribbon, since the
+      case's prose at 146 credits that packing to Cantrell (2025); measured here, T-187
+      pairs one to one with the Xu line's packing and not with Cantrell's, whose tilted
+      squares lean both ways where T-187's all lean one
+      (measure/identity-n146-lineage.json), so the record credits the ribbon to Xu and
+      Daniel. The issue says the 146 coordinates came from a public Kaggle notebook
+      (sigmaborov, 'Squares in Squares: certified contact polish', Apache License 2.0, as
+      included in areebbb's 'merge 28' notebook).
 
       The issue says the construction and the search were run with Gemini Carbon (Google), and
       the checking, the witness file, the figure and the comparison with other values were
@@ -49317,6 +49324,7 @@ results:
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/receipts/exact-certification.json.xz
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/receipts/sharp-controls.json
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity.json
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity-n146-lineage.json
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292.json
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292-1005.json
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292-own.json
@@ -49365,15 +49373,23 @@ results:
       issue's estimate of what an exact contact solution would gain; that side is not registered
       (RV-3).
 
-      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): the
-      house witness and its regularized view measure as T-146's packet; aligned by box centres,
-      49 squares turn by more than a degree against T-146 and none reverses its tilt. Cantrell's
-      ribbon is in a packing of another count, which the measurement cannot pair. The side the
-      issue names for that packing, 12.583782190152, is the record's house at 146 rounded up at
-      12 places, [Daniel n146 2026-10-14], which the case's lanes credit to Evan Daniel; the
-      case's prose still names Cantrell (2025), the Kingbird catalogue's earlier packing there.
-      Whether sigmaborov's coordinates are Daniel's packing was not measured, since the notebook
-      was not read.
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing):
+      the house witness and its regularized view measure as T-146's packet; aligned by box
+      centres, 49 squares turn by more than a degree against T-146 and none reverses its
+      tilt.
+
+      The 146 packing whose ribbon this one extends is the record's house at 146 by the side
+      the issue names, 12.583782190152, T-187 ([Daniel n146 2026-10-14]), which the case's
+      lanes credit to Evan Daniel; the case's prose still names Cantrell (2025), the
+      Kingbird catalogue's earlier packing there.
+
+      measure/identity-n146-lineage.json measures T-187 against Cantrell's (Daniel's exact
+      certificate of the catalogue's arrangement) and against PingYou Ltd's refinement of
+      Robert Barnett's refinement of Xu's: one to one with PingYou Ltd's under the identity,
+      9 squares beyond a tenth and its 37 tilted squares paired with tilted squares of the
+      same sign; against Cantrell's no symmetry pairs them, 58 squares beyond a tenth,
+      Cantrell's 36 tilted squares leaning 18 each way. Whether sigmaborov's coordinates are
+      exactly T-187's was not measured, since the notebook was not read.
 
       The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side stood in
       for 292's ceiling, finds main's consequences but the L step from 259, which this side is
@@ -49387,12 +49403,13 @@ results:
       not replayed. Licensed MIT by LICENSE at the pin. No human oversight or optimality is
       claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-p3g8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-146 and T-310, mapped as an adversarial review. Then adopt it at 292 in
-      place of T-146 under the house rule, the smallest validated side there, in the pass dated
-      the day this change merges, with both strong generators' regularization of the new house
-      and its flip in the same change.
+      The stage 4 review accepted in #1013 (R1, think-p3g8) is mapped onto this entry by
+      think-i38n together with #1009's review (#1014), and think-i38n adopts the smallest
+      validated packing at 292 with #1009's import, with both strong generators'
+      regularization of the new house and its flip; #1009's claim there is 3.62e-09 below
+      this side, 72 times this certificate's own contraction margin of 5.0288e-11, a new
+      result under the owner's option D (think-b0w5). If that import stalls or fails review,
+      think-i38n adopts this certificate at 292 in its own change, regularized the same way.
   - id: T-312
     kind: upper-bound
     registered: '2026-11-17'
@@ -49519,12 +49536,12 @@ results:
       described, not retained. Licensed MIT by LICENSE at the pin. No human oversight or
       optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-p3g8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against the house's packing, mapped as an adversarial review. Then adopt it at
-      262, the first adoption there, in place of the case's own house under the house rule, in
-      the pass dated the day this change merges, with both strong generators' regularization of
-      the new house and its flip in the same change.
+      The stage 4 review accepted in #1013 (R1, think-p3g8) is mapped onto this entry by
+      think-i38n together with #1009's review (#1014), and think-i38n adopts the smallest
+      validated packing at 262 with #1009's import, with both strong generators'
+      regularization of the new house and its flip; #1009's claim there is 1.58e-03 below
+      this side. If that import stalls or fails review, think-i38n adopts this certificate
+      at 262 in its own change, regularized the same way.
   - id: T-313
     kind: upper-bound
     registered: '2026-11-17'
@@ -49656,12 +49673,12 @@ results:
       running on the twin. Licensed MIT by LICENSE at the pin. No human oversight or optimality
       is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-p3g8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against the house's packing, mapped as an adversarial review. Then adopt it at
-      295 in place of T-193 under the house rule, in the pass dated the day this change merges,
-      with both strong generators' regularization of the new house and its flip in the same
-      change.
+      The stage 4 review accepted in #1013 (R1, think-p3g8) is mapped onto this entry by
+      think-i38n together with #1009's review (#1014), and think-i38n adopts the smallest
+      validated packing at 295 with #1009's import, with both strong generators'
+      regularization of the new house and its flip; #1009's claim there is 1.58e-03 below
+      this side. If that import stalls or fails review, think-i38n adopts this certificate
+      at 295 in its own change, regularized the same way.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

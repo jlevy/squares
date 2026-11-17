@@ -87,8 +87,11 @@ reports:
         diagonal and 233 axis-aligned squares. The ribbon extends the ribbon of 37 tilted
         squares in the packing of 146 squares with side 12.583782190152, which your record
         credits to David W. Cantrell (2025).'''
-      continues: the ribbon of David W. Cantrell's packing of 146 squares, two copies joined
-        into a ribbon of 59, with axis-aligned squares placed by an integer program
+      continues: the ribbon of the record's packing of 146 squares, T-187, Evan Daniel's from
+        a chain search started from Ryan Xu's, which the issue credits to David W. Cantrell
+        and which measures as Xu's arrangement, not Cantrell's (packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity-n146-lineage.json);
+        two copies joined into a ribbon of 59, with axis-aligned squares placed by an integer
+        program
     note: 'T-146''s uniform-contraction margin at 292 is 1.7591e-19 (squares 68 and 69), so
       the gain on it, 1.3617e-3, lies wholly outside T-146''s padding (packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292.json);
       the step from #1005''s certificate, 8.7776e-5, is about 2.6e7 times that certificate''s

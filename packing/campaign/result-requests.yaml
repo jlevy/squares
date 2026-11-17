@@ -35724,6 +35724,8 @@ issues:
       evidence:
       - E-ozden-1005-certificate-report
       - E-ozden-1005-exact-feasibility
+      validation:
+      - think-i38n
     - key: n292-leaderboard-side-only
       claim: >-
         The Kaggle per-puzzle leaderboard lists 17.589053943368 at 292 (Cats and boxes, 29
@@ -35733,6 +35735,19 @@ issues:
         A side-only entry that states no packing, so it is no report: context only, as
         #1001's ledger treated Kodaj's quoted 270.
       queued: false
+    - key: stage4-mapping-and-house
+      claim: >-
+        The stage 4 exit of T-310: the blind review accepted in #1013 (R1, think-p3g8), mapped
+        onto the entries with #1009's review (#1014), and the house decision at 292 under the
+        house rule, which #1009's lower claims there bear on.
+      source: body
+      not_registered: >-
+        No result of its own: the rest of the registered entries' import, queued with #1009's
+        import (think-i38n), which maps both reviews and adopts the smallest validated packing
+        at each count, regularized; if that import stalls or fails review, think-i38n maps this
+        review and adopts these certificates in its own change.
+      queued: true
+      bead: think-i38n
     beads:
     - think-qag8
     answer_bead: think-qag8
@@ -35748,31 +35763,60 @@ issues:
     kind: result-report
     triage: done
     summary: >-
-      Joost de Winter asks for the registration of s(292) <= 17.590016442847, rounded up at 12
-      places from the exact rational side of a centre-direction certificate in his watched
-      repository JoostdeWinter/square-packing at 796ff3b, 1.36e-3 below the record at
-      f9ddfeee (T-146), filed 11 minutes 38 seconds after #1005 and below its side. It says
-      the packing's tilted ribbon extends that of David W. Cantrell's packing of 146 squares,
-      and asks for credit to de Winter as an extension of Cantrell's ribbon. Triaged, retained
-      and registered on 17 November 2026 in lane c-import-1005-1117 (think-qag8) as T-311: the
-      print rounds up from its exact side, both maintained exact routes accept the certificate
-      and refuse its gross and sharp controls, and it is a new arrangement relative to T-146's
-      packing and to #1005's, measured; the ledger records #1005 and then this claim. The stage
-      4 review (think-p3g8) is a separate lane.
+      Joost de Winter asks for the registration of s(292) <= 17.590016442847, rounded up at
+      12 places from the exact rational side of a centre-direction certificate in his
+      watched repository JoostdeWinter/square-packing at 796ff3b, 1.36e-3 below the record
+      at f9ddfeee (T-146), filed 11 minutes 38 seconds after #1005 and below its side. It
+      says the packing's tilted ribbon extends that of the packing of 146 squares the record
+      credits to David W. Cantrell, and asks for credit to de Winter as an extension of
+      Cantrell's ribbon; that packing, by its side, is the record's T-187, Evan Daniel's
+      from Ryan Xu's, which measures as Xu's arrangement and not Cantrell's, so the record
+      credits de Winter after Daniel and Xu. Triaged, retained and registered on 17 November
+      2026 in lane c-import-1005-1117 (think-qag8) as T-311: the print rounds up from its
+      exact side, both maintained exact routes accept the certificate and refuse its gross
+      and sharp controls, and it is a new arrangement relative to T-146's packing and to
+      #1005's, measured; the ledger records #1005 and then this claim. The stage 4 review
+      (think-p3g8) is a separate lane.
     read_through: '2026-11-16T15:39:16Z'
     results:
     - key: n292-ribbon
       claim: >-
         s(292) <= 17.590016442847 rounded up at 12 places (the exact rational side of
         n292/n292_exact.json at JoostdeWinter/square-packing 796ff3b), a ribbon of 59 tilted
-        squares extending David W. Cantrell's, beside axis-aligned squares an integer program
-        placed.
+        squares extending that of the record's 146 packing (T-187), which the issue credits
+        to David W. Cantrell, beside axis-aligned squares an integer program placed.
       source: body
       register:
       - T-311
       evidence:
       - E-de-winter-1006-certificate-report
       - E-de-winter-1006-exact-feasibility
+      validation:
+      - think-i38n
+    - key: n292-kaggle-side-only
+      claim: >-
+        The issue quotes two side-only values at 292: the Kaggle per-puzzle table's
+        17.589053943368 (team Cats and boxes, 8 November), below both 292 claims, and a public
+        merged submission's 17.591378147172 (bestbryant/claude_code_squaresinsquares, 16
+        November), above the record.
+      source: body
+      not_registered: >-
+        Side-only entries that state no packing, so neither is a report: context only, as for
+        #1005's quotation of the first and #1001's ledger's treatment of Kodaj's quoted 270.
+      queued: false
+    - key: stage4-mapping-and-house
+      claim: >-
+        The stage 4 exit of T-311: the blind review accepted in #1013 (R1, think-p3g8), mapped
+        onto the entries with #1009's review (#1014), and the house decision at 292 under the
+        house rule, which #1009's lower claims there bear on.
+      source: body
+      not_registered: >-
+        No result of its own: the rest of the registered entries' import, queued with #1009's
+        import (think-i38n), which maps both reviews and adopts the smallest validated packing
+        at each count, regularized; if that import stalls or fails review, think-i38n maps this
+        review and adopts these certificates in its own change.
+      queued: true
+      bead: think-i38n
     beads:
     - think-qag8
     answer_bead: think-qag8
@@ -35813,6 +35857,8 @@ issues:
       evidence:
       - E-de-winter-1007-certificate-report
       - E-de-winter-1007-exact-feasibility
+      validation:
+      - think-i38n
     - key: n295-band
       claim: >-
         s(295) <= 17.699693441716 rounded up at 12 places (the exact side
@@ -35824,6 +35870,21 @@ issues:
       evidence:
       - E-de-winter-1007-certificate-report
       - E-de-winter-1007-exact-feasibility
+      validation:
+      - think-i38n
+    - key: stage4-mapping-and-house
+      claim: >-
+        The stage 4 exit of T-312 and T-313: the blind review accepted in #1013 (R1, think-p3g8), mapped
+        onto the entries with #1009's review (#1014), and the house decision at 262 and 295 under the
+        house rule, which #1009's lower claims there bear on.
+      source: body
+      not_registered: >-
+        No result of its own: the rest of the registered entries' import, queued with #1009's
+        import (think-i38n), which maps both reviews and adopts the smallest validated packing
+        at each count, regularized; if that import stalls or fails review, think-i38n maps this
+        review and adopts these certificates in its own change.
+      queued: true
+      bead: think-i38n
     beads:
     - think-qag8
     answer_bead: think-qag8

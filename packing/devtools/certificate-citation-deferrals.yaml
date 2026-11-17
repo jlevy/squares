@@ -88,31 +88,32 @@ deferrals:
   - evidence: E-ozden-1005-exact-feasibility
     results:
     - T-310
-    bead: think-qag8
-    blocked_on: think-p3g8
+    bead: think-i38n
+    blocked_on: think-i38n
     recorded: '2026-11-17'
     reason: Doğa Özden's certificate of issue 1005 at 292, below T-146, the first of two reports
-      there that day; T-311, 8.78e-5 below it, is the smaller validated side the house takes. The
-      case record cites it as history once the house adopts T-311 after the stage 4 review
-      (think-p3g8), in the pass dated the day this change merges; this entry is removed in that
-      change.
+      there that day. think-i38n maps its stage 4 review (pull request 1013) with issue 1009's and adopts the
+      smallest validated packing at 292 with issue 1009's import; the case record then cites this
+      evidence as history beside the house it adopts, and this entry is removed in that change.
   - evidence: E-de-winter-1006-exact-feasibility
     results:
     - T-311
-    bead: think-qag8
-    blocked_on: think-p3g8
+    bead: think-i38n
+    blocked_on: think-i38n
     recorded: '2026-11-17'
-    reason: Joost de Winter's certificate of issue 1006 at 292, below T-146 and T-310. The case
-      record cites it when the house adopts T-311, after its stage 4 review (think-p3g8), in the
-      pass dated the day this change merges; this entry is removed in that change.
+    reason: Joost de Winter's certificate of issue 1006 at 292, below T-146 and T-310. think-i38n
+      maps its stage 4 review (pull request 1013) with issue 1009's and adopts the smallest validated packing at
+      292 with issue 1009's import; the case record then cites this evidence, as the house or as
+      history beside a smaller one, and this entry is removed in that change.
   - evidence: E-de-winter-1007-exact-feasibility
     results:
     - T-312
     - T-313
-    bead: think-qag8
-    blocked_on: think-p3g8
+    bead: think-i38n
+    blocked_on: think-i38n
     recorded: '2026-11-17'
     reason: Joost de Winter's certificates of issue 1007 at 262 and 295, below the case's own
-      house at 262 and T-193 at 295. The case records cite them when the houses adopt T-312 and
-      T-313, after their stage 4 review (think-p3g8), in the pass dated the day this change
-      merges; this entry is removed in that change.
+      house at 262 and T-193 at 295. think-i38n maps their stage 4 review (pull request 1013) with issue 1009's
+      and adopts the smallest validated packing at each count with issue 1009's import; the case
+      records then cite this evidence, as the houses or as history beside smaller ones, and this
+      entry is removed in that change.
