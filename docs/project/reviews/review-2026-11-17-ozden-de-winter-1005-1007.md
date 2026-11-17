@@ -807,3 +807,7 @@ What went wrong along the way, and was redone before the freeze it precedes:
   square of the band and the rest do not fit a smaller box; it now takes the corner
   whose remaining squares have the least extent.
   Its first receipt was overwritten.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
