@@ -849,7 +849,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/26.html | cases/26.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/260.html | cases/260.html | record | overview | 2026-10-03 | 2026-11-06 | live |
 | cases/261.html | cases/261.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/262.html | cases/262.html | record | overview | 2026-10-03 | 2026-10-14 | live |
+| cases/262.html | cases/262.html | record | overview | 2026-10-03 | 2026-11-17 | live |
 | cases/263.html | cases/263.html | record | overview | 2026-10-03 | 2026-10-25 | live |
 | cases/264.html | cases/264.html | record | overview | 2026-10-03 | 2026-11-16 | live |
 | cases/265.html | cases/265.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -882,10 +882,10 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/29.html | cases/29.html | record | overview | 2026-10-03 | 2026-10-25 | live |
 | cases/290.html | cases/290.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/291.html | cases/291.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/292.html | cases/292.html | record | overview | 2026-10-03 | 2026-10-16 | live |
+| cases/292.html | cases/292.html | record | overview | 2026-10-03 | 2026-11-17 | live |
 | cases/293.html | cases/293.html | record | overview | 2026-10-03 | 2026-11-05 | live |
 | cases/294.html | cases/294.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/295.html | cases/295.html | record | overview | 2026-10-03 | 2026-10-23 | live |
+| cases/295.html | cases/295.html | record | overview | 2026-10-03 | 2026-11-17 | live |
 | cases/296.html | cases/296.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/297.html | cases/297.html | record | overview | 2026-10-03 | 2026-11-14 | live |
 | cases/298.html | cases/298.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -1450,6 +1450,10 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-307.html | result/t-307.html | result | overview | 2026-11-16 | 2026-11-16 | live |
 | result/t-308.html | result/t-308.html | result | overview | 2026-11-16 | 2026-11-16 | live |
 | result/t-309.html | result/t-309.html | result | overview | 2026-11-16 | 2026-11-16 | live |
+| result/t-310.html | result/t-310.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-311.html | result/t-311.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-312.html | result/t-312.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-313.html | result/t-313.html | result | overview | 2026-11-17 | 2026-11-17 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |

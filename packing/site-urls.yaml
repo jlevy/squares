@@ -6747,7 +6747,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/263.html
   canonical: cases/263.html
@@ -7011,7 +7011,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/293.html
   canonical: cases/293.html
@@ -7035,7 +7035,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-23'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/296.html
   canonical: cases/296.html
@@ -24922,6 +24922,152 @@ urls:
     - packing/devtools/measure_identity.py
     - docs/project/reviews/review-2026-11-16-joegun-1001.md
     - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-310.html
+  canonical: result/t-310.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 292
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s292 upper bound 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-ozden-1005-certificate-report
+    - E-ozden-1005-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/README.md
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/acquisition/claims.json
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/source/n-292-candidate.yaml
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/source/n-292-decimal-pose.yaml
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/measure/identity.json
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/measure/contraction-n292.json
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/measure/contraction-n292-own.json
+    - packing/resources/web/ozden-s292-upper-bound-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1005-1007-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-311.html
+  canonical: result/t-311.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 292
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s292 upper bound 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-de-winter-1006-certificate-report
+    - E-de-winter-1006-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/README.md
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/acquisition/claims.json
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/source/n292/n292_exact.json.gz
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity.json
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292.json
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292-1005.json
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292-own.json
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1005-1007-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-312.html
+  canonical: result/t-312.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 262
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter upper bounds 262 295 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-de-winter-1007-certificate-report
+    - E-de-winter-1007-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/README.md
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/source/n262/n262_exact.json.gz
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/receipts/sharp-controls-n262.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/identity-n262.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/contraction-n262.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/contraction-n262-own.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1005-1007-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-313.html
+  canonical: result/t-313.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 295
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter upper bounds 262 295 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-de-winter-1007-certificate-report
+    - E-de-winter-1007-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/README.md
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/source/n295/n295_exact.json.gz
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/receipts/sharp-controls-n295.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/identity-n295.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/contraction-n295.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/contraction-n295-own.json
+    - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1005-1007-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
 - path: results.html
   canonical: results.html
   kind: page

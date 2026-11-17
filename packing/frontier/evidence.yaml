@@ -64022,3 +64022,345 @@ evidence:
       program, which share its reader. The review ran on its own clone of the source at the
       pin; the five files' digests equal the packet's. Finite feasibility only.
     source_reviewed: '2026-11-16'
+  - id: E-ozden-1005-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 292
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s292 upper bound 2026-11-16]'
+    certificate: packing/resources/web/ozden-s292-upper-bound-2026-11-16/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-17'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at dec930b,
+      n-292-candidate.yaml, posted in issue 1005 on Doğa Özden's behalf by his AI agent. A
+      separate complete repository replay is retained for n = 292: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 254916 pair decisions; summed over the 3 jobs, the receipt records 91.9 route CPU
+      seconds and 94.61 job wall seconds, the longest job 31.97 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.0187e-13. The packet's sharp controls meet those margins on both routes. The
+      replay is E-ozden-1005-exact-feasibility. The source's own sqcheck.py was not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share this repository's corner-witness reader (certificate
+      parsing and half-angle conversion), Fraction arithmetic and the separating-axis method;
+      the first is the packing-witness verify the author ran on the same file, so on that route
+      the replay is reproduced with the producer's code, and the second shares no verification
+      code with it. Because this repository's packing-witness promote made the exact
+      coordinates, neither route is independent of how they were rounded, as the issue says. No
+      human oversight or optimality is claimed.
+  - id: E-ozden-1005-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 292
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s292 upper bound 2026-11-16]'
+    certificate: packing/resources/web/ozden-s292-upper-bound-2026-11-16/source/n-292-candidate.yaml
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports
+      ozden-s292-upper-bound-2026-11-16 certify --workers 2 wrote the receipt on 17 November
+      2026 from the packet's retained witness, read by the witness-corners reader, its JSON twin
+      held to it as the same packing, and check --replay decided all 3 retained jobs again, the
+      witness with its duplicate-square and outside-container controls, through both maintained
+      routes; check-claims rebuilds the frozen comparison. python -m
+      devtools.upper_bound_reports ozden-s292-upper-bound-2026-11-16 sharp-controls wrote the
+      packet's sharp controls, all 11 as stated in advance on both routes: contact accepted at
+      margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 292 that T-310 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier, its witness
+            promotion and the independent rational corner checker over September and October
+            2026, and the import lanes that wrote the corner reader; each lane's tier and
+            reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose sqpack
+          package also holds the first maintained route: sqpack's exact verifier
+          (V-sqpack-verify) is the packing-witness verify the source reports running, and the
+          promotion ran it on the coordinates before writing them, so on that route the replay
+          is reproduced with the producer's code. The independence rests on the independent
+          rational corner checker (V-check-rational-witness-independent), which shares no
+          geometry or verification code with sqpack.witness or sqpack.verify. Neither route is
+          the source's sqcheck.py, which this lane never ran. Issue 1005 says the search, checks
+          and filing were AI-assisted throughout, by a Claude Sonnet 5.5 director; the routes
+          here are Claude's, written in prompts of their own long before this certificate.
+    limitations: >-
+      A replay of the one retained witness by two maintained exact routes that share this
+      repository's corner-witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The first route is the code the author
+      ran and the promotion used; the second shares no verification code with it, and the
+      independently re-implemented relation rests on it. The source's sqcheck.py was not run
+      here. A separate complete repository replay is retained for n = 292: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 254916 pair decisions; summed over the 3 jobs, the receipt records 91.9 route CPU
+      seconds and 94.61 job wall seconds, the longest job 31.97 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 2.0187e-13. The receipt's controls are gross, and the packet's sharp controls meet
+      those margins. Finite feasibility only.
+    source_reviewed: '2026-11-17'
+  - id: E-de-winter-1006-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 292
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter s292 upper bound 2026-11-16]'
+    certificate: packing/resources/web/de-winter-s292-upper-bound-2026-11-16/source/n292/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-17'
+    limitations: >-
+      This atom records the source author's report, in issue 1006, of 1 exact rational
+      certificate at 796ff3b, n292/n292_exact.json, with its Witness/v2 twin n292_witness.yaml:
+      a ribbon of 59 tilted squares extending David W. Cantrell's, beside axis-aligned squares
+      an integer program placed. The issue says the author's two checkers, verify_exact.py and
+      check_area.py, and this repository's check_rational_witness_independent.py on the twin
+      accept it; no output of them is published. A separate complete repository replay is
+      retained for n = 292: 1 positive and 2 duplicate-square and outside-container controls
+      passed their required outcomes on both routes, 254916 pair decisions; summed over the 3
+      jobs, the receipt records 34.41 route CPU seconds and 39.34 job wall seconds. Squares
+      touch the box exactly, and every pair clears by at least 3.0312e-12, the gap of 3e-12 the
+      source states. The packet's sharp controls meet those margins on both routes. The replay
+      is E-de-winter-1006-exact-feasibility.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method; the source's own checkers were not run here.
+      The linear program's first-order statement is not replayed. No human oversight or
+      optimality is claimed.
+  - id: E-de-winter-1006-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 292
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s292 upper bound 2026-11-16]'
+    certificate: packing/resources/web/de-winter-s292-upper-bound-2026-11-16/source/n292/n292_exact.json.gz
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports
+      de-winter-s292-upper-bound-2026-11-16 certify --workers 2 wrote the receipt on 17 November
+      2026 from the packet's retained certificate, read by the center-direction-json reader, the
+      twin held to it as the same packing by the witness-corners-opposite reader, and check
+      --replay decided all 3 retained jobs again, the certificate with its duplicate-square and
+      outside-container controls, through both maintained routes; check-claims rebuilds the
+      frozen comparison. python -m devtools.upper_bound_reports
+      de-winter-s292-upper-bound-2026-11-16 sharp-controls wrote the packet's sharp controls,
+      all 11 as stated in advance on both routes: contact accepted at margin 0 and refused 1e-30
+      past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 292 that T-311 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and the import
+            lanes that wrote the centre-direction reader for #939's files and the corner
+            readers; each lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the checking, the witness file and the figure were produced with Claude
+          Fable 5.2 (Anthropic) under Joost de Winter's direction, and the construction and
+          search with Gemini Carbon (Google); the project's routes are Claude's too, written
+          from prompts of their own long before these certificates. One maintained route, the
+          independent rational corner checker (V-check-rational-witness-independent), is the
+          checker the source reports running, on its Witness/v2 twin, so the independence rests
+          on sqpack's exact verifier (V-sqpack-verify). Neither route is the source's
+          verify_exact.py or check_area.py, which this lane never ran. The routes' authors read
+          other sources' formats and, in earlier lanes, other sources' checkers, so the record
+          does not call them clean room.
+    limitations: >-
+      A replay of the one retained certificate by two maintained exact routes that share this
+      repository's centre-direction reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The author's own checkers are his and
+      were not run here; neither route shares code with them. A separate complete repository
+      replay is retained for n = 292: 1 positive and 2 duplicate-square and outside-container
+      controls passed their required outcomes on both routes, 254916 pair decisions; summed over
+      the 3 jobs, the receipt records 34.41 route CPU seconds and 39.34 job wall seconds, the
+      longest job 13.94 seconds. In every positive squares touch the box, a least wall clearance
+      of exactly 0, and every pair clears by at least 3.0312e-12. The receipt's controls are
+      gross, and the packet's sharp controls meet those margins. Finite feasibility only.
+    source_reviewed: '2026-11-17'
+  - id: E-de-winter-1007-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 262
+      - 295
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter upper bounds 262 295 2026-11-16]'
+    certificate: packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-17'
+    limitations: >-
+      This atom records the source author's report, in issue 1007, of 2 exact rational
+      certificates at 853b92e, n262/n262_exact.json and n295/n295_exact.json, with their
+      Witness/v2 twins: one band of 72 tilted squares beside axis-aligned squares an integer
+      program placed, the 295 said to be the 262 with an L-shaped border of 33 squares. The
+      issue says the author's two checkers in each folder and this repository's
+      check_rational_witness_independent.py on the twins accept them; no output of them is
+      published. A separate complete repository replay is retained for n = 262 and 295: 2
+      positives and 4 duplicate-square and outside-container controls passed their required
+      outcomes on both routes, 465336 pair decisions; summed over the 6 jobs, the receipt
+      records 33.09 route CPU seconds and 38.15 job wall seconds. Squares touch the box exactly
+      in both, and every pair clears by at least 4.4768e-12 at 262 and 1.5200e-12 at 295. The
+      packet's sharp controls meet those margins on both routes. The replay is
+      E-de-winter-1007-exact-feasibility.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method; the source's own checkers were not run here.
+      The source's statement that 295 is 262 with an L border is its own: the two sides differ
+      by 1 less 1.883e-10. No human oversight or optimality is claimed.
+  - id: E-de-winter-1007-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 262
+      - 295
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter upper bounds 262 295 2026-11-16]'
+    certificate: packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/source/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports
+      de-winter-upper-bounds-262-295-2026-11-16 certify --workers 2 wrote the receipt on 17
+      November 2026 from the packet's retained certificates, read by the center-direction-json
+      reader, each twin held to its certificate as the same packing by the witness-corners
+      reader, and check --replay decided all 6 retained jobs again, each certificate with its
+      duplicate-square and outside-container controls, through both maintained routes;
+      check-claims rebuilds the frozen comparison, reading 295's house as T-193's algebraic
+      side. python -m devtools.upper_bound_reports de-winter-upper-bounds-262-295-2026-11-16
+      sharp-controls wrote the packet's sharp controls, all 22 as stated in advance on both
+      routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates at 262 and 295 that T-312 and T-313 cite, every wall and every
+          pair decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 2
+        of: 2
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026, and the import
+            lanes that wrote the centre-direction reader for #939's files and the corner
+            readers; each lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue says the checking and the conversion to the witness format were produced
+          with Claude (Anthropic) under Joost de Winter's direction, and the construction,
+          search and rational certificates with Gemini Carbon (Google); the project's routes are
+          Claude's too, written from prompts of their own long before these certificates. One
+          maintained route, the independent rational corner checker
+          (V-check-rational-witness-independent), is the checker the source reports running, on
+          its Witness/v2 twin, so the independence rests on sqpack's exact verifier
+          (V-sqpack-verify). Neither route is the source's verify_exact.py or check_area.py,
+          which this lane never ran. The routes' authors read other sources' formats and, in
+          earlier lanes, other sources' checkers, so the record does not call them clean room.
+    limitations: >-
+      A replay of the two retained certificates by two maintained exact routes that share this
+      repository's centre-direction reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The author's own checkers are his and
+      were not run here; neither route shares code with them. A separate complete repository
+      replay is retained for n = 262 and 295: 2 positives and 4 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 465336 pair
+      decisions; summed over the 6 jobs, the receipt records 33.09 route CPU seconds and 38.15
+      job wall seconds, the longest job 7.63 seconds. In every positive squares touch the box, a
+      least wall clearance of exactly 0, and every pair clears by at least 1.52e-12. The
+      receipt's controls are gross, and the packet's sharp controls meet those margins. Finite
+      feasibility only.
+    source_reviewed: '2026-11-17'

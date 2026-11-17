@@ -386,6 +386,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ("A packing at 228 from a column-band proposal design, 3.80e-3 below T-174 (T-300)."),
     ),
     (
+        "https://github.com/kenaznia-doga/s292-upper-bound",
+        "Doğa Özden",
+        (
+            "A packing at 292 from a column-band design re-angled segment by segment, 1.27e-3"
+            " below T-146 (T-310)."
+        ),
+    ),
+    (
         "https://github.com/RobertoOno/squares-in-square",
         "Roberto Ono",
         (
@@ -453,7 +461,10 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "packing of 297 squares in T-174's layout with a double step in each "
             "staircase is replayed, reviewed and adopted here (T-299), and with borders "
             "it gives rows at 332 and 409 (#979). A local-search improvement of jazivxt's "
-            "packing at 90, 4.24e-3 below it, is replayed, reviewed and adopted here (T-304)."
+            "packing at 90, 4.24e-3 below it, is replayed, reviewed and adopted here (T-304). "
+            "A ribbon packing at 292 extending David W. Cantrell's, 1.36e-3 below T-146 "
+            "(T-311), and one band at 262 and 295, 7.41e-3 and 4.54e-3 below their houses "
+            "(T-312, T-313), are replayed here."
         ),
     ),
     (

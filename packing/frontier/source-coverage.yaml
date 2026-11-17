@@ -13495,6 +13495,94 @@ sources:
     have full outcomes. A later commit the same day, 5971b95, adds the author's numerical
     local-minimum check and leaves the certificates unchanged; the
     joegun-local-minimum-2026-11-16 packet retains it, and it claims no bound.
+- id: ozden-s292-upper-bound-2026-11-16
+  title: Doğa Özden's packing of 292 squares at kenaznia-doga/s292-upper-bound dec930b, issue 1005
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s292-upper-bound/tree/dec930bdaa5f58077af6c05bc13c0fca0a58a3ed
+  local: resources/web/ozden-s292-upper-bound-2026-11-16/
+  source_key: '[Özden s292 upper bound 2026-11-16]'
+  scope:
+    n_values:
+    - 292
+  reviewed: '2026-11-17'
+  source_date: '2026-11-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s292-upper-bound-2026-11-16/acquisition/claims.json
+  evidence:
+  - E-ozden-1005-certificate-report
+  - E-ozden-1005-exact-feasibility
+  notes: >-
+    The corner Witness/v2 certificate, its JSON twin, the decimal pose, the search's hit and its
+    metadata, the check reports and outputs, the README and the licence are retained for
+    jlevy/squares#1005 at dec930b, the repository's only commit; the lab's checker and its
+    README, Evan Daniel's MIT notice and the comparison figures are pinned by digest or against
+    byte-identical copies. The certificate is admitted only where its exact side rounds up to
+    the side the issue prints. Licensed CC BY 4.0 and MIT by LICENSE.md at the pin. T-310
+    records the in-horizon report, 1.27e-3 below T-146 at 292; the ledger of 17 November for
+    this lane (campaign/issue-intake/upper-bounds-1005-1007-20261117) records it, the first of
+    two reports at 292 that day. All 3 native jobs have full outcomes.
+- id: de-winter-s292-upper-bound-2026-11-16
+  title: Joost de Winter's packing of 292 squares at JoostdeWinter/square-packing 796ff3b, issue 1006
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/796ff3b76e7816f9df24bf4f6ef0bb3b9cacef24/n292
+  local: resources/web/de-winter-s292-upper-bound-2026-11-16/
+  source_key: '[de Winter s292 upper bound 2026-11-16]'
+  scope:
+    n_values:
+    - 292
+  reviewed: '2026-11-17'
+  source_date: '2026-11-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s292-upper-bound-2026-11-16/acquisition/claims.json
+  evidence:
+  - E-de-winter-1006-certificate-report
+  - E-de-winter-1006-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README and the
+    root README are retained for jlevy/squares#1006 at 796ff3b, the commit the issue names in
+    the watched repository; the licence and the two checkers are pinned against byte-identical
+    copies, and the figure by digest. The certificate is admitted only where its exact side
+    rounds up to the side the issue prints. Licensed MIT by LICENSE at the pin. T-311 records
+    the in-horizon report, 1.36e-3 below T-146 at 292 and 8.78e-5 below T-310, filed before it;
+    the ledger of 17 November for this lane
+    (campaign/issue-intake/upper-bounds-1005-1007-20261117) records both, in order. All 3 native
+    jobs have full outcomes.
+- id: de-winter-upper-bounds-262-295-2026-11-16
+  title: Joost de Winter's packings of 262 and 295 squares at JoostdeWinter/square-packing 853b92e, issue 1007
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/853b92ee2236f418160782dd2871d38ea75271a4
+  local: resources/web/de-winter-upper-bounds-262-295-2026-11-16/
+  source_key: '[de Winter upper bounds 262 295 2026-11-16]'
+  scope:
+    n_values:
+    - 262
+    - 295
+  reviewed: '2026-11-17'
+  source_date: '2026-11-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
+  evidence:
+  - E-de-winter-1007-certificate-report
+  - E-de-winter-1007-exact-feasibility
+  notes: >-
+    The two centre-direction certificates, their corner Witness/v2 twins, the folders' READMEs
+    and checksums and the root README are retained for jlevy/squares#1007 at 853b92e, the commit
+    the issue names in the watched repository; the licence and the four checkers are pinned
+    against byte-identical copies, and the figures by digest. Each certificate is admitted only
+    where its exact side rounds up to the side the issue prints. Licensed MIT by LICENSE at the
+    pin. T-312 and T-313 record the two in-horizon reports, 7.41e-3 below 16 + sqrt(2)/2 at 262
+    and 4.54e-3 below T-193's (22 + 22 sqrt(2))/3 at 295; the ledger of 17 November for this
+    lane (campaign/issue-intake/upper-bounds-1005-1007-20261117) records both. All 6 native jobs
+    have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

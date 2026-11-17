@@ -5723,6 +5723,87 @@ sources:
       LICENSE.md at the pin, which says it covers JoeGun's contribution and not Kodaj's terms; the
       licence of Kodaj's notebook is unchecked (think-71uq). Retained in
       web/joegun-upper-bounds-2026-11-16/.
+  - key: '[Özden s292 upper bound 2026-11-16]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-16'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s292-upper-bound at dec930bdaa5f58077af6c05bc13c0fca0a58a3ed
+      (2026-11-16T15:27:16Z), Doğa Özden's certificate for s(292) <= 17.5901042186818347 (the
+      exact side rounded up at 16 places), printed 17.590104218682 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by his lab's AI-run search, a column-band
+      design (tilted squares in columns across a diagonal band, axis-parallel squares on
+      wall-anchored staircase lattices, an exact dynamic programme over the columns) quenched
+      with Evan Daniel's ALM+SLP fq optimizer (evand/square-packing search/packer, MIT) and then
+      improved by segkick, an operator the lab's director wrote that rigidly re-angles a
+      contiguous tilted segment; a new arrangement relative to the house's packing (T-146, Nate
+      Chaoweeraprasit's packing as Evan Daniel improved it), its exact coordinates made by this
+      repository's packing-witness promote --strategy robust-rational from the decimal pose the
+      source retains. The issue says no registry packing was used as a seed. Registration was
+      requested in jlevy/squares#1005, posted on the author's behalf by his AI agent's account
+      kenaznia-doga; the issue says search, checks and filing were AI-assisted throughout. It
+      discloses first a side-only Kaggle leaderboard entry at 292, 17.589053943368, below this
+      side and with no packing. No global optimality claim. The lineage builds on this project:
+      the promotion tool made the exact coordinates. Licensed CC BY 4.0 and MIT by LICENSE.md at
+      the pin. Retained in web/ozden-s292-upper-bound-2026-11-16/.
+  - key: '[de Winter s292 upper bound 2026-11-16]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-16'
+    lineage: independent
+    credit: de Winter after Cantrell
+    note: >-
+      JoostdeWinter/square-packing at 796ff3b76e7816f9df24bf4f6ef0bb3b9cacef24
+      (2026-11-16T15:37:03Z), Joost de Winter's certificate for s(292) <=
+      33872522175917279266554668306659248043633029180856810473/1925667453806884053962316529711800854170000000000000000
+      = 17.5900164428464148 rounded up at 16 places (printed 17.590016442847 rounded up at 12),
+      133 seconds before jlevy/squares#1006, which requested its registration: a rational
+      centre-direction JSON (n292/n292_exact.json) and the same packing as a corner Witness/v2
+      (n292/n292_witness.yaml). One continuous ribbon of 59 tilted squares along the diagonal,
+      two copies of the 37-square ribbon of a packing of 146 squares with side 12.583782190152
+      that the issue credits to David W. Cantrell (2025), its coordinates taken from a public
+      Kaggle notebook (sigmaborov, Apache License 2.0), beside 233 axis-aligned squares an
+      integer program placed, then a numerical optimization rounded to exact rationals; a new
+      arrangement relative to the house's packing (T-146) and to Doğa Özden's of
+      jlevy/squares#1005, filed 11 minutes 38 seconds earlier, 8.78e-5 above it. It asks for
+      credit to de Winter as an extension of Cantrell's ribbon, and says the construction and
+      search were run with Gemini Carbon (Google) and the checks, witness file and figure
+      produced with Claude Fable 5.2 (Anthropic), under his direction. No local or global
+      optimality claim is proved. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s292-upper-bound-2026-11-16/.
+  - key: '[de Winter upper bounds 262 295 2026-11-16]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-16'
+    lineage: independent
+    credit: de Winter
+    note: >-
+      JoostdeWinter/square-packing at 853b92ee2236f418160782dd2871d38ea75271a4
+      (2026-11-16T21:26:15Z), Joost de Winter's certificates for s(262) <=
+      166996934419035177/10^16 = 16.6996934419035177 and s(295) <= 35399386883430443/(2 x 10^15)
+      = 17.6996934417152215 (printed 16.699693441904 and 17.699693441716, rounded up at 12
+      places), 132 seconds before jlevy/squares#1007, which requested their registration:
+      rational centre-direction JSON (n262/n262_exact.json, n295/n295_exact.json) and the same
+      packings as corner Witness/v2 files. One band of 72 squares tilted by 25 to 30 degrees, 4
+      wide and 18 long, along the diagonal, built from a closed-form layout, beside axis-aligned
+      squares an integer program placed, then a numerical optimization rounded to exact
+      rationals, with no coordinates of other packings used; the issue says the 295 is the 262
+      with an L of 33 axis-aligned squares, its side larger by exactly 1, where the
+      certificates' sides differ by 1 less 1.883e-10. New arrangements relative to the houses'
+      packings (16 + sqrt(2)/2 at 262, T-193's (22 + 22 sqrt(2))/3 at 295). It says the
+      construction, search and rational certificates were produced with Gemini Carbon (Google)
+      and the conversion and checks run with Claude (Anthropic), under his direction. No local
+      or global optimality claim. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-upper-bounds-262-295-2026-11-16/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
