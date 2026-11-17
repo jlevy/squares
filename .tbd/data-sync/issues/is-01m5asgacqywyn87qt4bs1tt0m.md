@@ -1,18 +1,19 @@
 ---
 type: is
 id: is-01m5asgacqywyn87qt4bs1tt0m
-title: "Results page size and timing: 1,749 bytes remaining at 228 results"
+title: "Site agent: lighten results.html before it reaches the 2,000,000-byte hard ceiling (1,645,613 bytes at 309 results on 17 November; about 77 rows of room, roughly three weeks)"
 kind: task
 status: open
 priority: 2
-version: 6
+version: 7
 delegate: profiles-pr-coordinator
-labels: []
+labels:
+  - site
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-19T19:16:37.910Z
-updated_at: 2026-11-17T03:07:41.691Z
+updated_at: 2026-11-17T03:09:30.146Z
 started_at: 2026-10-22T09:05:15.934Z
 ---
 Measured on claude/integrate-514 (bf1beaab1, PR #514 + main f3d5da7b): results.html is 1,203,626 bytes at 217 results against the 1,250,000 ceiling in devtools/site_urls.py; at the p90 row cost (4,607 + 291 B) the room is about 8 results, so RESULTS_ROOM_THROUGH was set to 225. Registering #675/#678's upper bounds (up to ~85+79 rows) or several intakes will exceed it. Options: paginate/lazy-render the results table, compress row markup, or re-measure the page-load budgets at a larger size and re-select the ceiling under OR-17. Test name and spec still say 'through 200'.
