@@ -1110,6 +1110,7 @@ case or experiment separately.
 | [De Winter’s Certificates of #977 and #979: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-de-winter-977-979.md) | dated review record | record | retained | — |
 | [Özden’s Certificate of #983: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ozden-983.md) | dated review record | record | retained | — |
 | [Ono’s Certificates of #984 and #985: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-14-ono-984-985.md) | dated review record | record | retained | — |
+| [Polkovskyi’s Thirteen Certificates of #1009: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-17-polkovskyi-1009.md) | dated review record | record | retained | — |
 | [The Certificate of #989 by jazivxt: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-jazivxt-989.md) | dated review record | record | retained | — |
 | [De Winter’s Certificate of #996: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-de-winter-996.md) | dated review record | record | retained | — |
 | [JoeGun’s Five Certificates of #1001: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-16-joegun-1001.md) | dated review record | record | retained | — |
