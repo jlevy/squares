@@ -33335,6 +33335,102 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /authors/0
+  expected_text: Polkovskyi
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy
+  start: 17
+  end: 22
+  label: Ozden
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy
+  start: 24
+  end: 30
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy
+  start: 32
+  end: 35
+  label: Ono
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy
+  start: 37
+  end: 46
+  label: ntumlnoob
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy
+  start: 48
+  end: 53
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy
+  start: 55
+  end: 59
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

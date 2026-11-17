@@ -85,3 +85,21 @@ deferrals:
     reason: The same configuration at 297 decided on sqpack's exact verifier over its field (route 1
       of route B, think-ozx8); cited with route B's verify_exact.py run when the house adopts T-247
       (think-vv1q owns that adoption).
+  - evidence: E-mishapolk-1009-exact-feasibility
+    results:
+    - T-314
+    - T-317
+    - T-318
+    - T-319
+    - T-320
+    - T-322
+    - T-323
+    - T-324
+    bead: think-i38n
+    blocked_on: think-evxy
+    recorded: '2026-11-17'
+    reason: Mykhailo Polkovskyi's eight certificates of issue 1009 that stand, each below its count's
+      house (T-302 at 147, T-174 at 210 and 272, T-269 at 260, T-101 at 262, T-289 at 268, T-146 at 292,
+      T-193 at 295). The case records cite them when the houses adopt them, after their stage 4 review
+      (think-evxy), in the pass of the day this pull request merges, 262, 292 and 295 after the earlier
+      reports' adoption (think-qag8); this entry is removed in that change.

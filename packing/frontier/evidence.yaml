@@ -64022,3 +64022,122 @@ evidence:
       program, which share its reader. The review ran on its own clone of the source at the
       pin; the five files' digests equal the packet's. Finite feasibility only.
     source_reviewed: '2026-11-16'
+  - id: E-mishapolk-1009-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 147
+      - 156
+      - 180
+      - 210
+      - 260
+      - 262
+      - 268
+      - 270
+      - 272
+      - 292
+      - 295
+      - 299
+      - 307
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk issue 1009 2026-11-16]'
+    certificate: packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-17'
+    limitations: >-
+      This atom records the source author's report, in issue 1009, of 13 exact rational
+      centre/half-angle certificates in Evan Daniel's format at Mishapolk/square-packing-records
+      b637e6c, certificates/0000-0999/nN.cert at 147, 156, 180, 210, 260, 262, 268, 270, 272, 292,
+      295, 299 and 307, each beside a Witness/v2 corner file of the same packing under
+      witnesses/2026-11-16/, first committed in b9b7fa7 (23:27:09Z), which b637e6c force-pushed
+      over with the same bytes. The issue says verify_bound_certificate.py --strict and
+      verify_area_exact.py --strict accept every certificate and this repository's
+      check_rational_witness_independent.py reports VERIFIED on every Witness/v2 file; none was
+      run here. A separate complete repository replay is retained for all 13 counts: 13 positives
+      and 26 duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 2490354 pair decisions; summed over the 39 jobs, the receipts record 599.51
+      route CPU seconds and 862.91 job wall seconds, the longest job 67.08 seconds. Every positive
+      clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The packet's sharp
+      controls meet those margins on both routes. The replay is
+      E-mishapolk-1009-exact-feasibility, which covers 147, 210, 260, 262, 268, 272, 292 and 295;
+      at 156, 180, 270, 299 and 307 the entries cite this report alone while the owner's RV-3
+      question stands (think-ruu2).
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No local optimality, KKT, rigidity, human oversight or
+      optimality is claimed.
+  - id: E-mishapolk-1009-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 147
+      - 210
+      - 260
+      - 262
+      - 268
+      - 272
+      - 292
+      - 295
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+    - >-
+      the certificate parser and half-angle map of devtools.evand_exact_certificates (the
+      evand-cert adapter), through which both maintained routes read the certificates, written in
+      Evan Daniel's format: its reader's line filter and corner construction are transcribed from
+      Daniel's verify_cert.py and verify_cert2.py, and the source's own checker,
+      verify_bound_certificate.py, is Daniel's separating-axis verifier
+    - >-
+      devtools.check_rational_witness_independent, the second route, which the issue says the
+      author ran on the Witness/v2 files of the same packings
+    - CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk issue 1009 2026-11-16]'
+    certificate: packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports mishapolk-issue1009-2026-11-16
+      certify --workers 2 wrote the receipts, one per count, on 17 November 2026 from the packet's
+      retained certificates, read by the evand-cert reader and each held to the source's
+      Witness/v2 corner file of the same packing (witness-corners), and check --replay decided all
+      39 retained jobs again, each certificate with its duplicate-square and outside-container
+      controls, through both maintained routes; check-claims rebuilds the frozen comparison.
+      python -m devtools.upper_bound_reports mishapolk-issue1009-2026-11-16 sharp-controls wrote
+      the packet's sharp controls, one receipt per count, all 143 as stated in advance on both
+      routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at 147, 210, 260, 262, 268, 272, 292 and 295 that T-314, T-317, T-318,
+          T-319, T-320, T-322, T-323 and T-324 cite, every wall and every pair decided by both
+          maintained routes; the same receipts decide the five counts at 156, 180, 270, 299 and 307,
+          whose entries cite the report alone while the owner's RV-3 question stands; the kernel's
+          controls are retained in the packet's receipts
+        checked: 8
+        of: 8
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method, and with
+      the producer's checking the evand-cert reader's line filter and corner construction and the
+      independent corner checker the author ran. The 39 jobs hold 2490354 pair decisions. Every
+      wall clears by exactly 1e-28 and every pair by at least 2.00e-28, above the sharp controls'
+      1e-30. The source's own verifiers were not run here. Finite feasibility only.
+    source_reviewed: '2026-11-17'

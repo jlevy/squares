@@ -35695,26 +35695,202 @@ issues:
     opened: '2026-11-16'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
-      Mykhailo Polkovskyi (Mishapolk) asks for the registration of 13 upper bounds, each the
-      exact rational side of a centre/half-angle certificate in Mishapolk/square-packing-records
-      at b637e6c rounded up at 12 places, with a Witness/v2 corner file of the same packing: in
-      Part A seven below the record at f9ddfeeef, s(210) <= 14.971214601589, s(260) <=
-      16.633520939840, s(262) <= 16.698115018700, s(268) <= 16.871868135103, s(272) <=
-      16.965501175831, s(292) <= 17.590016439231 and s(295) <= 17.698115018700, the last three
-      also below the open #1005, #1006 and #1007; in Part B six refinements of the registered
-      arrangements that lower the 12-place print, s(147) <= 12.651043553173, s(156) <=
-      12.977053087495, s(180) <= 13.915618502788, s(270) <= 16.928148603340, s(299) <=
-      17.801004434252 and s(307) <= 17.979230960384, which it calls subject to RV-3. It credits
-      Polkovskyi with new arrangements at 210, 262, 272, 292 and 295, improved packings after
-      Evan Daniel at 260 and after Doğa Özden at 268, and the certificate refinements in Part B,
-      whose arrangement credit stays with the standing authors, and says the packings were
-      discovered assisted by Gemini. Triage pending in lane c-import-1009-1117 (think-i38n).
+      Mykhailo Polkovskyi (Mishapolk) asks for the registration of 13 upper bounds, each the exact
+      rational side of a centre/half-angle certificate in Mishapolk/square-packing-records at
+      b637e6c rounded up at 12 places, with a Witness/v2 corner file of the same packing: in Part
+      A seven below the record at f9ddfeeef, s(210) <= 14.971214601589, s(260) <= 16.633520939840,
+      s(262) <= 16.698115018700, s(268) <= 16.871868135103, s(272) <= 16.965501175831, s(292) <=
+      17.590016439231 and s(295) <= 17.698115018700, the last three also below the open #1005,
+      #1006 and #1007; in Part B six refinements of the registered arrangements that lower the
+      12-place print, s(147) <= 12.651043553173, s(156) <= 12.977053087495, s(180) <=
+      13.915618502788, s(270) <= 16.928148603340, s(299) <= 17.801004434252 and s(307) <=
+      17.979230960384, which it calls subject to RV-3. It credits Polkovskyi with new arrangements
+      at 210, 262, 272, 292 and 295, improved packings after Evan Daniel at 260 and after Doğa
+      Özden at 268, and the certificate refinements in Part B, whose arrangement credit stays with
+      the standing authors, and says the packings were discovered assisted by Gemini. Triaged,
+      retained and registered on 17 November 2026 in lane c-import-1009-1117 (think-i38n) as T-314
+      to T-326: each print rounds up from its exact side, both maintained exact routes accept each
+      certificate and refuse its gross and sharp controls, and each lies below its house;
+      measured, the 262 and 292 certificates are one to one with the packings of #1007 and #1006,
+      and the five refinements at 156, 180, 270, 299 and 307 lie at their houses' padding and are
+      held for the owner's RV-3 question (think-ruu2). The stage 4 review is lane R2 (think-evxy).
     read_through: '2026-11-16T23:38:22Z'
-    results: []
+    results:
+    - key: n147-ono-refined
+      claim: >-
+        s(147) <= 12.651043553173 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n147.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of Roberto Ono's packing (T-302), as the issue says.
+      source: body
+      register:
+      - T-314
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      validation:
+      - think-evxy
+    - key: n156-ozden-refined
+      claim: >-
+        s(156) <= 12.977053087495 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n156.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of Doğa Özden's packing (T-287), as the issue says.
+      source: body
+      register:
+      - T-315
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      validation:
+      - think-ruu2
+      - think-evxy
+    - key: n180-ozden-refined
+      claim: >-
+        s(180) <= 13.915618502788 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n180.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of Doğa Özden's packing (T-288), as the issue says.
+      source: body
+      register:
+      - T-316
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      validation:
+      - think-ruu2
+      - think-evxy
+    - key: n210-new
+      claim: >-
+        s(210) <= 14.971214601589 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n210.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-317
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      validation:
+      - think-evxy
+    - key: n260-daniel-continued
+      claim: >-
+        s(260) <= 16.633520939840 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n260.cert at Mishapolk/square-packing-records b637e6c), an improved
+        packing after Evan Daniel (T-269), as the issue says.
+      source: body
+      register:
+      - T-318
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      validation:
+      - think-evxy
+    - key: n262-new
+      claim: >-
+        s(262) <= 16.698115018700 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n262.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-319
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      validation:
+      - think-evxy
+    - key: n268-ozden-continued
+      claim: >-
+        s(268) <= 16.871868135103 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n268.cert at Mishapolk/square-packing-records b637e6c), an improved
+        packing after Doğa Özden (T-289), as the issue says.
+      source: body
+      register:
+      - T-320
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      validation:
+      - think-evxy
+    - key: n270-ozden-refined
+      claim: >-
+        s(270) <= 16.928148603340 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n270.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of the packing T-283 holds, as the issue says.
+      source: body
+      register:
+      - T-321
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      validation:
+      - think-ruu2
+      - think-evxy
+    - key: n272-new
+      claim: >-
+        s(272) <= 16.965501175831 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n272.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-322
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      validation:
+      - think-evxy
+    - key: n292-new
+      claim: >-
+        s(292) <= 17.590016439231 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n292.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-323
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      validation:
+      - think-evxy
+    - key: n295-new
+      claim: >-
+        s(295) <= 17.698115018700 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n295.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-324
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      validation:
+      - think-evxy
+    - key: n299-ozden-refined
+      claim: >-
+        s(299) <= 17.801004434252 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n299.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of the packing T-277 holds, as the issue says.
+      source: body
+      register:
+      - T-325
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      validation:
+      - think-ruu2
+      - think-evxy
+    - key: n307-ozden-refined
+      claim: >-
+        s(307) <= 17.979230960384 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n307.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of the packing T-279 holds, as the issue says.
+      source: body
+      register:
+      - T-326
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      validation:
+      - think-ruu2
+      - think-evxy
     beads:
     - think-i38n
+    - think-evxy
+    - think-ruu2
     answer_bead: think-i38n
     replies: []
     close_when: >-

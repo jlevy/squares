@@ -5723,7 +5723,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-15'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/148.html
   canonical: cases/148.html
@@ -5803,7 +5803,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-11'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/157.html
   canonical: cases/157.html
@@ -6019,7 +6019,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-11'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/181.html
   canonical: cases/181.html
@@ -6291,7 +6291,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/211.html
   canonical: cases/211.html
@@ -6731,7 +6731,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-06'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -6747,7 +6747,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/263.html
   canonical: cases/263.html
@@ -6795,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-11'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -6819,7 +6819,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-09'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -6835,7 +6835,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/273.html
   canonical: cases/273.html
@@ -7011,7 +7011,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/293.html
   canonical: cases/293.html
@@ -7035,7 +7035,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-23'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/296.html
   canonical: cases/296.html
@@ -7067,7 +7067,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-09'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/3.html
   canonical: cases/3.html
@@ -7147,7 +7147,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-09'
+  lastmod: '2026-11-17'
   status: live
 - path: cases/308.html
   canonical: cases/308.html
@@ -24922,6 +24922,486 @@ urls:
     - packing/devtools/measure_identity.py
     - docs/project/reviews/review-2026-11-16-joegun-1001.md
     - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-314.html
+  canonical: result/t-314.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 147
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n147.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-147.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n147.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n147.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n147.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n147.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n147-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-315.html
+  canonical: result/t-315.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 156
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n156.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-156.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n156.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n156.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n156.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n156.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n156-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-316.html
+  canonical: result/t-316.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 180
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n180.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-180.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n180.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n180.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n180.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n180.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n180-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-317.html
+  canonical: result/t-317.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 210
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n210.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-210.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n210.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n210.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n210.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n210.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n210-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-318.html
+  canonical: result/t-318.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 260
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n260.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-260.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n260.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n260.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n260.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n260.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n260-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-319.html
+  canonical: result/t-319.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 262
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n262.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-262.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n262.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n262.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n262.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n262.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n262-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n262-1007.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-320.html
+  canonical: result/t-320.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 268
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n268.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-268.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n268.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n268.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n268.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n268.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n268-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-321.html
+  canonical: result/t-321.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 270
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n270.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-270.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n270.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n270.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n270.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n270.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n270-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-322.html
+  canonical: result/t-322.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 272
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n272.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-272.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n272.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n272.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n272.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n272.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n272-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-323.html
+  canonical: result/t-323.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 292
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n292.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-292.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n292.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n292.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n292.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292-1006.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-324.html
+  canonical: result/t-324.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 295
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n295.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-295.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n295.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n295.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n295.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n295.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n295-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n295-1007.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-325.html
+  canonical: result/t-325.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 299
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n299.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-299.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n299.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n299.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n299.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299-t280.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-326.html
+  canonical: result/t-326.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-17'
+  lastmod: '2026-11-17'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 307
+    established: null
+    attribution:
+      source_keys:
+      - '[Mishapolk issue 1009 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-mishapolk-1009-certificate-report
+    artifacts:
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n307.cert
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-307.yaml
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n307.json.xz
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n307.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n307.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n307.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n307-own.json
+    - packing/resources/web/mishapolk-issue1009-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
 - path: results.html
   canonical: results.html
   kind: page

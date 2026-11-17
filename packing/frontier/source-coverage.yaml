@@ -13495,6 +13495,50 @@ sources:
     have full outcomes. A later commit the same day, 5971b95, adds the author's numerical
     local-minimum check and leaves the certificates unchanged; the
     joegun-local-minimum-2026-11-16 packet retains it, and it claims no bound.
+- id: mishapolk-issue1009-2026-11-16
+  title: Mykhailo Polkovskyi's 13 packings from 147 to 307 squares at Mishapolk/square-packing-records b637e6c, issue 1009
+  role: source-repository
+  url: https://github.com/Mishapolk/square-packing-records/tree/b637e6cf59c23781c813e8442bfdccb5aa5f3954/certificates/0000-0999
+  local: resources/web/mishapolk-issue1009-2026-11-16/
+  source_key: '[Mishapolk issue 1009 2026-11-16]'
+  scope:
+    n_values:
+    - 147
+    - 156
+    - 180
+    - 210
+    - 260
+    - 262
+    - 268
+    - 270
+    - 272
+    - 292
+    - 295
+    - 299
+    - 307
+  reviewed: '2026-11-17'
+  source_date: '2026-11-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+  evidence:
+  - E-mishapolk-1009-certificate-report
+  - E-mishapolk-1009-exact-feasibility
+  notes: >-
+    The 13 centre/half-angle certificates, their Witness/v2 corner files and SHA256SUMS, the
+    submission note and the two new verifiers are retained for jlevy/squares#1009 at b637e6c,
+    the commit the issue names, which force-pushed over b9b7fa7 with the same certificate bytes;
+    each certificate is admitted only where its exact side rounds up to the side the issue
+    prints, and held to its Witness/v2 file. The licence, README, separating-axis verifier and
+    its licence are pinned against byte-identical copies, and the indexes, the repository-wide
+    SHA256SUMS and the figures by digest. Licensed MIT by LICENSE at the pin. T-314 to T-326
+    record the 13 in-horizon reports, each below its count's house; at 156, 180, 270, 299 and
+    307 the entries are held for the owner's RV-3 question (think-ruu2) at their houses'
+    padding. The ledger of 17 November for this lane
+    (campaign/issue-intake/upper-bounds-1009-20261117) records all 13. All 39 native jobs have
+    full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

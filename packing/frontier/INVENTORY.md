@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **991** evidence records. **578** are formal; **569** of those were established here. **16** are samples, counted separately.
-- **391** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **993** evidence records. **579** are formal; **570** of those were established here. **16** are samples, counted separately.
+- **392** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -1014,13 +1014,15 @@ results, it is a statement about what this repository has itself examined.
 | `E-joegun-1001-certificate-report` | 5 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-joegun-1001-exact-feasibility` | 5 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 5 of 5: the five certificates at 127, 204, 232, 264 and 305 that T-305 to T-309 cite, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports` |
 | `E-joegun-1001-review-exact-feasibility` | 5 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 5 of 5: the five certificates: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | `V-joegun-1001-review-check` |
+| `E-mishapolk-1009-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-mishapolk-1009-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | shared components | full, 8 of 8: the certificates at 147, 210, 260, 262, 268, 272, 292 and 295 that T-314, T-317, T-318, T-319, T-320, T-322, T-323 and T-324 cite, every wall and every pair decided by both maintained routes; the same receipts decide the five counts at 156, 180, 270, 299 and 307, whose entries cite the report alone while the owner's RV-3 question stands; the kernel's controls are retained in the packet's receipts | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 393, verified 593
-- **method**: exact-algebraic 337, interval-certified 238, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 393
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 930
-- **relationship to the producer's code**: generator 5, independent-implementation 373, not-applicable 35, same-implementation 519, shared-components 53, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 394, verified 594
+- **method**: exact-algebraic 338, interval-certified 238, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 394
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 932
+- **relationship to the producer's code**: generator 5, independent-implementation 373, not-applicable 35, same-implementation 520, shared-components 54, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

@@ -5723,6 +5723,32 @@ sources:
       LICENSE.md at the pin, which says it covers JoeGun's contribution and not Kodaj's terms; the
       licence of Kodaj's notebook is unchecked (think-71uq). Retained in
       web/joegun-upper-bounds-2026-11-16/.
+  - key: '[Mishapolk issue 1009 2026-11-16]'
+    authors:
+    - Polkovskyi
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-16'
+    lineage: builds-on-project
+    credit: Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy
+    short_credit: Polkovskyi after Ozden et al.
+    note: >-
+      Mishapolk/square-packing-records at b637e6cf59c23781c813e8442bfdccb5aa5f3954
+      (2026-11-16T23:31:56Z), which jlevy/squares#1009 names, a force-push over b9b7fa7
+      (23:27:09Z) with the same certificate bytes: Mykhailo Polkovskyi's 13 exact rational
+      centre/half-angle certificates in Evan Daniel's format at 147, 156, 180, 210, 260, 262, 268,
+      270, 272, 292, 295, 299 and 307, each beside a Witness/v2 corner file of the same packing,
+      every side the issue prints its exact side rounded up at 12 places. The issue calls seven of
+      them lowered upper bounds (new arrangements at 210, 262, 272, 292 and 295, improved packings
+      after Evan Daniel at 260 and after Doğa Özden at 268) and six exact refinements of the
+      registered arrangements at 147, 156, 180, 270, 299 and 307, whose arrangement credit it
+      leaves with the standing authors (Roberto Ono, Doğa Özden, Evan Daniel, ntumlnoob and
+      Francisco Couzo), and says the packings were discovered assisted by Gemini. Measured here,
+      the 262 and 292 certificates are one to one with Joost de Winter's packings of #1007 and
+      #1006, which the source does not name. No optimality claim. The lineage builds on this
+      project: the refinements re-solve this registry's houses, and the author ran this
+      repository's independent corner checker on the Witness/v2 files. MIT-licensed (LICENSE at
+      17cc220). Retained in web/mishapolk-issue1009-2026-11-16/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
