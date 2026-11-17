@@ -110,7 +110,9 @@ So each is a new arrangement relative to the record’s packing, as the issue sa
 
 The checks below were planned before any of them ran, in the plan the
 [#1005 packet](../ozden-s292-upper-bound-2026-11-16/README.md#exact-replay) describes
-(SHA-256 `1f61b672…6d28`, 01:36:23Z on 17 November).
+(SHA-256 `1f61b672…6d28`, 01:36:23Z on 17 November). The plan is not retained, and
+its hash reached the bead store after the receipts were committed, so that order rests
+on the bead note’s claim alone, as the #1005 packet says.
 
 `devtools.upper_bound_reports certify` decided both certificates and their
 duplicate-square and outside-container controls on both maintained routes: 6 jobs,

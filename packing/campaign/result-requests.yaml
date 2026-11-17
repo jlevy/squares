@@ -35752,29 +35752,32 @@ issues:
     kind: result-report
     triage: done
     summary: >-
-      Joost de Winter asks for the registration of s(292) <= 17.590016442847, rounded up at 12
-      places from the exact rational side of a centre-direction certificate in his watched
-      repository JoostdeWinter/square-packing at 796ff3b, 1.36e-3 below the record at
-      f9ddfeee (T-146), filed 11 minutes 38 seconds after #1005 and below its side. It says
-      the packing's tilted ribbon extends that of David W. Cantrell's packing of 146 squares,
-      and asks for credit to de Winter as an extension of Cantrell's ribbon. Triaged, retained
-      and registered on 17 November 2026 in lane c-import-1005-1117 (think-qag8) as T-311: the
-      print rounds up from its exact side, both maintained exact routes accept the certificate
-      and refuse its gross and sharp controls, and it is a new arrangement relative to T-146's
-      packing and to #1005's, measured; the ledger records #1005 and then this claim. The stage
-      4 review of 17 November (lane R1, think-p3g8; #1013) accepts it with no blocking or major
-      finding and its controls as stated, so the entry is confirmed, independently
-      re-implemented, at V3/C3, S3. It is not adopted: Polkovskyi's #1009 (T-323) is 3.62e-9
-      below it at 292, 72 times its own contraction margin of 5.0288e-11, a new result under
-      option D (think-b0w5), and takes the house.
+      Joost de Winter asks for the registration of s(292) <= 17.590016442847, rounded up at
+      12 places from the exact rational side of a centre-direction certificate in his
+      watched repository JoostdeWinter/square-packing at 796ff3b, 1.36e-3 below the record
+      at f9ddfeee (T-146), filed 11 minutes 38 seconds after #1005 and below its side. It
+      says the packing's tilted ribbon extends that of the packing of 146 squares the record
+      credits to David W. Cantrell, and asks for credit to de Winter as an extension of
+      Cantrell's ribbon; that packing, by its side, is the record's T-187, Evan Daniel's
+      from Ryan Xu's, which measures as Xu's arrangement and not Cantrell's, so the record
+      credits de Winter after Daniel and Xu. Triaged, retained and registered on 17 November
+      2026 in lane c-import-1005-1117 (think-qag8) as T-311: the print rounds up from its
+      exact side, both maintained exact routes accept the certificate and refuse its gross
+      and sharp controls, and it is a new arrangement relative to T-146's packing and to
+      #1005's, measured; the ledger records #1005 and then this claim. The stage 4 review of
+      17 November (lane R1, think-p3g8; #1013) accepts it with no blocking or major finding
+      and its controls as stated, so the entry is confirmed, independently re-implemented,
+      at V3/C3, S3. It is not adopted: Polkovskyi's #1009 (T-323) is 3.62e-9 below it at
+      292, 72 times its own contraction margin of 5.0288e-11, a new result under option D
+      (think-b0w5), and takes the house.
     read_through: '2026-11-16T15:39:16Z'
     results:
     - key: n292-ribbon
       claim: >-
         s(292) <= 17.590016442847 rounded up at 12 places (the exact rational side of
         n292/n292_exact.json at JoostdeWinter/square-packing 796ff3b), a ribbon of 59 tilted
-        squares extending David W. Cantrell's, beside axis-aligned squares an integer program
-        placed.
+        squares extending that of the record's 146 packing (T-187), which the issue credits
+        to David W. Cantrell, beside axis-aligned squares an integer program placed.
       source: body
       register:
       - T-311
@@ -35782,6 +35785,17 @@ issues:
       - E-de-winter-1006-certificate-report
       - E-de-winter-1006-exact-feasibility
       - E-de-winter-1006-review-exact-feasibility
+    - key: n292-kaggle-side-only
+      claim: >-
+        The issue quotes two side-only values at 292: the Kaggle per-puzzle table's
+        17.589053943368 (team Cats and boxes, 8 November), below both 292 claims, and a public
+        merged submission's 17.591378147172 (bestbryant/claude_code_squaresinsquares, 16
+        November), above the record.
+      source: body
+      not_registered: >-
+        Side-only entries that state no packing, so neither is a report: context only, as for
+        #1005's quotation of the first and #1001's ledger's treatment of Kodaj's quoted 270.
+      queued: false
     beads:
     - think-qag8
     answer_bead: think-qag8

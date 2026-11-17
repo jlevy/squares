@@ -33399,7 +33399,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s292 upper bound 2026-11-16]'
     field: /credit
-  expected_text: de Winter after Cantrell
+  expected_text: de Winter after Daniel, Xu
   start: 0
   end: 9
   label: de Winter
@@ -33411,10 +33411,22 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s292 upper bound 2026-11-16]'
     field: /credit
-  expected_text: de Winter after Cantrell
+  expected_text: de Winter after Daniel, Xu
   start: 16
-  end: 24
-  label: Cantrell
+  end: 22
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s292 upper bound 2026-11-16]'
+    field: /credit
+  expected_text: de Winter after Daniel, Xu
+  start: 24
+  end: 26
+  label: Xu
   role: prerequisite
   disposition: unresolved
   evidence: []

@@ -142,6 +142,13 @@ and sharp control of this certificate and of de Winter’s three was written dow
 with two branches stated in advance, a square that touches its wall exactly and a pair
 that touches exactly. Before the plan was hashed only `sha256sum` had read the
 certificate.
+The plan itself is not retained: it was a scratch file of the import lane
+(`i1/controls-plan-1005-1007.md`) that no longer exists on this host. Its hash first
+reached the bead store’s `tbd-sync` branch at 03:32:51Z, about twenty minutes after the
+receipts’ commit (03:12:53Z); the bead’s 01:35:03Z note states the plan without the
+hash. So the order of plan and runs rests on the bead note’s 01:36:23Z claim alone. The
+controls’ expected outcomes are mechanical, every one came out as stated, and the stage
+4 review retains its own plan, hashed before it read any certificate.
 
 `devtools.upper_bound_reports certify` decided the certificate and its duplicate-square
 and outside-container controls on both maintained routes, each job in its own child
@@ -172,9 +179,11 @@ half-angle conversion), `Fraction` arithmetic and the separating-axis method.
 The first is the `packing-witness verify` the author ran, from the package whose
 promotion made the coordinates, so on that route the replay is reproduced with the
 producer’s code; the independent rational corner checker shares no geometry or
-verification code with `sqpack.witness` or `sqpack.verify`, and the replay’s independent
-re-implementation rests on it. Neither route is the author’s `sqcheck.py`, which was not
-run.
+verification code with `sqpack.witness` or `sqpack.verify`. Neither route is independent
+of the `packing-witness promote` that made the coordinates, so the replay is recorded as
+reproduced with the producer’s code, as the earlier Özden replays are, and the
+independent route is the stage 4 review’s clean-room checker.
+Neither route is the author’s `sqcheck.py`, which was not run.
 
 ## The Gain Against Padding
 

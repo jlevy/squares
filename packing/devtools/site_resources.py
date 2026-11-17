@@ -462,7 +462,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "staircase is replayed, reviewed and adopted here (T-299), and with borders "
             "it gives rows at 332 and 409 (#979). A local-search improvement of jazivxt's "
             "packing at 90, 4.24e-3 below it, is replayed, reviewed and adopted here (T-304). "
-            "A ribbon packing at 292 extending David W. Cantrell's, 1.36e-3 below T-146 "
+            "A ribbon packing at 292 extending that of Ryan Xu's and Evan Daniel's 146, "
+            "1.36e-3 below T-146 "
             "(T-311), and one band at 262 and 295, 7.41e-3 and 4.54e-3 below their houses "
             "(T-312, T-313), are replayed here."
         ),

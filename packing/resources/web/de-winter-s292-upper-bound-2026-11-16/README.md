@@ -113,18 +113,31 @@ A measurement for credit; it decides nothing.
   assignment, best under symmetry 2, moves 156 squares beyond 10⁻³ and 44 beyond 0.1
   (largest 0.897925), and 35 tilted squares pair with tilted squares of the same sign.
   So it is a new arrangement relative to the record’s packing and to #1005’s.
-- **Cantrell’s ribbon** is in a packing of another count, which the measurement cannot
-  pair. The side the issue names for that packing, 12.583782190152, is the record’s house
-  at 146 rounded up at 12 places, [Daniel n146 2026-10-14], which the case’s lanes credit
-  to Evan Daniel; the case’s prose still names Cantrell (2025), the Kingbird catalogue’s
-  earlier packing at 12.60090777851301. Whether sigmaborov’s coordinates are Daniel’s
-  packing was not measured: the notebook was not read.
+- **The 146 packing whose ribbon this one extends.** The side the issue names for it,
+  12.583782190152, is the record’s house at 146 rounded up at 12 places, T-187
+  ([Daniel n146 2026-10-14]), Evan Daniel’s packing from a chain search started from Ryan
+  Xu’s, which the case’s lanes credit to Daniel; the case’s prose still names David W.
+  Cantrell (2025), the Kingbird catalogue’s earlier packing at 12.60090777851301.
+  [measure/identity-n146-lineage.json](measure/identity-n146-lineage.json) measures T-187
+  against Cantrell’s packing (Evan Daniel’s exact certificate of the catalogue’s
+  arrangement, retained in the evand-square-packing-2026-10-05 packet) and against PingYou
+  Ltd’s refinement of Robert Barnett’s refinement of Xu’s packing: T-187 pairs one to one
+  with PingYou Ltd’s under the identity, 9 squares beyond a tenth, its 37 tilted squares
+  each paired with a tilted square of the same sign; against Cantrell’s no symmetry pairs
+  them, 58 squares move beyond a tenth, and Cantrell’s 36 tilted squares, at 42.40 to
+  44.87 degrees, lean 18 each way, where T-187’s 37, at 39.65 to 42.45 degrees, all lean
+  one way. So the ribbon is that of Xu’s packing as Daniel’s chain search left it, not
+  Cantrell’s, and the record credits the packing **de Winter after Daniel, Xu**.
+  Whether sigmaborov’s coordinates are exactly T-187’s was not measured: the notebook was
+  not read.
 
 ## Exact Replay
 
 The checks below were planned before any of them ran, in the plan the
 [#1005 packet](../ozden-s292-upper-bound-2026-11-16/README.md#exact-replay) describes
-(SHA-256 `1f61b672…6d28`, 01:36:23Z on 17 November).
+(SHA-256 `1f61b672…6d28`, 01:36:23Z on 17 November). The plan is not retained, and
+its hash reached the bead store after the receipts were committed, so that order rests
+on the bead note’s claim alone, as the #1005 packet says.
 
 `devtools.upper_bound_reports certify` decided the certificate and its duplicate-square
 and outside-container controls on both maintained routes: 3 jobs, 254,916 pair
@@ -193,8 +206,10 @@ Polkovskyi’s T-323 is 3.62e-9 below it at 292, 72 times its own contraction ma
 
 ## Credit and Licence
 
-The packing is Joost de Winter’s, a new arrangement at 292 whose ribbon extends David W.
-Cantrell’s, as the issue says. The record credits people, not AI agents
+The packing is Joost de Winter’s, a new arrangement at 292 whose ribbon extends that of
+the record’s packing of 146 squares, T-187 (Evan Daniel’s, from a chain search started
+from Ryan Xu’s packing), which the issue credits to David W. Cantrell; the measurement
+above finds that ribbon to be Xu’s and Daniel’s, not Cantrell’s. The record credits people, not AI agents
 ([attribution.md](../../../../attribution.md)), and states the assistance in the source’s
 words. The bibliography key is **[de Winter s292 upper bound 2026-11-16]**.
 `LICENSE` at the pin is de Winter’s MIT licence, and the root README says all files are

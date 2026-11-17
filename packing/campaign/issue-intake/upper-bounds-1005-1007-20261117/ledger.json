@@ -40,7 +40,7 @@
           "difference": "below by 8.78e-05",
           "first_committed": "2026-11-16T15:37:03Z",
           "measured": "no symmetry of the box pairs it one to one with T-146's packing by nearest centres; the optimal assignment (symmetry 6) moves 290 squares beyond 1e-3, 119 beyond 1e-2 and 69 beyond 0.1 (largest 0.927764) and turns 128 squares by more than 1e-6 radians, by up to 42.38 degrees; aligned by box centres, 49 squares turn by more than a degree and none reverses its tilt; 59 squares are tilted beyond a degree, 39.82 to 42.40 degrees, all one way, against T-146's 49 (35.68 to 40.97) all the other way; against #1005's packing, filed before it, no symmetry pairs them one to one either, and the optimal assignment moves 44 squares beyond 0.1; the house witness and its regularized view measure as T-146; a new arrangement relative to the record's packing and to #1005's",
-          "packing": {"kind":"new packing","continues":"the ribbon of David W. Cantrell's packing of 146 squares, two copies joined into a ribbon of 59, with axis-aligned squares placed by an integer program"}
+          "packing": {"kind":"new packing","continues":"the ribbon of the record's packing of 146 squares, T-187, Evan Daniel's from a chain search started from Ryan Xu's, which the issue credits to David W. Cantrell and which measures as Xu's arrangement, not Cantrell's (packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity-n146-lineage.json); two copies joined into a ribbon of 59, with axis-aligned squares placed by an integer program"}
         }
       ],
       "best_now": [{"label":"#1006","holders":"Joost de Winter","side":"17.590016442847","exact":true}],
@@ -76,7 +76,7 @@
         "n": 292,
         "report": "#1006",
         "verdict": "recorded",
-        "source_says": "a new packing seeded from the ribbon of David W. Cantrell's packing of 146 squares, two copies joined into a ribbon of 59, with axis-aligned squares placed by an integer program",
+        "source_says": "a new packing seeded from the ribbon of the record's packing of 146 squares, T-187, Evan Daniel's from a chain search started from Ryan Xu's, which the issue credits to David W. Cantrell and which measures as Xu's arrangement, not Cantrell's (packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity-n146-lineage.json); two copies joined into a ribbon of 59, with axis-aligned squares placed by an integer program",
         "against": "T-146",
         "finding": "no symmetry of the box pairs it one to one with T-146's packing by nearest centres; the optimal assignment (symmetry 6) moves 290 squares beyond 1e-3, 119 beyond 1e-2 and 69 beyond 0.1 (largest 0.927764) and turns 128 squares by more than 1e-6 radians, by up to 42.38 degrees; aligned by box centres, 49 squares turn by more than a degree and none reverses its tilt; 59 squares are tilted beyond a degree, 39.82 to 42.40 degrees, all one way, against T-146's 49 (35.68 to 40.97) all the other way; against #1005's packing, filed before it, no symmetry pairs them one to one either, and the optimal assignment moves 44 squares beyond 0.1; the house witness and its regularized view measure as T-146; a new arrangement relative to the record's packing and to #1005's",
         "source": "packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity.json"

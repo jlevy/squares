@@ -5723,7 +5723,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/148.html
   canonical: cases/148.html
@@ -5803,7 +5803,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/157.html
   canonical: cases/157.html
@@ -6019,7 +6019,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/181.html
   canonical: cases/181.html
@@ -6291,7 +6291,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/211.html
   canonical: cases/211.html
@@ -6731,7 +6731,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -6747,7 +6747,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/263.html
   canonical: cases/263.html
@@ -6795,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -6819,7 +6819,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -6835,7 +6835,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/273.html
   canonical: cases/273.html
@@ -7011,7 +7011,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/293.html
   canonical: cases/293.html
@@ -7035,7 +7035,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/296.html
   canonical: cases/296.html
@@ -7067,7 +7067,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/3.html
   canonical: cases/3.html
@@ -7147,7 +7147,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/308.html
   canonical: cases/308.html
@@ -24944,6 +24944,7 @@ urls:
     evidence:
     - E-ozden-1005-certificate-report
     - E-ozden-1005-exact-feasibility
+    - E-ozden-1005-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s292-upper-bound-2026-11-16/README.md
     - packing/resources/web/ozden-s292-upper-bound-2026-11-16/acquisition/claims.json
@@ -24959,6 +24960,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md
 - path: result/t-311.html
   canonical: result/t-311.html
   kind: result
@@ -24981,6 +24984,7 @@ urls:
     evidence:
     - E-de-winter-1006-certificate-report
     - E-de-winter-1006-exact-feasibility
+    - E-de-winter-1006-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/README.md
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/acquisition/claims.json
@@ -24988,6 +24992,7 @@ urls:
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/receipts/exact-certification.json.xz
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/receipts/sharp-controls.json
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity.json
+    - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity-n146-lineage.json
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292.json
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292-1005.json
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292-own.json
@@ -24996,6 +25001,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md
 - path: result/t-312.html
   canonical: result/t-312.html
   kind: result
@@ -25018,6 +25025,7 @@ urls:
     evidence:
     - E-de-winter-1007-certificate-report
     - E-de-winter-1007-exact-feasibility
+    - E-de-winter-1007-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/README.md
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
@@ -25032,6 +25040,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md
 - path: result/t-313.html
   canonical: result/t-313.html
   kind: result
@@ -25054,6 +25064,7 @@ urls:
     evidence:
     - E-de-winter-1007-certificate-report
     - E-de-winter-1007-exact-feasibility
+    - E-de-winter-1007-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/README.md
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
@@ -25068,6 +25079,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md
 - path: result/t-314.html
   canonical: result/t-314.html
   kind: result
@@ -25090,6 +25103,7 @@ urls:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25105,6 +25119,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-315.html
   canonical: result/t-315.html
   kind: result
@@ -25126,6 +25142,8 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25141,6 +25159,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-316.html
   canonical: result/t-316.html
   kind: result
@@ -25162,6 +25182,8 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25177,6 +25199,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-317.html
   canonical: result/t-317.html
   kind: result
@@ -25199,6 +25223,7 @@ urls:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25214,6 +25239,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-318.html
   canonical: result/t-318.html
   kind: result
@@ -25236,6 +25263,7 @@ urls:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25251,6 +25279,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-319.html
   canonical: result/t-319.html
   kind: result
@@ -25273,6 +25303,7 @@ urls:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25289,6 +25320,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-320.html
   canonical: result/t-320.html
   kind: result
@@ -25311,6 +25344,7 @@ urls:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25326,6 +25360,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-321.html
   canonical: result/t-321.html
   kind: result
@@ -25347,6 +25383,8 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25362,6 +25400,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-322.html
   canonical: result/t-322.html
   kind: result
@@ -25384,6 +25424,7 @@ urls:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25399,6 +25440,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-323.html
   canonical: result/t-323.html
   kind: result
@@ -25421,6 +25464,7 @@ urls:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25437,6 +25481,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-324.html
   canonical: result/t-324.html
   kind: result
@@ -25459,6 +25505,7 @@ urls:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25475,6 +25522,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-325.html
   canonical: result/t-325.html
   kind: result
@@ -25496,6 +25545,8 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25512,6 +25563,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: result/t-326.html
   canonical: result/t-326.html
   kind: result
@@ -25533,6 +25586,8 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -25548,6 +25603,8 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
 - path: results.html
   canonical: results.html
   kind: page

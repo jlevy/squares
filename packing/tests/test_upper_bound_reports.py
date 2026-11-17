@@ -504,6 +504,8 @@ def test_custody_refuses_a_changed_retained_file(
         ("replayed-undeclared", "replayed must be"),
         ("requested-empty", "requested must be"),
         ("algebraic-house", "an algebraic house names a dated packet"),
+        ("algebraic-house-reader", "an algebraic house names a dated packet"),
+        ("algebraic-house-print", "an algebraic house names a dated packet"),
     ],
 )
 def test_the_declaration_refuses_what_it_does_not_describe(
@@ -528,6 +530,15 @@ def test_the_declaration_refuses_what_it_does_not_describe(
         value["requested"] = []
     elif mutation == "algebraic-house":
         value["houses"][0]["algebraic"] = "not a dated packet"
+    elif mutation == "algebraic-house-reader":
+        # A dated packet, but a reader other than the house's source key (review A8 of #1011).
+        value["houses"][0]["algebraic"] = T193_PACKET
+        value["houses"][0]["reader"] = "[not this house's source key]"
+    elif mutation == "algebraic-house-print":
+        # A dated packet and the source key as reader, but a printed lane beside it.
+        value["houses"][0]["algebraic"] = T193_PACKET
+        value["houses"][0]["reader"] = value["houses"][0]["source_key"]
+        value["houses"][0]["reported_rounding"] = "up"
     else:
         value["certificates"].reverse()
     _write_json(path, value)
