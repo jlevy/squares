@@ -2334,7 +2334,10 @@ LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
 #: History a registration after an adopted count's last pass rewrote in the record's body,
 #: keyed like the two beside it: the first and last words of the committed passage and the
 #: words the pass left in its place, compared as words. T-246 replaced n = 29's "no minimal
-#: polynomial anywhere" with the polynomial it registers (25 October 2026).
+#: polynomial anywhere" with the polynomial it registers (25 October 2026). Joost de
+#: Winter's credit request #1008 (17 November 2026, think-dp8t) rewrote n = 211's packing
+#: paragraph, which had said T-057's source "says nothing about AI assistance", with the
+#: AI collaborator and the unpublished sources his issue names.
 LATER_HISTORY_REWRITES: dict[tuple[int, str], tuple[str, str, str]] = {
     (29, "T-195"): (
         "**The minimal polynomial (T-246).**",
@@ -2343,6 +2346,17 @@ LATER_HISTORY_REWRITES: dict[tuple[int, str], tuple[str, str, str]] = {
             "This case has no minimal polynomial anywhere — in the literature or here — which "
             "is why `exact_form`, `algebraic_degree` and `minimal_polynomial` are all null. It "
             "does not follow that nothing exact is known."
+        ),
+    ),
+    (211, "T-188"): (
+        (
+            "It reports an outward interval check at 80 digits but publishes no boxes or "
+            "checker. The repository says"
+        ),
+        "so the credit stays de Winter’s until a published revision does.",
+        (
+            "It reports an outward interval check at 80 digits but publishes no boxes or "
+            "checker, and it says nothing about AI assistance."
         ),
     ),
 }
