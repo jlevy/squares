@@ -117,12 +117,13 @@ a construction with no certificate file, or an index bound deleting squares from
 (`Held.answer`): a certificate its author withdrew from an issue is kept out of the record
 (think-8m4k), and an index bound deleting a square from the next count's published
 certificate is an earlier report (D6, think-f2io), so a later equal side, as #732's 985,
-is not recorded; that it has no row of its own is D6's recommendation, which the owner has
-not confirmed (think-kzme). A verdict the walk decides
-only against held publications rests on them (`Resting`): an answer that leaves a hold
-out reruns the walk, and ``held-dependents`` says what each such answer would reopen
-(`refusal_flips`). ``check`` holds every hold, every resting verdict and every declaration
-to the walk.
+is not recorded. The owner's answer of 17 November (think-gmoj, on think-kzme) gives a
+deletion-made bound a row only where a report claims the count with a certificate file of
+its own, so an index deletion bound, claimed by an issue or not, has none. A verdict the
+walk decides only against held publications rests on them (`Resting`): an answer that
+leaves a hold out reruns the walk, and ``held-dependents`` says what each such answer
+would reopen (`refusal_flips`). ``check`` holds every hold, every resting verdict and
+every declaration to the walk.
 
 **The owner's rulings.** The history, #719 and #732 walks apply two answers of the owner
 of 23 October 2026 as rules of the walk (`WALK_RULINGS`, `devtools.intake_ledger.RULINGS`):
@@ -183,12 +184,14 @@ to 1024 that #763 claims, and the index's unrequested rows there, from starts fr
 the push of 23:38:42Z that made 964ee2b public (`PUSHED_LATER`), and every earlier
 publication strictly below the start, from the history scan, Polkovskyi's repository
 through f1ceee4 and the commits after it, #715's re-certifications and, in the corpus, the
-retained ledgers. The walk holds the issue's deletion bound at 683 (`_HELD_763`) and the
-history walk's holds it records (`_HELD_IN_763`). It held the issue's 13 L-border recipes
-until a maintained construction checker existed; 43f666c's import decides each from its
-recipe and its replayed parent (`RECIPES`, think-g2qy), so each is a declared row with its
-recipe, dated by the first commit whose index states it (`recipe_first_commits`). A count
-in the corpus is the register's: no declared row holds 268 or 303 (`declared_rows`).
+retained ledgers. The walk settles the issue's deletion bound at 683 with no row, since
+the issue claims it with no certificate file of its own (`_HELD_763`, think-gmoj), and
+holds the history walk's holds it records (`_HELD_IN_763`). It held the issue's 13
+L-border recipes until a maintained construction checker existed; 43f666c's import
+decides each from its recipe and its replayed parent (`RECIPES`, think-g2qy), so each is a
+declared row with its recipe, dated by the first commit whose index states it
+(`recipe_first_commits`). A count in the corpus is the register's: no declared row holds
+268 or 303 (`declared_rows`).
 
 **The push of 23:38:42Z.** The walk
 ``campaign/issue-intake/upper-bounds-couzo-964ee2b-notebooks-20261024`` reads the counts of
@@ -235,8 +238,10 @@ a window above 1024 writes the v2 Göbel receipt (`goebel_receipt`). A recipe ro
 decided by the construction checker (`devtools.construction_checker`, D2), not the
 filtered replay: ``recipe-decisions`` replays the parents that are not rows and decides
 each recipe (`RECIPES`). An index's one-square deletion from the next count is an earlier
-report by D6, and any other deletion, or one an issue claims, waits on think-kzme
-(`deletion_holds`); the Kingbird catalogue's sides wait on N1 (`CATALOGUE`). A certificate
+report by D6, and one an issue claims is settled with no row by the answer of 17 November
+(think-gmoj); any other deletion waits on think-kzme's last question, whether a bound
+deleting two or more squares is an earlier report (`deletion_holds`); the Kingbird
+catalogue's sides wait on N1 (`CATALOGUE`). A certificate
 the packet pins and does not retain is read from hosted shards (`Release.hosted`,
 `devtools.hosted_shards`), and the fast check reads its side and blob from the source
 history without opening one.
@@ -435,15 +440,34 @@ WITHDRAWN_ANSWER = (
 #: square from a neighbour's certificate, Couzo's 985 from his 986, is an earlier report,
 #: with that option described as "A published deletion bound counts like any stated
 #: bound; a later equal or higher side is not recorded". The walk records it and the chain
-#: passes over it; that it has no row of its own is the decision's recommendation, which
-#: the owner has not confirmed (think-kzme). A bound deleting more squares, or from a
-#: farther count, is outside the question's words and stays held.
+#: passes over it. That it has no row of its own was the decision's recommendation until
+#: the owner confirmed it on 17 November 2026 (think-gmoj, on think-kzme), selecting the
+#: option labelled "Only where someone claims the count (Recommended)": a deletion-made
+#: bound gets a row only where a report claims the count with a certificate file of its
+#: own, as #941 does at 809, and an index bound has no such file. A bound deleting more
+#: squares, or from a farther count, is outside D6's words and stays held, on think-kzme's
+#: last question.
 DELETION_ANSWER = (
     "the owner's answer of 23 October 2026 on D6 (think-f2io), the option labelled "
     '"Yes, an earlier report (Recommended)" in the question the coordinator asked, whether '
     "a side obtained by deleting a square from a neighbour's certificate is an earlier "
-    "report; so a later equal or higher side is not recorded, and on the decision's "
-    "recommendation, which the owner has not confirmed (think-kzme), it has no row of its own"
+    "report; so a later equal or higher side is not recorded, and by the owner's answer of "
+    '17 November 2026 (think-gmoj), the option labelled "Only where someone claims the '
+    'count (Recommended)", it has no row of its own, since no report claims the count with '
+    "a certificate file of its own"
+)
+#: The owner's answer that settles an index deletion bound an issue claims (`Held.answer`;
+#: think-gmoj, on think-kzme's questions 1 and 2). The owner selected the option labelled
+#: "Only where someone claims the count (Recommended)"; the rest is the question the
+#: coordinator asked: a deletion-made bound gets a row only where a report claims the count
+#: with a certificate file of its own, as #941 does at 809. An issue that claims an index
+#: deletion, as #763 does at 683, names no such file, so the bound has no row, and the walk
+#: records the claim as it did.
+CLAIMED_DELETION_ANSWER = (
+    "the owner's answer of 17 November 2026 (think-gmoj), the option labelled "
+    '"Only where someone claims the count (Recommended)" in the question the coordinator '
+    "asked: a deletion-made bound gets a row only where a report claims the count with a "
+    "certificate file of its own, and an index deletion an issue claims names none"
 )
 #: What a hold's class is called where a sentence counts holds (`held_sentence`).
 HELD_NAMES = {
@@ -699,11 +723,13 @@ def deletion_holds(
 
     A bound a publication states that deletes one square from the next count's certificate
     is an earlier report by the owner's D6 answer, settled with no row of its own
-    (`DELETION_ANSWER`, think-f2io). A bound deleting two or more squares is outside that
-    question's words and waits on think-kzme, as the history walk's 751, 752 and 927 do.
-    Every bound an issue claims waits on think-kzme too, whatever it deletes, with the bead
-    of the issue's import (``claimed_by``), as #763's 683 does: whether an issue's deletion
-    bound gets a row is that question (think-llit's plan, Deletion Rows).
+    (`DELETION_ANSWER`, think-f2io, think-gmoj). A bound deleting two or more squares is
+    outside that question's words and waits on think-kzme's last question, as the history
+    walk's 751, 752 and 927 do. A bound an issue claims, whatever it deletes, is settled with
+    no row by the owner's answer of 17 November 2026 (`CLAIMED_DELETION_ANSWER`,
+    think-gmoj), held under the bead of the issue's import (``claimed_by``), as #763's 683
+    is: an index bound names no certificate file of its own, and only such a file earns a
+    row (think-llit's plan, Deletion Rows).
     """
     settled: set[int] = set()
     waiting: set[int] = set()
@@ -730,8 +756,8 @@ def deletion_holds(
                 CONSEQUENCE,
                 claimed_by,
                 frozenset(waiting),
-                also=("think-kzme",),
-                note="deletion bounds the issue claims",
+                note="deletion bounds the issue claims, with no certificate file of their own",
+                answer=CLAIMED_DELETION_ANSWER,
             )
         )
     elif waiting:
@@ -782,8 +808,8 @@ _CLASSICAL_23AFF0C = "Göbel's squares and Friedman's off-centre family"
 #: 23aff0c's extend Friedman's constructions (`_CLASSICAL_23AFF0C`), so they wait on
 #: think-zkxy too. 36 of 4e4c8ce's 39 deletion bounds each delete one square from the next
 #: count's certificate and are settled by the owner's D6 answer (`DELETION_ANSWER`); the
-#: other three delete two or three squares and wait on think-kzme. ``check`` holds each to
-#: the walk.
+#: other three delete two or three squares and wait on think-kzme's last question, whether
+#: such a bound is an earlier report. ``check`` holds each to the walk.
 HISTORY_HELD: dict[str, tuple[Held, ...]] = {
     "TheSnakeFang/squarepack-certs@bef5c42": (
         _held(
@@ -934,20 +960,21 @@ _HELD_IN_732_F1: tuple[tuple[str, str], ...] = (("franciscouzo/square-packing@4e
 #: still owed (`Resting`).
 _RESTING_732_F1: tuple[Resting, ...] = ()
 #: #763's claim the walk records and holds back from a row: 683, 684's certificate less one
-#: square, which the issue claims, so it waits on think-kzme's question whether an
-#: issue-claimed deletion bound gets a row (think-2z2n). The walk held the issue's 13 tiling
-#: and L-border recipes (365 444 487 632 733 734 737 788 789 845 910 966 970) on a maintained
-#: construction checker until 43f666c's import (think-g2qy): the checker decides each one
-#: exactly (D2, think-f2io; `RECIPES`), so each is a row the walk records, as it did, and the
-#: release declares it with its recipe (`declared_rows`). The fourteenth recipe, 909,
-#: restates PR C's row and is not recorded.
+#: square, which the issue claims with no certificate file of its own, so it has no row by
+#: the owner's answer of 17 November 2026 to think-kzme's question whether an issue-claimed
+#: deletion bound gets a row (`CLAIMED_DELETION_ANSWER`, think-gmoj). The walk held the
+#: issue's 13 tiling and L-border recipes (365 444 487 632 733 734 737 788 789 845 910 966
+#: 970) on a maintained construction checker until 43f666c's import (think-g2qy): the
+#: checker decides each one exactly (D2, think-f2io; `RECIPES`), so each is a row the walk
+#: records, as it did, and the release declares it with its recipe (`declared_rows`). The
+#: fourteenth recipe, 909, restates PR C's row and is not recorded.
 _HELD_763 = (
     _held(
         CONSEQUENCE,
-        "think-2z2n",
+        "think-gmoj",
         "683",
-        also=("think-kzme",),
-        note="684's certificate less one square, which the issue claims",
+        note="684's certificate less one square, claimed with no file of its own",
+        answer=CLAIMED_DELETION_ANSWER,
     ),
 )
 #: #763's recipes, held until the construction checker decided them in 43f666c's import, a
@@ -1042,10 +1069,11 @@ _HELD_IN_43F: tuple[tuple[str, str], ...] = (
 )
 #: The 43f666c walk's verdicts decided only against publications it holds for a decision
 #: still owed (`Resting`): earlier publications below its starts that rest on 23aff0c's and
-#: 4e4c8ce's recipes and deletions from Friedman's constructions, as in the #763 walk; the
-#: push of 23:38:42Z's sides at 683, which rest on #763's deletion bound there (think-2z2n,
-#: think-kzme); and 43f666c's own 367, an L-border of 330's certificate 3.83e-12 above
-#: 23aff0c's deletion from Friedman's construction at 368 (think-zkxy).
+#: 4e4c8ce's recipes and deletions from Friedman's constructions, as in the #763 walk; and
+#: 43f666c's own 367, an L-border of 330's certificate 3.83e-12 above 23aff0c's deletion
+#: from Friedman's construction at 368 (think-zkxy). The push of 23:38:42Z's sides at 683
+#: rested on #763's deletion bound there until the owner's answer of 17 November 2026
+#: settled it with no row (think-gmoj), so they rest on nothing.
 _RESTING_43F = (
     _resting(f"{MISHAPOLK_REPOSITORY}@1851c2c", NOT_RECORDED, CONSEQUENCE, "367"),
     _resting(f"{MISHAPOLK_REPOSITORY}@1851c2c", NOT_RECORDED, RECIPE, "733 734 788 789 845"),
@@ -1054,9 +1082,6 @@ _RESTING_43F = (
     _resting(
         "franciscouzo/square-packing@5a299b4", NOT_RECORDED, RECIPE, "733 734 788 789 845 966"
     ),
-    _resting("franciscouzo/square-packing@964ee2b", NOT_RECORDED, CONSEQUENCE, "683"),
-    _resting("franciscouzo/square-packing@efef7d1", NOT_RECORDED, CONSEQUENCE, "683"),
-    _resting("franciscouzo/square-packing@fa6237e", NOT_RECORDED, CONSEQUENCE, "683"),
 )
 
 
@@ -4161,7 +4186,9 @@ def held_sentence(walk: Walk, report: str) -> str:
                 f" Its {len(item.counts)} "
                 + (HELD_NAMES if len(item.counts) > 1 else HELD_NAME)[item.kind]
                 + (f", {item.note}" if item.note else "")
-                + f", at {_compress_counts(item.counts)}, have no row by {item.answer} "
+                + f", at {_compress_counts(item.counts)}, "
+                + ("has" if len(item.counts) == 1 else "have")
+                + f" no row by {item.answer} "
                 f"(beyond_horizon_replay.{held_name})."
             )
     resting = [item for item in walk.resting if item.report == report]
@@ -6445,10 +6472,11 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
     (`walks_of`) declares the counts it reaches. A deletion the walk records and does not
     hold is a row at its parent's side, declaring the parent's certificate and the squares
     it deletes (``deleted``), which the replay decides as the parent's first ``n`` poses;
-    whether an issue's deletion bound gets a row is think-kzme's, so a walk holds it until
-    the owner answers. A recipe the walk records and does not hold is a row by the owner's
-    D2 answer, declaring its parent's certificate and the recipe the construction checker
-    decides (`write_recipe_decisions`)."""
+    an index deletion bound an issue claims has no row by the owner's answer of 17 November
+    2026 (`CLAIMED_DELETION_ANSWER`, think-gmoj), so a walk holds it settled. A recipe the
+    walk records and does not hold is a row by the owner's D2 answer, declaring its parent's
+    certificate and the recipe the construction checker decides
+    (`write_recipe_decisions`)."""
     commit = chosen.pin
     if chosen.claim_map:
         found = {

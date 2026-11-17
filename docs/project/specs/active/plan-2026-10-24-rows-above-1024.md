@@ -56,7 +56,7 @@ Every price is in CPU-hours.
 | --- | --- | --- |
 | D1: track counts above 1024 | Yes, no ceiling; rows recorded as reported, as below 1024 | think-f2io |
 | D2: recipe rows with no certificate file | Yes, “decided exactly from the recipe by a checker this project maintains”; the rule goes into the frontier README | think-f2io |
-| D6: deletion bounds | Selected the option labelled “Yes, an earlier report (Recommended)”; whether such a bound gets a row of its own is still open | think-f2io, think-kzme |
+| D6: deletion bounds | Selected the option labelled “Yes, an earlier report (Recommended)”; on 17 November 2026, “Only where someone claims the count (Recommended)”: a row only where a report claims the count with a certificate file of its own, as #941 at 809; whether a bound deleting two or more squares is an earlier report is still open | think-f2io, think-gmoj, think-kzme |
 | #613: Göbel as the baseline | Yes: “a rational row above Goebel’s exact side is not recorded” | think-8krd |
 | Restatements below the print | “sub-print re-certifications are RESTATEMENTS, not new rows” | think-fwa9 |
 | N2: compute for #732 | Under the 40 CPU-hour cap: all positives on both routes, plus six controls on a stratified 10% of #732’s files, about 36 CPU-hours with the rest | think-llit |
@@ -69,9 +69,9 @@ follows as recommended (a hosted-data manifest, not Git blobs; OR-18) unless the
 says otherwise”. That is the coordinator’s disposition, not the owner’s word, and this
 plan follows it ([Hosted Custody](#hosted-custody-n3-d4-or-18)).
 
-Still open: D3, D5, think-kzme’s sub-question on D6, N1, N4, N5 and N6.
-[Open Questions](#open-questions) sorts them into those a stated rule or the record
-already decides and those only the owner can answer.
+Still open: D3, D5, think-kzme’s last sub-question on D6 (bounds deleting two or more
+squares), N1, N4, N5 and N6. [Open Questions](#open-questions) sorts them into those a
+stated rule or the record already decides and those only the owner can answer.
 
 ### The Reports Above 1024
 
@@ -365,9 +365,13 @@ earlier report, so a later side equal to it or above it is not recorded.
   count, which includes `5a299b4`’s index bounds of that kind.
 - Deletions of two or more squares hold on think-kzme, as 751, 752 and 927 do today.
 
-**What waits on think-kzme.** The deletions an issue claims stay recorded in the walk
-but have no rows until think-kzme is answered: #715’s 158 above 1024, and #763’s 1646
-and 1727. R1 decides their positives, so writing their rows in R4 costs only seconds.
+**What the answer of 17 November settles.** The deletions an issue claims stay recorded
+in the walk, and an index deletion bound has no row, claimed or not, since only a report
+that claims the count with a certificate file of its own earns one (think-gmoj): #715’s
+158 above 1024 and #763’s 1646 and 1727, as #763’s 683 below it, are settled with no row
+(`CLAIMED_DELETION_ANSWER`), unless their reports turn out to state files of their own.
+What still waits on think-kzme is a deletion of two or more squares that no issue
+claims.
 
 ### Hosted Custody (N3, D4, OR-18)
 
@@ -510,10 +514,10 @@ W7 updates the rules where they live:
   table states with no certificate file of its own (a tiling or L-border recipe on a
   certificate) is a row once the maintained checker decides it exactly from the recipe
   and the parent is replayed (D2). A deletion bound is no recipe row: one square below
-  the next count’s certificate is an earlier report by D6, and any other deletion, or
-  one an issue claims, waits on think-kzme (`deletion_holds`). A certificate kept as
-  hosted data is read through its manifest, while its receipts and rows stay in Git
-  (`OR-18`).
+  the next count’s certificate is an earlier report by D6, one an issue claims has no
+  row by the answer of 17 November 2026 (think-gmoj), and any other deletion waits on
+  think-kzme (`deletion_holds`). A certificate kept as hosted data is read through its
+  manifest, while its receipts and rows stay in Git (`OR-18`).
 - **The frontier README, Adding or Reviewing a Result** (`:349`–`:355`): the same, in
   one sentence.
 - **`packing/campaign/result-import.md`, Several Reports at One Count** (`:498`–`:499`

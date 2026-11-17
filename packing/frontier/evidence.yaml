@@ -59904,8 +59904,10 @@ evidence:
       receipts/sharp-controls-nNNN.json). That replay is E-de-winter-941-exact-feasibility and
       the stage 4 review's clean-room run E-de-winter-941-review-exact-feasibility, which cite
       the rows. At 809, the 810 certificate less its last square, the replay and the review
-      accept the certificate too, and its row is held for the owner's think-kzme, so the replay
-      and review atoms do not cover it.
+      accept the certificate too; its row was held for the owner's think-kzme until the
+      owner's answer of 17 November 2026 (think-gmoj) gave a deletion-made bound a row where a
+      report claims the count with its own certificate file, as #941 does here, so the replay
+      and review atoms cover it with the other fourteen.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share certificate
@@ -60027,7 +60029,7 @@ evidence:
   - id: E-de-winter-941-exact-feasibility
     claim: upper-bound
     scope:
-      n_values: [413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 810, 851, 867, 910]
+      n_values: [413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 809, 810, 851, 867, 910]
     assurance: verified
     method: exact-algebraic
     performed_by: repository
@@ -60044,8 +60046,10 @@ evidence:
       check admits every retained job. python -m devtools.upper_bound_reports de-winter-issue941-2026-11-10
       sharp-controls wrote the packet's sharp controls (receipts/sharp-controls-nNNN.json), all
       11 a count as expected on both routes: contact accepted at margin 0 and refused 1e-30 past
-      it. check --replay was not run. This atom covers the fourteen counts the source's rows
-      state.
+      it. check --replay was not run. This atom covers the fifteen counts the source's rows
+      state, 809 among them since the owner's answer of 17 November 2026 gave the deletion
+      bound #941 claims there with its own certificate file a row (think-gmoj); the receipts
+      decided it with the others on 11 November.
     replay_status: passed
     verifiers:
     - V-sqpack-verify
@@ -60056,11 +60060,11 @@ evidence:
       coverage:
         extent: full
         unit: >-
-          the fourteen certificates the source's beyond-horizon rows state, every wall and every
+          the fifteen certificates the source's beyond-horizon rows state, every wall and every
           pair decided by both maintained routes; the kernel's controls are retained in the
           packet's receipts
-        checked: 14
-        of: 14
+        checked: 15
+        of: 15
       read: [specification, certificate-format]
       clean_room: false
       shares: []
@@ -60106,7 +60110,7 @@ evidence:
   - id: E-de-winter-941-review-exact-feasibility
     claim: upper-bound
     scope:
-      n_values: [413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 810, 851, 867, 910]
+      n_values: [413, 494, 539, 543, 547, 590, 738, 739, 753, 794, 809, 810, 851, 867, 910]
     assurance: verified
     method: exact-algebraic
     performed_by: repository
@@ -60132,11 +60136,11 @@ evidence:
       coverage:
         extent: full
         unit: >-
-          the fourteen certificates the source's beyond-horizon rows state: every square, every
+          the fifteen certificates the source's beyond-horizon rows state: every square, every
           wall and every pair, by two exact methods in two arithmetic libraries that share only
           the reader, with the stated controls decided by both
-        checked: 14
-        of: 14
+        checked: 15
+        of: 15
       read:
       - mathematics
       - specification

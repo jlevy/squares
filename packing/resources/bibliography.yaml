@@ -5209,11 +5209,12 @@ sources:
       jlevy/squares#941. Seven are square sub-windows of Francisco Couzo's packings at 544, 539,
       590, 696, 851, 851 and 868 (#763, franciscouzo/square-packing 43f666c), re-optimized, 753 a
       sub-window of the 810 here, six are borders of axis-aligned squares on these and 809 the 810
-      less one square; the issue credits the source arrangements to Couzo. Fourteen are
+      less one square; the issue credits the source arrangements to Couzo. All fifteen are
       beyond-horizon rows below the rows of Couzo and Kirill Tymchishin at those counts, bounds
       below the record, not the best known packings at 14 of the 15 counts: the issue says
-      public Kaggle submissions hold smaller ones at all but 543; 809, a deletion bound from the
-      810, is held for the owner (think-kzme).
+      public Kaggle submissions hold smaller ones at all but 543. 809, a deletion bound from the
+      810 with a certificate file of its own, was held for the owner (think-kzme) until the
+      owner's answer of 17 November 2026 gave it its row (think-gmoj).
       The source says the work was
       produced with Claude (Anthropic) under his direction. No local or global optimality claim is
       replayed; the issue's local-optimality statements rest on a numerical solution without

@@ -819,7 +819,10 @@ repositories:
       sides, are recorded; the re-certifications restate the reports they beat; and a bound one
       square below the next count's certificate is an earlier report (D6). Whether such a bound has
       a row of its own, whether an issue's claim at 743, 798, 855 or 985 gives it one, and the three
-      bounds at 751, 752 and 927 that delete two or three squares wait, so this read now names
+      bounds at 751, 752 and 927 that delete two or three squares waited, so this read names
+      think-kzme. The owner answered the first two on 17 November 2026 (think-gmoj): a
+      deletion-made bound gets a row only where a report claims the count with a certificate
+      file of its own, so these index bounds have none; 751, 752 and 927 still wait on
       think-kzme.
   - url: https://github.com/wand125/square-packing
     read_through: b57e66712b5f722b39fcb703692006062c7d9eb7

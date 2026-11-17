@@ -262,7 +262,10 @@ certificate has been replayed on both routes (D2). A two-strip L-packing (#799),
 Theorem 1.3 shape with its two strips chosen independently, has no parent: the
 maintained `devtools.two_strip_checker` decides it exactly from its parameters.
 A deletion bound is no such row: one square below the next count’s certificate is an
-earlier report (D6), and any other deletion, or one an issue claims, waits on the owner
+earlier report (D6), and a deletion-made bound gets a row only where a report claims the
+count with a certificate file of its own, as #941’s 809 does (the owner’s answer of 17
+November 2026, think-gmoj), so an index deletion bound has none, claimed or not; whether
+a bound deleting two or more squares is an earlier report waits on the owner
 (think-kzme;
 [several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
 A certificate kept as hosted data is read through its hosted-data manifest

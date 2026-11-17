@@ -8548,8 +8548,9 @@ reports:
     928, 965, 979, 985 and 989, have no row by the owner''s answer of 23 October 2026 on D6 (think-f2io),
     the option labelled "Yes, an earlier report (Recommended)" in the question the coordinator asked,
     whether a side obtained by deleting a square from a neighbour''s certificate is an earlier report;
-    so a later equal or higher side is not recorded, and on the decision''s recommendation, which the
-    owner has not confirmed (think-kzme), it has no row of its own (beyond_horizon_replay.HISTORY_HELD).
+    so a later equal or higher side is not recorded, and by the owner''s answer of 17 November 2026 (think-gmoj),
+    the option labelled "Only where someone claims the count (Recommended)", it has no row of its own,
+    since no report claims the count with a certificate file of its own (beyond_horizon_replay.HISTORY_HELD).
     Its verdicts at 1 count are decided only against held publications (beyond_horizon_replay.HISTORY_RESTING):
     1 against constructions with no certificate file. An answer that leaves a hold out reruns this walk.'
 - report: franciscouzo/square-packing@58a7833

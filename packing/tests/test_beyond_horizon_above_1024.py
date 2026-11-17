@@ -8,7 +8,7 @@ tests hold the mechanisms a records slice uses above 1024, negative controls fir
 - a frozen release asked to decide a claim above its window is refused;
 - a walk above 1024 whose rulings stop at 1024 fails `devtools.intake_ledger.answer_problems`;
 - a deletion of two squares above 1024 is not settled by the D6 answer and stays held on
-  think-kzme;
+  think-kzme, and a deletion an issue claims is settled with no row (think-gmoj);
 - a Kingbird catalogue side declared as a row before N1 is answered is refused;
 - a recipe row with no decision, or one that differs from its derivation, is refused;
 - the fast check reads a hosted row's side and blob without opening a shard, and
@@ -146,7 +146,9 @@ def test_a_deletion_bound_is_settled_only_one_square_from_the_next_count() -> No
     """`deletion_holds` gives the history walk's holds of 4e4c8ce's 39 deletion bounds:
     36 one square from the next count's certificate, settled by the D6 answer; 751, 752
     and 927 waiting on think-kzme. Above 1024 a two-square deletion waits too, and every
-    bound an issue claims, as #763's 1646 and 1727 would."""
+    bound an issue claims, as #763's 1646 and 1727 would be, is settled with no row by the
+    owner's answer of 17 November 2026 (think-gmoj): an index bound names no certificate
+    file of its own."""
     history = replay.HISTORY_HELD["franciscouzo/square-packing@4e4c8ce"]
     one = sorted(history[0].counts)
     bounds = [(n, n + 1, 1) for n in one] + [(751, 754, 3), (752, 754, 2), (927, 929, 2)]
@@ -162,7 +164,12 @@ def test_a_deletion_bound_is_settled_only_one_square_from_the_next_count() -> No
         "",
     )
     (claimed,) = replay.deletion_holds([(1646, 1647, 1), (1727, 1728, 1)], claimed_by="think-x")
-    assert (claimed.bead, claimed.also, claimed.answer) == ("think-x", ("think-kzme",), "")
+    assert (claimed.bead, claimed.also, claimed.answer) == (
+        "think-x",
+        (),
+        replay.CLAIMED_DELETION_ANSWER,
+    )
+    assert "17 November 2026 (think-gmoj)" in replay.CLAIMED_DELETION_ANSWER
     with pytest.raises(replay.ReplayError, match="1102 less 1 squares is not 1100"):
         replay.deletion_holds([(1100, 1102, 1)])
 
