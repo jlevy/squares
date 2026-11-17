@@ -5,11 +5,15 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 labels:
   - intake
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-17T21:28:19.830Z
+updated_at: 2026-11-17T21:55:15.688Z
 ---
+
+## Notes
+
+2026-11-17T23:10Z coord-intake-1117r: scope addition from the w5 audit: measure T-173 at 207 against T-147 shrunk to first contact (think-g0o4); 153 stays with the owner.
