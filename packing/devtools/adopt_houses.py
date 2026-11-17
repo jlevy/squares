@@ -3282,7 +3282,9 @@ CREDITS: dict[int, Credit] = {
     # T-287 (adopted on 11 November 2026), Doğa Özden's issue 943: a new arrangement relative
     # to T-186's packing, 58 squares beyond a tenth, found by transplant search from a strip
     # cut of Evan Daniel's n = 182 packing, which the 11 November review's cut model fits over
-    # most of the box (F8, F10).
+    # most of the box (F8, F10). The phrase names the seed; the seed's own lineage, through
+    # T-188 to Joost de Winter's T-057 (jlevy/squares#1008), is in T-287's claim and credit
+    # line.
     156: Credit(
         (OZDEN,),
         (),
@@ -3366,7 +3368,9 @@ CREDITS: dict[int, Credit] = {
     # T-243 (adopted on 25 October 2026), Evan Daniel's packing of issue 806 from an L-cut of
     # Francisco Couzo's n = 211 packing (T-188), an arrangement of Daniil Ostashev's design
     # (T-175), which the 25 October review measured square for square (M-1); another
-    # arrangement than T-174's, which held 182 before.
+    # arrangement than T-174's, which held 182 before. The phrase names the start and its
+    # design; the rest of the lineage, Ostashev's re-hardening of Daniel's exact optimum of
+    # Joost de Winter's packing (jlevy/squares#1008), is in T-243's claim and credit line.
     182: Credit(
         (DANIEL,),
         (),
@@ -3446,11 +3450,16 @@ CREDITS: dict[int, Credit] = {
     ),
     # Couzo's further arrangement of Ostashev's issue-575 design, five squares beyond a
     # tenth against T-182 and T-175 (RT-1 of the 16 October review; T-188 records no
-    # regularization).
+    # regularization). Ostashev's record file (n0211.sqpk, line 5) re-hardens that design
+    # from Evan Daniel's exact optimum (T-098) of Joost de Winter's packing (T-057), which
+    # the phrase names since de Winter's jlevy/squares#1008 (think-dp8t); no symmetry pairs
+    # the design with T-057's nearest centres one to one, so de Winter is no finder here.
+    # The phrase ends on Couzo, so that the id the page puts after it reads as his.
     211: Credit(
         (OSTASHEV,),
         (COUZO,),
-        "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
+        "the n = 211 design Daniil Ostashev re-hardened from Evan Daniel’s exact optimum of "
+        "Joost de Winter’s packing, as Francisco Couzo further arranged it",
     ),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of Francisco
     # Couzo's issue-672 packing (T-227), solved to its exact side 1.76e-11 below #672's
