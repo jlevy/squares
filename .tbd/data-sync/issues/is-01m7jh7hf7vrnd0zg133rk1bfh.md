@@ -5,7 +5,7 @@ title: "Import #1005, #1006 and #1007: s(292) by Özden and by de Winter, s(262)
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: w3-pass-1117r
 labels: []
 dependencies:
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:20.740Z
-updated_at: 2026-11-17T21:50:20.031Z
+updated_at: 2026-11-17T22:06:54.139Z
 started_at: 2026-11-16T15:59:56.835Z
 ---
 
@@ -36,3 +36,5 @@ Adoption target: the 2026-11-16 pass; switch to 2026-11-17 if adoption + stamps 
 2026-11-17T21:55Z coord-intake-1117r: reclaimed from silent c-*-1117 lanes; delegated to w3-pass-1117r (worktree /home/user/wt/w3): map review-1005 (82fb63e88) into #1011, adopt and regularize 262/292/295, merge; then #1009 (import-1009 83232579c, review-1009 6a4f56b3d).
 
 2026-11-17T22:40Z coord-intake-1117r: approved w3's plan change. #1011 maps R1 (#1013), confirms T-310..T-313 and adopts nothing: 262, 292 and 295 are staged in select_houses.PENDING_ADOPTION under think-i38n. #1009 (Polkovskyi) is lower at all three (262 -1.58e-3; 292 -3.6e-9, 72x #1006's contraction margin, so a new result under option D; 295 -1.58e-3), both PRs land 18 Nov, and the prior-state archive holds one state per count per day. If import-1009 stalls, de Winter's T-311/T-312/T-313 must be adopted instead.
+
+2026-11-17T23:40Z coord-intake-1117r: revised plan approved, with no PENDING_ADOPTION staging. 262 has no writer path for the staged-record sentence, and nine test_house_adoption pins would have to change for counts #1009 re-houses hours later. So #1011 = registration only (T-310..T-313, V3/C3 on the replay), with R1 (#1013) merged but unmapped; precedent: L58 merged, L57 mapped later. think-i38n maps R1 and #1014 and adopts the smallest validated packing at each count; if #1009 fails, it adopts de Winter's at 262/292/295.
