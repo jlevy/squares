@@ -5,7 +5,7 @@ title: "Import BuddenPing: 148 certificate refinements, 60 of them exact algebra
 kind: task
 status: open
 priority: 1
-version: 15
+version: 16
 delegate: null
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:06:14.598Z
-updated_at: 2026-10-31T11:18:07.580Z
+updated_at: 2026-11-17T03:32:50.307Z
 started_at: 2026-10-14T08:06:19.172Z
 ---
 Pull request jlevy/squares#574 (BuddenPing, PingYou Ltd), head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde of BuddenPing/squares (2026-10-13T01:58:38Z), treated as an intake report: never merged, approved or commented on here. Lane pr574 of the 2026-10-14 intake pass (think-mq0k), branch claude/wizardly-meitner-wqn4x3-intake-1014-pr574. Packet packing/resources/web/pingyou-pr574-certificates-2026-10-13/. Claim map, comparison, replay plan and draft acknowledgement in the notes.
@@ -163,3 +163,5 @@ Replace "The case pages keep their houses until adoption, which is the owner's, 
 The supersession note of ~11:05Z still applies: if T-193 is not yet at V3/C3 on main when this reply is posted, the reply must not say it is confirmed.
 
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner's decision to merge or close PR #574 and its 148-count submission; #574 is held for the owner (recorded reservation, think-5ip2), so no pass posts there.
+
+2026-11-17 coord-intake-1117: OWNER DECIDED (think-0mup): "Close with a thank-you note (Recommended)" — close PR #574 with a note pointing to the entries its results became; the posting hold at #574 is lifted for that note.

@@ -5,7 +5,7 @@ title: "Import wand125: the Lean kernel proof of s(59) = 8 (f9a77b7), a proof-as
 kind: task
 status: open
 priority: 3
-version: 8
+version: 9
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:06.049Z
-updated_at: 2026-10-24T09:16:49.611Z
+updated_at: 2026-11-17T03:32:42.547Z
 started_at: 2026-10-23T06:19:00.079Z
 ---
 Found in the 2026-10-11 intake read of wand125/square-packing (think-q655); nothing on GitHub asked. Commit f9a77b7 (2026-10-11T01:42:37Z) adds problems/square-lower-bounds/certificates/k2m5_n59_L8/lean/: a generated Lean proof, theorem s59_eq_8 : minSide 59 = 8 and s59_ge_8, axioms [propext, Classical.choice, Quot.sound], no sorry and no native_decide, on Evan Daniel's mixed-measure checker (ZMTreeM.checkM, CovM, le_minSide_mixed) used unchanged at evand/square-packing 1718a580e5de2fac7e1a5535e98f11ba447d312e, over the cover n59_mixed_cover_8.txt (SHA-256 6f4d2b64...): 6,400 root cells in 290 batches, 43,154 generated files not stored (SOURCES.sha256 lists them; receipts/kernel_tasks.jsonl.gz the kernel tasks).
@@ -37,3 +37,5 @@ Stage 4 review: owed, from the packet.
 2026-10-24 coord-intake-1024: released. #536's closing reply (the lost scratch draft reply-536.md) is re-drafted from main with check_requests --draft 536 after #787 merges (think-9i18's stage 7). This bead keeps T-235's stage 4 review.
 
 2026-10-24 coord-intake-1024: #536 closed 2026-10-24T09:16:30Z with its final reply https://github.com/jlevy/squares/issues/536#issuecomment-6382429802 (posted after Pages run 40080362391 verified 6808d293a's deploy); the record rides think-mdfr's records PR. This bead keeps T-235's stage 4 review (tracked on #783).
+
+2026-11-17 coord-intake-1117: OWNER DECIDED (think-l7j0): "Decline all three (Recommended)" — the over-cap run this bead holds is declined, recorded with its price; the result keeps its rung (for #537 the ~8 CPU-h sample still runs under the cap).
