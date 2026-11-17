@@ -5,8 +5,8 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 19
-delegate: coord-intake-1117
+version: 21
+delegate: coord-intake-1117r
 labels: []
 dependencies: []
 child_order_hints:
@@ -29,6 +29,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-17T03:32:13.586Z
+updated_at: 2026-11-17T21:28:05.342Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
+
+## Notes
+
+2026-11-17T21:45Z coord-intake-1117r (session_01KJPQoFoTCWBNT6bCUm8RkX): reclaimed. coord-intake-1117's last bead update was 03:32Z and its lanes' last pushes 04:00-04:29Z (17 h silent); no other session on the account works this repository. Found on resume: #953/#908/#909/#1010/#1011 open, CI green, mergeable; #953 has senior review A (04:25Z) unaddressed; #908, #909, #1010, #1011 unreviewed; import-1009 (83232579c), review-1005 (82fb63e88) and review-1009 (6a4f56b3d) pushed with no PR. Untracked: none of the eight 17 November owner decisions was applied (think-0mup: PR #574 still open; think-b0w5: #939/#946 still blocked:owner-decision; think-x30l, think-l7j0, think-k2lh, think-gmoj, think-k8vt records unwritten). New since: #1012 (Kaggle pointer, 109 and 270). Sweep 21:35Z: 8 unowned, 84 stalled, 1 blocker resolved (think-4ul6), 6 not checked. Old bold-ritchie lN-review branches all landed (L58's under the renamed unnir-s12-lower-bound-2026-11-08 packet).
