@@ -5,14 +5,14 @@ title: "Decision: news.html byte budget, no measured size passes the load checks
 kind: task
 status: open
 priority: 1
-version: 6
+version: 7
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
 labels:
   - decision
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T06:55:42.109Z
-updated_at: 2026-11-17T03:07:43.502Z
+updated_at: 2026-11-17T21:46:53.345Z
 ---
 The owner's decision is needed: the measurement that was to confirm a larger byte budget for news.html (plan #759, "Before Phase 1: The Budget Raise"; think-3oxz) found no size that passes the site's own load checks, and today's page fails one of them too. The budget stays at 600,000 bytes until the owner picks a step.
 
@@ -50,3 +50,5 @@ Evidence: the tool and its tests are on branch claude/intake-2026-10-24-news-bud
 2026-10-24 c-fix-788-1024: runway re-read at main 6808d293a after #787 (358,186 bytes, 52 stories): about 13 to 21 days to 600,000 and 5 to 8 to 450,000; added to WHAT IT MEANS.
 
 2026-11-17 coord-intake-1117: OWNER DECIDED (think-k8vt): "Hand both to the site agent (Recommended)": the results-page lightening and the News card layout fix (fold before first paint, reserve the filter bar, batch the reads) are the site agent's work; intake keeps raising results.html's exception in measured 100,000-byte steps up to HARD_HTML_LIMIT.
+
+2026-11-17T22:30Z w4-records-1117r (think-8gvd, applying think-k8vt): handed to the site agent by the owner's decision of 17 November 2026 (think-k8vt, "Hand both to the site agent (Recommended)"). The News card layout fix (fold before first paint, reserve the filter bar, batch the reads) is the site agent's work; left open for that agent, unclaimed by intake.
