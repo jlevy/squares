@@ -1,0 +1,52 @@
+# Lane c-review-1009-1117 findings, frozen at 2026-11-17T04:28:50Z, before the source's README.md, SUBMISSION_2026_11_16.md, ISSUE_*.md, verify_bound_certificate.py, verify_area_exact.py, verify_algebraic_bounds.py, check_packing.py, certified_bounds.json, upper_bounds.json, licence files or figures, this repository's witness, verifier, promotion, identity or contraction code, the register entries, case records or house witnesses at 147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299 or 307, issues #1005, #1006 and #1007 and their sources, or any import lane's or other review lane's work was read.
+# Read between the checker's freeze and this one, to write programs run after it: the front matter of the case record at 127 and the head of the house witness there, the help texts of devtools.contraction_margin and devtools.measure_identity, and the adapter names of devtools.upper_bound_reports; rv1009_padding.py was tried on the houses at 127, 204, 232, 264 and 305.
+# the frozen review text, and every receipt and program it cites:
+0e93742767b5bbc839a9fa666c0c9ad32cc08e693369115e88d70eade7d1a1a7  frozen/review-2026-11-17-polkovskyi-1009.frozen.md
+d28ca977ba11896d2ed34769b46b014ca7de9b3def0c771c0286b8e34af5add9  frozen/checker-frozen-digests.txt
+1f847c0baecf541c5bf63b07526a89658e89133477374963fe56e5098b241b74  programs/rv1009_describe.py
+08e815853b2ca8f67c65b9268ebae153bc725098bfb16c53f7732798c4c233ca  programs/rv1009_lstep.py
+0497d02d86a38849894ab265fd1d75c0d49eb306444162a30954633d4c2bdbe6  out/selftest.json
+e5b89d6a9c4c600d274cb972a2aef2a0823ec98ff9be3ad3d8ccae187f0a1c01  out/check-n147.json
+2baeb69a3d3ecbefc8d71c515111df6b72a23e57b17e30e31d9632bb6c002cee  out/check-n156.json
+5b872656fc28026fecf67f137f826f854940d94e50f7de501a6e14125773dc09  out/check-n180.json
+06b16096cf6bbe3e165b19cca6e05112c5f5dae3dba337c6a6de8cf2ef8044ab  out/check-n210.json
+1691b4bf1941a7a7e975ce1df001a4eca1b0016f2294f6d3e211178cb99fb2c4  out/check-n260.json
+6e4bd47945f29b2481a47548a0605b98a412ba4fd65ea0f1c239311c13a5673c  out/check-n262.json
+c8ae2aa5473df3d7e5b5f4c622d84777030b8cf23877390c38b8dfe5fbc1ce7d  out/check-n268.json
+423d70dfc9deed221f5866736513f390ae76f8c681f5d24e69660e6dff02930f  out/check-n270.json
+be366942e6f23914a5632636ddb02554322e46c8af295a05281ee2077cc7beb2  out/check-n272.json
+06088bcedbbf70e0108d652c37b12d69016fb74fc90364b3c6514f8a973d8b0d  out/check-n292.json
+d2e1755e9a35625e79d49df39449142f379f07f659190700179de8f4bd36c283  out/check-n295.json
+e7dcd173a771eb302ffcbb3be10a409b59dfb8b5c27077c14fba88e184af68f8  out/check-n299.json
+479a8be02badd8c326ecd90e6ca02b3f108b92c1c2c35d626a26c0f642cf2b8d  out/check-n307.json
+0886b3c7fd441b7e160b98c59dba2359ec490f8c5f85f21d56e158fae5722ef5  out/controls-n147.json
+043a90aff3bfcd7f116d2cca59242ff10206c8c0b23b9179d1f6c0065630c4e5  out/controls-n156.json
+a61ebe64111416926ed0578a7118488e47ac663d0c0410330884496d7309b744  out/controls-n180.json
+368412330f32693f5cf4b0269fdf3e9ff22efe97a2cdf5427e3761634e0d1a82  out/controls-n210.json
+259fd99df7c90699d74a95fc7a51a5b29473cbaefa041d0c64c98eb1717fb38b  out/controls-n260.json
+5f95ce7c5a49b6b74e4a95f842d9df84a12d30111392ae6fa89ddcfc4d05af5e  out/controls-n262.json
+cddd42df75b9890947203f2913f6972b71229bb3c7ca483d74ed989e8346a0fe  out/controls-n268.json
+c95e18caee56bc6a5113ca91fb8b04f83e68997ff292b214a4a31bfaa8d2c76c  out/controls-n270.json
+bad23485a1e285baf795d9a61d56bb36bcff127a6f63a7e512b659a074a187d9  out/controls-n272.json
+2a8f5ecf6a91781e6d95ba78d37ed8f78df692e063a7c0de133f2baa86237e99  out/controls-n292.json
+a1ce1bb5bf430c390a6b7a1ea284af35f6fc49a51ab32f372ab609c679db8bd4  out/controls-n295.json
+bdeb840075fcee8da04d7eb54cf51909d0f706d8b0cb111b30c91721d8a67edb  out/controls-n299.json
+fa84dca7597ea0ef9adfb37ba7284d9d2b952d134d88531aa219d33a038f61b1  out/controls-n307.json
+79111ad4309cee5af9524f5f1bbb7e581a5a022899c44e7e811ba1752cd9509f  out/describe-n147.json
+424b1bd31326bd5d8c023ae444dfd8e20c1f15fbac40af0568ffaebf3105d074  out/describe-n156.json
+489cfee1dac7fa90a40f15a7017c9319df944a3ffb6d0d6c4beb8af4a9d3e78e  out/describe-n180.json
+c14da2e21135942197463ff5dac970ab9a74a9d1fe765324241b82939bea288b  out/describe-n210.json
+ce77d1ab12561c2dde4251e3126eb4ff645da11f41b7b41def9e95705e9d421b  out/describe-n260.json
+b2845cba22776e2648ac95bc2c83b9cdc59a467ce69fb704a3ae9731ca4cfd51  out/describe-n262.json
+efa9c51b35f4b2ce2beff1a069c98d154c281b0fcd97f1c5e9142d42c704cadf  out/describe-n268.json
+acdfce0fd54c9d4e93c41c743154a4eb1750a8bb616f8fda725a860ffbb98315  out/describe-n270.json
+510f83a9aadf0bc9378cd6b5deacd703be12d803be38b6de48fb97ba779fab5a  out/describe-n272.json
+9d23a2fee945be5933b83e8cf4f56aaa9f9ae0634049113de10af953cfa55a19  out/describe-n292.json
+8188eb62950123483a0574eb2ac504a944e90b2be2040a60cff15a11e6ad2aef  out/describe-n295.json
+683c1405f9362f03158fb85d34a7b79c5d2511b8f815977c0c43453b6099354e  out/describe-n299.json
+3f8f9deccf2103301dd722ab0d1af88a8b3373840bc039cbf535c4ab33f21d20  out/describe-n307.json
+d1ff2c291c109a8d7bb4ae92018bb88fc9091f64604de5d67d3cd5c7ff4d5bad  out/lstep-262-295.json
+# programs written before this freeze and not yet run on anything of the thirteen counts (they may change before they are):
+9968ff5559293f5712997446268ea924b8c79ba6f5915e05455af9687fbe2fd8  programs/rv1009_custody.py
+c8de3c77b8c7e20674a940f0d98a5cf7da30a22b6d69b956bbd0a94aff18ee2d  programs/rv1009_padding.py
+81e9404a4383f2a5681263a29e3136ce01f1ee8826fc7bc71147499a31ad2b91  programs/rv1009_sides.py
