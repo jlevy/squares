@@ -5,8 +5,8 @@ title: "Stage 4 review of T-142's mixed_n28_L57425 and T-143's mixed_n30_L58925 
 kind: task
 status: in_progress
 priority: 2
-version: 6
-delegate: bold-ritchie-l93
+version: 8
+delegate: w1-holds-1117r
 labels:
   - result-import
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m4kbxmtaqt87tdw33cs19ah8
 hold: null
 hold_until: null
 created_at: 2026-11-04T16:00:43.636Z
-updated_at: 2026-11-17T03:07:35.291Z
+updated_at: 2026-11-17T21:29:42.731Z
 started_at: 2026-11-11T10:57:38.005Z
 ---
 T-142 (wand125's s(28) >= 2297/400, mixed_n28_L57425) and T-143 (s(30) >= 2357/400, mixed_n30_L58925), reported on no issue and registered at V0/C0, have no review that reads their certificates: the 11 October final review read the record and premises only. The declared-net route's checklist (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md, For the Records Lane, item 7) needs a review under docs/project/reviews/ that read the certificate and accepted it before a census replay's evidence can be mapped, and check_results' verified_lane_review_problems holds an adoption at n = 28 or 30 to a mapped review. So neither can leave V0/C0 by a census alone, as think-1lri says of T-132.
@@ -35,3 +35,5 @@ T-142 (wand125's s(28) >= 2297/400, mixed_n28_L57425) and T-143 (s(30) >= 2357/4
 2026-11-11 bold-ritchie-l95 (addressing lane L95, a correction to the L93 note above): that note says the 4 November census note of bold-ritchie-l45 on think-i85v came "before this review existed". That is wrong. A first launch of this review on 4 November produced docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md, retained on branch claude/bold-ritchie-xo28us-l45 (jlevy/squares#908, held for the owner) and not on main, so a 4 November review of these certificates existed on that branch when the l45 note was written. Lanes L93 and L95 did not read it (L95 confirmed only that the path is on that branch and absent from main). The 11 November review on #953 now says so in its opening and its Comparison With Earlier Reviews (senior-review finding B-1). Which review external_review names, and whether the 4 November review joins the reviews of T-142 and T-143, is left to the owner.
 
 2026-11-17 coord-intake-1117: OWNER DECIDED (think-fibh): "Lift the hold and merge (Recommended)": the 11 October regularize-first hold no longer applies to the lower-bound confirmations; #908, #909 and #953 are to be brought up to date and merged.
+
+2026-11-17T21:55Z coord-intake-1117r: reclaimed from silent c-holds-1117 / bold-ritchie lanes; delegated to w1-holds-1117r (worktree /home/user/wt/w1): address #953 review A, merge #953 -> #908 -> #909 per think-fibh.
