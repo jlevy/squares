@@ -31,10 +31,8 @@ starts, and the pins above.
 maximum reasoning setting its agent definition configures, the stage 4 mathematical
 review lane R1 (c-review-1005-1117) of the 17 November intake pass, separately prompted
 and blind to the import.
-The model ID its system prompt names is `claude-fable-5-2` (Fable 5.2); it is stated
-here because the owner asked on 17 November that the latest mathematical assessments run
-on Fable 5.2. It read the sources as data and ran only programs of its own, kept with
-their receipts in
+It read the sources as data and ran only programs of its own, kept with their receipts
+in
 [`packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/`](../../../packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md).
 Its checker is a clean-room implementation written for this review: it reuses no code
 from any earlier review.
@@ -807,6 +805,17 @@ What went wrong along the way, and was redone before the freeze it precedes:
   square of the band and the rest do not fit a smaller box; it now takes the corner
   whose remaining squares have the least extent.
   Its first receipt was overwritten.
+
+## Note on This Copy
+
+This copy differs from the frozen text
+(`frozen/review-2026-11-17-ozden-de-winter-1005-1007.frozen.md`, bound by
+`frozen/findings-frozen-digest.txt`) in two places, both added on 17 November 2026 after
+the freeze by lane w3-pass-1117r: the common-doc footer, and the reviewer line, which
+named a model identifier.
+The runbook’s stage 4 says the reviewer line names the system family, tier and reasoning
+setting, not a model identifier; the frozen copy is left as it was frozen.
+No finding, verdict or number changes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
