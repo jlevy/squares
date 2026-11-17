@@ -8,6 +8,7 @@ arithmetic; nothing passes through a float.
 
 from __future__ import annotations
 
+import json
 from fractions import Fraction
 
 
@@ -77,3 +78,33 @@ def is_exact_decimal(value):
         while den % prime == 0:
             den //= prime
     return den == 1
+
+
+def _flat(value):
+    """A scalar, or a short list of scalars: printed on one line."""
+    if isinstance(value, (list, tuple)):
+        return len(value) <= 4 and all(not isinstance(v, (list, tuple, dict)) for v in value)
+    return not isinstance(value, dict)
+
+
+def to_json(value, indent=0):
+    """JSON text with one key per line and lists of scalars or of short lists inline."""
+    pad = " " * indent
+    if isinstance(value, dict):
+        if not value:
+            return "{}"
+        rows = [f"{pad} {json.dumps(str(k))}: {to_json(v, indent + 1)}" for k, v in value.items()]
+        return "{\n" + ",\n".join(rows) + "\n" + pad + "}"
+    if isinstance(value, (list, tuple)):
+        if all(_flat(v) for v in value):
+            return json.dumps(value)
+        rows = [f"{pad} {to_json(v, indent + 1)}" for v in value]
+        return "[\n" + ",\n".join(rows) + "\n" + pad + "]"
+    return json.dumps(value)
+
+
+def write_json(path, value):
+    text = to_json(value) + "\n"
+    json.loads(text)  # the receipt must be valid JSON
+    with open(path, "w") as handle:
+        handle.write(text)

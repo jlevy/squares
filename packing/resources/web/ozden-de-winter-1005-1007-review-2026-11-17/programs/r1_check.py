@@ -17,7 +17,6 @@ both methods accept everything with equal classes.
 from __future__ import annotations
 
 import hashlib
-import json
 import os
 import platform
 import sys
@@ -214,9 +213,7 @@ def main(argv):
         receipt["verdict"] = "ACCEPT" if verdict == "ACCEPT" and not reasons else "REFUSE"
         receipt["reasons"] = reasons
     receipt["cpu_seconds"] = round(time.process_time() - started, 1)
-    with open(out_path, "w") as handle:
-        json.dump(receipt, handle, indent=1)
-        handle.write("\n")
+    r1_fmt.write_json(out_path, receipt)
     print(receipt["verdict"], receipt["file"], f"cpu {receipt['cpu_seconds']} s")
     return 0 if receipt["verdict"] == "ACCEPT" else 1
 

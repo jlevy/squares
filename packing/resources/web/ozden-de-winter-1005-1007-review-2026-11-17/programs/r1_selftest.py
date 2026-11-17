@@ -703,6 +703,9 @@ def suite_fmt(t, m):
             and f.ceil_places(F(3, 2), 0) == 2 and f.ceil_places(F(-3, 2), 0) == -1
             and f.ceil_places(F(2), 12) == 2)
     t.check("fmt terminating", f.is_exact_decimal(F(1, 8)) and not f.is_exact_decimal(F(1, 3)))
+    sample = {"a": [1, 2, [3, 4]], "b": {"c": [], "d": {}, "e": [[1, "x"], {"f": None}]},
+              "g": "text \"quoted\"", "h": [[1, 2, 3, 4, 5]], "i": True, "j": 1.5}
+    t.check("fmt json", json.loads(f.to_json(sample)) == sample)
     # closing two upright squares with centres 3 apart: tau = 1 - 1/3, the moved
     # centre lands 1 from the other
     fi, fj = m.frame.from_centre(F(0), F(0), F(1), F(0)), m.frame.from_centre(F(3), F(0), F(1), F(0))
@@ -750,9 +753,7 @@ def main(argv):
     receipt["every_broken_copy_fails"] = all_fail
     receipt["verdict"] = "PASSED" if tally.failed == 0 and all_fail else "FAILED"
     receipt["cpu_seconds"] = round(time.process_time() - started, 1)
-    with open(argv[1], "w") as handle:
-        json.dump(receipt, handle, indent=1)
-        handle.write("\n")
+    load().fmt.write_json(argv[1], receipt)
     print(receipt["verdict"], tally.total, "checks", tally.failed, "failed;",
           ", ".join(f"{b['failed']}" for b in receipt["broken_copies"]), "failures in the broken copies")
     return 0 if receipt["verdict"] == "PASSED" else 1

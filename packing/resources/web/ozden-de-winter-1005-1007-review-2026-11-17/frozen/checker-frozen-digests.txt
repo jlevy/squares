@@ -1,0 +1,27 @@
+# Lane R1 (c-review-1005-1117) checker and controls plan, frozen at 2026-11-17T03:46:57Z, before any program of this lane read a certificate, and before the sources' README.md files, checkers (verify_exact.py, check_area.py, verifier/sqcheck.py), outputs (verify-292.txt, sqcheck-292.txt, checks/*.json), SHA256SUMS, REGISTRATION.md, licence files, decimal pose, hit files or images, this repository's witness, verifier, promotion, identity or contraction code, the register entries, case records or witnesses at 146, 262, 292 or 295, issue #1009 or any other open issue or pull request, or any import lane's work was read.
+# Read before the freeze: the lane's three briefs; issues #1005, #1006 and #1007 (REST, bodies and events, no comments, fetched 01:34Z on 17 November); result-import.md (the intake pass, stages 1, 3 and 4), epistemics.md and attribution.md; the model review review-2026-11-16-joegun-1001.md, its packet README and its two frozen digest lists (not its programs, plan or receipts); packing/witnesses/witness.schema.yaml; the Ruff and BasedPyright exclusions of packing/pyproject.toml, biome.json and lefthook.yml; the agent definition .claude/agents/tbd-strong-max.md; the pinned trees' listings (names, blob ids, sizes); the names of the directories under packing/resources/web that hold earlier packets of these authors; 31 lines of packing/campaign/result-requests.yaml printed by a search for 'RV-3'; and the eight certificate files' structure by head, tail, sed, grep, wc, awk and sha256sum (keys, line kinds, scalar forms and quoting, tabs and line ends, the first and last entries, the format sentence), as needed to write the readers.
+# Before the freeze the programs were run on synthetic packings only, in scratch space. The session's worker process restarted between about 01:58Z and 03:04Z, before the controls program or the plan existed; nothing had been frozen and nothing was lost.
+# source files (blobless clones, materialised with git archive at the pins; digests by sha256sum; #1005 states the first, and the issues state no other):
+90a0e30681821da567835ce1c9e81cf52aa899985587a953eafa0701b1829a8a  kenaznia-doga/s292-upper-bound@dec930b:n-292-candidate.yaml
+07b86d44562acf8cd3bbff45ed2f7e6a9573af2f099009cfa1bf320fdfcbd720  kenaznia-doga/s292-upper-bound@dec930b:n292-witness.json
+3d6fb90c9b79bc9dee984ec0e4b6ecc89bb1306afb266d0b75dcecea4a972b4a  JoostdeWinter/square-packing@796ff3b:n292/n292_exact.json
+6d8a1264e3ddb014fc4ffbd55b53fa4889e6fcf00eba9458a3da8544ee3b6c3e  JoostdeWinter/square-packing@796ff3b:n292/n292_witness.yaml
+95875def0a2784e980ff92cacbe0508d84cc1ee03d6104130d9db4007a0ffa04  JoostdeWinter/square-packing@853b92e:n262/n262_exact.json
+7dccee9a115cd7b056637fa3f70a208c3b35da9b5d8f0bfca4ae57d7fd86ec87  JoostdeWinter/square-packing@853b92e:n262/n262_witness.yaml
+9a0b4bc14803a43fb46e0370a3ad25faaa5a1f7f47186248455c90fae91b13a0  JoostdeWinter/square-packing@853b92e:n295/n295_exact.json
+412a6d526bda6bbde6d8edc10f0ef6df39d9bcca2aa58f83579923711490337e  JoostdeWinter/square-packing@853b92e:n295/n295_witness.yaml
+# checker programs, the controls program, the describing program and the controls plan:
+1d4d841483d241a59010549b5c8e9df0926f82b2f6a8347373401407810b31d1  r1_read.py
+0210c6cc0533fb544df44a46b3fc7515afb99b0ad901b78ee194ccca11e1ecb7  r1_axes.py
+5c8a2cd6f0a7d647bc69511c4ff63617aa881cef4be38bee34675219a21835e5  r1_area.py
+7a7d7273feb290b3cb5d02333e3a6d7e05af879f5f9f21d30b433d1e426805e0  r1_frame.py
+e5544d514ff403bb82af776978f5e8ad2f995898f61203639b0f5454a7f9a3c3  r1_decide.py
+c3991839a59c604b9397c896363500176b2e4a1b9d1b76e39ab6cfe99e8b7df8  r1_fmt.py
+b15c4de3f01e2fb2fcbb749d3657b80135d63d7c5fa2a32e819c33166122fe40  r1_check.py
+8f0617c8ee2a4c8b687fd3e979ea34d55fe99319dce49d6ce06edfedfd615406  r1_twin.py
+02cdf3334dd48f8e695decbb4483cb36aeac7b65486f9e6a79f6c9a4cb8c1512  r1_selftest.py
+a048583e4ddb41f73074e7df18445176d534ec5af4e4c7f15b40603ee12688d2  r1_controls.py
+58e2bdcaa7ae2f5fac60303607f1759c4a33f9e8154d0d367d8215071a277e41  r1_describe.py
+ccaf62ab5cb7cb3b80e03aa1a76e6f50c0241bb214f98e78bd841a47c64c887f  controls-plan.json
+# receipt written by the frozen self-test (it reads no certificate):
+9e55eb16f8653aef8426b49d39c8ebb14ed0559305ad31a588ccfa373ed1b4ec  out/selftest.json

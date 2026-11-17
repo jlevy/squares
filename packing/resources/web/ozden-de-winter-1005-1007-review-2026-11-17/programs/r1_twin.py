@@ -20,7 +20,6 @@ It decides no certificate.
 
 from __future__ import annotations
 
-import json
 import os
 import sys
 from collections import Counter
@@ -101,9 +100,7 @@ def main(argv):
             key: pa.notes.get(key) == pb.notes.get(key) for key in keys
         }
         receipt["ids_equal"] = pa.ids == pb.ids
-    with open(out_path, "w") as handle:
-        json.dump(receipt, handle, indent=1)
-        handle.write("\n")
+    r1_fmt.write_json(out_path, receipt)
     print("SAME_PACKING" if receipt["same_packing"] else "DIFFERENT", receipt["first"]["file"],
           receipt["second"]["file"])
     return 0 if receipt["same_packing"] else 1
