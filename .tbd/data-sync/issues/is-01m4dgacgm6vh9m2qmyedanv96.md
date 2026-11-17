@@ -5,7 +5,7 @@ title: Record issue413 latest 31-pattern report with unpublished-certificate dis
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: claude-code@spud10.local
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: paused
 hold_until: null
 created_at: 2026-10-08T10:18:07.764Z
-updated_at: 2026-11-02T01:09:57.418Z
+updated_at: 2026-11-17T21:50:12.220Z
 started_at: 2026-10-08T10:18:20.299Z
 ---
 Retain the current #413 33-row reported roster and both corrections in reviewed metadata; preserve earlier dated 31/32-row observations in Notes. Current split: two reported unmodified standing FULL, two parallel standing-node checks plus fast, eighteen fast-only and eleven computed. Complete maintained object/receipt custody remains outstanding; all 35 classes including #358 are unadmitted. Conditional union: 2,234 orbits / 17,604 states against the frozen #404 60-entry baseline. Only row 23 touches the hard tail; none matches the first eight. Existing implementation/disposition: https://github.com/jlevy/squares/issues/413#issuecomment-6065911258 . Finish availability/custody/disposition under think-ewea, preserving distinct producer and verifier obligations. Do not rerun or duplicate the metadata join. Row 33 remains an ungenerated estimate. No admission or numerical movement.
@@ -32,3 +32,5 @@ October 9 handoff reconciliation: the current Description supersedes stale sourc
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner's standing n = 17 hold of 13 October (pending T-153); #413's seven dated status reports stay queued under it, and nothing is to run.
 
 2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Still waits on the owner's n = 17 intake hold of 13 October (pending T-153), whose bead is think-x4v4 (#413 is blocked: standing-hold on main, naming it). The claim is claude-code@spud10.local's, an identity outside this project's pass sessions, so this note is the only change: claim, status and hold stay as they are, and the sweep lists the bead's items again once the claim lease lapses, until the claim's holder or the owner releases or renews it.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c) waits on the owner. The owner's n = 17 intake hold of 13 October (pending T-153, Overbeck's s(17) = L) still stands, checked today: T-153 reads V0/C1 in packing/frontier/results.yaml, its ten trees (about 21 CPU-h, under the cap) and its capture recomputation (about 1,273 CPU-h) are unrun (think-lqtu), and none of the eight 17 November decisions (think-b0w5, -fibh, -gmoj, -k2lh, -l7j0, -x30l, -0mup, -k8vt) touches n = 17. The hold is 35 days old; whether to keep it, lift it for T-153's ten trees, or lift it goes to the owner through the coordinator (think-uz0m's report). Nothing here runs until then. #413's seven dated status reports stay queued. The claim is claude-code@spud10.local's, an identity outside this project's pass sessions whose last note here is of 9 October; it is left in place, and whether passes may release such claims is put to the owner. Until then the sweep lists this bead two days after each update (claim lease).

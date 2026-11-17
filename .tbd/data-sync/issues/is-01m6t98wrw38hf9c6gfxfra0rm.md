@@ -5,7 +5,7 @@ title: "#921: owner to answer reuse terms for Kingbird/Couzo-derived witnesses (
 kind: task
 status: open
 priority: 2
-version: 5
+version: 6
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-07T05:56:30.108Z
-updated_at: 2026-11-07T07:28:28.234Z
+updated_at: 2026-11-17T21:49:41.281Z
 started_at: 2026-11-07T05:56:33.094Z
 ---
 jlevy/squares#921 (Nicolas Alonso, NOVA ERA, nicolasalonsof84-a11y, opened 2026-11-07) asks which reuse terms apply to numerical witnesses derived from the Kingbird catalogue and Francisco Couzo's n152 source, seeds n = 11, 17, 37, 39, 41, 50, 54, 55, 71, 107, 152, 171, 235, 291 (some extended by a band of unit squares), for research and a competition with credits retained, and what permissions or notices the project has collected. This is a licensing question only the owner can answer: the issue carries blocked:owner-decision and no reply is posted until the owner decides. The owner must answer; this bead owns that answer and the reply on #921. Intake lane L55 prepared a factual licence brief (no legal advice) for the owner.
@@ -27,3 +27,5 @@ jlevy/squares#921 (Nicolas Alonso, NOVA ERA, nicolasalonsof84-a11y, opened 2026-
 
 
 2026-11-07 bold-ritchie-l56: The stage 7 acknowledgement was posted on #921 at 07:24:06Z, after #922 merged (63d11d6c0) and its Certificate page deploy and verify-deployment passed (run 42350093160): https://github.com/jlevy/squares/issues/921#issuecomment-6703882607 . It says the question was received and the reuse-terms answer is the owner's, and states no terms. It is recorded on draft PR #923 (https://github.com/jlevy/squares/pull/923). This bead still awaits the owner's answer and stays open.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c) waits on the owner: #921's question on reuse terms for Kingbird- and Couzo-derived witnesses (blocked:owner-decision; the stage 7 acknowledgement of 7 November is the only comment, gh 21:40Z). L55's licence brief is in this bead's notes. Re-put to the owner through the coordinator. Held (hold blocked).
