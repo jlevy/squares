@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 25
+version: 26
 delegate: coord-intake-1117r
 labels: []
 dependencies: []
@@ -33,10 +33,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-17T21:28:20.976Z
+updated_at: 2026-11-17T21:31:57.197Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
 ## Notes
 
 2026-11-17T21:45Z coord-intake-1117r (session_01KJPQoFoTCWBNT6bCUm8RkX): reclaimed. coord-intake-1117's last bead update was 03:32Z and its lanes' last pushes 04:00-04:29Z (17 h silent); no other session on the account works this repository. Found on resume: #953/#908/#909/#1010/#1011 open, CI green, mergeable; #953 has senior review A (04:25Z) unaddressed; #908, #909, #1010, #1011 unreviewed; import-1009 (83232579c), review-1005 (82fb63e88) and review-1009 (6a4f56b3d) pushed with no PR. Untracked: none of the eight 17 November owner decisions was applied (think-0mup: PR #574 still open; think-b0w5: #939/#946 still blocked:owner-decision; think-x30l, think-l7j0, think-k2lh, think-gmoj, think-k8vt records unwritten). New since: #1012 (Kaggle pointer, 109 and 270). Sweep 21:35Z: 8 unowned, 84 stalled, 1 blocker resolved (think-4ul6), 6 not checked. Old bold-ritchie lN-review branches all landed (L58's under the renamed unnir-s12-lower-bound-2026-11-08 packet).
+
+2026-11-17T22:05Z coord-intake-1117r lanes: w1-holds-1117r (#953 -> #908 -> #909, think-vshs/4ul6/i85v/r333; /home/user/wt/w1); w2-credit-1117r (#1010 + #1008 reply, think-dp8t; /home/user/wt/w2); w3-pass-1117r (review-1005 PR, #1011 adopt+regularize, import-1009 PR, review-1009 PR, think-qag8/p3g8/i38n/evxy; /home/user/wt/w3*); w4-records-1117r (owner-decision records think-8gvd, #1012 think-wvr8, later the replies' records; branch claude/keen-galileo-9gbz1a in /home/user/squares); w5-audit-1117r (stalled beads, think-uz0m, beads only). Queued: think-8yyy (option D) after w4's first PR. Merge authority: github-merge autonomous + owner's in-conversation instruction to resume every intake PR end to end.
