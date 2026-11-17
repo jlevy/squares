@@ -1,0 +1,124 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "31ddae6fe2c7cf3d4dea3ace12cf46ed9e79beba",
+  "read_on": "2026-11-16",
+  "counts": [
+    {
+      "n": 127,
+      "start": [{"label":"record T-174","holders":"Ryan Xu, improved by Francisco Couzo, PingYou Ltd","side":"11.810878787590","exact":true}],
+      "steps": [
+        {"report":"#1001","kind":"issue","reported_at":"2026-11-16T05:33:07Z","side":"11.801753890487","exact":true,"verdict":"recorded","reason":"below","decided_against":["record T-174"],"difference":"below by 9.12e-03","first_committed":"2026-11-16T05:31:52Z","measured":"no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the identity of the box, moves 123 squares beyond 1e-3, 105 beyond 1e-2 and 70 beyond 0.1 (largest 0.954869) and turns squares by up to 34.87 degrees; 56 squares are tilted beyond a degree, 26.42 to 31.83 degrees, all turned the same way, against T-174's 48 (7.30 to 34.87); the house witness and its regularized view measure as T-174; a new arrangement relative to the record's packing","packing":{"kind":"new packing","continues":"Tomáš Kodaj's public Kaggle packing of 127 squares (his Kaggle notebook squares-in-squares-22-1636), 11.801765635430 as the issue quotes it, by JoeGun's fault-line DP"}}
+      ],
+      "best_now": [{"label":"#1001","holders":"JoeGun","side":"11.801753890487","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 204,
+      "start": [{"label":"record T-268","holders":"Evan Daniel","side":"14.804361383652","exact":true}],
+      "steps": [
+        {
+          "report": "#1001",
+          "kind": "issue",
+          "reported_at": "2026-11-16T05:33:07Z",
+          "side": "14.802646843107",
+          "exact": true,
+          "verdict": "recorded",
+          "reason": "below",
+          "decided_against": ["record T-268"],
+          "difference": "below by 1.71e-03",
+          "first_committed": "2026-11-16T05:31:52Z",
+          "measured": "no symmetry of the box pairs it one to one with T-268's packing by nearest centres; the optimal assignment (symmetry 5) moves 199 squares beyond 1e-3, 112 beyond 1e-2 and 73 beyond 0.1 (largest 1.09835) and turns squares by up to 28.87 degrees; 99 squares are tilted beyond a degree, 1.38 to 27.72 degrees, all turned the same way, against T-268's 63 (25.39 to 31.24) turned the other way; against T-264, the house before it, 44 beyond 0.1 under the identity; the house witness and its regularized view measure as T-268; a new arrangement relative to the record's packings",
+          "packing": {"kind":"new packing","continues":"Tomáš Kodaj's public Kaggle packing of 204 squares (his Kaggle notebook squares-in-squares-22-1636), 14.802646907234 as the issue quotes it, by JoeGun's fault-line DP"}
+        }
+      ],
+      "best_now": [{"label":"#1001","holders":"JoeGun","side":"14.802646843107","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 232,
+      "start": [{"label":"record T-275","holders":"Alex Chilton, improved by Francisco Couzo, Doğa Özden","side":"15.761409644882","exact":true}],
+      "steps": [
+        {
+          "report": "#1001",
+          "kind": "issue",
+          "reported_at": "2026-11-16T05:33:07Z",
+          "side": "15.759531627557",
+          "exact": true,
+          "verdict": "recorded",
+          "reason": "below",
+          "decided_against": ["record T-275"],
+          "difference": "below by 1.88e-03",
+          "first_committed": "2026-11-16T05:31:52Z",
+          "measured": "no symmetry of the box pairs it one to one with T-275's packing by nearest centres; the optimal assignment (symmetry 7) moves 221 squares beyond 1e-3, 98 beyond 1e-2 and 35 beyond 0.1 (largest 1.15939) and turns squares by up to 38.71 degrees, with 25 tilts beyond a degree reversed; 65 squares are tilted beyond a degree, 24.72 to 31.72 degrees, 40 one way and 25 the other, against T-275's 80 all one way (1.46 to 32.00); against T-256, the house before it, 39 beyond 0.1; the house witness and its regularized view measure as T-275; a new arrangement relative to the record's packings",
+          "packing": {"kind":"new packing","continues":"Tomáš Kodaj's public Kaggle packing of 232 squares (his Kaggle notebook squares-in-squares-22-1636), 15.759531732104 as the issue quotes it, by JoeGun's fault-line DP"}
+        }
+      ],
+      "best_now": [{"label":"#1001","holders":"JoeGun","side":"15.759531627557","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 264,
+      "start": [{"label":"record T-186","holders":"Daniil Ostashev, improved by PingYou Ltd, Mishapolk","side":"16.774735132388","exact":true}],
+      "steps": [
+        {
+          "report": "#1001",
+          "kind": "issue",
+          "reported_at": "2026-11-16T05:33:07Z",
+          "side": "16.773807598002",
+          "exact": true,
+          "verdict": "recorded",
+          "reason": "below",
+          "decided_against": ["record T-186"],
+          "difference": "below by 9.28e-04",
+          "first_committed": "2026-11-16T05:31:52Z",
+          "measured": "no symmetry of the box pairs it one to one with T-186's packing by nearest centres; the optimal assignment, under the identity of the box, moves 244 squares beyond 1e-3, 115 beyond 1e-2 and 44 beyond 0.1 (largest 0.774758) and turns squares by up to 35.77 degrees, with 26 tilts beyond a degree reversed; 71 squares are tilted beyond a degree, 5.82 to 29.30 degrees, 26 one way and 45 the other, against T-186's 78 all one way (3.55 to 31.62); the house witness and its regularized view measure as T-186; a new arrangement relative to the record's packing",
+          "packing": {"kind":"new packing","continues":"Tomáš Kodaj's public Kaggle packing of 264 squares (his Kaggle notebook squares-in-squares-22-1636), 16.773891500852 as the issue quotes it, by a quench with Evan Daniel's code"}
+        }
+      ],
+      "best_now": [{"label":"#1001","holders":"JoeGun","side":"16.773807598002","exact":true}],
+      "publication_dependent": []
+    },
+    {
+      "n": 305,
+      "start": [{"label":"record T-174","holders":"Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, PingYou Ltd","side":"17.950466482138","exact":true}],
+      "steps": [
+        {
+          "report": "#1001",
+          "kind": "issue",
+          "reported_at": "2026-11-16T05:33:07Z",
+          "side": "17.945762359659",
+          "exact": true,
+          "verdict": "recorded",
+          "reason": "below",
+          "decided_against": ["record T-174"],
+          "difference": "below by 4.70e-03",
+          "first_committed": "2026-11-16T05:31:52Z",
+          "measured": "no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the identity of the box, moves 289 squares beyond 1e-3, 179 beyond 1e-2 and 113 beyond 0.1 (largest 1.09202) and turns squares by up to 44.82 degrees, with 32 tilts beyond a degree reversed; 92 squares are tilted beyond a degree, 1.64 to 33.44 degrees, all turned the same way, against T-174's 89 (4.46 to 33.38), 48 one way and 41 the other; the house witness and its regularized view measure as T-174; a new arrangement relative to the record's packing",
+          "packing": {"kind":"new packing","continues":"Tomáš Kodaj's public Kaggle packing of 305 squares (his Kaggle notebook squares-in-squares-22-1636), 17.946298110350 as the issue quotes it, by quenches with Evan Daniel's code and JoeGun's fault-line DP"}
+        }
+      ],
+      "best_now": [{"label":"#1001","holders":"JoeGun","side":"17.945762359659","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":5,"claims":5,"recorded_new":5,"recorded_new_continuing":5,"recorded_refinement":0,"recorded_unclassified":0,"recorded_by_exception":0,"not_recorded":0,"undecided":0},
+  "cross_check": [],
+  "reports": [{"report":"#1001","url":"https://github.com/jlevy/squares/issues/1001","kind":"issue","holders":"JoeGun","reported_at":"2026-11-16T05:33:07Z","bead":"think-0y9m","counts":[127,204,232,264,305],"recorded":[127,204,232,264,305],"recorded_new":[127,204,232,264,305],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[]}],
+  "owner_decisions": {
+    "exact_ties": [],
+    "first_commit_before_report": [],
+    "undecided": [],
+    "publication_dependent": [],
+    "unknown_times": [],
+    "refinement_chains": [],
+    "key_reason_candidates": [],
+    "measured_identity": [
+      {"n":127,"report":"#1001","verdict":"recorded","source_says":"a new packing seeded from Tomáš Kodaj's public Kaggle packing of 127 squares (his Kaggle notebook squares-in-squares-22-1636), 11.801765635430 as the issue quotes it, by JoeGun's fault-line DP","against":"T-174","finding":"no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the identity of the box, moves 123 squares beyond 1e-3, 105 beyond 1e-2 and 70 beyond 0.1 (largest 0.954869) and turns squares by up to 34.87 degrees; 56 squares are tilted beyond a degree, 26.42 to 31.83 degrees, all turned the same way, against T-174's 48 (7.30 to 34.87); the house witness and its regularized view measure as T-174; a new arrangement relative to the record's packing","source":"packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n127.json"},
+      {"n":204,"report":"#1001","verdict":"recorded","source_says":"a new packing seeded from Tomáš Kodaj's public Kaggle packing of 204 squares (his Kaggle notebook squares-in-squares-22-1636), 14.802646907234 as the issue quotes it, by JoeGun's fault-line DP","against":"T-268","finding":"no symmetry of the box pairs it one to one with T-268's packing by nearest centres; the optimal assignment (symmetry 5) moves 199 squares beyond 1e-3, 112 beyond 1e-2 and 73 beyond 0.1 (largest 1.09835) and turns squares by up to 28.87 degrees; 99 squares are tilted beyond a degree, 1.38 to 27.72 degrees, all turned the same way, against T-268's 63 (25.39 to 31.24) turned the other way; against T-264, the house before it, 44 beyond 0.1 under the identity; the house witness and its regularized view measure as T-268; a new arrangement relative to the record's packings","source":"packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n204.json"},
+      {"n":232,"report":"#1001","verdict":"recorded","source_says":"a new packing seeded from Tomáš Kodaj's public Kaggle packing of 232 squares (his Kaggle notebook squares-in-squares-22-1636), 15.759531732104 as the issue quotes it, by JoeGun's fault-line DP","against":"T-275","finding":"no symmetry of the box pairs it one to one with T-275's packing by nearest centres; the optimal assignment (symmetry 7) moves 221 squares beyond 1e-3, 98 beyond 1e-2 and 35 beyond 0.1 (largest 1.15939) and turns squares by up to 38.71 degrees, with 25 tilts beyond a degree reversed; 65 squares are tilted beyond a degree, 24.72 to 31.72 degrees, 40 one way and 25 the other, against T-275's 80 all one way (1.46 to 32.00); against T-256, the house before it, 39 beyond 0.1; the house witness and its regularized view measure as T-275; a new arrangement relative to the record's packings","source":"packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n232.json"},
+      {"n":264,"report":"#1001","verdict":"recorded","source_says":"a new packing seeded from Tomáš Kodaj's public Kaggle packing of 264 squares (his Kaggle notebook squares-in-squares-22-1636), 16.773891500852 as the issue quotes it, by a quench with Evan Daniel's code","against":"T-186","finding":"no symmetry of the box pairs it one to one with T-186's packing by nearest centres; the optimal assignment, under the identity of the box, moves 244 squares beyond 1e-3, 115 beyond 1e-2 and 44 beyond 0.1 (largest 0.774758) and turns squares by up to 35.77 degrees, with 26 tilts beyond a degree reversed; 71 squares are tilted beyond a degree, 5.82 to 29.30 degrees, 26 one way and 45 the other, against T-186's 78 all one way (3.55 to 31.62); the house witness and its regularized view measure as T-186; a new arrangement relative to the record's packing","source":"packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n264.json"},
+      {"n":305,"report":"#1001","verdict":"recorded","source_says":"a new packing seeded from Tomáš Kodaj's public Kaggle packing of 305 squares (his Kaggle notebook squares-in-squares-22-1636), 17.946298110350 as the issue quotes it, by quenches with Evan Daniel's code and JoeGun's fault-line DP","against":"T-174","finding":"no symmetry of the box pairs it one to one with T-174's packing by nearest centres; the optimal assignment, under the identity of the box, moves 289 squares beyond 1e-3, 179 beyond 1e-2 and 113 beyond 0.1 (largest 1.09202) and turns squares by up to 44.82 degrees, with 32 tilts beyond a degree reversed; 92 squares are tilted beyond a degree, 1.64 to 33.44 degrees, all turned the same way, against T-174's 89 (4.46 to 33.38), 48 one way and 41 the other; the house witness and its regularized view measure as T-174; a new arrangement relative to the record's packing","source":"packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n305.json"}
+    ]
+  },
+  "other_items": [{"issue":"#1001","url":"https://github.com/jlevy/squares/issues/1001","holders":"Tomáš Kodaj","kind":"quoted side, not claimed","bead":"think-0y9m","disposition":"The issue quotes Kodaj's notebook holding n = 270 at 16.927469594094, below the record's 16.928148603343 (T-283), and says JoeGun did not improve it, so it is not claimed. No packing is in hand: the notebook was not reachable from this session, so nothing is walked or registered at 270."}]
+}

@@ -1,0 +1,35 @@
+{
+ "r": 1,
+ "theta_half_tangent": "1/12000",
+ "U_r": "681981001309/72000000125",
+ "searched_box": [
+  4.986,
+  9.471958335069518,
+  4.986,
+  9.471958335069518
+ ],
+ "status": "verified",
+ "stop": null,
+ "nodes": 103965,
+ "leaves": 51983,
+ "max_depth": 31,
+ "mean_boundary_rectangles": 80.25698071466358,
+ "threshold": 1.0,
+ "least_certified_bound": 1.000002101419184,
+ "least_bound_box": [
+  5.231325846449114,
+  5.266372395941845,
+  8.210282553331215,
+  8.245329102823945
+ ],
+ "lowest_centre_estimate": 1.004091427477553,
+ "lowest_centre_estimate_at": [
+  8.472070695001037,
+  6.492727827019504
+ ],
+ "largest_error_budget": 1.0911088252548043e-09,
+ "E_eta": 3.410747263880391e-10,
+ "cpu_seconds": 76.255770386,
+ "threshold_exact": "1",
+ "mass_factor": "1"
+}

@@ -1,0 +1,127 @@
+{
+ "issue": {
+  "number": 914,
+  "title": "175, 204, 260, 268, 293, 303, 304: registration request",
+  "user": "evand",
+  "created_at": "2026-11-05T19:07:50Z",
+  "updated_at": "2026-11-05T21:18:34Z",
+  "body_sha256": "d3d3b4982e58a62e760df17f5329037f6dc847618afaa47fd8c724a96f7d3031",
+  "digests_printed": 13
+ },
+ "issue_digests_vs_packet": [
+  {
+   "file": "s175_1105.cert",
+   "issue": "32749cb2cc072a1fa70231b68908c1a255092c032748ff5c33c1ccfe018ea916",
+   "packet": "32749cb2cc072a1fa70231b68908c1a255092c032748ff5c33c1ccfe018ea916",
+   "equal": true
+  },
+  {
+   "file": "s175_1105_regularized.cert",
+   "issue": "786519adb0c0f103b7130eae165b65feaa4e59d3b02591cdd67c37e2f615c1d4",
+   "packet": "786519adb0c0f103b7130eae165b65feaa4e59d3b02591cdd67c37e2f615c1d4",
+   "equal": true
+  },
+  {
+   "file": "s204_trig1.cert",
+   "issue": "17ed0e5b7c4e69ca8558195886be7d7a149e9c09a8f60caf57bef160f75cf687",
+   "packet": "17ed0e5b7c4e69ca8558195886be7d7a149e9c09a8f60caf57bef160f75cf687",
+   "equal": true
+  },
+  {
+   "file": "s204_trig1_regularized.cert",
+   "issue": "55007aca9181eeb8ac53b9e48705c716974ede0bb0feee183ac6b8c493d9d107",
+   "packet": "55007aca9181eeb8ac53b9e48705c716974ede0bb0feee183ac6b8c493d9d107",
+   "equal": true
+  },
+  {
+   "file": "s260_ks_1105.cert",
+   "issue": "24edcc0b45e4b3b57b6632bbe0430d2574425205c0b127e8f96f16fc3e38b663",
+   "packet": "24edcc0b45e4b3b57b6632bbe0430d2574425205c0b127e8f96f16fc3e38b663",
+   "equal": true
+  },
+  {
+   "file": "s268_1105.cert",
+   "issue": "50f9704860c186e47e30244226b983cccd36b3ff27ba3fd23bad31ce146a1844",
+   "packet": "50f9704860c186e47e30244226b983cccd36b3ff27ba3fd23bad31ce146a1844",
+   "equal": true
+  },
+  {
+   "file": "s268_1105_regularized.cert",
+   "issue": "cfb1f7a793884bb938f29f10aa7dcd93b0c078700141af98a3bceb70ec69c0b2",
+   "packet": "cfb1f7a793884bb938f29f10aa7dcd93b0c078700141af98a3bceb70ec69c0b2",
+   "equal": true
+  },
+  {
+   "file": "s293_1105.cert",
+   "issue": "0fc702287dc5a79360da89379822b42ef12de0d54f0d9b7b13f2f765ba659f28",
+   "packet": "0fc702287dc5a79360da89379822b42ef12de0d54f0d9b7b13f2f765ba659f28",
+   "equal": true
+  },
+  {
+   "file": "s293_1105_regularized.cert",
+   "issue": "76d57b853e3e332b2e65084f07af863135dc74a1b0b179ba4a4e4d310cae9ab1",
+   "packet": "76d57b853e3e332b2e65084f07af863135dc74a1b0b179ba4a4e4d310cae9ab1",
+   "equal": true
+  },
+  {
+   "file": "s303_1105.cert",
+   "issue": "2f53c049a5f7feb793181e99282d0b36922b7c6f7fe9eece008f888c06a5c9a3",
+   "packet": "2f53c049a5f7feb793181e99282d0b36922b7c6f7fe9eece008f888c06a5c9a3",
+   "equal": true
+  },
+  {
+   "file": "s303_1105_regularized.cert",
+   "issue": "42a8ecd958c7f381a5ca82131b3df1f8fe237605bb44d4cb2facca07443f1940",
+   "packet": "42a8ecd958c7f381a5ca82131b3df1f8fe237605bb44d4cb2facca07443f1940",
+   "equal": true
+  },
+  {
+   "file": "s304_1105.cert",
+   "issue": "440402323670057e763ab6edac7cb4ba971222929d235a587b130f96d6d595cf",
+   "packet": "440402323670057e763ab6edac7cb4ba971222929d235a587b130f96d6d595cf",
+   "equal": true
+  },
+  {
+   "file": "s304_1105_regularized.cert",
+   "issue": "ee95b657f24d0f93b2b02c073922147b36faed4996fcdd6df587f713fccad065",
+   "packet": "ee95b657f24d0f93b2b02c073922147b36faed4996fcdd6df587f713fccad065",
+   "equal": true
+  }
+ ],
+ "issue_digests_all_equal": true,
+ "commit_adds": {
+  "files": 56,
+  "all_added": true,
+  "all_under_candidates": true
+ },
+ "packet_vs_upstream_bb4cc78": {
+  "equal": 55,
+  "equal_after_gunzip": 3,
+  "differ": [],
+  "not_in_packet": [
+   "search/exact/verify_cert.py",
+   "search/exact/verify_cert2.py"
+  ]
+ },
+ "issue_digests_vs_upstream_all_equal": true,
+ "licence": {
+  "mit_header": true,
+  "copyright_line": "Copyright (c) 2026 Evan Daniel",
+  "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+  "equal_upstream": true
+ },
+ "credits_md": {
+  "mentions_Deotte": false,
+  "mentions_composer": false,
+  "provenance_sentence": "Produced by Claude (Anthropic) in a single session under human direction, in the same spirit of",
+  "equal_upstream": true
+ },
+ "commit_log_head": [
+  "commit bb4cc78e5b35103c1f177db55e9cf08974e66563",
+  "parents 39fb4f027bf00405a8f13edb53bd111a805155b2",
+  "author Evan Daniel <evanbd@gmail.com> 2026-11-05T11:29:13-07:00",
+  "committer Evan Daniel <evanbd@gmail.com> 2026-11-05T11:29:13-07:00",
+  "tree 341f5ffb171dfae6476b22639fc0d6e932233367",
+  ""
+ ]
+}

@@ -25,7 +25,9 @@ measures any two packings of a count for credit and lineage.
   ``x y degrees``, as Evan Daniel's ``.input.txt`` and ``.predescent.txt`` files state
   them; blank lines and lines starting ``#`` are comments. Each number is read as the
   binary64 value its decimal names, and each angle, reduced modulo a quarter turn, as the
-  exact rotation whose half-angle tangent is the binary64 tangent of half of it.
+  exact rotation whose half-angle tangent is the binary64 tangent of half of it;
+- ``l-base:packet:NAME``, the ``n``-square packing that an import packet's certificate was
+  built on by one L step (`read_l_base`): its first ``n`` squares at its side less one.
 
 The receipt names each file by its repository-relative path, or by its name alone where
 it lies outside the repository, with the SHA-256 of the bytes read after any
@@ -105,6 +107,7 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import maximum_bipartite_matching
 
 from devtools import check_half_angle_area as area
+from devtools import construction_checker as construction
 from devtools import evand_exact_certificates as legacy
 from devtools import retained_data
 from devtools import upper_bound_reports as reports
@@ -114,6 +117,7 @@ FORMAT = "measure-identity-v1"
 BOUNDS = ("1e-9", "1e-6", "1e-3", "1e-2", "1e-1")
 PACKET = "packet"
 BINARY64 = "binary64-xyd"
+L_BASE = "l-base"
 MAX_INPUT_BYTES = reports.MAX_SOURCE_BYTES
 SYMMETRIES = 8
 _DECIMAL = re.compile(r"[-+]?(?:[0-9]+\.?[0-9]*|\.[0-9]+)(?:[eE][-+]?[0-9]+)?")
@@ -240,6 +244,58 @@ def split_spec(spec: str) -> tuple[str | None, str, str]:
     return label, kind, target
 
 
+def read_l_base(target: str, n: int) -> tuple[legacy.Certificate, dict[str, Any]]:
+    """The ``n``-square base of a packet's certificate built by one L step, exactly.
+
+    The L step (DS7, section 2; the lemma of `devtools.construction_checker`) writes
+    ``floor(W + 1)`` axis-aligned unit squares along the top and ``floor(W)`` up the right
+    of a packing of side ``W``, giving ``n + 2 floor(W) + 1`` squares at side ``W + 1``.
+    A certificate built so (#938's and #939's at 199) carries its base's padding, but its
+    own uniform-contraction margin is 0, since the grid squares touch. ``target`` is
+    ``packet:NAME``. The packet must declare exactly one count ``m = n + 2 floor(S - 1) +
+    1``, where ``S`` is that certificate's side. Its first ``n`` poses at side ``S - 1``
+    are the base. The base is refused unless each of its squares lies in
+    ``[0, S - 1]^2``, and unless `construction.write_out` of one layer on it gives the
+    certificate pose for pose.
+    """
+    kind, colon, name = target.partition(":")
+    if kind != PACKET or not colon or not name:
+        raise MeasureError(f"{L_BASE}:{target}: an L base is read from packet:NAME")
+    try:
+        packet = reports.packet_path(name)
+        counts = [row["n"] for row in reports.load_declaration(packet)["certificates"]]
+        built = []
+        for m in (m for m in counts if m > n and (m - n) % 2 == 1):
+            certificate = reports.read_facts(packet, {m})[m]
+            if certificate.side > 1 and m == n + 2 * math.floor(certificate.side - 1) + 1:
+                built.append((m, certificate))
+    except (reports.ReportError, OSError, ValueError, KeyError) as error:
+        raise MeasureError(f"{L_BASE}:{target}: {error}") from error
+    if len(built) != 1:
+        raise MeasureError(
+            f"{L_BASE}:{target}: {len(built)} certificates are one L step above {n}, not one"
+        )
+    ((m, extended),) = built
+    base = legacy.Certificate(n, extended.side - 1, extended.poses[:n])
+    for index, pose in enumerate(base.poses, start=1):
+        c, s = pose.basis
+        half = (abs(c) + abs(s)) / 2
+        if min(pose.x, pose.y) - half < 0 or max(pose.x, pose.y) + half > base.side:
+            raise MeasureError(f"{L_BASE}:{target}: square {index} lies outside the base's box")
+    recipe = construction.Recipe(
+        n=m,
+        kind=construction.TILING,
+        source_n=n,
+        parent=target,
+        parent_sha256="",
+        bound=extended.side,
+        layers=1,
+    )
+    if construction.write_out(recipe, base) != extended:
+        raise MeasureError(f"{L_BASE}:{target}: the certificate at {m} is not one L step on it")
+    return base, {"input": L_BASE, "packet": name, "extended_n": m}
+
+
 def read_packing(spec: str, n: int) -> Packing:
     """One packing of ``n`` squares, from its spec (see the module docstring)."""
     if type(n) is not int or n < 1:
@@ -257,6 +313,9 @@ def read_packing(spec: str, n: int) -> Packing:
             raise MeasureError(f"{plain}: the packet declares no certificate at {n}")
         side, squares = _from_certificate(facts[n])
         source: dict[str, Any] = {"input": PACKET, "packet": target}
+    elif kind == L_BASE:
+        base, source = read_l_base(target, n)
+        side, squares = _from_certificate(base)
     elif kind == BINARY64 or kind in reports.ADAPTERS:
         path = Path(target)
         raw = _file_bytes(path)

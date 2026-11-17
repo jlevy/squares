@@ -1,0 +1,48 @@
+{
+ "program": "l159_pose.py",
+ "pose_id": "W-colband-near1-n228",
+ "pose_n": 228,
+ "pose_side": "15.600801734811958",
+ "translation_x": {
+  "min": "-1.02948e-13",
+  "max": "-1.02948e-13",
+  "spread": "2.48921e-60"
+ },
+ "translation_y": {
+  "min": "-1.02974e-13",
+  "max": "-1.02974e-13",
+  "spread": "2.48921e-60"
+ },
+ "largest_turn_degrees": "4.72612e-35",
+ "pose_least_corner": [
+  "1.02948e-13",
+  "1.02974e-13"
+ ],
+ "pose_extent_x": "1.56008e+1",
+ "pose_side_less_extent_x": "2.0425e-13",
+ "pose_side_less_extent_y": "2.04197e-13",
+ "certificate_side_less_pose_extent_x": "5.23599e-17",
+ "certificate_side_less_pose_extent_y": "-4.50673e-53",
+ "pose_side_less_certificate_side": "2.04197e-13",
+ "pose_least_wall_margin": [
+  "1.01223e-13",
+  213,
+  "top"
+ ],
+ "pose_least_pair_margin_over_near_pairs": [
+  "2.02e-13",
+  118,
+  119
+ ],
+ "relative_gap_near_pairs": {
+  "count": 434,
+  "min": "2.01999e-13",
+  "max": "2.10139e-13",
+  "median": "2.05999e-13",
+  "within_5_percent_of_median": 434
+ },
+ "hit_header": "228 15.60080173481195764",
+ "hit_rows": 228,
+ "hit_rows_equal_pose_in_binary64": 228,
+ "hit_side_binary64_equals_pose_side": true
+}

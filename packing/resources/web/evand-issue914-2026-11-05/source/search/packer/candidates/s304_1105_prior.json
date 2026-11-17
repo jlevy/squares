@@ -1,0 +1,69 @@
+{
+ "store_id": 3130695,
+ "s": 17.92689890035674,
+ "sources": [
+  "pending:#806 (Evan Daniel (evand))",
+  "pending:#824 (Evan Daniel (evand))",
+  "pending:#824 (Evan Daniel (evand))",
+  "pending:#845 (Evan Daniel (evand))",
+  "register (Kirill Tymchishin)",
+  "register (Kirill Tymchishin)",
+  "register (Kirill Tymchishin)",
+  "register (Kirill Tymchishin)",
+  "register (Kirill Tymchishin)",
+  "register (Kirill Tymchishin)",
+  "register (Kirill Tymchishin)",
+  "register (Kirill Tymchishin)",
+  "run:runs/fault/b_ref1026 (None)",
+  "watch:franciscouzo/square-packing@dd24d4e (lollipoll)",
+  "later copies of the same minimum: store ids [3225658]"
+ ],
+ "ok": true,
+ "S_exact": "17.926898900356741589544339439965823160112692624367928256553057171",
+ "S_cert": "17.92689890035674158972360842897",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 304 closed unit squares pairwise disjoint inside the open box of side 17.92689890035673983 (688 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 1.8932578673034975e-06,
+  "status": "local minimum of S, strict modulo 154 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 154,
+  "flat_realised": 154.0,
+  "flat_residual": 4.321247576491395e-61,
+  "negative_eigs": 0,
+  "corner_corner": 251,
+  "vv_milp_dS": 0.0,
+  "rattlers": 76,
+  "min_pair": 9.999999999999993e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": false,
+  "S_exact": "17.9268989003567415895443394399658231601126926243679282565531",
+  "S_cert": "1792689890035674158972360842897/100000000000000000000000000000",
+  "groups": [
+   78,
+   16
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": false,
+    "line": "INVALID"
+   },
+   "verify_cert2": {
+    "ok": false,
+    "line": "INVALID: corner outside the open box"
+   }
+  }
+ }
+}

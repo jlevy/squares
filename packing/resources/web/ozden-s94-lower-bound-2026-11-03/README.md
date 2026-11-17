@@ -144,7 +144,7 @@ it is not a second implementation. On a declared net the census route stands as
 evidence only beside a passing control receipt (the 6 October declared-net soundness
 review, item 6) and once a review has read the certificate’s mathematics (item 7).
 With both, the row is `E-ozden-890-n94-9965-sqverify-fast-replay`, T-262 is V3/C3, and
-n-094’s verified lower bound is $1993/200$.
+n-094’s verified lower bound was $1993/200$ until T-266 (5 November 2026).
 
 ## The Stage 4 Review
 

@@ -63,7 +63,8 @@ PRINTED_DIGESTS = {
 #: The 12-place prints the issues give, each called the side rounded up; #893's is the
 #: author's truncation, which bounds nothing, and the record states its exact side.
 PRINTS = {299: "17.801238533979", 204: "14.807620995586"}
-#: Kaelan Yim's #895 states this side; no certificate is retained (think-qclj).
+#: Kaelan Yim's #895 states this side; lane L48 retained its certificate on 5 November
+#: (think-qclj, `test_upper_bound_reports_l48_1105`).
 YIM_260 = Fraction(
     1045817814143413714427921537528704162855767253933,
     62872364692131569638734867237718772414897487626,
@@ -133,8 +134,7 @@ def test_each_certificate_is_below_the_house_it_is_compared_with(name: str) -> N
 
 def test_the_ledger_records_each_claim_and_895_by_its_stated_side() -> None:
     """At 204 and 299 the issue is the one report; at 260 #895 is walked by the side it
-    states, below T-257, and stage 3 registers nothing for it until a certificate is
-    retained."""
+    states, below T-257, which the certificate lane L48 retained on 5 November has."""
     ledger = _json(LEDGER / "ledger.json")
     recorded: dict[int, list[str]] = {}
     for count in ledger["counts"]:

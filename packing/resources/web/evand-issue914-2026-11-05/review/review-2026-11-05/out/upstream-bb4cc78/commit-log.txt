@@ -1,0 +1,35 @@
+commit bb4cc78e5b35103c1f177db55e9cf08974e66563
+parents 39fb4f027bf00405a8f13edb53bd111a805155b2
+author Evan Daniel <evanbd@gmail.com> 2026-11-05T11:29:13-07:00
+committer Evan Daniel <evanbd@gmail.com> 2026-11-05T11:29:13-07:00
+tree 341f5ffb171dfae6476b22639fc0d6e932233367
+
+candidates: s(175), s(204), s(260), s(268), s(293), s(303), s(304) certificates for jlevy registration (11-05)
+
+candidate.py work dirs staged: exact / dilation certificates (both checkers VALID),
+inputs, pre-descent inputs, prior-record facts, regularized views (303's rerun with
+regularize 39fb4f02; 260 has a dilation certificate only, exactsolve did not converge).
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Fw8sAtwLBFgAfDPCdVs5xY
+
+commit 39fb4f027bf00405a8f13edb53bd111a805155b2
+parents 
+author Evan Daniel <evanbd@gmail.com> 2026-11-05T11:27:31-07:00
+committer Evan Daniel <evanbd@gmail.com> 2026-11-05T11:27:31-07:00
+tree 8a88eaba363d5c9aa80b55f8cfbcf8462632ddde
+
+regularize: keep violated rows in refine; inequality feasibility phase (n = 303 view)
+
+refine.keep() dropped rows among unmoved squares unless abs(g) < 1e-14, so a square the
+angle step had left 5e-13 into a wall lost its wall row.  The tight set can also be
+overdetermined and inconsistent at ~1e-17 (303: 872 rows, rank 595), and least squares
+left 1e-17 overlaps.  feasibility_phase treats every collected row as gap >= 0 (LP steps
+in units of the worst violation, to 1e-60), growing the side by the LP minimum only where
+no step exists at S* (303: 1.9e-32, reported as S_grow; S_exact stays S*).  Regression:
+5 candidates + 20 register n, all pass, worst gap -1.3e-64, S_grow only at 303.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Fw8sAtwLBFgAfDPCdVs5xY
+
+author UTC 2026-11-05T18:29:13+00:00

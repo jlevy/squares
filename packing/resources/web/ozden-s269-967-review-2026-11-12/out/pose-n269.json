@@ -1,0 +1,103 @@
+{
+ "program": "l127_pose.py",
+ "translation_x": {
+  "mean": "-1.04015e-13",
+  "spread": "3.73e-60"
+ },
+ "translation_y": {
+  "mean": "-1.0376e-13",
+  "spread": "2.49e-60"
+ },
+ "largest_turn_degrees": "4.78e-35",
+ "pose_least_corner": [
+  "1.04015e-13",
+  "1.0376e-13"
+ ],
+ "pose_side": "16.889730073595842",
+ "pose_side_minus_certificate_side": "2.0531e-13",
+ "certificate_side_minus_pose_extent_y": "-1.9e-37",
+ "certificate_side_minus_pose_extent_x": "2.0e-15",
+ "pose_extent_y_minus_pose_side": "-2.05e-13",
+ "near_pair_relative_gaps": {
+  "count": 620,
+  "least": "2.0365e-13",
+  "greatest": "2.7917e-13",
+  "median": "2.1265e-13",
+  "within_5pc_of_median": 483
+ },
+ "tilts": {
+  "beyond_0.5": 45,
+  "positive": 41,
+  "negative": 4,
+  "negative_squares": [
+   {
+    "square": 42,
+    "tilt": -44.325,
+    "centre": [
+     15.415,
+     14.238
+    ]
+   },
+   {
+    "square": 43,
+    "tilt": -44.328,
+    "centre": [
+     14.708,
+     14.946
+    ]
+   },
+   {
+    "square": 44,
+    "tilt": -44.378,
+    "centre": [
+     16.182,
+     14.894
+    ]
+   },
+   {
+    "square": 45,
+    "tilt": -44.331,
+    "centre": [
+     15.469,
+     15.602
+    ]
+   }
+  ],
+  "positive_range": [
+   41.605,
+   42.057
+  ],
+  "clusters_0.01": [
+   {
+    "tilt": 41.97,
+    "count": 34
+   },
+   {
+    "tilt": -44.33,
+    "count": 3
+   },
+   {
+    "tilt": 42.06,
+    "count": 2
+   },
+   {
+    "tilt": 41.68,
+    "count": 1
+   },
+   {
+    "tilt": 41.6,
+    "count": 1
+   }
+  ],
+  "positive_mean": 41.959,
+  "exactly_upright_squares": [
+   157,
+   214,
+   217
+  ],
+  "near_upright": 224,
+  "near_upright_beyond_1e-3": 7,
+  "near_upright_beyond_1e-6": 11,
+  "near_upright_largest": 0.2656
+ }
+}

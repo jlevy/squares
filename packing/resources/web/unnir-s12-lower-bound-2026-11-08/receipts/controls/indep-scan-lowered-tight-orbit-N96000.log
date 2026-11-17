@@ -1,0 +1,11 @@
+# command: nice -n 19 /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/indep_scan lowered-tight-orbit.txt 96000 1000000000000000 12
+# cwd: lowered-tight-orbit control (95ff8408), written by devtools.audit_s12_unnir_certificate --write-controls; indep_scan.cpp of unnir/s12-lower-bound-3.9716 064c2955 (sha256 74146d48) built by g++ 13.3.0 -O2, binary sha256 fb0d4e2d4c79e713ef0c68fcf5573e8481d89111158a71d648627bca83c127ba; no range arguments, so every bin k = 0..95999
+# python3: not used by this command
+# host: 4 cores; load 2.89 3.76 3.96; started 2026-11-08T19:06:21Z
+certificate: s = 15886400/4000000 = 3.971600000, D = 4000000, W = 9985226, m = 4996
+total weight = 119787752/9985226 = 11.996498827   (n = 12: total < n)
+angle net N = 96000, bins k = 0..95999 covering [0,90] deg (no symmetry assumed), grid Q = 1000000000000000
+min captured weight over all bins = 9985224/9985226 = 0.999999800   (bin k=39531, 44.7619 deg)
+  near centre (1.486822, 1.219308) at angle 44.761891 deg (diagnostic, floating point)
+NOT VERIFIED
+# finished 2026-11-08T19:20:21Z; exit 1; wall 839.992 s; CPU 832.3 s (user 804.256 + sys 28.020); load 4.00 4.00 4.00

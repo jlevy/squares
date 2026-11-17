@@ -1,0 +1,23 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane L157 of 14 November: the final replies on #977 (15:18:18Z) and #979
+  (15:18:20Z), both by jlevy after #980 merged as 3605269b8, are recorded, with each issue
+  closed on 14 November and read through its reply. #977's reply states T-299 at V3/C3,
+  confirmed and current, and names its three evidence ids, recorded under reported with
+  their statuses (#900); #979's reply speaks of its rows beyond the horizon, recorded with
+  no id as #942's are. Joost de Winter's answers to the 11 November review's six questions,
+  on #946 (11:02:01Z) and #939 (11:04:59Z), are read into both entries, read_through moving
+  to each, and his commit 6760360 is read in campaign/intake-watch.yaml and not retained.
+  No result, rung, side, bound, mark, score, credit holder, pin or block changes; #939 and
+  #946 stay open and blocked for the owner's RV-3. Against origin/main 3605269b8 (#980):
+  devtools.compare_paper_renders rendered the methods survey into empty site directories,
+  the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and
+  once with that main's result-requests.yaml swapped in: its 43 files were byte-identical
+  across the three. No PDF was printed; it prints from that HTML. The survey keeps its
+  version, v0.2.7.

@@ -1,0 +1,11 @@
+# command: nice -n 19 /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/indep_scan regrid-3999600.txt 96000 1000000000000000 12
+# cwd: regrid-3999600 control (4857a83c), written by devtools.audit_s12_unnir_certificate --write-controls; indep_scan.cpp of unnir/s12-lower-bound-3.9716 064c2955 (sha256 74146d48) built by g++ 13.3.0 -O2, binary sha256 fb0d4e2d4c79e713ef0c68fcf5573e8481d89111158a71d648627bca83c127ba; no range arguments, so every bin k = 0..95999
+# python3: not used by this command
+# host: 4 cores; load 4.00 4.00 4.00; started 2026-11-08T19:20:21Z
+certificate: s = 15886400/3999600 = 3.971997200, D = 3999600, W = 9985226, m = 4996
+total weight = 119787760/9985226 = 11.996499629   (n = 12: total < n)
+angle net N = 96000, bins k = 0..95999 covering [0,90] deg (no symmetry assumed), grid Q = 1000000000000000
+min captured weight over all bins = 9453881/9985226 = 0.946786883   (bin k=0, 0.0000 deg)
+  near centre (0.500005, 0.500005) at angle 0.000000 deg (diagnostic, floating point)
+NOT VERIFIED
+# finished 2026-11-08T19:34:03Z; exit 1; wall 822.333 s; CPU 817.5 s (user 790.316 + sys 27.189); load 3.14 3.21 3.51

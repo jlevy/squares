@@ -243,15 +243,16 @@ def test_a_superseded_report_is_held_to_the_reported_lane_alone(records: view.Re
     (T-045, T-070) held verified bounds equal to some of its values, the last at n = 52
     until T-082's certificate was decided there on 6 October, and every one is beaten in
     the reported lane, so it is superseded without a problem. The rule is held on the same
-    entry stating n = 12's verified 7943/2000, below the reported 4 there: superseded as a
-    report, and refused at a replayed rung. (Until 2 November 2026 it was held at n = 96's
-    997/100, below the reported 10, until T-191's cover proved s(96) = 10.)"""
+    entry stating n = 12's verified 9929/2500 (T-274), below the reported 4 there: superseded
+    as a report, and refused at a replayed rung. (Until 2 November 2026 it was held at
+    n = 96's 997/100, below the reported 10, until T-191's cover proved s(96) = 10, and
+    until 8 November at n = 12's 7943/2000, T-095's.)"""
     record = {**records.results["T-046"], "verification": "V0", "confirmation": "C0"}
     assert record["confirmation"] in check_standing.UNREPLAYED
     assert view.standing(record, records) == view.SUPERSEDED
     assert check_standing.problems(record, view.SUPERSEDED, records) == []
     assert "beaten at n = 18" in check_standing.summary(record, view.SUPERSEDED, records)
-    tied = {**record, "headline": "`s(12) ≥ 7943/2000`", "scope": {"n_values": [12]}}
+    tied = {**record, "headline": "`s(12) ≥ 9929/2500`", "scope": {"n_values": [12]}}
     assert check_standing.problems(tied, view.SUPERSEDED, records) == []
     assert "equals the verified bound at n = 12" in check_standing.summary(
         tied, view.SUPERSEDED, records
@@ -459,21 +460,22 @@ def test_an_entry_that_holds_some_counts_may_be_staged_at_others(
     records: view.Records, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """Since the adoption of 23 October 2026 (think-ot5c), T-193 holds six counts, and its
-    claim states exact sides below their case records at seven more, whose adoption is
+    claim states exact sides below their case records at six more, whose adoption is
     staged (`select_houses.PENDING_ADOPTION`): 267's form waits for its price, and the
-    others for think-8ido. T-174 was the example until the same adoption took its last
-    three staged counts, 70, 153 and 207. A staged count is pending adoption and no
-    excess; unstaged, the same statement is refused."""
+    others for think-8ido. The last pass of 9 November 2026 took a seventh, 199, to a
+    smaller house (T-284), where T-193's side is now above the case record. T-174 was the
+    example until the same adoption took its last three staged counts, 70, 153 and 207. A
+    staged count is pending adoption and no excess; unstaged, the same statement is
+    refused."""
     from devtools import select_houses  # noqa: PLC0415
 
     record = records.results["T-193"]
     assert view.standing(record, records) == view.HOLDS
-    assert {88, 126, 199, 266, 267, 292, 301} <= check_standing.staged("T-193")
+    assert {88, 126, 266, 267, 292, 301} <= check_standing.staged("T-193")
     assert check_standing.problems(record, view.HOLDS, records) == []
     line = check_standing.summary(record, view.HOLDS, records)
     assert (
-        "better than the case record at n = 88, 126, 199, 266, 267, 292, 301 "
-        "(staged for adoption)"
+        "better than the case record at n = 88, 126, 266, 267, 292, 301 (staged for adoption)"
     ) in line
     monkeypatch.setattr(
         select_houses,

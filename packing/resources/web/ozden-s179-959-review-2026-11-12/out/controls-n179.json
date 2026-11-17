@@ -1,0 +1,380 @@
+{
+ "program": "l108_controls.py",
+ "lane": "L108",
+ "python": "3.14.7",
+ "programs_sha256": {
+  "l108_reader.py": "b56db242a2580265607154243467ff8e0509e5b6b6e9fd9b7097b0bdb0f94184",
+  "l108_sat.py": "31d5846efe2390bc061ac7ba18c7360ce9248ae9403f04d0a8771665955ceabd",
+  "l108_clip.py": "7fec77bc02a66134cb01d543251eaad9b36141cc68069910dfb0f96291f268d6",
+  "l108_check.py": "6c6dbaff0369784888e087c7fb5bd6a9f05a0e5e095e60caf7e946a66616e6ef",
+  "l108_geom.py": "61633078d00e939597372c9c1c032fc794f99b41217f503f72edebfbbcbec387",
+  "l108_controls.py": "51ff1b944199c0e533545f7159ddc332ec1eb91da4c61381754ad840b76fffba"
+ },
+ "plan_sha256": "febe78fe9425f2192b2a349cf92fa2e4f882fcdc5e92590aa59e694dcfaa53e5",
+ "controls": [
+  {
+   "id": "G1",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlapping_pair_count": 1,
+    "overlapping_pairs_first": [
+     [
+      1,
+      179
+     ]
+    ],
+    "touching_pairs": [],
+    "walls_outside": [],
+    "wall_contacts": [
+     "67 bottom",
+     "123 left",
+     "162 top"
+    ],
+    "margin 1 179": "-1",
+    "area 1 179": "1"
+   }
+  },
+  {
+   "id": "G2",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlapping_pair_count": 0,
+    "overlapping_pairs_first": [],
+    "touching_pairs": [],
+    "walls_outside": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "wall_contacts": [
+     "67 bottom",
+     "123 left",
+     "162 top"
+    ]
+   }
+  },
+  {
+   "id": "G3",
+   "as_stated": true,
+   "came_out": {
+    "refused": "178 squares listed for n = 179"
+   }
+  },
+  {
+   "id": "G4",
+   "as_stated": true,
+   "came_out": {
+    "refused": "square 179: id 1"
+   }
+  },
+  {
+   "id": "G5",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "not_unit_a": [
+     1
+    ],
+    "not_unit_b": [
+     1
+    ]
+   }
+  },
+  {
+   "id": "G6",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "not_unit_a": [],
+    "not_unit_b": [],
+    "overlapping_pair_count": 44,
+    "overlapping_pairs_first": [
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      37
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      9
+     ]
+    ],
+    "walls_outside": [],
+    "wall_contacts": [
+     "67 bottom",
+     "123 left",
+     "162 top"
+    ],
+    "counterclockwise": 0,
+    "clockwise": 179
+   }
+  },
+  {
+   "id": "G7",
+   "as_stated": true,
+   "came_out": {
+    "refused": "the JSON twin differs from the YAML"
+   }
+  },
+  {
+   "id": "G8",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "wall_contacts": [
+     "67 left",
+     "123 bottom",
+     "162 right"
+    ],
+    "margin_list_sha256": "9275bf2768e525297073560d9c10b5a3497d7a932f2013320047d0eed9bc4137",
+    "counterclockwise": 0,
+    "clockwise": 179
+   }
+  },
+  {
+   "id": "G9",
+   "as_stated": true,
+   "came_out": {
+    "refused": "side: not in lowest terms"
+   }
+  },
+  {
+   "id": "G10",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "wall_contacts": [
+     "67 bottom",
+     "123 left",
+     "162 top"
+    ],
+    "margin_list_sha256": "9275bf2768e525297073560d9c10b5a3497d7a932f2013320047d0eed9bc4137",
+    "counterclockwise": 179,
+    "clockwise": 0
+   }
+  },
+  {
+   "id": "G11",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "wall_contacts": [
+     "67 bottom",
+     "123 left",
+     "162 top"
+    ],
+    "margin_list_sha256": "9275bf2768e525297073560d9c10b5a3497d7a932f2013320047d0eed9bc4137",
+    "counterclockwise": 0,
+    "clockwise": 179
+   }
+  },
+  {
+   "id": "S1a",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "walls_outside": [
+     [
+      162,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1b",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "walls_outside": [
+     [
+      162,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1c",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "walls_outside": [
+     [
+      33,
+      "top"
+     ],
+     [
+      107,
+      "right"
+     ],
+     [
+      108,
+      "right"
+     ],
+     [
+      109,
+      "right"
+     ],
+     [
+      110,
+      "right"
+     ],
+     [
+      111,
+      "right"
+     ],
+     [
+      112,
+      "right"
+     ],
+     [
+      113,
+      "right"
+     ],
+     [
+      114,
+      "right"
+     ],
+     [
+      115,
+      "right"
+     ],
+     [
+      116,
+      "right"
+     ],
+     [
+      117,
+      "right"
+     ],
+     [
+      118,
+      "right"
+     ],
+     [
+      140,
+      "top"
+     ],
+     [
+      149,
+      "top"
+     ],
+     [
+      156,
+      "top"
+     ],
+     [
+      162,
+      "top"
+     ],
+     [
+      167,
+      "top"
+     ],
+     [
+      172,
+      "top"
+     ],
+     [
+      176,
+      "top"
+     ],
+     [
+      178,
+      "top"
+     ],
+     [
+      179,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1d",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "walls_outside": [],
+    "wall_contacts": [
+     "67 bottom",
+     "123 left"
+    ]
+   }
+  },
+  {
+   "id": "S4c",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "ACCEPT",
+    "overlapping_pair_count": 0,
+    "overlapping_pairs_first": [],
+    "touching_pairs": [
+     [
+      104,
+      105
+     ]
+    ],
+    "walls_outside": [],
+    "wall_contacts": [
+     "67 bottom",
+     "123 left",
+     "162 top"
+    ],
+    "margin 104 105": "0"
+   }
+  },
+  {
+   "id": "S4p",
+   "as_stated": true,
+   "came_out": {
+    "verdict": "REFUSE",
+    "overlapping_pair_count": 1,
+    "overlapping_pairs_first": [
+     [
+      104,
+      105
+     ]
+    ],
+    "touching_pairs": [],
+    "walls_outside": [],
+    "margin 104 105": "-1/1000000000000000000000000000000"
+   }
+  },
+  {
+   "id": "S5",
+   "as_stated": true,
+   "came_out": {
+    "pairs": 419,
+    "as_stated": 419,
+    "not": []
+   }
+  },
+  {
+   "id": "S6",
+   "as_stated": true,
+   "came_out": {
+    "squares": 179,
+    "as_stated": 179,
+    "not": []
+   }
+  }
+ ],
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "cpu_seconds": 66.3
+}

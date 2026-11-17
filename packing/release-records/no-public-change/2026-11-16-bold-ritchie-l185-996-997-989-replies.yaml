@@ -1,0 +1,22 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane L185 of 16 November (think-32cl): the three replies jlevy posted after #998
+  merged and its Pages deploy and verify-deployment passed (run 43792910636) are recorded.
+  #997's final reply (02:51:52Z) states T-304 at V3/C3, confirmed and current, and names its
+  three evidence ids, recorded under reported with their statuses (#900). #996's final reply
+  (02:51:53Z) says its certificate is not registered, replaced by its author and retained; it
+  names no id of its result, which is recorded as spoken of, with no id. Both issues are
+  closed on 16 November and read through their replies. #989's follow-up (02:51:54Z) states
+  T-303 at V3/C3, confirmed and superseded, and names no reply in corrects. No result, row,
+  rung, side, bound, mark, score, credit holder, pin or block changes. Against origin/main
+  f4aa747e1 (#998): devtools.compare_paper_renders rendered the methods survey into empty
+  site directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from
+  this tree and once with that main's result-requests.yaml swapped in: its 43 files were
+  byte-identical across the three. No PDF was printed; it prints from that HTML. The survey
+  keeps its version, v0.2.7.

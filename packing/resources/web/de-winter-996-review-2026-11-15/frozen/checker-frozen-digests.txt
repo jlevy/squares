@@ -1,0 +1,15 @@
+# Lane L180 checker, frozen at 2026-11-15T12:12:15Z, before the controls plan, the findings, the author's README.md, REGISTRATION.md, SHA256SUMS contents, verify_exact.py, check_area.py and the figures, any packing-witness code (check_rational_witness_independent included), the register entries, case record or witnesses at 90, T-303's certificate, or import lane L181's work was read.
+# source files (clone of JoostdeWinter/square-packing at 64d5ee762a1159248d375973fb33825d51da637d; the same blobs at head 9cafa33d43f60423e51058f51dbdf042077c7cc2):
+3adcc363dc2d2cd5e52c1d0196536d137c2039de532de52b5eab39ba7a98e2dc  64d5ee7:n90/n90_exact.json
+3a28f570aaabfa5cb443d1c270925733d714009850deee852abde5f63e809aa6  64d5ee7:n90/n90_witness.yaml
+# checker programs:
+54678a2eb8f49c0b20ea77549f44383512b66c7663cdf7c196ab33fee79479ad  l180_reader.py
+c7d9fcd2a181fa4d9b0841ee6b3f80fa8ffc86881e65e3faa8bfcf2247216a8a  l180_axes.py
+c654769f886ca6f1b21985bf8b1bdcbf7c44fd4dd109d0417f03471254e8b8d8  l180_clip.py
+8431d0cd0a5e115767af62dfda322b9881b5dad3679e3b65eef13aea8050aa16  l180_decide.py
+0e78fe1580713dd7c8e5620eb0c6753b48a2c2f8793f857d2c9786c9975703f2  l180_check.py
+1403e7b8f8b1248b408cc54ce65f4ae1049372075d0d73def899d4f7ec61d0b1  l180_geom.py
+09d450bbf981ec03ab8597de286019fcf9ad80fc27d2ef42eeef5fc27d374055  l180_selftest.py
+# receipts written by the frozen checker:
+ba9386fe3d7cb7539ee557344c3c59a46ea62f00e4eaccd172afc87a904413c6  out/selftest.json
+b6b364bab77730856de60407b695ca8dd6f0f3f3d883dc085a4d8080f71d1d0b  out/check-n90.json

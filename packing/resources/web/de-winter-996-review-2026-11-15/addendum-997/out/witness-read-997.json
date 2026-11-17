@@ -1,0 +1,48 @@
+{
+ "program": "l180_witness_read.py",
+ "lane": "L180",
+ "validate_witness_document": {
+  "accepted": true
+ },
+ "witness_corners_as_published": {
+  "accepted": false,
+  "refusal": "n=90: a corner witness names witness.schema.yaml as its schema"
+ },
+ "departures": {
+  "softschema_schema": "https://github.com/jlevy/squares/blob/main/packing/witnesses/witness.schema.yaml",
+  "adapter_schemas": [
+   "../../../witnesses/witness.schema.yaml",
+   "../witness.schema.yaml",
+   "witness.schema.yaml"
+  ],
+  "id_form": [
+   "str"
+  ],
+  "listing_from_json_pose": {
+   "start 0, sense +": 90
+  },
+  "adapter_corner_order": [
+   [
+    -1,
+    -1
+   ],
+   [
+    1,
+    -1
+   ],
+   [
+    1,
+    1
+   ],
+   [
+    -1,
+    1
+   ]
+  ]
+ },
+ "witness_corners_on_the_changed_copy": {
+  "accepted": true,
+  "poses_equal_json": true,
+  "poses_differing": []
+ }
+}

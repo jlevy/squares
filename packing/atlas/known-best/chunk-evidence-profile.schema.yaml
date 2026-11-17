@@ -31,17 +31,17 @@ properties:
     - structured_square_count
     - within_six_components_and_three_free_cases
     properties:
-      case_count: {const: 36}
+      case_count: {const: 37}
       contact_component_count: {type: integer, minimum: 0}
       coverage_threshold_cases:
         type: object
         additionalProperties: false
         required: [at_least_50_percent, at_least_75_percent, at_least_90_percent]
         properties:
-          at_least_50_percent: {type: integer, minimum: 0, maximum: 36}
-          at_least_75_percent: {type: integer, minimum: 0, maximum: 36}
-          at_least_90_percent: {type: integer, minimum: 0, maximum: 36}
-      fully_structured_cases: {type: integer, minimum: 0, maximum: 36}
+          at_least_50_percent: {type: integer, minimum: 0, maximum: 37}
+          at_least_75_percent: {type: integer, minimum: 0, maximum: 37}
+          at_least_90_percent: {type: integer, minimum: 0, maximum: 37}
+      fully_structured_cases: {type: integer, minimum: 0, maximum: 37}
       internal_slide_dof: {type: integer, minimum: 0}
       narrow_partition_status_counts:
         type: object
@@ -52,10 +52,10 @@ properties:
         - not-established-search-limit
         - outside-registered-budget
         properties:
-          established: {type: integer, minimum: 0, maximum: 36}
-          not-established: {type: integer, minimum: 0, maximum: 36}
-          not-established-search-limit: {type: integer, minimum: 0, maximum: 36}
-          outside-registered-budget: {type: integer, minimum: 0, maximum: 36}
+          established: {type: integer, minimum: 0, maximum: 37}
+          not-established: {type: integer, minimum: 0, maximum: 37}
+          not-established-search-limit: {type: integer, minimum: 0, maximum: 37}
+          outside-registered-budget: {type: integer, minimum: 0, maximum: 37}
       sensitivity_comparison:
         type: object
         additionalProperties: false
@@ -66,7 +66,7 @@ properties:
         - sensitivity_structured_square_count
         - within_budget_flip_ns
         properties:
-          changed_case_count: {type: integer, minimum: 0, maximum: 36}
+          changed_case_count: {type: integer, minimum: 0, maximum: 37}
           changed_ns:
             type: array
             uniqueItems: true
@@ -94,8 +94,8 @@ properties:
           - structured_square_count
           - within_six_components_and_three_free_cases
           properties:
-            case_count: {type: integer, minimum: 1, maximum: 36}
-            fully_structured_cases: {type: integer, minimum: 0, maximum: 36}
+            case_count: {type: integer, minimum: 1, maximum: 37}
+            fully_structured_cases: {type: integer, minimum: 0, maximum: 37}
             sensitivity_changed_ns:
               type: array
               uniqueItems: true
@@ -107,18 +107,18 @@ properties:
             within_six_components_and_three_free_cases:
               type: integer
               minimum: 0
-              maximum: 36
+              maximum: 37
       square_count: {type: integer, minimum: 1}
       structured_fraction: {type: string, pattern: '^(0|1|0\.[0-9]+)$'}
       structured_square_count: {type: integer, minimum: 0}
       within_six_components_and_three_free_cases:
         type: integer
         minimum: 0
-        maximum: 36
+        maximum: 37
   cases:
     type: array
-    minItems: 36
-    maxItems: 36
+    minItems: 37
+    maxItems: 37
     items:
       type: object
       additionalProperties: false
@@ -225,6 +225,6 @@ properties:
     additionalProperties: false
     required: [excluded_exact_grid_cases, non_grid_cases, range]
     properties:
-      excluded_exact_grid_cases: {const: 64}
-      non_grid_cases: {const: 36}
+      excluded_exact_grid_cases: {const: 63}
+      non_grid_cases: {const: 37}
       range: {const: n=1..100}

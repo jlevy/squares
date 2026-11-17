@@ -1,0 +1,5 @@
+VALID n-127-candidate.yaml: n 127, side 11.801753890486488 (exact 617-bit over 613-bit), 8001 pairs, exact rational
+VALID n-204-candidate.yaml: n 204, side 14.802646843106611 (exact 534-bit over 530-bit), 20706 pairs, exact rational
+VALID n-232-candidate.yaml: n 232, side 15.759531627556573 (exact 54-bit over 50-bit), 26796 pairs, exact rational
+VALID n-264-candidate.yaml: n 264, side 16.773807598001998 (exact 718-bit over 714-bit), 34716 pairs, exact rational
+VALID n-305-candidate.yaml: n 305, side 17.945762359658971 (exact 613-bit over 609-bit), 46360 pairs, exact rational

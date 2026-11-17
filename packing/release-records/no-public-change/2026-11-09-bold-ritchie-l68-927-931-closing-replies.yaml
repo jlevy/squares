@@ -1,0 +1,18 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L68 of 9 November: the final replies that closed #927 to #931 are recorded,
+  each stating its register entry (T-275 to T-279) at V3/C3, confirmed and current, with
+  its three mapped evidence ids, and each issue is recorded closed, read through its
+  reply. The follow-ups on the closed #844, #893 and #914 are recorded as stating T-256,
+  T-263, T-270 and T-272 at V3/C3, confirmed and superseded. No result, rung, side, bound,
+  mark or credit changes. Against main adca8d352 (#932): rendered by
+  devtools.compare_paper_renders into empty site directories, its math pass in
+  /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that main's
+  result-requests.yaml swapped in: 43 files each, all byte-identical across the three. No
+  PDF was printed; it prints from that HTML. The paper keeps its version, v0.2.7.

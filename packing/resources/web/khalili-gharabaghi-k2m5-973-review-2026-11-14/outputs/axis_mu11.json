@@ -1,0 +1,19 @@
+{
+ "cover": "sol_exact_box11.txt",
+ "cells": 10000,
+ "corner_limits": 40000,
+ "min_mass": "1",
+ "min_at_cell_corner_tenths": [
+  5,
+  45,
+  5,
+  45
+ ],
+ "corners_at_exactly_1": 3000,
+ "min_ge_1": true,
+ "d4_region": {
+  "corners": 10000,
+  "at_exactly_1": 750,
+  "min_mass": "1"
+ }
+}

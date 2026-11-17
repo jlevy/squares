@@ -1833,3 +1833,456 @@ repositories:
       licence: CC BY 4.0 for the witness, JSON, outputs, READMEs and diff image, MIT for
       verifier/sqcheck.py, which the packet pins against the s299 packet's copy. No result
       content changed; nothing to import.
+  # The intake pass of 5 November 2026, lane L51 (think-3guf, think-ahvh), from the
+  # coordinator's read of #914.
+  - url: https://github.com/evand/square-packing
+    read_through: bb4cc78e5b35103c1f177db55e9cf08974e66563
+    read_on: '2026-11-05'
+    note: >-
+      The 52 commits past the 0e76d9f read, c9417f7 to bb4cc78 (2026-10-29T04:47:49Z to
+      2026-11-05T18:29:13Z); GitHub's activity log was not readable from the importing
+      session, so no push is dated. bb4cc78 adds search/packer/candidates/s175_1105,
+      s204_trig1, s260_ks_1105, s268_1105, s293_1105, s303_1105 and s304_1105, 56 files
+      (certificates, binary64 and pre-descent inputs, 80-digit points, run summaries, prior
+      facts and comparisons, and six regularized views), which #914 reports 38 minutes later;
+      the evand-issue914-2026-11-05 packet retains all 56, and the
+      evand-issue914-views-2026-11-05 packet pins the six views against those copies
+      (think-ahvh). Both packets pin bb4cc78. The other 51 hold no certificate and no
+      published side at a count: they change the packer (the event loop's claim queue,
+      campaigns and scorer, the compute pool pk/tasks.py that replaces jobs.py, pk try's arms
+      and reports, lineage, ingest, fill, relax, the store, and their tests),
+      search/packer/analysis/, triangle1000.py, the regularizer (39fb4f0: violated rows kept in
+      refine and an inequality feasibility phase, the fix the issue says 303's view needed),
+      and CLAUDE.md, CLAIMS.md (C54, untested), DESIGN.md, README.md, SUBMITTING.md,
+      Completed.md and TODO.md, whose lines name only results the record already holds (#845,
+      #824, #702, #703, #680, #674 and earlier). 0875935 lets the packer parse this register's
+      algebraic-number-field witnesses. Nothing else to import.
+  # The intake pass of 9 November 2026, lane L76 (think-3guf, think-1goz): Doğa Özden's lab
+  # committed one README line to each of its eight 9 November repositories between 20:53:12Z and
+  # 20:53:24Z, the same correction it posted that minute on #927 to #931, #935, #936 and #938.
+  - url: https://github.com/kenaznia-doga/s172-upper-bound
+    read_through: 204026bfbe01e9d7d135ea839eefab362a2a58eb
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:12Z) past the 2ce1f7c pin: 204026b, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 50 of README.md (blob e9402bc to
+      5a9b94f) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 172, 13.6146898533 (team Nevska, 7 November), smaller
+      than the certificate, which states no packing and which the lab cannot verify. The comment
+      on #935 says the same; a side with no packing is no report, and the record notes it on #935.
+      The ozden-s172-upper-bound-2026-11-09 packet stays at 2ce1f7c. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s199-upper-bound
+    read_through: 4fbff7b279f53211a458ee4cd93aa32c1dc3a08e
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:14Z) past the d03ee0b pin: 4fbff7b, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 53 of README.md (blob dc5e724 to
+      6496ba5) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 199, 14.6132098756 (team OigaZhDn, 31 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #938 says the same; a side with no packing is no report, and the record notes it
+      on #938 and in T-284. The ozden-s199-upper-bound-2026-11-09 packet stays at d03ee0b, the
+      commit #938 names. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s232-upper-bound
+    read_through: f76f2d0d024bb660804711985e08df37ca9d8193
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:15Z) past the 09e324f pin: f76f2d0, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob cc6bab2 to
+      37bef12) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 232, 15.7588527753 (team Salut Monde, 29 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #927 says the same; a side with no packing is no report, and the record notes it
+      on #927. The ozden-s232-upper-bound-2026-11-09 packet stays at 09e324f. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s268-upper-bound
+    read_through: ae2883e32016d1cbcc041cd56679dfbaa1cfed7f
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:17Z) past the a40a15d pin: ae2883e, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob 00da100 to
+      13ad406) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 268, 16.8718681351 (team Cats and boxes, 28 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #928 says the same; a side with no packing is no report, and the record notes it
+      on #928. The ozden-s268-upper-bound-2026-11-09 packet stays at a40a15d. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s270-upper-bound
+    read_through: 107a3cfb6b4c9a5cac6daa752e5d7d0b604e9262
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:18Z) past the 78ab8ce pin: 107a3cf, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 50 of README.md (blob efa23be to
+      8ca4831) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 270, 16.9273142164 (team Cats and boxes, 27 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #936 says the same; a side with no packing is no report, and the record notes it
+      on #936. The ozden-s270-upper-bound-2026-11-09 packet stays at 78ab8ce. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s299-upper-bound-17801004
+    read_through: 15cb4e779d7b72c5f419286931e050f8470e954b
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:20Z) past the a042eab pin: 15cb4e7, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob 95c314a to
+      4f04ee0) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 299, 17.7936369918 (team Cats and boxes, 27 October),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #929 says the same; a side with no packing is no report, and the record notes it
+      on #929, as it did on #824. The ozden-s299-upper-bound-2026-11-09 packet stays at a042eab.
+      Nothing to import.
+  - url: https://github.com/kenaznia-doga/s303-upper-bound
+    read_through: 781a162d2b37b5dcdde256a9911eef54b0055dce
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:22Z) past the b43ca09 pin: 781a162, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob d272a4e to
+      391effc) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 303, 17.8959261583 (team Cats and boxes, 1 November),
+      smaller than the certificate, which states no packing and which the lab cannot verify. The
+      comment on #930 says the same; a side with no packing is no report, and the record notes it
+      on #930. The ozden-s303-upper-bound-2026-11-09 packet stays at b43ca09. Nothing to import.
+  - url: https://github.com/kenaznia-doga/s307-upper-bound
+    read_through: f62d1ac42b112b9cfed0d8e6d96dd62bcb8e4fd8
+    read_on: '2026-11-09'
+    note: >-
+      One commit of 9 November (20:53:24Z) past the dbe8838 pin: f62d1ac, "README: correct Kaggle
+      comparison (leaderboard side-only entry)", changes line 48 of README.md (blob 324c63e to
+      59cb8a6) and nothing else. It adds to the Kaggle sentence that the per-puzzle leaderboard
+      lists an unpublished side-only entry at 307, 17.9792309604 (team Nevska, 7 November), smaller
+      than the certificate, which states no packing and which the lab cannot verify. The comment
+      on #931 says the same; a side with no packing is no report, and the record notes it on #931.
+      The ozden-s307-upper-bound-2026-11-09 packet stays at dbe8838. Nothing to import.
+  # The intake pass's lane L81 of 11 November 2026 (think-3guf, think-xq4o), from the
+  # coordinator's read.
+  - url: https://github.com/evand/square-packing
+    read_through: c801ab47c7cf83c3250c72459f5e19a2b2d9b0de
+    read_on: '2026-11-11'
+    note: >-
+      Ten commits of 5 to 11 November (19:08:24Z on 5 November to 01:02:50Z on 11 November)
+      past the bb4cc78e read, through c801ab4, the head. None adds a certificate, a bound or a
+      packing. 4c431a2 adds to Completed.md a line for #914's seven registrations, which the
+      record already holds (T-270 and the others of that import); e70a60e, 3ab0014, 235d2e8
+      and 541a0b3 change TODO.md and CLAUDE.md, the last also adding requirements.txt,
+      requirements.lock and search/packer/activate.sh for the packer's own Python
+      environment; ce647e0, 5e41680 and c801ab4 add options to the fq quench (frozen squares
+      as obstacles, frozen squares anchored to the right or top wall, opt-in ALM convergence
+      settings); 4620ca2 sets the task pool's default priority from PK_PRIO; and 2588ebb
+      raises exactsolve's threshold for releasing a slack-separated pair to the contact
+      tolerance, 1e-12, with a test, the commit saying the old threshold released a pair at
+      303 and reported a descent direction that overlaps it. That is a change to his local
+      optimality analysis, which certifies no bound here. Nothing to import.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: be93eb1668b8ec025ff08e1630abc9b4ad623a56
+    read_on: '2026-11-11'
+    bead: think-0fa1
+    note: >-
+      Two commits past the 3cea0f4 read: 11e1833 (06:28:08Z on 10 November) adds wedge/,
+      Kevin Fang's note "Lower bounds for the waste of unit-square packings in slabs and
+      trapezoids" (draft v0.1 of 9 November, doi:10.5281/zenodo.24099178) with its working
+      notes, four floating-point simulators and six language-model review reports, and
+      be93eb1 (17:56:52Z) adds three checkers for its Proposition 7.5 with their reports.
+      The note claims, among other bounds, that a region whose straight ceiling rises by
+      R >= 1 at slope at most 1 wastes at least 7e-6 sqrt(L R), which it calls Conjecture 1
+      of H. D. Bui's arXiv:2508.04603 with a constant, and says nothing is claimed for the
+      waste of a square or for c*(k) over all packings. Its README calls it claimed, not
+      verified: written by Claude as a research agent under Fang's direction, reviewed only
+      by language models, tested by floating-point simulation, with no certificate a program
+      can check. Slabs and trapezoids are another container, but the asymptotic records cite
+      Bui's paper and build on it, so think-0fa1 decides whether the note bears on any
+      record. Nothing under theorem-a/, composites/ or the strip folders changes.
+  # Lane L104 of 11 November 2026 (think-bcfs); lane L136 of 12 November (think-c3p2); lanes
+  # L154 (think-g2ax), L157 (think-2h88) and L158 of 14 November; lane L181 of 15 November
+  # (think-32cl).
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 6c0ad56a13346abda6debd73afab7892072896c7
+    read_on: '2026-11-15'
+    note: >-
+      Read through 6c0ad56 (12:07:15Z on 15 November), the head at 12:55Z, five commits past
+      the 66849f2 read. 64d5ee7 (11:27:26Z), "Add a packing of 90 unit squares with side
+      9.994038857546", adds n90/, a packing of 90 squares that jlevy/squares#996 (11:30:13Z)
+      reports, and a row and a paragraph of the root README; the
+      de-winter-s90-64d5ee7-2026-11-15 packet pins it and retains n90/ as superseded by its
+      author. 0c9bcd2 (11:27:49Z) adds n90/REGISTRATION.md, the issue's text in the
+      registration template's form, and n90/SHA256SUMS; 9cafa33 (11:29:27Z) renames the model
+      named for the local search from "OpenAI Codex (GPT-6 Astra)" to "GPT-6.1 Sol Max
+      (OpenAI)", the name the issue gives. fa53fb0 (12:07:15Z), "Replace the n = 90 packing by
+      one with side 9.994038766610", replaces the certificate, the witness and the figures by
+      a packing 9e-8 smaller that jlevy/squares#997 (12:08:33Z) reports in place of #996's,
+      and corrects the README's counts of leaning squares; the de-winter-s90-upper-bound-2026-11-15
+      packet pins it, the commit the issue names, and retains n90/. 6c0ad56 (12:07:15Z), "Pin
+      the n = 90 registration request to the new certificate", changes only
+      n90/REGISTRATION.md, which now names fa53fb0, and n90/SHA256SUMS, whose digests match
+      fa53fb0's files; no packet retains it, and it adds no bound, certificate or method. Lane
+      L181 (think-32cl) records the replacement in both requests entries and both packets'
+      READMEs. Nothing more to import.
+
+      The read of 14 November (lane L158) was through 66849f2 (15:33:56Z on 14 November), the
+      head at 16:05Z, one commit past
+      the 6760360 read: "Answer the review of the n = 297, 332 and 409 packings", which
+      answers by commit five of the six questions of the stage 4 review of jlevy/squares#977
+      and #979 (docs/project/reviews/review-2026-11-14-de-winter-977-979.md), as #977's final
+      reply (issuecomment-6879566179) asked them, and #979's note on the 409 row (F14). It
+      changes coordinate_provenance from verified to reported in the claim block of
+      n297/n297_witness.yaml and of the n132, n157, n172 and n199 witness files, with their
+      SHA256SUMS lines (F8); makes n297/verify_exact.py and check_area.py and their copies in
+      above324_from_n297/ stop through a require function that raises SystemExit instead of
+      deciding by assert, so python -O no longer removes the checks (F15); adds
+      above324_from_n297/n332_witness.yaml and n409_witness.yaml, Witness/v2 center-basis
+      files in exact rationals, and names the box, [0, side] x [0, side] with the origin at
+      the lower left corner, in the format line of both JSON files and in build.py, which
+      writes it (F6); and corrects above324_from_n297/README.md: the corner square at 409 is
+      tilted by about 45 degrees, 44.999964, edge direction (803761/1136689,
+      803760/1136689) (F13); the value recorded at 332 was T-174 plus the same 35 squares,
+      the value recorded at 409 lies 3.16e-9 above T-174 + 3 and places its squares
+      differently, and the corner arrangement at 409 is his own (F14). The review's question
+      3, whether the left and bottom walls' clearance of 1.5e-60 was deliberate, has no
+      answer. The commit says all squares and sides are unchanged, and compared value for
+      value as exact rationals they are: against the pins of the
+      de-winter-s297-upper-bound-2026-11-14 (7b4701f) and de-winter-issue979-2026-11-14
+      (c70defa) packets, every square and the side of n297_exact.json, n297_witness.yaml,
+      n332_exact.json and n409_exact.json (1,190, 1,190, 1,330 and 1,638 scalars) are
+      unchanged, n332_exact.json and n409_exact.json changing only their format line; each
+      new Witness/v2 file equals its JSON scalar for scalar, its ids 1 to n in order; squares
+      1 to 297 of each are the 297 translated by (1, 1) and (3, 3), the sides S + 1 and
+      S + 3; and square 404 of n409_exact.json has exactly the README's direction, at
+      44.9999644 degrees. The n132, n157, n172 and n199 witness files and their exact JSON
+      files hold the squares and sides of their packets' pins (6617869 and 57de046 for 132
+      and 157, c4e65d0 for 172, 702c7af for 199), so T-292, T-293, T-286, T-285 and T-299
+      and the two rows at 332 and 409 stand as recorded. packing-witness inspect reads all
+      seven witness files, where it refuses n297_witness.yaml at 7b4701f, as it refused the
+      172 and 199 files at 6760360, on the loader's rule that a verified claim needs a
+      replayable certificate record. No packet retains it: it adds no bound, certificate or
+      method, and the packets keep the same squares and sides at their pins. Lane L158
+      records the answers in the #977 and #979 requests entries and the s297 packet's README,
+      with a pointer from the issue 979 packet's. Nothing to import.
+
+      The read of 14 November (lane L157) was through 6760360 (11:03:30Z on 14 November), the
+      head at 15:27Z, one commit past the c70defa read: "Make the witness files for n = 172 and n = 199 valid Witness/v2 and remove
+      the contact count from the n = 199 README", which the author's answer on
+      jlevy/squares#939 (issuecomment-6876335132, 11:04:59Z) names. It adds the softschema
+      header and a claim block to n172/n172_witness.yaml and n199/n199_witness.yaml, lowercases
+      their ids and drops their notes line, updates both SHA256SUMS, and removes from
+      n199/README.md the sentence on the 734 load-bearing or forced contacts, which his answer
+      on jlevy/squares#946 (issuecomment-6876291132, 11:02:01Z) withdraws. Against the pins of
+      the de-winter-s172-upper-bound-2026-11-10 (c4e65d0) and
+      de-winter-s199-upper-bound-2026-11-09 (702c7af) packets, the Git diff changes no other
+      file of n172/ or n199/ and no line of a square or a side, so T-286 and T-285 stand as
+      recorded. packing-witness inspect passes both files' schema and refuses both on the
+      loader's rule that a verified claim needs a replayable certificate record, as at
+      57de046. No packet retains it: it adds no bound, certificate or method, and the two
+      packets keep the same squares and sides. Lane L157 (think-2h88) records the answers in
+      both requests entries and the s199 packet's README. Nothing to import.
+
+      The read of 14 November (lane L154) was through c70defa (10:39:38Z on 14 November), the
+      head at 10:59Z and 11:01Z, four commits past the 57de046 read. e008214 (10:02:54Z) adds n297/, a packing of 297 squares
+      that jlevy/squares#977 (10:13:18Z) reports, and a row of the root README; 7b4701f
+      (10:05:30Z) adds n297/check_area.py; the de-winter-s297-upper-bound-2026-11-14 packet pins
+      7b4701f, the commit the issue names, and retains n297/. 5fcb350 (10:10:06Z) adds
+      n297/REGISTRATION.md, the issue's text in the registration template's form with four
+      phrases reworded, and changes n297/README.md and SHA256SUMS to list it; no packet retains
+      it, and it states no bound the issue does not. c70defa adds above324_from_n297/, packings
+      of 332 and 409 built from the 297 that jlevy/squares#979 (10:41:23Z) reports, and one
+      paragraph of the root README; the de-winter-issue979-2026-11-14 packet pins it and
+      retains the folder. Lane L154 (think-g2ax) imports both issues. Nothing else to import.
+
+      The read of 12 November (lane L136) was through 57de046 (08:30:46Z on 12 November), the
+      head at 08:56Z and 09:02Z, one commit past the 6617869 read: "Publish the method for n =
+      132 and n = 157 and make both witness files valid Witness/v2", which the author's answers
+      on jlevy/squares#958 (issuecomment-6818738203, 08:31:55Z) name. It adds method_n132_n157/,
+      the growth step, the IPOPT model, the high-precision solver, the certificate scripts, the
+      250-digit solutions and binary64 and Shapely checks, and adds the softschema header, a
+      claim block and a lowercase id to n132_witness.yaml and n157_witness.yaml, with the
+      READMEs and SHA256SUMS of both folders and the root README. The git diff changes no line of
+      a square or a side, so T-292 and T-293 stand as recorded; no new bound. The
+      de-winter-method-132-157-2026-11-12 packet retains it (lane L136, think-c3p2), and the
+      s132 and s157 packets stay at 6617869. Nothing to import.
+
+      The read of 11 November (lane L104) was through 6617869 (20:52:23Z on 11 November), the head,
+      which the de-winter-s132-upper-bound-2026-11-11 and de-winter-s157-upper-bound-2026-11-11
+      packets pin with a491dad (20:49:44Z), the commit that adds n132/ and n157/, which
+      jlevy/squares#958 reports (20:56:18Z). The read covers the one commit those pins contain
+      whose changed paths no packet retains: 501cb8d (19:41:30Z), "Correct the README statements on
+      the descent runs and the certificate margin", which changes one paragraph of
+      above324/README.md and two of above324_refined/README.md and no certificate. It says the
+      certificates for 494, 738, 739, 753 and 810 and the 22 of above324_refined/ were written by
+      multiplying every centre and the side by 1 + 2e-10 + 4v, v the largest constraint violation
+      left, and rounding the side up at the 13th decimal, the margin 5.0e-9 to 6.4e-9 for eighteen
+      of the 22 and estimated at 8.4e-9 to 4.6e-8 for 754, 637, 684 and 805, and how the descent
+      runs chose the 22. Those are statements about #941's and #942's certificates, which their
+      requests entries take in (lane L103); no bound changes. Nothing else to import.
+  # Lane L168 of 15 November 2026 (think-jlsq).
+  - url: https://github.com/moh63-dev/k2m5-family
+    read_through: 9ccfe825fe04cd9f3770b4e76892364ceb50322c
+    read_on: '2026-11-15'
+    note: >-
+      Read through 9ccfe82 (02:56:10Z on 15 November), the head at 02:59Z, two commits past
+      2c0b1b9, the commit the moh63-dev-k2m5-family-2026-11-13 packet pins and T-298 cites,
+      tagged v1.0; neither new commit carries a tag. 85279d2 (00:22:20Z on 15 November,
+      16:22:20 on 14 November at the commit's own offset of -08:00), "v1.1: Lemma 7 sentence,
+      crop_cover, axis_exact, zmx2 logs, controls, LICENSE, run_cov fix", and 9ccfe82, the
+      same message with ", paper DOI", answer by commit seven of the fifteen questions of
+      jlevy/squares#973's final reply (issuecomment-6873382321), 1, 2, 6, 8, 11, 12 and 13,
+      and five more in part, 4, 5, 7, 14 and 15; 3, 9 and 10 have no answer. The #973
+      requests entry and the packet's README record each answer. The certificate is
+      unchanged: certificate/sol_exact_box11.txt keeps SHA-256 d259fed5...12099, the issue's,
+      and no file of certificate/ changes. Of the 466 files the packet's manifest pins
+      (acquisition/upstream-subtree.sha256), 457 hold their digests at the head,
+      tight_tile/cov.tar.xz among them, and none is removed; nine change, each first in
+      85279d2: LICENSE, README.md, SHA256SUMS_ALL, docs/CHECKING.md, paper/k2m5.tex and
+      paper/k2m5.pdf, tight_tile/README.md, tight_tile/run_cov.sh and
+      verification/verify.sh, with .gitignore, which the packet does not pin. 85279d2 adds 66
+      files. At the head every one of the 532 lines of SHA256SUMS_ALL holds, and it lists
+      every file but itself; at 85279d2 it left out the four of tight_tile/out_controls/,
+      which 9ccfe82 adds to it.
+
+      What changes. paper/k2m5.tex (and its PDF): Lemma 7's definition now says that every
+      segment of nu and omega is an elementary piece of the 1/10 grid, axis-parallel and of
+      length 1/10, checked on all 13,244 segments of mu_11, so that none crosses the grid
+      lines x = R and x = k - R, and in Lemma 7's proof a segment of omega that meets the open
+      strip lies in the closed one (the review's F5); the theta = 0 item names axis_exact.py
+      at the 10,000 limit corners in place of "an independent exact evaluation at 7,717
+      corners", says that the Lemma Z run at the same corners is not part of the release, and
+      calls the untilted mass piecewise bilinear rather than piecewise affine; the account of
+      Nagamochi and Karakus is reworded, Karakus's counterexample to the scoring step of
+      Nagamochi's Lemma 1 leaving the bound not disproved, and his proof of s(k^2 - 1) = k
+      not establishing s(k^2 - 2) = k; the date drops "Draft"; and the repository citation
+      names release v1.1. verification/axis_exact.py evaluates exactly, in integers, the
+      bilinear mass of every 1/10 cell of untilted centres at its four limit corners, and
+      verify.sh's new step 2b runs it on the board and on the two scaled controls.
+      verification/r9632/crop_cover.py writes the cropped cover c9632.txt, and verify.sh's
+      fast mode compares the two byte for byte. verification/logs/zmx2_box11/col00.log to
+      col54.log are zmx2's --log files for the 55 columns of the first-order sweep: 12,100
+      ROOT lines, each root's boxes, certified, empty, uncertified, deepest level, capped and
+      milliseconds, and 2,508 UNCERT lines. tight_tile/ctl_mutants.py writes the two
+      Tight-Tile controls the release lacked, mut_all099.txt (every weight times 99/100,
+      rounded down, 13,244 segments changed) and mut_x2_099.txt (the 106 segments on x = 2
+      times 99/100), and tight_tile/run_controls.sh runs ctl_rise.py on the board and the
+      three mutants at a cap of 2,000 cells (out_controls/controls_cap2000.out): the board
+      169 cells, 85 certified, none refused; ctl_rise.txt 2,083 cells, 443 refused, 6
+      containing the face point (1, 1), as lane L145's run at that cap; mut_all099.txt 1,029
+      refused of 2,057, 2 at the face point; mut_x2_099.txt 1,038 of 2,081, 6 there.
+      out_controls/versions.txt gives Python 3.13.0 for that run, and its numpy and scipy line
+      fails on a missing scipy. Lane L145's run of the board without a cap, on the same
+      ctl_rise.py and ttbox.py, took 155 cells, 78 certified, none refused
+      (receipts/controls/tight-ctl-rise-real.log); the difference is not explained here.
+      docs/CHECKING.md's theta = 0 row names axis_exact.py, and its ctl_rise row says the
+      1,190 refused cells came from a run stopped at a cap of 6,000 cells, the count
+      depending on the cap; run_controls.sh says CAP=6000 reproduces them, citing
+      docs/TIGHT_TILE_PROOF.md, which is not in the release. LICENSE grants MIT for the code
+      and CC BY 4.0 for the text and data, naming the files each covers, and leaves Evan
+      Daniel's code that verify.sh downloads under its own MIT licence; it no longer names
+      search/cover_loop.py and search/tilesep.py. README.md adds a Citing section, and
+      .zenodo.json and CITATION.cff (version 1.1, released 14 November) describe the
+      deposit. 9ccfe82 changes only those three files and SHA256SUMS_ALL: it gives the
+      paper's DOI, 10.5281/zenodo.24237740, in all three, and says that the software DOI of
+      the release will be added once minted. Neither doi.org nor zenodo.org was reachable
+      from this session, whose proxy refuses both, so the DOI was not resolved here.
+      tight_tile/run_cov.sh sets B and NP outside the
+      comment and writes to OUTD, by default cov. verification/verify.sh stops when
+      zmx2_print_all.patch fails to apply, unless it is already applied, where it went on
+      through || true, and --full adds step 6b, root 9632's dump with --uncert-cap 100000000,
+      qx2_zm.py on c9632.txt and check_9632.py, and step 9, the 75 coverage dumps regenerated
+      by run_cov.sh into build/cov_regen and checked by cov_check.py. As committed, step 6b
+      runs qx2_zm.py in build/square-packing/qx2, a directory evand/square-packing does not
+      have at 659ee62, where qx2_zm.py is search/qx2_zm.py, so under the script's set -euo
+      pipefail --full would stop there, before the sweep; this was read, not run.
+      lean/build_inst.sh builds each module of lean/K2m5 in its own process and writes
+      build_full.log with each module's wall time and peak memory, through
+      /home/claude/lean/mk.sh, a path outside the release; no build_full.log is published.
+
+      Checked at this read, from 85279d2's bytes with the project's Python 3.14.7 and -I,
+      and not retained: the ROOT lines of each of the 55 logs sum to its column's census in
+      colNN.out, and their milliseconds to 45,367 seconds against the 45,366 CPU-seconds
+      recorded; the 30 columns lane L145 ran here, the packet's receipts/zmx2/colNN_roots.log,
+      equal the release's logs line for line, 6,600 ROOT lines with their UNCERT lines, each
+      root's milliseconds left out; crop_cover.py writes c9632.txt byte for byte, the
+      retained copy's bytes; ctl_mutants.py writes both mutant boards byte for byte; and
+      axis_exact.py prints AXIS-FACE-OK, minimum exactly 1 at 750 of the 10,000 corners, in
+      about 3 CPU-seconds, and AXIS-FACE-FAILED on both scaled controls, at minima
+      0.998999999958 and 0.9929999999575. A re-run of the board's Tight-Tile control at the
+      cap of 2,000 was refused by this session's permission check, so the 155 against 169
+      cells stays unexplained. These files are the same at 9ccfe82. No packet retains either
+      commit: they add no bound, certificate or claim and change no certificate file, T-298
+      stands at V0/C1 as recorded, and the packet keeps its pin. A full replay (think-0h7r) that compares root for root retains
+      the logs it compares with. Lane L168 records the answers in the #973 requests entry
+      and the packet's README, and the replay's price on think-0h7r. Nothing to import.
+  # Lane L173 of 15 November 2026 (think-hisc).
+  - url: https://github.com/moh63-dev/k2m5-family
+    read_through: 0e28e8a547c742fb1e120da22dc8d7275f1a6f52
+    read_on: '2026-11-15'
+    note: >-
+      Read through 0e28e8a (03:41:17Z on 15 November, 19:41:17 on 14 November at the
+      commit's own offset of -08:00), "README: software DOI", the head at 06:42Z and still
+      at 06:51Z, one commit past 9ccfe82, which lane L168 read; the repository's tag v1.1
+      now names 9ccfe82, and the authors' comment on jlevy/squares#973
+      (issuecomment-6889513117, 05:03:46Z) calls it release v1.1 "plus one README commit
+      that adds the archive DOI", this one. It
+      changes two files: README.md's Citing section replaces "software DOI to be added here
+      once minted" with the archive DOI, 10.5281/zenodo.24237941, and SHA256SUMS_ALL changes
+      README.md's line to match. .zenodo.json and CITATION.cff are unchanged and still give
+      only the paper's DOI, 10.5281/zenodo.24237740. Checked at this read from the head's
+      bytes with the project's Python 3.14.7 and -I, and not retained: the Git diff from
+      9ccfe82 is those two files; the certificate and every file of certificate/ are as at
+      2c0b1b9, the pin of the moh63-dev-k2m5-family-2026-11-13 packet; of the 466 files its
+      manifest (acquisition/upstream-subtree.sha256) pins, 457 hold their digests,
+      tight_tile/cov.tar.xz among them, none is removed, and the nine that change are the
+      nine L168 listed, README.md among them; and all 532 lines of SHA256SUMS_ALL hold,
+      listing every file but itself. Neither DOI was resolved, since this session's proxy
+      refuses doi.org and zenodo.org. The commit adds no bound, certificate or claim and
+      changes no pinned file but README.md, so no packet retains it and the packet keeps its
+      pin; T-298 stays at V0/C1. Lane L173 records the comment's answers and both DOIs in
+      the #973 requests entry, on T-298's credit, in the bibliography, the resources index
+      and the packet's README, and what they change for the replay on think-0h7r. Nothing to
+      import.
+  # Lane L183 of 15 November 2026 (think-o79q).
+  - url: https://github.com/moh63-dev/k2m5-family
+    read_through: 355f83e9147b310b581b72cf91baf56d7ad36625
+    read_on: '2026-11-15'
+    note: >-
+      Read through 355f83e (16:48:53Z on 15 November, 08:48:53 at the commit's own offset of
+      -08:00), "Lean: full build log with timings; portable build script", the head at 17:13Z,
+      one commit past 0e28e8a, which lane L173 read; the authors' comment on jlevy/squares#973
+      (issuecomment-6897938053, 16:52:03Z) names it for item 14. It changes six files.
+      lean/build_full.log and lean/timed_build.py are new; lean/build_inst.sh takes
+      K2M5_DIR, LEAN_BIN and LEAN_PATH_EXTRA from the environment in place of
+      /home/claude/lean/mk.sh and runs timed_build.py for each module; lean/README.md adds a
+      section on rebuilding with timings; .gitignore keeps build_full.log; and SHA256SUMS_ALL
+      changes those lines. build_full.log, headed as the full build of release v1.1's
+      lean/K2m5 on 14 November with Lean 4.33.1 on a Linux host of 2 cores and 7 GB with no
+      swap, gives each of the twelve modules' exit, wall, CPU and peak resident memory, each
+      exit 0 with no error, and the axiom line [propext, Classical.choice, Quot.sound] for
+      k2m5_of_valid11. Its totals line gives 863.6 s of wall, 517.5 CPU-s and a peak of 5.96
+      GB (InstC6), where the twelve module lines sum to 857.2 s and 511.9 CPU-s; the rest is
+      presumably the axiom print, which has no line of its own. Its header says Evan Daniel's
+      project and Mathlib were already built and are not counted, and that the peaks include
+      the mapped Mathlib .olean files. timed_build.py compiles each module with lean
+      -DmaxHeartbeats=0, which lifts the elaboration time limit and leaves the kernel check as
+      it is.
+
+      Checked at this read from the head's bytes, and not retained: certificate/ and
+      lean/K2m5/ are as at 2c0b1b9, the pin of the moh63-dev-k2m5-family-2026-11-13 packet, so
+      the log builds the Lean sources T-298 cites; of the 466 files the packet's manifest pins,
+      456 hold their digests, tight_tile/cov.tar.xz among them, the ten that change being the
+      nine lanes L168 and L173 listed and lean/README.md; and all 534 lines of SHA256SUMS_ALL
+      hold, listing every file but itself. lean/K2m5's imports from Daniel's project at
+      evand/square-packing 659ee62 reach ten modules through Sqpack.Bentz, and those ten and
+      the three lake files have the Git blobs of the 2eb15455 tree the record built on 3
+      October (E-k2m4-evand-bentz4-lean-build), read from 659ee62's tree listing. So the
+      module the record's "at least 24 GB" was priced from, Sqpack.Bentz, is one the log
+      leaves out, as the comment says. Lane L183 records the comment in the #973 requests
+      entry and the packet's README, and the Lean build's price on think-0h7r. The commit adds
+      no bound, certificate or claim, nothing of it is retained, and the packet keeps its pin;
+      T-298 stays at V0/C1. Nothing to import.
+  # Lane L187 of 16 November 2026 (think-0y9m).
+  - url: https://github.com/JonathanGun/square-packing-upper-bounds
+    read_through: 0aac839e551fd8cb7d7717c20494b095429131a1
+    read_on: '2026-11-16'
+    note: >-
+      Read through 0aac839e (06:37:41Z on 16 November), the head at 09:16Z and then the
+      repository's only commit: a root commit with the message and tree of bc10ce4 (05:31:52Z), the
+      joegun-upper-bounds-2026-11-16 packet's pin, only its author and committer address and
+      time differing. bc10ce4 was the head and the only commit when lane L187 read it at
+      06:01Z, and jlevy/squares#1001 (05:33:07Z) named it; the issue was edited at 06:38Z, its
+      only change naming 0aac839e in its place. The pin is on no branch since the history was
+      rewritten, and the tree is unchanged: five exact corner certificates at 127, 204, 232,
+      264 and 305 with their decimal poses, the author's checker and its output, and
+      packing-witness verify's output, which the packet retains whole but for Evan Daniel's
+      MIT notice, pinned against a byte-identical copy. Nothing more to import.

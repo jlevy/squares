@@ -1,0 +1,100 @@
+{
+ "n": 156,
+ "side": "648852654374852353755125161419320205262325108517519100460480865981265775829850519452615985639917208560652327347262971218877375627787964220161046522562291163679743/49999999999999392625420305980539883800584911892231555650543140676793641372334456399329222570426017863765035947920189744639461855069670803668996512500000000000000",
+ "side_denominator_digits": 161,
+ "ceil12": "6488526543749/500000000000",
+ "floor12": "12977053087497/1000000000000",
+ "drop_to_floor12": 2.0471374579694022e-13,
+ "s1c_squares_below_drop": [
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  31,
+  39,
+  45,
+  52,
+  59,
+  66,
+  73,
+  75,
+  105,
+  106,
+  136,
+  154
+ ],
+ "far_wall_contacts": [
+  [
+   66,
+   "top"
+  ]
+ ],
+ "all_contacts": [
+  [
+   1,
+   "left"
+  ],
+  [
+   66,
+   "top"
+  ],
+  [
+   122,
+   "bottom"
+  ]
+ ],
+ "least_positive_clearance": 8.702293424816881e-17,
+ "any_positive_clearance_below_1e-30": false,
+ "square1_contacts": [
+  "left"
+ ],
+ "right_wall_contacts": [],
+ "least_pair": [
+  32,
+  33
+ ],
+ "least_pair_margin": 2.0183861943348081e-13,
+ "least_pair_closing_parameter": 2.0183861943343782e-13,
+ "least_pair_closing_move": 2.0183861943348081e-13,
+ "moved_square": 33,
+ "moved_square_least_other_margin": 2.04568019135144e-13,
+ "moved_square_least_wall_clearance": 2.000000000000405,
+ "moved_square_walls": {
+  "left": {
+   "before": 9.977053087496582,
+   "after_contact_move": 9.977053087496582
+  },
+  "right": {
+   "before": 2.0000000000004663,
+   "after_contact_move": 2.0000000000004663
+  },
+  "bottom": {
+   "before": 9.977053087496643,
+   "after_contact_move": 9.977053087496845
+  },
+  "top": {
+   "before": 2.000000000000405,
+   "after_contact_move": 2.000000000000203
+  }
+ },
+ "moved_square_outside_at_contact": [],
+ "moved_square_outside_past": [],
+ "pairs_below_1e-12": 373,
+ "programs": {
+  "l83_check.py": "661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0",
+  "l83_clip.py": "c4987a55491fa98f61328d54a3d5353eccfe91514664fdcd4aec5a114319b218",
+  "l83_freeze.py": "a4f0e93178d8f6ebf031e82f2c9970596bdb938a4e191722e7e01e89d909f8a3",
+  "l83_geom.py": "6542054ff2c45459de75e0fea2c73e0bf8481124daafb4f84439c587818cecd8",
+  "l83_plan_facts.py": "11b46d036848d04be55e86a30c24fb251d25a4140de15c24761d821924bd3387",
+  "l83_reader.py": "ab7b2cf73c61f0f707d92ef640176e1402f658136341caee8847f8665ab86526",
+  "l83_sat.py": "2236bccbeb4da6b635e0f43aa1c88c8e5aab3ed41de36a4eb87736a70706ced2",
+  "l83_selftest.py": "de00c72fc8b9b6abe10f1bdd93e7fdc8afd6b4f278e1e826e6c24e5c4e07ce1c"
+ }
+}

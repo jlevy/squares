@@ -1,0 +1,12 @@
+# command: nice -n 19 verify-target/release/verify s12_lower_3.9716.txt 12 96000 1 0
+# cwd: pricing sample, VERIFY_BINS=39500:39539 (a partial run, no verdict); scratch build 9f9dbeaf
+# python3: not used by this command
+# host: 4 cores; load 0.99 0.74 0.44; started 2026-11-08T15:02:46Z
+D4-symmetric atom set: true  -> angles cover [0,45] deg
+atoms=4996 total weight = 119787760/9985226 = 11.996500
+s = 15886400/4000000 = 3.971600
+angles: k=0..39765 (N=96000), covering [0,45deg]
+PARTIAL RUN: VERIFY_BINS=39500:39539 -- only these bins are swept; this run cannot verify anything
+min covered weight over ALL placements = 9985226/9985226 = 1.000000  (at angle k=39531)
+NOT VERIFIED (PARTIAL RUN: only bins 39500..39539 of 0..39764 were swept)
+# finished 2026-11-08T15:03:13Z; exit 4; wall 26.817 s; CPU 26.6 s (user 26.583 + sys 0.032); load 1.33 0.84 0.49

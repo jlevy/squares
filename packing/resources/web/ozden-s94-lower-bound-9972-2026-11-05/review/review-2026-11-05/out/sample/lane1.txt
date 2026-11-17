@@ -1,0 +1,9 @@
+r=1 exit=0 status: verified nodes: 103965 least_certified_bound: 1.000002101419184 lowest_centre_estimate: 1.004091427477553 cpu_seconds: 76.255770386 
+r=2 exit=0 status: verified nodes: 104121 least_certified_bound: 1.0000017858907067 lowest_centre_estimate: 1.0027177143700832 cpu_seconds: 71.70905407400001 
+r=4971 exit=0 status: verified nodes: 101681 least_certified_bound: 1.0000003786749352 lowest_centre_estimate: 1.0033822978741465 cpu_seconds: 87.133214366 
+r=4579 exit=0 status: verified nodes: 97491 least_certified_bound: 1.0000006117136875 lowest_centre_estimate: 1.002458491690283 cpu_seconds: 92.049163318 
+r=4731 exit=0 status: verified nodes: 99527 least_certified_bound: 1.00000033824587 lowest_centre_estimate: 1.0026133449444303 cpu_seconds: 90.428316965 
+r=2490 exit=0 status: verified nodes: 87265 least_certified_bound: 1.0000002675528183 lowest_centre_estimate: 1.0019620571803418 cpu_seconds: 86.680312251 
+r=2684 exit=0 status: verified nodes: 87279 least_certified_bound: 1.0000005844952626 lowest_centre_estimate: 1.0025586907512396 cpu_seconds: 85.717918068 
+r=2900 exit=0 status: verified nodes: 87661 least_certified_bound: 1.0000007085417326 lowest_centre_estimate: 1.0030491214101467 cpu_seconds: 76.18672237199999 
+r=3284 exit=0 status: verified nodes: 88383 least_certified_bound: 1.0000004454535838 lowest_centre_estimate: 1.0027985215431996 cpu_seconds: 81.172634954 

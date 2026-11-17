@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/997",
+  "source": "https://github.com/JoostdeWinter/square-packing",
+  "revision": "fa53fb0d734fbf438bcfb73c1434a15894bb2bc5",
+  "read_on": "2026-11-15",
+  "read_at_main": "91acf2022a69531da3421889810a3bc53aa89753",
+  "horizon": 324,
+  "results": [
+    {"n": 90, "certificate": "n90/n90_exact.json", "format": "center-direction-json", "requested": true, "replayed": true, "offered_side": "9.994038766610", "printed_in": "https://github.com/jlevy/squares/issues/997", "exact_side": "99940387666098521323/10000000000000000000", "ceiling": "9.9940387666098522", "first_committed": "2026-11-15T12:07:15Z", "grid_side": "10", "case": {"source_key": "[jazivxt s90 upper bound 2026-11-15]", "holders": "jazivxt", "result": "T-303", "reported_value": "9.9982771669260000", "verified_value": "9.9982771669260000", "evidence": ["E-jazivxt-989-exact-feasibility", "E-jazivxt-989-review-exact-feasibility"], "exact_side": "4999138583463/500000000000", "relation": "below", "difference": "42384003161478677/10000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

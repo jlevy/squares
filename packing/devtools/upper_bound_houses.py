@@ -66,7 +66,7 @@ import hashlib
 import json
 import sys
 from collections.abc import Callable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from functools import cache
 from pathlib import Path, PurePosixPath
 from typing import Any, NamedTuple, cast
@@ -88,6 +88,19 @@ REPO = reports.REPO
 WITNESSES = ROOT / "witnesses/known-best"
 ADOPTED_ON = "2026-10-11"
 NO_LICENCE = "no-licence-published"
+#: The status a packet's licence statement gives its retained certificate: MIT, CC BY 4.0
+#: (the reuse terms Doğa Özden's lab and Kaelan Yim gave for the houses at 204, 260 and
+#: 299, which every packet states first), or none published. Until 5 November 2026 every
+#: statement but MIT read as none (F8 of the senior review of #911).
+LICENCE_STATUSES = (("MIT", "MIT"), ("CC BY 4.0", "CC-BY-4.0"))
+
+
+def licence_status(statement: str) -> str:
+    """The status of a packet's licence statement, read from how the statement begins."""
+    return next(
+        (status for prefix, status in LICENCE_STATUSES if statement.startswith(prefix)),
+        NO_LICENCE,
+    )
 
 
 class HouseError(kernel.ReportError):
@@ -290,7 +303,7 @@ def _packet_origin(packet: Path, n: int) -> Origin:
         revision=source["source_commit"],
         retrieved=str(record["retrieved_at_utc"])[:10],
         author=_declaration(packet)["author"],
-        licence_status="MIT" if str(source["license"]).startswith("MIT") else NO_LICENCE,
+        licence_status=licence_status(str(source["license"])),
         raw_asset_retained=raw,
         retention_policy=RAW_RETENTION if raw else DERIVED_RETENTION,
     )
@@ -303,6 +316,13 @@ def _packet_inputs(packet: Path, numbers: Sequence[int]) -> tuple[Path, ...]:
     paths.extend(_stored(packet, n) for n in numbers)
     paths.extend(dict.fromkeys(_receipt(packet, n) for n in numbers))
     return tuple(paths)
+
+
+def _keyed(source: Source, key: str) -> Source:
+    """A packet's source under a key of its own, its witnesses' origins keyed alike: a
+    release whose certificate at one count is credited under a key of that count's, as
+    issue 914's 175 and 260 are (F13 of the 5 November review)."""
+    return replace(source, key=key, origin=lambda n: replace(source.origin(n), key=key))
 
 
 def packet_source(result: str, name: str, field_counts: Sequence[int] = ()) -> Source:
@@ -438,7 +458,7 @@ def _field_origin(packet: Path, n: int) -> Origin:
         revision=source["source_commit"],
         retrieved=str(record["retrieved_at_utc"])[:10],
         author=declaration["author"],
-        licence_status="MIT" if str(source["license"]).startswith("MIT") else NO_LICENCE,
+        licence_status=licence_status(str(source["license"])),
         raw_asset_retained=False,
         retention_policy=DERIVED_RETENTION,
     )
@@ -568,7 +588,6 @@ def _sources() -> dict[str, Source]:
         packet_source("T-186", "mishapolk-kkt-refinements-2026-10-14"),
         packet_source("T-187", "evand-n146-2026-10-14"),
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
-        packet_source("T-190", "couzo-n237-2026-10-15"),
         field_source("T-193", "evand-exact-cur-2026-10-16", FIELD_COUNTS["T-193"]),
         packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
         packet_source("T-197", "evand-n155-explorer-2026-10-17"),
@@ -577,7 +596,8 @@ def _sources() -> dict[str, Source]:
         packet_source("T-220", "evand-n183-subgrid-2026-10-19"),
         packet_source("T-221", "evand-n308-2026-10-19"),
         packet_source("T-222", "evand-n154-sweep-2026-10-20"),
-        packet_source("T-224", "evand-n270-sweep-2026-10-20"),
+        # The adoption of 9 November 2026 (think-he66) moved 270, T-224's only count, to
+        # T-283, so T-224 is no source here now.
         packet_source("T-225", "evand-regularized-2026-10-20"),
         packet_source("T-229", "mishapolk-issue719-2026-10-22"),
         # The adoption of 31 October 2026 moved 204, T-231's only count, to T-257, so T-231
@@ -585,10 +605,10 @@ def _sources() -> dict[str, Source]:
         # The adoption of 24 October 2026 moved 303, T-230's only count, to T-239, and the
         # adoption of 25 October moved it on to T-240, so neither T-230 nor T-239 is a
         # source here now, as T-196 and T-199 left on 22 October.
-        packet_source("T-240", "couzo-issue763-2026-10-23"),
         # The adoption of 25 October 2026 moved 304 from T-186 to T-242, Evan Daniel's exact
-        # descent of the packing T-241 certifies; T-186 keeps its other houses.
-        packet_source("T-242", "evand-kaggle-descents-2026-10-24"),
+        # descent of the packing T-241 certifies; T-186 keeps its other houses. The adoption
+        # of 5 November 2026 moved 303 from T-240 and 268 and 304 from T-242 to Evan Daniel's
+        # certificates of issue 914 (T-272, T-270, T-273), so neither is a source here now.
         # The adoption of 25 October 2026 moved 182 from T-174 to T-243, Evan Daniel's
         # packing of issue 806 from an L-cut of Francisco Couzo's 211; T-174 keeps its
         # other houses.
@@ -597,15 +617,116 @@ def _sources() -> dict[str, Source]:
         # certificates of issue 844; 172, 204, 260 and 293 to T-257, Evan Daniel's of issue
         # 845; 299 to T-258, his update to issue 824; and 130 to T-259, Mykhailo
         # Polkovskyi's re-solve of Couzo's packing of issue 843.
-        packet_source("T-256", "couzo-issue844-2026-10-28"),
-        packet_source("T-257", "evand-issue845-2026-10-29"),
+        # The adoption of 9 November 2026 (think-he66) moved 172, T-257's last house, to
+        # T-282, so T-257 is no source here now.
         packet_source("T-259", "mishapolk-issue846-2026-10-30"),
         # The adoption of 4 November 2026 moved 299 to T-263 and 204 to T-264, Doğa Özden's
         # further arrangements of issues 893 and 894 of Evan Daniel's T-258 and T-257
         # packings. 299 was T-258's only count, so T-258 is no source here now, as T-231
         # left on 31 October; T-257 still houses 172, 260 and 293.
-        packet_source("T-263", "ozden-s299-upper-bound-2026-11-03"),
-        packet_source("T-264", "ozden-s204-upper-bound-2026-11-03"),
+        # The adoption of 5 November 2026 (think-o7ly) moved 260 to T-265, Kaelan Yim's
+        # further arrangement of issue 895 of Evan Daniel's T-257 packing. The adoption of
+        # issue 914 (think-lrj4) then moved 175, 204, 268, 293, 303 and 304 on 5 November
+        # 2026 and 260 on 6 November 2026 to Evan Daniel's new packings, T-267 to T-273, so
+        # T-264 and T-265 are no source here now; T-257 still houses 172, and T-186 its
+        # other counts. Its 175 and 260 are under keys of their own, whose credits are those
+        # counts' (F13 of the 5 November review), read from the same packet.
+        _keyed(
+            packet_source("T-267", "evand-issue914-2026-11-05"),
+            "[Daniel issue 914 n175 2026-11-05]",
+        ),
+        # The pass of 16 November 2026 (think-0y9m) moved 204, T-268's only house, to JoeGun's
+        # T-306, so T-268 is no source here now.
+        _keyed(
+            packet_source("T-269", "evand-issue914-2026-11-05"),
+            "[Daniel issue 914 n260 2026-11-05]",
+        ),
+        packet_source("T-271", "evand-issue914-2026-11-05"),
+        packet_source("T-273", "evand-issue914-2026-11-05"),
+        # The adoption of 9 November 2026 (think-463r) moved 232 and 307 from T-256, 268 from
+        # T-270, 299 from T-263 and 303 from T-272 to Doğa Özden's further arrangements of
+        # issues 927 to 931, T-275 to T-279, one packet each; T-256, T-263, T-270 and T-272
+        # keep no house here now.
+        # The pass of 16 November 2026 (think-0y9m) moved 232, T-275's only house, to JoeGun's
+        # T-307, so T-275 is no source here now.
+        packet_source("T-277", "ozden-s299-upper-bound-2026-11-09"),
+        packet_source("T-278", "ozden-s303-upper-bound-2026-11-09"),
+        packet_source("T-279", "ozden-s307-upper-bound-2026-11-09"),
+        # The same day's later pass (think-he66) moved 172 from T-257 and 270 from T-224 to
+        # Doğa Özden's further arrangements of issues 935 and 936, T-282 and T-283, one packet
+        # each; T-257 and T-224 keep no house here now.
+        packet_source("T-282", "ozden-s172-upper-bound-2026-11-09"),
+        packet_source("T-283", "ozden-s270-upper-bound-2026-11-09"),
+        # The same day's last pass (think-1goz) moved 199, which no pass had adopted, from
+        # T-127 to Doğa Özden's issue 938, T-282's packing with one L step (T-284).
+        packet_source("T-284", "ozden-s199-upper-bound-2026-11-09"),
+        # Lane L81 of 11 November 2026 (think-xq4o) moved 156, 180, 268 and 269 to Doğa Özden's
+        # issues 943, 944, 945 and 947 (T-287 to T-290), each a new arrangement relative to the
+        # house it replaces, found by transplant search from another count's registry packing.
+        # 268 was T-276's only count, so T-276 is no source here now; T-186 and T-174 still
+        # house other counts. Lane L120 of 12 November moved 269 on from T-290, its only count,
+        # so T-290 is no source here now.
+        packet_source("T-287", "ozden-s156-upper-bound-2026-11-10"),
+        packet_source("T-288", "ozden-s180-upper-bound-2026-11-10"),
+        packet_source("T-289", "ozden-s268-upper-bound-2026-11-10"),
+        # Lane L100 of the same day (think-f65n) moved 179 from T-174 to Doğa Özden's issue
+        # 954 (T-291), a new arrangement relative to T-174's packing, found by a band-design
+        # search from the tilted squares of the registry's 70; T-174 still houses other counts.
+        # Lane L104 of the same day (think-bcfs) moved 132 from T-174 and 157 from the grid to
+        # Joost de Winter's issue 958 (T-292 and T-293), pinwheels he grew from Samanyu-dev's
+        # 109 by cut-and-fill steps, each a new arrangement; T-174 still houses other counts.
+        packet_source("T-292", "de-winter-s132-upper-bound-2026-11-11"),
+        packet_source("T-293", "de-winter-s157-upper-bound-2026-11-11"),
+        # Lane L107 (think-89i7) moved 179 on to the same author's issue 959 (T-294) on 12
+        # November 2026, a further arrangement of T-291's packing. 179 was T-291's only count,
+        # so T-291 is no source here now.
+        packet_source("T-294", "ozden-s179-issue959-2026-11-11"),
+        # Lane L110 (think-my76) moved 237 from T-190 to the same author's issue 960 (T-295)
+        # on 12 November 2026, a new arrangement relative to T-190's packing, found by a
+        # band-design search from two copies of the tilted squares of the registry's 70. 237
+        # was T-190's only count, so T-190 is no source here now.
+        packet_source("T-295", "ozden-s237-upper-bound-2026-11-11"),
+        # Lane L120 of 12 November 2026 (think-s418) moved 269 from T-290 to Doğa Özden's
+        # issue 962 (T-296), a new arrangement relative to his own T-290's packing, found by a
+        # band-design search from tilted squares of the registry's 207 and 70 and his own 179.
+        # 269 was T-290's only count, so T-290 is no source here now. Lane L132 (think-n73d)
+        # moved 269 on to the same author's issue 967 (T-297) in the pass of 13 November 2026,
+        # a new arrangement relative to T-296's packing, from his lab's column-band designer.
+        # 269 was T-296's only count, so T-296 is no source here now.
+        packet_source("T-297", "ozden-s269-upper-bound-2026-11-12"),
+        # Lane L154 of 14 November 2026 (think-g2ax) moved 297 from T-174 to Joost de Winter's
+        # issue 977 (T-299), T-174's layout with a double step in each staircase, a new
+        # arrangement relative to T-174's packing; T-174 still houses other counts.
+        packet_source("T-299", "de-winter-s297-upper-bound-2026-11-14"),
+        # Lane L160 of 14 November 2026 (think-14i2) moved 228 from T-174 to Doğa Özden's issue
+        # 983 (T-300), a new arrangement relative to T-174's packing from his lab's column-band
+        # proposal designer; T-174 still houses other counts. Lane L164 (think-17ex) moved 228
+        # on to Roberto Ono's issue 984 (T-301) in the pass of 15 November 2026, five band
+        # periods cut from Francisco Couzo's n = 404 packing, a new arrangement relative to
+        # T-300's packing. 228 was T-300's only count, so T-300 is no source here now.
+        packet_source("T-301", "ono-issue984-2026-11-14"),
+        # The same lane moved 147, first adopted here, from the case record's own house (the
+        # Kingbird catalogue's 45-degree packing, verified by T-155's exact ceiling) to his
+        # issue 985 (T-302), one band period cut from Evan Daniel's n = 229 packing.
+        packet_source("T-302", "ono-issue985-2026-11-14"),
+        # Lane L170 (think-i8y9) moved 90, first adopted here, from the 10 x 10 grid to
+        # jazivxt's issue 989 (T-303), posted by the account dpre4ai: a window of shifted copies
+        # of a crop of Joost de Winter's 157 (T-293), the first packing below the grid at 90.
+        # Lane L181 (think-32cl) moved 90 on to Joost de Winter's issue 997 (T-304) in the pass
+        # of 16 November 2026, which replaced his issue 996's certificate: T-303's packing as
+        # his local search improved it, jazivxt its finder. 90 was T-303's only count, so
+        # T-303 is no source here now.
+        packet_source("T-304", "de-winter-s90-upper-bound-2026-11-15"),
+        # Lane L187 (think-0y9m) moved 127 and 305 from T-174, 204 from T-268, 232 from T-275
+        # and 264 from T-186 to JoeGun's issue 1001 in the pass of 16 November 2026: Tomáš
+        # Kodaj's public Kaggle packings as JoeGun improved them, each a new arrangement
+        # relative to the house it replaces, one result a count read from one packet. T-174
+        # and T-186 keep their other houses.
+        packet_source("T-305", "joegun-upper-bounds-2026-11-16"),
+        packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
+        packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
+        packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
+        packet_source("T-309", "joegun-upper-bounds-2026-11-16"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -660,13 +781,66 @@ def _sources() -> dict[str, Source]:
 #: Couzo's (T-254). T-231 keeps no house here. The pass of 4 November 2026 adopted Doğa
 #: Özden's further arrangements of issue 893 (T-263) at 299 from T-258 and of issue 894
 #: (T-264) at 204 from T-257, with each packing's finder Evan Daniel; T-258 keeps no house
-#: here.
+#: here. The pass of 5 November 2026 adopted Kaelan Yim's further arrangement of issue 895
+#: (T-265) at 260 from T-257, with the packing's finder Evan Daniel.
+#: The same day's later pass (think-lrj4) adopted Evan Daniel's new packings of issue 914,
+#: T-267, T-268 and T-270 to T-273, at 175 from T-186, 204 from T-264, 268 and 304 from
+#: T-242, 293 from T-257 and 303 from T-240, and the pass of 6 November 2026 T-269 at 260
+#: from T-265; T-240, T-242, T-264 and T-265 keep no house here. The pass of 9 November
+#: 2026 (think-463r) adopted Doğa Özden's further arrangements of issues 927 to 931, T-275
+#: to T-279, at 232 and 307 from T-256, 268 from T-270, 299 from T-263 and 303 from T-272,
+#: each packing's finder its base holder; T-256, T-263, T-270 and T-272 keep no house here.
+#: The same day's later pass (think-he66) adopted his further arrangements of issues 935 and
+#: 936, T-282 and T-283, at 172 from T-257 and 270 from T-224, each packing's finder Evan
+#: Daniel; T-257 and T-224 keep no house here. Its last pass (think-1goz) adopted his issue
+#: 938, T-282's packing with one L step (T-284), at 199, first adopted here, from the case
+#: record's own house, T-127, with T-193 staged there for the writer. Lane L81 of 11 November
+#: (think-xq4o) adopted his issues 943, 944, 945 and 947 at 156 from T-186, 180 and 269 from
+#: T-174 and 268 from his own T-276 (T-287 to T-290), each a new arrangement relative to
+#: the house it replaces, Özden its finder; T-276 keeps no house here; T-186 and T-174
+#: still house other counts. Lane L100 of the same day (think-f65n) adopted his issue 954
+#: (T-291) at 179 from T-174, a new arrangement relative to T-174's packing, Özden its
+#: finder. Lane L104 of the same day (think-bcfs) adopted Joost de Winter's issue 958 at 132
+#: from T-174 and at 157 from the grid (T-292 and T-293), pinwheels grown from Samanyu-dev's
+#: 109, de Winter their finder.
+#: Lane L107 (think-89i7) adopted Doğa Özden's issue 959 (T-294) at 179 in place of T-291
+#: on 12 November 2026, a further arrangement of T-291's packing, Özden its finder still, as
+#: a pass of its own day, so that day's archive keeps 179 as T-291 left it. Lane L110
+#: (think-my76) adopted his issue 960 (T-295) at 237 from T-190 in the same pass, a new
+#: arrangement relative to T-190's packing, Özden its finder; T-190 keeps no house here.
+#: Lane L120 (think-s418) adopted his issue 962 (T-296) at 269 from his own T-290 in the
+#: same pass, a new arrangement relative to T-290's packing, Özden its finder; T-290 keeps
+#: no house here. Lane L132 (think-n73d) adopted his issue 967 (T-297) at 269 in place of
+#: T-296 in the pass of 13 November 2026, a new arrangement relative to T-296's packing,
+#: Özden its finder still; T-296 keeps no house here. Lane L154 (think-g2ax) adopted Joost de
+#: Winter's issue 977 (T-299) at 297 from T-174 in the pass of 14 November 2026, T-174's
+#: layout with a double step in each staircase, a new arrangement relative to T-174's
+#: packing, de Winter its finder; T-174 still houses other counts. Lane L160 (think-14i2)
+#: adopted Doğa Özden's issue 983 (T-300) at 228 from T-174 in the same pass, a new
+#: arrangement relative to T-174's packing, Özden its finder; T-174 still houses other counts.
+#: Lane L164 (think-17ex) adopted Roberto Ono's issue 984 (T-301) at 228 in place of T-300 in
+#: the pass of 15 November 2026, five band periods cut from Francisco Couzo's n = 404
+#: packing, a new arrangement relative to T-300's packing, Ono its finder, and his issue 985
+#: (T-302) at 147, first adopted here, from the case record's own house, one band period cut
+#: from Evan Daniel's n = 229 packing, Ono its finder; T-300 keeps no house here. Lane L170
+#: (think-i8y9) adopted jazivxt's issue 989 (T-303) at 90 in the same pass, first adopted
+#: here, from the 10 x 10 grid, a window of shifted copies of a crop of Joost de Winter's 157,
+#: the first packing below the grid at 90, jazivxt its finder after de Winter. Lane L181
+#: (think-32cl) adopted Joost de Winter's issue 997 (T-304) at 90 in place of T-303 in the
+#: pass of 16 November 2026, T-303's packing as his local search improved it, jazivxt its
+#: finder and de Winter its improver; T-303 keeps no house here. Lane L187 (think-0y9m)
+#: adopted JoeGun's issue 1001 in the same pass, Tomáš Kodaj's public Kaggle packings as
+#: JoeGun improved them, Kodaj their finder and JoeGun their improver, each a new arrangement
+#: relative to the house it replaces: T-305 at 127 and T-309 at 305 from T-174, T-306 at 204
+#: from T-268, T-307 at 232 from T-275 and T-308 at 264 from T-186; T-268 and T-275 keep no
+#: house here, and T-174 and T-186 still house other counts.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
     70: "T-174",
     84: "T-174",
     86: "T-174",
+    90: "T-304",
     102: "T-193",
     103: "T-174",
     105: "T-229",
@@ -674,25 +848,28 @@ ADOPTED: dict[int, str] = {
     110: "T-174",
     123: "T-193",
     126: "T-139",
-    127: "T-174",
+    127: "T-305",
     129: "T-186",
     130: "T-259",
     131: "T-174",
-    132: "T-174",
+    132: "T-292",
     146: "T-187",
+    147: "T-302",
     153: "T-174",
     154: "T-222",
     155: "T-197",
-    156: "T-186",
-    172: "T-257",
-    175: "T-186",
+    156: "T-287",
+    157: "T-293",
+    172: "T-282",
+    175: "T-267",
     176: "T-186",
-    179: "T-174",
-    180: "T-174",
+    179: "T-294",
+    180: "T-288",
     181: "T-174",
     182: "T-243",
     183: "T-220",
-    204: "T-264",
+    199: "T-284",
+    204: "T-306",
     206: "T-174",
     207: "T-174",
     208: "T-174",
@@ -700,39 +877,39 @@ ADOPTED: dict[int, str] = {
     210: "T-174",
     211: "T-188",
     227: "T-225",
-    228: "T-174",
+    228: "T-301",
     229: "T-225",
-    232: "T-256",
+    232: "T-307",
     236: "T-218",
-    237: "T-190",
+    237: "T-295",
     238: "T-174",
     239: "T-174",
     240: "T-174",
     241: "T-182",
     258: "T-193",
     259: "T-193",
-    260: "T-257",
+    260: "T-269",
     261: "T-174",
     263: "T-174",
-    264: "T-186",
+    264: "T-308",
     267: "T-134",
-    268: "T-242",
-    269: "T-174",
-    270: "T-224",
+    268: "T-289",
+    269: "T-297",
+    270: "T-283",
     271: "T-219",
     272: "T-174",
     273: "T-174",
     292: "T-146",
-    293: "T-257",
+    293: "T-271",
     295: "T-193",
-    297: "T-174",
-    299: "T-263",
+    297: "T-299",
+    299: "T-277",
     302: "T-193",
-    303: "T-240",
-    304: "T-242",
-    305: "T-174",
+    303: "T-278",
+    304: "T-273",
+    305: "T-309",
     306: "T-174",
-    307: "T-256",
+    307: "T-279",
     308: "T-221",
 }
 NUMBERS = tuple(sorted(ADOPTED))
@@ -836,6 +1013,47 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: T-256 is below T-193's algebraic side, which the writer's bead had staged there.
 #: The pass of 4 November 2026 (think-3guf, think-ybep) adopted that day's stage 4 review:
 #: T-263 at 299 and T-264 at 204.
+#: The pass of 5 November 2026 (think-3guf, think-o7ly) adopted that day's stage 4 review:
+#: T-265 at 260.
+#: Its later pass (think-3guf, think-lrj4) adopted that day's second stage 4 review at six
+#: counts: T-267, T-268 and T-270 to T-273 at 175, 204, 268, 293, 303 and 304.
+#: The pass of 6 November 2026 (think-3guf, think-lrj4) adopted the same review's T-269 at
+#: 260, in the same pull request: the pass of 5 November had already moved 260 (T-265), and
+#: a day's archive holds one prior state a count, as at 268 on 25 and 26 October.
+#: The pass of 12 November 2026 (think-3guf, think-89i7) adopted T-294 at 179, Doğa Özden's
+#: issue 959, from his own T-291: the pass of 11 November had already moved 179 (lane L100,
+#: think-f65n), and a day's archive holds one prior state a count, as at 260 and 268.
+#: The same day's lane L110 (think-3guf, think-my76) adopted T-295 at 237, Doğa Özden's
+#: issue 960, from T-190; its import was made on 11 November, but it lands on 12 November,
+#: so it joins that day's pass, whose archive takes a row for 237. The same day's lane L120
+#: (think-3guf, think-s418) adopted T-296 at 269, Doğa Özden's issue 962, from his own T-290,
+#: which the pass of 11 November had adopted, so that day's archive takes a row for 269 too.
+#: The pass of 13 November 2026 (think-3guf, think-n73d) adopted T-297 at 269, Doğa Özden's
+#: issue 967, from his own T-296: the pass of 12 November had already moved 269 (lane L120),
+#: and a day's archive holds one prior state a count, as at 179, 260 and 268. It is dated by
+#: the day its pull request can merge at the earliest; lane L132 made it on 12 November.
+#: The pass of 14 November 2026 (think-3guf, think-g2ax) adopted T-299 at 297, Joost de
+#: Winter's issue 977, from T-174, whose house 297 had been since the pass of 17 October.
+#: The same day's lane L160 (think-3guf, think-14i2) adopted T-300 at 228, Doğa Özden's issue
+#: 983, from T-174, whose house 228 had also been since the pass of 17 October; 228 is
+#: another count, so that day's archive takes a row for it beside 297's.
+#: The pass of 15 November 2026 (think-3guf, think-17ex) adopted T-301 at 228, Roberto Ono's
+#: issue 984, from T-300: the pass of 14 November had already moved 228 (lane L160), and a
+#: day's archive holds one prior state a count, as at 179, 260, 268 and 269. The same pass
+#: adopted T-302 at 147, his issue 985, from the case record's own house, which no pass had
+#: adopted before. Lane L164 made both on 14 November and adopted them on 15 November.
+#: Lane L170 (think-3guf, think-i8y9) adopted T-303 at 90 in the same pass of 15 November,
+#: jazivxt's issue 989, from the 10 x 10 grid, which no pass had adopted before; 90 is another
+#: count, so that day's archive takes a row for it beside 147's and 228's.
+#: The pass of 16 November 2026 (think-3guf, think-32cl) adopted T-304 at 90, Joost de
+#: Winter's issue 997, which replaced his issue 996's certificate, from T-303: the pass of 15
+#: November had already moved 90 (lane L170), and a day's archive holds one prior state a
+#: count, as at 179, 228, 260, 268 and 269. Lane L181 made the import on 15 November and the
+#: adoption on 16 November. The same pass (think-3guf, think-0y9m, lane L187) adopted JoeGun's
+#: issue 1001, Tomáš Kodaj's public Kaggle packings as JoeGun improved them, at 127 and 305
+#: from T-174 (T-305, T-309), 204 from T-268 (T-306), 232 from T-275 (T-307) and 264 from
+#: T-186 (T-308); none of the five had moved that day, so the day's archive takes a row for
+#: each beside 90's.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -917,6 +1135,15 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-26": frozenset({268}),
     "2026-10-31": frozenset({130, 172, 204, 232, 260, 293, 299, 307}),
     "2026-11-04": frozenset({204, 299}),
+    "2026-11-05": frozenset({175, 204, 260, 268, 293, 303, 304}),
+    "2026-11-06": frozenset({260}),
+    "2026-11-09": frozenset({172, 199, 232, 268, 270, 299, 303, 307}),
+    "2026-11-11": frozenset({132, 156, 157, 179, 180, 268, 269}),
+    "2026-11-12": frozenset({179, 237, 269}),
+    "2026-11-13": frozenset({269}),
+    "2026-11-14": frozenset({228, 297}),
+    "2026-11-15": frozenset({90, 147, 228}),
+    "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
 }
 
 

@@ -1,0 +1,4943 @@
+{
+ "program": "l101_selftest.py",
+ "cases": 987,
+ "failed": [],
+ "verdict": "PASSED",
+ "results": [
+  {
+   "case": "pair edge contact [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge contact [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge apart [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair edge past [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair edge past [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner contact [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner contact [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner apart [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair corner past [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair corner past [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,1000000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex contact [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex apart [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair 3-4-5 vertex past [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1000000000000000000000000000000), 'overlap', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "pair duplicate [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair duplicate [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-1, 1), 'overlap', mpq(1,1))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (3/5, 4/5) [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [as-given/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [as-given/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [as-given/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [as-given/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [as-given/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [as-given/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [as-given/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [as-given/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [rotated-start/as-given/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [rotated-start/as-given/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [rotated-start/rotated-start/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [rotated-start/rotated-start/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [rotated-start/reversed/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [rotated-start/reversed/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [rotated-start/reversed-rotated/ab]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "pair concentric (4/5, 3/5) [rotated-start/reversed-rotated/ba]",
+   "ok": true,
+   "detail": "('overlap', Fraction(-6, 5), 'overlap', mpq(5,6))"
+  },
+  {
+   "case": "wall left contact [as-given]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall left contact [rotated-start]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall left contact [reversed]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall left contact [reversed-rotated]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall left past [as-given]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "wall left past [rotated-start]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "wall left past [reversed]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "wall left past [reversed-rotated]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "wall left short [as-given]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "wall left short [rotated-start]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "wall left short [reversed]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "wall left short [reversed-rotated]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "wall bottom contact [as-given]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall bottom contact [rotated-start]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall bottom contact [reversed]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall bottom contact [reversed-rotated]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall right contact [as-given]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall right contact [rotated-start]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall right contact [reversed]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall right contact [reversed-rotated]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall right past [as-given]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "wall right past [rotated-start]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "wall right past [reversed]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "wall right past [reversed-rotated]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,1000000000000000000000000000000))"
+  },
+  {
+   "case": "wall top contact [as-given]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall top contact [rotated-start]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall top contact [reversed]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall top contact [reversed-rotated]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top contact [as-given]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top contact [rotated-start]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top contact [reversed]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top contact [reversed-rotated]",
+   "ok": true,
+   "detail": "('contact', Fraction(0, 1), 'contact', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top short [as-given]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top short [rotated-start]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top short [reversed]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top short [reversed-rotated]",
+   "ok": true,
+   "detail": "('clear', Fraction(1, 1000000000000000000000000000000), 'clear', mpq(0,1))"
+  },
+  {
+   "case": "wall 3-4-5 top past [as-given]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "wall 3-4-5 top past [rotated-start]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "wall 3-4-5 top past [reversed]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "wall 3-4-5 top past [reversed-rotated]",
+   "ok": true,
+   "detail": "('outside', Fraction(-1, 1000000000000000000000000000000), 'outside', mpq(1,960000000000000000000000000000000000000000000000000000000000))"
+  },
+  {
+   "case": "containment inside",
+   "ok": true,
+   "detail": "1"
+  },
+  {
+   "case": "containment half out",
+   "ok": true,
+   "detail": "1/2"
+  },
+  {
+   "case": "refuse shape rhombus 3-4-5",
+   "ok": true,
+   "detail": "('last edge is not the first turned by a right angle', 'area is not 1')"
+  },
+  {
+   "case": "refuse shape bowtie order",
+   "ok": true,
+   "detail": "('first edge is not of length 1', 'an edge is not of squared length 1')"
+  },
+  {
+   "case": "refuse shape rectangle 1 x (1 + d)",
+   "ok": true,
+   "detail": "('last edge is not the first turned by a right angle', 'an edge is not of squared length 1')"
+  },
+  {
+   "case": "refuse shape third corner off by d",
+   "ok": true,
+   "detail": "('third corner is not p0 + u + v', 'an edge is not of squared length 1')"
+  },
+  {
+   "case": "refuse shape side 2",
+   "ok": true,
+   "detail": "('first edge is not of length 1', 'an edge is not of squared length 1')"
+  },
+  {
+   "case": "refuse shape one point",
+   "ok": true,
+   "detail": "('first edge is not of length 1', 'an edge is not of squared length 1')"
+  },
+  {
+   "case": "refuse shape 3-4-5 third corner off by d",
+   "ok": true,
+   "detail": "('third corner is not p0 + u + v', 'an edge is not of squared length 1')"
+  },
+  {
+   "case": "random pair 0",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 1",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 2",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 3",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 4",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 5",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 6",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 7",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 8",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 9",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 10",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 11",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 12",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 13",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 14",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 15",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 16",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 17",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 18",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 19",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 20",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 21",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 22",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 23",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 24",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 25",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 26",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 27",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 28",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 29",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 30",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 31",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 32",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 33",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 34",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 35",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 36",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 37",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 38",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 39",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 40",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 41",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 42",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 43",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 44",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 45",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 46",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 47",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 48",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 49",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 50",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 51",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 52",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 53",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 54",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 55",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 56",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 57",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 58",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 59",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 60",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 61",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 62",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 63",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 64",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 65",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 66",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 67",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 68",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 69",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 70",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 71",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 72",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 73",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 74",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 75",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 76",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 77",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 78",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 79",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 80",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 81",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 82",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 83",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 84",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 85",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 86",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 87",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 88",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 89",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 90",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 91",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 92",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 93",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 94",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 95",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 96",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 97",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 98",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 99",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 100",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 101",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 102",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 103",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 104",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 105",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 106",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 107",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 108",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 109",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 110",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 111",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 112",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 113",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 114",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 115",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 116",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 117",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 118",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 119",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 120",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 121",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 122",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 123",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 124",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 125",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 126",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 127",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 128",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 129",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 130",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 131",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 132",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 133",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 134",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 135",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 136",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 137",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 138",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 139",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 140",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 141",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 142",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 143",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 144",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 145",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 146",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 147",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 148",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 149",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 150",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 151",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 152",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 153",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 154",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 155",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 156",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 157",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 158",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 159",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 160",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 161",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 162",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 163",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 164",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 165",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 166",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 167",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 168",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 169",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 170",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 171",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 172",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 173",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 174",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 175",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 176",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 177",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 178",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 179",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 180",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 181",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 182",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 183",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 184",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 185",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 186",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 187",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 188",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 189",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 190",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 191",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 192",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 193",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 194",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 195",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 196",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 197",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 198",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 199",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 200",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 201",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 202",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 203",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 204",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 205",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 206",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 207",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 208",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 209",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 210",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 211",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 212",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 213",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 214",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 215",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 216",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 217",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 218",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 219",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 220",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 221",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 222",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 223",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 224",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 225",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 226",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 227",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 228",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 229",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 230",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 231",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 232",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 233",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 234",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 235",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 236",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 237",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 238",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 239",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 240",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 241",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 242",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 243",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 244",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 245",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 246",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 247",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 248",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 249",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 250",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 251",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 252",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 253",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 254",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 255",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 256",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 257",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 258",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 259",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 260",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 261",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 262",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 263",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 264",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 265",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 266",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 267",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 268",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 269",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 270",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 271",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 272",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 273",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 274",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 275",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 276",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 277",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 278",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 279",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 280",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 281",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 282",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 283",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 284",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 285",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 286",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 287",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 288",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 289",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 290",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 291",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 292",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 293",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 294",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 295",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 296",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 297",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 298",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 299",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 300",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 301",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 302",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 303",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 304",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 305",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 306",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 307",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 308",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 309",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 310",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 311",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 312",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 313",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 314",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 315",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 316",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 317",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 318",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 319",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 320",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 321",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 322",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 323",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 324",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 325",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 326",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 327",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 328",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 329",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 330",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 331",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 332",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 333",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 334",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 335",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 336",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 337",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 338",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 339",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 340",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 341",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 342",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 343",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 344",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 345",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 346",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 347",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 348",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 349",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 350",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 351",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 352",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 353",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 354",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 355",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 356",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 357",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 358",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 359",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 360",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 361",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 362",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 363",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 364",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 365",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 366",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 367",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 368",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 369",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 370",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 371",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 372",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 373",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 374",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 375",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 376",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 377",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 378",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 379",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 380",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 381",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 382",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 383",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 384",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 385",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 386",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 387",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 388",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 389",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 390",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 391",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 392",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 393",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 394",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 395",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 396",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 397",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 398",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random pair 399",
+   "ok": true,
+   "detail": "[('contact', 'contact', 'contact', 0.0), ('before', 'clear', 'clear', 1e-30), ('past', 'overlap', 'overlap', -1e-30)]"
+  },
+  {
+   "case": "random wall 0 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 1 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 2 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 3 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 4 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 5 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 6 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 7 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 8 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 9 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 10 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 11 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 12 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 13 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 14 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 15 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 16 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 17 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 18 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 19 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 20 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 21 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 22 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 23 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 24 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 25 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 26 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 27 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 28 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 29 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 30 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 31 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 32 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 33 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 34 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 35 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 36 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 37 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 38 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 39 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 40 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 41 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 42 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 43 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 44 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 45 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 46 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 47 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 48 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 49 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 50 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 51 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 52 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 53 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 54 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 55 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 56 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 57 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 58 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 59 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 60 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 61 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 62 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 63 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 64 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 65 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 66 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 67 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 68 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 69 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 70 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 71 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 72 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 73 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 74 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 75 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 76 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 77 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 78 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 79 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 80 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 81 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 82 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 83 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 84 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 85 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 86 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 87 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 88 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 89 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 90 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 91 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 92 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 93 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 94 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 95 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 96 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 97 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 98 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 99 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 100 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 101 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 102 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 103 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 104 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 105 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 106 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 107 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 108 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 109 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 110 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 111 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 112 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 113 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 114 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 115 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 116 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 117 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 118 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 119 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 120 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 121 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 122 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 123 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 124 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 125 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 126 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 127 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 128 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 129 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 130 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 131 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 132 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 133 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 134 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 135 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 136 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 137 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 138 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 139 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 140 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 141 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 142 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 143 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 144 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 145 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 146 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 147 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 148 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 149 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 150 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 151 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 152 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 153 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 154 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 155 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 156 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 157 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 158 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 159 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 160 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 161 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 162 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 163 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 164 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 165 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 166 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 167 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 168 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 169 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 170 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 171 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 172 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 173 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 174 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 175 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 176 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 177 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 178 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 179 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 180 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 181 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 182 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 183 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 184 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 185 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 186 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 187 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 188 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 189 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 190 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 191 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 192 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 193 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 194 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 195 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 196 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 197 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 198 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 199 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 200 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 201 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 202 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 203 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 204 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 205 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 206 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 207 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 208 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 209 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 210 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 211 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 212 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 213 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 214 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 215 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 216 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 217 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 218 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 219 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 220 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 221 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 222 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 223 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 224 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 225 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 226 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 227 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 228 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 229 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 230 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 231 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 232 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 233 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 234 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 235 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 236 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 237 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 238 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 239 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 240 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 241 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 242 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 243 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 244 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 245 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 246 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 247 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 248 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 249 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 250 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 251 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 252 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 253 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 254 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 255 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 256 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 257 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 258 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 259 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 260 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 261 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 262 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 263 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 264 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 265 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 266 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 267 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 268 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 269 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 270 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 271 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 272 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 273 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 274 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 275 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 276 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 277 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 278 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 279 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 280 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 281 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 282 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 283 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 284 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 285 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 286 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 287 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 288 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 289 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 290 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 291 right",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 292 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 293 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 294 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 295 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 296 top",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 297 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 298 left",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "random wall 299 bottom",
+   "ok": true,
+   "detail": "[('at', 'contact', 'contact'), ('past', 'outside', 'outside'), ('short', 'clear', 'clear')]"
+  },
+  {
+   "case": "reader accepts base",
+   "ok": true,
+   "detail": "(5, 2)"
+  },
+  {
+   "case": "reader accepts base without twin",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "case": "reader refuses wrong contract",
+   "ok": true,
+   "detail": "softschema.contract: 'packing.squares:Witness/v1' is not 'packing.squares:Witness/v2'"
+  },
+  {
+   "case": "reader refuses extra top key",
+   "ok": true,
+   "detail": "top level is not exactly softschema and witness"
+  },
+  {
+   "case": "reader refuses extra softschema key",
+   "ok": true,
+   "detail": "softschema keys"
+  },
+  {
+   "case": "reader refuses missing claim",
+   "ok": true,
+   "detail": "witness keys ['coordinates', 'id', 'n', 'representation', 'scalar', 'side', 'square_size', 'squares']"
+  },
+  {
+   "case": "reader refuses unknown witness key",
+   "ok": true,
+   "detail": "witness keys ['claim', 'coordinates', 'id', 'n', 'note', 'representation', 'scalar', 'side', 'square_size', 'squares']"
+  },
+  {
+   "case": "reader refuses n is 3",
+   "ok": true,
+   "detail": "witness.n: 3 is not 2"
+  },
+  {
+   "case": "reader refuses n as string",
+   "ok": true,
+   "detail": "witness.n: '2' is not 2"
+  },
+  {
+   "case": "reader refuses square_size 2",
+   "ok": true,
+   "detail": "witness.square_size: '2' is not '1'"
+  },
+  {
+   "case": "reader refuses representation center-angle",
+   "ok": true,
+   "detail": "witness.representation: 'center-angle' is not 'corners'"
+  },
+  {
+   "case": "reader refuses scalar kind decimal",
+   "ok": true,
+   "detail": "witness.scalar: {'kind': 'decimal'} is not {'kind': 'rational'}"
+  },
+  {
+   "case": "reader refuses origin container-center",
+   "ok": true,
+   "detail": "witness.coordinates: {'origin': 'container-center', 'axes': 'x-right-y-up', 'angle_unit': 'not-applicable'} is not {'origin': 'lower-left', 'axes': 'x-right-y-up', 'angle_unit': 'not-applicable'}"
+  },
+  {
+   "case": "reader refuses angle unit degrees",
+   "ok": true,
+   "detail": "witness.coordinates: {'origin': 'lower-left', 'axes': 'x-right-y-up', 'angle_unit': 'degrees'} is not {'origin': 'lower-left', 'axes': 'x-right-y-up', 'angle_unit': 'not-applicable'}"
+  },
+  {
+   "case": "reader refuses side 10/4",
+   "ok": true,
+   "detail": "witness.side: not in lowest terms"
+  },
+  {
+   "case": "reader refuses side 5/1",
+   "ok": true,
+   "detail": "witness.side: denominator 1 written"
+  },
+  {
+   "case": "reader refuses side 0",
+   "ok": true,
+   "detail": "witness.side is not positive"
+  },
+  {
+   "case": "reader refuses side negative",
+   "ok": true,
+   "detail": "witness.side is not positive"
+  },
+  {
+   "case": "reader refuses side decimal",
+   "ok": true,
+   "detail": "witness.side: '2.5' is not p or p/q"
+  },
+  {
+   "case": "reader refuses side with plus",
+   "ok": true,
+   "detail": "witness.side: '+5/2' is not p or p/q"
+  },
+  {
+   "case": "reader refuses side leading zero",
+   "ok": true,
+   "detail": "witness.side: '05/2' is not p or p/q"
+  },
+  {
+   "case": "reader refuses side minus zero",
+   "ok": true,
+   "detail": "witness.side: '-0' is not p or p/q"
+  },
+  {
+   "case": "reader refuses side as int",
+   "ok": true,
+   "detail": "witness.side: scalar is int, not a string"
+  },
+  {
+   "case": "reader refuses one square",
+   "ok": true,
+   "detail": "witness.squares holds 1 entries, not 2"
+  },
+  {
+   "case": "reader refuses ids reversed",
+   "ok": true,
+   "detail": "squares[0]: id 2 is not 1"
+  },
+  {
+   "case": "reader refuses id repeated",
+   "ok": true,
+   "detail": "squares[1]: id 1 is not 2"
+  },
+  {
+   "case": "reader refuses id as string",
+   "ok": true,
+   "detail": "squares[0]: id '1' is not 1"
+  },
+  {
+   "case": "reader refuses square extra key",
+   "ok": true,
+   "detail": "squares[0]: keys are not exactly id and corners"
+  },
+  {
+   "case": "reader refuses three corners",
+   "ok": true,
+   "detail": "squares[0]: corners is not a list of four"
+  },
+  {
+   "case": "reader refuses point of three",
+   "ok": true,
+   "detail": "squares[0].corners[0]: not a pair"
+  },
+  {
+   "case": "reader refuses corner 2/4",
+   "ok": true,
+   "detail": "squares[0].corners[1][0]: not in lowest terms"
+  },
+  {
+   "case": "reader refuses corner as int",
+   "ok": true,
+   "detail": "squares[0].corners[1][0]: scalar is int, not a string"
+  },
+  {
+   "case": "reader refuses corner denominator zero",
+   "ok": true,
+   "detail": "squares[0].corners[1][0]: '1/0' is not p or p/q"
+  },
+  {
+   "case": "reader refuses corner with space",
+   "ok": true,
+   "detail": "squares[0].corners[1][0]: '1 ' is not p or p/q"
+  },
+  {
+   "case": "reader refuses twin differs in one digit",
+   "ok": true,
+   "detail": "JSON twin does not hold the same tree as the YAML"
+  },
+  {
+   "case": "reader refuses twin with float",
+   "ok": true,
+   "detail": "JSON float 2.0"
+  },
+  {
+   "case": "reader refuses twin with duplicate key",
+   "ok": true,
+   "detail": "JSON duplicate key 'n'"
+  },
+  {
+   "case": "reader refuses twin with true for n",
+   "ok": true,
+   "detail": "JSON twin does not hold the same tree as the YAML"
+  },
+  {
+   "case": "reader refuses yaml duplicate key",
+   "ok": true,
+   "detail": "$.witness: duplicate key 'n'"
+  },
+  {
+   "case": "reader refuses yaml alias",
+   "ok": true,
+   "detail": "YAML anchor"
+  },
+  {
+   "case": "reader refuses yaml two documents",
+   "ok": true,
+   "detail": "YAML: expected a single document in the stream\n  in \"<unicode string>\", line 1, column 1:\n    softschema:\n    ^\nbut found another document\n  in \"<unicode string>\", line 43, column 1:\n    ---\n    ^"
+  },
+  {
+   "case": "reader refuses yaml float n",
+   "ok": true,
+   "detail": "$.witness.n: scalar tag tag:yaml.org,2002:float"
+  },
+  {
+   "case": "reader refuses yaml bool n",
+   "ok": true,
+   "detail": "$.witness.n: scalar tag tag:yaml.org,2002:bool"
+  },
+  {
+   "case": "reader refuses yaml tagged scalar",
+   "ok": true,
+   "detail": "$.witness.side: scalar tag tag:yaml.org,2002:binary"
+  },
+  {
+   "case": "reader refuses yaml octal-looking n",
+   "ok": true,
+   "detail": "witness.n: '0o2' is not 2"
+  },
+  {
+   "case": "reader refuses yaml unquoted 0 scalar",
+   "ok": true,
+   "detail": "squares[0].corners[0][0]: scalar is int, not a string"
+  }
+ ]
+}

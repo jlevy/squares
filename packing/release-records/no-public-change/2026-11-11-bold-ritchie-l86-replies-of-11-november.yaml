@@ -1,0 +1,22 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L86 of 11 November: the final replies that closed #935, #936 and #938 are
+  recorded, each stating its register entry (T-282, T-283, T-284) at V3/C3, confirmed and
+  current, with its three mapped evidence ids, and each issue is recorded closed, read through
+  its reply; #938's result now lists E-ozden-938-review-exact-feasibility, which T-284 already
+  cites. The follow-ups on the closed #845, #703 and #438 are recorded as stating T-257 and
+  T-224 at V3/C3, confirmed and superseded, and T-127 at V3/C3, confirmed and current, the
+  12 October follow-up on #438 marked outdated. The import replies on #939 and #946 are
+  recorded as stating T-285 and T-286 at V0/C1, reviewed and pending adoption; both issues
+  stay open and blocked for the owner. No result, rung, side, bound, mark or credit changes.
+  Against main 9fd466fe1 (#948): rendered by devtools.compare_paper_renders into empty site
+  directories, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
+  tree and once with that main's result-requests.yaml swapped in: 43 files each, all
+  byte-identical across the three. No PDF was printed; it prints from that HTML. The paper
+  keeps its version, v0.2.7.

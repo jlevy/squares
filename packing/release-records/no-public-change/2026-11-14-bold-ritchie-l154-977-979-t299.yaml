@@ -1,0 +1,50 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/site_resources.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L154 of 14 November (think-g2ax): Joost de Winter's issue 977 is retained,
+  replayed and registered as T-299, the stage 4 review of it and of issue 979 (L153) is
+  mapped, and the case adopts it at 297 in place of T-174 in the pass of 14 November, with
+  its credit, the house writer's prose and source, the settlement it lapses, the bound
+  citations, the composite figure, the gate's rigidity totals, the importer's new witness
+  reader and packet, the other-projects card, the requests entries for #977 and #979 and the
+  coverage text and beyond-horizon rows at 332 and 409 that follow. No paper prints that
+  count, these records or that card. Against origin/main da5091505 (#978):
+  devtools.compare_paper_renders rendered each paper into empty site directories, the math
+  passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that
+  main's copies of the eleven paths above swapped in. The optimality review, the
+  threshold-bound review and the methods survey are byte-identical across the three, 43
+  files each. The explainer's 55 files are deterministic, and only its Markdown and HTML
+  differ from the baseline. Of its substitutions, the register count reads 299 here and 298
+  on that main (registered_results, "one of N results the framework has registered so
+  far"), the novelty count is unchanged (T-299 is previously-published), and the bound
+  citation it reads is n = 11's, which this change does not touch; the composite figure
+  changes only 297's own entry, which is in neither the 1 to 100 composite the explainer
+  reads nor any total. So the change is the live register count, which follows the site's
+  data and is not a revision of the paper, as the L71, L76, L81, L100, L110, L120, L132 and
+  L145 records say. This record read the substitutions rather than diffing a fresh pair of
+  renders. No PDF was printed; each prints from that HTML. Every paper keeps its version:
+  v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

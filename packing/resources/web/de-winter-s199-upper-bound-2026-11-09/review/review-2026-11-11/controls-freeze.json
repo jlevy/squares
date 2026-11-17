@@ -1,0 +1,7 @@
+{
+ "label": "controls plan frozen before deciding either certificate",
+ "frozen_at_utc": "2026-11-11T06:22:38Z",
+ "sha256": {
+  "controls-plan.json": "6e5fce1d767f81118a9ab38c7474d6810b757df140422c98a8401b198544cdbd"
+ }
+}

@@ -1,0 +1,22 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+r: 2
+theta_half_tangent: 1/6000
+U_r: 75775001309/8000000125
+searched_box: [4.986, 9.471875015626953, 9.470769487988761, 9.471875015626953]
+status: verified
+stop: None
+nodes: 305
+leaves: 153
+max_depth: 16
+mean_boundary_rectangles: 42.65245901639344
+threshold: 1.0
+least_certified_bound: 1.0002105034073316
+least_bound_box: [8.471971722348776, 8.4720401713694, 9.470769487988761, 9.471875015626953]
+lowest_centre_estimate: 1.0034650294776721
+lowest_centre_estimate_at: (6.498997151877109, 9.471322251807857)
+largest_error_budget: 1.0096951235916214e-09
+E_eta: 1.7054447217409082e-10
+cpu_seconds: 0.09368426000000002
+threshold_exact: 1
+mass_factor: 1
+cpu: user 0.515 s, sys 0.041 s, wall 0.716 s

@@ -1,0 +1,20 @@
+{
+ "store_id": 3180858,
+ "s": 17.633982502105148,
+ "sources": [
+  "kaggle:busyaprime__lb-22-2546533-best-public-packings-fq-hop__submission (busyaprime)",
+  "kaggle:kirilltym__22-2499-cpu-cuda-mps-eda-budget-lp___budget_inputs__public_v28 (kirilltym)",
+  "kaggle:kirilltym__22-2499-cpu-cuda-mps-eda-budget-lp__float64_roundtrip (kirilltym)",
+  "kaggle:kirilltym__22-2499-cpu-cuda-mps-eda-budget-lp__submission (kirilltym)",
+  "kaggle:kmmmvs__squares-dashboard-public-batch-20261103__submission (kmmmvs)",
+  "kaggle:mdmuqtadirfuad__squares-in-squares-certified-method__submission (mdmuqtadirfuad)",
+  "kaggle:nilanjansaha123__certified-merge-projection-quench-gpu-screen__submission (nilanjansaha123)",
+  "pending:#824 (Evan Daniel (evand))",
+  "pending:#845 (Evan Daniel (evand))",
+  "register (Evan Daniel)",
+  "register (Evan Daniel)",
+  "run:runs/compose-audit-1028 (None)"
+ ],
+ "why": "solve failed",
+ "ok": false
+}

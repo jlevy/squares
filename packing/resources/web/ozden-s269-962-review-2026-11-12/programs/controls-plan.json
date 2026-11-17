@@ -1,0 +1,732 @@
+{
+ "program": "l117_make_plan.py",
+ "certificate_sha256": "54b408b2f1b45fc3d0a1330767c8740f0889eecb73f5fcf7888710526dbcc26b",
+ "conventions": "contact is a margin or clearance of exactly 0; past is 1e-30 beyond it; pairs and contacts are 1-based ids; outside lists [square, wall] by both methods",
+ "controls": [
+  {
+   "id": "G1",
+   "what": "square 269 given square 1's corners",
+   "decided_by": "both methods, every square, wall and pair",
+   "expect": {
+    "verdict": "REFUSE",
+    "overlap_pairs": [
+     [
+      1,
+      269
+     ]
+    ],
+    "contact_pairs": [],
+    "least_margin": [
+     1,
+     269,
+     "-1"
+    ],
+    "overlap_area_sum_B": "1",
+    "contacts": [
+     [
+      103,
+      "bottom"
+     ],
+     [
+      155,
+      "top"
+     ],
+     [
+      158,
+      "left"
+     ],
+     [
+      160,
+      "left"
+     ],
+     [
+      161,
+      "left"
+     ],
+     [
+      162,
+      "left"
+     ],
+     [
+      163,
+      "left"
+     ],
+     [
+      164,
+      "left"
+     ],
+     [
+      165,
+      "left"
+     ],
+     [
+      166,
+      "left"
+     ],
+     [
+      167,
+      "left"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "G2",
+   "what": "square 1 translated by (S, 0)",
+   "decided_by": "both methods, every square, wall and pair",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     [
+      1,
+      "right"
+     ]
+    ],
+    "centre_outside_B": [
+     1
+    ],
+    "overlap_pairs": [],
+    "contact_pairs": [],
+    "contacts": [
+     [
+      103,
+      "bottom"
+     ],
+     [
+      155,
+      "top"
+     ],
+     [
+      158,
+      "left"
+     ],
+     [
+      160,
+      "left"
+     ],
+     [
+      161,
+      "left"
+     ],
+     [
+      162,
+      "left"
+     ],
+     [
+      163,
+      "left"
+     ],
+     [
+      164,
+      "left"
+     ],
+     [
+      165,
+      "left"
+     ],
+     [
+      166,
+      "left"
+     ],
+     [
+      167,
+      "left"
+     ]
+    ]
+   },
+   "basis": "square 1 clears the left wall by 1.34820e+1, so the moved square lies strictly right of x = S"
+  },
+  {
+   "id": "G3",
+   "what": "square 269's entry deleted, in the YAML and the twin",
+   "decided_by": "the reader",
+   "expect": {
+    "refused_for": "268 squares for n = 269"
+   }
+  },
+  {
+   "id": "G4",
+   "what": "square 269's id set to 1, in the YAML and the twin",
+   "decided_by": "the reader",
+   "expect": {
+    "refused_for": "square 269 id"
+   }
+  },
+  {
+   "id": "G5",
+   "what": "square 1's third corner moved 1e-30 in x",
+   "decided_by": "both methods, every square, wall and pair",
+   "expect": {
+    "verdict": "REFUSE",
+    "not_unit_A": [
+     1
+    ],
+    "not_unit_B": [
+     1
+    ]
+   }
+  },
+  {
+   "id": "G6",
+   "what": "every square reflected in its own horizontal centre line (the rotation read the other way)",
+   "decided_by": "both methods, every square, wall and pair",
+   "expect": {
+    "verdict": "REFUSE",
+    "unit_both": 269,
+    "clockwise": 269,
+    "outside": [],
+    "contacts": [
+     [
+      103,
+      "bottom"
+     ],
+     [
+      155,
+      "top"
+     ],
+     [
+      158,
+      "left"
+     ],
+     [
+      160,
+      "left"
+     ],
+     [
+      161,
+      "left"
+     ],
+     [
+      162,
+      "left"
+     ],
+     [
+      163,
+      "left"
+     ],
+     [
+      164,
+      "left"
+     ],
+     [
+      165,
+      "left"
+     ],
+     [
+      166,
+      "left"
+     ],
+     [
+      167,
+      "left"
+     ]
+    ],
+    "overlap_pairs": "non-empty, the same by both methods",
+    "class_disagreements": 0
+   }
+  },
+  {
+   "id": "G7",
+   "what": "the twin's side altered in its last digit (twin only)",
+   "decided_by": "the reader",
+   "expect": {
+    "refused_for": "json twin differs"
+   }
+  },
+  {
+   "id": "G8",
+   "what": "every corner transposed, (x, y) to (y, x)",
+   "decided_by": "both methods, every square, wall and pair",
+   "expect": {
+    "verdict": "ACCEPT",
+    "clockwise": 269,
+    "contacts": [
+     [
+      103,
+      "left"
+     ],
+     [
+      155,
+      "right"
+     ],
+     [
+      158,
+      "bottom"
+     ],
+     [
+      160,
+      "bottom"
+     ],
+     [
+      161,
+      "bottom"
+     ],
+     [
+      162,
+      "bottom"
+     ],
+     [
+      163,
+      "bottom"
+     ],
+     [
+      164,
+      "bottom"
+     ],
+     [
+      165,
+      "bottom"
+     ],
+     [
+      166,
+      "bottom"
+     ],
+     [
+      167,
+      "bottom"
+     ]
+    ],
+    "margin_list_sha256": "9b37ea0f5f54e676e4ea90ff3c56387a1782c24a06b2d6ef18a324778be91fbd",
+    "least_margin": [
+     10,
+     13,
+     "387347101583422782299256939949800674555068193933259851121560045736101753/1904299625995139896271881812123696009425574823918241133272820798798491240000000000000"
+    ]
+   }
+  },
+  {
+   "id": "G9",
+   "what": "the side written as 2p/2q, in the YAML and the twin",
+   "decided_by": "the reader",
+   "expect": {
+    "refused_for": "scalar not in lowest terms"
+   }
+  },
+  {
+   "id": "G10",
+   "what": "every square listed from its second corner",
+   "decided_by": "both methods, every square, wall and pair",
+   "expect": {
+    "verdict": "ACCEPT",
+    "counterclockwise": 269,
+    "contacts": [
+     [
+      103,
+      "bottom"
+     ],
+     [
+      155,
+      "top"
+     ],
+     [
+      158,
+      "left"
+     ],
+     [
+      160,
+      "left"
+     ],
+     [
+      161,
+      "left"
+     ],
+     [
+      162,
+      "left"
+     ],
+     [
+      163,
+      "left"
+     ],
+     [
+      164,
+      "left"
+     ],
+     [
+      165,
+      "left"
+     ],
+     [
+      166,
+      "left"
+     ],
+     [
+      167,
+      "left"
+     ]
+    ],
+    "margin_list_sha256": "9b37ea0f5f54e676e4ea90ff3c56387a1782c24a06b2d6ef18a324778be91fbd",
+    "least_margin": [
+     10,
+     13,
+     "387347101583422782299256939949800674555068193933259851121560045736101753/1904299625995139896271881812123696009425574823918241133272820798798491240000000000000"
+    ]
+   }
+  },
+  {
+   "id": "G11",
+   "what": "every square listed in the reverse cyclic order",
+   "decided_by": "both methods, every square, wall and pair",
+   "expect": {
+    "verdict": "ACCEPT",
+    "clockwise": 269,
+    "contacts": [
+     [
+      103,
+      "bottom"
+     ],
+     [
+      155,
+      "top"
+     ],
+     [
+      158,
+      "left"
+     ],
+     [
+      160,
+      "left"
+     ],
+     [
+      161,
+      "left"
+     ],
+     [
+      162,
+      "left"
+     ],
+     [
+      163,
+      "left"
+     ],
+     [
+      164,
+      "left"
+     ],
+     [
+      165,
+      "left"
+     ],
+     [
+      166,
+      "left"
+     ],
+     [
+      167,
+      "left"
+     ]
+    ],
+    "margin_list_sha256": "9b37ea0f5f54e676e4ea90ff3c56387a1782c24a06b2d6ef18a324778be91fbd",
+    "least_margin": [
+     10,
+     13,
+     "387347101583422782299256939949800674555068193933259851121560045736101753/1904299625995139896271881812123696009425574823918241133272820798798491240000000000000"
+    ]
+   }
+  },
+  {
+   "id": "G12",
+   "what": "the whole packing turned a quarter about the box centre, (x, y) to (S - y, x)",
+   "decided_by": "both methods, every square, wall and pair",
+   "expect": {
+    "verdict": "ACCEPT",
+    "counterclockwise": 269,
+    "contacts": [
+     [
+      103,
+      "right"
+     ],
+     [
+      155,
+      "left"
+     ],
+     [
+      158,
+      "bottom"
+     ],
+     [
+      160,
+      "bottom"
+     ],
+     [
+      161,
+      "bottom"
+     ],
+     [
+      162,
+      "bottom"
+     ],
+     [
+      163,
+      "bottom"
+     ],
+     [
+      164,
+      "bottom"
+     ],
+     [
+      165,
+      "bottom"
+     ],
+     [
+      166,
+      "bottom"
+     ],
+     [
+      167,
+      "bottom"
+     ]
+    ],
+    "margin_list_sha256": "9b37ea0f5f54e676e4ea90ff3c56387a1782c24a06b2d6ef18a324778be91fbd",
+    "least_margin": [
+     10,
+     13,
+     "387347101583422782299256939949800674555068193933259851121560045736101753/1904299625995139896271881812123696009425574823918241133272820798798491240000000000000"
+    ]
+   }
+  },
+  {
+   "id": "S1a",
+   "what": "the side lowered by 1/q, one unit of its own last place",
+   "decided_by": "both methods, every square's four walls (no pair depends on the side)",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     [
+      155,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1b",
+   "what": "the side lowered by 1e-30",
+   "decided_by": "both methods, every square's four walls (no pair depends on the side)",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     [
+      155,
+      "top"
+     ]
+    ]
+   },
+   "basis": "no positive far-wall clearance is below 1e-30; the least is [155, 'right', '2.79252e-16']"
+  },
+  {
+   "id": "S1c",
+   "what": "the side set to its 12-place floor, 16.899469075855",
+   "decided_by": "both methods, every square's four walls (no pair depends on the side)",
+   "expect": {
+    "verdict": "REFUSE",
+    "outside": [
+     [
+      141,
+      "right"
+     ],
+     [
+      142,
+      "right"
+     ],
+     [
+      143,
+      "right"
+     ],
+     [
+      144,
+      "right"
+     ],
+     [
+      145,
+      "right"
+     ],
+     [
+      146,
+      "right"
+     ],
+     [
+      147,
+      "right"
+     ],
+     [
+      148,
+      "right"
+     ],
+     [
+      149,
+      "right"
+     ],
+     [
+      155,
+      "right"
+     ],
+     [
+      155,
+      "top"
+     ],
+     [
+      217,
+      "top"
+     ],
+     [
+      227,
+      "top"
+     ],
+     [
+      236,
+      "top"
+     ],
+     [
+      244,
+      "top"
+     ],
+     [
+      251,
+      "top"
+     ],
+     [
+      257,
+      "top"
+     ],
+     [
+      262,
+      "top"
+     ],
+     [
+      266,
+      "top"
+     ]
+    ]
+   },
+   "basis": "exactly the right and top clearances below the drop of 4.65271e-14"
+  },
+  {
+   "id": "S1d",
+   "what": "the side set to its 12-place ceiling, the claim 16.899469075856",
+   "decided_by": "both methods, every square's four walls (no pair depends on the side)",
+   "expect": {
+    "verdict": "ACCEPT",
+    "outside": [],
+    "contacts": [
+     [
+      103,
+      "bottom"
+     ],
+     [
+      158,
+      "left"
+     ],
+     [
+      160,
+      "left"
+     ],
+     [
+      161,
+      "left"
+     ],
+     [
+      162,
+      "left"
+     ],
+     [
+      163,
+      "left"
+     ],
+     [
+      164,
+      "left"
+     ],
+     [
+      165,
+      "left"
+     ],
+     [
+      166,
+      "left"
+     ],
+     [
+      167,
+      "left"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S4c",
+   "what": "square 13 moved toward square 10 along their centre line to exact contact",
+   "decided_by": "both methods, every pair of square 13 and every square's walls",
+   "expect": {
+    "verdict": "ACCEPT",
+    "contact_pairs": [
+     [
+      10,
+      13
+     ]
+    ],
+    "overlap_pairs": [],
+    "least_margin": [
+     10,
+     13,
+     "0"
+    ],
+    "outside": []
+   },
+   "basis": {
+    "binding_axes": 2,
+    "move_length_sci": "2.05404e-13",
+    "move_length_squared_below_every_other_margin_squared": true,
+    "least_other_margin": [
+     11,
+     13,
+     "2.06037e-13"
+    ],
+    "move_length_squared_below_least_clearance_squared": true,
+    "least_clearance": "6.14237e+0",
+    "closed_form_margin_at_contact": "0",
+    "closed_form_margin_past": "-1/1000000000000000000000000000000"
+   }
+  },
+  {
+   "id": "S4p",
+   "what": "the same, 1e-30 past contact",
+   "decided_by": "both methods, every pair of square 13 and every square's walls",
+   "expect": {
+    "verdict": "REFUSE",
+    "contact_pairs": [],
+    "overlap_pairs": [
+     [
+      10,
+      13
+     ]
+    ],
+    "least_margin": [
+     10,
+     13,
+     "-1/1000000000000000000000000000000"
+    ],
+    "outside": []
+   }
+  },
+  {
+   "id": "S5",
+   "what": "every pair below 1e-12 closed along its centre line, the second square moved (pair-level)",
+   "decided_by": "both methods, that pair",
+   "expect": {
+    "pairs": 315,
+    "at_contact": "contact by both, margin exactly 0",
+    "past": "overlap by both, margin exactly -1e-30"
+   }
+  },
+  {
+   "id": "S6",
+   "what": "every square moved to its nearest wall by its clearance, and 1e-30 past (square-level)",
+   "decided_by": "both methods, that square's four walls",
+   "expect": {
+    "squares": 269,
+    "at_contact": "that wall contact by both, clearance exactly 0, no wall outside",
+    "past": "that wall outside by both, clearance exactly -1e-30, no other wall outside"
+   }
+  }
+ ]
+}

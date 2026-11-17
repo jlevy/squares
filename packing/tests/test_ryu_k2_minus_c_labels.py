@@ -8,8 +8,9 @@ hand counts, the arc bounds against dense sampling, the box decisions on the n =
 and on the box that holds the nine-pair configuration, and the exact witness checker.
 The last tests read the receipts the full run left in the
 ``squarepacker-k2-minus-c-2026-10-05`` packet: every box decided once, every one
-certified as labelled, the ten negative controls refused by decision with refuting
-witnesses, and a sample decided again with identical rows after review A of #884.
+certified as labelled and none near the budget of ``MAX_PIECES``, the ten negative
+controls refused by decision under that budget with refuting witnesses, and a sample
+decided again with identical rows after review A of #884.
 """
 
 from __future__ import annotations
@@ -149,6 +150,7 @@ def test_the_sharp_box_is_certified_at_9_and_refused_at_8() -> None:
     assert accepted.max_bound == 9
     refused = labels.certify(box, labels.ALLOWED["closed"], threshold=8, budget=64)
     assert not refused.certified
+    assert refused.reason == "budget of 64 pieces spent"
 
 
 def test_the_bound_at_the_slit_configuration_is_nine_at_every_level() -> None:
@@ -414,6 +416,7 @@ def test_every_box_was_decided_once_and_certified_as_labelled() -> None:
 
 def test_the_label_rows_match_the_retained_lists() -> None:
     seen = 0
+    most = (0, "", 0)
     for name in labels.LISTS:
         records = labels.read_list(name)
         rows = [
@@ -431,12 +434,17 @@ def test_the_label_rows_match_the_retained_lists() -> None:
                 assert row["bound"] <= labels.THRESHOLD
             else:
                 assert row["bound"] is None
+            most = max(most, (row["pieces"], name, row["line"]))
         seen += len(rows)
     assert seen == BOXES
+    # The packet README: no box came near the budget of MAX_PIECES; the most was 491.
+    assert most == (491, "bnb_n4_T9_1of2", 2304)
+    assert most[0] < labels.MAX_PIECES
 
 
 def test_the_ten_controls_are_refused_by_decision_and_refuted() -> None:
     report = _receipt("controls.json")
+    assert report["budget"] == labels.MAX_PIECES
     assert report["passed"]
     assert [control["control"][0] for control in report["controls"]] == list("ABCDEFGHIJ")
     for control in report["controls"]:

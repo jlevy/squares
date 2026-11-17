@@ -1,0 +1,92 @@
+{
+ "angles": {
+  "below_1e-9_rad_range": [
+   "6.98e-17",
+   "4.3e-12"
+  ],
+  "categories": {
+   "1e-9_rad_to_0.5deg": 7,
+   "below_1e-9_rad": 115,
+   "beyond_0.5deg": 49,
+   "exactly_on_the_axes": 1
+  },
+  "half_angle_denominator_digits_max": 52,
+  "half_angle_numerator_digits_max": 36
+ },
+ "bead": "think-qqyg",
+ "certificate_block": {
+  "center_dilation": "1",
+  "derived_from": "W-q1108-d058-hit-n172-w1",
+  "kind": "exact-rational-sat",
+  "pairs_tested": "14706",
+  "rational_digits": "36",
+  "replay": "uv run --frozen packing-witness verify n-172-candidate.yaml"
+ },
+ "count": "172",
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "lane": "L72",
+ "pairs": {
+  "below_1e-12": 342,
+  "below_1e-9_histogram": {
+   "[1e-12, 1e-9)": 0,
+   "[2.0, 2.1)e-13": 119,
+   "[2.1, 3.0)e-13": 219,
+   "[3e-13, 1e-12)": 4
+  },
+  "margin_over_axis_separation": {
+   "max": "3.266e-13",
+   "median": "2.130e-13",
+   "min": "2.008e-13"
+  }
+ },
+ "pose": {
+  "extent_x_minus_certificate_side": "-1.90432e-37",
+  "extent_y_minus_certificate_side": "-1.81515e-16",
+  "file": "n-172-decimal-pose.yaml",
+  "least_corner_x": "1.02018e-13",
+  "least_corner_y": "1.02077e-13",
+  "max_angle_difference_rad": "8.414e-37",
+  "max_centre_difference_after_translation": "9.522e-38",
+  "max_margin_difference_on_near_pairs": "6.87e-37",
+  "near_pairs_compared": 342,
+  "pose_least_wall_clearance_at_own_side": "1.00878e-13",
+  "pose_negative_wall_clearances_at_own_side": 0,
+  "side": "13.614689853286418"
+ },
+ "program": "l72_construct.py",
+ "program_digests": {
+  "l72_construct.py": "dc06d45c3d267cd677a60ec6902ea97d6943c257a4e58f3d6e346264eeb5a848",
+  "l72_reader.py": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a",
+  "l72_sat.py": "a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "source_block": {
+  "path": "n-172-decimal-pose.yaml"
+ },
+ "walls": {
+  "between_1e-12_and_1e-3": [
+   {
+    "clearance": "5.979e-05",
+    "id": 151,
+    "wall": "top"
+   }
+  ],
+  "histogram": {
+   "(0, 1e-15)": 5,
+   "[1e-15, 1e-13)": 33,
+   "[1e-6, 1e-3)": 1,
+   "zero": 3
+  },
+  "largest_positive_below_1e-12": {
+   "id": 164,
+   "sci": "7.017e-15",
+   "wall": "top"
+  }
+ },
+ "written_utc": "2026-11-09T16:35:58Z"
+}

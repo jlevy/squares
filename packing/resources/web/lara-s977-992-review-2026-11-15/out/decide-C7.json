@@ -1,0 +1,72 @@
+{
+ "file": "construction-C7.json",
+ "file_sha256": "694e2294bd044cb782f832bf5bef080a88f96663597ec85ec988d64238eeb9a8",
+ "name": "C7",
+ "container": [
+  "637/20",
+  "0"
+ ],
+ "n": 977,
+ "angles": {
+  "0": 536,
+  "45": 441
+ },
+ "families": {
+  "diamond": 441,
+  "stair-BL": 134,
+  "stair-BR": 134,
+  "stair-TR": 134,
+  "stair-TL": 134
+ },
+ "A": {
+  "method": "A: separating axes on e1..e4 in Z[sqrt 2], exact integer signs",
+  "pairs": 476776,
+  "apart": 473292,
+  "touching": 3484,
+  "overlapping": 0,
+  "overlapping_pairs": [],
+  "touching_pairs_sha256": "d6871d6e7d7097fd5dd2225639374c940dc8019eeefff979aedde9349d8d5666",
+  "pair_class_sha256": "bcdb6c318ba27ead2150bda9e91c579a9af7aac3746bdd0d636ba4dde2a41fbb",
+  "wall_class_sha256": "c2573362ce4e5ca02f51823fc1d557311f85bed3be446341049aadcb7b06efad",
+  "wall_touching": 120,
+  "wall_touching_squares": 116,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": []
+ },
+ "B": {
+  "method": "B: exact convex clipping in Q(sqrt 2) over gmpy2.mpq, signs by Pell brackets",
+  "pairs": 476776,
+  "apart": 473292,
+  "touching": 3484,
+  "overlapping": 0,
+  "overlapping_pairs": [],
+  "touching_pairs_sha256": "d6871d6e7d7097fd5dd2225639374c940dc8019eeefff979aedde9349d8d5666",
+  "pair_class_sha256": "bcdb6c318ba27ead2150bda9e91c579a9af7aac3746bdd0d636ba4dde2a41fbb",
+  "wall_class_sha256": "c2573362ce4e5ca02f51823fc1d557311f85bed3be446341049aadcb7b06efad",
+  "wall_touching": 120,
+  "wall_touching_squares": 116,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": [],
+  "overlap_areas": [],
+  "not_inside_by_area": []
+ },
+ "agree": {
+  "pair_classes": true,
+  "touching_pairs": true,
+  "overlapping_pairs": true,
+  "walls": true,
+  "unit": true
+ },
+ "all_agree": true,
+ "verdict_A": "packing",
+ "verdict_B": "packing",
+ "seconds": {
+  "A": 0.15,
+  "B": 18.26
+ },
+ "python": "3.14.7"
+}

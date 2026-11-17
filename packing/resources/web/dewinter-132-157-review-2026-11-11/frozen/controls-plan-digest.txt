@@ -1,0 +1,8 @@
+# Lane L105 controls plan stated, 2026-11-11T21:10:39Z, before l105_controls.py existed.
+# The plan was written by l105_plan.py from the unmodified files and the frozen checker; it decides no modified file.
+e6e89ebf94eff63e3a955362eddf9c829dfd07ce26e7d67fdce34b8371d12bb2  programs/controls-plan.json
+5594f419908ba633294fbf61770420f1ff4fd8a55609474f34b8f53989e9ded5  programs/l105_plan.py
+9ac3a6543ddb9b8a250634b769ac80d9a7eb8247f7932cb5591a848938a73a53  out/plan-facts-n132.json
+20a0acfb41d9126e4865e5b82bd49ab8e976f271419299ce1e1886eec6751f48  out/plan-facts-n157.json
+2e85ddfc8120507207304d08c543f74f2e5883508848e66f8fc588eba65abe4d  out/check-n132.json
+d5a92ad341ef71cee4689bb8bde5606c6e918793983e8eb1b5f90dd321e06030  out/check-n157.json

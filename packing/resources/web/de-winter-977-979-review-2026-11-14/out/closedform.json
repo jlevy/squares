@@ -1,0 +1,47 @@
+{
+ "program": "l153_closedform.py",
+ "registry_counts": 296,
+ "sides": {
+  "297": {
+   "nearest": [
+    {
+     "m": 85,
+     "k": 8,
+     "kind": "printed",
+     "difference": "-3.18512e-3"
+    },
+    {
+     "m": 126,
+     "k": 6,
+     "kind": "exact",
+     "difference": "-3.18512e-3"
+    },
+    {
+     "m": 263,
+     "k": 1,
+     "kind": "exact",
+     "difference": "6.28955e-3"
+    },
+    {
+     "m": 202,
+     "k": 3,
+     "kind": "printed",
+     "difference": "1.15334e-2"
+    },
+    {
+     "m": 232,
+     "k": 2,
+     "kind": "exact",
+     "difference": "-2.19540e-2"
+    },
+    {
+     "m": 175,
+     "k": 4,
+     "kind": "exact",
+     "difference": "-2.45944e-2"
+    }
+   ],
+   "within_1e-9": []
+  }
+ }
+}

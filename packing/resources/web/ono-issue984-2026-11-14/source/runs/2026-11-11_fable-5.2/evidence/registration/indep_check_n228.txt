@@ -1,0 +1,1 @@
+INDEPENDENT CHECK PASSED: n=228, 525 close pairs clipped exactly, max intersection area = 0, all vertices inside [0,S]^2, S = 15.596043120920791, bounding box = [0,15.596043120921] x [0,15.596043120919]

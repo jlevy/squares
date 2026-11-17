@@ -1,0 +1,84 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/938",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s199 upper bound 2026-11-09]",
+  "report_evidence": "E-ozden-938-certificate-report",
+  "receipt_format": "ozden-938-exact-replay-v1",
+  "witness_prefix": "W-ozden-938-n",
+  "claim_limitations": "Complete 2026-11-09 rational corner Witness/v2 at 199: the n = 172 packing of issue 935 (T-282), its exact corners unchanged, plus an L of 27 axis-aligned unit grid squares at side S172 + 1, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-09",
+  "read_at_main": "200f2ebc1c585259d7687fc8550c975e467d97d6",
+  "certificates": [
+    {
+      "n": 199,
+      "path": "n-199-candidate.yaml",
+      "format": "witness-corners",
+      "offered": "14.614689853287",
+      "first_committed": "2026-11-09T20:30:58Z",
+      "same_packing": [
+        {
+          "path": "n199-witness.json",
+          "format": "witness-corners"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    199
+  ],
+  "replayed": [
+    199
+  ],
+  "houses": [
+    {
+      "n": 199,
+      "reader": "[Gupta rational refinements 2026-10-08]",
+      "source_key": "[Gupta rational refinements 2026-10-08]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta",
+      "result": "T-127",
+      "reported_value": "14.6175721735928069",
+      "verified_value": "14.6175721735928069",
+      "evidence": [
+        "E-gupta-438-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 199,
+      "report": "T-174 (PR #574)",
+      "url": "https://github.com/jlevy/squares/pull/574",
+      "holders": "PingYou Ltd, of the house's packing",
+      "result": "T-174",
+      "reader": "[PingYou PR 574 certificates 2026-10-13]"
+    },
+    {
+      "n": 199,
+      "report": "T-193 (#639)",
+      "url": "https://github.com/jlevy/squares/issues/639",
+      "holders": "Evan Daniel, of the house's packing",
+      "result": "T-193",
+      "printed": "14.6175721735928068435558612724500328081986",
+      "rounding": "unstated"
+    }
+  ],
+  "register": {
+    "title": "Doğa Özden's packing of 199 squares at kenaznia-doga/s199-upper-bound d03ee0b, issue 938",
+    "headline": "Özden's T-282 packing plus an L of 27 squares at 199, 2.88e-3 below the house",
+    "significance": 3,
+    "source_checks": "The issue says this repository's packing-witness verify, run unmodified on the witness at main 200f2ebc, reports VERIFIED (exact-algebraic, 19701 pairs), and that verifier/sqcheck.py, an exact checker the author's lab wrote separately from this repository's code, reports VALID (exact rational) and prints the exact side rounded up. It says the two share only the unit-square, wall and non-overlap definitions.\n\nSquares 1 to 172 are #935's witness with its rational corners unchanged, whose exact coordinates this repository's packing-witness promote --strategy robust-rational made from the lab's decimal pose, so packing-witness verify is not independent of how they were rounded, as the issue says. The 27 grid squares touch each other, the walls and the n = 172 packing's bounding square exactly, so the exact minimum pair gap is 0, as in the record's grid witnesses; sqcheck.py certified the decimal pose in interval arithmetic only with a dilation of 1e-24. No local-optimality, rigidity or formal check is claimed. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Doğa Özden (https://dogaozden.com/math/live/square-packing/), who reports his n = 172 packing of issue 935 (T-282), found from the registry's 172, Evan Daniel's packing (T-257, #845), by basin hopping over local minima of Evan Daniel's ALM+SLP quench (https://github.com/evand/square-packing, MIT), with an L of 27 unit squares added along two walls: the classical L step, s(n + 2 floor(s) + 1) <= s(n) + 1 (Friedman's DS7, section 2). Nothing was searched at 199. The issue asks that the improvement be credited to Özden, the base packing to its holders as the record lists them, and the local optimizer to Evan Daniel.\n\nThe issue says the search and its code were written and run by AI agents and that the checks were run by code that did not produce the packing; the issue and repository were prepared and posted by Özden's AI agent, which uses the account kenaznia-doga, and Özden directed the work. The best published Kaggle per-puzzle side the issue found at 199, 14.617572173606 (kirilltym), is above this and states no packing; the author's comment of 20:53:05Z adds a side-only leaderboard entry, 14.6132098756 (team OigaZhDn, 31 October), below this side, which states no packing and so is no report.",
+    "next_rung": "Independently review the certificate (stage 4, think-ntcf, lane L77, prompted separately and blind to this one): its mathematics, a clean-room exact checker with sharp controls that handle the zero gaps of the grid squares, the construction against T-282's retained certificate, and the lineage the source states, mapped as an adversarial review, whose acceptance the verified lane and the house rule wait on. Then adopt it at 199 in place of T-127 under the house rule, taking 199 off select_houses.PENDING_ADOPTION and CORRECTIONS_OWED, with both strong generators' regularization and the flip of the new house in the same change.",
+    "bead": "think-1goz",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Ozden after Daniel, Levy",
+      "short_credit": "Ozden after Daniel et al.",
+      "note": "kenaznia-doga/s199-upper-bound at d03ee0bdb223e00fe124e818ed242f6cbd714fad (2026-11-09T20:30:58Z), Doğa Özden's certificate for s(199) <= 14.6146898532862152 (the exact side rounded up at 16 places), printed 14.614689853287 rounded up at 12 places: a rational corner Witness/v2 whose squares 1 to 172 are his n = 172 certificate of jlevy/squares#935 (T-282, a further arrangement of Evan Daniel's packing, T-257, #845) with their rational corners unchanged, and whose other 27 are an L of axis-aligned unit squares, a row of 14 along the top wall and a column of 13 along the right, at side S172 + 1 exactly: the classical L step s(n + 2 floor(s) + 1) <= s(n) + 1. Nothing was searched at 199. Registration was requested in jlevy/squares#938, posted on the author's behalf by his AI agent's account kenaznia-doga; the issue says the search and its code were written and run by AI agents, under his direction. No global optimality claim. The lineage builds on this project: the n = 172 packing starts from the registry's regularized atlas and its exact coordinates were made with this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs, write-ups, drawings) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in web/ozden-s199-upper-bound-2026-11-09/."
+    }
+  }
+}

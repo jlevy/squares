@@ -1,0 +1,13 @@
+# command: nice -n 19 /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/verify-target/release/verify regrid-3999600.txt 12 96000 1 0
+# cwd: regrid-3999600 control (4857a83c), written by devtools.audit_s12_unnir_certificate --write-controls; VERIFY_BINS=0:0, one thread; scratch build 9f9dbeaf
+# python3: not used by this command
+# host: 4 cores; load 2.75 3.11 3.46; started 2026-11-08T19:34:40Z
+D4-symmetric atom set: true  -> angles cover [0,45] deg
+atoms=4996 total weight = 119787760/9985226 = 11.996500
+s = 15886400/3999600 = 3.971997
+angles: k=0..39765 (N=96000), covering [0,45deg]
+PARTIAL RUN: VERIFY_BINS=0:0 -- only these bins are swept; this run cannot verify anything
+  FAIL at angle k=0: covered 9453881/9985226
+min covered weight over ALL placements = 9453881/9985226 = 0.946787  (at angle k=0)
+NOT VERIFIED (PARTIAL RUN: only bins 0..0 of 0..39764 were swept)
+# finished 2026-11-08T19:34:40Z; exit 4; wall 0.108 s; CPU 0.1 s (user 0.104 + sys 0.004); load 2.75 3.11 3.46

@@ -1,0 +1,15 @@
+s204_trig1_regularized ALL PASS 14 controls cpu 6.527
+    ok  C1 box at its extent | expected accept | A accept | B accept 
+    ok  C1 box 1e-30 below its extent | expected refuse | A refuse | B refuse 
+    ok  C2 packing at the near walls (translated by the least corner coordinates) | expected accept | A accept | B accept 
+    ok  C2 then 1e-30 past the left wall | expected refuse | A refuse | B refuse 
+    ok  C2 then 1e-30 past the bottom wall | expected refuse | A refuse | B refuse 
+    ok  C3 least-gap pair (162, 169) closed along its axis, exact contact | expected accept | A accept | B accept  [moved square, whole: A accept B accept partners []]
+    ok  C3 least-gap pair (162, 169) closed along its axis, 1e-30 past | expected refuse | A refuse | B refuse  [moved square, whole: A refuse B refuse partners [162]]
+    ok  C4 least-clearance square 87 moved to the bottom wall, exact contact | expected accept | A accept | B accept  [moved square, whole: A accept B accept partners []]
+    ok  C4 least-clearance square 87 moved to the bottom wall, 1e-30 past | expected refuse | A refuse | B refuse  [moved square, whole: A refuse B refuse partners []]
+    ok  C5 square 162 enlarged by delta* against 169, exact contact | expected accept | A accept | B accept 
+    ok  C5 square 162 enlarged by delta* against 169, 1e-30 past | expected refuse | A refuse | B refuse 
+    ok  G1 duplicate: square 204 replaced by square 1 | expected refuse | A refuse | B refuse 
+    ok  G2 square 1 centred at x = -1 (outside the box) | expected refuse | A refuse | B refuse 
+    ok  G3 every square turned to t = 0 in place | expected None | A refuse | B refuse 

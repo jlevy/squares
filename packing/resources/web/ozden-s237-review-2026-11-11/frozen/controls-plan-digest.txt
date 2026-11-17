@@ -1,0 +1,7 @@
+# Lane L109 controls plan, stated at 2026-11-11T22:07:16Z, before l109_controls.py existed (ls programs/: controls-plan.json l109_axes.py l109_check.py l109_clip.py l109_geom.py l109_make_plan.py l109_plan_facts.py l109_reader.py l109_selftest.py )
+14965c21ec36148bfaf227b0e267c719b1fea272ff2d0dd2bdfd3ad307aa7e69  programs/controls-plan.json
+803b5ff58dd6c0fa54dc7a9a4964a8e3a6f56d0927abb3dee020df33416b0d75  out/plan-facts-n237.json
+9b7164ea1a36fd87229b2e396b69770cc8a95acaadd8ea4dfeb2802d58557c71  out/check-n237.json
+5cda5e78960c45e331c7a86c4dd91e4b853a111ee8e0ed5dd87b3d03d55c0dfc  out/selftest.json
+a3cebcb920c1b5635b3e8a4be4e70ff9a70495b255d1fd4c6b26b79b942e530e  programs/l109_plan_facts.py
+01b9791713867003479937ed13f94678adfedc668847119548326415d2c3424e  programs/l109_make_plan.py

@@ -1,0 +1,14 @@
+# Lane L169 checker, frozen at 2026-11-15T03:19:25Z, before the controls plan, the findings, the author's README.md, SHA256SUMS contents, DONOR-LICENSE.txt, n90.csv and n90.png, Couzo's verify_bound_certificate.py, any packing-witness code, the register entries, case record or witnesses at 90, de Winter's n157 file, or import lane L170's work was read.
+# source certificate (clone of dpre4ai/n90-square-packing at 179fcba7f0e91e2c3d3e92525e0738b6da0f8dd5):
+88c93b2f1d1f3061d1e6815f790d13f3d8f174dd3431f50d8d4d9d4383b3d466  179fcba:n90.cert
+# checker programs:
+ed86ec55f66abefd85d54a271906744e28e0e0b2daf726f37a4027321764b73c  l169_reader.py
+24de6be609746cd93d84501e370199a646761861714343aa2b4ad100c71eed08  l169_sat.py
+a905dda23d5ef6f6c4edf213ea54bd08cc95f77de7ab0fc4a9e4113480124106  l169_clip.py
+e718b50dd2760ac04fa9a94c7555c9b9e1b8ffbae41f7c80bf831c824fe45174  l169_decide.py
+595186deef417634e85f453029c9cc3ef562f1289b4e078af334f3a2666c943f  l169_check.py
+66a8b105931e974966ddf1a0146e6831a8d72288ac290bffb49d46497d7794ea  l169_geom.py
+311a652588f818619d53146bec58321fb629890fc41c251ab8cbd6343cee282f  l169_selftest.py
+# receipts written by the frozen checker:
+9072593e3957cbc0357d4553c2e9135258079e7f15520f8c0cf769e2ca1b2518  out/selftest.json
+1522d283a79cd99210f00017e95eeb2fdc5f9c85e7b3bd3c7f6d658f6bf58d78  out/check-n90.json

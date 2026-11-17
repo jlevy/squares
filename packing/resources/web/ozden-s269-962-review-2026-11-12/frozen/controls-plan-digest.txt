@@ -1,0 +1,6 @@
+# Lane L117 controls plan, stated at 2026-11-12T00:15:04Z, before l117_controls.py existed (ls programs/: controls-plan.json l117_check.py l117_geom.py l117_hull.py l117_make_plan.py l117_plan_facts.py l117_reader.py l117_sat.py l117_selftest.py )
+26e87eda1275e5d992cc8ba792c8227cca39fc9daae3acd0a09b057efebf6a54  programs/controls-plan.json
+341fd9e7b0abbf0ffcd437a990550c6f7682e889e5c5c411967cbd0f87b085cb  out/plan-facts-n269.json
+bc489767bdf9f09fee9d7b18beb8f92cb6b95637dbef751feba59225e711707b  out/check-n269.json
+53dc7b140f14e17c071f9d292b9b94c60364f9884793591d6e2b0df4929e98ce  programs/l117_plan_facts.py
+3ca3041b78561cbdc3b79085f829124e616c8be9ae9f66831689e6f3323cdfa0  programs/l117_make_plan.py

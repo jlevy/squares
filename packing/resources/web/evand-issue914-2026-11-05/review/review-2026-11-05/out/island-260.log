@@ -1,0 +1,15 @@
+new 260 vs T-257's 260
+   islands 97 [[24.5, 63], [24.7, 18], [24.6, 9], [26.8, 3]] | 97 [[24.5, 64], [24.6, 14], [26.9, 3], [25.3, 3]]
+   island bbox new [1.417, 15.218, 4.662, 13.009] ref [1.415, 15.218, 4.627, 12.972]
+   best island symmetry rotation 180 {'translation': [-0.00018701339348387654, 1.0011249788563048], 'matched': 97, 'island_beyond_1e-2': 21, 'island_beyond_0.1': 0, 'island_largest_move': 0.04219, 'island_rms': 0.01159, 'island_turned_beyond_0.5deg': 7, 'island_angle_shift_median': -0.00662}
+   frame {'new_frame': 163, 'ref_frame': 163, 'matched': 163, 'beyond_1e-2': 127, 'beyond_0.1': 117, 'beyond_0.5': 106, 'largest': 7.799619515360362}
+new 260 vs T-265 (house)
+   islands 97 [[24.5, 63], [24.7, 18], [24.6, 9], [26.8, 3]] | 97 [[24.5, 63], [24.6, 14], [26.9, 3], [25.3, 3]]
+   island bbox new [1.417, 15.218, 4.662, 13.009] ref [1.415, 15.218, 4.627, 12.972]
+   best island symmetry rotation 180 {'translation': [0.0013798761603489242, 0.9995357055756727], 'matched': 97, 'island_beyond_1e-2': 18, 'island_beyond_0.1': 1, 'island_largest_move': 0.16069, 'island_rms': 0.01987, 'island_turned_beyond_0.5deg': 6, 'island_angle_shift_median': -0.00662}
+   frame {'new_frame': 163, 'ref_frame': 163, 'matched': 163, 'beyond_1e-2': 131, 'beyond_0.1': 116, 'beyond_0.5': 102, 'largest': 7.799619516174175}
+calibration: T-265 vs T-257's 260
+   islands 97 [[24.5, 63], [24.6, 14], [26.9, 3], [25.3, 3]] | 97 [[24.5, 64], [24.6, 14], [26.9, 3], [25.3, 3]]
+   island bbox new [1.415, 15.218, 4.627, 12.972] ref [1.415, 15.218, 4.627, 12.972]
+   best island symmetry identity {'translation': [0.0015668893545610514, -0.001589273479903583], 'matched': 97, 'island_beyond_1e-2': 7, 'island_beyond_0.1': 1, 'island_largest_move': 0.13745, 'island_rms': 0.01828, 'island_turned_beyond_0.5deg': 1, 'island_angle_shift_median': 0.0}
+   frame {'new_frame': 163, 'ref_frame': 163, 'matched': 163, 'beyond_1e-2': 54, 'beyond_0.1': 25, 'beyond_0.5': 0, 'largest': 0.38230714877246363}

@@ -1,0 +1,57 @@
+format: intake-ledger-v1
+read_at_main: 45e2ecca26f425bf60b1580839d1b93b1f18e5b2
+read_on: '2026-11-12'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l132
+  branch: claude/bold-ritchie-xo28us-l132
+  commit: 45e2ecca26f425bf60b1580839d1b93b1f18e5b2
+  note: The packet's claim record, written on the lane's branch from main 45e2ecca2 and read
+    here by path.
+reports:
+- report: '#967'
+  url: https://github.com/jlevy/squares/issues/967
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-12T03:00:14Z'
+  bead: think-n73d
+  claims:
+  - n: 269
+    printed: '16.889730073596'
+    rounding: up
+    exact: 844486503679774317585107924944840911514046390352810484872889230225239253111359589201293736258560538790041827703575563097600734949321301742514066552675399358882567550296990778328354922052489/49999999999999554941040741449920408797906372494862114492551489038797682405469787883155370439039646925857378463717403819287236408489602490010763460626843245006227561308936090000000000000000
+    exact_from: packing/resources/web/ozden-s269-upper-bound-2026-11-12/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l132@45e2ecca26f425bf60b1580839d1b93b1f18e5b2
+    first_committed: '2026-11-12T03:00:02Z'
+    measured:
+      against: T-296
+      finding: no symmetry of the box pairs it one to one with T-296's packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves every square
+        beyond 1e-6, 266 beyond 1e-3, 107 beyond 1e-2 and 53 beyond 0.1 (largest 0.950002)
+        and turns 102 squares by more than 1e-6 radians, by up to 44.77 degrees; aligned by
+        box centres, 57 squares turn by more than a degree; 45 squares tilted beyond a degree,
+        a band of 41 at 41.60 to 42.06 degrees and a cluster of 4 at -44.33 to -44.38 degrees,
+        against T-296's 45, 39.53 to 44.77 degrees, 22 turned one way and 23 the other; against
+        T-290's packing the assignment moves 127 squares beyond 0.1 (largest 1.25522) and
+        122 turn by more than a degree aligned by box centres, and against T-174's 75 beyond
+        0.1; the house witness measures as T-296; a new arrangement relative to T-296's packing
+        and to T-290's, not a further arrangement of either; the issue's own counts against
+        T-290 (261 beyond 1e-3, 137 beyond 0.05, largest 1.879) hold, as the review measured,
+        with T-290 reflected top to bottom in the new box, set against its upper-left corner
+        and paired by least summed move, a convention the issue does not name (F6)
+      source: packing/resources/web/ozden-s269-upper-bound-2026-11-12/measure/identity.json
+  note: 'The issue names f496016, committed at 2026-11-12T03:00:02Z, 12 seconds before the
+    issue. It says the packing was found by an AI-run column-band designer, new for this filing,
+    with no donor packing: tilted squares stood in columns across a band along the diagonal,
+    the axis-parallel squares on the two wall-anchored staircase lattices, the column counts
+    chosen by an exact dynamic programme, then quenched with Evan Daniel''s code and kicked
+    and quenched twice more; it calls the result a further improvement that supersedes its
+    own #947 (T-290) and #962 (T-296), neither new nor a refinement of either, so the claim
+    is not classified; the measurement names the relation.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

@@ -63,6 +63,7 @@ from sqpack.known_best import (
     COMPOSITE_PDF_EDITION_DATE,
     CompositeSpec,
     CorpusRange,
+    GridTransition,
     SourceGeometryError,
     catalogue_source_map,
     composite_pdf_name,
@@ -94,8 +95,9 @@ from sqpack.yamlio import safe_load
 #: that of 15 October n = 204 onto his issue 562 packet (T-162), and that of 19 October
 #: n = 229 onto Evan Daniel's issue 674 packet (T-199), and that of 20 October n = 227 and
 #: 260 onto Joost de Winter's issue 668 packet (T-196), and that of 21 October n = 260 onto
-#: Francisco Couzo's issue 678 packet (T-223).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 41}
+#: Francisco Couzo's issue 678 packet (T-223), and that of 15 November n = 147 onto Roberto
+#: Ono's issue 985 packet (T-302).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 21, "n=1..324": 40}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -107,18 +109,21 @@ GOLDEN_UNITSQUARE: dict[str, set[int]] = {
 #: How the corpus splits by source kind at each corpus; a case switching kind fails here.
 GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # 29 moved from Kingbird to PR #622's packet (T-195) on 17 October 2026, the first
-    # adoption under the house rule (think-30n2).
+    # adoption under the house rule (think-30n2), and 90 from the grid to jazivxt's issue 989
+    # packet on 15 November 2026 (T-303).
     "n=1..100": {
-        "exact-grid": 64,
+        "exact-grid": 63,
         "kingbird-derived-facts": 29,
-        "packet-derived-facts": 7,
+        "packet-derived-facts": 8,
     },
     # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4),
-    # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-220).
+    # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-220), and 157
+    # from the grid to Joost de Winter's issue 958 packet on 11 November (T-293), and 90 from
+    # the grid to jazivxt's issue 989 packet on 15 November (T-303).
     "n=1..200": {
-        "exact-grid": 113,
-        "kingbird-derived-facts": 51,
-        "packet-derived-facts": 36,
+        "exact-grid": 111,
+        "kingbird-derived-facts": 50,
+        "packet-derived-facts": 39,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
@@ -129,11 +134,14 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # Kingbird), to his issue 674 packet (T-199), and on 20 October 227 and 260 (both from
     # Kingbird), to Joost de Winter's issue 668 packet (T-196), and on 21 October 260 again,
     # to Francisco Couzo's issue 678 packet (T-223, think-xu4d), and on 31 October 293 and
-    # 299 (both from Kingbird), to Evan Daniel's issue 845 and issue 824 update packets.
+    # 299 (both from Kingbird), to Evan Daniel's issue 845 and issue 824 update packets, and
+    # on 11 November 157 (from the grid), to Joost de Winter's issue 958 packet (T-293), and
+    # on 15 November 147 (from Kingbird), to Roberto Ono's issue 985 packet (T-302), and 90
+    # (from the grid), to jazivxt's issue 989 packet (T-303).
     "n=1..324": {
-        "exact-grid": 174,
-        "kingbird-derived-facts": 70,
-        "packet-derived-facts": 80,
+        "exact-grid": 172,
+        "kingbird-derived-facts": 69,
+        "packet-derived-facts": 83,
     },
 }
 
@@ -283,8 +291,9 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
     assert len(kingbird) == len(expected_n) + len(above)
     for record in kingbird:
         assert record["attribution"].startswith("SVG and high-precision updates")
-        # Above the hundred a catalogue picture can serve two sizes (147 is the 148
-        # picture with a square removed), so the record names the picture's own n.
+        # Above the hundred a catalogue picture can serve two sizes (147 was the 148
+        # picture with a square removed until 15 November 2026), so the record names the
+        # picture's own n.
         assert record["n"] in record["listed_n"]
         assert record["source_n"] == max(record["listed_n"])
         if record["n"] <= 100:
@@ -1216,10 +1225,28 @@ def test_poster_preserves_logical_square_bound_row_coordinates() -> None:
 
 
 def test_retained_poster_preserves_triangle_card_sizes_and_positions() -> None:
-    root = ET.fromstring(_committed_poster_svg())
+    svg_text = _committed_poster_svg()
+    root = ET.fromstring(svg_text)
     cards = [card for card in root if card.attrib.get("data-feature") == "packing-card"]
     transitions = known_best_builder.resolved_composites()[1].transitions
     by_row = {transition.row: transition for transition in transitions}
+    # A poster that trails the pin (`sqpack.release`, rule 3) is laid out by the grid
+    # transitions of the data it was drawn from, which its cards record: a count that has
+    # left the grid since, as 157 did on 11 November 2026 (T-293), keeps its grid card
+    # until the next edition redraws the poster. Each such row is held to the layout the
+    # poster drew; every other row to the current one.
+    identity = known_best_builder.retained_identity(svg_text)
+    if not identity.current and COMPOSITES_MAY_TRAIL:
+        drawn: dict[int, int] = {}
+        for card in cards:
+            if card.attrib["data-segment"] == "grid":
+                drawn.setdefault(int(card.attrib["data-row"]) + 1, int(card.attrib["data-n"]))
+        # Only rows 10 and 13 differ from the current layout: 157 left the grid on 11
+        # November 2026 (T-293), and 90 on 15 November 2026 (T-303). A count that leaves or
+        # joins the grid before the redraw adds its row here, on purpose.
+        moved = sorted(row for row, first in drawn.items() if by_row[row].first_grid_n != first)
+        assert moved == [10, 13], moved
+        by_row = {row: GridTransition(row, first) for row, first in drawn.items()}
     assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 325))
     for card in cards:
         n = int(card.attrib["data-n"])
@@ -2390,8 +2417,16 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # refined them, so both names join it. On 4 November 2026 the adoption at 204 and 299
     # (T-264, T-263) credits Doğa Özden as the improver of Evan Daniel's packings, and the
     # print holds his name back until the next infographics cut (think-tj4o), so no name
-    # joins it yet.
-    assert len(expected_names) == 30
+    # joins it yet. On 5 November 2026 the adoption at 260 (T-265) credits Kaelan Yim as
+    # the improver of Evan Daniel's packing there, and the print holds his name back too.
+    # The adoption of issue 914 (T-267 to T-273) draws 175, 204, 268, 293, 303 and 304 on
+    # 5 November 2026 and 260 on 6 November 2026 from Evan Daniel's own packings and
+    # credits him alone there, so Özden at 204 and Yim at 260 are credited no more, and
+    # Lavrentev's and Tymchishin's names, which only 268, 303 and 304 credited, leave it.
+    # The pass of 16 November 2026 (think-0y9m) draws 127, 204, 232, 264 and 305 from
+    # JoeGun's packings of Tomáš Kodaj's, two new names the print holds back
+    # (think-tj4o), and Chilton's name, which only 232 credited, leaves it.
+    assert len(expected_names) == 27
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
     # re-housed still holds another count. The adoption of 20 October draws from three
@@ -2434,7 +2469,40 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # (T-231), which held nothing else. The adoption of 4 November draws 204 and 299 from
     # Doğa Özden's two packets (T-264, T-263), and no longer from Evan Daniel's issue 824
     # update packet, which held only 299; his issue 845 packet still holds 172, 260 and 293.
-    assert len(expected_sources) == 33
+    # The adoption of 5 November draws 260 from Kaelan Yim's packet (T-265); the issue 845
+    # packet still holds 172 and 293. The adoption of issue 914 the same day draws 204, 268,
+    # 293, 303 and 304 from his issue 914 packet and 175 and 260 from its two keys of their
+    # own (T-267 to T-273), and no longer from Özden's n204 packet, Yim's packet, Couzo's
+    # issue 763 packet or Daniel's Kaggle descents packet, which held nothing else: three
+    # sources more and four fewer. The issue 845 packet still holds 172. The adoption of 9
+    # November draws 232, 268, 299, 303 and 307 from Doğa Özden's five packets of that day
+    # (T-275 to T-279), and no longer from Couzo's issue 844 packet or Özden's 3 November
+    # s299 packet, which held nothing else: five sources more and two fewer. The issue 914
+    # packet still holds 204, 293 and 304. The same day's last pass draws 199 from Özden's
+    # issue 938 packet (T-284), one more source with no new name, and Gupta's rational
+    # refinements still hold other counts. The adoption of 11 November draws 156, 180, 268
+    # and 269 from Özden's four packets of that day (T-287 to T-290), and no longer from his
+    # 9 November s268 packet, which held nothing else: four sources more and one fewer. The
+    # same day's lane L100 draws 179 from Özden's issue 954 packet (T-291), one more source
+    # with no new name; PingYou Ltd's PR 574 certificates still hold other counts. Lane L104
+    # of the same day draws 132 and 157 from Joost de Winter's two issue 958 packets (T-292,
+    # T-293), two more sources with no new name: de Winter is printed already, and 157 was
+    # the grid. Lane L107 draws 179 from Özden's issue 959 packet (T-294) instead of his
+    # issue 954 packet, which held nothing else: one source more and one fewer. Lane L120
+    # of 12 November draws 269 from Özden's issue 962 packet (T-296), and no longer from his
+    # issue 947 packet (T-290), which held nothing else: one source more and one fewer, with
+    # no new name. Lane L132 draws 269 from Özden's issue 967 packet (T-297) instead of his
+    # issue 962 packet, which held nothing else: one source more and one fewer, with no new
+    # name. Lane L154 of 14 November draws 297 from Joost de Winter's issue 977 packet
+    # (T-299), one more source with no new name; PingYou Ltd's PR 574 certificates still
+    # hold other counts. Lane L160 of the same day draws 228 from Özden's issue 983 packet
+    # (T-300), one more source with no new name, Özden held off the block; PingYou Ltd's PR
+    # 574 certificates still hold other counts. Lane L164 draws 228 and 147 from Roberto Ono's
+    # two packets (T-301, T-302), and no longer from Özden's issue 983 packet, which held
+    # nothing else: two sources more and one fewer, Ono held off the block. Lane L170 of 15
+    # November draws 90 from jazivxt's issue 989 packet (T-303), one more source, where the
+    # grid was, jazivxt held off the block.
+    assert len(expected_sources) == 47
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2460,16 +2528,13 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Hajba",
         "Schadt",
         "Chaoweeraprasit",
-        "Chilton",
         "Couzo",
         "Daniel",
         "de Winter",
         "Gupta",
-        "Lavrentev",
         "ntumlnoob",
         "Ostashev",
         "PingYou Ltd",
-        "Tymchishin",
         "Xu",
         "Barnett",
         "Chang",
@@ -2569,20 +2634,76 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
 def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """think-tj4o: the case records and the bound citations credit Doğa Özden as the
-    improver of Evan Daniel's packings at 204 and 299 (T-264, T-263). The posters' credit
-    block holds exactly his name back until the next infographics cut, so the drawn 1-100
-    canvas keeps its height; without the hold it would not."""
+    """think-tj4o: the case record and the bound citation credit Doğa Özden as the
+    improver of Evan Daniel's packing at 299 (T-263). The posters' credit block holds
+    exactly his name back until the next infographics cut. The hold held him at 204
+    (T-264) and Kaelan Yim at 260 (T-265, think-hgpg, now moot) until Daniel's own packings
+    took 204 on 5 November 2026 and 260 on 6 November 2026 (T-268, T-269), and the records
+    there credit Daniel alone, so neither name is held or printed for them. The same
+    adoption takes Vladislav Lavrentev's and Kirill Tymchishin's names off the block, so
+    released now Özden's name changes the block's lines and keeps the drawn 1-100 canvas's
+    height. The adoption of 9 November 2026 (think-463r) credits him as the improver at
+    232, 268, 303 and 307 too, and at 299 again (T-275 to T-279), and the hold holds him at
+    all five. Its later pass (think-he66) credits him at 172 and 270 (T-282, T-283), held
+    the same way, and its last (think-1goz) at 199 (T-284), held alike. The adoption of 11
+    November 2026 (think-xq4o) credits him as the finder at 156, 180, 268 and 269 (T-287 to
+    T-290), held alike, and the same day's lane L100 (think-f65n) at 179 (T-291), its
+    lane L107 (think-89i7) at 179 again for T-294, and its lane L110 (think-my76) at 237
+    (T-295). Lane L120 of 12 November (think-s418) credits him as the finder at 269 again
+    (T-296), held as before, and lane L132 (think-n73d) a third time there (T-297, in the
+    pass of 13 November), held alike. Lane L160 of 14 November (think-14i2) credits him as
+    the finder at 228 (T-300, in the pass of 14 November), held alike. Lane L164 (think-17ex)
+    credits Roberto Ono, a new name, as the finder at 228 (T-301) in Özden's place and at 147
+    (T-302), in the pass of 15 November, so the hold holds Ono at both and Özden no longer
+    at 228; released, the block gains both names. Lane L170 (think-i8y9) credits jazivxt, a
+    new name, as the finder at 90 (T-303) in the same pass, where the grid credited no one,
+    held alike; released, the block gains that name too. Lane L181 (think-32cl) credits
+    Joost de Winter as the improver at 90 (T-304, in the pass of 16 November), a name the
+    block already prints, so the hold still holds jazivxt alone there. Lane L187
+    (think-0y9m) credits Tomáš Kodaj as the finder and JoeGun as the improver at 127, 204,
+    232, 264 and 305 (T-305 to T-309, in the same pass), two new names, held alike, and
+    Özden no longer at 232; released, the block gains both."""
     held = known_best_builder.PRINT_CREDIT_HELD
-    assert held == {204: ("Doğa Özden",), 299: ("Doğa Özden",)}
-    for n in held:
-        reported = build_bound_citations.load_case(n)["reported_upper_bound"]
-        assert reported["found_by"] == ["Evan Daniel"]
-        assert reported["improved_by"] == ["Doğa Özden"]
+    assert held == {
+        **dict.fromkeys(
+            (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
+        ),
+        **dict.fromkeys((147, 228), ("Roberto Ono",)),
+        90: ("jazivxt",),
+        **dict.fromkeys((127, 204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
+    }
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
-    for n in held:
-        assert citations[n]["upper"]["text"] == "Daniel & Özden, GitHub"
+    for n, found, improved in (
+        (156, ["Doğa Özden"], []),
+        (172, ["Evan Daniel"], ["Doğa Özden"]),
+        (179, ["Doğa Özden"], []),
+        (180, ["Doğa Özden"], []),
+        (199, ["Evan Daniel"], ["Doğa Özden"]),
+        (90, ["jazivxt"], ["Joost de Winter"]),
+        (147, ["Roberto Ono"], []),
+        (228, ["Roberto Ono"], []),
+        (127, ["Tomáš Kodaj"], ["JoeGun"]),
+        (204, ["Tomáš Kodaj"], ["JoeGun"]),
+        (232, ["Tomáš Kodaj"], ["JoeGun"]),
+        (264, ["Tomáš Kodaj"], ["JoeGun"]),
+        (305, ["Tomáš Kodaj"], ["JoeGun"]),
+        (237, ["Doğa Özden"], []),
+        (268, ["Doğa Özden"], []),
+        (269, ["Doğa Özden"], []),
+        (270, ["Evan Daniel"], ["Doğa Özden"]),
+        (299, ["Evan Daniel"], ["Doğa Özden"]),
+        (303, ["Evan Daniel"], ["Doğa Özden"]),
+        (307, ["ntumlnoob"], ["Francisco Couzo", "Doğa Özden"]),
+    ):
+        reported = build_bound_citations.load_case(n)["reported_upper_bound"]
+        assert (reported["found_by"], reported["improved_by"]) == (found, improved), n
+    assert citations[299]["upper"]["text"] == "Daniel & Özden, GitHub"
+    for n in (260,):
+        reported = build_bound_citations.load_case(n)["reported_upper_bound"]
+        assert reported["found_by"] == ["Evan Daniel"]
+        assert reported["improved_by"] == []
+        assert citations[n]["upper"]["text"] == "Daniel 2026, GitHub"
     corpus = known_best_builder.CORPUS
     read_credits = known_best_builder._poster_packing_credits  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     credit_lines = known_best_builder._print_credit_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
@@ -2602,17 +2723,29 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     names, lines, height = printed()
     try:
         monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
-        unheld_names, unheld_lines, unheld_height = printed()
+        released, released_lines, released_height = printed()
     finally:
         monkeypatch.undo()
         printed()
-    assert unheld_names - names == {"Özden"}
-    assert names < unheld_names
+    assert released - names == {"Özden", "Ono", "jazivxt", "Kodaj", "JoeGun"}
     assert "Özden" not in lines
-    assert "Özden" in unheld_lines
+    assert "Ono" not in lines
+    assert "jazivxt" not in lines
+    assert "Kodaj" not in lines
+    assert "JoeGun" not in lines
+    assert "Özden" in released_lines
+    assert "Ono" in released_lines
+    assert "jazivxt" in released_lines
+    assert "Kodaj" in released_lines
+    assert "JoeGun" in released_lines
+    assert "Yim" not in released_lines
+    assert released_lines != lines
     drawn = ET.fromstring((ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8"))
     assert drawn.get("height") == str(height)
-    assert unheld_height != height
+    # Measured on 16 November 2026: with the hold the 1-100 canvas keeps its drawn height,
+    # 3,898; released, the block's lines, with Kodaj's and JoeGun's names and without
+    # Chilton's, lay the canvas out at 3,869, a difference the next infographics cut draws.
+    assert (height, released_height) == (3898, 3869)
 
 
 def test_the_print_credit_hold_cannot_outlive_its_edition(
@@ -2638,6 +2771,9 @@ def test_the_print_credit_hold_cannot_outlive_its_edition(
     [refused] = problems([INFOGRAPHIC_VERSION, "v9.9.9"])
     assert "v9.9.9" in refused
     assert "think-tj4o" in refused
+    # think-hgpg is moot since 6 November 2026, when no current count credits Yim (#916).
+    assert "think-hgpg" not in refused
+    assert "overflows" not in refused
     monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
     assert problems(["v9.9.9"]) == []
 
@@ -4710,10 +4846,12 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
-    # 30 since the adoption at 232 and 307 of 31 October 2026 (see the credits test above).
+    # 30 since the adoption at 232 and 307 of 31 October 2026, 28 since the adoption of
+    # issue 914 of 5 November 2026 took Lavrentev's and Tymchishin's names off, and 27 since
+    # the pass of 16 November 2026 took Chilton's off at 232 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 30
+        == 27
     )
 
 

@@ -1,0 +1,47 @@
+{
+ "issue": {
+  "number": 914,
+  "title": "175, 204, 260, 268, 293, 303, 304: registration request",
+  "user": "evand",
+  "created_at": "2026-11-05T19:07:50Z",
+  "updated_at": "2026-11-05T21:18:34Z",
+  "body_sha256": "d3d3b4982e58a62e760df17f5329037f6dc847618afaa47fd8c724a96f7d3031",
+  "digests_printed": 13
+ },
+ "issue_digests_all_equal": true,
+ "commit_adds": {
+  "files": 56,
+  "all_added": true,
+  "all_under_candidates": true
+ },
+ "packet_vs_upstream_bb4cc78": {
+  "equal": 55,
+  "equal_after_gunzip": 3,
+  "differ": [],
+  "not_in_packet": [
+   "search/exact/verify_cert.py",
+   "search/exact/verify_cert2.py"
+  ]
+ },
+ "issue_digests_vs_upstream_all_equal": true,
+ "licence": {
+  "mit_header": true,
+  "copyright_line": "Copyright (c) 2026 Evan Daniel",
+  "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+  "equal_upstream": true
+ },
+ "credits_md": {
+  "mentions_Deotte": false,
+  "mentions_composer": false,
+  "provenance_sentence": "Produced by Claude (Anthropic) in a single session under human direction, in the same spirit of",
+  "equal_upstream": true
+ },
+ "commit_log_head": [
+  "commit bb4cc78e5b35103c1f177db55e9cf08974e66563",
+  "parents 39fb4f027bf00405a8f13edb53bd111a805155b2",
+  "author Evan Daniel <evanbd@gmail.com> 2026-11-05T11:29:13-07:00",
+  "committer Evan Daniel <evanbd@gmail.com> 2026-11-05T11:29:13-07:00",
+  "tree 341f5ffb171dfae6476b22639fc0d6e932233367",
+  ""
+ ]
+}

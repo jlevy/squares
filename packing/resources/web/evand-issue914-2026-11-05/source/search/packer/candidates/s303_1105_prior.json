@@ -1,0 +1,147 @@
+{
+ "store_id": 2798297,
+ "s": 17.9069782337989,
+ "sources": [
+  "pending:#763 (Francisco Couzo)",
+  "register (Vladislav Lavrentev)",
+  "register (Vladislav Lavrentev)",
+  "register (Vladislav Lavrentev)",
+  "register (Vladislav Lavrentev)",
+  "register (Vladislav Lavrentev)",
+  "register (Vladislav Lavrentev)",
+  "register (Vladislav Lavrentev)",
+  "register (Vladislav Lavrentev)",
+  "register (Vladislav Lavrentev)",
+  "run:runs/fault/b_ref1025 (None)",
+  "run:runs/fault/b_ref1026 (None)",
+  "watch:franciscouzo/square-packing@1c17153 (lollipoll)"
+ ],
+ "ok": true,
+ "S_exact": "17.906978233795266981649643337023191704217635713062390980393619553",
+ "S_cert": "17.906978233795266981828713119362",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 303 closed unit squares pairwise disjoint inside the open box of side 17.906978233795268096 (671 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": -0.0,
+  "status": "inconclusive: negative curvature blocked (first order) by weakly active contacts",
+  "flat_motions": 120,
+  "flat_realised": 120.0,
+  "flat_residual": 9.050250933976421e-32,
+  "negative_eigs": 1,
+  "corner_corner": 257,
+  "vv_milp_dS": 0.0,
+  "rattlers": 23,
+  "min_pair": 9.999999999999989e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "17.9069782337952669816496433370231917042176357130623909803936",
+  "S_cert": "8953489116897633490914356559681/500000000000000000000000000000",
+  "groups": [
+   34,
+   11
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 303 closed unit squares pairwise disjoint inside the open box of side 17.906978233795268096 (653 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.005145482941220081,
+  "matching_distance_regularized": 0.38081481090303654,
+  "symmetry": 0,
+  "moved_gt_1e4": 272,
+  "moved_gt_1e2": 157,
+  "moved_gt_1e1": 110,
+  "moved_gt_1e1_all": 126,
+  "max_move": 1.1070107471065265,
+  "max_move_all": 1.1375926713465478,
+  "max_angle_change": 44.36117473693291,
+  "rattler_status_swaps": 30,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "17.2764",
+   "22.1256",
+   "22.2599",
+   "22.4133",
+   "22.4563",
+   "22.5143",
+   "22.8512",
+   "22.8767",
+   "22.9417",
+   "23.0984",
+   "23.2150",
+   "23.4380",
+   "23.4900",
+   "23.4921",
+   "23.6603",
+   "23.7146",
+   "23.8456",
+   "23.8829",
+   "24.0001",
+   "24.0854",
+   "24.1141",
+   "24.1927",
+   "24.1937",
+   "24.2562",
+   "24.2574",
+   "24.2908",
+   "24.3176",
+   "24.3236",
+   "24.3270",
+   "24.3290",
+   "24.3300",
+   "24.3306",
+   "24.3307",
+   "24.3312",
+   "24.4409",
+   "24.4696",
+   "24.4876",
+   "24.8846",
+   "25.4186",
+   "25.8095",
+   "25.9458",
+   "26.1919",
+   "26.4661",
+   "26.6771",
+   "26.7360"
+  ],
+  "prior_only_angles": [
+   "26.7601",
+   "26.8332",
+   "26.8983",
+   "26.9852",
+   "27.0847"
+  ],
+  "contacts": {
+   "symmetry": 5,
+   "edges_ours": 814,
+   "edges_prior": 566,
+   "shared": 460,
+   "ours_only": 354,
+   "prior_only": 106,
+   "rattlers_ours": 9,
+   "rattlers_prior": 23,
+   "rattlers_shared": 2
+  }
+ }
+}

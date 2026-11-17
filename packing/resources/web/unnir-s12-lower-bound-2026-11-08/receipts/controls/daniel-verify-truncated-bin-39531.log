@@ -1,0 +1,6 @@
+# command: nice -n 19 /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/verify-target/release/verify truncated.txt 12 96000 1 0
+# cwd: truncated control (63161c11), written by devtools.audit_s12_unnir_certificate --write-controls; as the source's replay.py runs it: VERIFY_FULLSWEEP=1 VERIFY_BINS=39531:39531, one thread; scratch build 9f9dbeaf
+# python3: not used by this command
+# host: 4 cores; load 4.22 4.30 2.74; started 2026-11-08T15:19:06Z
+ERROR: malformed certificate: missing X_4996
+# finished 2026-11-08T15:19:06Z; exit 2; wall 0.006 s; CPU 0.0 s (user 0.004 + sys 0.000); load 4.22 4.30 2.74

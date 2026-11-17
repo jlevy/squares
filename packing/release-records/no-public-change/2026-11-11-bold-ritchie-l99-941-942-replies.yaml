@@ -1,0 +1,39 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L99 of 11 November: the first reply on #941 is recorded as an import reply, speaking
+  of above324-15 and n809 with no id, since neither result maps to a register or evidence id,
+  and naming think-kzme, which 809 waits on; the issue stays open for 809, recorded open with no
+  close date, and its notes record that GitHub closed it when #952 merged and that it was
+  reopened before the reply. The final reply on #942 is recorded, speaking of
+  above324-refined-16 and above324-refined-addendum-6 with no id, and the issue is recorded
+  closed, read through its reply. No result, rung, side, bound, mark or credit changes. Against
+  main c8448724e (#952): rendered by devtools.compare_paper_renders into empty site directories,
+  its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with
+  that main's result-requests.yaml swapped in: 43 files each, all byte-identical across the
+  three. No PDF was printed; it prints from that HTML. The paper keeps its version, v0.2.7.
+  Intake lane L103, on the same branch: Joost de Winter's answers on #941 (20:19:41Z) and #942
+  (20:20:02Z) are read into both entries, each read_through moving to its answer, and the notes
+  record what each answer says, that the answers settle the review's questions, and that n809
+  stays queued on think-kzme. No reply, issue state, result, rung, side, bound or mark changes;
+  the credit of the two #942 bibliography keys gains penguin069 and kmmmvs, and
+  bibliography.yaml is no input of this paper. Rendered again the same way against main
+  c8448724e with L103's result-requests.yaml: 43 files each, all byte-identical across the
+  three. Intake lane L112, on the same branch after it merged main 0af33d857 (#956, #957): the
+  final reply on #954 (22:41:37Z) is recorded, stating T-291 at V3/C3, confirmed and current,
+  with its three mapped evidence ids, and the issue is recorded closed, read through its reply;
+  its beads gain think-71uq, think-mdxq and think-89i7, which the reply names, and its notes
+  record what the reply says. No result, rung, side, bound, mark or credit changes. Rendered
+  again the same way against main 0af33d857 with L112's result-requests.yaml: 43 files each,
+  all byte-identical across the three. Review lane L114, on the same branch: the #942 final
+  reply's credit line is marked outdated, since after the author's answer both bibliography
+  keys credit penguin069 and kmmmvs, so the issue owes a follow-up; the notes on the #941,
+  #942 and #954 replies follow their posted wording more closely, and the #954 reply lists the
+  five beads it names. No reply, issue state, result, rung, side, bound, mark or credit
+  changes. Rendered again the same way against main 0af33d857 with L114's
+  result-requests.yaml: 43 files each, all byte-identical across the three.

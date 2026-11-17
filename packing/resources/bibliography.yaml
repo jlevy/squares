@@ -4417,6 +4417,60 @@ sources:
       the checks and this write-up." MIT licence for the scripts; the README releases the
       certificate into the public domain (CC0). Retained whole but for .gitignore in
       web/moh63-dev-s44-equals-7-2026-10-29/. Dated by that revision, 2026-10-29 UTC.
+  - key: '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+    authors: [Khalili, Gharabaghi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-13'
+    credit: Khalili, Gharabaghi after Daniel
+    lineage: independent
+    note: >-
+      moh63-dev/k2m5-family at 2c0b1b9979bcb67d92eb215366dc5ee19286c1d8
+      (2026-11-13T23:50:51Z), the repository's one commit: Mohsen Khalili and Sara
+      Gharabaghi's s(k^2 - 5) = k for every k >= 7, k = 7, 8 and 9 by the s(44), s(59) and
+      s(76) certificates (theirs, Hiroaki Hosono's and Benjamin Greff's) and every k >= 10
+      by one family of measures, a corner module, a period-1 wall pattern of depth 4 and
+      Lebesgue measure in the middle, of total k^2 - 4D with D = 1340566927759/10^12 > 5/4,
+      reduced by locality to the 11 x 11 board certificate/sol_exact_box11.txt. The board
+      is decided by Evan Daniel's zmx2 (first-order, D4-reduced) on 12,024 of 12,100 roots,
+      by zmx2 with his qx2_zm.py on root 9632, and by the authors' Tight-Tile Lemma and
+      checker on the 75 roots where zmx2 stalls at wall tiles of mass exactly one; the Lean
+      reduction k2m5_of_valid11 takes the board's validity as a hypothesis. Registration
+      was requested in jlevy/squares#973; the paper, paper/k2m5.pdf, is a draft not yet peer
+      reviewed. The paper thanks Evan Daniel for the linear program, checkers, format and
+      Lean reductions it builds on, Hiroaki Hosono and B. Greff for their public
+      certificates and "the Squares Project for its records", and cites T-252, T-066, T-184
+      and T-191 for the cases k = 7 to 10; it names no debt to this project's methods.
+      Acknowledgments: "The search, the certificate, the Tight-Tile checker and its proof,
+      and the verification runs were produced with Claude (Anthropic) under the authors'
+      direction; the authors reviewed the method, the checks and the text." MIT licence
+      (LICENSE); the README adds CC BY 4.0 for text and data. Retained but for .gitignore
+      and the 8.7 MB tight_tile/cov.tar.xz, pinned by digest, in
+      web/moh63-dev-k2m5-family-2026-11-13/. Dated by that revision, 2026-11-13 UTC.
+      The paper is archived as DOI 10.5281/zenodo.24237740 and release v1.1 (tag v1.1 =
+      9ccfe825fe04cd9f3770b4e76892364ceb50322c, committed 2026-11-15T02:56:10Z, the
+      certificate and every file of certificate/ unchanged from the pin) as DOI
+      10.5281/zenodo.24237941, as the
+      authors give them on jlevy/squares#973 (comment 6889513117) and in README.md at
+      0e28e8a547c742fb1e120da22dc8d7275f1a6f52; v1.1 states MIT for the code and CC BY 4.0
+      for the text and data in LICENSE. Neither DOI was resolved from the session that
+      recorded them, whose proxy refuses doi.org and zenodo.org.
+  - key: '[evand square-packing 2026-10-24]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-24'
+    credit: Daniel
+    lineage: independent
+    note: >-
+      evand/square-packing at 659ee62e4a9d39542a1146e8b011cc3ab6407ede
+      (2026-10-24T05:01:33Z), the commit Mohsen Khalili and Sara Gharabaghi's releases pin
+      for Evan Daniel's checkers: zmx2 (verify2/src/bin/zmx2.rs e2bb84e9) and qx2_zm.py
+      with the files it imports. Only search/zeromargin.py (3cb95fb7), LICENSE and
+      CREDITS.md are retained, in web/evand-square-packing-2026-10-24/; the other checker
+      files are byte-identical to copies earlier evand packets retain and are pinned to
+      them. MIT; CREDITS.md says the work was produced by Claude (Anthropic) in a single
+      session under human direction.
   - key: '[Mishapolk refinements 2026-10-23]'
     authors:
     - Polkovskyi
@@ -4554,6 +4608,32 @@ sources:
       repository's census replayed it at all 600 directions on 3 November 2026 and its whole-net control passed
       on 4 November, so T-262 is V3/C3, reproduced with the producer's code. Ozden is Özden
       in the credit's ASCII. Retained in web/ozden-s94-lower-bound-2026-11-03/.
+  - key: '[Özden s94 lower bound 2026-11-05]'
+    authors: [Özden]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: builds-on-project
+    credit: Ozden after Hosono, Tokoharu, Levy
+    short_credit: Ozden after Hosono, Tokoharu et al.
+    note: >-
+      kenaznia-doga/s94-lower-bound-9972 at 7d21f9bdf707102dd4ebf47e52f81b502a01004d
+      (2026-11-05T06:51:31Z), Doğa Özden's certificate for s(94) >= 2493/250: Hiroaki
+      Hosono's mixed_n94_L995 rectangle measure (T-091) dilated by 4986/4975 onto a declared
+      net of 4,972 half-angle directions of step 1/12000, with the lab's receipts of this
+      repository's sqverify-fast at every direction, assembled from six native runs, and a
+      99/100 mass control at two directions. Registration was requested in
+      jlevy/squares#910, posted on the author's behalf by his AI agent's account
+      kenaznia-doga. The README credits the measure to Hosono after Tokoharu and the
+      declared nets, the verifier, its review and T-262 to Joshua Levy and this project;
+      it says AI agents in the author's lab (Claude and OpenAI Codex agents) constructed
+      and rescaled the certificate, ran the checks, audited the receipts and prepared the
+      submission under his direction. Licensed CC BY 4.0 (certificates, witnesses,
+      receipts, data, write-ups) and MIT (code) by LICENSE.md, byte for byte the
+      declaration of [Özden s94 dilation 2026-11-03]. This repository's census replayed it
+      at all 4,972 directions on 5 November 2026 and its whole-net control passed the same
+      day, so T-266 is V3/C3, reproduced with the producer's code. Ozden is Özden in the
+      credit's ASCII. Retained in web/ozden-s94-lower-bound-9972-2026-11-05/.
   - key: '[Özden s299 upper bound 2026-11-03]'
     authors: [Özden]
     year: 2026
@@ -4602,7 +4682,1051 @@ sources:
       announced on jlevy/squares#890 (think-mdxq); retained before that on the presumption
       of permission the author's submission carries (think-cnn7). Ozden is Özden in the
       credit's ASCII. Retained in web/ozden-s204-upper-bound-2026-11-03/.
+  - key: '[Yim s260 upper bound 2026-11-05]'
+    authors: [Yim]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: independent
+    credit: Yim after Daniel, Tymchishin
+    short_credit: Yim after Daniel et al.
+    note: >-
+      vitamoon/vitamoon at d11a8a1ce798f7c0b4f801e922e242d22cedcd73 (2026-11-05T05:44:44Z),
+      Kaelan Yim's certificate n260.cert, first committed at e7cab3a (2026-11-05T05:27:47Z) and
+      unchanged at the pin, for s(260) <=
+      1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626
+      = 16.63398250192261413...: a rational centre/half-angle certificate in Evan Daniel's
+      format of a further arrangement of the registry's 260, Evan Daniel's #845 certificate
+      (T-257), one to one with it, whose lineage Daniel states starts at Kirill Tymchishin's
+      Kaggle notebook packing; the issue attributes the start to both. Registration was
+      requested in jlevy/squares#895, whose attachment this environment cannot fetch; the
+      author's reply names this file by branch, with no digest. AI-assisted environment set-up
+      disclosed. No global optimality claim. The lineage is independent: the source credits
+      Daniel's and Tymchishin's packing and none of this project's work, and this
+      repository's checker, which the author ran, is no part of the packing's lineage.
+      Licensed CC BY 4.0 with attribution to Kaelan Yim by the author's reply on
+      jlevy/squares#895 (issuecomment-6650567350). Retained in
+      web/yim-s260-upper-bound-2026-11-05/.
+  - key: '[Daniel issue 914 2026-11-05]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: independent
+    credit: Daniel after Deotte
+    note: >-
+      Seven complete exact certificates first committed at
+      evand/square-packing@bb4cc78e5b35103c1f177db55e9cf08974e66563 on 5 November 2026, the
+      head the packet pins, reported on issue 914: exact KKT points at 175, 204, 268, 293, 303
+      and 304, each with a regularized view at the same side, and a dilation certificate at
+      260, each a new packing by the source's word, built by the author's fault-line composer,
+      his implementation of Chris Deotte's multi-gadget fault DP. This key credits the
+      certificates at 204, 268, 293, 303 and 304, whose gadget donors are Daniel's own or not
+      recorded and whose credit is Daniel's after Deotte for the method, and names the
+      release; 175 and 260, whose starts the issue credits, have keys of their own, below
+      (F13 of the 5 November review). MIT-licensed; Claude assistance disclosed. No global
+      optimality claim. Retained in web/evand-issue914-2026-11-05/, the six views pinned in
+      web/evand-issue914-views-2026-11-05/.
+  - key: '[Daniel issue 914 views 2026-11-05]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: independent
+    credit: Daniel after Deotte
+    note: >-
+      The six regularized display views issue 914 names beside its certificates at 175, 204,
+      268, 293, 303 and 304, at evand/square-packing@bb4cc78e5b35103c1f177db55e9cf08974e66563,
+      each stating its certificate's exact side, drawn by the author's regularizer from his
+      packings, which his fault-line composer, his implementation of Chris Deotte's
+      multi-gadget fault DP, built. They claim no bound of their own; the record decides them
+      on both exact routes as it decides the certificates. MIT-licensed; Claude assistance
+      disclosed. Pinned in web/evand-issue914-views-2026-11-05/ against the copies
+      web/evand-issue914-2026-11-05/ retains.
+  - key: '[Daniel issue 914 n175 2026-11-05]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: independent
+    credit: Daniel after Deotte, Ostashev, PingYou Ltd, Polkovskyi
+    short_credit: Daniel after Deotte et al.
+    note: >-
+      The release's certificate at 175, search/packer/candidates/s175_1105.cert at
+      evand/square-packing@bb4cc78e5b35103c1f177db55e9cf08974e66563, first committed on 5
+      November 2026 and reported on issue 914: an exact KKT point of a new packing built by the
+      author's fault-line composer, his implementation of Chris Deotte's multi-gadget fault DP,
+      from gadgets of the register's s(175) packing (T-186: Daniil Ostashev's, as PingYou Ltd
+      and Mykhailo Polkovskyi refined it), which the issue asks to be credited as the start,
+      and an earlier composer build of his. It has a key of its own because its credit is the
+      175's (F13 of the 5 November review). MIT-licensed; Claude assistance disclosed. No
+      global optimality claim. Retained in web/evand-issue914-2026-11-05/.
+  - key: '[Daniel issue 914 n260 2026-11-05]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-05'
+    lineage: independent
+    credit: Daniel after Deotte, Tymchishin
+    short_credit: Daniel after Deotte et al.
+    note: >-
+      The release's certificate at 260, search/packer/candidates/s260_ks_1105.cert at
+      evand/square-packing@bb4cc78e5b35103c1f177db55e9cf08974e66563, first committed on 5
+      November 2026 and reported on issue 914: a dilation certificate of a new packing built by
+      the author's fault-line composer, his implementation of Chris Deotte's multi-gadget
+      fault DP, which recomposes in a 260 frame the tilted island of his issue 845 packing at
+      260 (T-257), with that packing's credit, Kirill Tymchishin's (kirilltym) Kaggle s(260) as
+      the start. It has a key of its own because its credit is the 260's (F13 of the 5
+      November review). MIT-licensed; Claude assistance disclosed. No global optimality claim.
+      Retained in web/evand-issue914-2026-11-05/.
+  - key: '[unnir s12 2026-11-08]'
+    authors: [unnir]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-08'
+    lineage: builds-on-project
+    credit: unnir after Daniel, Ryu, Levy
+    short_credit: unnir after Daniel et al.
+    ai_assistance:
+      sentence: 'The source says Numaro Autonomous Research (agentic autonomous autoresearch) assisted the work, and that acceptance rests on the certificate and the executable checks, not on agent agreement.'
+      marker: 'Numaro Autonomous Research'
+      anchor: 'unnir'
+    note: >-
+      unnir/s12-lower-bound-3.9716 at 064c2955670765321aaf1c0a2d5c778949daab6b
+      (2026-11-08T14:20:03Z, the repository's only commit), by unnir of Numaro
+      (https://numaro.tech), reported on jlevy/squares#924. It claims s(12) >= 9929/2500 =
+      3.9716 from certificate/s12_lower_3.9716.txt, a plain weighted-point certificate in
+      Evan Daniel's format: 4,996 D4-symmetric points on the grid 1/4000000, W = 9985226,
+      total 119787760/9985226 < 12, accepted at the angle net N = 96000 by Daniel's verify
+      (vendored byte for byte from evand/square-packing 0e76d9fe, built with overflow
+      checks) and by Ryu Sungjoon's indep_scan.cpp (from squarepacker/s12-lower-bound
+      7a96bec3, one include line changed), each with least captured weight exactly 1 at
+      bin 39531. The README asks credit for the new certificate instance to unnir (Numaro),
+      building on Levy, Evan Daniel and Ryu Sungjoon and the Burns and Massaccesi
+      framework, claims no new technique and no optimality, and says Numaro Autonomous
+      Research (agentic autonomous autoresearch) assisted the work. The sources give no
+      name but the handle unnir and the organization Numaro, which is not a second author.
+      MIT for the certificate, documentation and replay helper; the verifiers keep Daniel's
+      and Ryu's MIT notices. Retained in web/unnir-s12-lower-bound-2026-11-08/.
+  - key: '[Özden s232 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Chilton, Couzo, Daniel, Levy'
+    short_credit: 'Ozden after Chilton et al.'
+    note: >-
+      kenaznia-doga/s232-upper-bound at 09e324f447d20e10b79de410ad9950a2772c955d
+      (2026-11-09T06:02:41Z), Doğa Özden's certificate for s(232) <= 15.7614096448817244 (the exact side rounded up at 16 places), printed
+      15.761409644882 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
+      of the registry's 232, Francisco Couzo's refinement of Alex Chilton's Kaggle notebook packing
+      (T-256), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) from this repository's regularized known-best atlas,
+      its exact coordinates made by this repository's packing-witness promote --strategy
+      robust-rational. Registration was requested in jlevy/squares#927, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the search was AI-assisted throughout, under
+      his direction. No global optimality claim. The lineage builds on this project: the source
+      starts from the registry's regularized atlas and makes its exact coordinates with this
+      repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, outputs, write-ups) and MIT
+      (verifier/sqcheck.py) by LICENSE.md at the pin. Ozden is Özden in the credit's ASCII. Retained
+      in web/ozden-s232-upper-bound-2026-11-09/.
+  - key: '[Özden s268 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Deotte, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s268-upper-bound at a40a15d91081be002805b6eea35e099c9a2656db
+      (2026-11-09T06:02:49Z), Doğa Özden's certificate for s(268) <= 16.8724698978362125 (the exact side rounded up at 16 places), printed
+      16.872469897837 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
+      of the registry's 268, Evan Daniel's packing after Chris Deotte's multi-gadget fault DP
+      (T-270, #914), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) from this repository's regularized known-best atlas,
+      its exact coordinates made by this repository's packing-witness promote --strategy
+      robust-rational. Registration was requested in jlevy/squares#928, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the search was AI-assisted throughout, under
+      his direction. No global optimality claim. The lineage builds on this project: the source
+      starts from the registry's regularized atlas and makes its exact coordinates with this
+      repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, outputs, write-ups) and MIT
+      (verifier/sqcheck.py) by LICENSE.md at the pin. Ozden is Özden in the credit's ASCII. Retained
+      in web/ozden-s268-upper-bound-2026-11-09/.
+  - key: '[Özden s299 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Deotte, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s299-upper-bound-17801004 at a042eab017caeb07ca5f79afcdc5fbb89103cda2
+      (2026-11-09T06:02:57Z), Doğa Özden's certificate for s(299) <= 17.8010044342552937 (the exact side rounded up at 16 places), printed
+      17.801004434256 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
+      of the registry's 299, his own further arrangement of Evan Daniel's packing after Chris Deotte
+      (T-263, #893), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) from this repository's regularized known-best atlas,
+      its exact coordinates made by this repository's packing-witness promote --strategy
+      robust-rational. Registration was requested in jlevy/squares#929, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the search was AI-assisted throughout, under
+      his direction. No global optimality claim. The lineage builds on this project: the source
+      starts from the registry's regularized atlas and makes its exact coordinates with this
+      repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, outputs, write-ups) and MIT
+      (verifier/sqcheck.py) by LICENSE.md at the pin. Ozden is Özden in the credit's ASCII. Retained
+      in web/ozden-s299-upper-bound-2026-11-09/.
+  - key: '[Özden s303 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Deotte, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s303-upper-bound at b43ca090fc2ff5e750fecc71d8514298fe164514
+      (2026-11-09T06:03:05Z), Doğa Özden's certificate for s(303) <= 17.9017892731564904 (the exact side rounded up at 16 places), printed
+      17.901789273157 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
+      of the registry's 303, Evan Daniel's packing after Chris Deotte's multi-gadget fault DP
+      (T-272, #914), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) from this repository's regularized known-best atlas,
+      its exact coordinates made by this repository's packing-witness promote --strategy
+      robust-rational. Registration was requested in jlevy/squares#930, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the search was AI-assisted throughout, under
+      his direction. No global optimality claim. The lineage builds on this project: the source
+      starts from the registry's regularized atlas and makes its exact coordinates with this
+      repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, outputs, write-ups) and MIT
+      (verifier/sqcheck.py) by LICENSE.md at the pin. Ozden is Özden in the credit's ASCII. Retained
+      in web/ozden-s303-upper-bound-2026-11-09/.
+  - key: '[Özden s307 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after ntumlnoob, Couzo, Daniel, Levy'
+    short_credit: 'Ozden after ntumlnoob et al.'
+    note: >-
+      kenaznia-doga/s307-upper-bound at dbe8838a7273dc8458fef1f5a16ef4384867ca19
+      (2026-11-09T06:03:13Z), Doğa Özden's certificate for s(307) <= 17.9792309603873628 (the exact side rounded up at 16 places), printed
+      17.979230960388 rounded up at 12 places: a rational corner Witness/v2 of a further arrangement
+      of the registry's 307, Francisco Couzo's refinement of ntumlnoob's Kaggle notebook packing
+      (T-256), found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) from this repository's regularized known-best atlas,
+      its exact coordinates made by this repository's packing-witness promote --strategy
+      robust-rational. Registration was requested in jlevy/squares#931, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the search was AI-assisted throughout, under
+      his direction. No global optimality claim. The lineage builds on this project: the source
+      starts from the registry's regularized atlas and makes its exact coordinates with this
+      repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, outputs, write-ups) and MIT
+      (verifier/sqcheck.py) by LICENSE.md at the pin. Ozden is Özden in the credit's ASCII. Retained
+      in web/ozden-s307-upper-bound-2026-11-09/.
+  - key: '[Özden s172 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s172-upper-bound at 2ce1f7c7621859437e0bcc1f9ad2b00822b2c605
+      (2026-11-09T15:28:22Z), Doğa Özden's certificate for s(172) <= 13.6146898532862152 (the
+      exact side rounded up at 16 places), printed 13.614689853287 rounded up at 12 places: a
+      rational corner Witness/v2 of a further arrangement of the registry's 172, Evan Daniel's
+      packing (T-257, #845), not one to one with it by nearest centres, found by basin hopping
+      over local minima of Evan Daniel's ALM+SLP quench (evand/square-packing at bb4cc78e,
+      MIT) from this repository's regularized known-best atlas, its exact coordinates made by
+      this repository's packing-witness promote --strategy robust-rational from the decimal
+      pose the source retains. Registration was requested in jlevy/squares#935, posted on the
+      author's behalf by his AI agent's account kenaznia-doga; the issue says the search and
+      its code were written and run by AI agents, under his direction. No global optimality
+      claim. The lineage builds on this project: the source starts from the registry's
+      regularized atlas and makes its exact coordinates with this repository's promotion tool.
+      Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs, write-ups) and MIT
+      (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
+      notice for the base packing's certificate, as LICENSE-evand-square-packing.txt. Ozden is
+      Özden in the credit's ASCII. Retained in web/ozden-s172-upper-bound-2026-11-09/.
+  - key: '[Özden s270 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Chaoweeraprasit, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s270-upper-bound at 78ab8cec9085e4e1d6489127113f0af2550e749b
+      (2026-11-09T15:28:32Z), Doğa Özden's certificate for s(270) <= 16.9281486033428544 (the
+      exact side rounded up at 16 places), printed 16.928148603343 rounded up at 12 places: a
+      rational corner Witness/v2 of a further arrangement of the registry's 270, Evan Daniel's
+      packing found in a sweep from Nate Chaoweeraprasit's SQUISH packing (T-224, #703), one
+      to one with it, found by basin hopping over local minima of Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) from this repository's regularized known-best
+      atlas, its exact coordinates made by this repository's packing-witness promote
+      --strategy robust-rational from the decimal pose the source retains. Registration was
+      requested in jlevy/squares#936, posted on the author's behalf by his AI agent's account
+      kenaznia-doga; the issue says the search and its code were written and run by AI agents,
+      under his direction. No global optimality claim. The lineage builds on this project: the
+      source starts from the registry's regularized atlas and makes its exact coordinates with
+      this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose,
+      outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also
+      carries Evan Daniel's MIT notice for the base packing's certificate, as
+      LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in
+      web/ozden-s270-upper-bound-2026-11-09/.
+  - key: '[Özden s199 upper bound 2026-11-09]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s199-upper-bound at d03ee0bdb223e00fe124e818ed242f6cbd714fad
+      (2026-11-09T20:30:58Z), Doğa Özden's certificate for s(199) <= 14.6146898532862152 (the
+      exact side rounded up at 16 places), printed 14.614689853287 rounded up at 12 places: a
+      rational corner Witness/v2 whose squares 1 to 172 are his n = 172 certificate of
+      jlevy/squares#935 (T-282, a further arrangement of Evan Daniel's packing, T-257, #845)
+      with their rational corners unchanged, and whose other 27 are an L of axis-aligned unit
+      squares, a row of 14 along the top wall and a column of 13 along the right, at side
+      S172 + 1 exactly: the classical L step s(n + 2 floor(s) + 1) <= s(n) + 1. Nothing was
+      searched at 199. Registration was requested in jlevy/squares#938, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the issue says the search and its code
+      were written and run by AI agents, under his direction. No global optimality claim. The
+      lineage builds on this project: the n = 172 packing starts from the registry's
+      regularized atlas and its exact coordinates were made with this repository's promotion
+      tool. Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs, write-ups, drawings) and
+      MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
+      notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII.
+      Retained in web/ozden-s199-upper-bound-2026-11-09/.
+  - key: '[de Winter s199 upper bound 2026-11-09]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: 'de Winter after Ozden, Daniel, Levy'
+    short_credit: 'de Winter after Ozden et al.'
+    note: >-
+      JoostdeWinter/square-packing at 702c7af2db04c9b69696455ee3d33883a2935e8a
+      (2026-11-09T21:54:59Z), Joost de Winter's certificate for s(199) <= 14.6146898532835806
+      (the exact side rounded up at 16 places), printed at 38 places in jlevy/squares#939 as
+      14.61468985328358057514628890087947061619: a rational centre-basis witness without this
+      repository's schema envelope (n199/n199_witness.yaml) and the same packing as JSON
+      (n199/n199_exact.json), whose squares 1 to 172 are the n = 172 arrangement of
+      jlevy/squares#935 (T-282) re-solved to what the source calls its exact local optimum, and
+      whose other 27 are the L of jlevy/squares#938 (T-284), square for square. The source says
+      the side is 1.4e-99 above the real root near 14.6147 of 62x^5 - 4426x^4 + 125017x^3 -
+      1746146x^2 + 12052670x - 32855154; local optimality has no formal proof. Registration was
+      requested in jlevy/squares#939; the source says the work was produced with Claude
+      (Anthropic) under his direction. No global optimality claim. The lineage builds on this
+      project: the core is T-282's arrangement, which starts from the registry's regularized
+      atlas. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s199-upper-bound-2026-11-09/.
+  - key: '[de Winter s172 upper bound 2026-11-10]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: 'de Winter after Ozden, Daniel, Levy'
+    short_credit: 'de Winter after Ozden et al.'
+    note: >-
+      JoostdeWinter/square-packing at c4e65d0b8c4d32e45bf32a907e8b760502f137af
+      (2026-11-10T21:26:23Z), Joost de Winter's certificate for s(172) <= 13.614689853284
+      (rounded up at 12 places, as the source's README prints it; jlevy/squares#946 prints it cut
+      at 56 places): a rational centre-basis witness without this repository's schema envelope
+      (n172/n172_witness.yaml) and the same packing as JSON (n172/n172_exact.json), the n = 172
+      arrangement of jlevy/squares#935 (T-282) re-solved to what the source calls its exact local
+      optimum, the real root near 13.6147 of 62x^5 - 4116x^4 + 107933x^3 - 1397031x^2 + 8918035x -
+      22427977, 1.6e-319 above it, with 300-digit coordinates of the optimum; local optimality has
+      no formal proof. It is the 172-square core of jlevy/squares#939. Registration was requested
+      in jlevy/squares#946; the source says the work was produced with Claude (Anthropic) under
+      his direction. No global optimality claim. The lineage builds on this project: the
+      arrangement is T-282's, which starts from the registry's regularized atlas. Licensed MIT by
+      LICENSE at the pin. Retained in web/de-winter-s172-upper-bound-2026-11-10/.
+  - key: '[Yim certificates 2026-11-09]'
+    authors:
+    - Yim
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-09'
+    lineage: builds-on-project
+    credit: Yim after Ozden, Daniel, Deotte, Casson, Couzo, Lavrentev, alexchilton, Polkovskyi, Levy
+    short_credit: Yim after Ozden et al.
+    note: >-
+      vitamoon/vitamoon at ac14112009f5668b464170dcd979334a5537521d (2026-11-09T09:49:17Z),
+      Kaelan Yim's 14 exact rational centre/half-angle certificates in Evan Daniel's format,
+      publications in a watched repository that no issue reports and, by their own word, not a
+      registration request: at 299 (first committed at e4209f6) and 303 (546928a, overwriting the
+      first n303 of 78eb9ea) re-solves of Doğa Özden's #929 and #930 packings (T-277, T-278), after
+      Evan Daniel and Chris Deotte, with Griffin Casson's SLP solver; at 130 (c10e094) Mykhailo
+      Polkovskyi's T-259 certificate translated, after Francisco Couzo; and at 553 to 700
+      (78eb9ea) refinements and further arrangements of Couzo's packings after Vladislav
+      Lavrentev's, and at 604 after alexchilton's. AI-assisted (Hermes Agent). No global
+      optimality claim. The lineage builds on this project: the 299 certificate's source names
+      this repository's regularized atlas, and #929 and #930 were made with its promotion tool.
+      Retained as factual data; the repository states no licence for these files, and the 130 and
+      303 certificates carry Polkovskyi's MIT and Özden's CC BY 4.0 notices. Ozden is Özden in the
+      credit's ASCII. Retained in web/yim-certificates-2026-11-09/.
+  - key: '[Özden s156 upper bound 2026-11-10]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s156-upper-bound at 87c92921a64216d38914a7af488a7d7a91cf1eb7
+      (2026-11-10T15:27:50Z), Doğa Özden's certificate for s(156) <= 12.9770530874972048 (the
+      exact side rounded up at 16 places), printed 12.977053087498 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by transplant search, a horizontal and a
+      vertical unit-wide strip cut out of the registry's 182 (Evan Daniel) and closed up,
+      squares then deleted, then quenched with Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT) and basin-hopped over its local minima, a new
+      arrangement relative to the house's packing (T-186), its exact coordinates made by this
+      repository's packing-witness promote --strategy robust-rational from the decimal pose the
+      source retains. Registration was requested in jlevy/squares#943, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the issue says the search and its code
+      were written and run by AI agents, under his direction. No global optimality claim. The
+      lineage builds on this project: the seed is a registry packing and the exact coordinates
+      are made with this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal
+      pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin
+      also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden
+      in the credit's ASCII. Retained in web/ozden-s156-upper-bound-2026-11-10/.
+  - key: '[Özden s180 upper bound 2026-11-10]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Couzo, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s180-upper-bound at 4cfcb9058a5bc5e8e6986bda31c072ccefc3731f
+      (2026-11-10T15:27:50Z), Doğa Özden's certificate for s(180) <= 13.9156185027900258 (the
+      exact side rounded up at 16 places), printed 13.915618502791 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by transplant search, an L of axis-aligned
+      grid squares added along two walls of the registry's 154 (Evan Daniel, improved by
+      Francisco Couzo), squares then deleted or inserted, then quenched with Evan Daniel's
+      ALM+SLP quench (evand/square-packing at bb4cc78e, MIT) and basin-hopped over its local
+      minima, a new arrangement relative to the house's packing (T-174), its exact coordinates
+      made by this repository's packing-witness promote --strategy robust-rational from the
+      decimal pose the source retains. Registration was requested in jlevy/squares#944, posted
+      on the author's behalf by his AI agent's account kenaznia-doga; the issue says the search
+      and its code were written and run by AI agents, under his direction. No global optimality
+      claim. The lineage builds on this project: the seed is a registry packing and the exact
+      coordinates are made with this repository's promotion tool. Licensed CC BY 4.0 (witness,
+      JSON, decimal pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the
+      pin; the pin also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt.
+      Ozden is Özden in the credit's ASCII. Retained in web/ozden-s180-upper-bound-2026-11-10/.
+  - key: '[Özden s268 upper bound 2026-11-10]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: 'Ozden after PingYou, Couzo, Mishapolk, Daniel, Levy'
+    short_credit: 'Ozden after PingYou et al.'
+    note: >-
+      kenaznia-doga/s268-upper-bound-16872029849 at b027aba9280d453ea075bd9b80694a5345257f4e
+      (2026-11-10T15:27:50Z), Doğa Özden's certificate for s(268) <= 16.8720298490844502 (the
+      exact side rounded up at 16 places), printed 16.872029849085 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by transplant search, a horizontal and a
+      vertical unit-wide strip cut out of the registry's 302 (PingYou Ltd, improved by Francisco
+      Couzo, Mishapolk and Evan Daniel) and closed up, then quenched with Evan Daniel's ALM+SLP
+      quench (evand/square-packing at bb4cc78e, MIT) and basin-hopped over its local minima, a
+      new arrangement relative to the house's packing (T-276), its exact coordinates made by
+      this repository's packing-witness promote --strategy robust-rational from the decimal pose
+      the source retains. Registration was requested in jlevy/squares#945, posted on the
+      author's behalf by his AI agent's account kenaznia-doga; the issue says the search and its
+      code were written and run by AI agents, under his direction. No global optimality claim.
+      The lineage builds on this project: the seed is a registry packing and the exact
+      coordinates are made with this repository's promotion tool. Licensed CC BY 4.0 (witness,
+      JSON, decimal pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the
+      pin; the pin also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt.
+      Ozden is Özden in the credit's ASCII. Retained in web/ozden-s268-upper-bound-2026-11-10/.
+  - key: '[Özden s269 upper bound 2026-11-11]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s269-upper-bound at 6f93b07eac91e5f7b299c9a6420041d9a695a478
+      (2026-11-11T03:34:54Z), Doğa Özden's certificate for s(269) <= 16.9009945799513249 (the
+      exact side rounded up at 16 places), printed 16.900994579952 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by transplant search, a horizontal and a
+      vertical unit-wide strip cut out of the registry's 304 (Evan Daniel) and closed up, one
+      square then deleted, then quenched with Evan Daniel's ALM+SLP quench (evand/square-packing
+      at bb4cc78e, MIT) and basin-hopped over its local minima, a new arrangement relative to
+      the house's packing (T-174), its exact coordinates made by this repository's
+      packing-witness promote --strategy robust-rational from the decimal pose the source
+      retains. Registration was requested in jlevy/squares#947, posted on the author's behalf by
+      his AI agent's account kenaznia-doga; the issue says the search and its code were written
+      and run by AI agents, under his direction. No global optimality claim. The lineage builds
+      on this project: the seed is a registry packing and the exact coordinates are made with
+      this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose,
+      outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also
+      carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in
+      the credit's ASCII. Retained in web/ozden-s269-upper-bound-2026-11-11/.
+  - key: '[de Winter issue 941 2026-11-10]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: builds-on-project
+    credit: de Winter after Couzo, Lavrentev, Tymchishin, Levy
+    short_credit: de Winter after Couzo et al.
+    note: >-
+      JoostdeWinter/square-packing at 71da0d56fd91b7061addca2a728ee72ec9728b0b
+      (2026-11-10T06:15:17Z), the folder above324/: Joost de Winter's fifteen exact rational
+      centre/half-angle certificates in Evan Daniel's format beyond the case corpus, at 413 to 910,
+      nine of them first committed at d3a020e (2026-11-09T23:59:23Z), reported in
+      jlevy/squares#941. Seven are square sub-windows of Francisco Couzo's packings at 544, 539,
+      590, 696, 851, 851 and 868 (#763, franciscouzo/square-packing 43f666c), re-optimized, 753 a
+      sub-window of the 810 here, six are borders of axis-aligned squares on these and 809 the 810
+      less one square; the issue credits the source arrangements to Couzo. Fourteen are
+      beyond-horizon rows below the rows of Couzo and Kirill Tymchishin at those counts, bounds
+      below the record, not the best known packings at 14 of the 15 counts: the issue says
+      public Kaggle submissions hold smaller ones at all but 543; 809, a deletion bound from the
+      810, is held for the owner (think-kzme).
+      The source says the work was
+      produced with Claude (Anthropic) under his direction. No local or global optimality claim is
+      replayed; the issue's local-optimality statements rest on a numerical solution without
+      formal proof. The lineage builds on this project: the source arrangements are Couzo's
+      packings as #763 reported them here, and the issue compares with this repository's record.
+      Licensed MIT by LICENSE at the pin. Retained in web/de-winter-issue941-2026-11-10/.
+  - key: '[de Winter issue 942 2026-11-10]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: independent
+    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069, kmmmvs
+    short_credit: de Winter after Samanyu-dev et al.
+    note: >-
+      JoostdeWinter/square-packing at a9486ede74cd75996f488605f27d7fce32a73b3a
+      (2026-11-10T14:39:52Z), the folder above324_refined/: Joost de Winter's sixteen exact
+      rational certificates beyond the case corpus, at 632 to 989, reported in jlevy/squares#942.
+      Each is a public Kaggle packing for the competition "Squares in Squares" from the per-puzzle
+      merge data_out/best_certified_22.2226173_before_clearance.csv in
+      Samanyu-dev/squares_in_squares at 53551d7, locally re-optimized along a remaining descent
+      direction with the arrangement unchanged. The merged file names no author per packing; its
+      README credits Chris Deotte, lightningv08 (Vladislav Lavrentev), alexchilton (Alex Chilton),
+      kirilltym (Kirill Tymchishin), malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt
+      and the register of Francisco Couzo, and the credit follows it, with penguin069 and kmmmvs:
+      the author's answer of 11 November (jlevy/squares#942, issuecomment-6806342752) says the
+      README introduces its ten names with "among them" and its score history names those two
+      further merged sources. The starting packings' authors are not identified per puzzle, and
+      the answer says the README reports the owner's own wins in the file at n = 650 to 990, so
+      some may be Samanyu-dev's own. No licence is stated for the starting packings: the answer
+      says the merge file states none and the repository has no licence file at 53551d7, and
+      that public Kaggle notebooks default to Apache 2.0, each dataset carrying its uploader's
+      choice; none was traced per packing. Beyond-horizon rows below the record's rows at those
+      counts. These are bounds below the record, which the record does not call the best known
+      packings (the review's F9): each arrangement is another holder's public Kaggle packing,
+      re-optimized, and the issue's own table puts each side 1.8e-07 to 3.8e-04 below the best
+      public packing it found, a comparison not checked here; Kaggle files no report brought
+      here may hold smaller ones. The source says the work
+      was produced with Claude (Anthropic)
+      under his direction. No local or global optimality claim. The lineage is independent: the
+      arrangements are public Kaggle packings, and the source compares with this repository's
+      register without building on it. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-issue942-2026-11-10/.
+  - key: '[de Winter a0c4fc8 2026-11-10]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-10'
+    lineage: independent
+    credit: de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo, penguin069, kmmmvs
+    short_credit: de Winter after Samanyu-dev et al.
+    note: >-
+      JoostdeWinter/square-packing at a0c4fc80db67e9806026921654dce49a155ac31b
+      (2026-11-10T15:37:44Z): six more of Joost de Winter's exact rational certificates in
+      above324_refined/, at 597, 754, 864, 865, 869 and 991, reported by his addendum comment on
+      jlevy/squares#942 (issuecomment-6772308414, 16:02:47Z), from the same procedure and merged
+      Kaggle file as the issue's sixteen, with the arrangements unchanged; credited as
+      [de Winter issue 942 2026-11-10] is, penguin069 and kmmmvs included; the starting
+      packings' authors are not identified per puzzle, so some may be Samanyu-dev's own; no
+      licence is stated for those starting packings, public Kaggle notebooks defaulting to
+      Apache 2.0, and none was traced per packing. The author's answer of 11 November
+      (jlevy/squares#942, issuecomment-6806342752) says the six came from a later run than the
+      issue's sixteen.
+      Beyond-horizon rows below the record's rows at those counts. These are bounds below the
+      record, which the record does not call the best known packings (the review's F9): each
+      arrangement is another holder's public Kaggle packing, re-optimized, and the addendum's
+      own table puts each side 1.2e-06 to 2.2e-04 below the best public packing it found, a
+      comparison not checked here; Kaggle files no report brought here may hold smaller ones.
+      Claude assistance disclosed.
+      No local or global optimality claim. Licensed MIT by
+      LICENSE at the pin. Retained in web/de-winter-a0c4fc8-2026-11-10/.
+  - key: '[Özden s179 upper bound 2026-11-11]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: builds-on-project
+    credit: 'Ozden after Xu, Daniel, PingYou, Levy'
+    short_credit: 'Ozden after Xu et al.'
+    note: >-
+      kenaznia-doga/s179-upper-bound at bd262d8ba2966000e827547597fe6da24d0e118c
+      (2026-11-11T18:27:50Z), Doğa Özden's certificate for s(179) <= 13.8813671601098758 (the
+      exact side rounded up at 16 places), printed 13.881367160110 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by a band-design search, new for this
+      filing, the tilted squares of the registry's 70 (Ryan Xu, improved by Evan Daniel and
+      PingYou Ltd), a two-row band of 20 squares, laid along the diagonal as a seed band,
+      annealed in a reduced model with the axis-parallel squares on the two wall-anchored
+      staircase lattices, then quenched once with Evan Daniel's ALM+SLP quench
+      (evand/square-packing at bb4cc78e, MIT), a new arrangement relative to the house's packing
+      (T-174, Nate Chaoweeraprasit's, improved by Siddharth Gupta and PingYou Ltd), its exact
+      coordinates made by this repository's packing-witness promote --strategy robust-rational
+      from the decimal pose the source retains. Registration was requested in jlevy/squares#954,
+      posted on the author's behalf by his AI agent's account kenaznia-doga; the issue says the
+      search and its code were written and run by AI agents, under his direction. No global
+      optimality claim. The lineage builds on this project: the band is built from a registry
+      packing and the exact coordinates are made with this repository's promotion tool.
+      Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs, write-ups) and MIT
+      (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan Daniel's MIT
+      notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII.
+      Retained in web/ozden-s179-upper-bound-2026-11-11/.
+  - key: '[de Winter s132 upper bound 2026-11-11]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: independent
+    credit: de Winter after Samanyu-dev
+    note: >-
+      JoostdeWinter/square-packing at 6617869a3491b5872c6ecdff55db05cbee57d516
+      (2026-11-11T20:52:23Z), Joost de Winter's certificate for s(132) <= 11.976048383604 (rounded
+      up at 12 places, as the root README prints it), first committed at
+      a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c (2026-11-11T20:49:44Z), 6 minutes 34 seconds before
+      jlevy/squares#958, which requested its registration: a rational centre-basis witness without
+      this repository's schema envelope (n132/n132_witness.yaml) and the same packing as JSON
+      (n132/n132_exact.json), a pinwheel derived from Samanyu-dev/squares_in_squares's public
+      109-square packing (53551d7) by one cut-and-fill step, 1.3e-59 above a 250-digit solution of
+      its contact equations; local optimality has no formal proof. The source credits the pinwheel
+      at 109 to Samanyu-dev and says the work was produced with Claude Fable 5.2 (Anthropic) under
+      de Winter's direction. No global optimality claim. The lineage is independent of this project.
+      Licensed MIT by LICENSE at the pin. Retained in web/de-winter-s132-upper-bound-2026-11-11/.
+  - key: '[de Winter s157 upper bound 2026-11-11]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: independent
+    credit: de Winter after Samanyu-dev
+    note: >-
+      JoostdeWinter/square-packing at 6617869a3491b5872c6ecdff55db05cbee57d516
+      (2026-11-11T20:52:23Z), Joost de Winter's certificate for s(157) <= 12.993302611344 (rounded
+      up at 12 places, as the root README prints it), below the 13 x 13 grid's 13, first committed
+      at a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c (2026-11-11T20:49:44Z), 6 minutes 34 seconds
+      before jlevy/squares#958, which requested its registration: a rational centre-basis witness
+      without this repository's schema envelope (n157/n157_witness.yaml) and the same packing as
+      JSON (n157/n157_exact.json), a pinwheel derived from Samanyu-dev/squares_in_squares's public
+      109-square packing (53551d7) by two cut-and-fill steps through his 132, 1.4e-59 above a
+      250-digit solution of its contact equations; local optimality has no formal proof. The source
+      credits the pinwheel at 109 to Samanyu-dev and says the work was produced with Claude Fable
+      5.2 (Anthropic) under de Winter's direction. No global optimality claim. The lineage is
+      independent of this project. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s157-upper-bound-2026-11-11/.
+  - key: '[de Winter method 132 157 2026-11-12]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-12'
+    lineage: independent
+    credit: de Winter after Samanyu-dev
+    note: >-
+      JoostdeWinter/square-packing at 57de0465c07f7ba94bbd1fd2a317ee3f08cfedca
+      (2026-11-12T08:30:46Z), the commit after 6617869 that Joost de Winter's answers on
+      jlevy/squares#958 (issuecomment-6818738203, 08:31:55Z) name: method_n132_n157/, the code
+      that produced his packings of 132 and 157 ([de Winter s132 upper bound 2026-11-11], T-292;
+      [de Winter s157 upper bound 2026-11-11], T-293), a growth step that cuts a packing along
+      one vertical and one horizontal line and copies the layer next to each cut across it, an
+      IPOPT model through CasADi, a 900-bit Newton solver of the contact equations, the
+      certificate scripts, the 250-digit solutions, and binary64 and Shapely checks; and both
+      witness files with this repository's softschema header, a claim block and a lowercase id,
+      their squares and sides unchanged. The method README says that, run from Samanyu-dev's
+      public 109-square packing (squares_in_squares 53551d7), the scripts reproduce both exact
+      JSON files byte for byte; not run here, so that is the author's claim. The README says the
+      code was written with Claude Fable 5.2 (Anthropic) under de Winter's direction. No new
+      bound. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-method-132-157-2026-11-12/.
+  - key: '[Özden s179 issue 959 2026-11-11]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: builds-on-project
+    credit: 'Ozden after Xu, Daniel, PingYou, Levy'
+    short_credit: 'Ozden after Xu et al.'
+    note: >-
+      kenaznia-doga/s179-upper-bound-13880960371 at 6ab3cfe60db4d081092bed3b6bbb44c76b067230
+      (2026-11-11T21:18:12Z), Doğa Özden's second certificate at 179, for s(179) <=
+      13.8809603715582251 (the exact side rounded up at 16 places), printed 13.880960371559
+      rounded up at 12 places: a rational corner Witness/v2 of a packing from a later batch of
+      the band-design search of his #954, the tilted squares of the registry's 70 (Ryan Xu,
+      improved by Evan Daniel and PingYou Ltd), a two-row band of 20 squares, laid along the
+      diagonal with a copy shifted by (5, 5), annealed in a reduced model with the axis-parallel
+      squares on the two wall-anchored staircase lattices, then quenched once with Evan Daniel's
+      ALM+SLP quench (evand/square-packing at bb4cc78e, MIT), a further arrangement of his own
+      #954 packing (T-291) measured here, its exact coordinates made by this repository's
+      packing-witness promote --strategy robust-rational from the decimal pose the source
+      retains. Registration was requested in jlevy/squares#959, posted on the author's behalf by
+      his AI agent's account kenaznia-doga; the issue says the search and its code were written
+      and run by AI agents, under his direction. No global optimality claim. The lineage builds
+      on this project: the band is built from a registry packing and the exact coordinates are
+      made with this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal
+      pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin
+      also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is
+      Özden in the credit's ASCII. Retained in web/ozden-s179-issue959-2026-11-11/.
+  - key: '[Özden s237 upper bound 2026-11-11]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: builds-on-project
+    credit: 'Ozden after Xu, Daniel, PingYou, Levy'
+    short_credit: 'Ozden after Xu et al.'
+    note: >-
+      kenaznia-doga/s237-upper-bound at 13c4b231bb16437a6ee3751e75113ef95113b235
+      (2026-11-11T21:37:37Z), Doğa Özden's certificate for s(237) <= 15.8938055805725742 (the
+      exact side rounded up at 16 places), printed 15.893805580573 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by the band-design search of #954, two
+      copies of the band of tilted squares of the registry's 70 (Ryan Xu, improved by Evan
+      Daniel and PingYou Ltd), laid along the diagonal as a seed band, annealed in a reduced
+      model with the axis-parallel squares on the two wall-anchored staircase lattices, then
+      quenched with Evan Daniel's ALM+SLP quench (evand/square-packing at bb4cc78e, MIT), a new
+      arrangement relative to the house's packing (T-190, Nate Chaoweeraprasit's, improved by
+      Francisco Couzo and Mishapolk), its exact coordinates made by this repository's
+      packing-witness promote --strategy robust-rational from the decimal pose the source
+      retains. Registration was requested in jlevy/squares#960, posted on the author's behalf
+      by his AI agent's account kenaznia-doga; the issue says the search and its code were
+      written and run by AI agents, under his direction. No global optimality claim. The
+      lineage builds on this project: the band is built from a registry packing and the exact
+      coordinates are made with this repository's promotion tool. Licensed CC BY 4.0 (witness,
+      JSON, decimal pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at
+      the pin; the pin also carries Evan Daniel's MIT notice, as
+      LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in
+      web/ozden-s237-upper-bound-2026-11-11/.
+  - key: '[Özden s269 issue 962 2026-11-11]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-11'
+    lineage: builds-on-project
+    credit: 'Ozden after PingYou, Xu, Daniel, Levy'
+    short_credit: 'Ozden after PingYou et al.'
+    note: >-
+      kenaznia-doga/s269-upper-bound-16899469076 at fdab2c0073ea91701d0d8429663faa6e5c7f831f
+      (2026-11-11T23:34:47Z), Doğa Özden's certificate for s(269) <= 16.8994690758550466 (the
+      exact side rounded up at 16 places), printed 16.899469075856 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by the band-design search of #954, tilted
+      squares of three clusters, of the registry's 207 (PingYou Ltd), of the registry's 70
+      (Ryan Xu, improved by Evan Daniel and PingYou Ltd) and of the author's own 179 of #954
+      (T-291), laid along the diagonal as a seed band, annealed in a reduced model with the
+      axis-parallel squares on the two wall-anchored staircase lattices, then quenched with
+      Evan Daniel's ALM+SLP quench (evand/square-packing at bb4cc78e, MIT), a new arrangement
+      relative to the house's packing (T-290, the author's own, from a strip cut of Evan
+      Daniel's 304), its exact coordinates made by this repository's packing-witness promote
+      --strategy robust-rational from the decimal pose the source retains. Registration was
+      requested in jlevy/squares#962, posted on the author's behalf by his AI agent's account
+      kenaznia-doga; the issue says the search and its code were written and run by AI agents,
+      under his direction. No global optimality claim. The lineage builds on this project: the
+      band is built from registry packings and the exact coordinates are made with this
+      repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal pose, outputs,
+      write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries
+      Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the
+      credit's ASCII. Retained in web/ozden-s269-issue962-2026-11-11/.
+  - key: '[Özden s269 upper bound 2026-11-12]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-12'
+    lineage: builds-on-project
+    credit: 'Ozden after PingYou, Xu, Daniel, Levy'
+    short_credit: 'Ozden after PingYou et al.'
+    note: >-
+      kenaznia-doga/s269-upper-bound-1688973007 at f496016d3ebccb00c00cbf146efe85e0cc952dda
+      (2026-11-12T03:00:02Z), Doğa Özden's certificate for s(269) <= 16.8897300735956367 (the
+      exact side rounded up at 16 places), printed 16.889730073596 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by an AI-run column-band designer, tilted
+      squares stood in columns across a band along the diagonal and the axis-parallel squares on
+      the two wall-anchored staircase lattices, the design chosen by an exact dynamic programme
+      over the columns, then quenched with Evan Daniel's ALM+SLP quench (evand/square-packing at
+      bb4cc78e, MIT) and kicked and quenched twice more; a new arrangement relative to the
+      house's packing (T-296, the author's own band packing of #962) and to T-290's, its exact
+      coordinates made by this repository's packing-witness promote --strategy robust-rational
+      from the decimal pose the source retains. The issue names the registry's 207 (PingYou
+      Ltd), the registry's 70 (Ryan Xu, improved by Evan Daniel and PingYou Ltd) and the
+      author's own 179 of #954 as the band's source packing, while saying the designer used no
+      donor packing. Registration was requested in jlevy/squares#967, posted on the author's
+      behalf by his AI agent's account kenaznia-doga; the issue says the search and its code
+      were written and run by AI agents, under his direction. No global optimality claim. The
+      lineage builds on this project: the issue credits registry packings as the band's source
+      and the exact coordinates are made with this repository's promotion tool. Licensed CC BY
+      4.0 (witness, JSON, decimal pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by
+      LICENSE.md at the pin; the pin also carries Evan Daniel's MIT notice, as
+      LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's ASCII. Retained in
+      web/ozden-s269-upper-bound-2026-11-12/.
+  - key: '[de Winter s297 upper bound 2026-11-14]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: de Winter after Couzo, Daniel, PingYou, Levy
+    short_credit: de Winter after Couzo et al.
+    note: >-
+      JoostdeWinter/square-packing at 7b4701f35e815301e4f467d214fab4205ded5eb1
+      (2026-11-14T10:05:30Z), Joost de Winter's certificate for s(297) <= 17.739455558289
+      (rounded up at 12 places), first committed at e0082144fa1c9e19ae71299f808337f4b4f58855
+      (2026-11-14T10:02:54Z), 10 minutes 24 seconds before jlevy/squares#977, which requested
+      its registration: a rational centre-basis Witness/v2 (n297/n297_witness.yaml) whose
+      verified claim names no certificate record, and the same packing as JSON
+      (n297/n297_exact.json). The packing keeps the layout of T-174 (Francisco Couzo's packing
+      as Evan Daniel and PingYou Ltd improved it) with a double step in each staircase and the
+      band's lean changing direction once, the double step taken from the source's own n = 132
+      and n = 157 pinwheels; a new arrangement relative to T-174's packing, 1.8e-59 above a
+      330-digit solution of its contact equations; local optimality has no formal proof. The
+      source says the work was produced with Claude Fable 5.2 (Anthropic) under de Winter's
+      direction. No global optimality claim. The lineage builds on this project: the layout is
+      the record's T-174. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s297-upper-bound-2026-11-14/.
+  - key: '[de Winter issue 979 2026-11-14]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: de Winter after Couzo, Daniel, PingYou, Levy
+    short_credit: de Winter after Couzo et al.
+    note: >-
+      JoostdeWinter/square-packing at c70defaf39af47db220d1e7c2922590637ffb664
+      (2026-11-14T10:39:38Z), the folder above324_from_n297/: Joost de Winter's two exact
+      rational certificates beyond the case corpus at 332 and 409, 1 minute 45 seconds before
+      jlevy/squares#979, which requested their registration. Each is his packing of 297
+      (jlevy/squares#977, [de Winter s297 upper bound 2026-11-14]), which keeps the layout of
+      T-174 (Francisco Couzo's packing as Evan Daniel and PingYou Ltd improved it), with
+      axis-aligned squares added: a border of 35 at the side plus 1, and two arms of 3 x 17 and
+      ten squares in the corner at the side plus 3, following the construction of the rows they
+      supersede. Beyond-horizon rows below Couzo's and Kirill Tymchishin's at those counts.
+      Claude Fable 5.2 assistance disclosed. No local or global optimality claim. Licensed MIT
+      by LICENSE at the pin. Retained in web/de-winter-issue979-2026-11-14/.
+  - key: '[Özden s228 upper bound 2026-11-14]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: 'Ozden after Daniel, Levy'
+    short_credit: 'Ozden after Daniel et al.'
+    note: >-
+      kenaznia-doga/s228-upper-bound at 8bebf3f78ef50baa0b47341a836b5e45717c49cc
+      (2026-11-14T18:33:59Z), Doğa Özden's certificate for s(228) <= 15.6008017348117539 (the
+      exact side rounded up at 16 places), printed 15.600801734812 rounded up at 12 places: a
+      rational corner Witness/v2 of a packing found by an AI-run column-band proposal design,
+      axis-parallel squares in two wall-anchored staircase or corner domains and tilted stacks
+      across a diagonal band, proposals from a finite-memory dynamic programme over the
+      columns, quenched once with Evan Daniel's ALM+SLP fq optimizer (evand/square-packing
+      search/packer, built from bb4cc78e, MIT), with no random kicks; a new arrangement
+      relative to the house's packing (T-174, Francisco Couzo's packing as PingYou Ltd improved
+      it), its exact coordinates made by this repository's packing-witness promote --strategy
+      robust-rational from the decimal pose the source retains. The issue says the design took
+      no donor or transplant start and is no public recovery. Registration was requested in
+      jlevy/squares#983, posted on the author's behalf by his AI agent's account
+      kenaznia-doga; the issue says search, checks and filing were AI-assisted throughout. It
+      discloses first a side-only Kaggle leaderboard entry at 228, 15.596043116646, below this
+      side and with no packing. No global optimality claim. The lineage builds on this
+      project: the exact coordinates are made with this repository's promotion tool. Licensed
+      CC BY 4.0 (witness, JSON, decimal pose, hit file, check reports and outputs, write-ups)
+      and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin also carries Evan
+      Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden in the credit's
+      ASCII. Retained in web/ozden-s228-upper-bound-2026-11-14/.
+  - key: '[Ono issue 984 2026-11-14]'
+    authors:
+    - Ono
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: 'Ono after Couzo, Levy'
+    short_credit: 'Ono after Couzo et al.'
+    note: >-
+      RobertoOno/squares-in-square at b5636fd6694d2cc7aa5811ae33f441268b81b714
+      (2026-11-14T20:26:58Z), whose ancestor fce076f2bf459a25be3645d899e8950b93ed977c the issue
+      names, Roberto Ono's certificate for s(228) <= 15.5960431209207917 (the exact side rounded
+      up at 16 places), printed 15.596043120921 rounded up at 12 places: an exact rational
+      certificate of centres and half-angle tangents from the harness's run of 11 November
+      2026, made from Francisco Couzo's packing of 404 squares as this registry retains it
+      (couzo-issue763-2026-10-23) by cutting five periods of its band, then a penalty step, an
+      exact-constraint sequential-LP polish and basin hopping; a new arrangement relative to
+      T-300's packing (Doğa Özden's column-band packing, the house it replaced at 228) and to
+      T-174. Registration was
+      requested in jlevy/squares#984, the account's first contribution; the issue says the
+      packing was found, certified and checked by an AI coding agent (Claude, by Anthropic)
+      working in the harness, directed by a person. It discloses first two side-only Kaggle
+      leaderboard entries at 228 below this side, with no packing. No optimality claim. The
+      lineage builds on this project: the harness reads its starting packings from this
+      registry's witnesses. Licensed MIT by LICENSE at the pin. Retained in
+      web/ono-issue984-2026-11-14/.
+  - key: '[Ono issue 985 2026-11-14]'
+    authors:
+    - Ono
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-14'
+    lineage: builds-on-project
+    credit: 'Ono after Daniel, Levy'
+    short_credit: 'Ono after Daniel et al.'
+    note: >-
+      RobertoOno/squares-in-square at b5636fd6694d2cc7aa5811ae33f441268b81b714
+      (2026-11-14T20:26:58Z), whose ancestor fce076f2bf459a25be3645d899e8950b93ed977c the issue
+      names, Roberto Ono's certificate for s(147) <= 12.6510435565876945 (the exact side rounded
+      up at 16 places), printed 12.651043556588 rounded up at 12 places: an exact rational
+      certificate of centres and half-angle tangents from the same run, made from Evan Daniel's
+      packing of 229 squares as this registry holds it by cutting one period of its band and
+      polishing; the first packing below 7 + 4*sqrt(2) at 147 the record holds, a new
+      arrangement relative to the Kingbird catalogue's 45-degree packing there. Registration was
+      requested in jlevy/squares#985, the account's first contribution with #984; the issue
+      says the packing was found by an AI coding agent (Claude, by Anthropic) working in the
+      harness, directed by a person. It discloses first a side-only Kaggle leaderboard entry at
+      147 below this side, with no packing. No optimality claim. The lineage builds on this
+      project: the harness reads its starting packings from this registry's witnesses. Licensed
+      MIT by LICENSE at the pin, which web/ono-issue984-2026-11-14/ retains. Retained in
+      web/ono-issue985-2026-11-14/.
+  - key: '[jazivxt s90 upper bound 2026-11-15]'
+    authors:
+    - jazivxt
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-15'
+    lineage: independent
+    credit: 'jazivxt after de Winter'
+    note: >-
+      dpre4ai/n90-square-packing at f9b31b4ebddb278a128b6cb5c43836a305a24dca
+      (2026-11-15T03:10:54Z), whose parent 179fcba7f0e91e2c3d3e92525e0738b6da0f8dd5 the issue
+      names, the certificate for s(90) <= 4999138583463/500000000000 = 9.998277166926 (exact
+      at 12 places), below the 10 x 10 grid's 10, the first packing below the grid at 90 the
+      record holds, first committed at e5c2ecc365b5a0d4783e0b7e2fe580fca2cc76b5
+      (2026-11-15T03:00:02Z), 51 seconds before jlevy/squares#989, which requested its
+      registration, the account dpre4ai's first contribution: Evan Daniel's text format of
+      rational centres and half-angle tangents, a packing the issue says was made from a crop of
+      Joost de Winter's n = 157 packing (JoostdeWinter/square-packing c70defa,
+      n157/n157_exact.json, T-293), copies of the crop offset by one unit and a square window
+      across two of them holding 90 squares, then fitted and made exact. The issue asks for credit to
+      'jazivxt and GPT-6 Astra Ultra', jazivxt's Kaggle profile named, and says GPT-6 Astra
+      Ultra was the AI collaborator on the search and verification; the README says the
+      arrangement was found during Kaggle's Squares in Squares competition. No optimality
+      claim. The repository states no licence; the account submitted it in the issue
+      (presumption of permission, think-cnn7), and DONOR-LICENSE.txt is de Winter's MIT notice
+      for the donor. Retained in web/jazivxt-s90-upper-bound-2026-11-15/.
+  - key: '[de Winter s90 upper bound 2026-11-15]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-15'
+    lineage: builds-on-project
+    credit: de Winter after jazivxt, Levy
+    short_credit: de Winter after jazivxt et al.
+    note: >-
+      JoostdeWinter/square-packing at fa53fb0d734fbf438bcfb73c1434a15894bb2bc5
+      (2026-11-15T12:07:15Z), Joost de Winter's certificate for s(90) <=
+      99940387666098521323/10000000000000000000 = 9.9940387666098521323 (printed
+      9.994038766610, rounded up at 12 places), 78 seconds before jlevy/squares#997, which
+      requested its registration in place of the certificate jlevy/squares#996 had named at
+      64d5ee762a1159248d375973fb33825d51da637d (9.09e-8 larger, retained in
+      web/de-winter-s90-64d5ee7-2026-11-15/ as superseded by its author): a rational
+      centre-direction JSON (n90/n90_exact.json) and the same packing as a corner Witness/v2
+      (n90/n90_witness.yaml). The packing is T-303, jazivxt's packing of jlevy/squares#989
+      ([jazivxt s90 upper bound 2026-11-15]), built from a crop of the source's own n = 157
+      packing, improved by a local search over small groups of squares and optimized again
+      after each change, 4.24e-3 below it; a further arrangement of T-303's packing, as the
+      issues say. They ask for credit to de Winter as an improvement of jazivxt's packing, and
+      say the local search was run with GPT-6.1 Sol Max (OpenAI) and the optimization,
+      certificate, checks and figures were produced with Claude Fable 5.2 (Anthropic) under his
+      direction. No local or global optimality claim is proved. The lineage builds on this
+      project: the start is the record's T-303. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s90-upper-bound-2026-11-15/.
+  - key: '[JoeGun upper bounds 2026-11-16]'
+    authors:
+    - JoeGun
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-16'
+    lineage: builds-on-project
+    credit: JoeGun after Kodaj, Daniel, Levy
+    short_credit: JoeGun after Kodaj et al.
+    note: >-
+      JonathanGun/square-packing-upper-bounds at bc10ce471c9d7841b9a53b383dae87d23dbe5a99
+      (2026-11-16T05:31:52Z), then the repository's only commit, which jlevy/squares#1001 named
+      when it requested the registration 75 seconds later. The history was rewritten the same
+      day: 0aac839e re-commits the same tree, the issue was edited to name it, and bc10ce4 is on
+      no branch. The tree holds JoeGun's five rational corner Witness/v2 certificates,
+      s(127) <= 11.801753890487, s(204) <= 14.802646843107, s(232) <= 15.759531627557, s(264) <=
+      16.773807598002 and s(305) <= 17.945762359659, each its exact side rounded up at 12 places,
+      with the binary64 decimal pose each was made from. The source says each packing is a public
+      Kaggle packing by Tomáš Kodaj, from his notebook 'Squares in Squares | [22.1636]', improved
+      further by JoeGun, by a fault-line DP of his own at 127, 204, 232 and 305 and by quenches
+      with Evan Daniel's code (evand/square-packing at 6067db5, MIT) at 264 and 305, and asks that
+      Kodaj be credited as the finder; it says JoeGun's part is 1.174e-5, 6.41e-8, 1.045e-7,
+      8.390e-5 and 5.358e-4 of the gains, and that credit to Kodaj alone is fair at 204 and 232.
+      The exact coordinates are made by this repository's packing-witness promote --strategy
+      robust-rational from the decimal poses, and AI agents wrote and ran the search code, the
+      checker and the filing under JoeGun's direction. At the pin it makes no optimality,
+      rigidity or KKT claim. A later commit the same day, 5971b95, adds a numerical check with
+      Evan Daniel's exactsolve.py, which the author says is not a proof: a KKT point and a local
+      minimum, strict up to flat motions and so not rigid, at the exact touching point near the
+      certificate at 127, 232, 264 and 305, and no result at 204, the lower sides unclaimed;
+      it is retained in web/joegun-local-minimum-2026-11-16/. The lineage builds on this
+      project: the exact coordinates are made with this repository's promotion tool. Licensed CC BY 4.0 (witnesses, poses, outputs, text) and MIT (check.py) by
+      LICENSE.md at the pin, which says it covers JoeGun's contribution and not Kodaj's terms; the
+      licence of Kodaj's notebook is unchecked (think-71uq). Retained in
+      web/joegun-upper-bounds-2026-11-16/.
 credited_names:
+  Kaelan Yim: Yim
   Doğa Özden: Özden
   Benjamin Greff: Greff
   Mohsen Khalili: Khalili
@@ -4657,3 +5781,8 @@ credited_names:
   Chris Deotte: Deotte
   Alex Chilton: Chilton
   ntumlnoob: ntumlnoob
+  unnir: unnir
+  Roberto Ono: Ono
+  jazivxt: jazivxt
+  Tomáš Kodaj: Kodaj
+  JoeGun: JoeGun

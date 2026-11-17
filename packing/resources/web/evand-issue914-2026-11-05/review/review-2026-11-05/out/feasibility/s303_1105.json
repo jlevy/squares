@@ -1,0 +1,66 @@
+{
+ "path": "/home/user/squares/.claude/worktrees/review-lrj4/packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s303_1105.cert",
+ "sha256": "2f53c049a5f7feb793181e99282d0b36922b7c6f7fe9eece008f888c06a5c9a3",
+ "bytes": 45365,
+ "n": 303,
+ "side": "17901832750854048761575294038467/1000000000000000000000000000000",
+ "side_float": 17.901832750854048,
+ "sense": 1,
+ "pairs_expected": 45753,
+ "method_a": {
+  "name": "separating axes, fractions.Fraction",
+  "walls_decided": 1212,
+  "squares_outside": [],
+  "least_wall_clearance": "1/200000000000000000000",
+  "least_wall_clearance_float": 5e-21,
+  "least_wall_square": 236,
+  "least_wall_square_line": 238,
+  "least_wall_walls": [
+   "left"
+  ],
+  "squares_at_least_wall_clearance": 29,
+  "pairs_decided": 45753,
+  "classes": {
+   "separated": 45753,
+   "touching": 0,
+   "overlapping": 0
+  },
+  "least_pair_gap": "51980888579216432093229070811934294449027694680884417964779766099657748204410471463/5198088857921648082447737953608426961803578154948436684865632261252450000000000000000000000000000000000",
+  "least_pair_gap_float": 9.99999999999999e-21,
+  "least_pair": [
+   90,
+   91
+  ],
+  "least_pair_lines": [
+   92,
+   93
+  ],
+  "least_pair_axis": "u_i",
+  "pairs_below_1e-6_by_decade": {
+   "1e-16": 1,
+   "1e-20": 758,
+   "1e-7": 12
+  },
+  "verdict": "accept",
+  "cpu_seconds": 9.864
+ },
+ "method_b": {
+  "name": "exact clipped areas, gmpy2.mpq 2.3.1",
+  "every_square_area_exactly_1": true,
+  "walls_decided": 303,
+  "squares_outside": [],
+  "pairs_decided": 45753,
+  "classes": {
+   "empty": 45753,
+   "touching": 0,
+   "overlapping": 0
+  },
+  "largest_overlap_area": "0",
+  "verdict": "accept",
+  "cpu_seconds": 1.81
+ },
+ "methods_agree_pair_by_pair": true,
+ "verdict": "accept",
+ "label": "s303_1105",
+ "cpu_seconds_total": 11.677
+}

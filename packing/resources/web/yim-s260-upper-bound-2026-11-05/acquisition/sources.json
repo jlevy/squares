@@ -1,0 +1,32 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-05T05:57Z",
+  "git_scope": "A full clone of vitamoon/vitamoon, the author's GitHub profile repository, read for the intake of jlevy/squares#895 at 05:57Z on 5 November 2026, when main's head was d11a8a1 (committed 2026-11-05T05:44:44Z, 'edit atoms 4'). The author's reply on #895 (issuecomment-6650567350, 2026-11-05T05:31:32Z) names the file by the branch, https://github.com/vitamoon/vitamoon/blob/main/n260.cert, not by a commit, and states no digest, so the packet is pinned at the commit that branch named when it was read. n260.cert was added at e7cab3ac67e6d7c22970e7b8ffb121c1d96016a5 (committed 2026-11-05T05:27:47Z, 'n260 square packing cert 895'), and the four later commits to the pin each change README.md only, so the file at the pin is the file first committed. The scope is that one file; the repository's other file, README.md, is the author's profile page, which says nothing about packing and is not retained. The certificate #895 attached on 4 November, n260.cert.txt, is a GitHub user attachment this environment cannot fetch, so whether it is byte-identical to this file is not established; the reply offers this file as that certificate. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "yim-s260-upper-bound",
+      "source_url": "https://github.com/vitamoon/vitamoon",
+      "source_ref": "main",
+      "source_commit": "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
+      "committed_utc": "2026-11-05T05:44:44Z",
+      "git_tree": "ba2d28327d775ab627b5b74c394f70fa28c1d866",
+      "archived_path": "packing/resources/web/yim-s260-upper-bound-2026-11-05/source",
+      "subtree_manifest": "packing/resources/web/yim-s260-upper-bound-2026-11-05/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "n260.cert"
+      ],
+      "subtree_file_count": 1,
+      "subtree_total_bytes": 67514,
+      "retained_file_count": 1,
+      "retained_total_bytes": 67514,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "CC BY 4.0, with attribution to Kaelan Yim: the author's reply on jlevy/squares#895 (issuecomment-6650567350, 2026-11-05T05:31:32Z, edited once at 05:31:52Z) says 'I release n260.cert under the Creative Commons Attribution 4.0 International (CC BY 4.0) license' and 'You may retain and use it in the project with attribution to Kaelan Yim.' The repository carries no licence file. The certificate's header line credits the packing to Kaelan Yim, 'derived from Evan Daniel and Kirill Tymchishin packing method', and the issue says the search started from a public packing attributed to Evan Daniel and Kirill Tymchishin, T-257's at 260 (Evan Daniel's MIT-licensed evand/square-packing, retained by the evand-issue845-2026-10-29 packet); the file carries no copy of that notice.",
+      "claims": [
+        "Issue #895 (opened 2026-11-04T02:15:02Z by vitamoon, credit name Kaelan Yim) reports s(260) <= 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626, approximately 16.6339825019226141, about 1.99e-10 below the record's 16.6339825021218840 (Evan Daniel's #845 certificate, T-257). n260.cert states that exact side in its header line, `260 S`, then 260 rows `x y t`, a rational centre and the rational tangent of the half-angle of each unit square, in Evan Daniel's certificate format.",
+        "The issue says the author converted the rational certificate to this repository's Witness/v2 corner form and ran devtools.check_rational_witness_independent from a local checkout of jlevy/squares at e6e8d57726db80cd0e6a1523166a96c5d36a3119, which reported VERIFIED: 260 unit squares and all 33,670 pairs, in exact rational arithmetic at the stated side. It says that was the only checker run. That statement is the author's; no source program ran here.",
+        "The issue says the search started from a publicly available packing attributed to Evan Daniel and Kirill Tymchishin, and that the author carried out the computational refinement independently; the certificate's header says 'derived from Evan Daniel and Kirill Tymchishin packing method using CUDA/SLP numeric tightening'. AI was used 'to study and set up an environment similar to the one used by Daniel and Tymchishin'. No local-optimality, rigidity or global-optimality claim is made."
+      ]
+    }
+  ]
+}

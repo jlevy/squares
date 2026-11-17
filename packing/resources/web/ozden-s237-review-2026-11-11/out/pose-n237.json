@@ -1,0 +1,39 @@
+{
+ "program": "l109_pose.py",
+ "programs_sha256": {
+  "l109_reader.py": "49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79",
+  "l109_axes.py": "6ce32690e2eaba319e5775235e731b8d569065b806645fa67489ac3c4922f8d1",
+  "l109_check.py": "ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932",
+  "l109_pose.py": "1c0deebfc5b6fc25bd0aec012313989564a151de9458322f97aa2ed978819750"
+ },
+ "decides": "nothing",
+ "pose_id": "W-band-b1r2-n237",
+ "pose_least_corner": [
+  "1.15789e-13",
+  "1.02678e-13"
+ ],
+ "pose_extent_x_less_cert_side": "-1.12646e-14",
+ "pose_extent_y_less_cert_side": "-1.77842e-37",
+ "pose_stated_side_less_cert_side": "2.06845e-13",
+ "pose_stated_side_less_pose_extent": "2.06845e-13",
+ "pose_least_wall_clearance_at_stated_side": [
+  "1.02321e-13",
+  140
+ ],
+ "largest_centre_difference_after_translation": "4.747e-38",
+ "largest_angle_difference_degrees": "4.981e-35",
+ "near_pairs": 192,
+ "largest_near_pair_margin_difference": "7.598e-37",
+ "near_margin_over_axis_separation": {
+  "min": "2.007e-13",
+  "median": "2.382e-13",
+  "max": "5.697e-13"
+ },
+ "pose_tilts": {
+  "exactly_upright": 0,
+  "below_1e-9_degrees": 91,
+  "between_1e-9_and_0.5": 103,
+  "beyond_0.5": 43,
+  "beyond_1": 42
+ }
+}

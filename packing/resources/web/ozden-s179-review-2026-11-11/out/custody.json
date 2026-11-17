@@ -1,0 +1,162 @@
+{
+ "program": "l101_custody.py",
+ "head": "bd262d8ba2966000e827547597fe6da24d0e118c",
+ "issue_pin": "bd262d8ba2966000e827547597fe6da24d0e118c",
+ "head_is_pin": true,
+ "commits_in_clone": 1,
+ "parents": [],
+ "author": "Kenan (Doğa) <doga@doga.kenan.works>",
+ "committer": "Kenan (Doğa) <doga@doga.kenan.works>",
+ "authored": "2026-11-11T18:27:50+00:00",
+ "committed": "2026-11-11T18:27:50+00:00",
+ "issue_opened": "2026-11-11T18:28:14Z",
+ "tree": "148e8db7143fc23b93b59960cd8f77c246679640",
+ "files": {
+  "LICENSE-evand-square-packing.txt": {
+   "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "size": 1068,
+   "working_file_matches": true,
+   "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578"
+  },
+  "LICENSE.md": {
+   "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "size": 1484,
+   "working_file_matches": true,
+   "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c"
+  },
+  "README.md": {
+   "blob": "ffab8813754e592bbad0a4bd7d67c13babb5e6e3",
+   "size": 6539,
+   "working_file_matches": true,
+   "sha256": "da2f1edef001f981c4f8888cc258a42b7324f7369bfee34406bb1098c17100f8"
+  },
+  "n-179-candidate.yaml": {
+   "blob": "6a0ffc0da4e82aa9a411bd2e8327e1f23f6a4e9a",
+   "size": 527207,
+   "working_file_matches": true,
+   "sha256": "75813e7cc0ee167557678ce6dab287359711c58796afa3048cd10ff2f6a8041b"
+  },
+  "n-179-decimal-pose.yaml": {
+   "blob": "58ce29616f2d4c4e030750a169729efe332e836c",
+   "size": 19415,
+   "working_file_matches": true,
+   "sha256": "5b9dab2ab06903b9d40e7b690fc31b47366176babffbda02ef1815a3492028f6"
+  },
+  "n179-witness.json": {
+   "blob": "1da8f3c99df72248d9b1e6bf879f1b2c10caa81b",
+   "size": 521699,
+   "working_file_matches": true,
+   "sha256": "6a4aad8224c22bcdf705e54e32b8e96601382e07f358a2d96dfcea68996d14b3"
+  },
+  "packing-witness-verify.txt": {
+   "blob": "af9700d7d05aae9e62e327a7fd087258e625407e",
+   "size": 499,
+   "working_file_matches": true,
+   "sha256": "662b3ee2db53868cf4b2a52640eea42acf9801f6d9a7fe92422facce6778d0ea"
+  },
+  "records/n-179-candidate-diff.png": {
+   "blob": "7750a855fd8f69ad1ed87009949aec3c28d2e8de",
+   "size": 241795,
+   "working_file_matches": true,
+   "sha256": "bb47c267d86da0fc54dbe8e152978067548a7297965d0c981318742086514dba"
+  },
+  "sqcheck-output.txt": {
+   "blob": "113370ae076ceaf567bd34e7e4892d902b7e9470",
+   "size": 101,
+   "working_file_matches": true,
+   "sha256": "e2b2d36d65177954558d56f88cd0ba354f66a7f0f857ddcc7d0b8054d8dc45da"
+  },
+  "verifier/README.md": {
+   "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+   "size": 3441,
+   "working_file_matches": true,
+   "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce"
+  },
+  "verifier/sqcheck.py": {
+   "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "size": 17654,
+   "working_file_matches": true,
+   "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979"
+  }
+ },
+ "same_blob_in_this_repository": {
+  "LICENSE-evand-square-packing.txt": [
+   "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt",
+   "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE",
+   "packing/resources/web/evand-compositions-2026-10-13/source/LICENSE",
+   "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/LICENSE",
+   "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/LICENSE",
+   "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/LICENSE",
+   "packing/resources/web/evand-exact-cur-2026-10-16/source/LICENSE",
+   "packing/resources/web/evand-exact-data-2026-10-12/source/LICENSE",
+   "packing/resources/web/evand-fresh-compositions-2026-10-14/source/LICENSE",
+   "packing/resources/web/evand-hunt3-first-hour-2026-10-10/source/LICENSE",
+   "packing/resources/web/evand-issue845-2026-10-29/source/LICENSE",
+   "packing/resources/web/evand-issue914-2026-11-05/source/LICENSE",
+   "packing/resources/web/evand-kaggle-descents-2026-10-24/source/LICENSE",
+   "packing/resources/web/evand-n146-2026-10-14/source/LICENSE",
+   "packing/resources/web/evand-n154-2026-10-12/source/LICENSE",
+   "packing/resources/web/evand-n154-sweep-2026-10-20/source/LICENSE",
+   "packing/resources/web/evand-n155-explorer-2026-10-17/source/LICENSE",
+   "packing/resources/web/evand-n182-2026-10-25/source/LICENSE",
+   "packing/resources/web/evand-n183-subgrid-2026-10-19/source/LICENSE",
+   "packing/resources/web/evand-n229-dilation-2026-10-17/source/LICENSE",
+   "packing/resources/web/evand-n229-dilation-update-2026-10-18/source/LICENSE",
+   "packing/resources/web/evand-n236-2026-10-16/source/LICENSE",
+   "packing/resources/web/evand-n270-sweep-2026-10-20/source/LICENSE",
+   "packing/resources/web/evand-n271-2026-10-17/source/LICENSE",
+   "packing/resources/web/evand-n299-2026-10-26/source/LICENSE",
+   "packing/resources/web/evand-n299-update-2026-10-29/source/LICENSE",
+   "packing/resources/web/evand-n303-2026-10-22/source/LICENSE",
+   "packing/resources/web/evand-n308-2026-10-19/source/LICENSE",
+   "packing/resources/web/evand-n343-sweep-2026-10-20/source/LICENSE",
+   "packing/resources/web/evand-new-arrangements-2026-10-07/source/LICENSE",
+   "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/LICENSE",
+   "packing/resources/web/evand-record-hunt-2026-10-09/source/LICENSE",
+   "packing/resources/web/evand-record-hunt3-2026-10-10/source/LICENSE",
+   "packing/resources/web/evand-regularized-2026-10-10/source/LICENSE",
+   "packing/resources/web/evand-regularized-2026-10-20/source/LICENSE",
+   "packing/resources/web/evand-square-packing-2026-09-26/square-packing/LICENSE",
+   "packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/LICENSE",
+   "packing/resources/web/evand-square-packing-2026-10-01/source/s12/LICENSE",
+   "packing/resources/web/evand-square-packing-2026-10-03/square-packing/s12/LICENSE",
+   "packing/resources/web/evand-square-packing-2026-10-04/square-packing/LICENSE",
+   "packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/LICENSE",
+   "packing/resources/web/evand-trio126-2026-10-09/source/LICENSE",
+   "packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/integrations/wand125/EVAND-LICENSE.txt",
+   "packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/integrations/wand125/UPSTREAM-LICENSE.txt",
+   "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds/point_n21_L5/UPSTREAM-LICENSE.txt",
+   "vendor/evand-regularize/LICENSE"
+  ],
+  "LICENSE.md": [
+   "packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/LICENSE.md",
+   "packing/resources/web/ozden-s172-upper-bound-2026-11-09/source/LICENSE.md",
+   "packing/resources/web/ozden-s180-upper-bound-2026-11-10/source/LICENSE.md",
+   "packing/resources/web/ozden-s199-upper-bound-2026-11-09/source/LICENSE.md",
+   "packing/resources/web/ozden-s204-upper-bound-2026-11-03/licence/LICENSE.md",
+   "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/LICENSE.md",
+   "packing/resources/web/ozden-s268-upper-bound-2026-11-09/source/LICENSE.md",
+   "packing/resources/web/ozden-s268-upper-bound-2026-11-10/source/LICENSE.md",
+   "packing/resources/web/ozden-s269-upper-bound-2026-11-11/source/LICENSE.md",
+   "packing/resources/web/ozden-s270-upper-bound-2026-11-09/source/LICENSE.md",
+   "packing/resources/web/ozden-s299-upper-bound-2026-11-03/licence/LICENSE.md",
+   "packing/resources/web/ozden-s299-upper-bound-2026-11-09/source/LICENSE.md",
+   "packing/resources/web/ozden-s303-upper-bound-2026-11-09/source/LICENSE.md",
+   "packing/resources/web/ozden-s307-upper-bound-2026-11-09/source/LICENSE.md",
+   "packing/resources/web/ozden-s94-lower-bound-2026-11-03/licence/LICENSE.md",
+   "packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/source/LICENSE.md"
+  ],
+  "verifier/README.md": [
+   "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+  ],
+  "verifier/sqcheck.py": [
+   "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+  ]
+ },
+ "promotion_commit": {
+  "commit": "591644a9e9b41c04858e2601382e5a65485a09a9",
+  "on_main": true,
+  "committed": "2026-11-11T03:02:26-08:00"
+ },
+ "main_head": "d619efc8bc8d6cccb6e3925672210612f16d6014"
+}

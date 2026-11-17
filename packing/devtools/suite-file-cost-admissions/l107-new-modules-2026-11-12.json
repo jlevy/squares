@@ -1,0 +1,60 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 15,
+  "seconds": 7.956,
+  "files": [
+    {
+      "file": "packing/tests/test_measure_core.py",
+      "tests": 6,
+      "seconds": 0.482
+    },
+    {
+      "file": "packing/tests/test_upper_bound_reports_l107_1111.py",
+      "tests": 9,
+      "seconds": 7.474
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_measure_core.py",
+      "packing/tests/test_upper_bound_reports_l107_1111.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_measure_core.py": 6,
+      "packing/tests/test_upper_bound_reports_l107_1111.py": 9
+    },
+    "deselected_tests": 0
+  }
+}

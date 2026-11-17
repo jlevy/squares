@@ -1,0 +1,115 @@
+{
+ "program": "l108_contract.py",
+ "decider_sha256": {
+  "l108_reader.py": "b56db242a2580265607154243467ff8e0509e5b6b6e9fd9b7097b0bdb0f94184",
+  "l108_sat.py": "31d5846efe2390bc061ac7ba18c7360ce9248ae9403f04d0a8771665955ceabd",
+  "l108_clip.py": "7fec77bc02a66134cb01d543251eaad9b36141cc68069910dfb0f96291f268d6",
+  "l108_check.py": "6c6dbaff0369784888e087c7fb5bd6a9f05a0e5e095e60caf7e946a66616e6ef"
+ },
+ "rows": [
+  {
+   "deficit": "1e-13",
+   "verdict": "ACCEPT",
+   "side_20": "13.880960371556936925",
+   "side_ceil_12": "13.880960371557",
+   "side_less_s70_plus_5": "1.35733e-12",
+   "side_less_nevska": "9.36925e-13",
+   "certificate_side_less_this_side": "1.28809e-12",
+   "least_margin": {
+    "pair": [
+     104,
+     105
+    ],
+    "value": "9.92233284828425e-14"
+   },
+   "touching_pairs": [],
+   "overlapping_pair_count": 0,
+   "wall_contacts": [
+    "67 bottom",
+    "123 left",
+    "162 top"
+   ],
+   "walls_outside": [],
+   "pair_disagreements": [],
+   "wall_disagreements": []
+  },
+  {
+   "deficit": "19e-14",
+   "verdict": "ACCEPT",
+   "side_20": "13.880960371555777639",
+   "side_ceil_12": "13.880960371556",
+   "side_less_s70_plus_5": "1.98044e-13",
+   "side_less_nevska": "-2.22361e-13",
+   "certificate_side_less_this_side": "2.44738e-12",
+   "least_margin": {
+    "pair": [
+     104,
+     105
+    ],
+    "value": "9.22332848282452e-15"
+   },
+   "touching_pairs": [],
+   "overlapping_pair_count": 0,
+   "wall_contacts": [
+    "67 bottom",
+    "123 left",
+    "162 top"
+   ],
+   "walls_outside": [],
+   "pair_disagreements": [],
+   "wall_disagreements": []
+  },
+  {
+   "deficit": "199e-15",
+   "verdict": "ACCEPT",
+   "side_20": "13.88096037155566185",
+   "side_ceil_12": "13.880960371556",
+   "side_less_s70_plus_5": "8.22551e-14",
+   "side_less_nevska": "-3.3815e-13",
+   "certificate_side_less_this_side": "2.56317e-12",
+   "least_margin": {
+    "pair": [
+     104,
+     105
+    ],
+    "value": "2.23328482822723e-16"
+   },
+   "touching_pairs": [],
+   "overlapping_pair_count": 0,
+   "wall_contacts": [
+    "33 top",
+    "67 bottom",
+    "123 left"
+   ],
+   "walls_outside": [],
+   "pair_disagreements": [],
+   "wall_disagreements": []
+  },
+  {
+   "deficit": "2e-13",
+   "verdict": "REFUSE",
+   "side_20": "13.880960371555649174",
+   "side_ceil_12": "13.880960371556",
+   "side_less_s70_plus_5": "6.95793e-14",
+   "side_less_nevska": "-3.50826e-13",
+   "certificate_side_less_this_side": "2.57584e-12",
+   "least_margin": {
+    "pair": [
+     104,
+     105
+    ],
+    "value": "-7.76671517177476e-16"
+   },
+   "touching_pairs": [],
+   "overlapping_pair_count": 2,
+   "wall_contacts": [
+    "33 top",
+    "67 bottom",
+    "123 left"
+   ],
+   "walls_outside": [],
+   "pair_disagreements": [],
+   "wall_disagreements": []
+  }
+ ]
+}

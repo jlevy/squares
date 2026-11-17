@@ -1,0 +1,64 @@
+{
+  "certificate": "../src/repo/certificate/s12_lower_3.9716.txt",
+  "sha256": "833b76a179a420a40775cc76305ec9ffb7f6ea27472e587958c234c4c4712cbd",
+  "bytes": 103946,
+  "sha256_matches_expected": true,
+  "token_parse_agrees": true,
+  "side": "9929/2500",
+  "side_decimal": "3.9716000000",
+  "side_header": [
+    15886400,
+    4000000
+  ],
+  "D": 4000000,
+  "W": 9985226,
+  "declared_points": 4996,
+  "parsed_points": 4996,
+  "side_in_D_units": "15886400",
+  "total_weight_numerator": 119787760,
+  "total_weight": "119787760/9985226",
+  "total_weight_decimal": "11.996499628551222",
+  "margin_below_n_numerator": 34952,
+  "margin_below_n": "34952/9985226",
+  "D4_maps_preserving": {
+    "id": true,
+    "rot90": true,
+    "rot180": true,
+    "rot270": true,
+    "mirror_x": true,
+    "mirror_y": true,
+    "diag": true,
+    "antidiag": true
+  },
+  "orbit_size_census": {
+    "4": 23,
+    "8": 613
+  },
+  "centre_point_present": false,
+  "weight_census": {
+    "min": 1,
+    "max": 1381741,
+    "distinct": 364,
+    "points_with_weight_1": 1976,
+    "weight_of_weight_le_10_points": 1976
+  },
+  "coordinate_range_D_units": [
+    1343865,
+    14542535
+  ],
+  "checks": {
+    "D_positive": true,
+    "W_positive": true,
+    "side_den_positive": true,
+    "side_equals_9929_over_2500": true,
+    "side_header_denominator_equals_D": true,
+    "side_times_D_integer": true,
+    "all_weights_positive": true,
+    "all_points_in_closed_container": true,
+    "no_point_on_container_boundary": true,
+    "points_distinct": true,
+    "total_strictly_below_n": true,
+    "D4_symmetric": true
+  },
+  "ok": true
+}

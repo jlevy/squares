@@ -1,0 +1,14 @@
+# Lane L108 findings frozen at 2026-11-11T22:11:47Z, before the author's README, sqcheck.py, verifier/README.md, packing-witness-verify.txt, sqcheck-output.txt, the decimal pose, the licence files, the register entries at 179, #954's import lane or this repository's verifier and promotion code was opened.
+8f6884a3212a26e9f226545ae09df68fec3dbbc85b72df49b779f85f9b33ac97  frozen/review-2026-11-12-ozden-959.frozen.md
+# lines and bytes: 351 22693
+# checker list:
+6ed17495a6c026c2f3a8b9ca2406cb526202c02171d14337082623e268ae9103  frozen/checker-frozen-digests.txt
+# controls plan list:
+2616c7025fbe8f42ad5e552d9dd24b75ed80421f605872cf854ea7fe2c8c7756  frozen/controls-plan-digest.txt
+# receipts and programs at the freeze:
+b8e2a69ccc1ebba744c13f1423847d53aa8cf5e81e162f12a91c56fc85f3575e  out/selftest.json
+ed2b381e24af9f7d40a6c40c274f7aa8fa1848223364467a064bcdcb8577550d  out/check-n179.json
+219ddfee1e869ba8379fddfd3f9f5258b2d7c27ee6422eb64a5f604e267ed62b  out/plan-facts-n179.json
+5be15b826054632b7b33091ff006af79b050ab30f52e0540f20607cdb34ac5b2  out/controls-n179.json
+febe78fe9425f2192b2a349cf92fa2e4f882fcdc5e92590aa59e694dcfaa53e5  programs/controls-plan.json
+51ff1b944199c0e533545f7159ddc332ec1eb91da4c61381754ad840b76fffba  programs/l108_controls.py

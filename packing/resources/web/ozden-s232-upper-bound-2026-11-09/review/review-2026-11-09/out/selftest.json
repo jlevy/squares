@@ -1,0 +1,67 @@
+{
+ "program": "l64_selftest.py",
+ "programs_sha256": {
+  "l64_util.py": "de76960f100535969691e9c386be79de5ca3e45fbe7db318ea86e5ec9bc2af81",
+  "l64_reader.py": "0e51d443fda1825b6ae207689ed932b9d1c73fc0c46aed0ceec153ba08be9c9c",
+  "l64_sat.py": "b4e61fcb7eae75386a7fa5f8c065518eacfbea47460477e192ca75f02762b948",
+  "l64_clip.py": "d238d55672949ffde490f234c97db0d76a2efc96a9515485d45e67e02b789e95",
+  "l64_check.py": "5c4927b88049a41a3fa1e822eab96d575d27f7d982058b272f677d87064c2058",
+  "l64_selftest.py": "2d8518c7c440415340cc8a92410f7b106f01e9872231957b65b3b6776656fc22"
+ },
+ "environment": {
+  "python": "3.14.7",
+  "implementation": "CPython",
+  "isolated_mode": "True",
+  "nice": "19"
+ },
+ "seed": 20261109,
+ "epsilon": "1/1000000000000000000000000000000",
+ "counts": {
+  "known": 28,
+  "random_pairs": 3000,
+  "random_walls": 1000,
+  "reader_refusals": 32
+ },
+ "reader_refusals": {
+  "CRLF": "mutant.yaml: carriage return in file",
+  "tab": "mutant.yaml: tab in file",
+  "non-ASCII digit": "mutant.yaml: non-ASCII byte at offset 500",
+  "duplicate key": "mutant.yaml: duplicate key 'n' at   in \"<unicode string>\", line 9, column 3:\n      n: 2\n      ^",
+  "decimal": "mutant.yaml: not an integer or p/q scalar: '2.3'",
+  "exponent": "mutant.yaml: not an integer or p/q scalar: '23e-1'",
+  "plus sign": "mutant.yaml: not an integer or p/q scalar: '+23/10'",
+  "leading zero": "mutant.yaml: not an integer or p/q scalar: '023/10'",
+  "zero denominator": "mutant.yaml: not an integer or p/q scalar: '23/0'",
+  "negative denominator": "mutant.yaml: not an integer or p/q scalar: '23/-10'",
+  "negative zero": "mutant.yaml: negative zero: '-0'",
+  "space in scalar": "mutant.yaml: not an integer or p/q scalar: '23 /10'",
+  "underscore": "mutant.yaml: not an integer or p/q scalar: '2_3/10'",
+  "extra square key": "mutant.yaml: square #2: keys ['angle', 'corners', 'id']",
+  "three corners": "mutant.yaml: square #2: corners is not four points",
+  "count mismatch": "mutant.yaml: n is 3, expected 2",
+  "repeated id": "mutant.yaml: square #2: repeated id 1",
+  "center-basis": "mutant.yaml: representation 'center-basis' not in ('corners',)",
+  "decimal kind": "mutant.yaml: scalar is {'kind': 'decimal'}, not exactly kind: rational",
+  "container-center": "mutant.yaml: coordinates are {'origin': 'container-center', 'axes': 'x-right-y-up', 'angle_unit': 'n",
+  "square size 2": "mutant.yaml: square_size is not '1'",
+  "anchor and alias": "mutant.yaml: YAML feature characters this layout never uses: ['&', '*']",
+  "tag": "mutant.yaml: YAML feature characters this layout never uses: ['!']",
+  "flow sequence": "mutant.yaml: YAML feature characters this layout never uses: ['[', ']']",
+  "unknown witness key": "mutant.yaml: witness keys: unknown ['extra'], missing []",
+  "zero side": "mutant.yaml: side is not positive",
+  "JSON digit differs": "mutant.json: JSON squares differ from the YAML squares",
+  "JSON float": "mutant.json: JSON non-string number or constant '2.0'",
+  "JSON duplicate key": "mutant.json: JSON duplicate key 'n'",
+  "JSON n as string": "mutant.json: JSON witness.n is not an integer",
+  "JSON NaN": "mutant.json: JSON non-string number or constant 'NaN'",
+  "JSON id as string": "mutant.json: JSON square id is not an integer"
+ },
+ "failures": [],
+ "verdict": "PASSED",
+ "clock": {
+  "started_utc": "2026-11-09T08:00:43Z",
+  "finished_utc": "2026-11-09T08:00:48Z",
+  "cpu_seconds": "5.27",
+  "wall_seconds": "5.34"
+ }
+}

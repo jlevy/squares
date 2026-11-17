@@ -90,6 +90,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/unnir/s12-lower-bound-3.9716",
+        "unnir",
+        (
+            "Daniel's s(12) points dilated again, with 3,260 more and new weights: the"
+            " lower bound s(12) \u2265 9929/2500 (T-274)."
+        ),
+    ),
+    (
         "https://github.com/wand125/square-packing-bounds",
         "Hiroaki Hosono",
         "Weighted point and rectangle-density lower-bound certificates across many n.",
@@ -215,11 +223,27 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/moh63-dev/k2m5-family",
+        "Mohsen Khalili and Sara Gharabaghi",
+        (
+            "One family of measures for s(k^2 - 5) = k at every k >= 10, reduced to an"
+            " 11 x 11 board, with a Tight-Tile Lemma and a Lean reduction (T-298)."
+        ),
+    ),
+    (
         "https://github.com/kenaznia-doga/s94-lower-bound",
         "Doğa Özden",
         (
             "Hosono's s(94) measure dilated onto a finer net: s(94) >= 1993/200,"
             " reported here (T-262)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s94-lower-bound-9972",
+        "Doğa Özden",
+        (
+            "The same measure dilated onto a 4,972-direction net: s(94) >= 2493/250,"
+            " reported here (T-266)."
         ),
     ),
     (
@@ -236,6 +260,164 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         (
             "A further arrangement of Evan Daniel's packing, one to one with it,"
             " 6.48e-6 below it (T-264)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s232-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Couzo's refinement of Chilton's packing, 2.52e-4"
+            " below it (T-275)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s268-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it, 2.96e-5"
+            " below it (T-276)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s299-upper-bound-17801004",
+        "Doğa Özden",
+        ("A further arrangement of his own packing at 299, 2.34e-4 below it (T-277)."),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s303-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it, 4.35e-5"
+            " below it (T-278)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s307-upper-bound",
+        "Doğa Özden",
+        (
+            "A further arrangement of Couzo's refinement of ntumlnoob's packing, 2.03e-5"
+            " below it (T-279)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s172-upper-bound",
+        "Doğa Özden",
+        ("A further arrangement of Evan Daniel's packing at 172, 3.25e-3 below it (T-282)."),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s270-upper-bound",
+        "Doğa Özden",
+        ("A further arrangement of Evan Daniel's packing at 270, 1.36e-5 below it (T-283)."),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s199-upper-bound",
+        "Doğa Özden",
+        (
+            "His packing at 172 with an L of 27 squares, 2.88e-3 below the record at 199"
+            " (T-284)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s156-upper-bound",
+        "Doğa Özden",
+        ("A packing at 156 seeded from Evan Daniel's 182, 2.11e-3 below the record (T-287)."),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s180-upper-bound",
+        "Doğa Özden",
+        ("A packing at 180 seeded from Evan Daniel's 154, 1.38e-3 below the record (T-288)."),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s268-upper-bound-16872029849",
+        "Doğa Özden",
+        (
+            "A packing at 268 seeded from the registry's 302, 4.40e-4 below his own"
+            " T-276 (T-289)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s269-upper-bound",
+        "Doğa Özden",
+        ("A packing at 269 seeded from Evan Daniel's 304, 5.19e-4 below the record (T-290)."),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s179-upper-bound",
+        "Doğa Özden",
+        (
+            "A packing at 179, a band built from the registry's 70, 2.43e-3 below the record"
+            " (T-291)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s179-upper-bound-13880960371",
+        "Doğa Özden",
+        (
+            "A further arrangement at 179 of his own T-291 band, 4.07e-4 below it, now the"
+            " record (T-294)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s237-upper-bound",
+        "Doğa Özden",
+        (
+            "A packing at 237, a band built from two copies of the registry's 70, 8.80e-3"
+            " below the record (T-295)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s269-upper-bound-16899469076",
+        "Doğa Özden",
+        (
+            "A second packing at 269, a band built from tilted squares of the registry's 207"
+            " and 70 and his own 179, 1.53e-3 below his first (T-296)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s269-upper-bound-1688973007",
+        "Doğa Özden",
+        (
+            "A third packing at 269, from a column-band designer, 9.74e-3 below his second"
+            " (T-297)."
+        ),
+    ),
+    (
+        "https://github.com/kenaznia-doga/s228-upper-bound",
+        "Doğa Özden",
+        ("A packing at 228 from a column-band proposal design, 3.80e-3 below T-174 (T-300)."),
+    ),
+    (
+        "https://github.com/RobertoOno/squares-in-square",
+        "Roberto Ono",
+        (
+            "A coding-agent harness whose run cut band periods from registered packings: 228,"
+            " 4.76e-3 below T-300 (T-301), and 147, 5.81e-3 below 7 + 4√2 (T-302)."
+        ),
+    ),
+    (
+        "https://github.com/dpre4ai/n90-square-packing",
+        "jazivxt",
+        (
+            "A packing at 90 from shifted copies of a crop of Joost de Winter's 157, the first"
+            " below the grid of side 10, 1.72e-3 below it (T-303)."
+        ),
+    ),
+    (
+        "https://github.com/JonathanGun/square-packing-upper-bounds",
+        "JoeGun",
+        (
+            "Five packings at 127, 204, 232, 264 and 305, Tomáš Kodaj's public Kaggle packings"
+            " that JoeGun improved further, each a new arrangement 9.3e-4 to 9.1e-3 below its"
+            " house (T-305 to T-309)."
+        ),
+    ),
+    (
+        "https://github.com/vitamoon/vitamoon",
+        "Kaelan Yim",
+        (
+            "A further arrangement of Evan Daniel's packing, one to one with it,"
+            " 1.99e-10 below it (T-265); eleven certificates beyond the case corpus,"
+            " 553 to 700, below Francisco Couzo's rows; and re-certifications at 130,"
+            " 299 and 303, held for the owner (T-280, T-281)."
         ),
     ),
     (
@@ -263,7 +445,15 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "Exact rational certificates for 227, 229 and 260 squares, replayed and "
             "reviewed here (T-196). The house packing at 260 was replaced by T-223 on "
             "21 October; Daniel's regularized views (T-225) now supply the house "
-            "packings at 227, 229 and 260."
+            "packings at 227, 229 and 260. Thirty-seven certificates beyond 324 squares, "
+            "from 413 to 991 (#941, #942), are replayed and reviewed here; thirty-six are "
+            "dated rows beyond the case corpus, and the deletion bound at 809 waits on the "
+            "owner. Pinwheel packings of 132 and 157 squares, 157 the first below the "
+            "13-by-13 grid, are replayed, reviewed and adopted here (T-292, T-293). A "
+            "packing of 297 squares in T-174's layout with a double step in each "
+            "staircase is replayed, reviewed and adopted here (T-299), and with borders "
+            "it gives rows at 332 and 409 (#979). A local-search improvement of jazivxt's "
+            "packing at 90, 4.24e-3 below it, is replayed, reviewed and adopted here (T-304)."
         ),
     ),
     (

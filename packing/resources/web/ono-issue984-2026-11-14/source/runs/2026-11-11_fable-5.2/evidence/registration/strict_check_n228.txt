@@ -1,0 +1,8 @@
+file: runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json
+n = 228; side = 15.596043120920791646977220704185… (exact fraction in the file)
+pairs: 25878 in all; 525 with centres at squared distance < 2 tested on the four edge normals
+smallest pair margin: 2.389e-10 (exact: 23809472726341234365234403450859842555633149002312278750075223637036049443832583352421847/99648177712745160540537544037031282242327949156349420961832318865296588215483518059405707761942528)
+smallest wall margin: 0.000e+00 (exact: 0)
+NOT STRICT (a margin is zero or negative)
+seconds: 0.1
+exported: runs/2026-11-11_fable-5.2/evidence/registration/n228.cert

@@ -1,0 +1,2 @@
+VALID     n=199  exact-rational  s<=14.614689853286216 (exact side rounded up)  n-199-candidate.yaml
+CERTIFIED n=199  interval        s<=14.614689853286419 (exact side rounded up) (dilation 1e-24; at own side 27 tight constraints, worst -0.0e+00)  n-199-decimal-pose.yaml

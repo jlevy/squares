@@ -1,0 +1,10 @@
+# Lane L108 checker, frozen at 2026-11-11T22:03:30Z, before the controls plan, the findings, the author's checkers or their outputs, any packing-witness code or any import lane's work was read.
+b56db242a2580265607154243467ff8e0509e5b6b6e9fd9b7097b0bdb0f94184  l108_reader.py
+31d5846efe2390bc061ac7ba18c7360ce9248ae9403f04d0a8771665955ceabd  l108_sat.py
+7fec77bc02a66134cb01d543251eaad9b36141cc68069910dfb0f96291f268d6  l108_clip.py
+6c6dbaff0369784888e087c7fb5bd6a9f05a0e5e095e60caf7e946a66616e6ef  l108_check.py
+61633078d00e939597372c9c1c032fc794f99b41217f503f72edebfbbcbec387  l108_geom.py
+75ae5da556c21dd77eeaecec1a3c6bbaddaa9b978022046e6dc97115e67a903a  l108_selftest.py
+# receipts written by the frozen checker:
+b8e2a69ccc1ebba744c13f1423847d53aa8cf5e81e162f12a91c56fc85f3575e  out/selftest.json
+ed2b381e24af9f7d40a6c40c274f7aa8fa1848223364467a064bcdcb8577550d  out/check-n179.json

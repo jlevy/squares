@@ -1,0 +1,306 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Kaelan Yim",
+  "source_key": "[Yim certificates 2026-11-09]",
+  "report_evidence": "E-yim-1109-certificate-report",
+  "receipt_format": "yim-1109-exact-replay-v1",
+  "witness_prefix": "W-yim-1109-n",
+  "claim_limitations": "Complete vitamoon/vitamoon ac14112 rational centre/half-angle certificates in Evan Daniel's format, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-09",
+  "read_at_main": "adca8d352cd32036bcf877658dfffef61ea2d621",
+  "certificates": [
+    {
+      "n": 130,
+      "path": "n130.cert",
+      "format": "evand-cert",
+      "offered": "11.902430645983",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T08:42:14Z"
+    },
+    {
+      "n": 299,
+      "path": "n299.cert",
+      "format": "evand-cert",
+      "offered": "17.801004434255",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:30:26Z"
+    },
+    {
+      "n": 303,
+      "path": "n303.cert",
+      "format": "evand-cert",
+      "offered": "17.901789273154",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T09:36:10Z"
+    },
+    {
+      "n": 553,
+      "path": "n553.cert",
+      "format": "evand-cert",
+      "offered": "23.969145238668",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 599,
+      "path": "n599.cert",
+      "format": "evand-cert",
+      "offered": "24.936479681246",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 600,
+      "path": "n600.cert",
+      "format": "evand-cert",
+      "offered": "24.951090275321",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 601,
+      "path": "n601.cert",
+      "format": "evand-cert",
+      "offered": "24.958070476928",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 602,
+      "path": "n602.cert",
+      "format": "evand-cert",
+      "offered": "24.981298949631",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 604,
+      "path": "n604.cert",
+      "format": "evand-cert",
+      "offered": "24.995880488226",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 645,
+      "path": "n645.cert",
+      "format": "evand-cert",
+      "offered": "25.881385537401",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 647,
+      "path": "n647.cert",
+      "format": "evand-cert",
+      "offered": "25.899272968790",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 648,
+      "path": "n648.cert",
+      "format": "evand-cert",
+      "offered": "25.908803576981",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 699,
+      "path": "n699.cert",
+      "format": "evand-cert",
+      "offered": "26.907311118315",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    },
+    {
+      "n": 700,
+      "path": "n700.cert",
+      "format": "evand-cert",
+      "offered": "26.908036102718",
+      "printed_in": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "first_committed": "2026-11-09T07:13:34Z"
+    }
+  ],
+  "requested": [
+    299,
+    303,
+    553,
+    599,
+    600,
+    601,
+    602,
+    604,
+    645,
+    647,
+    648,
+    699,
+    700
+  ],
+  "replayed": [
+    130,
+    299,
+    303,
+    553,
+    599,
+    600,
+    601,
+    602,
+    604,
+    645,
+    647,
+    648,
+    699,
+    700
+  ],
+  "houses": [
+    {
+      "n": 130,
+      "reader": "[Mishapolk issue 846 2026-10-30]",
+      "source_key": "[Mishapolk issue 846 2026-10-30]",
+      "holders": "Francisco Couzo, improved by Mishapolk",
+      "result": "T-259",
+      "reported_value": "11.9024306459822658",
+      "verified_value": "11.9024306459822658",
+      "evidence": [
+        "E-mishapolk-846-exact-feasibility",
+        "E-mishapolk-846-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 299,
+      "reader": "[Özden s299 upper bound 2026-11-09]",
+      "source_key": "[Özden s299 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-277",
+      "reported_value": "17.8010044342552937",
+      "verified_value": "17.8010044342552937",
+      "evidence": [
+        "E-ozden-929-exact-feasibility",
+        "E-ozden-929-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 303,
+      "reader": "[Özden s303 upper bound 2026-11-09]",
+      "source_key": "[Özden s303 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-278",
+      "reported_value": "17.9017892731564904",
+      "verified_value": "17.9017892731564904",
+      "evidence": [
+        "E-ozden-930-exact-feasibility",
+        "E-ozden-930-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 553,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "23.969774299704",
+      "rounding": "up"
+    },
+    {
+      "n": 599,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "24.937296174353",
+      "rounding": "up"
+    },
+    {
+      "n": 600,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "24.951414939457",
+      "rounding": "up"
+    },
+    {
+      "n": 601,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "24.958452262518",
+      "rounding": "up"
+    },
+    {
+      "n": 602,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "24.981485660049",
+      "rounding": "up"
+    },
+    {
+      "n": 604,
+      "report": "couzo-43f666c-2026-10-24",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after alexchilton",
+      "printed": "24.996827861695",
+      "rounding": "up"
+    },
+    {
+      "n": 645,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "25.883109225944",
+      "rounding": "up"
+    },
+    {
+      "n": 647,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "25.899276594081",
+      "rounding": "up"
+    },
+    {
+      "n": 648,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "25.908836705326",
+      "rounding": "up"
+    },
+    {
+      "n": 699,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "26.907571868006",
+      "rounding": "up"
+    },
+    {
+      "n": 700,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "26.908095391467",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Kaelan Yim's packing of 299 squares at vitamoon/vitamoon ac14112 (first committed at e4209f6), a publication in a watched repository with no issue",
+    "headline": "Yim's refinement at 299 of Özden's #929 packing, after Daniel and Deotte, 1.18e-12 below it",
+    "significance": 2,
+    "source_checks": "PACKINGS.md says two public checkers, evand/square-packing bb4cc78e search/exact/verify_cert.py and verify_cert2.py, whose SHA-256s it prints and which equal the copies the evand-n183-subgrid-2026-10-19 packet retains, together with a local rational repair verifier and this repository's centre/basis and independent-corner routes at f30d6405, five local exact checks, accepted every new certificate, and that these are not five wholly independent implementations. No local-optimality, rigidity or formal check is claimed. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Kaelan Yim (GitHub vitamoon), who publishes a refinement of Doğa Özden's #929 packing at 299, itself Özden's further arrangement of the registry's 299 after Evan Daniel and Chris Deotte, by what he calls returned-anchor continuation, and asks for the credit 'Kaelan Yim after Doğa Özden, Evan Daniel and Chris Deotte'. He says it is 'a refinement of his arrangement, not a new construction or material gain', and that Hermes Agent was used for research, numerical search, implementation and verification orchestration. The publication is not a registration request.",
+    "next_rung": "Independently review the certificate (stage 4, a lane prompted separately and blind to this one): its mathematics, a clean-room exact checker with sharp controls, the identity against #929's packing and the lineage the source states, mapped as an adversarial review. Then decide the house at 299 under the house rule.",
+    "bead": "think-h96r",
+    "bibliography": {
+      "authors": [
+        "Yim"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Yim after Ozden, Daniel, Deotte",
+      "short_credit": "Yim after Ozden et al.",
+      "note": "vitamoon/vitamoon at ac14112009f5668b464170dcd979334a5537521d (2026-11-09T09:49:17Z), Kaelan Yim's 14 exact rational centre/half-angle certificates in Evan Daniel's format: n299 first committed at e4209f6, n130 at c10e094 (08:42:14Z), n303 at 546928a (09:36:10Z), overwriting the first n303 of 78eb9ea, and the other eleven at 78eb9ea (2026-11-09T07:13:34Z); a publication in a watched repository that no issue reports, and not a registration request by its own word. The n299 certificate refines Doğa Özden's #929 packing (kenaznia-doga/s299-upper-bound-17801004 a042eab), after Evan Daniel and Chris Deotte; the ten at 553 to 700 but 604 refine Francisco Couzo's packings after Vladislav Lavrentev, and 604 Couzo's after alexchilton; 303 refines Özden's #930 packing, after Evan Daniel, Chris Deotte and Griffin Casson's solver. AI-assisted (Hermes Agent). No global optimality claim. Retained as factual data; the repository states no licence for these files. Ozden is Özden in the credit's ASCII. Retained in web/yim-certificates-2026-11-09/."
+    }
+  }
+}

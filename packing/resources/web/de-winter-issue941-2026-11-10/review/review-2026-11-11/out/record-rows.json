@@ -1,0 +1,2030 @@
+{
+ "main": "591644a9e9b41c04858e2601382e5a65485a09a9",
+ "case_corpus": {
+  "n_min": 1,
+  "n_max": 324,
+  "reader_view": "frontier/STATUS.md"
+ },
+ "dispositions": {
+  "superseded": 1645,
+  "above-classical-construction": 9,
+  "tracked-outside-case-corpus": 368
+ },
+ "monotone_least_current_row": {
+  "413": {
+   "value": "20.824764038662",
+   "at_n": 413,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "494": {
+   "value": "22.737532875219",
+   "at_n": 494,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "539": {
+   "value": "23.736669673811",
+   "at_n": 539,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "543": {
+   "value": "23.803053261145",
+   "at_n": 543,
+   "source_id": "tymchishin-22-3662-2026-10-23"
+  },
+  "547": {
+   "value": "23.879127653315",
+   "at_n": 547,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "590": {
+   "value": "24.802527132871",
+   "at_n": 590,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "597": {
+   "value": "24.901150566387",
+   "at_n": 597,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "632": {
+   "value": "25.656854249498",
+   "at_n": 632,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "637": {
+   "value": "25.769289510287",
+   "at_n": 637,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "655": {
+   "value": "26.535533905933",
+   "at_n": 677,
+   "source_id": "couzo-index-2026-10-15"
+  },
+  "684": {
+   "value": "26.656854249498",
+   "at_n": 684,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "685": {
+   "value": "26.692388159732",
+   "at_n": 685,
+   "source_id": "tymchishin-reclosure-v3-2026-10-23"
+  },
+  "738": {
+   "value": "27.691283629524",
+   "at_n": 738,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "739": {
+   "value": "27.691450272099",
+   "at_n": 739,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "744": {
+   "value": "27.786715806974",
+   "at_n": 744,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "750": {
+   "value": "27.874585541193",
+   "at_n": 750,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "753": {
+   "value": "27.907984230435",
+   "at_n": 753,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "754": {
+   "value": "27.920422831462",
+   "at_n": 754,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "756": {
+   "value": "27.949602638227",
+   "at_n": 756,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "794": {
+   "value": "28.691448980966",
+   "at_n": 794,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "805": {
+   "value": "28.858216341607",
+   "at_n": 805,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "809": {
+   "value": "28.908036098650",
+   "at_n": 809,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "810": {
+   "value": "28.910451045451",
+   "at_n": 810,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "814": {
+   "value": "28.961440808824",
+   "at_n": 814,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "851": {
+   "value": "29.691448975560",
+   "at_n": 851,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "864": {
+   "value": "29.873870986621",
+   "at_n": 864,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "865": {
+   "value": "29.883815809125",
+   "at_n": 865,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "867": {
+   "value": "29.908036097699",
+   "at_n": 867,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "869": {
+   "value": "29.913238532580",
+   "at_n": 869,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "910": {
+   "value": "30.691448975560",
+   "at_n": 910,
+   "source_id": "couzo-issue763-2026-10-23-recipes"
+  },
+  "918": {
+   "value": "30.796057688423",
+   "at_n": 918,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "921": {
+   "value": "30.839621660274",
+   "at_n": 921,
+   "source_id": "couzo-issue763-2026-10-23"
+  },
+  "924": {
+   "value": "30.870828693406",
+   "at_n": 924,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "935": {
+   "value": "30.994174058119",
+   "at_n": 935,
+   "source_id": "couzo-964ee2b-2026-10-23"
+  },
+  "970": {
+   "value": "31.656854249499",
+   "at_n": 970,
+   "source_id": "couzo-issue763-2026-10-23-recipes"
+  },
+  "989": {
+   "value": "31.909679351448",
+   "at_n": 989,
+   "source_id": "couzo-43f666c-2026-10-24"
+  },
+  "991": {
+   "value": "31.934561612655",
+   "at_n": 991,
+   "source_id": "couzo-43f666c-2026-10-24"
+  }
+ },
+ "counts": [
+  413,
+  494,
+  539,
+  543,
+  547,
+  590,
+  597,
+  632,
+  637,
+  655,
+  684,
+  685,
+  738,
+  739,
+  744,
+  750,
+  753,
+  754,
+  756,
+  794,
+  805,
+  809,
+  810,
+  814,
+  851,
+  864,
+  865,
+  867,
+  869,
+  910,
+  918,
+  921,
+  924,
+  935,
+  970,
+  989,
+  991
+ ],
+ "inside_corpus": [],
+ "register_entries": {},
+ "beyond_horizon_rows": {
+  "413": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "20.831663365382",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "20.8316633653748782",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "20.831663365378",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "20.831663365359",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "20.824764038662",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "494": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "22.778174593083",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "22.778174593076",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "22.778174593073",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "22.737532875219",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "539": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "23.778174593092",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "23.778174593076",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "23.778174593065",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "23.736669673811",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "543": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "23.828427124779",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "23.828427124774",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "tymchishin-22-3662-2026-10-23"
+   },
+   {
+    "source_id": "tymchishin-22-3662-2026-10-23",
+    "claim": "upper-bound",
+    "value": "23.803053261145",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "547": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "23.946082411630",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "23.898819144794",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "23.906371163646",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "23.946082411003",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-23aff0c-2026-10-17"
+   },
+   {
+    "source_id": "couzo-23aff0c-2026-10-17",
+    "claim": "upper-bound",
+    "value": "23.942809041643",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "23.898819144772",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "23.879127653315",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "590": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "24.828427124830",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "24.828427124774",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "24.802527132871",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "597": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "24.961554162270",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "24.961502766154",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "muglich-issue686-2026-10-19"
+   },
+   {
+    "source_id": "muglich-issue686-2026-10-19",
+    "claim": "upper-bound",
+    "value": "24.958141573307033",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "24.950690418637",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "24.961513018469",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "24.950690418604",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "24.901150566387",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "632": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "25.677669529699",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "25.677669529688",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23-recipes"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23-recipes",
+    "claim": "upper-bound",
+    "value": "25.656854249507",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "25.656854249498",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "637": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "25.778174593087",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "25.7781745930779883",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "25.778174593082",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "25.778174593058",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-fa6237e-2026-10-23"
+   },
+   {
+    "source_id": "couzo-fa6237e-2026-10-23",
+    "claim": "upper-bound",
+    "value": "25.769621349979",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "aqibrazadev-blending-2026-10-23"
+   },
+   {
+    "source_id": "aqibrazadev-blending-2026-10-23",
+    "claim": "upper-bound",
+    "value": "25.769289519260",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "25.769289510287",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "684": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "26.677669529700",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "26.6776695296907003",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "26.677669529693",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "26.677669529689",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "26.677669529670",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "26.656854249501",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "26.656854249498",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "685": [
+   {
+    "source_id": "tymchishin-reclosure-v3-2026-10-23",
+    "claim": "upper-bound",
+    "value": "26.692388159732",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "738": [
+   {
+    "source_id": "tymchishin-reclosure-v3-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.691431135633",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "aqibrazadev-blending-2026-10-23"
+   },
+   {
+    "source_id": "aqibrazadev-blending-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.691283629550",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "27.691283629524",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "739": [
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.691450272099",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "744": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "27.798989873262",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "27.7989898732513590",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "27.798989873256",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.798989873230",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "27.786715806974",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "750": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "27.949747468418",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "27.911200800711",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "27.927909095101",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "27.928780276056",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "27.911195756382",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.911195491084",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.874585541193",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "753": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "27.949747468344",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "27.932449886404",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "27.937423518013",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "27.936842811648",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "27.935538484638",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "27.9324498863881494",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.907984230435",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "754": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "27.950422600590",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "27.937423317053",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "27.937423518013",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "27.9374233139930546",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "27.942911732349",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.920621682790",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "27.920422831462",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "756": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "27.984450134768",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "muglich-issue686-2026-10-19",
+    "claim": "upper-bound",
+    "value": "27.976914446491419",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "27.976782251658",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "27.984237490911",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "27.983489205831",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "27.982602664098",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "muglich-issue686-2026-10-19"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "27.984282828196",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "27.976780205512",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.976777716758",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "27.949646347575",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "27.949602638227",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "794": [
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "28.691448980966",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "805": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "28.927176135353",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "28.909665866810",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "28.902673974184",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "28.921843659464",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "28.916476090926",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "28.911312576594",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "28.902673974150",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "28.858216341607",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "809": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "28.942670732678",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "28.933954694456",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "28.937423518015",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "28.937423314202",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "28.938951653895",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "28.933954128802",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "28.933951500687",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "28.908036098650",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "810": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "28.951463124709",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "muglich-issue686-2026-10-19",
+    "claim": "upper-bound",
+    "value": "28.951463061400412",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-reconcile-2026-10-20"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "28.9514630500047711",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "28.951463124704",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "muglich-issue686-2026-10-19"
+   },
+   {
+    "source_id": "couzo-reconcile-2026-10-20",
+    "claim": "upper-bound",
+    "value": "28.951463061398",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "28.951462957761",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "28.910451045451",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "814": [
+   {
+    "source_id": "fang-direct-certificates-2026-10-13",
+    "claim": "upper-bound",
+    "value": "28.999873603982716",
+    "assurance": "verified",
+    "disposition": "superseded",
+    "superseded_by": "couzo-verified-bounds-2026-10-14"
+   },
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "28.997961625277",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "muglich-issue686-2026-10-19",
+    "claim": "upper-bound",
+    "value": "28.981594177155286",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "28.981388189193",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "28.995946347758",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "28.993798579000",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "muglich-issue686-2026-10-19"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "28.997905039848",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-23aff0c-2026-10-17"
+   },
+   {
+    "source_id": "couzo-23aff0c-2026-10-17",
+    "claim": "upper-bound",
+    "value": "28.995949340329",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "28.981388113792",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "28.981388046068",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "28.961440808824",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "851": [
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "29.691448975560",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "864": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "29.933881005348",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "29.924694876402",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "29.932742598598",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "29.924702911083",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "29.924694842541",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "29.924694560082",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "29.873880250030",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "29.873870986621",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "865": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "29.933881005348",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "29.932449886402",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "29.931498747933",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "29.932742598598",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "29.932623425046",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "29.933881004714",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "29.931498747931",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "29.886279332517",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "29.883815809125",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "867": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "29.950867216906",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "29.949688481977",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "29.942070418091",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-fa6237e-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "29.950265025802",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "29.950105216770",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "29.950867216900",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "couzo-fa6237e-2026-10-23",
+    "claim": "upper-bound",
+    "value": "29.908095427843",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "kyleluecke-inos-2026-10-23"
+   },
+   {
+    "source_id": "kyleluecke-inos-2026-10-23",
+    "claim": "upper-bound",
+    "value": "29.908036104109",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "29.908036097699",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "869": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "29.987056764014",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "muglich-issue686-2026-10-19",
+    "claim": "upper-bound",
+    "value": "29.974936836673075",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "29.974935743865",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "29.982472918533",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "29.982462261984",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "29.981360065447",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "muglich-issue686-2026-10-19"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "29.9749357188757236",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "29.974934501502",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "29.913238532580",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "910": [
+   {
+    "source_id": "couzo-issue763-2026-10-23-recipes",
+    "claim": "upper-bound",
+    "value": "30.691448975560",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "918": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "30.828427124912",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "30.825571499902",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "30.828427124807",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.825571499869",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-efef7d1-2026-10-23"
+   },
+   {
+    "source_id": "couzo-efef7d1-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.824728376140",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-fa6237e-2026-10-23"
+   },
+   {
+    "source_id": "couzo-fa6237e-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.803910346360",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "kyleluecke-inos-2026-10-23"
+   },
+   {
+    "source_id": "kyleluecke-inos-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.799684872950",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "30.796057688423",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "921": [
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.839621660274",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "924": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "30.933881005550",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "30.932449886402",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "30.931498747933",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "30.932742598607",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "30.932577553094",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "30.933766814037",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.931498747932",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-efef7d1-2026-10-23"
+   },
+   {
+    "source_id": "couzo-efef7d1-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.928790966656",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-fa6237e-2026-10-23"
+   },
+   {
+    "source_id": "couzo-fa6237e-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.877665942945",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "aqibrazadev-blending-2026-10-23"
+   },
+   {
+    "source_id": "aqibrazadev-blending-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.877654761160",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "30.870828693406",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "935": [
+   {
+    "source_id": "muglich-issue686-2026-10-19",
+    "claim": "upper-bound",
+    "value": "30.994174058156152",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-964ee2b-2026-10-23"
+   },
+   {
+    "source_id": "de-winter-issue666-2026-10-17",
+    "claim": "upper-bound",
+    "value": "30.995955854834",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "30.995336946282",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "muglich-issue686-2026-10-19"
+   },
+   {
+    "source_id": "couzo-964ee2b-2026-10-23",
+    "claim": "upper-bound",
+    "value": "30.994174058119",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "970": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "31.656854250166",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "31.656854249528",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "31.656854249500",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23-recipes"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23-recipes",
+    "claim": "upper-bound",
+    "value": "31.656854249499",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "989": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "31.987056764817",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "31.975475685281",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "muglich-issue686-2026-10-19"
+   },
+   {
+    "source_id": "muglich-issue686-2026-10-19",
+    "claim": "upper-bound",
+    "value": "31.974936836705050",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue715-2026-10-21"
+   },
+   {
+    "source_id": "couzo-issue715-2026-10-21",
+    "claim": "upper-bound",
+    "value": "31.974181306003",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "31.976993727283",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "31.976125363479",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "mishapolk-issue732-2026-10-22",
+    "claim": "upper-bound",
+    "value": "31.974133837950",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue732-f1ceee4-2026-10-23"
+   },
+   {
+    "source_id": "mishapolk-issue732-f1ceee4-2026-10-23",
+    "claim": "upper-bound",
+    "value": "31.974117146000",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "31.909775968518",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "31.909679351448",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ],
+  "991": [
+   {
+    "source_id": "couzo-verified-bounds-2026-10-14",
+    "claim": "upper-bound",
+    "value": "31.989568690022",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-index-2026-10-15"
+   },
+   {
+    "source_id": "couzo-issue678-2026-10-18",
+    "claim": "upper-bound",
+    "value": "31.981485095638",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "muglich-issue686-2026-10-19"
+   },
+   {
+    "source_id": "muglich-issue686-2026-10-19",
+    "claim": "upper-bound",
+    "value": "31.977403109964455",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-reconcile-2026-10-20"
+   },
+   {
+    "source_id": "couzo-issue670-2026-10-17",
+    "claim": "upper-bound",
+    "value": "31.982052182975",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue672-2026-10-17"
+   },
+   {
+    "source_id": "couzo-issue672-2026-10-17",
+    "claim": "upper-bound",
+    "value": "31.982010362324",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue675-2026-10-18"
+   },
+   {
+    "source_id": "couzo-issue675-2026-10-18",
+    "claim": "upper-bound",
+    "value": "31.981535631408",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue678-2026-10-18"
+   },
+   {
+    "source_id": "mishapolk-issue719-2026-10-22",
+    "claim": "upper-bound",
+    "value": "31.9756199047897388",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue763-2026-10-23"
+   },
+   {
+    "source_id": "couzo-index-2026-10-15",
+    "claim": "upper-bound",
+    "value": "31.988287236851",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-issue670-2026-10-17"
+   },
+   {
+    "source_id": "couzo-reconcile-2026-10-20",
+    "claim": "upper-bound",
+    "value": "31.977403109933",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "mishapolk-issue719-2026-10-22"
+   },
+   {
+    "source_id": "couzo-issue763-2026-10-23",
+    "claim": "upper-bound",
+    "value": "31.934594193723",
+    "assurance": "reported",
+    "disposition": "superseded",
+    "superseded_by": "couzo-43f666c-2026-10-24"
+   },
+   {
+    "source_id": "couzo-43f666c-2026-10-24",
+    "claim": "upper-bound",
+    "value": "31.934561612655",
+    "assurance": "reported",
+    "disposition": "tracked-outside-case-corpus",
+    "superseded_by": null
+   }
+  ]
+ },
+ "counts_with_no_row": [
+  655
+ ]
+}

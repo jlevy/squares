@@ -1,0 +1,457 @@
+{
+ "program": "controls.py",
+ "program_sha256": "fee793aab42ab0496e7a4e451bd79ca14beb35e4f9c214be3c8ab37f7110345f",
+ "certcheck_sha256": "0890eea39e3c622f8a3d5d4d4d8a7e79eb2ceb162a6551ecfc0c00bd2464ce5c",
+ "python": "3.14.7",
+ "input": {
+  "path": "packing/resources/web/yim-s260-upper-bound-2026-11-05/source/n260.cert",
+  "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb"
+ },
+ "tilted_definition": "|t|, |t - 1|, |t + 1| all above 0.0087266 (about 1 degree from upright)",
+ "controls": [
+  {
+   "control": "side lowered by the least far-wall clearance",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 0,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "least_far_clearance": "0"
+   },
+   "cpu_seconds": 15.523
+  },
+  {
+   "control": "side lowered 1e-30 past it",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 1,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 1,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": -1e-30,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {},
+   "cpu_seconds": 15.04
+  },
+  {
+   "control": "every square moved to the left wall by its least clearance",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 0,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": 0.0,
+    "right": 7.216449644332531e-16,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "clearance": "1977388481655875730359392569123340175249023059023899049259506770001/2740112630327610005453870840370144892737884566599873592298409119272755260624383378",
+    "float": 7.216449644332531e-16,
+    "rows": [
+     133
+    ]
+   },
+   "cpu_seconds": 17.319
+  },
+  {
+   "control": "every square moved to the left wall, 1e-30 past",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 1,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 1,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": -1e-30,
+    "right": 7.216449644332541e-16,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {},
+   "cpu_seconds": 18.59
+  },
+  {
+   "control": "every square moved to the bottom wall by its least clearance",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 0,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 0.0,
+    "top": 4.330424907554929e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "clearance": "134037853608132905062210912497744540246639415607541777162888689314/185739331808791749916078567986768486816346484490848003516239427518687420838934455",
+    "float": 7.216449650315173e-16,
+    "rows": [
+     7
+    ]
+   },
+   "cpu_seconds": 17.182
+  },
+  {
+   "control": "every square moved to the bottom wall, 1e-30 past",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 1,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 1,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": -1e-30,
+    "top": 4.330424907554929e-13
+   },
+   "as_expected": true,
+   "detail": {},
+   "cpu_seconds": 18.495
+  },
+  {
+   "control": "the square nearest the top wall raised by its clearance",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 0,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 0.0
+   },
+   "as_expected": true,
+   "detail": {
+    "row": 236,
+    "clearance": 4.3232084579046136e-13
+   },
+   "cpu_seconds": 15.506
+  },
+  {
+   "control": "the square nearest the top wall raised 1e-30 past",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 1,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 1,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": -1e-30
+   },
+   "as_expected": true,
+   "detail": {
+    "row": 236
+   },
+   "cpu_seconds": 15.729
+  },
+  {
+   "control": "tightest pair closed to contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 0,
+   "least_pair_gap": 0.0,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "rows": [
+     203,
+     210
+    ],
+    "gap": "37347959082111876277007861566196898433889635591448584858043065694990564673509510967697076950803350707825605834993189272442972/27946718690305266394382114473219030475281790568592702750130196793105839741650806436128190602568849821333133818245998032461763018247785531075",
+    "gap_float": 1.336398719863592e-15,
+    "motion": "37347959082111876277007861566196898433889635591448584858043065694990564673509510967697076950803350707825605834993189272442972/27946718690305266394382114473219030475281790568592702750130196793105839741650806436128190602568849821333133818245998032461763018247785531075",
+    "motion_float": 1.336398719863592e-15,
+    "i_tilted": false,
+    "j_tilted": false
+   },
+   "cpu_seconds": 15.441
+  },
+  {
+   "control": "tightest pair 1e-30 past contact",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 1,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 1,
+   "B_wall_failures": 0,
+   "least_pair_gap": -1e-30,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "rows": [
+     203,
+     210
+    ]
+   },
+   "cpu_seconds": 17.546
+  },
+  {
+   "control": "tightest pair of two tilted squares closed to contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 0,
+   "least_pair_gap": 0.0,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "rows": [
+     153,
+     156
+    ],
+    "gap": "79480026260906575468063918373548479558597223861313483005910605936618925525565309840351368954782458207341082451147103867305/85938054456796251327642872687708603497902101669779507909046938687075439814491413967071455902419870143970934566892634323403825394456287",
+    "gap_float": 9.24852520379824e-13,
+    "motion": "79480026260906575468063918373548479558597223861313483005910605936618925525565309840351368954782458207341082451147103867305/85938054456796251327642872687708603497902101669779507909046938687075439814491413967071455902419870143970934566892634323403825394456287",
+    "motion_float": 9.24852520379824e-13,
+    "i_tilted": true,
+    "j_tilted": true
+   },
+   "cpu_seconds": 15.929
+  },
+  {
+   "control": "tightest pair of two tilted squares 1e-30 past contact",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 1,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 1,
+   "B_wall_failures": 0,
+   "least_pair_gap": -1e-30,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "rows": [
+     153,
+     156
+    ]
+   },
+   "cpu_seconds": 15.705
+  },
+  {
+   "control": "tightest pair of a tilted and a near-upright square closed to contact",
+   "expected": "accept",
+   "A": true,
+   "B": true,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 0,
+   "least_pair_gap": 0.0,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "rows": [
+     205,
+     208
+    ],
+    "gap": "5812782684151689207414637164346467655860738551590788231904455047440993716666716441008916332012818375802413453048701038294644545/5708553441738995269487942885853555573363339085369241653181149998469778003433730157152787222818991843587610365818625516369255090364620640433",
+    "gap_float": 1.0182584333275407e-12,
+    "motion": "5812782684151689207414637164346467655860738551590788231904455047440993716666716441008916332012818375802413453048701038294644545/5708553441738995269487942885853555573363339085369241653181149998469778003433730157152787222818991843587610365818625516369255090364620640433",
+    "motion_float": 1.0182584333275407e-12,
+    "i_tilted": false,
+    "j_tilted": true
+   },
+   "cpu_seconds": 15.424
+  },
+  {
+   "control": "tightest pair of a tilted and a near-upright square 1e-30 past contact",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 1,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 1,
+   "B_wall_failures": 0,
+   "least_pair_gap": -1e-30,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {
+    "rows": [
+     205,
+     208
+    ]
+   },
+   "cpu_seconds": 16.043
+  },
+  {
+   "control": "duplicated square (row 2 := row 1)",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 1,
+   "A_wall_failures": 0,
+   "B_overlapping_pairs": 1,
+   "B_wall_failures": 0,
+   "least_pair_gap": -1.0,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {},
+   "cpu_seconds": 18.332
+  },
+  {
+   "control": "square outside the box (row 1 at x = -1)",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 1,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 1,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": -1.5000000000011762,
+    "right": 0.0,
+    "bottom": 7.216449650315173e-16,
+    "top": 4.3232084579046136e-13
+   },
+   "as_expected": true,
+   "detail": {},
+   "cpu_seconds": 15.468
+  },
+  {
+   "control": "side lowered by 1e-10",
+   "expected": "refuse",
+   "A": false,
+   "B": false,
+   "methods_agree_on_pairs": true,
+   "methods_agree_on_walls": true,
+   "A_overlapping_pairs": 0,
+   "A_wall_failures": 26,
+   "B_overlapping_pairs": 0,
+   "B_wall_failures": 26,
+   "least_pair_gap": 1.336398719863592e-15,
+   "least_walls": {
+    "left": 7.216449644332531e-16,
+    "right": -1e-10,
+    "bottom": 7.216449650315173e-16,
+    "top": -9.956767915420953e-11
+   },
+   "as_expected": true,
+   "detail": {},
+   "cpu_seconds": 15.585
+  }
+ ],
+ "all_as_expected": true,
+ "cpu_seconds_total": 302.224,
+ "wall_seconds": 305.696
+}

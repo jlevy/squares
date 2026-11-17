@@ -123,6 +123,14 @@ def _decimals(value: str, places: int = 6) -> str:
     return text or "0"
 
 
+def _distance(value: str) -> str:
+    """A slide distance at six places, or in three significant figures where six places
+    would print a real motion as 0: at 260 the first movable square of T-265's witness,
+    adopted 5 November 2026, slides 3.18e-07."""
+    text = _decimals(value)
+    return f"{float(value):.3g}" if text in {"0", "-0"} and float(value) != 0 else text
+
+
 def _exact_side(record: dict, field: str) -> Decimal | None:
     """The record's bound as an exact decimal, or None when it is absent."""
     bound = record.get(field)
@@ -209,7 +217,7 @@ def rigidity_for(
         }
 
     first = case["movable_squares"][0]
-    distance = _decimals(first["slide_distance"])
+    distance = _distance(first["slide_distance"])
     return {
         "property": "not-rigid",
         "assurance": "numerically-checked",

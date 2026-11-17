@@ -1,0 +1,41 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/site_resources.py
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L145 of 14 November (think-2vgx): Mohsen Khalili and Sara Gharabaghi's issue 973
+  is retained, sampled and registered as T-298, a reported family s(k^2 - 5) = k at V0/C0, and V0/C1 once the stage 4 review was mapped (5a8200f0), with
+  its coverage entry, the requests entry for #973, sentences on T-081 and T-191, the source's
+  card among the other projects, and the frontier corpus's reported-open counts (233 to 225 up
+  to 324, 129 to 125 up to 200), since n = 116 to 319 are now reported-proved. No verified bound,
+  house or credit holder of a paper's count changes. Against origin/main 0db247de7 (#972):
+  devtools.compare_paper_renders rendered each paper into empty site directories, the math
+  passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that
+  main's copies of the five paths above swapped in. The optimality review, the threshold-bound
+  review and the methods survey are byte-identical across the three, 43 files each. The
+  explainer's 55 files are deterministic, and only its Markdown and HTML differ from the
+  baseline: a unified diff of the two Markdown renders is one line, the register count, "one
+  of 297 results the framework has registered so far" here reading 298, with the novelty count
+  after it unchanged (T-298 is previously-published). The count follows the site's data and is
+  not a revision of the paper, as the L71, L76, L81, L100, L110, L120 and L132 records say. No
+  PDF was printed; each prints from that HTML. Every paper keeps its version: v0.4.35,
+  v0.1.11, v0.1.4 and v0.2.7. Lane L147 re-ran devtools.compare_paper_renders against the
+  same main on 14 November, on the tree that maps the stage 4 review and applies the
+  review L146's fixes: the same result, the three other papers byte-identical across the
+  three renders and the explainer's Markdown differing from the baseline in that one line.

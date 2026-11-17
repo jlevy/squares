@@ -90,7 +90,17 @@ KRISTIANSEN_798 = "amundsk-issue798-2026-10-24"
 #: 26 October (`test_upper_bound_reports_819`).
 KRISTIANSEN_819 = "amundsk-issue819-2026-10-25"
 #: The packets that request nothing inside the corpus, so plan no register entry.
-BEYOND_ONLY = (EVAND_584, EVAND_596, DANIEL_702, KRISTIANSEN_798, KRISTIANSEN_819)
+BEYOND_ONLY = (
+    EVAND_584,
+    EVAND_596,
+    DANIEL_702,
+    KRISTIANSEN_798,
+    KRISTIANSEN_819,
+    "de-winter-issue941-2026-11-10",
+    "de-winter-issue942-2026-11-10",
+    "de-winter-a0c4fc8-2026-11-10",
+    "de-winter-issue979-2026-11-14",
+)
 #: Issue #528, Ostashev's three compositions in sqcert, and issue #529, Rio Calle's n = 102
 #: layout, whose exact certificate is derived here (`test_upper_bound_reports_528_529`).
 OSTASHEV_528 = "dostashev-records-2026-10-12"
@@ -169,6 +179,109 @@ L2_1031 = (
 #: Doğa Özden's #893 at 299 and #894 at 204, each retained from its pin on the submission
 #: presumption, no licence being stated.
 L36_1104 = ("ozden-s299-upper-bound-2026-11-03", "ozden-s204-upper-bound-2026-11-03")
+#: The intake pass's lane L48 of 5 November 2026 (`test_upper_bound_reports_l48_1105`):
+#: Kaelan Yim's #895 at 260, retained at vitamoon/vitamoon d11a8a1 under CC BY 4.0.
+YIM_895 = "yim-s260-upper-bound-2026-11-05"
+#: The intake pass's lane L51 of 5 November 2026 (`test_upper_bound_reports_l51_1105`):
+#: Evan Daniel's #914 at seven counts, retained at evand/square-packing bb4cc78 under MIT,
+#: and its six regularized views, pinned against the first packet's copies.
+L51_1105 = ("evand-issue914-2026-11-05", "evand-issue914-views-2026-11-05")
+#: The intake pass's lane L63 of 9 November 2026 (`test_upper_bound_reports_l63_1109`):
+#: Doğa Özden's #927 to #931 at 232, 268, 299, 303 and 307, each a corner witness his lab
+#: promoted to exact rationals with this repository's `packing-witness promote`, retained
+#: under CC BY 4.0 and MIT.
+L63_1109 = (
+    "ozden-s232-upper-bound-2026-11-09",
+    "ozden-s268-upper-bound-2026-11-09",
+    "ozden-s299-upper-bound-2026-11-09",
+    "ozden-s303-upper-bound-2026-11-09",
+    "ozden-s307-upper-bound-2026-11-09",
+)
+#: The intake pass's lane L71 of 9 November 2026 (`test_upper_bound_reports_l71_1109`):
+#: Doğa Özden's #935 and #936 at 172 and 270, each a corner witness his lab promoted to
+#: exact rationals with this repository's `packing-witness promote` from a decimal pose
+#: the packet retains, under CC BY 4.0 and MIT.
+L71_1109 = ("ozden-s172-upper-bound-2026-11-09", "ozden-s270-upper-bound-2026-11-09")
+#: The intake pass's lane L65 of 9 November 2026 (`test_upper_bound_reports_l65_1109`):
+#: Kaelan Yim's certificates in his watched repository vitamoon/vitamoon, which no issue
+#: reports, at the head ac14112 and the first n303 of 78eb9ea, retained as factual data.
+L65_1109 = ("yim-certificates-2026-11-09", "yim-n303-2026-11-09")
+#: The intake pass's lane L76 of 9 November 2026 (`test_upper_bound_reports_l76_1109`):
+#: Doğa Özden's #938 at 199, his #935 witness at 172 (T-282) with an L of 27 unit grid
+#: squares at side S172 + 1, under CC BY 4.0 and MIT. Its grid squares touch each other.
+L76_1109 = "ozden-s199-upper-bound-2026-11-09"
+#: The intake pass's lane L81 of 11 November 2026 (`test_upper_bound_reports_l81_1111`):
+#: Doğa Özden's #943, #944, #945 and #947 at 156, 180, 268 and 269, each a corner witness
+#: his lab promoted to exact rationals with this repository's `packing-witness promote`
+#: from a decimal pose the packet retains, under CC BY 4.0 and MIT.
+L81_1111 = (
+    "ozden-s156-upper-bound-2026-11-10",
+    "ozden-s180-upper-bound-2026-11-10",
+    "ozden-s268-upper-bound-2026-11-10",
+    "ozden-s269-upper-bound-2026-11-11",
+)
+#: The intake pass's lane L90 of 11 November 2026 (`test_upper_bound_reports_l90_1111`):
+#: Joost de Winter's #941 at fifteen counts and #942 at sixteen, and the six of a0c4fc8
+#: that #942's addendum reports, all beyond the corpus, retained under MIT. The borders of
+#: #941's 539, 590, 794, 851, 867 and 910 touch the walls and each other.
+L90_1111 = (
+    "de-winter-issue941-2026-11-10",
+    "de-winter-issue942-2026-11-10",
+    "de-winter-a0c4fc8-2026-11-10",
+)
+#: The intake pass's lane L100 of 11 November 2026 (`test_upper_bound_reports_l100_1111`):
+#: Doğa Özden's #954 at 179, a corner witness his lab promoted to exact rationals with this
+#: repository's `packing-witness promote` from a decimal pose the packet retains, under
+#: CC BY 4.0 and MIT.
+L100_1111 = "ozden-s179-upper-bound-2026-11-11"
+#: The intake pass's lane L104 of 11 November 2026 (`test_upper_bound_reports_l104_1111`):
+#: Joost de Winter's #958, pinwheels at 132 and 157 in his watched repository
+#: JoostdeWinter/square-packing at 6617869, each a rational centre-basis witness without
+#: the schema's envelope, retained under MIT.
+L104_1111 = ("de-winter-s132-upper-bound-2026-11-11", "de-winter-s157-upper-bound-2026-11-11")
+#: The intake pass's lane L107 of 11 November 2026 (`test_upper_bound_reports_l107_1111`):
+#: the same author's #959 at 179, a further arrangement of his #954 promoted the same way,
+#: under CC BY 4.0 and MIT.
+L107_1111 = "ozden-s179-issue959-2026-11-11"
+#: The intake pass's lane L110 of 11 November 2026 (`test_upper_bound_reports_l110_1111`):
+#: Doğa Özden's #960 at 237, promoted the same way, under CC BY 4.0 and MIT.
+L110_1111 = "ozden-s237-upper-bound-2026-11-11"
+#: The intake pass's lane L120 of 12 November 2026 (`test_upper_bound_reports_l120_1112`):
+#: the same author's #962 at 269, a band below his #947 promoted the same way, under
+#: CC BY 4.0 and MIT.
+L120_1112 = "ozden-s269-issue962-2026-11-11"
+#: The intake pass's lane L132 of 12 November 2026 (`test_upper_bound_reports_l132_1112`):
+#: the same author's #967 at 269, a column-band design below his #962 promoted the same
+#: way, under CC BY 4.0 and MIT.
+L132_1112 = "ozden-s269-upper-bound-2026-11-12"
+#: The intake pass's lane L154 of 14 November 2026 (`test_upper_bound_reports_l154_1114`):
+#: Joost de Winter's #977 at 297, a rational centre-basis Witness/v2 whose verified claim
+#: names no certificate, and his #979 at 332 and 409, beyond the corpus, that packing with
+#: borders of axis-aligned squares, which touch the walls and each other; retained under MIT.
+L154_1114 = ("de-winter-s297-upper-bound-2026-11-14", "de-winter-issue979-2026-11-14")
+#: The intake pass's lane L160 of 14 November 2026 (`test_upper_bound_reports_l160_1114`):
+#: Doğa Özden's #983 at 228, a column-band design below T-174 promoted the same way as his
+#: #967, under CC BY 4.0 and MIT.
+L160_1114 = "ozden-s228-upper-bound-2026-11-14"
+#: The intake pass's lane L164 of 14 November 2026 (`test_upper_bound_reports_l164_1114`):
+#: Roberto Ono's #984 at 228, five band periods cut from Francisco Couzo's 404, below T-300,
+#: and #985 at 147, one period cut from Evan Daniel's 229, below 7 + 4 sqrt(2); the source's
+#: harness JSON, read by ``ono-json``, under MIT.
+L164_1114 = ("ono-issue984-2026-11-14", "ono-issue985-2026-11-14")
+#: The intake pass's lane L170 of 15 November 2026 (`test_upper_bound_reports_l170_1115`):
+#: jazivxt's #989 at 90, a window of shifted copies of a crop of Joost de Winter's 157, the
+#: first below the 10 x 10 grid; Evan Daniel's text certificate, read by ``evand-cert``, its
+#: repository with no licence, submitted by the account dpre4ai.
+L170_1115 = "jazivxt-s90-upper-bound-2026-11-15"
+#: The intake pass's lane L181 of 15 November 2026 (`test_upper_bound_reports_l181_1115`):
+#: Joost de Winter's #997 at 90, which replaced his #996's certificate, a local-search
+#: improvement of jazivxt's T-303; his centre-direction JSON, read by
+#: ``center-direction-json``, under MIT.
+L181_1115 = "de-winter-s90-upper-bound-2026-11-15"
+#: The intake pass's lane L187 of 16 November 2026 (`test_upper_bound_reports_l187_1116`):
+#: JoeGun's #1001 at 127, 204, 232, 264 and 305, his improvements of Tomas Kodaj's public
+#: Kaggle packings; corner Witness/v2 files read by ``witness-corners``, under CC BY 4.0.
+L187_1116 = "joegun-upper-bounds-2026-11-16"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -222,7 +335,27 @@ EVERY = (
     KRISTIANSEN_819,
     DANIEL_824,
     *L2_1031,
+    *L71_1109,
     *L36_1104,
+    YIM_895,
+    *L51_1105,
+    *L63_1109,
+    *L65_1109,
+    L76_1109,
+    *L81_1111,
+    *L90_1111,
+    L100_1111,
+    *L104_1111,
+    L107_1111,
+    L110_1111,
+    L120_1112,
+    L132_1112,
+    *L154_1114,
+    L160_1114,
+    *L164_1114,
+    L170_1115,
+    L181_1115,
+    L187_1116,
 )
 
 
@@ -1271,9 +1404,12 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675 and Özden's #893
-    # touches the box. Couzo's #672 touches at 229 and clears every wall at 227, so its
-    # walls mix; every other source's clear it.
+    # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
+    # to #931, #935, #936, #938, #943 to #947, #954, #959, #960 and #962, Yim's #895 and de
+    # Winter's #958, #977, #979 and #997 and JoeGun's #1001 touches the box. Couzo's #672
+    # touches at 229 and clears every wall at 227, so its walls mix, as de Winter's #941
+    # does, whose borders touch the box and whose other certificates clear it; every other
+    # source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
@@ -1286,15 +1422,33 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         COUZO_670,
         COUZO_675,
         "ozden-s299-upper-bound-2026-11-03",
+        YIM_895,
+        *L63_1109,
+        *L71_1109,
+        L76_1109,
+        *L81_1111,
+        L100_1111,
+        *L104_1111,
+        L107_1111,
+        L110_1111,
+        L120_1112,
+        L132_1112,
+        *L154_1114,
+        L160_1114,
+        *L164_1114,
+        L181_1115,
+        L187_1116,
     }
     assert (walls == {0}) is (name in touching)
-    assert (0 in walls and len(walls) > 1) is (name == COUZO_672)
-    # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
-    # every other source's pairs clear.
+    assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
+    # Only #567's and #622's squares, #938's grid squares and the borders of #941 and #979
+    # touch each other, an exact contact the kernel admits; every other source's pairs clear.
     gaps = {
         Fraction(m["exact_verify_best_pair_gap"]) for m in reports.margins(positives).values()
     }
-    assert (0 in gaps) is (name in {PINGYOU_261, PINGYOU_622})
+    assert (0 in gaps) is (
+        name in {PINGYOU_261, PINGYOU_622, L76_1109, L90_1111[0], L154_1114[1]}
+    )
 
 
 def _jobs_from_receipt(packet: Path, directory: Path) -> None:
@@ -1474,7 +1628,13 @@ def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:
     assert len(readers) >= 35
     #: T-185's 175 is the 11 October release's certificate under a key of its own, read
     #: from that release's packet.
-    shared = {"[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]"}
+    shared = {
+        "[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]",
+        #: T-267's 175 and T-269's 260 are issue 914's certificates under keys of their own,
+        #: read from that release's packet (F13 of the 5 November review).
+        "[Daniel issue 914 n175 2026-11-05]": "[Daniel issue 914 2026-11-05]",
+        "[Daniel issue 914 n260 2026-11-05]": "[Daniel issue 914 2026-11-05]",
+    }
     for key, reader in readers.items():
         packet = reports.packet_path(reader.args[0])
         assert reports.load_declaration(packet)["source_key"] == shared.get(key, key)
@@ -1562,6 +1722,26 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         "evand-n299-update-2026-10-29": "2026-10-29",
         "mishapolk-issue846-2026-10-30": "2026-10-30",
         **dict.fromkeys(L36_1104, "2026-11-03"),
+        YIM_895: "2026-11-05",
+        **dict.fromkeys(L51_1105, "2026-11-05"),
+        **dict.fromkeys(L63_1109, "2026-11-09"),
+        **dict.fromkeys(L71_1109, "2026-11-09"),
+        **dict.fromkeys(L65_1109, "2026-11-09"),
+        L76_1109: "2026-11-09",
+        **dict.fromkeys(L81_1111[:3], "2026-11-10"),
+        L81_1111[3]: "2026-11-11",
+        L100_1111: "2026-11-11",
+        **dict.fromkeys(L104_1111, "2026-11-11"),
+        L107_1111: "2026-11-11",
+        L110_1111: "2026-11-11",
+        L120_1112: "2026-11-11",
+        L132_1112: "2026-11-12",
+        L154_1114[0]: "2026-11-14",
+        L160_1114: "2026-11-14",
+        **dict.fromkeys(L164_1114, "2026-11-11"),
+        L170_1115: "2026-11-15",
+        L181_1115: "2026-11-15",
+        L187_1116: "2026-11-16",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

@@ -1,0 +1,98 @@
+{
+ "program": "l180_custody.py",
+ "lane": "L180",
+ "checked_out": "64d5ee762a1159248d375973fb33825d51da637d",
+ "working_tree_clean": true,
+ "remote_head": "9cafa33d43f60423e51058f51dbdf042077c7cc2",
+ "commit_count": 22,
+ "authors": [
+  "Joost de Winter"
+ ],
+ "commits_of_15_november": [
+  {
+   "sha": "9cafa33d43f60423e51058f51dbdf042077c7cc2",
+   "authored": "2026-11-15T12:29:27+01:00",
+   "committed": "2026-11-15T12:29:27+01:00",
+   "author": "Joost de Winter",
+   "subject": "Name GPT-6.1 Sol Max as the model that ran the local search for n = 90"
+  },
+  {
+   "sha": "0c9bcd27444084f33aa3c7d36467a596784df538",
+   "authored": "2026-11-15T12:27:49+01:00",
+   "committed": "2026-11-15T12:27:49+01:00",
+   "author": "Joost de Winter",
+   "subject": "Add the registration request and checksums for n = 90"
+  },
+  {
+   "sha": "64d5ee762a1159248d375973fb33825d51da637d",
+   "authored": "2026-11-15T12:27:26+01:00",
+   "committed": "2026-11-15T12:27:26+01:00",
+   "author": "Joost de Winter",
+   "subject": "Add a packing of 90 unit squares with side 9.994038857546"
+  }
+ ],
+ "pin_is_ancestor_of_head": true,
+ "n90_blobs": {
+  "pin": {
+   "n90/README.md": "4a70c622ac4bc8e9dc36bc202df0dfa55289a7d7",
+   "n90/check_area.py": "87d48575a3cc103dc052188eb78762c18d5c9dc7",
+   "n90/n90_before_after.png": "5c9a9b3a3f48b1743cae6197e69b4eb210ea01a6",
+   "n90/n90_exact.json": "620a72b7d853c0637a5df31f50987ae347af0f21",
+   "n90/n90_record.png": "94f09192f0d6842683d3dadcdfdab53a34af2b7f",
+   "n90/n90_witness.yaml": "52ccc234615f210cbb8b21791c0c2a0377c96f65",
+   "n90/verify_exact.py": "e33049d69f19d2ad7970f3aa445f3d90d2efcf38"
+  },
+  "head": {
+   "n90/README.md": "5f4350a2f22aa6c981dfade64369e70967fb1b63",
+   "n90/REGISTRATION.md": "a3f3cec8a1c21e464023b08af96d470f7a5b0bab",
+   "n90/SHA256SUMS": "47a3907988fc5e8ff3f487155917da79d147c6c7",
+   "n90/check_area.py": "87d48575a3cc103dc052188eb78762c18d5c9dc7",
+   "n90/n90_before_after.png": "5c9a9b3a3f48b1743cae6197e69b4eb210ea01a6",
+   "n90/n90_exact.json": "620a72b7d853c0637a5df31f50987ae347af0f21",
+   "n90/n90_record.png": "94f09192f0d6842683d3dadcdfdab53a34af2b7f",
+   "n90/n90_witness.yaml": "52ccc234615f210cbb8b21791c0c2a0377c96f65",
+   "n90/verify_exact.py": "e33049d69f19d2ad7970f3aa445f3d90d2efcf38"
+  }
+ },
+ "certificate_blobs_unchanged": true,
+ "changed_pin_to_head": [
+  "README.md",
+  "n90/README.md",
+  "n90/REGISTRATION.md",
+  "n90/SHA256SUMS"
+ ],
+ "sha256sums_at_head": {
+  "n90_exact.json": true,
+  "n90_witness.yaml": true,
+  "n90_record.png": true,
+  "n90_before_after.png": true,
+  "verify_exact.py": true,
+  "check_area.py": true,
+  "REGISTRATION.md": true,
+  "README.md": true
+ },
+ "sha256sums_hold": true,
+ "dating": {
+  "issue_opened": "2026-11-15T11:30:13Z",
+  "pin_committed": "2026-11-15T12:27:26+01:00",
+  "head_committed": "2026-11-15T12:29:27+01:00",
+  "issue_after_pin_seconds": 167,
+  "issue_after_head_seconds": 46,
+  "issue_labels": [
+   "intake"
+  ],
+  "issue_comments": 0
+ },
+ "licence": {
+  "blob": "17e795f2a70c232c04633f4d7318191f7c198abe",
+  "blob_at_head": "17e795f2a70c232c04633f4d7318191f7c198abe",
+  "first_line": "MIT License",
+  "copyright": "Copyright (c) 2026 Joost de Winter",
+  "readme_statement": "All files are released under the MIT licence (see `LICENSE`).",
+  "added_in": "9bf5d9b 2026-10-17T16:27:31+02:00"
+ },
+ "n90_readme_search_credit": {
+  "pin": "The local search that found the arrangement was run with OpenAI Codex (GPT-6 Astra). The local optimization, rational certificate, checking and figures were produced with Claude Fable 5.2 (Anthropic). Both worked under the direction of Joost de Winter.",
+  "head": "The local search that found the arrangement was run with GPT-6.1 Sol Max (OpenAI). The local optimization, rational certificate, checking and figures were produced with Claude Fable 5.2 (Anthropic). Both worked under the direction of Joost de Winter."
+ }
+}

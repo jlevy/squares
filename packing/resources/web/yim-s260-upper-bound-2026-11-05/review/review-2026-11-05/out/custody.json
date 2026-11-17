@@ -1,0 +1,112 @@
+{
+ "program": "custody.py",
+ "program_sha256": "8c89cc7f003ebec0121618c3d78f00d96b79c17955767a4fb0e773150f710f5d",
+ "python": "3.14.7",
+ "clone_head_main": "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
+ "pinned_commit": "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
+ "head_is_pin": true,
+ "commits_from_pin_back_to_first_with_file": [
+  {
+   "commit": "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
+   "committed": "2026-11-04T21:44:44-08:00",
+   "author": "vitamoon",
+   "email": "91440012+vitamoon@users.noreply.github.com",
+   "subject": "edit atoms 4",
+   "changes": [
+    "M\tREADME.md"
+   ],
+   "n260_cert": {
+    "blob": "82ecdeccd504618180df3ea99d5b80f9a7c76e0f",
+    "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb",
+    "bytes": 67514
+   }
+  },
+  {
+   "commit": "844a9f4147106972098f8dbb1705185cda23c794",
+   "committed": "2026-11-04T21:42:55-08:00",
+   "author": "vitamoon",
+   "email": "91440012+vitamoon@users.noreply.github.com",
+   "subject": "edit atoms 3",
+   "changes": [
+    "M\tREADME.md"
+   ],
+   "n260_cert": {
+    "blob": "82ecdeccd504618180df3ea99d5b80f9a7c76e0f",
+    "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb",
+    "bytes": 67514
+   }
+  },
+  {
+   "commit": "06b5bbefaddc8d54912e0bd222a2a6d8224e6b8c",
+   "committed": "2026-11-04T21:38:54-08:00",
+   "author": "vitamoon",
+   "email": "91440012+vitamoon@users.noreply.github.com",
+   "subject": "edit atoms 2",
+   "changes": [
+    "M\tREADME.md"
+   ],
+   "n260_cert": {
+    "blob": "82ecdeccd504618180df3ea99d5b80f9a7c76e0f",
+    "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb",
+    "bytes": 67514
+   }
+  },
+  {
+   "commit": "d09c4d2a75aa2e77ff663218d621baec46e09c88",
+   "committed": "2026-11-04T21:35:29-08:00",
+   "author": "vitamoon",
+   "email": "91440012+vitamoon@users.noreply.github.com",
+   "subject": "edit atoms 1",
+   "changes": [
+    "M\tREADME.md"
+   ],
+   "n260_cert": {
+    "blob": "82ecdeccd504618180df3ea99d5b80f9a7c76e0f",
+    "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb",
+    "bytes": 67514
+   }
+  },
+  {
+   "commit": "e7cab3ac67e6d7c22970e7b8ffb121c1d96016a5",
+   "committed": "2026-11-04T21:27:47-08:00",
+   "author": "vitamoon",
+   "email": "91440012+vitamoon@users.noreply.github.com",
+   "subject": "n260 square packing cert 895",
+   "changes": [
+    "A\tn260.cert"
+   ],
+   "n260_cert": {
+    "blob": "82ecdeccd504618180df3ea99d5b80f9a7c76e0f",
+    "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb",
+    "bytes": 67514
+   }
+  }
+ ],
+ "n260_cert_identical_at_every_commit": true,
+ "retained": {
+  "sha256": "c9e83969169f2ceec6014bc7fcd18418067209d485816c9b899b2e8b2a86ccbb",
+  "bytes": 67514
+ },
+ "retained_matches_clone": true,
+ "retained_matches_manifest": true,
+ "authors": [
+  [
+   "vitamoon",
+   "91440012+vitamoon@users.noreply.github.com"
+  ]
+ ],
+ "author_check_program": {
+  "e6e8d57726db80cd0e6a1523166a96c5d36a3119": {
+   "blob": "21b521f6902384f8e9c714712fe9a7d7e8a9c29f",
+   "sha256": "e8571770eca46d4fc227bd4811ba58c7847464d248170a09cc4382bca9de90f9"
+  },
+  "HEAD": {
+   "blob": "21b521f6902384f8e9c714712fe9a7d7e8a9c29f",
+   "sha256": "e8571770eca46d4fc227bd4811ba58c7847464d248170a09cc4382bca9de90f9"
+  }
+ },
+ "author_check_program_unchanged_at_head": true,
+ "custody_holds": true,
+ "cpu_seconds_total": 0.072,
+ "wall_seconds": 0.075
+}

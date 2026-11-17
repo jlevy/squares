@@ -1,0 +1,803 @@
+{
+ "program": "l70_sides.py",
+ "program_digests": {
+  "l70_reader.py": "3b2939a734a2959802458f54b2495673dfb32b1798c478433ff6b135361990fb",
+  "l70_sat.py": "3524406d5f8af4aa7bc8bdb175b146d4b02f1a96ef2b5cadd81a8cce6a9f9d87",
+  "l70_clip.py": "ffb7a2685028a7d2287f9fb91abfbb18ed9581a05a3d4d36e2b4c6da695970f1",
+  "l70_check.py": "4d4dd2e03c8d2898dcae161bd6257d6a2580369431978f0dee82e134e92b25a4",
+  "l70_sides.py": "b07f11845b83732f5c566418a4ccd49484a98a7e17ef8d831fcd8a0a8aaec8b2"
+ },
+ "entries": {
+  "yim-n299": {
+   "file": "n299.cert",
+   "sha256": "7e4964375418fdab9a78d12b2756ffca8c1386985468be7b0be2fbd030b9fd75",
+   "side": {
+    "exact": "49520681639553253091959720304954604907070758384704238109808721459262431205131612278389503816375037/2781903786522383536263046420444731316926020496322871983755429706465280000000000000000000000000000",
+    "denominator_digits": 97,
+    "terminates": false,
+    "floor_40": "17.8010044342541117080027897886608557495537",
+    "ceil_12": "17.801004434255",
+    "ceil_16": "17.8010044342541118",
+    "floor_12": "17.801004434254"
+   },
+   "author_table_print": "17.801004434255",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "ceiling/nearest at 78 places",
+   "house": "T-277",
+   "house_sha256": "dfb0ccf71474a276a52ce768cc38e799d30ff6373a22b8ae318f58f278025d9d",
+   "json_source_sha256_equal": true,
+   "house_side": {
+    "exact": "7120401773702096342754592967281230757016830483803152851632588133933118281289482616136465872615357870735152930548574683963962811760970665605528283832840143529598339/399999999999998813176108643858924605486367171198872507435001091151754396322514904585379408344301256195880070191908496990382957782839857114267648100000000000000000",
+    "denominator_digits": 162,
+    "terminates": false,
+    "floor_40": "17.8010044342552936735298641951785451039999",
+    "ceil_12": "17.801004434256",
+    "ceil_16": "17.8010044342552937",
+    "floor_12": "17.801004434255"
+   },
+   "json_source_exact_side_equal": true,
+   "gap": {
+    "record_minus_new": "13152457501228826284021959213164597922634786197388381531651681206994918015812212605352083539767378618967328479548528320923043191116726918910692066771232009130698528338314348367283241936529846548548487748655412615688970612544595203/11127615146089501128753412692990992485709028045251688039943061264984587757583706875149057910109357964176046786808221379569552066169459438020538416821493427914465983192037963172500119132222184369061288276209099079680000000000000000000000000000",
+    "float": 1.1819655270744065e-12,
+    "sci": "1.1819655270744e-12",
+    "relative": 6.639881088956395e-14,
+    "units_of_12th_place": 1.1819655270744065,
+    "binary64_spacings_at_side": 332.6937192060668,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "17.801004434255",
+    "record_ceil_12": "17.801004434256"
+   },
+   "json_improvement": "1.1819655270744065176893544462564038330024478114650744465456852790917702428794702E-12",
+   "json_improvement_minus_exact": "-3.2576176949575e-92",
+   "json_improvement_digits": 80,
+   "json_improvement_relation": "floor/nearest at 79 places"
+  },
+  "yim-n303": {
+   "file": "n303.cert",
+   "sha256": "14dbc28d7929d2008f2e76e74b078fafee2ec57b8d7603eb9a5ac306caf39b29",
+   "side": {
+    "exact": "1159243312382833490764400031561352875121611202900949162484560193631809228369410184762453/64755723279645431239980480646475572327964543123998048064000000000000000000000000000000",
+    "denominator_digits": 86,
+    "terminates": false,
+    "floor_40": "17.9017892731531992856633983391691014163256",
+    "ceil_12": "17.901789273154",
+    "ceil_16": "17.9017892731531993",
+    "floor_12": "17.901789273153"
+   },
+   "author_table_print": "17.901789273154",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "house": "T-278",
+   "house_sha256": "9cbeb7a8198ef9f3316f9e4dd0a998b879133a2e31e12c82c3fbe9882e0f2f3e",
+   "json_source_sha256_equal": true,
+   "house_side": {
+    "exact": "447544731828911039747777636237071350718715813575203650644682965517518811603884689802495778772042992023292265444653372109230293195215370185029543202786115810159713/24999999999999931932159172221288855294099116562124920847557711161993959344477155085573888905125695641180191552412077693918175854406830032031612900000000000000000",
+    "denominator_digits": 161,
+    "terminates": false,
+    "floor_40": "17.9017892731564903313568165555760761864999",
+    "ceil_12": "17.901789273157",
+    "ceil_16": "17.9017892731564904",
+    "floor_12": "17.901789273156"
+   },
+   "json_source_exact_side_equal": true,
+   "gap": {
+    "record_minus_new": "729842617204309098363073931180357667296132803768695604474506171004557585914346419433938713153346232210448808936079956029860448818558666373281846775854783695685772010699608148718628257453606032307731099950463236582131/221766175615223475783184538297570310422365808332577194552107682320930006208630190459560778398894412489814586939206326205904557553075379465558926330382196774295056587581653318074583948375246019403072000000000000000000000000000000",
+    "float": 3.2910456934182165e-12,
+    "sci": "3.2910456934182e-12",
+    "relative": 1.838389248807156e-13,
+    "units_of_12th_place": 3.2910456934182166,
+    "binary64_spacings_at_side": 926.3470099085972,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "17.901789273154",
+    "record_ceil_12": "17.901789273157"
+   },
+   "json_improvement": "3.2910456934182164069747701743215455523750257883238419809617495817253175132420894E-12",
+   "json_improvement_minus_exact": "3.2478709664935e-92",
+   "json_improvement_digits": 80,
+   "json_improvement_relation": "ceiling/nearest at 79 places"
+  },
+  "yim-n130": {
+   "file": "n130.cert",
+   "sha256": "3056cb4dd92927f671851b9866976a061fab3635daed5d3f676fffb570e1f565",
+   "side": {
+    "exact": "12971572518503349393832850076636691474305902182478289654941561/1089825507438012248624046765161000000000000000000000000000000",
+    "denominator_digits": 61,
+    "terminates": false,
+    "floor_40": "11.9024306459822462042030375294435824141858",
+    "ceil_12": "11.902430645983",
+    "ceil_16": "11.9024306459822463",
+    "floor_12": "11.902430645982"
+   },
+   "author_table_print": "11.902430645983",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "ceiling/nearest at 78 places",
+   "house": "T-259",
+   "house_sha256": "1e00cd74ccf3495b69d6d84f9c130432b63cebd447209d0dbeaf17077a669be7",
+   "json_source_sha256_equal": true,
+   "house_side": {
+    "exact": "5951215322991132879306459820277/500000000000000000000000000000",
+    "denominator_digits": 30,
+    "terminates": true,
+    "floor_40": "11.9024306459822657586129196405540000000000",
+    "ceil_12": "11.902430645983",
+    "ceil_16": "11.9024306459822658",
+    "floor_12": "11.902430645982"
+   },
+   "json_source_exact_side_equal": true,
+   "gap": {
+    "record_minus_new": "21310894672422622184158210315498943076914997633/1089825507438012248624046765161000000000000000000000000000000",
+    "float": 1.955440988211111e-14,
+    "sci": "1.9554409882111e-14",
+    "relative": 1.6428921506643532e-15,
+    "units_of_12th_place": 0.01955440988211111,
+    "binary64_spacings_at_side": 11.008154132315692,
+    "same_12_place_ceiling": true,
+    "new_ceil_12": "11.902430645983",
+    "record_ceil_12": "11.902430645983"
+   },
+   "json_improvement": "1.9554409882111110417585814151945915200201713147367080899820681871384030119667357E-14",
+   "json_improvement_minus_exact": "-4.1778001156206e-94",
+   "json_improvement_digits": 80,
+   "json_improvement_relation": "floor/nearest at 79 places"
+  },
+  "yim-n303-first": {
+   "file": "78eb9ea:n303.cert",
+   "sha256": "b8318f81e2199cc9e162f5072cd37c0528d129d496c67cd6188e86b4a430ab9b",
+   "side": {
+    "exact": "1259726429694979000000000000001259726429694979/70368744177664000000000000000000000000000000",
+    "denominator_digits": 44,
+    "terminates": true,
+    "floor_40": "17.9017892732954777557097258977771009317293",
+    "ceil_12": "17.901789273296",
+    "ceil_16": "17.9017892732954778",
+    "floor_12": "17.901789273295"
+   },
+   "author_table_print_78eb9ea": "17.901789273296",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "exact (76 places)",
+   "house": "T-278",
+   "gap": {
+    "record_minus_new": "-2445092627050569571909868161721330832360782743006325262351506478406321253911982479718573026330380691060395293341425576977567658114913771464812598807335773398936932304586324016291/17592186044415952101515220640869139817665686309571540960354135394447886505424155330422363625726297628363763476172856297191778450580142893728794188780620742656000000000000000000000000000000",
+    "float": -1.3898742435290933e-10,
+    "sci": "-1.3898742435291e-10",
+    "relative": -7.763884505182913e-12,
+    "units_of_12th_place": -138.98742435290933,
+    "binary64_spacings_at_side": -39121.48203280922,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "17.901789273296",
+    "record_ceil_12": "17.901789273157"
+   }
+  },
+  "yim-n553": {
+   "file": "n553.cert",
+   "sha256": "78a92b71ab396d0a5d835693045809527390fc415a46b7fda765c23fc4415436",
+   "side": {
+    "exact": "607775069974622337055447579653461349034263804181650638828652853573964289181844595191249/25356560024265810879529729142535656002426581087952972914000000000000000000000000000000",
+    "denominator_digits": 86,
+    "terminates": false,
+    "floor_40": "23.9691452386676896136525203263417702326838",
+    "ceil_12": "23.969145238668",
+    "ceil_16": "23.9691452386676897",
+    "floor_12": "23.969145238667"
+   },
+   "author_table_print": "23.969145238668",
+   "author_table_print_relation": "ceiling/nearest at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 553,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "23.969774299704",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "23.969774299704",
+   "row_print_relation_to_certificate": "ceiling/nearest at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n553.cert",
+   "couzo_sha256": "e3f5dc5df488e70d9179a712f63ce0fd73d60e6d8798a66a11fe01711d3777d1",
+   "couzo_side": {
+    "exact": "2597406560146678819901071115736086882929393879264361039/108361744573406395433405418056411470679500000000000000",
+    "denominator_digits": 54,
+    "terminates": false,
+    "floor_40": "23.9697742997035645656992244272840704095319",
+    "ceil_12": "23.969774299704",
+    "ceil_16": "23.9697742997035646",
+    "floor_12": "23.969774299703"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "3456918213644740403608016286568549048583163937125730431674044555847147626104311153800021694077995326298867122620683032609/5495362161219478541170113971410248598496413454703739281345444739497446560058672788425937350126000000000000000000000000000000",
+    "float": 0.0006290610358749521,
+    "sci": "6.2906103587495e-04",
+    "relative": 2.6243928207648234e-05,
+    "units_of_12th_place": 629061035.8749521,
+    "binary64_spacings_at_side": 177064940422.48328,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "23.969145238668",
+    "record_ceil_12": "23.969774299704"
+   },
+   "gap_to_print": {
+    "float": 0.0006290610363103863,
+    "sci": "6.2906103631039e-04"
+   },
+   "below_print": true
+  },
+  "yim-n599": {
+   "file": "n599.cert",
+   "sha256": "98cf7076c90a22676f62a96d19f4db412ec7ef9624105fc85a3f0adb5f588c44",
+   "side": {
+    "exact": "247397946552985445057593390432140536753143829724259163663431893138806590844279201570273/9921125584500774055204756275992877303158938661153843140000000000000000000000000000000",
+    "denominator_digits": 85,
+    "terminates": false,
+    "floor_40": "24.9364796812451984183133815933176418005448",
+    "ceil_12": "24.936479681246",
+    "ceil_16": "24.9364796812451985",
+    "floor_12": "24.936479681245"
+   },
+   "author_table_print": "24.936479681246",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 599,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "24.937296174353",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "24.937296174353",
+   "row_print_relation_to_certificate": "ceiling at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n599.cert",
+   "couzo_sha256": "f01ca481a5837fbfb353ca87a0897cf73073c8e9e1c35344db25ad27e3f0fea7",
+   "couzo_side": {
+    "exact": "36015875265190648604693217911/1444257429249000000000000000",
+    "denominator_digits": 28,
+    "terminates": false,
+    "floor_40": "24.9372961743520738069747201093076701721313",
+    "ceil_12": "24.937296174353",
+    "ceil_16": "24.9372961743520739",
+    "floor_12": "24.937296174352"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "11699251575284572880021821628624470253737048296241562882795430088092138556020401719233000885023/14328659331927570456020618107483071708895008777613327393472994001860000000000000000000000000000000",
+    "float": 0.0008164931068753887,
+    "sci": "8.1649310687539e-04",
+    "relative": 3.274184583472001e-05,
+    "units_of_12th_place": 816493106.8753886,
+    "binary64_spacings_at_side": 229822378242.1612,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "24.936479681246",
+    "record_ceil_12": "24.937296174353"
+   },
+   "gap_to_print": {
+    "float": 0.0008164931078015817,
+    "sci": "8.1649310780158e-04"
+   },
+   "below_print": true
+  },
+  "yim-n600": {
+   "file": "n600.cert",
+   "sha256": "10b422dde0d0d31f55c92c2d96c5e7cfc4cbbebbcec413cc5e357a3067ee664d",
+   "side": {
+    "exact": "898558652382384886554390737459350320275949893348420081716458451761623567508461865690979/36012801142848449724253470723601280114284844972425347072000000000000000000000000000000",
+    "denominator_digits": 86,
+    "terminates": false,
+    "floor_40": "24.9510902753207205902959087612842774653813",
+    "ceil_12": "24.951090275321",
+    "ceil_16": "24.9510902753207206",
+    "floor_12": "24.951090275320"
+   },
+   "author_table_print": "24.951090275321",
+   "author_table_print_relation": "ceiling/nearest at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "ceiling/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 600,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "24.951414939457",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "24.951414939457",
+   "row_print_relation_to_certificate": "ceiling/nearest at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n600.cert",
+   "couzo_sha256": "fa38bb6675e57d891f0ad62ec628f6ab524020b6809a71d5e3b2b25ae6beae27",
+   "couzo_side": {
+    "exact": "79528029362962540818092324042208591568897895134526641/3187315411007066053201851101379562941400000000000000",
+    "denominator_digits": 52,
+    "terminates": false,
+    "floor_40": "24.9514149394567818605727125648012982184823",
+    "ceil_12": "24.951414939457",
+    "ceil_16": "24.9514149394567819",
+    "floor_12": "24.951414939456"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "9806920754205255113290401366303881494188233397248479384751945617235300585729052459215787328936392143857881768754556413/30206356862140459108524957631246903821045102958134319180096830973483105704728182341727420416000000000000000000000000000000",
+    "float": 0.0003246641360612703,
+    "sci": "3.2466413606127e-04",
+    "relative": 1.3011852708515718e-05,
+    "units_of_12th_place": 324664136.0612703,
+    "binary64_spacings_at_side": 91384830136.6313,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "24.951090275321",
+    "record_ceil_12": "24.951414939457"
+   },
+   "gap_to_print": {
+    "float": 0.0003246641362794097,
+    "sci": "3.2466413627941e-04"
+   },
+   "below_print": true
+  },
+  "yim-n601": {
+   "file": "n601.cert",
+   "sha256": "d8c55d4f7b9e920c6988c4537a0eb80b07186e22191056eadc6a6c5b40d856cf",
+   "side": {
+    "exact": "1964964125304217000000000000001964964125304217/78730610490131000000000000000000000000000000",
+    "denominator_digits": 44,
+    "terminates": false,
+    "floor_40": "24.9580704769274994703209813452997767497569",
+    "ceil_12": "24.958070476928",
+    "ceil_16": "24.9580704769274995",
+    "floor_12": "24.958070476927"
+   },
+   "author_table_print": "24.958070476928",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 601,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "24.958452262518",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "24.958452262518",
+   "row_print_relation_to_certificate": "ceiling at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n601.cert",
+   "couzo_sha256": "35b4ddfea801ebd8c79a879b16f0e39d90137a5513cb66d5c4f7959c2cbb0f23",
+   "couzo_side": {
+    "exact": "651317585643635622547810789713007873603743348768261386351761081819190973227510559714049830671/26096072736921641322062554006194438233646722551614956880675505429793681399058000000000000000",
+    "denominator_digits": 92,
+    "terminates": false,
+    "floor_40": "24.9584522625172101148127826078728996821807",
+    "ceil_12": "24.958452262518",
+    "ceil_16": "24.9584522625172102",
+    "floor_12": "24.958452262517"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "392200650578828120544183747802126982931309136682101518251911904164427249632861097942687529170558135868338415786386207/1027279868986352285053666158944736779176207598442451905642435092714167431251848311590848299000000000000000000000000000000",
+    "float": 0.0003817855897106445,
+    "sci": "3.8178558971064e-04",
+    "relative": 1.529684556137373e-05,
+    "units_of_12th_place": 381785589.7106445,
+    "binary64_spacings_at_side": 107463089972.26773,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "24.958070476928",
+    "record_ceil_12": "24.958452262518"
+   },
+   "gap_to_print": {
+    "float": 0.0003817855905005297,
+    "sci": "3.8178559050053e-04"
+   },
+   "below_print": true
+  },
+  "yim-n602": {
+   "file": "n602.cert",
+   "sha256": "8710f13abeda199702e929684704e0226bcec15c3325f020600addf9bebdc3f2",
+   "side": {
+    "exact": "4049108824262356425055970255900075024019042732929186677097480184331036364534919972291/162085599809144631924403340016208559980914463192440334000000000000000000000000000000",
+    "denominator_digits": 84,
+    "terminates": false,
+    "floor_40": "24.9812989496301425363767499162254336262566",
+    "ceil_12": "24.981298949631",
+    "ceil_16": "24.9812989496301426",
+    "floor_12": "24.981298949630"
+   },
+   "author_table_print": "24.981298949631",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 602,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "24.981485660049",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "24.981485660049",
+   "row_print_relation_to_certificate": "ceiling at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n602.cert",
+   "couzo_sha256": "c3408743ada42be9e6561915d2ab934289e1958808870d3c1d9b05f8bc86e1ce",
+   "couzo_side": {
+    "exact": "191041477242382041225906782842695980001677618252480333/7647322494830915465067197032609191249000000000000000",
+    "denominator_digits": 52,
+    "terminates": false,
+    "floor_40": "24.9814856600481348093933768498715934786755",
+    "ceil_12": "24.981485660049",
+    "ceil_16": "24.9814856600481349",
+    "floor_12": "24.981485660048"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "231431456668735929695352910067118330893186548751455078739345679795338991264382199756930893836275765297357653000318541/1239520853508633282160951164058256906171215760978654540667802142082035243276255942427437166000000000000000000000000000000",
+    "float": 0.00018671041799227302,
+    "sci": "1.8671041799227e-04",
+    "relative": 7.4739517310161955e-06,
+    "units_of_12th_place": 186710417.992273,
+    "binary64_spacings_at_side": 52554310556.011894,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "24.981298949631",
+    "record_ceil_12": "24.981485660049"
+   },
+   "gap_to_print": {
+    "float": 0.0001867104188574636,
+    "sci": "1.8671041885746e-04"
+   },
+   "below_print": true
+  },
+  "yim-n604": {
+   "file": "n604.cert",
+   "sha256": "ce7ea7da25d1f955f4ae26163c56c19952fb0446d4280b5a39503272d17d2175",
+   "side": {
+    "exact": "67721539209973384114510101885152920403362544089524811752885085198864152570705410301651/2709308009448803636345647913495589745913645048765947287500000000000000000000000000000",
+    "denominator_digits": 85,
+    "terminates": false,
+    "floor_40": "24.9958804882251178764863127302397197533121",
+    "ceil_12": "24.995880488226",
+    "ceil_16": "24.9958804882251179",
+    "floor_12": "24.995880488225"
+   },
+   "author_table_print": "24.995880488226",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "ceiling/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 604,
+     "source_id": "couzo-43f666c-2026-10-24",
+     "claim": "upper-bound",
+     "value": "24.996827861695",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-gn29"
+    }
+   ],
+   "row_print": "24.996827861695",
+   "row_print_relation_to_certificate": "ceiling at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-43f666c-2026-10-24/source/certificates/best/n604.cert",
+   "couzo_sha256": "7ca6d281f620f785481aee1ad5ad3b358640c8e5a3f7fc28347d1c02b6bebb39",
+   "couzo_side": {
+    "exact": "2342043966174570121834033344193852319457506864235879946102319460169/93693647015250504286298127510245031476256606044012000000000000000",
+    "denominator_digits": 65,
+    "terminates": false,
+    "floor_40": "24.9968278616943568370799686981287032245033",
+    "ceil_12": "24.996827861695",
+    "ceil_16": "24.9968278616943569",
+    "floor_12": "24.996827861694"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "60121492328254275215033404066772926782346135555556968136650248614293153927932668663951411578633683451268503383294090718006324434047/63461237073221796471771583299586976158608990242019476579210009984637008837140163466482325476485774254362500000000000000000000000000000",
+    "float": 0.0009473734692389606,
+    "sci": "9.4737346923896e-04",
+    "relative": 3.789974769921646e-05,
+    "units_of_12th_place": 947373469.2389606,
+    "binary64_spacings_at_side": 266661925190.3298,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "24.995880488226",
+    "record_ceil_12": "24.996827861695"
+   },
+   "gap_to_print": {
+    "float": 0.0009473734698821235,
+    "sci": "9.4737346988212e-04"
+   },
+   "below_print": true
+  },
+  "yim-n645": {
+   "file": "n645.cert",
+   "sha256": "b7a129cf0f151c5e3cee2154ea270126d14c53355c67ba4116b7b21f3329c296",
+   "side": {
+    "exact": "24093806619138340900475561824158980847600133395084947802824134887040980995054184472241/930931869328269677215895332067857800948827381955105600000000000000000000000000000000",
+    "denominator_digits": 84,
+    "terminates": false,
+    "floor_40": "25.8813855374009833411480290383146169017504",
+    "ceil_12": "25.881385537401",
+    "ceil_16": "25.8813855374009834",
+    "floor_12": "25.881385537400"
+   },
+   "author_table_print": "25.881385537401",
+   "author_table_print_relation": "ceiling/nearest at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 645,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "25.883109225944",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "25.883109225944",
+   "row_print_relation_to_certificate": "ceiling/nearest at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n645.cert",
+   "couzo_sha256": "f6c62c8afc06b5927c3dce63bd537c74027b3ede977b2122db129fdc677226cd",
+   "couzo_side": {
+    "exact": "29476183760281785651283379063/1138819277969000000000000000",
+    "denominator_digits": 28,
+    "terminates": false,
+    "floor_40": "25.8831092259435408304421316871523016861870",
+    "ceil_12": "25.883109225944",
+    "ceil_16": "25.8831092259435409",
+    "floor_12": "25.883109225943"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "1827391090869650346575400184970655021610082132933003133786027569853181292995279290373056641471/1060163159266751530847122612195395312589107722235329938965148526400000000000000000000000000000000",
+    "float": 0.0017236885425574893,
+    "sci": "1.7236885425575e-03",
+    "relative": 6.659511141071786e-05,
+    "units_of_12th_place": 1723688542.5574894,
+    "binary64_spacings_at_side": 485175192372.7939,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "25.881385537401",
+    "record_ceil_12": "25.883109225944"
+   },
+   "gap_to_print": {
+    "float": 0.001723688543016659,
+    "sci": "1.7236885430167e-03"
+   },
+   "below_print": true
+  },
+  "yim-n647": {
+   "file": "n647.cert",
+   "sha256": "86ef4d3db4179e9bd23359bb39c0fcb9b02a32111f28fa96c3861d0ca2ce24b9",
+   "side": {
+    "exact": "817664229623251606050434336654106558104740326329466247133653288893875117074723415812797/31570933694108162010640329683157093369410816201064032968000000000000000000000000000000",
+    "denominator_digits": 86,
+    "terminates": false,
+    "floor_40": "25.8992729687891975910976159082950441047098",
+    "ceil_12": "25.899272968790",
+    "ceil_16": "25.8992729687891976",
+    "floor_12": "25.899272968789"
+   },
+   "author_table_print": "25.899272968790",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "ceiling/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 647,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "25.899276594081",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "25.899276594081",
+   "row_print_relation_to_certificate": "ceiling/nearest at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n647.cert",
+   "couzo_sha256": "1d9fe721301ce175ed791f6db67780598e6831fe0411533ccec3af778f953b00",
+   "couzo_side": {
+    "exact": "2612702594054985300702492313835407735209621202729434671/100879365667382792962559512314233084863000000000000000",
+    "denominator_digits": 54,
+    "terminates": false,
+    "floor_40": "25.8992765940809971557103943925827615143537",
+    "ceil_12": "25.899276594081",
+    "ceil_16": "25.8992765940809972",
+    "floor_12": "25.899276594080"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "11546031486159258007822286059431776169295669281548691371653308827907236225184454220909761235360317646419580124177608189/3184855764588633530160201354382757292981460613506431720712164805492259726049041158530573763384000000000000000000000000000000",
+    "float": 3.625291799564613e-06,
+    "sci": "3.6252917995646e-06",
+    "relative": 1.3997656600158223e-07,
+    "units_of_12th_place": 3625291.7995646126,
+    "binary64_spacings_at_side": 1020428924.8517816,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "25.899272968790",
+    "record_ceil_12": "25.899276594081"
+   },
+   "gap_to_print": {
+    "float": 3.6252918024089026e-06,
+    "sci": "3.6252918024089e-06"
+   },
+   "below_print": true
+  },
+  "yim-n648": {
+   "file": "n648.cert",
+   "sha256": "311438621acf913e48e73c05b5ae09ce9e66b5f322ae1e28eb5c6f76a5512eb5",
+   "side": {
+    "exact": "1646684897044236144519404074731194624456440515062373084991729547939559396278917853680917/63556964031610367436252889366355696403161036743625288936000000000000000000000000000000",
+    "denominator_digits": 86,
+    "terminates": false,
+    "floor_40": "25.9088035769809480455569453336363990389876",
+    "ceil_12": "25.908803576981",
+    "ceil_16": "25.9088035769809481",
+    "floor_12": "25.908803576980"
+   },
+   "author_table_print": "25.908803576981",
+   "author_table_print_relation": "ceiling/nearest at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 648,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "25.908836705326",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "25.908836705326",
+   "row_print_relation_to_certificate": "ceiling/nearest at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n648.cert",
+   "couzo_sha256": "91c77fbd278810e8b296ea67f8efb23cdf5a192e958a62ed2e7cd66f4ed963d5",
+   "couzo_side": {
+    "exact": "249300964549957916031750309467/9622236898761000000000000000",
+    "denominator_digits": 28,
+    "terminates": false,
+    "floor_40": "25.9088367053256571462763298491680632684401",
+    "ceil_12": "25.908836705326",
+    "ceil_16": "25.9088367053256572",
+    "floor_12": "25.908836705325"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "20259975939187710868872011026453631072821304409563433610207087483756485679185344258837473356163/611560164478186965532505704539048070530778696553250570447789205408296000000000000000000000000000000",
+    "float": 3.312834470910072e-05,
+    "sci": "3.3128344709101e-05",
+    "relative": 1.2786504112819185e-06,
+    "units_of_12th_place": 33128344.70910072,
+    "binary64_spacings_at_side": 9324800055.456709,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "25.908803576981",
+    "record_ceil_12": "25.908836705326"
+   },
+   "gap_to_print": {
+    "float": 3.312834505195444e-05,
+    "sci": "3.3128345051954e-05"
+   },
+   "below_print": true
+  },
+  "yim-n699": {
+   "file": "n699.cert",
+   "sha256": "36bc1c18a29a30c72ae073e88c17c7934707431327d1ee6baccac8f41b2a2dfb",
+   "side": {
+    "exact": "463444108903748149602545905601733440575147260077565762818601269996466243511927963216913/17223724320350528810762165125722372432035052881076216512400000000000000000000000000000",
+    "denominator_digits": 86,
+    "terminates": false,
+    "floor_40": "26.9073111183142974176119193459438077787554",
+    "ceil_12": "26.907311118315",
+    "ceil_16": "26.9073111183142975",
+    "floor_12": "26.907311118314"
+   },
+   "author_table_print": "26.907311118315",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 699,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "26.907571868006",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "26.907571868006",
+   "row_print_relation_to_certificate": "ceiling at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n699.cert",
+   "couzo_sha256": "1d66169891d51c5db4849cf34b5d6149a74c814eab0addfd2b9373c942289a1d",
+   "couzo_side": {
+    "exact": "381806913449303071686120597895340703696222462095228624415011286693526229816179742768366777/14189571445623318393916975439930479591165835261729704759103138068026952693500000000000000",
+    "denominator_digits": 89,
+    "terminates": false,
+    "floor_40": "26.9075718680051430690090190705337331796846",
+    "ceil_12": "26.907571868006",
+    "ceil_16": "26.9075718680051431",
+    "floor_12": "26.907571868005"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "193992425456595004731288587371867222728516431740795576761123592160681452891055733485926597071589908517376771150818847432943616602504024842328977933850517/743979503206495464792907969422356808172631049907807376544278353420732981572629058417525819274918967122977740045657757251136548400000000000000000000000000000",
+    "float": 0.0002607496908456514,
+    "sci": "2.6074969084565e-04",
+    "relative": 9.690569335826983e-06,
+    "units_of_12th_place": 260749690.8456514,
+    "binary64_spacings_at_side": 73394513158.09048,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "26.907311118315",
+    "record_ceil_12": "26.907571868006"
+   },
+   "gap_to_print": {
+    "float": 0.00026074969170258237,
+    "sci": "2.6074969170258e-04"
+   },
+   "below_print": true
+  },
+  "yim-n700": {
+   "file": "n700.cert",
+   "sha256": "6ef241dda3ecb79e39aa5abf8f0ecada1c7dd1f4547d663de846ec61ca9b1121",
+   "side": {
+    "exact": "741569470970925307033971998246097513425482077742578713987245355943954511152435544741989/27559405232700754810876973232755940523270075481087697323000000000000000000000000000000",
+    "denominator_digits": 86,
+    "terminates": false,
+    "floor_40": "26.9080361027172029096183521305291351287763",
+    "ceil_12": "26.908036102718",
+    "ceil_16": "26.9080361027172030",
+    "floor_12": "26.908036102717"
+   },
+   "author_table_print": "26.908036102718",
+   "author_table_print_relation": "ceiling at 12 places",
+   "json_side_exact_equal": true,
+   "json_side_decimal_relation": "floor/nearest at 78 places",
+   "current_rows": [
+    {
+     "n": 700,
+     "source_id": "couzo-issue763-2026-10-23",
+     "claim": "upper-bound",
+     "value": "26.908095391467",
+     "assurance": "reported",
+     "disposition": "tracked-outside-case-corpus",
+     "bead": "think-ptkk"
+    }
+   ],
+   "row_print": "26.908095391467",
+   "row_print_relation_to_certificate": "ceiling/nearest at 12 places",
+   "couzo_certificate": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n700.cert",
+   "couzo_sha256": "2a68991a5602b77e6288c5568a4ec3f39ce5da917e1f41d98fbc9cb49cb6335e",
+   "couzo_side": {
+    "exact": "7101657419037510725626072988554051329801439200844739337153286295137767866894816433478321091/263922708602020662036415034259284667705390047905623738815777407399998055863000000000000000",
+    "denominator_digits": 90,
+    "terminates": false,
+    "floor_40": "26.9080953914669643504723464099190735135528",
+    "ceil_12": "26.908095391467",
+    "ceil_16": "26.9080953914669644",
+    "floor_12": "26.908095391466"
+   },
+   "gap_to_certificate": {
+    "record_minus_new": "431239856369939618145515005757000026820304854929466332622029546464467394245247835642332662757501163572055184452889080223181483716300998099416264048056268493/7273552876475084746851027775290609478311138183804809558722331644460254215971388072907848770613284671995941739478124814807389554749000000000000000000000000000000",
+    "float": 5.928874976144085e-05,
+    "sci": "5.9288749761441e-05",
+    "relative": 2.203379648350822e-06,
+    "units_of_12th_place": 59288749.76144085,
+    "binary64_spacings_at_side": 16688299458.305475,
+    "same_12_place_ceiling": false,
+    "new_ceil_12": "26.908036102718",
+    "record_ceil_12": "26.908095391467"
+   },
+   "gap_to_print": {
+    "float": 5.928874979709038e-05,
+    "sci": "5.9288749797090e-05"
+   },
+   "below_print": true
+  }
+ }
+}

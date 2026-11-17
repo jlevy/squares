@@ -1,0 +1,64 @@
+{
+ "program": "l108_sides.py",
+ "side_floor_40": "13.8809603715582250212879051524545166445210",
+ "side_floor_12": "13.880960371558",
+ "side_ceil_12": "13.880960371559",
+ "claim_is_ceil_12": true,
+ "claim_less_side": "7.7497871209484754548e-13",
+ "side_floor_15": "13.880960371558225",
+ "side_ceil_15": "13.880960371558226",
+ "side_nearest_binary64_repr": "13.880960371558224",
+ "issue_prints_13_880960371558224": true,
+ "readme_prints_13_880960371558225_ellipsis": true,
+ "verify_txt_side_equals_certificate": true,
+ "verify_txt_pairs": "15931",
+ "sqcheck_txt": "VALID     n=179  exact-rational  s<=13.880960371558226 (exact side rounded up)  n-179-candidate.yaml",
+ "sqcheck_print_is_ceil_15": true,
+ "t174": {
+  "print": "13.88379549051089845",
+  "exact_equals_house_witness_side": true,
+  "exact_equals_issue_fraction": true,
+  "print_is_ceil_17": true,
+  "floor_20": "13.88379549051089844017",
+  "gain": "2.83511895267e-3",
+  "relative_gain": "2.04203e-4"
+ },
+ "n954": {
+  "side_floor_20": "13.88136716010987570339",
+  "ceil_16": "13.8813671601098758",
+  "floor_16": "13.8813671601098757",
+  "ceil_12": "13.881367160110",
+  "gain": "4.06788551650e-4",
+  "relative_gain": "2.93046e-5",
+  "gain_claim_to_claim": "4.06788e-4"
+ },
+ "s70": {
+  "value_60": "8.880960371555579594696691574923364158995",
+  "s70_plus_5": "13.88096037155557959469669157492336415899",
+  "side_less_s70_plus_5": "2.64542659121e-12",
+  "relative_to_side": "1.9058e-13",
+  "claim_less_s70_plus_5": "3.42041e-12",
+  "s70_plus_5_round_12": "13.880960371556",
+  "nevska_less_s70_plus_5": "4.20405e-13",
+  "side_less_nevska": "2.22502e-12",
+  "claim_less_nevska": "3.0e-12",
+  "s70_registry_print_is_ceil_18": "8.880960371555579594696692"
+ },
+ "s207": {
+  "value_60": "14.88096037155557959469669157492336415899",
+  "s207_less_s70": "6.0",
+  "side_lists_differ_only_in_constant": true,
+  "same_field": true
+ },
+ "fractional_parts_12": {
+  "s70": "0.880960371556",
+  "s207": "0.880960371556",
+  "side_rounded": "0.880960371558",
+  "side_floor": "0.880960371558",
+  "side_ceil": "0.880960371559"
+ },
+ "kirilltym": {
+  "less_house": "1.31015e-11",
+  "less_side": "2.83511e-3"
+ }
+}

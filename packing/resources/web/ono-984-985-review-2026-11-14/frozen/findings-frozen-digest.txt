@@ -1,0 +1,20 @@
+# Lane L163 findings frozen at 2026-11-14T21:17:04Z, before the author's README.md, REPORT.md, FOLLOWUP.md, RUN.md, targets.md, attempts.jsonl, records.json, VERIFIER.sha256, verify.py, certify.py, tests/, search/, evidence notes and checker outputs or figures, the register entries, case records or house witnesses at 228 or 147, any import lane's work (PR #986's branch beyond the L159 review text), or this repository's verifier, promotion, identity or contraction code was opened.
+479ecd4501b2b7fe1be91051bd8a89af34d50a2426b730b172ca552d88ed92d8  frozen/review-2026-11-14-ono-984-985.frozen.md
+# lines and bytes: 506 36569
+# checker list:
+f020547d255f6fecda5137b80b516bd1f1f13322f5dc062875690bc986e58d17  frozen/checker-frozen-digests.txt
+# controls plan list:
+108d564620570796deb21a0a26d983d6353f81760836c85fe4e3429b4c5d0f2f  frozen/controls-plan-digest.txt
+# receipts and programs at the freeze:
+c6b5090c917de8083d02da83b550b1e57b0761ba0bd5d9f2d98495bdc5926e96  out/selftest.json
+e7fd617d4bd2e5d1ebc4a7e17423abd9434e3af04e597b878c8cf5a5642e48e8  out/check-n228.json
+60a11814ef210ba31e589c0f5f041513f3eb8237a4657c86141d992c218e67e7  out/check-n147.json
+6d9d3916043dd49cab8b8595326736d457a99ec3af180ac4e2daf09c2ba30ca6  out/plan-facts-n228.json
+01f3ea3d380245ce02235902c4141e0e4f8e4f62993a2ff943bcc3a79fed6056  out/plan-facts-n147.json
+f68207f000ab2adc4e70de4fcc914c4211b0b7b1efea20edba92f50976f372a8  out/controls-n228.json
+730e6a9e0dca311d2e65123ce2cb3014cacd67fc51130ae341540058b49c9cf7  out/controls-n147.json
+3931d411d0d24aadb1e43b2acb55602320b1b9abbe78a1b76e9256f6d871c7dd  out/describe-n228.json
+755ae5358ddd26216d80937128ba820d765746c916af07c0e7bc41bae612b87a  out/describe-n147.json
+07c25cae01fbb0304a09d0b59c8535be0100bae2a81bd4b40149c2addf41a0b1  programs/controls-plan.json
+49152b8de00f93505ad239cae5386a1bc8d7e854ac00133a1f90cc8dcf052ced  programs/l163_controls.py
+8ca4aeb9dec587afc895dca678e9eb18de01e819f44c1cda7bb51e2b439a4b95  programs/l163_describe.py

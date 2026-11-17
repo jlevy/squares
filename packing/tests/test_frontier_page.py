@@ -418,15 +418,16 @@ def test_the_gap_is_exact_where_both_bounds_are(rows, cases) -> None:
     for n, case in cases.items():
         if case["status"] == "proved":
             assert gaps[n] == "0", n
-    # s(12): verified upper 4, verified lower 7943/2000 since 5 October 2026 (T-095;
-    # 15680000/3949423, 31360/7901 and 15680/3951 before it), so the gap is 57/2000.
+    # s(12): verified upper 4, verified lower 9929/2500 since 8 November 2026 (T-274;
+    # 7943/2000, 15680000/3949423, 31360/7901 and 15680/3951 before it), so the gap is
+    # 71/2500.
     assert gaps[12] is not None
-    assert abs(float(gaps[12]) - 57 / 2000) < 1e-15
+    assert abs(float(gaps[12]) - 71 / 2500) < 1e-15
     html_12, _ = frontier.gap(cases[12], native=True)
     fraction = re.search(r"<mfrac>(.*?)</mfrac>", html_12, re.DOTALL)
     assert fraction is not None
-    assert re.findall(r"<mn>(.*?)</mn>", fraction[1]) == ["57", "2000"]
-    assert html_12.endswith('<span class="site-approx">= 0.0285</span>')
+    assert re.findall(r"<mn>(.*?)</mn>", fraction[1]) == ["71", "2500"]
+    assert html_12.endswith('<span class="site-approx">= 0.0284</span>')
 
 
 def _exact(form: str) -> Any:
@@ -487,10 +488,11 @@ def test_a_closed_form_carries_its_decimal_and_the_decimal_is_the_exact_value(
     # when it was set, and the three kinds of cell beside it.
     lower_12 = frontier.bound_approx_html({"value": "3.969117", "exact_form": "31360/7901"})
     assert lower_12 == '<span class="site-approx">≈ 3.96911783…</span>'
-    # n = 12's terminating 7943/2000 (T-095) is its verified lower bound, and was its
-    # reported one too until T-245's reported s(12) = 4 of 25 October 2026, a whole number.
+    # n = 12's terminating 9929/2500 (T-274) is its verified lower bound since 8 November
+    # 2026, after T-095's 7943/2000, which was its reported one too until T-245's reported
+    # s(12) = 4 of 25 October 2026, a whole number.
     assert frontier.bound_approx_html(cases[12]["verified_lower_bound"]) == (
-        '<span class="site-approx">= 3.9715</span>'
+        '<span class="site-approx">= 3.9716</span>'
     )
     assert frontier.bound_approx_html(cases[12]["reported_lower_bound"]) == ""
     assert frontier.bound_approx_html(cases[18]["reported_lower_bound"]) == (
@@ -507,14 +509,15 @@ def test_the_tables_cells_carry_those_decimals(page: str, cases) -> None:
     """The rendered rows hold them: under each closed form in the four bound columns,
     and under a gap that is not a whole number."""
     row_12 = page[page.index('<tr id="n-12"') : page.index('<tr id="n-13"')]
-    # Since 5 October 2026 the verified lower bound equals the reported one (T-095), so
-    # the verified cell shows no second decimal, and the gap is the terminating 57/2000.
+    # Since 8 November 2026 the verified lower bound is T-274's terminating 9929/2500 and
+    # the reported one T-245's whole 4, so the verified cell's decimal and the gap's, the
+    # terminating 71/2500, are the row's two.
     assert [found.group(0) for found in APPROX.finditer(row_12)] == [
-        '<span class="site-approx">= 3.9715</span>',
-        '<span class="site-approx">= 0.0285</span>',
+        '<span class="site-approx">= 3.9716</span>',
+        '<span class="site-approx">= 0.0284</span>',
     ]
-    assert "<mfrac><mrow><mn>7943</mn></mrow><mrow><mn>2000</mn></mrow></mfrac>" in row_12
-    assert "<mfrac><mrow><mn>57</mn></mrow><mrow><mn>2000</mn></mrow></mfrac>" in row_12
+    assert "<mfrac><mrow><mn>9929</mn></mrow><mrow><mn>2500</mn></mrow></mfrac>" in row_12
+    assert "<mfrac><mrow><mn>71</mn></mrow><mrow><mn>2500</mn></mrow></mfrac>" in row_12
     table = page[page.index("<tbody>") : page.index("</tbody>")]
     expected = sum(
         bool(frontier.bound_approx_html(case[field]))

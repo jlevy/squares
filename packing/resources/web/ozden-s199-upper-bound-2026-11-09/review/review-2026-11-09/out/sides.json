@@ -1,0 +1,73 @@
+{
+ "program": "l77_sides.py",
+ "program_sha256": "41d9e507a25ac550bc685436f2772d63b2cf1fba864f8ac22e17f65dc2b60f6d",
+ "checker_sha256": "f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf",
+ "statements_sha256": "311078aeeaebc84b1bc982fba85a016d0cffa5255c2f1634d92c99c910b2d8ae",
+ "side": "1461468985328621153330369591208625293096183957845596937754957265273646011066209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000",
+ "side_denominator_digits": 89,
+ "side_terminates": false,
+ "side_floor_40": "14.6146898532862151043460952792061109169999",
+ "S172_floor_40": "13.6146898532862151043460952792061109169999",
+ "record_equals_main_witness_side": true,
+ "record_equals_case_reported": true,
+ "record_equals_case_verified": true,
+ "record_floor_30": "14.617572173592806843702036994186",
+ "record_exact_decimal_places": 30,
+ "claim_minus_side": 7.848956539047208e-13,
+ "gap_record_minus_side": {
+  "exact": "2882320306591738651658002720233454941739801912784797535127385935682422865462915373860234803615855677/999999999999999755653904720793918935507139097435441683845301698053290444500000000000000000000000000000",
+  "12_sig": "2.88232030659e-03",
+  "float": 0.0028823203065917393
+ },
+ "relative_gap_over_record": "1.97182e-04",
+ "relative_gap_over_side": "1.97221e-04",
+ "gap_in_units_of_1e-12": 2882320306.591739,
+ "gap_in_binary64_spacings_at_side": 1622602082341.1213,
+ "record_16_floor_ceiling": [
+  "14.6175721735928068",
+  "14.6175721735928069"
+ ],
+ "S172_16_floor_ceiling": [
+  "13.6146898532862151",
+  "13.6146898532862152"
+ ],
+ "readme_line11_print": {
+  "print": "13.6146898532862153\u2026",
+  "is_16_floor": false,
+  "is_16_ceiling": false,
+  "print_minus_S172": 1.956539047207939e-16
+ },
+ "comment_print": {
+  "is_13_floor": true,
+  "minus_side": -1.5104346095279207e-14
+ },
+ "pose_side": {
+  "pose_side_minus_certificate_side": 2.0289565390472079e-13,
+  "dilated_1e-24_15_place_ceiling": "14.614689853286419",
+  "sqcheck_pose_print_matches_dilated_ceiling": true,
+  "pose_side_15_place_ceiling_undilated": "14.614689853286418"
+ },
+ "context": {
+  "kirilltym_minus_side": 0.0028823203197848955,
+  "kirilltym_minus_record": 1.3193156297963006e-11,
+  "side_minus_side_only_entry": 0.0014799776862151044,
+  "side_only_entry_below_side": true
+ },
+ "checks": {
+  "claim_is_12_place_ceiling": true,
+  "claim_bounds_side": true,
+  "12_place_floor_below_side": true,
+  "gap_positive": true,
+  "improvement_print_is_gap_4_sig": true,
+  "relative_print_is_gap_over_record_3_sig": true,
+  "record_print_is_16_place_ceiling": true,
+  "s172_issue_print_is_16_place_ceiling": true,
+  "readme_line7_is_15_place_floor": true,
+  "sqcheck_print_is_15_place_ceiling": true,
+  "verify_print_is_side_exactly": true,
+  "pairs_tested_is_all_pairs": true,
+  "comment_difference_print": true,
+  "kirilltym_above_side_and_record": true
+ },
+ "verdict": "SIDES_AS_STATED"
+}

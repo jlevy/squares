@@ -1,0 +1,144 @@
+{
+ "program": "l127_sides.py",
+ "inputs": {
+  "n-269-candidate.yaml": "35b1307a3a0dc2eb806ef064933c809a2f2b7eda73551bcc4ba6c411a307b5e6",
+  "n269-witness.json": "a1c4caab16d420112732566c45fd5910ba6713ce65ded0fcf8be6e6032c18ca3",
+  "results.yaml": "703ac3e389df21e0e3c22e980d98fed82d70fbf6ee55e47f8eb0df18cb620daf",
+  "results-l120.yaml": "a1bdb79f065d23815bb56fe23e489c23163aa0dc1fc7f91b718ed1db49d4b4d0",
+  "n-269.yaml": "be8758e1eb1563c9cdc10c564ad2e2c9caeb7347e2abba174df7f8b584145749",
+  "n-269-house-pr966.yaml": "a1058958f6aa3e7c8e5a5080a786364b36f81b21790545f32e4bf73770cecfc5",
+  "n-269-candidate-962.yaml": "54b408b2f1b45fc3d0a1330767c8740f0889eecb73f5fcf7888710526dbcc26b",
+  "n-269-decimal-pose.yaml": "52e389457e9a4d6411ace6f0dcd7bc8efdf4a17cd870336331ed8ed5e76ce32e",
+  "issue-967.json": "b9d9820c2831aeb920936f83d49cc415cbf6cad31e9546500b8b79fd1c675233",
+  "contraction-new.json": "c16356b06d6ce8d0108a58e8e8a8ab6302d875ff12a6d7b64f1297cf54728f4b"
+ },
+ "side_floor_40": "16.8897300735956366902159327450669600658803",
+ "side_floor_12": "16.889730073595",
+ "side_ceil_12": "16.889730073596",
+ "claim": "4222432518399/250000000000",
+ "claim_is_ceil_12": true,
+ "claim_minus_side": "3.63310e-13",
+ "t290": {
+  "floor_20": "16.90099457995132482016",
+  "register_equals_main_house_witness": true,
+  "register_equals_issue_fraction": true,
+  "print_16_ceil": "16.9009945799513249",
+  "gain": "1.12645063557e-02",
+  "relative_to_t290": "6.66500e-04",
+  "relative_to_side": "6.66944e-04"
+ },
+ "t962": {
+  "floor_20": "16.89946907585504652716",
+  "register_equals_branch_house_witness": true,
+  "register_equals_962_source_certificate": true,
+  "print_16_ceil": "16.8994690758550466",
+  "print_16_floor": "16.8994690758550465",
+  "print_12_ceil": "16.899469075856",
+  "gain": "9.73900225941e-03",
+  "relative_to_t962": "5.76290e-04"
+ },
+ "kaggle": {
+  "value": "16.889730079125",
+  "kaggle_minus_side": "5.5293633e-09",
+  "kaggle_minus_claim": "5.5290000e-09",
+  "side_below": true,
+  "claim_below": true,
+  "kaggle_minus_half_unit_minus_claim": "5.5285000e-09"
+ },
+ "kirilltym_minus_side": "1.1783509e-02",
+ "pose": {
+  "pose_side": "8444865036797921/500000000000000",
+  "pose_minus_side": "2.05310e-13",
+  "pose_minus_cloud": "9.20000e-14",
+  "side_minus_cloud": "-1.13310e-13",
+  "claim_minus_cloud": "2.50000e-13",
+  "quench_minus_side": "7.77392e-04",
+  "kick_minus_side": "4.35973e-06",
+  "parent_minus_quench": "1.55373e-07"
+ },
+ "contracted_side_floor_16": "16.8897300735924008",
+ "contracted_below_side": "3.23586e-12",
+ "prints": {
+  "issue exact side 16.889730073595636": {
+   "printed": "16.889730073595636",
+   "floor": true,
+   "ceil": false,
+   "nearest": false
+  },
+  "sqcheck 16.889730073595637": {
+   "printed": "16.889730073595637",
+   "floor": false,
+   "ceil": true,
+   "nearest": true
+  },
+  "claim 16.889730073596": {
+   "printed": "16.889730073596",
+   "floor": false,
+   "ceil": true,
+   "nearest": true
+  },
+  "#962 as 16.8994690758550465": {
+   "printed": "16.8994690758550465",
+   "floor": true,
+   "ceil": false,
+   "nearest": true
+  },
+  "#962 as 16.899469075856": {
+   "printed": "16.899469075856",
+   "floor": false,
+   "ceil": true,
+   "nearest": false
+  },
+  "T-290 as 16.9009945799513249": {
+   "printed": "16.9009945799513249",
+   "floor": false,
+   "ceil": true,
+   "nearest": false
+  },
+  "gain on T-290 1.126e-02": {
+   "printed": "1.126e-02",
+   "value": "1.1264506e-02",
+   "rounds_to_nearest": true
+  },
+  "gain on T-290 1.1265e-2": {
+   "printed": "1.1265e-2",
+   "value": "1.1264506e-02",
+   "rounds_to_nearest": true
+  },
+  "gain on T-290 1.13e-2": {
+   "printed": "1.13e-2",
+   "value": "1.1264506e-02",
+   "rounds_to_nearest": true
+  },
+  "relative 6.66e-04 (of T-290)": {
+   "printed": "6.66e-04",
+   "value": "6.6649961e-04",
+   "rounds_to_nearest": true
+  },
+  "gain on #962 9.74e-3": {
+   "printed": "9.74e-3",
+   "value": "9.7390023e-03",
+   "rounds_to_nearest": true
+  },
+  "below Kaggle 5.53e-9": {
+   "printed": "5.53e-9",
+   "value": "5.5293633e-09",
+   "rounds_to_nearest": true
+  },
+  "below Kaggle 5.5e-9": {
+   "printed": "5.5e-9",
+   "value": "5.5293633e-09",
+   "rounds_to_nearest": true
+  },
+  "below kirilltym 1.18e-2": {
+   "printed": "1.18e-2",
+   "value": "1.1783509e-02",
+   "rounds_to_nearest": true
+  },
+  "comment: below #947's side by 9.74e-3": {
+   "printed": "9.74e-3",
+   "value": "1.1264506e-02",
+   "rounds_to_nearest": false
+  }
+ }
+}

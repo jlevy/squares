@@ -1,0 +1,192 @@
+{
+ "program": "l64_digests.py",
+ "programs_sha256": {
+  "l64_digests.py": "327afd95f671a1ff84e86fed9565eb9a3534af80a5b1837b34fff4641fb79937",
+  "l64_util.py": "de76960f100535969691e9c386be79de5ca3e45fbe7db318ea86e5ec9bc2af81"
+ },
+ "frozen_digests_file_sha256": "59c3d0065049c552c24226a6f2e1564638fcd6dd312960ff463b2aa01ab3acd3",
+ "checker_files_equal_frozen": true,
+ "current_programs": {
+  "l64_check.py": "5c4927b88049a41a3fa1e822eab96d575d27f7d982058b272f677d87064c2058",
+  "l64_clip.py": "d238d55672949ffde490f234c97db0d76a2efc96a9515485d45e67e02b789e95",
+  "l64_compare_lane.py": "4372431af05c3c8271fd2c6e48372c28d5675a4812ba57180b2ef032a70c88de",
+  "l64_construct.py": "f3543a6db4742a526003217d1d3379199d7b898fcbaac4d53c1b7e7b97ef643d",
+  "l64_controls.py": "eab74ba33600c399dc37929d36990ae24196d60a59c3ef562e913eb919cca90d",
+  "l64_controls_centre.py": "14fd8ca610895fb90d3e92cad7ff2627aecfb3ba85f53245453ff5253520910a",
+  "l64_custody.py": "97b65c7460b3e1c47390740b96e0c27a54fca800a17057e43e92fa0824d8a80b",
+  "l64_digests.py": "327afd95f671a1ff84e86fed9565eb9a3534af80a5b1837b34fff4641fb79937",
+  "l64_house.py": "182c1a55bcc198dcc784a20afb83ef9b89e19fca30f709b198701406325b8a68",
+  "l64_houses.py": "6fe27d05c688efb5e5a2b6b1caf7e1b042de24e3d701f74d13348bd4b82688b5",
+  "l64_identity.py": "a90406fbacc8926e4c3f34d34d478dcb1471af56a1bad3a6464b109e2e7e96e9",
+  "l64_reader.py": "0e51d443fda1825b6ae207689ed932b9d1c73fc0c46aed0ceec153ba08be9c9c",
+  "l64_sat.py": "b4e61fcb7eae75386a7fa5f8c065518eacfbea47460477e192ca75f02762b948",
+  "l64_selftest.py": "2d8518c7c440415340cc8a92410f7b106f01e9872231957b65b3b6776656fc22",
+  "l64_sides.py": "def7811a18cd997d8524881138f0b169f0fbcc95ca2416bb5f418b37a2c1cd5d",
+  "l64_util.py": "de76960f100535969691e9c386be79de5ca3e45fbe7db318ea86e5ec9bc2af81"
+ },
+ "receipts": {
+  "check-n232.json": {
+   "program": "l64_check.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "check-n268.json": {
+   "program": "l64_check.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "check-n299.json": {
+   "program": "l64_check.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "check-n303.json": {
+   "program": "l64_check.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "check-n307.json": {
+   "program": "l64_check.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "compare-lane.json": {
+   "program": "l64_compare_lane.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "construct.json": {
+   "program": "l64_construct.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-centre-n232.json": {
+   "program": "l64_controls_centre.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-centre-n268.json": {
+   "program": "l64_controls_centre.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-centre-n299.json": {
+   "program": "l64_controls_centre.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-centre-n303.json": {
+   "program": "l64_controls_centre.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-centre-n307.json": {
+   "program": "l64_controls_centre.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-n232.json": {
+   "program": "l64_controls.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-n268.json": {
+   "program": "l64_controls.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-n299.json": {
+   "program": "l64_controls.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-n303.json": {
+   "program": "l64_controls.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "controls-n307.json": {
+   "program": "l64_controls.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "custody.json": {
+   "program": "l64_custody.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "houses.json": {
+   "program": "l64_houses.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "identity-n232.json": {
+   "program": "l64_identity.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "identity-n268.json": {
+   "program": "l64_identity.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "identity-n299.json": {
+   "program": "l64_identity.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "identity-n303.json": {
+   "program": "l64_identity.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "identity-n307.json": {
+   "program": "l64_identity.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "program-digests.json": {
+   "program": "l64_digests.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "selftest.json": {
+   "program": "l64_selftest.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  },
+  "sides.json": {
+   "program": "l64_sides.py",
+   "all_programs_match_kept_bytes": true,
+   "checker_files_match_frozen": true,
+   "differs": []
+  }
+ },
+ "verdict": "ALL_RECEIPTS_MATCH"
+}

@@ -1,0 +1,93 @@
+{
+ "lane": "L163",
+ "program": "l163_digests.py",
+ "frozen_lists": {
+  "checker-frozen-digests.txt": {
+   "entries": 18,
+   "sha256": "f020547d255f6fecda5137b80b516bd1f1f13322f5dc062875690bc986e58d17"
+  },
+  "controls-plan-digest.txt": {
+   "entries": 7,
+   "sha256": "108d564620570796deb21a0a26d983d6353f81760836c85fe4e3429b4c5d0f2f"
+  },
+  "findings-frozen-digest.txt": {
+   "entries": 15,
+   "sha256": "b6c703c0d0b46d51907677ae9768ed64a69ea2a89957ae0559707ec74299a75c"
+  }
+ },
+ "frozen_mismatches": [],
+ "rerun_equal_but_cpu": {
+  "selftest.json": true,
+  "check-n228.json": true,
+  "check-n147.json": true,
+  "plan-facts-n228.json": true,
+  "plan-facts-n147.json": true,
+  "controls-n228.json": true,
+  "controls-n147.json": true,
+  "describe-n228.json": true,
+  "describe-n147.json": true
+ },
+ "rerun_plan_byte_for_byte": true,
+ "files": {
+  "frozen/checker-frozen-digests.txt": "f020547d255f6fecda5137b80b516bd1f1f13322f5dc062875690bc986e58d17",
+  "frozen/controls-plan-digest.txt": "108d564620570796deb21a0a26d983d6353f81760836c85fe4e3429b4c5d0f2f",
+  "frozen/findings-frozen-digest.txt": "b6c703c0d0b46d51907677ae9768ed64a69ea2a89957ae0559707ec74299a75c",
+  "frozen/review-2026-11-14-ono-984-985.frozen.md": "479ecd4501b2b7fe1be91051bd8a89af34d50a2426b730b172ca552d88ed92d8",
+  "out/check-n147.json": "60a11814ef210ba31e589c0f5f041513f3eb8237a4657c86141d992c218e67e7",
+  "out/check-n228.json": "e7fd617d4bd2e5d1ebc4a7e17423abd9434e3af04e597b878c8cf5a5642e48e8",
+  "out/closedform.json": "65ee43e70be25c0904bfd44f343ff8c6795b1c589e4cabb6ff3924a621148047",
+  "out/contraction-house-main-n228.json": "97fec86f8d962bb4fd02009bb2437932ac81c5911440298f219f560cc1c6ad26",
+  "out/contraction-new-n147.json": "a343fc81b3a873bb4747668a27ce362946f942e439ab9af5938e5b02c2332cd1",
+  "out/contraction-new-n228.json": "dd17b747294b889062bf72f65a8f71f8ca853a9185fd2986eaca2528c0492b12",
+  "out/contraction-t101.json": "a8f5302aebb8e29f3cb1b2da6519a8f6e2e6bf330619f88a3b4c35b05771db99",
+  "out/contraction-t155.json": "bcc7522a624eee3bd07e007a52abfde5421e540656a500e371d0e3c3a433c028",
+  "out/contraction-t174.json": "e1ffc72f653222479ca961e94856a82300bf9d5925d064fa9048540734de7ed8",
+  "out/contraction-t300.json": "285ee3bf1d2ffa72c7804bb8b660c95128f56038a3e08ba19812ba0bb7c067a1",
+  "out/controls-n147.json": "730e6a9e0dca311d2e65123ce2cb3014cacd67fc51130ae341540058b49c9cf7",
+  "out/controls-n228.json": "f68207f000ab2adc4e70de4fcc914c4211b0b7b1efea20edba92f50976f372a8",
+  "out/custody.json": "cb217742cabc7c237d96ced22e46388e75215557c469689b271cefb88b07282c",
+  "out/describe-n147.json": "755ae5358ddd26216d80937128ba820d765746c916af07c0e7bc41bae612b87a",
+  "out/describe-n228.json": "3931d411d0d24aadb1e43b2acb55602320b1b9abbe78a1b76e9256f6d871c7dd",
+  "out/identity-house-main-n228.json": "b341bbb05af6831858a02df143b5d774f4ef448b41640789ced2c8f415579d77",
+  "out/identity-n147.json": "babaca883f88c25bd4fb6dc480f2fabb73b37e5240a5309fccd6bbaff6ad3a7b",
+  "out/identity-n228.json": "042f1e6152ca50e914cc0446ff3e1f3efd72c4d145676e5257dcaad17ba6c608",
+  "out/identity-seed-n147.json": "4190c41f831df9988aaf49e5e5f93a9bfbf141906fb14bd11c55462956749484",
+  "out/identity-seed-n228.json": "abdd2e611c53d02f84355da63bdd5d3be2b710762502fa4ed0db62bd4e4036c6",
+  "out/lineage-n228-n147.json": "4f8e9460c689d72666161f1c9fa966551236ff286ec7d41dab7a6539466d7992",
+  "out/lineage/seed-n147.cert.gz": "bbbf42b42e167660c1b182c22c42a2f7d7e5d6e33b829a93274bc91faaea3eef",
+  "out/lineage/seed-n228-mirror-x-dropped.cert.gz": "3c4453d5e34bc1d631d5d7708dd0815e94e8536943c0debd912eab2a6e041e46",
+  "out/lineage/seed-n228-mirror-y-dropped.cert.gz": "2166d2b625f693eaa85b6729d182e35bcb3c47e6f65005f416d611048b8b0565",
+  "out/plan-facts-n147.json": "01f3ea3d380245ce02235902c4141e0e4f8e4f62993a2ff943bcc3a79fed6056",
+  "out/plan-facts-n228.json": "6d9d3916043dd49cab8b8595326736d457a99ec3af180ac4e2daf09c2ba30ca6",
+  "out/selftest.json": "c6b5090c917de8083d02da83b550b1e57b0761ba0bd5d9f2d98495bdc5926e96",
+  "out/sides.json": "8fcc1a2c06df94328c3ec2d18fea989e8c5ccf428c0aa7d431e64e61f7755827",
+  "out/xyd/house-n147.txt.gz": "69c0e40b410bb43acf254ae0f846126b6695d0077edbd025affdc1ff1a500a6f",
+  "out/xyd/t056-n228.txt.gz": "09751ae24ae48f81c76f2cfc3c69e04eddad3c99a1c72147e58c487d3f8883bc",
+  "out/xyd/t092-n228.txt.gz": "e7d9f4420efad7844d57f21602105ff243c48df29a5378d22242554dcbbf6433",
+  "programs/__pycache__/l163_reader.cpython-314.pyc": "d595191ac6be5968d61af5fc0a244dc0ae85843d54bc147f6d769d6cd50d928b",
+  "programs/__pycache__/l163_sat.cpython-314.pyc": "7acfaeff267cd905f173c0de84b8ebd00f0d55b8f142951a63b598757e1e0f2e",
+  "programs/controls-plan.json": "07c25cae01fbb0304a09d0b59c8535be0100bae2a81bd4b40149c2addf41a0b1",
+  "programs/issue-984-985.json": "e8b9fee4450cef8697f4c3664f640413fd17c42f09c86f51edeefca08f3bf50e",
+  "programs/l163_check.py": "8c55a1b9ff1fb0eac074429fe6ee1284de459a4fd3ad5963123243ccdffa1e0a",
+  "programs/l163_clip.py": "c33ac11579f64bd6075888e1823350c90f2798d477759958426c5c42595b824f",
+  "programs/l163_closedform.py": "fce2bc73779e0081ab1502d9ea230db06bbd7ac8a70edde8d78c3ac02d4a2811",
+  "programs/l163_controls.py": "49152b8de00f93505ad239cae5386a1bc8d7e854ac00133a1f90cc8dcf052ced",
+  "programs/l163_convert.py": "b4a1f925dd6f8b12e9bd5d66a4b50b248960a1af7ca3e2c43aad8012ea0e1141",
+  "programs/l163_custody.py": "d7bcb35cf90d0d2b7032eb85b24740e62651b522b754d01521e9ee00b060ca8f",
+  "programs/l163_decide.py": "5a7a7f277a0f17ef1d60bd66bdcbc6357675964c11f8fd82634b4d2add4f2d29",
+  "programs/l163_describe.py": "8ca4aeb9dec587afc895dca678e9eb18de01e819f44c1cda7bb51e2b439a4b95",
+  "programs/l163_digests.py": "e7d61bb18cb59ac69a8705c3bbdbb731d547ae2298b1c9891005c1fb12a45b0c",
+  "programs/l163_geom.py": "5e670dcda859321fe2e70127ea336e00a28b1ca87066eff09841af122e430063",
+  "programs/l163_lineage.py": "e4863d6635b92ae07d12b6ce2bdf719598ba8914825becaba6315f5db19aa959",
+  "programs/l163_make_plan.py": "ed672ac91cf45c696b9a399e4697955bfc0232edb0d40af843410f7b52fba5f1",
+  "programs/l163_plan_facts.py": "7d5fb85cb741ad41105b220019fcf1f05fa195a2d65ab7776fdd653c2623dc2f",
+  "programs/l163_reader.py": "aff21943f0f13ff06dfc07a4089ee4bc0c201e6463c2efa173c0315cb4e3136d",
+  "programs/l163_sat.py": "b64c761137003e26b209a6a50238288b98fd8195bfb5fd9dc06641c7028cd89b",
+  "programs/l163_selftest.py": "7e2f96d1fbcd349ef01e7c871b23dd061bfdcf9547feaef7354c948256bde09e",
+  "programs/l163_sides.py": "ce378688394e5a837597c66e7bb515c4cd0acc406add1f40579cd3383fa9d764"
+ },
+ "summary": [
+  "ALL_FROZEN_DIGESTS_HOLD",
+  "RERUN_REPRODUCES_EVERY_RECEIPT"
+ ]
+}

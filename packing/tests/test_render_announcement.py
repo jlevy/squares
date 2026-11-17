@@ -614,9 +614,14 @@ def test_a_line_about_a_few_counts_prints_each_bound_where_the_line_stays_brief(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Two bounds fit in a current line. Supersession prose can push the same two
-    beyond the brief limit, and T-151's nine counts stay elided (review A, A8)."""
+    beyond the brief limit, as T-174's at 132 did until 11 November 2026; since T-292
+    superseded it there, the shorter clause leaves both bounds printed. T-151's nine
+    counts stay elided (review A, A8)."""
     lines, _ = run(capsys, ["--ids", "T-141", "T-151", "--date", "2026-10-14", "--all"])
-    assert lines[1].startswith("s(n) ≤ … at n = 132, 308 (verified), since superseded ")
+    assert lines[1].startswith(
+        "s(132) ≤ 11.98569, s(308) ≤ 17.99827 (verified), since superseded by T-221 and T-292"
+    )
+    assert len(ra.before_link(lines[1])) <= ra.BRIEF_LIMIT
     assert lines[2].startswith("s(n) ≤ … at 9 counts, n = 176\u2013305 (verified), since ")
     entry = records.results["T-141"]
     current = [

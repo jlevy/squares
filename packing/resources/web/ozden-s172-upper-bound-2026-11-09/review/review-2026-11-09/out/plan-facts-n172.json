@@ -1,0 +1,120 @@
+{
+ "bottom_below_1e-30": [
+  85
+ ],
+ "ceil12_minus_side": "7.8489565e-13",
+ "certificate": "n-172-candidate.yaml",
+ "contacts": [
+  {
+   "id": 46,
+   "wall": "left"
+  },
+  {
+   "id": 85,
+   "wall": "bottom"
+  },
+  {
+   "id": 161,
+   "wall": "right"
+  }
+ ],
+ "least_clearance_per_wall": {
+  "bottom": {
+   "id": 85,
+   "sci": "0"
+  },
+  "left": {
+   "id": 46,
+   "sci": "0"
+  },
+  "right": {
+   "id": 161,
+   "sci": "0"
+  },
+  "top": {
+   "id": 159,
+   "sci": "1.81514e-16"
+  }
+ },
+ "least_pair": {
+  "margin": "2.00833939294e-13",
+  "movers": {
+   "36": {
+    "clearances_left_right_bottom_top": [
+     "8.18711e+00",
+     "4.01349e+00",
+     "9.68477e+00",
+     "2.51583e+00"
+    ],
+    "closing_parameter": "2.008339392e-13",
+    "move_crosses_a_wall_at_contact": false,
+    "move_x": "1.24116e-13",
+    "move_y": "1.60428e-13",
+    "moves_toward": 38
+   },
+   "38": {
+    "clearances_left_right_bottom_top": [
+     "8.80511e+00",
+     "3.39549e+00",
+     "1.04835e+01",
+     "1.71702e+00"
+    ],
+    "closing_parameter": "2.008339392e-13",
+    "move_crosses_a_wall_at_contact": false,
+    "move_x": "-1.24116e-13",
+    "move_y": "-1.60428e-13",
+    "moves_toward": 36
+   }
+  },
+  "pair": [
+   36,
+   38
+  ]
+ },
+ "least_positive_clearance_per_wall": {
+  "bottom": "2.79249e-17",
+  "left": "4.09916e-16",
+  "right": "1.24950e-15",
+  "top": "1.81514e-16"
+ },
+ "left_below_1e-30": [
+  46
+ ],
+ "n": 172,
+ "one_over_q": "1/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000",
+ "pairs_below_1e-12": 342,
+ "right_below_1e-30": [
+  161
+ ],
+ "right_or_top_below_1e-30": [
+  161
+ ],
+ "right_or_top_below_one_over_q": [
+  161
+ ],
+ "right_or_top_below_side_minus_floor12": [
+  152,
+  153,
+  154,
+  156,
+  157,
+  158,
+  159,
+  160,
+  161,
+  162,
+  163,
+  164,
+  165,
+  166,
+  167,
+  168,
+  169,
+  170,
+  171,
+  172
+ ],
+ "side_minus_floor12": "2.1510434e-13",
+ "top_below_1e-30": [],
+ "written_utc": "2026-11-09T16:15:22Z"
+}

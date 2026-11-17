@@ -1,0 +1,80 @@
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+certificate_gz_sha256: f59d4c9562d7246f41c8c389a5bc118da9cf268a794e6416d146a195fb03360c
+certificate_json_sha256: d1df3bc69bb12c0eebcb51d6b3636593079fbb82ae1128938ec5c07c83cc951c
+L: 2493/250
+B: 24872661/24875000
+D: 1/12000
+last: 4971
+rows: 853
+M: 9399999/100000
+N_theta: 4972
+t_max: 1657/4000
+N0b_B(1+D): 99498934887/99500000000
+N0c_tmax^2+2tmax-1: 1649/16000000
+N0e_B(1+D/(1-D^2/4)): 14327846598855339/14327999975125000
+N0b_margin_1-B(1+D): 1065113/99500000000
+expanded_rectangles: 6720
+max_expanded_density: 39419.588490856724
+max_row_density_w/|R|: 315356.7079268538
+U_r_range: [9.264893218841625, 9.472]
+U_0: 1184/125
+least_margin_minus_core_half_extent: {'value': 5.361452742726193e-06, 'r': 1}
+hosono_candidate_gz_sha256: df3ae678029f3da1f0fd4c9b1ba9d331c582478e46c453f238c36e476d9fd27c
+hosono_candidate_json_sha256: 64d819536a9994172b1f7a7b2095e7b40e420a09efa7441d459e73191a20667a
+regenerated_gz_os_byte: 255
+B(1+83/40000): 996970870863/995000000000
+shared_nodes: 20
+new_nodes: 4952
+shared_node_r: [0, 249, 498, 747, 996, 1245, 1494, 1743, 1992, 2241, 2490, 2739, 2988, 3237, 3486, 3735, 3984, 4233, 4482, 4731]
+growth_at_axis: 11/9972
+growth_min_max: [0.00019341552863424362, 0.001516104645360223]
+growth_vs_tokoharu_domain_min_max: [-6.45557359740197e-05, -9.017907923308708e-06]
+route_ceiling_L0/B0: 99500/9977
+ceiling_minus_L: 0.0009377568407336875
+mutant_gz_sha256: 2f72d2ddedd70e6be97fa58494b8508eb3020c2e8bbad5b2f429cac134c01532
+mutant_derived_from: NEGATIVE CONTROL: verified n94 L9.972 certificate, every mass multiplied by99/100
+mutant_differing_keys: ['derived_from', 'total_mass']
+all_checks_hold: True
+  [ok] json_text_is_gzip_content
+  [ok] top_level_keys
+  [ok] points_empty
+  [ok] proof_net_keys_step_last
+  [ok] n_is_94
+  [ok] L_is_2493/250
+  [ok] masses_nonnegative
+  [ok] rectangles_nondegenerate_in_K
+  [ok] total_mass_is_sum
+  [ok] M_is_94_minus_1e-5
+  [ok] M_below_n
+  [ok] N0a
+  [ok] N0b
+  [ok] N0c
+  [ok] N0d
+  [ok] N0e
+  [ok] B_in_(0,1)
+  [ok] L^2>=2B^2
+  [ok] caps_L<=1000_rows<=1e6
+  [ok] tan(pi/8)_in_last_bin
+  [ok] tan(pi/8)_beyond_bin_last-1
+  [ok] expanded_integral_is_M
+  [ok] expanded_density_D4_invariant
+  [ok] eight_times_densest_row_density<=2^32
+  [ok] expanded_density<=2^96
+  [ok] U_r>L/2_all_r
+  [ok] core_half_extent_below_margin_all_r
+  [ok] L_is_lambda_L0
+  [ok] B_is_lambda_B0
+  [ok] same_row_count
+  [ok] each_row_lambda_times_hosono_mass_equal
+  [ok] hosono_total_mass_equal
+  [ok] hosono_scaling_factor_1
+  [ok] regenerated_json_text_byte_identical
+  [ok] regenerated_gzip_byte_identical
+  [ok] hosono_net_with_dilated_core_fails_N0b
+  [ok] growth_at_axis_is_11/9972
+  [ok] growth_positive_at_all_shared
+  [ok] L_below_ceiling
+  [ok] mutant_masses_99/100_rectangles_same
+  [ok] mutant_other_fields_same
+ALL_CHECKS_HOLD
+cpu: user 0.338 s, sys 0.029 s, wall 0.367 s

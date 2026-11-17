@@ -1,0 +1,8 @@
+D4: measure invariant under x->s-x and x<->y (exact)
+# zmx2 cert hash=a53f06f25d54b3df mode=d4 atoms=grid+fo depth=40 node_cap=20000000 kappa=1.5 K=30 region=x25-25,y42-42,bins0-0 area=1
+cover: s = 11/1, 0 points, 13244 segments, total 28909433072241/250000000000 = 115.63773228896
+area densities: 1 rectangle(s) (ZMX2_AREA.md)
+roots: 1 in region, 0 already done (log), 1 to run, 1 threads
+done in 72s wall: roots 1 (missing 0), boxes 11311, certified 5597, empty 0, uncertified 59, max depth 40, cpu 72s
+NOT VERIFIED: 59 uncertified boxes
+# L144 packaging: 59 UNCERT lines removed; sha256 of their sorted box strings 730a4d3f398bf2713f03ba889c71e3093eb0e45f87c55cc4102b51e9f0f80d55

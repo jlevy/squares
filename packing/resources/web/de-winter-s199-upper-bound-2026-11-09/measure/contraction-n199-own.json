@@ -1,0 +1,49 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 199,
+ "certificate": {
+  "label": "#939",
+  "input": "packet",
+  "packet": "de-winter-s199-upper-bound-2026-11-09"
+ },
+ "side": "1461468985328358057514628890087947061618972730200175769881498026931092424681356737007190165664341823168492765447/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+ "lambda_star": "1",
+ "one_minus_lambda_star": "0.000000e+00",
+ "binding_pair": [
+  173,
+  174
+ ],
+ "contracted_side": "1461468985328358057514628890087947061618972730200175769881498026931092424681356737007190165664341823168492765447/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+ "margin": "0",
+ "margin_float": "0.000000e+00",
+ "certificate_routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes_accept": true,
+ "cpu_seconds": 25.77
+}

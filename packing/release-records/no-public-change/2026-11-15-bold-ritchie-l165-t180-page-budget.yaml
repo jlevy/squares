@@ -1,0 +1,26 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/devtools/site_urls.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Coordinator, 15 November 2026, on the import of #984 and #985 (think-17ex): hosted run
+  43662981013 measured result/t-180.html at 501,700 bytes once T-301 and T-302 are listed
+  at 228 and 147, past its 500,000 ceiling, so devtools/site_urls.py moves that page's
+  budget exception to 525,000 as a measured choice. No paper reads a page budget. Against
+  the branch's own copy of site_urls.py: devtools.compare_paper_renders rendered each paper
+  into empty site directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM),
+  twice from this tree and once with that copy swapped in, and all four papers are
+  byte-identical across the three (55, 43, 43 and 43 files). No PDF was printed; each
+  prints from that HTML.

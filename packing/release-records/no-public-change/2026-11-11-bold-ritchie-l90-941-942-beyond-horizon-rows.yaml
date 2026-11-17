@@ -1,0 +1,36 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/site_resources.py
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L90 of 11 November (think-cen3): Joost de Winter's #941 (fifteen counts from 413
+  to 910), #942 (sixteen from 632 to 989) and the six of a0c4fc8 that #942's addendum reports
+  are retained at JoostdeWinter/square-packing, replayed on both maintained exact routes, walked
+  in report order and reviewed by the blind stage 4 lane L96, whose review is mapped. Thirty-six
+  beyond-horizon rows, verified, thirty-five superseding the rows they beat and one at 655 below
+  the grid; 809, a deletion bound #941 claims, is held without a row for the owner (think-kzme).
+  With them come three coverage sources, the two issues' requests entries, and a sentence on the
+  source's card among the other projects. No register entry, case record or house moves. No
+  paper prints those counts, rows or requests. Against main 591644a9e (#951), after the review
+  was mapped and again after the senior review's fixes: devtools.compare_paper_renders rendered
+  each paper into empty site directories,
+  the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once
+  with that main's copies of the three paths above swapped in. All four papers are
+  byte-identical across the three renders: the explainer's 55 files and 43 files each of the
+  optimality review, the threshold-bound review and the methods survey. (An earlier run against
+  main 8afdabe8f, before the review, found the same.) No PDF was printed; each prints from that
+  HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

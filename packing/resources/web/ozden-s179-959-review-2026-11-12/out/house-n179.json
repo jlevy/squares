@@ -1,0 +1,162 @@
+{
+ "program": "l108_house.py",
+ "decider_sha256": {
+  "l108_reader.py": "b56db242a2580265607154243467ff8e0509e5b6b6e9fd9b7097b0bdb0f94184",
+  "l108_sat.py": "31d5846efe2390bc061ac7ba18c7360ce9248ae9403f04d0a8771665955ceabd",
+  "l108_clip.py": "7fec77bc02a66134cb01d543251eaad9b36141cc68069910dfb0f96291f268d6",
+  "l108_check.py": "6c6dbaff0369784888e087c7fb5bd6a9f05a0e5e095e60caf7e946a66616e6ef"
+ },
+ "house_t174": {
+  "file_sha256": "569f5d6865357004c55036da9c617eb77c33dd18109cffc34e7eae751da59dda",
+  "verdict": "ACCEPT",
+  "not_unit_a": [],
+  "not_unit_b": [],
+  "counterclockwise": 179,
+  "clockwise": 0,
+  "walls_decided": 716,
+  "wall_disagreements": [],
+  "walls_outside": [],
+  "wall_contacts": [
+   "1 left",
+   "1 top",
+   "2 top",
+   "4 right",
+   "5 left",
+   "6 left",
+   "8 left",
+   "11 left",
+   "15 left",
+   "19 left",
+   "24 left",
+   "30 left",
+   "37 bottom",
+   "38 bottom",
+   "39 bottom",
+   "40 bottom",
+   "41 bottom",
+   "43 bottom",
+   "44 bottom",
+   "45 top",
+   "46 top",
+   "47 top",
+   "50 top",
+   "51 top",
+   "53 top",
+   "54 top",
+   "55 right",
+   "59 top",
+   "60 top",
+   "65 right",
+   "65 top",
+   "70 left",
+   "70 bottom",
+   "71 top",
+   "74 right",
+   "76 bottom",
+   "76 right",
+   "82 right",
+   "90 right",
+   "98 right",
+   "106 right",
+   "112 right",
+   "115 right",
+   "117 right",
+   "118 right",
+   "126 left",
+   "130 left",
+   "150 bottom",
+   "152 bottom",
+   "156 bottom",
+   "157 bottom"
+  ],
+  "least_positive_wall_clearance": {
+   "square": 123,
+   "wall": "left",
+   "value": "6.8443345381132820766e-96"
+  },
+  "positive_wall_clearances_below": {
+   "1e-15": 1,
+   "1e-13": 1,
+   "1e-12": 1,
+   "1e-9": 1,
+   "1e-6": 1,
+   "1e-3": 1
+  },
+  "pairs_decided": 15931,
+  "pair_disagreements": [],
+  "overlapping_pair_count": 0,
+  "touching_pairs": [
+   [
+    119,
+    122
+   ]
+  ],
+  "clipped_area_sum": "0",
+  "least_margin": {
+   "pair": [
+    119,
+    122
+   ],
+   "value": "0"
+  },
+  "pairs_below": {
+   "1e-15": 525,
+   "1e-13": 525,
+   "1e-12": 525,
+   "1e-9": 525,
+   "1e-6": 525,
+   "1e-3": 525
+  },
+  "wall_contact_count": 51
+ },
+ "n954": {
+  "file_sha256": "75813e7cc0ee167557678ce6dab287359711c58796afa3048cd10ff2f6a8041b",
+  "verdict": "ACCEPT",
+  "not_unit_a": [],
+  "not_unit_b": [],
+  "counterclockwise": 179,
+  "clockwise": 0,
+  "walls_decided": 716,
+  "wall_disagreements": [],
+  "walls_outside": [],
+  "wall_contacts": [
+   "39 bottom",
+   "117 right",
+   "123 left"
+  ],
+  "least_positive_wall_clearance": {
+   "square": 60,
+   "wall": "bottom",
+   "value": "2.1701072127636500259e-16"
+  },
+  "positive_wall_clearances_below": {
+   "1e-15": 8,
+   "1e-13": 36,
+   "1e-12": 36,
+   "1e-9": 36,
+   "1e-6": 36,
+   "1e-3": 44
+  },
+  "pairs_decided": 15931,
+  "pair_disagreements": [],
+  "overlapping_pair_count": 0,
+  "touching_pairs": [],
+  "clipped_area_sum": "0",
+  "least_margin": {
+   "pair": [
+    14,
+    15
+   ],
+   "value": "2.03083381521852e-13"
+  },
+  "pairs_below": {
+   "1e-15": 0,
+   "1e-13": 0,
+   "1e-12": 389,
+   "1e-9": 389,
+   "1e-6": 389,
+   "1e-3": 444
+  },
+  "wall_contact_count": 3
+ }
+}

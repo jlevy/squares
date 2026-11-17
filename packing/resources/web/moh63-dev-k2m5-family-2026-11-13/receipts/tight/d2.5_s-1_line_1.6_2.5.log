@@ -1,0 +1,19 @@
+# command: /home/user/squares-l145/packing/.venv/bin/python3 -I -c 'import multiprocessing, os, runpy, sys; multiprocessing.set_start_method('"'"'fork'"'"'); sys.argv = sys.argv[1:]; sys.path.append(os.path.dirname(os.path.abspath(sys.argv[0]))); runpy.run_path(sys.argv[0], run_name='"'"'__main__'"'"')' run_tt.py ../certificate/sol_exact_box11.txt 2.5 -1 line 1.6 2.5
+# cwd: tight_tile/ of the k2m5-family tree staged by devtools.replay_k2m5_family from packing/resources/web/moh63-dev-k2m5-family-2026-11-13 (pinned 2c0b1b99), every file checked against its manifest
+# python3: /home/user/squares-l145/packing/.venv/bin/python3
+# host: 4 cores; load 3.87 4.02 4.07; started 2026-11-14T03:23:41Z
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "C_u", "h0": "1/4000", "K": "4", "ok": 192, "cells": 383, "fails": 0, "worst": 0.006198217749235288, "secs": 24}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_t t+1", "h0": "1/4000", "K": "4", "ok": 18, "cells": 35, "fails": 0, "worst": 0.013339454916, "secs": 3}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_t t-1", "h0": "1/4000", "K": "4", "ok": 18, "cells": 35, "fails": 0, "worst": 0.0070321015512, "secs": 3}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_d d+1", "h0": "1/4000", "K": "4", "ok": 14, "cells": 27, "fails": 0, "worst": 0.007278805098, "secs": 2}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_d d-1", "h0": "1/4000", "K": "4", "ok": 14, "cells": 27, "fails": 0, "worst": 0.0259655979595, "secs": 2}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t+1 d+1 a", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.013515127378, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t+1 d+1 b", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.013515127378, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t+1 d-1 a", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0322019202395, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t+1 d-1 b", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0322019202395, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t-1 d+1 a", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.007278805342, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t-1 d+1 b", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.00721760642063, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t-1 d-1 a", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0259655982035, "secs": 1}
+{"tile": "d0=5/2 sign=-1 line 1.6 2.5", "chart": "W_td t-1 d-1 b", "h0": "1/4000", "K": "4", "ok": 1, "cells": 1, "fails": 0, "worst": 0.02590819588429, "secs": 1}
+ALL-OK
+# finished 2026-11-14T03:24:23Z; exit 0; wall 41.741 s; CPU 41.5 s (user 41.419 + sys 0.048); load 3.94 4.02 4.06

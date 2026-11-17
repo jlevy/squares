@@ -1,0 +1,74 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/960",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s237 upper bound 2026-11-11]",
+  "report_evidence": "E-ozden-960-certificate-report",
+  "receipt_format": "ozden-960-exact-replay-v1",
+  "witness_prefix": "W-ozden-960-n",
+  "claim_limitations": "Complete 2026-11-11 rational corner Witness/v2 at 237, promoted to exact rationals by this repository's packing-witness promote, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-11",
+  "read_at_main": "b5b12c20646710a606bc86516f6c93168d00457e",
+  "certificates": [
+    {
+      "n": 237,
+      "path": "n-237-candidate.yaml",
+      "format": "witness-corners",
+      "offered": "15.893805580573",
+      "first_committed": "2026-11-11T21:37:37Z",
+      "same_packing": [
+        {
+          "path": "n237-witness.json",
+          "format": "witness-corners"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    237
+  ],
+  "replayed": [
+    237
+  ],
+  "houses": [
+    {
+      "n": 237,
+      "reader": "[Couzo n237 2026-10-15]",
+      "source_key": "[Couzo n237 2026-10-15]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo and Mishapolk",
+      "result": "T-190",
+      "reported_value": "15.9026036382595969",
+      "verified_value": "15.9026036382595969",
+      "evidence": [
+        "E-couzo-4e4c8ce-n237-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 237,
+      "report": "T-253, Polkovskyi of 23 October (no issue)",
+      "url": "https://github.com/Mishapolk/square-packing-records/commit/e386aabc5e881afa8a8ad977500d2d3f57d86898",
+      "holders": "Mykhailo Polkovskyi, of the house's packing",
+      "reader": "[Mishapolk refinements 2026-10-23]"
+    }
+  ],
+  "register": {
+    "title": "Doğa Özden's packing of 237 squares at kenaznia-doga/s237-upper-bound 13c4b23, issue 960",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "The issue says this repository's packing-witness verify, run unmodified on the witness at main c8448724, reports VERIFIED (exact-algebraic, 27966 pairs), and that verifier/sqcheck.py, an exact checker the author's lab wrote separately from this repository's code, reports VALID (exact rational) and prints the exact side rounded up. It says the two share only the unit-square, wall and non-overlap definitions.\n\nThis repository's packing-witness promote --strategy robust-rational at c8448724 made the exact coordinates from the lab's decimal pose, n-237-decimal-pose.yaml, with center_dilation 1 and no dilation, so packing-witness verify is not independent of how they were rounded, as the issue says. The issue says the pair margins of about 2e-13 are the decimal pose's own, that only the squares that set the left wall, the bottom wall and the side touch them exactly, and that other squares near a wall clear it by up to about 1e-12. Before promotion sqcheck.py certified the decimal pose in interval arithmetic at its own side. No local-optimality, rigidity or formal check is claimed. Those statements are the author's; no source program ran here.",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-my76",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER"
+    }
+  }
+}

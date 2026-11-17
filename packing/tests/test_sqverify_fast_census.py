@@ -1604,6 +1604,57 @@ def test_the_890_dilation_is_read_at_its_upstream_path_and_reproduces_the_produc
     assert fields == ["    relationship_to_generator: same-implementation"]
 
 
+def test_the_910_dilation_is_read_at_its_upstream_path_and_reproduces_the_producer() -> None:
+    """#910's further dilation is a case at its own upstream path, on its declared net of
+    4,972 directions, classified as #890's is, with no Hosono wording in its provenance.
+    Its census row verifies every direction of that net and refuses none."""
+    packet = "ozden-s94-lower-bound-9972-2026-11-05"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert list(found) == ["mixed_n94_L9972"]
+    case = found["mixed_n94_L9972"]
+    assert case.candidate == census.WEB / packet / "source/certificate/n94-L9972.json.gz"
+    assert (case.n, case.side) == (94, "2493/250")
+    assert census.net_directions(case) == 4972
+    assert packet in census.SAME_CRATE_PACKETS
+    assert packet not in census.SHARED_CRATE_PACKETS | census.INDEPENDENT_MIXED_PACKETS
+    fields, _ = census.mixed_relationship(case)
+    assert fields == ["    relationship_to_generator: same-implementation"]
+    provenance = census.packet_provenance(case)
+    assert provenance is not census.HOSONO_PROVENANCE
+    assert "4986/4975" in provenance.subject
+    row = entries()["mixed_n94_L9972"]
+    assert (row["status"], row["L"], row["n"]) == ("VERIFIED", "2493/250", 94)
+    assert row["directions_verified"] == census.net_directions(case)
+    assert row["refused_directions"] == []
+    assert row["least_certified_bound"] >= 1
+
+
+def test_the_910_replay_entry_is_what_the_census_prints() -> None:
+    """E-ozden-910-n94-9972-sqverify-fast-replay is `--evidence`'s entry for
+    mixed_n94_L9972, field for field, with the stage 4 review of 5 November as its audit
+    record: Özden's further dilation as the theorem's subject, the controls of the same
+    day, the replay's agreement with every selected line of the lab's archive, and no
+    Hosono or clean-room wording."""
+    name = "mixed_n94_L9972"
+    text = census.evidence_entry(
+        cases()[name],
+        FOLDER,
+        entries()[name],
+        audit_record="docs/project/reviews/review-2026-11-05-ozden-s94-9972.md",
+        date="2026-11-05",
+    )
+    (generated,) = safe_load(text)
+    assert generated["id"] == "E-ozden-910-n94-9972-sqverify-fast-replay"
+    register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    (committed,) = (item for item in register["evidence"] if item["id"] == generated["id"])
+    assert generated == committed
+    flat = " ".join(text.split())
+    for wording in ("Hiroaki Hosono's mixed_n94_L9972", "mixed-fetch", "tarball", "clean-room"):
+        assert wording not in flat, wording
+    assert "applied to Doğa Özden's mixed_n94_L9972" in flat
+    assert "replay-comparison.json" in flat
+
+
 def test_the_890_replay_entry_is_what_the_census_prints() -> None:
     """E-ozden-890-n94-9965-sqverify-fast-replay is `--evidence`'s entry for
     mixed_n94_L9965, field for field (F1 of #898's review): Özden's dilation as the

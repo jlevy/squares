@@ -1,0 +1,11 @@
+# command: /home/user/squares-l145/packing/.venv/bin/python3 -I -c 'import multiprocessing, os, runpy, sys; multiprocessing.set_start_method('"'"'fork'"'"'); sys.argv = sys.argv[1:]; sys.path.append(os.path.dirname(os.path.abspath(sys.argv[0]))); runpy.run_path(sys.argv[0], run_name='"'"'__main__'"'"')' ctl_rise.py ctl_rise.txt
+# cwd: tight_tile of the k2m5-family tree staged by devtools.replay_k2m5_family from packing/resources/web/moh63-dev-k2m5-family-2026-11-13 (pinned 2c0b1b99), every file checked against its manifest
+# python3: /home/user/squares-l145/packing/.venv/bin/python3
+# host: 4 cores; load 4.15 4.08 3.33; started 2026-11-14T02:43:04Z
+   cells 200 ok 38 todo 81 fails 22 {'face': 8, 'kink': 56, 'bis': 75, 'hbis': 0}
+   cells 400 ok 100 todo 81 fails 60 {'face': 8, 'kink': 119, 'bis': 112, 'hbis': 0}
+   cells 600 ok 163 todo 81 fails 97 {'face': 8, 'kink': 181, 'bis': 150, 'hbis': 0}
+   cells 800 ok 225 todo 81 fails 135 {'face': 8, 'kink': 244, 'bis': 187, 'hbis': 0}
+   cells 1000 ok 287 todo 81 fails 173 {'face': 8, 'kink': 307, 'bis': 224, 'hbis': 0}
+   cells 1200 ok 350 todo 81 fails 210 {'face': 8, 'kink': 369, 'bis': 262, 'hbis': 0}
+   cells 1400 ok 412 todo 81 fails 248 {'face': 8, 'kink': 432, 'bis': 299, 'hbis': 0}

@@ -1,0 +1,19 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L54 of 6 November: #918 and #919, two copies of the empty registration
+  template opened six seconds apart by adnuubhai-ux, are entered as kind other with
+  triage pending and no results, #919 noted as a duplicate of #918, and their
+  acknowledgements (issuecomment-6697905579 and issuecomment-6697906500) are recorded.
+  No result, rung, side, bound, mark or credit changes. Against main f30d6405d (#917):
+  rendered at link revision 0000000000000000000000000000000000000000 into empty site
+  directories, twice from this tree and once with that main's result-requests.yaml
+  swapped in, by devtools.compare_paper_renders with render_packing_methods, its math
+  pass in /usr/bin/google-chrome (SQPACK_CHROMIUM): 43 files each, all byte-identical
+  across the three. No PDF was printed; it prints from that HTML. The paper keeps its
+  version, v0.2.7.

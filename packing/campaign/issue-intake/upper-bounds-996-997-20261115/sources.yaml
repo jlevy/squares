@@ -1,0 +1,70 @@
+# What `python -m devtools.intake_ledger gather` reads: the upper bound at n <= 324 that lane L181 of the
+# intake pass takes in on 15 November 2026 (think-32cl), Joost de Winter's packing of 90 squares. He reported
+# it first in #996 (11:30:13Z), at 64d5ee7, the first commit to hold n90/ (11:27:26Z), and replaced it in #997
+# (12:08:33Z) by the packing at fa53fb0 (12:07:15Z), 9.09e-8 smaller, asking that fa53fb0 be pinned and the
+# earlier commit disregarded. The author's own replacement withdraws #996's claim, so it is no report in the
+# walk and is listed below with its disposition; #997's claim is walked. GitHub's activity log was not readable
+# from this session, so no push time is recorded: by the owner's rule of 14 October fa53fb0 would date the
+# claim if its push came first, but no other report reached 90 in the 78 seconds between the commit and #997,
+# so the issue dates the claim, with the first commit kept, and the verdict is the same either way. The start
+# is frozen at main 91acf2022 (#995's merge): T-303 at 90 (jazivxt's packing of #989, adopted in the pass of 15
+# November), in both lanes, with no register bound pending adoption below it. The claim's exact side is its
+# certificate's, read by the packet's claim record (acquisition/claims.json), which the lane wrote from main
+# 91acf2022; #997 prints that side rounded up at 12 places, and the claim record's admission holds the print to
+# it. The side the issues quote from a public merged Kaggle submission, 9.998277166917
+# (bestbryant/claude_code_squaresinsquares), is above the claim and is no report here.
+format: intake-ledger-sources-v1
+read_at_main: 91acf2022a69531da3421889810a3bc53aa89753
+read_on: '2026-11-15'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l181
+  branch: claude/bold-ritchie-xo28us-l181
+  commit: 91acf2022a69531da3421889810a3bc53aa89753
+  note: The packet's claim record, written on the lane's branch from main 91acf2022 and read here by path.
+reports:
+- report: '#997'
+  issue: 997
+  holders: Joost de Winter
+  bead: think-32cl
+  lanes:
+  - lane: l181
+    packet: de-winter-s90-upper-bound-2026-11-15
+    record: claims.json
+    counts: [90]
+  claims:
+  - n: 90
+    measured:
+      against: T-303
+      finding: no symmetry of the box pairs it one to one with T-303's packing by nearest centres; the optimal assignment, under the identity of the box, moves 87 squares beyond 1e-3, 32 beyond 1e-2 and 6 beyond 0.1 (largest 0.645009) and turns 48 squares by more than 1e-6 radians, by up to 22.91 degrees; aligned by box centres, 16 squares turn by more than a degree and none reverses its tilt; 40 squares are tilted beyond a degree, 22.90 to 30.99 degrees, all turned the same way and each paired with a square T-303 tilts the same way, and the other 50 are exactly upright, against T-303's 44 tilted beyond a degree (22.61 to 31.56) and five more within 0.07 degrees; the house witness measures as T-303; a further arrangement of T-303's packing, as the source says, not a new one; against the certificate #996 named it is one to one by nearest centres under the identity, no square moved beyond 0.0142, a refinement of it
+      source: packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/identity.json
+    new_packing:
+      source: '#996, which #997 says states the arrangement and lineage: ''The packing starts from T-303 by jazivxt (issue #989), which is built from a crop of my packing for n = 157 (T-293). A local search changed small groups of squares in position and angle, optimized the packing again after each change, and kept the changes that gave a smaller side.'''
+      continues: jazivxt's packing of 90 squares (T-303), by a local search over small groups of its squares
+    note: >-
+      T-303's uniform-contraction margin is 1.0988e-11, its squares 79 and 81 binding, wall slack included, so the
+      gain, 4.2384e-3, is about 3.9e8 times that margin and lies wholly outside T-303's padding
+      (packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090.json); RV-3 (think-ruu2)
+      does not reach it. The step from #996's certificate, 9.09e-8, is about 9.5e3 times that certificate's own
+      margin, 9.53e-12 (measure/contraction-n090-996.json).
+  note: >-
+    #997 names fa53fb0, committed at 2026-11-15T12:07:15Z, 78 seconds before it, which replaces the certificate
+    #996 named (64d5ee7) by one 9e-8 smaller and asks that fa53fb0 be pinned and the earlier one disregarded; the
+    head, 6c0ad56 (12:07:15Z), changes only n90/REGISTRATION.md and n90/SHA256SUMS, the certificate unchanged. It
+    says the arrangement, lineage, credit and AI assistance are as #996 states: credit to Joost de Winter as an
+    improvement of jazivxt's packing, the local search run with GPT-6.1 Sol Max (OpenAI) and the optimization,
+    certificate, checks and figures produced with Claude Fable 5.2 (Anthropic) under his direction.
+exceptions: []
+other_items:
+- issue: '#996'
+  url: https://github.com/jlevy/squares/issues/996
+  holders: Joost de Winter
+  kind: replaced by its author
+  bead: think-32cl
+  disposition: 'The claim s(90) <= 199880777150913904183/20000000000000000000 = 9.994038857546 at 64d5ee7,
+    replaced by the author 38 minutes later in #997 by the certificate at fa53fb0, 9.09e-8 smaller, with the
+    request that the earlier commit be disregarded: not walked and not recorded. The superseded certificate is
+    retained in the de-winter-s90-64d5ee7-2026-11-15 packet; both maintained exact routes accepted it, and the
+    stage 4 review of 15 November accepted it.'

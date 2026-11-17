@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#1001","kind":"issue","number":1001,"url":"https://github.com/jlevy/squares/issues/1001","author":"JonathanGun","created_at":"2026-11-16T05:33:07Z","state":"open","closed_at":null,"title":"s(127), s(204), s(232), s(264), s(305): lowered upper bounds on Tomáš Kodaj's public packings: registration request"}]
+}

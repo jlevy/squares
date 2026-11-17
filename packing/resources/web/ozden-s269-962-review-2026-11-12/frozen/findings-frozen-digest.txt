@@ -1,0 +1,14 @@
+# Lane L117 findings frozen at 2026-11-12T00:23:36Z, before the author's README, sqcheck.py, verifier/README.md, packing-witness-verify.txt, sqcheck-output.txt, the decimal pose, the licence files, the register entries at 269, #947's import packet or this repository's verifier, promotion or identity code was opened.
+b8f46901bc40a8dd7bd231d722144a0d4312873fae96e91d325d73b85cb96930  frozen/review-2026-11-12-ozden-962.frozen.md
+# lines and bytes: 407 27762
+# checker list:
+f251bd5d0e4003a88bfd2e74323a8031ecd779bb10275b016cd9770aa4f8f80d  frozen/checker-frozen-digests.txt
+# controls plan list:
+98a2bc65ff178b6f49561cf40dd264df88a1d0661e7be022a8fc234299ca2f8e  frozen/controls-plan-digest.txt
+# receipts and programs at the freeze:
+67dedf0592e8434fa0e8fd3740ef508e20b724aae65a26cb94dc5c84f3ac1f6a  out/selftest.json
+bc489767bdf9f09fee9d7b18beb8f92cb6b95637dbef751feba59225e711707b  out/check-n269.json
+341fd9e7b0abbf0ffcd437a990550c6f7682e889e5c5c411967cbd0f87b085cb  out/plan-facts-n269.json
+fcea04fbc9e00c576dbd33f24aa6cf9df84c649821613be25b442e18646995cf  out/controls-n269.json
+26e87eda1275e5d992cc8ba792c8227cca39fc9daae3acd0a09b057efebf6a54  programs/controls-plan.json
+2fc13544b87f4ca5dd069c58a7c51a34aa9141fe182b5c03215c2be2d5e3e484  programs/l117_controls.py

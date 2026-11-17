@@ -194,6 +194,19 @@ def test_the_refused_records_split_by_their_witness_tilts() -> None:
     # holds square 229 5.21e-7 degrees from the axis, which the module will not round
     # either way. `KNOWN_TILTS` records it with the bead that owes its regularization, so
     # the record is held apart, in no class, and the rest split (review A6 of #756).
+    # n = 270's house since 9 November 2026 (T-283, think-he66), which the axis tool
+    # refuses while the layer draws grid-slack's view of it, holds 13 near-axis squares
+    # 1.05e-12 to 2.38e-7 degrees off the axis, held the same way (think-wju3).
+    held_270 = {
+        str(square): {
+            "near_degrees": 0,
+            "distance_degrees": known.distance,
+            "owner": compare.OWNER_270,
+        }
+        for (n, square), known in compare.KNOWN_TILTS.items()
+        if n == 270
+    }
+    assert len(held_270) == 13
     assert result["held"] == {
         "259": {
             "229": {
@@ -201,9 +214,11 @@ def test_the_refused_records_split_by_their_witness_tilts() -> None:
                 "distance_degrees": "5.21e-7",
                 "owner": compare.KNOWN_TILTS[(259, 229)].owner,
             }
-        }
+        },
+        "270": held_270,
     }
     assert compare.KNOWN_TILTS[(259, 229)].owner.startswith("think-mbdw: ")
+    assert compare.OWNER_270.startswith("think-wju3: ")
     assert sum(counts.values()) + len(result["held"]) == result["refused"] == _axis_refused()
     # Every refused record holds a tilted square.
     assert counts["axis-only"] == 0
