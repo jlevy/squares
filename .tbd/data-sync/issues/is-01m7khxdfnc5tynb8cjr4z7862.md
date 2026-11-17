@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 32
+version: 34
 delegate: coord-intake-1117r
 labels: []
 dependencies: []
@@ -36,10 +36,12 @@ child_order_hints:
   - is-01m7ntt9vv7ra5j9r8j1ekm5zk
   - is-01m7nttb149v3f9pm9q25brdwd
   - is-01m7nv6w77awr6fcg5athhey03
+  - is-01m7nx9jmvgs4qtnpcpwq9whd9
+  - is-01m7nx9kh2jdcesj1b3z9qyh1k
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-17T22:49:28.039Z
+updated_at: 2026-11-17T23:25:54.594Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
