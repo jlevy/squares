@@ -5,15 +5,18 @@ title: "#1008: de Winter's credit request at 211 (T-188 derives from T-175, whic
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 8
 delegate: w2-credit-1117r
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+child_order_hints:
+  - is-01m7nsww6cj9tfxxfgbgkr0cqr
+  - is-01m7nswyb6rp0dmajf9w6zsppp
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:09.906Z
-updated_at: 2026-11-17T22:50:00.860Z
+updated_at: 2026-11-17T23:24:49.522Z
 started_at: 2026-11-17T01:29:11.445Z
 ---
 

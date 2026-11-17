@@ -3,9 +3,9 @@ type: is
 id: is-01m7nswd68a1zktn2vvq4np6y1
 title: "Address PR #1010 review A: chain reach (T-287), 182/211 prose, label, receipts"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: w2-credit-1117r
 labels: []
 dependencies: []
@@ -20,6 +20,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T22:26:16.391Z
-updated_at: 2026-11-17T22:26:39.739Z
+updated_at: 2026-11-17T23:24:50.076Z
 started_at: 2026-11-17T22:26:39.739Z
+closed_at: 2026-11-17T23:24:50.076Z
+close_reason: "Review A of #1010 addressed: A1, A2, A3, A5 fixed in 15adfe178; A4 deferred (think-qywl) and A6 deferred to the #1008 reply (think-gu5s), both re-parented under think-dp8t. https://github.com/jlevy/squares/pull/1010#issuecomment-6963989952"
+resolution: null
+duplicate_of: null
 ---
