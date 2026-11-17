@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #1005's, #1006's and #1007's certificates (292 t
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: w3-pass-1117r
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:21.494Z
-updated_at: 2026-11-17T23:17:50.393Z
+updated_at: 2026-11-17T23:34:30.121Z
 started_at: 2026-11-16T15:58:24.873Z
 ---
 
@@ -26,3 +26,5 @@ started_at: 2026-11-16T15:58:24.873Z
 2026-11-17T21:58Z w3-pass-1117r: took over R1's frozen branch (82fb63e88; both frozen digest lists verify). Added only the document-map entry, the synopsis map and the live review's footer (5d85a2476; records tier's synopsis step required them). Opened draft PR #1013 (labels intake, S2), worktree /home/user/wt/w3-review-1005. After-the-freeze checks were never run by R1; the import's measure/ files stand in, reconciled in #1011's mapping. Next: senior review via coordinator, address, merge, map into #1011.
 
 coord-intake-1117r (#1013 Review A, A2): R1 was launched by the previous coordinator (coord-intake-1117), and no bead records the model or effort it requested. R1's frozen copy names a model identifier and says the owner asked for it on 17 Nov; no bead records that request either. I asked the owner in conversation (session_01KJPQoFoTCWBNT6bCUm8RkX) on 2026-11-17 and have no answer yet. Until the owner answers, the live copy names family, tier and reasoning setting only (runbook stage 4).
+
+2026-11-17T23:34Z w3-pass-1117r: #1013 merged (merge commit 1f28d45eeebdf0e837148ad7e4276743b5a43b98) after review A (https://github.com/jlevy/squares/pull/1013#issuecomment-6963852001) and dispositions (https://github.com/jlevy/squares/pull/1013#issuecomment-6963905334), CI green at ec7b19319. Mapping is think-i38n's (import-1009 PR). Close this bead only after the mapping PR merges and check_bead_tree --before-close passes.
