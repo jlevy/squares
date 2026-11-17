@@ -88,11 +88,14 @@ def test_retained_census_reports_source_stratified_coverage() -> None:
     registered = document["contact_sweeps"][0]
     assert registered["name"] == "registered-angle-contact"
     non_grid = registered["summary"]["non_grid"]
-    assert non_grid["records"] == 36
+    assert non_grid["records"] == 37
     # T-174's adopted houses structure 61, 82 and 85 squares at n68/84/86, replacing
     # 59, 71 and 50. The source-stratified total gains 48 squares; n84 and n86 now fit
-    # the six-chunk, three-free budget as well.
-    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1779, 1860)
+    # the six-chunk, three-free budget as well. jazivxt's packing at 90 (T-303, 15 November
+    # 2026) joins the non-grid records, 78 of its 90 squares structured, outside the budget.
+    # de Winter's improvement of it (T-304, 16 November 2026) structures 87 of the 90 in
+    # 13 contact chunks with 3 free squares, still outside the budget, so the total gains 9.
+    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1866, 1950)
     assert non_grid["within_six_chunks_and_three_free"] == 27
 
     # The relaxed sweep structures three more squares and merges two angle classes
@@ -112,12 +115,13 @@ def test_retained_census_reports_source_stratified_coverage() -> None:
     near_partitions = partitions["atlas"]["bands"][1]
     assert near_partitions["name"] == "near"
     partitioned_non_grid = near_partitions["summary"]["non_grid"]
-    assert partitioned_non_grid["records"] == 36
+    assert partitioned_non_grid["records"] == 37
     assert partitioned_non_grid["established"] == 3
     assert partitioned_non_grid["outside_registered_budget"] == 2
     # The selected n84 house has a retained not-established outcome; its earlier
     # search-limit outcome describes the old source geometry.
-    assert partitioned_non_grid["not_established"] == 24
+    # n90's new house has a not-established outcome too (T-303).
+    assert partitioned_non_grid["not_established"] == 25
     assert partitioned_non_grid["search_limit"] == 7
     assert [
         entry["n"]

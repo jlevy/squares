@@ -1,0 +1,9 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [
+    {"report":"#943","kind":"issue","number":943,"url":"https://github.com/jlevy/squares/issues/943","author":"kenaznia-doga","created_at":"2026-11-10T15:28:40Z","state":"open","closed_at":null,"title":"s(156) ≤ 12.977053087498: improved packing (registration request)"},
+    {"report":"#944","kind":"issue","number":944,"url":"https://github.com/jlevy/squares/issues/944","author":"kenaznia-doga","created_at":"2026-11-10T15:28:41Z","state":"open","closed_at":null,"title":"s(180) ≤ 13.915618502791: improved packing (registration request)"},
+    {"report":"#945","kind":"issue","number":945,"url":"https://github.com/jlevy/squares/issues/945","author":"kenaznia-doga","created_at":"2026-11-10T15:28:42Z","state":"open","closed_at":null,"title":"s(268) ≤ 16.872029849085: improved packing (registration request)"},
+    {"report":"#947","kind":"issue","number":947,"url":"https://github.com/jlevy/squares/issues/947","author":"kenaznia-doga","created_at":"2026-11-11T03:35:07Z","state":"open","closed_at":null,"title":"s(269) ≤ 16.900994579952: improved packing (registration request)"}
+  ]
+}

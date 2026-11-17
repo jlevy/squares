@@ -1,0 +1,109 @@
+{
+ "path": "/home/user/squares/.claude/worktrees/review-lrj4/packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s260_ks_1105.cert",
+ "sha256": "24edcc0b45e4b3b57b6632bbe0430d2574425205c0b127e8f96f16fc3e38b663",
+ "bytes": 37544,
+ "n": 260,
+ "side": "8316760475444266760475435949833/500000000000000000000000000000",
+ "side_float": 16.633520950888535,
+ "sense": -1,
+ "pairs_expected": 33670,
+ "method_a": {
+  "name": "separating axes, fractions.Fraction",
+  "walls_decided": 1040,
+  "squares_outside": [],
+  "least_wall_clearance": "49899999999999999100000000000049999999999999999/100000000000000000000000000000100000000000000000000000000000",
+  "least_wall_clearance_float": 4.99e-13,
+  "least_wall_square": 258,
+  "least_wall_square_line": 260,
+  "least_wall_walls": [
+   "right"
+  ],
+  "squares_at_least_wall_clearance": 1,
+  "pairs_decided": 33670,
+  "classes": {
+   "separated": 33497,
+   "touching": 0,
+   "overlapping": 173
+  },
+  "least_pair_gap": "-4066289127882814853820129501080879957876483979261567170611/14317694268227827900169178065000000000000000000000000000000",
+  "least_pair_gap_float": -0.28400446689983133,
+  "least_pair": [
+   50,
+   69
+  ],
+  "least_pair_lines": [
+   52,
+   71
+  ],
+  "least_pair_axis": "u_i",
+  "pairs_below_1e-6_by_decade": {
+   "1e-12": 267,
+   "1e-13": 1,
+   "negative": 173
+  },
+  "verdict": "refuse",
+  "cpu_seconds": 6.665
+ },
+ "method_b": {
+  "name": "exact clipped areas, gmpy2.mpq 2.3.1",
+  "every_square_area_exactly_1": true,
+  "walls_decided": 260,
+  "squares_outside": [],
+  "pairs_decided": 33670,
+  "classes": {
+   "empty": 33497,
+   "touching": 0,
+   "overlapping": 173
+  },
+  "largest_overlap_area": "10098014899218165734665002999677210609543070723500176181358481973368281087112254647405558382447303609365135228132797813/118737170033615470563125710669438424756642680191662766227401000000000000000000000000000000000000000000000000000000000000",
+  "verdict": "refuse",
+  "cpu_seconds": 1.033
+ },
+ "methods_agree_pair_by_pair": true,
+ "verdict": "refuse",
+ "overlapping_pairs_first_10": [
+  [
+   4,
+   145
+  ],
+  [
+   4,
+   182
+  ],
+  [
+   4,
+   191
+  ],
+  [
+   6,
+   7
+  ],
+  [
+   6,
+   82
+  ],
+  [
+   7,
+   8
+  ],
+  [
+   8,
+   9
+  ],
+  [
+   9,
+   10
+  ],
+  [
+   10,
+   220
+  ],
+  [
+   11,
+   12
+  ]
+ ],
+ "overlapping_pairs_count": 173,
+ "label": "s260_ks_1105-reversed",
+ "cpu_seconds_total": 7.701
+}

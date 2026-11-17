@@ -1,0 +1,21 @@
+# command: /home/user/squares-l145/packing/.venv/bin/python3 -I -c 'import multiprocessing, os, runpy, sys; multiprocessing.set_start_method('"'"'fork'"'"'); sys.argv = sys.argv[1:]; sys.path.append(os.path.dirname(os.path.abspath(sys.argv[0]))); runpy.run_path(sys.argv[0], run_name='"'"'__main__'"'"')' ctl_rise.py ctl_rise.txt 2000
+# cwd: tight_tile of the k2m5-family tree staged by devtools.replay_k2m5_family from packing/resources/web/moh63-dev-k2m5-family-2026-11-13 (pinned 2c0b1b99), every file checked against its manifest
+# python3: /home/user/squares-l145/packing/.venv/bin/python3
+# host: 4 cores; load 3.07 3.63 3.34; started 2026-11-14T02:47:27Z
+   cells 200 ok 38 todo 81 fails 22 {'face': 8, 'kink': 56, 'bis': 75, 'hbis': 0}
+   cells 400 ok 100 todo 81 fails 60 {'face': 8, 'kink': 119, 'bis': 112, 'hbis': 0}
+   cells 600 ok 163 todo 81 fails 97 {'face': 8, 'kink': 181, 'bis': 150, 'hbis': 0}
+   cells 800 ok 225 todo 81 fails 135 {'face': 8, 'kink': 244, 'bis': 187, 'hbis': 0}
+   cells 1000 ok 287 todo 81 fails 173 {'face': 8, 'kink': 307, 'bis': 224, 'hbis': 0}
+   cells 1200 ok 350 todo 81 fails 210 {'face': 8, 'kink': 369, 'bis': 262, 'hbis': 0}
+   cells 1400 ok 412 todo 81 fails 248 {'face': 8, 'kink': 432, 'bis': 299, 'hbis': 0}
+   cells 1600 ok 475 todo 79 fails 286 {'face': 8, 'kink': 494, 'bis': 336, 'hbis': 0}
+   cells 1800 ok 538 todo 81 fails 322 {'face': 8, 'kink': 556, 'bis': 375, 'hbis': 0}
+   cells 2000 ok 600 todo 81 fails 360 {'face': 8, 'kink': 619, 'bis': 412, 'hbis': 0}
+ctl_rise.txt {'ok': 600, 'cells': 2083, 'fails': 443, 'segs': 347, 'splits': {'face': 8, 'kink': 620, 'bis': 412, 'hbis': 0}}
+refused cells 443 ; of which containing the face point (1, 1): 6
+  FAIL [(1.0, 0.9997495540562541), (1.0, 0.9997495545624687), (0.999999999254942, 0.9997495545624687), (0.999999999254942, 0.9997495540562541)] bound
+  FAIL [(1.0, 0.9997495535500394), (1.0, 0.9997495540562541), (0.999999999254942, 0.9997495540562541), (0.999999999254942, 0.9997495535500394)] bound
+  FAIL [(0.999999999254942, 0.9997495545624687), (0.9999999985098839, 0.9997495545624687), (0.9999999985098839, 0.9997495540562541), (0.999999999254942, 0.9997495540562541)] bound
+  FAIL [(0.9999999985098839, 0.9997495540562541), (0.9999999985098839, 0.9997495535500394), (0.999999999254942, 0.9997495535500394), (0.999999999254942, 0.9997495540562541)] bound
+# finished 2026-11-14T02:52:02Z; exit 0; wall 274.338 s; CPU 272.8 s (user 272.688 + sys 0.136); load 3.07 3.28 3.26

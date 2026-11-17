@@ -1,0 +1,58 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/989",
+  "author": "jazivxt",
+  "source_key": "[jazivxt s90 upper bound 2026-11-15]",
+  "report_evidence": "E-jazivxt-989-certificate-report",
+  "receipt_format": "jazivxt-989-exact-replay-v1",
+  "witness_prefix": "W-jazivxt-989-n",
+  "claim_limitations": "Complete 2026-11-15 exact rational centre and half-angle certificate at 90, in Evan Daniel's text format, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-15",
+  "read_at_main": "a4f36ae70e5ffa3fb1f88b49c8e8befda8a38e45",
+  "certificates": [
+    {
+      "n": 90,
+      "path": "n90.cert",
+      "format": "evand-cert",
+      "offered": "9.998277166926",
+      "first_committed": "2026-11-15T03:00:02Z"
+    }
+  ],
+  "requested": [
+    90
+  ],
+  "replayed": [
+    90
+  ],
+  "houses": [
+    {
+      "n": 90,
+      "reader": "grid",
+      "source_key": "[Kingbird]",
+      "holders": "trivial grid",
+      "reported_value": "10.0",
+      "verified_value": "10",
+      "evidence": [
+        "E-basic-grid-upper"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "jazivxt's packing of 90 squares at dpre4ai/n90-square-packing f9b31b4, issue 989",
+    "headline": "jazivxt's packing at 90 from a crop of de Winter's 157, the first below the grid's 10, by 1.72e-03",
+    "significance": 3,
+    "source_checks": "The issue and README say Francisco Couzo's public checker verify_bound_certificate.py, at franciscouzo/square-packing 712c6a6 ('based on Evan Daniel's verifier'), accepted the certificate in strict mode, positive clearance from each wall and separation between every pair, and that a separate exact-arithmetic check tested all four walls per square and all 4,005 pairs, both in rational arithmetic by the separating-axis criterion, the least pair separation on a certifying axis about 1.19448e-12. Neither check's output is published, nor the second checker. Those statements are the author's; no source program ran here.",
+    "credit": "Credit jazivxt, whom the issue and README name for the packing, after Joost de Winter, whose n = 157 packing (T-293) supplied the motif: a rectangular crop of it, about 12.993303 by 9.353384, its successive copies offset horizontally by one unit so that they fit at a vertical pitch of 9.019403, a square window across two copies holding 90 squares, then fitted and made exact. The README says the arrangement was found during Kaggle's Squares in Squares competition. The issue asks for credit to 'jazivxt and GPT-6 Astra Ultra' and says GPT-6 Astra Ultra was the AI collaborator on the search and verification; the first published README (e5c2ecc) named it 'Codex Astra Ultra'. An AI agent is not credited as an author here; the assistance is stated in the source's words.",
+    "next_rung": "Independently review the certificate (stage 4, a separate lane blind to this one): its mathematics, a clean-room exact checker with sharp controls, the identity against the grid and the construction the source states, mapped as an adversarial review, whose acceptance the verified lane and the house rule wait on. Then adopt it at 90 in place of the grid under the house rule, with both strong generators' regularization, measured against the new witness, and the flip of the new house in the same change.",
+    "bead": "think-i8y9",
+    "bibliography": {
+      "authors": [
+        "jazivxt"
+      ],
+      "lineage": "independent",
+      "credit": "jazivxt after de Winter",
+      "note": "dpre4ai/n90-square-packing at f9b31b4ebddb278a128b6cb5c43836a305a24dca (2026-11-15T03:10:54Z), whose parent 179fcba7f0e91e2c3d3e92525e0738b6da0f8dd5 the issue names, the certificate for s(90) <= 4999138583463/500000000000 = 9.998277166926 (exact at 12 places), below the 10 x 10 grid's 10, first committed at e5c2ecc365b5a0d4783e0b7e2fe580fca2cc76b5 (2026-11-15T03:00:02Z), 51 seconds before jlevy/squares#989, which requested its registration: Evan Daniel's text format of rational centres and half-angle tangents, a packing made from a crop of Joost de Winter's n = 157 packing (JoostdeWinter/square-packing c70defa, n157/n157_exact.json, T-293) with successive copies offset by one unit, then fitted and made exact. The issue asks for credit to 'jazivxt and GPT-6 Astra Ultra', jazivxt's Kaggle profile named, and says GPT-6 Astra Ultra was the AI collaborator on the search and verification. No optimality claim. The repository states no licence; the account submitted it in the issue (presumption of permission, think-cnn7), and DONOR-LICENSE.txt is de Winter's MIT notice for the donor. Retained in web/jazivxt-s90-upper-bound-2026-11-15/."
+    }
+  }
+}

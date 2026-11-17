@@ -1,0 +1,6 @@
+# Lane L101 controls plan, stated at 2026-11-11T19:14:36Z, before l101_controls.py existed (ls programs/: controls-plan.json l101_check.py l101_clip.py l101_geom.py l101_make_plan.py l101_plan_facts.py l101_reader.py l101_sat.py l101_selftest.py )
+152681a326372a68f960c4ee0fe4b78c45e40168ddf2d6d62a4652fb3f61e6b9  programs/controls-plan.json
+c442b30f04839ff8c23fc6b4eb50547692c307244a05853bcaf1c093b57eea2f  out/plan-facts-n179.json
+69ab86f57eadec3a9c2215be7e5a657d0f27f3e90a0a86812cb5f33235928a06  out/check-n179.json
+907e6da03932da2acdc0ae8074ebd21eacbd80fba2766060226bb119c57e1963  programs/l101_plan_facts.py
+5a8322425012f6cf848a6d3bcfbe8d568e010b47203c5f152f7846151eeb6f38  programs/l101_make_plan.py

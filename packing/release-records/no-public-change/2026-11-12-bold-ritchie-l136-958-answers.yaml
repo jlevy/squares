@@ -1,0 +1,20 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L136 of 12 November (think-c3p2): Joost de Winter's answers on #958
+  (issuecomment-6818738203, 08:31:55Z) are read into its entry, read_through moving to the
+  answer, and the notes record what each answer says (F8 to F12 and the published method), that
+  his commit 57de046 is retained in the de-winter-method-132-157-2026-11-12 packet, that its git
+  diff changes no square or side of either witness, and that the reproduction from the seed was
+  not run here. No reply, issue state, result, rung, side, bound, mark, score or credit changes.
+  Against origin/main 17de4fb55 (#969): rendered by devtools.compare_paper_renders into empty
+  site directories, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
+  tree and once with that main's result-requests.yaml swapped in: the methods survey 43 files,
+  all byte-identical across the three, as were the three n = 11 papers the tool also rendered
+  (55, 43 and 43 files). No PDF was printed; it prints from that HTML. The paper keeps its
+  version, v0.2.7.

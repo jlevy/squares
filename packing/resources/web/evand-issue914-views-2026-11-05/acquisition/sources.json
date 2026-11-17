@@ -1,0 +1,86 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-05T19:58Z",
+  "git_scope": "The sparse checkout of bb4cc78 (committed 2026-11-05T18:29:13Z) that the evand-issue914-2026-11-05 packet was written from, fetched on 5 November 2026 for the import of issue #914. This packet takes the six regularized display views the commit adds beside six of the issue's seven certificates, s175_1105_regularized.cert, s204_trig1_regularized.cert, s268_1105_regularized.cert, s293_1105_regularized.cert, s303_1105_regularized.cert and s304_1105_regularized.cert, each of which the issue names with its SHA-256 as a regularized view at its certificate's side, so that both maintained exact routes decide each view as they decide the certificates. The evand-issue914-2026-11-05 packet retains the six files and the licence at the same pin, so they are pinned here against those copies and nothing is retained here; no source program was executed.",
+  "sources": [
+    {
+      "id": "evand-issue914-views-2026-11-05",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+      "source_commit": "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+      "committed_utc": "2026-11-05T18:29:13Z",
+      "git_tree": "341f5ffb171dfae6476b22639fc0d6e932233367",
+      "archived_path": "packing/resources/web/evand-issue914-views-2026-11-05/source",
+      "subtree_manifest": "packing/resources/web/evand-issue914-views-2026-11-05/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "search/packer/candidates/s175_1105_regularized.cert",
+        "search/packer/candidates/s204_trig1_regularized.cert",
+        "search/packer/candidates/s268_1105_regularized.cert",
+        "search/packer/candidates/s293_1105_regularized.cert",
+        "search/packer/candidates/s303_1105_regularized.cert",
+        "search/packer/candidates/s304_1105_regularized.cert"
+      ],
+      "subtree_file_count": 7,
+      "subtree_total_bytes": 249378,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "The source's MIT licence, retained by the evand-issue914-2026-11-05 packet at the same pin.",
+          "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/LICENSE"
+        },
+        {
+          "path": "search/packer/candidates/s175_1105_regularized.cert",
+          "bytes": 25651,
+          "sha256": "786519adb0c0f103b7130eae165b65feaa4e59d3b02591cdd67c37e2f615c1d4",
+          "reason": "The six regularized views this packet replays, retained by the evand-issue914-2026-11-05 packet at the same pin; pinned by digest here and compared with those copies.",
+          "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s175_1105_regularized.cert"
+        },
+        {
+          "path": "search/packer/candidates/s204_trig1_regularized.cert",
+          "bytes": 32659,
+          "sha256": "55007aca9181eeb8ac53b9e48705c716974ede0bb0feee183ac6b8c493d9d107",
+          "reason": "The six regularized views this packet replays, retained by the evand-issue914-2026-11-05 packet at the same pin; pinned by digest here and compared with those copies.",
+          "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s204_trig1_regularized.cert"
+        },
+        {
+          "path": "search/packer/candidates/s268_1105_regularized.cert",
+          "bytes": 44914,
+          "sha256": "cfb1f7a793884bb938f29f10aa7dcd93b0c078700141af98a3bceb70ec69c0b2",
+          "reason": "The six regularized views this packet replays, retained by the evand-issue914-2026-11-05 packet at the same pin; pinned by digest here and compared with those copies.",
+          "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s268_1105_regularized.cert"
+        },
+        {
+          "path": "search/packer/candidates/s293_1105_regularized.cert",
+          "bytes": 42936,
+          "sha256": "76d57b853e3e332b2e65084f07af863135dc74a1b0b179ba4a4e4d310cae9ab1",
+          "reason": "The six regularized views this packet replays, retained by the evand-issue914-2026-11-05 packet at the same pin; pinned by digest here and compared with those copies.",
+          "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s293_1105_regularized.cert"
+        },
+        {
+          "path": "search/packer/candidates/s303_1105_regularized.cert",
+          "bytes": 51111,
+          "sha256": "42a8ecd958c7f381a5ca82131b3df1f8fe237605bb44d4cb2facca07443f1940",
+          "reason": "The six regularized views this packet replays, retained by the evand-issue914-2026-11-05 packet at the same pin; pinned by digest here and compared with those copies.",
+          "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s303_1105_regularized.cert"
+        },
+        {
+          "path": "search/packer/candidates/s304_1105_regularized.cert",
+          "bytes": 51039,
+          "sha256": "ee95b657f24d0f93b2b02c073922147b36faed4996fcdd6df587f713fccad065",
+          "reason": "The six regularized views this packet replays, retained by the evand-issue914-2026-11-05 packet at the same pin; pinned by digest here and compared with those copies.",
+          "identical_to": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105_regularized.cert"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel: the licence the evand-issue914-2026-11-05 packet retains at the same pin (blob 52cf89d), pinned here against that copy. CREDITS.md says the repository's work was 'Produced by Claude (Anthropic) in a single session under human direction'; the views' commit carries a Co-Authored-By trailer naming Claude.",
+      "claims": [
+        "Issue #914 (opened 2026-11-05T19:07:50Z by evand) names six regularized views, each with its SHA-256 and each 'same side' as its certificate: s175_1105_regularized.cert, s204_trig1_regularized.cert, s268_1105_regularized.cert, s293_1105_regularized.cert and s304_1105_regularized.cert at their certificates' sides, and s303_1105_regularized.cert, whose box the issue says is 1.9e-32 larger than the KKT point's side S*, inside the certificate's side S', made after the regularizer fix of 39fb4f0. Each view's header states the same exact side as its certificate. The issue says the source's two exact checkers report VALID on all thirteen files; that statement is the author's, and no source program ran here. The views claim no bound of their own: each states its certificate's side."
+      ]
+    }
+  ]
+}

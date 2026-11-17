@@ -1,0 +1,146 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-14T21:07Z",
+  "git_scope": "A full clone of RobertoOno/squares-in-square, fetched at 21:07Z on 14 November 2026 for the intake of jlevy/squares#984 and #985; the packet pins main at b5636fd (committed 2026-11-14T20:26:58Z), as the ono-issue984-2026-11-14 packet does. #985 names fce076f, b5636fd's ancestor, 55 seconds before the issue, and every n = 147 file retained here has the same blob there. The certificate n147_S65104355.json was first committed in be713b7 (2026-11-11T22:15:40Z). The scope is the n = 147 certificate, every n = 147 file under evidence/registration and opt.py, the polish the issue names, retained here, and the root and run files the ono-issue984-2026-11-14 packet retains from the same pin, each pinned against its byte-identical copy there. The SHA-256 the issue states for n147_S65104355.json, n147.cert and n147.strict.cert match the files. The raster cand147.png is pinned by digest only. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "ono-issue985-2026-11-14",
+      "source_url": "https://github.com/RobertoOno/squares-in-square",
+      "source_ref": "main",
+      "source_commit": "b5636fd6694d2cc7aa5811ae33f441268b81b714",
+      "committed_utc": "2026-11-14T20:26:58Z",
+      "git_tree": "886c4ba7e7243ea24f58778281723fd342e061d6",
+      "archived_path": "packing/resources/web/ono-issue985-2026-11-14/source",
+      "subtree_manifest": "packing/resources/web/ono-issue985-2026-11-14/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "VERIFIER.sha256",
+        "runs/2026-11-11_fable-5.2/FOLLOWUP.md",
+        "runs/2026-11-11_fable-5.2/REPORT.md",
+        "runs/2026-11-11_fable-5.2/RUN.md",
+        "runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json",
+        "runs/2026-11-11_fable-5.2/evidence/cand147.png",
+        "runs/2026-11-11_fable-5.2/evidence/candidates_notes.md",
+        "runs/2026-11-11_fable-5.2/evidence/kaggle_per_puzzle_check.md",
+        "runs/2026-11-11_fable-5.2/evidence/registration/frozen_verifier_n147.strict.txt",
+        "runs/2026-11-11_fable-5.2/evidence/registration/frozen_verifier_n147.txt",
+        "runs/2026-11-11_fable-5.2/evidence/registration/indep_check_n147.txt",
+        "runs/2026-11-11_fable-5.2/evidence/registration/issue_n147.md",
+        "runs/2026-11-11_fable-5.2/evidence/registration/n147.cert",
+        "runs/2026-11-11_fable-5.2/evidence/registration/n147.strict.cert",
+        "runs/2026-11-11_fable-5.2/evidence/registration/n147.strict.json",
+        "runs/2026-11-11_fable-5.2/evidence/registration/strict_check_n147.strict.txt",
+        "runs/2026-11-11_fable-5.2/evidence/registration/strict_check_n147.txt",
+        "runs/2026-11-11_fable-5.2/search/README.md",
+        "runs/2026-11-11_fable-5.2/search/fu_strict_check.py",
+        "runs/2026-11-11_fable-5.2/search/indep_check.py",
+        "runs/2026-11-11_fable-5.2/search/opt.py",
+        "verify.py"
+      ],
+      "subtree_file_count": 24,
+      "subtree_total_bytes": 420987,
+      "retained_file_count": 11,
+      "retained_total_bytes": 197991,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "sha256": "337190927b2142ad7a742d962edaeb65e38454b2e82f377ac0e04bbd7f4c3ebc",
+          "reason": "The repository's MIT notice, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "bytes": 3501,
+          "sha256": "a2c2878ad126d31f91e4a0d340136d8dfb9e092096e7f3e94dd122d5d12b4119",
+          "reason": "The harness README, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/README.md"
+        },
+        {
+          "path": "VERIFIER.sha256",
+          "bytes": 163,
+          "sha256": "231dcf62b63963c180cded142f5c8229a7c07fd25447651eed07981690c22fe1",
+          "reason": "The digests of the frozen verifier and its tests, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/VERIFIER.sha256"
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/FOLLOWUP.md",
+          "bytes": 8679,
+          "sha256": "e14ce1d487f6c31bb73d4c140839c24588a54ac364a4ac311155d14046d00ce4",
+          "reason": "The run's follow-up log, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/FOLLOWUP.md"
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/REPORT.md",
+          "bytes": 26944,
+          "sha256": "40cd39badece1f6cf3f36d0e081a62cf008ee564ccb409645e14c772be0e45a3",
+          "reason": "The run's report, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/REPORT.md"
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/RUN.md",
+          "bytes": 4398,
+          "sha256": "006b93250b0a4e6fe5f5638f14c7b6170a61f720e3f29cf4ff8bdc3f51a2fbaf",
+          "reason": "The run's record, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/RUN.md"
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/evidence/cand147.png",
+          "bytes": 143158,
+          "sha256": "677c92698e2b54512612813061cab7c0eaf3f910e76e642113a73659d14cda67",
+          "reason": "A raster picture of the packing for inspection, which decides nothing; pinned by digest only."
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/evidence/candidates_notes.md",
+          "bytes": 7390,
+          "sha256": "a5442ada2f2f8f3b58be71675ca79de4c59ccb598c9a96f86aa5be7d09b7d77e",
+          "reason": "The run's candidate notes, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/evidence/candidates_notes.md"
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/evidence/kaggle_per_puzzle_check.md",
+          "bytes": 6762,
+          "sha256": "50a90e73ec08989d42b8fd6e4161dc515c8c4ce473786bffedcd50d0fba6a3b1",
+          "reason": "The run's leaderboard check, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/evidence/kaggle_per_puzzle_check.md"
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/search/README.md",
+          "bytes": 5672,
+          "sha256": "ab5b0efaa7ccfb40c65f094d71d62ab0f8599c92e9f13409a041b6fd63df18cd",
+          "reason": "The run's search README, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/search/README.md"
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/search/fu_strict_check.py",
+          "bytes": 3756,
+          "sha256": "e15dda6038ea9b4566b6db6595f3f5eee4e4a9c24cff3c6f1646a7b57398fc27",
+          "reason": "The author's strict checker, never executed here, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/search/fu_strict_check.py"
+        },
+        {
+          "path": "runs/2026-11-11_fable-5.2/search/indep_check.py",
+          "bytes": 3690,
+          "sha256": "1ed97b2c415e697cc7305193a7e570bbcb3cd6a3a3776cd4fb93abf069aff2e7",
+          "reason": "The author's clipping checker, never executed here, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/search/indep_check.py"
+        },
+        {
+          "path": "verify.py",
+          "bytes": 7815,
+          "sha256": "aa603403f5e07445d206bffb9af23da0cf1e2b744d206443bcfa87ba70d63891",
+          "reason": "The repository's frozen exact verifier, never executed here, byte-identical to the copy the ono-issue984-2026-11-14 packet retains from the same pin.",
+          "identical_to": "packing/resources/web/ono-issue984-2026-11-14/source/verify.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Roberto Ono, as LICENSE at the pin states (1,068 bytes), for the repository's files: the harness, the frozen verifier, the run's code, report, certificates and evidence. The repository states no other licence for its data; the certificates and their text copies are retained under the same notice, which the packet keeps beside them. The issue says the packing was found, certified and checked by an AI coding agent (Claude, by Anthropic) working in the repository's harness, directed by a person who set the harness up and read the request before it was posted.",
+      "claims": [
+        "n147_S65104355.json is an exact rational certificate of 147 unit squares, each its centre (cx, cy) in [0, S]^2 and t = tan(theta/2), in a square of rational side S whose 12-place ceiling #985 prints as the bound, 12.651043556588; the issue also prints the exact side to 30 places, 12.651043556587694471904370629016..., and states that it is 0.005810692904685 below the registry's 12.65685424949238 (= 7 + 4 sqrt(2)), read at main fa980f8e. evidence/registration/n147.cert is the same packing as text. n147.strict.cert and n147.strict.json are the packing moved by (1e-15, 1e-15) in a square of side S + 2e-15. The issue says the packing touches the four walls. Feasibility only: no optimality, KKT or rigidity claim.",
+        "The issue reports the author's runs of verify.py (all 10731 pairs) VALID, indep_check.py (328 close pairs) PASSED and fu_strict_check.py on the strict copy STRICT VALID, least pair margin 3.003e-10, least wall margin 1e-15, with the same statement of what the checkers share as #984's. Those statements are the author's; no source program ran here.",
+        "The issue discloses first that the packing does not beat the Kaggle per-puzzle leaderboard's side-only entry at 147, 12.651043553172632772258400... (team Nevska, 7 November), 3.415e-09 below this side, which supplies no packing. Its lineage: the registry's n = 229 record (Evan Daniel, 2026-10-20, side 15.6501615138764..., W-known-best-n229), a three-wide diagonal band of tilted squares between two corner-anchored grids, with every square of 13 <= x + y < 19 deleted and the squares beyond moved by (-3, -3), removing one period of the band; 147 squares overlap by at most 0.010 and a penalty step and an exact-constraint sequential-LP polish (search/opt.py) remove the overlaps at a cost of 0.00088 in side. It says other cuts and seven other copies or versions of the n = 229 packing give 12.651043557 to 12.651056453, that the registry's n = 147 packing, the 45-degree arrangement shared with n = 148, is a different arrangement, asks that Daniel's n = 229 packing be credited as the start and Roberto Ono as the credit name, and says the packing was found by an AI coding agent (Claude, by Anthropic) directed by a person."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "C_u", "h0": "1/4000", "ok": 27308, "cells": 53224, "fails": 0, "worst": 0.0, "secs": 12738}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_t t+1", "h0": "1/4000", "ok": 24, "cells": 47, "fails": 0, "worst": 0.0, "secs": 24}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_t t-1", "h0": "1/4000", "ok": 18, "cells": 35, "fails": 0, "worst": 0.0008509487064781221, "secs": 19}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_d d+1", "h0": "1/4000", "ok": 14, "cells": 27, "fails": 0, "worst": 0.0032212664084091034, "secs": 13}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_d d-1", "h0": "1/4000", "ok": 14, "cells": 27, "fails": 0, "worst": 0.018033427562, "secs": 13}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_td t+1 d+1 a", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0032506729795, "secs": 6}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_td t+1 d+1 b", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0032506729795, "secs": 6}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_td t+1 d-1 a", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.018033427562, "secs": 6}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_td t+1 d-1 b", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.018033427562, "secs": 6}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_td t-1 d+1 a", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.0041099833315, "secs": 6}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_td t-1 d+1 b", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.00407992141931, "secs": 7}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_td t-1 d-1 a", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.018892737914, "secs": 6}
+{"tile": "d0=3/2 sign=-1 line 3.6 1.5", "chart": "W_td t-1 d-1 b", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.01888181354075, "secs": 6}
+ALL-OK

@@ -90,7 +90,7 @@ import sys
 import tempfile
 import zipfile
 import zlib
-from collections.abc import Callable, Collection, Mapping
+from collections.abc import Callable, Collection, Mapping, Sequence
 from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
 from fractions import Fraction
@@ -122,6 +122,7 @@ from devtools.retained_data import read_retained_bytes
 from sqpack.field import FieldElement
 from sqpack.witness import (
     WitnessError,
+    check_witness_semantics,
     validate_witness_document,
     witness_document,
     witness_envelope,
@@ -660,9 +661,28 @@ def pingyou_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
     return _certificate(n, _literal(value["s_exact"], f"n={n} side"), _triples(squares, n))
 
 
-#: The only frame and the only schema name a corner witness may state for `witness_corners`.
+#: The only frame and the schema names a corner witness may state for `witness_corners`: the
+#: file name a source's witness states, or the path the regularized atlas's own corner views
+#: state from `atlas/known-best/regularized/`, which the review of 9 November 2026 asked the
+#: reader to accept so that the 307 view could be measured (F14), or the path the house
+#: witnesses state from `witnesses/known-best/`, so that a grid house, which has no packet,
+#: can be measured (think-bcfs, at 157), or the schema's address on this repository's main
+#: branch, which Joost de Winter's corner witness of issue 996 names, so that it can be
+#: measured against his JSON of the same packing (think-32cl). Either way the document is
+#: validated against this repository's schema file.
 CORNER_FRAME = {"origin": "lower-left", "axes": "x-right-y-up", "angle_unit": "not-applicable"}
 CORNER_SCHEMA = "witness.schema.yaml"
+CORNER_SCHEMA_URL = (
+    "https://github.com/jlevy/squares/blob/main/packing/witnesses/witness.schema.yaml"
+)
+CORNER_SCHEMAS = frozenset(
+    {
+        CORNER_SCHEMA,
+        "../../../witnesses/witness.schema.yaml",
+        "../witness.schema.yaml",
+        CORNER_SCHEMA_URL,
+    }
+)
 #: Corners as ``sqpack.witness`` materializes a centre and basis, in half-diagonal units.
 CORNER_ORDER = ((-1, -1), (1, -1), (1, 1), (-1, 1))
 
@@ -678,9 +698,11 @@ def pose_corners(pose: legacy.Pose) -> list[tuple[Fraction, Fraction]]:
 def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
     """A rational ``corners`` Witness/v2, read back exactly to centres and half-angles.
 
-    The document must name the witness schema by its file name, which is read from this
+    The document must name the witness schema by its file name, or by the path the
+    regularized atlas's views name it by (`CORNER_SCHEMAS`), which is read from this
     repository, pass it and its semantic checks, state ``n`` unit squares numbered 1 to
-    ``n`` in order in the lower-left frame, and list each square's corners in the order
+    ``n`` in order in the lower-left frame, each id the number or ``square-`` and the number
+    (Joost de Winter's form, #996), and list each square's corners in the order
     `pose_corners` writes them. A pose is recovered as the corners' mean and
     ``t = s / (1 + c)`` from the first edge ``(c, s)``, and the four corners must be
     exactly that pose's, which holds only for a unit square in that order. Corners listed
@@ -688,13 +710,35 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
     reads them as another packing.
     """
     _no_options(options, "witness-corners")
+    return _corner_witness(raw, n, start=0)
+
+
+def witness_corners_opposite(
+    raw: bytes, n: int, options: Mapping[str, str]
+) -> legacy.Certificate:
+    """`witness_corners` for a witness whose corners start at the opposite vertex (#996, #997).
+
+    Joost de Winter's corner twins of #996 and #997 list each square's corners
+    counterclockwise from the corner at ``C + (u + v) / 2`` of its centre ``C`` and edge
+    directions ``u`` and ``v = u`` turned a quarter, the vertex opposite the one
+    `pose_corners` starts from. Read by `witness_corners`, each square is the same square a
+    half turn on, and an upright one has no finite half-angle there. This reads the list
+    from its third corner, so each pose is the one the source's own centre-direction JSON
+    states, and every other rule of `witness_corners` holds.
+    """
+    _no_options(options, "witness-corners-opposite")
+    return _corner_witness(raw, n, start=2)
+
+
+def _corner_witness(raw: bytes, n: int, *, start: int) -> legacy.Certificate:
+    """`witness_corners`, its corner lists read from their corner ``start`` (0 to 3)."""
     try:
         document = load_yaml(_text(raw))
     except yaml.YAMLError as error:
         raise ReportError(f"n={n}: invalid witness YAML: {error}") from error
     metadata = document.get("softschema") if type(document) is dict else None
     _require(
-        type(metadata) is dict and metadata.get("schema") == CORNER_SCHEMA,
+        type(metadata) is dict and metadata.get("schema") in CORNER_SCHEMAS,
         f"n={n}: a corner witness names {CORNER_SCHEMA} as its schema",
     )
     try:
@@ -714,8 +758,12 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
     rows = []
     for index, square in enumerate(witness["squares"], start=1):
         where = f"n={n} square {index}"
-        _require(square["id"] == index, f"{where}: squares are not numbered 1..n in order")
-        corners = [(_literal(x, where), _literal(y, where)) for x, y in square["corners"]]
+        _require(
+            square["id"] in (index, f"square-{index}"),
+            f"{where}: squares are not numbered 1..n in order",
+        )
+        listed = [(_literal(x, where), _literal(y, where)) for x, y in square["corners"]]
+        corners = listed[start:] + listed[:start]
         c, s = corners[1][0] - corners[0][0], corners[1][1] - corners[0][1]
         _require(c != -1, f"{where}: no finite half-angle")
         x = sum((x for x, _ in corners), Fraction(0)) / 4
@@ -740,6 +788,32 @@ def witness_center_basis(raw: bytes, n: int, options: Mapping[str, str]) -> lega
     where ``c^2 + s^2 = 1``.
     """
     _no_options(options, "witness-center-basis")
+    return _center_basis_witness(raw, n, unreplayed=False)
+
+
+#: The one semantic rule `witness_center_basis_unreplayed` reads past.
+UNREPLAYED_CLAIM = "verified claims require a replayable certificate record"
+
+
+def witness_center_basis_unreplayed(
+    raw: bytes, n: int, options: Mapping[str, str]
+) -> legacy.Certificate:
+    """A rational centre-basis Witness/v2 whose verified claim names no certificate (#977).
+
+    Joost de Winter's witnesses from ``57de046`` on carry the envelope and a ``claim`` of
+    ``coordinate_provenance: verified`` with no ``certificate`` record. They pass this
+    repository's witness schema, and the loader refuses them on one rule the schema does not
+    state, `UNREPLAYED_CLAIM` (the de-winter-method-132-157-2026-11-12 packet's README).
+    This reads such a file as `witness_center_basis` does, held to the schema and to every
+    other semantic rule, and refuses it unless that rule is the only problem: the claim is
+    read and not believed, since a replay here decides the geometry, not the claim.
+    """
+    _no_options(options, "witness-center-basis-unreplayed")
+    return _center_basis_witness(raw, n, unreplayed=True)
+
+
+def _center_basis_witness(raw: bytes, n: int, *, unreplayed: bool) -> legacy.Certificate:
+    """`witness_center_basis`, or with ``unreplayed`` its reading past `UNREPLAYED_CLAIM`."""
     try:
         document = load_yaml(_text(raw))
     except yaml.YAMLError as error:
@@ -756,8 +830,19 @@ def witness_center_basis(raw: bytes, n: int, options: Mapping[str, str]) -> lega
             path=WITNESS_SCHEMA,
             fallback_schema=WITNESS_SCHEMA,
         )
+        _require(not unreplayed, f"n={n}: the witness's claim is replayable; read it as such")
     except WitnessError as error:
-        raise ReportError(f"n={n}: not a valid witness: {error}") from error
+        # The semantic rules run only once the schema has passed, so a semantic refusal
+        # whose every problem is the unreplayed claim leaves a witness the schema admits.
+        stated: Any = fields.get("witness")
+        if not (
+            unreplayed
+            and error.kind == "semantic-invalid"
+            and type(stated) is dict
+            and check_witness_semantics(cast("dict[str, Any]", stated)) == [UNREPLAYED_CLAIM]
+        ):
+            raise ReportError(f"n={n}: not a valid witness: {error}") from error
+        witness = cast("dict[str, Any]", stated)
     _require(
         witness["n"] == n
         and witness["representation"] == "center-basis"
@@ -820,6 +905,127 @@ def center_basis_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.
     return _certificate(n, _literal(value["side"], f"n={n} side"), rows)
 
 
+def _centre_basis_row(
+    centre: Sequence[object], basis: Sequence[object], where: str
+) -> tuple[Fraction, Fraction, Fraction]:
+    """A centre and a unit edge direction ``(c, s)`` of rational strings, as ``(x, y, t)``.
+
+    Read as `center_basis_json` reads its squares: ``t = s / (1 + c)``, refused where
+    ``c = -1`` or where the basis is not exactly the rotation ``t`` gives.
+    """
+    x, y = (_literal(value, where) for value in centre)
+    c, s = (_literal(value, where) for value in basis)
+    _require(c != -1, f"{where}: no finite half-angle")
+    pose = legacy.Pose(x, y, s / (1 + c))
+    _require(pose.basis == (c, s), f"{where}: the basis is no rotation")
+    return pose.x, pose.y, pose.t
+
+
+#: The fields of a bare centre-basis witness (`witness_center_basis_bare`); ``notes`` may
+#: also appear.
+_BARE_WITNESS = frozenset(
+    {"id", "n", "side", "square_size", "representation", "scalar", "coordinates", "squares"}
+)
+
+
+def witness_center_basis_bare(
+    raw: bytes, n: int, options: Mapping[str, str]
+) -> legacy.Certificate:
+    """A rational centre-basis witness without this repository's envelope (#939).
+
+    Joost de Winter's ``n199_witness.yaml`` follows Witness/v2's ``witness`` object, but
+    it has no ``softschema`` block and no ``claim``, it has a ``notes`` field, and its id
+    has capitals, so the schema refuses it and `witness_center_basis` refuses it with the
+    schema. This reads its geometry exactly as that adapter does, and nothing else. The
+    document must be exactly one ``witness`` object of the known fields, stating ``n``
+    unit squares with distinct integer ids in the lower-left frame, each exactly an
+    ``id``, a ``center`` and a ``basis`` of rational strings. Its ``id`` and ``notes`` are
+    read and not believed. A document that carries the envelope is refused here, since
+    `witness_center_basis` reads it.
+    """
+    _no_options(options, "witness-center-basis-bare")
+    try:
+        document = load_yaml(_text(raw))
+    except yaml.YAMLError as error:
+        raise ReportError(f"n={n}: invalid witness YAML: {error}") from error
+    _require(
+        type(document) is dict and set(cast("dict[str, Any]", document)) == {"witness"},
+        f"n={n}: not exactly one witness object",
+    )
+    witness: Any = cast("dict[str, Any]", document)["witness"]
+    _require(
+        type(witness) is dict
+        and _BARE_WITNESS <= set(witness) <= _BARE_WITNESS | {"notes"}
+        and type(witness["id"]) is str
+        and type(witness.get("notes", "")) is str,
+        f"n={n}: not a witness object of the known fields",
+    )
+    _require(
+        type(witness["n"]) is int
+        and witness["n"] == n
+        and witness["representation"] == "center-basis"
+        and witness["scalar"] == {"kind": "rational"}
+        and witness["square_size"] == "1"
+        and witness["coordinates"] == CORNER_FRAME,
+        f"n={n}: not a rational centre-basis witness of {n} unit squares in the lower-left "
+        "frame",
+    )
+    squares: Any = witness["squares"]
+    _require(type(squares) is list and len(squares) == n, f"n={n}: not {n} squares")
+    ids: list[int] = []
+    rows = []
+    for index, square in enumerate(cast("list[Any]", squares), start=1):
+        where = f"n={n} square {index}"
+        fields: dict[str, Any] = square if type(square) is dict else {}
+        _require(
+            set(fields) == {"id", "center", "basis"}
+            and type(fields["id"]) is int
+            and all(
+                type(fields[key]) is list and len(fields[key]) == 2
+                for key in ("center", "basis")
+            ),
+            f"{where}: not exactly an id, a centre and a basis of two rationals each",
+        )
+        ids.append(fields["id"])
+        rows.append(_centre_basis_row(fields["center"], fields["basis"], where))
+    _require(len(set(ids)) == n, f"n={n}: square ids are not {n} distinct ids")
+    return _certificate(n, _literal(witness["side"], f"n={n} side"), rows)
+
+
+def center_direction_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Rational centre-direction JSON (#939): ``[x, y, c, s]`` rows beside the side.
+
+    Joost de Winter's ``n199_exact.json`` states each unit square as a list of four
+    rational strings, its centre in ``[0, S]^2`` and ``(c, s)``, the unit direction of
+    one edge: the basis `center_basis_json` reads, read the same way. Besides ``n``,
+    ``side`` and ``squares``, the object must hold ``square_size``, which is ``"1"``,
+    and ``format``, a label read and not believed. It may hold
+    ``optimum_minimal_polynomial``, a list of integers that the source says its side lies
+    just above a root of. That is also read and not believed: a finite certificate proves
+    its own side and nothing about a polynomial. JSON numbers are refused as
+    coordinates, so no float is read.
+    """
+    _no_options(options, "center-direction-json")
+    value = _json(raw)
+    squares = _squares(value, n)
+    required = {"n", "side", "square_size", "format", "squares"}
+    polynomial = value.get("optimum_minimal_polynomial", [])
+    _require(
+        required <= set(value) <= required | {"optimum_minimal_polynomial"}
+        and value["square_size"] == "1"
+        and type(value["format"]) is str
+        and type(polynomial) is list
+        and all(type(coefficient) is int for coefficient in polynomial),
+        f"n={n}: not a centre-direction certificate of only the known fields",
+    )
+    rows = []
+    for index, square in enumerate(squares, start=1):
+        where = f"n={n} square {index}"
+        _require(type(square) is list and len(square) == 4, f"{where}: not x, y, c and s")
+        rows.append(_centre_basis_row(square[:2], square[2:], where))
+    return _certificate(n, _literal(value["side"], f"n={n} side"), rows)
+
+
 def centred_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
     """Centred JSON (#483): ``side`` and ``{x, y, t}`` squares in [-S/2, S/2]^2.
 
@@ -848,6 +1054,35 @@ def centred_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
         )
         x, y, t = (_literal(square[key], f"n={n} square {index}") for key in ("x", "y", "t"))
         rows.append((x + side / 2, y + side / 2, t))
+    return _certificate(n, side, rows)
+
+
+def ono_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Roberto Ono's harness JSON (#984, #985): ``side`` and ``{cx, cy, t}`` squares.
+
+    Centres lie in [0, S]^2 and ``t = tan(theta/2)``, as in Evan Daniel's format, whose text
+    copy the source keeps beside each certificate. ``side_decimal_info_only`` is the
+    source's display, read and not believed; the copies the source moves off the walls for
+    strict checkers carry no such field.
+    """
+    _no_options(options, "ono-json")
+    value = _json(raw)
+    squares = _squares(value, n)
+    required = {"n", "side", "squares"}
+    _require(
+        required <= set(value) <= required | {"side_decimal_info_only"}
+        and type(value.get("side_decimal_info_only", "")) is str,
+        f"n={n}: not a harness certificate with only the known fields",
+    )
+    side = _literal(value["side"], f"n={n} side")
+    rows: list[tuple[Fraction, Fraction, Fraction]] = []
+    for index, square in enumerate(squares, start=1):
+        _require(
+            type(square) is dict and set(square) == {"cx", "cy", "t"},
+            f"n={n} square {index}: exactly cx, cy and t",
+        )
+        x, y, t = (_literal(square[key], f"n={n} square {index}") for key in ("cx", "cy", "t"))
+        rows.append((x, y, t))
     return _certificate(n, side, rows)
 
 
@@ -1093,9 +1328,14 @@ ADAPTERS: dict[str, Adapter] = {
     "squish-json": squish_json,
     "pingyou-json": pingyou_json,
     "witness-corners": witness_corners,
+    "witness-corners-opposite": witness_corners_opposite,
     "witness-center-basis": witness_center_basis,
+    "witness-center-basis-bare": witness_center_basis_bare,
+    "witness-center-basis-unreplayed": witness_center_basis_unreplayed,
     "center-basis-json": center_basis_json,
+    "center-direction-json": center_direction_json,
     "centred-json": centred_json,
+    "ono-json": ono_json,
     "decimal-dilation": decimal_dilation,
     "sqcert": sqcert,
     "calle-txt": calle_txt,
@@ -1524,6 +1764,93 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # (think-otv6) and issue 894 at 204 (think-8b8m).
     "[Özden s299 upper bound 2026-11-03]": _import("ozden-s299-upper-bound-2026-11-03"),
     "[Özden s204 upper bound 2026-11-03]": _import("ozden-s204-upper-bound-2026-11-03"),
+    # The intake pass's lane L48 of 5 November (think-3guf): Kaelan Yim's issue 895 at 260
+    # (think-qclj), retained at vitamoon/vitamoon d11a8a1 once the author named the file.
+    "[Yim s260 upper bound 2026-11-05]": _import("yim-s260-upper-bound-2026-11-05"),
+    # The intake pass's lane L51 of 5 November (think-3guf): Evan Daniel's issue 914 at 175,
+    # 204, 260, 268, 293, 303 and 304 (think-ahvh). The views packet of the same pin carries
+    # the same key and no reader: its sides are these certificates'.
+    "[Daniel issue 914 2026-11-05]": _import("evand-issue914-2026-11-05"),
+    # The release's 175 and 260 under keys of their own, whose credits are those counts'
+    # (F13 of the 5 November review), read from the same packet.
+    "[Daniel issue 914 n175 2026-11-05]": _import("evand-issue914-2026-11-05"),
+    "[Daniel issue 914 n260 2026-11-05]": _import("evand-issue914-2026-11-05"),
+    # The intake pass's lane L63 of 9 November (think-3guf): Doğa Özden's issues 927 to 931
+    # at 232, 268, 299, 303 and 307 (think-463r), one repository and one packet each.
+    "[Özden s232 upper bound 2026-11-09]": _import("ozden-s232-upper-bound-2026-11-09"),
+    "[Özden s268 upper bound 2026-11-09]": _import("ozden-s268-upper-bound-2026-11-09"),
+    "[Özden s299 upper bound 2026-11-09]": _import("ozden-s299-upper-bound-2026-11-09"),
+    "[Özden s303 upper bound 2026-11-09]": _import("ozden-s303-upper-bound-2026-11-09"),
+    "[Özden s307 upper bound 2026-11-09]": _import("ozden-s307-upper-bound-2026-11-09"),
+    # The intake pass's lane L71 of 9 November (think-3guf): Doğa Özden's issues 935 and 936
+    # at 172 and 270 (think-he66), one repository and one packet each.
+    "[Özden s172 upper bound 2026-11-09]": _import("ozden-s172-upper-bound-2026-11-09"),
+    "[Özden s270 upper bound 2026-11-09]": _import("ozden-s270-upper-bound-2026-11-09"),
+    # Lane L76 of 9 November (think-3guf): Doğa Özden's issue 938 at 199 (think-1goz), the
+    # 172 packing of issue 935 (T-282) plus an L of 27 grid squares.
+    "[Özden s199 upper bound 2026-11-09]": _import("ozden-s199-upper-bound-2026-11-09"),
+    # Lane L81 of 11 November (think-3guf): Doğa Özden's issues 943, 944, 945 and 947 at 156,
+    # 180, 268 and 269 (think-xq4o), one repository and one packet each.
+    "[Özden s156 upper bound 2026-11-10]": _import("ozden-s156-upper-bound-2026-11-10"),
+    "[Özden s180 upper bound 2026-11-10]": _import("ozden-s180-upper-bound-2026-11-10"),
+    "[Özden s268 upper bound 2026-11-10]": _import("ozden-s268-upper-bound-2026-11-10"),
+    "[Özden s269 upper bound 2026-11-11]": _import("ozden-s269-upper-bound-2026-11-11"),
+    # Lane L100 of 11 November (think-3guf): Doğa Özden's issue 954 at 179 (think-f65n), a
+    # band built from the registry's 70, one repository and one packet.
+    "[Özden s179 upper bound 2026-11-11]": _import("ozden-s179-upper-bound-2026-11-11"),
+    # Lane L107 of 11 November (think-3guf): the same author's issue 959 at 179
+    # (think-89i7), 4.07e-4 below his 954 (T-291), the same band method on a later batch;
+    # one repository and one packet.
+    "[Özden s179 issue 959 2026-11-11]": _import("ozden-s179-issue959-2026-11-11"),
+    # Lane L110 of 11 November (think-3guf): Doğa Özden's issue 960 at 237 (think-my76), a
+    # band built from two copies of the registry's 70, one repository and one packet.
+    "[Özden s237 upper bound 2026-11-11]": _import("ozden-s237-upper-bound-2026-11-11"),
+    # Lane L120 of 12 November (think-3guf): Doğa Özden's issue 962 at 269 (think-s418), a
+    # band built from tilted squares of the registry's 207 and 70 and his own 179, below his
+    # own T-290; one repository and one packet.
+    "[Özden s269 issue 962 2026-11-11]": _import("ozden-s269-issue962-2026-11-11"),
+    # Lane L132 of 12 November (think-3guf): Doğa Özden's issue 967 at 269 (think-n73d), a
+    # column-band design of his own, below his own T-296 and T-290; one repository and one
+    # packet.
+    "[Özden s269 upper bound 2026-11-12]": _import("ozden-s269-upper-bound-2026-11-12"),
+    # The intake pass's lane L65 of 9 November (think-h96r): Kaelan Yim's certificates at
+    # vitamoon/vitamoon ac14112, which no issue reports; T-280 and T-281 are held below the
+    # stage 4 exit for the owner (think-ruu2's RV-3, think-ikku).
+    "[Yim certificates 2026-11-09]": _import("yim-certificates-2026-11-09"),
+    # Lane L78 of 10 November (think-2h88): Joost de Winter's issue 939 at 199, T-284's
+    # packing with its core re-solved; T-285 is held below the stage 4 exit for the owner
+    # (think-ruu2's RV-3).
+    "[de Winter s199 upper bound 2026-11-09]": _import("de-winter-s199-upper-bound-2026-11-09"),
+    # The same lane, 11 November: his issue 946 at 172, that packing's core, T-282's
+    # arrangement re-solved; T-286 is held with T-285.
+    "[de Winter s172 upper bound 2026-11-10]": _import("de-winter-s172-upper-bound-2026-11-10"),
+    # Lane L104 of 11 November (think-bcfs): Joost de Winter's issue 958, pinwheels at 132 and
+    # 157 at JoostdeWinter/square-packing 6617869, one packet each.
+    "[de Winter s132 upper bound 2026-11-11]": _import("de-winter-s132-upper-bound-2026-11-11"),
+    "[de Winter s157 upper bound 2026-11-11]": _import("de-winter-s157-upper-bound-2026-11-11"),
+    # Lane L154 of 14 November (think-g2ax): Joost de Winter's issue 977 at 297, T-174's layout
+    # with a double step in each staircase, at JoostdeWinter/square-packing 7b4701f.
+    "[de Winter s297 upper bound 2026-11-14]": _import("de-winter-s297-upper-bound-2026-11-14"),
+    # Lane L160 of 14 November (think-14i2): Doğa Özden's issue 983 at 228, a column-band
+    # design of his own, below T-174's packing; one repository and one packet.
+    "[Özden s228 upper bound 2026-11-14]": _import("ozden-s228-upper-bound-2026-11-14"),
+    # Lane L164 of 14 November (think-17ex): Roberto Ono's issues 984 at 228, five band
+    # periods cut from Francisco Couzo's 404, and 985 at 147, one period cut from Evan Daniel's
+    # 229; one repository, squares-in-square b5636fd, and a packet for each issue.
+    "[Ono issue 984 2026-11-14]": _import("ono-issue984-2026-11-14"),
+    "[Ono issue 985 2026-11-14]": _import("ono-issue985-2026-11-14"),
+    # Lane L170 of 15 November (think-i8y9): jazivxt's issue 989 at 90, posted by the account
+    # dpre4ai, a window of copies of a crop of Joost de Winter's 157 (T-293), the first below
+    # the 10 x 10 grid; one repository and one packet, its certificate in Evan Daniel's text.
+    "[jazivxt s90 upper bound 2026-11-15]": _import("jazivxt-s90-upper-bound-2026-11-15"),
+    # Lane L181 of 15 November (think-32cl): Joost de Winter's issue 997 at 90, which
+    # replaced his issue 996's certificate, a local search's improvement of jazivxt's T-303;
+    # his watched repository, its centre-direction JSON.
+    "[de Winter s90 upper bound 2026-11-15]": _import("de-winter-s90-upper-bound-2026-11-15"),
+    # Lane L187 of 16 November (think-0y9m): JoeGun's issue 1001 at 127, 204, 232, 264 and
+    # 305, his improvements of Tomas Kodaj's public Kaggle packings; corner Witness/v2 files
+    # made by this repository's promotion tool, in one repository and one packet.
+    "[JoeGun upper bounds 2026-11-16]": _import("joegun-upper-bounds-2026-11-16"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

@@ -1,0 +1,16 @@
+# Lane L180 findings frozen at 2026-11-15T12:23:58Z, before the author's n90/README.md, REGISTRATION.md, SHA256SUMS, verify_exact.py, check_area.py or figures, the repository README or LICENSE, the register entries, case record, house witness or T-303's certificate at 90, any import lane's work (L181 and its branch), or this repository's verifier, promotion, witness, identity or contraction code was opened.
+6926820061e3abf79e727389f7c7b92316652872724aa21115a896fe822c1a9a  frozen/review-2026-11-15-de-winter-996.frozen.md
+# lines and bytes: 551 38893
+# checker list:
+7c9550a0fb7b503af014f3b7b7596416f3e4fab55497e0ec09f94b9243094d2a  frozen/checker-frozen-digests.txt
+# controls plan list:
+391c434d32fdd2fd9629dafd11b022dba3b090928eadacb6fc3d7950f613f676  frozen/controls-plan-digest.txt
+# receipts and programs at the freeze:
+ba9386fe3d7cb7539ee557344c3c59a46ea62f00e4eaccd172afc87a904413c6  out/selftest.json
+b6b364bab77730856de60407b695ca8dd6f0f3f3d883dc085a4d8080f71d1d0b  out/check-n90.json
+38c322c2982caf3078203938930cef651a56d3fe106f8f0a338e65245d1ac9d0  out/plan-facts-n90.json
+2fe05d0a3d84f8453284ae276e8cd5b4f0df346abe16cdf7ad0a6c5e431ac7f3  out/controls-n90.json
+e67c13966b6fdf4e54eb8be0c1c5dad80cbad600bfa289d855a202add9ae9337  out/describe-n90.json
+31a2b55110de9600dc8889648e738caf9c62fe7d4c6d67e491b08203bc0364b2  programs/controls-plan.json
+37abb13791e588f42284161b30497d5ffd3f24fd5f225aa4826c3e60e1e688a0  programs/l180_controls.py
+efae6bd3fcfd44aed6049eca0fc2f2e2995b481aaa9ad5b7ea02b8458ab18be8  programs/l180_describe.py

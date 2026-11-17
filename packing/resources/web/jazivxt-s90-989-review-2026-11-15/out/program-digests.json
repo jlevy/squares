@@ -1,0 +1,307 @@
+{
+ "program": "l169_digests.py",
+ "frozen_digests": [
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "179fcba:n90.cert",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "l169_reader.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "l169_sat.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "l169_clip.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "l169_decide.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "l169_check.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "l169_geom.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "l169_selftest.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "out/selftest.json",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "path": "out/check-n90.json",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "path": "programs/controls-plan.json",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "path": "out/plan-facts-n90.json",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "path": "out/check-n90.json",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "path": "programs/l169_plan_facts.py",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "path": "programs/l169_make_plan.py",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "frozen/review-2026-11-15-jazivxt-989.frozen.md",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "frozen/checker-frozen-digests.txt",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "frozen/controls-plan-digest.txt",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "out/selftest.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "out/check-n90.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "out/plan-facts-n90.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "out/controls-n90.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "out/describe-n90.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "programs/controls-plan.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "programs/l169_controls.py",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "path": "programs/l169_describe.py",
+   "holds": true
+  }
+ ],
+ "all_frozen_digests_hold": true,
+ "rerun": [
+  {
+   "receipt": "out/selftest.json",
+   "exit": 0,
+   "equal_but_cpu_and_time": true
+  },
+  {
+   "receipt": "out/check-n90.json",
+   "exit": 0,
+   "equal_but_cpu_and_time": true
+  },
+  {
+   "receipt": "out/plan-facts-n90.json",
+   "exit": 0,
+   "equal_but_cpu_and_time": true
+  },
+  {
+   "receipt": "programs/controls-plan.json",
+   "exit": 0,
+   "equal_but_cpu_and_time": true
+  },
+  {
+   "receipt": "out/controls-n90.json",
+   "exit": 0,
+   "equal_but_cpu_and_time": true
+  },
+  {
+   "receipt": "out/describe-n90.json",
+   "exit": 0,
+   "equal_but_cpu_and_time": true
+  }
+ ],
+ "rerun_reproduces_every_receipt": true,
+ "files": [
+  [
+   "README.md",
+   "8b9c49519169bcf9ebcea2959840a11b2247611e0a5354048baf75432dec7810"
+  ],
+  [
+   "frozen/checker-frozen-digests.txt",
+   "998ff4cacc189a47e471b653bff8e3b4d51c5c8901a3204a1d32707fdd97ffb9"
+  ],
+  [
+   "frozen/controls-plan-digest.txt",
+   "3782b4b418810c7ca2e7b25a221cdd4267d57083649593c1da6a96d80879c363"
+  ],
+  [
+   "frozen/findings-frozen-digest.txt",
+   "23fdb0bd1507b79522a897e9dff0172c8a2e27f4ce9022461c4e361a8d30c8ca"
+  ],
+  [
+   "frozen/review-2026-11-15-jazivxt-989.frozen.md",
+   "475fad339b0360c3db2b4747a333a5e42e1b1480a7ce8dc4599e108204c031d6"
+  ],
+  [
+   "out/check-n90.json",
+   "1522d283a79cd99210f00017e95eeb2fdc5f9c85e7b3bd3c7f6d658f6bf58d78"
+  ],
+  [
+   "out/contraction-house-n90.json",
+   "935a2954b68cdc26f2ded6fb2622347615a97fb6e78435237e35f32ac195be8e"
+  ],
+  [
+   "out/contraction-new-n90.json",
+   "4c138c92f9790bb601b5b7f3fb734a44525499a586bfae137e60ab86cab25f1c"
+  ],
+  [
+   "out/controls-n90.json",
+   "8509c1ee4162defa880c7aaebba23043ba5a86cf6c7073d9631ef54fbf857dec"
+  ],
+  [
+   "out/custody.json",
+   "e77508fbb9a34b284d3f921780174f98db133347a066eac20b9fffc9f317b42c"
+  ],
+  [
+   "out/describe-n90.json",
+   "8883236865ff2055ccb0547bc62fa4095f62ba2d252fd2d9390f2a3aeb12f4f9"
+  ],
+  [
+   "out/identity-n90.json",
+   "c594839523dd2928d67cad721fa113088fcceb36f8d917270f923682677d2cac"
+  ],
+  [
+   "out/lineage-n90.json",
+   "ff01c9992ff550ee99cd47250c3be086cf54472a51f86ee7789964dec7fbf36e"
+  ],
+  [
+   "out/lineage/seed-n90.cert",
+   "8a6864c196633cc03239e829f846bfceeb6205b96fc74de7e2ce8c6c25d2f79c"
+  ],
+  [
+   "out/plan-facts-n90.json",
+   "b9258aa5d431fdca9e66e51dd0c512cf7680795f1836d4734995a7143cc46ced"
+  ],
+  [
+   "out/record-n90.json",
+   "bd326f3e2954daa2408c3bd0c75ee562fb8efd10b93017fefbc15bcd374c7300"
+  ],
+  [
+   "out/selftest.json",
+   "9072593e3957cbc0357d4553c2e9135258079e7f15520f8c0cf769e2ca1b2518"
+  ],
+  [
+   "programs/controls-plan.json",
+   "71bee737ce47ea67876ff0df0ce704838a48a95f7970ab7454c4bb53cb1663f9"
+  ],
+  [
+   "programs/issue-989.json",
+   "aab2455acd2927eec6bc4e99edda83d2328b0a4feaf40116afe7ee68afb18ca6"
+  ],
+  [
+   "programs/l169_check.py",
+   "595186deef417634e85f453029c9cc3ef562f1289b4e078af334f3a2666c943f"
+  ],
+  [
+   "programs/l169_clip.py",
+   "a905dda23d5ef6f6c4edf213ea54bd08cc95f77de7ab0fc4a9e4113480124106"
+  ],
+  [
+   "programs/l169_controls.py",
+   "a886acdf9f53303665492e9e0553ed45936e995b383734fd634fd3c22a205012"
+  ],
+  [
+   "programs/l169_custody.py",
+   "0c888f3b089d11d67abbbe35c36498caad227c16677fedbe59e015b40272338e"
+  ],
+  [
+   "programs/l169_decide.py",
+   "e718b50dd2760ac04fa9a94c7555c9b9e1b8ffbae41f7c80bf831c824fe45174"
+  ],
+  [
+   "programs/l169_describe.py",
+   "fe51d7dd0e623f6758dd6d88fba9f67c21063888a5197ce96923105de6b141b6"
+  ],
+  [
+   "programs/l169_digests.py",
+   "6bbbec07108a0e8d1b7a30281f1c9872a585829526492ee1f557ec5ff7ed749e"
+  ],
+  [
+   "programs/l169_geom.py",
+   "66a8b105931e974966ddf1a0146e6831a8d72288ac290bffb49d46497d7794ea"
+  ],
+  [
+   "programs/l169_lineage.py",
+   "b8e6f75dd1268a05ca4660ca12befb97f762afb73f602019532019280a594c5b"
+  ],
+  [
+   "programs/l169_make_plan.py",
+   "2cb3e7eb56a3170e726dc13b9ec4904321a13623ca91005ee7929381cf0acd10"
+  ],
+  [
+   "programs/l169_plan_facts.py",
+   "a320a45027a71fcee1f3d208446712dac2d52be4afbb597e9cb252f8f7b68129"
+  ],
+  [
+   "programs/l169_reader.py",
+   "ed86ec55f66abefd85d54a271906744e28e0e0b2daf726f37a4027321764b73c"
+  ],
+  [
+   "programs/l169_record.py",
+   "c6891d979a7e2ca7f66ee73acb20bbc3bba5fbff4d3334349078e709345835f9"
+  ],
+  [
+   "programs/l169_sat.py",
+   "24de6be609746cd93d84501e370199a646761861714343aa2b4ad100c71eed08"
+  ],
+  [
+   "programs/l169_selftest.py",
+   "311a652588f818619d53146bec58321fb629890fc41c251ab8cbd6343cee282f"
+  ]
+ ]
+}

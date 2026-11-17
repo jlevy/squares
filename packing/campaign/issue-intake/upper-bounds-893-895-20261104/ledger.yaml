@@ -11,6 +11,12 @@ lanes:
   commit: ca3a171bb279639692cd464727a50ba384f724b0
   note: The packets' claim records, written on the lane's branch from main ca3a171bb and read
     here by path.
+- name: l48
+  branch: claude/bold-ritchie-xo28us-l48
+  commit: a7db9aad3e7cf1b9b942859a73a10127c1b9e7e1
+  note: '#895''s packet''s claim record, written on 5 November on the lane''s branch from
+    main a7db9aad3, once the author named the file, and read here by path. The starts stay
+    frozen at ca3a171bb; T-257 still holds 260 on main a7db9aad3.'
 reports:
 - report: '#893'
   url: https://github.com/jlevy/squares/issues/893
@@ -74,12 +80,29 @@ reports:
   - n: 260
     printed: 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626
     rounding: exact
-    note: The side as the issue states it, about 16.6339825019226141. The certificate is a
-      GitHub issue attachment (user-attachments) that this session cannot fetch, so it is
-      not retained and nothing here decides it; the issue says the search started from a public
-      packing attributed to Evan Daniel and Kirill Tymchishin.
-  note: No certificate is retained. The acknowledgement asks the author to put it at a public
-    GitHub commit; until then the claim is walked by its stated side and registers nothing.
+    exact: 1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626
+    exact_from: packing/resources/web/yim-s260-upper-bound-2026-11-05/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l48@a7db9aad3e7cf1b9b942859a73a10127c1b9e7e1
+    first_committed: '2026-11-05T05:27:47Z'
+    measured:
+      against: T-257
+      finding: one to one under the identity by nearest centres; the optimal assignment moves
+        26 squares beyond 0.1 and 64 beyond 1e-2 (largest 0.382) and turns 14 squares by more
+        than 1e-6 radians, by up to 1.50 degrees; 105 tilted squares against T-257's 104;
+        a further arrangement of T-257's packing, one to one with it
+      source: packing/resources/web/yim-s260-upper-bound-2026-11-05/measure/identity.json
+    note: The side the issue states, about 16.6339825019226141, is the header side of the
+      certificate retained at vitamoon/vitamoon d11a8a1, read by the packet's claim record.
+      The issue says the search started from a public packing attributed to Evan Daniel and
+      Kirill Tymchishin and calls the author's work the computational refinement that produced
+      the candidate; it does not say the configuration is unchanged, and 26 squares move beyond
+      a tenth, so the claim is not classified as a refinement and the measurement names the
+      relation.
+  note: Walked by the issue's time, 2026-11-04T02:15:02Z. The issue attached the certificate
+    as a GitHub user attachment this session cannot fetch; the author's reply of 2026-11-05T05:31:32Z
+    names n260.cert in vitamoon/vitamoon by its branch, with no commit or digest. Lane L48
+    retained it at d11a8a1, the branch's head when read at 05:57Z, where it is unchanged since
+    its first commit, e7cab3a (2026-11-05T05:27:47Z).
 exceptions: []
 key_reason_candidates: []
 other_items: []

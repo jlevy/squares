@@ -1,0 +1,3 @@
+Findings frozen at 2026-11-05T09:41:52Z
+48327ab14fa2cf5534b9cb05a47831a81f2da63c78c8e3101b270a1015648a59  review-2026-11-05-ozden-s94-9972.md
+Read after the freeze: docs/project/reviews/review-2026-11-03-ozden-s94-dilated-measure.md, receipts/dilation-audit.json, receipts/native-receipt-audit.json, receipts/sample-diagnostic.json

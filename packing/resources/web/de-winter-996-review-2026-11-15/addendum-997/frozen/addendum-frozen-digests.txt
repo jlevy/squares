@@ -1,0 +1,30 @@
+# Lane L182 addendum on #997, its programs and receipts frozen at 2026-11-15T13:18:44Z, after the controls, the comparison with #996 and the digest check, and before the addendum's commit. README.md is not listed.
+# source files (clone of JoostdeWinter/square-packing at fa53fb0d734fbf438bcfb73c1434a15894bb2bc5; the same blobs at head 6c0ad56a13346abda6debd73afab7892072896c7):
+85840c5563e023790ae32af68c62d636e041a7d34f01c0f772979450dd188a2a  fa53fb0:n90/n90_exact.json
+c9aa917fa0abc9bfe4ddfdd73ec391b20e474fb0c5c97252a7819ad7152c1628  fa53fb0:n90/n90_witness.yaml
+# the plan list:
+2836c29de7284da54a7f1e9a1554c7fa7881668134264fd0bf2eed0d1ec8ea90  frozen/controls-plan-digest.txt
+# programs:
+34853d02311825905f592a1f74cf0c84c23e3e20928e89dcb0a9e1ac385ebcf7  programs/controls-plan-997.json
+31cd96bbf2faff98066cbc76f164422279abfd5a3aade313b05a4aa9252aa91f  programs/issue-997.json
+b9f67bb603ebec9dc03f7e90d3670bbe024242048fbfc1a8d355fc19fa2bba44  programs/l182_compare.py
+5c222acdca3977196d7d7343d22116bea0f5196b8262200738b09a68aa751b24  programs/l182_digests.py
+183c264852a8dc59e6ed511e34b5829ef43f8d7a315d767d598bcd14ca913766  programs/l182_make_plan.py
+d792ce016031636a122d7cd6903bb9580cba7d241f5e0e8626f17477edc52669  programs/l182_plan_facts.py
+e579fb7abb45aa9a1d342dde9b933db18169718073f59643a8dec8e057fd436b  programs/l182_sides.py
+# receipts:
+74a7c492718b1340a11d12affb06011b6eb25cf4996c7ee81a0b6b5a0381b986  out/addendum-digests.json
+bf8544902b6ea7d939c9c81f1c47ec301eaaacbf671ab0eb0c1116208bf3a7e6  out/check-n90-997.json
+e84c8a11b814c09a980febb817115b51a56c7ce5d17387d2979fc5baf9be44d7  out/compare-997-996.json
+3393829d63c1cce1b06111656ed2b9d2af99709f2878fe515469e09058b3d52f  out/contraction-996-against-997.json
+14a652346e5f370d9f82a413399a3eb1102635253cc3e7b0b2b39e40329f9ca5  out/contraction-new-n90-997.json
+c3e950a30706c31313e90326c7f054a08a73a385e490de95355ec1b893b4d99c  out/contraction-t303-house-n90-997.json
+7be8cc2af65c287a992afd73ccb9103eefad41973525607bd009e449b32ff2b2  out/controls-n90-997.json
+b74f3b4f14c815b685c8ecfc5fd01e15d9b569393fb34c4ae0c9fd5616f9825f  out/custody-997.json
+2deef272a49a5d11335bd2146d32802333436ce0c786232ffd35a249904cab7f  out/describe-n90-997.json
+c437755e28a49234be29f15e1a16cd2be10a6cce33096439093099a91d64ceda  out/identity-n90-997.json
+4d3f450dfcb2f84465e92a75b56df23247a06a9822c25f4d872f66c6fe74125b  out/lineage-n90-997.json
+aa261a412df2c1eda3739cd2ea1d0e02c0e1b6b08010335458b52b1bcd96cb41  out/plan-facts-n90-997.json
+cc3b82e33de26ef66d7e3b4a7c481372f31714231c6781fc8d50c2ab43a783e2  out/selftest.json
+9c585bd4bfa2d701571e1e22725d86d4b4fc6c6ba997f0002e21f562e9c4a051  out/sides-997.json
+6fa0b04e81429eebfc5d4c88e2e7eafa207d5ab52ce49a5e89ff9c837b80e3e0  out/witness-read-997.json

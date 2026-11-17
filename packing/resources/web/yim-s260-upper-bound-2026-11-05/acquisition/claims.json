@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/895",
+  "source": "https://github.com/vitamoon/vitamoon",
+  "revision": "d11a8a1ce798f7c0b4f801e922e242d22cedcd73",
+  "read_on": "2026-11-05",
+  "read_at_main": "a7db9aad3e7cf1b9b942859a73a10127c1b9e7e1",
+  "horizon": 324,
+  "results": [
+    {"n": 260, "certificate": "n260.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626", "printed_in": "https://github.com/jlevy/squares/issues/895", "exact_side": "1045817814143413714427921537528704162855767253933/62872364692131569638734867237718772414897487626", "ceiling": "16.6339825019226142", "first_committed": "2026-11-05T05:27:47Z", "grid_side": "17", "case": {"source_key": "[Daniel issue 845 2026-10-29]", "holders": "Evan Daniel, from a search started from Kirill Tymchishin's Kaggle notebook packing", "result": "T-257", "reported_value": "16.6339825021218840", "verified_value": "16.6339825021218840", "evidence": ["E-evand-845-exact-feasibility", "E-evand-845-review-exact-feasibility"], "exact_side": "8316991251060941991251052624833/500000000000000000000000000000", "relation": "below", "difference": "3132141555647612416779200987727444969624782540332435873562218908229/15718091173032892409683716809429693103724371906500000000000000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

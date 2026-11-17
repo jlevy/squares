@@ -1,0 +1,57 @@
+{
+ "program": "l77_mutants.py",
+ "program_sha256": "84eea344ecd49cd03e876f1ad231bf68a18a199e9d9e7c491a8c811b4d2f357b",
+ "checker_sha256": "f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf",
+ "verdict": "EVERY_MUTANT_CAUGHT",
+ "mutants": {
+  "A-contact-as-overlap": {
+   "selftest": "FAILED",
+   "failed_cases": 39,
+   "first_failed": [
+    "edge-contact-ccw0-0",
+    "edge-contact-ccw0-3",
+    "corner-contact-ccw0"
+   ]
+  },
+  "B-open-halfplanes": {
+   "selftest": "STOPPED",
+   "error": "ZeroDivisionError: division or modulo by zero"
+  },
+  "B-contact-as-overlap": {
+   "selftest": "FAILED",
+   "failed_cases": 39,
+   "first_failed": [
+    "edge-contact-ccw0-0",
+    "edge-contact-ccw0-3",
+    "corner-contact-ccw0"
+   ]
+  },
+  "A-clockwise-not-accepted": {
+   "selftest": "STOPPED",
+   "error": "l77_checker.Refused: A: last edge is not the first turned by a right angle"
+  },
+  "A-only-own-axes": {
+   "selftest": "FAILED",
+   "failed_cases": 7,
+   "first_failed": [
+    "vertex-edge-contact-ccw",
+    "vertex-edge-overlap-ccw",
+    "vertex-edge-apart-ccw"
+   ]
+  },
+  "B-no-area-check": {
+   "selftest": "FAILED",
+   "failed_cases": 1,
+   "first_failed": [
+    "shape-rhombus"
+   ]
+  },
+  "reader-accepts-non-lowest": {
+   "selftest": "FAILED",
+   "failed_cases": 1,
+   "first_failed": [
+    "reader-refuses-non-lowest"
+   ]
+  }
+ }
+}

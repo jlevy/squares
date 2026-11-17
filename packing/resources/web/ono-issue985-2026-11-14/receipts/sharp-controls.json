@@ -1,0 +1,394 @@
+{
+ "format": "upper-bound-sharp-controls-v1",
+ "packet": "ono-issue985-2026-11-14",
+ "n": 147,
+ "certificate": "packing/resources/web/ono-issue985-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json",
+ "side": "11864804754111373311404579236459661610708446554466063961080880819368560222888047487421179/937851861867402376107974997050677704744266630455345333352649906089505616661381854003200",
+ "epsilon": "1/1000000000000000000000000000000",
+ "routes": [
+  "exact_verify",
+  "independent"
+ ],
+ "controls": [
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "lowered_by": "0"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.344
+  },
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container"
+   ],
+   "detail": {
+    "lowered_by": "1/1000000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": [
+      "container"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": [
+      "container"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.396
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "square": 108,
+    "partner": 101,
+    "moved_by": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "0",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "0",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.392
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "detail": {
+    "square": 108,
+    "partner": 101,
+    "moved_by": "41904620889811272790195128868997780200954846394242081030414062382897304459977909279920826252486677/139560169660018005014674780559923399919467066916790147712803734400043781783552000000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "overlap"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "overlap"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.668
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "moved_by": "0"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.386
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container"
+   ],
+   "detail": {
+    "moved_by": "1/1000000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": [
+      "container"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": [
+      "container"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.279
+  },
+  {
+   "control": "square-enlarged-past-pair-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "shape"
+   ],
+   "detail": {
+    "square": 108,
+    "partner": 101,
+    "pair_gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+    "half_edge_grown_by": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+    "edge": "1873144890231083508922587047099044544037231178548229999463393956369501569069683065638341/1873144889106214907216225570565148659122625269239553867879691374108931949151613720985600",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "0",
+     "failures": [
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "0",
+     "failures": [
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.748
+  },
+  {
+   "control": "square-enlarged-past-pair-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "window",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap",
+    "shape"
+   ],
+   "detail": {
+    "square": 108,
+    "partner": 101,
+    "pair_gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+    "half_edge_grown_by": "41904620889811272790195128868997780200954846394242081030414062382897304459977909279920826252486677/139560169660018005014674780559923399919467066916790147712803734400043781783552000000000000000000000000000000",
+    "edge": "69780084871913623397148663070156828828731313659349920250643948230435953274673304459977909279920826252486677/69780084830009002507337390279961699959733533458395073856401867200021890891776000000000000000000000000000000",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-69780084871913623397148663070156828828731313659349920250643948230435953274673304459977909279920826252486677/69780084830009002507337390279961699959733533458395073856401867200021890891776000000000000000000000000000000000000000000000000000000000000",
+     "failures": [
+      "overlap",
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-69780084871913623397148663070156828828731313659349920250643948230435953274673304459977909279920826252486677/69780084830009002507337390279961699959733533458395073856401867200021890891776000000000000000000000000000000000000000000000000000000000000",
+     "failures": [
+      "overlap",
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 2.955
+  },
+  {
+   "control": "square-enlarged-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "square": 3,
+    "wall_clearance": "0",
+    "half_edge_grown_by": "0",
+    "edge": "1",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.432
+  },
+  {
+   "control": "square-enlarged-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container",
+    "shape"
+   ],
+   "detail": {
+    "square": 3,
+    "wall_clearance": "0",
+    "half_edge_grown_by": "898943361934699974388806098653/898943361934703766893755463273000000000000000000000000000000",
+    "edge": "449471680967351883446877731637398943361934699974388806098653/449471680967351883446877731636500000000000000000000000000000",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": [
+      "container",
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "1124868601706361476533895884914605909308676131583702582260569619918069344652741/3746289778212429814432451141130297318245250538479107735759382748217863898303227441971200",
+     "failures": [
+      "container",
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.683
+  },
+  {
+   "control": "duplicate-square",
+   "where": "gross",
+   "margin": "gap",
+   "expected_margin": "-1",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "detail": {
+    "square": 2,
+    "copy_of": 1
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1",
+     "failures": [
+      "overlap"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1",
+     "failures": [
+      "overlap"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 3.07
+  }
+ ],
+ "all_as_expected": true
+}

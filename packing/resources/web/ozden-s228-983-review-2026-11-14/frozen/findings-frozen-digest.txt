@@ -1,0 +1,16 @@
+# Lane L159 findings frozen at 2026-11-14T19:22:58Z, before the author's README, sqcheck.py, verifier/README.md, verify-228.txt, sqcheck-228.txt, checks/, the search record, the decimal pose, the licence files, the register entries at 228, the house witness, the import lane L160 or its branch, or this repository's verifier, promotion or identity code was opened.
+fd5a3f5edb780eac3bc404107ecd8d58b1cb309424fe3a29ba91af4c1e236b61  frozen/review-2026-11-14-ozden-983.frozen.md
+# lines and bytes: 421 28249
+# checker list:
+0b12963d8bb6b29377ae0607884de5cb39d1d33cea5b4eed2eb579af603b1e30  frozen/checker-frozen-digests.txt
+# controls plan list:
+5cd04e9149cdd6746b440f7c333862bf4c6cd458c2130f56537d39833c799843  frozen/controls-plan-digest.txt
+# receipts and programs at the freeze:
+8a3f7cfa3a03da6c5f046262d2f366bfae697bf0d5436018edccb1cfc3296daa  out/selftest.json
+7d17f80bb91aef69ff054d041047cb210dc30157963efe0233d3c0fe7f786213  out/check-n228.json
+afa533b0be63fac743214e3b983106eaf8e4a6c8d3ef0bf9780a350467073a99  out/plan-facts-n228.json
+37046970dca8fba8f3363b23e9e0e92a09d03d623064ad00b1515a8b3d5d2e70  out/controls-n228.json
+78d2b8a6fb192b7688366d5e4b86a69bd62ddc5dbf790b46d960dc478e101f4d  out/describe-n228.json
+185e87922867f541f423a326088e900f6761a69bc1590baa13c5582815bc8476  programs/controls-plan.json
+14a612a3f0cb101d176e968ac3b805e0aecf31b553a1846ecc67e107a10cf00e  programs/l159_controls.py
+b54215ee4c1e4639a893a6ef69acfd3ce49aa4efdcd72f226d6fd8b503c157af  programs/l159_describe.py

@@ -1,0 +1,53 @@
+format: intake-ledger-v1
+read_at_main: b5b12c20646710a606bc86516f6c93168d00457e
+read_on: '2026-11-11'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l107
+  branch: claude/bold-ritchie-xo28us-l107
+  commit: b5b12c20646710a606bc86516f6c93168d00457e
+  note: The packet's claim record, written on the lane's branch from main b5b12c206 and read
+    here by path.
+reports:
+- report: '#959'
+  url: https://github.com/jlevy/squares/issues/959
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-11T21:18:24Z'
+  bead: think-89i7
+  claims:
+  - n: 179
+    printed: '13.880960371559'
+    rounding: up
+    exact: 1388096037155822502128790515250755112992700071140158603216207237631759847022259162223365161028562708981913500156981545848997786790079746004217653486626222737561559114471095443533640028465316631511517257649915054413876043/100000000000000000000000000000382066398767479260730653096809429923440324843182790249464187167106629590077455771513675657320116033076253416959053569425215538797993845132515219355779258909325190694986680090000000000000000
+    exact_from: packing/resources/web/ozden-s179-issue959-2026-11-11/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l107@b5b12c20646710a606bc86516f6c93168d00457e
+    first_committed: '2026-11-11T21:18:12Z'
+    measured:
+      against: T-291
+      finding: nearest centres pair it one to one with T-291's packing, the author's own from
+        issue 954, under the identity of the box; the optimal assignment moves 3 squares beyond
+        0.1, 31 beyond 1e-2 and 85 beyond 1e-3 (largest 0.218429) and turns 44 squares by
+        more than 1e-6 radians, by up to 27.79 degrees, 5 of them by more than a degree with
+        the boxes centred; 35 squares tilted beyond a degree, 37.7 to 40.75 degrees from upright
+        and all turned the same way, against T-291's 36, 27.3 to 41.4 degrees; a further arrangement
+        of T-291's packing, its finder's own; against T-174's, no symmetry pairs it one to
+        one, 46 squares beyond 0.1; laid along the diagonal of the box, the registry's 70
+        (Ryan Xu, improved by Evan Daniel and PingYou Ltd) at shifts (0, 0) to (5, 5) lies
+        within 1e-9 of 99 of its 179 squares and of 15 of its 35 tilted ones, 7 at (0, 0)
+        and 8 at (5, 5), and its side is 2.645e-12 above s(70) + 5, 1.906e-13 of itself
+      source: packing/resources/web/ozden-s179-issue959-2026-11-11/measure/identity.json
+  note: 'The issue names 6ab3cfe, committed at 2026-11-11T21:18:12Z, 12 seconds before the
+    issue. It says the packing came from a later batch of #954''s band-design scan, a mutation
+    of the same seed, the tilted squares of the registry''s 70 laid as a band along the diagonal
+    with a copy shifted by (5, 5), annealed in a reduced model and quenched once with Evan
+    Daniel''s code; it calls the result an improvement on the record and on #954, neither
+    new nor a refinement of it, so the claim is not classified; the measurement names the
+    relation, and measure/core-n070.json in the packet the relation to the 70.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

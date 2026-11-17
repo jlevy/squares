@@ -1,0 +1,54 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "ozden-s199-upper-bound-2026-11-09",
+  "source_url": "https://github.com/kenaznia-doga/s199-upper-bound",
+  "source_ref": "main",
+  "source_commit": "d03ee0bdb223e00fe124e818ed242f6cbd714fad",
+  "retrieved_at_utc": "2026-11-09T21:06Z",
+  "git_scope": "A full clone of kenaznia-doga/s199-upper-bound, fetched for the intake of jlevy/squares#938; the pin is the repository's first commit, d03ee0b (committed 2026-11-09T20:30:58Z, 's(199) upper bound: #935's packing plus an L of 27 grid squares; exact witness, decimal pose, checks, README, licences', the author's message), 34 seconds before the issue, of 13 files, and the scope is the whole tree. #938 names this commit. One later commit, 4fbff7b (2026-11-09T20:53:14Z, 'README: correct Kaggle comparison (leaderboard side-only entry)'), changes one line of README.md and nothing else; it is read in packing/campaign/intake-watch.yaml and not retained. The SHA-256 the issue and the README state for n-199-candidate.yaml, 8a85b4c3...8aca, and the one the README and .meta.json state for n199-witness.json, 88d20ae2...4cb8, match the files. verifier/README.md is byte-identical to the copy the ozden-s299-upper-bound-2026-11-03 packet retains and is pinned against it; verifier/sqcheck.py is byte-identical to the copy the ozden-s232-upper-bound-2026-11-09 packet retains and is pinned against it; LICENSE-evand-square-packing.txt is byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains from Evan Daniel's evand/square-packing and is pinned against it. n-199-decimal-pose.yaml, the decimal pose the witness's source.path names, and .meta.json, the claim's figures as the lab's tooling wrote them, are new at this pin and retained. No source program ran in writing this packet.",
+  "archived_dir": "source",
+  "license": "CC BY 4.0 for the witness, the JSON, the decimal pose, the checker outputs, the README, the metadata and the drawings, and MIT for verifier/sqcheck.py, copyright (c) 2026 Doğa Özden, as LICENSE.md at the pin states (1,484 bytes, SHA-256 5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c, byte-identical to the LICENSE.md the s172 and s270 repositories carry and the lab added to its s299, s204 and s94 repositories on 4 November 2026, announced on jlevy/squares#890, issuecomment-6637821113). LICENSE.md is retained under source/ with the rest of the tree. LICENSE-evand-square-packing.txt is Evan Daniel's MIT notice for evand/square-packing, which the source carries for the base packing's certificate and the quench code from which the n = 172 packing descends. Squares 1 to 172 are the n = 172 packing of jlevy/squares#935 (T-282), and the 27 others are axis-aligned unit squares of the classical L step, as the issue states.",
+  "claims": [
+    "n-199-candidate.yaml is a packing.squares:Witness/v2 file (corners, rational scalars, 199 squares) whose exact rational side, rounded up at 12 places, #938 prints as the bound, 14.614689853287. Squares 1 to 172 are the exact n = 172 witness of #935 (T-282), with the same rational corners; squares 173 to 186 are a row of 14 axis-aligned unit squares along the top wall and squares 187 to 199 a column of 13 along the right wall of the square of side S172 + 1, which is the side, exactly. The issue says the gain is inherited from #935 by s(n + 2 floor(s) + 1) <= s(n) + 1, with floor(S172) = 13 and 172 + 27 = 199, and that nothing was searched at n = 199. The grid squares touch each other, the walls and the n = 172 packing's bounding square exactly, so the exact minimum pair gap is 0. An upper bound only: no KKT, local-optimality, rigidity or global-optimality claim.",
+    "n199-witness.json is the same file as JSON. packing-witness-verify.txt is the author's run of this repository's packing-witness verify at main 200f2ebc on the witness placed under packing/witnesses/known-best/ (VERIFIED, exact-algebraic, 19701 pairs); sqcheck-output.txt is the author's run of verifier/sqcheck.py, an exact checker the source says was written separately from this repository's code (VALID, exact rational, the exact side rounded up at 15 places, on the witness; CERTIFIED in interval arithmetic on the decimal pose with a dilation of 1e-24, since the grid squares touch). n-199-decimal-pose.yaml is #935's search pose with the 27 grid squares at decimal centres, at the side 14.614689853286418. .meta.json states the exact side, the 12-place claim, the record's exact side 7308786086796403421851018497093/5e29, the gain 2.882e-03 (relative 1.97e-04), both files' SHA-256s and 19701 pairs. Those statements are the author's; no source program ran here.",
+    "The issue and README say the packing of squares 1 to 172 is #935's, which starts from the registry's 172 (Evan Daniel, T-257, #845), taken from this repository's regularized known-best atlas, and was found by basin hopping over local minima of Evan Daniel's ALM+SLP quench (evand/square-packing search/packer at bb4cc78e, MIT); they ask that the improvement be credited to Doğa Özden, the base packing to its holders as the record lists them, and the local optimizer to Evan Daniel, and call the L of 27 grid squares the standard row-and-column extension. The issue says it found no automatic propagation of the extension in the registry, so files it as its own witness, and that it checked every count of frontier_all for the same extension from any other record: only 199 improves, and s(198) = 14 + 4/7 keeps 199 monotone. The issue says the search and its code were written and run by AI agents and that the checks were run by code that did not produce the packing; the issue and repository were prepared and posted by Özden's AI agent, which uses the account kenaznia-doga; Özden directed the work."
+  ],
+  "scope": [
+    ".meta.json",
+    "LICENSE-evand-square-packing.txt",
+    "LICENSE.md",
+    "README.md",
+    "n-199-candidate.yaml",
+    "n-199-decimal-pose.yaml",
+    "n199-witness.json",
+    "packing-witness-verify.txt",
+    "records",
+    "sqcheck-output.txt",
+    "verifier"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE-evand-square-packing.txt",
+      "reason": "Evan Daniel's MIT notice for evand/square-packing, which the source carries for the base packing's certificate and the quench code; byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains.",
+      "identical_to": "packing/resources/web/evand-issue845-2026-10-29/source/LICENSE"
+    },
+    {
+      "match": "records/n-199-packing.png",
+      "reason": "A raster drawing of the packing, the L in orange, which decides nothing; pinned by digest only, as the 9 November packets pin their raster comparisons."
+    },
+    {
+      "match": "records/n-199-packing.svg",
+      "reason": "The same drawing as SVG, which decides nothing; pinned by digest only, as the raster is."
+    },
+    {
+      "match": "verifier/README.md",
+      "reason": "The README of the author's exact checker, byte-identical to the copy the ozden-s299-upper-bound-2026-11-03 packet retains.",
+      "identical_to": "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+    },
+    {
+      "match": "verifier/sqcheck.py",
+      "reason": "The author's exact checker, the source says written separately from this repository's code; byte-identical to the copy the ozden-s232-upper-bound-2026-11-09 packet retains, and never executed here.",
+      "identical_to": "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+    }
+  ]
+}

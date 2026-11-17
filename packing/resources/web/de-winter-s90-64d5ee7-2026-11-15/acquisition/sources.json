@@ -1,0 +1,54 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-15T12:01Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, a watched repository, fetched at 12:01Z on 15 November 2026 for the intake of jlevy/squares#996 (lane L181, bead think-32cl), when main's head was 9cafa33 (git ls-remote read the same head at 12:04Z). The pin is 64d5ee7 (committed 2026-11-15T11:27:26Z, 'Add a packing of 90 unit squares with side 9.994038857546', the author's message), the commit #996 (11:30:13Z) names, which the author superseded in #997 (12:08:33Z) by fa53fb0, a packing 9e-8 smaller that the de-winter-s90-upper-bound-2026-11-15 packet retains, asking that 64d5ee7 be disregarded; this packet keeps the superseded certificate as history and for the measurements against it; it adds n90/ with the certificate n90_exact.json, the Witness/v2 file n90_witness.yaml, verify_exact.py, check_area.py, README.md and two figures, and a row and a paragraph of the root README. The next commit, 0c9bcd2 (11:27:49Z, 'Add the registration request and checksums for n = 90'), adds n90/REGISTRATION.md and n90/SHA256SUMS; the head, 9cafa33 (11:29:27Z, 'Name GPT-6.1 Sol Max as the model that ran the local search for n = 90'), changes the model named for the local search from 'OpenAI Codex (GPT-6 Astra)' in n90/README.md and 'OpenAI Codex' in the root README to 'GPT-6.1 Sol Max (OpenAI)', the name the issue gives, in both and in n90/REGISTRATION.md, and updates n90/SHA256SUMS. Neither changes a file this packet retains but the two READMEs; every other file of n90/ has the same Git blob at the pin and the head, and n90/SHA256SUMS at the head states the SHA-256 of the seven other files of n90/ at the pin, which match. GitHub's activity log was not readable from this session, so the push times are not read. The scope is the licence, the root README and the whole of n90/. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and is pinned against it. The two figures are pinned by digest only. No source program ran in writing this packet; verify_exact.py and check_area.py are retained as data and never executed here.",
+  "sources": [
+    {
+      "id": "de-winter-s90-64d5ee7-2026-11-15",
+      "source_url": "https://github.com/JoostdeWinter/square-packing",
+      "source_ref": "main",
+      "source_commit": "64d5ee762a1159248d375973fb33825d51da637d",
+      "committed_utc": "2026-11-15T11:27:26Z",
+      "git_tree": "f777d277612b08cb4d0bbae4d621540deff94ad2",
+      "archived_path": "packing/resources/web/de-winter-s90-64d5ee7-2026-11-15/source",
+      "subtree_manifest": "packing/resources/web/de-winter-s90-64d5ee7-2026-11-15/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "n90"
+      ],
+      "subtree_file_count": 9,
+      "subtree_total_bytes": 675261,
+      "retained_file_count": 6,
+      "retained_total_bytes": 146760,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+          "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+          "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+        },
+        {
+          "path": "n90/n90_before_after.png",
+          "bytes": 362328,
+          "sha256": "ac0042fbc501f164c5ff89349b3487a2d149abdd399429f393e1e0950a2d2ff9",
+          "reason": "Two raster figures, the packing and T-303's packing beside it, which decide nothing; pinned by digest only."
+        },
+        {
+          "path": "n90/n90_record.png",
+          "bytes": 165101,
+          "sha256": "3955cfcc451016e29358dded3a9319811c6be67dc9c70e1eb1a601c39bfeada0",
+          "reason": "Two raster figures, the packing and T-303's packing beside it, which decide nothing; pinned by digest only."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The source says the packing starts from this project's T-303, jazivxt's packing of issue 989, whose certificate the jazivxt-s90-upper-bound-2026-11-15 packet holds, built from a crop of the source's own n = 157 packing (T-293).",
+      "claims": [
+        "n90/n90_exact.json states 90 unit squares as [center_x, center_y, cos, sin] rows of exact rationals, (cos, sin) the unit direction of one edge, with the side 199880777150913904183/20000000000000000000; the issue and the root README round it up at 12 places as 9.994038857546, and n90/README.md prints 9.99403885754569520915. n90/n90_witness.yaml states the same packing as a packing.squares:Witness/v2 document of rational corners with the softschema envelope and a claim block of coordinate_provenance reported. The issue and n90/README.md compare the side with the record's 9.998277166926 at 90 (T-303), an improvement of 0.00424.",
+        "n90/README.md and the issue say the packing starts from T-303, which jazivxt built from a crop of the source's n = 157 packing: T-303 has a cluster of 49 squares that lean away from the axes inside a frame of axis-aligned squares; a local search changed small groups of squares in position and angle, optimized the packing again after each change and kept the changes that gave a smaller side; in the new packing the cluster has 37 leaning squares, seven squares in the upper left of the cluster have a new angle, and five squares along the left wall are axis-aligned. They say a linear program over all 90 squares, with every contact linearized at the solution, found no first-order improvement larger than 4e-10, that the certificate keeps a smallest gap of 1e-12 between squares, and that the local optimum has no formal proof. They say a public merged Kaggle submission (bestbryant/claude_code_squaresinsquares, 15 November 2026) lists 9.998277166917 for n = 90 and that the leaderboard's best sides were not available.",
+        "verify_exact.py (separating axes) and check_area.py (the area of each close pair's clipped intersection), both Python's fractions.Fraction and its standard library only, are the folder's two exact checkers; #996 says they have one author and read the same input file but share no code, each reports 90 squares and 202 close pairs, this repository's check_rational_witness_independent.py at ed7aff6 reports 'VERIFIED: 90 squares, 4005 pairs' on the witness, and the witness validates against this repository's witness.schema.yaml. The issue asks that the bound be credited to Joost de Winter as an improvement of jazivxt's packing, and says the local search was run with GPT-6.1 Sol Max (OpenAI) and the local optimization, rational certificate, checks and figures were produced with Claude Fable 5.2 (Anthropic), both under his direction; n90/README.md at the pin names the local search's model 'OpenAI Codex (GPT-6 Astra)', which the head renames. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

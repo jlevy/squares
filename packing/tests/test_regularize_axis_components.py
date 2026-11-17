@@ -196,6 +196,25 @@ def test_a_row_with_slack_compacts_into_the_wall_and_each_other() -> None:
     assert "regularized" in view["claim"]["limitations"]
 
 
+def test_a_slide_limit_past_the_digit_bound_refuses_the_frame(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A slide whose exact limit carries more than `SLIDE_DIGITS` digits refuses the frame,
+    as n = 270's certificate of 9 November 2026 did at 4,300, rather than failing while the
+    move is written or compacting without end. Every limit here has a few digits, so a
+    bound of one refuses the first slide, and the default leaves the same frame alone."""
+    witness = decimal_witness(
+        [("0.53", "0.5", "0"), ("1.56", "0.5", "0"), ("2.59", "0.5", "0"), PIN_4], "4"
+    )
+    monkeypatch.setattr(axis, "SLIDE_DIGITS", 1)
+    with pytest.raises(axis.RegularizeError) as refused:
+        regularize(witness, source_path="tests/synthetic")
+    assert refused.value.kind == "slide-digits"
+    monkeypatch.setattr(axis, "SLIDE_DIGITS", 4300)
+    report, _view = regularize(witness, source_path="tests/synthetic")
+    assert report["regularization"]["moves"]["compactions"] == 3
+
+
 def test_a_block_off_its_lattice_by_a_hair_snaps_onto_it_exactly() -> None:
     """A 2-by-2 block a few 1e-13 short of its lattice lands on it, by snaps only.
 
@@ -533,6 +552,32 @@ def test_the_atlas_layer_updates_checks_and_verifies(
         "unexpected file packing/regularized/stray.txt",
     ]
     assert main(["--check-atlas"], layout=layout) == 1
+
+
+def test_the_atlas_records_a_frame_past_the_slide_digits_as_refused(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A frame whose compaction passes `SLIDE_DIGITS` is a `refused` record with the kind
+    `slide-digits` and no view, as n = 270's is since 9 November 2026, and the layer still
+    checks. A bound of one refuses the row at 4, the one count here that slides."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    monkeypatch.setattr(axis, "SLIDE_DIGITS", 1)
+    layout = scratch_atlas(tmp_path)
+
+    assert main(["--update-atlas"], layout=layout) == 0
+    index = json.loads(layout.index.read_text())
+    records = {record["n"]: record for record in index["entries"]}
+    assert {n: record["status"] for n, record in records.items()} == {
+        2: "refused",
+        3: "unchanged",
+        4: "refused",
+    }
+    assert records[4]["refusal"]["kind"] == "slide-digits"
+    assert "passes 1 digits" in records[4]["refusal"]["reason"]
+    assert "view" not in records[4]
+    assert records[4]["shades"]["house"]["light_before"] == 4
+    assert sorted(path.name for path in layout.directory.iterdir()) == ["index.json"]
+    assert check_atlas(layout) == []
 
 
 def drawn_by_another_generator(layout: AtlasLayout, n: int) -> dict[str, Any]:

@@ -1,0 +1,142 @@
+{
+ "file": "n0753.cert",
+ "programs": {
+  "l96_read.py": "45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29",
+  "l96_sat.py": "c09e123ab57545907ffc388d3f34f831919b509a55a1202987dec5273b41b9a1",
+  "l96_clip.py": "8b0e5e21a0b01b3faa81b8059b2d973d31b9891eccde60cb301489fcc24ac728",
+  "l96_check.py": "88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131"
+ },
+ "sha256": "814b82fd32df8d43da42c235b154d1a1d7e2dc1d340a4cf512e7dad51850db8c",
+ "bytes": 102070,
+ "reader": "accepted",
+ "comments": [
+  "# exact rational certificate: unit squares, centre (x, y), rotation t = tan(theta/2)",
+  "# sub-window of the n = 810 certificate in this folder (from the n = 868 packing of F. Couzo), re-optimized; rational certificate with a margin of about 5e-9 above the numerical optimum"
+ ],
+ "n": 753,
+ "scalars": 2260,
+ "noncanonical_scalars": 0,
+ "side": {
+  "exact": "34878314287653/1250000000000",
+  "floor_20": "27.90265143012240000000",
+  "ceil_10": "27.9026514302",
+  "ceil_12": "27.902651430123"
+ },
+ "squares_tilted": 752,
+ "squares_axis_aligned": 1,
+ "walls": {
+  "contacts": [],
+  "least_positive_clearance": {
+   "exact": "696299219982793428342417243225615145688206557713060381724507041/6938893903907228377649068474154914293913353102264033630490303039550781250",
+   "approx": "1.003473e-10",
+   "square": 736,
+   "wall": "left"
+  },
+  "clearances_equal_between_methods": true
+ },
+ "least_far_wall_clearance": "1.012420e-10",
+ "pairs": {
+  "total": 283128,
+  "A_decided_by_x_line": 262290,
+  "A_decided_by_y_line": 19790,
+  "A_decided_by_margin": 1048,
+  "A_least_x_line_gap": "2.502053e-13",
+  "A_least_y_line_gap": "9.723407e-14",
+  "B_not_enumerated": 275176,
+  "B_decided_by_disc": 6098,
+  "B_clipped": 1854,
+  "contacts": [],
+  "overlaps_A": [],
+  "overlaps_B": [],
+  "classes_equal": true,
+  "least_positive_margin": {
+   "exact": "141021855250902088269938296097062372009237933532239267767419981627444259540797616386093260273463/701806722734168286745356825573346207585317398510372750493948142115573372390758425743319094181060791015625",
+   "approx": "2.009412e-10",
+   "pair": [
+    127,
+    130
+   ]
+  },
+  "smallest_ten_positive_margins": [
+   [
+    "2.009412e-10",
+    [
+     127,
+     130
+    ]
+   ],
+   [
+    "2.010107e-10",
+    [
+     132,
+     149
+    ]
+   ],
+   [
+    "2.011265e-10",
+    [
+     254,
+     288
+    ]
+   ],
+   [
+    "2.011632e-10",
+    [
+     288,
+     323
+    ]
+   ],
+   [
+    "2.011804e-10",
+    [
+     109,
+     129
+    ]
+   ],
+   [
+    "2.011913e-10",
+    [
+     269,
+     276
+    ]
+   ],
+   [
+    "2.012070e-10",
+    [
+     276,
+     304
+    ]
+   ],
+   [
+    "2.012114e-10",
+    [
+     143,
+     144
+    ]
+   ],
+   [
+    "2.012125e-10",
+    [
+     460,
+     466
+    ]
+   ],
+   [
+    "2.012147e-10",
+    [
+     276,
+     282
+    ]
+   ]
+  ],
+  "positive_margins_below": {
+   "1e-12": 0,
+   "1e-10": 0,
+   "1e-9": 792,
+   "1e-8": 829,
+   "1e-6": 831
+  }
+ },
+ "problems": [],
+ "verdict": "ACCEPT"
+}

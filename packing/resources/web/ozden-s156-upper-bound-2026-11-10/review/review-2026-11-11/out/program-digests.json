@@ -1,0 +1,26 @@
+{
+ "verdict": "ALL_RECEIPTS_MATCH",
+ "receipts_held": 25,
+ "kept_programs": {
+  "l83_check.py": "661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0",
+  "l83_clip.py": "c4987a55491fa98f61328d54a3d5353eccfe91514664fdcd4aec5a114319b218",
+  "l83_compare_lane.py": "f7de1d491e102a572393400b071be92d03c8f2ab5348a57ed02874cf55b27deb",
+  "l83_construct.py": "d22443706f42d195c37f01e4e1f107dde8f1f5c02e9f2c0c1772598f326cdce7",
+  "l83_controls.py": "7e17eaca86488b2996c38ab84d4aa555e5602550a814e866dc5a8618163fd619",
+  "l83_custody.py": "1fa87f73bd0e56e2f642632e06730edde2c258a7880f16d1cb524f876ff23408",
+  "l83_digests.py": "af9bd6aa3d24a1aab2cdfa6e09d66c45a527eef23d862d8879ff1f786c61cf0d",
+  "l83_freeze.py": "a4f0e93178d8f6ebf031e82f2c9970596bdb938a4e191722e7e01e89d909f8a3",
+  "l83_geom.py": "6542054ff2c45459de75e0fea2c73e0bf8481124daafb4f84439c587818cecd8",
+  "l83_house.py": "b392f85aa49b18c73dcbbef58ff4310b88f8d7e39150c47f6522a48e0e181387",
+  "l83_houses.py": "3e5893c0bf65cf91773507b30952ed2cbfdb6097a866d8a2090d6a6b4464610e",
+  "l83_identity.py": "d0f2b9ff40c1fe7ed3787ed5ed71e309a36972209680a65a7948ce4fe46e127e",
+  "l83_make_plan.py": "c974af1e66f27353a7c744407d5ced1efc4c5a62c16f661f424eeb2988a489e3",
+  "l83_plan_facts.py": "11b46d036848d04be55e86a30c24fb251d25a4140de15c24761d821924bd3387",
+  "l83_reader.py": "ab7b2cf73c61f0f707d92ef640176e1402f658136341caee8847f8665ab86526",
+  "l83_sat.py": "2236bccbeb4da6b635e0f43aa1c88c8e5aab3ed41de36a4eb87736a70706ced2",
+  "l83_selftest.py": "de00c72fc8b9b6abe10f1bdd93e7fdc8afd6b4f278e1e826e6c24e5c4e07ce1c",
+  "l83_shares.py": "71327a97b30de8803b5464a58d5490fe99e3d5b5a5ff222bb473382ac826dca5",
+  "l83_sides.py": "151ba0c19ce13eeef5889af364c72ef3206f62d85f5bae48e7dca262d1bb6990"
+ },
+ "problems": []
+}

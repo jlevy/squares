@@ -1,0 +1,397 @@
+{
+ "file": "n-232-candidate.yaml",
+ "expected_sha256": "93d856c25c9f75842ca5e36552ccb726e87884440689c9ce4100d2a58d5a279d",
+ "sha256": "93d856c25c9f75842ca5e36552ccb726e87884440689c9ce4100d2a58d5a279d",
+ "sha256_matches": true,
+ "reader": {
+  "status": "read",
+  "witness_id": "W-pose-n232-rational",
+  "n": 232,
+  "noncanonical_scalars": 0,
+  "noncanonical_first": [],
+  "meta": {
+   "envelope": {
+    "contract": "packing.squares:Witness/v2",
+    "schema": "witness.schema.yaml",
+    "envelope": "witness",
+    "status": "enforced"
+   },
+   "claim": {
+    "coordinate_provenance": "verified",
+    "method": "exact-algebraic",
+    "limitations": "Exact feasible upper-bound witness derived by rational robustification; does not establish global optimality or certify the original decimal pose."
+   },
+   "source": {
+    "path": "n-232-decimal-pose.yaml"
+   },
+   "certificate": {
+    "kind": "exact-rational-sat",
+    "derived_from": "W-pose-n232",
+    "rational_digits": 36,
+    "center_dilation": "1",
+    "pairs_tested": 26796,
+    "replay": "uv run --frozen packing-witness verify n-232-candidate.yaml"
+   },
+   "angle_unit": "not-applicable"
+  }
+ },
+ "side": {
+  "exact": "15759531627556573/1000000000000000",
+  "decimal_40": "15.7595316275565730000000000000000000000000",
+  "numerator_digits": 17,
+  "denominator_digits": 16
+ },
+ "decision": {
+  "verdict": "ACCEPT",
+  "reasons": [],
+  "disagreements": [],
+  "disagreement_count": 0,
+  "n": 232,
+  "squares_unit_by_A": 232,
+  "squares_unit_by_B": 232,
+  "non_unit_A": [],
+  "non_unit_B": [],
+  "senses": {
+   "ccw": 232,
+   "cw": 0,
+   "none": 0
+  },
+  "walls": {
+   "square_wall_pairs": 928,
+   "contacts": [
+    [
+     108,
+     "left"
+    ],
+    [
+     108,
+     "bottom"
+    ],
+    [
+     109,
+     "left"
+    ],
+    [
+     110,
+     "left"
+    ],
+    [
+     111,
+     "left"
+    ],
+    [
+     112,
+     "left"
+    ],
+    [
+     113,
+     "left"
+    ],
+    [
+     114,
+     "left"
+    ],
+    [
+     115,
+     "bottom"
+    ],
+    [
+     122,
+     "bottom"
+    ],
+    [
+     129,
+     "bottom"
+    ],
+    [
+     136,
+     "bottom"
+    ],
+    [
+     224,
+     "right"
+    ],
+    [
+     225,
+     "right"
+    ],
+    [
+     226,
+     "right"
+    ],
+    [
+     227,
+     "right"
+    ],
+    [
+     228,
+     "right"
+    ],
+    [
+     229,
+     "right"
+    ],
+    [
+     230,
+     "right"
+    ],
+    [
+     231,
+     "right"
+    ],
+    [
+     232,
+     "right"
+    ]
+   ],
+   "contact_count": 21,
+   "crossing": [],
+   "least_by_wall": {
+    "left": {
+     "value": "0",
+     "sci": "0",
+     "squares": [
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114
+     ],
+     "count": 7
+    },
+    "bottom": {
+     "value": "0",
+     "sci": "0",
+     "squares": [
+      108,
+      115,
+      122,
+      129,
+      136
+     ],
+     "count": 5
+    },
+    "right": {
+     "value": "0",
+     "sci": "0",
+     "squares": [
+      224,
+      225,
+      226,
+      227,
+      228,
+      229,
+      230,
+      231,
+      232
+     ],
+     "count": 9
+    },
+    "top": {
+     "value": "1/500000000000000",
+     "sci": "2.00000000000e-15",
+     "squares": [
+      151,
+      160,
+      169,
+      178,
+      187,
+      196,
+      205,
+      214,
+      223,
+      232
+     ],
+     "count": 10
+    }
+   },
+   "least_clearance": "0",
+   "least_clearance_sci": "0",
+   "least_positive_clearance": "1/500000000000000",
+   "least_positive_clearance_sci": "2.00000000000e-15",
+   "least_positive_at": [
+    [
+     151,
+     "top"
+    ],
+    [
+     160,
+     "top"
+    ],
+    [
+     169,
+     "top"
+    ],
+    [
+     178,
+     "top"
+    ],
+    [
+     187,
+     "top"
+    ],
+    [
+     196,
+     "top"
+    ],
+    [
+     205,
+     "top"
+    ],
+    [
+     214,
+     "top"
+    ],
+    [
+     223,
+     "top"
+    ],
+    [
+     232,
+     "top"
+    ]
+   ],
+   "least_positive_count": 10,
+   "all_area_inside_one_B": true,
+   "not_contained_B": []
+  },
+  "pairs": {
+   "decided": 26796,
+   "of": 26796,
+   "classes_A": {
+    "apart": 26796,
+    "touch": 0,
+    "overlap": 0
+   },
+   "classes_B": {
+    "apart": 26796,
+    "touch": 0,
+    "overlap": 0
+   },
+   "clip_two_ways_mismatch": 0,
+   "touching": [],
+   "overlapping": [],
+   "overlapping_count": 0,
+   "overlap_area_sum_B": "0",
+   "least_margin": "997/1000000000000000",
+   "least_margin_sci": "9.97000000000e-13",
+   "least_margin_at": [
+    [
+     188,
+     197
+    ],
+    [
+     189,
+     198
+    ],
+    [
+     190,
+     199
+    ],
+    [
+     191,
+     200
+    ],
+    [
+     192,
+     201
+    ],
+    [
+     193,
+     202
+    ],
+    [
+     194,
+     203
+    ],
+    [
+     195,
+     204
+    ],
+    [
+     196,
+     205
+    ]
+   ],
+   "least_positive_margin": "997/1000000000000000",
+   "least_positive_margin_sci": "9.97000000000e-13",
+   "least_positive_margin_at": [
+    [
+     188,
+     197
+    ],
+    [
+     189,
+     198
+    ],
+    [
+     190,
+     199
+    ],
+    [
+     191,
+     200
+    ],
+    [
+     192,
+     201
+    ],
+    [
+     193,
+     202
+    ],
+    [
+     194,
+     203
+    ],
+    [
+     195,
+     204
+    ],
+    [
+     196,
+     205
+    ]
+   ],
+   "positive_margins_below": {
+    "1e-15": 0,
+    "1e-12": 104,
+    "1e-11": 411,
+    "1e-10": 539,
+    "1e-9": 540,
+    "1e-6": 564,
+    "1e-3": 587,
+    "1e-1": 708
+   }
+  },
+  "digests": {
+   "margins_sha256": "29a6ce2a7aa9727bd446d9718bdf4df55b96526d30dfd71bf98c65d5dbcd2579",
+   "clearances_sha256": "fbcbde33642bf688514064b8720e7a32b9fcb28d127604169ea12c1cf8d75e9d"
+  },
+  "method_B": "gmpy2 2.3.1, GMP 6.3.0"
+ },
+ "extents": {
+  "min_x": "0",
+  "min_y": "0",
+  "max_x": "15759531627556573/1000000000000000",
+  "max_y": "15759531627556571/1000000000000000",
+  "least_box_in_place": "15759531627556573/1000000000000000",
+  "side_minus_least_box_in_place_sci": "0",
+  "least_box_translated": "15759531627556573/1000000000000000",
+  "side_minus_least_box_translated_sci": "0"
+ },
+ "claim": {
+  "claim_text": "15.759531627557",
+  "ceil12": "15.759531627557",
+  "floor12": "15.759531627556",
+  "claim_is_ceil12": true,
+  "claim_at_least_side": true,
+  "claim_minus_side": "427/1000000000000000",
+  "claim_minus_side_sci": "4.27000000000e-13",
+  "side_minus_floor12_sci": "5.73000000000e-13"
+ },
+ "verdict": "ACCEPT",
+ "cpu_seconds": 2.8
+}

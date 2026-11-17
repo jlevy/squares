@@ -1,0 +1,30 @@
+== n-232-input.txt: n = 232, S_in = 15.75953162755658
+  contacts: 1250 candidate incidences (|gap| < 1e-08), 197 vertex-vertex touches set aside; jam-LP dual residual 0.0e+00; load-bearing set 544 contacts on 137 squares; free squares (rattlers / force-free): [7, 12, 16, 20, 21, 33, 34, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 148, 157, 166, 175, 184, 193, 202, 211, 220, 229]
+  projection onto 386 independent of 861 contact equations: max |g| 3.0e-09 -> 7.7e-76 (6 steps)
+  KKT: |A| = 861 contacts, independent |B| = 386, variables 412 (26 frozen flat), system 772x772, cond ~ 2.0e+03
+  Newton: 5 residual evaluations, residual 1.6e-15 -> 4.9e-74
+  free squares re-placed: min clearance -4.02e-9; 20 with clearance < 1e-12
+  free squares [107, 108, 109, 110, 111, 112, 113, 114, 117, 118, 148, 157, 166, 175, 184, 193, 202, 211, 220, 229] cannot be given positive clearance: promoted into the KKT system; re-solving
+  projection onto 458 independent of 1049 contact equations: max |g| 3.0e-09 -> 6.4e-75 (6 steps)
+  KKT: |A| = 1049 contacts, independent |B| = 458, variables 472 (14 frozen flat), system 916x916, cond ~ 1.8e+03
+  Newton: 5 residual evaluations, residual 1.1e-15 -> 6.7e-74
+  free squares re-placed: min clearance -8.89e-17; 2 with clearance < 1e-12
+  free squares [115, 116] cannot be given positive clearance: promoted into the KKT system; re-solving
+  projection onto 467 independent of 1077 contact equations: max |g| 3.0e-09 -> 4.3e-75 (6 steps)
+  KKT: |A| = 1077 contacts, independent |B| = 467, variables 478 (11 frozen flat), system 934x934, cond ~ 5.5e+03
+  Newton: 5 residual evaluations, residual 1.7e-15 -> 3.4e-73
+  free squares re-placed: min clearance 1.5e-12; 0 with clearance < 1e-12
+  533 weakly active (force-free) contacts kept closed
+  redundant contacts (610): max |g| = 2.1e-73; frozen flat variables (11): max |dL/dv| = 2.0e-74
+  S = 15.759531623540125992479650834802644843181852975990406482795499055   (input 15.75953162755658, shift -4.02e-9)
+  multipliers: equilibrium residual 0.0e+00; best strictly positive choice over the 544 load-bearing contacts: min lambda = 7.280e-07, max 5.866e-01
+  zero modes: 110 of 110 realised by exact motions at fixed S (step 1e-3 both ways, projection residual <= 9.1e-61, correction <= 5.8e-12 t^2, |dS| <= 1.7e-61)
+  second order: rank J_A = 302, dim null(J_A) = 110; reduced Hessian: #neg 0, #zero 110, min eig -1.2305307490428965e-15, min positive None
+    => local minimum of S, strict modulo 110 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated
+  first-order rigid squares: 27 of 137 load-bearing; squares in zero modes: [8, 13, 14, 24, 29, 30, 31, 32, 40, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 149, 150, 151, 152, 153, 154, 155, 156, 158, 159, 160, 161, 162, 163, 164, 165, 167, 168, 169, 170, 171, 172, 173, 174, 176, 177, 178, 179, 180, 181, 182, 183, 185, 186, 187, 188, 189, 190, 191, 192, 194, 195, 196, 197, 198, 199, 200, 201, 203, 204, 205, 206, 207, 208, 209, 210, 212, 213, 214, 215, 216, 217, 218, 219, 221, 222, 223, 224, 225, 226, 227, 228, 230, 231]
+  corner-corner branches (189 touches as disjunctions, MILP): min first-order dS = 0.00e+00 => jammed in every branch
+  feasibility (mp SAT): active pairs min gap -2.05e-73; non-active pairs min -1.91e-73 (173, 174); vertex-vertex min -1.95e-73; non-active walls min -1.36e-73
+  513 pairs/walls touch (|SAT gap| < 1e-12; load-bearing, weakly active or corner-corner); every other pair/wall is separated by >= 1.5e-12 (112, 119)
+  weakly active (|gap| < 1e-12, not load-bearing): [('0.0', 107, 108), ('-6.2e-76', 107, 114), ('0.0', 108, 109), ('3.1e-76', 108, 115), ('2.1e-81', 109, 110), ('0.0', 109, 116), ('-2.1e-81', 110, 111), ('-1.6e-76', 110, 117), ('0.0', 111, 112), ('0.0', 111, 118), ('0.0', 112, 113), ('-3.5e-76', 114, 115)] ...
+  certificate (n-232-input.cert): exact check VALID; S' = 15.759531623540125992637246151039 (S' - S = 1.58e-19); exact min wall 5.00e-21, min pair 1.00e-20
+  done in 26.7 s

@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#984","kind":"issue","number":984,"url":"https://github.com/jlevy/squares/issues/984","author":"RobertoOno","created_at":"2026-11-14T20:11:25Z","state":"open","closed_at":null,"title":"s(228) ≤ 15.596043120921: first public packing at the leaderboard side (registration request)"},{"report":"#985","kind":"issue","number":985,"url":"https://github.com/jlevy/squares/issues/985","author":"RobertoOno","created_at":"2026-11-14T20:11:26Z","state":"open","closed_at":null,"title":"s(147) ≤ 12.651043556588: first public packing below 7 + 4√2 (registration request)"}]
+}

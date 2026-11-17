@@ -1,0 +1,6 @@
+mutant-r1198 exit=1 status: counterexample-candidate stop: {'centre': [8.42119725230776, 5.398223670276931], 'estimate': 0.9944820024480657} nodes: 511 least_certified_bound: inf lowest_centre_estimate: 0.9944820024480657 cpu_seconds: 1.260003344 
+mutant-r3663 exit=1 status: counterexample-candidate stop: {'centre': [5.388376312659499, 5.254250875106333], 'estimate': 0.999075503314179} nodes: 255 least_certified_bound: inf lowest_centre_estimate: 0.999075503314179 cpu_seconds: 0.7846277399999999 
+thr-r1198-10012 exit=1 status: counterexample-candidate stop: {'centre': [5.563542538044242, 7.444313033682741], 'estimate': 1.0011852341557472} nodes: 43340 least_certified_bound: 1.0012018106634817 lowest_centre_estimate: 1.0011852341557472 cpu_seconds: 34.900111183 
+thr-r1198-1001 exit=0 status: verified stop: None nodes: 90285 least_certified_bound: 1.0010005377129534 lowest_centre_estimate: 1.0011265076521403 cpu_seconds: 70.911677693 
+exact-box-r3663-crate-least exit=0 status: verified boxes: 1 least_exact_bound: 1.0300449806526146 least_centre_capture: 1.0336467437483632 cpu_seconds: 0.08480178799999999 
+thr-r3663-10035 exit=0 status: verified stop: None nodes: 104153 least_certified_bound: 1.0035000299915122 lowest_centre_estimate: 1.0036440743288966 cpu_seconds: 91.951469526 

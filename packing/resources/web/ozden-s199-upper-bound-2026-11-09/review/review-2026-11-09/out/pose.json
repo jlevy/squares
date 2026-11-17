@@ -1,0 +1,46 @@
+{
+ "program": "l77_pose.py",
+ "program_sha256": "c3cd3ef38484a5ff41adab48edefd32a052ef59bd963d0453bf437da44a60961",
+ "pose_199_sha256": "40d8101c706b66bd29ebaddd567a63d398e5dc416d6d97fa77e2671895f34494",
+ "pose_172_sha256": "b3c237e9e1de5d9fc0dab17a5d7ac1fe71aefdb8e268af70d2e5e24a4b1a1baf",
+ "n": 199,
+ "side_pose_199": "14.614689853286418",
+ "side_pose_172": "13.614689853286418",
+ "side_199_is_172_plus_1_as_decimals": true,
+ "squares_1_172_verbatim_935_pose": true,
+ "grid_at_pose_S172_and_half_integers": true,
+ "pose_old_grid_least_gaps": [
+  [
+   159,
+   184,
+   "1.01e-13"
+  ],
+  [
+   159,
+   185,
+   "1.01e-13"
+  ],
+  [
+   161,
+   199,
+   "1.01027e-13"
+  ],
+  [
+   160,
+   189,
+   "1.02127e-13"
+  ],
+  [
+   157,
+   189,
+   "1.0238e-13"
+  ],
+  [
+   157,
+   188,
+   "1.02385e-13"
+  ]
+ ],
+ "pose_old_grid_overlaps": 0,
+ "pose_side_minus_certificate_side": 2.0289565390472079e-13
+}

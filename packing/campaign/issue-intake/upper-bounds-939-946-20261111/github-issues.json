@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#939","kind":"issue","number":939,"url":"https://github.com/jlevy/squares/issues/939","author":"JoostdeWinter","created_at":"2026-11-09T22:03:57Z","state":"open","closed_at":null,"title":"s(199) <= 14.6146898532835806: registration request"},{"report":"#946","kind":"issue","number":946,"url":"https://github.com/jlevy/squares/issues/946","author":"JoostdeWinter","created_at":"2026-11-10T21:27:10Z","state":"open","closed_at":null,"title":"s(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request"}]
+}

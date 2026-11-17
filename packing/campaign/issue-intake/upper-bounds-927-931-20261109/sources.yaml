@@ -1,0 +1,142 @@
+# What `python -m devtools.intake_ledger gather` reads: the five upper bounds at n <= 324 that lane
+# L63 of the intake pass (think-3guf) takes in on 9 November 2026, Doğa Özden's #927 at 232, #928 at
+# 268, #929 at 299, #930 at 303 and #931 at 307, each posted by his AI agent's account kenaznia-doga
+# 35 to 64 seconds after the one commit of the repository that holds its certificate. GitHub's
+# activity log was not read, so no push time is recorded; each issue dates its report, and nothing
+# else reached these counts between the commits and the issues. The starts are frozen at main
+# 19b354a5c (#926's merge): T-256 at 232 and 307 (Francisco Couzo's refinements of Alex Chilton's and
+# ntumlnoob's Kaggle notebook packings), T-270 at 268 and T-272 at 303 (Evan Daniel’s #914 packings,
+# registered on 5 November and landed on main on 6 November), and T-263 at 299 (the author's own #893), in
+# both lanes, with no register bound pending adoption below them. Each claim's exact side is its
+# certificate's header, read by the packet's claim record (acquisition/claims.json), which the lane
+# wrote from main 19b354a5c; each issue prints that side rounded up at 12 places, and the claim
+# record's admission holds the print to it. The Kaggle per-puzzle sides the issues quote at all five
+# counts, each above its claim, state no packing and are no report.
+format: intake-ledger-sources-v1
+read_at_main: 19b354a5cec5633ee6f96ff82752a53f2b53b063
+read_on: '2026-11-09'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l63
+  branch: claude/bold-ritchie-xo28us-l63
+  commit: 19b354a5cec5633ee6f96ff82752a53f2b53b063
+  note: The packets' claim records, written on the lane's branch from main 19b354a5c and read here by path.
+reports:
+- report: '#927'
+  issue: 927
+  holders: Doğa Özden
+  bead: think-463r
+  lanes:
+  - lane: l63
+    packet: ozden-s232-upper-bound-2026-11-09
+    record: claims.json
+    counts: [232]
+  claims:
+  - n: 232
+    measured:
+      against: T-256
+      finding: one to one under the identity by nearest centres; the optimal assignment moves 6 squares beyond 0.1
+        and 48 beyond 1e-2 (largest 0.500) and turns 95 squares by more than 1e-6 radians, 12 of them by more than 1
+        degree and by up to 28.76 degrees; 80 tilted squares against T-256's 81, none reversed; a further arrangement
+        of T-256's packing, one to one with it
+      source: packing/resources/web/ozden-s232-upper-bound-2026-11-09/measure/identity.json
+  note: >-
+    The issue names 09e324f, committed at 2026-11-09T06:02:41Z, 64 seconds before the issue. It says the packing
+    starts from the registry's 232 (T-256), taken from this repository's regularized known-best atlas, and calls it
+    neither new nor a refinement, so the claim is not classified; the measurement names the relation.
+- report: '#928'
+  issue: 928
+  holders: Doğa Özden
+  bead: think-463r
+  lanes:
+  - lane: l63
+    packet: ozden-s268-upper-bound-2026-11-09
+    record: claims.json
+    counts: [268]
+  claims:
+  - n: 268
+    measured:
+      against: T-270
+      finding: one to one under the identity by nearest centres; the optimal assignment moves 4 squares beyond 0.1
+        and 61 beyond 1e-2 (largest 0.274) and turns 121 squares by more than 1e-6 radians, 3 of them by more than 1
+        degree and by up to 2.14 degrees; 99 tilted squares against T-270's 98, none reversed; a further
+        arrangement of T-270's packing, one to one with it
+      source: packing/resources/web/ozden-s268-upper-bound-2026-11-09/measure/identity.json
+  note: >-
+    The issue names a40a15d, committed at 2026-11-09T06:02:49Z, 57 seconds before the issue. It says the packing
+    starts from the registry's 268 (T-270, #914, registered on 5 November and on main from 6 November), taken from this repository's
+    regularized known-best atlas, and calls it neither new nor a refinement, so the claim is not classified; the
+    measurement names the relation.
+- report: '#929'
+  issue: 929
+  holders: Doğa Özden
+  bead: think-463r
+  lanes:
+  - lane: l63
+    packet: ozden-s299-upper-bound-2026-11-09
+    record: claims.json
+    counts: [299]
+  claims:
+  - n: 299
+    measured:
+      against: T-263
+      finding: no symmetry pairs it one to one by nearest centres; the optimal assignment (the identity) moves 12
+        squares beyond 0.1 and 70 beyond 1e-2 (largest 0.642) and turns 131 squares by more than 1e-6 radians, 5 of
+        them by more than 1 degree and by up to 41.32 degrees, one of them to the other side of upright; 85 tilted
+        squares against T-263's 85; a further arrangement of T-263's packing, not one to one with it by nearest
+        centres
+      source: packing/resources/web/ozden-s299-upper-bound-2026-11-09/measure/identity.json
+  note: >-
+    The issue names a042eab, committed at 2026-11-09T06:02:57Z, 50 seconds before the issue. It says the packing
+    starts from the registry's 299 (T-263, the author's own #893), taken from this repository's regularized
+    known-best atlas, that it supersedes T-263 at 299, and that T-263 stays a verified bound; it calls the packing
+    neither new nor a refinement, so the claim is not classified; the measurement names the relation.
+- report: '#930'
+  issue: 930
+  holders: Doğa Özden
+  bead: think-463r
+  lanes:
+  - lane: l63
+    packet: ozden-s303-upper-bound-2026-11-09
+    record: claims.json
+    counts: [303]
+  claims:
+  - n: 303
+    measured:
+      against: T-272
+      finding: one to one under the identity by nearest centres; the optimal assignment moves 5 squares beyond 0.1
+        and 105 beyond 1e-2 (largest 0.227) and turns 151 squares by more than 1e-6 radians, 14 of them by more than
+        1 degree and by up to 19.02 degrees; 111 tilted squares against T-272's 112, none reversed; a further
+        arrangement of T-272's packing, one to one with it
+      source: packing/resources/web/ozden-s303-upper-bound-2026-11-09/measure/identity.json
+  note: >-
+    The issue names b43ca09, committed at 2026-11-09T06:03:05Z, 42 seconds before the issue. It says the packing
+    starts from the registry's 303 (T-272, #914, registered on 5 November and on main from 6 November), taken from this repository's
+    regularized known-best atlas, and calls it neither new nor a refinement, so the claim is not classified; the
+    measurement names the relation.
+- report: '#931'
+  issue: 931
+  holders: Doğa Özden
+  bead: think-463r
+  lanes:
+  - lane: l63
+    packet: ozden-s307-upper-bound-2026-11-09
+    record: claims.json
+    counts: [307]
+  claims:
+  - n: 307
+    measured:
+      against: T-256
+      finding: one to one under the identity by nearest centres; the optimal assignment moves 5 squares beyond 0.1
+        and 12 beyond 1e-2 (largest 0.200) and turns 114 squares by more than 1e-6 radians, 6 of them by more than 1
+        degree and by up to 25.23 degrees, one of them to the other side of upright; 112 tilted squares against
+        T-256's 107; a further arrangement of T-256's packing, one to one with it
+      source: packing/resources/web/ozden-s307-upper-bound-2026-11-09/measure/identity.json
+  note: >-
+    The issue names dbe8838, committed at 2026-11-09T06:03:13Z, 35 seconds before the issue. It says the packing
+    starts from the registry's 307 (T-256), taken from this repository's regularized known-best atlas, and calls it
+    neither new nor a refinement, so the claim is not classified; the measurement names the relation.
+exceptions: []
+other_items: []

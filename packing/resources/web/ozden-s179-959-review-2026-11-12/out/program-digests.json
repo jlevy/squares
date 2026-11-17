@@ -1,0 +1,159 @@
+{
+ "program": "l108_digests.py",
+ "frozen_lines_checked": 22,
+ "every_frozen_digest_holds": true,
+ "checks": [
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "programs/l108_reader.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "programs/l108_sat.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "programs/l108_clip.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "programs/l108_check.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "programs/l108_geom.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "programs/l108_selftest.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "out/selftest.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/checker-frozen-digests.txt",
+   "file": "out/check-n179.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "programs/controls-plan.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "out/plan-facts-n179.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "out/check-n179.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "programs/l108_plan_facts.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/controls-plan-digest.txt",
+   "file": "programs/l108_make_plan.py",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "frozen/review-2026-11-12-ozden-959.frozen.md",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "frozen/checker-frozen-digests.txt",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "frozen/controls-plan-digest.txt",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/selftest.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/check-n179.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/plan-facts-n179.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "out/controls-n179.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "programs/controls-plan.json",
+   "holds": true
+  },
+  {
+   "list": "frozen/findings-frozen-digest.txt",
+   "file": "programs/l108_controls.py",
+   "holds": true
+  }
+ ],
+ "files": {
+  "README.md": "34aaa94f093f201b36feaddafcb2ffd3853ca4a0ee27d550ebcc60c2b5ef6966",
+  "frozen/checker-frozen-digests.txt": "6ed17495a6c026c2f3a8b9ca2406cb526202c02171d14337082623e268ae9103",
+  "frozen/controls-plan-digest.txt": "2616c7025fbe8f42ad5e552d9dd24b75ed80421f605872cf854ea7fe2c8c7756",
+  "frozen/findings-frozen-digest.txt": "dd54197c6eb9ff6b3429feb0abf5a8f09065b18591a04b2a5b6d8e56345a7b8b",
+  "frozen/review-2026-11-12-ozden-959.frozen.md": "8f6884a3212a26e9f226545ae09df68fec3dbbc85b72df49b779f85f9b33ac97",
+  "out/check-n179.json": "ed2b381e24af9f7d40a6c40c274f7aa8fa1848223364467a064bcdcb8577550d",
+  "out/contract-n179.json": "eb05817b0b1ed1da14e54a3b011ecd187a7979f1d20242f336a5e5668246f0fc",
+  "out/controls-n179.json": "5be15b826054632b7b33091ff006af79b050ab30f52e0540f20607cdb34ac5b2",
+  "out/custody.json": "bb2f32cee4183c21121f80a2693424690a0639f6052a56715c0590258578f24f",
+  "out/house-n179.json": "1438cd8e12f2506f464e4908fc448cc5278c129f8a78ddaac0a69fa4f49bfdae",
+  "out/house-t291-main.json": "58b7d80837f3840483524b1960998dae9434131d527c28f7784726c8540f6f07",
+  "out/identity-n179.json": "e4c079dc6510af780d3d32152a068d70bd0b756ee1523c8b279a995d6790331e",
+  "out/plan-facts-n179.json": "219ddfee1e869ba8379fddfd3f9f5258b2d7c27ee6422eb64a5f604e267ed62b",
+  "out/pose-n179.json": "55cf9b3a7513a2d17bbab3c98edf7b6c314eae153fc6101e6f87d5a04366a39c",
+  "out/pose-n954.json": "8f4b3feeb77ed6f6c2367824384e7a90f1fdce938474c896e9748468eeb8cc81",
+  "out/s70-n179.json": "2e3422a09392226eeedb3ae1c18a0ae870046a712eae5c123a6bcc68035d4f63",
+  "out/selftest.json": "b8e2a69ccc1ebba744c13f1423847d53aa8cf5e81e162f12a91c56fc85f3575e",
+  "out/sides.json": "07d43b5b76a6035ce06f950a2d98bec5455304ea273a272b13675da4f87f9c0e",
+  "programs/controls-plan.json": "febe78fe9425f2192b2a349cf92fa2e4f882fcdc5e92590aa59e694dcfaa53e5",
+  "programs/issue-959.json": "aa7b795c2418889189c925a959d76388cd9b62de6a42144b8608f032014180e0",
+  "programs/l108_check.py": "6c6dbaff0369784888e087c7fb5bd6a9f05a0e5e095e60caf7e946a66616e6ef",
+  "programs/l108_clip.py": "7fec77bc02a66134cb01d543251eaad9b36141cc68069910dfb0f96291f268d6",
+  "programs/l108_contract.py": "30ccaa2d299e023bdafd07402922c51dfdedb48fa9575f49b6d59ff336ee545d",
+  "programs/l108_controls.py": "51ff1b944199c0e533545f7159ddc332ec1eb91da4c61381754ad840b76fffba",
+  "programs/l108_custody.py": "b88cbfefc411c7ed8e0d94b2fe3b97a6cc1586c9ca7f610cd092e6bca30dc4f4",
+  "programs/l108_digests.py": "fde9a7b07f1b6d1415fdf28c9cfcf172ff341db74aae80e5edf6a494de7309db",
+  "programs/l108_geom.py": "61633078d00e939597372c9c1c032fc794f99b41217f503f72edebfbbcbec387",
+  "programs/l108_house.py": "685d19966f5ac3d0f42f9f16c414c2e57edf7fd08b8b41b397987ea09f00df48",
+  "programs/l108_identity.py": "db064b2f34d3254b6686045f917d911e95713f83d90e37595e485247131f0e44",
+  "programs/l108_make_plan.py": "cbf8463347b44a6f1d0a139519b037ba4c08d4ca79b676719d17a3a2015e30bf",
+  "programs/l108_plan_facts.py": "63e5820d17420c7bc641afeaf696b13e072f128d745ab4251ad851932f7d9506",
+  "programs/l108_pose.py": "112eecdc70102ba583ced8f813431893f13136efea7328c0d66a2e6e8b2a7761",
+  "programs/l108_reader.py": "b56db242a2580265607154243467ff8e0509e5b6b6e9fd9b7097b0bdb0f94184",
+  "programs/l108_s70.py": "2bdaea314d225d75e4a3fa35d38412b5873d62a0621c803db00bfd42fc6c3366",
+  "programs/l108_sat.py": "31d5846efe2390bc061ac7ba18c7360ce9248ae9403f04d0a8771665955ceabd",
+  "programs/l108_selftest.py": "75ae5da556c21dd77eeaecec1a3c6bbaddaa9b978022046e6dc97115e67a903a",
+  "programs/l108_sides.py": "2b11ae30109951c16afafdd49094ea765172a34631a54884440b563bc273337d",
+  "programs/l108_wit.py": "cb5ba9bcc9e6eac9121cd19c65f69049322c64cf5aac68aba3f89ef823102f0f",
+  "programs/run_after.sh": "28eff5bd3a28b7e8ba223414e97c1e8d7cad84f80717443d1024a9d219294e07",
+  "programs/run_frozen.sh": "017e8bfb81295c180e64544d352a5b6cbdce0ef6dbdf05a21450de95ad0c59be"
+ }
+}

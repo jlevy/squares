@@ -1,0 +1,21 @@
+# Lane L186 findings, frozen at 2026-11-16T06:34:58Z, before the author's README.md, check.py, check-output.txt, packing-witness-verify.txt, make-pose.py, LICENSE files or decimal poses, this repository's witness, verifier, promotion, identity or contraction code, the register entries, case records or house witnesses at 127, 204, 232, 264 or 305, Kodaj's notebook, or any import lane's work was read.
+# the frozen review text, and every receipt and program it cites:
+d876b18f50e2a9a179c0e27cf6b5b7842e99fda9287197894372c59bc2a1b36c  frozen/review-2026-11-16-joegun-1001.frozen.md
+47aec91aeec3338f0c3c711cb53accb15146abc7bfcd5ca304a649b81cc72deb  frozen/checker-frozen-digests.txt
+35054d216cc5c11fe52e26e0b5a1769474a522bc51eacd386c90763a1fadef04  programs/l186_describe.py
+77fb7f168eb463d478ec295a91b4ad684441fcce36bf7c906bbb8e47f9f50cb9  out/check-n127.json
+5b79239203fe66067439dfce4d1d6a735cdbc379adbe0b011e32593c279684cf  out/check-n204.json
+c7f9e6ae8047e36d5e59bf90b3d8685ef4ff3c9b736d3aef2e273b8acf5140cd  out/check-n232.json
+ce37438d83548a7fb2b04f57c2669665562332ec8223747a400c726b40660765  out/check-n264.json
+8b4bf4d3a6ca5f120d69e48b6868d6f1be8ae0bccee1a0e0b86c9ab1eac762a8  out/check-n305.json
+cd5a3ea7aa612afa02d665fd5d55c42dc74d54fafd32234cd2561f28246d2807  out/controls-n127.json
+01c6eed66b28a690f78a13c80f6c38805f9b6b193178204611ff0e66d7961564  out/controls-n204.json
+fa8c1501b8aedbbeebbb41909b86153351fa4d3c1e9bc2ccb55e75f4a429dba9  out/controls-n232.json
+7cdeab9a5037f25ab63285f154f80f6e90990f9b3a5041f07325e6019b87a76c  out/controls-n264.json
+aff7f8ab1a1fafd789c4fa130c8f26ed9a8081ec89f180a0b0d849a9e7a8202a  out/controls-n305.json
+ca714102b63d35c0ec4e543c8979392016679aed4b6dc022fbb947d12a67f72a  out/describe-n127.json
+274eb85efc6757414abc7056d23f209b693d18fa45e577098e7e00d7f2bfb075  out/describe-n204.json
+a24d4c4f5f4f9940a275b1899ae3412c1ebd01f2010179c4a79d2e28985794f9  out/describe-n232.json
+8fafe7f74752c67c719177685f79f08b6b8f2b44636eadc26bce8bced2db5f7c  out/describe-n264.json
+7948b938d3648e52970c96145c937a5a25e7326bb8accbd68446915d5f39dc5d  out/describe-n305.json
+a45935b8adbcfa2db33cdf5a6c7cde41b6e4bcb0f26fd8c71329d52f1c1f7288  out/selftest.json

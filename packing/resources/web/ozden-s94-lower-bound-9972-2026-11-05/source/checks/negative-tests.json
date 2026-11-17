@@ -1,0 +1,36 @@
+{
+  "status": "NEGATIVE_TESTS_PASSED",
+  "tests": [
+    {
+      "test": "duplicate_direction",
+      "status": "REJECTED_AS_REQUIRED",
+      "code": "exhaustive_unique"
+    },
+    {
+      "test": "out_of_range_direction",
+      "status": "REJECTED_AS_REQUIRED",
+      "code": "exhaustive_unique"
+    },
+    {
+      "test": "nonfinite_bound",
+      "status": "REJECTED_AS_REQUIRED",
+      "code": "native_bound"
+    },
+    {
+      "test": "subthreshold_bound",
+      "status": "REJECTED_AS_REQUIRED",
+      "code": "native_bound"
+    },
+    {
+      "test": "wrong_native_source_identity",
+      "status": "REJECTED_AS_REQUIRED",
+      "code": "native_source"
+    },
+    {
+      "test": "modified_verifier_source",
+      "status": "REJECTED_AS_REQUIRED",
+      "code": "source_digest"
+    }
+  ],
+  "note": "Corrupt fixture archive hashes were recomputed, so semantic gates, not only stale manifest hashes, cause these refusals."
+}

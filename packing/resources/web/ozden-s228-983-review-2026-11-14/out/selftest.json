@@ -1,0 +1,16 @@
+{
+ "program": "l159_selftest.py",
+ "verdict": "PASSED",
+ "cases": 32833,
+ "failed": 0,
+ "failures": [],
+ "broken_method_a_zero_margin_apart": {
+  "cases": 32833,
+  "failed": 913
+ },
+ "broken_method_b_open_half_planes": {
+  "cases": 32833,
+  "failed": 2135
+ },
+ "cpu_seconds": 3.2
+}

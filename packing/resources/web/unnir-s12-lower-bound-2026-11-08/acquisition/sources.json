@@ -1,0 +1,78 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-08T14:57Z",
+  "git_scope": "A full clone of unnir/s12-lower-bound-3.9716, fetched for the intake of jlevy/squares#924; the repository holds one commit, 064c295 (committed 2026-11-08T14:20:03Z, 'Publish s(12) >= 3.9716 certificate and replay evidence'), which was main and HEAD when fetched, of 20 files, and the scope is the whole tree. #924 names this commit. Every digest in the source's SHA256SUMS matched (sha256sum -c, 19 files), and the certificate's SHA-256 is 833b76a179a420a40775cc76305ec9ffb7f6ea27472e587958c234c4c4712cbd, as the issue states. verifier/rust/ is evand/square-packing at 0e76d9fe verify/ byte for byte (Git blobs f7c700c8 src/main.rs, 7c956f54 Cargo.toml, 946d942c Cargo.lock, compared with git ls-tree in a blobless clone of evand/square-packing fetched for this intake); verifier/cpp/indep_scan.cpp is squarepacker/s12-lower-bound at 7a96bec3 tools/indep_scan.cpp with its one #include <bits/stdc++.h> line replaced by ten standard headers and nothing else changed. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "unnir-s12-lower-bound-3.9716",
+      "source_url": "https://github.com/unnir/s12-lower-bound-3.9716",
+      "source_ref": "main",
+      "source_commit": "064c2955670765321aaf1c0a2d5c778949daab6b",
+      "committed_utc": "2026-11-08T14:20:03Z",
+      "git_tree": "23680a4070e2e0c3b9bc3456d6a422be4681636a",
+      "archived_path": "packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716",
+      "subtree_manifest": "packing/resources/web/unnir-s12-lower-bound-2026-11-08/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".gitignore",
+        "LICENSE",
+        "LICENSES",
+        "README.md",
+        "SHA256SUMS",
+        "certificate",
+        "verification",
+        "verifier"
+      ],
+      "subtree_file_count": 20,
+      "subtree_total_bytes": 263776,
+      "retained_file_count": 15,
+      "retained_total_bytes": 260015,
+      "compressed": [
+        "s12-lower-bound-3.9716/certificate/s12_lower_3.9716.txt.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": ".gitignore",
+          "bytes": 37,
+          "sha256": "b85c32907b12eb31ffb44484289e50c366267fdd7ed629210390817267fd0702",
+          "reason": "A retained .gitignore would act on this repository's tree; it names only the build and replay-output directories and Python caches."
+        },
+        {
+          "path": "LICENSES/Evan-Daniel-MIT.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT notice, byte for byte the LICENSE of evand/square-packing that the evand-batch-105-130-2026-10-07 packet retains",
+          "identical_to": "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE"
+        },
+        {
+          "path": "LICENSES/Ryu-Sungjoon-MIT.txt",
+          "bytes": 2357,
+          "sha256": "2794da99e1d3f291a7439bfa4e029fa319fca43efbb4d4cfa4c4b407b4b5fb7e",
+          "reason": "Ryu Sungjoon's MIT notice, byte for byte the LICENSE that squarepacker/s12-lower-bound carries at 7a96bec3, which the 2026-10-05 packet retains",
+          "identical_to": "packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/LICENSE"
+        },
+        {
+          "path": "verifier/rust/Cargo.lock",
+          "bytes": 150,
+          "sha256": "bc8aceea5da6316d672b29f5a4c1a21d823735aa294ac82883a210c4028fc3fe",
+          "reason": "Daniel's verify lockfile, Git blob 946d942c, unchanged since the 2026-09-26 evand packet's s12/verify/Cargo.lock",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/Cargo.lock"
+        },
+        {
+          "path": "verifier/rust/Cargo.toml",
+          "bytes": 149,
+          "sha256": "bb4c383a36628a2e7690f3ade2b7493a3edf89755522bc5bad68720bfbec9cf3",
+          "reason": "Daniel's verify manifest, Git blob 7c956f54, unchanged since the 2026-09-26 evand packet's s12/verify/Cargo.toml",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/Cargo.toml"
+        }
+      ],
+      "license": "MIT. LICENSE grants it for the new certificate, the packet documentation and the replay helper, copyright (c) 2026 unnir (Numaro, https://numaro.tech); the verifier sources keep their upstream MIT notices in LICENSES/: Evan Daniel's for verifier/rust/ (byte for byte the LICENSE the evand-batch-105-130-2026-10-07 packet keeps) and Ryu Sungjoon's for verifier/cpp/ (byte for byte the LICENSE the squarepacker-s12-lower-bound-2026-10-05 packet keeps). The author submitted the source on jlevy/squares#924 and states the MIT grant for retention and reproduction there.",
+      "claims": [
+        "certificate/s12_lower_3.9716.txt is a plain weighted-point certificate in Evan Daniel's format that s(12) >= 9929/2500 = 3.9716: side 15886400/4000000, D = 4000000, W = 9985226, 4,996 distinct positive-weight points, exactly D4-symmetric, total weight 119787760/9985226 = 11.9964996..., below 12 by 34952/9985226, so every closed unit square in [0, 9929/2500]^2 capturing weight at least one excludes twelve unit squares from any square of side below 9929/2500 (README.md, verification/summary.json).",
+        "Evan Daniel's verify, vendored unchanged from evand/square-packing 0e76d9fe and built with overflow checks, accepted it with arguments CERT 12 96000 10 0 over all 39,765 bins covering [0, 45] degrees with checked D4 symmetry, least captured weight 9985226/9985226 = 1 at bin k = 39531, exit 0, 2,167.12 s wall on 10 threads of an Apple M4 Max (verification/logs/rust.log).",
+        "Ryu Sungjoon's indep_scan.cpp, from squarepacker/s12-lower-bound 7a96bec3 with only its include line changed, accepted it with arguments CERT 96000 1000000000000000 12 over all 96,000 bins covering [0, 90] degrees with no symmetry assumed, least captured weight 9985226/9985226 at bin k = 39531, exit 0, about 626.45 s wall on one thread, run concurrently with the Rust check (verification/logs/cpp.log).",
+        "Two negative controls made by verification/replay.py --controls: W doubled with every numerator unchanged, refused by both checkers at the single bin 39531 with capture exactly 1/2 (Rust exit 4, a partial run with no verdict; C++ exit 1, NOT VERIFIED), and the last point removed with the declared count kept, refused by both parsers with exit 2 (verification/controls/).",
+        "The two checks share the certificate, the weighted closed-cover theorem, the rational angle net N = 96000 and the shrink mechanism; the README calls them separately written implementations, not method-distinct proofs, and producer evidence, and says no independent replay, review, Lean replay or parent-core interval replay was done. It claims no optimality and no new technique, and credits the new certificate instance to unnir (Numaro), building on Levy, Evan Daniel and Ryu Sungjoon and the Burns and Massaccesi framework; it says Numaro Autonomous Research (agentic autonomous autoresearch) assisted the work."
+      ]
+    }
+  ]
+}

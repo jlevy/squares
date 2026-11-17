@@ -1,0 +1,9 @@
+778884d09f88ce159ea2cea2134d30fb14bf01bf58fc9e69c6f3d77433da8168  ./CREDITS.md
+c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./LICENSE
+bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5  ./search/mixed_cover.py
+6294052a37ce66c5d84b55afd606e3a52f463e22b876bf44b5aa903aefb7e737  ./search/qx2_zm.py
+3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc  ./search/zeromargin.py
+1fd203469bb43a55ca7ce376b9717437e0970eead31941ec7fa100ab24d5ba95  ./search/zm_mixed.py
+e1daec4d9995e879ddbf4aa5fb89b6f03eaaa23157ef60feb72741e3a0ffa57e  ./verify2/Cargo.lock
+4e0f078ea45b32802c21cb71413305e30cd062c3fa371c6ff6e62bda3d07a577  ./verify2/Cargo.toml
+e2bb84e9e05938db416940ad608d2583ca9a0c248d59820937c4ce59d607ead7  ./verify2/src/bin/zmx2.rs

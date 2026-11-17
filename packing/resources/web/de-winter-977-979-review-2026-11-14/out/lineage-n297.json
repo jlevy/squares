@@ -1,0 +1,219 @@
+{
+ "program": "l153_lineage.py",
+ "new": {
+  "dominant_lean_degrees": 0.375,
+  "dominant_lean_runs_along_band": [
+   [
+    -1,
+    48
+   ],
+   [
+    1,
+    41
+   ]
+  ],
+  "within_1_degree_of_upright": 187,
+  "exactly_upright": 187,
+  "tilted": 110,
+  "lean_from_45_degrees_top": [
+   [
+    -0.375,
+    48
+   ],
+   [
+    0.375,
+    41
+   ],
+   [
+    0.282,
+    6
+   ],
+   [
+    0.159,
+    3
+   ],
+   [
+    0.556,
+    1
+   ],
+   [
+    0.587,
+    1
+   ],
+   [
+    -0.053,
+    1
+   ],
+   [
+    0.233,
+    1
+   ]
+  ],
+  "lean_values": 16,
+  "upright_blocks": [
+   {
+    "size": 95,
+    "centroid": [
+     0.74,
+     0.26
+    ],
+    "first_ids": [
+     73,
+     74,
+     75
+    ]
+   },
+   {
+    "size": 72,
+    "centroid": [
+     0.226,
+     0.774
+    ],
+    "first_ids": [
+     1,
+     2,
+     3
+    ]
+   },
+   {
+    "size": 10,
+    "centroid": [
+     0.085,
+     0.085
+    ],
+    "first_ids": [
+     168,
+     170,
+     172
+    ]
+   },
+   {
+    "size": 10,
+    "centroid": [
+     0.915,
+     0.915
+    ],
+    "first_ids": [
+     169,
+     171,
+     173
+    ]
+   }
+  ]
+ },
+ "T-174": {
+  "dominant_lean_degrees": 0.26,
+  "dominant_lean_runs_along_band": [
+   [
+    -1,
+    30
+   ],
+   [
+    1,
+    27
+   ],
+   [
+    -1,
+    7
+   ],
+   [
+    1,
+    1
+   ],
+   [
+    -1,
+    1
+   ],
+   [
+    1,
+    32
+   ]
+  ],
+  "within_1_degree_of_upright": 190,
+  "exactly_upright": 46,
+  "tilted": 107,
+  "lean_from_45_degrees_top": [
+   [
+    0.26,
+    60
+   ],
+   [
+    -0.26,
+    38
+   ],
+   [
+    -0.045,
+    5
+   ],
+   [
+    0.016,
+    3
+   ],
+   [
+    -0.016,
+    1
+   ]
+  ],
+  "lean_values": 5,
+  "upright_blocks": [
+   {
+    "size": 91,
+    "centroid": [
+     0.746,
+     0.254
+    ],
+    "first_ids": [
+     67,
+     79,
+     80
+    ]
+   },
+   {
+    "size": 78,
+    "centroid": [
+     0.235,
+     0.765
+    ],
+    "first_ids": [
+     1,
+     2,
+     3
+    ]
+   },
+   {
+    "size": 10,
+    "centroid": [
+     0.915,
+     0.915
+    ],
+    "first_ids": [
+     170,
+     171,
+     172
+    ]
+   },
+   {
+    "size": 10,
+    "centroid": [
+     0.085,
+     0.085
+    ],
+    "first_ids": [
+     180,
+     181,
+     182
+    ]
+   },
+   {
+    "size": 1,
+    "centroid": [
+     0.723,
+     0.972
+    ],
+    "first_ids": [
+     207
+    ]
+   }
+  ]
+ }
+}

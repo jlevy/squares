@@ -1,0 +1,127 @@
+{
+ "board": {
+  "side": "11",
+  "pitch": 10,
+  "wden": 2000000000000,
+  "points": 0,
+  "segments": 13244,
+  "polygons": [
+   [
+    4,
+    23120000000000,
+    38,
+    38,
+    72,
+    38,
+    72,
+    72,
+    38,
+    72
+   ]
+  ],
+  "trailing_lines": 0,
+  "distinct_pieces": 13148,
+  "repeated_pieces": 96,
+  "min_weight": "101/1000000000000",
+  "weights_positive": true,
+  "inside_container": true,
+  "lebesgue_rect_tenths": [
+   38,
+   72,
+   38,
+   72
+  ],
+  "lebesgue_density": "1"
+ },
+ "total": "28909433072241/250000000000",
+ "D": "1340566927759/1000000000000",
+ "D_float": 1.340566927759,
+ "D_equals_sol_json": true,
+ "D_gt_5_4": true,
+ "slack_below_k2_minus_5_per_k": "90566927759/250000000000",
+ "board_d4_invariant": true,
+ "premises": {
+  "omega0_pieces": 586,
+  "nu_pieces": 1518,
+  "all_elementary": true,
+  "all_weights_positive": true,
+  "omega0_start_phase_in_0_1": true,
+  "omega0_depth_in_0_R": true,
+  "nu_in_0_R_square": true,
+  "nu_diagonal_symmetric": true,
+  "omega_mirror_symmetric": true,
+  "omega0_total": "19/5",
+  "nu_total": "3312166719827/250000000000"
+ },
+ "built_mu11_equals_board": true,
+ "built_d4_invariant": {
+  "10": true,
+  "11": true,
+  "12": true,
+  "13": true,
+  "14": true,
+  "15": true,
+  "16": true,
+  "17": true,
+  "18": true,
+  "19": true,
+  "20": true
+ },
+ "totals_equal_k2_minus_4D_k10_to_40": true,
+ "omega0_total_equals_19_5": true,
+ "windows": [
+  {
+   "k": 10,
+   "window_pairs": 9,
+   "pieces_compared": 17836,
+   "mismatches": 0,
+   "first": []
+  },
+  {
+   "k": 12,
+   "window_pairs": 25,
+   "pieces_compared": 29276,
+   "mismatches": 0,
+   "first": []
+  },
+  {
+   "k": 13,
+   "window_pairs": 36,
+   "pieces_compared": 34996,
+   "mismatches": 0,
+   "first": []
+  },
+  {
+   "k": 14,
+   "window_pairs": 49,
+   "pieces_compared": 40716,
+   "mismatches": 0,
+   "first": []
+  },
+  {
+   "k": 20,
+   "window_pairs": 169,
+   "pieces_compared": 75036,
+   "mismatches": 0,
+   "first": []
+  },
+  {
+   "k": 25,
+   "window_pairs": 324,
+   "pieces_compared": 103636,
+   "mismatches": 0,
+   "first": []
+  }
+ ],
+ "window_self_control_k12": {
+  "k": 12,
+  "window_pairs": 25,
+  "pieces_compared": 29276,
+  "mismatches": 3,
+  "first": [
+   "((40, 65, True, True, 0), (0, 55, False, False, 0), 1430, 1430, (40, 65, 38, 55), (40, 65, 38, 55))",
+   "((50, 75, True, True, 10), (0, 55, False, False, 0), 1430, 1430, (50, 75, 38, 55), (50, 75, 38, 55))",
+   "((60, 80, True, True, 20), (0, 55, False, False, 0), 1137, 1137, (60, 80, 38, 55), (60, 80, 38, 55))"
+  ]
+ }
+}

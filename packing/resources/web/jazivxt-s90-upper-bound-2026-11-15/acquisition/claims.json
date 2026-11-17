@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/989",
+  "source": "https://github.com/dpre4ai/n90-square-packing",
+  "revision": "f9b31b4ebddb278a128b6cb5c43836a305a24dca",
+  "read_on": "2026-11-15",
+  "read_at_main": "a4f36ae70e5ffa3fb1f88b49c8e8befda8a38e45",
+  "horizon": 324,
+  "results": [
+    {"n": 90, "certificate": "n90.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "9.998277166926", "printed_in": "https://github.com/jlevy/squares/issues/989", "exact_side": "4999138583463/500000000000", "ceiling": "9.9982771669260000", "first_committed": "2026-11-15T03:00:02Z", "grid_side": "10", "case": {"source_key": "[Kingbird]", "holders": "trivial grid", "reported_value": "10.0", "verified_value": "10", "evidence": ["E-basic-grid-upper"], "exact_side": "10", "relation": "below", "difference": "861416537/500000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

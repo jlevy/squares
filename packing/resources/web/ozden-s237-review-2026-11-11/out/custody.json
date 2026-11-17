@@ -1,0 +1,170 @@
+{
+ "program": "l109_custody.py",
+ "programs_sha256": {
+  "l109_check.py": "ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932",
+  "l109_custody.py": "760c850e5db220dd495013b41b974afca0e9961ea26f403933b3d12136dc333c"
+ },
+ "decides": "nothing",
+ "clone_head": "13c4b231bb16437a6ee3751e75113ef95113b235",
+ "head_is_pin": true,
+ "commits_in_clone": 1,
+ "commit": {
+  "sha": "13c4b231bb16437a6ee3751e75113ef95113b235",
+  "parents": "",
+  "tree": "2b7d007e9988b17cecc06d44db63dc653cbcb96d",
+  "author": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+  "authored": "2026-11-11T21:37:37+00:00",
+  "committer": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+  "committed": "2026-11-11T21:37:37+00:00",
+  "subject": "s(237) <= 15.893805580573: improved packing of 237 unit squares"
+ },
+ "files": {
+  "LICENSE-evand-square-packing.txt": {
+   "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "blob_computed_equal": true,
+   "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+   "bytes": 1068,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 1068
+  },
+  "LICENSE.md": {
+   "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "blob_computed_equal": true,
+   "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+   "bytes": 1484,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 1484
+  },
+  "README.md": {
+   "blob": "d5fcac96a67ff88b6ebb0f494799cf9db26a7903",
+   "blob_computed_equal": true,
+   "sha256": "541dee128082dea7d000f0ff580f9b1f6875649ada6c8955349c9ae1681aad13",
+   "bytes": 6922,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 6922
+  },
+  "n-237-candidate.yaml": {
+   "blob": "48b0b1e3819b4648c66c3e0a8157d4ad72c096a5",
+   "blob_computed_equal": true,
+   "sha256": "80687bdceef5780f907c7f47a181802fbfb76a026d077aa18f7bb3eaa3ec3833",
+   "bytes": 695934,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 695934
+  },
+  "n-237-decimal-pose.yaml": {
+   "blob": "3857151461849e3b6a3a387a7d594475fc3e5d88",
+   "blob_computed_equal": true,
+   "sha256": "c2b099dcfaef1a71fe0c82b16398345a0dc15fbb4b28e2c96c872f7adfe01329",
+   "bytes": 25800,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 25800
+  },
+  "n237-witness.json": {
+   "blob": "48d3a6b230b449eb30ae47939aebed4f9dac167a",
+   "blob_computed_equal": true,
+   "sha256": "98f55b8ea9a5ae030fbdabc2c21b37e1a72f09a0eb656a6872d48e47ac573ca7",
+   "bytes": 688628,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 688628
+  },
+  "packing-witness-verify.txt": {
+   "blob": "b7d1206936456a153dd4fccd02db1cc487b1b2c1",
+   "blob_computed_equal": true,
+   "sha256": "2a938b69be2b0d7a445169819c2a73878468d7d177c50041f659e1b99b936efb",
+   "bytes": 555,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 555
+  },
+  "records/n-237-candidate-diff.png": {
+   "blob": "07cc09cc41634337bbb5a8a62a4f82737eb411ac",
+   "blob_computed_equal": true,
+   "sha256": "60d20cdbbc2a149fec19b2f3c16109b56f7ec48a495c219535cc6f493e6ef097",
+   "bytes": 260280,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 260280
+  },
+  "sqcheck-output.txt": {
+   "blob": "ae03be47574b35291002092592444b8bd50f7cb5",
+   "blob_computed_equal": true,
+   "sha256": "e81b07b47dd95cf3764151b0698d57d88383e0f895251a514ab61b293d984155",
+   "bytes": 101,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 101
+  },
+  "verifier/README.md": {
+   "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+   "blob_computed_equal": true,
+   "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+   "bytes": 3441,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 3441
+  },
+  "verifier/sqcheck.py": {
+   "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "blob_computed_equal": true,
+   "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+   "bytes": 17654,
+   "mode": "100644",
+   "type": "blob",
+   "size_listed": 17654
+  }
+ },
+ "retained_copies_on_main_by_blob": {
+  "LICENSE.md": {
+   "copies_on_main": 16,
+   "examples": [
+    "packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/LICENSE.md",
+    "packing/resources/web/ozden-s172-upper-bound-2026-11-09/source/LICENSE.md",
+    "packing/resources/web/ozden-s180-upper-bound-2026-11-10/source/LICENSE.md",
+    "packing/resources/web/ozden-s199-upper-bound-2026-11-09/source/LICENSE.md",
+    "packing/resources/web/ozden-s204-upper-bound-2026-11-03/licence/LICENSE.md",
+    "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/LICENSE.md"
+   ]
+  },
+  "LICENSE-evand-square-packing.txt": {
+   "copies_on_main": 46,
+   "examples": [
+    "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt",
+    "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE",
+    "packing/resources/web/evand-compositions-2026-10-13/source/LICENSE",
+    "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/LICENSE",
+    "packing/resources/web/evand-exact-and-local-reports-2026-10-07/source/s12/LICENSE",
+    "packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/LICENSE"
+   ]
+  },
+  "verifier/sqcheck.py": {
+   "copies_on_main": 1,
+   "examples": [
+    "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+   ]
+  },
+  "verifier/README.md": {
+   "copies_on_main": 1,
+   "examples": [
+    "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+   ]
+  }
+ },
+ "main": {
+  "sha": "c8448724edfb33053037f362d50bed961b7ada79",
+  "committed": "2026-11-11T10:36:11-08:00",
+  "subject": "Merge pull request #952 from jlevy/claude/bold-ritchie-xo28us-l90"
+ },
+ "issue": {
+  "created_at": "2026-11-11T21:37:50Z",
+  "updated_at": "2026-11-11T21:55:37Z",
+  "author": "kenaznia-doga",
+  "comments": 0,
+  "states_check_time": true
+ }
+}

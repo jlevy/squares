@@ -1,0 +1,19 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "200f2ebc1c585259d7687fc8550c975e467d97d6",
+  "read_on": "2026-11-09",
+  "counts": [
+    {
+      "n": 199,
+      "start": [{"label":"register T-193, pending adoption","holders":"[Daniel exact current records 2026-10-16]","side":"14.617572173593","exact":false}],
+      "steps": [{"report":"#938","kind":"issue","reported_at":"2026-11-09T20:31:32Z","side":"14.614689853287","exact":true,"verdict":"recorded","reason":"below","decided_against":["register T-193, pending adoption"],"difference":"below by at least 2.88e-03","first_committed":"2026-11-09T20:30:58Z","measured":"squares 1 to 172 are T-282's certificate at 172, corner for corner, and the other 27 the L step's row of 14 and column of 13 at side S172 + 1, exactly; no symmetry pairs it one to one with T-127's packing by nearest centres, and the best (a reflection) moves 81 squares beyond 0.1 (largest 1.006) and turns 69 by more than 1e-6 radians; another arrangement than the house's, by way of T-257's 172, which Evan Daniel found from the 199 record by removing an L"}],
+      "best_now": [{"label":"#938","holders":"Doğa Özden","side":"14.614689853287","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":1,"claims":1,"recorded_new":0,"recorded_new_continuing":0,"recorded_refinement":0,"recorded_unclassified":1,"recorded_by_exception":0,"not_recorded":0,"undecided":0},
+  "cross_check": [],
+  "reports": [{"report":"#938","url":"https://github.com/jlevy/squares/issues/938","kind":"issue","holders":"Doğa Özden","reported_at":"2026-11-09T20:31:32Z","bead":"think-1goz","counts":[199],"recorded":[199],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[199],"recorded_by_exception":[],"not_recorded":[],"undecided":[]}],
+  "owner_decisions": {"exact_ties":[],"first_commit_before_report":[],"undecided":[],"publication_dependent":[],"unknown_times":[],"refinement_chains":[],"key_reason_candidates":[],"measured_identity":[{"n":199,"report":"#938","verdict":"recorded","source_says":"nothing stated","against":"T-127","finding":"squares 1 to 172 are T-282's certificate at 172, corner for corner, and the other 27 the L step's row of 14 and column of 13 at side S172 + 1, exactly; no symmetry pairs it one to one with T-127's packing by nearest centres, and the best (a reflection) moves 81 squares beyond 0.1 (largest 1.006) and turns 69 by more than 1e-6 radians; another arrangement than the house's, by way of T-257's 172, which Evan Daniel found from the 199 record by removing an L","source":"packing/resources/web/ozden-s199-upper-bound-2026-11-09/measure/identity.json"}]},
+  "other_items": []
+}

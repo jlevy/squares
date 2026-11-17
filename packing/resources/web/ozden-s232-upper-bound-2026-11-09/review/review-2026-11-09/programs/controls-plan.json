@@ -1,0 +1,25 @@
+{
+ "about": "Controls for lane L64's review of issues 927-931, with each expected outcome stated before any control ran. Applied to each of the five certificates. 'Past' is 1e-30 beyond exact contact. 'Both' means methods A (separating axes, Fraction) and B (clipped areas, mpq) of the frozen checker, deciding the whole file unless the control says pair-level or square-level. S is the certificate's side; i, j is its least-margin pair from check-nNNN.json, j the second id.",
+ "stated": "2026-11-09, before l64_controls.py was written or run",
+ "controls": [
+  {"id": "G1", "kind": "gross", "what": "the last square replaced by a copy of the first", "expect": "REFUSE", "detail": "that pair overlaps by both: margin -1, area 1"},
+  {"id": "G2", "kind": "gross", "what": "square 1 translated by (S, 0)", "expect": "REFUSE", "detail": "square 1 outside by both"},
+  {"id": "G3", "kind": "gross, reader", "what": "the YAML with the last square's entry removed (n unchanged)", "expect": "READ_REFUSED", "detail": "count n - 1 for n"},
+  {"id": "G4", "kind": "gross, reader", "what": "the YAML with the last square's id set to 1", "expect": "READ_REFUSED", "detail": "repeated id"},
+  {"id": "G5", "kind": "gross, shape", "what": "square 1's third corner moved by 1e-30 in x", "expect": "REFUSE", "detail": "square 1 not a unit square by both, and not a square at all"},
+  {"id": "G6", "kind": "rotation sense", "what": "every square reflected in the horizontal line through its centre, corners kept in their order (the rotation read the other way: basis (a, b) becomes (a, -b))", "expect": "REFUSE", "detail": "overlapping pairs by both, each pair classed alike; the count is measured, not predicted"},
+  {"id": "S1a", "kind": "sharp, side", "what": "the side lowered by one unit of its own last place, 1/q for S = p/q in lowest terms", "expect": "REFUSE", "detail": "exactly the square touching the far wall is outside, by both"},
+  {"id": "S1b", "kind": "sharp, side", "what": "the side lowered by 1e-30", "expect": "REFUSE", "detail": "exactly the square touching the far wall is outside, by both"},
+  {"id": "S1c", "kind": "sharp, side", "what": "the side set to its 12-place floor, the claim less 1e-12", "expect": "REFUSE", "detail": "the far-wall square outside, by both; how many others is measured"},
+  {"id": "S1d", "kind": "sharp, side", "what": "the side set to its 12-place ceiling, the issue's claim", "expect": "ACCEPT", "detail": "the claim itself"},
+  {"id": "S3a", "kind": "sharp, near wall", "what": "every square translated by (-1e-30, 0)", "expect": "REFUSE", "detail": "exactly the square touching the left wall is outside, by both"},
+  {"id": "S3b", "kind": "sharp, near wall", "what": "every square translated by (0, -1e-30)", "expect": "REFUSE", "detail": "exactly the square touching the bottom wall is outside, by both"},
+  {"id": "S4c", "kind": "sharp, pair", "what": "square j of the least-margin pair moved toward i along the pair's separating axis by the exact contact parameter of the Minkowski difference", "expect": "ACCEPT", "detail": "the pair touches by both (margin exactly 0, area 0); accepted unless the moved square meets a third square or a wall first"},
+  {"id": "S4p", "kind": "sharp, pair", "what": "the same, 1e-30 past contact", "expect": "REFUSE", "detail": "the pair overlaps by both"},
+  {"id": "S5", "kind": "sharp, pair-level", "what": "every pair with margin below 1e-12, each alone, closed the same way", "expect": "ALL_AS_STATED", "detail": "each pair touching by both at contact (A margin exactly 0) and overlapping by both 1e-30 past"},
+  {"id": "S6", "kind": "sharp, square-level", "what": "every square alone moved toward its nearest wall by its exact least clearance", "expect": "ALL_AS_STATED", "detail": "each inside by both at contact with clearance exactly 0, and outside by both 1e-30 past"},
+  {"id": "S7c", "kind": "sharp, shape", "what": "square j of the least-margin pair enlarged about its centre by the exact factor k* at which it touches i", "expect": "REFUSE", "detail": "refused for shape by both; the pair touches by both"},
+  {"id": "S7p", "kind": "sharp, shape", "what": "the same at k* + 1e-30", "expect": "REFUSE", "detail": "refused for shape; the pair overlaps by both"},
+  {"id": "S8", "kind": "sharp, shape and wall", "what": "the square touching the far wall enlarged about its centre by 1 + 1e-30", "expect": "REFUSE", "detail": "refused for shape by both and outside by both"}
+ ]
+}

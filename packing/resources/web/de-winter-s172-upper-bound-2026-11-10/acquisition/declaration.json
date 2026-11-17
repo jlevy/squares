@@ -1,0 +1,32 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "de-winter-s172-upper-bound-2026-11-10",
+  "source_url": "https://github.com/JoostdeWinter/square-packing",
+  "source_ref": "main",
+  "source_commit": "c4e65d0b8c4d32e45bf32a907e8b760502f137af",
+  "retrieved_at_utc": "2026-11-11T04:59Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, fetched for the intake of jlevy/squares#946; the pin is the head of main when it was read, c4e65d0 (committed 2026-11-10T21:26:23Z, 'Tighten the n = 172 certificate to 1.6e-319 above the optimum and add 300-digit coordinates', the author's message), 47 seconds before the issue, which names this commit. The scope is the licence, the root README and the whole of n172/. The folder n172/ first appeared at 8c0de9d (21:20:44Z), with a certificate 1.4e-99 above the same root, which c4e65d0 overwrote; that version is pinned by the commit alone and not retained. Four earlier commits, d3a020e, 71da0d5, a9486ed and a0c4fc8 (9 and 10 November), add certificates at 37 counts above 324 under above324/ and above324_refined/; they are outside this scope, pinned by the commit only, and left for triage. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and is pinned against it. n172/SHA256SUMS states the SHA-256 of the six other files of n172/, and they match. n172/n172_record.png is a figure and is pinned by digest only. No source program ran in writing this packet; verify_exact.py is retained as data and never executed here.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The packing is the n = 172 arrangement of jlevy/squares#935 (T-282, Evan Daniel's packing improved by Doğa Özden) at its exact local optimum, as the issue states; the issue credits the arrangement to Daniel and Özden.",
+  "claims": [
+    "n172/n172_witness.yaml states 172 unit squares, centre and basis (cos, sin) as exact rationals, in a square of exact rational side, which #946 prints cut as 13.61468985328358057514628890087947061618972730200175769881... and the root README rounds up at 12 places as 13.614689853284. Like n199_witness.yaml it follows this repository's Witness/v2 witness object without the schema's envelope (no softschema block, no claim, a notes field, an id with capitals). n172/n172_exact.json states the same packing as [center_x, center_y, cos, sin] rows, with the side and the coefficients of a quintic; n172/n172_optimum_300_digits.txt states the side, centres and edge directions at the local optimum truncated to 300 decimals, the squares that can move without changing the side at their certificate positions.",
+    "The issue and README say the side is 1.6e-319 above the real root near 13.6147 of the irreducible 62x^5 - 4116x^4 + 107933x^3 - 1397031x^2 + 8918035x - 22427977, the exact local optimum of the registered arrangement: a solution of the contact equations at about 390 digits closes all contacts with a residual below 1e-389, the contact equations have rank 285 and fix the side to first order, non-negative contact forces in balance exist (floating point), and the polynomial was identified from 108 digits of an earlier 130-digit solution and agrees with the 390-digit side to 386 digits. Local optimality has no formal proof and no symbolic derivation exists, as the issue says. It is the 172-square core of #939's packing; no square was added, removed or moved to another place in the contact structure. The issue calls it the same type of result as T-098 and says it understands that such results await the RV-3 ruling.",
+    "verify_exact.py (Python standard library, fractions.Fraction) checks exact unit directions, containment, a separating-axis test on every pair with centres closer than sqrt(2), and by an exact sign test that the side lies within 1e-318 above a root of the quintic; the issue says it is the one checker, written for this certificate, not run against this repository's checkers. The issue says the local optimization, high-precision solution, rational certificate, checking and figure were produced with Claude Fable 5.2 (Anthropic) under Joost de Winter's direction. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "LICENSE",
+    "README.md",
+    "n172"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+      "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+    },
+    {
+      "match": "n172/n172_record.png",
+      "reason": "A raster figure of the packing, its tilted squares yellow, which decides nothing; pinned by digest only."
+    }
+  ]
+}

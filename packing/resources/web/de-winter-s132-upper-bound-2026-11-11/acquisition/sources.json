@@ -1,0 +1,49 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-11T20:58Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, a watched repository, fetched for the intake of jlevy/squares#958 (bead think-bcfs), which the lane first read at 20:58Z as a publication with no issue and the issue, opened at 20:56:18Z, names; the pin is the head of main when it was read, 6617869 (committed 2026-11-11T20:52:23Z, 'Name Claude Fable 5.2 in the AI assistance statements for n = 132 and n = 157', the author's message), which changes only the READMEs and SHA256SUMS of n132/ and n157/ and the root README. The folders n132/ and n157/ first appeared at a491dad (2026-11-11T20:49:44Z, 'Add square packings for n = 132 and n = 157 (side below 13) that improve the Squares Project records'), whose certificates, exact JSON, figures and checkers are byte-identical at the pin. The commit before them, 501cb8d (19:41:30Z), corrects the READMEs of above324/ and above324_refined/ and is outside this scope. GitHub's activity log was not readable from this session, so the push time of a491dad is not read; the repository's head was 6617869 when it was fetched at 20:58Z. The scope is the licence, the root README and the whole of n132/. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and is pinned against it. n132/SHA256SUMS states the SHA-256 of the five other files of n132/, and they match. n132/n132_record.png is a figure and is pinned by digest only. No source program ran in writing this packet; verify_exact.py is retained as data and never executed here.",
+  "sources": [
+    {
+      "id": "de-winter-s132-upper-bound-2026-11-11",
+      "source_url": "https://github.com/JoostdeWinter/square-packing",
+      "source_ref": "main",
+      "source_commit": "6617869a3491b5872c6ecdff55db05cbee57d516",
+      "committed_utc": "2026-11-11T20:52:23Z",
+      "git_tree": "8fba98b70e8ab1d56759d8a740a3acc2710f97e8",
+      "archived_path": "packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source",
+      "subtree_manifest": "packing/resources/web/de-winter-s132-upper-bound-2026-11-11/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "n132"
+      ],
+      "subtree_file_count": 8,
+      "subtree_total_bytes": 557538,
+      "retained_file_count": 6,
+      "retained_total_bytes": 467973,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+          "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+          "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+        },
+        {
+          "path": "n132/n132_record.png",
+          "bytes": 88493,
+          "sha256": "aff43c1e131ab6b90514841db9d787904232d7d35c59aa7f03152040b0a7f846",
+          "reason": "A raster figure of the packing, its tilted squares yellow, which decides nothing; pinned by digest only."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The source derives the packing from the public 109-square packing of Samanyu-dev/squares_in_squares (53551d7, best_fit_101_500.csv) and says credit for the pinwheel arrangement at n = 109 belongs to Samanyu-dev; that packing is not retained here and its licence is not stated in this source.",
+      "claims": [
+        "n132/n132_witness.yaml states 132 unit squares, centre and basis (cos, sin) as exact rationals, in a square of exact rational side, which the root README's table rounds up at 12 places as 11.976048383604. Like n172_witness.yaml it follows this repository's Witness/v2 witness object without the schema's envelope (no softschema block, no claim, an id with capitals). n132/n132_exact.json states the same packing as [center_x, center_y, cos, sin] rows with the side.",
+        "n132/README.md says the packing is a pinwheel, a central block of tilted squares with four arms surrounded by four blocks of axis-aligned squares, 54 tilted and 78 axis-aligned; that it was derived from the public 109-square packing of Samanyu-dev/squares_in_squares (53551d7, best_fit_101_500.csv, side 10.949289581), which that repository's README reports as a result of its own stretch and quench chains, by one step that cuts the packing along one horizontal and one vertical line, moves the parts about one unit apart, fills each gap with one layer of squares that continues the local lattice and re-optimizes all squares; and that credit for the pinwheel arrangement at n = 109 belongs to Samanyu-dev.",
+        "n132/README.md says all squares were optimized together with IPOPT and the contact equations then solved to 250 digits: all 1407 contact equations are satisfied to 1e-269 and all other gaps stay open; the certificate's side is 1.3e-59 above this solution; non-negative contact forces in balance exist (floating point); 324 perturbation trials, each re-optimized, found no smaller side; local optimality has no formal proof, and a search for a minimal polynomial of the side up to degree 16 found none. It says the Kaggle competition 'Squares in Squares' has a per-puzzle leaderboard that lists sides without packings, that the author has not seen its values for n = 132, and so an unpublished packing with a smaller side may exist.",
+        "verify_exact.py (Python standard library) is the folder's one exact checker. The README says the derivation, optimization, high-precision solution, rational certificate, checking and figure were produced with Claude Fable 5.2 (Anthropic) under the direction of Joost de Winter, as 6617869 states it (a491dad said Claude (Anthropic)). Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

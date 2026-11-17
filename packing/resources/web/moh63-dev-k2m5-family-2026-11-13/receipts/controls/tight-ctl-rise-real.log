@@ -1,0 +1,7 @@
+# command: /home/user/squares-l145/packing/.venv/bin/python3 -I -c 'import multiprocessing, os, runpy, sys; multiprocessing.set_start_method('"'"'fork'"'"'); sys.argv = sys.argv[1:]; sys.path.append(os.path.dirname(os.path.abspath(sys.argv[0]))); runpy.run_path(sys.argv[0], run_name='"'"'__main__'"'"')' ctl_rise.py ../certificate/sol_exact_box11.txt
+# cwd: tight_tile of the k2m5-family tree staged by devtools.replay_k2m5_family from packing/resources/web/moh63-dev-k2m5-family-2026-11-13 (pinned 2c0b1b99), every file checked against its manifest
+# python3: /home/user/squares-l145/packing/.venv/bin/python3
+# host: 4 cores; load 3.05 3.68 3.35; started 2026-11-14T02:46:55Z
+../certificate/sol_exact_box11.txt {'ok': 78, 'cells': 155, 'fails': 0, 'segs': 347, 'splits': {'face': 15, 'kink': 1, 'bis': 61, 'hbis': 0}}
+refused cells 0 ; of which containing the face point (1, 1): 0
+# finished 2026-11-14T02:47:12Z; exit 0; wall 17.247 s; CPU 17.2 s (user 17.143 + sys 0.087); load 3.28 3.70 3.36

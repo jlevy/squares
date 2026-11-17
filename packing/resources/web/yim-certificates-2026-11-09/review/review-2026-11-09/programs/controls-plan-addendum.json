@@ -1,0 +1,827 @@
+{
+ "addendum": "S4' and S7', stated before any of them runs, after the frozen plan's S4c/S4p and S7 missed on the n130 trial",
+ "definitions": {
+  "touching and overlapping sets": "every pair (j, k) of the moved square j whose margin max_w |w.d| - T is 0 (touching) or negative (overlapping) after the move, exact; no other pair changes",
+  "S7' containment": "method A: the enlarged square's corners against the walls (outside only if a clearance is below 1e-30 h); method B: clipped area exactly 1, which a square of area (1 + 1e-30)^2 cannot keep, so B reports it outside"
+ },
+ "files": {
+  "yim-n130": {
+   "input": "ac14112/n130.cert",
+   "input_sha256": "3056cb4dd92927f671851b9866976a061fab3635daed5d3f676fffb570e1f565",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (33, 41) closed along its centre line to contact (square 41 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "33",
+        "41"
+       ],
+       [
+        "41",
+        "42"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "33",
+        "41"
+       ],
+       [
+        "41",
+        "42"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 33 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "33"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "33"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n299": {
+   "input": "ac14112/n299.cert",
+   "input_sha256": "7e4964375418fdab9a78d12b2756ffca8c1386985468be7b0be2fbd030b9fd75",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (246, 254) closed along its centre line to contact (square 254 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "246",
+        "254"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "246",
+        "254"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 246 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "246"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "246"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n303": {
+   "input": "ac14112/n303.cert",
+   "input_sha256": "14dbc28d7929d2008f2e76e74b078fafee2ec57b8d7603eb9a5ac306caf39b29",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (25, 249) closed along its centre line to contact (square 249 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "25",
+        "249"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "25",
+        "249"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 25 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "25"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "25"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n303-first": {
+   "input": "78eb9ea/n303.cert",
+   "input_sha256": "b8318f81e2199cc9e162f5072cd37c0528d129d496c67cd6188e86b4a430ab9b",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (32, 198) closed along its centre line to contact (square 198 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "32",
+        "198"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "32",
+        "198"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 32 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "32"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "32"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n553": {
+   "input": "ac14112/n553.cert",
+   "input_sha256": "78a92b71ab396d0a5d835693045809527390fc415a46b7fda765c23fc4415436",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (262, 263) closed along its centre line to contact (square 263 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "262",
+        "263"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "262",
+        "263"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 262 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "262"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "262"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n599": {
+   "input": "ac14112/n599.cert",
+   "input_sha256": "98cf7076c90a22676f62a96d19f4db412ec7ef9624105fc85a3f0adb5f588c44",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (34, 119) closed along its centre line to contact (square 119 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "34",
+        "119"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "34",
+        "119"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 34 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "34"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "34"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n600": {
+   "input": "ac14112/n600.cert",
+   "input_sha256": "10b422dde0d0d31f55c92c2d96c5e7cfc4cbbebbcec413cc5e357a3067ee664d",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (420, 482) closed along its centre line to contact (square 482 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "420",
+        "482"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "420",
+        "482"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 420 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "420"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "420"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n601": {
+   "input": "ac14112/n601.cert",
+   "input_sha256": "d8c55d4f7b9e920c6988c4537a0eb80b07186e22191056eadc6a6c5b40d856cf",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (135, 153) closed along its centre line to contact (square 153 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "135",
+        "153"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "135",
+        "153"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 135 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "135"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "135"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n602": {
+   "input": "ac14112/n602.cert",
+   "input_sha256": "8710f13abeda199702e929684704e0226bcec15c3325f020600addf9bebdc3f2",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (366, 446) closed along its centre line to contact (square 446 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "366",
+        "446"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "366",
+        "446"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 366 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "366"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "366"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n604": {
+   "input": "ac14112/n604.cert",
+   "input_sha256": "ce7ea7da25d1f955f4ae26163c56c19952fb0446d4280b5a39503272d17d2175",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (87, 101) closed along its centre line to contact (square 101 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "87",
+        "101"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "87",
+        "101"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 87 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "87"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "87"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n645": {
+   "input": "ac14112/n645.cert",
+   "input_sha256": "b7a129cf0f151c5e3cee2154ea270126d14c53355c67ba4116b7b21f3329c296",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (569, 578) closed along its centre line to contact (square 578 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "569",
+        "578"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "569",
+        "578"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 569 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "569"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "569"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n647": {
+   "input": "ac14112/n647.cert",
+   "input_sha256": "86ef4d3db4179e9bd23359bb39c0fcb9b02a32111f28fa96c3861d0ca2ce24b9",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (325, 446) closed along its centre line to contact (square 446 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "325",
+        "446"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "325",
+        "446"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 325 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "325"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "325"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n648": {
+   "input": "ac14112/n648.cert",
+   "input_sha256": "311438621acf913e48e73c05b5ae09ce9e66b5f322ae1e28eb5c6f76a5512eb5",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (313, 438) closed along its centre line to contact (square 438 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "313",
+        "438"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "313",
+        "438"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 313 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "313"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "313"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n699": {
+   "input": "ac14112/n699.cert",
+   "input_sha256": "36bc1c18a29a30c72ae073e88c17c7934707431327d1ee6baccac8f41b2a2dfb",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (632, 634) closed along its centre line to contact (square 634 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "632",
+        "634"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "632",
+        "634"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 632 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "632"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "632"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  },
+  "yim-n700": {
+   "input": "ac14112/n700.cert",
+   "input_sha256": "6ef241dda3ecb79e39aa5abf8f0ecada1c7dd1f4547d663de846ec61ca9b1121",
+   "controls": [
+    {
+     "id": "S4'c",
+     "level": "whole-file",
+     "what": "the least-margin pair (586, 588) closed along its centre line to contact (square 588 moved), as S4c",
+     "expect": {
+      "verdict": "ACCEPT",
+      "touching_pairs": [
+       [
+        "586",
+        "588"
+       ]
+      ],
+      "overlapping_pairs": [],
+      "outside": []
+     }
+    },
+    {
+     "id": "S4'p",
+     "level": "whole-file",
+     "what": "the same, 1e-30 past, as S4p",
+     "expect": {
+      "verdict": "REFUSE",
+      "touching_pairs": [],
+      "overlapping_pairs": [
+       [
+        "586",
+        "588"
+       ]
+      ],
+      "outside": []
+     }
+    },
+    {
+     "id": "S7'",
+     "level": "whole-file",
+     "what": "square 586 (as four corners) enlarged by 1 + 1e-30 about its centre, as S7",
+     "expect": {
+      "verdict": "REFUSE",
+      "not_unit": [
+       "586"
+      ],
+      "outside_A": [],
+      "outside_B": [
+       "586"
+      ],
+      "overlapping_pairs": []
+     }
+    }
+   ]
+  }
+ }
+}

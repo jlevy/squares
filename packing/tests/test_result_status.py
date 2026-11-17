@@ -350,6 +350,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-088",
         "T-089",
         "T-092",
+        # Superseded at n = 12 on 8 November 2026, when unnir's certificate (T-274) took
+        # the verified lower bound it held.
+        "T-095",
         "T-096",
         "T-099",
         "T-100",
@@ -426,9 +429,63 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-104",
         "T-105",
         "T-106",
+        # T-266's s(94) >= 2493/250 supersedes Özden's 1993/200 (T-262) at n = 94, its
+        # one count, in both lanes.
+        "T-262",
+        # The adoption of issue 914 on 5 and 6 November 2026 took the last houses of
+        # Francisco Couzo's #763 certificate (T-240), Evan Daniel's Kaggle descents (T-242),
+        # Doğa Özden's 204 (T-264) and Kaelan Yim's 260 (T-265).
+        "T-240",
+        "T-242",
+        "T-264",
+        "T-265",
+        # The adoption of 9 November 2026 took the last houses of Francisco Couzo's #844
+        # certificate (T-256, 232 and 307), Doğa Özden's 299 (T-263) and Evan Daniel's
+        # issue-914 certificates at 268 and 303 (T-270, T-272) to Özden's further
+        # arrangements of them (T-275 to T-279).
+        "T-256",
+        "T-263",
+        "T-270",
+        "T-272",
+        # Its later pass took 172, the last house of Evan Daniel's #845 certificate (T-257),
+        # and 270, his #703 packing's only house (T-224), to Özden's further arrangements
+        # of them (T-282, T-283).
+        "T-224",
+        "T-257",
+        # The adoption of 11 November 2026 took 268, the only house of Doğa Özden's further
+        # arrangement of T-270's packing (T-276), to his issue-945 certificate (T-289);
+        # T-174 and T-186 keep their other houses.
+        "T-276",
+        # The adoption of 12 November 2026 (lane L107) took 179, the only house of Özden's
+        # issue-954 certificate (T-291), to his further arrangement of it (T-294).
+        "T-291",
+        # The same day's lane L110 took 237, the only house of Francisco Couzo's 15 October
+        # certificate (T-190), to Doğa Özden's issue-960 certificate (T-295).
+        "T-190",
+        # Lane L120 of 12 November 2026 took 269, the only house of Doğa Özden's issue-947
+        # certificate (T-290), to his issue-962 certificate (T-296).
+        "T-290",
+        # Lane L132 took 269, the only house of Özden's issue-962 certificate (T-296), to his
+        # issue-967 certificate (T-297) in the pass of 13 November 2026.
+        "T-296",
+        # Hyukdong Kim's exact degree-21 side at 297 (T-247), 3.4e-90 below T-174's and never
+        # the house, is superseded once lane L154 adopted Joost de Winter's issue-977
+        # certificate (T-299) there in the pass of 14 November 2026, 9.62e-04 below it.
+        "T-247",
+        # Lane L164 took 228, the only house of Doğa Özden's issue-983 certificate (T-300), to
+        # Roberto Ono's issue-984 certificate (T-301) in the pass of 15 November 2026.
+        "T-300",
+        # Lane L181 took 90, the only house of jazivxt's issue-989 certificate (T-303), to
+        # Joost de Winter's issue-997 certificate (T-304) in the pass of 16 November 2026.
+        "T-303",
+        # Lane L187 took 204 and 232, the only houses of Evan Daniel's issue-914 certificate
+        # there (T-268) and of Doğa Özden's issue-927 certificate (T-275), to JoeGun's
+        # issue-1001 certificates (T-306, T-307) in the same pass.
+        "T-268",
+        "T-275",
         # T-142's s(28) >= 2297/400 and T-143's s(30) >= 2357/400 supersede Hosono's check2
         # bounds of 6 October at n = 28 and 30 (T-107, T-109), one count each, in both
-        # lanes, since their censuses of 4 November.
+        # lanes, on their censuses of 4 November, adopted in the pass of 17 November 2026.
         "T-107",
         "T-109",
     }
@@ -490,6 +547,28 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # The adoption of 4 November 2026 took 299, the only house of Evan Daniel's update
     # (T-258), to Doğa Özden's further arrangement of it (T-263), which supersedes it, and
     # 204 to Özden's of #845's (T-264); T-257 keeps 172, 260 and 293.
+    # The adoption of issue 914 took 175, 204, 268, 293, 303 and 304 on 5 November 2026
+    # and 260 on 6 November 2026 to Evan Daniel's certificates (T-267 to T-273): the last
+    # houses of T-240 (303), T-242 (268 and 304), T-264 (204) and T-265 (260), which they
+    # supersede; T-186 and T-257 keep their other houses.
+    # The adoption of 9 November 2026 took 232, 268, 299, 303 and 307 to Doğa Özden's
+    # further arrangements (T-275 to T-279): the last houses of T-256 (232 and 307),
+    # T-263 (299), T-270 (268) and T-272 (303), which they supersede.
+    # The adoption of 11 November 2026 took 156, 180, 268 and 269 to Doğa Özden's
+    # certificates of issues 943 to 947 (T-287 to T-290): the last house of T-276 (268),
+    # which they supersede; T-174 and T-186 keep their other houses. The adoption of 12
+    # November 2026 took 179, T-291's only house, to T-294, which supersedes it, 237, the
+    # only house of T-190, to Özden's issue-960 certificate (T-295), which supersedes it,
+    # and 269, the only house of T-290, to his issue-962 certificate (T-296), which
+    # supersedes it. The pass of 13 November took 269, T-296's only house, on to his
+    # issue-967 certificate (T-297), which supersedes it. The pass of 14 November took 297 to
+    # Joost de Winter's issue-977 certificate (T-299), which supersedes T-247 there; T-174
+    # keeps its other houses. The pass of 15 November took 228, T-300's only house, to Roberto
+    # Ono's issue-984 certificate (T-301), which supersedes it, and 147, first adopted, to his
+    # issue-985 certificate (T-302). The pass of 16 November took 90, T-303's only house, to
+    # Joost de Winter's issue-997 certificate (T-304), which supersedes it, and 204 and 232,
+    # T-268's and T-275's only houses, to JoeGun's issue-1001 certificates (T-306, T-307),
+    # which supersede them; T-174 and T-186 keep their other houses.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

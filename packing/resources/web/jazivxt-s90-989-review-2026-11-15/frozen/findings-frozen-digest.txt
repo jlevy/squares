@@ -1,0 +1,16 @@
+# Lane L169 findings frozen at 2026-11-15T03:28:11Z, before the author's README.md, SHA256SUMS, DONOR-LICENSE.txt, n90.csv or n90.png, Couzo's verify_bound_certificate.py, the register entries, case record, family entries or house witness at 90, de Winter's n157_exact.json, any import lane's work (L170 and its branch), or this repository's verifier, promotion, identity or contraction code was opened.
+475fad339b0360c3db2b4747a333a5e42e1b1480a7ce8dc4599e108204c031d6  frozen/review-2026-11-15-jazivxt-989.frozen.md
+# lines and bytes: 481 33903
+# checker list:
+998ff4cacc189a47e471b653bff8e3b4d51c5c8901a3204a1d32707fdd97ffb9  frozen/checker-frozen-digests.txt
+# controls plan list:
+3782b4b418810c7ca2e7b25a221cdd4267d57083649593c1da6a96d80879c363  frozen/controls-plan-digest.txt
+# receipts and programs at the freeze:
+9072593e3957cbc0357d4553c2e9135258079e7f15520f8c0cf769e2ca1b2518  out/selftest.json
+1522d283a79cd99210f00017e95eeb2fdc5f9c85e7b3bd3c7f6d658f6bf58d78  out/check-n90.json
+b9258aa5d431fdca9e66e51dd0c512cf7680795f1836d4734995a7143cc46ced  out/plan-facts-n90.json
+8509c1ee4162defa880c7aaebba23043ba5a86cf6c7073d9631ef54fbf857dec  out/controls-n90.json
+8883236865ff2055ccb0547bc62fa4095f62ba2d252fd2d9390f2a3aeb12f4f9  out/describe-n90.json
+71bee737ce47ea67876ff0df0ce704838a48a95f7970ab7454c4bb53cb1663f9  programs/controls-plan.json
+a886acdf9f53303665492e9e0553ed45936e995b383734fd634fd3c22a205012  programs/l169_controls.py
+fe51d7dd0e623f6758dd6d88fba9f67c21063888a5197ce96923105de6b141b6  programs/l169_describe.py

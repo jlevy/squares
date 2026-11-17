@@ -1,0 +1,282 @@
+{
+ "172": {
+  "contacts": [],
+  "contraction": {
+   "binding_pair": [
+    15,
+    16
+   ],
+   "contracted_side": "1.361793569838141540398113e+01",
+   "decided": {
+    "at_first_contact": {
+     "classes_A": {
+      "apart": 14705,
+      "overlapping": 0,
+      "touching": 1
+     },
+     "classes_B": {
+      "apart": 14705,
+      "overlapping": 0,
+      "touching": 1
+     },
+     "overlapping": [],
+     "touching": [
+      [
+       15,
+       16
+      ]
+     ],
+     "verdict": "ACCEPT"
+    },
+    "past_first_contact": {
+     "classes_A": {
+      "apart": 14403,
+      "overlapping": 303,
+      "touching": 0
+     },
+     "classes_B": {
+      "apart": 14403,
+      "overlapping": 303,
+      "touching": 0
+     },
+     "overlapping": [
+      [
+       2,
+       3
+      ],
+      [
+       2,
+       6
+      ],
+      [
+       2,
+       46
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       7
+      ],
+      [
+       3,
+       45
+      ],
+      [
+       6,
+       7
+      ],
+      [
+       6,
+       9
+      ],
+      [
+       6,
+       10
+      ],
+      [
+       7,
+       12
+      ]
+     ],
+     "touching": [],
+     "verdict": "REFUSE"
+    }
+   },
+   "extent_at_1": "1.3617935698381415404e+01",
+   "gain": "3.24584509520e-03",
+   "gain_inside_margin": false,
+   "gain_over_margin": "2.38350e+16",
+   "lambda_star": "584130104508048585703329157199241276196853745507500501484693728351636450000000000000000000000000000000000/584130104508048585709170458244321757354026843706973065815003664257097443349363119955760826638938265518323",
+   "margin": "1.3617935e-19",
+   "margin_exact": "15909292405372367169146530170356031088234525567647766982654746046355751276533523031991351056210310558087448991001077/116826020901609717141834091648864351470805368741394613163000732851419488669872623991152165327787653103664600000000000000000000000000000",
+   "margin_share_of_gain": "4.19549e-17",
+   "one_minus_lambda_star": "9.9999999e-21",
+   "pair_contraction_E1_minus_Estar": "1.2617935e-19",
+   "wall_slack_S_minus_E1": "1.0000000e-20"
+  },
+  "entry": "T-257",
+  "least_pair": {
+   "axis": 1,
+   "margin": "5841301045080481157173098199472564330309935905460993349363119955760826638938265518323/584130104508048585703329157199241276196853745507500501484693728351636450000000000000000000000000000000000",
+   "pair": [
+    15,
+    16
+   ],
+   "sci": "9.99999999999e-21"
+  },
+  "least_wall_clearance": {
+   "clearance": "1/200000000000000000000",
+   "id": 45,
+   "sci": "5.00000e-21",
+   "wall": "left"
+  },
+  "pair_classes_A": {
+   "apart": 14706,
+   "overlapping": 0,
+   "touching": 0
+  },
+  "pair_classes_B": {
+   "apart": 14706,
+   "overlapping": 0,
+   "touching": 0
+  },
+  "pairs_below_1e-12": 303,
+  "problems": [],
+  "side": "2723587139676283080823463207799/200000000000000000000000000000",
+  "verdict": "ACCEPT",
+  "witness": "packing/witnesses/known-best/n-172.yaml"
+ },
+ "270": {
+  "contacts": [],
+  "contraction": {
+   "binding_pair": [
+    42,
+    57
+   ],
+   "contracted_side": "1.692816225219675011472868e+01",
+   "decided": {
+    "at_first_contact": {
+     "classes_A": {
+      "apart": 36314,
+      "overlapping": 0,
+      "touching": 1
+     },
+     "classes_B": {
+      "apart": 36314,
+      "overlapping": 0,
+      "touching": 1
+     },
+     "overlapping": [],
+     "touching": [
+      [
+       42,
+       57
+      ]
+     ],
+     "verdict": "ACCEPT"
+    },
+    "past_first_contact": {
+     "classes_A": {
+      "apart": 35550,
+      "overlapping": 765,
+      "touching": 0
+     },
+     "classes_B": {
+      "apart": 35550,
+      "overlapping": 765,
+      "touching": 0
+     },
+     "overlapping": [
+      [
+       1,
+       8
+      ],
+      [
+       1,
+       77
+      ],
+      [
+       2,
+       23
+      ],
+      [
+       2,
+       82
+      ],
+      [
+       3,
+       4
+      ],
+      [
+       3,
+       6
+      ],
+      [
+       3,
+       27
+      ],
+      [
+       3,
+       78
+      ],
+      [
+       4,
+       6
+      ],
+      [
+       4,
+       27
+      ]
+     ],
+     "touching": [],
+     "verdict": "REFUSE"
+    }
+   },
+   "extent_at_1": "1.6928162252196750114e+01",
+   "gain": "1.36488538957e-05",
+   "gain_inside_margin": false,
+   "gain_over_margin": "8.06280e+13",
+   "lambda_star": "32697750042442211293471958995515227318893213310212723893833641895566450000000000000000000000000000000000/32697750042442211293798936495939649045532872780860595927809804117761234412488318157416719240490668134461",
+   "margin": "1.6928162e-19",
+   "margin_exact": "57882046910993453229013309658820388363420453540847757505160083348053154830791986752475929054371606682546023882246041061066755315445582554976706229442174276144837676287831829561560753933/341927529099121846971484148560167404614690989618245979448716675430349528850652058098366848789949216193548184483145957668305596783037497799802964562952499914536391710784317941000000000000000000000000000000",
+   "margin_share_of_gain": "1.24026e-14",
+   "one_minus_lambda_star": "9.9999999e-21",
+   "pair_contraction_E1_minus_Estar": "1.5928162e-19",
+   "wall_slack_S_minus_E1": "1.0000000e-20"
+  },
+  "entry": "T-224",
+  "least_pair": {
+   "axis": 0,
+   "margin": "326977500424421726639659470647872033976162222194784412488318157416719240490668134461/32697750042442211293471958995515227318893213310212723893833641895566450000000000000000000000000000000000",
+   "pair": [
+    42,
+    57
+   ],
+   "sci": "9.99999999999e-21"
+  },
+  "least_wall_clearance": {
+   "clearance": "1/200000000000000000000",
+   "id": 16,
+   "sci": "5.00000e-21",
+   "wall": "bottom"
+  },
+  "pair_classes_A": {
+   "apart": 36315,
+   "overlapping": 0,
+   "touching": 0
+  },
+  "pair_classes_B": {
+   "apart": 36315,
+   "overlapping": 0,
+   "touching": 0
+  },
+  "pairs_below_1e-12": 765,
+  "problems": [],
+  "side": "16928162252196750114897964982713/1000000000000000000000000000000",
+  "verdict": "ACCEPT",
+  "witness": "packing/witnesses/known-best/n-270.yaml"
+ },
+ "bead": "think-qqyg",
+ "cpu_seconds": 35.87,
+ "environment": {
+  "executable": "/home/user/squares/packing/.venv/bin/python3",
+  "implementation": "CPython",
+  "isolated_flag": true,
+  "python": "3.14.7"
+ },
+ "lane": "L72",
+ "program": "l72_houses.py",
+ "program_digests": {
+  "l72_check.py": "a6c8edeb92a97603acc55805d20f61b8c7ef66d917c5fd7d006cf6db92ecfa24",
+  "l72_clip.py": "4a450e3237e470c3ca033ad11d7a012be96e75d1ffebaf6764c9ed5c57d79da1",
+  "l72_house.py": "77c6851d2be3be635f575e9745157daa15f0d3f68ef7eb1944123b3304d3aff5",
+  "l72_houses.py": "4829b7b8bfc2823586b14329dfcdfb0e79d52c51aef8fc6a777cf08da74065fe",
+  "l72_reader.py": "76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a",
+  "l72_sat.py": "a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e",
+  "l72_util.py": "7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46"
+ },
+ "written_utc": "2026-11-09T16:40:11Z"
+}

@@ -1,0 +1,21 @@
+{
+ "store_id": 3410128,
+ "s": 16.633982501922613,
+ "sources": [
+  "pending:#895 (vitamoon)",
+  "pending:#895 (vitamoon)",
+  "register (Evan Daniel)",
+  "watch:vitamoon/vitamoon@d11a8a1 (vitamoon)",
+  "later copies of the same minimum: store ids [3180838]"
+ ],
+ "descent": {
+  "s_before": 16.633982501922613,
+  "vv_milp_dS": -2.332023146933279e-05,
+  "why": "a first-order descent exists once corner-corner touches may slip along either side (an optimizer that linearises each pair on one fixed separating axis can stall here).",
+  "ok": true,
+  "s_after": 16.63398250059691,
+  "rounds": 2
+ },
+ "why": "no equilibrium with smooth contacts (not first-order jammed).",
+ "ok": false
+}

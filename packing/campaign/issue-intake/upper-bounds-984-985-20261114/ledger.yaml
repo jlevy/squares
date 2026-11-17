@@ -1,0 +1,98 @@
+format: intake-ledger-v1
+read_at_main: 473577f42a42c4a454190944e13d0a3ef8fa4c1d
+read_on: '2026-11-14'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l164
+  branch: claude/bold-ritchie-xo28us-l164
+  commit: 473577f42a42c4a454190944e13d0a3ef8fa4c1d
+  note: The packets' claim records, written on the lane's branch from main 473577f42 and read
+    here by path.
+reports:
+- report: '#984'
+  url: https://github.com/jlevy/squares/issues/984
+  kind: issue
+  holders: Roberto Ono
+  reported_at: '2026-11-14T20:11:25Z'
+  bead: think-17ex
+  claims:
+  - n: 228
+    printed: '15.596043120921'
+    rounding: up
+    exact: 87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680
+    exact_from: packing/resources/web/ono-issue984-2026-11-14/acquisition/claims.json at claude/bold-ritchie-xo28us-l164@473577f42a42c4a454190944e13d0a3ef8fa4c1d
+    first_committed: '2026-11-11T22:15:40Z'
+    measured:
+      against: T-300
+      finding: no symmetry of the box pairs it one to one with T-300's packing by nearest
+        centres; the optimal assignment, best under symmetry 0, moves 227 squares beyond 1e-3,
+        137 beyond 1e-2 and 96 beyond 0.1 (largest 0.963975) and turns 90 squares by more
+        than 1e-6 radians, by up to 43.68 degrees; aligned by box centres, 72 squares turn
+        by more than a degree and 22 tilts reverse; 55 squares tilted beyond a degree, 1.29
+        to 43.68 degrees, 19 one way and 36 the other, against T-300's 48, all one way; against
+        T-174 likewise no symmetry pairs them, 89 squares beyond 0.1 (largest 0.906908); the
+        house witness and its regularized view measure as T-300; a new arrangement relative
+        to T-300's and T-174's packings, and relative to T-128, T-098, T-092 and T-056 as
+        the review measured (F12); the issue's cut of Couzo's 404 gives 228 squares only under
+        the mirror x -> S - x and with two squares dropped whose centres land outside the
+        new box, which the issue does not name, and the certificate lies 34 squares beyond
+        a tenth from that seed (F9)
+      source: packing/resources/web/ono-issue984-2026-11-14/measure/identity.json
+    new_packing:
+      source: '#984: ''Start: Francisco Couzo''s packing of n = 404 ... Operation: mirror
+        it, delete every square whose centre has 13.8 <= x + y < 23.8 and translate the rest
+        by (-5, -5), which removes five periods of the band.'''
+    note: T-300's own uniform-contraction margin at 228 is 2.949e-12 (squares 118 and 119),
+      and the gain, 4.7586e-3, is 1.61e9 times it; T-174's is 0 (squares 201 and 227 touch).
+      The gain lies wholly outside both predecessors' padding (packing/resources/web/ono-issue984-2026-11-14/measure/contraction-n228-t300.json
+      and contraction-n228-t174.json), and RV-3 (think-ruu2) does not reach it.
+  note: 'The issue names fce076f, committed at 2026-11-14T20:10:31Z, 54 seconds before it;
+    the packet pins main b5636fd, whose one commit past fce076f records the posting, the certificate
+    unchanged. It says the packing was made by cutting five band periods from Francisco Couzo''s
+    n = 404 packing as this registry retains it, then a penalty step, an exact-constraint
+    sequential-LP polish and basin hopping, and asks that Couzo''s n = 404 packing be credited
+    as the start. It discloses that the open request #983 (Doğa Özden, now T-300) lies 0.004758613890
+    above it and that the two arrangements were not compared.'
+- report: '#985'
+  url: https://github.com/jlevy/squares/issues/985
+  kind: issue
+  holders: Roberto Ono
+  reported_at: '2026-11-14T20:11:26Z'
+  bead: think-17ex
+  claims:
+  - n: 147
+    printed: '12.651043556588'
+    rounding: up
+    exact: 11864804754111373311404579236459661610708446554466063961080880819368560222888047487421179/937851861867402376107974997050677704744266630455345333352649906089505616661381854003200
+    exact_from: packing/resources/web/ono-issue985-2026-11-14/acquisition/claims.json at claude/bold-ritchie-xo28us-l164@473577f42a42c4a454190944e13d0a3ef8fa4c1d
+    first_committed: '2026-11-11T22:15:40Z'
+    measured:
+      against: T-155
+      finding: no symmetry of the box pairs it one to one with the house's packing (the Kingbird
+        catalogue's 45-degree arrangement shared with 148, as T-155's exact view states it)
+        by nearest centres; the optimal assignment, best under symmetry 1, moves 140 squares
+        beyond 1e-3, 116 beyond 1e-2 and 92 beyond 0.1 (largest 1.13164) and turns 78 squares
+        by more than 1e-6 radians; 44 squares tilted beyond a degree, 25.84 to 27.72 degrees,
+        all one way, against the house's 64 at 45 degrees; a new arrangement relative to the
+        house's packing and to T-101, as the review measured (F12); the issue's cut of Evan
+        Daniel's 229 reproduces exactly, and the certificate is a refinement of that seed,
+        one to one with it, no square beyond 0.046 (F10)
+      source: packing/resources/web/ono-issue985-2026-11-14/measure/identity.json
+    new_packing:
+      source: '#985: ''Start: the registry''s n = 229 record (Evan Daniel, 2026-10-20 ...)
+        ... delete every square whose centre has 13 <= x + y < 19 and translate the squares
+        beyond by (-3, -3), which removes one period of the band.'''
+    note: The house's packing, T-155's exact view at 147, has uniform-contraction margin 0
+      (squares 1 and 2 touch), so the gain, 5.8107e-3, lies wholly outside its padding (packing/resources/web/ono-issue985-2026-11-14/measure/contraction-n147-t155.json)
+      and RV-3 (think-ruu2) does not reach it.
+  note: The issue names fce076f, 55 seconds before it. It says the packing was made by cutting
+    one band period from Evan Daniel's n = 229 record and polishing it, and asks that Daniel's
+    n = 229 packing be credited as the start; it says the registry's n = 147 packing, the
+    45-degree arrangement shared with 148, is a different arrangement.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

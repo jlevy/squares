@@ -1,0 +1,141 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/942#issuecomment-6772308414",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter a0c4fc8 2026-11-10]",
+  "report_evidence": "E-de-winter-a0c4fc8-certificate-report",
+  "receipt_format": "dewinter-a0c4fc8-exact-replay-v1",
+  "witness_prefix": "W-dewinter-a0c4fc8-n",
+  "claim_limitations": "Complete JoostdeWinter/square-packing a0c4fc8 above324_refined/ rational centre/half-angle certificates in Evan Daniel's format with two comment lines, read exactly from the retained source files. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-11",
+  "read_at_main": "8afdabe8fef2c308d6352a48e610924d0c6edb05",
+  "certificates": [
+    {
+      "n": 597,
+      "path": "above324_refined/n0597.cert",
+      "format": "evand-cert",
+      "offered": "24.8969258585",
+      "first_committed": "2026-11-10T15:37:44Z"
+    },
+    {
+      "n": 754,
+      "path": "above324_refined/n0754.cert",
+      "format": "evand-cert",
+      "offered": "27.9075316299",
+      "first_committed": "2026-11-10T15:37:44Z"
+    },
+    {
+      "n": 864,
+      "path": "above324_refined/n0864.cert",
+      "format": "evand-cert",
+      "offered": "29.8530288378",
+      "first_committed": "2026-11-10T15:37:44Z"
+    },
+    {
+      "n": 865,
+      "path": "above324_refined/n0865.cert",
+      "format": "evand-cert",
+      "offered": "29.8693054513",
+      "first_committed": "2026-11-10T15:37:44Z"
+    },
+    {
+      "n": 869,
+      "path": "above324_refined/n0869.cert",
+      "format": "evand-cert",
+      "offered": "29.9122235088",
+      "first_committed": "2026-11-10T15:37:44Z"
+    },
+    {
+      "n": 991,
+      "path": "above324_refined/n0991.cert",
+      "format": "evand-cert",
+      "offered": "31.9019684133",
+      "first_committed": "2026-11-10T15:37:44Z"
+    }
+  ],
+  "requested": [
+    597,
+    754,
+    864,
+    865,
+    869,
+    991
+  ],
+  "replayed": [
+    597,
+    754,
+    864,
+    865,
+    869,
+    991
+  ],
+  "houses": [],
+  "pending": [
+    {
+      "n": 597,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Kirill Tymchishin",
+      "printed": "24.901150566387",
+      "rounding": "up"
+    },
+    {
+      "n": 754,
+      "report": "couzo-43f666c-2026-10-24",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "27.920422831462",
+      "rounding": "up"
+    },
+    {
+      "n": 864,
+      "report": "couzo-43f666c-2026-10-24",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "29.873870986621",
+      "rounding": "up"
+    },
+    {
+      "n": 865,
+      "report": "couzo-43f666c-2026-10-24",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Kirill Tymchishin",
+      "printed": "29.883815809125",
+      "rounding": "up"
+    },
+    {
+      "n": 869,
+      "report": "couzo-issue763-2026-10-23",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "29.913238532580",
+      "rounding": "up"
+    },
+    {
+      "n": 991,
+      "report": "couzo-43f666c-2026-10-24",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo, after Vladislav Lavrentev",
+      "printed": "31.934561612655",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Joost de Winter's six beyond-horizon certificates at 597 to 991, JoostdeWinter/square-packing a0c4fc8, issue 942's addendum",
+    "headline": "Six more of de Winter's local re-optimizations of public Kaggle packings, certified exactly below the rows from 597 to 991",
+    "significance": 2,
+    "source_checks": "The addendum says the certificates, checker and margin are as #942 states: his verify_cert.py (fractions.Fraction) and a second script with separate code by the same author, not this repository's checkers, and a margin of about 5e-9 above the numerical optimum. Those are the source's statements. No source program ran here.",
+    "credit": "Credit Joost de Winter (Delft University of Technology) for the local re-optimization of six public Kaggle packings from the same merged file as #942's (Samanyu-dev/squares_in_squares 53551d7), with the arrangements unchanged, as the addendum says; the file names no author per packing. Produced with Claude (Anthropic) under Joost de Winter's direction.",
+    "next_rung": "Record each count as a beyond-horizon row in report order, superseding the row it is below; beyond the case corpus, so no register entry records them.",
+    "bead": "think-cen3",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "independent",
+      "credit": "de Winter after Samanyu-dev, Deotte, Lavrentev, Chilton, Tymchishin, malyshevdanil, prvsiyan, busyaprime, nilanjansaha123, jazivxt, Couzo",
+      "short_credit": "de Winter after Samanyu-dev et al.",
+      "note": "Six exact rational certificates beyond the case corpus at 597, 754, 864, 865, 869 and 991, added to JoostdeWinter/square-packing above324_refined/ at a0c4fc80db67e9806026921654dce49a155ac31b and reported by #942's addendum comment: public Kaggle packings locally re-optimized with the arrangements unchanged. Beyond-horizon rows below the record's rows at those counts. Retained under the author's MIT licence. Claude assistance disclosed. No local or global optimality claim is replayed."
+    }
+  }
+}

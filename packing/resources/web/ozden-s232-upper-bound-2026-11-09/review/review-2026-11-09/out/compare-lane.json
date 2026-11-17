@@ -1,0 +1,252 @@
+{
+ "program": "l64_compare_lane.py",
+ "programs_sha256": {
+  "l64_compare_lane.py": "4372431af05c3c8271fd2c6e48372c28d5675a4812ba57180b2ef032a70c88de",
+  "l64_util.py": "de76960f100535969691e9c386be79de5ca3e45fbe7db318ea86e5ec9bc2af81"
+ },
+ "branch": "claude/bold-ritchie-xo28us-l63",
+ "head": "a8e143c6c2d923425dd1fb5dde56b10ed5502de3",
+ "counts": {
+  "232": {
+   "routes_on_positive": {
+    "exact_verify": {
+     "passed": true,
+     "pairs_tested": 26796,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    },
+    "independent": {
+     "passed": true,
+     "pairs_tested": 26796,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    }
+   },
+   "identity_against_house": {
+    "against": "T-256",
+    "lane_nearest_one_to_one": true,
+    "mine_nearest_one_to_one": true,
+    "moved_beyond_lane": {
+     "1e-9": 218,
+     "1e-6": 218,
+     "1e-3": 141,
+     "1e-2": 48,
+     "1e-1": 6
+    },
+    "moved_beyond_mine": {
+     "1e-9": 218,
+     "1e-6": 218,
+     "1e-3": 141,
+     "1e-2": 48,
+     "0.1": 6
+    },
+    "largest_move_lane": "0.500262",
+    "largest_move_mine": 0.500262,
+    "largest_turn_lane": "28.76",
+    "largest_turn_mine": 28.76,
+    "turned_beyond_1e-6_lane": 95,
+    "turned_beyond_1e-6_rad_mine": 95,
+    "counts_equal": true
+   },
+   "readme_side_print": "15.7614096448817244\u2026",
+   "readme_print_is_ceil_16": true,
+   "readme_print_has_ellipsis": true,
+   "side_floor_17": "15.76140964488172433"
+  },
+  "268": {
+   "routes_on_positive": {
+    "exact_verify": {
+     "passed": true,
+     "pairs_tested": 35778,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    },
+    "independent": {
+     "passed": true,
+     "pairs_tested": 35778,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    }
+   },
+   "identity_against_house": {
+    "against": "T-270",
+    "lane_nearest_one_to_one": true,
+    "mine_nearest_one_to_one": true,
+    "moved_beyond_lane": {
+     "1e-9": 255,
+     "1e-6": 255,
+     "1e-3": 122,
+     "1e-2": 61,
+     "1e-1": 4
+    },
+    "moved_beyond_mine": {
+     "1e-9": 255,
+     "1e-6": 255,
+     "1e-3": 122,
+     "1e-2": 61,
+     "0.1": 4
+    },
+    "largest_move_lane": "0.27375",
+    "largest_move_mine": 0.27375,
+    "largest_turn_lane": "2.14",
+    "largest_turn_mine": 2.14,
+    "turned_beyond_1e-6_lane": 121,
+    "turned_beyond_1e-6_rad_mine": 121,
+    "counts_equal": true
+   },
+   "readme_side_print": "16.8724698978362125\u2026",
+   "readme_print_is_ceil_16": true,
+   "readme_print_has_ellipsis": true,
+   "side_floor_17": "16.87246989783621245"
+  },
+  "299": {
+   "routes_on_positive": {
+    "exact_verify": {
+     "passed": true,
+     "pairs_tested": 44551,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    },
+    "independent": {
+     "passed": true,
+     "pairs_tested": 44551,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    }
+   },
+   "identity_against_house": {
+    "against": "T-263",
+    "lane_nearest_one_to_one": false,
+    "mine_nearest_one_to_one": false,
+    "moved_beyond_lane": {
+     "1e-9": 290,
+     "1e-6": 290,
+     "1e-3": 187,
+     "1e-2": 70,
+     "1e-1": 12
+    },
+    "moved_beyond_mine": {
+     "1e-9": 290,
+     "1e-6": 290,
+     "1e-3": 187,
+     "1e-2": 70,
+     "0.1": 12
+    },
+    "largest_move_lane": "0.641941",
+    "largest_move_mine": 0.641941,
+    "largest_turn_lane": "41.32",
+    "largest_turn_mine": 41.32,
+    "turned_beyond_1e-6_lane": 131,
+    "turned_beyond_1e-6_rad_mine": 131,
+    "counts_equal": true
+   },
+   "readme_side_print": "17.8010044342552937\u2026",
+   "readme_print_is_ceil_16": true,
+   "readme_print_has_ellipsis": true,
+   "side_floor_17": "17.80100443425529367"
+  },
+  "303": {
+   "routes_on_positive": {
+    "exact_verify": {
+     "passed": true,
+     "pairs_tested": 45753,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    },
+    "independent": {
+     "passed": true,
+     "pairs_tested": 45753,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    }
+   },
+   "identity_against_house": {
+    "against": "T-272",
+    "lane_nearest_one_to_one": true,
+    "mine_nearest_one_to_one": true,
+    "moved_beyond_lane": {
+     "1e-9": 293,
+     "1e-6": 293,
+     "1e-3": 239,
+     "1e-2": 105,
+     "1e-1": 5
+    },
+    "moved_beyond_mine": {
+     "1e-9": 293,
+     "1e-6": 293,
+     "1e-3": 239,
+     "1e-2": 105,
+     "0.1": 5
+    },
+    "largest_move_lane": "0.22746",
+    "largest_move_mine": 0.22746,
+    "largest_turn_lane": "19.02",
+    "largest_turn_mine": 19.02,
+    "turned_beyond_1e-6_lane": 151,
+    "turned_beyond_1e-6_rad_mine": 151,
+    "counts_equal": true
+   },
+   "readme_side_print": "17.9017892731564904\u2026",
+   "readme_print_is_ceil_16": true,
+   "readme_print_has_ellipsis": true,
+   "side_floor_17": "17.90178927315649033"
+  },
+  "307": {
+   "routes_on_positive": {
+    "exact_verify": {
+     "passed": true,
+     "pairs_tested": 46971,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    },
+    "independent": {
+     "passed": true,
+     "pairs_tested": 46971,
+     "least_gap_equals_mine": true,
+     "least_clearance_equals_mine": true,
+     "side_equals_mine": true
+    }
+   },
+   "identity_against_house": {
+    "against": "T-256",
+    "lane_nearest_one_to_one": true,
+    "mine_nearest_one_to_one": true,
+    "moved_beyond_lane": {
+     "1e-9": 306,
+     "1e-6": 306,
+     "1e-3": 45,
+     "1e-2": 12,
+     "1e-1": 5
+    },
+    "moved_beyond_mine": {
+     "1e-9": 306,
+     "1e-6": 306,
+     "1e-3": 45,
+     "1e-2": 12,
+     "0.1": 5
+    },
+    "largest_move_lane": "0.199974",
+    "largest_move_mine": 0.199974,
+    "largest_turn_lane": "25.23",
+    "largest_turn_mine": 25.23,
+    "turned_beyond_1e-6_lane": 114,
+    "turned_beyond_1e-6_rad_mine": 114,
+    "counts_equal": true
+   },
+   "readme_side_print": "17.9792309603873628\u2026",
+   "readme_print_is_ceil_16": true,
+   "readme_print_has_ellipsis": true,
+   "side_floor_17": "17.97923096038736272"
+  }
+ },
+ "verdict": "LANE_EQUALS_REVIEW"
+}

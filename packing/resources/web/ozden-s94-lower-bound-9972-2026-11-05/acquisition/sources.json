@@ -1,0 +1,72 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-05T06:58Z",
+  "git_scope": "A full clone of kenaznia-doga/s94-lower-bound-9972, fetched for the intake of jlevy/squares#910; the repository holds one commit, 7d21f9b (committed 2026-11-05T06:51:31Z, 'Publish s(94) >= 9.972 certificate with exhaustive audited native receipts'), of 56 files, and the scope is the whole tree. #910 names this commit. Every digest the issue and the README state matches: certificate/n94-L9972.json.gz f59d4c95...360c as stored and d1df3bc6...951c decompressed (equal to certificate/n94-L9972.json); Hosono's candidate.json 64d81953...0667a decompressed from source/hosono-candidate.json.gz, whose stored bytes df3ae678...d27c are byte for byte the gzip the wand125-mixed-bounds-evening-2026-10-04 packet keeps; receipts/directions.jsonl.gz 041284d5...7a59 as stored and 02906bb0...312a decompressed; controls/mass-99-100.json.gz 2f72d2dd...1532; LICENSE.md 5b8e1449...a18da4c. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "ozden-s94-lower-bound-9972",
+      "source_url": "https://github.com/kenaznia-doga/s94-lower-bound-9972",
+      "source_ref": "main",
+      "source_commit": "7d21f9bdf707102dd4ebf47e52f81b502a01004d",
+      "committed_utc": "2026-11-05T06:51:31Z",
+      "git_tree": "dc7906ded9c9e0236f81e3b2c519ff13cc8157d4",
+      "archived_path": "packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/source",
+      "subtree_manifest": "packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".gitignore",
+        "LICENSE.md",
+        "MANIFEST.json",
+        "README.md",
+        "certificate",
+        "checks",
+        "controls",
+        "exploratory",
+        "receipts",
+        "source",
+        "tools",
+        "verifier"
+      ],
+      "subtree_file_count": 56,
+      "subtree_total_bytes": 2218204,
+      "retained_file_count": 54,
+      "retained_total_bytes": 2177278,
+      "compressed": [
+        "source/exploratory/directions.jsonl.gz",
+        "source/receipts/INDEX.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": ".gitignore",
+          "bytes": 51,
+          "sha256": "94c525bb64752fbf15a1f6475cd0c79158d1fe10e05eb0e51923e3e512677856",
+          "reason": "A retained .gitignore would act on this repository's tree; it names only Python caches and the verifier's build directory."
+        },
+        {
+          "path": "source/hosono-candidate.json.gz",
+          "bytes": 40875,
+          "sha256": "df3ae678029f3da1f0fd4c9b1ba9d331c582478e46c453f238c36e476d9fd27c",
+          "reason": "Hiroaki Hosono's mixed_n94_L995 candidate.json, as gzip: its stored bytes (SHA-256 df3ae678...d27c) are byte for byte packing/resources/web/wand125-mixed-bounds-evening-2026-10-04/square-packing-bounds/certificates/mixed_n94_L995/candidate.json.gz, that packet's deterministic gzip of the file T-091 rests on, compared at intake; it is retained there under that packet's custody and its MIT notice, and devtools.audit_dilated_measure reads the base from there."
+        }
+      ],
+      "license": "CC BY 4.0 for the certificates, witnesses, receipts, data and write-ups, and MIT for the source code (tools/ and the exploratory checker's programs), copyright (c) 2026 Do\u011fa \u00d6zden, as LICENSE.md states. LICENSE.md (1,484 bytes, Git blob 9803370f8c382515d3769896adb8d04b201aebd6, SHA-256 5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c) is byte for byte the declaration that the ozden-s94-lower-bound-2026-11-03 packet keeps as licence/LICENSE.md. Hiroaki Hosono's measure keeps its MIT notice (Copyright (c) 2026 wand125, source/UPSTREAM-LICENSE), which applies to the rescaled certificate as well. The copy of this repository's sqverify-fast under verifier/ keeps its own licence (verifier/sqverify_fast/UPSTREAM-LICENSE): MIT for the code and CC BY 4.0 for its documentation, Joshua Levy and the squares project.",
+      "claims": [
+        "certificate/n94-L9972.json.gz (and its canonical JSON text, certificate/n94-L9972.json) is a format M rectangle-measure certificate that s(94) >= 2493/250 = 9.972: Hiroaki Hosono's mixed_n94_L995 (wand125/square-packing-bounds@797bdf6e) with every rectangle coordinate multiplied by 4986/4975, the masses unchanged (853 orbits, total 9399999/100000 < 94), core side B = 24872661/24875000 and a declared proof_net of step 1/12000 and last 4971 (4,972 half-angle directions, last tangent 1657/4000), B(1 + D) = 99498934887/99500000000 < 1. tools/rescale.py regenerates it from Hosono's candidate.json.",
+        "receipts/ holds the lab's runs of jlevy/squares' sqverify-fast at e6e8d577, unmodified (crate source d97758bb, rustc 1.98.0, release, x86_64-unknown-linux-gnu): six native streams A to F, each a successful strict subset of the net (status PARTIAL, return code 0), from which directions.jsonl.gz selects one row per direction (selection.csv), VERIFIED at all 4,972 indices 0 to 4971, least certified bound 1.0000000000003892 at direction 3663. Streams B, C and D were compacted at production to the native proof fields; their pre-compaction digests are the lab's statements.",
+        "controls/ holds every mass multiplied by 99/100, refused natively at directions 0 and 1198 (a two-direction control, not a whole-net one), and an exact rational witness at direction 1198 capturing 0.991109005346039... < 1.",
+        "exploratory/ is the lab's earlier C checker, which is not interval arithmetic, with its 4,972 VERIFIED rows; it is supplementary and not offered as evidence.",
+        "The README answers the review notes of jlevy/squares#890: the checked quadrant [L/2, U_r]^2 stands for the whole centre domain through the quarter turn and the D4-symmetric measure; the outward growth at a shared angle is m_old(t) - m_new(t)/lambda, not rho(1 - 1/lambda); the route's ceiling stays 99500/9977, with no claim for a 49,707-direction 9.97285 partial."
+      ],
+      "original_gzip": [
+        "source/certificate/n94-L9972.json.gz",
+        "source/controls/mass-99-100.json.gz",
+        "source/receipts/directions.jsonl.gz",
+        "source/receipts/native/A.jsonl.gz",
+        "source/receipts/native/B.jsonl.gz",
+        "source/receipts/native/C.jsonl.gz",
+        "source/receipts/native/D.jsonl.gz",
+        "source/receipts/native/E.jsonl.gz",
+        "source/receipts/native/F.jsonl.gz"
+      ]
+    }
+  ]
+}

@@ -341,7 +341,11 @@ verifiers:
           source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and
           at 659ee62, the commit Mohsen Khalili and Sara Gharabaghi's verify.sh builds, and
           run here on their s(44) cover on 31 October 2026 (E-khalili-842-cover-replay),
-          where its decision path is 6b7f0f79's
+          where its decision path is 6b7f0f79's; their k^2 - 5 family's box-11 board
+          (jlevy/squares#973) runs it with --first-order and an area density, a decision
+          path no review here has read, and the import lane of 14 November 2026 ran it on a
+          sample of that board's sweep, root 9632 and the source's controls (with the
+          source's one-line print-all patch for the dump), as diagnostics
     note: >-
       Hosono verified his own covers with zmx2 as well, so a zmx2 replay of one of
       Hosono's covers is a replay of the producer's code.
@@ -390,6 +394,13 @@ verifiers:
       - packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zm_d4_sweep.py
     versions:
       - {sha256: 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab, note: zeromargin.py}
+      - sha256: 3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc
+        revision: 659ee62e4a9d39542a1146e8b011cc3ab6407ede
+        path: packing/resources/web/evand-square-packing-2026-10-24/square-packing/search/zeromargin.py
+        note: >-
+          zeromargin.py at 659ee62: 640fe453's code with an int64 guard on CHAIN totals and
+          assertions on the pitch, which qx2_zm.py and zm_mixed.py import there; Khalili and
+          Gharabaghi's qx2_zm.py runs (jlevy/squares#842, #973) used it
       - sha256: cc7fa8c70f7a39c5e1e920baa9efdc1af8feb68bc6eeb029dab4a99fc3f77fbe
         path: packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zm_d4_sweep.py
         note: zm_d4_sweep.py
@@ -406,8 +417,18 @@ verifiers:
       arrangement sweep in each bin.
     source:
       - packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/src/main.rs
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/rust/src/main.rs
     versions:
       - {sha256: 226ef3f1209933dadb986c963cc1c5b52b86a06686f546441157378311fcc94c}
+      - sha256: aca2fa6f8b42d7973f299a5332d8f7ef200409a0a04fb6eb21d703ff9c8dabc0
+        revision: 0e76d9fe5e48fc2a614e3c132a0a3fd67e0a6a8d
+        path: packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/rust/src/main.rs
+        note: >-
+          verify/src/main.rs at evand/square-packing 0e76d9fe (Git blob f7c700c8), as
+          unnir's s(12) packet vendors it; it differs from 226ef3f1 only by upstream commit
+          cca7bf1 of 7 October 2026, which says in the doc comment that the square is
+          closed and makes the program exit 1 on a refused complete sweep and 4 on a
+          partial run, where it exited 0 whatever its verdict. Nothing it computes changed.
 
   - id: V-evand-xcheck-py
     program: xcheck.py
@@ -450,8 +471,12 @@ verifiers:
     source:
       - packing/resources/web/evand-square-packing-2026-10-01/source/s12/search/qx2_zm.py
     versions:
-      - {sha256: 6294052a37ce66c5d84b55afd606e3a52f463e22b876bf44b5aa903aefb7e737}
-
+      - sha256: 6294052a37ce66c5d84b55afd606e3a52f463e22b876bf44b5aa903aefb7e737
+        note: >-
+          unchanged at 659ee62, where Mohsen Khalili and Sara Gharabaghi ran it with
+          zeromargin.py 3cb95fb7 on a cropped cover of their k^2 - 5 board's root 9632
+          (jlevy/squares#973); the import lane of 14 November 2026 ran that window and its
+          scaled control here, as diagnostics
   - id: V-evand-verify-cert-py
     program: verify_cert.py (s12/search/exact/)
     author: Evan Daniel
@@ -911,6 +936,35 @@ verifiers:
     versions:
       - {sha256: 21527e8d86214dd5612e523217a6266f56dfa95beb11ade34d66e20303d2ea96}
 
+  - id: V-squarepacker-indep-scan-cpp
+    program: indep_scan.cpp
+    author: squarepacker
+    provenance: external
+    language: [C++]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      indep_check.cpp with three optional arguments that restrict the sweep to a range of
+      bins and print each bin below a threshold; given only the certificate, N, Q and n it
+      sweeps every bin of [0, 90] degrees with no symmetry reduction, as indep_check does.
+    source:
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/s12-lower-bound-3.9716/verifier/cpp/indep_scan.cpp
+      - packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/tools/indep_scan.cpp
+    versions:
+      - sha256: 74146d48aa46287514ea44fcfdab6ed66ff687ccca46f24347dd8b1cf923ac61
+        note: >-
+          unnir's s(12) packet's copy, the 7a96bec3 file with its one include of
+          bits/stdc++.h replaced by ten standard headers and nothing else changed
+      - sha256: 35465554962a0c64e22c6275f3da81be10fa1641ef00776dadf3027de790cbbe
+        revision: 7a96bec36bc6811c3715ef581598f22ff9b7ba3a
+        path: packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/tools/indep_scan.cpp
+        note: >-
+          squarepacker/s12-lower-bound v1.1, where its range-restricted run was the weight
+          search's stopping rule (T-095)
+    note: >-
+      A range-restricted run prints VERIFIED for its range alone, so a receipt is read by
+      its arguments as well as its verdict line.
+
   - id: V-schadt-n29-check-py
     program: check.py
     author: Schadt
@@ -1087,6 +1141,107 @@ verifiers:
       the author's lab, which the source says had sqverify-fast's SOUNDNESS.md prose but
       not its source. Retained and read; no evidence entry here rests on a run of it.
 
+  - id: V-khalili-tight-tile
+    program: ttbox.py with ttpoly.py and ttarea.py, run by run_tt.py, and cov_check.py
+    author: Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic, under their direction)
+    provenance: external
+    language: [Python]
+    methods: [exact-algebraic, interval-certified]
+    role: decides
+    summary: >-
+      Proves the source's Tight-Tile Lemma for the box-11 board of the k^2 - 5 family: in
+      coordinates blown up in the tilt around each axis-parallel wall tile of mass exactly
+      one, bounds the mass on each cell of a chart from below by a concave function built
+      from exact limit values and outward-rounded interval derivative bounds, checked at
+      the cell's vertices in rational arithmetic (run_tt.py, one job per base line or
+      strip); cov_check.py then requires every job finished with no refused cell and every
+      box zmx2 left in the 75 tight-tile roots to lie in the certified region, by exact
+      comparisons.
+    source:
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttbox.py
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttpoly.py
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/ttarea.py
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/run_tt.py
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/tight_tile/cov_check.py
+    versions:
+      - sha256: 11551b3bdaf7ca7020d7803d933ddd7a9fa6885259d48c7f70b5f86dae2310c4
+        revision: 2c0b1b9979bcb67d92eb215366dc5ee19286c1d8
+        note: >-
+          ttbox.py; at the same revision ttpoly.py is 538f9685..., ttarea.py 61b36385...,
+          run_tt.py a536996d... and cov_check.py 259b229f.... The source's 308 jobs at u0 =
+          1/4000, 15 at 1/2000 and 3 reruns recorded about 1,007,447 CPU-seconds; their
+          outputs are retained, and the import lane re-ran a sample of jobs on 14 November
+          2026 (packet receipts/tight/).
+    note: >-
+      New with jlevy/squares#973. The source reports one adversarial review of the
+      Tight-Tile proof and code by a separate agent (docs/CHECKING.md) and the paper is not
+      peer reviewed. It reads the board through its own loader, not Daniel's format code.
+
+  - id: V-khalili-k2m5-lean
+    program: >-
+      lean/K2m5 (Grid10, Fam10, InstData, InstFam, InstC1 to InstC7, Inst), on Evan Daniel's
+      Lean library at evand/square-packing 659ee62, with scripts/gen_fam10_data.py emitting
+      InstData.lean from the board and family files
+    author: >-
+      Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic), porting Evan
+      Daniel's Sqpack/BentzFam.lean to the 1/10 grid
+    provenance: external
+    language: [Lean 4, Python]
+    methods: [proof-assistant-checked]
+    role: decides
+    summary: >-
+      Kernel-checks k2m5_of_valid11 : Valid11 -> forall k >= 10, minSide (k^2 - 5) = k: that
+      the board file read verbatim is the family's mu_11, that mu_k has total k^2 - 4D for
+      every k >= 9 with D = 2681133855518/(2 * 10^12), and the reduction to the board. Valid11,
+      every closed unit square in [0,11]^2 has mass at least one under the board, is a
+      hypothesis it does not prove.
+    source:
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Inst.lean
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Fam10.lean
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Grid10.lean
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/InstData.lean
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/scripts/gen_fam10_data.py
+    versions:
+      - sha256: 252b7eff19cfc7bf3fe7b443809c1f8d3adc313862a22e94288ff9c941315f3a
+        revision: 2c0b1b9979bcb67d92eb215366dc5ee19286c1d8
+        note: >-
+          Inst.lean; Fam10.lean is 828f164d..., Grid10.lean f4021764... and InstData.lean
+          5ddfd973... at the same revision. The source's build of 12 November 2026 reports
+          the axioms propext, Classical.choice and Quot.sound (lean/build.log); not built
+          here (think-0h7r).
+
+  - id: V-khalili-k2m5-checks
+    program: >-
+      verification/verify.sh with sanity_k2m5.py, locality_check.py, audit_zmx2.py,
+      r9632/check_9632.py and tight_tile/summarize_tt.py
+    author: Mohsen Khalili and Sara Gharabaghi (written with Claude, Anthropic, under their direction)
+    provenance: external
+    language: [Python, Bash]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The source's exact bookkeeping and record audits: the board's total 121 - 4D, D > 5/4
+      and D4 invariance against the family file; locality of the family on built boards k =
+      10, 12, 13 and 20; that the recorded zmx2 sweep covers all 12,100 D4 roots at one
+      settings hash and leaves uncertified boxes in exactly the 75 tight-tile roots and root
+      9632; and that root 9632's zmx2-uncertified boxes lie in the one qx2_zm.py root of the
+      window, none meeting a box qx2_zm.py left.
+    source:
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/verify.sh
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/sanity_k2m5.py
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/locality_check.py
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/audit_zmx2.py
+      - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/verification/r9632/check_9632.py
+    versions:
+      - sha256: f3faf96524ad526c56045198bde699f7a6b33e5a260360ef02a0443255b2b9ee
+        revision: 2c0b1b9979bcb67d92eb215366dc5ee19286c1d8
+        note: >-
+          verify.sh; sanity_k2m5.py a7cc2db1..., locality_check.py b55d4376...,
+          audit_zmx2.py a2274b02... and check_9632.py d77c6df3... at the same revision. The
+          fast mode ran here on 14 November 2026 on the retained bytes and passed
+          (receipts/verify_fast.log); it reads the recorded runs and recomputes no tilted
+          box.
+
   # --- First-party programs: deciders ----------------------------------------------------
   - id: V-ozden-890-review-axis
     program: dm_axis.py, with dmlib.py
@@ -1176,6 +1331,176 @@ verifiers:
           the packet's source.
       note: >-
         Written after reading SOUNDNESS.md, the crate's format reader, admission, declared net, per-bin domain and search box, which the producer ran, and Hosono's description of format M; the receipts were read to compare. No clean room with respect to the producer's checker is claimed.
+  - id: V-ozden-910-review-axis
+    program: axis_exact.py, with xzcommon.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides direction 0 of a format M measure in full and in exact integers: the capture,
+      bilinear on each cell of the event grid, at every grid vertex of the per-bin quadrant
+      over one common denominator, swept column by column with exact slope updates. Ran on
+      #910's certificate, where it decided direction 0 at least 1 (29,495,761 vertices,
+      least capture 1.003086850384903 on the wall edge, in the strip the dilation adds).
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/axis_exact.py
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py
+    independence_record: docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #910 import (think-xzxd),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents among others. Written by a Claude agent
+          prompted separately from the source and from the import lane, in files of its own
+          that read no checker's source.
+      note: >-
+        Written from SOUNDNESS.md's theorem and lemmas N0, D, C1 and R1 to R5, read as a specification, the crate's README for verdict meanings, and the certificate's own JSON. Its author read none of the producer's verification code: not sqverify_fast/src/, the lab's verifier/ copy, tools/, checks/ or exploratory/; the lab's receipts were read to compare.
+  - id: V-ozden-910-review-bnb
+    program: bnb.py, run by sample.sh, with xzcommon.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      Decides one oblique direction of a format M measure over its whole per-bin quadrant,
+      or a named region, by branch and bound with proved binary64 bounds: rectangles
+      classified inside or outside by triangle inequalities with slack, boundary captures
+      bounded below through the concave vertical section, the capture's gradient enclosed
+      edge by edge, and a stated error budget. Ran on #910's certificate at 25 directions,
+      all verified, and refused the 99/100 mutant at 1198 and 3663.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb.py
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/sample.sh
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py
+    independence_record: docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #910 import (think-xzxd),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents among others. Written by a Claude agent
+          prompted separately from the source and from the import lane, in files of its own
+          that read no checker's source.
+      note: >-
+        Written from SOUNDNESS.md's theorem and lemmas N0, D, C1 and R1 to R5, read as a specification, the crate's README for verdict meanings, and the certificate's own JSON. Its author read none of the producer's verification code: not sqverify_fast/src/, the lab's verifier/ copy, tools/, checks/ or exploratory/; the lab's receipts were read to compare. validate_bnb.py cross-checks its per-box quantities against exact captures and decides nothing.
+  - id: V-ozden-910-review-exact
+    program: bnb_exact.py, capture_exact.py and poses_exact.py, with xzcommon.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides in exact rationals the capture of a format M measure at named poses, by
+      clipping each rectangle by the core, and over one small region of one direction by
+      the branch and bound's steps without an error budget: the controls' witnesses, the
+      sampled directions' least centres with their mutant's, and the region of the crate's
+      least-bound box at 3663 (at least 1.03004 throughout). Decides those poses and that
+      region only.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/bnb_exact.py
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/capture_exact.py
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/poses_exact.py
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py
+    independence_record: docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #910 import (think-xzxd),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents among others. Written by a Claude agent
+          prompted separately from the source and from the import lane, in files of its own
+          that read no checker's source.
+      note: >-
+        Written from SOUNDNESS.md's theorem and lemmas N0, D, C1 and R1 to R5, read as a specification, the crate's README for verdict meanings, and the certificate's own JSON. Its author read none of the producer's verification code: not sqverify_fast/src/, the lab's verifier/ copy, tools/, checks/ or exploratory/; the lab's receipts were read to compare.
+  - id: V-ozden-910-review-premises
+    program: premises.py, with xzcommon.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes in exact rationals, apart from the crate and the import lane's tool, every
+      premise of the measure-capture theorem but coverage for a format M certificate on
+      its declared net: the file, the 6,720 expanded rectangles and the box's eight
+      symmetries, the mass, lemma N0's (a) to (e), the net's covering of tan(pi/8), the
+      dilation against its base and the regeneration of the text and gzip by a rule of its
+      own, and the 99/100 mutant's construction.
+    source:
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/premises.py
+      - packing/resources/web/ozden-s94-lower-bound-9972-2026-11-05/review/review-2026-11-05/programs/xzcommon.py
+    independence_record: docs/project/reviews/review-2026-11-05-ozden-s94-9972.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of the #910 import (think-xzxd),
+            tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's lab used Claude agents among others. Written by a Claude agent
+          prompted separately from the source and from the import lane, in files of its own
+          that read no checker's source.
+      note: >-
+        Written from SOUNDNESS.md's theorem and lemmas N0, D, C1 and R1 to R5, read as a specification, and the certificate's own JSON. Its author read none of the producer's verification code, and not the import lane's devtools.audit_dilated_measure.
   - id: V-check-basic-bounds
     program: devtools.check_basic_bounds
     author: Squares Project (Levy)
@@ -1219,12 +1544,19 @@ verifiers:
     versions:
     - sha256: 6642aca5a6dacfb09f8bb4fb650182d744128e835ca41d50f43d8f4b849712eb
       path: packing/src/sqpack/witness.py
-      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+      note: The source the n183 primary batch ran; the retained seven-file provenance
+        identifies the historical run. It changed on 19 October 2026 (99c7fff6c, each
+        pair's margin measured once a square), so it is not the source later replays ran
+    - sha256: 60bb51cc699ce30940f988013f1d052a49f54b80f5dea84c2cc253e008226db8
+      path: packing/src/sqpack/witness.py
+      note: The source since 99c7fff6c (19 October 2026), which the replay of issue 895's
+        certificate ran on 5 November 2026 (E-yim-895-exact-feasibility; F2 of the
+        review of that day)
     - sha256: 56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337
       path: packing/src/sqpack/verify.py
       note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+        provenance identifies the historical run, and the replay of issue 895's
+        certificate on 5 November 2026 ran it too
 
   - id: V-check-rational-witness-independent
     program: devtools.check_rational_witness_independent
@@ -1241,8 +1573,15 @@ verifiers:
     versions:
     - sha256: 89f8d8e2e071a3f7035083c9a8beb23e3bec175eb0762b2825a5b9f684c16975
       path: packing/devtools/check_rational_witness_independent.py
-      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+      note: The source the n183 primary batch ran; the retained seven-file provenance
+        identifies the historical run. It changed on 20 October 2026 (c81d93355 and
+        e3c308c4b, each square's own-axis projections computed once), so it is not the
+        source later replays ran
+    - sha256: e8571770eca46d4fc227bd4811ba58c7847464d248170a09cc4382bca9de90f9
+      path: packing/devtools/check_rational_witness_independent.py
+      note: The source since e3c308c4b (20 October 2026), which the author of issue 895 ran
+        at e6e8d577 on his own Witness/v2 conversion and the replay of his certificate ran
+        on 5 November 2026 (E-yim-895-exact-feasibility; F2 of the review of that day)
 
   - id: V-check-nagamochi-lemma1-counterexample
     program: devtools.check_nagamochi_lemma1_counterexample
@@ -2833,6 +3172,66 @@ verifiers:
       lapses after 30 days, and no case record has a block for local minimality
       (think-8xy2).
 
+  - id: V-khalili-973-review-check
+    program: k2m5_cover.py, k2m5_axis.py, k2m5_coverage.py and closure_9632.py, with k2m5_exact.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 14 November stage 4 review's exact programs for Khalili and Gharabaghi's k^2 - 5
+      family (issue 973): the board's total, D and D4 invariance and the family built by
+      Definition 3 with Lemma 7's premises and window identity (k2m5_cover.py); the whole
+      theta = 0 face by one-sided corner limits on every 1/10 cell, no symmetry used
+      (k2m5_axis.py); every leftover zmx2 box of the 75 tight-tile roots against the
+      Tight-Tile Lemma's domain and the jobs it needs (k2m5_coverage.py); root 9632's
+      closure from the two checkers' outputs (closure_9632.py); and exact mass of a rational
+      pose by clipping in Fractions (k2m5_exact.py), with which the review probed poses,
+      zmx2's tightest leaves and the Tight-Tile bound's cell vertices.
+    source:
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_cover.py
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_axis.py
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_coverage.py
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/closure_9632.py
+      - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/programs/k2m5_exact.py
+    independence_record: packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 973 (L144, think-h10k), strong
+            tier, reasoning setting not recorded, prompted separately from the import lane
+            (L145, think-2vgx)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source says Claude produced its search, certificate, Tight-Tile checker and
+          verification runs. The programs were written from the paper's statements and import
+          no code of the source or of evand/square-packing, but the review lane read the
+          source's verification and Tight-Tile code in full as part of the review, and its
+          README does not record that the programs were frozen before that reading, so the
+          record does not call them clean-room. They were frozen with their outputs at
+          2026-11-14T04:41:26Z (receipts/freeze.sha256), before the lane read the record's
+          own material on the claim.
+    note: >-
+      Written and run on 14 November 2026 for
+      docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md and kept with
+      its outputs in khalili-gharabaghi-k2m5-973-review-2026-11-14 beside the import lane's
+      packet. The lane's other programs (k2m5_samples.py, draw_samples.py, make_mutants.py,
+      mutate_cov.py, m3_search.py, submeasure.py, boards_vs_family.py, lean_data_link.py,
+      compare_uncert.py, compare_tt.py, zmx2_leaf_probe.py, tt_region.py,
+      package_outputs.py, freeze.py and run_jobs.sh) evaluate samples, draw them, build
+      mutants, compare runs or drive the source's code, and are not registered. The review
+      ran at tbd-strong, not at the tbd-strong-max tier with maximum reasoning that the
+      runbook asks of a stage 4 review.
+
   # --- First-party programs: premise checks and replay drivers ------------------------
   - id: V-ozden-890-review-premises
     program: dm_premises.py, with dmlib.py
@@ -2979,15 +3378,27 @@ verifiers:
       lemma N0's (a) to (e), the dilation row by row against the base, and the
       regeneration of the certificate's JSON text from the base by the source's stated
       rule; then compares the census capture with the producer's sqverify-fast receipts
-      direction by direction. It decides no coverage; sqverify-fast does.
+      direction by direction, or, where the producer's receipts are an archive of several
+      runs, with the archive's selected line at every direction of the declared net on
+      every field the line keeps and with the node total of an archive whose audit holds.
+      Its receipts command audits a producer's archive of several
+      native runs: each run's rows are its declared scope, its summary states the
+      certificate's premises and a build of reviewed source, each direction of the net is
+      held once, verified, by a line equal to its run's, and a mass-scaled control's
+      witnesses are recomputed by check_sqverify_fast.mixed_exact. It decides no coverage;
+      sqverify-fast does.
     source:
       - packing/devtools/audit_dilated_measure.py
       - packing/tests/test_audit_dilated_measure.py
     note: >-
       Written by lane L33 of the intake of 3 November 2026 (think-2agl) for #890, after
-      reading the certificate, the source's README and tools/rescale.py as data. Its
-      receipts are receipts/dilation-audit.json and receipts/replay-comparison.json in
-      the ozden-s94-lower-bound-2026-11-03 packet.
+      reading the certificate, the source's README and tools/rescale.py as data, and
+      extended by lane L49 on 5 November (think-pi8b) for #910: that source's canonical
+      rescale rule, the growth at the nodes the two nets share, the receipts command, and
+      compare's archive mode. Its receipts are receipts/dilation-audit.json and
+      receipts/replay-comparison.json in the ozden-s94-lower-bound-2026-11-03 packet, and
+      receipts/dilation-audit.json, receipts/native-receipt-audit.json and
+      receipts/replay-comparison.json in the ozden-s94-lower-bound-9972-2026-11-05 packet.
   - id: V-evand-regularized-1020-review-controls
     program: sharp_controls_t225.py
     author: Squares Project (Levy)
@@ -3646,6 +4057,23 @@ verifiers:
       the exact capture of both at a pose in that cell.
     source: [packing/devtools/replay_evand_zmx2.py]
 
+  - id: V-replay-k2m5-family
+    program: devtools.replay_k2m5_family
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Stages Khalili and Gharabaghi's k^2 - 5 release from its packet, holding the
+      pinned-only tight_tile/cov.tar.xz to its digest and leaving the retained files'
+      custody to devtools.acquire_source --check (OR-16), builds zmx2 e2bb84e9 by
+      devtools.replay_evand_zmx2 and a copy with the source's one-line print-all patch, runs
+      the source's verify.sh, zmx2 columns, root 9632 (zmx2 dump, qx2_zm.py and
+      check_9632.py), controls and tight-tile jobs under receipts, and compares each with
+      the source's record; it decides nothing about the board.
+    source: [packing/devtools/replay_k2m5_family.py]
+
   - id: V-audit-evand-mixed-covers
     program: devtools.audit_evand_mixed_covers
     author: Squares Project (Levy)
@@ -3691,6 +4119,25 @@ verifiers:
       controls rebuilt byte for byte.
     source: [packing/devtools/audit_s12_v11_certificate.py]
     note: It shares only the file reader and the D4 test with devtools.audit_s12_rescaled_certificate, and nothing with the source's tools.
+
+  - id: V-audit-s12-unnir
+    program: devtools.audit_s12_unnir_certificate
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Decides everything unnir's s(12) certificate rests on but coverage, in integers and
+      Fraction: its bytes, the header and side, positivity, containment, distinctness, D4
+      invariance and orbits, the total below 12, an admissible pose of bin 39531 capturing
+      exactly one over every open cell of its arrangement in a window, and the four
+      controls, the source's two rebuilt as its replay helper writes them.
+    source: [packing/devtools/audit_s12_unnir_certificate.py]
+    note: >-
+      It shares the file reader and the D4 test with devtools.audit_s12_rescaled_certificate,
+      the orbit grouping with devtools.audit_s12_v11_certificate and Daniel's sigma rounding
+      with devtools.verify_evand_angle_net_native, and nothing with the source's tools.
 
   - id: V-compare-evand-s32-sweep
     program: devtools.compare_evand_s32_sweep
@@ -7315,3 +7762,1381 @@ verifiers:
       receipts are in the ozden-s204-upper-bound-2026-11-03 packet's. oz_sides.py,
       oz_identity.py, oz_compare_lane.py, oz_custody.py and oz_repair.py, kept beside
       them, decide nothing and are not registered.
+  - id: V-yim-1105-review-check
+    program: certcheck.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 5 November stage 4 review's exact checker of Kaelan Yim's rational centre and
+      half-angle certificate of issue 895 (260), in Evan Daniel's text format, with a
+      fail-closed reader of its own: every token, line and count the format states, the
+      header side against the issue's fraction, and every wall and all 33,670 pairs with no
+      distance filter, decided twice, by separating axes over the four edge normals with
+      corner projections in fractions.Fraction (method A) and by exact Sutherland-Hodgman
+      clipped areas with the shoelace formula in Fraction (method B), the two sharing only
+      the reader; the rotation sense is fixed counterclockwise against the house witness,
+      and the reversed sense is decided as a control. controls.py decides seventeen sharp
+      and gross controls a certificate by both methods against outcomes stated before each
+      runs (the side lowered to its far-wall contact, every square moved to the left and the
+      bottom walls, a square raised to the top wall, the tightest pair, the tightest pair of
+      tilted squares and the tightest mixed pair closed along their gap normals, each at
+      exact contact and 1e-30 past it; a duplicate, a square out of the box and the side
+      lowered by 1e-10), and selftest.py holds both methods to 23 hand cases with known
+      answers and 400 random rational pairs taken exactly to contact, then 1e-30 either side.
+    source:
+      - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/certcheck.py
+      - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/controls.py
+      - packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/programs/selftest.py
+    independence_record: packing/resources/web/yim-s260-upper-bound-2026-11-05/review/review-2026-11-05/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 895 (think-o7ly), strong tier
+            (tbd-strong-max) at maximum reasoning, prompted separately from the import lane
+            (bold-ritchie-l48)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The author's own check ran this repository's
+          devtools.check_rational_witness_independent, whose commits Claude agents
+          authored, all but one; the issue says AI set up the search environment and does
+          not name the system. The programs were written from the mathematics, the format
+          as the issue and the packet state it, and the certificates, with the rotation
+          sense measured against the house witness. They import nothing from this
+          repository, and their author read none of its witness verifiers, its importer or
+          Evan Daniel's checkers.
+    note: >-
+      Written and run on 5 November 2026 for
+      docs/project/reviews/review-2026-11-05-yim-895-260.md (SHA-256
+      0890eea39e3c622f8a3d5d4d4d8a7e79eb2ceb162a6551ecfc0c00bd2464ce5c for certcheck.py as
+      retained, in the directory's programs.sha256, and as each receipt records), and kept,
+      with everything they printed, in the yim-s260-upper-bound-2026-11-05 packet's
+      review/review-2026-11-05/. side.py, identity.py, upright.py, rowsback.py, movers.py,
+      slides.py and custody.py, kept beside them, decide nothing about the bound and are
+      not registered.
+  - id: V-evand-1105-review-check
+    program: decide_feasibility.py and sharp_controls.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 5 November stage 4 review's exact checker of Evan Daniel's seven certificates of
+      issue 914 (175, 204, 260, 268, 293, 303 and 304) and his six regularized views, in his
+      text format, with a strict reader of its own (cert_reader.py: one header n S, n rows
+      of three rationals, comments, LF only, anything else refused): every wall and every
+      pair with no distance filter, decided twice, by separating axes in
+      fractions.Fraction (method A) and by exact Sutherland-Hodgman clipped areas with the
+      shoelace formula in gmpy2.mpq with a corner construction of its own (method B), the
+      two sharing only the reader (exact_geometry.py), each pair classed separated,
+      touching or overlapping and the two classes required to agree; the rotation sense is
+      read counterclockwise and the reversed sense decided as a control.
+      sharp_controls.py decides fourteen control instances a file by both methods against
+      outcomes stated before each runs: the box at its extent and 1e-30 below, the packing
+      at the near walls and 1e-30 past, the least-gap pair closed and 1e-30 past, the
+      least-clearance square to its wall and 1e-30 past, the least closing enlargement and
+      1e-30 more, a duplicate, a square outside and every square turned to t = 0.
+      self_test.py holds both methods to 19 known answers, 3,000 random rational pairs and
+      6,000 constructed contacts and 1e-30 overlaps, and its reader to 14 malformed files.
+    source:
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/decide_feasibility.py
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/exact_geometry.py
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/cert_reader.py
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/sharp_controls.py
+      - packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/programs/self_test.py
+    independence_record: packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/README.md
+    independence:
+      read: [mathematics, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 914 (think-lrj4), strong tier
+            (tbd-strong-max) at maximum reasoning, prompted separately from the import lane
+            (bold-ritchie-l51)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 914 says the composer, the search, the checks and the request were done with
+          Claude; the certificates' commit carries a Co-Authored-By trailer naming Claude,
+          and the source's CREDITS.md says its work was produced by Claude under the
+          author's direction. The programs were written from the mathematics and the
+          format as the certificates' first line and the issue state it; the source's
+          binary64 inputs, 80-digit points and JSON reports were read to compare. Its
+          authors never read verify_cert.py, verify_cert2.py or any producer code, which
+          were hashed only, nor this repository's maintained routes. The method's
+          mathematics, separating axes and polygon intersection, is what the issue says the
+          producer's two checkers use.
+    note: >-
+      Written and run on 5 November 2026 for
+      docs/project/reviews/review-2026-11-05-evand-914-seven.md (SHA-256
+      f152ff262d61b2cbc5913fe700e72e786521d18757eb8c6ac7d3d9068a4b5d7f for
+      decide_feasibility.py, 60477ad6a4e58599a0130549212c27050ddd79729f70c5282441f1a1fece3d96
+      for exact_geometry.py and f75ae7df3913ef6fe6d97c8bb328387c3f6a5a271666aca121ece838e9aa0390
+      for sharp_controls.py as retained, in the directory's out/program-digests.txt), and
+      kept, with everything they printed, in the evand-issue914-2026-11-05 packet's
+      review/review-2026-11-05/. custody.py is a premise check of the digests;
+      sides_and_kkt.py, house_slack.py, scale_slack.py, identity.py, island_260.py, tilts.py
+      and input_260.py, kept beside them, measure and decide nothing about the bounds, and
+      are not registered.
+
+  - id: V-unnir-924-review-decider
+    program: decide_bins.py with run_bins.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 8 November stage 4 review's exact decider of unnir's s(12) certificate, in
+      Daniel's text format: for each bin of the net 2 arctan(k/N), a core square at the
+      bin's mid-tangent angle with a rational shrink of its own, its exact minimum capture
+      over the bin's whole centre domain by a strip sweep over the open cells of the box
+      arrangement in int and Fraction (numpy int64 only for the weight counts), subdivision
+      of a bin that fails, and an exact-angle mode with no shrink. test_decider.py holds the
+      sweep to a brute-force enumeration of open cells on 2,000 random instances, and
+      mutation_check.py shows that test catches one-unit errors.
+    source:
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/decide_bins.py
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/run_bins.py
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/test_decider.py
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/mutation_check.py
+    independence_record: packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 924 (L58), strong tier
+            (tbd-strong-max) at maximum reasoning, prompted separately from the import and
+            replay lane (L57)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The decider's digest was recorded at 15:08:21Z, before its authors read either
+          of the producer's checkers (out/digests-before-reading-producer-code.txt), and
+          the digest that ran is that one. It imports nothing from the producer or from
+          this repository. Both producer checkers' sources say Claude helped write them;
+          the source names its own assistant only as Numaro Autonomous Research.
+    note: >-
+      Written and run on 8 November 2026 for
+      docs/project/reviews/review-2026-11-08-s12-unnir-3.9716.md (SHA-256
+      335101d848607c63cd4e12c7ec14305585b3cd1f4c88df8735b900b0b9b11540 for decide_bins.py
+      and a6aacfb29dea2c8e71232a7b4418d72504c963cfe9d8286871bd707637a73590 for run_bins.py,
+      in the folder's out/sha256sums.txt). controls.py and emulate_band.py, kept beside it,
+      were written after its authors read Daniel's Rust and decide nothing about the bound;
+      lineage.py measures the point set's relation to T-095's. They are not registered.
+
+  - id: V-unnir-924-review-premises
+    program: premises.py with net_coverage.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      The 8 November stage 4 review's exact premise check of unnir's s(12) certificate: a
+      strict line parse and a token parse that must agree, the digest, count, distinctness,
+      positivity, containment, the D4 invariance of the weighted multiset and its orbits,
+      the side, the total and the margin below 12; and, exactly, the bins of the net that
+      cover [0, 45] degrees.
+    source:
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/premises.py
+      - packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/programs/net_coverage.py
+    independence_record: packing/resources/web/unnir-s12-lower-bound-2026-11-08/review/review-2026-11-08/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 924 (L58), strong tier
+            (tbd-strong-max) at maximum reasoning, prompted separately from the import and
+            replay lane (L57)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Written before its authors read the producer's checkers; it imports nothing from
+          the producer or from this repository. Both producer checkers' sources say Claude
+          helped write them.
+  - id: V-ozden-1109-review-check
+    program: l64_check.py with l64_reader.py, l64_sat.py, l64_clip.py and l64_util.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 9 November stage 4 review's exact checker of Doğa Özden's rational corner
+      Witness/v2 certificates of issues 927 to 931 (232, 268, 299, 303 and 307), with a
+      fail-closed reader of its own (PyYAML BaseLoader, duplicate keys refused, every scalar
+      an integer or p/q, the JSON twin held to the same witness): every format hypothesis
+      (envelope, n, distinct ids in order, side, unit size, corners, rational, lower-left
+      origin, axes), every square a unit square from its listed corners, every wall and every
+      pair twice with no distance filter, by separating axes over the four edge normals in
+      fractions.Fraction (l64_sat.py) and by exact Sutherland-Hodgman clipped areas in
+      gmpy2.mpq (l64_clip.py). l64_controls.py decides 19 controls a certificate and
+      l64_controls_centre.py a 20-control addendum, each stated in a plan hashed before its
+      program existed (the side at and one unit of its last place below its extent, every
+      square to its nearest wall, every pair within 1e-12 to contact along its centre line
+      and 1e-30 past it, an enlarged square, a duplicate, a translation out of the box, a
+      broken square, the count and ids, the reversed rotation sense), and l64_selftest.py
+      holds both methods to known answers, 3,000 random rational pairs and 1,000 random
+      walls at contact and either side of it, and 32 malformed files.
+    source:
+      - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_check.py
+      - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_reader.py
+      - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_sat.py
+      - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_clip.py
+      - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_util.py
+      - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_controls.py
+      - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_controls_centre.py
+      - packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/programs/l64_selftest.py
+    independence_record: packing/resources/web/ozden-s232-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 927 to 931 (L64, think-rd0p),
+            strong tier (tbd-strong-max) at maximum reasoning, prompted separately from the
+            import lane (L63, think-463r)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose
+          witness tooling Claude agents co-authored, and the lab's issue 890 says Claude
+          agents ran its checks. The six checker files were frozen at 2026-11-09T07:18:14Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from
+          this repository or the sources.
+    note: >-
+      Written and run on 9 November 2026 for
+      docs/project/reviews/review-2026-11-09-ozden-927-931-five.md (SHA-256
+      5c4927b88049a41a3fa1e822eab96d575d27f7d982058b272f677d87064c2058 for l64_check.py and
+      0e51d443fda1825b6ae207689ed932b9d1c73fc0c46aed0ceec153ba08be9c9c for l64_reader.py as
+      retained, in the directory's programs.sha256, and as each receipt records), and kept
+      once, with the shared receipts and those at 232, in the
+      ozden-s232-upper-bound-2026-11-09 packet's review/review-2026-11-09/; each other
+      count's receipts are in its own packet's. l64_sides.py, l64_custody.py, l64_house.py,
+      l64_houses.py, l64_identity.py, l64_construct.py, l64_digests.py and
+      l64_compare_lane.py, kept beside them, decide no certificate of the five and are not
+      registered.
+  - id: V-ozden-935-936-review-check
+    program: l72_check.py with l72_reader.py, l72_sat.py, l72_clip.py and l72_util.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 9 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificates of issues 935 and 936 (172 and 270), with a fail-closed reader of its own
+      (PyYAML composed nodes with every scalar a string, aliases, explicit tags and duplicate keys
+      refused, every scalar an integer or p/q in canonical form, the JSON twin held to the same
+      witness): every format hypothesis, every square a unit square from its listed corners, every
+      wall and every pair twice with no distance filter, by separating axes over the four edge
+      normals in fractions.Fraction (l72_sat.py) and by exact Sutherland-Hodgman clipped areas in
+      gmpy2.mpq (l72_clip.py). l72_controls.py decides 23 controls a certificate, stated in a plan
+      hashed before its program existed (the side at and one unit of its last place below its
+      extent, every square to its nearest wall, every pair within 1e-12 to contact along its centre
+      line and 1e-30 past it, an enlarged square, a duplicate, a translation out of the box, a
+      broken square, the count and ids, the reversed rotation sense), and l72_selftest.py holds both
+      methods to 80 cases: known answers in both listing senses, walls, refused shapes, 3,000
+      random rational pairs and 1,000 random walls at contact and either side of it, and 41
+      malformed files.
+    source:
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_check.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_reader.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_sat.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_clip.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_util.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_controls.py
+      - packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/programs/l72_selftest.py
+    independence_record: packing/resources/web/ozden-s172-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 935 and 936 (L72, think-qqyg), strong
+            tier (tbd-strong-max) at maximum reasoning, prompted separately from the import lane
+            (L71, think-he66)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issues say AI agents wrote and ran the lab's
+          search and checks. The six checker files were frozen at 2026-11-09T16:12:07Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or this
+          repository's witness, verifier or promotion code; they import nothing from this
+          repository or the sources.
+    note: >-
+      Written and run on 9 November 2026 for docs/project/reviews/review-2026-11-09-ozden-935-936.md
+      (SHA-256 a6c8edeb92a97603acc55805d20f61b8c7ef66d917c5fd7d006cf6db92ecfa24 for l72_check.py and
+      76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a for l72_reader.py as
+      retained, in the directory's programs.sha256, and as each receipt records), and kept once,
+      with the shared receipts and those at 172, in the ozden-s172-upper-bound-2026-11-09 packet's
+      review/review-2026-11-09/; the 270 receipts are in its own packet's. l72_freeze.py,
+      l72_plan_facts.py, l72_sides.py, l72_custody.py, l72_house.py, l72_houses.py,
+      l72_identity.py, l72_construct.py, l72_digests.py and l72_compare_lane.py, kept beside them,
+      decide no certificate of the two and are not registered.
+  - id: V-ozden-938-review-check
+    program: l77_check.py with l77_checker.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 9 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 938 (199), with a strict reader of its own (every scalar an integer or
+      p/q in lowest terms, the JSON twin held to the same plain tree): every format hypothesis,
+      every square a unit square from its listed corners, every wall and every pair twice with no
+      distance filter, by separating axes over the four edge normals in fractions.Fraction (method
+      A) and by exact clipped areas in gmpy2.mpq (method B), each pair classed overlapping,
+      touching or clear, so that the 25 exact contacts of the certificate's grid squares are
+      decided as contacts by both. l77_controls.py decides 23 controls stated in a plan hashed
+      before its program existed (a grid square moved 1e-30 toward the 172 part, square 184 taken
+      to exact contact with 159 and past it, every near pair between the parts closed along its
+      centre line, the side lowered by one unit of its denominator, three removals, the corner
+      square given to the column, the reversed rotation sense); l77_selftest.py holds both methods
+      and the reader to 138 cases, and l77_mutants.py shows each of seven mutated checkers fails
+      them.
+    source:
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_check.py
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_checker.py
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_controls.py
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_selftest.py
+      - packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/l77_mutants.py
+    independence_record: packing/resources/web/ozden-s199-upper-bound-2026-11-09/review/review-2026-11-09/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 938 (L77, think-ntcf), strong tier,
+            prompted separately from the import lane (L76, think-1goz)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The 172 part's coordinates were made by this repository's packing-witness promote, whose
+          witness tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The four checker files were frozen at 2026-11-09T21:05:54Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or this
+          repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source.
+    note: >-
+      Written and run on 9 November 2026 for docs/project/reviews/review-2026-11-09-ozden-938.md
+      (SHA-256 7749f47cd0a481bd72ef532379dcf6d225b9d50bb9ed83aaac8eaf3784966016 for l77_check.py and
+      f1d6ff951c10ad3088c831c108a00eca8498b6cec22ad6f76a208781549958cf for l77_checker.py, as
+      frozen and as each receipt records), and kept with its receipts in the
+      ozden-s199-upper-bound-2026-11-09 packet's review/review-2026-11-09/. l77_construct.py,
+      l77_plan_facts.py, l77_sides.py, l77_propagate.py, l77_custody.py, l77_pose.py,
+      l77_identity.py, l77_digests.py and l77_compare_lane.py, kept beside them, decide no
+      certificate and are not registered.
+  - id: V-yim-1109-review-check
+    program: l70_check.py with l70_reader.py, l70_sat.py and l70_clip.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 9 November stage 4 review's exact checker of Kaelan Yim's rational
+      centre/half-angle certificates in vitamoon/vitamoon (130, 299 and 303 at ac14112, the
+      first 303 at 78eb9ea and 553 to 700), with strict readers of its own that turn every
+      number into integers: every square a unit square, every wall and every pair with no
+      distance filter, by separating axes over the four edge normals in fractions.Fraction
+      (l70_sat.py) and by exact clipped areas in gmpy2.mpq (l70_clip.py), the two agreeing
+      on every class. l70_controls.py decides the controls of a plan frozen before it
+      existed (the side, the walls, every near pair and every square at contact and 1e-30
+      past it, the reversed rotation sense), l70_controls_addendum.py a 45-control
+      addendum frozen before it ran, and l70_selftest.py holds both methods to 32 known
+      cases.
+    source:
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_check.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_reader.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_sat.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_clip.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_controls.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_controls_addendum.py
+      - packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/programs/l70_selftest.py
+    independence_record: packing/resources/web/yim-certificates-2026-11-09/review/review-2026-11-09/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of Kaelan Yim's vitamoon certificates
+            (L70, think-i5a5), strong tier (tbd-strong-max) at maximum reasoning, prompted
+            separately from the import lane (L65, think-h96r)
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer says Hermes Agent was used for research, search, implementation and
+          verification orchestration, and names no model family (the review's question 5).
+          The checker files were frozen at 2026-11-09T14:05:49Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's verifier code; they import nothing from this repository or the
+          source.
+    note: >-
+      Written and run on 9 November 2026 for
+      docs/project/reviews/review-2026-11-09-yim-vitamoon.md (SHA-256
+      4d4dd2e03c8d2898dcae161bd6257d6a2580369431978f0dee82e134e92b25a4 for l70_check.py and
+      3b2939a734a2959802458f54b2495673dfb32b1798c478433ff6b135361990fb for l70_reader.py as
+      retained and frozen, and as each receipt records), kept in the yim-certificates-2026-11-09
+      packet's review/review-2026-11-09/. l70_sides.py, l70_contract.py, l70_identity.py,
+      l70_relative303.py, l70_construct.py, l70_custody.py, l70_digests.py and
+      l70_compare_lane.py, kept beside them, decide no certificate and are not registered.
+  - id: V-de-winter-939-946-review-check
+    program: l82_check.py with l82_decide.py and l82_selftest.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Joost de Winter's rational certificates
+      of issues 939 (199) and 946 (172), with a strict reader of its own that turns every number
+      into Python integers: every square a unit square, every wall and every pair with no
+      distance filter, decided twice in the one module l82_check.py, by separating axes over the
+      four edge normals in fractions.Fraction (method A) and by exact clipping against the
+      closed half-planes and the shoelace area in gmpy2.mpq (method B), the two sharing only the
+      reader and agreeing on every class. l82_decide.py runs it on a certificate with the 21
+      controls of a plan frozen before they ran, and l82_selftest.py holds both methods to 1,700
+      cases, with four mutated checkers each failing them.
+    source:
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_check.py
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_decide.py
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/l82_selftest.py
+    independence_record: packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 939 and 946 (L82, think-o53d),
+            prompted separately from the import lane (L78, think-2h88) and blind to its work
+            until its findings were frozen
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates were produced with Claude (Anthropic) under the
+          author's direction (#946 names Claude Fable 5.2). The checker was frozen at
+          2026-11-11T06:22:08Z (checker-freeze.json), before its author read any producer code
+          or this repository's witness, verifier or promotion code; it imports nothing from
+          this repository or the source.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-de-winter-939-946.md (SHA-256
+      03d58e600f67534334e40669f8401a17f308063262122ab98dfc3bdcfef37178 for l82_check.py and
+      18bcc73e17f6c12bdc0443daecaab04adf6846efe17b5a49e982da3f654e8ff9 for l82_selftest.py as
+      frozen and retained), kept in the de-winter-s199-upper-bound-2026-11-09 packet's
+      review/review-2026-11-11/, with the 172 receipts in the de-winter-s172-upper-bound-2026-11-10
+      packet's. Its runs (decide-939.json, decide-946.json) are not entered as evidence while
+      T-285 and T-286 are held for the owner's RV-3 (think-ruu2), as T-280's are not.
+      l82_algebra.py, l82_measure.py, l82_moves.py, l82_supplement.py, l82_print300.py,
+      l82_freeze.py and l82_compare_lane.py, kept beside them, decide no certificate and are not
+      registered.
+  - id: V-ozden-943-947-review-check
+    program: l83_check.py with l83_reader.py, l83_sat.py, l83_clip.py and l83_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificates of issues 943, 944, 945 and 947 (156, 180, 268, 269), with a strict reader of
+      its own (l83_reader.py: every scalar an exact integer pair in lowest terms, ids 1 to n in
+      order, the JSON twin held to the same tree, any unexpected layout refused): every format
+      hypothesis, every square a unit square from its listed corners, every wall and every pair
+      twice with no distance filter, by separating axes over the four edge normals in
+      fractions.Fraction (l83_sat.py, method A) and by exact clipped areas in gmpy2.mpq
+      (l83_clip.py, method B), each pair classed overlapping, touching or clear by both.
+      l83_geom.py holds the exact constructions the controls use, the centre-line closing among
+      them; l83_controls.py decides 15 controls a count stated in a plan hashed before it
+      existed; l83_selftest.py holds both methods and the reader to 92 cases.
+    source:
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_check.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_reader.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_sat.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_clip.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_geom.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_selftest.py
+      - packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/programs/l83_controls.py
+    independence_record: packing/resources/web/ozden-s156-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 943, 944, 945 and 947 (L83,
+            think-x8oc), strong tier, prompted separately from the import lane (L81, think-xq4o)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issues say AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-11T06:36:12Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-ozden-943-947.md (SHA-256
+      661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0 for l83_check.py, as
+      frozen at 2026-11-11T06:36:12Z and as each receipt records), and kept with its receipts in
+      the ozden-s156-upper-bound-2026-11-10 packet's review/review-2026-11-11/, each count's
+      receipts in its own packet. l83_construct.py, l83_plan_facts.py, l83_sides.py,
+      l83_houses.py, l83_house.py, l83_shares.py, l83_identity.py, l83_custody.py,
+      l83_digests.py and l83_compare_lane.py, kept beside them, decide no certificate and are
+      not registered.
+  - id: V-de-winter-941-942-review-check
+    program: l96_check.py with l96_read.py, l96_sat.py and l96_clip.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Joost de Winter's 37 rational
+      centre/half-angle certificates of #941, #942 and #942's addendum (JoostdeWinter/square-packing
+      above324/ at 71da0d5 and above324_refined/ at a9486ed and a0c4fc8), with a strict reader of
+      its own (l96_read.py) that turns every number into integer pairs and fails closed: every
+      square a unit square, every wall and every pair, by separating axes over the four edge
+      normals in fractions.Fraction (l96_sat.py, method A) and by exact clipping and shoelace
+      areas in gmpy2.mpq (l96_clip.py, method B), the two required to agree exactly on every
+      class. l96_controls.py decides the nine controls a file of a plan frozen before they ran,
+      and l96_selftest.py holds the reader and both methods to 72 cases.
+    source:
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_check.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_read.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_sat.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_clip.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_controls.py
+      - packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/programs/l96_selftest.py
+    independence_record: packing/resources/web/de-winter-issue941-2026-11-10/review/review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of #941, #942 and the addendum (L96), strong
+            tier (tbd-strong), prompted separately from the import lane (L90, think-cen3) and
+            blind to its work until its findings were frozen
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the certificates were produced with Claude (Anthropic) under the
+          author's direction. The checker files were frozen at 2026-11-11T15:10:54Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's verifier code; they import nothing from this repository or the
+          source.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md (SHA-256
+      88bca816c37b02a16df53f400ce3c2272d860def44c5f7b78b2919687aff8131 for l96_check.py and
+      45ae2270ac50e7edd8c6cf49b0cae55d298a3931bc4db933e6349bd8f90e1f29 for l96_read.py as frozen
+      and retained), kept in the de-winter-issue941-2026-11-10 packet's review/review-2026-11-11/,
+      each count's receipts in its own packet. l96_record_rows.py, l96_claims.py,
+      l96_construct.py, l96_custody.py, l96_extent.py, l96_digests.py and l96_compare_lane.py,
+      kept beside them, decide no certificate and are not registered.
+  - id: V-ozden-954-review-check
+    program: l101_check.py with l101_reader.py, l101_sat.py, l101_clip.py and l101_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 954 (179), with a strict reader of its own (l101_reader.py: every
+      scalar an exact integer pair in lowest terms, ids 1 to n in order, the JSON twin held to
+      the same tree with floats, constants and duplicate keys refused, any unexpected layout
+      refused): every format hypothesis, every square a unit square from its listed corners, every
+      wall and every pair twice with no distance filter, by separating axes over the four edge
+      normals in fractions.Fraction (l101_sat.py, method A) and by exact clipped areas in
+      gmpy2.mpq (l101_clip.py, method B), each pair classed overlapping, touching or clear by
+      both. l101_geom.py holds the exact constructions the self-test and controls use, the
+      centre-line closing among them; l101_controls.py decides 17 controls stated in a plan
+      hashed before it existed; l101_selftest.py holds both methods and the reader to 987 cases.
+    source:
+      - packing/resources/web/ozden-s179-review-2026-11-11/programs/l101_check.py
+      - packing/resources/web/ozden-s179-review-2026-11-11/programs/l101_reader.py
+      - packing/resources/web/ozden-s179-review-2026-11-11/programs/l101_sat.py
+      - packing/resources/web/ozden-s179-review-2026-11-11/programs/l101_clip.py
+      - packing/resources/web/ozden-s179-review-2026-11-11/programs/l101_geom.py
+      - packing/resources/web/ozden-s179-review-2026-11-11/programs/l101_selftest.py
+      - packing/resources/web/ozden-s179-review-2026-11-11/programs/l101_controls.py
+    independence_record: packing/resources/web/ozden-s179-review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 954 (L101, under think-f65n), strong
+            tier, prompted separately from the import lane (L100, think-f65n)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-11T19:12:23Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-ozden-954.md (SHA-256
+      96b96450424033e0553fd4977e9980277eee3a136c36eaca5a82854296ab1c05 for l101_check.py, as
+      frozen at 2026-11-11T19:12:23Z and as the check and controls receipts record), and kept
+      with its receipts in the review-only directory ozden-s179-review-2026-11-11 beside the
+      import lane's packet. l101_plan_facts.py, l101_make_plan.py, l101_sides.py,
+      l101_house.py, l101_pose.py, l101_identity.py, l101_band.py, l101_custody.py,
+      l101_compare_lane.py and l101_digests.py, kept beside them, decide no certificate and are
+      not registered; l101_house.py decides the house witness with the frozen l101_check.decide.
+  - id: V-ozden-959-review-check
+    program: l108_check.py with l108_reader.py, l108_sat.py, l108_clip.py and l108_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 959 (179), with a strict reader of its own (l108_reader.py: ids 1 to
+      n in order, every scalar an exact integer pair in lowest terms, the JSON twin held to the
+      same tree, any unexpected layout refused): every format hypothesis, every square a unit
+      square from its listed corners, every wall and every pair twice with no distance filter,
+      by separating axes in gmpy2.mpq (l108_sat.py, method A) and by exact clipping of closed
+      polygons in fractions.Fraction (l108_clip.py, method B), each pair classed overlapping,
+      touching or clear by both. l108_geom.py holds the exact constructions the self-test and
+      controls use; l108_controls.py decides 19 controls stated in a plan hashed before it
+      existed; l108_selftest.py holds both methods and the reader to 8,453 cases.
+    source:
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_check.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_reader.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_sat.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_clip.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_geom.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_selftest.py
+      - packing/resources/web/ozden-s179-959-review-2026-11-12/programs/l108_controls.py
+    independence_record: packing/resources/web/ozden-s179-959-review-2026-11-12/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 959 (L108, under think-89i7), strong
+            tier, prompted separately from the import lane (L107, think-89i7)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-11T22:03:30Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source, and reuse no code of the review of issue 954 (L101), whose
+          programs their author did not open.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-12-ozden-959.md (SHA-256
+      6c6dbaff0369784888e087c7fb5bd6a9f05a0e5e095e60caf7e946a66616e6ef for l108_check.py, as
+      frozen at 2026-11-11T22:03:30Z), and kept with its receipts in the review-only directory
+      ozden-s179-959-review-2026-11-12 beside the import lane's packet. l108_plan_facts.py,
+      l108_make_plan.py, l108_wit.py, l108_sides.py, l108_house.py, l108_pose.py, l108_s70.py,
+      l108_identity.py, l108_contract.py, l108_custody.py and l108_digests.py, kept beside them,
+      decide no certificate and are not registered; l108_house.py and l108_contract.py decide
+      the house witnesses and the contracted squares with the frozen l108_check.decide.
+  - id: V-de-winter-958-review-check
+    program: l105_check.py with l105_reader.py, l105_sat.py, l105_clip.py and l105_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Joost de Winter's rational centre-basis
+      certificates of issue 958 (132 and 157), with a strict reader of its own (l105_reader.py: the
+      JSON's [center_x, center_y, cos, sin] rows and the YAML's centre-basis witness, every scalar
+      an exact rational, ids in order, the two files held to the same packing scalar for scalar):
+      every format hypothesis, every square a unit square, every wall and every pair of both files
+      twice with no distance filter, by separating axes in fractions.Fraction (l105_sat.py, method
+      A) and by exact clipped areas in gmpy2.mpq (l105_clip.py, method B), each pair classed
+      overlapping, touching or clear by both. l105_geom.py holds the exact constructions the
+      self-test and controls use; l105_controls.py decides 16 controls a count stated in a plan
+      hashed before it existed; l105_selftest.py holds both methods and the reader to 2,213 cases,
+      and two mutated methods fail it.
+    source:
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_check.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_reader.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_sat.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_clip.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_geom.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_selftest.py
+      - packing/resources/web/dewinter-132-157-review-2026-11-11/programs/l105_controls.py
+    independence_record: packing/resources/web/dewinter-132-157-review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 958 (L105, under think-bcfs), strong
+            tier, prompted separately from the import lane (L104, think-bcfs)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's READMEs and the issue say the derivation, optimization, certificates and
+          checking were produced with Claude Fable 5.2 (Anthropic) under Joost de Winter's
+          direction. The six checker files and run_frozen.sh were frozen at 2026-11-11T21:07:25Z
+          (frozen/checker-frozen-digests.txt), before their author read the source's
+          verify_exact.py, any of the import lane's work or this repository's witness, verifier or
+          promotion code; they import nothing from this repository or the source.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-dewinter-132-157.md (SHA-256
+      1e7b04cca2bfc3b2e0ef6c95c885e88b99a82615571af3c454ce245222e622b7 for l105_check.py, as frozen
+      at 2026-11-11T21:07:25Z), and kept with its receipts in the review-only directory
+      dewinter-132-157-review-2026-11-11 beside the import lane's packets. l105_plan.py,
+      l105_sides.py, l105_construct.py, l105_lineage.py, l105_identity.py, l105_custody.py,
+      l105_compare_lane.py and l105_digests.py, kept beside them, decide no certificate and are not
+      registered.
+  - id: V-ozden-960-review-check
+    program: l109_check.py with l109_reader.py, l109_axes.py, l109_clip.py and l109_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 11 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 960 (237), with a strict reader of its own (l109_reader.py: every
+      scalar an exact integer pair in lowest terms, ids 1 to n in order, the JSON twin held to
+      the same tree with floats, constants and duplicate keys refused, anchors, aliases, tags
+      and any unexpected layout refused): every format hypothesis, every square a unit square
+      from its listed corners, every wall and every pair twice with no distance filter, by
+      separating axes over the four edge directions in fractions.Fraction (l109_axes.py, method
+      A) and by exact clipped areas in gmpy2.mpq (l109_clip.py, method B), each pair classed
+      overlapping, touching or clear by both. l109_geom.py holds the exact constructions the
+      self-test and controls use, the centre-line closing among them; l109_controls.py decides
+      17 controls stated in a plan hashed before it existed; l109_selftest.py holds both methods
+      and the reader to 2,838 cases.
+    source:
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_check.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_reader.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_axes.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_clip.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_geom.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_selftest.py
+      - packing/resources/web/ozden-s237-review-2026-11-11/programs/l109_controls.py
+    independence_record: packing/resources/web/ozden-s237-review-2026-11-11/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 960 (L109, under think-my76), strong
+            tier, prompted separately from the import lane (L110, think-my76)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-11T22:05:18Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source and share no code with lane L101's review of #954.
+    note: >-
+      Written and run on 11 November 2026 for
+      docs/project/reviews/review-2026-11-11-ozden-960.md (SHA-256
+      ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932 for l109_check.py, as
+      frozen at 2026-11-11T22:05:18Z), and kept with its receipts in the review-only directory
+      ozden-s237-review-2026-11-11 beside the import lane's packet. l109_plan_facts.py,
+      l109_make_plan.py, l109_census.py, l109_sides.py, l109_pose.py, l109_identity.py,
+      l109_band.py, l109_custody.py and l109_digests.py, kept beside them, decide no
+      certificate and are not registered.
+  - id: V-ozden-962-review-check
+    program: l117_check.py with l117_reader.py, l117_sat.py, l117_hull.py and l117_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 12 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 962 (269), with a strict reader of its own (l117_reader.py: every
+      scalar a canonical integer or p/q in lowest terms, ids 1 to n in order, the JSON twin held
+      to the same tree with floats, constants and duplicate keys refused, anchors, aliases, tags,
+      keys outside the schema and any unexpected layout refused): every format hypothesis, every
+      square a unit square from its listed corners, every wall and every pair twice with no
+      distance filter, by separating axes over the four edge normals in Python integers over
+      per-square denominators (l117_sat.py, method A) and by the convex hull of each pair's
+      contained vertices and edge crossings in gmpy2.mpq, with walls by centre and slabs
+      (l117_hull.py, method B), each pair classed overlapping, touching or apart by both.
+      l117_geom.py holds the exact constructions the self-test and controls use, the closed-form
+      margin from centres and half-widths and the centre-line closing among them;
+      l117_controls.py decides 20 controls stated in a plan hashed before it existed;
+      l117_selftest.py holds both methods and the reader to 12,445 cases.
+    source:
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_check.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_reader.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_sat.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_hull.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_geom.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_selftest.py
+      - packing/resources/web/ozden-s269-962-review-2026-11-12/programs/l117_controls.py
+    independence_record: packing/resources/web/ozden-s269-962-review-2026-11-12/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 962 (L117, under think-s418), strong
+            tier, prompted separately from the import lane (L120, think-s418)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-12T00:12:46Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source and reuse no code of any earlier review, lane L108's review
+          of #959, the model for its method, among them.
+    note: >-
+      Written and run on 12 November 2026 for
+      docs/project/reviews/review-2026-11-12-ozden-962.md (SHA-256
+      7ea59b80c685e1ec98a3a2fa8a122356002e3ea11046f082584e6e6ecd8b0ca9 for l117_check.py, as
+      frozen at 2026-11-12T00:12:46Z), and kept with its receipts in the review-only directory
+      ozden-s269-962-review-2026-11-12 beside the import lane's packet. l117_plan_facts.py,
+      l117_make_plan.py, l117_sides.py, l117_pose.py, l117_lineage.py, l117_custody.py and
+      l117_digests.py, kept beside them, decide no certificate and are not registered.
+  - id: V-ozden-967-review-check
+    program: l127_check.py with l127_reader.py, l127_sat.py, l127_clip.py and l127_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 12 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 967 (269), with a strict reader of its own (l127_reader.py: every
+      scalar a canonical integer or p/q in lowest terms, ids 1 to n in order, the JSON twin held
+      to the same tree with floats, constants and duplicate keys refused, anchors, aliases, tags,
+      keys outside the schema and any unexpected layout refused): every format hypothesis, every
+      square a unit square from its listed corners, every wall and every pair twice with no
+      distance filter, by separating axes over the four edge normals in Python integers over
+      per-square denominators (l127_sat.py, method A) and by exact convex clipping in gmpy2.mpq,
+      each square a unit square by its sides and diagonals, each pair and each wall classed by
+      the intersection exactly and containment decided by area (l127_clip.py, method B), each
+      pair classed overlapping, touching or apart by both. l127_geom.py holds the exact
+      constructions the self-test and controls use, the closed-form margin from centres and
+      half-widths and the centre-line closing among them; l127_controls.py decides 20 controls
+      stated in a plan hashed before it existed; l127_selftest.py holds both methods and the
+      reader to 26,381 cases.
+    source:
+      - packing/resources/web/ozden-s269-967-review-2026-11-12/programs/l127_check.py
+      - packing/resources/web/ozden-s269-967-review-2026-11-12/programs/l127_reader.py
+      - packing/resources/web/ozden-s269-967-review-2026-11-12/programs/l127_sat.py
+      - packing/resources/web/ozden-s269-967-review-2026-11-12/programs/l127_clip.py
+      - packing/resources/web/ozden-s269-967-review-2026-11-12/programs/l127_geom.py
+      - packing/resources/web/ozden-s269-967-review-2026-11-12/programs/l127_selftest.py
+      - packing/resources/web/ozden-s269-967-review-2026-11-12/programs/l127_controls.py
+    independence_record: packing/resources/web/ozden-s269-967-review-2026-11-12/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 967 (L127, under think-n73d), strong
+            tier, prompted separately from the import lane (L132, think-n73d)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says AI agents wrote and ran the
+          lab's search and checks. The six checker files were frozen at 2026-11-12T04:06:28Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code or
+          this repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source and reuse no code of any earlier review, lane L117's review
+          of #962, the model for its method, among them, whose programs it did not open.
+    note: >-
+      Written and run on 12 November 2026 for
+      docs/project/reviews/review-2026-11-12-ozden-967.md (SHA-256
+      8be6c6512adde72d284b317a50e0231adf82c825c800a88766657af861ab4197 for l127_check.py, as
+      frozen at 2026-11-12T04:06:28Z), and kept with its receipts in the review-only directory
+      ozden-s269-967-review-2026-11-12 beside the import lane's packet. l127_plan_facts.py,
+      l127_make_plan.py, l127_describe.py, l127_sides.py, l127_pose.py, l127_lineage.py,
+      l127_closedform.py, l127_custody.py and l127_digests.py, kept beside them, decide no
+      certificate and are not registered.
+  - id: V-de-winter-977-979-review-check
+    program: l153_check.py with l153_reader.py, l153_sat.py, l153_clip.py and l153_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 14 November stage 4 review's exact checker of Joost de Winter's rational centre-basis
+      certificates of issues 977 (297) and 979 (332 and 409), with a strict reader of its own
+      (l153_reader.py: the JSON's five keys only, every scalar a canonical integer or p/q in
+      lowest terms, floats, constants and duplicate keys refused; for 297 the Witness/v2 twin
+      held to the same n, side and squares, with anchors, aliases, tags, keys outside the
+      schema and any other resolved type refused): every square a unit square, every wall and
+      every pair twice with no distance filter, by separating axes over the four edge normals
+      in Python integers over per-square denominators (l153_sat.py, method A) and by exact
+      convex clipping of the corners in gmpy2.mpq, each square a unit square by its sides and
+      diagonals, each pair and each wall classed by the intersection exactly and containment
+      decided by area (l153_clip.py, method B), each pair classed overlapping, touching or
+      apart by both. l153_geom.py holds the exact constructions the self-test and controls
+      use; l153_controls.py decides 55 controls stated in a plan hashed before it existed;
+      l153_selftest.py holds both methods and the reader to 7,720 cases.
+    source:
+      - packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_check.py
+      - packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_reader.py
+      - packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_sat.py
+      - packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_clip.py
+      - packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_geom.py
+      - packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_selftest.py
+      - packing/resources/web/de-winter-977-979-review-2026-11-14/programs/l153_controls.py
+    independence_record: packing/resources/web/de-winter-977-979-review-2026-11-14/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 977 and 979 (L153, under
+            think-gabn), strong tier, prompted separately from the import lane (L154,
+            think-g2ax)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the construction, the certificates and the author's two checkers were
+          produced with Claude Fable 5.2 (Anthropic) under Joost de Winter's direction. The six
+          checker files were frozen at 2026-11-14T11:11:08Z (frozen/checker-frozen-digests.txt),
+          before their author read the author's README, checkers or build script, or this
+          repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source and reuse no code of any earlier review, lane L127's review
+          of #967, the model for its method, among them, whose programs it did not open.
+    note: >-
+      Written and run on 14 November 2026 for
+      docs/project/reviews/review-2026-11-14-de-winter-977-979.md (SHA-256
+      02bfdf2ee535d66ae57930f301213348b4694c6a1fc179cb610d79289562eada for l153_check.py, as
+      frozen at 2026-11-14T11:11:08Z), and kept with its receipts in the review-only directory
+      de-winter-977-979-review-2026-11-14 beside the import lane's packets. l153_plan_facts.py,
+      l153_make_plan.py, l153_describe.py, l153_sides.py, l153_lineage.py, l153_construct.py,
+      l153_closedform.py, l153_custody.py and l153_digests.py, kept beside them, decide no
+      certificate and are not registered.
+  - id: V-ozden-983-review-check
+    program: l159_check.py with l159_reader.py, l159_sat.py, l159_clip.py and l159_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 14 November stage 4 review's exact checker of Doğa Özden's rational corner Witness/v2
+      certificate of issue 983 (228), with a strict reader of its own (l159_reader.py: every
+      scalar a canonical integer or p/q in lowest terms, ids 1 to n in order, the JSON twin held
+      to the same tree with floats, constants and duplicate keys refused, anchors, aliases, tags,
+      keys outside the schema and any unexpected layout refused): every format hypothesis, every
+      square a unit square from its listed corners, every wall and every pair twice with no
+      distance filter, by separating axes over the four edge normals in Python integers over
+      per-square denominators (l159_sat.py, method A) and by exact Sutherland-Hodgman clipping
+      in gmpy2.mpq, each square a unit square by its sides and diagonals, each pair and each
+      wall classed by the intersection exactly and containment decided by area (l159_clip.py,
+      method B), each pair classed overlapping, touching or apart by both. l159_geom.py holds
+      the exact constructions the self-test and controls use, the closed-form margin from
+      centres and half-widths and the centre-line closing among them; l159_controls.py decides
+      20 controls stated in a plan hashed before it existed; l159_selftest.py holds both methods
+      and the reader to 32,833 cases.
+    source:
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_check.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_reader.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_sat.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_clip.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_geom.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_selftest.py
+      - packing/resources/web/ozden-s228-983-review-2026-11-14/programs/l159_controls.py
+    independence_record: packing/resources/web/ozden-s228-983-review-2026-11-14/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 983 (L159, under think-5y6d), strong
+            tier, prompted separately from the import lane (L160, think-14i2)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The coordinates were made by this repository's packing-witness promote, whose witness
+          tooling Claude agents co-authored, and the issue says the lab's search, checks and
+          filing were AI-assisted throughout. The six checker files were frozen at
+          2026-11-14T19:12:07Z (frozen/checker-frozen-digests.txt), before their author read
+          any producer code or this repository's witness, verifier or promotion code; they
+          import nothing from this repository or the source and reuse no code of any earlier
+          review, lane L127's review of #967, the model for its method, among them, whose
+          programs it did not open.
+    note: >-
+      Written and run on 14 November 2026 for
+      docs/project/reviews/review-2026-11-14-ozden-983.md (SHA-256
+      6ea41979038f2527cc7fcdff308fc0884acdf4a156967e345d2d26bcf2506a93 for l159_check.py, as
+      frozen at 2026-11-14T19:12:07Z), and kept with its receipts in the review-only directory
+      ozden-s228-983-review-2026-11-14 beside the import lane's packet. l159_plan_facts.py,
+      l159_make_plan.py, l159_describe.py, l159_sides.py, l159_pose.py, l159_lineage.py,
+      l159_closedform.py, l159_custody.py and l159_digests.py, kept beside them, decide no
+      certificate and are not registered.
+  - id: V-ono-984-985-review-check
+    program: l163_check.py with l163_reader.py, l163_sat.py, l163_clip.py, l163_decide.py and l163_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 14 November stage 4 review's exact checker of Roberto Ono's centre and half-angle
+      certificates of issues 984 (228) and 985 (147), with a strict reader of its own
+      (l163_reader.py: the JSON keys exactly n, side, side_decimal_info_only and squares, every
+      scalar a canonical p/q in lowest terms, the count equal to n, floats, constants and
+      duplicate keys refused, and the .cert twin held to the same tree): every reading
+      hypothesis, every square a unit square, every wall and every pair twice with no distance
+      filter, by separating axes over the four edge normals in Python integers over per-square
+      denominators, the edge directions taken from t as Pythagorean triples (l163_sat.py,
+      method A), and by exact Sutherland-Hodgman clipping of the corners in gmpy2.mpq, each
+      square a unit square by its sides and diagonals and listed counterclockwise, each pair and
+      each wall classed by the intersection exactly and containment decided by area
+      (l163_clip.py, method B); l163_decide.py runs both and requires their classes to agree.
+      l163_geom.py holds the closed-form margins and constructions the self-test and controls
+      use; l163_controls.py decides 20 controls a count stated in a plan hashed before it
+      existed; l163_selftest.py holds both methods and the reader to 13,326 cases.
+    source:
+      - packing/resources/web/ono-984-985-review-2026-11-14/programs/l163_check.py
+      - packing/resources/web/ono-984-985-review-2026-11-14/programs/l163_reader.py
+      - packing/resources/web/ono-984-985-review-2026-11-14/programs/l163_sat.py
+      - packing/resources/web/ono-984-985-review-2026-11-14/programs/l163_clip.py
+      - packing/resources/web/ono-984-985-review-2026-11-14/programs/l163_decide.py
+      - packing/resources/web/ono-984-985-review-2026-11-14/programs/l163_geom.py
+      - packing/resources/web/ono-984-985-review-2026-11-14/programs/l163_selftest.py
+      - packing/resources/web/ono-984-985-review-2026-11-14/programs/l163_controls.py
+    independence_record: packing/resources/web/ono-984-985-review-2026-11-14/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issues 984 and 985 (L163, under
+            think-jbwm), strong tier, prompted separately from the import lane (L164,
+            think-17ex)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the packings were found, certified and checked by a Claude agent in
+          the author's harness. The seven checker files were frozen at 2026-11-14T21:07:22Z
+          (frozen/checker-frozen-digests.txt), before their author read any producer code, the
+          author's checkers or their outputs, or this repository's witness, verifier or
+          promotion code; they import nothing from this repository or the source and reuse no
+          code of any earlier review, lanes L153's and L159's reviews, the models for its
+          method, among them, whose programs it did not open.
+    note: >-
+      Written and run on 14 November 2026 for docs/project/reviews/review-2026-11-14-ono-984-985.md, and kept with its receipts in the
+      review-only directory ono-984-985-review-2026-11-14 beside the import lane's packets.
+      l163_plan_facts.py, l163_make_plan.py and l163_describe.py, kept beside them, decide no
+      certificate and are not registered.
+  - id: V-jazivxt-989-review-check
+    program: l169_check.py with l169_reader.py, l169_sat.py, l169_clip.py, l169_decide.py and l169_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 15 November stage 4 review's exact checker of jazivxt's centre and half-angle
+      certificate of issue 989 (90), in Evan Daniel's text format, with a strict reader of its
+      own (l169_reader.py: the header n S and exactly n rows of three tokens, every scalar
+      canonical, an integer or p/q in lowest terms with q >= 2, one line terminator throughout,
+      nothing else): every reading hypothesis, every square a unit square, every wall and every
+      pair twice with no distance filter, by separating axes over the four edge normals in
+      Python integers over per-square denominators, the edge directions taken from t as
+      Pythagorean triples (l169_sat.py, method A), and by exact Sutherland-Hodgman clipping of
+      the corners in gmpy2.mpq, each square a unit square by its sides and diagonals and listed
+      counterclockwise, each pair clipped both ways round and each wall classed by the
+      intersection exactly, containment decided by area (l169_clip.py, method B); l169_decide.py
+      runs both and requires their classes to agree. l169_geom.py holds the closed-form margins
+      and constructions the self-test and controls use; l169_controls.py decides 23 controls
+      stated in a plan hashed before it existed; l169_selftest.py holds both methods and the
+      reader to 6,166 cases.
+    source:
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_check.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_reader.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_sat.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_clip.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_decide.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_geom.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_selftest.py
+      - packing/resources/web/jazivxt-s90-989-review-2026-11-15/programs/l169_controls.py
+    independence_record: packing/resources/web/jazivxt-s90-989-review-2026-11-15/README.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 989 (L169, under think-176a), strong
+            tier, prompted separately from the import lane (L170, think-i8y9)
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issue and the source's README say GPT-6 Astra Ultra was the AI collaborator on the
+          search and verification; the review was written by a Claude agent. The seven checker
+          files were frozen at 2026-11-15T03:19:25Z (frozen/checker-frozen-digests.txt), before
+          their author read the source's README, Francisco Couzo's checker, or this repository's
+          witness, verifier or promotion code; they import nothing from this repository or the
+          source and reuse no code of any earlier review, lanes L163's and L159's reviews, the
+          models for its method, among them, whose programs it did not open.
+    note: >-
+      Written and run on 15 November 2026 for docs/project/reviews/review-2026-11-15-jazivxt-989.md,
+      and kept with its receipts in the review-only directory jazivxt-s90-989-review-2026-11-15
+      beside the import lane's packet. l169_plan_facts.py, l169_make_plan.py and
+      l169_describe.py, kept beside them, decide no certificate and are not registered.
+  - id: V-de-winter-996-review-check
+    program: l180_check.py with l180_reader.py, l180_axes.py, l180_clip.py, l180_decide.py and l180_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 15 November stage 4 review's exact checker of Joost de Winter's rational
+      centre-direction certificates of issues 996 and 997 (90) and their corner Witness/v2
+      twins, with a strict reader of its own (l180_reader.py: the JSON's five keys only, every
+      scalar a canonical integer or p/q in lowest terms, floats, constants, duplicate keys,
+      tabs and carriage returns refused; the twin one YAML document of strings, integers,
+      mappings and sequences with no anchors, aliases or tags, its keys inside the schema's
+      lists, held to the JSON's n, side and squares corner for corner): every square a unit
+      square, every wall and every pair twice with no distance filter, by separating axes over
+      the four edge normals in Python integers over per-square denominators, from the JSON's
+      poses (l180_axes.py, method A), and by exact Sutherland-Hodgman clipping in gmpy2.mpq of
+      the twin's own corners, each square a unit square by its sides and diagonals, each pair
+      clipped both ways round and each wall classed by the intersection exactly, containment
+      decided by area (l180_clip.py, method B); l180_decide.py runs both and requires their
+      classes to agree. l180_geom.py holds the closed-form margins and constructions the
+      self-test and controls use; l180_controls.py decides 26 controls stated in a plan hashed
+      before it ran; l180_selftest.py holds both methods and the reader to 31,771 checks. The
+      addendum of the same day (lane L182) ran it unchanged on #997's certificate.
+    source:
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_check.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_reader.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_axes.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_clip.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_decide.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_geom.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_selftest.py
+      - packing/resources/web/de-winter-996-review-2026-11-15/programs/l180_controls.py
+    independence_record: docs/project/reviews/review-2026-11-15-de-winter-996.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 996 (L180, under think-uhav), strong
+            tier, prompted separately from the import lane (L181, think-32cl); run unchanged
+            on issue 997's certificate by the addendum lane L182
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues say the local optimization, the rational certificate, the checks and the
+          figures were produced with Claude Fable 5.2 (Anthropic), and the local search with
+          GPT-6.1 Sol Max (OpenAI), under Joost de Winter's direction. The seven checker files
+          were frozen at 2026-11-15T12:12:15Z (frozen/checker-frozen-digests.txt), before their
+          author read the author's README, registration, checksums or checkers, or this
+          repository's witness, verifier or promotion code; they import nothing from this
+          repository or the source and reuse no code of any earlier review, lanes L169's and
+          L153's reviews, the models for its method, among them, whose programs it did not
+          open. The addendum ran them with their frozen digests holding.
+    note: >-
+      Written and run on 15 November 2026 for
+      docs/project/reviews/review-2026-11-15-de-winter-996.md, and kept with its receipts in the
+      review-only directory de-winter-996-review-2026-11-15 beside the import lane's packets,
+      the addendum's under addendum-997/. l180_plan_facts.py, l180_make_plan.py,
+      l180_describe.py and the addendum's l182 programs, kept beside them, decide no
+      certificate and are not registered.
+  - id: V-joegun-1001-review-check
+    program: l186_check.py with l186_reader.py, l186_sat.py, l186_clip.py, l186_decide.py and l186_geom.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 16 November stage 4 review's exact checker of JoeGun's five rational corner
+      Witness/v2 certificates of issue 1001 (127, 204, 232, 264 and 305), with a strict reader
+      of its own (l186_reader.py: one YAML document with no anchors, aliases, tags, duplicate
+      keys, tabs or carriage returns; the softschema envelope and the Witness/v2 keys; corners,
+      rational scalars, the lower-left origin; ids 1 to n in order; every scalar p or p/q, its
+      canonical form recorded): every square a unit square, every wall and every pair twice
+      with no distance filter, by separating axes on each square's corners written over one
+      integer denominator, in Python integers (l186_sat.py, method A), and by exact
+      Sutherland-Hodgman clipping in gmpy2.mpq, each square a unit square by its sides and
+      diagonals, each pair clipped both ways round and each wall classed by clipping against
+      its outer half-plane, containment decided by area (l186_clip.py, method B);
+      l186_decide.py runs both and requires their classes to agree, and l186_check.py adds the
+      file's digest and the claim's 12-place arithmetic. l186_geom.py holds the closed form by
+      centres and half-extents the self-test and controls use; l186_controls.py decides 32
+      controls a count stated as rules in a plan hashed before any certificate was read;
+      l186_selftest.py holds both methods and the reader to 73,784 checks.
+    source:
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_check.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_reader.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_sat.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_clip.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_decide.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_geom.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_selftest.py
+      - packing/resources/web/joegun-1001-review-2026-11-16/programs/l186_controls.py
+    independence_record: docs/project/reviews/review-2026-11-16-joegun-1001.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 1001 (L186, under think-skt8),
+            strong tier (tbd-strong, not the tbd-strong-max tier the runbook names), prompted
+            separately from the import lane (L187, think-0y9m)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1001 says AI agents wrote and ran the search code, the checker and the filing
+          under JoeGun's direction, and that this repository's packing-witness promote made the
+          exact coordinates. The eight checker files and the controls plan were frozen at
+          2026-11-16T06:18:03Z (frozen/checker-frozen-digests.txt), before their author read the
+          author's README, check.py, outputs or decimal poses, or this repository's witness,
+          verifier or promotion code; they import nothing from this repository or the source and
+          reuse no code of any earlier review, lane L180's, the model for its method, among
+          them, whose programs it did not open.
+    note: >-
+      Written and run on 16 November 2026 for
+      docs/project/reviews/review-2026-11-16-joegun-1001.md, and kept with its receipts in the
+      review-only directory joegun-1001-review-2026-11-16 beside the import lane's packet.
+      l186_describe.py, l186_custody.py, l186_author_outputs.py and l186_sides.py, kept beside
+      them, decide no certificate and are not registered.

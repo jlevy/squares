@@ -1,0 +1,58 @@
+{
+ "tried": [
+  {
+   "tile": [
+    "5/2",
+    "7/2",
+    1
+   ],
+   "face_points": 1089,
+   "limit_tight_points": 0,
+   "found": false
+  },
+  {
+   "tile": [
+    "3/2",
+    "5/2",
+    -1
+   ],
+   "face_points": 1089,
+   "limit_tight_points": 13,
+   "found": false
+  },
+  {
+   "tile": [
+    "5/2",
+    "9/2",
+    -1
+   ],
+   "face_points": 1089,
+   "limit_tight_points": 260,
+   "found": true
+  }
+ ],
+ "result": {
+  "tile": [
+   "5/2",
+   "9/2",
+   -1
+  ],
+  "face_point": [
+   "4",
+   "0"
+  ],
+  "h": "1/1000000",
+  "segment_tenths": [
+   25,
+   50,
+   26,
+   50
+  ],
+  "weight": "80659964228/2000000000000",
+  "capture_at_h": 1.81484919513e-06,
+  "mu11_minus_1": 1.272689313715029e-06,
+  "mutant_minus_1": -5.42159881414971e-07,
+  "mutant_mass_below_1": true,
+  "mu11_limit_minus_1_at_h2": 1.2726873103433772e-09
+ }
+}

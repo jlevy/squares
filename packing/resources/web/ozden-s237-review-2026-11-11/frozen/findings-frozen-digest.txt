@@ -1,0 +1,27 @@
+# Lane L109 findings frozen at 2026-11-11T22:12:51Z, before anything of an import lane, the author's sqcheck.py, verifier/README.md, packing-witness-verify.txt, sqcheck-output.txt, the decimal pose, the licence files, the register entries at 237 or this repository's verifier, promotion and witness code was opened.
+6a212dabee91d40beb9d903194f8fa1f0ccc6f1fba73ac78ca8125ba627f2fac  frozen/review-2026-11-11-ozden-960.frozen.md
+# lines and bytes: 358 22516
+# checker list:
+530953bbb34854e6d38c2dcb7f125c79acd8cd21b8c0055149901a3d321186dd  frozen/checker-frozen-digests.txt
+# controls plan list:
+3babbaa7f62e87d279803ddcf432e6ff30a962f393f230466b17454119ceb3fe  frozen/controls-plan-digest.txt
+# receipts at the freeze:
+5cda5e78960c45e331c7a86c4dd91e4b853a111ee8e0ed5dd87b3d03d55c0dfc  out/selftest.json
+9b7164ea1a36fd87229b2e396b69770cc8a95acaadd8ea4dfeb2802d58557c71  out/check-n237.json
+803b5ff58dd6c0fa54dc7a9a4964a8e3a6f56d0927abb3dee020df33416b0d75  out/plan-facts-n237.json
+1a0ff1d3db4ee52f13aa0ebe57f60d382a842571ee1ded132c3a436cf6605e84  out/controls-n237.json
+605dc8234f47ac368c0436a6c40eb763979aa57ce4b9a467cb1121de28ec1150  out/census-n237.json
+14965c21ec36148bfaf227b0e267c719b1fea272ff2d0dd2bdfd3ad307aa7e69  programs/controls-plan.json
+42adeecddd4c65ecf9c9375262a33f5890567ba9675684451108257848bf1f32  programs/issue-960.json
+# programs at the freeze:
+6ce32690e2eaba319e5775235e731b8d569065b806645fa67489ac3c4922f8d1  programs/l109_axes.py
+f838476a1054c6aea37cfcc6480d8f6f2a41783594903bcb6a5cef243ad0c54e  programs/l109_census.py
+ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932  programs/l109_check.py
+cb5dddaf40b502e284c99fe1a537783102e2ffb3949d96e7d3571b4b536ab5aa  programs/l109_clip.py
+515cd86f663a3f80ffc980d93275eb2a2e6dc58d5415e75fc7560bd1cd4008f2  programs/l109_controls.py
+e2c7189065f533b1ee6c1e03a405dcde91d4b72336e77ec2a9b1942f2782029e  programs/l109_geom.py
+01b9791713867003479937ed13f94678adfedc668847119548326415d2c3424e  programs/l109_make_plan.py
+a3cebcb920c1b5635b3e8a4be4e70ff9a70495b255d1fd4c6b26b79b942e530e  programs/l109_plan_facts.py
+49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79  programs/l109_reader.py
+9a2f6008e8ef3948c5fa9193d9c9cff0b986411ff9c6f4a2736b3d827d7e4c92  programs/l109_selftest.py
+2c1efd6a6a5440200313e8f44eb68c234be9da416ecd4ea7ac8d90884a9943a4  programs/run_frozen.sh

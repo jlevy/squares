@@ -1,0 +1,46 @@
+format: intake-ledger-v1
+read_at_main: 588ccb226f74710acf26faf1d7eab6950c3edd8f
+read_on: '2026-11-15'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#992'
+  url: https://github.com/jlevy/squares/issues/992
+  kind: issue
+  holders: Miguel Lara
+  reported_at: '2026-11-15T06:03:49Z'
+  bead: think-ud9e
+  claims:
+  - n: 977
+    printed: '31.8492424049'
+    rounding: unstated
+    first_committed: '2026-11-15T06:00:25Z'
+    note: The exact side is 17 + (21/2) sqrt 2, 31.849242404917497 to 15 places, which the
+      issue prints after "approximately" at 10 places. The construction the certificate states
+      (441 squares turned 45 degrees in a 21 x 21 diamond and four corner staircases of 134)
+      is decided exactly on both maintained routes over Q(sqrt 2) by devtools.diamond_staircases
+      (packing/resources/web/lara-s977-upper-bound-2026-11-15/receipts/exact-decision.json);
+      its side is the L-border of the Göbel square (15, 21) of 921, which holds 982, as the
+      source's commits after the issue say. devtools.goebel_construction reads Göbel's construction
+      at 977 as 17 + 11 sqrt 2, about 32.556, which is above the grid's 32, so it decides
+      nothing at this count; the module applies no L-border (think-7j3i).
+  note: 'The issue names no commit and asks that the submission be pinned to the full commit
+    once made; the packet pins the head, 26d5695 (06:24:28Z), whose three commits after the
+    issue add an acknowledgement of Göbel''s classical construction and say the bound is not
+    a new record, the construction unchanged. The issue calls the side better than the grid''s
+    32 and says the best published bound at 977 had not been established; the record''s row
+    at 977 is Francisco Couzo''s #763 certificate of 23 October.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+rulings:
+- ruling: restatement
+  decided: '2026-10-23'
+  bead: think-fwa9
+- ruling: classical-constructions
+  decided: '2026-10-23'
+  bead: think-8krd
+cross_check: []

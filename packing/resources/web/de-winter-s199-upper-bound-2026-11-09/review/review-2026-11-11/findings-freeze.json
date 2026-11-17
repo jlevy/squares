@@ -1,0 +1,7 @@
+{
+ "label": "findings frozen before reading L78's PR #948, branch, notes or packets",
+ "frozen_at_utc": "2026-11-11T06:38:01Z",
+ "sha256": {
+  "review-2026-11-11-de-winter-939-946.md": "51a61287179681303fdb198efd1befe39b975b8b1b526caebe69190f15a74e5b"
+ }
+}

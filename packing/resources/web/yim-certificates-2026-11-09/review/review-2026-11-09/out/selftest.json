@@ -1,0 +1,348 @@
+{
+ "program": "l70_selftest.py",
+ "program_digests": {
+  "l70_reader.py": "3b2939a734a2959802458f54b2495673dfb32b1798c478433ff6b135361990fb",
+  "l70_sat.py": "3524406d5f8af4aa7bc8bdb175b146d4b02f1a96ef2b5cadd81a8cce6a9f9d87",
+  "l70_clip.py": "ffb7a2685028a7d2287f9fb91abfbb18ed9581a05a3d4d36e2b4c6da695970f1",
+  "l70_check.py": "4d4dd2e03c8d2898dcae161bd6257d6a2580369431978f0dee82e134e92b25a4",
+  "l70_selftest.py": "0ae2ea312d93ee2f9e67574940058a5b076a7203325657ea7ef7c79489173126"
+ },
+ "python": "3.14.7",
+ "verdict": "PASSED",
+ "cases": [
+  {
+   "case": "edge contact",
+   "ok": true,
+   "detail": {
+    "A": "touch",
+    "B": "touch",
+    "margin": "0",
+    "area": "0"
+   }
+  },
+  {
+   "case": "edge past 1e-30",
+   "ok": true,
+   "detail": {
+    "A": "overlap",
+    "B": "overlap",
+    "margin": "-1/1000000000000000000000000000000",
+    "area": "1/1000000000000000000000000000000"
+   }
+  },
+  {
+   "case": "edge apart 1e-30",
+   "ok": true,
+   "detail": {
+    "A": "apart",
+    "B": "apart",
+    "margin": "1/1000000000000000000000000000000"
+   }
+  },
+  {
+   "case": "corner contact",
+   "ok": true,
+   "detail": {
+    "A": "touch",
+    "B": "touch",
+    "margin": "0",
+    "area": "0"
+   }
+  },
+  {
+   "case": "corner past",
+   "ok": true,
+   "detail": {
+    "A": "overlap",
+    "B": "overlap",
+    "margin": "-1/1000000000000000000000000000000",
+    "area": "1/1000000000000000000000000000000000000000000000000000000000000"
+   }
+  },
+  {
+   "case": "3-4-5 vertex on edge, contact",
+   "ok": true,
+   "detail": {
+    "A": "touch",
+    "B": "touch",
+    "margin": "0",
+    "area": "0"
+   }
+  },
+  {
+   "case": "3-4-5 vertex on edge, past",
+   "ok": true,
+   "detail": {
+    "A": "overlap",
+    "B": "overlap",
+    "margin": "-1/1000000000000000000000000000000",
+    "area": "1/960000000000000000000000000000000000000000000000000000000000"
+   }
+  },
+  {
+   "case": "3-4-5 vertex on edge, contact, reflected",
+   "ok": true,
+   "detail": {
+    "A": "touch",
+    "B": "touch",
+    "margin": "0",
+    "area": "0"
+   }
+  },
+  {
+   "case": "duplicate",
+   "ok": true,
+   "detail": {
+    "A": "overlap",
+    "B": "overlap",
+    "margin": "-1",
+    "area": "1"
+   }
+  },
+  {
+   "case": "rotated copy (3/5, 4/5)",
+   "ok": true,
+   "detail": {
+    "A": "overlap",
+    "B": "overlap",
+    "margin": "-6/5",
+    "area": "5/6"
+   }
+  },
+  {
+   "case": "rotated copy (4/5, 3/5)",
+   "ok": true,
+   "detail": {
+    "A": "overlap",
+    "B": "overlap",
+    "margin": "-6/5",
+    "area": "5/6"
+   }
+  },
+  {
+   "case": "left wall contact",
+   "ok": true,
+   "detail": {
+    "A_outside": [],
+    "B_outside": [],
+    "A_contacts": {
+     "left": [
+      "1"
+     ],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   }
+  },
+  {
+   "case": "left wall past",
+   "ok": true,
+   "detail": {
+    "A_outside": [
+     "1"
+    ],
+    "B_outside": [
+     "1"
+    ],
+    "A_contacts": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   }
+  },
+  {
+   "case": "top wall contact",
+   "ok": true,
+   "detail": {
+    "A_outside": [],
+    "B_outside": [],
+    "A_contacts": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": [
+      "1"
+     ]
+    }
+   }
+  },
+  {
+   "case": "top wall past",
+   "ok": true,
+   "detail": {
+    "A_outside": [
+     "1"
+    ],
+    "B_outside": [
+     "1"
+    ],
+    "A_contacts": {
+     "left": [],
+     "bottom": [],
+     "right": [],
+     "top": []
+    }
+   }
+  },
+  {
+   "case": "left contact class",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "good corner square accepted",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "shape refused: rectangle 1 x (1+e)",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "shape refused: square of side 1+e",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "shape refused: unit rhombus (3/5, 4/5)",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "shape refused: bowtie order",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "shape refused: repeated corner",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "shape refused: third corner off by e",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "clockwise listing accepted",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "random pairs at contact and 1e-30 either side",
+   "ok": true,
+   "detail": {
+    "probes": 1800,
+    "failures": []
+   }
+  },
+  {
+   "case": "random squares at a wall and 1e-30 past",
+   "ok": true,
+   "detail": {
+    "probes": 1600,
+    "failures": []
+   }
+  },
+  {
+   "case": "cw reading is the horizontal reflection",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "reader accepts a good file",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "reader flags a token not in lowest terms",
+   "ok": true,
+   "detail": null
+  },
+  {
+   "case": "reader refuses every malformed cert",
+   "ok": true,
+   "detail": {
+    "no final newline": "no final newline",
+    "carriage return": "carriage return in file",
+    "tab": "tab in file",
+    "blank line": "blank line or irregular spacing at body line 3",
+    "double space": "blank line or irregular spacing at body line 1",
+    "leading space": "blank line or irregular spacing at body line 1",
+    "header three tokens": "header is not 'n S'",
+    "header n zero": "header count is not a positive integer",
+    "header n leading zero": "header count is not a positive integer",
+    "too few rows": "header says 3 squares, file has 2 rows",
+    "too many rows": "header says 1 squares, file has 2 rows",
+    "row with two tokens": "row 2 has 2 tokens",
+    "row with four tokens": "row 2 has 4 tokens",
+    "zero denominator": "not a rational token: '3/0'",
+    "leading zero": "not a rational token: '03/2'",
+    "plus sign": "not a rational token: '+3/2'",
+    "decimal point": "not a rational token: '1.5'",
+    "negative denominator": "not a rational token: '3/-2'",
+    "letter": "not a rational token: 'a'",
+    "negative zero": "negative zero token",
+    "double slash": "not a rational token: '3//2'",
+    "comment after header": "comment after the header at body line 1",
+    "non-ASCII data": "non-ASCII data at body line 2",
+    "negative side": "side is not positive",
+    "zero side": "side is not positive",
+    "not UTF-8": "not UTF-8: 'utf-8' codec can't decode byte 0xff in position 2: invalid start byte",
+    "empty": "blank line or irregular spacing at body line 0"
+   }
+  },
+  {
+   "case": "corner reader: good accepted, every variant refused",
+   "ok": true,
+   "detail": {
+    "good": [
+     "accepted",
+     "ACCEPT"
+    ],
+    "wrong representation": [
+     "refused",
+     "witness.representation is not 'corners'"
+    ],
+    "decimal scalars": [
+     "refused",
+     "scalar is not {kind: rational}"
+    ],
+    "centre origin": [
+     "refused",
+     "coordinates are not lower-left, x-right-y-up"
+    ],
+    "n mismatch": [
+     "refused",
+     "squares list length differs from n"
+    ],
+    "three corners": [
+     "refused",
+     "square 0 does not have four corners"
+    ],
+    "repeated id": [
+     "refused",
+     "repeated square id"
+    ],
+    "bad scalar": [
+     "refused",
+     "not a rational token: '0.5'"
+    ],
+    "duplicate key": [
+     "refused",
+     "duplicate key 'square_size'"
+    ]
+   }
+  },
+  {
+   "case": "ceil and floor at 12 places",
+   "ok": true,
+   "detail": null
+  }
+ ],
+ "cpu_seconds": 1.174
+}

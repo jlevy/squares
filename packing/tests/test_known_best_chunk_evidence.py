@@ -32,28 +32,34 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
     # add 48 structured squares, and 86 no longer changes under the sensitivity sweep.
     # T-195 moves n = 29 from the catalogue's stratum to the packets'. The adoption of
     # 23 October 2026 (think-ot5c) gives 70 T-174's algebraic witness, whose contact
-    # components have three more internal slide degrees of freedom: 867 to 870.
+    # components have three more internal slide degrees of freedom: 867 to 870. The
+    # adoption of 15 November 2026 (think-i8y9) moves n = 90 off the exact grid to
+    # jazivxt's packet (T-303), the profile's 37th case: 90 squares, 78 structured in 10
+    # components, 38 internal slide degrees, its components changing by 3 under the
+    # sensitivity sweep. The pass of 16 November 2026 (think-32cl) moves 90 on to Joost de
+    # Winter's improvement of that packing (T-304): 87 squares structured in 13 components,
+    # 48 internal slide degrees, unchanged under the sensitivity sweep.
     assert profile["aggregate"] == {
-        "case_count": 36,
-        "contact_component_count": 163,
+        "case_count": 37,
+        "contact_component_count": 176,
         "coverage_threshold_cases": {
-            "at_least_50_percent": 35,
-            "at_least_75_percent": 33,
-            "at_least_90_percent": 27,
+            "at_least_50_percent": 36,
+            "at_least_75_percent": 34,
+            "at_least_90_percent": 28,
         },
         "fully_structured_cases": 9,
-        "internal_slide_dof": 870,
+        "internal_slide_dof": 918,
         "narrow_partition_status_counts": {
             "established": 3,
-            "not-established": 24,
+            "not-established": 25,
             "not-established-search-limit": 7,
             "outside-registered-budget": 2,
         },
         "sensitivity_comparison": {
             "changed_case_count": 3,
             "changed_ns": [68, 71, 88],
-            "primary_structured_square_count": 1779,
-            "sensitivity_structured_square_count": 1784,
+            "primary_structured_square_count": 1866,
+            "sensitivity_structured_square_count": 1871,
             "within_budget_flip_ns": [],
         },
         "source_strata": [
@@ -68,19 +74,19 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
                 "within_six_components_and_three_free_cases": 22,
             },
             {
-                "case_count": 7,
+                "case_count": 8,
                 "fully_structured_cases": 1,
                 "sensitivity_changed_ns": [68, 88],
                 "source_kind": "packet-derived-facts",
-                "square_count": 476,
-                "structured_fraction": "0.936974789916",
-                "structured_square_count": 446,
+                "square_count": 566,
+                "structured_fraction": "0.941696113074",
+                "structured_square_count": 533,
                 "within_six_components_and_three_free_cases": 5,
             },
         ],
-        "square_count": 1860,
-        "structured_fraction": "0.956451612903",
-        "structured_square_count": 1779,
+        "square_count": 1950,
+        "structured_fraction": "0.956923076923",
+        "structured_square_count": 1866,
         "within_six_components_and_three_free_cases": 27,
     }
     assert "DESCRIPTIVE · NO VERDICT" in rendering

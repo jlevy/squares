@@ -1,0 +1,10 @@
+mu_11: 13148 segment pieces, Lebesgue (38, 72, 38, 72); 8352 distinct windows (side 16/10, up to integer shifts)
+mu_10: 7225 windows, without an integer-translate in mu_11: 0
+mu_12: 11025 windows, without an integer-translate in mu_11: 0
+mu_13: 13225 windows, without an integer-translate in mu_11: 0
+mu_20: 34225 windows, without an integer-translate in mu_11: 0
+LOCALITY OK
+
+real	0m15.349s
+user	0m14.545s
+sys	0m0.275s

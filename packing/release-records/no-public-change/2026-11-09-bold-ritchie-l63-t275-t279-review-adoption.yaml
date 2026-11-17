@@ -1,0 +1,48 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/site_resources.py
+  - packing/devtools/site_urls.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L63 of 9 November (think-463r), second phase: the stage 4 review of #927 to
+  #931 (think-rd0p) is mapped onto T-275 to T-279 (S3, V3/C3, the review's checker and
+  evidence), and the five counts adopt them as houses under the house rule, 232 and 307
+  from T-256, 268 from T-270, 299 from T-263 and 303 from T-272, with both strong
+  generators' regularization: grid-slack's views drawn at 232, 268, 299 and 303, 307
+  decided no better. That changes the adoption writer's prose and credits, the house
+  sources, the default drawings' settlement at 307, the posters' print-credit hold (now
+  Doğa Özden at all five counts, so the poster credit block is unchanged), the corner
+  reader's accepted schema path, the composite figure record, the five project cards, 303's
+  page budget and the records. No paper prints those counts, these records, those cards
+  or the hold. Against main 19b354a5c (#926): devtools.compare_paper_renders rendered each
+  paper into empty site directories, the math passes in /usr/bin/google-chrome
+  (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of the eleven
+  paths above swapped in. The optimality review, the threshold-bound review and the
+  methods survey are byte-identical across the three, 43 files each. The explainer's 55
+  files are deterministic, and only its Markdown and HTML differ from the baseline; a
+  Markdown diff of a fresh pair of renders, from this tree and with main's copies of the
+  eleven paths swapped in, shows the one change, the live register count, "one of 274
+  results the framework has registered so far" and now 279, which follows the site's data
+  and is not a revision of the paper. No PDF was printed. Every paper keeps its version:
+  v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

@@ -1,0 +1,49 @@
+{
+ "program": "l109_digests.py",
+ "verdict": "ALL_RECEIPTS_MATCH",
+ "checks": 73,
+ "problems": [],
+ "programs": {
+  "controls-plan.json": "14965c21ec36148bfaf227b0e267c719b1fea272ff2d0dd2bdfd3ad307aa7e69",
+  "issue-960.json": "42adeecddd4c65ecf9c9375262a33f5890567ba9675684451108257848bf1f32",
+  "l109_axes.py": "6ce32690e2eaba319e5775235e731b8d569065b806645fa67489ac3c4922f8d1",
+  "l109_band.py": "6f7003a94fa1157c67a32a20c96019c6373b654e8be24147f0fd09f914fe5a66",
+  "l109_census.py": "f838476a1054c6aea37cfcc6480d8f6f2a41783594903bcb6a5cef243ad0c54e",
+  "l109_check.py": "ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932",
+  "l109_clip.py": "cb5dddaf40b502e284c99fe1a537783102e2ffb3949d96e7d3571b4b536ab5aa",
+  "l109_controls.py": "515cd86f663a3f80ffc980d93275eb2a2e6dc58d5415e75fc7560bd1cd4008f2",
+  "l109_custody.py": "760c850e5db220dd495013b41b974afca0e9961ea26f403933b3d12136dc333c",
+  "l109_digests.py": "5fd5142527bbf0a57c7099df407de1931bfcf41894b1f817a4216264da4a7228",
+  "l109_geom.py": "e2c7189065f533b1ee6c1e03a405dcde91d4b72336e77ec2a9b1942f2782029e",
+  "l109_identity.py": "dba7c8bd96d2ff3f3beafe32e471e95e88ec186d7bb6cbd0036925e0e006768b",
+  "l109_make_plan.py": "01b9791713867003479937ed13f94678adfedc668847119548326415d2c3424e",
+  "l109_plan_facts.py": "a3cebcb920c1b5635b3e8a4be4e70ff9a70495b255d1fd4c6b26b79b942e530e",
+  "l109_pose.py": "1c0deebfc5b6fc25bd0aec012313989564a151de9458322f97aa2ed978819750",
+  "l109_reader.py": "49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79",
+  "l109_selftest.py": "9a2f6008e8ef3948c5fa9193d9c9cff0b986411ff9c6f4a2736b3d827d7e4c92",
+  "l109_sides.py": "8cd01cdce347a2389a5fe58728d9e9946d58945168b4e21ece2227d75624ece3",
+  "run_after.sh": "e7f34b8e865da82a8d01b0496d8fa61b30cf041c296fb61da28da662f6fec253",
+  "run_frozen.sh": "2c1efd6a6a5440200313e8f44eb68c234be9da416ecd4ea7ac8d90884a9943a4"
+ },
+ "receipts": {
+  "band-n237.json": "043bb7ef5cbab27e0e8701e371c42b8cdd6fb131ad94d6bbcf046d01f02b16ac",
+  "census-n237.json": "605dc8234f47ac368c0436a6c40eb763979aa57ce4b9a467cb1121de28ec1150",
+  "check-n237.json": "9b7164ea1a36fd87229b2e396b69770cc8a95acaadd8ea4dfeb2802d58557c71",
+  "contraction-margin-t189.json": "ccb3782f94922f38a6d8191c422e62204239be9401190551d4c02e25ede9d993",
+  "contraction-margin-t190.json": "657461e8bbe417888e2cd89c803208f317a69ade633682b98172de4d82b709ec",
+  "controls-n237.json": "1a0ff1d3db4ee52f13aa0ebe57f60d382a842571ee1ded132c3a436cf6605e84",
+  "custody.json": "e71d06da20cfaa7c6c65045530c46ea9a25654e03f8589107634d0c816c946c8",
+  "identity-n237.json": "4d8c576284c534634858094bec32c7964109d220d3e1366044ad003ea91dee95",
+  "measure-identity-n237.json": "70da913c202f0f943d6063a30c93ea03ffec197a75aa73656df803804a68a821",
+  "plan-facts-n237.json": "803b5ff58dd6c0fa54dc7a9a4964a8e3a6f56d0927abb3dee020df33416b0d75",
+  "pose-n237.json": "eab7790820cca297b3e020d32447b1f03ea541ae0223acc7f666b2760cdfba55",
+  "selftest.json": "5cda5e78960c45e331c7a86c4dd91e4b853a111ee8e0ed5dd87b3d03d55c0dfc",
+  "sides.json": "77923250c935f1e9ade4460d4589c16793fd53b5b3edf093e50dfac6900ba6cf"
+ },
+ "frozen": {
+  "checker-frozen-digests.txt": "530953bbb34854e6d38c2dcb7f125c79acd8cd21b8c0055149901a3d321186dd",
+  "controls-plan-digest.txt": "3babbaa7f62e87d279803ddcf432e6ff30a962f393f230466b17454119ceb3fe",
+  "findings-frozen-digest.txt": "e5f204033b500c622bd55e92787eebae331086e655d0f8ec942f9b0c7befa844",
+  "review-2026-11-11-ozden-960.frozen.md": "6a212dabee91d40beb9d903194f8fa1f0ccc6f1fba73ac78ca8125ba627f2fac"
+ }
+}

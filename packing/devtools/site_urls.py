@@ -39,6 +39,18 @@ REGISTRATION_DATE = "2026-10-26"
 HARD_HTML_LIMIT = 2_000_000
 # Measured exceptions retain the global two-megabyte ceiling.
 PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
+    "synopsis/the-program-at-a-glance.html": (
+        650_000,
+        (
+            "Main measures 599,314 bytes (hosted run 42692448089) and hosted run "
+            "42715322236 600,604 bytes on 9 November 2026, past the page budget of "
+            "600,000, once the results table lists T-284 and the document table #938's "
+            "ledger, review and regularization runs: 1,290 bytes in four rows, about 320 "
+            "bytes a row. The ceiling moves to 650,000 as a measured choice, room for "
+            "about 150 more such rows, or about 38 single-result intakes. Its timing was "
+            "not re-measured. How the page scales is think-3d9e."
+        ),
+    ),
     "index.html": (
         1_300_000,
         (
@@ -74,8 +86,37 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         350_000,
         "Complete n=18 certificate record; prepared HTML measures 326,548 bytes.",
     ),
+    "cases/260.html": (
+        355_000,
+        (
+            "A section for each packing that has been the house, each listing every other "
+            "side; prepared HTML measures 305,912 bytes in hosted "
+            "run 42112356624 on 5 November 2026, past the 300,000 record ceiling, once T-269 "
+            "(#914) is registered beside T-265's house section, before any adoption. An "
+            "adoption grows a case page by 27 to 33 KB (cases/204.html's measurements), so "
+            "the ceiling moves to 355,000 as a measured choice, for T-269's adoption. After "
+            "that adoption, on 6 November 2026 (think-lrj4), the page measures 326,413 "
+            "bytes, 28,587 below the ceiling, less than one more adoption at the larger "
+            "growth. Its timing was not re-measured; how a page that grows with every "
+            "adoption scales is think-rp0d's question."
+        ),
+    ),
+    "cases/303.html": (
+        360_000,
+        (
+            "A section for each packing that has been the house, each listing every other "
+            "side; prepared HTML measures 307,154 bytes in hosted run 42586831248 on 9 "
+            "November 2026, past the 300,000 record ceiling, once T-278 (#930) is "
+            "registered beside T-272's house section, before any adoption, and 326,923 "
+            "bytes locally after T-278's adoption that day (think-463r). An adoption grows "
+            "a case page by 27 to 33 KB (cases/204.html's measurements), so the ceiling "
+            "moves to 360,000 as a measured choice, 33,077 above the page, for one more "
+            "adoption at the larger growth. Its timing was not re-measured; how a page that "
+            "grows with every adoption scales is think-rp0d's question."
+        ),
+    ),
     "cases/204.html": (
-        430_000,
+        475_000,
         (
             "Twelve verified certificates and a section for each of the eight that have "
             "been the house, each listing every other side; prepared HTML measures "
@@ -84,12 +125,18 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "November 2026 after T-264's, 26,723 bytes more, since the new section lists "
             "every other side and every earlier section gains the new one. The record "
             "keeps every earlier house's section as history, so each adoption grows the "
-            "page by 27 to 33 KB (32,981 bytes at T-257's). The ceiling moves to 430,000 "
-            "as a measured choice: one more adoption at that growth, which think-w64i's "
-            "queued 204 candidate would be, with 16 to 22 KB to spare. Its timing was not "
-            "re-measured. How a "
-            "page that grows with every adoption scales is the question think-rp0d asks "
-            "of result/t-046.html."
+            "page by 27 to 33 KB (32,981 bytes at T-257's). The ceiling moved to 430,000 "
+            "as a measured choice for one more adoption at that growth. T-268's adoption "
+            "(#914, think-lrj4) used it on 5 November 2026: the page measures 410,384 "
+            "bytes, 19,616 below the ceiling, less than one more adoption, so the next "
+            "adoption at 204 moves the ceiling as its own measured choice (think-w64i's "
+            "candidate, above T-268's side, is no longer one). Its timing was not "
+            "re-measured. How a page that grows with every adoption scales is the question "
+            "think-rp0d asks of result/t-046.html and of these case pages. The adoption of "
+            "T-306 (#1001, think-0y9m) on 16 November 2026 took it to 437,813 bytes in the "
+            "hosted published build (run 43829225469), 27,429 bytes more, past 430,000, so "
+            "the ceiling moves to 475,000 as a measured choice for one more adoption at that "
+            "growth; its timing was not re-measured."
         ),
     ),
     "result/t-007.html": (
@@ -161,8 +208,27 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        1_500_000,
+        1_700_000,
         (
+            "On 12 November 2026 the 297-result page measures 1,600,513 bytes in hosted run "
+            "43182861315, past the 1,600,000 ceiling, once #967's import registers T-297; the "
+            "room the 5 November note expected through 291 results was used, and six more "
+            "registrations fitted in its margin. Measured locally the page is 1,600,513 "
+            "source bytes at a 90th-percentile row of 4,587 bytes. The ceiling moves to "
+            "1,700,000 as the same measured choice, which leaves 99,487 source bytes, 21 rows "
+            "at that row cost with 3,160 bytes to spare, so the room runs through 318 "
+            "results; its timing was not re-measured, and the lightening stays think-v1qe's. "
+            "On 5 November 2026 the 273-result page measures 1,510,022 bytes in hosted run "
+            "42112356624, past the 1,500,000 ceiling, when one intake (#914) registers seven "
+            "results, T-267 to T-273, at once; the room the 26 October note expected through "
+            "267 results was used as it said. Measured locally the page is 1,511,394 source "
+            "bytes at a 90th-percentile row of 4,661 bytes. The ceiling moves to 1,600,000 as "
+            "the same measured choice, which leaves 88,606 source bytes, 18 rows at that row "
+            "cost with a margin, so the room runs through 291 results; its timing was not "
+            "re-measured, and the lightening stays think-v1qe's. After the review and the "
+            "adoptions of the same seven results the page measures 1,512,211 bytes on 6 "
+            "November 2026, so 18 rows at 4,661 bytes reach 1,596,109, 3,891 bytes below "
+            "the ceiling at 291 results, less than one row. "
             "On 26 October 2026 the 250-result page measures 1,418,298 bytes, past the "
             "1,400,000 ceiling with T-248 to T-251, at a 90th-percentile row of 4,674 "
             "bytes; recent arrivals live on their own page and cost the archive nothing. "
@@ -185,16 +251,21 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-174.html": (
-        350_000,
+        375_000,
         (
             "The complete 68-case result and its 89-step history with prepared math "
             "measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS "
             "checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and "
-            "blocking <=123 ms."
+            "blocking <=123 ms. Main measures 348,784 bytes on 16 November 2026 "
+            "(31ddae6fe), and 353,469 once T-305 and T-309 (#1001) are listed at 127 and "
+            "305, about 2.3 KB a result, past the 350,000 ceiling, and 353,877 once they "
+            "are adopted there in T-174's place, so the ceiling moves to 375,000 as a "
+            "measured choice, room for about 9 more listed results. Those are byte "
+            "measurements only; the timing is owed under think-v4me."
         ),
     ),
     "result/t-180.html": (
-        475_000,
+        525_000,
         (
             "The closed form's result, its scope of 264 counts and prepared math measure "
             "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
@@ -205,7 +276,16 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "counts (1,269 bytes). On 2 November 2026 it measures 450,697 bytes, after T-184 "
             "and T-191 settled 76 and 95 among its counts, so the ceiling moves to 475,000 "
             "as a measured choice. Those are byte measurements only; the timing is owed "
-            "under think-v4me, whose trigger has passed."
+            "under think-v4me, whose trigger has passed. Hosted run 42661656618 measures "
+            "474,579 bytes on main 20f844dbf on 9 November 2026, and run 42674158193 477,057 "
+            "once T-282 and T-283 (#935, #936) are listed at 172 and 270, about 1.24 KB a "
+            "result, so the ceiling moves to 500,000 as a measured choice, room for about 18 "
+            "more listed results; the timing is still think-v4me's. Hosted run 43662981013 "
+            "measures 501,700 bytes on 15 November 2026 once T-301 and T-302 (#984, #985) "
+            "are listed at 228 and 147, 2,276 bytes for the two, against 499,424 on #986's "
+            "head 4544c4c96, so the ceiling moves to 525,000 as a measured choice, room for "
+            "about 20 more listed results at about 1.14 KB each; the timing is still "
+            "think-v4me's."
         ),
     ),
     "result/t-068.html": (

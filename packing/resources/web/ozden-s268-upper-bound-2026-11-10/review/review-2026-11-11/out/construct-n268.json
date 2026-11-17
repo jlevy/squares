@@ -1,0 +1,346 @@
+{
+ "n": 268,
+ "wall_clearance_bins": {
+  "contact": {
+   "left": 2,
+   "bottom": 1,
+   "right": 2,
+   "top": 3
+  },
+  "(0,1e-15)": {
+   "left": 4,
+   "bottom": 7,
+   "right": 5,
+   "top": 5
+  },
+  "[1e-15,1e-13)": {
+   "left": 0,
+   "bottom": 0,
+   "right": 0,
+   "top": 0
+  },
+  "[1e-13,1e-12)": {
+   "left": 0,
+   "bottom": 0,
+   "right": 0,
+   "top": 0
+  },
+  "[1e-12,1e-9)": {
+   "left": 0,
+   "bottom": 0,
+   "right": 0,
+   "top": 0
+  },
+  "[1e-9,1e-3)": {
+   "left": 8,
+   "bottom": 7,
+   "right": 8,
+   "top": 6
+  }
+ },
+ "largest_clearance_below_1e-12": [
+  1.5707963267948962e-16,
+  218,
+  "right"
+ ],
+ "clearances_in_[1e-12,1e-3)": [
+  [
+   105,
+   "bottom",
+   3.133986213500483e-06
+  ],
+  [
+   83,
+   "left",
+   6.323372423116874e-06
+  ],
+  [
+   117,
+   "bottom",
+   1.1195466006296984e-05
+  ],
+  [
+   76,
+   "left",
+   1.1622750394333973e-05
+  ],
+  [
+   114,
+   "bottom",
+   1.291419330693021e-05
+  ],
+  [
+   94,
+   "left",
+   1.4933066356609553e-05
+  ],
+  [
+   169,
+   "right",
+   1.6821255432219484e-05
+  ],
+  [
+   158,
+   "right",
+   1.8165731612597083e-05
+  ],
+  [
+   101,
+   "left",
+   1.8411599052672424e-05
+  ],
+  [
+   179,
+   "right",
+   1.8435904786589267e-05
+  ],
+  [
+   146,
+   "right",
+   1.8617111033838944e-05
+  ],
+  [
+   133,
+   "right",
+   1.9320673246101342e-05
+  ],
+  [
+   119,
+   "right",
+   2.034999229866927e-05
+  ],
+  [
+   104,
+   "right",
+   2.1086445909927554e-05
+  ],
+  [
+   3,
+   "top",
+   2.1973468233244347e-05
+  ],
+  [
+   2,
+   "top",
+   2.7986884565244345e-05
+  ],
+  [
+   4,
+   "top",
+   2.878342402212217e-05
+  ],
+  [
+   1,
+   "top",
+   3.335428607124434e-05
+  ],
+  [
+   116,
+   "bottom",
+   3.6670016446092677e-05
+  ],
+  [
+   115,
+   "bottom",
+   5.390333696087883e-05
+  ],
+  [
+   98,
+   "left",
+   7.2110787959367e-05
+  ],
+  [
+   228,
+   "left",
+   0.00020267381918096457
+  ],
+  [
+   251,
+   "top",
+   0.0002499210468924712
+  ],
+  [
+   13,
+   "top",
+   0.0003195974085892625
+  ],
+  [
+   49,
+   "left",
+   0.0003425209584799842
+  ],
+  [
+   118,
+   "bottom",
+   0.00046447639188998326
+  ],
+  [
+   104,
+   "bottom",
+   0.0006798916948803169
+  ],
+  [
+   89,
+   "left",
+   0.0007013041367524475
+  ],
+  [
+   225,
+   "right",
+   0.000841903532533769
+  ]
+ ],
+ "contact_squares_in_pose": [
+  {
+   "id": 10,
+   "wall": "top",
+   "pose_center": [
+    "9.5000164857622593",
+    "16.372029849084552"
+   ],
+   "pose_angle": "2.8000000000000001e-14"
+  },
+  {
+   "id": 11,
+   "wall": "top",
+   "pose_center": [
+    "10.500058092764462",
+    "16.372029849084552"
+   ],
+   "pose_angle": "2.8000000000000001e-14"
+  },
+  {
+   "id": 12,
+   "wall": "top",
+   "pose_center": [
+    "11.502355822185256",
+    "16.372029849084552"
+   ],
+   "pose_angle": "2.8000000000000001e-14"
+  },
+  {
+   "id": 38,
+   "wall": "left",
+   "pose_center": [
+    "0.50000000000010214",
+    "13.371544526360399"
+   ],
+   "pose_angle": "5e-15"
+  },
+  {
+   "id": 59,
+   "wall": "left",
+   "pose_center": [
+    "0.50000000000010214",
+    "11.37133670920732"
+   ],
+   "pose_angle": "5e-15"
+  },
+  {
+   "id": 107,
+   "wall": "bottom",
+   "pose_center": [
+    "13.371466038507354",
+    "0.50000000000010214"
+   ],
+   "pose_angle": "5e-15"
+  },
+  {
+   "id": 196,
+   "wall": "right",
+   "pose_center": [
+    "16.372029849084552",
+    "9.3078095715474554"
+   ],
+   "pose_angle": "2.8000000000000001e-14"
+  },
+  {
+   "id": 208,
+   "wall": "right",
+   "pose_center": [
+    "16.372029849084552",
+    "11.312573351698932"
+   ],
+   "pose_angle": "2.8000000000000001e-14"
+  }
+ ],
+ "pose_side": "16.872029849084655",
+ "pose_least_corner": [
+  "1.02096e-13",
+  "1.02096e-13"
+ ],
+ "pose_least_wall_clearance_at_own_side": "1.02096e-13",
+ "pose_side_minus_certificate_side": "2.04852e-13",
+ "pose_extent_x_minus_y": "0.0",
+ "largest_centre_difference": "2.658e-53",
+ "largest_angle_difference_rad": "8.074e-37",
+ "near_pairs": 274,
+ "largest_near_margin_difference": "5.687e-37",
+ "margin_over_axis_separation": {
+  "min": 2.018949708577228e-13,
+  "median": 2.0507582433874123e-13,
+  "max": 2.0847123889799511e-13
+ },
+ "tilts": {
+  "exactly_on_axes": 28,
+  "below_1e-9_rad": 130,
+  "1e-9_rad_to_0.5deg": 67,
+  "beyond_0.5deg": 43
+ },
+ "certificate_meta": {
+  "claim": {
+   "coordinate_provenance": "verified",
+   "method": "exact-algebraic",
+   "limitations": "Exact feasible upper-bound witness derived by rational robustification; does not establish global optimality or certify the original decimal pose."
+  },
+  "source": {
+   "path": "n-268-decimal-pose.yaml"
+  },
+  "certificate": {
+   "kind": "exact-rational-sat",
+   "derived_from": "W-q1108-xbh-C+1-c1-t218-n268",
+   "rational_digits": "36",
+   "center_dilation": "1",
+   "pairs_tested": "35778",
+   "replay": "uv run --frozen packing-witness verify n-268-candidate.yaml"
+  },
+  "id": "W-candidate-n268"
+ },
+ "pose_id": "W-q1108-xbh-C+1-c1-t218-n268",
+ "derived_from_is_pose_id": true,
+ "source_path": "n-268-decimal-pose.yaml",
+ "source_path_is_pose_file": true,
+ "pose_softschema_schema": "witness.schema.yaml",
+ "pose_claim": {
+  "coordinate_provenance": "reported",
+  "method": "numerical-f64",
+  "precision": {
+   "binary_bits": "53",
+   "rounding": "round-to-nearest"
+  },
+  "tolerance": "1e-12",
+  "limitations": "q1108 finder output, unverified."
+ },
+ "replay": "uv run --frozen packing-witness verify n-268-candidate.yaml",
+ "replay_names_certificate_file": true,
+ "programs": {
+  "l83_check.py": "661fb2cd4c56d97bba2f0609d0a7686b07815ead5bb5b3e78ef226fa558dbae0",
+  "l83_clip.py": "c4987a55491fa98f61328d54a3d5353eccfe91514664fdcd4aec5a114319b218",
+  "l83_construct.py": "d22443706f42d195c37f01e4e1f107dde8f1f5c02e9f2c0c1772598f326cdce7",
+  "l83_controls.py": "7e17eaca86488b2996c38ab84d4aa555e5602550a814e866dc5a8618163fd619",
+  "l83_custody.py": "1fa87f73bd0e56e2f642632e06730edde2c258a7880f16d1cb524f876ff23408",
+  "l83_digests.py": "af9bd6aa3d24a1aab2cdfa6e09d66c45a527eef23d862d8879ff1f786c61cf0d",
+  "l83_freeze.py": "a4f0e93178d8f6ebf031e82f2c9970596bdb938a4e191722e7e01e89d909f8a3",
+  "l83_geom.py": "6542054ff2c45459de75e0fea2c73e0bf8481124daafb4f84439c587818cecd8",
+  "l83_house.py": "b392f85aa49b18c73dcbbef58ff4310b88f8d7e39150c47f6522a48e0e181387",
+  "l83_houses.py": "3e5893c0bf65cf91773507b30952ed2cbfdb6097a866d8a2090d6a6b4464610e",
+  "l83_identity.py": "d0f2b9ff40c1fe7ed3787ed5ed71e309a36972209680a65a7948ce4fe46e127e",
+  "l83_make_plan.py": "c974af1e66f27353a7c744407d5ced1efc4c5a62c16f661f424eeb2988a489e3",
+  "l83_plan_facts.py": "11b46d036848d04be55e86a30c24fb251d25a4140de15c24761d821924bd3387",
+  "l83_reader.py": "ab7b2cf73c61f0f707d92ef640176e1402f658136341caee8847f8665ab86526",
+  "l83_sat.py": "2236bccbeb4da6b635e0f43aa1c88c8e5aab3ed41de36a4eb87736a70706ced2",
+  "l83_selftest.py": "de00c72fc8b9b6abe10f1bdd93e7fdc8afd6b4f278e1e826e6c24e5c4e07ce1c",
+  "l83_shares.py": "71327a97b30de8803b5464a58d5490fe99e3d5b5a5ff222bb473382ac826dca5",
+  "l83_sides.py": "151ba0c19ce13eeef5889af364c72ef3206f62d85f5bae48e7dca262d1bb6990"
+ }
+}

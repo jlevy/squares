@@ -1,0 +1,222 @@
+{
+ "program": "l105_selftest.py",
+ "mutant": "Bopen",
+ "status": "FAILED",
+ "cases": 994,
+ "failed": 638,
+ "errors": [
+  "hand pairs: AssertionError: ('apart', 'contact', mpq(0,1), mpq(0,1))",
+  "random pairs: AssertionError: ('contact', 'apart', mpq(0,1), mpq(0,1))"
+ ],
+ "failures": [
+  {
+   "case": "edge contact as-is",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge contact swapped as-is",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge 1e-30 past as-is",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=apart area=0"
+  },
+  {
+   "case": "edge contact transposed",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge contact swapped transposed",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge 1e-30 past transposed",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=apart area=0"
+  },
+  {
+   "case": "edge contact other-edge",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge contact swapped other-edge",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge 1e-30 past other-edge",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=apart area=0"
+  },
+  {
+   "case": "edge-offset contact as-is",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge-offset contact swapped as-is",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge-offset 1e-30 past as-is",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=contact area=0"
+  },
+  {
+   "case": "edge-offset contact transposed",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge-offset contact swapped transposed",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge-offset 1e-30 past transposed",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=contact area=0"
+  },
+  {
+   "case": "edge-offset contact other-edge",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge-offset contact swapped other-edge",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "edge-offset 1e-30 past other-edge",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=contact area=0"
+  },
+  {
+   "case": "corner contact as-is",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "corner contact swapped as-is",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "corner 1e-30 past as-is",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=contact area=0"
+  },
+  {
+   "case": "corner contact transposed",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "corner contact swapped transposed",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "corner 1e-30 past transposed",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=contact area=0"
+  },
+  {
+   "case": "corner contact other-edge",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "corner contact swapped other-edge",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "corner 1e-30 past other-edge",
+   "ok": false,
+   "detail": "A=overlap m=-1.00000e-30 B=contact area=0"
+  },
+  {
+   "case": "3-4-5 vertex contact as-is",
+   "ok": false,
+   "detail": "A=contact m=0 B=apart area=0"
+  },
+  {
+   "case": "unit box: four contacts",
+   "ok": false,
+   "detail": "[('contact', '0', 'inside'), ('contact', '0', 'inside'), ('contact', '0', 'inside'), ('contact', '0', 'inside')]"
+  },
+  {
+   "case": "box 1+eps: left, bottom contact",
+   "ok": false,
+   "detail": "[('contact', '0', 'inside'), ('contact', '0', 'inside'), ('inside', '1.00000e-30', 'inside'), ('inside', '1.00000e-30', 'inside')]"
+  },
+  {
+   "case": "left past",
+   "ok": false,
+   "detail": "[('outside', '-1.00000e-30', 'contact'), ('inside', '1.50000e+0', 'inside'), ('inside', '3.00000e+0', 'inside'), ('inside', '1.50000e+0', 'inside')]"
+  },
+  {
+   "case": "3-4-5 vertex at top",
+   "ok": false,
+   "detail": "[('inside', '1.30000e+0', 'inside'), ('inside', '2.60000e+0', 'inside'), ('inside', '1.30000e+0', 'inside'), ('contact', '0', 'inside')]"
+  },
+  {
+   "case": "3-4-5 vertex past top",
+   "ok": false,
+   "detail": "[('inside', '1.30000e+0', 'inside'), ('inside', '2.60000e+0', 'inside'), ('inside', '1.30000e+0', 'inside'), ('outside', '-1.00000e-30', 'contact')]"
+  },
+  {
+   "case": "3-4-5 vertex at left",
+   "ok": false,
+   "detail": "[('contact', '0', 'inside'), ('inside', '1.30000e+0', 'inside'), ('inside', '2.60000e+0', 'inside'), ('inside', '1.30000e+0', 'inside')]"
+  },
+  {
+   "case": "contained: unit box",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "case": "random pair 0 t=0",
+   "ok": false,
+   "detail": "m=0 A=contact B=apart"
+  },
+  {
+   "case": "random wall 0 left t=0",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "case": "random wall 0 left t=-1.00000e-30",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "case": "random wall 1 bottom t=0",
+   "ok": false,
+   "detail": ""
+  },
+  {
+   "case": "random wall 1 bottom t=-1.00000e-30",
+   "ok": false,
+   "detail": ""
+  }
+ ],
+ "program_sha256": {
+  "l105_selftest.py": "f523a6013f25c1d0ccca7cb0175c855bfbbe0df522d528665f384486076eabf0",
+  "l105_geom.py": "57f9fc07f5c8ccc8f752ba4a49e2b9e9a8b4314b449320f53c0327117b0fe361",
+  "l105_reader.py": "2e1cff6848c9b92bd9253bafb5ced916573868fdfc34a6d7e3511696997b8bdf",
+  "l105_sat.py": "86932296989a6dcf8e972039c6c8f08a6085945438c180533f257dc9bcc61e67",
+  "l105_clip.py": "4eba021609f021d2a9d77ade651164522f6716e6b554318010cc02b9d13b7dc7",
+  "l105_check.py": "1e7b04cca2bfc3b2e0ef6c95c885e88b99a82615571af3c454ce245222e622b7"
+ },
+ "all_cases": null
+}

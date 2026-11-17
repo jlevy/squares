@@ -1,0 +1,155 @@
+{
+ "program": "l117_digests.py",
+ "verdict": "ALL_FROZEN_DIGESTS_HOLD",
+ "checked": 22,
+ "checks": [
+  {
+   "list": "checker-frozen-digests.txt",
+   "file": "programs/l117_reader.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "file": "programs/l117_sat.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "file": "programs/l117_hull.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "file": "programs/l117_check.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "file": "programs/l117_geom.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "file": "programs/l117_selftest.py",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "file": "out/selftest.json",
+   "holds": true
+  },
+  {
+   "list": "checker-frozen-digests.txt",
+   "file": "out/check-n269.json",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "file": "programs/controls-plan.json",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "file": "out/plan-facts-n269.json",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "file": "out/check-n269.json",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "file": "programs/l117_plan_facts.py",
+   "holds": true
+  },
+  {
+   "list": "controls-plan-digest.txt",
+   "file": "programs/l117_make_plan.py",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "frozen/review-2026-11-12-ozden-962.frozen.md",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "frozen/checker-frozen-digests.txt",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "frozen/controls-plan-digest.txt",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "out/selftest.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "out/check-n269.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "out/plan-facts-n269.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "out/controls-n269.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "programs/controls-plan.json",
+   "holds": true
+  },
+  {
+   "list": "findings-frozen-digest.txt",
+   "file": "programs/l117_controls.py",
+   "holds": true
+  }
+ ],
+ "files": {
+  "README.md": "23e0edd6512ca582e4d2bfa0257d06e484452735b5dae8125274d27916f129db",
+  "frozen/checker-frozen-digests.txt": "f251bd5d0e4003a88bfd2e74323a8031ecd779bb10275b016cd9770aa4f8f80d",
+  "frozen/controls-plan-digest.txt": "98a2bc65ff178b6f49561cf40dd264df88a1d0661e7be022a8fc234299ca2f8e",
+  "frozen/findings-frozen-digest.txt": "6ed900c088c2b67961ca6ed62d477ff8f7df593b940956a28810944198102e48",
+  "frozen/review-2026-11-12-ozden-962.frozen.md": "b8f46901bc40a8dd7bd231d722144a0d4312873fae96e91d325d73b85cb96930",
+  "out/check-n269.json": "bc489767bdf9f09fee9d7b18beb8f92cb6b95637dbef751feba59225e711707b",
+  "out/contraction-new.json": "2c0fec47e73ccd5d3718e3aa5307807876531914af53b8bc747e6c7b74bffb9e",
+  "out/contraction-t290.json": "c3aa5869535faeca17df753d9012448826fab3b6de89c612512ea58d91210072",
+  "out/controls-n269.json": "fcea04fbc9e00c576dbd33f24aa6cf9df84c649821613be25b442e18646995cf",
+  "out/custody.json": "3d412c66810be736544a25e4b3fafd71fefefb9ea2107eb475c63907004c2e69",
+  "out/identity-n269.json": "2fe32bace5af4720b970e613aedf808aa5cf2eb8fc8795e38fe5495efe9b186e",
+  "out/lineage-n269.json": "4eb7074a581309334efd1fb533c49e5daa82f5e7d3936e8fdd8e3ddb9b9209e3",
+  "out/plan-facts-n269.json": "341fd9e7b0abbf0ffcd437a990550c6f7682e889e5c5c411967cbd0f87b085cb",
+  "out/pose-n269.json": "fc0a8669dcb6bad6dbf5ae65067dd99b57c5d065a5ea73e1c458ab76564d8f38",
+  "out/selftest.json": "67dedf0592e8434fa0e8fd3740ef508e20b724aae65a26cb94dc5c84f3ac1f6a",
+  "out/sides.json": "bf0673c5e7f0135fa469f9030eed30b8cd95d5d7e76491f34347c12b20ccc9d0",
+  "programs/__pycache__/l117_geom.cpython-314.pyc": "82c81cf6180419ae1b053d52a29dad8fb557b9e9a36791b14587cee9281f0658",
+  "programs/__pycache__/l117_reader.cpython-314.pyc": "950077b956ef50382055f915e78ab32c512709f4d9adcb3a86e82dc26be5a317",
+  "programs/controls-plan.json": "26e87eda1275e5d992cc8ba792c8227cca39fc9daae3acd0a09b057efebf6a54",
+  "programs/issue-962.json": "1c72f03819d394ccfb3f7a6e8014c59ff68100ce7d56c9a25788923aa21572d8",
+  "programs/l117_check.py": "7ea59b80c685e1ec98a3a2fa8a122356002e3ea11046f082584e6e6ecd8b0ca9",
+  "programs/l117_controls.py": "2fc13544b87f4ca5dd069c58a7c51a34aa9141fe182b5c03215c2be2d5e3e484",
+  "programs/l117_custody.py": "548bb4afa4b03f567ba38709c74994e1e7d004839b6e9998204afb3d5104b160",
+  "programs/l117_digests.py": "8557dffa6943d8c0259a4d541f90a29f895eee836bb4911adbed961df6678c45",
+  "programs/l117_geom.py": "c57fe74603e7da976e7a8b8ca8c92e6067f1069f77426b229a500a4ec96ba61d",
+  "programs/l117_hull.py": "9c927fc9499ede25698b9fa2b542aa9c96a409d3b420b137ffb420e485032fc2",
+  "programs/l117_lineage.py": "8948dc7df0245b456fe90f89aab161d206ea980c1dcfa2863626164969514676",
+  "programs/l117_make_plan.py": "3ca3041b78561cbdc3b79085f829124e616c8be9ae9f66831689e6f3323cdfa0",
+  "programs/l117_plan_facts.py": "53dc7b140f14e17c071f9d292b9b94c60364f9884793591d6e2b0df4929e98ce",
+  "programs/l117_pose.py": "94c25ac8a4dcce9658f6999324ab1a9a64ffaac76d2ba27c26b607accd48c1f9",
+  "programs/l117_reader.py": "492d8f73ea4f217538134d854f3134c8f824552551ed1394d87694f4fc244722",
+  "programs/l117_sat.py": "22b2a759097fee1e6d490c8c7976b9ada655cf2680c49aa3750aaac34a726131",
+  "programs/l117_selftest.py": "fe437de83f8e8f4ad54848b3ef9b4d0b1009e15ed293a8de538c5d613f0867f9",
+  "programs/l117_sides.py": "b57bd8dfa197b96fdbd7aeb92d09994cffc49edfbb46a37bbc92c5cad306d3fc",
+  "programs/run_after.sh": "cd70a8a674ec6c894d22a53a0fe8ca8579db0e316985e73863293d37aa7fce7f",
+  "programs/run_frozen.sh": "2bd5ed37a417feebf6287665fa2d68a44da1d40b85ba21f4b1b3ec002071775d"
+ }
+}

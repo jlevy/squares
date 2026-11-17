@@ -2789,11 +2789,43 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: `data-credited-names` and `data-source-keys`, the metadata's `source_groups` and the
 #: canvas height. The metadata's `cases` list reads the case records directly and stays
 #: the truthful record, `improved_by` included. The case records, the case pages, the bound
-#: citations and the site credit every name. Doğa Özden improved Evan Daniel's packings at
-#: 204 and 299 (T-264, T-263), adopted on 4 November 2026 (think-tj4o).
+#: citations and the site credit every name. Doğa Özden improved Evan Daniel's packing at
+#: 299 (T-263), adopted on 4 November 2026 (think-tj4o). The hold held him at 204 too
+#: (T-264), and Kaelan Yim at 260 (T-265, think-hgpg, now moot), until Evan Daniel's own
+#: packings took 204 on 5 November 2026 and 260 on 6 November 2026 (T-268, T-269),
+#: crediting neither name there. Measured on 6 November 2026, the block fits Özden's name
+#: in its three lines and the 1-100 canvas keeps its height whether the hold stands or is
+#: emptied. The adoption of 9 November 2026 (think-463r) credits him as an improver at 232,
+#: 268, 303 and 307 too, and at 299 again (T-275 to T-279), so the hold holds him there
+#: alike: no other name enters or leaves the block. The same day's later pass (think-he66)
+#: credits him as an improver at 172 and 270 (T-282, T-283), held the same way, and its last
+#: pass (think-1goz) at 199 (T-284, T-282's packing with one L step), held alike. The
+#: adoption of 11 November 2026 (think-xq4o) credits him as the finder at 156, 180, 268 and
+#: 269 (T-287 to T-290), held the same way; 268 was already held for T-276. The same
+#: day's lane L100 (think-f65n) credits him as the finder at 179 (T-291), held alike, and
+#: its lane L107 (think-89i7) again at 179 for his further arrangement of it (T-294); the
+#: same day's lane L110 (think-my76) credits him as the finder at 237 (T-295), held alike.
+#: Lane L120 of 12 November (think-s418) credits him as the finder at 269 again (T-296),
+#: already held for T-290, and lane L132 (think-n73d) a third time there (T-297, in the pass
+#: of 13 November), held alike. Lane L160 of 14 November (think-14i2) credits him as the
+#: finder at 228 (T-300, in the pass of 14 November), held alike. Lane L164 (think-17ex)
+#: credits Roberto Ono, a new name, as the finder at 228 (T-301) in place of Özden and at 147
+#: (T-302), in the pass of 15 November, so the hold holds Ono at both and Özden no longer at
+#: 228, where no case record names him now. Lane L170 (think-i8y9) credits jazivxt, a new
+#: name, as the finder at 90 (T-303), in the same pass, where the grid credited no one, so
+#: the hold holds jazivxt there. Lane L181 (think-32cl) credits Joost de Winter as the
+#: improver at 90 (T-304, in the pass of 16 November), a name the block already prints, so
+#: the hold still holds jazivxt alone there. Lane L187 (think-0y9m) credits Tomáš Kodaj as
+#: the finder and JoeGun as the improver at 127, 204, 232, 264 and 305 (T-305 to T-309, in
+#: the same pass), two new names, so the hold holds both there, and Özden no longer at 232,
+#: where no case record names him now.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
-    204: ("Doğa Özden",),
-    299: ("Doğa Özden",),
+    **dict.fromkeys(
+        (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
+    ),
+    **dict.fromkeys((147, 228), ("Roberto Ono",)),
+    90: ("jazivxt",),
+    **dict.fromkeys((127, 204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
 }
 #: The infographic edition the hold was set under. While the hold is not empty, a version
 #: bump or a poster drawn for any other edition fails the pull-request suite
@@ -2812,7 +2844,8 @@ def print_credit_hold_problems(versions: Sequence[str]) -> list[str]:
     return [
         f"the print-credit hold (PRINT_CREDIT_HELD, think-tj4o) was set for the "
         f"{PRINT_CREDIT_HELD_FOR} posters; posters of {version} credit every name, so the "
-        "cut that draws them empties the hold"
+        "cut that draws them empties the hold and lays the credit block out again with "
+        "every name it held"
         for version in sorted(set(versions))
         if version != PRINT_CREDIT_HELD_FOR
     ]

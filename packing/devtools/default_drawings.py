@@ -449,19 +449,10 @@ _README_3MRY = (
 #: Both generators on the witness the adoption of 25 October 2026 wrote at 304, Evan
 #: Daniel's exact descent of the packing T-241 certifies (T-242, think-hx0e): his
 #: regularizer and grid-slack at 0.5, 1 and 5 degrees. Every view goes to review at row 7
-#: and draws more light squares than the axis tool's view of the witness, so the count is
-#: decided on that view (`SETTLED`).
-_RUNHX0E = (
-    ("evand-regularize", "evand-regularize-adopt-2026-10-25-n304-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg05"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-25-n304-grid-deg5"),
-)
-_README_HX0E = (
-    "packing/cases/regularized_drawings/think-hx0e-2026-10-25/README.md and "
-    "selection-adopt-2026-10-25-n304.md, the selection of 25 October 2026 (think-hx0e), "
-    "beside the runs' receipts and reports"
-)
+#: and draws more light squares than the axis tool's view of the witness, so the count was
+#: decided on that view (`SETTLED`) until the pass of 5 November 2026 moved 304 to T-273
+#: (think-lrj4) and its entry left (evidence in
+#: packing/cases/regularized_drawings/think-hx0e-2026-10-25/).
 
 #: Both generators ran on the three witnesses the adoption of 22 October 2026 moved to Evan
 #: Daniel's regularized views of 20 October (T-225, think-ql4v), 204, 229 and 260, and drew
@@ -500,16 +491,35 @@ _README_3GUF = (
 #: entry, decided on the earlier witness, left. The regularizer's solved views at 204 and
 #: 299 lie below the new houses and are register candidates (think-w64i). Their receipt,
 #: run blocks, reports and the selection's report are in
-#: packing/cases/regularized_drawings/think-ybep-2026-11-04/.
-_RUNYBEP = (
-    ("evand-regularize", "evand-regularize-adopt-2026-11-04-n204-299-evand"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg05"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg1"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-04-n204-299-grid-deg5"),
+#: packing/cases/regularized_drawings/think-ybep-2026-11-04/. 204's entry left when the pass
+#: of 5 November 2026 moved 204 to T-268 (think-lrj4).
+
+#: Both generators on the witness the adoption of 5 November 2026 wrote at 260 (think-o7ly):
+#: Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees. None draws a view:
+#: grid-slack's relaxed rows overlap at the witness's side at every threshold, and the
+#: regularizer's solve finds the witness not jammed, as a packing with contact-free squares
+#: is, so the selection decided 260 (`SETTLED`) and the axis tool's view stays drawn. Their
+#: receipt, run blocks, reports and the selection's report are in
+#: packing/cases/regularized_drawings/think-o7ly-2026-11-05/. Its entry left when the pass of
+#: 6 November 2026 moved 260 to T-269 (think-lrj4).
+
+#: Both generators on the seven witnesses the adoption of issue 914 wrote, at 175, 204,
+#: 268, 293, 303 and 304 on 5 November 2026 and at 260 on 6 November 2026 (think-lrj4):
+#: Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees. The selection drew the
+#: regularizer's views at 175, 204 and 268 and grid-slack's at 260 (0.5 degrees) and 303 (5
+#: degrees), and decided 293 and 304 (`SETTLED`); 204's, 260's and 304's entries, decided on
+#: the earlier witnesses, left. No view lies below a house. Their receipt, run blocks,
+#: reports and the selection's report are in
+#: packing/cases/regularized_drawings/think-lrj4-2026-11-05/.
+_RUNLRJ4 = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-05-n175-304-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n175-304-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n175-304-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-05-n175-304-grid-deg5"),
 )
-_README_YBEP = (
-    "packing/cases/regularized_drawings/think-ybep-2026-11-04/README.md and "
-    "selection-adopt-2026-11-04-n204-299.md, the selection of 4 November 2026 (think-ybep), "
+_README_LRJ4 = (
+    "packing/cases/regularized_drawings/think-lrj4-2026-11-05/README.md and "
+    "selection-adopt-2026-11-05-n175-304.md, the selection of 6 November 2026 (think-lrj4), "
     "beside the runs' receipt, blocks and reports"
 )
 
@@ -524,6 +534,31 @@ _README_YBEP = (
 #: "no change", so none is adopted (`SETTLED`; the owner's question whether exactness
 #: alone earns the picture is think-j68m). Their receipt, blocks, reports and the selection's
 #: report are in packing/cases/regularized_drawings/think-yk2h-2026-10-31/.
+_RUN463R = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-09-n232-307-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n232-307-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n232-307-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-09-n232-307-grid-deg5"),
+)
+_README_463R = (
+    "packing/cases/regularized_drawings/think-463r-2026-11-09/README.md and "
+    "selection-adopt-2026-11-09-n232-307.md, the selection of 9 November 2026 (think-463r), "
+    "beside the runs' receipt, blocks and reports"
+)
+
+_RUN17EX = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-15-n147-228-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg5"),
+)
+_README_17EX = (
+    "packing/cases/regularized_drawings/think-17ex-2026-11-15/README.md and "
+    "selection-adopt-2026-11-15-n147-228.md, the selection of 15 November 2026 "
+    "(think-17ex), beside the runs' receipt, blocks and reports"
+)
+
+
 _RUNYK2H = (
     ("evand-regularize", "evand-regularize-yk2h-2026-10-31-n39-291-evand"),
     ("regularize_grid_slack/2", "grid-slack-yk2h-2026-10-31-n39-291-grid-deg05"),
@@ -687,52 +722,6 @@ SETTLED: dict[int, Settled] = {
         "sides",
         _README_3MRY,
     ),
-    127: Settled(
-        DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-127.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "135498536094691656518840302064514115294542468016226400014199451957145619817818"
-        "540810178220264676019962366284978593757592312767615344487718300447600244313196"
-        "410894217701147358186228992617922292138047804585614932138977858328658631503049"
-        "767834454372611964435874412134384772911945898712395990568273081346030515083644"
-        "680793466355542912350299874514184892678819300042905045000848034914843613019526"
-        "150569319197864659154008470196129176297253011415657909588271800757337965097268"
-        "244731531/11472350070773135870738664984884771824240519173376928166846447271962"
-        "181482698376590799910042055451537469277860534944156990094530050859887280911833"
-        "518571890816974225740486914904215376569885447307269234078535071645003843008473"
-        "664677728271135218388461117144501113959721371541098765701449634712221142863779"
-        "884574231106787879705830596466720112479423463036006094003783613697035648679089"
-        "255034048384043441345133675219950369224788645308472728992856849918581294863698"
-        "036325476448808712",
-        _RUN3MRY,
-        "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
-        "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
-        _README_3MRY,
-    ),
-    132: Settled(
-        DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-132.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "330741141472971891752525638916268099190405651568227696856704748111804993903234"
-        "544824692742563267471366087272519939719862775272482615515511940205796407879977"
-        "623138902744671520621182831612781005756922291501663623607999015437858787584923"
-        "741134089237988126556723621312460601401465496067086785787167947007446517513853"
-        "727237321313516231967966271862199341844272166972287839215142478543390817619512"
-        "619117827183090547306030624141902964527982272653764631651515952706487627761481"
-        "68747513/275946909967463874893845848449072515987769045935967960920393567952818"
-        "897553710616137428695538913967791341453030878097615394432058980078993877239822"
-        "476213401346108751123539753545407955276110529059530588329921217650534199572672"
-        "315324596256562541151944620121207001759339148926675382326949517250104509227042"
-        "279571998341658352279115211051629099388551808435073135571241582399088460704596"
-        "783429597069815913961869057090929886096862856311382647609816048846134375256835"
-        "5930089397710507",
-        _RUN3MRY,
-        "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
-        "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
-        _README_3MRY,
-    ),
     176: Settled(
         DECIDED,
         "[Mishapolk KKT refinements 2026-10-14]",
@@ -747,56 +736,6 @@ SETTLED: dict[int, Settled] = {
         "totals); Evan Daniel's same-side view is refused (its literal is too large) and his "
         "solved view is held at row 4 (solved above U)",
         _README_Z7WN,
-    ),
-    179: Settled(
-        DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-179.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "633623811190746643479884505475771579015670596141459749084386172048189662237909"
-        "387768608210996858604245967567884947308023476651605782792368384356665613496796"
-        "255789465066717889450211342784010306101275867663851001085653029078076845090437"
-        "6205618905474742150835470970130080373399871451707/4563765085878763825287779650"
-        "351406931178147045231598627106378914144698040567906497454406515088567583661809"
-        "587983789662616086382763052404581936167428866533709354906907039039875673855245"
-        "681436318195008323311050101670105215678875972177933710147852286686061339899161"
-        "34021565891836642047",
-        _RUN3MRY,
-        "Evan Daniel's same-side view and grid-slack's views at 0.5, 1 and 5 degrees "
-        "draw no change, and his solved view is held at row 4 (solved about 1e-19 "
-        "above U)",
-        _README_3MRY,
-    ),
-    180: Settled(
-        DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-180.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "155025071816638739375920062838973091822976073002980368747210126605852720649780"
-        "417647109197446301149543571551755227757385929209582336869098517573907666164058"
-        "591390993846669032590361599387262694283676957458118848978158186527057716197716"
-        "7375393786132252959632859942696323050956793319412034/1113926449460885485630252"
-        "817228660364340154725382597603439982237063155721544698609036724925314374797939"
-        "461433885545711541904570251436349681422966777467674634410710614191872023681777"
-        "015649365843410343697085341552585661859445060494127788703323993064975543431992"
-        "21015096444019032359522413",
-        _RUN3MRY,
-        "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
-        "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
-        _README_3MRY,
-    ),
-    204: Settled(
-        DECIDED,
-        "[Özden s204 upper bound 2026-11-03]",
-        "resources/web/ozden-s204-upper-bound-2026-11-03/source/n-204-candidate.yaml",
-        "d4b8b05c45e3be464476c94712a4dbc063009875",
-        "7403810497792604009019579959/500000000000000000000000000",
-        _RUNYBEP,
-        "grid-slack finds no view at 0.5, 1 or 5 degrees, its relaxed rows overlapping at "
-        "this side, so the axis tool's view of this witness stays drawn; Evan Daniel's "
-        "regularizer solved the witness 4.82e-16 below its side, held at row 3 as a "
-        "register candidate (think-w64i), never admitted here",
-        _README_YBEP,
     ),
     208: Settled(
         DECIDED,
@@ -868,43 +807,6 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
-    228: Settled(
-        DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-228.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "819486956222427434065838854556296435515888934151427614630092120369644833117556"
-        "039448104315966648179462605733217414292381343616991657052470805939640487660620"
-        "426879920064276697278749018283614028631455498143890842621261204280638890820734"
-        "712906429323944800731179720647781901202137909117069812583845222036212652665331"
-        "179513582599377049658313223899216547026567503163152289472875876258728022078455"
-        "094832042010996996761328350609147532400322612448654764542489093484190008881892"
-        "90166/525157247685563248366746065785287543925418240602052988075354819092404618"
-        "566980135334828175799072844156754253325417094237105752149667670692223375175108"
-        "319675827585781705227366233060212608797260303410593242463677254737570034238567"
-        "695832506381375190527631078920495575552963285753861575662875420541624554743275"
-        "072280539553231888830390973210068583013267994048846579655759147075410546688021"
-        "973925174813607763037593035155380705974005312455782512992290822334714088168782"
-        "4268888523",
-        _RUN3MRY,
-        "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
-        "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
-        _README_3MRY,
-    ),
-    237: Settled(
-        DECIDED,
-        "[Couzo n237 2026-10-15]",
-        "resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert",
-        "58a783368d4b7e70bb800f0009ea9ca03e578739",
-        "7951301819129798440089572127137/500000000000000000000000000000",
-        _RUNZ7WN_B,
-        "every view, admitted at row 10, draws one more light and one more uneven "
-        "square than the axis tool's view of this witness (6 / 10 against 5 / 9), "
-        "though no near-axis square, no more angle classes and more shared sides: "
-        "Evan Daniel's same-side and solved views, and grid-slack's at all three "
-        "thresholds",
-        _README_R3CL,
-    ),
     240: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",
@@ -956,24 +858,6 @@ SETTLED: dict[int, Settled] = {
         "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
         "change), and grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed rows "
         "overlap at this side)",
-        _README_3MRY,
-    ),
-    269: Settled(
-        DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-269.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "762455321661214625154064717575663643223209516170114617954836114502409073914917"
-        "350306062684974688108175698138394198328039661482509815313961445914973037400188"
-        "315008896501350993871128847488533369930209358303422921792499221423993238497834"
-        "934040341710705797262200466540592661253334264548983/45111659257824839102395844"
-        "510075287639411941931091142308133831539304493554725538730586505928273109944096"
-        "508731943061625604172188642108802879488059456112093682097138673317692898853025"
-        "765103795703325919365728472905467297061887465330632167402750760142429709049654"
-        "398016240842352148167624",
-        _RUN3MRY,
-        "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U, no "
-        "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
     272: Settled(
@@ -1051,53 +935,34 @@ SETTLED: dict[int, Settled] = {
         "earn the picture is the owner's question (think-j68m)",
         _README_YK2H,
     ),
-    297: Settled(
+    293: Settled(
         DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-297.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "101472464323768792245904284543375474230555638453919578463733874774559530240921"
-        "796792735523846207099103202422615058339983630007196089896766991483740867721667"
-        "472916181572269715834763092162768289696214262722220496581436740329667491992470"
-        "385588085302831190869100320592567888502647361261272797960903099925533059078417"
-        "429905087434713621596035551277929270182148134551280954705208376703496488535181"
-        "163507406261488638141906227450903477512322347617174097593298009022893926125113"
-        "158834843390701473172549156227486488485336454113392032916041278678136092861880"
-        "714914125104000339150069207041486952229136779363920730721882582452975716844475"
-        "544551508425850620449911914183287655383495697476433982807143529755491715467190"
-        "957715249168323828398934353363258835081365949059791777270378889679221320876989"
-        "1349919882220390497356350587355960673096877261161822776515148405970758147782/5"
-        "719846533430548674203078792439336393621731481938234825416678389927869848489027"
-        "877708066734232047947137898972962775609360488188416493204427088723993241944454"
-        "799676029355918789765977508446988496657465337902752489231712573562300516122045"
-        "534866041540641672755317142321730275229664454497186112262952127162776339672486"
-        "261780225171883834157956874357967989176612445253960517217212910393328705639027"
-        "284783238100329138618575079038839202957768898848137306692783133978181959092724"
-        "854554789952501742000569044182361051414453459246839227984250482400578136931797"
-        "879673891932961186820374671676841931854018610437219256644150165082229962721906"
-        "019098533504551291534383695277344580904241761440617232506027356096622336718904"
-        "533869257644312426513742119915109402556450217842041957939001871119160026896464"
-        "0211800250714276006224877779479559693213270601792473480819619316765587763",
-        _RUN3MRY,
-        "Evan Daniel's regularizer yields no view (upstream's checker refused its "
-        "certificate), and grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed "
-        "rows overlap at this side)",
-        _README_3MRY,
+        "[Daniel issue 914 2026-11-05]",
+        "resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/"
+        "s293_1105.cert",
+        "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+        "17623065212060701770633564247069/1000000000000000000000000000000",
+        _RUNLRJ4,
+        "every view, Evan Daniel's regularizer's certified KKT view at the witness's side "
+        "and grid-slack's at 0.5, 1 and 5 degrees, is admitted at row 10 but draws more "
+        "light and uneven squares than the axis tool's view of this witness (11 and 26 "
+        "against 9 and 24), so that view stays drawn",
+        _README_LRJ4,
     ),
     304: Settled(
         DECIDED,
-        "[Daniel Kaggle descents 2026-10-24]",
-        "resources/web/evand-kaggle-descents-2026-10-24/source/search/packer/candidates/"
-        "s304_pub.cert",
-        "8a8879a2972c32cbd2d906049228cc9f0762b02a",
-        "1792689890035674158972360842897/100000000000000000000000000000",
-        _RUNHX0E,
-        "every view draws more light squares than the axis tool's view of this witness "
-        "(4 or 5 to 2) and goes to review at row 7, its per-square contact counts falling "
-        "while no total does: grid-slack's at all three thresholds (14 squares) and Evan "
-        "Daniel's certified KKT re-solve at the witness's side (36); each has fewer uneven "
-        "and near-axis squares, and none is a register candidate",
-        _README_HX0E,
+        "[Daniel issue 914 2026-11-05]",
+        "resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/"
+        "s304_1105.cert",
+        "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+        "17920944093340242061198022152503/1000000000000000000000000000000",
+        _RUNLRJ4,
+        "Evan Daniel's regularizer's certified KKT view at the witness's side is refused at "
+        "row 7, its house and stage totals of shared sides falling (703 and 720 against 759 "
+        "and 796), and grid-slack's views at 0.5, 1 and 5 degrees go to review at row 7, 50 "
+        "per-square contact counts falling while no total does, with more uneven squares "
+        "than the axis tool's view of this witness (49 against 40), so that view stays drawn",
+        _README_LRJ4,
     ),
     306: Settled(
         DECIDED,
@@ -1129,17 +994,37 @@ SETTLED: dict[int, Settled] = {
     ),
     307: Settled(
         DECIDED,
-        "[Couzo issue 844 2026-10-28]",
-        "resources/web/couzo-issue844-2026-10-28/source/certificates/n307.cert",
-        "712c6a6e9ef58a9521784e6b7e236af813422de7",
-        "2707897969116659515550794271467451840032974544063449693/"
-        "150612387934832692306604131393579915999000000000000000",
-        _RUN3GUF,
-        "grid-slack's views at all three thresholds are refused at row 7 against the axis "
-        "tool's view of this witness, a house total of shared sides falling and more light "
-        "and uneven squares drawn; Evan Daniel's certified KKT solve is 3.75e-12 below the "
-        "side and held at row 3 as a register candidate (think-ruu2), never admitted here",
-        _README_3GUF,
+        "[Özden s307 upper bound 2026-11-09]",
+        "resources/web/ozden-s307-upper-bound-2026-11-09/source/n-307-candidate.yaml",
+        "dbe8838a7273dc8458fef1f5a16ef4384867ca19",
+        "449480774009684068230455615438457327425493010149518207533311266279067802674440"
+        "281063163481255147688160512083866164777157380357557984529353435587198614995134"
+        "515039437077222130568527506328213541414734004764759503110113052197"
+        "/25000000000000000000000000000007228952143313328760480263137575411212650339400"
+        "499617794887156550751333176460501119255701638639310978743329054270587917634591"
+        "387507318688709425989287484853991618028740642800100000000000000000",
+        _RUN463R,
+        "on T-279's witness grid-slack's views at all three thresholds go to review at row 7, "
+        "13 per-square counts falling while no total does, and Evan Daniel's certified KKT "
+        "solve is 3.48e-12 below the side and held at row 3 as a register candidate, never "
+        "admitted here; the axis tool's view stays drawn",
+        _README_463R,
+    ),
+    228: Settled(
+        DECIDED,
+        "[Ono issue 984 2026-11-14]",
+        "resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/"
+        "n228_S59604312.json.gz",
+        "b5636fd6694d2cc7aa5811ae33f441268b81b714",
+        "87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/"
+        "5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680",
+        _RUN17EX,
+        "on T-301's witness grid-slack's views at all three thresholds go to review at row 7, "
+        "2 per-square counts falling while no total does, Evan Daniel's same-side view is "
+        "refused at row 7, a total of shared sides falling, and his KKT solve, 4.29e-09 below "
+        "the side, beyond the certificate's own contraction margin, is held at row 3 as a "
+        "register candidate, never admitted here; the axis tool's view stays drawn",
+        _README_17EX,
     ),
 }
 

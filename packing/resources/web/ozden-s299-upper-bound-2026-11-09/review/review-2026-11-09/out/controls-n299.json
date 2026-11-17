@@ -1,0 +1,657 @@
+{
+ "program": "l64_controls.py",
+ "programs_sha256": {
+  "l64_util.py": "de76960f100535969691e9c386be79de5ca3e45fbe7db318ea86e5ec9bc2af81",
+  "l64_reader.py": "0e51d443fda1825b6ae207689ed932b9d1c73fc0c46aed0ceec153ba08be9c9c",
+  "l64_sat.py": "b4e61fcb7eae75386a7fa5f8c065518eacfbea47460477e192ca75f02762b948",
+  "l64_clip.py": "d238d55672949ffde490f234c97db0d76a2efc96a9515485d45e67e02b789e95",
+  "l64_check.py": "5c4927b88049a41a3fa1e822eab96d575d27f7d982058b272f677d87064c2058",
+  "l64_selftest.py": "2d8518c7c440415340cc8a92410f7b106f01e9872231957b65b3b6776656fc22",
+  "l64_controls.py": "eab74ba33600c399dc37929d36990ae24196d60a59c3ef562e913eb919cca90d"
+ },
+ "plan_sha256": "d5e090ad8d436e22bdb982f2313f99e129b6235c692ce547a46b6301a2633927",
+ "environment": {
+  "python": "3.14.7",
+  "implementation": "CPython",
+  "isolated_mode": "True",
+  "nice": "19"
+ },
+ "certificate": "/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l64/src/s299-upper-bound-17801004/n-299-candidate.yaml",
+ "certificate_sha256": "dfb0ccf71474a276a52ce768cc38e799d30ff6373a22b8ae318f58f278025d9d",
+ "n": 299,
+ "side": "7120401773702096342754592967281230757016830483803152851632588133933118281289482616136465872615357870735152930548574683963962811760970665605528283832840143529598339/399999999999998813176108643858924605486367171198872507435001091151754396322514904585379408344301256195880070191908496990382957782839857114267648100000000000000000",
+ "least_margin_pair": [
+  179,
+  194
+ ],
+ "far_wall_square": [
+  86
+ ],
+ "left_wall_square": [
+  107
+ ],
+ "bottom_wall_square": [
+  113
+ ],
+ "controls": [
+  {
+   "id": "G1",
+   "what": "the last square replaced by a copy of the first",
+   "expect": "REFUSE",
+   "expect_detail": "that pair overlaps by both: margin -1, area 1",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 1,
+    "overlapping_first": [
+     {
+      "pair": [
+       1,
+       299
+      ],
+      "margin_A": "-1",
+      "margin_A_sci": "-1.00000e+0",
+      "area_B": "1",
+      "area_B_sci": "1.00000e+0"
+     }
+    ],
+    "classes": {
+     "separated": 44550,
+     "touching": 0,
+     "overlapping": 1
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "G2",
+   "what": "square 1 translated by (S, 0)",
+   "expect": "REFUSE",
+   "expect_detail": "square 1 outside by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [
+     1
+    ],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44551,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "G3",
+   "what": "the YAML with the last square's entry removed (n unchanged)",
+   "expect": "READ_REFUSED",
+   "expect_detail": "count n - 1 for n",
+   "observed": "READ_REFUSED",
+   "as_expected": true,
+   "reason": "G3-n299.yaml: squares: 298 for n = 299",
+   "edited_sha256": "2e1ce72093421311abea289bbac4389133268d05db64eebcfe052604040da9c8"
+  },
+  {
+   "id": "G4",
+   "what": "the YAML with the last square's id set to 1",
+   "expect": "READ_REFUSED",
+   "expect_detail": "repeated id",
+   "observed": "READ_REFUSED",
+   "as_expected": true,
+   "reason": "G4-n299.yaml: square #299: repeated id 1",
+   "edited_sha256": "fb074f95e5f7502154c92efee9d06abd5645186dd77056ba768c8400701e4c12"
+  },
+  {
+   "id": "G5",
+   "what": "square 1's third corner moved by 1e-30 in x",
+   "expect": "REFUSE",
+   "expect_detail": "square 1 not a unit square by both, and not a square at all",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [
+     1
+    ],
+    "not_squares": [
+     1
+    ],
+    "outside": [],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44253,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "G6",
+   "what": "every square reflected in the horizontal line through its centre, corners kept in their order (the rotation read the other way: basis (a, b) becomes (a, -b))",
+   "expect": "REFUSE",
+   "expect_detail": "overlapping pairs by both, each pair classed alike; the count is measured, not predicted",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 122,
+    "overlapping_first": [
+     {
+      "pair": [
+       3,
+       10
+      ],
+      "margin_A": "-67540445181081068509353897074507247643309796874673991882839003132543326412014419274716497472020634900156414097222815544648347920917994787563055456544731211053/554709194894189001503336052638126295680793654614960668821179254444156705066633910862569081572975534434267127872865866384504230247858219013436045000000000000000",
+      "margin_A_sci": "-1.21758e-1",
+      "area_B": "16078422847642488113187347756682853285339209886208408382084334567393828360703170786619684920103054324791320142489720741952819168354571558063484549186164069583652027944093901/277244571968899399408059131588274199840823727636884216447747741135562452220816955431284540786487767217133563936432933192252115123929109506718022500000000000000000000000000000",
+      "area_B_sci": "5.79936e-2"
+     },
+     {
+      "pair": [
+       3,
+       106
+      ],
+      "margin_A": "-366179854937201248378362911859434550420304963163643128079825007902436022342057235852577966826332003331313981979353798353001497516252491950906085939841959051699/2643090303389596615311498432628547116020435606926514876282451326830113725764611231026011072247362271614553974811572430477568526561883636042694561000000000000000",
+      "margin_A_sci": "-1.38542e-1",
+      "area_B": "3989973464092234544515441668269838260411741315605937356047564640971832475765612244441588765903010996094351511822416522198474216485685012549911766235740849181547886925064012851/226819805729499227939712658063592603752359236781956560423570743271222252576461123102601107224736227161455397481157243047756852656188363604269456100000000000000000000000000000000",
+      "area_B_sci": "1.75909e-2"
+     },
+     {
+      "pair": [
+       4,
+       9
+      ],
+      "margin_A": "-3000923924237923014899259129045560533134834420094828396901897669417937238548588020461/13928972364745714271947025867960599838920629167933119619307457218457570250000000000000",
+      "margin_A_sci": "-2.15444e-1",
+      "area_B": "63525825263324912921064465760618311628963089839223872879717304946328993582864075291543878790315603118069175968234002754250497436566381632558858620932023427078236270416327/776065084551399261869348389396072396983048841860235330597772803967119882086816871110809646221853335279268770937557395519492542305673998134740250000000000000000000000000000",
+      "area_B_sci": "8.18563e-2"
+     }
+    ],
+    "classes": {
+     "separated": 44429,
+     "touching": 0,
+     "overlapping": 122
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S1a",
+   "what": "the side lowered by one unit of its own last place, 1/q for S = p/q in lowest terms",
+   "expect": "REFUSE",
+   "expect_detail": "exactly the square touching the far wall is outside, by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [
+     86
+    ],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44551,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S1b",
+   "what": "the side lowered by 1e-30",
+   "expect": "REFUSE",
+   "expect_detail": "exactly the square touching the far wall is outside, by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [
+     86
+    ],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44551,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S1c",
+   "what": "the side set to its 12-place floor, the claim less 1e-12",
+   "expect": "REFUSE",
+   "expect_detail": "the far-wall square outside, by both; how many others is measured",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [
+     86,
+     107,
+     108,
+     109,
+     113,
+     114,
+     116,
+     122,
+     123,
+     126,
+     128,
+     129,
+     130,
+     138,
+     142,
+     143,
+     145,
+     154,
+     157,
+     158,
+     161,
+     172,
+     174,
+     175,
+     179,
+     188,
+     190,
+     202,
+     204
+    ],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44551,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S1d",
+   "what": "the side set to its 12-place ceiling, the issue's claim",
+   "expect": "ACCEPT",
+   "expect_detail": "the claim itself",
+   "observed": "ACCEPT",
+   "as_expected": true,
+   "decision": {
+    "verdict": "ACCEPT",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44551,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S3a",
+   "what": "every square translated by (-1e-30, 0)",
+   "expect": "REFUSE",
+   "expect_detail": "exactly the square touching the left wall is outside, by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [
+     107
+    ],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44551,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S3b",
+   "what": "every square translated by (0, -1e-30)",
+   "expect": "REFUSE",
+   "expect_detail": "exactly the square touching the bottom wall is outside, by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [
+     113
+    ],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44551,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S4c",
+   "what": "square j of the least-margin pair moved toward i along the pair's separating axis by the exact contact parameter of the Minkowski difference",
+   "expect": "ACCEPT",
+   "expect_detail": "the pair touches by both (margin exactly 0, area 0); accepted unless the moved square meets a third square or a wall first",
+   "observed": "ACCEPT",
+   "as_expected": true,
+   "pair": [
+    179,
+    194
+   ],
+   "moved_by": "2.02624754210e-13",
+   "pair_A": "touching",
+   "pair_margin_A": "0",
+   "pair_B": "touching",
+   "pair_area_B": "0",
+   "decision": {
+    "verdict": "ACCEPT",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44550,
+     "touching": 1,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S4p",
+   "what": "the same, 1e-30 past contact",
+   "expect": "REFUSE",
+   "expect_detail": "the pair overlaps by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "pair": [
+    179,
+    194
+   ],
+   "moved_by": "2.02624754210e-13",
+   "pair_A": "overlapping",
+   "pair_margin_A": "-1.00000e-30",
+   "pair_B": "overlapping",
+   "pair_area_B": "6.66229e-46",
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 1,
+    "overlapping_first": [
+     {
+      "pair": [
+       179,
+       194
+      ],
+      "margin_A": "-1/1000000000000000000000000000000",
+      "margin_A_sci": "-1.00000e-30",
+      "area_B": "62500000000000000000000000000017601175287050756256004025712552084611484991875378057646481568007840377498243233059971057693078909052097893788244171319967264248426482418904993157169243253176629202024191041/93811447294695214759648378806254126966177873168495522572755699279021291245534110153895000956465124838114789887903201181584636398989841566000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "area_B_sci": "6.66229e-46"
+     }
+    ],
+    "classes": {
+     "separated": 44550,
+     "touching": 0,
+     "overlapping": 1
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S5",
+   "what": "every pair with margin below 1e-12, each alone, closed the same way",
+   "expect": "ALL_AS_STATED",
+   "expect_detail": "each pair touching by both at contact (A margin exactly 0) and overlapping by both 1e-30 past",
+   "observed": "MISSES",
+   "as_expected": false,
+   "pairs": 612,
+   "misses": [
+    {
+     "pair": [
+      107,
+      136
+     ],
+     "extra": "0",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      107,
+      136
+     ],
+     "extra": "1/1000000000000000000000000000000",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      108,
+      136
+     ],
+     "extra": "0",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      108,
+      136
+     ],
+     "extra": "1/1000000000000000000000000000000",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      109,
+      137
+     ],
+     "extra": "0",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      109,
+      137
+     ],
+     "extra": "1/1000000000000000000000000000000",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      116,
+      144
+     ],
+     "extra": "0",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      116,
+      144
+     ],
+     "extra": "1/1000000000000000000000000000000",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      120,
+      136
+     ],
+     "extra": "0",
+     "A": "separated",
+     "B": "separated"
+    },
+    {
+     "pair": [
+      120,
+      136
+     ],
+     "extra": "1/1000000000000000000000000000000",
+     "A": "separated",
+     "B": "separated"
+    }
+   ]
+  },
+  {
+   "id": "S6",
+   "what": "every square alone moved toward its nearest wall by its exact least clearance",
+   "expect": "ALL_AS_STATED",
+   "expect_detail": "each inside by both at contact with clearance exactly 0, and outside by both 1e-30 past",
+   "observed": "ALL_AS_STATED",
+   "as_expected": true,
+   "squares": 299,
+   "misses": []
+  },
+  {
+   "id": "S7c",
+   "what": "square j of the least-margin pair enlarged about its centre by the exact factor k* at which it touches i",
+   "expect": "REFUSE",
+   "expect_detail": "refused for shape by both; the pair touches by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "pair": [
+    179,
+    194
+   ],
+   "factor_minus_one": "4.05249508421e-13",
+   "pair_A": "touching",
+   "pair_B": "touching",
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [
+     194
+    ],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44550,
+     "touching": 1,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S7p",
+   "what": "the same at k* + 1e-30",
+   "expect": "REFUSE",
+   "expect_detail": "refused for shape; the pair overlaps by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "pair": [
+    179,
+    194
+   ],
+   "factor_minus_one": "4.05249508421e-13",
+   "pair_A": "overlapping",
+   "pair_B": "overlapping",
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [
+     194
+    ],
+    "not_squares": [],
+    "outside": [],
+    "overlapping_pairs": 1,
+    "overlapping_first": [
+     {
+      "pair": [
+       179,
+       194
+      ],
+      "margin_A": "-250000000000101312377105410609926087754964706295017357239489420150055446992380724744839297440467335147616797231095027109647627216929/500000000000000000000000000000070404701148203025024016102850203381623996199721162043706219295254433858000000000000000000000000000000000000000000000000000000000000",
+      "margin_A_sci": "-5.00000e-31",
+      "area_B": "62500000000000000000000000000017601175287050756256004025712552084611484991875378057646481568007840377498243233059971057693078909052097893788244171319967264248426482418904993157169243253176629202024191041/375245789178780859038593515225016507864711492673982090291022797116085164982136440615580003825860499352459159551612804726338545595959366264000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "area_B_sci": "1.66557e-46"
+     }
+    ],
+    "classes": {
+     "separated": 44550,
+     "touching": 0,
+     "overlapping": 1
+    },
+    "disagreements_A_B": 0
+   }
+  },
+  {
+   "id": "S8",
+   "what": "the square touching the far wall enlarged about its centre by 1 + 1e-30",
+   "expect": "REFUSE",
+   "expect_detail": "refused for shape by both and outside by both",
+   "observed": "REFUSE",
+   "as_expected": true,
+   "decision": {
+    "verdict": "REFUSE",
+    "shape_refusals": [
+     86
+    ],
+    "not_squares": [],
+    "outside": [
+     86
+    ],
+    "overlapping_pairs": 0,
+    "overlapping_first": [],
+    "classes": {
+     "separated": 44551,
+     "touching": 0,
+     "overlapping": 0
+    },
+    "disagreements_A_B": 0
+   }
+  }
+ ],
+ "verdict": "MISSES",
+ "misses": [
+  "S5"
+ ],
+ "clock": {
+  "started_utc": "2026-11-09T07:32:43Z",
+  "finished_utc": "2026-11-09T07:40:38Z",
+  "cpu_seconds": "468.07",
+  "wall_seconds": "474.74"
+ }
+}

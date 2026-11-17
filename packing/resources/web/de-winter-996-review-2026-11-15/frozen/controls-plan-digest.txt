@@ -1,0 +1,6 @@
+# Lane L180 controls plan, stated at 2026-11-15T12:15:57Z, before l180_controls.py existed (ls programs/: controls-plan.json issue-996.json l180_axes.py l180_check.py l180_clip.py l180_decide.py l180_geom.py l180_make_plan.py l180_plan_facts.py l180_reader.py l180_selftest.py )
+31a2b55110de9600dc8889648e738caf9c62fe7d4c6d67e491b08203bc0364b2  programs/controls-plan.json
+38c322c2982caf3078203938930cef651a56d3fe106f8f0a338e65245d1ac9d0  out/plan-facts-n90.json
+b6b364bab77730856de60407b695ca8dd6f0f3f3d883dc085a4d8080f71d1d0b  out/check-n90.json
+c6fb615bb2663777d07879c8ec342d9a21e4e15aed1fe8740fa58c23dbe84308  programs/l180_plan_facts.py
+4e8100f474df8ea9669836ec1140daa9bffb9bd6c61c4b9ab9e12edefa3a1dd9  programs/l180_make_plan.py

@@ -1,0 +1,153 @@
+{
+ "statements": [
+  {
+   "child": 539,
+   "parent": 494,
+   "stated_border": 45,
+   "comment": "# the n = 494 certificate plus a border of 45 axis-aligned squares",
+   "parent_squares_all_in_child_unchanged": true,
+   "extra_squares": 45,
+   "extra_all_axis_aligned": true,
+   "side_is_parent_plus_1": true,
+   "parent_order_preserved_as_prefix": true,
+   "extra_in_column_x_gt_parent_side": 22,
+   "extra_in_row_y_gt_parent_side": 23,
+   "extra_x_values": [
+    "116182994321241/5000000000000"
+   ],
+   "extra_y_values": [
+    "116182994321241/5000000000000"
+   ],
+   "parent_side_floor": 22,
+   "l_border_capacity_floor(S)+floor(S+1)": 45,
+   "as_stated": true
+  },
+  {
+   "child": 590,
+   "parent": 543,
+   "stated_border": 47,
+   "comment": "# the n = 543 certificate plus a border of 47 axis-aligned squares",
+   "parent_squares_all_in_child_unchanged": true,
+   "extra_squares": 47,
+   "extra_all_axis_aligned": true,
+   "side_is_parent_plus_1": true,
+   "parent_order_preserved_as_prefix": true,
+   "extra_in_column_x_gt_parent_side": 23,
+   "extra_in_row_y_gt_parent_side": 24,
+   "extra_x_values": [
+    "243024287169329998040674496427696418242519321666666032219/10000000000000000000000000000000000000000000000000000000"
+   ],
+   "extra_y_values": [
+    "243024287169329998040674496427696418242519321666666032219/10000000000000000000000000000000000000000000000000000000"
+   ],
+   "parent_side_floor": 23,
+   "l_border_capacity_floor(S)+floor(S+1)": 47,
+   "as_stated": true
+  },
+  {
+   "child": 794,
+   "parent": 739,
+   "stated_border": 55,
+   "comment": "# the n = 739 certificate plus a border of 55 axis-aligned squares",
+   "parent_squares_all_in_child_unchanged": true,
+   "extra_squares": 55,
+   "extra_all_axis_aligned": true,
+   "side_is_parent_plus_1": true,
+   "parent_order_preserved_as_prefix": true,
+   "extra_in_column_x_gt_parent_side": 27,
+   "extra_in_row_y_gt_parent_side": 28,
+   "extra_x_values": [
+    "70478208984663/2500000000000"
+   ],
+   "extra_y_values": [
+    "70478208984663/2500000000000"
+   ],
+   "parent_side_floor": 27,
+   "l_border_capacity_floor(S)+floor(S+1)": 55,
+   "as_stated": true
+  },
+  {
+   "child": 851,
+   "parent": 794,
+   "stated_border": 57,
+   "comment": "# the n = 794 certificate plus a border of 57 axis-aligned squares",
+   "parent_squares_all_in_child_unchanged": true,
+   "extra_squares": 57,
+   "extra_all_axis_aligned": true,
+   "side_is_parent_plus_1": true,
+   "parent_order_preserved_as_prefix": true,
+   "extra_in_column_x_gt_parent_side": 28,
+   "extra_in_row_y_gt_parent_side": 29,
+   "extra_x_values": [
+    "72978208984663/2500000000000"
+   ],
+   "extra_y_values": [
+    "72978208984663/2500000000000"
+   ],
+   "parent_side_floor": 28,
+   "l_border_capacity_floor(S)+floor(S+1)": 57,
+   "as_stated": true
+  },
+  {
+   "child": 867,
+   "parent": 810,
+   "stated_border": 57,
+   "comment": "# the n = 810 certificate plus a border of 57 axis-aligned squares",
+   "parent_squares_all_in_child_unchanged": true,
+   "extra_squares": 57,
+   "extra_all_axis_aligned": true,
+   "side_is_parent_plus_1": true,
+   "parent_order_preserved_as_prefix": true,
+   "extra_in_column_x_gt_parent_side": 28,
+   "extra_in_row_y_gt_parent_side": 29,
+   "extra_x_values": [
+    "294079170469143/10000000000000"
+   ],
+   "extra_y_values": [
+    "294079170469143/10000000000000"
+   ],
+   "parent_side_floor": 28,
+   "l_border_capacity_floor(S)+floor(S+1)": 57,
+   "as_stated": true
+  },
+  {
+   "child": 910,
+   "parent": 851,
+   "stated_border": 59,
+   "comment": "# the n = 851 certificate plus a border of 59 axis-aligned squares",
+   "parent_squares_all_in_child_unchanged": true,
+   "extra_squares": 59,
+   "extra_all_axis_aligned": true,
+   "side_is_parent_plus_1": true,
+   "parent_order_preserved_as_prefix": true,
+   "extra_in_column_x_gt_parent_side": 29,
+   "extra_in_row_y_gt_parent_side": 30,
+   "extra_x_values": [
+    "75478208984663/2500000000000"
+   ],
+   "extra_y_values": [
+    "75478208984663/2500000000000"
+   ],
+   "parent_side_floor": 29,
+   "l_border_capacity_floor(S)+floor(S+1)": 59,
+   "as_stated": true
+  },
+  {
+   "child": 809,
+   "parent": 810,
+   "comment": "# the n = 810 certificate with one square removed",
+   "removed": [
+    [
+     810,
+     "28.40791704675995",
+     "23.40791704493822",
+     "-3697179402351257/488281250000000000000000000"
+    ]
+   ],
+   "added": 0,
+   "same_side": true,
+   "as_stated": true
+  }
+ ],
+ "result": "AS_STATED"
+}

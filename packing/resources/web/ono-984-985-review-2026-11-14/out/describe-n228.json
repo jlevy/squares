@@ -1,0 +1,219 @@
+{
+ "label": "n228",
+ "lane": "L163",
+ "program": "l163_describe.py",
+ "side_decimal_info_only": {
+  "string": "15.59604312092079164697\u2026",
+  "floor_at_its_places": "15.59604312092079164697",
+  "equals_floor": true,
+  "side_45_places": "15.596043120920791646977220704185059412512595861"
+ },
+ "tilts": {
+  "exactly_upright": 58,
+  "below_1e-9_deg_nonzero": 109,
+  "below_1e-3_deg": 170,
+  "below_0.5_deg": 173,
+  "beyond_0.5_deg": 55,
+  "beyond_0.5_positive": 19,
+  "beyond_0.5_negative": 36,
+  "beyond_0.5_range": [
+   -42.2135,
+   43.6761
+  ],
+  "beyond_0.5_abs_mean": 40.996,
+  "beyond_0.5_rounded_0.01_top": [
+   [
+    -41.7,
+    32
+   ],
+   [
+    41.63,
+    16
+   ],
+   [
+    43.68,
+    1
+   ],
+   [
+    41.6,
+    1
+   ],
+   [
+    41.79,
+    1
+   ],
+   [
+    -42.21,
+    1
+   ],
+   [
+    -41.88,
+    1
+   ],
+   [
+    -41.73,
+    1
+   ]
+  ],
+  "between_1e-3_and_0.5_deg": [
+   [
+    50,
+    -0.00142
+   ],
+   [
+    78,
+    -0.003215
+   ],
+   [
+    213,
+    -0.130908
+   ]
+  ],
+  "largest_t_digits": 16,
+  "distinct_t": 116
+ },
+ "pairs": {
+  "centres_closer_than_sqrt2": 525,
+  "below_1e-3": 594,
+  "below_1e-6": 515,
+  "below_1e-6_range_sci": [
+   "2.38935e-10",
+   "9.88133e-7"
+  ],
+  "below_1e-6_median_sci": "3.00399e-10",
+  "below_1e-6_distinct_6_figures": 126,
+  "below_1e-6_common_6_figures": [
+   [
+    "3.00399e-10",
+    105
+   ],
+   [
+    "3.00400e-10",
+    73
+   ],
+   [
+    "3.00398e-10",
+    35
+   ],
+   [
+    "3.00401e-10",
+    27
+   ],
+   [
+    "3.00397e-10",
+    14
+   ]
+  ],
+  "first_above_1e-6": [
+   "3.31227e-6",
+   15,
+   81
+  ],
+  "least_10": [
+   [
+    8,
+    21,
+    "2.38935e-10"
+   ],
+   [
+    9,
+    21,
+    "2.47302e-10"
+   ],
+   [
+    9,
+    22,
+    "2.93800e-10"
+   ],
+   [
+    5,
+    9,
+    "2.98791e-10"
+   ],
+   [
+    74,
+    92,
+    "2.98964e-10"
+   ],
+   [
+    74,
+    91,
+    "2.99202e-10"
+   ],
+   [
+    74,
+    82,
+    "2.99213e-10"
+   ],
+   [
+    106,
+    172,
+    "2.99472e-10"
+   ],
+   [
+    104,
+    105,
+    "2.99532e-10"
+   ],
+   [
+    13,
+    87,
+    "2.99769e-10"
+   ]
+  ]
+ },
+ "walls": {
+  "left": {
+   "contacts": [
+    22
+   ],
+   "positive_below_1e-12": 0,
+   "least_positive": [
+    "1.76259e-12",
+    23
+   ]
+  },
+  "bottom": {
+   "contacts": [
+    31,
+    34
+   ],
+   "positive_below_1e-12": 11,
+   "least_positive": [
+    "7.99277e-19",
+    1
+   ]
+  },
+  "right": {
+   "contacts": [
+    144
+   ],
+   "positive_below_1e-12": 7,
+   "least_positive": [
+    "5.71764e-15",
+    150
+   ]
+  },
+  "top": {
+   "contacts": [],
+   "positive_below_1e-12": 0,
+   "least_positive": [
+    "1.77285e-12",
+    114
+   ]
+  }
+ },
+ "extents": {
+  "x_extent_less_side_sci": "0",
+  "y_extent_less_side_sci": "-1.77285e-12",
+  "walls_touched": [
+   "left",
+   "bottom",
+   "right"
+  ],
+  "side_is_x_extent": true,
+  "side_is_y_extent": false
+ },
+ "check_least_margin": "2.38935e-10",
+ "cpu_seconds": 0.6
+}

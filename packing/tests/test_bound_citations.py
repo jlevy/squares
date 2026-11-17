@@ -942,9 +942,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # Couzo's certified packing took the case; the synthetic test above keeps that shape.
     # From 2026-10-05 its exact optimum, Couzo's packing improved by Daniel (T-098), and
     # since the house adoption of 11 October 2026 Daniel's record-hunt packing (T-141), as
-    # PingYou Ltd refined it since the adoption of 17 October 2026 (T-174).
+    # PingYou Ltd refined it since the adoption of 17 October 2026 (T-174), and since 11
+    # November 2026 Joost de Winter's pinwheel (T-292), a new arrangement.
     132: (
-        ("Daniel & PingYou Ltd, GitHub (confirmed T-174)", "external", "verified"),
+        ("de Winter 2026, GitHub (confirmed T-292)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",
@@ -1264,9 +1265,10 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     assert lines[11]["recent"]
     assert lines[11]["text"] == "Ahmed after Levy, Overbeck 2026, GitHub"
     assert lines[12]["recent"]
-    # squarepacker's re-weighting of Daniel's points since 5 October 2026 (T-095), after
-    # this project's (T-079), which named the project; the credit names Levy for Route B.
-    assert lines[12]["text"] == "Ryu after Daniel, Levy 2026, GitHub"
+    # unnir's extension of Daniel's points since 8 November 2026 (T-274), after
+    # squarepacker's re-weighting of them (T-095, from 5 October) and this project's
+    # (T-079); the credit names the lineage the source names.
+    assert lines[12]["text"] == "unnir after Daniel, Ryu, Levy 2026, GitHub"
     assert lines[18]["recent"]
     assert lines[18]["text"] == "Hosono after Tokoharu, Levy et al. 2026, GitHub"
     assert all(line["recent"] for line in lines.values() if line and line["basis"] == "project")

@@ -1,0 +1,38 @@
+{
+  "build": {
+    "profile": "release",
+    "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+    "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+    "target": "x86_64-unknown-linux-gnu"
+  },
+  "direction_cpu_seconds": 10.011115417,
+  "direction_seconds": 10.178326143,
+  "directions": 2,
+  "fault_injected_at_box": null,
+  "kind": "sqverify-fast-summary/v1",
+  "nodes": 454775,
+  "premises": {
+    "B": "24872661/24875000",
+    "D": "1/12000",
+    "L": "2493/250",
+    "angle_count": 4972,
+    "centre_domain": "per-bin",
+    "expanded_points": 0,
+    "expanded_rectangles": 6720,
+    "expanded_segments": 0,
+    "format": "M",
+    "input_sha256": "f59d4c9562d7246f41c8c389a5bc118da9cf268a794e6416d146a195fb03360c",
+    "mass_below_n": "1/100000",
+    "mass_exact": "9399999/100000",
+    "n": 94,
+    "net_last_tangent": "1657/4000",
+    "net_origin": "proof_net",
+    "shrink_bound": "99498934887/99500000000",
+    "source_rectangles": 853
+  },
+  "refused_directions": [],
+  "status": "PARTIAL",
+  "threads": 2,
+  "threshold": "1",
+  "wall_seconds": 8.951800452
+}

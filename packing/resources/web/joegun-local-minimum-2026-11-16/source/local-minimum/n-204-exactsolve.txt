@@ -1,0 +1,5 @@
+== n-204-input.txt: n = 204, S_in = 14.80264684310662
+  contacts: 774 candidate incidences (|gap| < 1e-07), 30 vertex-vertex touches set aside; jam-LP dual residual 5.1e-09; load-bearing set 763 contacts on 179 squares; free squares (rattlers / force-free): [0, 1, 48, 51, 52, 55, 56, 58, 62, 63, 67, 71, 90, 100, 101, 110, 113, 121, 123, 130, 155, 166, 167, 179, 184]
+  projection onto 455 independent of 774 contact equations: max |g| 5.2e-08 -> 1.2e-72 (6 steps)
+  KKT: |A| = 774 contacts, independent |B| = 455, variables 538 (82 frozen flat), system 911x911, cond ~ 1.6e+08
+  !! KKT solve failed: Newton diverging: residual history [6.127396771892949e-09, 3.036309027997567e-08, 1.5060876633318202e-07, 6.2399349698024e-07, 2.4626135498227755e-06, 9.41578433767781e-06, 3.4466061862410456e-05, 0.0

@@ -1,10 +1,12 @@
-"""The corpus's non-expressible residue is axis-aligned except for the radical n51 strip.
+"""The corpus's non-expressible residue is axis-aligned except for two tilted packings.
 
 `BC-024` asked which chunk shapes, sizes, tilted counts and wall seatings recur across the
 imported `n <= 100` corpus, and what the residue has in common. The radical n51 strip
-has two tilted components the grammar does not express; the remaining residue consists
-of axis-aligned polyominoes. Every other tilted component is a singleton, a bar, an L
-or a rectangle, all expressible.
+has two tilted components the grammar does not express, and since 15 November 2026
+jazivxt's packing at 90 (T-303, adopted in place of the 10 x 10 grid) has one, of seven
+squares at 67.09 degrees (-22.91 degrees modulo a quarter turn, F7's -22.914477),
+interior; the remaining residue consists of axis-aligned polyominoes. Every other tilted
+component is a singleton, a bar, an L or a rectangle, all expressible.
 
 These assertions exist because that is a load-bearing claim for the partition-instrument
 design, and because it is exactly the kind of clean result that should be pinned before it
@@ -35,7 +37,7 @@ def _record() -> dict:
     return json.loads(RECORD.read_text(encoding="utf-8"))
 
 
-def test_only_the_new_radical_strip_has_tilted_unexpressed_components() -> None:
+def test_only_the_radical_strip_has_tilted_unexpressed_components() -> None:
     """The finding, stated as sharply as the data allows.
 
     Checked from the census directly rather than from the taxonomy record, so this fails if
@@ -49,13 +51,17 @@ def test_only_the_new_radical_strip_has_tilted_unexpressed_components() -> None:
         and is_tilted(str(component["angle_degrees"]))
     ]
 
+    # n = 90 joined on 15 November 2026: jazivxt's packing (T-303) held one tilted interior
+    # component of seven squares the grammar does not express (think-i8y9). It left on 16
+    # November with Joost de Winter's improvement of that packing (T-304, think-32cl), whose
+    # residue at 90 is two corner blocks seated on two walls each.
     assert tilted_and_unexpressed == [(51, "45"), (51, "45")]
     angles = {
         str(component["angle_degrees"])
         for entry in band()
-        if entry["n"] != 51
         for component in entry["components"]
         if component["shape"] == "other-polyomino"
+        if not is_tilted(str(component["angle_degrees"]))
     }
     # Axis-aligned to within 1e-9 degrees. The one residual is n = 68's corner block, in
     # Francisco Couzo's numerically optimized pose since 2026-09-29, at 3.2e-10 degrees.
@@ -95,14 +101,18 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
     three. The radical n51 strip adds two tilted interior components. T-174's adopted
     witnesses at 68, 84 and 86 have two, three and two corner blocks respectively; all
     touch two walls, including both of 68's, which end the former one-wall exception.
+    jazivxt's packing at 90 (T-303, 15 November 2026) added two corner blocks touching two
+    walls and one tilted interior component touching none; Joost de Winter's improvement of
+    it (T-304, 16 November 2026) has two corner blocks touching two walls, of 23 and 11
+    squares, and no interior component.
     """
     residue = _record()["residue"]
 
-    assert residue["walls_touched"] == {"0": 2, "2": 70, "4": 44}
+    assert residue["walls_touched"] == {"0": 2, "2": 72, "4": 44}
     assert residue["by_source"] == {
         "exact-grid": 44,
         "kingbird-derived-facts": 56,
-        "packet-derived-facts": 16,
+        "packet-derived-facts": 18,
     }
     assert residue["tilted"] == 2
     assert residue["whole_record"] == 44
@@ -128,6 +138,8 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
                 (86, 37, 2),
                 (88, 16, 2),
                 (88, 25, 2),
+                (90, 11, 2),
+                (90, 23, 2),
             }, item
         else:
             assert item["walls_touched"] == 2, item
@@ -143,14 +155,15 @@ def test_the_strata_are_not_three_samples_of_one_population() -> None:
     """
     strata = _record()["strata"]
 
-    assert strata["exact-grid"]["records"] == 64
+    # n = 90 left the grid for jazivxt's packet (T-303) on 15 November 2026.
+    assert strata["exact-grid"]["records"] == 63
     assert strata["exact-grid"]["tilted_components"] == 0
-    assert strata["exact-grid"]["components"] == 64  # one connected component per record
+    assert strata["exact-grid"]["components"] == 63  # one connected component per record
     assert strata["kingbird-derived-facts"]["tilted_components"] > 0
     assert "unitsquare-rendering" not in strata
     # n = 29 moved from the catalogue to PR #622's packet (T-195) on 17 October 2026.
     assert strata["kingbird-derived-facts"]["records"] == 29
-    assert strata["packet-derived-facts"]["records"] == 7
+    assert strata["packet-derived-facts"]["records"] == 8
     assert strata["packet-derived-facts"]["tilted_components"] > 0
 
 

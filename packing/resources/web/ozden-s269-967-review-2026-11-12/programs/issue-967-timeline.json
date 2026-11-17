@@ -1,0 +1,37 @@
+{
+  "fetched": "2026-11-12T04:28Z",
+  "issue": 967,
+  "updated_at": "2026-11-12T03:55:16Z",
+  "body_unchanged_since_03_56Z_fetch": true,
+  "graphql_edit_history": "refused from this session; not fetched",
+  "timeline": [
+    {
+      "event": "cross-referenced",
+      "created_at": "2026-11-12T03:00:21Z",
+      "actor": "kenaznia-doga",
+      "label": null,
+      "cross_referenced_from": 962
+    },
+    {
+      "event": "cross-referenced",
+      "created_at": "2026-11-12T03:00:22Z",
+      "actor": "kenaznia-doga",
+      "label": null,
+      "cross_referenced_from": 947
+    },
+    {
+      "event": "cross-referenced",
+      "created_at": "2026-11-12T03:00:23Z",
+      "actor": "kenaznia-doga",
+      "label": null,
+      "cross_referenced_from": 966
+    },
+    {
+      "event": "labeled",
+      "created_at": "2026-11-12T03:55:16Z",
+      "actor": "jlevy",
+      "label": "intake",
+      "cross_referenced_from": null
+    }
+  ]
+}

@@ -131,6 +131,18 @@ UNKNOWN_FOUR_SHARD_OWNERS: Final = {
     # all below the unchanged 10% guard, without assigning cost weights.
     "packing/tests/test_changelog.py": 1,
     "packing/tests/test_release_impact.py": 1,
+    # 2026-11-08 real-tree check: 895 files / 76 unknown, shard 4 at 22/211 (10.4%) with
+    # the new #924 packet test. Move it to shard 3, at 17/238: 18/19/18/21 unknown files,
+    # all within the unchanged 10% guard, without assigning cost weights.
+    "packing/tests/test_s12_unnir_certificate.py": 3,
+    # 2026-11-11 hosted check: 901 files / 80 unknown, shard 4 at 22/211 (10.4%) with the
+    # new L81 packet test. Move it to shard 3, at 18/240: 19/21/19/21 unknown files, all
+    # within the unchanged 10% guard, without assigning cost weights.
+    "packing/tests/test_upper_bound_reports_l81_1111.py": 3,
+    # 2026-11-11 hosted check: 905 files / 84 unknown, shard 1 at 21/209 (10.05%) with the
+    # new L100 and L104 packet tests. Move L104's to shard 2, at 21/243: 20/22/21/21 unknown
+    # files, all within the unchanged 10% guard, without assigning cost weights.
+    "packing/tests/test_upper_bound_reports_l104_1111.py": 2,
 }
 #: What a test file is called where no pytest configuration says otherwise.
 _PYTHON_FILES: Final = ("test_*.py",)

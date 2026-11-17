@@ -1,0 +1,653 @@
+{
+  "credit_name": "Kaelan Yim",
+  "snapshot_utc": "2026-11-09T09:48:29.456844+00:00",
+  "certificate_format": "n L header, followed by exactly n rows x y t; rational t=tan(theta/2). Unit edge length exactly1.",
+  "new_certificates": 14,
+  "certificates": [
+    {
+      "n": 130,
+      "file": "n130.cert",
+      "text_copy": "n130.cert.txt",
+      "sha256": "3056cb4dd92927f671851b9866976a061fab3635daed5d3f676fffb570e1f565",
+      "side_exact": "12971572518503349393832850076636691474305902182478289654941561/1089825507438012248624046765161000000000000000000000000000000",
+      "side_decimal": "11.902430645982246204203037529443582414185848054084799798286852632919100179318129",
+      "pairs_checked": 8385,
+      "credit": "Kaelan Yim — exact enclosing-box operation only. Packing credit remains Mishapolk after Francisco Couzo and PR574 contributors; not a new arrangement.",
+      "lineage_statements": [
+        "Mishapolk re-solve of Couzo843, from PR574 Nate Chaoweeraprasit/Siddharth Gupta/PingYou Ltd. Not independent family from those ancestors. Unchanged Griffin Casson c37 SLP MIT."
+      ],
+      "source_issue": "https://github.com/jlevy/squares/issues/846",
+      "source_repository": "https://github.com/Mishapolk/square-packing-records",
+      "source_commit": "52aa2672c74c91931686d60a49bdf97ec798291c",
+      "source_sha256": "1e00cd74ccf3495b69d6d84f9c130432b63cebd447209d0dbeaf17077a669be7",
+      "source_exact_side": "5951215322991132879306459820277/500000000000000000000000000000",
+      "exact_side_improvement_decimal": "1.9554409882111110417585814151945915200201713147367080899820681871384030119667357E-14",
+      "operation": {
+        "translation_x": "-4969999999999999/500000000000000000000000000000",
+        "translation_y": "-9889999999999997/1000000000000000000000000000000",
+        "source_side": "5951215322991132879306459820277/500000000000000000000000000000",
+        "span_x": "2380486129196449163722583928111/200000000000000000000000000000",
+        "span_y": "12971572518503349393832850076634511823291026157981041561411239/1089825507438012248624046765161000000000000000000000000000000",
+        "closed_envelope_side": "12971572518503349393832850076634511823291026157981041561411239/1089825507438012248624046765161000000000000000000000000000000",
+        "strict_wall_padding": "1/1000000000000000000000000000000",
+        "new_side": "12971572518503349393832850076636691474305902182478289654941561/1089825507438012248624046765161000000000000000000000000000000",
+        "orientations_and_relative_centers_unchanged_exactly": true
+      },
+      "relative_centers_and_orientations_unchanged": true,
+      "classification": "Archival exact envelope-only certificate variant; no numerical search or new-packing gain",
+      "record_claim": "No registry adoption, new-packing, current-record or Atlas-credit claim. Same-12-place padding-only restatement policy may apply.",
+      "eligibility_policy_source": "https://github.com/jlevy/squares/issues/846#issuecomment-6543941452",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five exact routes accepted; some share code/ancestry. Initial closed-envelope touching variant was accepted locally but rejected by a public checker requiring strict wall clearance; adding1e-30 translation padding and2e-30 to the side passed all five routes. No optimizer retry.",
+      "cohort_audit_status": "Independent exact-envelope and numerical-cohort review completed; unchanged relative geometry confirmed. Archival only, no credit recommendation.",
+      "licensing": "Pinned source MIT publisher declaration; verbatim copyright and permission notice included in n130-source-LICENSE.txt; no independent ownership audit",
+      "license_file": "n130-source-LICENSE.txt"
+    },
+    {
+      "n": 299,
+      "file": "n299.cert",
+      "text_copy": "n299.cert.txt",
+      "sha256": "7e4964375418fdab9a78d12b2756ffca8c1386985468be7b0be2fbd030b9fd75",
+      "side_exact": "49520681639553253091959720304954604907070758384704238109808721459262431205131612278389503816375037/2781903786522383536263046420444731316926020496322871983755429706465280000000000000000000000000000",
+      "side_decimal": "17.801004434254111708002789788660855749553743592332097443775120017194927003806730",
+      "pairs_checked": 44551,
+      "credit": "Kaelan Yim — AI-assisted computational refinement, after Doğa Özden, Evan Daniel and Chris Deotte",
+      "lineage_statements": [
+        "Doğa Özden after Evan Daniel after Chris Deotte; fault-line DP from Deotte public Kaggle s334; Daniel refill/exact-descent T248/T258; Özden T263 and pending929; Squares Project regularized atlas input. Public search uses Evan Daniel ALM+SLP bb4cc78e MIT. This cohort uses Griffcass SLP c37 unchanged MIT; results inherit source CC BY 4.0; AI assistance throughout; prospective credit Kaelan Yim after these contributors."
+      ],
+      "source_issue": "https://github.com/jlevy/squares/issues/929",
+      "source_repository": "https://github.com/kenaznia-doga/s299-upper-bound-17801004",
+      "source_commit": "a042eab017caeb07ca5f79afcdc5fbb89103cda2",
+      "source_sha256": "dfb0ccf71474a276a52ce768cc38e799d30ff6373a22b8ae318f58f278025d9d",
+      "source_exact_side": "7120401773702096342754592967281230757016830483803152851632588133933118281289482616136465872615357870735152930548574683963962811760970665605528283832840143529598339/399999999999998813176108643858924605486367171198872507435001091151754396322514904585379408344301256195880070191908496990382957782839857114267648100000000000000000",
+      "exact_side_improvement_decimal": "1.1819655270744065176893544462564038330024478114650744465456852790917702428794702E-12",
+      "classification": "Microscopic continuation refinement of the source arrangement; neither broader kick beats control; not a material or new-construction claim",
+      "record_claim": "Strict exact side improvement over the fresh pending coordinate-backed issue929 witness; no global optimality or universal-record claim. Historical lower unwitnessed side reports remain separate.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact routes accepted, sharing some code/ancestry; all299 squares and44551 pairs. Independent cohort review also completed; it did not rerun exact checkers, reproduce repair transforms or review auxiliary geometry.",
+      "cohort_audit_status": "Independent full-cohort numerical review completed;408raw+repairedlayouts and source/RNG/native/ranking verified. Exact certificate checks are separate.",
+      "licensing": "Upstream issue929 states CC BY4.0 for witness/data/text; MIT code. Inherited lineage must be retained."
+    },
+    {
+      "n": 303,
+      "file": "n303.cert",
+      "sha256": "14dbc28d7929d2008f2e76e74b078fafee2ec57b8d7603eb9a5ac306caf39b29",
+      "side_exact": "1159243312382833490764400031561352875121611202900949162484560193631809228369410184762453/64755723279645431239980480646475572327964543123998048064000000000000000000000000000000",
+      "side_decimal": "17.901789273153199285663398339169101416325678452911809445496271024013322889185489",
+      "pairs_checked": 45753,
+      "credit": "Kaelan Yim — AI-assisted microscopic computational refinement, after Doğa Özden, Evan Daniel, Chris Deotte and Griffin Casson",
+      "lineage_statements": [
+        "No-strain control refinement of Doğa Özden issue930, itself after Evan Daniel issue914 and Chris Deotte fault-line construction; unchanged Griffin Casson c37 SLP used for matched recovery. Not an independent construction."
+      ],
+      "record_claim": "Exact improvement over pinned issue930 coordinates; no global-best, optimality, maintainer acceptance or guaranteed Atlas credit claim",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact routes accepted all303 squares/all45753 pairs; routes share some ancestry/code. Feasibility is independent of optimizer completion and the disclosed preflight sequencing defect.",
+      "cohort_audit_status": "Independent v32 cohort/admission review completed: 890 scientific paths/272 unique plus 7 auxiliary/3 unique; all raw/projected/repaired geometry, 275 matching nonoptimizing repair-transform replays, 262 native inputs/primals, source axes/omission proofs, ranking/custody verified. Admission remains NONCOMPLIANT: pre-science pair-Jacobian coverage was zero. Five exact certificate checks are separate.",
+      "text_copy": "n303.cert.txt",
+      "source_issue": "https://github.com/jlevy/squares/issues/930",
+      "source_repository": "https://github.com/kenaznia-doga/s303-upper-bound",
+      "source_commit": "b43ca090fc2ff5e750fecc71d8514298fe164514",
+      "source_sha256": "9cbeb7a8198ef9f3316f9e4dd0a998b879133a2e31e12c82c3fbe9882e0f2f3e",
+      "source_exact_side": "447544731828911039747777636237071350718715813575203650644682965517518811603884689802495778772042992023292265444653372109230293195215370185029543202786115810159713/24999999999999931932159172221288855294099116562124920847557711161993959344477155085573888905125695641180191552412077693918175854406830032031612900000000000000000",
+      "exact_side_improvement_decimal": "3.2910456934182164069747701743215455523750257883238419809617495817253175132420894E-12",
+      "classification": "Microscopic no-strain control refinement; NOT aspect-strain utility, material gain or structural construction",
+      "protocol_exception": "Pre-science mixed-rotation Jacobian fixture retained zero pairs and tested only walls. Post-science all938 retained pairs/all910 columns passed; this does not cure the sequencing violation. Not a fully protocol-compliant pilot.",
+      "relative_geometry": {
+        "relative_centers_not_preserved_exactly": true,
+        "nonreference_relative_centers_changed": 302,
+        "max_relative_center_change_exact": "5198539085638920178498326083636071457021762161538222580554033914453271684789488649595305690942514777/1363446491520360233869547295014060390222311345383410189487771574107027532199645546000000000000000000000000000000",
+        "max_relative_center_change_float": 3.8127928877077544e-12,
+        "operation": "Rationalized no-strain control refinement; not common-translation/envelope-only"
+      },
+      "licensing": "Source certificates/data/text CC BY4.0; code MIT, per pinned publisher declaration. Attribution and change notice retained; not independent ownership audit.",
+      "license_file": "n303-source-LICENSE.md",
+      "submitted": false,
+      "registry_adopted": false,
+      "material_gain_threshold": "1/1000000",
+      "material_gain_threshold_met": false,
+      "prior_certificate_commit": "c10e0944b12b66bbc8ee1e121967ff289c2bace6",
+      "prior_certificate_sha256": "b8318f81e2199cc9e162f5072cd37c0528d129d496c67cd6188e86b4a430ab9b"
+    },
+    {
+      "n": 553,
+      "file": "n553.cert",
+      "sha256": "78a92b71ab396d0a5d835693045809527390fc415a46b7fda765c23fc4415436",
+      "side_exact": "607775069974622337055447579653461349034263804181650638828652853573964289181844595191249/25356560024265810879529729142535656002426581087952972914000000000000000000000000000000",
+      "side_decimal": "23.969145238667689613652520326341770232683839221109743137036552586793722511072323",
+      "pairs_checked": 152628,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n553 non303-basin-refine-v1 refinement of Couzo / Lavrentev]"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    },
+    {
+      "n": 599,
+      "file": "n599.cert",
+      "sha256": "98cf7076c90a22676f62a96d19f4db412ec7ef9624105fc85a3f0adb5f588c44",
+      "side_exact": "247397946552985445057593390432140536753143829724259163663431893138806590844279201570273/9921125584500774055204756275992877303158938661153843140000000000000000000000000000000",
+      "side_decimal": "24.936479681245198418313381593317641800544881657992278845648169689302154096753452",
+      "pairs_checked": 179101,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n599 n599 direct-source checkpoint refinement refinement of Couzo / Lavrentev]"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    },
+    {
+      "n": 600,
+      "file": "n600.cert",
+      "sha256": "10b422dde0d0d31f55c92c2d96c5e7cfc4cbbebbcec413cc5e357a3067ee664d",
+      "side_exact": "898558652382384886554390737459350320275949893348420081716458451761623567508461865690979/36012801142848449724253470723601280114284844972425347072000000000000000000000000000000",
+      "side_decimal": "24.951090275320720590295908761284277465381325059970025956271757061020792866659779",
+      "pairs_checked": 179700,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n600 n600 matched tiny refinement of Couzo / Lavrentev]",
+        "Construction credits of the starting packing are retained.",
+        "Francisco Couzo",
+        "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo; seed/construction: franciscouzo",
+        "Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11",
+        "franciscouzo",
+        "this repository; source credit in certificate metadata"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    },
+    {
+      "n": 601,
+      "file": "n601.cert",
+      "sha256": "d8c55d4f7b9e920c6988c4537a0eb80b07186e22191056eadc6a6c5b40d856cf",
+      "side_exact": "1964964125304217000000000000001964964125304217/78730610490131000000000000000000000000000000",
+      "side_decimal": "24.958070476927499470320981345299776749756915878905206797665000779920992644875277",
+      "pairs_checked": 180300,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n601 non303-remote-v4 refinement of Couzo / Lavrentev]"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    },
+    {
+      "n": 602,
+      "file": "n602.cert",
+      "sha256": "8710f13abeda199702e929684704e0226bcec15c3325f020600addf9bebdc3f2",
+      "side_exact": "4049108824262356425055970255900075024019042732929186677097480184331036364534919972291/162085599809144631924403340016208559980914463192440334000000000000000000000000000000",
+      "side_decimal": "24.981298949630142536376749916225433626256695174921820697324047839239012145043708",
+      "pairs_checked": 180901,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n602 n602 direct-source refinement of Couzo / Lavrentev]",
+        "Construction credits of the starting packing are retained.",
+        "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo; retained seed/construction credit: Joost de Winter",
+        "Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11",
+        "franciscouzo",
+        "franciscouzo; earlier seed and construction credits retained in provenance"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed; exact certificate feasibility separately checked"
+    },
+    {
+      "n": 604,
+      "file": "n604.cert",
+      "sha256": "ce7ea7da25d1f955f4ae26163c56c19952fb0446d4280b5a39503272d17d2175",
+      "side_exact": "67721539209973384114510101885152920403362544089524811752885085198864152570705410301651/2709308009448803636345647913495589745913645048765947287500000000000000000000000000000",
+      "side_decimal": "24.995880488225117876486312730239719753312131011284214548677844056947057868198871",
+      "pairs_checked": 182106,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n604 n604 tiny baseline refinement of Couzo / alexchilton]",
+        "Construction credits of the starting packing are retained.",
+        "Earlier construction credits retained in the notebook.",
+        "Francisco Couzo (square-packing live search); refines the packing of alexchilton, Kaggle notebook \"fault-line-dp-basin-hopping-lb-22-3747\" run 361412241; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "alexchilton, Kaggle notebook \"fault-line-dp-basin-hopping-lb-22-3747\" run 361412241; earlier construction credits in the notebook",
+        "alexchilton, Kaggle notebook \"fault-line-dp-basin-hopping-lb-22-3747\" run 361412241; earlier construction credits in the notebook; earlier seed and construction credits retained in provenance",
+        "integer square grid"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed; exact certificate feasibility separately checked"
+    },
+    {
+      "n": 645,
+      "file": "n645.cert",
+      "sha256": "b7a129cf0f151c5e3cee2154ea270126d14c53355c67ba4116b7b21f3329c296",
+      "side_exact": "24093806619138340900475561824158980847600133395084947802824134887040980995054184472241/930931869328269677215895332067857800948827381955105600000000000000000000000000000000",
+      "side_decimal": "25.881385537400983341148029038314616901750448895424106181339768975385082383517878",
+      "pairs_checked": 207690,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n645 n645 matched small-kick refinement of Couzo / Lavrentev]",
+        "Construction credits of the starting packing are retained.",
+        "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo; earlier seed and construction credits retained in provenance",
+        "Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11",
+        "franciscouzo",
+        "franciscouzo; earlier seed and construction credits retained in provenance"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    },
+    {
+      "n": 647,
+      "file": "n647.cert",
+      "sha256": "86ef4d3db4179e9bd23359bb39c0fcb9b02a32111f28fa96c3861d0ca2ce24b9",
+      "side_exact": "817664229623251606050434336654106558104740326329466247133653288893875117074723415812797/31570933694108162010640329683157093369410816201064032968000000000000000000000000000000",
+      "side_decimal": "25.899272968789197591097615908295044104709895085109777299067609488471917357393875",
+      "pairs_checked": 208981,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n647 n647 matched large-kick refinement of Couzo / Lavrentev]",
+        "Construction credits of the starting packing are retained.",
+        "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo; earlier seed and construction credits retained in provenance",
+        "Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11",
+        "this repository; source credit in certificate metadata"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    },
+    {
+      "n": 648,
+      "file": "n648.cert",
+      "sha256": "311438621acf913e48e73c05b5ae09ce9e66b5f322ae1e28eb5c6f76a5512eb5",
+      "side_exact": "1646684897044236144519404074731194624456440515062373084991729547939559396278917853680917/63556964031610367436252889366355696403161036743625288936000000000000000000000000000000",
+      "side_decimal": "25.908803576980948045556945333636399038987617001578906746323705873591314283669753",
+      "pairs_checked": 209628,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n648 n648 direct-source refinement of Couzo / Lavrentev]",
+        "Construction credits of the starting packing are retained.",
+        "Francisco Couzo",
+        "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo; earlier seed and construction credits retained in provenance",
+        "Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11",
+        "franciscouzo",
+        "franciscouzo; earlier seed and construction credits retained in provenance"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    },
+    {
+      "n": 699,
+      "file": "n699.cert",
+      "sha256": "36bc1c18a29a30c72ae073e88c17c7934707431327d1ee6baccac8f41b2a2dfb",
+      "side_exact": "463444108903748149602545905601733440575147260077565762818601269996466243511927963216913/17223724320350528810762165125722372432035052881076216512400000000000000000000000000000",
+      "side_decimal": "26.907311118314297417611919345943807778755466956845487526762601591182517107441723",
+      "pairs_checked": 243951,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n699 n699 direct-source refinement of Couzo / Lavrentev]",
+        "Construction credits of the starting packing are retained.",
+        "Francisco Couzo",
+        "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11",
+        "franciscouzo",
+        "franciscouzo; earlier seed and construction credits retained in provenance"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    },
+    {
+      "n": 700,
+      "file": "n700.cert",
+      "sha256": "6ef241dda3ecb79e39aa5abf8f0ecada1c7dd1f4547d663de846ec61ca9b1121",
+      "side_exact": "741569470970925307033971998246097513425482077742578713987245355943954511152435544741989/27559405232700754810876973232755940523270075481087697323000000000000000000000000000000",
+      "side_decimal": "26.908036102717202909618352130529135128776356149243765216145002253420132503932408",
+      "pairs_checked": 244650,
+      "credit": "Kaelan Yim — AI-assisted computational refinement; inherited construction and method credits retained below",
+      "lineage_statements": [
+        "[Kaelan Yim / cygnet n700 n700 matched small-kick refinement of Couzo / Lavrentev]",
+        "Construction credits of the starting packing are retained.",
+        "Francisco Couzo (Kaggle push search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo (square-packing live search); refines the packing of Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11; earlier construction credits retained; earlier seed and construction credits retained in provenance",
+        "Francisco Couzo; earlier seed and construction credits retained in provenance",
+        "Vladislav Lavrentev (lightningv08), Kaggle \"CUDA Packing Search\" v11"
+      ],
+      "record_claim": "No current public/global record or optimality claim. Submission freshness must be checked.",
+      "checks": [
+        {
+          "checker": "exact_certificate.verify_certificate",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert.py",
+          "accepted": true
+        },
+        {
+          "checker": "verify_cert2.py",
+          "accepted": true
+        },
+        {
+          "checker": "registry-main-report.json",
+          "accepted": true
+        },
+        {
+          "checker": "registry-independent-report.json",
+          "accepted": true
+        }
+      ],
+      "registry_revision": "f30d6405dcf36f9b9e3e031f855cd055fb44332c",
+      "verification_scope": "Five local exact-check routes accepted; routes share some code/ancestry. Exact feasibility is separate from optimizer convergence and current-record status.",
+      "cohort_audit_status": "Independent cohort review completed"
+    }
+  ],
+  "previous_n260_untouched": true
+}

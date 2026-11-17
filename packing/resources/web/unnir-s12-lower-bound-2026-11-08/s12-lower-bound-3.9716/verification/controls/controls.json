@@ -1,0 +1,30 @@
+{
+  "scope": "negative controls only; bin 39531 for weight control",
+  "certificateSha256": "833b76a179a420a40775cc76305ec9ffb7f6ea27472e587958c234c4c4712cbd",
+  "results": [
+    {
+      "control": "double-denominator",
+      "checker": "rust",
+      "exitCode": 4,
+      "minimumExact": "1/2",
+      "partial": true
+    },
+    {
+      "control": "double-denominator",
+      "checker": "cpp",
+      "exitCode": 1,
+      "minimumExact": "1/2",
+      "partial": true
+    },
+    {
+      "control": "truncated",
+      "checker": "rust",
+      "exitCode": 2
+    },
+    {
+      "control": "truncated",
+      "checker": "cpp",
+      "exitCode": 2
+    }
+  ]
+}

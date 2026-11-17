@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/985",
+  "source": "https://github.com/RobertoOno/squares-in-square",
+  "revision": "b5636fd6694d2cc7aa5811ae33f441268b81b714",
+  "read_on": "2026-11-14",
+  "read_at_main": "473577f42a42c4a454190944e13d0a3ef8fa4c1d",
+  "horizon": 324,
+  "results": [
+    {"n": 147, "certificate": "runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json", "format": "ono-json", "requested": true, "replayed": true, "offered_side": "12.651043556588", "printed_in": "https://github.com/jlevy/squares/issues/985", "exact_side": "11864804754111373311404579236459661610708446554466063961080880819368560222888047487421179/937851861867402376107974997050677704744266630455345333352649906089505616661381854003200", "ceiling": "12.6510435565876945", "first_committed": "2026-11-11T22:15:40Z", "grid_side": "13", "case": {"source_key": "[Kingbird]", "holders": "the Kingbird catalogue, verified by T-155's exact ceiling", "result": "T-155", "reported_value": "12.65685424949238", "verified_value": "12.65685424949239", "evidence": ["E-regularized-bounds-2026-10-12-exact-decision"], "reported_rounding": "unstated", "exact_side": "316421356237309504880168872421/25000000000000000000000000000", "relation": "below", "difference": "40602454240614250686990460679499380644443407373376398220749644336231103635680908636886234728855915816721/6987540884818154395431093849619311874689658213074098030870034591030371313254400000000000000000000000000000", "reported_relation": "below"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

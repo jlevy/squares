@@ -1,0 +1,51 @@
+# What `python -m devtools.intake_ledger gather` reads: the upper bound at n <= 324 that lane L110
+# of the intake pass (think-3guf) takes in on 11 November 2026, Doğa Özden's #960 at 237, posted by
+# his AI agent's account kenaznia-doga 13 seconds after the one commit of the repository that holds
+# its certificate. GitHub's activity log was not read, so no push time is recorded; the issue dates
+# its report, and nothing else reached this count between the commit and the issue. The start is
+# frozen at main b5b12c206 (#956's merge): T-190 at 237 (Francisco Couzo's certificate of Nate
+# Chaoweeraprasit's packing, improved by Couzo and Mishapolk), in both lanes, with no register bound
+# pending adoption below it. The issue names the record T-189, Couzo's issue-607 certificate, 2.40e-11
+# above T-190, but prints T-190's side; the ledger compares with the case record. The claim's exact
+# side is its certificate's header, read by the packet's claim record (acquisition/claims.json),
+# which the lane wrote from main b5b12c206; the issue prints that side rounded up at 12 places, and
+# the claim record's admission holds the print to it. The Kaggle per-puzzle packing the issue
+# quotes, 15.902603638274 (kirilltym), is above the claim. The side-only leaderboard entry it quotes,
+# 15.893805585209 (team elegans, 5 November), is above the claim by 4.64e-9, is unpublished and
+# states no packing, so it is no report and context only.
+format: intake-ledger-sources-v1
+read_at_main: b5b12c20646710a606bc86516f6c93168d00457e
+read_on: '2026-11-11'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: l110
+  branch: claude/bold-ritchie-xo28us-l110
+  commit: b5b12c20646710a606bc86516f6c93168d00457e
+  note: The packet's claim record, written on the lane's branch from main b5b12c206 and read here by path.
+reports:
+- report: '#960'
+  issue: 960
+  holders: Doğa Özden
+  bead: think-my76
+  lanes:
+  - lane: l110
+    packet: ozden-s237-upper-bound-2026-11-11
+    record: claims.json
+    counts: [237]
+  claims:
+  - n: 237
+    measured:
+      against: T-190
+      finding: no symmetry of the box pairs it one to one with T-190's packing by nearest centres; the optimal assignment, under the best of the box's eight symmetries, moves every square beyond 1e-3, 111 beyond 1e-2 and 72 beyond 0.1 (largest 0.924884) and turns 154 squares by more than 1e-6 radians, by up to 43.77 degrees; aligned by box centres, 73 squares turn by more than a degree, as the issue says; 42 squares tilted beyond a degree, 42.19 to 44.46 degrees from upright, 38 turned one way and 4 the other, and one more at 0.83 degrees, against T-190's 49, 1.14 to 43.62 degrees; T-189's packing, the house witness and its regularized view measure the same; a new arrangement relative to T-190's packing, not a further arrangement of it (F10 of the 11 November review); the issue's own counts (236 beyond 1e-3, 78 beyond 0.05, largest 1.202) hold with the house turned a half turn, set against the upper-right corner of the new box and paired by least summed move (F8); of the seed the issue states, the first copy of the 70 band matches, 19 of its 20 squares within 0.1 of a tilted square here after a 0.39-degree turn, and the second, shifted by (7, 7), lies more than 0.25 from every tilted square until turned by -1.20 degrees and shifted again; the two copies hold 40 tilted squares, not 42 (F9)
+      source: packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/identity.json
+  note: >-
+    The issue names 13c4b23, committed at 2026-11-11T21:37:37Z, 13 seconds before the issue. It says the packing
+    was found by a band-design search: two copies of the tilted squares of the registry's 70 (Ryan Xu, improved by
+    Evan Daniel and PingYou Ltd) laid as a band along the diagonal, annealed in a reduced model with the axis-parallel
+    squares on the two wall-anchored staircase lattices, then quenched with Evan Daniel's code; it calls the result an
+    improvement on the record, neither new nor a refinement of it, so the claim is not classified; the measurement
+    names the relation.
+exceptions: []
+other_items: []

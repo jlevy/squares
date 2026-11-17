@@ -1,0 +1,49 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 199,
+ "certificate": {
+  "label": "T-284",
+  "input": "packet",
+  "packet": "ozden-s199-upper-bound-2026-11-09"
+ },
+ "side": "1461468985328621153330369591208625293096183957845596937754957265273646011066209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000",
+ "lambda_star": "1",
+ "one_minus_lambda_star": "0.000000e+00",
+ "binding_pair": [
+  173,
+  174
+ ],
+ "contracted_side": "1461468985328621153330369591208625293096183957845596937754957265273646011066209445561190527/99999999999999975565390472079391893550713909743544168384530169805329044450000000000000000",
+ "margin": "0",
+ "margin_float": "0.000000e+00",
+ "certificate_routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes_accept": true,
+ "cpu_seconds": 31.31
+}

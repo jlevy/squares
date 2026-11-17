@@ -1,0 +1,27 @@
+# L72 clean-room checker, frozen 2026-11-09T16:12:07Z (lane L72, bead think-qqyg).
+#
+# Written from the definitions alone: the Witness/v2 schema text
+# (packing/witnesses/witness.schema.yaml), the mathematics of unit squares, containment
+# and interior-disjointness, the method described in the precedent review's text
+# (docs/project/reviews/review-2026-11-09-ozden-927-931-five.md), and the layout of the
+# two certificates read as data.
+# At this time NOT read: the producer's verifier/sqcheck.py or verifier/README.md, any of
+# this repository's witness, verifier or promotion code (sqpack, packing-witness, devtools),
+# the precedent reviews' programs (l64_*.py and earlier), and anything of lane L71 (branch,
+# PR, notes, packets). Read: the precedent review document and its packet README, issues 935
+# and 936, result-import.md stage 4, the schema, and the certificates, JSON twins, decimal
+# poses and author READMEs as data.
+#
+# Self-test PASSED (80 cases: 20 known answers in both listing senses, 8 wall cases,
+# 7 refused shapes, 2 reader acceptances, 41 malformed files refused, 3,000 random pairs to
+# contact and 1e-30 either side, 1,000 random squares to a wall, past it and short of it).
+# One timing run on the 172 certificate preceded the freeze (ACCEPT, 9.9 s); final runs
+# follow it.
+#
+# sha256  file
+7815f7a504f308ac814c01a19b138eba45022c11e7dac9b682778b5f10b6eb46  l72_util.py
+76eec7368e38006f6651cc0d17d35205d8f6616c5489a7230a76524b8d2ebc1a  l72_reader.py
+a565ecf5112556144adc2583e7541d4eae16af6ee56df2f09fe90dc036daef5e  l72_sat.py
+4a450e3237e470c3ca033ad11d7a012be96e75d1ffebaf6764c9ed5c57d79da1  l72_clip.py
+a6c8edeb92a97603acc55805d20f61b8c7ef66d917c5fd7d006cf6db92ecfa24  l72_check.py
+5c7ba446d2c3798fcb858629b54188e507099ecdf2685ed064e07887485ce6dd  l72_selftest.py

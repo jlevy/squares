@@ -1,0 +1,18 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L56 of 7 November: the stage 7 acknowledgement posted on #921 after #922
+  merged is recorded as an acknowledgement reply with no reported results, read_through
+  moves to the comment's time, and the ask note and notes say it was posted. The entry
+  stays blocked: owner-decision (think-8h80), and the reply states no terms. No result,
+  rung, side, bound, mark or credit changes.
+  Against main 63d11d6c0 (#922): rendered by devtools.compare_paper_renders with
+  render_packing_methods, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM),
+  twice from this tree and once with that main's result-requests.yaml swapped in: 43
+  files each, all byte-identical across the three. No PDF was printed; it prints from
+  that HTML. The paper keeps its version, v0.2.7.

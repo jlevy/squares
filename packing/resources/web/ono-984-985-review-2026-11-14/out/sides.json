@@ -1,0 +1,157 @@
+{
+ "lane": "L163",
+ "program": "l163_sides.py",
+ "n228": {
+  "side_45_floor": "15.596043120920791646977220704185059412512595861",
+  "claim_is_ceil12": true,
+  "claim_less_side_sci": "2.08353e-13",
+  "T-174_reported_equals_verified": true,
+  "T-174_floor_20": "15.60460147572967428456",
+  "T-174_print_is": {
+   "printed": "15.60460147572967429",
+   "exact_floor_at_places": "15.60460147572967428",
+   "exact_ceil_at_places": "15.60460147572967429",
+   "printed_less_exact_sci": "5.43541e-18",
+   "is_floor": false,
+   "is_ceil": true
+  },
+  "gain_on_T-174": {
+   "exact_sci": "8.55835480888e-3",
+   "relative_sci": "5.48450e-4",
+   "issue_print": {
+    "printed": "0.008558354808882",
+    "exact_floor_at_places": "0.008558354808882",
+    "exact_ceil_at_places": "0.008558354808883",
+    "printed_less_exact_sci": "-6.37587e-16",
+    "is_floor": true,
+    "is_ceil": false
+   }
+  },
+  "claim_gain_on_T-174_sci": "8.55835480867e-3",
+  "T-300_side_45_floor": "15.600801734811753802851455917391001480863026354",
+  "T-300_claim_is_ceil12": true,
+  "gain_on_T-300_exact": {
+   "sci": "4.75861389096e-3",
+   "relative_sci": "3.05023e-4"
+  },
+  "issue_983_above": {
+   "claim983_less_S": {
+    "printed": "0.004758613890",
+    "exact_floor_at_places": "0.004758613891",
+    "exact_ceil_at_places": "0.004758613892",
+    "printed_less_exact_sci": "-1.20835e-12",
+    "is_floor": false,
+    "is_ceil": false
+   },
+   "exact983_less_S": {
+    "printed": "0.004758613890",
+    "exact_floor_at_places": "0.004758613890",
+    "exact_ceil_at_places": "0.004758613891",
+    "printed_less_exact_sci": "-9.62155e-13",
+    "is_floor": true,
+    "is_ceil": false
+   },
+   "exact983_less_claim": {
+    "printed": "0.004758613890",
+    "exact_floor_at_places": "0.004758613890",
+    "exact_ceil_at_places": "0.004758613891",
+    "printed_less_exact_sci": "-7.53802e-13",
+    "is_floor": true,
+    "is_ceil": false
+   },
+   "claim983_less_claim": {
+    "printed": "0.004758613890",
+    "exact_floor_at_places": "0.004758613891",
+    "exact_ceil_at_places": "0.004758613891",
+    "printed_less_exact_sci": "-1.00000e-12",
+    "is_floor": false,
+    "is_ceil": false
+   }
+  },
+  "side_only": {
+   "S_less_nevska_sci": "4.28912e-9",
+   "S_less_square1000_sci": "4.27451e-9",
+   "square1000_less_nevska_sci": "1.46023e-11",
+   "issue_prints": [
+    "4.289e-09",
+    "4.275e-09"
+   ]
+  },
+  "strict_side_print": {
+   "printed": "15.596043120920793646",
+   "exact_floor_at_places": "15.596043120920793646",
+   "exact_ceil_at_places": "15.596043120920793647",
+   "printed_less_exact_sci": "-9.77220e-19",
+   "is_floor": true,
+   "is_ceil": false
+  }
+ },
+ "n147": {
+  "side_45_floor": "12.651043556587694471904370629016850446284092771",
+  "claim_is_ceil12": true,
+  "claim_less_side_sci": "3.05528e-13",
+  "seven_plus_four_root2_floor_40": "12.6568542494923801952067548968387923142786",
+  "record_print_is": {
+   "printed": "12.65685424949238",
+   "exact_floor_at_places": "12.65685424949238",
+   "exact_ceil_at_places": "12.65685424949239",
+   "printed_less_exact_sci": "-1.95206e-16",
+   "is_floor": true,
+   "is_ceil": false
+  },
+  "gain_on_closed_form": {
+   "floor_30": "0.005810692904685723302384267821",
+   "ceil_30": "0.005810692904685723302384267822",
+   "relative_sci": "4.59094e-4",
+   "issue_print": {
+    "printed": "0.005810692904685",
+    "exact_floor_at_places": "0.005810692904685",
+    "exact_ceil_at_places": "0.005810692904686",
+    "printed_less_exact_sci": "-7.23302e-16",
+    "is_floor": true,
+    "is_ceil": false
+   },
+   "issue_print_hi": {
+    "printed": "0.005810692904685",
+    "exact_floor_at_places": "0.005810692904685",
+    "exact_ceil_at_places": "0.005810692904686",
+    "printed_less_exact_sci": "-7.23302e-16",
+    "is_floor": true,
+    "is_ceil": false
+   }
+  },
+  "claim_gain_on_closed_form_floor_15": "0.005810692904380",
+  "T-155_verified_less_closed_form_sci": "1.20768e-30",
+  "gain_on_T-155_sci": "5.81069290468e-3",
+  "side_only": {
+   "S_less_nevska_sci": "3.41506e-9",
+   "issue_print": "3.415e-09"
+  },
+  "strict_side_print": {
+   "printed": "12.651043556587696471",
+   "exact_floor_at_places": "12.651043556587696471",
+   "exact_ceil_at_places": "12.651043556587696472",
+   "printed_less_exact_sci": "-9.04370e-19",
+   "is_floor": true,
+   "is_ceil": false
+  }
+ },
+ "issue_exact_side_prints": {
+  "228": {
+   "printed": "15.596043120920791646977220704185",
+   "exact_floor_at_places": "15.596043120920791646977220704185",
+   "exact_ceil_at_places": "15.596043120920791646977220704186",
+   "printed_less_exact_sci": "-5.94125e-32",
+   "is_floor": true,
+   "is_ceil": false
+  },
+  "147": {
+   "printed": "12.651043556587694471904370629016",
+   "exact_floor_at_places": "12.651043556587694471904370629016",
+   "exact_ceil_at_places": "12.651043556587694471904370629017",
+   "printed_less_exact_sci": "-8.50446e-31",
+   "is_floor": true,
+   "is_ceil": false
+  }
+ }
+}

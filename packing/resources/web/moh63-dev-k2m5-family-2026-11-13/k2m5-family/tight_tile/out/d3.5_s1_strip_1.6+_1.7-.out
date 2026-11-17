@@ -1,0 +1,4 @@
+{"tile": "d0=7/2 sign=1 strip 1.6+ 1.7-", "chart": "S_u", "h0": "1/4000", "ok": 19, "cells": 37, "fails": 0, "worst": 0.012978059482759544, "secs": 10}
+{"tile": "d0=7/2 sign=1 strip 1.6+ 1.7-", "chart": "S_d d+1", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.01456564065638, "secs": 3}
+{"tile": "d0=7/2 sign=1 strip 1.6+ 1.7-", "chart": "S_d d-1", "h0": "1/4000", "ok": 1, "cells": 1, "fails": 0, "worst": 0.01564762093076, "secs": 3}
+ALL-OK

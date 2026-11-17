@@ -1,0 +1,25 @@
+# command: env CARGO_PROFILE_RELEASE_OVERFLOW_CHECKS=true CARGO_TARGET_DIR=/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/verify-target nice -n 19 cargo build --release --locked -j 2
+# cwd: a scratch copy of verifier/rust/ of unnir/s12-lower-bound-3.9716 064c2955 (main.rs f7c700c8, Cargo.toml 7c956f54 and Cargo.lock 946d942c as Git blobs, those of evand/square-packing 0e76d9fe verify/), built into a fresh target directory; cargo 1.97.0
+# python3: not used by this command
+# host: 4 cores; load 0.21 0.71 0.39; started 2026-11-08T15:00:22Z
+   Compiling verify v0.1.0 (/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l57-build/verify-crate)
+warning: field `seg` is never read
+   --> src/main.rs:107:86
+    |
+107 | struct Anchor { x0: i128, y0: i128, x1: i128, y1: i128, d: i128, nx: i128, ny: i128, seg: bool }
+    |        ------ field in this struct                                                   ^^^
+    |
+    = note: `Anchor` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable `bigN` should have a snake case name
+    --> src/main.rs:1459:9
+     |
+1459 |     let bigN: i128 = args[3].parse().unwrap_or_else(|_| die(format!("N must be an integer, got {:?}", args[3])));  // angle parameter
+     |         ^^^^ help: convert the identifier to snake case: `big_n`
+     |
+     = note: `#[warn(non_snake_case)]` (part of `#[warn(nonstandard_style)]`) on by default
+
+warning: `verify` (bin "verify") generated 2 warnings
+    Finished `release` profile [optimized] target(s) in 12.32s
+# finished 2026-11-08T15:00:34Z; exit 0; wall 12.343 s; CPU 10.4 s (user 9.935 + sys 0.432); load 0.39 0.73 0.40

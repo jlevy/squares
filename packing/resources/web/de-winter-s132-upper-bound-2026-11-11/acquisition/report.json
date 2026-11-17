@@ -1,0 +1,66 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/958",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter s132 upper bound 2026-11-11]",
+  "report_evidence": "E-de-winter-s132-certificate-report",
+  "receipt_format": "de-winter-s132-exact-replay-v1",
+  "witness_prefix": "W-de-winter-s132-n",
+  "claim_limitations": "Complete 2026-11-11 rational centre-basis witness at 132, read exactly from the retained source file without its schema envelope, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#958 names: a pinwheel the source derives from Samanyu-dev's public 109-square packing, by one cut-and-fill step. Finite construction feasibility only; the 250-digit contact solution, local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-11",
+  "read_at_main": "c8448724edfb33053037f362d50bed961b7ada79",
+  "certificates": [
+    {
+      "n": 132,
+      "path": "n132/n132_witness.yaml",
+      "format": "witness-center-basis-bare",
+      "offered": "11.976048383604",
+      "printed_in": "https://github.com/JoostdeWinter/square-packing/blob/6617869a3491b5872c6ecdff55db05cbee57d516/README.md",
+      "first_committed": "2026-11-11T20:49:44Z",
+      "same_packing": [
+        {
+          "path": "n132/n132_exact.json",
+          "format": "center-direction-json"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    132
+  ],
+  "replayed": [
+    132
+  ],
+  "houses": [
+    {
+      "n": 132,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Evan Daniel, improved by PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "11.9856801988458088115",
+      "verified_value": "11.9856801988458088115",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Joost de Winter's pinwheel packing of 132 squares at JoostdeWinter/square-packing 6617869, issue 958",
+    "headline": "De Winter's pinwheel at 132 from Samanyu-dev's 109, a new arrangement 9.63e-03 below T-174",
+    "significance": 3,
+    "source_checks": "n132/README.md says all squares were optimized together with an interior-point solver (IPOPT) and the contact equations of the result then solved to 250 digits: all 1407 contact equations (a corner of one square on the edge line of another, or a corner on a wall) are satisfied to 1e-269 and all other gaps stay open, and the certificate's side is 1.3e-59 above that solution. It says non-negative contact forces in balance exist, the first-order condition for a local minimum, checked in floating point; that 324 perturbation trials, each re-optimized, found no smaller side; that local optimality has no formal proof; and that a search for a minimal polynomial of the side up to degree 16 found none. It says verify_exact.py, Python's standard library only, is the folder's exact checker. Those statements are the author's; no source program ran here.\n\nThe README says the Kaggle competition 'Squares in Squares' has a per-puzzle leaderboard that lists sides without packings, that the author has not seen its values at 132, and so an unpublished packing with a smaller side may exist.",
+    "credit": "Credit Joost de Winter, who reports a pinwheel, a central block of tilted squares with four arms surrounded by four blocks of axis-aligned squares (54 tilted, 78 upright), derived from the public 109-square packing of Samanyu-dev/squares_in_squares (best_fit_101_500.csv, side 10.949289581) by one step: the packing cut along one horizontal and one vertical line, the parts moved about one unit apart, each gap filled with one layer of squares continuing the local lattice, and every square re-optimized. The README says credit for the pinwheel arrangement at n = 109 belongs to Samanyu-dev, whose README reports that packing as a result of its own stretch and quench chains; the issue makes no claim at 109 and names its own contribution as the growth steps and the optimization, so the packing at 132 is credited to de Winter after Samanyu-dev.\n\nThe README says the derivation, optimization, high-precision solution, rational certificate, checking and figure were produced with Claude Fable 5.2 (Anthropic) under the direction of Joost de Winter; 6617869 named the model in place of a491dad's 'Claude (Anthropic)'.",
+    "next_rung": "Independently review the certificate (stage 4, a separate lane blind to this one): its mathematics, a clean-room exact checker with sharp controls, the identity against T-174's packing and the construction the source states, mapped as an adversarial review, whose acceptance the verified lane and the house rule wait on. Then adopt it at 132 in place of T-174 under the house rule, with both strong generators' regularization, measured against the new witness, and the flip of the new house in the same change.",
+    "bead": "think-bcfs",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "independent",
+      "credit": "de Winter after Samanyu-dev",
+      "note": "JoostdeWinter/square-packing at 6617869a3491b5872c6ecdff55db05cbee57d516 (2026-11-11T20:52:23Z), Joost de Winter's certificate for s(132) <= 11.976048383604 (rounded up at 12 places, as the root README prints it), first committed at a491dad8b092d0da80d6fe5e8dff2ad5b0d4518c (2026-11-11T20:49:44Z), 6 minutes 34 seconds before jlevy/squares#958, which requested its registration: a rational centre-basis witness without this repository's schema envelope (n132/n132_witness.yaml) and the same packing as JSON (n132/n132_exact.json), a pinwheel derived from Samanyu-dev/squares_in_squares's public 109-square packing (53551d7) by one cut-and-fill step, 1.3e-59 above a 250-digit solution of its contact equations; local optimality has no formal proof. The source credits the pinwheel at 109 to Samanyu-dev and says the work was produced with Claude Fable 5.2 (Anthropic) under de Winter's direction. No global optimality claim. The lineage is independent of this project. Licensed MIT by LICENSE at the pin. Retained in web/de-winter-s132-upper-bound-2026-11-11/."
+    }
+  }
+}

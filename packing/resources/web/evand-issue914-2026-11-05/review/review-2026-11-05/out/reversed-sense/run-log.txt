@@ -1,0 +1,13 @@
+s175_1105-reversed refuse A refuse {'separated': 15156, 'touching': 0, 'overlapping': 69} B refuse {'empty': 15156, 'touching': 0, 'overlapping': 69} minwall 5e-21 mingap -0.20762994938325408 cpu 4.796
+s204_trig1-reversed refuse A refuse {'separated': 20639, 'touching': 0, 'overlapping': 67} B refuse {'empty': 20639, 'touching': 0, 'overlapping': 67} minwall 5e-21 mingap -0.28259199973122073 cpu 5.138
+s260_ks_1105-reversed refuse A refuse {'separated': 33497, 'touching': 0, 'overlapping': 173} B refuse {'empty': 33497, 'touching': 0, 'overlapping': 173} minwall 4.99e-13 mingap -0.28400446689983133 cpu 7.701
+s268_1105-reversed refuse A refuse {'separated': 35682, 'touching': 0, 'overlapping': 96} B refuse {'empty': 35682, 'touching': 0, 'overlapping': 96} minwall 5e-21 mingap -0.2916853446578283 cpu 9.938
+s293_1105-reversed refuse A refuse {'separated': 42702, 'touching': 0, 'overlapping': 76} B refuse {'empty': 42702, 'touching': 0, 'overlapping': 76} minwall 5e-21 mingap -0.11060693917433248 cpu 7.963
+s303_1105-reversed refuse A refuse {'separated': 45636, 'touching': 0, 'overlapping': 117} B refuse {'empty': 45636, 'touching': 0, 'overlapping': 117} minwall 5e-21 mingap -0.29254024650333493 cpu 11.754
+s175_1105_regularized-reversed refuse A refuse {'separated': 15162, 'touching': 0, 'overlapping': 63} B refuse {'empty': 15162, 'touching': 0, 'overlapping': 63} minwall 5e-21 mingap -0.20120017578309063 cpu 3.159
+s304_1105-reversed refuse A refuse {'separated': 45950, 'touching': 0, 'overlapping': 106} B refuse {'empty': 45950, 'touching': 0, 'overlapping': 106} minwall 5e-21 mingap -0.28996453429020264 cpu 11.865
+s204_trig1_regularized-reversed refuse A refuse {'separated': 20637, 'touching': 0, 'overlapping': 69} B refuse {'empty': 20637, 'touching': 0, 'overlapping': 69} minwall 5e-21 mingap -0.28259199973122073 cpu 5.104
+s268_1105_regularized-reversed refuse A refuse {'separated': 35685, 'touching': 0, 'overlapping': 93} B refuse {'empty': 35685, 'touching': 0, 'overlapping': 93} minwall 5e-21 mingap -0.28855562718622735 cpu 8.957
+s293_1105_regularized-reversed refuse A refuse {'separated': 42700, 'touching': 0, 'overlapping': 78} B refuse {'empty': 42700, 'touching': 0, 'overlapping': 78} minwall 5e-21 mingap -0.11060693917433248 cpu 7.816
+s303_1105_regularized-reversed refuse A refuse {'separated': 45635, 'touching': 0, 'overlapping': 118} B refuse {'empty': 45635, 'touching': 0, 'overlapping': 118} minwall 5e-21 mingap -0.29254024650333493 cpu 11.524
+s304_1105_regularized-reversed refuse A refuse {'separated': 45960, 'touching': 0, 'overlapping': 96} B refuse {'empty': 45960, 'touching': 0, 'overlapping': 96} minwall 5e-21 mingap -0.2921608060337738 cpu 11.104

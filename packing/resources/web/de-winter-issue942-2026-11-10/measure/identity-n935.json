@@ -1,0 +1,115 @@
+{
+ "format": "measure-identity-v1",
+ "n": 935,
+ "inputs": {
+  "DE-WINTER": {
+   "input": "packet",
+   "packet": "de-winter-issue942-2026-11-10",
+   "side": "154900285932009/5000000000000"
+  },
+  "couzo-964ee2b": {
+   "input": "evand-cert",
+   "path": "packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n935.cert",
+   "sha256": "3278f2bc22da4ba6705d2d7092b04b91423e294b06c341e780793921d1c70c43",
+   "side": "5931724681599557786191419461/191381924566750000000000000"
+  }
+ },
+ "tilts": {
+  "DE-WINTER": {
+   "exactly_turned": 315,
+   "tilted_beyond_1_degree": 308,
+   "tilted_positive": 145,
+   "tilted_negative": 163,
+   "tilt_range_degrees": [
+    1.2098504065730822,
+    26.98580998624879
+   ],
+   "near_upright": 7,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.7340115212658276,
+    -0.7112048921423479,
+    -0.1716173214263108,
+    -0.015728426595401857,
+    -0.010889527688107137
+   ]
+  },
+  "couzo-964ee2b": {
+   "exactly_turned": 357,
+   "tilted_beyond_1_degree": 346,
+   "tilted_positive": 154,
+   "tilted_negative": 192,
+   "tilt_range_degrees": [
+    1.892938570254861,
+    22.342308765962702
+   ],
+   "near_upright": 11,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.5893943253248608,
+    -0.028050911110042875,
+    -0.005068304845224247,
+    0.013852784426703763,
+    0.03186417438541274,
+    0.037787364859312764,
+    0.1090761553597128,
+    0.18666573668557582,
+    0.28135762378526075,
+    0.40475534703476174,
+    0.5779630206825609
+   ]
+  }
+ },
+ "pairs": [
+  {
+   "view": "DE-WINTER",
+   "against": "couzo-964ee2b",
+   "side_difference": "-1.411687e-02",
+   "side_difference_exact": "-2701714078007254734999311/191381924566750000000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 3,
+    "largest_move": "1.26573",
+    "moved_beyond": {
+     "1e-9": 935,
+     "1e-6": 933,
+     "1e-3": 933,
+     "1e-2": 927,
+     "1e-1": 410
+    },
+    "largest_turn_degrees": "35.91",
+    "turned_beyond_1e-6": 442
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 104,
+    "tilted_paired_same_sign_within_1e-1": 1,
+    "tilted_paired_opposite_sign": 25,
+    "tilted_paired_opposite_sign_beyond_1e-1": 24,
+    "tilted_paired_with_untilted": 179,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 3,
+    "total_squared": "97.8985",
+    "runner_up_symmetry": 4,
+    "runner_up_total_squared": "103.364",
+    "largest_move": "1.27565",
+    "rms_move": "0.32358",
+    "bottleneck": "1.04387",
+    "moved_beyond": {
+     "1e-9": 935,
+     "1e-6": 935,
+     "1e-3": 935,
+     "1e-2": 617,
+     "1e-1": 407
+    },
+    "nearest_one_to_one": false,
+    "turned_beyond_1_degree": 428,
+    "tilts_reversed_beyond_1_degree": 226
+   }
+  }
+ ]
+}
