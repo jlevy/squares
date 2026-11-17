@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: w3-pass-1117r
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-17T23:15:32.786Z
+updated_at: 2026-11-17T23:20:02.855Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -28,3 +28,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-17T22:20Z w3-pass-1117r (coordinator decision, supersedes the 22:10Z staging note): staging dropped. #1011 lands the registration only (T-310..T-313 at V3/C3 on the replay); R1's review (#1013) is NOT mapped there. THIS BEAD OWNS (1) mapping R1's review (docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md) into T-310..T-313 together with #1014's review of #1009, and adopting the smallest validated packing at each count in the import-1009 PR (Polkovskyi's at 262, 292, 295 where it is smaller: 262/295 by 1.58e-3, 292 by 3.62e-9 = 72 x #1006's own contraction margin 5.0288e-11, a new result under option D); and (2) IF #1009 STALLS OR FAILS REVIEW, adopting de Winter's packings (T-312 at 262, T-311 at 292, T-313 at 295) with both strong generators' regularization in its own PR, so they are not lost. Mapping draft kept at scratchpad w3/r1-mapping-and-staging.diff and w3/map_r1.py (staging and check_standing parts to be dropped).
 
 2026-11-17T23:20Z w3-pass-1117r (review A1 of #1014, option b): the 1009 review (#1014) measured no gains, padding, lineage, custody or author's checks and confirmed no significance (its after-the-freeze programs never ran). The significance scores and the padding/option-D judgments in the import-1009 PR rest on the import lane's own measurements (mishapolk-issue1009 packet measure/) and the owner's option D (think-b0w5), not on a blind review; the mapping must say so. Also: the replay entry's 'every wall clears by exactly 1e-28' must be corrected (right/top walls 1.0001e-28 to 1.0098e-28; top 1.073e-28 at 180, 5.6e-16 at 292). Owner answered think-bx2a: 262/292 credit de Winter, improved by Polkovskyi (applied).
+
+2026-11-17T23:30Z w3-pass-1117r (review A1 of #1013): R1's review of #1005-#1007 likewise made none of its after-the-freeze measurements, no comparison, no author questions and no significance confirmation; the import-1009 mapping must cite the import lanes' measure/ receipts (#1011's packets; mishapolk packet) for identity/padding and keep the draft scores as the import's, not R1's.
