@@ -1,0 +1,71 @@
+mixed_n28_L57425 1 smallest angle 1.0016728 independent
+mixed_n28_L57425 2 second angle 1.0016728 independent
+mixed_n28_L57425 4 drawn 1.0016728 independent
+mixed_n28_L57425 165 drawn 1.0016728 independent
+mixed_n28_L57425 220 drawn 1.0016728 independent
+mixed_n28_L57425 300 drawn 1.0012621 independent
+mixed_n28_L57425 363 drawn 1.0016728 independent
+mixed_n28_L57425 503 drawn 1.0015782 independent
+mixed_n28_L57425 521 drawn 1.0015438 independent
+mixed_n28_L57425 689 drawn 1.0016728 independent
+mixed_n28_L57425 758 drawn 1.0016728 independent
+mixed_n28_L57425 788 drawn 1.0016728 independent
+mixed_n28_L57425 867 drawn 1.0016728 independent
+mixed_n28_L57425 877 least exact at a least-bound centre 1.0009607 from the source's box
+mixed_n28_L57425 1006 drawn 1.0016679 independent
+mixed_n28_L57425 1036 middle 1.0016728 independent
+mixed_n28_L57425 1045 drawn 1.0016728 independent
+mixed_n28_L57425 1088 source's least certified 1.0015151 independent
+mixed_n28_L57425 1139 drawn 1.0014778 independent
+mixed_n28_L57425 1244 drawn 1.0013189 from the axis argmin
+mixed_n28_L57425 1301 drawn 1.0011785 from the axis argmin
+mixed_n28_L57425 1357 least exact at a least-bound centre 1.0008910 from the source's box
+mixed_n28_L57425 1397 drawn 1.0016489 independent
+mixed_n28_L57425 1513 drawn 1.0016728 independent
+mixed_n28_L57425 1588 drawn 1.0012220 independent
+mixed_n28_L57425 1703 drawn 1.0007906 independent
+mixed_n28_L57425 1789 drawn 1.0015560 independent
+mixed_n28_L57425 1829 drawn 1.0016540 independent
+mixed_n28_L57425 1908 drawn 1.0011799 independent
+mixed_n28_L57425 1989 source's least certified 1.0016728 independent
+mixed_n28_L57425 2032 drawn 1.0016728 independent
+mixed_n28_L57425 2071 next to last 1.0011536 from the source's box
+mixed_n28_L57425 2072 last 1.0016728 independent
+mixed_n30_L58925 1 smallest angle 1.0018467 independent
+mixed_n30_L58925 2 second angle 1.0018467 from the source's box
+mixed_n30_L58925 60 drawn 1.0018506 independent
+mixed_n30_L58925 88 drawn 1.0018506 independent
+mixed_n30_L58925 196 drawn 1.0018392 independent
+mixed_n30_L58925 336 drawn 1.0018433 independent
+mixed_n30_L58925 348 drawn 1.0018000 independent
+mixed_n30_L58925 478 drawn 1.0016001 independent
+mixed_n30_L58925 534 drawn 1.0012616 independent
+mixed_n30_L58925 615 drawn 1.0017714 independent
+mixed_n30_L58925 692 source's least certified 1.0014700 independent
+mixed_n30_L58925 757 drawn 1.0019720 independent
+mixed_n30_L58925 791 drawn 1.0016247 independent
+mixed_n30_L58925 899 drawn 1.0013822 independent
+mixed_n30_L58925 972 least exact at a least-bound centre 1.0010296 from the source's box
+mixed_n30_L58925 985 drawn 1.0019890 independent
+mixed_n30_L58925 1036 middle 1.0019248 independent
+mixed_n30_L58925 1085 drawn 1.0016581 independent
+mixed_n30_L58925 1207 drawn 1.0019712 independent
+mixed_n30_L58925 1281 drawn 1.0018025 from the source's box
+mixed_n30_L58925 1325 drawn 1.0014416 independent
+mixed_n30_L58925 1400 drawn 1.0012819 independent
+mixed_n30_L58925 1477 drawn 1.0024946 independent
+mixed_n30_L58925 1561 drawn 1.0007763 independent
+mixed_n30_L58925 1585 source's least certified 1.0013090 independent
+mixed_n30_L58925 1654 drawn 1.0015842 independent
+mixed_n30_L58925 1799 drawn 1.0009567 independent
+mixed_n30_L58925 1883 drawn 1.0012580 independent
+mixed_n30_L58925 1945 least exact at a least-bound centre 1.0008076 independent
+mixed_n30_L58925 1978 drawn 1.0009363 independent
+mixed_n30_L58925 2038 drawn 1.0007095 from the axis argmin
+mixed_n30_L58925 2071 next to last 1.0010174 independent
+mixed_n30_L58925 2072 last 1.0010068 independent
+NO_COUNTEREXAMPLE_IN_SAMPLE
+
+real	1m54.913s
+user	1m52.787s
+sys	0m0.841s
