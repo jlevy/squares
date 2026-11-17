@@ -50874,12 +50874,14 @@ results:
       reports VERIFIED on its Witness/v2 file. Those statements are the author's; no source
       program ran here.
 
-      Credit Mykhailo Polkovskyi (Mishapolk, https://github.com/Mishapolk/square-packing-records),
-      as the issue asks for a new arrangement. Measured, it continues the arrangement of Joost de
-      Winter's #1007, reported hours before it, which the issue does not name; whether the credit
-      should name de Winter's packing is the owner's to decide (an identity measured against what
-      the source says), and nothing here infers it. The issue says the packings were 'Discovered
-      by Mykhailo Polkovskyi, assisted by Gemini'.
+      Credit the packing to Joost de Winter, improved by Mykhailo Polkovskyi (Mishapolk,
+      https://github.com/Mishapolk/square-packing-records), by the owner's answer of 17
+      November 2026 (think-bx2a): "de Winter, improved by Polkovskyi". The issue asks for
+      credit for a new arrangement and does not name de Winter's packing; measured, it
+      continues the arrangement of de Winter's #1007 (T-312), reported hours before it, and
+      a certificate that rearranges a packing the record already credits does not take the
+      packing's credit (attribution.md), as at 147 and 260. The issue says the packings were
+      'Discovered by Mykhailo Polkovskyi, assisted by Gemini'.
     scope:
       n_values:
       - 262
@@ -51610,12 +51612,14 @@ results:
       reports VERIFIED on its Witness/v2 file. Those statements are the author's; no source
       program ran here.
 
-      Credit Mykhailo Polkovskyi (Mishapolk, https://github.com/Mishapolk/square-packing-records),
-      as the issue asks for a new arrangement. Measured, it continues the arrangement of Joost de
-      Winter's #1006, reported hours before it, which the issue does not name; whether the credit
-      should name de Winter's packing is the owner's to decide (an identity measured against what
-      the source says), and nothing here infers it. The issue says the packings were 'Discovered
-      by Mykhailo Polkovskyi, assisted by Gemini'.
+      Credit the packing to Joost de Winter, improved by Mykhailo Polkovskyi (Mishapolk,
+      https://github.com/Mishapolk/square-packing-records), by the owner's answer of 17
+      November 2026 (think-bx2a): "de Winter, improved by Polkovskyi". The issue asks for
+      credit for a new arrangement and does not name de Winter's packing; measured, it
+      continues the arrangement of de Winter's #1006 (T-311), reported hours before it, and
+      a certificate that rearranges a packing the record already credits does not take the
+      packing's credit (attribution.md), as at 147 and 260. The issue says the packings were
+      'Discovered by Mykhailo Polkovskyi, assisted by Gemini'.
     scope:
       n_values:
       - 292

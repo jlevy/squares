@@ -184,6 +184,8 @@ reports:
       source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n262.json
     new_packing:
       source: '#1009: ''New packing arrangements below the standing bounds; primary credit to Mykhailo Polkovskyi.'''
+      continues: Joost de Winter's packing of issue 1007 (T-312), as measured one to one; credited to de Winter, improved
+        by Polkovskyi, by the owner's answer of 17 November 2026 (think-bx2a)
     note: 'T-101''s uniform-contraction margin is 1.6707e-19 (squares 92 and 253), so the gain, 8.9918e-03, about 5.4e+16
       times it, lies wholly outside its padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n262.json);
       RV-3 (think-ruu2) does not reach it. Against #1007, whose margin is 6.8888e-11, the gain is 1.5784e-03, about 2.29e+07
@@ -247,6 +249,8 @@ reports:
       source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n292.json
     new_packing:
       source: '#1009: ''New packing arrangements below the standing bounds; primary credit to Mykhailo Polkovskyi.'''
+      continues: Joost de Winter's packing of issue 1006 (T-311), as measured one to one; credited to de Winter, improved
+        by Polkovskyi, by the owner's answer of 17 November 2026 (think-bx2a)
     note: 'T-146''s uniform-contraction margin is 1.7591e-19 (squares 68 and 69), so the gain, 1.3617e-03, about 7.7e+15
       times it, lies wholly outside its padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292.json);
       RV-3 (think-ruu2) does not reach it. Against #1006, whose margin is 5.0288e-11, the gain is 3.6163e-09, about 7.19e+01

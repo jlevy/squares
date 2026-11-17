@@ -148,9 +148,10 @@ touches, and each enlargement closes its one pair or wall alone.
 - **210, 272, 262, 292 and 295.** New arrangements relative to the record’s packings.
 - **Against the earlier reports.** The 262 certificate is one to one with #1007’s
   packing under a box symmetry, 3 squares beyond a tenth; the 292 certificate is one to
-  one with #1006’s, 3 beyond a tenth. The issue calls both new and names neither, so the
-  register keeps its credit and the owner decides (think-bx2a). The 295 certificate is
-  not one to one with #1007’s.
+  one with #1006’s, 3 beyond a tenth. The issue calls both new and names neither; the
+  owner answered on 17 November 2026 (think-bx2a), “de Winter, improved by Polkovskyi”,
+  so the record credits both packings to Joost de Winter, improved by Mykhailo
+  Polkovskyi, as at 147 and 260. The 295 certificate is not one to one with #1007’s.
 
 ## The L Step
 
@@ -166,7 +167,7 @@ step on the 262 certificate.
 
 - The source’s verifiers were not run; the issue’s statements about them are its own.
 - Whose arrangement the 262 and 292 certificates continue is measured, not stated by
-  the source (think-bx2a).
+  the source; the credit follows the measurement by the owner’s answer (think-bx2a).
 - No local optimality, rigidity, KKT or global optimality is established for any
   certificate.
 
