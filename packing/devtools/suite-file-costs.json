@@ -759,6 +759,7 @@
     "packing/tests/test_upper_bound_intervals.py": 5.229,
     "packing/tests/test_upper_bound_packets.py": 42.128,
     "packing/tests/test_upper_bound_reports.py": 127.895,
+    "packing/tests/test_upper_bound_reports_1009.py": 36.02,
     "packing/tests/test_upper_bound_reports_487b058.py": 1.331,
     "packing/tests/test_upper_bound_reports_488_489.py": 5.582,
     "packing/tests/test_upper_bound_reports_4e4c8ce.py": 1.132,
@@ -1085,6 +1086,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-l187-1116-2026-11-16.json",
           "provenance": {},
           "tests": 12
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_1009.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-1009-2026-11-17.json",
+          "provenance": {},
+          "tests": 31
         }
       ]
     }

@@ -1,0 +1,426 @@
+format: intake-ledger-v1
+read_at_main: f9ddfeeef9070ede581142154ab992149b278ab0
+read_on: '2026-11-17'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: c-import-1009
+  branch: claude/intake-2026-11-17-import-1009
+  commit: f9ddfeeef9070ede581142154ab992149b278ab0
+  note: The packet's claim record, written on the lane's branch from main f9ddfeeef and read
+    here by path.
+reports:
+- report: '#1005'
+  url: https://github.com/jlevy/squares/issues/1005
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-16T15:27:38Z'
+  bead: think-qag8
+  claims:
+  - n: 292
+    printed: '17.590104218682'
+    rounding: up
+    exact: 2147229518882059890086899958250897491556516647879114253409452492578978997444460406318900646134290454180486647268099660700641173206186150228357571901222733525037065479076168514562715678274914005135983284085238970891957/122070312500000000000000000000032025360448157077781662949451003018506027823162801459947296665713761222062709464747072442794623177948994346733238703538899224172481004351278872345115313431726710893086560500000000000000
+    exact_from: n-292-candidate.yaml at kenaznia-doga/s292-upper-bound@dec930bdaa5f58077af6c05bc13c0fca0a58a3ed,
+      read by this lane with upper_bound_reports' witness-corners adapter (lane I1 imports
+      it, think-qag8)
+    first_committed: '2026-11-16T15:27:16Z'
+  note: 'Lane I1 (think-qag8) imports #1005 in its own pull request, which merges before this
+    one; its exact side here is read from the pinned file by this lane.'
+- report: '#1006'
+  url: https://github.com/jlevy/squares/issues/1006
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-16T15:39:16Z'
+  bead: think-qag8
+  claims:
+  - n: 292
+    printed: '17.590016442847'
+    rounding: up
+    exact: 33872522175917279266554668306659248043633029180856810473/1925667453806884053962316529711800854170000000000000000
+    exact_from: n292/n292_exact.json at JoostdeWinter/square-packing@796ff3b76e7816f9df24bf4f6ef0bb3b9cacef24,
+      read by this lane with upper_bound_reports' center-direction-json adapter (lane I1 imports
+      it, think-qag8)
+    first_committed: '2026-11-16T15:37:03Z'
+  note: 'Lane I1 (think-qag8) imports #1006 in its own pull request, which merges before this
+    one; its exact side here is read from the pinned file by this lane.'
+- report: '#1007'
+  url: https://github.com/jlevy/squares/issues/1007
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-16T21:28:27Z'
+  bead: think-qag8
+  claims:
+  - n: 262
+    printed: '16.699693441904'
+    rounding: up
+    exact: 166996934419035177/10000000000000000
+    exact_from: n262/n262_exact.json at JoostdeWinter/square-packing@853b92ee2236f418160782dd2871d38ea75271a4,
+      read by this lane with upper_bound_reports' center-direction-json adapter (lane I1 imports
+      it, think-qag8)
+    first_committed: '2026-11-16T21:26:15Z'
+  - n: 295
+    printed: '17.699693441716'
+    rounding: up
+    exact: 35399386883430443/2000000000000000
+    exact_from: n295/n295_exact.json at JoostdeWinter/square-packing@853b92ee2236f418160782dd2871d38ea75271a4,
+      read by this lane with upper_bound_reports' center-direction-json adapter (lane I1 imports
+      it, think-qag8)
+    first_committed: '2026-11-16T21:26:15Z'
+  note: 'Lane I1 (think-qag8) imports #1007 in its own pull request, which merges before this
+    one; its exact sides here are read from the pinned files by this lane.'
+- report: '#1009'
+  url: https://github.com/jlevy/squares/issues/1009
+  kind: issue
+  holders: Mykhailo Polkovskyi (Mishapolk)
+  reported_at: '2026-11-16T23:38:22Z'
+  bead: think-i38n
+  claims:
+  - n: 147
+    printed: '12.651043553173'
+    rounding: up
+    exact: 12651043553172632772258400324749/1000000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-302
+      finding: no symmetry of the box pairs it one to one with T-302's packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves 69 squares beyond
+        1e-3, 12 beyond 1e-2 and 8 beyond 0.1 (largest 0.647942) and turns squares by up to
+        0.05435 degrees; the house witness measures as T-302; a further arrangement of T-302's
+        packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n147.json
+    refines:
+      packing_of: Roberto Ono
+      entry: T-302
+      source: '#1009: ''Exact rational certificate refinements of the registered arrangements
+        on main; arrangement credit remains with the standing authors, with certificate refinement
+        credited to Mykhailo Polkovskyi.'''
+    note: T-302's uniform-contraction margin is 2.9342e-09 (squares 145 and 147), and the
+      gain is 3.4151e-09, 1.1639 of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n147.json),
+      beyond it by 4.81e-10, and T-302 contracted rounds up at 12 places above this claim's
+      print, so the gain is no re-certification of the padding alone. The certificate's own
+      margin is 2.5304e-27 (contraction-n147-own.json).
+  - n: 156
+    printed: '12.977053087495'
+    rounding: up
+    exact: 6488526543747308102826438356697/500000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-287
+      finding: nearest centres pair it one to one with T-287's packing; the optimal assignment,
+        under the identity of the box, moves 0 squares beyond 1e-3, 0 beyond 1e-2 and 0 beyond
+        0.1 (largest 1.44264e-05) and turns squares by up to 0.0005845 degrees; the house
+        witness measures as T-287; a re-solve of T-287's packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n156.json
+    refines:
+      packing_of: Doğa Özden
+      entry: T-287
+      source: '#1009: ''Exact rational certificate refinements of the registered arrangements
+        on main; arrangement credit remains with the standing authors, with certificate refinement
+        credited to Mykhailo Polkovskyi.'''
+    note: 'T-287''s uniform-contraction margin is 2.4170e-12 (squares 32 and 33), and the
+      gain is 2.5885e-12, 1.0709 of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n156.json):
+      T-287 contracted rounds up at 12 places to this claim''s own print, so the gain over
+      the padding, 1.71e-13, lies within the print; whether such a re-certification is a new
+      result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. The certificate''s
+      own margin is 2.5964e-27 (contraction-n156-own.json).'
+  - n: 180
+    printed: '13.915618502788'
+    rounding: up
+    exact: 3478904625696829029492667716679/250000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-288
+      finding: nearest centres pair it one to one with T-288's packing; the optimal assignment,
+        under the identity of the box, moves 0 squares beyond 1e-3, 0 beyond 1e-2 and 0 beyond
+        0.1 (largest 1.42864e-05) and turns squares by up to 0.0005788 degrees; the house
+        witness measures as T-288; a re-solve of T-288's packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n180.json
+    refines:
+      packing_of: Doğa Özden
+      entry: T-288
+      source: '#1009: ''Exact rational certificate refinements of the registered arrangements
+        on main; arrangement credit remains with the standing authors, with certificate refinement
+        credited to Mykhailo Polkovskyi.'''
+    note: 'T-288''s uniform-contraction margin is 2.5843e-12 (squares 126 and 139), and the
+      gain is 2.7096e-12, 1.0485 of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n180.json):
+      T-288 contracted rounds up at 12 places to this claim''s own print, so the gain over
+      the padding, 1.25e-13, lies within the print; whether such a re-certification is a new
+      result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. The certificate''s
+      own margin is 1.8662e-23 (contraction-n180-own.json).'
+  - n: 210
+    printed: '14.971214601589'
+    rounding: up
+    exact: 14971214601588191477949459822729/1000000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-174
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves 192 squares
+        beyond 1e-3, 93 beyond 1e-2 and 61 beyond 0.1 (largest 0.973003) and turns squares
+        by up to 42.47 degrees; the house witness measures as T-174; a new arrangement relative
+        to the record's packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n210.json
+    new_packing:
+      source: '#1009: ''New packing arrangements below the standing bounds; primary credit
+        to Mykhailo Polkovskyi.'''
+    note: T-174's uniform-contraction margin at 210 is 0, squares 70 and 71 touching, so the
+      gain, 1.7865e-03, lies wholly outside any padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n210.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 2.9952e-27 (contraction-n210-own.json).
+  - n: 260
+    printed: '16.633520939840'
+    rounding: up
+    exact: 16633520939839760712361517061493/1000000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-269
+      finding: nearest centres pair it one to one with T-269's packing; the optimal assignment,
+        under the identity of the box, moves 39 squares beyond 1e-3, 10 beyond 1e-2 and 0
+        beyond 0.1 (largest 0.039705) and turns squares by up to 0.1497 degrees; the house
+        witness measures as T-269; a further arrangement of T-269's packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n260.json
+    new_packing:
+      source: '#1009: ''Improved packings below the standing bounds on main; credit Mykhailo
+        Polkovskyi (after Evan Daniel at 260; after Doğa Özden at 268).'''
+      continues: Evan Daniel's packing of 260 squares (T-269), as the issue says
+    note: T-269's uniform-contraction margin is 1.6618e-11 (squares 98 and 244), and the gain
+      is 1.1049e-08, 664.8643 of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n260.json),
+      beyond it by 1.10e-08, and T-269 contracted rounds up at 12 places above this claim's
+      print, so the gain is no re-certification of the padding alone. The certificate's own
+      margin is 3.3276e-27 (contraction-n260-own.json).
+  - n: 262
+    printed: '16.698115018700'
+    rounding: up
+    exact: 521816094334356075877658927847/31250000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-101
+      finding: 'no symmetry of the box pairs it one to one with T-101''s packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves 262 squares
+        beyond 1e-3, 187 beyond 1e-2 and 78 beyond 0.1 (largest 0.89057) and turns squares
+        by up to 29.19 degrees; against de Winter''s #1007 packing, nearest centres pair it
+        one to one with de Winter''s #1007 packing, and the optimal assignment, (symmetry
+        2), moves 261 squares beyond 1e-3, 128 beyond 1e-2 and 3 beyond 0.1 (largest 0.314602)
+        and turns squares by up to 4.25 degrees; T-101''s packing is the exact certificate
+        of the Kingbird catalogue''s 16 + sqrt(2)/2 arrangement at 262; a new arrangement
+        relative to the record''s packing, and measured one to one with #1007''s'
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n262.json
+    new_packing:
+      source: '#1009: ''New packing arrangements below the standing bounds; primary credit
+        to Mykhailo Polkovskyi.'''
+    note: 'T-101''s uniform-contraction margin is 1.6707e-19 (squares 92 and 253), so the
+      gain, 8.9918e-03, about 5.4e+16 times it, lies wholly outside its padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n262.json);
+      RV-3 (think-ruu2) does not reach it. Against #1007, whose margin is 6.8888e-11, the
+      gain is 1.5784e-03, about 2.29e+07 times it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n262-1007.json).
+      The certificate''s own margin is 3.3402e-27 (contraction-n262-own.json).'
+  - n: 268
+    printed: '16.871868135103'
+    rounding: up
+    exact: 2108983516887772284036428313677/125000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-289
+      finding: no symmetry of the box pairs it one to one with T-289's packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves 95 squares beyond
+        1e-3, 33 beyond 1e-2 and 10 beyond 0.1 (largest 0.809253) and turns squares by up
+        to 1.444 degrees; the house witness measures as T-289; a further arrangement of T-289's
+        packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n268.json
+    new_packing:
+      source: '#1009: ''Improved packings below the standing bounds on main; credit Mykhailo
+        Polkovskyi (after Evan Daniel at 260; after Doğa Özden at 268).'''
+      continues: Doğa Özden's packing of 268 squares (T-289), as the issue says
+    note: T-289's uniform-contraction margin is 3.2045e-12 (squares 55 and 65), so the gain,
+      1.6171e-04, about 5.0e+07 times it, lies wholly outside its padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n268.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 3.3744e-27 (contraction-n268-own.json).
+  - n: 270
+    printed: '16.928148603340'
+    rounding: up
+    exact: 16928148603339607384058475178539/1000000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-283
+      finding: nearest centres pair it one to one with T-283's packing; the optimal assignment,
+        under the identity of the box, moves 0 squares beyond 1e-3, 0 beyond 1e-2 and 0 beyond
+        0.1 (largest 1.44264e-05) and turns squares by up to 0.0005845 degrees; the house
+        witness measures as T-283; a re-solve of T-283's packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n270.json
+    refines:
+      packing_of: Evan Daniel, improved by Doğa Özden
+      entry: T-283
+      source: '#1009: ''Exact rational certificate refinements of the registered arrangements
+        on main; arrangement credit remains with the standing authors, with certificate refinement
+        credited to Mykhailo Polkovskyi.'''
+    note: 'T-283''s uniform-contraction margin is 3.2115e-12 (squares 220 and 234), and the
+      gain is 3.2470e-12, 1.0111 of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n270.json):
+      T-283 contracted rounds up at 12 places to this claim''s own print, so the gain over
+      the padding, 3.55e-14, lies within the print; whether such a re-certification is a new
+      result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. The certificate''s
+      own margin is 3.3863e-27 (contraction-n270-own.json).'
+  - n: 272
+    printed: '16.965501175831'
+    rounding: up
+    exact: 84827505879151075278293008137/5000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-174
+      finding: no symmetry of the box pairs it one to one with T-174's packing by nearest
+        centres; the optimal assignment, (symmetry 6), moves 122 squares beyond 1e-3, 102
+        beyond 1e-2 and 36 beyond 0.1 (largest 0.932553) and turns squares by up to 38.62
+        degrees; the house witness measures as T-174; a new arrangement relative to the record's
+        packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n272.json
+    new_packing:
+      source: '#1009: ''New packing arrangements below the standing bounds; primary credit
+        to Mykhailo Polkovskyi.'''
+    note: T-174's uniform-contraction margin at 272 is 0, squares 57 and 58 touching, so the
+      gain, 8.5299e-05, lies wholly outside any padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n272.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 3.3935e-27 (contraction-n272-own.json).
+  - n: 292
+    printed: '17.590016439231'
+    rounding: up
+    exact: 17590016439230092219882547056721/1000000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-146
+      finding: 'no symmetry of the box pairs it one to one with T-146''s packing by nearest
+        centres; the optimal assignment, (symmetry 3), moves 291 squares beyond 1e-3, 131
+        beyond 1e-2 and 70 beyond 0.1 (largest 0.931284) and turns squares by up to 43.84
+        degrees; the house witness measures as T-146; against de Winter''s #1006 packing,
+        nearest centres pair it one to one with de Winter''s #1006 packing, and the optimal
+        assignment, (symmetry 5), moves 131 squares beyond 1e-3, 59 beyond 1e-2 and 3 beyond
+        0.1 (largest 0.47811) and turns squares by up to 1.557 degrees; against Özden''s #1005
+        packing, no symmetry of the box pairs it one to one with Özden''s #1005 packing by
+        nearest centres, and the optimal assignment, (symmetry 7), moves 113 squares beyond
+        1e-3, 82 beyond 1e-2 and 45 beyond 0.1 (largest 0.898415) and turns squares by up
+        to 42.64 degrees; a new arrangement relative to the record''s packing, and measured
+        one to one with #1006''s'
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n292.json
+    new_packing:
+      source: '#1009: ''New packing arrangements below the standing bounds; primary credit
+        to Mykhailo Polkovskyi.'''
+    note: 'T-146''s uniform-contraction margin is 1.7591e-19 (squares 68 and 69), so the gain,
+      1.3617e-03, about 7.7e+15 times it, lies wholly outside its padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292.json);
+      RV-3 (think-ruu2) does not reach it. Against #1006, whose margin is 5.0288e-11, the
+      gain is 3.6163e-09, about 7.19e+01 times it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292-1006.json).
+      The certificate''s own margin is 7.0307e-14 (contraction-n292-own.json).'
+  - n: 295
+    printed: '17.698115018700'
+    rounding: up
+    exact: 3539623003739878885735661164959/200000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-146
+      finding: 'no symmetry of the box pairs it one to one with T-146''s packing by nearest
+        centres; the optimal assignment, (symmetry 4), moves 290 squares beyond 1e-3, 281
+        beyond 1e-2 and 203 beyond 0.1 (largest 1.11945) and turns squares by up to 45 degrees;
+        against de Winter''s #1007 packing, no symmetry of the box pairs it one to one with
+        de Winter''s #1007 packing by nearest centres, and the optimal assignment, (symmetry
+        2), moves 292 squares beyond 1e-3, 246 beyond 1e-2 and 11 beyond 0.1 (largest 0.695787)
+        and turns squares by up to 4.245 degrees; T-146''s packing is the rational certificate
+        of the arrangement T-193''s exact form solves; a new arrangement relative to the record''s
+        packing'
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n295.json
+    new_packing:
+      source: '#1009: ''New packing arrangements below the standing bounds; primary credit
+        to Mykhailo Polkovskyi.'''
+    note: 'T-146''s uniform-contraction margin is 1.7704e-19 (squares 206 and 220), so the
+      gain, 6.1178e-03, about 3.5e+16 times it, lies wholly outside its padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n295.json);
+      RV-3 (think-ruu2) does not reach it. Against #1007, whose margin is 2.5384e-11, the
+      gain is 1.5784e-03, about 6.22e+07 times it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n295-1007.json).
+      The certificate''s own margin is 2.9661e-19 (contraction-n295-own.json).'
+  - n: 299
+    printed: '17.801004434252'
+    rounding: up
+    exact: 2225125554281470853018439796251/125000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-277
+      finding: nearest centres pair it one to one with T-277's packing; the optimal assignment,
+        under the identity of the box, moves 1 squares beyond 1e-3, 0 beyond 1e-2 and 0 beyond
+        0.1 (largest 0.00102118) and turns squares by up to 0.0378 degrees; the house witness
+        measures as T-277; against T-280's packing (Yim's re-solve of T-277), nearest centres
+        pair it one to one with T-280's packing (Yim's re-solve of T-277), and the optimal
+        assignment, under the identity of the box, moves 0 squares beyond 1e-3, 0 beyond 1e-2
+        and 0 beyond 0.1 (largest 0.000999151) and turns squares by up to 0.04928 degrees;
+        a re-solve of T-277's packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n299.json
+    refines:
+      packing_of: Evan Daniel, improved by Doğa Özden
+      entry: T-277
+      source: '#1009: ''Exact rational certificate refinements of the registered arrangements
+        on main; arrangement credit remains with the standing authors, with certificate refinement
+        credited to Mykhailo Polkovskyi.'''
+    note: 'T-277''s uniform-contraction margin is 3.4040e-12 (squares 179 and 194), and the
+      gain is 3.5268e-12, 1.0361 of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299.json):
+      T-277 contracted rounds up at 12 places to this claim''s own print, so the gain over
+      the padding, 1.23e-13, lies within the print; whether such a re-certification is a new
+      result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. Against T-280,
+      whose margin is 5.5511e-17, the gain is 2.3449e-12, about 4.22e+04 times it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299-t280.json).
+      The certificate''s own margin is 3.5612e-27 (contraction-n299-own.json).'
+  - n: 307
+    printed: '17.979230960384'
+    rounding: up
+    exact: 898961548019194230217753151937/50000000000000000000000000000
+    exact_from: packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1009@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T23:27:09Z'
+    measured:
+      against: T-279
+      finding: nearest centres pair it one to one with T-279's packing; the optimal assignment,
+        under the identity of the box, moves 0 squares beyond 1e-3, 0 beyond 1e-2 and 0 beyond
+        0.1 (largest 1.41421e-07) and turns squares by up to 5.73e-06 degrees; the house witness
+        measures as T-279; a re-solve of T-279's packing
+      source: packing/resources/web/mishapolk-issue1009-2026-11-16/measure/identity-n307.json
+    refines:
+      packing_of: ntumlnoob, improved by Francisco Couzo and Doğa Özden
+      entry: T-279
+      source: '#1009: ''Exact rational certificate refinements of the registered arrangements
+        on main; arrangement credit remains with the standing authors, with certificate refinement
+        credited to Mykhailo Polkovskyi.'''
+    note: 'T-279''s uniform-contraction margin is 3.4186e-12 (squares 108 and 304), and the
+      gain is 3.4781e-12, 1.0174 of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n307.json):
+      T-279 contracted rounds up at 12 places to this claim''s own print, so the gain over
+      the padding, 5.95e-14, lies within the print; whether such a re-certification is a new
+      result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. The certificate''s
+      own margin is 3.5960e-27 (contraction-n307-own.json).'
+  note: '#1009 names b637e6c, committed at 2026-11-16T23:31:56Z and pushed at 23:32:03Z as
+    a force-push over b9b7fa7 (committed 23:27:09Z, pushed 23:27:18Z), which holds the same
+    13 certificates byte for byte; the claims'' first commit is b9b7fa7''s. The push came
+    11 minutes before the issue, but no other report reached these counts in between, so the
+    issue dates the claims, with the first commit kept, and the verdicts are the same either
+    way. It credits Polkovskyi with new arrangements at 210, 262, 272, 292 and 295, improved
+    packings after Evan Daniel at 260 and after Doğa Özden at 268, and certificate refinements
+    at 147, 156, 180, 270, 299 and 307, whose arrangement credit it leaves with the standing
+    authors; it calls Part B ''subject to RV-3'' and says the packings were ''Discovered by
+    Mykhailo Polkovskyi, assisted by Gemini''.'
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []
