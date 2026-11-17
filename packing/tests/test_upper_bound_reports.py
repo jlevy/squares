@@ -486,6 +486,7 @@ def test_custody_refuses_a_changed_retained_file(
         ("descending", "unique and ascending"),
         ("replayed-undeclared", "replayed must be"),
         ("requested-empty", "requested must be"),
+        ("algebraic-house", "an algebraic house names a dated packet"),
     ],
 )
 def test_the_declaration_refuses_what_it_does_not_describe(
@@ -508,6 +509,8 @@ def test_the_declaration_refuses_what_it_does_not_describe(
         value["replayed"].append(400)
     elif mutation == "requested-empty":
         value["requested"] = []
+    elif mutation == "algebraic-house":
+        value["houses"][0]["algebraic"] = "not a dated packet"
     else:
         value["certificates"].reverse()
     _write_json(path, value)
@@ -529,6 +532,92 @@ def test_a_declaration_may_request_only_counts_beyond_the_horizon(
     _write_json(path, value)
     assert reports.load_declaration(packet)["houses"] == []
     assert reports.load_declaration(private(EVAND_584))["houses"] == []
+
+
+#: T-193's issue-639 form at 295, (22 + 22 sqrt 2)/3, the case's house since 23 October 2026,
+#: which no rational reader rebuilds: its packet's derived algebraic fact states it.
+T193_PACKET = "evand-exact-cur-2026-10-16"
+ALGEBRAIC_HOUSE: dict[str, Any] = {
+    "n": 295,
+    "reader": "[Daniel exact current records 2026-10-16]",
+    "source_key": "[Daniel exact current records 2026-10-16]",
+    "holders": "Ryan Xu, improved by Evan Daniel and PingYou Ltd",
+    "result": "T-193",
+    "reported_value": "17.70423279073603036",
+    "verified_value": "17.70423279073603036",
+    "evidence": ["E-evand-639-verify-exact-replay"],
+    "algebraic": T193_PACKET,
+}
+#: (22 + 22 sqrt 2)/3 to 40 places, cut.
+T193_SIDE = Fraction("17.7042327907360303578790506442044525761775")
+
+
+def _algebraic_row(side: Fraction, **house: str) -> dict[str, Any]:
+    """One certificate at 295 compared with the algebraic house, no rational reader read."""
+    declaration = cast(
+        "reports.Declaration",
+        {
+            "issue": "https://github.com/jlevy/squares/issues/1",
+            "read_on": "2026-11-17",
+            "houses": [{**ALGEBRAIC_HOUSE, **house}],
+            "pending": [],
+            "requested": [295],
+            "replayed": [295],
+        },
+    )
+    row = cast(
+        "reports.CertificateRow",
+        {
+            "n": 295,
+            "path": "certificates/n295.cert",
+            "format": "evand-cert",
+            "offered": "17.698115018700",
+            "first_committed": "2026-11-16T23:27:09Z",
+        },
+    )
+
+    def no_rational_reader(reader: str, n: int) -> Fraction:
+        raise AssertionError(f"{reader} was read as a rational house at {n}")
+
+    certificate = legacy.Certificate(295, side, ())
+    return reports.claim_row(row, certificate, declaration, no_rational_reader)
+
+
+@pytest.mark.parametrize(
+    ("side", "relation"),
+    [(Fraction(17698115018700, 10**12), "below"), (Fraction(1771, 100), "above")],
+)
+def test_an_algebraic_house_is_compared_exactly(side: Fraction, relation: str) -> None:
+    """At 295 the house's side is a quadratic irrational; the relation is one exact sign."""
+    row = _algebraic_row(side)
+    case = row["case"]
+    assert case["relation"] == relation
+    assert case["algebraic"] == T193_PACKET
+    assert "reader" not in case
+    low, high = (Fraction(value) for value in case["difference_bounds"])
+    # The house's side less the certificate's, bracketed within a part in a million.
+    assert low <= Fraction(case["difference"]) <= high
+    assert (low > 0) is (high > 0) is (relation == "below")
+    apart = T193_SIDE - side
+    assert abs(low - apart) <= abs(apart) / 10**6
+    assert abs(high - apart) <= abs(apart) / 10**6
+    holders = f"case: {ALGEBRAIC_HOUSE['holders']}"
+    assert row["smallest"] == (reports.THIS if relation == "below" else holders)
+
+
+@pytest.mark.parametrize("printed", ["17.704232790737", "17.70423279073603036"])
+def test_an_algebraic_house_admits_its_side_rounded_up(printed: str) -> None:
+    side = Fraction(17698115018700, 10**12)
+    assert _algebraic_row(side, verified_value=printed)["case"]["relation"] == "below"
+
+
+@pytest.mark.parametrize(
+    "printed", ["17.704232790736", "17.704232790738", "17.7042327907360303"]
+)
+def test_an_algebraic_house_refuses_any_other_print(printed: str) -> None:
+    side = Fraction(17698115018700, 10**12)
+    with pytest.raises(kernel.ReportError, match="algebraic side rounded up"):
+        _algebraic_row(side, verified_value=printed)
 
 
 @pytest.mark.parametrize(

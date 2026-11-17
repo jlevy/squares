@@ -289,6 +289,12 @@ class House(TypedDict):
       the case states it. `register_regularized_bounds.printed_value` keeps such a print,
       as T-155 left n = 29 (think-gzrw): the reader's side must then equal this fraction,
       and the printed value need only be at or above it.
+    - ``algebraic`` (optional): where the house's side is an irrational algebraic number,
+      as T-193's issue-639 forms are at 295 and elsewhere, the import packet whose derived
+      algebraic-number-field fact ``facts/alg-n-NNN.yaml`` states it exactly
+      (`algebraic_side`), the same reading a pending report's ``algebraic`` takes. No
+      rational reader rebuilds such a side, so ``reader`` is then the house's source key,
+      and each printed lane must be that side rounded up at its places.
     """
 
     n: int
@@ -301,6 +307,7 @@ class House(TypedDict):
     evidence: list[str]
     reported_rounding: NotRequired[str]
     verified_exact_form: NotRequired[str]
+    algebraic: NotRequired[str]
 
 
 class Pending(TypedDict):
@@ -479,6 +486,15 @@ def load_declaration(packet: Path) -> Declaration:
         "the houses must be exactly the in-horizon counts, in order",
     )
     for house in declaration["houses"]:
+        if "algebraic" in house:
+            _require(
+                _PACKET.fullmatch(house["algebraic"])
+                and house["reader"] == house["source_key"]
+                and not {"reported_rounding", "verified_exact_form"} & set(house),
+                f"n={house['n']}: an algebraic house names a dated packet, its source key as "
+                "its reader, and no printed lane or exact form beside it",
+            )
+            continue
         _require(house["reader"] in HOUSES, f"n={house['n']}: no reader {house['reader']}")
         _require(
             house.get("reported_rounding", "up") in ROUNDINGS,
@@ -1942,6 +1958,13 @@ def algebraic_side(name: str, n: int) -> FieldElement | Fraction:
     return value
 
 
+def exact_sign(value: FieldElement | Fraction) -> int:
+    """The exact sign of a difference of sides, one of them algebraic or both rational."""
+    if isinstance(value, FieldElement):
+        return value.sign()
+    return (value > 0) - (value < 0)
+
+
 def algebraic_against(
     value: FieldElement | Fraction, side: Fraction
 ) -> tuple[str, Span, Fraction, Fraction]:
@@ -2126,7 +2149,31 @@ def claim_row(
         "grid_side": legacy.literal(grid_side(n)),
     }
     candidates: list[tuple[str, Span]] = [(THIS, exact_span(side))]
-    if n <= HORIZON:
+    algebraic = houses[n].get("algebraic") if n <= HORIZON else None
+    if algebraic is not None:
+        house = houses[n]
+        exact = algebraic_side(algebraic, n)
+        for lane in ("reported_value", "verified_value"):
+            shown = Fraction(Decimal(house[lane]))
+            unit = Fraction(1, 10 ** len(house[lane].partition(".")[2]))
+            # The print is the side rounded up: at or above it, and within one unit.
+            _require(
+                exact_sign(exact - shown) <= 0 < exact_sign(exact - (shown - unit)),
+                f"n={n}: the case's {lane} is not its house's algebraic side rounded up",
+            )
+        verdict, span, low, high = algebraic_against(exact, side)
+        result["case"] = {
+            **{key: value for key, value in house.items() if key not in {"n", "reader"}},
+            "exact_side": (
+                exact.text() if isinstance(exact, FieldElement) else legacy.literal(exact)
+            ),
+            "relation": verdict,
+            # The house's side less the certificate's: an enclosure's midpoint, with its bounds.
+            "difference": legacy.literal((low + high) / 2),
+            "difference_bounds": [legacy.literal(low), legacy.literal(high)],
+        }
+        candidates.append((f"case: {house['holders']}", span))
+    elif n <= HORIZON:
         house = houses[n]
         prior = read_side(house["reader"], n)
         printed_lane = "reported_rounding" in house
