@@ -2093,10 +2093,11 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
     above 1024 (think-f2io), and #846 the same day as an owner decision (think-ikku). #779
     left them on 4 November, closed when #889 landed T-179's replay (think-u0av). #921
     joined them on 7 November as an owner decision on reuse terms (think-8h80), and #939
-    and #946 on 11 November, held for the owner's RV-3 (think-ruu2; think-2h88). #529,
-    #537, #574 and #783 left them on 17 November, on the owner's decisions of that day
-    (think-x30l, think-l7j0, think-0mup). Each carries its type, and the label taxonomy
-    names every type the record uses."""
+    and #946 on 11 November, held for the owner's RV-3 (think-ruu2; think-2h88). #1008
+    joined them on 17 November, waiting on the README its author says names T-057's
+    sources (think-a88h), and #529, #537, #574 and #783 left them the same day, on the
+    owner's decisions of that day (think-x30l, think-l7j0, think-0mup). Each carries its
+    type, and the label taxonomy names every type the record uses."""
     by_type: dict[str, set[int]] = {}
     for entry in check_requests.load_record()["issues"]:
         if entry.get("blocked"):
@@ -2106,7 +2107,7 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
         "owner-decision": 23,
         "owner-reply": 2,
         "standing-hold": 9,
-        "author": 1,
+        "author": 2,
         "compute": 6,
     }
     assert set(by_type) <= set(check_requests.BLOCK_TYPES)

@@ -1,0 +1,719 @@
+{
+ "program": "r1_controls.py",
+ "lane": "R1 (c-review-1005-1117)",
+ "label": "1007-n295-witness",
+ "file": "n295/n295_witness.yaml",
+ "form": "witness-yaml",
+ "sha256": "412a6d526bda6bbde6d8edc10f0ef6df39d9bcca2aa58f83579923711490337e",
+ "plan_sha256": "ccaf62ab5cb7cb3b80e03aa1a76e6f50c0241bb214f98e78bd841a47c64c887f",
+ "certificate": {
+  "verdict": "ACCEPT",
+  "reasons": [],
+  "n": 295,
+  "least_clearance_left_bottom_right_top": ["0", "0", "0", "7.00000000000e-16"],
+  "W": {
+   "exact": "0",
+   "about": "0"
+  },
+  "SIGMA": {
+   "exact": "0",
+   "about": "0"
+  },
+  "touching_pairs": 0
+ },
+ "controls": [
+  {
+   "id": "C0",
+   "stated": "Equal to method A on every pair and every square, with no mismatch.",
+   "as_stated": true,
+   "pairs_compared": 43365,
+   "pair_mismatches": 0,
+   "squares_compared": 295,
+   "square_mismatches": 0,
+   "cpu_seconds": 2.6
+  },
+  {
+   "id": "K1",
+   "stated": "Prior: the claim is at least the side and is the side's 12-place ceiling. As stated when both hold.",
+   "as_stated": true,
+   "claim": "17.699693441716",
+   "claim_at_least_side": true,
+   "claim_is_twelve_place_ceiling": true,
+   "claim_less_side": {
+    "exact": "1557/2000000000000000",
+    "about": "7.78500000000e-13"
+   },
+   "cpu_seconds": 0.0
+  },
+  {
+   "id": "T0",
+   "stated": "Prior: the same packing square for square: n equal, sides equal, the k-th squares' corner sets equal for every k.",
+   "as_stated": true,
+   "twin": "n295/n295_exact.json",
+   "n_equal": true,
+   "side_equal": true,
+   "unequal_in_file_order": {
+    "count": 0,
+    "first": []
+   },
+   "twin_listing_relative_to_this_file": {
+    "same sense, from corner 0 of the first file's listing": 295
+   },
+   "cpu_seconds": 0.0
+  },
+  {
+   "id": "T1",
+   "stated": "Not the same packing; sides equal; the squares unequal in file order are exactly [1].",
+   "as_stated": true,
+   "same_packing": false,
+   "unequal_in_file_order": {
+    "count": 1,
+    "first": [1]
+   },
+   "cpu_seconds": 0.0
+  },
+  {
+   "id": "R1",
+   "stated": "The reader refuses: n stated, n - 1 listed.",
+   "as_stated": true,
+   "text_changed": true,
+   "refused": true,
+   "refusal": "witness.n states 295 squares and 294 are listed",
+   "expected_phrase": "states 295 squares and 294 are listed",
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "R2",
+   "stated": "Read; n, the side and every square equal the certificate's; only the side is flagged as written out of lowest terms.",
+   "as_stated": true,
+   "text_changed": true,
+   "values_equal": true,
+   "only_the_side_flagged": true,
+   "side_as_written": "70798773766860886/4000000000000000...",
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "R3",
+   "stated": "The reader refuses: duplicate square ids; not an array of four scalars.",
+   "as_stated": true,
+   "text_changed": true,
+   "refused": true,
+   "refusal": "witness.squares: duplicate square ids",
+   "expected_phrase": "duplicate square ids",
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "R4",
+   "stated": "The reader refuses.",
+   "as_stated": true,
+   "text_changed": true,
+   "refused": true,
+   "refusal": "line 9: plain scalar '17.5' resolves to float, neither a string nor a plain integer",
+   "expected_phrase": "resolves to float",
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "R5",
+   "stated": "The reader refuses: not a rational scalar.",
+   "as_stated": true,
+   "text_changed": true,
+   "refused": true,
+   "refusal": "witness.squares[1].corners[0].x: not a rational scalar: '+2378448417070788560105231408442150891/925116247242358746010'",
+   "expected_phrase": "not a rational scalar",
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "R6",
+   "stated": "The reader refuses: duplicate key.",
+   "as_stated": true,
+   "text_changed": true,
+   "refused": true,
+   "refusal": "line 10: duplicate key 'side'",
+   "expected_phrase": "duplicate key",
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "R7",
+   "stated": "The reader refuses.",
+   "as_stated": true,
+   "text_changed": true,
+   "refused": true,
+   "refusal": "witness.coordinates.origin is 'container-center'",
+   "expected_phrase": "witness.coordinates.origin is",
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "G1",
+   "stated": "REFUSE; reasons exactly overlapping [(1, n)]; that margin exactly -1 and method B's area exactly 1; for every 1 < k < n the margin of (k, n) equals the certificate's margin of (1, k).",
+   "as_stated": true,
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "overlapping",
+     "count": 1,
+     "first": [[1, 295]]
+    }
+   ],
+   "margin_1_n": "-1",
+   "area_1_n_by_b": "1",
+   "margins_of_k_n_equal_those_of_1_k": true,
+   "cpu_seconds": 3.1
+  },
+  {
+   "id": "G2",
+   "stated": "REFUSE; reasons exactly crossing [(1, right)] and area-inside-below-1 [1]; square 1's right clearance exactly R_1 - S; its area inside the box exactly 0; no overlapping pair.",
+   "as_stated": true,
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[1, "right"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [1]
+    }
+   ],
+   "right_clearance_of_square_1": {
+    "exact": "-3190369590437327721615231408442150891/925116247242358746010000000000000000",
+    "about": "-3.44861480916e0"
+   },
+   "is_R1_less_S": true,
+   "area_inside_by_b": "0",
+   "cpu_seconds": 3.0
+  },
+  {
+   "id": "G3",
+   "stated": "REFUSE; reasons exactly not-unit [1]; refused as a unit square by method A and by method B.",
+   "as_stated": true,
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "not-unit",
+     "count": 1,
+     "first": [1]
+    }
+   ],
+   "unit_by_a": false,
+   "why_a": ["first edge is not of length 1", "first two edges are not perpendicular", "third edge is not the first reversed", "fourth edge is not the second reversed"],
+   "unit_by_b": false,
+   "cpu_seconds": 3.0
+  },
+  {
+   "id": "S0",
+   "stated": "The side rule with lowering 1 (stated under S1a); REFUSE.",
+   "as_stated": true,
+   "side_rule_holds": true,
+   "lowering": {
+    "exact": "1",
+    "about": "1.00000000000e0"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 34,
+     "first": [[263, "top"], [264, "top"], [265, "top"], [266, "top"], [267, "top"], [268, "top"], [269, "top"], [270, "top"], [271, "top"], [272, "top"], [273, "top"], [274, "top"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 33,
+     "first": [263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274]
+    }
+   ],
+   "crossing": {
+    "count": 34,
+    "first": [[263, "top"], [264, "top"], [265, "top"], [266, "top"], [267, "top"], [268, "top"], [269, "top"], [270, "top"], [271, "top"], [272, "top"], [273, "top"], [274, "top"]]
+   },
+   "at_right_or_top_wall_exactly": {
+    "count": 0,
+    "first": []
+   },
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "S1a",
+   "stated": "The side rule with lowering d: every right and top clearance lower by exactly the lowering, every left and bottom clearance and every margin unchanged; crossing exactly the (k, right) with R_k below the lowering and the (k, top) with T_k below it; REFUSE exactly when some square crosses. Prior: W = 0, so refused.",
+   "as_stated": true,
+   "side_rule_holds": true,
+   "lowering": {
+    "exact": "1/1000000000000000000000000000000",
+    "about": "1.00000000000e-30"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[291, "right"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [291]
+    }
+   ],
+   "crossing": {
+    "count": 1,
+    "first": [[291, "right"]]
+   },
+   "at_right_or_top_wall_exactly": {
+    "count": 0,
+    "first": []
+   },
+   "branch": "touching wall (W = 0)",
+   "prior_refused": true,
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "S1b",
+   "stated": "The side rule with lowering 1/q.",
+   "as_stated": true,
+   "side_rule_holds": true,
+   "lowering": {
+    "exact": "1/2000000000000000",
+    "about": "5.00000000000e-16"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[291, "right"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [291]
+    }
+   ],
+   "crossing": {
+    "count": 1,
+    "first": [[291, "right"]]
+   },
+   "at_right_or_top_wall_exactly": {
+    "count": 0,
+    "first": []
+   },
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "S1c",
+   "stated": "The side rule with lowering W; the certificate's verdict; a square at the right or top wall at clearance exactly 0.",
+   "as_stated": true,
+   "side_rule_holds": true,
+   "lowering": {
+    "exact": "0",
+    "about": "0"
+   },
+   "verdict": "ACCEPT",
+   "reasons": [],
+   "crossing": {
+    "count": 0,
+    "first": []
+   },
+   "at_right_or_top_wall_exactly": {
+    "count": 1,
+    "first": [[291, "right"]]
+   },
+   "cpu_seconds": 0.4
+  },
+  {
+   "id": "S1d",
+   "stated": "The side rule with lowering W + d; REFUSE.",
+   "as_stated": true,
+   "side_rule_holds": true,
+   "lowering": {
+    "exact": "1/1000000000000000000000000000000",
+    "about": "1.00000000000e-30"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[291, "right"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [291]
+    }
+   ],
+   "crossing": {
+    "count": 1,
+    "first": [[291, "right"]]
+   },
+   "at_right_or_top_wall_exactly": {
+    "count": 0,
+    "first": []
+   },
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "S1e",
+   "stated": "The side rule with lowering S - C (a raising when C is above S). Prior: accepted.",
+   "as_stated": true,
+   "side_rule_holds": true,
+   "lowering": {
+    "exact": "-1557/2000000000000000",
+    "about": "-7.78500000000e-13"
+   },
+   "verdict": "ACCEPT",
+   "reasons": [],
+   "crossing": {
+    "count": 0,
+    "first": []
+   },
+   "at_right_or_top_wall_exactly": {
+    "count": 0,
+    "first": []
+   },
+   "prior_accepted": true,
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "S1f",
+   "stated": "The side rule with lowering S - C + 10^-12. Prior: refused.",
+   "as_stated": true,
+   "side_rule_holds": true,
+   "lowering": {
+    "exact": "443/2000000000000000",
+    "about": "2.21500000000e-13"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 33,
+     "first": [[263, "top"], [264, "top"], [265, "top"], [266, "top"], [267, "top"], [268, "top"], [269, "top"], [270, "top"], [271, "top"], [272, "top"], [273, "top"], [274, "top"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 33,
+     "first": [263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274]
+    }
+   ],
+   "crossing": {
+    "count": 33,
+    "first": [[263, "top"], [264, "top"], [265, "top"], [266, "top"], [267, "top"], [268, "top"], [269, "top"], [270, "top"], [271, "top"], [272, "top"], [273, "top"], [274, "top"]]
+   },
+   "at_right_or_top_wall_exactly": {
+    "count": 0,
+    "first": []
+   },
+   "prior_refused": true,
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "S2c",
+   "stated": "The certificate's verdict; every margin unchanged; clearances exactly (L - W_left, B - W_bottom, R + W_left - SIGMA, T + W_bottom - SIGMA); squares at clearance exactly 0 at the left wall, at the bottom wall, and at the right or the top wall.",
+   "as_stated": true,
+   "verdict": "ACCEPT",
+   "reasons": [],
+   "translation": ["0", "0"],
+   "side_lowered_by_SIGMA": {
+    "exact": "0",
+    "about": "0"
+   },
+   "margins_equal": true,
+   "contacts_left_bottom_right_top": [2, 1, 1, 0],
+   "cpu_seconds": 3.0
+  },
+  {
+   "id": "S2p",
+   "stated": "REFUSE; crossing exactly the squares whose right or top clearance in S2c is below d; every margin unchanged.",
+   "as_stated": true,
+   "side_rule_holds": true,
+   "lowering": {
+    "exact": "1/1000000000000000000000000000000",
+    "about": "1.00000000000e-30"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[291, "right"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [291]
+    }
+   ],
+   "crossing": {
+    "count": 1,
+    "first": [[291, "right"]]
+   },
+   "at_right_or_top_wall_exactly": {
+    "count": 0,
+    "first": []
+   },
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "P0p",
+   "stated": "REFUSE; (i, j) overlapping, its margin exactly -d by method A and by the closed form, overlapping by method B. Where no pair of the certificate touches, the control is recorded as having no subject.",
+   "as_stated": true,
+   "no_subject": "no pair of the certificate touches",
+   "touching_pairs_in_the_certificate": 0,
+   "cpu_seconds": 0.0
+  },
+  {
+   "id": "P1c",
+   "stated": "The certificate's verdict with no reason; that pair's margin exactly 0 by method A and by the closed form, touching by method B; one more touching pair than the certificate has. Where no pair has an eligible square, the tightest positive pair is closed by moving j and the outcome is stated only for that pair: margin exactly 0, touching by method B.",
+   "as_stated": true,
+   "pair": [55, 56],
+   "square_moved": 56,
+   "eligible": true,
+   "rank_among_positive_margins": 0,
+   "margin_in_the_certificate": {
+    "exact": "130682424409045554313906189258616309337971/85972981316318916405636805335346230431562500000000000",
+    "about": "1.52004062681e-12"
+   },
+   "shift_length_squared": "2.31052350716e-24",
+   "verdict": "ACCEPT",
+   "reasons": [],
+   "margin": "0",
+   "closed_form": "0",
+   "class_by_b": "touching",
+   "area_by_b": "0",
+   "touching_pairs": 1,
+   "cpu_seconds": 0.7
+  },
+  {
+   "id": "P1p",
+   "stated": "REFUSE; reasons exactly overlapping [(i, j)]; that margin exactly -d by method A and by the closed form; method B's area positive. In the fallback of P1c: REFUSE, with (i, j) among the overlapping pairs at margin exactly -d.",
+   "as_stated": true,
+   "pair": [55, 56],
+   "square_moved": 56,
+   "eligible": true,
+   "rank_among_positive_margins": 0,
+   "margin_in_the_certificate": {
+    "exact": "130682424409045554313906189258616309337971/85972981316318916405636805335346230431562500000000000",
+    "about": "1.52004062681e-12"
+   },
+   "shift_length_squared": "2.31052350716e-24",
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "overlapping",
+     "count": 1,
+     "first": [[55, 56]]
+    }
+   ],
+   "margin": "-1/1000000000000000000000000000000",
+   "closed_form": "-1/1000000000000000000000000000000",
+   "class_by_b": "overlapping",
+   "area_by_b": "4.37931113152e-49",
+   "touching_pairs": 0,
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "W1c-left",
+   "stated": "The certificate's verdict with no reason; that square's clearance at the wall exactly 0 by method A, touching by method B; its clearance at the opposite wall raised by the move. Where no square is eligible the control is recorded as having no subject, and W2 stands for the wall.",
+   "as_stated": true,
+   "square": 77,
+   "clearance_in_the_certificate": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_at_the_wall": {
+    "exact": "0",
+    "about": "0"
+   },
+   "verdict": "ACCEPT",
+   "reasons": [],
+   "clearance": "0",
+   "class_by_b": "touching",
+   "cpu_seconds": 0.4
+  },
+  {
+   "id": "W1p-left",
+   "stated": "REFUSE; reasons exactly crossing [(k, left)] and area-inside-below-1 [k]; that clearance exactly -d.",
+   "as_stated": true,
+   "square": 77,
+   "clearance_in_the_certificate": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_at_the_wall": {
+    "exact": "0",
+    "about": "0"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[77, "left"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [77]
+    }
+   ],
+   "clearance": "-1/1000000000000000000000000000000",
+   "class_by_b": "overlapping",
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "W1c-bottom",
+   "stated": "As W1c-left, at the bottom wall.",
+   "as_stated": true,
+   "square": 89,
+   "clearance_in_the_certificate": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_at_the_wall": {
+    "exact": "0",
+    "about": "0"
+   },
+   "verdict": "ACCEPT",
+   "reasons": [],
+   "clearance": "0",
+   "class_by_b": "touching",
+   "cpu_seconds": 0.4
+  },
+  {
+   "id": "W1p-bottom",
+   "stated": "As W1p-left, at the bottom wall.",
+   "as_stated": true,
+   "square": 89,
+   "clearance_in_the_certificate": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_at_the_wall": {
+    "exact": "0",
+    "about": "0"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[89, "bottom"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [89]
+    }
+   ],
+   "clearance": "-1/1000000000000000000000000000000",
+   "class_by_b": "overlapping",
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "W1c-right",
+   "stated": "As W1c-left, at the right wall.",
+   "as_stated": true,
+   "square": 291,
+   "clearance_in_the_certificate": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_at_the_wall": {
+    "exact": "0",
+    "about": "0"
+   },
+   "verdict": "ACCEPT",
+   "reasons": [],
+   "clearance": "0",
+   "class_by_b": "touching",
+   "cpu_seconds": 0.4
+  },
+  {
+   "id": "W1p-right",
+   "stated": "As W1p-left, at the right wall.",
+   "as_stated": true,
+   "square": 291,
+   "clearance_in_the_certificate": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_at_the_wall": {
+    "exact": "0",
+    "about": "0"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[291, "right"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [291]
+    }
+   ],
+   "clearance": "-1/1000000000000000000000000000000",
+   "class_by_b": "overlapping",
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "W1c-top",
+   "stated": "As W1c-left, at the top wall.",
+   "as_stated": true,
+   "square": 263,
+   "clearance_in_the_certificate": {
+    "exact": "7/10000000000000000",
+    "about": "7.00000000000e-16"
+   },
+   "least_clearance_at_the_wall": {
+    "exact": "7/10000000000000000",
+    "about": "7.00000000000e-16"
+   },
+   "verdict": "ACCEPT",
+   "reasons": [],
+   "clearance": "0",
+   "class_by_b": "touching",
+   "cpu_seconds": 0.3
+  },
+  {
+   "id": "W1p-top",
+   "stated": "As W1p-left, at the top wall.",
+   "as_stated": true,
+   "square": 263,
+   "clearance_in_the_certificate": {
+    "exact": "7/10000000000000000",
+    "about": "7.00000000000e-16"
+   },
+   "least_clearance_at_the_wall": {
+    "exact": "7/10000000000000000",
+    "about": "7.00000000000e-16"
+   },
+   "verdict": "REFUSE",
+   "reasons": [
+    {
+     "kind": "crossing",
+     "count": 1,
+     "first": [[263, "top"]]
+    },
+    {
+     "kind": "area-inside-below-1",
+     "count": 1,
+     "first": [263]
+    }
+   ],
+   "clearance": "-1/1000000000000000000000000000000",
+   "class_by_b": "overlapping",
+   "cpu_seconds": 0.4
+  }
+ ],
+ "tier": "twin",
+ "as_stated": 34,
+ "of": 34,
+ "run_on_the_reports_first_file_only": ["G4", "G5", "G6", "G7", "G8", "G9", "G10", "W2c-left", "W2p-left", "W2c-bottom", "W2p-bottom", "W2c-right", "W2p-right", "W2c-top", "W2p-top", "PALL", "WALL"],
+ "not_as_stated": [],
+ "summary": "EVERY_CONTROL_AS_STATED",
+ "cpu_seconds": 24.7
+}

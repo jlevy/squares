@@ -1,0 +1,36 @@
+{
+ "program": "r1_twin.py",
+ "lane": "R1 (c-review-1005-1117)",
+ "first": {
+  "file": "n-292-candidate.yaml",
+  "form": "witness-yaml"
+ },
+ "second": {
+  "file": "n292-witness.json",
+  "form": "witness-json"
+ },
+ "n": [292, 292],
+ "n_equal": true,
+ "side_equal": true,
+ "side_a_less_side_b": "0",
+ "squares_with_four_distinct_corners": [292, 292],
+ "unequal_in_file_order": {
+  "count": 0,
+  "first": []
+ },
+ "equal_square_for_square": true,
+ "equal_as_collections": true,
+ "second_file_listing_relative_to_first": {
+  "same sense, from corner 0 of the first file's listing": 292
+ },
+ "same_packing": true,
+ "records_equal_outside_the_geometry": {
+  "softschema": true,
+  "witness_id": true,
+  "claim": true,
+  "source": true,
+  "certificate": true,
+  "id_form": true
+ },
+ "ids_equal": true
+}
