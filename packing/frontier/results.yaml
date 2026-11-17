@@ -34985,6 +34985,14 @@ results:
       14.993549626299. "The lineage from the start is short" counts the search's steps, not
       the squares' motion (N-4).
 
+      2026-11-17 (jlevy/squares#1008, think-dw3n): Ostashev's record file for T-175's
+      design (the dostashev-merged-bands packet's source/records/n0211.sqpk, line 5) says he
+      re-hardened it from Evan Daniel's exact optimum (T-098) of Joost de Winter's packing
+      (T-057), which matches it square for square (T-098's register comparison). So by the
+      chain rule of attribution.md, as T-188's line does since the same issue, the credit
+      line names de Winter after Ostashev: Daniel after Couzo, Ostashev, de Winter, Levy.
+      The T-098 link is the author's own, and the short credit is unchanged.
+
       The source's s182-1024_regularized.cert is a display view at the same side, one to one
       with the certificate under the identity: it moves 49 squares beyond 1e-9 (37 beyond
       1e-3), 5 beyond a tenth

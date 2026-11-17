@@ -31,4 +31,9 @@ reason: >-
   paths above swapped in. All four are byte-identical across the three: the explainer's 55
   files and 43 files each of the optimality review, the threshold-bound review and the methods
   survey. No PDF was printed; each prints from that HTML. Every paper keeps its version:
-  v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
+  v0.4.35, v0.1.11, v0.1.4 and v0.2.7. Lane w2-credit-1117r (think-dw3n) then carried the chain
+  to 182: T-243's line, Evan Daniel's L-cut of T-188, names de Winter, with a T-243 notes
+  sentence, the requests entry's ask note and one sentence of the packet's lineage section.
+  The same comparison against origin/main f9ddfeeef, run again on that tree with the same
+  four paths and /usr/bin/google-chrome as SQPACK_CHROMIUM, wrote the same 55 and three
+  times 43 files byte-identical across its three renders.

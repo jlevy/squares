@@ -28645,7 +28645,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /credit
-  expected_text: Daniel after Couzo, Ostashev, Levy
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
   start: 0
   end: 6
   label: Daniel
@@ -28662,25 +28662,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /credit
-  expected_text: Daniel after Couzo, Ostashev, Levy
-  start: 20
-  end: 28
-  label: Ostashev
-  role: prerequisite
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  note: Reviewed source credit matches the evidenced person and printed name; issue
-    806 names the register's s(211) packing as the start its L-cut search began from
-    and asks that Daniil Ostashev be credited; that packing, T-188, is Francisco Couzo's
-    arrangement of Ostashev's design (T-175), and the original credit role is retained.
-  contributor_id: daniil-ostashev
-- origin:
-    path: packing/resources/bibliography.yaml
-    record_key: '[Daniel n182 2026-10-25]'
-    field: /credit
-  expected_text: Daniel after Couzo, Ostashev, Levy
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
   start: 13
   end: 18
   label: Couzo
@@ -28698,9 +28680,46 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /credit
-  expected_text: Daniel after Couzo, Ostashev, Levy
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
+  start: 20
+  end: 28
+  label: Ostashev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  note: Reviewed source credit matches the evidenced person and printed name; issue
+    806 names the register's s(211) packing as the start its L-cut search began from
+    and asks that Daniil Ostashev be credited; that packing, T-188, is Francisco Couzo's
+    arrangement of Ostashev's design (T-175), and the original credit role is retained.
+  contributor_id: daniil-ostashev
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
   start: 30
-  end: 34
+  end: 39
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: 'Reviewed 2026-11-17 (think-dw3n, jlevy/squares#1008): de Winter joins this
+    credit by attribution.md''s chain rule, since the 211 packing the L-cut began from
+    (T-188) continues the Ostashev design that was re-hardened from Evan Daniel''s
+    exact optimum of Joost de Winter''s packing (dostashev-merged-bands-2026-10-13
+    source/records/n0211.sqpk, line 5); the printed surname matches his profile.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
+  start: 41
+  end: 45
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -28708,7 +28727,7 @@ occurrences:
   - primary-byline
   - announcement-account
   note: Reviewed packing/resources/bibliography.yaml [[Daniel n182 2026-10-25]] /credit
-    span 30:34. The issue names this project's register as where its start came from;
+    span 41:45. The issue names this project's register as where its start came from;
     the first-party jlevy/squares record is the Joshua Levy identity established by
     LICENSE and the retained ojoshe receipt, and project credit does not imply sole
     personal authorship.

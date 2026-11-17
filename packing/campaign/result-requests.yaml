@@ -35710,8 +35710,9 @@ issues:
       README of JoostdeWinter/square-packing-211. Checked on 17 November 2026 in lane
       c-credit-1008-1117 (think-dp8t): every link from T-057 to the house is in a retained source's
       own files, so by attribution.md's chain rule the lines of T-188, T-181 and T-182 (Couzo's
-      continuations of T-175's design at 211) name de Winter; T-098's and T-175's already did, the
-      short credits are unchanged, and the house phrase at 211 names the chain. The record's
+      continuations of T-175's design at 211) name de Winter, as does T-243's at 182, Evan
+      Daniel's L-cut of T-188 (think-dw3n); T-098's and T-175's already did, the short credits are
+      unchanged, and the house phrase at 211 names the chain. The record's
       devtools.measure_identity repeats his comparison and his figures hold. The README he names
       was unchanged when read (head 702df9bb, 84 bytes, no sources), so T-057's credit stays de
       Winter until a published revision names them (think-a88h); the GPT-6 Astra statement is
@@ -35734,7 +35735,9 @@ issues:
         Ellsworth, Levy, each continuing T-175's design at 211 (the 14 and 16 October reviews'
         pairings). Ostashev stays the finder of the house's packing, since no symmetry pairs his
         design with T-057's nearest centres one to one; T-253's line already names de Winter.
-        T-243 at 182, an L-cut of T-188's packing, is left to think-dw3n.
+        The chain continues to 182, where T-243 is Evan Daniel's L-cut of T-188's packing (M-1
+        of the 25 October review), so in the same change (think-dw3n) its line becomes Daniel
+        after Couzo, Ostashev, de Winter, Levy (from Daniel after Couzo, Ostashev, Levy).
     - what: >-
         Name T-057's own sources, Arslanov, Mustafin and Shangitbayev (2021) and others, in its
         credit and through the chain.

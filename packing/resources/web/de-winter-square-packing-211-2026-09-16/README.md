@@ -125,6 +125,8 @@ says he re-hardened that exact optimum; and Couzo’s metadata seeds T-188 from 
 #575 certificate, by its digest. So the credit lines of T-188 and of Couzo’s #583 and
 #586 certificates (T-181, T-182), which continue the same design, now name de Winter,
 as T-098’s and T-175’s already did.
+The chain reaches one count beyond 211: Evan Daniel’s T-243 at `n = 182` is an L-cut of
+T-188’s packing (M-1 of the review of 25 October 2026), so its line names de Winter too.
 
 The first link is the author’s statement only. The issue says the packing uses the
 construction of Arslanov, Mustafin and Shangitbayev (2021), two tilted components
