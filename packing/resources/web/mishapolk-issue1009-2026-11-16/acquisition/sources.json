@@ -1,0 +1,207 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-17T01:41Z",
+  "git_scope": "Blobless clone of Mishapolk/square-packing-records fetched on 17 November 2026 at 01:40Z for the intake of jlevy/squares#1009 (lane c-import-1009-1117, bead think-i38n), and a sparse checkout of b637e6c (committed 2026-11-16T23:31:56Z, 'Add 13 verified exact rational square-packing certificates (2026-11-16)'), the repository's head when git ls-remote read it and the commit the issue names, opened 6 minutes 26 seconds later (23:38:22Z). Its parent is 52aa267, the last read. GitHub's activity log for the repository, read here, shows a push of b9b7fa7 (committed 23:27:09Z, parent 52aa267) at 23:27:18Z, then a force-push at 23:32:03Z that replaced it with b637e6c: b9b7fa7 holds the 13 certificates, the 13 Witness/v2 files, both SHA256SUMS lists, the figures and the two verifiers byte for byte as b637e6c does, and differs only in SUBMISSION_2026_11_16.md (its heading and prose) and in the two indexes (their generated times, and the credit at each of the 13 counts, which b9b7fa7 gave as 'Mykhailo Polkovskyi after <holder>' and b637e6c as 'Mykhailo Polkovskyi (Mishapolk)'). b9b7fa7 is on no branch now; it was fetched by its id. Retained: the 13 certificates under certificates/0000-0999/ and the 13 Witness/v2 files under witnesses/2026-11-16/ that the issue names, the witnesses' SHA256SUMS, the submission note and the two new verifiers, verify_area_exact.py and verify_algebraic_bounds.py, as data. Pinned by digest: the licence against the issue-732 packet's copy, the README against the issue-846 packet's, the separating-axis verifier and its licence against the issue-678 packet's, the certificates' SHA256SUMS over the whole repository (561,476 bytes), the two indexes, and the 13 figures. No source program was executed.",
+  "sources": [
+    {
+      "id": "mishapolk-issue1009-2026-11-16",
+      "source_url": "https://github.com/Mishapolk/square-packing-records",
+      "source_ref": "b637e6cf59c23781c813e8442bfdccb5aa5f3954",
+      "source_commit": "b637e6cf59c23781c813e8442bfdccb5aa5f3954",
+      "committed_utc": "2026-11-16T23:31:56Z",
+      "git_tree": "fad6ceaefe68a6323f35dd9b7635fef070bf633c",
+      "archived_path": "packing/resources/web/mishapolk-issue1009-2026-11-16/source",
+      "subtree_manifest": "packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "BOUND_VERIFIER_LICENSE.txt",
+        "verify_bound_certificate.py",
+        "verify_area_exact.py",
+        "verify_algebraic_bounds.py",
+        "SUBMISSION_2026_11_16.md",
+        "certified_bounds.json",
+        "upper_bounds.json",
+        "certificates/SHA256SUMS",
+        "certificates/0000-0999/n147.cert",
+        "certificates/0000-0999/n156.cert",
+        "certificates/0000-0999/n180.cert",
+        "certificates/0000-0999/n210.cert",
+        "certificates/0000-0999/n260.cert",
+        "certificates/0000-0999/n262.cert",
+        "certificates/0000-0999/n268.cert",
+        "certificates/0000-0999/n270.cert",
+        "certificates/0000-0999/n272.cert",
+        "certificates/0000-0999/n292.cert",
+        "certificates/0000-0999/n295.cert",
+        "certificates/0000-0999/n299.cert",
+        "certificates/0000-0999/n307.cert",
+        "witnesses/2026-11-16/SHA256SUMS",
+        "witnesses/2026-11-16/n-147.yaml",
+        "witnesses/2026-11-16/n-156.yaml",
+        "witnesses/2026-11-16/n-180.yaml",
+        "witnesses/2026-11-16/n-210.yaml",
+        "witnesses/2026-11-16/n-260.yaml",
+        "witnesses/2026-11-16/n-262.yaml",
+        "witnesses/2026-11-16/n-268.yaml",
+        "witnesses/2026-11-16/n-270.yaml",
+        "witnesses/2026-11-16/n-272.yaml",
+        "witnesses/2026-11-16/n-292.yaml",
+        "witnesses/2026-11-16/n-295.yaml",
+        "witnesses/2026-11-16/n-299.yaml",
+        "witnesses/2026-11-16/n-307.yaml",
+        "figures/2026-11-16/n147.svg",
+        "figures/2026-11-16/n156.svg",
+        "figures/2026-11-16/n180.svg",
+        "figures/2026-11-16/n210.svg",
+        "figures/2026-11-16/n260.svg",
+        "figures/2026-11-16/n262.svg",
+        "figures/2026-11-16/n268.svg",
+        "figures/2026-11-16/n270.svg",
+        "figures/2026-11-16/n272.svg",
+        "figures/2026-11-16/n292.svg",
+        "figures/2026-11-16/n295.svg",
+        "figures/2026-11-16/n299.svg",
+        "figures/2026-11-16/n307.svg"
+      ],
+      "subtree_file_count": 50,
+      "subtree_total_bytes": 25671377,
+      "retained_file_count": 30,
+      "retained_total_bytes": 12348332,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "BOUND_VERIFIER_LICENSE.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT licence for the verifier; byte-identical to the copy the issue-678 packet retains.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1088,
+          "sha256": "4761eb7dc9e50c13cd9a876e0a56dbe3db7b97064a354c0ac235c93293e4de0c",
+          "reason": "The source's MIT licence; byte-identical to the copy the issue-732 packet retains.",
+          "identical_to": "packing/resources/web/mishapolk-issue732-2026-10-22/source/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "bytes": 4737,
+          "sha256": "6681c2ab6552dd917c2740da97e06071d87277126078d295d82234aa9881bee1",
+          "reason": "The source's README, unchanged since 52aa267; byte-identical to the copy the issue-846 packet retains.",
+          "identical_to": "packing/resources/web/mishapolk-issue846-2026-10-30/source/README.md"
+        },
+        {
+          "path": "certificates/SHA256SUMS",
+          "bytes": 561476,
+          "sha256": "03f0dfd704676faa75711eb3617b83d2a41cced2f142df4f7ecff05b09e840d1",
+          "reason": "The digest list of every certificate in the repository (561,476 bytes); the 13 the issue names are checked against it; pinned by digest only."
+        },
+        {
+          "path": "certified_bounds.json",
+          "bytes": 4623204,
+          "sha256": "ef7b4689a0b322776c0f45928a71b19dd20241b0a066a73be3ef55984c6603d5",
+          "reason": "The source's two indexes at the pin, which state each count's side and credit; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n147.svg",
+          "bytes": 18996,
+          "sha256": "c7e4e0b8fe98f043d555598134624f352578c08ea1472a270dce7c686e173930",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n156.svg",
+          "bytes": 20171,
+          "sha256": "587c746fac01d7e17b29b0862f98e0cf37da6bc5ebc4778cc4e604624058a77a",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n180.svg",
+          "bytes": 23243,
+          "sha256": "f5e486262796b9ed005520d31401e50aa5570e3451dbc619cb23833f3d86bd76",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n210.svg",
+          "bytes": 27103,
+          "sha256": "3604028378441510e9afb4b224610483f21a9147eb5724b61a4bfad1d391f3de",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n260.svg",
+          "bytes": 33508,
+          "sha256": "2e05780a2a38d3bbe993ae67a3aeedc0afa70a11ef2d16a9c402062063015987",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n262.svg",
+          "bytes": 33768,
+          "sha256": "187513cd809006662ce5a0d1e872ff700a90a9729f442a4ce628dcce6adbc190",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n268.svg",
+          "bytes": 34544,
+          "sha256": "a8ca56313d8df8bd69dc2c8ca93eca6447d4b46c5f7ea575a64b3c7ff5a51d8a",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n270.svg",
+          "bytes": 34810,
+          "sha256": "67300295509a4894be8cbace4b708ae04c3c318d8fd9763f8972898483859e80",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n272.svg",
+          "bytes": 35080,
+          "sha256": "fb867d4a3df2fda220e2df28b51c8bf74f5cb241c37a2e0736fabb78a3660bd7",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n292.svg",
+          "bytes": 37631,
+          "sha256": "add0b1a6f2822a7de5ca7114f43add6b16b70866d7a99514f314be188a893a2f",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n295.svg",
+          "bytes": 38001,
+          "sha256": "c2fd60b55c36686584edc168f5574d9da3edc40f378b9c51218aedc57ce93da6",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n299.svg",
+          "bytes": 38520,
+          "sha256": "f4e149c16a8c014ee6a7be53dfe50cb4f06468506b09c35140236849d0664de5",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "figures/2026-11-16/n307.svg",
+          "bytes": 39597,
+          "sha256": "d27ea9d12f47ae159b987e278ab5b8c361a20654be6ab3690d591ceda5dba498",
+          "reason": "Pictures of the 13 packings, which state no geometry the certificates do not; pinned by digest only."
+        },
+        {
+          "path": "upper_bounds.json",
+          "bytes": 7712933,
+          "sha256": "672c426e930c949346f77061fed09835753f7e7890410ecc4fa5e17fbc948ba6",
+          "reason": "The source's two indexes at the pin, which state each count's side and credit; pinned by digest only."
+        },
+        {
+          "path": "verify_bound_certificate.py",
+          "bytes": 3567,
+          "sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "reason": "The verifier the issue names; byte-identical to the copy the issue-678 packet retains, and never executed here.",
+          "identical_to": "packing/resources/web/couzo-issue678-2026-10-18/source/verify_bound_certificate.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Mykhailo Polkovskyi (Mishapolk): LICENSE (Git blob d81c957, SHA-256 4761eb7d...4de0c), added at 17cc220 and unchanged at the pin, byte-identical to the copy the mishapolk-issue732-2026-10-22 packet retains and pinned against it; the author's grant on issue #719 (issuecomment-6350348588, answer 5) states that it covers all certificates, catalogs, manifests and tooling and lets jlevy/squares retain and redistribute the raw certificate files. BOUND_VERIFIER_LICENSE.txt and verify_bound_certificate.py are Evan Daniel's MIT verifier as Francisco Couzo modified it, byte-identical to the copies the couzo-issue678-2026-10-18 packet retains and pinned against them. The issue says the packings were 'Discovered by Mykhailo Polkovskyi, assisted by Gemini'; the tree names no AI-assistance terms.",
+      "claims": [
+        "Issue #1009 (opened 2026-11-16T23:38:22Z by Mishapolk, never edited) reports 13 upper bounds from certificates/0000-0999/nN.cert at b637e6c, each the certificate's exact rational side rounded up at 12 places, in two parts: A, seven lowered upper bounds at 210, 260, 262, 268, 272, 292 and 295 (printed 14.971214601589, 16.633520939840, 16.698115018700, 16.871868135103, 16.965501175831, 17.590016439231 and 17.698115018700), and B, six 'exact rational refinements lowering the 12-place print (subject to RV-3)' at 147, 156, 180, 270, 299 and 307 (printed 12.651043553173, 12.977053087495, 13.915618502788, 16.928148603340, 17.801004434252 and 17.979230960384). It lists each certificate's and each Witness/v2 file's SHA-256, which match the retained files and the two SHA256SUMS lists, and the least wall and pair clearances: 1e-28 at every wall, 2e-28 at most pairs, 4.238e-15 at 292, 1.776e-20 at 295 and 1.445e-24 at 180.",
+        "At 262, 292 and 295 the issue says each side is below the open requests #1007 (262, 295), #1005 and #1006 (292), and verify_algebraic_bounds.py states #1007's sides as 166996934419035177/10^16 and 35399386883430443/(2*10^15) and #1006's as an exact fraction, with exact comparisons against 16 + sqrt(2)/2 and (22 + 22 sqrt(2))/3 at 262 and 295.",
+        "The issue credits Mykhailo Polkovskyi with new arrangements at 210, 262, 272, 292 and 295, improved packings 'after Evan Daniel at 260' and 'after Do\u011fa \u00d6zden at 268', and certificate refinements of the registered arrangements at 147, 156, 180, 270, 299 and 307, whose arrangement credit it leaves with the standing authors.",
+        "The issue says verify_bound_certificate.py --strict and verify_area_exact.py --strict accept every certificate, and that this repository's check_rational_witness_independent.py at f9ddfeeef reports VERIFIED on all 13 Witness/v2 files. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

@@ -282,6 +282,11 @@ L181_1115 = "de-winter-s90-upper-bound-2026-11-15"
 #: JoeGun's #1001 at 127, 204, 232, 264 and 305, his improvements of Tomas Kodaj's public
 #: Kaggle packings; corner Witness/v2 files read by ``witness-corners``, under CC BY 4.0.
 L187_1116 = "joegun-upper-bounds-2026-11-16"
+#: The intake pass of 17 November 2026, lane c-import-1009-1117
+#: (`test_upper_bound_reports_1009`): Mykhailo Polkovskyi's #1009 at 13 counts,
+#: centre/half-angle certificates read by ``evand-cert``, each held to the source's
+#: Witness/v2 corner file, under MIT.
+ISSUE_1009 = "mishapolk-issue1009-2026-11-16"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -356,6 +361,7 @@ EVERY = (
     L170_1115,
     L181_1115,
     L187_1116,
+    ISSUE_1009,
 )
 
 
@@ -1831,6 +1837,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L170_1115: "2026-11-15",
         L181_1115: "2026-11-15",
         L187_1116: "2026-11-16",
+        ISSUE_1009: "2026-11-16",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

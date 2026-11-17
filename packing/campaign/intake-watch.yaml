@@ -2286,3 +2286,19 @@ repositories:
       264 and 305 with their decimal poses, the author's checker and its output, and
       packing-witness verify's output, which the packet retains whole but for Evan Daniel's
       MIT notice, pinned against a byte-identical copy. Nothing more to import.
+  # Lane c-import-1009-1117 of the intake pass of 17 November 2026 (think-p02d, think-i38n).
+  - url: https://github.com/Mishapolk/square-packing-records
+    read_through: b637e6cf59c23781c813e8442bfdccb5aa5f3954
+    read_on: '2026-11-17'
+    note: >-
+      Read through b637e6c (23:31:56Z on 16 November), the head at 01:40Z on 17 November and the
+      one commit past the 52aa267 read, which jlevy/squares#1009 (23:38:22Z) names: 13 exact
+      rational certificates at 147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299 and 307
+      under certificates/0000-0999/ (each rewriting the file at that path), their Witness/v2
+      corner files and figures under witnesses/2026-11-16/ and figures/2026-11-16/, two new
+      verifiers, a submission note and the two indexes. GitHub's activity log shows it pushed at
+      23:32:03Z as a force-push over b9b7fa7 (committed 23:27:09Z, pushed 23:27:18Z), which holds
+      the same certificates, witnesses, figures and verifiers byte for byte and differs only in
+      the submission note's prose and the indexes' times and credits; b9b7fa7 is on no branch
+      now. The mishapolk-issue1009-2026-11-16 packet pins b637e6c and retains the certificates,
+      the witnesses and the verifiers. Nothing more to import.

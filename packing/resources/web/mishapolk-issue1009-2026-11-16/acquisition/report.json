@@ -1,0 +1,451 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1009",
+  "author": "Mishapolk",
+  "source_key": "[Mishapolk issue 1009 2026-11-16]",
+  "report_evidence": "E-mishapolk-1009-certificate-report",
+  "receipt_format": "mishapolk-1009-exact-replay-v1",
+  "witness_prefix": "W-mishapolk-1009-n",
+  "claim_limitations": "Complete b637e6c rational centre/half-angle certificates in Evan Daniel's format, centres in [0, S]^2, read exactly from the retained source files, each held to the source's own Witness/v2 corner file of the same packing. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-17",
+  "read_at_main": "f9ddfeeef9070ede581142154ab992149b278ab0",
+  "certificates": [
+    {
+      "n": 147,
+      "path": "certificates/0000-0999/n147.cert",
+      "format": "evand-cert",
+      "offered": "12.651043553173",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-147.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 156,
+      "path": "certificates/0000-0999/n156.cert",
+      "format": "evand-cert",
+      "offered": "12.977053087495",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-156.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 180,
+      "path": "certificates/0000-0999/n180.cert",
+      "format": "evand-cert",
+      "offered": "13.915618502788",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-180.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 210,
+      "path": "certificates/0000-0999/n210.cert",
+      "format": "evand-cert",
+      "offered": "14.971214601589",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-210.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 260,
+      "path": "certificates/0000-0999/n260.cert",
+      "format": "evand-cert",
+      "offered": "16.633520939840",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-260.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 262,
+      "path": "certificates/0000-0999/n262.cert",
+      "format": "evand-cert",
+      "offered": "16.698115018700",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-262.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 268,
+      "path": "certificates/0000-0999/n268.cert",
+      "format": "evand-cert",
+      "offered": "16.871868135103",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-268.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 270,
+      "path": "certificates/0000-0999/n270.cert",
+      "format": "evand-cert",
+      "offered": "16.928148603340",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-270.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 272,
+      "path": "certificates/0000-0999/n272.cert",
+      "format": "evand-cert",
+      "offered": "16.965501175831",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-272.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 292,
+      "path": "certificates/0000-0999/n292.cert",
+      "format": "evand-cert",
+      "offered": "17.590016439231",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-292.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 295,
+      "path": "certificates/0000-0999/n295.cert",
+      "format": "evand-cert",
+      "offered": "17.698115018700",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-295.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 299,
+      "path": "certificates/0000-0999/n299.cert",
+      "format": "evand-cert",
+      "offered": "17.801004434252",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-299.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 307,
+      "path": "certificates/0000-0999/n307.cert",
+      "format": "evand-cert",
+      "offered": "17.979230960384",
+      "first_committed": "2026-11-16T23:27:09Z",
+      "same_packing": [
+        {
+          "path": "witnesses/2026-11-16/n-307.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    147,
+    156,
+    180,
+    210,
+    260,
+    262,
+    268,
+    270,
+    272,
+    292,
+    295,
+    299,
+    307
+  ],
+  "replayed": [
+    147,
+    156,
+    180,
+    210,
+    260,
+    262,
+    268,
+    270,
+    272,
+    292,
+    295,
+    299,
+    307
+  ],
+  "houses": [
+    {
+      "n": 147,
+      "reader": "[Ono issue 985 2026-11-14]",
+      "source_key": "[Ono issue 985 2026-11-14]",
+      "holders": "Roberto Ono",
+      "result": "T-302",
+      "reported_value": "12.6510435565876945",
+      "verified_value": "12.6510435565876945",
+      "evidence": [
+        "E-ono-985-exact-feasibility",
+        "E-ono-985-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 156,
+      "reader": "[Özden s156 upper bound 2026-11-10]",
+      "source_key": "[Özden s156 upper bound 2026-11-10]",
+      "holders": "Doğa Özden",
+      "result": "T-287",
+      "reported_value": "12.9770530874972048",
+      "verified_value": "12.9770530874972048",
+      "evidence": [
+        "E-ozden-943-exact-feasibility",
+        "E-ozden-943-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 180,
+      "reader": "[Özden s180 upper bound 2026-11-10]",
+      "source_key": "[Özden s180 upper bound 2026-11-10]",
+      "holders": "Doğa Özden",
+      "result": "T-288",
+      "reported_value": "13.9156185027900258",
+      "verified_value": "13.9156185027900258",
+      "evidence": [
+        "E-ozden-944-exact-feasibility",
+        "E-ozden-944-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 210,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Francisco Couzo, improved by Evan Daniel and PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "14.9730011165876257419",
+      "verified_value": "14.9730011165876257419",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    },
+    {
+      "n": 260,
+      "reader": "[Daniel issue 914 n260 2026-11-05]",
+      "source_key": "[Daniel issue 914 n260 2026-11-05]",
+      "holders": "Evan Daniel",
+      "result": "T-269",
+      "reported_value": "16.6335209508885336",
+      "verified_value": "16.6335209508885336",
+      "evidence": [
+        "E-evand-914-exact-feasibility",
+        "E-evand-914-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 262,
+      "reader": "[evand exact optima 2026-10-05]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue (the Kingbird catalogue), verified by T-101's exact ceiling",
+      "result": "T-101",
+      "reported_value": "16.70710678118654",
+      "verified_value": "16.70710678118655",
+      "evidence": [
+        "E-evand-exact-ceilings-2026-10-05-exact-replay",
+        "E-evand-exact-ceilings-2026-10-05-source-replay",
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    },
+    {
+      "n": 268,
+      "reader": "[Özden s268 upper bound 2026-11-10]",
+      "source_key": "[Özden s268 upper bound 2026-11-10]",
+      "holders": "Doğa Özden",
+      "result": "T-289",
+      "reported_value": "16.8720298490844502",
+      "verified_value": "16.8720298490844502",
+      "evidence": [
+        "E-ozden-945-exact-feasibility",
+        "E-ozden-945-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 270,
+      "reader": "[Özden s270 upper bound 2026-11-09]",
+      "source_key": "[Özden s270 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-283",
+      "reported_value": "16.9281486033428544",
+      "verified_value": "16.9281486033428544",
+      "evidence": [
+        "E-ozden-936-exact-feasibility",
+        "E-ozden-936-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 272,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "16.96558647483767064",
+      "verified_value": "16.96558647483767064",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    },
+    {
+      "n": 292,
+      "reader": "[Daniel regularized lists 2026-10-10]",
+      "source_key": "[Daniel regularized lists 2026-10-10]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel",
+      "result": "T-146",
+      "reported_value": "17.5913781454976982",
+      "verified_value": "17.5913781454976982",
+      "evidence": [
+        "E-evand-regularized-exact-feasibility"
+      ]
+    },
+    {
+      "n": 295,
+      "reader": "[Daniel exact current records 2026-10-16]",
+      "source_key": "[Daniel exact current records 2026-10-16]",
+      "holders": "Ryan Xu, improved by Evan Daniel and PingYou Ltd",
+      "result": "T-193",
+      "reported_value": "17.70423279073603036",
+      "verified_value": "17.70423279073603036",
+      "evidence": [
+        "E-evand-639-verify-exact-replay"
+      ],
+      "algebraic": "evand-exact-cur-2026-10-16"
+    },
+    {
+      "n": 299,
+      "reader": "[Özden s299 upper bound 2026-11-09]",
+      "source_key": "[Özden s299 upper bound 2026-11-09]",
+      "holders": "Evan Daniel, improved by Doğa Özden",
+      "result": "T-277",
+      "reported_value": "17.8010044342552937",
+      "verified_value": "17.8010044342552937",
+      "evidence": [
+        "E-ozden-929-exact-feasibility",
+        "E-ozden-929-review-exact-feasibility"
+      ]
+    },
+    {
+      "n": 307,
+      "reader": "[Özden s307 upper bound 2026-11-09]",
+      "source_key": "[Özden s307 upper bound 2026-11-09]",
+      "holders": "ntumlnoob, improved by Francisco Couzo and Doğa Özden",
+      "result": "T-279",
+      "reported_value": "17.9792309603873628",
+      "verified_value": "17.9792309603873628",
+      "evidence": [
+        "E-ozden-931-exact-feasibility",
+        "E-ozden-931-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 262,
+      "report": "#1007",
+      "url": "https://github.com/jlevy/squares/issues/1007",
+      "holders": "Joost de Winter",
+      "printed": "16.699693441904",
+      "rounding": "up"
+    },
+    {
+      "n": 292,
+      "report": "T-193 (#639)",
+      "url": "https://github.com/jlevy/squares/issues/639",
+      "holders": "Evan Daniel's exact form of Nate Chaoweeraprasit's packing",
+      "result": "T-193",
+      "printed": "17.5913781454976981594",
+      "rounding": "unstated"
+    },
+    {
+      "n": 292,
+      "report": "#1005",
+      "url": "https://github.com/jlevy/squares/issues/1005",
+      "holders": "Doğa Özden",
+      "printed": "17.590104218682",
+      "rounding": "up"
+    },
+    {
+      "n": 292,
+      "report": "#1006",
+      "url": "https://github.com/jlevy/squares/issues/1006",
+      "holders": "Joost de Winter",
+      "printed": "17.590016442847",
+      "rounding": "up"
+    },
+    {
+      "n": 295,
+      "report": "#1007",
+      "url": "https://github.com/jlevy/squares/issues/1007",
+      "holders": "Joost de Winter",
+      "printed": "17.699693441716",
+      "rounding": "up"
+    },
+    {
+      "n": 299,
+      "report": "T-280 (vitamoon ac14112)",
+      "url": "https://github.com/vitamoon/vitamoon/blob/ac14112009f5668b464170dcd979334a5537521d/PACKINGS.md",
+      "holders": "Kaelan Yim, after Evan Daniel and Doğa Özden",
+      "result": "T-280",
+      "reader": "[Yim certificates 2026-11-09]"
+    }
+  ],
+  "register": {
+    "title": "PLACEHOLDER",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-i38n",
+    "bibliography": {
+      "authors": [
+        "Polkovskyi"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER"
+    }
+  }
+}

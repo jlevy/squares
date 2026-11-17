@@ -35689,3 +35689,34 @@ issues:
       the author asked for is still queued, so the issue is closed with it, and that answers are
       welcome at any time. The issue was closed as completed at 11:55:54Z; it has no comment after
       the reply, and read_through moves to it.
+  - number: 1009
+    title: 'Lowered upper bounds for 7 counts (n = 210, 260, 262, 268, 272, 292, 295) and 6 exact 12-place refinements (n = 147, 156, 180, 270, 299, 307): registration request'
+    author: Mishapolk
+    opened: '2026-11-16'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Mykhailo Polkovskyi (Mishapolk) asks for the registration of 13 upper bounds, each the
+      exact rational side of a centre/half-angle certificate in Mishapolk/square-packing-records
+      at b637e6c rounded up at 12 places, with a Witness/v2 corner file of the same packing: in
+      Part A seven below the record at f9ddfeeef, s(210) <= 14.971214601589, s(260) <=
+      16.633520939840, s(262) <= 16.698115018700, s(268) <= 16.871868135103, s(272) <=
+      16.965501175831, s(292) <= 17.590016439231 and s(295) <= 17.698115018700, the last three
+      also below the open #1005, #1006 and #1007; in Part B six refinements of the registered
+      arrangements that lower the 12-place print, s(147) <= 12.651043553173, s(156) <=
+      12.977053087495, s(180) <= 13.915618502788, s(270) <= 16.928148603340, s(299) <=
+      17.801004434252 and s(307) <= 17.979230960384, which it calls subject to RV-3. It credits
+      Polkovskyi with new arrangements at 210, 262, 272, 292 and 295, improved packings after
+      Evan Daniel at 260 and after Doğa Özden at 268, and the certificate refinements in Part B,
+      whose arrangement credit stays with the standing authors, and says the packings were
+      discovered assisted by Gemini. Triage pending in lane c-import-1009-1117 (think-i38n).
+    read_through: '2026-11-16T23:38:22Z'
+    results: []
+    beads:
+    - think-i38n
+    answer_bead: think-i38n
+    replies: []
+    close_when: >-
+      The 13 bounds are triaged, retained and registered on main, and the reply on main says
+      what was registered, replayed and reviewed.
