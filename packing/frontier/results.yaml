@@ -49102,8 +49102,10 @@ results:
       40.70 to 44.80 degrees, 59 one way and 5 the other, where T-146 has 49, 35.68 to 40.97
       degrees, all the other way.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-p3g8). Joost de Winter's #1006, filed 11 minutes 38 seconds
+      Both maintained exact routes accept the certificate, and the stage 4 review of 17
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair
+      of the certificate and of its twin by two exact methods, so the bound is confirmed,
+      independently re-implemented. Joost de Winter's #1006, filed 11 minutes 38 seconds
       later, is 8.78e-05 below it (T-311); the ledger records both, in order.
 
       The issue says this repository's packing-witness verify, run unmodified on the witness,
@@ -49150,7 +49152,10 @@ results:
         T-305's 9.12e-03 at 127. The column-band designer and the segment re-angling operator
         are described and not published, so not S4. No lower bound or optimum.
       scored: '2026-11-17'
-      by: think-qag8 Doğa Özden import (intake lane c-import-1005-1117), a draft for the stage 4 review
+      by: >-
+        think-qag8 Doğa Özden import (intake lane c-import-1005-1117), a draft the stage 4
+        review of 17 November (lane R1, think-p3g8) leaves unchanged, since it states no
+        significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -49159,6 +49164,7 @@ results:
     evidence:
     - E-ozden-1005-certificate-report
     - E-ozden-1005-exact-feasibility
+    - E-ozden-1005-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s292-upper-bound-2026-11-16/README.md
     - packing/resources/web/ozden-s292-upper-bound-2026-11-16/acquisition/claims.json
@@ -49174,10 +49180,16 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_i1_1117.py
     - packing/resources/web/ozden-s292-upper-bound-2026-11-16/receipts/sharp-controls.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/check-1005-n292-yaml.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/check-1005-n292-json.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/controls-1005-n292-yaml.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/controls-1005-n292-json.json
     notes: >-
       A separate complete repository replay is retained for n = 292: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -49224,6 +49236,30 @@ results:
       259, which reaches 292 1.76e-19 below T-146 on main and is above this side, so the bound
       carries to no other count.
 
+      The 17 November review's clean-room checker (E-ozden-1005-review-exact-feasibility)
+      decided every wall and all 42,486 pairs of the certificate and of its JSON twin by
+      separating axes in Python integers and again by exact vertex-enumerated intersections
+      in GMP rationals, with no distance filter, every pair strictly apart and every square
+      inside by both methods: its least margin, 2.01869e-13 at squares 154 and 155, is the
+      replay's, and five squares touch the walls, each at one corner (left 2, bottom 2, top
+      1). Its 51 controls on the candidate and 34 on the twin, stated beforehand as rules,
+      were decided as stated, among them the squares accepted in the box of the claim and
+      refused in that of its 12-place floor.
+
+      It finds no blocking or major defect (F1 to F12): the side is the packing's height
+      exactly, the right wall cleared by 2.705e-16 (F4); the 398 near pairs lie in a band
+      around 2.06e-13, as a uniform opening of an exact contact arrangement would leave
+      (F5); the JSON twin equals the candidate value for value (F6); and the file's words
+      verified, its source path and its parent witness id are the promotion tool's, written
+      by the author's run, so the record states its own provenance (F10). It measures no
+      identity or padding itself, leaving both to after its freeze; the packet's
+      measurements (measure/) stand, and agree with what it measured. It states no
+      significance, so the draft S3 stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:18:44Z; the review was mapped with #1009's import.
+
       The source's own sqcheck.py was not run here. The two maintained routes share this
       repository's corner-witness reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method, and the first of them, sqpack's exact
@@ -49232,11 +49268,32 @@ results:
       described, not retained. Licensed CC BY 4.0 and MIT by LICENSE.md at the pin. No human
       oversight or optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-p3g8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-146, mapped as an adversarial review. The case's house then moves to
-      the smallest validated side at 292, T-311's 8.78e-05 below this one, in the pass dated the
-      day this change merges, and this entry stays as the first report at 292 in the walk.
+      Stays as the first report at 292 in the walk and is not adopted: T-311 is 8.78e-05
+      below it, and Mykhailo Polkovskyi's T-323, validated in the same change, is smaller
+      again and takes the house at 292. V4 and C4 then need a second accepted adversarial
+      review by a distinct reviewer and a retained human oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1005's corner Witness/v2 certificate at 292 and its JSON
+        twin, decided by the review's clean-room exact checker, frozen before any producer,
+        witness or verifier code was read, by two methods, with 51 controls on the candidate
+        and 34 on the twin stated in advance as rules; the claim's arithmetic, the side
+        against the packing's extent, the near pairs, the tilts, the twin and the file's own
+        provenance words.
+      verdict: accepted
+      covers:
+      - T-310
   - id: T-311
     kind: upper-bound
     registered: '2026-11-17'
@@ -49259,8 +49316,10 @@ results:
       59 squares tilted beyond a degree, 39.82 to 42.40 degrees, all one way, where T-146 has
       49, 35.68 to 40.97 degrees, all the other way.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-p3g8).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 17
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair
+      of the certificate and of its twin by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says the author's two checkers, verify_exact.py (separating axes) and
       check_area.py (the area of each close pair's clipped intersection), both Fraction and the
@@ -49301,7 +49360,10 @@ results:
         program and a local optimization is no new technique, so not S4. No lower bound or
         optimum.
       scored: '2026-11-17'
-      by: think-qag8 Joost de Winter import (intake lane c-import-1005-1117), a draft for the stage 4 review
+      by: >-
+        think-qag8 Joost de Winter import (intake lane c-import-1005-1117), a draft the
+        stage 4 review of 17 November (lane R1, think-p3g8) leaves unchanged, since it
+        states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -49310,6 +49372,7 @@ results:
     evidence:
     - E-de-winter-1006-certificate-report
     - E-de-winter-1006-exact-feasibility
+    - E-de-winter-1006-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/README.md
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/acquisition/claims.json
@@ -49325,10 +49388,16 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_i1_1117.py
     - packing/resources/web/de-winter-s292-upper-bound-2026-11-16/receipts/sharp-controls.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/check-1006-n292-exact.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/check-1006-n292-witness.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/controls-1006-n292-exact.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/controls-1006-n292-witness.json
     notes: >-
       A separate complete repository replay is retained for n = 292: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -49379,6 +49448,29 @@ results:
       for 292's ceiling, finds main's consequences but the L step from 259, which this side is
       below, so the bound carries to no other count.
 
+      The 17 November review's clean-room checker
+      (E-de-winter-1006-review-exact-feasibility) decided every wall and all 42,486 pairs of
+      the certificate and of its Witness/v2 twin by separating axes in Python integers and
+      again by exact vertex-enumerated intersections in GMP rationals, with no distance
+      filter, every pair strictly apart and every square inside by both methods: its least
+      margin, 3.03125e-12 at squares 278 and 279, is the replay's, and three squares touch
+      the walls, each at one corner (left, bottom, top). Its 51 controls on the certificate
+      and 34 on the twin, stated beforehand as rules, were decided as stated, among them the
+      squares accepted in the box of the claim and refused in that of its 12-place floor.
+
+      It finds no blocking or major defect (F1 to F12): the side is the packing's height
+      exactly, the right wall cleared by 3.228e-13 (F4); the near pairs have no band, 245
+      below 1e-9 and then a continuum, as a numerical optimization rounded to rationals
+      would leave (F5); the twin holds exactly the corners of the centre file (F6); of the
+      issue's 233 axis-aligned squares 17 are exactly upright and 216 turned by 1.2e-8 to
+      0.049 degrees (F11, for the author); and the centre file states no origin and is read
+      in [0, S]^2, as its twin states (F12). It measures no identity or padding itself; the
+      packet's measurements stand. It states no significance, so the draft S3 stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:18:44Z; the review was mapped with #1009's import.
+
       The source's own checkers were not run here. The two maintained routes share this
       repository's centre-direction reader (certificate parsing and half-angle conversion),
       Fraction arithmetic and the separating-axis method; one of them, the independent rational
@@ -49387,12 +49479,34 @@ results:
       not replayed. Licensed MIT by LICENSE at the pin. No human oversight or optimality is
       claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-p3g8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-146 and T-310, mapped as an adversarial review. Then adopt it at 292 in
-      place of T-146 under the house rule, the smallest validated side there, in the pass dated
-      the day this change merges, with both strong generators' regularization of the new house
-      and its flip in the same change.
+      Not adopted: Mykhailo Polkovskyi's T-323 (#1009), validated in the same change, is
+      3.62e-09 below it at 292, 72 times this certificate's own contraction margin of
+      5.0288e-11, so under the owner's option D of 17 November (think-b0w5) it is a new
+      result and the house rule adopts it there instead. V4 and C4 then need a second
+      accepted adversarial review by a distinct reviewer and a retained human oversight
+      record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1006's centre-direction certificate at 292 and its Witness/v2
+        twin, decided by the review's clean-room exact checker, frozen before any producer,
+        witness or verifier code was read, by two methods, with 51 controls on the
+        certificate and 34 on the twin stated in advance as rules; the claim's arithmetic,
+        the side against the packing's extent, the near pairs, the tilts, the twin and the
+        box of a centre file.
+      verdict: accepted
+      covers:
+      - T-311
   - id: T-312
     kind: upper-bound
     registered: '2026-11-17'
@@ -49411,8 +49525,10 @@ results:
       beyond a tenth (largest 0.898). It has 72 squares tilted beyond a degree, 24.94 to 29.73
       degrees, all one way, where the house has 20, all at 45 degrees.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-p3g8).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 17
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair
+      of the certificate and of its twin by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says the author's two checkers, verify_exact.py and check_area.py in each
       folder, both Fraction and the standard library only, report 558 close pairs at 262 and 626
@@ -49445,7 +49561,10 @@ results:
         by an integer program and optimized is no new technique, so not S4. No lower bound or
         optimum.
       scored: '2026-11-17'
-      by: think-qag8 Joost de Winter import (intake lane c-import-1005-1117), a draft for the stage 4 review
+      by: >-
+        think-qag8 Joost de Winter import (intake lane c-import-1005-1117), a draft the
+        stage 4 review of 17 November (lane R1, think-p3g8) leaves unchanged, since it
+        states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -49454,6 +49573,7 @@ results:
     evidence:
     - E-de-winter-1007-certificate-report
     - E-de-winter-1007-exact-feasibility
+    - E-de-winter-1007-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/README.md
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
@@ -49468,10 +49588,16 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_i1_1117.py
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/receipts/sharp-controls-n262.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/check-1007-n262-exact.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/check-1007-n262-witness.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/controls-1007-n262-exact.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/controls-1007-n262-witness.json
     notes: >-
       A separate complete repository replay is retained for n = 262, in the receipt of the
       release's two certificates (receipts/exact-certification.json.xz): the positive and its
@@ -49512,6 +49638,35 @@ results:
       side gives 17.699693441904 at 295, 1.883e-10 above T-313's side, and monotonicity carries
       it to no smaller count below its record, so the bound carries to no other count.
 
+      The 17 November review's clean-room checker
+      (E-de-winter-1007-review-exact-feasibility) decided every wall and all 34,191 pairs of
+      the certificate and of its Witness/v2 twin by separating axes in Python integers and
+      again by exact vertex-enumerated intersections in GMP rationals, with no distance
+      filter, every pair strictly apart and every square inside by both methods: its least
+      margin, 4.47681e-12 at squares 33 and 37, is the replay's, and four squares touch the
+      walls, each along an edge (left 1, bottom 1, right 2). Its 51 controls on the
+      certificate and 34 on the twin, stated beforehand as rules, were decided as stated,
+      among them the squares accepted in the box of the claim and refused in that of its
+      12-place floor.
+
+      It finds no blocking or major defect (F1 to F12): the side is the packing's width
+      exactly, the top wall cleared by 4.68e-14 exactly (F4); the 753 near pairs lie between
+      4.5e-12 and 1.8e-11 (F5); the twin holds exactly the corners of the centre file (F6).
+
+      It finds too (F9) that the first 262 squares of #1007's 295 file, as they stand, prove
+      s(262) <= 166996934417125687/10^16 = 16.6996934417125687, 1.90949e-10 below this side,
+      accepted by both its methods with its controls as stated. That bound is not
+      registered: the issue claims the 262 file's side, and a consequence of another
+      certificate at a count whose value the record already holds gets no entry of its own
+      unless it settles a case, which it does not, since Mykhailo Polkovskyi's #1009, filed
+      later on 16 November, is 1.58e-03 below both at 262 (T-319). It measures no identity
+      or padding itself; the packet's measurements stand. It states no significance, so the
+      draft S3 stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:18:44Z; the review was mapped with #1009's import.
+
       The source's own checkers were not run here. The two maintained routes share this
       repository's centre-direction reader, Fraction arithmetic and the separating-axis method;
       one of them, the independent rational corner checker, is the checker the issue reports
@@ -49519,12 +49674,33 @@ results:
       described, not retained. Licensed MIT by LICENSE at the pin. No human oversight or
       optimality is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-p3g8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against the house's packing, mapped as an adversarial review. Then adopt it at
-      262, the first adoption there, in place of the case's own house under the house rule, in
-      the pass dated the day this change merges, with both strong generators' regularization of
-      the new house and its flip in the same change.
+      Not adopted: Mykhailo Polkovskyi's T-319 (#1009), validated in the same change, is
+      1.58e-03 below it at 262, and the house rule adopts it there instead. V4 and C4 then
+      need a second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1007's centre-direction certificate at 262 and its Witness/v2
+        twin, decided by the review's clean-room exact checker, frozen before any producer,
+        witness or verifier code was read, by two methods, with 51 controls on the
+        certificate and 34 on the twin stated in advance as rules; the claim's arithmetic,
+        the side against the packing's extent, the near pairs, the tilts, the twin, the box
+        of a centre file, and the 295 file's first 262 squares decided as a packing of their
+        own.
+      verdict: accepted
+      covers:
+      - T-312
   - id: T-313
     kind: upper-bound
     registered: '2026-11-17'
@@ -49549,8 +49725,10 @@ results:
       1.883e-10, so this one is below the L step on T-312's, and measured here it is no such
       step on its own first 262 squares.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (think-p3g8).
+      Both maintained exact routes accept the certificate, and the stage 4 review of 17
+      November 2026 accepts it, its clean-room checker deciding every square, wall and pair
+      of the certificate and of its twin by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says the author's two checkers, verify_exact.py and check_area.py in each
       folder, both Fraction and the standard library only, report 558 close pairs at 262 and 626
@@ -49581,7 +49759,10 @@ results:
         and T-226's 1.88e-05 (S3), where new arrangements are S3: beside T-312's 7.41e-03 at
         262, whose band it shares. No new technique, so not S4. No lower bound or optimum.
       scored: '2026-11-17'
-      by: think-qag8 Joost de Winter import (intake lane c-import-1005-1117), a draft for the stage 4 review
+      by: >-
+        think-qag8 Joost de Winter import (intake lane c-import-1005-1117), a draft the
+        stage 4 review of 17 November (lane R1, think-p3g8) leaves unchanged, since it
+        states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -49590,6 +49771,7 @@ results:
     evidence:
     - E-de-winter-1007-certificate-report
     - E-de-winter-1007-exact-feasibility
+    - E-de-winter-1007-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/README.md
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
@@ -49604,10 +49786,16 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_i1_1117.py
     - packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/receipts/sharp-controls-n295.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/check-1007-n295-exact.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/check-1007-n295-witness.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/controls-1007-n295-exact.json
+    - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/out/controls-1007-n295-witness.json
     notes: >-
       A separate complete repository replay is retained for n = 295, in the receipt of the
       release's two certificates (receipts/exact-certification.json.xz): the positive and its
@@ -49650,18 +49838,65 @@ results:
       295 lands at 330, beyond the corpus, and monotonicity carries this side to no smaller
       count below its record, so the bound carries to no other count.
 
+      The 17 November review's clean-room checker
+      (E-de-winter-1007-review-exact-feasibility) decided every wall and all 43,365 pairs of
+      the certificate and of its Witness/v2 twin by separating axes in Python integers and
+      again by exact vertex-enumerated intersections in GMP rationals, with no distance
+      filter, every pair strictly apart and every square inside by both methods: its least
+      margin, 1.52004e-12 at squares 55 and 56, is the replay's, and four squares touch the
+      walls, each along an edge (left 2, bottom 1, right 1). Its 51 controls on the
+      certificate and 34 on the twin, stated beforehand as rules, were decided as stated,
+      among them the squares accepted in the box of the claim and refused in that of its
+      12-place floor.
+
+      It finds no blocking or major defect (F1 to F12): the side is the packing's width
+      exactly, the top wall cleared by 7e-16 exactly (F4); the 850 near pairs lie between
+      1.5e-12 and 3.1e-12 (F5); the twin holds exactly the corners of the centre file (F6).
+      Its one minor finding, F8, is for the author: the 295 file is not the 262 file with an
+      L-shaped border, as #1007 says, since the sides differ by 1 less 1.882962e-10 and none
+      of the 262 inner squares' centres equals the 262 file's, 17 of them moved by more than
+      1e-3; it is the same plan solved again with smaller gaps, which this lane's l-base
+      reading also found. The claim at 295 does not depend on that sentence. It measures no
+      identity or padding itself; the packet's measurements stand. It states no
+      significance, so the draft S3 stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:18:44Z; the review was mapped with #1009's import.
+
       The source's own checkers were not run here. The two maintained routes share this
       repository's centre-direction reader, Fraction arithmetic and the separating-axis method;
       one of them, the independent rational corner checker, is the checker the issue reports
       running on the twin. Licensed MIT by LICENSE at the pin. No human oversight or optimality
       is claimed.
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-p3g8): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against the house's packing, mapped as an adversarial review. Then adopt it at
-      295 in place of T-193 under the house rule, in the pass dated the day this change merges,
-      with both strong generators' regularization of the new house and its flip in the same
-      change.
+      Not adopted: Mykhailo Polkovskyi's T-324 (#1009), validated in the same change, is
+      1.58e-03 below it at 295, and the house rule adopts it there instead. V4 and C4 then
+      need a second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1007's centre-direction certificate at 295 and its Witness/v2
+        twin, decided by the review's clean-room exact checker, frozen before any producer,
+        witness or verifier code was read, by two methods, with 51 controls on the
+        certificate and 34 on the twin stated in advance as rules; the claim's arithmetic,
+        the side against the packing's extent, the near pairs, the tilts, the twin, the box
+        of a centre file, and the issue's statement that the 295 packing is the 262 packing
+        with a border.
+      verdict: accepted
+      covers:
+      - T-313
 
   - id: T-314
     kind: upper-bound
@@ -49682,11 +49917,13 @@ results:
       T-302's packing, then, with eight squares moved: the issue calls it a refinement of the
       registered arrangement.
 
-      T-302's own uniform-contraction margin is 2.9342e-09; the gain is 1.164 times it, and this
-      side rounds up at 12 places below T-302 contracted, 12.651043553654, so the gain is no
-      re-certification of its padding alone. Both maintained exact routes accept the certificate,
-      read by the evand-cert reader and held to the source's Witness/v2 corner file of the same
-      packing; the stage 4 review is a separate lane (think-evxy), and the adoption waits on it.
+      T-302's own uniform-contraction margin is 2.9342e-09; the gain is 1.164 times it, and
+      this side rounds up at 12 places below T-302 contracted, 12.651043553654, so the gain
+      is no re-certification of its padding alone. Both maintained exact routes accept the
+      certificate, read by the evand-cert reader and held to the source's Witness/v2 corner
+      file of the same packing; the stage 4 review of 17 November 2026 accepts it, its
+      clean-room checker deciding every square, wall and pair of both files by two exact
+      methods, so the bound is confirmed, independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -49714,8 +49951,8 @@ results:
         the case's print; the arrangement is Ono's (T-302, S3). No lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -49724,6 +49961,7 @@ results:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -49739,10 +49977,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n147.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n147.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n147.json
     notes: >-
       A separate complete repository replay is retained for n = 147, in the receipt of the
       release's 13 certificates (receipts/exact-certification-n147.json.xz): the positive and its
@@ -49779,6 +50021,27 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 10,731 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00004e-28 at squares 115 and 118, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -49787,11 +50050,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4, think-evxy): a
-      clean-room exact checker, the identity against the house's packing and the lineage the
-      source states, a mapped review whose acceptance would confirm the rungs. Then adopt the
-      count where it is the smallest validated side under the house rule, with both strong
-      generators' regularization and the flip of the new house in the same change.
+      Adopt it at 147 in place of T-302 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
     regularizations:
     - n: 147
       of: T-302
@@ -49807,16 +50070,37 @@ results:
         moved: 69
         max_move: 0.647942
         max_turn_deg: 0.05435
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 147 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-314
   - id: T-315
     kind: upper-bound
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's re-solve of T-287's packing at 156, 2.59e-12 below it, at its padding; held
+      Polkovskyi's re-solve of T-287's packing at 156, 2.59e-12 below it, beyond its padding
     claim: >-
-      One complete rational source certificate reports a finite upper-bound improvement at the
-      exact side it states: s(156) <= 12.977053087494616205652876713394. That side is
-      12.9770530874946163 rounded up at 16 places and 12.977053087495 at 12, as #1009 prints it.
+      One complete rational certificate proves s(156) <= 12.977053087494616205652876713394.
+      That side is 12.9770530874946163 rounded up at 16 places and 12.977053087495 at 12, as
+      #1009 prints it.
 
       It is 2.59e-12 below T-287 (Doğa Özden's packing), the case's house in both lanes, and
       measured here nearest centres pair it one to one with T-287's packing; the optimal
@@ -49824,12 +50108,17 @@ results:
       and 0 beyond a tenth (largest 1.44264e-05), and turns squares by up to 0.0005845 degrees. It
       is T-287's packing re-solved, every square within 1.44264e-05 of its place.
 
-      The gain is 1.0709 of T-287's own uniform-contraction margin, 2.4170e-12, what contracting
-      T-287's certificate takes off it with no square re-solved, and T-287 so contracted rounds up
-      at 12 places to this claim's own print, 12.977053087495 (devtools.contraction_margin).
-      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
-      RV-3): until the answer the entry stays below the stage 4 exit, and the case keeps its
-      house.
+      The gain is 1.0709 of T-287's own uniform-contraction margin, 2.4170e-12: below T-287
+      shrunk until its squares first touch by 1.71e-13 (devtools.contraction_margin), so
+      under the owner's option D of 17 November 2026 (think-b0w5), which settles RV-3, it is
+      a new result, not a restatement of the padding, though T-287 so contracted rounds up
+      at 12 places to this claim's own print.
+
+      Both maintained exact routes accept the certificate, read by the evand-cert reader and
+      held to the source's Witness/v2 corner file of the same packing, and the stage 4
+      review of 17 November 2026 accepts it, its clean-room checker deciding every square,
+      wall and pair of both files by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -49846,19 +50135,22 @@ results:
     scope:
       n_values:
       - 156
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
-        A re-solve of T-287's packing at 156, 2.59e-12 below it and 1.0709 of T-287's own
-        uniform-contraction margin, at the 12-place print of T-287 contracted: the padding class
-        think-ruu2's RV-3 puts to the owner, held at S1 as T-280, T-285 and T-286 are, and the
-        answer may change the score. No new arrangement, lower bound or optimum.
+        A re-solve of T-287's packing at 156, 2.5885e-12 below it, 1.0709 of T-287's own
+        uniform-contraction margin and 1.71e-13 below T-287 shrunk to first contact: a new
+        result under the owner's option D of 17 November 2026 (think-b0w5), at a tighter
+        padding of the same arrangement, every square within 1.5e-5 of its place, as T-259's
+        re-solve at 130 is (S1). The arrangement and its score are T-287's. No new
+        arrangement, lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no
+        significance; rescored under option D (think-b0w5) by lane w3-pass-1117r
     novelty: previously-published
     attribution:
       source_keys:
@@ -49866,6 +50158,8 @@ results:
       published: '2026-11-16'
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -49881,17 +50175,21 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n156.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n156.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n156.json
     notes: >-
       A separate complete repository replay is retained for n = 156, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n156.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 72540 pair decisions over the 3 jobs, 15.48 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. It is retained and not
-      entered: the entry cites only the report until the owner's RV-3 answer (think-ruu2).
+      release's 13 certificates (receipts/exact-certification-n156.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 72540 pair decisions over the 3 jobs, 15.48 route CPU seconds. The
+      positive clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The
+      replay is E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n156.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -49921,6 +50219,27 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 12,090 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00006e-28 at squares 76 and 126, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -49929,11 +50248,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at its
-      predecessor's own contraction margin is a new result. If it is not, the entry is withdrawn
-      and T-287 stays the house; if it is, the replay and the stage 4 review's clean-room run are
-      entered, both rungs rise to V3 and C3, and 156 is adopted under the house rule with both
-      strong generators' regularization and the flip.
+      Adopt it at 156 in place of T-287 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
     regularizations:
     - n: 156
       of: T-287
@@ -49949,29 +50268,37 @@ results:
         moved: 0
         max_move: 1.44264e-05
         max_turn_deg: 0.0005845
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and the
-        stage 4 review's clean-room run, both retained, entered as the stage 4 exit
-      rung: C3
-      link: think-ruu2
-      estimated_cost:
-        cpu_hours: 0.05
-        cpu_hours_high: 0.5
-        basis: >-
-          the replay and the sharp controls ran on 17 November and their receipts are retained; the
-          review is one count; what remains is records work
-        priced: '2026-11-17'
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 156 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-315
   - id: T-316
     kind: upper-bound
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's re-solve of T-288's packing at 180, 2.71e-12 below it, at its padding; held
+      Polkovskyi's re-solve of T-288's packing at 180, 2.71e-12 below it, beyond its padding
     claim: >-
-      One complete rational source certificate reports a finite upper-bound improvement at the
-      exact side it states: s(180) <= 13.915618502787316117970670866716. That side is
-      13.9156185027873162 rounded up at 16 places and 13.915618502788 at 12, as #1009 prints it.
+      One complete rational certificate proves s(180) <= 13.915618502787316117970670866716.
+      That side is 13.9156185027873162 rounded up at 16 places and 13.915618502788 at 12, as
+      #1009 prints it.
 
       It is 2.71e-12 below T-288 (Doğa Özden's packing), the case's house in both lanes, and
       measured here nearest centres pair it one to one with T-288's packing; the optimal
@@ -49979,12 +50306,17 @@ results:
       and 0 beyond a tenth (largest 1.42864e-05), and turns squares by up to 0.0005788 degrees. It
       is T-288's packing re-solved, every square within 1.42864e-05 of its place.
 
-      The gain is 1.0485 of T-288's own uniform-contraction margin, 2.5843e-12, what contracting
-      T-288's certificate takes off it with no square re-solved, and T-288 so contracted rounds up
-      at 12 places to this claim's own print, 13.915618502788 (devtools.contraction_margin).
-      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
-      RV-3): until the answer the entry stays below the stage 4 exit, and the case keeps its
-      house.
+      The gain is 1.0485 of T-288's own uniform-contraction margin, 2.5843e-12: below T-288
+      shrunk until its squares first touch by 1.25e-13 (devtools.contraction_margin), so
+      under the owner's option D of 17 November 2026 (think-b0w5), which settles RV-3, it is
+      a new result, not a restatement of the padding, though T-288 so contracted rounds up
+      at 12 places to this claim's own print.
+
+      Both maintained exact routes accept the certificate, read by the evand-cert reader and
+      held to the source's Witness/v2 corner file of the same packing, and the stage 4
+      review of 17 November 2026 accepts it, its clean-room checker deciding every square,
+      wall and pair of both files by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -50001,19 +50333,22 @@ results:
     scope:
       n_values:
       - 180
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
-        A re-solve of T-288's packing at 180, 2.71e-12 below it and 1.0485 of T-288's own
-        uniform-contraction margin, at the 12-place print of T-288 contracted: the padding class
-        think-ruu2's RV-3 puts to the owner, held at S1 as T-280, T-285 and T-286 are, and the
-        answer may change the score. No new arrangement, lower bound or optimum.
+        A re-solve of T-288's packing at 180, 2.7096e-12 below it, 1.0485 of T-288's own
+        uniform-contraction margin and 1.25e-13 below T-288 shrunk to first contact: a new
+        result under the owner's option D of 17 November 2026 (think-b0w5), at a tighter
+        padding of the same arrangement, every square within 1.5e-5 of its place, as T-259's
+        re-solve at 130 is (S1). The arrangement and its score are T-288's. No new
+        arrangement, lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no
+        significance; rescored under option D (think-b0w5) by lane w3-pass-1117r
     novelty: previously-published
     attribution:
       source_keys:
@@ -50021,6 +50356,8 @@ results:
       published: '2026-11-16'
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -50036,17 +50373,21 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n180.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n180.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n180.json
     notes: >-
       A separate complete repository replay is retained for n = 180, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n180.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 96660 pair decisions over the 3 jobs, 18.87 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 1.44e-24. It is retained and not
-      entered: the entry cites only the report until the owner's RV-3 answer (think-ruu2).
+      release's 13 certificates (receipts/exact-certification-n180.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 96660 pair decisions over the 3 jobs, 18.87 route CPU seconds. The
+      positive clears every wall by exactly 1e-28 and every pair by at least 1.44e-24. The
+      replay is E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n180.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -50076,6 +50417,28 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 16,110 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 1.44492e-24 at squares 34 and 139, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5); the pairs opened by about
+      2.9e-24, more than at the ten counts whose pairs sit at the 2e-28 dilation. It
+      measures no identity or padding of its own, leaving both to after its freeze; the
+      packet's measurements stand. It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -50084,11 +50447,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at its
-      predecessor's own contraction margin is a new result. If it is not, the entry is withdrawn
-      and T-288 stays the house; if it is, the replay and the stage 4 review's clean-room run are
-      entered, both rungs rise to V3 and C3, and 180 is adopted under the house rule with both
-      strong generators' regularization and the flip.
+      Adopt it at 180 in place of T-288 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
     regularizations:
     - n: 180
       of: T-288
@@ -50104,19 +50467,27 @@ results:
         moved: 0
         max_move: 1.42864e-05
         max_turn_deg: 0.0005788
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and the
-        stage 4 review's clean-room run, both retained, entered as the stage 4 exit
-      rung: C3
-      link: think-ruu2
-      estimated_cost:
-        cpu_hours: 0.05
-        cpu_hours_high: 0.5
-        basis: >-
-          the replay and the sharp controls ran on 17 November and their receipts are retained; the
-          review is one count; what remains is records work
-        priced: '2026-11-17'
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 180 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-316
   - id: T-317
     kind: upper-bound
     registered: '2026-11-17'
@@ -50135,10 +50506,12 @@ results:
       tenth (largest 0.973003), and turns squares by up to 42.47 degrees. A new arrangement
       relative to that packing, as the issue says.
 
-      T-174's own uniform-contraction margin is 0, two of its squares touching, so the gain lies
-      wholly outside any padding. Both maintained exact routes accept the certificate, read by the
-      evand-cert reader and held to the source's Witness/v2 corner file of the same packing; the
-      stage 4 review is a separate lane (think-evxy), and the adoption waits on it.
+      T-174's own uniform-contraction margin is 0, two of its squares touching, so the gain
+      lies wholly outside any padding. Both maintained exact routes accept the certificate,
+      read by the evand-cert reader and held to the source's Witness/v2 corner file of the
+      same packing; the stage 4 review of 17 November 2026 accepts it, its clean-room
+      checker deciding every square, wall and pair of both files by two exact methods, so
+      the bound is confirmed, independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -50164,8 +50537,8 @@ results:
         S4. No lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -50174,6 +50547,7 @@ results:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -50189,10 +50563,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n210.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n210.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n210.json
     notes: >-
       A separate complete repository replay is retained for n = 210, in the receipt of the
       release's 13 certificates (receipts/exact-certification-n210.json.xz): the positive and its
@@ -50229,6 +50607,27 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 21,945 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00004e-28 at squares 196 and 208, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -50237,11 +50636,32 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4, think-evxy): a
-      clean-room exact checker, the identity against the house's packing and the lineage the
-      source states, a mapped review whose acceptance would confirm the rungs. Then adopt the
-      count where it is the smallest validated side under the house rule, with both strong
-      generators' regularization and the flip of the new house in the same change.
+      Adopt it at 210 in place of T-174 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 210 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-317
   - id: T-318
     kind: upper-bound
     registered: '2026-11-17'
@@ -50260,11 +50680,13 @@ results:
       squares by up to 0.1497 degrees. A further arrangement of T-269's packing, as the issue
       says, its contacts changed and no square moved by a tenth.
 
-      T-269's own uniform-contraction margin is 1.6618e-11; the gain is 664.864 times it, and this
-      side rounds up at 12 places below T-269 contracted, 16.633520950872, so the gain is no
-      re-certification of its padding alone. Both maintained exact routes accept the certificate,
-      read by the evand-cert reader and held to the source's Witness/v2 corner file of the same
-      packing; the stage 4 review is a separate lane (think-evxy), and the adoption waits on it.
+      T-269's own uniform-contraction margin is 1.6618e-11; the gain is 664.864 times it,
+      and this side rounds up at 12 places below T-269 contracted, 16.633520950872, so the
+      gain is no re-certification of its padding alone. Both maintained exact routes accept
+      the certificate, read by the evand-cert reader and held to the source's Witness/v2
+      corner file of the same packing; the stage 4 review of 17 November 2026 accepts it,
+      its clean-room checker deciding every square, wall and pair of both files by two exact
+      methods, so the bound is confirmed, independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -50290,8 +50712,8 @@ results:
         (T-269, S3). No lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -50300,6 +50722,7 @@ results:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -50315,10 +50738,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n260.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n260.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n260.json
     notes: >-
       A separate complete repository replay is retained for n = 260, in the receipt of the
       release's 13 certificates (receipts/exact-certification-n260.json.xz): the positive and its
@@ -50354,6 +50781,27 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 33,670 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00012e-28 at squares 6 and 11, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -50362,11 +50810,32 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4, think-evxy): a
-      clean-room exact checker, the identity against the house's packing and the lineage the
-      source states, a mapped review whose acceptance would confirm the rungs. Then adopt the
-      count where it is the smallest validated side under the house rule, with both strong
-      generators' regularization and the flip of the new house in the same change.
+      Adopt it at 260 in place of T-269 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 260 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-318
   - id: T-319
     kind: upper-bound
     registered: '2026-11-17'
@@ -50390,11 +50859,13 @@ results:
       moves 3 squares beyond a tenth (largest 0.314602) and 261 beyond 1e-3: the issue calls the
       packing new, and measured it continues #1007's arrangement.
 
-      T-101's own uniform-contraction margin is 1.6707e-19, so the gain, about 5.4e+16 times it,
-      lies wholly outside its padding. #1007's margin is 6.8888e-11, and the gain on it 1.578e-03.
-      Both maintained exact routes accept the certificate, read by the evand-cert reader and held
-      to the source's Witness/v2 corner file of the same packing; the stage 4 review is a separate
-      lane (think-evxy), and the adoption waits on it.
+      T-101's own uniform-contraction margin is 1.6707e-19, so the gain, about 5.4e+16 times
+      it, lies wholly outside its padding. #1007's margin is 6.8888e-11, and the gain on it
+      1.578e-03. Both maintained exact routes accept the certificate, read by the evand-cert
+      reader and held to the source's Witness/v2 corner file of the same packing; the stage
+      4 review of 17 November 2026 accepts it, its clean-room checker deciding every square,
+      wall and pair of both files by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -50424,8 +50895,8 @@ results:
         optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -50434,6 +50905,7 @@ results:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -50450,10 +50922,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n262.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n262.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n262.json
     notes: >-
       A separate complete repository replay is retained for n = 262, in the receipt of the
       release's 13 certificates (receipts/exact-certification-n262.json.xz): the positive and its
@@ -50489,6 +50965,29 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 34,191 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00004e-28 at squares 211 and 230, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5); its 295 certificate is
+      this arrangement in an L-shaped border of 33 squares solved again, 5.93e-19 above this
+      side plus 1, which this certificate with an upright border proves (F8). It measures no
+      identity or padding of its own, leaving both to after its freeze; the packet's
+      measurements stand. It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -50497,13 +50996,32 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4, think-evxy): a
-      clean-room exact checker, the identity against the house's packing and the lineage the
-      source states, a mapped review whose acceptance would confirm the rungs. Then adopt the
-      count where it is the smallest validated side under the house rule, with both strong
-      generators' regularization and the flip of the new house in the same change. At 262, 292 and
-      295 the adoption follows that of the earlier reports' certificates (think-qag8), so the
-      house's history reads in order.
+      Adopt it at 262 in place of the Kingbird catalogue's 16 + √2/2 under the house rule,
+      the smallest validated side there, in the pass of the day this change merges, with
+      both strong generators' regularization of the new house and its flip in the same
+      change. V4 and C4 then need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 262 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction, and the 295 certificate against the 262.
+      verdict: accepted
+      covers:
+      - T-319
   - id: T-320
     kind: upper-bound
     registered: '2026-11-17'
@@ -50522,10 +51040,12 @@ results:
       0.809253), and turns squares by up to 1.444 degrees. A further arrangement of T-289's
       packing, as the issue says, with ten squares moved beyond a tenth.
 
-      T-289's own uniform-contraction margin is 3.2045e-12, so the gain, about 5.0e+07 times it,
-      lies wholly outside its padding. Both maintained exact routes accept the certificate, read
-      by the evand-cert reader and held to the source's Witness/v2 corner file of the same
-      packing; the stage 4 review is a separate lane (think-evxy), and the adoption waits on it.
+      T-289's own uniform-contraction margin is 3.2045e-12, so the gain, about 5.0e+07 times
+      it, lies wholly outside its padding. Both maintained exact routes accept the
+      certificate, read by the evand-cert reader and held to the source's Witness/v2 corner
+      file of the same packing; the stage 4 review of 17 November 2026 accepts it, its
+      clean-room checker deciding every square, wall and pair of both files by two exact
+      methods, so the bound is confirmed, independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -50551,8 +51071,8 @@ results:
         T-306 and T-308. No technique is new, so not S4. No lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -50561,6 +51081,7 @@ results:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -50576,10 +51097,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n268.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n268.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n268.json
     notes: >-
       A separate complete repository replay is retained for n = 268, in the receipt of the
       release's 13 certificates (receipts/exact-certification-n268.json.xz): the positive and its
@@ -50615,6 +51140,27 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 35,778 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00003e-28 at squares 228 and 264, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -50623,21 +51169,42 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4, think-evxy): a
-      clean-room exact checker, the identity against the house's packing and the lineage the
-      source states, a mapped review whose acceptance would confirm the rungs. Then adopt the
-      count where it is the smallest validated side under the house rule, with both strong
-      generators' regularization and the flip of the new house in the same change.
+      Adopt it at 268 in place of T-289 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 268 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-320
   - id: T-321
     kind: upper-bound
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's re-solve of T-283's packing at 270, 3.25e-12 below it, at its padding; held
+      Polkovskyi's re-solve of T-283's packing at 270, 3.25e-12 below it, beyond its padding
     claim: >-
-      One complete rational source certificate reports a finite upper-bound improvement at the
-      exact side it states: s(270) <= 16.928148603339607384058475178539. That side is
-      16.9281486033396074 rounded up at 16 places and 16.928148603340 at 12, as #1009 prints it.
+      One complete rational certificate proves s(270) <= 16.928148603339607384058475178539.
+      That side is 16.9281486033396074 rounded up at 16 places and 16.928148603340 at 12, as
+      #1009 prints it.
 
       It is 3.25e-12 below T-283 (Evan Daniel's packing as Doğa Özden improved it), the case's
       house in both lanes, and measured here nearest centres pair it one to one with T-283's
@@ -50646,12 +51213,17 @@ results:
       0.0005845 degrees. It is T-283's packing re-solved, every square within 1.44264e-05 of its
       place.
 
-      The gain is 1.0111 of T-283's own uniform-contraction margin, 3.2115e-12, what contracting
-      T-283's certificate takes off it with no square re-solved, and T-283 so contracted rounds up
-      at 12 places to this claim's own print, 16.928148603340 (devtools.contraction_margin).
-      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
-      RV-3): until the answer the entry stays below the stage 4 exit, and the case keeps its
-      house.
+      The gain is 1.0111 of T-283's own uniform-contraction margin, 3.2115e-12: below T-283
+      shrunk until its squares first touch by 3.55e-14 (devtools.contraction_margin), so
+      under the owner's option D of 17 November 2026 (think-b0w5), which settles RV-3, it is
+      a new result, not a restatement of the padding, though T-283 so contracted rounds up
+      at 12 places to this claim's own print.
+
+      Both maintained exact routes accept the certificate, read by the evand-cert reader and
+      held to the source's Witness/v2 corner file of the same packing, and the stage 4
+      review of 17 November 2026 accepts it, its clean-room checker deciding every square,
+      wall and pair of both files by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -50669,19 +51241,22 @@ results:
     scope:
       n_values:
       - 270
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
-        A re-solve of T-283's packing at 270, 3.25e-12 below it and 1.0111 of T-283's own
-        uniform-contraction margin, at the 12-place print of T-283 contracted: the padding class
-        think-ruu2's RV-3 puts to the owner, held at S1 as T-280, T-285 and T-286 are, and the
-        answer may change the score. No new arrangement, lower bound or optimum.
+        A re-solve of T-283's packing at 270, 3.2470e-12 below it, 1.0111 of T-283's own
+        uniform-contraction margin and 3.55e-14 below T-283 shrunk to first contact: a new
+        result under the owner's option D of 17 November 2026 (think-b0w5), at a tighter
+        padding of the same arrangement, every square within 1.5e-5 of its place, as T-259's
+        re-solve at 130 is (S1). The arrangement and its score are T-283's. No new
+        arrangement, lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no
+        significance; rescored under option D (think-b0w5) by lane w3-pass-1117r
     novelty: previously-published
     attribution:
       source_keys:
@@ -50689,6 +51264,8 @@ results:
       published: '2026-11-16'
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -50704,17 +51281,21 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n270.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n270.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n270.json
     notes: >-
       A separate complete repository replay is retained for n = 270, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n270.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 217890 pair decisions over the 3 jobs, 85.79 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. It is retained and not
-      entered: the entry cites only the report until the owner's RV-3 answer (think-ruu2).
+      release's 13 certificates (receipts/exact-certification-n270.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 217890 pair decisions over the 3 jobs, 85.79 route CPU seconds. The
+      positive clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The
+      replay is E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n270.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -50744,6 +51325,29 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 36,315 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00004e-28 at squares 164 and 193, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5); it is one of the two least
+      regular of the thirteen: 85 squares turned by less than 1e-9 degrees and 218 near
+      pairs open by 1e-27 to 1e-9 (F10). It measures no identity or padding of its own,
+      leaving both to after its freeze; the packet's measurements stand. It states no
+      significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -50752,11 +51356,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at its
-      predecessor's own contraction margin is a new result. If it is not, the entry is withdrawn
-      and T-283 stays the house; if it is, the replay and the stage 4 review's clean-room run are
-      entered, both rungs rise to V3 and C3, and 270 is adopted under the house rule with both
-      strong generators' regularization and the flip.
+      Adopt it at 270 in place of T-283 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
     regularizations:
     - n: 270
       of: T-283
@@ -50772,19 +51376,27 @@ results:
         moved: 0
         max_move: 1.44264e-05
         max_turn_deg: 0.0005845
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and the
-        stage 4 review's clean-room run, both retained, entered as the stage 4 exit
-      rung: C3
-      link: think-ruu2
-      estimated_cost:
-        cpu_hours: 0.05
-        cpu_hours_high: 0.5
-        basis: >-
-          the replay and the sharp controls ran on 17 November and their receipts are retained; the
-          review is one count; what remains is records work
-        priced: '2026-11-17'
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 270 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-321
   - id: T-322
     kind: upper-bound
     registered: '2026-11-17'
@@ -50803,10 +51415,12 @@ results:
       0.932553), and turns squares by up to 38.62 degrees. A new arrangement relative to that
       packing, as the issue says.
 
-      T-174's own uniform-contraction margin is 0, two of its squares touching, so the gain lies
-      wholly outside any padding. Both maintained exact routes accept the certificate, read by the
-      evand-cert reader and held to the source's Witness/v2 corner file of the same packing; the
-      stage 4 review is a separate lane (think-evxy), and the adoption waits on it.
+      T-174's own uniform-contraction margin is 0, two of its squares touching, so the gain
+      lies wholly outside any padding. Both maintained exact routes accept the certificate,
+      read by the evand-cert reader and held to the source's Witness/v2 corner file of the
+      same packing; the stage 4 review of 17 November 2026 accepts it, its clean-room
+      checker deciding every square, wall and pair of both files by two exact methods, so
+      the bound is confirmed, independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -50832,8 +51446,8 @@ results:
         S4. No lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -50842,6 +51456,7 @@ results:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -50857,10 +51472,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n272.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n272.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n272.json
     notes: >-
       A separate complete repository replay is retained for n = 272, in the receipt of the
       release's 13 certificates (receipts/exact-certification-n272.json.xz): the positive and its
@@ -50897,6 +51516,27 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 36,856 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00006e-28 at squares 184 and 187, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -50905,11 +51545,32 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4, think-evxy): a
-      clean-room exact checker, the identity against the house's packing and the lineage the
-      source states, a mapped review whose acceptance would confirm the rungs. Then adopt the
-      count where it is the smallest validated side under the house rule, with both strong
-      generators' regularization and the flip of the new house in the same change.
+      Adopt it at 272 in place of T-174 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 272 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-322
   - id: T-323
     kind: upper-bound
     registered: '2026-11-17'
@@ -50934,11 +51595,13 @@ results:
       above, no symmetry pairs them. The issue calls the packing new, and measured it continues
       #1006's arrangement.
 
-      T-146's own uniform-contraction margin is 1.7591e-19, so the gain, about 7.7e+15 times it,
-      lies wholly outside its padding. #1006's margin is 5.0288e-11, and the gain on it 3.616e-09.
-      Both maintained exact routes accept the certificate, read by the evand-cert reader and held
-      to the source's Witness/v2 corner file of the same packing; the stage 4 review is a separate
-      lane (think-evxy), and the adoption waits on it.
+      T-146's own uniform-contraction margin is 1.7591e-19, so the gain, about 7.7e+15 times
+      it, lies wholly outside its padding. #1006's margin is 5.0288e-11, and the gain on it
+      3.616e-09. Both maintained exact routes accept the certificate, read by the evand-cert
+      reader and held to the source's Witness/v2 corner file of the same packing; the stage
+      4 review of 17 November 2026 accepts it, its clean-room checker deciding every square,
+      wall and pair of both files by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -50968,8 +51631,8 @@ results:
         scored with that report. No lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -50978,6 +51641,7 @@ results:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -50994,10 +51658,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n292.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n292.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n292.json
     notes: >-
       A separate complete repository replay is retained for n = 292, in the receipt of the
       release's 13 certificates (receipts/exact-certification-n292.json.xz): the positive and its
@@ -51036,6 +51704,29 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 42,486 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 4.23790e-15 at squares 196 and 209, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5); it is one of the two least
+      regular of the thirteen: 14 squares upright, 219 turned by less than a degree, and
+      pair gaps of 4e-15 to 2e-12 (F10). It measures no identity or padding of its own,
+      leaving both to after its freeze; the packet's measurements stand. It states no
+      significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -51044,13 +51735,32 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4, think-evxy): a
-      clean-room exact checker, the identity against the house's packing and the lineage the
-      source states, a mapped review whose acceptance would confirm the rungs. Then adopt the
-      count where it is the smallest validated side under the house rule, with both strong
-      generators' regularization and the flip of the new house in the same change. At 262, 292 and
-      295 the adoption follows that of the earlier reports' certificates (think-qag8), so the
-      house's history reads in order.
+      Adopt it at 292 in place of T-146 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 292 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-323
   - id: T-324
     kind: upper-bound
     registered: '2026-11-17'
@@ -51076,11 +51786,13 @@ results:
       L strip of 33 squares lies along two sides of its box, so it is no L step on that
       certificate as the L-base reader models one.
 
-      T-193's own uniform-contraction margin is 1.7704e-19, so the gain, about 3.5e+16 times it,
-      lies wholly outside its padding. #1007's margin is 2.5384e-11, and the gain on it 1.578e-03.
-      Both maintained exact routes accept the certificate, read by the evand-cert reader and held
-      to the source's Witness/v2 corner file of the same packing; the stage 4 review is a separate
-      lane (think-evxy), and the adoption waits on it.
+      T-193's own uniform-contraction margin is 1.7704e-19, so the gain, about 3.5e+16 times
+      it, lies wholly outside its padding. #1007's margin is 2.5384e-11, and the gain on it
+      1.578e-03. Both maintained exact routes accept the certificate, read by the evand-cert
+      reader and held to the source's Witness/v2 corner file of the same packing; the stage
+      4 review of 17 November 2026 accepts it, its clean-room checker deciding every square,
+      wall and pair of both files by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -51106,8 +51818,8 @@ results:
         No technique is new, so not S4. No lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no significance
     novelty: previously-published
     attribution:
       source_keys:
@@ -51116,6 +51828,7 @@ results:
     evidence:
     - E-mishapolk-1009-certificate-report
     - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -51132,10 +51845,14 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n295.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n295.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n295.json
     notes: >-
       A separate complete repository replay is retained for n = 295, in the receipt of the
       release's 13 certificates (receipts/exact-certification-n295.json.xz): the positive and its
@@ -51171,6 +51888,30 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 43,365 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 1.77633e-20 at squares 80 and 81, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5); it is T-319's arrangement
+      in an L-shaped border of 33 squares solved again, its inner squares up to 0.079 from
+      T-319's, and its side 5.93e-19 above T-319's side plus 1, which T-319 with an upright
+      border proves; the two print alike at 12 places (F8). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -51179,23 +51920,42 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Independently review the retained replay and the certificate (stage 4, think-evxy): a
-      clean-room exact checker, the identity against the house's packing and the lineage the
-      source states, a mapped review whose acceptance would confirm the rungs. Then adopt the
-      count where it is the smallest validated side under the house rule, with both strong
-      generators' regularization and the flip of the new house in the same change. At 262, 292 and
-      295 the adoption follows that of the earlier reports' certificates (think-qag8), so the
-      house's history reads in order.
+      Adopt it at 295 in place of T-193 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 295 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction, and the 295 certificate against the 262.
+      verdict: accepted
+      covers:
+      - T-324
   - id: T-325
     kind: upper-bound
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's re-solve of T-277's packing at 299, 3.53e-12 below it, at its padding; held
+      Polkovskyi's re-solve of T-277's packing at 299, 3.53e-12 below it, beyond its padding
     claim: >-
-      One complete rational source certificate reports a finite upper-bound improvement at the
-      exact side it states: s(299) <= 17.801004434251766824147518370008. That side is
-      17.8010044342517669 rounded up at 16 places and 17.801004434252 at 12, as #1009 prints it.
+      One complete rational certificate proves s(299) <= 17.801004434251766824147518370008.
+      That side is 17.8010044342517669 rounded up at 16 places and 17.801004434252 at 12, as
+      #1009 prints it.
 
       It is 3.53e-12 below T-277 (Evan Daniel's packing as Doğa Özden improved it), the case's
       house in both lanes, and measured here nearest centres pair it one to one with T-277's
@@ -51205,12 +51965,17 @@ results:
       place. It is also 2.34e-12 below T-280, Kaelan Yim's re-solve of the same packing, held for
       the owner's RV-3, and one to one with it.
 
-      The gain is 1.0361 of T-277's own uniform-contraction margin, 3.4040e-12, what contracting
-      T-277's certificate takes off it with no square re-solved, and T-277 so contracted rounds up
-      at 12 places to this claim's own print, 17.801004434252 (devtools.contraction_margin).
-      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
-      RV-3): until the answer the entry stays below the stage 4 exit, and the case keeps its
-      house.
+      The gain is 1.0361 of T-277's own uniform-contraction margin, 3.4040e-12: below T-277
+      shrunk until its squares first touch by 1.23e-13 (devtools.contraction_margin), so
+      under the owner's option D of 17 November 2026 (think-b0w5), which settles RV-3, it is
+      a new result, not a restatement of the padding, though T-277 so contracted rounds up
+      at 12 places to this claim's own print.
+
+      Both maintained exact routes accept the certificate, read by the evand-cert reader and
+      held to the source's Witness/v2 corner file of the same packing, and the stage 4
+      review of 17 November 2026 accepts it, its clean-room checker deciding every square,
+      wall and pair of both files by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -51228,19 +51993,22 @@ results:
     scope:
       n_values:
       - 299
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
-        A re-solve of T-277's packing at 299, 3.53e-12 below it and 1.0361 of T-277's own
-        uniform-contraction margin, at the 12-place print of T-277 contracted: the padding class
-        think-ruu2's RV-3 puts to the owner, held at S1 as T-280, T-285 and T-286 are, and the
-        answer may change the score. No new arrangement, lower bound or optimum.
+        A re-solve of T-277's packing at 299, 3.5268e-12 below it, 1.0361 of T-277's own
+        uniform-contraction margin and 1.23e-13 below T-277 shrunk to first contact: a new
+        result under the owner's option D of 17 November 2026 (think-b0w5), at a tighter
+        padding of the same arrangement, every square within 1.5e-5 of its place, as T-259's
+        re-solve at 130 is (S1). The arrangement and its score are T-277's. No new
+        arrangement, lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no
+        significance; rescored under option D (think-b0w5) by lane w3-pass-1117r
     novelty: previously-published
     attribution:
       source_keys:
@@ -51248,6 +52016,8 @@ results:
       published: '2026-11-16'
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -51264,17 +52034,21 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n299.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n299.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n299.json
     notes: >-
       A separate complete repository replay is retained for n = 299, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n299.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 267306 pair decisions over the 3 jobs, 62.68 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. It is retained and not
-      entered: the entry cites only the report until the owner's RV-3 answer (think-ruu2).
+      release's 13 certificates (receipts/exact-certification-n299.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 267306 pair decisions over the 3 jobs, 62.68 route CPU seconds. The
+      positive clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The
+      replay is E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n299.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -51305,6 +52079,27 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 44,551 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00004e-28 at squares 50 and 53, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -51313,11 +52108,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at its
-      predecessor's own contraction margin is a new result. If it is not, the entry is withdrawn
-      and T-277 stays the house; if it is, the replay and the stage 4 review's clean-room run are
-      entered, both rungs rise to V3 and C3, and 299 is adopted under the house rule with both
-      strong generators' regularization and the flip.
+      Adopt it at 299 in place of T-277 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
     regularizations:
     - n: 299
       of: T-277
@@ -51333,29 +52128,37 @@ results:
         moved: 1
         max_move: 0.00102118
         max_turn_deg: 0.0378
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and the
-        stage 4 review's clean-room run, both retained, entered as the stage 4 exit
-      rung: C3
-      link: think-ruu2
-      estimated_cost:
-        cpu_hours: 0.05
-        cpu_hours_high: 0.5
-        basis: >-
-          the replay and the sharp controls ran on 17 November and their receipts are retained; the
-          review is one count; what remains is records work
-        priced: '2026-11-17'
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 299 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-325
   - id: T-326
     kind: upper-bound
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's re-solve of T-279's packing at 307, 3.48e-12 below it, at its padding; held
+      Polkovskyi's re-solve of T-279's packing at 307, 3.48e-12 below it, beyond its padding
     claim: >-
-      One complete rational source certificate reports a finite upper-bound improvement at the
-      exact side it states: s(307) <= 17.97923096038388460435506303874. That side is
-      17.9792309603838847 rounded up at 16 places and 17.979230960384 at 12, as #1009 prints it.
+      One complete rational certificate proves s(307) <= 17.97923096038388460435506303874.
+      That side is 17.9792309603838847 rounded up at 16 places and 17.979230960384 at 12, as
+      #1009 prints it.
 
       It is 3.48e-12 below T-279 (ntumlnoob's packing as Francisco Couzo and Doğa Özden improved
       it), the case's house in both lanes, and measured here nearest centres pair it one to one
@@ -51364,12 +52167,17 @@ results:
       squares by up to 5.73e-06 degrees. It is T-279's packing re-solved, every square within
       1.41421e-07 of its place.
 
-      The gain is 1.0174 of T-279's own uniform-contraction margin, 3.4186e-12, what contracting
-      T-279's certificate takes off it with no square re-solved, and T-279 so contracted rounds up
-      at 12 places to this claim's own print, 17.979230960384 (devtools.contraction_margin).
-      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
-      RV-3): until the answer the entry stays below the stage 4 exit, and the case keeps its
-      house.
+      The gain is 1.0174 of T-279's own uniform-contraction margin, 3.4186e-12: below T-279
+      shrunk until its squares first touch by 5.95e-14 (devtools.contraction_margin), so
+      under the owner's option D of 17 November 2026 (think-b0w5), which settles RV-3, it is
+      a new result, not a restatement of the padding, though T-279 so contracted rounds up
+      at 12 places to this claim's own print.
+
+      Both maintained exact routes accept the certificate, read by the evand-cert reader and
+      held to the source's Witness/v2 corner file of the same packing, and the stage 4
+      review of 17 November 2026 accepts it, its clean-room checker deciding every square,
+      wall and pair of both files by two exact methods, so the bound is confirmed,
+      independently re-implemented.
 
       The issue says verify_bound_certificate.py --strict (Evan Daniel's separating-axis verifier
       as Francisco Couzo modified it) and verify_area_exact.py --strict (the author's
@@ -51387,19 +52195,22 @@ results:
     scope:
       n_values:
       - 307
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
-        A re-solve of T-279's packing at 307, 3.48e-12 below it and 1.0174 of T-279's own
-        uniform-contraction margin, at the 12-place print of T-279 contracted: the padding class
-        think-ruu2's RV-3 puts to the owner, held at S1 as T-280, T-285 and T-286 are, and the
-        answer may change the score. No new arrangement, lower bound or optimum.
+        A re-solve of T-279's packing at 307, 3.4781e-12 below it, 1.0174 of T-279's own
+        uniform-contraction margin and 5.95e-14 below T-279 shrunk to first contact: a new
+        result under the owner's option D of 17 November 2026 (think-b0w5), at a tighter
+        padding of the same arrangement, every square within 1.5e-5 of its place, as T-259's
+        re-solve at 130 is (S1). The arrangement and its score are T-279's. No new
+        arrangement, lower bound or optimum.
       scored: '2026-11-17'
       by: >-
-        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft for the stage 4
-        review (think-evxy) to confirm or change
+        think-i38n Polkovskyi import (intake lane c-import-1009-1117), a draft the stage 4
+        review of 17 November (think-evxy) leaves unchanged, since it states no
+        significance; rescored under option D (think-b0w5) by lane w3-pass-1117r
     novelty: previously-published
     attribution:
       source_keys:
@@ -51407,6 +52218,8 @@ results:
       published: '2026-11-16'
     evidence:
     - E-mishapolk-1009-certificate-report
+    - E-mishapolk-1009-exact-feasibility
+    - E-mishapolk-1009-review-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-issue1009-2026-11-16/README.md
     - packing/resources/web/mishapolk-issue1009-2026-11-16/acquisition/claims.json
@@ -51422,17 +52235,21 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1009.py
     - packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/sharp-controls-n307.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/check-n307.json
+    - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n307.json
     notes: >-
       A separate complete repository replay is retained for n = 307, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n307.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 281826 pair decisions over the 3 jobs, 60.25 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. It is retained and not
-      entered: the entry cites only the report until the owner's RV-3 answer (think-ruu2).
+      release's 13 certificates (receipts/exact-certification-n307.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 281826 pair decisions over the 3 jobs, 60.25 route CPU seconds. The
+      positive clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The
+      replay is E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n307.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -51462,6 +52279,27 @@ results:
       sides remove, and one more: 295 from this release's 262, 5.93e-19 below its own 295, at the
       same 12-place print.
 
+      The 17 November review's clean-room checker
+      (E-mishapolk-1009-review-exact-feasibility) decided every wall and all 46,971 pairs of
+      the certificate and of its Witness/v2 file, by separating axes in Python integers from
+      the centres and half-angle tangents and again by exact convex clipping in GMP
+      rationals from the corners, each method run on both forms, with no distance filter:
+      every pair strictly apart, its least margin 2.00010e-28 at squares 48 and 113, the
+      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
+      stated beforehand as rules, were decided as stated, among them the squares accepted in
+      the box of the claim and crossing the walls of the box one unit of the twelfth place
+      smaller.
+
+      It finds no blocking or major defect (F1 to F10, all notes): the two files are one
+      packing, square by square (F4), and the file is a contact packing opened by a small
+      dilation and set 1e-28 from the left and bottom walls (F5). It measures no identity or
+      padding of its own, leaving both to after its freeze; the packet's measurements stand.
+      It states no significance, so the draft score stands.
+
+      The import read the review after its replay, controls, measurements and registration
+      were committed, and the review lane read none of them before its findings were frozen
+      at 04:28:50Z.
+
       The source's own verifiers were not run here. The two maintained routes share this
       repository's evand-cert reader (certificate parsing and half-angle conversion, its line
       filter and corner construction transcribed from Evan Daniel's checkers, the family of the
@@ -51470,11 +52308,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at its
-      predecessor's own contraction margin is a new result. If it is not, the entry is withdrawn
-      and T-279 stays the house; if it is, the replay and the stage 4 review's clean-room run are
-      entered, both rungs rise to V3 and C3, and 307 is adopted under the house rule with both
-      strong generators' regularization and the flip.
+      Adopt it at 307 in place of T-279 under the house rule, the smallest validated side
+      there, in the pass of the day this change merges, with both strong generators'
+      regularization of the new house and its flip in the same change. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
     regularizations:
     - n: 307
       of: T-279
@@ -51490,19 +52328,28 @@ results:
         moved: 0
         max_move: 1.41421e-07
         max_turn_deg: 5.73e-06
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and the
-        stage 4 review's clean-room run, both retained, entered as the stage 4 exit
-      rung: C3
-      link: think-ruu2
-      estimated_cost:
-        cpu_hours: 0.05
-        cpu_hours_high: 0.5
-        basis: >-
-          the replay and the sharp controls ran on 17 November and their receipts are retained; the
-          review is one count; what remains is records work
-        priced: '2026-11-17'
+    reviews:
+    - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-17'
+      scope: >-
+        Finite feasibility of #1009's certificate at 307 in both its forms, the
+        centre/half-angle file and the Witness/v2 corner file, decided by the review's
+        clean-room exact checker, frozen before any producer, witness or verifier code was
+        read, by two methods run on both forms, with 37 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        files' construction.
+      verdict: accepted
+      covers:
+      - T-326
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:

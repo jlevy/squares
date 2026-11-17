@@ -125,8 +125,7 @@ reports:
         remains with the standing authors, with certificate refinement credited to Mykhailo Polkovskyi.'''
     note: 'T-287''s uniform-contraction margin is 2.4170e-12 (squares 32 and 33), and the gain is 2.5885e-12, 1.0709
       of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n156.json): T-287 contracted rounds
-      up at 12 places to this claim''s own print, so the gain over the padding, 1.71e-13, lies within the print; whether
-      such a re-certification is a new result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. The certificate''s
+      up at 12 places to this claim''s own print, so the gain over the padding, 1.71e-13, lies within the print; under the owner''s option D of 17 November 2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first contact, so it is a new result. The certificate''s
       own margin is 2.5964e-27 (contraction-n156-own.json).'
   - n: 180
     measured:
@@ -142,8 +141,7 @@ reports:
         remains with the standing authors, with certificate refinement credited to Mykhailo Polkovskyi.'''
     note: 'T-288''s uniform-contraction margin is 2.5843e-12 (squares 126 and 139), and the gain is 2.7096e-12, 1.0485
       of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n180.json): T-288 contracted rounds
-      up at 12 places to this claim''s own print, so the gain over the padding, 1.25e-13, lies within the print; whether
-      such a re-certification is a new result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. The certificate''s
+      up at 12 places to this claim''s own print, so the gain over the padding, 1.25e-13, lies within the print; under the owner''s option D of 17 November 2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first contact, so it is a new result. The certificate''s
       own margin is 1.8662e-23 (contraction-n180-own.json).'
   - n: 210
     measured:
@@ -220,8 +218,7 @@ reports:
         remains with the standing authors, with certificate refinement credited to Mykhailo Polkovskyi.'''
     note: 'T-283''s uniform-contraction margin is 3.2115e-12 (squares 220 and 234), and the gain is 3.2470e-12, 1.0111
       of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n270.json): T-283 contracted rounds
-      up at 12 places to this claim''s own print, so the gain over the padding, 3.55e-14, lies within the print; whether
-      such a re-certification is a new result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. The certificate''s
+      up at 12 places to this claim''s own print, so the gain over the padding, 3.55e-14, lies within the print; under the owner''s option D of 17 November 2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first contact, so it is a new result. The certificate''s
       own margin is 3.3863e-27 (contraction-n270-own.json).'
   - n: 272
     measured:
@@ -253,8 +250,10 @@ reports:
     note: 'T-146''s uniform-contraction margin is 1.7591e-19 (squares 68 and 69), so the gain, 1.3617e-03, about 7.7e+15
       times it, lies wholly outside its padding (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292.json);
       RV-3 (think-ruu2) does not reach it. Against #1006, whose margin is 5.0288e-11, the gain is 3.6163e-09, about 7.19e+01
-      times it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292-1006.json). The certificate''s
-      own margin is 7.0307e-14 (contraction-n292-own.json).'
+      times it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n292-1006.json): under the owner''s
+      option D of 17 November 2026 (think-b0w5) the claim is below #1006 shrunk to first contact, 3.62e-9 = 72 x 5.0288e-11,
+      so it is a new result, not a restatement of de Winter''s packing. The certificate''s own margin is 7.0307e-14
+      (contraction-n292-own.json).'
   - n: 295
     measured:
       against: T-146
@@ -290,8 +289,7 @@ reports:
         remains with the standing authors, with certificate refinement credited to Mykhailo Polkovskyi.'''
     note: 'T-277''s uniform-contraction margin is 3.4040e-12 (squares 179 and 194), and the gain is 3.5268e-12, 1.0361
       of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299.json): T-277 contracted rounds
-      up at 12 places to this claim''s own print, so the gain over the padding, 1.23e-13, lies within the print; whether
-      such a re-certification is a new result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. Against
+      up at 12 places to this claim''s own print, so the gain over the padding, 1.23e-13, lies within the print; under the owner''s option D of 17 November 2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first contact, so it is a new result. Against
       T-280, whose margin is 5.5511e-17, the gain is 2.3449e-12, about 4.22e+04 times it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299-t280.json).
       The certificate''s own margin is 3.5612e-27 (contraction-n299-own.json).'
   - n: 307
@@ -308,8 +306,7 @@ reports:
         remains with the standing authors, with certificate refinement credited to Mykhailo Polkovskyi.'''
     note: 'T-279''s uniform-contraction margin is 3.4186e-12 (squares 108 and 304), and the gain is 3.4781e-12, 1.0174
       of it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n307.json): T-279 contracted rounds
-      up at 12 places to this claim''s own print, so the gain over the padding, 5.95e-14, lies within the print; whether
-      such a re-certification is a new result is the owner''s RV-3 (think-ruu2), as at T-280, T-285 and T-286. The certificate''s
+      up at 12 places to this claim''s own print, so the gain over the padding, 5.95e-14, lies within the print; under the owner''s option D of 17 November 2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first contact, so it is a new result. The certificate''s
       own margin is 3.5960e-27 (contraction-n307-own.json).'
   note: '#1009 names b637e6c, committed at 2026-11-16T23:31:56Z and pushed at 23:32:03Z as a force-push over b9b7fa7
     (committed 23:27:09Z, pushed 23:27:18Z), which holds the same 13 certificates byte for byte; the claims'' first commit

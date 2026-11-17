@@ -241,7 +241,7 @@ def test_each_gain_against_its_house_contraction_margin(n: int) -> None:
 
 def test_the_262_and_292_certificates_pair_one_to_one_with_the_earlier_reports() -> None:
     """Measured, the 262 and 292 certificates continue the packings of #1007 and #1006,
-    which the issue does not name (think-m8ex); 295 does not pair with #1007's."""
+    which the issue does not name (think-bx2a); 295 does not pair with #1007's."""
     measure = reports.packet_path(NAME) / "measure"
 
     def pairs(n: int) -> dict[str, Any]:

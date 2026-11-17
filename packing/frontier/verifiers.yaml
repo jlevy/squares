@@ -8995,3 +8995,147 @@ verifiers:
       review-only directory joegun-1001-review-2026-11-16 beside the import lane's packet.
       l186_describe.py, l186_custody.py, l186_author_outputs.py and l186_sides.py, kept beside
       them, decide no certificate and are not registered.
+  - id: V-r1-1005-1007-review-check
+    program: r1_check.py with r1_read.py, r1_axes.py, r1_area.py, r1_decide.py, r1_frame.py and r1_fmt.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 17 November stage 4 review's exact checker of the four certificates of issues
+      1005, 1006 and 1007 (292 twice, 262 and 295), each in two files, with strict readers
+      of its own (r1_read.py: a Witness/v2 corners record as one block-style YAML document
+      built from the parser's events, with no anchors, aliases, tags, directives, flow
+      collections, duplicate keys, tabs or carriage returns, every corner scalar read a
+      second time line by line, or as JSON; and a centre file of exactly five keys, the
+      format sentence as quoted and four scalars a square; every scalar p or p/q, lowest
+      terms recorded): every square a unit square, every wall and every pair twice with no
+      distance filter, by separating axes on each square's corners written over one integer
+      denominator, in Python integers (r1_axes.py, method A), and by building each pair's
+      intersection from the corners inside the other square and the crossings of
+      non-parallel edges, its convex hull measured in gmpy2.mpq, each square a unit square
+      by its sides and diagonals, each wall classed by the intersection with its outer
+      half-plane and containment decided by area (r1_area.py, method B); r1_decide.py runs
+      both and requires their classes to agree, and r1_check.py adds the file's digest and
+      the claim's 12-place arithmetic. r1_frame.py holds the closed form by centres and
+      half-extents the self-test and controls use, and r1_fmt.py the exact prints;
+      r1_twin.py decides whether two files hold one packing; r1_controls.py decides 51
+      controls on a first file and 34 on a twin, stated as rules in a plan hashed before any
+      certificate was read; r1_selftest.py holds both methods and the readers to 24,389
+      checks and 14 broken copies.
+    source:
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_check.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_read.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_axes.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_area.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_decide.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_frame.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_fmt.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_twin.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_selftest.py
+      - packing/resources/web/ozden-de-winter-1005-1007-review-2026-11-17/programs/r1_controls.py
+    independence_record: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane R1 of issues 1005 to 1007
+            (c-review-1005-1117, under think-p3g8), strongest tier (tbd-strong-max) at the
+            maximum reasoning setting its agent definition configures, prompted separately
+            from the import lane (c-import-1005-1117, think-qag8)
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1005 says the search, checks and filing were AI-assisted throughout and that
+          this repository's packing-witness promote made the coordinates; issues 1006 and
+          1007 say the checking and the witness files were produced with Claude under Joost
+          de Winter's direction and the construction with Gemini Carbon. The checker files
+          and the controls plan were frozen at 2026-11-17T03:46:57Z
+          (frozen/checker-frozen-digests.txt), before their author read the sources'
+          READMEs, checkers or outputs, or this repository's witness, verifier or promotion
+          code; they import nothing from this repository or the sources and reuse no code of
+          any earlier review, lane L186's, the model for its method, among them, whose
+          programs it did not open.
+    note: >-
+      Written and run on 17 November 2026 for
+      docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md, and kept with its
+      receipts in the review-only directory ozden-de-winter-1005-1007-review-2026-11-17
+      beside the import lane's three packets. r1_describe.py, r1_inner.py, r1_tilts.py and
+      r1_tables.py, kept beside them, decide no certificate and are not registered;
+      r1_inner.py hands the 295 file's first 262 squares to the frozen decision.
+  - id: V-rv1009-review-check
+    program: rv1009_check.py with rv1009_reader.py, rv1009_axes.py, rv1009_clip.py, rv1009_forms.py, rv1009_decide.py and rv1009_files.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 17 November stage 4 review's exact checker of Mykhailo Polkovskyi's thirteen
+      certificates of issue 1009 (147 to 307), each in two forms, with strict readers of its
+      own (rv1009_reader.py: the .cert form of centres and half-angle tangents, comment
+      lines only before the header, and the Witness/v2 corner form; every scalar p or p/q,
+      handed out as written): every square a unit square, every wall and every pair with no
+      distance filter, by separating axes in Python integers from the poses (rv1009_axes.py,
+      method A) and by exact Sutherland-Hodgman clipping in gmpy2.mpq from the corners
+      alone, each square a unit square by its sides and diagonals, containment and walls by
+      the clipped area (rv1009_clip.py, method B); rv1009_forms.py writes each form in the
+      other's terms so that each method also decides the other form, rv1009_decide.py runs
+      both and requires their classes to agree, rv1009_files.py decides one count's two
+      files natively and crossed with the twin relation, and rv1009_check.py adds the files'
+      digests and the claim's 12-place arithmetic. rv1009_controls.py decides 37 controls a
+      count stated as rules in a plan hashed before any certificate was read;
+      rv1009_selftest.py holds both methods, the readers and the forms to 34,183 checks and
+      six broken copies.
+    source:
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_check.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_reader.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_axes.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_clip.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_forms.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_decide.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_files.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_geom.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_write.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_issue.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_selftest.py
+      - packing/resources/web/polkovskyi-1009-review-2026-11-17/programs/rv1009_controls.py
+    independence_record: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 1009 (c-review-1009-1117, under
+            think-evxy), strongest tier (tbd-strong-max) at maximum reasoning, prompted
+            separately from the import lane (c-import-1009-1117, think-i38n)
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1009 says the packings were discovered by Mykhailo Polkovskyi assisted by
+          Gemini. The checker was written from the mathematics, the Witness/v2 schema text
+          and the files, and frozen at 2026-11-17T03:33:14Z
+          (frozen/checker-frozen-digests.txt), before its author read the source's README,
+          submission note, verifiers or indexes, or this repository's witness, verifier,
+          promotion, identity or contraction code; it imports nothing from this repository
+          or the source and reuses no code of any earlier review, lane L186's, the model for
+          its method, among them, whose programs it did not open.
+    note: >-
+      Written and run on 17 November 2026 for
+      docs/project/reviews/review-2026-11-17-polkovskyi-1009.md, and kept with its receipts
+      in the review-only directory polkovskyi-1009-review-2026-11-17 beside the import
+      lane's packet. rv1009_describe.py and rv1009_lstep.py, kept beside them, decide no
+      certificate and are not registered; rv1009_custody.py, rv1009_padding.py and
+      rv1009_sides.py were written and not run.

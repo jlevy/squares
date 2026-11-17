@@ -24,10 +24,17 @@ issue names.
 
 Intake lane c-import-1009-1117 retained, replayed and measured it on 17 November 2026
 and registers it as **T-314** to **T-326**, one result a count.
-Eight stand at V3/C3 on the replay; the five refinements at 156, 180, 270, 299 and 307,
-each at its house’s padding, are held at V0 for the owner’s RV-3 question
-(think-ruu2), as T-280, T-285 and T-286 are.
-The blind stage 4 review is lane R2 (think-evxy).
+The five refinements at 156, 180, 270, 299 and 307, each 1.01 to 1.07 times its house’s
+padding, were first held for the owner’s RV-3 question (think-ruu2); the owner’s option
+D of 17 November (think-b0w5) decides them: each is below its house shrunk to first
+contact, so each is a new result.
+The blind stage 4 review of 17 November
+([review-2026-11-17-polkovskyi-1009.md](../../../../docs/project/reviews/review-2026-11-17-polkovskyi-1009.md),
+lane c-review-1009-1117, think-evxy), read only after this packet’s replay, controls,
+measurements and registration were committed, accepts all thirteen with ten findings,
+all notes, and 481 of 481 controls stated in advance; its least margins equal the
+replay’s. All thirteen stand at V3/C3, confirmed, independently re-implemented, and each
+count is adopted under the house rule in the pull request that maps the review.
 
 ## What the Source Claims
 
@@ -88,18 +95,18 @@ measurements are against T-146’s rational certificate of the arrangement T-193
 | n | Print | House | Gain | House margin | Gain / margin | Identity against the house | Disposition |
 | ---: | --- | --- | ---: | ---: | ---: | --- | --- |
 | 147 | 12.651043553173 | T-302 | 3.415e-09 | 2.934e-09 | 1.1639 | not one to one, 8 beyond 0.1, largest 0.647942 | further arrangement, S2 |
-| 156 | 12.977053087495 | T-287 | 2.589e-12 | 2.417e-12 | 1.0709 | one to one, 0 beyond 0.1, largest 1.44264e-05 | held for RV-3, S1 |
-| 180 | 13.915618502788 | T-288 | 2.710e-12 | 2.584e-12 | 1.0485 | one to one, 0 beyond 0.1, largest 1.42864e-05 | held for RV-3, S1 |
+| 156 | 12.977053087495 | T-287 | 2.589e-12 | 2.417e-12 | 1.0709 | one to one, 0 beyond 0.1, largest 1.44264e-05 | new result under option D, S1 |
+| 180 | 13.915618502788 | T-288 | 2.710e-12 | 2.584e-12 | 1.0485 | one to one, 0 beyond 0.1, largest 1.42864e-05 | new result under option D, S1 |
 | 210 | 14.971214601589 | T-174 | 1.787e-03 | 0.000e+00 | – | not one to one, 61 beyond 0.1, largest 0.973003 | new arrangement, S3 |
 | 260 | 16.633520939840 | T-269 | 1.105e-08 | 1.662e-11 | 664.8643 | one to one, 0 beyond 0.1, largest 0.039705 | further arrangement, S2 |
 | 262 | 16.698115018700 | T-101 | 8.992e-03 | 1.671e-19 | 5.38e+16 | not one to one, 78 beyond 0.1, largest 0.89057 | continues #1007, S3 |
 | 268 | 16.871868135103 | T-289 | 1.617e-04 | 3.204e-12 | 5.05e+07 | not one to one, 10 beyond 0.1, largest 0.809253 | continued arrangement, S3 |
-| 270 | 16.928148603340 | T-283 | 3.247e-12 | 3.212e-12 | 1.0111 | one to one, 0 beyond 0.1, largest 1.44264e-05 | held for RV-3, S1 |
+| 270 | 16.928148603340 | T-283 | 3.247e-12 | 3.212e-12 | 1.0111 | one to one, 0 beyond 0.1, largest 1.44264e-05 | new result under option D, S1 |
 | 272 | 16.965501175831 | T-174 | 8.530e-05 | 0.000e+00 | – | not one to one, 36 beyond 0.1, largest 0.932553 | new arrangement, S3 |
 | 292 | 17.590016439231 | T-146 | 1.362e-03 | 1.759e-19 | 7.74e+15 | not one to one, 70 beyond 0.1, largest 0.931284 | continues #1006, S2 |
 | 295 | 17.698115018700 | T-146 (T-193) | 6.118e-03 | 1.770e-19 | 3.46e+16 | not one to one, 203 beyond 0.1, largest 1.11945 | new arrangement, S3 |
-| 299 | 17.801004434252 | T-277 | 3.527e-12 | 3.404e-12 | 1.0361 | one to one, 0 beyond 0.1, largest 0.00102118 | held for RV-3, S1 |
-| 307 | 17.979230960384 | T-279 | 3.478e-12 | 3.419e-12 | 1.0174 | one to one, 0 beyond 0.1, largest 1.41421e-07 | held for RV-3, S1 |
+| 299 | 17.801004434252 | T-277 | 3.527e-12 | 3.404e-12 | 1.0361 | one to one, 0 beyond 0.1, largest 0.00102118 | new result under option D, S1 |
+| 307 | 17.979230960384 | T-279 | 3.478e-12 | 3.419e-12 | 1.0174 | one to one, 0 beyond 0.1, largest 1.41421e-07 | new result under option D, S1 |
 
 The other reports at these counts: at 262 the certificate is 1.578 × 10⁻³ below
 #1007, at 295 also 1.578 × 10⁻³ below #1007, at 292 8.778 × 10⁻⁵ below #1005 and
@@ -130,8 +137,8 @@ touches, and each enlargement closes its one pair or wall alone.
   to one with its house’s packing and no square moves by 10⁻³; at 299 one square moves
   by 1.02 × 10⁻³. Each gain is 1.01 to 1.07 times the house’s own uniform-contraction
   margin, and the house contracted rounds up at 12 places to the claim’s own print, so
-  the gain over the padding lies within the print: RV-3’s class, held as at T-285 and
-  T-286.
+  the gain over the padding lies within the print. Each is below its house shrunk to
+  first contact, so under the owner’s option D (think-b0w5) each is a new result.
 - **147.** No symmetry pairs the certificate one to one with T-302’s packing, and 8
   squares move beyond a tenth; the gain is 1.16 times T-302’s margin and the side rounds
   up below T-302 contracted, so it is more than the padding.
@@ -142,7 +149,7 @@ touches, and each enlargement closes its one pair or wall alone.
 - **Against the earlier reports.** The 262 certificate is one to one with #1007’s
   packing under a box symmetry, 3 squares beyond a tenth; the 292 certificate is one to
   one with #1006’s, 3 beyond a tenth. The issue calls both new and names neither, so the
-  register keeps its credit and the owner decides (think-m8ex). The 295 certificate is
+  register keeps its credit and the owner decides (think-bx2a). The 295 certificate is
   not one to one with #1007’s.
 
 ## The L Step
@@ -159,7 +166,7 @@ step on the 262 certificate.
 
 - The source’s verifiers were not run; the issue’s statements about them are its own.
 - Whose arrangement the 262 and 292 certificates continue is measured, not stated by
-  the source (think-m8ex).
+  the source (think-bx2a).
 - No local optimality, rigidity, KKT or global optimality is established for any
   certificate.
 

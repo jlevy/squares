@@ -161,7 +161,21 @@ so no bound carries to another count.
 
 ## Stage 4 Review
 
-The blind stage 4 review is lane R1’s (think-p3g8); this lane has not read it.
+The blind stage 4 review is lane R1’s (think-p3g8):
+[review-2026-11-17-ozden-de-winter-1005-1007.md](../../../../docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md), read only after this packet’s replay, controls,
+measurements and registration were committed, and mapped with #1009’s import.
+It accepts both certificates and their Witness/v2 twins, decided by a clean-room checker
+by two exact methods with 51 and 34 controls each stated in advance, with no blocking or
+major finding. Its least margins, 4.47681e-12 at 262 (squares 33 and 37) and 1.52004e-12
+at 295 (squares 55 and 56), are the replay’s.
+Its one minor finding, F8, is for the author: the 295 file is not the 262 file with an L
+border, which this packet’s l-base reading also found.
+It finds too (F9) that the 295 file’s first 262 squares, as they stand, prove
+$s(262) \le 16.6996934417125687$, 1.90949e-10 below the 262 file’s side; the issue does
+not claim it, and it is not registered, since Polkovskyi’s T-319 is 1.58e-03 below both
+at 262.
+T-312 and T-313 are confirmed, independently re-implemented, at V3/C3, and not adopted:
+Polkovskyi’s T-319 and T-324 are 1.58e-03 below them and take the houses.
 
 ## What Is Not Established
 
