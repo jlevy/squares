@@ -28709,8 +28709,8 @@ occurrences:
   - bibliography
   contributor_id: joost-de-winter
   note: 'Reviewed 2026-11-17 (think-dw3n, jlevy/squares#1008): de Winter joins this
-    credit by attribution.md''s chain rule, since the 211 packing the L-cut began from
-    (T-188) continues the Ostashev design that was re-hardened from Evan Daniel''s
+    credit by attribution.md''s chain rule, since the 211 packing the L-cut began
+    from (T-188) continues the Ostashev design that was re-hardened from Evan Daniel''s
     exact optimum of Joost de Winter''s packing (dostashev-merged-bands-2026-10-13
     source/records/n0211.sqpk, line 5); the printed surname matches his profile.'
 - origin:
@@ -31699,7 +31699,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
   start: 0
   end: 5
   label: Ozden
@@ -31711,7 +31711,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
   start: 12
   end: 18
   label: Daniel
@@ -31723,9 +31723,45 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
   start: 20
-  end: 24
+  end: 25
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s156 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  start: 27
+  end: 35
+  label: Ostashev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s156 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  start: 37
+  end: 46
+  label: de Winter
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s156 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  start: 48
+  end: 52
   label: Levy
   role: prerequisite
   disposition: unresolved

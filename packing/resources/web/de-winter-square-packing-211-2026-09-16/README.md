@@ -125,8 +125,11 @@ says he re-hardened that exact optimum; and Couzo’s metadata seeds T-188 from 
 #575 certificate, by its digest. So the credit lines of T-188 and of Couzo’s #583 and
 #586 certificates (T-181, T-182), which continue the same design, now name de Winter,
 as T-098’s and T-175’s already did.
-The chain reaches one count beyond 211: Evan Daniel’s T-243 at `n = 182` is an L-cut of
-T-188’s packing (M-1 of the review of 25 October 2026), so its line names de Winter too.
+The chain reaches two counts beyond 211. Evan Daniel’s T-243 at `n = 182` is an L-cut of
+T-188’s packing (M-1 of the review of 25 October 2026), and Doğa Özden’s T-287 at
+`n = 156` is a strip cut of that 182, which its source names as the seed and which the
+review of 11 November 2026 measured it continuing over most of the box (F8).
+So both lines name de Winter too; T-287’s had named the seed’s finder alone.
 
 The first link is the author’s statement only. The issue says the packing uses the
 construction of Arslanov, Mustafin and Shangitbayev (2021), two tilted components
@@ -151,13 +154,21 @@ The receipts are [`measure/identity-t175.json`](measure/identity-t175.json), whi
 measures T-098 as well, [`measure/identity-t188.json`](measure/identity-t188.json),
 which measures T-175 as well, and [`measure/identity-t149.json`](measure/identity-t149.json).
 Against T-175, T-188 pairs one to one under the identity with five squares beyond a
-tenth, at most 0.445, as the review of 16 October 2026 found. From `packing/`:
+tenth, at most 0.445, as the review of 16 October 2026 found. From `packing/`, these
+three commands print the three receipts byte for byte:
 
 ```bash
+uv run --frozen --all-extras --group dev python -m devtools.measure_identity --n 211 \
+  T-175=packet:dostashev-merged-bands-2026-10-13 \
+  T-057=witness-corners:witnesses/de-winter-2026/n-211-rational.yaml.gz \
+  T-098=evand-cert:resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/batch/certs/n-211.cert
 uv run --frozen --all-extras --group dev python -m devtools.measure_identity --n 211 \
   T-188=packet:couzo-verified-bounds-2026-10-14 \
   T-057=witness-corners:witnesses/de-winter-2026/n-211-rational.yaml.gz \
   T-175=packet:dostashev-merged-bands-2026-10-13
+uv run --frozen --all-extras --group dev python -m devtools.measure_identity --n 211 \
+  T-149=packet:dostashev-records-2026-10-11 \
+  T-057=witness-corners:witnesses/de-winter-2026/n-211-rational.yaml.gz
 ```
 
 <!-- This document follows common-doc-guidelines.md.

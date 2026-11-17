@@ -36,4 +36,8 @@ reason: >-
   sentence, the requests entry's ask note and one sentence of the packet's lineage section.
   The same comparison against origin/main f9ddfeeef, run again on that tree with the same
   four paths and /usr/bin/google-chrome as SQPACK_CHROMIUM, wrote the same 55 and three
-  times 43 files byte-identical across its three renders.
+  times 43 files byte-identical across its three renders. Review A of #1010 then carried the
+  chain to 156 (T-287, a strip cut of that 182), added the chain clause to T-243's claim,
+  reordered the 211 house phrase to end on Couzo, commented the 182 and 156 phrases and added
+  the packet's two other measure_identity commands; the comparison, run a third time on that
+  tree, again wrote all 184 files byte-identical across its three renders.

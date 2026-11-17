@@ -34873,7 +34873,9 @@ results:
 
       Credit Evan Daniel (https://github.com/evand/square-packing), from an L-cut of
       Francisco Couzo's 211 packing (T-188), an arrangement of Daniil Ostashev's design
-      (T-175). The issue asks that "the register's s(211) packing (Daniil Ostashev; also in
+      (T-175), which Ostashev re-hardened from Daniel's own exact optimum (T-098) of Joost de
+      Winter's packing (T-057), so the credit line names de Winter as well (since
+      jlevy/squares#1008). The issue asks that "the register's s(211) packing (Daniil Ostashev; also in
       Francisco Couzo's repository)" be credited as the start; the register's packing at the
       side the issue gives for it is T-188's, and where T-188 differs from Ostashev's own 211
       packing the certificate follows T-188 (M-1 of the 25 October review).
@@ -43122,6 +43124,13 @@ results:
       promote. The issue asks that the improvement be credited to Özden, the seed packing and
       the current record to their holders as the registry lists them, and the local optimizer to
       Evan Daniel.
+
+      That 182 (T-243) is Evan Daniel's L-cut of Francisco Couzo's 211 packing (T-188), which
+      continues the design Daniil Ostashev re-hardened from Daniel's exact optimum of Joost de
+      Winter's packing (T-057). By the chain rule of attribution.md the credit line keeps that
+      seed's whole line, as de Winter's jlevy/squares#1008 of 16 November 2026 asked for the
+      lines through his packing: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy. Until 17
+      November 2026 it named the seed's finder alone.
 
       The issue says the search and its code were written and run by AI agents and that the
       checks were run by code that did not produce the packing; it says the issue and repository

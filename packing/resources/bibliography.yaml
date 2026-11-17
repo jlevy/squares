@@ -5115,7 +5115,7 @@ sources:
     venue: GitHub
     dated: '2026-11-10'
     lineage: builds-on-project
-    credit: 'Ozden after Daniel, Levy'
+    credit: 'Ozden after Daniel, Couzo, Ostashev, de Winter, Levy'
     short_credit: 'Ozden after Daniel et al.'
     note: >-
       kenaznia-doga/s156-upper-bound at 87c92921a64216d38914a7af488a7d7a91cf1eb7
@@ -5134,7 +5134,13 @@ sources:
       are made with this repository's promotion tool. Licensed CC BY 4.0 (witness, JSON, decimal
       pose, outputs, write-ups) and MIT (verifier/sqcheck.py) by LICENSE.md at the pin; the pin
       also carries Evan Daniel's MIT notice, as LICENSE-evand-square-packing.txt. Ozden is Özden
-      in the credit's ASCII. Retained in web/ozden-s156-upper-bound-2026-11-10/.
+      in the credit's ASCII. Retained in web/ozden-s156-upper-bound-2026-11-10/. The source's
+      README names the seed by its key, [Daniel n182 2026-10-25], and the 11 November review
+      measured the packing continuing it over most of the box (F8). That 182 is Daniel's L-cut
+      of Francisco Couzo's 211 packing (T-188), which continues the design Daniil Ostashev
+      re-hardened from Daniel's exact optimum of Joost de Winter's packing (T-057), so since
+      jlevy/squares#1008 the credit carries that seed's line by attribution.md's chain rule,
+      where it had named the seed's finder alone.
   - key: '[Özden s180 upper bound 2026-11-10]'
     authors:
     - 'Özden'
