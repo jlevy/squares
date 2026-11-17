@@ -3,9 +3,9 @@ type: is
 id: is-01m5ndgfnpr93ktyy1ayc60vtb
 title: "PR #756 (merge): senior review, address, gate"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: c-rev-756-1024
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:39.157Z
-updated_at: 2026-10-24T03:34:22.415Z
+updated_at: 2026-10-24T07:40:45.792Z
 started_at: 2026-10-24T01:05:25.282Z
+closed_at: 2026-10-24T07:40:45.791Z
+close_reason: "Merged as PR #756 at 2026-10-24T07:39:21Z (e5c1c64e3), head a9e3fab37, CI green; regularization states 57/228/28/7/4/0"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

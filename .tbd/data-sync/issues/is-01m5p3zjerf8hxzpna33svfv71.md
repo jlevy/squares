@@ -3,9 +3,9 @@ type: is
 id: is-01m5p3zjerf8hxzpna33svfv71
 title: "Address PR #756 review B (B1-B4)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 6
 delegate: c-fix-756b-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5nzjjyj7axr5vb1gvk4xwh9
 hold: null
 hold_until: null
 created_at: 2026-10-24T04:51:22.200Z
-updated_at: 2026-10-24T07:11:44.261Z
+updated_at: 2026-10-24T07:40:42.796Z
 started_at: 2026-10-24T04:51:27.638Z
+closed_at: 2026-10-24T07:40:42.796Z
+close_reason: "B1-B4 addressed; dispositions https://github.com/jlevy/squares/pull/756#issuecomment-6380267295. Merged as PR #756 at 2026-10-24T07:39:21Z (e5c1c64e3), head a9e3fab37, CI green; regularization states 57/228/28/7/4/0"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
@@ -28,3 +32,4 @@ started_at: 2026-10-24T04:51:27.638Z
 - Step 2 and 3 done. #757 landed (c5697c2f2): a trial merge of #757's head 21a0624cf (tree equal to main's after the merge) was resolved and checked first, then applied to the real merge 9e92fffd9 (tree a9c6df1aa, identical). 24 conflicts, resolved three ways or regenerated: ADOPTED 302 T-193 and 303 T-239; LATER_PASSES 2026-10-24 {204, 303}; SETTLED drops 303; SCREEN_FINDINGS (124, 1184, 302, 5110), reproduced by the screen at 303; index totals recomputed with atlas_totals; custody 70 houses, 200 inputs, 44 mutations. default_drawings: 57 / 228 / 28 / 7 owed / 4 / 0, as expected. 5eeedcf3e restored this branch's no-public-change records in release.py (the merge had taken #757's file whole); check_release_impact passes. 340 + 204 tests passed.
 - Then merged #766 (5f8f005a3) at ecb953c89 and #769 (34eb8bb75) at daba8ac50, only the pin conflicting each time; all house and generator checks, stamp_landed --apply (nothing to stamp), check_release_impact and the records tier pass. Head 624926fdb pushed 07:02Z.
 - Hosted green: 7399291de (Packing validation 40066058128), 5eeedcf3e (40069040138), dec383676 (40071590857). 624926fdb: run 40072590130 in progress at 07:11Z.
+- 624926fdb green (Packing validation 40072590130). Then merged #770 (11d0ab06b) at 67f5799cc, pin only; all checks and the records tier pass. Final head a9e3fab37 (pushed 07:25Z) is green: Packing validation 40074076267, Certificate page 40074076118, Branch mergeability 40074071406; 31 pass, 28 skipped, none failing; GitHub reports MERGEABLE. Draft; not marked ready (coordinator's call).
