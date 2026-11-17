@@ -1,0 +1,7 @@
+mixed_n28_L57425 CONSISTENT []
+mixed_n30_L58925 CONSISTENT []
+ALL_CONSISTENT
+
+real	1m57.342s
+user	1m55.796s
+sys	0m0.112s
