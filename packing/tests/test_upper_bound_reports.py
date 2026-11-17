@@ -282,6 +282,16 @@ L181_1115 = "de-winter-s90-upper-bound-2026-11-15"
 #: JoeGun's #1001 at 127, 204, 232, 264 and 305, his improvements of Tomas Kodaj's public
 #: Kaggle packings; corner Witness/v2 files read by ``witness-corners``, under CC BY 4.0.
 L187_1116 = "joegun-upper-bounds-2026-11-16"
+#: The intake pass's lane c-import-1005-1117 of 17 November 2026
+#: (`test_upper_bound_reports_i1_1117`): Doğa Özden's #1005 at 292, a column-band design
+#: promoted the same way as his #983, under CC BY 4.0 and MIT; Joost de Winter's #1006 at
+#: 292, below it, and his #1007 at 262 and 295, his centre-direction JSON read by
+#: ``center-direction-json``, under MIT. The 295 house is T-193's algebraic side.
+I1_1117 = (
+    "ozden-s292-upper-bound-2026-11-16",
+    "de-winter-s292-upper-bound-2026-11-16",
+    "de-winter-upper-bounds-262-295-2026-11-16",
+)
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -356,6 +366,7 @@ EVERY = (
     L170_1115,
     L181_1115,
     L187_1116,
+    *I1_1117,
 )
 
 
@@ -1495,10 +1506,10 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
     # to #931, #935, #936, #938, #943 to #947, #954, #959, #960 and #962, Yim's #895 and de
-    # Winter's #958, #977, #979 and #997 and JoeGun's #1001 touches the box. Couzo's #672
-    # touches at 229 and clears every wall at 227, so its walls mix, as de Winter's #941
-    # does, whose borders touch the box and whose other certificates clear it; every other
-    # source's clear it.
+    # Winter's #958, #977, #979, #997, #1006 and #1007, JoeGun's #1001 and Özden's #1005
+    # touches the box. Couzo's #672 touches at 229 and clears every wall at 227, so its walls
+    # mix, as de Winter's #941 does, whose borders touch the box and whose other
+    # certificates clear it; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
@@ -1527,6 +1538,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         *L164_1114,
         L181_1115,
         L187_1116,
+        *I1_1117,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1831,6 +1843,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L170_1115: "2026-11-15",
         L181_1115: "2026-11-15",
         L187_1116: "2026-11-16",
+        **dict.fromkeys(I1_1117, "2026-11-16"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

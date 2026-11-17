@@ -35689,3 +35689,76 @@ issues:
       the author asked for is still queued, so the issue is closed with it, and that answers are
       welcome at any time. The issue was closed as completed at 11:55:54Z; it has no comment after
       the reply, and read_through moves to it.
+  - number: 1005
+    title: 's(292) ≤ 17.590104218682: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-16'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      The account kenaznia-doga, Doğa Özden's AI agent, asks on his behalf for the registration
+      of s(292) <= 17.590104218682, rounded up at 12 places from the exact rational side of a
+      corner Witness/v2 certificate in kenaznia-doga/s292-upper-bound at dec930b, made by this
+      repository's packing-witness promote, 1.27e-3 below the record at f9ddfeee (T-146). It
+      says the packing is an original AI-run column-band design improved by a segment
+      re-angling operator, and asks that Özden be credited as improved_by. It discloses first a
+      side-only Kaggle leaderboard entry at 292 below the claim, which states no packing.
+      Triage pending in lane c-import-1005-1117 (think-qag8).
+    read_through: '2026-11-16T15:27:38Z'
+    results: []
+    beads:
+    - think-qag8
+    answer_bead: think-qag8
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, and the reply on main says what
+      was registered, replayed and reviewed.
+  - number: 1006
+    title: 'Lowered upper bound for n = 292 (side 17.590016442847): registration request'
+    author: JoostdeWinter
+    opened: '2026-11-16'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Joost de Winter asks for the registration of s(292) <= 17.590016442847, rounded up at 12
+      places from the exact rational side of a centre-direction certificate in his watched
+      repository JoostdeWinter/square-packing at 796ff3b, 1.36e-3 below the record at
+      f9ddfeee (T-146), filed 11 minutes 38 seconds after #1005 and below its side. It says
+      the packing's tilted ribbon extends that of David W. Cantrell's packing of 146 squares,
+      and asks for credit to de Winter as an extension of Cantrell's ribbon. Triage pending in
+      lane c-import-1005-1117 (think-qag8).
+    read_through: '2026-11-16T15:39:16Z'
+    results: []
+    beads:
+    - think-qag8
+    answer_bead: think-qag8
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, and the reply on main says what
+      was registered, replayed and reviewed.
+  - number: 1007
+    title: 'Lowered upper bounds for n = 262 (side 16.699693441904) and n = 295 (side 17.699693441716): registration request'
+    author: JoostdeWinter
+    opened: '2026-11-16'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      Joost de Winter asks for the registration of s(262) <= 16.699693441904 and s(295) <=
+      17.699693441716, each rounded up at 12 places from the exact rational side of a
+      centre-direction certificate in his watched repository JoostdeWinter/square-packing at
+      853b92e, 7.41e-3 below 16 + sqrt(2)/2 at 262 and 4.54e-3 below (22 + 22 sqrt(2))/3 at 295,
+      the record at f9ddfeee. It says both share one band of 72 tilted squares and that the
+      295 packing is the 262 one with an L of 33 axis-aligned squares. Triage pending in lane
+      c-import-1005-1117 (think-qag8).
+    read_through: '2026-11-16T21:28:27Z'
+    results: []
+    beads:
+    - think-qag8
+    answer_bead: think-qag8
+    replies: []
+    close_when: >-
+      Both bounds are triaged, retained and registered on main, and the reply on main says
+      what was registered, replayed and reviewed.

@@ -1,0 +1,96 @@
+{
+ "format": "measure-identity-v1",
+ "n": 295,
+ "inputs": {
+  "DEWINTER": {
+   "input": "packet",
+   "packet": "de-winter-upper-bounds-262-295-2026-11-16",
+   "side": "35399386883430443/2000000000000000"
+  },
+  "T-146": {
+   "input": "packet",
+   "packet": "evand-regularized-2026-10-10",
+   "side": "1106514549421001897378505810757/62500000000000000000000000000"
+  }
+ },
+ "tilts": {
+  "DEWINTER": {
+   "exactly_turned": 72,
+   "tilted_beyond_1_degree": 72,
+   "tilted_positive": 72,
+   "tilted_negative": 0,
+   "tilt_range_degrees": [
+    24.942495142056224,
+    29.731169126973786
+   ],
+   "near_upright": 0,
+   "near_upright_beyond_1e-3_degrees": []
+  },
+  "T-146": {
+   "exactly_turned": 160,
+   "tilted_beyond_1_degree": 160,
+   "tilted_positive": 160,
+   "tilted_negative": 0,
+   "tilt_range_degrees": [
+    45.0,
+    45.0
+   ],
+   "near_upright": 0,
+   "near_upright_beyond_1e-3_degrees": []
+  }
+ },
+ "pairs": [
+  {
+   "view": "DEWINTER",
+   "against": "T-146",
+   "side_difference": "-4.539349e-03",
+   "side_difference_exact": "-283709313800553628505810757/62500000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 3,
+    "largest_move": "1.11514",
+    "moved_beyond": {
+     "1e-9": 292,
+     "1e-6": 292,
+     "1e-3": 292,
+     "1e-2": 220,
+     "1e-1": 209
+    },
+    "largest_turn_degrees": "45",
+    "turned_beyond_1e-6": 181
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 52,
+    "tilted_paired_same_sign_within_1e-1": 0,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 20,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 3,
+    "total_squared": "72.7543",
+    "runner_up_symmetry": 6,
+    "runner_up_total_squared": "73.6392",
+    "largest_move": "1.11569",
+    "rms_move": "0.496613",
+    "bottleneck": "1.08258",
+    "moved_beyond": {
+     "1e-9": 295,
+     "1e-6": 295,
+     "1e-3": 295,
+     "1e-2": 220,
+     "1e-1": 209
+    },
+    "nearest_one_to_one": false,
+    "turned_beyond_1_degree": 181,
+    "tilts_reversed_beyond_1_degree": 0
+   }
+  }
+ ]
+}

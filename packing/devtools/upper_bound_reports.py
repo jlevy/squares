@@ -1867,6 +1867,16 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # 305, his improvements of Tomas Kodaj's public Kaggle packings; corner Witness/v2 files
     # made by this repository's promotion tool, in one repository and one packet.
     "[JoeGun upper bounds 2026-11-16]": _import("joegun-upper-bounds-2026-11-16"),
+    # Lane c-import-1005-1117 of 17 November (think-qag8): two reports at 292 on 16
+    # November, Doğa Özden's issue 1005, a column-band design re-angled segment by segment,
+    # and Joost de Winter's issue 1006, a ribbon extending David W. Cantrell's 146, filed 12
+    # minutes later and below it; and de Winter's issue 1007 at 262 and 295, one band, the
+    # 295 said to be the 262 with an L of 33 axis-aligned squares. One packet per pin.
+    "[Özden s292 upper bound 2026-11-16]": _import("ozden-s292-upper-bound-2026-11-16"),
+    "[de Winter s292 upper bound 2026-11-16]": _import("de-winter-s292-upper-bound-2026-11-16"),
+    "[de Winter upper bounds 262 295 2026-11-16]": _import(
+        "de-winter-upper-bounds-262-295-2026-11-16"
+    ),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
