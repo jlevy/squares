@@ -37391,7 +37391,7 @@ evidence:
         control exactly, and ran six directions with the reviewed sqverify-fast, each
         row equal to the source's; it accepted the certificate with findings, none
         blocking or major. The review of 11 November
-        (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md), was
+        (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md) was
         prompted again and separately and did not read the first. The argument from the
         certificate to s(28) >= 2297/400 (in fact >) was re-derived and holds: the D4
         fold square by square, lemma N0 on the 1/5002 net (B (1 + 1/5002) =
@@ -37466,7 +37466,7 @@ evidence:
         control exactly, and ran six directions with the reviewed sqverify-fast, each
         row equal to the source's; it accepted the certificate with findings, none
         blocking or major. The review of 11 November
-        (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md), was
+        (docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md) was
         prompted again and separately and did not read the first. The argument from the
         certificate to s(30) >= 2357/400 (in fact >) was re-derived and holds: the D4
         fold square by square, lemma N0 on the 1/5002 net (B (1 + 1/5002) =
@@ -37713,9 +37713,10 @@ evidence:
       packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/programs and the
       inputs that directory's README names: PY P/check_candidate.py must write
       ALL_PREMISES_HOLD; PY P/check_source_logs.py must write SOURCE_RECORDS_CONSISTENT;
-      OPENBLAS_NUM_THREADS=2 PY P/axis_decide.py must write decided_verified true; and PY
-      P/sample_directions.py with the reviewed sqverify-fast must write SAMPLE_AGREES. The
-      receipts are in the directory's out/.
+      and OPENBLAS_NUM_THREADS=2 PY P/axis_decide.py must write decided_verified true. The
+      receipts are in the directory's out/. The directory's sample_directions.py, which
+      runs the reviewed sqverify-fast, is not part of this replay: it shares the
+      producer's components, and the limitations call its runs a diagnostic.
     replay_status: passed
     verifiers: [V-wand125-n28-n30-review-premises, V-wand125-n28-n30-review-axis-decision, V-wand125-n28-n30-review-exact-capture]
     independence_record: >-
@@ -37762,9 +37763,10 @@ evidence:
       packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/programs and the
       inputs that directory's README names: PY P/check_candidate.py must write
       ALL_PREMISES_HOLD; PY P/check_source_logs.py must write SOURCE_RECORDS_CONSISTENT;
-      OPENBLAS_NUM_THREADS=2 PY P/axis_decide.py must write decided_verified true; and PY
-      P/sample_directions.py with the reviewed sqverify-fast must write SAMPLE_AGREES. The
-      receipts are in the directory's out/.
+      and OPENBLAS_NUM_THREADS=2 PY P/axis_decide.py must write decided_verified true. The
+      receipts are in the directory's out/. The directory's sample_directions.py, which
+      runs the reviewed sqverify-fast, is not part of this replay: it shares the
+      producer's components, and the limitations call its runs a diagnostic.
     replay_status: passed
     verifiers: [V-wand125-n28-n30-review-premises, V-wand125-n28-n30-review-axis-decision, V-wand125-n28-n30-review-exact-capture]
     independence_record: >-

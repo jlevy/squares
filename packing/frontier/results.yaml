@@ -27617,7 +27617,7 @@ results:
       mass scaled by 985/1000.
 
       The value is above T-142's 2297/400 = 5.7425, the verified and reported lower
-      bound at n = 28 since 17 November, by 1/400, above the 287/50 that
+      bound at n = 28 since its adoption in the pass of 17 November, by 1/400, above the 287/50 that
       jlevy/squares#446 reported on 8 October, never adopted, by 1/200, and above
       T-107's 1147/200 = 5.735, which held both lanes until then, by 1/100.
 
@@ -27752,8 +27752,8 @@ results:
       threshold, not the certificate's slack.
 
       Every lower bound the register holds at 28 is below it: T-142's 2297/400, the same
-      author's earlier certificate, which holds both lanes of the case since 17 November,
-      by 1/400; T-107's 1147/200, which held them until then, by 1/100; T-068's and T-074's 2289/400 by 9/400; T-046's 143/25 by 1/40;
+      author's earlier certificate, which holds both lanes of the case since its adoption
+      in the pass of 17 November, by 1/400; T-107's 1147/200, which held them until then, by 1/100; T-068's and T-074's 2289/400 by 9/400; T-046's 143/25 by 1/40;
       T-045's 28/5 by 29/200; T-047's 1377/250 by 237/1000; and the closed forms of
       T-007 and T-083, about 5.359 and 5.322, by more. The per-count rule records it
       after T-142, which reached this repository on 10 October; T-142 and T-107 keep

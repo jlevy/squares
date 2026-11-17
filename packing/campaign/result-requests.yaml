@@ -3932,7 +3932,9 @@ issues:
       evidence, T-233 is V3/C3, and the lower lanes at n19, n20, n26 and n27 take 1931/400,
       393/80, 1111/200 and 1131/200. The issue's n27 2261/400 is superseded in the same
       release and stays unregistered, and its n31 597/100 is passed by the source's later
-      2391/400 (T-232, not reported here).
+      2391/400 (T-232, not reported here), and its n28 287/50 is passed by the source's
+      later 2297/400 (T-142, not reported here), which both lanes take since its adoption in
+      the pass of 17 November.
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
@@ -8476,18 +8478,26 @@ issues:
         review of 11 November did again; T-142 and T-143 are V3/C3. They ran ahead of the
         owner's order of 11 October, which queued them after think-ux1v; the owner lifted it
         on 17 November 2026 (think-fibh), and the case records adopt them in the pass of that
-        day (#908). Their tracking issues, #776 and #777, carry the replies.
+        day (#908). Their tracking issues, #776 and #777, carry the final comments that
+        report it, and this issue a follow-up of its own.
     - what: The complete linear replay and control of T-144, carried to n = 122 to 126, with a
         review.
       state: queued
       source: body
       bead: think-nd7g
-      blocked_on: [think-ux1v]
+      note: >-
+        The owner lifted the order of 11 October (regularize every packing first,
+        think-ux1v) for the lower-bound confirmations on 17 November 2026 (think-fibh), so
+        this replay waits on compute alone (the block below).
     - what: The complete replay of T-132 in the same lane, and a reply on issue 446.
       state: queued
       source: body
       bead: think-r333
-      blocked_on: [think-ux1v]
+      note: >-
+        The owner lifted the order of 11 October (regularize every packing first,
+        think-ux1v) for the lower-bound confirmations on 17 November 2026 (think-fibh). The
+        replay ran on 4 November 2026 (think-r333); its records and the reply on #446 follow
+        in #909.
     beads:
     - think-i85v
     - think-nd7g
@@ -25137,7 +25147,6 @@ issues:
       - E-wand125-fine-net-n28-57425-sqverify-fast-replay
     beads:
     - think-i85v
-    - think-ux1v
     answer_bead: think-i85v
     replies:
     - url: https://github.com/jlevy/squares/issues/776#issuecomment-6381478097
@@ -25190,7 +25199,6 @@ issues:
       - E-wand125-fine-net-n30-58925-sqverify-fast-replay
     beads:
     - think-i85v
-    - think-ux1v
     answer_bead: think-i85v
     replies:
     - url: https://github.com/jlevy/squares/issues/777#issuecomment-6381478206

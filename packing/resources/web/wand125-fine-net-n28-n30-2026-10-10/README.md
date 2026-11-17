@@ -4,9 +4,10 @@ Two commits of 10 October to wand125/square-packing add check2 measure certifica
 the 2,073-direction net of the n = 29 follow-up: `mixed_n28_L57425`, reporting
 $s(28) \ge 2297/400 = 5.7425$, and `mixed_n30_L58925`, reporting
 $s(30) \ge 2357/400 = 5.8925$. No issue reports either; the evening watch read of 10
-October found them. Since 4 November each bound is confirmed here by its complete
-replay and controls, re-implemented sharing the producer’s components, and holds both
-lower lanes of its case ([The Complete Replays](#the-complete-replays)).
+October found them. Each bound is confirmed here by its complete replay and controls of
+4 November, re-implemented sharing the producer’s components, and holds both lower lanes
+of its case since its adoption in the pass of 17 November
+([The Complete Replays](#the-complete-replays)).
 
 | Item | n = 28 | n = 30 |
 | --- | --- | --- |
@@ -144,7 +145,9 @@ order on 17 November 2026 (think-fibh), and the adoption is in the pass of that 
 (#908).
 
 The two cost 5.5 CPU-hours at two threads: 17,764 CPU-seconds of capture (7,096.9
-and 10,667.1) and 2,096 of control (1,111 and 985), in 2.97 hours of wall. think-i85v
+and 10,667.1) and 2,096 of control (1,111 and 985, by the lane’s process accounting
+recorded on think-i85v, since the control receipts record wall seconds only), in 2.97
+hours of wall. think-i85v
 had priced them at 3.28 to 4.5 and 4.49 to 6.1 CPU-hours, 7.8 to 10.6 in all. The
 captures ran 20 and 32 percent above the central price, near its upper end, as the
 preparation lane’s smoke run of 11 October had said; the controls, priced as large
