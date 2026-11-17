@@ -5,7 +5,7 @@ title: "Import Mishapolk: 5,468 certificates 328–10000 at 814fbe9, '#715 resol
 kind: task
 status: open
 priority: 1
-version: 13
+version: 14
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: null
 labels:
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-22T20:07:20.685Z
-updated_at: 2026-10-31T11:17:55.965Z
+updated_at: 2026-11-17T21:48:40.888Z
 started_at: 2026-10-23T02:12:17.764Z
 ---
 Issue #732 (https://github.com/jlevy/squares/issues/732), opened 2026-10-22T19:55:03Z by Mishapolk (Mykhailo Polkovskyi): "328–10000: Registration Request (5,468 Exact Rational Certificates), Complete Resolution of Couzo #715, and Algebraic Boundary Saturation Proof". Source Mishapolk/square-packing-records@814fbe9129b7abb301923cc50de621697a53940f (upper_bounds.json, certified_bounds.json, certificates/manifest.json, certificates/census.json with digests in the issue).
@@ -149,3 +149,6 @@ holds decide 369, 376, 985 and 499)
 blocked_on: think-llit, think-kzme, think-f2io
 
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner: #732's rows above 1024 are recorded by think-llit's walk (bold-ritchie-l4, live on 31 October), which needs D4 (hosting the certificates above 1024) and zenodo.org access for the #836 and #847 deposits it must read; per-row credit (D5, think-f2io) and the deletion-bound rows (think-kzme) are the owner's too. Nothing here runs before then.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (b) in part. think-kzme is settled by the owner's answer of 17 November (think-gmoj): a deletion bound gets a row only where a report claims the count with its own certificate file, so 985's deletion bound gets none and #732's tie there stays unrecorded; the record change is think-8gvd's (lane w4). #732's rows above 1024 are think-llit's R2 (about 32 CPU-h, the owner publishes data/mishapolk-issue732-above-1024-v1 before it merges). #732's two queued asks wait on the owner on think-f2io: the N = 10,000 cap (D1 answers it in substance) and sole credit at 11 counts (D5; option D of 17 November, think-b0w5, measures whether each is a new result). Held, no claim.
+blocked_on: think-llit, think-kzme, think-f2io

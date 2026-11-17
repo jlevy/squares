@@ -5,7 +5,7 @@ title: "Validate Daniel's s(29) degree-7213 minimal polynomial (T-246, #816, #81
 kind: task
 status: open
 priority: 3
-version: 9
+version: 10
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-25T06:04:54.875Z
-updated_at: 2026-10-31T12:52:49.736Z
+updated_at: 2026-11-17T21:48:44.219Z
 started_at: 2026-10-25T15:41:58.506Z
 ---
 The validation of Evan Daniel's degree-7213 minimal polynomial of the s(29) record side, T-246, from the release exact-data-2026-10-12 of evand/square-packing (tag commit 31523f87316bdfda00f5459dd9077928e264f133), tracked by the owner's issue #816 and delivered on draft PR #817 (branch claude/friendly-einstein-gf9z0h-s29-validation), owner w-s29-validate-1025.
@@ -41,3 +41,5 @@ The validation of Evan Daniel's degree-7213 minimal polynomial of the s(29) reco
 
 **Draft reply on #816 (post after #817 merges, from main):** "Status of the six steps, on main with their receipts under packing/resources/web/evand-exact-data-2026-10-12/receipts/validation-2026-10-25/: (1) the author's replay passed, 10 of 10 steps, with the source's own scripts (10 of the 50 verify_mod primes, under the cap); (2) irreducibility and the root were decided again with independent code; (4) the configuration at the unique zero t* of the five consistency polynomials is a packing, decided without any Monte Carlo step, so s(29) <= S*, where S* = S(t*); (5) S* and sigma both lie 3.90e-799 below T-195's exact rational, and agree with each other to about 810 places; (3) the identities that make sigma equal to S* exactly are still checked modulo random primes only: a deterministic check is priced at about 23 CPU-hours for one identity and about 717 for all six; (6) the review (docs/project/reviews/review-2026-10-31-evand-s29-minpoly-validation.md) accepts the chain with that one Monte Carlo step. Two decisions are yours: whether to register s(29) <= S* as an upper bound below T-195 and re-kind T-246, and whether to fund the deterministic identities."
 2026-10-31 (L5, #816 follow-up issuecomment-6543105784, recorded on #858): for #816's next follow-up, from #858's review A. A1: the owner list there credits all three decisions to F-2; only registering s(29) <= S* and moving n = 29's lanes is F-2's; funding the deterministic identities and re-pricing the exact route first is F-1's; the Monte Carlo ruling comes from the review's Rungs section; cite "F-1, F-2 and the review's Rungs section". A2: "about 3.2 of its 5" counts receipts only; review A of #817 also ran tools on the asset (check_exact_side_packing 35 CPU-s, price 7 CPU-s, its six-identity check 754 CPU-s, the 812-place bracket 10.6 CPU-min, about 1,430 CPU-s), so about 3.6 of 5, 0.4 of it review A's reproductions; say so, or that the tally is by receipts. A3: the reply's T-246 bullet quoted the old next_rung ("no number of primes would"); #858 corrects next_rung (either deterministic route, exact division or the modular route against the resultant bound, would earn C3; the replay's random primes fall short), so the next follow-up carries the corrected sentence.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c) waits on the owner since the #816 follow-up of 31 October (issuecomment-6543105784): whether to register s(29) <= S* below T-195 and re-kind T-246, and whether to fund the deterministic identities (about 23 CPU-h for one, under the cap; about 717 for all six, above it). The six steps are done or priced; `check_requests --report` shows no reply due on #816. The 17 November declines (think-l7j0) do not cover these. Re-put to the owner through the coordinator. Held (hold blocked).

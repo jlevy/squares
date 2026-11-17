@@ -5,7 +5,7 @@ title: "Import Mishapolk: 73 upper bounds across n = 51 to 308 (#593)"
 kind: task
 status: open
 priority: 1
-version: 8
+version: 9
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T07:10:33.832Z
-updated_at: 2026-10-31T11:17:59.326Z
+updated_at: 2026-11-17T21:48:51.165Z
 started_at: 2026-10-14T07:10:42.633Z
 ---
 Stage 1-2 and stage 4 replay of issue #593 (Mishapolk/square-packing-records at 46f638ce0537beeb1bad24242c6a3d357eecd9ee), lane mishapolk of the 2026-10-14 intake pass, branch claude/wizardly-meitner-wqn4x3-intake-1014-mishapolk. Claim map, comparison and priced plan in notes.
@@ -108,3 +108,5 @@ https://github.com/jlevy/squares/issues/593#issuecomment-6163849805 (revised fro
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-183 at 237, V0/C0; the ties at 211 and 241 and the other 70 counts not recorded.
 
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner's decision on #593's queued ask: whether Polkovskyi is credited jointly with Couzo (#586) at 211 and 241. Best put together with think-ikku, the owner's open question on his sub-print refinements at the same two counts.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c) waits on the owner: #593's ask, joint credit with Couzo (#586) at 211 and 241, citing the author's earlier commit 8bb41af; the follow-ups of 20 October and 11 November repeat that it is with the owner. Not settled by 17 November: option D (think-b0w5) settles think-ikku's sub-print refinements at these counts, not who was earlier at a tie. #1008 (de Winter's credit request at 211, think-dp8t, lane w2) touches the same count; the coordinator should put the two to the owner together. Held (hold blocked).
