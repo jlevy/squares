@@ -122,7 +122,8 @@ moved outside the box at each count, through both maintained exact routes: all a
 required, 2,490,354 pair decisions and 599.51 route CPU seconds (7 minutes 34 seconds
 of wall on two workers), one receipt a count under [receipts/](receipts/); `check
 --replay` admitted all 39 again.
-Every certificate clears every wall by exactly 10⁻²⁸, and every pair by at least
+Every certificate clears every wall by at least 10⁻²⁸, exactly that at the left and
+bottom walls, and every pair by at least
 2 × 10⁻²⁸, with 1.4449 × 10⁻²⁴ at 180, 1.7763 × 10⁻²⁰ at 295 and 4.2379 × 10⁻¹⁵ at
 292, equal on both routes; the issue’s table states the same.
 

@@ -64799,10 +64799,11 @@ evidence:
         controls as stated, 37 a count, in a plan hashed before any program read a
         certificate: each claim is its side's 12-place ceiling, accepted in the box of the
         claim and crossing the walls of the box one unit of the twelfth place smaller; the
-        two forms are one packing; every wall clears by exactly 1e-28 and every pair is
-        strictly apart, the least margins 2.0e-28 at ten counts, 1.44e-24 at 180, 1.78e-20
-        at 295 and 4.24e-15 at 292; the 295 certificate is the 262 arrangement in an L
-        border solved again, 5.93e-19 above the 262 side plus 1 (F8). Its clean-room run is
+        two forms are one packing; every wall clears by at least 1e-28, exactly that at the
+        left and bottom walls, and every pair is strictly apart, the least margins 2.0e-28
+        at ten counts, 1.44e-24 at 180, 1.78e-20 at 295 and 4.24e-15 at 292; the 295
+        certificate is the 262 arrangement in an L border solved again, 5.93e-19 above the
+        262 side plus 1 (F8). Its clean-room run is
         E-mishapolk-1009-review-exact-feasibility, and the replay
         E-mishapolk-1009-exact-feasibility.
     limitations: >-
@@ -64819,10 +64820,10 @@ evidence:
       outside-container controls passed their required outcomes on both routes, 2490354 pair
       decisions; summed over the 39 jobs, the receipts record 599.51 route CPU seconds and
       862.91 job wall seconds, the longest job 67.08 seconds. Every positive clears every
-      wall by exactly 1e-28 and every pair by at least 2.00e-28. The packet's sharp controls
-      meet those margins on both routes. The replay is E-mishapolk-1009-exact-feasibility,
-      and the stage 4 review's clean-room run E-mishapolk-1009-review-exact-feasibility, at
-      all thirteen counts.
+      wall by at least 1e-28, exactly that at the left and bottom walls, and every pair by
+      at least 2.00e-28. The packet's sharp controls meet those margins on both routes. The
+      replay is E-mishapolk-1009-exact-feasibility, and the stage 4 review's clean-room run
+      E-mishapolk-1009-review-exact-feasibility, at all thirteen counts.
 
       The two maintained routes, the sqpack rational witness verifier and the independent rational
       corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
@@ -64896,8 +64897,9 @@ evidence:
       parsing, half-angle conversion, Fraction arithmetic and the separating-axis method, and with
       the producer's checking the evand-cert reader's line filter and corner construction and the
       independent corner checker the author ran. The 39 jobs hold 2490354 pair decisions. Every
-      wall clears by exactly 1e-28 and every pair by at least 2.00e-28, above the sharp controls'
-      1e-30. The source's own verifiers were not run here. Finite feasibility only.
+      wall clears by at least 1e-28, exactly that at the left and bottom walls, and every pair by
+      at least 2.00e-28, above the sharp controls' 1e-30. The source's own verifiers were not run
+      here. Finite feasibility only.
     source_reviewed: '2026-11-17'
     external_review:
       state: informally-verified
@@ -64913,10 +64915,11 @@ evidence:
         controls as stated, 37 a count, in a plan hashed before any program read a
         certificate: each claim is its side's 12-place ceiling, accepted in the box of the
         claim and crossing the walls of the box one unit of the twelfth place smaller; the
-        two forms are one packing; every wall clears by exactly 1e-28 and every pair is
-        strictly apart, the least margins 2.0e-28 at ten counts, 1.44e-24 at 180, 1.78e-20
-        at 295 and 4.24e-15 at 292; the 295 certificate is the 262 arrangement in an L
-        border solved again, 5.93e-19 above the 262 side plus 1 (F8). Its clean-room run is
+        two forms are one packing; every wall clears by at least 1e-28, exactly that at the
+        left and bottom walls, and every pair is strictly apart, the least margins 2.0e-28
+        at ten counts, 1.44e-24 at 180, 1.78e-20 at 295 and 4.24e-15 at 292; the 295
+        certificate is the 262 arrangement in an L border solved again, 5.93e-19 above the
+        262 side plus 1 (F8). Its clean-room run is
         E-mishapolk-1009-review-exact-feasibility, and the replay
         E-mishapolk-1009-exact-feasibility.
   - id: E-mishapolk-1009-review-exact-feasibility
@@ -64954,14 +64957,15 @@ evidence:
       every format hypothesis, every square a unit square, every wall and all 415,059 pairs
       by separating axes in Python integers from the poses and again by exact convex
       clipping in gmpy2.mpq from the corners, each method run on both forms, with no
-      distance filter: every pair strictly apart and every wall cleared by exactly 1e-28,
-      the least pair margins 2.0e-28 at ten counts, 1.44492e-24 at 180, 1.77633e-20 at 295
-      and 4.23790e-15 at 292; the two forms the same squares at all 3,218.
-      rv1009_controls.py decided the 37 controls a count the plan hashed beforehand states
-      (out/controls-nNNN.json), all 481 as stated, among them the squares accepted in the
-      box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller, and every pair closed along its line of centres to exact contact and past it.
-      rv1009_selftest.py passed 34,183 checks, and each of its six broken copies failed it.
+      distance filter: every pair strictly apart and every wall cleared by at least 1e-28,
+      exactly that at the left and bottom walls,, the least pair margins 2.0e-28 at ten
+      counts, 1.44492e-24 at 180, 1.77633e-20 at 295 and 4.23790e-15 at 292; the two forms
+      the same squares at all 3,218. rv1009_controls.py decided the 37 controls a count the
+      plan hashed beforehand states (out/controls-nNNN.json), all 481 as stated, among them
+      the squares accepted in the box of the claim and crossing the walls of the box one
+      unit of the twelfth place smaller, and every pair closed along its line of centres to
+      exact contact and past it. rv1009_selftest.py passed 34,183 checks, and each of its
+      six broken copies failed it.
     replay_status: passed
     verifiers:
     - V-rv1009-review-check
@@ -65015,10 +65019,11 @@ evidence:
         controls as stated, 37 a count, in a plan hashed before any program read a
         certificate: each claim is its side's 12-place ceiling, accepted in the box of the
         claim and crossing the walls of the box one unit of the twelfth place smaller; the
-        two forms are one packing; every wall clears by exactly 1e-28 and every pair is
-        strictly apart, the least margins 2.0e-28 at ten counts, 1.44e-24 at 180, 1.78e-20
-        at 295 and 4.24e-15 at 292; the 295 certificate is the 262 arrangement in an L
-        border solved again, 5.93e-19 above the 262 side plus 1 (F8). Its clean-room run is
+        two forms are one packing; every wall clears by at least 1e-28, exactly that at the
+        left and bottom walls, and every pair is strictly apart, the least margins 2.0e-28
+        at ten counts, 1.44e-24 at 180, 1.78e-20 at 295 and 4.24e-15 at 292; the 295
+        certificate is the 262 arrangement in an L border solved again, 5.93e-19 above the
+        262 side plus 1 (F8). Its clean-room run is
         E-mishapolk-1009-review-exact-feasibility, and the replay
         E-mishapolk-1009-exact-feasibility.
     limitations: >-

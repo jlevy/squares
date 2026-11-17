@@ -50003,10 +50003,11 @@ results:
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n147.json
     notes: >-
       A separate complete repository replay is retained for n = 147, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n147.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 64386 pair decisions over the 3 jobs, 13.52 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. The replay is
+      release's 13 certificates (receipts/exact-certification-n147.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 64386 pair decisions over the 3 jobs, 13.52 route CPU seconds. The
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
       E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n147.json), stated before they ran (a
@@ -50043,10 +50044,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00004e-28 at squares 115 and 118, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -50204,8 +50205,9 @@ results:
       release's 13 certificates (receipts/exact-certification-n156.json.xz): the positive
       and its duplicate-square and outside-container controls passed their required outcomes
       on both routes, 72540 pair decisions over the 3 jobs, 15.48 route CPU seconds. The
-      positive clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The
-      replay is E-mishapolk-1009-exact-feasibility.
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
+      E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n156.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -50241,10 +50243,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00006e-28 at squares 76 and 126, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -50402,8 +50404,9 @@ results:
       release's 13 certificates (receipts/exact-certification-n180.json.xz): the positive
       and its duplicate-square and outside-container controls passed their required outcomes
       on both routes, 96660 pair decisions over the 3 jobs, 18.87 route CPU seconds. The
-      positive clears every wall by exactly 1e-28 and every pair by at least 1.44e-24. The
-      replay is E-mishapolk-1009-exact-feasibility.
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 1.44e-24. The replay is
+      E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n180.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -50439,10 +50442,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 1.44492e-24 at squares 34 and 139, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -50589,10 +50592,11 @@ results:
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n210.json
     notes: >-
       A separate complete repository replay is retained for n = 210, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n210.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 131670 pair decisions over the 3 jobs, 25.74 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. The replay is
+      release's 13 certificates (receipts/exact-certification-n210.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 131670 pair decisions over the 3 jobs, 25.74 route CPU seconds. The
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
       E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n210.json), stated before they ran (a
@@ -50629,10 +50633,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00004e-28 at squares 196 and 208, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -50764,10 +50768,11 @@ results:
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n260.json
     notes: >-
       A separate complete repository replay is retained for n = 260, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n260.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 202020 pair decisions over the 3 jobs, 52.62 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. The replay is
+      release's 13 certificates (receipts/exact-certification-n260.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 202020 pair decisions over the 3 jobs, 52.62 route CPU seconds. The
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
       E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n260.json), stated before they ran (a
@@ -50803,10 +50808,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00012e-28 at squares 6 and 11, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -50857,7 +50862,8 @@ results:
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's packing of 262 squares, 8.99e-03 below 16 + sqrt(2)/2 and 1.58e-03 below #1007
+      Polkovskyi's further arrangement of de Winter's packing at 262, 8.99e-03 below 16 +
+      sqrt(2)/2 and 1.58e-03 below T-312
     claim: >-
       One complete rational certificate proves s(262) <= 16.698115018699394428085085691104. That
       side is 16.6981150186993945 rounded up at 16 places and 16.698115018700 at 12, as #1009
@@ -50950,10 +50956,11 @@ results:
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n262.json
     notes: >-
       A separate complete repository replay is retained for n = 262, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n262.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 205146 pair decisions over the 3 jobs, 34.88 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. The replay is
+      release's 13 certificates (receipts/exact-certification-n262.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 205146 pair decisions over the 3 jobs, 34.88 route CPU seconds. The
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
       E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n262.json), stated before they ran (a
@@ -50989,10 +50996,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00004e-28 at squares 211 and 230, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -51125,10 +51132,11 @@ results:
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n268.json
     notes: >-
       A separate complete repository replay is retained for n = 268, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n268.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 214668 pair decisions over the 3 jobs, 39.82 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. The replay is
+      release's 13 certificates (receipts/exact-certification-n268.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 214668 pair decisions over the 3 jobs, 39.82 route CPU seconds. The
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
       E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n268.json), stated before they ran (a
@@ -51164,10 +51172,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00003e-28 at squares 228 and 264, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -51312,8 +51320,9 @@ results:
       release's 13 certificates (receipts/exact-certification-n270.json.xz): the positive
       and its duplicate-square and outside-container controls passed their required outcomes
       on both routes, 217890 pair decisions over the 3 jobs, 85.79 route CPU seconds. The
-      positive clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The
-      replay is E-mishapolk-1009-exact-feasibility.
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
+      E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n270.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -51349,10 +51358,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00004e-28 at squares 164 and 193, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -51500,10 +51509,11 @@ results:
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n272.json
     notes: >-
       A separate complete repository replay is retained for n = 272, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n272.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 221136 pair decisions over the 3 jobs, 44.42 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 2.00e-28. The replay is
+      release's 13 certificates (receipts/exact-certification-n272.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 221136 pair decisions over the 3 jobs, 44.42 route CPU seconds. The
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
       E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n272.json), stated before they ran (a
@@ -51540,10 +51550,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00006e-28 at squares 184 and 187, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -51594,7 +51604,8 @@ results:
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's packing of 292 squares, 1.36e-03 below T-146 and 3.62e-09 below #1006
+      Polkovskyi's further arrangement of de Winter's packing at 292, 1.36e-03 below T-146
+      and 3.62e-09 below T-311
     claim: >-
       One complete rational certificate proves s(292) <= 17.590016439230092219882547056721. That
       side is 17.5900164392300923 rounded up at 16 places and 17.590016439231 at 12, as #1009
@@ -51688,10 +51699,11 @@ results:
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n292.json
     notes: >-
       A separate complete repository replay is retained for n = 292, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n292.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 254916 pair decisions over the 3 jobs, 83.21 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 4.23e-15. The replay is
+      release's 13 certificates (receipts/exact-certification-n292.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 254916 pair decisions over the 3 jobs, 83.21 route CPU seconds. The
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 4.23e-15. The replay is
       E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n292.json), stated before they ran (a
@@ -51730,10 +51742,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 4.23790e-15 at squares 196 and 209, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -51875,10 +51887,11 @@ results:
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/out/controls-n295.json
     notes: >-
       A separate complete repository replay is retained for n = 295, in the receipt of the
-      release's 13 certificates (receipts/exact-certification-n295.json.xz): the positive and its
-      duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 260190 pair decisions over the 3 jobs, 62.23 route CPU seconds. The positive clears
-      every wall by exactly 1e-28 and every pair by at least 1.77e-20. The replay is
+      release's 13 certificates (receipts/exact-certification-n295.json.xz): the positive
+      and its duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 260190 pair decisions over the 3 jobs, 62.23 route CPU seconds. The
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 1.77e-20. The replay is
       E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n295.json), stated before they ran (a
@@ -51914,10 +51927,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 1.77633e-20 at squares 80 and 81, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -52067,8 +52080,9 @@ results:
       release's 13 certificates (receipts/exact-certification-n299.json.xz): the positive
       and its duplicate-square and outside-container controls passed their required outcomes
       on both routes, 267306 pair decisions over the 3 jobs, 62.68 route CPU seconds. The
-      positive clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The
-      replay is E-mishapolk-1009-exact-feasibility.
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
+      E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n299.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -52105,10 +52119,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00004e-28 at squares 50 and 53, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
@@ -52268,8 +52282,9 @@ results:
       release's 13 certificates (receipts/exact-certification-n307.json.xz): the positive
       and its duplicate-square and outside-container controls passed their required outcomes
       on both routes, 281826 pair decisions over the 3 jobs, 60.25 route CPU seconds. The
-      positive clears every wall by exactly 1e-28 and every pair by at least 2.00e-28. The
-      replay is E-mishapolk-1009-exact-feasibility.
+      positive clears every wall by at least 1e-28, exactly that at the left and bottom
+      walls, and every pair by at least 2.00e-28. The replay is
+      E-mishapolk-1009-exact-feasibility.
 
       The packet's sharp controls (receipts/sharp-controls-n307.json), stated before they ran (a
       plan hashed on think-i38n at 01:59:51Z on 17 November), lowered the side to the packing's
@@ -52305,10 +52320,10 @@ results:
       the centres and half-angle tangents and again by exact convex clipping in GMP
       rationals from the corners, each method run on both forms, with no distance filter:
       every pair strictly apart, its least margin 2.00010e-28 at squares 48 and 113, the
-      replay's, and every wall cleared by exactly 1e-28. Its 37 controls at this count,
-      stated beforehand as rules, were decided as stated, among them the squares accepted in
-      the box of the claim and crossing the walls of the box one unit of the twelfth place
-      smaller.
+      replay's, and every wall cleared by at least 1e-28, exactly that at the left and
+      bottom walls. Its 37 controls at this count, stated beforehand as rules, were decided
+      as stated, among them the squares accepted in the box of the claim and crossing the
+      walls of the box one unit of the twelfth place smaller.
 
       It finds no blocking or major defect (F1 to F10, all notes): the two files are one
       packing, square by square (F4), and the file is a contact packing opened by a small
