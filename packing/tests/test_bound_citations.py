@@ -994,9 +994,9 @@ def test_the_recorded_register_gives_these_lines(n: int) -> None:
         # rectangle replays raised both, n = 26 under T-045 and n = 29 under T-070, and
         # the replays of its 1 October certificates raised both again later that day
         # (T-074); its mixed certificates of 6 October on declared nets, decided by
-        # sqverify-fast, raised both again (T-105, T-108), and both rose once more on 4
-        # November, when their fine-net certificates' census replays were mapped (T-233 at
-        # n = 26, T-132 at n = 29).
+        # sqverify-fast, raised both again (T-105, T-108), and both rose once more when
+        # their fine-net certificates' census replays of 4 November were mapped (T-233 at
+        # n = 26 on 4 November, T-132 at n = 29 in the pass of 17 November).
         (26, "Hosono after Tokoharu and Levy", "GitHub", "T-233"),
         (29, "Hosono after Tokoharu and Levy", "GitHub", "T-132"),
     ],

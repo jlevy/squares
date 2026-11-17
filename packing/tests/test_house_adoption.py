@@ -2513,8 +2513,8 @@ October gives a direct $291/50 = 5.82$ certificate for this case, `mixed_n29_L58
 follow-up on #446, which supersedes the issue’s $1163/200$: a density of 650 rectangles
 of total mass $2899999/100000 < 29$, on a net the certificate declares, core side
 $4999/5000$ and 2,073 half-angle tangents of step $1/5002$. It raises both lower lanes
-from $581/100$ (T-108) by $1/100$. The complete 2,073-direction maintained native replay
-of 4 November, its whole-net controls and the
+from $581/100$ (T-108) by $1/100$ in the pass of 17 November. The complete
+2,073-direction maintained native replay of 4 November, its whole-net controls and the
 """
     + REVIEW_4_NOVEMBER_N29_LINK
     + """
@@ -2541,7 +2541,10 @@ on 6 October 2026.""",
 T132_LOWER_29_HISTORY = (
     ("(T-108), since superseded (T-132), from a density of", "(T-108), from a density of"),
     (
-        "so it was also the verified lower bound until the fine-net validation above.",
+        (
+            "so it was also the verified lower bound until T-132’s adoption in the pass of "
+            "17 November."
+        ),
         "so it is also the verified lower bound.",
     ),
     (
@@ -2572,10 +2575,11 @@ T132_LOWER_29_BLOCKERS = (
 def _t132_lower_projection(held: dict[str, Any], wrote: dict[str, Any], body: str) -> str:
     """Check T-132's lower adoption at 29, then compare the house layer below it.
 
-    T-132's fine-net census replay raised both lower lanes at 29 from T-108's 581/100 on
-    4 November 2026, after T-195's house pass of 17 October wrote the record, and its two
-    blockers left; the case also cites its stage 4 review's sample. The writer owns
-    neither lane, so the adoption is checked exactly and projected out.
+    T-132's fine-net census replay of 4 November 2026 raised both lower lanes at 29 from
+    T-108's 581/100 in the pass of 17 November, after T-195's house pass of 17 October
+    wrote the record, and its two blockers left; the case also cites its stage 4 review's
+    sample. The writer owns neither lane, so the adoption is checked exactly and
+    projected out.
     """
     replay = "E-wand125-fine-net-n29-582-followup-sqverify-fast-replay"
     assert held["source_reviewed"] == "2026-11-04"
@@ -2615,11 +2619,11 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     after the adoption is replayed after it: `apply_closed_form`, of 14 October 2026,
     raises the reported lower lane, adds its evidence, resource and paragraph, and moves
     `source_reviewed` no earlier. The later lower adoptions, n108's fine-net bound of 18
-    October, n68's and n84's of 19 October, n146's linear bound (T-179) and n29's fine-net
-    bound (T-132), both of 4 November, are checked explicitly and projected out before
-    this historical upper-layer comparison, as is a registration pending adoption entered
-    after the count's last pass (`LATER_PENDING_REPORTS`) and a citation added after it
-    (`LATER_CITATIONS`).
+    October, n68's and n84's of 19 October, n146's linear bound (T-179) of 4 November and
+    n29's fine-net bound (T-132) of the pass of 17 November, are checked explicitly and
+    projected out before this historical upper-layer comparison, as is a registration
+    pending adoption entered after the count's last pass (`LATER_PENDING_REPORTS`) and a
+    citation added after it (`LATER_CITATIONS`).
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
     body_mismatches = []

@@ -11704,9 +11704,9 @@ results:
         The strongest verified lower bound on record at n = 29 when scored, by 0.0125
         above T-074, and the strongest reported then (the reports of 1163/200 and 291/50
         passed it on 8 and 10 October 2026, and T-132 took both lanes from it in the pass
-        of 17 November 2026, on its census of 4 November). The certificate kind of T-099 on a declared net with
-        the C++ checker of T-069 and later; no new technique, at S3 as T-096, T-099 and
-        T-100 are.
+        of 17 November 2026, on its census of 4 November). The certificate kind of T-099
+        on a declared net with the C++ checker of T-069 and later; no new technique, at S3
+        as T-096, T-099 and T-100 are.
       scored: '2026-10-06'
       by: docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md (repository; confirms the registering lane's draft)
     novelty: previously-published
@@ -14297,10 +14297,9 @@ results:
 
       The control (22:53 to 23:07Z, 854 s of wall at two threads) ends CONTROLS_REFUSED
       under the enclosure rule that #892 adopted for the census: at the axis the mutant's
-      exact capture lies in the
-      enclosure the sweep held at its least vertex, [0.9908643538541804,
-      0.9908643548997059], 1.05e-9 wide, 5.23e-10 above the crate's bound, as F-8 of the
-      review expected. #543's question to the owner on the census's axis tolerance is
+      exact capture lies in the enclosure the sweep held at its least vertex,
+      [0.9908643538541804, 0.9908643548997059], 1.05e-9 wide, 5.23e-10 above the crate's
+      bound, as F-8 of the review expected. #543's question to the owner on the census's axis tolerance is
       still open; #892's rule is not the owner's answer to it. The gap of 5.23e-10 also
       lies inside the former constant allowance of 1e-9, so this control passes under
       either rule and #543 is not load-bearing here.

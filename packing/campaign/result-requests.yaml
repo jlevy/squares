@@ -3911,7 +3911,7 @@ issues:
     summary: All seven fine-net lower-bound statements are recorded as attributed reports with complete
       original-source custody and accepted conditional maintained input-premise review. Fresh complete
       native capture and whole-net controls remain pending; standing bounds and ratings do not change.
-      On 10 October the author reports a stronger n29 certificate, which awaits its own import. On 16
+      On 10 October the author reports a stronger n29 certificate, registered as T-132. On 16
       October the author reports 21 more fine-net certificates, three of which (n = 37, 39 and 44) the
       record already holds from the source's repository as T-178, T-176 and T-177; the 18 new ones, at n
       = 38 to 110, are registered as T-200 through T-217 in merged pull request 671. n108 (T-216)
@@ -3930,9 +3930,12 @@ issues:
       their replay evidence was held. On 4 November n26's control, written again under the
       enclosure rule of pull request 892 (think-tcsl), was refused, so the four replays are
       evidence, T-233 is V3/C3, and the lower lanes at n19, n20, n26 and n27 take 1931/400,
-      393/80, 1111/200 and 1131/200. The issue's n27 2261/400 is superseded in the same
-      release and stays unregistered, and its n31 597/100 is passed by the source's later
-      2391/400 (T-232, not reported here).
+      393/80, 1111/200 and 1131/200. On 4 November the complete capture and whole-net controls
+      of the n29 follow-up passed and the stage 4 review accepted it, so T-132 is V3/C3,
+      re-implemented sharing the producer's components, and n29's lower lanes take 291/50 in
+      the pass of 17 November; the issue's n29 1163/200 is passed by 1/200. The issue's n27
+      2261/400 is superseded in the same release and stays unregistered, and its n31 597/100
+      is passed by the source's later 2391/400 (T-232, not reported here).
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19

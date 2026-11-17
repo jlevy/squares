@@ -36456,9 +36456,10 @@ evidence:
       P/oblique_decide.py at directions 886, 1595, 1947, 2068 and 2072, and with --split
       adaptive at 1, 312, 603 and 1173, must write VERIFIED for each, with --scale 99/100
       at 1947 REFUTED, and at 312 with --split adaptive REFUTED with --scale 9991/10000
-      and VERIFIED with --scale 9993/10000; and PY P/sample_directions.py with the reviewed
-      sqverify-fast must write SAMPLE_AGREES. The receipts are in the directory's out/ and
-      out/oblique/.
+      and VERIFIED with --scale 9993/10000. The receipts are in the directory's out/ and
+      out/oblique/. The directory's sample_directions.py, which runs the reviewed
+      sqverify-fast, is not part of this replay: it shares the producer's components, and
+      the limitations call its runs a diagnostic.
     replay_status: passed
     verifiers: [V-wand125-n29-review-premises, V-wand125-n29-review-axis-decision, V-wand125-n29-review-oblique-decision, V-wand125-n29-review-exact-capture]
     independence_record: >-

@@ -241,6 +241,12 @@ download URL in `source-manifest.json`.
 
 No program here is a replay, and none is cited by an evidence entry yet; the review
 proposes the registry entries.
+Since #909 (17 November 2026) the four deciding programs are registered as
+`V-wand125-n29-review-premises`, `V-wand125-n29-review-exact-capture`,
+`V-wand125-n29-review-axis-decision` and `V-wand125-n29-review-oblique-decision`, and the
+sample entry `E-wand125-fine-net-n29-582-review-sample` cites them, a sample of ten
+directions; `sample_directions.py`’s runs, which share the producer’s components, are a
+diagnostic that entry’s limitations describe.
 
 The computation totalled about 69 CPU-minutes.
 That is 26 CPU-seconds for the build (19.8 seconds of wall at two jobs), 41 for the

@@ -9,7 +9,8 @@ It supersedes the issue’s earlier n = 29 report, $1163/200 = 5.815$, which the
 $1/200$. The certificate’s own README compares it instead with `mixed_n29_L58175`
 ($2327/400$, at `dd6a7cc`), which no issue reported, and which it exceeds by $1/400$.
 Since 4 November 2026 a complete replay here, its whole-net controls and a stage 4
-review confirm it (T-132, V3/C3; [Review and Replay](#review-and-replay)), and both
+review confirm it, re-implemented sharing the producer’s components (T-132, V3/C3;
+[Review and Replay](#review-and-replay)), and both
 lower lanes at n = 29 hold it since the pass of 17 November 2026. They ran ahead of the
 owner’s order of 11 October, which queued the replay after the regularization of every
 packing (think-ux1v); the owner lifted that order on 17 November (think-fibh, #909).
