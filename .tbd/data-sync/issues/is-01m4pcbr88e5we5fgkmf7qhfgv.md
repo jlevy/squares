@@ -5,7 +5,7 @@ title: "Import wand125 via evand: Valid7 in the Lean kernel (evand PR #6, merged
 kind: task
 status: in_progress
 priority: 3
-version: 5
+version: 6
 delegate: codex@spud10.local
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:08.136Z
-updated_at: 2026-10-26T05:39:47.313Z
+updated_at: 2026-11-17T22:07:09.967Z
 started_at: 2026-10-18T08:47:55.993Z
 ---
 Found in the 2026-10-11 intake read of evand/square-packing (think-q655); nothing on GitHub asked. Commit 060c1a1 (2026-10-11T02:36:49Z) merges wand125's PR #6 to evand/square-packing, "ValidTilt7 / Valid7 in the kernel, s(k^2 - 3) = k for all k >= 6": a Lean kernel checker for the V3 pose tree of L4_k02_box7.txt and a bridge to box7Cover (lean/Sqpack/V7/, LemmaE*, CapK, KBern and 25 other modules, lean/VALID7.md, generators under lean/scripts/), with 45d8c39 and 5b69ce0 (a kernel checker for covers by a mixed point/segment/area measure). The merge message says the root modules and Main are generated from wand125's release data/valid7-lean-certs-v1, not in the repository, and that evand reviewed it statically on 10 October and did not rebuild it. 7dfca4e makes the checker opt-in (Sqpack.Valid7Checker), adds a spot check (tasks/pr6-valid7-kernel/spotcheck-2026-10-10.md) and sets the k2m3 status to "no hypothesis".
@@ -28,3 +28,5 @@ This is new evidence for T-064 (s(k^2 - 3) = k for k >= 6, V3/C3): its lower hal
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): https://github.com/jlevy/squares/issues/537 (the sample or rebuild decision is on https://github.com/jlevy/squares/issues/543). Tracker https://github.com/jlevy/squares/issues/544.
 
 2026-10-18 W1 intake (think-xmxb): #537 new author comment https://github.com/jlevy/squares/issues/537#issuecomment-6247112302 (2026-10-18T07:25:01Z): Valid7 v2 at wand125/square-packing 649a92042b4b79dda1eca1749c34029aee60990e, release valid7-lean-v2, library evand c5c7f00. Same theorem/standard axioms; 62626 generated files; same9800 roots with re-certified leaves. Author reports798 CPU-h, peak37GB module/51GB Main,29.4h on48vCPU. The component CPU figures quoted in comment do not sum to798: reconcile source receipt before accepting new budget price. No build here. Retain and audit version2 instead of offering only stale v1 cost. Draft acknowledgement: Thank you for the version2 source and updated compute figures. This is queued as new evidence for T-064; no rebuild or new rung is claimed. A full build remains subject to the recorded budget and machine decision.
+
+2026-11-17T23:55Z w4-records-1117r (think-8gvd, applying think-l7j0): #537 is closeable once w4's records PR merges (the rebuild decision ask is done: full build declined, sample runnable on think-qu37). Its final comment follows from main (check_requests --draft 537), then the close is recorded in the next change.
