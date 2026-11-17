@@ -784,11 +784,33 @@ What went wrong along the way, and was redone before the freeze it precedes:
 
 This copy differs from the frozen text
 (`frozen/review-2026-11-17-polkovskyi-1009.frozen.md`, bound by
-`frozen/findings-frozen-digest.txt`) in one place, changed on 17 November 2026 after the
-freeze by lane w3-pass-1117r: the reviewer line, which named a model identifier.
-The runbook’s stage 4 says the reviewer line names the system family, tier and reasoning
-setting, not a model identifier; the frozen copy is left as it was frozen.
+`frozen/findings-frozen-digest.txt`) in two places, changed on 17 November 2026 after
+the freeze by lane w3-pass-1117r: the reviewer line, which named a model identifier, and
+this note.
+The runbook’s stage 4 says the reviewer line names the system family, tier and
+reasoning setting, not a model identifier; the frozen copy is left as it was frozen.
 No finding, verdict or number changes.
+
+**What this review did not measure.** The lane stopped after the findings freeze at
+04:28:50Z and wrote no After the Freeze section.
+Where the text above says that the slack against the record’s packings (F5, K1), the
+gains, the padding question and the lineage (the Verdict) “are measured after the
+freeze”, none of it was done.
+`rv1009_custody.py`, `rv1009_padding.py` and `rv1009_sides.py` never ran on the thirteen
+counts; `rv1009_padding.py` was tried before the findings freeze only on the houses at
+127, 204, 232, 264 and 305, as the frozen findings list says, with no receipt kept.
+Their docstrings, which the findings digest binds and which are kept as frozen, describe
+runs that did not happen.
+So this review measures none of these: the gains against the record, the padding against
+the houses (RV-3, which the owner’s option D of 17 November 2026 now decides), identity
+and lineage, custody, and the author’s own checks; and it confirms no significance
+score. Where the import of issue 1009 (think-i38n) records them, under option D and with
+the significance scores, they are the import lane’s own measurements on its replay
+route, not this blind review’s. The statement under What I Ran that the controls program
+failed 9 to 31 of 37 controls on a synthetic packing under four broken copies of the
+checker rests on scratch runs of which no program or receipt is kept; the self-test’s
+six broken copies and the controls’ own refusals, which are kept, are what show the
+controls are not vacuous.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
