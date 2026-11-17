@@ -1,0 +1,138 @@
+{
+ "program": "r1_selftest.py",
+ "lane": "R1 (c-review-1005-1117)",
+ "checks": 24389,
+ "failed": 0,
+ "first_failures": [],
+ "broken_copies": [
+  {
+   "what": "A uses only the first square's two directions",
+   "program": "r1_axes.py",
+   "replaced": ["for owner in (si, sj):"],
+   "by": ["for owner in (si,):"],
+   "checks": 24389,
+   "failed": 1636,
+   "first_failure": ["corner-on-edge 4/5 d 1/1000000000000000000000000000000 (Fraction(1, 1), Fraction(0, 1)) A margin, other order"]
+  },
+  {
+   "what": "A counts a zero margin as apart",
+   "program": "r1_axes.py",
+   "replaced": ["if value > 0:\n        return \"apart\""],
+   "by": ["if value >= 0:\n        return \"apart\""],
+   "checks": 24389,
+   "failed": 357,
+   "first_failure": ["edge (Fraction(1, 1), Fraction(0, 1)) q0 tau 0 d 0 A class"]
+  },
+  {
+   "what": "A measures the separation on one side only",
+   "program": "r1_axes.py",
+   "replaced": ["num = max(min(pj) - max(pi), min(pi) - max(pj))"],
+   "by": ["num = min(pj) - max(pi)"],
+   "checks": 24389,
+   "failed": 2988,
+   "first_failure": ["edge (Fraction(1, 1), Fraction(0, 1)) q0 tau 0 d 1/1000000000000000000000000000000 A margin, other order"]
+  },
+  {
+   "what": "A's unit test drops perpendicularity",
+   "program": "r1_axes.py",
+   "replaced": ["if E[0][0] * E[1][0] + E[0][1] * E[1][1] != 0:"],
+   "by": ["if False:"],
+   "checks": 24389,
+   "failed": 1,
+   "first_failure": ["refuse A: rhombus with unit sides"]
+  },
+  {
+   "what": "A's right clearance uses the least x",
+   "program": "r1_axes.py",
+   "replaced": ["side - Fraction(max(xs), D),"],
+   "by": ["side - Fraction(min(xs), D),"],
+   "checks": 24389,
+   "failed": 647,
+   "first_failure": ["wall right 1 eps 1/1000000000000000000000000000000 A"]
+  },
+  {
+   "what": "B's point-in-polygon test and its crossing test are both open",
+   "program": "r1_area.py",
+   "replaced": ["if (bx - ax) * (py - ay) - (by - ay) * (px - ax) < 0:", "if t < 0 or t > 1:", "if u < 0 or u > 1:"],
+   "by": ["if (bx - ax) * (py - ay) - (by - ay) * (px - ax) <= 0:", "if t <= 0 or t >= 1:", "if u <= 0 or u >= 1:"],
+   "checks": 24389,
+   "failed": 2234,
+   "first_failure": ["edge (Fraction(1, 1), Fraction(0, 1)) q0 tau 0 d 0 B class"]
+  },
+  {
+   "what": "B skips the edge crossings",
+   "program": "r1_area.py",
+   "replaced": ["if den == 0:\n                continue"],
+   "by": ["if True:\n                continue"],
+   "checks": 24389,
+   "failed": 2695,
+   "first_failure": ["edge (Fraction(1, 1), Fraction(0, 1)) q0 tau 1/3 d -1/1000000000000000000000000000000 B class"]
+  },
+  {
+   "what": "B's unit test drops the diagonals",
+   "program": "r1_area.py",
+   "replaced": ["diagonals = _d2(points[0], points[2]) == TWO and _d2(points[1], points[3]) == TWO"],
+   "by": ["diagonals = True"],
+   "checks": 24389,
+   "failed": 2,
+   "first_failure": ["refuse B: rhombus with unit sides"]
+  },
+  {
+   "what": "B calls fewer than three contact points apart",
+   "program": "r1_area.py",
+   "replaced": ["if not candidates:\n        return apart_word, ZERO"],
+   "by": ["if len(candidates) < 3:\n        return apart_word, ZERO"],
+   "checks": 24389,
+   "failed": 527,
+   "first_failure": ["wall left 1 eps 0 B class"]
+  },
+  {
+   "what": "B's wall test is open",
+   "program": "r1_area.py",
+   "replaced": ["candidates = [p for p, f in zip(P, values) if f >= 0]"],
+   "by": ["candidates = [p for p, f in zip(P, values) if f > 0]"],
+   "checks": 24389,
+   "failed": 527,
+   "first_failure": ["wall left 1 eps 0 B class"]
+  },
+  {
+   "what": "the closed form's half-extent is doubled",
+   "program": "r1_frame.py",
+   "replaced": ["return (abs(_dot(frame.u, w)) + abs(_dot(frame.v, w))) / 2"],
+   "by": ["return abs(_dot(frame.u, w)) + abs(_dot(frame.v, w))"],
+   "checks": 24389,
+   "failed": 4039,
+   "first_failure": ["edge (Fraction(1, 1), Fraction(0, 1)) q0 tau 0 d 1/1000000000000000000000000000000 closed form"]
+  },
+  {
+   "what": "the YAML reader lets a duplicate key through",
+   "program": "r1_read.py",
+   "replaced": ["if key in mapping:"],
+   "by": ["if False:"],
+   "checks": 24389,
+   "failed": 1,
+   "first_failure": ["yaml refused: duplicate key, larger side"]
+  },
+  {
+   "what": "the witness reader ignores the stated count",
+   "program": "r1_read.py",
+   "replaced": ["if len(listed) != n:\n        raise Refusal(f\"witness.n states"],
+   "by": ["if False:\n        raise Refusal(f\"witness.n states"],
+   "checks": 24389,
+   "failed": 3,
+   "first_failure": ["yaml refused: count too large"]
+  },
+  {
+   "what": "the decision ignores wall crossings",
+   "program": "r1_decide.py",
+   "replaced": ["if self.clear[k][w] < 0 or self.wall_b[k][w][0] == \"overlapping\""],
+   "by": ["if False"],
+   "checks": 24389,
+   "failed": 6,
+   "first_failure": ["witness-yaml 2x2 box too small"]
+  }
+ ],
+ "every_broken_copy_fails": true,
+ "verdict": "PASSED",
+ "cpu_seconds": 26.5
+}

@@ -1,0 +1,342 @@
+{
+ "program": "r1_check.py",
+ "lane": "R1 (c-review-1005-1117)",
+ "file": "n292_exact.json",
+ "form": "centre-json",
+ "python": "3.14.7",
+ "gmpy2": "2.3.1",
+ "gmp": "GMP 6.3.0",
+ "pyyaml": "6.0.3",
+ "bytes": 69084,
+ "sha256": "3d6fb90c9b79bc9dee984ec0e4b6ecc89bb1306afb266d0b75dcecea4a972b4a",
+ "stated_sha256": null,
+ "sha256_is_the_stated_one": null,
+ "reading": {
+  "form": "centre-json",
+  "format": "each square: [center_x, center_y, cos, sin] as exact rationals; (cos, sin) is the unit direction of one edge",
+  "id_form": "none; squares are numbered by position",
+  "side_written_in_lowest_terms": true,
+  "scalars": 1169,
+  "scalars_in_lowest_terms": 1169,
+  "scalars_written_as_integers": 34
+ },
+ "n": 292,
+ "side": {
+  "exact": "33872522175917279266554668306659248043633029180856810473/1925667453806884053962316529711800854170000000000000000",
+  "to_40_places": "17.5900164428464147126481795327645168253834",
+  "numerator_digits": 56,
+  "denominator_digits": 55,
+  "is_terminating_decimal": false
+ },
+ "squares": {
+  "unit_by_a": 292,
+  "unit_by_b": 292,
+  "counterclockwise_by_a": 292,
+  "clockwise_by_a": 0,
+  "counterclockwise_by_b": 292,
+  "clockwise_by_b": 0,
+  "not_unit": []
+ },
+ "pairs": {
+  "decided": 42486,
+  "expected": 42486,
+  "by_a": {
+   "apart": 42486,
+   "touching": 0,
+   "overlapping": 0
+  },
+  "by_b": {
+   "apart": 42486,
+   "touching": 0,
+   "overlapping": 0
+  },
+  "sum_of_overlap_areas_by_b": "0",
+  "touching_pairs": 0,
+  "touching_pairs_listed": [],
+  "least_margin": {
+   "exact": "19790618741226626427779/6528865809985474485125000000000000",
+   "about": "3.03124912001e-12"
+  },
+  "least_margin_pairs": [[278, 279]],
+  "least_positive_margin": {
+   "exact": "19790618741226626427779/6528865809985474485125000000000000",
+   "about": "3.03124912001e-12"
+  },
+  "least_positive_margin_pairs": [[278, 279]],
+  "positive_margins_below": {
+   "1e-12": 0,
+   "1e-11": 1,
+   "1e-10": 206,
+   "1e-9": 245,
+   "1e-6": 330,
+   "1e-3": 801,
+   "1e-1": 939
+  },
+  "thirty_least_positive": [
+   {
+    "pair": [278, 279],
+    "margin": "3.03124912001e-12"
+   },
+   {
+    "pair": [74, 75],
+    "margin": "1.00162136633e-11"
+   },
+   {
+    "pair": [70, 76],
+    "margin": "1.00228824904e-11"
+   },
+   {
+    "pair": [70, 71],
+    "margin": "1.00248390000e-11"
+   },
+   {
+    "pair": [75, 76],
+    "margin": "1.00931834417e-11"
+   },
+   {
+    "pair": [281, 285],
+    "margin": "1.01641717574e-11"
+   },
+   {
+    "pair": [200, 203],
+    "margin": "1.02013749362e-11"
+   },
+   {
+    "pair": [184, 200],
+    "margin": "1.02105067238e-11"
+   },
+   {
+    "pair": [285, 289],
+    "margin": "1.02416911158e-11"
+   },
+   {
+    "pair": [184, 204],
+    "margin": "1.02420146577e-11"
+   },
+   {
+    "pair": [283, 288],
+    "margin": "1.02512167306e-11"
+   },
+   {
+    "pair": [202, 203],
+    "margin": "1.02875255477e-11"
+   },
+   {
+    "pair": [12, 16],
+    "margin": "1.02956886448e-11"
+   },
+   {
+    "pair": [247, 251],
+    "margin": "1.03048469879e-11"
+   },
+   {
+    "pair": [288, 289],
+    "margin": "1.03178592354e-11"
+   },
+   {
+    "pair": [10, 16],
+    "margin": "1.03191991172e-11"
+   },
+   {
+    "pair": [184, 203],
+    "margin": "1.03214825079e-11"
+   },
+   {
+    "pair": [172, 282],
+    "margin": "1.03253982146e-11"
+   },
+   {
+    "pair": [279, 283],
+    "margin": "1.03323723331e-11"
+   },
+   {
+    "pair": [62, 63],
+    "margin": "1.03410279196e-11"
+   },
+   {
+    "pair": [204, 247],
+    "margin": "1.03559410895e-11"
+   },
+   {
+    "pair": [2, 55],
+    "margin": "1.03574063748e-11"
+   },
+   {
+    "pair": [188, 192],
+    "margin": "1.03651859167e-11"
+   },
+   {
+    "pair": [60, 61],
+    "margin": "1.03671388546e-11"
+   },
+   {
+    "pair": [188, 189],
+    "margin": "1.03700972926e-11"
+   },
+   {
+    "pair": [280, 284],
+    "margin": "1.03737377747e-11"
+   },
+   {
+    "pair": [284, 288],
+    "margin": "1.03769498756e-11"
+   },
+   {
+    "pair": [202, 205],
+    "margin": "1.03782607920e-11"
+   },
+   {
+    "pair": [250, 251],
+    "margin": "1.03783315952e-11"
+   },
+   {
+    "pair": [5, 8],
+    "margin": "1.03805817898e-11"
+   }
+  ],
+  "positive_below_1e-9": {
+   "count": 245,
+   "least": "3.03124912001e-12",
+   "greatest": "9.55714510130e-10",
+   "median": "1.05781861427e-11",
+   "distinct_values": 245,
+   "next_above": {
+    "pair": [224, 225],
+    "margin": "1.06970152496e-9"
+   }
+  }
+ },
+ "walls": {
+  "left": {
+   "touching_squares": [231],
+   "touching_count": 1,
+   "crossing_squares": [],
+   "least_clearance": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_squares": [231],
+   "least_positive_clearance": {
+    "exact": "10553058682651859913/11709271915305839623250000000000000",
+    "about": "9.01256607497e-16"
+   },
+   "least_positive_clearance_squares": [122],
+   "positive_clearances_below_1e-9": 8,
+   "classes_by_b": {
+    "apart": 291,
+    "touching": 1,
+    "overlapping": 0
+   }
+  },
+  "bottom": {
+   "touching_squares": [71],
+   "touching_count": 1,
+   "crossing_squares": [],
+   "least_clearance": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_squares": [71],
+   "least_positive_clearance": {
+    "exact": "244286971076954084210251594206943525533507/1398388211982743413700436705717766848665000000000000000",
+    "about": "1.74691812319e-13"
+   },
+   "least_positive_clearance_squares": [61],
+   "positive_clearances_below_1e-9": 8,
+   "classes_by_b": {
+    "apart": 291,
+    "touching": 1,
+    "overlapping": 0
+   }
+  },
+  "right": {
+   "touching_squares": [],
+   "touching_count": 0,
+   "crossing_squares": [],
+   "least_clearance": {
+    "exact": "1352943380681263455912577353870020024180431429816007545140003795266416880863031/4191550405499057596408430525168532594293633919335551851488298077758278179314000000000000000",
+    "about": "3.22778745283e-13"
+   },
+   "least_clearance_squares": [253],
+   "least_positive_clearance": {
+    "exact": "1352943380681263455912577353870020024180431429816007545140003795266416880863031/4191550405499057596408430525168532594293633919335551851488298077758278179314000000000000000",
+    "about": "3.22778745283e-13"
+   },
+   "least_positive_clearance_squares": [253],
+   "positive_clearances_below_1e-9": 9,
+   "classes_by_b": {
+    "apart": 292,
+    "touching": 0,
+    "overlapping": 0
+   }
+  },
+  "top": {
+   "touching_squares": [205],
+   "touching_count": 1,
+   "crossing_squares": [],
+   "least_clearance": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_squares": [205],
+   "least_positive_clearance": {
+    "exact": "5246280504040415433631998086391808273227/149189888168064317846905432385649114772812500000000000",
+    "about": "3.51651212321e-14"
+   },
+   "least_positive_clearance_squares": [192],
+   "positive_clearances_below_1e-9": 4,
+   "classes_by_b": {
+    "apart": 291,
+    "touching": 1,
+    "overlapping": 0
+   }
+  }
+ },
+ "extent": {
+  "width": {
+   "exact": "957193315076152798553822420266186060902382275510399067/54416851637762166641795187693462563605000000000000000",
+   "about": "1.7590016442846091933e1"
+  },
+  "height": {
+   "exact": "33872522175917279266554668306659248043633029180856810473/1925667453806884053962316529711800854170000000000000000",
+   "about": "1.7590016442846414712e1"
+  },
+  "side_less_width": {
+   "exact": "1352943380681263455912577353870020024180431429816007545140003795266416880863031/4191550405499057596408430525168532594293633919335551851488298077758278179314000000000000000",
+   "about": "3.22778745283e-13"
+  },
+  "side_less_height": {
+   "exact": "0",
+   "about": "0"
+  },
+  "side_less_larger_extent": {
+   "exact": "0",
+   "about": "0"
+  },
+  "least_right_or_top_clearance": {
+   "exact": "0",
+   "about": "0"
+  }
+ },
+ "area_inside_box_by_b": {
+  "exactly_1": 292,
+  "below_1": 0
+ },
+ "claim": {
+  "claimed": "17.590016442847",
+  "claim_less_side": {
+   "exact": "1127068804525493085792603312810405765179527/1925667453806884053962316529711800854170000000000000000",
+   "about": "5.85287351820e-13"
+  },
+  "claim_at_least_side": true,
+  "twelve_place_ceiling_of_side": "17.590016442847",
+  "claim_is_that_ceiling": true
+ },
+ "methods_disagree": {
+  "count": 0,
+  "first": []
+ },
+ "verdict": "ACCEPT",
+ "reasons": [],
+ "cpu_seconds": 9.0
+}
