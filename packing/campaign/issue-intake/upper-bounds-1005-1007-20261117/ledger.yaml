@@ -1,0 +1,178 @@
+format: intake-ledger-v1
+read_at_main: f9ddfeeef9070ede581142154ab992149b278ab0
+read_on: '2026-11-17'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: i1
+  branch: claude/intake-2026-11-17-import-1005
+  commit: f9ddfeeef9070ede581142154ab992149b278ab0
+  note: The packets' claim records, written on the lane's branch from main f9ddfeeef and read
+    here by path.
+reports:
+- report: '#1005'
+  url: https://github.com/jlevy/squares/issues/1005
+  kind: issue
+  holders: Doğa Özden
+  reported_at: '2026-11-16T15:27:38Z'
+  bead: think-qag8
+  claims:
+  - n: 292
+    printed: '17.590104218682'
+    rounding: up
+    exact: 2147229518882059890086899958250897491556516647879114253409452492578978997444460406318900646134290454180486647268099660700641173206186150228357571901222733525037065479076168514562715678274914005135983284085238970891957/122070312500000000000000000000032025360448157077781662949451003018506027823162801459947296665713761222062709464747072442794623177948994346733238703538899224172481004351278872345115313431726710893086560500000000000000
+    exact_from: packing/resources/web/ozden-s292-upper-bound-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1005@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T15:27:16Z'
+    measured:
+      against: T-146
+      finding: no symmetry of the box pairs it one to one with T-146's packing by nearest
+        centres; the optimal assignment (symmetry 3) moves 290 squares beyond 1e-3, 127 beyond
+        1e-2 and 81 beyond 0.1 (largest 0.907709) and turns 109 squares by more than 1e-6
+        radians, by up to 41 degrees; aligned by box centres, 77 squares turn by more than
+        a degree and 26 reverse their tilt; 64 squares are tilted beyond a degree, 40.70 to
+        44.80 degrees, 59 one way and 5 the other, against T-146's 49 (35.68 to 40.97) all
+        the other way; the house witness and its regularized view measure as T-146; a new
+        arrangement relative to the record's packing
+      source: packing/resources/web/ozden-s292-upper-bound-2026-11-16/measure/identity.json
+    new_packing:
+      source: '#1005: ''an original AI-run design, not a donor/transplant start or public
+        recovery; no registry packing was used as a seed.'''
+      continues: the lab's own earlier column-band designs at 292 (jobs s2h292b and s3h292a),
+        by its segment re-angling operator segkick
+    note: T-146's uniform-contraction margin at 292 is 1.7591e-19, its squares 68 and 69 binding,
+      wall slack included, so the gain, 1.2739e-3, about 7.2e15 times it, lies wholly outside
+      T-146's padding (packing/resources/web/ozden-s292-upper-bound-2026-11-16/measure/contraction-n292.json);
+      RV-3 (think-ruu2) does not reach it. T-193's 292, pending adoption, is that contraction's
+      exact contact, 1.76e-19 below T-146. The certificate's own margin is 3.3490e-12 (squares
+      154 and 155, the least-gap pair; contraction-n292-own.json).
+  note: '#1005 names dec930b, committed at 2026-11-16T15:27:16Z, 22 seconds before it, the
+    repository''s only commit and its head. Posted on Doğa Özden''s behalf by his AI agent,
+    which uses the account kenaznia-doga, it asks that Özden be recorded as improved_by for
+    the new arrangement, the record staying credited to Nate Chaoweeraprasit (itsnaka), improved
+    by Evan Daniel, and Evan Daniel credited for the optimizer. It says this repository''s
+    packing-witness promote made the exact coordinates, and that search, checks and filing
+    were AI-assisted throughout.'
+- report: '#1006'
+  url: https://github.com/jlevy/squares/issues/1006
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-16T15:39:16Z'
+  bead: think-qag8
+  claims:
+  - n: 292
+    printed: '17.590016442847'
+    rounding: up
+    exact: 33872522175917279266554668306659248043633029180856810473/1925667453806884053962316529711800854170000000000000000
+    exact_from: packing/resources/web/de-winter-s292-upper-bound-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1005@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T15:37:03Z'
+    measured:
+      against: T-146
+      finding: 'no symmetry of the box pairs it one to one with T-146''s packing by nearest
+        centres; the optimal assignment (symmetry 6) moves 290 squares beyond 1e-3, 119 beyond
+        1e-2 and 69 beyond 0.1 (largest 0.927764) and turns 128 squares by more than 1e-6
+        radians, by up to 42.38 degrees; aligned by box centres, 49 squares turn by more than
+        a degree and none reverses its tilt; 59 squares are tilted beyond a degree, 39.82
+        to 42.40 degrees, all one way, against T-146''s 49 (35.68 to 40.97) all the other
+        way; against #1005''s packing, filed before it, no symmetry pairs them one to one
+        either, and the optimal assignment moves 44 squares beyond 0.1; the house witness
+        and its regularized view measure as T-146; a new arrangement relative to the record''s
+        packing and to #1005''s'
+      source: packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/identity.json
+    new_packing:
+      source: '#1006: ''The packing has one continuous ribbon of 59 tilted squares along the
+        diagonal and 233 axis-aligned squares. The ribbon extends the ribbon of 37 tilted
+        squares in the packing of 146 squares with side 12.583782190152, which your record
+        credits to David W. Cantrell (2025).'''
+      continues: the ribbon of David W. Cantrell's packing of 146 squares, two copies joined
+        into a ribbon of 59, with axis-aligned squares placed by an integer program
+    note: 'T-146''s uniform-contraction margin at 292 is 1.7591e-19 (squares 68 and 69), so
+      the gain on it, 1.3617e-3, lies wholly outside T-146''s padding (packing/resources/web/de-winter-s292-upper-bound-2026-11-16/measure/contraction-n292.json);
+      the step from #1005''s certificate, 8.7776e-5, is about 2.6e7 times that certificate''s
+      own margin, 3.3490e-12 (contraction-n292-1005.json), so RV-3 (think-ruu2) reaches neither.
+      The certificate''s own margin is 5.0288e-11 (squares 278 and 279; contraction-n292-own.json).'
+  note: '#1006 names 796ff3b, committed at 2026-11-16T15:37:03Z, 133 seconds before it; the
+    next commit, fe13d47, adds only the registration text and SHA256SUMS. It asks for credit
+    to Joost de Winter as an extension of David W. Cantrell''s ribbon, whose packing of 146
+    squares it took from a public Kaggle notebook (sigmaborov, Apache License 2.0), and says
+    the construction and search were run with Gemini Carbon (Google) and the checking, witness
+    file and figure produced with Claude Fable 5.2 (Anthropic), both under his direction.'
+- report: '#1007'
+  url: https://github.com/jlevy/squares/issues/1007
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-16T21:28:27Z'
+  bead: think-qag8
+  claims:
+  - n: 262
+    printed: '16.699693441904'
+    rounding: up
+    exact: 166996934419035177/10000000000000000
+    exact_from: packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1005@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T21:26:15Z'
+    measured:
+      against: T-155
+      finding: no symmetry of the box pairs it one to one with T-155's exact view of the house's
+        packing by nearest centres; the optimal assignment, under the identity of the box,
+        moves 261 squares beyond 1e-3, 91 beyond 1e-2 and 78 beyond 0.1 (largest 0.897603);
+        72 squares are tilted beyond a degree, 24.94 to 29.73 degrees, all one way, against
+        the house's 20, all at 45 degrees; a new arrangement relative to the record's packing
+      source: packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/identity-n262.json
+    new_packing:
+      source: '#1007: ''A band of 72 squares, tilted by 25 to 30 degrees and arranged 4 squares
+        wide and 18 long, runs along the diagonal. ... No coordinates of other packings were
+        used.'''
+    note: T-155's uniform-contraction margin at 262 is 1.6707e-19 (squares 244 and 245), so
+      the gain on its rational ceiling, 7.4133e-3, lies wholly outside its padding (packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/contraction-n262.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 6.8888e-11 (squares
+      33 and 179; contraction-n262-own.json).
+  - n: 295
+    printed: '17.699693441716'
+    rounding: up
+    exact: 35399386883430443/2000000000000000
+    exact_from: packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/acquisition/claims.json
+      at claude/intake-2026-11-17-import-1005@f9ddfeeef9070ede581142154ab992149b278ab0
+    first_committed: '2026-11-16T21:26:15Z'
+    measured:
+      against: T-146
+      finding: no symmetry of the box pairs it one to one with T-146's packing at 295, the
+        house's 45-degree arrangement, by nearest centres; the optimal assignment (symmetry
+        3) moves 292 squares beyond 1e-3, 220 beyond 1e-2 and 209 beyond 0.1 (largest 1.11514);
+        72 squares are tilted beyond a degree, 24.94 to 29.73 degrees, all one way, against
+        T-146's 160, all at 45 degrees; a new arrangement relative to the record's packing.
+        The certificate is not one L step on its first 262 squares (measure_identity's l-base
+        refuses it), and its side is 1 - 1.883e-10 above the 262 certificate's
+      source: packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/identity-n295.json
+    new_packing:
+      source: '#1007: ''The packing for n = 295 is the packing for n = 262 with an L-shaped
+        border of 33 axis-aligned squares, so its side is larger by exactly 1.'''
+      continues: the source's own packing of 262 squares, with an L of 33 axis-aligned squares
+    note: T-146's rational packing at 295 has uniform-contraction margin 1.7704e-19 (squares
+      206 and 220), and T-193's (22 + 22 sqrt(2))/3 is its exact contact, 1.80e-19 below it,
+      so the gain, 4.5393e-3, lies wholly outside the house's padding (packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/measure/contraction-n295.json);
+      RV-3 (think-ruu2) does not reach it. The certificate's own margin is 2.5384e-11 (squares
+      55 and 56; contraction-n295-own.json). The L step from the 262 certificate gives 17.699693441904
+      at 295, 1.883e-10 above this side.
+  note: '#1007 names 853b92e, committed at 2026-11-16T21:26:15Z, 132 seconds before it; the
+    head, d02237a, adds only the registration texts and their SHA256SUMS lines. It asks for
+    credit to Joost de Winter, says no coordinates of other packings were used, and says the
+    construction, search and rational certificates were produced with Gemini Carbon (Google)
+    and the conversion to the witness format and the checks run with Claude (Anthropic), both
+    under his direction.'
+exceptions: []
+key_reason_candidates: []
+other_items:
+- issue: '#1005'
+  url: https://github.com/jlevy/squares/issues/1005
+  holders: Cats and boxes
+  kind: side-only leaderboard entry, no packing
+  bead: think-qag8
+  disposition: 'Both #1005 and #1006 quote the Kaggle per-puzzle table''s best side at 292,
+    17.589053943368 (team ''Cats and boxes'', 29 October), below both claims; it states no
+    packing, so it is no report and is recorded as context only, as #1001''s ledger treated
+    Kodaj''s quoted 270.'
+cross_check: []

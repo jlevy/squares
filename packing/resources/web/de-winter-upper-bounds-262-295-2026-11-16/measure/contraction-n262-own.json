@@ -1,0 +1,49 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 262,
+ "certificate": {
+  "label": "de-winter-1007",
+  "input": "packet",
+  "packet": "de-winter-upper-bounds-262-295-2026-11-16"
+ },
+ "side": "166996934419035177/10000000000000000",
+ "lambda_star": "20443105212365549687500000000000000/20443105212455250946432298848817003",
+ "one_minus_lambda_star": "4.387849e-12",
+ "binding_pair": [
+  33,
+  179
+ ],
+ "contracted_side": "1365574360188697163487880726196810887/81772420849821003785729195395268012",
+ "margin": "14082822665899015749817677199731092714531/204431052124552509464322988488170030000000000000000",
+ "margin_float": "6.888788e-11",
+ "certificate_routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "1190389467830565391862193362381605465785291/265901401087913655394835506008184222955703125000000000",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "1190389467830565391862193362381605465785291/265901401087913655394835506008184222955703125000000000",
+   "failures": []
+  }
+ },
+ "routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes_accept": true,
+ "cpu_seconds": 11.74
+}
