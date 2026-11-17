@@ -604,9 +604,9 @@ frozen decision.
 - **Authorship.** #1005 says the search, checks and filing were AI-assisted throughout
   and names a Claude Sonnet 5.5 director; #1006 says the construction and search ran
   with Gemini Carbon and the checking with Claude Fable 5.2; #1007 says Gemini Carbon
-  and Claude. This review was written by a Claude agent, as was the model review, on the
-  model #1006 names for its own checking; the independence claimed here is of code and
-  of what was read.
+  and Claude. This review was written by a Claude agent, as was the model review, at the
+  strongest tier (`tbd-strong-max`) and maximum reasoning; the independence claimed here
+  is of code and of what was read.
 
 ## Findings
 
@@ -810,12 +810,75 @@ What went wrong along the way, and was redone before the freeze it precedes:
 
 This copy differs from the frozen text
 (`frozen/review-2026-11-17-ozden-de-winter-1005-1007.frozen.md`, bound by
-`frozen/findings-frozen-digest.txt`) in two places, both added on 17 November 2026 after
-the freeze by lane w3-pass-1117r: the common-doc footer, and the reviewer line, which
-named a model identifier.
-The runbook’s stage 4 says the reviewer line names the system family, tier and reasoning
-setting, not a model identifier; the frozen copy is left as it was frozen.
+`frozen/findings-frozen-digest.txt`) in four places, all made on 17 November 2026 after
+the freeze by lane w3-pass-1117r: the common-doc footer, added; the reviewer line, from
+which a model identifier was removed; the Authorship bullet, whose statement of the
+model was the lane’s own report and now names the family, tier and reasoning setting;
+and this note.
+The runbook’s stage 4 says the reviewer line names the system family, tier
+and reasoning setting, not a model identifier; the frozen copy is left as it was frozen.
 No finding, verdict or number changes.
+
+**What this review did not do (17 November 2026).** Lane R1 stopped at its findings
+freeze, 04:18:44Z, and wrote no After the Freeze, Relation to Earlier Reviews or Frozen
+Findings section.
+So the four measurements the text above defers to after the freeze were
+not made by this review: the square-by-square difference of the two 292 packings, the
+padding question, the contraction margins of the certificates and the houses, and the
+relation to the record’s packings and to the 146 packing #1006 names.
+They are the import lane’s own, made on its replay route: the identity receipts
+(`measure/identity.json` in the ozden-s292 and de-winter-s292 packets,
+`measure/identity-n262.json` and `-n295.json` in the de-winter-upper-bounds-262-295
+packet), the contraction receipts (`measure/contraction-*.json` in the same three
+packets), and the 146 lineage (`measure/identity-n146-lineage.json` in the
+de-winter-s292 packet), all on #1011, which registers the four results; and the margins
+of #1009’s certificates against #1006’s and #1007’s, in the import of issue 1009
+(think-i38n). No earlier review of these four certificates exists to compare with; the
+concurrent review of issue 1009 (#1014) concerns other files.
+The review confirms no significance score and puts no questions to the authors: the
+draft scores and the questions are carried by the import’s mapping (think-i38n) and the
+issues’ answer bead (think-qag8). In the Controls, the eight P0p controls, one a file,
+had nothing to test, since no pair touches in any of the eight files, as the plan
+allowed in advance; so 332 of the 340 controls had a subject.
+
+**Checking and re-running from this repository.** The checker list mixes three bases, so
+check it in parts, from this packet’s directory:
+
+```bash
+(cd programs && grep -E ' (r1_[a-z]+\.py|controls-plan\.json)$' ../frozen/checker-frozen-digests.txt \
+  | awk '{print $1"  "$2}' | sha256sum -c)
+grep -E ' out/' frozen/checker-frozen-digests.txt | awk '{print $1"  "$2}' | sha256sum -c
+grep -v '^#' frozen/findings-frozen-digest.txt | grep -E '^[0-9a-f]{64}  ' | sha256sum -c
+```
+
+The sources are retained in #1011’s three packets, four of the eight files gzipped.
+From `packing/`, this builds the `PIN` directory the README’s commands name and checks
+the eight sources against lines 5 to 12 of the checker list:
+
+```bash
+W=resources/web; R=$W/ozden-de-winter-1005-1007-review-2026-11-17; PIN=$(mktemp -d)
+mkdir -p $PIN/ozden-dec930b $PIN/dewinter-796ff3b/n292 $PIN/dewinter-853b92e/n262 \
+  $PIN/dewinter-853b92e/n295
+cp $W/ozden-s292-upper-bound-2026-11-16/source/n-292-candidate.yaml $PIN/ozden-dec930b/
+gunzip -c $W/ozden-s292-upper-bound-2026-11-16/source/n292-witness.json.gz \
+  > $PIN/ozden-dec930b/n292-witness.json
+gunzip -c $W/de-winter-s292-upper-bound-2026-11-16/source/n292/n292_exact.json.gz \
+  > $PIN/dewinter-796ff3b/n292/n292_exact.json
+cp $W/de-winter-s292-upper-bound-2026-11-16/source/n292/n292_witness.yaml \
+  $PIN/dewinter-796ff3b/n292/
+for n in 262 295; do
+  gunzip -c $W/de-winter-upper-bounds-262-295-2026-11-16/source/n$n/n${n}_exact.json.gz \
+    > $PIN/dewinter-853b92e/n$n/n${n}_exact.json
+  cp $W/de-winter-upper-bounds-262-295-2026-11-16/source/n$n/n${n}_witness.yaml \
+    $PIN/dewinter-853b92e/n$n/
+done
+sed -n 5,12p $R/frozen/checker-frozen-digests.txt | sed -E \
+  's#kenaznia-doga/s292-upper-bound@dec930b:#ozden-dec930b/#;
+   s#JoostdeWinter/square-packing@(796ff3b|853b92e):#dewinter-\1/#' \
+  | awk -v P=$PIN '{print $1"  "P"/"$2}' | sha256sum -c
+```
+
+With that `PIN`, the README’s commands re-run the checks, the twins and the controls.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
