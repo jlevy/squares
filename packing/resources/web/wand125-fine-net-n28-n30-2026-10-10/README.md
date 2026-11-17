@@ -4,8 +4,9 @@ Two commits of 10 October to wand125/square-packing add check2 measure certifica
 the 2,073-direction net of the n = 29 follow-up: `mixed_n28_L57425`, reporting
 $s(28) \ge 2297/400 = 5.7425$, and `mixed_n30_L58925`, reporting
 $s(30) \ge 2357/400 = 5.8925$. No issue reports either; the evening watch read of 10
-October found them. Both bounds remain unconfirmed here; no standing bound or rating
-changes.
+October found them. Since 4 November each bound is confirmed here by its complete
+replay and controls, re-implemented sharing the producer’s components, and holds both
+lower lanes of its case ([The Complete Replays](#the-complete-replays)).
 
 | Item | n = 28 | n = 30 |
 | --- | --- | --- |
@@ -13,7 +14,7 @@ changes.
 | Pinned revision | `36b85b9f37efa7cc5d4464805cfb0f2d21576267`, committed 2026-10-10T11:47:30Z | `ff9f2692afe7d1e65a51bb079b61b3710b97fc82`, committed 2026-10-10T14:12:31Z |
 | Release asset | `certificates__mixed_n28_L57425.tar.gz`, 627,191 bytes, SHA-256 `7d0f9107…3bf3` | `certificates__mixed_n30_L58925.tar.gz`, 638,622 bytes, SHA-256 `0d11fe05…61ba` |
 | Candidate | 631 positive rectangles, mass $2799999/100000$ | 463 positive rectangles, mass $2999999/100000$ |
-| Standing bound | T-107’s $1147/200$, both lanes; $+3/400$ | T-109’s $11767/2000$, both lanes; $+9/1000$ |
+| Standing bound on 10 October | T-107’s $1147/200$, both lanes; $+3/400$ | T-109’s $11767/2000$, both lanes; $+9/1000$ |
 | Other report | #446’s unadopted $287/50$ (`mixed_n28_L574`); $+1/400$ | none |
 
 Both declare core $4999/5000$ and the net `{"step": "1/5002", "last": 2072}`, and both
@@ -90,19 +91,63 @@ direction, and the original and the near-threshold mutant at the least-bound dir
 Both certificates together come to about 7.8 CPU-hours, above the 20 CPU-minute limit
 for a run inside an intake, so neither full net was run.
 
-## Review and Remaining Work
+## The Stage 4 Reviews
+
+The [mathematical review of 4 November](../../../../docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md)
+(think-4ul6) accepts both certificates, with findings F-1 to F-7, none blocking or
+major. Its programs, README and receipts are in [`review/`](review/README.md): the
+argument re-derived, every exact premise recomputed apart from the crate, direction 0
+of each net decided over its whole per-bin domain by code that shares nothing with the
+crate’s, the source’s run logs, receipts and 197/200 controls read exactly, and six
+directions of each run with the reviewed `sqverify-fast`, each row equal to the
+source’s. It decides no other direction; coverage there rests on the complete replays
+below.
+
+The
+[mathematical review of 11 November 2026](../../../../docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md)
+(think-4ul6, prompted again and separately; it did not read the first) also accepts
+both certificates, with no blocking or major finding. Its programs, README and outputs are in [`review/review-2026-11-11/`](review/review-2026-11-11/README.md):
+every exact premise recomputed, direction 0 of each net decided completely, the source’s
+logs and controls held to an exact evaluator at every least-bound centre and control
+witness, and a seeded search at 33 directions of each net. It also judges T-142’s axis
+gap of $2.15 \times 10^{-9}$ under #892’s enclosure rule: the gap lies within the source
+sweep’s own enclosure at that vertex, and the refusal has an exact witness.
 
 The source reports all 2,073 directions verified by its adaptation of this repository’s
 crate (build `ab6e33e1…`, 12 threads): in 771.6 seconds of wall for n = 28 and 1,790.1
 for n = 30. Its control scales every mass by 197/200 at 32 sampled directions and
 reports all 32 refused, 31 with an exact capture below the threshold, for each.
 These are attributed author outcomes; a sampled control does not replace the whole-net
-controls the records lane requires.
+controls below.
 
-A maintained replay must retain the complete direction outcomes of a census run, from a
-candidate retained where the census reads it, with the whole-net controls and restored
-positives, and must be followed by an independent review that reads each certificate.
-That work, with a budget for it, belongs to the import’s bead, think-i85v.
+## The Complete Replays
+
+The census route of the 6 October soundness review is a capture at every direction and
+the whole-net controls. The census read each candidate from `release/` and ran on 4
+November, after the review, one count at a time at two threads: each capture passed at
+all 2,073 directions, and `devtools.fine_net_followup capture-agreement` finds each
+direction’s node count and least certified bound equal to the source’s check2 log
+([n = 28](receipts/capture-agreement-n28.json),
+[n = 30](receipts/capture-agreement-n30.json)). Both whole-net controls were refused,
+the axis legs judged by #892’s enclosure rule: n = 28’s 99/100 axis gap,
+$2.15 \times 10^{-9}$ (the review’s F-7), would have failed the census’s former constant allowance
+of $10^{-9}$. #892 adopted that rule for the census; #543’s question to the owner on
+T-142’s control tolerance is still open. The receipts are in
+[the census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md).
+The two replays are evidence, with the stage 4 review of 4 November as their audit
+record; the review of 11 November joins it on the two report entries and in T-142’s and
+T-143’s reviews. T-142 and T-143 are V3/C3, and the case records at n = 28 and 30 take
+their values in both lower lanes. They ran on 4 November ahead of the owner’s order of 11 October, which queued
+them after the regularization of every packing (think-ux1v); the owner lifted that
+order on 17 November 2026 (think-fibh), and the adoption is in the pass of that day
+(#908).
+
+The two cost 5.5 CPU-hours at two threads: 17,764 CPU-seconds of capture (7,096.9
+and 10,667.1) and 2,096 of control (1,111 and 985), in 2.97 hours of wall. think-i85v
+had priced them at 3.28 to 4.5 and 4.49 to 6.1 CPU-hours, 7.8 to 10.6 in all. The
+captures ran 20 and 32 percent above the central price, near its upper end, as the
+preparation lane’s smoke run of 11 October had said; the controls, priced as large
+as the captures, took 16 and 9 percent of them.
 
 ## Sources and Notices
 
@@ -138,6 +183,8 @@ direction, and each commit names Claude Opus 5.5 as co-author.
 | --- | --- | --- | --- |
 | `release/certificates/mixed_n28_L57425/candidate.json.gz` | upstream | `83973a7165fd67ef82fbf73083fbc27c7e5c690b` | `5ef20511e18a9997dfcc4cef773b65eac83dfe59e6a56fa810f3c789076c0107` |
 | `release/certificates/mixed_n30_L58925/candidate.json.gz` | upstream | `6fc73a25e66e7c2e2390c43f767a9fd14c3ef09e` | `981a17db67b24f99d64e176c892655c27fde67f8e99f2875a8f1d55ff3d0677e` |
+| `review/review-2026-11-11/outputs/receipts-check.json.gz` | receipt | `86dfc2079d43cf9d100239e73e4f703a961717a8` | `ba49bfbf61129b246a2e8101ab4548085e39aeaaf7f3c0d6f694913c366808db` |
+| `review/review-2026-11-11/outputs/direction-sample.json.gz` | receipt | `e4f99940726339b6724ede25d0a2630c436e6761` | `382e4e50a2911d329368d5093f1dc1d821194351b3d7d6e3756143f5a3f0f23f` |
 
 ## Original Gzip Files
 

@@ -1,0 +1,175 @@
+{
+ "program": "premises.py",
+ "status": "PREMISES_HOLD",
+ "cpu_seconds": 0.52,
+ "certificates": {
+  "mixed_n28_L57425": {
+   "certificate": "mixed_n28_L57425",
+   "file": "candidate.json.gz",
+   "stored_sha256": "4f7afe456e6ecf0a8c905004c58413b7a09bf20392cee50669a86c86aba090d4",
+   "sha256": "5ef20511e18a9997dfcc4cef773b65eac83dfe59e6a56fa810f3c789076c0107",
+   "candidate_digest": "a1ea15ca8c4c9751029ea5d3bf98ad23f57a69a31accf04723587717888f6dd4",
+   "claim": {
+    "n": 28,
+    "L": "2297/400",
+    "B": "4999/5000",
+    "step": "1/5002",
+    "last": 2072,
+    "total_mass": "2799999/100000"
+   },
+   "rows": {
+    "count": 631,
+    "all_inside_with_positive_extent": true,
+    "all_masses_positive": true,
+    "all_coordinates_multiples_of_1e-17": true,
+    "mass_sum": "2799999/100000",
+    "mass_gap_below_n": "1/100000",
+    "densest_row": {
+     "index": 216,
+     "mass_over_area": 616441.1053393667,
+     "image_density": 77055.13816742084
+    },
+    "heaviest_row": {
+     "index": 8,
+     "mass": 1.3323863679192334,
+     "rectangle": [
+      0.5759876008076157,
+      0.9987997098542816,
+      0.8160137374142423,
+      0.9997999037677782
+     ]
+    },
+    "least_row_mass": 3.265951151135738e-05,
+    "thin_strips": {
+     "count": 339,
+     "mass": 19.22103309551349
+    }
+   },
+   "expansion": {
+    "images": 5048,
+    "distinct_after_merge": 5036,
+    "integral": "2799999/100000",
+    "d4_invariant": true
+   },
+   "lemma_N0": {
+    "a_D_positive_and_count": true,
+    "b_B_1_plus_D": "25009997/25010000",
+    "b_holds": true,
+    "c_reach": "367/6255001",
+    "c_holds": true,
+    "d_tmax": "1036/2501",
+    "d_holds": true,
+    "e_tangent_form": "500400014977/500400075000",
+    "e_holds": true,
+    "sharp_extent": "500400014977/500400085000",
+    "sharp_holds": true,
+    "last_bin_lower_end": "4143/10004",
+    "last_bin_lower_end_reach": "-22423/100080016",
+    "last_bin_needed": true
+   },
+   "net_geometry": {
+    "bins": 2073,
+    "ends_checked": 4146,
+    "failures": [],
+    "largest_extent": "500400014977/500400085000",
+    "largest_extent_float": 0.999999860065971,
+    "largest_extent_at": [
+     0,
+     "upper"
+    ],
+    "clearance": 1.3993402898802466e-07,
+    "last_bin_upper_end_past_tan_pi_8": true,
+    "narrowest_domain_width": "40597410341/9379557200",
+    "narrowest_domain_width_float": 4.328286450558668,
+    "least_far_corner_clearance": 1.0994302209440976e-07,
+    "least_far_corner_clearance_at": 1
+   },
+   "failures": [],
+   "status": "PREMISES_HOLD"
+  },
+  "mixed_n30_L58925": {
+   "certificate": "mixed_n30_L58925",
+   "file": "candidate.json.gz",
+   "stored_sha256": "20856f763ec4a48a9450e362dd185c239366a5b92d8e6c1398f45f37d122565b",
+   "sha256": "981a17db67b24f99d64e176c892655c27fde67f8e99f2875a8f1d55ff3d0677e",
+   "candidate_digest": "716bcb62b5d6ce733968985f9efd0a5456915c135cd72feca4bb4983cb11380a",
+   "claim": {
+    "n": 30,
+    "L": "2357/400",
+    "B": "4999/5000",
+    "step": "1/5002",
+    "last": 2072,
+    "total_mass": "2999999/100000"
+   },
+   "rows": {
+    "count": 463,
+    "all_inside_with_positive_extent": true,
+    "all_masses_positive": true,
+    "all_coordinates_multiples_of_1e-17": true,
+    "mass_sum": "2999999/100000",
+    "mass_gap_below_n": "1/100000",
+    "densest_row": {
+     "index": 156,
+     "mass_over_area": 425643.6529680611,
+     "image_density": 53205.45662100764
+    },
+    "heaviest_row": {
+     "index": 21,
+     "mass": 2.721284737414362,
+     "rectangle": [
+      0.5263253682273109,
+      0.9987901666002319,
+      0.9941392490269987,
+      0.9997999964827032
+     ]
+    },
+    "least_row_mass": 6.988071835393085e-05,
+    "thin_strips": {
+     "count": 243,
+     "mass": 23.171322281939222
+    }
+   },
+   "expansion": {
+    "images": 3704,
+    "distinct_after_merge": 3672,
+    "integral": "2999999/100000",
+    "d4_invariant": true
+   },
+   "lemma_N0": {
+    "a_D_positive_and_count": true,
+    "b_B_1_plus_D": "25009997/25010000",
+    "b_holds": true,
+    "c_reach": "367/6255001",
+    "c_holds": true,
+    "d_tmax": "1036/2501",
+    "d_holds": true,
+    "e_tangent_form": "500400014977/500400075000",
+    "e_holds": true,
+    "sharp_extent": "500400014977/500400085000",
+    "sharp_holds": true,
+    "last_bin_lower_end": "4143/10004",
+    "last_bin_lower_end_reach": "-22423/100080016",
+    "last_bin_needed": true
+   },
+   "net_geometry": {
+    "bins": 2073,
+    "ends_checked": 4146,
+    "failures": [],
+    "largest_extent": "500400014977/500400085000",
+    "largest_extent_float": 0.999999860065971,
+    "largest_extent_at": [
+     0,
+     "upper"
+    ],
+    "clearance": 1.3993402898802466e-07,
+    "last_bin_upper_end_past_tan_pi_8": true,
+    "narrowest_domain_width": "42004343921/9379557200",
+    "narrowest_domain_width_float": 4.478286450558668,
+    "least_far_corner_clearance": 1.0994302209440976e-07,
+    "least_far_corner_clearance_at": 1
+   },
+   "failures": [],
+   "status": "PREMISES_HOLD"
+  }
+ }
+}

@@ -2949,8 +2949,8 @@ def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
 ) -> None:
     """`--refresh --n` writes the named records and does not replay n108's later layer,
     which the full refresh refuses (review A1 of #692). The named record is n = 70's: n
-    = 29's was until T-132 raised its lower lanes on 4 November 2026, and its full
-    refresh now refuses that later layer as n108's does."""
+    = 29's was until T-132 raised its lower lanes in the pass of 17 November 2026, and its
+    full refresh now refuses that later layer as n108's does."""
     moves = [move for move in replayed if move.n in (70, 108)]
     marker = f"**House adoption, {adopt.day_words(70)}.**"
     paths = {}

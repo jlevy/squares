@@ -1635,14 +1635,11 @@ def test_a_landed_unfinished_confirmation_fails_the_register_gate(
     )
 
 
-#: The prices the 10 October packets and beads give the four imports of that day: the
-#: rung, the central estimate and the upper end in CPU-hours, and the bead that owns it.
-#: The upper ends of the three fine-net imports are the preparation lane's revised prices
-#: of 11 October, which the final review's F1-3 asked the record to carry. T-132's census
-#: ran on 4 November inside its price (think-r333), so it carries none since.
+#: The prices the 10 October packets and beads give the imports of that day still
+#: unconfirmed: the rung, the central estimate and the upper end in CPU-hours, and the bead
+#: that owns it. The three fine-net imports, T-132, T-142 and T-143, left in the pass of 17
+#: November 2026, when their censuses of 4 November, controls and reviews landed.
 PACKET_PRICES = {
-    "T-142": ("C3", 3.28, 4.5, "think-i85v"),
-    "T-143": ("C3", 4.49, 6.1, "think-i85v"),
     "T-144": ("C3", 11.24, 23, "think-nd7g"),
     "T-081": ("C3", 118, 435, "think-hwpr"),
 }

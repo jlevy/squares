@@ -9,6 +9,8 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-31-evand-s29-minpoly-validation.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md, role: review, authority: record, lifecycle: retained}
@@ -673,6 +675,7 @@ documents:
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-446-release-2026-10-08/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n31-2026-10-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n37-n39-n44-2026-10-13/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n29-2026-10-10/README.md, role: source-index, authority: record, lifecycle: retained}

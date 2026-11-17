@@ -42,9 +42,9 @@ The
 read the certificate before either run was mapped.
 On 4 November 2026 this census, its controls and the stage 4 review ran ahead of the
 owner’s order of 11 October, which queued the replay after the regularization of every
-packing (think-ux1v); the owner has not lifted that order, and the adoption is pending
-the owner’s decision on it (#909, think-r333). This README is a hand-maintained index of
-the folder, not a generated view.
+packing (think-ux1v); the owner lifted that order on 17 November 2026 (think-fibh), and
+the case record adopts the bound in the pass of that day (#909, think-r333). This README
+is a hand-maintained index of the folder, not a generated view.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

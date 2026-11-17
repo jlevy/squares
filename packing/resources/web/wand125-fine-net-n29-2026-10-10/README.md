@@ -10,9 +10,9 @@ $1/200$. The certificate’s own README compares it instead with `mixed_n29_L581
 ($2327/400$, at `dd6a7cc`), which no issue reported, and which it exceeds by $1/400$.
 Since 4 November 2026 a complete replay here, its whole-net controls and a stage 4
 review confirm it (T-132, V3/C3; [Review and Replay](#review-and-replay)), and both
-lower lanes at n = 29 hold it on the branch that records them. They ran ahead of the
+lower lanes at n = 29 hold it since the pass of 17 November 2026. They ran ahead of the
 owner’s order of 11 October, which queued the replay after the regularization of every
-packing (think-ux1v); the adoption is pending the owner’s decision on that order (#909).
+packing (think-ux1v); the owner lifted that order on 17 November (think-fibh, #909).
 
 | Item | Value |
 | --- | --- |
@@ -124,8 +124,8 @@ The receipts are in the
 and with the review they put T-132 at V3/C3: n29’s lower lanes hold $291/50$. On 4
 November 2026 this census, its controls and the stage 4 review ran ahead of the owner’s
 order of 11 October, which queued the replay after the regularization of every packing
-(think-ux1v); the owner has not lifted that order, and the adoption is pending the
-owner’s decision on it (#909, think-r333).
+(think-ux1v); the owner lifted that order on 17 November 2026 (think-fibh), and the case
+record adopts the bound in the pass of that day (#909, think-r333).
 
 ## Sources and Notices
 

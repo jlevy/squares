@@ -483,6 +483,11 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # issue-1001 certificates (T-306, T-307) in the same pass.
         "T-268",
         "T-275",
+        # T-142's s(28) >= 2297/400 and T-143's s(30) >= 2357/400 supersede Hosono's check2
+        # bounds of 6 October at n = 28 and 30 (T-107, T-109), one count each, in both
+        # lanes, on their censuses of 4 November, adopted in the pass of 17 November 2026.
+        "T-107",
+        "T-109",
         # T-132's fine-net bound supersedes Hosono's check2 bound of 6 October at n = 29
         # (T-108), its one count, in both lanes, adopted in the pass of 17 November 2026.
         "T-108",
