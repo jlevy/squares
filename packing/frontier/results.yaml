@@ -16010,10 +16010,12 @@ results:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n28_L57425.control.json
     next_rung: >-
-      None for the bound. V4 and C4 need an explicit human oversight record: two
-      adversarial AI reviews by distinct reviewers, separately prompted lanes with no
-      shared context (4 and 11 November), are retained and both accept the claim. An
-      independent full implementation would add implementation diversity.
+      None for the bound. V4 and C4 need an explicit human oversight record. Two
+      accepted adversarial AI reviews are retained, of 4 and 11 November, separately
+      prompted Claude lanes with no shared context; whether the second counts as a
+      distinct reviewer is the owner's question on jlevy/squares#543, which the
+      oversight record states. An independent full implementation would add
+      implementation diversity.
     notes: >-
       From the complete maintained capture of 4 November 2026 (two threads, 7,096.9 CPU
       seconds, 594,284,796 boxes, least certified bound 1.0000000000106595 at direction
@@ -16189,10 +16191,12 @@ results:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n30_L58925.control.json
     next_rung: >-
-      None for the bound. V4 and C4 need an explicit human oversight record: two
-      adversarial AI reviews by distinct reviewers, separately prompted lanes with no
-      shared context (4 and 11 November), are retained and both accept the claim. An
-      independent full implementation would add implementation diversity.
+      None for the bound. V4 and C4 need an explicit human oversight record. Two
+      accepted adversarial AI reviews are retained, of 4 and 11 November, separately
+      prompted Claude lanes with no shared context; whether the second counts as a
+      distinct reviewer is the owner's question on jlevy/squares#543, which the
+      oversight record states. An independent full implementation would add
+      implementation diversity.
     notes: >-
       From the complete maintained capture of 4 November 2026 (two threads, 10,667.1 CPU
       seconds, 702,952,674 boxes, least certified bound 1.000000000029295 at direction
