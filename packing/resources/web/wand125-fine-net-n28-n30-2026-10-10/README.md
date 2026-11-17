@@ -91,7 +91,7 @@ direction, and the original and the near-threshold mutant at the least-bound dir
 Both certificates together come to about 7.8 CPU-hours, above the 20 CPU-minute limit
 for a run inside an intake, so neither full net was run.
 
-## The Stage 4 Review
+## The Stage 4 Reviews
 
 The [mathematical review of 4 November](../../../../docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md)
 (think-4ul6) accepts both certificates, with findings F-1 to F-7, none blocking or
@@ -102,6 +102,16 @@ crate’s, the source’s run logs, receipts and 197/200 controls read exactly, 
 directions of each run with the reviewed `sqverify-fast`, each row equal to the
 source’s. It decides no other direction; coverage there rests on the complete replays
 below.
+
+The
+[mathematical review of 11 November 2026](../../../../docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md)
+(think-4ul6, prompted again and separately; it did not read the first) also accepts
+both certificates, with no blocking or major finding. Its programs, README and outputs are in [`review/review-2026-11-11/`](review/review-2026-11-11/README.md):
+every exact premise recomputed, direction 0 of each net decided completely, the source’s
+logs and controls held to an exact evaluator at every least-bound centre and control
+witness, and a seeded search at 33 directions of each net. It also judges T-142’s axis
+gap of $2.15 \times 10^{-9}$ under #892’s enclosure rule: the gap lies within the source
+sweep’s own enclosure at that vertex, and the refusal has an exact witness.
 
 The source reports all 2,073 directions verified by its adaptation of this repository’s
 crate (build `ab6e33e1…`, 12 threads): in 771.6 seconds of wall for n = 28 and 1,790.1
@@ -124,11 +134,13 @@ $2.15 \times 10^{-9}$ (the review’s F-7), would have failed the census’s for
 of $10^{-9}$. #892 adopted that rule for the census; #543’s question to the owner on
 T-142’s control tolerance is still open. The receipts are in
 [the census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md).
-The two replays are evidence, with the stage 4 review as their audit record: T-142 and
-T-143 are V3/C3, and the case records at n = 28 and 30 take their values in both lower
-lanes. They ran on 4 November ahead of the owner’s order of 11 October, which queued
-them after the regularization of every packing (think-ux1v); the adoption is pending
-the owner’s decision on that order (#908).
+The two replays are evidence, with the stage 4 review of 4 November as their audit
+record; the review of 11 November joins it on the two report entries and in T-142’s and
+T-143’s reviews. T-142 and T-143 are V3/C3, and the case records at n = 28 and 30 take
+their values in both lower lanes. They ran on 4 November ahead of the owner’s order of 11 October, which queued
+them after the regularization of every packing (think-ux1v); the owner lifted that
+order on 17 November 2026 (think-fibh), and the adoption is in the pass of that day
+(#908).
 
 The two cost 5.5 CPU-hours at two threads: 17,764 CPU-seconds of capture (7,096.9
 and 10,667.1) and 2,096 of control (1,111 and 985), in 2.97 hours of wall. think-i85v
@@ -171,6 +183,8 @@ direction, and each commit names Claude Opus 5.5 as co-author.
 | --- | --- | --- | --- |
 | `release/certificates/mixed_n28_L57425/candidate.json.gz` | upstream | `83973a7165fd67ef82fbf73083fbc27c7e5c690b` | `5ef20511e18a9997dfcc4cef773b65eac83dfe59e6a56fa810f3c789076c0107` |
 | `release/certificates/mixed_n30_L58925/candidate.json.gz` | upstream | `6fc73a25e66e7c2e2390c43f767a9fd14c3ef09e` | `981a17db67b24f99d64e176c892655c27fde67f8e99f2875a8f1d55ff3d0677e` |
+| `review/review-2026-11-11/outputs/receipts-check.json.gz` | receipt | `86dfc2079d43cf9d100239e73e4f703a961717a8` | `ba49bfbf61129b246a2e8101ab4548085e39aeaaf7f3c0d6f694913c366808db` |
+| `review/review-2026-11-11/outputs/direction-sample.json.gz` | receipt | `e4f99940726339b6724ede25d0a2630c436e6761` | `382e4e50a2911d329368d5093f1dc1d821194351b3d7d6e3756143f5a3f0f23f` |
 
 ## Original Gzip Files
 

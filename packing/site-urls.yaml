@@ -15828,7 +15828,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-11-04'
+  lastmod: '2026-11-17'
   status: live
   identity:
     kind: lower-bound
@@ -15857,17 +15857,21 @@ urls:
     - packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/receipts/capture-agreement-n28.json
     - packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/README.md
     - docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md
+    - packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md
+    - docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md
     - packing/benchmarks/measure-verifier/census-mixed/census.json
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n28_L57425.jsonl.gz
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n28_L57425.control.json
   amendments:
-  - date: '2026-11-04'
+  - date: '2026-11-17'
     reason: The complete sqverify-fast census replay of mixed_n28_L57425 at all 2,073 directions,
-      after the stage 4 review of 4 November (think-4ul6), with its whole-net control refused under
-      the census's enclosure rule for the axis, is cited as replay evidence; the retained candidate,
-      release record, capture agreement, review, census receipts and census record join the artifacts,
-      and the result rises to V3/C3. The value, scope and attribution are unchanged.
+      run on 4 November after the stage 4 review of that day (think-4ul6), with its whole-net control
+      refused under the census's enclosure rule for the axis, is cited as replay evidence; the retained
+      candidate, release record, capture agreement, both stage 4 reviews (4 and 11 November), census
+      receipts and census record join the artifacts, and the result rises to V3/C3 in the pass of
+      17 November, when the owner lifted the hold of 11 October (think-fibh). The value, scope and
+      attribution are unchanged.
     previous:
       kind: lower-bound
       scope:
@@ -15895,7 +15899,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-11-04'
+  lastmod: '2026-11-17'
   status: live
   identity:
     kind: lower-bound
@@ -15924,17 +15928,21 @@ urls:
     - packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/receipts/capture-agreement-n30.json
     - packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/README.md
     - docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md
+    - packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md
+    - docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md
     - packing/benchmarks/measure-verifier/census-mixed/census.json
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n30_L58925.jsonl.gz
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n30_L58925.control.json
   amendments:
-  - date: '2026-11-04'
+  - date: '2026-11-17'
     reason: The complete sqverify-fast census replay of mixed_n30_L58925 at all 2,073 directions,
-      after the stage 4 review of 4 November (think-4ul6), with its whole-net control refused under
-      the census's enclosure rule for the axis, is cited as replay evidence; the retained candidate,
-      release record, capture agreement, review, census receipts and census record join the artifacts,
-      and the result rises to V3/C3. The value, scope and attribution are unchanged.
+      run on 4 November after the stage 4 review of that day (think-4ul6), with its whole-net control
+      refused under the census's enclosure rule for the axis, is cited as replay evidence; the retained
+      candidate, release record, capture agreement, both stage 4 reviews (4 and 11 November), census
+      receipts and census record join the artifacts, and the result rises to V3/C3 in the pass of
+      17 November, when the owner lifted the hold of 11 October (think-fibh). The value, scope and
+      attribution are unchanged.
     previous:
       kind: lower-bound
       scope:

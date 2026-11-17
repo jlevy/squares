@@ -772,6 +772,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [wand125’s Fine-Net Certificates for $s(28) \ge 2297/400$ and $s(30) \ge 2357/400$: Mathematical Review](docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md) | dated review record | record | retained | — |
 | [Mathematical Review: wand125’s Fine-Net Lower Bounds at n = 28 and n = 30](docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md) | dated review record | record | retained | — |
 | [Review: The Validation of Daniel’s Degree-7213 Minimal Polynomial of the s(29) Record Side](docs/project/reviews/review-2026-10-31-evand-s29-minpoly-validation.md) | dated review record | record | retained | — |
 | [wand125 Rectangle Certificates of 27 and 28 September: Review of T-046 and Its Census Route](docs/project/reviews/review-2026-10-26-wand125-rectangle-certificates-t046.md) | dated review record | record | retained | — |

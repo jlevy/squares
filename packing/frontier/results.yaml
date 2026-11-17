@@ -15960,10 +15960,11 @@ results:
     significance:
       score: 3
       rationale: >-
-        Scored as a claim on 11 October: the strongest lower bound on record at n = 28,
-        3/400 above T-107, by the certificate kind and declared net of T-102, T-103 and
-        T-132, with no new technique, at S3 as T-102 to T-111 and T-132 are. The
-        complete replay of 4 November passed after it and leaves the score as it was.
+        Scored as a claim on 11 October: it raises n = 28's verified lower bound by 3/400
+        above T-107, below T-192's reported 1149/200, by the certificate kind and declared
+        net of T-102, T-103 and T-132, with no new technique, at S3 as T-102 to T-111 and
+        T-132 are. The complete replay of 4 November passed after it and leaves the score
+        as it was.
       scored: '2026-10-11'
       by: >-
         the 11 October final review
@@ -15998,6 +15999,9 @@ results:
         packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/receipts/capture-agreement-n28.json
       - packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/README.md
       - docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md
+      - >-
+        packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md
+      - docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md
       - packing/benchmarks/measure-verifier/census-mixed/census.json
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md
@@ -16006,39 +16010,43 @@ results:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n28_L57425.control.json
     next_rung: >-
-      None for the bound. V4 and C4 need a second qualifying adversarial AI review by a
-      distinct reviewer and an explicit human oversight record; one AI review, of 4
-      November, is retained. An independent full implementation would add implementation
-      diversity.
+      None for the bound. V4 and C4 need an explicit human oversight record: two
+      adversarial AI reviews by distinct reviewers, separately prompted lanes with no
+      shared context (4 and 11 November), are retained and both accept the claim. An
+      independent full implementation would add implementation diversity.
     notes: >-
       From the complete maintained capture of 4 November 2026 (two threads, 7,096.9 CPU
       seconds, 594,284,796 boxes, least certified bound 1.0000000000106595 at direction
       1088, each direction's node count and least bound equal to the source's check2
       log, receipts/capture-agreement-n28.json in the packet), its whole-net control
       receipt of the same day (670 s of wall for the 99/100 sweep at two threads) and
-      the mapped stage 4 review of 4 November (think-4ul6), which read the certificate.
+      the mapped stage 4 reviews of 4 and 11 November (think-4ul6), each of which read
+      the certificate and accepted it. Each review's own runs are samples, cited by
+      n-028.md, and set no rung.
 
-      The review measured the 99/100 mutant's axis gap at 2.15e-9 (its F-7), beyond the
-      census's former constant allowance of 1e-9; the control judges that leg by the
-      enclosure rule that #892 adopted for the census, and ends CONTROLS_REFUSED: the
-      capture lies in [0.9914000062838418, 0.991400010590911], whose lower end is the
-      crate's bound to the bit. #543's question to the owner on this control's tolerance
-      (widen the allowance, derive it from the sweep's enclosure, or confirm by another
-      control) is still open; #892's rule is not the owner's answer to it.
+      The review of 4 November measured the 99/100 mutant's axis gap at 2.15e-9 (its
+      F-7), beyond the census's former constant allowance of 1e-9; the control judges
+      that leg by the enclosure rule that #892 adopted for the census, and ends
+      CONTROLS_REFUSED: the capture lies in [0.9914000062838418, 0.991400010590911],
+      whose lower end is the crate's bound to the bit. #543's question to the owner on
+      this control's tolerance (widen the allowance, derive it from the sweep's
+      enclosure, or confirm by another control) is still open; #892's rule is not the
+      owner's answer to it.
 
-      On 4 November 2026 this census, its controls and the stage 4 review ran ahead of
-      the owner's order of 11 October, which queued the replay after the regularization
-      of every packing (think-ux1v); the owner has not lifted that order, and the
-      adoption is pending the owner's decision on it (#908, think-i85v).
+      On 4 November 2026 this census, its controls and the first stage 4 review ran
+      ahead of the owner's order of 11 October, which queued the replay after the
+      regularization of every packing (think-ux1v). The owner lifted that order on 17
+      November 2026 (think-fibh), and the case records adopt the bound in the pass of
+      that day (#908, think-i85v).
 
       The score of 11 October was given to the claim; the complete replay of 4 November
       passed after it and leaves the score as it was. The case records' lower lanes move
       to 2297/400; T-107 keeps its claim at n = 28, now superseded there. The issue-446
       report of 287/50, which it passes, stays where it is. The pre-publication receipt
-      repeats the source's check2 run, so one complete author run is reported (the
-      review's F-4). The release asset's six data members are retained in Git under
-      OR-18; its nested verifier archive and sealed inner bundle are pinned by digest
-      and not opened.
+      repeats the source's check2 run, so one complete author run is reported (F-4 of
+      the review of 4 November). The release asset's six data members are retained in
+      Git under OR-18; its nested verifier archive and sealed inner bundle are pinned by
+      digest and not opened.
     controls:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n28_L57425.control.json
@@ -16061,6 +16069,29 @@ results:
           read exactly (62 oblique witnesses, 120 leaf poses); twelve directions run with
           the reviewed sqverify-fast, each row equal to the source's. No full replay;
           coverage at the other directions rests on the census.
+        verdict: accepted
+        covers: [T-142, T-143]
+      - path: docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md
+        kind: adversarial
+        reviewer: >-
+          Claude (Anthropic), the tbd-strong-max sub-agent at maximum reasoning, lane L93,
+          the stage 4 mathematical review of think-i85v (think-4ul6), prompted separately
+          from the replay lane and sharing none of its context beyond the brief and the
+          committed record, running only programs of its own at most two at a time, and
+          barred from the source's adapted crate and this repository's sqverify_fast source
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-11'
+        scope: >-
+          wand125's mixed_n28_L57425 at 36b85b9 and mixed_n30_L58925 at ff9f269, as the
+          n28/n30 packet retains them: the argument from certificate to bound re-derived
+          (the D4 fold, lemma N0 on the 1/5002 net, the per-bin domains, the quarter-turn
+          quadrant, the count); every exact premise; direction 0 of each net decided
+          completely; the source's check2 receipts, run logs and 197/200 controls read and
+          held to an exact evaluator at every least-bound centre and control witness; a
+          seeded search at 33 directions of each net; T-142's axis gap under #892's
+          enclosure rule; T-142, T-143, their evidence entries and n-028.md and n-030.md on
+          main at 8afdabe8f; and the significance
         verdict: accepted
         covers: [T-142, T-143]
 
@@ -16147,6 +16178,9 @@ results:
         packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/receipts/capture-agreement-n30.json
       - packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/README.md
       - docs/project/reviews/review-2026-11-04-wand125-fine-net-n28-n30.md
+      - >-
+        packing/resources/web/wand125-fine-net-n28-n30-2026-10-10/review/review-2026-11-11/README.md
+      - docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md
       - packing/benchmarks/measure-verifier/census-mixed/census.json
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/README.md
@@ -16155,36 +16189,39 @@ results:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n30_L58925.control.json
     next_rung: >-
-      None for the bound. V4 and C4 need a second qualifying adversarial AI review by a
-      distinct reviewer and an explicit human oversight record; one AI review, of 4
-      November, is retained. An independent full implementation would add implementation
-      diversity.
+      None for the bound. V4 and C4 need an explicit human oversight record: two
+      adversarial AI reviews by distinct reviewers, separately prompted lanes with no
+      shared context (4 and 11 November), are retained and both accept the claim. An
+      independent full implementation would add implementation diversity.
     notes: >-
       From the complete maintained capture of 4 November 2026 (two threads, 10,667.1 CPU
       seconds, 702,952,674 boxes, least certified bound 1.000000000029295 at direction
       1585, each direction's node count and least bound equal to the source's check2
       log, receipts/capture-agreement-n30.json in the packet), its whole-net control
       receipt of the same day (589 s of wall for the 99/100 sweep at two threads) and
-      the mapped stage 4 review of 4 November (think-4ul6), which read the certificate.
+      the mapped stage 4 reviews of 4 and 11 November (think-4ul6), each of which read
+      the certificate and accepted it. Each review's own runs are samples, cited by
+      n-030.md, and set no rung.
 
-      The review measured the 99/100 mutant's axis gap at 1.9e-10; the control judges
-      that leg by the enclosure rule that #892 adopted for the census, and ends
-      CONTROLS_REFUSED: the capture lies in [0.9917353545019875, 0.9917353548785199],
-      whose lower end is the crate's bound to the bit. The gap is inside the former
-      constant allowance too.
+      The review of 4 November measured the 99/100 mutant's axis gap at 1.9e-10; the
+      control judges that leg by the enclosure rule that #892 adopted for the census,
+      and ends CONTROLS_REFUSED: the capture lies in [0.9917353545019875,
+      0.9917353548785199], whose lower end is the crate's bound to the bit. The gap is
+      inside the former constant allowance too.
 
-      On 4 November 2026 this census, its controls and the stage 4 review ran ahead of
-      the owner's order of 11 October, which queued the replay after the regularization
-      of every packing (think-ux1v); the owner has not lifted that order, and the
-      adoption is pending the owner's decision on it (#908, think-i85v).
+      On 4 November 2026 this census, its controls and the first stage 4 review ran
+      ahead of the owner's order of 11 October, which queued the replay after the
+      regularization of every packing (think-ux1v). The owner lifted that order on 17
+      November 2026 (think-fibh), and the case records adopt the bound in the pass of
+      that day (#908, think-i85v).
 
       The score of 11 October was given to the claim; the complete replay of 4 November
       passed after it and leaves the score as it was. The case records' lower lanes move
       to 2357/400; T-109 keeps its claim at n = 30, now superseded there. The
       pre-publication receipt is the very run record the check2 receipt embeds, so one
-      complete author run is reported (the review's F-4). The release asset's six data members are
-      retained in Git under OR-18; its nested verifier archive and sealed inner bundle
-      are pinned by digest and not opened.
+      complete author run is reported (F-4 of the review of 4 November). The release
+      asset's six data members are retained in Git under OR-18; its nested verifier
+      archive and sealed inner bundle are pinned by digest and not opened.
     controls:
       - >-
         packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n30_L58925.control.json
@@ -16207,6 +16244,29 @@ results:
           read exactly (62 oblique witnesses, 120 leaf poses); twelve directions run with
           the reviewed sqverify-fast, each row equal to the source's. No full replay;
           coverage at the other directions rests on the census.
+        verdict: accepted
+        covers: [T-142, T-143]
+      - path: docs/project/reviews/review-2026-11-11-wand125-fine-net-n28-n30.md
+        kind: adversarial
+        reviewer: >-
+          Claude (Anthropic), the tbd-strong-max sub-agent at maximum reasoning, lane L93,
+          the stage 4 mathematical review of think-i85v (think-4ul6), prompted separately
+          from the replay lane and sharing none of its context beyond the brief and the
+          committed record, running only programs of its own at most two at a time, and
+          barred from the source's adapted crate and this repository's sqverify_fast source
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-11'
+        scope: >-
+          wand125's mixed_n28_L57425 at 36b85b9 and mixed_n30_L58925 at ff9f269, as the
+          n28/n30 packet retains them: the argument from certificate to bound re-derived
+          (the D4 fold, lemma N0 on the 1/5002 net, the per-bin domains, the quarter-turn
+          quadrant, the count); every exact premise; direction 0 of each net decided
+          completely; the source's check2 receipts, run logs and 197/200 controls read and
+          held to an exact evaluator at every least-bound centre and control witness; a
+          seeded search at 33 directions of each net; T-142's axis gap under #892's
+          enclosure rule; T-142, T-143, their evidence entries and n-028.md and n-030.md on
+          main at 8afdabe8f; and the significance
         verdict: accepted
         covers: [T-142, T-143]
 
@@ -27491,7 +27551,7 @@ results:
       mass scaled by 985/1000.
 
       The value is above T-142's 2297/400 = 5.7425, the verified and reported lower
-      bound at n = 28 since 4 November, by 1/400, above the 287/50 that
+      bound at n = 28 since 17 November, by 1/400, above the 287/50 that
       jlevy/squares#446 reported on 8 October, never adopted, by 1/200, and above
       T-107's 1147/200 = 5.735, which held both lanes until then, by 1/100.
 
@@ -27618,7 +27678,7 @@ results:
       October review's qualifying read of the first program and of this certificate
       (docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md),
       which no run here has yet followed. The case record's lanes do not take it, so the
-      entry is pending adoption at n = 28, where T-142 holds both lanes since 4
+      entry is pending adoption at n = 28, where T-142 holds both lanes since 17
       November. The
       release asset is pinned by size and digest and kept outside Git; the directory's MIT
       documents and check2's source are retained. The source's least certified bounds
@@ -27626,7 +27686,7 @@ results:
       threshold, not the certificate's slack.
 
       Every lower bound the register holds at 28 is below it: T-142's 2297/400, the same
-      author's earlier certificate, which holds both lanes of the case since 4 November,
+      author's earlier certificate, which holds both lanes of the case since 17 November,
       by 1/400; T-107's 1147/200, which held them until then, by 1/100; T-068's and T-074's 2289/400 by 9/400; T-046's 143/25 by 1/40;
       T-045's 28/5 by 29/200; T-047's 1377/250 by 237/1000; and the closed forms of
       T-007 and T-083, about 5.359 and 5.322, by more. The per-count rule records it

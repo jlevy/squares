@@ -2072,9 +2072,9 @@ sources:
       with their data in release square-lower-bounds-v1; the release assets are pinned by size and digest,
       and since 4 November 2026 their six data members each are retained in the packet's release/.
       Maintained measure, declared-net and full check2 premises accepted at both. The stage 4
-      review of 4 November 2026 accepts both certificates, and the complete native captures and
-      whole-net controls of that day passed, so T-142 and T-143 are V3/C3 and hold both lower lanes
-      at n28 and n30. The enclosing MIT notice does not settle
+      reviews of 4 and 11 November 2026 accept both certificates, and the complete native
+      captures and whole-net controls of 4 November passed, so T-142 and T-143 are V3/C3 and hold
+      both lower lanes at n28 and n30 since the pass of 17 November. The enclosing MIT notice does not settle
       redistribution of the nested verifier, which adapts this project's sqverify_fast, so a maintained
       replay is not another independent implementation.
   - key: '[wand125 fine-net n31 2026-10-11]'
