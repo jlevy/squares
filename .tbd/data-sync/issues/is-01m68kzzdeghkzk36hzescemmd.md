@@ -5,7 +5,7 @@ title: Register the candidates below the new houses at 130, 293 and 307 (regular
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: bold-ritchie-l8
 labels:
   - validation
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T09:17:32.462Z
-updated_at: 2026-11-09T23:40:42.735Z
+updated_at: 2026-11-17T03:07:28.495Z
 started_at: 2026-10-31T11:48:22.244Z
 ---
 Evan Daniel's regularizer (regularize_evand run, run adopt-2026-10-31-n130-307-evand, retained under packing/cases/regularized_drawings/think-3guf-2026-10-31/ on #852) solved two of the new witnesses the 31 October adoption wrote to exact KKT local minima below the house best packing's side:
@@ -62,3 +62,5 @@ The decision table held both at row 3 (register first), and the selection lists 
 2026-11-09 coordinator: two new entries now wait on these questions (PR #934, lane L65, bead think-h96r). T-280 covers Kaelan Yim's vitamoon certificates at 299 (e4209f6, 1.18e-12 below T-277) and 303 (546928a, 3.29e-12 below T-278); T-281 covers his envelope-only 130 (c10e094, 1.96e-14 below T-259, T-260's form). Both are held at V0/C1 after the L70 blind review. Measured as shares of the predecessor's uniform-contraction (padding) margin by devtools.contraction_margin and independently by L70: 299 0.3472, 303 0.9674, 130 0.0896 (precedents T-259 0.9193, T-265 9.9679). Under RV-3 option (a) (withdraw padding-sized re-certifications) T-280 and T-281 would be withdrawn alongside T-253 and T-260; T-281 also waits on RV-1. Also waiting: think-5c9z (Daniel regularizer KKT points 3.30-3.53e-12 below T-275..T-279, the same padding class).
 
 2026-11-09 23:45Z coordinator: #939 (Joost de Winter, s(199), 22:03Z) adds a case. It is T-282's 172 arrangement re-solved to its exact local optimum (quintic root; equal in 63 places to Daniel's held KKT solve under think-wju3) plus #938's L of 27. Its gain over #938 (T-284 pending in PR #940) is 2.6345e-12 and crosses #938's 12-place print (...284 vs ...287). #938's and #939's whole-certificate contraction margins are both 0 (the grid squares touch), but T-282's margin (2.533e-12) carries through the L step: T-282 contracted plus the L is a valid 199-packing 1.0107e-13 above #939 with the same 12-place print. L78 (think-2h88) proposes option D: a re-solve is a restatement unless its 12-place print falls below that of the predecessor contracted to first contact, measured through any construction (here the L step); under D, #939 and Daniel's held 172 solve are restatements, T-265 stays a result. Pending the owner's answer #939 would be T-285 held at V0/C1, S1, with T-284 the house at 199. Brief: scratchpad l78/phase1-brief.md section 6.
+
+2026-11-17 coord-intake-1117: OWNER DECIDED (think-b0w5): "Only if it beats the gap-free original (Recommended)" = option D at every count: a re-certification is a new result only if its side is below its predecessor shrunk to first contact (devtools.contraction_margin); else a restatement credited to the original finder. Apply and close.

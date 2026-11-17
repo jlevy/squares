@@ -5,7 +5,7 @@ title: "News page budget raise: measure_news_page, the news.html exception and t
 kind: task
 status: open
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
 delegate: null
 labels: []
@@ -14,7 +14,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-24T06:07:41.427Z
-updated_at: 2026-10-24T09:43:40.658Z
+updated_at: 2026-11-17T03:07:45.261Z
 started_at: 2026-10-24T06:08:00.514Z
 ---
 The plan docs/project/specs/active/plan-2026-10-23-news-pr-feed.md, section 'Before Phase 1: The Budget Raise' and 'The page budget'. One PR: devtools.measure_news_page (bytes, project, load), its report at today's size and the projected 1,300,000 bytes, PAGE_BUDGET_EXCEPTIONS['news.html'] with a measured reason, docs/project/site-urls.md re-rendered, NEWS_CEILING and NEWS_TRIP_BYTES and the trip check in render_changelog --check with its scopes, the room report and merge-step rule in the runbook, and the tests from the Testing Strategy. Must merge before main's news.html passes 450,000 bytes (318,655 on 24 Oct; about 9 days). Owner's answer: 'Keep all, raise the limit'.
@@ -37,3 +37,5 @@ Validation: test_measure_news_page 10 passed; ruff and basedpyright clean on bot
 
 2026-10-24 coord-intake-1024: the tool half landed as PR #788 (b2ea7b09c, merged 09:26:00Z), with review A's corrections: the longest task comes from news-cards.js's per-card forced layouts (2 per visible card), the layout shift is the fold plus the filter-bar reveal, and without news-cards.js a 1,305,949-byte page passes every limit. Runway at main 6808d293a (358,186 bytes): about 13 to 21 days to 600,000, 5 to 8 to 450,000. The raise itself (exception, NEWS_CEILING, trip check, runbook rules) waits on the owner's decision in think-lsam.
 blocked_on: think-lsam
+
+2026-11-17 coord-intake-1117: OWNER DECIDED (think-k8vt): "Hand both to the site agent (Recommended)": the results-page lightening and the News card layout fix (fold before first paint, reserve the filter bar, batch the reads) are the site agent's work; intake keeps raising results.html's exception in measured 100,000-byte steps up to HARD_HTML_LIMIT.

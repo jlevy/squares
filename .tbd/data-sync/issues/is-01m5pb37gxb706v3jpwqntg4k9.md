@@ -5,14 +5,14 @@ title: "Decision: news.html byte budget, no measured size passes the load checks
 kind: task
 status: open
 priority: 1
-version: 5
+version: 6
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
 labels:
   - decision
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T06:55:42.109Z
-updated_at: 2026-10-24T09:09:06.857Z
+updated_at: 2026-11-17T03:07:43.502Z
 ---
 The owner's decision is needed: the measurement that was to confirm a larger byte budget for news.html (plan #759, "Before Phase 1: The Budget Raise"; think-3oxz) found no size that passes the site's own load checks, and today's page fails one of them too. The budget stays at 600,000 bytes until the owner picks a step.
 
@@ -48,3 +48,5 @@ Evidence: the tool and its tests are on branch claude/intake-2026-10-24-news-bud
 
 2026-10-24 c-fix-788-1024 (review A on PR #788, https://github.com/jlevy/squares/pull/788#issuecomment-6381675002): description corrected in place. WHY now names news-cards.js refresh's two forced layouts per visible card as the longest task's cause (A1) and the news-filters.js filter-bar reveal as the second layout shift (A2), with the retained tool's controls (project --without news-cards.js passes every limit at 1,305,949 bytes; without news-filters.js it still fails the longest task). WHAT IT MEANS gives the runway as 18 to 28 days to 600,000 and 9 to 13 to 450,000 by pace window (A3). Option 1 widened to fold before first paint, reserve the filter bar and batch reads before writes; option 3 notes it is not needed for the longest task. The stale 'no pull request opened' evidence line now points at #788. Before the edit the description said the long task grows with the page and gave about 28 days as the runway.
 2026-10-24 c-fix-788-1024: runway re-read at main 6808d293a after #787 (358,186 bytes, 52 stories): about 13 to 21 days to 600,000 and 5 to 8 to 450,000; added to WHAT IT MEANS.
+
+2026-11-17 coord-intake-1117: OWNER DECIDED (think-k8vt): "Hand both to the site agent (Recommended)": the results-page lightening and the News card layout fix (fold before first paint, reserve the filter bar, batch the reads) are the site agent's work; intake keeps raising results.html's exception in measured 100,000-byte steps up to HARD_HTML_LIMIT.
