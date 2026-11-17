@@ -110,8 +110,9 @@ both certificates, with no blocking or major finding. Its programs, README and o
 every exact premise recomputed, direction 0 of each net decided completely, the source’s
 logs and controls held to an exact evaluator at every least-bound centre and control
 witness, and a seeded search at 33 directions of each net. It also judges T-142’s axis
-gap of $2.15 \times 10^{-9}$ under #892’s enclosure rule: the gap lies within the source
-sweep’s own enclosure at that vertex, and the refusal has an exact witness.
+gap of $2.15 \times 10^{-9}$ under #892’s enclosure rule: the gap is the source sweep’s
+own slack at that vertex, present in its original run and its control, and the refusal
+has an exact witness.
 
 The source reports all 2,073 directions verified by its adaptation of this repository’s
 crate (build `ab6e33e1…`, 12 threads): in 771.6 seconds of wall for n = 28 and 1,790.1
