@@ -18,12 +18,13 @@ This review moves no bound and adopts nothing.
 
 ## Summary for the Author
 
-**Decision: accept both certificates.** For each, the argument from the certificate to
-the claim is correct and complete, and every hypothesis it needs holds in exact
-arithmetic. If 28 unit squares fitted in the closed square of side $2297/400$, or 30 in
-the square of side $2357/400$, their cores at the declared net’s angles would be
-disjoint sets of measure at least one each, against total masses of $28 - 1/100000$ and
-$30 - 1/100000$. Each certificate in fact proves the strict bound $s(n) > L$.
+**Decision: accept both of Hiroaki Hosono’s (wand125’s) certificates.** For each, the
+argument from the certificate to the claim is correct and complete, and every hypothesis
+it needs holds in exact arithmetic.
+If 28 unit squares fitted in the closed square of side $2297/400$, or 30 in the square
+of side $2357/400$, their cores at the declared net’s angles would be disjoint sets of
+measure at least one each, against total masses of $28 - 1/100000$ and $30 - 1/100000$.
+Each certificate in fact proves the strict bound $s(n) > L$.
 
 The one condition that needs a large computation is the capture: at each of the 2,073
 net directions, every core centred in its per-bin domain must hold mass at least one.
@@ -300,9 +301,10 @@ and to wrong readings:
   angle-sensitive ones (27 of 31 at n = 28, where four witnesses lie where the density
   is constant; 31 of 31 at n = 30): the standard step $83/40000$, half the declared
   step, and the rows without their $D_4$ images; the other field order is refused;
-- the reader and the premises refuse a duplicate key, a float token, a second gzip
-  member, a negative mass, a total mass of $n$, a step of $1/4999$ (so $B(1 + D) = 1$)
-  and a last index of 2071 (the net stops short of $\tan(\pi/8)$);
+- the reader refuses a duplicate key, a float token and a second gzip member; the
+  selftest’s own mass checks refuse a negative mass and a total mass of $n$; and lemma
+  N0, as `premises.py` checks it, refuses a step of $1/4999$ (so $B(1 + D) = 1$) and a
+  last index of 2071 (the net stops short of $\tan(\pi/8)$);
 - the axis decision refuses the 99/100 mutant of both: rigorous least captures
   $0.99140000843703$ and $0.99173535469008$, each with an exact witness below one.
 
@@ -586,7 +588,8 @@ name them:
   check.
 - **The 11 October review of register rungs** found both at `V0/C0` and T-142’s
   whole-net control held on an owner decision.
-  #892 has since replaced that decision with the enclosure rule judged above.
+  #892 has since changed the control’s axis rule to the enclosure rule judged above, so
+  that question no longer holds T-142’s control; #543 itself is still open.
 - **The 14 October review of the n = 37, 39 and 44 certificates**, §5 and F-1, named
   T-142’s gap of $2.15 \times 10^{-9}$ and found, by emulating the crate’s column walk
   at n = 37, 39 and 44, that the census’s gap is half the sweep’s enclosure, widest at

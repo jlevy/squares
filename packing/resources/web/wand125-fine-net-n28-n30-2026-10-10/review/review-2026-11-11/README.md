@@ -47,7 +47,7 @@ system family.
 | `receipts_check.py` | The source’s receipts, run logs and 197/200 controls read as data and held to the exact evaluator: completeness, totals, the summary’s premises, the exact capture at every rotated direction’s least-bound centre, at the axis argmins and at every control witness | poses |
 | `axis_decide.py` | Net index 0 of each certificate, completely: the capture is bilinear on the event grid’s cells, so the least value over the closed quadrant is at a vertex; the vertex values by one binary64 matrix product of exact int64 overlaps under the bound $(1 + \gamma_K)(1 + 2^{-53})^3$, the 64 smallest again in fractions by two methods; with `--factor 99/100`, the mutant | direction 0 |
 | `direction_sample.py` | A seeded search for the least capture at 33 rotated directions of each net, every end point evaluated exactly, with the 99/100 mutant’s witness at each | poses |
-| `selftest.py` | The two exact methods against each other and the float estimate, the reading against wrong readings at the source’s control witnesses, and the reader and premises against mutated files | nothing (a test) |
+| `selftest.py` | The two exact methods against each other and the float estimate, the reading against wrong readings at the source’s control witnesses, and mutated files against the reader, its own mass checks and lemma N0 as `premises.py` checks it (it does not run `premises.py`’s own mass checks) | nothing (a test) |
 
 ## How to Run Them
 
@@ -111,7 +111,8 @@ CPU-minutes.
   only angle-sensitive witnesses and checks which they are.
 - `direction_sample.py` first used a $33 \times 33$ grid and six starts; it was widened
   to $65 \times 65$, ten starts and the axis argmin’s two before the recorded runs. The
-  trial outputs are not kept.
+  trial outputs are not kept. Its usage line still says `[--grid 33]`; the default it
+  ran with (`--grid`, line 138) is 65, and the program is kept as it ran.
 - `receipts_check.py` first counted the 99/100 witnesses at the least-bound centres by a
   float comparison with a margin; it counts them exactly now.
 - A check that the source’s public copy of its verifier (wand125/square-packing-tools
