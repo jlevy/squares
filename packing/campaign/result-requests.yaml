@@ -35689,3 +35689,76 @@ issues:
       the author asked for is still queued, so the issue is closed with it, and that answers are
       welcome at any time. The issue was closed as completed at 11:55:54Z; it has no comment after
       the reply, and read_through moves to it.
+  - number: 1008
+    title: 'Credit request for n = 211: the current record derives from T-057'
+    author: JoostdeWinter
+    opened: '2026-11-16'
+    state: open
+    kind: correction
+    triage: done
+    summary: >-
+      Joost de Winter asks that the credit at 211 name each step from his T-057 to the house:
+      his sources for T-057, T-057 for Evan Daniel's exact optimum (T-098), and T-098 for Daniil
+      Ostashev's design (T-175) and Francisco Couzo's further arrangement of it (T-188), "Ostashev
+      & Couzo, after de Winter" for example. He quotes Ostashev's record file (n0211.sqpk, "found
+      by: re-hardening Evan Daniel's exact optimum of Joost de Winter's packing on the GPU") and
+      Ostashev's request on #575 that the seeds' authors be acknowledged, and compares T-175, T-188
+      and T-149 with T-057 by an optimal assignment (28, 31 and 32 squares beyond a tenth; 0, 0 and
+      21 tilts reversed). He says T-057 uses the construction of Arslanov, Mustafin and
+      Shangitbayev (2021), two tilted components combined with two grids, and other sources, that
+      it was made with GPT-6 Astra as AI collaborator, and that he has added those sources to the
+      README of JoostdeWinter/square-packing-211. Checked on 17 November 2026 in lane
+      c-credit-1008-1117 (think-dp8t): every link from T-057 to the house is in a retained source's
+      own files, so by attribution.md's chain rule the lines of T-188, T-181 and T-182 (Couzo's
+      continuations of T-175's design at 211) name de Winter; T-098's and T-175's already did, the
+      short credits are unchanged, and the house phrase at 211 names the chain. The record's
+      devtools.measure_identity repeats his comparison and his figures hold. The README he names
+      was unchanged when read (head 702df9bb, 84 bytes, no sources), so T-057's credit stays de
+      Winter until a published revision names them (think-a88h); the GPT-6 Astra statement is
+      recorded now as his.
+    read_through: '2026-11-16T22:06:21Z'
+    results: []
+    asks:
+    - what: >-
+        Name the lineage at each step at 211: T-057 for T-098, and T-098 for T-175 and T-188.
+      state: done
+      source: body
+      note: >-
+        Applied on 17 November 2026 (think-dp8t). T-098's line already named de Winter (Daniel
+        after Couzo, de Winter, Ellsworth, Levy; its register comparison matches its 211 to T-057
+        square for square, within 5.2e-10), and T-175's already named both seeds' authors
+        (Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu; n0211.sqpk line 5, #575's
+        lineage list). T-188 becomes Couzo after Ostashev, Daniel, de Winter, Levy (from Couzo
+        after Ostashev, Daniel, Levy), T-181 Couzo after Daniel, Ostashev, de Winter, Fang,
+        Ellsworth, Levy and T-182 Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang,
+        Ellsworth, Levy, each continuing T-175's design at 211 (the 14 and 16 October reviews'
+        pairings). Ostashev stays the finder of the house's packing, since no symmetry pairs his
+        design with T-057's nearest centres one to one; T-253's line already names de Winter.
+        T-243 at 182, an L-cut of T-188's packing, is left to think-dw3n.
+    - what: >-
+        Name T-057's own sources, Arslanov, Mustafin and Shangitbayev (2021) and others, in its
+        credit and through the chain.
+      state: queued
+      source: body
+      bead: think-a88h
+      note: >-
+        Credit is read from the source's own files (result-import.md, stage 2). The issue says
+        the sources are in the README of JoostdeWinter/square-packing-211, but at 01:37Z on 17
+        November 2026 its head was still 702df9bb of 16 September, on its only branch, with the
+        84-byte README naming none, and the issue leaves the other sources unnamed. think-a88h
+        records them when a published revision names them.
+    beads:
+    - think-dp8t
+    - think-a88h
+    - think-dw3n
+    answer_bead: think-dp8t
+    replies: []
+    blocked:
+      type: author
+      reason: >-
+        T-057's sources wait on the README revision the author says names them, unpublished
+        when read on 17 November 2026.
+    close_when: >-
+      T-057's sources are named in a published revision and carried through the chain at 211,
+      or the author withdraws the ask, and the author has received a reply verified against
+      main and the deployed site.

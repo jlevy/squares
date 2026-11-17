@@ -11397,7 +11397,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
+    Levy
   start: 0
   end: 5
   label: Couzo
@@ -11415,7 +11416,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
+    Levy
   start: 12
   end: 18
   label: Daniel
@@ -11433,7 +11435,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
+    Levy
   start: 20
   end: 28
   label: Ostashev
@@ -11449,9 +11452,30 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
+    Levy
   start: 30
-  end: 40
+  end: 39
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: 'Reviewed 2026-11-17 (think-dp8t, jlevy/squares#1008): de Winter joins this
+    credit by attribution.md''s chain rule at 211, since the Ostashev design it continues
+    was re-hardened from Evan Daniel''s exact optimum of Joost de Winter''s packing
+    (dostashev-merged-bands-2026-10-13 source/records/n0211.sqpk, line 5); the printed
+    surname matches his profile.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
+    Levy
+  start: 41
+  end: 51
   label: BuddenPing
   role: prerequisite
   disposition: unresolved
@@ -11463,9 +11487,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
-  start: 42
-  end: 46
+  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
+    Levy
+  start: 53
+  end: 57
   label: Fang
   role: prerequisite
   disposition: resolved
@@ -11479,9 +11504,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
-  start: 48
-  end: 57
+  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
+    Levy
+  start: 59
+  end: 68
   label: Ellsworth
   role: prerequisite
   disposition: resolved
@@ -11490,15 +11516,16 @@ occurrences:
   - catalogue-credits
   contributor_id: david-ellsworth
   note: Reviewed packing/resources/bibliography.yaml [[Couzo certificates 2026-10-13]]
-    /credit span 48:57. The cited Kingbird reconstruction, packing or tooling lineage
+    /credit span 59:68. The cited Kingbird reconstruction, packing or tooling lineage
     names David Ellsworth; the retained catalogue header binds that name to Davidebyzero.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
-  start: 59
-  end: 63
+  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
+    Levy
+  start: 70
+  end: 74
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -11507,7 +11534,7 @@ occurrences:
   - announcement-account
   contributor_id: joshua-levy
   note: Reviewed packing/resources/bibliography.yaml [[Couzo certificates 2026-10-13]]
-    /credit span 59:63. The specific first-party jlevy/squares method or source is
+    /credit span 70:74. The specific first-party jlevy/squares method or source is
     the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
     project credit does not imply sole personal authorship.
 - origin:
@@ -12073,7 +12100,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
   start: 0
   end: 5
   label: Couzo
@@ -12091,7 +12118,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
   start: 12
   end: 18
   label: Daniel
@@ -12109,7 +12136,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
   start: 20
   end: 28
   label: Ostashev
@@ -12125,9 +12152,28 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
   start: 30
-  end: 34
+  end: 39
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: 'Reviewed 2026-11-17 (think-dp8t, jlevy/squares#1008): de Winter joins this
+    credit by attribution.md''s chain rule at 211, since the Ostashev design it continues
+    was re-hardened from Evan Daniel''s exact optimum of Joost de Winter''s packing
+    (dostashev-merged-bands-2026-10-13 source/records/n0211.sqpk, line 5); the printed
+    surname matches his profile.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue-583 certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+  start: 41
+  end: 45
   label: Fang
   role: prerequisite
   disposition: resolved
@@ -12141,9 +12187,9 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy
-  start: 36
-  end: 45
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+  start: 47
+  end: 56
   label: Ellsworth
   role: prerequisite
   disposition: resolved
@@ -12152,16 +12198,16 @@ occurrences:
   - catalogue-credits
   contributor_id: david-ellsworth
   note: Reviewed packing/resources/bibliography.yaml [[Couzo issue-583 certificates
-    2026-10-13]] /credit span 36:45. The cited Kingbird reconstruction, packing or
+    2026-10-13]] /credit span 47:56. The cited Kingbird reconstruction, packing or
     tooling lineage names David Ellsworth; the retained catalogue header binds that
     name to Davidebyzero.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy
-  start: 47
-  end: 51
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+  start: 58
+  end: 62
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -12170,7 +12216,7 @@ occurrences:
   - announcement-account
   contributor_id: joshua-levy
   note: Reviewed packing/resources/bibliography.yaml [[Couzo issue-583 certificates
-    2026-10-13]] /credit span 47:51. The specific first-party jlevy/squares method
+    2026-10-13]] /credit span 58:62. The specific first-party jlevy/squares method
     or source is the Joshua Levy identity established by LICENSE and the retained
     ojoshe receipt; project credit does not imply sole personal authorship.
 - origin:
@@ -13307,7 +13353,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
   start: 0
   end: 5
   label: Couzo
@@ -13325,7 +13371,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
   start: 12
   end: 20
   label: Ostashev
@@ -13341,7 +13387,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
   start: 22
   end: 28
   label: Daniel
@@ -13359,9 +13405,28 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
   start: 30
-  end: 34
+  end: 39
+  label: de Winter
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: 'Reviewed 2026-11-17 (think-dp8t, jlevy/squares#1008): de Winter joins this
+    credit by attribution.md''s chain rule at 211, since the Ostashev design it continues
+    was re-hardened from Evan Daniel''s exact optimum of Joost de Winter''s packing
+    (dostashev-merged-bands-2026-10-13 source/records/n0211.sqpk, line 5); the printed
+    surname matches his profile.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
+  start: 41
+  end: 45
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -13370,7 +13435,7 @@ occurrences:
   - announcement-account
   contributor_id: joshua-levy
   note: Reviewed packing/resources/bibliography.yaml [[Couzo verified bounds 2026-10-14]]
-    /credit span 30:34. The specific first-party jlevy/squares method or source is
+    /credit span 41:45. The specific first-party jlevy/squares method or source is
     the Joshua Levy identity established by LICENSE and the retained ojoshe receipt;
     project credit does not imply sole personal authorship.
 - origin:

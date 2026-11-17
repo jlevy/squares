@@ -1417,6 +1417,10 @@ sources:
     dated: '2026-09-16'
     credit: de Winter
     lineage: independent
+    ai_assistance:
+      sentence: 'The repository says nothing about AI assistance; the author’s issue jlevy/squares#1008 of 16 November 2026 says the packing was made with GPT-6 Astra as AI collaborator.'
+      marker: 'GPT-6 Astra'
+      anchor: 'square-packing-211'
     note: >-
       JoostdeWinter/square-packing-211 at 702df9bb, 2026-09-16: one packing of 211 unit
       squares at side 14.99796070496771500150, with the author's interval verification
@@ -1424,7 +1428,14 @@ sources:
       is read from the commit metadata ("Joost de Winter"); it names no prior work and
       states nothing about AI assistance. Only derived facts are retained
       (web/de-winter-square-packing-211-2026-09-16/README.md). Distinct from
-      [De Winter 2026], the same author's ResearchGate report. Dated by that revision.
+      [De Winter 2026], the same author's ResearchGate report. Dated by that revision. The
+      author's issue jlevy/squares#1008 of 16 November 2026 says the packing uses the
+      construction of Arslanov, Mustafin and Shangitbayev (2021), two tilted components
+      combined with two grids, and other sources it does not name; that it was made with
+      GPT-6 Astra as AI collaborator; and that he has added those sources to the
+      repository's README. Read at 01:37Z on 17 November 2026, the repository's head is
+      still 702df9bb and its README, 84 bytes, names none, so the credit stays de Winter
+      until a published revision names them (think-a88h).
   - key: '[griffcass square-packing 2026-09-23]'
     authors: [Casson]
     year: 2026
@@ -2693,12 +2704,14 @@ sources:
     venue: GitHub
     dated: '2026-10-13'
     lineage: builds-on-project
-    credit: Couzo after Daniel, Ostashev, BuddenPing, Fang, Ellsworth, Levy
+    credit: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth, Levy
     short_credit: Couzo after Daniel et al.
     note: >-
       Fourteen complete exact certificates at b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d, nine
       of them requested on issues 583 and 586: 154 continued from Daniel's issue-552
-      arrangement, 211 and 241 from Ostashev's, 302 from BuddenPing's, and five beyond the
+      arrangement, 211 and 241 from Ostashev's (his 211 re-hardened from Daniel's exact
+      optimum of de Winter's packing, the lineage the credit names since
+      jlevy/squares#1008), 302 from BuddenPing's, and five beyond the
       case corpus continuing the author's issue-506 L-border constructions and Fang's
       380-382; exact optima from Daniel's exact contact solver and dilated rational
       witnesses. Five further certificates at 176, 344, 375, 376 and 378 are named by no
@@ -2795,12 +2808,14 @@ sources:
     venue: GitHub
     dated: '2026-10-13'
     lineage: builds-on-project
-    credit: Couzo after Daniel, Ostashev, Fang, Ellsworth, Levy
+    credit: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
     short_credit: Couzo after Daniel et al.
     note: >-
       Seven complete exact certificates at 45966700cf15d3f42e064fd6da51fcb9a5def2be that
       issue 583 names and b85dee2 replaced: 154 (issue 570's, by SHA-256) continued from
-      Daniel's issue-552 arrangement, 211 and 241 from Ostashev's, and 339, 379, 380 and 382
+      Daniel's issue-552 arrangement, 211 and 241 from Ostashev's (his 211 re-hardened from
+      Daniel's exact optimum of de Winter's packing, the lineage the credit names since
+      jlevy/squares#1008), and 339, 379, 380 and 382
       beyond the case corpus continuing the author's issue-506 L-border constructions and
       Fang's 380-382. The source checks with Squares Project (Levy) verification code; this
       project lineage is not independent. The certificates are retained as factual data; the
@@ -2966,14 +2981,18 @@ sources:
     venue: GitHub
     dated: '2026-10-14'
     lineage: builds-on-project
-    credit: Couzo after Ostashev, Daniel, Levy
+    credit: Couzo after Ostashev, Daniel, de Winter, Levy
     short_credit: Couzo after Ostashev et al.
     note: >-
       The author's verified-bounds index at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d,
       first committed on 14 October 2026 with no issue: one exact certificate inside the
       case corpus, s(211) <= 7496774813149710519467765230441/5e29, the author's
-      refinement of Daniil Ostashev's arrangement of issue 575 ("seeded from Daniil
-      Ostashev"), retained as factual data; 296 certificates beyond the corpus (339, 370, 378 to
+      further arrangement of Daniil Ostashev's design of issue 575 ("seeded from Daniil
+      Ostashev"), retained as factual data. Ostashev's record file for that design
+      (web/dostashev-merged-bands-2026-10-13/source/records/n0211.sqpk, line 5) says he
+      re-hardened it from Evan Daniel's exact optimum (T-098) of Joost de Winter's packing
+      (T-057), so by the chain rule the credit names de Winter as well, as de Winter asked
+      on jlevy/squares#1008 of 16 November 2026. 296 certificates beyond the corpus (339, 370, 378 to
       382, 403 to 991), pinned by digest as bulk data and compared from their exact
       header sides, of which the source register records 252. The unlicensed prose and
       index are hash-pinned; they state nothing about AI assistance, and the author's

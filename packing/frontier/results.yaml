@@ -5306,7 +5306,9 @@ results:
 
       Joost de Winter,
       [JoostdeWinter/square-packing-211](https://github.com/JoostdeWinter/square-packing-211/tree/702df9bb3b1e7fe13279a61a1fa89722aa2d496a).
-      The source says nothing about AI assistance.
+      The repository says nothing about AI assistance; the author's issue
+      jlevy/squares#1008 of 16 November 2026 says the packing was made with GPT-6 Astra as
+      AI collaborator.
     scope: {n_values: [211]}
     verification: V3
     confirmation: C3
@@ -5353,6 +5355,25 @@ results:
       (epistemics.md, No Blind Trust); none is retained for this result, so it stands at
       V3/C3: machine-checked, review record pending. The oversight record restores the
       rung.
+
+      2026-11-17 (jlevy/squares#1008, think-dp8t): the author says the packing uses the
+      construction of Arslanov, Mustafin and Shangitbayev (2021), two tilted components
+      combined with two grids, and other sources the issue does not name, and that he has
+      added those sources to the repository's README. Read at 01:37Z on 17 November 2026,
+      the repository's head is still the revision of 16 September this entry cites, on its
+      only branch, and its 84-byte README names no prior work, so the credit stays de
+      Winter until a published revision names them (attribution.md, Credit Text and
+      Lineage; think-a88h records them then, here and in every line that runs through this
+      packing).
+
+      The same issue asks that the lines at 211 name this packing at each step: T-098
+      already does, and T-175 through T-098; T-188, T-181 and T-182, which continue T-175's
+      design, name de Winter since this change. Measured here by devtools.measure_identity
+      (de-winter-square-packing-211-2026-09-16/measure/; a measurement, which decides
+      nothing), the issue's comparison holds: against this packing no symmetry pairs nearest
+      centres one to one with T-175's, T-188's or T-149's, and the optimal assignment, under
+      a reflection, moves 28, 31 and 32 squares beyond a tenth, at most 0.705, 0.731 and
+      0.776, reversing no tilt for T-175 and T-188 and 21 for T-149.
     next_rung: >-
       V4 and C4 need two adversarial AI reviews by distinct reviewers of the complete claim
       and a human oversight record; the same-project reviews of each route (2026-09-29 and
@@ -24410,6 +24431,22 @@ results:
       out of this entry's artifacts so that the workers' snapshot stays under its cap. The
       review's findings here are non-blocking: the kernel's two controls are gross, the
       third route's six sharp (RQ-8).
+
+      2026-11-17 (jlevy/squares#1008, think-dp8t): Joost de Winter asks that the lines at 211
+      name each step from his packing (T-057) through Evan Daniel's exact optimum of it
+      (T-098) to this design and Francisco Couzo's further arrangement of it (T-188). This
+      line already names both seeds' authors: the record file's header
+      (source/records/n0211.sqpk, line 5), the README at the pin and issue 575 say the 211
+      was re-hardened from Daniel's exact optimum of de Winter's packing, and the issue asks
+      that the seeds' authors be acknowledged. So the credit is unchanged, and the lines
+      that continue this design at 211 (T-181, T-182, T-188) now name de Winter as well.
+
+      Measured here by devtools.measure_identity
+      (de-winter-square-packing-211-2026-09-16/measure/identity-t175.json; a measurement,
+      which decides nothing), against T-057 and T-098 alike no symmetry pairs nearest
+      centres one to one, as the 14 October review found, and the optimal assignment, under
+      a reflection, moves 28 squares beyond a tenth, at most 0.705, and reverses no tilt, as
+      the issue reports.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
       retained human oversight record; one AI review, of 14 October, is retained.
@@ -25226,7 +25263,10 @@ results:
       packings each started from, as the author asks: Evan Daniel's 154 arrangement of issue
       552, continued through the author's browser refinement, native basin hopping and exact
       finishing; Daniil Ostashev's 211 and 241 arrangements of issue 575, continued with
-      native search and refinement.
+      native search and refinement. Ostashev's record file says he re-hardened his 211 from
+      Evan Daniel's exact optimum (T-098) of Joost de Winter's packing (T-057), so by the
+      chain rule of attribution.md the credit line names de Winter as well, as de Winter
+      asked on jlevy/squares#1008 of 16 November 2026.
 
       Beyond the case corpus, 339 and 379 continue the author's L-border constructions of
       issue 506, and 380 and 382 continue Kevin Fang's published arrangements
@@ -25423,7 +25463,10 @@ results:
       552, itself descended from the author's earlier 155 with one square removed, continued
       through the author's browser refinement, native basin hopping and exact finishing;
       Daniil Ostashev's 211 and 241 arrangements of issue 575, continued with native search
-      and refinement.
+      and refinement. Ostashev's record file says he re-hardened his 211 from Evan Daniel's
+      exact optimum (T-098) of Joost de Winter's packing (T-057), so by the chain rule of
+      attribution.md the credit line names de Winter as well, as de Winter asked on
+      jlevy/squares#1008 of 16 November 2026.
 
       Beyond the case corpus, 339 and 379 continue the author's L-border constructions of
       issue 506 (339 last through the browser's fq search, 379 through native SLP
@@ -26674,6 +26717,12 @@ results:
       a refinement in the record's sense (RT-1); the author's README and metadata keep
       Ostashev's construction credit.
 
+      Ostashev's record file for that design says he
+      re-hardened it from Evan Daniel's exact optimum (T-098) of Joost de Winter's packing
+      (T-057), so by the chain rule of attribution.md the credit line names that lineage,
+      as de Winter asked on jlevy/squares#1008 of 16 November 2026: Couzo after Ostashev,
+      Daniel, de Winter, Levy.
+
       Evan Daniel's optimizer, contact solver and verifier and this repository's exact
       verifier were used. The pinned files state nothing about AI assistance; the author's
       issues 583 and 586 of 13 October and 607 of 14 October state that he used OpenAI Codex
@@ -26738,6 +26787,19 @@ results:
       arrangement of the earlier design, with no regularization item. The seed the metadata
       labels issue 501 is byte for byte Ostashev's issue-575 certificate, and the poses
       agree (RT-11); the label is a question for the author.
+
+      2026-11-17 (jlevy/squares#1008, think-dp8t): the credit line gains de Winter, the
+      finder of the packing Ostashev's design was re-hardened from (the dostashev-merged-bands
+      packet's source/records/n0211.sqpk, line 5), through Daniel's exact optimum of it,
+      which matches it square for square (T-098's register comparison); the short credit is
+      unchanged.
+
+      Measured here by devtools.measure_identity
+      (de-winter-square-packing-211-2026-09-16/measure/identity-t188.json; a measurement,
+      which decides nothing), against T-057 no symmetry pairs nearest centres one to one,
+      and the optimal assignment, under a reflection, moves 31 squares beyond a tenth, at
+      most 0.731, and reverses no tilt, as the issue reports; against T-175 it repeats the
+      16 October review's pairing, five squares beyond a tenth, at most 0.445.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share

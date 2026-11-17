@@ -19,7 +19,7 @@ It is a different source from the same author’s ResearchGate report of August 
 | Revision | `702df9bb3b1e7fe13279a61a1fa89722aa2d496a`, tree `7216964baa956748913ce20f5f2790a803354921`, the second of two commits |
 | Committed | 2026-09-16T10:00:56+02:00, which is 2026-09-16T08:00:56Z; author and committer clocks agree. The first commit, `7d000e1a`, three minutes earlier, holds only the README |
 | Author | Joost de Winter, read from the commit metadata: the repository has no LICENSE and its 84-byte README names no author |
-| Credit | The source names no prior work and says nothing about AI assistance |
+| Credit | The source names no prior work and says nothing about AI assistance; the author’s [jlevy/squares#1008](https://github.com/jlevy/squares/issues/1008) of 16 November 2026 names both, as [Lineage Request](#lineage-request-17-november-2026) says |
 | Licence | None published |
 | Retrieved | 2026-09-29, a full clone |
 | Retained here | Derived facts and metadata only: [`facts/n-211.yaml`](facts/n-211.yaml), the 211 centres and angles carried verbatim as a Witness/v2 witness, and [`acquisition/sources.json`](acquisition/sources.json), which pins the three upstream files by SHA-256 |
@@ -110,6 +110,53 @@ Nothing here bears on optimality: the verified lower bound at `n = 211` is untou
 [`receipts/live-catalogue-2026-09-29.json`](receipts/live-catalogue-2026-09-29.json)
 records that the live catalogue fetched on 29 September 2026 still lists no packing for
 `n = 211`.
+
+## Lineage Request, 17 November 2026
+
+On [jlevy/squares#1008](https://github.com/jlevy/squares/issues/1008) (16 November 2026)
+the author asks that the credit at `n = 211` name each step from this packing to the
+house: his sources for T-057, T-057 for Evan Daniel’s exact optimum (T-098), and T-098
+for Daniil Ostashev’s design (T-175) and Francisco Couzo’s further arrangement of it
+(T-188). Each link below the first is in a retained source’s own files: T-098’s packet
+matches its 211 certificate to this packing square for square, every centre within
+`5.2e-10`; Ostashev’s record file
+([`n0211.sqpk`](../dostashev-merged-bands-2026-10-13/source/records/n0211.sqpk), line 5)
+says he re-hardened that exact optimum; and Couzo’s metadata seeds T-188 from Ostashev’s
+#575 certificate, by its digest. So the credit lines of T-188 and of Couzo’s #583 and
+#586 certificates (T-181, T-182), which continue the same design, now name de Winter,
+as T-098’s and T-175’s already did.
+
+The first link is the author’s statement only. The issue says the packing uses the
+construction of Arslanov, Mustafin and Shangitbayev (2021), two tilted components
+combined with two grids, and other sources it does not name; that it was made with GPT-6
+Astra as AI collaborator; and that he has added those sources to this repository’s
+README. Read at 01:37Z on 17 November 2026, the repository’s head is still `702df9bb`
+on its only branch, and the README, 84 bytes, names none. Credit is read from the
+source’s own files, so T-057’s stays de Winter until a published revision names those
+sources (think-a88h); the AI collaborator is recorded now, as the author’s statement.
+
+The issue also compares the packings with this one by an optimal assignment under the
+box’s symmetries. `devtools.measure_identity` repeats that here, a measurement for
+credit that decides nothing, and the issue’s figures hold:
+
+| Measured against T-057 | Nearest centres one to one | Beyond a tenth | Largest move | Tilts reversed |
+| --- | --- | --- | --- | --- |
+| T-175, Ostashev | no | 28 | 0.705 | 0 |
+| T-188, Couzo | no | 31 | 0.731 | 0 |
+| T-149, Ostashev’s #501 | no | 32 | 0.776 | 21 |
+
+The receipts are [`measure/identity-t175.json`](measure/identity-t175.json), which
+measures T-098 as well, [`measure/identity-t188.json`](measure/identity-t188.json),
+which measures T-175 as well, and [`measure/identity-t149.json`](measure/identity-t149.json).
+Against T-175, T-188 pairs one to one under the identity with five squares beyond a
+tenth, at most 0.445, as the review of 16 October 2026 found. From `packing/`:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.measure_identity --n 211 \
+  T-188=packet:couzo-verified-bounds-2026-10-14 \
+  T-057=witness-corners:witnesses/de-winter-2026/n-211-rational.yaml.gz \
+  T-175=packet:dostashev-merged-bands-2026-10-13
+```
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

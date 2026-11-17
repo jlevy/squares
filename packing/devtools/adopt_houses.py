@@ -3446,11 +3446,15 @@ CREDITS: dict[int, Credit] = {
     ),
     # Couzo's further arrangement of Ostashev's issue-575 design, five squares beyond a
     # tenth against T-182 and T-175 (RT-1 of the 16 October review; T-188 records no
-    # regularization).
+    # regularization). Ostashev's record file (n0211.sqpk, line 5) re-hardens that design
+    # from Evan Daniel's exact optimum (T-098) of Joost de Winter's packing (T-057), which
+    # the phrase names since de Winter's jlevy/squares#1008 (think-dp8t); no symmetry pairs
+    # the design with T-057's nearest centres one to one, so de Winter is no finder here.
     211: Credit(
         (OSTASHEV,),
         (COUZO,),
-        "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
+        "Francisco Couzo’s further arrangement of the n = 211 design Daniil Ostashev "
+        "re-hardened from Evan Daniel’s exact optimum of Joost de Winter’s packing",
     ),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of Francisco
     # Couzo's issue-672 packing (T-227), solved to its exact side 1.76e-11 below #672's
