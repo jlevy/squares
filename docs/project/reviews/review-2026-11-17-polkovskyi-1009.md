@@ -22,10 +22,10 @@ The 26 files’ digests are in the packet’s README and
 **Reviewed at:** `main` at `f9ddfeeef`, the merge of #1004, as this lane found it at
 01:32Z on 17 November and as the issue names it, and the pin above.
 
-**Reviewer:** Claude (AI review), model `claude-fable-5-2` (Fable 5.2), at the strongest
-tier (`tbd-strong-max`) and maximum reasoning, the stage 4 mathematical review lane
-`c-review-1009-1117`, separately prompted.
-It read the source as data and ran only programs of its own, kept with their receipts in
+**Reviewer:** Claude (AI review), at the strongest tier (`tbd-strong-max`) and maximum
+reasoning, the stage 4 mathematical review lane `c-review-1009-1117`, separately
+prompted. It read the source as data and ran only programs of its own, kept with their
+receipts in
 [`packing/resources/web/polkovskyi-1009-review-2026-11-17/`](../../../packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md).
 Its checker is a clean-room implementation written for this review: it reuses no code
 from any earlier review.
@@ -779,6 +779,16 @@ What went wrong along the way, and was redone before the freeze it precedes:
   list. `rv1009_custody.py`, `rv1009_padding.py` and `rv1009_sides.py` were written in
   the same interval, while the controls ran, and were not run on anything of the
   thirteen counts until the findings were frozen.
+
+## Note on This Copy
+
+This copy differs from the frozen text
+(`frozen/review-2026-11-17-polkovskyi-1009.frozen.md`, bound by
+`frozen/findings-frozen-digest.txt`) in one place, changed on 17 November 2026 after the
+freeze by lane w3-pass-1117r: the reviewer line, which named a model identifier.
+The runbook’s stage 4 says the reviewer line names the system family, tier and reasoning
+setting, not a model identifier; the frozen copy is left as it was frozen.
+No finding, verdict or number changes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
