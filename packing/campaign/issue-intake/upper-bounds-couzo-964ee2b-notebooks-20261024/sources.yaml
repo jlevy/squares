@@ -1612,7 +1612,8 @@ reports:
     the coordinator asked, whether a side obtained by deleting a square from a neighbour''s certificate
     is an earlier report; so a later equal or higher side is not recorded, and by the owner''s answer
     of 17 November 2026 (think-gmoj), the option labelled "Only where someone claims the count (Recommended)",
-    it has no row of its own, since no report claims the count with a certificate file of its own (beyond_horizon_replay.WALKS[''upper-bounds-couzo-964ee2b-notebooks-20261024''].held).
+    it has no row of its own, since an index bound has no certificate file of its own; a later file at
+    its side, as #732''s n985.cert, is a tie the report-order rule does not record (beyond_horizon_replay.WALKS[''upper-bounds-couzo-964ee2b-notebooks-20261024''].held).
     Its verdicts at 1 count are decided only against held publications (beyond_horizon_replay.WALKS[''upper-bounds-couzo-964ee2b-notebooks-20261024''].resting):
     1 against constructions with no certificate file. An answer that leaves a hold out reruns this walk.'
 - report: franciscouzo/square-packing@23aff0c

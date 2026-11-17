@@ -575,13 +575,14 @@ record’s statement of the rule:
   So #941’s 809, the 810 certificate less its last square, which the issue claims with
   its own file `above324/n0809.cert`, is a row, and an index deletion bound has none,
   claimed by an issue or not: 743, 798, 855 and 985, which #715 and #732 claim, and
-  #763’s 683 (`beyond_horizon_replay.CLAIMED_DELETION_ANSWER`). Whether a bound that
-  deletes two or three squares is an earlier report too, as at 751, 752 and 927, was not
-  part of that answer, so those three stay held on think-kzme.
-  Above 1024 the walk applies both answers the same way
+  #763’s 683 (`beyond_horizon_replay.CLAIMED_DELETION_ANSWER`). A later certificate file
+  at an index bound’s side, as #732’s `n985.cert` at 985, is a tie, which report order
+  does not record. Whether a bound that deletes two or three squares is an earlier report
+  too, as at 751, 752 and 927, was not part of that answer, so those three stay held on
+  think-kzme. Above 1024 the walk applies both answers the same way
   (`beyond_horizon_replay.deletion_holds`): a bound one square below the next count’s
-  certificate, or one an issue claims, is settled with no row, and one deleting two or
-  more squares that no issue claims waits on think-kzme.
+  certificate, claimed by an issue or not, is settled with no row, and any bound
+  deleting two or more squares, claimed or not, waits on think-kzme.
   A deletion from a construction no certificate file states, as 23aff0c’s from
   Friedman’s, waits with that construction (D2, think-zkxy).
 - **A recipe is a row once the maintained checker decides it** (D2 on think-f2io):

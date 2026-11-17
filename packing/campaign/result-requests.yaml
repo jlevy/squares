@@ -9271,6 +9271,10 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+      outdated:
+      - >-
+        whether to keep T-159 (#529) is the owner's decision: the owner decided on 17
+        November 2026 to keep it registered
     blocked:
       type: owner-decision
       reason: >-
@@ -10374,7 +10378,8 @@ issues:
         thank-you note (Recommended)": the pull request is closed unmerged, with a note pointing
         to the register entries its results became. T-174 registers the 68 counts the 14 October
         ledger records, and the 80 others are the ledger's reasoned non-imports, each tying or
-        trailing an earlier report; unimported does not by itself require a new replay. The
+        trailing an earlier report, or undecided at 29, 55, 71 and 83; unimported does not by
+        itself require a new replay. The
         algebraic house writer stays with think-ot5c. The owner's decision ends the recorded
         reservation of 23 October, so the hold is lifted.
     beads:
@@ -23995,7 +24000,9 @@ issues:
         (think-f2io) such a bound is an earlier report, so this tie is not recorded. The bound
         itself has no row: by the owner's answer of 17 November 2026 (think-gmoj) a
         deletion-made bound gets a row only where a report claims the count with a certificate
-        file of its own, and the index bound has none.
+        file of its own, and the index bound has none; this issue's own n985.cert, at the
+        bound's side, is a tie, which report order does not record. The current row at 985
+        is couzo-issue763-2026-10-23's, below both.
       queued: false
     - key: rows-above-1024
       claim: >-
@@ -24869,6 +24876,11 @@ issues:
       - result: n683
       - result: rows-above-1024
       beads: [think-2z2n, think-llit]
+      outdated:
+      - >-
+        n683 held from a row on think-2z2n until the project decides whether an issue-claimed
+        deletion bound gets a row: the owner's answer of 17 November 2026 settles it with no
+        row, since the issue claims it with no certificate file of its own
     blocked:
       type: author
       reason: >-
@@ -25497,6 +25509,10 @@ issues:
       - result: n59-lean-kernel
         id: E-n059-wand125-lean-kernel-report
         status: recorded
+      outdated:
+      - >-
+        the complete build C3 needs, about 862 CPU-hours, held above the item cap for the
+        owner's decision: the owner declined it at that price on 17 November 2026
     review_track: true
     close_when: >-
       The review its C1 needs has landed on main, the build its C3 needs has landed or the
@@ -33597,6 +33613,10 @@ issues:
         verification: V0
         confirmation: C1
         status: reviewed
+      outdated:
+      - >-
+        the full replay priced and held for the maintainer's budget decision: on 17 November
+        2026 the owner held all of it, the subsets under the item cap included
     close_when: >-
       T-298 is on main with the stage 4 review mapped, and the reply on main says what was
       retained and run, what the review found, and that the full replay is priced and owned
@@ -35760,7 +35780,7 @@ issues:
       Prabhat's and Tomáš Kodaj's notebooks, 4.58e-04 below the house, 10.94974746830584 (T-101's
       exact side); at 270, 16.927469593519 in Danil Malyshev's and 16.927469594094 in Kodaj's,
       6.79e-04 below the house, T-283's 16.9281486033428544, and below the refinement there that
-      his #1009 reports. He asks that the notebooks' authors be credited, claiming none himself,
+      Mykhailo Polkovskyi's #1009 reports, which the issue calls its author's own. He asks that the notebooks' authors be credited, claiming none himself,
       and says exact rational Witness/v2 versions of the Kaggle coordinates, which are stored as
       float64 and need a Kaggle login to download, are attached. None is: the issue's body holds
       no attachment and links only the three notebook pages. Triaged read-only on 17 November
@@ -35814,5 +35834,9 @@ issues:
       with the issue and the notebooks' files need a login, so nothing was retained or checked,
       and that an exact certificate attached to the issue or committed to his repository starts
       the import, with the credit he asks for, Prabhat and Kodaj at 109, Malyshev and Kodaj at
-      270. At 270 the import would follow #1009's, which is another lane's (think-i38n) and
-      registers his refinement there; at 109 the record's house is T-101's exact side.
+      270. At 270 the import would follow #1009's, Mykhailo Polkovskyi's issue, which the issue
+      calls its author's own; another lane imports it (think-i38n) and registers his refinement
+      there. At 109 the record's house is T-101's exact side. #1022, which the same author filed
+      later that day, reports s(270) <= 16.927314216352 below the Kaggle sides here, with a
+      certificate in his repository's n270/; it is an import of its own, and this issue's
+      acknowledgement reads it first.

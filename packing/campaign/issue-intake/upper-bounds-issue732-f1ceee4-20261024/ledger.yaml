@@ -1621,7 +1621,8 @@ reports:
     a square from a neighbour''s certificate is an earlier report; so a later equal or higher
     side is not recorded, and by the owner''s answer of 17 November 2026 (think-gmoj), the
     option labelled "Only where someone claims the count (Recommended)", it has no row of
-    its own, since no report claims the count with a certificate file of its own (beyond_horizon_replay.WALKS[''upper-bounds-issue732-f1ceee4-20261024''].held).'
+    its own, since an index bound has no certificate file of its own; a later file at its
+    side, as #732''s n985.cert, is a tie the report-order rule does not record (beyond_horizon_replay.WALKS[''upper-bounds-issue732-f1ceee4-20261024''].held).'
 exceptions: []
 key_reason_candidates: []
 other_items: []

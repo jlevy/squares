@@ -239,8 +239,8 @@ decided by the construction checker (`devtools.construction_checker`, D2), not t
 filtered replay: ``recipe-decisions`` replays the parents that are not rows and decides
 each recipe (`RECIPES`). An index's one-square deletion from the next count is an earlier
 report by D6, and one an issue claims is settled with no row by the answer of 17 November
-(think-gmoj); any other deletion waits on think-kzme's last question, whether a bound
-deleting two or more squares is an earlier report (`deletion_holds`); the Kingbird
+(think-gmoj); a bound deleting two or more squares, claimed or not, waits on think-kzme's
+last question, whether it is an earlier report (`deletion_holds`); the Kingbird
 catalogue's sides wait on N1 (`CATALOGUE`). A certificate
 the packet pins and does not retain is read from hosted shards (`Release.hosted`,
 `devtools.hosted_shards`), and the fast check reads its side and blob from the source
@@ -453,8 +453,9 @@ DELETION_ANSWER = (
     "a side obtained by deleting a square from a neighbour's certificate is an earlier "
     "report; so a later equal or higher side is not recorded, and by the owner's answer of "
     '17 November 2026 (think-gmoj), the option labelled "Only where someone claims the '
-    'count (Recommended)", it has no row of its own, since no report claims the count with '
-    "a certificate file of its own"
+    'count (Recommended)", it has no row of its own, since an index bound has no '
+    "certificate file of its own; a later file at its side, as #732's n985.cert, is a tie "
+    "the report-order rule does not record"
 )
 #: The owner's answer that settles an index deletion bound an issue claims (`Held.answer`;
 #: think-gmoj, on think-kzme's questions 1 and 2). The owner selected the option labelled
@@ -723,49 +724,63 @@ def deletion_holds(
 
     A bound a publication states that deletes one square from the next count's certificate
     is an earlier report by the owner's D6 answer, settled with no row of its own
-    (`DELETION_ANSWER`, think-f2io, think-gmoj). A bound deleting two or more squares is
-    outside that question's words and waits on think-kzme's last question, as the history
-    walk's 751, 752 and 927 do. A bound an issue claims, whatever it deletes, is settled with
-    no row by the owner's answer of 17 November 2026 (`CLAIMED_DELETION_ANSWER`,
-    think-gmoj), held under the bead of the issue's import (``claimed_by``), as #763's 683
+    (`DELETION_ANSWER`, think-f2io, think-gmoj). One such bound that an issue claims is
+    settled with no row by the owner's answer of 17 November 2026
+    (`CLAIMED_DELETION_ANSWER`), held under that decision's bead, think-gmoj, as #763's 683
     is: an index bound names no certificate file of its own, and only such a file earns a
-    row (think-llit's plan, Deletion Rows).
+    row (think-llit's plan, Deletion Rows). A bound deleting two or more squares, claimed or
+    not, is outside D6's words and waits on think-kzme's last question, whether it is an
+    earlier report, as the history walk's 751, 752 and 927 do; one an issue claims waits
+    under the bead of the issue's import (``claimed_by``) too.
     """
-    settled: set[int] = set()
-    waiting: set[int] = set()
+    one: set[int] = set()
+    more: set[int] = set()
     for n, parent, deleted in bounds:
         _require(
             deleted > 0 and parent - deleted == n,
             f"n={n}: {parent} less {deleted} squares is not {n}",
         )
-        (settled if deleted == 1 and not claimed_by else waiting).add(n)
+        (one if deleted == 1 else more).add(n)
     holds: list[Held] = []
-    if settled:
+    if one and not claimed_by:
         holds.append(
             Held(
                 CONSEQUENCE,
                 "think-f2io",
-                frozenset(settled),
+                frozenset(one),
                 note="each deleting one square from the next count's certificate",
                 answer=DELETION_ANSWER,
             )
         )
-    if waiting and claimed_by:
+    if one and claimed_by:
+        holds.append(
+            Held(
+                CONSEQUENCE,
+                "think-gmoj",
+                frozenset(one),
+                note=(
+                    f"deletion bounds the issue claims, imported under {claimed_by}, each "
+                    "one square below the next count's certificate with no file of its own"
+                ),
+                answer=CLAIMED_DELETION_ANSWER,
+            )
+        )
+    if more and claimed_by:
         holds.append(
             Held(
                 CONSEQUENCE,
                 claimed_by,
-                frozenset(waiting),
-                note="deletion bounds the issue claims, with no certificate file of their own",
-                answer=CLAIMED_DELETION_ANSWER,
+                frozenset(more),
+                also=("think-kzme",),
+                note="deletion bounds the issue claims, each deleting two or more squares",
             )
         )
-    elif waiting:
+    elif more:
         holds.append(
             Held(
                 CONSEQUENCE,
                 "think-kzme",
-                frozenset(waiting),
+                frozenset(more),
                 note="each deleting two or more squares, beyond the D6 answer's words",
             )
         )
@@ -6472,8 +6487,9 @@ def declared_rows(chosen: Release) -> dict[str, Any]:
     (`walks_of`) declares the counts it reaches. A deletion the walk records and does not
     hold is a row at its parent's side, declaring the parent's certificate and the squares
     it deletes (``deleted``), which the replay decides as the parent's first ``n`` poses;
-    an index deletion bound an issue claims has no row by the owner's answer of 17 November
-    2026 (`CLAIMED_DELETION_ANSWER`, think-gmoj), so a walk holds it settled. A recipe the
+    an index bound an issue claims one square below the next count's certificate has no row
+    by the owner's answer of 17 November 2026 (`CLAIMED_DELETION_ANSWER`, think-gmoj), so a
+    walk holds it settled, and one deleting more waits on think-kzme. A recipe the
     walk records and does not hold is a row by the owner's D2 answer, declaring its parent's
     certificate and the recipe the construction checker decides
     (`write_recipe_decisions`)."""

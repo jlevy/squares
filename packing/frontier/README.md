@@ -264,9 +264,9 @@ maintained `devtools.two_strip_checker` decides it exactly from its parameters.
 A deletion bound is no such row: one square below the next count’s certificate is an
 earlier report (D6), and a deletion-made bound gets a row only where a report claims the
 count with a certificate file of its own, as #941’s 809 does (the owner’s answer of 17
-November 2026, think-gmoj), so an index deletion bound has none, claimed or not; whether
-a bound deleting two or more squares is an earlier report waits on the owner
-(think-kzme;
+November 2026, think-gmoj), so an index deletion bound has none, claimed or not; any
+bound deleting two or more squares, claimed or not, waits on the owner’s answer to
+whether it is an earlier report (think-kzme;
 [several reports at one count](../campaign/result-import.md#several-reports-at-one-count)).
 A certificate kept as hosted data is read through its hosted-data manifest
 (`devtools.hosted_shards`), while its receipts and rows stay in Git
