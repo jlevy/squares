@@ -5,14 +5,14 @@ title: "Decide: does the restatement ruling reach #719's 631, another holder's r
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T08:18:08.892Z
-updated_at: 2026-10-23T16:57:39.962Z
+updated_at: 2026-11-09T16:38:13.594Z
 ---
 **The question.** The owner's answer of 23 October (think-fwa9) is that a side below an earlier report at its count by less than the 12-place print, with both rounding up to the same 12-place print, restates that report: the earlier report stays the row. Does it also reach a re-certification by another holder that an earlier ledger recorded?
 
@@ -32,3 +32,5 @@ updated_at: 2026-10-23T16:57:39.962Z
 - **The two answers read together** (think-fwa9's restatements, think-8krd's "Goebel's classical constructions count as earlier reports beyond n = 324") could say the opposite: such a side restates an earlier report.
 - **No such side exists to 1024.** In the history, #719 and #732 walks the closest side below Göbel's construction is #675's at 919, 1.0e-05 below it (measured from the three ledger.json files at #754's head).
 - **Pinned by** `test_goebel_s_construction_is_an_earlier_report_beyond_the_horizon` (test_intake_ledger.py) and stated as open in result-import.md (Several Reports at One Count). An answer of "yes" changes `restated` and that test, and changes no verdict to 1024. It matters once think-llit raises the rulings' `through` past 1024; the retained Göbel program reaches 1073, and `goebel_form` refuses beyond.
+
+2026-11-09 coordinator: two new entries now wait on these questions (PR #934, lane L65, bead think-h96r). T-280 covers Kaelan Yim's vitamoon certificates at 299 (e4209f6, 1.18e-12 below T-277) and 303 (546928a, 3.29e-12 below T-278); T-281 covers his envelope-only 130 (c10e094, 1.96e-14 below T-259, T-260's form). Both are held at V0/C1 after the L70 blind review. Measured as shares of the predecessor's uniform-contraction (padding) margin by devtools.contraction_margin and independently by L70: 299 0.3472, 303 0.9674, 130 0.0896 (precedents T-259 0.9193, T-265 9.9679). Under RV-3 option (a) (withdraw padding-sized re-certifications) T-280 and T-281 would be withdrawn alongside T-253 and T-260; T-281 also waits on RV-1. Also waiting: think-5c9z (Daniel regularizer KKT points 3.30-3.53e-12 below T-275..T-279, the same padding class).

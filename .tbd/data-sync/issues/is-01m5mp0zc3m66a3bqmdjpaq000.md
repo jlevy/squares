@@ -5,16 +5,18 @@ title: "Decide: does a D6 deletion bound get a row (all 36, or where an issue cl
 kind: task
 status: open
 priority: 2
-version: 8
+version: 13
 labels:
   - decision
   - result-import
 dependencies:
   - type: blocks
     target: is-01m5pdb4p3a5q65jka3hb9y04v
+  - type: blocks
+    target: is-01m5pjxq31vpw03t0emgwnvhfe
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T15:28:13.698Z
-updated_at: 2026-10-24T07:34:58.499Z
+updated_at: 2026-11-17T01:22:59.413Z
 ---
 **The question.** The owner answered D6 on 23 October (think-f2io) by selecting the option labelled "Yes, an earlier report (Recommended)". The rest is the question the coordinator asked, not the owner's words: as coord-intake-1023 relayed it, the question was "a side obtained by deleting a square from a neighbour's certificate (e.g. Couzo's 985 from his 986)", and the selected option's description read "A published deletion bound counts like any stated bound; a later equal or higher side is not recorded". The owner-answers branch (PR #754) applies that: each such bound is recorded in the walk, and a later equal or higher side is not recorded (#732's 985). It gives the bound no row of its own, which is think-f2io's recommendation ("no rows, except where an issue claims the count"), not the owner's word. Three questions follow:
 1. Does a one-square deletion bound get a row of its own, as a stated bound with a certificate has? The selected option's description, the coordinator's words, said it "counts like any stated bound".
@@ -54,3 +56,12 @@ Three 4e4c8ce bounds delete more than one square (certified_bounds.json at 4e4c8
 In #754 the 36 one-square bounds are settled (`beyond_horizon_replay.DELETION_ANSWER`). 751, 752 and 927 stay held on this bead: in beyond_horizon_replay.HISTORY_HELD's second 4e4c8ce entry, and in test_deletions_of_two_or_three_squares_stay_held_for_the_owner. No verdict or row changes.
 
 2026-10-23 c-fix-754b-1023 (PR https://github.com/jlevy/squares/pull/754, review B, "Not verified"). coord-intake-1023 confirmed that the owner answered D6 by selecting the option labelled "Yes, an earlier report (Recommended)" in a multiple-choice question; the question text and the option's description were the coordinator's, not the owner's. The description's first paragraph, question 1 and the "row for each of the 36" line now quote only the label as the owner's answer and attribute the rest to the question the coordinator asked. The questions themselves are unchanged. #754 corrects the repository the same way (commit 8775445cd; think-f2io's note).
+
+2026-10-24 coord-intake-1024: #754 merged (0bbb0a2c4). The question above is the owner's (listed in the pass's owner questions); #763's 683, 1646 and 1727 also wait on it.
+blocked_on: none
+
+2026-11-11 bold-ritchie-l90 (think-cen3, PR #952): one more issue-claimed one-square deletion bound, at 809. Joost de Winter's #941 claims s(809) <= 28.9079170470, and its certificate above324/n0809.cert (JoostdeWinter/square-packing d3a020e, retained at 71da0d5) is the 810 certificate less its last square, at 810's side, claimed in the same issue as the 810 (the L96 stage 4 review's F5). Treated as 743, 798, 855 and 985 are: no row; the row of couzo-issue763-2026-10-23 (28.908036098650) stays current at 809, the de-winter-issue941-2026-11-10 declaration requests no row there, and the ledger upper-bounds-941-942-20261111 records the claim with a note naming this bead. Both maintained routes and the review accept the certificate. Unlike the four, the bound and the claim arrive in one report at one time, so no earlier report holds the count. Nothing here decides the question.
+
+2026-11-11 coordinator (senior review L97 of #952, N3): unlike 743/798/855/985, whose held bounds are index deletions with no file of their own, 809 (de Winter #941, n0809.cert at 71da0d5) is the issue's own certificate file, so it is also a stated bound with a certificate (question 1).
+
+2026-11-11 bold-ritchie-l103 (think-acm0): Joost de Winter answered #941's question on 809 at 20:19:41Z (https://github.com/jlevy/squares/issues/941#issuecomment-6806337206): "It is the deletion bound from 810: the 810 certificate with its last square removed, at the same side. Please handle it under the rule the project adopts for deletion bounds." So n809 stays queued on this bead in result-requests.yaml, and #941 stays open for it. Nothing here decides the question.

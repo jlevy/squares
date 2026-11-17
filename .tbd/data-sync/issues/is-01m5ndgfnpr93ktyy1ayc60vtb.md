@@ -5,7 +5,7 @@ title: "PR #756 (merge): senior review, address, gate"
 kind: task
 status: closed
 priority: 2
-version: 6
+version: 7
 delegate: c-rev-756-1024
 labels: []
 dependencies: []
@@ -16,10 +16,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T22:18:39.157Z
-updated_at: 2026-10-24T07:40:45.792Z
+updated_at: 2026-11-17T01:22:59.490Z
 started_at: 2026-10-24T01:05:25.282Z
-closed_at: 2026-10-24T07:40:45.791Z
-close_reason: "Merged as PR #756 at 2026-10-24T07:39:21Z (e5c1c64e3), head a9e3fab37, CI green; regularization states 57/228/28/7/4/0"
+closed_at: 2026-10-24T08:25:38.273Z
+close_reason: "PR #756 merged 2026-10-24T07:39:21Z (e5c1c64e3) after senior review A and follow-ups; coord-intake-1024 bead hygiene."
 resolution: null
 duplicate_of: null
 ---

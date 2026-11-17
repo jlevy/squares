@@ -3,9 +3,9 @@ type: is
 id: is-01m5khvkc9y6prw31wexsamsc4
 title: "PR #736 (merge): home page News box and Recently Added"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: null
 labels: []
 dependencies: []
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.840Z
-updated_at: 2026-10-23T06:43:56.057Z
+updated_at: 2026-10-24T10:48:04.854Z
 started_at: 2026-10-23T04:56:10.753Z
+closed_at: 2026-10-24T10:48:04.853Z
+close_reason: "PR #736 merged 2026-10-24T10:47:45Z (f354a34f5); see think-xae5."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

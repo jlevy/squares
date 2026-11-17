@@ -3,9 +3,9 @@ type: is
 id: is-01m5mpc70ng0dmtj9rxfvs8w3p
 title: "PR #753 (merge on 24 October UTC): T-231, T-229 lineage, reply records"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: c-land-753-1023
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T15:34:21.973Z
-updated_at: 2026-10-24T00:19:15.860Z
+updated_at: 2026-10-24T08:25:44.864Z
 started_at: 2026-10-23T15:34:24.630Z
+closed_at: 2026-10-24T08:25:44.863Z
+close_reason: "PR #753 merged 2026-10-24T01:03:07Z (5f5294d82); deferral think-mboh stays open."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

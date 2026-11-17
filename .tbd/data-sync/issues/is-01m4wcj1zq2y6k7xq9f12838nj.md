@@ -5,7 +5,7 @@ title: "Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)"
 kind: task
 status: open
 priority: 1
-version: 7
+version: 15
 delegate: null
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T05:01:01.303Z
-updated_at: 2026-10-23T06:16:15.118Z
+updated_at: 2026-11-02T18:02:58.000Z
 started_at: 2026-10-14T05:01:05.888Z
 ---
 Stage 1 triage of jlevy/squares#594 (bengreff, Benjamin Greff, opened 2026-10-14T02:06:46Z, labelled intake, no comments when read at 04:44Z): "Exact value s(76) = 9 (k = 9 of the k² − 5 series): registration request (external certificate)". "External certificate" is wand125's title template of #279/#280: the author's own certificate in his own repository, not a citation of another's published result.
@@ -107,3 +107,20 @@ Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-me
 **#594 issuecomment-6181807169 (bengreff, 2026-10-15T00:50:37Z), the answer to the triage's question.** The sixteen wall segments were not intended; they are LP residue. Every 1/20-lattice point on an integer line had a candidate segment of length 2/1000 along that line (one along each line at a crossing: 81 on the wall x = 0 inside the cross, with images); the interior-point solve without crossover gave weight 0 to all but four D4 orbits, at the crossings (0, 3), (0, 4), (0, 5), (0, 6) and images, about 1.04e-12; export_cover.py rounds every weight up to the unit 1/(4e8), so each became one unit. Rounding up only adds mass, and their 4e-8 is in the stated total. The horizontal partners at those crossings ([0, 2/1000] and [0, 1/16] on y = 3..6 and images) also carry one unit each, for the same reason. "The pinned cover stays as it is." This agrees with the triage's control (zmx2 decides every root identically without the 16 wall segments). Nothing to register; the review should record the answer. #594's read_through moves to this comment in the next records PR.
 
 **Intake-watch read for the records PR:** bengreff/s76-certificate read_through 06993982e83dba37ca12121bd876396a15571fcb, read_on 2026-10-15, bead think-osvq (the second route, owned until a packet pins it).
+2026-10-31 bold-ritchie-l5 (intake pass of 31 October, epic think-3guf, lane L5): stage 2 of the second route done. The packet bengreff-s76-second-route-2026-10-14 pins bengreff/s76-certificate at 06993982e83dba37ca12121bd876396a15571fcb (still the head, full clone 2026-10-31T05:07Z) and retains the twelve files that commit changes (README.md, SHA256SUMS, verify.sh, records/toolchain.txt, tools/check_full.py and records/zm_full/, the two .gz files as published; acquire_source --check passes). The evidence update: E-bengreff-594-cover-report's limitations name the route as reported and not run or audited here; a source-coverage entry names the packet. No rung moves. Nothing was run but sha256sum and a line count (roots.jsonl.gz: 129,601 lines; both .gz digests equal the tree's SHA256SUMS). What the commit reports: the full pass's own verdict is NOT VERIFIED (6 boxes in one root R = [27/20, 7/5] x [13/10, 27/20] x [1/4, 9/32]), and R certifies alone at depth 34 (13,767 boxes); 651,314 CPU-s at the source, the rerun 2,661 CPU-s. Still open here: the records audit (check_full.py and an exact reader of roots.jsonl.gz, minutes), the rerun of R (about 45 CPU-minutes, under the cap), and the full pass (about 155 to 181 CPU-hours, held over the 40 CPU-hour cap). Branch claude/bold-ritchie-xo28us-evidence, draft PR #850.
+
+2026-11-02 bold-ritchie-l30 (intake lane L30, epic think-3guf; PR #886, branch claude/bold-ritchie-xo28us-l30): T-184 rises to V3/C3 and n = 76 is proved (commits 3e990b69a controls, 101002a16 records). A follow-up on #594 is owed once #886 merges and main plus the deployed site agree (stage 7); not posted. Draft, to be checked against `check_requests --draft 594` rendered from main after the merge:
+
+> @bengreff, a follow-up to [our comment of 26 October](https://github.com/jlevy/squares/issues/594#issuecomment-6412988864), which gave your result as V3/C1, reviewed and pending adoption. With #886 merged, it has moved on `main`:
+>
+> - **[T-184](https://jlevy.github.io/squares/result/t-184.html), V3/C3, confirmed:** s(76) = 9, the lower half by your mixed cover and the upper half by the 9 × 9 grid, credited *Greff after Daniel, Hosono*. It is confirmed, reproduced with the producer's code: Evan Daniel's `zmx2` and `zm_mixed.py`, run here from the bytes you pin and read as one decision over the D4 region.
+> - **What held it at C1 is done.** Stage 4 asks that each checker refuse two mutated certificates. `zmx2` already did. With your `verify.sh` flags and its depth limit of 24, `zm_mixed.py` now refuses two covers with every mass scaled just below one at a low pose (by 49979/50000 and by 49301/50000), each on a cell where it certifies your cover with the same flags; a test keeps both pairs. No ruling on the review's depth-12 refusal was needed.
+> - **The case page.** [n = 76](https://jlevy.github.io/squares/cases/76.html) now adopts the value: s(76) = 9 is proved there, and Hiroaki Hosono's 1793/200 (T-091) is superseded.
+> - **Your second route** at `06993982` is retained in its own packet as reported; it is not run or audited here.
+> - **Next, for V4/C4:** a second adversarial review by a distinct reviewer and a human oversight record.
+>
+> **On `main`.** [`packing/frontier/RESULTS.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/RESULTS.md), [`packing/frontier/n-076.md`](https://github.com/jlevy/squares/blob/main/packing/frontier/n-076.md), [the packet](https://github.com/jlevy/squares/blob/main/packing/resources/web/bengreff-s76-certificate-2026-10-14/README.md).
+
+2026-11-02 bold-ritchie-l30, after review A of #886: the draft above now credits *Greff after Daniel, Hosono*, as bibliography.yaml and attribution.md give it, and names Hiroaki Hosono's 1793/200 (T-091) in place of wand125's.
+
+2026-11-02 bold-ritchie-l31 (intake lane L31, epic think-3guf; branch claude/bold-ritchie-xo28us-l31): the #594 follow-up owed after #886 is posted, https://github.com/jlevy/squares/issues/594#issuecomment-6584365975 (2026-11-02T17:57:59Z). Posted after Pages run 41493415710 deployed 86ed750b8 and its verify-deployment job 125447599931 passed 6039 of 6039 checks (result/t-184.html and cases/76.html served HTTP 200). Rendered with check_requests --draft 594 from main 86ed750b8 and reconciled with L30's draft above: T-184 V3/C3, confirmed, reproduced with the producer's code (Daniel's zmx2 and zm_mixed.py), current; credit Greff after Daniel, Hosono; zmx2's controls (drop-heaviest-point, drop-heaviest-segment) and zm_mixed.py's two uniform scalings (49979/50000, 49301/50000; exact pose captures 0.9999974 and 0.9999833), named as one mutation family; n = 76 proved, Hosono's 1793/200 (T-091) superseded; the second route retained as reported since 31 October, not run or audited; what remains (V4/C4: a second adversarial AI review, a human oversight record; the second route's audit) with this bead. Links squaremath.org and main; no closing keywords; read back byte-equal to the draft. The issue was closed on 26 October and stays closed. Recorded under #594's replies (and the stale "not yet retained" summary and second-route reason corrected) in the L31 records PR. Not closed: the coordinator closes this bead after that PR merges and check_bead_tree --before-close passes.

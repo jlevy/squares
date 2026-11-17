@@ -3,15 +3,21 @@ type: is
 id: is-01m4kbxmtaqt87tdw33cs19ah8
 title: "Import wand125: s(28) >= 2297/400 and s(30) >= 2357/400 by fine-net check2 certificates (no issue)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 10
+version: 16
+delegate: bold-ritchie-l42
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
+child_order_hints:
+  - is-01m6kmn3kndnywx2z5anbp67tr
+hold: null
+hold_until: null
 created_at: 2026-10-10T16:56:42.570Z
-updated_at: 2026-10-12T07:54:18.187Z
+updated_at: 2026-11-04T22:12:11.484Z
+started_at: 2026-11-04T15:03:02.888Z
 ---
 Found by the 2026-10-10 evening reads (think-0nkn): wand125/square-packing 36b85b9 and ff9f269 add problems/square-lower-bounds/certificates/mixed_n28_L57425/ and mixed_n30_L58925/, check2 bundles on the 2,073-direction net (core 4999/5000, step 1/5002), reporting s(28) >= 2297/400 = 5.7425 (mass 2799999/100000; +3/400 over T-107's 1147/200; +1/400 over #446's unadopted 287/50) and s(30) >= 2357/400 = 5.8925 (mass 2999999/100000; +9/1000 over T-109's 11767/2000). Data: square-lower-bounds-v1 assets certificates__mixed_n28_L57425.tar.gz (627,191 B, SHA-256 7d0f910768d47fcdba6233334798487471db7ef2fe556400269c34c3116d3bf3) and certificates__mixed_n30_L58925.tar.gz (638,622 B, 0d11fe0554909e1457d70efa425c82344e622006590ac6ee58a481b69d1b61ba). Author: 772 s and 1790.3 s, 0.985 control at 32 directions. No issue reports them. Stages 1-3 as T-132 (#446 s(29)) did with devtools.fine_net_followup; full capture likely CPU-hours (owner budget).
 
@@ -42,3 +48,17 @@ Register: two entries at V0/C0 (T-NN placeholders), pending adoption at n = 28 a
 2026-10-11 prep lane (nothing expensive ran): T-143 (n30) ready, smoke 5.8 CPU-s against 7.7, control samples at 0 and 1585 counted, revised 4.5 to 6.1 CPU-hours. T-142 (n28) census ready (smoke 4.5 CPU-s against 5.1, revised 3.3 to 4.5 CPU-hours) but its whole-net control is HELD: at the axis direction the 99/100 mutant's exact capture sits 2.15e-9 above the vertex sweep's certified bound, beyond the census's AXIS_ROUNDING of 1e-9 (CR-5 of the FC-1 re-check; n29's gap is 5.2e-10 and n30's 1.9e-10), so the control would write CONTROL_FAILED after 1.6 to 2.2 CPU-hours though the refusal is sound (exact capture below 1 at a centre inside the domain). Options for the owner and a review: widen AXIS_ROUNDING, derive it from the sweep's enclosure, or confirm with another control. Branch claude/wand125-confirmations-2026-10-11 (from claude/determined-rubin-yjfy2a 3ec95b418; commits 8ffbdbd1f..44eb6a017): runbook docs/project/specs/active/plan-2026-10-11-wand125-confirmations.md (mapped), --via release for proof bundles held only in release assets, devtools/retain_wand125_release.py, the census's MIXED_PACKETS, --evidence and --sweep-timeout, fine_net_followup control-sample. Total revised 23 to 31 CPU-hours, about 7 h wall in two lanes of two cores. Smoke receipts in the coordinator's scratch only. Owner questions pending: the n28 control's axis tolerance, and retaining the three check2 candidates in Git (as the 6 October check2 packet does, MIT; the nested verifier archive stays out).
 
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): the replay lane is https://github.com/jlevy/squares/issues/532 (T-142, T-143, T-144, with T-132). The owner questions on retaining the check2 candidates and on T-142's whole-net control tolerance are on https://github.com/jlevy/squares/issues/543. Tracker https://github.com/jlevy/squares/issues/544.
+
+2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on think-ux1v, which the owner's order of 11 October puts first (in_progress, no update since 13 October, though #487, #497 to #549 and #518 have merged, so what remains of it needs checking), and on the replay tooling reaching main (claude/wand125-confirmations-2026-10-11 at 44eb6a0); then T-143's 4.5 to 6.1 and T-142's 3.3 to 4.5 CPU-hours, within the 40 CPU-hour item cap, with #543's two owner questions (check2 candidates in Git; T-142's control tolerance) open.
+
+2026-11-04 bold-ritchie-l42 (intake lane L42, think-3guf; asked to run T-142's and T-143's census or control under the enclosure rule if priced at 15 CPU-hours or less, at two threads under nice -n 19): not run, and stopped here. What the two need, read today:
+- Price: T-142's capture and whole-net control 3.28 to 4.5 CPU-hours (5,903 + 5,911 CPU-s from the 10 October eight-direction sample, revised up by the 11 October smoke run), T-143's 4.49 to 6.1 (8,080 + 8,092 CPU-s); together 7.8 to 10.6 CPU-hours, about 4 to 5.5 hours of wall at two threads. Within 15, and within the 40 CPU-hour item cap.
+- No review reads either certificate (the 11 October final review read the record and premises only). result-import.md stage 4 and the declared-net checklist (review-2026-10-06-sqverify-fast-declared-net-soundness.md, For the Records Lane, item 7) need one before a census's evidence can be mapped, and check_results' verified_lane_review_problems refuses the verified lanes at n = 28 and 30 until a mapped review covers them: a census now would move no rung, as think-1lri found for T-132 (#889 deferred T-132's census for the same reason). That review is now think-4ul6.
+- The release assets' members are not retained (pinned by size and digest only; #543 still asks the owner about keeping the three check2 candidates in Git, though think-r333 retained n29's on 2 November), and sqverify_fast_census lists no packet for them (MIXED_PACKETS, MIXED_ROOTS).
+- This bead is still blocked by think-ux1v, the owner's order of 11 October (regularization before this replay).
+- T-142's control tolerance question on #543 is moot: #892's enclosure rule judges its axis gap of 2.15e-9 (think-4uun). T-142's and T-143's next_rung and unfinished_confirmations now say so and name think-4ul6 (branch claude/bold-ritchie-xo28us-l42).
+Order once unblocked: retain the two release assets' members, add the packet to the census, run think-4ul6's review, then the two censuses and controls (7.8 to 10.6 CPU-hours), --evidence with that review as the audit record, and the adoptions at n = 28 and 30. No reply is owed: no issue reported either.
+
+2026-11-04 bold-ritchie-l42, later: on the coordinator's word (the owner's answer of 17 October to retain fine-net candidates where the census reads them; #543's checkbox is stale), both release assets' data members are retained (commit 7ccb06b3c on PR #903; check-retained 0 problems) and the census reads the packet. The coordinator has launched think-4ul6's review against 78729cfc2. Once it lands, the two censuses and controls (7.8 to 10.6 CPU-hours), the evidence with the review as audit_record and the adoptions at n = 28 and 30 go in a follow-up PR after #903, by the coordinator's decision. The think-ux1v ordering of 11 October is the coordinator's to clear with the owner.
+
+2026-11-04 bold-ritchie-l45 (follow-up to #903, branch claude/bold-ritchie-xo28us-l45): after think-4ul6's stage 4 review accepted both certificates, the complete sqverify-fast censuses ran at two threads under nice 19 from reviewed source d97758bb (binary 567a0fd5): mixed_n28_L57425 VERIFIED at all 2,073 directions (594,284,796 nodes, least 1.0000000000106595 at 1088, 7,096.9 CPU-s, 3,644 s wall) and mixed_n30_L58925 VERIFIED (702,952,674 nodes, least 1.000000000029295 at 1585, 10,667.1 CPU-s, 5,784 s), each direction equal to the source's check2 log (capture-agreement receipts). Whole-net controls CONTROLS_REFUSED at both (n28 675 s / 1,111 CPU-s, axis capture in [0.9914000062838418, 0.991400010590911], gap 2.15e-9 judged by #892's enclosure rule; n30 597 s / 985 CPU-s, gap 1.88e-10). 5.5 CPU-hours in all against the 7.8 to 10.6 priced. The replays are evidence with the review as audit_record; T-142 and T-143 are V3/C3 and both lower lanes at n = 28 and 30 take 2297/400 and 2357/400 (T-107, T-109 superseded). Tracking issues #776 and #777 each owe the reply that reports the rungs once this lands on main; #532's T-142/T-143 ask is marked done.

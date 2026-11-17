@@ -3,10 +3,10 @@ type: is
 id: is-01m53fpy7t6jb17mc9gsdhha75
 title: "Regularization: a second exact route over number fields, so a strong view at an algebraic house can be admitted (#660 A4)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 3
-delegate: null
+version: 4
+delegate: w-regularize-algebraic-1026
 labels:
   - regularization
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T23:10:48.058Z
-updated_at: 2026-10-24T01:55:13.044Z
+updated_at: 2026-10-26T03:38:04.868Z
 started_at: 2026-10-16T23:10:55.263Z
 ---
 The regularization of the exact algebraic houses: a regularizer that draws an exact view of a number-field witness at or below its house's side, and a second exact route that admits such a view (#660 A4; scope restated by review A3 of #756 on 24 October 2026).

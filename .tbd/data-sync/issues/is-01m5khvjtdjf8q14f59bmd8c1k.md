@@ -5,8 +5,8 @@ title: "Intake pass 2026-10-23 (resumed): land #736 and #742, #719 records (204 
 kind: epic
 status: in_progress
 priority: 1
-version: 95
-delegate: coord-intake-1023
+version: 174
+delegate: coord-n12-1025
 labels:
   - result-import
 dependencies: []
@@ -101,10 +101,78 @@ child_order_hints:
   - is-01m5pdb3nsxtetytme2gpssxak
   - is-01m5pdb4p3a5q65jka3hb9y04v
   - is-01m5pdbrxayk72e4e03w8017jg
+  - is-01m5pg1gyc2xjj54pjyqcp530z
+  - is-01m5pg1j3v0e9s1d4cpkkgh218
+  - is-01m5pg1k2rge85ex0w801evvhz
+  - is-01m5pgg4w55avj7f7j3h1nr5h7
+  - is-01m5pgg68ng3fm9e9e576jka91
+  - is-01m5ph8wdhfm0473akktqdmq66
+  - is-01m5ph9rqe5bpdf29txxgz7bce
+  - is-01m5ph9tgz55s39cjkhjz3f3ng
+  - is-01m5frrpa39v4j885s113618g2
+  - is-01m5ngnmstxk6xfzjsxfqsxez5
+  - is-01m5nvf31dym5rjns3hp10xbdd
+  - is-01m5pjxn8ykge4h67nqv0hgqer
+  - is-01m5pjxq31vpw03t0emgwnvhfe
+  - is-01m5p8babk5xj1t2jtfgv1qy88
+  - is-01m5pn326d1a7qmcsxkmh55vys
+  - is-01m5pn385t6saqvecp4w6nbp0e
+  - is-01m5ppkz2jedpvbe0tpd7crt4s
+  - is-01m5prf1nx2jxx04pk04ghajkd
+  - is-01m5psf04h11njx53x3nszbw2z
+  - is-01m5psj7mnr8mmwzryzp881165
+  - is-01m5psw2f2372wa4byhnkajzq5
+  - is-01m5ptytewak95j0qntd6dk909
+  - is-01m5pwb2kmk5xd6tfkzyhh4h3y
+  - is-01m5pwg8mh903ck2a2bj2zx8yj
+  - is-01m5pwz24145bevmx7ts4gfp0x
+  - is-01m5pxt8z7wcmrqg087r0p1kwa
+  - is-01m5pz90d37eft8e4f3vgvxj5h
+  - is-01m5q0hxzdzv80pbpgak8s6cem
+  - is-01m5q0mdz7cfpryfkgvr7kefbx
+  - is-01m5q394sd3cx4fay9z38d7wrn
+  - is-01m5q4anwvwe7m5sbdx2mmrk0p
+  - is-01m5q61t2j0332t5mwepz08dhz
+  - is-01m5q623ssynf7fnwc7m8pqpqr
+  - is-01m5q85h3gvffn8jnxxqyq15tb
+  - is-01m5q85hzznrk7kq7ddn7wmzpj
+  - is-01m5q8dsxs5b82f172caet7dga
+  - is-01m5q9h14az2vh0xkmmxf98vca
+  - is-01m5q9h2v09zqp5k29wf7s9mk1
+  - is-01m5qbeek9b0nkjt5ng41nr9fp
+  - is-01m5qc91rje7cqb1gaebmnqdpw
+  - is-01m5qc93gte6p0b4htctzq5mg3
+  - is-01m5qcdfkp5sh4j4syeas6b9fq
+  - is-01m5qcdm0pwbmvvbgp6pjgj670
+  - is-01m5qge3f4s6k5jnr4zcd3q4sv
+  - is-01m5qgmv8c5fvy8ce1s8ajhrq9
+  - is-01m5qhrt0fbwn9t9npxg6jmd3c
+  - is-01m5qjf1f2nwwdmeanpfwt5vd4
+  - is-01m5qmak2fqxxtyp28ye418qxr
+  - is-01m5qqwh830qd3x6f9qrga2tyz
+  - is-01m5qs1s5dgwrm3b9j8vnpzkn3
+  - is-01m5g1p2t87yg0ryt8db6gjwya
+  - is-01m5qsa0zpbykjt72q42fhz1fw
+  - is-01m5qsa1tcazkphxbd029zj58d
+  - is-01m5qsa2jj6mf8cgemykzyy109
+  - is-01m5qsa3atwx2vwehndjk0p9aa
+  - is-01m5qw2vxfpq9swr8q3nq6cnw8
+  - is-01m5r6x0j12j7arpqj9e8fwvr3
+  - is-01m5r7y7jhn1ph707k211nv2pz
+  - is-01m5re1rjde9214mm9wbncb69g
+  - is-01m5re8ps95t49ek0prw8rjacm
+  - is-01m5rh3m44f1gvpbpff571xcwh
+  - is-01m5rr1szcsazmt86mavzs7555
+  - is-01m5rr1xq0hjnz6409nrc5kd8h
+  - is-01m5rr21pm1cpb0ryp0pyvmkvy
+  - is-01m5rt5tsxbxfb0b3n9mrtqs01
+  - is-01m5szcqa1r3bdx2xw9dpkf463
+  - is-01m5tv6pzmhzj7t4pgtwgdk8m9
+  - is-01m5vy0jp5b8fnq6j88zsdc871
 hold: null
 hold_until: null
 created_at: 2026-10-23T04:56:08.269Z
-updated_at: 2026-10-24T07:35:19.209Z
+updated_at: 2026-11-17T01:22:59.359Z
 started_at: 2026-10-23T04:56:10.325Z
 ---
 
@@ -114,3 +182,24 @@ Resumes coord-intake-1021b's pass of 21-23 October (no epic of its own). Lanes a
 
 2026-10-23 coord-intake-1023: coordinator call for c-lane-719-records-1023 on #722 review A2 at 204: #719's ledger is re-gathered with 1851c2c's least side at 204 (n204.cert, T-231); T-229 stands as registered and adopted on the issue's named file (n-204.cert) before the author claimed the lower file, and is superseded at 204 by T-231 (same author, same commit). Not an owner question: A2 is an existing rule. Fallback (a dated note only) if the checks need more than a narrow, tested statement of this case. Added lanes at the owner's request for more parallelism: tracker audits A/B/C (think-s4ld, think-ioqe, think-lrg9), stage-7 drafts (think-ntyb), T-231 math review (think-tetq), above-1024 triage (think-llit).
 2026-10-23 15:20Z coord-intake-1023 status. Merged: #742 (598d23289), #749 (c1115c095). Posted: #732 verdict + import reply, #715 and #719 follow-ups (recorded in #753). Open intake PRs: #753 (T-231, T-229 lineage, reply records; CI red on page budget 204.html, a missing source card, a slow-marker test; lane fixing), #745 (T-232 n31 replay clean, review accepted, to map; T-233 four captures verified, n26 control failed closed on AXIS_ROUNDING, think-tcsl; T-233 stays V0/C1), #750 (Lean sources T-234..T-236 reported; waits on #753/#745 ids; stage 4 reviews owed), #747 (close step; review A changes requested; addressing), #748/#751/#752 (green; senior reviews running), #754 (owner answers into walks incl. D6; resumed), algebraic houses branch (9 adoptions; driver rerun of 258/259/302; no PR yet). Owner questions open: think-r8cn (Q13 drawings), think-4o9c (register kind for s(2)-s(5) Lean routes), T-157 human oversight for V4/C4, compute cap for the pass (think-lh7d's 40 CPU-h item rule applied), above-1024 D3/D5/N1/N4/N5/N6, owner-reserved issues #557/#565/#570/#574, T-154 S5 confirmation. Answered today: fwa9, 8m4k, f2io D1/D2/D6, 8krd, 7hq0, llit N2/N3, qh3s (no preference: S1 line kept). Session usage limit hit at 10:30Z stopped four lanes; resumed 15:10Z.
+
+2026-10-24 ~08:20Z coord-intake-1024 (Claude Code remote session, claude/gracious-babbage-szx392): HANDOFF. coord-intake-1023's session (session_014X1vTGQSoQHeyW8Lt5ps7K) was interrupted; the owner asked this session to resume the pass and land everything in flight without further confirmation (OR-10 continuation). State at takeover, main e5c1c64e3 (#756): open drafts #781 (think-494l, Fang note; green, no review), #787 (think-9i18, stage 7 records; green, no review), #788 (think-3oxz, measure_news_page; green, review A at 463f78d3f unaddressed), #736 (think-xae5; review B approves, final-sync decisions B1/B3/B4/B5 pending). Not ours: #744 (owner: another agent's), #599/#574/#435/#403. Lanes of coord-intake-1023 still marked in_progress with no live worker: c-import-763-1024 (think-ptkk, no branch pushed), c-couzo-answers-1024 (think-mdfr, no branch), c-post-770-1024 (think-dxmr; the 16 posts were made, records ride #787). Plan: review/address/merge #788, #787, #781, #736; stage 7 posts after deploy; resume think-ptkk and think-mdfr; sweep; close stale lane beads.
+
+2026-10-24 ~19:20Z coord-intake-1024 status. MERGED this session (each reviewed, dispositions posted, hosted CI green, merge commit): #787 09:02Z (stage 7 records), #788 09:26Z (measure_news_page), #736 10:47Z (home News box, owner's take-over; follow-up review C), #781 11:18Z (Fang note; T-163 V3/C1), #791 11:51Z (plan: rows above 1024), #790 12:07Z (Couzo's 24 Oct answers, watch reads), #789 13:22Z (#763 PR A: T-240 reported, 194 rows), #792 17:34Z (T-241 Couzo 304, T-242 Daniel 268/304), #793 18:32Z (W7 code: windows, Göbel module, construction checker, hosted shards), #796 19:06Z (OR-1 tools: measure_identity, sharp-controls). POSTED (after verified deploys): #534 and #536 finals + closed; #603 status; #672, #678 finals + closed; #715 follow-up; #763 acknowledgement; #446 reopened (closed by a commit message; think-ulc1). IN FLIGHT: #794 (#763 PR B: T-240 V3/C3, adopted and regularized at 268 and 303) dated 25 Oct, merges at 00:10Z via scheduled check-in trig_01DhTFUTDPGkUQQYuVtXQfPv; #795 (the 99 Kaggle-credited sides and the push's 86 intermediate sides, 185 rows) in follow-up review C. NEXT: think-hx0e (T-241/T-242 stage 4 and re-housing at 268/304, pass day after 25 Oct), think-gn29 (43f666c), think-20oj (regularizer views), R1 (owner publishes data/couzo-715-certificates-v1), R2 (owner publishes #732 shards), think-g2qy (recipes with best/ certificates). OWNER QUESTIONS: think-lsam (News budget; tool landed), think-kzme (D6 sub-question), think-zkxy (Friedman), think-nq5g (send wand125 M-1..M-3), D5/N1/N5 (plan #791), #789 A7 (stage 2 presumption rule's generality), row-7 view at 268 (#794), Daniel's acknowledgement (no issue; draft in think-l49q).
+
+2026-10-24 ~20:50Z coord-intake-1024 checkpoint. MERGED: #795 (2ed0ea740, 20:34Z; review C's C1 fixed in a65b63819, C2 -> think-yeol), deploy being verified. SWEEP 20:30Z (main 84d4a75af): new #797 (Fang, c*(k) < 4 sqrt(2k)+1; think-4tj5), #798 (Kristiansen, 14 bounds at 334-504; think-2l0q), #799 (Karimi, 683 bounds at 1184-3775; think-5dc3), #755 comment (amundsk answers + CC0; think-fc1n), squarepack-certs db1ed62 (in think-4tj5); all three issues labelled intake; think-xu4d closed (#678 done; think-0b6l moved here); think-z236's wait cleared (rides R1). LANES: c-triage-797-1024, c-triage-798-1024 (+fc1n), c-triage-799-1024 (read-only, scratch triage-797/798/799); c-review-t241-t242-math (think-vm3m under think-hx0e; worktree wt-rev241, files only); c-import-gn29-1024 (think-gn29 + think-g2qy, worktree wt-gn29, branch claude/intake-2026-10-24-couzo-43f666c); c-sync-794-1024 (think-acuz: merge main 2ed0ea740 into #794, 7 conflicts). Report order at 330-997: #763 -> push 23:38:42Z (#795) -> 43f666c (06:10:44Z, gn29) -> #798 (19:03Z), so #798's import follows gn29's. #794 merges at 00:10Z (trig_01DhTFUTDPGkUQQYuVtXQfPv) after a follow-up review of the merge.
+
+2026-10-24 ~21:20Z coord-intake-1024: stage 4 review of T-241/T-242 (think-vm3m) accepted for finite feasibility, all three certificates valid; M-1 (major): Couzo's manifest previous_source / previous_reference.seed_credit name the catalogue's previous record, not the seed (checked: at 303 seed_credit Lavrentev, previous_source Daniel's T-230). That reading error is also in #795's merged credits at 364, 450 and 874 ('seeded from', my call of 24 Oct): think-o4m0. Lane c-map-hx0e-1024 (wt-hx0e, branch claude/intake-2026-10-24-t241-t242-review): retain and map the review, M-1..M-5, think-o4m0, adopt T-242 at 304 (H1, after #794); T-242 at 268 is H2 on or after 2026-10-26T00:00Z. Told c-sync-794-1024 to narrow T-240's RF-2 sentence to 268/303, and c-import-gn29-1024 the reading rule. Lanes now: gn29, sync-794, 798, 797, hx0e. Queued: W8 two-strip checker (think-clgp), Fang's #797 stage 4 note review.
+
+2026-10-25 ~04:40Z coord-intake-1024 checkpoint. MERGED today: #794 (01:00Z, T-240 houses 268/303), #801 (02:35Z, Daniel's and Fang's deficiency rows), #800 (03:01Z, 43f666c's 122 rows + #763's 13 recipes), #802 (03:41Z, #798's 12 rows + #755 answers), #803 (04:14Z, T-241/T-242 V3/C3, T-242 house at 304, M-1 credit corrections incl. #795's 364/450/874). Every deploy verified. POSTED: #763 (PR B reply 6391800383; 43f666c follow-up 6392829915; notebook rows 6393433847), #797 ack 6392638719, #798 import reply 6393163824, #755 follow-up 6393163946. OPEN: #805 (Fang Theorem A review mapped to V3/C1; #797 ack, #798/#755 reply records), H2 (think-3anz, wt-h2: T-242 at 268, merges on or after 2026-10-26T00:00Z; records the notebook-rows reply), W8 (think-clgp, wt-w8: two-strip checker + #799 packet). NEW BEADS: think-x565 (OR-1 papers no-change tool), think-tfdn (A7 template wording), think-0tdd (Q2 measurement), think-fqp6 (Daniel Lean build), think-yeol (walk README credit preamble). OWNER QUESTIONS added: #799 O1 (theorem-wide k^2-c statements as earlier reports beyond 324); R1 still waits on the owner publishing data/couzo-715-certificates-v1.
+
+2026-10-25 ~05:30Z coord-intake-1024: sweep of main bb756e193 (scratch sweep-0525.txt): new #806 (Daniel, s(182) <= 13.970916436215, in corpus; think-2lzo, with evand's 28 commits to d99925d), #804 (Kim, exact minimal polynomials at 88/126/172/199/263; think-9vai), #565 comment (maximusrufus T-154 rebuild; owner-held; think-z2mj), #799 V2 (2,824 rows) and preprint (think-5dc3, via think-z2mj); #806 and #804 labelled intake. Reply/close records for #763/#797/#798 ride #807 (H2); #799's entry rides #808 (W8). think-gn29 now waits on think-llit/think-kzme; think-tfdn unblocked. Three triage lanes running; reviews of #807 and #808 running; H2 merges at the 26 Oct 00:10Z check-in (trig_0178kD4FUDrHjrZmrqD5uc12).
+
+2026-10-25 08:50Z, coord-n12-1025: result ids T-244 and T-245 are reserved for PR #812 (n = 12 Lean proof, #810; s(29) minimal polynomial, #545/#811). #814 registered T-243 while #812 also used it, so #812 is being renumbered. The next free id after #812 is T-246.
+
+2026-10-25 09:35Z, coord-n12-1025: correction to the note above. #813 holds T-244 (Kim at 172 and 263), so #812 registers T-245 (n = 12) and T-246 (s(29)). Whichever of #813 and #812 merges second must re-cut the explainer, since both take the version after v0.4.28.
+
+2026-10-25 ~11:50Z coord-intake-1024 checkpoint. MERGED since 04:40Z: #805 (Fang review mapped), #808 (W8 two-strip checker, #799 packet V1+V2), #814 (T-243, Daniel's s(182), V3/C3, house at 182 on 25 Oct), #813 (T-244, Kim's exact sides at 172/263, reported; configurations received). CLOSED: #797, #798, #806 (finals posted and recorded). POSTED: #799 ack, #804 ack, #806 final, #763 notebook-rows note. OPEN: #807 (H2, T-242 at 268) merges at the 26 Oct 00:10Z check-in (trig_0178kD4FUDrHjrZmrqD5uc12; needs main merged, stamp without --date, re-pin, CI); think-4rzl lane (c-decide-4rzl-1025, wt-4rzl) decides T-244's configurations and records #804's ack and #799's 08:11Z/08:17Z answers. OWNER QUESTIONS: #565 rebuild of T-154 (Form A C1->C3 or Form B, with think-6t6q); #799 O1 (theorem-wide k^2-c statements as earlier reports beyond 324); R1 waits on the owner publishing data/couzo-715-certificates-v1 (and R2 on #732 shards); the earlier list (think-lsam, think-kzme, think-zkxy, think-nq5g, D5/N1/N5, #789 A7). NEXT: R1-R5 above 1024 once hosted data exists; think-hx0e done; think-20oj (303 view); think-x565, think-yeol, think-tfdn, think-0tdd, think-fqp6, think-pf37, think-f8py (Daniel's row review).
+
+2026-10-25 16:05Z, coord-n12-1025: T-247 is reserved for think-ozx8 (Hyukdong Kim's exact side at 297, #804's comments of 12:00Z and 12:23Z), taken on the owner's word of 25 October. The next free id after it is T-248.
+2026-10-26 ~00:50Z, coord-n12-1025: ownership transferred to coord-n12-1025 on the owner's instruction of 26 October ("keep following up on all remaining issues that are filed and have not been dealt with ... closing items that fully have intake completed"). Evidence the outgoing owner is not live: its session "squares: Ongoing intake" (session_014ZKp7R) is archived with status failed on the account's monthly spend limit; its scheduled check-in trig_01DhTFUTDPGkUQQYuVtXQfPv no longer exists; #807 was last updated 25 Oct 05:38Z and its planned 26 Oct 00:10Z merge did not happen. Remaining work taken over: #807 (think-3anz, T-242 at 268, pass of 26 October: merge main, re-stamp, re-pin, fold amundsk's #798 comment of 13:34Z, think-2l0q), the #797/#798 close records, #763's reply record and its author's credit answers, #799 mohsensbu answers of 08:11Z/08:17Z (c-decide-4rzl-1025), #804 exact-sides-held reply (think-9vai, think-4rzl), the stale lane delegates on #686/#715/#719, and the new #819 (amundsk, s(344)). Owner-reserved replies (#557, #565, #570, #574) stay reserved.

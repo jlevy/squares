@@ -3,10 +3,10 @@ type: is
 id: is-01m5nvephbmqvk0ace4vzerhg9
 title: "Take over PR #736 (home page News box) on the owner's word: merge main, resolve without redesign, verify a strict improvement compatible with later design choices, review, merge"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 6
-delegate: c-take-736-1024
+version: 11
+delegate: c-sync-736-1024
 labels: []
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:22:20.715Z
-updated_at: 2026-10-24T04:52:43.974Z
+updated_at: 2026-10-24T10:59:31.261Z
 started_at: 2026-10-24T02:22:34.759Z
+closed_at: 2026-10-24T10:48:04.270Z
+close_reason: "PR #736 merged 2026-10-24T10:47:45Z (f354a34f5) at efd1d8e48 after review B's fixes and follow-up review C (approve: strict improvement, 710 of 711 pages identical, compatible with #746, #764, #771, #757 and the 22 October design); hosted CI green (31 pass, 28 skipped)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
@@ -31,3 +35,15 @@ started_at: 2026-10-24T02:22:34.759Z
 - B4: clarify the live-count sentence.
 - B5: fold the duplicate SOURCE_COVERAGE into the papers' re-measure.
 - After each preceding merge: `stamp_landed --backfill --apply`, not plain `--apply`, then re-pin. After #757, re-measure the papers' record.
+
+2026-10-24 c-sync-736-1024: final sync of #736 done; head 8e3692a31 (draft, MERGEABLE CLEAN, labels S2 and project).
+- Merges of main: b3f67a02d (e5c1c64e3, #745 to #771; one conflict, release.py DATA_REVISION, main's taken) with stamp_landed --backfill --apply (11 entries, all 24 Oct UTC: 303 at T-239 #757, nine algebraic houses #756, mishapolk-issue732-f1ceee4 rows #769; checked against ADOPTED at merge parents); 9688cd628 (6808d293a, #787, clean); 8e3692a31 (b2ea7b09c, #788, clean). Re-pin 252c64ba4 to b3f67a02d.
+- Review B fixes c0ce843f9: B1 owner's S5 rule, FRESH_DAYS and record_reference dropped, attribution corrected; B2 option (a), house_moves drops a landing whose result is not a verified upper-bound holder; B3, B4 as worded; B5 duplicate SOURCE_COVERAGE removed. Papers re-measured 5c71b2f94 at link revision c0ce843f: 69/69 byte-identical, retain v0.4.25, v0.1.11, v0.1.4, v0.2.7.
+- Dispositions: https://github.com/jlevy/squares/pull/736#issuecomment-6382731191. PR body updated.
+- Hosted at 8e3692a31: 31 pass, 28 skipped, 0 fail (Packing validation 40082304617 after re-running validate once the coordinator fixed think-3oxz; Certificate page 40082304588; Branch mergeability 40082301179).
+- Site comparison main 6808d293a vs branch 9688cd628: 710 of 711 pages identical masked; home sections identical except Recently Added (new) and News (same three visible cards byte-identical, six carried hidden), plus results.css link and news-filters.js tag.
+- Open, outside the branch: tests/test_beyond_horizon_replay.py::test_the_receipts_records_and_coverage_rows_hold runs 42-45 s on most hosted runs against the 45 s backstop (failed suite-c at 5c71b2f94 at 45.07 s; 44.19 s on main's push at e5c1c64e3).
+
+2026-10-24 coord-intake-1024: c-sync-736-1024 finished at head 8e3692a31 (main b2ea7b09c merged): B1-B5 fixed in c0ce843f9 (dispositions https://github.com/jlevy/squares/pull/736#issuecomment-6382731191), papers' record re-measured (5c71b2f94), DATA_REVISION re-pinned (252c64ba4), landings backfill 11 entries in b3f67a02d; hosted CI green (Packing validation 40082304617 after a re-run of the bead-tree step the coordinator's closures had broken, Certificate page 40082304588, Branch mergeability 40082301179); 710 of 711 HTML pages identical to main's, index.html 579,134 bytes (budget 1,300,000), box 55,692 of 64,000. Because the owner asked for careful review, a follow-up review C (think-s2dw) checks the fixes and merges before the merge. Slow test found: think-zjls.
+
+2026-10-24 coord-intake-1024: #736's deploy verified: Pages run 40087328669 on f354a34f5, deploy job 120854074102 and verify-deployment job 120854118400 succeeded; squaremath.org's home page carries Recently Added and the News box.

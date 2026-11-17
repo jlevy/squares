@@ -1,0 +1,11 @@
+entity_id: is-01m5ndgfnpr93ktyy1ayc60vtb
+timestamp: 2026-11-17T01:23:02.556Z
+field: closed_at
+lost_value: '"2026-10-24T07:40:45.791Z"'
+winner_source: remote
+loser_source: local
+context:
+  local_version: 6
+  remote_version: 6
+  local_updated_at: 2026-10-24T07:40:45.792Z
+  remote_updated_at: 2026-10-24T08:25:38.273Z

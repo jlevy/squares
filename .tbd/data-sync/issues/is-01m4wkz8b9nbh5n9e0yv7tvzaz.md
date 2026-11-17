@@ -5,7 +5,7 @@ title: "Import Mishapolk: 73 upper bounds across n = 51 to 308 (#593)"
 kind: task
 status: open
 priority: 1
-version: 7
+version: 8
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T07:10:33.832Z
-updated_at: 2026-10-23T06:16:20.927Z
+updated_at: 2026-10-31T11:17:59.326Z
 started_at: 2026-10-14T07:10:42.633Z
 ---
 Stage 1-2 and stage 4 replay of issue #593 (Mishapolk/square-packing-records at 46f638ce0537beeb1bad24242c6a3d357eecd9ee), lane mishapolk of the 2026-10-14 intake pass, branch claude/wizardly-meitner-wqn4x3-intake-1014-mishapolk. Claim map, comparison and priced plan in notes.
@@ -106,3 +106,5 @@ Couzo priority at 211/241 and 156/271; 51 needs an algebraic house to compare in
 https://github.com/jlevy/squares/issues/593#issuecomment-6163849805 (revised from the draft above; text in scratchpad mishapolk/ack593.md).
 
 Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-meitner-wqn4x3-records-1014): T-183 at 237, V0/C0; the ties at 211 and 241 and the other 70 counts not recorded.
+
+2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner's decision on #593's queued ask: whether Polkovskyi is credited jointly with Couzo (#586) at 211 and 241. Best put together with think-ikku, the owner's open question on his sub-print refinements at the same two counts.

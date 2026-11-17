@@ -3,20 +3,20 @@ type: is
 id: is-01m5733rrtrvkg93nmregwfe2a
 title: "Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request (#666)"
 kind: task
-status: in_progress
+status: open
 priority: 2
-version: 14
-delegate: coord-intake-1021b
+version: 16
+delegate: null
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m572ssbx1x412zpvsw1sb6je
 child_order_hints:
   - is-01m5bdvsnv6eetrva29yt6p6gy
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-18T08:47:34.680Z
-updated_at: 2026-10-22T08:30:22.744Z
+updated_at: 2026-11-02T01:09:34.544Z
 started_at: 2026-10-18T13:04:20.646Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/666
@@ -123,3 +123,9 @@ Ledger: 432 claims at 124 counts, all recorded, none undecided; starts frozen at
 
 2026-10-22 08:30 coord-intake-1021b: after #720 merged (0281e7763; deploy run 39745544894, check_published_site 4806/4806), the import reply with the report-order verdicts was posted: #666 https://github.com/jlevy/squares/issues/666#issuecomment-6336294534. Its record edit is in the coordinator scratchpad replies/0122d.md (validate0122d/), carried by #719's records PR (think-xyhn).
 blocked_on: think-f2io
+
+2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner: #666's eight rows above 1024 are recorded by think-llit's walk (bold-ritchie-l4, live on 31 October) once the owner decides D4 (hosting) and D5 (per-row credit beyond the horizon, think-f2io), and once zenodo.org is reachable for the #836 and #847 deposits the walk must read.
+
+2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Waits on think-llit's walk above 1024, which records #666's eight rows above 1024 (#666's requests entry queues each blocked_on think-llit), and on the owner's D4 (hosting) and D5 (per-row credit beyond the horizon) on think-f2io, which the walk needs. Not done: no row is recorded and no reply from main is posted. Held (`hold: blocked`), and the claim of coord-intake-1021b, an ended session of an earlier lane or coordinator, released (status open, no delegate), so the bead names no one acting on it while it waits; the sweep had read the lapsed claim as stalled every two days since 2 November.
+The line below replaces the earlier `blocked_on: think-f2io`.
+blocked_on: think-llit, think-f2io

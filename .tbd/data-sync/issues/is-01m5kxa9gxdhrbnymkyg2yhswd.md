@@ -3,9 +3,9 @@ type: is
 id: is-01m5kxa9gxdhrbnymkyg2yhswd
 title: "PR #747 (merge): close settled intake issues at stage 7; awaiting-author questions"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: c-addr-747-1023
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T08:16:24.605Z
-updated_at: 2026-10-23T18:31:47.318Z
+updated_at: 2026-10-24T08:25:45.941Z
 started_at: 2026-10-23T08:16:33.602Z
+closed_at: 2026-10-24T08:25:45.941Z
+close_reason: "PR #747 merged 2026-10-23T18:32:52Z (7cd0a94bf)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

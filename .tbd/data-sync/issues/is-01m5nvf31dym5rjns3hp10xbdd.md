@@ -5,12 +5,12 @@ title: n-204.md history paragraphs still call the 204 seed Polkovskyi's own cons
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels: []
 dependencies: []
-parent_id: is-01m5nq1f8n1jcjddbfz2zx2x97
+parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T02:22:33.517Z
-updated_at: 2026-10-24T02:22:33.517Z
+updated_at: 2026-10-24T08:56:50.968Z
 ---
 Deferral from think-t5hc (c-records-a-1024, 24 October 2026; PR A, branch claude/intake-2026-10-24-author-answers).
 

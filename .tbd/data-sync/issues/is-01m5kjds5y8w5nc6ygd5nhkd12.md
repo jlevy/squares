@@ -3,9 +3,9 @@ type: is
 id: is-01m5kjds5y8w5nc6ygd5nhkd12
 title: "Stage 4 mathematical review of T-231: Polkovskyi's lower s(204) side, n204.cert at 12fc466 (#719)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 delegate: c-review-t231-math
 labels:
   - result-import
@@ -15,8 +15,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:06:04.606Z
-updated_at: 2026-10-23T06:14:36.726Z
+updated_at: 2026-10-24T08:26:42.135Z
 started_at: 2026-10-23T05:06:05.506Z
+closed_at: 2026-10-24T08:26:42.135Z
+close_reason: "T-231's stage 4 review landed on main: docs/project/reviews/review-2026-10-23-mishapolk-n204.md and the packet's review/review-2026-10-23/ (merged with #753, 5f5294d82)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

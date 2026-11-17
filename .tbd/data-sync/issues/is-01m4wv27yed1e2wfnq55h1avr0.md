@@ -5,7 +5,7 @@ title: "Import wand125: s(37) >= 2599/400, s(39) >= 533/80, s(44) >= 2799/400 (c
 kind: task
 status: open
 priority: 1
-version: 15
+version: 24
 delegate: null
 labels:
   - result-import
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:14:31.758Z
-updated_at: 2026-10-23T06:16:28.804Z
+updated_at: 2026-11-04T15:59:25.354Z
 started_at: 2026-10-14T09:14:41.660Z
 ---
 Found by the 2026-10-14 watch survey (think-fxs7): problems/square-lower-bounds/certificates/mixed_n37_L64975 (7a42c16, 2026-10-13T03:18Z), mixed_n39_L66625 (dfb2cf8, 03:01Z), mixed_n44_L69975 (9f24185, 03:01Z), mixed_n145_L1224 (22f06b3, 06:18Z). Against main: 37 above 161/25 = 6.44; 39 above 133/20 = 6.65; 44 above 2789/400 = 6.9725; 145 above the reported 12.2138669 (Green DS7, disputed in #308) and the verified 12.0434, and by monotonicity lifting 146-149. The 37/39/44 bundles take the T-142/T-143 route (think-i85v): stages 1-2 with the release assets, a priced stage 4 replay with sqverify-fast from reviewed source over all directions with whole-net controls, held for an owner budget.
@@ -48,3 +48,19 @@ Registered on 2026-10-14 in the 14 October records PR (branch claude/wizardly-me
 Each count's replay is its own bead: think-w76a s(37) 6.53 CPU-h, think-567s s(39) 7.09 CPU-h (its control waits on think-4uun), think-ec27 s(44) 16.95 CPU-h, think-v511 s(145) ~37 CPU-h (range 24-64, run with a stop at 40). Each is within the cap; the three fine-net counts wait on the owner's #543 answer on retaining the candidates where the census reads them. The total, 67.5 CPU-h, is over 40 only summed. The whole backlog is think-lh7d.
 
 Renumbered on 14 October at review A3 of #602 (records PR, branch claude/wizardly-meitner-wqn4x3-records-1014): Kevin Fang's theorem, T-178 above, is now T-163, at Theorem 1's first commit (6028f31, 12 October); T-163 to T-177 above are now T-164 to T-178. T-179 to T-184 keep their ids.
+
+2026-10-31 bold-ritchie-l10 (intake lane L10, epic think-3guf): #446's owed follow-up posted at 2026-10-31T20:02:48Z, https://github.com/jlevy/squares/issues/446#issuecomment-6548460193: T-177 (s(44) >= 2799/400) moved from pending adoption to superseded, by T-252 (s(44) = 7, #851, merged at 90b79dbe1); its rungs (V0/C1, reviewed) and this bead's census are unchanged. Rendered with check_requests --draft 446 from main 737d8311e and edited to the one moved field; main's RESULTS.md reads "reviewed, superseded by T-252" and render_recent_results.standing gives superseded by T-252; Pages run 41232002123's verify-deployment job (124630005688) passed 6032 of 6032 checks, result/t-177.html, result/t-252.html and cases/44.html served (the hosts themselves are refused by this session's proxy). Recorded under #446's replies in PR #865 (de16c0ee4); check_requests --report: #446 reply due no. Whether T-177's census (about 17 CPU-hours) is still worth running now that s(44) = 7 is the owner's call; nothing here changes it.
+
+2026-11-02 bold-ritchie-l30 (intake lane L30, epic think-3guf; PR #886, branch claude/bold-ritchie-xo28us-l30): n = 37 done under think-w76a. The n37 asset's data members are retained in the 13 October packet's release/ (fine_net_followup retain, pinned size and digest); the census verified mixed_n37_L64975 at all 2,073 directions (864,953,550 nodes, least bound 1.0000000000165958 at 1919, every direction equal to the source's log; 12,667.7 CPU-s) and its whole-net controls ended CONTROLS_REFUSED. T-178 is V3/C3 and n-037's lower lanes hold 2599/400 (commits 315a04a83, 34f8b6451, 101002a16). About 3.8 CPU-hours in all. n = 44 (T-177, think-ec27) was not run: s(44) = 7 is proved (T-252), so its census is low value; noted there. n = 39 (think-567s) still waits on think-4uun; n = 145 (think-v511) untouched.
+
+2026-11-02 bold-ritchie-l31 (intake lane L31, epic think-3guf): #446's follow-up on T-178 (V3/C3, confirmed, current after #886) is posted, https://github.com/jlevy/squares/issues/446#issuecomment-6584375294, and recorded under #446's replies in the L31 records PR. It restates that T-176's (s(39)) and T-177's (s(44), superseded by T-252) censuses stay with this bead. Nothing here changes what this bead owns.
+
+2026-11-04 bold-ritchie-l32 (PR #889): T-176 (n39) is V3/C3 on the branch at b3caa7d61, now that #892's axis rule passes its control (think-567s). T-178 (n37) landed in #886. T-177 (n44) is not run, since T-252 proves s(44) = 7. T-179 (n145, think-v511) is still replaying: at 08:52Z, 88 of 201 angles were done, every one the certificate's own record, with 26.2 CPU-hours in rows. The lane has spent about 29.7 of its 40 CPU-hour cap, and the rest of the replay is projected at about 8.4. The #446 follow-up for T-176's move is owed after #889 merges, rendered from main with check_requests --draft 446 (think-ndvg). Nothing has been posted.
+
+2026-11-04 14:30Z bold-ritchie-l32 (PR #889, head c6ac84914; main c5e1f3da9 merged): both of the lane's replays are in. T-176 (n39, 533/80) and T-179 (n145 to 149, 306/25) are V3/C3, with the case records adopted as the house rule derives. T-177 (n44) was not run, since T-252 proves s(44) = 7. T-132 (n29, think-r333) was not run: the cap went to T-179, and its census evidence waits on the stage 4 review think-1lri. The lane spent about 37.8 measured CPU-hours of its 40. Two #446 follow-ups are owed after #889 merges, for T-176's and T-179's moves, rendered from main with check_requests --draft 446. Nothing has been posted.
+
+2026-11-04 bold-ritchie-l32 (PR #889, review F2): T-179's follow-up belongs on #779, not #446. #889 meets #779's close_when: the replay, its control and the review its C3 needs. After merge, render the reply from main with check_requests --draft 779 and post it. Then update #779's record: clear blocked: compute, drop the blocked:compute label, and close the issue. Draft, for comparison with the rendered text; not posted:
+
+> T-179 is now confirmed (V3/C3, current). The complete replay here of wand125's mixed_n145_L1224, from 2 to 4 November 2026, ran the source's replay function and unchanged checker (code/unified_linear_verify.cpp, byte for byte T-080's) at all 201 angles. It used the candidate and certificate retained from the release asset, and every angle returned the certificate's own record (34.2 CPU-hours; linear-merge FULL_REPLAY_MATCHES_SHIPPED). The route's control accepts the original and refuses two mutated measures at net index 35, each provably uncovered there in exact arithmetic. With the mathematical review of 14 October, s(n) >= 306/25 = 12.24 is now the verified lower bound at n = 145 to 149, and the reported one at 145 to 148. At 149, Hosono's closed form (T-180) stays the reported bound. The confirmation is a reproduction with the producer's own checker; no second implementation stands beside it. Merged in #889 (<merge sha>). This closes the tracking issue.
+
+T-176's move (#446) is a separate follow-up, also rendered from main after merge: check_requests --draft 446.

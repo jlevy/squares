@@ -3,9 +3,9 @@ type: is
 id: is-01m5nrbfn316e9g0zfr03269fr
 title: "Import Polkovskyi's f1ceee4 (#732): 138 certificates at 328-989 in report order, the 335 decision, and the intake-watch read through 7e82c64"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: c-import-732c-1024
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:28:09.635Z
-updated_at: 2026-10-24T04:51:17.981Z
+updated_at: 2026-10-24T08:25:41.443Z
 started_at: 2026-10-24T01:28:14.516Z
+closed_at: 2026-10-24T08:25:41.443Z
+close_reason: "#732's f1ceee4 import landed in PR #769 (34eb8bb75, 2026-10-24T06:48:50Z); the #732/#715/#719 replies were posted 07:02Z and their records ride PR #787 (think-9i18)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

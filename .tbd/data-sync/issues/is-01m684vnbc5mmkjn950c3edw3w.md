@@ -1,0 +1,338 @@
+---
+type: is
+id: is-01m684vnbc5mmkjn950c3edw3w
+title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #833-#835, watched repos, replies owed, n=39/55/290/291 exemptions"
+kind: epic
+status: in_progress
+priority: 1
+version: 370
+delegate: bold-ritchie-l2
+labels:
+  - result-import
+dependencies: []
+child_order_hints:
+  - is-01m685br2zhdy2p5x9fv387m0g
+  - is-01m685brzc3k2t7n7fjy3ahzb0
+  - is-01m685msgkcqe67s8cwkqy116j
+  - is-01m685nejvjntazeebg3zn18mt
+  - is-01m685ngekhjw1cxgta3763s3s
+  - is-01m685njhfc113wb8prbg15npb
+  - is-01m685tapg46244xgj0cmsd3x2
+  - is-01m685wqakx05engdrvf9s4789
+  - is-01m685wzp4h0xvh1qv6pn93we4
+  - is-01m685xayb6rmzxwj5c5vrt8p2
+  - is-01m686kknmrk1xt97vne82cnea
+  - is-01m687rz8hpgevyt6xe2j9p4bb
+  - is-01m68d0t3gpq5ftvzkakhjmm3h
+  - is-01m68f02ycck4713n6e6pbexf6
+  - is-01m68g3cp9a4ap3mmnecyzzrhj
+  - is-01m68g3f8bda4are97wk6tf31k
+  - is-01m68g3hqcfvxxbpxaxmxpemac
+  - is-01m68j95k4h00b9dwww5sz44jc
+  - is-01m68kzzdeghkzk36hzescemmd
+  - is-01m68mknga9mx8s5cgrq3c3j1z
+  - is-01m68tpnq7ase66t9wk9g7bnmk
+  - is-01m69465zvpwzvv8nxy5dh4r3f
+  - is-01m686jr88t8k44ka04rczse21
+  - is-01m68brwhg67e0znzz0snrfz8a
+  - is-01m6ah2k5saw21a8r8hycw869k
+  - is-01m6amk85wp0pa216aptvnvtwd
+  - is-01m6bpb1c27j2623dy9pth50aq
+  - is-01m6cmvq7zytr8d7rp51r10b3n
+  - is-01m6cwqea9q1s7t03mqhpz5ptn
+  - is-01m692s0e5n34n064hq32vb0fs
+  - is-01m6d7e086v9rf0p53dy235ase
+  - is-01m6d7e190sgv3s1h6zwdmpd31
+  - is-01m6fj2mwfwwncghn4hv6qdhhg
+  - is-01m6fj4ghawh7zavnqvf1qjh07
+  - is-01m6g1d9hjqtnwrvcm4c82hcwa
+  - is-01m6jf7mh886ywnp58vnkzq8xb
+  - is-01m6jf7nsn2t8ff43vghamk027
+  - is-01m6jf7ps8jcdka5zx64tpgxxz
+  - is-01m6jf8xzcmwm89b3rnk5xmn50
+  - is-01m6jqkyrwaxf85nz7bytdv6t9
+  - is-01m6jrqgkrdfpxas3rpssbx5fx
+  - is-01m6jt6e1ma73nnan4vg5y107t
+  - is-01m6jvv8f1b298n1p2wpnadbv2
+  - is-01m6n86trbv1javs88wtdd2j24
+  - is-01m6nj9yngz2knh52thr8ve4vn
+  - is-01m6njad7kd4rxmaye77mf39nt
+  - is-01m6pmy1yjah0yzxy31g6sr734
+  - is-01m6t98wrw38hf9c6gfxfra0rm
+  - is-01m6tbkmqp9s17p686kypt7kx8
+  - is-01m6xtfj9k290nt68gkczqsrkh
+  - is-01m6zhjx4dwahg13jmpa4c49j7
+  - is-01m6zhjxnkb2vbrmszz3r3w6mg
+  - is-01m6zmy2q13ktyhmhht2x01aq1
+  - is-01m7095y8pvgn38rnax6412t0p
+  - is-01m70ga5pgpeaz5emqpaqrabqb
+  - is-01m70ga6b62h1z8an6d5ynxges
+  - is-01m70ss8n42m4wbes3mxnfj62y
+  - is-01m711heqx45xp4jm5438k71s5
+  - is-01m711hf9r83yf4wg0mnfazjbc
+  - is-01m713xzyykpqv9j0nh1frrsbx
+  - is-01m718bvyn9v2f9x2d2pkegc99
+  - is-01m718w43rrbxtcy1msxskcwxk
+  - is-01m74fener751d3cv3kntesy95
+  - is-01m74fep2rzsgrq8ry7tty1bga
+  - is-01m74g5z2wq1712x96qgj4ss25
+  - is-01m74kx8rt4r1t7p0masm8gw9x
+  - is-01m74mkwmxnkr1qseky1m2ddt0
+  - is-01m75zme4v3ez66chn8cafb8be
+  - is-01m7669mgkdahg27hv3qp6dckm
+  - is-01m7669n9m9w2c38r80q0ggf50
+  - is-01m769gwr5jzck0h7018ympx6x
+  - is-01m769qmqxk8mkymbfh6f7jkv2
+  - is-01m76gxg5g597cm3wac3vn2d6e
+  - is-01m76ya938mxjsy82rhp5gt007
+  - is-01m77ffn9xeb5dd1807kydjnz1
+  - is-01m7bwabjnw739a8whwmhq1sre
+  - is-01m7bwac8g3ns9chyz5wfgfhx7
+  - is-01m7c8z1ev7zzxpneb0h3816nw
+  - is-01m7bxg56ccnr8yr3dr26nrtd2
+  - is-01m7c65j5dk876m77ftewkck4q
+  - is-01m7cqvr3281rg2qcc2p8b25ry
+  - is-01m7ctstpsbx3m1y3kaeyhrps2
+  - is-01m7cv6fg9btky09bs1ejcxnhw
+  - is-01m7cv6g9j0vadbqwn9e16wg6n
+  - is-01m7d6bfpevfmje9ptnyj3kc3b
+  - is-01m7dppxbk4wn22w55gpepd5gg
+  - is-01m7dppxytdt9cghhpywb6x4ep
+  - is-01m7dxfckbmebt7qp2dm4sfhps
+  - is-01m7dxfd8bsmwgw1qdq07hq3p5
+  - is-01m7eb5wbrcnjdjkw461e24gd8
+  - is-01m7ejw4j4y7qmjc6kh8w8djy2
+  - is-01m7ejw568xyepqhcbwsec8eje
+  - is-01m7ev7r9exbce9dg65038tpwj
+  - is-01m7ewb3vc6y2p1estdbqz4h0s
+  - is-01m7ezt81q8rk81x2rs5004yck
+  - is-01m7ezt8nzf87nm3fxqhm7nmx4
+  - is-01m7f0gt7r4asg2efjw9cd6n4m
+  - is-01m7f0hg627vw4aek919dahv50
+  - is-01m7f0q9yjvhyn57fk6sbrxd3n
+  - is-01m7fh3qx5tv2n6v88me8sk1fz
+  - is-01m7fh3rfger884fx9tfqfv1kh
+  - is-01m7fmdgt4k3mfszyk95ynffjr
+  - is-01m7g25t7fsgphrer0krqfxh46
+  - is-01m7hewzayyc5nrepf8k7ygx0h
+  - is-01m7hewzytyfndnmb2xvqgq4fb
+  - is-01m7hya774p1hnpfdvzgc5nrxw
+  - is-01m7jh7hf7vrnd0zg133rk1bfh
+  - is-01m7jh7j6p07m5njnw872msz68
+hold: null
+hold_until: null
+created_at: 2026-10-31T04:53:02.444Z
+updated_at: 2026-11-16T15:58:20.027Z
+started_at: 2026-10-31T08:37:28.427Z
+---
+
+## Notes
+
+(Earlier notes trimmed on 2026-11-11 to stay under the 50,000-character field limit; the full history is in the tbd-sync branch's history for think-3guf.)
+
+2026-11-01 05:20: merged #867 (e36ecf29d): #842 authors' --cert-mode answer read in, follow-up recorded (F1 link fixed in place), squarepack-certs f6b9499 read. 24 PRs merged this pass; no open intake PR; no lane running. Tool note: mcp add_issue_comment wrapped a URL in stray backticks twice (L11); update_issue_comment came through clean — read comments back after posting.
+
+2026-11-01 15:52: renewal. Lanes started ~15:10: L12 tooling (think-u4bm, -13ew, -t9uj, -rsqv), L13 W9 checker for #847 (think-fuwd), L14 #545 grade-C gradec replay (think-mtah), #804 Kim imports (think-ozx8, think-9vai) and watched reads. Sweep intake12: one new item, moh63-dev/s44-equals-7 29622595a773 (v1.2, docs only: zmx2 reworded to interval-certified, which T-252 already says; cites T-252 and Zenodo 10.5281/zenodo.23769766; certificate unchanged; nothing to import), assigned to L14 as a read. #846 closeable = known false positive (think-u4bm). No new issues since 14:45Z; open PRs only owner-blocked #574/#599/#744/#809.
+
+2026-11-01 16:52: renewal. PRs: #869 (L12 tooling; review A posted, no blockers, 3 should-fix + 3 nits sent back to L12), #868 (L14: Kim's 297 route B + squares-exact-forms + watched reads + gradec replay tool; strong-max correctness review running; first question is T-247's V0/C0 -> V3/C3 without a stage-4 review). Grade-C replay running (5/236 at 16:48Z, 0 failures, 3 controls refused). HOLD: T-261 stays at C1 after the replay until the owner answers think-xyek (note on think-mtah). Sweep intake13: #842 comment 6560351462 (v1.2 announcement; same as the watched read) -> #868's addressing pass; #847 comment 6560655638 (3D unit cubes in a cube, Zenodo 23862003; outside the register's scope, read only) -> L13; watched reads in #868; #846 -> #869.
+
+2026-11-01 17:53: renewal. Merged #869 (83a2b9132; review A addressed in 5 commits, CI green); closed think-u4bm, -13ew, -t9uj, -rsqv after `check_bead_tree --before-close` passed on main. Sweep intake14: 0 closeable (the #846 false positive is gone); 4 items, all in flight (#842 read + 2 watched reads in #868's addressing pass; #847 read with L13). #868: review A (strong-max) found T-247 V3/C3 correct with nothing adopted, custody verified; 1 blocking (DATA_REVISION pin) + 4 should-fix, addressing pass running. Grade-C replay 7/236 done, all byte-identical; host load
+
+[Trimmed 2026-11-12: entries from late 10 November to early 11 November were removed to stay under the 50,000-character notes limit. The full text is in the tbd-sync branch history of this bead (git log -p on the tbd-sync branch, file for think-3guf).]
+
+2026-11-11 10:53Z renewal (intake195): L91 opened #951 (records of the seven 11 Nov replies; CI green); senior review L92 running. All new intake items (#943/#944/#945/#947 closes, #593/#847/#928 replies) close with #951. #941/#942 and de Winter's repo stay with L90 (think-cen3). think-4ul6 (T-142/T-143 stage-4 review; the 4 Nov launch was lost, no review on main) relaunched as L93 (tbd-strong-max, blind), claimed by bold-ritchie-l93.
+
+2026-11-11 11:53Z renewal (intake196): #951 merged (591644a9e) after senior review L92 (no blocking; two optional nits skipped); think-xq4o closed. Intake clean apart from #941/#942/de Winter repo (L90, think-cen3) and think-4ul6 (L93 running).
+
+2026-11-11 ~12:40Z: CORRECTION to the 10:53Z note: the 4 Nov think-4ul6 review was not lost; it is review-2026-11-04-wand125-fine-net-n28-n30.md on #908's branch (l45, held for the owner), not on main. L93's #953 is a second, fresh review (accepts both). Senior review L94: maths sound; blocking B-1 (the "lost" text) and B-2 (DATA_REVISION pin); S-1..S-3 and nits. L95 addressing them. #953 labelled blocked:owner-decision: which review(s) the T-142/T-143 records cite (two reviews count toward C4) goes with the owner's #908 decision.
+
+2026-11-11 12:53Z renewal (intake197): no change from intake196. L90 (de Winter) and L95 (#953 fixes, awaiting CI) running.
+
+2026-11-11 ~13:30Z: L95 addressed all of L94's findings on #953 (head 091956368, CI green: 31 success, 28 skipped). #953 stays draft with blocked:owner-decision until the owner decides #908 and whether T-142/T-143 cite one review or both.
+
+2026-11-11 13:53Z renewal (intake198): no change. L90 pushed its import (069ca8c43 retain+replay, c7d7079cc 37 beyond-horizon rows, re-pin, main merged at 2fb1156eb); hand-back pending.
+
+2026-11-11 14:52Z renewal (intake199): no change. L90's draft PR #952 is CI-green at 2fb1156eb; asked L90 to hand back.
+
+2026-11-11 15:53Z renewal (intake200): no new items. L96 blind review of de Winter's 37 accepted all (branch l96 bdf45bd6c, LANE_AGREES; minor F8/F9/F10, F14 494 class, 809 vs think-kzme). L90 to fold it into #952 after its sharp controls (ETA ~18:20Z).
+
+2026-11-11 16:53Z renewal (intake201): no change. Waiting on L90 (sharp controls, then folding L96 into #952).
+
+2026-11-11 17:52Z renewal (intake202): no change. L90 handed back #952 (head 22c85caf9, CI green; 36 verified rows, 809 held on think-kzme, L96 mapped). Senior review L97 running.
+
+2026-11-11 ~18:45Z: #952 merged (c8448724e) after blind review L96 and senior review L97 plus fixes (f9074dac7, CI green): 36 de Winter rows verified above 324, 35 superseded, 809 queued on think-kzme (N3 note added there). L98 waiting on deploy, drafting the #941/#942 replies.
+
+2026-11-11 ~18:55Z: Pages deploy for c8448724e succeeded (run 43079349582; 6255/6255 checks). #941 had been auto-closed at 18:36:15Z by a closing keyword in #952's body; coordinator reopened it. Posted the #941 import reply (issuecomment-6804521353; stays open for n809/think-kzme) and the #942 final (-6804532105; closed 18:53:16Z). Both match their L98 drafts byte for byte. L99 is recording them (records PR).
+
+2026-11-11 18:57Z renewal (intake203): new #954 (Özden, s(179) <= 13.881367160110, 2.428e-3 below T-174). Bead think-f65n claimed by bold-ritchie-l100; L100 is importing it and L101 is running the blind review in parallel. The other new items (#941/#942 replies, #942 close) are covered by L99's records PR.
+
+2026-11-11 19:52Z renewal (intake204): new de Winter head 501cb8d (READMEs only: answers the 5e-9 and 16-vs-22 questions; noted on think-cen3, read owed). #957 (two_strip flaky-test fix, think-doi6) is in CI; #955 waits on it. L101 review of #954 accepted; L100 is folding it in.
+
+2026-11-11 20:52Z renewal (intake205): de Winter answered the review's questions on #941 (-6806337206) and #942 (-6806342752), and pushed n132/n157 with no issue (a491dad 20:49:44Z; head 6617869). 132 claims a gain of 0.0096; 157 goes below the 13x13 grid. New beads: think-bcfs (import, L104; blind review L105) and think-acm0 (record the answers on #955, L103). GitHub Actions has been queuing runs since about 19:37Z (#957's scope job and L100's runs not started).
+
+2026-11-11 ~21:40Z: L100 handed back #956 (T-291 s(179), adopted at 179, L101 review mapped; head 23473980a; CI queued since 20:28Z and never started). L100's request that the coordinator cancel and re-run the runs was refused: the classifier had already refused L100, so not done. Senior review L106 running. L103 extended #955 (ae88e4262) with de Winter's answers; think-acm0 closed. #958 = de Winter's issue for 132/157, passed to L104/L105. intake label added to #954 and #958.
+
+2026-11-11 ~22:05Z: senior review L106 of #956: nothing blocking. S1: the author's 21:18Z comment on 954 points to #959 (s(179) <= 13.880960371559, 4.07e-4 below T-291). Decision: adopt T-291 now; #959 gets its own lane as T-294 (bead think-89i7; blind review L108 started; import after #956 merges). S2: credit sentence. S3: opened think-71uq (owner decision: notices for upstream starts; think-mdxq closed 4 Nov). L100 is addressing S1-S3, N1-N3 and stamp_landed. L104 handed back #961 (T-292 s(132), T-293 s(157), CI pending; waits for L105). Freed about 7.5 GB (stale scratch clone/work; worktrees l93 and l102).
+
+2026-11-11 21:53Z renewal (intake206): new #960 (Özden s(237) <= 15.893805580573, 8.8e-3 below T-189); bead think-my76; blind review L109 started; import after L100. L105 accepted both of de Winter's 132/157; L104 is mapping and adopting. Corrected my earlier wrong 'past midnight' note to L100/L104: no stamp_landed unless the date is 12 Nov. Intake labels added to #954, #958, #959 and #960. #957's Certificate page run is still in progress (slow runners).
+
+2026-11-11 22:22Z: #956 merged (b5b12c206): T-291 s(179) is the house at 179; 954 stays open until its reply. L107 importing #959 as T-294 (think-89i7, review L108 running). L111 checking the deploy and drafting the 954 reply. #960's import is deferred until a lane frees up (review L109 running).
+
+2026-11-11 ~22:50Z: #957 merged (0af33d857; think-doi6 closed). #955 merged with main (7f4b759fe; result-requests conflict kept both sides, occurrences regenerated); CI pending. L108's blind review of #959 accepted (440acdb99; RV-3 not reached; s(70)+5 within 2.6e-12; contracted side not registered), sent to L107. L109's review of #960 accepted; L110 importing as T-295 (the house is T-190, not T-189 as the issue says).
+
+2026-11-11 22:42Z: Pages deploy of b5b12c206 succeeded (run 43110891256; 6262/6262). Posted the 954 final reply (issuecomment-6808834300; byte-identical to the L111 draft except one coordinator edit: the seed-band source is worded 'the issue names'); closed 954; think-f65n closed. L112 is recording the reply on #955.
+
+2026-11-11 22:53Z renewal (intake207): no new items; 954's reply and close are owned by L112 (#955), de Winter's repo read by L104 (#961). Running: L104 (#961), L107 (#959), L110 (#960), L112 (#955).
+
+2026-11-11 ~23:50Z: L113's senior review of #955: B1 (the #942 final reply's credit line goes outdated after L103 adds penguin069 and kmmmvs; mark it outdated, then post a follow-up after merge), plus S1–S3 and N1–N8. L114 is addressing them and drafting the #942 follow-up. Bead think-2rys filed (check_requests compares read_through by date only). L110 handed back #963 (T-295 s(237), adopted at 237, L109 mapped; CI red on T-id contiguity until #961/#959 merge). Senior review L115 running. Main's records tier fails its bead-tree check because think-f65n was closed before #955 recorded 954's close; #955's merge fixes it. Planned merge order: #955, #961 (T-292/293), #959 (T-294), #963 (T-295).
+
+2026-11-11 23:52Z: #955 merged (2fe557598) after senior review L113 and L114's fixes (CI green): replies on 941, 942 and 954, de Winter's answers, the credit adding penguin069 and kmmmvs, 942's final reply credit marked outdated. 941 still open. The #942 follow-up draft (L114) is checked; post it after the Pages deploy. #961 must now reconcile its own 954 entry with main's (take main's). Senior reviews running: L115 (#963), L116 (#961).
+
+2026-11-11 23:58Z renewal (intake208): new #962 (Özden s(269) <= 16.899469075856, 1.526e-3 below his T-290); his #947 comment points to it. Bead think-s418; blind review L117 started; import queued. L115's senior review of #963 found B1 (stamp_landed) and B2 (palette pin), plus S1/S2/N1 noted on think-my76; they will be applied in the rebase after #961/#959. think-ikku got a T-253/237 note. Main's records gate is green again since #955.
+
+2026-11-12 ~00:10Z: L116's senior review of #961: nothing blocking. The poster-test change is a legitimate use of the existing release rule 3 (COMPOSITES_MAY_TRAIL), so no owner decision is needed. #961 now merges after #955 and takes main's fuller 954 entry. L104 is merging main, adding a moved==[13] guard to the poster test, adding the think-mdxq note to the licence citations, fixing the 958 label note, then stamp_landed (12 Nov) and a re-pin. Process lesson: I closed think-f65n at 22:42Z before the records PR marking 954 closed had merged, against result-import.md close step 4; it tripped main's bead-tree gate until #955 merged. Close an answer bead only after its records PR merges.
+
+2026-11-12 ~00:12Z: Pages deploy of 2fe557598 succeeded (run 43122907091). Posted the #942 follow-up correcting the credit (issuecomment-6810296603, byte-identical to L114's draft); 942 stays closed. Recording owed in a later records PR.
+
+2026-11-12 ~00:30Z: #961 merged (75cce00b6) after senior review L116 and L104's fixes (CI green; landed 12 Nov): T-292 s(132) and T-293 s(157) are houses. 958 still open. L118 checking the deploy and drafting the 958 reply. L107 told main moved (T-294 next). think-bcfs stays open until the records PR for 958's reply merges.
+
+2026-11-12 ~00:50Z: Pages deploy of 75cce00b6 succeeded (run 43127129857; 6275/6275). Posted the 958 final reply (issuecomment-6810906839; L118's draft plus one coordinator paragraph thanking him for the #941 answers, 809 held) and closed 958. Owed records: the 958 final reply, the #942 follow-up (-6810296603) and the #941 acknowledgement; think-bcfs stays open until that records PR merges. Evidence nit: E-de-winter-s157-review-exact-feasibility says 'about 1e-250', the receipt says 1.31e-247.
+
+2026-11-12 ~00:55Z: L117's blind review of #962 accepted (1b37943b9; RV-3 not reached; contracted side not registered). L120 importing it as T-296 (think-s418). L119 also formats the three #961 Markdown files the hook missed (adopt_houses --check stays OK).
+
+2026-11-12 00:52Z renewal (intake209): no new issues; 942/958 recording owned by L119. Running: L107 (#959), L119 (records), L120 (#962).
+
+2026-11-12 ~01:25Z: L107 handed back #964 (T-294 s(179) adopted on 12 Nov in a second pass, L108 mapped, new devtools.measure_core, CI green at dd7bef433). Senior review L122 running. L119 handed back #965 (records: 958 final, 942 follow-up, the formatting, the evidence nit); CI red only from a worker crash in test_site_atlas_views, which passes locally. Senior review L121 running. Labels added to #964 and #965.
+
+2026-11-12 ~01:40Z: L121's senior review of #965: nothing blocking; the frontend failure was a starved-runner worker crash, unrelated. Coordinator applied the PR-body fix and nits 1-3 (3ff23bc64), which also restarts CI.
+
+2026-11-12 ~01:50Z: L122's senior review of #964: nothing blocking. S1: the credit should say 'below his earlier packing' (T-291), as at 268. S2: the PR body lacks a Selected next entry. S3: #965 conflicts (result-requests tail, release.py). measure_core's conclusion confirmed by a wider offset scan. Sent to L107, which applies the fixes, then merges main after #965 lands.
+
+2026-11-12 ~02:00Z: #965 merged (0352d7554) after CI green on 3ff23bc64. think-bcfs closed after check_bead_tree --before-close passed. 941 open, 942 and 958 closed. L107 will now merge main into #964.
+
+2026-11-12 01:53Z renewal (intake210): no new issues; the working tree stays clean after #965. Running: L107 (#964 fixes + merge main), L120 (#962 import).
+
+2026-11-12 ~02:30Z: L107 applied #964's review (S1, S2, N1–N3), merged main with #965, and re-pinned (head 67f40d9f0). CI red only on the same Chromium worker crash as #965 (test_site_atlas_views viewport test). Bead think-sj00 opened; L123 is diagnosing and fixing the flake (no skip or weakening). #964 merges main after the fix lands, which reruns CI.
+
+2026-11-12 ~02:45Z: L120 handed back #966 (T-296 s(269) adopted, L117 mapped; CI green apart from contiguity; frontend was pending). Senior review L124 running. Merge order: #964 (once L123's flake fix lands), then #963 (fixes + rebase), then #966 (rebase).
+
+2026-11-12 02:52Z renewal (intake211): no change. L124's senior review of #966: nothing blocking; S1 (a #947 follow-up is owed after merge), S2 (#947 read_through) and N1–N5 recorded on think-s418 for the rebase pass. think-xg1x filed (shard 4 at 10.0%). Waiting on L123 (flake fix think-sj00); then merge #964, #963 (fixes), #966.
+
+2026-11-12 ~03:40Z: L123 handed back #968 (think-sj00). Root cause: the step's faulthandler_timeout C watchdog walks thread states without the GIL and segfaults when a ThreadingHTTPServer thread exits mid-walk. Fix: a Python-thread stack_watchdog plugin plus a ban scan, D-523. CI frontend still running on 3e9f52a2a. Senior review L125 running. L123 stopped after handback.
+
+2026-11-12 ~04:10Z: L125's senior review of #968: nothing blocking; the diagnosis was verified against CPython 3.14.7 source and repros; hosted CI is green including frontend. Should-fix: arm() exceptions must not skip the phase, and the unit test can deadlock on a pipe. Nits: GIL mechanism wording, thread restart, ban-scan scope, spec note. L126 is addressing them.
+
+2026-11-12 03:53Z renewal (intake212): new #967 (Özden s(269) <= 16.889730073596, 9.74e-3 below his #962/T-296; just under Kaggle's 16.889730079125); his #947 comment (-6813076182) points to it. Bead think-n73d; blind review L127 started; import after #966. #966/T-296 still merges (as with #954 and #959).
+
+2026-11-12 ~04:40Z: #968 merged (bc152e8b4) after L126 applied L125's review (CI green incl. frontend). think-sj00 closed. L107 is merging main into #964 to re-run CI with the fix. L126 noted a one-off local load-budget timing failure in test_site_rendering (passed on rerun and in CI); not filed.
+
+2026-11-12 ~04:50Z: L127's blind review of #967 accepted (587375ed1; RV-3 not reached; new arrangement). Import (T-297) waits for #966; notes on think-n73d.
+
+2026-11-12 04:54Z renewal (intake213): no change. Waiting on L107 (#964 merging main for CI with the fix).
+
+2026-11-12 ~05:15Z: #964 merged (942256917): T-294 is the house at 179 (second pass on 12 Nov). L107 also admitted its two test modules to the test-cost record (shard 2 had reached 10.1% with #968's file). 959 still open. L128: deploy plus 959 reply draft. L129: rebase #963 onto main and apply L115's B1/B2/S1/S2/N1 (think-my76 delegated to l129; L110 stopped). Then #966, then #967's import.
+
+2026-11-12 ~05:25Z: Pages deploy of 942256917 succeeded (run 43159519695; 6282/6282). Posted the 959 final reply (issuecomment-6815463268; L128's draft, which differs from the posted text only by a trailing blank line) and closed 959. Recording owed, to be batched with the next records PR (960, 962, 967 replies and the 947 follow-up); think-89i7 stays open until then.
+
+2026-11-12 05:53Z renewal (intake214): the 959 close and reply need recording (owned by think-89i7). #954 owed a follow-up because T-291 is now superseded: posted issuecomment-6815931661 (from check_requests --draft 954, with a short opening and a link to the 959 reply); 954 stays closed. Recording owed in the next records batch.
+
+2026-11-12 ~06:10Z: #963 merged (455b5d20a) after L129 rebased it (the 237 adoption moved to 12 Nov; LATER_PASSES 11-12 = {179, 237}) and applied L115's review (CI green). T-295 is the house at 237. 960 still open. L130: deploy plus 960 reply draft. L131: rebase #966 and apply L124's review (think-s418). Worktrees l110 and l120 removed; 15 GB free.
+
+2026-11-12 ~06:27Z: Pages deploy of 455b5d20a succeeded (run 43165808073; 6289/6289). Posted the 960 final reply (issuecomment-6816435262; L130's draft unchanged) and closed 960. Recording owed in the next batch: 959 final, 954 follow-up, 960 final; think-89i7 and think-my76 stay open until then.
+
+2026-11-12 06:53Z renewal (intake215): no new issues. Items owed are the recordings of the 954 follow-up, the 959 final and the 960 final, for the batch records PR after #966. L131 is still finishing #966.
+
+2026-11-12 ~07:15Z: #966 merged (45e2ecca2) after L131 rebased it (LATER_PASSES 11-12 = {179, 237, 269}) and applied L124's review; CI green. T-296 is the house at 269. 962 still open. L132 is importing #967 as T-297 (think-n73d; it may hit a same-day second adoption at 269, so stop-and-report if the tool can't do it). L133 is on the deploy and drafting the 962 reply and the 947 follow-up. Next: one records batch for the 954 follow-up, the 959, 960 and 962 finals, and the 947 follow-up.
+
+2026-11-12 ~07:27Z: Pages deploy of 45e2ecca2 succeeded (run 43173034832; 6296/6296). Posted the 962 final (issuecomment-6817476078) and closed 962. Posted the 947 follow-up (-6817476436; L133's draft with the #962 link anchored to the new comment); 947 stays closed. Records batch owed for the 954 follow-up, the 959, 960 and 962 finals and the 947 follow-up.
+
+2026-11-12 07:53Z renewal (intake216): no new issues; all new items (947/962 replies, comments, closes) are covered by L134's records batch. Running: L132 (#967 import), L134 (records).
+
+2026-11-12 ~08:20Z: L135's senior review of #969: nothing blocking. S1: my brief had wrongly told L134 to put corrects on the 947/954 follow-ups; neither final reply carries an outdated statement, so corrects would pre-clear a future correction. Dropped, with the notes saying why. S2: merge times from GitHub's merged_at. Coordinator applied both plus the release-record reason (1d61afb9f) and fixed the PR body; CI running. Lesson: corrects is only for replies with outdated statements; a position-superseded follow-up (#928 pattern) names none.
+
+2026-11-12 ~08:45Z: #969 merged (17de4fb55): the 954 and 947 follow-ups and the 959, 960 and 962 finals recorded. think-89i7, think-my76 and think-s418 closed after check_bead_tree --before-close passed. Remaining in flight: L132 (#967 import, T-297).
+
+2026-11-12 08:53Z renewal (intake217): de Winter answered #958's six questions (comment 6818738203) and pushed 57de046 (method_n132_n157 published; witness YAMLs made valid). Bead think-c3p2 opened; L136 retaining the commit, recording the answers, checking 'unchanged' and the cheap reproduction, and drafting a short follow-up. #967 stays with L132.
+
+2026-11-12 ~09:40Z: L132 handed back #970 (T-297 s(269) adopted in a 2026-11-13 pass because 269 was already adopted on 11-12; landings stamped 11-12; results.html ceiling raised from 1.6 to 1.7 MB; CI green). Plan: senior review L137 now; merge only after 00:00Z on 13 Nov, then stamp_landed and re-pin, so pass and landing agree. Owed after merge: the 967 reply and the 962 follow-up.
+
+2026-11-12 ~09:45Z: L137's senior review of #970: nothing blocking. The future-dated pass is acceptable (T-242/#807 precedent); stamp_landed then re-pin must be the last two commits after 00:00Z 13 Nov, with the merge the same day. The 1.7 MB results.html raise follows practice, but timing is unmeasured for the third time; think-v1qe noted (the 2 MB hard limit is about 3 weeks away and is the owner's). Merge plan on think-n73d; reminder scheduled for 00:10Z 13 Nov (trig_01G7Jg5YXNgLB21fouu18yAK).
+
+2026-11-12 09:53Z renewal (intake218): no new issues; the three listed items are owned (#967 by #970, waiting for the 00:10Z merge; #958 comment and de Winter's 57de046 by L136).
+
+2026-11-12 ~10:45Z: L138's senior review of #971: nothing blocking. S1 ('cannot state' -> 'does not state'); S2 (the s157 README asserted fourfold symmetry in the record's voice; 132 is not fourfold, so attribute it); N1–N6. L139 is applying them. The follow-up draft was rewritten by the coordinator per R1–R7 (blank lines, attribution, no unsupported claims, opens with the merge) as l136-replies/followup-958-v2.md; post after #971 merges, with MERGEDATE/MERGESHA filled.
+
+2026-11-12 ~10:56Z: #971 merged (0ee1e7622) after L138 and L139; Pages deploy 43202144155 succeeded. Posted the 958 follow-up (issuecomment-6821661969; the coordinator's R1–R7 rewrite); 958 stays closed. Recording owed in the next batch (with the 967 final and 962 follow-up after #970); think-c3p2 stays open until then. intake219: only #967 remains, owned by #970, which merges after 00:00Z.
+
+2026-11-12 11:53Z renewal (intake220): no new issues. #967 is owned by #970 (merge after 00:00Z); the 958 follow-up recording is in the post-#970 batch. Nothing running.
+
+2026-11-12 12:54Z renewal (intake221): no change. Waiting for 00:00Z to finish #970.
+
+2026-11-12 13:53Z renewal (intake222): no change.
+
+2026-11-13 ~00:48Z: #970 merged (2bae82a34) on 13 Nov after L140 merged main (#971), applied N1–N3, stamped landings to 11-13 and re-pinned last (CI green on ae901e10b). T-297 is the house at 269. 967 open. L141: deploy plus 967 reply and 962 follow-up drafts. Then a final records batch (967 final, 962 follow-up, 958 follow-up) and close think-n73d and think-c3p2.
+
+2026-11-13 00:52Z renewal (intake233): no new issues. Items owed: the 967 final, the 962 follow-up (both drafting, L141 restarted after the container restart) and the 958 follow-up recording. Final records batch after posting.
+
+2026-11-13 ~01:12Z: Pages deploy of 2bae82a34 succeeded (run 43339421096; 6303/6303). Posted the 967 final (issuecomment-6840725232) and closed 967. Posted the 962 follow-up (-6840725487, anchored to the 967 reply); 962 stays closed. L142 is opening the final records batch (967 final, 962 follow-up, 958 follow-up, and reverting the 269 credit phrase that made n-269 read 'issue 962 (T-297)'). Then close think-n73d and think-c3p2.
+
+2026-11-13: #972 (records for #958 answers, #962 follow-up, #967 adoption) merged 0db247de7; think-n73d and think-c3p2 closed; think-u70i filed (adoption sentence T-id placement). All submissions through #967 imported, replied, closed. Open owner decisions unchanged (#921, #908/#909, #543, #919, think-8nim, RV-3/think-ruu2, T-142/T-143 #953, think-71uq).
+2026-11-13 02:52-22:52Z: hourly renewals intake235-254 all identical; no new submissions, no PR movement; main at 0db247de7. Scheduler skipped 12:52 and 14:52 runs and fired 13:52 late (15:25), back on time from 16:52.
+2026-11-14 ~02:00Z: NEW #973 (moh63-dev: Khalili & Gharabaghi), s(k^2-5)=k for all k>=7; k>=10 by one periodic family reduced to board mu_11 (Valid11), Lean k2m5_of_valid11, new Tight-Tile Lemma for 75 roots; on Daniel zmx2/qx2_zm @659ee62. Labelled intake. Beads: import think-2vgx (lane L145, tbd-strong, 4 CPU-h timebox, full replay = owner-priced option), blind review think-h10k (lane L144, tbd-strong, 6 CPU-h). Precedent T-064/T-081. Reply owed after import merges.
+2026-11-14 ~05:30Z: L144 review done (f58b34b7b; accepted, F1/F2 major; 8 new counts; replay 145-320 CPU-h held think-0h7r; lemma review think-kn13). L145 import = draft #974 (T-298 V0/C1, head ca558e53). L146 senior review: B1 clean-room wording, B2 case files silent on F1/F2, B3 S4 label+News; 9 S. Labels S4+intake applied. L147 addressing. WebKit CI failure diagnosed: Playwright browser cache key lacks Ubuntu release, ubuntu-latest -> 26.04 restores ubuntu24 WebKit; fix = PR #975 (bca5f0dd3), review L148, CI waiting.
+2026-11-14 06:51Z: #975 CI fix merged b526521e4 (think-46as closed). L147 addressed L146 (B1-B3, S1-S9, notes) on #974; CI green incl. WebKit; #974 merged 9adc3a0ad 06:36Z (T-298 V0/C1 S4). Deploy+verify ok (run 43567161807). Final reply posted on #973 (issuecomment-6873382321), issue closed. L149 records+News PR in progress; then close think-2vgx, think-h10k. Owner-held: think-0h7r (full replay 145-320 CPU-h + Lean on >=24 GB host), think-kn13 (zmx2 lemma review).
+2026-11-14 ~08:30Z: #976 (records of #973 reply incl. edited Record ids paragraph; T-298 S4 News) reviewed by L151 (B1 + S1-S4 + notes applied), merged 7629f5ade. think-2vgx and think-h10k closed; think-0h7r and think-kn13 re-parented to this epic, blocked_on the owner decision.
+2026-11-14 ~11:05Z: #978 merged da5091505 (hidden slow-lane F: test_check_declared_bounds, ryu MAX_PIECES unnamed since #884; think-42jg closed; gap filed think-jyc2; timeout think-m2th held for owner with measurements). NEW #977 (de Winter s(297) <= 17.739455558289, -9.6e-4 vs T-174) and #979 (s(332), s(409) beyond horizon, from the 297 packing): labelled intake; import think-g2ax (L154), blind review think-gabn (L153).
+2026-11-14 ~15:20Z: L153 review (accepted, S3) + L154 import = #980; L155 senior review (no B; S1-S4 + N1-N5 applied by L156); #980 merged 3605269b8 15:03Z: T-299 house at 297 (V3/C3), beyond-horizon rows 332/409 (source de-winter-issue979-2026-11-14). Deploy ok (run 43608111891). Replies posted and #977/#979 closed 15:18Z. de Winter answered L82 questions on #946/#939 (RV-3 held). L157 records PR for all four in progress. Filed think-f0rj (grid-slack dir names).
+2026-11-14 ~16:00Z: #981 (records of #977/#979 replies, #939/#946 answers) merged 6865af7d6; think-g2ax, think-gabn closed. Posted: #804 follow-up (T-247 superseded by T-299), acknowledgements on #946 and #939 (edited within 15 s to say the gain is 1.04x T-282 padding, not inside it). de Winter commit 66849f2 answers review Q1/4/5/6 (squares unchanged per author). L158 records PR in progress.
+2026-11-14 ~16:45Z: #982 (records of #804 follow-up, #946/#939 acknowledgements, de Winter 66849f2: squares/sides unchanged, answers review Q1,2,4,5,6; Q3 open) merged fa980f8e7.
+2026-11-14 ~19:00Z: NEW #983 (Özden via kenaznia-doga, s(228) <= 15.600801734812, -3.80e-3 vs Couzo/PingYou house; side-only leaderboard 15.596043 not beaten, context). Labelled intake. Import think-14i2 (L160), blind review think-5y6d (L159).
+2026-11-14 ~21:00Z: L159 review (#983 accepted, S3) + L160 import = #986 (T-300 at 228); L161 senior review no B; coordinator applied S1/S2/N1-N3 (b80ab61bb, re-pin 4544c4c96), CI running, merge before 23:59Z. NEW #984 (Roberto Ono, s(228) <= 15.596043120921, beats #983 by 4.76e-3) and #985 (Ono, s(147) <= 12.651043556588, below 7+4sqrt2): labelled intake; import think-17ex (after #986 merges; T-301 supersedes T-300 in a 2026-11-15 pass), blind review think-jbwm (L163 running).
+2026-11-14 21:17Z: #986 merged 473577f42 21:06Z (T-300 house at 228, stamped 11-14). Deploy ok (run 43640967893). #983 final reply posted (issuecomment-6884336616) and closed; recording folded into L164 (#984/#985 import). #987 formatting-only rewrap of #986 runs README (hook-less worktree edit), CI running.
+2026-11-14 ~22:55Z: L163 review of #984/#985 landed (6d1e3383e; both accepted, all notes, S3 each, RV-3 n/a, 147 beats conjectured optimum 7+4sqrt2). L164 import running (adoption in a 2026-11-15 pass). #987 rewrap merged ed7aff650.
+2026-11-15 ~01:55Z: L164 import = #988 (T-301 at 228 superseding T-300; T-302 at 147 below 7+4sqrt2; 2026-11-15 pass, stamped 11-15, pin 9860e55f7). Coordinator added t-180 page budget 525,000 (28c795cbc, measured, precedent chain, think-v4me). Labels S3+intake. L166 senior review running. think-jlsq filed (moh63-dev k2m5-family v1.1).
+2026-11-15 ~02:40Z: L166 senior review of #988 (B1 PR body; S1 T-302 closed-form sentence; S2 leaderboard wording; notes) applied by coordinator (4ba79fa24, re-pin a2ca37157); #988 merged a4f36ae70 (T-301 house at 228 superseding T-300; T-302 at 147, first below 7+4sqrt2). Deploy ok (run 43667638495). Replies on #984, #985 posted and closed; #983 follow-up (T-300 superseded) posted. L168 records PR (+ think-jlsq moh63-dev v1.1 read) in progress. Then close think-17ex, think-jbwm, think-jlsq.
+2026-11-15 ~03:50Z: #990 (records of #983 follow-up, #984/#985 finals; k2m5-family v1.1 read) merged a3e4ea0c5; think-17ex, think-jbwm, think-jlsq closed. NEW #989 (jazivxt via dpre4ai, s(90) <= 9.998277166926 < 10): intake; import think-i8y9 (L170), blind review think-176a (L169). Deferred: cite #973 paper DOI 10.5281/zenodo.24237740 on T-298 next change.
+2026-11-15 ~04:55Z: L169 review of #989 landed (22949a12e; accepted, all notes, S3 proposed; no family claims s(90)=10; first s(n^2-n)<n at n=10; author repo states no licence for its files). L170 import running. k2m5-family 0e28e8a (README: software DOI) to read in the next records PR.
+2026-11-15 ~05:40Z: L170 import = #991 (T-303 at 90, first below the 10x10 grid; 11-15 pass {90,147,228}; stamped 11-15). L171 senior review: B1 padding double-counts wall slack; S1 finding count; S2 timing; S3 X-008 stale (BC-024 tilted residue at 51 and 90) -> addendum + 2 owner points (grammar conclusion; 37/63 calibration constants move with adoptions); S4 licence bead think-86c1. L172 addressing; merge by 23:59Z.
+2026-11-15 ~06:45Z: L172 applied L171 (B1 padding, S1-S4, notes; X-008 addendum; owner points in #991 body) ; #991 merged 588ccb226 (T-303, first below the 10x10 grid at 90). Deploy ok (run 43685575655). #989 reply posted and closed. #973 authors answered all 15 (05:03Z), acknowledged 05:54Z. L173 records PR for #989 + #973 + k2m5-family 0e28e8a + DOIs (think-hisc).
+2026-11-15 ~07:00Z: NEW #992 (Miguel Lara, s(977) <= 17+21/sqrt2 ~ 31.849, beyond horizon; goebel side(977)=17+11sqrt2 ~32.556 > grid 32; no exact certificate, float CSV at 31.85). Intake; import think-ud9e (L175), blind review think-u58c (L174). L173 records PR (#989, #973 answers, DOIs) still running.
+2026-11-15 ~07:40Z: L173 = #993 (records #989 final, #973 answers + ack, k2m5 0e28e8a, DOIs on T-298); CI red only on D-509 pdf flake (run 43688482102); occurrence noted on think-6dle; #993 waits for main to move (no rerun, no empty commit). L174 review of #992: exact packing accepted but record already holds 31.765989508190 at 977 (Couzo #763) < claim 31.849; classical (Goebel (16,21) less squares; Friedman L-border at 982); S1; not recordable as a row. Goebel module lacks L-border extension (bordered members undercut module at 910 counts 325-2000) -> owner decision think-zkxy.
+2026-11-15 ~08:05Z: L175 = #994 (#992 not recordable: Couzo #763 row 31.765989508190 < claim; packet retained, review mapped, new devtools.diamond_staircases builds the construction over Q(sqrt2), both number-field routes accept; beads think-cszb licence, think-7j3i owner decision L-border Goebel (overlaps think-zkxy), think-526p NumberField.decimal bug). CI green. L176 senior review running. Then merge #994, merge main into #993 for a fresh run, reply on #992.
+2026-11-15 ~08:40Z: L176 senior review of #994: no B; S1 Goebel wording, S2 vacuous check, S3 dated note in review, S4 beads. Coordinator did S4 (think-7j3i retitled with F11 measurement, linked to think-zkxy as one two-part owner question) and N9; labels S2+intake. L177 addressing S1-S3, N1-N8, N10.
+2026-11-15 ~09:35Z: L177 applied L176; #994 merged 538b7833a (#992 not recorded; diamond_staircases). Deploy ok (run 43697866071). Merged main into #993 (a08ccd897, conflict resolved additively) -> fresh run green incl. D-509 pdf; #993 merged 942c1271f. #992 final reply posted and closed (09:30Z). Closed think-i8y9, think-176a, think-hisc, think-u58c. think-ud9e re-delegated L175->L179 (L175 ended); L179 records PR for #992 reply.
+2026-11-15 ~10:05Z: #995 (#992 final reply record) merged 91acf2022; think-ud9e closed. Intake clear: every issue, reply and comment recorded. Open owner decisions: #921, #908/#909, #543, #919, think-8nim, RV-3 think-ruu2 (#939/#946 and KKT sides at 147/172/228/269/297/90), T-142/T-143 #953, think-71uq, think-0h7r, think-kn13, think-m2th, think-7j3i+think-zkxy, #991 research points (X-008 grammar, 37/63 calibration).
+2026-11-15 ~12:00Z: NEW #996 (de Winter, s(90) <= 9.994038857546, -4.24e-3 vs T-303 adopted this morning; local search from T-303). Intake; import think-32cl (L181; adoption in a 2026-11-16 pass, stamps and merge on 11-16), blind review think-uhav (L180). de Winter repo 3 new commits (9cafa33) to read.
+2026-11-15 ~12:45Z: L180 review of #996 landed (95ad4bc8a): accepted, 13 notes; RV-3 n/a (T-303 margin 1.0988e-11, gain 3.86e8 times); identity: T-303 arrangement improved square for square (credit de Winter after jazivxt); S3 proposed; F11 witness-corners adapter refuses the twin (read the JSON via center-direction-json). L181 told (no summary).
+2026-11-15 ~13:00Z: #997 (de Winter, 12:08Z): replacement certificate fa53fb0 for #996, side 9.994038766610 (9e-8 lower); author asks to disregard 64d5ee7. L181 redirected to import fa53fb0 only (one T-id, #996+#997). Review addendum lane L182 (think-h69d) reruns L180 frozen checker on fa53fb0. Adoption 2026-11-16.
+2026-11-15 ~13:40Z: L182 addendum on fa53fb0 landed (83ac8ceec): accepted; 26 controls as stated (4 re-targeted); step 9.09e-8 from #996 is 9,539x #996 padding (genuine re-optimization); gain on T-303 3.857e8x its margin, RV-3 n/a; F15: take lineage text from REGISTRATION.md at 6c0ad56. L181 told (no summary).
+2026-11-15 ~17:00Z: #973 authors comment 6897938053 + commit 355f83e: full Lean build log (12 modules, 14 min, 5.96 GB peak per module); the 24 GB host premise is void. Lean subset of think-0h7r is under the owner 40 CPU-h item cap (development.md blocked:compute) -> lane L183 (think-o79q) builds k2m5_of_valid11 here, timebox 3 CPU-h / 9 GB disk; Valid11 replay stays owner-held.
+2026-11-15 ~18:15Z: L183 = #999: Lean build NOT run (disk plan 9.54 GB > 9 GB cap; Sqpack.Bentz needs ~13 GB + swap, so the 24 GB premise stands for that module; coordinator was wrong to call it void). Records #973 comment + 355f83e read; adds devtools.lean_disk_price + integrity-ceremony allowlist entry. think-0h7r re-priced (Lean 0.5 CPU-h, ~11 GB disk, swap or 24 GB). L184 senior review of #999 (tool and allowlist scrutiny). Sequence: #998 (11-16) then #999.
+2026-11-15 ~19:00Z: L184 review of #999: keep a slimmed lean_disk_price (OR-1, cited numbers), DROP the integrity allowlist entry (no independent pin; added to pass a gate), B1 truncation guard fix, S1-S3 memory/disk wording (2 Oct packet: 16 GB free should need no swap). L185 addressing. #999 merges after #998 (11-16).
+2026-11-15 ~19:10Z: #999 merged f46b05370 (L185 applied L184: slim tool, allowlist dropped, B1 fix, memory/disk wording); think-o79q closed. Remaining: #998 (#996/#997, adopt 11-16; must merge main first).
+- 2026-11-15T18:55Z renewal (intake298): main f46b05370. 3 unowned items (#996, #997, de Winter repo at 6c0ad56) are all carried by #998 (L181, think-32cl), which reads through 6c0ad56 and waits for 16 November UTC to adopt T-304, stamp and pin. #973 comment and k2m5-family 355f83e read on main via #999. Nothing else new.
+- 2026-11-15T19:53Z renewal (intake299): no change since 18:55Z; #998 (L181) waits for 16 November UTC.
+- 2026-11-15T20:53Z renewal (intake300): no change; #998 (L181) waits for 16 November UTC.
+- 2026-11-15T21:53Z renewal (intake301): no change; #998 (L181) waits for 16 November UTC.
+- 2026-11-15T22:53Z renewal (intake302): no change; #998 (L181) waits for 16 November UTC.
+- 2026-11-15T23:54Z renewal (intake303): no change; L181 alive, adopts T-304 on #998 at 00:00Z 16 November.
+- 2026-11-16T00:53Z renewal (intake304): no new items (day rollover only); L181 is working the 16 November adoption on #998 locally.
+- 2026-11-16T01:53Z renewal (intake305): no new items. L181 handed back #998 at 50e2d897e (T-304 adopted at 90 in the 16 November pass, CI green); senior review running.
+- 2026-11-16T02:55Z: #998 merged at f4aa747e1 (T-304 adopted at 90 in the 16 November pass) after senior review and an addressing pass (S1 independence note, N4 comments); Pages deployed and verified; replies posted on #997, #996 (both closed) and a superseded follow-up on #989. Records lane L185 opened for the replies; beads think-32cl, think-uhav, think-h69d close after it merges.
+- 2026-11-16T03:45Z: #1000 (L185 records of the #996/#997/#989 replies) merged at 31ddae6fe; think-32cl, think-uhav, think-h69d closed after check_bead_tree --before-close. Intake queue is empty of new items; only owner decisions remain.
+- 2026-11-16T03:55Z renewal (intake307): 0 unowned items; the one resolved blocker is think-4ul6 (#953, T-142/T-143), held for the owner. Open PRs all held (#953, #909, #908 owner; #809, #744, #599, #574 as before). No lanes running.
+- 2026-11-16T04:54Z renewal (intake308): no change; queue empty, no lanes.
+- 2026-11-16T06:00Z renewal (intake309): new #1001 (JoeGun: s(127), s(204), s(232), s(264), s(305) on Kodaj's Kaggle packings, Witness/v2 at bc10ce4). Labelled intake; beads think-0y9m (import, lane L187) and think-skt8 (blind stage 4 review, lane L186) created and both lanes launched in parallel.
+- 2026-11-16T06:57Z renewal (intake310): no new items. L186 (think-skt8) review of #1001 landed on its branch at 1b9dc0976 (frozen 06:18Z); L187 told it landed, not summarized. L187 import in progress.
+- 2026-11-16T07:56Z renewal (intake311): no change; L187 (#1001 import) active, not yet pushed.
+- 2026-11-16T08:55Z renewal (intake312): no new items. L187 handed back draft #1002 at 50a6ee5a1 (T-305..T-309 at 127/204/232/264/305, adopted in the 16 November pass, CI green); senior review running; must merge on 16 Nov.
+- 2026-11-16T09:54Z renewal (intake313): no new items. #1002 senior review: merge-ready, S1 (upstream rewritten to 0aac839e, same tree; issue edited 06:38Z) and N1 being fixed by an addressing pass; labelled intake, S3.
+- 2026-11-16T10:50Z: #1002 merged at d451e3d83 (T-305..T-309, adopted at 127/204/232/264/305 in the 16 November pass) after senior review and an addressing pass (rewritten upstream 0aac839e, '1 degree'); Pages deployed and verified (run 43848738239). think-skt8 closed. The author then added a KKT/local-minimum section (upstream 5971b95, issue edit 09:29Z, comment 6912585795); lane L188 reads it and corrects the record's 'no KKT claim' statements. The #1001 reply waits for L188 so it can address both.
+- 2026-11-16T10:57Z renewal (intake314): superseded follow-ups posted on #914 (T-268 -> T-306 at 204) and #927 (T-275 -> T-307 at 232); recording added to L188's records PR, which also reads #1001's 5971b95 and comment. #1001 reply waits for L188.
+- 2026-11-16T11:57Z: #1003 (L188: #1001's local-minimum source read, 'no KKT claim' statements corrected, #914/#927 follow-ups recorded) merged at 67cf4484d; Pages verified (43860362355). #1001 final reply posted (issuecomment-6915717106) and issue closed. Records lane L191 opened for it; think-0y9m and think-664l close after it merges.
+- 2026-11-16T11:58Z renewal (intake315): only the #1001 reply/close rows, owned by L191. Nothing else new.
+- 2026-11-16T12:45Z: #1004 (L191 records of the #1001 reply) merged at f9ddfeeef; think-0y9m and think-664l closed after check_bead_tree. #1001 complete; intake queue empty again.
+- 2026-11-16T12:58Z renewal (intake316): 0 unowned items, 0 closeable; queue empty, no lanes.
+- 2026-11-16T13:57Z renewal (intake317): no change; queue empty, no lanes.
+- 2026-11-16T14:56Z renewal (intake318): no change; queue empty, no lanes.
+- 2026-11-16T16:00Z renewal (intake319): new #1005 (Özden, s(292) <= 17.590104218682, 15:27Z) and #1006 (de Winter, s(292) <= 17.590016442847, 15:39Z, lower). Both labelled intake; beads think-qag8 (import, L193) and think-p3g8 (blind review, L192); both lanes launched. The de Winter watched-repo row (fe13d47) is in L193's scope.

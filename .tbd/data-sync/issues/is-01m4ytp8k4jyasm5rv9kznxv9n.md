@@ -3,9 +3,9 @@ type: is
 id: is-01m4ytp8k4jyasm5rv9kznxv9n
 title: Beyond-horizon rows above Göbel's classical constructions
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 10
+version: 11
 delegate: c-answers-1023
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:46:28.067Z
-updated_at: 2026-10-23T17:01:27.332Z
+updated_at: 2026-10-31T09:57:56.223Z
 started_at: 2026-10-23T07:54:25.898Z
+closed_at: 2026-10-31T09:57:56.223Z
+close_reason: "Done: #613 answered and closed with its final comment (issuecomment-6540803366, recorded in jlevy/squares#854); D-522 landed in #834; think-v022 closed."
+resolution: null
+duplicate_of: null
 ---
 **Owner question:** do Frits Göbel's classical constructions count as earlier reports, and so as the baseline beyond n = 324, so that a beyond-horizon row above one is not recorded? The record holds no Göbel construction beyond the corpus; its standing side there is the beyond-horizon row or the grid. Until the owner answers, draft register plans mark the affected rows `undecided-goebel` rather than recorded.
 

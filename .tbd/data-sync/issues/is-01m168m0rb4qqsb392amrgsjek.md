@@ -3,16 +3,20 @@ type: is
 id: is-01m168m0rb4qqsb392amrgsjek
 title: Eliminate the five-unknown system for the n=29 minimal polynomial
 kind: task
-status: open
+status: closed
 priority: 0
-version: 5
+version: 7
+delegate: w-beads29-1025
 labels: []
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-08-29T08:01:48.299Z
-updated_at: 2026-08-29T10:09:57.466Z
-closed_at: null
-close_reason: null
-resolution: null
+updated_at: 2026-10-25T17:16:50.590Z
+started_at: 2026-10-25T17:16:36.399Z
+closed_at: 2026-10-25T17:16:50.590Z
+close_reason: Superseded by T-246 (Evan Daniel's degree-7213 s(29) minimal polynomial) and its validation under think-10m1 (#817/#816). The eliminant this bead sought now exists externally; BC-066's measured wall stays in the notes.
+resolution: canceled
 duplicate_of: null
 ---
 BC-060's exit named two routes — elimination via SymPy, and integer relation via mpmath pslq — and only the second was built. It refused: no relation through degree 20 below 1e22 at 1000 digits. A symbolic build of the Kingbird system, rationalised by the half-angle substitution u = tan(theta/2), gives per-equation total degrees [11, 20, 23, 22, 19, 6] in {s, u_a, u_b, u_c, u_d, u_i} and a Bezout bound of 12,690,480 on the solution variety — so degree 20 was a corner of the space, not a survey of it. Build the symbolic system as a retained artifact, tighten the bound with a BKK/mixed-volume computation, and attempt resultant or Groebner elimination of the five angle unknowns to get the eliminant in s exactly. A refusal is a result: it would say the exact-algebraic route is out of reach at n=29 and the interval route is what carries the bound.

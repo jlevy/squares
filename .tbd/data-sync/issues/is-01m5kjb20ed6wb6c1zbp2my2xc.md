@@ -3,18 +3,24 @@ type: is
 id: is-01m5kjb20ed6wb6c1zbp2my2xc
 title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666, #715, #719, #732), with a hosted-data manifest for the bulk certificates (think-f2io, 2026-10-23)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 5
-delegate: c-triage-1024-1023
+version: 30
+spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
+delegate: null
 labels:
   - result-import
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m5pjxq31vpw03t0emgwnvhfe
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
-hold: null
+child_order_hints:
+  - is-01m5qby09kkaa1rny3x82s2784
+  - is-01m5qby16169h30h6s4cg3r70a
+hold: blocked
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-10-23T23:07:37.271Z
+updated_at: 2026-11-02T01:48:10.854Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -40,3 +46,38 @@ Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: t
 #715 and #732 claim counts up to 9913, so the above-1024 work must handle this before any import, receipt or gather above 1073: extend the program's reach and re-verify it against a larger build (review A of #754 matched it against a 5000 build to 1073), or split every input at 1073.
 
 Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a ledger read from 23 October lists the `restatement` ruling through its top count, so the 66 counts above 1024 where #732 is below #715's print by less than 1e-12 (think-f2io) are walked under it; and it applies Göbel's baseline at every count it walks beyond 324, through its `classical-constructions` ruling or a frozen start member. A ruling it does not apply at some count, as Göbel's above 1073, is named under `rulings_not_applied` with the reason, or `check`, `render` and `gather` fail.
+
+2026-10-24 coord-intake-1024: released (no live lane after the interruption of coord-intake-1023's session); open for the next lane. #763's 233 rows above 1024 join this walk (think-cnn7's plan).
+
+2026-10-24 coord-intake-1024: the plan landed as PR #791 (docs/project/specs/active/plan-2026-10-24-rows-above-1024.md) after review A (approve after six Mediums; all 17 findings fixed, dispositions https://github.com/jlevy/squares/pull/791#issuecomment-6383725520). Slices: W7 code (after #789), R1 (~4.3 CPU-h), R2 #732 (~32, owner publishes the hosted shards first), R3 (#763/964ee2b/43f666c, ~0.1), R4 (held rows). Open owner questions with the coordinator's recommendations: D5, think-kzme's sub-question, N1, N5; D4 recorded as the record's disposition (hosted data/couzo-715-certificates-v1). Next: W7 after #789 merges.
+
+2026-10-24 c-w7-1024 (W7, branch claude/w7-2026-10-24-rows-above-1024-code). Design questions and findings, for the coordinator:
+- STOPPED ON (plan wrong against the code): "The RECIPE hold class becomes settled for every recipe the checker decides. D2's answer applies as Held.answer, the way DELETION_ANSWER applies D6's." In the code an answered Held means the publication has NO row (held_problems refuses a row at any held count; declared_rows skips held counts; held_sentence prints "have no row by {answer}"), while D2's answer makes a decided recipe a row. W7 therefore does not settle recipes through Held.answer: a recipe the walk records and does not hold is a declared row carrying its recipe, decided by devtools.construction_checker into receipts/recipe-decisions.json, and the RECIPE class holds only recipes the checker refuses (classical parents, think-zkxy; Fang composites). No frozen walk changes: every recipe in them stays held as written. If the coordinator wants the Held.answer form instead, that is a change to Held's meaning (an answer that settles a publication AS a row), which the plan should state.
+- Fang composites: the plan says the checker "refuses a Fang composite unless his table states the composite's parts", but states no rule for deciding a composite whose parts are stated. W7 refuses every composite, naming unstated parts when the table states none; a composite rule needs its own decision.
+- The summary README threshold is 400 walked counts (intake_ledger.SUMMARY_FROM): above every retained walk (the history walk walks 392 counts, its README 339 kB), so every frozen README renders byte for byte.
+- Base finding, not W7's: the #678 Goebel receipt (couzo-issue678-2026-10-18/receipts/goebel-comparison.json) does not rebuild byte for byte at main 2ec489d1e: couzo_678_replay.goebel writes families "... and corner-touching strips ..." where the committed file says "... corner-touching Goebel strips ...". Left as committed; a one-line records fix for a later slice.
+- For R1: history-publications and earlier still scan HISTORY_COUNTS (325..1024); scanning the watched repositories above 1024 is R1's change, with the walk above 1024's name in WALKS (above=1024, through=None), Release.walk_above on each lifted release, CLAIM_MAP_WALKS/WALK_READ_AT_MAIN entries, and Barnett's repository in WATCHED_HOLDERS.
+
+2026-10-24 c-w7-1024: W7 is draft PR https://github.com/jlevy/squares/pull/793 at 6d44159fc (S2, project), every hosted check passed; records nothing.
+
+2026-10-24 coord-intake-1024 on W7's two stops (PR #793 at 6d44159fc): (1) RECIPE hold: confirmed as built. The owner's D2 answer is that recipes become rows via a maintained checker (think-f2io), so a decided recipe is a declared row and the RECIPE class holds only recipes the checker refuses; the plan's 'as Held.answer' wording is wrong against the code and is corrected in #793's review round. Not an owner question. (2) Fang composites: refusing every composite until a rule exists is the safe default; a bead holds the rule.
+
+2026-10-24 c-w7-1024, PR #793 round 1 (reviews A senior, B correctness, C security; one push). Fixed: A1 A2 A4 A10 (plan and rule text: a decided recipe is a declared row, RECIPE holds refused recipes only; composites wait on think-tj3x; a deletion is no recipe row, D6 or think-kzme; "capacity less the stated deletions"), A3 and B3 (one Hosting per call: acquisition record, manifest and receipts read once, tested at 5,000 hosted rows; one pinned-entry helper for side and blob; is_hosted is hosted_pins' predicate), A5 (byte-change refusals tested), A6 (recipe_pin_problems), A7 and C1 to C4 (hosted_shards: counting reader under tarfile stream mode bounds pax and long-name records; per-member bound 64 MiB; chunked hash before publish; DIR-members/STEM; ShardError at the root; members dir inside the repository; the unused `sizes` check dropped, no source states sizes), A8 with B2 (recipe certificate_n = source_n; claim_side tS + L in decided_sides and release_sides; a recipe row is dated by the index commit that first states its recipe, and first_commits refuses one until R1 reads index history), A9, A12 (evand_exact_certificates.header shared with header_side; release record amended, 51/51 renders identical), B1 (#719 sources read #666 above FROZEN_THROUGH; lifted-#666 test), B4 (later_publications refuses a receipt below its walk), B5, B6. Deferred: A11 -> think-z236 (R1), A13 -> think-j83l. Review C's out-of-diff load_manifest note -> think-eyrn. Each new test fails with its fix mutated out (13 of 13). No record changes.
+
+2026-10-24 c-w7-1024: #793 round 1 pushed as acb59dba11f98bf2b8331f00e6a7e32a9e8b7b1d (fixes c3bb93b47, 72e2eba50, ae6c93fe0, acb59dba1); main had not moved, no merge. CI green: Packing validation 40113441342 (attempt 1), Certificate page 40113441337 (attempt 5; earlier attempts failed on HTTP 502 from the jobs API in wait_for_run_artifact, think-nnk7). Dispositions replies: A issuecomment-6387505266, B -6387505446, C -6387505611. Open from this round: think-z236 (A11, R1), think-j83l (A13), think-eyrn (C, outside the diff), think-nnk7 (CI waiter).
+
+2026-10-24 c-w7-1024, PR #793 round 2 (review D, follow-up; one push): head b28584668e4a55df4e6202694c959ae8be39c15c. Fixed in 4e7a218b3: D1 (stream allowance starts at MAX_HEADERS and grows per admitted member; C1 test at the shipped bounds; review C 512 MiB records refused at the defaults, peak RSS 55 MiB), D2 (member-read errors are ShardError), D3 (a link anywhere below the members directory refused), D4 (release_sides clone branch tested), D5 (receipt without limit refused), D6 (header_side in both branches). 5 of 5 mutations detected. Merged main 3480b5fd3 (#792) as 96bbef3b5: one conflict, two no-change records in release.py, both kept; W7 record re-measured in b28584668 (51/51 identical); release_pin current (3a9c5b60); site_urls --history-ref origin/main passes. Validation: 1,059 tests passed, rebuild driver clean, --records 53/53 (148 s). CI green first attempt: Packing validation 40120155316, Certificate page 40120155325, mergeability 40120151956; PR MERGEABLE. Reply D: issuecomment-6387969029.
+
+2026-10-24 coord-intake-1024: W7 landed as PR #793 (dd0061553, merged 2026-10-24T18:32:59Z) after review A (senior), B (correctness), C (security) and follow-up D, all dispositioned; hosted CI green first attempt at b28584668. Phase 1 done. Next: R1 (records: #666, #719, #715, Couzo 5a299b4, Fang, Barnett; owner to publish data/couzo-715-certificates-v1 first, D4), then R2 (#732 under N2, owner publishes the #732 shards), R3 (#763's 233 rows, 964ee2b's 6, 43f666c's 831 recipes after think-gn29), R4 (held rows after D5/kzme/N1/N5). Open: think-z236, think-j83l, think-eyrn, think-nnk7, think-tj3x.
+
+2026-10-31 bold-ritchie-l4 (intake pass think-3guf, lane L4). PR #835 brought up to main 3978a7f61 (one conflict in release.py, both no-change records kept), its record re-measured (69 files byte-identical), --records and 204 affected tests green locally; pushed 3954a5d64. R1 NOT started; its readiness, read-only:
+- Repository access: in this sandbox a blobless clone of a watched repository into the worktree's ignored attic/ works (tested on TheSnakeFang/squarepack-certs), and raw.githubusercontent.com serves files at a pin. codeload tarballs and zenodo.org are refused by the proxy (403). So the 26 October blocker "read access to five watched repositories" no longer holds here.
+- New reports above 1024 since the plan: #836 (Karimi v5.0, 5,308 rows at 1182-9944, 2026-10-26T12:18:36Z; think-7yrs), V1.0 of his filled-end set (comment on #836, 2026-10-27T04:16:22Z, 4,571 rows), #847 (V2.0, 2026-10-30T21:56:32Z, 5,134 rows at 1182-9946; think-r94q); the issues also name newer heads, Couzo 712c6a6 (28 October) and Mishapolk ab8e833. The walk is read on the day R1 starts from every report to date, so it must read the three Karimi deposits, all on zenodo.org: R1's walk needs #836's and #847's stage 2 first (zenodo.org reachable, or the owner supplies the three files). Reading the walk at a date before #836 to avoid them would break the plan's rule.
+- D4 (hosting Couzo's certificates above 1024): the 23 October disposition is a hosted release the owner publishes after a lane stages its manifest; no lane has staged it, so the owner has had nothing to publish. By OR-18's count the set is about 9.1 MB as zlib stores it (think-cyal, 98 certificates, 51.2 MB checkout), where the #715 packet kept its certificates to 1024 in Git at 4.42 MB stored, and check_added_blobs admits 48 MiB a pull request and 5 MiB a blob. DECISION for the coordinator or owner: keep hosting (R1 stages the manifest, the owner publishes before R1 merges) or commit them to Git, which removes the owner's step.
+- R5 grows (think-5dc3): #836's v5 rows, which two_strip_checker reads, land with #799's, about 9.2 CPU-h more (think-gw1s). The filled-end sets need W9 (think-fuwd) and a slice of their own after R5, about 11.8 CPU-h for V2.0, up to 21.3 with V1.0 (think-qczx); the owner question Q-847a (how V1.0's withdrawn and restated rows stand) is on think-r94q.
+- Requests entries for #836 and #847 (triage pending) and their intake labels: branch claude/bold-ritchie-xo28us-beyond.
+
+2026-11-01 bold-ritchie-l13 (addressing pass of PR #870, W9, think-fuwd), from the stage 4 review's F2 (docs/project/reviews/review-2026-11-01-filled-end-lemma.md): **the walk must record a filled-end row at side_exact, or at a decimal rounded up from it (as couzo_678_replay.rounds_up_to requires of a printed side), never at the author's decimal `side` column.** Karimi rounded the exact side to nearest, so his decimal is below side_exact at 2,514 of V2.0's 5,134 rows and 2,204 of V1.0's 4,571, by up to 0.502 units of its twelfth place (0.504 in V1.0; the review's 0.503 and 0.506 are the largest gaps either way, which are above). The V fit binds at every row, so where the decimal is below, a square of that side does not hold the construction (1190: decimal 34.958620689655, exact 5069/145 = 34.95862068965517...). devtools.filled_end_checker decides and reports side_exact alone, and each decisions receipt counts the decimal against it under author_columns.side, which `check` derives again. The review accepted the lemma with no defect, so under D2 each decided row is a row once this walk records it.
+
+2026-11-02 coordinator (intake pass think-3guf): claim of bold-ritchie-l4 released (that lane has ended). The walk waits on the owner's D4 (how the certificates above 1024 are hosted) and D1/D5 as recorded in think-f2io; nothing runnable until then. Six held beads name this bead.
+blocked_on: think-f2io

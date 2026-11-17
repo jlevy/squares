@@ -5,7 +5,7 @@ title: "Address PR #756 review B (B1-B4)"
 kind: task
 status: closed
 priority: 2
-version: 6
+version: 7
 delegate: c-fix-756b-1024
 labels: []
 dependencies: []
@@ -13,10 +13,10 @@ parent_id: is-01m5nzjjyj7axr5vb1gvk4xwh9
 hold: null
 hold_until: null
 created_at: 2026-10-24T04:51:22.200Z
-updated_at: 2026-10-24T07:40:42.796Z
+updated_at: 2026-11-17T01:22:59.563Z
 started_at: 2026-10-24T04:51:27.638Z
-closed_at: 2026-10-24T07:40:42.796Z
-close_reason: "B1-B4 addressed; dispositions https://github.com/jlevy/squares/pull/756#issuecomment-6380267295. Merged as PR #756 at 2026-10-24T07:39:21Z (e5c1c64e3), head a9e3fab37, CI green; regularization states 57/228/28/7/4/0"
+closed_at: 2026-10-24T08:25:37.000Z
+close_reason: "PR #756 merged 2026-10-24T07:39:21Z (e5c1c64e3) with review B addressed (dispositions on the PR); coord-intake-1024 bead hygiene."
 resolution: null
 duplicate_of: null
 ---

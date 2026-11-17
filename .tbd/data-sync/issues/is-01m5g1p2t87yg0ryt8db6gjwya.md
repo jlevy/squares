@@ -5,13 +5,13 @@ title: Give issue 678's packet an import declaration instead of a bespoke house 
 kind: chore
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - result-import
 dependencies: []
-parent_id: is-01m58r5901xpf3e6vy8wwh9mrh
+parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-21T20:15:47.528Z
-updated_at: 2026-10-21T20:15:47.528Z
+updated_at: 2026-10-24T20:22:39.771Z
 ---
 Review A7 of #706 (suggestion, deferred from that PR): give issue 678's packet (`packing/resources/web/couzo-issue678-2026-10-18/`) an import declaration, so T-223's house reads through `upper_bound_houses.packet_source` and `upper_bound_reports._import` like every other house.
 

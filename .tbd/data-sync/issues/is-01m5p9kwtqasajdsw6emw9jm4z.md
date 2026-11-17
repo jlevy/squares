@@ -5,14 +5,14 @@ title: "Owner's call: send wand125 the n31 review's M-1 to M-3 and its five ques
 kind: task
 status: open
 priority: 3
-version: 1
+version: 2
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-24T06:29:51.063Z
-updated_at: 2026-10-24T06:29:51.063Z
+updated_at: 2026-10-24T08:28:56.438Z
 ---
 The owner's call, carried here from think-wop1 so that think-wop1 can close: whether, and where, to send Hiroaki Hosono (wand125) the minor findings and the questions of the stage 4 review of T-232, docs/project/reviews/review-2026-10-23-wand125-n31-fine-net.md (think-oc25), since no issue of his asked for s(31) and #534 is the project's own tracking issue.
 
@@ -25,3 +25,8 @@ What they are (the review's Findings and Questions for the Author):
 None of them changes the record: T-232 is at V3/C3 on main (#745) and the answers would change no rung, credit or lineage, so nothing holds an issue open on them. The #446 follow-up of 2026-10-24T05:40:18Z (issuecomment-6380484985) and the #534 closing reply drafted on 24 October leave them out for this decision.
 
 Options: post them on #446, where the author reports this family of certificates; open an issue or a discussion on wand125/square-packing; or send nothing.
+
+## Notes
+
+2026-10-24 coord-intake-1024: #745 merged. The call is the owner's (listed in the pass's owner questions); #534 can close without it.
+blocked_on: none

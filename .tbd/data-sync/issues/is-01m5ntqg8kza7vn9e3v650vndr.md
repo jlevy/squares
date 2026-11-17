@@ -5,7 +5,7 @@ title: Catch up every 'Review pending' result on the profiles (T-073/T-080, T-08
 kind: task
 status: closed
 priority: 2
-version: 8
+version: 9
 delegate: c-review-pending-1024
 labels: []
 dependencies: []
@@ -16,10 +16,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T02:09:40.627Z
-updated_at: 2026-10-24T07:33:27.659Z
+updated_at: 2026-11-17T01:22:59.526Z
 started_at: 2026-10-24T02:09:50.200Z
-closed_at: 2026-10-24T07:33:27.658Z
-close_reason: "Owner's request of 24 October done: no profile on squaremath.org shows 'Review pending' (all 76 profile pages grepped after #770's deploy, edition v0.9.2-d7f02b); T-163 assessed current, T-073/T-080 and T-083/T-084 credited both ('Credit both (Recommended)'), and every pending review has a GitHub tracking issue (#772-#780, #782-#786; check_requests --pending: 48 pending, 0 untracked). T-163's V3 route continues in PR #781 (think-494l)."
+closed_at: 2026-10-24T08:26:51.457Z
+close_reason: "Landed as PR #770 (11d0ab06b, 2026-10-24T07:14:46Z): every pending review tracked on an issue; the 16 acknowledgements were posted 07:31Z."
 resolution: null
 duplicate_of: null
 ---
