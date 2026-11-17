@@ -24,6 +24,9 @@ houses:
   - n: 86
     result: T-174
     landed: '2026-10-19'
+  - n: 90
+    result: T-304
+    landed: '2026-11-16'
   - n: 102
     result: T-193
     landed: '2026-10-24'
@@ -46,8 +49,8 @@ houses:
     result: T-139
     landed: '2026-10-12'
   - n: 127
-    result: T-174
-    landed: '2026-10-19'
+    result: T-305
+    landed: '2026-11-16'
   - n: 129
     result: T-186
     landed: '2026-10-17'
@@ -58,11 +61,14 @@ houses:
     result: T-174
     landed: '2026-10-19'
   - n: 132
-    result: T-174
-    landed: '2026-10-19'
+    result: T-292
+    landed: '2026-11-12'
   - n: 146
     result: T-187
     landed: '2026-10-17'
+  - n: 147
+    result: T-302
+    landed: '2026-11-15'
   - n: 153
     result: T-174
     landed: '2026-10-24'
@@ -75,6 +81,9 @@ houses:
   - n: 156
     result: T-287
     landed: '2026-11-11'
+  - n: 157
+    result: T-293
+    landed: '2026-11-12'
   - n: 172
     result: T-282
     landed: '2026-11-09'
@@ -85,8 +94,8 @@ houses:
     result: T-186
     landed: '2026-10-17'
   - n: 179
-    result: T-174
-    landed: '2026-10-19'
+    result: T-294
+    landed: '2026-11-12'
   - n: 180
     result: T-288
     landed: '2026-11-11'
@@ -103,8 +112,8 @@ houses:
     result: T-284
     landed: '2026-11-10'
   - n: 204
-    result: T-268
-    landed: '2026-11-06'
+    result: T-306
+    landed: '2026-11-16'
   - n: 206
     result: T-174
     landed: '2026-10-19'
@@ -127,20 +136,20 @@ houses:
     result: T-225
     landed: '2026-10-22'
   - n: 228
-    result: T-174
-    landed: '2026-10-19'
+    result: T-301
+    landed: '2026-11-15'
   - n: 229
     result: T-225
     landed: '2026-10-22'
   - n: 232
-    result: T-275
-    landed: '2026-11-09'
+    result: T-307
+    landed: '2026-11-16'
   - n: 236
     result: T-218
     landed: '2026-10-20'
   - n: 237
-    result: T-190
-    landed: '2026-10-17'
+    result: T-295
+    landed: '2026-11-12'
   - n: 238
     result: T-174
     landed: '2026-10-19'
@@ -169,8 +178,8 @@ houses:
     result: T-174
     landed: '2026-10-19'
   - n: 264
-    result: T-186
-    landed: '2026-10-17'
+    result: T-308
+    landed: '2026-11-16'
   - n: 267
     result: T-134
     landed: '2026-10-12'
@@ -178,8 +187,8 @@ houses:
     result: T-289
     landed: '2026-11-11'
   - n: 269
-    result: T-290
-    landed: '2026-11-11'
+    result: T-297
+    landed: '2026-11-13'
   - n: 270
     result: T-283
     landed: '2026-11-09'
@@ -202,8 +211,8 @@ houses:
     result: T-193
     landed: '2026-10-24'
   - n: 297
-    result: T-174
-    landed: '2026-10-19'
+    result: T-299
+    landed: '2026-11-14'
   - n: 299
     result: T-277
     landed: '2026-11-09'
@@ -217,8 +226,8 @@ houses:
     result: T-273
     landed: '2026-11-06'
   - n: 305
-    result: T-174
-    landed: '2026-10-19'
+    result: T-309
+    landed: '2026-11-16'
   - n: 306
     result: T-174
     landed: '2026-10-19'
@@ -293,8 +302,16 @@ sources:
     landed: '2026-10-23'
   - id: couzo-verified-bounds-2026-10-14
     landed: '2026-10-16'
+  - id: de-winter-a0c4fc8-2026-11-10
+    landed: '2026-11-11'
   - id: de-winter-issue666-2026-10-17
     landed: '2026-10-22'
+  - id: de-winter-issue941-2026-11-10
+    landed: '2026-11-11'
+  - id: de-winter-issue942-2026-11-10
+    landed: '2026-11-11'
+  - id: de-winter-issue979-2026-11-14
+    landed: '2026-11-14'
   - id: evand-compositions-2026-10-13
     landed: '2026-10-14'
   - id: evand-fresh-compositions-2026-10-14

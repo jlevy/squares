@@ -1,0 +1,42 @@
+{
+  "fetched_at": "2026-11-14T19:27:55Z",
+  "issues_named": [
+    {
+      "closed_at": null,
+      "created_at": "2026-10-14T01:40:32Z",
+      "is_pr": false,
+      "number": 593,
+      "state": "open",
+      "title": "73 new upper bounds across N=51..308: registration request",
+      "user": "Mishapolk"
+    },
+    {
+      "closed_at": null,
+      "created_at": "2026-10-05T21:40:49Z",
+      "is_pr": false,
+      "number": 375,
+      "state": "open",
+      "title": "Analytic optima of 48 recent records (s(n) bounds 3e-13 … 5e-11 below the register) and exact certificates for every record n ≤ 104: registration request",
+      "user": "evand"
+    },
+    {
+      "closed_at": null,
+      "created_at": "2026-10-07T20:11:50Z",
+      "is_pr": false,
+      "number": 419,
+      "state": "open",
+      "title": "Mechanized exact forms for 269 best-known packings, n ≤ 324 (minimal polynomial, isolating interval, exact configuration), checked independently and in Lean: registration request",
+      "user": "evand"
+    },
+    {
+      "closed_at": null,
+      "created_at": "2026-10-07T07:01:52Z",
+      "is_pr": false,
+      "number": 405,
+      "state": "open",
+      "title": "Prove n = 17 optimality: Bidwell family, explainer paper, and verifiable proof",
+      "user": "jlevy"
+    }
+  ],
+  "evand_square_packing_head": "not checked: the GitHub API call was refused (access to that repository is not enabled for this session), and a git ls-remote of it was refused by the session permission system; neither was retried"
+}

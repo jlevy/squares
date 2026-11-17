@@ -80,8 +80,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         "-x",
         "-p",
         "no:cacheprovider",
-        "-o",
-        "faulthandler_timeout=45",
+        *validate.stack_watchdog(45),
         target,
     )
     try:

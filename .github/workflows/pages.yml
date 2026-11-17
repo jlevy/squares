@@ -1735,25 +1735,39 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
 
+      # Playwright skips a browser whose revision directory is already complete, and the
+      # directory does not record the Ubuntu release the build was made for. WebKit has
+      # one build per release, so a 24.04 WebKit restored on a 26.04 runner, during
+      # ubuntu-latest's move to 26.04 (19 October to 19 November 2026), was skipped and
+      # failed at launch for want of ICU 74 and libxml2.so.2 (run 43559737624, PR #974).
+      # The browser cache is keyed on the release and has no restore-keys, which would
+      # match another release by prefix. Firefox shares the key, though Playwright 1.62
+      # serves 26.04 its 24.04 build. The step also names the full image for the package
+      # cache below.
+      - name: Name the runner image the browser and its system packages belong to
+        id: image
+        run: |
+          echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+          echo "os=${ImageOS}" >> "$GITHUB_OUTPUT"
+
       - name: Cache the Playwright browser
         uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('packing/uv.lock') }}
+          key: playwright-${{ runner.os }}-${{ steps.image.outputs.os }}-${{ matrix.browser }}-${{ hashFiles('packing/uv.lock') }}
 
       # The browser binary was always cached; its system libraries were not. WebKit's are
       # 181 packages, 114 MB, fetched in 24.7 s of a 46 s install in run 34993754160, and
       # Firefox's 40 packages, 49 MB, in 8.9 s. apt now keeps what it downloads in a
       # directory the Actions cache saves, keyed on the runner image (whose package lists
-      # decide the versions) and the lock (which pins Playwright and so the package list);
-      # an older image's archives are restored as a start and apt fetches only what moved.
+      # decide the versions) and the lock (which pins Playwright and so the package list).
+      # An older image of the same Ubuntu release seeds it and apt fetches only what moved;
+      # another release seeds nothing, so `apt-get autoclean` drops every archive the
+      # runner's lists no longer name before the cache is saved (run 43562344263 fetched
+      # all 139 MB of WebKit's 26.04 packages over 137 MB of restored 24.04 archives).
       # dpkg's per-file fsync and the man-db trigger are switched off for the unpack, on a
       # runner that is discarded when the job ends. The same packages at the same versions
       # are installed either way, so no browser sees a different system.
-      - name: Name the runner image the system packages belong to
-        id: image
-        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
-
       - name: Cache the browser's system packages
         uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
@@ -1770,6 +1784,7 @@ jobs:
           echo force-unsafe-io | sudo tee /etc/dpkg/dpkg.cfg.d/90-pages-unsafe-io > /dev/null
           sudo rm -f /etc/apt/apt.conf.d/docker-clean /var/lib/man-db/auto-update
           uv run --frozen --group dev python -m playwright install --with-deps ${{ matrix.browser }}
+          sudo apt-get autoclean -qq
           sudo rm -rf ~/apt-archives/partial ~/apt-archives/lock
           sudo chown -R "$(id -u):$(id -g)" ~/apt-archives
 
@@ -1870,25 +1885,39 @@ jobs:
           enable-cache: true
           cache-dependency-glob: uv.lock
 
+      # Playwright skips a browser whose revision directory is already complete, and the
+      # directory does not record the Ubuntu release the build was made for. WebKit has
+      # one build per release, so a 24.04 WebKit restored on a 26.04 runner, during
+      # ubuntu-latest's move to 26.04 (19 October to 19 November 2026), was skipped and
+      # failed at launch for want of ICU 74 and libxml2.so.2 (run 43559737624, PR #974).
+      # The browser cache is keyed on the release and has no restore-keys, which would
+      # match another release by prefix. Firefox shares the key, though Playwright 1.62
+      # serves 26.04 its 24.04 build. The step also names the full image for the package
+      # cache below.
+      - name: Name the runner image the browser and its system packages belong to
+        id: image
+        run: |
+          echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
+          echo "os=${ImageOS}" >> "$GITHUB_OUTPUT"
+
       - name: Cache the Playwright browser
         uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ matrix.browser }}-${{ hashFiles('packing/uv.lock') }}
+          key: playwright-${{ runner.os }}-${{ steps.image.outputs.os }}-${{ matrix.browser }}-${{ hashFiles('packing/uv.lock') }}
 
       # The browser binary was always cached; its system libraries were not. WebKit's are
       # 181 packages, 114 MB, fetched in 24.7 s of a 46 s install in run 34993754160, and
       # Firefox's 40 packages, 49 MB, in 8.9 s. apt now keeps what it downloads in a
       # directory the Actions cache saves, keyed on the runner image (whose package lists
-      # decide the versions) and the lock (which pins Playwright and so the package list);
-      # an older image's archives are restored as a start and apt fetches only what moved.
+      # decide the versions) and the lock (which pins Playwright and so the package list).
+      # An older image of the same Ubuntu release seeds it and apt fetches only what moved;
+      # another release seeds nothing, so `apt-get autoclean` drops every archive the
+      # runner's lists no longer name before the cache is saved (run 43562344263 fetched
+      # all 139 MB of WebKit's 26.04 packages over 137 MB of restored 24.04 archives).
       # dpkg's per-file fsync and the man-db trigger are switched off for the unpack, on a
       # runner that is discarded when the job ends. The same packages at the same versions
       # are installed either way, so no browser sees a different system.
-      - name: Name the runner image the system packages belong to
-        id: image
-        run: echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"
-
       - name: Cache the browser's system packages
         uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
@@ -1905,6 +1934,7 @@ jobs:
           echo force-unsafe-io | sudo tee /etc/dpkg/dpkg.cfg.d/90-pages-unsafe-io > /dev/null
           sudo rm -f /etc/apt/apt.conf.d/docker-clean /var/lib/man-db/auto-update
           uv run --frozen --group dev python -m playwright install --with-deps ${{ matrix.browser }}
+          sudo apt-get autoclean -qq
           sudo rm -rf ~/apt-archives/partial ~/apt-archives/lock
           sudo chown -R "$(id -u):$(id -g)" ~/apt-archives
 

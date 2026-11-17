@@ -1,0 +1,7 @@
+segments 13244, total 28909433072241/250000000000 = 115.637732288964, D = 1340566927759/1000000000000 = 1.340566927759
+total = 121 - 4D exactly; D > 5/4 (so k^2 - 4D < k^2 - 5 for every k); D4-invariant; family file agrees
+SANITY-OK
+
+real	0m0.091s
+user	0m0.085s
+sys	0m0.004s

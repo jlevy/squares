@@ -1,0 +1,42 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "joegun-upper-bounds-2026-11-16",
+  "source_url": "https://github.com/JonathanGun/square-packing-upper-bounds",
+  "source_ref": "main",
+  "source_commit": "bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+  "retrieved_at_utc": "2026-11-16T06:01Z",
+  "git_scope": "A full clone of JonathanGun/square-packing-upper-bounds, fetched at 06:01Z on 16 November 2026 for the intake of jlevy/squares#1001 (lane L187, bead think-0y9m), when git ls-remote read main's head as bc10ce4. The pin is that head, then the repository's only commit (committed 2026-11-16T05:31:52Z, 'exact witnesses for s(127), s(204), s(232), s(264), s(305)', author and committer JoeGun), the commit #1001 (05:33:07Z) named when filed. The history was rewritten after the clone: at 09:16Z the same day git ls-remote read main's only head as 0aac839e551fd8cb7d7717c20494b095429131a1, a root commit of 06:37:41Z with bc10ce4's message and tree (2faf49af), only its author and committer address and time differing, and #1001 was edited at 06:38:44Z, its only change naming 0aac839e in place of bc10ce4. bc10ce4 is on no branch now; the retained files are the tree both commits hold. The five n-NNN-candidate.yaml files have the SHA-256 digests the issue and the root README list. GitHub's activity log was not readable from this session, so the push time is not read. The scope is the whole tree. LICENSE-evand-square-packing.txt is byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains and is pinned against it. No source program ran in writing this packet; check.py and make-pose.py are retained as data and never executed here.",
+  "archived_dir": "source",
+  "license": "LICENSE.md at the pin, copyright 2026 JoeGun: CC BY 4.0 for the witness files (n-*-candidate.yaml), the decimal poses (n-*-decimal-pose.yaml), the checker outputs and the README, and MIT for check.py; it says the licence covers the author's own contribution and does not change the terms of Tomas Kodaj's work, on whose public Kaggle packings the five packings build. make-pose.py is named by no licence line and is retained under the presumption of permission for a source its author submitted to this repository (think-cnn7). LICENSE-evand-square-packing.txt is Evan Daniel's MIT notice for evand/square-packing, whose quench code the search used; the source says none of his code is in the repository. The licence of Kodaj's notebook was not checked by the source and is not readable from this session (Kaggle refused by the session proxy); whether a seeded packing needs a notice of its own is the owner's question think-71uq, which holds no import.",
+  "claims": [
+    "n-127-candidate.yaml, n-204-candidate.yaml, n-232-candidate.yaml, n-264-candidate.yaml and n-305-candidate.yaml each state a packing of n unit squares as a packing.squares:Witness/v2 document of rational corners, with the softschema envelope, a claim block of coordinate_provenance verified and method exact-algebraic, and a certificate block (exact-rational-sat, rational_digits 36, center_dilation '1') derived from the decimal pose n-NNN-decimal-pose.yaml beside it. #1001 and the root README print the sides rounded up at 12 places as 11.801753890487, 14.802646843107, 15.759531627557, 16.773807598002 and 17.945762359659, each below the record's side at 31ddae6 by 9.1249e-3, 1.7145e-3, 1.8780e-3, 9.275e-4 and 4.7041e-3, and say each exact side less the record's exact side is negative in Fraction arithmetic.",
+    "The README and #1001 say each packing is a public Kaggle packing by Tomas Kodaj (tomkodaj), from his notebook 'Squares in Squares | [22.1636]' (last run 2026-11-13 09:48 UTC, downloaded 10:17 UTC that day), at sides 11.801765635430, 14.802646907234, 15.759531732104, 16.773891500852 and 17.946298110350, improved further by JoeGun by 1.174e-5, 6.41e-8, 1.045e-7, 8.390e-5 and 5.358e-4: a fault-line DP of their own at 127, 204 and 232 (2026-11-13 10:42 UTC), a 600 s quench with Evan Daniel's code (evand/square-packing at 6067db5, MIT) at 264 (2026-11-14 09:42 UTC), and two quench runs then the fault-line DP at 305 (2026-11-13 13:41 and 23:40 UTC). The fault-line DP cuts pieces out of other packings along lines no square crosses and joins them by a dynamic programme; the donors are their own and public Kaggle packings, and which donors the winning pieces came from was not recorded. They did not trace what Kodaj's packings build on. They suggest credit to Kodaj as finder at all five counts, improved by JoeGun, and say credit to Kodaj alone is fair at 204 and 232, where their part is below 2e-7.",
+    "The README says the exact coordinates come from this repository's packing-witness promote --strategy robust-rational --max-side-increase 1e-11 at 31ddae6, after every f64 centre was pushed away from the centroid by a factor of at least 1 + 1e-12, and that packing-witness verify (packing-witness-verify.txt) reports VERIFIED, exact-algebraic, for all five, testing 8,001, 20,706, 26,796, 34,716 and 46,360 pairs, so that it does not check the rounding independently; and that check.py, written apart from this repository's code in Fraction arithmetic with no tolerance and no distance filter (check-output.txt), reports VALID for all five and refused three broken copies of the n = 127 witness. They make no optimality, rigidity or KKT claim, did not measure the least pair margin or the contraction margin, and say AI agents wrote and ran the search code, the checker and the filing, under JoeGun's direction. The issue also quotes the Kaggle per-puzzle leaderboard's side-only entries below the claims at all five counts, and Kodaj's n = 270 at 16.927469594094, which it does not claim. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "LICENSE-evand-square-packing.txt",
+    "LICENSE.md",
+    "README.md",
+    "check-output.txt",
+    "check.py",
+    "make-pose.py",
+    "n-127-candidate.yaml",
+    "n-127-decimal-pose.yaml",
+    "n-204-candidate.yaml",
+    "n-204-decimal-pose.yaml",
+    "n-232-candidate.yaml",
+    "n-232-decimal-pose.yaml",
+    "n-264-candidate.yaml",
+    "n-264-decimal-pose.yaml",
+    "n-305-candidate.yaml",
+    "n-305-decimal-pose.yaml",
+    "packing-witness-verify.txt"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE-evand-square-packing.txt",
+      "reason": "Evan Daniel's MIT notice for evand/square-packing, which the source carries for his quench code; byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains.",
+      "identical_to": "packing/resources/web/evand-issue845-2026-10-29/source/LICENSE"
+    }
+  ]
+}

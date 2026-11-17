@@ -1,0 +1,10 @@
+# Lane L159 checker, frozen at 2026-11-14T19:12:07Z, before the controls plan, the findings, the author's README, checkers or their outputs, the decimal pose, any packing-witness code, the register entries at 228 or any import lane's work (L160) was read.
+544bdec8f02570156dd2b34d7c94c9f2432e3afb9d6f744e128681b24b23def4  l159_reader.py
+728439dcbd329b095e5e78c58cae9f61116d6b1238d69d5621e1500ee25c19ec  l159_sat.py
+2925a00883afc2cc7683b5869c899ae1664792e26f0deca60ec67260bfdab343  l159_clip.py
+6ea41979038f2527cc7fcdff308fc0884acdf4a156967e345d2d26bcf2506a93  l159_check.py
+0645b8520582f4d322b708909a26c231c237542334529daf55c0c9401a2ec200  l159_geom.py
+768b1dc7326b2e85ca582170411af2a7930e3a72c6d378bf4187a2dabd7e0949  l159_selftest.py
+# receipts written by the frozen checker:
+8a3f7cfa3a03da6c5f046262d2f366bfae697bf0d5436018edccb1cfc3296daa  out/selftest.json
+7d17f80bb91aef69ff054d041047cb210dc30157963efe0233d3c0fe7f786213  out/check-n228.json

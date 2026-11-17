@@ -1,0 +1,394 @@
+{
+ "format": "upper-bound-sharp-controls-v1",
+ "packet": "joegun-upper-bounds-2026-11-16",
+ "n": 232,
+ "certificate": "packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-232-candidate.yaml",
+ "side": "15759531627556573/1000000000000000",
+ "epsilon": "1/1000000000000000000000000000000",
+ "routes": [
+  "exact_verify",
+  "independent"
+ ],
+ "controls": [
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "lowered_by": "0"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "997/1000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "997/1000000000000000",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.725
+  },
+  {
+   "control": "side-lowered-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container"
+   ],
+   "detail": {
+    "lowered_by": "1/1000000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "997/1000000000000000",
+     "failures": [
+      "container"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "997/1000000000000000",
+     "failures": [
+      "container"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.849
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "square": 197,
+    "partner": 188,
+    "moved_by": "997/1000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "0",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "0",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.69
+  },
+  {
+   "control": "tightest-pair-closed-past-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "detail": {
+    "square": 197,
+    "partner": 188,
+    "moved_by": "997000000000000001/1000000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "overlap"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "overlap"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 7.409
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "moved_by": "0"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "997/1000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "997/1000000000000000",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.245
+  },
+  {
+   "control": "squares-moved-past-near-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container"
+   ],
+   "detail": {
+    "moved_by": "1/1000000000000000000000000000000"
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "997/1000000000000000",
+     "failures": [
+      "container"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "997/1000000000000000",
+     "failures": [
+      "container"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.236
+  },
+  {
+   "control": "square-enlarged-past-pair-contact",
+   "where": "at-contact",
+   "margin": "gap",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "shape"
+   ],
+   "detail": {
+    "square": 197,
+    "partner": 188,
+    "pair_gap": "997/1000000000000000",
+    "half_edge_grown_by": "997/1000000000000000",
+    "edge": "500000000000997/500000000000000",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "0",
+     "failures": [
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "0",
+     "failures": [
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.564
+  },
+  {
+   "control": "square-enlarged-past-pair-contact",
+   "where": "past-contact",
+   "margin": "gap",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "window",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap",
+    "shape"
+   ],
+   "detail": {
+    "square": 197,
+    "partner": 188,
+    "pair_gap": "997/1000000000000000",
+    "half_edge_grown_by": "997000000000000001/1000000000000000000000000000000",
+    "edge": "500000000000997000000000000001/500000000000000000000000000000",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "overlap",
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1/1000000000000000000000000000000",
+     "failures": [
+      "overlap",
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 7.313
+  },
+  {
+   "control": "square-enlarged-past-wall-contact",
+   "where": "at-contact",
+   "margin": "wall",
+   "expected_margin": "0",
+   "margin_rule": "equal",
+   "expected": "accepted",
+   "expected_failures": [],
+   "detail": {
+    "square": 108,
+    "wall_clearance": "0",
+    "half_edge_grown_by": "0",
+    "edge": "1",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": true,
+     "wall": "0",
+     "gap": "997/1000000000000000",
+     "failures": []
+    },
+    "independent": {
+     "passed": true,
+     "wall": "0",
+     "gap": "997/1000000000000000",
+     "failures": []
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.645
+  },
+  {
+   "control": "square-enlarged-past-wall-contact",
+   "where": "past-contact",
+   "margin": "wall",
+   "expected_margin": "-1/1000000000000000000000000000000",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "container",
+    "shape"
+   ],
+   "detail": {
+    "square": 108,
+    "wall_clearance": "0",
+    "half_edge_grown_by": "1/1000000000000000000000000000000",
+    "edge": "500000000000000000000000000001/500000000000000000000000000000",
+    "clean": true
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "997/1000000000000000",
+     "failures": [
+      "container",
+      "shape"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "-1/1000000000000000000000000000000",
+     "gap": "997/1000000000000000",
+     "failures": [
+      "container",
+      "shape"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 7.002
+  },
+  {
+   "control": "duplicate-square",
+   "where": "gross",
+   "margin": "gap",
+   "expected_margin": "-1",
+   "margin_rule": "equal",
+   "expected": "refused",
+   "expected_failures": [
+    "overlap"
+   ],
+   "detail": {
+    "square": 2,
+    "copy_of": 1
+   },
+   "routes": {
+    "exact_verify": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1",
+     "failures": [
+      "overlap"
+     ]
+    },
+    "independent": {
+     "passed": false,
+     "wall": "0",
+     "gap": "-1",
+     "failures": [
+      "overlap"
+     ]
+    }
+   },
+   "as_expected": true,
+   "cpu_seconds": 6.451
+  }
+ ],
+ "all_as_expected": true
+}

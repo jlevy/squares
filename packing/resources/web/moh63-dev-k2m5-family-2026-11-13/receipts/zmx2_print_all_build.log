@@ -1,0 +1,8 @@
+# command: cargo build --release --bin zmx2
+# cwd: verify2/ of zmx2 e2bb84e9 built from retained bytes with verification/zmx2_print_all.patch applied (1 line removed, 2 added; patched zmx2.rs ae54ce2ea601626ded851cbed0b3d4322dc05c23de7caf5dae402a24c58626f9)
+# python3: not used by this command
+# host: 4 cores; load 0.08 0.23 0.28; started 2026-11-14T02:11:44Z
+   Compiling verify2 v0.1.0 (/tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l145-work/zmx2/print-all/verify2)
+    Finished `release` profile [optimized] target(s) in 11.45s
+# finished 2026-11-14T02:11:56Z; exit 0; wall 11.470 s; CPU 13.3 s (user 12.809 + sys 0.453); load 0.22 0.26 0.29
+# binary sha256: 32cf67df0081e6ebf2e26c5173f2929d007833ae2de49b40d23105b6b28ed615

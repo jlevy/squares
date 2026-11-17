@@ -126,10 +126,13 @@ FRONTIER_COUNTS: dict[str, tuple[int, int, int]] = {
     # not Nagamochi-bounded, so the formal-open and reported-open counts fall by two in
     # every corpus. The same day the s(95) cover, its total below 96, adopted s(96) = 10
     # in the verified lane (T-191); n = 96 was reported-proved already (T-081), so only
-    # the formal-open count falls, by one in every corpus.
+    # the formal-open count falls, by one in every corpus. 2026-11-14: Khalili and
+    # Gharabaghi's reported family s(k^2 - 5) = k (T-298) made n = 116, 139, 164, 191,
+    # 220, 251, 284 and 319 reported-proved, their verified lanes open, so only the
+    # reported-open count falls, by four up to 200 and by eight up to 324.
     "n=1..100": (51, 49, 0),
-    "n=1..200": (135, 129, 0),
-    "n=1..324": (243, 233, 0),
+    "n=1..200": (135, 125, 0),
+    "n=1..324": (243, 225, 0),
 }
 #: n = 68, 103, 105, 110 and 131 left the exclusions on 2026-09-29, when their records
 #: moved from UnitSquare renderings to Francisco Couzo's packings (T-056), and n = 69, the
@@ -237,11 +240,60 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: 947 (T-287 to T-290), new arrangements: separating and translating squares 15 and 16 at
 #: 156, 71 and 72 at 180, 217 and 227 at 268 and 191 and 195 at 269, against 39, 7, 120 and
 #: 20 translating before, so n=1..200 has 664 separating squares and 2,261 translating
-#: ones, and n=1..324 2,421 and 6,335, in the same records.
+#: ones, and n=1..324 2,421 and 6,335, in the same records. The same day's lane L100
+#: (think-f65n) moved 179 to his certificate of issue 954 (T-291), a new arrangement:
+#: separating and translating squares 74 and 74 against T-174's 2 and 7, so n=1..200 has
+#: 736 separating squares and 2,328 translating ones, and n=1..324 2,493 and 6,402, in the
+#: same records. The same day's lane L104 (think-bcfs) moved 132 and 157 to Joost de
+#: Winter's certificates of issue 958 (T-292, T-293): separating 2 and 0 squares against
+#: T-174's 4 and the grid's 0, translating 18 and 4 against 12 and 13, so n=1..200 has 734
+#: separating squares and 2,325 translating ones, and n=1..324 2,491 and 6,399, in the
+#: same records. Lane L107 (think-89i7) moved 179 on to Doğa Özden's certificate of issue 959
+#: (T-294) on 12 November, a further arrangement of T-291's: separating and translating
+#: squares 64 and 64 against 74 and 74, so n=1..200 has 724 and 2,315, and n=1..324 2,481
+#: and 6,389. Lane L110 (think-my76) moved 237 to his certificate of issue 960 (T-295) the
+#: same day, a new arrangement: separating and translating squares 206 and 206 against
+#: T-190's 4 and 21, so n=1..324 has 2,683 separating squares and 6,574 translating ones,
+#: in the same records. Lane L120 (think-s418) moved 269 to his certificate of issue 962
+#: (T-296) the same day, a new arrangement: separating and translating squares 182 and 217
+#: against T-290's 191 and 195, so n=1..324 has 2,674 separating squares and 6,596
+#: translating ones, in the same records. Lane L132 (think-n73d) moved 269 on to his
+#: certificate of issue 967 (T-297) in the pass of 13 November, a new arrangement:
+#: separating and translating squares 110 and 112 against T-296's 182 and 217, so n=1..324
+#: has 2,602 separating squares and 6,491 translating ones, in the same records. Lane L154
+#: (think-g2ax) moved 297 to Joost de Winter's certificate of issue 977 (T-299) in the pass
+#: of 14 November, a new arrangement in T-174's layout: separating and translating squares
+#: 18 and 62 against T-174's 12 and 41, so n=1..324 has 2,608 separating squares and 6,512
+#: translating ones, in the same records. Lane L160 (think-14i2) moved 228 to Doğa Özden's
+#: certificate of issue 983 (T-300) in the same pass, a new arrangement: separating and
+#: translating squares 80 and 123 against T-174's 5 and 18, so n=1..324 has 2,683
+#: separating squares and 6,617 translating ones, in the same records. Lane L164
+#: (think-17ex) moved 228 on to Roberto Ono's certificate of issue 984 (T-301) in the pass
+#: of 15 November, a new arrangement: separating and translating squares 76 and 110 against
+#: T-300's 80 and 123; and 147 to his certificate of issue 985 (T-302), a new arrangement:
+#: 37 and 61 against the catalogue packing's 0 and 10, so 147 joins the records with a
+#: square that separates, 126 of them, and n=1..324 has 2,716 separating squares and 6,655
+#: translating ones; at n=1..200, 68 records, 761 separating squares and 2,366
+#: translating ones, against 67, 724 and 2,315. Lane L170 (think-i8y9) moved 90 from the
+#: 10 x 10 grid to jazivxt's certificate of issue 989 (T-303) in the same pass, a new
+#: arrangement: separating and translating squares 15 and 31 against the grid's 0 and 10,
+#: so 90 joins the records with a square that separates: n=1..100 has 29 such records, 126
+#: separating squares and 598 translating ones; n=1..200 69, 776 and 2,387; and n=1..324
+#: 127, 2,731 and 6,676. Lane L181 (think-32cl) moved 90 on to Joost de Winter's certificate
+#: of issue 997 (T-304) in the pass of 16 November, T-303's packing improved: separating and
+#: translating squares 0 and 12 against T-303's 15 and 31, so 90 leaves the records with a
+#: square that separates: n=1..100 has 28 such records, 111 separating squares and 579
+#: translating ones; n=1..200 68, 761 and 2,368; and n=1..324 126, 2,716 and 6,657.
+#: Lane L187 (think-0y9m) moved 127 and 305 from T-174, 204 from T-268, 232 from T-275 and
+#: 264 from T-186 to JoeGun's certificates of issue 1001 (T-305 to T-309) in the same pass,
+#: new arrangements whose near pairs are opened by about 1e-11 or 1e-12: separating squares
+#: 90, 108, 48, 152 and 211 against 5, 8, 94, 7 and 1, and translating squares 92, 111, 76,
+#: 223 and 262 against 17, 55, 103, 60 and 19, so n=1..200 has 846 separating squares and
+#: 2,443 translating ones, and n=1..324 3,210 and 7,167, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (28, 111, 86, 577),
-    "n=1..200": (67, 664, 182, 2261),
-    "n=1..324": (125, 2421, 302, 6335),
+    "n=1..100": (28, 111, 86, 579),
+    "n=1..200": (68, 846, 182, 2443),
+    "n=1..324": (126, 3210, 302, 7167),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -1820,6 +1872,17 @@ def _xdist_distribution(jobs: int) -> tuple[str, ...]:
     return () if workers == 1 else ("-n", str(workers))
 
 
+def stack_watchdog(seconds: float) -> tuple[str, ...]:
+    """The pytest arguments that dump every stack once a test phase runs `seconds`.
+
+    Not `-o faulthandler_timeout`: CPython's C watchdog walks the threads without the
+    GIL, and a request thread of the preview server ending during the walk crashed an
+    xdist worker twice on 2026-11-12 (`D-523`). `devtools.stack_watchdog` takes the same
+    dump from a thread that holds the GIL.
+    """
+    return ("-p", "devtools.stack_watchdog", "-o", f"stack_watchdog_timeout={seconds:g}")
+
+
 _SUITE_FILES_PLUGIN = "devtools.suite_files"
 
 
@@ -2223,7 +2286,8 @@ def _site_layout_tests(context: Context) -> str:
     four native-frontier timing cases follow in their existing serial command. All
     three require Chromium, retain every assertion, and share the original total
     subprocess timeout. This isolates execution; the earlier Playwright stall's exact
-    cause remains unknown.
+    cause remains unknown. Each phase that runs a minute dumps every stack through
+    `stack_watchdog`, which does not end the process.
     """
     distribution = _xdist_distribution(context.jobs)
     loadfile = ("--dist=loadfile",) if distribution else ()
@@ -2234,8 +2298,7 @@ def _site_layout_tests(context: Context) -> str:
         "-q",
         "-p",
         "no:cacheprovider",
-        "-o",
-        "faulthandler_timeout=60",
+        *stack_watchdog(60),
     )
     commands = (
         (
@@ -2611,12 +2674,14 @@ def _known_best_atlas(context: Context) -> str:
         f"n={KNOWN_BEST_CORPUS.first_n}), {KNOWN_BEST_CORPUS.count} manifest entries, "
         f"sources, links, and {len(KNOWN_BEST_COMPOSITES)} composite"
         f"{'' if len(KNOWN_BEST_COMPOSITES) == 1 else 's'}",
-        # Five strata and thirty-six non-grid cases are calibration facts, not corpus
+        # Five strata and thirty-seven non-grid cases are calibration facts, not corpus
         # facts: `D4` pins both layers at CALIBRATION_CORPUS, so neither moves when the
         # atlas widens. They stay literal because the numbers are findings about the
-        # inspected hundred rather than counts of it.
+        # inspected hundred rather than counts of it. The non-grid cases were 36 until
+        # lane L170 (think-i8y9) adopted jazivxt's packing at 90 (T-303) on 15 November
+        # 2026, moving 90 off the grid inside the hundred.
         "known-best contact overlay check passed: 5 house-rendered calibration strata",
-        "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
+        "known-best chunk evidence profile check passed: 37 non-grid calibration cases",
         "bound citations check passed",
         "contact enumeration pricing check passed",
         "contact full-cell control check passed",

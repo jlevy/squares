@@ -1,0 +1,73 @@
+{
+ "file": "construction-G982.json",
+ "file_sha256": "5a05b8ac5b4aae6d980f48ed1678d292c5fcfbc8e4095e9596da8d3b6f8a8a39",
+ "name": "G982",
+ "container": [
+  "17",
+  "21/2"
+ ],
+ "n": 982,
+ "angles": {
+  "0": 541,
+  "45": 441
+ },
+ "families": {
+  "diamond": 441,
+  "stair-BL": 120,
+  "stair-BR": 120,
+  "stair-TR": 120,
+  "stair-TL": 120,
+  "L-border": 61
+ },
+ "A": {
+  "method": "A: separating axes on e1..e4 in Z[sqrt 2], exact integer signs",
+  "pairs": 481671,
+  "apart": 478139,
+  "touching": 3532,
+  "overlapping": 0,
+  "overlapping_pairs": [],
+  "touching_pairs_sha256": "67ebe633203a8b3396e488f1182593c2f6eec3a0e2aa9c18b161fd0e405a2445",
+  "pair_class_sha256": "24f98dd7ac73a9ae8335f68a8e6dcaf038b5254901bd3808fad11e88e858f95e",
+  "wall_class_sha256": "5d54ebd4322560cb0439d3bbef09a954713edd6b42f82dd4356a269c94bd652d",
+  "wall_touching": 122,
+  "wall_touching_squares": 120,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": []
+ },
+ "B": {
+  "method": "B: exact convex clipping in Q(sqrt 2) over gmpy2.mpq, signs by Pell brackets",
+  "pairs": 481671,
+  "apart": 478139,
+  "touching": 3532,
+  "overlapping": 0,
+  "overlapping_pairs": [],
+  "touching_pairs_sha256": "67ebe633203a8b3396e488f1182593c2f6eec3a0e2aa9c18b161fd0e405a2445",
+  "pair_class_sha256": "24f98dd7ac73a9ae8335f68a8e6dcaf038b5254901bd3808fad11e88e858f95e",
+  "wall_class_sha256": "5d54ebd4322560cb0439d3bbef09a954713edd6b42f82dd4356a269c94bd652d",
+  "wall_touching": 122,
+  "wall_touching_squares": 120,
+  "wall_crossing": 0,
+  "wall_crossing_squares": 0,
+  "wall_crossing_list": [],
+  "non_unit": [],
+  "overlap_areas": [],
+  "not_inside_by_area": []
+ },
+ "agree": {
+  "pair_classes": true,
+  "touching_pairs": true,
+  "overlapping_pairs": true,
+  "walls": true,
+  "unit": true
+ },
+ "all_agree": true,
+ "verdict_A": "packing",
+ "verdict_B": "packing",
+ "seconds": {
+  "A": 0.18,
+  "B": 19.5
+ },
+ "python": "3.14.7"
+}

@@ -1,0 +1,224 @@
+{
+ "program": "l169_lineage.py",
+ "source_157_side": 12.993302611343223,
+ "source_157_tilts": [
+  -27.54,
+  -25.2,
+  -24.65,
+  -24.02
+ ],
+ "source_157_tilted": 61,
+ "tilted_translation_peaks": {
+  "identity": [
+   [
+    [
+     -3.0,
+     -0.0
+    ],
+    37
+   ],
+   [
+    [
+     -3.9,
+     -1.8
+    ],
+    15
+   ],
+   [
+    [
+     -2.6,
+     0.9
+    ],
+    14
+   ]
+  ],
+  "quarter": [
+   [
+    [
+     -3.0,
+     -0.0
+    ],
+    37
+   ],
+   [
+    [
+     -3.9,
+     -1.8
+    ],
+    15
+   ],
+   [
+    [
+     -2.6,
+     0.9
+    ],
+    14
+   ]
+  ],
+  "half": [
+   [
+    [
+     -3.0,
+     -0.0
+    ],
+    37
+   ],
+   [
+    [
+     -3.9,
+     -1.8
+    ],
+    15
+   ],
+   [
+    [
+     -2.6,
+     0.9
+    ],
+    14
+   ]
+  ],
+  "three-quarter": [
+   [
+    [
+     -3.0,
+     -0.0
+    ],
+    37
+   ],
+   [
+    [
+     -3.9,
+     -1.8
+    ],
+    15
+   ],
+   [
+    [
+     -2.6,
+     0.9
+    ],
+    14
+   ]
+  ],
+  "mirror-x": [],
+  "mirror-y": [],
+  "transpose": [],
+  "anti-transpose": []
+ },
+ "copy_A_translation": [
+  -2.9962432967485952,
+  0.001827288012232389
+ ],
+ "copy_A_tight_matches": 47,
+ "crop": {
+  "height": 9.353384482690725,
+  "readme_height": 9.353384,
+  "top_square_index_0_based": 103,
+  "top_square": [
+   6.511402208495874,
+   8.690411142163612,
+   -24.650011633203416
+  ],
+  "next_top_above": 9.620970688343533,
+  "squares": 107,
+  "tilted": 51
+ },
+ "least_pitch": {
+  "0.0": 9.353384482690725,
+  "1.0": 9.019403129001393,
+  "-1.0": 9.353384482690725
+ },
+ "seed_sigma_+1": {
+  "centres_in_box": 91,
+  "by_copy": {
+   "-1": 0,
+   "0": 82,
+   "1": 9
+  },
+  "certificate_squares_with_a_distinct_nearest": 90,
+  "largest_nearest_distance": 0.14570169246204243,
+  "seed_squares_nearest_to_none": [
+   [
+    54,
+    0.1121926896129759,
+    6.557121174911358,
+    -24.019968321975544
+   ]
+  ]
+ },
+ "seed_sigma_-1": {
+  "centres_in_box": 90,
+  "by_copy": {
+   "-1": 0,
+   "0": 82,
+   "1": 8
+  },
+  "certificate_squares_with_a_distinct_nearest": 88,
+  "largest_nearest_distance": 1.0014809202347186,
+  "seed_squares_nearest_to_none": [
+   [
+    54,
+    0.1121926896129759,
+    6.557121174911358,
+    -24.019968321975544
+   ],
+   [
+    88,
+    3.4970593145946287,
+    9.521230288012234,
+    0.0
+   ]
+  ]
+ },
+ "seed": {
+  "sigma": 1,
+  "dropped": [
+   [
+    0.1121926896129759,
+    6.557121174911358,
+    -24.019968321975544,
+    0
+   ]
+  ],
+  "dropped_wall_crossing": [
+   -0.5480366353748645
+  ],
+  "side_10_windows_holding_exactly_the_90": [
+   0.113,
+   0.503
+  ],
+  "squares": 90,
+  "by_copy": {
+   "-1": 0,
+   "0": 81,
+   "1": 9
+  },
+  "tilted": 44,
+  "overlapping_pairs": 1,
+  "deepest_overlap": -1.1724580240013438e-07,
+  "squares_crossing_a_wall": 10,
+  "deepest_wall_crossing": -0.04101086755578723,
+  "nearest_centres_one_to_one": true,
+  "assignment_moves_beyond": {
+   "1e-3": 90,
+   "1e-2": 49,
+   "1e-1": 2
+  },
+  "largest_move": 0.14570169246204243,
+  "largest_move_square": 58,
+  "largest_turn_deg": 4.020762860910359,
+  "turned_beyond_1_deg": 38,
+  "copy_B_squares_of_the_certificate": [
+   82,
+   83,
+   84,
+   85,
+   86,
+   87,
+   88,
+   89,
+   90
+  ]
+ }
+}

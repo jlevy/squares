@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#992","kind":"issue","number":992,"url":"https://github.com/jlevy/squares/issues/992","author":"larasmiguel","created_at":"2026-11-15T06:03:49Z","state":"open","closed_at":null,"title":"Upper Bound for Packing 977 Unit Squares — Construction by Miguel Lara"}]
+}

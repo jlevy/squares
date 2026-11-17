@@ -1,0 +1,10 @@
+# Lane L117 checker, frozen at 2026-11-12T00:12:46Z, before the controls plan, the findings, the author's README, checkers or their outputs, the decimal pose, any packing-witness code, the register entries at 269 or any import lane's work was read.
+492d8f73ea4f217538134d854f3134c8f824552551ed1394d87694f4fc244722  l117_reader.py
+22b2a759097fee1e6d490c8c7976b9ada655cf2680c49aa3750aaac34a726131  l117_sat.py
+9c927fc9499ede25698b9fa2b542aa9c96a409d3b420b137ffb420e485032fc2  l117_hull.py
+7ea59b80c685e1ec98a3a2fa8a122356002e3ea11046f082584e6e6ecd8b0ca9  l117_check.py
+c57fe74603e7da976e7a8b8ca8c92e6067f1069f77426b229a500a4ec96ba61d  l117_geom.py
+fe437de83f8e8f4ad54848b3ef9b4d0b1009e15ed293a8de538c5d613f0867f9  l117_selftest.py
+# receipts written by the frozen checker:
+67dedf0592e8434fa0e8fd3740ef508e20b724aae65a26cb94dc5c84f3ac1f6a  out/selftest.json
+bc489767bdf9f09fee9d7b18beb8f92cb6b95637dbef751feba59225e711707b  out/check-n269.json

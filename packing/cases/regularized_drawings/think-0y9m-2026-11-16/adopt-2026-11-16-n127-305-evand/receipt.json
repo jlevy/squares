@@ -1,0 +1,490 @@
+{
+ "format": "evand-regularization-receipt-v1",
+ "generated_by": "python -m devtools.regularize_evand run",
+ "policy": "docs/project/policies/regularization-policy.md",
+ "finished": "2026-11-16T07:11:26Z",
+ "run_directory": "adopt-2026-11-16-n127-305-evand",
+ "generator": {
+  "name": "evand-regularize",
+  "source_url": "https://github.com/evand/square-packing",
+  "pin": "675a5ea",
+  "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+  "patches": [],
+  "interpreter": "CPython 3.14.7"
+ },
+ "parameters": {
+  "timeout": 600.0,
+  "regularize_timeout": 600.0,
+  "variant": "conservative",
+  "orient": "0",
+  "from_stage": "input",
+  "same_mode": "relax",
+  "frame": "kkt",
+  "style": "coincide",
+  "dps": 80,
+  "eps": "1e-20",
+  "workers": 2,
+  "counts": [
+   127,
+   204,
+   232,
+   264,
+   305
+  ]
+ },
+ "counts": [
+  {
+   "n": 127,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "11.801753890364738880529387958519684547332524445423356321963120406",
+   "s_W": "11.80175389048648731247759756354897614999",
+   "U": "11.8017538904864874",
+   "level": 2,
+   "moved": 91,
+   "groups": [
+    45,
+    6
+   ],
+   "symmetry": [],
+   "view": "solved",
+   "s_V": "11.801753890364738880647405497424",
+   "relation": "solved",
+   "same_refusal": "same-side-refused: overlap",
+   "one_to_one": true,
+   "max_move": "6.441804e-1",
+   "house": [
+    [
+     97,
+     19,
+     6,
+     4,
+     1
+    ],
+    [
+     29,
+     35,
+     28,
+     9,
+     26
+    ]
+   ],
+   "stage": [
+    [
+     26,
+     35,
+     36,
+     15,
+     15
+    ],
+    [
+     17,
+     36,
+     39,
+     9,
+     26
+    ]
+   ],
+   "row": 3,
+   "decision": "held",
+   "index_record": null,
+   "refusal": null,
+   "after_registration": "review",
+   "solved_row": 3,
+   "seconds": {
+    "input": 0.03,
+    "solve": 8.6,
+    "regularize": 11.14,
+    "import": 2.588,
+    "same": 8.974,
+    "measure": 0.124
+   },
+   "cost": {
+    "cpu_seconds": 31.44,
+    "wall_seconds": 31.54
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "from_stage": "input"
+   }
+  },
+  {
+   "n": 204,
+   "status": "generator-failed",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "solve failed",
+   "solve_gate": null,
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": null,
+   "s_W": "14.80264684310661206923132169029437085050",
+   "U": "14.8026468431066121",
+   "level": null,
+   "moved": 0,
+   "groups": [
+    null,
+    null
+   ],
+   "symmetry": null,
+   "view": null,
+   "s_V": null,
+   "relation": null,
+   "same_refusal": null,
+   "one_to_one": null,
+   "max_move": null,
+   "house": [
+    null,
+    null
+   ],
+   "stage": [
+    null,
+    null
+   ],
+   "row": 1,
+   "decision": "no-view",
+   "index_record": null,
+   "refusal": "generator-failed",
+   "after_registration": null,
+   "solved_row": 1,
+   "seconds": {
+    "input": 0.037,
+    "solve": 7.97
+   },
+   "cost": {
+    "cpu_seconds": 7.69,
+    "wall_seconds": 8.11
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "from_stage": "input"
+   }
+  },
+  {
+   "n": 232,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "15.759531623540125992479650834802644843181852975990406482795499055",
+   "s_W": "15.759531627556573",
+   "U": "15.7595316275565730",
+   "level": 2,
+   "moved": 82,
+   "groups": [
+    73,
+    19
+   ],
+   "symmetry": [],
+   "view": "solved",
+   "s_V": "15.759531623540125992637246151039",
+   "relation": "solved",
+   "same_refusal": "same-side-refused: unmatched-rotation",
+   "one_to_one": true,
+   "max_move": "4.108261e-1",
+   "house": [
+    [
+     72,
+     28,
+     8,
+     25,
+     99
+    ],
+    [
+     42,
+     24,
+     25,
+     28,
+     113
+    ]
+   ],
+   "stage": [
+    [
+     47,
+     30,
+     18,
+     30,
+     107
+    ],
+    [
+     37,
+     28,
+     26,
+     28,
+     113
+    ]
+   ],
+   "row": 3,
+   "decision": "held",
+   "index_record": null,
+   "refusal": null,
+   "after_registration": "review",
+   "solved_row": 3,
+   "seconds": {
+    "input": 0.021,
+    "solve": 42.68,
+    "regularize": 30.61,
+    "import": 6.298,
+    "same": 0.061,
+    "measure": 0.198
+   },
+   "cost": {
+    "cpu_seconds": 79.94,
+    "wall_seconds": 79.94
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "from_stage": "input"
+   }
+  },
+  {
+   "n": 264,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "16.77380759798293320160508634712062360847898890226565470807558549",
+   "s_W": "16.77380759800199889920072216264009881314",
+   "U": "16.7738075980019989",
+   "level": 2,
+   "moved": 88,
+   "groups": [
+    72,
+    16
+   ],
+   "symmetry": [],
+   "view": "solved",
+   "s_V": "16.773807597982933201772824423101",
+   "relation": "solved",
+   "same_refusal": "same-side-refused: unmatched-rotation",
+   "one_to_one": true,
+   "max_move": "1.541013e-1",
+   "house": [
+    [
+     207,
+     43,
+     12,
+     2,
+     0
+    ],
+    [
+     39,
+     30,
+     31,
+     29,
+     135
+    ]
+   ],
+   "stage": [
+    [
+     42,
+     31,
+     33,
+     28,
+     130
+    ],
+    [
+     26,
+     38,
+     36,
+     29,
+     135
+    ]
+   ],
+   "row": 3,
+   "decision": "held",
+   "index_record": null,
+   "refusal": null,
+   "after_registration": "review",
+   "solved_row": 3,
+   "seconds": {
+    "input": 0.026,
+    "solve": 104.39,
+    "regularize": 29.72,
+    "import": 9.472,
+    "same": 0.035,
+    "measure": 0.409
+   },
+   "cost": {
+    "cpu_seconds": 143.72,
+    "wall_seconds": 144.14
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "from_stage": "input"
+   }
+  },
+  {
+   "n": 305,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "17.945762359467513364565457300320047925025070674964752354500717291",
+   "s_W": "17.94576235965896961392789532103526512598",
+   "U": "17.9457623596589697",
+   "level": 2,
+   "moved": 131,
+   "groups": [
+    138,
+    34
+   ],
+   "symmetry": [],
+   "view": "solved",
+   "s_V": "17.945762359467513364744914923915",
+   "relation": "solved",
+   "same_refusal": "same-side-refused: unmatched-rotation",
+   "one_to_one": true,
+   "max_move": "2.482963e-1",
+   "house": [
+    [
+     267,
+     21,
+     9,
+     5,
+     3
+    ],
+    [
+     77,
+     14,
+     21,
+     29,
+     164
+    ]
+   ],
+   "stage": [
+    [
+     29,
+     54,
+     48,
+     72,
+     102
+    ],
+    [
+     27,
+     46,
+     39,
+     29,
+     164
+    ]
+   ],
+   "row": 3,
+   "decision": "held",
+   "index_record": null,
+   "refusal": null,
+   "after_registration": "review",
+   "solved_row": 3,
+   "seconds": {
+    "input": 0.046,
+    "solve": 59.88,
+    "regularize": 73.22,
+    "import": 11.62,
+    "same": 0.042,
+    "measure": 0.455
+   },
+   "cost": {
+    "cpu_seconds": 144.93,
+    "wall_seconds": 145.36
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "from_stage": "input"
+   }
+  }
+ ],
+ "candidates": [
+  127,
+  232,
+  264,
+  305
+ ],
+ "review_queue": [],
+ "index_records": {
+  "regularized": [],
+  "refused": [],
+  "unchanged": []
+ },
+ "solve_outputs": {
+  "127": {
+   "input.txt": "79fa6fdb16f93ad1e61c0a7895a99b5061f7765d3a2a56df0e456a921d052761",
+   "solve/witness.exact.txt": "93ac8056a3530d81b8a1ab1fe014745c045a0fb42e43d650c298754e75e5e7bf",
+   "solve/witness.contacts.json": "aa5f2e38ac4f9487ac9990268b07a9a7852a904829f3822f0f76c3535585b3c4",
+   "regularize.cert": "769a8ccf2214138afc3a62ac19d4807e97ade87e24daead7cb6897deb558b5af"
+  },
+  "204": {
+   "input.txt": "af045848d2fae56f7b888c41b99f996da6fdf2379175d2405787cfbbaea41dea"
+  },
+  "232": {
+   "input.txt": "866ed93d1f3b1392f4dd5f19eac1d2b038237e1d893611d68102f83bf1873320",
+   "solve/witness.exact.txt": "8e3690bc0f689d2e60a697cf5f7c4a74c30191107b8ba8089f98af166088f45d",
+   "solve/witness.contacts.json": "2352f0b9da76624452c7ff532259f9d5d749c7c71a58fa2a7949b4b4e7ea78ba",
+   "regularize.cert": "30ce7238153a4510e910c9819b62df2c22574e3af13bb43e98da91e4e3a6a1fb"
+  },
+  "264": {
+   "input.txt": "e3cc3db98fca11c45edd036e6f2e6791aa52e1e369b2bea997a5659470130fb6",
+   "solve/witness.exact.txt": "5d12334003c13efbeb8952c4a6218235441f8e431f14c15dfcc4f4ba55ba7c3f",
+   "solve/witness.contacts.json": "58d31ad9a85cfcc8326402c9cddee89fae67db0c212eac3bfd51217b989b4879",
+   "regularize.cert": "eb868517b98e4bc6e00bfc010a21b3b1d35092be067c43c78d09b9e5c481a7d4"
+  },
+  "305": {
+   "input.txt": "a911222964c7f41184f01527b1abff3e73de5833ea1cd4b403bdff570329a218",
+   "solve/witness.exact.txt": "df8b6733f9f4e5b8475d312c744adfb104d0daf9243952edc2b5c26eee52a9fe",
+   "solve/witness.contacts.json": "43bba19bd59ea0de7d4104de776559c03260bcfee84fc2420780f717b12f78c2",
+   "regularize.cert": "c688c38384e989ac683c9f74d08b56c48e61314415ca072b32eeac016f73665b"
+  }
+ },
+ "cost": {
+  "wall_seconds": 234.15,
+  "cpu_seconds": 407.92,
+  "driver_cpu_seconds": 0.2,
+  "count_cpu_seconds": 407.72,
+  "workers": 2,
+  "counts": 5,
+  "measured_by": "resource.getrusage: each count's worker RUSAGE_SELF plus RUSAGE_CHILDREN (its solve and shim), summed, plus the driver's RUSAGE_SELF"
+ },
+ "previous_runs": []
+}

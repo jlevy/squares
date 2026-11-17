@@ -1,0 +1,60 @@
+format: intake-ledger-v1
+read_at_main: a4f36ae70e5ffa3fb1f88b49c8e8befda8a38e45
+read_on: '2026-11-15'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: l170
+  branch: claude/bold-ritchie-xo28us-l170
+  commit: a4f36ae70e5ffa3fb1f88b49c8e8befda8a38e45
+  note: The packet's claim record, written on the lane's branch from main a4f36ae70 and read
+    here by path.
+reports:
+- report: '#989'
+  url: https://github.com/jlevy/squares/issues/989
+  kind: issue
+  holders: jazivxt
+  reported_at: '2026-11-15T03:00:53Z'
+  bead: think-i8y9
+  claims:
+  - n: 90
+    printed: '9.998277166926'
+    rounding: up
+    exact: 4999138583463/500000000000
+    exact_from: packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/claims.json
+      at claude/bold-ritchie-xo28us-l170@a4f36ae70e5ffa3fb1f88b49c8e8befda8a38e45
+    first_committed: '2026-11-15T03:00:02Z'
+    measured:
+      against: the 10 x 10 grid
+      finding: not one to one with the grid's 90 squares under any symmetry of the box by
+        nearest centres; the optimal assignment moves every square beyond 1e-3, 54 beyond
+        1e-2 and 52 beyond 0.1 (largest 1.332) and turns 48 squares by more than 1e-6 radians;
+        44 squares are tilted beyond a degree, 22.6 to 31.6 degrees, all turned the same way,
+        and five more within 0.07 degrees of upright; a new arrangement, the first below the
+        grid at 90
+      source: packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/identity.json
+    new_packing:
+      source: '#989: ''We started with a rectangular crop of Joost de Winter’s N157 packing
+        ... Shifting successive copies horizontally by one unit reduced their vertical spacing
+        from approximately 9.353384 to 9.019403. A square window spanning two copies contained
+        90 tiles. We tightened their positions and orientations and converted the result to
+        exact rational coordinates.'''
+      continues: Joost de Winter's packing of 157 squares (T-293), by a crop, shifted copies
+        and a window of two
+    note: The grid's uniform-contraction margin is 0, its squares touching, so the gain, 1.7228e-3,
+      lies wholly outside any padding (packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/contraction-n090.json);
+      a packing below the grid is no re-certification of the grid, and RV-3 (think-ruu2) does
+      not reach it.
+  note: The issue names 179fcba, committed at 2026-11-15T03:00:42Z, 11 seconds before it;
+    e5c2ecc, committed at 03:00:02Z, first published the certificate with the same bytes,
+    and 179fcba changes only the name of the AI collaborator in README.md and README.md's
+    digest. The issue asks for credit to 'jazivxt and GPT-6 Astra Ultra' and says GPT-6 Astra
+    Ultra was the AI collaborator on the search and verification. It names the case record's
+    side 10 and no other report at 90; the packet's head, f9b31b4, adds a construction figure
+    after the issue.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

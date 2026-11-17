@@ -2801,10 +2801,32 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: credits him as an improver at 172 and 270 (T-282, T-283), held the same way, and its last
 #: pass (think-1goz) at 199 (T-284, T-282's packing with one L step), held alike. The
 #: adoption of 11 November 2026 (think-xq4o) credits him as the finder at 156, 180, 268 and
-#: 269 (T-287 to T-290), held the same way; 268 was already held for T-276.
-PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = dict.fromkeys(
-    (156, 172, 180, 199, 232, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
-)
+#: 269 (T-287 to T-290), held the same way; 268 was already held for T-276. The same
+#: day's lane L100 (think-f65n) credits him as the finder at 179 (T-291), held alike, and
+#: its lane L107 (think-89i7) again at 179 for his further arrangement of it (T-294); the
+#: same day's lane L110 (think-my76) credits him as the finder at 237 (T-295), held alike.
+#: Lane L120 of 12 November (think-s418) credits him as the finder at 269 again (T-296),
+#: already held for T-290, and lane L132 (think-n73d) a third time there (T-297, in the pass
+#: of 13 November), held alike. Lane L160 of 14 November (think-14i2) credits him as the
+#: finder at 228 (T-300, in the pass of 14 November), held alike. Lane L164 (think-17ex)
+#: credits Roberto Ono, a new name, as the finder at 228 (T-301) in place of Özden and at 147
+#: (T-302), in the pass of 15 November, so the hold holds Ono at both and Özden no longer at
+#: 228, where no case record names him now. Lane L170 (think-i8y9) credits jazivxt, a new
+#: name, as the finder at 90 (T-303), in the same pass, where the grid credited no one, so
+#: the hold holds jazivxt there. Lane L181 (think-32cl) credits Joost de Winter as the
+#: improver at 90 (T-304, in the pass of 16 November), a name the block already prints, so
+#: the hold still holds jazivxt alone there. Lane L187 (think-0y9m) credits Tomáš Kodaj as
+#: the finder and JoeGun as the improver at 127, 204, 232, 264 and 305 (T-305 to T-309, in
+#: the same pass), two new names, so the hold holds both there, and Özden no longer at 232,
+#: where no case record names him now.
+PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
+    **dict.fromkeys(
+        (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
+    ),
+    **dict.fromkeys((147, 228), ("Roberto Ono",)),
+    90: ("jazivxt",),
+    **dict.fromkeys((127, 204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
+}
 #: The infographic edition the hold was set under. While the hold is not empty, a version
 #: bump or a poster drawn for any other edition fails the pull-request suite
 #: (`print_credit_hold_problems`, held by test_known_best_atlas), so the cut that redraws

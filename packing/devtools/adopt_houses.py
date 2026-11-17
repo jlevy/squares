@@ -155,9 +155,12 @@ VERIFIER_TABLE = re.compile(
 #: Counts whose body a pass marked as history by hand, in prose no tool writes in a fixed
 #: form (`historical`): the first pass, on 11 October 2026, the SQUISH update sections at
 #: 155, 258, 263 and 302 and the grid prose at 308, and the pass of 19 October 2026 the
-#: intake's staging paragraph, grid sentence and packing section at 183 (T-220). Only
+#: intake's staging paragraph, grid sentence and packing section at 183 (T-220), and lane
+#: L104's pass of 11 November 2026 the grid sentence and packing section at 157 (T-293) and
+#: the packing section's opening at 132 (T-292), review F14 of #958, and lane L170's pass of
+#: 15 November 2026 the grid sentence and packing section at 90 (T-303), as at 157. Only
 #: their owned parts are the writer's.
-HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
+HAND_MARKED = frozenset({90, 132, 155, 157, 183, 258, 263, 302, 308})
 #: The first pass whose writer also marks the closing sentence of a T-155 view's section as
 #: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
 VIEW_SECTION_FROM = "2026-10-19"
@@ -215,6 +218,15 @@ class Prose:
     #: For an algebraic house, how its witness states each square in the field.
     field_squares: str = "its centre and the cosine and sine of its rotation"
 
+
+#: What the stage 4 review of issue 1001 (lane L186, think-skt8) decided on each of its five
+#: certificates, the clause the case records write after the maintained routes.
+REVIEW_1001 = (
+    ", and the 16 November review’s clean-room checker, frozen before any producer, witness "
+    "or verifier code was read, decided it again by separating axes in integers and by exact "
+    "clipping in GMP rationals over every square, wall and pair; its 32 controls at this "
+    "count, stated beforehand as rules, were each decided as stated"
+)
 
 #: Each adopted result, as its register entry and its review describe it.
 RESULTS: dict[str, Prose] = {
@@ -707,6 +719,73 @@ RESULTS: dict[str, Prose] = {
             "finder, with #561’s packing and the SQUISH design it continues as its start, as "
             "at 146, 236 and 308; the case credits it so."
         ),
+    ),
+    "T-292": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#958](https://github.com/jlevy/squares/issues/958)",
+        producer_route=False,
+        ai=(
+            "The issue and the source’s README say the derivation, optimization, "
+            "high-precision solution, rational certificate, checking and figure were produced "
+            "with Claude Fable 5.2 (Anthropic) under Joost de Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the packing is a pinwheel, a central block of tilted squares with "
+            "four arms inside four blocks of axis-aligned squares, grown from the public "
+            "109-square packing of Samanyu-dev’s squares_in_squares by one step: cut along one "
+            "horizontal and one vertical line, the parts moved about one unit apart, each gap "
+            "filled with one layer of squares continuing the local lattice, and every square "
+            "re-optimized; credit for the pinwheel at 109 belongs to Samanyu-dev, and his own "
+            "contribution is the growth step and the optimization. The 11 November review "
+            "measured the step: under one symmetry the seed, cut at about x = 3.58 and y = "
+            "7.37 and moved apart, pairs each of its 109 squares with one here within 0.129, "
+            "the other 23 being 15 axis-aligned squares at the cuts and 8 tilted ones. Against "
+            "T-174’s packing, this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 84 squares beyond a tenth, at most 0.986. So Joost de Winter is "
+            "the packing’s finder, after Samanyu-dev’s pinwheel at 109, below the record it "
+            "improves."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it and its JSON twin again by separating axes in "
+            "rationals and by exact clipped areas in GMP rationals over every square, wall and "
+            "pair; its 16 controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-293": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#958](https://github.com/jlevy/squares/issues/958)",
+        producer_route=False,
+        ai=(
+            "The issue and the source’s README say the derivation, optimization, "
+            "high-precision solution, rational certificate, checking and figure were produced "
+            "with Claude Fable 5.2 (Anthropic) under Joost de Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the packing is a pinwheel grown from the public 109-square packing "
+            "of Samanyu-dev’s squares_in_squares by two cut-and-fill steps, the first giving "
+            "his packing of 132 (T-292); credit for the pinwheel at 109 belongs to "
+            "Samanyu-dev, and his own contribution is the growth steps and the optimization. "
+            "The 11 November review measured the second step: under one symmetry the 132, "
+            "cut at about x = 8.33 and y = 8.32 and moved apart, pairs each of its squares "
+            "with one here within 0.126, the other 25 being 17 axis-aligned squares at the "
+            "cuts and 8 tilted ones. It is the first packing of 157 squares below the 13 × 13 "
+            "grid on record: no symmetry pairs it one to one with the grid’s squares, the "
+            "optimal assignment moving 100 beyond a tenth, and its 61 tilted squares turn 24.0 "
+            "to 27.5 degrees. So Joost de Winter is the packing’s finder, after Samanyu-dev’s "
+            "pinwheel at 109."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it and its JSON twin again by separating axes in "
+            "rationals and by exact clipped areas in GMP rationals over every square, wall and "
+            "pair; its 16 controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
     ),
     "T-220": Prose(
         author="Evan Daniel",
@@ -2307,6 +2386,610 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-291": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#954](https://github.com/jlevy/squares/issues/954)",
+        producer_route=True,
+        ai=(
+            "Issue 954 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing was found by a band-design search: the tilted squares "
+            "of the registry’s n = 70 packing, Ryan Xu’s as Evan Daniel and PingYou Ltd "
+            "improved it, laid along the diagonal as a band and a copy shifted by (5, 5), "
+            "annealed in a reduced model with the axis-parallel squares on the two "
+            "wall-anchored staircase lattices, then quenched once with Evan Daniel’s ALM+SLP "
+            "code; the 11 November review finds that seed within 0.05 of 28 of its 37 tilted "
+            "squares, under one symmetry of the 70 box and no other. Against T-174’s packing, "
+            "this case’s house best packing before this adoption, it is a new arrangement: no "
+            "symmetry pairs nearest centres one to one, and the optimal assignment moves 47 "
+            "squares beyond a tenth, at most 0.886, its band on the main diagonal where the "
+            "house’s lies on the other. So Doğa Özden is the packing’s finder, from the band "
+            "of Ryan Xu’s packing as the seed, below the record it improves; the issue claims "
+            "the upper bound only. Three squares touch a wall, as the source says."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its 17 "
+            "controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-294": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#959](https://github.com/jlevy/squares/issues/959)",
+        producer_route=True,
+        ai=(
+            "Issue 959 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing came from a later batch of the band-design search of "
+            "its #954 (T-291): the tilted squares of the registry’s n = 70 packing, Ryan Xu’s "
+            "as Evan Daniel and PingYou Ltd improved it, laid along the diagonal as a band and "
+            "a copy shifted by (5, 5), mutated, annealed in a reduced model and quenched once "
+            "with Evan Daniel’s ALM+SLP code. Against T-291’s packing, this case’s house best "
+            "packing before this adoption, it is a further arrangement: nearest centres pair "
+            "the two one to one under the identity, and the optimal assignment moves 3 "
+            "squares beyond a tenth, at most 0.218, and turns 5 by more than a degree. Placed "
+            "in its box, the 70 keeps at most 48 of its squares at any corner, so it is no 70 "
+            "with a border, and laid at both ends of the diagonal it lies within 1e-9 of 15 of "
+            "the 35 tilted squares, the 70 band’s ends kept in place; the side is "
+            "2.645e-12 above s(70) + 5, about its own repair dilation, as the review of issue "
+            "959 also finds. So Doğa Özden stays the packing’s finder, from the band of "
+            "Ryan Xu’s packing as the seed; the issue claims the upper bound only. Three "
+            "squares touch a wall, as the source says."
+        ),
+        third_route=(
+            ", and the clean-room checker of the review of issue 959, frozen before any "
+            "producer or witness code was read, decided it again by separating axes in GMP "
+            "rationals and by exact clipping in rationals over every square, wall and pair; "
+            "its 19 controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-295": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#960](https://github.com/jlevy/squares/issues/960)",
+        producer_route=True,
+        ai=(
+            "Issue 960 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing was found by the band-design search of issue 954: two "
+            "copies of the tilted squares of the registry’s n = 70 packing, Ryan Xu’s as Evan "
+            "Daniel and PingYou Ltd improved it, laid along the diagonal as a band, annealed "
+            "in a reduced model with the axis-parallel squares on the two wall-anchored "
+            "staircase lattices, then quenched with Evan Daniel’s ALM+SLP code; the 11 "
+            "November review finds the first copy within 0.1 of 19 of its 20 squares after a "
+            "0.39-degree turn, and the second only after a −1.20-degree turn and a shift the "
+            "issue does not state. Against T-190’s packing, this case’s house best packing "
+            "before this adoption, it is a new arrangement: no symmetry pairs nearest centres "
+            "one to one, and the optimal assignment moves 72 squares beyond a tenth, at most "
+            "0.925, its band straight from corner to corner where the house’s is curved. So "
+            "Doğa Özden is the packing’s finder, from the band of Ryan Xu’s packing as the "
+            "seed, below the record it improves; the issue claims the upper bound only. Three "
+            "squares touch a wall, as the source says."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in rationals and by "
+            "exact clipped areas in GMP rationals over every square, wall and pair; its 17 "
+            "controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-296": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#962](https://github.com/jlevy/squares/issues/962)",
+        producer_route=True,
+        ai=(
+            "Issue 962 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing was found by the band-design search of issue 954: "
+            "tilted squares of three clusters, of the registry’s n = 207 packing, PingYou "
+            "Ltd’s, of its n = 70 packing, Ryan Xu’s as Evan Daniel and PingYou Ltd improved "
+            "it, and of Doğa Özden’s own n = 179 packing of issue 954, laid along the diagonal "
+            "as a band, annealed in a reduced model with the axis-parallel squares on the two "
+            "wall-anchored staircase lattices, then quenched with Evan Daniel’s ALM+SLP code; "
+            "the seed band is neither published nor retained, and the 12 November review did "
+            "not rebuild it. Against T-290’s packing, his own and this case’s house best "
+            "packing before this adoption, it is a new arrangement: no symmetry pairs nearest "
+            "centres one to one, and the optimal assignment moves 115 squares beyond a tenth, "
+            "at most 1.124, its 46 tilted squares leaning both ways where T-290’s 100 lean one "
+            "way. So Doğa Özden is the packing’s finder, from those three packings’ tilted "
+            "squares as the seed, below the record it improves; the issue claims the upper "
+            "bound only. Eleven squares touch a wall, nine of them at the left, where the "
+            "source speaks of the squares that set each wall."
+        ),
+        third_route=(
+            ", and the 12 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by the "
+            "convex hull of vertices and edge crossings in GMP rationals over every square, "
+            "wall and pair; of its 20 controls, each stated beforehand, 19 were decided as "
+            "stated and the twentieth refused the certificate as stated, one detail of the "
+            "review’s own wall report aside"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-297": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#967](https://github.com/jlevy/squares/issues/967)",
+        producer_route=True,
+        ai=(
+            "Issue 967 says the search and its code were written and run by AI agents, and "
+            "that Doğa Özden’s AI agent, which uses the account kenaznia-doga, prepared and "
+            "posted the issue and the repository at his direction."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing was found by an AI-run column-band designer, new for "
+            "this filing: tilted squares stood in columns across a band along the diagonal, "
+            "the axis-parallel squares on the two wall-anchored staircase lattices, the design "
+            "chosen by an exact dynamic programme over the columns, then quenched with Evan "
+            "Daniel’s ALM+SLP code and kicked and quenched twice more. It says the designer "
+            "used no donor packing, and also names PingYou Ltd’s n = 207 packing, Ryan Xu’s "
+            "n = 70 packing as Evan Daniel and PingYou Ltd improved it and Doğa Özden’s own "
+            "n = 179 packing of issue 954 as the band’s source packing; the designer and its "
+            "design are neither published nor retained, and the 12 November review did not "
+            "rebuild them. Against T-296’s packing, his own and this case’s house best packing "
+            "before this adoption, it is a new arrangement: no symmetry pairs nearest centres "
+            "one to one, and the optimal assignment moves 53 squares beyond a tenth, at most "
+            "0.950, its 45 tilted squares a band of 41 leaning one way and a cluster of four "
+            "the other, where T-296’s lean 22 one way and 23 the other; against T-290’s it "
+            "moves 127. So Doğa Özden is the packing’s finder, below the record it improves; "
+            "the issue claims the upper bound only. Three squares touch a wall, one at each of "
+            "the left, the bottom and the top, as the source says."
+        ),
+        third_route=(
+            ", and the 12 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by "
+            "exact convex clipping in GMP rationals over every square, wall and pair; all 20 "
+            "of its controls, each stated beforehand, were decided as stated"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-299": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#977](https://github.com/jlevy/squares/issues/977)",
+        producer_route=False,
+        ai=(
+            "The issue and the source’s README say the construction, optimization, "
+            "high-precision solution, rational certificate, checks and figures were produced "
+            "with Claude Fable 5.2 (Anthropic) under Joost de Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the packing keeps the layout of T-174’s packing, Francisco "
+            "Couzo’s as Evan Daniel and PingYou Ltd improved it: two blocks of axis-aligned "
+            "squares with staircase edges, two corner blocks of 10 and a diagonal band of 18 "
+            "columns of tilted squares. Two things are new: each staircase has two steps of "
+            "double size, taken from the staircases of his own pinwheels at 132 and 157, "
+            "between which the band lies one step closer to the upper left block, and the "
+            "band’s columns change their lean once, where T-174’s change three times. Against "
+            "T-174’s packing, this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 55 squares beyond a tenth, at most 0.700; its 110 tilted squares "
+            "lean 61 one way and 49 the other. So Joost de Winter is the packing’s finder, in "
+            "Couzo’s layout, below the record it improves, as the issue asks."
+        ),
+        third_route=(
+            ", and the 14 November review’s clean-room checker, frozen before any producer "
+            "or witness code was read, decided it and its Witness/v2 twin again by separating "
+            "axes in integers and by exact clipped areas in GMP rationals over every square, "
+            "wall and pair; its 19 controls, each stated beforehand, were each decided as "
+            "stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-300": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#983](https://github.com/jlevy/squares/issues/983)",
+        producer_route=True,
+        ai=(
+            "Issue 983 says the search, the checks and the filing were AI-assisted "
+            "throughout, and that Doğa Özden’s AI agent, which uses the account "
+            "kenaznia-doga, prepared and posted the issue and the repository on his behalf."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, from the package whose promotion made the exact "
+            "coordinates, so on that route the replay is reproduced with the producer’s code; "
+            "the independent rational corner checker shares no verification code with it, and "
+            "the review’s checker shares no code with either route or the source."
+        ),
+        lineage=(
+            "The issue says the packing is an original AI-run column-band proposal design, not "
+            "a donor or transplant start or a public recovery: axis-parallel squares in two "
+            "wall-anchored staircase or corner domains and tilted stacks across a diagonal "
+            "band, proposals from a finite-memory dynamic programme over the columns, quenched "
+            "once with Evan Daniel’s ALM+SLP code and no random kicks; the designer and its "
+            "design are neither published nor retained. Against T-174’s packing, Francisco "
+            "Couzo’s as PingYou Ltd improved it and this case’s house best packing before this "
+            "adoption, it is a new arrangement: no symmetry pairs nearest centres one to one, "
+            "and the optimal assignment moves 75 squares beyond a tenth, at most 0.940; its 48 "
+            "tilted squares all lean one way, where T-174’s 51 lean 45 one way and 6 the "
+            "other. So Doğa Özden is the packing’s finder, below the record it improves, as "
+            "the issue asks; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 14 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again over every square, wall and pair"
+        ),
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-301": Prose(
+        author="Roberto Ono",
+        reported="on [jlevy/squares#984](https://github.com/jlevy/squares/issues/984)",
+        producer_route=False,
+        ai=(
+            "Issue 984 says the packing was found, certified and checked by an AI coding "
+            "agent (Claude, by Anthropic) working in the author’s harness, directed by a "
+            "person who set the harness up and read the request before it was posted."
+        ),
+        lineage=(
+            "The issue says the packing was made from Francisco Couzo’s packing of 404 "
+            "squares, as this registry retains it: mirrored, every square with "
+            "13.8 ≤ x + y < 23.8 deleted and the rest moved by (−5, −5), which removes five "
+            "periods of its band, then a penalty step, an exact-constraint polish and basin "
+            "hopping that re-seats cells at the band’s ends; it asks that Couzo’s packing be "
+            "credited as the start. Against T-300’s packing, Doğa Özden’s column-band packing "
+            "and this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 96 squares beyond a tenth, at most 0.964; its 55 tilted squares "
+            "lean 36 one way and 19 the other, where T-300’s 48 all lean one way. So Roberto "
+            "Ono is the packing’s finder, from Couzo’s band, below the record it improves; "
+            "the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 14 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by "
+            "exact clipping in GMP rationals over every square, wall and pair; its 20 "
+            "controls at this count, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+    ),
+    "T-302": Prose(
+        author="Roberto Ono",
+        reported="on [jlevy/squares#985](https://github.com/jlevy/squares/issues/985)",
+        producer_route=False,
+        ai=(
+            "Issue 985 says the packing was found, certified and checked by an AI coding "
+            "agent (Claude, by Anthropic) working in the author’s harness, directed by a "
+            "person who set the harness up and read the request before it was posted."
+        ),
+        lineage=(
+            "The issue says the packing was made from Evan Daniel’s packing of 229 squares, "
+            "this registry’s record there, a three-wide diagonal band of tilted squares "
+            "between two corner-anchored grids: every square with 13 ≤ x + y < 19 deleted "
+            "and the squares beyond moved by (−3, −3), which removes one period of the band, "
+            "then a penalty step and an exact-constraint polish that remove the overlaps left; "
+            "it asks that Daniel’s packing be credited as the start. Against the case’s house "
+            "best packing before this adoption, the Kingbird catalogue’s 45-degree packing at "
+            "7 + 4√2 that 147 shares with 148, it is a new arrangement: no symmetry pairs "
+            "nearest centres one to one, and the optimal assignment moves 92 squares beyond "
+            "a tenth; its 44 tilted squares lean one way at 25.8 to 27.7 degrees, where the "
+            "house’s 64 stand at 45. So Roberto Ono is the packing’s finder, from Daniel’s "
+            "band, the first below 7 + 4√2; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 14 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by "
+            "exact clipping in GMP rationals over every square, wall and pair; its 20 "
+            "controls at this count, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+    ),
+    "T-303": Prose(
+        author="jazivxt",
+        reported="on [jlevy/squares#989](https://github.com/jlevy/squares/issues/989)",
+        producer_route=False,
+        ai=(
+            "Issue 989 and the source’s README say GPT-6 Astra Ultra was the AI collaborator "
+            "on the search and verification; the source’s first published README named it "
+            "Codex Astra Ultra. The issue was opened by the account dpre4ai and asks for "
+            "credit to jazivxt and GPT-6 Astra Ultra; this record credits the person."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the checker the issue says accepted it, "
+            "Francisco Couzo’s, so the replay shares the producer’s components. The review’s "
+            "checker shares no code with either maintained route or the source, and the "
+            "independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue says the packing was made from a rectangular crop, about 12.993303 by "
+            "9.353384, of Joost de Winter’s packing of 157 squares (T-293), whose successive "
+            "copies, offset horizontally by one unit, fit at a vertical pitch of 9.019403; a "
+            "square window across two copies held 90 squares, whose positions and "
+            "orientations were then tightened and made exact. It is the first packing of 90 "
+            "squares below the 10 × 10 grid on record: no symmetry pairs it one to one with "
+            "the grid’s squares, the optimal assignment moving 52 beyond a tenth, and its 44 "
+            "tilted squares turn 22.6 to 31.6 degrees, all one way. So jazivxt is the "
+            "packing’s finder, after de Winter’s 157; the issue claims the upper bound only."
+        ),
+        third_route=(
+            ", and the 15 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read, decided it again by separating axes in integers and by "
+            "exact clipping in GMP rationals over every square, wall and pair; its 23 "
+            "controls, each stated beforehand, were each decided as stated"
+        ),
+    ),
+    "T-304": Prose(
+        author="Joost de Winter",
+        reported=(
+            "on [jlevy/squares#997](https://github.com/jlevy/squares/issues/997), which "
+            "replaces the certificate of "
+            "[jlevy/squares#996](https://github.com/jlevy/squares/issues/996)"
+        ),
+        producer_route=True,
+        ai=(
+            "Issues 996 and 997 say the local search was run with GPT-6.1 Sol Max (OpenAI) "
+            "and the local optimization, rational certificate, checks and figures were "
+            "produced with Claude Fable 5.2 (Anthropic), both under Joost de Winter’s "
+            "direction."
+        ),
+        routes=(
+            "One maintained route, the independent rational corner checker, is the checker "
+            "the source reports running, on its Witness/v2 twin, so the maintained routes’ "
+            "independent re-implementation rests on `sqpack`’s exact verifier. No route here "
+            "is the source’s own code, and the review’s checker shares no code with either "
+            "maintained route or the source."
+        ),
+        lineage=(
+            "The issues say the packing starts from T-303, jazivxt’s packing, which jazivxt "
+            "built from a crop of de Winter’s own packing of 157 squares, and that a local "
+            "search changed small groups of squares in position and angle, optimized the "
+            "packing again after each change and kept the changes that gave a smaller side. "
+            "Against T-303’s packing, this case’s house best packing before this adoption, it "
+            "is a further arrangement: no symmetry pairs nearest centres one to one, but under "
+            "the identity the optimal assignment moves 6 squares beyond a tenth, at most "
+            "0.645, and each of its 40 tilted squares pairs with one T-303 tilts the same way. "
+            "Issue 996’s certificate, 9.09e-8 larger, which issue 997 replaced, is the same "
+            "arrangement, no square moved beyond 0.0142. So jazivxt stays the packing’s "
+            "finder and Joost de Winter is its improver, as the issues ask."
+        ),
+        third_route=(
+            ", and the 15 November review’s clean-room checker, frozen before any producer or "
+            "witness code was read and run unchanged on this certificate by its addendum, "
+            "decided it and its Witness/v2 twin again by separating axes in integers and by "
+            "exact clipping in GMP rationals over every square, wall and pair; its 26 "
+            "controls, each stated beforehand, were each decided as stated"
+        ),
+        diversity="by a Claude agent, a system family that also produced the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-305": Prose(
+        author="JoeGun",
+        reported="on [jlevy/squares#1001](https://github.com/jlevy/squares/issues/1001)",
+        producer_route=True,
+        ai=(
+            "Issue 1001 says AI agents wrote and ran the search code, the checker and "
+            "the filing, and that JoeGun directed the work."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose "
+            "`packing-witness promote` made the exact coordinates and ran that "
+            "verifier on them, so on that route the replay is reproduced with the "
+            "producer’s code; the independent rational corner checker shares no "
+            "verification code with it, and the maintained routes’ independent "
+            "re-implementation rests on it. Neither is the source’s own `check.py`, "
+            "which was not run here."
+        ),
+        lineage=(
+            "The issue says the packing is Tomáš Kodaj’s public Kaggle packing, from "
+            "his notebook squares-in-squares-22-1636, improved further by a "
+            "fault-line DP of JoeGun’s own, so that JoeGun’s part of the gain is "
+            "1.174e-5 and the rest Kodaj’s; Kodaj’s notebook was not reachable here, "
+            "so that lineage is the issue’s. Against T-174’s packing, PingYou Ltd’s "
+            "refinement of Francisco Couzo’s refinement of Ryan Xu’s packing and this "
+            "case’s house best packing before this adoption, it is a new arrangement: "
+            "no symmetry pairs nearest centres one to one, and the optimal assignment "
+            "moves 70 squares beyond a tenth, at most 0.955; 56 squares turn beyond a "
+            "degree, 26.42 to 31.83 degrees. So Tomáš Kodaj is the packing’s finder "
+            "and JoeGun its improver, as the issue asks."
+        ),
+        third_route=REVIEW_1001,
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-306": Prose(
+        author="JoeGun",
+        reported="on [jlevy/squares#1001](https://github.com/jlevy/squares/issues/1001)",
+        producer_route=True,
+        ai=(
+            "Issue 1001 says AI agents wrote and ran the search code, the checker and "
+            "the filing, and that JoeGun directed the work."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose "
+            "`packing-witness promote` made the exact coordinates and ran that "
+            "verifier on them, so on that route the replay is reproduced with the "
+            "producer’s code; the independent rational corner checker shares no "
+            "verification code with it, and the maintained routes’ independent "
+            "re-implementation rests on it. Neither is the source’s own `check.py`, "
+            "which was not run here."
+        ),
+        lineage=(
+            "The issue says the packing is Tomáš Kodaj’s public Kaggle packing, from "
+            "his notebook squares-in-squares-22-1636, improved further by a "
+            "fault-line DP of JoeGun’s own, so that JoeGun’s part of the gain is "
+            "6.41e-8 and the rest Kodaj’s; Kodaj’s notebook was not reachable here, "
+            "so that lineage is the issue’s. Against T-268’s packing, Evan Daniel’s "
+            "packing built by his fault-line composer and this case’s house best "
+            "packing before this adoption, it is a new arrangement: no symmetry pairs "
+            "nearest centres one to one, and the optimal assignment moves 73 squares "
+            "beyond a tenth, at most 1.098; 99 squares turn beyond a degree, 1.38 to "
+            "27.72 degrees. So Tomáš Kodaj is the packing’s finder and JoeGun its "
+            "improver, as the issue asks. The issue adds that credit to Kodaj alone "
+            "would be fair here, JoeGun’s part being below 2e-7; the record keeps "
+            "JoeGun as the improver of the certified side and leaves that offer to "
+            "the owner."
+        ),
+        third_route=REVIEW_1001,
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-307": Prose(
+        author="JoeGun",
+        reported="on [jlevy/squares#1001](https://github.com/jlevy/squares/issues/1001)",
+        producer_route=True,
+        ai=(
+            "Issue 1001 says AI agents wrote and ran the search code, the checker and "
+            "the filing, and that JoeGun directed the work."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose "
+            "`packing-witness promote` made the exact coordinates and ran that "
+            "verifier on them, so on that route the replay is reproduced with the "
+            "producer’s code; the independent rational corner checker shares no "
+            "verification code with it, and the maintained routes’ independent "
+            "re-implementation rests on it. Neither is the source’s own `check.py`, "
+            "which was not run here."
+        ),
+        lineage=(
+            "The issue says the packing is Tomáš Kodaj’s public Kaggle packing, from "
+            "his notebook squares-in-squares-22-1636, improved further by a "
+            "fault-line DP of JoeGun’s own, so that JoeGun’s part of the gain is "
+            "1.045e-7 and the rest Kodaj’s; Kodaj’s notebook was not reachable here, "
+            "so that lineage is the issue’s. Against T-275’s packing, Doğa Özden’s "
+            "further arrangement of Francisco Couzo’s refinement of Alex Chilton’s "
+            "Kaggle notebook packing and this case’s house best packing before this "
+            "adoption, it is a new arrangement: no symmetry pairs nearest centres one "
+            "to one, and the optimal assignment moves 35 squares beyond a tenth, at "
+            "most 1.159; 65 squares turn beyond a degree, 24.72 to 31.72 degrees. So "
+            "Tomáš Kodaj is the packing’s finder and JoeGun its improver, as the "
+            "issue asks. The issue adds that credit to Kodaj alone would be fair "
+            "here, JoeGun’s part being below 2e-7; the record keeps JoeGun as the "
+            "improver of the certified side and leaves that offer to the owner."
+        ),
+        third_route=REVIEW_1001,
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-308": Prose(
+        author="JoeGun",
+        reported="on [jlevy/squares#1001](https://github.com/jlevy/squares/issues/1001)",
+        producer_route=True,
+        ai=(
+            "Issue 1001 says AI agents wrote and ran the search code, the checker and "
+            "the filing, and that JoeGun directed the work."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose "
+            "`packing-witness promote` made the exact coordinates and ran that "
+            "verifier on them, so on that route the replay is reproduced with the "
+            "producer’s code; the independent rational corner checker shares no "
+            "verification code with it, and the maintained routes’ independent "
+            "re-implementation rests on it. Neither is the source’s own `check.py`, "
+            "which was not run here."
+        ),
+        lineage=(
+            "The issue says the packing is Tomáš Kodaj’s public Kaggle packing, from "
+            "his notebook squares-in-squares-22-1636, improved further by a "
+            "600-second quench with Evan Daniel’s code, so that JoeGun’s part of the "
+            "gain is 8.390e-5 and the rest Kodaj’s; Kodaj’s notebook was not "
+            "reachable here, so that lineage is the issue’s. Against T-186’s packing, "
+            "Mishapolk’s tighter certificate of Daniil Ostashev’s composition and "
+            "this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the "
+            "optimal assignment moves 44 squares beyond a tenth, at most 0.775; 71 "
+            "squares turn beyond a degree, 5.82 to 29.30 degrees. So Tomáš Kodaj is "
+            "the packing’s finder and JoeGun its improver, as the issue asks."
+        ),
+        third_route=REVIEW_1001,
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-309": Prose(
+        author="JoeGun",
+        reported="on [jlevy/squares#1001](https://github.com/jlevy/squares/issues/1001)",
+        producer_route=True,
+        ai=(
+            "Issue 1001 says AI agents wrote and ran the search code, the checker and "
+            "the filing, and that JoeGun directed the work."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the "
+            "`packing-witness verify` the source ran, from the package whose "
+            "`packing-witness promote` made the exact coordinates and ran that "
+            "verifier on them, so on that route the replay is reproduced with the "
+            "producer’s code; the independent rational corner checker shares no "
+            "verification code with it, and the maintained routes’ independent "
+            "re-implementation rests on it. Neither is the source’s own `check.py`, "
+            "which was not run here."
+        ),
+        lineage=(
+            "The issue says the packing is Tomáš Kodaj’s public Kaggle packing, from "
+            "his notebook squares-in-squares-22-1636, improved further by two quench "
+            "runs with Evan Daniel’s code and then a fault-line DP of JoeGun’s own, "
+            "so that JoeGun’s part of the gain is 5.358e-4 and the rest Kodaj’s; "
+            "Kodaj’s notebook was not reachable here, so that lineage is the issue’s. "
+            "Against T-174’s packing, PingYou Ltd’s tighter certificate of Francisco "
+            "Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH Mondrian packing and "
+            "this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the "
+            "optimal assignment moves 113 squares beyond a tenth, at most 1.092; 92 "
+            "squares turn beyond a degree, 1.64 to 33.44 degrees. So Tomáš Kodaj is "
+            "the packing’s finder and JoeGun its improver, as the issue asks."
+        ),
+        third_route=REVIEW_1001,
+        diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -2326,6 +3009,10 @@ CHILTON = "Alex Chilton"
 NTUMLNOOB = "ntumlnoob"
 OZDEN = "Doğa Özden"
 YIM = "Kaelan Yim"
+ONO = "Roberto Ono"
+JAZIVXT = "jazivxt"
+KODAJ = "Tomáš Kodaj"
+JOEGUN = "JoeGun"
 
 
 @dataclass(frozen=True)
@@ -2435,6 +3122,23 @@ CREDITS: dict[int, Credit] = {
         (COUZO, PINGYOU),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
     ),
+    # T-303 (adopted in the pass of 15 November 2026, the first adoption at 90), jazivxt's
+    # issue 989, posted by the account dpre4ai: a window of shifted copies of a crop of Joost
+    # de Winter's n = 157 packing (T-293), the first packing of 90 squares below the grid, 52
+    # squares beyond a tenth of it. T-304 (adopted in the pass of 16 November 2026), Joost de
+    # Winter's issue 997, which replaced his issue 996's certificate: T-303's packing as his
+    # local search improved it, a further arrangement of it, 6 squares beyond a tenth under
+    # the identity and each tilted square paired with one T-303 tilts the same way (the 15
+    # November review's F9 and its addendum). jazivxt stays the finder and de Winter is the
+    # improver, as the issues ask, in the "X's packing as Y improved it" form. The phrase opens
+    # with "the packing" because the writer capitalizes a phrase's first letter, and the
+    # handle keeps its own case (attribution.md).
+    90: Credit(
+        (JAZIVXT,),
+        (DE_WINTER,),
+        "the packing jazivxt found from shifted copies of a crop of Joost de Winter’s n = 157 "
+        "packing, as de Winter improved it by a local search",
+    ),
     # Evan Daniel's exact form (T-193, of T-174 by its item) of PingYou Ltd's tighter
     # certificate of his own display regularization of Ryan Xu's packing (T-174, of T-146,
     # measured with no square moved); the stage 4 review of issue 639 measured that route.
@@ -2477,12 +3181,16 @@ CREDITS: dict[int, Credit] = {
         (DANIEL,),
         "Evan Daniel’s reconstruction and exact certificate of Ryan Xu’s arrangement",
     ),
-    # T-174's regularization of T-128's packing, 53 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-305 (adopted in the pass of 16 November 2026), JoeGun's issue 1001: Tomáš Kodaj's
+    # public Kaggle packing as JoeGun's fault-line DP improved it, a new arrangement relative
+    # to T-174's packing (no symmetry one to one, 70 squares beyond a tenth under the
+    # identity). Kodaj is the finder and JoeGun the improver, as the issue asks; Kodaj's
+    # packing is not in hand, so that lineage is the issue's statement. The same for 204,
+    # 232, 264 and 305 below.
     127: Credit(
-        (XU,),
-        (COUZO, PINGYOU),
-        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+        (KODAJ,),
+        (JOEGUN,),
+        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a fault-line DP",
     ),
     # Mykhailo Polkovskyi's KKT refinement of PR 574's re-solve of issue 562's packing
     # (T-186's regularization of T-174), no square moved beyond 1e-3.
@@ -2509,12 +3217,14 @@ CREDITS: dict[int, Credit] = {
         (PINGYOU,),
         "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing",
     ),
-    # T-174's regularization of T-141's packing, 18 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-292 (adopted on 11 November 2026), Joost de Winter's issue 958: a pinwheel grown from
+    # Samanyu-dev's 109 by one cut-and-fill step, which the 11 November review measured (F11);
+    # a new arrangement relative to T-174's packing, 84 squares beyond a tenth (F14).
     132: Credit(
-        (DANIEL,),
-        (PINGYOU,),
-        "PingYou Ltd’s refinement of Evan Daniel’s record-hunt packing",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s pinwheel grown from Samanyu-dev’s n = 109 packing, below Evan "
+        "Daniel’s record-hunt packing as PingYou Ltd refined it",
     ),
     # Evan Daniel's chain search from Ryan Xu's packing: nine squares beyond a tenth
     # against Xu's and Barnett's (RT-5 of the 16 October review; T-187 records no
@@ -2524,6 +3234,19 @@ CREDITS: dict[int, Credit] = {
         (DANIEL,),
         (),
         "Evan Daniel’s packing from a chain search started from Ryan Xu’s n = 146 packing",
+    ),
+    # T-302 (adopted in the pass of 15 November 2026, the first adoption at 147), Roberto Ono's
+    # issue 985: one band period cut from Evan Daniel's n = 229 packing (T-225's record there)
+    # and polished, a new arrangement relative to the Kingbird catalogue's 45-degree packing at
+    # 7 + 4*sqrt(2), 92 squares beyond a tenth. The issue asks that Daniel's packing be
+    # credited as the start, so the phrase names it, as the 156 and 268 phrases name the
+    # packings their strip cuts were taken from, and the closed form it is the first below,
+    # as the 157 phrase names the grid.
+    147: Credit(
+        (ONO,),
+        (),
+        "Roberto Ono’s packing from a band cut of Evan Daniel’s n = 229 packing, the first "
+        "below 7 + 4√2",
     ),
     # PingYou Ltd's algebraic certificate of its own n = 153 packing (T-174's regularization
     # of T-148, by the source's statement), the one root of a degree-7 polynomial; issue
@@ -2567,6 +3290,15 @@ CREDITS: dict[int, Credit] = {
         "Daniil Ostashev’s packing as Francisco Couzo, PingYou Ltd and Mykhailo Polkovskyi "
         "refined it",
     ),
+    # T-293 (adopted on 11 November 2026), Joost de Winter's issue 958: a pinwheel grown from
+    # Samanyu-dev's 109 by two cut-and-fill steps through his 132, the first packing of 157
+    # squares below the grid (F11, F14).
+    157: Credit(
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s pinwheel grown from Samanyu-dev’s n = 109 packing, the first below "
+        "the 13 × 13 grid",
+    ),
     # T-257 (adopted on 31 October 2026), Evan Daniel's packing of issue 845 from an L-cut of
     # the s(199) record, Chaoweeraprasit's packing as Gupta improved it, which the 31
     # October review fitted with 14 squares beyond a tenth; another arrangement than T-174's.
@@ -2600,13 +3332,17 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s exact re-solve of Daniil Ostashev’s issue-575 n = 176 "
         "packing, after PingYou Ltd’s",
     ),
-    # T-174's regularization of T-127's packing, 42 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-294 (adopted on 12 November 2026), Doğa Özden's issue 959: a further arrangement of
+    # his own T-291 packing (issue 954, adopted the day before), one to one with it by nearest
+    # centres, 3 squares beyond a tenth, from a band of the tilted squares of Ryan Xu's n = 70
+    # packing as Evan Daniel and PingYou Ltd improved it, whose two ends it keeps in place to
+    # 1e-9 (lane L107's measure_core; the review of issue 959's F8, F9).
     179: Credit(
-        (SQUISH,),
-        ("Siddharth Gupta", PINGYOU),
-        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
-        "SQUISH packing",
+        (OZDEN,),
+        (),
+        "Doğa Özden’s further arrangement of his own packing from a band of the tilted "
+        "squares of Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it, "
+        "below his earlier packing",
     ),
     # T-288 (adopted on 11 November 2026), Doğa Özden's issue 944: a new arrangement relative
     # to T-174's packing, 49 squares beyond a tenth, found by transplant search from an L added
@@ -2659,14 +3395,14 @@ CREDITS: dict[int, Credit] = {
         "Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
         construction="extension",
     ),
-    # T-268 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
-    # fault-line composer from gadgets of his own n = 233 and n = 370 packings: one to one with
-    # T-264's under no symmetry, 66 squares beyond a tenth (the 5 November review).
+    # T-306 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 204, a new
+    # arrangement relative to T-268's packing (73 squares beyond a tenth); the issue says
+    # JoeGun's part of the gain is 6.41e-8 and credit to Kodaj alone would be fair, an offer
+    # the record leaves to the owner, keeping JoeGun as the improver of the certified side.
     204: Credit(
-        (DANIEL,),
-        (),
-        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
-        "multi-gadget fault DP, from gadgets of his own n = 233 and n = 370 packings",
+        (KODAJ,),
+        (JOEGUN,),
+        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a fault-line DP",
     ),
     # T-174's regularization of T-098's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -2733,12 +3469,17 @@ CREDITS: dict[int, Credit] = {
         via=COUZO,
         how=" as refined in Francisco Couzo’s #672 report",
     ),
-    # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # T-301 (adopted in the pass of 15 November 2026), Roberto Ono's issue 984: five band
+    # periods cut from Francisco Couzo's n = 404 packing and polished, a new arrangement
+    # relative to T-300's packing, Doğa Özden's column-band packing adopted the day before,
+    # 96 squares beyond a tenth. The issue asks that Couzo's packing be credited as the start,
+    # so the phrase names it, as the 156 and 268 phrases name the packings their strip cuts
+    # were taken from, and names the packing it is below, as the 179 and 269 phrases do.
     228: Credit(
-        (COUZO,),
-        (PINGYOU,),
-        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
+        (ONO,),
+        (),
+        "Roberto Ono’s packing from a band cut of Francisco Couzo’s n = 404 packing, below "
+        "Doğa Özden’s column-band packing",
     ),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of his own
     # issue-674 packing (T-199), polished to its exact side 1.91e-11 below #674's
@@ -2752,17 +3493,13 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s display regularization of his own packing from a search started from "
         "Francisco Couzo’s refinement of Joost de Winter’s packing",
     ),
-    # T-256 (adopted on 31 October 2026), Francisco Couzo's refinement of Alex Chilton's
-    # Kaggle notebook packing, as issue 844 states it; the notebook packing is not
-    # published, so the 31 October review could not measure it (F-5).
-    # T-275 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-256's
-    # packing, one to one with it under the identity, 6 squares beyond a tenth (the 9
-    # November review).
+    # T-307 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 232, a new
+    # arrangement relative to T-275's packing (35 squares beyond a tenth, 25 tilts
+    # reversed); JoeGun's part is 1.045e-7, with the same offer as at 204.
     232: Credit(
-        (CHILTON,),
-        (COUZO, OZDEN),
-        "Doğa Özden’s further arrangement of Francisco Couzo’s refinement of Alex Chilton’s "
-        "Kaggle notebook packing",
+        (KODAJ,),
+        (JOEGUN,),
+        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a fault-line DP",
     ),
     # Evan Daniel's basin explorer from a rebuild of issue 481's composition to a different
     # local minimum; the issue credits the composition for the construction, which the
@@ -2772,13 +3509,17 @@ CREDITS: dict[int, Credit] = {
         (),
         "Evan Daniel’s packing from a rebuild of Nate Chaoweeraprasit’s SQUISH composition",
     ),
-    # Couzo's refinement of issue 593's arrangement of his issue-561 design (T-190's
-    # regularization of T-183).
+    # T-295 (adopted on 12 November 2026), Doğa Özden's issue 960: a new arrangement relative
+    # to T-190's packing, 72 squares beyond a tenth, found by a band-design search from two
+    # copies of the tilted squares of Ryan Xu's n = 70 packing as Evan Daniel and PingYou Ltd
+    # improved it (the 11 November review's F9 and F10).
     237: Credit(
-        (SQUISH,),
-        (COUZO, POLKOVSKYI),
-        "Francisco Couzo’s refinement of Mykhailo Polkovskyi’s arrangement of Couzo’s "
-        "design, after Nate Chaoweeraprasit’s SQUISH packing",
+        (OZDEN,),
+        (),
+        "Doğa Özden’s packing from two copies of a band of the tilted squares of Ryan Xu’s "
+        "n = 70 packing as Evan Daniel and PingYou Ltd improved it, below Nate "
+        "Chaoweeraprasit’s SQUISH packing as Francisco Couzo and Mykhailo Polkovskyi refined "
+        "it",
     ),
     # T-174's regularization of T-151's packing, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -2845,14 +3586,14 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
         "Chaoweeraprasit’s SQUISH packing",
     ),
-    # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
-    # T-174).
+    # T-308 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 264, a new
+    # arrangement relative to T-186's packing (44 squares beyond a tenth); the issue says a
+    # 600-second quench with Evan Daniel's code made JoeGun's step.
     264: Credit(
-        (OSTASHEV,),
-        (PINGYOU, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
-        "Ostashev’s composition of his 38-square rectangle with a 93-square piece of Evan "
-        "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
+        (KODAJ,),
+        (JOEGUN,),
+        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a quench with Evan "
+        "Daniel’s code",
     ),
     267: _couzo("Xu"),
     # T-289 (adopted on 11 November 2026), Doğa Özden's issue 945: a new arrangement relative
@@ -2866,15 +3607,23 @@ CREDITS: dict[int, Credit] = {
         "Couzo, Mishapolk and Evan Daniel improved it, below his own further arrangement of "
         "Evan Daniel’s packing",
     ),
-    # T-290 (adopted on 11 November 2026), Doğa Özden's issue 947: a new arrangement relative
-    # to T-174's packing, 112 squares beyond a tenth, found by transplant search from a strip
-    # cut of Evan Daniel's n = 304 packing, which the 11 November review's cut model fits over
-    # two thirds of the box (F8, F10).
+    # T-297 (adopted in the pass of 13 November 2026), Doğa Özden's issue 967: a new
+    # arrangement relative to his own T-296's packing, 53 squares beyond a tenth, and to
+    # T-290's, 127, found by his lab's column-band designer. The issue says the designer used
+    # no donor packing and names as the band's source packing PingYou Ltd's n = 207 packing,
+    # Ryan Xu's n = 70 packing as Evan Daniel and PingYou Ltd improved it, and his own n = 179
+    # packing of issue 954 (the 12 November review's F9 and F10), so the phrase names them as
+    # T-296's did, with their improvers. T-296, adopted on 12 November, was his earlier band
+    # packing of issue 962, and T-290 before it his packing from a strip cut of Evan Daniel's
+    # n = 304 packing (F7). The phrase ends "below his earlier packing", as 179's does: the
+    # adoption sentence follows it with the new house's id, so naming issue 962 there read
+    # as if T-297 were that issue's.
     269: Credit(
         (OZDEN,),
         (),
-        "Doğa Özden’s packing from a strip cut of Evan Daniel’s n = 304 packing, below Nate "
-        "Chaoweeraprasit’s SQUISH packing as Evan Daniel and PingYou Ltd improved it",
+        "Doğa Özden’s column-band packing, whose band he credits to PingYou Ltd’s n = 207 "
+        "packing, Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it and "
+        "his own n = 179 packing of issue 954, below his earlier packing",
     ),
     # Issue 703's packing, another arrangement of the design of issue 500's packing, which
     # T-174 refines to 1e-30: 15 squares beyond a tenth under the identity (the 21 October
@@ -2929,13 +3678,17 @@ CREDITS: dict[int, Credit] = {
         "multi-gadget fault DP",
     ),
     295: _exact_form(XU, (DANIEL, PINGYOU), "his display regularization of Ryan Xu’s"),
-    # T-174's regularization of T-098's packing, 119 squares moved beyond 1e-3, one to
-    # one; that it is that packing is the source's statement (the 14 October review of PR
-    # 574).
+    # T-299 (adopted in the pass of 14 November 2026), Joost de Winter's issue 977: the layout
+    # of T-174's packing, Francisco Couzo's as Evan Daniel and PingYou Ltd improved it, with a
+    # double step in each staircase taken from his own 132 and 157 pinwheels and the band's
+    # lean changing direction once; a new arrangement relative to T-174's packing, 55
+    # squares beyond a tenth. The issue asks that it be credited to him as a packing that
+    # builds on T-174, so the phrase names the layout's finder and its improvers.
     297: Credit(
-        (COUZO,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s packing with a double step in each staircase of Francisco Couzo’s "
+        "layout, below Couzo’s packing as Evan Daniel and PingYou Ltd improved it",
     ),
     # T-263 (adopted on 4 November 2026), Doğa Özden's further arrangement of issue 893 of
     # T-258's packing, one to one with it under the identity (the 4 November review): the
@@ -2983,13 +3736,14 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
         "multi-gadget fault DP",
     ),
-    # T-174's regularization of T-152's packing, measured one to one, no square moved
-    # beyond 1e-12 (the 14 October review of PR 574).
+    # T-309 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 305, a new
+    # arrangement relative to T-174's packing (113 squares beyond a tenth); the issue says
+    # two quench runs with Evan Daniel's code and then JoeGun's fault-line DP made his step.
     305: Credit(
-        (SQUISH,),
-        (COUZO, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Nate "
-        "Chaoweeraprasit’s SQUISH Mondrian packing",
+        (KODAJ,),
+        (JOEGUN,),
+        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by quenches with Evan "
+        "Daniel’s code and a fault-line DP",
     ),
     # T-174's regularization of T-128's packing, 34 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).

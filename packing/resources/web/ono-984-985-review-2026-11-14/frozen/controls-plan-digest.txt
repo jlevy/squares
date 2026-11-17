@@ -1,0 +1,8 @@
+# Lane L163 controls plan, stated at 2026-11-14T21:10:47Z, before l163_controls.py existed (ls programs/: controls-plan.json l163_check.py l163_clip.py l163_decide.py l163_geom.py l163_make_plan.py l163_plan_facts.py l163_reader.py l163_sat.py l163_selftest.py )
+07c25cae01fbb0304a09d0b59c8535be0100bae2a81bd4b40149c2addf41a0b1  programs/controls-plan.json
+6d9d3916043dd49cab8b8595326736d457a99ec3af180ac4e2daf09c2ba30ca6  out/plan-facts-n228.json
+01f3ea3d380245ce02235902c4141e0e4f8e4f62993a2ff943bcc3a79fed6056  out/plan-facts-n147.json
+e7fd617d4bd2e5d1ebc4a7e17423abd9434e3af04e597b878c8cf5a5642e48e8  out/check-n228.json
+60a11814ef210ba31e589c0f5f041513f3eb8237a4657c86141d992c218e67e7  out/check-n147.json
+7d5fb85cb741ad41105b220019fcf1f05fa195a2d65ab7776fdd653c2623dc2f  programs/l163_plan_facts.py
+ed672ac91cf45c696b9a399e4697955bfc0232edb0d40af843410f7b52fba5f1  programs/l163_make_plan.py

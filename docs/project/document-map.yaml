@@ -102,6 +102,20 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-yim-certificates-20261109/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-941-942-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-954-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-959-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-960-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-962-20261112/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-967-20261112/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-977-979-20261114/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-983-20261114/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-989-20261115/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-996-997-20261115/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-992-20261115/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}
@@ -252,6 +266,18 @@ documents:
   - {path: packing/cases/regularized_drawings/think-he66-2026-11-09/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-1goz-2026-11-09/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-xq4o-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-f65n-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-s418-2026-11-12/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-n73d-2026-11-12/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-g2ax-2026-11-14/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-14i2-2026-11-14/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-17ex-2026-11-15/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-i8y9-2026-11-15/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-32cl-2026-11-16/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-0y9m-2026-11-16/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-89i7-2026-11-12/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-my76-2026-11-11/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-ruu2-2026-10-31/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-ruu2-2026-10-31/review/code/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-3anz-2026-10-25/README.md, role: source-index, authority: record, lifecycle: retained}
@@ -315,6 +341,21 @@ documents:
   - {path: docs/project/reviews/review-2026-11-09-ozden-927-931-five.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-09-yim-vitamoon.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-de-winter-939-946.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-11-ozden-954.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-12-ozden-962.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-12-ozden-967.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-14-de-winter-977-979.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-14-ozden-983.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-14-ono-984-985.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-15-jazivxt-989.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-15-de-winter-996.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-16-joegun-1001.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-15-lara-992.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-11-dewinter-132-157.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-12-ozden-959.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-11-ozden-960.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-wand125-validtilt9-independent-check.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md, role: review, authority: record, lifecycle: retained}

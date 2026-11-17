@@ -1,0 +1,43 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-16T10:27Z",
+  "git_scope": "A full clone of JonathanGun/square-packing-upper-bounds, fetched at 10:27Z on 16 November 2026 by intake lane L188 (bead think-664l), when git ls-remote read main's only head as 5971b95, the pin: committed 2026-11-16T09:28:39Z, 'local minimum check: KKT point and local minimum at 127, 232, 264, 305, none rigid, no result at 204', author and committer JoeGun, the only child of 0aac839e, the head intake-watch.yaml read through for lane L187. It adds local-minimum/ (28 files) and changes README.md and LICENSE.md; every other file has the Git blob it has at 0aac839e and at bc10ce4, the joegun-upper-bounds-2026-11-16 packet's pin, whose tree 0aac839e re-commits, so the five n-NNN-candidate.yaml files still have the SHA-256 digests jlevy/squares#1001 lists, as the issue's comment of 09:29:26Z says. The issue's body was edited at 09:29:27Z to add the same section. GitHub's activity log was not readable from this session, so the push time is not read. The scope is the two changed root files, the whole of local-minimum/ and Evan Daniel's MIT notice, which LICENSE.md now names for the local-minimum outputs; the rest of the tree is the earlier packet's and is pinned by the commit alone. LICENSE-evand-square-packing.txt is byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains and is pinned against it. No source program ran in writing this packet; local-minimum/make-input.py is retained as data and never executed here.",
+  "sources": [
+    {
+      "id": "joegun-local-minimum-2026-11-16",
+      "source_url": "https://github.com/JonathanGun/square-packing-upper-bounds",
+      "source_ref": "main",
+      "source_commit": "5971b95f7141bb9bd1bac4b501bc3a094fb84822",
+      "committed_utc": "2026-11-16T09:28:39Z",
+      "git_tree": "94a011645799bf8dcd5939fad728db8ac0cc13fd",
+      "archived_path": "packing/resources/web/joegun-local-minimum-2026-11-16/source",
+      "subtree_manifest": "packing/resources/web/joegun-local-minimum-2026-11-16/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE-evand-square-packing.txt",
+        "LICENSE.md",
+        "README.md",
+        "local-minimum"
+      ],
+      "subtree_file_count": 31,
+      "subtree_total_bytes": 542294,
+      "retained_file_count": 30,
+      "retained_total_bytes": 541226,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE-evand-square-packing.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT notice for evand/square-packing, which the source carries for his quench code and his exactsolve.py; byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains.",
+          "identical_to": "packing/resources/web/evand-issue845-2026-10-29/source/LICENSE"
+        }
+      ],
+      "license": "LICENSE.md at the pin, copyright 2026 JoeGun: CC BY 4.0 for the witness files (n-*-candidate.yaml), the decimal poses (n-*-decimal-pose.yaml), the checker outputs, the files in local-minimum/ except make-input.py, and the README; MIT for check.py, make-pose.py and local-minimum/make-input.py. It says the licence covers the author's own contribution and does not change the terms of Tomas Kodaj's work. LICENSE-evand-square-packing.txt is Evan Daniel's MIT notice for evand/square-packing; LICENSE.md says his exactsolve.py made the logs and outputs in local-minimum/ and that none of his code is in the repository. The licence of Kodaj's notebook is still unchecked; whether a seeded packing needs a notice of its own is the owner's question think-71uq, which holds no import.",
+      "claims": [
+        "README.md and jlevy/squares#1001 (its comment of 09:29:26Z and its body as edited at 09:29:27Z) say the author ran exactsolve.py from evand/square-packing at 6067db5 (MIT) on all five packings in 80-digit arithmetic, and that it gave a result for four. At 127, 232, 264 and 305 it reports a KKT point (every contact force positive, balance residual 0) and a local minimum, its verdict 'local minimum of S, strict modulo N exact flat motions' with N = 52, 110, 155 and 132, so that none is rigid; the least contact forces are 6.66e-8, 7.28e-7, 6.75e-7 and 2.55e-6. At 204, whose load rests on 30 corner-on-corner touches, it found no smooth equilibrium and its Newton step diverged: no result in either direction.",
+        "They say the result is about the exact touching point near each witness (local-minimum/n-NNN-input.exact.txt), at sides 11.801753890364738880, 15.759531623540125992, 16.773807597982933201 and 17.945762359467513364, of which the witnesses are loosened copies, larger by 1.9e-11 to 4.0e-9; that at 232 the tool moved 22 loose squares into the contact system, the least gap between pairs that do not touch there 1.5e-12; and that the tool wrote its own rational certificate of each exact point (n-NNN-input.cert, its exact check VALID), whose lower sides they do not claim. They say the check is numerical, at 80 digits, and not a proof; that one tool by one author made it; that this repository's local_rigidity code was not run; and that the witnesses and their SHA-256 values are unchanged.",
+        "The README now reads 'They are upper bounds. We make no optimality claim.' where it read 'They are upper bounds only. We make no optimality or rigidity claim.', and its Not done list replaces 'No local-optimality, rigidity or KKT analysis.' with 'No local minimum result at n = 204.' and 'No proof of the local minimum results. They are numerical.' It says AI agents also ran the local minimum check, under JoeGun's direction. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

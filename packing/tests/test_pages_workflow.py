@@ -797,7 +797,9 @@ def test_the_firefox_and_webkit_system_packages_are_cached_and_installed_the_sam
     for name in ("font-loading", "browser-geometry"):
         steps = jobs[name]["steps"]
         image = next(step for step in steps if step.get("id") == "image")
-        assert image["run"] == 'echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"'
+        assert 'echo "image=${ImageOS}-${ImageVersion}" >> "$GITHUB_OUTPUT"' in (
+            image["run"].splitlines()
+        )
         cache = next(
             step for step in steps if step.get("name") == "Cache the browser's system packages"
         )
@@ -813,7 +815,33 @@ def test_the_firefox_and_webkit_system_packages_are_cached_and_installed_the_sam
         playwright = "uv run --frozen --group dev python -m playwright"
         assert f"{playwright} install --with-deps ${{{{ matrix.browser }}}}" in lines
         assert any('Dir::Cache::Archives \\"$HOME/apt-archives/\\"' in line for line in lines)
+        assert "sudo apt-get autoclean -qq" in lines
         assert steps.index(image) < steps.index(cache) < steps.index(install)
+
+
+def test_the_firefox_and_webkit_browser_cache_is_keyed_on_the_ubuntu_release() -> None:
+    """A browser cached on one Ubuntu release must never be restored on another.
+
+    Playwright skips a browser whose revision directory is complete, and that directory
+    does not name the release its build was made for. WebKit has one build per release,
+    so a 24.04 WebKit restored on a 26.04 runner was skipped and failed at launch for
+    want of ICU 74 (run 43559737624, PR #974). A restore key would match another
+    release's entry by prefix, so there is none.
+    """
+    jobs = load()["jobs"]
+    for name in ("font-loading", "browser-geometry"):
+        steps = jobs[name]["steps"]
+        image = next(step for step in steps if step.get("id") == "image")
+        assert 'echo "os=${ImageOS}" >> "$GITHUB_OUTPUT"' in image["run"].splitlines()
+        browser = next(
+            step for step in steps if step.get("name") == "Cache the Playwright browser"
+        )
+        assert browser["with"]["key"] == (
+            "playwright-${{ runner.os }}-${{ steps.image.outputs.os }}-${{ matrix.browser }}-"
+            "${{ hashFiles('packing/uv.lock') }}"
+        )
+        assert "restore-keys" not in browser["with"]
+        assert steps.index(image) < steps.index(browser)
 
 
 def test_live_verification_waits_for_the_exact_deployed_revision() -> None:

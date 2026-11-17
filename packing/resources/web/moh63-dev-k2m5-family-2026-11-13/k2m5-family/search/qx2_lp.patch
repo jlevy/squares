@@ -1,0 +1,24 @@
+--- /tmp/claude-0/up_qx2_lp.py	2026-11-01 08:20:34.211364808 -0800
++++ /home/claude/sq/release/k2m5-family/search/qx2_lp.py	2026-11-01 08:20:32.941011189 -0800
+@@ -199,6 +199,11 @@
+     def __init__(self, m, nproc):
+         import qx2_exact as E
+         import scipy.sparse as sp
++        cache = os.environ.get('GERMCACHE')
++        if cache and os.path.exists(cache):
++            z = np.load(cache, allow_pickle=False)
++            self.A = sp.csr_matrix((z['data'], z['indices'], z['indptr']), shape=tuple(z['shape']))
++            self.rhs = z['rhs']; self.added = np.zeros(self.A.shape[0], bool); return
+         EM = E.ExactModel(m)
+         rows = E.germ_rows_exact(EM, m.R, nproc=nproc)
+         r, c, v, rhs = [], [], [], []
+@@ -212,6 +217,9 @@
+             rhs.append(float(1 - ar)); k += 1
+         self.A = sp.csr_matrix((v, (r, c)), shape=(k, m.nvar)); self.rhs = np.array(rhs)
+         self.added = np.zeros(k, bool)
++        if cache:
++            np.savez(cache, data=self.A.data, indices=self.A.indices, indptr=self.A.indptr,
++                     shape=np.array(self.A.shape), rhs=self.rhs)
+ 
+     def violated(self, x, tol=1e-10):
+         val = self.A @ x - self.rhs

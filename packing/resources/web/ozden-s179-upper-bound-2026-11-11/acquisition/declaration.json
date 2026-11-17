@@ -1,0 +1,49 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "ozden-s179-upper-bound-2026-11-11",
+  "source_url": "https://github.com/kenaznia-doga/s179-upper-bound",
+  "source_ref": "main",
+  "source_commit": "bd262d8ba2966000e827547597fe6da24d0e118c",
+  "retrieved_at_utc": "2026-11-11T19:01Z",
+  "git_scope": "A full clone of kenaznia-doga/s179-upper-bound, fetched for the intake of jlevy/squares#954; the repository holds one commit, bd262d8 (committed 2026-11-11T18:27:50Z, 's(179) upper bound: exact witness, decimal pose, checks, README, licences', the author's message), 24 seconds before the issue, of 11 files, and the scope is the whole tree. #954 names this commit, and git ls-remote at 19:01Z on 11 November 2026 gives it as the head. The SHA-256 the issue and the README state for n-179-candidate.yaml, 75813e7c...041b, and the one the README states for n179-witness.json, 6a4aad82...14b3, match the files. verifier/README.md is byte-identical to the copy the ozden-s299-upper-bound-2026-11-03 packet retains and is pinned against it; verifier/sqcheck.py is byte-identical to the copy the ozden-s232-upper-bound-2026-11-09 packet retains and is pinned against it; LICENSE-evand-square-packing.txt is byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains from Evan Daniel's evand/square-packing and is pinned against it. n-179-decimal-pose.yaml, the decimal pose the witness's source.path names, is new at this pin and retained. No source program ran in writing this packet.",
+  "archived_dir": "source",
+  "license": "CC BY 4.0 for the witness, the JSON, the decimal pose, the checker outputs, the README and the diff image, and MIT for verifier/sqcheck.py, copyright (c) 2026 Doğa Özden, as LICENSE.md at the pin states (1,484 bytes, SHA-256 5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c, byte-identical to the LICENSE.md the lab's s172, s199, s270, s156, s180, s268 and s269 repositories carry and the lab added to its s299, s204 and s94 repositories on 4 November 2026, announced on jlevy/squares#890, issuecomment-6637821113). LICENSE.md is retained under source/ with the rest of the tree. LICENSE-evand-square-packing.txt is Evan Daniel's MIT notice for evand/square-packing, which the source carries for his quench code. The packing's seed band is built from the tilted squares of the registry's n = 70 packing, and its local optimizer is Evan Daniel's MIT-licensed ALM+SLP quench from evand/square-packing at bb4cc78e, as the issue states.",
+  "claims": [
+    "n-179-candidate.yaml is a packing.squares:Witness/v2 file (corners, rational scalars, 179 squares) whose exact rational side, rounded up at 12 places, #954 prints as the bound, 13.881367160110. Its exact coordinates were produced by this repository's packing-witness promote --strategy robust-rational at 591644a9 from the lab's decimal pose, n-179-decimal-pose.yaml, with center_dilation '1' and no dilation: pairs separated by at least about 2e-13, the squares that set the left wall, the bottom wall and the side touching them exactly, and other squares near a wall clearing it by up to about 1e-12. An upper bound only: no KKT, local-optimality, rigidity or global-optimality claim.",
+    "n179-witness.json is the same file as JSON. packing-witness-verify.txt is the author's run of this repository's packing-witness verify at 591644a9 on the witness placed under packing/witnesses/known-best/ (VERIFIED, exact-algebraic, 15931 pairs); sqcheck-output.txt is the author's run of verifier/sqcheck.py, an exact checker the source says was written separately from this repository's code (VALID, exact rational, the exact side rounded up at 15 places). The issue says sqcheck.py also certified the decimal pose in interval arithmetic at its own side before promotion. Those statements are the author's; no source program ran here.",
+    "The issue and README say the packing was found by an AI-run band-design search, new for this filing: tilted squares from a registry packing of the same family laid along the diagonal as a seed band; simulated annealing in a reduced model in which the tilted squares move freely and the axis-parallel squares sit on the two wall-anchored staircase lattices, present or absent, with the overlap of the squares that must be kept as energy; then one quench with Evan Daniel's ALM+SLP code from evand/square-packing search/packer at bb4cc78e, MIT. The band is built from the tilted squares of the registry's n = 70 packing (Ryan Xu, found_by; improved by Evan Daniel and PingYou Ltd; side 8.880960371555579595), a two-row band of 20 squares at -40.7505 degrees along the diagonal; the registry's n = 207 packing (PingYou Ltd) is two such bands, mirrored. Seed M_55_16_36: that band where x + y <= 16, a second copy shifted by (5, 5) where x + y > 16, overlapping squares dropped, random adjacent squares added up to 36 tilted squares; annealed at side 13.8812 (2e6 moves, energy 0.084), then quenched to 13.881367160110; two other seeds of the same scan (cuts 12 and 15, 35 tilted squares) quench to the same side. The result is one straight band of 35 squares from corner to corner (23 at -40.81 degrees, eight near -41.4 where the two copies join, four near -39.9 at the lower-left end), where the record's band is wavy and lies on the other diagonal. They report, against the registry packing matched by assignment up to the square's symmetries: 146 of 179 centres move by more than 1e-3, 54 by more than 0.05 (largest 0.886); 44 squares re-tilted by more than 1 degree (largest 44.36); 37 squares tilted by more than 0.5 degree against the record's 35. They ask that the improvement be credited to Doğa Özden, the band's source packing n = 70 and the current record to their holders as the registry lists them, and the local optimizer to Evan Daniel. The issue says the search and its code were written and run by AI agents and that the checks were run by code that did not produce the packing; the issue and repository were prepared and posted by Özden's AI agent, which uses the account kenaznia-doga; Özden directed the work."
+  ],
+  "scope": [
+    "LICENSE-evand-square-packing.txt",
+    "LICENSE.md",
+    "README.md",
+    "n-179-candidate.yaml",
+    "n-179-decimal-pose.yaml",
+    "n179-witness.json",
+    "packing-witness-verify.txt",
+    "records",
+    "sqcheck-output.txt",
+    "verifier"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE-evand-square-packing.txt",
+      "reason": "Evan Daniel's MIT notice for evand/square-packing, which the source carries for his quench code; byte-identical to the LICENSE the evand-issue845-2026-10-29 packet retains.",
+      "identical_to": "packing/resources/web/evand-issue845-2026-10-29/source/LICENSE"
+    },
+    {
+      "match": "records/n-179-candidate-diff.png",
+      "reason": "A raster comparison of the candidate with the registry packing, which decides nothing; pinned by digest only, as the 3, 9, 10 and 11 November packets pin theirs."
+    },
+    {
+      "match": "verifier/README.md",
+      "reason": "The README of the author's exact checker, byte-identical to the copy the ozden-s299-upper-bound-2026-11-03 packet retains.",
+      "identical_to": "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+    },
+    {
+      "match": "verifier/sqcheck.py",
+      "reason": "The author's exact checker, the source says written separately from this repository's code; byte-identical to the copy the ozden-s232-upper-bound-2026-11-09 packet retains, and never executed here.",
+      "identical_to": "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+    }
+  ]
+}

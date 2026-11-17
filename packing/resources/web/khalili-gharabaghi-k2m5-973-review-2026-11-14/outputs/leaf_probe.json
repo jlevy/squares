@@ -1,0 +1,167 @@
+{
+ "leaves_total": 149381,
+ "files": [
+  "zb_col29.tight",
+  "zb_col30.tight",
+  "zb_col48.tight",
+  "zc_r10026.tight",
+  "zc_r10228.tight",
+  "zc_r10326.tight",
+  "zc_r10743.tight",
+  "zc_r11201.tight",
+  "zc_r11310.tight",
+  "zc_r1132.tight",
+  "zc_r11330.tight",
+  "zc_r11370.tight",
+  "zc_r11404.tight",
+  "zc_r11847.tight",
+  "zc_r11957.tight",
+  "zc_r12073.tight",
+  "zc_r1675.tight",
+  "zc_r208.tight",
+  "zc_r2116.tight",
+  "zc_r2342.tight",
+  "zc_r2377.tight",
+  "zc_r2643.tight",
+  "zc_r2754.tight",
+  "zc_r3525.tight",
+  "zc_r3676.tight",
+  "zc_r446.tight",
+  "zc_r4548.tight",
+  "zc_r4791.tight",
+  "zc_r4846.tight",
+  "zc_r5494.tight",
+  "zc_r5624.tight",
+  "zc_r625.tight",
+  "zc_r6846.tight",
+  "zc_r7305.tight",
+  "zc_r7457.tight",
+  "zc_r7569.tight",
+  "zc_r7881.tight",
+  "zc_r8665.tight",
+  "zc_r875.tight",
+  "zc_r8762.tight",
+  "zc_r9039.tight",
+  "zc_r9649.tight",
+  "zc_r9991.tight"
+ ],
+ "uniform_3000": {
+  "leaves": 3000,
+  "evaluations": 29348,
+  "non_admissible_points_skipped": 630,
+  "violations": 0,
+  "first_violations": [],
+  "least_mu_minus_bound": 0.0,
+  "at": [
+   "27/5",
+   "24/5",
+   "1/8"
+  ],
+  "mu": 1.0,
+  "bound": 1.0,
+  "file": "zc_r12073.tight",
+  "least_bound_in_draw": 1.0,
+  "by_category": {
+   "bound_above_1|corner_or_interior": {
+    "least_gap": 4.741493143544691e-07,
+    "at": [
+     "196621/40960",
+     "204801/81920",
+     "0"
+    ],
+    "mu": 1.0000034670357316,
+    "bound": 1.0000029928864171
+   },
+   "bound_above_1|small_u": {
+    "least_gap": 4.741493143548448e-07,
+    "at": [
+     "393243/81920",
+     "204801/81920",
+     "1/72057594037927936"
+    ],
+    "mu": 1.0000034670357316,
+    "bound": 1.0000029928864171
+   },
+   "bound_exactly_1|corner_or_interior": {
+    "least_gap": 0.0,
+    "at": [
+     "27/5",
+     "24/5",
+     "1/8"
+    ],
+    "mu": 1.0,
+    "bound": 1.0
+   },
+   "bound_exactly_1|small_u": {
+    "least_gap": 0.0029861419842502302,
+    "at": [
+     "97/20",
+     "281/80",
+     "1/140737488355328"
+    ],
+    "mu": 1.0029861419842503,
+    "bound": 1.0
+   }
+  }
+ },
+ "least_bound_300": {
+  "leaves": 300,
+  "evaluations": 3128,
+  "non_admissible_points_skipped": 224,
+  "violations": 0,
+  "first_violations": [],
+  "least_mu_minus_bound": 0.0,
+  "at": [
+   "77/16",
+   "1/2",
+   "0"
+  ],
+  "mu": 1.0,
+  "bound": 1.0,
+  "file": "zb_col48.tight",
+  "least_bound_in_draw": 1.0,
+  "by_category": {
+   "bound_above_1|corner_or_interior": {
+    "least_gap": 3.4101029518614117e-06,
+    "at": [
+     "393227847791/81920000000",
+     "24576260693/16384000000",
+     "1025023/65536000000"
+    ],
+    "mu": 1.0000037367618662,
+    "bound": 1.0000003266589144
+   },
+   "bound_above_1|small_u": {
+    "least_gap": 3.448979079926886e-06,
+    "at": [
+     "196609/40960",
+     "204801/81920",
+     "1/72057594037927936"
+    ],
+    "mu": 1.0000034670357316,
+    "bound": 1.0000000180566517
+   },
+   "bound_exactly_1|corner_or_interior": {
+    "least_gap": 0.0,
+    "at": [
+     "77/16",
+     "1/2",
+     "0"
+    ],
+    "mu": 1.0,
+    "bound": 1.0
+   },
+   "bound_exactly_1|small_u": {
+    "least_gap": 0.0,
+    "at": [
+     "24/5",
+     "22/5",
+     "1/16777216"
+    ],
+    "mu": 1.0,
+    "bound": 1.0
+   }
+  }
+ },
+ "secs": 55.5
+}

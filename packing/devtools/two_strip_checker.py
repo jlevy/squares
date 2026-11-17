@@ -176,7 +176,7 @@ import time
 import zipfile
 import zlib
 from collections.abc import Callable, Iterator, Mapping, Sequence
-from concurrent.futures import Executor, ProcessPoolExecutor, ThreadPoolExecutor, as_completed
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from fractions import Fraction
@@ -1244,6 +1244,29 @@ class ReplayStoppedError(RuntimeError):
     cancelled and the receipts already written were kept."""
 
 
+def _route_outcomes(
+    order: Sequence[tuple[int, TwoStrip]],
+    chosen: Mapping[int, int],
+    pool: ProcessPoolExecutor | None,
+) -> Iterator[tuple[int, int, Callable[[], dict[str, Any]]]]:
+    """Each row's job, with its K and count, as a call that returns its result or raises
+    its error. With no pool a row runs here when its call is made, in order, and the next
+    is not yielded until the caller has made it, so a caller that stops at a raising row
+    starts no other; with a pool every row is submitted at once and comes back as it
+    finishes."""
+    if pool is None:
+        for k, row in order:
+            yield k, row.n, partial(route_row, row, with_controls=row.n == chosen[k])
+        return
+    jobs = {
+        pool.submit(route_row, row, with_controls=row.n == chosen[k]): (k, row.n)
+        for k, row in order
+    }
+    for job in as_completed(jobs):
+        k, n = jobs[job]
+        yield k, n, job.result
+
+
 def _route_jobs(
     deposit: Deposit,
     groups: Mapping[int, Sequence[TwoStrip]],
@@ -1251,23 +1274,22 @@ def _route_jobs(
     todo: Sequence[int],
     chosen: Mapping[int, int],
     workers: int,
-    pool: Executor,
+    pool: ProcessPoolExecutor | None,
     log: Callable[[str], None],
 ) -> None:
-    """Submit every row of the Ks to replay and write each K's receipt as its last row is
+    """Run every row of the Ks to replay and write each K's receipt as its last row is
     decided; a row whose job raised is `ReplayStoppedError`."""
-    jobs = {}
-    for k in todo:
-        # The controlled count first, since its controls are a K's longest job, then the
-        # largest counts first, so the two workers finish a K together.
-        for row in sorted(groups[k], key=lambda row: (row.n != chosen[k], -row.n)):
-            job = pool.submit(route_row, row, with_controls=row.n == chosen[k])
-            jobs[job] = (k, row.n)
+    # The controlled count first, since its controls are a K's longest job, then the
+    # largest counts first, so the two workers finish a K together.
+    order = [
+        (k, row)
+        for k in todo
+        for row in sorted(groups[k], key=lambda row: (row.n != chosen[k], -row.n))
+    ]
     found: dict[int, list[dict[str, Any]]] = {k: [] for k in todo}
-    for job in as_completed(jobs):
-        k, n = jobs[job]
+    for k, n, outcome in _route_outcomes(order, chosen, pool):
         try:
-            item = job.result()
+            item = outcome()
         except Exception as error:
             log(f"K={k} n={n} raised {error!r}: stopping, the rows not yet started cancelled")
             raise ReplayStoppedError(
@@ -1310,18 +1332,24 @@ def replay_all(
     ]
     log(f"{deposit.label}: {len(groups)} values of K, {len(todo)} to replay: {todo}")
     chosen = {k: controlled_count(groups[k]) for k in todo}
-    runner: Executor = (
-        ProcessPoolExecutor(max_workers=workers) if workers > 1 else ThreadPoolExecutor(1)
-    )
-    with runner as pool:
-        try:
-            _route_jobs(
-                deposit, groups, todo=todo, chosen=chosen, workers=workers, pool=pool, log=log
-            )
-        except BaseException:
-            # Without this the pool's exit would decide every queued row and drop it.
-            pool.shutdown(wait=False, cancel_futures=True)
-            raise
+    if workers == 1:
+        _route_jobs(deposit, groups, todo=todo, chosen=chosen, workers=1, pool=None, log=log)
+    else:
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            try:
+                _route_jobs(
+                    deposit,
+                    groups,
+                    todo=todo,
+                    chosen=chosen,
+                    workers=workers,
+                    pool=pool,
+                    log=log,
+                )
+            except BaseException:
+                # Without this the pool's exit would decide every queued row and drop it.
+                pool.shutdown(wait=False, cancel_futures=True)
+                raise
     if not all(part_is_current(deposit, k, rows) for k, rows in groups.items()):
         return None
     summary = replay_summary(deposit, groups)

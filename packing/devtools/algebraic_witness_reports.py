@@ -5,9 +5,9 @@ maintained exact routes over Q. PR #574 also states certificates whose coordinat
 real algebraic number fields, of degree 2 to 8. One maintained route reads them:
 `sqpack.witness.exact_verify`, which builds every square in its witness's field
 (`sqpack.field`) and decides each unit-square identity, wall and pair by exact signs. The
-independent rational corner checker reads rational corners only, and no second route over
-a number field is maintained here, so every receipt this module writes records one route
-and says so.
+independent rational corner checker reads rational corners only, and the second route over
+a number field, `devtools.check_algebraic_witness_independent`, was added after this module
+and is not run here, so every receipt this module writes records one route and says so.
 
 The packet declares the witnesses in ``acquisition/algebraic.json`` (`Declaration`):
 

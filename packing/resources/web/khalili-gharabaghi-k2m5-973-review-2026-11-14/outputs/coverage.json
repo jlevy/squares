@@ -1,0 +1,24 @@
+{
+ "files": 75,
+ "finished": 75,
+ "boxes": 1255023,
+ "outside": 0,
+ "outside_first": [],
+ "by_domain": {
+  "extra d0=3/2 sign=-1": 29,
+  "extra d0=3/2 sign=1": 9,
+  "extra d0=5/2 sign=-1": 40,
+  "main d0=3/2 sign=-1": 473643,
+  "main d0=3/2 sign=1": 473914,
+  "main d0=5/2 sign=-1": 153356,
+  "main d0=5/2 sign=1": 153999,
+  "main d0=7/2 sign=1": 33
+ },
+ "main_jobs_needed": 308,
+ "main_jobs_not_ok": [],
+ "extra_jobs_needed": 15,
+ "extra_jobs_not_ok": [],
+ "jobs_without_K_recorded": 308,
+ "mutated": null,
+ "verdict": "COVERED"
+}

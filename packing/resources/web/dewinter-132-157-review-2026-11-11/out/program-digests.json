@@ -1,0 +1,306 @@
+{
+ "program": "l105_digests.py",
+ "programs": {
+  "controls-plan.json": "e6e89ebf94eff63e3a955362eddf9c829dfd07ce26e7d67fdce34b8371d12bb2",
+  "issue-958.json": "1def3e3f847b763b8bc627a3e83b7a48454c53251e3431636ae4d921d396c6dc",
+  "l105_check.py": "1e7b04cca2bfc3b2e0ef6c95c885e88b99a82615571af3c454ce245222e622b7",
+  "l105_clip.py": "4eba021609f021d2a9d77ade651164522f6716e6b554318010cc02b9d13b7dc7",
+  "l105_compare_lane.py": "19b637aebf72fdbf81fd982db352926abf7edc54ef3879462297722c1b4ec3e0",
+  "l105_construct.py": "ef1166dcba0630aa5399d7113475f6729a189c9dd63c5f9e5e5a4e06abe26709",
+  "l105_controls.py": "31b894362ded4b2798f6f0b33e1cf81f841969b1b5b189ef6a790598e02d3886",
+  "l105_custody.py": "199b4d7c537410a965f519f081718d6aa546a2f5480bd81a285770684fed19a0",
+  "l105_digests.py": "b973fa8beee12e5c37c955b4eecabb6fd56b70f65114f24331d5a2c10f114201",
+  "l105_geom.py": "57f9fc07f5c8ccc8f752ba4a49e2b9e9a8b4314b449320f53c0327117b0fe361",
+  "l105_identity.py": "ae6701c01b17f869ad776436d63f63c74d747ad406095d2fe5e4e5b83b17f4dc",
+  "l105_lineage.py": "cf6a82291bbd108ea46702e072cf9f3291b6e4c3436d02880c0113d68838ebbd",
+  "l105_plan.py": "5594f419908ba633294fbf61770420f1ff4fd8a55609474f34b8f53989e9ded5",
+  "l105_reader.py": "2e1cff6848c9b92bd9253bafb5ced916573868fdfc34a6d7e3511696997b8bdf",
+  "l105_sat.py": "86932296989a6dcf8e972039c6c8f08a6085945438c180533f257dc9bcc61e67",
+  "l105_selftest.py": "f523a6013f25c1d0ccca7cb0175c855bfbbe0df522d528665f384486076eabf0",
+  "l105_sides.py": "3d2b9a5501b0991e568865be7eeb053ae039b3507552080e74e0a37ccd72e608",
+  "run_after.sh": "387c82df18092d82a5f01fbd836195e266a43e996f17724a14c057a5862f5a99",
+  "run_frozen.sh": "9ea50fe0fda94d6c2b6f41af5cb5ada1143f03acbcc9c436ef0c6fe53cb95642"
+ },
+ "receipts": {
+  "check-n132.json": {
+   "sha256": "2e85ddfc8120507207304d08c543f74f2e5883508848e66f8fc588eba65abe4d",
+   "programs_named": 4,
+   "programs_match": true
+  },
+  "check-n157.json": {
+   "sha256": "d5a92ad341ef71cee4689bb8bde5606c6e918793983e8eb1b5f90dd321e06030",
+   "programs_named": 4,
+   "programs_match": true
+  },
+  "compare-lane.json": {
+   "sha256": "dc029b8bcb9c3c33f6079897b7afed995a5c4a504265399c125a267e3507fdac",
+   "programs_named": 0,
+   "programs_match": true
+  },
+  "construct.json": {
+   "sha256": "6444642b67d99daaba9199149442dba9a3262f4019c609f94ef1311f2e8f1007",
+   "programs_named": 0,
+   "programs_match": true
+  },
+  "controls-n132.json": {
+   "sha256": "5d262a016f0a73932744180d176e2e971366c3ad1fd741d5328a801bd9d03ece",
+   "programs_named": 6,
+   "programs_match": true
+  },
+  "controls-n157.json": {
+   "sha256": "1b92ce9f04224da282137c6adc87f9783d4d86a4a1a99da62a30cf9f9fb5f944",
+   "programs_named": 6,
+   "programs_match": true
+  },
+  "custody.json": {
+   "sha256": "1e08f0a5bc2ab9c72cee47f4d880dcd829c8abe74aa22b869110101815d2d99e",
+   "programs_named": 0,
+   "programs_match": true
+  },
+  "identity-n132.json": {
+   "sha256": "27c284f86854cd2546a9eb3bdeb4ecff22795e404592cdca99f22155ae7fa3b0",
+   "programs_named": 0,
+   "programs_match": true
+  },
+  "lineage.json": {
+   "sha256": "ee2d223944e6ee1264dbc470ba6fd70d829636d97177582ac53ecdb76741ee61",
+   "programs_named": 0,
+   "programs_match": true
+  },
+  "plan-facts-n132.json": {
+   "sha256": "9ac3a6543ddb9b8a250634b769ac80d9a7eb8247f7932cb5591a848938a73a53",
+   "programs_named": 0,
+   "programs_match": true
+  },
+  "plan-facts-n157.json": {
+   "sha256": "20a0acfb41d9126e4865e5b82bd49ab8e976f271419299ce1e1886eec6751f48",
+   "programs_named": 0,
+   "programs_match": true
+  },
+  "selftest-mutant-A0.json": {
+   "sha256": "78db5b4013b77baecaa1a287385e5247ad053d78b30fd1e66d9122ad2d78d44b",
+   "programs_named": 6,
+   "programs_match": true
+  },
+  "selftest-mutant-Bopen.json": {
+   "sha256": "8af134dba6c46efb93619541b7151d68fa8af2ccf2e62a58d302e2d93d25f0d4",
+   "programs_named": 6,
+   "programs_match": true
+  },
+  "selftest.json": {
+   "sha256": "aa57cadd0f7696358af056e9521bbe72dcd15d22d4b5473bec972d443d4ccd2f",
+   "programs_named": 6,
+   "programs_match": true
+  },
+  "sides.json": {
+   "sha256": "80ba1982d674f351227d92bfce206c2263c898abdff7fe972e7a74c150950d7e",
+   "programs_named": 0,
+   "programs_match": true
+  }
+ },
+ "frozen_lists": {
+  "checker-frozen-digests.txt": {
+   "sha256": "5312e766bc440b0fd72e12fe925e7144da41782135df3bdcf1317a89afaa6152",
+   "lines": 7,
+   "all_equal": true,
+   "rows": [
+    {
+     "file": "l105_reader.py",
+     "frozen": "2e1cff6848c9b92bd9253bafb5ced916573868fdfc34a6d7e3511696997b8bdf",
+     "now_equal": true
+    },
+    {
+     "file": "l105_sat.py",
+     "frozen": "86932296989a6dcf8e972039c6c8f08a6085945438c180533f257dc9bcc61e67",
+     "now_equal": true
+    },
+    {
+     "file": "l105_clip.py",
+     "frozen": "4eba021609f021d2a9d77ade651164522f6716e6b554318010cc02b9d13b7dc7",
+     "now_equal": true
+    },
+    {
+     "file": "l105_check.py",
+     "frozen": "1e7b04cca2bfc3b2e0ef6c95c885e88b99a82615571af3c454ce245222e622b7",
+     "now_equal": true
+    },
+    {
+     "file": "l105_geom.py",
+     "frozen": "57f9fc07f5c8ccc8f752ba4a49e2b9e9a8b4314b449320f53c0327117b0fe361",
+     "now_equal": true
+    },
+    {
+     "file": "l105_selftest.py",
+     "frozen": "f523a6013f25c1d0ccca7cb0175c855bfbbe0df522d528665f384486076eabf0",
+     "now_equal": true
+    },
+    {
+     "file": "run_frozen.sh",
+     "frozen": "9ea50fe0fda94d6c2b6f41af5cb5ada1143f03acbcc9c436ef0c6fe53cb95642",
+     "now_equal": true
+    }
+   ]
+  },
+  "controls-plan-digest.txt": {
+   "sha256": "d5b8e9543e3a46179139ae70c7ee5c47da0db92df5139ab86553c25d4f40b640",
+   "lines": 6,
+   "all_equal": true,
+   "rows": [
+    {
+     "file": "programs/controls-plan.json",
+     "frozen": "e6e89ebf94eff63e3a955362eddf9c829dfd07ce26e7d67fdce34b8371d12bb2",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_plan.py",
+     "frozen": "5594f419908ba633294fbf61770420f1ff4fd8a55609474f34b8f53989e9ded5",
+     "now_equal": true
+    },
+    {
+     "file": "out/plan-facts-n132.json",
+     "frozen": "9ac3a6543ddb9b8a250634b769ac80d9a7eb8247f7932cb5591a848938a73a53",
+     "now_equal": true
+    },
+    {
+     "file": "out/plan-facts-n157.json",
+     "frozen": "20a0acfb41d9126e4865e5b82bd49ab8e976f271419299ce1e1886eec6751f48",
+     "now_equal": true
+    },
+    {
+     "file": "out/check-n132.json",
+     "frozen": "2e85ddfc8120507207304d08c543f74f2e5883508848e66f8fc588eba65abe4d",
+     "now_equal": true
+    },
+    {
+     "file": "out/check-n157.json",
+     "frozen": "d5a92ad341ef71cee4689bb8bde5606c6e918793983e8eb1b5f90dd321e06030",
+     "now_equal": true
+    }
+   ]
+  },
+  "findings-frozen-digest.txt": {
+   "sha256": "5461bd6fab7cd4b3bfed4758bc87b59aea547ad70b481e47a43a831fe152ef92",
+   "lines": 23,
+   "all_equal": true,
+   "rows": [
+    {
+     "file": "frozen/review-2026-11-11-dewinter-132-157.frozen.md",
+     "frozen": "b758262191faff470605f15df68ac5f94d6ae8c80a295deaf7b4b2146100cad4",
+     "now_equal": true
+    },
+    {
+     "file": "frozen/checker-frozen-digests.txt",
+     "frozen": "5312e766bc440b0fd72e12fe925e7144da41782135df3bdcf1317a89afaa6152",
+     "now_equal": true
+    },
+    {
+     "file": "frozen/controls-plan-digest.txt",
+     "frozen": "d5b8e9543e3a46179139ae70c7ee5c47da0db92df5139ab86553c25d4f40b640",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_check.py",
+     "frozen": "1e7b04cca2bfc3b2e0ef6c95c885e88b99a82615571af3c454ce245222e622b7",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_clip.py",
+     "frozen": "4eba021609f021d2a9d77ade651164522f6716e6b554318010cc02b9d13b7dc7",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_controls.py",
+     "frozen": "31b894362ded4b2798f6f0b33e1cf81f841969b1b5b189ef6a790598e02d3886",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_geom.py",
+     "frozen": "57f9fc07f5c8ccc8f752ba4a49e2b9e9a8b4314b449320f53c0327117b0fe361",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_plan.py",
+     "frozen": "5594f419908ba633294fbf61770420f1ff4fd8a55609474f34b8f53989e9ded5",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_reader.py",
+     "frozen": "2e1cff6848c9b92bd9253bafb5ced916573868fdfc34a6d7e3511696997b8bdf",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_sat.py",
+     "frozen": "86932296989a6dcf8e972039c6c8f08a6085945438c180533f257dc9bcc61e67",
+     "now_equal": true
+    },
+    {
+     "file": "programs/l105_selftest.py",
+     "frozen": "f523a6013f25c1d0ccca7cb0175c855bfbbe0df522d528665f384486076eabf0",
+     "now_equal": true
+    },
+    {
+     "file": "programs/controls-plan.json",
+     "frozen": "e6e89ebf94eff63e3a955362eddf9c829dfd07ce26e7d67fdce34b8371d12bb2",
+     "now_equal": true
+    },
+    {
+     "file": "programs/issue-958.json",
+     "frozen": "1def3e3f847b763b8bc627a3e83b7a48454c53251e3431636ae4d921d396c6dc",
+     "now_equal": true
+    },
+    {
+     "file": "programs/run_frozen.sh",
+     "frozen": "9ea50fe0fda94d6c2b6f41af5cb5ada1143f03acbcc9c436ef0c6fe53cb95642",
+     "now_equal": true
+    },
+    {
+     "file": "out/check-n132.json",
+     "frozen": "2e85ddfc8120507207304d08c543f74f2e5883508848e66f8fc588eba65abe4d",
+     "now_equal": true
+    },
+    {
+     "file": "out/check-n157.json",
+     "frozen": "d5a92ad341ef71cee4689bb8bde5606c6e918793983e8eb1b5f90dd321e06030",
+     "now_equal": true
+    },
+    {
+     "file": "out/controls-n132.json",
+     "frozen": "5d262a016f0a73932744180d176e2e971366c3ad1fd741d5328a801bd9d03ece",
+     "now_equal": true
+    },
+    {
+     "file": "out/controls-n157.json",
+     "frozen": "1b92ce9f04224da282137c6adc87f9783d4d86a4a1a99da62a30cf9f9fb5f944",
+     "now_equal": true
+    },
+    {
+     "file": "out/plan-facts-n132.json",
+     "frozen": "9ac3a6543ddb9b8a250634b769ac80d9a7eb8247f7932cb5591a848938a73a53",
+     "now_equal": true
+    },
+    {
+     "file": "out/plan-facts-n157.json",
+     "frozen": "20a0acfb41d9126e4865e5b82bd49ab8e976f271419299ce1e1886eec6751f48",
+     "now_equal": true
+    },
+    {
+     "file": "out/selftest-mutant-A0.json",
+     "frozen": "78db5b4013b77baecaa1a287385e5247ad053d78b30fd1e66d9122ad2d78d44b",
+     "now_equal": true
+    },
+    {
+     "file": "out/selftest-mutant-Bopen.json",
+     "frozen": "8af134dba6c46efb93619541b7151d68fa8af2ccf2e62a58d302e2d93d25f0d4",
+     "now_equal": true
+    },
+    {
+     "file": "out/selftest.json",
+     "frozen": "aa57cadd0f7696358af056e9521bbe72dcd15d22d4b5473bec972d443d4ccd2f",
+     "now_equal": true
+    }
+   ]
+  }
+ },
+ "status": "ALL_RECEIPTS_MATCH",
+ "problems": []
+}

@@ -1,0 +1,81 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-14T02:03Z",
+  "git_scope": "A depth-1 fetch of the pinned commit, which Mohsen Khalili and Sara Gharabaghi's k2m5-family release (jlevy/squares#973, packet moh63-dev-k2m5-family-2026-11-13) names for Evan Daniel's checkers zmx2 and qx2_zm.py. The scope is the files those checkers build or import with, and the licence and credits. Every file but search/zeromargin.py, LICENSE and CREDITS.md is byte-identical to a copy earlier packets retain and is pinned to it; search/zeromargin.py (SHA-256 3cb95fb74ce44666654d6cc193c3f255bd07ba6c9afd864a6f93e364d428c5cc), which the source's qx2_zm.py run imported and no earlier packet holds, is retained. It differs from the 640fe453 copy earlier packets keep by two added guards: an int64 bound that disables CHAIN totals that could overflow, and assertions that the pitch divides cy_max and is at most 1/2. Nothing in the tree was executed in the repository.",
+  "sources": [
+    {
+      "id": "evand-square-packing",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "659ee62e4a9d39542a1146e8b011cc3ab6407ede",
+      "source_commit": "659ee62e4a9d39542a1146e8b011cc3ab6407ede",
+      "committed_utc": "2026-10-24T05:01:33Z",
+      "git_tree": "1e87853b3a7a14af9622470337aaa51dd5efad8f",
+      "archived_path": "packing/resources/web/evand-square-packing-2026-10-24/square-packing",
+      "subtree_manifest": "packing/resources/web/evand-square-packing-2026-10-24/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/qx2_zm.py",
+        "search/zm_mixed.py",
+        "search/zeromargin.py",
+        "search/mixed_cover.py",
+        "verify2/Cargo.toml",
+        "verify2/Cargo.lock",
+        "verify2/src/bin/zmx2.rs"
+      ],
+      "subtree_file_count": 9,
+      "subtree_total_bytes": 426327,
+      "retained_file_count": 3,
+      "retained_total_bytes": 88777,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/mixed_cover.py",
+          "bytes": 13195,
+          "sha256": "bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5",
+          "reason": "byte-identical to the copy the evand-square-packing-2026-10-03 packet retains",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-03/square-packing/s12/certificates/k2m4/qx2_zm/checker/mixed_cover.py"
+        },
+        {
+          "path": "search/qx2_zm.py",
+          "bytes": 64316,
+          "sha256": "6294052a37ce66c5d84b55afd606e3a52f463e22b876bf44b5aa903aefb7e737",
+          "reason": "byte-identical to the copy the evand-square-packing-2026-10-03 packet retains",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-03/square-packing/s12/certificates/k2m4/qx2_zm/checker/qx2_zm.py"
+        },
+        {
+          "path": "search/zm_mixed.py",
+          "bytes": 86265,
+          "sha256": "1fd203469bb43a55ca7ce376b9717437e0970eead31941ec7fa100ab24d5ba95",
+          "reason": "byte-identical to the copy the evand-square-packing-2026-10-03 packet retains",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-03/square-packing/s12/certificates/k2m4/qx2_zm/checker/zm_mixed.py"
+        },
+        {
+          "path": "verify2/Cargo.lock",
+          "bytes": 151,
+          "sha256": "e1daec4d9995e879ddbf4aa5fb89b6f03eaaa23157ef60feb72741e3a0ffa57e",
+          "reason": "byte-identical to the copy the evand-square-packing-2026-10-04 packet retains",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/Cargo.lock"
+        },
+        {
+          "path": "verify2/Cargo.toml",
+          "bytes": 151,
+          "sha256": "4e0f078ea45b32802c21cb71413305e30cd062c3fa371c6ff6e62bda3d07a577",
+          "reason": "byte-identical to the copy the evand-square-packing-2026-10-04 packet retains",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/Cargo.toml"
+        },
+        {
+          "path": "verify2/src/bin/zmx2.rs",
+          "bytes": 173472,
+          "sha256": "e2bb84e9e05938db416940ad608d2583ca9a0c248d59820937c4ce59d607ead7",
+          "reason": "byte-identical to the copy the evand-square-packing-2026-10-04 packet retains (e2bb84e9, the version devtools.replay_evand_zmx2 builds)",
+          "identical_to": "packing/resources/web/evand-square-packing-2026-10-04/square-packing/s12/verify2/src/bin/zmx2.rs"
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE). CREDITS.md says the work was produced by Claude (Anthropic) in a single session under human direction.",
+      "claims": [
+        "No claim of its own: the checker files at the commit the k2m5-family release pins. zmx2 (verify2/src/bin/zmx2.rs, e2bb84e9) is Daniel's interval-certified mixed-cover checker in outward-rounded binary64 with exact integer mass tests; qx2_zm.py (6294052a) is his exact-rational checker for covers with a Lebesgue polygon, importing zm_mixed.py (1fd20346), zeromargin.py (3cb95fb7) and mixed_cover.py (bb89de15)."
+      ]
+    }
+  ]
+}

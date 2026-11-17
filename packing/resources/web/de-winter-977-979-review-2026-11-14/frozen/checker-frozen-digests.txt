@@ -1,0 +1,18 @@
+# Lane L153 checker, frozen at 2026-11-14T11:11:08Z, before the controls plan, the findings, the author's README, REGISTRATION.md, SHA256SUMS, checkers (verify_exact.py, check_area.py), build.py or their outputs, any packing-witness code, the register entries at 297, 332 or 409, or import lane L154's work was read.
+# source certificates (clone of JoostdeWinter/square-packing at 7b4701f35e815301e4f467d214fab4205ded5eb1 and c70defaf39af47db220d1e7c2922590637ffb664):
+7ff1712fc2efe66661377481e1d37b8577b30a9979f10c83d2539cd2e31d6632  7b4701f:n297/n297_exact.json
+96941f37d9c937b041f5e76efee7859485639f23c41a9bebcea01acef1be1bc5  7b4701f:n297/n297_witness.yaml
+d6fb8424688c6272acd452c7a0e46104e69f1bcd20def89741e1ac55062d0873  c70defa:above324_from_n297/n332_exact.json
+513a40e3cbb182f344ed0194e4fe8974d7f518a27d1ad7bff4d2f267eac4a443  c70defa:above324_from_n297/n409_exact.json
+# checker programs:
+5d1836e72d901cb6b20ce0770212c4b53c29b5764c4e0f4a9c57bbc5321c6f55  l153_reader.py
+d479b16c0aeabf8a5dfc36a05d30ad10707478f486c514245de2a0ec9d427eb9  l153_sat.py
+676b2eb7ff112a0c1d3a1195c9c5fc65ef1c0ae3a54ed67dc81a5e70d391a4fa  l153_clip.py
+02bfdf2ee535d66ae57930f301213348b4694c6a1fc179cb610d79289562eada  l153_check.py
+2756bb23384ce6b6d789d9e29cad4dcff811c1b8d4b33e3e7346c51867c6fcb3  l153_geom.py
+d53b46a4f0c5368bff89d6472c1b04ff3106806db7b5d1d5deefce45784973ad  l153_selftest.py
+# receipts written by the frozen checker:
+a3d14b2906b77b02b082b5364ce7b915c5b9b9006a9ab97992541d195aa26a6d  out/selftest.json
+d240ebc820499b878cb3a786fa177401975f6fecc6cd46048f028f03f474af30  out/check-n297.json
+380cd359ed0d2115afc57c7bcdd6e08c74e1a56a437da0a253a688230bad2bfb  out/check-n332.json
+74346ccb028200bf2b7d95039ce91180b4bc58c429457d2aa58aed15de7d493c  out/check-n409.json

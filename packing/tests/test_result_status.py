@@ -456,6 +456,33 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # arrangement of T-270's packing (T-276), to his issue-945 certificate (T-289);
         # T-174 and T-186 keep their other houses.
         "T-276",
+        # The adoption of 12 November 2026 (lane L107) took 179, the only house of Özden's
+        # issue-954 certificate (T-291), to his further arrangement of it (T-294).
+        "T-291",
+        # The same day's lane L110 took 237, the only house of Francisco Couzo's 15 October
+        # certificate (T-190), to Doğa Özden's issue-960 certificate (T-295).
+        "T-190",
+        # Lane L120 of 12 November 2026 took 269, the only house of Doğa Özden's issue-947
+        # certificate (T-290), to his issue-962 certificate (T-296).
+        "T-290",
+        # Lane L132 took 269, the only house of Özden's issue-962 certificate (T-296), to his
+        # issue-967 certificate (T-297) in the pass of 13 November 2026.
+        "T-296",
+        # Hyukdong Kim's exact degree-21 side at 297 (T-247), 3.4e-90 below T-174's and never
+        # the house, is superseded once lane L154 adopted Joost de Winter's issue-977
+        # certificate (T-299) there in the pass of 14 November 2026, 9.62e-04 below it.
+        "T-247",
+        # Lane L164 took 228, the only house of Doğa Özden's issue-983 certificate (T-300), to
+        # Roberto Ono's issue-984 certificate (T-301) in the pass of 15 November 2026.
+        "T-300",
+        # Lane L181 took 90, the only house of jazivxt's issue-989 certificate (T-303), to
+        # Joost de Winter's issue-997 certificate (T-304) in the pass of 16 November 2026.
+        "T-303",
+        # Lane L187 took 204 and 232, the only houses of Evan Daniel's issue-914 certificate
+        # there (T-268) and of Doğa Özden's issue-927 certificate (T-275), to JoeGun's
+        # issue-1001 certificates (T-306, T-307) in the same pass.
+        "T-268",
+        "T-275",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -524,7 +551,19 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # T-263 (299), T-270 (268) and T-272 (303), which they supersede.
     # The adoption of 11 November 2026 took 156, 180, 268 and 269 to Doğa Özden's
     # certificates of issues 943 to 947 (T-287 to T-290): the last house of T-276 (268),
-    # which they supersede; T-174 and T-186 keep their other houses.
+    # which they supersede; T-174 and T-186 keep their other houses. The adoption of 12
+    # November 2026 took 179, T-291's only house, to T-294, which supersedes it, 237, the
+    # only house of T-190, to Özden's issue-960 certificate (T-295), which supersedes it,
+    # and 269, the only house of T-290, to his issue-962 certificate (T-296), which
+    # supersedes it. The pass of 13 November took 269, T-296's only house, on to his
+    # issue-967 certificate (T-297), which supersedes it. The pass of 14 November took 297 to
+    # Joost de Winter's issue-977 certificate (T-299), which supersedes T-247 there; T-174
+    # keeps its other houses. The pass of 15 November took 228, T-300's only house, to Roberto
+    # Ono's issue-984 certificate (T-301), which supersedes it, and 147, first adopted, to his
+    # issue-985 certificate (T-302). The pass of 16 November took 90, T-303's only house, to
+    # Joost de Winter's issue-997 certificate (T-304), which supersedes it, and 204 and 232,
+    # T-268's and T-275's only houses, to JoeGun's issue-1001 certificates (T-306, T-307),
+    # which supersede them; T-174 and T-186 keep their other houses.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

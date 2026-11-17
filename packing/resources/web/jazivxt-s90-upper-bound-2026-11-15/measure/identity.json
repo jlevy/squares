@@ -1,0 +1,99 @@
+{
+ "format": "measure-identity-v1",
+ "n": 90,
+ "inputs": {
+  "JAZIVXT": {
+   "input": "packet",
+   "packet": "jazivxt-s90-upper-bound-2026-11-15",
+   "side": "4999138583463/500000000000"
+  },
+  "grid": {
+   "input": "witness-corners",
+   "path": "packing/witnesses/known-best/n-090.yaml",
+   "sha256": "48883a656acd765bd4dac3d8d850afcb0448876dee8d7f42e7f80f19cf129007",
+   "side": "10"
+  }
+ },
+ "tilts": {
+  "JAZIVXT": {
+   "exactly_turned": 49,
+   "tilted_beyond_1_degree": 44,
+   "tilted_positive": 0,
+   "tilted_negative": 44,
+   "tilt_range_degrees": [
+    22.61145330229438,
+    31.559363105938992
+   ],
+   "near_upright": 5,
+   "near_upright_beyond_1e-3_degrees": [
+    -0.062462013848985976,
+    -0.021177500715680253,
+    0.00291984692691879,
+    0.020018495040207366
+   ]
+  },
+  "grid": {
+   "exactly_turned": 0,
+   "tilted_beyond_1_degree": 0,
+   "tilted_positive": 0,
+   "tilted_negative": 0,
+   "tilt_range_degrees": [],
+   "near_upright": 0,
+   "near_upright_beyond_1e-3_degrees": []
+  }
+ },
+ "pairs": [
+  {
+   "view": "JAZIVXT",
+   "against": "grid",
+   "side_difference": "-1.722833e-03",
+   "side_difference_exact": "-861416537/500000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 1,
+    "largest_move": "1.33219",
+    "moved_beyond": {
+     "1e-9": 90,
+     "1e-6": 90,
+     "1e-3": 90,
+     "1e-2": 54,
+     "1e-1": 52
+    },
+    "largest_turn_degrees": "31.56",
+    "turned_beyond_1e-6": 48
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 0,
+    "tilted_paired_same_sign_within_1e-1": 0,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 44,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 1,
+    "total_squared": "35.2332",
+    "runner_up_symmetry": 5,
+    "runner_up_total_squared": "35.2332",
+    "largest_move": "1.331",
+    "rms_move": "0.625684",
+    "bottleneck": "1.16565",
+    "moved_beyond": {
+     "1e-9": 90,
+     "1e-6": 90,
+     "1e-3": 90,
+     "1e-2": 54,
+     "1e-1": 52
+    },
+    "nearest_one_to_one": false,
+    "turned_beyond_1_degree": 44,
+    "tilts_reversed_beyond_1_degree": 0
+   }
+  }
+ ]
+}

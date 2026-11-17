@@ -5451,7 +5451,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/117.html
   canonical: cases/117.html
@@ -5547,7 +5547,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/128.html
   canonical: cases/128.html
@@ -5595,7 +5595,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/133.html
   canonical: cases/133.html
@@ -5651,7 +5651,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/14.html
   canonical: cases/14.html
@@ -5723,7 +5723,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-04'
+  lastmod: '2026-11-15'
   status: live
 - path: cases/148.html
   canonical: cases/148.html
@@ -5811,7 +5811,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-11'
   status: live
 - path: cases/158.html
   canonical: cases/158.html
@@ -5875,7 +5875,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/165.html
   canonical: cases/165.html
@@ -6003,7 +6003,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-12'
   status: live
 - path: cases/18.html
   canonical: cases/18.html
@@ -6115,7 +6115,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/192.html
   canonical: cases/192.html
@@ -6235,7 +6235,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-05'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -6379,7 +6379,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/221.html
   canonical: cases/221.html
@@ -6443,7 +6443,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-15'
   status: live
 - path: cases/229.html
   canonical: cases/229.html
@@ -6483,7 +6483,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-09'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/233.html
   canonical: cases/233.html
@@ -6523,7 +6523,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-12'
   status: live
 - path: cases/238.html
   canonical: cases/238.html
@@ -6651,7 +6651,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/252.html
   canonical: cases/252.html
@@ -6763,7 +6763,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/265.html
   canonical: cases/265.html
@@ -6803,7 +6803,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-11'
+  lastmod: '2026-11-13'
   status: live
 - path: cases/27.html
   canonical: cases/27.html
@@ -6939,7 +6939,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/285.html
   canonical: cases/285.html
@@ -7051,7 +7051,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-26'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/298.html
   canonical: cases/298.html
@@ -7131,7 +7131,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/306.html
   canonical: cases/306.html
@@ -7251,7 +7251,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/32.html
   canonical: cases/32.html
@@ -7403,7 +7403,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/45.html
   canonical: cases/45.html
@@ -7531,7 +7531,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/6.html
   canonical: cases/6.html
@@ -7683,7 +7683,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-02'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/77.html
   canonical: cases/77.html
@@ -7811,7 +7811,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-16'
   status: live
 - path: cases/91.html
   canonical: cases/91.html
@@ -7851,7 +7851,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-02'
+  lastmod: '2026-11-14'
   status: live
 - path: cases/96.html
   canonical: cases/96.html
@@ -24123,6 +24123,805 @@ urls:
     - docs/project/reviews/review-2026-11-11-ozden-943-947.md
     - packing/campaign/issue-intake/upper-bounds-943-947-20261111/README.md
     - packing/devtools/upper_bound_reports.py
+- path: result/t-291.html
+  canonical: result/t-291.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 179
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s179 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-ozden-954-certificate-report
+    - E-ozden-954-exact-feasibility
+    - E-ozden-954-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/README.md
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/source/n-179-candidate.yaml
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/source/n-179-decimal-pose.yaml
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/measure/contraction-n179.json
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/measure/contraction-n179-own.json
+    - packing/resources/web/ozden-s179-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s179-review-2026-11-11/out/check-n179.json
+    - packing/resources/web/ozden-s179-review-2026-11-11/out/controls-n179.json
+    - packing/resources/web/ozden-s179-review-2026-11-11/out/identity-n179.json
+    - packing/resources/web/ozden-s179-review-2026-11-11/out/band-n179.json
+    - docs/project/reviews/review-2026-11-11-ozden-954.md
+    - packing/campaign/issue-intake/upper-bounds-954-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-292.html
+  canonical: result/t-292.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 132
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s132 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-de-winter-s132-certificate-report
+    - E-de-winter-s132-exact-feasibility
+    - E-de-winter-s132-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/README.md
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_witness.yaml
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/source/n132/n132_exact.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/contraction-n132-own.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-11-dewinter-132-157.md
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/README.md
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/check-n132.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/controls-n132.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/lineage.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/compare-lane.json
+- path: result/t-293.html
+  canonical: result/t-293.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 157
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s157 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-de-winter-s157-certificate-report
+    - E-de-winter-s157-exact-feasibility
+    - E-de-winter-s157-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/README.md
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_witness.yaml
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/source/n157/n157_exact.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157.json
+    - packing/resources/web/de-winter-s157-upper-bound-2026-11-11/measure/contraction-n157-own.json
+    - packing/resources/web/de-winter-s132-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-11-dewinter-132-157.md
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/README.md
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/check-n157.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/controls-n157.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/lineage.json
+    - packing/resources/web/dewinter-132-157-review-2026-11-11/out/compare-lane.json
+- path: result/t-294.html
+  canonical: result/t-294.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 179
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s179 issue 959 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-ozden-959-certificate-report
+    - E-ozden-959-exact-feasibility
+    - E-ozden-959-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/README.md
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/acquisition/claims.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/source/n-179-candidate.yaml
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/source/n-179-decimal-pose.yaml
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/identity.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/core-n070.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179-own.json
+    - packing/resources/web/ozden-s179-issue959-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/check-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/controls-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/identity-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/s70-n179.json
+    - packing/resources/web/ozden-s179-959-review-2026-11-12/out/contract-n179.json
+    - docs/project/reviews/review-2026-11-12-ozden-959.md
+    - packing/campaign/issue-intake/upper-bounds-959-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/measure_core.py
+- path: result/t-295.html
+  canonical: result/t-295.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-11'
+  lastmod: '2026-11-11'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 237
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s237 upper bound 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-ozden-960-certificate-report
+    - E-ozden-960-exact-feasibility
+    - E-ozden-960-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/README.md
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/acquisition/claims.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/source/n-237-candidate.yaml
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/source/n-237-decimal-pose.yaml
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/identity.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/contraction-n237.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/contraction-n237-t189.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/contraction-n237-own.json
+    - packing/resources/web/ozden-s237-upper-bound-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/check-n237.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/controls-n237.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/identity-n237.json
+    - packing/resources/web/ozden-s237-review-2026-11-11/out/band-n237.json
+    - docs/project/reviews/review-2026-11-11-ozden-960.md
+    - packing/campaign/issue-intake/upper-bounds-960-20261111/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-296.html
+  canonical: result/t-296.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-12'
+  lastmod: '2026-11-12'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 269
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s269 issue 962 2026-11-11]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-ozden-962-certificate-report
+    - E-ozden-962-exact-feasibility
+    - E-ozden-962-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/README.md
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/acquisition/claims.json
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/source/n-269-candidate.yaml
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/source/n-269-decimal-pose.yaml
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/measure/identity.json
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/measure/contraction-n269.json
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/measure/contraction-n269-own.json
+    - packing/resources/web/ozden-s269-issue962-2026-11-11/measure/l-step-scan.json
+    - packing/resources/web/ozden-s269-962-review-2026-11-12/out/check-n269.json
+    - packing/resources/web/ozden-s269-962-review-2026-11-12/out/controls-n269.json
+    - packing/resources/web/ozden-s269-962-review-2026-11-12/out/identity-n269.json
+    - packing/resources/web/ozden-s269-962-review-2026-11-12/out/lineage-n269.json
+    - packing/resources/web/ozden-s269-962-review-2026-11-12/out/contraction-new.json
+    - docs/project/reviews/review-2026-11-12-ozden-962.md
+    - packing/campaign/issue-intake/upper-bounds-962-20261112/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-297.html
+  canonical: result/t-297.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-12'
+  lastmod: '2026-11-12'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 269
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s269 upper bound 2026-11-12]'
+      published: '2026-11-12'
+    builds_on: null
+    evidence:
+    - E-ozden-967-certificate-report
+    - E-ozden-967-exact-feasibility
+    - E-ozden-967-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/README.md
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/acquisition/claims.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/source/n-269-candidate.yaml
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/source/n-269-decimal-pose.yaml
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/measure/identity.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/measure/contraction-n269.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/measure/contraction-n269-own.json
+    - packing/resources/web/ozden-s269-upper-bound-2026-11-12/measure/l-step-scan.json
+    - packing/resources/web/ozden-s269-967-review-2026-11-12/out/check-n269.json
+    - packing/resources/web/ozden-s269-967-review-2026-11-12/out/controls-n269.json
+    - packing/resources/web/ozden-s269-967-review-2026-11-12/out/identity-n269.json
+    - packing/resources/web/ozden-s269-967-review-2026-11-12/out/lineage-n269.json
+    - packing/resources/web/ozden-s269-967-review-2026-11-12/out/contraction-new.json
+    - docs/project/reviews/review-2026-11-12-ozden-967.md
+    - packing/campaign/issue-intake/upper-bounds-967-20261112/README.md
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-298.html
+  canonical: result/t-298.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-14'
+  lastmod: '2026-11-14'
+  status: live
+  identity:
+    kind: optimality
+    scope:
+      n_values:
+      - 44
+      - 59
+      - 76
+      - 95
+      - 116
+      - 139
+      - 164
+      - 191
+      - 220
+      - 251
+      - 284
+      - 319
+    established: null
+    attribution:
+      source_keys:
+      - '[Khalili Gharabaghi k2m5 family 2026-11-13]'
+      published: '2026-11-13'
+    builds_on: null
+    evidence:
+    - E-khalili-973-k2m5-family-report
+    - E-khalili-973-valid11-report
+    - E-khalili-973-lean-report
+    - E-khalili-973-review-partial-checks
+    - E-khalili-973-replay-sample
+    - E-khalili-973-review-replay-sample
+    - E-basic-grid-upper
+    artifacts:
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/README.md
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/README.md
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/certificate/sol_exact_box11.txt.gz
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/paper/k2m5.pdf
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/k2m5-family/lean/K2m5/Inst.lean
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/receipts/verify_fast.log
+    - packing/resources/web/moh63-dev-k2m5-family-2026-11-13/receipts/compare.json.gz
+    - packing/resources/web/evand-square-packing-2026-10-24/README.md
+    - packing/resources/web/khalili-gharabaghi-k2m5-973-review-2026-11-14/README.md
+    - docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md
+    - packing/devtools/replay_k2m5_family.py
+- path: result/t-299.html
+  canonical: result/t-299.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-14'
+  lastmod: '2026-11-14'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 297
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s297 upper bound 2026-11-14]'
+      published: '2026-11-14'
+    builds_on: null
+    evidence:
+    - E-de-winter-s297-certificate-report
+    - E-de-winter-s297-exact-feasibility
+    - E-de-winter-s297-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/README.md
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/acquisition/claims.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_witness.yaml
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/source/n297/n297_exact.json.gz
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/identity.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/contraction-n297.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/contraction-n297-own.json
+    - packing/resources/web/de-winter-s297-upper-bound-2026-11-14/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-977-979-20261114/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-14-de-winter-977-979.md
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/README.md
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/check-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/controls-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/lineage-n297.json
+    - packing/resources/web/de-winter-977-979-review-2026-11-14/out/sides.json
+- path: result/t-300.html
+  canonical: result/t-300.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-14'
+  lastmod: '2026-11-14'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 228
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s228 upper bound 2026-11-14]'
+      published: '2026-11-14'
+    builds_on: null
+    evidence:
+    - E-ozden-983-certificate-report
+    - E-ozden-983-exact-feasibility
+    - E-ozden-983-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/README.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/acquisition/claims.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/source/n-228-candidate.yaml
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/source/n-228-decimal-pose.yaml
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/identity.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/contraction-n228.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/contraction-n228-own.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-14/measure/l-step-scan.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/check-n228.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/controls-n228.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/identity-n228.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/lineage-n228.json
+    - packing/resources/web/ozden-s228-983-review-2026-11-14/out/contraction-new.json
+    - docs/project/reviews/review-2026-11-14-ozden-983.md
+    - packing/campaign/issue-intake/upper-bounds-983-20261114/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-301.html
+  canonical: result/t-301.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-14'
+  lastmod: '2026-11-14'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 228
+    established: null
+    attribution:
+      source_keys:
+      - '[Ono issue 984 2026-11-14]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-ono-984-certificate-report
+    - E-ono-984-exact-feasibility
+    - E-ono-984-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ono-issue984-2026-11-14/README.md
+    - packing/resources/web/ono-issue984-2026-11-14/acquisition/claims.json
+    - packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json.gz
+    - packing/resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/evidence/registration/n228.cert
+    - packing/resources/web/ono-issue984-2026-11-14/receipts/exact-certification.json.xz
+    - packing/resources/web/ono-issue984-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/ono-issue984-2026-11-14/measure/identity.json
+    - packing/resources/web/ono-issue984-2026-11-14/measure/contraction-n228-t300.json
+    - packing/resources/web/ono-issue984-2026-11-14/measure/contraction-n228-t174.json
+    - packing/resources/web/ono-issue984-2026-11-14/measure/contraction-n228-own.json
+    - packing/resources/web/ono-issue984-2026-11-14/measure/l-step-scan.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/check-n228.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n228.json
+    - docs/project/reviews/review-2026-11-14-ono-984-985.md
+    - packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-302.html
+  canonical: result/t-302.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-14'
+  lastmod: '2026-11-14'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 147
+    established: null
+    attribution:
+      source_keys:
+      - '[Ono issue 985 2026-11-14]'
+      published: '2026-11-11'
+    builds_on: null
+    evidence:
+    - E-ono-985-certificate-report
+    - E-ono-985-exact-feasibility
+    - E-ono-985-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ono-issue985-2026-11-14/README.md
+    - packing/resources/web/ono-issue985-2026-11-14/acquisition/claims.json
+    - packing/resources/web/ono-issue985-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n147_S65104355.json
+    - packing/resources/web/ono-issue985-2026-11-14/source/runs/2026-11-11_fable-5.2/evidence/registration/n147.cert
+    - packing/resources/web/ono-issue985-2026-11-14/receipts/exact-certification.json.xz
+    - packing/resources/web/ono-issue985-2026-11-14/receipts/sharp-controls.json
+    - packing/resources/web/ono-issue985-2026-11-14/measure/identity.json
+    - packing/resources/web/ono-issue985-2026-11-14/measure/contraction-n147-t155.json
+    - packing/resources/web/ono-issue985-2026-11-14/measure/contraction-n147-own.json
+    - packing/resources/web/ono-issue985-2026-11-14/measure/l-step-scan.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/check-n147.json
+    - packing/resources/web/ono-984-985-review-2026-11-14/out/controls-n147.json
+    - docs/project/reviews/review-2026-11-14-ono-984-985.md
+    - packing/campaign/issue-intake/upper-bounds-984-985-20261114/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-303.html
+  canonical: result/t-303.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-15'
+  lastmod: '2026-11-15'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 90
+    established: null
+    attribution:
+      source_keys:
+      - '[jazivxt s90 upper bound 2026-11-15]'
+      published: '2026-11-15'
+    builds_on: null
+    evidence:
+    - E-jazivxt-989-certificate-report
+    - E-jazivxt-989-exact-feasibility
+    - E-jazivxt-989-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/README.md
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/acquisition/claims.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/source/n90.cert
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/exact-certification.json.xz
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/identity.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/contraction-n090.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/contraction-n090-own.json
+    - packing/resources/web/jazivxt-s90-upper-bound-2026-11-15/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-989-20261115/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-15-jazivxt-989.md
+    - packing/resources/web/jazivxt-s90-989-review-2026-11-15/out/check-n90.json
+    - packing/resources/web/jazivxt-s90-989-review-2026-11-15/out/controls-n90.json
+    - packing/resources/web/jazivxt-s90-989-review-2026-11-15/out/describe-n90.json
+- path: result/t-304.html
+  canonical: result/t-304.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-15'
+  lastmod: '2026-11-15'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 90
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s90 upper bound 2026-11-15]'
+      published: '2026-11-15'
+    builds_on: null
+    evidence:
+    - E-de-winter-997-certificate-report
+    - E-de-winter-997-exact-feasibility
+    - E-de-winter-997-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/README.md
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/acquisition/claims.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/source/n90/n90_exact.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/identity.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090-996.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090-own.json
+    - packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/l-step-scan.json
+    - packing/resources/web/de-winter-s90-64d5ee7-2026-11-15/README.md
+    - packing/campaign/issue-intake/upper-bounds-996-997-20261115/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-15-de-winter-996.md
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/check-n90-997.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/controls-n90-997.json
+    - packing/resources/web/de-winter-996-review-2026-11-15/addendum-997/out/compare-997-996.json
+- path: result/t-305.html
+  canonical: result/t-305.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 127
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-127-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n127.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n127.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n127.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n127-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-306.html
+  canonical: result/t-306.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-204-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n204.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n204.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n204.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n204-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-307.html
+  canonical: result/t-307.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 232
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-232-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n232.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n232.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n232.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n232-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-308.html
+  canonical: result/t-308.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 264
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-264-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n264.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n264.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n264.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n264-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
+- path: result/t-309.html
+  canonical: result/t-309.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-16'
+  lastmod: '2026-11-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 305
+    established: null
+    attribution:
+      source_keys:
+      - '[JoeGun upper bounds 2026-11-16]'
+      published: '2026-11-16'
+    builds_on: null
+    evidence:
+    - E-joegun-1001-certificate-report
+    - E-joegun-1001-exact-feasibility
+    - E-joegun-1001-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/README.md
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/acquisition/claims.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/source/n-305-candidate.yaml
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/exact-certification.json.xz
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/receipts/sharp-controls-n305.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/identity-n305.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n305.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/contraction-n305-own.json
+    - packing/resources/web/joegun-upper-bounds-2026-11-16/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-16-joegun-1001.md
+    - packing/resources/web/joegun-1001-review-2026-11-16/README.md
 - path: results.html
   canonical: results.html
   kind: page

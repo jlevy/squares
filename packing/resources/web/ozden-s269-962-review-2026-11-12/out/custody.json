@@ -1,0 +1,125 @@
+{
+ "program": "l117_custody.py",
+ "clone": {
+  "head": "fdab2c0073ea91701d0d8429663faa6e5c7f831f",
+  "commits": 1,
+  "parents": "",
+  "author": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+  "author_date": "2026-11-11T23:34:47+00:00",
+  "committer": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+  "commit_date": "2026-11-11T23:34:47+00:00",
+  "tree": "1068f77d5c76df63379e371d10d98b6f8f75df52",
+  "status_clean": true,
+  "files": [
+   {
+    "path": "LICENSE-evand-square-packing.txt",
+    "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+    "worktree_equals_blob": true,
+    "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+    "copies_in_repository": 46,
+    "example_copies": [
+     "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt",
+     "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE",
+     "packing/resources/web/evand-compositions-2026-10-13/source/LICENSE"
+    ]
+   },
+   {
+    "path": "LICENSE.md",
+    "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+    "worktree_equals_blob": true,
+    "sha256": "5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c",
+    "copies_in_repository": 17,
+    "example_copies": [
+     "packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/LICENSE.md",
+     "packing/resources/web/ozden-s172-upper-bound-2026-11-09/source/LICENSE.md",
+     "packing/resources/web/ozden-s179-upper-bound-2026-11-11/source/LICENSE.md"
+    ]
+   },
+   {
+    "path": "README.md",
+    "blob": "adf43916ce9d5cc5a2a147033efb89fe2264ca11",
+    "worktree_equals_blob": true,
+    "sha256": "2dbab755fa1d7c474bbcfbea692f5b488ac7012df57d56229cd7942a4eacf986",
+    "copies_in_repository": 0,
+    "example_copies": []
+   },
+   {
+    "path": "n-269-candidate.yaml",
+    "blob": "c1a534599485b8a79e054b6bae4dc37e2836957a",
+    "worktree_equals_blob": true,
+    "sha256": "54b408b2f1b45fc3d0a1330767c8740f0889eecb73f5fcf7888710526dbcc26b",
+    "copies_in_repository": 0,
+    "example_copies": []
+   },
+   {
+    "path": "n-269-decimal-pose.yaml",
+    "blob": "f14e09eaf668fa08b1bd6739aa2b00fe911ae5d3",
+    "worktree_equals_blob": true,
+    "sha256": "1d68f5a5d76eea53cb77c58ee710ca9041b75c3bcbac2af1311bfab9a75dd50a",
+    "copies_in_repository": 0,
+    "example_copies": []
+   },
+   {
+    "path": "n269-witness.json",
+    "blob": "0292f68e1152261da3b9b03787f0ce651cf56d6d",
+    "worktree_equals_blob": true,
+    "sha256": "4b7ac2a7402037b047c04e239d239042228ae6c68f09cb917e09fa128f5b9cc0",
+    "copies_in_repository": 0,
+    "example_copies": []
+   },
+   {
+    "path": "packing-witness-verify.txt",
+    "blob": "57787bb73dc18b0c84f0940ff5a3c3c54dbb32d9",
+    "worktree_equals_blob": true,
+    "sha256": "dcf176d3887851e6bfa4b97622cc56c7d625c0aa252252a78d980d67c17b3412",
+    "copies_in_repository": 0,
+    "example_copies": []
+   },
+   {
+    "path": "records/n-269-candidate-diff.png",
+    "blob": "a214e62df19a129ca0adf016eb43d17760d321e3",
+    "worktree_equals_blob": true,
+    "sha256": "6db28ad115c93b8ec21fb6eb2b322bc1f595bd090078e796ec15e352e9142b03",
+    "copies_in_repository": 0,
+    "example_copies": []
+   },
+   {
+    "path": "sqcheck-output.txt",
+    "blob": "9fdc6a0892cd4507a0182ed3b9de710c4a338f34",
+    "worktree_equals_blob": true,
+    "sha256": "7adad6e650009e07cdf2ba6eb327a42d94c208f9013c50e710761cd613f2bb53",
+    "copies_in_repository": 0,
+    "example_copies": []
+   },
+   {
+    "path": "verifier/README.md",
+    "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+    "worktree_equals_blob": true,
+    "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+    "copies_in_repository": 1,
+    "example_copies": [
+     "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+    ]
+   },
+   {
+    "path": "verifier/sqcheck.py",
+    "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+    "worktree_equals_blob": true,
+    "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+    "copies_in_repository": 1,
+    "example_copies": [
+     "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+    ]
+   }
+  ]
+ },
+ "issue_created": "2026-11-11T23:35:04Z",
+ "seconds_commit_to_issue": 17.0,
+ "comment_947_created": "2026-11-11T23:35:10Z",
+ "seconds_issue_to_comment": 6.0,
+ "main_0af33d85": "0af33d857a7c9fb18d161b73b46c81fb826b5ed6 2026-11-11T14:36:52-08:00",
+ "next_main_first_parent": [
+  "2fe557598 2026-11-11T15:50:49-08:00"
+ ],
+ "issue_search_time_stated": "2026-11-11 15:35 PST = 2026-11-11T23:35Z"
+}

@@ -1,0 +1,20 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane L179 of 15 November (think-ud9e): the final reply on #992 (09:30:33Z), by
+  jlevy after #994 merged as 538b7833a and its Pages deploy and verify-deployment passed
+  (run 43697866071), is recorded, with the issue closed on 15 November and read through the
+  reply. The reply says the bound holds exactly and why it is not recorded, Couzo's #763 row
+  at 977 being below it; it names no register or evidence id, so the result is recorded as
+  spoken of, with no id, as #979's and #942's are (#900). No result, row, rung, side, bound,
+  mark, score, credit holder, pin or block changes. Against origin/main 942c1271f (#993):
+  devtools.compare_paper_renders rendered the methods survey into empty site directories,
+  the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once
+  with that main's result-requests.yaml swapped in: its 43 files were byte-identical across
+  the three. No PDF was printed; it prints from that HTML. The survey keeps its version,
+  v0.2.7.

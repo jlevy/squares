@@ -132,6 +132,15 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: 935 and 936 (T-282, T-283): 172 left, its new certificate stable across the tolerances,
 #: and 270 joined, with three squares on a wall and 31 more 7.3e-8 to 2.9e-6 from one
 #: (review F4 of #935 and #936).
+#: The pass of 15 November 2026 (think-17ex) moved it at 147 and 228, to Roberto Ono's
+#: certificates (T-302, T-301), each opened from contact by about 3e-10 between pairs and
+#: touching three walls: both joined. The same pass (think-i8y9) moved it at 90, from the
+#: grid to jazivxt's certificate (T-303), a contact arrangement opened by about 1.2e-12
+#: between pairs and 2.1e-15 from the left and bottom walls: 90 joined.
+#: The pass of 16 November 2026 (think-0y9m) moved it at 127 and 305 from T-174, at 204
+#: from T-268, 232 from T-275 and 264 from T-186, to JoeGun's certificates (T-305 to T-309),
+#: each opened from contact by about 1e-11 or 1e-12 between pairs and touching three walls:
+#: 127 and 305 joined, and 204, 232 and 264 stayed.
 #: Re-screening the adopted counts with the screen's own `--update --n` rebuilds the
 #: retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -140,17 +149,32 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
+        # 90 joined on 15 November 2026 with jazivxt's certificate there (T-303,
+        # think-i8y9): its least pair margin, 1.2e-12, lies between the screen's
+        # tolerances.
+        90,
     ],
     "n=1..200": [
         68,
         84,
         86,
         88,
+        90,
         105,
         106,
+        # 127 joined on 16 November 2026 with JoeGun's certificate there (T-305,
+        # think-0y9m), a near-contact arrangement opened by about 1.1e-11; 204, 232 and
+        # 264 stayed with his certificates there (T-306 to T-308), and 305 joined with
+        # T-309, opened the same way.
+        127,
         129,
-        132,
+        # 132 left on 11 November 2026: Joost de Winter's certificate there (T-292,
+        # think-bcfs) is stable across tolerances.
         146,
+        # 147 joined on 15 November 2026 with Roberto Ono's certificate there (T-302,
+        # think-17ex), and 228 with his certificate there (T-301): their least pair margins,
+        # 3.0e-10 and 2.4e-10, lie between the screen's tolerances, as T-196's did.
+        147,
         # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
         # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
         # certificates there (T-287, T-288, think-xq4o).
@@ -167,11 +191,22 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
+        90,
         105,
         106,
+        # 127 joined on 16 November 2026 with JoeGun's certificate there (T-305,
+        # think-0y9m), a near-contact arrangement opened by about 1.1e-11; 204, 232 and
+        # 264 stayed with his certificates there (T-306 to T-308), and 305 joined with
+        # T-309, opened the same way.
+        127,
         129,
-        132,
+        # 132 left on 11 November 2026: Joost de Winter's certificate there (T-292,
+        # think-bcfs) is stable across tolerances.
         146,
+        # 147 joined on 15 November 2026 with Roberto Ono's certificate there (T-302,
+        # think-17ex), and 228 with his certificate there (T-301): their least pair margins,
+        # 3.0e-10 and 2.4e-10, lie between the screen's tolerances, as T-196's did.
+        147,
         # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
         # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
         # certificates there (T-287, T-288, think-xq4o).
@@ -187,6 +222,7 @@ GOLDEN_UNSTABLE = {
         # 207 left on 23 October 2026: T-174's algebraic witness there is stable across
         # tolerances (think-ot5c).
         227,
+        228,
         229,
         232,
         241,
@@ -202,7 +238,8 @@ GOLDEN_UNSTABLE = {
         # witness stable across tolerances there (think-lrj4), and joined again on 9
         # November 2026 with Doğa Özden's further arrangement of it (T-276, think-463r).
         268,
-        269,
+        # 269 left on 13 November 2026: Doğa Özden's certificate of issue 967 there (T-297,
+        # think-n73d) is stable across tolerances.
         # 270 joined on 9 November 2026 with Doğa Özden's further arrangement of T-224's
         # packing (T-283, think-he66).
         270,
@@ -214,6 +251,7 @@ GOLDEN_UNSTABLE = {
         # 303 left on 9 November 2026: Doğa Özden's certificate there (T-278, think-463r)
         # is stable across tolerances.
         304,
+        305,
         307,
     ],
 }

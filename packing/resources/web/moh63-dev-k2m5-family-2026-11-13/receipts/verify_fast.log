@@ -1,0 +1,33 @@
+# command: bash verification/verify.sh
+# cwd: the root of the k2m5-family tree staged by devtools.replay_k2m5_family from packing/resources/web/moh63-dev-k2m5-family-2026-11-13 (pinned 2c0b1b99), every file checked against its manifest
+# python3: /home/user/squares-l145/packing/.venv/bin/python3 -I through the shim /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/l145-work/shim/python3 (script directory appended to sys.path)
+# host: 4 cores; load 0.19 0.25 0.28; started 2026-11-14T02:12:05Z
+== 0. certificate hashes
+sol_exact_box11.txt: OK
+sol_exact_family.txt: OK
+sol_exact.json: OK
+== 1. exact bookkeeping: total = 121 - 4D, D > 5/4, D4 invariance
+segments 13244, total 28909433072241/250000000000 = 115.637732288964, D = 1340566927759/1000000000000 = 1.340566927759
+total = 121 - 4D exactly; D > 5/4 (so k^2 - 4D < k^2 - 5 for every k); D4-invariant; family file agrees
+SANITY-OK
+== 2. locality on the built boards k = 10, 12, 13, 20 (exact; Lemma 7 of the paper is the general proof)
+LOCALITY OK
+== 3. audit of the recorded zmx2 sweep (theta = 0 and first-order D4 sweep, 12,100 roots)
+cover hashes of the cov/ dumps (same settings: d4, first-order, depth 40, node cap 2e7): ['a53f06f25d54b3df']
+cert0: 2,500 roots VERIFIED; columns 55, roots 12100, cover hash ['a53f06f25d54b3df'], totals ['28909433072241/250000000000']
+roots with uncertified boxes: 76; tight-tile roots dumped: 75; other: [9632]
+ZMX2-AUDIT-OK
+== 4. root 9632: zmx2 and qx2_zm.py together leave nothing uncertified
+zmx2 uncertified boxes: 6850; all inside W: True
+qx2_zm run on W: True; one qx2 root meets W: True; qx2 uncertified boxes: 83 (log says 83)
+qx2-uncertified boxes meeting a zmx2-uncertified box: 0
+ROOT-9632-CLOSED
+== 5. Tight-Tile Lemma: every job and chart certified; every leftover zmx2 box covered
+jobs ALL-OK 308 (of which fixed by out_fix reruns 2), NOT-OK 0, unfinished 0; cells 2747676
+tight-tile jobs (u0 = 1/4000): 308; not certified: 0
+u0 = 1/2000 jobs: 15; not certified: 0
+extra u0 = 1/2000 regions used: 5 of 5
+files 75 (finished 75); uncertified boxes 1255023; inside certified tight-tile regions 1255023; OUTSIDE 0
+COVERAGE-OK
+fast checks done
+# finished 2026-11-14T02:12:42Z; exit 0; wall 37.322 s; CPU 37.3 s (user 36.188 + sys 1.069); load 0.99 0.44 0.35

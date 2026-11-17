@@ -1,0 +1,33 @@
+{
+  "fetched_at": "2026-11-14T19:27:19Z",
+  "issue_now": {
+    "comments": 0,
+    "labels": [
+      "intake"
+    ],
+    "updated_at": "2026-11-14T18:57:20Z"
+  },
+  "timeline": [
+    {
+      "actor": "jlevy",
+      "created_at": "2026-11-14T18:57:20Z",
+      "event": "labeled",
+      "label": "intake",
+      "source": null
+    },
+    {
+      "actor": "jlevy",
+      "created_at": "2026-11-14T19:15:53Z",
+      "event": "referenced",
+      "label": null,
+      "source": null
+    },
+    {
+      "actor": "jlevy",
+      "created_at": "2026-11-14T19:23:09Z",
+      "event": "referenced",
+      "label": null,
+      "source": null
+    }
+  ]
+}

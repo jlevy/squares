@@ -44,7 +44,10 @@ def test_presets_cannot_inherit_broader_selection_or_optional_chromium(
     ((context, command, progress),) = seen
     assert command[-1] == target
     assert command[command.index("-n") + 1] == "0"
-    assert {"-s", "-vv", "-x", "faulthandler_timeout=45"} <= set(command)
+    assert {"-s", "-vv", "-x", "devtools.stack_watchdog", "stack_watchdog_timeout=45"} <= set(
+        command
+    )
+    assert not any("faulthandler_timeout" in part for part in command)
     assert "--collect-only" not in context.environment["PYTEST_ADDOPTS"]
     assert "SQPACK_SITE_PREVIEW_URL" not in context.environment
     assert "PACKING_REACHABLE_TEST_ARTIFACT_STEM" not in context.environment

@@ -1,0 +1,49 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
+  - packing/devtools/site_resources.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L170 of 15 November (think-i8y9): jazivxt's issue 989 is retained, replayed and
+  registered as T-303, read by the existing evand-cert adapter, the stage 4 review of it
+  (L169) is mapped, and the case adopts it at 90, first adopted there, in place of the 10 x
+  10 grid, in the pass of 15 November, with its credit, the house writer's prose and source,
+  the hand-marked grid prose, the admitted view, the poster credit hold, the bound citations,
+  the composite figure, the gate's screen totals, the importer's packet, the other-projects
+  card, the requests entry for #989 and the coverage text that follow. No paper prints that
+  count's record, these records or that card. Against origin/main a3e4ea0c5 (#990):
+  devtools.compare_paper_renders rendered each paper into empty site directories, the math
+  passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that
+  main's copies of the eleven paths above swapped in. The optimality review, the
+  threshold-bound review and the methods survey are byte-identical across the three, 43
+  files each. The explainer's 55 files are deterministic, and only its Markdown and HTML
+  differ from the baseline; rendered again by hand both ways, the one difference in each is
+  the register count the explainer reads (registered_results, "one of N results the
+  framework has registered so far"), 303 here and 302 on that main. The novelty count is
+  unchanged (T-303 is previously-published), the bound citation it reads is n = 11's, which
+  this change does not touch, and the composite figure's entry at 90 and its totals change
+  without reaching the explainer's text, as the renders show. So the change is the live
+  register count, which follows the site's data and is not a revision of the paper, as the
+  L71 to L164 records say. No PDF was printed; each prints from that HTML. Every paper keeps
+  its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

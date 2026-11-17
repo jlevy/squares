@@ -1,0 +1,109 @@
+{
+ "program": "l180_digests.py",
+ "lane": "L180",
+ "frozen_digests": {
+  "checker-frozen-digests.txt: 64d5ee7:n90/n90_exact.json": true,
+  "checker-frozen-digests.txt: 64d5ee7:n90/n90_witness.yaml": true,
+  "checker-frozen-digests.txt: l180_reader.py": true,
+  "checker-frozen-digests.txt: l180_axes.py": true,
+  "checker-frozen-digests.txt: l180_clip.py": true,
+  "checker-frozen-digests.txt: l180_decide.py": true,
+  "checker-frozen-digests.txt: l180_check.py": true,
+  "checker-frozen-digests.txt: l180_geom.py": true,
+  "checker-frozen-digests.txt: l180_selftest.py": true,
+  "checker-frozen-digests.txt: out/selftest.json": true,
+  "checker-frozen-digests.txt: out/check-n90.json": true,
+  "controls-plan-digest.txt: programs/controls-plan.json": true,
+  "controls-plan-digest.txt: out/plan-facts-n90.json": true,
+  "controls-plan-digest.txt: out/check-n90.json": true,
+  "controls-plan-digest.txt: programs/l180_plan_facts.py": true,
+  "controls-plan-digest.txt: programs/l180_make_plan.py": true,
+  "findings-frozen-digest.txt: frozen/review-2026-11-15-de-winter-996.frozen.md": true,
+  "findings-frozen-digest.txt: frozen/checker-frozen-digests.txt": true,
+  "findings-frozen-digest.txt: frozen/controls-plan-digest.txt": true,
+  "findings-frozen-digest.txt: out/selftest.json": true,
+  "findings-frozen-digest.txt: out/check-n90.json": true,
+  "findings-frozen-digest.txt: out/plan-facts-n90.json": true,
+  "findings-frozen-digest.txt: out/controls-n90.json": true,
+  "findings-frozen-digest.txt: out/describe-n90.json": true,
+  "findings-frozen-digest.txt: programs/controls-plan.json": true,
+  "findings-frozen-digest.txt: programs/l180_controls.py": true,
+  "findings-frozen-digest.txt: programs/l180_describe.py": true
+ },
+ "all_frozen_digests_hold": true,
+ "rerun_exits": [
+  {
+   "program": "l180_selftest.py",
+   "exit": 0
+  },
+  {
+   "program": "l180_check.py",
+   "exit": 0
+  },
+  {
+   "program": "l180_plan_facts.py",
+   "exit": 0
+  },
+  {
+   "program": "l180_make_plan.py",
+   "exit": 0
+  },
+  {
+   "program": "l180_controls.py",
+   "exit": 0
+  },
+  {
+   "program": "l180_describe.py",
+   "exit": 0
+  }
+ ],
+ "rerun_equals_kept": {
+  "selftest.json": true,
+  "check-n90.json": true,
+  "plan-facts-n90.json": true,
+  "controls-n90.json": true,
+  "describe-n90.json": true,
+  "controls-plan.json": true
+ },
+ "rerun_reproduces_every_receipt": true,
+ "packet_files": {
+  "README.md": "f331f6f9349c33a3dcc0f51576c288b26e56d9cee2ad143c0f71f97bff7879b9",
+  "frozen/checker-frozen-digests.txt": "7c9550a0fb7b503af014f3b7b7596416f3e4fab55497e0ec09f94b9243094d2a",
+  "frozen/controls-plan-digest.txt": "391c434d32fdd2fd9629dafd11b022dba3b090928eadacb6fc3d7950f613f676",
+  "frozen/findings-frozen-digest.txt": "6e54e489868dd67f4dc8e3fb4979e2f2d2ec58bd95c42ac61f3528747ae03a4f",
+  "frozen/review-2026-11-15-de-winter-996.frozen.md": "6926820061e3abf79e727389f7c7b92316652872724aa21115a896fe822c1a9a",
+  "out/check-n90.json": "b6b364bab77730856de60407b695ca8dd6f0f3f3d883dc085a4d8080f71d1d0b",
+  "out/contraction-new-n90.json": "a6104f62527ad5cf8f8d50b9d1da8f6458a639a375498ceb5a41b14ec8a97535",
+  "out/contraction-t303-house-n90.json": "382c9a3e1dd7336dd8874f3273e1bbea13388c2de1a4d0559c9f136887840211",
+  "out/controls-n90.json": "2fe05d0a3d84f8453284ae276e8cd5b4f0df346abe16cdf7ad0a6c5e431ac7f3",
+  "out/custody.json": "d69f04d1c2e84d5cb4ad09ba934b84f2542883661579535a4b1419f46f733081",
+  "out/describe-n90.json": "e67c13966b6fdf4e54eb8be0c1c5dad80cbad600bfa289d855a202add9ae9337",
+  "out/grid-n90.txt": "ecd7e26d14ef8928a505dc7af47bab26db25dc1d46dac1639c87bc5428715dd1",
+  "out/identity-n90.json": "8638f0c1f44f60c40720a5ae7570ac8f35df0ecf0a394adfed53ec399e8257dd",
+  "out/lineage-n90.json": "89abf6f6fc179b0b1e7e8b4e640b1d10b4a71831cad058f04fb0871440b38efe",
+  "out/plan-facts-n90.json": "38c322c2982caf3078203938930cef651a56d3fe106f8f0a338e65245d1ac9d0",
+  "out/selftest.json": "ba9386fe3d7cb7539ee557344c3c59a46ea62f00e4eaccd172afc87a904413c6",
+  "out/sides.json": "b6f6b7e097db68510a5463cd19bb2b5bbd642d23cd0873431af8be8ce6a6cc5f",
+  "out/witness-read.json": "6fa0b04e81429eebfc5d4c88e2e7eafa207d5ab52ce49a5e89ff9c837b80e3e0",
+  "programs/__pycache__/l180_reader.cpython-314.pyc": "64fb10a382a09e9f2b21f12c061efc0c2f1028dd3f6eecaf39df4d0f8d1a209b",
+  "programs/controls-plan.json": "31a2b55110de9600dc8889648e738caf9c62fe7d4c6d67e491b08203bc0364b2",
+  "programs/issue-996.json": "ed7457020103079aa85cf83407823b8fea7695457b45ca945ae1a95da85c1f99",
+  "programs/l180_axes.py": "c7d9fcd2a181fa4d9b0841ee6b3f80fa8ffc86881e65e3faa8bfcf2247216a8a",
+  "programs/l180_check.py": "0e78fe1580713dd7c8e5620eb0c6753b48a2c2f8793f857d2c9786c9975703f2",
+  "programs/l180_clip.py": "c654769f886ca6f1b21985bf8b1bdcbf7c44fd4dd109d0417f03471254e8b8d8",
+  "programs/l180_controls.py": "37abb13791e588f42284161b30497d5ffd3f24fd5f225aa4826c3e60e1e688a0",
+  "programs/l180_custody.py": "7b2ff9ad65e6e45a6a4a33f06347287dd2fffba1cba6d229e5ef9a7cc4d91e2a",
+  "programs/l180_decide.py": "8431d0cd0a5e115767af62dfda322b9881b5dad3679e3b65eef13aea8050aa16",
+  "programs/l180_describe.py": "efae6bd3fcfd44aed6049eca0fc2f2e2995b481aaa9ad5b7ea02b8458ab18be8",
+  "programs/l180_digests.py": "9c2ad80c9e00e59ca76aeaedbf3aa8c21c27a147a6ee82713863f59e14ab7a1e",
+  "programs/l180_geom.py": "1403e7b8f8b1248b408cc54ce65f4ae1049372075d0d73def899d4f7ec61d0b1",
+  "programs/l180_grid.py": "b81da5b1e672524efae3f35ac893b3f918e94eee6b46822422c6ef93432ff231",
+  "programs/l180_lineage.py": "60cf0f841e2346ee39db0d0e85dc9bf3004d623cd3e09c0f613308c0396ef236",
+  "programs/l180_make_plan.py": "4e8100f474df8ea9669836ec1140daa9bffb9bd6c61c4b9ab9e12edefa3a1dd9",
+  "programs/l180_plan_facts.py": "c6fb615bb2663777d07879c8ec342d9a21e4e15aed1fe8740fa58c23dbe84308",
+  "programs/l180_reader.py": "54678a2eb8f49c0b20ea77549f44383512b66c7663cdf7c196ab33fee79479ad",
+  "programs/l180_selftest.py": "09d450bbf981ec03ab8597de286019fcf9ad80fc27d2ef42eeef5fc27d374055",
+  "programs/l180_sides.py": "9776da02a3fecc8d05663a4194e48d7eca76f1175435f52b2a908f2cb4564ad5",
+  "programs/l180_witness_read.py": "f7111d7afa02b3a4978e8445099f555b40360541d609f88058c14595db18adb4"
+ }
+}

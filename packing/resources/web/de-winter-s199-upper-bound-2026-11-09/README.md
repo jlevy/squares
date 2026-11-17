@@ -269,6 +269,48 @@ The review asks six informational questions. None holds a rung or the issues ope
 6. Which commit should the record cite for #939, `702c7af2` or `c4e65d0b`? Its files are
    the same at both.
 
+### The Author’s Answers
+
+Joost de Winter answered all six on 14 November 2026 on #946
+([issuecomment-6876291132](https://github.com/jlevy/squares/issues/946#issuecomment-6876291132),
+11:02:01Z), and repeated the two that concern #939 there
+([issuecomment-6876335132](https://github.com/jlevy/squares/issues/939#issuecomment-6876335132),
+11:04:59Z). The [s172 packet](../de-winter-s172-upper-bound-2026-11-10/README.md#stage-4-review)
+points here. The answers change no result: T-285 and T-286 stay held at V0/C1 for RV-3.
+
+1. **The bound (F1).** Yes. The bound is the certificate’s rational side,
+   13.6146898532835806 rounded up at 16 places (14.6146898532835806 at 199), and the
+   quintic’s root is the arrangement’s asserted optimum, supported numerically.
+2. **The L step (F2).** Yes. The border of 27 axis-aligned squares from 172 to 199 is
+   #938’s step, and #939’s gain against the house T-284 is 2.63 × 10⁻¹², as at 172. The
+   issue’s 0.00288 is the gap to the earlier record T-127.
+3. **The free squares.** Set by the procedure, with no meaning for the result. The squares
+   that touch nothing at the optimum were moved by a fixed (−10⁻⁴, −10⁻⁴) and turned by
+   10⁻⁴ rad, so that they stay clear of their neighbours in the certificate. The other
+   moved squares slide along their contacts, as F6 describes, and the side does not depend
+   on these positions.
+4. **The quintic.** Found by an integer relation search on the powers of the side, from 108
+   digits of the 130-digit solution, and confirmed by the sign test in `verify_exact.py`.
+   The 130-digit program solved the optimality conditions with the contact forces as
+   unknowns. The 390-digit one, written later as a new program, applies Newton’s method to
+   the contact equations alone, starting from the certificate, with no forces and no input
+   from the quintic. Both have one author, Claude Fable 5.2 under his direction, and no
+   derivation of the quintic from the contact equations exists.
+5. **The 734.** The contact conditions the 130-digit solver kept closed: those with a
+   positive contact force, and those it closed to keep the solution determined, so a pair
+   touching along an edge counts more than once. He could not reproduce the number from the
+   published files, and asks that the record use its own counts. He took it out of
+   `n199/README.md` in `6760360`; the copy retained here at `702c7af` still states it.
+6. **The commit.** `c4e65d0b`, the files of #939 being the same at both. This packet keeps
+   its pin, `702c7af`, the commit the issue names; `n199/` is the same at both.
+
+`6760360` (14 November, 11:03:30Z) also adds the Witness/v2 `softschema` header and a
+`claim` block to both witness files, lowercases their ids and drops their `notes` line.
+Its Git diff changes no line of a square or a side, so nothing here changes; it is read in
+[`campaign/intake-watch.yaml`](../../../campaign/intake-watch.yaml) and not retained.
+`packing-witness inspect` passes both files’ schema and refuses both on one loader rule: a
+`verified` claim needs a replayable `certificate` record, as at `57de046` for 132 and 157.
+
 ## What Is Not Established
 
 - **The quintic’s root as the local optimum.** The certificate proves s(199) ≤ S, the

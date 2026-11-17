@@ -12,8 +12,9 @@
 # also bounds s(172), unclaimed; #946 is the first report at 172, since the record carries no
 # deletion of an L inside the corpus. JoostdeWinter/square-packing's four commits between the two
 # pins (d3a020e, 71da0d5, a9486ed and a0c4fc8) add certificates at 37 counts above 324: #941
-# reports 15 (above324/) and #942 16 (above324_refined/), triaged on think-cen3, and no issue
-# reports a0c4fc8's six, left for triage; 8c0de9d (21:20:44Z on 10 November) first added n172/
+# reports 15 (above324/) and #942 16 (above324_refined/), triaged on think-cen3, and #942's
+# addendum comment (issuecomment-6772308414, 16:02:47Z on 10 November) reports a0c4fc8's six,
+# which the ledger upper-bounds-941-942-20261111 records; 8c0de9d (21:20:44Z on 10 November) first added n172/
 # at 1.4e-99 above the same root,
 # overwritten at c4e65d0 47 seconds before #946.
 format: intake-ledger-sources-v1

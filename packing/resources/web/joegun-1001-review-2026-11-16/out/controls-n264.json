@@ -1,0 +1,867 @@
+{
+ "count": "264",
+ "file": "n-264-candidate.yaml",
+ "sha256": "14fef8f163b2cdb9062f714cdd41d81dce2447691a2de55e3797810cdcd676ee",
+ "sha256_matches_plan": true,
+ "original": {
+  "verdict": "ACCEPT",
+  "reasons": [],
+  "disagreement_count": 0,
+  "wall_contacts": 9,
+  "crossing": [],
+  "touching_pairs": 0,
+  "overlapping": [],
+  "overlapping_count": 0,
+  "least_margin_sci": "1.20000001261e-12",
+  "digests": {
+   "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+   "clearances_sha256": "8e81fbf69d9bc0070449ea35fdc97703afdbcbf69a20a5b402a428ffced642d1"
+  }
+ },
+ "least_right_or_top_clearance": {
+  "value": "0",
+  "sci": "0"
+ },
+ "status": "EVERY_CONTROL_AS_STATED",
+ "as_stated": 32,
+ "controls_run": 32,
+ "priors": {
+  "P0_accept": true,
+  "P2_S1e_accepted": true,
+  "P2_S1f_refused": true
+ },
+ "controls": [
+  {
+   "id": "C0",
+   "text": "The closed form of l186_geom (centres and half-extents, a third formulation) recomputes every pair margin and every wall clearance of the original.",
+   "stated": "equal to method A's exact values for every pair and every square-wall pair",
+   "observed": {
+    "pair_mismatches": 0,
+    "square_clearance_mismatches": 0,
+    "pairs": 34716
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "R1",
+   "text": "The last square's entry deleted from the file text.",
+   "stated": "the reader refuses: n squares stated, n - 1 listed",
+   "observed": {
+    "reader": "n is 264, 263 squares listed"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "R2",
+   "text": "The side written as 2p/2q in the file text.",
+   "stated": "read; the side's value and every corner equal to the original's; the side flagged non-canonical, nothing else flagged that the original does not flag",
+   "observed": {
+    "reader": "read",
+    "noncanonical": [
+     "side"
+    ]
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "R3",
+   "text": "The ids of squares 1 and 2 exchanged in the file text.",
+   "stated": "the reader refuses: ids out of order",
+   "observed": {
+    "reader": "squares[0]: id 2, expected 1"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "R4",
+   "text": "The side written as a 40-place decimal (a YAML float) in the file text.",
+   "stated": "the reader refuses",
+   "observed": {
+    "reader": "$.witness.side: scalar of type tag:yaml.org,2002:float refused: '16.7738075980019988992007221626400988131'"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "R5",
+   "text": "Square 1's first x coordinate written with a leading '+'.",
+   "stated": "the reader refuses",
+   "observed": {
+    "reader": "squares[0].corners[0][0]: not a rational scalar: '+29045880131084071553430191146094031314930980406440783253517'"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "G1",
+   "text": "Square n given square 1's four corners.",
+   "stated": "REFUSE. Margins: every pair without square n unchanged; (k, n) equal to the original (1, k) for 1 < k < n; (1, n) exactly -1. Clearances: square n's equal to square 1's, the rest unchanged. Overlapping pairs exactly [(1, n)], B area exactly 1.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "overlapping pairs: 1"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [
+     [
+      1,
+      264,
+      "-1",
+      "1"
+     ]
+    ],
+    "overlapping_count": 1,
+    "least_margin_sci": "-1.00000000000e+0",
+    "digests": {
+     "margins_sha256": "c513b83dcb449e8ce123de260ca21ad5386b42f05d29610b98b9545fde0ec4ee",
+     "clearances_sha256": "d234857e54bba16b22de1c3f6f37ebcbc1af32367d5d22964d0f33645efda6d1"
+    }
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "G2",
+   "text": "Square 1 translated by (S, 0).",
+   "stated": "REFUSE. Square 1's clearances (L + S, B, R - S, T), every other square's unchanged; the only wall crossing (1, right) at R - S; B's area of square 1 inside the box 0 (when L >= 0); no overlapping pair; every pair without square 1 unchanged.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[1, 'right', '-4768126852939935730253717244538057102223665881232172821917758742059707452877494940181773/2136461160168471425089301870071346029269432159411905503434029671734044242000000000000000']]",
+     "area inside the box is not 1 (B): [1]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [
+     [
+      1,
+      "right",
+      "-4768126852939935730253717244538057102223665881232172821917758742059707452877494940181773/2136461160168471425089301870071346029269432159411905503434029671734044242000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "40238b188cffc3baaa5449c0b3122d66271b5991f13a0995d5f77bad578a4a56",
+     "clearances_sha256": "714b707ec1ca83ccc4d103f99272e786586b0f94ac9ffbce4fd267aacd93bd95"
+    }
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "G3",
+   "text": "Square 1's first corner moved by 1e-30 in x.",
+   "stated": "REFUSE: square 1, and only square 1, not a unit square by method A and by method B.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "not a unit square: A [1], B [1]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "5fd2d205f3982c9cdb71737241e5a746ec7aa92f6fb2b39a493948d845c09f47",
+     "clearances_sha256": "8e81fbf69d9bc0070449ea35fdc97703afdbcbf69a20a5b402a428ffced642d1"
+    },
+    "non_unit_A": [
+     1
+    ],
+    "non_unit_B": [
+     1
+    ]
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "G4",
+   "text": "Every square's corners listed in reverse order.",
+   "stated": "the original's verdict; margin and clearance lists identical; method A's counterclockwise and clockwise counts exchanged.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "8e81fbf69d9bc0070449ea35fdc97703afdbcbf69a20a5b402a428ffced642d1"
+    },
+    "senses": {
+     "ccw": 0,
+     "cw": 264,
+     "none": 0
+    }
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "G5",
+   "text": "Every square's corners listed from its second corner.",
+   "stated": "the original's verdict; margin and clearance lists identical; senses unchanged.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "8e81fbf69d9bc0070449ea35fdc97703afdbcbf69a20a5b402a428ffced642d1"
+    },
+    "senses": {
+     "ccw": 264,
+     "cw": 0,
+     "none": 0
+    }
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "G6",
+   "text": "Every corner transposed, (x, y) -> (y, x).",
+   "stated": "the original's verdict; margin list identical; clearances (L, B, R, T) -> (B, L, T, R); senses exchanged.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "f9c842a97537d26a96a0f104013c8d42dae96b44365b13cba11c0168da5d0eec"
+    },
+    "senses": {
+     "ccw": 0,
+     "cw": 264,
+     "none": 0
+    }
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "G7",
+   "text": "The packing turned a quarter about the box centre, (x, y) -> (S - y, x).",
+   "stated": "the original's verdict; margin list identical; clearances (L, B, R, T) -> (T, L, B, R); senses unchanged.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "c12d5515d4c99737ba2230ebccce7114e6e2433e4536332468c40f63a96525b1"
+    },
+    "senses": {
+     "ccw": 264,
+     "cw": 0,
+     "none": 0
+    }
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "G8",
+   "text": "The packing mirrored, (x, y) -> (S - x, y).",
+   "stated": "the original's verdict; margin list identical; clearances (L, B, R, T) -> (R, B, L, T); senses exchanged.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "5feda2d9d2b80e597e2377334b579a0b585aaba83c8496f528c50ee976b648da"
+    },
+    "senses": {
+     "ccw": 0,
+     "cw": 264,
+     "none": 0
+    }
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "S1a",
+   "text": "The side lowered by 1e-30.",
+   "stated": "Side rule with delta = 1e-30.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[208, 'top', '-1/1000000000000000000000000000000']]",
+     "area inside the box is not 1 (B): [208]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 8,
+    "crossing": [
+     [
+      208,
+      "top",
+      "-1/1000000000000000000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "21c51f97413168b9f8250e85860b6284d2a6da44f12dd09e741755ae8c1edf37"
+    },
+    "delta": "1/1000000000000000000000000000000",
+    "delta_sci": "1.00000000000e-30",
+    "new_side_decimal_30": "16.773807598001998899200722162639",
+    "expected_verdict": "REFUSE",
+    "expected_crossings": 1,
+    "expected_contacts": 8
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "S1b",
+   "text": "The side lowered by 1/q, one unit of its numerator over its own denominator q.",
+   "stated": "Side rule with delta = 1/q.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[208, 'top', '-1/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000']]",
+     "area inside the box is not 1 (B): [208]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 8,
+    "crossing": [
+     [
+      208,
+      "top",
+      "-1/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "4283e8169898cbd00363c05afd2509849b25362c8de2e09ec8d299ea6bc3056e"
+    },
+    "delta": "1/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000",
+    "delta_sci": "1.59999999999e-215",
+    "new_side_decimal_30": "16.773807598001998899200722162640",
+    "expected_verdict": "REFUSE",
+    "expected_crossings": 1,
+    "expected_contacts": 8
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "S1c",
+   "text": "The side lowered by W, the least right-or-top clearance.",
+   "stated": "Side rule with delta = W: accepted when the original is, with exactly the right/top square-wall pairs at clearance W now touching, beside the original's contacts.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "8e81fbf69d9bc0070449ea35fdc97703afdbcbf69a20a5b402a428ffced642d1"
+    },
+    "delta": "0",
+    "delta_sci": "0",
+    "new_side_decimal_30": "16.773807598001998899200722162640",
+    "expected_verdict": "ACCEPT",
+    "expected_crossings": 0,
+    "expected_contacts": 9
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "S1d",
+   "text": "The side lowered by W + 1e-30.",
+   "stated": "Side rule with delta = W + 1e-30: refused, the crossing square-wall pairs exactly those right/top pairs with clearance below W + 1e-30, each at its clearance - W - 1e-30.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[208, 'top', '-1/1000000000000000000000000000000']]",
+     "area inside the box is not 1 (B): [208]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 8,
+    "crossing": [
+     [
+      208,
+      "top",
+      "-1/1000000000000000000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "21c51f97413168b9f8250e85860b6284d2a6da44f12dd09e741755ae8c1edf37"
+    },
+    "delta": "1/1000000000000000000000000000000",
+    "delta_sci": "1.00000000000e-30",
+    "new_side_decimal_30": "16.773807598001998899200722162639",
+    "expected_verdict": "REFUSE",
+    "expected_crossings": 1,
+    "expected_contacts": 8
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "S1e",
+   "text": "The side set to the issue's claim C.",
+   "stated": "Side rule with delta = S - C (negative when C > S).",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 8,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "860d9bb6d95fe6485858ab4ae7699dab0dbb8a082262c694c1c434a117435392"
+    },
+    "delta": "-68799954864834993824178554068218456481833502095289323040375717804061368780579405763803377564091908388977130902881039107748023223173395735949665921524069378036935168624801407838037152680001488636765189/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000",
+    "delta_sci": "-1.10079927783e-15",
+    "new_side_decimal_30": "16.773807598002000000000000000000",
+    "expected_verdict": "ACCEPT",
+    "expected_crossings": 0,
+    "expected_contacts": 8
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "S1f",
+   "text": "The side set to the claim's 12-place floor, C - 1e-12.",
+   "stated": "Side rule with delta = S - C + 1e-12.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[108, 'right', '-99/100000000000000'], [109, 'right', '-497/500000000000000'], [118, 'right', '-497/500000000000000'], [120, 'right', '-497/500000000000000'], [131, 'right', '-497/500000000000000'], [184, 'top', '-312022074363533567961457607203163451275294036263358817200736390225743005840782527941760235490669187055871446316112589574597299894532805842995239617686953060609545652379110808371/312499999999999712740211971362845584394697986672492530561845344060302439182694182709457475071170673127821895929757862750405840709933239839274954787096308618882178226655086490000000000000000'], [192, 'top', '-312022074363533567961457607203163451275294036263358817200736390225743005840782527941760235490669187055871446316112589574597299894532805842995239617686953060609545652379110808371/312499999999999712740211971362845584394697986672492530561845344060302439182694182709457475071170673127821895929757862750405840709933239839274954787096308618882178226655086490000000000000000'], [208, 'top', '-62431200045135165006175821445981855722072234631988842438971056137999285720741429584092500663795902876891259175154145741520140855385417068993118174199880939933691699390804439744679987847320707386013324811/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000'], [216, 'top', '-156043305643318376420928092057743412836173030944142474553546364572887433554231033981973990974095683691889738038253579020163239598486327791145888059150456809793672783846930501981803814118549634749380529182411/156250000000000000000000000000071259407942327721373908293798792084015098961548640775971489235653239522636703127833058589026341719352635729651975280517177534036638817325710744545981198125000315411745194090000000000000000'], [224, 'top', '-39002152793449710079705422736362418461212489007043160881233029374892708003818572970629820038359154893942794120712342412285126864142746871620776938421735129656954885161716424058046089266700686908184851016339/39062500000000000000000000000008185202263645751779435412125535584437440136163183082746832137143954904135968622456359430712182862929721436457395120343613153826084578218273047457721149125000006922722568410000000000000000']]",
+     "area inside the box is not 1 (B): [108, 109, 118, 120, 131, 184, 192, 208, 216, 224]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 8,
+    "crossing": [
+     [
+      108,
+      "right",
+      "-99/100000000000000"
+     ],
+     [
+      109,
+      "right",
+      "-497/500000000000000"
+     ],
+     [
+      118,
+      "right",
+      "-497/500000000000000"
+     ],
+     [
+      120,
+      "right",
+      "-497/500000000000000"
+     ],
+     [
+      131,
+      "right",
+      "-497/500000000000000"
+     ],
+     [
+      184,
+      "top",
+      "-312022074363533567961457607203163451275294036263358817200736390225743005840782527941760235490669187055871446316112589574597299894532805842995239617686953060609545652379110808371/312499999999999712740211971362845584394697986672492530561845344060302439182694182709457475071170673127821895929757862750405840709933239839274954787096308618882178226655086490000000000000000"
+     ],
+     [
+      192,
+      "top",
+      "-312022074363533567961457607203163451275294036263358817200736390225743005840782527941760235490669187055871446316112589574597299894532805842995239617686953060609545652379110808371/312499999999999712740211971362845584394697986672492530561845344060302439182694182709457475071170673127821895929757862750405840709933239839274954787096308618882178226655086490000000000000000"
+     ],
+     [
+      208,
+      "top",
+      "-62431200045135165006175821445981855722072234631988842438971056137999285720741429584092500663795902876891259175154145741520140855385417068993118174199880939933691699390804439744679987847320707386013324811/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000"
+     ],
+     [
+      216,
+      "top",
+      "-156043305643318376420928092057743412836173030944142474553546364572887433554231033981973990974095683691889738038253579020163239598486327791145888059150456809793672783846930501981803814118549634749380529182411/156250000000000000000000000000071259407942327721373908293798792084015098961548640775971489235653239522636703127833058589026341719352635729651975280517177534036638817325710744545981198125000315411745194090000000000000000"
+     ],
+     [
+      224,
+      "top",
+      "-39002152793449710079705422736362418461212489007043160881233029374892708003818572970629820038359154893942794120712342412285126864142746871620776938421735129656954885161716424058046089266700686908184851016339/39062500000000000000000000000008185202263645751779435412125535584437440136163183082746832137143954904135968622456359430712182862929721436457395120343613153826084578218273047457721149125000006922722568410000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "cd4987c4feb2620be37a3fc9736468131deda897b2884c3de2397256ddb6a62f"
+    },
+    "delta": "62431200045135165006175821445981855722072234631988842438971056137999285720741429584092500663795902876891259175154145741520140855385417068993118174199880939933691699390804439744679987847320707386013324811/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000",
+    "delta_sci": "9.98899200722e-13",
+    "new_side_decimal_30": "16.773807598001000000000000000000",
+    "expected_verdict": "REFUSE",
+    "expected_crossings": 15,
+    "expected_contacts": 8
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "P1c",
+   "text": "A near pair closed to exact contact along its centre line (l186_geom.close_pair). The pair: the first, in increasing margin and then index order, with a positive margin, for which a moved square (the higher-numbered tried first) has every other margin and all four clearances positive and greater than the move to 1e-30 past contact (compared exactly through squared lengths).",
+   "stated": "the original's verdict; the pair's margin exactly 0, touching by A and by B (area 0); every pair without the moved square unchanged; every other pair of the moved square in its original class; clearances of the other squares unchanged and the moved square's in their original classes.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 1,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "0",
+    "digests": {
+     "margins_sha256": "3f74f258a7084c08f7a3b67776ae4761c499fef708dcd13d2c9a468faa743849",
+     "clearances_sha256": "a3eb106afc89243d407de0c7b87a58f7aefab424a0582573b7903e773f2e4093"
+    },
+    "pair": [
+     255,
+     256
+    ],
+    "moved": 255,
+    "pair_margin_sci": "1.20000001261e-12",
+    "move_squared_sci": "1.44000003029e-24"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "P1p",
+   "text": "The same pair closed 1e-30 past contact.",
+   "stated": "REFUSE: overlapping pairs exactly [the pair], margin exactly -1e-30; everything else as in P1c.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "overlapping pairs: 1"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [
+     [
+      255,
+      256,
+      "-1/1000000000000000000000000000000",
+      "18050470791166028881321786914191295910194677416053569618856295408968232763081265341783162438990454228329816607871/18050541516267089905799491011336506212049592595830644982921589189049881076657071659715000000000000000000000000000000000000000000000000000000000"
+     ]
+    ],
+    "overlapping_count": 1,
+    "least_margin_sci": "-1.00000000000e-30",
+    "digests": {
+     "margins_sha256": "494c93edbec98017979eea001f6728eb0ba610e588bf7f5e4ccf54507f6f8401",
+     "clearances_sha256": "04e8f55c71bb7e97a808b6624cb257ce0fdf56ae0d9ec0772849939acbda77ce"
+    },
+    "pair": [
+     255,
+     256
+    ],
+    "moved": 255,
+    "pair_margin_sci": "1.20000001261e-12",
+    "move_squared_sci": "1.44000003029e-24"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "W1c-left",
+   "text": "For each wall, the square with the least clearance at it (lowest number on ties) whose every margin is positive and greater than its clearance + 1e-30 (else the next by clearance), moved perpendicular to that wall by its clearance.",
+   "stated": "the original's verdict; that square-wall clearance exactly 0, the opposite wall's raised by the move, the two others unchanged; every other square's clearances unchanged; every pair without the moved square unchanged, its own pairs in their original classes. When no square is eligible, the whole packing is translated toward that wall by the least clearance at it instead: the margin list identical; every clearance at that wall lowered by exactly the move and at the opposite wall raised by it; contacts and crossings exactly those of the new clearances; the original's verdict.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "8e81fbf69d9bc0070449ea35fdc97703afdbcbf69a20a5b402a428ffced642d1"
+    },
+    "square": 133,
+    "clearance_sci": "0"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "W1p-left",
+   "text": "The same square moved 1e-30 further.",
+   "stated": "REFUSE: the only crossing that square at that wall, by exactly -1e-30. In the translated fallback: REFUSE, the crossings exactly the squares at the least clearance, each at that wall by exactly -1e-30, the rest as for W1c.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[133, 'left', '-1/1000000000000000000000000000000']]",
+     "area inside the box is not 1 (B): [133]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 8,
+    "crossing": [
+     [
+      133,
+      "left",
+      "-1/1000000000000000000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "774f668e7760d3f2d79cbe102272972711feffaeef8a7ae08ddbcb54be95d78f",
+     "clearances_sha256": "611fa5c84a191ffd69f51350d0ce76f46dca424aae56cf69b4aba13055686634"
+    },
+    "square": 133,
+    "clearance_sci": "0"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "W1c-bottom",
+   "text": "For each wall, the square with the least clearance at it (lowest number on ties) whose every margin is positive and greater than its clearance + 1e-30 (else the next by clearance), moved perpendicular to that wall by its clearance.",
+   "stated": "the original's verdict; that square-wall clearance exactly 0, the opposite wall's raised by the move, the two others unchanged; every other square's clearances unchanged; every pair without the moved square unchanged, its own pairs in their original classes. When no square is eligible, the whole packing is translated toward that wall by the least clearance at it instead: the margin list identical; every clearance at that wall lowered by exactly the move and at the opposite wall raised by it; contacts and crossings exactly those of the new clearances; the original's verdict.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "8e81fbf69d9bc0070449ea35fdc97703afdbcbf69a20a5b402a428ffced642d1"
+    },
+    "square": 124,
+    "clearance_sci": "0"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "W1p-bottom",
+   "text": "The same square moved 1e-30 further.",
+   "stated": "REFUSE: the only crossing that square at that wall, by exactly -1e-30. In the translated fallback: REFUSE, the crossings exactly the squares at the least clearance, each at that wall by exactly -1e-30, the rest as for W1c.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[124, 'bottom', '-1/1000000000000000000000000000000']]",
+     "area inside the box is not 1 (B): [124]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 8,
+    "crossing": [
+     [
+      124,
+      "bottom",
+      "-1/1000000000000000000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "20ec3f5332a038319dea37090e93cfcaf6543189d2b9b728afe7b466bee79558",
+     "clearances_sha256": "ef5dfa37ebcef94dcab238381b84e098c540cb27b785d0550710f1813748ab51"
+    },
+    "square": 124,
+    "clearance_sci": "0"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "W1c-right",
+   "text": "For each wall, the square with the least clearance at it (lowest number on ties) whose every margin is positive and greater than its clearance + 1e-30 (else the next by clearance), moved perpendicular to that wall by its clearance.",
+   "stated": "the original's verdict; that square-wall clearance exactly 0, the opposite wall's raised by the move, the two others unchanged; every other square's clearances unchanged; every pair without the moved square unchanged, its own pairs in their original classes. When no square is eligible, the whole packing is translated toward that wall by the least clearance at it instead: the margin list identical; every clearance at that wall lowered by exactly the move and at the opposite wall raised by it; contacts and crossings exactly those of the new clearances; the original's verdict.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 10,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "8d1b45899ed699ca508dc5da44de328fa51d31aea74200ea3408f3d0f9eb7ddf",
+     "clearances_sha256": "9b3f6d734f7deb1032b116658e771cbdc4a8ec1e166fafb9c5638dcb8696723d"
+    },
+    "square": 109,
+    "clearance_sci": "4.89920072216e-15"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "W1p-right",
+   "text": "The same square moved 1e-30 further.",
+   "stated": "REFUSE: the only crossing that square at that wall, by exactly -1e-30. In the translated fallback: REFUSE, the crossings exactly the squares at the least clearance, each at that wall by exactly -1e-30, the rest as for W1c.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[109, 'right', '-1/1000000000000000000000000000000']]",
+     "area inside the box is not 1 (B): [109]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [
+     [
+      109,
+      "right",
+      "-1/1000000000000000000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3e56f771678f74ae70b3f25c1dcb64200e6d802481af363e9fed9d3dfb0becaf",
+     "clearances_sha256": "20f687a7536266764a897305fdaf45611c7519fd165cb724ff5d8ffa9f09508d"
+    },
+    "square": 109,
+    "clearance_sci": "4.89920072216e-15"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "W1c-top",
+   "text": "For each wall, the square with the least clearance at it (lowest number on ties) whose every margin is positive and greater than its clearance + 1e-30 (else the next by clearance), moved perpendicular to that wall by its clearance.",
+   "stated": "the original's verdict; that square-wall clearance exactly 0, the opposite wall's raised by the move, the two others unchanged; every other square's clearances unchanged; every pair without the moved square unchanged, its own pairs in their original classes. When no square is eligible, the whole packing is translated toward that wall by the least clearance at it instead: the margin list identical; every clearance at that wall lowered by exactly the move and at the opposite wall raised by it; contacts and crossings exactly those of the new clearances; the original's verdict.",
+   "observed": {
+    "verdict": "ACCEPT",
+    "reasons": [],
+    "disagreement_count": 0,
+    "wall_contacts": 9,
+    "crossing": [],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "3af4327515c5899d5d0b700fa3b21ff25fdf282650519446a8a7148ff6c8f519",
+     "clearances_sha256": "8e81fbf69d9bc0070449ea35fdc97703afdbcbf69a20a5b402a428ffced642d1"
+    },
+    "square": 208,
+    "clearance_sci": "0"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "W1p-top",
+   "text": "The same square moved 1e-30 further.",
+   "stated": "REFUSE: the only crossing that square at that wall, by exactly -1e-30. In the translated fallback: REFUSE, the crossings exactly the squares at the least clearance, each at that wall by exactly -1e-30, the rest as for W1c.",
+   "observed": {
+    "verdict": "REFUSE",
+    "reasons": [
+     "square across a wall: [[208, 'top', '-1/1000000000000000000000000000000']]",
+     "area inside the box is not 1 (B): [208]"
+    ],
+    "disagreement_count": 0,
+    "wall_contacts": 8,
+    "crossing": [
+     [
+      208,
+      "top",
+      "-1/1000000000000000000000000000000"
+     ]
+    ],
+    "touching_pairs": 0,
+    "overlapping": [],
+    "overlapping_count": 0,
+    "least_margin_sci": "1.20000001261e-12",
+    "digests": {
+     "margins_sha256": "a6b20efe6e20b1d9a1730d04dbf254e9dfc4fb0b898db8f385bf4031b356f59c",
+     "clearances_sha256": "0c031984e397eb17adffb8730e92cf7ed2c97cdad01bd62d16a8a674bb319474"
+    },
+    "square": 208,
+    "clearance_sci": "0"
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "WALL",
+   "text": "Every square moved perpendicular to its nearest wall (least clearance; ties left, bottom, right, top) by its clearance and 1e-30 further; each moved square decided alone against the walls.",
+   "stated": "for every square: method A's clearance at that wall exactly 0 and -1e-30; method B touching and crossing; B's area inside the box 1 at contact and below 1 past.",
+   "observed": {
+    "moves": 528,
+    "squares": 264,
+    "failures": [],
+    "failure_count": 0
+   },
+   "outcome": "AS_STATED"
+  },
+  {
+   "id": "PALL",
+   "text": "Every pair closed along its centre line (square j toward square i), to exact contact and 1e-30 past it; each closed pair decided alone.",
+   "stated": "for every pair: method A's margin and the closed form's exactly 0 and -1e-30; method B touching and overlapping, both clipping orders agreeing.",
+   "observed": {
+    "closings": 69432,
+    "pairs": 34716,
+    "failures": [],
+    "failure_count": 0,
+    "closing_times_sha256": "a103562f7cc79651df84afb9f9f3feb72f8bd7f90200e6c57c40aaed29ee1930"
+   },
+   "outcome": "AS_STATED"
+  }
+ ],
+ "cpu_seconds": 350.1
+}

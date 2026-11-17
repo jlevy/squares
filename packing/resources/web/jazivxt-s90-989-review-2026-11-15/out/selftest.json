@@ -1,0 +1,16 @@
+{
+ "program": "l169_selftest.py",
+ "status": "PASSED",
+ "cases": 6166,
+ "failures": 0,
+ "first_failures": [],
+ "broken_copies_failures": {
+  "A_only_i_normals": 288,
+  "A_zero_is_apart": 1476,
+  "B_open_half_planes": 1584
+ },
+ "every_broken_copy_fails": true,
+ "python": "3.14.7",
+ "gmp": "gmpy2 2.3.1, GMP 6.3.0",
+ "cpu_seconds": 1.27
+}

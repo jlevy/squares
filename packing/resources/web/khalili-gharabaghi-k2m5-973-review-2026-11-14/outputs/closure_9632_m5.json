@@ -1,0 +1,13 @@
+{
+ "zmx2_boxes": 6850,
+ "zmx2_boxes_in_qx2_root": true,
+ "qx2_one_root": true,
+ "qx2_finished": true,
+ "qx2_uncert": 83,
+ "qx2_log_uncert": 83,
+ "meeting_pairs": 1,
+ "least_separation": null,
+ "least_separation_float": -7.62939453125e-06,
+ "closed": false,
+ "mutated": "M-5"
+}

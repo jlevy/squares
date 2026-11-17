@@ -1,0 +1,538 @@
+{
+ "cases_read": 324,
+ "counts": {
+  "127": {
+   "side_exact_digits": [
+    186,
+    185
+   ],
+   "record": {
+    "text": "11.81087878758917984",
+    "exact_form_rational": true,
+    "found_by": [
+     "Ryan Xu"
+    ],
+    "improved_by": [
+     "Francisco Couzo",
+     "PingYou Ltd"
+    ],
+    "evidence": [
+     "E-pingyou-574-certificate-report"
+    ]
+   },
+   "issue_record_print": "11.8108787875891799",
+   "issue_record_print_minus_record": "6.047574e-17",
+   "gain_exact_sci": "9.124897102693e-03",
+   "gain_relative": "7.725841e-04",
+   "gain_positive": true,
+   "claim_to_record_as_printed": "9.124897102180e-03",
+   "issue_lower_by": "9.1249e-3",
+   "issue_lower_by_matches_3sf": true,
+   "kodaj_side": "11.801765635430",
+   "kodaj_minus_side": "1.174494e-05",
+   "issue_our_part": "1.174e-5",
+   "kodaj_below_record": true,
+   "kodaj_gain_on_record": "9.113152e-03",
+   "kodaj_share_of_gain": "9.987129e-01",
+   "leaderboard_side": "11.800793726617",
+   "leaderboard_below_side_by": "9.601639e-04",
+   "closed_forms_within_1e-3": [],
+   "l_steps": [
+    {
+     "width": 1,
+     "count": 150,
+     "side": "1.280175389049e+01",
+     "record": "12.77817459305202",
+     "below_record": false,
+     "above_record_by": "2.357930e-02"
+    },
+    {
+     "width": 2,
+     "count": 175,
+     "side": "1.380175389049e+01",
+     "record": "13.7640500515431752",
+     "below_record": false,
+     "above_record_by": "3.770384e-02"
+    },
+    {
+     "width": 3,
+     "count": 202,
+     "side": "1.480175389049e+01",
+     "record": "14.72792206135785",
+     "below_record": false,
+     "above_record_by": "7.383183e-02"
+    },
+    {
+     "width": 4,
+     "count": 231,
+     "side": "1.580175389049e+01",
+     "record": "15.70710678118654",
+     "below_record": false,
+     "above_record_by": "9.464711e-02"
+    },
+    {
+     "width": 5,
+     "count": 262,
+     "side": "1.680175389049e+01",
+     "record": "16.70710678118654",
+     "below_record": false,
+     "above_record_by": "9.464711e-02"
+    },
+    {
+     "width": 6,
+     "count": 295,
+     "side": "1.780175389049e+01",
+     "record": "17.70423279073603036",
+     "below_record": false,
+     "above_record_by": "9.752110e-02"
+    },
+    {
+     "width": 7,
+     "count": 330,
+     "side": "1.880175389049e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 8,
+     "count": 367,
+     "side": "1.980175389049e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    }
+   ],
+   "monotonicity_counts_below_with_record_above_side": [],
+   "monotonicity_counts_above_with_record_below_side": []
+  },
+  "204": {
+   "side_exact_digits": [
+    161,
+    160
+   ],
+   "record": {
+    "text": "14.8043613836518588",
+    "exact_form_rational": true,
+    "found_by": [
+     "Evan Daniel"
+    ],
+    "improved_by": [],
+    "evidence": [
+     "E-evand-914-certificate-report"
+    ]
+   },
+   "issue_record_print": "14.8043613836518588",
+   "issue_record_print_minus_record": "7.447971e-17",
+   "gain_exact_sci": "1.714540545247e-03",
+   "gain_relative": "1.158132e-04",
+   "gain_positive": true,
+   "claim_to_record_as_printed": "1.714540544859e-03",
+   "issue_lower_by": "1.7145e-3",
+   "issue_lower_by_matches_3sf": true,
+   "kodaj_side": "14.802646907234",
+   "kodaj_minus_side": "6.412739e-08",
+   "issue_our_part": "6.41e-8",
+   "kodaj_below_record": true,
+   "kodaj_gain_on_record": "1.714476e-03",
+   "kodaj_share_of_gain": "9.999626e-01",
+   "leaderboard_side": "14.802436041464",
+   "leaderboard_below_side_by": "2.108016e-04",
+   "closed_forms_within_1e-3": [],
+   "l_steps": [
+    {
+     "width": 1,
+     "count": 233,
+     "side": "1.580264684311e+01",
+     "record": "15.77817459305202",
+     "below_record": false,
+     "above_record_by": "2.447225e-02"
+    },
+    {
+     "width": 2,
+     "count": 264,
+     "side": "1.680264684311e+01",
+     "record": "16.77473513238783285",
+     "below_record": false,
+     "above_record_by": "2.791171e-02"
+    },
+    {
+     "width": 3,
+     "count": 297,
+     "side": "1.780264684311e+01",
+     "record": "17.7394555582889518",
+     "below_record": false,
+     "above_record_by": "6.319128e-02"
+    },
+    {
+     "width": 4,
+     "count": 332,
+     "side": "1.880264684311e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 5,
+     "count": 369,
+     "side": "1.980264684311e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 6,
+     "count": 408,
+     "side": "2.080264684311e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 7,
+     "count": 449,
+     "side": "2.180264684311e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 8,
+     "count": 492,
+     "side": "2.280264684311e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    }
+   ],
+   "monotonicity_counts_below_with_record_above_side": [],
+   "monotonicity_counts_above_with_record_below_side": []
+  },
+  "232": {
+   "side_exact_digits": [
+    17,
+    16
+   ],
+   "record": {
+    "text": "15.7614096448817244",
+    "exact_form_rational": true,
+    "found_by": [
+     "Alex Chilton"
+    ],
+    "improved_by": [
+     "Francisco Couzo",
+     "Do\u011fa \u00d6zden"
+    ],
+    "evidence": [
+     "E-ozden-927-certificate-report"
+    ]
+   },
+   "issue_record_print": "15.7614096448817244",
+   "issue_record_print_minus_record": "6.348086e-17",
+   "gain_exact_sci": "1.878017325151e-03",
+   "gain_relative": "1.191529e-04",
+   "gain_positive": true,
+   "claim_to_record_as_printed": "1.878017324724e-03",
+   "issue_lower_by": "1.8780e-3",
+   "issue_lower_by_matches_3sf": true,
+   "kodaj_side": "15.759531732104",
+   "kodaj_minus_side": "1.045474e-07",
+   "issue_our_part": "1.045e-7",
+   "kodaj_below_record": true,
+   "kodaj_gain_on_record": "1.877913e-03",
+   "kodaj_share_of_gain": "9.999443e-01",
+   "leaderboard_side": "15.758852775266",
+   "leaderboard_below_side_by": "6.788523e-04",
+   "closed_forms_within_1e-3": [],
+   "l_steps": [
+    {
+     "width": 1,
+     "count": 263,
+     "side": "1.675953162756e+01",
+     "record": "16.73316600789937898",
+     "below_record": false,
+     "above_record_by": "2.636562e-02"
+    },
+    {
+     "width": 2,
+     "count": 296,
+     "side": "1.775953162756e+01",
+     "record": "17.70710678118654",
+     "below_record": false,
+     "above_record_by": "5.242485e-02"
+    },
+    {
+     "width": 3,
+     "count": 331,
+     "side": "1.875953162756e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 4,
+     "count": 368,
+     "side": "1.975953162756e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 5,
+     "count": 407,
+     "side": "2.075953162756e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 6,
+     "count": 448,
+     "side": "2.175953162756e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 7,
+     "count": 491,
+     "side": "2.275953162756e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 8,
+     "count": 536,
+     "side": "2.375953162756e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    }
+   ],
+   "monotonicity_counts_below_with_record_above_side": [],
+   "monotonicity_counts_above_with_record_below_side": []
+  },
+  "264": {
+   "side_exact_digits": [
+    217,
+    215
+   ],
+   "record": {
+    "text": "16.77473513238783285",
+    "exact_form_rational": true,
+    "found_by": [
+     "Daniil Ostashev"
+    ],
+    "improved_by": [
+     "PingYou Ltd",
+     "Mishapolk"
+    ],
+    "evidence": [
+     "E-mishapolk-70a033f-certificate-report"
+    ]
+   },
+   "issue_record_print": "16.7747351323878329",
+   "issue_record_print_minus_record": "5.755748e-17",
+   "gain_exact_sci": "9.275343858339e-04",
+   "gain_relative": "5.529353e-05",
+   "gain_positive": true,
+   "claim_to_record_as_printed": "9.275343858328e-04",
+   "issue_lower_by": "9.275e-4",
+   "issue_lower_by_matches_3sf": true,
+   "kodaj_side": "16.773891500852",
+   "kodaj_minus_side": "8.390285e-05",
+   "issue_our_part": "8.390e-5",
+   "kodaj_below_record": true,
+   "kodaj_gain_on_record": "8.436315e-04",
+   "kodaj_share_of_gain": "9.095421e-01",
+   "leaderboard_side": "16.770127228405",
+   "leaderboard_below_side_by": "3.680370e-03",
+   "closed_forms_within_1e-3": [],
+   "l_steps": [
+    {
+     "width": 1,
+     "count": 297,
+     "side": "1.777380759800e+01",
+     "record": "17.7394555582889518",
+     "below_record": false,
+     "above_record_by": "3.435204e-02"
+    },
+    {
+     "width": 2,
+     "count": 332,
+     "side": "1.877380759800e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 3,
+     "count": 369,
+     "side": "1.977380759800e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 4,
+     "count": 408,
+     "side": "2.077380759800e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 5,
+     "count": 449,
+     "side": "2.177380759800e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 6,
+     "count": 492,
+     "side": "2.277380759800e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 7,
+     "count": 537,
+     "side": "2.377380759800e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 8,
+     "count": 584,
+     "side": "2.477380759800e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    }
+   ],
+   "monotonicity_counts_below_with_record_above_side": [],
+   "monotonicity_counts_above_with_record_below_side": []
+  },
+  "305": {
+   "side_exact_digits": [
+    185,
+    184
+   ],
+   "record": {
+    "text": "17.95046648213771228",
+    "exact_form_rational": true,
+    "found_by": [
+     "Nate Chaoweeraprasit (itsnaka)"
+    ],
+    "improved_by": [
+     "Francisco Couzo",
+     "PingYou Ltd"
+    ],
+    "evidence": [
+     "E-pingyou-574-certificate-report"
+    ]
+   },
+   "issue_record_print": "17.9504664821377123",
+   "issue_record_print_minus_record": "2.669093e-17",
+   "gain_exact_sci": "4.704122478743e-03",
+   "gain_relative": "2.620613e-04",
+   "gain_positive": true,
+   "claim_to_record_as_printed": "4.704122478712e-03",
+   "issue_lower_by": "4.7041e-3",
+   "issue_lower_by_matches_3sf": true,
+   "kodaj_side": "17.946298110350",
+   "kodaj_minus_side": "5.357507e-04",
+   "issue_our_part": "5.358e-4",
+   "kodaj_below_record": true,
+   "kodaj_gain_on_record": "4.168372e-03",
+   "kodaj_share_of_gain": "8.861104e-01",
+   "leaderboard_side": "17.945755838742",
+   "leaderboard_below_side_by": "6.520917e-06",
+   "closed_forms_within_1e-3": [
+    [
+     55,
+     10,
+     "-8.647845e-06"
+    ],
+    [
+     209,
+     3,
+     "-4.608668e-04"
+    ]
+   ],
+   "l_steps": [
+    {
+     "width": 1,
+     "count": 340,
+     "side": "1.894576235966e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 2,
+     "count": 377,
+     "side": "1.994576235966e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 3,
+     "count": 416,
+     "side": "2.094576235966e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 4,
+     "count": 457,
+     "side": "2.194576235966e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 5,
+     "count": 500,
+     "side": "2.294576235966e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 6,
+     "count": 545,
+     "side": "2.394576235966e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 7,
+     "count": 592,
+     "side": "2.494576235966e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    },
+    {
+     "width": 8,
+     "count": 641,
+     "side": "2.594576235966e+01",
+     "record": null,
+     "below_record": null,
+     "above_record_by": null
+    }
+   ],
+   "monotonicity_counts_below_with_record_above_side": [],
+   "monotonicity_counts_above_with_record_below_side": []
+  }
+ }
+}

@@ -1,0 +1,237 @@
+{
+ "program": "l109_selftest.py",
+ "programs_sha256": {
+  "l109_reader.py": "49fcc06a84075ee0ed97c7f914bdde50ebb5a499547f9b4604933011b21ece79",
+  "l109_axes.py": "6ce32690e2eaba319e5775235e731b8d569065b806645fa67489ac3c4922f8d1",
+  "l109_clip.py": "cb5dddaf40b502e284c99fe1a537783102e2ffb3949d96e7d3571b4b536ab5aa",
+  "l109_check.py": "ea0a9c4c1c65a5c1600af8ccf98b263c750822abf2bbc672610e678a2fc17932",
+  "l109_geom.py": "e2c7189065f533b1ee6c1e03a405dcde91d4b72336e77ec2a9b1942f2782029e",
+  "l109_selftest.py": "9a2f6008e8ef3948c5fa9193d9c9cff0b986411ff9c6f4a2736b3d827d7e4c92"
+ },
+ "python": "3.14.7",
+ "verdict": "PASSED",
+ "cases": 2838,
+ "failures": [],
+ "reader_cases": [
+  {
+   "case": "the base file and its twin",
+   "outcome": "accepted"
+  },
+  {
+   "case": "the base file, no twin, plain scalars quoted",
+   "outcome": "accepted"
+  },
+  {
+   "case": "yaml: anchor",
+   "refused": "anchor 's' at   in \"<unicode string>\", line 9, column 9:\n      side: &s '2'\n            ^"
+  },
+  {
+   "case": "yaml: alias",
+   "refused": "anchor 's' at   in \"<unicode string>\", line 9, column 9:\n      side: &s '2'\n            ^"
+  },
+  {
+   "case": "yaml: explicit !!str tag",
+   "refused": "explicit tag 'tag:yaml.org,2002:str' at   in \"<unicode string>\", line 9, column 9:\n      side: !!str 2\n            ^"
+  },
+  {
+   "case": "yaml: python object tag",
+   "refused": "explicit tag 'tag:yaml.org,2002:python/object:fractions.Fraction' at   in \"<unicode string>\", line 9, column 9:\n      si"
+  },
+  {
+   "case": "yaml: local tag",
+   "refused": "explicit tag '!rational' at   in \"<unicode string>\", line 9, column 9:\n      side: !rational '2'\n            ^"
+  },
+  {
+   "case": "yaml: duplicate key in witness",
+   "refused": "duplicate key 'n' at   in \"<unicode string>\", line 9, column 3:\n      n: 2\n      ^"
+  },
+  {
+   "case": "yaml: duplicate key in square",
+   "refused": "duplicate key 'id' at   in \"<unicode string>\", line 30, column 5:\n        id: 2\n        ^"
+  },
+  {
+   "case": "yaml: float n",
+   "refused": "scalar tag tag:yaml.org,2002:float ('2.0') at   in \"<unicode string>\", line 8, column 6:\n      n: 2.0\n         ^"
+  },
+  {
+   "case": "yaml: boolean n",
+   "refused": "scalar tag tag:yaml.org,2002:bool ('yes') at   in \"<unicode string>\", line 8, column 6:\n      n: yes\n         ^"
+  },
+  {
+   "case": "yaml: null side",
+   "refused": "scalar tag tag:yaml.org,2002:null ('') at   in \"<unicode string>\", line 9, column 8:\n      side:\n           ^"
+  },
+  {
+   "case": "yaml: hex n",
+   "refused": "non-canonical integer '0x2' at   in \"<unicode string>\", line 8, column 6:\n      n: 0x2\n         ^"
+  },
+  {
+   "case": "yaml: underscored n",
+   "refused": "non-canonical integer '0_2' at   in \"<unicode string>\", line 8, column 6:\n      n: 0_2\n         ^"
+  },
+  {
+   "case": "yaml: sexagesimal n",
+   "refused": "n"
+  },
+  {
+   "case": "yaml: merge key",
+   "refused": "non-string key at   in \"<unicode string>\", line 13, column 5:\n        <<: {kind: rational}\n        ^"
+  },
+  {
+   "case": "yaml: side 4/2 not lowest",
+   "refused": "side: not in lowest terms"
+  },
+  {
+   "case": "yaml: side 2/1",
+   "refused": "side: denominator 1 not above 1"
+  },
+  {
+   "case": "yaml: side 02",
+   "refused": "side: non-canonical scalar '02'"
+  },
+  {
+   "case": "yaml: side +2",
+   "refused": "side: non-canonical scalar '+2'"
+  },
+  {
+   "case": "yaml: side 2.0 string",
+   "refused": "side: non-canonical scalar '2.0'"
+  },
+  {
+   "case": "yaml: side 2e0 string",
+   "refused": "side: non-canonical scalar '2e0'"
+  },
+  {
+   "case": "yaml: side with space",
+   "refused": "side: non-canonical scalar ' 2'"
+  },
+  {
+   "case": "yaml: side 0",
+   "refused": "side not positive"
+  },
+  {
+   "case": "yaml: side negative",
+   "refused": "side not positive"
+  },
+  {
+   "case": "yaml: coordinate -0",
+   "refused": "square 1 corner 0 x: non-canonical scalar '-0'"
+  },
+  {
+   "case": "yaml: coordinate 0/5",
+   "refused": "square 1 corner 0 x: not in lowest terms"
+  },
+  {
+   "case": "yaml: coordinate 1/-2",
+   "refused": "square 2 corner 0 x: non-canonical scalar '6/-5'"
+  },
+  {
+   "case": "yaml: coordinate 1/0",
+   "refused": "square 2 corner 0 x: non-canonical scalar '6/0'"
+  },
+  {
+   "case": "yaml: coordinate plain integer 0",
+   "refused": "square 1 corner 0 x: scalar is int, not a string"
+  },
+  {
+   "case": "yaml: id as string",
+   "refused": "square 2: id '2'"
+  },
+  {
+   "case": "yaml: ids out of order",
+   "refused": "square 1: id 2"
+  },
+  {
+   "case": "yaml: n too large",
+   "refused": "2 squares listed, n = 3"
+  },
+  {
+   "case": "yaml: extra square key",
+   "refused": "square 2: keys"
+  },
+  {
+   "case": "yaml: three corners",
+   "refused": "square 2: not four corners"
+  },
+  {
+   "case": "yaml: three coordinates",
+   "refused": "square 2 corner 3: not a pair"
+  },
+  {
+   "case": "yaml: representation",
+   "refused": "representation is not corners"
+  },
+  {
+   "case": "yaml: scalar kind",
+   "refused": "scalar is not {kind: rational}"
+  },
+  {
+   "case": "yaml: square_size",
+   "refused": "square_size is not '1'"
+  },
+  {
+   "case": "yaml: origin",
+   "refused": "coordinates are not lower-left, x-right-y-up, not-applicable"
+  },
+  {
+   "case": "yaml: angle unit",
+   "refused": "coordinates are not lower-left, x-right-y-up, not-applicable"
+  },
+  {
+   "case": "yaml: unknown witness key",
+   "refused": "witness has ['extra']"
+  },
+  {
+   "case": "yaml: missing claim",
+   "refused": "witness lacks ['claim']"
+  },
+  {
+   "case": "yaml: contract",
+   "refused": "contract"
+  },
+  {
+   "case": "yaml: extra envelope key",
+   "refused": "envelope keys"
+  },
+  {
+   "case": "yaml: two documents",
+   "refused": "expected one document, found 2"
+  },
+  {
+   "case": "twin: value differs",
+   "refused": "the JSON twin differs: $.witness.side: value differs"
+  },
+  {
+   "case": "twin: type differs",
+   "refused": "the JSON twin differs: $.witness.n: type int vs str"
+  },
+  {
+   "case": "twin: float",
+   "refused": "JSON float '2.0'"
+  },
+  {
+   "case": "twin: NaN",
+   "refused": "JSON constant 'NaN'"
+  },
+  {
+   "case": "twin: duplicate key",
+   "refused": "JSON duplicate key 'n'"
+  },
+  {
+   "case": "twin: missing key",
+   "refused": "the JSON twin differs: $.witness: keys ['certificate', 'claim', 'coordinates', 'id', 'n', 'representation', 'scalar', 's"
+  },
+  {
+   "case": "twin: coordinate differs",
+   "refused": "the JSON twin differs: $.witness.squares[1].corners[0][0]: value differs"
+  },
+  {
+   "case": "twin: not JSON",
+   "refused": "JSON error: Expecting ',' delimiter: line 1 column 704 (char 703)"
+  }
+ ],
+ "broken_copies_failures": {
+  "A counts a zero margin as apart": 55,
+  "B clips with open half-planes": 109
+ }
+}

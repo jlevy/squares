@@ -1,0 +1,8 @@
+zmx2 uncertified boxes: 6850; all inside W: True
+qx2_zm run on W: True; one qx2 root meets W: True; qx2 uncertified boxes: 83 (log says 83)
+qx2-uncertified boxes meeting a zmx2-uncertified box: 0
+ROOT-9632-CLOSED
+
+real	0m0.754s
+user	0m0.739s
+sys	0m0.004s

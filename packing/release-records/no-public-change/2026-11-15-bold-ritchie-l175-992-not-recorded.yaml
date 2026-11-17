@@ -1,0 +1,20 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L175 of 15 November (think-ud9e): Miguel Lara's issue 992, s(977) <= 17 +
+  21/sqrt(2) by a construction stated in prose, is retained (lara-s977-upper-bound-2026-11-15),
+  its stated construction decided exactly on both maintained routes over Q(sqrt 2) by the new
+  devtools.diamond_staircases with the controls stated in advance, and walked by the ledger of
+  15 November, which does not record it: Francisco Couzo's #763 row at 977, 31.765989508190,
+  is earlier and below it. The requests entry for #992 is added. No result, row, rung, side,
+  bound, mark, score, credit holder, pin or block changes. Against origin/main 588ccb226
+  (#991): devtools.compare_paper_renders rendered the methods survey into empty site
+  directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
+  tree and once with that main's result-requests.yaml swapped in: its 43 files were
+  byte-identical across the three. No PDF was printed; it prints from that HTML. The survey
+  keeps its version, v0.2.7.

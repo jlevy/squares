@@ -1,0 +1,67 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/984",
+  "author": "Roberto Ono",
+  "source_key": "[Ono issue 984 2026-11-14]",
+  "report_evidence": "E-ono-984-certificate-report",
+  "receipt_format": "ono-984-exact-replay-v1",
+  "witness_prefix": "W-ono-984-n",
+  "claim_limitations": "Complete 2026-11-11 exact rational centre and half-angle certificate at 228, the source's own harness JSON, read exactly from the retained source file, with its text copy held to the same packing. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-14",
+  "read_at_main": "473577f42a42c4a454190944e13d0a3ef8fa4c1d",
+  "certificates": [
+    {
+      "n": 228,
+      "path": "runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json",
+      "format": "ono-json",
+      "offered": "15.596043120921",
+      "first_committed": "2026-11-11T22:15:40Z",
+      "same_packing": [
+        {
+          "path": "runs/2026-11-11_fable-5.2/evidence/registration/n228.cert",
+          "format": "evand-cert"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    228
+  ],
+  "replayed": [
+    228
+  ],
+  "houses": [
+    {
+      "n": 228,
+      "reader": "[Özden s228 upper bound 2026-11-14]",
+      "source_key": "[Özden s228 upper bound 2026-11-14]",
+      "holders": "Doğa Özden",
+      "result": "T-300",
+      "reported_value": "15.6008017348117539",
+      "verified_value": "15.6008017348117539",
+      "evidence": [
+        "E-ozden-983-exact-feasibility",
+        "E-ozden-983-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Roberto Ono's packing of 228 squares at RobertoOno/squares-in-square b5636fd, issue 984",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-17ex",
+    "bibliography": {
+      "authors": [
+        "Ono"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER"
+    }
+  }
+}

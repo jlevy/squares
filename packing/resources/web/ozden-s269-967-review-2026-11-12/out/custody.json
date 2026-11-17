@@ -1,0 +1,175 @@
+{
+ "program": "l127_custody.py",
+ "clone_head": "f496016d3ebccb00c00cbf146efe85e0cc952dda",
+ "head_is_pin": true,
+ "commits_in_clone": 1,
+ "pin": {
+  "commit": "f496016d3ebccb00c00cbf146efe85e0cc952dda",
+  "parents": [],
+  "author": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+  "authored": "2026-11-12T03:00:02+00:00",
+  "committer": "kenaznia-doga <kenaznia-doga@users.noreply.github.com>",
+  "committed": "2026-11-12T03:00:02+00:00",
+  "tree": "70850ffebc3c9ead4e61b63cd967639361f1b3bf"
+ },
+ "files": {
+  "LICENSE-evand-square-packing.txt": {
+   "blob": "52cf89d2125f517a425c9a57c998dd85d83d7741",
+   "bytes": 1068,
+   "worktree_equals_blob": true,
+   "retained_on_main": 46,
+   "retained_examples": [
+    "packing/resources/web/couzo-issue678-2026-10-18/source/BOUND_VERIFIER_LICENSE.txt",
+    "packing/resources/web/evand-batch-105-130-2026-10-07/source/LICENSE",
+    "packing/resources/web/evand-compositions-2026-10-13/source/LICENSE"
+   ]
+  },
+  "LICENSE.md": {
+   "blob": "9803370f8c382515d3769896adb8d04b201aebd6",
+   "bytes": 1484,
+   "worktree_equals_blob": true,
+   "retained_on_main": 17,
+   "retained_examples": [
+    "packing/resources/web/ozden-s156-upper-bound-2026-11-10/source/LICENSE.md",
+    "packing/resources/web/ozden-s172-upper-bound-2026-11-09/source/LICENSE.md",
+    "packing/resources/web/ozden-s179-upper-bound-2026-11-11/source/LICENSE.md"
+   ]
+  },
+  "README.md": {
+   "blob": "d2b0feeebdb44cf606e435923f1bff38dfb7bea5",
+   "bytes": 7314,
+   "worktree_equals_blob": true,
+   "retained_on_main": 0,
+   "retained_examples": []
+  },
+  "n-269-candidate.yaml": {
+   "blob": "9a9fca8ed3f4daaacec48e46715b4fa9567477dc",
+   "bytes": 820780,
+   "worktree_equals_blob": true,
+   "retained_on_main": 0,
+   "retained_examples": []
+  },
+  "n-269-decimal-pose.yaml": {
+   "blob": "077f9912e4b1ca93c4f715c01008ea9c364ee14b",
+   "bytes": 28459,
+   "worktree_equals_blob": true,
+   "retained_on_main": 0,
+   "retained_examples": []
+  },
+  "n269-witness.json": {
+   "blob": "8a0c0f2f8d280be8df7ba8e1019d66cf392ae237",
+   "bytes": 812482,
+   "worktree_equals_blob": true,
+   "retained_on_main": 0,
+   "retained_examples": []
+  },
+  "packing-witness-verify.txt": {
+   "blob": "22a2bbbf17af98997244d7daf9ab1ed66c89600f",
+   "bytes": 559,
+   "worktree_equals_blob": true,
+   "retained_on_main": 0,
+   "retained_examples": []
+  },
+  "records/n-269-candidate-diff.png": {
+   "blob": "e67d0775d7bbbdab9727ea7fc68e48eed53bedcc",
+   "bytes": 308205,
+   "worktree_equals_blob": true,
+   "retained_on_main": 0,
+   "retained_examples": []
+  },
+  "sqcheck-output.txt": {
+   "blob": "092f181bb1a631008a06435667e287555a4abe14",
+   "bytes": 101,
+   "worktree_equals_blob": true,
+   "retained_on_main": 0,
+   "retained_examples": []
+  },
+  "verifier/README.md": {
+   "blob": "fd30c806c53e0b8b245c5a97f12ab11fc3d16666",
+   "bytes": 3441,
+   "worktree_equals_blob": true,
+   "retained_on_main": 1,
+   "retained_examples": [
+    "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+   ]
+  },
+  "verifier/sqcheck.py": {
+   "blob": "aa4b27ca191ea9eb21007aa0ed8cdecde44593fd",
+   "bytes": 17654,
+   "worktree_equals_blob": true,
+   "retained_on_main": 1,
+   "retained_examples": [
+    "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+   ]
+  }
+ },
+ "worktree_clean": true,
+ "times": {
+  "commit_to_issue_seconds": 12.0,
+  "issue_to_947_comment_seconds": 7.0,
+  "issue_created": "2026-11-12T03:00:14+00:00",
+  "stated_check_time_utc": "2026-11-12T03:10:00+00:00",
+  "stated_check_after_issue_seconds": 586.0
+ },
+ "stated_commit": {
+  "commit": "0352d755486c11bac54391b040b49db841136681",
+  "committed": "2026-11-12T01:40:42+00:00",
+  "is_main_head_now": true
+ },
+ "main_first_parent": [
+  {
+   "commit": "0352d75548",
+   "committed": "2026-11-12T01:40:42+00:00"
+  },
+  {
+   "commit": "75cce00b6c",
+   "committed": "2026-11-12T00:25:06+00:00"
+  },
+  {
+   "commit": "2fe5575985",
+   "committed": "2026-11-11T23:50:49+00:00"
+  },
+  {
+   "commit": "0af33d857a",
+   "committed": "2026-11-11T22:36:52+00:00"
+  },
+  {
+   "commit": "b5b12c2064",
+   "committed": "2026-11-11T22:20:08+00:00"
+  },
+  {
+   "commit": "c8448724ed",
+   "committed": "2026-11-11T18:36:11+00:00"
+  }
+ ],
+ "timeline": [
+  {
+   "event": "cross-referenced",
+   "created_at": "2026-11-12T03:00:21Z",
+   "actor": "kenaznia-doga",
+   "label": null,
+   "cross_referenced_from": 962
+  },
+  {
+   "event": "cross-referenced",
+   "created_at": "2026-11-12T03:00:22Z",
+   "actor": "kenaznia-doga",
+   "label": null,
+   "cross_referenced_from": 947
+  },
+  {
+   "event": "cross-referenced",
+   "created_at": "2026-11-12T03:00:23Z",
+   "actor": "kenaznia-doga",
+   "label": null,
+   "cross_referenced_from": 966
+  },
+  {
+   "event": "labeled",
+   "created_at": "2026-11-12T03:55:16Z",
+   "actor": "jlevy",
+   "label": "intake",
+   "cross_referenced_from": null
+  }
+ ]
+}
