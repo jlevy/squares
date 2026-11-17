@@ -5,7 +5,7 @@ title: "Import wand125: s(28) >= 2297/400 and s(30) >= 2357/400 by fine-net chec
 kind: task
 status: in_progress
 priority: 2
-version: 18
+version: 19
 delegate: w1-holds-1117r
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T16:56:42.570Z
-updated_at: 2026-11-17T21:29:46.092Z
+updated_at: 2026-11-17T21:43:14.304Z
 started_at: 2026-11-04T15:03:02.888Z
 ---
 Found by the 2026-10-10 evening reads (think-0nkn): wand125/square-packing 36b85b9 and ff9f269 add problems/square-lower-bounds/certificates/mixed_n28_L57425/ and mixed_n30_L58925/, check2 bundles on the 2,073-direction net (core 4999/5000, step 1/5002), reporting s(28) >= 2297/400 = 5.7425 (mass 2799999/100000; +3/400 over T-107's 1147/200; +1/400 over #446's unadopted 287/50) and s(30) >= 2357/400 = 5.8925 (mass 2999999/100000; +9/1000 over T-109's 11767/2000). Data: square-lower-bounds-v1 assets certificates__mixed_n28_L57425.tar.gz (627,191 B, SHA-256 7d0f910768d47fcdba6233334798487471db7ef2fe556400269c34c3116d3bf3) and certificates__mixed_n30_L58925.tar.gz (638,622 B, 0d11fe0554909e1457d70efa425c82344e622006590ac6ee58a481b69d1b61ba). Author: 772 s and 1790.3 s, 0.985 control at 32 directions. No issue reports them. Stages 1-3 as T-132 (#446 s(29)) did with devtools.fine_net_followup; full capture likely CPU-hours (owner budget).
@@ -64,3 +64,5 @@ Order once unblocked: retain the two release assets' members, add the packet to 
 2026-11-04 bold-ritchie-l45 (follow-up to #903, branch claude/bold-ritchie-xo28us-l45): after think-4ul6's stage 4 review accepted both certificates, the complete sqverify-fast censuses ran at two threads under nice 19 from reviewed source d97758bb (binary 567a0fd5): mixed_n28_L57425 VERIFIED at all 2,073 directions (594,284,796 nodes, least 1.0000000000106595 at 1088, 7,096.9 CPU-s, 3,644 s wall) and mixed_n30_L58925 VERIFIED (702,952,674 nodes, least 1.000000000029295 at 1585, 10,667.1 CPU-s, 5,784 s), each direction equal to the source's check2 log (capture-agreement receipts). Whole-net controls CONTROLS_REFUSED at both (n28 675 s / 1,111 CPU-s, axis capture in [0.9914000062838418, 0.991400010590911], gap 2.15e-9 judged by #892's enclosure rule; n30 597 s / 985 CPU-s, gap 1.88e-10). 5.5 CPU-hours in all against the 7.8 to 10.6 priced. The replays are evidence with the review as audit_record; T-142 and T-143 are V3/C3 and both lower lanes at n = 28 and 30 take 2297/400 and 2357/400 (T-107, T-109 superseded). Tracking issues #776 and #777 each owe the reply that reports the rungs once this lands on main; #532's T-142/T-143 ask is marked done.
 
 2026-11-17T21:55Z coord-intake-1117r: reclaimed from silent c-holds-1117 / bold-ritchie lanes; delegated to w1-holds-1117r (worktree /home/user/wt/w1): address #953 review A, merge #953 -> #908 -> #909 per think-fibh.
+
+2026-11-17 w1-holds-1117r (PR #953 review A, suggestion A6, deferred here as think-ctcq): for the stage 7 reply that shares the 11 November review with the author, its question Q4 can be sharper. Review A's reviewer read wand125/square-packing-tools at 5fba675ed61c (6 October): its fine_net_verifier/PROVENANCE.md names jlevy/squares main at dee22b882 (#362, 5 October) as the upstream base and fe12e036c as the branch commit (the archive's name), while the bundles' UPSTREAM_COMMIT names 42534d959d..., which this clone does not hold. Ask why UPSTREAM_COMMIT differs from the base PROVENANCE.md names. Not compared: that copy against the archive e495f9bf.... Source: https://github.com/jlevy/squares/pull/953#issuecomment-6938296720
