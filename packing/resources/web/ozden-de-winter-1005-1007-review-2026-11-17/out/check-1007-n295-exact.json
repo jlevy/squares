@@ -1,0 +1,342 @@
+{
+ "program": "r1_check.py",
+ "lane": "R1 (c-review-1005-1117)",
+ "file": "n295_exact.json",
+ "form": "centre-json",
+ "python": "3.14.7",
+ "gmpy2": "2.3.1",
+ "gmp": "GMP 6.3.0",
+ "pyyaml": "6.0.3",
+ "bytes": 32035,
+ "sha256": "9a0b4bc14803a43fb46e0370a3ad25faaa5a1f7f47186248455c90fae91b13a0",
+ "stated_sha256": null,
+ "sha256_is_the_stated_one": null,
+ "reading": {
+  "form": "centre-json",
+  "format": "each square: [center_x, center_y, cos, sin] as exact rationals; (cos, sin) is the unit direction of one edge",
+  "id_form": "none; squares are numbered by position",
+  "side_written_in_lowest_terms": true,
+  "scalars": 1181,
+  "scalars_in_lowest_terms": 1181,
+  "scalars_written_as_integers": 446
+ },
+ "n": 295,
+ "side": {
+  "exact": "35399386883430443/2000000000000000",
+  "to_40_places": "17.6996934417152215000000000000000000000000",
+  "numerator_digits": 17,
+  "denominator_digits": 16,
+  "is_terminating_decimal": true
+ },
+ "squares": {
+  "unit_by_a": 295,
+  "unit_by_b": 295,
+  "counterclockwise_by_a": 295,
+  "clockwise_by_a": 0,
+  "counterclockwise_by_b": 295,
+  "clockwise_by_b": 0,
+  "not_unit": []
+ },
+ "pairs": {
+  "decided": 43365,
+  "expected": 43365,
+  "by_a": {
+   "apart": 43365,
+   "touching": 0,
+   "overlapping": 0
+  },
+  "by_b": {
+   "apart": 43365,
+   "touching": 0,
+   "overlapping": 0
+  },
+  "sum_of_overlap_areas_by_b": "0",
+  "touching_pairs": 0,
+  "touching_pairs_listed": [],
+  "least_margin": {
+   "exact": "130682424409045554313906189258616309337971/85972981316318916405636805335346230431562500000000000",
+   "about": "1.52004062681e-12"
+  },
+  "least_margin_pairs": [[55, 56]],
+  "least_positive_margin": {
+   "exact": "130682424409045554313906189258616309337971/85972981316318916405636805335346230431562500000000000",
+   "about": "1.52004062681e-12"
+  },
+  "least_positive_margin_pairs": [[55, 56]],
+  "positive_margins_below": {
+   "1e-12": 0,
+   "1e-11": 850,
+   "1e-10": 850,
+   "1e-9": 850,
+   "1e-6": 850,
+   "1e-3": 853,
+   "1e-1": 952
+  },
+  "thirty_least_positive": [
+   {
+    "pair": [55, 56],
+    "margin": "1.52004062681e-12"
+   },
+   {
+    "pair": [36, 39],
+    "margin": "1.69465353421e-12"
+   },
+   {
+    "pair": [48, 52],
+    "margin": "2.15231775915e-12"
+   },
+   {
+    "pair": [35, 36],
+    "margin": "2.20089802719e-12"
+   },
+   {
+    "pair": [25, 26],
+    "margin": "2.38729485617e-12"
+   },
+   {
+    "pair": [15, 19],
+    "margin": "2.38855479984e-12"
+   },
+   {
+    "pair": [21, 22],
+    "margin": "2.41207024532e-12"
+   },
+   {
+    "pair": [113, 123],
+    "margin": "2.43040000000e-12"
+   },
+   {
+    "pair": [4, 8],
+    "margin": "2.45287431899e-12"
+   },
+   {
+    "pair": [294, 295],
+    "margin": "2.46080000000e-12"
+   },
+   {
+    "pair": [18, 21],
+    "margin": "2.46406401078e-12"
+   },
+   {
+    "pair": [264, 265],
+    "margin": "2.46720000000e-12"
+   },
+   {
+    "pair": [5, 9],
+    "margin": "2.50373786826e-12"
+   },
+   {
+    "pair": [293, 294],
+    "margin": "2.50560000000e-12"
+   },
+   {
+    "pair": [13, 14],
+    "margin": "2.50759446684e-12"
+   },
+   {
+    "pair": [292, 293],
+    "margin": "2.56320000000e-12"
+   },
+   {
+    "pair": [11, 12],
+    "margin": "2.56935052792e-12"
+   },
+   {
+    "pair": [22, 25],
+    "margin": "2.57201986768e-12"
+   },
+   {
+    "pair": [210, 211],
+    "margin": "2.57760000000e-12"
+   },
+   {
+    "pair": [42, 43],
+    "margin": "2.58237528820e-12"
+   },
+   {
+    "pair": [97, 111],
+    "margin": "2.59840000000e-12"
+   },
+   {
+    "pair": [106, 112],
+    "margin": "2.59920000000e-12"
+   },
+   {
+    "pair": [226, 227],
+    "margin": "2.60000000000e-12"
+   },
+   {
+    "pair": [106, 113],
+    "margin": "2.60800000000e-12"
+   },
+   {
+    "pair": [106, 123],
+    "margin": "2.60800000000e-12"
+   },
+   {
+    "pair": [121, 130],
+    "margin": "2.61120000000e-12"
+   },
+   {
+    "pair": [106, 121],
+    "margin": "2.61280000000e-12"
+   },
+   {
+    "pair": [142, 143],
+    "margin": "2.61440000000e-12"
+   },
+   {
+    "pair": [97, 100],
+    "margin": "2.61600000000e-12"
+   },
+   {
+    "pair": [142, 150],
+    "margin": "2.61920000000e-12"
+   }
+  ],
+  "positive_below_1e-9": {
+   "count": 850,
+   "least": "1.52004062681e-12",
+   "greatest": "3.12093302229e-12",
+   "median": "2.66560000000e-12",
+   "distinct_values": 344,
+   "next_above": {
+    "pair": [40, 43],
+    "margin": "1.06457369855e-6"
+   }
+  }
+ },
+ "walls": {
+  "left": {
+   "touching_squares": [77, 82],
+   "touching_count": 2,
+   "crossing_squares": [],
+   "least_clearance": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_squares": [77, 82],
+   "least_positive_clearance": {
+    "exact": "9/5000000000000000",
+    "about": "1.80000000000e-15"
+   },
+   "least_positive_clearance_squares": [80],
+   "positive_clearances_below_1e-9": 14,
+   "classes_by_b": {
+    "apart": 293,
+    "touching": 2,
+    "overlapping": 0
+   }
+  },
+  "bottom": {
+   "touching_squares": [89],
+   "touching_count": 1,
+   "crossing_squares": [],
+   "least_clearance": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_squares": [89],
+   "least_positive_clearance": {
+    "exact": "9/5000000000000000",
+    "about": "1.80000000000e-15"
+   },
+   "least_positive_clearance_squares": [129],
+   "positive_clearances_below_1e-9": 15,
+   "classes_by_b": {
+    "apart": 294,
+    "touching": 1,
+    "overlapping": 0
+   }
+  },
+  "right": {
+   "touching_squares": [291],
+   "touching_count": 1,
+   "crossing_squares": [],
+   "least_clearance": {
+    "exact": "0",
+    "about": "0"
+   },
+   "least_clearance_squares": [291],
+   "least_positive_clearance": {
+    "exact": "1/312500000000000",
+    "about": "3.20000000000e-15"
+   },
+   "least_positive_clearance_squares": [289, 293],
+   "positive_clearances_below_1e-9": 15,
+   "classes_by_b": {
+    "apart": 294,
+    "touching": 1,
+    "overlapping": 0
+   }
+  },
+  "top": {
+   "touching_squares": [],
+   "touching_count": 0,
+   "crossing_squares": [],
+   "least_clearance": {
+    "exact": "7/10000000000000000",
+    "about": "7.00000000000e-16"
+   },
+   "least_clearance_squares": [263, 264, 265, 266, 267, 268, 269, 270, 272, 273, 274, 275, 276, 277, 278, 279],
+   "least_positive_clearance": {
+    "exact": "7/10000000000000000",
+    "about": "7.00000000000e-16"
+   },
+   "least_positive_clearance_squares": [263, 264, 265, 266, 267, 268, 269, 270, 272, 273, 274, 275, 276, 277, 278, 279],
+   "positive_clearances_below_1e-9": 17,
+   "classes_by_b": {
+    "apart": 295,
+    "touching": 0,
+    "overlapping": 0
+   }
+  }
+ },
+ "extent": {
+  "width": {
+   "exact": "35399386883430443/2000000000000000",
+   "about": "1.7699693441715221500e1"
+  },
+  "height": {
+   "exact": "11062308401072013/625000000000000",
+   "about": "1.7699693441715220800e1"
+  },
+  "side_less_width": {
+   "exact": "0",
+   "about": "0"
+  },
+  "side_less_height": {
+   "exact": "7/10000000000000000",
+   "about": "7.00000000000e-16"
+  },
+  "side_less_larger_extent": {
+   "exact": "0",
+   "about": "0"
+  },
+  "least_right_or_top_clearance": {
+   "exact": "0",
+   "about": "0"
+  }
+ },
+ "area_inside_box_by_b": {
+  "exactly_1": 295,
+  "below_1": 0
+ },
+ "claim": {
+  "claimed": "17.699693441716",
+  "claim_less_side": {
+   "exact": "1557/2000000000000000",
+   "about": "7.78500000000e-13"
+  },
+  "claim_at_least_side": true,
+  "twelve_place_ceiling_of_side": "17.699693441716",
+  "claim_is_that_ceiling": true
+ },
+ "methods_disagree": {
+  "count": 0,
+  "first": []
+ },
+ "verdict": "ACCEPT",
+ "reasons": [],
+ "cpu_seconds": 3.8
+}

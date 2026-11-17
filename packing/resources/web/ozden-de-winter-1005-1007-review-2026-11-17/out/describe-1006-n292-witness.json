@@ -1,0 +1,122 @@
+{
+ "program": "r1_describe.py",
+ "lane": "R1 (c-review-1005-1117)",
+ "decides": "nothing",
+ "file": "n292_witness.yaml",
+ "form": "witness-yaml",
+ "n": 292,
+ "tilts": {
+  "exactly_upright": 17,
+  "turned_below_1e-9_degrees": 0,
+  "turned_1e-9_to_1e-6_degrees": 151,
+  "turned_1e-6_to_1e-3_degrees": 7,
+  "turned_1e-3_to_1_degree": 58,
+  "turned_beyond_1_degree": 59
+ },
+ "largest_tilt_degrees": 42.400022,
+ "least_nonzero_tilt_degrees": 1.2217384437462897e-08,
+ "tilted_beyond_1_degree_by_5_degree_bin": {
+  "35 to 40": 2,
+  "40 to 45": 57
+ },
+ "tilted_beyond_1_degree_range": [39.815419, 42.400022],
+ "tilted_squares": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+ "blocks_of_tilted_squares_joined_below_1e-6": [18, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+ "least_margin_between_tilted_squares": "1.02956886448e-11",
+ "distinct_directions_as_written": 276,
+ "distinct_orientations": 276,
+ "commonest_orientations": [
+  {
+   "squares": 17,
+   "tilt_degrees": 0.0,
+   "denominator_digits": 1
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530152,
+   "denominator_digits": 20
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530152,
+   "denominator_digits": 20
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530152,
+   "denominator_digits": 19
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530152,
+   "denominator_digits": 20
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530161,
+   "denominator_digits": 20
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530161,
+   "denominator_digits": 20
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530161,
+   "denominator_digits": 20
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530161,
+   "denominator_digits": 20
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 41.196094183,
+   "denominator_digits": 20
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530161,
+   "denominator_digits": 19
+  },
+  {
+   "squares": 1,
+   "tilt_degrees": 40.750530161,
+   "denominator_digits": 20
+  }
+ ],
+ "direction_denominator_digits": [15, 21],
+ "wall_contacts": {
+  "left": {
+   "squares": 1,
+   "along_an_edge": [],
+   "at_one_corner": [231]
+  },
+  "bottom": {
+   "squares": 1,
+   "along_an_edge": [],
+   "at_one_corner": [71]
+  },
+  "right": {
+   "squares": 0,
+   "along_an_edge": [],
+   "at_one_corner": []
+  },
+  "top": {
+   "squares": 1,
+   "along_an_edge": [],
+   "at_one_corner": [205]
+  }
+ },
+ "position_scalars": {
+  "what": "corner coordinates (corners file) or centre coordinates (centre file)",
+  "count": 2336,
+  "terminating_decimals": 2,
+  "most_decimal_places": 0,
+  "numerator_digits": [1, 57],
+  "denominator_digits": [1, 56],
+  "negative": 0
+ }
+}
