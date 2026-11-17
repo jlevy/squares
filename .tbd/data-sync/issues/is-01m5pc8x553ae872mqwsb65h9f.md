@@ -5,7 +5,7 @@ title: "Import #763 (PR A, W1): Couzo's 964ee2b at or below 1024 — packet, led
 kind: task
 status: open
 priority: 1
-version: 19
+version: 20
 delegate: null
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: blocked
 hold_until: null
 created_at: 2026-10-24T07:16:16.676Z
-updated_at: 2026-11-02T02:13:22.079Z
+updated_at: 2026-11-17T21:52:08.493Z
 started_at: 2026-10-24T07:16:25.387Z
 ---
 Plan and verdicts: think-cnn7's notes (triage of 24 Oct). After #769 (PR C) and #757, both merged. Licence: the owner's presumption of permission (think-m8f4 follows up the exact licence). PR B (review, V3/C3, adoption and regularization at 268 and 303) follows.
@@ -112,3 +112,5 @@ blocked_on: think-llit, think-2z2n
 
 2026-11-02 bold-ritchie-l21 (think-n20n, addressing review A of #877, A4): the author's wait goes on the blocked_on line too. The five credit questions of 24 and 25 October still await Couzo under #763's awaiting_author, and #763 is blocked: author on main, so this bead does not wait only on beads, and the sweep reads its own silence again: seven days without an update, besides AWAITED_DAYS for the questions themselves. think-2z2n is now held on think-kzme in turn (review A10). This line replaces the one in the note above.
 blocked_on: think-llit, think-2z2n, jlevy/squares#763 (the author's answers)
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c) waits on the author, and (b) in part. #763's five credit questions of 24 and 25 October are awaited 23 to 24 days, past the 14 at which stage 0 asks the coordinator to chase, withdraw with a note, or keep waiting. 683 (think-2z2n) is settled by think-gmoj of 17 November: a deletion bound gets a row only where a report claims the count with its own certificate file, and #763 states 683 as 684's certificate less one square, so it gets none; think-8gvd (w4) names think-2z2n. New: `check_requests --report` at f9ddfeeef lists #763 as reply due, because T-240 at 268 and 303 is now superseded where the 31 October reply said current; a follow-up from main is owed (with the chase, if the coordinator chooses one). #763's rows above 1024 are think-llit's R3. Listed for the coordinator. The blocked_on line of 2 November stands.

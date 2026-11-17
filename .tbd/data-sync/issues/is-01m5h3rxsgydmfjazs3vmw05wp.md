@@ -5,7 +5,7 @@ title: "Import Mishapolk: 122 upper bounds at 105–1568, incl. 105 and 204 in t
 kind: task
 status: open
 priority: 1
-version: 25
+version: 26
 delegate: null
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: blocked
 hold_until: null
 created_at: 2026-10-22T06:11:32.271Z
-updated_at: 2026-11-02T02:13:21.515Z
+updated_at: 2026-11-17T21:52:36.604Z
 started_at: 2026-10-22T06:11:33.610Z
 ---
 Issue #719 (https://github.com/jlevy/squares/issues/719), opened 2026-10-22T05:30:47Z by Mishapolk (Mikhail Polk; repository Mishapolk/square-packing-records): 122 claimed strict improvements at N in [105, 1568], two in the case corpus (105: 5.18e-12 below the catalogue witness; 204: 1.006e-8 below T-225, the house since #718), 112 beyond the horizon at or below 1024, 8 above 1024 (1061-1568; owner decision D1, think-f2io). Many margins are ~1e-12 (likely re-solves of existing arrangements); several are 1e-4 to 2e-3 (447, 553, 601, 652, 701). Stage 0 owner; stage 1 triage (read-only, priced) first.
@@ -274,3 +274,5 @@ blocked_on: think-f2io, think-9vr8
 
 2026-11-02 bold-ritchie-l21 (think-n20n, addressing review A of #877, A4): the author's wait goes on the blocked_on line too. #719's two questions of 24 October (the lineage and licence of certificates/n204.cert) still await Mishapolk under awaiting_author, so this bead does not wait only on beads, and the sweep reads its own silence again: seven days without an update, besides AWAITED_DAYS for the questions themselves. This line replaces the one in the note above.
 blocked_on: think-f2io, think-9vr8, jlevy/squares#719 (the author's answers)
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c) waits on the author and the owner. #719's two questions of 24 October (the lineage and licence of certificates/n204.cert) are awaited 24 days, past the 14 at which stage 0 asks for a decision: chase, withdraw with a note, or keep waiting. Since 16 November the house at 204 is T-306 (#1001), so the answer can no longer change 204's house, only the credit of #719's T-229/T-231 entries there; recommended to the coordinator: one chase on #719, then withdraw with a note if unanswered. #719's eight rows above 1024 (think-9vr8) now wait only on think-llit's R1; per-row credit at 1061, 1413 and 1489 stays on D5 (think-f2io). The blocked_on line of 2 November stands.

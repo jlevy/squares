@@ -5,7 +5,7 @@ title: "Import franciscouzo: 1285 upper bounds at 328–9913 (#715)"
 kind: task
 status: open
 priority: 1
-version: 19
+version: 20
 delegate: null
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: blocked
 hold_until: null
 created_at: 2026-10-21T22:22:12.593Z
-updated_at: 2026-11-02T01:09:35.793Z
+updated_at: 2026-11-17T21:50:34.579Z
 started_at: 2026-10-21T22:22:13.353Z
 closed_at: null
 close_reason: null
@@ -213,3 +213,6 @@ blocked_on: think-f2io
 
 2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Waits on think-llit's walk above 1024, which records #715's rows above 1024 (queued blocked_on think-llit on main) once D4 is answered (data/couzo-715-certificates-v1 published, or the certificates committed), and on D3 and D5 on think-f2io. Not done: the above-1024 result stays queued; 335 (think-rx26) and the 30 re-certifications (think-fwa9) are other beads'. Held (`hold: blocked`), and the claim of coord-intake-1021b, an ended session of an earlier lane or coordinator, released (status open, no delegate), so the bead names no one acting on it while it waits; the sweep had read the lapsed claim as stalled every two days since 2 November.
 blocked_on: think-llit, think-f2io
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (e) think-f2io is dropped from this wait. The plan this walk follows (docs/project/specs/active/plan-2026-10-24-rows-above-1024.md) says of D5 'No row waits on this answer; the credit is added later', of D3 'Nothing above 1024 depends on it', and of D4 that the record's disposition stands (host data/couzo-715-certificates-v1; the owner publishes it before R1 merges, or chooses Git before R1's first commit), so the owner's open items hold no row. think-llit's hold is lifted today and its R1 listed for the coordinator as runnable work nobody is on. #715's rows above 1024 are R1's; 335 (D3) is think-rx26's and holds no row here. The requests entry's `blocked: owner-decision` reason, where it names D4 and D5, is now stale and is flagged to the coordinator for R1's records change. Held on think-llit alone.
+blocked_on: think-llit

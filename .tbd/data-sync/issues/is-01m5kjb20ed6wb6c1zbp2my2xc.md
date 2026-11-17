@@ -5,7 +5,7 @@ title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666,
 kind: task
 status: open
 priority: 1
-version: 30
+version: 32
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: null
 labels:
@@ -17,10 +17,10 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 child_order_hints:
   - is-01m5qby09kkaa1rny3x82s2784
   - is-01m5qby16169h30h6s4cg3r70a
-hold: blocked
+hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-11-02T01:48:10.854Z
+updated_at: 2026-11-17T21:52:53.081Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
@@ -81,3 +81,6 @@ Two more obligations from review B1 (`intake_ledger.answer_problems`, #754): a l
 
 2026-11-02 coordinator (intake pass think-3guf): claim of bold-ritchie-l4 released (that lane has ended). The walk waits on the owner's D4 (how the certificates above 1024 are hosted) and D1/D5 as recorded in think-f2io; nothing runnable until then. Six held beads name this bead.
 blocked_on: think-f2io
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (e), the chain's root fix: the hold on think-f2io does not match this bead's own plan, and is lifted. The plan (spec_path, on main) gives R1's dependency as 'W7 merged; the owner publishes data/couzo-715-certificates-v1 before R1 merges': W7 merged on 24 October (#793), and publishing is a step at R1's merge, not before it starts. Of what think-f2io still holds, the plan says D5 'No row waits on this answer; the credit is added later' and D3 'Nothing above 1024 depends on it'; D4's disposition stands, with Git admissible if the owner chooses before R1's first commit. The 31 October environment stop is gone too: Karimi's #836 and #847 deposits are retained (packing/resources/web/karimi-records-2026-10-31/), and zenodo.org answers through this session's proxy (21:46Z, https://zenodo.org/api/records/23819397 -> 200). Q-847a (V1.0) and the 17 November deletion answer (think-gmoj) are holds R1's walk can carry, as it carries think-zkxy's and Fang's composites. R1 is runnable and nobody is on it. Next: R1 as the plan's slice table gives it, the walk gathered on the day it starts from every report to date (the 17 November reads of de Winter d02237a and Mishapolk b637e6c included; check the Goebel reach above 1073 that c-fix-754b-1023 noted), about 4.3 CPU-h and one to two lane-days, staging data/couzo-715-certificates-v1 for the owner to publish before it merges; then R2 (about 32 CPU-h, the owner publishes #732's shards), R3, R5 and R4. Listed for the coordinator. Hold none, unclaimed. If no lane starts R1 within seven days, the sweep lists this bead and every bead held on it again, which is right.
+blocked_on: none

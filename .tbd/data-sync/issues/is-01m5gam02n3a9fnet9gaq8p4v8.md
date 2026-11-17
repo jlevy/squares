@@ -5,7 +5,7 @@ title: "Owner decisions for #715 (and #666): counts above 1024, recipe-only rows
 kind: task
 status: open
 priority: 1
-version: 17
+version: 18
 delegate: null
 labels:
   - result-import
@@ -14,7 +14,7 @@ dependencies: []
 hold: blocked
 hold_until: null
 created_at: 2026-10-21T22:51:56.373Z
-updated_at: 2026-11-02T01:09:48.339Z
+updated_at: 2026-11-17T21:50:49.591Z
 started_at: 2026-10-21T22:51:57.158Z
 ---
 From the read-only triage of #715 (c-triage-715; full text: policy.md in the coordinator scratchpad triage-715/). No rule sets a ceiling above the n <= 324 horizon or mentions 1024, but the record holds nothing above 998, and #666's eight counts above 1024 wait on the same question.
@@ -142,3 +142,5 @@ declares yet. Packet README, Held Back and Not Recorded.
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner: D3 (whether 335 is recorded), D4 (host the certificates above 1024 or commit them; think-llit's note of 31 October), D5 (per-row credit beyond the horizon, which takes in #686's provenance ask and Polkovskyi's ask for sole credit at 11 counts), and whether the D1 answer, no ceiling, declines #732's ask to cap tracking at N = 10,000. D1, D2 and D6 are answered.
 
 2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): The owner's decision bead for D3 (whether 335 is recorded), D4 (host the certificates above 1024, or commit them; think-llit's note of 31 October), D5 (per-row credit beyond the horizon, with #686's ask and Polkovskyi's 11 counts on #732) and #732's ask to cap tracking at N = 10,000; D1, D2 and D6 are answered. It waits on the owner, whom no bead stands for, so its `blocked_on: none` stands, while think-3m10, -9vr8, -cyal, -5dc3, -7yrs, -9vjn and -xyhn name it in theirs. The sweep lists its two #732 asks again after seven days without an update, which is the reminder. Held (`hold: blocked`), and the claim of coord-intake-1024, an ended session of an earlier lane or coordinator, released (status open, no delegate), so the bead names no one acting on it while it waits; the sweep had read the lapsed claim as stalled every two days since 2 November.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c), the root of the wait chain under think-llit. Answered: D1 (no ceiling) and D2 (recipes are rows by a maintained checker; W7, #793) on 23 October, D6 on 23 October, and D4 by the record's disposition with the owner's N3 (host; the owner publishes data/couzo-715-certificates-v1 before R1 merges, or chooses Git at 9 to 13 MB before R1's first commit; plan-2026-10-24-rows-above-1024, 'For the Owner'). Still the owner's: D3 (whether #715's 335 is recorded; nothing above 1024 waits on it), D5 (per-row credit beyond the corpus: #686's provenance ask, think-9vjn, and #732's ask for sole credit at 11 counts; no row waits on it), and #732's ask to cap tracking at N = 10,000, which D1's 'no ceiling' answers in substance though no record says so. New since 2 November: option D of 17 November (think-b0w5) bears on D5. #732's 11 counts each pair one to one with Couzo's #715 certificate (receipts/pose-identity.json), so option D's measurement decides whether each is a new result at all; it does not say whether a new result is credited to Polkovskyi alone or after Couzo. Since nothing here holds a row, think-llit's hold on this bead is lifted today. Owner questions through the coordinator: (1) does option D answer D5, with the runbook's 'after' rule for a refinement that is a new result; (2) confirm that D1 declines the N = 10,000 cap; (3) D3. Waits on the owner; no bead stands for them, so the sweep lists this bead after seven days, which is the reminder. Hold blocked stays.
