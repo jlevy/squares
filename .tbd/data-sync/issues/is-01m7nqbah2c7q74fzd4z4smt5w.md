@@ -3,9 +3,9 @@ type: is
 id: is-01m7nqbah2c7q74fzd4z4smt5w
 title: "Address PR #953 review A: senior review of the T-142/T-143 stage 4 review"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 10
+version: 11
 labels: []
 dependencies: []
 parent_id: is-01m7kqn1kjvjkmqbcs4yfq84fc
@@ -20,5 +20,9 @@ child_order_hints:
   - is-01m7nqbq8k8vks9bkr6b298qvt
   - is-01m7nqbqwz19p3yfkq32fyvzzh
 created_at: 2026-11-17T21:41:59.458Z
-updated_at: 2026-11-17T21:42:13.151Z
+updated_at: 2026-11-17T23:04:59.288Z
+closed_at: 2026-11-17T23:04:59.288Z
+close_reason: "Review A of PR #953 addressed: A1-A5, A8, A9 fixed; A6 (think-ctcq) and A7 (think-30al) deferred and open. Reply https://github.com/jlevy/squares/pull/953#issuecomment-6963098308; merged e01cffa62."
+resolution: null
+duplicate_of: null
 ---
