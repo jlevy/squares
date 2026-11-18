@@ -31,6 +31,9 @@ The Git blobs and SHA-256 are of the uncompressed bytes; the blobs equal the pin
 trees’. The issues state no digest.
 The authors’ `n127/SHA256SUMS` at `35b576a` lists the first two digests; at `cc20a26` it
 is the same file, and at `a1ba501` it lists the two `cc20a26` digests (the review’s F9).
+The author’s next commits, `67fb815` and `838c5ea`, pushed with `cc20a26` and `a1ba501`
+respectively, update it to the digests of the files beside it, so it was stale only at
+the intermediate commits the issues pin (the review’s addendum after review A).
 
 T-305, the house at 127, is read from its retained copy in
 [`../joegun-upper-bounds-2026-11-16/source/n-127-candidate.yaml`](../joegun-upper-bounds-2026-11-16/source/n-127-candidate.yaml)
