@@ -37037,8 +37037,12 @@ issues:
       w6r-dewinter-1118 (think-gqzz) as T-331: both maintained exact routes accept the certificate
       and refuse its gross and sharp controls; measured, it is a new arrangement relative to
       T-320's packing and to T-289's, and the gain lies wholly outside T-320's contraction
-      margin, so under option D (think-b0w5) it is a new result. The stage 4 review (R-1021) is a
-      separate lane.
+      margin, so under option D (think-b0w5) it is a new result. The blind stage 4 review of 18
+      November (R-1021, PR #1033) accepts it with no blocking or major finding, and its
+      clean-room run is mapped, so T-331 is confirmed, independently re-implemented, at V3/C3.
+      The house at 268 moves to it by the house rule in the pass's next pull request, on 19
+      November (think-78aj): #1009's pass moved 268 on 18 November, and a day's archive holds
+      one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
     read_through: '2026-11-17T22:49:55Z'
     results:
     - key: n268-a1ba501
@@ -37051,10 +37055,12 @@ issues:
       evidence:
       - E-de-winter-1021-certificate-report
       - E-de-winter-1021-exact-feasibility
+      - E-de-winter-1021-review-exact-feasibility
       validation:
       - think-gqzz
     beads:
     - think-gqzz
+    - think-78aj
     answer_bead: think-gqzz
     replies: []
     close_when: >-
@@ -37081,8 +37087,12 @@ issues:
       w6r-dewinter-1118 (think-gqzz) as T-332: both maintained exact routes accept the certificate
       and refuse its gross and sharp controls; measured, it is a new arrangement relative to
       T-321's packing and to T-283's, and the gain lies wholly outside T-321's contraction
-      margin, so under option D (think-b0w5) it is a new result. The stage 4 review (R-1021) is a
-      separate lane.
+      margin, so under option D (think-b0w5) it is a new result. The blind stage 4 review of 18
+      November (R-1021, PR #1033) accepts it with no blocking or major finding, and its
+      clean-room run is mapped, so T-332 is confirmed, independently re-implemented, at V3/C3.
+      The house at 270 moves to it by the house rule in the pass's next pull request, on 19
+      November (think-78aj): #1009's pass moved 270 on 18 November, and a day's archive holds
+      one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
     read_through: '2026-11-17T22:50:19Z'
     results:
     - key: n270-a1ba501
@@ -37095,10 +37105,12 @@ issues:
       evidence:
       - E-de-winter-1022-certificate-report
       - E-de-winter-1022-exact-feasibility
+      - E-de-winter-1022-review-exact-feasibility
       validation:
       - think-gqzz
     beads:
     - think-gqzz
+    - think-78aj
     answer_bead: think-gqzz
     replies: []
     close_when: >-
