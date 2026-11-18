@@ -5,7 +5,7 @@ title: "Import #1021, #1022: Joost de Winter's s(268) <= 16.870013850405 and s(2
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: w6r-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T01:22:44.981Z
-updated_at: 2026-11-18T06:14:56.204Z
+updated_at: 2026-11-18T06:26:26.809Z
 started_at: 2026-11-18T01:23:11.221Z
 ---
 
@@ -30,3 +30,5 @@ started_at: 2026-11-18T01:23:11.221Z
 R-1021 (blind review), 05:40Z 18 Nov: lane r1021-1118 started in /home/user/wt/r1021 on branch claude/intake-2026-11-18-review-1021 (from main 0f191a2d23; #1023 open, not merged). Subject: de Winter s(268) <= 16.870013850405 (#1021) and s(270) <= 16.927314216352 (#1022), source pin a1ba5019. Houses to measure against: T-289 (268) and T-283 (270). Blind to the import lane's branch, packets and these notes; appending only.
 
 R-1021 (blind review), 06:15Z: checker and controls plan frozen and pushed at 06:08:53Z (e220d02c4f), before any certificate was read. Frozen checker: #1021 and #1022 ACCEPT (both forms, both methods, natively and crossed); custody identical over five routes. #1023 merged at 05:46:46Z (seen only after the freeze), so the lane also measures against T-320 and T-321, through a disclosed post-freeze adapter (r1021_post.py) that converts their layouts for the frozen modules. Measurements and controls running.
+
+2026-11-18T06:26Z w6r-dewinter-1118: worktree /home/user/wt/w6-import-1021 recreated; merged main 86284ec20 (#1023) at 78973e596; declarations read the houses T-320/T-321 (#1009) and claims rebuilt (268 below T-320 by 1.8543e-3, 270 below T-321 by 8.3439e-4); replay at 97ae1b663: both routes accept, gross controls refused, check --replay, 11/11 sharp controls as the plan (c4a97465..., hashed 02:27:48Z) states each (branches W1, P1, N1, E1); identity: neither one to one with its house or the house before (46 and 94 squares beyond 0.1), new arrangements; margins T-320 3.37e-27, T-321 3.39e-27, own 2.69e-58 and 2.56e-58; L-step scans; ledger upper-bounds-1021-1022-20261118 at 807c2eb3d records both. Blind review R-1021 running (not read). Next: register (provisional ids), records tier, draft PR.
