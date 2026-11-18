@@ -283,14 +283,17 @@ def test_live_current_families_pending_comparison_and_known_scope_gap() -> None:
     # neither lane at those counts. At 204 the release's lower file (T-231), adopted on 24
     # October 2026, holds both lanes, and T-229 neither. The pass of 31 October 2026
     # adopted Evan Daniel's #845 (T-257) at 204 and 260, so T-231 and T-225 hold neither
-    # lane there. At 105, 227 and 229 the reported lane is a smaller report the owner's
-    # question holds (T-260's at 105 and 229, T-253's at 227), so T-225 and T-229 keep
-    # their verified lanes alone there.
+    # lane there. At 105, 227 and 229 the reported lane was a smaller report the owner's
+    # question held (T-260's at 105 and 229, T-253's at 227), so T-225 and T-229 kept
+    # their verified lanes alone there, until the owner's option D of 17 November 2026
+    # made both reports restatements there (think-b0w5, think-8yyy): a restatement is no
+    # current record, so T-225 and T-229 hold both lanes again.
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-225"]} == {
-        (n, "upper", "verified") for n in (227, 229)
+        (n, "upper", lane) for n in (227, 229) for lane in ("reported", "verified")
     }
     assert {(facet.n, facet.direction, facet.lane) for facet in index.facets["T-229"]} == {
-        (105, "upper", "verified")
+        (105, "upper", "reported"),
+        (105, "upper", "verified"),
     }
     assert not index.facets.get("T-231")
     assert not {facet for facet in index.facets["T-174"] if facet.n == 105}

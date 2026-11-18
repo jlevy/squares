@@ -8,9 +8,9 @@ packets through ``test_upper_bound_reports``; these hold what is particular to t
 source's own digest list against the retained files, each print against its exact side,
 the record each certificate is compared with, the ledger's verdicts, the retained sharp
 controls, the identity and contraction measurements the register's notes cite, and the
-holds: T-280 (299, 303) and T-281 (130) stay below the stage 4 exit for the owner
+holds: T-280 (299, 303) and T-281 (130) stayed below the stage 4 exit for the owner
 (think-ruu2's RV-3, think-ikku), at C1 with the stage 4 review mapped and no case moved,
-while the eleven sides above the corpus are current, verified beyond-horizon rows. Every
+until the owner's option D made both restatements (think-b0w5, think-8yyy), while the eleven sides above the corpus are current, verified beyond-horizon rows. Every
 test reads the packets, the ledger and the record only; none needs the network.
 """
 
@@ -187,10 +187,14 @@ def test_each_in_corpus_certificate_is_its_houses_packing(n: int) -> None:
 
 
 def test_the_holds_and_the_rows() -> None:
+    """T-280 and T-281 were held below the stage 4 exit for the owner (think-ruu2's RV-3,
+    think-ikku). The owner's option D of 17 November 2026 (think-b0w5) answered both: each
+    re-certification lies within its house's own padding, so each is recorded, at C1, as a
+    restatement at every count (think-8yyy), with no wait and no regularization credit."""
     register = yaml.safe_load((reports.ROOT / "frontier/results.yaml").read_text("utf-8"))
     entries = {entry["id"]: entry for entry in register["results"]}
-    holds = (("T-280", [299, 303], "think-ruu2"), ("T-281", [130], "think-ikku"))
-    for result, scope, link in holds:
+    holds = (("T-280", [299, 303], ["T-277", "T-278"]), ("T-281", [130], ["T-259"]))
+    for result, scope, restated in holds:
         entry = entries[result]
         assert entry["scope"]["n_values"] == scope
         assert (entry["verification"], entry["confirmation"]) == ("V0", "C1")
@@ -198,8 +202,11 @@ def test_the_holds_and_the_rows() -> None:
         (review,) = entry["reviews"]
         assert (review["path"], review["verdict"]) == (REVIEW, "accepted")
         assert entry["attribution"]["source_keys"] == [SOURCE_KEY]
-        assert entry["unfinished_confirmations"][0]["link"] == link
-        assert [item["n"] for item in entry["regularizations"]] == scope
+        assert "unfinished_confirmations" not in entry
+        assert "regularizations" not in entry
+        assert [item["n"] for item in entry["restatements"]] == scope
+        assert [item["of"] for item in entry["restatements"]] == restated
+        assert {item["ruling"] for item in entry["restatements"]} == {"think-b0w5"}
     for n, key in HOUSE_KEYS.items():
         case = coverage.parse_case(reports.ROOT / f"frontier/n-{n:03d}.md")
         assert case["reported_upper_bound"]["source_key"] == key
