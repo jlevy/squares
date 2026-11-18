@@ -725,7 +725,8 @@ def _sources() -> dict[str, Source]:
         # Kodaj's public Kaggle packings as JoeGun improved them, each a new arrangement
         # relative to the house it replaces, one result a count read from one packet. T-174
         # and T-186 keep their other houses.
-        packet_source("T-305", "joegun-upper-bounds-2026-11-16"),
+        # The pass of 18 November 2026 (think-zqot) moved 127, T-305's only house, to T-330, so
+        # T-305 is no source here now.
         packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
@@ -742,9 +743,10 @@ def _sources() -> dict[str, Source]:
             packet_source(f"T-{number}", "mishapolk-issue1009-2026-11-16")
             for number in range(314, 327)
         ),
-        # The same day's lane w6r-dewinter-1118 (think-zqot) moved 127 from T-305, which still
-        # houses 204, 232, 264 and 305 through the same packet, to Joost de Winter's issue
-        # 1020 (T-330), the smallest of his three reports there that evening.
+        # The same day's lane w6r-dewinter-1118 (think-zqot) moved 127 from T-305, its only
+        # house (T-306 to T-309 still house 204, 232, 264 and 305 through the same packet), to
+        # Joost de Winter's issue 1020 (T-330), the smallest of his three reports there that
+        # evening.
         packet_source("T-330", "de-winter-s127-issue1020-2026-11-17"),
     ]
     found = {source.result: source for source in sources}
@@ -868,7 +870,7 @@ def _sources() -> dict[str, Source]:
 #: issue 1020 (T-330), a further arrangement of his own #1017 (T-329) and #1015 (T-328),
 #: from an arrangement in the Kaggle compilations of Alex Chilton and Asterios Panoras: a new
 #: arrangement relative to T-305's packing (no symmetry one to one, 9 squares beyond a
-#: tenth). T-305 still houses 204, 232, 264 and 305.
+#: tenth). T-305 keeps no house here; T-306 to T-309 still house 204, 232, 264 and 305.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",

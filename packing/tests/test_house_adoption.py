@@ -320,7 +320,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
         29: "T-195",
         105: "T-229",
-        127: "T-305",
+        127: "T-330",
         130: "T-259",
         132: "T-292",
         155: "T-197",
@@ -1829,7 +1829,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 204 from T-268, 232 from T-275 and 264 from T-186 to JoeGun's certificates of issue
     # 1001 (T-305 to T-309) in the same pass. Lane w3-pass-1117r moved 147, 156, 180, 210,
     # 260, 268, 270, 272, 292, 295, 299 and 307 to Mykhailo Polkovskyi's certificates of
-    # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November.
+    # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November, and lane
+    # w6r-dewinter-1118 127 on from T-305 to Joost de Winter's certificate of issue 1020
+    # (T-330) in the same pass.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1865,7 +1867,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         297: "T-299",
         228: "T-301",
         90: "T-304",
-        127: "T-305",
+        127: "T-330",
         264: "T-308",
         305: "T-309",
         210: "T-317",
