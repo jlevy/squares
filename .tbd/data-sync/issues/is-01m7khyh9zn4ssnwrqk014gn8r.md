@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: w3r-pass-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T01:19:38.613Z
+updated_at: 2026-11-18T02:13:16.734Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -34,3 +34,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-18T00:44Z w3-pass-1117r: regularization done (grid-slack 0.5/1/5 deg + evand driver on 13 counts; selection draws views at 11, decides 270 and 307; SETTLED drops 210/272; runs retained under packing/cases/regularized_drawings/think-i38n-2026-11-18/). Merged main (#1010, #1013, #908, #1011). Custody, exact-side register, case verifiers, certificate reach, URL amendments for T-310..T-313, no-public-change record (paper renders: only the explainer register count moved) done; test_house_adoption 92 passed. KKT register candidates at 260/268/270/272/292/295/299/307 (4e-19..1e-13 below) held for think-8yyy. Next: stamp, re-pin, draft PR, coordinator review.
 
 2026-11-18T01:19Z w3r-pass-1118: took over from w3-pass-1117r (killed by a worker restart about 01:00Z). Resuming from c82c06859 plus six uncommitted files in /home/user/wt/w3-import-1009; #1013, #1011 and #1014 merged before the restart.
+
+2026-11-18T02:13Z w3r-pass-1118: finished the branch and opened draft PR #1023 (intake, S3), head 91494623f. Committed the six uncommitted files (8dacbfa8a: each generator's check passes; test_house_adoption 92 passed) plus the runs' README in the document map; T-314..T-326 next_rung now reads adopted (5d6c40cbc); merged main #1016 (34dd6e1db, result-requests conflict: kept #1009 and #1012); no-public-change record re-measured against 2980557a2 (a460f62d6); rigidity blocks for 12 counts (a8f1ae9b4); stamp 5d382d34b, re-pin 91494623f. Announcement 262 credit gap -> think-gpni. Next: hosted CI, then the coordinator's senior review.
