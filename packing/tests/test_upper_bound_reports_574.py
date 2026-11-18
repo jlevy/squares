@@ -519,27 +519,30 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # 9 November 2026 (think-463r) moved 299 on to Özden's second further arrangement
     # (T-277), and that of 15 November 2026 (think-17ex) moved 147 from the Kingbird
     # catalogue's 7 + 4*sqrt(2), which PR #574 states, to Roberto Ono's issue-985
-    # certificate (T-302), below it; every other side is at or below its case.
+    # certificate (T-302), below it, and that of 18 November 2026 (think-i38n) moved 147,
+    # 260 and 299 on to Mykhailo Polkovskyi's issue-1009 certificates (T-314, T-318, T-325)
+    # and 262 from the Kingbird catalogue's 16 + sqrt(2)/2, which PR #574 states, to his
+    # T-319, below it; every other side is at or below its case.
     assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
         147,
         227,
         229,
         260,
+        262,
         299,
         302,
     }
     for n in (227, 229):
         assert rows[n]["case"]["reported_source_key"] == "[Daniel regularized lists 2026-10-20]"
         assert rows[n]["case"]["reported_relation"] == "above"
-    assert rows[147]["case"]["reported_source_key"] == "[Ono issue 985 2026-11-14]"
-    assert rows[260]["case"]["reported_source_key"] == "[Daniel issue 914 n260 2026-11-05]"
-    assert rows[299]["case"]["reported_source_key"] == "[Özden s299 upper bound 2026-11-09]"
-    for n in (147, 260, 299):
+    for n in (147, 260, 262, 299):
+        assert rows[n]["case"]["reported_source_key"] == "[Mishapolk issue 1009 2026-11-16]"
+    for n in (147, 260, 262, 299):
         assert rows[n]["case"]["reported_relation"] == "above"
     assert all(
         row["case"]["verified_relation"] in {"equal", "below"}
         for n, row in rows.items()
-        if n not in {147, 227, 229, 260, 299, 302}
+        if n not in {147, 227, 229, 260, 262, 299, 302}
     )
     # 207 was below every other report until its side became the house there.
     assert sorted(n for n, row in rows.items() if row["below_every_other"]) == []

@@ -791,3 +791,72 @@ def test_stderr_says_whether_the_announcement_fits_one_post_or_a_thread(
 def test_the_header_names_the_day_and_the_count() -> None:
     assert ra.header(date(2026, 10, 11), 1) == "11 October 2026: 1 new result"
     assert ra.header(date(2026, 1, 2), 12) == "2 January 2026: 12 new results"
+
+
+def test_a_new_best_credits_the_case_records_finder_and_improver(
+    capsys: pytest.CaptureFixture[str], records: Records
+) -> None:
+    """Review A1 of #1023 (think-gpni): #1009's key credits Mykhailo Polkovskyi alone, but
+    the case records credit whose packing each certificate continues, at 262 and 292 by the
+    owner's answer of 17 November 2026 (think-bx2a). A new-best line credits the case
+    record's `found_by`, improved by its `improved_by`, where the case cites the result's
+    own source, and names Polkovskyi by his full name, not the handle the case keeps."""
+    lines, _ = run(
+        capsys,
+        [
+            "--ids",
+            *("T-318", "T-319", "T-320", "T-323"),
+            "--date",
+            "2026-11-18",
+            "--min-significance",
+            "1",
+        ],
+    )
+    credited = {line.rsplit("#", 1)[-1].upper(): line.split(": ", 1)[1] for line in lines[1:]}
+    polkovskyi = "improved by Mykhailo Polkovskyi https://"
+    assert credited["T-318"].startswith(f"Evan Daniel, {polkovskyi}")
+    assert credited["T-319"].startswith(f"Joost de Winter, {polkovskyi}")
+    assert credited["T-320"].startswith(f"Doğa Özden, {polkovskyi}")
+    assert credited["T-323"].startswith(f"Joost de Winter, {polkovskyi}")
+    # The register's own credit line still credits the source's author first.
+    finders, _after = ra.credit_parts(ra.credit_text(records.results["T-319"], records.sources))
+    assert finders == ["Polkovskyi"]
+
+
+def test_the_case_credit_holds_only_where_the_case_cites_the_results_source(
+    records: Records,
+) -> None:
+    """A count the case record holds from another source, or a count where the result is
+    not the best known, keeps the register's credit line."""
+    index = ra.rival_bounds(records)
+    t319 = records.results["T-319"]
+    (count,) = ra.counts(t319, records, index)
+    assert ra.case_credit(t319, [count], records) == (("Joost de Winter",), ("Mishapolk",))
+    assert ra.case_credit(t319, [replace(count, bettered_by=("T-999",))], records) is None
+    elsewhere = {**t319, "attribution": {"source_keys": ["[Kingbird]"]}}
+    assert ra.case_credit(elsewhere, [count], records) is None
+    # T-311 at 292, superseded by T-323, is the best known nowhere.
+    (superseded,) = ra.counts(records.results["T-311"], records, index)
+    assert ra.case_credit(records.results["T-311"], [superseded], records) is None
+
+
+def test_a_case_records_handle_maps_to_the_token_its_profile_gives() -> None:
+    """`credited_names` keeps `Mishapolk` as itself for the sources that credit the handle;
+    his contributor profile maps it to `Polkovskyi`, whose full name prints."""
+    credited = {"Mykhailo Polkovskyi": "Polkovskyi", "Mishapolk": "Mishapolk"}
+    profile = ra.Profile(
+        id="mykhailo-polkovskyi",
+        path="packing/contributors/people/mykhailo-polkovskyi.md",
+        names=frozenset({"Mykhailo Polkovskyi", "Polkovskyi", "Mishapolk"}),
+        real_name="Mykhailo Polkovskyi",
+    )
+    tokens = ra.credit_tokens(credited, [profile])
+    assert tokens["Mishapolk"] == "Polkovskyi"
+    assert tokens["Mykhailo Polkovskyi"] == "Polkovskyi"
+    names = ra.Names(full={"Polkovskyi": "Mykhailo Polkovskyi"}, tokens=tokens)
+    assert names.show(names.token("Mishapolk")) == "Mykhailo Polkovskyi"
+    assert ra.credit_tokens({"Nate Chaoweeraprasit (itsnaka)": "Chaoweeraprasit"}) == {
+        "Nate Chaoweeraprasit (itsnaka)": "Chaoweeraprasit",
+        "Nate Chaoweeraprasit": "Chaoweeraprasit",
+        "itsnaka": "Chaoweeraprasit",
+    }

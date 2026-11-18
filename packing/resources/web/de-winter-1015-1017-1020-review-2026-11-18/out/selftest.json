@@ -1,0 +1,8 @@
+{
+ "program": "r127_selftest.py",
+ "checks": 10486,
+ "failures": 0,
+ "first_failures": [],
+ "verdict": "PASSED",
+ "cpu_seconds": 2.53
+}

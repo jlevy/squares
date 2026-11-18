@@ -1,0 +1,184 @@
+{
+ "program": "rb127_routes.py",
+ "contraction": {
+  "T-305": {
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "binding_pair_equal": true,
+   "shrunk_side_equal": true,
+   "margin_equal": true,
+   "tool_routes_accept_shrunk": true,
+   "tool_cpu_seconds": 22.03
+  },
+  "1015": {
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "binding_pair_equal": true,
+   "shrunk_side_equal": true,
+   "margin_equal": true,
+   "tool_routes_accept_shrunk": true,
+   "tool_cpu_seconds": 39.8
+  },
+  "1017": {
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "binding_pair_equal": true,
+   "shrunk_side_equal": true,
+   "margin_equal": true,
+   "tool_routes_accept_shrunk": true,
+   "tool_cpu_seconds": 4.64
+  },
+  "1020": {
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "binding_pair_equal": true,
+   "shrunk_side_equal": true,
+   "margin_equal": true,
+   "tool_routes_accept_shrunk": true,
+   "tool_cpu_seconds": 13.99
+  }
+ },
+ "steps": {
+  "T-305 -> 1015": {
+   "gain_equal": true,
+   "tool_within_margin": false,
+   "mine_below_shrunk_predecessor": true,
+   "verdicts_agree": true,
+   "tool_gain_over_margin": "7919468.3901",
+   "mine_gain_over_margin": "7.9194684e+6"
+  },
+  "1015 -> 1017": {
+   "gain_equal": true,
+   "tool_within_margin": false,
+   "mine_below_shrunk_predecessor": true,
+   "verdicts_agree": true,
+   "tool_gain_over_margin": "252681585973133287080932524917764497070574789496810766336.0000",
+   "mine_gain_over_margin": "2.5268159e+56"
+  },
+  "1017 -> 1020": {
+   "gain_equal": true,
+   "tool_within_margin": false,
+   "mine_below_shrunk_predecessor": true,
+   "verdicts_agree": true,
+   "tool_gain_over_margin": "4.2899",
+   "mine_gain_over_margin": "4.2899266e+0"
+  }
+ },
+ "identity": {
+  "T-305 -> 1015": {
+   "tool_nearest_one_to_one": false,
+   "mine_any_symmetry_one_to_one": false,
+   "one_to_one_agree": true,
+   "assignment_counts_equal": true,
+   "centred_counts_equal": true,
+   "largest_move_tool": "0.789455",
+   "largest_move_mine": "7.8945498e-1",
+   "side_difference_equal": true,
+   "tool_bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 55,
+    "tilted_paired_same_sign_within_1e-1": 52,
+    "tilted_paired_opposite_sign": 1,
+    "tilted_paired_opposite_sign_beyond_1e-1": 1,
+    "tilted_paired_with_untilted": 1,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   }
+  },
+  "T-305 -> 1017": {
+   "tool_nearest_one_to_one": false,
+   "mine_any_symmetry_one_to_one": false,
+   "one_to_one_agree": true,
+   "assignment_counts_equal": true,
+   "centred_counts_equal": true,
+   "largest_move_tool": "0.789453",
+   "largest_move_mine": "7.8945303e-1",
+   "side_difference_equal": true,
+   "tool_bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 55,
+    "tilted_paired_same_sign_within_1e-1": 53,
+    "tilted_paired_opposite_sign": 1,
+    "tilted_paired_opposite_sign_beyond_1e-1": 1,
+    "tilted_paired_with_untilted": 1,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   }
+  },
+  "T-305 -> 1020": {
+   "tool_nearest_one_to_one": false,
+   "mine_any_symmetry_one_to_one": false,
+   "one_to_one_agree": true,
+   "assignment_counts_equal": true,
+   "centred_counts_equal": true,
+   "largest_move_tool": "0.789453",
+   "largest_move_mine": "7.8945303e-1",
+   "side_difference_equal": true,
+   "tool_bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 55,
+    "tilted_paired_same_sign_within_1e-1": 53,
+    "tilted_paired_opposite_sign": 1,
+    "tilted_paired_opposite_sign_beyond_1e-1": 1,
+    "tilted_paired_with_untilted": 1,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   }
+  },
+  "1015 -> 1017": {
+   "tool_nearest_one_to_one": true,
+   "mine_any_symmetry_one_to_one": true,
+   "one_to_one_agree": true,
+   "assignment_counts_equal": true,
+   "centred_counts_equal": true,
+   "largest_move_tool": "0.328312",
+   "largest_move_mine": "3.2831227e-1",
+   "side_difference_equal": true,
+   "tool_bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 57,
+    "tilted_paired_same_sign_within_1e-1": 56,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 0,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   }
+  },
+  "1017 -> 1020": {
+   "tool_nearest_one_to_one": true,
+   "mine_any_symmetry_one_to_one": true,
+   "one_to_one_agree": true,
+   "assignment_counts_equal": true,
+   "centred_counts_equal": true,
+   "largest_move_tool": "0.107338",
+   "largest_move_mine": "1.0733842e-1",
+   "side_difference_equal": true,
+   "tool_bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 57,
+    "tilted_paired_same_sign_within_1e-1": 57,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 0,
+    "tilt_angles_shared_within_1e-4_degrees": 52
+   }
+  },
+  "1015 -> 1020": {
+   "tool_nearest_one_to_one": true,
+   "mine_any_symmetry_one_to_one": true,
+   "one_to_one_agree": true,
+   "assignment_counts_equal": true,
+   "centred_counts_equal": true,
+   "largest_move_tool": "0.289626",
+   "largest_move_mine": "2.8962637e-1",
+   "side_difference_equal": true,
+   "tool_bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 57,
+    "tilted_paired_same_sign_within_1e-1": 56,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 0,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   }
+  }
+ },
+ "all_agree": true
+}

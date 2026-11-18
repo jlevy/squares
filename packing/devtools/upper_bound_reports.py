@@ -1877,6 +1877,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[de Winter upper bounds 262 295 2026-11-16]": _import(
         "de-winter-upper-bounds-262-295-2026-11-16"
     ),
+    # The intake pass of 17 November (think-i38n): Mykhailo Polkovskyi's issue 1009 at 13
+    # counts from 147 to 307, centre/half-angle certificates beside Witness/v2 corner
+    # files of the same packings, in one repository and one packet.
+    "[Mishapolk issue 1009 2026-11-16]": _import("mishapolk-issue1009-2026-11-16"),
     # Lane w6-dewinter-1118 of 18 November (think-gqzz): Joost de Winter's issues 1021 at 268,
     # nine diagonal slices of published packings, and 1022 at 270, Panoras's compilation's
     # packing re-solved by regions, both at JoostdeWinter/square-packing a1ba501.

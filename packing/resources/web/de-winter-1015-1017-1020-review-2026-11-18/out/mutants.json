@@ -1,0 +1,398 @@
+{
+ "program": "r127_mutants.py",
+ "unmutated": {
+  "exit": 0,
+  "failures": 0,
+  "first_lines": [
+   "selftest: PASSED checks=10486 failures=0 cpu=2.67s",
+   ""
+  ]
+ },
+ "mutants": [
+  {
+   "mutant": 1,
+   "what": "A uses only the first square's axes",
+   "file": "r127_axes.py",
+   "replacements": [
+    [
+     "return max(_sep_on(a, 0, b), _sep_on(a, 1, b), _sep_on(b, 0, a), _sep_on(b, 1, a))",
+     "return max(_sep_on(a, 0, b), _sep_on(a, 1, b))"
+    ]
+   ],
+   "exit": 1,
+   "failures": 1612,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=1612 cpu=2.33s",
+    "  FAIL tilted corner margin (Fraction(4, 5), Fraction(3, 5)) 1/1000000000000000000000000000000",
+    "  FAIL tilted corner margin (Fraction(4, 5), Fraction(3, 5)) 0",
+    "  FAIL tilted corner margin (Fraction(4, 5), Fraction(3, 5)) -1/1000000000000000000000000000000",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 2,
+   "what": "A measures the separation on one side only",
+   "file": "r127_axes.py",
+   "replacements": [
+    [
+     "s = max(lo_b - hi_a, lo_a - hi_b)",
+     "s = lo_b - hi_a"
+    ]
+   ],
+   "exit": 1,
+   "failures": 978,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=978 cpu=2.5s",
+    "  FAIL listing invariance A u=(Fraction(1, 1), Fraction(0, 1)) s0=2",
+    "  FAIL listing invariance A u=(Fraction(1, 1), Fraction(0, 1)) s0=3",
+    "  FAIL listing invariance A u=(Fraction(1, 1), Fraction(0, 1)) s0=2",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 3,
+   "what": "A's unit test without perpendicularity",
+   "file": "r127_axes.py",
+   "replacements": [
+    [
+     "        and E[0][0] * E[1][0] + E[0][1] * E[1][1] == 0\n",
+     ""
+    ]
+   ],
+   "exit": 1,
+   "failures": 1,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=1 cpu=2.45s",
+    "  FAIL A refuses unit rhombus",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 4,
+   "what": "A takes the right clearance from the least x",
+   "file": "r127_axes.py",
+   "replacements": [
+    [
+     "side - Fraction(max(xs), a.D),",
+     "side - Fraction(min(xs), a.D),"
+    ]
+   ],
+   "exit": 1,
+   "failures": 388,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=388 cpu=2.5s",
+    "  FAIL wall clearance A (Fraction(1, 1), Fraction(0, 1)) wall 2 1/1000000000000000000000000000000",
+    "  FAIL wall clearance A (Fraction(1, 1), Fraction(0, 1)) wall 2 0",
+    "  FAIL wall clearance A (Fraction(1, 1), Fraction(0, 1)) wall 2 -1/1000000000000000000000000000000",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 5,
+   "what": "A counts a zero margin as apart",
+   "file": "r127_axes.py",
+   "replacements": [
+    [
+     "return \"apart\" if m > 0 else",
+     "return \"apart\" if m >= 0 else"
+    ]
+   ],
+   "exit": 1,
+   "failures": 6,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=6 cpu=2.6s",
+    "  FAIL 2x2 grid accepted (centre)",
+    "  FAIL 2x2 grid six touching pairs (centre)",
+    "  FAIL 2x2 grid accepted (witness)",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 6,
+   "what": "B with open point-in-polygon and crossing tests",
+   "file": "r127_area.py",
+   "replacements": [
+    [
+     "cross(poly[i], poly[(i + 1) % k], p) >= 0",
+     "cross(poly[i], poly[(i + 1) % k], p) > 0"
+    ],
+    [
+     "if 0 <= t <= 1 and 0 <= u <= 1:",
+     "if 0 < t < 1 and 0 < u < 1:"
+    ]
+   ],
+   "exit": 1,
+   "failures": 1276,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=1276 cpu=2.48s",
+    "  FAIL corner contact class u=(Fraction(1, 1), Fraction(0, 1)) d=0",
+    "  FAIL edge contact class B u=(Fraction(1, 1), Fraction(0, 1)) tau=0 d=0: apart",
+    "  FAIL listing invariance B u=(Fraction(1, 1), Fraction(0, 1)) s0=0",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 7,
+   "what": "B skips the edge crossings",
+   "file": "r127_area.py",
+   "replacements": [
+    [
+     "cand += seg_intersections(P, Q)",
+     "cand += []"
+    ]
+   ],
+   "exit": 1,
+   "failures": 1571,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=1571 cpu=1.51s",
+    "  FAIL corner contact class u=(Fraction(1, 1), Fraction(0, 1)) d=-1/1000000000000000000000000000000",
+    "  FAIL corner overlap area u=(Fraction(1, 1), Fraction(0, 1))",
+    "  FAIL corner contact class u=(Fraction(1, 1), Fraction(0, 1)) d=-1/1000000000000000000000000000000",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 8,
+   "what": "B's unit test by its sides alone",
+   "file": "r127_area.py",
+   "replacements": [
+    [
+     "ok = ok and d2(pts[0], pts[2]) == 2 and d2(pts[1], pts[3]) == 2",
+     "ok = ok"
+    ],
+    [
+     "ok = ok and (s == 2 or s == -2)",
+     "ok = ok"
+    ]
+   ],
+   "exit": 1,
+   "failures": 2,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=2 cpu=2.62s",
+    "  FAIL B refuses unit rhombus",
+    "  FAIL B refuses folded",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 9,
+   "what": "B calls a zero-area intersection apart",
+   "file": "r127_area.py",
+   "replacements": [
+    [
+     "    if area == 0:\n        return \"contact\", ZERO",
+     "    if area == 0:\n        return \"apart\", ZERO"
+    ]
+   ],
+   "exit": 1,
+   "failures": 632,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=632 cpu=2.32s",
+    "  FAIL corner contact class u=(Fraction(1, 1), Fraction(0, 1)) d=0",
+    "  FAIL edge contact class B u=(Fraction(1, 1), Fraction(0, 1)) tau=0 d=0: apart",
+    "  FAIL listing invariance B u=(Fraction(1, 1), Fraction(0, 1)) s0=0",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 10,
+   "what": "B's wall test calls a touch clear",
+   "file": "r127_area.py",
+   "replacements": [
+    [
+     "out.append(\"clear\" if npts == 0 else",
+     "out.append(\"clear\" if area == 0 else"
+    ]
+   ],
+   "exit": 1,
+   "failures": 506,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=506 cpu=2.51s",
+    "  FAIL wall class B (Fraction(1, 1), Fraction(0, 1)) wall 0 0: clear",
+    "  FAIL wall class B (Fraction(1, 1), Fraction(0, 1)) wall 1 0: clear",
+    "  FAIL wall class B (Fraction(1, 1), Fraction(0, 1)) wall 2 0: clear",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 11,
+   "what": "the closed form's half-extent doubled",
+   "file": "r127_frame.py",
+   "replacements": [
+    [
+     "return (abs(u[0]) + abs(u[1])) / 2",
+     "return abs(u[0]) + abs(u[1])"
+    ]
+   ],
+   "exit": 1,
+   "failures": 2483,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=2483 cpu=2.34s",
+    "  FAIL wall clearance closed form (Fraction(1, 1), Fraction(0, 1)) 0",
+    "  FAIL wall clearance closed form (Fraction(1, 1), Fraction(0, 1)) 1",
+    "  FAIL wall clearance closed form (Fraction(1, 1), Fraction(0, 1)) 2",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 12,
+   "what": "the closed form's threshold without the sine",
+   "file": "r127_frame.py",
+   "replacements": [
+    [
+     "return (1 + abs(cosd) + abs(sind)) / 2",
+     "return (1 + abs(cosd)) / 2"
+    ]
+   ],
+   "exit": 1,
+   "failures": 2445,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=2445 cpu=2.5s",
+    "  FAIL random pair 0: A both ways and closed form",
+    "  FAIL random closing 0 1/1000000000000000000000000000000",
+    "  FAIL random closing B 0 1/1000000000000000000000000000000",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 13,
+   "what": "the YAML reader lets a duplicate key through",
+   "file": "r127_read.py",
+   "replacements": [
+    [
+     "if value in top:",
+     "if False:"
+    ]
+   ],
+   "exit": 1,
+   "failures": 1,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=1 cpu=2.58s",
+    "  FAIL witness reader refuses duplicate key",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 14,
+   "what": "the readers ignore the stated count",
+   "file": "r127_read.py",
+   "replacements": [
+    [
+     "if len(squares) != w[\"n\"]:",
+     "if False:"
+    ],
+    [
+     "if not isinstance(sq, list) or len(sq) != n:",
+     "if not isinstance(sq, list):"
+    ]
+   ],
+   "exit": 1,
+   "failures": 2,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=2 cpu=2.54s",
+    "  FAIL centre reader refuses count",
+    "  FAIL witness reader refuses count",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 15,
+   "what": "the readers allow a leading plus",
+   "file": "r127_read.py",
+   "replacements": [
+    [
+     "RATIONAL = re.compile(r\"(-?)(0|",
+     "RATIONAL = re.compile(r\"([-+]?)(0|"
+    ]
+   ],
+   "exit": 1,
+   "failures": 1,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=1 cpu=2.53s",
+    "  FAIL centre reader refuses leading plus",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 16,
+   "what": "the decision ignores wall crossings",
+   "file": "r127_decide.py",
+   "replacements": [
+    [
+     "if ca == \"cross\" or cb == \"cross\":",
+     "if False:"
+    ],
+    [
+     "if d.insideB[i] != 1:",
+     "if False:"
+    ]
+   ],
+   "exit": 1,
+   "failures": 2,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=2 cpu=2.4s",
+    "  FAIL 2x2 in a box 1e-30 small (centre)",
+    "  FAIL 2x2 in a box 1e-30 small (witness)",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 17,
+   "what": "the contraction takes the least factor",
+   "file": "r127_contract.py",
+   "replacements": [
+    [
+     "if best is None or lam > best:",
+     "if best is None or lam < best:"
+    ]
+   ],
+   "exit": 1,
+   "failures": 2,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=2 cpu=2.41s",
+    "  FAIL tight grid: lambda* 1, L' 3",
+    "  FAIL loose grid contraction",
+    ""
+   ],
+   "fails_selftest": true
+  },
+  {
+   "mutant": 18,
+   "what": "the twin comparison reads only the first corner",
+   "file": "r127_twin.py",
+   "replacements": [
+    [
+     "if set(a) != set(b):",
+     "if a[0] not in b:"
+    ]
+   ],
+   "exit": 1,
+   "failures": 3,
+   "first_lines": [
+    "selftest: FAILED checks=10486 failures=3 cpu=2.42s",
+    "  FAIL twin differs at corner 1 of square 6",
+    "  FAIL twin differs at corner 2 of square 6",
+    "  FAIL twin differs at corner 3 of square 6",
+    ""
+   ],
+   "fails_selftest": true
+  }
+ ],
+ "verdict": "ALL_MUTANTS_FAIL"
+}
