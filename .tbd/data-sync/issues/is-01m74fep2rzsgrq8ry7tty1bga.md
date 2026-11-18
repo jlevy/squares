@@ -5,8 +5,8 @@ title: "Import #941, #942: Joost de Winter's 31 lowered upper bounds for n betwe
 kind: task
 status: in_progress
 priority: 2
-version: 16
-delegate: w4-records-1117r
+version: 17
+delegate: w4r-records-1118
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:55.639Z
-updated_at: 2026-11-17T21:55:56.923Z
+updated_at: 2026-11-18T01:19:03.507Z
 started_at: 2026-11-11T09:58:23.522Z
 ---
 #941 (2026-11-10T13:30Z) fifteen lowered upper bounds n 413-910; #942 (14:41Z) sixteen n 632-989; JoostdeWinter. Beyond the atlas's 324, below the 1024 horizon: beyond-horizon rows. Precedent: Yim's 553-700 rows (PR #934). Starts after the Özden lane to stay within usage limits.
