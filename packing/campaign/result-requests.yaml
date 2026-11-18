@@ -36207,7 +36207,7 @@ issues:
       at V3/C3, S3. It is not adopted: Polkovskyi's #1009 (T-323) is 3.62e-9 below it at
       292, 72 times its own contraction margin of 5.0288e-11, a new result under option D
       (think-b0w5), and takes the house.
-    read_through: '2026-11-16T15:39:16Z'
+    read_through: '2026-11-18T06:44:18Z'
     results:
     - key: n292-ribbon
       claim: >-
@@ -36271,6 +36271,15 @@ issues:
       exact-feasibility entries confirmed; and the two side-only values as context only. Its
       one question, whether the small turns of 216 squares the issue calls axis-aligned were
       left by the numerical optimization, is informational and holds nothing open.
+
+      The author answered it at 06:44:18Z the same day (issuecomment-6971266453), read here
+      by the records lane w9-records-1118: the integer program placed the 233 squares
+      exactly upright, the numerical optimization that followed freed the position and
+      angle of all 292, and the rational certificate keeps the angles where it left them,
+      so 17 stay exactly upright and 216 carry turns of up to 0.049 degrees, which he
+      describes as nearly axis-aligned; and he agrees with the credit as registered. The
+      answer changes nothing here: T-311's notes already describe the integer program and
+      the optimization of all 292 that followed, and the credit stands.
   - number: 1007
     title: 'Lowered upper bounds for n = 262 (side 16.699693441904) and n = 295 (side 17.699693441716): registration request'
     author: JoostdeWinter
@@ -36412,7 +36421,7 @@ issues:
       was unchanged when read (head 702df9bb, 84 bytes, no sources), so T-057's credit stays de
       Winter until a published revision names them (think-a88h); the GPT-6 Astra statement is
       recorded now as his.
-    read_through: '2026-11-16T22:06:21Z'
+    read_through: '2026-11-18T06:45:20Z'
     results: []
     asks:
     - what: >-
@@ -36448,7 +36457,13 @@ issues:
         the sources are in the README of JoostdeWinter/square-packing-211, but at 01:37Z on 17
         November 2026 its head was still 702df9bb of 16 September, on its only branch, with the
         84-byte README naming none, and the issue leaves the other sources unnamed. think-a88h
-        records them when a published revision names them.
+        records them when a published revision names them. The author published that revision
+        on 18 November 2026: 43e15330 (committed 05:36:16Z, its only branch's head when
+        read at 07:28Z, adding 14 lines to the README), named in his comment of 06:45:20Z
+        (issuecomment-6971284605). The ask stays queued on think-a88h, which now owes the
+        recording itself: pin the revision as a new bibliography key, set T-057's credit to de
+        Winter after the sources it names, and carry them by the chain rule to every line
+        through T-057 (T-098, T-175, T-181, T-182, T-188, T-253, T-243 at 182 and T-287 at 156).
     awaiting_author:
     - question: >-
         Could you push the README revision of JoostdeWinter/square-packing-211 that names T-057's
@@ -36456,7 +36471,19 @@ issues:
         2026, its head was still 702df9bb, whose 84-byte README names no prior work.
       changes: lineage
       asked: https://github.com/jlevy/squares/issues/1008#issuecomment-6964537872
-      state: awaiting
+      state: answered
+      answer: https://github.com/jlevy/squares/issues/1008#issuecomment-6971284605
+      note: >-
+        Answered on 18 November 2026 at 06:45:20Z: the README revision is
+        JoostdeWinter/square-packing-211 at 43e15330bab7dd11588067167a2dd370137ef2b7, whose
+        README now names the sources of T-057. They are Arslanov, Mustafin and Shangitbayev
+        (2021, Electronic Journal of Combinatorics 28(4), P4.22, doi:10.37236/8586), for the
+        construction of tilted components combined with grids and for its 64-square
+        rectangular component; Erich Friedman's collection and his survey DS7 (2009,
+        doi:10.37236/28); and David Ellsworth's records, the last two as starting points and
+        comparisons. The other parts are a computationally found 30-square component and
+        two aligned grids of 99 and 18 squares. The answer is read here; recording it in
+        T-057's credit and down the chain is the queued ask's, on think-a88h.
     beads:
     - think-a88h
     answer_bead: think-a88h
@@ -36467,11 +36494,6 @@ issues:
       kind: acknowledgement
       reported: []
       beads: [think-a88h]
-    blocked:
-      type: author
-      reason: >-
-        T-057's sources wait on the README revision the author says names them, unpublished
-        when read on 17 November 2026.
     close_when: >-
       T-057's sources are named in a published revision and carried through the chain at 211,
       or the author withdraws the ask, and the author has received a reply verified against
@@ -36485,6 +36507,16 @@ issues:
       the chain and its credit changes are done, so think-a88h, which carries T-057's sources
       down the chain once a published revision names them, answers the issue from here;
       think-dw3n, closed, is dropped from the beads.
+
+      On 18 November 2026 at 06:45:20Z the author answered (issuecomment-6971284605), read
+      here by the records lane w9-records-1118 with the revision it names, 43e15330: its
+      README names T-057's sources (the awaiting_author entry above), the search and
+      refinement were done with GPT-6 Astra from earlier solutions and scripts developed
+      with Claude Opus and earlier GPT models, and he accepts the credit lines as merged in
+      #1010. The block on the author lifts, so `blocked` is removed, and the blocked:author
+      label follows the merge of this change. What remains is the project's own: think-a88h
+      records the sources in T-057's credit and carries them down the chain, and the
+      follow-up that reports it follows the merge of that change.
   - number: 1009
     title: 'Lowered upper bounds for 7 counts (n = 210, 260, 262, 268, 272, 292, 295) and 6 exact 12-place refinements (n = 147, 156, 180, 270, 299, 307): registration request'
     author: Mishapolk
