@@ -1,0 +1,30 @@
+{
+  "kind": "dilated-measure-replay-comparison/v1",
+  "packet": "de-winter-s108-lower-bound-2026-11-17",
+  "certificate": "mixed_n108_L1063",
+  "capture": "packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.jsonl.gz",
+  "capture_sha256": "c8fdeddf24cd6087c25c0c766d82e785390c0eb33d88c889c7a34948686eb6b6",
+  "directions": 401,
+  "capture_states_the_declared_net": true,
+  "status": "VERIFIED",
+  "nodes": 266337510,
+  "runs_receipts_status": "RECEIPTS_HOLD",
+  "run_nodes": 266337510,
+  "nodes_equal_run_nodes": true,
+  "capture_input_sha256": "bd471f6541874a6f6a057c57b8804812563859d83a0f2e1a1aa7595dad32d0da",
+  "premises_equal_each_run_apart_from_input": true,
+  "least_certified_bound": 1.0000000000543061,
+  "build": {"profile":"release","rustc":"rustc 1.98.0 (88d9e12ae 2026-08-18)","source_sha256":"d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88","target":"x86_64-unknown-linux-gnu"},
+  "threads": 2,
+  "direction_cpu_seconds": 4623.619304447006,
+  "run_direction_cpu_seconds": 5407.804,
+  "runs": [
+    "packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_000_030.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_031_061.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_062_092.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_093_122.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_123_157.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_158_192.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_193_227.jsonl.gz",
+    "packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_228_262.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_263_297.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_298_332.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_333_367.jsonl.gz","packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/direction_runs/directions_368_400.jsonl.gz"
+  ],
+  "run_directions": 401,
+  "identical_directions": 401,
+  "differing": {},
+  "verdict": "EVERY_DIRECTION_AGREES",
+  "compared": "every field of every direction row but cpu_seconds and seconds, the premises apart from input_sha256, and the node total against the runs' summed nodes"
+}

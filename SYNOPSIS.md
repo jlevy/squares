@@ -532,7 +532,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 329 | 329 registered, 297 by others |
+| Frontier results | 330 | 330 registered, 298 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -1146,6 +1146,7 @@ case or experiment separately.
 | [De Winter’s Three Certificates of s(127), #1015, #1017 and #1020: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md) | dated review record | record | retained | — |
 | [De Winter’s Three Certificates of s(127), #1015, #1017 and #1020: Stage 4 Review of Record](docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md) | dated review record | record | retained | — |
 | [De Winter’s Rescaled Measure for $s(109) \ge s(108) \ge 10.6300379408$ (#1018): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1018.md) | dated review record | record | retained | — |
+| [De Winter’s Certificates of s(268) and s(270), #1021 and #1022: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md) | dated review record | record | retained | — |
 | [The Construction of #992 by Miguel Lara: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-lara-992.md) | dated review record | record | retained | — |
 | [Proof Review: Khalili and Gharabaghi’s `s(k² − 5) = k` for Every `k ≥ 7`](docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md) | dated review record | record | retained | — |
 | [De Winter’s Packings at 132 and 157: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-11-dewinter-132-157.md) | dated review record | record | retained | — |

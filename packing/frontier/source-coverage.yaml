@@ -13605,6 +13605,32 @@ sources:
     and 4.54e-3 below T-193's (22 + 22 sqrt(2))/3 at 295; the ledger of 17 November for this
     lane (campaign/issue-intake/upper-bounds-1005-1007-20261117) records both. All 6 native jobs
     have full outcomes.
+- id: de-winter-s108-lower-bound-2026-11-17
+  title: Joost de Winter's dilation of Hosono's mixed_n108_L1062 for s(108) >= 10.630037940829..., issue 1018
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/cc20a26845789c2502950041c26709eda8a71081/lower_n108
+  local: resources/web/de-winter-s108-lower-bound-2026-11-17/
+  source_key: '[de Winter s108 lower bound 2026-11-17]'
+  scope: {n_values: [108, 109]}
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-108.md
+  - frontier/n-109.md
+  - frontier/results.yaml
+  - resources/web/de-winter-s108-lower-bound-2026-11-17/README.md
+  evidence:
+  - E-de-winter-1018-n108-report
+  notes: >-
+    The licence, the root README and lower_n108/ are retained at cc20a26, the commit
+    jlevy/squares#1018 names, but for the copy of Hosono's candidate the T-216 packet keeps, the
+    copy of this repository's crate and SOUNDNESS.md, and two copies of this repository's
+    licence, each pinned by digest. The certificate is Hosono's T-216 measure dilated by
+    1063/1062 onto a 401-direction declared net at a core side the source chose; the proof
+    enlarges the bound from 10.63 to 10.6300379408297..., above T-216's 531/50 by 0.0100, and
+    the same bound holds at 109 by monotonicity. T-327 records the claim.
 - id: de-winter-s127-issue1015-2026-11-17
   title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing 35b576a, issue 1015
   role: source-repository

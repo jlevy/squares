@@ -235,8 +235,10 @@ def test_a_correcting_bound_keeps_its_recency_and_names_what_it_corrects(
     # since the second merge that day, when T-080's replayed certificate took n = 101 to 105;
     # 219 since the third, when T-076's replayed linear certificate took n = 82.
     # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108; 213
-    # since 4 November, when T-179's replayed linear certificate took n = 145 to 149.
-    assert len(corrected) == 213
+    # since 4 November, when T-179's replayed linear certificate took n = 145 to 149; 212
+    # since 18 November, when de Winter's replayed and reviewed #1018 (T-327)
+    # took n = 109 by monotonicity from 108.
+    assert len(corrected) == 212
     seen = 0
     for attributes, cells in rows:
         n = int(attributes["data-n"] or 0)

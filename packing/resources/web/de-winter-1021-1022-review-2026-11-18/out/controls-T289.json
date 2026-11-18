@@ -1,0 +1,356 @@
+{
+ "summary": {
+  "label": "T-289",
+  "kind": "house",
+  "planned": 33,
+  "ran": 33,
+  "as_stated": 33,
+  "not_as_stated": [],
+  "not_run": [],
+  "cpu_total": 332.4
+ },
+ "controls": [
+  {
+   "id": "RC1",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "corners file: squares is not a list of n = 268"
+  },
+  {
+   "id": "RC4",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "side: scalar '16.8720298490844501479793265790643273101820' is outside the grammar"
+  },
+  {
+   "id": "RC5",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "square 1 corner 0[0]: scalar '+17453292519943295007693358218114639833141126552' is outside the grammar"
+  },
+  {
+   "id": "RC6",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "corners file: scalar style '\"'"
+  },
+  {
+   "id": "RC7",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "corners file: duplicate key 'n'"
+  },
+  {
+   "id": "RC8",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "corners file: YAML anchor"
+  },
+  {
+   "id": "RC9",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "corners file: tab or carriage return"
+  },
+  {
+   "id": "RC10",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "corners file: square 1 id out of order or of the wrong kind"
+  },
+  {
+   "id": "RC11",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "square 1 corner 0[0]: negative zero"
+  },
+  {
+   "id": "RC12",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "observed": "square 1 corner 0[0]: scalar '017453292519943295007693358218114639833141126552' is outside the grammar"
+  },
+  {
+   "id": "RC2",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "observed": [
+    [
+     "side",
+     "not-lowest-terms"
+    ]
+   ]
+  },
+  {
+   "id": "G1",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "per_decision": [
+     true
+    ]
+   },
+   "cpu": 8.12
+  },
+  {
+   "id": "G2",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "per_decision": [
+     true
+    ]
+   },
+   "cpu": 8.36
+  },
+  {
+   "id": "G3",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "corner_sets_not_unit": [
+     1
+    ],
+    "b_not_unit": [
+     1
+    ]
+   },
+   "cpu": 8.61
+  },
+  {
+   "id": "G4",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "facts": {},
+   "cpu": 9.3
+  },
+  {
+   "id": "G5",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "facts": {},
+   "cpu": 9.13
+  },
+  {
+   "id": "G6",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "facts": {},
+   "cpu": 9.41
+  },
+  {
+   "id": "G7",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "facts": {},
+   "cpu": 9.45
+  },
+  {
+   "id": "S1a",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "delta": "1.00000e-40",
+    "W": "0",
+    "crossing": 5
+   },
+   "cpu": 8.46
+  },
+  {
+   "id": "S1b",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "delta": "5.00000e-222",
+    "W": "0",
+    "crossing": 5
+   },
+   "cpu": 8.19
+  },
+  {
+   "id": "S1c",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "facts": {
+    "delta": "0",
+    "W": "0",
+    "crossing": 0
+   },
+   "cpu": 8.95
+  },
+  {
+   "id": "S1d",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "delta": "1.00000e-40",
+    "W": "0",
+    "crossing": 5
+   },
+   "cpu": 8.35
+  },
+  {
+   "id": "S1e",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "facts": {
+    "delta": "-5.49852e-13",
+    "W": "0",
+    "crossing": 0
+   },
+   "cpu": 8.95
+  },
+  {
+   "id": "S1f",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "delta": "4.50148e-13",
+    "W": "0",
+    "crossing": 15
+   },
+   "cpu": 8.48
+  },
+  {
+   "id": "E1c",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "facts": {
+    "extent": "16.872029849084450147979326579064",
+    "side_less_extent": "0"
+   },
+   "cpu": 9.12
+  },
+  {
+   "id": "E1p",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "crossing": 5
+   },
+   "cpu": 8.38
+  },
+  {
+   "id": "K1c",
+   "as_stated": true,
+   "stated_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "facts": {
+    "binding": [
+     [
+      55,
+      65
+     ]
+    ],
+    "shrunk_side_30": "16.872029849081245664975492767766"
+   },
+   "cpu": 17.02
+  },
+  {
+   "id": "K1p",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "overlapping": 1
+   },
+   "cpu": 15.66
+  },
+  {
+   "id": "K1s",
+   "as_stated": true,
+   "stated_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "facts": {
+    "crossing": 5
+   },
+   "cpu": 15.67
+  },
+  {
+   "id": "PALL",
+   "as_stated": true,
+   "facts": {
+    "closings": 71556,
+    "not_as_stated": []
+   },
+   "cpu": 107.65
+  },
+  {
+   "id": "WALL",
+   "as_stated": true,
+   "facts": {
+    "moves": 536,
+    "not_as_stated": []
+   },
+   "cpu": 0.27
+  },
+  {
+   "id": "C0",
+   "as_stated": true,
+   "facts": {
+    "pairs": 35778,
+    "margin_mismatches": 0,
+    "squares": 268,
+    "clearance_mismatches": 0
+   },
+   "cpu": 15.04
+  },
+  {
+   "id": "KC",
+   "as_stated": true,
+   "facts": {
+    "controls_with_a_stated_verdict": 29,
+    "constant_ACCEPT_fails": 20,
+    "constant_REFUSE_fails": 9,
+    "constant_ACCEPT_fails_ids": [
+     "RC1",
+     "RC4",
+     "RC5",
+     "RC6",
+     "RC7",
+     "RC8",
+     "RC9",
+     "RC10",
+     "RC11",
+     "RC12",
+     "G1",
+     "G2",
+     "G3",
+     "S1a",
+     "S1b",
+     "S1d",
+     "S1f",
+     "E1p",
+     "K1p",
+     "K1s"
+    ],
+    "constant_REFUSE_fails_ids": [
+     "RC2",
+     "G4",
+     "G5",
+     "G6",
+     "G7",
+     "S1c",
+     "S1e",
+     "E1c",
+     "K1c"
+    ]
+   }
+  }
+ ]
+}
