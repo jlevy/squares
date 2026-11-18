@@ -5,7 +5,7 @@ title: "Apply the 17 November owner decisions' record changes: close #574 with t
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: w4r-records-1118
 labels:
   - intake
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.249Z
-updated_at: 2026-11-18T01:28:41.767Z
+updated_at: 2026-11-18T01:38:36.617Z
 started_at: 2026-11-17T21:29:36.275Z
 ---
 
@@ -29,3 +29,5 @@ started_at: 2026-11-17T21:29:36.275Z
 2026-11-18T01:19Z w4r-records-1118: took over lane w4-records-1117r (killed by a worker restart about 01:00Z 18 Nov); think-8gvd, think-wvr8, think-cen3 delegated to w4r-records-1118. Resuming at PR #1016 head f38bb863c (main eb50f54e9 merged in): check dispositions and pin, wait for CI, merge, then post replies from main and the records change.
 
 2026-11-18T01:28Z w4r-records-1118: review A's dispositions (issuecomment-6965071615) cover A1-A14; pin checked at head f38bb863c (release_pin --check: the pin 103a47409 is the last data commit; the merge of main eb50f54e9 (#1014, review docs only) changes no data; stamp_landed: nothing to stamp). Hosted CI green on f38bb863c (Packing validation 44212531249, Certificate page 44212531302, Branch mergeability 44212522440; packing-required and pages-required pass). Marked ready and merged #1016 as 2980557a2 at 01:28:28Z (merge commit). Next: deploy check, then replies from main.
+
+2026-11-18T01:38Z w4r-records-1118: branch claude/keen-galileo-9gbz1a restarted on main 2980557a2; WIP c38f6e7b3 (pushed) records other lanes' replies (#776, #777 final + close, #1008 ack + awaiting_author, #532, #446). Drafts for #574, #529, #537, #941, #783, #973, #543, #763, #1012 in the scratchpad's drafts/; posting waits for the Pages deploy of 2980557a2 (run 44216081724, runners starved).
