@@ -5,7 +5,7 @@ title: "Import #1005, #1006 and #1007: s(292) by Özden and by de Winter, s(262)
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 19
 delegate: w3r2-pass-1118
 labels: []
 dependencies:
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:20.740Z
-updated_at: 2026-11-18T06:40:00.905Z
+updated_at: 2026-11-18T06:48:55.924Z
 started_at: 2026-11-16T15:59:56.835Z
 ---
 
@@ -46,3 +46,5 @@ Adoption target: the 2026-11-16 pass; switch to 2026-11-17 if adoption + stamps 
 2026-11-18T06:27Z w3r2-pass-1118: final replies posted from main 86284ec20 after the verified deploy (Pages run 44246610603), and the issues closed (06:23Z): #1005 https://github.com/jlevy/squares/issues/1005#issuecomment-6970908422 (T-310 V3/C3, superseded; T-323 the house), #1006 https://github.com/jlevy/squares/issues/1006#issuecomment-6970908715 (T-311 V3/C3, superseded; T-323 credited de Winter improved by Polkovskyi), #1007 https://github.com/jlevy/squares/issues/1007#issuecomment-6970909007 (T-312/T-313 V3/C3, superseded by T-319/T-324). OWED: the records change recording these replies (kind final, reported ids/rungs/positions) and state closed/closed date in result-requests.yaml; close this bead only after that change merges (check_bead_tree --before-close HOLDs on #1005-#1007 now). Each reply carries one informational question (no awaiting_author).
 
 2026-11-18T06:55Z w9-records-1118: records change c6e5814e6 pushed on claude/keen-galileo-9gbz1a (from main 86284ec20): #1005, #1006, #1007 recorded closed 2026-11-18 with their final replies (T-310..T-313 V3/C3 confirmed superseded). Next: checks, draft PR, coordinator review, merge, then close via check_bead_tree --before-close.
+
+2026-11-18T06:50Z w9-records-1118 (correction: the previous note's 06:55Z was 06:40Z): draft PR #1032 opened (intake, S1), head 8e10dc630 (c6e5814e6 records the four finals and closes; 8e10dc630 the no-public-change record), base main 86284ec20. Records tier 55/55; check_requests --github 15 -> 7 differences (the 8 for #1005-#1009 closed). Next: hosted CI, coordinator's senior review.
