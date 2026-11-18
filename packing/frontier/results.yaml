@@ -16438,12 +16438,13 @@ results:
       126 move from the Karakus strip bound to 563/50, and their reported lanes at 122 to
       125 from Green's reported value to it. At n = 126 the same source's closed-form bound
       (T-180), reported three days later, is larger, a(126) = 11.3133238509..., and keeps
-      the reported lane, so this entry is superseded there in that lane. The release
-      asset's candidate and certificate are retained in the packet; its proof bundle
-      (38.9 MB) is pinned by digest in the packet's release record and fetched from the
-      release for a replay, and the release's SHA256SUMS does not list the asset. The score
-      of 11 October was given to the claim; the complete replay passed after it and leaves
-      the score as it was.
+      the reported lane, so this entry is superseded there in that lane.
+
+      The release asset's candidate and certificate are retained in the packet; its proof
+      bundle (38.9 MB) is pinned by digest in the packet's release record and fetched from
+      the release for a replay, and the release's SHA256SUMS does not list the asset. The
+      score of 11 October was given to the claim; the complete replay passed after it and
+      leaves the score as it was.
     controls:
       - packing/resources/web/wand125-linear-n122-2026-10-10/receipts/n122/control.json
       - packing/tests/test_wand125_linear_certificates.py
