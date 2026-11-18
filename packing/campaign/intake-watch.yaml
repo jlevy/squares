@@ -1990,12 +1990,30 @@ repositories:
       record. Nothing under theorem-a/, composites/ or the strip folders changes.
   # Lane L104 of 11 November 2026 (think-bcfs); lane L136 of 12 November (think-c3p2); lanes
   # L154 (think-g2ax), L157 (think-2h88) and L158 of 14 November; lane L181 of 15 November
-  # (think-32cl).
+  # (think-32cl); lane c-import-1005-1117 of 17 November (think-qag8).
   - url: https://github.com/JoostdeWinter/square-packing
-    read_through: 6c0ad56a13346abda6debd73afab7892072896c7
-    read_on: '2026-11-15'
+    read_through: d02237aa809d3738e7968936d08e6ba9ddd01edb
+    read_on: '2026-11-17'
     note: >-
-      Read through 6c0ad56 (12:07:15Z on 15 November), the head at 12:55Z, five commits past
+      Read through d02237a (21:26:39Z on 16 November), the head at 01:34Z on 17 November,
+      four commits past the 6c0ad56 read. 796ff3b (15:37:03Z), "Add a packing of 292 unit
+      squares with side 17.590016442847", adds n292/, a packing of 292 squares that
+      jlevy/squares#1006 (15:39:16Z) reports, and a row and a paragraph of the root README;
+      the de-winter-s292-upper-bound-2026-11-16 packet pins it, the commit the issue names,
+      and retains n292/. fe13d47 (15:37:03Z) adds only n292/REGISTRATION.md, the issue's text
+      in the registration template's form, and n292/SHA256SUMS, whose digests match 796ff3b's
+      files. 853b92e (21:26:15Z), "Add packings of 262 and 295 unit squares with sides
+      16.699693441904 and 17.699693441716", adds n262/ and n295/, the two packings
+      jlevy/squares#1007 (21:28:27Z) reports, and two rows and a paragraph of the root
+      README; the de-winter-upper-bounds-262-295-2026-11-16 packet pins it, the commit the
+      issue names, and retains both folders. d02237a (21:26:39Z) adds only
+      n262/REGISTRATION.md and n295/REGISTRATION.md and a line for each to its folder's
+      SHA256SUMS. No packet retains fe13d47 or d02237a: they add no bound, certificate or
+      method, and every certificate, witness and checker has the same blob at the pins and
+      the head. Lane c-import-1005-1117 (think-qag8) records the three claims. Nothing more
+      to import.
+
+      The read of 15 November (lane L181) was through 6c0ad56 (12:07:15Z on 15 November), the head at 12:55Z, five commits past
       the 66849f2 read. 64d5ee7 (11:27:26Z), "Add a packing of 90 unit squares with side
       9.994038857546", adds n90/, a packing of 90 squares that jlevy/squares#996 (11:30:13Z)
       reports, and a row and a paragraph of the root README; the
@@ -2286,3 +2304,15 @@ repositories:
       264 and 305 with their decimal poses, the author's checker and its output, and
       packing-witness verify's output, which the packet retains whole but for Evan Daniel's
       MIT notice, pinned against a byte-identical copy. Nothing more to import.
+  # Lane c-import-1005-1117 of 17 November 2026 (think-qag8).
+  - url: https://github.com/kenaznia-doga/s292-upper-bound
+    read_through: dec930bdaa5f58077af6c05bc13c0fca0a58a3ed
+    read_on: '2026-11-17'
+    note: >-
+      Read through dec930b (15:27:16Z on 16 November), the head at 01:34Z on 17 November and
+      the repository's only commit, which jlevy/squares#1005 (15:27:38Z) names: the exact
+      corner certificate at 292 and its JSON twin, the decimal pose, the search's hit and its
+      metadata, the check reports and outputs, the comparison figures, the lab's checker and
+      Evan Daniel's MIT notice. The ozden-s292-upper-bound-2026-11-16 packet pins it and
+      retains the whole tree but the figures, the checker and its README and the notice,
+      which it pins by digest or against byte-identical copies. Nothing more to import.

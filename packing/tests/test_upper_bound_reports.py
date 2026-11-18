@@ -282,6 +282,16 @@ L181_1115 = "de-winter-s90-upper-bound-2026-11-15"
 #: JoeGun's #1001 at 127, 204, 232, 264 and 305, his improvements of Tomas Kodaj's public
 #: Kaggle packings; corner Witness/v2 files read by ``witness-corners``, under CC BY 4.0.
 L187_1116 = "joegun-upper-bounds-2026-11-16"
+#: The intake pass's lane c-import-1005-1117 of 17 November 2026
+#: (`test_upper_bound_reports_i1_1117`): Doğa Özden's #1005 at 292, a column-band design
+#: promoted the same way as his #983, under CC BY 4.0 and MIT; Joost de Winter's #1006 at
+#: 292, below it, and his #1007 at 262 and 295, his centre-direction JSON read by
+#: ``center-direction-json``, under MIT. The 295 house is T-193's algebraic side.
+I1_1117 = (
+    "ozden-s292-upper-bound-2026-11-16",
+    "de-winter-s292-upper-bound-2026-11-16",
+    "de-winter-upper-bounds-262-295-2026-11-16",
+)
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -356,6 +366,7 @@ EVERY = (
     L170_1115,
     L181_1115,
     L187_1116,
+    *I1_1117,
 )
 
 
@@ -486,6 +497,9 @@ def test_custody_refuses_a_changed_retained_file(
         ("descending", "unique and ascending"),
         ("replayed-undeclared", "replayed must be"),
         ("requested-empty", "requested must be"),
+        ("algebraic-house", "an algebraic house names a dated packet"),
+        ("algebraic-house-reader", "an algebraic house names a dated packet"),
+        ("algebraic-house-print", "an algebraic house names a dated packet"),
     ],
 )
 def test_the_declaration_refuses_what_it_does_not_describe(
@@ -508,6 +522,17 @@ def test_the_declaration_refuses_what_it_does_not_describe(
         value["replayed"].append(400)
     elif mutation == "requested-empty":
         value["requested"] = []
+    elif mutation == "algebraic-house":
+        value["houses"][0]["algebraic"] = "not a dated packet"
+    elif mutation == "algebraic-house-reader":
+        # A dated packet, but a reader other than the house's source key (review A8 of #1011).
+        value["houses"][0]["algebraic"] = T193_PACKET
+        value["houses"][0]["reader"] = "[not this house's source key]"
+    elif mutation == "algebraic-house-print":
+        # A dated packet and the source key as reader, but a printed lane beside it.
+        value["houses"][0]["algebraic"] = T193_PACKET
+        value["houses"][0]["reader"] = value["houses"][0]["source_key"]
+        value["houses"][0]["reported_rounding"] = "up"
     else:
         value["certificates"].reverse()
     _write_json(path, value)
@@ -529,6 +554,92 @@ def test_a_declaration_may_request_only_counts_beyond_the_horizon(
     _write_json(path, value)
     assert reports.load_declaration(packet)["houses"] == []
     assert reports.load_declaration(private(EVAND_584))["houses"] == []
+
+
+#: T-193's issue-639 form at 295, (22 + 22 sqrt 2)/3, the case's house since 23 October 2026,
+#: which no rational reader rebuilds: its packet's derived algebraic fact states it.
+T193_PACKET = "evand-exact-cur-2026-10-16"
+ALGEBRAIC_HOUSE: dict[str, Any] = {
+    "n": 295,
+    "reader": "[Daniel exact current records 2026-10-16]",
+    "source_key": "[Daniel exact current records 2026-10-16]",
+    "holders": "Ryan Xu, improved by Evan Daniel and PingYou Ltd",
+    "result": "T-193",
+    "reported_value": "17.70423279073603036",
+    "verified_value": "17.70423279073603036",
+    "evidence": ["E-evand-639-verify-exact-replay"],
+    "algebraic": T193_PACKET,
+}
+#: (22 + 22 sqrt 2)/3 to 40 places, cut.
+T193_SIDE = Fraction("17.7042327907360303578790506442044525761775")
+
+
+def _algebraic_row(side: Fraction, **house: str) -> dict[str, Any]:
+    """One certificate at 295 compared with the algebraic house, no rational reader read."""
+    declaration = cast(
+        "reports.Declaration",
+        {
+            "issue": "https://github.com/jlevy/squares/issues/1",
+            "read_on": "2026-11-17",
+            "houses": [{**ALGEBRAIC_HOUSE, **house}],
+            "pending": [],
+            "requested": [295],
+            "replayed": [295],
+        },
+    )
+    row = cast(
+        "reports.CertificateRow",
+        {
+            "n": 295,
+            "path": "certificates/n295.cert",
+            "format": "evand-cert",
+            "offered": "17.698115018700",
+            "first_committed": "2026-11-16T23:27:09Z",
+        },
+    )
+
+    def no_rational_reader(reader: str, n: int) -> Fraction:
+        raise AssertionError(f"{reader} was read as a rational house at {n}")
+
+    certificate = legacy.Certificate(295, side, ())
+    return reports.claim_row(row, certificate, declaration, no_rational_reader)
+
+
+@pytest.mark.parametrize(
+    ("side", "relation"),
+    [(Fraction(17698115018700, 10**12), "below"), (Fraction(1771, 100), "above")],
+)
+def test_an_algebraic_house_is_compared_exactly(side: Fraction, relation: str) -> None:
+    """At 295 the house's side is a quadratic irrational; the relation is one exact sign."""
+    row = _algebraic_row(side)
+    case = row["case"]
+    assert case["relation"] == relation
+    assert case["algebraic"] == T193_PACKET
+    assert "reader" not in case
+    low, high = (Fraction(value) for value in case["difference_bounds"])
+    # The house's side less the certificate's, bracketed within a part in a million.
+    assert low <= Fraction(case["difference"]) <= high
+    assert (low > 0) is (high > 0) is (relation == "below")
+    apart = T193_SIDE - side
+    assert abs(low - apart) <= abs(apart) / 10**6
+    assert abs(high - apart) <= abs(apart) / 10**6
+    holders = f"case: {ALGEBRAIC_HOUSE['holders']}"
+    assert row["smallest"] == (reports.THIS if relation == "below" else holders)
+
+
+@pytest.mark.parametrize("printed", ["17.704232790737", "17.70423279073603036"])
+def test_an_algebraic_house_admits_its_side_rounded_up(printed: str) -> None:
+    side = Fraction(17698115018700, 10**12)
+    assert _algebraic_row(side, verified_value=printed)["case"]["relation"] == "below"
+
+
+@pytest.mark.parametrize(
+    "printed", ["17.704232790736", "17.704232790738", "17.7042327907360303"]
+)
+def test_an_algebraic_house_refuses_any_other_print(printed: str) -> None:
+    side = Fraction(17698115018700, 10**12)
+    with pytest.raises(kernel.ReportError, match="algebraic side rounded up"):
+        _algebraic_row(side, verified_value=printed)
 
 
 @pytest.mark.parametrize(
@@ -1406,10 +1517,10 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
     # to #931, #935, #936, #938, #943 to #947, #954, #959, #960 and #962, Yim's #895 and de
-    # Winter's #958, #977, #979 and #997 and JoeGun's #1001 touches the box. Couzo's #672
-    # touches at 229 and clears every wall at 227, so its walls mix, as de Winter's #941
-    # does, whose borders touch the box and whose other certificates clear it; every other
-    # source's clear it.
+    # Winter's #958, #977, #979, #997, #1006 and #1007, JoeGun's #1001 and Özden's #1005
+    # touches the box. Couzo's #672 touches at 229 and clears every wall at 227, so its walls
+    # mix, as de Winter's #941 does, whose borders touch the box and whose other
+    # certificates clear it; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
@@ -1438,6 +1549,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         *L164_1114,
         L181_1115,
         L187_1116,
+        *I1_1117,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1742,6 +1854,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L170_1115: "2026-11-15",
         L181_1115: "2026-11-15",
         L187_1116: "2026-11-16",
+        **dict.fromkeys(I1_1117, "2026-11-16"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

@@ -1,0 +1,83 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1006",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter s292 upper bound 2026-11-16]",
+  "report_evidence": "E-de-winter-1006-certificate-report",
+  "receipt_format": "de-winter-1006-exact-replay-v1",
+  "witness_prefix": "W-de-winter-1006-n",
+  "claim_limitations": "Complete 2026-11-16 exact rational centre-direction certificate at 292, read exactly from the retained source file n292/n292_exact.json at 796ff3b, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#1006 names: a ribbon extending David W. Cantrell's packing of 146 squares, with axis-aligned squares placed by an integer program. Finite construction feasibility only; the linear program's first-order statement, local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-17",
+  "read_at_main": "f9ddfeeef9070ede581142154ab992149b278ab0",
+  "certificates": [
+    {
+      "n": 292,
+      "path": "n292/n292_exact.json",
+      "format": "center-direction-json",
+      "offered": "17.590016442847",
+      "first_committed": "2026-11-16T15:37:03Z",
+      "same_packing": [
+        {
+          "path": "n292/n292_witness.yaml",
+          "format": "witness-corners-opposite"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    292
+  ],
+  "replayed": [
+    292
+  ],
+  "houses": [
+    {
+      "n": 292,
+      "reader": "[Daniel regularized lists 2026-10-10]",
+      "source_key": "[Daniel regularized lists 2026-10-10]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel",
+      "result": "T-146",
+      "reported_value": "17.5913781454976982",
+      "verified_value": "17.5913781454976982",
+      "evidence": [
+        "E-evand-regularized-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 292,
+      "report": "T-193 (#639)",
+      "url": "https://github.com/jlevy/squares/issues/639",
+      "holders": "Evan Daniel, of the house's packing",
+      "result": "T-193",
+      "printed": "17.5913781454976981594349494020130208086995",
+      "rounding": "unstated"
+    },
+    {
+      "n": 292,
+      "report": "#1005",
+      "url": "https://github.com/jlevy/squares/issues/1005",
+      "holders": "Doğa Özden",
+      "reader": "[Özden s292 upper bound 2026-11-16]"
+    }
+  ],
+  "register": {
+    "title": "Joost de Winter's packing of 292 squares at JoostdeWinter/square-packing 796ff3b, issue 1006",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-qag8",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER"
+    }
+  }
+}
