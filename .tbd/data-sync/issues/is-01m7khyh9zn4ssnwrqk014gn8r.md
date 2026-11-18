@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 24
+version: 25
 delegate: w3r2-pass-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T06:48:59.642Z
+updated_at: 2026-11-18T06:50:25.608Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -56,3 +56,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-18T06:55Z w9-records-1118: records change c6e5814e6 pushed on claude/keen-galileo-9gbz1a: #1009 recorded closed 2026-11-18 with its final reply (T-314..T-326 V3/C3 confirmed current; beads [think-4z8z]); think-4z8z added to #1009's beads. Next: checks, draft PR, review, merge, close via --before-close.
 
 2026-11-18T06:50Z w9-records-1118: draft PR #1032 (intake, S1) records #1009's final and close; head 8e10dc630, base 86284ec20. Next: hosted CI, review, merge, then close via --before-close.
+
+2026-11-18T06:50Z w9-records-1118 STOPPED (handback requested) before review/merge. State: draft PR #1032 (intake, S1), head 8e10dc630, base 86284ec20, hosted CI in progress; review request sent to main (squares-e0 unreachable). Remaining: senior review + addressing pass, CI green on head, merge (merge commit) after re-checking main, then close this bead via check_bead_tree --before-close on main.

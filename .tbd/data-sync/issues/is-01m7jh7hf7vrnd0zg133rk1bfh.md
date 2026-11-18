@@ -5,7 +5,7 @@ title: "Import #1005, #1006 and #1007: s(292) by Özden and by de Winter, s(262)
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 delegate: w3r2-pass-1118
 labels: []
 dependencies:
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:20.740Z
-updated_at: 2026-11-18T06:48:55.924Z
+updated_at: 2026-11-18T06:50:21.472Z
 started_at: 2026-11-16T15:59:56.835Z
 ---
 
@@ -48,3 +48,5 @@ Adoption target: the 2026-11-16 pass; switch to 2026-11-17 if adoption + stamps 
 2026-11-18T06:55Z w9-records-1118: records change c6e5814e6 pushed on claude/keen-galileo-9gbz1a (from main 86284ec20): #1005, #1006, #1007 recorded closed 2026-11-18 with their final replies (T-310..T-313 V3/C3 confirmed superseded). Next: checks, draft PR, coordinator review, merge, then close via check_bead_tree --before-close.
 
 2026-11-18T06:50Z w9-records-1118 (correction: the previous note's 06:55Z was 06:40Z): draft PR #1032 opened (intake, S1), head 8e10dc630 (c6e5814e6 records the four finals and closes; 8e10dc630 the no-public-change record), base main 86284ec20. Records tier 55/55; check_requests --github 15 -> 7 differences (the 8 for #1005-#1009 closed). Next: hosted CI, coordinator's senior review.
+
+2026-11-18T06:50Z w9-records-1118 STOPPED (handback requested) before review/merge. State: draft PR #1032 (intake, S1), head 8e10dc630, base 86284ec20, hosted CI in progress; review request sent to main (squares-e0 unreachable). Remaining: senior review + addressing pass, CI green on head, merge (merge commit) after re-checking main, then close this bead via check_bead_tree --before-close on main.
