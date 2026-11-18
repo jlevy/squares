@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from decimal import ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP, Decimal, localcontext
 from functools import cache
@@ -469,30 +470,28 @@ def _pinned_hue(representative: Decimal, *, tolerance: Decimal) -> int | None:
     return None
 
 
-def _class_pin(
-    members: tuple[int, ...],
-    representative: Decimal,
+def _square_hues(
+    class_hues: tuple[int, ...],
+    class_by_square: Mapping[int, int],
+    orientations: tuple[Decimal, ...],
     *,
-    orientations: tuple[Decimal, ...] | None,
     tolerance: Decimal,
-) -> int | None:
-    """A class's pinned hue: its representative's, else that of any square it holds.
+) -> dict[int, int]:
+    """Each square's hue: its class's, except that a square at a pinned angle takes the pin.
 
-    Classes are seeded greedily, so a square within the tolerance of a pinned angle
-    can join a class seeded just outside it, and the class mean then lies outside it
-    too: at n = 292 (T-323, 18 November 2026) a square 0.9 microradians off the axis
-    joined a class seeded 1.87 microradians off, whose mean is 1.47 off. A right angle
-    takes hue 0 in every packing, so the class takes the pin its member holds.
-    """
-    pinned = _pinned_hue(representative, tolerance=tolerance)
-    if pinned is not None or orientations is None:
-        return pinned
-    held = {
-        pin
-        for member in members
-        if (pin := _pinned_hue(orientations[member], tolerance=tolerance)) is not None
-    }
-    return min(held) if held else None
+    Classes are seeded greedily, so a square within the tolerance of a pinned angle can
+    join a class seeded just outside it, whose mean then lies outside it too: at n = 292
+    (T-323, 18 November 2026) a square 0.92 microradians off the axis joined a class
+    seeded 1.87 microradians off, whose mean is 1.48 off, and drew in that class's hue.
+    A right angle is hue 0 in every packing, so the square takes the pin and the rest of
+    its class keeps the class hue, as n = 110's class 1.6 microradians off does (review A5
+    of #1023)."""
+    hues = {square: class_hues[index] for square, index in class_by_square.items()}
+    for square, orientation in enumerate(orientations):
+        pinned = _pinned_hue(orientation, tolerance=tolerance)
+        if pinned is not None:
+            hues[square] = pinned
+    return hues
 
 
 def _angle_class_hues(
@@ -502,7 +501,6 @@ def _angle_class_hues(
     hue_count: int,
     tolerance: Decimal,
     registry: AngleHueRegistry | None,
-    orientations: tuple[Decimal, ...] | None = None,
 ) -> tuple[int, ...]:
     """Assign hues: pinned angles first, then the rest by descending size.
 
@@ -510,12 +508,10 @@ def _angle_class_hues(
     orientations, so a right angle is the same colour in every packing.
     Orientation is stored modulo a quarter turn, so a class sitting just under
     90 degrees is a right angle; ``_orientation_distance`` compares modulo that
-    seam rather than against zero directly. Given the squares' `orientations`, a
-    class holding a square at a pinned angle takes that pin (`_class_pin`).
+    seam rather than against zero directly.
     """
     pins = [
-        _class_pin(members, representative, orientations=orientations, tolerance=tolerance)
-        for members, representative in zip(classes, representatives, strict=True)
+        _pinned_hue(representative, tolerance=tolerance) for representative in representatives
     ]
     unpinned = sorted(
         (index for index, pin in enumerate(pins) if pin is None),
@@ -941,11 +937,13 @@ def assign_square_colors(
             hue_count=spec.hue_count,
             tolerance=spec.angle_tolerance_radians,
             registry=angle_hue_registry,
-            orientations=orientations,
         )
-        hue_by_square = {
-            index: class_hues[class_by_square[index]] for index in range(len(frame.squares))
-        }
+        hue_by_square = _square_hues(
+            class_hues,
+            class_by_square,
+            orientations,
+            tolerance=spec.angle_tolerance_radians,
+        )
         shade_groups = {index: list(members) for index, members in enumerate(angle_classes)}
     else:
         hue_by_square = {index: index % spec.hue_count for index in range(len(frame.squares))}
