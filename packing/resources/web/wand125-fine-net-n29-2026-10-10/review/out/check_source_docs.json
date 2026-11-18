@@ -1,0 +1,162 @@
+{
+ "certificate": "mixed_n29_L582",
+ "documents_equal_pins": {
+  "ASSET.json": true,
+  "README.md": true,
+  "bundle.json": true,
+  "check2/src/INDEPENDENCE.md": true,
+  "check2/src/REPRODUCE.md": true,
+  "check2/src/SOUNDNESS.md": true,
+  "check2/src/SPEC.md": true,
+  "check2/src/UPSTREAM_COMMIT": true,
+  "check2/src/fine_net_check.sh": true,
+  "files-sha256.json": true,
+  "provenance/search-notes.md": true,
+  "../../LICENSE": true
+ },
+ "license_first_line": "MIT License",
+ "license_names": [
+  "Copyright (c) 2026 wand125"
+ ],
+ "bundle": {
+  "n_L_B_net_mass": true,
+  "net_step_count": true,
+  "endpoint": "1036/2501",
+  "endpoint_equals_t_max": true,
+  "endpoint_check_equals_poly": true,
+  "rotated_side_upper_equals_B(1+D)": true,
+  "side_margin_equals": true,
+  "per_edge_margin_equals_half": true,
+  "candidate_sha256_equals": true,
+  "candidate_digest_equals_receipt": true,
+  "receipt_sha256_equals": true,
+  "verifier_sources_equal_sealed_members": true,
+  "build_source": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+  "build_source_equals_receipt": true,
+  "compared_with": "2327/400",
+  "improvement_lower": "1/400",
+  "improvement_exact": true,
+  "remaining_text": "Every admissible centre at every net angle must have mixed score >= Gamma, and M < n*Gamma. Not checked here.",
+  "verification_text": "Second-system check: sqverify-fast (exact rational / outward-rounded interval arithmetic) verified every net direction with threshold 1 (check2/receipt.json); a negative control with masses x0.985 is refused (check2/control.json). The shipped C++ verifier records of earlier bundles are not included; they are run only as occasional spot checks."
+ },
+ "asset_json": {
+  "size_sha_equal_asset": true,
+  "source_commit": null,
+  "published_after_is_the_pin's_parent": true,
+  "documents_listed_are_pinned": true,
+  "check": "tar xzf check2/src/sqverify-proof-net-fe12e036c.tar.gz\n(cd sqverify_fast && cargo build --release --locked)\nbash check2/src/fine_net_check.sh sqverify_fast/target/release/sqverify-fast candidate.json out/"
+ },
+ "readme": {
+  "files_named": [
+   "bundle.json",
+   "candidate.json",
+   "check2/control.json",
+   "check2/control.jsonl.gz",
+   "check2/receipt.json",
+   "check2/run.jsonl.gz",
+   "check2/src/",
+   "check2/src/REPRODUCE.md",
+   "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+   "files-sha256.json",
+   "provenance/",
+   "verification/prepublication-receipt.json"
+  ],
+  "named_but_absent_everywhere": [
+   "check2/control.jsonl.gz"
+  ],
+  "states_digest": true,
+  "states_mass": true,
+  "states_2073": true,
+  "control_factor_stated": [
+   "x0.985",
+   "x0.985",
+   "x 0.985"
+  ],
+  "0.985_is_197/200": true,
+  "seconds_stated": [
+   "4306"
+  ],
+  "stated_seconds_equal_prepublication_receipt": true,
+  "stated_seconds_equal_check2_run": false,
+  "line_numbers": {
+   "control_file_line": 15,
+   "second_system_line": 12,
+   "branch_commit_line": 18,
+   "prepublication_line": 52
+  },
+  "pinned_minus_sealed": {
+   "lines_added": 4,
+   "lines_removed": 0,
+   "headings_added": [
+    "## Pre-publication check"
+   ]
+  }
+ },
+ "shipped_script": {
+  "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36",
+  "writes_build_field": true,
+  "writes_schema_field": false,
+  "writes_tries": false,
+  "writes_integer_seconds": true,
+  "control_kind_text": [
+   "every mass x 0.985, 32 directions"
+  ],
+  "mutant_rule": true,
+  "control_directions_rule": true,
+  "pass_needs_one_exact_refusal_only": true,
+  "published_receipt_schema": "fine-net-check2-receipt/v1",
+  "published_receipt_has_build_field": false,
+  "prepublication_receipt_shape_is_the_script's": true
+ },
+ "bundle_soundness": {
+  "git_blob": "cadf59b631586fc31c962b3cd37b89ee706706b5",
+  "equals_e020eb1e2_edition": true,
+  "mentions_proof_net": false,
+  "has_declared_nets_section": false,
+  "claim_names_the_standard_net": true,
+  "N2_reflects_the_whole_configuration": true,
+  "N2_names_t_200": true,
+  "line_of_whole_configuration": 43,
+  "head_edition_folds_square_by_square": true,
+  "head_has_declared_nets_section": true
+ },
+ "bundle_independence": {
+  "git_blob": "9b60b4afe335f0b625f34c0a29369710b34b581f",
+  "equals_e020eb1e2_edition": true
+ },
+ "spec": {
+  "orientation_restriction_text": "- **Orientations.** \u03bc is D4-invariant, so the unit squares' orientations may be restricted",
+  "orientation_line": 46,
+  "net_condition_text": "2. **Net:** 0 < B < 1, B\u00b7(1 + step) < 1, and (1 + last\u00b7step)\u00b2 > 2 (the net reaches past",
+  "endpoint_form_equivalent": true,
+  "lists_t_max_le_half_in_section_3": false,
+  "lists_tangent_form_in_section_5": true
+ },
+ "reproduce": {
+  "timing_text": [
+   "(n = 18, 416 directions) to about 25 minutes (832 directions, n around 30); the control",
+   "adds about a tenth. On a plain 4-vCPU Ubuntu host, n = 29 at L = 5.81 took 584 seconds."
+  ],
+  "timing_lines": [
+   60,
+   61
+  ],
+  "names_tools_commit_5fba675": true
+ },
+ "search_notes": {
+  "refers_to_itself": true,
+  "text": [
+   "fresh structured initial measure (bands at integer distances from the walls), LP under the n budget with core side B on the declared half-angle net, full-net screening collecting up to 32 separated low-coverage witnesses per angle, repair tolerance scaled to the mass slack, repeated until every net angle passed; see provenance/search-notes.md"
+  ]
+ },
+ "verifier_commits": {
+  "upstream_commit_file": "42534d959d668c5e03839dc87f9e628fa4fc2d83",
+  "upstream_commit_in_this_clone": false,
+  "fe12e036c_in_this_clone": false,
+  "clone_is_shallow": "true"
+ },
+ "problems": [],
+ "notes": [
+  "note: README names check2/control.jsonl.gz, absent"
+ ]
+}
