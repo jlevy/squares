@@ -5,7 +5,7 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 15
 delegate: w7r2-optd-1118
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-18T07:37:16.984Z
+updated_at: 2026-11-18T07:58:59.496Z
 started_at: 2026-11-18T02:28:47.344Z
 ---
 
@@ -39,3 +39,5 @@ started_at: 2026-11-18T02:28:47.344Z
 2026-11-18T07:09Z w7r2-optd-1118 (resumes w7r-optd-1118 after the 06:55Z container restart): hosted run 44254462433 at b6b7cac6e failed one step only (validate: assess_frontier_rigidity --check stale at 172, 199, the escape screen having moved). Fixed: db76f4624 (rigidity --update), fde52d009 (re-pin). compare_paper_renders vs main 86284ec20 with the 13 record paths re-run on the final tree: 55/43/43/43 byte-identical. Pushed fde52d009; waiting on hosted CI, then senior review.
 
 2026-11-18T07:37Z w7r2-optd-1118: hosted at fde52d009 failed sweeps only (composite-figure.json carries the rigidity scope): e1380234b (build_composite_figure_data --update), 8d62fe249 (re-pin). Local at 8d62fe249: --sweeps green, --records green (at fde52d009), compare_paper_renders 55/43/43/43 byte-identical. Pushed 8d62fe249; waiting on hosted CI. PR body draft: scratchpad w7r2-pr-body.md (HOSTED_RESULT placeholder).
+
+2026-11-18T07:58Z w7r2-optd-1118: hosted CI green at 8d62fe249 (Packing validation 44259793422, Certificate page 44259793298, mergeability 44259785190); PR body updated; sent head/base (86284ec20) to the coordinator for the senior review. Worktree untouched until it returns.
