@@ -8528,7 +8528,8 @@ issues:
       lower-bound confirmations on 17 November 2026 (think-fibh). T-142's, T-143's and T-132's
       censuses, controls and reviews ran on 4 November 2026 (think-i85v, think-r333), and the
       case records adopt them in the pass of 17 November (#908, #909); T-144's replay is still
-      to run (think-nd7g). Two owner questions stay open on #543.
+      to run (think-nd7g). Both #532 lines on #543 are settled (the owner's answer of 17
+      October; #892).
     read_through: '2026-10-12T07:49:51Z'
     results: []
     asks:
@@ -8988,9 +8989,9 @@ issues:
       Closed on 18 November 2026 with the final comment (issuecomment-6967032773), posted
       after #1016 merged as 2980557a2 and its deploy was verified; recorded by the records
       lane w4r-records-1118. It says the full build is declined at about 798 CPU-hours, that
-      the sample of about 8 stays runnable on think-qu37, unscheduled, and moves no rung, that
-      the evidence belongs to T-250 at V0/C0 and that T-064 stays at V3/C3. Its
-      blocked:owner-decision label was removed with the close.
+      the sample of about 100 roots, about 8 CPU-hours, stays runnable on think-qu37,
+      unscheduled, and moves no rung, that the evidence belongs to T-250 at V0/C0 and that
+      T-064 stays at V3/C3. Its blocked:owner-decision label was removed with the close.
   - number: 538
     title: Workbench trajectory cost check flakes over 400 ms under CI load
     author: jlevy
@@ -9393,6 +9394,18 @@ issues:
       beads: [think-qu37, think-nd7g]
       corrects:
       - https://github.com/jlevy/squares/issues/543#issuecomment-6166305101
+      outdated:
+      - >-
+        T-132's records follow in #909, still open: #909 had merged as a1a8d0aae at
+        02:14:45Z, before this reply was posted at 02:19:31Z
+    - url: https://github.com/jlevy/squares/issues/543#issuecomment-6968200183
+      date: '2026-11-18'
+      by: jlevy
+      kind: correction
+      reported: []
+      beads: [think-nd7g]
+      corrects:
+      - https://github.com/jlevy/squares/issues/543#issuecomment-6967037169
     blocked:
       type: owner-decision
       reason: >-
@@ -9407,6 +9420,15 @@ issues:
       (think-xnj5). The owner decided on 17 November 2026 to keep it registered (think-x30l),
       which settles that decision; the follow-up saying so follows the merge of the change that
       records it.
+
+      The follow-up of 18 November 2026 (issuecomment-6967037169, 02:19:31Z), posted after
+      #1016 merged as 2980557a2 and its deploy was verified, says that and that the owner's
+      decisions of 17 November settle the Valid7 line (think-l7j0) and both #532 lines, and
+      that two runs over the cap were declined with Valid7. It said T-132's records follow
+      in #909, still open, though #909 had merged as a1a8d0aae at 02:14:45Z (review A1 of
+      #1026); the correction of the same day (issuecomment-6968200183) says that T-132 is
+      V3/C3, confirmed, current and adopted at 29. Both are recorded by the records lane
+      w4r-records-1118. The other lines stay with the owner.
   - number: 544
     title: 'Intake pass of 2026-10-11: remaining work'
     author: jlevy
