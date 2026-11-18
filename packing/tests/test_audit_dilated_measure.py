@@ -617,3 +617,21 @@ def test_a_direction_in_two_runs_is_refused(
     receipt = audit.receipts(PACKET_1018)
     assert receipt["status"] == "RECEIPTS_FAIL"
     assert receipt["coverage"]["every_index_once"] is False
+
+
+def test_the_1018_replay_comparison_is_what_the_tool_recomputes() -> None:
+    assert audit.main(["compare", PACKET_1018, "--check"]) == 0
+
+
+def test_every_1018_direction_of_the_census_equals_the_authors_runs() -> None:
+    """The census binary (rustc 1.98.0) and the author's runs (rustc 1.100.0), both of
+    reviewed crate source d97758bb, agree on every field of all 401 directions but the
+    timings, on the premises but the input digest (the author ran the decompressed text,
+    the census the stored gzip), and on the node total."""
+    receipt = stored(PACKET_1018, "compare")
+    assert receipt["verdict"] == "EVERY_DIRECTION_AGREES"
+    assert receipt["identical_directions"] == receipt["directions"] == 401
+    assert receipt["differing"] == {}
+    assert receipt["nodes"] == receipt["run_nodes"] == 266337510
+    assert receipt["premises_equal_each_run_apart_from_input"] is True
+    assert receipt["capture_input_sha256"] == DILATION_1018.stored_sha256
