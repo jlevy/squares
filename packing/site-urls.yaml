@@ -11227,7 +11227,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-09-29'
-  lastmod: '2026-09-29'
+  lastmod: '2026-11-18'
   status: live
   identity:
     kind: upper-bound
@@ -11237,7 +11237,7 @@ urls:
     established: null
     attribution:
       source_keys:
-      - '[de Winter n211 2026-09-16]'
+      - '[de Winter n211 2026-11-18]'
       published: '2026-09-16'
     builds_on: null
     evidence:
@@ -11249,12 +11249,45 @@ urls:
     - packing/resources/web/de-winter-square-packing-211-2026-09-16/acquisition/sources.json
     - packing/resources/web/de-winter-square-packing-211-2026-09-16/receipts/certification.json
     - packing/resources/web/de-winter-square-packing-211-2026-09-16/receipts/interval-certification.json
+    - packing/resources/web/de-winter-square-packing-211-2026-11-18/README.md
+    - packing/resources/web/de-winter-square-packing-211-2026-11-18/acquisition/sources.json
     - packing/witnesses/de-winter-2026/n-211-rational.yaml.gz
     - packing/devtools/upper_bound_packets.py
     - packing/devtools/check_rational_witness_independent.py
     - packing/devtools/upper_bound_intervals.py
     - docs/project/reviews/review-2026-09-29-issue-227-upper-bound-packings.md
     - docs/project/reviews/review-2026-09-30-interval-route-t056-t057.md
+  amendments:
+  - date: '2026-11-18'
+    reason: The author's README revision of 18 November 2026 names T-057's sources, so its credit
+      is read from that revision's key, [de Winter n211 2026-11-18], and the packet that retains it
+      joins the artifacts (jlevy/squares#1008, think-a88h); no bound, rung or evidence change.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 211
+      established: null
+      attribution:
+        source_keys:
+        - '[de Winter n211 2026-09-16]'
+        published: '2026-09-16'
+      builds_on: null
+      evidence:
+      - E-n211-de-winter-report
+      - E-n211-de-winter-exact-replay
+      - E-n211-de-winter-interval-replay
+      artifacts:
+      - packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
+      - packing/resources/web/de-winter-square-packing-211-2026-09-16/acquisition/sources.json
+      - packing/resources/web/de-winter-square-packing-211-2026-09-16/receipts/certification.json
+      - packing/resources/web/de-winter-square-packing-211-2026-09-16/receipts/interval-certification.json
+      - packing/witnesses/de-winter-2026/n-211-rational.yaml.gz
+      - packing/devtools/upper_bound_packets.py
+      - packing/devtools/check_rational_witness_independent.py
+      - packing/devtools/upper_bound_intervals.py
+      - docs/project/reviews/review-2026-09-29-issue-227-upper-bound-packings.md
+      - docs/project/reviews/review-2026-09-30-interval-route-t056-t057.md
 - path: result/t-058.html
   canonical: result/t-058.html
   kind: result

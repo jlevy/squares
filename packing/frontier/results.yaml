@@ -5307,16 +5307,19 @@ results:
       Joost de Winter, after Arslanov, Mustafin and Shangitbayev, Erich Friedman and
       David Ellsworth,
       [JoostdeWinter/square-packing-211](https://github.com/JoostdeWinter/square-packing-211/tree/702df9bb3b1e7fe13279a61a1fa89722aa2d496a).
-      Its README, since the revision of 18 November 2026
-      ([43e15330](https://github.com/JoostdeWinter/square-packing-211/tree/43e15330bab7dd11588067167a2dd370137ef2b7)),
-      says the packing combines a 64-square rectangular component from Arslanov,
-      Mustafin and Shangitbayev (2021), whose construction of tilted components combined
-      with grids it uses, a computationally found 30-square component and two aligned
-      grids of 99 and 18 squares, and that Erich Friedman's collection and survey and
-      David Ellsworth's records supplied its starting points and comparisons. It says
-      the numerical search and refinement were performed with GPT-6 Astra under the
-      direction of Joost de Winter, and that earlier solutions and optimization scripts
-      supplied to the model had been developed with Claude Opus and previous GPT models.
+      Its
+      [README](https://github.com/JoostdeWinter/square-packing-211/blob/43e15330bab7dd11588067167a2dd370137ef2b7/README.md),
+      since its revision of 18 November 2026, says the packing combines a 64-square
+      rectangular component from Arslanov, Mustafin and Shangitbayev (2021), whose
+      construction of tilted components combined with grids it uses, a computationally
+      found 30-square component and two aligned grids of 99 and 18 squares, and that
+      Erich Friedman's collection and survey and David Ellsworth's records supplied its
+      starting points and comparisons.
+
+      The README says the numerical search and refinement were performed with GPT-6 Astra
+      under the direction of Joost de Winter, and that earlier solutions and optimization
+      scripts supplied to the model had been developed with Claude Opus and previous GPT
+      models.
     scope: {n_values: [211]}
     verification: V3
     confirmation: C3
@@ -5386,15 +5389,17 @@ results:
       0.776, reversing no tilt for T-175 and T-188 and 21 for T-149.
 
       2026-11-18 (jlevy/squares#1008, think-a88h): the author published the README
-      revision the issue named, 43e15330 of 18 November 2026, which changes the README
-      alone; the packing is the same file, byte for byte, as at the revision this
-      entry's evidence cites. It names the sources: Arslanov, Mustafin and Shangitbayev
-      (2021) for the construction and the 64-square rectangular component, and Erich
-      Friedman's collection and survey and David Ellsworth's records as starting points
-      and comparisons. So the credit is read from [de Winter n211 2026-11-18], the key
-      of that revision (epistemics.md, Parallel Projects and Their Credit): de Winter
-      after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth. The evidence and the
-      certificate stay the 16 September revision's. By attribution.md's chain rule the
+      revision the issue named on 18 November 2026, which changes the README alone; the
+      packing is the same file, byte for byte, as at the revision this entry's evidence
+      cites. It names the sources: Arslanov, Mustafin and Shangitbayev (2021) for the
+      construction and the 64-square rectangular component, and Erich Friedman's
+      collection and survey and David Ellsworth's records as starting points and
+      comparisons. So the credit is read from [de Winter n211 2026-11-18], the key of
+      that revision (epistemics.md, Parallel Projects and Their Credit): de Winter after
+      Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth.
+
+      The evidence and the certificate stay the 16 September revision's. By
+      attribution.md's chain rule the
       lines through this packing name the same sources after de Winter: T-098, T-175,
       T-181, T-182, T-188 and T-253 at 211, T-243 at 182 and T-287 at 156. The AI
       assistance is now the README's statement, where it was the issue's.
@@ -25688,7 +25693,9 @@ results:
       552, itself descended from the author's earlier 155 with one square removed, continued
       through the author's browser refinement, native basin hopping and exact finishing;
       Daniil Ostashev's 211 and 241 arrangements of issue 575, continued with native search
-      and refinement. Ostashev's record file says he re-hardened his 211 from Evan Daniel's
+      and refinement.
+
+      Ostashev's record file says he re-hardened his 211 from Evan Daniel's
       exact optimum (T-098) of Joost de Winter's packing (T-057), so by the chain rule of
       attribution.md the credit line names de Winter as well, as de Winter asked on
       jlevy/squares#1008 of 16 November 2026, and since 18 November 2026 the sources his
@@ -35121,7 +35128,9 @@ results:
       Winter's packing (T-057), so the credit line names de Winter as well (since
       jlevy/squares#1008), and after him the sources his README names for that packing
       (since 18 November 2026), Arslanov, Mustafin and Shangitbayev, Friedman and
-      Ellsworth. The issue asks that "the register's s(211) packing (Daniil Ostashev; also in
+      Ellsworth.
+
+      The issue asks that "the register's s(211) packing (Daniil Ostashev; also in
       Francisco Couzo's repository)" be credited as the start; the register's packing at the
       side the issue gives for it is T-188's, and where T-188 differs from Ostashev's own 211
       packing the certificate follows T-188 (M-1 of the 25 October review).
@@ -36619,12 +36628,13 @@ results:
       re-certification, as a regularization: the index says 'packing refined from Evan Daniel' at
       154, 155, 236 and 271 and 'from Evan Daniel & Francisco Couzo' at 183, and credits Polkovskyi
       alone at 211, 227, 237 and 241, whose houses are Daniil Ostashev's (211, 241), Joost de Winter's
-      (227) and Nate Chaoweeraprasit's (237) packings.
+      (227) and Nate Chaoweeraprasit's (237) packings. A publication in a watched repository that
+      no issue reports, recorded from its commits by the owner's rule of 14 October 2026.
+
       At 211 it re-certifies T-188, whose line runs through Joost de Winter's packing
       (T-057), so by the chain rule of attribution.md the credit line names de Winter
       and, since 18 November 2026, the sources his README names for that packing,
-      Arslanov, Mustafin and Shangitbayev, Friedman and Ellsworth. A publication in a watched repository that
-      no issue reports, recorded from its commits by the owner's rule of 14 October 2026.
+      Arslanov, Mustafin and Shangitbayev, Friedman and Ellsworth.
 
       The same commits' certificates at 88 and 126 lie below the house but above an exact side a register entry states pending adoption (T-193's), 152 is undecided against T-122's exact side, and those at 204 and 270 tied the houses when published; the ledger records none of them.
     scope:
