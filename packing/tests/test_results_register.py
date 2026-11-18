@@ -496,7 +496,7 @@ def test_a_confirmation_above_the_verification_is_refused(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    promoted = _changed_result(tmp_path, "T-132", confirmation="C2")
+    promoted = _changed_result(tmp_path, "T-144", confirmation="C2")
     monkeypatch.setattr(check_results, "RESULTS", promoted)
     assert check_results.main() == 1
     assert "confirmation C2 exceeds verification V0" in capsys.readouterr().out
@@ -1637,12 +1637,9 @@ def test_a_landed_unfinished_confirmation_fails_the_register_gate(
 
 #: The prices the 10 October packets and beads give the imports of that day still
 #: unconfirmed: the rung, the central estimate and the upper end in CPU-hours, and the bead
-#: that owns it. T-132's upper end is the preparation lane's revised price of 11 October,
-#: which the final review's F1-3 asked the record to carry. Since 2 November T-132's is
-#: owned by think-1lri, the review that reads its certificate, which comes first. T-142
-#: and T-143 left on 4 November, when their censuses, controls and review landed.
+#: that owns it. The three fine-net imports, T-132, T-142 and T-143, left in the pass of 17
+#: November 2026, when their censuses of 4 November, controls and reviews landed.
 PACKET_PRICES = {
-    "T-132": ("C3", 4.3, 5.5, "think-1lri"),
     "T-144": ("C3", 11.24, 23, "think-nd7g"),
     "T-081": ("C3", 118, 435, "think-hwpr"),
 }
@@ -1683,7 +1680,7 @@ def test_the_registers_unfinished_confirmations_pass_and_the_schema_knows_the_fi
     # The softschema header is the validator's own and is stripped before the schema.
     payload = {key: value for key, value in register.items() if key != "softschema"}
     assert validator.is_valid(payload)
-    t132 = next(entry for entry in payload["results"] if entry["id"] == "T-132")
+    t144 = next(entry for entry in payload["results"] if entry["id"] == "T-144")
     for refused in (
         _unfinished(rung="C0"),
         _unfinished(owner="someone"),
@@ -1692,7 +1689,7 @@ def test_the_registers_unfinished_confirmations_pass_and_the_schema_knows_the_fi
         _unfinished(estimated_cost=_priced(priced=None)),
         _unfinished(what=None),
     ):
-        t132["unfinished_confirmations"] = [refused]
+        t144["unfinished_confirmations"] = [refused]
         assert not validator.is_valid(payload), refused
 
 
