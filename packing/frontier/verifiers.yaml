@@ -9639,3 +9639,63 @@ verifiers:
       (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11);
       kept in the n29 packet's review/ with its README and receipts. oblique_sample.py,
       a driver kept beside it, decides nothing and is not registered.
+
+  - id: V-de-winter-1021-review-check
+    program: r1021_check.py with r1021_read.py, r1021_geom.py and r1021_clip.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 18 November blind stage 4 review's exact checker (R-1021) of Joost de Winter's
+      rational centre-direction certificates of issues 1021 (268) and 1022 (270) and their
+      corner Witness/v2 twins, with strict readers of its own for both forms (r1021_read.py):
+      every square a unit square, every wall and every pair, with no distance filter and no
+      tolerance, by separating axes on the poses in Python integers (r1021_geom.py, method A)
+      and by exact Sutherland-Hodgman clipping in GMP rationals from the corners, both ways
+      round, with the area inside the box (r1021_clip.py, method B), each form decided by both
+      methods natively and crossed, the two forms held to one packing, and the side checked
+      against both files (r1021_check.py). r1021_controls.py decides the 45 controls a plan
+      frozen before any program read a certificate states for each report (33 for a house);
+      r1021_selftest.py holds the programs to 67 hand-derived checks and ten broken copies.
+      Decided both certificates ACCEPT, and the four predecessors T-289, T-320, T-283 and
+      T-321 ACCEPT through a reader written after the freeze (r1021_post.py; the review's F3).
+    source:
+      - packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_check.py
+      - packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_read.py
+      - packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_geom.py
+      - packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_clip.py
+      - packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_controls.py
+      - packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/controls-plan.json
+      - packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_selftest.py
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the blind stage 4 mathematical review, lane r1021-1118 of the 18 November intake
+            pass, tbd-strong-max tier, maximum reasoning, prompted separately from the import
+            lane
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues name GPT-6.2 Astra (OpenAI) for the search, optimization and rational
+          certificates, the source's READMEs GPT-6.2 Sol (the review's F14), and Claude
+          (Anthropic) for the repository files, checks and figures, under Joost de Winter's
+          direction. The checker was frozen at 06:08:52Z on 18 November (e220d02c4f) before
+          any of its programs read a certificate; it imports nothing from this repository or
+          the source and reuses no code of any earlier review, and its author read the
+          author's checkers only as data, after the findings were frozen.
+    note: >-
+      Written and run on 18 November 2026 for docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md, kept with its receipts in the
+      review-only directory de-winter-1021-1022-review-2026-11-18. r1021_contract.py,
+      r1021_identity.py, r1021_measure.py, r1021_custody.py, r1021_post.py, r1021_routes.py,
+      r1021_synth.py, r1021_trial.py, r1021_ctrial.py and r1021_fmt.py, kept beside it, decide
+      no certificate's feasibility and are not registered.

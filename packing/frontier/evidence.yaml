@@ -65772,6 +65772,19 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-18'
+    external_review:
+      state: informally-verified
+      date: '2026-11-18'
+      reviewed_by: >-
+        Claude (AI review), strongest tier (tbd-strong-max) at maximum reasoning, the blind stage
+        4 review R-1021, lane r1021-1118, prompted separately from the import lane and blind to
+        it until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md accepts the certificate #1021 names, with fourteen findings, none blocking or
+        major (F3, the frozen reader's strictness with the predecessors' files, is the
+        review's own). Its clean-room run on this certificate is
+        E-de-winter-1021-review-exact-feasibility, and the replay
+        E-de-winter-1021-exact-feasibility.
     limitations: >-
       This atom records the source author's report, in issue 1021, of 1 exact rational
       certificate at a1ba501, n268/n268_exact.json, with its Witness/v2 twin n268_witness.yaml:
@@ -65861,6 +65874,50 @@ evidence:
       controls are gross, and the packet's sharp controls meet those margins. Finite
       feasibility only.
     source_reviewed: '2026-11-18'
+  - id: E-de-winter-1021-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 268
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s268 upper bound 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s268-upper-bound-2026-11-17/source/n268/n268_exact.json.gz
+    replay: >-
+      With the project interpreter (CPython 3.14.7) as python -I -B at nice 19 on a shared
+      host, 18 November 2026, from the review-only directory packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs: the review's
+      frozen r1021_check.py in report mode on #1021's centre file and its Witness/v2 twin
+      as fetched at a1ba501 (../out/check-1021.json, ACCEPT, 4.75 CPU-seconds), decided
+      each form by both methods, natively and crossed: every one of the 268 squares a unit
+      square inside the box with area exactly 1 inside, every wall and all 35,778 pairs by
+      separating axes in Python integers and again by exact clipping in GMP rationals, with no
+      distance filter and no tolerance, the two methods' classes equal and every pair apart;
+      the two files are one packing, the side is written identically in both and the claim,
+      16.870013850405, is its 12-place ceiling. r1021_controls.py decided the 45 controls the frozen
+      plan states (../out/controls-1021.json), all as stated; r1021_selftest.py passed 67
+      checks and caught ten broken copies.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-1021-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 268 and its twin: every square, every wall and every pair, by
+          two exact methods in two arithmetic libraries that share only the readers
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, which share its readers, by the blind stage 4 review R-1021 (lane
+      r1021-1118). The source files are pinned by digest in the review's custody receipt and
+      are the files this import retains. Finite feasibility only.
+    source_reviewed: '2026-11-18'
   - id: E-de-winter-1022-certificate-report
     claim: upper-bound
     scope:
@@ -65877,6 +65934,19 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-18'
+    external_review:
+      state: informally-verified
+      date: '2026-11-18'
+      reviewed_by: >-
+        Claude (AI review), strongest tier (tbd-strong-max) at maximum reasoning, the blind stage
+        4 review R-1021, lane r1021-1118, prompted separately from the import lane and blind to
+        it until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md accepts the certificate #1022 names, with fourteen findings, none blocking or
+        major (F3, the frozen reader's strictness with the predecessors' files, is the
+        review's own). Its clean-room run on this certificate is
+        E-de-winter-1022-review-exact-feasibility, and the replay
+        E-de-winter-1022-exact-feasibility.
     limitations: >-
       This atom records the source author's report, in issue 1022, of 1 exact rational
       certificate at a1ba501, n270/n270_exact.json, with its Witness/v2 twin n270_witness.yaml:
@@ -65965,4 +66035,48 @@ evidence:
       wall clears by at least 2.00e-60, and every pair by at least 1.58e-59. The receipt's
       controls are gross, and the packet's sharp controls meet those margins. Finite
       feasibility only.
+    source_reviewed: '2026-11-18'
+  - id: E-de-winter-1022-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 270
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s270 upper bound 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s270-upper-bound-2026-11-17/source/n270/n270_exact.json.gz
+    replay: >-
+      With the project interpreter (CPython 3.14.7) as python -I -B at nice 19 on a shared
+      host, 18 November 2026, from the review-only directory packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs: the review's
+      frozen r1021_check.py in report mode on #1022's centre file and its Witness/v2 twin
+      as fetched at a1ba501 (../out/check-1022.json, ACCEPT, 6.17 CPU-seconds), decided
+      each form by both methods, natively and crossed: every one of the 270 squares a unit
+      square inside the box with area exactly 1 inside, every wall and all 36,315 pairs by
+      separating axes in Python integers and again by exact clipping in GMP rationals, with no
+      distance filter and no tolerance, the two methods' classes equal and every pair apart;
+      the two files are one packing, the side is written identically in both and the claim,
+      16.927314216352, is its 12-place ceiling. r1021_controls.py decided the 45 controls the frozen
+      plan states (../out/controls-1022.json), all as stated; r1021_selftest.py passed 67
+      checks and caught ten broken copies.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-1021-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 270 and its twin: every square, every wall and every pair, by
+          two exact methods in two arithmetic libraries that share only the readers
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, which share its readers, by the blind stage 4 review R-1021 (lane
+      r1021-1118). The source files are pinned by digest in the review's custody receipt and
+      are the files this import retains. Finite feasibility only.
     source_reviewed: '2026-11-18'

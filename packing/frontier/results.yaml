@@ -52665,8 +52665,10 @@ results:
       assignment moves 46 squares beyond a tenth (largest 0.901); against T-289's, 56.
       So it is a new arrangement relative to both. It has 46 squares tilted, 36.85 to 43.09 degrees by magnitude, 15 one way and 31 the other, and the other 222 exactly upright.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (R-1021, under think-gqzz).
+      Both maintained exact routes accept the certificate. The blind stage 4 review of 18
+      November (R-1021), at the tier stage 4 names, accepts it with no blocking or major
+      finding, by a clean-room checker of its own deciding every square, wall and pair by two
+      exact methods: confirmed, independently re-implemented.
 
       The issue says the author's two checkers, verify_exact.py (separating axes) and
       check_area.py (the area of each close pair's clipped intersection), both Fraction and the
@@ -52689,7 +52691,9 @@ results:
       rationale: >-
         A new arrangement at 268 relative to T-320's packing and to T-289's, 46 and 56 squares moved beyond a tenth and none paired one to one by nearest centres, 1.85e-03 below the house, above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-320 and T-328. A slice composition of published packings is no new technique, so not S4. No lower bound or optimum.
       scored: '2026-11-18'
-      by: think-gqzz Joost de Winter import (intake lanes w6-dewinter-1118 and w6r-dewinter-1118), a draft for the stage 4 review
+      by: >-
+        the stage 4 review of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md), confirming the registering
+        lane's draft (think-gqzz)
     novelty: previously-published
     attribution:
       source_keys:
@@ -52698,6 +52702,22 @@ results:
     evidence:
     - E-de-winter-1021-certificate-report
     - E-de-winter-1021-exact-feasibility
+    - E-de-winter-1021-review-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review, lane r1021-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 268 and 270 of the certificates of issues 1021 and 1022 and their
+        twins, decided again by a clean-room exact checker by two methods with the controls a
+        plan frozen beforehand states, custody in the source's history, the sides and the
+        issues' numbers, option D's gains and contraction margins exactly against T-289,
+        T-320, T-283 and T-321, identity against each, and the significance.
+      verdict: accepted
+      covers: [T-331, T-332]
     artifacts:
     - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/README.md
     - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/claims.json
@@ -52713,6 +52733,10 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/check-1021.json
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/controls-1021.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/sharp-controls.json
@@ -52741,10 +52765,19 @@ results:
       certificate's own margin is 2.6855e-58 (squares 49 and 52; measure/contraction-n268-own.json).
       The L-step scan (measure/l-step-scan.json), with this side stood in for 268's ceiling, finds
       main's consequences unchanged.
+
+      The blind stage 4 review of 18 November (R-1021, lane r1021-1118, PR #1033) accepts both
+      certificates with fourteen findings, none blocking or major: F3, the frozen reader's
+      strictness with the predecessors' files, met by a reader written after the freeze, is the
+      review's own; F8 notes that the houses the issues name were replaced by T-320 and T-321
+      while they were open; F14, after the freeze, that the source's READMEs name GPT-6.2 Sol
+      where the issues name GPT-6.2 Astra; the rest are notes. Its option D measurements and
+      identity agree with this lane's exactly. Its Questions 1 (the start files), 2 (#1022's
+      five slightly turned squares) and 3 (which model) go to the author with the reply. Its
+      clean-room run on this certificate is E-de-winter-1021-review-exact-feasibility.
     next_rung: >-
-      The stage 4 exit: the blind review (R-1021, under think-gqzz) accepted and mapped, and the
-      house rule's adoption at 268, regularized in the same pull request; V4 and C4 need a
-      second qualifying adversarial review by a distinct reviewer and an explicit human
+      The house rule's adoption at 268, regularized in the same pull request; V4 and C4 need
+      a second qualifying adversarial review by a distinct reviewer and an explicit human
       oversight record.
   - id: T-332
     kind: upper-bound
@@ -52765,8 +52798,10 @@ results:
       assignment moves 94 squares beyond a tenth (largest 1.024); against T-283's, 94.
       So it is a new arrangement relative to both. It has 78 squares tilted beyond a degree, 19.78 to 35.37 degrees, all one way, 5 within a degree of upright and the rest exactly upright.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (R-1021, under think-gqzz).
+      Both maintained exact routes accept the certificate. The blind stage 4 review of 18
+      November (R-1021), at the tier stage 4 names, accepts it with no blocking or major
+      finding, by a clean-room checker of its own deciding every square, wall and pair by two
+      exact methods: confirmed, independently re-implemented.
 
       The issue says the author's two checkers, verify_exact.py (separating axes) and
       check_area.py (the area of each close pair's clipped intersection), both Fraction and the
@@ -52789,7 +52824,9 @@ results:
       rationale: >-
         A new arrangement at 270 relative to T-321's packing and to T-283's, 94 squares moved beyond a tenth and none paired one to one by nearest centres, 8.34e-04 below the house, above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-320 and T-328. Re-optimizing a compilation's packing by regions is no new technique, so not S4. No lower bound or optimum.
       scored: '2026-11-18'
-      by: think-gqzz Joost de Winter import (intake lanes w6-dewinter-1118 and w6r-dewinter-1118), a draft for the stage 4 review
+      by: >-
+        the stage 4 review of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md), confirming the registering
+        lane's draft (think-gqzz)
     novelty: previously-published
     attribution:
       source_keys:
@@ -52798,6 +52835,22 @@ results:
     evidence:
     - E-de-winter-1022-certificate-report
     - E-de-winter-1022-exact-feasibility
+    - E-de-winter-1022-review-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review, lane r1021-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 268 and 270 of the certificates of issues 1021 and 1022 and their
+        twins, decided again by a clean-room exact checker by two methods with the controls a
+        plan frozen beforehand states, custody in the source's history, the sides and the
+        issues' numbers, option D's gains and contraction margins exactly against T-289,
+        T-320, T-283 and T-321, identity against each, and the significance.
+      verdict: accepted
+      covers: [T-331, T-332]
     artifacts:
     - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/README.md
     - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/claims.json
@@ -52813,6 +52866,10 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/check-1022.json
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/controls-1022.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/sharp-controls.json
@@ -52841,10 +52898,19 @@ results:
       certificate's own margin is 2.5584e-58 (squares 98 and 101; measure/contraction-n270-own.json).
       The L-step scan (measure/l-step-scan.json), with this side stood in for 270's ceiling, finds
       main's consequences unchanged.
+
+      The blind stage 4 review of 18 November (R-1021, lane r1021-1118, PR #1033) accepts both
+      certificates with fourteen findings, none blocking or major: F3, the frozen reader's
+      strictness with the predecessors' files, met by a reader written after the freeze, is the
+      review's own; F8 notes that the houses the issues name were replaced by T-320 and T-321
+      while they were open; F14, after the freeze, that the source's READMEs name GPT-6.2 Sol
+      where the issues name GPT-6.2 Astra; the rest are notes. Its option D measurements and
+      identity agree with this lane's exactly. Its Questions 1 (the start files), 2 (#1022's
+      five slightly turned squares) and 3 (which model) go to the author with the reply. Its
+      clean-room run on this certificate is E-de-winter-1022-review-exact-feasibility.
     next_rung: >-
-      The stage 4 exit: the blind review (R-1021, under think-gqzz) accepted and mapped, and the
-      house rule's adoption at 270, regularized in the same pull request; V4 and C4 need a
-      second qualifying adversarial review by a distinct reviewer and an explicit human
+      The house rule's adoption at 270, regularized in the same pull request; V4 and C4 need
+      a second qualifying adversarial review by a distinct reviewer and an explicit human
       oversight record.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
