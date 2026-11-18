@@ -30,6 +30,14 @@ ELSEWHERE = "packing/resources/web/yim-certificates-2026-11-09/measure/contracti
 OUTSIDE = (
     "packing/cases/register_candidates/think-ruu2-2026-10-31/measure/contraction-n130-t259.json"
 )
+#: T-259 at 130 against T-254's certificate, within its margin: a receipt of another pair.
+OTHER_PAIR = (
+    "packing/resources/web/yim-certificates-2026-11-09/measure/precedent-contraction-n130-t259.json"
+)
+#: #719's 631 against Couzo's 490 through his three layers: n is the base's, 490.
+THROUGH = (
+    "packing/resources/web/mishapolk-issue719-2026-10-22/measure/contraction-n631-through-490.json"
+)
 
 
 @pytest.fixture(scope="module")
@@ -121,6 +129,20 @@ def test_a_restatement_is_held_to_its_scope_predecessor_and_receipt(
             _restated(records, _item(measured_in="packing/no-such-receipt.json")),
             "does not name a file",
         ),
+        # Review A7 of #1030: the receipt is of this pair, `of`'s certificate against this
+        # result's, its rival labelled with this id or read from a packet this cites.
+        "pair": (
+            _restated(records, _item(measured_in=OTHER_PAIR, gain_over_margin="0.9193")),
+            "its receipt measures 'T-254', not T-259",
+        ),
+        "rival": (
+            _restated(records, _item(measured_in=OUTSIDE)),
+            "is neither T-281 nor read from a packet T-281 cites",
+        ),
+        "uncited": (
+            {**_restated(records, _item()), "artifacts": []},
+            "is neither T-281 nor read from a packet T-281 cites",
+        ),
     }
     for name, (record, words) in cases.items():
         found = _problems(records, record)
@@ -169,3 +191,30 @@ def test_the_register_records_the_restatements_option_d_settles(records: view.Re
             "V3",
             "C3",
         )
+
+
+def test_a_restatement_measured_through_a_construction_is_read_at_its_own_count() -> None:
+    """A receipt through a construction states the base's count in `n` (490 for Couzo's
+    631) and the compared count in `against.n`, so a restatement at 631 is held to it at
+    631 and refused at 490 (review A7 of #1030)."""
+
+    def found(n: int) -> list[str]:
+        record = {
+            "id": "mishapolk-719",
+            "artifacts": [],
+            "restatements": [
+                {
+                    "n": n,
+                    "of": "couzo-4e4c8ce",
+                    "ruling": "think-b0w5",
+                    "gain_over_margin": "0.0105",
+                    "measured_in": THROUGH,
+                }
+            ],
+        }
+        dated = {"mishapolk-719": "2026-10-22", "couzo-4e4c8ce": "2026-10-15"}
+        scopes = {"mishapolk-719": {490, 631}, "couzo-4e4c8ce": {490, 631}}
+        return check_results.restatements_problems(record, dated, scopes)
+
+    assert found(631) == []
+    assert any("receipt at n = 490" in line for line in found(490))

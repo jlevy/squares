@@ -141,3 +141,67 @@ def test_an_l_step_carries_its_base_margin_where_the_whole_certificate_has_none(
     assert record["against"] == retained["against"]
     assert record["against"]["gain_over_margin"] == "1.0399"
     assert record["against"]["within_margin"] is False
+
+
+def test_a_one_step_base_against_a_certificate_at_its_own_count_is_compared_directly(
+    tmp_path: Path,
+) -> None:
+    """The s172 packet's retained command, #939's base against #946 at 172, writes its
+    receipt again: the rival is read at ``--n`` and compared with the base itself, and a
+    one-step ``l-base:packet:`` receipt carries no ``construction`` (review A2 of #1030)."""
+    packet = reports.WEB / "de-winter-s172-upper-bound-2026-11-10/measure"
+    retained = json.loads(
+        (packet / "contraction-n172-against-939-base.json").read_text(encoding="utf-8")
+    )
+    out = tmp_path / "receipt.json"
+    command = [
+        "--n",
+        "172",
+        "#939=l-base:packet:de-winter-s199-upper-bound-2026-11-09",
+        "--against",
+        "#946=packet:de-winter-s172-upper-bound-2026-11-10",
+        "--no-routes",
+        "--out",
+        str(out),
+    ]
+    assert cm.main(command) == 0
+    record = json.loads(out.read_text(encoding="utf-8"))
+    assert record["against"] == retained["against"]
+    assert "construction" not in record and "construction" not in retained
+
+
+def test_a_one_step_base_compares_a_rival_through_its_step_only_when_asked(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """T-284's base, T-282's packing, against #939's certificate at 199: with
+    ``--through`` the rival is read at the extended count and compared with T-284
+    contracted through its one L step, a gain of 1.0399 of the margin it carries, as the
+    s199 packet's base receipt states; without it the packet's 199 is not read at 172,
+    and the refusal says so (review A2 of #1030)."""
+    record = cm.margin(
+        cm.read_certificate("T-284=l-base:packet:ozden-s199-upper-bound-2026-11-09", 172),
+        routes=False,
+        against=cm.read_certificate("#939=packet:de-winter-s199-upper-bound-2026-11-09", 199),
+        through=True,
+    )
+    against = record["against"]
+    assert against["compared"].startswith("through the construction")
+    assert (against["n"], against["gain_over_margin"], against["within_margin"]) == (
+        199,
+        "1.0399",
+        False,
+    )
+    assert record["construction"]["margin_through"] == record["margin"]
+    command = [
+        "--n",
+        "172",
+        "T-284=l-base:packet:ozden-s199-upper-bound-2026-11-09",
+        "--against",
+        "#939=packet:de-winter-s199-upper-bound-2026-11-09",
+        "--no-routes",
+        "--out",
+        str(tmp_path / "receipt.json"),
+    ]
+    assert cm.main(command) == 2
+    assert "pass --through" in capsys.readouterr().err
+

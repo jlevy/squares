@@ -1602,8 +1602,12 @@ def restatements_problems(
     this one, as a regularization's `of` is. The ruling is `RESTATEMENT_RULING`. The
     receipt `measured_in` is a repository file in `devtools.contraction_margin`'s format at
     this count, measured against a later certificate whose side lies within the margin
-    (`against.within_margin`), and `gain_over_margin` is the share it records. An identity
-    measured here carries at least one measurement.
+    (`against.within_margin`), and `gain_over_margin` is the share it records. A receipt
+    measured through a construction states the base's count in `n` and this count in
+    `against.n`, which is read as this count. The receipt measures `of`'s certificate
+    (its label) against this result's: the rival is labelled with this id or read from a
+    packet this result cites in its `artifacts` (review A7 of #1030). An identity measured
+    here carries at least one measurement.
     """
     items = record.get("restatements")
     if not items:
@@ -1649,7 +1653,33 @@ def restatements_problems(
                 receipt = None
             if receipt is not None:
                 against = receipt.get("against") or {}
-                if receipt.get("format") != CONTRACTION_FORMAT or receipt.get("n") != n:
+                through = str(against.get("compared", "")).startswith("through the construction")
+                at = against.get("n") if through else receipt.get("n")
+                certificate = receipt.get("certificate") or {}
+                rival = against.get("certificate") or {}
+                cited = {
+                    str(path).split("/")[3]
+                    for path in record.get("artifacts") or ()
+                    if str(path).startswith("packing/resources/web/")
+                    and len(str(path).split("/")) > 4
+                }
+                rival_packet = rival.get("packet") or (
+                    str(rival.get("path", "")).split("/")[3]
+                    if str(rival.get("path", "")).startswith("packing/resources/web/")
+                    else None
+                )
+                if receipt.get("format") == CONTRACTION_FORMAT and at == n:
+                    if certificate.get("label") != other:
+                        problems.append(
+                            f"{name}: its receipt measures {certificate.get('label')!r}, "
+                            f"not {other}"
+                        )
+                    if rival.get("label") != rid and rival_packet not in cited:
+                        problems.append(
+                            f"{name}: its receipt's rival {rival.get('label')!r} is neither "
+                            f"{rid} nor read from a packet {rid} cites"
+                        )
+                if receipt.get("format") != CONTRACTION_FORMAT or at != n:
                     problems.append(
                         f"{name}: measured_in is no {CONTRACTION_FORMAT} receipt at n = {n}"
                     )

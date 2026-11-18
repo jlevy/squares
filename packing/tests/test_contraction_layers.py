@@ -30,9 +30,11 @@ HALF = Fraction(1, 2)
 GAP = ((HALF, HALF, Fraction(0)), (Fraction(8, 5), HALF, Fraction(0)))
 #: Two upright unit squares that touch in a box of side 2: no padding.
 TOUCH = ((HALF, HALF, Fraction(0)), (Fraction(3, 2), HALF, Fraction(0)))
-#: An upright square and one at half-angle tangent 1/2 in a box of side 16/5, which
-#: contracts to 12/5 (test_contraction_margin's ROTATED): a worse arrangement than TOUCH.
-ROTATED = ((HALF, Fraction(7, 10), Fraction(0)), (Fraction(5, 2), Fraction(7, 10), HALF))
+#: An upright square and one at half-angle tangent 1/2 in a box of side 29/10, which
+#: contracts to 12/5 as test_contraction_margin's ROTATED does: a worse arrangement than
+#: TOUCH. It keeps ``floor`` of its side, so one L step on it adds as many squares
+#: contracted as not.
+NARROW = ((HALF, Fraction(7, 10), Fraction(0)), (Fraction(11, 5), Fraction(7, 10), HALF))
 DILATION = 1 + Fraction(1, 10**6)
 WEB = reports.WEB
 COUZO = WEB / "couzo-index-2026-10-15/source/certificates/best/n631.cert"
@@ -105,21 +107,25 @@ def test_layers_carry_the_base_padding_the_whole_certificate_lacks(tmp_path: Pat
 def test_a_rival_is_compared_with_the_side_carried_through_the_construction(
     tmp_path: Path,
 ) -> None:
-    """The rotated pair with one layer, dilated, carries 12/5 + 1 = 17/5 through its
-    construction. Read at the extended count, a rival at or above that side lies within
-    its margin, the same construction undilated among them, and the 3 by 3 grid, at 3,
-    outside it, a new result by option D's test; the command says the same."""
-    text = _composite(ROTATED, Fraction(16, 5), 1)
+    """The narrowed rotated pair with one layer, dilated, carries 12/5 + 1 = 17/5 through
+    its construction. Read at the extended count, 7, a rival at or above that side lies
+    within its margin, the same construction undilated among them, and seven squares of
+    the 3 by 3 grid, at 3, outside it, a new result by option D's test; the command says
+    the same. (The pair at side 16/5 contracts across ``floor``, so its layers would add
+    fewer squares contracted, which the module refuses: review A8(a) of #1030.)"""
+    text = _composite(NARROW, Fraction(29, 10), 1)
     base = _spec(tmp_path, text)
     m = _count(text)
-    same = _composite(ROTATED, Fraction(16, 5), 1, dilation=Fraction(1))
-    better = "9 3\n" + "".join(f"{x}/2 {y}/2 0\n" for x in (1, 3, 5) for y in (1, 3, 5))
+    same = _composite(NARROW, Fraction(29, 10), 1, dilation=Fraction(1))
+    cells = [(x, y) for x in (1, 3, 5) for y in (1, 3, 5)][:7]
+    better = "7 3\n" + "".join(f"{x}/2 {y}/2 0\n" for x, y in cells)
     assert _count(same) == _count(better) == m
     for name, rival, inside in (("same.cert", same, True), ("better.cert", better, False)):
         record = cm.margin(
             cm.read_certificate(base, 2),
             routes=False,
             against=cm.read_certificate(_plain(tmp_path, rival, name), m),
+            through=True,
         )
         assert Fraction(record["construction"]["contracted_extended_side"]) == Fraction(17, 5)
         against = record["against"]
@@ -128,8 +134,11 @@ def test_a_rival_is_compared_with_the_side_carried_through_the_construction(
     out = tmp_path / "out.json"
     rival = _plain(tmp_path, better, "rival.cert")
     command = ["--n", "2", base, "--against", rival, "--no-routes", "--out", str(out)]
-    assert cm.main(command) == 0
+    assert cm.main([*command, "--through"]) == 0
     assert json.loads(out.read_text(encoding="utf-8"))["against"]["within_margin"] is False
+    # Without --through the rival is read at the base's count, which it is not, and the
+    # refusal says how to compare it through the construction (review A2 of #1030).
+    assert cm.main(command) == 2
 
 
 def test_where_the_base_binds_the_layers_carry_no_more_than_the_dilation(
@@ -203,6 +212,7 @@ def test_couzo_631_is_his_490_with_three_layers_and_a_dilation() -> None:
         cm.read_certificate(f"couzo-4e4c8ce=l-base:631:evand-cert:{COUZO}", 490),
         routes=False,
         against=cm.read_certificate(f"mishapolk-719=witness-center-basis:{LATER}", 631),
+        through=True,
     )
     for field in ("contracted_extended_side", "margin_through", "extended_side"):
         assert record["construction"][field] == retained["construction"][field]
@@ -211,3 +221,44 @@ def test_couzo_631_is_his_490_with_three_layers_and_a_dilation() -> None:
         legacy.literal(Fraction(retained["construction"]["margin_through"]))
         == (retained["construction"]["margin_through"])
     )
+
+
+def test_a_contraction_that_changes_the_layers_square_count_is_refused(
+    tmp_path: Path,
+) -> None:
+    """One square in a box of side 41/20 with one layer: contracted, the base's side falls
+    to 1, whose L step adds 3 squares where the construction added 5, so the packing the
+    layers would carry has another count and is refused (review A8(a) of #1030)."""
+    text = _composite(((HALF, HALF, Fraction(0)),), Fraction(41, 20), 1)
+    read = cm.read_certificate(_spec(tmp_path, text), 1)
+    with pytest.raises(cm.ContractionError, match="4 squares, not the construction's 6"):
+        cm.margin(read, routes=False)
+
+
+def test_a_dilated_base_is_not_compared_with_another_base(tmp_path: Path) -> None:
+    """Two bases compare exactly only when neither construction is dilated, so a dilated
+    one is refused there (review A8(b) of #1030); undilated, the bases compare."""
+    dilated = _composite(GAP, Fraction(21, 10), 1)
+    plain = _composite(GAP, Fraction(21, 10), 1, dilation=Fraction(1))
+    first = cm.read_certificate(_spec(tmp_path, dilated, "dilated"), 2)
+    (tmp_path / "other").mkdir()
+    second = cm.read_certificate(_spec(tmp_path / "other", plain, "plain"), 2)
+    with pytest.raises(cm.ContractionError, match="dilated: a dilated construction"):
+        cm.margin(first, routes=False, against=second)
+    undilated = cm.read_certificate(_spec(tmp_path, plain, "undilated"), 2)
+    record = cm.margin(undilated, routes=False, against=second)
+    assert record["against"]["within_margin"] is True
+
+
+def test_a_malformed_rival_and_a_through_without_a_base_are_refused(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A malformed ``--against`` and a ``--through`` whose certificate is no ``l-base``
+    end in a refusal, never a traceback (review A8(c) of #1030)."""
+    base = _spec(tmp_path, _composite(GAP, Fraction(21, 10), 1))
+    assert cm.main(["--n", "2", base, "--against", "nocolon", "--no-routes"]) == 2
+    assert "refused:" in capsys.readouterr().err
+    plain = _plain(tmp_path, _composite(GAP, Fraction(21, 10), 1), "plain.cert")
+    assert cm.main(["--n", "7", plain, "--against", plain, "--through", "--no-routes"]) == 2
+    assert "--through needs an l-base" in capsys.readouterr().err
+

@@ -61,13 +61,22 @@ certificate at 631 is his 490 with three layers, dilated by ``1 + 1e-24``: its o
 is that dilation alone, ``2.57e-23``, where its base contracts by ``2.60e-11``. The
 receipt's ``construction`` then gives the side the certificate carries through it, the
 contracted base with the ``k`` layers written on it undilated, and both routes decide that
-packing too. An ``--against`` that is no ``l-base`` is read at ``M`` and compared with
-that side, which is option D's test through the construction::
+packing too. With ``--through``, ``--against`` names a certificate that is no ``l-base``,
+read at ``M`` and compared with that side, which is option D's test through the
+construction::
 
     COUZO=resources/web/couzo-index-2026-10-15/source/certificates/best/n631.cert
     LATER=resources/web/mishapolk-issue719-2026-10-22/facts/n-631.yaml.gz
     python -m devtools.contraction_margin --n 490 "couzo=l-base:631:evand-cert:$COUZO" \\
-        --against "719=witness-center-basis:$LATER"
+        --against "719=witness-center-basis:$LATER" --through
+
+Without ``--through``, ``--against`` is read at ``--n`` and compared with the base itself,
+whichever form names the base, as the one-step receipts of 10 and 11 November were
+written (the s199 and s172 packets' ``contraction-n172-*.json``). A receipt carries
+``construction`` only when the base is read by the ``M:FORMAT:PATH`` form or the
+comparison is through it, so those one-step receipts, which carry none, are what their
+commands still write. An ``l-base`` against an ``l-base`` compares the two bases, which is
+exact only when neither construction is dilated, so a dilated one is refused there.
 
 From ``packing/``, with the project interpreter::
 
@@ -246,17 +255,38 @@ def _packing(read: Read) -> tuple[Fraction, tuple[int, int]]:
     return factor, pair
 
 
-def margin(read: Read, *, routes: bool = True, against: Read | None = None) -> dict[str, Any]:
-    """The receipt: the factor, the contracted side, the margin, and the routes' verdicts."""
+def margin(
+    read: Read, *, routes: bool = True, against: Read | None = None, through: bool = False
+) -> dict[str, Any]:
+    """The receipt: the factor, the contracted side, the margin, and the routes' verdicts.
+
+    ``through`` compares ``against``, a certificate that is no ``l-base``, with the side
+    ``read``'s construction carries, at its extended count; otherwise ``against`` is
+    compared with ``read`` itself, at the same count."""
     started = time.process_time()
     certificate = read.certificate
     factor, pair = _packing(read)
     layered = read.layered
-    through = layered is not None and against is not None and against.layered is None
+    if through and (layered is None or against is None or against.layered is not None):
+        raise ContractionError(
+            "--through compares an l-base's construction with an --against that is no l-base"
+        )
     if against is not None:
         count = layered.extended.n if through and layered is not None else certificate.n
         if against.certificate.n != count:
             raise ContractionError("--against names a certificate of another count")
+        if not through and layered is not None and against.layered is not None:
+            dilated = [
+                each.label
+                for each in (read, against)
+                if each.layered is not None and each.layered.dilation != 1
+            ]
+            if dilated:
+                raise ContractionError(
+                    f"{', '.join(dilated)}: a dilated construction's base is not compared "
+                    "with another base; compare the constructions' certificates, or one "
+                    "base --through against the other's certificate"
+                )
         _packing(against)
     given = sharp.decide(certificate, PROFILE) if routes else None
     if given is not None and not all(item["passed"] for item in given.values()):
@@ -281,7 +311,7 @@ def margin(read: Read, *, routes: bool = True, against: Read | None = None) -> d
         record["routes"] = verdicts
         record["routes_accept"] = all(item["passed"] for item in verdicts.values())
     carried: Fraction | None = None
-    if layered is not None:
+    if layered is not None and (through or "layers" in layered.source):
         built = construction.write_out(
             construction.Recipe(
                 n=layered.extended.n,
@@ -294,6 +324,11 @@ def margin(read: Read, *, routes: bool = True, against: Read | None = None) -> d
             ),
             contracted,
         )
+        if built.n != layered.extended.n or len(built.poses) != layered.extended.n:
+            raise ContractionError(
+                f"{read.label}: the contracted base with its L layers written on it has "
+                f"{len(built.poses)} squares, not the construction's {layered.extended.n}"
+            )
         carried = built.side
         stated = layered.extended.side
         block: dict[str, Any] = {
@@ -348,24 +383,36 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--n", type=int, required=True)
     parser.add_argument("certificate", help="[LABEL=]KIND:TARGET, as devtools.measure_identity")
     parser.add_argument("--against", help="a later certificate of the same count")
+    parser.add_argument(
+        "--through",
+        action="store_true",
+        help="read --against at the l-base's extended count and compare it through the "
+        "construction",
+    )
     parser.add_argument("--no-routes", action="store_true")
     parser.add_argument("--out", type=Path)
     args = parser.parse_args(argv)
     try:
         read = read_certificate(args.certificate, args.n)
         against = None
+        if args.through and (read.layered is None or not args.against):
+            raise ContractionError("--through needs an l-base certificate and an --against")
         if args.against:
-            # Against a base read through its construction, a certificate that is no base
-            # itself is the construction's rival, so it is read at the extended count.
-            kind = identity.split_spec(args.against)[1]
-            count = (
-                read.layered.extended.n
-                if read.layered is not None and kind != identity.L_BASE
-                else args.n
-            )
-            against = read_certificate(args.against, count)
-        record = margin(read, routes=not args.no_routes, against=against)
-    except ContractionError as error:
+            # Through the construction, the rival is read at the extended count; otherwise
+            # at --n, as the base itself is.
+            through_n = read.layered.extended.n if read.layered is not None else args.n
+            count = through_n if args.through else args.n
+            try:
+                against = read_certificate(args.against, count)
+            except ContractionError as error:
+                if read.layered is None or args.through:
+                    raise
+                raise ContractionError(
+                    f"{error} (to compare it through the construction, at {through_n}, "
+                    "pass --through)"
+                ) from error
+        record = margin(read, routes=not args.no_routes, against=against, through=args.through)
+    except (ContractionError, identity.MeasureError) as error:
         print(f"refused: {error}", file=sys.stderr)
         return 2
     text = json.dumps(record, indent=1, ensure_ascii=False) + "\n"

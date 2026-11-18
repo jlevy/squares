@@ -350,10 +350,10 @@ From `packing/`, the measurements through Couzo’s construction (lane w7-optd-1
 COUZO=resources/web/couzo-index-2026-10-15/source/certificates/best/n631.cert
 python -m devtools.contraction_margin --n 490 "couzo-4e4c8ce=l-base:631:evand-cert:$COUZO" \
   --against "mishapolk-719=witness-center-basis:resources/web/mishapolk-issue719-2026-10-22/facts/n-631.yaml.gz" \
-  --out resources/web/mishapolk-issue719-2026-10-22/measure/contraction-n631-through-490.json
+  --through --out resources/web/mishapolk-issue719-2026-10-22/measure/contraction-n631-through-490.json
 python -m devtools.contraction_margin --n 490 "couzo-4e4c8ce=l-base:631:evand-cert:$COUZO" \
   --against "mishapolk-732=evand-cert:resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n631.cert" \
-  --out resources/web/mishapolk-issue719-2026-10-22/measure/contraction-n631-732-through-490.json
+  --through --out resources/web/mishapolk-issue719-2026-10-22/measure/contraction-n631-732-through-490.json
 ```
 
 ## Compressed Files
