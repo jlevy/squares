@@ -3,9 +3,9 @@ type: is
 id: is-01m7nxzge4950perv8zk1290n7
 title: "Address PR #908 review A: senior review of T-142/T-143 to V3/C3"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 12
+version: 13
 labels: []
 dependencies: []
 parent_id: is-01m7kqn1kjvjkmqbcs4yfq84fc
@@ -22,5 +22,9 @@ child_order_hints:
   - is-01m7ny00gj1gn565seay10734y
   - is-01m7ny01x782dx7z19q5c5karh
 created_at: 2026-11-17T23:37:52.323Z
-updated_at: 2026-11-17T23:38:10.215Z
+updated_at: 2026-11-18T00:55:28.863Z
+closed_at: 2026-11-18T00:55:28.863Z
+close_reason: "Review A of PR #908 addressed: A1-A8, A10, A11 fixed, A9 declined; reply https://github.com/jlevy/squares/pull/908#issuecomment-6964876465; merged 2be743b07."
+resolution: null
+duplicate_of: null
 ---
