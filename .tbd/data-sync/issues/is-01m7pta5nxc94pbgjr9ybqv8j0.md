@@ -5,7 +5,7 @@ title: "Address PR #1033 review A: R-1021 post-freeze notes (A1, A3, A4), packet
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: r1021b-1118
 labels: []
 dependencies: []
@@ -18,7 +18,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-18T07:53:01.884Z
-updated_at: 2026-11-18T07:53:17.780Z
+updated_at: 2026-11-18T08:00:14.622Z
 started_at: 2026-11-18T07:53:17.780Z
 ---
 Lane r1021b-1118, sole committer on claude/intake-2026-11-18-review-1021 (worktree /home/user/wt/r1021). Review A (senior, round 1, head 23860a5751, base 86284ec203): https://github.com/jlevy/squares/pull/1033#issuecomment-6972418114. Verdict approve; A1 and A2 Low, A3 to A5 suggestions. This bead is also the lane's own progress bead under the blind-review brief's 07:55Z rule (no further notes in think-gqzz). Done when every finding has a disposition in a marked reply, CI is green on the head, the PR is merged with a merge commit, and the worktree is removed.
+
+## Notes
+
+08:00Z r1021b-1118: review A (approve; A1, A2 Low; A3 to A5 suggestions) addressed in eb80ba3b50 (After the Freeze: A1, A3, A4; packet README: A2) and in the PR description (A3, A5). main moved to 50962004c8 (#1032), merged at c71609feb8 (pushed 07:56:16Z); release_pin --check passes, no re-pin needed. Local at c71609feb8: frozen lists 22/49 OK, review lines 1-739 equal the frozen text, records 55/55 (109.9 s), render_document_map --check and retained_data check pass; check_pr_description passes on the new description. Hosted CI on c71609feb8 running. Next: CI final, discovery sweep, disposition reply (draft in the scratchpad's r1021/dispositions-A.md), close A1-A5 beads, mark ready, merge (merge commit), remove /home/user/wt/r1021.
