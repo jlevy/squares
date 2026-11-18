@@ -65344,8 +65344,8 @@ evidence:
       outside-container controls passed their required outcomes on both routes, 2490354 pair
       decisions; summed over the 39 jobs, the receipts record 599.51 route CPU seconds and
       862.91 job wall seconds, the longest job 67.08 seconds. Every positive clears every
-      wall by at least 1e-28, exactly that at the left and bottom walls, and every pair by
-      at least 2.00e-28. The packet's sharp controls meet those margins on both routes. The
+      wall by at least 1e-28 and every pair by at least 2.00e-28, the left and bottom walls
+      by exactly 1e-28. The packet's sharp controls meet those margins on both routes. The
       replay is E-mishapolk-1009-exact-feasibility, and the stage 4 review's clean-room run
       E-mishapolk-1009-review-exact-feasibility, at all thirteen counts.
 

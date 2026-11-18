@@ -488,6 +488,25 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # lanes, on their censuses of 4 November, adopted in the pass of 17 November 2026.
         "T-107",
         "T-109",
+        # The pass of 18 November 2026 (think-i38n) took the last houses of nine results to
+        # Mykhailo Polkovskyi's issue-1009 certificates (T-314 to T-326): T-302 at 147,
+        # T-287 at 156, T-288 at 180, T-269 at 260, T-289 at 268, T-283 at 270, T-146 at
+        # 292, T-277 at 299 and T-279 at 307. Doğa Özden's and Joost de Winter's
+        # certificates of issues 1005 to 1007 (T-310 to T-313), never houses, are
+        # superseded by his smaller ones at 262, 292 and 295 (T-319, T-323, T-324).
+        "T-302",
+        "T-287",
+        "T-288",
+        "T-269",
+        "T-289",
+        "T-283",
+        "T-146",
+        "T-277",
+        "T-279",
+        "T-310",
+        "T-311",
+        "T-312",
+        "T-313",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets

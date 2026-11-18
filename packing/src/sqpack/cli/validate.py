@@ -290,10 +290,14 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: 90, 108, 48, 152 and 211 against 5, 8, 94, 7 and 1, and translating squares 92, 111, 76,
 #: 223 and 262 against 17, 55, 103, 60 and 19, so n=1..200 has 846 separating squares and
 #: 2,443 translating ones, and n=1..324 3,210 and 7,167, in the same records.
+#: The pass of 18 November 2026 (think-i38n) moved thirteen counts, 147 to 307, to
+#: Mykhailo Polkovskyi's certificates of issue 1009 (T-314 to T-326), each clearing every
+#: wall by at least 1e-28 and every pair by at least 2e-28, so n=1..200 has 773 separating
+#: squares and 2,471 translating ones, and n=1..324 3,245 and 7,844, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
-    "n=1..200": (68, 846, 182, 2443),
-    "n=1..324": (126, 3210, 302, 7167),
+    "n=1..200": (68, 773, 182, 2471),
+    "n=1..324": (126, 3245, 302, 7844),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
