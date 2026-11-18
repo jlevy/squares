@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-17'
+last_reviewed: '2026-11-18'
 results:
   - id: T-001
     kind: lower-bound
@@ -52646,6 +52646,192 @@ results:
       verdict: accepted
       covers:
       - T-326
+  - id: T-327
+    kind: lower-bound
+    registered: '2026-11-18'
+    landed: '2026-11-18'
+    headline: "`s(109) ≥ s(108) ≥ 10.630037940829…` verified, T-216's measure dilated onto 401 directions"
+    claim: >-
+      A rectangle measure of JoostdeWinter/square-packing, published on 17 November 2026 and
+      reported in jlevy/squares#1018, with a one-page rational enlargement, proves s(108) >=
+      1700799526134255846599/159999384348528500000 = 10.6300379408297…, and so s(109) >= the
+      same, since a packing of 109 squares contains one of 108.
+
+      The certificate is Hiroaki Hosono's mixed_n108_L1062 (T-216) dilated by 1063/1062: 823
+      uniform rectangles in D4 orbits, every coordinate scaled and every mass unchanged, of
+      total mass 10799999/100000 < 108, in the square of side 1063/100, at the core side
+      12487/12500 the source chose, on a net its file declares of 401 half-angle tangents of
+      step 83/80000, last 83/200, with B(1 + D) = 999996421/1000000000 < 1. The core is not
+      1063/1062 times T-216's 9977/10000; the finer net admits it, and the dilation carries
+      none of T-216's coverage.
+
+      Here the premises, lemma N0 on the declared net, the dilation
+      row by row and the file's regeneration from T-216's by the source's own rule were
+      recomputed exactly from the retained bytes, and the author's twelve runs audited:
+      every direction once, of reviewed crate source.
+
+      The format M theorem proves s(108) >= 1063/100. The source's proof enlarges that: with
+      z0 = D/2, w(t) = (1 + 2t - t^2)/(2(1 + t^2)), u = 2 B w(z0) =
+      319998768697057/320000086112500 and h = 707107/10^6 > 1/sqrt 2, a packing of 108 unit
+      squares in a square of side S = 2h + (L - 2h)/u, scaled by u about (h, h), lies in
+      [0, L]^2 with each square's centre at least its axis half-width from every wall, so
+      each holds a core of side B at its nearest net direction in the verified domain, and
+      108 such cores would capture more than the total mass. S is the claimed side exactly.
+
+      The same sqverify-fast, built here from reviewed source, decided all 401 directions of
+      the retained certificate on 18 November 2026, every direction's row equal to the
+      author's twelve runs on every field but the timings and the node totals equal, and its
+      whole-net controls of the same day refused the 99/100 mutant at every direction and
+      the near-threshold mutant.
+
+      The blind stage 4 review of 18 November accepts the argument, the enlargement lemma
+      included, with no blocking or major finding: every premise recomputed exactly, and all
+      401 directions decided by clean-room code of its own, the axis by an exact vertex
+      argument and the 400 rotated ones by its own branch and bound, the least capture found
+      1.00468.
+
+      This raises the verified and reported lower lanes at n = 108 from T-216's 531/50 by
+      0.0100, and at n = 109 the reported lane from Hosono's closed form a(109) =
+      10.5512903697… (T-180) by 0.0787 and the verified lane from Karakuş's strip bound
+      10.4624294225 by 0.1676. The bound is confirmed, reproduced with the producer's code:
+      the source decided it with the same sqverify-fast, so the census replay here is not a
+      second implementation; the review's clean-room decision of all 401 directions,
+      independently re-implemented, stands beside it and sets no rung until a soundness
+      review accepts its decider. No independent full implementation with a reviewed
+      decider, second method, proof-assistant check or optimality theorem is claimed.
+
+      Joost de Winter after Hosono, Tokoharu and Levy,
+      [square-packing](https://github.com/JoostdeWinter/square-packing/tree/cc20a26845789c2502950041c26709eda8a71081/lower_n108).
+      The source says the rescaling, the computation and the proof were produced with
+      GPT-6.2 Astra (OpenAI) and the repository files and checks with Claude (Anthropic), under
+      his direction.
+    scope: {n_values: [108, 109]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        The strongest lower bound on record at n = 108 and n = 109, 0.0100 above T-216 at 108,
+        by T-216's own measure dilated onto a finer declared net, the certificate kind and
+        route of T-216, T-262 and T-266, with a short rational enlargement past the measure's
+        side that those did not use, no new technique beyond it, at S3 as they are; scored as
+        a claim on 18 November.
+      scored: '2026-11-18'
+      by: >-
+        the blind stage 4 review of 18 November
+        (docs/project/reviews/review-2026-11-18-de-winter-1018.md), confirming the
+        registering lane's draft (think-i5en)
+    novelty: previously-published
+    attribution:
+      source_keys: ['[de Winter s108 lower bound 2026-11-17]']
+      published: '2026-11-17'
+    composition: >-
+      One source certificate with its rational enlargement, and one complete maintained
+      native replay, C3. The source decided it with this repository's sqverify-fast, so the
+      census replay here is reproduced with the producer's code; no second complete
+      implementation with a reviewed decider stands beside it. The source's exact audit,
+      check_lower.py, is retained and not run. The stage 4 review's own clean-room programs
+      decided all 401 directions, independently re-implemented, an entry cited by the case
+      records that sets no rung, since its decider's soundness has not been adversarially
+      reviewed; the review read the enlargement's argument, which no machine decides.
+    evidence:
+      - E-de-winter-1018-n108-report
+      - E-de-winter-1018-n108-sqverify-fast-replay
+    reviews:
+      - path: docs/project/reviews/review-2026-11-18-de-winter-1018.md
+        kind: adversarial
+        reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 mathematical lane r108-1118, separately prompted from the import lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-18'
+        scope: >-
+          The claim from the certificate to s(109) >= s(108) >= the claimed side: the exact
+          premises, the measure against T-216's row by row, the archived runs' coverage, the
+          enlargement lemma in exact arithmetic, and coverage decided at all 401 directions
+          by clean-room code of its own, with 38 planned controls; findings frozen before the
+          import lane's receipts or T-216's reviews were read. No census run of its own.
+        verdict: accepted
+        covers: [T-327]
+    artifacts:
+      - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/README.md
+      - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/acquisition/sources.json
+      - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/n108_measure.json.gz
+      - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/proof_n108.pdf
+      - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/receipts/controls-plan-108.txt
+      - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/receipts/dilation-audit.json
+      - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/receipts/native-receipt-audit.json
+      - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/receipts/replay-comparison.json
+      - packing/devtools/audit_dilated_measure.py
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.jsonl.gz
+      - packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.control.json
+      - docs/project/reviews/review-2026-11-18-de-winter-1018.md
+      - packing/resources/web/de-winter-1018-review-2026-11-18/README.md
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.control.json
+      - packing/tests/test_sqverify_fast_census.py
+      - packing/tests/test_audit_dilated_measure.py
+    next_rung: >-
+      None for the bound. V4 and C4 need a second qualifying adversarial AI review by a
+      distinct reviewer and an explicit human oversight record; one AI review, of 18
+      November, is retained. A soundness review of the stage 4 review's decider would let
+      its complete decision of all 401 directions count as an independent full
+      implementation beside the census replay.
+    notes: >-
+      Registered on the day after the report from the packet's retained bytes, at V0/C0,
+      with the complete census replay and its whole-net controls already run and retained
+      here. From that replay, its control receipt and the blind stage 4 review of 18
+      November (R-108, think-i5en; PR #1027), recorded as
+      E-de-winter-1018-n108-sqverify-fast-replay with the review as its audit record, the
+      entry is V3/C3, and both case records' verified lanes take the claimed side beside the
+      reported ones; T-216 keeps its claim at n = 108, now superseded there. The score of 18
+      November stands, confirmed by the review.
+
+      The complete census replay (two threads under nice 19, 4,624 CPU-seconds and 4,943
+      seconds of wall, 266,337,510 nodes, least leaf bound 1.0000000000543061 at direction
+      76, the exact capture at that leaf's centre 1.0295 clearing 1) equals the author's
+      twelve native runs at every direction on every field but the timings, and the node
+      totals are equal (receipts/replay-comparison.json in the packet); the runs were built
+      from the same reviewed crate source by rustc 1.100.0, the census binary by the pinned
+      1.98.0, which settles the record's half of the review's N-3.
+
+      Its whole-net control receipt (mixed_n108_L1063.control.json, CONTROLS_REFUSED)
+      verified the original again at direction 76, refused the 99/100 mutant at all 401
+      directions, each a coverage refusal at a centre in the per-bin domain whose exact
+      capture is below 1, the axis inside the enclosure the sweep held,
+      [0.9974040452859079, 0.9974040454240194], and refused the near-threshold mutant at
+      direction 76. The plan that stated each of these outcomes before any program read the
+      certificate is retained (receipts/controls-plan-108.txt, hashed at 01:49:49Z on 18
+      November, its digest on think-i5en at 01:50Z); every outcome was the one stated.
+
+      The author's twelve runs carry no controls (the review's N-5): no mutant was run with
+      them, and lower_checks.txt's 99/100 figure is one exact axis capture, so the whole-net
+      controls here are the only controls on the certificate; the review's own decider,
+      after its planned controls, refused the 99/100 copy at all 400 rotated directions, as
+      the census did.
+
+      The issue states the gain as 0.0100 at both counts, which is T-216's at 108 (the
+      review's N-6): at 109 the record held Hosono's closed form a(109) = 10.5512903697...
+      reported (T-180) and Karakuş's strip bound 10.4624294225 verified, so the gain there
+      is 0.0787 over the reported lane and 0.1676 over the verified one.
+
+      The price (Review A's A8 on #1027): the triage priced the census from T-216's
+      136,113,602 nodes in 2,087 CPU-seconds scaled to the author's 266,337,510, 4,084
+      CPU-seconds or 1.13 CPU-hours, which it rounded up to about 1.2; the review's frozen
+      price for the capture was 1.38 to 1.50 CPU-hours, from the source's 20.3 µs a node and
+      the n = 31 sample's 18.6, widened after its freeze to 1.13 on the same basis, T-216's
+      15.3 µs; it ran in 4,624 CPU-seconds, 1.28 CPU-hours, 17.4 µs a node, and the controls
+      in about 0.15 more. The lane's CPU for the whole import, review round included, was
+      about 1.8 CPU-hours, under the owner's 40 an item.
+
+      The review's other notes: N-1, the certificate proves the strict s(108) > S, of which
+      the entry states the >=; N-2, the README at the pin lists a SHA256SUMS the folder
+      lacks, which the source's next commit adds; N-4, the net's last direction is needed
+      by lemma N0's premise and not by the argument; N-7, the census replay reruns the
+      producer's own crate, as this entry's wording says; N-8, the PDF's earlier figure
+      10.622222909689 is not reproduced and is no part of the claim. N-2, N-3, N-5 and N-8,
+      and the review's four questions, go to the author with the reply.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
