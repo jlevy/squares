@@ -1,4 +1,4 @@
-# de Winter’s Rescaled Measure for $s(109) \ge s(108) \ge 10.6300379408$ (#1018): Stage 4 Mathematical Review
+# De Winter’s Rescaled Measure for $s(109) \ge s(108) \ge 10.6300379408$ (#1018): Stage 4 Mathematical Review
 
 **Date:** 2026-11-18 UTC. **Subject:** the lower bound of issue
 [#1018](https://github.com/jlevy/squares/issues/1018) by Joost de Winter (Delft
@@ -113,9 +113,10 @@ with controls); and nothing of the bead `think-i5en` but its id, to which this l
 appended its progress notes under its own heading without reading the others.
 
 **Not read before the findings were frozen:** `check_lower.py` and `stretch_measure.py`
-(to be read as data once the findings are frozen); any crate source, the source’s or
-this repository’s; the census driver’s code; the reviews of T-216; the import lane’s
-branch, packets, receipts and bead notes; the issue’s comments.
+(read as data once the findings were frozen, [After the Freeze](#after-the-freeze)); any
+crate source, the source’s or this repository’s; the census driver’s code; the reviews
+of T-216; the import lane’s branch, packets, receipts and bead notes; the issue’s
+comments.
 
 **Not run:** any program of the source’s, and any program of this repository’s on the
 certificate.
@@ -609,6 +610,76 @@ What went wrong along the way, before the freeze it precedes:
   at sharp minima, so the plan states $10^{-4}$.
 - A first `git push` of the freeze was refused for want of credentials and retried with
   `gh` as the credential helper; the commit was unchanged.
+
+## After the Freeze
+
+The findings above were frozen at 03:06:07Z on 18 November (`b38c7535c`). Afterwards
+this lane read the source’s two programs as data, and then the reviews of T-216.
+
+**`stretch_measure.py`** (903 bytes) multiplies every coordinate of Hosono’s file by the
+new side over the old and rewrites `L`, `B` and `proof_net`, leaving the masses; that is
+the transformation `rv1018_measure.py` found.
+
+**`check_lower.py`** (5,687 bytes) checks Hosono’s file by the SHA-256 of its
+decompressed bytes (`4d72da64…`, T-216’s retained candidate); that the measure is the
+rescaling; the rows, masses and total; each receipt’s kind, status, refusals, fault,
+threshold, crate source and input digest, and its premises $n$, $L$, $B$, $D$, angle
+count, mass, row count, format M, per-bin domain and no points or segments; that the
+records cover $r = 0, \ldots, 400$, each verified with a bound of at least 1; the exact
+axis capture at the logged argmin, at least the logged bound and below 1 at 99/100;
+lemma N0 (c) and (d); and $u$, $h$ and $S$, including $uS + 2h(1 - u) = L$. It agrees
+with every value this review computed.
+What it leaves to the verifier or does not check is what this review added: N0 (b) and
+(e), complete trees and least-bound boxes in their quadrants, the summaries’ totals
+against their records, the merged expansion, any capture at a rotated direction, and any
+control beyond the one axis pose (N-5). Nothing in either program changes a finding.
+
+## Comparison With Earlier Reviews
+
+No earlier review of #1018 exists.
+T-216, whose measure #1018 rescales, has two mathematical reviews of 18 October, which
+this lane read after its findings were frozen: Review B,
+[`review-2026-10-18-wand125-n108-certificate-mathematics.md`](review-2026-10-18-wand125-n108-certificate-mathematics.md),
+and Review C,
+[`review-2026-10-18-n108-fine-net-mathematics-max.md`](review-2026-10-18-n108-fine-net-mathematics-max.md),
+both by Codex agents of another system family.
+
+- **The same derivation.** Both fold square by square, take the per-bin domain from
+  $w(a_r)$, reduce to the quadrant by the quarter turn and count; Review C spells out
+  the last bin of T-216’s net, which is needed there ($a_{200}^2 + 2a_{200} - 1 < 0$).
+  Here the last bin is not needed (N-4), and steps 3 and 4, the scaling and the
+  clearance, are new to #1018; neither review needed them.
+- **The same measure facts.** Both found 823 rows, 6,524 distinct rectangles after
+  merging and the mass $108 - 10^{-5}$; this review found the same counts for the
+  rescaled measure, as a scaling keeps every coincidence.
+- **Margins.** At T-216’s core, Review C found the axis capture $1.0040111$ at the
+  source’s axis pose, and Review B found the original captures at the 201 witnesses of
+  the census’s 99/100 control between $1.0040$ and $1.0101$. With the rescaled measure
+  and the relatively larger core, the axis least here is $1.0074788$ and the least
+  capture found $1.0047$; the census control on T-216 refused at all 201 directions, as
+  this review’s decider refuses the 99/100 copy at all 401 here.
+- **Identity of the verifier.** Review B recomputed the crate’s source digest
+  `d97758bb…` by `build.rs`’s rule; this review compared the bundled files byte for byte
+  instead. Both arrive at the reviewed crate.
+- **The price.** Review B records T-216’s census at 2,086.8 CPU-seconds for 136,113,602
+  nodes, 15.3 µs a node on this project’s host.
+  At that rate the capture of a census here takes 1.13 CPU-hours, so the frozen range
+  for the census, 1.5 to 2.2 CPU-hours, widens at its lower end to about 1.2.
+
+Neither review found a mathematical defect of T-216 (Review C’s one minor finding is a
+filename in T-216’s README), and nothing here disagrees with either.
+
+## Note on This Copy
+
+This copy differs from the frozen text
+(`frozen/review-2026-11-18-de-winter-1018.frozen.md`, bound by
+`frozen/findings-frozen-digests.txt` in the packet) as follows, all changed on 18
+November 2026 after the freeze by this lane: the title’s first word is capitalized as a
+sentence start; the Scope’s pointer to the reading of `check_lower.py` and
+`stretch_measure.py` now links that reading; and the two sections above and this note
+were added. No finding, verdict or number of the frozen text changes; the last item of
+the comparison widens the census price’s lower end, which the frozen price table does
+not show.
 
 ## Reproduction
 
