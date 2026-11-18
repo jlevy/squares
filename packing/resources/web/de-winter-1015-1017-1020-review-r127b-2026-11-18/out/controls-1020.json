@@ -1,0 +1,1295 @@
+{
+ "program": "rb127_controls.py",
+ "label": "1020",
+ "mode": "pair",
+ "verdict": "SOME_CONTROL_NOT_AS_STATED",
+ "controls": 35,
+ "not_as_stated": [
+  "E1p"
+ ],
+ "results": [
+  {
+   "control": "R1-C",
+   "stated": "form C refused: the count stated exceeds the squares listed",
+   "as_stated": true,
+   "outcome": "form C: n = 127 stated, 126 squares listed"
+  },
+  {
+   "control": "R1-J",
+   "stated": "form J refused: the count stated exceeds the squares listed",
+   "as_stated": true,
+   "outcome": "form J: n = 127 stated, 126 squares listed"
+  },
+  {
+   "control": "R2-C",
+   "stated": "read; the same value and corners; the side flagged as not in lowest terms",
+   "as_stated": true,
+   "outcome": [
+    "side not in lowest terms"
+   ]
+  },
+  {
+   "control": "R2-J",
+   "stated": "read; the same value and rows; the side flagged as not in lowest terms",
+   "as_stated": true,
+   "outcome": [
+    "side not in lowest terms"
+   ]
+  },
+  {
+   "control": "R3-C",
+   "stated": "form C refused: ids out of order",
+   "as_stated": true,
+   "outcome": "form C: square 1 has id 'square-2', out of order"
+  },
+  {
+   "control": "R3-J",
+   "stated": "form J read; the twin fails at exactly squares 1 and 2",
+   "as_stated": true,
+   "outcome": [
+    1,
+    2
+   ]
+  },
+  {
+   "control": "R4-C-quoted",
+   "stated": "refused: not a scalar p or p/q, or a YAML float",
+   "as_stated": true,
+   "outcome": "form C side: not a scalar p or p/q: '11.8007937266149622393290313560964667339298'"
+  },
+  {
+   "control": "R4-C-plain",
+   "stated": "refused: not a scalar p or p/q, or a YAML float",
+   "as_stated": true,
+   "outcome": "form C: scalar of tag tag:yaml.org,2002:float at $.witness.side: '11.8007937266149622393290313560964667339'"
+  },
+  {
+   "control": "R4-J",
+   "stated": "refused: not a scalar p or p/q",
+   "as_stated": true,
+   "outcome": "form J side: not a scalar p or p/q: '11.8007937266149622393290313560964667339298'"
+  },
+  {
+   "control": "R5-C",
+   "stated": "refused, naming the coordinate",
+   "as_stated": true,
+   "outcome": "form C square 1 corner 1 x: not a scalar p or p/q: '+93750000000000000000000000000000000000000000000000000068127'"
+  },
+  {
+   "control": "R6-C",
+   "stated": "refused: a corner scalar that is not a string",
+   "as_stated": true,
+   "outcome": "form C square 1 corner 1 x: not a string scalar (int)"
+  },
+  {
+   "control": "R5-J",
+   "stated": "refused, naming the coordinate",
+   "as_stated": true,
+   "outcome": "form J square 1 center_x: not a scalar p or p/q: '+78125000000000000000000000000000000000000000000000000068127'"
+  },
+  {
+   "control": "R6-J",
+   "stated": "refused: a JSON number in place of a scalar string",
+   "as_stated": true,
+   "outcome": "form J square 1 center_x: not a string scalar (int)"
+  },
+  {
+   "control": "G1",
+   "stated": "refused; (1, n) at margin -1 with B area 1 the only overlap; each (k, n) at the original (1, k)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlaps": [
+     [
+      1,
+      127
+     ]
+    ]
+   }
+  },
+  {
+   "control": "G2",
+   "stated": "refused: square 1's clearances exactly (L+S, B, R-S, T), none of it inside, no pair overlapping",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "inside_b": "0"
+   }
+  },
+  {
+   "control": "G3",
+   "stated": "refused: square 1 not a unit square by A or B; the twin fails at square 1 only",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "twin_failures": [
+     1
+    ]
+   }
+  },
+  {
+   "control": "G4",
+   "stated": "accepted with every listing clockwise; margins identical; the twin holds",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "senses": [
+     -1
+    ],
+    "listings": {
+     "offset 1, clockwise": 127
+    }
+   }
+  },
+  {
+   "control": "G5",
+   "stated": "accepted; transposed: margins identical; (L,B,R,T) -> (B,L,T,R)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT"
+   }
+  },
+  {
+   "control": "G6",
+   "stated": "accepted; quarter turn: margins identical; (L,B,R,T) -> (T,L,B,R)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT"
+   }
+  },
+  {
+   "control": "G7",
+   "stated": "accepted; mirrored: margins identical; (L,B,R,T) -> (R,B,L,T)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT"
+   }
+  },
+  {
+   "control": "S1a",
+   "stated": "the side lowered by 1e-40; by the side rule refused",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "1.00000e-40",
+    "verdict": "REFUSE",
+    "touching": 0,
+    "crossing": 14
+   }
+  },
+  {
+   "control": "S1b",
+   "stated": "the side lowered by 1/q, q its denominator; by the side rule accepted",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "2.00000e-60",
+    "verdict": "PARTIAL",
+    "touching": 0,
+    "crossing": 0
+   }
+  },
+  {
+   "control": "S1c",
+   "stated": "the side lowered by W, the least right-or-top clearance; by the side rule accepted",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "2.00000e-60",
+    "verdict": "PARTIAL",
+    "touching": 1,
+    "crossing": 0
+   }
+  },
+  {
+   "control": "S1d",
+   "stated": "the side lowered by W + 1e-40; by the side rule refused",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "1.00000e-40",
+    "verdict": "REFUSE",
+    "touching": 0,
+    "crossing": 14
+   }
+  },
+  {
+   "control": "S1e",
+   "stated": "the side set to the claim 11.800793726615; by the side rule accepted",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "-3.77607e-14",
+    "verdict": "PARTIAL",
+    "touching": 0,
+    "crossing": 0
+   }
+  },
+  {
+   "control": "S1f",
+   "stated": "the side set to the claim less 1e-12; by the side rule refused",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "9.62239e-13",
+    "verdict": "REFUSE",
+    "touching": 0,
+    "crossing": 14
+   }
+  },
+  {
+   "control": "E1c",
+   "stated": "every square moved by the least left and bottom clearances, the side its extent X: accepted; margins identical; walls touched exactly by the squares at the least clearances and at the larger extent",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "side_less_extent_sci": "4.0000000e-60",
+    "touching": {
+     "left": 9,
+     "bottom": 11,
+     "right": 1,
+     "top": 0
+    },
+    "width_equals_height": false
+   }
+  },
+  {
+   "control": "E1p",
+   "stated": "the same with the side X - 1e-40: refused, exactly the squares at the larger extent crossing",
+   "as_stated": false,
+   "outcome": {
+    "verdict": "REFUSE",
+    "crossing": 14
+   }
+  },
+  {
+   "control": "K1c",
+   "stated": "centres scaled by lambda*, the first contact, in the box of the shrunk side: accepted; every margin exactly lambda* M - H; the touching pairs exactly the binding pairs",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "lambda_star": "447306955146010191095287639519607416786121594280545091245303274497901330757033374982498684474290802934128395589672665234853777181247396417486230436173076954636848886314269252412956441403914010812354827497258469929274465683990089485616404840000000000000000000000000000000000000000000000000000000000/447306955146010191095287639519607416786121594280545091245310647340243891055269283348901724869137728524982090817970640176915614522028307163529888022779183114558815923409573167212991959931744496456538651461715298471851164634453635951507928867743254386584124368845972439779880118026111730104870261811",
+    "touching_pairs": [
+     [
+      84,
+      99
+     ]
+    ],
+    "shrunk_side": "2061944183655577095239598616282883577864695918543404521405055906258566493501293308129315783692152211596660382396686867516998111094126769755865910891343743860045997311326555053803259818746977522090721400254580166175408152899955872513330937478141284956478282164991188814022035257086015169756882015330744683318867365560059674023430504853134920374636994457638457191685048468639190491324573826419994674821740157813114660574/174729279353910230896596734187346647182078747765837926267699471617282769943464563808164736277006925205071129225769950501780772022371834500921319812413332334964534229249000776062165248094032073153030049082121168082938222536633078488938698622264802901236349673477873640822519679256581480383384079903967059062172274331449107268764515906743866226457759086396002192390365780439406767926035745157640426109118914554773465475",
+    "margin_sci": "1.8202663e-58"
+   }
+  },
+  {
+   "control": "K1p",
+   "stated": "scaled by lambda*(1 - 1e-40) in its own extent: refused; the overlaps exactly the pairs whose factor exceeds it; no wall crossed",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlaps": [
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      48
+     ],
+     [
+      1,
+      57
+     ],
+     [
+      1,
+      63
+     ],
+     [
+      1,
+      70
+     ],
+     [
+      1,
+      101
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      47
+     ],
+     [
+      2,
+      56
+     ],
+     [
+      2,
+      101
+     ],
+     [
+      3,
+      56
+     ],
+     [
+      3,
+      100
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      63
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      8
+     ],
+     [
+      5,
+      9
+     ],
+     [
+      6,
+      100
+     ],
+     [
+      7,
+      10
+     ],
+     [
+      7,
+      11
+     ],
+     [
+      7,
+      100
+     ],
+     [
+      8,
+      9
+     ],
+     [
+      8,
+      103
+     ],
+     [
+      9,
+      10
+     ],
+     [
+      9,
+      12
+     ],
+     [
+      10,
+      11
+     ],
+     [
+      10,
+      13
+     ],
+     [
+      11,
+      14
+     ],
+     [
+      11,
+      78
+     ],
+     [
+      12,
+      13
+     ],
+     [
+      12,
+      16
+     ],
+     [
+      12,
+      90
+     ],
+     [
+      13,
+      14
+     ],
+     [
+      13,
+      16
+     ],
+     [
+      13,
+      17
+     ],
+     [
+      14,
+      15
+     ],
+     [
+      14,
+      17
+     ],
+     [
+      14,
+      18
+     ],
+     [
+      15,
+      18
+     ],
+     [
+      15,
+      19
+     ],
+     [
+      15,
+      78
+     ],
+     [
+      15,
+      104
+     ],
+     [
+      16,
+      17
+     ],
+     [
+      16,
+      90
+     ],
+     [
+      17,
+      18
+     ],
+     [
+      17,
+      21
+     ],
+     [
+      18,
+      22
+     ],
+     [
+      19,
+      23
+     ],
+     [
+      19,
+      66
+     ],
+     [
+      19,
+      71
+     ],
+     [
+      19,
+      104
+     ],
+     [
+      21,
+      22
+     ],
+     [
+      21,
+      24
+     ],
+     [
+      21,
+      25
+     ],
+     [
+      22,
+      23
+     ],
+     [
+      22,
+      25
+     ],
+     [
+      23,
+      26
+     ],
+     [
+      23,
+      27
+     ],
+     [
+      23,
+      71
+     ],
+     [
+      24,
+      25
+     ],
+     [
+      24,
+      28
+     ],
+     [
+      24,
+      29
+     ],
+     [
+      24,
+      98
+     ],
+     [
+      25,
+      26
+     ],
+     [
+      25,
+      30
+     ],
+     [
+      26,
+      27
+     ],
+     [
+      26,
+      30
+     ],
+     [
+      26,
+      31
+     ],
+     [
+      27,
+      71
+     ],
+     [
+      27,
+      84
+     ],
+     [
+      27,
+      99
+     ],
+     [
+      28,
+      32
+     ],
+     [
+      29,
+      32
+     ],
+     [
+      29,
+      33
+     ],
+     [
+      30,
+      31
+     ],
+     [
+      30,
+      33
+     ],
+     [
+      31,
+      34
+     ],
+     [
+      31,
+      35
+     ],
+     [
+      31,
+      99
+     ],
+     [
+      32,
+      33
+     ],
+     [
+      32,
+      36
+     ],
+     [
+      32,
+      96
+     ],
+     [
+      33,
+      34
+     ],
+     [
+      33,
+      36
+     ],
+     [
+      34,
+      35
+     ],
+     [
+      34,
+      37
+     ],
+     [
+      34,
+      38
+     ],
+     [
+      35,
+      39
+     ],
+     [
+      35,
+      88
+     ],
+     [
+      36,
+      37
+     ],
+     [
+      36,
+      40
+     ],
+     [
+      36,
+      102
+     ],
+     [
+      37,
+      38
+     ],
+     [
+      37,
+      42
+     ],
+     [
+      38,
+      39
+     ],
+     [
+      38,
+      42
+     ],
+     [
+      39,
+      124
+     ],
+     [
+      40,
+      102
+     ],
+     [
+      40,
+      107
+     ],
+     [
+      40,
+      125
+     ],
+     [
+      42,
+      117
+     ],
+     [
+      43,
+      47
+     ],
+     [
+      43,
+      48
+     ],
+     [
+      43,
+      101
+     ],
+     [
+      44,
+      50
+     ],
+     [
+      44,
+      51
+     ],
+     [
+      45,
+      49
+     ],
+     [
+      45,
+      53
+     ],
+     [
+      46,
+      50
+     ],
+     [
+      46,
+      55
+     ],
+     [
+      47,
+      48
+     ],
+     [
+      47,
+      56
+     ],
+     [
+      47,
+      101
+     ],
+     [
+      48,
+      57
+     ],
+     [
+      48,
+      101
+     ],
+     [
+      49,
+      53
+     ],
+     [
+      49,
+      59
+     ],
+     [
+      49,
+      112
+     ],
+     [
+      49,
+      113
+     ],
+     [
+      49,
+      114
+     ],
+     [
+      50,
+      51
+     ],
+     [
+      50,
+      55
+     ],
+     [
+      50,
+      61
+     ],
+     [
+      50,
+      62
+     ],
+     [
+      51,
+      62
+     ],
+     [
+      52,
+      53
+     ],
+     [
+      52,
+      65
+     ],
+     [
+      53,
+      58
+     ],
+     [
+      53,
+      59
+     ],
+     [
+      53,
+      65
+     ],
+     [
+      54,
+      55
+     ],
+     [
+      54,
+      68
+     ],
+     [
+      55,
+      60
+     ],
+     [
+      55,
+      61
+     ],
+     [
+      55,
+      68
+     ],
+     [
+      56,
+      101
+     ],
+     [
+      57,
+      70
+     ],
+     [
+      57,
+      101
+     ],
+     [
+      58,
+      65
+     ],
+     [
+      58,
+      109
+     ],
+     [
+      59,
+      108
+     ],
+     [
+      59,
+      109
+     ],
+     [
+      60,
+      68
+     ],
+     [
+      60,
+      73
+     ],
+     [
+      61,
+      73
+     ],
+     [
+      61,
+      74
+     ],
+     [
+      62,
+      74
+     ],
+     [
+      62,
+      75
+     ],
+     [
+      63,
+      76
+     ],
+     [
+      63,
+      103
+     ],
+     [
+      64,
+      65
+     ],
+     [
+      65,
+      104
+     ],
+     [
+      66,
+      71
+     ],
+     [
+      66,
+      104
+     ],
+     [
+      66,
+      109
+     ],
+     [
+      67,
+      68
+     ],
+     [
+      67,
+      80
+     ],
+     [
+      68,
+      80
+     ],
+     [
+      70,
+      76
+     ],
+     [
+      71,
+      84
+     ],
+     [
+      71,
+      109
+     ],
+     [
+      72,
+      73
+     ],
+     [
+      72,
+      86
+     ],
+     [
+      72,
+      98
+     ],
+     [
+      73,
+      74
+     ],
+     [
+      73,
+      86
+     ],
+     [
+      73,
+      87
+     ],
+     [
+      74,
+      75
+     ],
+     [
+      74,
+      86
+     ],
+     [
+      74,
+      87
+     ],
+     [
+      74,
+      105
+     ],
+     [
+      75,
+      87
+     ],
+     [
+      75,
+      105
+     ],
+     [
+      76,
+      83
+     ],
+     [
+      76,
+      89
+     ],
+     [
+      77,
+      78
+     ],
+     [
+      78,
+      104
+     ],
+     [
+      79,
+      80
+     ],
+     [
+      79,
+      93
+     ],
+     [
+      80,
+      81
+     ],
+     [
+      80,
+      93
+     ],
+     [
+      81,
+      82
+     ],
+     [
+      81,
+      93
+     ],
+     [
+      82,
+      94
+     ],
+     [
+      82,
+      98
+     ],
+     [
+      84,
+      99
+     ],
+     [
+      84,
+      111
+     ],
+     [
+      85,
+      86
+     ],
+     [
+      85,
+      98
+     ],
+     [
+      86,
+      87
+     ],
+     [
+      86,
+      96
+     ],
+     [
+      86,
+      97
+     ],
+     [
+      87,
+      97
+     ],
+     [
+      87,
+      105
+     ],
+     [
+      87,
+      106
+     ],
+     [
+      88,
+      99
+     ],
+     [
+      88,
+      120
+     ],
+     [
+      89,
+      90
+     ],
+     [
+      89,
+      93
+     ],
+     [
+      89,
+      103
+     ],
+     [
+      90,
+      103
+     ],
+     [
+      92,
+      93
+     ],
+     [
+      93,
+      94
+     ],
+     [
+      96,
+      102
+     ],
+     [
+      97,
+      102
+     ],
+     [
+      97,
+      105
+     ],
+     [
+      97,
+      106
+     ],
+     [
+      97,
+      107
+     ],
+     [
+      99,
+      111
+     ],
+     [
+      105,
+      106
+     ],
+     [
+      106,
+      107
+     ],
+     [
+      108,
+      109
+     ],
+     [
+      108,
+      110
+     ],
+     [
+      108,
+      114
+     ],
+     [
+      108,
+      115
+     ],
+     [
+      109,
+      110
+     ],
+     [
+      110,
+      111
+     ],
+     [
+      111,
+      119
+     ],
+     [
+      112,
+      113
+     ],
+     [
+      113,
+      114
+     ],
+     [
+      117,
+      121
+     ],
+     [
+      117,
+      122
+     ],
+     [
+      117,
+      123
+     ],
+     [
+      117,
+      126
+     ],
+     [
+      117,
+      127
+     ],
+     [
+      119,
+      120
+     ],
+     [
+      120,
+      124
+     ],
+     [
+      121,
+      122
+     ],
+     [
+      121,
+      127
+     ],
+     [
+      122,
+      123
+     ],
+     [
+      122,
+      127
+     ],
+     [
+      123,
+      124
+     ],
+     [
+      125,
+      126
+     ],
+     [
+      126,
+      127
+     ]
+    ]
+   }
+  },
+  {
+   "control": "K1s",
+   "stated": "K1c's packing in a box 1e-40 smaller: refused at the right or top wall only",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "crossing": {
+     "left": 0,
+     "bottom": 0,
+     "right": 8,
+     "top": 7
+    }
+   }
+  },
+  {
+   "control": "C0",
+   "stated": "every margin from the form C corners' projections, and every clearance from their extremes, equal to method A's from the poses",
+   "as_stated": true,
+   "outcome": {
+    "pairs": 8001,
+    "pair_mismatches": [],
+    "wall_mismatches": []
+   }
+  },
+  {
+   "control": "X1",
+   "stated": "each direction (c, s) read as (c, -s): the twin fails at exactly the squares not upright",
+   "as_stated": true,
+   "outcome": {
+    "twin_failures": 63,
+    "not_upright": 63
+   }
+  },
+  {
+   "control": "WALL",
+   "stated": "every square moved to its nearest wall and 1e-40 past: A's clearance exactly 0 and -1e-40; B touching and crossing; B's area inside 1 and below 1",
+   "as_stated": true,
+   "outcome": {
+    "moves": 254,
+    "failures": []
+   }
+  },
+  {
+   "control": "PALL",
+   "stated": "every pair closed along its line of centres to contact and 1e-40 past: A's margin exactly 0 and -1e-40, the corner projections exactly 0 at contact, B touching and overlapping both ways round",
+   "as_stated": true,
+   "outcome": {
+    "closings": 16002,
+    "failures": []
+   }
+  }
+ ],
+ "cpu_seconds_by_group": {
+  "reader": 1.32,
+  "geometry": 15.64,
+  "side": 1.71,
+  "extent": 4.04,
+  "contraction": 19.24,
+  "C0": 1.97,
+  "X1": 0.01,
+  "WALL": 0.15,
+  "PALL": 29.24
+ },
+ "cpu_seconds": 73.32,
+ "plan_mismatch": []
+}

@@ -1,0 +1,86 @@
+{
+ "program": "rb127_trial.py",
+ "synthetic": {
+  "squares": 127,
+  "turned": 10,
+  "side_sci": "1.20130000110e+1",
+  "largest_scalar_digits": 69
+ },
+ "prepare_cpu_seconds": 0.1,
+ "jobs": [
+  {
+   "job": "check pair",
+   "exit": 0,
+   "wall_seconds": 2.1,
+   "cpu_seconds": 2.0,
+   "tail": "synthetic: ACCEPT"
+  },
+  {
+   "job": "check house",
+   "exit": 0,
+   "wall_seconds": 1.5,
+   "cpu_seconds": 1.2,
+   "tail": "synthetic-house: ACCEPT"
+  },
+  {
+   "job": "controls pair",
+   "exit": 0,
+   "wall_seconds": 42.4,
+   "cpu_seconds": 17.8,
+   "tail": "synthetic: EVERY_CONTROL_AS_STATED (35 controls; not as stated: []; plan mismatch: [])"
+  },
+  {
+   "job": "controls house",
+   "exit": 0,
+   "wall_seconds": 36.0,
+   "cpu_seconds": 17.9,
+   "tail": "synthetic-house: EVERY_CONTROL_AS_STATED (29 controls; not as stated: []; plan mismatch: [])"
+  },
+  {
+   "job": "measure",
+   "exit": 0,
+   "wall_seconds": 3.5,
+   "cpu_seconds": 1.9,
+   "tail": " not below the shrunk predecessor\nT-305 -> 1017 gain 0 margin 1.1939540e-2 not below the shrunk predecessor\nT-305 -> 1020 gain 0 margin 1.1939540e-2 not below the shrunk predecessor\n1015 -> 1017 gain 0 margin 1.1939540e-2 not below the shrunk predecessor\n1017 -> 1020 gain 0 margin 1.1939540e-2 not below the shrunk predecessor\n1015 -> 1020 gain 0 margin 1.1939540e-2 not below the shrunk predecessor"
+  }
+ ],
+ "controls_under_broken_copies": [
+  {
+   "mutant": "none (the intact programs)",
+   "controls_not_as_stated": [],
+   "caught": false,
+   "controls": 35
+  },
+  {
+   "mutant": "method B clipping with open half-planes",
+   "controls_not_as_stated": [
+    "G1",
+    "S1c",
+    "E1c",
+    "E1p",
+    "K1c",
+    "K1p",
+    "WALL",
+    "PALL"
+   ],
+   "caught": true
+  },
+  {
+   "mutant": "method A counting a zero margin as overlap",
+   "controls_not_as_stated": [
+    "K1c"
+   ],
+   "caught": true
+  },
+  {
+   "mutant": "the contraction's first contact moved by a factor 1 + 1e-30",
+   "controls_not_as_stated": [
+    "K1c",
+    "K1p"
+   ],
+   "caught": true
+  }
+ ],
+ "every_broken_copy_caught": true,
+ "cpu_seconds_total": 46.1
+}
