@@ -564,6 +564,7 @@ sources:
     venue: GitHub
     dated: '2026-10-05'
     credit: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, Levy
+    short_credit: Daniel after Couzo et al.
     lineage: builds-on-project
     note: >-
       evand/square-packing at 13ee36e5807727d12a5da36b9b90a96bdba272bf
