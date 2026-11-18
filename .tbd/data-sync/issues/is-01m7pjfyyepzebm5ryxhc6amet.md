@@ -5,7 +5,7 @@ title: "Stage 4 review of T-144's mixed_n122_L1126 (wand125 s(122) >= 563/50, n 
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: r144b-1118
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m4kbxna1xdmjd8nkka3wax60
 hold: null
 hold_until: null
 created_at: 2026-11-18T05:36:22.990Z
-updated_at: 2026-11-18T07:03:54.323Z
+updated_at: 2026-11-18T07:05:42.785Z
 started_at: 2026-11-18T05:37:37.484Z
 ---
 T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L1126, raising n = 122 to 126; V0/C0 on main) has no review that reads its certificate: the 11 October final review (docs/project/reviews/review-2026-10-11-final-lower-bounds.md) read the record and premises only. result-import.md stage 4 needs a mapped mathematical review before the complete replay's evidence moves the verified lane (check_results verified_lane_review_problems), as the 14 October review did for T-179 and the 4/11 November reviews for T-142 and T-143.
@@ -33,3 +33,5 @@ T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L
 2026-11-18 06:14Z r144-1118: correction, the freeze note's time was 06:03:49Z (commit ee66533d0f), not 06:25Z. Receipts of RC1 to RC6 pushed at 15d8a8ab8b: premises hold, 201 inputs encode the candidate, node 0 decided exactly (least capture 1.0039577044...), nodes 37, 108, 180, 200, 1 decided by the lane's branch and bound, 99/100 mutants refused with exact witnesses, no capture below 1 at 1,608 poses and a 24-node search. The coordinator approved deciding all 201 nodes (1 process, nice 19, stop at 2 CPU-hours): running from 06:14Z, receipts under out/bnb-all/.
 
 2026-11-18 06:34Z r144-1118: nodes 0 to 125 decided by the lane's own programs (receipts pushed through 1cc50e6fe3); the run continues at nodes 126 to 200, 735 CPU-s so far. Checker read as data: sound by reading. Findings drafted (no blocking or major; M-1 release SHA256SUMS lacks the asset; M-2 README omits the centre domain; R-1 record: at n = 126 the reported lane is T-180's 11.3133 > 563/50, so T-144 raises the reported lane at 122-125 only). Next: finish the run, freeze the findings, read the earlier reviews, map, PR.
+
+2026-11-18 07:08Z r144b-1118 (successor lane, delegated): resumed after the 06:59Z container restart. Range 176-200 had not completed (nodes 176 to 193 printed NODE_DECIDED, no .done, empty .time, no run.log line; the driver restarts a range without .done), so it is re-running from scratch through the frozen r144_run_all.sh (1 process, nice 19) from 07:07Z; the killed run's partial receipts are kept in scratch for a determinism comparison. Ranges 1-175 and node 0 are decided and committed at 1b9c98255. Next: commit range 176-200, summarize, freeze the findings.
