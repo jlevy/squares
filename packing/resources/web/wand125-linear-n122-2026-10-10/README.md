@@ -12,9 +12,9 @@ The bound remains unconfirmed here; no standing bound or rating changes.
 | Item | Value |
 | --- | --- |
 | Source | [`mixed_n122_L1126`](https://github.com/wand125/square-packing/tree/a9f76c382d023b4095899c4eb7ea7483b8b87ecf/problems/square-lower-bounds/certificates/mixed_n122_L1126) |
-| Pinned revision | `a9f76c382d023b4095899c4eb7ea7483b8b87ecf`, committed 2026-10-10T10:41:36Z, unchanged through the head when read, `27ed168` |
+| Pinned revision | `a9f76c382d023b4095899c4eb7ea7483b8b87ecf`, committed 2026-10-10T10:41:36Z, unchanged through the head when read, `27ed168`, and through `ea1c454` (2026-10-31) when read again on 18 November |
 | Release asset | `certificates__mixed_n122_L1126.tar.gz` in `square-lower-bounds-v1`, 31,784,537 bytes, SHA-256 `6443eae0…5deb` |
-| Retrieved | 2026-10-10T17:00:59Z |
+| Retrieved | 2026-10-10T17:00:59Z; the documents and the asset again 2026-11-18T05:30Z, for the retention below |
 | Measure | 502 point, 1,268 segment and 3 rectangle orbits under D4, mass $12199999/100000$ |
 | Net | core $9977/10000$, 201 half-angles of step $83/40000$: `mixed_n101_L1028`’s |
 | Checker | `code/unified_linear_verify.cpp`, SHA-256 `0249726a…a06d`, V-wand125-unified-linear-verify-cpp |
@@ -29,7 +29,7 @@ pinned document and archive member.
 | --- | --- | --- |
 | 122 | Green, DS7 Theorem 9 with k = 11, 11.22928… | Karakuş strip, 11.04751… |
 | 123 to 125 | Green’s, by monotonicity, 11.22928… | Karakuş strip, 11.09481… to 11.18877… |
-| 126 | Nagamochi, 11.24695… | Karakuş strip, 11.23545… |
+| 126 | Nagamochi, 11.24695…; since 14 October Hosono’s closed form, 11.31332…, above 11.26 | Karakuş strip, 11.23545… |
 | 127 | Nagamochi, 11.29563…, above 11.26 | Karakuş strip, 11.28192…, above 11.26 |
 
 The source compares its side with an exact rational upper bound on Green’s value and
@@ -37,6 +37,40 @@ states the margin as more than 0.0307191; the maintained reader confirms that th
 exceeds Green’s bound and Nagamochi’s at n = 122. Green’s proof has not been recovered
 here (the n = 122 case record says so), so a certificate-backed bound would replace an
 unproved report in the reported lane.
+At n = 126 the same source’s closed form of 14 October (T-180), $a(126) = 11.31332\ldots$,
+took the reported lane after this packet was written, so there the certificate would
+raise the verified lane alone.
+
+## What Is Retained
+
+On 18 November 2026 (think-nd7g)
+[`devtools.acquire_source`](../../../devtools/acquire_source.py) wrote the packet’s
+pinned-tree part from its [declaration](acquisition/declaration.json), from a blobless,
+sparse clone of the source at the pin: the
+[acquisition record](acquisition/sources.json) and the
+[subtree manifest](acquisition/upstream-subtree.sha256) give the size and SHA-256 of all
+19 files in scope, and `--check` re-derives them. Four are retained byte for byte under
+[`square-packing/`](square-packing/problems/square-lower-bounds/certificates/mixed_n122_L1126/):
+`README.md`, `ASSET.json`, `manifest.json` and `completion-audit.json`, 6,924 bytes. The
+other 15 are pinned by digest only: the licence, byte-identical to the FN-1 packet’s,
+and all 13 files of `code/` with `requirements.txt`, byte-identical to the reviewed
+copies the 2 October linear packet and the 28 September point-and-mixed packet retain.
+
+The same day `devtools.fine_net_followup retain` held the release asset to its pinned
+size and SHA-256 again (equal to the release API’s digest, asset 627696187) and copied
+its candidate and certificate to [`release/`](release/certificates/mixed_n122_L1126/),
+each as deterministic gzip (41,652 and 11,329 bytes), as the MIT notice permits; both
+have the SHA-256 the 10 October [source manifest](source-manifest.json) records. The
+proof bundle, beyond `OR-18`’s size rule, is pinned by digest only in the
+[retention record](acquisition/release-assets.json), which
+`devtools.fine_net_followup check-retained` re-derives from the packet.
+`devtools.audit_wand125_linear` registers the certificate as `n122`, as it registers
+T-179’s `n145`: it reads the four documents here and the two members there, and for a
+replay takes the asset from the release, holds it to its pin, and copies out the
+bundle, which it holds to the record’s digest before anything runs. Its exact audit of
+the retained bytes is [`receipts/linear-audit.json`](receipts/linear-audit.json), and
+its pre-replay checks over all 201 angles, which bind the bundle’s 810 files and every
+input to the candidate, are [`receipts/n122/fetch.json`](receipts/n122/fetch.json).
 
 ## What Was Checked
 
@@ -117,9 +151,9 @@ bead, think-nd7g.
 The nearest enclosing source notice, `problems/square-lower-bounds/LICENSE`, is MIT,
 Copyright 2026 wand125, byte-identical to the notice the #446 packet records; it covers
 the certificate directory, its `code/` included.
-This packet nonetheless retains no upstream byte: it publishes authored facts, hash
-references and this repository’s own receipts, and the asset stays with its author,
-pinned by size and digest.
+Until 18 November the packet retained no upstream byte; it now retains the four
+documents and two release members above under that notice, and the asset and its proof
+bundle stay with the author, pinned by size and digest.
 The sample ran the source’s replay function and checker from this repository’s retained
 copies; nothing from the asset or the source tree was executed.
 
