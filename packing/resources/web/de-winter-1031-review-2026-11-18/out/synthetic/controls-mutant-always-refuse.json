@@ -1,0 +1,995 @@
+{
+ "arith": "gmpy2 2.3.1 GMP GMP 6.3.0",
+ "controls": {
+  "C0": {
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "pair_mismatches": 0,
+   "pairs": 78,
+   "squares": 13,
+   "stated": "equal to method A on the form J poses at every pair and every wall",
+   "wall_mismatches": 0
+  },
+  "E1c": {
+   "X": "8",
+   "accepted": false,
+   "as_stated": false,
+   "classes": {
+    "apart": 58,
+    "contact": 20,
+    "overlap": 0
+   },
+   "contacts": 9,
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "stated": "the extent rule: every clearance predicted, margins identical; accepted; left, bottom and the wall of each larger extent touched exactly by the squares that attain the least clearances",
+   "translation": [
+    "0",
+    "0"
+   ],
+   "unchanged_read_back": null,
+   "wall_contacts": 9,
+   "width_equals_height": true
+  },
+  "E1p": {
+   "X": "8",
+   "accepted": false,
+   "as_stated": true,
+   "classes": {
+    "apart": 58,
+    "contact": 20,
+    "overlap": 0
+   },
+   "contacts": 6,
+   "cpu_s": 0.0,
+   "crossing_count": 3,
+   "crossings": [
+    [
+     12,
+     "right"
+    ],
+    [
+     12,
+     "top"
+    ],
+    [
+     13,
+     "right"
+    ]
+   ],
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "stated": "refused; exactly the squares at the wall of each larger extent cross",
+   "translation": [
+    "0",
+    "0"
+   ],
+   "unchanged_read_back": null,
+   "wall_contacts": 6,
+   "width_equals_height": true
+  },
+  "G1": {
+   "accepted": false,
+   "as_stated": true,
+   "b_area": "1",
+   "classes": {
+    "apart": 54,
+    "contact": 23,
+    "overlap": 1
+   },
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margins_predicted": true,
+   "methods_agree": true,
+   "overlap_count": 1,
+   "overlaps": [
+    [
+     1,
+     13
+    ]
+   ],
+   "stated": "refused: the margins of the n - 1 pairs with square n exactly predicted ((1, n) at -1, each (k, n) at the original (1, k)); overlapping pairs exactly [(1, n)], with B area 1",
+   "unchanged_read_back": true,
+   "wall_contacts": 10
+  },
+  "G2": {
+   "accepted": false,
+   "area_inside_zero": true,
+   "as_stated": true,
+   "classes": {
+    "apart": 60,
+    "contact": 18,
+    "overlap": 0
+   },
+   "clearances_predicted": true,
+   "cpu_s": 0.0,
+   "crossing_count": 1,
+   "crossings": [
+    [
+     1,
+     "right"
+    ]
+   ],
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "stated": "refused: square 1's clearances exactly (L + S, B, R - S, T); its area inside 0; no pair with it overlaps; other squares unchanged",
+   "unchanged_read_back": true,
+   "wall_contacts": 8
+  },
+  "G3": {
+   "as_stated": true,
+   "b_not_unit": [
+    1
+   ],
+   "cpu_s": 0.0,
+   "no_pose": [
+    1
+   ],
+   "stated": "refused: square 1, and only square 1, not a unit square by B; no pose from its corners; the twin relation fails at square 1 only",
+   "twin_fails": [
+    1
+   ],
+   "verdict": "refused"
+  },
+  "G4": {
+   "accepted": false,
+   "as_stated": true,
+   "b_classes_and_areas_as_original": true,
+   "classes": {
+    "apart": 58,
+    "contact": 20,
+    "overlap": 0
+   },
+   "clearances_permuted": true,
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margins_as_predicted": true,
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "senses": {
+    "ccw": 0,
+    "cw": 13
+   },
+   "stated": "the original's verdict with A on the poses taken from the changed corners and B on the changed corners; margins and clearances identical; every sense clockwise",
+   "twin_holds": true,
+   "twin_listings": [
+    "3 cw"
+   ],
+   "unchanged_read_back": null,
+   "wall_contacts": 9
+  },
+  "G5": {
+   "accepted": false,
+   "as_stated": true,
+   "b_classes_and_areas_as_original": true,
+   "classes": {
+    "apart": 58,
+    "contact": 20,
+    "overlap": 0
+   },
+   "clearances_permuted": true,
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margins_as_predicted": true,
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "senses": {
+    "ccw": 13,
+    "cw": 0
+   },
+   "stated": "the same, senses unchanged, every twin offset moved by one",
+   "twin_holds": true,
+   "twin_offsets_moved_by_one": true,
+   "unchanged_read_back": null,
+   "wall_contacts": 9
+  },
+  "G6": {
+   "accepted": false,
+   "as_stated": true,
+   "b_classes_and_areas_as_original": true,
+   "classes": {
+    "apart": 58,
+    "contact": 20,
+    "overlap": 0
+   },
+   "clearances_permuted": true,
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margins_as_predicted": true,
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "senses": {
+    "ccw": 0,
+    "cw": 13
+   },
+   "stated": "margins identical; clearances (L, B, R, T) -> (B, L, T, R); the original's verdict",
+   "twin_holds": true,
+   "unchanged_read_back": null,
+   "wall_contacts": 9
+  },
+  "G7": {
+   "accepted": false,
+   "as_stated": true,
+   "b_classes_and_areas_as_original": true,
+   "classes": {
+    "apart": 58,
+    "contact": 20,
+    "overlap": 0
+   },
+   "clearances_permuted": true,
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margins_as_predicted": true,
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "senses": {
+    "ccw": 13,
+    "cw": 0
+   },
+   "stated": "margins identical; clearances (L, B, R, T) -> (T, L, B, R); the original's verdict",
+   "twin_holds": true,
+   "unchanged_read_back": null,
+   "wall_contacts": 9
+  },
+  "G8": {
+   "accepted": false,
+   "as_stated": true,
+   "b_classes_and_areas_as_original": true,
+   "classes": {
+    "apart": 58,
+    "contact": 20,
+    "overlap": 0
+   },
+   "clearances_permuted": true,
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margins_as_predicted": true,
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "senses": {
+    "ccw": 0,
+    "cw": 13
+   },
+   "stated": "margins identical; clearances (L, B, R, T) -> (R, B, L, T); the original's verdict",
+   "twin_holds": true,
+   "unchanged_read_back": null,
+   "wall_contacts": 9
+  },
+  "K1c": {
+   "accepted": false,
+   "as_stated": false,
+   "b_classes_and_areas_as_original": false,
+   "classes": {
+    "apart": 78,
+    "contact": 0,
+    "overlap": 0
+   },
+   "clearances_permuted": true,
+   "clearances_predicted": true,
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margins_as_predicted": true,
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "senses": {
+    "ccw": 13,
+    "cw": 0
+   },
+   "stated": "accepted, with every margin exactly (1 + EPS) M - H, every clearance predicted, and no contact anywhere",
+   "twin_holds": true,
+   "unchanged_read_back": null,
+   "wall_contacts": 0
+  },
+  "K1p": {
+   "accepted": false,
+   "as_stated": true,
+   "classes": {
+    "apart": 58,
+    "contact": 0,
+    "overlap": 20
+   },
+   "clearances_predicted": true,
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "expected_overlaps": 20,
+   "margins_predicted": true,
+   "methods_agree": true,
+   "overlap_count": 20,
+   "overlaps": [
+    [
+     1,
+     2
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     2,
+     3
+    ],
+    [
+     2,
+     4
+    ],
+    [
+     2,
+     5
+    ],
+    [
+     2,
+     6
+    ],
+    [
+     3,
+     5
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     4,
+     7
+    ],
+    [
+     4,
+     8
+    ],
+    [
+     5,
+     6
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     5,
+     8
+    ],
+    [
+     5,
+     9
+    ],
+    [
+     6,
+     8
+    ],
+    [
+     6,
+     9
+    ],
+    [
+     7,
+     8
+    ],
+    [
+     8,
+     9
+    ]
+   ],
+   "stated": "overlaps exactly the pairs with (1 - EPS) M < H; every clearance exactly L + EPS (S/2 - x) and so on; no crossing",
+   "unchanged_read_back": null,
+   "wall_contacts": 0
+  },
+  "P0p": {
+   "accepted": false,
+   "as_stated": true,
+   "classes": {
+    "apart": 60,
+    "contact": 17,
+    "overlap": 1
+   },
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margin_exact_minus_eps": true,
+   "methods_agree": true,
+   "moved": 2,
+   "overlap_count": 1,
+   "overlapping_pairs_of_moved": [
+    [
+     1,
+     2
+    ]
+   ],
+   "overlaps": [
+    [
+     1,
+     2
+    ]
+   ],
+   "pair": [
+    1,
+    2
+   ],
+   "stated": "refused: that pair's margin exactly -10^-40; the moved square's overlapping pairs exactly those method A's rule gives, that pair among them; B agrees at every pair of the moved square",
+   "unchanged_read_back": true,
+   "wall_contacts": 9
+  },
+  "P1c": {
+   "accepted": false,
+   "as_stated": false,
+   "b_class": "contact",
+   "candidates_tried": 1,
+   "classes": {
+    "apart": 57,
+    "contact": 21,
+    "overlap": 0
+   },
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margin": "0",
+   "methods_agree": true,
+   "moved": 11,
+   "original_margin": "3.00024666971e-1",
+   "overlap_count": 0,
+   "overlaps": [],
+   "pair": [
+    10,
+    11
+   ],
+   "stated": "that pair's margin exactly 0, touching by A and B; the moved square's other pairs keep their classes; other squares unchanged; accepted",
+   "unchanged_read_back": true,
+   "wall_contacts": 9
+  },
+  "P1p": {
+   "accepted": false,
+   "as_stated": true,
+   "b_class": "overlap",
+   "candidates_tried": 1,
+   "classes": {
+    "apart": 57,
+    "contact": 20,
+    "overlap": 1
+   },
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "margin": "-1.00000000000e-40",
+   "methods_agree": true,
+   "moved": 11,
+   "original_margin": "3.00024666971e-1",
+   "overlap_count": 1,
+   "overlaps": [
+    [
+     10,
+     11
+    ]
+   ],
+   "pair": [
+    10,
+    11
+   ],
+   "stated": "refused: of the moved square's pairs exactly that pair overlaps, margin exactly -10^-40",
+   "unchanged_read_back": true,
+   "wall_contacts": 9
+  },
+  "PALL": {
+   "as_stated": true,
+   "closings": 156,
+   "cpu_s": 0.0,
+   "failure_count": 0,
+   "failures": [],
+   "pairs": 78,
+   "stated": "A's margin exactly 0 and -10^-40; the corner projections' exactly 0 and -10^-40; B touching and overlapping, both orders agreeing"
+  },
+  "R1": {
+   "C": "form C: n is 13 and 12 squares are listed",
+   "J": "form J: n is 13 and 12 squares are listed",
+   "applied": true,
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "stated": "the changed form's reader refuses: n stated, n - 1 listed"
+  },
+  "R2": {
+   "applied": true,
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "flagged": true,
+   "stated": "read; values equal to the original's; the side flagged not in lowest terms; accepted",
+   "values_equal": true,
+   "verdict": "the original's (no value changed)"
+  },
+  "R3": {
+   "C": "form C square 1: id 'square-2' out of order",
+   "J_twin_fails_at": [
+    1,
+    2
+   ],
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "stated": "form J read, and the twin relation fails at exactly squares 1 and 2, so the check refuses; form C refused by its reader, ids out of order"
+  },
+  "R4": {
+   "C quoted": "form C side: not a scalar p or p/q: '8.0000000000000000000000000000000000000000'",
+   "C unquoted": "form C side: not a string scalar (float)",
+   "J": "form J side: not a scalar p or p/q: '8.0000000000000000000000000000000000000000'",
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "stated": "the reader refuses each: not a scalar twice, a YAML float (not a string) once"
+  },
+  "R5": {
+   "C": "form C square 1 corner 0 x: not a scalar p or p/q: '+1'",
+   "J": "form J square 1[0]: not a scalar p or p/q: '+1/2'",
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "stated": "the changed form's reader refuses"
+  },
+  "R6": {
+   "C": "form C: duplicate key 'n'",
+   "J": "form J: duplicate key 'n'",
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "stated": "the changed form's reader refuses"
+  },
+  "R7": {
+   "J": "form J square 10: (cos, sin) is not a unit vector",
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "square": 10,
+   "stated": "the reader refuses: not a unit vector"
+  },
+  "S1a": {
+   "accepted": false,
+   "as_stated": true,
+   "b_equal": true,
+   "contacts_right_top": 0,
+   "cpu_s": 0.0,
+   "crossings": 3,
+   "delta": "1.00000000000e-40",
+   "rule_holds": true,
+   "side": "8.0000000000000000000e+0",
+   "stated": "the side rule: right and top clearances lowered by exactly delta, left and bottom unchanged, every pose and corner the original's; crossings exactly where an original right or top clearance is below delta, contacts exactly where it equals delta; accepted exactly when there is no crossing"
+  },
+  "S1b": {
+   "accepted": false,
+   "as_stated": true,
+   "b_equal": true,
+   "contacts_right_top": 0,
+   "cpu_s": 0.0,
+   "crossings": 4,
+   "delta": "1.00000000000e+0",
+   "rule_holds": true,
+   "side": "7.0000000000000000000e+0",
+   "stated": "the side rule with delta = 1/q"
+  },
+  "S1c": {
+   "W": "0",
+   "accepted": true,
+   "as_stated": true,
+   "b_equal": true,
+   "contacts_right_top": 3,
+   "cpu_s": 0.0,
+   "crossings": 0,
+   "delta": "0",
+   "rule_holds": true,
+   "side": "8.0000000000000000000e+0",
+   "stated": "the side rule with delta = W: accepted, contacts exactly at the squares that attain W"
+  },
+  "S1d": {
+   "accepted": false,
+   "as_stated": true,
+   "b_equal": true,
+   "contacts_right_top": 0,
+   "cpu_s": 0.0,
+   "crossings": 3,
+   "delta": "1.00000000000e-40",
+   "rule_holds": true,
+   "side": "8.0000000000000000000e+0",
+   "stated": "the side rule: refused, exactly the squares that attain W crossing"
+  },
+  "S1e": {
+   "accepted": true,
+   "as_stated": true,
+   "b_equal": true,
+   "contacts_right_top": 0,
+   "cpu_s": 0.0,
+   "crossings": 0,
+   "delta": "-1.00000000000e-12",
+   "rule_holds": true,
+   "side": "8.0000000000010000000e+0",
+   "stated": "the side rule with delta = S - C"
+  },
+  "S1f": {
+   "accepted": true,
+   "as_stated": true,
+   "b_equal": true,
+   "contacts_right_top": 3,
+   "cpu_s": 0.0,
+   "crossings": 0,
+   "delta": "0",
+   "rule_holds": true,
+   "side": "8.0000000000000000000e+0",
+   "stated": "the side rule with delta = S - C + 10^-12"
+  },
+  "T1": {
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "dilation": {
+    "contraction_margin_short": "8.00000000000e-40",
+    "one_less_g_star_short": "1.00000000000e-40",
+    "verdict": "MEASURED",
+    "verify": {
+     "contracted_accepted_contacts_exactly_first_pairs": true,
+     "contracted_contacts": 20,
+     "contracted_wall_contacts": 9,
+     "cpu_s": 0.0,
+     "past_overlap_count": 20,
+     "past_overlaps_exactly_pairs_above": true
+    }
+   },
+   "has_contact": true,
+   "original": {
+    "contraction_margin_short": "0",
+    "one_less_g_star_short": "0",
+    "verdict": "MEASURED",
+    "verify": {
+     "contracted_accepted_contacts_exactly_first_pairs": true,
+     "contracted_contacts": 20,
+     "contracted_wall_contacts": 9,
+     "cpu_s": 0.0,
+     "past_overlap_count": 20,
+     "past_overlaps_exactly_pairs_above": true
+    }
+   },
+   "stated": "on the original: g* = 1 exactly when some pair is in contact, and then the contraction margin is S - X; on the dilation: g* = 1/(1 + EPS) exactly when the original has a pair in contact, and the contraction margin is (1 + EPS) S - X; the program's own verification passes on both"
+  },
+  "W0p": {
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "stated": "refused: the only crossing that square at that wall, by exactly -10^-40",
+   "walls": {
+    "bottom": {
+     "accepted": false,
+     "as_stated": true,
+     "classes": {
+      "apart": 60,
+      "contact": 18,
+      "overlap": 0
+     },
+     "crossing_count": 1,
+     "crossings": [
+      [
+       1,
+       "bottom"
+      ]
+     ],
+     "methods_agree": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 1,
+     "squares_in_contact": 3,
+     "unchanged_read_back": true,
+     "wall_contacts": 8
+    },
+    "left": {
+     "accepted": false,
+     "as_stated": true,
+     "classes": {
+      "apart": 60,
+      "contact": 18,
+      "overlap": 0
+     },
+     "crossing_count": 1,
+     "crossings": [
+      [
+       1,
+       "left"
+      ]
+     ],
+     "methods_agree": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 1,
+     "squares_in_contact": 3,
+     "unchanged_read_back": true,
+     "wall_contacts": 8
+    },
+    "right": {
+     "accepted": false,
+     "as_stated": true,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "crossing_count": 1,
+     "crossings": [
+      [
+       12,
+       "right"
+      ]
+     ],
+     "methods_agree": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 12,
+     "squares_in_contact": 2,
+     "unchanged_read_back": true,
+     "wall_contacts": 8
+    },
+    "top": {
+     "accepted": false,
+     "as_stated": true,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "crossing_count": 1,
+     "crossings": [
+      [
+       12,
+       "top"
+      ]
+     ],
+     "methods_agree": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 12,
+     "squares_in_contact": 1,
+     "unchanged_read_back": true,
+     "wall_contacts": 8
+    }
+   }
+  },
+  "W1c": {
+   "as_stated": false,
+   "cpu_s": 0.0,
+   "stated": "that clearance exactly 0, the opposite one raised by the move, all else unchanged; accepted",
+   "walls": {
+    "bottom": {
+     "accepted": false,
+     "as_stated": false,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "clearance": "3.33333333333e-1",
+     "crossing_count": 0,
+     "crossings": [],
+     "methods_agree": true,
+     "opposite_raised": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 13,
+     "unchanged_read_back": true,
+     "wall_contacts": 10
+    },
+    "left": {
+     "accepted": false,
+     "as_stated": false,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "clearance": "4.30000000000e+0",
+     "crossing_count": 0,
+     "crossings": [],
+     "methods_agree": true,
+     "opposite_raised": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 10,
+     "unchanged_read_back": true,
+     "wall_contacts": 10
+    },
+    "right": {
+     "accepted": false,
+     "as_stated": false,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "clearance": "9.99876558454e-1",
+     "crossing_count": 0,
+     "crossings": [],
+     "methods_agree": true,
+     "opposite_raised": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 11,
+     "unchanged_read_back": true,
+     "wall_contacts": 10
+    },
+    "top": {
+     "accepted": false,
+     "as_stated": false,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "clearance": "2.30000000000e+0",
+     "crossing_count": 0,
+     "crossings": [],
+     "methods_agree": true,
+     "opposite_raised": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 10,
+     "unchanged_read_back": true,
+     "wall_contacts": 10
+    }
+   }
+  },
+  "W1p": {
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "stated": "refused: the only crossing that square at that wall, by exactly -10^-40",
+   "walls": {
+    "bottom": {
+     "accepted": false,
+     "as_stated": true,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "clearance": "3.33333333333e-1",
+     "crossing_count": 1,
+     "crossings": [
+      [
+       13,
+       "bottom"
+      ]
+     ],
+     "methods_agree": true,
+     "opposite_raised": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 13,
+     "unchanged_read_back": true,
+     "wall_contacts": 9
+    },
+    "left": {
+     "accepted": false,
+     "as_stated": true,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "clearance": "4.30000000000e+0",
+     "crossing_count": 1,
+     "crossings": [
+      [
+       10,
+       "left"
+      ]
+     ],
+     "methods_agree": true,
+     "opposite_raised": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 10,
+     "unchanged_read_back": true,
+     "wall_contacts": 9
+    },
+    "right": {
+     "accepted": false,
+     "as_stated": true,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "clearance": "9.99876558454e-1",
+     "crossing_count": 1,
+     "crossings": [
+      [
+       11,
+       "right"
+      ]
+     ],
+     "methods_agree": true,
+     "opposite_raised": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 11,
+     "unchanged_read_back": true,
+     "wall_contacts": 9
+    },
+    "top": {
+     "accepted": false,
+     "as_stated": true,
+     "classes": {
+      "apart": 58,
+      "contact": 20,
+      "overlap": 0
+     },
+     "clearance": "2.30000000000e+0",
+     "crossing_count": 1,
+     "crossings": [
+      [
+       10,
+       "top"
+      ]
+     ],
+     "methods_agree": true,
+     "opposite_raised": true,
+     "overlap_count": 0,
+     "overlaps": [],
+     "square": 10,
+     "unchanged_read_back": true,
+     "wall_contacts": 9
+    }
+   }
+  },
+  "WALL": {
+   "as_stated": true,
+   "cpu_s": 0.0,
+   "failures": 0,
+   "moves": 26,
+   "squares": 13,
+   "stated": "A's clearance exactly 0 and -10^-40; B's wall term the same, touching and crossing; B's area inside 1 and below 1"
+  },
+  "X1": {
+   "accepted": false,
+   "as_stated": true,
+   "classes": {
+    "apart": 58,
+    "contact": 20,
+    "overlap": 0
+   },
+   "cpu_s": 0.0,
+   "crossing_count": 0,
+   "crossings": [],
+   "expected_count": 2,
+   "methods_agree": true,
+   "overlap_count": 0,
+   "overlaps": [],
+   "stated": "the twin relation fails at exactly the squares with cos*sin != 0 and |cos| != |sin|; on the changed packing the two methods agree at every pair and wall",
+   "twin_fails_at_count": 2,
+   "unchanged_read_back": null,
+   "wall_contacts": 9
+  }
+ },
+ "cpu_s_total": 0.3,
+ "failed": [
+  "E1c",
+  "K1c",
+  "P1c",
+  "W1c"
+ ],
+ "mutant": "always-refuse",
+ "plan_sha256": "fc8635da9ec2df5788b5fa94c38d6bc5745bc5071f9a80f90c7cc8a8a7c4a050",
+ "program": "rv1031_controls.py",
+ "python": "3.14.7",
+ "setup_cpu_s": 0.0,
+ "verdict": "CONTROLS_NOT_AS_STATED"
+}
