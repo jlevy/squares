@@ -1,0 +1,57 @@
+Lane r1021-1118, checker freeze, 18 November 2026
+
+Frozen with this note: every program in programs/, the controls plan
+programs/controls-plan.json, the two issue bodies programs/issue-1021.json and
+programs/issue-1022.json, and the pre-freeze receipts out/selftest.json,
+out/trial-270-60.json, out/trial-270-120.json and out/ctrial.json, which ran on
+synthetic packings only. frozen/checker-frozen.sha256 lists their SHA-256; check it
+from the packet's directory with `sha256sum -c frozen/checker-frozen.sha256`.
+
+No program of this lane has read a certificate.
+
+Read before this freeze:
+- The lane's briefs (blind-review-brief.md and common-brief.md in the session's
+  scratch space, and the coordinator's message): the issues, the pin, the folders and
+  their two files each, that T-289 and T-283 are the houses while #1023 is open, that
+  option D (think-b0w5) needs each gain and each predecessor's contraction margin, and
+  that identity decides credit (think-bx2a).
+- Issues #1021 and #1022 through the REST API at 05:36:49Z: titles, bodies and
+  metadata; each showed 0 comments, and none was fetched.
+- The source at a1ba5019, as data: the tree listing of n268/ and n270/, the commit
+  list, the structure of the four certificate files (head, tail, grep, wc) to write
+  the readers, their SHA-256 by three routes (git show at the pin, the contents API at
+  05:39:12Z, raw.githubusercontent.com at 05:39:13Z), and n268/SHA256SUMS and
+  n270/SHA256SUMS at 838c5ea. Not read: README.md, REGISTRATION.md, verify_exact.py,
+  check_area.py, the figures.
+- On main at 0f191a2d23: packing/campaign/result-import.md (the intake pass, stage 4,
+  the house rule); the review of #1015, #1017 and #1020 by lane r127b
+  (docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md) in full,
+  as the house format, whose text describes the two methods this checker implements
+  afresh; the first 200 lines of the review of #1018; the senior reviews A of #1027
+  and #1028 (PR comments); T-289's and T-283's register entries; the bound lanes of
+  packing/frontier/n-268.md; the heads and tails of T-289's and T-283's certificates
+  (packing/resources/web/ozden-s268-upper-bound-2026-11-10/source/n-268-candidate.yaml,
+  packing/resources/web/ozden-s270-upper-bound-2026-11-09/source/n-270-candidate.yaml)
+  and the heads of the house witnesses packing/witnesses/known-best/n-268.yaml and
+  n-270.yaml; packing/witnesses/witness.schema.yaml; attribution.md (Credit Text and
+  Lineage); epistemics.md (Significance and Novelty); the ids, headlines and rungs of
+  the register entries covering 268 or 270; the file list of the #1014 review packet
+  (packing/resources/web/polkovskyi-1009-review-2026-11-17/), which retains no source.
+- The titles and descriptions of the owner's beads think-b0w5 and think-bx2a, not
+  their notes. think-bx2a's description concerns 262 and 292 and names a file of the
+  #1009 import packet; nothing in either concerns 268 or 270.
+- Directory names only, in listings of the session's scratch space and /home/user/wt
+  (among them w3-import-1009, review-1023 and the other lanes' folders); none opened.
+
+Not read before this freeze, nor before the findings freeze unless the findings say
+so: the import lane's branch claude/intake-2026-11-18-import-1021, its packets,
+receipts, ledger and bead notes; PR #1023, its branch and its 268 and 270 entries; any
+issue comment; the notes of think-gqzz (this lane appends under its own heading
+without reading the rest); any earlier review's programs or receipts; the code and the
+help texts of devtools.contraction_margin and devtools.measure_identity, which run
+after this freeze as a second route; any code of the author's.
+
+Run before this freeze, on synthetic packings only: r1021_selftest.py (67 checks, 10
+broken copies caught), r1021_trial.py (pricing), r1021_synth.py with r1021_check.py
+and r1021_controls.py (45 report controls and 33 house controls as stated), and
+r1021_ctrial.py (the controls under each broken copy).

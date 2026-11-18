@@ -1,0 +1,170 @@
+{
+ "intact report": {
+  "original": "accepted",
+  "ran": 45,
+  "not_as_stated": []
+ },
+ "intact house": {
+  "original": "accepted",
+  "ran": 33,
+  "not_as_stated": []
+ },
+ "M1 method A on square i's axes only / report": {
+  "original": "accepted",
+  "ran": 45,
+  "not_as_stated": [
+   "G1",
+   "PALL",
+   "C0"
+  ]
+ },
+ "M1 method A on square i's axes only / house": {
+  "original": "accepted",
+  "ran": 33,
+  "not_as_stated": [
+   "G1",
+   "PALL",
+   "C0"
+  ]
+ },
+ "M2 method A's H without |sin D| / report": {
+  "original": "accepted",
+  "ran": 45,
+  "not_as_stated": [
+   "K1p",
+   "PALL",
+   "C0"
+  ]
+ },
+ "M2 method A's H without |sin D| / house": {
+  "original": "accepted",
+  "ran": 33,
+  "not_as_stated": [
+   "K1p",
+   "PALL",
+   "C0"
+  ]
+ },
+ "M3 margin 0 classed as overlap / report": {
+  "original": "refused: the original is not accepted: None",
+  "not_as_stated": [
+   "(original refused)"
+  ]
+ },
+ "M3 margin 0 classed as overlap / house": {
+  "original": "refused: the original is not accepted: None",
+  "not_as_stated": [
+   "(original refused)"
+  ]
+ },
+ "M4 method B with open half-planes / report": {
+  "original": "refused: the original is not accepted: None",
+  "not_as_stated": [
+   "(original refused)"
+  ]
+ },
+ "M4 method B with open half-planes / house": {
+  "original": "refused: the original is not accepted: None",
+  "not_as_stated": [
+   "(original refused)"
+  ]
+ },
+ "M5 method B ignoring the listing sense / report": {
+  "original": "accepted",
+  "ran": 45,
+  "not_as_stated": [
+   "G4",
+   "G5",
+   "G7"
+  ]
+ },
+ "M5 method B ignoring the listing sense / house": {
+  "original": "accepted",
+  "ran": 33,
+  "not_as_stated": [
+   "G4",
+   "G5",
+   "G7"
+  ]
+ },
+ "M6 contraction at the least factor / report": {
+  "original": "accepted",
+  "ran": 45,
+  "not_as_stated": [
+   "K1c"
+  ]
+ },
+ "M6 contraction at the least factor / house": {
+  "original": "accepted",
+  "ran": 33,
+  "not_as_stated": [
+   "K1c"
+  ]
+ },
+ "M7 half-extent 1/2 at every angle / report": {
+  "original": "refused: the original is not accepted: None",
+  "not_as_stated": [
+   "(original refused)"
+  ]
+ },
+ "M7 half-extent 1/2 at every angle / house": {
+  "original": "refused: the original is not accepted: None",
+  "not_as_stated": [
+   "(original refused)"
+  ]
+ },
+ "M8 twin accepting any corner order / report": {
+  "original": "accepted",
+  "ran": 45,
+  "not_as_stated": [
+   "G4"
+  ]
+ },
+ "M8 twin accepting any corner order / house": {
+  "original": "accepted",
+  "ran": 33,
+  "not_as_stated": []
+ },
+ "M9 identity orientation on raw directions / report": {
+  "original": "accepted",
+  "ran": 45,
+  "not_as_stated": []
+ },
+ "M9 identity orientation on raw directions / house": {
+  "original": "accepted",
+  "ran": 33,
+  "not_as_stated": []
+ },
+ "M10 scalar accepting a plus sign / report": {
+  "original": "accepted",
+  "ran": 45,
+  "not_as_stated": [
+   "RJ5",
+   "RC5"
+  ]
+ },
+ "M10 scalar accepting a plus sign / house": {
+  "original": "accepted",
+  "ran": 33,
+  "not_as_stated": [
+   "RC5"
+  ]
+ },
+ "cpu": 78.7,
+ "verdict": "PASSED",
+ "not_a_checker_mutant": [
+  "M9 identity orientation on raw directions"
+ ],
+ "caught": {
+  "M1 method A on square i's axes only": true,
+  "M2 method A's H without |sin D|": true,
+  "M3 margin 0 classed as overlap": true,
+  "M4 method B with open half-planes": true,
+  "M5 method B ignoring the listing sense": true,
+  "M6 contraction at the least factor": true,
+  "M7 half-extent 1/2 at every angle": true,
+  "M8 twin accepting any corner order": true,
+  "M9 identity orientation on raw directions": false,
+  "M10 scalar accepting a plus sign": true
+ }
+}

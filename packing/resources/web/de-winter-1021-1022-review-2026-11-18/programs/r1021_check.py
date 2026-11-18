@@ -226,8 +226,10 @@ def check_report(raw_j: bytes, raw_c: bytes) -> dict:
     out["form_j"] = {"accept": dj["accept"], **summary(dj)}
     out["form_c"] = {"accept": dc["accept"], **summary(dc), "corner_sets_not_unit": [k + 1 for k, u in enumerate(c_unit) if not u]}
     out["crossed"] = {"margins_identical": same_margins, "clearances_identical": same_clear, "b_classes_identical": same_b}
+    # The two files' sides must be equal as numbers (above); whether they are written alike
+    # is recorded in side_text_equal and decides nothing.
     accept = (dj["accept"] and dc["accept"] and not twin_fail and same_margins and same_clear and same_b
-              and all(c_unit) and out["side_text_equal"])
+              and all(c_unit))
     out["verdict"] = "ACCEPT" if accept else "REFUSE"
     if accept:
         out["describe"] = describe(rows, side, dj)
