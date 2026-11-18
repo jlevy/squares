@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-17'
+last_reviewed: '2026-11-18'
 results:
   - id: T-001
     kind: lower-bound
@@ -49903,6 +49903,368 @@ results:
       regularization of the new house and its flip; #1009's claim there is 1.58e-03 below
       this side. If that import stalls or fails review, think-i38n adopts this certificate
       at 295 in its own change, regularized the same way.
+  - id: T-314
+    kind: upper-bound
+    registered: '2026-11-18'
+    landed: '2026-11-18'
+    headline: >-
+      de Winter's band packing at 127, close to T-305's arrangement, 9.58e-04 below T-305
+    claim: >-
+      One complete rational certificate proves s(127) <=
+      590039784110678470545925017871932135226358204819969425332092601/50000000000000000000000000000000000000000000000000000000000000.
+      That side is 11.8007956822135695 rounded up at 16 places and 11.800795682214 at 12, as
+      #1015 prints it.
+
+      It is 9.58e-04 below T-305 (Tomáš Kodaj's Kaggle packing as JoeGun improved it), the
+      case's house in both lanes, and the first of three reports at 127 that Joost de Winter
+      filed on the evening of 17 November, each below the last; the ledger records all three.
+      Measured here, no symmetry of the box pairs it one to one with T-305's packing by nearest
+      centres; the optimal assignment, under the identity, moves 77 squares beyond a hundredth
+      and 10 beyond a tenth (largest 0.789), and 55 of its 57 squares tilted beyond a degree
+      (1.20 to 30.12 degrees, 55 one way and 2 the other) pair with T-305's tilted squares of
+      the same sign, where T-305 has 56, 26.42 to 31.83 degrees, all one way. So it is close
+      to T-305's arrangement, its band rearranged, but not one to one with it.
+
+      Both maintained exact routes accept the certificate; the stage 4 review is a separate
+      lane, blind to this one (R-127, under think-zqot).
+
+      The issue says the author's two checkers, verify_exact.py (separating axes) and
+      check_area.py (the area of each close pair's clipped intersection), both Fraction and the
+      standard library only, each report 127 squares and 311 close pairs, and that no test of
+      local optimality was run. Those statements are the author's; no source program ran here.
+
+      Credit Joost de Winter (Delft University of Technology), after the arrangement in the
+      public Kaggle coordinate compilations of Alex Chilton and Asterios Panoras, as the issue
+      asks: it says the search started from an exact certificate of an arrangement there whose
+      original finder could not be established, changed the sliding offsets of the columns in
+      the tilted central band, and optimized the positions and angles of individual squares.
+      Whether that arrangement is Kodaj's is not established here; the compilations were not
+      read.
+
+      The issue says the search, optimization and rational certificate were produced with
+      GPT-6.2 Sol (OpenAI) and the repository files, checks and figure with Claude
+      (Anthropic), both under his direction. The side-only Kaggle entry it quotes, Luka
+      Cvetkovic's 11.800793726618, states no packing.
+    scope:
+      n_values:
+      - 127
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A continued arrangement at 127 of T-305's packing, ten squares moved beyond a tenth and
+        none paired one to one by nearest centres, 9.58e-04 below the house, above the S2/S3
+        line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3),
+        where new and continued arrangements are S3, as T-304 at 90 and T-320 at 268. No
+        technique is new, so not S4. No lower bound or optimum.
+      scored: '2026-11-18'
+      by: think-zqot Joost de Winter import (intake lane w6-dewinter-1118), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s127 issue 1015 2026-11-17]'
+      published: '2026-11-17'
+    evidence:
+    - E-de-winter-1015-certificate-report
+    - E-de-winter-1015-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/README.md
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/source/n127/n127_exact.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/contraction-n127.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/contraction-n127-own.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/controls-plan-127.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_w6_1118.py
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 127: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 48006 pair decisions; summed over the 3 jobs, the receipt records 29.25 route CPU
+      seconds. No square touches the box: every wall clears by at least 2.3137e-70, and every
+      pair by at least 3.7304e-70 (squares 31 and 34), so the squares sit within 1e-69 of
+      contact. The certificate is read by the center-direction-json reader, and its corner twin
+      is held to it as the same packing by the witness-corners-opposite reader. The replay is
+      E-de-winter-1015-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated (campaign/issue-intake/upper-bounds-1015-1020-20261118/controls-plan-127.txt),
+      lowered the side to the packing's extent, 7.7394e-63 below it, closed the least-gap pair
+      (square 34 toward square 31) by its gap and moved every square toward its nearer near
+      wall by the least clearance, 2.3137e-70: both routes accepted each at exact contact,
+      margin 0, and refused each 1e-30 past it.
+
+      They refused square 34 enlarged to its pair and square 46 enlarged to its wall at contact for the shape alone and 1e-30 past it for the
+      overlap or the wall as well, and refused a duplicated square. The plan expected a square
+      to touch a near wall, as at every earlier de Winter certificate; none does, and every
+      verdict was the one stated.
+
+      At n = 127 the certificate is below the case's ceiling (Tomáš Kodaj, improved by JoeGun,
+      T-305) by 9.58e-04; smallest when filed. The ledger of 18 November for this lane
+      (campaign/issue-intake/upper-bounds-1015-1020-20261118) walks #1015 (22:14:33Z), #1017
+      (22:27:04Z) and #1020 (22:49:35Z) and records all three, each below the last; GitHub's
+      activity log puts each certificate's push before its issue. T-315 (#1017) and T-316
+      (#1020) are below this side. The lower bounds at 127 lie below it.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-305's margin at
+      127 is 1.2099e-10 (squares 89 and 93; measure/contraction-n127.json), so the gain of
+      9.58e-04, about 7.9e6 times it, lies wholly outside T-305's padding, and the claim is a
+      new result. This certificate's own margin is 7.7394e-63 (squares 31 and 34;
+      measure/contraction-n127-own.json).
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): the
+      house witness and its regularized view measure as T-305's packet; aligned by box centres,
+      9 squares turn by more than a degree and one reverses its tilt. The L-step scan
+      (measure/l-step-scan.json), with this side stood in for 127's ceiling, finds main's
+      consequences unchanged; the L step from 127 lands at 150 above its ceiling.
+    next_rung: >-
+      The stage 4 exit: the blind review (R-127, under think-zqot) accepted and mapped, with
+      the house decision at 127, where T-316 is smaller; V4 and C4 need a second qualifying
+      adversarial review by a distinct reviewer and an explicit human oversight record.
+  - id: T-315
+    kind: upper-bound
+    registered: '2026-11-18'
+    landed: '2026-11-18'
+    headline: >-
+      de Winter's further arrangement of his T-314 at 127, 1.96e-06 below it
+    claim: >-
+      One complete rational certificate proves s(127) <= 5900396863307571/500000000000000 =
+      11.800793726615142, the exact side #1017 states; its title rounds it up at 12 places as
+      11.800793726616.
+
+      It is 1.96e-06 (1.9556e-06) below T-314, the same author's #1015, filed 12 minutes 31 seconds
+      before it, and 9.60e-04 below T-305, the case's house in both lanes; the ledger records
+      #1015, #1017 and #1020 in order. Measured here it is T-314's arrangement moved: one to one
+      with T-314's packing by nearest centres under the identity, which moves 27 squares beyond
+      a hundredth and 5 beyond a tenth (largest 0.328) and turns squares by up to 1.50 degrees,
+      all 57 tilted squares paired with tilted squares of the same sign, as the issue's second
+      stage, which shifted the tilted cap at the top of the band, says.
+
+      Both maintained exact routes accept the certificate; the stage 4 review is a separate
+      lane, blind to this one (R-127, under think-zqot).
+
+      The issue says the author's two checkers, unchanged from #1015's, each report 127
+      squares and 312 close pairs, and that no test of local optimality was run. Those
+      statements are the author's; no source program ran here.
+
+      Credit Joost de Winter (Delft University of Technology), after the arrangement in the
+      Kaggle compilations of Alex Chilton and Asterios Panoras, as the issue asks: the search
+      of #1015, then a second stage that repeatedly changed the aspect ratio of the enclosing
+      rectangle while moving and rotating squares and returned to a square. The issue states
+      #1015's AI assistance. It says the packing is 2.04e-12 below Luka Cvetkovic's side-only
+      Kaggle entry, 11.800793726617185, probably the same local optimum; that entry states no
+      packing.
+    scope:
+      n_values:
+      - 127
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: >-
+        A further arrangement of T-314's packing at 127, 1.96e-06 below it, one to one with it
+        and five squares beyond a tenth, below the S2/S3 line T-239's rationale draws between
+        T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), as T-323's 3.62e-09 at 292 (S2); the
+        arrangement is T-314's (S3). No lower bound or optimum.
+      scored: '2026-11-18'
+      by: think-zqot Joost de Winter import (intake lane w6-dewinter-1118), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s127 issue 1017 2026-11-17]'
+      published: '2026-11-17'
+    evidence:
+    - E-de-winter-1017-certificate-report
+    - E-de-winter-1017-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/README.md
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/source/n127/n127_exact.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/contraction-n127.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/contraction-n127-1015.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/contraction-n127-own.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/controls-plan-127.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_w6_1118.py
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 127: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 48006 pair decisions; summed over the 3 jobs, the receipt records 4.81 route CPU
+      seconds. Squares touch the box at the near walls, a least wall clearance of exactly 0, the
+      far walls clear by 3.3728e-16, and every pair clears by at least 3.8484e-15 (squares 35
+      and 88). The certificate is read by the center-direction-json reader, and its corner twin
+      is held to it as the same packing by the witness-corners-opposite reader. The replay is
+      E-de-winter-1017-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated, lowered the side to the packing's extent, closed the
+      least-gap pair (square 88 toward square 35) by its gap and moved every square toward its
+      nearer near wall by 0: both routes accepted each at exact contact, margin 0, and refused
+      each 1e-30 past it. They refused square 88 enlarged to its pair at contact for its shape
+      alone and 1e-30 past it for the overlap as well; square 43, at its wall, enlarged by 0 was
+      accepted and 1e-30 past it refused for the wall and its shape, the branch stated in
+      advance; and they refused a duplicated square.
+
+      At n = 127 the certificate is below the case's ceiling (T-305) by 9.60e-04 and below
+      #1015 (T-314) by 1.9556e-06; smallest when filed. The ledger of 18 November for this lane
+      records it after #1015 and before #1020; T-316 (#1020) is below it.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-314's
+      certificate's margin is 7.7394e-63 (squares 31 and 34; measure/contraction-n127-1015.json),
+      so the step of 1.9556e-06 lies wholly outside it, and the claim is a new result, not a
+      restatement of T-314's packing. T-305's margin is 1.2099e-10
+      (measure/contraction-n127.json). This certificate's own margin is 4.1903e-14 (squares 35
+      and 88; measure/contraction-n127-own.json).
+
+      Measured pose by pose (measure/identity.json): against T-305 no symmetry pairs it one to
+      one, and the optimal assignment moves 11 squares beyond a tenth (largest 0.789). The
+      L-step scan finds main's consequences unchanged.
+    next_rung: >-
+      The stage 4 exit: the blind review (R-127, under think-zqot) accepted and mapped, with
+      the house decision at 127, where T-316 is smaller; V4 and C4 need a second qualifying
+      adversarial review by a distinct reviewer and an explicit human oversight record.
+  - id: T-316
+    kind: upper-bound
+    registered: '2026-11-18'
+    landed: '2026-11-18'
+    headline: >-
+      de Winter's further arrangement of his T-315 at 127, 1.80e-13 below it, beyond its padding
+    claim: >-
+      One complete rational certificate proves s(127) <=
+      5900396863307481119664515678048233366964863482714849291045437/500000000000000000000000000000000000000000000000000000000000.
+      That side is 11.8007937266149623 rounded up at 16 places and 11.800793726615 at 12, as
+      #1020 prints it.
+
+      It is 1.80e-13 (1.7976e-13) below T-315, the same author's #1017, filed 22 minutes 31 seconds
+      before it, 1.96e-06 below T-314 (#1015) and 9.60e-04 below T-305, the case's house in
+      both lanes; the ledger records the three reports in order. Measured here it is T-315's
+      arrangement moved: one to one with T-315's packing by nearest centres under the
+      identity, which moves 28 squares beyond a hundredth and 1 beyond a tenth (largest 0.107)
+      and turns squares by up to 3.98 degrees, all 57 tilted squares paired with tilted squares
+      of the same sign, 52 of them within 1e-4 degrees, as the issue's shift of two groups of
+      the band lengthwise says.
+
+      Its gain is 4.29 times T-315's uniform-contraction margin, and
+      it lies 1.38e-13 below T-315's certificate shrunk to first contact, so under the owner's
+      option D of 17 November 2026 (think-b0w5) it is a new result, not a restatement.
+
+      Both maintained exact routes accept the certificate; the stage 4 review is a separate
+      lane, blind to this one (R-127, under think-zqot).
+
+      The issue says the author's two checkers, unchanged from #1015's, each report 127
+      squares and 308 close pairs, and that no test of local optimality was run. Those
+      statements are the author's; no source program ran here.
+
+      Credit Joost de Winter (Delft University of Technology), after the arrangement in the
+      Kaggle compilations of Alex Chilton and Asterios Panoras, as the issue asks. The issue
+      names GPT-6.2 Astra (OpenAI) for the search, optimization and rational certificate,
+      where the pinned folder's README names GPT-6.2 Sol, and Claude (Anthropic) for the
+      repository files, checks and figure, both under his direction. It says the packing is
+      2.2e-12 below Luka Cvetkovic's side-only Kaggle entry, 11.800793726617185, probably the
+      same local optimum; that entry states no packing.
+    scope:
+      n_values:
+      - 127
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 1
+      rationale: >-
+        A further arrangement of T-315's packing at 127, 1.80e-13 below it, 4.29 times T-315's
+        own contraction margin and 1.38e-13 below it shrunk to first contact: a new result
+        under the owner's option D of 17 November 2026 (think-b0w5), but a gain at the scale of
+        the padding, as the re-solves T-315, T-316 and T-321 (S1), although it moves one square
+        beyond a tenth. The arrangement is T-314's (S3). No lower bound or optimum.
+      scored: '2026-11-18'
+      by: think-zqot Joost de Winter import (intake lane w6-dewinter-1118), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s127 issue 1020 2026-11-17]'
+      published: '2026-11-17'
+    evidence:
+    - E-de-winter-1020-certificate-report
+    - E-de-winter-1020-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/README.md
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/source/n127/n127_exact.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127-1017.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127-own.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/controls-plan-127.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_w6_1118.py
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 127: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 48006 pair decisions; summed over the 3 jobs, the receipt records 12.90 route CPU
+      seconds. No square touches the box: every wall clears by at least 2e-60, exactly
+      1/(5 x 10^59), and every pair by at least 1.6483e-59 (squares 84 and 99). The
+      certificate is read by the center-direction-json reader, and its corner twin is held to
+      it as the same packing by the witness-corners-opposite reader. The replay is
+      E-de-winter-1020-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated, lowered the side to the packing's extent, 2e-60 below it,
+      closed the least-gap pair (square 99 toward square 84) by its gap and moved every square
+      toward its nearer near wall by 2e-60: both routes accepted each at exact contact, margin
+      0, and refused each 1e-30 past it. They refused square 99 enlarged to its pair and square
+      91 enlarged to its wall at contact for the shape alone and 1e-30 past it for the overlap
+      or the wall as well, and refused a duplicated square. The plan expected a square to touch
+      a near wall; none does, and every verdict was the one stated.
+
+      At n = 127 the certificate is below the case's ceiling (T-305) by 9.60e-04, below #1015
+      (T-314) by 1.96e-06 and below #1017 (T-315) by 1.7976e-13; smallest: this certificate.
+      The 12-place prints of #1017 and #1020 differ (11.800793726616 and 11.800793726615), so
+      the restatement ruling of 23 October (think-fwa9) does not reach it.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-315's
+      certificate's margin is 4.1903e-14 (squares 35 and 88;
+      measure/contraction-n127-1017.json), and the step of 1.7976e-13 is 4.29 times it, so this
+      side lies 1.3786e-13 below T-315 shrunk to first contact, and the claim is a new result.
+      T-305's margin is 1.2099e-10 (measure/contraction-n127.json). This certificate's own
+      margin is 1.8203e-58 (squares 84 and 99; measure/contraction-n127-own.json).
+
+      Measured pose by pose (measure/identity.json): one to one with T-314's packing too (5
+      squares beyond a tenth); against T-305 no symmetry pairs it one to one, and the optimal
+      assignment moves 9 squares beyond a tenth (largest 0.789). The L-step scan finds main's
+      consequences unchanged.
+    next_rung: >-
+      The stage 4 exit: the blind review (R-127, under think-zqot) accepted and mapped, and the
+      house rule's adoption at 127, regularized in the same pull request; V4 and C4 need a
+      second qualifying adversarial review by a distinct reviewer and an explicit human
+      oversight record.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

@@ -33575,6 +33575,150 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1015 2026-11-17]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1015 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1015 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 16
+  end: 23
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1015 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 25
+  end: 32
+  label: Panoras
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1017 2026-11-17]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1017 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1017 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 16
+  end: 23
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1017 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 25
+  end: 32
+  label: Panoras
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1020 2026-11-17]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1020 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1020 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 16
+  end: 23
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1020 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 25
+  end: 32
+  label: Panoras
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

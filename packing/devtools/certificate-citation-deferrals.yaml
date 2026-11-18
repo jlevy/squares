@@ -117,3 +117,32 @@ deferrals:
       and adopts the smallest validated packing at each count with issue 1009's import; the case
       records then cite this evidence, as the houses or as history beside smaller ones, and this
       entry is removed in that change.
+  - evidence: E-de-winter-1015-exact-feasibility
+    results:
+    - T-314
+    bead: think-zqot
+    blocked_on: think-zqot
+    recorded: '2026-11-18'
+    reason: Joost de Winter's certificate of issue 1015 at 127, below T-305, the first of his three
+      reports there that evening. think-zqot maps the three certificates' stage 4 review (R-127) and
+      adopts the smallest validated packing at 127; the case record then cites this evidence as
+      history beside the house it adopts, and this entry is removed in that change.
+  - evidence: E-de-winter-1017-exact-feasibility
+    results:
+    - T-315
+    bead: think-zqot
+    blocked_on: think-zqot
+    recorded: '2026-11-18'
+    reason: Joost de Winter's certificate of issue 1017 at 127, below T-305 and T-314. think-zqot maps
+      the stage 4 review (R-127) and adopts the smallest validated packing at 127; the case record
+      then cites this evidence as history beside the house, and this entry is removed in that change.
+  - evidence: E-de-winter-1020-exact-feasibility
+    results:
+    - T-316
+    bead: think-zqot
+    blocked_on: think-zqot
+    recorded: '2026-11-18'
+    reason: Joost de Winter's certificate of issue 1020 at 127, below T-305, T-314 and T-315.
+      think-zqot maps the stage 4 review (R-127) and adopts the smallest validated packing at 127,
+      regularized in the same change; the case record then cites this evidence, and this entry is
+      removed in that change.

@@ -13601,6 +13601,93 @@ sources:
     and 4.54e-3 below T-193's (22 + 22 sqrt(2))/3 at 295; the ledger of 17 November for this
     lane (campaign/issue-intake/upper-bounds-1005-1007-20261117) records both. All 6 native jobs
     have full outcomes.
+- id: de-winter-s127-issue1015-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing 35b576a, issue 1015
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/35b576a355297942bca9c195bee5cd74f0b27f40/n127
+  local: resources/web/de-winter-s127-issue1015-2026-11-17/
+  source_key: '[de Winter s127 issue 1015 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1015-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1015-certificate-report
+  - E-de-winter-1015-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1015 at 35b576a, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-314 records the in-horizon report,
+    9.58e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
+- id: de-winter-s127-issue1017-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing cc20a26, issue 1017
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/cc20a26845789c2502950041c26709eda8a71081/n127
+  local: resources/web/de-winter-s127-issue1017-2026-11-17/
+  source_key: '[de Winter s127 issue 1017 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1017-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1017-certificate-report
+  - E-de-winter-1017-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1017 at cc20a26, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-315 records the in-horizon report,
+    1.96e-06 below T-314 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
+- id: de-winter-s127-issue1020-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing a1ba501, issue 1020
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a1ba5019e787e407646293d7bef81d63c9951b32/n127
+  local: resources/web/de-winter-s127-issue1020-2026-11-17/
+  source_key: '[de Winter s127 issue 1020 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1020-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1020-certificate-report
+  - E-de-winter-1020-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1020 at a1ba501, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-316 records the in-horizon report,
+    1.80e-13 below T-315, 1.96e-06 below T-314 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
