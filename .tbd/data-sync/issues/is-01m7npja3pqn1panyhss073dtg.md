@@ -5,7 +5,7 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: w7r-optd-1118
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-18T05:13:03.298Z
+updated_at: 2026-11-18T06:00:56.934Z
 started_at: 2026-11-18T02:28:47.344Z
 ---
 
@@ -29,3 +29,5 @@ started_at: 2026-11-18T02:28:47.344Z
 2026-11-18T04:46Z w7r-optd-1118 (resumes w7-optd-1118 after the restart): committed the uncommitted SYNOPSIS/VERIFIERS renders (39c2a26da), case verifier sections at 172/199 + synopsis document map (ef868818f), merged origin/main 3ac78a55f into w7-optd-prep (3ceb5ce81; one conflict, test_check_requests docstring), pushed to claude/intake-2026-11-18-option-d-prep. #1023 still open (head ff07d4e69, validate red); option-d branch not yet folded. Next: trial merge with #1023's head to pre-resolve (SYNOPSIS, regularized/index.json, house-adoption-prior-state-2026-11-18.json.xz add/add, upper_bound_houses.py, INVENTORY, RESULTS, VERIFIERS, source-coverage.yaml, test_check_requests).
 
 2026-11-18T05:12Z w7r-optd-1118: prep 30512e98d pushed to -option-d-prep (adds no-change record 2026-11-18-w7r-optd-1118-option-d.yaml, compare_paper_renders vs main 3ac78a55f: 55/43/43/43 byte-identical). Trial merge with #1023 head 0db1e5b4f resolved by scratchpad w7/tools/resolve_1023.py (index.json via carried_index, prior-state union, upper_bound_houses, source-coverage union, generated MDs theirs then render_evidence_inventory/verifiers/case_verifiers/results --update, render_results_headline, render_document_map); adopt_houses --check and atlas check pass. Still owed after the real merge: tests/test_house_adoption.py expectations at 172 (T-286) and 199 (T-285) (OVERTAKEN, the lifted-hold dict, 'later' in the custody-history test) and re-run 'python -m devtools.upper_bound_houses custody' (receipt houses); then records tier, stamp_landed, release_pin. PR body draft: scratchpad w7/pr-body2.md.
+
+2026-11-18T06:00Z w7r-optd-1118: #1023 merged (86284ec20). Merged it into the prep (ec0646223, resolver script), re-ran custody (77 houses), fixed test_house_adoption / test_known_best_atlas / test_result_status for 172/199 and the restated entries, render_recent_results.superseding now names the holders at restated counts (T-281 superseded by T-259) with a test in test_restatements. Re-measured the eight driver solves against main as merged: shares unchanged (1.40 at 295 .. 3.03e12 at 260; houses' own margins identical). think-ruu2 README lists the ten candidates (classification and receipts only, think-4z8z; think-frl5 at 270/299/307). Folded: claude/intake-2026-11-18-option-d fast-forwarded to ec0646223 (= -prep). Next: records tier, release impact vs new main, open the draft PR.
