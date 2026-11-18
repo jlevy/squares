@@ -463,7 +463,9 @@ def test_an_entry_that_holds_some_counts_may_be_staged_at_others(
     claim states exact sides below their case records at six more, whose adoption is
     staged (`select_houses.PENDING_ADOPTION`): 267's form waits for its price, and the
     others for think-8ido. The last pass of 9 November 2026 took a seventh, 199, to a
-    smaller house (T-284), where T-193's side is now above the case record. T-174 was the
+    smaller house (T-284), where T-193's side is now above the case record, and the pass of
+    18 November 2026 took 292, staged, and 295, held, to Mykhailo Polkovskyi's smaller
+    certificates (T-323, T-324), so T-193 holds five. T-174 was the
     example until the same adoption took its last three staged counts, 70, 153 and 207. A
     staged count is pending adoption and no excess; unstaged, the same statement is
     refused."""
@@ -471,11 +473,12 @@ def test_an_entry_that_holds_some_counts_may_be_staged_at_others(
 
     record = records.results["T-193"]
     assert view.standing(record, records) == view.HOLDS
-    assert {88, 126, 266, 267, 292, 301} <= check_standing.staged("T-193")
+    assert {88, 126, 266, 267, 301} <= check_standing.staged("T-193")
+    assert 292 not in check_standing.staged("T-193")
     assert check_standing.problems(record, view.HOLDS, records) == []
     line = check_standing.summary(record, view.HOLDS, records)
     assert (
-        "better than the case record at n = 88, 126, 266, 267, 292, 301 (staged for adoption)"
+        "better than the case record at n = 88, 126, 266, 267, 301 (staged for adoption)"
     ) in line
     monkeypatch.setattr(
         select_houses,

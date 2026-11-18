@@ -159,7 +159,9 @@ def test_the_review_programs_are_the_ones_its_receipts_name() -> None:
 
 def test_the_case_adopted_t265_at_260() -> None:
     """The pass of 5 November 2026 adopted T-265 at 260; that of 6 November 2026 moved the
-    count on to Evan Daniel's issue-914 packing (T-269), and T-265 stays as history."""
+    count on to Evan Daniel's issue-914 packing (T-269), and that of 18 November 2026 to
+    Mykhailo Polkovskyi's further arrangement of it (T-318); T-265 stays as history."""
     assert 260 in houses.LATER_PASSES["2026-11-05"]
-    assert (houses.ADOPTED[260], houses.adopted_on(260)) == ("T-269", "2026-11-06")
+    assert 260 in houses.LATER_PASSES["2026-11-06"]
+    assert (houses.ADOPTED[260], houses.adopted_on(260)) == ("T-318", "2026-11-18")
     assert "T-265" not in set(houses.ADOPTED.values())

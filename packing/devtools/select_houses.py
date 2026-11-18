@@ -223,10 +223,12 @@ class Pending:
 #: The adoption of 5 November 2026 (think-lrj4) took 175 off: Evan Daniel's certificate of
 #: issue 914 (T-267) is below T-193's algebraic side there. The last pass of 9 November 2026
 #: (think-1goz) took 199 off: Doğa Özden's certificate of issue 938 (T-284), T-282's packing
-#: with one L step, is 2.88e-3 below T-193's algebraic side there.
+#: with one L step, is 2.88e-3 below T-193's algebraic side there. The pass of 18 November
+#: 2026 (think-i38n) took 292 off: Mykhailo Polkovskyi's certificate of issue 1009 (T-323)
+#: is 1.36e-3 below T-193's algebraic side there.
 PENDING_ADOPTION: dict[int, Pending] = {
     n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
-    for n in (88, 126, 266, 267, 292, 301)
+    for n in (88, 126, 266, 267, 301)
 }  # fmt: skip
 
 
@@ -273,12 +275,14 @@ REVIEW_639 = "docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
 #: T-193's side there, so its entry went too; T-193's item at 175 stays think-8ido's.
 #: The last pass of 9 November 2026 took 199 to Doğa Özden's issue 938 (T-284), below
 #: T-193's side there, so its entry went too; T-193's item at 199 stays think-8ido's.
+#: The pass of 18 November 2026 took 292 to Mykhailo Polkovskyi's issue 1009 (T-323), below
+#: T-193's side there, so its entry went too; T-193's item at 292 stays think-8ido's.
 CORRECTIONS_OWED: dict[int, Correction] = {
     n: Correction(result="T-193", named=named, measured=measured, bead=RE1_BEAD,
                   measured_in=REVIEW_639)
     for n, named, measured in (
         (88, "T-174", "T-127"), (126, "T-174", "T-139"),
-        (266, "T-174", "T-119"), (292, "T-174", "T-146"), (301, "T-174", "T-098"),
+        (266, "T-174", "T-119"), (301, "T-174", "T-098"),
     )
 }  # fmt: skip
 

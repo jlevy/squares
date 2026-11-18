@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from decimal import ROUND_CEILING, ROUND_FLOOR, ROUND_HALF_UP, Decimal, localcontext
 from functools import cache
@@ -469,6 +470,30 @@ def _pinned_hue(representative: Decimal, *, tolerance: Decimal) -> int | None:
     return None
 
 
+def _square_hues(
+    class_hues: tuple[int, ...],
+    class_by_square: Mapping[int, int],
+    orientations: tuple[Decimal, ...],
+    *,
+    tolerance: Decimal,
+) -> dict[int, int]:
+    """Each square's hue: its class's, except that a square at a pinned angle takes the pin.
+
+    Classes are seeded greedily, so a square within the tolerance of a pinned angle can
+    join a class seeded just outside it, whose mean then lies outside it too: at n = 292
+    (T-323, 18 November 2026) a square 0.92 microradians off the axis joined a class
+    seeded 1.87 microradians off, whose mean is 1.48 off, and drew in that class's hue.
+    A right angle is hue 0 in every packing, so the square takes the pin and the rest of
+    its class keeps the class hue, as n = 110's class 1.6 microradians off does (review A5
+    of #1023)."""
+    hues = {square: class_hues[index] for square, index in class_by_square.items()}
+    for square, orientation in enumerate(orientations):
+        pinned = _pinned_hue(orientation, tolerance=tolerance)
+        if pinned is not None:
+            hues[square] = pinned
+    return hues
+
+
 def _angle_class_hues(
     classes: tuple[tuple[int, ...], ...],
     representatives: tuple[Decimal, ...],
@@ -913,9 +938,12 @@ def assign_square_colors(
             tolerance=spec.angle_tolerance_radians,
             registry=angle_hue_registry,
         )
-        hue_by_square = {
-            index: class_hues[class_by_square[index]] for index in range(len(frame.squares))
-        }
+        hue_by_square = _square_hues(
+            class_hues,
+            class_by_square,
+            orientations,
+            tolerance=spec.angle_tolerance_radians,
+        )
         shade_groups = {index: list(members) for index, members in enumerate(angle_classes)}
     else:
         hue_by_square = {index: index % spec.hue_count for index in range(len(frame.squares))}
