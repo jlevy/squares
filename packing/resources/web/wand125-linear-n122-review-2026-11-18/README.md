@@ -22,7 +22,7 @@ asset.
 
 - `programs/`: the review’s programs and the controls plan (`controls-plan.json`).
 - `frozen/`: the digests of the checker and the plan at their freeze
-  (`checker-frozen-digests.txt`, 06:03:49Z), the findings’ digests at theirs
+  (`checker-frozen-digests.txt`, 06:03:40Z, commit `ee66533d0f`), the findings’ digests at theirs
   (`findings-frozen-digest.txt`), and the frozen review text.
 - `out/`: the receipts.
   `out/bnb-all/` holds the complete decision of nodes 1 to 200, one file per range of 25
@@ -33,10 +33,15 @@ asset.
 Every program is the lane’s own, written for this review from the mathematics and the
 certificate’s documents (its README, `manifest.json`, `completion-audit.json` and the
 shape of `candidate.json` and `input.txt`). None imports anything from this repository
-or from the source, and none was written after reading the source’s checker or code:
-`code/` was hashed, not opened, until the checker froze.
+or from the source. The programs that decide were written before any of the source’s
+code was read: `code/` was hashed, not opened, until the checker froze. The four written
+after that freeze, `r144_run_all.sh`, `r144_lanes.py`, `r144_release_sums.py` and
+`r144_summarize.py`, decide nothing about the capture: the first drives the frozen
+`r144_bnb.py`, the others compare the record’s lanes, read the release’s sums and gather
+receipts.
 They ran under CPython 3.14.7, the project interpreter, as `python -I -B` at
-`nice -n 19`, one process at a time, with numpy 2.5.2 on one OpenBLAS thread.
+`nice -n 19`, one process at a time, with numpy 2.5.2 on one OpenBLAS thread, and
+`r144_lanes.py` with PyYAML.
 
 | Program | Decides | Reads | Writes |
 | --- | --- | --- | --- |
@@ -50,10 +55,11 @@ They ran under CPython 3.14.7, the project interpreter, as `python -I -B` at
 | `r144_poses.py` | nothing: exact captures at 1,608 fixed poses and a seeded search at 24 nodes, compared with 1 and with the source’s least leaf bounds | the candidate and the 201 records | `out/poses.json.gz` |
 | `r144_lanes.py` | which lanes of the case records 563/50 would raise at 122 to 127 | `packing/frontier/n-122.md` to `n-127.md` | `out/lanes.json` |
 | `r144_release_sums.py` | whether the release’s `SHA256SUMS` lists the asset | that file and its API digest | `out/release-sums.json` |
+| `r144_summarize.py` | nothing: gathers node 0’s decision and the 200 nodes’ receipts into one, with the source’s node counts beside them | the receipts and the 201 records | `out/complete-decision.json` |
 | `r144_selftest.py` | nothing about the certificate: the controls on the programs above | synthetic measures, and mutated copies of the real candidate and node 37’s input | `out/selftest-*.json` |
 
-`r144_run_all.sh`, `r144_lanes.py` and `r144_release_sums.py` were written after the
-controls plan, and two frozen programs changed after the checker’s freeze.
+`r144_run_all.sh`, `r144_lanes.py`, `r144_release_sums.py` and `r144_summarize.py` were
+written after the controls plan, and two frozen programs changed after the checker’s freeze.
 Both changes are disclosed in the review’s
 [What This Review Ran](../../../../docs/project/reviews/review-2026-11-18-wand125-linear-n122.md#what-this-review-ran).
 `r144_premises.py` takes its square roots of 2 and 22 to 200 digits instead of 60, since
@@ -87,6 +93,8 @@ $PY $R/programs/r144_poses.py --bundle $BUNDLE \
   --out $R/out/poses.json
 $PY $R/programs/r144_lanes.py --frontier packing/frontier --out $R/out/lanes.json
 $R/programs/r144_run_all.sh $BUNDLE $R/out/bnb-all 7200
+$PY $R/programs/r144_summarize.py --axis $R/out/axis-node0.json --ranges $R/out/bnb-all \
+  --bundle $BUNDLE --out $R/out/complete-decision.json
 ```
 
 `r144_release_sums.py` takes the release’s `SHA256SUMS`, downloaded beside the asset,

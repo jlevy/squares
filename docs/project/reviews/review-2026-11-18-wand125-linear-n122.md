@@ -87,7 +87,7 @@ $(563/50 - 1/2)^2 > N - 11 + 1/4$ for $N \le 126$ but not at 127.
 
 ## What Was Read
 
-**Before the checker froze (06:03:49Z), as data.** The lane’s briefs and the bead
+**Before the checker froze (06:03:40Z, commit `ee66533d0f`), as data.** The lane’s briefs and the bead
 `think-rxs3`; `result-import.md` stage 4; the house review of 11 November
 (`review-2026-11-11-wand125-fine-net-n28-n30.md`) as the format model, and PRs #1013 and
 #1014’s structure; on `main`, the import packet’s README and `source-manifest.json`;
@@ -192,9 +192,10 @@ here. Step 6 at 201 angles is the whole computational content.
 
 Every program is this lane’s own, kept with its outputs in the packet’s
 [`programs/`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/README.md).
-They use CPython 3.14.7 (`fractions`, `hashlib`, `json`, `tarfile`) and numpy 2.5.2 on
-one OpenBLAS thread, and import nothing from this repository or the source.
-The checker and the controls plan were frozen at 06:03:49Z
+They use CPython 3.14.7 (`fractions`, `hashlib`, `json`, `tarfile`), numpy 2.5.2 on one
+OpenBLAS thread and, in `r144_lanes.py`, PyYAML, and import nothing from this repository
+or the source.
+The checker and the controls plan were frozen at 06:03:40Z (commit `ee66533d0f`)
 ([`frozen/checker-frozen-digests.txt`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/frozen/checker-frozen-digests.txt)),
 after the selftest had passed on synthetic measures and before any program read the
 certificate.
@@ -217,8 +218,10 @@ wide, and your bound on $G_{11}$ lies inside it.
 At 200 digits your bound exceeds $G_{11}$ by $1.42 \times 10^{-90}$, as 90-digit roots
 rounded up would give, and the check holds; nothing else changed.
 `r144_poses.py` gained `--draw`, which draws the six seeded search nodes.
-Three programs were added after the plan: `r144_lanes.py`, `r144_release_sums.py`, and
-`r144_run_all.sh`, which runs the complete decision.
+Four programs were added after the plan, none of which decides a capture:
+`r144_run_all.sh`, which runs the complete decision with the frozen `r144_bnb.py`,
+`r144_summarize.py`, which gathers its receipts, `r144_lanes.py` and
+`r144_release_sums.py`.
 The plan priced the complete run without running it, and the coordinator approved it at
 06:13Z, after the five-node sample had measured its cost (one process, `nice -n 19`, a
 stop at 2 CPU-hours).
@@ -293,7 +296,7 @@ there falls below $1 - 10^{-9}$, and a capture below one would refute the node.
 FULL_RUN_PARAGRAPH
 
 The 99/100 mutant is refuted at nodes 37 and 180, at the first box whose centre estimate
-fell below one: exact captures $0.99953403$ and $0.99910313$ at $(5.74367, 6.40593)$ and
+fell below $1 - 10^{-9}$: exact captures $0.99953403$ and $0.99910313$ at $(5.74367, 6.40593)$ and
 $(5.76951, 6.08703)$.
 
 **Poses and a seeded search.** At every node the four corners of the quadrant and four
@@ -522,7 +525,8 @@ The review’s compute, the complete decision included, was FULL_TOTAL_CPU CPU-h
 
 ## Comparison With Earlier Reviews
 
-COMPARISON_PLACEHOLDER
+This section is written after the findings freeze, from earlier reviews read only then,
+as the runbook asks; the frozen copy ends here.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
