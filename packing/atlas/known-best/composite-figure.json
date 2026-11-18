@@ -2,7 +2,7 @@
   "figure": {
     "composites": [
       {"columns":10,"layout":"10 by 10, row-major n=1..100","range":{"count":100,"first_n":1,"last_n":100},"rows":10,"square_count":5050,"stem":"known-best-1-100","totals":{"degree_derived_here":81,"degree_known":98,"degree_recorded_upstream":17,"exact_value_known":98,"lower_bound_correction":16,"lower_bound_first_proved_here":0,"lower_bound_recent_result":81,"only_known_numerically":2,"proved_optimal":49,"rigidity_catalogue_annotated":2,"rigidity_established":12,"rigidity_known":14}},
-      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":226,"degree_known":318,"degree_recorded_upstream":92,"exact_value_known":318,"lower_bound_correction":213,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":6,"proved_optimal":81,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
+      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":226,"degree_known":318,"degree_recorded_upstream":92,"exact_value_known":318,"lower_bound_correction":212,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":6,"proved_optimal":81,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
     ],
     "entries": [
       {
@@ -2840,7 +2840,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"784486179677573581991671750502627647690849586315837067524969581719432573131816575701996805775810683190356963481048249437688278531515088276722668684203536782312550970389724710204791776796466633913283058017708370027620419738095784643318869869830251266633372895467029627071662430818071267/71939390732892786308108684741508629641699074976010803840294931177844619752318328260334740244990201471845694327319816922121412586841233786246385477865838612662698183807605944712358552400692382953629903438860750830990483480097357305500507667288338480599543227312734648617526189636189266","minimal_polynomial":null,"state":"minimal-polynomial"},
-        "lower": {"correction":false,"display":"s(108) ≥ 10.620000","evidence":["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.62"},
+        "lower": {"correction":false,"display":"s(108) ≥ 10.630037","evidence":["E-de-winter-1018-n108-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.630037940829"},
         "n": 108,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
@@ -2866,7 +2866,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"6 + (7/2)sqrt(2)","minimal_polynomial":"2*s**2 - 24*s + 23 = 0","state":"closed-form"},
-        "lower": {"correction":true,"display":"s(109) ≥ 10.462429","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.4624294225"},
+        "lower": {"correction":false,"display":"s(109) ≥ 10.630037","evidence":["E-de-winter-1018-n108-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.630037940829"},
         "n": 109,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
@@ -8595,7 +8595,7 @@
     "generated_by": "python -m devtools.build_composite_figure_data",
     "provenance_vocabulary": {"absent":"No source on hand supplies it. Not a claim that the fact is unknown to mathematics.","catalogue":"Transcribed here from the retained catalogue, not carried by the frontier record.","derived":"Computed by this repository from a fact it already holds.","frontier":"Read from the case's frontier record, which transcribes a retained source."},
     "range": {"count":324,"first_n":1,"last_n":324},
-    "totals": {"degree_derived_here":226,"degree_known":318,"degree_recorded_upstream":92,"exact_value_known":318,"lower_bound_correction":213,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":6,"proved_optimal":81,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}
+    "totals": {"degree_derived_here":226,"degree_known":318,"degree_recorded_upstream":92,"exact_value_known":318,"lower_bound_correction":212,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":6,"proved_optimal":81,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}
   },
   "softschema": {"contract":"packing.squares:CompositeFigure/v1","envelope":"figure","schema":"composite-figure.schema.yaml","status":"enforced"}
 }
