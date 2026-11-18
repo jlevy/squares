@@ -2095,8 +2095,10 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
     joined them on 7 November as an owner decision on reuse terms (think-8h80), and #939
     and #946 on 11 November, held for the owner's RV-3 (think-ruu2; think-2h88). #1008
     joined them on 17 November, waiting on the README its author says names T-057's
-    sources (think-a88h). Each carries its type, and the label taxonomy names every type
-    the record uses."""
+    sources (think-a88h). #776 and #777 left them on 17 November, when T-142's and
+    T-143's censuses, controls and review were recorded (think-i85v); each now owes only
+    its reply. Each carries its type, and the label taxonomy names every type the record
+    uses."""
     by_type: dict[str, set[int]] = {}
     for entry in check_requests.load_record()["issues"]:
         if entry.get("blocked"):
@@ -2107,7 +2109,7 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
         "owner-reply": 2,
         "standing-hold": 9,
         "author": 2,
-        "compute": 6,
+        "compute": 4,
     }
     assert set(by_type) <= set(check_requests.BLOCK_TYPES)
 

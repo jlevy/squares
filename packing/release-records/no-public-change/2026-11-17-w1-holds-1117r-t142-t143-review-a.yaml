@@ -1,0 +1,35 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Lane w1-holds-1117r of 17 November (think-vshs) addressed #908's senior review A: it
+  merged main 1f28d45ee (#1010, #1013), whose results.yaml and result-requests.yaml
+  changes meet this branch's in neither entry; it reworded four sentences that dated
+  T-142's lanes to a day so that they name the pass of 17 November (T-192's claim and
+  notes, source coverage), recorded in #446's summary that its n28 287/50 is passed by
+  T-142, reworded #532's T-142/T-143 ask, dropped think-ux1v from #532's T-144 and T-132
+  asks and from #776's and #777's beads, and re-dated the result-page amendments to the
+  merge day. The rungs, sides, bounds, marks and credits are those the branch already
+  carried, and the register holds 309 results. Against main 1f28d45ee:
+  devtools.compare_paper_renders --baseline origin/main with the five paths named here
+  swapped in, SQPACK_CHROMIUM the preinstalled Playwright Chromium
+  (/opt/pw-browsers/chromium-1243): 55, 43, 43 and 43 files, byte-identical across its
+  three renders of each paper. No PDF was printed; each prints from that HTML. Every paper
+  keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
