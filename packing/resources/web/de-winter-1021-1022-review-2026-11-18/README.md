@@ -80,7 +80,33 @@ and `n-270.yaml` at `0f191a2d23` and `86284ec203`.
 
 ## What They Printed
 
-Filled in from the receipts; the review gives the numbers and what they mean.
+The review gives the numbers and what they mean; each line below is the program’s
+summary.
+
+- `r1021_selftest.py`: `PASSED 67 checks; 10 of 10 broken copies caught; failed: []`.
+- `r1021_trial.py`: one decision of a 270-square synthetic packing by both methods, 4.6
+  CPU-seconds at 60-digit numbers and 11.5 at 120.
+- `r1021_ctrial.py`: `PASSED`; the intact programs pass every control on the synthetic
+  report and house, each broken copy of the checker fails at least one control or has
+  its original refused, and M9 (the identity measurement) is caught by the self-test.
+- `r1021_custody.py`: `routes ['pin1', 'api1', 'raw1', 'api2', 'raw2'] agree True`, and
+  the source’s `SHA256SUMS` at the head match all four files.
+- `r1021_check.py`: `1021 ACCEPT`, `1022 ACCEPT`; `T-289 REFUSE read: square 38 corner
+  3[0]: not a plain scalar` and `T-283 REFUSE read: square 84 corner 0[1]: not a plain
+  scalar` (the review’s F3).
+- `r1021_post.py unquote`: 3, 2, 2,145 and 2,161 lines unquoted in T-289’s, T-283’s,
+  T-320’s and T-321’s files, `values unchanged True` each; `cert`: reading `tan-half`,
+  0 twin failures at 268 and at 270; `compare`: one line made ASCII in each witness
+  before #1023, 20 certificate-block lines dropped in each of the four, values unchanged.
+- `r1021_measure.py`: `268 gain 2.015998680e-3 margin 3.204483004e-12 new True` and
+  `270 gain 8.343869912e-4 margin 3.211509047e-12 new True`, one to one under no
+  symmetry at either.
+- `r1021_post.py` (the driver): T-289, T-320, T-283 and T-321 `ACCEPT`; every step new
+  under option D; the gains and margins in the review’s Option D section.
+- `devtools.contraction_margin` and `devtools.measure_identity` (the second route): the
+  receipts in `out/second-route/`; `r1021_routes.py`: `all equal: True comparisons: 52`.
+- `r1021_controls.py`: 45 of 45 as stated at #1021, #1022, T-320 and T-321, and 33 of 33
+  at T-289 and T-283; `not_as_stated: []` and `not_run: []` at each.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
