@@ -1,0 +1,97 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1007",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter upper bounds 262 295 2026-11-16]",
+  "report_evidence": "E-de-winter-1007-certificate-report",
+  "receipt_format": "de-winter-1007-exact-replay-v1",
+  "witness_prefix": "W-de-winter-1007-n",
+  "claim_limitations": "Complete 2026-11-16 exact rational centre-direction certificates at 262 and 295, read exactly from the retained source files n262/n262_exact.json and n295/n295_exact.json at 853b92e, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#1007 names: a band of 72 tilted squares with axis-aligned squares placed by an integer program. Finite construction feasibility only; local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-17",
+  "read_at_main": "f9ddfeeef9070ede581142154ab992149b278ab0",
+  "certificates": [
+    {
+      "n": 262,
+      "path": "n262/n262_exact.json",
+      "format": "center-direction-json",
+      "offered": "16.699693441904",
+      "first_committed": "2026-11-16T21:26:15Z",
+      "same_packing": [
+        {
+          "path": "n262/n262_witness.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    },
+    {
+      "n": 295,
+      "path": "n295/n295_exact.json",
+      "format": "center-direction-json",
+      "offered": "17.699693441716",
+      "first_committed": "2026-11-16T21:26:15Z",
+      "same_packing": [
+        {
+          "path": "n295/n295_witness.yaml",
+          "format": "witness-corners"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    262,
+    295
+  ],
+  "replayed": [
+    262,
+    295
+  ],
+  "houses": [
+    {
+      "n": 262,
+      "reader": "[Daniel regularizer 2026-10-11]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue, verified by T-155's exact ceiling",
+      "result": "T-155",
+      "reported_value": "16.70710678118654",
+      "verified_value": "16.70710678118655",
+      "evidence": [
+        "E-evand-exact-ceilings-2026-10-05-exact-replay",
+        "E-evand-exact-ceilings-2026-10-05-source-replay",
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    },
+    {
+      "n": 295,
+      "reader": "[Daniel exact current records 2026-10-16]",
+      "source_key": "[Daniel exact current records 2026-10-16]",
+      "holders": "Ryan Xu, improved by Evan Daniel and PingYou Ltd",
+      "result": "T-193",
+      "reported_value": "17.70423279073603036",
+      "verified_value": "17.70423279073603036",
+      "evidence": [
+        "E-evand-639-verify-exact-replay"
+      ],
+      "algebraic": "evand-exact-cur-2026-10-16"
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Joost de Winter's packings of 262 and 295 squares at JoostdeWinter/square-packing 853b92e, issue 1007",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-qag8",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER"
+    }
+  }
+}
