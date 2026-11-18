@@ -1,0 +1,562 @@
+{
+ "program": "r127_controls.py",
+ "file": "source/i1017-cc20a26/n127/n127_witness.yaml.gz",
+ "sha256": "8245da32e92e9780a22a5cf9cd42911674e3be4d816c235fe42743f9a90a085d",
+ "plan_sha256": "dc8d0b1788390460519a4bbecf2d088af39209421ba76adfbb71b4fccc696af9",
+ "tier": "twin",
+ "checker": "real",
+ "original_verdict": "ACCEPT",
+ "least_right_or_top_clearance_W": "3.37280e-16",
+ "controls": 31,
+ "as_stated": 31,
+ "not_as_stated": [],
+ "missing_from_run": [],
+ "unplanned": [
+  "S0",
+  "S1b"
+ ],
+ "verdict": "SOME_CONTROL_NOT_AS_STATED",
+ "results": [
+  {
+   "id": "R1",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "READER_REFUSES",
+   "as_stated": true,
+   "details": {
+    "text_changed": true,
+    "reason": "n stated 127, 126 listed"
+   }
+  },
+  {
+   "id": "R3",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "READER_REFUSES",
+   "as_stated": true,
+   "details": {
+    "text_changed": true,
+    "reason": "ids not distinct"
+   }
+  },
+  {
+   "id": "R4",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "READER_REFUSES",
+   "as_stated": true,
+   "details": {
+    "text_changed": true,
+    "reason": "plain scalar of implicit type tag:yaml.org,2002:float: '11.8'"
+   }
+  },
+  {
+   "id": "R5",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "READER_REFUSES",
+   "as_stated": true,
+   "details": {
+    "text_changed": true,
+    "reason": "square 1 corner 0 x: not a rational: '+36623114587402519/12207031250000000'"
+   }
+  },
+  {
+   "id": "R6",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "READER_REFUSES",
+   "as_stated": true,
+   "details": {
+    "text_changed": true,
+    "reason": "duplicate key 'side'"
+   }
+  },
+  {
+   "id": "R7",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "READER_REFUSES",
+   "as_stated": true,
+   "details": {
+    "text_changed": true,
+    "reason": "coordinates"
+   }
+  },
+  {
+   "id": "R2",
+   "stated": "read; values equal; only the side flagged out of lowest terms",
+   "expected_verdict": "READ",
+   "verdict": "READ",
+   "as_stated": true,
+   "details": {
+    "flags": [
+     "side"
+    ]
+   }
+  },
+  {
+   "id": "G1",
+   "stated": "refused: overlapping exactly (1, n) at margin -1, B area 1; each (k, n) at the original (1, k)",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "G2",
+   "stated": "refused: the only crossing square 1 at the right wall, at R1 - S exactly; its area inside 0; no overlapping pair",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "G3",
+   "stated": "refused: square 1, and only square 1, not a unit square by A and by B",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "S0",
+   "stated": "the side lowered by 1: the side rule",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "delta": "1.00000e+0",
+    "crossings_expected": 24,
+    "crossing_squares": [
+     [
+      40,
+      "right"
+     ],
+     [
+      44,
+      "right"
+     ],
+     [
+      51,
+      "right"
+     ],
+     [
+      62,
+      "right"
+     ],
+     [
+      75,
+      "right"
+     ],
+     [
+      105,
+      "right"
+     ],
+     [
+      106,
+      "right"
+     ],
+     [
+      107,
+      "right"
+     ],
+     [
+      111,
+      "top"
+     ],
+     [
+      112,
+      "top"
+     ],
+     [
+      113,
+      "top"
+     ],
+     [
+      114,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1a",
+   "stated": "the side lowered by 1e-30: the side rule",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "delta": "1.00000e-30",
+    "crossings_expected": 0,
+    "crossing_squares": []
+   }
+  },
+  {
+   "id": "S1b",
+   "stated": "the side lowered by 1/q, q the side's denominator: the side rule",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "delta": "2.00000e-15",
+    "crossings_expected": 14,
+    "crossing_squares": [
+     [
+      51,
+      "right"
+     ],
+     [
+      105,
+      "right"
+     ],
+     [
+      106,
+      "right"
+     ],
+     [
+      107,
+      "right"
+     ],
+     [
+      113,
+      "top"
+     ],
+     [
+      115,
+      "top"
+     ],
+     [
+      119,
+      "top"
+     ],
+     [
+      120,
+      "top"
+     ],
+     [
+      121,
+      "right"
+     ],
+     [
+      121,
+      "top"
+     ],
+     [
+      122,
+      "top"
+     ],
+     [
+      124,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1c",
+   "stated": "the side lowered by W, the least right or top clearance: the side rule; accepted",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "delta": "3.37280e-16",
+    "crossings_expected": 0,
+    "crossing_squares": []
+   }
+  },
+  {
+   "id": "S1d",
+   "stated": "the side lowered by W + 1e-30: the side rule; refused",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "delta": "3.37280e-16",
+    "crossings_expected": 14,
+    "crossing_squares": [
+     [
+      51,
+      "right"
+     ],
+     [
+      105,
+      "right"
+     ],
+     [
+      106,
+      "right"
+     ],
+     [
+      107,
+      "right"
+     ],
+     [
+      113,
+      "top"
+     ],
+     [
+      115,
+      "top"
+     ],
+     [
+      119,
+      "top"
+     ],
+     [
+      120,
+      "top"
+     ],
+     [
+      121,
+      "right"
+     ],
+     [
+      121,
+      "top"
+     ],
+     [
+      122,
+      "top"
+     ],
+     [
+      124,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "S1e",
+   "stated": "the side set to the claim: the side rule with delta = S - C",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "delta": "-8.58000e-13",
+    "crossings_expected": 0,
+    "crossing_squares": []
+   }
+  },
+  {
+   "id": "S1f",
+   "stated": "the side set to the claim less 1e-12: the side rule",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "delta": "1.42000e-13",
+    "crossings_expected": 14,
+    "crossing_squares": [
+     [
+      51,
+      "right"
+     ],
+     [
+      105,
+      "right"
+     ],
+     [
+      106,
+      "right"
+     ],
+     [
+      107,
+      "right"
+     ],
+     [
+      113,
+      "top"
+     ],
+     [
+      115,
+      "top"
+     ],
+     [
+      119,
+      "top"
+     ],
+     [
+      120,
+      "top"
+     ],
+     [
+      121,
+      "right"
+     ],
+     [
+      121,
+      "top"
+     ],
+     [
+      122,
+      "top"
+     ],
+     [
+      124,
+      "top"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "P0p",
+   "stated": "the first touching pair pushed 1e-30 past",
+   "verdict": "NO_SUBJECT",
+   "expected_verdict": "NO_SUBJECT",
+   "as_stated": true,
+   "details": {
+    "touching_pairs": 0
+   }
+  },
+  {
+   "id": "P1c",
+   "stated": "the tightest eligible pair closed along its centre line to exact contact",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "pair": [
+     35,
+     88
+    ],
+    "moved": 88,
+    "margin": "3.84839e-15"
+   }
+  },
+  {
+   "id": "P1p",
+   "stated": "the tightest eligible pair closed along its centre line to 1e-30 past",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "pair": [
+     35,
+     88
+    ],
+    "moved": 88,
+    "margin": "3.84839e-15"
+   }
+  },
+  {
+   "id": "W1c-left",
+   "stated": "square 52, nearest the left wall, moved to it",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "square": 52,
+    "clearance": "0"
+   }
+  },
+  {
+   "id": "W1p-left",
+   "stated": "square 52, nearest the left wall, moved to it and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "square": 52,
+    "clearance": "0"
+   }
+  },
+  {
+   "id": "W1c-bottom",
+   "stated": "square 43, nearest the bottom wall, moved to it",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "square": 43,
+    "clearance": "0"
+   }
+  },
+  {
+   "id": "W1p-bottom",
+   "stated": "square 43, nearest the bottom wall, moved to it and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "square": 43,
+    "clearance": "0"
+   }
+  },
+  {
+   "id": "W1c-right",
+   "stated": "square 51, nearest the right wall, moved to it",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "square": 51,
+    "clearance": "3.37280e-16"
+   }
+  },
+  {
+   "id": "W1p-right",
+   "stated": "square 51, nearest the right wall, moved to it and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "square": 51,
+    "clearance": "3.37280e-16"
+   }
+  },
+  {
+   "id": "W1c-top",
+   "stated": "square 113, nearest the top wall, moved to it",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "square": 113,
+    "clearance": "3.37280e-16"
+   }
+  },
+  {
+   "id": "W1p-top",
+   "stated": "square 113, nearest the top wall, moved to it and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "REFUSE",
+   "as_stated": true,
+   "details": {
+    "square": 113,
+    "clearance": "3.37280e-16"
+   }
+  },
+  {
+   "id": "T0",
+   "stated": "the report's other file: the same packing; n, the side and every square's corner set equal",
+   "expected_verdict": "SAME_PACKING",
+   "verdict": "SAME_PACKING",
+   "as_stated": true,
+   "details": {
+    "listing": {
+     "from 0 same": 127
+    }
+   }
+  },
+  {
+   "id": "T1",
+   "stated": "square 1 moved by (1e-30, 0), against the other file: different, exactly square 1 unequal",
+   "expected_verdict": "DIFFERENT",
+   "verdict": "DIFFERENT",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "C0",
+   "stated": "the closed form recomputes every margin and clearance equal to method A",
+   "expected_verdict": "EQUAL",
+   "verdict": "EQUAL",
+   "as_stated": true,
+   "details": {
+    "mismatches": 0
+   }
+  }
+ ],
+ "cpu_seconds": 6.8
+}

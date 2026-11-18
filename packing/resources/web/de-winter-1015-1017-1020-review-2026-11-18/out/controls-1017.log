@@ -1,0 +1,4 @@
+source/i1017-cc20a26/n127/n127_exact.json [first, real]: EVERY_CONTROL_AS_STATED 49/49 not_as_stated=[] missing=[] cpu=41.5s
+source/i1017-cc20a26/n127/n127_witness.yaml.gz [twin, real]: SOME_CONTROL_NOT_AS_STATED 31/31 not_as_stated=[] missing=[] cpu=6.8s
+source/i1017-cc20a26/n127/n127_exact.json [first, always-accept]: SOME_CONTROL_NOT_AS_STATED 20/46 not_as_stated=['R1', 'R3', 'R4', 'R5', 'R6', 'R7', 'G1', 'G2', 'G3', 'S0', 'S1b', 'S1d'] missing=['C0', 'PALL', 'WALL'] cpu=2.2s
+source/i1017-cc20a26/n127/n127_exact.json [first, always-refuse]: SOME_CONTROL_NOT_AS_STATED 27/46 not_as_stated=['R2', 'S1a', 'S1c', 'S1e', 'P1c', 'W1c-left', 'W1c-bottom', 'W1c-right', 'W1c-top', 'T0', 'G6', 'G7'] missing=['C0', 'PALL', 'WALL'] cpu=2.2s
