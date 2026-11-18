@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: w3r-pass-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T02:13:16.734Z
+updated_at: 2026-11-18T02:46:21.587Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -36,3 +36,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-18T01:19Z w3r-pass-1118: took over from w3-pass-1117r (killed by a worker restart about 01:00Z). Resuming from c82c06859 plus six uncommitted files in /home/user/wt/w3-import-1009; #1013, #1011 and #1014 merged before the restart.
 
 2026-11-18T02:13Z w3r-pass-1118: finished the branch and opened draft PR #1023 (intake, S3), head 91494623f. Committed the six uncommitted files (8dacbfa8a: each generator's check passes; test_house_adoption 92 passed) plus the runs' README in the document map; T-314..T-326 next_rung now reads adopted (5d6c40cbc); merged main #1016 (34dd6e1db, result-requests conflict: kept #1009 and #1012); no-public-change record re-measured against 2980557a2 (a460f62d6); rigidity blocks for 12 counts (a8f1ae9b4); stamp 5d382d34b, re-pin 91494623f. Announcement 262 credit gap -> think-gpni. Next: hosted CI, then the coordinator's senior review.
+
+2026-11-18T02:46Z w3r-pass-1118: hosted CI on #1023 head 91494623f failed in suites a-d, sweeps and overview (about 25 tests and 3 sweep steps): stale derived records (composite figure, family and contact-shade censuses, rigidity blocks, site-urls) and pins the adoption moved (screen findings, unstable list, KNOWN_TILTS at 270, settlement tests on 272, page budgets for results.html, t-007, t-180, poster credits, superseded set, readoptions, 574 sides, l48/l51/l65 adoptions). Fixed in 948fbe135, 03683fed3; merged main #909 at e97b62f77. Re-running the failing modules locally, then compare_paper_renders against a1a8d0aae (site_urls.py and validate.py are now paper inputs), stamp, re-pin, push.
