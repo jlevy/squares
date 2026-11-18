@@ -4090,7 +4090,8 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
         "multi-gadget fault DP",
     ),
-    # Before the pass of 18 November 2026: Evan Daniel’s exact form (T-193), _exact_form(XU, ...).
+    # Before the pass of 18 November 2026: Evan Daniel's exact form (T-193),
+    # _exact_form(XU, ...).
     # T-299 (adopted in the pass of 14 November 2026), Joost de Winter's issue 977: the layout
     # of T-174's packing, Francisco Couzo's as Evan Daniel and PingYou Ltd improved it, with a
     # double step in each staircase taken from his own 132 and 157 pinwheels and the band's
