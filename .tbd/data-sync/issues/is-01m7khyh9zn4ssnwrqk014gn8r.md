@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 22
+version: 23
 delegate: w3r2-pass-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T06:29:11.646Z
+updated_at: 2026-11-18T06:40:05.912Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -52,3 +52,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-18T06:27Z w3r2-pass-1118: final reply on #1009 posted from main 86284ec20 after the verified deploy, https://github.com/jlevy/squares/issues/1009#issuecomment-6970909384 (T-314..T-326 V3/C3, each the house; credits as the case records; the held solves at 156/180/270/299/307 noted per think-frl5; the eight KKT candidates named under think-4z8z), issue closed 06:23:34Z. OWED: the records change recording the reply (kind final; reported ids, rungs, positions; beads think-4z8z) and #1009 state closed; close this bead only after it merges. think-gpni, think-p3g8, think-evxy closed.
 
 2026-11-18T06:35Z w3r2-pass-1118: worktree /home/user/wt/w3-import-1009 removed after confirming its head 5f4943500 is in main 86284ec20 (git worktree remove --force, because of the vendor/kpress submodule; tree clean). Lane done; remaining: the records change for the four replies, then close think-qag8 and think-i38n by check_bead_tree --before-close.
+
+2026-11-18T06:55Z w9-records-1118: records change c6e5814e6 pushed on claude/keen-galileo-9gbz1a: #1009 recorded closed 2026-11-18 with its final reply (T-314..T-326 V3/C3 confirmed current; beads [think-4z8z]); think-4z8z added to #1009's beads. Next: checks, draft PR, review, merge, close via --before-close.
