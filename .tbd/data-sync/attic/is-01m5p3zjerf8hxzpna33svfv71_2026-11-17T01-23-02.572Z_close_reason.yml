@@ -1,0 +1,14 @@
+entity_id: is-01m5p3zjerf8hxzpna33svfv71
+timestamp: 2026-11-17T01:23:02.572Z
+field: close_reason
+lost_value: '"B1-B4 addressed; dispositions
+  https://github.com/jlevy/squares/pull/756#issuecomment-6380267295. Merged as PR #756
+  at 2026-10-24T07:39:21Z (e5c1c64e3), head a9e3fab37, CI green; regularization states
+  57/228/28/7/4/0"'
+winner_source: remote
+loser_source: local
+context:
+  local_version: 6
+  remote_version: 5
+  local_updated_at: 2026-10-24T07:40:42.796Z
+  remote_updated_at: 2026-10-24T08:25:37.000Z

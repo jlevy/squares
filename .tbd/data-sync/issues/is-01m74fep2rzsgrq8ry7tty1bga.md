@@ -3,10 +3,10 @@ type: is
 id: is-01m74fep2rzsgrq8ry7tty1bga
 title: "Import #941, #942: Joost de Winter's 31 lowered upper bounds for n between 413 and 989"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 12
-delegate: bold-ritchie-l90
+version: 18
+delegate: w4r-records-1118
 labels:
   - intake
   - result-import
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:55.639Z
-updated_at: 2026-11-11T19:55:13.479Z
+updated_at: 2026-11-18T03:54:57.913Z
 started_at: 2026-11-11T09:58:23.522Z
+closed_at: 2026-11-18T03:54:57.913Z
+close_reason: "#941 closed on 18 November 2026 with its final comment (issuecomment-6967033493): all fifteen rows verified, 809's by the owner's answer of 17 November (think-gmoj, row in #1016, merged 2980557a2); recorded closed in #1026 (merged 46510a0dc). Multi-square deletions stay on think-kzme; no count of #941 depends on them. check_bead_tree --before-close on main 46510a0dc: ok (w4r-records-1118)."
+resolution: null
+duplicate_of: null
 ---
 #941 (2026-11-10T13:30Z) fifteen lowered upper bounds n 413-910; #942 (14:41Z) sixteen n 632-989; JoostdeWinter. Beyond the atlas's 324, below the 1024 horizon: beyond-horizon rows. Precedent: Yim's 553-700 rows (PR #934). Starts after the Özden lane to stay within usage limits.
 
@@ -58,3 +62,7 @@ Not this lane's: the records tier's bead-tree step fails locally because result-
 2026-11-11 L90 senior review fixes (18:35Z): 087c2252c applies S1 (809 its own queued result n809, blocked on think-kzme), S2 (no "not best known" assertion beyond #941's own 14 counts), S3 (credit de Winter after Couzo, Lavrentev, Tymchishin, Levy; census reconciled), S4 (#946 notes, s172 coverage, 939-946 ledger header name the addendum), N1-N4; f9074dac7 re-pins. Hosted CI green on f9074dac7 (31 success, 28 skipped). Records tier 55/55; targeted tests 647 passed, 1 skipped; papers byte-identical against 591644a9e.
 
 2026-11-11 19:55Z coordinator: JoostdeWinter/square-packing head 501cb8d (20:41:30+01:00) changes only above324/README.md and above324_refined/README.md. It answers the review's 5e-9 question (centres and side scaled by 1 + 2e-10 + 4v, rounded up at the 13th decimal; margins 4.6e-9 to 3.0e-8, per count) and the sixteen vs twenty-two question (a first run of sixteen more than 1e-7 below the best public value, then a second run of six above 1e-6; eighteen more below 1e-6 not listed). No certificate changed. Owed: a read in intake-watch.yaml or a README edition in the two packets, plus a follow-up record noting the answers. No comment on #941/#942 yet.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (b) settled by the owner's answer of 17 November (think-gmoj): 'a row only when a report claims the count with its own certificate file, as at 809 (#941)'. #941's n809 result, queued blocked_on think-kzme in result-requests.yaml, now gets its row. What it owes: record 809's row in report order (retained and replayed in L90's import; confirm both routes cover it), drop think-kzme from n809's blocked_on, record the intake-watch read of de Winter's 501cb8d (owed since 11 November), the final reply on #941 from main, and the close. think-8gvd's title (lane w4) says 'no deletion rows' and does not name 809, so the coordinator should place 809 in w4's records change or a small PR of its own (S1, minutes of CPU). Claim of bold-ritchie-l90 (session gone, silent since 11 November) released: status open, no delegate. Listed for the coordinator.
+
+2026-11-17T23:05Z w4-records-1117r (think-8gvd, applying think-gmoj; claimed on the coordinator's instruction): 809 gets its row in w4's records PR from branch claude/keen-galileo-9gbz1a: the de-winter-issue941-2026-11-10 declaration requests 809 (check-claims --write rebuilt claims.json and beyond-horizon-claims.json), source-coverage.yaml gains the 809 row at assurance verified and marks couzo-issue763-2026-10-23's 809 row superseded, E-de-winter-941-exact-feasibility and E-de-winter-941-review-exact-feasibility cover 809 (the receipts exact-certification-n809.json.xz and sharp-controls-n809.json, and the review's out/check-n0809.json, already decided it on 11 November), the lane test drops HELD, and #941's n809 is queued: false with no blocked_on. The 501cb8d read the audit asks for is already on main: intake-watch.yaml's JoostdeWinter/square-packing entry records it in the 11 November read (lane L104), and the two packets' READMEs carry 'The 501cb8d edition'; nothing to add. #941 is closeable once the PR merges; its final reply follows from main.

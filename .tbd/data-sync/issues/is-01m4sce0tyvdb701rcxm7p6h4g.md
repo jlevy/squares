@@ -5,7 +5,7 @@ title: "T-153 (n = 17 candidate): every remaining validation and confirmation op
 kind: epic
 status: open
 priority: 2
-version: 10
+version: 12
 labels:
   - result-import
 dependencies: []
@@ -19,11 +19,15 @@ child_order_hints:
   - is-01m4sce3gn9z1yw0r256g6ztdh
   - is-01m4sce3xksss28rqt564zbv13
   - is-01m4vfsr016tdffjr2ymtkap0k
+hold: blocked
+hold_until: null
 created_at: 2026-10-13T01:01:05.757Z
-updated_at: 2026-10-31T11:18:48.858Z
+updated_at: 2026-11-17T21:52:44.703Z
 ---
 Owner decisions of 13 October 2026 (session 012JUyoHafZq55vksGxE4vPP): n = 17 is recorded as reported proved on T-153 (Overbeck's candidate proof, #557), T-153 stays at V0/C1 (reviewed), and the remaining replays are held until the owner says otherwise. This epic tracks every option that would raise T-153's rungs or add attributes beside them, with its price, so it can be revisited without re-deriving anything. Rung rules: epistemics.md (Verification, Confirmation, Review Records); the record: T-153's next_rung and unfinished_confirmations in packing/frontier/results.yaml; prices: packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts/recomputation-price.json and receipts-here/trees.json. V3 and C3 move together, and only when every load-bearing part has a complete passing replay; no single option below moves a rung by itself.
 
 ## Notes
 
 2026-10-31 bold-ritchie-l6 (stalled-bead triage of the 31 October intake pass, think-ztcy): Waits on the owner's hold of 13 October on T-153's remaining replays (the ten trees, about 21 CPU-hours here; the capture recomputation, about 1,273 CPU-hours, above the cap); #557 is held for the owner, so no pass posts there, and every option stays priced here.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c) waits on the owner. T-153 reads V0/C1 on main and #557 is held for the owner (result-requests.yaml, held by the owner since 23 October); none of the 17 November decisions touches it. Of the options this epic prices, the ten trees (about 21 CPU-h) are under the cap and the capture recomputation (about 1,273 CPU-h) is far above it; the 17 November decline of three over-cap runs (think-l7j0) shows how the owner treats the latter. Put to the owner through the coordinator: fund the ten trees, which also bears on lifting the n = 17 intake hold (think-x4v4), or keep holding. Held (hold blocked).

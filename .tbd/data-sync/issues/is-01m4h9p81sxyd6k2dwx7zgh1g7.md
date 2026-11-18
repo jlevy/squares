@@ -5,7 +5,7 @@ title: Take Evan Daniel's Lean closed forms for 62 quadratic register sides (7d0
 kind: task
 status: open
 priority: 3
-version: 5
+version: 6
 delegate: null
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-09T21:39:14.104Z
-updated_at: 2026-10-31T20:15:07.509Z
+updated_at: 2026-11-17T21:49:23.885Z
 started_at: 2026-10-31T20:02:09.396Z
 ---
 evand/square-packing 7d047a9 gives Lean closed forms a + b*sqrt(d) for 62 quadratic register sides; ed01e0d says an issue is drafted. Import as evidence for T-120..T-124 when the issue arrives.
@@ -44,3 +44,5 @@ Route that would work: a host that reaches lakecache.blob.core.windows.net with 
 - The quadratic form is no longer the house at 8: 176 (Mishapolk KKT refinements 2026-10-14), 204 (Daniel #845, adopted in #852), 227 and 229 (Daniel regularized lists 2026-10-20), 232 (Couzo #844, adopted in #852), 260 (Daniel #845, adopted in #852), 264 (Mishapolk KKT refinements 2026-10-14) and 299 (Daniel n299 update 2026-10-29). Their verified bound is that smaller packing's exact feasibility; the Lean proof there would bind a packing that is no longer the record.
 - At the other 33 the house is still the Kingbird quadratic form and the verified bound a rational above it. 19 still rest on E-evand-exact-ceilings-2026-10-05-*: 104, 109, 125, 149, 150, 151, 170, 174, 201, 202, 203, 231, 233, 234, 257, 262, 265, 296, 298. 14 now rest on the regularized-bounds exact decisions (E-regularized-bounds-2026-10-12-exact-decision, at 290 E-regularized-bounds-2026-10-13-grid-slack-exact-decision): 53, 101, 122, 124, 145, 147, 148, 173, 197, 200, 226, 290, 291, 294.
 So the ask (#419, 11 October) now bears on 33 counts, not 41. The claim is released back to open.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (d) live work nobody is doing; the 31 October environment stop no longer holds. Probes from this session at 21:46Z: lakecache.blob.core.windows.net (the only Mathlib 0df444a3 cache host) now answers through the proxy (HTTP 404 from the storage service on the container root, where 31 October had the proxy's 403 CONNECT refusal; `lake exe cache get` itself untried), and the disk has 14 GB free against the 9 to 10 GB the toolchain and cache need (4.6 GB on 31 October). Next: the packet at evand/square-packing 6bbae37, `lake exe cache get && lake build` of the modules for the 33 counts bold-ritchie-l10 re-measured (no longer 41), and the axiom receipt; then #419's ask at those counts. About 2.1 process-hours and half a lane-day; the disk is shared with three other lanes, so schedule it alone. Listed for the coordinator; unclaimed.

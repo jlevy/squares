@@ -5,7 +5,7 @@ title: "Review Polkovskyi's 23 October and #846 refinements (stage 4): adopt 130
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: bold-ritchie-l2
 labels:
   - validation
@@ -19,7 +19,7 @@ parent_id: is-01m685njhfc113wb8prbg15npb
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:40.481Z
-updated_at: 2026-11-11T23:58:36.680Z
+updated_at: 2026-11-17T03:07:30.324Z
 started_at: 2026-10-31T08:37:28.980Z
 ---
 Stage 4 review of Mykhailo Polkovskyi's certificates of 23 October (T-252 on the lane's branch: 154, 155, 183, 211, 227, 236, 237, 241 and 271, each about 1.3e-19 to 1.7e-19 below its house) and of #846 (T-258: 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house, and 130, a 2e-14 dilation of Couzo's #843 packing 2.08e-12 below it), and the adoption at each of the fifteen counts where it is the smallest validated side, crediting each packing to its finder and the refinement to Polkovskyi.
@@ -54,3 +54,5 @@ Record on #852: T-253 (the nine of 23 October) and T-260 (issue 846's five, spli
 2026-11-09 coordinator: two new entries now wait on these questions (PR #934, lane L65, bead think-h96r). T-280 covers Kaelan Yim's vitamoon certificates at 299 (e4209f6, 1.18e-12 below T-277) and 303 (546928a, 3.29e-12 below T-278); T-281 covers his envelope-only 130 (c10e094, 1.96e-14 below T-259, T-260's form). Both are held at V0/C1 after the L70 blind review. Measured as shares of the predecessor's uniform-contraction (padding) margin by devtools.contraction_margin and independently by L70: 299 0.3472, 303 0.9674, 130 0.0896 (precedents T-259 0.9193, T-265 9.9679). Under RV-3 option (a) (withdraw padding-sized re-certifications) T-280 and T-281 would be withdrawn alongside T-253 and T-260; T-281 also waits on RV-1. Also waiting: think-5c9z (Daniel regularizer KKT points 3.30-3.53e-12 below T-275..T-279, the same padding class).
 
 2026-11-11 coordinator: once #963 merges, T-295 (Özden, s(237) <= 15.893805580573) is the house at 237, 8.80e-3 below T-253's certificate there. So if T-253 stays recorded after this bead decides, it can be adopted at its other eight counts only.
+
+2026-11-17 coord-intake-1117: OWNER DECIDED (think-b0w5): "Only if it beats the gap-free original (Recommended)" = option D at every count: a re-certification is a new result only if its side is below its predecessor shrunk to first contact (devtools.contraction_margin); else a restatement credited to the original finder. Apply and close.

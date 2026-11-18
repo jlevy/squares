@@ -1,0 +1,16 @@
+entity_id: is-01m5ntqg8kza7vn9e3v650vndr
+timestamp: 2026-11-17T01:23:02.567Z
+field: close_reason
+lost_value: "\"Owner's request of 24 October done: no profile on squaremath.org shows
+  'Review pending' (all 76 profile pages grepped after #770's deploy, edition
+  v0.9.2-d7f02b); T-163 assessed current, T-073/T-080 and T-083/T-084 credited both
+  ('Credit both (Recommended)'), and every pending review has a GitHub tracking issue
+  (#772-#780, #782-#786; check_requests --pending: 48 pending, 0 untracked). T-163's V3
+  route continues in PR #781 (think-494l).\""
+winner_source: remote
+loser_source: local
+context:
+  local_version: 8
+  remote_version: 8
+  local_updated_at: 2026-10-24T07:33:27.659Z
+  remote_updated_at: 2026-10-24T08:26:51.457Z

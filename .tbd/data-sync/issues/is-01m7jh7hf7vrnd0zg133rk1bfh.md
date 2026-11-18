@@ -1,19 +1,21 @@
 ---
 type: is
 id: is-01m7jh7hf7vrnd0zg133rk1bfh
-title: "Import #1005 and #1006: two upper bounds at n = 292 (Özden 17.590104218682 at s292-upper-bound dec930b; de Winter 17.590016442847 at square-packing 796ff3b)"
+title: "Import #1005, #1006 and #1007: s(292) by Özden and by de Winter, s(262) and s(295) by de Winter (T-310 to T-313), adopt and regularize in the 2026-11-17 pass"
 kind: task
 status: in_progress
 priority: 1
-version: 3
-delegate: bold-ritchie-l193
+version: 16
+delegate: w3r2-pass-1118
 labels: []
-dependencies: []
-parent_id: is-01m684vnbc5mmkjn950c3edw3w
+dependencies:
+  - type: blocks
+    target: is-01m7khyh9zn4ssnwrqk014gn8r
+parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:20.740Z
-updated_at: 2026-11-16T16:05:13.218Z
+updated_at: 2026-11-18T04:37:43.581Z
 started_at: 2026-11-16T15:59:56.835Z
 ---
 
@@ -26,3 +28,17 @@ Pins: #1005 kenaznia-doga/s292-upper-bound dec930bdaa5f58077af6c05bc13c0fca0a58a
 Controls plan stated before any program decided either certificate: scratch l193/controls-plan-1005-1006.md SHA-256 ee357f3ccb714bb1f71444fa4cb1a48d19c68e4b3bf47a8b2b889b96f11f1dc9, hashed 16:05:04Z; 6 gross jobs (3 per certificate) and 22 sharp rows (11 per certificate), with the touching-wall branch (expected for #1005) and the touching-pair branch stated in advance. Only sha256sum had read the certificate bytes (both match the issues' / SHA256SUMS digests).
 
 Adoption target: the 2026-11-16 pass; switch to 2026-11-17 if adoption + stamps + re-pin are not pushed and green by about 21:00Z (coordinator, switch point 20:30Z).
+
+2026-11-17 coord-intake-1117: reclaimed. The bold-ritchie coordinator's last renewal was 2026-11-16T16:00Z (epic is-01m684vn); lanes L192/L193 pushed no branch (git ls-remote finds no claude/bold-ritchie-xo28us-l19x) and are silent 9.5 h. Scope widened: #1007 (262, 295) and #1009 (13 counts incl. 292, 262, 295) arrived after; #1005/#1006/#1007 go in one import PR, #1009 in its own after it. Re-parented to think-p02d.
+
+2026-11-17 c-import-1005-1117 (I1), progress: branch claude/intake-2026-11-17-import-1005 from origin/main f9ddfeeef; cherry-picked I2's algebraic-house commit 9d02ee33 unchanged as cda073280 (test_upper_bound_reports 408 passed after). Controls plan stated before any program decided a certificate: scratch i1/controls-plan-1005-1007.md, SHA-256 1f61b6721c29d0750e89572e6d814d2940acc0b63f961d0e80663b51d41d6d28, hashed 01:36:23Z; 12 gross jobs and 44 sharp rows, touching-wall and touching-pair branches stated in advance. Pins: #1005 kenaznia-doga/s292-upper-bound dec930b (head, only commit); #1006 JoostdeWinter/square-packing 796ff3b; #1007 853b92e; watched-repo read through d02237a. Intake commit 0cb649717 pushed (packets, replay, sharp controls all as stated, identity, contraction, L-step, ledger upper-bounds-1005-1007-20261117: 292 #1005 recorded then #1006 recorded; 262 and 295 #1007 recorded). T-ids T-310 (Özden 292), T-311 (de Winter 292), T-312 (262), T-313 (295) being registered. R1's review not read.
+
+2026-11-17T21:55Z coord-intake-1117r: reclaimed from silent c-*-1117 lanes; delegated to w3-pass-1117r (worktree /home/user/wt/w3): map review-1005 (82fb63e88) into #1011, adopt and regularize 262/292/295, merge; then #1009 (import-1009 83232579c, review-1009 6a4f56b3d).
+
+2026-11-17T22:40Z coord-intake-1117r: approved w3's plan change. #1011 maps R1 (#1013), confirms T-310..T-313 and adopts nothing: 262, 292 and 295 are staged in select_houses.PENDING_ADOPTION under think-i38n. #1009 (Polkovskyi) is lower at all three (262 -1.58e-3; 292 -3.6e-9, 72x #1006's contraction margin, so a new result under option D; 295 -1.58e-3), both PRs land 18 Nov, and the prior-state archive holds one state per count per day. If import-1009 stalls, de Winter's T-311/T-312/T-313 must be adopted instead.
+
+2026-11-17T23:40Z coord-intake-1117r: revised plan approved, with no PENDING_ADOPTION staging. 262 has no writer path for the staged-record sentence, and nine test_house_adoption pins would have to change for counts #1009 re-houses hours later. So #1011 = registration only (T-310..T-313, V3/C3 on the replay), with R1 (#1013) merged but unmapped; precedent: L58 merged, L57 mapped later. think-i38n maps R1 and #1014 and adopts the smallest validated packing at each count; if #1009 fails, it adopts de Winter's at 262/292/295.
+
+2026-11-17T23:00Z w3-pass-1117r: #1011 registration-only (coordinator decision): R1 not mapped here; think-i38n maps it with #1014 and adopts. Review A (https://github.com/jlevy/squares/pull/1011#issuecomment-6962939466) addressed in 8fe7a0500 (pushed), dispositions https://github.com/jlevy/squares/pull/1011#issuecomment-6963510453: A1-A9 fixed (A3 measured: T-187 is Xu's line not Cantrell's; credit de Winter after Daniel, Xu; A5: queued stage4-mapping-and-house rows hold #1005-#1007 open), A10 -> think-2hw5, n-146.md stale prose -> think-r4yl. Controls plan scratch file gone (A4). Remaining before merge: #1013 merge, merge main, stamp_landed --apply + release_pin --update on merge day, hosted CI green, merge.
+
+2026-11-18T00:44Z w3-pass-1117r: #1011 merged at 00:30:34Z as 45f0288b5 (merge commit; head d4e3305e7, hosted CI 31 pass; stamps T-310..T-313 2026-11-18, DATA_REVISION 8444308c). First replies on #1005-#1007 rendered from main with check_requests --draft; posting waits for the deploy of 45f0288b5 (Certificate page run 44208401769 queued).

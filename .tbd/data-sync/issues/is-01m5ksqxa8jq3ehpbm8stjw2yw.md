@@ -3,16 +3,20 @@ type: is
 id: is-01m5ksqxa8jq3ehpbm8stjw2yw
 title: "Validate: Hosono's Lean kernel proof of s(59) = 8 (T-235), full build (~862 CPU-h by the source's receipt; HELD)"
 kind: task
-status: open
+status: closed
 priority: 3
-version: 1
+version: 3
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T07:13:56.552Z
-updated_at: 2026-10-23T07:13:56.552Z
+updated_at: 2026-11-18T01:52:04.782Z
+closed_at: 2026-11-18T01:52:04.782Z
+close_reason: "The full Lean build of T-235 (about 862 CPU-hours) was declined by the owner on 17 November 2026 at that price (think-l7j0); recorded in T-235's next_rung and #783 by #1016 (merged 2980557a2). T-235 keeps V0/C0; its C1 review stays on think-xk3f. check_bead_tree --before-close: ok (w4r-records-1118)."
+resolution: canceled
+duplicate_of: null
 ---
 Validation part of think-xk3f (Hiroaki Hosono's Lean kernel proof that s(59) = 8, a formalization of T-066; no issue; GitHub tracking jlevy/squares#536 and #544). Created by c-lean-1023 under the 23 October intake epic, as the lane rules allow; it serves think-xk3f.
 
@@ -26,4 +30,9 @@ Validation part of think-xk3f (Hiroaki Hosono's Lean kernel proof that s(59) = 8
 - Done when: a build and axiom receipt is committed on a branch this bead names and registered on T-235, or the owner dispositions the build.
 - Machine note: not this host for the full run.
 
+blocked_on: none
+
+## Notes
+
+2026-11-17T23:55Z w4-records-1117r (think-8gvd, applying think-l7j0): Budget status: DECLINED by the owner on 17 November 2026 ('Decline all three (Recommended)', think-l7j0) at its price, about 862 CPU-hours by the source's receipt, above the 40 CPU-hour item cap and this host. Recorded in w4's records PR: T-235's next_rung says so (its C3 unfinished confirmation keeps this bead and the price), #783's owner-decision block lifts, and source-coverage's wand125-n59-lean-kernel-2026-10-11 note. T-235 keeps V0/C0. Done when's 'or the owner dispositions the build' is met: close this bead once the PR merges (check_bead_tree --before-close first). The Pts.lean subset was not asked about and is not run.
 blocked_on: none

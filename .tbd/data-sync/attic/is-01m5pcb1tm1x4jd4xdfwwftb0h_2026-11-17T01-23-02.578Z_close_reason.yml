@@ -1,0 +1,14 @@
+entity_id: is-01m5pcb1tm1x4jd4xdfwwftb0h
+timestamp: 2026-11-17T01:23:02.578Z
+field: close_reason
+lost_value: '"16 comments posted 2026-10-24 after deploy 40073374851 (edition
+  v0.9.2-d7f02b): acks on #772-#780, #782-#786; follow-ups on #603 (6381479105) and #294
+  (6381479220). Reply-record patch scratchpad/post770/requests.patch handed to
+  think-9i18 (the stage-7 records PR) to land."'
+winner_source: remote
+loser_source: local
+context:
+  local_version: 4
+  remote_version: 3
+  local_updated_at: 2026-10-24T07:33:26.968Z
+  remote_updated_at: 2026-10-24T08:25:48.622Z

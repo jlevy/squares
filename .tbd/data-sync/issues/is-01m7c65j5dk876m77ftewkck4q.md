@@ -5,14 +5,14 @@ title: Review zmx2's area-density and first-order lemmas (Lemmas 1-3, K, K(d), U
 kind: task
 status: open
 priority: 2
-version: 3
+version: 4
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m684vnbc5mmkjn950c3edw3w
 created_at: 2026-11-14T04:48:34.989Z
-updated_at: 2026-11-14T08:13:53.822Z
+updated_at: 2026-11-17T03:32:41.038Z
 ---
 Finding F1 of the stage 4 review of #973 (docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md, lane L144, think-h10k), held for the owner as a priced option: the record has never reviewed zmx2's area-density lemmas or its first-order lemmas, and T-298's 12,024 general-position roots of Valid11 rest on them.
 
@@ -30,3 +30,5 @@ Finding F1 of the stage 4 review of #973 (docs/project/reviews/review-2026-11-14
 
 2026-11-14 06:55Z coordinator: #973 is answered and closed (T-298 merged in #974). This lemma review (review F1) is held for the owner's decision: one strongest-tier review lane, under 1 CPU-hour.
 blocked_on: the owner's decision
+
+2026-11-17 coord-intake-1117: Held with #973 (owner, 17 Nov, think-k2lh: "Hold all of it"); the coordinator reads that answer as covering this lemma review too, until the owner says otherwise.

@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 156
 kind: task
 status: open
 priority: 2
-version: 16
+version: 17
 delegate: null
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: blocked
 hold_until: null
 created_at: 2026-10-18T08:47:34.680Z
-updated_at: 2026-11-02T01:09:34.544Z
+updated_at: 2026-11-17T21:48:55.005Z
 started_at: 2026-10-18T13:04:20.646Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/666
@@ -129,3 +129,6 @@ blocked_on: think-f2io
 2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Waits on think-llit's walk above 1024, which records #666's eight rows above 1024 (#666's requests entry queues each blocked_on think-llit), and on the owner's D4 (hosting) and D5 (per-row credit beyond the horizon) on think-f2io, which the walk needs. Not done: no row is recorded and no reply from main is posted. Held (`hold: blocked`), and the claim of coord-intake-1021b, an ended session of an earlier lane or coordinator, released (status open, no delegate), so the bead names no one acting on it while it waits; the sweep had read the lapsed claim as stalled every two days since 2 November.
 The line below replaces the earlier `blocked_on: think-f2io`.
 blocked_on: think-llit, think-f2io
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (e) think-f2io is dropped from this wait. The plan this walk follows (docs/project/specs/active/plan-2026-10-24-rows-above-1024.md) says of D5 'No row waits on this answer; the credit is added later', of D3 'Nothing above 1024 depends on it', and of D4 that the record's disposition stands (host data/couzo-715-certificates-v1; the owner publishes it before R1 merges, or chooses Git before R1's first commit), so the owner's open items hold no row. think-llit's hold is lifted today and its R1 listed for the coordinator as runnable work nobody is on. #666's eight rows above 1024 are R1's. The requests entry's `blocked: owner-decision` reason, where it names D4 and D5, is now stale and is flagged to the coordinator for R1's records change. Held on think-llit alone.
+blocked_on: think-llit

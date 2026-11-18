@@ -5,7 +5,7 @@ title: Build Daniel's S12HLower in the Lean kernel with an axiom receipt, or rec
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - validation
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4pff4kjeeg11941am6tb84v
 hold: blocked
 hold_until: null
 created_at: 2026-10-26T05:39:44.184Z
-updated_at: 2026-11-02T01:09:56.087Z
+updated_at: 2026-11-17T21:52:41.589Z
 ---
 The kernel build of Evan Daniel's S12HLower, s12_ge_15680_3951 : (15680/3951 : ℝ) ≤ minSide 12, registered on 26 October 2026 as a reported formalization of T-049 (#535, think-oyd4, w-imports-1026). The source and its closure (9 modules, receipts/s12h-lean-closure.json) are retained in packing/resources/web/evand-exact-and-local-reports-2026-10-07/ at evand/square-packing f58a017; the proof was first committed at 513bb66 (2026-09-28).
 
@@ -30,3 +30,5 @@ The kernel build of Evan Daniel's S12HLower, s12_ge_15680_3951 : (15680/3951 : �
 ## Notes
 
 2026-11-02 bold-ritchie-l21 (think-n20n, intake pass think-3guf, stalled-bead waits): Waits on the owner: build S12HLower on a host with at least 32 GB, or decline (#535 is blocked: owner-decision on main, naming this bead). This bead is that decision's, so no other bead stands for the wait and it carries no blocked_on line; the sweep lists it again after seven days without an update. Held (`hold: blocked`); it had no claim.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (c) waits on the owner, since 26 October: build S12HLower on a host with at least 32 GB (about 8 CPU-h, under the cap, but 30.6 GB resident against this host's 15 GB) or decline (#535 blocked: owner-decision). The 17 November declines (think-l7j0) were of three runs over the CPU cap and do not cover this one. Re-put to the owner through the coordinator. Held.

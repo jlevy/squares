@@ -3,9 +3,9 @@ type: is
 id: is-01m5nrt62q564tpf7pwvr3wkv5
 title: "Address PR #756 review A (A1-A14)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: c-fix-756-1024
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m5ndgfnpr93ktyy1ayc60vtb
 hold: null
 hold_until: null
 created_at: 2026-10-24T01:36:11.351Z
-updated_at: 2026-10-24T03:28:55.080Z
+updated_at: 2026-10-24T07:40:44.879Z
 started_at: 2026-10-24T01:36:18.844Z
+closed_at: 2026-10-24T07:40:44.879Z
+close_reason: "Review A's findings addressed (dispositions 03:28Z). Merged as PR #756 at 2026-10-24T07:39:21Z (e5c1c64e3), head a9e3fab37, CI green; regularization states 57/228/28/7/4/0"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

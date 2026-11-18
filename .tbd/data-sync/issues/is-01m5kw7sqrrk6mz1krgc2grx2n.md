@@ -3,9 +3,9 @@ type: is
 id: is-01m5kw7sqrrk6mz1krgc2grx2n
 title: Replay sqverify_continuous v4 on T-145's and T-157's densities (the second route for the continuous cover)
 kind: task
-status: in_progress
+status: open
 priority: 2
-version: 15
+version: 17
 delegate: null
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T07:57:34.328Z
-updated_at: 2026-11-01T07:03:39.829Z
+updated_at: 2026-11-17T21:52:53.593Z
 started_at: 2026-10-26T11:21:24.071Z
 ---
 The second route for the continuous cover of T-145 and T-157: a complete run here of wand125's sqverify_continuous, reviewed on 23 October 2026 (think-xzob; docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md) with no blocking or major finding. A replay moves the cover's mark to independently re-implemented after reading the producer's code, and no rung.
@@ -53,3 +53,5 @@ Receipts and outputs: packing/resources/web/wand125-sqverify-continuous-v4-2026-
 2026-11-01 bold-ritchie-l10 (branch claude/bold-ritchie-xo28us-l10b, after #865 merged at 68f25b17a): **c6718 at tau 2503/2500: REFUSED, patch verified, no legal refutation** (budget 4,000,000 a root, two threads; 171,796,970 nodes, 6,487.3 CPU-s; judged faithful). 67 roots verified; 11 at the node budget (3-5, 76, 79-85); 8 at resolution (49-52, 74, 75, 77, 78) at legal poses capturing 2503/2500 + 3.4e-13 to 3.0e-12. So the earlier reading "least oblique capture at or just above 1001/1000" was too strong: the witnesses track tau', not the minimum; the minimum lies in [1, 1001/1000 + 2.9e-12]. The 1001/1000 run's witnesses at roots 49-52 are legal poses capturing less than 2503/2500, so that statement is false at oblique poses with the patch holding, yet this program's refusals report the path centre of a box straddling the level set at tau' (SC-6), so the judge counts none. **Conclusion:** no threshold shift near the least capture gives a counted control with this program; #533's queued ask ("this repository's own mass controls") stays queued. **Remaining here:** a density mutant lowering oblique captures well below tau' over a region the search reaches first (both densities), or a witness rule reporting the least capture found (an upstream suggestion to the author, or a first-party judge pass over a refused box); no further threshold run is proposed. #485's final comment posted and the issue closed: https://github.com/jlevy/squares/issues/485#issuecomment-6551827600 (01:34:34Z), after the Pages deploy of 68f25b17a verified (run 41260521565, verify-deployment 124714341387, 6034/6034). #533 stays open on the queued ask; no #533 reply owed by this change beyond its next follow-up.
 
 2026-11-01 bold-ritchie-l10, after review A of #866 (https://github.com/jlevy/squares/pull/866#pullrequestreview-5725482992 is #865's; #866's is pullrequestreview-5726221477). **Correction to the note above:** the witness rule is conditional, read from slab.rs:582-667 (LIFO, lower half pushed first so the upper half is searched first; the first unaccepted box below resolution or at the budget is evaluated once at its path centre). Reached from accepted territory, the box sits on the rim of the region below tau', just above it (every resolution refusal of the 1001/1000 and 2503/2500 runs; 84 of B3348's 86 roots, SC-9); it refutes when that region holds the pose a root searches first (the mass controls; B3348's roots 0 and 1, u and v within 1e-12 of 1 at the top of the t range). Read from the source, borne out by receipts, not proved. The least oblique capture is in [1, 1001/1000 + 1.9e-13] (root 51). **Design for a counted control here:** a density mutant whose oblique captures are below tau' at the pose some root searches first (u, v near 1 at the top of its t range), patch holding, for both densities; or a witness rule reporting the least capture found (slab.rs:611-630), which would be a new build, not the v4 that decided T-145 and T-157, and must be recorded as such.
+
+2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (d) live work nobody is doing. Status was in_progress with no delegate since bold-ritchie-l10 ended on 1 November; set back to open. #533's ask (this repository's own mass controls on both n = 40 replays) stays queued: no threshold shift gives a counted control with the v4 program. Next, per the 1 November design note: a density mutant whose oblique captures fall below tau' at the pose a root searches first (u, v near 1 at the top of its t range), patch holding, for both densities, judged with review/programs/judge_run.py; or a witness rule reporting the least capture found, which is a new build and must be recorded as one. About half to one agent-day and 1.5 CPU-h. Listed for the coordinator.

@@ -5,7 +5,7 @@ title: Plan the News page toggle (notable stories / all changes by PR), the merg
 kind: task
 status: closed
 priority: 2
-version: 14
+version: 15
 spec_path: docs/project/specs/active/plan-2026-10-23-news-pr-feed.md
 delegate: c-news-plan-1023b
 labels: []
@@ -13,10 +13,11 @@ dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 child_order_hints:
   - is-01m5p8babk5xj1t2jtfgv1qy88
+  - is-01m5pd752rfjvvntjhwpyrjfcv
 hold: null
 hold_until: null
 created_at: 2026-10-23T17:18:55.109Z
-updated_at: 2026-10-24T08:26:50.144Z
+updated_at: 2026-11-17T01:22:59.451Z
 started_at: 2026-10-23T17:19:23.812Z
 closed_at: 2026-10-24T08:26:50.144Z
 close_reason: "The plan landed on main as #759 (1aa953fad); its slices are think-3oxz (budget, PR #788) and the phases that follow."

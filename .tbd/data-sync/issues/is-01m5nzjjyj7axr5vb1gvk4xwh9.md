@@ -3,9 +3,9 @@ type: is
 id: is-01m5nzjjyj7axr5vb1gvk4xwh9
 title: "PR #756 follow-up review B with a correctness review of merge commit 474409acf"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 delegate: c-rev-756b-1024
 labels: []
 dependencies: []
@@ -15,8 +15,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-24T03:34:22.415Z
-updated_at: 2026-10-24T04:51:22.200Z
+updated_at: 2026-10-24T07:40:43.800Z
 started_at: 2026-10-24T03:34:32.874Z
+closed_at: 2026-10-24T07:40:43.799Z
+close_reason: "Review B approved. Merged as PR #756 at 2026-10-24T07:39:21Z (e5c1c64e3), head a9e3fab37, CI green; regularization states 57/228/28/7/4/0"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

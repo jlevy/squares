@@ -5,16 +5,18 @@ title: "Decide: does a D6 deletion bound get a row (all 36, or where an issue cl
 kind: task
 status: open
 priority: 2
-version: 12
+version: 16
 labels:
   - decision
   - result-import
 dependencies:
   - type: blocks
+    target: is-01m5pdb4p3a5q65jka3hb9y04v
+  - type: blocks
     target: is-01m5pjxq31vpw03t0emgwnvhfe
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 created_at: 2026-10-23T15:28:13.698Z
-updated_at: 2026-11-11T21:04:04.728Z
+updated_at: 2026-11-17T23:52:55.095Z
 ---
 **The question.** The owner answered D6 on 23 October (think-f2io) by selecting the option labelled "Yes, an earlier report (Recommended)". The rest is the question the coordinator asked, not the owner's words: as coord-intake-1023 relayed it, the question was "a side obtained by deleting a square from a neighbour's certificate (e.g. Couzo's 985 from his 986)", and the selected option's description read "A published deletion bound counts like any stated bound; a later equal or higher side is not recorded". The owner-answers branch (PR #754) applies that: each such bound is recorded in the walk, and a later equal or higher side is not recorded (#732's 985). It gives the bound no row of its own, which is think-f2io's recommendation ("no rows, except where an issue claims the count"), not the owner's word. Three questions follow:
 1. Does a one-square deletion bound get a row of its own, as a stated bound with a certificate has? The selected option's description, the coordinator's words, said it "counts like any stated bound".
@@ -63,3 +65,9 @@ blocked_on: none
 2026-11-11 coordinator (senior review L97 of #952, N3): unlike 743/798/855/985, whose held bounds are index deletions with no file of their own, 809 (de Winter #941, n0809.cert at 71da0d5) is the issue's own certificate file, so it is also a stated bound with a certificate (question 1).
 
 2026-11-11 bold-ritchie-l103 (think-acm0): Joost de Winter answered #941's question on 809 at 20:19:41Z (https://github.com/jlevy/squares/issues/941#issuecomment-6806337206): "It is the deletion bound from 810: the 810 certificate with its last square removed, at the same side. Please handle it under the rule the project adopts for deletion bounds." So n809 stays queued on this bead in result-requests.yaml, and #941 stays open for it. Nothing here decides the question.
+
+2026-11-17 coord-intake-1117: OWNER DECIDED (think-gmoj): "Only where someone claims the count (Recommended)" = option (a): a deletion-made bound gets a row only where a report claims that count with its own certificate file, as at 809; no rows for the others. Apply to the held deletion rows, then close.
+
+2026-11-17T23:40Z w4-records-1117r (think-8gvd, applying think-gmoj): questions 1 and 2 are answered and applied in w4's records PR (branch claude/keen-galileo-9gbz1a): #941's 809, claimed with its own file above324/n0809.cert, gets its row (verified; couzo-issue763's 809 row superseded); every index deletion bound has no row, claimed or not (743, 798, 855, 985 under #715/#732; #763's 683; above 1024 #715's 158 and #763's 1646/1727 via deletion_holds(claimed_by=...)), as beyond_horizon_replay.DELETION_ANSWER and the new CLAIMED_DELETION_ANSWER now say; the six walks' sources.yaml, ledger.yaml and README re-transcribed (no verdict changed), result-import.md, frontier/README.md, the rows-above-1024 plan and the intake-watch read updated. NOT answered by think-gmoj: question 3, whether a bound deleting two or three squares (751, 752, 927, from 4e4c8ce; nothing rests on them) is an earlier report. They stay held on this bead (HISTORY_HELD, deletion_holds' unclaimed multi-square branch), so this bead stays open for that one question, an owner question the coordinator should put. Edge case for the owner too: at 985, #732's own file n985.cert ties the earlier 4e4c8ce index bound, so by the report-order rule neither gets a row (the tie stays with the earlier report, which has no file), and couzo-verified-bounds-2026-10-14's row 2.2e-10 above stays current; unchanged here.
+
+2026-11-17T23:52Z w4-records-1117r (addressing #1016 review A, A7): correction to my note above: the 985 edge case is moot. couzo-verified-bounds-2026-10-14's 985 row was superseded by mishapolk-issue732-f1ceee4 (31.920310216790) and then by couzo-issue763-2026-10-23, whose 31.858728049404 is the current row at 985, 6.16e-2 below the index bound; #732's n985.cert ties the bound, which report order does not record, and nothing at 985 waits. Question 3 (751, 752, 927, and since A4 any claimed bound deleting two or more squares) is the one thing this bead stays open for; the coordinator is putting it to the owner.
