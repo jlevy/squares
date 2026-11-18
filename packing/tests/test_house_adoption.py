@@ -149,8 +149,10 @@ NEXT_CANDIDATES = {
 }
 #: The next candidates a later pass moved after T-174 took them on 17 October 2026: the
 #: adoption of 23 October 2026 took 105 to Mykhailo Polkovskyi's re-solve of T-174's
-#: packing (T-229, issue 719), 5.18e-12 below it.
-NEXT_MOVED_LATER = {105: ("T-229", "2026-10-23")}
+#: packing (T-229, issue 719), 5.18e-12 below it, and the pass of 18 November 2026 took
+#: 272 to Mykhailo Polkovskyi's issue-1009 certificate (T-322), a new arrangement 8.53e-5
+#: below it.
+NEXT_MOVED_LATER = {105: ("T-229", "2026-10-23"), 272: ("T-322", "2026-11-18")}
 
 #: The counts of the 15 October next candidates that the 16 October review's adoption
 #: moved again, each with its house since then and the next candidate it replaced: T-186

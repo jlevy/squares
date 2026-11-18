@@ -52813,7 +52813,7 @@ regularized_drawings:
         max_turn_deg: 1.06929
       view: packing/atlas/known-best/regularized/n-146-regularized.yaml.gz
     - n: 147
-      of: T-302
+      of: T-314
       by: project
       method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -52822,9 +52822,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 39
-        max_move: 0.04882875
-        max_turn_deg: 0.00314012
+        moved: 50
+        max_move: 0.441679
+        max_turn_deg: 0.054352
       view: packing/atlas/known-best/regularized/n-147-regularized.yaml.gz
     - n: 152
       of: T-098
@@ -52885,19 +52885,18 @@ regularized_drawings:
         max_turn_deg: 0.00904477
       view: packing/atlas/known-best/regularized/n-155-regularized.yaml.gz
     - n: 156
-      of: T-287
+      of: T-315
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
-      changes: {straightened: 1}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 14
-        max_move: 0.3012276
-        max_turn_deg: 0.157846
+        moved: 12
+        max_move: 0.3012174
+        max_turn_deg: 0.15843
       view: packing/atlas/known-best/regularized/n-156-regularized.yaml.gz
     - n: 157
       of: T-293
@@ -53016,7 +53015,7 @@ regularized_drawings:
         max_turn_deg: 2.96935
       view: packing/atlas/known-best/regularized/n-179-regularized.yaml.gz
     - n: 180
-      of: T-288
+      of: T-316
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
       modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
@@ -53027,8 +53026,8 @@ regularized_drawings:
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
         moved: 66
-        max_move: 0.03867744
-        max_turn_deg: 0.394053
+        max_move: 0.03868754
+        max_turn_deg: 0.394631
       view: packing/atlas/known-best/regularized/n-180-regularized.yaml.gz
     - n: 181
       of: T-174
@@ -53172,17 +53171,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-209-regularized.yaml.gz
     - n: 210
-      of: T-174
+      of: T-317
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 2.357549e-84
-        max_turn_deg: 0.0
+        moved: 20
+        max_move: 0.3542056
+        max_turn_deg: 0.00472423
       view: packing/atlas/known-best/regularized/n-210-regularized.yaml.gz
     - n: 211
       of: T-188
@@ -53383,7 +53383,7 @@ regularized_drawings:
         max_turn_deg: 0.267445
       view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
     - n: 260
-      of: T-269
+      of: T-318
       by: project
       method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -53392,9 +53392,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 61
-        max_move: 0.4084173
-        max_turn_deg: 0.142995
+        moved: 62
+        max_move: 0.4465108
+        max_turn_deg: 0.019679
       view: packing/atlas/known-best/regularized/n-260-regularized.yaml.gz
     - n: 261
       of: T-174
@@ -53410,6 +53410,21 @@ regularized_drawings:
         max_move: 0.0777529
         max_turn_deg: 4.92095e-10
       view: packing/atlas/known-best/regularized/n-261-regularized.yaml.gz
+    - n: 262
+      of: T-319
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      changes: {straightened: 38, re_angled: 22}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 175
+        max_move: 0.425686
+        max_turn_deg: 0.352331
+      view: packing/atlas/known-best/regularized/n-262-regularized.yaml.gz
     - n: 263
       of: T-174
       by: project
@@ -53467,7 +53482,7 @@ regularized_drawings:
         max_turn_deg: 0.584252
       view: packing/atlas/known-best/regularized/n-267-regularized.yaml.gz
     - n: 268
-      of: T-289
+      of: T-320
       by: project
       method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -53476,9 +53491,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 91
-        max_move: 0.4123473
-        max_turn_deg: 0.214618
+        moved: 102
+        max_move: 0.06679351
+        max_turn_deg: 0.0293364
       view: packing/atlas/known-best/regularized/n-268-regularized.yaml.gz
     - n: 269
       of: T-297
@@ -53495,18 +53510,17 @@ regularized_drawings:
         max_turn_deg: 0.265586
       view: packing/atlas/known-best/regularized/n-269-regularized.yaml.gz
     - n: 270
-      of: T-283
+      of: T-321
       by: project
-      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 6
-        max_move: 0.08019168
-        max_turn_deg: 0.317719
+        moved: 1
+        max_move: 0.003322039
+        max_turn_deg: 0.000662939
       view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
     - n: 271
       of: T-219
@@ -53524,17 +53538,19 @@ regularized_drawings:
         max_turn_deg: 0.143387
       view: packing/atlas/known-best/regularized/n-271-regularized.yaml.gz
     - n: 272
-      of: T-174
+      of: T-322
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea+probe-flat-stall-stop, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["replica patch probe-flat-stall-stop", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 3, re_angled: 1}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 22
-        max_move: 0.3479106
-        max_turn_deg: 0.0
+        moved: 17
+        max_move: 0.3333264
+        max_turn_deg: 0.235977
       view: packing/atlas/known-best/regularized/n-272-regularized.yaml.gz
     - n: 273
       of: T-174
@@ -53550,18 +53566,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-273-regularized.yaml.gz
     - n: 292
-      of: T-146
+      of: T-323
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 59
-        max_move: 0.1642337
-        max_turn_deg: 0.0
+        moved: 53
+        max_move: 0.1119674
+        max_turn_deg: 0.101515
       view: packing/atlas/known-best/regularized/n-292-regularized.yaml.gz
     - n: 293
       of: T-271
@@ -53576,6 +53592,20 @@ regularized_drawings:
         max_move: 9.768757e-06
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-293-regularized.yaml.gz
+    - n: 295
+      of: T-324
+      by: project
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 196
+        max_move: 0.4280067
+        max_turn_deg: 0.334741
+      view: packing/atlas/known-best/regularized/n-295-regularized.yaml.gz
     - n: 297
       of: T-299
       by: project
@@ -53591,7 +53621,7 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-297-regularized.yaml.gz
     - n: 299
-      of: T-277
+      of: T-325
       by: project
       method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -53600,9 +53630,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 61
-        max_move: 0.3063997
-        max_turn_deg: 0.759643
+        moved: 70
+        max_move: 0.3063243
+        max_turn_deg: 0.33486
       view: packing/atlas/known-best/regularized/n-299-regularized.yaml.gz
     - n: 301
       of: T-098
@@ -53688,7 +53718,7 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-306-regularized.yaml.gz
     - n: 307
-      of: T-279
+      of: T-326
       by: project
       method: regularize_axis_components/2
       side: same
@@ -53697,8 +53727,8 @@ regularized_drawings:
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
         moved: 15
-        max_move: 0.08989261
-        max_turn_deg: 3.435e-13
+        max_move: 0.08989271
+        max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-307-regularized.yaml.gz
     - n: 308
       of: T-221
