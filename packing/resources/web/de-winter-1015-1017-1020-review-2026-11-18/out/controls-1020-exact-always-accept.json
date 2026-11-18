@@ -1,0 +1,493 @@
+{
+ "program": "r127_controls.py",
+ "file": "source/i1020-a1ba501/n127/n127_exact.json",
+ "sha256": "3a66f38276be9e986fc46fa1f859de54754ec77fc4694b3442de58381056a835",
+ "plan_sha256": "dc8d0b1788390460519a4bbecf2d088af39209421ba76adfbb71b4fccc696af9",
+ "tier": "first",
+ "checker": "always-accept",
+ "original_verdict": "ACCEPT",
+ "least_right_or_top_clearance_W": "2.00000e-60",
+ "controls": 43,
+ "as_stated": 17,
+ "not_as_stated": [
+  "R1",
+  "R3",
+  "R4",
+  "R5",
+  "R6",
+  "R7",
+  "G1",
+  "G2",
+  "G3",
+  "S0",
+  "S1a",
+  "S1d",
+  "S1f",
+  "P1p",
+  "W1p-left",
+  "W1-bottom",
+  "W1-right",
+  "W1-top",
+  "T1",
+  "G9",
+  "S2p",
+  "W2p-left",
+  "W2p-bottom",
+  "W2p-right",
+  "W2p-top",
+  "K1"
+ ],
+ "missing_from_run": [
+  "C0",
+  "PALL",
+  "WALL"
+ ],
+ "unplanned": [
+  "W1"
+ ],
+ "verdict": "SOME_CONTROL_NOT_AS_STATED",
+ "results": [
+  {
+   "id": "R1",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "text_changed": true,
+    "reason": null
+   }
+  },
+  {
+   "id": "R3",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "text_changed": true,
+    "reason": null
+   }
+  },
+  {
+   "id": "R4",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "text_changed": true,
+    "reason": null
+   }
+  },
+  {
+   "id": "R5",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "text_changed": true,
+    "reason": null
+   }
+  },
+  {
+   "id": "R6",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "text_changed": true,
+    "reason": null
+   }
+  },
+  {
+   "id": "R7",
+   "stated": "the reader refuses",
+   "expected_verdict": "READER_REFUSES",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "text_changed": true,
+    "reason": null
+   }
+  },
+  {
+   "id": "R2",
+   "stated": "read; values equal; only the side flagged",
+   "expected_verdict": "READ",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "G1",
+   "stated": "refused: overlapping exactly (1, n) at margin -1, B area 1; each (k, n) at the original (1, k)",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {}
+  },
+  {
+   "id": "G2",
+   "stated": "refused: the only crossing square 1 at the right wall, at R1 - S exactly; its area inside 0; no overlapping pair",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {}
+  },
+  {
+   "id": "G3",
+   "stated": "refused: square 1, and only square 1, not a unit square by A and by B",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {}
+  },
+  {
+   "id": "S0",
+   "stated": "the side lowered by 1: the side rule",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "delta": "1.00000e+0",
+    "crossings_expected": 24
+   }
+  },
+  {
+   "id": "S1a",
+   "stated": "the side lowered by 1e-30: the side rule",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "delta": "1.00000e-30",
+    "crossings_expected": 15
+   }
+  },
+  {
+   "id": "S1b",
+   "stated": "the side lowered by 1/q, q the side's denominator: the side rule",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "delta": "2.00000e-60",
+    "crossings_expected": 0
+   }
+  },
+  {
+   "id": "S1c",
+   "stated": "the side lowered by W, the least right or top clearance: the side rule; accepted",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "delta": "2.00000e-60",
+    "crossings_expected": 0
+   }
+  },
+  {
+   "id": "S1d",
+   "stated": "the side lowered by W + 1e-30: the side rule; refused",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "delta": "1.00000e-30",
+    "crossings_expected": 15
+   }
+  },
+  {
+   "id": "S1e",
+   "stated": "the side set to the claim: the side rule with delta = S - C",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "delta": "-3.77606e-14",
+    "crossings_expected": 0
+   }
+  },
+  {
+   "id": "S1f",
+   "stated": "the side set to the claim less 1e-12: the side rule",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "delta": "9.62239e-13",
+    "crossings_expected": 15
+   }
+  },
+  {
+   "id": "P0p",
+   "stated": "the first touching pair pushed 1e-30 past",
+   "verdict": "NO_SUBJECT",
+   "expected_verdict": "NO_SUBJECT",
+   "as_stated": true,
+   "details": {
+    "touching_pairs": 0
+   }
+  },
+  {
+   "id": "P1c",
+   "stated": "the tightest eligible pair closed along its centre line to exact contact",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "pair": [
+     42,
+     118
+    ],
+    "moved": 118,
+    "margin": "1.21596e-7"
+   }
+  },
+  {
+   "id": "P1p",
+   "stated": "the tightest eligible pair closed along its centre line to 1e-30 past",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "pair": [
+     42,
+     118
+    ],
+    "moved": 118,
+    "margin": "1.21596e-7"
+   }
+  },
+  {
+   "id": "W1c-left",
+   "stated": "square 91, nearest the left wall, moved to it",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "square": 91,
+    "clearance": "3.22495e-8"
+   }
+  },
+  {
+   "id": "W1p-left",
+   "stated": "square 91, nearest the left wall, moved to it and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "square": 91,
+    "clearance": "3.22495e-8"
+   }
+  },
+  {
+   "id": "W1-bottom",
+   "stated": "no eligible square",
+   "verdict": "NO_SUBJECT",
+   "expected_verdict": "NO_SUBJECT",
+   "as_stated": false,
+   "details": {}
+  },
+  {
+   "id": "W1-right",
+   "stated": "no eligible square",
+   "verdict": "NO_SUBJECT",
+   "expected_verdict": "NO_SUBJECT",
+   "as_stated": false,
+   "details": {}
+  },
+  {
+   "id": "W1-top",
+   "stated": "no eligible square",
+   "verdict": "NO_SUBJECT",
+   "expected_verdict": "NO_SUBJECT",
+   "as_stated": false,
+   "details": {}
+  },
+  {
+   "id": "T0",
+   "stated": "the report's other file: the same packing",
+   "expected_verdict": "SAME_PACKING",
+   "verdict": "SAME_PACKING",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "T1",
+   "stated": "square 1 moved by (1e-30, 0), against the other file: different",
+   "expected_verdict": "DIFFERENT",
+   "verdict": "SAME_PACKING",
+   "as_stated": false,
+   "details": {}
+  },
+  {
+   "id": "G6",
+   "stated": "transposed: the original's verdict; margins identical; clearances (L,B,R,T) -> (B,L,T,R)",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "G7",
+   "stated": "a quarter turn about the box centre: the original's verdict; margins identical; (L,B,R,T) -> (T,L,B,R)",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "G8",
+   "stated": "mirrored x -> S - x: the original's verdict; margins identical; (L,B,R,T) -> (R,B,L,T)",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {}
+  },
+  {
+   "id": "G9",
+   "stated": "every centre times 99/100: margins equal the closed form's f M - T; overlapping exactly the pairs with T/M > 99/100",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "overlapping_expected": 306
+   }
+  },
+  {
+   "id": "S2c",
+   "stated": "moved to the corner, the side set to the larger extent: ACCEPT; margins identical",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "moved": [
+     "2.00000e-60",
+     "2.00000e-60"
+    ],
+    "extent": "1.18007e+1"
+   }
+  },
+  {
+   "id": "S2p",
+   "stated": "moved to the corner, the side set to the larger extent less 1e-30: REFUSE; margins identical",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "moved": [
+     "2.00000e-60",
+     "2.00000e-60"
+    ],
+    "extent": "1.18007e+1"
+   }
+  },
+  {
+   "id": "W2c-left",
+   "stated": "the whole packing translated to the left wall",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "move": "2.00000e-60"
+   }
+  },
+  {
+   "id": "W2p-left",
+   "stated": "the whole packing translated to the left wall and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "move": "1.00000e-30"
+   }
+  },
+  {
+   "id": "W2c-bottom",
+   "stated": "the whole packing translated to the bottom wall",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "move": "2.00000e-60"
+   }
+  },
+  {
+   "id": "W2p-bottom",
+   "stated": "the whole packing translated to the bottom wall and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "move": "1.00000e-30"
+   }
+  },
+  {
+   "id": "W2c-right",
+   "stated": "the whole packing translated to the right wall",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "move": "2.00000e-60"
+   }
+  },
+  {
+   "id": "W2p-right",
+   "stated": "the whole packing translated to the right wall and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "move": "1.00000e-30"
+   }
+  },
+  {
+   "id": "W2c-top",
+   "stated": "the whole packing translated to the top wall",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "move": "9.86000e-58"
+   }
+  },
+  {
+   "id": "W2p-top",
+   "stated": "the whole packing translated to the top wall and 1e-30 further",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "move": "1.00000e-30"
+   }
+  },
+  {
+   "id": "K0",
+   "stated": "contracted by lambda* and boxed at L': accepted, touching exactly the binding pairs",
+   "expected_verdict": "ACCEPT",
+   "verdict": "ACCEPT",
+   "as_stated": true,
+   "details": {
+    "one_less_lambda": "1.64827e-59",
+    "L_prime": "1.18007e+1"
+   }
+  },
+  {
+   "id": "K1",
+   "stated": "contracted by lambda* - 1e-30 in the box of side L': refused, overlapping exactly the pairs with T/M > lambda* - 1e-30",
+   "expected_verdict": "REFUSE",
+   "verdict": "ACCEPT",
+   "as_stated": false,
+   "details": {
+    "one_less_lambda": "1.64827e-59",
+    "L_prime": "1.18007e+1"
+   }
+  }
+ ],
+ "cpu_seconds": 7.9
+}
