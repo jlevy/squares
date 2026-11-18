@@ -1,0 +1,777 @@
+{
+ "program": "rv1009_controls.py",
+ "lane": "c-review-1009-1117",
+ "n": 268,
+ "original_verdict": "ACCEPT",
+ "least_step": "1/10^40",
+ "controls_planned": 37,
+ "controls_run": 37,
+ "controls_as_stated": 37,
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "controls": [
+  {
+   "id": "C0",
+   "stated": "equal to method A's margin at every pair and to its clearance at every square and wall",
+   "outcome": "as stated",
+   "pairs": 35778,
+   "pair_mismatches": 0,
+   "square_mismatches": 0
+  },
+  {
+   "id": "R1",
+   "stated": "the reader of the changed form refuses: n stated, n - 1 listed; the other form is read",
+   "outcome": "as stated",
+   "form_p": "cert: n is 268 and 267 squares are listed",
+   "form_c": "witness: n is 268 and 267 squares are listed"
+  },
+  {
+   "id": "R2",
+   "stated": "read; the side's value and every clearance equal to the original's, every row and corner the original's; accepted; only the side flagged non-canonical, in each form",
+   "outcome": "as stated",
+   "verdict": "PARTIAL",
+   "side_text": "4217967033775544568072856627354/25000000..."
+  },
+  {
+   "id": "R3",
+   "stated": "form C: the reader refuses, ids out of order. Form P: read, and refused because the twin relation fails at exactly squares 1 and 2 and for no other reason; the rows read back are the original's with rows 1 and 2 exchanged",
+   "outcome": "as stated",
+   "form_c": "witness: square 1 has id 'square-2', out of order",
+   "form_p_twin_fails": [
+    1,
+    2
+   ],
+   "form_p_problems": [
+    "2 squares differ between the files"
+   ]
+  },
+  {
+   "id": "R4",
+   "stated": "refused by the reader each time: not a scalar p or p/q in form P and in the quoted form C, a YAML float in the unquoted form C",
+   "outcome": "as stated",
+   "form_p": "cert side: not a scalar p or p/q: '16.8718681351021782722914265094160000000'",
+   "form_c_quoted": "witness side: not a scalar p or p/q: '16.8718681351021782722914265094160000000'",
+   "form_c_float": "doc.witness.side: scalar of kind float"
+  },
+  {
+   "id": "R5",
+   "stated": "the reader of the changed form refuses, naming that coordinate as not a scalar; the other form is read",
+   "outcome": "as stated",
+   "form_p": "cert square 1 x: not a scalar p or p/q: '+5000000000000000000000000001/1000000000'",
+   "form_c": "witness square 1 corner 1 x: not a scalar p or p/q: '+1/10000000000000000000000000000'"
+  },
+  {
+   "id": "G1",
+   "stated": "refused; the margins of the n - 1 pairs with square n exactly predicted: (1, n) is -1 and each (k, n) is the original (1, k); the overlapping pairs among them exactly (1, n) and any the prediction makes negative; method B's overlap area exactly 1 when (1, n) is the only one; square n's clearances are square 1's; every other square unchanged",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "overlapping": [
+    [
+     1,
+     268
+    ]
+   ],
+   "overlap_area": "1"
+  },
+  {
+   "id": "G2",
+   "stated": "refused; square 1's clearances exactly (L + S, B, R - S, T), so it crosses the right wall; its area inside the box is 0 exactly when L >= 0; no pair with square 1 overlaps; every other square unchanged",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "crossing": [
+    [
+     1,
+     "right"
+    ]
+   ],
+   "square_1_right_clearance": "-10000000000000000000000000001/10000000000000000000000000000",
+   "square_1_area_inside": "0"
+  },
+  {
+   "id": "G3",
+   "stated": "refused: square 1, and only square 1, is not a unit square by method B; no pose can be taken from its corners; the twin relation fails at square 1 only; method A's poses, from form P, are all unit",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "not_unit_by_b": [
+    1
+   ],
+   "twin_fails": [
+    1
+   ],
+   "pose_from_corners_refused": true
+  },
+  {
+   "id": "G4",
+   "stated": "the original's verdict, with method A on the poses taken from the changed form C and method B on its corners: every margin and clearance identical to the original's; method B's classes identical; every sense exchanged; the twin relation holds",
+   "outcome": "as stated",
+   "verdict": "ACCEPT",
+   "senses_ccw": 0,
+   "senses_cw": 268
+  },
+  {
+   "id": "G5",
+   "stated": "as G4, with every sense unchanged",
+   "outcome": "as stated",
+   "verdict": "ACCEPT",
+   "senses_ccw": 268,
+   "senses_cw": 0
+  },
+  {
+   "id": "G6",
+   "stated": "the original's verdict; every margin identical; every square's clearances (L, B, R, T) become (B, L, T, R)",
+   "outcome": "as stated",
+   "verdict": "ACCEPT"
+  },
+  {
+   "id": "G7",
+   "stated": "the original's verdict; every margin identical; every square's clearances (L, B, R, T) become (T, L, B, R)",
+   "outcome": "as stated",
+   "verdict": "ACCEPT"
+  },
+  {
+   "id": "G8",
+   "stated": "the original's verdict; every margin identical; every square's clearances (L, B, R, T) become (R, B, L, T)",
+   "outcome": "as stated",
+   "verdict": "ACCEPT"
+  },
+  {
+   "id": "S1a",
+   "stated": "the side rule: every right and top clearance lowered by exactly the amount, every left and bottom clearance unchanged, every row and corner the original's; the contacts exactly the square-wall pairs whose new clearance is 0 and the crossings exactly those whose new clearance is negative; accepted exactly when nothing crosses",
+   "outcome": "as stated",
+   "delta": "1.000000e-40",
+   "verdict": "PARTIAL",
+   "contacts": 0,
+   "contacts_first": [],
+   "crossings": 0,
+   "crossings_first": []
+  },
+  {
+   "id": "S1b",
+   "stated": "the side rule",
+   "outcome": "as stated",
+   "step": "1/125000000000000000000000000000",
+   "delta": "8.000000e-30",
+   "verdict": "PARTIAL",
+   "contacts": 0,
+   "contacts_first": [],
+   "crossings": 0,
+   "crossings_first": []
+  },
+  {
+   "id": "S1c",
+   "stated": "the side rule; accepted, with contacts at the right or top exactly at the squares that attain W (the touching-wall branch: the box at the packing's upper extent)",
+   "outcome": "as stated",
+   "least_right_or_top_clearance": "2256300273411969992170690762969134279040076071530127811065166195184400012857208458334748483386213365567/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "attained_at": [
+    [
+     5,
+     "top"
+    ],
+    [
+     6,
+     "top"
+    ],
+    [
+     7,
+     "top"
+    ],
+    [
+     8,
+     "top"
+    ],
+    [
+     9,
+     "top"
+    ],
+    [
+     10,
+     "top"
+    ],
+    [
+     11,
+     "top"
+    ],
+    [
+     12,
+     "top"
+    ]
+   ],
+   "delta": "1.000055e-28",
+   "verdict": "PARTIAL",
+   "contacts": 15,
+   "contacts_first": [
+    [
+     5,
+     "top"
+    ],
+    [
+     6,
+     "top"
+    ],
+    [
+     7,
+     "top"
+    ],
+    [
+     8,
+     "top"
+    ],
+    [
+     9,
+     "top"
+    ],
+    [
+     10,
+     "top"
+    ],
+    [
+     11,
+     "top"
+    ],
+    [
+     12,
+     "top"
+    ]
+   ],
+   "crossings": 0,
+   "crossings_first": []
+  },
+  {
+   "id": "S1d",
+   "stated": "the side rule; refused, the crossings including every square that attains W",
+   "outcome": "as stated",
+   "delta": "1.000055e-28",
+   "verdict": "REFUSE",
+   "contacts": 0,
+   "contacts_first": [],
+   "crossings": 15,
+   "crossings_first": [
+    [
+     5,
+     "top"
+    ],
+    [
+     6,
+     "top"
+    ],
+    [
+     7,
+     "top"
+    ],
+    [
+     8,
+     "top"
+    ],
+    [
+     9,
+     "top"
+    ],
+    [
+     10,
+     "top"
+    ],
+    [
+     11,
+     "top"
+    ],
+    [
+     12,
+     "top"
+    ]
+   ]
+  },
+  {
+   "id": "S1e",
+   "stated": "the side rule with the amount S less the claim (negative when the claim is above S)",
+   "outcome": "as stated",
+   "new_side": "the claim",
+   "delta": "-8.217277e-13",
+   "verdict": "PARTIAL",
+   "contacts": 0,
+   "contacts_first": [],
+   "crossings": 0,
+   "crossings_first": []
+  },
+  {
+   "id": "S1f",
+   "stated": "the side rule with the amount S less the claim plus 1e-12",
+   "outcome": "as stated",
+   "new_side": "the claim less 1e-12",
+   "delta": "1.782723e-13",
+   "verdict": "REFUSE",
+   "contacts": 0,
+   "contacts_first": [],
+   "crossings": 15,
+   "crossings_first": [
+    [
+     5,
+     "top"
+    ],
+    [
+     6,
+     "top"
+    ],
+    [
+     7,
+     "top"
+    ],
+    [
+     8,
+     "top"
+    ],
+    [
+     9,
+     "top"
+    ],
+    [
+     10,
+     "top"
+    ],
+    [
+     11,
+     "top"
+    ],
+    [
+     12,
+     "top"
+    ]
+   ]
+  },
+  {
+   "id": "E1c",
+   "stated": "the extent rule: every clearance exactly predicted, every margin identical; accepted; the left wall touched exactly by the squares that attain L*, the bottom by those that attain B*, and the right (when the width is the larger) or the top (when the height is) by those that attain R* or T*; nothing crosses. So X is the packing's extent and S - X its slack at the walls",
+   "outcome": "as stated",
+   "verdict": "ACCEPT",
+   "width": "380659217616325643899443198776659852201415026363930871605310220479085049067796817055291489069615599987142791541665251516613786634433/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "height": "380659217616325643899443198776659852201415026363930871605310220479085049067796817055291489069615599987142791541665251516613786634433/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "extent_less_side": "-2.000055e-28",
+   "side_less_extent": "4512477328425565978675801739522112329769868115844408923798151975184400012857208458334748483386213365567/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "contacts": [
+    [
+     1,
+     "left"
+    ],
+    [
+     5,
+     "top"
+    ],
+    [
+     6,
+     "top"
+    ],
+    [
+     7,
+     "top"
+    ],
+    [
+     8,
+     "top"
+    ],
+    [
+     9,
+     "top"
+    ],
+    [
+     10,
+     "top"
+    ],
+    [
+     11,
+     "top"
+    ],
+    [
+     12,
+     "top"
+    ],
+    [
+     14,
+     "left"
+    ],
+    [
+     26,
+     "left"
+    ],
+    [
+     37,
+     "left"
+    ]
+   ],
+   "contacts_count": 28,
+   "crossings": []
+  },
+  {
+   "id": "E1p",
+   "stated": "the extent rule; refused; the crossings exactly the squares within e of the wall or walls of the larger extent",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "width": "380659217616325643899443198776659852201415026363930871605310220479085049067796817055291489069615599987142791541665251516613786634433/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "height": "380659217616325643899443198776659852201415026363930871605310220479085049067796817055291489069615599987142791541665251516613786634433/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "extent_less_side": "-2.000055e-28",
+   "side_less_extent": "4512477328425565978675801739522112329769868115844408923798151975184400012857208458334748483386213365567/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "contacts": [
+    [
+     1,
+     "left"
+    ],
+    [
+     14,
+     "left"
+    ],
+    [
+     26,
+     "left"
+    ],
+    [
+     37,
+     "left"
+    ],
+    [
+     46,
+     "left"
+    ],
+    [
+     54,
+     "left"
+    ],
+    [
+     61,
+     "left"
+    ],
+    [
+     93,
+     "bottom"
+    ],
+    [
+     94,
+     "bottom"
+    ],
+    [
+     95,
+     "bottom"
+    ],
+    [
+     96,
+     "bottom"
+    ],
+    [
+     97,
+     "bottom"
+    ]
+   ],
+   "contacts_count": 13,
+   "crossings": [
+    [
+     5,
+     "top"
+    ],
+    [
+     6,
+     "top"
+    ],
+    [
+     7,
+     "top"
+    ],
+    [
+     8,
+     "top"
+    ],
+    [
+     9,
+     "top"
+    ],
+    [
+     10,
+     "top"
+    ],
+    [
+     11,
+     "top"
+    ],
+    [
+     12,
+     "top"
+    ],
+    [
+     173,
+     "right"
+    ],
+    [
+     181,
+     "right"
+    ],
+    [
+     187,
+     "right"
+    ],
+    [
+     193,
+     "right"
+    ]
+   ]
+  },
+  {
+   "id": "K1c",
+   "stated": "accepted; the touching pairs exactly those whose own factor equals g*, the wall contacts exactly the square-wall pairs whose factor equals g*, at least one of either; no pair overlaps and nothing crosses",
+   "outcome": "as stated",
+   "verdict": "ACCEPT",
+   "one_less_factor": "1/5000000000000000000000000001",
+   "one_less_factor_sci": "2.000000e-28",
+   "side_margin": "2108983516887772284036428313677/625000000000000000000000000125000000000000000000000000000",
+   "side_margin_sci": "3.374374e-27",
+   "pairs_touching": [],
+   "pairs_touching_count": 0,
+   "pairs_overlapping": [],
+   "pairs_overlapping_count": 0,
+   "walls_touching": [
+    [
+     1,
+     "left"
+    ],
+    [
+     14,
+     "left"
+    ],
+    [
+     26,
+     "left"
+    ],
+    [
+     37,
+     "left"
+    ],
+    [
+     46,
+     "left"
+    ],
+    [
+     54,
+     "left"
+    ],
+    [
+     61,
+     "left"
+    ],
+    [
+     93,
+     "bottom"
+    ]
+   ],
+   "walls_crossing": []
+  },
+  {
+   "id": "K1p",
+   "stated": "refused; the overlapping pairs exactly those whose own factor exceeds g*(1 - e), the crossings exactly the square-wall pairs whose factor does",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "one_less_factor": "2.000000e-28",
+   "one_less_factor_sci": "2.000000e-28",
+   "side_margin": "3.374374e-27",
+   "side_margin_sci": "3.374374e-27",
+   "pairs_touching": [],
+   "pairs_touching_count": 0,
+   "pairs_overlapping": [],
+   "pairs_overlapping_count": 0,
+   "walls_touching": [],
+   "walls_crossing": [
+    [
+     1,
+     "left"
+    ],
+    [
+     14,
+     "left"
+    ],
+    [
+     26,
+     "left"
+    ],
+    [
+     37,
+     "left"
+    ],
+    [
+     46,
+     "left"
+    ],
+    [
+     54,
+     "left"
+    ],
+    [
+     61,
+     "left"
+    ],
+    [
+     93,
+     "bottom"
+    ]
+   ]
+  },
+  {
+   "id": "P1c",
+   "stated": "the pair's margin exactly 0, touching by both methods; the moved square's other margins and its clearances as the closed form gives them; every other square unchanged. With an eligible pair: accepted, and the only contact among the moved square's pairs is that pair",
+   "outcome": "as stated",
+   "verdict": "PARTIAL",
+   "pair": [
+    228,
+    264
+   ],
+   "square_moved": 264,
+   "eligible": true,
+   "candidates_tried": 1,
+   "original_margin": "20361674380984728680467389008520489607325080532643985546173781829527890732853643",
+   "original_margin_sci": "2.000033e-28",
+   "new_margin": "0",
+   "overlapping": [],
+   "touching": [
+    [
+     228,
+     264
+    ]
+   ]
+  },
+  {
+   "id": "P1p",
+   "stated": "the pair's margin exactly -e; refused; every other square unchanged. With an eligible pair: the only overlap among the moved square's pairs is that pair",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "pair": [
+    228,
+    264
+   ],
+   "square_moved": 264,
+   "eligible": true,
+   "candidates_tried": 1,
+   "original_margin": "20361674380984728680467389008520489607325080532643985546173781829527890732853643",
+   "original_margin_sci": "2.000033e-28",
+   "new_margin": "-1/10000000000000000000000000000000000000000",
+   "overlapping": [
+    [
+     228,
+     264
+    ]
+   ],
+   "touching": []
+  },
+  {
+   "id": "W1c-left",
+   "stated": "that square's clearance at the wall exactly 0 and at the opposite wall raised by the move, its other clearances and every other square unchanged, none of its pairs touching or overlapping; accepted; the only new wall contact is that square's. Fallback: every clearance exactly predicted, every margin identical, contact exactly at the squares of least clearance",
+   "outcome": "as stated",
+   "verdict": "PARTIAL",
+   "square": 1,
+   "original_clearance": "1/10000000000000000000000000000",
+   "new_clearance": "0",
+   "fallback": false
+  },
+  {
+   "id": "W1p-left",
+   "stated": "refused; that square's clearance exactly -e; the only new crossing is that square at that wall, and its area inside the box is below 1. Fallback: the crossings exactly the squares of least clearance",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "square": 1,
+   "original_clearance": "1/10000000000000000000000000000",
+   "new_clearance": "-1/10000000000000000000000000000000000000000",
+   "fallback": false
+  },
+  {
+   "id": "W1c-bottom",
+   "stated": "as W1c-left",
+   "outcome": "as stated",
+   "verdict": "PARTIAL",
+   "square": 93,
+   "original_clearance": "1/10000000000000000000000000000",
+   "new_clearance": "0",
+   "fallback": false
+  },
+  {
+   "id": "W1p-bottom",
+   "stated": "as W1p-left",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "square": 93,
+   "original_clearance": "1/10000000000000000000000000000",
+   "new_clearance": "-1/10000000000000000000000000000000000000000",
+   "fallback": false
+  },
+  {
+   "id": "W1c-right",
+   "stated": "as W1c-left",
+   "outcome": "as stated",
+   "verdict": "PARTIAL",
+   "square": 173,
+   "original_clearance": "2256300273411969992170690762969134279040076071530127811065166195184400012857208458334748483386213365567/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "new_clearance": "0",
+   "fallback": false
+  },
+  {
+   "id": "W1p-right",
+   "stated": "as W1p-left",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "square": 173,
+   "original_clearance": "2256300273411969992170690762969134279040076071530127811065166195184400012857208458334748483386213365567/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "new_clearance": "-1/10000000000000000000000000000000000000000",
+   "fallback": false
+  },
+  {
+   "id": "W1c-top",
+   "stated": "as W1c-left",
+   "outcome": "as stated",
+   "verdict": "PARTIAL",
+   "square": 5,
+   "original_clearance": "2256300273411969992170690762969134279040076071530127811065166195184400012857208458334748483386213365567/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "new_clearance": "0",
+   "fallback": false
+  },
+  {
+   "id": "W1p-top",
+   "stated": "as W1p-left",
+   "outcome": "as stated",
+   "verdict": "REFUSE",
+   "square": 5,
+   "original_clearance": "2256300273411969992170690762969134279040076071530127811065166195184400012857208458334748483386213365567/22561770550135959865051109765529780507297920443142811127329857800000000000000000000000000000000000000000000000000000000000000000000",
+   "new_clearance": "-1/10000000000000000000000000000000000000000",
+   "fallback": false
+  },
+  {
+   "id": "WALL",
+   "stated": "method A's clearance and the closed form's exactly 0 and exactly -e; method B touching and crossing; method B's area inside the box exactly 1 at contact and below 1 past it",
+   "outcome": "as stated",
+   "squares": 268,
+   "moves": 536,
+   "not_as_stated": 0
+  },
+  {
+   "id": "PALL",
+   "stated": "method A's margin exactly 0 and exactly -e; the corner projections' margin exactly 0 at contact; method B touching and overlapping with positive area, its two clipping orders agreeing",
+   "outcome": "as stated",
+   "pairs": 35778,
+   "closings": 71556,
+   "not_as_stated": 0
+  },
+  {
+   "id": "X1",
+   "stated": "the twin relation fails at exactly the squares whose t is not 0, 1 or -1, so the files are refused wherever a square is tilted; on the mirrored packing the two methods agree at every wall and pair (its verdict is recorded, not stated)",
+   "outcome": "as stated",
+   "squares_with_tangent_0_or_1": 148,
+   "twin_fails": 120,
+   "mirrored_packing_verdict": "REFUSE",
+   "mirrored_pairs_overlapping": 75,
+   "mirrored_walls_crossing": 0
+  }
+ ],
+ "cpu_seconds_by_group": {
+  "C0": 7.2,
+  "R": 4.1,
+  "G": 26.4,
+  "S": 3.3,
+  "E": 9.5,
+  "K": 12.7,
+  "P": 1.8,
+  "W": 4.5,
+  "WALL": 0.1,
+  "PALL": 59.2,
+  "X": 5.5
+ },
+ "cpu_seconds": 139.6
+}
