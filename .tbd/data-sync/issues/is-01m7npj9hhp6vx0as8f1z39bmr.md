@@ -5,7 +5,7 @@ title: "Apply the 17 November owner decisions' record changes: close #574 with t
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: w4r-records-1118
 labels:
   - intake
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.249Z
-updated_at: 2026-11-18T03:33:13.225Z
+updated_at: 2026-11-18T03:40:59.893Z
 started_at: 2026-11-17T21:29:36.275Z
 ---
 
@@ -43,3 +43,5 @@ started_at: 2026-11-17T21:29:36.275Z
 2026-11-18T03:15Z w4r-records-1118: #1026 green at 1a1dbc103 (runs 44226177904, 44226177903, 44226170161), mergeable CLEAN against main a1a8d0aae; review requested from the coordinator. Worktree held untouched until the review returns.
 
 2026-11-18T03:33Z w4r-records-1118: review A of #1026 (issuecomment-6968182762): approve after A1, A2. A1: posted the correction on #543 https://github.com/jlevy/squares/issues/543#issuecomment-6968200183 (#909 had merged before the follow-up said 'still open'); recording it with corrects. Addressing A2-A5, then merge main 95f89dffc.
+
+2026-11-18T03:40Z w4r-records-1118: review A of #1026 addressed (dispositions issuecomment-6968319802): A1 correction posted on #543 (issuecomment-6968200183) and recorded (outdated + corrects), A2 S1 applied and News none, A3/A4 in d7197aa37, A5 description. Main 95f89dffc merged at 7abe0085f; no-change record re-measured at 3314adc46 (pushed); pin unchanged (eda3ee5cd303). Records tier 55/55. Waiting for hosted CI on 3314adc46, then ready and merge.
