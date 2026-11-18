@@ -1684,8 +1684,9 @@ def test_the_1018_replay_entry_is_what_the_census_prints() -> None:
     """E-de-winter-1018-n108-sqverify-fast-replay is `--evidence`'s entry for
     mixed_n108_L1063, field for field, with the stage 4 review of 18 November as its audit
     record: de Winter's rescaling as the theorem's subject, the controls of the same day,
-    the replay's agreement with the author's twelve runs, the enlargement left to the
-    review, and no clean-room wording."""
+    the replay's agreement with the author's twelve runs, the enlargement to the claimed
+    side and the monotonicity step to 109 stated in the theorem with their pinpoints (A1 of
+    #1029's review), and no clean-room wording."""
     name = "mixed_n108_L1063"
     text = census.evidence_entry(
         cases()[name],
@@ -1705,7 +1706,14 @@ def test_the_1018_replay_entry_is_what_the_census_prints() -> None:
         assert wording not in flat, wording
     assert "applied to Joost de Winter's mixed_n108_L1063" in flat
     assert "replay-comparison.json" in flat
-    assert "enlargement from 1063/100 to its claimed side is a separate step" in flat
+    theorem = " ".join(generated["proof"]["theorem"].split())
+    assert "s(108) >= S" in theorem
+    assert "1700799526134255846599/159999384348528500000" in theorem
+    assert "s(109) >= s(108) >= S by monotonicity" in theorem
+    pinpoints = " ".join(generated["proof"]["pinpoints"].split())
+    assert "proof_n108.pdf" in pinpoints
+    assert "receipts/dilation-audit.json" in pinpoints
+    assert "separate step that this theorem does not state" not in flat
 
 
 def test_the_890_replay_entry_is_what_the_census_prints() -> None:

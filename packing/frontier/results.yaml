@@ -52816,13 +52816,14 @@ results:
       reported (T-180) and Karakuş's strip bound 10.4624294225 verified, so the gain there
       is 0.0787 over the reported lane and 0.1676 over the verified one.
 
-      The price (Review A's A8 on #1027): the triage priced the census at about 1.2
-      CPU-hours, from T-216's 136,113,602 nodes in 2,087 CPU-seconds scaled to the author's
-      266,337,510; the review's frozen price for the capture was 1.38 to 1.50 CPU-hours, from
-      the source's 20.3 µs a node and the n = 31 sample's 18.6, widened after its freeze to
-      1.13 at T-216's 15.3 µs; it ran in 4,624 CPU-seconds, 1.28 CPU-hours, 17.4 µs a node,
-      and the controls in about 0.15 more. The lane's CPU for the whole import was about 1.6
-      CPU-hours, under the owner's 40 an item.
+      The price (Review A's A8 on #1027): the triage priced the census from T-216's
+      136,113,602 nodes in 2,087 CPU-seconds scaled to the author's 266,337,510, 4,084
+      CPU-seconds or 1.13 CPU-hours, which it rounded up to about 1.2; the review's frozen
+      price for the capture was 1.38 to 1.50 CPU-hours, from the source's 20.3 µs a node and
+      the n = 31 sample's 18.6, widened after its freeze to 1.13 on the same basis, T-216's
+      15.3 µs; it ran in 4,624 CPU-seconds, 1.28 CPU-hours, 17.4 µs a node, and the controls
+      in about 0.15 more. The lane's CPU for the whole import, review round included, was
+      about 1.8 CPU-hours, under the owner's 40 an item.
 
       The review's other notes: N-1, the certificate proves the strict s(108) > S, of which
       the entry states the >=; N-2, the README at the pin lists a SHA256SUMS the folder

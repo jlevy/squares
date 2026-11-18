@@ -65860,7 +65860,17 @@ evidence:
         and L, lemma D for format M's per-bin domain), applied to Joost de Winter's
         mixed_n108_L1063, Hiroaki Hosono's mixed_n108_L1062 dilated by 1063/1062 at core
         side 12487/12500: no 108 unit squares pack in a square of side 1063/100, so s(108)
-        >= 1063/100.
+        >= 1063/100. The census decides more than that: at each of the 401 net directions,
+        every closed core of side 12487/12500 centred in format M's per-bin domain captures
+        mass at least 1. The source's enlargement carries this coverage to the side S =
+        1700799526134255846599/159999384348528500000 = 10.63003794082972...: the map x -> ux
+        + h(1 - u), with u = 2Bw(D/2) = 319998768697057/320000086112500 and h =
+        707107/1000000, takes a packing of 108 unit squares in a square of side S to 108
+        squares of side u with disjoint interiors in the square of side 1063/100, each
+        centred in the per-bin domain of its folded net direction and containing a core of
+        that direction, so the cores' masses add to at least 108 > 10799999/100000, a
+        contradiction, and s(108) >= S. And s(109) >= s(108) >= S by monotonicity: a packing
+        of 109 unit squares contains a packing of 108.
       scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
       pinpoints: >-
         SOUNDNESS.md's theorem and lemmas, accepted with the crate by
@@ -65868,8 +65878,12 @@ evidence:
         the declared-net change by
         docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
         certificate's mathematics read in
-        docs/project/reviews/review-2026-11-18-de-winter-1018.md; the census route accepted
-        as a complete replay here in
+        docs/project/reviews/review-2026-11-18-de-winter-1018.md; the enlargement in the
+        source's proof_n108.pdf (retained in the packet), re-derived in that review's The
+        Argument, Re-Derived, steps 3 to 7, and recomputed in exact rationals by
+        devtools.audit_dilated_measure (V-audit-dilated-measure) in the packet's
+        receipts/dilation-audit.json, its enlargement block; the census route accepted as a
+        complete replay here in
         docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md;
         the census row, receipts and control receipt named in replay.
       assumptions:
@@ -65919,9 +65933,9 @@ evidence:
       below 1 at the least-bound leaf's centre); each capture below 1 was evaluated again by
       an exact evaluator written apart from the crate, and
       tests/test_sqverify_fast_census.py holds the receipts. The source's exact audit,
-      check_lower.py, is retained in the packet and was not run here; the source's
-      enlargement from 1063/100 to its claimed side is a separate step that this theorem
-      does not state.
+      check_lower.py, is retained in the packet and was not run here. The enlargement from
+      1063/100 to the claimed side is exact arithmetic on the certificate, not a computation
+      this replay runs; the theorem states it with the monotonicity step to 109.
     source_reviewed: '2026-11-18'
   - id: E-de-winter-1018-n108-review-decision
     claim: lower-bound

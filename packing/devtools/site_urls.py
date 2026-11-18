@@ -327,9 +327,10 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "entries and prepared math measure 470,189 bytes on 31 October 2026, as T-124's "
             "roster of 178 configurations needs its own exception. Hosted run 44247789006 "
             "measures 502,411 bytes on 18 November 2026 at PR #1029's db76300d2, past 500,000 "
-            "once its register list at 109 names T-327 (#1018) after #1009's thirteen "
-            "results (T-314 to T-326), so the ceiling moves to 525,000 as a measured choice. "
-            "A byte measurement only; the page's timing is owed under think-v4me."
+            "once its register list at 108 and 109 names T-327 (#1018) after #1009's "
+            "thirteen results (T-314 to T-326), so the ceiling moves to 525,000 as a "
+            "measured choice, 22,589 bytes of room, about nine more such rows at about 2.4 "
+            "KB. A byte measurement only; the page's timing is owed under think-v4me."
         ),
     ),
     "result/t-101.html": (

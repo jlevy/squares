@@ -163,10 +163,10 @@ puts the exact capture at the least-bound leaf’s centre at most one part in a 
 by the crate and by the independent evaluator. The author’s twelve runs carry no controls of
 their own, so these are the only controls on the certificate.
 
-The triage priced the census at about 1.2 CPU-hours, from T-216’s 136,113,602 nodes in
-2,087 CPU-seconds scaled to the author’s 266,337,510 nodes, and the stage 4 review’s
-frozen price for the capture was 1.38 to 1.50 CPU-hours (1.13 at T-216’s rate, after its
-freeze); it ran in 4,624 CPU-seconds, 1.28 CPU-hours, about 17.4 µs a node, and the
+The triage priced the census from T-216’s 136,113,602 nodes in 2,087 CPU-seconds scaled
+to the author’s 266,337,510 nodes, 4,084 CPU-seconds or 1.13 CPU-hours, which it rounded
+up to about 1.2, and the stage 4 review’s frozen price for the capture was 1.38 to 1.50
+CPU-hours (1.13 on the same basis, T-216’s rate, after its freeze); it ran in 4,624 CPU-seconds, 1.28 CPU-hours, about 17.4 µs a node, and the
 controls in about 530 more.
 
 ## Stage 4 Review

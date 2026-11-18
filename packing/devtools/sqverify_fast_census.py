@@ -1305,6 +1305,10 @@ class PacketProvenance:
     says what of the source's own checking was not run here. `comparison` and `history`
     are optional sentences after the run's facts and after the controls: the replay's
     agreement with the source's own receipts, and a control receipt kept as it failed.
+    `consequence` is an optional sentence the theorem states after the census's own
+    conclusion, where the bound the case records hold follows from it by a further step
+    (#1018's enlargement and monotonicity, as T-016's entry carries n = 18 and 19), and
+    `pinpoint` names where that step is read and recomputed.
     """
 
     subject: str
@@ -1312,6 +1316,8 @@ class PacketProvenance:
     closing: str
     comparison: str = ""
     history: str = ""
+    consequence: str = ""
+    pinpoint: str = ""
 
 
 #: Hiroaki Hosono's packets (wand125), fetched by `fine_net_followup mixed-fetch`.
@@ -1395,13 +1401,34 @@ PACKET_PROVENANCE = {
         ),
         closing=(
             "The source's exact audit, check_lower.py, is retained in the packet and was not"
-            " run here; the source's enlargement from 1063/100 to its claimed side is a"
-            " separate step that this theorem does not state."
+            " run here. The enlargement from 1063/100 to the claimed side is exact"
+            " arithmetic on the certificate, not a computation this replay runs; the"
+            " theorem states it with the monotonicity step to 109."
         ),
         comparison=(
             "Every direction's row equals the source's twelve native runs, built by rustc"
             " 1.100.0 from the same reviewed source, on every field but the timings, and the"
             " node totals are equal (receipts/replay-comparison.json in the packet). "
+        ),
+        consequence=(
+            " The census decides more than that: at each of the 401 net directions, every"
+            " closed core of side 12487/12500 centred in format M's per-bin domain captures"
+            " mass at least 1. The source's enlargement carries this coverage to the side"
+            " S = 1700799526134255846599/159999384348528500000 = 10.63003794082972...: the"
+            " map x -> ux + h(1 - u), with u = 2Bw(D/2) = 319998768697057/320000086112500"
+            " and h = 707107/1000000, takes a packing of 108 unit squares in a square of"
+            " side S to 108 squares of side u with disjoint interiors in the square of side"
+            " 1063/100, each centred in the per-bin domain of its folded net direction and"
+            " containing a core of that direction, so the cores' masses add to at least"
+            " 108 > 10799999/100000, a contradiction, and s(108) >= S. And s(109) >= s(108)"
+            " >= S by monotonicity: a packing of 109 unit squares contains a packing of 108."
+        ),
+        pinpoint=(
+            "; the enlargement in the source's proof_n108.pdf (retained in the packet),"
+            " re-derived in that review's The Argument, Re-Derived, steps 3 to 7, and"
+            " recomputed in exact rationals by devtools.audit_dilated_measure"
+            " (V-audit-dilated-measure) in the packet's receipts/dilation-audit.json, its"
+            " enlargement block"
         ),
     ),
 }
@@ -1957,7 +1984,8 @@ def evidence_entry(
             "The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; "
             "Formats M and L, lemma D for format M's per-bin domain), applied to "
             f"{provenance.subject.format(certificate=case.certificate)}: no {case.n} unit "
-            f"squares pack in a square of side {side}, so s({case.n}) >= {side}.",
+            f"squares pack in a square of side {side}, so s({case.n}) >= {side}."
+            + provenance.consequence,
             indent=6,
         ),
         (
@@ -1972,7 +2000,9 @@ def evidence_entry(
                 if declared
                 else later_source
             )
-            + f"; the certificate's mathematics read in {audit_record}; "
+            + f"; the certificate's mathematics read in {audit_record}"
+            + provenance.pinpoint
+            + "; "
             + (
                 ""
                 if audit_record == ROUTE_REVIEW
