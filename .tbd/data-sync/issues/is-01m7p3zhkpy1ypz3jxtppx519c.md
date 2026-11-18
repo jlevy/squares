@@ -5,7 +5,7 @@ title: "Import #1021, #1022: Joost de Winter's s(268) <= 16.870013850405 and s(2
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: w6r-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T01:22:44.981Z
-updated_at: 2026-11-18T06:26:26.809Z
+updated_at: 2026-11-18T06:57:47.206Z
 started_at: 2026-11-18T01:23:11.221Z
 ---
 
@@ -32,3 +32,5 @@ R-1021 (blind review), 05:40Z 18 Nov: lane r1021-1118 started in /home/user/wt/r
 R-1021 (blind review), 06:15Z: checker and controls plan frozen and pushed at 06:08:53Z (e220d02c4f), before any certificate was read. Frozen checker: #1021 and #1022 ACCEPT (both forms, both methods, natively and crossed); custody identical over five routes. #1023 merged at 05:46:46Z (seen only after the freeze), so the lane also measures against T-320 and T-321, through a disclosed post-freeze adapter (r1021_post.py) that converts their layouts for the frozen modules. Measurements and controls running.
 
 2026-11-18T06:26Z w6r-dewinter-1118: worktree /home/user/wt/w6-import-1021 recreated; merged main 86284ec20 (#1023) at 78973e596; declarations read the houses T-320/T-321 (#1009) and claims rebuilt (268 below T-320 by 1.8543e-3, 270 below T-321 by 8.3439e-4); replay at 97ae1b663: both routes accept, gross controls refused, check --replay, 11/11 sharp controls as the plan (c4a97465..., hashed 02:27:48Z) states each (branches W1, P1, N1, E1); identity: neither one to one with its house or the house before (46 and 94 squares beyond 0.1), new arrangements; margins T-320 3.37e-27, T-321 3.39e-27, own 2.69e-58 and 2.56e-58; L-step scans; ledger upper-bounds-1021-1022-20261118 at 807c2eb3d records both. Blind review R-1021 running (not read). Next: register (provisional ids), records tier, draft PR.
+
+R-1021 (blind review), 06:58Z: draft PR #1033 (labels intake, S2), head 521c23a3ee, base main 86284ec203 (#1023 merged in). Checker frozen e220d02c4f (pushed 06:08:52Z), findings frozen ba9bceb65b (pushed 06:51:05Z). Verdict: #1021 and #1022 accepted (both files, both methods, natively and crossed); stated sides are the files' sides (12-place ceilings). Option D: new against T-320 (gain 1.854284698e-3, margin 3.374431279e-27), T-289 (2.015998680e-3, 3.204483004e-12), T-321 (8.343869879e-4, 3.386260668e-27), T-283 (8.343869912e-4, 3.211509047e-12); each margin computed on the predecessor's own certificate, confirmed exactly by devtools.contraction_margin. Identity: new arrangements relative to all four (no symmetry one to one), so the packing credit is de Winter's. 246/246 controls as stated. Significance read: #1021 S3, #1022 S3. F3 (minor, this review): post-freeze adapter r1021_post.py for the predecessors' layouts. F14 (author): READMEs say GPT-6.2 Sol, issues say GPT-6.2 Astra. About 0.7 CPU-hours.
