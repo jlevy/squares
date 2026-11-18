@@ -1,0 +1,37 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/frontier/README.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane w4-records-1117r of the 17 November intake pass (think-8gvd, think-wvr8): the
+  owner's decisions of 17 November 2026 are applied. #574's and #529's queued asks are done
+  and their holds and blocks lifted; T-159's notes say the owner kept it; the three runs over
+  the 40 CPU-hour item cap are recorded as declined with their prices in T-235's, T-250's and
+  T-252's next rungs and the coverage notes, #537's decision ask is done and #783's block
+  lifts; #973's replay is held for the owner in T-298's next rung; #941's 809 gets a verified
+  beyond-horizon row of de-winter-issue941-2026-11-10, superseding couzo-issue763-2026-10-23's
+  row there, by the owner's answer on deletion-made bounds, which the frontier README and the
+  walks' notes now state; #763's 683 is settled with no row; and #1012 is entered at triage.
+  No rung, side, register entry, credit holder, house or pin changes, and no paper prints a
+  beyond-horizon row. Against origin/main 45f0288b5 (#1011): devtools.compare_paper_renders
+  rendered each paper into empty site directories, the math passes in
+  /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once with that main's
+  copies of the four paths above swapped in. All four papers are byte-identical across the
+  three renders: the explainer's 55 files and the optimality review's, the threshold-bound
+  review's and the methods survey's 43 files each. No PDF was printed; each prints from that
+  HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
