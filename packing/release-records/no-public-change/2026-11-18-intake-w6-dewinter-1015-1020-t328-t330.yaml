@@ -21,7 +21,7 @@ outputs:
 reason: >-
   Intake lane w6-dewinter-1118 of 18 November (think-zqot): Joost de Winter's issues 1015, 1017
   and 1020 at 127 are retained and replayed, and their three certificates are registered as
-  T-314 to T-316, read by the existing center-direction-json and witness-corners-opposite
+  T-328 to T-330, read by the existing center-direction-json and witness-corners-opposite
   adapters. The importer gains the three packets' house readers; the requests entries, the
   coverage sources and his other-projects card follow. No paper prints 127's records, these
   entries or that card. Against origin/main 2980557a2 (#1016): devtools.compare_paper_renders
@@ -33,7 +33,7 @@ reason: >-
   from the baseline; rendered again from this tree and with main's results.yaml swapped in, the
   one difference in each is the register count the explainer reads ("one of N results the
   framework has registered so far"), 316 here and 313 on main, at one place in each. The
-  novelty count is unchanged (T-314 to T-316 are previously-published), and the bound citation
+  novelty count is unchanged (T-328 to T-330 are previously-published), and the bound citation
   it reads is n = 11's, which this change does not touch. So the change is the live register
   count, which follows the site's data and is not a revision of the paper, as the L71 to L187
   and c-import-1005-1117 records say. No PDF was printed; each prints from that HTML. Every paper

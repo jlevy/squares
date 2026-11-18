@@ -1454,9 +1454,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-311.html | result/t-311.html | result | overview | 2026-11-17 | 2026-11-17 | live |
 | result/t-312.html | result/t-312.html | result | overview | 2026-11-17 | 2026-11-17 | live |
 | result/t-313.html | result/t-313.html | result | overview | 2026-11-17 | 2026-11-17 | live |
-| result/t-314.html | result/t-314.html | result | overview | 2026-11-18 | 2026-11-18 | live |
-| result/t-315.html | result/t-315.html | result | overview | 2026-11-18 | 2026-11-18 | live |
-| result/t-316.html | result/t-316.html | result | overview | 2026-11-18 | 2026-11-18 | live |
+| result/t-328.html | result/t-328.html | result | overview | 2026-11-18 | 2026-11-18 | live |
+| result/t-329.html | result/t-329.html | result | overview | 2026-11-18 | 2026-11-18 | live |
+| result/t-330.html | result/t-330.html | result | overview | 2026-11-18 | 2026-11-18 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-22 | live |

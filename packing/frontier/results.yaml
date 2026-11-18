@@ -49938,7 +49938,7 @@ results:
       regularization of the new house and its flip; #1009's claim there is 1.58e-03 below
       this side. If that import stalls or fails review, think-i38n adopts this certificate
       at 295 in its own change, regularized the same way.
-  - id: T-314
+  - id: T-328
     kind: upper-bound
     registered: '2026-11-18'
     landed: '2026-11-18'
@@ -50024,7 +50024,7 @@ results:
         numbers, option D's gains and contraction margins exactly, identity against T-305 and
         each other, and the significance; compared with R-127 after its findings were frozen.
       verdict: accepted
-      covers: [T-314, T-315, T-316]
+      covers: [T-328, T-329, T-330]
     - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
       kind: adversarial
       reviewer: Claude (Anthropic), strong tier (tbd-strong) at xhigh reasoning, below the tier stage 4 names (its F13); the additional blind stage 4 review, lane r127-1118, separately prompted from the import lane
@@ -50037,7 +50037,7 @@ results:
         contraction margins and identity, and the significance; findings frozen before the
         import lane's receipts were read.
       verdict: accepted
-      covers: [T-314, T-315, T-316]
+      covers: [T-328, T-329, T-330]
     artifacts:
     - packing/resources/web/de-winter-s127-issue1015-2026-11-17/README.md
     - packing/resources/web/de-winter-s127-issue1015-2026-11-17/acquisition/claims.json
@@ -50089,7 +50089,7 @@ results:
       T-305) by 9.58e-04; smallest when filed. The ledger of 18 November for this lane
       (campaign/issue-intake/upper-bounds-1015-1020-20261118) walks #1015 (22:14:33Z), #1017
       (22:27:04Z) and #1020 (22:49:35Z) and records all three, each below the last; GitHub's
-      activity log puts each certificate's push before its issue. T-315 (#1017) and T-316
+      activity log puts each certificate's push before its issue. T-329 (#1017) and T-330
       (#1020) are below this side. The lower bounds at 127 lie below it.
 
       Measured against padding (option D of 17 November 2026, think-b0w5): T-305's margin at
@@ -50118,24 +50118,24 @@ results:
       clean-room run on this certificate is registered: E-de-winter-1015-review-exact-feasibility
       (R-127b) and E-de-winter-1015-review-r127-exact-feasibility (R-127).
     next_rung: >-
-      None for the bound; the house decision at 127 takes T-316, which is smaller. V4 and C4
+      None for the bound; the house decision at 127 takes T-330, which is smaller. V4 and C4
       need an explicit human oversight record beside the two adversarial AI reviews of 18
       November, R-127b and R-127.
-  - id: T-315
+  - id: T-329
     kind: upper-bound
     registered: '2026-11-18'
     landed: '2026-11-18'
     headline: >-
-      de Winter's further arrangement of his T-314 at 127, 1.96e-06 below it
+      de Winter's further arrangement of his T-328 at 127, 1.96e-06 below it
     claim: >-
       One complete rational certificate proves s(127) <= 5900396863307571/500000000000000 =
       11.800793726615142, the exact side #1017 states; its title rounds it up at 12 places as
       11.800793726616.
 
-      It is 1.96e-06 (1.9556e-06) below T-314, the same author's #1015, filed 12 minutes 31 seconds
+      It is 1.96e-06 (1.9556e-06) below T-328, the same author's #1015, filed 12 minutes 31 seconds
       before it, and 9.60e-04 below T-305, the case's house in both lanes; the ledger records
-      #1015, #1017 and #1020 in order. Measured here it is T-314's arrangement moved: one to one
-      with T-314's packing by nearest centres under the identity, which moves 27 squares beyond
+      #1015, #1017 and #1020 in order. Measured here it is T-328's arrangement moved: one to one
+      with T-328's packing by nearest centres under the identity, which moves 27 squares beyond
       a hundredth and 5 beyond a tenth (largest 0.328) and turns squares by up to 1.50 degrees,
       all 57 tilted squares paired with tilted squares of the same sign, as the issue's second
       stage, which shifted the tilted cap at the top of the band, says.
@@ -50165,10 +50165,10 @@ results:
     significance:
       score: 2
       rationale: >-
-        A further arrangement of T-314's packing at 127, 1.96e-06 below it, one to one with it
+        A further arrangement of T-328's packing at 127, 1.96e-06 below it, one to one with it
         and five squares beyond a tenth, below the S2/S3 line T-239's rationale draws between
         T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), as T-323's 3.62e-09 at 292 (S2); the
-        arrangement is T-314's (S3). No lower bound or optimum.
+        arrangement is T-328's (S3). No lower bound or optimum.
       scored: '2026-11-18'
       by: >-
         the stage 4 review of record of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md), confirming the registering
@@ -50197,7 +50197,7 @@ results:
         numbers, option D's gains and contraction margins exactly, identity against T-305 and
         each other, and the significance; compared with R-127 after its findings were frozen.
       verdict: accepted
-      covers: [T-314, T-315, T-316]
+      covers: [T-328, T-329, T-330]
     - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
       kind: adversarial
       reviewer: Claude (Anthropic), strong tier (tbd-strong) at xhigh reasoning, below the tier stage 4 names (its F13); the additional blind stage 4 review, lane r127-1118, separately prompted from the import lane
@@ -50210,7 +50210,7 @@ results:
         contraction margins and identity, and the significance; findings frozen before the
         import lane's receipts were read.
       verdict: accepted
-      covers: [T-314, T-315, T-316]
+      covers: [T-328, T-329, T-330]
     artifacts:
     - packing/resources/web/de-winter-s127-issue1017-2026-11-17/README.md
     - packing/resources/web/de-winter-s127-issue1017-2026-11-17/acquisition/claims.json
@@ -50257,13 +50257,13 @@ results:
       advance; and they refused a duplicated square.
 
       At n = 127 the certificate is below the case's ceiling (T-305) by 9.60e-04 and below
-      #1015 (T-314) by 1.9556e-06; smallest when filed. The ledger of 18 November for this lane
-      records it after #1015 and before #1020; T-316 (#1020) is below it.
+      #1015 (T-328) by 1.9556e-06; smallest when filed. The ledger of 18 November for this lane
+      records it after #1015 and before #1020; T-330 (#1020) is below it.
 
-      Measured against padding (option D of 17 November 2026, think-b0w5): T-314's
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-328's
       certificate's margin is 7.7394e-63 (squares 31 and 34; measure/contraction-n127-1015.json),
       so the step of 1.9556e-06 lies wholly outside it, and the claim is a new result, not a
-      restatement of T-314's packing. T-305's margin is 1.2099e-10
+      restatement of T-328's packing. T-305's margin is 1.2099e-10
       (measure/contraction-n127.json). This certificate's own margin is 4.1903e-14 (squares 35
       and 88; measure/contraction-n127-own.json).
 
@@ -50285,32 +50285,32 @@ results:
       clean-room run on this certificate is registered: E-de-winter-1017-review-exact-feasibility
       (R-127b) and E-de-winter-1017-review-r127-exact-feasibility (R-127).
     next_rung: >-
-      None for the bound; the house decision at 127 takes T-316, which is smaller. V4 and C4
+      None for the bound; the house decision at 127 takes T-330, which is smaller. V4 and C4
       need an explicit human oversight record beside the two adversarial AI reviews of 18
       November, R-127b and R-127.
-  - id: T-316
+  - id: T-330
     kind: upper-bound
     registered: '2026-11-18'
     landed: '2026-11-18'
     headline: >-
-      de Winter's further arrangement of his T-315 at 127, 1.80e-13 below it, beyond its padding
+      de Winter's further arrangement of his T-329 at 127, 1.80e-13 below it, beyond its padding
     claim: >-
       One complete rational certificate proves s(127) <=
       5900396863307481119664515678048233366964863482714849291045437/500000000000000000000000000000000000000000000000000000000000.
       That side is 11.8007937266149623 rounded up at 16 places and 11.800793726615 at 12, as
       #1020 prints it.
 
-      It is 1.80e-13 (1.7976e-13) below T-315, the same author's #1017, filed 22 minutes 31 seconds
-      before it, 1.96e-06 below T-314 (#1015) and 9.60e-04 below T-305, the case's house in
-      both lanes; the ledger records the three reports in order. Measured here it is T-315's
-      arrangement moved: one to one with T-315's packing by nearest centres under the
+      It is 1.80e-13 (1.7976e-13) below T-329, the same author's #1017, filed 22 minutes 31 seconds
+      before it, 1.96e-06 below T-328 (#1015) and 9.60e-04 below T-305, the case's house in
+      both lanes; the ledger records the three reports in order. Measured here it is T-329's
+      arrangement moved: one to one with T-329's packing by nearest centres under the
       identity, which moves 28 squares beyond a hundredth and 1 beyond a tenth (largest 0.107)
       and turns squares by up to 3.98 degrees, all 57 tilted squares paired with tilted squares
       of the same sign, 52 of them within 1e-4 degrees, as the issue's shift of two groups of
       the band lengthwise says.
 
-      Its gain is 4.29 times T-315's uniform-contraction margin, and
-      it lies 1.38e-13 below T-315's certificate shrunk to first contact, so under the owner's
+      Its gain is 4.29 times T-329's uniform-contraction margin, and
+      it lies 1.38e-13 below T-329's certificate shrunk to first contact, so under the owner's
       option D of 17 November 2026 (think-b0w5) it is a new result, not a restatement.
 
       Both maintained exact routes accept the certificate. The blind stage 4 review of record of
@@ -50338,13 +50338,13 @@ results:
     significance:
       score: 1
       rationale: >-
-        A further arrangement of T-315's packing at 127, 1.80e-13 below it, 4.29 times T-315's
+        A further arrangement of T-329's packing at 127, 1.80e-13 below it, 4.29 times T-329's
         own contraction margin and 1.38e-13 below it shrunk to first contact: a new result
         under the owner's option D of 17 November 2026 (think-b0w5), but a gain at the scale of
         the padding, as the re-solves of #1009's import at 156, 180 and 270 (S1), although it
-        moves one square beyond a tenth. The arrangement is T-314's (S3). No lower bound or
+        moves one square beyond a tenth. The arrangement is T-328's (S3). No lower bound or
         optimum. The stage 4 review of 18 November (#1025) reads S2 at its floor: a further
-        state of T-315's arrangement, its step 4.29 times T-315's contraction margin and not a
+        state of T-329's arrangement, its step 4.29 times T-329's contraction margin and not a
         padding re-certification, and the review of record (R-127b) reads S2 too, with S1 as its
         alternative, on #1020's identity and ratio; both leave the rule to the owner. The record
         keeps S1, as #1009's import did for its re-solves at 1.01 to 1.07 times their margins,
@@ -50379,7 +50379,7 @@ results:
         numbers, option D's gains and contraction margins exactly, identity against T-305 and
         each other, and the significance; compared with R-127 after its findings were frozen.
       verdict: accepted
-      covers: [T-314, T-315, T-316]
+      covers: [T-328, T-329, T-330]
     - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
       kind: adversarial
       reviewer: Claude (Anthropic), strong tier (tbd-strong) at xhigh reasoning, below the tier stage 4 names (its F13); the additional blind stage 4 review, lane r127-1118, separately prompted from the import lane
@@ -50392,7 +50392,7 @@ results:
         contraction margins and identity, and the significance; findings frozen before the
         import lane's receipts were read.
       verdict: accepted
-      covers: [T-314, T-315, T-316]
+      covers: [T-328, T-329, T-330]
     artifacts:
     - packing/resources/web/de-winter-s127-issue1020-2026-11-17/README.md
     - packing/resources/web/de-winter-s127-issue1020-2026-11-17/acquisition/claims.json
@@ -50439,18 +50439,18 @@ results:
       a near wall; none does, and every verdict was the one stated.
 
       At n = 127 the certificate is below the case's ceiling (T-305) by 9.60e-04, below #1015
-      (T-314) by 1.96e-06 and below #1017 (T-315) by 1.7976e-13; smallest: this certificate.
+      (T-328) by 1.96e-06 and below #1017 (T-329) by 1.7976e-13; smallest: this certificate.
       The 12-place prints of #1017 and #1020 differ (11.800793726616 and 11.800793726615), so
       the restatement ruling of 23 October (think-fwa9) does not reach it.
 
-      Measured against padding (option D of 17 November 2026, think-b0w5): T-315's
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-329's
       certificate's margin is 4.1903e-14 (squares 35 and 88;
       measure/contraction-n127-1017.json), and the step of 1.7976e-13 is 4.29 times it, so this
-      side lies 1.3786e-13 below T-315 shrunk to first contact, and the claim is a new result.
+      side lies 1.3786e-13 below T-329 shrunk to first contact, and the claim is a new result.
       T-305's margin is 1.2099e-10 (measure/contraction-n127.json). This certificate's own
       margin is 1.8203e-58 (squares 84 and 99; measure/contraction-n127-own.json).
 
-      Measured pose by pose (measure/identity.json): one to one with T-314's packing too (5
+      Measured pose by pose (measure/identity.json): one to one with T-328's packing too (5
       squares beyond a tenth); against T-305 no symmetry pairs it one to one, and the optimal
       assignment moves 9 squares beyond a tenth (largest 0.789). The L-step scan finds main's
       consequences unchanged.

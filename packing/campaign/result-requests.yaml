@@ -36510,7 +36510,7 @@ issues:
       below T-305, the house at eb50f54e9: a tilted band of 57 squares inside a frame of
       axis-aligned squares, from an arrangement in the Kaggle compilations of Alex Chilton and
       Asterios Panoras whose finder he could not establish. Triaged, retained and registered on
-      18 November 2026 in lane w6-dewinter-1118 (think-zqot) as T-314: the print rounds up from
+      18 November 2026 in lane w6-dewinter-1118 (think-zqot) as T-328: the print rounds up from
       the exact side, both maintained exact routes accept the certificate and refuse its gross
       and sharp controls, and it is measured close to T-305's arrangement, ten squares beyond a
       tenth and not one to one by nearest centres. It is the first of his three reports at 127
@@ -36525,7 +36525,7 @@ issues:
         squares in a frame of axis-aligned squares.
       source: body
       register:
-      - T-314
+      - T-328
       evidence:
       - E-de-winter-1015-certificate-report
       - E-de-winter-1015-exact-feasibility
@@ -36561,7 +36561,7 @@ issues:
       11.800793726615142, the exact side of a centre-direction certificate at cc20a26 in his
       watched repository, 1.96e-06 below his #1015 and 9.60e-04 below T-305: #1015's band with
       its tilted cap shifted by a second stage of the search. Triaged, retained and registered
-      on 18 November 2026 in lane w6-dewinter-1118 (think-zqot) as T-315: both maintained exact
+      on 18 November 2026 in lane w6-dewinter-1118 (think-zqot) as T-329: both maintained exact
       routes accept the certificate and refuse its gross and sharp controls; measured, it is
       #1015's arrangement moved, one to one with it, and its step lies far outside #1015's
       padding, so under option D (think-b0w5) it is a new result. #1020 is lower. The stage 4
@@ -36574,7 +36574,7 @@ issues:
         JoostdeWinter/square-packing cc20a26), #1015's band with its tilted cap shifted.
       source: body
       register:
-      - T-315
+      - T-329
       evidence:
       - E-de-winter-1017-certificate-report
       - E-de-winter-1017-exact-feasibility
@@ -36605,7 +36605,7 @@ issues:
       places from the exact side of a centre-direction certificate at a1ba501 in his watched
       repository, 1.80e-13 below his #1017: its band with two groups of squares shifted
       lengthwise and every square re-optimized. Triaged, retained and registered on 18 November
-      2026 in lane w6-dewinter-1118 (think-zqot) as T-316: both maintained exact routes accept
+      2026 in lane w6-dewinter-1118 (think-zqot) as T-330: both maintained exact routes accept
       the certificate and refuse its gross and sharp controls; measured, it is #1017's
       arrangement moved, one to one with it, and the step is 4.29 times #1017's contraction
       margin, so it lies below #1017 shrunk to first contact and under option D (think-b0w5) is
@@ -36621,7 +36621,7 @@ issues:
         groups shifted lengthwise.
       source: body
       register:
-      - T-316
+      - T-330
       evidence:
       - E-de-winter-1020-certificate-report
       - E-de-winter-1020-exact-feasibility

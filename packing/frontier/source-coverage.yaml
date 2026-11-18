@@ -13630,7 +13630,7 @@ sources:
     jlevy/squares#1015 at 35b576a, the commit the issue names in the watched repository; the
     licence and the two checkers are pinned against byte-identical copies, and the figure by
     digest. The certificate is admitted only where its exact side rounds up to the side the
-    issue prints. Licensed MIT by LICENSE at the pin. T-314 records the in-horizon report,
+    issue prints. Licensed MIT by LICENSE at the pin. T-328 records the in-horizon report,
     9.58e-04 below T-305 at 127; the ledger of 18 November for this lane
     (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
     order. All 3 native jobs have full outcomes.
@@ -13659,8 +13659,8 @@ sources:
     jlevy/squares#1017 at cc20a26, the commit the issue names in the watched repository; the
     licence and the two checkers are pinned against byte-identical copies, and the figure by
     digest. The certificate is admitted only where its exact side rounds up to the side the
-    issue prints. Licensed MIT by LICENSE at the pin. T-315 records the in-horizon report,
-    1.96e-06 below T-314 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
+    issue prints. Licensed MIT by LICENSE at the pin. T-329 records the in-horizon report,
+    1.96e-06 below T-328 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
     (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
     order. All 3 native jobs have full outcomes.
 - id: de-winter-s127-issue1020-2026-11-17
@@ -13688,8 +13688,8 @@ sources:
     jlevy/squares#1020 at a1ba501, the commit the issue names in the watched repository; the
     licence and the two checkers are pinned against byte-identical copies, and the figure by
     digest. The certificate is admitted only where its exact side rounds up to the side the
-    issue prints. Licensed MIT by LICENSE at the pin. T-316 records the in-horizon report,
-    1.80e-13 below T-315, 1.96e-06 below T-314 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
+    issue prints. Licensed MIT by LICENSE at the pin. T-330 records the in-horizon report,
+    1.80e-13 below T-329, 1.96e-06 below T-328 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
     (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
     order. All 3 native jobs have full outcomes.
 selected_overrides:
