@@ -5,7 +5,7 @@ title: "Apply the 17 November owner decisions' record changes: close #574 with t
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: w4r-records-1118
 labels:
   - intake
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.249Z
-updated_at: 2026-11-18T02:18:47.985Z
+updated_at: 2026-11-18T02:19:50.185Z
 started_at: 2026-11-17T21:29:36.275Z
 ---
 
@@ -33,3 +33,5 @@ started_at: 2026-11-17T21:29:36.275Z
 2026-11-18T01:38Z w4r-records-1118: branch claude/keen-galileo-9gbz1a restarted on main 2980557a2; WIP c38f6e7b3 (pushed) records other lanes' replies (#776, #777 final + close, #1008 ack + awaiting_author, #532, #446). Drafts for #574, #529, #537, #941, #783, #973, #543, #763, #1012 in the scratchpad's drafts/; posting waits for the Pages deploy of 2980557a2 (run 44216081724, runners starved).
 
 2026-11-18T02:18Z w4r-records-1118: deploy verified. Pages run 44216081724 (Certificate page; publish, deploy, verify-deployment success) built 2980557a2fff33cff2c564773b76cceb2605681f. check_published_site --commit 2980557a2 (SQPACK_CHROMIUM=/usr/bin/google-chrome): 6416 of 6416 checks passed (a first run without SQPACK_CHROMIUM failed only the two browser checks, the Playwright headless shell missing). Spot-checked result pages t-250, t-235, t-252, t-298 carry the 17 November decisions. Posting replies now.
+
+2026-11-18T02:19Z w4r-records-1118: POSTED from main 2980557a2 after the verified deploy: #574 final (thank-you note) https://github.com/jlevy/squares/pull/574#issuecomment-6967028143, PR #574 closed unmerged 02:19:03Z; #529 final https://github.com/jlevy/squares/issues/529#issuecomment-6967032263 (closed 02:19:13Z); #537 final https://github.com/jlevy/squares/issues/537#issuecomment-6967032773 (closed 02:19:15Z); #941 final https://github.com/jlevy/squares/issues/941#issuecomment-6967033493 (closed 02:19:18Z); #783 follow-up https://github.com/jlevy/squares/issues/783#issuecomment-6967036738; #973 follow-up https://github.com/jlevy/squares/issues/973#issuecomment-6967036950; #543 follow-up https://github.com/jlevy/squares/issues/543#issuecomment-6967037169; #763 follow-up https://github.com/jlevy/squares/issues/763#issuecomment-6967037416; #1012 acknowledgement https://github.com/jlevy/squares/issues/1012#issuecomment-6967037708. blocked:owner-decision removed from #574, #529, #537, #783. Next: the records change on claude/keen-galileo-9gbz1a (WIP c38f6e7b3 already has the other lanes' replies).
