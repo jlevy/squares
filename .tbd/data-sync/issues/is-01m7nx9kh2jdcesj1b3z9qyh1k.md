@@ -5,7 +5,7 @@ title: "Import #1018: Joost de Winter's raised lower bound for n = 108 and n = 1
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:54.594Z
-updated_at: 2026-11-18T04:01:40.661Z
+updated_at: 2026-11-18T04:20:37.887Z
 started_at: 2026-11-18T01:19:03.018Z
 ---
 
@@ -54,3 +54,7 @@ started_at: 2026-11-18T01:19:03.018Z
 ### R-108 (blind review)
 
 2026-11-18T04:05Z: review A of #1027 (approve) being addressed: merged main 46510a0dc keeping both synopsis and doc-map lines (2923234bd); live-copy notes for A3, A4, A7, A9 (b0123e856, frozen files untouched); description recast in the template (A1, A5). Tracking beads think-mrzq (parent), think-ajp6 ... think-7vmd. A8 (the census price against the import's run) is the import lane's; the coordinator passes it on. Waiting on hosted CI at b0123e856, then reply, ready, merge.
+
+### R-108 (blind review)
+
+2026-11-18T04:20Z: PR #1027 merged at 04:19:11Z with a merge commit, 3ac78a55f90d496e133a565955eca1fb02096b2d (parents main 46510a0dc and head b0123e856), after review A was addressed (dispositions https://github.com/jlevy/squares/pull/1027#issuecomment-6968899159) and hosted CI was green on b0123e856 (Packing validation 44234137109, Certificate page 44234137120, Branch mergeability 44234132860). The review is on main at docs/project/reviews/review-2026-11-18-de-winter-1018.md. A8 (the census price against this import's run) is left for the import lane as think-ao7v. Worktree /home/user/wt/r108 removed; GitHub deleted the remote branch on merge.
