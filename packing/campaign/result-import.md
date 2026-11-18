@@ -546,12 +546,20 @@ record’s statement of the rule:
   The record reads a sub-print re-certification as a side below an earlier report at its
   count by less than one unit in the 12th place, with both rounding up to the same
   12-place print. The walk measures the distance to the member of the standing side the
-  claim is closest below, a report and not a construction; whether the answer also
-  reaches a side within the print below a construction is open (think-oqjd), and no such
-  side exists to 1024. A claim in the ruling’s words that an earlier ledger recorded and
-  the answer did not name waits on the owner (`awaiting_owner`). #719’s 631 is the one
-  such claim to 1024: another holder’s re-certification of Couzo’s `4e4c8ce`
-  certificate, which #722 recorded (think-oqjd).
+  claim is closest below, a report and not a construction.
+  A claim in the ruling’s words that an earlier ledger recorded and the answer did not
+  name waits on the owner (`awaiting_owner`); #719’s 631 was the one such claim to 1024,
+  another holder’s re-certification of Couzo’s `4e4c8ce` certificate, which #722
+  recorded. Option D (above) answers think-oqjd’s two questions.
+  A construction with no padding, as Göbel’s are, gives up nothing when shrunk, so any
+  side below it is a new result, and no such side within the print exists to 1024.
+  #719’s 631 restates Couzo’s certificate: that certificate is his 490 with three L
+  layers, dilated by 1 + 1e-24, and carries 2.6048e-11 through that construction, where
+  #719’s lies 2.7293e-13 below it (its packet’s `measure/`). The walks still record it
+  until think-wtdz takes it out.
+  #732’s 631, the row, lies within the same margin (3.4337e-12 below), which the
+  decision does not name; whether option D reaches a recorded row beyond the horizon is
+  the owner’s question (think-1ell), and the row stands meanwhile.
 - **Göbel’s classical constructions are earlier reports** (think-8krd,
   [#613](https://github.com/jlevy/squares/issues/613)): “Goebel’s classical
   constructions count as earlier reports beyond n = 324 (the baseline): a rational row

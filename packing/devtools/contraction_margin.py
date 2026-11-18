@@ -54,6 +54,21 @@ base's margin is the margin the certificate carries through the step::
         'T-284=l-base:packet:ozden-s199-upper-bound-2026-11-09' \\
         --against 'T-285=l-base:packet:de-winter-s199-upper-bound-2026-11-09'
 
+**Through several layers and a dilation.** ``l-base:M:FORMAT:PATH`` reads the base of
+the ``M``-square certificate in a file built by ``k`` L steps and then a uniform dilation
+(`devtools.measure_identity.read_l_layers`), as Francisco Couzo's ``4e4c8ce``
+certificate at 631 is his 490 with three layers, dilated by ``1 + 1e-24``: its own margin
+is that dilation alone, ``2.57e-23``, where its base contracts by ``2.60e-11``. The
+receipt's ``construction`` then gives the side the certificate carries through it, the
+contracted base with the ``k`` layers written on it undilated, and both routes decide that
+packing too. An ``--against`` that is no ``l-base`` is read at ``M`` and compared with
+that side, which is option D's test through the construction::
+
+    COUZO=resources/web/couzo-index-2026-10-15/source/certificates/best/n631.cert
+    LATER=resources/web/mishapolk-issue719-2026-10-22/facts/n-631.yaml.gz
+    python -m devtools.contraction_margin --n 490 "couzo=l-base:631:evand-cert:$COUZO" \\
+        --against "719=witness-center-basis:$LATER"
+
 From ``packing/``, with the project interpreter::
 
     python -m devtools.contraction_margin --n 299 \\
@@ -76,6 +91,7 @@ from typing import Any
 
 from strif import atomic_output_file
 
+from devtools import construction_checker as construction
 from devtools import evand_exact_certificates as legacy
 from devtools import measure_identity as identity
 from devtools import retained_data
@@ -99,11 +115,13 @@ class ContractionError(ValueError):
 
 @dataclass(frozen=True)
 class Read:
-    """One certificate as read, with where it came from."""
+    """One certificate as read, with where it came from, and for an ``l-base`` the
+    construction it is the base of (`devtools.measure_identity.LayeredBase`)."""
 
     label: str
     source: dict[str, Any]
     certificate: legacy.Certificate
+    layered: identity.LayeredBase | None = None
 
 
 def read_certificate(spec: str, n: int) -> Read:
@@ -113,6 +131,7 @@ def read_certificate(spec: str, n: int) -> Read:
     except identity.MeasureError as error:
         raise ContractionError(str(error)) from error
     plain = spec if label is None else spec.partition("=")[2]
+    layered: identity.LayeredBase | None = None
     try:
         if kind == identity.PACKET:
             facts = reports.read_facts(reports.packet_path(target), {n})
@@ -121,7 +140,8 @@ def read_certificate(spec: str, n: int) -> Read:
             certificate = facts[n]
             source: dict[str, Any] = {"input": identity.PACKET, "packet": target}
         elif kind == identity.L_BASE:
-            certificate, source = identity.read_l_base(target, n)
+            layered = identity.read_l_construction(target, n)
+            certificate, source = layered.base, layered.source
         elif kind in reports.ADAPTERS:
             path = Path(target)
             raw = retained_data.read_retained_bytes(path, limit=reports.MAX_SOURCE_BYTES)
@@ -135,7 +155,7 @@ def read_certificate(spec: str, n: int) -> Read:
         raise ContractionError(f"{plain}: {error}") from error
     if certificate.n != n or len(certificate.poses) != n:
         raise ContractionError(f"{plain}: not a certificate of {n} squares")
-    return Read(label or plain, source, certificate)
+    return Read(label or plain, source, certificate, layered)
 
 
 def _where(path: Path) -> dict[str, Any]:
@@ -231,8 +251,11 @@ def margin(read: Read, *, routes: bool = True, against: Read | None = None) -> d
     started = time.process_time()
     certificate = read.certificate
     factor, pair = _packing(read)
+    layered = read.layered
+    through = layered is not None and against is not None and against.layered is None
     if against is not None:
-        if against.certificate.n != certificate.n:
+        count = layered.extended.n if through and layered is not None else certificate.n
+        if against.certificate.n != count:
             raise ContractionError("--against names a certificate of another count")
         _packing(against)
     given = sharp.decide(certificate, PROFILE) if routes else None
@@ -257,7 +280,51 @@ def margin(read: Read, *, routes: bool = True, against: Read | None = None) -> d
         verdicts = sharp.decide(contracted, PROFILE)
         record["routes"] = verdicts
         record["routes_accept"] = all(item["passed"] for item in verdicts.values())
-    if against is not None:
+    carried: Fraction | None = None
+    if layered is not None:
+        built = construction.write_out(
+            construction.Recipe(
+                n=layered.extended.n,
+                kind=construction.TILING,
+                source_n=certificate.n,
+                parent=read.label,
+                parent_sha256="",
+                bound=contracted.side + layered.layers,
+                layers=layered.layers,
+            ),
+            contracted,
+        )
+        carried = built.side
+        stated = layered.extended.side
+        block: dict[str, Any] = {
+            "layers": layered.layers,
+            "dilation": legacy.literal(layered.dilation),
+            "extended_n": layered.extended.n,
+            "extended_side": legacy.literal(stated),
+            "contracted_extended_side": legacy.literal(carried),
+            "margin_through": legacy.literal(stated - carried),
+            "margin_through_float": _float(stated - carried),
+        }
+        if given is not None:
+            extended_verdicts = sharp.decide(built, PROFILE)
+            block["routes"] = extended_verdicts
+            block["routes_accept"] = all(item["passed"] for item in extended_verdicts.values())
+            record["routes_accept"] = record["routes_accept"] and block["routes_accept"]
+        record["construction"] = block
+    if against is not None and through and layered is not None and carried is not None:
+        later, stated = against.certificate, layered.extended.side
+        gain, carry = stated - later.side, stated - carried
+        record["against"] = {
+            "certificate": {"label": against.label, **against.source},
+            "compared": "through the construction, at its extended count",
+            "n": later.n,
+            "side": legacy.literal(later.side),
+            "gain": legacy.literal(gain),
+            "gain_float": _float(gain),
+            "gain_over_margin": f"{float(gain / carry):.4f}" if carry else None,
+            "within_margin": later.side >= carried,
+        }
+    elif against is not None:
         later = against.certificate
         gain = certificate.side - later.side
         record["against"] = {
@@ -285,11 +352,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", type=Path)
     args = parser.parse_args(argv)
     try:
-        record = margin(
-            read_certificate(args.certificate, args.n),
-            routes=not args.no_routes,
-            against=read_certificate(args.against, args.n) if args.against else None,
-        )
+        read = read_certificate(args.certificate, args.n)
+        against = None
+        if args.against:
+            # Against a base read through its construction, a certificate that is no base
+            # itself is the construction's rival, so it is read at the extended count.
+            kind = identity.split_spec(args.against)[1]
+            count = (
+                read.layered.extended.n
+                if read.layered is not None and kind != identity.L_BASE
+                else args.n
+            )
+            against = read_certificate(args.against, count)
+        record = margin(read, routes=not args.no_routes, against=against)
     except ContractionError as error:
         print(f"refused: {error}", file=sys.stderr)
         return 2
