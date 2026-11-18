@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **1004** evidence records. **585** are formal; **576** of those were established here. **19** are samples, counted separately.
+- **1006** evidence records. **586** are formal; **577** of those were established here. **20** are samples, counted separately.
 - **394** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
@@ -497,7 +497,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n026-wand125-mixed-5545-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-n027-wand125-mixed-56435-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-n028-wand125-mixed-5735-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
-| `E-n029-wand125-mixed-581-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
+| `E-n029-wand125-mixed-581-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-mixed-rotated-verify-cpp`, `V-wand125-verify-mixed-full-proof-py` |
 | `E-n030-wand125-mixed-58835-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-n039-wand125-mixed-665-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-n041-wand125-mixed-6775-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
@@ -507,7 +507,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n026-wand125-mixed-5545-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | not recorded | `V-sqverify-fast` |
 | `E-n027-wand125-mixed-56435-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | not recorded | `V-sqverify-fast` |
 | `E-n028-wand125-mixed-5735-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | not recorded | `V-sqverify-fast` |
-| `E-n029-wand125-mixed-581-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqverify-fast` |
+| `E-n029-wand125-mixed-581-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqverify-fast` |
 | `E-n030-wand125-mixed-58835-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | not recorded | `V-sqverify-fast` |
 | `E-n039-wand125-mixed-665-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | not recorded | `V-sqverify-fast` |
 | `E-n041-wand125-mixed-6775-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | not recorded | `V-sqverify-fast` |
@@ -550,7 +550,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-460-followup-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | not recorded | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-check-half-angle-area`, `V-evand-exact-certificates`, `V-evand-arrangement-receipts` |
 | `E-evand-465-record-hunt-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-465-record-hunt-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | not recorded | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-check-half-angle-area`, `V-evand-exact-certificates`, `V-evand-arrangement-receipts` |
-| `E-wand125-fine-net-n29-582-followup-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-wand125-fine-net-n29-582-followup-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-wand125-fine-net-n29-582-followup-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | `V-sqverify-fast` |
+| `E-wand125-fine-net-n29-582-review-sample` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | `V-wand125-n29-review-premises`, `V-wand125-n29-review-axis-decision`, `V-wand125-n29-review-oblique-decision`, `V-wand125-n29-review-exact-capture` |
 | `E-n040-guzhou-clipped-corner-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-guzhou-n40-finite-py` |
 | `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | 0 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | not recorded | `V-sqverify-fast`, `V-audit-clipped-corner-transfer` |
 | `E-n040-guzhou-clipped-corner-finite-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-audit-clipped-corner-transfer` |
@@ -1030,10 +1032,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 396, verified 603
-- **method**: exact-algebraic 342, interval-certified 243, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 396
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 943
-- **relationship to the producer's code**: generator 5, independent-implementation 378, not-applicable 37, same-implementation 523, shared-components 55, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 396, verified 605
+- **method**: exact-algebraic 342, interval-certified 245, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 396
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 945
+- **relationship to the producer's code**: generator 5, independent-implementation 379, not-applicable 37, same-implementation 523, shared-components 56, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
