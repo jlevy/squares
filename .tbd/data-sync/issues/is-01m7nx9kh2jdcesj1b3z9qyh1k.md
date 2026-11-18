@@ -5,8 +5,8 @@ title: "Import #1018: Joost de Winter's raised lower bound for n = 108 and n = 1
 kind: task
 status: in_progress
 priority: 1
-version: 14
-delegate: w6-dewinter-1118
+version: 15
+delegate: w6r-dewinter-1118
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:54.594Z
-updated_at: 2026-11-18T04:20:37.887Z
+updated_at: 2026-11-18T04:38:15.073Z
 started_at: 2026-11-18T01:19:03.018Z
 ---
 
