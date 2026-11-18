@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 delegate: w6r-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T04:38:15.064Z
+updated_at: 2026-11-18T05:25:53.099Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -54,3 +54,5 @@ R-127 (blind review), 2026-11-18 03:30Z: review A addressed in d19d061e5 (addend
 R-127b (blind review), 2026-11-18T03:43Z: findings frozen and pushed at ee8cbc0b12 (verify with sha256sum -c frozen/findings-frozen.sha256 from the packet). Verdict: #1015, #1017, #1020 accepted (feasible; stated sides are the files' sides; prints are 12-place ceilings). Option D (think-b0w5), exact: T-305 margin 1.2099401e-10, gains 9.582e-4/9.6016e-4/9.6016e-4 (new); #1015 margin 7.7393785e-63, #1015->#1017 gain 1.9555984e-6 (new); #1017 margin 4.1902971e-14, #1017->#1020 gain 1.7976067e-13 = 4.29x margin, #1020 1.3786e-13 below shrunk #1017 (new). devtools.contraction_margin and measure_identity agree exactly (second route). Identity: #1017, #1020 one to one with predecessor under identity (5 and 1 beyond a tenth); none one to one with T-305. Significance: #1015 S3, #1017 S2, #1020 S2 (S1 alt). 133/134 controls as stated; E1p at #1020 a plan-rule defect (F3, minor). Minor custody: stale SHA256SUMS at #1017/#1020 pins (F8); #1017's 'later commits unchanged' now false (F9). Next: compare with R-127 (#1025), docs copy, draft PR. CPU ~0.2 h.
 
 R-127b (blind review), 2026-11-18T03:53Z: draft PR #1028 (https://github.com/jlevy/squares/pull/1028), labels intake and S2, head 485556fdab, base main 95f89dffce (#1025 merged in). Review: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, packet packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/. After the freeze: read R-127 (#1025) and compared (exact agreement on verdicts, margins, contraction and identity; this review adds F9, F10, F12, F15); F8 downgraded to a note on the source's push log (pins pushed together with their checksum fixes); author's checkers read as data (sound for the centre file); constant checkers caught at #1017 and #1020. Local records tier running.
+
+R-127b (blind review of record), 2026-11-18T05:27Z, lane r127b2-1118: PR #1028 merged at 05:25:00Z as 0f191a2d239c39f127b87ea840c536830653d1ff (merge commit; head 1e281a7567, main 3ac78a55f9 merged in; hosted CI green, 16 pass). Review A (https://github.com/jlevy/squares/pull/1028#issuecomment-6969042368) addressed in a dated addendum after the freeze (bcb047ed3f; README commands and rb127_e1p_walls.py in c932385e65); frozen lists still verify (22 and 42 OK); reply https://github.com/jlevy/squares/pull/1028#issuecomment-6969920966. For the mapping: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, verdict accepted at all three; questions for the author are 1, 3 and 4 (Question 2 withdrawn, F8 a note). Significance: this review reads #1015 S3, #1017 S2, #1020 S2 and does not govern; the S1/S2 rule near 1x the margin is the owner's (think-mu3t), and #1020, T-285 and T-286 should be scored by one reading.
