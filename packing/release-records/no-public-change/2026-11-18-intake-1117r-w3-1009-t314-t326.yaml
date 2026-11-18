@@ -10,12 +10,15 @@ paths:
   - packing/devtools/adopt_houses.py
   - packing/devtools/default_drawings.py
   - packing/devtools/select_houses.py
+  - packing/devtools/site_urls.py
   - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/n-180.md
   - packing/frontier/n-295.md
   - packing/frontier/results.yaml
   - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+  - packing/src/sqpack/render/color.py
 outputs:
   - papers/n11-lower-bounds-explainer.html
   - papers/n11-lower-bounds-explainer.md
@@ -35,14 +38,19 @@ reason: >-
   house writer's prose and sources, the admitted views at eleven counts and the
   settlements at 270 and 307, the composite figure, the bound citations at the thirteen
   counts, the requests entries for #1005 to #1007 and #1009 and the coverage text that
-  follow. No paper prints those counts, these records or those cards. Against origin/main
-  2980557a2 (#1016): devtools.compare_paper_renders rendered each paper into empty site
-  directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from
-  this tree and once with that main's copies of the twelve paths above swapped in. The
-  optimality review, the threshold-bound review and the methods survey are
-  byte-identical across the three, 43 files each. The explainer's 55 files are
+  follow. The gate's pinned translation-screen findings (validate.SCREEN_FINDINGS) and
+  three page ceilings (site_urls: results.html, result/t-007.html, result/t-180.html)
+  follow the new witnesses and the 13 new rows, and the colorizer pins a class that holds a
+  square at a pinned angle (render/color.py, _class_pin), which changes n = 292's house
+  frame and no other of the 324 house witnesses or 100 regularized views, measured. No
+  paper prints those counts, these records, those cards or that frame. Against
+  origin/main a1a8d0aae (#909): devtools.compare_paper_renders rendered each paper into
+  empty site directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM),
+  twice from this tree and once with that main's copies of the fifteen paths above
+  swapped in. The optimality review, the threshold-bound review and the methods survey
+  are byte-identical across the three, 43 files each. The explainer's 55 files are
   deterministic, and only its Markdown and HTML differ from the baseline; rendered again
-  from this tree and with the same twelve paths swapped in, and diffed, the one
+  from this tree and with the same fifteen paths swapped in, and diffed, the one
   difference in each is the register count the explainer reads (registered_results, "one
   of N results the framework has registered so far"), 326 here and 313 on that main, at
   one line each. The novelty count is unchanged at 32 (T-314 to T-326 are
