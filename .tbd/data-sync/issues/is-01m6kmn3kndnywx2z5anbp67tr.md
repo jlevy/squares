@@ -3,9 +3,9 @@ type: is
 id: is-01m6kmn3kndnywx2z5anbp67tr
 title: "Stage 4 review of T-142's mixed_n28_L57425 and T-143's mixed_n30_L58925 (wand125 s(28) >= 2297/400, s(30) >= 2357/400): the review that reads the certificates, owed before their census evidence can be mapped"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 delegate: w1-holds-1117r
 labels:
   - result-import
@@ -15,8 +15,12 @@ parent_id: is-01m4kbxmtaqt87tdw33cs19ah8
 hold: null
 hold_until: null
 created_at: 2026-11-04T16:00:43.636Z
-updated_at: 2026-11-17T21:29:42.731Z
+updated_at: 2026-11-18T00:55:52.688Z
 started_at: 2026-11-11T10:57:38.005Z
+closed_at: 2026-11-18T00:55:52.688Z
+close_reason: "Both stage 4 reviews of T-142 and T-143 (4 and 11 November) are on main: #953 merged e01cffa62 (17 Nov), #908 merged 2be743b07 (18 Nov), which maps both and takes T-142/T-143 to V3/C3. check_bead_tree --before-close think-4ul6 on main 45f0288b5: may close."
+resolution: null
+duplicate_of: null
 ---
 T-142 (wand125's s(28) >= 2297/400, mixed_n28_L57425) and T-143 (s(30) >= 2357/400, mixed_n30_L58925), reported on no issue and registered at V0/C0, have no review that reads their certificates: the 11 October final review read the record and premises only. The declared-net route's checklist (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md, For the Records Lane, item 7) needs a review under docs/project/reviews/ that read the certificate and accepted it before a census replay's evidence can be mapped, and check_results' verified_lane_review_problems holds an adoption at n = 28 or 30 to a mapped review. So neither can leave V0/C0 by a census alone, as think-1lri says of T-132.
 

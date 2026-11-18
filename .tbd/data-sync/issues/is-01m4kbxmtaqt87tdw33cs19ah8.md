@@ -5,7 +5,7 @@ title: "Import wand125: s(28) >= 2297/400 and s(30) >= 2357/400 by fine-net chec
 kind: task
 status: in_progress
 priority: 2
-version: 20
+version: 21
 delegate: w1-holds-1117r
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T16:56:42.570Z
-updated_at: 2026-11-17T23:05:17.151Z
+updated_at: 2026-11-18T00:55:56.097Z
 started_at: 2026-11-04T15:03:02.888Z
 ---
 Found by the 2026-10-10 evening reads (think-0nkn): wand125/square-packing 36b85b9 and ff9f269 add problems/square-lower-bounds/certificates/mixed_n28_L57425/ and mixed_n30_L58925/, check2 bundles on the 2,073-direction net (core 4999/5000, step 1/5002), reporting s(28) >= 2297/400 = 5.7425 (mass 2799999/100000; +3/400 over T-107's 1147/200; +1/400 over #446's unadopted 287/50) and s(30) >= 2357/400 = 5.8925 (mass 2999999/100000; +9/1000 over T-109's 11767/2000). Data: square-lower-bounds-v1 assets certificates__mixed_n28_L57425.tar.gz (627,191 B, SHA-256 7d0f910768d47fcdba6233334798487471db7ef2fe556400269c34c3116d3bf3) and certificates__mixed_n30_L58925.tar.gz (638,622 B, 0d11fe0554909e1457d70efa425c82344e622006590ac6ee58a481b69d1b61ba). Author: 772 s and 1790.3 s, 0.985 control at 32 directions. No issue reports them. Stages 1-3 as T-132 (#446 s(29)) did with devtools.fine_net_followup; full capture likely CPU-hours (owner budget).
@@ -67,3 +67,5 @@ Order once unblocked: retain the two release assets' members, add the packet to 
 2026-11-17T21:55Z coord-intake-1117r: reclaimed from silent c-holds-1117 / bold-ritchie lanes; delegated to w1-holds-1117r (worktree /home/user/wt/w1): address #953 review A, merge #953 -> #908 -> #909 per think-fibh.
 
 2026-11-17 w1-holds-1117r (PR #953 review A, suggestion A6, deferred here as think-ctcq): for the stage 7 reply that shares the 11 November review with the author, its question Q4 can be sharper. Review A's reviewer read wand125/square-packing-tools at 5fba675ed61c (6 October): its fine_net_verifier/PROVENANCE.md names jlevy/squares main at dee22b882 (#362, 5 October) as the upstream base and fe12e036c as the branch commit (the archive's name), while the bundles' UPSTREAM_COMMIT names 42534d959d..., which this clone does not hold. Ask why UPSTREAM_COMMIT differs from the base PROVENANCE.md names. Not compared: that copy against the archive e495f9bf.... Source: https://github.com/jlevy/squares/pull/953#issuecomment-6938296720
+
+2026-11-18 w1-holds-1117r: #953 (e01cffa62) and #908 (2be743b07) merged; T-142 and T-143 are V3/C3 on main and both lower lanes at n = 28 and 30 hold them; deploy verified (Pages 44205944299 attempt 2, check_published_site 6389/6389). Posted: #776 final https://github.com/jlevy/squares/issues/776#issuecomment-6965313743 and #777 final https://github.com/jlevy/squares/issues/777#issuecomment-6965314300 (both closed), #532 https://github.com/jlevy/squares/issues/532#issuecomment-6965326217, #446 https://github.com/jlevy/squares/issues/446#issuecomment-6965326853. Still open on this bead: the stage 7 reply that shares the two reviews (author findings M-1 to M-4 and F-1 to F-7, Q4 per think-ctcq) with the author, on the owner's word (no issue of the author's carries T-142/T-143); the records lane's recording of the four replies; think-ux1v dependency in the tracker (stale for lower bounds per think-fibh).
