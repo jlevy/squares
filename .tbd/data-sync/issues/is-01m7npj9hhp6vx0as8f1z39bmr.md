@@ -5,16 +5,18 @@ title: "Apply the 17 November owner decisions' record changes: close #574 with t
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: w4-records-1117r
 labels:
   - intake
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+child_order_hints:
+  - is-01m7nzb3t01tet3pf3fxcbcrkb
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.249Z
-updated_at: 2026-11-17T23:53:02.029Z
+updated_at: 2026-11-18T00:01:41.184Z
 started_at: 2026-11-17T21:29:36.275Z
 ---
 
