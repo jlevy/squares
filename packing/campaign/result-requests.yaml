@@ -28,7 +28,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-11-17'
+last_reviewed: '2026-11-18'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -4849,6 +4849,34 @@ issues:
       - result: fine-net-n27-5655-followup
         id: E-wand125-fine-net-n27-5655-followup-sqverify-fast-replay
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6965326853
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n28
+        id: E-wand125-fine-net-lower-bounds-446-report
+        status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6967367035
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n29-582-followup
+        id: T-132
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-n29-582-followup
+        id: E-wand125-fine-net-n29-582-followup-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-n29-582-followup
+        id: E-wand125-fine-net-n29-582-followup-report
+        status: reviewed
+      - result: fine-net-n29
+        id: E-wand125-fine-net-lower-bounds-446-report
+        status: recorded
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -8355,7 +8383,8 @@ issues:
     title: 'n = 102: certified s = 10.605828696455852'
     author: riocalle
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -8443,6 +8472,23 @@ issues:
       - result: valley-bottom
       - result: earlier-layout
       - result: private-certificate
+    - url: https://github.com/jlevy/squares/issues/529#issuecomment-6967032263
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n102-layout
+        id: T-159
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n102-layout
+        id: E-calle-529-exact-feasibility
+        status: confirmed
+      - result: valley-bottom
+      - result: earlier-layout
+      - result: private-certificate
     close_when: The import and its disposition are on main, the credit relation to Ryan Xu's
       packing is measured and stated, T-159 stays registered as the owner chose on 17 November
       2026, and the resulting state has been posted; optimality and the author's private
@@ -8456,6 +8502,14 @@ issues:
       rendered with `check_requests --draft 529` from main, and closes it, and its
       blocked:owner-decision label goes with the close. The decision was tracked on
       jlevy/squares#543, which gets a follow-up too.
+
+      Closed on 18 November 2026 with the final comment (issuecomment-6967032263), posted
+      after #1016 merged as 2980557a2 and its deploy was verified; recorded by the records
+      lane w4r-records-1118. It states the owner's decision, T-159 at V3/C3, confirmed, and
+      superseded (by T-146 on arrival, by T-193, the house since 23 October, now),
+      E-calle-529-exact-feasibility confirmed, and the three claims not registered with
+      their reasons. Its blocked:owner-decision label was removed with the close; #543's
+      follow-up of the same day (issuecomment-6967037169) reports the decision there.
   - number: 532
     title: Replay wand125's lower bounds T-142, T-143 and T-144 (with T-132) and their whole-net controls
     author: jlevy
@@ -8474,7 +8528,8 @@ issues:
       lower-bound confirmations on 17 November 2026 (think-fibh). T-142's, T-143's and T-132's
       censuses, controls and reviews ran on 4 November 2026 (think-i85v, think-r333), and the
       case records adopt them in the pass of 17 November (#908, #909); T-144's replay is still
-      to run (think-nd7g). Two owner questions stay open on #543.
+      to run (think-nd7g). Both #532 lines on #543 are settled (the owner's answer of 17
+      October; #892).
     read_through: '2026-10-12T07:49:51Z'
     results: []
     asks:
@@ -8501,7 +8556,7 @@ issues:
         think-ux1v) for the lower-bound confirmations on 17 November 2026 (think-fibh), so
         this replay waits on compute alone (the block below).
     - what: The complete replay of T-132 in the same lane, and a reply on issue 446.
-      state: queued
+      state: done
       source: body
       bead: think-r333
       note: >-
@@ -8509,8 +8564,10 @@ issues:
         2,073 directions and its whole-net control, with the stage 4 review think-1lri as
         the audit record, put T-132 at V3/C3. The owner lifted the order of 11 October
         (regularize every packing first, think-ux1v) for these confirmations on 17 November
-        2026 (think-fibh), and the case record adopts T-132 in the pass of that day (#909);
-        the reply on #446 is owed once that is on main.
+        2026 (think-fibh), and the case record adopts T-132 in the pass of that day (#909).
+        Done on 18 November 2026: #909 merged as a1a8d0aae, and the reply on #446
+        (issuecomment-6967367035) and this issue's follow-up (issuecomment-6967368650) report
+        T-132 at V3/C3, confirmed, current, recorded by the records lane w4r-records-1118.
     beads:
     - think-i85v
     - think-nd7g
@@ -8522,6 +8579,18 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/532#issuecomment-6965326217
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported: []
+      beads: [think-r333, think-nd7g]
+    - url: https://github.com/jlevy/squares/issues/532#issuecomment-6967368650
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported: []
+      beads: [think-nd7g]
     blocked:
       type: compute
       reason: >-
@@ -8824,7 +8893,8 @@ issues:
     title: Take Valid7 in the Lean kernel (evand/square-packing 060c1a1) as evidence for T-064
     author: jlevy
     opened: '2026-10-12'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: other
     intake: true
     triage: done
@@ -8888,6 +8958,12 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/537#issuecomment-6967032773
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported: []
+      beads: [think-qu37]
     close_when: The packet and the evidence entry are on main, and the rebuild's disposition of 17
       November 2026 (the full build declined over the cap, the sample runnable under it) is on main
       and stated in a reply.
@@ -8909,6 +8985,13 @@ issues:
       the full build is declined at its price and that the sample stays runnable under the cap on
       think-qu37 and moves no rung, and closes it; its blocked:owner-decision label goes with the
       close. T-250's next_rung and its unfinished confirmation state the decline with the price.
+
+      Closed on 18 November 2026 with the final comment (issuecomment-6967032773), posted
+      after #1016 merged as 2980557a2 and its deploy was verified; recorded by the records
+      lane w4r-records-1118. It says the full build is declined at about 798 CPU-hours, that
+      the sample of about 100 roots, about 8 CPU-hours, stays runnable on think-qu37,
+      unscheduled, and moves no rung, that the evidence belongs to T-250 at V0/C0 and that
+      T-064 stays at V3/C3. Its blocked:owner-decision label was removed with the close.
   - number: 538
     title: Workbench trajectory cost check flakes over 400 ms under CI load
     author: jlevy
@@ -9303,6 +9386,26 @@ issues:
       - >-
         whether to keep T-159 (#529) is the owner's decision: the owner decided on 17
         November 2026 to keep it registered
+    - url: https://github.com/jlevy/squares/issues/543#issuecomment-6967037169
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported: []
+      beads: [think-qu37, think-nd7g]
+      corrects:
+      - https://github.com/jlevy/squares/issues/543#issuecomment-6166305101
+      outdated:
+      - >-
+        T-132's records follow in #909, still open: #909 had merged as a1a8d0aae at
+        02:14:45Z, before this reply was posted at 02:19:31Z
+    - url: https://github.com/jlevy/squares/issues/543#issuecomment-6968200183
+      date: '2026-11-18'
+      by: jlevy
+      kind: correction
+      reported: []
+      beads: [think-nd7g]
+      corrects:
+      - https://github.com/jlevy/squares/issues/543#issuecomment-6967037169
     blocked:
       type: owner-decision
       reason: >-
@@ -9317,6 +9420,15 @@ issues:
       (think-xnj5). The owner decided on 17 November 2026 to keep it registered (think-x30l),
       which settles that decision; the follow-up saying so follows the merge of the change that
       records it.
+
+      The follow-up of 18 November 2026 (issuecomment-6967037169, 02:19:31Z), posted after
+      #1016 merged as 2980557a2 and its deploy was verified, says that and that the owner's
+      decisions of 17 November settle the Valid7 line (think-l7j0) and both #532 lines, and
+      that two runs over the cap were declined with Valid7. It said T-132's records follow
+      in #909, still open, though #909 had merged as a1a8d0aae at 02:14:45Z (review A1 of
+      #1026); the correction of the same day (issuecomment-6968200183) says that T-132 is
+      V3/C3, confirmed, current and adopted at 29. Both are recorded by the records lane
+      w4r-records-1118. The other lines stay with the owner.
   - number: 544
     title: 'Intake pass of 2026-10-11: remaining work'
     author: jlevy
@@ -10370,7 +10482,8 @@ issues:
     title: 'research: submit 148 square-packing certificate refinements with exact endpoints'
     author: BuddenPing
     opened: '2026-10-13'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -10445,6 +10558,23 @@ issues:
         id: T-174
         verification: V3
         confirmation: C3
+    - url: https://github.com/jlevy/squares/issues/574#issuecomment-6967028143
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: pr574-certificates
+        id: T-174
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: pr574-certificates
+        id: E-pingyou-574-certificate-report
+        status: reviewed
+      - result: pr574-certificates
+        id: E-pingyou-574-algebraic-report
+        status: reviewed
     close_when: The import and its disposition are on main, and the thank-you note the owner decided
       on 17 November 2026 states the resulting state with T-174's id and closes the pull request;
       optimality is outside this request.
@@ -10484,6 +10614,16 @@ issues:
       the houses it became and the later packings that replaced some of them, the follow-ups
       that waited on this hold at 179, 180, 228 and 269, and a thank-you; it closes the pull
       request, and the next change records it as `final`.
+
+      Closed on 18 November 2026, unmerged, with the thank-you note
+      (issuecomment-6967028143, 02:18Z), posted after #1016 merged as 2980557a2 and its
+      Pages deploy was verified (run 44216081724; check_published_site 6416 of 6416);
+      recorded by the records lane w4r-records-1118. It states T-174 at V3/C3, confirmed,
+      current, and both report entries reviewed, which the follow-up of 14 October gave as
+      recorded; that the other 80 counts tie or trail an earlier report or stay undecided at
+      29, 55, 71 and 83; that 23 of the 68 case records still take their upper bound from
+      T-174; and that T-294 (179), T-288 (180), T-301 (228) and T-297 (269) replaced it
+      there. Its blocked:owner-decision label was removed with the close.
   - number: 575
     title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
       registration request'
@@ -24909,6 +25049,40 @@ issues:
         n683 held from a row on think-2z2n until the project decides whether an issue-claimed
         deletion bound gets a row: the owner's answer of 17 November 2026 settles it with no
         row, since the issue claims it with no certificate file of its own
+    - url: https://github.com/jlevy/squares/issues/763#issuecomment-6967037416
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n268
+        id: T-240
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n268
+        id: E-couzo-763-exact-feasibility
+        status: confirmed
+      - result: n268
+        id: E-couzo-763-review-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: T-240
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n303
+        id: E-couzo-763-exact-feasibility
+        status: confirmed
+      - result: n303
+        id: E-couzo-763-review-exact-feasibility
+        status: confirmed
+      - result: n683
+      - result: rows-above-1024
+      beads: [think-llit]
+      corrects:
+      - https://github.com/jlevy/squares/issues/763#issuecomment-6542832947
     blocked:
       type: author
       reason: >-
@@ -25164,7 +25338,8 @@ issues:
       declared net — review tracking'
     author: jlevy
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -25178,8 +25353,8 @@ issues:
       whole-net control passed (think-i85v); the separately prompted review of 11 November
       accepted it again. T-142 is V3/C3, and the case record at n = 28 takes 2297/400 in both
       lower lanes in the pass of 17 November, when the owner lifted the order of 11 October
-      that had queued the replay after think-ux1v (think-fibh, #908); the reply that reports
-      the rungs is owed.
+      that had queued the replay after think-ux1v (think-fibh, #908). The final reply of 18
+      November 2026 reports the rungs and closes the issue.
     read_through: '2026-10-24T05:13:16Z'
     results:
     - key: mixed-n28-57425
@@ -25207,6 +25382,37 @@ issues:
       - result: mixed-n28-57425
         id: E-wand125-fine-net-n28-57425-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/776#issuecomment-6963938807
+      date: '2026-11-17'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: mixed-n28-57425
+        id: T-142
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: mixed-n28-57425
+        id: E-wand125-fine-net-n28-57425-report
+        status: reviewed
+    - url: https://github.com/jlevy/squares/issues/776#issuecomment-6965313743
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: mixed-n28-57425
+        id: T-142
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: mixed-n28-57425
+        id: E-wand125-fine-net-n28-57425-report
+        status: reviewed
+      - result: mixed-n28-57425
+        id: E-wand125-fine-net-n28-57425-sqverify-fast-replay
+        status: confirmed
     review_track: true
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
@@ -25216,7 +25422,8 @@ issues:
       declared net — review tracking'
     author: jlevy
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -25230,8 +25437,8 @@ issues:
       whole-net control passed (think-i85v); the separately prompted review of 11 November
       accepted it again. T-143 is V3/C3, and the case record at n = 30 takes 2357/400 in both
       lower lanes in the pass of 17 November, when the owner lifted the order of 11 October
-      that had queued the replay after think-ux1v (think-fibh, #908); the reply that reports
-      the rungs is owed.
+      that had queued the replay after think-ux1v (think-fibh, #908). The final reply of 18
+      November 2026 reports the rungs and closes the issue.
     read_through: '2026-10-24T05:13:18Z'
     results:
     - key: mixed-n30-58925
@@ -25259,6 +25466,37 @@ issues:
       - result: mixed-n30-58925
         id: E-wand125-fine-net-n30-58925-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/777#issuecomment-6963939109
+      date: '2026-11-17'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: mixed-n30-58925
+        id: T-143
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: mixed-n30-58925
+        id: E-wand125-fine-net-n30-58925-report
+        status: reviewed
+    - url: https://github.com/jlevy/squares/issues/777#issuecomment-6965314300
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: mixed-n30-58925
+        id: T-143
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: mixed-n30-58925
+        id: E-wand125-fine-net-n30-58925-report
+        status: reviewed
+      - result: mixed-n30-58925
+        id: E-wand125-fine-net-n30-58925-sqverify-fast-replay
+        status: confirmed
     review_track: true
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
@@ -25543,6 +25781,23 @@ issues:
       - >-
         the complete build C3 needs, about 862 CPU-hours, held above the item cap for the
         owner's decision: the owner declined it at that price on 17 November 2026
+    - url: https://github.com/jlevy/squares/issues/783#issuecomment-6967036738
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n59-lean-kernel
+        id: T-235
+        verification: V0
+        confirmation: C0
+        status: recorded
+        position: second certificate
+      - result: n59-lean-kernel
+        id: E-n059-wand125-lean-kernel-report
+        status: recorded
+      beads: [think-xk3f]
+      corrects:
+      - https://github.com/jlevy/squares/issues/783#issuecomment-6381478743
     review_track: true
     close_when: >-
       The review its C1 needs has landed on main, the build its C3 needs has landed or the
@@ -31450,7 +31705,8 @@ issues:
     title: 'Fifteen lowered upper bounds for n between 413 and 910: registration request'
     author: JoostdeWinter
     opened: '2026-11-10'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -31523,6 +31779,14 @@ issues:
       date: '2026-11-11'
       by: jlevy
       kind: import
+      reported:
+      - result: above324-15
+      - result: n809
+      beads: [think-kzme]
+    - url: https://github.com/jlevy/squares/issues/941#issuecomment-6967033493
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
       reported:
       - result: above324-15
       - result: n809
@@ -31645,6 +31909,16 @@ issues:
       couzo-issue763-2026-10-23 there is superseded. Nothing on the issue waits any longer: the
       reply that says so follows the merge of the change that records it, rendered with
       `check_requests --draft 941` from main, and closes the issue as its final comment.
+
+      Closed on 18 November 2026 with the final comment (issuecomment-6967033493), posted
+      after #1016 merged as 2980557a2 and its deploy was verified; recorded by the records
+      lane w4r-records-1118. It says that 809 has its row by the owner's answer of 17
+      November, 1.19e-4 below couzo-issue763-2026-10-23's row, which it supersedes, with both
+      evidence atoms covering it; that all fifteen are verified rows beyond the case corpus
+      with no T-numbers; that unclaimed deletion and border-step bounds from these sides have
+      no rows, and that multi-square deletions wait on think-kzme, which no count here
+      depends on; and that the author's margin answer and his 501cb8d edition are recorded
+      in the packet's README and change no row.
   - number: 942
     title: 'Sixteen lowered upper bounds for n between 632 and 989: registration request'
     author: JoostdeWinter
@@ -33647,6 +33921,29 @@ issues:
       - >-
         the full replay priced and held for the maintainer's budget decision: on 17 November
         2026 the owner held all of it, the subsets under the item cap included
+    - url: https://github.com/jlevy/squares/issues/973#issuecomment-6967036950
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: k2m5-family
+        id: T-298
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: current
+      - result: k2m5-family
+        id: E-khalili-973-review-partial-checks
+        status: confirmed
+      - result: k2m5-family
+        id: E-khalili-973-replay-sample
+        status: recorded
+      - result: k2m5-family
+        id: E-khalili-973-review-replay-sample
+        status: recorded
+      beads: [think-0h7r, think-kn13]
+      corrects:
+      - https://github.com/jlevy/squares/issues/973#issuecomment-6890009039
     close_when: >-
       T-298 is on main with the stage 4 review mapped, and the reply on main says what was
       retained and run, what the review found, and that the full replay is priced and owned
@@ -36066,12 +36363,24 @@ issues:
         November 2026 its head was still 702df9bb of 16 September, on its only branch, with the
         84-byte README naming none, and the issue leaves the other sources unnamed. think-a88h
         records them when a published revision names them.
+    awaiting_author:
+    - question: >-
+        Could you push the README revision of JoostdeWinter/square-packing-211 that names T-057's
+        sources, and name the "other sources" in it? When last read, at 21:37Z on 17 November
+        2026, its head was still 702df9bb, whose 84-byte README names no prior work.
+      changes: lineage
+      asked: https://github.com/jlevy/squares/issues/1008#issuecomment-6964537872
+      state: awaiting
     beads:
-    - think-dp8t
     - think-a88h
-    - think-dw3n
-    answer_bead: think-dp8t
-    replies: []
+    answer_bead: think-a88h
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1008#issuecomment-6964537872
+      date: '2026-11-17'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+      beads: [think-a88h]
     blocked:
       type: author
       reason: >-
@@ -36081,6 +36390,15 @@ issues:
       T-057's sources are named in a published revision and carried through the chain at 211,
       or the author withdraws the ask, and the author has received a reply verified against
       main and the deployed site.
+    notes: >-
+      The acknowledgement of 17 November 2026 (issuecomment-6964537872, 23:53:56Z), posted by
+      lane w2-credit-1117r after #1010 merged as 240e3de0c and its deploy was verified, reports
+      the credit lines that now name de Winter at 211, 182 and 156 and why the finder at 211
+      stays Ostashev, and asks for the README revision that names T-057's sources
+      (awaiting_author); recorded by the records lane w4r-records-1118. think-dp8t's check of
+      the chain and its credit changes are done, so think-a88h, which carries T-057's sources
+      down the chain once a published revision names them, answers the issue from here;
+      think-dw3n, closed, is dropped from the beads.
   - number: 1012
     title: 'Public Kaggle packings below the register for n = 109 and n = 270: pointer'
     author: JoostdeWinter
@@ -36135,7 +36453,20 @@ issues:
     beads:
     - think-wvr8
     answer_bead: think-wvr8
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1012#issuecomment-6967037708
+      date: '2026-11-18'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n109-kaggle
+      - result: n270-kaggle
+    blocked:
+      type: author
+      reason: >-
+        Both pointed-to packings wait on the exact Witness/v2 files the issue says are attached,
+        which only the author can attach or commit; none had reached this repository when the
+        acknowledgement of 18 November 2026 asked for them.
     close_when: >-
       Each pointed-to packing is imported from an exact certificate that reached this
       repository (registered with credit to the notebooks' authors, or recorded as not
@@ -36154,6 +36485,17 @@ issues:
       later that day, reports s(270) <= 16.927314216352 below the Kaggle sides here, with a
       certificate in his repository's n270/; it is an import of its own, and this issue's
       acknowledgement reads it first.
+
+      The acknowledgement of 18 November 2026 (issuecomment-6967037708), posted after #1016
+      merged as 2980557a2 and its deploy was verified and recorded by the records lane
+      w4r-records-1118, says that no file came with the issue, that the notebooks' files need
+      a Kaggle login and Kaggle answered with HTTP 404, and that the author's repository holds
+      none either: read at its head 838c5ea (2026-11-17T22:48:48Z) on 18 November, it has no
+      file for 109, and its n270/ (first committed at a1ba501) is #1022's
+      packing. It asks him to attach the two Witness/v2 files or commit them, says how the
+      import runs once one arrives, with the credit he asks for, and that #1022 is an import
+      of its own. The issue now waits on the author's files (blocked: author), and its
+      blocked:author label follows the merge of the change that records the block.
   - number: 1018
     title: Raised lower bound for n = 108 and n = 109 (side 10.630037940829)
     author: JoostdeWinter
