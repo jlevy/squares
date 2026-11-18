@@ -65482,7 +65482,7 @@ evidence:
       by separating axes in Python integers from the poses and again by exact convex
       clipping in gmpy2.mpq from the corners, each method run on both forms, with no
       distance filter: every pair strictly apart and every wall cleared by at least 1e-28,
-      exactly that at the left and bottom walls,, the least pair margins 2.0e-28 at ten
+      exactly that at the left and bottom walls; the least pair margins 2.0e-28 at ten
       counts, 1.44492e-24 at 180, 1.77633e-20 at 295 and 4.23790e-15 at 292; the two forms
       the same squares at all 3,218. rv1009_controls.py decided the 37 controls a count the
       plan hashed beforehand states (out/controls-nNNN.json), all 481 as stated, among them

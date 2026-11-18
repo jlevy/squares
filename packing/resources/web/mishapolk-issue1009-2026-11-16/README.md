@@ -176,9 +176,10 @@ step on the 262 certificate.
 
 MIT, copyright (c) 2026 Mykhailo Polkovskyi, by `LICENSE` at the pin, whose grant on
 #719 covers the certificates. The key `[Mishapolk issue 1009 2026-11-16]` credits
-`Polkovskyi after Ozden, Daniel, Ono, ntumlnoob, Couzo, Levy`: the standing authors of
-the packings the refinements re-solve and the improvements continue, and this project,
-whose houses they re-solve and whose independent corner checker the author ran.
+`Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo, Levy`: the standing
+authors of the packings the refinements re-solve and the improvements continue (de
+Winter’s at 262 and 292, by the owner’s answer of 17 November 2026, think-bx2a), and this
+project, whose houses they re-solve and whose independent corner checker the author ran.
 
 ## Commands
 
