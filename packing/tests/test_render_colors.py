@@ -40,11 +40,12 @@ from sqpack.witness import load_witness
 #: above the 52 at Couzo's n = 301. Since 12 November 2026 Doğa Özden's n = 237 (T-295)
 #: carries 103, above the 85 at Couzo's n = 267. Since 16 November 2026 JoeGun's n = 305
 #: (T-309, think-0y9m), whose turned squares keep the binary64 pose's many slightly
-#: different angles, carries 131, above Özden's 103 at n = 237.
+#: different angles, carries 131, above Özden's 103 at n = 237. Since 18 November 2026
+#: Mykhailo Polkovskyi's n = 295 (T-324, think-i38n) carries 165, above JoeGun's 131.
 GOLDEN_MAX_ANGLE_CLASSES: dict[str, tuple[int, int]] = {
     "n=1..100": (14, 69),
     "n=1..200": (67, 182),
-    "n=1..324": (131, 305),
+    "n=1..324": (165, 295),
 }
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
@@ -447,10 +448,11 @@ def _angle_classes_by_case() -> dict[int, dict[int, list[tuple[int, float]]]]:
 
 
 def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries() -> None:
-    """The current corpus asks for 131 angle classes in one frame; the palette has 20.
+    """The current corpus asks for 165 angle classes in one frame; the palette has 20.
 
     The renderer colors per frame, so the relevant count is the largest class count
-    in any single frame: 131 at JoeGun's n = 305 (T-309) since its adoption on 16 November
+    in any single frame: 165 at Mykhailo Polkovskyi's n = 295 (T-324) since its adoption on
+    18 November 2026, 131 at JoeGun's n = 305 (T-309) from its adoption on 16 November
     2026, and 103 at Doğa Özden's n = 237 (T-295) from its adoption on 12 November 2026,
     against 14 when the corpus stopped at 100. Before that it was 85 at
     Couzo's n = 267 (T-134) from the house adoption of 11 October 2026. It was 106 at the

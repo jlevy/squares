@@ -96,8 +96,9 @@ from sqpack.yamlio import safe_load
 #: n = 229 onto Evan Daniel's issue 674 packet (T-199), and that of 20 October n = 227 and
 #: 260 onto Joost de Winter's issue 668 packet (T-196), and that of 21 October n = 260 onto
 #: Francisco Couzo's issue 678 packet (T-223), and that of 15 November n = 147 onto Roberto
-#: Ono's issue 985 packet (T-302).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 21, "n=1..324": 40}
+#: Ono's issue 985 packet (T-302), and that of 18 November n = 262 onto Mykhailo
+#: Polkovskyi's issue 1009 packet (T-319).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 21, "n=1..324": 39}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -137,11 +138,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # 299 (both from Kingbird), to Evan Daniel's issue 845 and issue 824 update packets, and
     # on 11 November 157 (from the grid), to Joost de Winter's issue 958 packet (T-293), and
     # on 15 November 147 (from Kingbird), to Roberto Ono's issue 985 packet (T-302), and 90
-    # (from the grid), to jazivxt's issue 989 packet (T-303).
+    # (from the grid), to jazivxt's issue 989 packet (T-303), and on 18 November 262 (from
+    # Kingbird), to Mykhailo Polkovskyi's issue 1009 packet (T-319).
     "n=1..324": {
         "exact-grid": 172,
-        "kingbird-derived-facts": 69,
-        "packet-derived-facts": 83,
+        "kingbird-derived-facts": 68,
+        "packet-derived-facts": 84,
     },
 }
 
@@ -2501,8 +2503,13 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # two packets (T-301, T-302), and no longer from Özden's issue 983 packet, which held
     # nothing else: two sources more and one fewer, Ono held off the block. Lane L170 of 15
     # November draws 90 from jazivxt's issue 989 packet (T-303), one more source, where the
-    # grid was, jazivxt held off the block.
-    assert len(expected_sources) == 47
+    # grid was, jazivxt held off the block. The pass of 18 November 2026 (think-i38n) draws
+    # its thirteen counts, 147 to 307, from Mykhailo Polkovskyi's issue 1009 packet, one
+    # more source with no new name, and no longer from Ono's issue 985 packet, Evan
+    # Daniel's issue 914 n260 packet and regularized lists of 10 October (T-146 at 292), or
+    # Özden's s156, s180, s268, s270, s299 and s307 packets, which held nothing else: nine
+    # fewer. PingYou Ltd's PR 574 certificates and Daniel's issue 639 forms keep others.
+    assert len(expected_sources) == 39
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2532,6 +2539,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Daniel",
         "de Winter",
         "Gupta",
+        # Mishapolk's place moved up on 18 November 2026, when the pass of that day
+        # (think-i38n) credited him at thirteen more counts (T-314 to T-326).
+        "Mishapolk",
         "ntumlnoob",
         "Ostashev",
         "PingYou Ltd",
@@ -2540,7 +2550,6 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Chang",
         "DeVincentis",
         "hmbelvedere",
-        "Mishapolk",
         "Rehwaldt",
     ]
     assert all(body.count(name) == 1 for name in expected_names)
@@ -2662,7 +2671,11 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     block already prints, so the hold still holds jazivxt alone there. Lane L187
     (think-0y9m) credits Tomáš Kodaj as the finder and JoeGun as the improver at 127, 204,
     232, 264 and 305 (T-305 to T-309, in the same pass), two new names, held alike, and
-    Özden no longer at 232; released, the block gains both."""
+    Özden no longer at 232; released, the block gains both. The pass of 18 November 2026
+    (think-i38n) credits Mykhailo Polkovskyi (Mishapolk) as the improver at 147, 156, 180,
+    260, 262, 268, 270, 292, 299 and 307 and as the finder at 210, 272 and 295 (T-314 to
+    T-326), a name the block already prints, as is de Winter's at 262 and 292, so the hold
+    is unchanged and holds Özden and Ono where they are still credited."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
@@ -2675,13 +2688,13 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
     for n, found, improved in (
-        (156, ["Doğa Özden"], []),
+        (156, ["Doğa Özden"], ["Mishapolk"]),
         (172, ["Evan Daniel"], ["Doğa Özden"]),
         (179, ["Doğa Özden"], []),
-        (180, ["Doğa Özden"], []),
+        (180, ["Doğa Özden"], ["Mishapolk"]),
         (199, ["Evan Daniel"], ["Doğa Özden"]),
         (90, ["jazivxt"], ["Joost de Winter"]),
-        (147, ["Roberto Ono"], []),
+        (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, ["Roberto Ono"], []),
         (127, ["Tomáš Kodaj"], ["JoeGun"]),
         (204, ["Tomáš Kodaj"], ["JoeGun"]),
@@ -2689,21 +2702,21 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (264, ["Tomáš Kodaj"], ["JoeGun"]),
         (305, ["Tomáš Kodaj"], ["JoeGun"]),
         (237, ["Doğa Özden"], []),
-        (268, ["Doğa Özden"], []),
+        (268, ["Doğa Özden"], ["Mishapolk"]),
         (269, ["Doğa Özden"], []),
-        (270, ["Evan Daniel"], ["Doğa Özden"]),
-        (299, ["Evan Daniel"], ["Doğa Özden"]),
+        (270, ["Evan Daniel"], ["Doğa Özden", "Mishapolk"]),
+        (299, ["Evan Daniel"], ["Doğa Özden", "Mishapolk"]),
         (303, ["Evan Daniel"], ["Doğa Özden"]),
-        (307, ["ntumlnoob"], ["Francisco Couzo", "Doğa Özden"]),
+        (307, ["ntumlnoob"], ["Francisco Couzo", "Doğa Özden", "Mishapolk"]),
     ):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert (reported["found_by"], reported["improved_by"]) == (found, improved), n
-    assert citations[299]["upper"]["text"] == "Daniel & Özden, GitHub"
+    assert citations[299]["upper"]["text"] == "Daniel et al., GitHub"
     for n in (260,):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert reported["found_by"] == ["Evan Daniel"]
-        assert reported["improved_by"] == []
-        assert citations[n]["upper"]["text"] == "Daniel 2026, GitHub"
+        assert reported["improved_by"] == ["Mishapolk"]
+        assert citations[n]["upper"]["text"] == "Daniel & Mishapolk, GitHub"
     corpus = known_best_builder.CORPUS
     read_credits = known_best_builder._poster_packing_credits  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     credit_lines = known_best_builder._print_credit_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
@@ -2744,8 +2757,10 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     assert drawn.get("height") == str(height)
     # Measured on 16 November 2026: with the hold the 1-100 canvas keeps its drawn height,
     # 3,898; released, the block's lines, with Kodaj's and JoeGun's names and without
-    # Chilton's, lay the canvas out at 3,869, a difference the next infographics cut draws.
-    assert (height, released_height) == (3898, 3869)
+    # Chilton's, laid the canvas out at 3,869. Measured on 18 November 2026, after
+    # Mishapolk's name moved up the block (think-i38n), released lines lay it out at 3,898
+    # too, so the next infographics cut changes the lines and not the height.
+    assert (height, released_height) == (3898, 3898)
 
 
 def test_the_print_credit_hold_cannot_outlive_its_edition(

@@ -6414,8 +6414,11 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: 1,512,211 bytes on 6 November, so the 18 rows reach 1,596,109 bytes, 3,891 below the
 #: ceiling at 291 results, less than one row. On 12 November #967's T-297 takes the page to
 #: 297 results and 1,600,513 source bytes, past 1,600,000, at a P90 row of 4,587 bytes; the
-#: ceiling moves to 1,700,000, room for 21 more rows (think-v1qe).
-PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_700_000}
+#: ceiling moves to 1,700,000, room for 21 more rows (think-v1qe). On 18 November #1009's
+#: T-314 to T-326 take the page to 326 results and 1,706,120 source bytes, past 1,700,000,
+#: at a P90 row of 4,507 bytes; the ceiling moves to 1,800,000, room for 20 more rows
+#: (think-v1qe).
+PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_800_000}
 #: How many results the results page's ceiling was set to hold, each result past the
 #: register's count at what the table's 90th-percentile row costs now and an average
 #: entry of the seven days: 160 on 14 October and 40 more, then, at 1,250,000 bytes, 217
@@ -6429,8 +6432,10 @@ PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_700_00
 #: 1,600,000 bytes, 273 on 5 November and 18 more (4,661 bytes each, in the 88,606 bytes
 #: left), timing not re-measured; at 1,512,211 bytes on 6 November the margin at 291 is
 #: 3,891 bytes; at 1,700,000 bytes, 297 on 12 November and 21 more (4,587 bytes each, in
-#: the 99,487 bytes left, 3,160 to spare), timing not re-measured.
-RESULTS_ROOM_THROUGH = 318
+#: the 99,487 bytes left, 3,160 to spare), timing not re-measured; at 1,800,000 bytes, 326
+#: on 18 November and 20 more (4,507 bytes each, in the 93,880 bytes left, 3,740 to
+#: spare), timing not re-measured.
+RESULTS_ROOM_THROUGH = 346
 
 
 def test_no_page_carries_a_result_overview(
