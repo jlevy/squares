@@ -7384,7 +7384,7 @@ sources:
   evidence: [E-wand125-continuous-n28-5745-report]
   notes: >-
     The reported 1149/200 at n28 is above T-142's 2297/400, which stands in both lanes
-    since 17 November, #446's 287/50 and T-107's 1147/200. Complete release-asset and document
+    since its adoption in the pass of 17 November, #446's 287/50 and T-107's 1147/200. Complete release-asset and document
     custody, the exact premises and the binding of check2's kernel inputs to the
     candidate are accepted; a diagnostic sample of both programs is not a replay. Replay
     and adoption remain under think-zb5w. T-192 records it.

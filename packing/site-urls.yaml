@@ -15864,7 +15864,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
   identity:
     kind: lower-bound
@@ -15900,7 +15900,7 @@ urls:
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n28_L57425.jsonl.gz
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n28_L57425.control.json
   amendments:
-  - date: '2026-11-17'
+  - date: '2026-11-18'
     reason: The complete sqverify-fast census replay of mixed_n28_L57425 at all 2,073 directions,
       run on 4 November after the stage 4 review of that day (think-4ul6), with its whole-net control
       refused under the census's enclosure rule for the axis, is cited as replay evidence; the retained
@@ -15935,7 +15935,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
   identity:
     kind: lower-bound
@@ -15971,7 +15971,7 @@ urls:
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n30_L58925.jsonl.gz
     - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-n28-n30-2026-10-10/mixed_n30_L58925.control.json
   amendments:
-  - date: '2026-11-17'
+  - date: '2026-11-18'
     reason: The complete sqverify-fast census replay of mixed_n30_L58925 at all 2,073 directions,
       run on 4 November after the stage 4 review of that day (think-4ul6), with its whole-net control
       refused under the census's enclosure rule for the axis, is cited as replay evidence; the retained

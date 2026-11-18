@@ -1,0 +1,27 @@
+{
+ "program": "r1_twin.py",
+ "lane": "R1 (c-review-1005-1117)",
+ "first": {
+  "file": "derived_exact.json",
+  "form": "centre-json"
+ },
+ "second": {
+  "file": "derived_witness.yaml",
+  "form": "witness-yaml"
+ },
+ "n": [262, 262],
+ "n_equal": true,
+ "side_equal": true,
+ "side_a_less_side_b": "0",
+ "squares_with_four_distinct_corners": [262, 262],
+ "unequal_in_file_order": {
+  "count": 0,
+  "first": []
+ },
+ "equal_square_for_square": true,
+ "equal_as_collections": true,
+ "second_file_listing_relative_to_first": {
+  "same sense, from corner 0 of the first file's listing": 262
+ },
+ "same_packing": true
+}

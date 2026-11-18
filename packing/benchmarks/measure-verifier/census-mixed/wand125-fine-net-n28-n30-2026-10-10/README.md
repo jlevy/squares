@@ -25,11 +25,12 @@ least certified bound equal to the source’s check2 log (the packet’s
 `receipts/capture-agreement-n28.json` and `capture-agreement-n30.json`). The captures
 ran from 18:38Z to 19:39Z (n28, 3,644 s of wall) and from 19:39Z to 21:15Z (n30, 5,784
 s), and the controls after them: n28’s from 21:15Z to 21:26Z (675 s of wall and 1,111
-CPU-seconds), n30’s from 21:26Z to 21:36Z (597 s and 985 CPU-seconds).
-Each control verified the original again at its least-bound direction, refused the
-99/100 mutant at all 2,073 directions, each a coverage refusal at an in-domain pose
-whose capture, evaluated apart from the crate, is below 1, and refused the
-near-threshold mutant.
+CPU-seconds), n30’s from 21:26Z to 21:36Z (597 s and 985 CPU-seconds); the control
+receipts record wall seconds only, and the CPU-seconds are the lane’s process
+accounting, recorded on think-i85v. Each control verified the original again at its
+least-bound direction, refused the 99/100 mutant at all 2,073 directions, each a
+coverage refusal at an in-domain pose whose capture, evaluated apart from the crate, is
+below 1, and refused the near-threshold mutant.
 
 **The axis legs, by the enclosure rule.** Since #892 (think-4uun) the census judges an
 axis refusal by the enclosure the vertex sweep held at its least vertex, recomputed
