@@ -19,7 +19,7 @@ from typing import Any
 
 import pytest
 
-from devtools import check_results, check_standing, profile_records
+from devtools import check_requests, check_results, check_standing, profile_records
 from devtools import render_recent_results as view
 
 #: Kaelan Yim's 130 (T-281) against T-259's certificate: 0.0896 of its margin.
@@ -50,7 +50,7 @@ def _item(**changes: Any) -> dict[str, Any]:
 
 
 def _restated(records: view.Records, *items: Mapping[str, Any]) -> dict[str, Any]:
-    """T-281 as a record of a restatement, its regularization replaced by `items`."""
+    """T-281 as a record of a restatement at the counts `items` name, and nowhere else."""
     record = {**records.results["T-281"], "restatements": [dict(item) for item in items]}
     record.pop("regularizations", None)
     return record
@@ -111,6 +111,46 @@ def test_a_restatement_is_held_to_its_scope_predecessor_and_receipt(
     for name, (record, words) in cases.items():
         found = _problems(records, record)
         assert any(words in line for line in found), (name, found)
-    regularized = records.results["T-281"]["regularizations"]
+    regularized = [
+        {
+            "n": 130,
+            "of": "T-259",
+            "by": "[Yim certificates 2026-11-09]",
+            "method": "T-259's certificate under one common translation",
+            "side": "solved",
+            "identity": {"basis": "source-claim"},
+        }
+    ]
     both = {**_restated(records, _item()), "regularizations": regularized}
     assert any("also a regularization" in line for line in _problems(records, both))
+
+
+def test_the_register_records_the_restatements_option_d_settles(records: view.Records) -> None:
+    """T-253, T-260, T-280 and T-281 restate their houses at every count, T-173 at 207;
+    none improves on a case record there, so none is pending adoption or a current record,
+    and a reply's result mapped to one is settled (`check_requests.RESTATED`)."""
+    index = profile_records.load_record_index()
+    every = {"T-253": 9, "T-260": 5, "T-280": 2, "T-281": 1}
+    for ident, count in every.items():
+        record = records.results[ident]
+        assert len(check_standing.restated(record)) == count, ident
+        assert check_standing.improvements(record, records) == [], ident
+        assert view.standing(record, records) == view.SUPERSEDED, ident
+        assert ident not in index.current_results, ident
+        assert not record.get("regularizations"), ident
+    assert check_standing.restated(records.results["T-173"]) == frozenset({207})
+    register = check_requests.load_register()
+    state = check_requests.result_state(
+        {"key": "sub-print", "claim": "c", "register": ["T-260"]}, register
+    )
+    assert (state.state, state.settled) == (check_requests.RESTATED, True)
+    # A new result under option D is no restatement: T-285 and T-286 are confirmed.
+    for ident in ("T-285", "T-286"):
+        assert not records.results[ident].get("restatements")
+        assert (
+            records.results[ident]["verification"],
+            records.results[ident]["confirmation"],
+        ) == (
+            "V3",
+            "C3",
+        )

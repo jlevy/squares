@@ -655,11 +655,13 @@ def _sources() -> dict[str, Source]:
         # The same day's later pass (think-he66) moved 172 from T-257 and 270 from T-224 to
         # Doğa Özden's further arrangements of issues 935 and 936, T-282 and T-283, one packet
         # each; T-257 and T-224 keep no house here now.
-        packet_source("T-282", "ozden-s172-upper-bound-2026-11-09"),
+        # The pass of 18 November 2026 (think-8yyy) moved 172, T-282's only house, to Joost de
+        # Winter's re-solve of it (T-286), so T-282 is no source here now.
         packet_source("T-283", "ozden-s270-upper-bound-2026-11-09"),
         # The same day's last pass (think-1goz) moved 199, which no pass had adopted, from
-        # T-127 to Doğa Özden's issue 938, T-282's packing with one L step (T-284).
-        packet_source("T-284", "ozden-s199-upper-bound-2026-11-09"),
+        # T-127 to Doğa Özden's issue 938, T-282's packing with one L step (T-284); the pass of
+        # 18 November 2026 (think-8yyy) moved it on to Joost de Winter's re-solve of T-284's
+        # core (T-285), so T-284 is no source here now.
         # Lane L81 of 11 November 2026 (think-xq4o) moved 156, 180, 268 and 269 to Doğa Özden's
         # issues 943, 944, 945 and 947 (T-287 to T-290), each a new arrangement relative to the
         # house it replaces, found by transplant search from another count's registry packing.
@@ -727,6 +729,12 @@ def _sources() -> dict[str, Source]:
         packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-309", "joegun-upper-bounds-2026-11-16"),
+        # The pass of 18 November 2026 (think-8yyy) moved 199 and 172 to Joost de Winter's
+        # issues 939 and 946 (T-285, T-286), T-284's and T-282's packings re-solved to the
+        # exact local optimum of T-282's arrangement, new results under the owner's option D
+        # of 17 November 2026 (think-b0w5), one packet each.
+        packet_source("T-285", "de-winter-s199-upper-bound-2026-11-09"),
+        packet_source("T-286", "de-winter-s172-upper-bound-2026-11-10"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -833,7 +841,13 @@ def _sources() -> dict[str, Source]:
 #: JoeGun improved them, Kodaj their finder and JoeGun their improver, each a new arrangement
 #: relative to the house it replaces: T-305 at 127 and T-309 at 305 from T-174, T-306 at 204
 #: from T-268, T-307 at 232 from T-275 and T-308 at 264 from T-186; T-268 and T-275 keep no
-#: house here, and T-174 and T-186 still house other counts.
+#: house here, and T-174 and T-186 still house other counts. Lane w7-optd-1118 (think-8yyy)
+#: adopted Joost de Winter's issues 939 and 946 in the pass of 18 November 2026: T-285 at 199
+#: from T-284 and T-286 at 172 from T-282, each its house's packing re-solved to the exact
+#: local optimum of T-282's arrangement, 1.0399 of the margin T-282's certificate carries
+#: (at 199 through T-284's L step), new results under the owner's option D of 17 November
+#: 2026 (think-b0w5), Evan Daniel the finder and Doğa Özden and de Winter the improvers;
+#: T-282 and T-284 keep no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -860,7 +874,7 @@ ADOPTED: dict[int, str] = {
     155: "T-197",
     156: "T-287",
     157: "T-293",
-    172: "T-282",
+    172: "T-286",
     175: "T-267",
     176: "T-186",
     179: "T-294",
@@ -868,7 +882,7 @@ ADOPTED: dict[int, str] = {
     181: "T-174",
     182: "T-243",
     183: "T-220",
-    199: "T-284",
+    199: "T-285",
     204: "T-306",
     206: "T-174",
     207: "T-174",
@@ -1054,6 +1068,10 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: from T-174 (T-305, T-309), 204 from T-268 (T-306), 232 from T-275 (T-307) and 264 from
 #: T-186 (T-308); none of the five had moved that day, so the day's archive takes a row for
 #: each beside 90's.
+#: The pass of 18 November 2026 (lane w7-optd-1118, think-8yyy) adopted Joost de Winter's
+#: issues 939 and 946 at 199 and 172 (T-285, T-286), from T-284 and T-282, new results under
+#: the owner's option D (think-b0w5); neither count had moved that day, so the day's archive
+#: takes a row for each.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1144,6 +1162,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-14": frozenset({228, 297}),
     "2026-11-15": frozenset({90, 147, 228}),
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
+    "2026-11-18": frozenset({172, 199}),
 }
 
 

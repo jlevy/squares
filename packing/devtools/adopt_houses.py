@@ -2231,6 +2231,84 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-285": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#939](https://github.com/jlevy/squares/issues/939)",
+        producer_route=False,
+        ai=(
+            "Issue 939 says the derivation, local optimization, high-precision solution, "
+            "rational certificate, checks and figure were produced with Claude (Anthropic) "
+            "under Joost de Winter’s direction."
+        ),
+        routes=(
+            "Both routes read the certificate through two readers written for the source’s "
+            "files and share no code with its `verify_exact.py`; the review’s checker shares "
+            "no code with either route or the source."
+        ),
+        lineage=(
+            "The certificate is Doğa Özden’s packing of issue 938 (T-284), this case’s house "
+            "best packing before this adoption, with its 172-square core, T-282’s "
+            "arrangement, re-solved to what the source calls the exact local optimum of that "
+            "arrangement, and T-284’s L of 27 squares unchanged: measured here, it is what "
+            "`devtools.construction_checker` writes for one L-border layer on its own first "
+            "172 squares, and nearest centres pair it one to one with T-284’s packing under "
+            "the identity, no square moving beyond 1e-3. T-284’s own uniform-contraction "
+            "margin is 0, since its grid squares touch, but its base, T-282’s certificate, "
+            "contracts by $2.53 \\times 10^{-12}$; this certificate’s gain is 1.0399 times "
+            "that, $1.01 \\times 10^{-13}$ below T-284’s base shrunk until its squares first "
+            "touch with the L written on it, so under the owner’s option D of 17 November "
+            "2026 it is a new result, not a restatement of the padding. So Evan Daniel keeps "
+            "the packing, as Doğa Özden improved and extended it, and Joost de Winter is "
+            "credited with the re-solve."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "repository verifier code was read, decided it again by separating axes in "
+            "rationals and by exact clipped areas in GMP rationals over every square, wall and "
+            "pair, from both of the source’s files; its controls, stated beforehand, were "
+            "each decided as stated"
+        ),
+        diversity="by a Claude agent, the system family the issue says made the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-286": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#946](https://github.com/jlevy/squares/issues/946)",
+        producer_route=False,
+        ai=(
+            "Issue 946 says the local optimization, high-precision solution, rational "
+            "certificate, checking and figure were produced with Claude (Anthropic) under "
+            "Joost de Winter’s direction."
+        ),
+        routes=(
+            "Both routes read the certificate through two readers written for the source’s "
+            "files and share no code with its `verify_exact.py`; the review’s checker shares "
+            "no code with either route or the source."
+        ),
+        lineage=(
+            "The certificate is Doğa Özden’s packing of issue 935 (T-282), this case’s house "
+            "best packing before this adoption, re-solved to what the source calls the exact "
+            "local optimum of its arrangement, the core of issue 939’s certificate at 199 "
+            "with less padding: nearest centres pair it one to one with T-282’s packing "
+            "under the identity, no square moving beyond 1e-3. Its gain is 1.0399 times "
+            "T-282’s own uniform-contraction margin of $2.53 \\times 10^{-12}$, $1.01 \\times "
+            "10^{-13}$ below T-282 shrunk until its squares first touch, so under the owner’s "
+            "option D of 17 November 2026 it is a new result, not a restatement of the "
+            "padding. Evan Daniel’s regularizer reached the same point from T-282’s witness "
+            "on 9 November, which the record held unregistered. So Evan Daniel keeps the "
+            "packing, as Doğa Özden improved it, and Joost de Winter is credited with the "
+            "re-solve, as the issue asks."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "repository verifier code was read, decided it again by separating axes in "
+            "rationals and by exact clipped areas in GMP rationals over every square, wall and "
+            "pair, from both of the source’s files; its controls, stated beforehand, were "
+            "each decided as stated but one it mis-stated for this certificate and reports"
+        ),
+        diversity="by a Claude agent, the system family the issue says made the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-287": Prose(
         author="Doğa Özden",
         reported="on [jlevy/squares#943](https://github.com/jlevy/squares/issues/943)",
@@ -3308,11 +3386,13 @@ CREDITS: dict[int, Credit] = {
     # packing: 15 squares beyond a tenth under the identity assignment, not one to one by
     # nearest centres only through one shared centre in a block near 45 degrees (the 9
     # November review of issues 935 and 936, F6).
+    # The pass of 18 November 2026 (think-8yyy): Joost de Winter's issue 946 (T-286), T-282's
+    # packing re-solved, a new result under the owner's option D (think-b0w5).
     172: Credit(
         (DANIEL,),
-        (OZDEN,),
-        "Doğa Özden’s further arrangement of Evan Daniel’s packing from an L-cut of the "
-        "n = 199 record, Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
+        (OZDEN, DE_WINTER),
+        "Joost de Winter’s re-solve of Doğa Özden’s further arrangement of Evan Daniel’s "
+        "packing from an L-cut of the n = 199 record",
     ),
     # T-267 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
     # fault-line composer, his implementation of Chris Deotte's multi-gadget fault DP, from
@@ -3391,12 +3471,13 @@ CREDITS: dict[int, Credit] = {
     # whose improver is Özden; the 172 line started from this count's former house, T-127's
     # packing, by an L-cut (issue 845), against which this is a new arrangement, 81 squares
     # beyond a tenth (the 9 November review of issue 938, F10 and F13).
+    # The pass of 18 November 2026 (think-8yyy): Joost de Winter's issue 939 (T-285), T-284's
+    # packing with its 172-square core re-solved, a new result under option D (think-b0w5).
     199: Credit(
         (DANIEL,),
-        (OZDEN,),
-        "Doğa Özden’s 172-square packing plus an L of 27, its 172 squares his further "
-        "arrangement of Evan Daniel’s packing from an L-cut of this count’s former record, "
-        "Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
+        (OZDEN, DE_WINTER),
+        "Joost de Winter’s re-solve of the core of Doğa Özden’s 172-square packing plus an "
+        "L of 27, its 172 squares Özden’s further arrangement of Evan Daniel’s packing",
         construction="extension",
     ),
     # T-306 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 204, a new
