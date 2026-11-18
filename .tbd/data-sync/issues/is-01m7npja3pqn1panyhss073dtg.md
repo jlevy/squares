@@ -5,7 +5,7 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: w7r-optd-1118
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-18T06:17:20.974Z
+updated_at: 2026-11-18T06:52:03.374Z
 started_at: 2026-11-18T02:28:47.344Z
 ---
 
@@ -33,3 +33,5 @@ started_at: 2026-11-18T02:28:47.344Z
 2026-11-18T06:00Z w7r-optd-1118: #1023 merged (86284ec20). Merged it into the prep (ec0646223, resolver script), re-ran custody (77 houses), fixed test_house_adoption / test_known_best_atlas / test_result_status for 172/199 and the restated entries, render_recent_results.superseding now names the holders at restated counts (T-281 superseded by T-259) with a test in test_restatements. Re-measured the eight driver solves against main as merged: shares unchanged (1.40 at 295 .. 3.03e12 at 260; houses' own margins identical). think-ruu2 README lists the ten candidates (classification and receipts only, think-4z8z; think-frl5 at 270/299/307). Folded: claude/intake-2026-11-18-option-d fast-forwarded to ec0646223 (= -prep). Next: records tier, release impact vs new main, open the draft PR.
 
 2026-11-18T06:17Z w7r-optd-1118: draft PR #1030 opened (head a5c360323, labels intake, S2) from claude/intake-2026-11-18-option-d. No-change record re-measured against main 86284ec20 (papers byte-identical). Records tier green but release impact before the record; --edit tier running; hosted CI running.
+
+2026-11-18T06:51Z w7r-optd-1118: #1030 first hosted run (a5c360323) failed sweeps + suites a-d; fixed and pushed b6b7cac6e: sweeps sparse checkout gains de Winter's two packets; escape screen (--update --n 172 199), family/contact-shade censuses, bound citations updated; SCREEN_FINDINGS (validate.py) n=1..200 637/2476, n=1..324 3109/7849; tests l65_1109, profile_records, translation_escape_screen updated; contributor_census --reconcile (2 de Winter improved_by spans unresolved); suite_files admit-local for test_contraction_layers + test_restatements; DATA_REVISION re-pinned f1890a4c; no-change record names 13 paths (papers byte-identical vs 86284ec20). Waiting on hosted CI.
