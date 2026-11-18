@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 50
+version: 51
 delegate: coord-intake-1117r
 labels: []
 dependencies: []
@@ -54,7 +54,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-18T07:47:50.877Z
+updated_at: 2026-11-18T08:24:36.554Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -69,3 +69,5 @@ started_at: 2026-11-17T01:28:43.493Z
 2026-11-18T04:45Z coord-intake-1117r: second worker restart at about 04:30Z; all lanes lost again. On main since the first restart: #909, #1016, #1025, #1026 and #1027. Open: #1023 (Review A changes requested, being addressed), #1028 (Review A approves after a post-freeze note), #1024 and #1029 (imports), option D (prep commits backed up to claude/intake-2026-11-18-option-d-prep at 0cb68cd1b). Owner decided think-frl5: Polkovskyi keeps credit and the record notes the project's prior held solves. Respawned: w3r2 (#1023), r127b2 (#1028), w6r (#1029, #1024, think-gqzz), w7r (think-8yyy).
 
 2026-11-18T07:10Z coord-intake-1117r: the container restarted at about 06:55Z (the third restart), killing all agents and background compute. Files and commits survived. r144's 11 local commits are now pushed. Lost mid-run: the T-144 replay (range 0-76 partial) and R-144's node range 176-200; both lanes resume from their last committed range. Respawned: senior reviews of #1029 and #1032, w6r2 (#1029, #1024, think-gqzz), w7r2 (#1030), r1021b (#1033), r144b (think-rxs3), w8b (think-nd7g). Main is at 86284ec20 (#1023). Open PRs: #1024, #1029, #1030, #1032, #1033.
+
+2026-11-18T08:35Z coord-intake-1117r: the 15 senior reviews this session spawned named a model identifier in their reviewer lines, copying #953's Review A format. All 15 comments are now edited to 'strong tier, xhigh reasoning', no comment since 17 Nov 21:00Z names one, and the reviewer brief forbids it. On main, the only identifiers added since f9ddfeeef are the two lines in R1's frozen, digest-bound copy (#1013), which are disclosed. Older evidence.yaml reviewed_by fields name models by the October convention; I left them unchanged.
