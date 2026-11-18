@@ -626,6 +626,105 @@ decision, about 600 lost to the restart, and 30 for the second mutant.
 This section is written after the findings freeze, from earlier reviews read only then,
 as the runbook asks; the frozen copy ends here.
 
+Lane r144b-1118 wrote it after the findings froze at 07:35:35Z (commit `80405c86fe`),
+from four reviews read only then: the
+[2 October review](review-2026-10-02-wand125-linear-certificates-and-n76.md) of T-080,
+which read the same checker for `mixed_n101_L1028` and `mixed_n83_L935`; the
+[14 October review](review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md) of
+T-179 and its siblings, which re-derived the argument for the sibling certificate
+`mixed_n145_L1224`; and the two final reviews of 11 October,
+[of the lower bounds](review-2026-10-11-final-lower-bounds.md) and
+[of the asymptotics and the grading](review-2026-10-11-final-asymptotic-and-grading.md),
+which read T-144’s record and premises only.
+Nothing above this section changed after the freeze.
+
+**Where they agree.**
+
+- *The argument.* The 2 October review derived the chain this review re-derived: the
+  orbit expansion, the containment identities, the quarter turn and the reflection,
+  which need only the $D_4$ invariance, the count, and the transfer by mass.
+  The 14 October review repeated it at $n = 145$. All three find it sound.
+- *The checker.* The 2 October review read `0249726a…` line by line, as this review did
+  without it. Both find the same things at the same lines: a point charged only when it
+  lies in the closed core for every centre of the box; a segment proposed in floating
+  point, proved at both ends and closed by convexity; the axis branch’s overlap less the
+  `axis_slice` derivative bound; and the oblique rectangle kernel.
+- *Termination margins.* The 14 October review calls the stored lower bounds “the branch
+  and bound’s termination margin, not the measure’s slack”, which is N-2 here; the 2
+  October review’s LC-3 makes the matching point about refusals.
+- *The README’s comparison with $\sqrt N$* is F-8 of 14 October and N-4 here, both
+  notes. *The fresh-machine replay without a receipt* is in §3 and question 3 of 14
+  October, and in N-6 and question 4 here.
+- *The README’s statement of the fold.* LC-2 of 2 October says the READMEs state the
+  conclusion (“every closed core …”, “every admissible centre”) and not the quadrant and
+  the quarter turn. M-2 here is the same wording at $n = 122$. That review graded it a
+  note and this one minor, because line 15 read literally is false of a core that leaves
+  $K$. The frozen grade stands; the fix asked of the author is the same.
+- *Green’s margin.* The 11 October final review computed
+  $563/50 - 11.22928087555\ldots = 0.0307191\ldots$, as this review does to more places.
+- *The transfer.* That review found the derivation of 123 to 126 valid by either route
+  the record gives, containment of 122 squares in $N$ or the mass below $N$; step 7 here
+  uses the first.
+- *Significance.* The grading review confirmed `S3` “as T-080, five counts by
+  monotonicity”, and the 14 October review confirmed $n = 145$’s `S3` by pointing to
+  T-144’s five counts at $k = 11$. This review confirms `S3`, with four counts on the
+  reported lane (R-1).
+
+**What this review adds.**
+
+- *A complete decision apart from the source’s code.* The 2 October review’s list of
+  what the replay must show says that “the point and segment paths have no second
+  implementation anywhere”.
+  The 14 October review says the same for $n = 145$ and names “an independent
+  implementation of the linear bounds” as a possible second route.
+  This review’s branch and bound and vertex argument are such an implementation, and
+  they decided every angle of this certificate, and only this certificate, with two
+  mutants refused.
+- *R-1,* which neither earlier review could raise: T-180 landed on 14 October, after the
+  final reviews of 11 October compared $563/50$ with Nagamochi’s value at 126, then the
+  reported lane there.
+- *M-1.* T-144’s `notes` and its evidence entry’s `limitations` already say that the
+  release’s `SHA256SUMS` omits the asset; no earlier review took it up, and the sibling
+  assets are listed.
+
+**What the earlier reviews raised that this one did not.**
+
+- *The records carry no per-angle bound.* LC-4 of 2 October and F-5 of 14 October
+  (minor) say that `certificate.json`’s records hold the index, status, input digest and
+  node count, and each angle’s `lower` lives only in the proof bundle.
+  The same holds here (`out/premises.json.gz`: the records list digests and node
+  counts), and this review did not raise it.
+  It stands for this certificate as F-5 states it, and question 3 of 14 October applies
+  here too.
+- *Exit status.* The 2 October review’s hypothesis 10: every acceptance check in the
+  source’s drivers is an `assert`, and the C++ exits zero on an unresolved angle, so a
+  run of the source’s command must keep assertions on and read the status.
+  N-5 here covers the C++’s asserts only.
+- *Dependencies.* The 2 October review noted that the READMEs ask for NumPy, SciPy,
+  Numba and HiGHS while the replay path imports the standard library and needs a C++17
+  compiler. This README asks for the same (line 48), and this review did not check what
+  the replay imports.
+- *The case records.* The 11 October final review’s F1-4 found that `n-122.md` to
+  `n-126.md` listed nothing of T-144’s evidence.
+  That has since been fixed: all five now list `E-wand125-linear-n122-1126-report`.
+
+**Where they differ.** The 11 October grading review groups T-144 with T-132, T-142 and
+T-143 as entries that “say that a replay would be re-implemented sharing the producer’s
+components”. T-144’s `composition` said then, on PR #487’s branch at `aeb8a7219`, the
+commit the companion review of the lower bounds names, and says now that a replay here
+“would run the source’s checker unchanged”, which is a confirmation reproduced with the
+producer’s code, as this review and the 14 October review’s §9 put it.
+The grouping fits the three check2 entries, whose replays run this repository’s crate as
+the producer adapted it, and not T-144.
+
+## Note on This Copy
+
+This copy differs from the frozen text
+(`frozen/review-2026-11-18-wand125-linear-n122.frozen.md`, bound by
+`frozen/findings-frozen-digest.txt`) in two places, both written after the freeze by
+lane r144b-1118: the body of Comparison With Earlier Reviews, and this note.
+No finding, verdict or number above changes.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
