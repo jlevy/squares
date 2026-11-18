@@ -283,6 +283,92 @@ def test_the_n145_pre_replay_receipt_is_bound_to_the_pin() -> None:
     assert record["inputs"]["inputs"] == linear.LAST + 1
 
 
+# --------------------------------------------------------------------------- n = 122
+
+N122 = linear.LINEAR["n122"]
+N122_BUNDLE = "3986d902d11ba2c91a8e56c9b18bb07bf8876c24451587480b2a86c4ba9a55d0"
+
+
+@pytest.fixture(scope="module")
+def n122() -> dict[str, Any]:
+    return linear.linear_certificate(N122)
+
+
+def test_n122_is_read_from_its_release_members_and_its_pinned_tree() -> None:
+    """T-144's certificate, of wand125/square-packing, held as T-179's is: four documents
+    of the pinned Git tree under ``square-packing/``, the candidate and certificate only
+    the release asset holds under ``release/``, and the proof bundle pinned by the
+    release record."""
+    assert N122.packet == linear.N122_PACKET
+    assert N122.revision == linear.N122_REVISION
+    assert N122.source == linear.N122_PACKET / "square-packing"
+    folder = Path("problems/square-lower-bounds/certificates/mixed_n122_L1126")
+    assert N122.directory == folder
+    assert N122.tarball == "n122-L11.26-proof-bundle.tar.gz"
+    release = linear.N122_PACKET / "release/certificates/mixed_n122_L1126"
+    assert mixed.retained_path(N122, "candidate.json") == release / "candidate.json.gz"
+    assert mixed.retained_path(N122, "certificate.json") == release / "certificate.json.gz"
+    for name in ("manifest.json", "completion-audit.json", "README.md"):
+        assert mixed.retained_path(N122, name) == N122.source / folder / name
+    assert mixed.tarball_pin(N122) == (N122_BUNDLE, 38912523)
+    tree = linear.linear_tree(N122)
+    assert tree[N122.upstream_tarball] == N122_BUNDLE
+    assert tree[folder / "code/unified_linear_verify.cpp"] == linear.LINEAR_CHECKER_SHA256
+    receipt = linear.N122_PACKET / "receipts/linear-audit.json"
+    expected = json.dumps(linear.linear_audit(linear.N122_PACKET), indent=2, default=str) + "\n"
+    assert receipt.read_text(encoding="utf-8") == expected
+
+
+def test_n122_has_its_stated_exact_premises(n122: dict[str, Any]) -> None:
+    assert n122["orbits"] == {"rectangle": 3, "point": 502, "segment": 1268}
+    assert n122["images"] == {"rectangle": 24, "point": 4016, "segment": 10144}
+    assert Fraction(n122["total_mass"]) == 122 - Fraction(1, 100000)
+    assert n122["candidate_digest"] == N122.candidate_digest
+    assert n122["code_files"] == 13
+    assert n122["checker_sha256"] == linear.LINEAR_CHECKER_SHA256
+    assert n122["nodes"] == 73694735
+    assert (n122["most_nodes"], n122["most_nodes_at"]) == (2218683, 0)
+    assert n122["tarball_sha256"] == N122_BUNDLE
+    assert n122["comparison"]["side_exceeds_green"]
+    assert n122["comparison"]["side_exceeds_nagamochi"]
+
+
+def test_the_n122_release_members_are_the_source_manifests() -> None:
+    """The members `fine_net_followup retain` stored are the bytes the 10 October intake
+    pinned in the packet's source manifest, before this repository held any of them."""
+    manifest = json.loads((linear.N122_PACKET / "source-manifest.json").read_text())
+    pinned = {row["path"]: (row["sha256"], row["bytes"]) for row in manifest["asset_members"]}
+    members = mixed.release_members(N122)
+    assert {path.name: (row["sha256"], row["bytes"]) for path, row in members.items()} == pinned
+    release = manifest["release"]
+    record = json.loads((linear.N122_PACKET / mixed.RELEASE_RECORD).read_text())
+    (asset,) = record["assets"]
+    assert (asset["asset"], asset["bytes"], asset["sha256"]) == (
+        release["asset"],
+        release["bytes"],
+        release["sha256"],
+    )
+
+
+def test_the_n122_pre_replay_receipt_is_bound_to_the_pin() -> None:
+    record = json.loads((N122.receipts / "fetch.json").read_text())
+    assert record["status"] == "BUNDLE_READY"
+    assert (record["tarball"]["sha256"], record["tarball"]["bytes"]) == mixed.tarball_pin(N122)
+    assert "certificates__mixed_n122_L1126.tar.gz" in record["tarball"]["origin"]
+    assert record["bindings"]["files"] == 810
+    assert record["bindings"]["checker_copies"] == 202
+    assert record["preconditions"]["candidate_digest"] == N122.candidate_digest
+    assert record["inputs"]["status"] == "ALL_INPUTS_ENCLOSE_THE_CANDIDATE"
+    assert record["inputs"]["inputs"] == linear.LAST + 1
+
+
+def test_n122_is_priced_from_its_own_samples() -> None:
+    price = linear.linear_price()["certificates"]["n122"]
+    assert [sample["index"] for sample in price["samples"]] == [37, 108]
+    assert price["upstream_cpu_hours"] == 14.41
+    assert price["nodes"] == 73694735
+
+
 def test_a_release_asset_off_its_pin_is_refused(tmp_path: Path) -> None:
     asset = tmp_path / "certificates__mixed_n145_L1224.tar.gz"
     asset.write_bytes(b"not the asset")
