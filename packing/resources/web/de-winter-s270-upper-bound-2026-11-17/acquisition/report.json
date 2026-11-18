@@ -8,7 +8,7 @@
   "witness_prefix": "W-de-winter-1022-n",
   "claim_limitations": "Complete 2026-11-17 exact rational centre-direction certificate at 270, read exactly from the retained source file n270/n270_exact.json at a1ba501, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#1022 names: the packing of Asterios Panoras's Kaggle compilation with its end regions relaxed and a bottom region compressed. Finite construction feasibility only; local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
   "read_on": "2026-11-18",
-  "read_at_main": "a1a8d0aaeded4f066755ffafcb7dbdc7b16cfa27",
+  "read_at_main": "86284ec203b63097b0a51fd5dffe931852430335",
   "certificates": [
     {
       "n": 270,
@@ -33,15 +33,15 @@
   "houses": [
     {
       "n": 270,
-      "reader": "[Özden s270 upper bound 2026-11-09]",
-      "source_key": "[Özden s270 upper bound 2026-11-09]",
-      "holders": "Evan Daniel, improved by Doğa Özden",
-      "result": "T-283",
-      "reported_value": "16.9281486033428544",
-      "verified_value": "16.9281486033428544",
+      "reader": "[Mishapolk issue 1009 2026-11-16]",
+      "source_key": "[Mishapolk issue 1009 2026-11-16]",
+      "holders": "Evan Daniel, improved by Doğa Özden and Mykhailo Polkovskyi",
+      "result": "T-321",
+      "reported_value": "16.9281486033396074",
+      "verified_value": "16.9281486033396074",
       "evidence": [
-        "E-ozden-936-exact-feasibility",
-        "E-ozden-936-review-exact-feasibility"
+        "E-mishapolk-1009-exact-feasibility",
+        "E-mishapolk-1009-review-exact-feasibility"
       ]
     }
   ],
