@@ -36098,7 +36098,8 @@ issues:
     title: 's(292) ≤ 17.590104218682: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-16'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -36145,15 +36146,46 @@ issues:
     beads:
     - think-qag8
     answer_bead: think-qag8
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1005#issuecomment-6970908422
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n292-column-band
+        id: T-310
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n292-column-band
+        id: E-ozden-1005-certificate-report
+      - result: n292-column-band
+        id: E-ozden-1005-exact-feasibility
+        status: confirmed
+      - result: n292-column-band
+        id: E-ozden-1005-review-exact-feasibility
+        status: confirmed
+      - result: n292-leaderboard-side-only
     close_when: >-
       The bound is triaged, retained and registered on main, and the reply on main says what
       was registered, replayed and reviewed.
+    notes: >-
+      Closed on 18 November 2026 with the final comment (issuecomment-6970908422,
+      06:23:22Z), posted by lane w3r2-pass-1118 after #1023 merged as 86284ec20 and its
+      Pages deploy was verified (run 44246610603); recorded by the records lane
+      w9-records-1118. It states T-310 at V3/C3, confirmed, S3, and superseded on the
+      frontier, since #1006 (T-311) and then #1009 (T-323, adopted by #1023 and credited to
+      de Winter, improved by Polkovskyi) are lower at 292; both exact-feasibility entries
+      confirmed; and the Kaggle side as context only. Its one question, whether the author
+      will publish the decimal pose file the certificate's source.path names, is
+      informational and holds nothing open.
   - number: 1006
     title: 'Lowered upper bound for n = 292 (side 17.590016442847): registration request'
     author: JoostdeWinter
     opened: '2026-11-16'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -36204,15 +36236,47 @@ issues:
     beads:
     - think-qag8
     answer_bead: think-qag8
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1006#issuecomment-6970908715
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n292-ribbon
+        id: T-311
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n292-ribbon
+        id: E-de-winter-1006-certificate-report
+      - result: n292-ribbon
+        id: E-de-winter-1006-exact-feasibility
+        status: confirmed
+      - result: n292-ribbon
+        id: E-de-winter-1006-review-exact-feasibility
+        status: confirmed
+      - result: n292-kaggle-side-only
     close_when: >-
       The bound is triaged, retained and registered on main, and the reply on main says what
       was registered, replayed and reviewed.
+    notes: >-
+      Closed on 18 November 2026 with the final comment (issuecomment-6970908715,
+      06:23:23Z), posted by lane w3r2-pass-1118 after #1023 merged as 86284ec20 and its
+      Pages deploy was verified (run 44246610603); recorded by the records lane
+      w9-records-1118. It states T-311 at V3/C3, confirmed, S3, credited after Daniel and
+      Xu, with the measured reason the ribbon's credit goes to Xu's line and not Cantrell's;
+      T-323, 3.62e-9 below it and one to one with it, credited to de Winter, improved by
+      Polkovskyi, and adopted by #1023, so T-311 is superseded on the frontier; both
+      exact-feasibility entries confirmed; and the two side-only values as context only. Its
+      one question, whether the small turns of 216 squares the issue calls axis-aligned were
+      left by the numerical optimization, is informational and holds nothing open.
   - number: 1007
     title: 'Lowered upper bounds for n = 262 (side 16.699693441904) and n = 295 (side 17.699693441716): registration request'
     author: JoostdeWinter
     opened: '2026-11-16'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -36260,7 +36324,40 @@ issues:
     beads:
     - think-qag8
     answer_bead: think-qag8
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1007#issuecomment-6970909007
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n262-band
+        id: T-312
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n262-band
+        id: E-de-winter-1007-certificate-report
+      - result: n262-band
+        id: E-de-winter-1007-exact-feasibility
+        status: confirmed
+      - result: n262-band
+        id: E-de-winter-1007-review-exact-feasibility
+        status: confirmed
+      - result: n295-band
+        id: T-313
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n295-band
+        id: E-de-winter-1007-certificate-report
+      - result: n295-band
+        id: E-de-winter-1007-exact-feasibility
+        status: confirmed
+      - result: n295-band
+        id: E-de-winter-1007-review-exact-feasibility
+        status: confirmed
     close_when: >-
       Both bounds are triaged, retained and registered on main, and the reply on main says
       what was registered, replayed and reviewed.
@@ -36276,6 +36373,16 @@ issues:
       claim it, and it is not registered, since Polkovskyi's #1009 (T-319), filed later on 16
       November, is 1.58e-3 below both at 262. Both go to the author in the reply, and neither
       holds a rung.
+
+      Closed on 18 November 2026 with the final comment (issuecomment-6970909007,
+      06:23:24Z), posted by lane w3r2-pass-1118 after #1023 merged as 86284ec20 and its
+      Pages deploy was verified (run 44246610603); recorded by the records lane
+      w9-records-1118. It states T-312 and T-313 at V3/C3, confirmed, S3, each superseded on
+      the frontier by Polkovskyi's #1009, adopted by #1023 (T-319 at 262, credited to de
+      Winter, improved by Polkovskyi; T-324 at 295, his alone); both exact-feasibility
+      entries confirmed; and F8 and F9 for the author, as above. Its one question, whether
+      the 295 packing was solved from the 262 plan with the border in place, is
+      informational and holds nothing open.
   - number: 1008
     title: 'Credit request for n = 211: the current record derives from T-057'
     author: JoostdeWinter
@@ -36382,7 +36489,8 @@ issues:
     title: 'Lowered upper bounds for 7 counts (n = 210, 260, 262, 268, 272, 292, 295) and 6 exact 12-place refinements (n = 147, 156, 180, 270, 299, 307): registration request'
     author: Mishapolk
     opened: '2026-11-16'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -36576,11 +36684,215 @@ issues:
     - think-i38n
     - think-evxy
     - think-ruu2
+    - think-4z8z
     answer_bead: think-i38n
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1009#issuecomment-6970909384
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n147-ono-refined
+        id: T-314
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n147-ono-refined
+        id: E-mishapolk-1009-certificate-report
+      - result: n147-ono-refined
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n147-ono-refined
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n156-ozden-refined
+        id: T-315
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n156-ozden-refined
+        id: E-mishapolk-1009-certificate-report
+      - result: n156-ozden-refined
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n156-ozden-refined
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n180-ozden-refined
+        id: T-316
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n180-ozden-refined
+        id: E-mishapolk-1009-certificate-report
+      - result: n180-ozden-refined
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n180-ozden-refined
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n210-new
+        id: T-317
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n210-new
+        id: E-mishapolk-1009-certificate-report
+      - result: n210-new
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n210-new
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n260-daniel-continued
+        id: T-318
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n260-daniel-continued
+        id: E-mishapolk-1009-certificate-report
+      - result: n260-daniel-continued
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n260-daniel-continued
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n262-new
+        id: T-319
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n262-new
+        id: E-mishapolk-1009-certificate-report
+      - result: n262-new
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n262-new
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n268-ozden-continued
+        id: T-320
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n268-ozden-continued
+        id: E-mishapolk-1009-certificate-report
+      - result: n268-ozden-continued
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n268-ozden-continued
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n270-ozden-refined
+        id: T-321
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n270-ozden-refined
+        id: E-mishapolk-1009-certificate-report
+      - result: n270-ozden-refined
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n270-ozden-refined
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n272-new
+        id: T-322
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n272-new
+        id: E-mishapolk-1009-certificate-report
+      - result: n272-new
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n272-new
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n292-new
+        id: T-323
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n292-new
+        id: E-mishapolk-1009-certificate-report
+      - result: n292-new
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n292-new
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n295-new
+        id: T-324
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n295-new
+        id: E-mishapolk-1009-certificate-report
+      - result: n295-new
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n295-new
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n299-ozden-refined
+        id: T-325
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n299-ozden-refined
+        id: E-mishapolk-1009-certificate-report
+      - result: n299-ozden-refined
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n299-ozden-refined
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      - result: n307-ozden-refined
+        id: T-326
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n307-ozden-refined
+        id: E-mishapolk-1009-certificate-report
+      - result: n307-ozden-refined
+        id: E-mishapolk-1009-exact-feasibility
+        status: confirmed
+      - result: n307-ozden-refined
+        id: E-mishapolk-1009-review-exact-feasibility
+        status: confirmed
+      beads: [think-4z8z]
     close_when: >-
       The 13 bounds are triaged, retained and registered on main, and the reply on main says
       what was registered, replayed and reviewed.
+    notes: >-
+      Closed on 18 November 2026 with the final comment (issuecomment-6970909384,
+      06:23:25Z), posted by lane w3r2-pass-1118 after #1023 merged as 86284ec20 and its
+      Pages deploy was verified (run 44246610603); recorded by the records lane
+      w9-records-1118. It states T-314 to T-326 at V3/C3, confirmed, each current as its
+      count's house, with the credits the case records give (de Winter, improved by
+      Polkovskyi, at 262 and 292 by the owner's answer, think-bx2a), the five refinements at
+      156, 180, 270, 299 and 307 as new results under option D (think-b0w5), the earlier
+      held KKT points the owner's decision of 18 November notes (think-frl5), and both
+      exact-feasibility entries confirmed. It names the certified KKT points below the new
+      houses at 260, 268, 270, 272, 292, 295, 299 and 307, which are not registered and wait
+      on their own stage 4 review (think-4z8z); registering and adopting one owes this issue
+      a follow-up, so think-4z8z joins its beads. Its one question, whether the
+      certificates' verify_cert.py is one of the three verifiers the issue names, is
+      informational and holds nothing open.
   - number: 1012
     title: 'Public Kaggle packings below the register for n = 109 and n = 270: pointer'
     author: JoostdeWinter
