@@ -3450,7 +3450,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-wand125-fine-net-n39-66625-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-176 |
 | `E-ozden-890-n94-9965-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 600 of 600: complete legal core-centre domains at every declared-net direction | T-262 |
 | `E-ozden-910-n94-9972-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 4,972 of 4,972: complete legal core-centre domains at every declared-net direction | T-266 |
-| `E-de-winter-1018-n108-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 401 of 401: complete legal core-centre domains at every declared-net direction | T-314 |
+| `E-de-winter-1018-n108-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 401 of 401: complete legal core-centre domains at every declared-net direction | T-327 |
 
 ### `V-replay-chelokot-lean`
 

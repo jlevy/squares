@@ -2170,14 +2170,14 @@ $531/50 = 10.62$ held both lanes from 18 October, by a replay that shares the pr
 verifier components."""
 
 
-#: The second later lower layer at 108: de Winter's #1018 (T-314 on its branch) moves both
+#: The second later lower layer at 108: de Winter's #1018 (T-327) moves both
 #: lower lanes past T-216's 531/50 on 18 November 2026, once its census replay and stage 4
 #: review are accepted, with its evidence, resource and dated paragraph.
 N108_DE_WINTER_LOWER = r"""**External intake, 2026-11-18.** Joost de Winter’s
 [lower bound](../resources/web/de-winter-s108-lower-bound-2026-11-17/README.md), which
 his issue #1018 reports, raises both lower lanes to
 $s(108) \ge 1700799526134255846599/159999384348528500000 = 10.6300379408297\ldots$
-(T-314): Hosono’s density of T-216, every rectangle dilated by $1063/1062$ and the
+(T-327): Hosono’s density of T-216, every rectangle dilated by $1063/1062$ and the
 masses unchanged, at core side $12487/12500$ on a net the certificate declares of 401
 half-angles of step $83/80000$, which proves $s(108) \ge 10.63$, and a one-page rational
 enlargement past that side by scaling a packing of the claimed side into the measure’s

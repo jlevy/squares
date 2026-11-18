@@ -49938,7 +49938,7 @@ results:
       regularization of the new house and its flip; #1009's claim there is 1.58e-03 below
       this side. If that import stalls or fails review, think-i38n adopts this certificate
       at 295 in its own change, regularized the same way.
-  - id: T-314
+  - id: T-327
     kind: lower-bound
     registered: '2026-11-18'
     landed: '2026-11-18'
@@ -50043,7 +50043,7 @@ results:
           by clean-room code of its own, with 38 planned controls; findings frozen before the
           import lane's receipts or T-216's reviews were read. No census run of its own.
         verdict: accepted
-        covers: [T-314]
+        covers: [T-327]
     artifacts:
       - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/README.md
       - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/acquisition/sources.json

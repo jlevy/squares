@@ -491,7 +491,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # T-132's fine-net bound supersedes Hosono's check2 bound of 6 October at n = 29
         # (T-108), its one count, in both lanes, adopted in the pass of 17 November 2026.
         "T-108",
-        # Joost de Winter's #1018 (T-314 on its branch) supersedes Hosono's fine-net bound at
+        # Joost de Winter's #1018 (T-327) supersedes Hosono's fine-net bound at
         # n = 108 (T-216), its one count, in both lanes, from the pass of 18 November 2026.
         "T-216",
     }

@@ -36511,7 +36511,7 @@ issues:
       at core side 12487/12500, twelve native runs of this repository's sqverify-fast, and a
       one-page proof that enlarges the bound from 10.63 by scaling a packing into the measure's
       square. Triaged, retained and registered on 18 November 2026 in lane w6-dewinter-1118
-      (think-i5en) as T-314: a lower bound, so the house rule does not reach it. The premises,
+      (think-i5en) as T-327: a lower bound, so the house rule does not reach it. The premises,
       the dilation, the regeneration of the file from T-216's and the enlargement's arithmetic
       hold exactly, and the author's runs cover every direction once, of reviewed crate source.
       The complete census replay of all 401 directions and its whole-net controls ran here and
@@ -36531,7 +36531,7 @@ issues:
         declared-net directions, with a rational enlargement from 10.63.
       source: body
       register:
-      - T-314
+      - T-327
       evidence:
       - E-de-winter-1018-n108-report
       - E-de-winter-1018-n108-sqverify-fast-replay

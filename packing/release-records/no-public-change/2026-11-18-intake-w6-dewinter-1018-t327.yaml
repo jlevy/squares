@@ -22,7 +22,7 @@ outputs:
 reason: >-
   Intake lanes w6-dewinter-1118 and w6r-dewinter-1118 of 18 November (think-i5en): Joost de
   Winter's issue 1018 is retained, audited and replayed by the census, its stage 4 review
-  (#1027) is mapped, and its lower bound at 108 and 109 is registered as T-314 at V3/C3, which
+  (#1027) is mapped, and its lower bound at 108 and 109 is registered as T-327 at V3/C3, which
   moves both lower lanes at both counts; the requests entry, the coverage source, the case
   records, the composite figure record and the bound citations follow. No paper prints 108's
   or 109's lower bounds, this entry or that source. Against main 3ac78a55f9 (#1027):
@@ -35,7 +35,7 @@ reason: >-
   but results.yaml swapped in, all 55 are byte-identical, so the difference is results.yaml's
   alone: the register count the explainer reads ("one of N results the framework has
   registered so far"), 314 here and 313 on main, as the first measurement of this record found
-  against a1a8d0aae. The novelty count is unchanged (T-314 is previously-published), and the
+  against a1a8d0aae. The novelty count is unchanged (T-327 is previously-published), and the
   bound citation it reads is n = 11's, which this change does not touch. So the change is the
   live register count, which follows the site's data and is not a revision of the paper, as
   the earlier intake records say. No PDF was printed; each prints from that HTML. Every paper

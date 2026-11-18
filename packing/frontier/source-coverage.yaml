@@ -13630,7 +13630,7 @@ sources:
     licence, each pinned by digest. The certificate is Hosono's T-216 measure dilated by
     1063/1062 onto a 401-direction declared net at a core side the source chose; the proof
     enlarges the bound from 10.63 to 10.6300379408297..., above T-216's 531/50 by 0.0100, and
-    the same bound holds at 109 by monotonicity. T-314 records the claim.
+    the same bound holds at 109 by monotonicity. T-327 records the claim.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

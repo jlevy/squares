@@ -1318,7 +1318,7 @@ def test_the_corrections_on_record_are_recent_and_name_nagamochi_2005() -> None:
     # since the third, when its replayed n = 82 linear certificate (T-076) took n = 82.
     # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108; 213
     # since 4 November, when T-179's replayed linear certificate took n = 145 to 149; 212
-    # since 18 November, when de Winter's replayed and reviewed #1018 (T-314 on its branch)
+    # since 18 November, when de Winter's replayed and reviewed #1018 (T-327)
     # took n = 109 by monotonicity from 108.
     assert len(corrected) == 212
     assert 37 not in corrected
