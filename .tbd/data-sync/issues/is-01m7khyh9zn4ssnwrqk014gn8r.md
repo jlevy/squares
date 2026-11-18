@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 21
 delegate: w3r2-pass-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T06:23:07.518Z
+updated_at: 2026-11-18T06:24:14.433Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -48,3 +48,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-18T05:47Z w3r2-pass-1118: #1023 MERGED at 2026-11-18T05:46:46Z as merge commit 86284ec203b63097b0a51fd5dffe931852430335 (head 5f4943500, hosted CI 31 pass, up to date with main 0f191a2d2; round-2 check of A1/A5 passed by the coordinator). Next: Pages deploy check, replies on #1005/#1006/#1007/#1009 from main, closes, worktree removal.
 
 2026-11-18T06:25Z w3r2-pass-1118: deploy verified. Pages run 44246610603 built 86284ec203b63097b0a51fd5dffe931852430335, success 06:10:05Z. check_published_site --commit 86284ec20: 6480 of 6482 (the two failures are the browser checks, Playwright's chromium headless shell missing at /opt/pw-browsers in this session); with --no-browser 6480 of 6480 passed. results.html rows T-310..T-326 V3/C3 at S as registered, T-310..T-313 data-current=false, T-314..T-326 true; case pages 147..307 credit as the records (e.g. 262/292 Found by Joost de Winter, improved by Mishapolk; 270/299 Daniel improved by Özden, Mishapolk), 292 shows T-323's 17.590016439231 with the regularized drawing. Posting replies from main 86284ec20 next.
+
+2026-11-18T06:27Z w3r2-pass-1118: final reply on #1009 posted from main 86284ec20 after the verified deploy, https://github.com/jlevy/squares/issues/1009#issuecomment-6970909384 (T-314..T-326 V3/C3, each the house; credits as the case records; the held solves at 156/180/270/299/307 noted per think-frl5; the eight KKT candidates named under think-4z8z), issue closed 06:23:34Z. OWED: the records change recording the reply (kind final; reported ids, rungs, positions; beads think-4z8z) and #1009 state closed; close this bead only after it merges. think-gpni, think-p3g8, think-evxy closed.

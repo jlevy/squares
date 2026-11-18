@@ -3,9 +3,9 @@ type: is
 id: is-01m7jh7j6p07m5njnw872msz68
 title: "Stage 4 blind review of #1005's, #1006's and #1007's certificates (292 twice, 262, 295)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 13
+version: 14
 delegate: w3r2-pass-1118
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:21.494Z
-updated_at: 2026-11-18T04:37:43.587Z
+updated_at: 2026-11-18T06:24:05.192Z
 started_at: 2026-11-16T15:58:24.873Z
+closed_at: 2026-11-18T06:24:05.192Z
+close_reason: "R1's blind review (#1013, merged 1f28d45ee) is mapped into T-310..T-313 by #1023 (merged 86284ec20, 2026-11-18T05:46Z); check_bead_tree --before-close ok on main 86284ec20."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
