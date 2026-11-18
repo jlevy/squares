@@ -5,7 +5,7 @@ title: "Import #1018: Joost de Winter's raised lower bound for n = 108 and n = 1
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: w6r-dewinter-1118
 labels:
   - intake
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:54.594Z
-updated_at: 2026-11-18T04:52:10.893Z
+updated_at: 2026-11-18T04:56:06.902Z
 started_at: 2026-11-18T01:19:03.018Z
 ---
 
@@ -64,3 +64,5 @@ started_at: 2026-11-18T01:19:03.018Z
 ### R-108 (blind review)
 
 2026-11-18T04:30Z: think-ao7v (review A's A8 on #1027, deferred: set the census price beside the import's census run, 1.28 CPU-hours) is now a child of this bead rather than of the closed think-mrzq, which had made check_bead_tree fail for every PR (reported by lane w3r2-pass-1118). It is open, for the import lane to close when its mapping records the price.
+
+2026-11-18T04:56Z w6r-dewinter-1118 (resumed lane after the 04:30Z restart): committed the uncommitted five files as WIP (cff19139fa), merged main 3ac78a55f9 (#1027) at 90a8edb09, mapped R-108 at fa31c463f (pushed): E-de-winter-1018-n108-sqverify-fast-replay (census --evidence, review as audit_record), external_review on the report entry, V-de-winter-1018-review-{premises,axis,bnb} and E-de-winter-1018-n108-review-decision (full 401/401, sets no rung, cited by the case records only), T-314 (provisional; renumber to the next id after #1023 per the coordinator: ids follow merge order) at V3/C3 with reviews, both lower lanes at 108 and 109 moved, credit group [108,109] de Winter, A8 (price beside the real run), N-5, N-6 in notes. Records tier running.
