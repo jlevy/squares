@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T03:30:17.785Z
+updated_at: 2026-11-18T03:43:10.893Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -50,3 +50,5 @@ coord-intake-1117r, coordinator's correction: I launched blind review R-127 (#10
 R-127b (blind review), 2026-11-18T03:19Z, lane r127b-1118 (strong tier, maximum reasoning): checker and controls plan frozen and pushed at 7987712380 on claude/intake-2026-11-18-review-1015-max (packet packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/; verify with sha256sum -c frozen/checker-frozen.sha256 from the packet). No certificate decided yet; next: checks, controls, option D measurements, custody.
 
 R-127 (blind review), 2026-11-18 03:30Z: review A addressed in d19d061e5 (addendum after the freeze: F9/Question 1 moot, significance precedence, erratum, push time; reply https://github.com/jlevy/squares/pull/1025#issuecomment-6968149371). PR #1025 merged with a merge commit as 95f89dffceaeecb2d2fc800baec54bd7906b162d. For the mapping: the review is docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md; do not send Question 1.
+
+R-127b (blind review), 2026-11-18T03:43Z: findings frozen and pushed at ee8cbc0b12 (verify with sha256sum -c frozen/findings-frozen.sha256 from the packet). Verdict: #1015, #1017, #1020 accepted (feasible; stated sides are the files' sides; prints are 12-place ceilings). Option D (think-b0w5), exact: T-305 margin 1.2099401e-10, gains 9.582e-4/9.6016e-4/9.6016e-4 (new); #1015 margin 7.7393785e-63, #1015->#1017 gain 1.9555984e-6 (new); #1017 margin 4.1902971e-14, #1017->#1020 gain 1.7976067e-13 = 4.29x margin, #1020 1.3786e-13 below shrunk #1017 (new). devtools.contraction_margin and measure_identity agree exactly (second route). Identity: #1017, #1020 one to one with predecessor under identity (5 and 1 beyond a tenth); none one to one with T-305. Significance: #1015 S3, #1017 S2, #1020 S2 (S1 alt). 133/134 controls as stated; E1p at #1020 a plan-rule defect (F3, minor). Minor custody: stale SHA256SUMS at #1017/#1020 pins (F8); #1017's 'later commits unchanged' now false (F9). Next: compare with R-127 (#1025), docs copy, draft PR. CPU ~0.2 h.
