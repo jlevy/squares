@@ -1,0 +1,1030 @@
+{
+ "donors": {
+  "T-325-299": {
+   "best": [
+    {
+     "matched_tilted": 53,
+     "matched_tilted_squares": [
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      172,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      271,
+      272,
+      280,
+      282,
+      283,
+      284,
+      285,
+      287,
+      288,
+      289,
+      290,
+      291,
+      294
+     ],
+     "matched_upright": 157,
+     "symmetry": "rot270",
+     "translation": [
+      -0.9963192283550405,
+      0.018821257810547096
+     ],
+     "votes": 47
+    },
+    {
+     "matched_tilted": 51,
+     "matched_tilted_squares": [
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      37,
+      38,
+      39,
+      40,
+      45,
+      46,
+      47,
+      48,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      125,
+      280
+     ],
+     "matched_upright": 156,
+     "symmetry": "mirror-y",
+     "translation": [
+      -0.023737202709035333,
+      0.9910550128649245
+     ],
+     "votes": 44
+    },
+    {
+     "matched_tilted": 50,
+     "matched_tilted_squares": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      37,
+      38,
+      39,
+      40,
+      45,
+      46,
+      47,
+      48,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      61,
+      62,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92
+     ],
+     "matched_upright": 24,
+     "symmetry": "mirror-x",
+     "translation": [
+      4.97826180195852,
+      9.992777609933018
+     ],
+     "votes": 37
+    },
+    {
+     "matched_tilted": 49,
+     "matched_tilted_squares": [
+      159,
+      160,
+      161,
+      162,
+      163,
+      204,
+      205,
+      206,
+      207,
+      209,
+      210,
+      211,
+      212,
+      213,
+      214,
+      232,
+      233,
+      234,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      271,
+      272,
+      280,
+      282,
+      283,
+      284,
+      285,
+      287,
+      288,
+      289,
+      290,
+      291,
+      294,
+      295
+     ],
+     "matched_upright": 22,
+     "symmetry": "rot90",
+     "translation": [
+      -10.003133644065636,
+      -4.984226924760396
+     ],
+     "votes": 36
+    },
+    {
+     "matched_tilted": 42,
+     "matched_tilted_squares": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      16,
+      18,
+      19,
+      20,
+      21,
+      22,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      38,
+      39,
+      40,
+      45,
+      47,
+      48,
+      51,
+      52,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      61,
+      62,
+      84,
+      85,
+      87,
+      88,
+      89,
+      91,
+      92
+     ],
+     "matched_upright": 0,
+     "symmetry": "mirror-y",
+     "translation": [
+      -0.4844981124851806,
+      1.8830148216649205
+     ],
+     "votes": 38
+    }
+   ],
+   "donor": {
+    "n": 299,
+    "path": "/home/user/wt/r1031/packing/resources/web/mishapolk-issue1009-2026-11-16/source/witnesses/2026-11-16/n-299.yaml",
+    "sha256": "a2d19c925ba44a452e17f4d3ccd3b7782ed01e95c03438ddb31c0da2d486198f",
+    "side": 17.801004434251766,
+    "tilted": 118
+   }
+  },
+  "couzo-335-1009": {
+   "best": [
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      22,
+      31,
+      33
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      5.416726509632486,
+      9.691933094466647
+     ],
+     "votes": 3
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      9,
+      56,
+      58
+     ],
+     "matched_upright": 0,
+     "symmetry": "rot180",
+     "translation": [
+      -2.6994310763383957,
+      0.3098991414221599
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      4,
+      19
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      9.28051049278738,
+      8.774857021467895
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      5,
+      6
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      9.985292051652639,
+      9.620113452012008
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      7,
+      9
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      8.37830338053307,
+      10.560719685579484
+     ],
+     "votes": 2
+    }
+   ],
+   "donor": {
+    "n": 335,
+    "path": "/home/user/wt/r1031/packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n335.cert",
+    "sha256": "d500b46c6bad15967033ee4bf5b207d8afb6d8073272d407b22e8e8d450e380a",
+    "side": 18.822875655561383,
+    "tilted": 51
+   }
+  },
+  "couzo-335-1023": {
+   "best": [
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      22,
+      31,
+      33
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      5.405469410509741,
+      9.688034890237637
+     ],
+     "votes": 3
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      267,
+      268,
+      270
+     ],
+     "matched_upright": 0,
+     "symmetry": "anti-transpose",
+     "translation": [
+      -7.7020182222892855,
+      -3.400577691529636
+     ],
+     "votes": 3
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      133,
+      172,
+      280
+     ],
+     "matched_upright": 34,
+     "symmetry": "transpose",
+     "translation": [
+      -10.984323529433336,
+      -1.078489637862459
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      134,
+      135,
+      280
+     ],
+     "matched_upright": 52,
+     "symmetry": "transpose",
+     "translation": [
+      -9.98000659934155,
+      -1.0590179800210473
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      134,
+      135,
+      172
+     ],
+     "matched_upright": 17,
+     "symmetry": "anti-transpose",
+     "translation": [
+      -1.7946753693533184,
+      11.755026890788852
+     ],
+     "votes": 2
+    }
+   ],
+   "donor": {
+    "n": 335,
+    "path": "/home/user/wt/r1031/packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n335.cert",
+    "sha256": "a85356b6778170e89f7634001198401eab9b7d984da886142937cf2c3930eb07",
+    "side": 18.82287565553613,
+    "tilted": 60
+   }
+  },
+  "couzo-372-1009": {
+   "best": [
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      5,
+      6,
+      37
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      1.7919884048978847,
+      1.0121587211114562
+     ],
+     "votes": 3
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      22,
+      31,
+      33
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      5.418837667949904,
+      9.694735486406637
+     ],
+     "votes": 3
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      159,
+      161,
+      269
+     ],
+     "matched_upright": 0,
+     "symmetry": "transpose",
+     "translation": [
+      -0.4261700046067327,
+      3.4268699455037224
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      165,
+      243,
+      280
+     ],
+     "matched_upright": 94,
+     "symmetry": "transpose",
+     "translation": [
+      -6.986035467620232,
+      1.0015967488383861
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      165,
+      166,
+      280
+     ],
+     "matched_upright": 78,
+     "symmetry": "anti-transpose",
+     "translation": [
+      -8.988006300970625,
+      -2.0794640245356995
+     ],
+     "votes": 2
+    }
+   ],
+   "donor": {
+    "n": 372,
+    "path": "/home/user/wt/r1031/packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n372.cert",
+    "sha256": "61a0f1998b0348abfdcbb24ebc889cf7ee133d485e0fe33f21956f0cdc689908",
+    "side": 19.822875655635812,
+    "tilted": 53
+   }
+  },
+  "couzo-372-1015": {
+   "best": [
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      22,
+      31,
+      33
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      5.416726509632486,
+      9.691933094466647
+     ],
+     "votes": 3
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      9,
+      56,
+      58
+     ],
+     "matched_upright": 0,
+     "symmetry": "rot180",
+     "translation": [
+      -3.6994310763383957,
+      -0.6901008585778401
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      4,
+      19
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      9.28051049278738,
+      8.774857021467895
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      5,
+      6
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      9.985292051652639,
+      9.620113452012008
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      7,
+      9
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      8.37830338053307,
+      10.560719685579484
+     ],
+     "votes": 2
+    }
+   ],
+   "donor": {
+    "n": 372,
+    "path": "/home/user/wt/r1031/packing/resources/web/couzo-index-2026-10-15/source/certificates/best/n372.cert",
+    "sha256": "53a9e205a025de18091ebe13ca0f05af84f105df70599b96e19de3853fe28337",
+    "side": 19.822875655561383,
+    "tilted": 51
+   }
+  },
+  "couzo-372-1023": {
+   "best": [
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      133,
+      172
+     ],
+     "matched_upright": 21,
+     "symmetry": "identity",
+     "translation": [
+      -15.783302450405877,
+      10.737312998944876
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      133,
+      172
+     ],
+     "matched_upright": 21,
+     "symmetry": "identity",
+     "translation": [
+      -11.778555098379051,
+      9.737748349973394
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      133,
+      172
+     ],
+     "matched_upright": 19,
+     "symmetry": "rot90",
+     "translation": [
+      -12.78435332111632,
+      0.9436581222921712
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      133,
+      172
+     ],
+     "matched_upright": 59,
+     "symmetry": "rot180",
+     "translation": [
+      1.0167402886031878,
+      -1.0634937367841424
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      133,
+      172
+     ],
+     "matched_upright": 89,
+     "symmetry": "rot180",
+     "translation": [
+      -2.9880070634236375,
+      -0.06392908781266016
+     ],
+     "votes": 2
+    }
+   ],
+   "donor": {
+    "n": 372,
+    "path": "/home/user/wt/r1031/packing/resources/web/couzo-issue763-2026-10-23/source/certificates/best/n372.cert",
+    "sha256": "af0315981aa0db34a89ed76d3bc043a6df0f13e03a4ef2127dafc390005efa66",
+    "side": 19.806121988460376,
+    "tilted": 220
+   }
+  },
+  "couzo-372-1024": {
+   "best": [
+    {
+     "matched_tilted": 1,
+     "matched_tilted_squares": [
+      172
+     ],
+     "matched_upright": 20,
+     "symmetry": "identity",
+     "translation": [
+      -13.730956645190348,
+      -2.0092342292649583
+     ],
+     "votes": 1
+    },
+    {
+     "matched_tilted": 1,
+     "matched_tilted_squares": [
+      280
+     ],
+     "matched_upright": 50,
+     "symmetry": "identity",
+     "translation": [
+      -8.015795649486385,
+      -1.0009419529478523
+     ],
+     "votes": 1
+    },
+    {
+     "matched_tilted": 1,
+     "matched_tilted_squares": [
+      280
+     ],
+     "matched_upright": 47,
+     "symmetry": "identity",
+     "translation": [
+      -8.018265783353188,
+      -2.001875633661099
+     ],
+     "votes": 1
+    },
+    {
+     "matched_tilted": 1,
+     "matched_tilted_squares": [
+      280
+     ],
+     "matched_upright": 11,
+     "symmetry": "identity",
+     "translation": [
+      -1.2217818962335176,
+      -13.804015856185536
+     ],
+     "votes": 1
+    },
+    {
+     "matched_tilted": 1,
+     "matched_tilted_squares": [
+      280
+     ],
+     "matched_upright": 20,
+     "symmetry": "identity",
+     "translation": [
+      -11.018621661045657,
+      -4.0030189078221134
+     ],
+     "votes": 1
+    }
+   ],
+   "donor": {
+    "n": 372,
+    "path": "/home/user/wt/r1031/packing/resources/web/couzo-43f666c-2026-10-24/source/certificates/best/n372.cert",
+    "sha256": "f1c7bc100e39157f59758c5c736aead1f5ea6e4031e34d0ba11d26d29f1b2469",
+    "side": 19.806121548577917,
+    "tilted": 279
+   }
+  },
+  "polkovskyi-335-1023": {
+   "best": [
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      22,
+      31,
+      33
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      5.416732780980617,
+      9.691934337868478
+     ],
+     "votes": 3
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      9,
+      56,
+      58
+     ],
+     "matched_upright": 0,
+     "symmetry": "rot180",
+     "translation": [
+      -2.6994332082204098,
+      0.3098948874124474
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      4,
+      19
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      9.280516316099897,
+      8.774857243588357
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      5,
+      6
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      9.985297874965156,
+      9.620113674132472
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      7,
+      9
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      8.378309203845587,
+      10.560719907699948
+     ],
+     "votes": 2
+    }
+   ],
+   "donor": {
+    "n": 335,
+    "path": "/home/user/wt/r1031/packing/resources/web/mishapolk-issue732-f1ceee4-2026-10-23/source/certificates/0000-0999/n335.cert",
+    "sha256": "2ce7578e3bf70539e12f421e4c6a90e9940d228c2f09ee7fe8b687e3151c52f5",
+    "side": 18.822875655541953,
+    "tilted": 53
+   }
+  },
+  "polkovskyi-372-1022": {
+   "best": [
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      22,
+      31,
+      33
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      5.416730377259388,
+      9.691934294946206
+     ],
+     "votes": 3
+    },
+    {
+     "matched_tilted": 3,
+     "matched_tilted_squares": [
+      9,
+      56,
+      58
+     ],
+     "matched_upright": 0,
+     "symmetry": "rot180",
+     "translation": [
+      -3.6994353366374435,
+      -0.6900971693837077
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      4,
+      19
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      9.280513812642592,
+      8.774857687120107
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      5,
+      6
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      9.985295371507853,
+      9.620114117664222
+     ],
+     "votes": 2
+    },
+    {
+     "matched_tilted": 2,
+     "matched_tilted_squares": [
+      7,
+      9
+     ],
+     "matched_upright": 0,
+     "symmetry": "identity",
+     "translation": [
+      8.378306700388283,
+      10.560720351231698
+     ],
+     "votes": 2
+    }
+   ],
+   "donor": {
+    "n": 372,
+    "path": "/home/user/wt/r1031/packing/resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n372.cert",
+    "sha256": "ce471232ab5e0679ceb8c52b4b85d609f9f28ac715449d556cdc6fab56e9041b",
+    "side": 19.82287565555126,
+    "tilted": 52
+   }
+  }
+ },
+ "program": "rv1031_lineage.py",
+ "reflection_across_x_plus_y_equals_S": {
+  "every_square": {
+   "squares": 299,
+   "tilted_within_0.1_and_3_deg": 103,
+   "within": {
+    "0.01 and 1.0 deg": 258,
+    "0.01 and 3.0 deg": 258,
+    "0.05 and 1.0 deg": 281,
+    "0.05 and 3.0 deg": 281,
+    "0.1 and 1.0 deg": 283,
+    "0.1 and 3.0 deg": 283,
+    "0.25 and 1.0 deg": 285,
+    "0.25 and 3.0 deg": 285
+   }
+  },
+  "negative_to_positive": {
+   "distinct_partners": 54,
+   "median_distance": 0.0008734163706801234,
+   "squares": 60,
+   "within": {
+    "0.05 and 1.0 deg": 50,
+    "0.05 and 3.0 deg": 50,
+    "0.1 and 1.0 deg": 51,
+    "0.1 and 3.0 deg": 51,
+    "0.25 and 1.0 deg": 52,
+    "0.25 and 3.0 deg": 52
+   }
+  },
+  "positive_to_negative": {
+   "distinct_partners": 54,
+   "median_distance": 0.00045622203076163727,
+   "squares": 55,
+   "within": {
+    "0.05 and 1.0 deg": 50,
+    "0.05 and 3.0 deg": 50,
+    "0.1 and 1.0 deg": 51,
+    "0.1 and 3.0 deg": 51,
+    "0.25 and 1.0 deg": 52,
+    "0.25 and 3.0 deg": 52
+   }
+  }
+ },
+ "subject": {
+  "n": 299,
+  "path": "/tmp/claude-0/-home-user-squares/bd74155c-bf06-5d6c-a727-558842453a91/scratchpad/review-1031/src-raw/n299_exact.json",
+  "sha256": "199e6132eeb4104d9894e4296f2bac3d244175f745163f63130e9f2065ed4a9c",
+  "side": 17.79363699174304
+ }
+}

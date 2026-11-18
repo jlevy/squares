@@ -1,0 +1,1 @@
+PASSED 14785 0 {"method A with one square's normals only": 831, 'method A with sin D signed in H': 1076, 'method A counting a zero margin as overlap': 1013, 'method B with open half-planes': 1009, 'method B taking every listing as counterclockwise': 1084, 'a reader that takes a leading plus': 3, 'form P read clockwise': 1}
