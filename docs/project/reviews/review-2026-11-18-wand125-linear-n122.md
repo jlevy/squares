@@ -692,8 +692,9 @@ Nothing above this section changed after the freeze.
 - *The records carry no per-angle bound.* LC-4 of 2 October and F-5 of 14 October
   (minor) say that `certificate.json`’s records hold the index, status, input digest and
   node count, and each angle’s `lower` lives only in the proof bundle.
-  The same holds here (`out/premises.json.gz`: the records list digests and node
-  counts), and this review did not raise it.
+  The same holds here: read after the freeze, each of the 201 records in this
+  certificate’s `certificate.json` has exactly the keys `index`, `status`,
+  `input_sha256` and `nodes`. This review did not raise it.
   It stands for this certificate as F-5 states it, and question 3 of 14 October applies
   here too.
 - *Exit status.* The 2 October review’s hypothesis 10: every acceptance check in the
