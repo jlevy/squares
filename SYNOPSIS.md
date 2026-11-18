@@ -902,6 +902,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-992-20261115/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1001-20261116/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1005-1007-20261117/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md) | generated status view | generated | generated | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
 | [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
@@ -1063,6 +1064,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issue 997 (think-32cl)](packing/cases/regularized_drawings/think-32cl-2026-11-16/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 1001 (think-0y9m)](packing/cases/regularized_drawings/think-0y9m-2026-11-16/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 1009 (think-i38n)](packing/cases/regularized_drawings/think-i38n-2026-11-18/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption at 127 of Issue 1020 (think-zqot)](packing/cases/regularized_drawings/think-zqot-2026-11-18/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 958 (think-bcfs)](packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 959 (think-89i7)](packing/cases/regularized_drawings/think-89i7-2026-11-12/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 960 (think-my76)](packing/cases/regularized_drawings/think-my76-2026-11-11/README.md) | source retention and archive policy | record | retained | — |

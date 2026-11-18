@@ -19259,10 +19259,10 @@ occurrences:
     path: packing/frontier/n-127.md
     record_key: '127'
     field: /reported_upper_bound/found_by/0
-  expected_text: Tomáš Kodaj
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: Tomáš Kodaj
+  end: 15
+  label: Joost de Winter
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -19284,18 +19284,6 @@ occurrences:
   note: Reviewed packing/frontier/n-127.md [127] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-127.md
-    record_key: '127'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: JoeGun
-  start: 0
-  end: 6
-  label: JoeGun
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
 - origin:
     path: packing/frontier/n-128.md
     record_key: '128'

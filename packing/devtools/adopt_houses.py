@@ -3427,15 +3427,15 @@ RESULTS: dict[str, Prose] = {
         ),
         lineage=(
             "The issues say the search started from an exact certificate of an arrangement in "
-            "the public Kaggle compilations of Alex Chilton and Asterios Panoras, whose original "
-            "finder could not be established, and that #1015, #1017 and #1020 are its three "
-            "stages that evening. Measured, this certificate is #1017’s arrangement moved, one "
-            "to one by nearest centres (one square beyond a tenth), and #1017 is #1015’s; "
-            "against T-305’s packing, Tomáš Kodaj’s as JoeGun improved it and this case’s house "
-            "best packing before this adoption, no symmetry pairs nearest centres one to one, "
-            "and the optimal assignment moves 9 squares beyond a tenth, at most 0.789. So Joost "
-            "de Winter is the packing’s finder, after the arrangement in those compilations, as "
-            "the issues ask."
+            "the public Kaggle compilations of Alex Chilton and Asterios Panoras, whose "
+            "original finder could not be established, and that #1015, #1017 and #1020 are its "
+            "three stages that evening. Measured, this certificate is #1017’s arrangement "
+            "moved, one to one by nearest centres (one square beyond a tenth), and #1017 is "
+            "#1015’s; against T-305’s packing, Tomáš Kodaj’s as JoeGun improved it and this "
+            "case’s house best packing before this adoption, no symmetry pairs nearest centres "
+            "one to one, and the optimal assignment moves 9 squares beyond a tenth, at most "
+            "0.789. So Joost de Winter is the packing’s finder, after the arrangement in those "
+            "compilations, as the issues ask."
         ),
         third_route=REVIEW_1020,
         diversity="by Claude agents, a system family that also produced the files and checks",

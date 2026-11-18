@@ -52815,8 +52815,8 @@ results:
       The blind stage 4 review of record of 18 November (R-127b, lane r127b-1118, PR #1028)
       accepts all three certificates with fifteen findings, none blocking or major: F3, E1p's
       frozen rule too narrow at #1020 and restated after the freeze, is the review's own; F9,
-      #1017's statement that later commits leave its files unchanged, false since a1ba501, is
-      minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
+      #1017's statement that later commits leave its files unchanged, false at #1020's revision,
+      is minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
       since each push that published a pin also fixed it; the rest are notes. The additional
       review R-127 (lane r127-1118, PR #1025), at the strong tier and xhigh reasoning (its F13),
       accepts them too, with thirteen findings, all notes, its F9 and Question 1 moot after its
@@ -52982,8 +52982,8 @@ results:
       The blind stage 4 review of record of 18 November (R-127b, lane r127b-1118, PR #1028)
       accepts all three certificates with fifteen findings, none blocking or major: F3, E1p's
       frozen rule too narrow at #1020 and restated after the freeze, is the review's own; F9,
-      #1017's statement that later commits leave its files unchanged, false since a1ba501, is
-      minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
+      #1017's statement that later commits leave its files unchanged, false at #1020's revision,
+      is minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
       since each push that published a pin also fixed it; the rest are notes. The additional
       review R-127 (lane r127-1118, PR #1025), at the strong tier and xhigh reasoning (its F13),
       accepts them too, with thirteen findings, all notes, its F9 and Question 1 moot after its
@@ -53166,8 +53166,8 @@ results:
       The blind stage 4 review of record of 18 November (R-127b, lane r127b-1118, PR #1028)
       accepts all three certificates with fifteen findings, none blocking or major: F3, E1p's
       frozen rule too narrow at #1020 and restated after the freeze, is the review's own; F9,
-      #1017's statement that later commits leave its files unchanged, false since a1ba501, is
-      minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
+      #1017's statement that later commits leave its files unchanged, false at #1020's revision,
+      is minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
       since each push that published a pin also fixed it; the rest are notes. The additional
       review R-127 (lane r127-1118, PR #1025), at the strong tier and xhigh reasoning (its F13),
       accepts them too, with thirteen findings, all notes, its F9 and Question 1 moot after its
