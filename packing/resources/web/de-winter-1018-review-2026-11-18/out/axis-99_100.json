@@ -1,0 +1,33 @@
+{
+ "verdict": "REFUSED_EXACT",
+ "factor": "99/100",
+ "threshold": "1",
+ "x_events": 5542,
+ "y_events": 5542,
+ "vertices": 30713764,
+ "expanded_rectangles": 6524,
+ "overlap_error_E": 1.6527224033779931e-13,
+ "gamma": 7.246425681728397e-13,
+ "max_Sx": 2628.472165299714,
+ "max_Sy": 2628.4721652997146,
+ "rigorous_least_capture": 0.9974040448911559,
+ "rigorous_least_at": [
+  "6893368290553469509/1062000000000000000",
+  "6893368290553469509/1062000000000000000"
+ ],
+ "least_exact_vertex_value": "0.99740404535495149761",
+ "least_exact_vertex_value_fraction_digits": 564,
+ "least_exact_vertex": [
+  "6893368290553469509/1062000000000000000",
+  "6893368290553469509/1062000000000000000"
+ ],
+ "least_exact_vertex_float": [
+  6.4909305937414965,
+  6.4909305937414965
+ ],
+ "float_estimate_there": 0.9974040453549625,
+ "smallest_vertices_evaluated_exactly": 64,
+ "cpu_seconds": 8.53,
+ "program": "rv1018_axis.py",
+ "measure_json_sha256": "d4d160901461bd9e3769db1dbace4b00d2e0afb57429dcd3c7467f06c5ced9d8"
+}

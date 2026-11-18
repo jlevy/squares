@@ -357,6 +357,7 @@ documents:
   - {path: docs/project/reviews/review-2026-11-16-joegun-1001.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-18-de-winter-1018.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-15-lara-992.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-11-dewinter-132-157.md, role: review, authority: record, lifecycle: retained}
