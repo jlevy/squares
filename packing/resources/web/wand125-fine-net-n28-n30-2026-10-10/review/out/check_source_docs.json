@@ -1,0 +1,179 @@
+{
+ "certificates": [
+  {
+   "certificate": "mixed_n28_L57425",
+   "documents_equal_pins": {
+    "ASSET.json": true,
+    "README.md": true,
+    "bundle.json": true,
+    "files-sha256.json": true
+   },
+   "bundle": {
+    "n_L_B_net_mass": true,
+    "endpoint": "1036/2501",
+    "endpoint_equals_t_max": true,
+    "endpoint_check_equals_poly": true,
+    "rotated_side_upper_equals_B(1+D)": true,
+    "side_margin_equals": true,
+    "per_edge_margin_equals_half": true,
+    "candidate_sha256_equals": true,
+    "candidate_digest_equals_receipt": true,
+    "receipt_sha256_equals": true,
+    "verifier_sources_equal_sealed_members": true,
+    "build_source": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+    "compared_with": "287/50",
+    "improvement_lower": "1/400",
+    "improvement_exact": true,
+    "verification_text": "Second-system check: sqverify-fast (exact rational / outward-rounded interval arithmetic) verified every net direction with threshold 1 (check2/receipt.json); a negative control with masses x0.985 is refused (check2/control.json). The shipped C++ verifier records of earlier bundles are not included; they are run only as occasional spot checks."
+   },
+   "asset_json": {
+    "size_sha_equal_asset": true,
+    "source_commit": null,
+    "check": "tar xzf check2/src/sqverify-proof-net-fe12e036c.tar.gz\n(cd sqverify_fast && cargo build --release --locked)\nbash check2/src/fine_net_check.sh sqverify_fast/target/release/sqverify-fast candidate.json out/"
+   },
+   "readme": {
+    "files_named": [
+     "bundle.json",
+     "candidate.json",
+     "check2/control.json",
+     "check2/control.jsonl.gz",
+     "check2/receipt.json",
+     "check2/run.jsonl.gz",
+     "check2/src/",
+     "check2/src/REPRODUCE.md",
+     "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+     "files-sha256.json",
+     "verification/prepublication-receipt.json"
+    ],
+    "named_but_absent": [
+     "check2/control.jsonl.gz"
+    ],
+    "states_digest": true,
+    "states_mass": true,
+    "states_2073": true,
+    "seconds_stated": [
+     "772"
+    ],
+    "pinned_minus_sealed": {
+     "lines_added": 4,
+     "lines_removed": 0,
+     "headings_added": [
+      "## Pre-publication check"
+     ]
+    }
+   },
+   "shipped_script": {
+    "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36",
+    "writes_build_field": true,
+    "writes_schema_field": false,
+    "writes_tries": false,
+    "control_kind_text": [
+     "every mass x 0.985, 32 directions"
+    ],
+    "mutant_rule": true,
+    "control_directions_rule": true,
+    "published_receipt_schema": "fine-net-check2-receipt/v1",
+    "published_receipt_has_build_field": false
+   },
+   "bundle_soundness": {
+    "git_blob": "cadf59b631586fc31c962b3cd37b89ee706706b5",
+    "equals_e020eb1e2_edition": true,
+    "mentions_proof_net": false,
+    "has_declared_nets_section": false
+   },
+   "archive_soundness": {
+    "mentions_proof_net": true,
+    "has_declared_nets_section": false,
+    "lines_more_than_bundle_copy": 11
+   }
+  },
+  {
+   "certificate": "mixed_n30_L58925",
+   "documents_equal_pins": {
+    "ASSET.json": true,
+    "README.md": true,
+    "bundle.json": true,
+    "files-sha256.json": true
+   },
+   "bundle": {
+    "n_L_B_net_mass": true,
+    "endpoint": "1036/2501",
+    "endpoint_equals_t_max": true,
+    "endpoint_check_equals_poly": true,
+    "rotated_side_upper_equals_B(1+D)": true,
+    "side_margin_equals": true,
+    "per_edge_margin_equals_half": true,
+    "candidate_sha256_equals": true,
+    "candidate_digest_equals_receipt": true,
+    "receipt_sha256_equals": true,
+    "verifier_sources_equal_sealed_members": true,
+    "build_source": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+    "compared_with": "11767/2000",
+    "improvement_lower": "9/1000",
+    "improvement_exact": true,
+    "verification_text": "Second-system check: sqverify-fast (exact rational / outward-rounded interval arithmetic) verified every net direction with threshold 1 (check2/receipt.json); a negative control with masses x0.985 is refused (check2/control.json). The shipped C++ verifier records of earlier bundles are not included; they are run only as occasional spot checks."
+   },
+   "asset_json": {
+    "size_sha_equal_asset": true,
+    "source_commit": null,
+    "check": "tar xzf check2/src/sqverify-proof-net-fe12e036c.tar.gz\n(cd sqverify_fast && cargo build --release --locked)\nbash check2/src/fine_net_check.sh sqverify_fast/target/release/sqverify-fast candidate.json out/"
+   },
+   "readme": {
+    "files_named": [
+     "bundle.json",
+     "candidate.json",
+     "check2/control.json",
+     "check2/control.jsonl.gz",
+     "check2/receipt.json",
+     "check2/run.jsonl.gz",
+     "check2/src/",
+     "check2/src/REPRODUCE.md",
+     "check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+     "files-sha256.json",
+     "verification/prepublication-receipt.json"
+    ],
+    "named_but_absent": [
+     "check2/control.jsonl.gz"
+    ],
+    "states_digest": true,
+    "states_mass": true,
+    "states_2073": true,
+    "seconds_stated": [
+     "1790.3"
+    ],
+    "pinned_minus_sealed": {
+     "lines_added": 4,
+     "lines_removed": 0,
+     "headings_added": [
+      "## Pre-publication check"
+     ]
+    }
+   },
+   "shipped_script": {
+    "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36",
+    "writes_build_field": true,
+    "writes_schema_field": false,
+    "writes_tries": false,
+    "control_kind_text": [
+     "every mass x 0.985, 32 directions"
+    ],
+    "mutant_rule": true,
+    "control_directions_rule": true,
+    "published_receipt_schema": "fine-net-check2-receipt/v1",
+    "published_receipt_has_build_field": false
+   },
+   "bundle_soundness": {
+    "git_blob": "cadf59b631586fc31c962b3cd37b89ee706706b5",
+    "equals_e020eb1e2_edition": true,
+    "mentions_proof_net": false,
+    "has_declared_nets_section": false
+   },
+   "archive_soundness": {
+    "mentions_proof_net": true,
+    "has_declared_nets_section": false,
+    "lines_more_than_bundle_copy": 11
+   }
+  }
+ ],
+ "problems": []
+}
