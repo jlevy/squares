@@ -5,8 +5,8 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 24
-delegate: w6r-dewinter-1118
+version: 25
+delegate: w6r2-dewinter-1118
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T06:48:41.574Z
+updated_at: 2026-11-18T07:03:46.768Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
