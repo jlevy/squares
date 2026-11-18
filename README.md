@@ -43,7 +43,7 @@ The side length of that smallest square is written $s(n)$.
 The value of $s(n)$ remains unknown for most $n$. In many cases, $s(n)$ is known only to
 lie between an upper bound (the size of the enclosing square for the tightest packing
 ever discovered, such as $s(29) \le 5.934$) and a lower bound (a size below which it is
-proved that no packing can exist, such as the reported $s(29) \ge 5.81$).
+proved that no packing can exist, such as the reported $s(29) \ge 5.82$).
 
 <!-- END SHARED: project-intro -->
 

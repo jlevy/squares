@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **272** programs: **57** external and **215** first-party; **187** decide claims and **85** check premises.
-- **780** of **1004** evidence entries name the programs that verified them: 378 independently re-implemented, 323 reproduced with the producer’s code, 55 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **276** programs: **57** external and **219** first-party; **190** decide claims and **86** check premises.
+- **782** of **1006** evidence entries name the programs that verified them: 379 independently re-implemented, 323 reproduced with the producer’s code, 56 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -182,7 +182,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 4 | 4 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 172 | 36 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 173 | 37 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 8 | 8 |
 | [`V-replay-k2m5-family`](#v-replay-k2m5-family) | devtools.replay_k2m5_family | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -304,6 +304,10 @@ second implementation agrees.
 | [`V-jazivxt-989-review-check`](#v-jazivxt-989-review-check) | l169_check.py with l169_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-de-winter-996-review-check`](#v-de-winter-996-review-check) | l180_check.py with l180_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-joegun-1001-review-check`](#v-joegun-1001-review-check) | l186_check.py with l186_reader.py | Squares Project (Levy) | first-party | decides | 1 | 5 |
+| [`V-wand125-n29-review-premises`](#v-wand125-n29-review-premises) | check_candidate.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-wand125-n29-review-exact-capture`](#v-wand125-n29-review-exact-capture) | fine_net_exact.capture | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-wand125-n29-review-axis-decision`](#v-wand125-n29-review-axis-decision) | axis_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-wand125-n29-review-oblique-decision`](#v-wand125-n29-review-oblique-decision) | oblique_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 
 ## By Program
 
@@ -3424,6 +3428,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-n030-wand125-mixed-58835-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-109 |
 | `E-n039-wand125-mixed-665-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-110 |
 | `E-n041-wand125-mixed-6775-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-111 |
+| `E-wand125-fine-net-n29-582-followup-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-132 |
 | `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | not recorded | T-133 |
 | `E-wand125-fine-net-n28-57425-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-142 |
 | `E-wand125-fine-net-n30-58925-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-143 |
@@ -5527,6 +5532,70 @@ The 16 November stage 4 review's exact checker of JoeGun's five rational corner 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-joegun-1001-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 5 of 5: the five certificates: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-305, T-306, T-307, T-308, T-309 |
+
+### `V-wand125-n29-review-premises`
+
+**check_candidate.py, check_source_logs.py, check_source_docs.py and custody_and_nested.py (with fine_net_exact.py)** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the crate and the tools, every exact premise of the check2 candidate mixed_n29_L582 on its declared net (the measure and its mass, the distinct D4 images, lemma N0's premises and the last bin, the per-bin domain at every node, lemma F3's caps, the canonical form of every number, the semantic digest); reads the source's run log, receipts, control and pinned documents against the candidate, rebuilds the control's mutant to its logged digest, and ties the nested verifier archive to its build digest and, file by file, to reviewed source.
+
+- Source: [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/fine_net_exact.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/fine_net_exact.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/check_candidate.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/check_candidate.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/check_source_logs.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/check_source_logs.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/check_source_docs.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/check_source_docs.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/custody_and_nested.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/custody_and_nested.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-1lri of the wand125 n29 import (think-r333), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of its own that import nothing from the crate, the tools or the source. Adapted from the programs of the n28 and n30 review (think-4ul6), another Claude lane, after reading them line by line.
+- Note: Written and run on 4 November 2026 by the stage 4 review of T-132 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11); kept in the n29 packet's review/ with its README and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
+
+### `V-wand125-n29-review-exact-capture`
+
+**fine_net_exact.capture, driven by check_source_logs.py, sample_directions.py and oblique_decide.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The exact mass a closed core at a given centre and net angle captures from a format M measure, by Sutherland-Hodgman clipping of the rotated core against each D4 image in fractions. Decides the capture at the poses it evaluated: the 31 oblique witnesses of the source's 197/200 control, the 60 leaf poses of the source's 12 tightest directions, the 35 leaf poses and 2 oblique mutant witnesses of the reviewed sqverify-fast's runs here, and the least-capture centres the oblique decisions found; it agrees with the crate's exact witnesses digit for digit at all 33 it was compared with.
+
+- Source: [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/fine_net_exact.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/fine_net_exact.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/check_source_logs.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/check_source_logs.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/sample_directions.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/sample_directions.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/oblique_decide.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/oblique_decide.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/selftest.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-1lri of the wand125 n29 import (think-r333), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of its own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 4 November 2026 by the stage 4 review of T-132 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11); kept in the n29 packet's review/ with its README and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
+
+### `V-wand125-n29-review-axis-decision`
+
+**axis_decide.py (with fine_net_exact.py)** · Squares Project (Levy) · first-party · decides · Python · numerical-f64, exact-algebraic
+
+Decides direction 0 of a format M certificate over its whole per-bin domain [1/2, L - 1/2]^2: every vertex of the grid of overlap breakpoints, with overlaps exact in int64, evaluated as a binary64 dot product of nonnegative terms under the proved a priori bound gamma_{K+4} (5.8e-13 here, against a margin of 8.7e-4) and certified by an exact comparison, and the least vertices, their D4 orbit and a random sample evaluated exactly in fractions. Decided direction 0 of mixed_n29_L582 verified.
+
+- Source: [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/axis_decide.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/axis_decide.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/fine_net_exact.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/fine_net_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-1lri of the wand125 n29 import (think-r333), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of its own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 4 November 2026 by the stage 4 review of T-132 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11); kept in the n29 packet's review/ with its README and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
+
+### `V-wand125-n29-review-oblique-decision`
+
+**oblique_decide.py (with fine_net_exact.py)** · Squares Project (Levy) · first-party · decides · Python · interval-certified, exact-algebraic
+
+Decides one oblique direction of a format M certificate over its whole per-bin domain by a branch and bound of its own. A box of centres is accepted when the capture of the intersection of its cores, a rotated rectangle, is at least 1, with every area bounded below by a concave section and trapezoids in binary64 moved outward one ulp at every step (numpy.nextafter), images classified with slack 1e-12, and possible counterexamples evaluated exactly in fractions. Decided nine oblique directions of mixed_n29_L582 verified, among them the four with the source's least certified bounds; refuted the 99/100 mutant at direction 1947; and at direction 312 refuted the measure scaled by 9991/10000 and verified it scaled by 9993/10000.
+
+- Source: [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/oblique_decide.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/oblique_decide.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/fine_net_exact.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/fine_net_exact.py), [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/oblique_selftest.py`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/programs/oblique_selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md`](../../packing/resources/web/wand125-fine-net-n29-2026-10-10/review/README.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review think-1lri of the wand125 n29 import (think-r333), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake and replay lanes, in files of its own that import nothing from the crate, the tools or the source.
+- Note: Written and run on 4 November 2026 by the stage 4 review of T-132 (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11); kept in the n29 packet's review/ with its README and receipts. oblique_sample.py, a driver kept beside it, decides nothing and is not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

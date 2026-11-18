@@ -488,6 +488,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # lanes, on their censuses of 4 November, adopted in the pass of 17 November 2026.
         "T-107",
         "T-109",
+        # T-132's fine-net bound supersedes Hosono's check2 bound of 6 October at n = 29
+        # (T-108), its one count, in both lanes, adopted in the pass of 17 November 2026.
+        "T-108",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
