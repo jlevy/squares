@@ -5,7 +5,7 @@ title: "Stage 4 review of T-144's mixed_n122_L1126 (wand125 s(122) >= 563/50, n 
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 delegate: r144b-1118
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m4kbxna1xdmjd8nkka3wax60
 hold: null
 hold_until: null
 created_at: 2026-11-18T05:36:22.990Z
-updated_at: 2026-11-18T08:16:17.224Z
+updated_at: 2026-11-18T08:55:07.746Z
 started_at: 2026-11-18T05:37:37.484Z
 ---
 T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L1126, raising n = 122 to 126; V0/C0 on main) has no review that reads its certificate: the 11 October final review (docs/project/reviews/review-2026-10-11-final-lower-bounds.md) read the record and premises only. result-import.md stage 4 needs a mapped mathematical review before the complete replay's evidence moves the verified lane (check_results verified_lane_review_problems), as the 14 October review did for T-179 and the 4/11 November reviews for T-142 and T-143.
@@ -43,3 +43,5 @@ T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L
 2026-11-18 07:50Z r144b-1118: draft PR https://github.com/jlevy/squares/pull/1034 (labels intake, S2), head c5a905423d (main 86284ec20 merged in), base main 86284ec203. Post-freeze commit 526b710cfe adds the comparison with the 2 Oct T-080, 14 Oct T-179 and 11 Oct final reviews, the note on this copy, the doc-map entry and synopsis row. packing-validate --records passed locally (55 steps, 264 s). Scratch: the extracted bundle (634 MB) deleted; the asset and pinned documents kept in scratch r144/. Waiting on hosted CI, then a message to the coordinator for the senior review.
 
 2026-11-18 08:19Z r144b-1118: correction, the previous note (PR opened) was written at about 07:45Z, not 07:50Z. PR #1034: hosted CI passed on a1c5348e3d (16 pass, 41 skipped, none failed); main then moved (#1032, records only, no overlap), so main 50962004c was merged in: head b71e72e8a0, base main 50962004c8. packing-validate --records passed on it (199 s). CI on b71e72e8a0 is running; the coordinator gets the number, head and base when it is green. The worktree /home/user/wt/r144 stays as it is for the senior review.
+
+2026-11-18 08:57Z r144b-1118: handed to the coordinator for senior review. PR https://github.com/jlevy/squares/pull/1034 (draft, intake, S2), head cf89f10a8c (contains main d068c3fc04; main d068c3fc0 #1033 merged with the doc-map/synopsis conflict resolved by keeping both entries and re-rendering), base main; hosted CI green on the head (16 pass, 41 skipped); packing-validate --records passed on it. main has since moved to 1015fc175f (#1029); a trial merge is clean. Worktree /home/user/wt/r144 untouched until the review returns. Bead stays in progress (the mapping is think-nd7g's).
