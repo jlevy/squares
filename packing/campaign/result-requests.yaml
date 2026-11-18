@@ -4857,6 +4857,26 @@ issues:
       - result: fine-net-n28
         id: E-wand125-fine-net-lower-bounds-446-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6967367035
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n29-582-followup
+        id: T-132
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: fine-net-n29-582-followup
+        id: E-wand125-fine-net-n29-582-followup-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-n29-582-followup
+        id: E-wand125-fine-net-n29-582-followup-report
+        status: reviewed
+      - result: fine-net-n29
+        id: E-wand125-fine-net-lower-bounds-446-report
+        status: recorded
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -8535,7 +8555,7 @@ issues:
         think-ux1v) for the lower-bound confirmations on 17 November 2026 (think-fibh), so
         this replay waits on compute alone (the block below).
     - what: The complete replay of T-132 in the same lane, and a reply on issue 446.
-      state: queued
+      state: done
       source: body
       bead: think-r333
       note: >-
@@ -8543,8 +8563,10 @@ issues:
         2,073 directions and its whole-net control, with the stage 4 review think-1lri as
         the audit record, put T-132 at V3/C3. The owner lifted the order of 11 October
         (regularize every packing first, think-ux1v) for these confirmations on 17 November
-        2026 (think-fibh), and the case record adopts T-132 in the pass of that day (#909);
-        the reply on #446 is owed once that is on main.
+        2026 (think-fibh), and the case record adopts T-132 in the pass of that day (#909).
+        Done on 18 November 2026: #909 merged as a1a8d0aae, and the reply on #446
+        (issuecomment-6967367035) and this issue's follow-up (issuecomment-6967368650) report
+        T-132 at V3/C3, confirmed, current, recorded by the records lane w4r-records-1118.
     beads:
     - think-i85v
     - think-nd7g
@@ -8562,6 +8584,12 @@ issues:
       kind: follow-up
       reported: []
       beads: [think-r333, think-nd7g]
+    - url: https://github.com/jlevy/squares/issues/532#issuecomment-6967368650
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported: []
+      beads: [think-nd7g]
     blocked:
       type: compute
       reason: >-
