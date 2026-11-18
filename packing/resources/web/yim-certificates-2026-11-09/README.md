@@ -217,13 +217,15 @@ It records every claim but the first n303, which #930 holds:
 - **299 and 303.** [T-280](../../../frontier/RESULTS.md), recorded as re-solves of T-277’s
   and T-278’s packings, credited to their finders, with Yim credited for the re-solve as a
   regularization. Each gain lies within its house certificate’s padding. Whether such a
-  re-certification is a new result is the owner’s open question (think-ruu2’s RV-3, with
-  think-ikku), so T-280 is held below the stage 4 exit at V0/C1, with the stage 4 review
-  mapped and its replay not entered, and neither house moves.
+  re-certification is a new result was the owner’s open question (think-ruu2’s RV-3, with
+  think-ikku), so T-280 was held below the stage 4 exit at V0/C1, with the stage 4 review
+  mapped and its replay not entered, and neither house moved. Under the owner’s answer of
+  17 November it is a restatement at both counts ([Padding (Option D)](#padding-option-d)).
 - **130.** [T-281](../../../frontier/RESULTS.md), a sub-print re-certification of T-259 in
-  the restatement ruling’s words, which the record applies beyond the corpus only. It is
-  held at V0/C1 for think-ikku’s RV-1 (and think-oqjd) and RV-3, as T-260 is, with the
-  review mapped, and the house does not move.
+  the restatement ruling’s words, which the record applied beyond the corpus only. It was
+  held at V0/C1 for think-ikku’s RV-1 (and think-oqjd) and RV-3, as T-260 was, with the
+  review mapped, and the house did not move. Under the owner’s answer of 17 November it is
+  a restatement of T-259 ([Padding (Option D)](#padding-option-d)).
 
 ## Stage 4 Review
 
@@ -236,10 +238,12 @@ axes in `Fraction` and by exact clipped areas in `gmpy2.mpq`, the two agreeing a
 square, wall and pair, with controls stated in advance and an addendum.
 Its contraction margins equal this packet’s exactly.
 
-It is mapped now under `reviews` on T-280 and T-281 and under the report evidence’s
+It is mapped under `reviews` on T-280 and T-281 and under the report evidence’s
 `external_review`, which lifts both to C1 and no further. The replay and the review’s run
-enter their evidence, and adoption to V3/C3 follows, only when the owner answers RV-3
-(and, for 130, RV-1). Above the corpus nothing waits: the eleven rows cite both runs.
+were to enter their evidence, and adoption to V3/C3 to follow, only if the owner’s answer
+to RV-3 (and, for 130, RV-1) made either a new result; it made neither, and both stay at
+V0/C1 ([Padding (Option D)](#padding-option-d)). Above the corpus nothing waits: the
+eleven rows cite both runs.
 
 The padding the review measured (its F4, the owner’s question), each predecessor
 certificate contracted uniformly to first contact:
@@ -252,6 +256,20 @@ certificate contracted uniformly to first contact:
 
 The precedents measure the same way: T-259 over Couzo’s #843 at 0.9193, and T-265 over
 T-257 at 9.9679 (`measure/precedent-contraction-*.json`).
+
+## Padding (Option D)
+
+The owner answered RV-3 and think-ikku’s RV-1 on 17 November 2026 (think-b0w5, option D):
+a re-certification of a standing packing is a new result only if its side is below its
+predecessor’s once the predecessor is shrunk until its squares first touch
+(`devtools.contraction_margin`), and sides are compared, not prints. The table above is
+that measurement, and every share is below 1: at 299 (0.3472 of T-277’s margin), at 303
+(0.9674 of T-278’s) and at 130 (0.0896 of T-259’s) each contracted house certificate lies
+below this source’s certificate. On 18 November 2026 lane w7-optd-1118 (think-8yyy)
+recorded T-280 and T-281 as restatements (`restatements`), credited to the houses’
+finders: both stay registered as the record of the report, at V0/C1, with no profile
+credit, and no house moves. Whether option D reaches T-259 itself, which lies 0.9193 of
+#843’s margin below Couzo’s packing, is the owner’s question think-7k8p.
 
 The review also corrects two records here (its F14 and F15). T-281’s box is the extent
 plus $2 \times 10^{-30}$, with the packing $10^{-30}$ off the bottom and left walls and
@@ -277,8 +295,8 @@ author; none bears on a verdict.
 ## What Is Not Established
 
 - **The stage 4 exit.** The review is mapped, but the replay and the review’s run are
-  not entered on T-280 and T-281, which stay at V0/C1 until the owner answers RV-3 (and
-  RV-1 for 130).
+  not entered on T-280 and T-281, which stay at V0/C1 as restatements under the owner’s
+  option D of 17 November 2026 ([Padding (Option D)](#padding-option-d)).
 - **Human oversight.** No human oversight record is retained.
 - **Optimality** of any kind: a finite certificate proves an upper bound and nothing
   more.

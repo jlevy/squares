@@ -10401,7 +10401,10 @@ issues:
       queued: false
     asks:
     - what: >-
-        Credit for the packings at 153 and 207 (T-173) as new arrangements, as the issue says. Measured, they are PingYou Ltd's packings (T-148, T-147). At 207 the owner's option D of 17 November 2026 (think-b0w5) decides it: a re-solve within T-147's padding, a restatement of PingYou's packing. At 153, another arrangement of T-148's design, the owner decides which credit the record gives (RQ-5 of the review of 14 October, decision 1 of #602).
+        Credit for the packings at 153 and 207 (T-173) as new arrangements, as the issue
+        says. Measured, they are PingYou Ltd's packings (T-148, T-147), and the owner
+        decides which credit the record gives (RQ-5 of the review of 14 October, decision
+        1 of #602).
       state: queued
       source: body
       bead: think-g0o4
@@ -10459,9 +10462,8 @@ issues:
     blocked:
       type: owner-decision
       reason: >-
-        The owner decides T-173's credit at 153: a new arrangement, as the issue says, or
-        PingYou Ltd's packing, as measured (think-g0o4). Option D (think-b0w5) decided 207 on 17
-        November 2026: a restatement of PingYou Ltd's packing (T-147).
+        The owner decides T-173's credit at 153 and 207: new arrangements, as the issue
+        says, or PingYou Ltd's packings, as measured (think-g0o4).
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request. The author has said which name the record should carry.
@@ -10477,13 +10479,14 @@ issues:
       edited in place at 03:46Z that day, with a visible note, to say at least, so the reply as it
       stands states nothing outdated (PR #637's review, A6).
 
-      Applied on 18 November 2026 in lane w7-optd-1118 (think-8yyy): under the owner's option D
-      of 17 November 2026 (think-b0w5), T-173's 207 gains 0.9984 of T-147's own
-      uniform-contraction margin and 0.1966 of T-167's, within both
-      (resources/web/mishapolk-exact-certificates-2026-10-12/measure/), so it is a restatement
-      of PingYou Ltd's packing, credited to PingYou Ltd, and T-173 records it so (restatements).
-      153 stays the owner's (think-g0o4), and the issue stays open, blocked: owner-decision, on
-      it alone.
+      Measured on 18 November 2026 in lane w7-optd-1118 (think-8yyy), as a receipt only:
+      devtools.contraction_margin finds T-173's 207 0.9984 of T-147's own uniform-contraction
+      margin and 0.1966 of T-167's, within both, one to one with T-147's packing
+      (resources/web/mishapolk-exact-certificates-2026-10-12/measure/). The owner's option D of
+      17 November 2026 (think-b0w5) does not list T-173, and a result recorded before it that
+      its decision bead does not name keeps its standing and credit until the owner says, so
+      T-173 stands as recorded at 153 and 207; whether option D reaches it is think-7k8p's
+      question, beside T-259 at 130. Both counts stay the owner's (think-g0o4).
   - number: 574
     title: 'research: submit 148 square-packing certificate refinements with exact endpoints'
     author: BuddenPing
@@ -27910,9 +27913,10 @@ issues:
         id: E-mishapolk-846-certificate-report
         status: reviewed
     close_when: >-
-      The results are registered with their replay and their review, 130 is adopted, the owner's
-      answer (option D, think-b0w5) is recorded at the fourteen other counts, and the reply on
-      main says so; nothing the author asked for is queued.
+      The results are registered with their replay and their review, 130 is adopted, the owner
+      answered on 17 November 2026 (option D, think-b0w5) and the record follows the answer at
+      the fourteen other counts, and the reply on main says so; nothing the author asked for is
+      queued.
     notes: >-
       Read on 31 October 2026 from main 3978a7f61. The commit 52aa267 precedes the issue by 6
       minutes 42 seconds; GitHub's activity log was not readable, so no push is dated. The ten
@@ -30913,7 +30917,7 @@ issues:
       the root check exactly (S lies 1.56e-319 above it). It is 2.63e-12 below T-282, one to one
       with its packing, 1.0399 of T-282's own uniform-contraction margin: a refinement, which the
       ledger of 11 November records, and the KKT point the record holds unregistered (think-wju3).
-      Registered as T-286, held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-282.
+      Registered as T-286; under the owner's option D of 17 November 2026 (think-b0w5) a new result, confirmed at V3/C3 and adopted as the house at 172 on 18 November 2026.
       The 11 November stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md,
       think-o53d, lane L82), written blind in a separate lane, accepts it with #939's, no finding
       blocking, and is mapped at C1; its F1 asks the author to state the bound as the

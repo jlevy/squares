@@ -17646,7 +17646,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-11-18'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: upper-bound
@@ -17671,10 +17671,6 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/check_half_angle_area.py
     - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
-    - packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/contraction-n207-t147.json
-    - packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/contraction-n207-t167.json
-    - packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/precedent-contraction-n207-t147-t167.json
-    - packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/identity-n207.json
   amendments:
   - date: '2026-10-15'
     reason: 'The 14 October review accepts the retained replay: the result rises to V3/C3 and cites
@@ -17701,32 +17697,6 @@ urls:
       - packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-153.yaml.gz
       - packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-207.yaml.gz
       - packing/devtools/upper_bound_reports.py
-  - date: '2026-11-18'
-    previous:
-      kind: upper-bound
-      scope:
-        n_values:
-        - 153
-        - 207
-      established: null
-      attribution:
-        source_keys:
-        - '[Mishapolk exact certificates 2026-10-12]'
-        published: '2026-10-12'
-      builds_on: null
-      evidence:
-      - E-mishapolk-573-certificate-report
-      - E-mishapolk-573-exact-feasibility
-      artifacts:
-      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/README.md
-      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/acquisition/claims.json
-      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-153.yaml.gz
-      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/facts/n-207.yaml.gz
-      - packing/devtools/upper_bound_reports.py
-      - packing/devtools/check_half_angle_area.py
-      - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
-    reason: 'Under the owner''s option D of 17 November 2026 (think-b0w5), T-173''s 207 is a restatement
-      of PingYou Ltd''s packing (think-8yyy): its contraction receipts and identity join the result.'
 - path: result/t-174.html
   canonical: result/t-174.html
   kind: result

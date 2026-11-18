@@ -13,8 +13,10 @@ packet retains, and the folders for 227, 229 and 260 are unchanged.
 Intake lane L78 (think-2h88) retained the source and replayed the certificate on 9
 November 2026, and on 10 November, after #938’s import (lane L76, PR #940) made T-284 the
 house at 199, compared it with T-284, measured it and registered it as **T-285, held at
-V0/C1** for the owner’s RV-3 (think-ruu2). The house stays T-284, and the case record is
-not touched.
+V0/C1** for the owner’s RV-3 (think-ruu2). The owner’s option D of 17 November 2026
+(think-b0w5) made it a new result, and on 18 November 2026 lane w7-optd-1118 (think-8yyy)
+raised it to V3/C3 and adopted it as the house at 199, in place of T-284
+([Padding (Option D)](#padding-option-d)).
 
 ## What the Source Claims
 
@@ -206,10 +208,13 @@ under [measure/](measure/):
 
 ## The Register
 
-- **T-285 records the claim, held at V0/C1, S1**, as T-280 is.
-  - Its regularization item names T-284.
-  - The replay above is not entered as evidence, and nothing is adopted.
-  - Whether a re-certification at the margin its predecessor carries is a new result is
+As registered on 11 November, before the owner’s answer
+([Padding (Option D)](#padding-option-d) says what followed it):
+
+- **T-285 recorded the claim, held at V0/C1, S1**, as T-280 was.
+  - Its regularization item named T-284.
+  - The replay above was not entered as evidence, and nothing was adopted.
+  - Whether a re-certification at the margin its predecessor carries is a new result was
     the owner’s RV-3 (think-ruu2). Its answer settles this entry and the held solve at
     172 alike.
   - The stage 4 review observes (F4) that the gain lies 1.0107 × 10⁻¹³ below the
@@ -220,12 +225,34 @@ under [measure/](measure/):
   - Under a rule that counts any gain, a gain across the predecessor’s own print, or a
     gain beyond its contraction margin, it counts. A case-by-case judgment of whether the
     4% beyond the margin is padding could go either way.
-  - The question and its options are think-ruu2’s (RV-3). The record decides nothing.
+  - The question and its options were think-ruu2’s (RV-3). The record decided nothing
+    until the owner answered.
 - **Nothing at 172 is registered from this packet.** The certificate’s first 172 squares
   at S − 1 prove s(172) ≤ S − 1, 2.63 × 10⁻¹² below T-282. That bound is not claimed here,
   and it is think-wju3’s held solve with less padding. #946 reported the same core a day
-  later, 1.36 × 10⁻⁹⁹ lower, and T-286 records it, held alike
+  later, 1.36 × 10⁻⁹⁹ lower, and T-286 records it
   ([de-winter-s172-upper-bound-2026-11-10](../de-winter-s172-upper-bound-2026-11-10/README.md)).
+
+## Padding (Option D)
+
+The owner answered RV-3 on 17 November 2026 (think-b0w5, option D): a re-certification of a
+standing packing is a new result only if its side is below its predecessor’s once the
+predecessor is shrunk until its squares first touch, measured through any construction
+(`devtools.contraction_margin`), and sides are compared, not prints. T-284 is T-282’s
+packing with one undilated L border, so the margin it carries through the L step is
+T-282’s, 2.533458 × 10⁻¹². This certificate is its own 172-square core with the same
+border, and the core gains 1.0399 of that margin, 1.010713 × 10⁻¹³ beyond it
+([contraction-n172-base.json](measure/contraction-n172-base.json)). T-285 is therefore a
+new result.
+
+Lane w7-optd-1118 (think-8yyy) entered, on 18 November 2026, the replay above
+(`E-de-winter-939-exact-feasibility`) and the stage 4 review’s clean-room run
+(`E-de-winter-939-review-exact-feasibility`) as evidence, raised T-285 to V3/C3, and
+adopted it as the house at 199 under the house rule, with both strong generators’
+regularization of the new witness
+([think-8yyy-2026-11-18](../../../cases/regularized_drawings/think-8yyy-2026-11-18/README.md)).
+The packet keeps `702c7af`, the commit the issue names; the author’s `c4e65d0b` holds the
+same `n199/` files byte for byte, and T-285 says so.
 
 ## Stage 4 Review
 
@@ -276,7 +303,8 @@ Joost de Winter answered all six on 14 November 2026 on #946
 11:02:01Z), and repeated the two that concern #939 there
 ([issuecomment-6876335132](https://github.com/jlevy/squares/issues/939#issuecomment-6876335132),
 11:04:59Z). The [s172 packet](../de-winter-s172-upper-bound-2026-11-10/README.md#stage-4-review)
-points here. The answers change no result: T-285 and T-286 stay held at V0/C1 for RV-3.
+points here. The answers changed no result: T-285 and T-286 stayed held at V0/C1 for
+RV-3 until the owner’s answer of 17 November ([Padding (Option D)](#padding-option-d)).
 
 1. **The bound (F1).** Yes. The bound is the certificate’s rational side,
    13.6146898532835806 rounded up at 16 places (14.6146898532835806 at 199), and the

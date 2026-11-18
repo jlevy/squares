@@ -22782,22 +22782,9 @@ results:
 
       Credit Mykhailo Polkovskyi (Mishapolk), as he asks on issue 593, with the
       certificates. The issue calls 153 and 207 new arrangements from basin hopping with
-      tilted boundary corridors. Measured pose by pose by the 14 October review against
-      PingYou Ltd's packings: at 207 every square pairs with one of T-147's within 2.8e-04,
-      three turned by at most 0.012 degrees, a re-solve of PingYou's packing and not a new
-      arrangement by pose; at 153 it is T-148's design with 100 squares moved beyond 1e-03
-      and six beyond a tenth, another arrangement of PingYou's design.
-
-      At 207 the owner's option D of 17 November 2026 (think-b0w5) decides the credit: a
-      re-certification of a standing packing is a new result only if its side is below the
-      predecessor's once the predecessor is shrunk until its squares first touch, and
-      T-147's certificate so contracted lies at or below this one (its gain is 0.9984 of
-      T-147's margin, and 0.1966 of the margin of PingYou's own tighter realization, T-167),
-      so at 207 it is a restatement of PingYou Ltd's packing, credited to PingYou Ltd.
-      Whether to credit 153 as a new arrangement stays the owner's decision 1 on pull
-      request 602 (think-g0o4). It discloses that Gemini was used for the search
-      implementation, verification orchestration and issue preparation, directed by the
-      author.
+      tilted boundary corridors. Measured pose by pose by the 14 October review against PingYou Ltd's packings: at 207 every square pairs with one of T-147's within 2.8e-04, three turned by at most 0.012 degrees, a re-solve of PingYou's packing and not a new arrangement by pose; at 153 it is T-148's design with 100 squares moved beyond 1e-03 and six beyond a tenth, another arrangement of PingYou's design. Whether to credit them as new arrangements is the owner's decision 1 on pull request 602. It discloses that
+      Gemini was used for the search implementation, verification orchestration and issue
+      preparation, directed by the author.
 
       On 15 October 2026 the case records adopted this entry as the house at 153 and 207, each
       case's reported and verified upper bounds moving together and PingYou Ltd's certificates
@@ -22814,13 +22801,14 @@ results:
     significance:
       score: 2
       rationale: >-
-        Another arrangement of PingYou Ltd's design at 153, 2.56e-12 below the case ceiling,
-        as T-159 and T-150 are; at 207 a re-solve of its packing within T-147's padding, a
-        restatement under the owner's option D (think-b0w5). No lower bound or optimum.
-      scored: '2026-11-18'
+        Another arrangement of PingYou Ltd's design at 153 and a re-solve of its packing at
+        207, 2.56e-12 and 1.49e-09 below the case ceilings, as T-159 and T-150 are; no lower
+        bound or optimum.
+      scored: '2026-10-14'
       by: >-
-        lane w7-optd-1118 (think-8yyy), applying the owner's option D of 17 November 2026
-        (think-b0w5), the score unchanged
+        the 14 October review
+        (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md), changing
+        the draft of think-2zz8 Mishapolk import from S1
     novelty: previously-published
     attribution:
       source_keys: ['[Mishapolk exact certificates 2026-10-12]']
@@ -22837,10 +22825,6 @@ results:
       - packing/devtools/upper_bound_reports.py
       - packing/devtools/check_half_angle_area.py
       - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
-      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/contraction-n207-t147.json
-      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/contraction-n207-t167.json
-      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/precedent-contraction-n207-t147-t167.json
-      - packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/identity-n207.json
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_check_half_angle_area.py
@@ -22901,31 +22885,9 @@ results:
       decision 1 (RQ-5); no retained check binds the derived fact to upstream bytes beyond
       the review's own fetch (RQ-7); and the kernel's two controls are gross, the third
       route's six sharp (RQ-8).
-
-      The padding at 207 (option D, think-b0w5): devtools.contraction_margin, on 18 November
-      2026, took T-147's certificate to first contact by 1.488096e-09, both maintained
-      routes deciding it and its contraction, and this certificate gains 0.9984 of that
-      (mishapolk-exact-certificates-2026-10-12/measure/contraction-n207-t147.json); against
-      T-167, PingYou's own tighter realization of the packing and itself 0.9980 of T-147's
-      margin, it gains 0.1966 of T-167's 2.829461e-12 (contraction-n207-t167.json,
-      precedent-contraction-n207-t147-t167.json). Nearest centres pair it one to one with
-      T-147's packing, no square beyond 1e-3, the largest move 2.83e-4 (identity-n207.json).
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
       retained human oversight record; one AI review, of 14 October, is retained.
-    restatements:
-    - n: 207
-      of: T-147
-      ruling: think-b0w5
-      gain_over_margin: '0.9984'
-      measured_in: packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/contraction-n207-t147.json
-      identity:
-        basis: measured
-        measured_in: packing/resources/web/mishapolk-exact-certificates-2026-10-12/measure/identity-n207.json
-        one_to_one: true
-        moved: 0
-        max_move: 0.000282843
-        max_turn_deg: 0.01146
     reviews:
       - path: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
         kind: adversarial
@@ -42806,7 +42768,7 @@ results:
       (devtools.contraction_margin). This certificate lies 1.0107e-13 below T-284's base so
       contracted with the L written on it, so it is a new result, and the case adopted it as
       the house at 199 on 18 November 2026. Its core's bound at 172 is not claimed here;
-      #946 reports that core, tightened, and T-286 records it, held alike.
+      #946 reports that core, tightened, and T-286 records it, adopted at 172 alike.
 
       The issue says the side is less than 1e-98 above the real root near 14.6147 of 62x^5 -
       4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, the arrangement's local

@@ -140,9 +140,10 @@ def test_a_restatement_is_held_to_its_scope_predecessor_and_receipt(
 
 
 def test_the_register_records_the_restatements_option_d_settles(records: view.Records) -> None:
-    """T-253, T-260, T-280 and T-281 restate their houses at every count, T-173 at 207;
-    none improves on a case record there, so none is pending adoption or a current record,
-    and a reply's result mapped to one is settled (`check_requests.RESTATED`)."""
+    """T-253, T-260, T-280 and T-281 restate their houses at every count; none improves on
+    a case record there, so none is pending adoption or a current record, and a reply's
+    result mapped to one is settled (`check_requests.RESTATED`). T-173, which option D does
+    not list, keeps its standing at 207, measured and not applied (think-7k8p)."""
     index = profile_records.load_record_index()
     every = {"T-253": 9, "T-260": 5, "T-280": 2, "T-281": 1}
     for ident, count in every.items():
@@ -152,7 +153,7 @@ def test_the_register_records_the_restatements_option_d_settles(records: view.Re
         assert view.standing(record, records) == view.SUPERSEDED, ident
         assert ident not in index.current_results, ident
         assert not record.get("regularizations"), ident
-    assert check_standing.restated(records.results["T-173"]) == frozenset({207})
+    assert not records.results["T-173"].get("restatements")
     register = check_requests.load_register()
     state = check_requests.result_state(
         {"key": "sub-print", "claim": "c", "register": ["T-260"]}, register

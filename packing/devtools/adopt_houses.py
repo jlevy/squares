@@ -3805,7 +3805,8 @@ CREDITS: dict[int, Credit] = {
         (DANIEL,),
         (OZDEN, DE_WINTER),
         "Joost de Winter’s re-solve of Doğa Özden’s further arrangement of Evan Daniel’s "
-        "packing from an L-cut of the n = 199 record",
+        "packing from an L-cut of the n = 199 record, Nate Chaoweeraprasit’s SQUISH packing "
+        "as Siddharth Gupta refined it",
     ),
     # T-267 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
     # fault-line composer, his implementation of Chris Deotte's multi-gadget fault DP, from
@@ -3890,7 +3891,9 @@ CREDITS: dict[int, Credit] = {
         (DANIEL,),
         (OZDEN, DE_WINTER),
         "Joost de Winter’s re-solve of the core of Doğa Özden’s 172-square packing plus an "
-        "L of 27, its 172 squares Özden’s further arrangement of Evan Daniel’s packing",
+        "L of 27, its 172 squares Özden’s further arrangement of Evan Daniel’s packing from "
+        "an L-cut of this count’s former record, Nate Chaoweeraprasit’s SQUISH packing as "
+        "Siddharth Gupta refined it",
         construction="extension",
     ),
     # T-306 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 204, a new
