@@ -1,0 +1,44 @@
+{
+ "program": "rb127_selftest.py",
+ "verdict": "PASSED",
+ "checks": 4729,
+ "failed": [],
+ "mutants": [
+  {
+   "mutant": "method A with only the first square's two normals",
+   "failed_checks": 309,
+   "caught": true
+  },
+  {
+   "mutant": "method A counting a zero margin as overlap",
+   "failed_checks": 6,
+   "caught": true
+  },
+  {
+   "mutant": "method B clipping with open half-planes",
+   "failed_checks": 459,
+   "caught": true
+  },
+  {
+   "mutant": "method B without its diagonal test",
+   "failed_checks": 1,
+   "caught": true
+  },
+  {
+   "mutant": "a reader that takes a leading plus sign",
+   "failed_checks": 2,
+   "caught": true
+  },
+  {
+   "mutant": "the contraction taking the least contact factor",
+   "failed_checks": 2,
+   "caught": true
+  },
+  {
+   "mutant": "the twin relation in one sense only",
+   "failed_checks": 24,
+   "caught": true
+  }
+ ],
+ "cpu_seconds": 4.24
+}
