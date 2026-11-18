@@ -1,0 +1,263 @@
+{
+ "asset": {
+  "certificate": "mixed_n29_L582",
+  "asset": "certificates__mixed_n29_L582.tar.gz",
+  "bytes": 651878,
+  "sha256": "6203a9b4cc1a388100531a145c54db232ba8ad1f4674e6da4b41f8b1a59c3274",
+  "equal_to_pin": true,
+  "tar_entry_kinds": {
+   "file": 8
+  },
+  "member_paths": [
+   "certificates/mixed_n29_L582/candidate.json",
+   "certificates/mixed_n29_L582/check2/control-197_200.jsonl.gz",
+   "certificates/mixed_n29_L582/check2/control.json",
+   "certificates/mixed_n29_L582/check2/receipt.json",
+   "certificates/mixed_n29_L582/check2/run.jsonl.gz",
+   "certificates/mixed_n29_L582/check2/src/sqverify-proof-net-fe12e036c.tar.gz",
+   "certificates/mixed_n29_L582/n29-L5.82-check2-bundle.tar.gz",
+   "certificates/mixed_n29_L582/verification/prepublication-receipt.json"
+  ],
+  "members_outside_prefix": [],
+  "members_equal_manifest": true,
+  "retained_copies_equal_members": {
+   "release/certificates/mixed_n29_L582/candidate.json.gz": true,
+   "release/certificates/mixed_n29_L582/check2/control-197_200.jsonl.gz": true,
+   "release/certificates/mixed_n29_L582/check2/control.json": true,
+   "release/certificates/mixed_n29_L582/check2/receipt.json": true,
+   "release/certificates/mixed_n29_L582/check2/run.jsonl.gz": true,
+   "release/certificates/mixed_n29_L582/verification/prepublication-receipt.json": true
+  },
+  "retained_files": [
+   "release/certificates/mixed_n29_L582/candidate.json.gz",
+   "release/certificates/mixed_n29_L582/check2/control-197_200.jsonl.gz",
+   "release/certificates/mixed_n29_L582/check2/control.json",
+   "release/certificates/mixed_n29_L582/check2/receipt.json",
+   "release/certificates/mixed_n29_L582/check2/run.jsonl.gz",
+   "release/certificates/mixed_n29_L582/verification/prepublication-receipt.json"
+  ],
+  "retained_files_are_exactly_the_stored_members": true,
+  "sealed": {
+   "root": "n29-L5.82-check2-bundle/",
+   "members": 16,
+   "equal_manifest": true,
+   "matches_its_files_sha256": true,
+   "files_sha256_entries": 15,
+   "unlisted_in_its_files_sha256": [
+    "files-sha256.json"
+   ],
+   "payloads_repeating_outer": [
+    "candidate.json",
+    "check2/control-197_200.jsonl.gz",
+    "check2/control.json",
+    "check2/receipt.json",
+    "check2/run.jsonl.gz",
+    "check2/src/sqverify-proof-net-fe12e036c.tar.gz"
+   ],
+   "readme_sha256": "c5ea942ad9a96b4bf33956443ab76bdf5a7631d0a0424dd1f81109164e547b2f",
+   "readme_differs_from_pinned": true,
+   "files_sha256_readme_entry_is_sealed_edition": true,
+   "pinned_documents_equal_sealed_copies": {
+    "README.md": false,
+    "bundle.json": true,
+    "check2/src/INDEPENDENCE.md": true,
+    "check2/src/REPRODUCE.md": true,
+    "check2/src/SOUNDNESS.md": true,
+    "check2/src/SPEC.md": true,
+    "check2/src/UPSTREAM_COMMIT": true,
+    "check2/src/fine_net_check.sh": true,
+    "files-sha256.json": true,
+    "provenance/search-notes.md": true
+   }
+  },
+  "archive_sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81",
+  "archive_equals_common_verifier_source": true,
+  "archive_in_sealed_bundle_identical": true
+ },
+ "nested": {
+  "archive_sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81",
+  "files": 20,
+  "tar_entry_kinds": {
+   "dir": 3,
+   "file": 20
+  },
+  "root": "sqverify_fast/",
+  "build_digest_by_build_rs_rule": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+  "build_digest_equals_declared": true,
+  "build_rs_sha256": "1e238378117bc7716e50cdd4e3d0d3862e756e1ff863794b9b559ffe4b2743e6",
+  "comparisons": {
+   "e020eb1e2": {
+    "repo_build_digest": "7c49cf79f2408e745d5a0759caf85768d92c502bb574b95dbc12b81a36e50300",
+    "identical": [
+     ".gitignore",
+     "Cargo.lock",
+     "Cargo.toml",
+     "INDEPENDENCE.md",
+     "build.rs",
+     "clippy.toml",
+     "independence-record.yaml",
+     "rust-toolchain.toml",
+     "src/axis.rs",
+     "src/exact.rs",
+     "src/interval.rs",
+     "src/lib.rs",
+     "src/main.rs",
+     "src/oracle.rs",
+     "src/rotated.rs",
+     "src/rotated_tests.rs"
+    ],
+    "differ": {
+     "README.md": {
+      "added_in_archive": 5,
+      "removed_from_repo": 2
+     },
+     "SOUNDNESS.md": {
+      "added_in_archive": 11,
+      "removed_from_repo": 0
+     },
+     "src/certificate.rs": {
+      "added_in_archive": 32,
+      "removed_from_repo": 2
+     },
+     "tests/adversarial.rs": {
+      "added_in_archive": 55,
+      "removed_from_repo": 0
+     }
+    },
+    "only_in_archive": [],
+    "only_in_repo": [],
+    "duplicate_key_reader_found": true,
+    "duplicate_key_reader_identical": true
+   },
+   "34e87a86b": {
+    "repo_build_digest": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+    "identical": [
+     ".gitignore",
+     "Cargo.lock",
+     "Cargo.toml",
+     "build.rs",
+     "clippy.toml",
+     "rust-toolchain.toml",
+     "src/axis.rs",
+     "src/exact.rs",
+     "src/interval.rs",
+     "src/main.rs",
+     "src/oracle.rs",
+     "src/rotated.rs"
+    ],
+    "differ": {
+     "INDEPENDENCE.md": {
+      "added_in_archive": 0,
+      "removed_from_repo": 65
+     },
+     "README.md": {
+      "added_in_archive": 10,
+      "removed_from_repo": 27
+     },
+     "SOUNDNESS.md": {
+      "added_in_archive": 18,
+      "removed_from_repo": 102
+     },
+     "independence-record.yaml": {
+      "added_in_archive": 0,
+      "removed_from_repo": 40
+     },
+     "src/certificate.rs": {
+      "added_in_archive": 38,
+      "removed_from_repo": 98
+     },
+     "src/lib.rs": {
+      "added_in_archive": 0,
+      "removed_from_repo": 3
+     },
+     "src/rotated_tests.rs": {
+      "added_in_archive": 0,
+      "removed_from_repo": 1
+     },
+     "tests/adversarial.rs": {
+      "added_in_archive": 55,
+      "removed_from_repo": 0
+     }
+    },
+    "only_in_archive": [],
+    "only_in_repo": [
+     "tests/declared_net.rs"
+    ],
+    "duplicate_key_reader_found": true,
+    "duplicate_key_reader_identical": true
+   },
+   "HEAD": {
+    "repo_build_digest": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+    "identical": [
+     ".gitignore",
+     "Cargo.lock",
+     "Cargo.toml",
+     "build.rs",
+     "clippy.toml",
+     "rust-toolchain.toml",
+     "src/axis.rs",
+     "src/exact.rs",
+     "src/interval.rs",
+     "src/main.rs",
+     "src/oracle.rs",
+     "src/rotated.rs"
+    ],
+    "differ": {
+     "INDEPENDENCE.md": {
+      "added_in_archive": 0,
+      "removed_from_repo": 79
+     },
+     "README.md": {
+      "added_in_archive": 10,
+      "removed_from_repo": 27
+     },
+     "SOUNDNESS.md": {
+      "added_in_archive": 23,
+      "removed_from_repo": 117
+     },
+     "independence-record.yaml": {
+      "added_in_archive": 1,
+      "removed_from_repo": 74
+     },
+     "src/certificate.rs": {
+      "added_in_archive": 38,
+      "removed_from_repo": 98
+     },
+     "src/lib.rs": {
+      "added_in_archive": 0,
+      "removed_from_repo": 3
+     },
+     "src/rotated_tests.rs": {
+      "added_in_archive": 0,
+      "removed_from_repo": 1
+     },
+     "tests/adversarial.rs": {
+      "added_in_archive": 55,
+      "removed_from_repo": 57
+     }
+    },
+    "only_in_archive": [],
+    "only_in_repo": [
+     "tests/declared_net.rs"
+    ],
+    "duplicate_key_reader_found": true,
+    "duplicate_key_reader_identical": true
+   }
+  },
+  "certificate_rs_facts": {
+   "reads_proof_net": true,
+   "requires_exactly_step_and_last": true,
+   "refuses_proof_net_beside_certificate_metadata": true,
+   "refuses_proof_net_outside_format_M": true,
+   "reads_a_count_field": false,
+   "refuses_top_level_net_outside_format_L": false,
+   "checks_tangent_form_for_per_bin": true
+  }
+ },
+ "problems": [],
+ "status": "CUSTODY_HOLDS"
+}
+
+real	0m0.302s
+user	0m0.220s
+sys	0m0.086s

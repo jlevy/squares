@@ -1,0 +1,37 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/frontier/n-029.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L47 of 4 November (think-r333): T-132 (s(29) >= 291/50) rises to V3/C3 on
+  its census replay and whole-net control, with the stage 4 review of 4 November
+  (think-1lri) as the audit record, and both lower lanes at n = 29 take 291/50, with
+  the atlas's composite figure record and bound citations at that count, n29's coverage
+  note and #446's and #532's requests entries following; T-108 is superseded at n = 29.
+  No paper prints that count or those results, and the register still holds 264
+  results. Against main a7db9aad3 (#907), with devtools.compare_paper_renders
+  --baseline origin/main and those six paths, at head 7a3b8f8b3: each paper rendered
+  into an empty site directory twice from this tree and once with main's six inputs
+  swapped in, by render_n11_lower_bounds_explainer --prepare-math (55 files each) and
+  by render_n11_optimality_review, render_n11_threshold_bound_review and
+  render_packing_methods at link revision 0000000000000000000000000000000000000000 (43
+  files each), the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM): all
+  byte-identical across the three. No PDF was printed; each prints from that HTML.
+  Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
