@@ -1,0 +1,47 @@
+{
+ "verdict": "AXIS_DIRECTION_DECIDED",
+ "factor": "1",
+ "threshold": "1",
+ "x_events": 5542,
+ "y_events": 5542,
+ "vertices": 30713764,
+ "expanded_rectangles": 6524,
+ "overlap_error_E": 1.6527224033779931e-13,
+ "gamma": 7.246425681728397e-13,
+ "max_Sx": 2655.0223891916303,
+ "max_Sy": 2655.0223891916303,
+ "rigorous_least_capture": 1.0074788332233897,
+ "rigorous_least_at": [
+  "6893368290553469509/1062000000000000000",
+  "6893368290553469509/1062000000000000000"
+ ],
+ "least_exact_vertex_value": "1.0074788336918701996",
+ "least_exact_vertex_value_fraction_digits": 564,
+ "least_exact_vertex": [
+  "6893368290553469509/1062000000000000000",
+  "6893368290553469509/1062000000000000000"
+ ],
+ "least_exact_vertex_float": [
+  6.4909305937414965,
+  6.4909305937414965
+ ],
+ "float_estimate_there": 1.0074788336918814,
+ "smallest_vertices_evaluated_exactly": 64,
+ "cpu_seconds": 8.74,
+ "program": "rv1018_axis.py",
+ "measure_json_sha256": "d4d160901461bd9e3769db1dbace4b00d2e0afb57429dcd3c7467f06c5ced9d8",
+ "source_axis": {
+  "x_events": 5542,
+  "y_events": 5542,
+  "vertices": 30713764,
+  "argmin": [
+   "6893368290553469509/1062000000000000000",
+   "6893368290553469509/1062000000000000000"
+  ],
+  "logged_bound": "1.0074788336221452",
+  "events_agree": true,
+  "exact_capture_at_argmin": "1.0074788336918701996",
+  "exact_minus_logged_bound": 6.972501284323211e-11,
+  "argmin_is_least_exact_vertex": true
+ }
+}
