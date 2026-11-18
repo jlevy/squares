@@ -1,0 +1,17 @@
+{
+ "n": [
+  127,
+  127
+ ],
+ "side_equal": true,
+ "unequal_squares": [],
+ "unequal_count": 0,
+ "listing": {
+  "from 0 same": 127
+ },
+ "verdict": "SAME_PACKING",
+ "files": {
+  "source/i1020-a1ba501/n127/n127_exact.json": "3a66f38276be9e986fc46fa1f859de54754ec77fc4694b3442de58381056a835",
+  "source/i1020-a1ba501/n127/n127_witness.yaml.gz": "19597239cdf162cbac5c12a6e60547ce0771f0b02078446517ad3e5d3dabb31e"
+ }
+}
