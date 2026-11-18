@@ -1,0 +1,13 @@
+PASS area_lower never above the exact area on 3,000 pairs (worst gap 1.86e-15)
+PASS area_lower within 1e-12 of the exact area
+PASS a core 0.01% too wide is caught above the exact area (179 of 600)
+PASS nodes beyond the rectangle are caught above the exact area (175 of 600)
+PASS lemma Q: at 1600 interior points the exact area is at least its least corner value
+PASS corner bound (lemma Q) at most the exact capture at the centre, corners and 3 interior points of 24 boxes
+PASS intersection bound (lemma S) likewise at the same 24 boxes
+PASS the corner bound is at least the intersection bound, to 1e-12, at 24 of 24 boxes (largest gain 1.46e-02)
+PASS full-core bound at the centre below the exact capture and within 1e-9 (worst 1.87e-12)
+
+real	0m8.874s
+user	0m8.739s
+sys	0m0.017s

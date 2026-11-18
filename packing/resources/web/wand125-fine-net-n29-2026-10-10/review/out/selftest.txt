@@ -1,0 +1,13 @@
+PASS partition of the core's neighbourhood sums to B^2 at r in {0,1,777,1500,2071,2072}
+PASS axis capture equals the product of overlaps at 10 centres
+PASS capture is invariant under the quarter turn about the centre (lemma C1)
+PASS a reflection in y = x changes an oblique capture (C1 uses no reflection)
+PASS c^2 + s^2 = 1 exactly at every 37th node
+PASS rho(0) = 1/2 and tan(pi/8) bracketed by its polynomial
+PASS the eight images are closed under the three generators of D4
+PASS strict reader refuses 13 of 13 non-canonical spellings and reads the canonical ones
+PASS a seeded wrong clip breaks the partition identity
+
+real	0m0.171s
+user	0m0.158s
+sys	0m0.012s
