@@ -3932,7 +3932,9 @@ issues:
       evidence, T-233 is V3/C3, and the lower lanes at n19, n20, n26 and n27 take 1931/400,
       393/80, 1111/200 and 1131/200. The issue's n27 2261/400 is superseded in the same
       release and stays unregistered, and its n31 597/100 is passed by the source's later
-      2391/400 (T-232, not reported here).
+      2391/400 (T-232, not reported here), and its n28 287/50 is passed by the source's
+      later 2297/400 (T-142, not reported here), which both lanes take since its adoption in
+      the pass of 17 November.
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
@@ -8456,28 +8458,46 @@ issues:
       review, of four lower bounds registered at V0/C0: T-142 and T-143 by a sqverify-fast census at
       all 2,073 directions with the whole-net control, T-144 by audit_wand125_linear's linear
       replay and control, and T-132, reported on #446, in the same lane. Priced at 23 to 31
-      CPU-hours, within the budget the owner set on 11 October; held until the regularization of
-      every packing lands (think-ux1v), with the tooling on its own branch and two owner questions
-      open (#543).
+      CPU-hours, within the budget the owner set on 11 October, which ordered the lane after the
+      regularization of every packing (think-ux1v); the owner lifted that order for these
+      lower-bound confirmations on 17 November 2026 (think-fibh). T-142's and T-143's censuses,
+      controls and review ran on 4 November 2026 (think-i85v), and the case records adopt them in
+      the pass of 17 November (#908); T-144's and T-132's asks are their beads' (think-nd7g,
+      think-r333). Two owner questions stay open on #543.
     read_through: '2026-10-12T07:49:51Z'
     results: []
     asks:
     - what: Complete first-party replays of T-142 and T-143, with the whole-net control and a review.
-      state: queued
+      state: done
       source: body
       bead: think-i85v
-      blocked_on: [think-ux1v]
+      note: >-
+        Done 4 November 2026: the complete sqverify-fast censuses of mixed_n28_L57425 and
+        mixed_n30_L58925 at all 2,073 directions, their whole-net controls refused, and the
+        stage 4 review of that day (think-4ul6) accepted both, as the separately prompted
+        review of 11 November did again; T-142 and T-143 are V3/C3. They ran ahead of the
+        owner's order of 11 October, which queued them after think-ux1v; the owner lifted it
+        on 17 November 2026 (think-fibh), and the case records adopt them in the pass of that
+        day (#908). Their tracking issues, #776 and #777, carry the final comments that
+        report it, and this issue a follow-up of its own.
     - what: The complete linear replay and control of T-144, carried to n = 122 to 126, with a
         review.
       state: queued
       source: body
       bead: think-nd7g
-      blocked_on: [think-ux1v]
+      note: >-
+        The owner lifted the order of 11 October (regularize every packing first,
+        think-ux1v) for the lower-bound confirmations on 17 November 2026 (think-fibh), so
+        this replay waits on compute alone (the block below).
     - what: The complete replay of T-132 in the same lane, and a reply on issue 446.
       state: queued
       source: body
       bead: think-r333
-      blocked_on: [think-ux1v]
+      note: >-
+        The owner lifted the order of 11 October (regularize every packing first,
+        think-ux1v) for the lower-bound confirmations on 17 November 2026 (think-fibh). The
+        replay ran on 4 November 2026 (think-r333); its records and the reply on #446 follow
+        in #909.
     beads:
     - think-i85v
     - think-nd7g
@@ -8492,8 +8512,10 @@ issues:
     blocked:
       type: compute
       reason: >-
-        First-party replays of T-142, T-143, T-144 and T-132 on the owner's budget of 11
-        October (think-i85v, think-nd7g, think-r333); a compute lane runs them.
+        First-party replays of T-144 and T-132 on the owner's budget of 11 October
+        (think-nd7g, think-r333); a compute lane runs them. T-142's and T-143's ran on 4
+        November (think-i85v), and the case records adopt them in the pass of 17 November,
+        when the owner lifted the order of 11 October (think-fibh, #908).
     close_when: >-
       Each replay's receipts and controls are retained in its packet, a review accepts them,
       the four register entries on main record the replays and their rungs, and #446 has a
@@ -25106,7 +25128,13 @@ issues:
       rather than an issue, by the owner's answer of that day, "Open all nine
       (Recommended)": one issue for each pending review that had none. The result maps to
       T-142 at V0/C0, recorded; the complete census, its whole-net control and a review are
-      queued in think-i85v after think-ux1v, and are an ask on #532.
+      queued in think-i85v after think-ux1v, and are an ask on #532. On 4 November 2026 the
+      stage 4 review (think-4ul6) accepted the certificate, and the complete census and its
+      whole-net control passed (think-i85v); the separately prompted review of 11 November
+      accepted it again. T-142 is V3/C3, and the case record at n = 28 takes 2297/400 in both
+      lower lanes in the pass of 17 November, when the owner lifted the order of 11 October
+      that had queued the replay after think-ux1v (think-fibh, #908); the reply that reports
+      the rungs is owed.
     read_through: '2026-10-24T05:13:16Z'
     results:
     - key: mixed-n28-57425
@@ -25116,9 +25144,9 @@ issues:
       - T-142
       evidence:
       - E-wand125-fine-net-n28-57425-report
+      - E-wand125-fine-net-n28-57425-sqverify-fast-replay
     beads:
     - think-i85v
-    - think-ux1v
     answer_bead: think-i85v
     replies:
     - url: https://github.com/jlevy/squares/issues/776#issuecomment-6381478097
@@ -25135,11 +25163,6 @@ issues:
         id: E-wand125-fine-net-n28-57425-report
         status: recorded
     review_track: true
-    blocked:
-      type: compute
-      reason: >-
-        T-142's census and whole-net control, about 3.3 CPU-hours, up to about 4.5
-        (think-i85v), then its review; a compute lane runs it.
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
@@ -25157,7 +25180,13 @@ issues:
       rather than an issue, by the owner's answer of that day, "Open all nine
       (Recommended)": one issue for each pending review that had none. The result maps to
       T-143 at V0/C0, recorded; the complete census, its whole-net control and a review are
-      queued in think-i85v after think-ux1v, and are an ask on #532.
+      queued in think-i85v after think-ux1v, and are an ask on #532. On 4 November 2026 the
+      stage 4 review (think-4ul6) accepted the certificate, and the complete census and its
+      whole-net control passed (think-i85v); the separately prompted review of 11 November
+      accepted it again. T-143 is V3/C3, and the case record at n = 30 takes 2357/400 in both
+      lower lanes in the pass of 17 November, when the owner lifted the order of 11 October
+      that had queued the replay after think-ux1v (think-fibh, #908); the reply that reports
+      the rungs is owed.
     read_through: '2026-10-24T05:13:18Z'
     results:
     - key: mixed-n30-58925
@@ -25167,9 +25196,9 @@ issues:
       - T-143
       evidence:
       - E-wand125-fine-net-n30-58925-report
+      - E-wand125-fine-net-n30-58925-sqverify-fast-replay
     beads:
     - think-i85v
-    - think-ux1v
     answer_bead: think-i85v
     replies:
     - url: https://github.com/jlevy/squares/issues/777#issuecomment-6381478206
@@ -25186,11 +25215,6 @@ issues:
         id: E-wand125-fine-net-n30-58925-report
         status: recorded
     review_track: true
-    blocked:
-      type: compute
-      reason: >-
-        T-143's census and control, about 4.5 CPU-hours, up to about 6.1 (think-i85v), then
-        its review; a compute lane runs it.
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
       that reports the resulting rungs is posted.
