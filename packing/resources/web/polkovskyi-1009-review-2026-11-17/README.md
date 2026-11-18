@@ -8,7 +8,7 @@ Polkovskyi’s thirteen exact rational certificates at 147, 156, 180, 210, 260, 
 
 The sources are files of
 [Mishapolk/square-packing-records](https://github.com/Mishapolk/square-packing-records)
-at `b637e6cf59c23781c813e8442bfdccb5aa5f3954`, not retained here; the import lane retains
+at `b637e6cf59c23781c813e8442bfdccb5aa5f3954`, not retained here; an import lane retains
 them in its own packet. This directory is review-only.
 
 The review lane froze its checker and plan at 03:33:14Z and its findings at 04:28:50Z on 17
@@ -66,34 +66,39 @@ implementation: it imports nothing from this repository or the source, and reuse
 code of any earlier review.
 The review of #1001 (lane L186) was the model; its text, its packet’s README and its
 frozen lists were read, and its programs were not opened.
-Each was run with CPython 3.14.7 (the project interpreter) as `python -I -B`, under
+The programs that ran (the checker’s, `rv1009_describe.py` and `rv1009_lstep.py`) were
+run with CPython 3.14.7 (the project interpreter) as `python -I -B`, under
 `nice -n 19`.
 
-| Program | Decides | Writes |
-| --- | --- | --- |
-| `rv1009_reader.py` | the strict readers of form P and form C; every scalar `p` or `p/q`, handed out as written and not reduced | nothing (a module) |
-| `rv1009_axes.py` | method A: separating axes in Python integers, from poses | nothing (a module) |
-| `rv1009_clip.py` | method B: exact convex clipping in GMP rationals, from corners alone | nothing (a module) |
-| `rv1009_forms.py` | nothing about a packing: each form written in the other’s terms, and whether two listings are the same square | nothing (a module) |
-| `rv1009_decide.py` | a packing by both methods, every square, wall and pair, with no distance filter and no tolerance | nothing (a module) |
-| `rv1009_files.py` | one count’s two files to a decision, natively and crossed, with the twin relation | nothing (a module) |
-| `rv1009_geom.py` | nothing: closed forms and moves for the self-test and the controls | nothing (a module) |
-| `rv1009_write.py` | nothing: writers of both forms, for the controls | nothing (a module) |
-| `rv1009_issue.py` | nothing: the issue’s three tables, read from its saved response | nothing (a module) |
-| `rv1009_check.py` | one count’s two files against the issue’s digests and claim, each file decided by both methods | `out/check-nNNN.json` |
-| `rv1009_selftest.py` | the readers, both methods, the forms and the closed forms against 34,183 checks, and six broken copies | `out/selftest.json` |
-| `rv1009_controls.py` | the 37 controls of the plan at one count, by both methods or the readers | `out/controls-nNNN.json` |
+| Program | Decides | Reads | Writes |
+| --- | --- | --- | --- |
+| `rv1009_reader.py` | the strict readers of form P and form C; every scalar `p` or `p/q`, handed out as written and not reduced | the bytes it is handed | nothing (a module) |
+| `rv1009_axes.py` | method A: separating axes in Python integers, from poses | poses from the reader | nothing (a module) |
+| `rv1009_clip.py` | method B: exact convex clipping in GMP rationals, from corners alone | corners from the reader | nothing (a module) |
+| `rv1009_forms.py` | nothing about a packing: each form written in the other’s terms, and whether two listings are the same square | rows and corners | nothing (a module) |
+| `rv1009_decide.py` | a packing by both methods, every square, wall and pair, with no distance filter and no tolerance | poses, corners and the side | nothing (a module) |
+| `rv1009_files.py` | one count’s two files to a decision, natively and crossed, with the twin relation | a count’s two files | nothing (a module) |
+| `rv1009_geom.py` | nothing: closed forms and moves for the self-test and the controls | rows | nothing (a module) |
+| `rv1009_write.py` | nothing: writers of both forms, for the controls | rows | nothing (a module) |
+| `rv1009_issue.py` | nothing: the issue’s three tables, read from its saved response | `issue-1009.json` | nothing (a module) |
+| `rv1009_check.py` | one count’s two files against the issue’s digests and claim, each file decided by both methods | a count’s `.cert` and Witness/v2 files, `issue-1009.json` | `out/check-nNNN.json` |
+| `rv1009_selftest.py` | the readers, both methods, the forms and the closed forms against 34,183 checks, and six broken copies | nothing | `out/selftest.json` |
+| `rv1009_controls.py` | the 37 controls of the plan at one count, by both methods or the readers | a count’s two files, `controls-plan.json`, `issue-1009.json` | `out/controls-nNNN.json` |
 
 Written after the checker and the plan were frozen, and not in the checker’s digest
 list:
 
-| Program | What it does | Writes |
-| --- | --- | --- |
-| `rv1009_describe.py` | nothing: tilts, near pairs, contact factors, walls and scalar lengths | `out/describe-nNNN.json` |
-| `rv1009_lstep.py` | nothing: whether the 295 certificate is the 262 certificate in an L border | `out/lstep-262-295.json` |
-| `rv1009_custody.py` | nothing: the 26 files’ custody in the source’s history | not run before the lane stopped |
-| `rv1009_padding.py` | nothing: a certificate’s contraction margin against its house | not run before the lane stopped |
-| `rv1009_sides.py` | nothing: the sides against the record, prints, L steps and monotonicity | not run before the lane stopped |
+| Program | What it does | Reads | Writes |
+| --- | --- | --- | --- |
+| `rv1009_describe.py` | nothing: tilts, near pairs, contact factors, walls and scalar lengths | a count’s two files, `issue-1009.json` | `out/describe-nNNN.json` |
+| `rv1009_lstep.py` | nothing: whether the 295 certificate is the 262 certificate in an L border | the 262 and 295 `.cert` files | `out/lstep-262-295.json` |
+| `rv1009_custody.py` | nothing: the 26 files’ custody in the source’s history | a clone of the source and `issue-1009.json` | never run |
+| `rv1009_padding.py` | nothing: a certificate’s contraction margin against its house | a house witness and a count’s two files | not run on the thirteen counts; tried before the findings freeze on the houses at 127, 204, 232, 264 and 305, no receipt kept |
+| `rv1009_sides.py` | nothing: the sides against the record, prints, L steps and monotonicity | `packing/frontier/n-*.md`, `issue-1009.json` and the check receipts | never run |
+
+These three later programs are kept as the findings freeze bound them, and their
+docstrings describe runs after the freeze that never happened (the review’s Note on
+This Copy).
 
 From `packing/` of this repository, with `PIN` a checkout of the source at the pin and
 `R` this directory, for each count `N`:
@@ -124,6 +129,6 @@ $PY $R/programs/rv1009_lstep.py $PIN/certificates/0000-0999/n262.cert \
   F10 cite; they decide nothing.
 
 The review’s after-the-freeze measurements, the padding against the record’s houses and
-the sides against the record, were not run before the lane stopped; the import’s packet
-(`packing/resources/web/mishapolk-issue1009-2026-11-16/measure/`) holds the identity and
-contraction measurements at every count.
+the sides against the record, were never run; see the review’s Note on This Copy.
+Where the import of issue 1009 (think-i38n) measures identity and padding, those
+measurements are the import lane’s own, not this review’s.
