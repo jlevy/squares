@@ -1,0 +1,70 @@
+# Controls plan, lane w6-dewinter-1118, n = 127 (think-zqot)
+
+Written 2026-11-18, before any route, checker or measuring program has decided any of the
+three certificates below. Before writing it the lane had cloned
+JoostdeWinter/square-packing at 838c5ea and read each n127/n127_exact.json's side field
+and square count with a script of its own (Fraction arithmetic, no geometry).
+
+Certificates (n127/n127_exact.json, centre-direction JSON):
+
+- C1, #1015, pin 35b576a (first committed 689bc79): blob 369badb2..., side
+  11.80079568221356941... (12-place ceiling 11.800795682214).
+- C2, #1017, pin cc20a26: blob a9d633fc..., side 5900396863307571/500000000000000
+  = 11.800793726615142 (12-place ceiling 11.800793726616).
+- C3, #1020, pin a1ba501: blob 722628c9..., side 11.80079372661496223...
+  (12-place ceiling 11.800793726615).
+
+## Admission (upper_bound_reports check-claims)
+
+Each exact side rounds up at 12 places to its issue's print: C1 to 11.800795682214, C2 to
+11.800793726616 (and equals #1017's stated exact fraction), C3 to 11.800793726615. Each
+is below T-305's exact side. Any other outcome stops the lane at that certificate.
+
+## Gross controls (upper_bound_reports certify), each certificate
+
+On both maintained exact routes (the sqpack rational witness verifier and the independent
+rational corner checker):
+
+- positive job: accepted on both routes;
+- duplicate-square job: refused on both routes, an overlap;
+- outside-container job: refused on both routes, a container failure.
+
+`check --replay` decides every job again with the same verdicts.
+
+## Sharp controls (upper_bound_reports sharp-controls), each certificate
+
+11 controls a count. At exact contact both routes accept with decisive margin exactly 0,
+and 1e-30 past contact both refuse with margin exactly -1e-30 (within the enlarged
+square's window, or at most it, as the module states), each route naming only the
+failure the control makes:
+
+- side-lowered-past-wall-contact: accepted at contact, refused past it (container).
+  Branch W0: if a square touches the top or right wall exactly, the lowering is by 0 and
+  the at-contact control is the certificate itself, accepted. Branch W1: otherwise the
+  box is lowered by the least far-wall clearance, accepted at contact.
+- tightest-pair-closed-past-contact: accepted at contact, refused past it (overlap).
+  Branch P0: if a pair touches exactly, the move is by 0, accepted at contact.
+  Expected: P1, no pair touches (least gap positive, of order 1e-13 to 1e-10).
+- squares-moved-past-near-wall-contact: accepted at contact, refused past it
+  (container). Branch N0: least near-wall clearance 0 (a square touches the left or
+  bottom wall), move by 0, accepted at contact. Expected N0, as at every earlier de
+  Winter certificate.
+- square-enlarged-past-pair-contact: refused at contact for its shape alone (margin
+  exactly 0), refused past contact for shape and overlap.
+- square-enlarged-past-wall-contact: Branch E0 (a square already at its wall, grown by
+  0): accepted at contact, refused past it for the wall and its shape. Branch E1: refused
+  at contact for shape alone, past contact for shape and container.
+- duplicate-square: refused (overlap), both routes.
+
+## Contraction margins and identity (contraction_margin, measure_identity)
+
+contraction_margin refuses a certificate unless both routes accept it and every exact
+wall and pair check holds; it is expected to accept T-305 (the house, packet
+joegun-upper-bounds-2026-11-16), C1, C2 and C3, and both routes to accept each
+contracted packing. measure_identity decides nothing about any bound. No expectation
+is stated for the margins, the gains' ratios to them, or the identities: those are
+measurements, and option D (think-b0w5) is applied to whatever they show.
+
+Any control that comes out otherwise than stated here is recorded as such, on the bead,
+in the packet README and in the PR, and the certificate it concerns is not registered
+at any rung above V1 until the difference is explained.
