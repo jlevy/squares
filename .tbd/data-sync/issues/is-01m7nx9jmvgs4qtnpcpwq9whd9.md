@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T02:27:16.323Z
+updated_at: 2026-11-18T02:28:13.213Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -38,3 +38,5 @@ R-127 (blind review), 2026-11-18 02:40Z: runs done and pushed (branch claude/int
 2026-11-18T02:31Z w6-dewinter-1118: draft PR https://github.com/jlevy/squares/pull/1024 opened at d4d2866de (labels intake, S3), provisional ids T-314..T-316 (to be T-327..T-329 after #1023, import-1009, merges).
 
 R-127 (blind review), 2026-11-18 02:27Z: findings frozen and pushed at 3db7ac1fe (checker freeze 950cf3106 at 02:02Z). Verdict: all three certificates (#1015, #1017, #1020) accepted, both files each; every report-order step beats its predecessor's contraction margin (closest #1017 to #1020: gain 1.79761e-13, margin 4.19030e-14, ratio 4.29). Significance confirmed here: #1015 S3, #1017 S2, #1020 S2. (Correction: the previous note's 02:40Z should read 02:20Z.) Next: post-freeze comparison, doc map, synopsis, draft PR.
+
+2026-11-18T02:28:01Z w6-dewinter-1118: correction: the note headed 02:31Z (PR #1024 opened) was written at about 02:24Z, and the one headed 02:21Z at about 02:20Z; times were mistyped.

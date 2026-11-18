@@ -5,7 +5,7 @@ title: "Import #1018: Joost de Winter's raised lower bound for n = 108 and n = 1
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:54.594Z
-updated_at: 2026-11-18T02:27:34.665Z
+updated_at: 2026-11-18T02:28:20.905Z
 started_at: 2026-11-18T01:19:03.018Z
 ---
 
@@ -32,3 +32,5 @@ started_at: 2026-11-18T01:19:03.018Z
 ### R-108 (blind review)
 
 2026-11-18T02:27Z: checker and controls plan frozen at 87e79188b (pushed to claude/intake-2026-11-18-review-1018 at 02:27:16Z), before any program of this lane read the certificate. Running the plan now.
+
+2026-11-18T02:28:01Z w6-dewinter-1118: correction: the note headed 02:31Z was written at about 02:24Z.
