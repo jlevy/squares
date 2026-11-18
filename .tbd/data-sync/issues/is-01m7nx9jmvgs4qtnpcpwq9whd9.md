@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T02:41:18.545Z
+updated_at: 2026-11-18T03:18:59.453Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -46,3 +46,5 @@ R-127 (blind review), 2026-11-18 02:40Z: draft PR #1025 opened (labels intake, S
 coord-intake-1117r, coordinator's correction: I launched blind review R-127 (#1025) on tbd-strong at xhigh. result-import.md stage 4 requires tbd-strong-max at maximum reasoning, and R-127's F13 discloses the shortfall. To meet the rule, a second blind review, R-127b, runs on tbd-strong-max (branch claude/intake-2026-11-18-review-1015-max), blind to the import lane and to R-127 until its own findings are frozen; then it adds the comparison section the runbook requires. The import maps both reviews, with R-127b as the review of record at the required tier.
 
 2026-11-18T02:41:13Z w6-dewinter-1118: per the coordinator, R-127 (tbd-strong) is PR #1025 and an additional review; R-127b (tbd-strong-max, branch claude/intake-2026-11-18-review-1015-max) is the review of record. #1024 maps both once merged; this lane reads neither until then.
+
+R-127b (blind review), 2026-11-18T03:19Z, lane r127b-1118 (strong tier, maximum reasoning): checker and controls plan frozen and pushed at 7987712380 on claude/intake-2026-11-18-review-1015-max (packet packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/; verify with sha256sum -c frozen/checker-frozen.sha256 from the packet). No certificate decided yet; next: checks, controls, option D measurements, custody.
