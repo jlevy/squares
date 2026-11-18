@@ -5,7 +5,7 @@ title: "Import #1031: Joost de Winter's s(299) <= 17.793636991744 (0.0074 below 
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: w6r2-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T07:26:42.911Z
-updated_at: 2026-11-18T08:35:17.583Z
+updated_at: 2026-11-18T08:54:09.638Z
 started_at: 2026-11-18T07:33:41.966Z
 ---
 
@@ -26,3 +26,5 @@ started_at: 2026-11-18T07:33:41.966Z
 2026-11-18T08:20Z w6r2-dewinter-1118: R-1031 writes on think-r3tn (coordinator); this lane does not read think-r3tn, nor any R-1031 section here, until #1031's review merges. Nothing measured yet for #1031 beyond the triage's side and gains (scratch download at 07:33Z).
 
 2026-11-18T08:33Z w6r2-dewinter-1118: for #1031's PR Limits: at about 08:30Z the coordinator's message relayed R-1031's summary verdict (accept; 7.37e-3 below T-325, about 2e24 times T-325's margin; a new arrangement; S3), before this lane ran any measurement of #1031 beyond the triage's side and gain (07:33Z). The import's replay, controls, identity and margin measurements will be its own programs' outputs under a controls plan hashed before they run.
+
+2026-11-18T09:00Z w6r2-dewinter-1118: for #1031's PR Limits (coordinator): the 08:30Z relay of R-1031's verdict included its S3 reading before this lane scored #1031, so the import's significance score is not blind to the review; and at about 08:58Z the coordinator relayed that R-1031's senior review found 210 of 299 squares coinciding with T-325 under one rigid motion (the review lane is measuring whether generic or a continuation). The credit at 299 is not settled until #1036 merges with that answer; the import's own identity measurement (measure_identity against T-325 and T-277) will be run and reported as its own.
