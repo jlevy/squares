@@ -688,13 +688,88 @@ outside both frozen digest lists.
   separating-axis test “on all pairs”, while it tests the 714 close pairs, as its output
   line says. `README.md` and `REGISTRATION.md` restate the issue’s text.
 
+### Review A of #1036
+
+Review A of the pull request that carried this review (round 1, at `573b8c3df`) approved
+it and asked for the following, which this section answers.
+None of it changes the verdict, a bound or a rung; the frozen text above is left as it
+was frozen.
+
+- **N5’s label (A1).** The novelty label for #1031 is `previously-published`, as for
+  every result by others: the packing is published in the author’s repository at
+  `497eb478` and in the issue (Custody).
+  N5 should read so. The Kaggle side-only value of Nick Sarris stays a note, a priority
+  note for the owner, and changes no label.
+
+- **Whether the coincidence with T-325 is generic (A2).** F7 counted only the turned
+  squares, while T-325’s best motion lines up 210 of the 299 squares.
+  Written after the findings’ freeze and run at 08:55Z, `after-freeze/rv1031_generic.py`
+  (`after-freeze/generic.json`) scores, for each reference and each of the eight
+  symmetries of its box, the strongest translations that carry a turned square onto a
+  turned square of the same tilt or an upright square onto an upright one, and the unit
+  shifts of the best turned motion: 780 to 832 motions a reference.
+
+| Reference | Best motion | Squares within 0.1, turned and upright | Motions lining up 150 or more |
+| --- | --- | --- | ---: |
+| T-325 | rot270, moved by $(-0.996, 0.019)$ | 210: 53 and 157 | 6 |
+| T-325, its best for upright squares | rot270, moved by $(-0.006, -0.003)$ | 164: 2 and 162 | — |
+| T-248 | rot270, moved by $(-0.008, -0.002)$ | 160: 0 and 160 | 4 |
+| T-101, the catalogue construction, unrelated | anti-transpose, moved by $(-0.023, -0.007)$ | 162: 1 and 161 | 8 |
+| #1031 itself, the identity left out | the reflection across $x + y = S$ | 283: 103 and 180 | 9 |
+| #1031 itself, a unit shift | identity, moved by $(-1.000, 0.000)$ | 155: 3 and 152 | — |
+
+The upright part of the coincidence is generic: an unrelated house lines up 161 of the
+packing’s upright squares, T-325 lines up 162 under another motion, and a shift of one
+unit lines up 152 of the packing’s own.
+What is specific is the turned band: under T-325’s best motion, 53 of the 60 negatively
+turned squares.
+The motion leaves 89 squares, 30% of the packing, with no partner: all 55
+positively turned squares, 7 negatively turned ones and 27 upright ones.
+The positively turned group matches the same band of T-325 under a second motion
+(mirror-y, moved by $(-0.024, 0.991)$, 51 turned squares), and the two groups are each
+other’s mirror image across $x + y = S$.
+
+**#1031 is not a measured continuation of T-325.** By the record’s measure it is one to
+one with no house at 299. Under the best rigid motion with a free translation, 30% of
+its squares, a whole turned group among them, have no partner, and what that motion
+lines up beyond a generic lattice is the turned band that every house since T-248 (Evan
+Daniel’s #824) carries, which #1031 holds twice.
+It is a new arrangement, credited to Joost de Winter after the antecedents the source
+names, and not “improved from Polkovskyi’s T-325”; were the band itself to be credited,
+its first holder in the record is T-248, not T-325. The reply to Q2 and the import’s
+credit note should state these counts.
+
+- **The freeze times (A3).** GitHub’s activity record for the branch gives the evidence:
+  the branch was created at `212876836f` at 08:02:06Z (committed at 08:01:53Z), and
+  `c8e59efe1e` was pushed at 08:27:59Z (committed at 08:27:52Z; the digest list was
+  written at 08:27:44Z). The first program run on a certificate began at 08:02:41Z, and
+  the first reads after the freeze at 08:28:12Z and 08:28:50Z. The times in the frozen
+  text and the frozen README (08:02:05Z and 08:27:44Z) are the lane’s own clock.
+
+- **The house the issue cites (A5).** #1023 merged at 05:46:46Z, 48 minutes before the
+  pin was committed and 58 before the issue was opened.
+  The issue quotes the case page as the author read it; whether it was drafted before
+  the merge, or the page had not yet been regenerated, is not known here.
+  F9’s “after the issue was drafted” should read so.
+
+- **The read of `think-10mx` (A6).** The JSON that `tbd show think-10mx --json` returned
+  at 07:35:53Z held the import lane’s triage note, synced at 07:33:51Z. The filter
+  printed only the title, status, labels and parent, and the note was neither printed
+  nor read. Review A reports that it held the exact side, T-325’s side, the gain, the
+  lineage and the Kaggle value, and no identity, margin or significance.
+
+- **Source lines (A7).** N1 is the last byte of `n299_exact.json`, byte 182,141, a `}`
+  with no newline after it.
+  N4 is `n299_witness.yaml` lines 18 to 21, the `claim` block.
+
 ## Note on This Copy
 
 This copy differs from the frozen text
 (`frozen/review-2026-11-18-de-winter-1031.frozen.md`, bound by
 `frozen/findings-frozen-digests.txt`) in three places, added after the findings’ freeze:
-the section After the Freeze, this note and the footer below.
-No finding, verdict or number changes.
+the section After the Freeze (with its answers to review A of #1036), this note and the
+footer below. No finding, verdict or number changes; where review A corrects a line of
+the frozen text (N5, F9), After the Freeze says so and the frozen line stays.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
