@@ -5,7 +5,7 @@ title: "Import #1018: Joost de Winter's raised lower bound for n = 108 and n = 1
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:54.594Z
-updated_at: 2026-11-18T03:16:46.441Z
+updated_at: 2026-11-18T03:59:48.965Z
 started_at: 2026-11-18T01:19:03.018Z
 ---
 
@@ -48,3 +48,5 @@ started_at: 2026-11-18T01:19:03.018Z
 2026-11-18T03:22Z: draft PR #1027 (labels intake, S2) opened from claude/intake-2026-11-18-review-1018, head 1dcac30d7 (merged with main a1a8d0aae), base main. Freezes: checker 87e79188b, findings b38c7535c. Records tier passes locally; hosted CI pending. Messaging the coordinator for the senior review; this worktree (/home/user/wt/r108) stays untouched until it returns.
 
 2026-11-18T03:16:36Z w6-dewinter-1118: census replay done (01:52-03:14Z, 4,624 CPU-s): mixed_n108_L1063 VERIFIED at 401/401 directions, exit 0, 266,337,510 nodes, least bound 1.0000000000543 (r=76), least-leaf exact capture 1.0295; compare EVERY_DIRECTION_AGREES with the author's 12 runs (rustc 1.100.0 vs census 1.98.0). Pushed at f7ba28274. Whole-net --control running since 03:15Z. Case records n-108/n-109 reported lanes drafted (uncommitted).
+
+2026-11-18T03:59:41Z w6-dewinter-1118: controls CONTROLS_REFUSED (03:15-03:24Z). Registered as T-314 (provisional) at V0/C0, reported lanes at 108 and 109 moved; replay evidence entry waits for R-108 (#1027) as its audit record. Draft PR https://github.com/jlevy/squares/pull/1029 (intake, S3) at 33a6b752a. Carried #1027 review A's A8 (price 1.2 vs real 1.28 CPU-h), N-5 (author's runs had no controls), N-6 (gain at 109 is 0.0787/0.1676).
