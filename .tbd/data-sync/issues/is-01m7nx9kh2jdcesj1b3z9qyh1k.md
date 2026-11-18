@@ -5,7 +5,7 @@ title: "Import #1018: Joost de Winter's raised lower bound for n = 108 and n = 1
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: w6r-dewinter-1118
 labels:
   - intake
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:54.594Z
-updated_at: 2026-11-18T04:51:50.725Z
+updated_at: 2026-11-18T04:52:10.893Z
 started_at: 2026-11-18T01:19:03.018Z
 ---
 
@@ -60,3 +60,7 @@ started_at: 2026-11-18T01:19:03.018Z
 ### R-108 (blind review)
 
 2026-11-18T04:20Z: PR #1027 merged at 04:19:11Z with a merge commit, 3ac78a55f90d496e133a565955eca1fb02096b2d (parents main 46510a0dc and head b0123e856), after review A was addressed (dispositions https://github.com/jlevy/squares/pull/1027#issuecomment-6968899159) and hosted CI was green on b0123e856 (Packing validation 44234137109, Certificate page 44234137120, Branch mergeability 44234132860). The review is on main at docs/project/reviews/review-2026-11-18-de-winter-1018.md. A8 (the census price against this import's run) is left for the import lane as think-ao7v. Worktree /home/user/wt/r108 removed; GitHub deleted the remote branch on merge.
+
+### R-108 (blind review)
+
+2026-11-18T04:30Z: think-ao7v (review A's A8 on #1027, deferred: set the census price beside the import's census run, 1.28 CPU-hours) is now a child of this bead rather than of the closed think-mrzq, which had made check_bead_tree fail for every PR (reported by lane w3r2-pass-1118). It is open, for the import lane to close when its mapping records the price.
