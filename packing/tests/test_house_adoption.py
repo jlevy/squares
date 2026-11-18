@@ -2227,19 +2227,58 @@ checker and the maintained replay share `sqverify_fast` components, so this is s
 component confirmation. It establishes neither independent full confirmation nor
 optimality. The upper lanes remain unchanged."""
 
-N108_CURRENT_LOWER = r"""The current verified lower bound is $s(108) \ge 531/50 = 10.62$,
-from Hiroaki Hosono’s fine-net measure and the maintained replay described above. That
-confirmation shares the producer’s verifier components."""
+N108_CURRENT_LOWER = r"""The current verified lower bound is
+$s(108) \ge 1700799526134255846599/159999384348528500000 = 10.6300379408297\ldots$, from
+Joost de Winter’s dilation of Hosono’s fine-net measure, its enlargement and the census
+replay described above, reproduced with the producer’s code. Before it, Hosono’s
+$531/50 = 10.62$ held both lanes from 18 October, by a replay that shares the producer’s
+verifier components."""
+
+
+#: The second later lower layer at 108: de Winter's #1018 (T-327) moves both
+#: lower lanes past T-216's 531/50 on 18 November 2026, once its census replay and stage 4
+#: review are accepted, with its evidence, resource and dated paragraph.
+N108_DE_WINTER_LOWER = r"""**External intake, 2026-11-18.** Joost de Winter’s
+[lower bound](../resources/web/de-winter-s108-lower-bound-2026-11-17/README.md), which
+his issue #1018 reports, raises both lower lanes to
+$s(108) \ge 1700799526134255846599/159999384348528500000 = 10.6300379408297\ldots$
+(T-327): Hosono’s density of T-216, every rectangle dilated by $1063/1062$ and the
+masses unchanged, at core side $12487/12500$ on a net the certificate declares of 401
+half-angles of step $83/80000$, which proves $s(108) \ge 10.63$, and a one-page rational
+enlargement past that side by scaling a packing of the claimed side into the measure’s
+square. The source decides the certificate with this repository’s `sqverify-fast` at
+every direction. Here its premises, the dilation, the file’s regeneration from T-216’s
+and the enlargement’s arithmetic were recomputed exactly, and the author’s runs audited.
+It is above T-216’s $531/50$ by $0.0100$. The complete census replay of all 401
+directions and its whole-net controls ran here and passed, and the blind
+[stage 4 review](../../docs/project/reviews/review-2026-11-18-de-winter-1018.md) of 18
+November accepts the argument, the enlargement included, with every finding a note.
+The bound is confirmed, reproduced with the producer’s code: the source ran the same
+verifier. The review’s own clean-room programs decided all 401 directions too, which
+sets no rung until a soundness review accepts their decider."""
+N108_DE_WINTER_EXACT = "1700799526134255846599/159999384348528500000"
+N108_DE_WINTER_RESOURCE = {
+    "key": "[de Winter s108 lower bound 2026-11-17]",
+    "role": "lower-bound-proof",
+    "local": "web/de-winter-s108-lower-bound-2026-11-17/source",
+    "url": (
+        "https://github.com/JoostdeWinter/square-packing/tree/"
+        "cc20a26845789c2502950041c26709eda8a71081/lower_n108"
+    ),
+    "retrieved": True,
+}
 
 
 def _n108_later_lower_projection(held: dict[str, Any], wrote: dict[str, Any], body: str) -> str:
-    """Check the exact later n108 lower adoption, then compare the earlier house layer."""
-    assert held["source_reviewed"] == "2026-10-18"
-    assert held["reported_lower_bound"]["exact_form"] == "531/50"
+    """Check the exact later n108 lower adoptions, then compare the earlier house layer: T-216's
+    fine-net bound of 18 October, then de Winter's #1018 of 18 November, reported and
+    verified."""
+    assert held["source_reviewed"] == "2026-11-18"
+    assert held["reported_lower_bound"]["exact_form"] == N108_DE_WINTER_EXACT
     assert held["verified_lower_bound"] == {
-        "value": "10.62",
-        "exact_form": "531/50",
-        "evidence": ["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],
+        "value": "10.630037940829",
+        "exact_form": N108_DE_WINTER_EXACT,
+        "evidence": ["E-de-winter-1018-n108-sqverify-fast-replay"],
     }
     assert held["evidence"] == [
         *wrote["evidence"],
@@ -2247,6 +2286,9 @@ def _n108_later_lower_projection(held: dict[str, Any], wrote: dict[str, Any], bo
         "E-wand125-fine-net-n108-1062-sqverify-fast-replay",
         "E-n108-review-max-premises",
         "E-n108-review-max-captures",
+        "E-de-winter-1018-n108-report",
+        "E-de-winter-1018-n108-sqverify-fast-replay",
+        "E-de-winter-1018-n108-review-decision",
     ]
     assert held["resources"] == [
         *wrote["resources"],
@@ -2261,10 +2303,11 @@ def _n108_later_lower_projection(held: dict[str, Any], wrote: dict[str, Any], bo
             ),
             "retrieved": True,
         },
+        N108_DE_WINTER_RESOURCE,
     ]
     for key in ("source_reviewed", "evidence", "resources"):
         held[key] = wrote[key]
-    for addition in (N108_LOWER_INTRO, N108_CURRENT_LOWER):
+    for addition in (N108_DE_WINTER_LOWER, N108_LOWER_INTRO, N108_CURRENT_LOWER):
         words = _flat(addition)
         for old, new in LATER_RENAMES:
             words = words.replace(old, new)

@@ -1,0 +1,59 @@
+# Controls plan, lane w6-dewinter-1118, s(108) and s(109) lower bound of #1018 (think-i5en)
+
+Written 2026-11-18, before any program of this repository has decided the certificate.
+Before writing it the lane had read, as data, lower_n108/README.md, REGISTRATION.md,
+lower_checks.txt, replay_lower.sh, stretch_measure.py and the text of proof_n108.pdf at
+JoostdeWinter/square-packing cc20a26, the first and last lines of two of the twelve
+archived direction-run files, and compared the bundled sqverify_fast/ with this
+repository's packing/sqverify_fast/ file by file (identical but LICENSE, which is this
+repository's root LICENSE). No route, verifier, audit or control has read
+evidence/n108_measure.json.gz.
+
+Certificate: lower_n108/evidence/n108_measure.json.gz, format M, n = 108, L = 1063/100,
+B = 12487/12500, proof_net step 83/80000, last 400 (401 directions), Hiroaki Hosono's
+mixed_n108_L1062 (T-216) with every rectangle coordinate times 1063/1062 and every mass
+kept. Claim: s(109) >= s(108) >= 1700799526134255846599/159999384348528500000.
+
+## Premises (devtools.audit_dilated_measure audit, extended for this certificate)
+
+Expected to hold, every one, in exact rationals:
+
+- the file: format M, rectangles only, no scaling factor, a proof_net of exactly step and
+  last, eight times the densest row's density at most 2^32;
+- the measure: masses nonnegative, rectangles nondegenerate and inside [0, L]^2, total
+  exactly 10799999/100000 < 108;
+- lemma N0 (a) to (e) on the declared net, B (1 + D) = 999996421/1000000000 < 1;
+- the rescaling: L = (1063/1062) L0, the same 823 rows, each rectangle 1063/1062 times
+  T-216's row by row, each mass equal; the core B declared by the source, not 1063/1062
+  times T-216's core;
+- the regeneration: T-216's retained candidate rewritten as stretch_measure.py says is
+  byte for byte the retained file's decompressed text (expected; if it is not, the
+  difference is recorded and the row-by-row check above still decides the rescaling);
+- the enlargement: with z0 = D/2, w(t) = (1 + 2t - t^2) / (2 (1 + t^2)), u = 2 B w(z0)
+  and h = 707107/1000000, h^2 > 1/2, u < 1, and S = 2h + (L - 2h)/u equals the claimed
+  side exactly; w nondecreasing on [0, z0].
+
+## Complete replay (devtools.sqverify_fast_census, --family mixed)
+
+sqverify-fast built from reviewed crate source d97758bb... (rustc 1.98.0, release) at
+every one of the 401 declared-net directions, threshold 1: expected status VERIFIED,
+every direction verified, return code 0, the least-bound leaf's exact capture clearing 1.
+Expected to agree with the producer's twelve archived runs on every field but the two
+timings, direction by direction, and on the node total, 266,337,510.
+
+## Controls (devtools.sqverify_fast_census --control, receipt v2)
+
+Expected CONTROLS_REFUSED:
+
+- the original verified again at its least-bound direction;
+- the near-threshold mutant (every mass scaled so the exact capture at the least-bound
+  leaf's centre is at most one part in a million below 1) refused there, a counterexample
+  candidate whose witness the crate confirms below 1, the exact capture recomputed equal;
+- the 99/100 mass mutant at every direction of the net: refused at one direction at
+  least, and every direction that does not verify it a refusal on coverage at a pose in
+  the per-bin centre domain, its exact capture recomputed equal to the crate's and below
+  1. Expected refused at all 401 directions, the axis included (the source's axis
+  integration gives 0.997404045355 after the 1% reduction).
+
+Any outcome other than stated here is recorded on the bead, in the packet README and in
+the PR, and the entry is not raised above V1 until it is explained.

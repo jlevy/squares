@@ -491,6 +491,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # T-132's fine-net bound supersedes Hosono's check2 bound of 6 October at n = 29
         # (T-108), its one count, in both lanes, adopted in the pass of 17 November 2026.
         "T-108",
+        # Joost de Winter's #1018 (T-327) supersedes Hosono's fine-net bound at
+        # n = 108 (T-216), its one count, in both lanes, from the pass of 18 November 2026.
+        "T-216",
         # The pass of 18 November 2026 (think-i38n) took the last houses of nine results to
         # Mykhailo Polkovskyi's issue-1009 certificates (T-314 to T-326): T-302 at 147,
         # T-287 at 156, T-288 at 180, T-269 at 260, T-289 at 268, T-283 at 270, T-146 at
