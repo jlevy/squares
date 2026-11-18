@@ -3,9 +3,9 @@ type: is
 id: is-01m7jh7hf7vrnd0zg133rk1bfh
 title: "Import #1005, #1006 and #1007: s(292) by Özden and by de Winter, s(262) and s(295) by de Winter (T-310 to T-313), adopt and regularize in the 2026-11-17 pass"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 21
+version: 22
 delegate: w3r2-pass-1118
 labels: []
 dependencies:
@@ -15,8 +15,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:20.740Z
-updated_at: 2026-11-18T07:33:20.466Z
+updated_at: 2026-11-18T07:54:20.516Z
 started_at: 2026-11-16T15:59:56.835Z
+closed_at: 2026-11-18T07:54:20.516Z
+close_reason: "Done: #1005, #1006 and #1007 answered with final comments (6970908422, 6970908715, 6970909007) and closed 06:23Z on 18 Nov after #1023 (86284ec20); #1032 recorded them closed and merged 07:53:49Z as 50962004c. check_bead_tree --before-close on main 50962004c: no record names it, no live child."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

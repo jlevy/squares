@@ -3,9 +3,9 @@ type: is
 id: is-01m7khyh9zn4ssnwrqk014gn8r
 title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262, 268, 272, 292, 295; 12-place refinements: 147, 156, 180, 270, 299, 307) at Mishapolk/square-packing-records b637e6c (T-314 to T-326), adopt and regularize; merges after think-qag8's PR"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 26
+version: 27
 delegate: w3r2-pass-1118
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T07:33:27.062Z
+updated_at: 2026-11-18T07:54:20.959Z
 started_at: 2026-11-17T01:29:10.698Z
+closed_at: 2026-11-18T07:54:20.958Z
+close_reason: "Done: T-314..T-326 registered, reviewed and adopted in #1023 (86284ec20); #1009 answered with its final comment (6970909384) and closed 06:23Z on 18 Nov; #1032 recorded it closed and merged 07:53:49Z as 50962004c. The held KKT points stay on think-4z8z. check_bead_tree --before-close on main 50962004c: no record names it, no live child."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
