@@ -294,10 +294,15 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: Mykhailo Polkovskyi's certificates of issue 1009 (T-314 to T-326), each clearing every
 #: wall by at least 1e-28 and every pair by at least 2e-28, so n=1..200 has 773 separating
 #: squares and 2,471 translating ones, and n=1..324 3,245 and 7,844, in the same records.
+#: Lane w7-optd-1118 (think-8yyy) moved 172 and 199 in the same pass to Joost de Winter's
+#: re-solves of issues 946 and 939 (T-286, T-285), T-282's arrangement at its exact local
+#: optimum: separating and translating squares 16 and 88 against T-282's 84 and 86 at 172,
+#: and 17 and 95 against T-284's 85 and 92 at 199, so n=1..200 has 637 separating squares
+#: and 2,476 translating ones, and n=1..324 3,109 and 7,849, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
-    "n=1..200": (68, 773, 182, 2471),
-    "n=1..324": (126, 3245, 302, 7844),
+    "n=1..200": (68, 637, 182, 2476),
+    "n=1..324": (126, 3109, 302, 7849),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
