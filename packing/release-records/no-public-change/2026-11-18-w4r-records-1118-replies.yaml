@@ -1,0 +1,23 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane w4r-records-1118 of the 17 November intake pass (think-8gvd): the replies
+  posted after #1016 merged (2980557a2) and its deploy was verified are recorded. #574
+  (closed unmerged with the thank-you note), #529, #537 and #941 are recorded closed with
+  their final comments; #783, #973, #543 and #763 get their follow-ups, each correcting
+  the reply whose statement went out of date; #1012's acknowledgement asks for the
+  author's exact files, so its entry is blocked: author. The replies other lanes posted
+  are recorded too: #776's and #777's follow-ups and final comments (both recorded
+  closed), #1008's acknowledgement with the question it asks (awaiting_author, and
+  think-a88h answers it from here), and the follow-ups on #532 and #446. No result,
+  rung, side, bound, house, mark or credit changes. Against origin/main a1a8d0aae
+  (#909): devtools.compare_paper_renders rendered the methods survey into empty site
+  directories, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from
+  this tree and once with that main's result-requests.yaml swapped in: 43 files each,
+  all byte-identical across the three. No PDF was printed; it prints from that HTML. The
+  paper keeps its version, v0.2.7.
