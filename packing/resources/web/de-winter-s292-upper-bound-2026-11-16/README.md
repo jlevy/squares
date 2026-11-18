@@ -183,7 +183,18 @@ below. The L step from 292 lands at 327, beyond the corpus; no bound carries.
 
 ## Stage 4 Review
 
-The blind stage 4 review is lane R1’s (think-p3g8); this lane has not read it.
+The blind stage 4 review is lane R1’s (think-p3g8):
+[review-2026-11-17-ozden-de-winter-1005-1007.md](../../../../docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md), read only after this packet’s replay, controls,
+measurements and registration were committed, and mapped with #1009’s import.
+It accepts the certificate and its Witness/v2 twin, decided by a clean-room checker by
+two exact methods with 51 and 34 controls stated in advance, with no blocking or major
+finding. Its least margin, 3.03125e-12 at squares 278 and 279, is the replay’s; it adds
+that the side is the packing’s height exactly (F4), that the near pairs have no band
+(F5), that of the issue’s 233 axis-aligned squares 17 are exactly upright and 216 turned
+by 1.2e-8 to 0.049 degrees (F11), and that the centre file states no origin (F12).
+T-311 is confirmed, independently re-implemented, at V3/C3. It is not adopted:
+Polkovskyi’s T-323 is 3.62e-9 below it at 292, 72 times its own contraction margin of
+5.0288e-11, a new result under the owner’s option D of 17 November.
 
 ## What Is Not Established
 

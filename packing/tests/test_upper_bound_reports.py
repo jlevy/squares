@@ -292,6 +292,11 @@ I1_1117 = (
     "de-winter-s292-upper-bound-2026-11-16",
     "de-winter-upper-bounds-262-295-2026-11-16",
 )
+#: The intake pass of 17 November 2026, lane c-import-1009-1117
+#: (`test_upper_bound_reports_1009`): Mykhailo Polkovskyi's #1009 at 13 counts,
+#: centre/half-angle certificates read by ``evand-cert``, each held to the source's
+#: Witness/v2 corner file, under MIT.
+ISSUE_1009 = "mishapolk-issue1009-2026-11-16"
 #: The intake pass's lane w6-dewinter-1118 of 18 November 2026
 #: (`test_upper_bound_reports_w6_1118`): Joost de Winter's #1015, #1017 and #1020 at 127,
 #: three certificates of one band filed that evening, each below the last, his
@@ -377,6 +382,7 @@ EVERY = (
     L181_1115,
     L187_1116,
     *I1_1117,
+    ISSUE_1009,
     *W6_1118,
 )
 
@@ -1868,6 +1874,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L181_1115: "2026-11-15",
         L187_1116: "2026-11-16",
         **dict.fromkeys(I1_1117, "2026-11-16"),
+        ISSUE_1009: "2026-11-16",
         **dict.fromkeys(W6_1118, "2026-11-17"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")

@@ -59,10 +59,12 @@ SUPERSEDED = {n: "couzo-issue763-2026-10-23" for n in PRINTED if n > 324} | {
 }
 #: In the corpus: the house each certificate is compared with, and the gap, rounded.
 HOUSES = {130: ("T-259", "1.955e-14"), 299: ("T-277", "1.182e-12"), 303: ("T-278", "3.291e-12")}
-#: The source key of each house's reported lane, which the holds leave in place.
+#: The source key of each house's reported lane, which the holds leave in place. The pass
+#: of 18 November 2026 (think-i38n) moved 299 from T-277 to Mykhailo Polkovskyi's
+#: re-solve of it (T-325), 2.34e-12 below T-280's held side; the holds stay as they were.
 HOUSE_KEYS = {
     130: "[Mishapolk issue 846 2026-10-30]",
-    299: "[Özden s299 upper bound 2026-11-09]",
+    299: "[Mishapolk issue 1009 2026-11-16]",
     303: "[Özden s303 upper bound 2026-11-09]",
 }
 #: Each in-corpus certificate's gain over its house as a share of the house certificate's

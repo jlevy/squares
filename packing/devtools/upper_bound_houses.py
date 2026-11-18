@@ -582,7 +582,8 @@ def _sources() -> dict[str, Source]:
     sources = [
         packet_source("T-134", "couzo-exact-certificates-2026-10-09"),
         packet_source("T-139", "evand-trio126-2026-10-09"),
-        packet_source("T-146", "evand-regularized-2026-10-10"),
+        # The pass of 18 November 2026 (think-i38n) moved 292, T-146's only house, to Mykhailo
+        # Polkovskyi's T-323, so T-146 is no source here now.
         packet_source("T-174", "pingyou-pr574-certificates-2026-10-13", FIELD_COUNTS["T-174"]),
         packet_source("T-182", "couzo-certificates-2026-10-13"),
         packet_source("T-186", "mishapolk-kkt-refinements-2026-10-14"),
@@ -637,10 +638,8 @@ def _sources() -> dict[str, Source]:
         ),
         # The pass of 16 November 2026 (think-0y9m) moved 204, T-268's only house, to JoeGun's
         # T-306, so T-268 is no source here now.
-        _keyed(
-            packet_source("T-269", "evand-issue914-2026-11-05"),
-            "[Daniel issue 914 n260 2026-11-05]",
-        ),
+        # The pass of 18 November 2026 (think-i38n) moved 260, T-269's only house, to Mykhailo
+        # Polkovskyi's further arrangement of it (T-318), so T-269 is no source here now.
         packet_source("T-271", "evand-issue914-2026-11-05"),
         packet_source("T-273", "evand-issue914-2026-11-05"),
         # The adoption of 9 November 2026 (think-463r) moved 232 and 307 from T-256, 268 from
@@ -649,14 +648,16 @@ def _sources() -> dict[str, Source]:
         # keep no house here now.
         # The pass of 16 November 2026 (think-0y9m) moved 232, T-275's only house, to JoeGun's
         # T-307, so T-275 is no source here now.
-        packet_source("T-277", "ozden-s299-upper-bound-2026-11-09"),
+        # The pass of 18 November 2026 (think-i38n) moved 299 and 307, T-277's and T-279's only
+        # houses, to Mykhailo Polkovskyi's re-solves of them (T-325, T-326), so T-277 and
+        # T-279 are no sources here now.
         packet_source("T-278", "ozden-s303-upper-bound-2026-11-09"),
-        packet_source("T-279", "ozden-s307-upper-bound-2026-11-09"),
         # The same day's later pass (think-he66) moved 172 from T-257 and 270 from T-224 to
         # Doğa Özden's further arrangements of issues 935 and 936, T-282 and T-283, one packet
         # each; T-257 and T-224 keep no house here now.
         packet_source("T-282", "ozden-s172-upper-bound-2026-11-09"),
-        packet_source("T-283", "ozden-s270-upper-bound-2026-11-09"),
+        # The pass of 18 November 2026 (think-i38n) moved 270, T-283's only house, to Mykhailo
+        # Polkovskyi's re-solve of it (T-321), so T-283 is no source here now.
         # The same day's last pass (think-1goz) moved 199, which no pass had adopted, from
         # T-127 to Doğa Özden's issue 938, T-282's packing with one L step (T-284).
         packet_source("T-284", "ozden-s199-upper-bound-2026-11-09"),
@@ -666,9 +667,10 @@ def _sources() -> dict[str, Source]:
         # 268 was T-276's only count, so T-276 is no source here now; T-186 and T-174 still
         # house other counts. Lane L120 of 12 November moved 269 on from T-290, its only count,
         # so T-290 is no source here now.
-        packet_source("T-287", "ozden-s156-upper-bound-2026-11-10"),
-        packet_source("T-288", "ozden-s180-upper-bound-2026-11-10"),
-        packet_source("T-289", "ozden-s268-upper-bound-2026-11-10"),
+        # The pass of 18 November 2026 (think-i38n) moved 156, 180 and 268, T-287's, T-288's and
+        # T-289's only houses, to Mykhailo Polkovskyi's re-solves of the first two (T-315,
+        # T-316) and his further arrangement of the third (T-320), so T-287 to T-289 are no
+        # sources here now.
         # Lane L100 of the same day (think-f65n) moved 179 from T-174 to Doğa Özden's issue
         # 954 (T-291), a new arrangement relative to T-174's packing, found by a band-design
         # search from the tilted squares of the registry's 70; T-174 still houses other counts.
@@ -708,7 +710,8 @@ def _sources() -> dict[str, Source]:
         # The same lane moved 147, first adopted here, from the case record's own house (the
         # Kingbird catalogue's 45-degree packing, verified by T-155's exact ceiling) to his
         # issue 985 (T-302), one band period cut from Evan Daniel's n = 229 packing.
-        packet_source("T-302", "ono-issue985-2026-11-14"),
+        # The pass of 18 November 2026 (think-i38n) moved 147, T-302's only house, to Mykhailo
+        # Polkovskyi's further arrangement of it (T-314), so T-302 is no source here now.
         # Lane L170 (think-i8y9) moved 90, first adopted here, from the 10 x 10 grid to
         # jazivxt's issue 989 (T-303), posted by the account dpre4ai: a window of shifted copies
         # of a crop of Joost de Winter's 157 (T-293), the first packing below the grid at 90.
@@ -727,6 +730,18 @@ def _sources() -> dict[str, Source]:
         packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-309", "joegun-upper-bounds-2026-11-16"),
+        # The pass of 18 November 2026 (think-i38n) moved thirteen counts to Mykhailo
+        # Polkovskyi's issue 1009, one result a count read from one packet: new arrangements at
+        # 210 and 272 from T-174, at 262, first adopted here, from the Kingbird catalogue's
+        # 16 + sqrt(2)/2, at 292 from T-146 and at 295 from T-193; further arrangements of
+        # T-302's packing at 147, T-269's at 260 and T-289's at 268; and re-solves of T-287's,
+        # T-288's, T-283's, T-277's and T-279's at 156, 180, 270, 299 and 307, new results
+        # under the owner's option D of 17 November 2026 (think-b0w5). T-174 and T-193 keep
+        # their other houses.
+        *(
+            packet_source(f"T-{number}", "mishapolk-issue1009-2026-11-16")
+            for number in range(314, 327)
+        ),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -833,7 +848,18 @@ def _sources() -> dict[str, Source]:
 #: JoeGun improved them, Kodaj their finder and JoeGun their improver, each a new arrangement
 #: relative to the house it replaces: T-305 at 127 and T-309 at 305 from T-174, T-306 at 204
 #: from T-268, T-307 at 232 from T-275 and T-308 at 264 from T-186; T-268 and T-275 keep no
-#: house here, and T-174 and T-186 still house other counts.
+#: house here, and T-174 and T-186 still house other counts. Lane w3-pass-1117r (think-i38n)
+#: adopted Mykhailo Polkovskyi's issue 1009 in the pass of 18 November 2026, one result a
+#: count from T-314 at 147 to T-326 at 307: new arrangements at 210 and 272 from T-174, at
+#: 262, first adopted here, from the case record's own house, at 292 from T-146 and at 295
+#: from T-193's algebraic side; further arrangements of T-302's packing at 147, T-269's at
+#: 260 and T-289's at 268, each packing's finder kept; and re-solves of T-287's, T-288's,
+#: T-283's, T-277's and T-279's at 156, 180, 270, 299 and 307, new results under the
+#: owner's option D of 17 November 2026 (think-b0w5), each packing's finder kept. T-146,
+#: T-269, T-277, T-279, T-283, T-287, T-288, T-289 and T-302 keep no house here; T-174 and
+#: T-193 still house other counts. The 262 and 292 certificates pair one to one with Joost
+#: de Winter's packings of issues 1007 and 1006, and the owner answered (think-bx2a): each is
+#: found by de Winter and improved by Polkovskyi, as `adopt_houses.CREDITS` gives them.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -854,17 +880,17 @@ ADOPTED: dict[int, str] = {
     131: "T-174",
     132: "T-292",
     146: "T-187",
-    147: "T-302",
+    147: "T-314",
     153: "T-174",
     154: "T-222",
     155: "T-197",
-    156: "T-287",
+    156: "T-315",
     157: "T-293",
     172: "T-282",
     175: "T-267",
     176: "T-186",
     179: "T-294",
-    180: "T-288",
+    180: "T-316",
     181: "T-174",
     182: "T-243",
     183: "T-220",
@@ -874,7 +900,7 @@ ADOPTED: dict[int, str] = {
     207: "T-174",
     208: "T-174",
     209: "T-174",
-    210: "T-174",
+    210: "T-317",
     211: "T-188",
     227: "T-225",
     228: "T-301",
@@ -888,28 +914,29 @@ ADOPTED: dict[int, str] = {
     241: "T-182",
     258: "T-193",
     259: "T-193",
-    260: "T-269",
+    260: "T-318",
     261: "T-174",
+    262: "T-319",
     263: "T-174",
     264: "T-308",
     267: "T-134",
-    268: "T-289",
+    268: "T-320",
     269: "T-297",
-    270: "T-283",
+    270: "T-321",
     271: "T-219",
-    272: "T-174",
+    272: "T-322",
     273: "T-174",
-    292: "T-146",
+    292: "T-323",
     293: "T-271",
-    295: "T-193",
+    295: "T-324",
     297: "T-299",
-    299: "T-277",
+    299: "T-325",
     302: "T-193",
     303: "T-278",
     304: "T-273",
     305: "T-309",
     306: "T-174",
-    307: "T-279",
+    307: "T-326",
     308: "T-221",
 }
 NUMBERS = tuple(sorted(ADOPTED))
@@ -1144,6 +1171,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-14": frozenset({228, 297}),
     "2026-11-15": frozenset({90, 147, 228}),
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
+    "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
 }
 
 

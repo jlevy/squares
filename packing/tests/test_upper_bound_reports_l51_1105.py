@@ -252,10 +252,13 @@ def test_the_review_decides_each_file_on_both_methods(name: str) -> None:
 #: T-270's and T-272's packings (T-276, T-278), and those two stay as history. The adoption
 #: of 11 November 2026 took 268 on to his issue-945 certificate (T-289), a new arrangement,
 #: and the pass of 16 November 2026 took 204 to JoeGun's issue-1001 certificate (T-306), a
-#: new arrangement relative to T-268's packing, which stays as history.
+#: new arrangement relative to T-268's packing, which stays as history. The pass of 18
+#: November 2026 took 260 and 268 to Mykhailo Polkovskyi's issue-1009 certificates, further
+#: arrangements of T-269's and T-289's packings (T-318, T-320).
 MOVED_LATER = {
     204: ("T-306", "2026-11-16"),
-    268: ("T-289", "2026-11-11"),
+    260: ("T-318", "2026-11-18"),
+    268: ("T-320", "2026-11-18"),
     303: ("T-278", "2026-11-09"),
 }
 
@@ -263,7 +266,8 @@ MOVED_LATER = {
 def test_the_cases_adopted_t267_to_t273() -> None:
     """The pass of 5 November 2026 adopted six of the seven; 260, which the same day's
     earlier pass had moved to T-265, moved to T-269 the next day, since a day's archive
-    holds one prior state a count. A later pass moved 204, 268 and 303 on (`MOVED_LATER`)."""
+    holds one prior state a count. A later pass moved 204, 260, 268 and 303 on
+    (`MOVED_LATER`)."""
     adopted = {
         175: "T-267",
         204: "T-268",

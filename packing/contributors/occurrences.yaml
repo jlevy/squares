@@ -19812,6 +19812,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-147.md
+    record_key: '147'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-148.md
     record_key: '148'
     field: /reported_lower_bound/proved_by/0
@@ -20115,6 +20127,18 @@ occurrences:
   note: Reviewed packing/frontier/n-156.md [156] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-156.md
+    record_key: '156'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-157.md
     record_key: '157'
@@ -20677,6 +20701,18 @@ occurrences:
   note: Reviewed packing/frontier/n-180.md [180] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-180.md
+    record_key: '180'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-181.md
     record_key: '181'
@@ -21455,28 +21491,14 @@ occurrences:
     path: packing/frontier/n-210.md
     record_key: '210'
     field: /reported_upper_bound/found_by/0
-  expected_text: Francisco Couzo
+  expected_text: Mishapolk
   start: 0
-  end: 15
-  label: Francisco Couzo
+  end: 9
+  label: Mishapolk
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - primary-byline
-  contributor_id: francisco-couzo
-- origin:
-    path: packing/frontier/n-210.md
-    record_key: '210'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  contributor_id: evan-daniel
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-210.md
     record_key: '210'
@@ -21494,20 +21516,6 @@ occurrences:
   note: Reviewed packing/frontier/n-210.md [210] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-210.md
-    record_key: '210'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-211.md
     record_key: '211'
@@ -22815,6 +22823,18 @@ occurrences:
     text and credit role are retained.
   contributor_id: trevor-green
 - origin:
+    path: packing/frontier/n-260.md
+    record_key: '260'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-261.md
     record_key: '261'
     field: /reported_upper_bound/found_by/0
@@ -22895,6 +22915,30 @@ occurrences:
   note: Reviewed packing/frontier/n-262.md [262] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-262.md
+    record_key: '262'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-262.md
+    record_key: '262'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-263.md
     record_key: '263'
@@ -23131,6 +23175,18 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-268.md
+    record_key: '268'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-269.md
     record_key: '269'
     field: /reported_upper_bound/found_by/0
@@ -23207,6 +23263,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-270.md
+    record_key: '270'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-271.md
     record_key: '271'
     field: /reported_upper_bound/found_by/0
@@ -23245,19 +23313,14 @@ occurrences:
     path: packing/frontier/n-272.md
     record_key: '272'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Mishapolk
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 9
+  label: Mishapolk
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
-    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
-    retained.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-272.md
     record_key: '272'
@@ -23275,20 +23338,6 @@ occurrences:
   note: Reviewed packing/frontier/n-272.md [272] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-272.md
-    record_key: '272'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-273.md
     record_key: '273'
@@ -23626,37 +23675,26 @@ occurrences:
     path: packing/frontier/n-292.md
     record_key: '292'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Joost de Winter
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 15
+  label: Joost de Winter
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
-    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
-    retained.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-292.md
     record_key: '292'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
+  expected_text: Mishapolk
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 9
+  label: Mishapolk
   role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-292.md [292] /reported_upper_bound/improved_by/0
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel. Keep finder,
-    improver and solver roles distinct.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-292.md
     record_key: '292'
@@ -23726,19 +23764,14 @@ occurrences:
     path: packing/frontier/n-295.md
     record_key: '295'
     field: /reported_upper_bound/found_by/0
-  expected_text: Ryan Xu
+  expected_text: Mishapolk
   start: 0
-  end: 7
-  label: Ryan Xu
+  end: 9
+  label: Mishapolk
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - packet
-  - owner-confirmation
-  contributor_id: ryan-xu
-  note: 'Reviewed packing/frontier/n-295.md [295] /reported_upper_bound/found_by/0
-    span 0:7. The cited construction or method derives from ry-xu issue #432 or its
-    documented refinements; the packet and owner confirmation bind ry-xu to Ryan Xu.'
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-295.md
     record_key: '295'
@@ -23756,38 +23789,6 @@ occurrences:
   note: Reviewed packing/frontier/n-295.md [295] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-295.md
-    record_key: '295'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
-  role: construction-improver
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-295.md [295] /reported_upper_bound/improved_by/0
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel. Keep finder,
-    improver and solver roles distinct.
-- origin:
-    path: packing/frontier/n-295.md
-    record_key: '295'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
 - origin:
     path: packing/frontier/n-296.md
     record_key: '296'
@@ -23894,6 +23895,18 @@ occurrences:
   start: 0
   end: 10
   label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-299.md
+    record_key: '299'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
   role: construction-improver
   disposition: unresolved
   evidence: []
@@ -24291,6 +24304,18 @@ occurrences:
   start: 0
   end: 10
   label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-307.md
+    record_key: '307'
+    field: /reported_upper_bound/improved_by/2
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
   role: construction-improver
   disposition: unresolved
   evidence: []
@@ -33572,6 +33597,122 @@ occurrences:
   end: 9
   label: de Winter
   role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /authors/0
+  expected_text: Polkovskyi
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo,
+    Levy
+  start: 0
+  end: 10
+  label: Polkovskyi
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo,
+    Levy
+  start: 17
+  end: 22
+  label: Ozden
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo,
+    Levy
+  start: 24
+  end: 30
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo,
+    Levy
+  start: 32
+  end: 35
+  label: Ono
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo,
+    Levy
+  start: 37
+  end: 46
+  label: de Winter
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo,
+    Levy
+  start: 48
+  end: 57
+  label: ntumlnoob
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo,
+    Levy
+  start: 59
+  end: 64
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk issue 1009 2026-11-16]'
+    field: /credit
+  expected_text: Polkovskyi after Ozden, Daniel, Ono, de Winter, ntumlnoob, Couzo,
+    Levy
+  start: 66
+  end: 70
+  label: Levy
+  role: prerequisite
   disposition: unresolved
   evidence: []
   note: Identity review pending.

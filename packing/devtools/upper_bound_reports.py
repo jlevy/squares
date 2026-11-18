@@ -1884,6 +1884,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[de Winter s127 issue 1015 2026-11-17]": _import("de-winter-s127-issue1015-2026-11-17"),
     "[de Winter s127 issue 1017 2026-11-17]": _import("de-winter-s127-issue1017-2026-11-17"),
     "[de Winter s127 issue 1020 2026-11-17]": _import("de-winter-s127-issue1020-2026-11-17"),
+    # The intake pass of 17 November (think-i38n): Mykhailo Polkovskyi's issue 1009 at 13
+    # counts from 147 to 307, centre/half-angle certificates beside Witness/v2 corner
+    # files of the same packings, in one repository and one packet.
+    "[Mishapolk issue 1009 2026-11-16]": _import("mishapolk-issue1009-2026-11-16"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
