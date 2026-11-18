@@ -653,3 +653,49 @@ What went wrong along the way:
   among them; the copy kept in `out/custody-inputs/` keeps only its metadata and file
   list, and the patches were not read.
 - **The controls plan.** Two of its rules were wrong for this certificate (F3).
+
+## After the Freeze
+
+Written after the findings were frozen at 08:27:44Z; it changes no finding.
+Its files are in the packet’s
+[`after-freeze/`](../../../packing/resources/web/de-winter-1031-review-2026-11-18/after-freeze/README.md),
+outside both frozen digest lists.
+
+- **The record’s own measure of T-325.** The import of #1009 measured T-325’s
+  contraction margin with `devtools.contraction_margin`
+  (`packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299-own.json`).
+  That receipt, read here and its tool not run, agrees exactly with this review’s: the
+  same side, the same factor ($1 - \lambda^* = 2.000044 \times 10^{-28}$), the same
+  contracted side, the same margin ($3.561215 \times 10^{-27}$) and the same binding
+  pair (71, 140) (`after-freeze/compare-t325-contraction.json`, from
+  `rv1031_compare.py`). Two implementations that share no code give the figure option D
+  needs.
+- **The author’s files, read as data at 08:28:50Z** (`verify_exact.py`, `check_area.py`
+  and `README.md` at the pin, `REGISTRATION.md` at `3293038d`; their digests are the
+  source’s `SHA256SUMS` lines).
+  Neither checker was run.
+  Both do what the issue says.
+  `verify_exact.py` tests each pair whose centres are closer than $\sqrt 2$ on the four
+  edge directions of the two squares, with weak inequalities, so that contact passes;
+  `check_area.py` clips one square of each such pair against the other with closed
+  half-planes (Sutherland–Hodgman, points on a line kept) and requires an intersection
+  of fewer than three vertices or of area exactly 0, and checks each square’s shoelace
+  area is 1. Both build the corners in the witness’s order and both skip the pairs
+  farther apart, which cannot overlap.
+  Both read scalars with `Fraction(v)`, which accepts forms this review’s readers refuse
+  (decimals, spaces, a leading `+`); nothing in these files uses them.
+  One note for the author: `verify_exact.py`’s docstring says it runs the
+  separating-axis test “on all pairs”, while it tests the 714 close pairs, as its output
+  line says. `README.md` and `REGISTRATION.md` restate the issue’s text.
+
+## Note on This Copy
+
+This copy differs from the frozen text
+(`frozen/review-2026-11-18-de-winter-1031.frozen.md`, bound by
+`frozen/findings-frozen-digests.txt`) in three places, added after the findings’ freeze:
+the section After the Freeze, this note and the footer below.
+No finding, verdict or number changes.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
