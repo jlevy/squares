@@ -5,7 +5,7 @@ title: "Import #1018: Joost de Winter's raised lower bound for n = 108 and n = 1
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:54.594Z
-updated_at: 2026-11-18T02:28:20.905Z
+updated_at: 2026-11-18T02:33:04.677Z
 started_at: 2026-11-18T01:19:03.018Z
 ---
 
@@ -34,3 +34,7 @@ started_at: 2026-11-18T01:19:03.018Z
 2026-11-18T02:27Z: checker and controls plan frozen at 87e79188b (pushed to claude/intake-2026-11-18-review-1018 at 02:27:16Z), before any program of this lane read the certificate. Running the plan now.
 
 2026-11-18T02:28:01Z w6-dewinter-1118: correction: the note headed 02:31Z was written at about 02:24Z.
+
+### R-108 (blind review)
+
+2026-11-18T02:38Z: receipts so far as planned (self-test PASS; custody: bundled crate byte-identical to 910b6b12c; PREMISES_HOLD; SCALED_COPY; RUNS_COVER_THE_NET; axis decided, 99/100 refused; poses consistent; sample search found no capture below 1). This lane's own branch and bound decided all 19 sampled rotated directions in 52 CPU-s, so by the plan's rule it is now running the full net (r = 1..400, two processes, priced at about 0.3 CPU-hours).
