@@ -1664,7 +1664,9 @@ def test_the_1018_rescaling_is_read_at_its_upstream_path_and_reproduces_the_prod
     found = {name: case for name, case in cases().items() if case.packet == packet}
     assert list(found) == ["mixed_n108_L1063"]
     case = found["mixed_n108_L1063"]
-    assert case.candidate == census.WEB / packet / "source/lower_n108/evidence/n108_measure.json.gz"
+    assert case.candidate == (
+        census.WEB / packet / "source/lower_n108/evidence/n108_measure.json.gz"
+    )
     assert (case.n, case.side) == (108, "1063/100")
     assert census.net_directions(case) == 401
     assert packet in census.SAME_CRATE_PACKETS
@@ -1698,7 +1700,8 @@ def test_the_1018_replay_entry_is_what_the_census_prints() -> None:
     (committed,) = (item for item in register["evidence"] if item["id"] == generated["id"])
     assert generated == committed
     flat = " ".join(text.split())
-    for wording in ("Hiroaki Hosono's mixed_n108_L1063", "mixed-fetch", "tarball", "clean-room"):
+    stale = ("Hiroaki Hosono's mixed_n108_L1063", "mixed-fetch", "tarball", "clean-room")
+    for wording in stale:
         assert wording not in flat, wording
     assert "applied to Joost de Winter's mixed_n108_L1063" in flat
     assert "replay-comparison.json" in flat

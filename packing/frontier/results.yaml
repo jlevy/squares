@@ -49955,7 +49955,9 @@ results:
       12487/12500 the source chose, on a net its file declares of 401 half-angle tangents of
       step 83/80000, last 83/200, with B(1 + D) = 999996421/1000000000 < 1. The core is not
       1063/1062 times T-216's 9977/10000; the finer net admits it, and the dilation carries
-      none of T-216's coverage. Here the premises, lemma N0 on the declared net, the dilation
+      none of T-216's coverage.
+
+      Here the premises, lemma N0 on the declared net, the dilation
       row by row and the file's regeneration from T-216's by the source's own rule were
       recomputed exactly from the retained bytes, and the author's twelve runs audited:
       every direction once, of reviewed crate source.
@@ -50116,7 +50118,7 @@ results:
 
       The review's other notes: N-1, the certificate proves the strict s(108) > S, of which
       the entry states the >=; N-2, the README at the pin lists a SHA256SUMS the folder
-      lacks, which the next commit, 67fb815, adds; N-4, the net's last direction is needed
+      lacks, which the source's next commit adds; N-4, the net's last direction is needed
       by lemma N0's premise and not by the argument; N-7, the census replay reruns the
       producer's own crate, as this entry's wording says; N-8, the PDF's earlier figure
       10.622222909689 is not reproduced and is no part of the claim. N-2, N-3, N-5 and N-8,

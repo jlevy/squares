@@ -25211,6 +25211,7 @@ urls:
     builds_on: null
     evidence:
     - E-de-winter-1018-n108-report
+    - E-de-winter-1018-n108-sqverify-fast-replay
     artifacts:
     - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/README.md
     - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/acquisition/sources.json
@@ -25224,6 +25225,8 @@ urls:
     - packing/benchmarks/measure-verifier/census-mixed/census.json
     - packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.jsonl.gz
     - packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.control.json
+    - docs/project/reviews/review-2026-11-18-de-winter-1018.md
+    - packing/resources/web/de-winter-1018-review-2026-11-18/README.md
 - path: results.html
   canonical: results.html
   kind: page
