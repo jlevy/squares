@@ -65863,7 +65863,7 @@ evidence:
         >= 1063/100. The census decides more than that: at each of the 401 net directions,
         every closed core of side 12487/12500 centred in format M's per-bin domain captures
         mass at least 1. The source's enlargement carries this coverage to the side S =
-        1700799526134255846599/159999384348528500000 = 10.63003794082972...: the map x -> ux
+        1700799526134255846599/159999384348528500000 = 10.6300379408297...: the map x -> ux
         + h(1 - u), with u = 2Bw(D/2) = 319998768697057/320000086112500 and h =
         707107/1000000, takes a packing of 108 unit squares in a square of side S to 108
         squares of side u with disjoint interiors in the square of side 1063/100, each
