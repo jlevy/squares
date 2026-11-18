@@ -35,16 +35,17 @@ of the same pin and asset.
 
 ## Programs
 
-Every program is the lane’s own, written for this review from the mathematics and the
+Every program is the review’s own, lane r144-1118’s apart from lane r144b-1118’s
+`r144b_compare_killed.py`, written for this review from the mathematics and the
 certificate’s documents (its README, `manifest.json`, `completion-audit.json` and the
 shape of `candidate.json` and `input.txt`). None imports anything from this repository
 or from the source. The programs that decide were written before any of the source’s
-code was read: `code/` was hashed, not opened, until the checker froze. The five written
+code was read: `code/` was hashed, not opened, until the checker froze. The six written
 after that freeze, `r144_run_all.sh`, `r144_mutate.py`, `r144_lanes.py`,
-`r144_release_sums.py` and `r144_summarize.py`, decide nothing about the capture: the
-first drives the frozen `r144_bnb.py`, the second writes a mutated candidate for the
-frozen deciders, and the others compare the record’s lanes, read the release’s sums and
-gather receipts.
+`r144_release_sums.py`, `r144_summarize.py` and `r144b_compare_killed.py`, decide
+nothing about the capture: the first drives the frozen `r144_bnb.py`, the second writes
+a mutated candidate for the frozen deciders, and the others compare the record’s lanes,
+read the release’s sums, gather receipts and compare the killed run with its rerun.
 They ran under CPython 3.14.7, the project interpreter, as `python -I -B` at
 `nice -n 19`, one process at a time, with numpy 2.5.2 on one OpenBLAS thread, and
 `r144_lanes.py` with PyYAML.
@@ -56,17 +57,19 @@ They ran under CPython 3.14.7, the project interpreter, as `python -I -B` at
 | `r144_premises.py` | every exact premise, the custody of the pinned documents, the asset and the 810 bundle files, the 201 records, and the comparisons with Green’s $G_{11}$, Nagamochi’s $1 + \sqrt{105}$ and $\sqrt N$ | the pinned documents, the packet manifest on `main`, the asset and the bundle | `out/premises.json.gz` |
 | `r144_inputs.py` | that each of the 201 checker inputs encloses the recomputed $L$, $B$, $E_j$, $\cos$, $\sin$, $\gamma$ and exactly the multiset of the 14,184 images | the bundle | `out/inputs.json` |
 | `r144_axis.py` | node 0 completely, by the vertex argument, in exact integers and a bounded binary64 matrix product | the candidate | `out/axis-node0*.json` |
-| `r144_bnb.py` | nodes 1 to 200 completely, by a rigorous branch and bound on boxes of centres | the candidate | `out/bnb-sample*.json`, `out/bnb-all/` |
+| `r144_bnb.py` | nodes 1 to 200 completely, by a rigorous branch and bound on boxes of centres | the candidate | `out/bnb-sample*.json`, `out/bnb-all/`, `out/bnb-mutant-segment.json` |
 | `r144_run_all.sh` | nothing itself: drives `r144_bnb.py` over nodes 1 to 200 in ranges, under a CPU budget | the bundle path | `out/bnb-all/` |
 | `r144_poses.py` | nothing: exact captures at 1,608 fixed poses and a seeded search at 24 nodes, compared with 1 and with the source’s least leaf bounds | the candidate and the 201 records | `out/poses.json.gz` |
 | `r144_lanes.py` | which lanes of the case records 563/50 would raise at 122 to 127 | `packing/frontier/n-122.md` to `n-127.md` | `out/lanes.json` |
 | `r144_release_sums.py` | whether the release’s `SHA256SUMS` lists the asset | that file and its API digest | `out/release-sums.json` |
 | `r144_mutate.py` | nothing: writes the second mutated candidate (the heaviest segment orbit removed) for the frozen deciders | the candidate | a scratch directory and `out/mutant-segment.json` |
-| `r144_summarize.py` | nothing: gathers node 0’s decision and the 200 nodes’ receipts into one, with the source’s node counts beside them | the receipts and the 201 records | `out/complete-decision.json` |
+| `r144_summarize.py` | nothing: gathers node 0’s decision and the 200 nodes’ receipts into one, with the source’s node counts beside them | the receipts and the 201 records | `out/complete-decision.json` (stored as `.gz`) |
+| `r144b_compare_killed.py` | nothing: whether the killed run of range 176 to 200 and its rerun printed the same verdict, boxes, least margin and witness at every node the killed run finished | the two runs’ printed lines | `out/killed-range-comparison.json` |
 | `r144_selftest.py` | nothing about the certificate: the controls on the programs above | synthetic measures, and mutated copies of the real candidate and node 37’s input | `out/selftest-*.json` |
 
-`r144_run_all.sh`, `r144_mutate.py`, `r144_lanes.py`, `r144_release_sums.py` and
-`r144_summarize.py` were written after the controls plan, and two frozen programs changed after the checker’s freeze.
+`r144_run_all.sh`, `r144_mutate.py`, `r144_lanes.py`, `r144_release_sums.py`,
+`r144_summarize.py` and `r144b_compare_killed.py` were written after the controls plan,
+and two frozen programs changed after the checker’s freeze.
 Both changes are disclosed in the review’s
 [What This Review Ran](../../../../docs/project/reviews/review-2026-11-18-wand125-linear-n122.md#what-this-review-ran).
 `r144_premises.py` takes its square roots of 2 and 22 to 200 digits instead of 60, since
@@ -100,15 +103,29 @@ $PY $R/programs/r144_poses.py --bundle $BUNDLE \
   --out $R/out/poses.json
 $PY $R/programs/r144_lanes.py --frontier packing/frontier --out $R/out/lanes.json
 $R/programs/r144_run_all.sh $BUNDLE $R/out/bnb-all 7200
+$PY $R/programs/r144b_compare_killed.py --killed $R/out/bnb-all/killed-range-176-200.stdout.txt \
+  --rerun $R/out/bnb-all/range-176-200.stdout.txt --out $R/out/killed-range-comparison.json
+$PY $R/programs/r144_mutate.py --bundle $BUNDLE --kind segment --out-dir /tmp/r144-mutant \
+  --out $R/out/mutant-segment.json
+$PY $R/programs/r144_axis.py --bundle /tmp/r144-mutant --out $R/out/axis-node0-mutant-segment.json
+$PY $R/programs/r144_bnb.py --bundle /tmp/r144-mutant --angles 37,180 \
+  --out $R/out/bnb-mutant-segment.json
 $PY $R/programs/r144_summarize.py --axis $R/out/axis-node0.json --ranges $R/out/bnb-all \
   --bundle $BUNDLE --out $R/out/complete-decision.json
 ```
+
+`r144_run_all.sh` skips every range with a `.done` file and runs any other range from
+its first node. A container restart at about 06:59Z killed range 176 to 200 after node
+193, before it wrote its `.done` file or its time; lane r144b-1118 kept the lines it had
+printed as `out/bnb-all/killed-range-176-200.stdout.txt` and ran the driver again from
+07:05:32Z, which ran that range from scratch and left the seven finished ranges as they
+were.
 
 `r144_release_sums.py` takes the release’s `SHA256SUMS`, downloaded beside the asset,
 and the digest and update time that
 `gh api repos/wand125/square-packing/releases/tags/square-lower-bounds-v1` gives for it.
 Each program exits 0 and prints its verdict.
-Two receipts over 1,000 lines are kept as `gzip -9n` (table below), as the packet rule
+Three receipts over 1,000 lines are kept as `gzip -9n` (table below), as the packet rule
 in [`packing/resources/README.md`](../../README.md) asks; a rerun writes them plain.
 
 ## What They Printed
@@ -126,7 +143,13 @@ in [`packing/resources/README.md`](../../README.md) asks; a rerun writes them pl
 | `r144_poses.py` | `NO_COUNTEREXAMPLE_FOUND`; methods A and B agree at all 1,608 fixed poses | 53 |
 | `r144_lanes.py` | raises the reported lane at 122 to 125 and the verified lane at 122 to 126 | 0.1 |
 | `r144_release_sums.py` | `SUMS_DO_NOT_LIST_ASSET`, 465 entries | 0.1 |
-| `r144_run_all.sh` | FULL_RUN_PLACEHOLDER | FULL_RUN_CPU |
+| `r144_run_all.sh` (nodes 1 to 200, eight ranges) | `NODE_DECIDED` at all 200; least discharged margin $2.8 \times 10^{-10}$ (node 113); at most 264 contributing images per box | 2,534 |
+| the run of range 176 to 200 that the restart killed | `NODE_DECIDED` at nodes 176 to 193 before it was killed | about 600 |
+| `r144b_compare_killed.py` | `KILLED_RUN_REPRODUCED`, 18 of 18 nodes | 0.1 |
+| `r144_mutate.py --kind segment` | `MUTANT_WRITTEN`, primitive 627 removed (mass $1.1914$) | 0.1 |
+| `r144_axis.py`, the second mutant | `AXIS_REFUSED`, exact witness $0.85744567027\ldots$ | 0.7 |
+| `r144_bnb.py`, the second mutant, nodes 37, 180 | `NODE_REFUTED` at each, exact witnesses $0.99494$ and $0.97258$ | 29.5 |
+| `r144_summarize.py` | `ALL_201_NODES_DECIDED`, 71,418,450 boxes against the source’s 71,476,052 nodes | 0.1 |
 
 The first `r144_premises.py` run printed `PREMISES_FAIL`, with one failed check: at 60
 digits, its enclosure of $G_{11}$ could not separate it from the source’s bound.
@@ -138,8 +161,10 @@ The 200-digit rerun holds; nothing else failed along the way.
 | --- | --- | --- | --- |
 | `out/premises.json.gz` | receipt | `40cb2b3ee5566e5730e50935562de43ad56ee927` | `57918dcc47f892d96f2f18921f46cc4961e580d27a1cc28bea4c73317192a6b3` |
 | `out/poses.json.gz` | receipt | `1a6a1fc5076a8ebd93d32941a9c49b9598a3abd6` | `cac19bdf026e914dcc8d3dff2638968e19c617df1327a4106770d2370bbc0d88` |
+| `out/complete-decision.json.gz` | receipt | `a07f40d8061db5c28e2128f14b6dadef1f40d2ac` | `b07d376b0a15f17a4f0527be0a622c9e64e4c4f29eb9133d436639b226d4ecc4` |
 
-Restore a plain copy with `gunzip -k out/premises.json.gz out/poses.json.gz`.
+Restore a plain copy with
+`gunzip -k out/premises.json.gz out/poses.json.gz out/complete-decision.json.gz`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

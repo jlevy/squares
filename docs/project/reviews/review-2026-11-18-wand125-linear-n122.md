@@ -36,13 +36,15 @@ share no code with it:
 
 - node 0 by a vertex argument in exact integers: the infimum of the capture over the
   centre domain is exactly $1.0039577044080\ldots$;
-- nodes 1 to 200 by a rigorous branch and bound of this review’s own, FULL_SUMMARY;
+- nodes 1 to 200 by a rigorous branch and bound of this review’s own, every one of them
+  decided, in 71,418,450 boxes against your checker’s 71,476,052 nodes;
 - every exact premise; that each of the 201 checker inputs encloses exactly the
   candidate’s 14,184 images; and the comparison with Green’s $G_{11}$, which your bound
   exceeds by more than $0.0307191$, as your README says (that comparison’s precision was
   raised after the freeze, as disclosed below).
 
-Both deciders refuse the 99/100 mutant with exact witnesses.
+Both deciders refuse two mutants with exact witnesses: every mass times 99/100, and the
+heaviest segment orbit (mass $1.19$) removed.
 The least capture found in a seeded search at 24 angles is $1.00176$ (angle 196); the
 `lower` fields of your records, down to $1 + 4.1 \times 10^{-10}$, are where the branch
 and bound stopped, not the margins.
@@ -84,9 +86,10 @@ $11.7426406871$ at $n = 126$.
 | 126 | T-180, $11.31332\ldots$ | Karakuş, $11.23546\ldots$ (+0.02454) | verified only |
 | 127 | T-180, $11.37167\ldots$ | Karakuş, $11.28193\ldots$ | neither |
 
-The comparisons are exact: $563/50 - G_{11} = 0.0307191244486\ldots$, by 200-digit
-enclosures of $\sqrt 2$ and $\sqrt{22}$, and $563/50 - (1 + \sqrt{105}) =
-0.0130492340404\ldots$, decided by squaring
+The comparisons are exact.
+The gain over $G_{11}$ is $0.0307191244486\ldots$, by 200-digit enclosures of $\sqrt 2$
+and $\sqrt{22}$; the gain over $1 + \sqrt{105}$ is $0.0130492340404\ldots$, and its sign
+is decided by squaring
 ([`out/premises.json.gz`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/premises.json.gz));
 and $(563/50 - 1/2)^2 > N - 11 + 1/4$ for $N \le 126$ but not at 127, by squaring
 ([`out/lanes.json`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/lanes.json),
@@ -120,9 +123,11 @@ receipts; the source’s `unified_linear_verify.cpp` in full, and the lines of
 `unified_linear_verify.py`, `unified_measure.py`, `README.md`, `manifest.json`,
 `ASSET.json` and `completion-audit.json` that this review cites, to check each citation;
 T-144’s register entry and `E-wand125-linear-n122-1126-report` on `main`; the front
-matter of `n-122.md`, `n-126.md` and `n-127.md`; and, as format models, the file lists
-of PRs #1013 and #1014, the freeze statements and closing note of the review of #1009,
-and the headings of the review of 11 November.
+matter of `n-122.md`, `n-126.md` and `n-127.md`; as format models, the file lists of PRs
+#1013 and #1014, the freeze statements and closing note of the review of #1009, and the
+headings of the review of 11 November; and, for the house conventions, the retained-data
+rule, the flowmark and lint exclusions, `epistemics.md`’s rung tables, and the runbook’s
+stage 4 and its pull-request label rule.
 
 **A departure from the brief.** The coordinator’s brief allowed the source’s checker to
 be read as data only after the findings froze.
@@ -178,11 +183,12 @@ sides along $(c_j, s_j)$ and $(-s_j, c_j)$.
    value at $z = D/2$ is $63985225828447/64000068890000$, a clearance of about
    $2.3 \times 10^{-4}$.
 5. **Centre domain.** The core lies in the open interior of $gS$, which lies in $K$, so
-   the core lies in $K$ and its centre in $D_j = \{c : Q_j(c) \subseteq K\} =
-   [L/2 - E_j, L/2 + E_j]^2$, $E_j = L/2 - b(c_j + s_j)$, since the core reaches
-   $b(c_j + s_j)$ from its centre along each axis.
-   $E_j$ runs from $4.92452$ (node 200) to $5.13115$ (node 0). The domain is the core’s
-   own, so no bin-end estimate of the unit square’s reach is needed.
+   the core lies in $K$ and its centre in the set $D_j$ of centres $c$ with
+   $Q_j(c) \subseteq K$, which is $[L/2 - E_j, L/2 + E_j]^2$ with
+   $E_j = L/2 - b(c_j + s_j)$, since the core reaches $b(c_j + s_j)$ from its centre
+   along each axis. $E_j$ runs from $4.92452$ (node 200) to $5.13115$ (node 0). The
+   domain is the core’s own, so no bin-end estimate of the unit square’s reach is
+   needed.
 6. **Capture.** The certificate asserts $\mu(Q_j(c)) \ge 1$ for every $j$ and every
    $c \in D_j$. Then $g^{-1}Q_j(c)$, $c$ the centre of $gS$, is a closed square in the
    open interior of $S$ with the same measure, by invariance.
@@ -222,7 +228,8 @@ here. Step 6 at 201 angles is the whole computational content.
 
 ## What This Review Ran
 
-Every program is this lane’s own, kept with its outputs in the packet’s
+Every program is the review’s own, lane r144-1118’s apart from lane r144b-1118’s
+`r144b_compare_killed.py`, kept with its outputs in the packet’s
 [`programs/`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/README.md).
 They use CPython 3.14.7 (`fractions`, `hashlib`, `json`, `tarfile`), numpy 2.5.2 on one
 OpenBLAS thread and, in `r144_lanes.py`, PyYAML, and import nothing from this repository
@@ -238,8 +245,10 @@ certificate.
 | `r144_inputs.py` | the 201 inputs encode the candidate | `INPUTS_ENCODE_CANDIDATE` | 3.9 |
 | `r144_axis.py` | node 0, completely | `AXIS_DECIDED` | 0.5 |
 | `r144_axis.py --factor 99/100` | the mutant’s node 0 | `AXIS_REFUSED`, exact witness | 0.5 |
-| `r144_bnb.py`, nodes 1 to 200 | nodes 1 to 200, completely | FULL_TABLE_RESULT | FULL_TABLE_CPU |
+| `r144_bnb.py`, nodes 1 to 200, through `r144_run_all.sh` | nodes 1 to 200, completely | `NODE_DECIDED` at all 200 | 2,534, and about 600 in the run the restart killed |
 | `r144_bnb.py --factor 99/100`, nodes 37, 180 | the mutant | `NODE_REFUTED` at both, exact witnesses | 0.2 |
+| `r144_mutate.py`, then `r144_axis.py` and `r144_bnb.py` (nodes 37, 180) on its output | the second mutant | `AXIS_REFUSED`; `NODE_REFUTED` at both; exact witnesses | 30 |
+| `r144_summarize.py`, `r144b_compare_killed.py` | nothing (receipts) | `ALL_201_NODES_DECIDED`; `KILLED_RUN_REPRODUCED` | 0.1 |
 | `r144_poses.py` | poses | `NO_COUNTEREXAMPLE_FOUND`, 1,608 fixed poses, 24 searched angles | 53 |
 | `r144_lanes.py`, `r144_release_sums.py` | the lanes; the release’s sums | above; M-1 | 0.2 |
 | `r144_selftest.py` | nothing (controls) | `SELFTEST_PASS`, synthetic and real | 8.8 |
@@ -250,13 +259,26 @@ wide, and your bound on $G_{11}$ lies inside it.
 At 200 digits your bound exceeds $G_{11}$ by $1.42 \times 10^{-90}$, as 90-digit roots
 rounded up would give, and the check holds; nothing else changed.
 `r144_poses.py` gained `--draw`, which draws the six seeded search nodes.
-Five programs were added after the plan, none of which decides a capture:
+Six programs were added after the plan, none of which decides a capture:
 `r144_run_all.sh`, which runs the complete decision with the frozen `r144_bnb.py`;
 `r144_summarize.py`, which gathers its receipts; `r144_mutate.py`, which writes the
-second mutated certificate for the frozen deciders; `r144_lanes.py`; and
-`r144_release_sums.py`. The plan priced the complete run without running it, and the
-coordinator approved it at 06:13Z, after the five-node sample had measured its cost (one
-process, `nice -n 19`, a stop at 2 CPU-hours).
+second mutated certificate for the frozen deciders; `r144_lanes.py`;
+`r144_release_sums.py`; and, by lane r144b-1118, `r144b_compare_killed.py`, which
+compares the killed run’s printed lines with the rerun’s. The plan priced the complete
+run without running it, and the coordinator approved it at 06:13Z, after the five-node
+sample had measured its cost (one process, `nice -n 19`, a stop at 2 CPU-hours).
+
+**The restart, disclosed.** A container restart at about 06:59Z killed the complete run
+in its last range, 176 to 200, after it had printed node 193. That range had written no
+`.done` file and its timer no time, and the driver runs such a range again from scratch,
+so on the coordinator’s word lane r144b-1118 ran it again with the same driver, from
+07:05:32Z to 07:29:15Z (one process, `nice -n 19`). The 18 nodes the killed run had
+finished came out the same in verdict, boxes, least margin and witness
+([`out/killed-range-comparison.json`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/killed-range-comparison.json),
+from `out/bnb-all/killed-range-176-200.stdout.txt`), as a deterministic program’s
+should. The killed run’s CPU, 569 seconds over those 18 nodes plus the part of node 194
+it ran, about 600 in all by its per-node times (its timer died with it), is counted in
+the totals.
 
 **Premises.** The reader is strict: no float token, no duplicate key, every number `p`,
 `p/q` or (for `L` and `B`) a plain decimal, exactly the keys `schema`, `n`, `L`, `B`,
@@ -305,6 +327,7 @@ the least exact corner value below is the infimum itself.
 | Where | $X = Y = 7.76834931$, limits from below in both |
 | Exact capture at a pose inside that cell (methods A and B equal) | $1.0039577874\ldots$ |
 | The 99/100 mutant | refused: rigorous least $0.99391812736$, exact witness $0.99391820956$ |
+| The second mutant (the heaviest segment orbit removed) | refused: rigorous least $0.85744566944$, exact witness $0.85744567027$ |
 
 So node 0 is decided by an implementation that shares nothing with yours, and its margin
 is $3.96 \times 10^{-3}$, where your record’s least leaf bound there is
@@ -325,15 +348,33 @@ errs by less than the shrink divided by the direction component; a rectangle cou
 full mass only when its four corners are inside, and otherwise its exact share against
 the exact $T$, by rational clipping.
 Masses are rounded down and the sum divided by $1 + 2 \times 10^{-12}$, which covers
-$k u$ for the at most FULL_MAXTERMS terms a box held.
+$k u$ for the at most 264 terms a box held.
 A box not discharged is also evaluated at its centre, exactly if a binary64 estimate
 there falls below $1 - 10^{-9}$, and a capture below one would refute the node.
 
-FULL_RUN_PARAGRAPH
+All 200 nodes were decided, each `NODE_DECIDED`: `out/bnb-all/` holds the eight ranges,
+and
+[`out/complete-decision.json.gz`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/complete-decision.json.gz)
+gathers them with node 0 (`ALL_201_NODES_DECIDED`). The trees hold 71,418,450 boxes,
+35,811,625 of them discharged, against your checker’s 71,476,052 nodes over the same
+angles: 0.973 to 1.034 times your record’s count at each node, median 0.996. They go at
+most 22 halvings below a cell of the starting grid, clip 3,423,274 rectangle shares
+exactly, and never have more than 264 images contributing to one box.
+The least discharged margin is $2.8 \times 10^{-10}$, at node 113. At node 37 the tree
+here discharged 53,278 boxes against your 53,272 leaves.
+The run took 2,534 CPU-seconds by the driver’s timer, 2,457 of them inside the nodes,
+one process at `nice -n 19`.
 
 The 99/100 mutant is refuted at nodes 37 and 180, at the first box whose centre estimate
 fell below $1 - 10^{-9}$: exact captures $0.99953403$ and $0.99910313$ at
-$(5.74367, 6.40593)$ and $(5.76951, 6.08703)$.
+$(5.74367, 6.40593)$ and $(5.76951, 6.08703)$. The second mutant removes the heaviest
+segment orbit, primitive 627, a horizontal segment at height $1.9952$ of mass $1.1914$,
+or $0.1489$ per image
+([`out/mutant-segment.json`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/mutant-segment.json)).
+The branch and bound refutes it at nodes 37 and 180, with exact captures $0.99494280$
+and $0.97258041$ at $(8.78314, 10.36466)$ and $(8.82438, 10.05595)$
+([`out/bnb-mutant-segment.json`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/bnb-mutant-segment.json)),
+and the vertex argument refuses its node 0 (table above).
 
 **Poses and a seeded search.** At every node the four corners of the quadrant and four
 seeded poses were evaluated exactly by both methods: 1,608 poses, no disagreement, the
@@ -353,10 +394,11 @@ The import packet’s two-angle sample ran your checker on this host at 0.776 of
 recorded times, which prices a complete replay at about 11.2 CPU-hours, plus about 170
 CPU-seconds for the route’s control at angle 37; your own replay of 7 h 41 min at three
 workers bounds it near 23 CPU-hours.
-That replay is the replay lane’s. This review’s complete decision cost FULL_CPU_HOURS
-CPU-hours on one core, because each of its boxes evaluates only the images within reach
-of its cell of the $32 \times 32$ starting grid, where your checker evaluates all 14,184
-at every box (N-3).
+That replay is the replay lane’s. This review’s complete decision cost 0.70 CPU-hours on
+one core (2,534 CPU-seconds; the run the restart killed spent about 600 more), because
+each of its boxes evaluates only the images within reach of its cell of the
+$32 \times 32$ starting grid, where your checker evaluates all 14,184 at every box
+(N-3).
 
 **Controls on this review’s programs.** The controls plan was frozen with the checker,
 and each control fails an always-accept or an always-refuse checker:
@@ -422,17 +464,18 @@ confirm the certificate as reproduced with the producer’s code.
 | --- | --- | --- |
 | Your `unified_linear_verify.cpp` (`0249726a…`), your runs | the quadrant at each of the 201 angles, one run each, records retained | its inputs and the premises above; the compiler; your machine; that the records are the runs’ |
 | A replay by the T-080 route (the replay lane) | the same, rerun here | the same program; this host |
-| This review’s programs | every exact premise; the inputs; node 0 by the vertex argument; nodes 1 to 200 by the branch and bound; 1,608 poses and a search | CPython 3.14.7’s `fractions` and integers; numpy’s binary64 under the stated bounds; its own code |
+| This review’s programs | every exact premise; the inputs; node 0 by the vertex argument; nodes 1 to 200 by the branch and bound; 1,608 poses and a search | CPython 3.14.7’s `fractions` and integers; numpy’s and OpenBLAS’s binary64 under the stated bounds, which hold in any summation order; its own code |
 
 This review’s programs share no code with your checker or its driver: they were written
 from the mathematics and the certificate’s documents and frozen before any of your code
 was opened. Both branch and bounds bound points and segments by the same trimmed core,
 the natural bound, and found nearly the same trees: at node 37, 53,278 discharged boxes
-here against your 53,272 leaves.
-The rectangles are handled differently (exact clipping against the trimmed core here, a
-centre value and a derivative bound in yours), and node 0 here is decided by a different
-argument. All share the mathematics (steps 1 to 7 and the quarter turn) and the reading
-of the format, which this review checked against the inputs row by row.
+here against your 53,272 leaves, and over nodes 1 to 200, 0.973 to 1.034 times your node
+counts. The rectangles are handled differently (exact clipping against the trimmed core
+here, a centre value and a derivative bound in yours), and node 0 here is decided by a
+different argument.
+All share the mathematics (steps 1 to 7 and the quarter turn) and the
+reading of the format, which this review checked against the inputs row by row.
 Authorship overlaps at the system family: the source’s commit names Claude as co-author,
 and this review is a Claude agent with its own prompt and files.
 
@@ -472,16 +515,17 @@ Nothing to change.
 **N-2 — note. The `lower` fields are not margins.** The records’ least `lower` is
 $1 + 4.07 \times 10^{-10}$ (node 180). A branch and bound stops splitting as soon as a
 box’s bound reaches one, so its least leaf bound can sit just above one whatever the
-true margin: this review’s own tree at node 180 ended at $1 + 6.0 \times 10^{-9}$. The
-least captures found here are $1.0039577$ at node 0 (exact, over the whole domain) and
+true margin: this review’s own tree at node 180 ended at $1 + 6.0 \times 10^{-9}$, and
+its least over nodes 1 to 200, at node 113, at $1 + 2.8 \times 10^{-10}$. The least
+captures found here are $1.0039577$ at node 0 (exact, over the whole domain) and
 $1.0017586$ over the search.
 
 **N-3 — note. The checker’s cost is linear in the measure.** Every box evaluates every
 image (`unified_linear_verify.cpp` lines 109 to 111, 128 and 141): 14,184 per box over
 73.7 million boxes. A core of side about one meets only the images within its reach (at
-most FULL_MAXTERMS contributed to any box here), so a spatial cull pays: this review’s
-numpy branch and bound, which culls by its starting grid’s cells, decided nodes 1 to 200
-in FULL_CPU_HOURS CPU-hours, against 14.4 hours of checker time in your records.
+most 264 contributed to any box here), so a spatial cull pays: this review’s numpy
+branch and bound, which culls by its starting grid’s cells, decided nodes 1 to 200 in
+0.70 CPU-hours, against 14.4 hours of checker time in your records.
 
 **N-4 — note. The README compares with $\sqrt N$.** Line 8 says the bound improves on
 $\sqrt N$ at 122 to 126. True, but the record’s comparisons are Green’s report (122 to
@@ -545,9 +589,9 @@ whole of step 6, apart from the source’s code.
 The runbook counts a first-party implementation as the replay when its soundness has
 been adversarially reviewed and its independence recorded, and asks that two mutated
 certificates be refused by every checker that accepted the original, with a test that
-holds them (stage 4, “The replay”). Here both deciders refused two: every mass times
-99/100, and MUTANT2_SUMMARY. What the decision still needs is the review of its
-soundness, its registration in
+holds them (stage 4, “The replay”). Here both deciders refused two, each with exact
+witnesses: every mass times 99/100, and the candidate without its heaviest segment
+orbit. What the decision still needs is the review of its soundness, its registration in
 [`verifiers.yaml`](../../../packing/frontier/verifiers.yaml) with its independence
 record, and the test; with those it supports `V3/C3`: confirmed, independently
 re-implemented (clean-room), by a Claude agent, a system family the producer also used.
@@ -571,10 +615,11 @@ cases (S5). The rationale’s “five counts” for the reported lane should rea
 
 The packet’s
 [README](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/README.md)
-gives every command, what each printed and the digests of the two compressed receipts.
+gives every command, what each printed and the digests of the three compressed receipts.
 The programs need the source at `a9f76c3` and the asset at its digest, fetched as above.
-The review’s compute, the complete decision included, was FULL_TOTAL_CPU CPU-hours, at
-`nice -n 19` and one process at a time.
+The review’s compute was about 0.93 CPU-hours, at `nice -n 19` and one process at a
+time: about 195 CPU-seconds for the plan’s controls and samples, 2,534 for the complete
+decision, about 600 lost to the restart, and 30 for the second mutant.
 
 ## Comparison With Earlier Reviews
 

@@ -1,0 +1,73 @@
+# Lanes r144-1118 and r144b-1118 (bead think-rxs3) findings, frozen at 2026-11-18T07:35:35Z, before the 2 October T-080 review (review-2026-10-02-wand125-linear-certificates-and-n76.md), the 14 October T-179 review (review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md), the 11 October final reviews (review-2026-10-11-final-lower-bounds.md and review-2026-10-11-final-asymptotic-and-grading.md), the 18 October n = 108 reviews, the replay lane w8's branch, receipts or notes (beyond think-nd7g's notes of 10 to 12 October, which tbd show printed and the review discloses), and the import packet's receipts/ and reported-n122.json were read.
+# Verify from packing/resources/web/wand125-linear-n122-review-2026-11-18/: sha256sum -c frozen/findings-frozen-digest.txt
+# Read between the checker's freeze and this one, by lane r144-1118: the source's code/unified_linear_verify.cpp in full, unified_linear_verify.py, replay_linear_bundle.py, unified_measure.py lines 1 to 120, replay_angle in unified_linear_full_verify.py and interval in mixed_rotated_verify.py, all as data; the register entries T-144 and T-180, the evidence entry E-wand125-linear-n122-1126-report, the front matter of packing/frontier/n-122.md to n-127.md; the release's current SHA256SUMS and its API record; for the house conventions, PR #1014's description, the #1014 packet's frozen review against its live copy, packing/resources/README.md's retained-data rule, tests/test_retained_data.py, pyproject.toml's lint exclusions, one review program's entry in verifiers.yaml, devtools/render_document_map.py's head, the Makefile's flowmark lines.
+# Read by lane r144b-1118 after resuming at 07:04Z: its two briefs and the bead think-rxs3; this branch, its draft and receipts, the killed run's partial receipts; the source's unified_linear_verify.cpp in full and the cited lines of unified_linear_verify.py, unified_measure.py, README.md, manifest.json, ASSET.json and completion-audit.json, to check each citation; T-144's register entry and E-wand125-linear-n122-1126-report; the front matter of n-122.md, n-126.md and n-127.md; the file lists of PRs #1013 and #1014, the freeze statements and closing note of the review of #1009, the headings of the review of 11 November, packing/resources/README.md's retained-data rule and the head of tests/test_retained_data.py, the head of .flowmarkignore, epistemics.md's rung tables and the runbook's stage 4 and PR-label rule.
+# Run after the checker's freeze: RC1 to RC6 of the plan; the coordinator-approved complete decision of nodes 1 to 200 (r144_run_all.sh, added after the plan, as are r144_lanes.py, r144_release_sums.py, r144_mutate.py and r144_summarize.py), whose last range, 176 to 200, a container restart killed after node 193 and lane r144b-1118 re-ran from scratch; the second mutant (r144_mutate.py) through the frozen deciders; r144_premises.py changed after the freeze (200-digit roots), r144_poses.py gained --draw.
+# the frozen review text, every program and every receipt it cites:
+5b7329b4c76ead065d26a61bf5da85c83f2eb0769014e40fbb23fd1f0d71e09e  frozen/review-2026-11-18-wand125-linear-n122.frozen.md
+25d5be5246f4f931b8526270c7eb707a5f12b90095ce3f16897ade72aa9377ba  frozen/checker-frozen-digests.txt
+c9abd5ed0703c0b551f8c9a7276a7bb5b485eb43e1440d057d3a6f79cf90ef4b  programs/r144_axis.py
+5ffd26862cdb051e02d8c7e6dd0b29100dda1054b1f491af0b28538043d15f8f  programs/r144_bnb.py
+bfc184502cb0ca44ae00837212fde89ee3a45ea7c652c8995139574609e0897a  programs/r144_common.py
+293491694fca82106443c423df70e23330c198479bbe05cd131e92bc12b39be0  programs/r144_exact.py
+65249046e7e7475e416780d7827f25e9e19b62459dcecb43a49ffab6045847a8  programs/r144_inputs.py
+1aabd95892da83ae158c4eac58eee2ebfbc010fcb9e8d076d43e8b1153bcc4e5  programs/r144_lanes.py
+87299cc55017c33de032a9043d2a34629409a8609a2466bf238fdddc9f0a7f49  programs/r144_mutate.py
+ccbbee2de6468de1faf083ab4869570472abc68c2ada795f0e9e604cf7c0ec3e  programs/r144_poses.py
+202f10dc3fced3a87bd1647723b18fe8cf21e484af6c29842a075adce0414909  programs/r144_premises.py
+a245e436288756bbd7b95935a121cc9062ea7f4cb0547cf33e9eacbe2b44956b  programs/r144_release_sums.py
+8cc1ce8254437be9cd9f153845ef064c310c3d8d84c30ae063e35f03eae14bf9  programs/r144_selftest.py
+3ac97c90556e60a09035cbd23ff75fac7b87e7a5912e4951eeee1e8a35c31549  programs/r144_summarize.py
+ec1463a20b3bc0d16dc57906505e5088ba68d7d8e7a8793c467c90eae1ec838e  programs/r144b_compare_killed.py
+e3a1419a876c5e57af54c5ed35908932e8490f773befdf503a58ce69033c7ae5  programs/r144_run_all.sh
+fbc87af1887d3671db8ebadd1175991aeadac9ec7d19c6df7eae640e17f98cb3  programs/controls-plan.json
+8519aa51fdc700f4e558880aea17a69a809a4674f791051b631e8110e5e061de  out/axis-node0-99_100.json
+3a50d4db782731c6a4a9f3f294fbcd1c54e5543b366d53313985fc324ac2b541  out/axis-node0-mutant-segment.json
+1c8727224ebcdc13880cbd8338c0472e80153c0dff2ebaf38e2a8396b7e89fb3  out/axis-node0.json
+d1c22dba98dfea3c5b0ccc31a47b1bfd41419d250d8e75d8f1687b90ef23469b  out/bnb-mutant-segment.json
+7517c03d256a30e3f9d19f85c00fe294316e777c3e47ec1bc5a535b105a180e2  out/bnb-sample-99_100.json
+33101fe5f9dffde9fa1b1ed72dcc7db68f5fa6b5d7c5b39d814e76398ea01a96  out/bnb-sample.json
+15998f64e6389f647e32c659ba20e1708b24edcbdd589f3ff27ec65f72971f30  out/inputs.json
+1c24235d271de68c5e6eadc5e2ce4f776302c777e4509570f01f9eedebbedfc6  out/killed-range-comparison.json
+1944f88a9b4fe387980aeea58af22befbb5c52b7fdc6e2d5ee45b9188237bed4  out/lanes.json
+c395f06637f4d81053e49851ec82d4745994dcc8dc5ffe29990fc975cb7ecf20  out/mutant-segment.json
+1f77d8b773ed73ea0e4b5fc1c3f3cb000a37470d572a026c20282d7becfaf194  out/release-sums.json
+736a9d62e508edefdc6f71cdfaea00657d3bed001d76c223d11f54a3d17e3fc0  out/selftest-real.json
+325bc899c74c6961a9907f8ff7b14fe5283cbdee1979144e0b706ea60fd33eda  out/selftest-synthetic.json
+363585f49ed59d4a89911c91444b3e2f3edc608dbb43f3873ef5efaec9855b3d  out/complete-decision.json.gz
+2344f60d9168489f28ad13aebbb2afe2926a84d4da4a4f6a877f6b28ca622466  out/poses.json.gz
+f00e47f8c380ee4fe7b0d0f633e195b036ba54be47df6077927e7761a2940132  out/premises.json.gz
+50f597a84d654450664882292c013b2ec07a6dab241102f5c1e824f5dc5eb748  out/bnb-all/range-001-025.json
+29bbce3512f9c17127c3503abc26a98f7cb08dde43375c2428748db8334f05cd  out/bnb-all/range-026-050.json
+924824634aab9d505ba9c866aa4563267545eca45f246c90e7138d66661f56be  out/bnb-all/range-051-075.json
+afb401fe173e42ddfd0565c75b355b1a162cf38901f8ad54a9442a6cae142605  out/bnb-all/range-076-100.json
+353d091a731e9e3eef94f564d0ee86a793ab806e5f8ec9672505fbdbf2addc41  out/bnb-all/range-101-125.json
+e10db0b2f69fed5817b45c80a553c14a2b6175247bb258009068308174b86856  out/bnb-all/range-126-150.json
+a263ce15fc16843f28b51d517796ad5af92f20c2a5e5660175f5ba207e3769a4  out/bnb-all/range-151-175.json
+eb712390333c0813da562b1535403c3bd5d03c80476ce40e885fde7a17d66933  out/bnb-all/range-176-200.json
+ad4f0266062f4b1714be778af2380c01cf302b7f3fd2f2a3570ef74a617a6b44  out/bnb-all/killed-range-176-200.stdout.txt
+48e82ae58e2650ece62bc5ad2eec1ffc3079e43d0b05b10c8cb8f47992d5e605  out/bnb-all/range-001-025.stdout.txt
+387a412569d3ecdc19f46b562087fd520b0099e8d1d71fca19e8ba98004a41be  out/bnb-all/range-026-050.stdout.txt
+683b6c7be11e2537f57d5f49c579aea56deec90a4fbd775a9edf078b14914cec  out/bnb-all/range-051-075.stdout.txt
+d83e1ad22ba7a309b1e0a325191c94a2d91c503557a6149920fb803a3f327e92  out/bnb-all/range-076-100.stdout.txt
+3292ffb1884d4267f4f363bc7d0e17706fb8ba5f1b7866df1357db17cc013396  out/bnb-all/range-101-125.stdout.txt
+d47da0ade7f8fc798bc0a99c430e27f495fc6bb7fa22cb3de5a139ce08c9ca91  out/bnb-all/range-126-150.stdout.txt
+cf5285c27ed508e2f71be6375f67ef52c0daff617fa7f741c9b3f9d4fc8b19b7  out/bnb-all/range-151-175.stdout.txt
+46c7276ea8ef22ef8784e5227f2bea9cf1ebbc9996cba176fbee295a2df51777  out/bnb-all/range-176-200.stdout.txt
+919ba5bd8e9971679b066f4c78d1c335d340c60bd387aa9ff1b7c5ebca3fad9c  out/bnb-all/range-001-025.time
+c9aeaeffe088aaaab7d31c6e4ea4c4d5f554042b73e7d482d5f8f393f766080d  out/bnb-all/range-026-050.time
+29906974cc41c3698657c27935a9653d508dbb5df6c0c44b3f9d22bbee396d1d  out/bnb-all/range-051-075.time
+2324c900d2c7dd7b1a01448f14058dc7448f8e0b784c9e0172e9838636a62571  out/bnb-all/range-076-100.time
+d593361b54679f2ad27153385ec6aee38f8d9e81ae0c585caa419827895d0ab2  out/bnb-all/range-101-125.time
+2a840cf04cb4c2b1e66ccd7e35556a28ddead906508120a0ccd198843f2330fe  out/bnb-all/range-126-150.time
+1a7bbcf7a97c247139b197c061c774aaaee4711f60aa2df0d0fb25f49c3a1e33  out/bnb-all/range-151-175.time
+e83d7302065cf7b6c25736a50122ee852c93ba34d9ccd1f4b8465c64a770d937  out/bnb-all/range-176-200.time
+05fdcee1d28b6de465bc9558c7062b665bf78b7b7805a65ce492a4ee09298bf0  out/bnb-all/range-001-025.done
+4960a9ce196ee53a9ae6f2b038ebf5bb7949312406eabe79835e766b4a3d0d88  out/bnb-all/range-026-050.done
+97b912eb4a61df5f806ca6239dde3e1a4f51ad20aced1642cbb83dc510a5fa6b  out/bnb-all/range-051-075.done
+bec4c0b05bdca335d3f6f76051d1054cb36e2dd3f3b963d4222cf221059dea8b  out/bnb-all/range-076-100.done
+23c9dbf723bbdcf3bba5611781271d754e74269c6c5b066e12ccd9405cd9b7e4  out/bnb-all/range-101-125.done
+fc53fb23e4ae1df02b05ea4cbe66145dfbeca9037cb56cb7b3e900eb0ee11b5a  out/bnb-all/range-126-150.done
+d09aa8346d420f76dfd2a63d40d19e352d11668352401d5ce43e1e70c333f681  out/bnb-all/range-151-175.done
+ab6557812843af78e1517a997d9fd98e61cd0d61f1dfd9059789cef3f2cd9eda  out/bnb-all/range-176-200.done
+d6318f60b11677e5f4e66295cdb65e5ef8a191ac21602ee21d8b0ffe861ebf8d  out/bnb-all/run.log
