@@ -5,7 +5,7 @@ title: "R-1031: blind stage 4 review of #1031 (de Winter s(299)), the review lan
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: r1031-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T07:47:50.877Z
-updated_at: 2026-11-18T08:15:09.548Z
+updated_at: 2026-11-18T08:32:33.370Z
 started_at: 2026-11-18T07:48:37.747Z
 ---
 
@@ -26,3 +26,5 @@ R-1031 (blind review), lane r1031-1118, 2026-11-18T07:55Z. Claimed think-r3tn (c
 R-1031 08:02Z: checker and controls plan frozen and pushed, commit 212876836f on claude/intake-2026-11-18-review-1031 (frozen/checker-frozen-digests.txt, 11 files). Before the freeze the programs ran only on synthetic data (rv1031_synth.py). Next: selftest, check, controls, contraction on #1031 and on T-325 (form C n-299.yaml at mishapolk-issue1009-2026-11-16/source with form P twin).
 
 R-1031 08:16Z: runs done (receipts in out/, not yet committed at this note): selftest PASSED 14,785 checks, 7 broken copies fail; check ACCEPT (44,551 pairs all apart by A and B, least margin 1.05e-74 at (137,175), 28 exact wall contacts at left/bottom, side exceeds extent by 6.42e-67; claim 17.793636991744 is the 12-place ceiling, 9.59e-13 above the side); controls 34 of 36 as stated, S1d and E1p not as stated (my rules assumed the next right/top clearance >1e-40 above the least; the 26 right/top clearances are all ~6.4e-67, side rule holds, methods agree); contraction T-325 3.5612e-27 (1-g* 2.00004e-28, pair 71-140), #1031 own 6.42e-67; gain vs T-325 7.3674425087e-3 = 2.07e24 x its contraction margin; identity: not one to one with any house T-101..T-325 under any symmetry (best moves 121-131 beyond 0.1); a quarter turn of T-258..T-325 plus a unit shift matches 210 squares (53 tilted) within 0.1; record's 335/372 packings match at most 3 tilted squares. Running: controls under always-accept/always-refuse on the certificate.
+
+R-1031 08:36Z: findings frozen 08:27:44Z and pushed (c8e59efe1e; frozen/findings-frozen-digests.txt, 62 files, sha256sum -c OK from the packet dir); main d068c3fc0 merged in (2d825d918d); doc-map entry, synopsis row, After the Freeze, Note on This Copy and footer pushed (573b8c3dfc). After the freeze: the record's own T-325 contraction receipt (1009 import measure/contraction-n299-own.json) agrees exactly with this lane's; the author's verify_exact.py and check_area.py read as data (not run). Verdict accept; 34/36 controls as stated (S1d, E1p: plan's rule error, F3); broken copies on the certificate: always-accept fails 7, always-refuse 6. Significance S3 (blind to the import lane's draft). Owner-relevant: band coincidence F7 (each tilted group matches 50-53 squares of the T-248..T-325 band under its own rigid motion) is a measurement, not a credit; credit by think-bx2a: de Winter as finder. CPU ~0.37 h. Next: records tier, draft PR (intake, S2), message coordinator.
