@@ -5,7 +5,7 @@ title: "Stage 4 review of T-144's mixed_n122_L1126 (wand125 s(122) >= 563/50, n 
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: r144b-1118
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m4kbxna1xdmjd8nkka3wax60
 hold: null
 hold_until: null
 created_at: 2026-11-18T05:36:22.990Z
-updated_at: 2026-11-18T07:36:13.622Z
+updated_at: 2026-11-18T07:46:17.966Z
 started_at: 2026-11-18T05:37:37.484Z
 ---
 T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L1126, raising n = 122 to 126; V0/C0 on main) has no review that reads its certificate: the 11 October final review (docs/project/reviews/review-2026-10-11-final-lower-bounds.md) read the record and premises only. result-import.md stage 4 needs a mapped mathematical review before the complete replay's evidence moves the verified lane (check_results verified_lane_review_problems), as the 14 October review did for T-179 and the 4/11 November reviews for T-142 and T-143.
@@ -39,3 +39,5 @@ T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L
 2026-11-18 07:21Z r144b-1118: correction, the rerun of range 176-200 started at 07:05:32Z (not 07:07Z). It reproduces the killed run exactly at nodes 176 to 193 (boxes, margins) and has decided node 194; nodes 195-200 are running (one process, nice 19, host load ~11). Uncommitted in /home/user/wt/r144: review-text corrections (G11 margin 0.0307191244486..., M-2 wording, driver citation, node-0 infimum argument, disclosures of the checker read before the findings freeze and of think-nd7g's Oct notes), README updates, programs/r144b_compare_killed.py. The doc-map and synopsis lines are saved as a patch in scratch r144b/postfreeze-map.patch for after the freeze. Next: commit the range, second mutant, summarize, freeze.
 
 2026-11-18 07:36Z r144b-1118: range 176-200 rerun complete (07:05:32Z to 07:29:15Z, 1,070 CPU-s), committed at e83890be42: ALL 201 NODES DECIDED by the lane's own programs (node 0 by r144_axis.py, nodes 1-200 by r144_bnb.py, 71,418,450 boxes vs the source's 71,476,052 nodes); the killed run's 18 finished nodes reproduced exactly. Second mutant (heaviest segment orbit removed) refused by both deciders with exact witnesses. FINDINGS FROZEN at 2026-11-18T07:35:35Z, commit 80405c86fe (frozen/findings-frozen-digest.txt, 67 files, verifies). Decision accept, no blocking or major; S3 confirmed. CPU about 0.93 h in all. Next: read the earlier reviews, write the comparison, map, draft PR.
+
+2026-11-18 07:50Z r144b-1118: draft PR https://github.com/jlevy/squares/pull/1034 (labels intake, S2), head c5a905423d (main 86284ec20 merged in), base main 86284ec203. Post-freeze commit 526b710cfe adds the comparison with the 2 Oct T-080, 14 Oct T-179 and 11 Oct final reviews, the note on this copy, the doc-map entry and synopsis row. packing-validate --records passed locally (55 steps, 264 s). Scratch: the extracted bundle (634 MB) deleted; the asset and pinned documents kept in scratch r144/. Waiting on hosted CI, then a message to the coordinator for the senior review.
