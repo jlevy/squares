@@ -49295,7 +49295,7 @@ results:
   - id: T-310
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Özden's column-band packing at 292, a new arrangement 1.27e-03 below T-146
     claim: >-
@@ -49507,7 +49507,7 @@ results:
   - id: T-311
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       de Winter's ribbon packing at 292, a new arrangement 1.36e-03 below T-146, 8.78e-05 below
       T-310
@@ -49736,7 +49736,7 @@ results:
   - id: T-312
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       de Winter's band packing at 262, a new arrangement 7.41e-03 below 16 + √2/2
     claim: >-
@@ -49930,7 +49930,7 @@ results:
   - id: T-313
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       de Winter's band packing at 295, a new arrangement 4.54e-03 below T-193's (22 + 22√2)/3
     claim: >-
