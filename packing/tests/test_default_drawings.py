@@ -735,8 +735,9 @@ def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> N
     assert recorded["grid-slack-3a-rerun-deg1-1016"] == "regularize_grid_slack/1"
     assert recorded["evand-regularize-3a-rerun-303-1016"] == "evand-regularize"
     assert "grid-slack-3a-deg1-1016" not in recorded
-    # 272 rests on the adoption's runs of 17 October 2026 (think-3mry).
-    n = 272
+    # 273 rests on the adoption's runs of 17 October 2026 (think-3mry), as 272 did until
+    # the pass of 18 November 2026 regularized its new witness (T-322, think-i38n).
+    n = 273
     held = defaults.SETTLED[n]
     named = (
         *held.runs,
@@ -755,6 +756,11 @@ def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> N
         (
             f"n={n}: SETTLED names run grid-slack-3a-rerun-deg05-1016 as evand-regularize's, "
             "and its record as regularize_grid_slack/1's"
+        ),
+        # That run never covered 273, as it covered 272, so its record says so too.
+        (
+            f"n={n}: SETTLED names run grid-slack-3a-rerun-deg05-1016, whose record shows it "
+            f"ran 105, 129, 146, 156, 176, 204, 271, 272, 303, not {n}"
         ),
     ]
     # Without the retained evidence, only the index's blocks hold a run, and that is not
@@ -872,7 +878,8 @@ def test_a_settled_run_covered_the_count_where_its_record_says_which() -> None:
     )
     assert records["evand-regularize-adopt174-c-1017"].counts == frozenset({103, 261})
     assert len(records["grid-slack-adopt174-deg5-1017"].counts or ()) == 35
-    n = 272
+    # 273, as 272 was until the pass of 18 November 2026 regularized its new witness.
+    n = 273
     held = defaults.SETTLED[n]
     named = (*held.runs, ("evand-regularize", "evand-regularize-adopt174-c-1017"))
     found, _listed = defaults.state_problems(

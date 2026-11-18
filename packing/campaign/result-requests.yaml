@@ -36115,7 +36115,10 @@ issues:
       arrangement relative to T-146's packing, measured. The record credits Özden as its
       finder, since no registry packing seeded it. Joost de Winter's #1006, filed 11 minutes 38
       seconds later, is 8.78e-5 below it (T-311); the ledger records both, in order. The stage 4
-      review (think-p3g8) is a separate lane.
+      review of 17 November (lane R1, think-p3g8; #1013) accepts it with no blocking or major
+      finding and its controls as stated, so the entry is confirmed, independently
+      re-implemented, at V3/C3, S3. It is not adopted: T-311 is smaller, and Polkovskyi's
+      #1009 (T-323) smaller again at 292.
     read_through: '2026-11-16T15:27:38Z'
     results:
     - key: n292-column-band
@@ -36129,8 +36132,7 @@ issues:
       evidence:
       - E-ozden-1005-certificate-report
       - E-ozden-1005-exact-feasibility
-      validation:
-      - think-i38n
+      - E-ozden-1005-review-exact-feasibility
     - key: n292-leaderboard-side-only
       claim: >-
         The Kaggle per-puzzle leaderboard lists 17.589053943368 at 292 (Cats and boxes, 29
@@ -36140,19 +36142,6 @@ issues:
         A side-only entry that states no packing, so it is no report: context only, as
         #1001's ledger treated Kodaj's quoted 270.
       queued: false
-    - key: stage4-mapping-and-house
-      claim: >-
-        The stage 4 exit of T-310: the blind review accepted in #1013 (R1, think-p3g8), mapped
-        onto the entries with #1009's review (#1014), and the house decision at 292 under the
-        house rule, which #1009's lower claims there bear on.
-      source: body
-      not_registered: >-
-        No result of its own: the rest of the registered entries' import, queued with #1009's
-        import (think-i38n), which maps both reviews and adopts the smallest validated packing
-        at each count, regularized; if that import stalls or fails review, think-i38n maps this
-        review and adopts these certificates in its own change.
-      queued: true
-      bead: think-i38n
     beads:
     - think-qag8
     answer_bead: think-qag8
@@ -36180,8 +36169,12 @@ issues:
       2026 in lane c-import-1005-1117 (think-qag8) as T-311: the print rounds up from its
       exact side, both maintained exact routes accept the certificate and refuse its gross
       and sharp controls, and it is a new arrangement relative to T-146's packing and to
-      #1005's, measured; the ledger records #1005 and then this claim. The stage 4 review
-      (think-p3g8) is a separate lane.
+      #1005's, measured; the ledger records #1005 and then this claim. The stage 4 review of
+      17 November (lane R1, think-p3g8; #1013) accepts it with no blocking or major finding
+      and its controls as stated, so the entry is confirmed, independently re-implemented,
+      at V3/C3, S3. It is not adopted: Polkovskyi's #1009 (T-323) is 3.62e-9 below it at
+      292, 72 times its own contraction margin of 5.0288e-11, a new result under option D
+      (think-b0w5), and takes the house.
     read_through: '2026-11-16T15:39:16Z'
     results:
     - key: n292-ribbon
@@ -36196,8 +36189,7 @@ issues:
       evidence:
       - E-de-winter-1006-certificate-report
       - E-de-winter-1006-exact-feasibility
-      validation:
-      - think-i38n
+      - E-de-winter-1006-review-exact-feasibility
     - key: n292-kaggle-side-only
       claim: >-
         The issue quotes two side-only values at 292: the Kaggle per-puzzle table's
@@ -36209,19 +36201,6 @@ issues:
         Side-only entries that state no packing, so neither is a report: context only, as for
         #1005's quotation of the first and #1001's ledger's treatment of Kodaj's quoted 270.
       queued: false
-    - key: stage4-mapping-and-house
-      claim: >-
-        The stage 4 exit of T-311: the blind review accepted in #1013 (R1, think-p3g8), mapped
-        onto the entries with #1009's review (#1014), and the house decision at 292 under the
-        house rule, which #1009's lower claims there bear on.
-      source: body
-      not_registered: >-
-        No result of its own: the rest of the registered entries' import, queued with #1009's
-        import (think-i38n), which maps both reviews and adopts the smallest validated packing
-        at each count, regularized; if that import stalls or fails review, think-i38n maps this
-        review and adopts these certificates in its own change.
-      queued: true
-      bead: think-i38n
     beads:
     - think-qag8
     answer_bead: think-qag8
@@ -36247,8 +36226,11 @@ issues:
       each print rounds up from its exact side, both maintained exact routes accept both
       certificates and refuse their gross and sharp controls, and each is a new arrangement
       relative to its house's packing, measured. The two sides differ by 1 less 1.883e-10, so
-      the 295 certificate is not one L step on the 262 one. The stage 4 review (think-p3g8) is
-      a separate lane.
+      the 295 certificate is not one L step on the 262 one. The stage 4 review of 17 November
+      (lane R1, think-p3g8; #1013) accepts both with its controls as stated, its one minor
+      finding the issue's sentence that the 295 packing is the 262 one with an L border (F8),
+      so both entries are confirmed, independently re-implemented, at V3/C3, S3. Neither is
+      adopted: Polkovskyi's #1009 (T-319, T-324) is 1.58e-3 below both and takes the houses.
     read_through: '2026-11-16T21:28:27Z'
     results:
     - key: n262-band
@@ -36262,8 +36244,7 @@ issues:
       evidence:
       - E-de-winter-1007-certificate-report
       - E-de-winter-1007-exact-feasibility
-      validation:
-      - think-i38n
+      - E-de-winter-1007-review-exact-feasibility
     - key: n295-band
       claim: >-
         s(295) <= 17.699693441716 rounded up at 12 places (the exact side
@@ -36275,21 +36256,7 @@ issues:
       evidence:
       - E-de-winter-1007-certificate-report
       - E-de-winter-1007-exact-feasibility
-      validation:
-      - think-i38n
-    - key: stage4-mapping-and-house
-      claim: >-
-        The stage 4 exit of T-312 and T-313: the blind review accepted in #1013 (R1, think-p3g8), mapped
-        onto the entries with #1009's review (#1014), and the house decision at 262 and 295 under the
-        house rule, which #1009's lower claims there bear on.
-      source: body
-      not_registered: >-
-        No result of its own: the rest of the registered entries' import, queued with #1009's
-        import (think-i38n), which maps both reviews and adopts the smallest validated packing
-        at each count, regularized; if that import stalls or fails review, think-i38n maps this
-        review and adopts these certificates in its own change.
-      queued: true
-      bead: think-i38n
+      - E-de-winter-1007-review-exact-feasibility
     beads:
     - think-qag8
     answer_bead: think-qag8
@@ -36297,6 +36264,18 @@ issues:
     close_when: >-
       Both bounds are triaged, retained and registered on main, and the reply on main says
       what was registered, replayed and reviewed.
+    notes: >-
+      The stage 4 review (docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md,
+      lane R1, think-p3g8) agrees with the replay everywhere both measured: the least pair
+      margins (4.47681e-12 at 262, squares 33 and 37; 1.52004e-12 at 295, squares 55 and 56)
+      and the exact wall contacts. It finds (F8, minor, for the author) that the 295 file is
+      not the 262 file with an L border: the sides differ by 1 less 1.882962e-10, and the 295
+      file's 262 inner squares are a second solution of the 262 plan, 17 of them more than
+      1e-3 from the 262 file's. It finds too (F9) that those 262 squares, as they stand, prove
+      s(262) <= 16.6996934417125687, 1.90949e-10 below the 262 file's side; the issue does not
+      claim it, and it is not registered, since Polkovskyi's #1009 (T-319), filed later on 16
+      November, is 1.58e-3 below both at 262. Both go to the author in the reply, and neither
+      holds a rung.
   - number: 1008
     title: 'Credit request for n = 211: the current record derives from T-057'
     author: JoostdeWinter
@@ -36399,6 +36378,209 @@ issues:
       the chain and its credit changes are done, so think-a88h, which carries T-057's sources
       down the chain once a published revision names them, answers the issue from here;
       think-dw3n, closed, is dropped from the beads.
+  - number: 1009
+    title: 'Lowered upper bounds for 7 counts (n = 210, 260, 262, 268, 272, 292, 295) and 6 exact 12-place refinements (n = 147, 156, 180, 270, 299, 307): registration request'
+    author: Mishapolk
+    opened: '2026-11-16'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Mykhailo Polkovskyi (Mishapolk) asks for the registration of 13 upper bounds, each the
+      exact rational side of a centre/half-angle certificate in
+      Mishapolk/square-packing-records at b637e6c rounded up at 12 places, with a Witness/v2
+      corner file of the same packing: in Part A seven below the record at f9ddfeeef, s(210)
+      <= 14.971214601589, s(260) <= 16.633520939840, s(262) <= 16.698115018700, s(268) <=
+      16.871868135103, s(272) <= 16.965501175831, s(292) <= 17.590016439231 and s(295) <=
+      17.698115018700, the last three also below the open #1005, #1006 and #1007; in Part B
+      six refinements of the registered arrangements that lower the 12-place print, s(147)
+      <= 12.651043553173, s(156) <= 12.977053087495, s(180) <= 13.915618502788, s(270) <=
+      16.928148603340, s(299) <= 17.801004434252 and s(307) <= 17.979230960384, which it
+      calls subject to RV-3. It credits Polkovskyi with new arrangements at 210, 262, 272,
+      292 and 295, improved packings after Evan Daniel at 260 and after Doğa Özden at 268,
+      and the certificate refinements in Part B, whose arrangement credit stays with the
+      standing authors, and says the packings were discovered assisted by Gemini. Triaged,
+      retained and registered on 17 November 2026 in lane c-import-1009-1117 (think-i38n) as
+      T-314 to T-326: each print rounds up from its exact side, both maintained exact routes
+      accept each certificate and refuse its gross and sharp controls, and each lies below
+      its house; measured, the 262 and 292 certificates are one to one with the packings of
+      #1007 and #1006, which the owner's answer of 17 November (think-bx2a), "de Winter,
+      improved by Polkovskyi", makes the credit at both, and the five refinements at 156,
+      180, 270, 299 and 307 lie 1.01 to 1.07 times their houses' padding beyond it. The
+      owner's option D of 17 November (think-b0w5) decides those five: each is below its
+      house shrunk to first contact, so each is a new result. The stage 4 review of 17
+      November (think-evxy; #1014) accepts all thirteen with ten findings, all notes, and
+      481 of 481 controls as stated, so each entry is confirmed, independently
+      re-implemented, at V3/C3, and the pass of 18 November 2026 adopts each one at its count
+      under the house rule and regularizes the new house: eleven views drawn, and 270 and 307
+      decided no better on the new witnesses.
+    read_through: '2026-11-16T23:38:22Z'
+    results:
+    - key: n147-ono-refined
+      claim: >-
+        s(147) <= 12.651043553173 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n147.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of Roberto Ono's packing (T-302), as the issue says.
+      source: body
+      register:
+      - T-314
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n156-ozden-refined
+      claim: >-
+        s(156) <= 12.977053087495 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n156.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of Doğa Özden's packing (T-287), as the issue says.
+      source: body
+      register:
+      - T-315
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n180-ozden-refined
+      claim: >-
+        s(180) <= 13.915618502788 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n180.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of Doğa Özden's packing (T-288), as the issue says.
+      source: body
+      register:
+      - T-316
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n210-new
+      claim: >-
+        s(210) <= 14.971214601589 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n210.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-317
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n260-daniel-continued
+      claim: >-
+        s(260) <= 16.633520939840 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n260.cert at Mishapolk/square-packing-records b637e6c), an improved
+        packing after Evan Daniel (T-269), as the issue says.
+      source: body
+      register:
+      - T-318
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n262-new
+      claim: >-
+        s(262) <= 16.698115018700 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n262.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-319
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n268-ozden-continued
+      claim: >-
+        s(268) <= 16.871868135103 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n268.cert at Mishapolk/square-packing-records b637e6c), an improved
+        packing after Doğa Özden (T-289), as the issue says.
+      source: body
+      register:
+      - T-320
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n270-ozden-refined
+      claim: >-
+        s(270) <= 16.928148603340 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n270.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of the packing T-283 holds, as the issue says.
+      source: body
+      register:
+      - T-321
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n272-new
+      claim: >-
+        s(272) <= 16.965501175831 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n272.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-322
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n292-new
+      claim: >-
+        s(292) <= 17.590016439231 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n292.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-323
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n295-new
+      claim: >-
+        s(295) <= 17.698115018700 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n295.cert at Mishapolk/square-packing-records b637e6c), a new
+        arrangement, as the issue says.
+      source: body
+      register:
+      - T-324
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n299-ozden-refined
+      claim: >-
+        s(299) <= 17.801004434252 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n299.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of the packing T-277 holds, as the issue says.
+      source: body
+      register:
+      - T-325
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    - key: n307-ozden-refined
+      claim: >-
+        s(307) <= 17.979230960384 rounded up at 12 places (the exact rational side of
+        certificates/0000-0999/n307.cert at Mishapolk/square-packing-records b637e6c), a refinement
+        of the packing T-279 holds, as the issue says.
+      source: body
+      register:
+      - T-326
+      evidence:
+      - E-mishapolk-1009-certificate-report
+      - E-mishapolk-1009-exact-feasibility
+      - E-mishapolk-1009-review-exact-feasibility
+    beads:
+    - think-i38n
+    - think-evxy
+    - think-ruu2
+    answer_bead: think-i38n
+    replies: []
+    close_when: >-
+      The 13 bounds are triaged, retained and registered on main, and the reply on main says
+      what was registered, replayed and reviewed.
   - number: 1012
     title: 'Public Kaggle packings below the register for n = 109 and n = 270: pointer'
     author: JoostdeWinter

@@ -721,7 +721,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/144.html | cases/144.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/145.html | cases/145.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/146.html | cases/146.html | record | overview | 2026-10-03 | 2026-11-04 | live |
-| cases/147.html | cases/147.html | record | overview | 2026-10-03 | 2026-11-15 | live |
+| cases/147.html | cases/147.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/148.html | cases/148.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/149.html | cases/149.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/15.html | cases/15.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -731,7 +731,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/153.html | cases/153.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/154.html | cases/154.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/155.html | cases/155.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/156.html | cases/156.html | record | overview | 2026-10-03 | 2026-11-11 | live |
+| cases/156.html | cases/156.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/157.html | cases/157.html | record | overview | 2026-10-03 | 2026-11-11 | live |
 | cases/158.html | cases/158.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/159.html | cases/159.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -758,7 +758,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/178.html | cases/178.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/179.html | cases/179.html | record | overview | 2026-10-03 | 2026-11-12 | live |
 | cases/18.html | cases/18.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/180.html | cases/180.html | record | overview | 2026-10-03 | 2026-11-11 | live |
+| cases/180.html | cases/180.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/181.html | cases/181.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/182.html | cases/182.html | record | overview | 2026-10-03 | 2026-10-25 | live |
 | cases/183.html | cases/183.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -792,7 +792,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/208.html | cases/208.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/209.html | cases/209.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/21.html | cases/21.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/210.html | cases/210.html | record | overview | 2026-10-03 | 2026-10-17 | live |
+| cases/210.html | cases/210.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/211.html | cases/211.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/212.html | cases/212.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/213.html | cases/213.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -847,20 +847,20 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/258.html | cases/258.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/259.html | cases/259.html | record | overview | 2026-10-03 | 2026-10-23 | live |
 | cases/26.html | cases/26.html | record | overview | 2026-10-03 | 2026-11-04 | live |
-| cases/260.html | cases/260.html | record | overview | 2026-10-03 | 2026-11-06 | live |
+| cases/260.html | cases/260.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/261.html | cases/261.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/262.html | cases/262.html | record | overview | 2026-10-03 | 2026-11-17 | live |
+| cases/262.html | cases/262.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/263.html | cases/263.html | record | overview | 2026-10-03 | 2026-10-25 | live |
 | cases/264.html | cases/264.html | record | overview | 2026-10-03 | 2026-11-16 | live |
 | cases/265.html | cases/265.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/266.html | cases/266.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/267.html | cases/267.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/268.html | cases/268.html | record | overview | 2026-10-03 | 2026-11-11 | live |
+| cases/268.html | cases/268.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/269.html | cases/269.html | record | overview | 2026-10-03 | 2026-11-13 | live |
 | cases/27.html | cases/27.html | record | overview | 2026-10-03 | 2026-11-04 | live |
-| cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-11-09 | live |
+| cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/271.html | cases/271.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/272.html | cases/272.html | record | overview | 2026-10-03 | 2026-10-17 | live |
+| cases/272.html | cases/272.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/273.html | cases/273.html | record | overview | 2026-10-03 | 2026-10-23 | live |
 | cases/274.html | cases/274.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/275.html | cases/275.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -882,14 +882,14 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/29.html | cases/29.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/290.html | cases/290.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/291.html | cases/291.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/292.html | cases/292.html | record | overview | 2026-10-03 | 2026-11-17 | live |
+| cases/292.html | cases/292.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/293.html | cases/293.html | record | overview | 2026-10-03 | 2026-11-05 | live |
 | cases/294.html | cases/294.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/295.html | cases/295.html | record | overview | 2026-10-03 | 2026-11-17 | live |
+| cases/295.html | cases/295.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/296.html | cases/296.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/297.html | cases/297.html | record | overview | 2026-10-03 | 2026-11-14 | live |
 | cases/298.html | cases/298.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/299.html | cases/299.html | record | overview | 2026-10-03 | 2026-11-09 | live |
+| cases/299.html | cases/299.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/3.html | cases/3.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/30.html | cases/30.html | record | overview | 2026-10-03 | 2026-11-04 | live |
 | cases/300.html | cases/300.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -899,7 +899,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/304.html | cases/304.html | record | overview | 2026-10-03 | 2026-11-05 | live |
 | cases/305.html | cases/305.html | record | overview | 2026-10-03 | 2026-11-16 | live |
 | cases/306.html | cases/306.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/307.html | cases/307.html | record | overview | 2026-10-03 | 2026-11-09 | live |
+| cases/307.html | cases/307.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/308.html | cases/308.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/309.html | cases/309.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/31.html | cases/31.html | record | overview | 2026-10-03 | 2026-10-31 | live |
@@ -1450,10 +1450,23 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-307.html | result/t-307.html | result | overview | 2026-11-16 | 2026-11-16 | live |
 | result/t-308.html | result/t-308.html | result | overview | 2026-11-16 | 2026-11-16 | live |
 | result/t-309.html | result/t-309.html | result | overview | 2026-11-16 | 2026-11-16 | live |
-| result/t-310.html | result/t-310.html | result | overview | 2026-11-17 | 2026-11-17 | live |
-| result/t-311.html | result/t-311.html | result | overview | 2026-11-17 | 2026-11-17 | live |
-| result/t-312.html | result/t-312.html | result | overview | 2026-11-17 | 2026-11-17 | live |
-| result/t-313.html | result/t-313.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-310.html | result/t-310.html | result | overview | 2026-11-17 | 2026-11-18 | live |
+| result/t-311.html | result/t-311.html | result | overview | 2026-11-17 | 2026-11-18 | live |
+| result/t-312.html | result/t-312.html | result | overview | 2026-11-17 | 2026-11-18 | live |
+| result/t-313.html | result/t-313.html | result | overview | 2026-11-17 | 2026-11-18 | live |
+| result/t-314.html | result/t-314.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-315.html | result/t-315.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-316.html | result/t-316.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-317.html | result/t-317.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-318.html | result/t-318.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-319.html | result/t-319.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-320.html | result/t-320.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-321.html | result/t-321.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-322.html | result/t-322.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-323.html | result/t-323.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-324.html | result/t-324.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-325.html | result/t-325.html | result | overview | 2026-11-17 | 2026-11-17 | live |
+| result/t-326.html | result/t-326.html | result | overview | 2026-11-17 | 2026-11-17 | live |
 | result/t-327.html | result/t-327.html | result | overview | 2026-11-18 | 2026-11-18 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-22 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-22 | live |
@@ -1517,7 +1530,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | index.html | 1,300,000 | The shared 100-case Atlas preview includes all 324 canonical case links and per-case SVG references, with common controls, reading and documentation cards. Retained desktop/mobile expansion checks cover the prepared shared row layout. The page-specific ceiling remains below the global two-megabyte limit. |
 | papers/n11-lower-bounds-explainer.html | 1,500,000 | Four prepared font preferences and the authored paper content measure 1,417,498 bytes. |
 | papers/n11-threshold-bound-review.html | 900,000 | The 401-formula review measures 823,322 bytes after sharing font geometry. Its 842,245-byte edition passed three-run desktop/mobile, light/dark and no-JS checks with CLS ≤0.050 and LCP ≤836 ms. The ceiling leaves headroom above the measured edition. |
-| result/t-007.html | 800,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. |
+| result/t-007.html | 850,000 | Complete broad scope history and prepared exact bounds measure 711,115 bytes. Main measures 794,770 bytes on 18 November 2026 (a1a8d0aae, hosted run 44221820600), and 811,974 once T-314 to T-326 (#1009) are listed at their thirteen counts (run 44221608402), about 1.3 KB a result, past the 800,000 ceiling, so the ceiling moves to 850,000 as a measured choice, room for about 29 more listed results. Those are byte measurements only; the timing is owed under think-v4me. |
 | result/t-019.html | 350,000 | Complete broad scope history and prepared exact bounds measure 299,697 bytes on main on 4 November 2026, 303 under the 300,000 result budget, and 300,264 once T-233 joined the results its counts rest on (n = 19): 567 bytes for one listed result. The ceiling moves to 350,000 as a measured choice, room for about 88 more results of that size (49,736 bytes). Its timing was not re-measured; result/t-046.html's growth of the same kind is think-rp0d. |
 | result/t-046.html | 450,000 | Complete broad scope history and prepared exact bounds measure 355,078 bytes. On 31 October 2026 the page measures 401,561 bytes, past the 400,000 ceiling with T-252 listed at n = 44 among its 48 counts' register results; the ceiling moves to 450,000 as a measured choice, about 30 more listed results at 1.5 KB each. Its timing was not re-measured. How the page scales is think-rp0d. |
 | result/t-058.html | 600,000 | Complete broad scope history and prepared exact bounds measure 509,332 bytes. |
@@ -1527,9 +1540,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-124.html | 400,000 | Complete broad scope history and prepared exact bounds measure 304,237 bytes. |
 | result/t-155.html | 400,000 | Fifty-nine counts' exact regularized sides, their regularizations and prepared math measure 303,829 bytes. |
 | result/t-174.html | 375,000 | The complete 68-case result and its 89-step history with prepared math measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. Main measures 348,784 bytes on 16 November 2026 (31ddae6fe), and 353,469 once T-305 and T-309 (#1001) are listed at 127 and 305, about 2.3 KB a result, past the 350,000 ceiling, and 353,877 once they are adopted there in T-174's place, so the ceiling moves to 375,000 as a measured choice, room for about 9 more listed results. Those are byte measurements only; the timing is owed under think-v4me. |
-| result/t-180.html | 525,000 | The closed form's result, its scope of 264 counts and prepared math measure 341,524 bytes, and 402,418 on 22 October 2026, when its register list on those counts reached 138 results. At about 1.5 KB a listed result the room is about 32 more; think-v4me owns the runway and re-measures the page, its timing included, before it passes 440,000 bytes. It passed that mark unmeasured: 448,598 bytes on 31 October 2026 before T-261, and 449,867 with T-261 listed at 233 of its counts (1,269 bytes). On 2 November 2026 it measures 450,697 bytes, after T-184 and T-191 settled 76 and 95 among its counts, so the ceiling moves to 475,000 as a measured choice. Those are byte measurements only; the timing is owed under think-v4me, whose trigger has passed. Hosted run 42661656618 measures 474,579 bytes on main 20f844dbf on 9 November 2026, and run 42674158193 477,057 once T-282 and T-283 (#935, #936) are listed at 172 and 270, about 1.24 KB a result, so the ceiling moves to 500,000 as a measured choice, room for about 18 more listed results; the timing is still think-v4me's. Hosted run 43662981013 measures 501,700 bytes on 15 November 2026 once T-301 and T-302 (#984, #985) are listed at 228 and 147, 2,276 bytes for the two, against 499,424 on #986's head 4544c4c96, so the ceiling moves to 525,000 as a measured choice, room for about 20 more listed results at about 1.14 KB each; the timing is still think-v4me's. |
+| result/t-180.html | 550,000 | The closed form's result, its scope of 264 counts and prepared math measure 341,524 bytes, and 402,418 on 22 October 2026, when its register list on those counts reached 138 results. At about 1.5 KB a listed result the room is about 32 more; think-v4me owns the runway and re-measures the page, its timing included, before it passes 440,000 bytes. It passed that mark unmeasured: 448,598 bytes on 31 October 2026 before T-261, and 449,867 with T-261 listed at 233 of its counts (1,269 bytes). On 2 November 2026 it measures 450,697 bytes, after T-184 and T-191 settled 76 and 95 among its counts, so the ceiling moves to 475,000 as a measured choice. Those are byte measurements only; the timing is owed under think-v4me, whose trigger has passed. Hosted run 42661656618 measures 474,579 bytes on main 20f844dbf on 9 November 2026, and run 42674158193 477,057 once T-282 and T-283 (#935, #936) are listed at 172 and 270, about 1.24 KB a result, so the ceiling moves to 500,000 as a measured choice, room for about 18 more listed results; the timing is still think-v4me's. Hosted run 43662981013 measures 501,700 bytes on 15 November 2026 once T-301 and T-302 (#984, #985) are listed at 228 and 147, 2,276 bytes for the two, against 499,424 on #986's head 4544c4c96, so the ceiling moves to 525,000 as a measured choice, room for about 20 more listed results at about 1.14 KB each; the timing is still think-v4me's. Main measures 514,271 bytes on 18 November 2026 (a1a8d0aae, run 44221820600), and 531,877 once T-314 to T-326 (#1009) are listed at their thirteen counts (run 44221608402), about 1.35 KB a result, past 525,000, so the ceiling moves to 550,000 as a measured choice, room for about 13 more listed results; the timing is still think-v4me's. |
 | result/t-261.html | 500,000 | The grade-C local minima at 233 counts, the scopes of its three evidence entries and prepared math measure 470,189 bytes on 31 October 2026, as T-124's roster of 178 configurations needs its own exception. A byte measurement only; the page's timing is owed under think-v4me. |
-| results.html | 1,700,000 | On 12 November 2026 the 297-result page measures 1,600,513 bytes in hosted run 43182861315, past the 1,600,000 ceiling, once #967's import registers T-297; the room the 5 November note expected through 291 results was used, and six more registrations fitted in its margin. Measured locally the page is 1,600,513 source bytes at a 90th-percentile row of 4,587 bytes. The ceiling moves to 1,700,000 as the same measured choice, which leaves 99,487 source bytes, 21 rows at that row cost with 3,160 bytes to spare, so the room runs through 318 results; its timing was not re-measured, and the lightening stays think-v1qe's. On 5 November 2026 the 273-result page measures 1,510,022 bytes in hosted run 42112356624, past the 1,500,000 ceiling, when one intake (#914) registers seven results, T-267 to T-273, at once; the room the 26 October note expected through 267 results was used as it said. Measured locally the page is 1,511,394 source bytes at a 90th-percentile row of 4,661 bytes. The ceiling moves to 1,600,000 as the same measured choice, which leaves 88,606 source bytes, 18 rows at that row cost with a margin, so the room runs through 291 results; its timing was not re-measured, and the lightening stays think-v1qe's. After the review and the adoptions of the same seven results the page measures 1,512,211 bytes on 6 November 2026, so 18 rows at 4,661 bytes reach 1,596,109, 3,891 bytes below the ceiling at 291 results, less than one row. On 26 October 2026 the 250-result page measures 1,418,298 bytes, past the 1,400,000 ceiling with T-248 to T-251, at a 90th-percentile row of 4,674 bytes; recent arrivals live on their own page and cost the archive nothing. The ceiling moves to 1,500,000 as a measured choice, which leaves 81,702 bytes, about 17 rows, so the room runs through 267 results; its timing was not re-measured, and the lightening stays think-v1qe's. On 22 October 2026 the complete 228-result page measured 1,324,108 bytes with shared popover expand/close controls, versus 1,248,215 on main. Reusing KPress sprite glyphs removes 80,940 bytes compared with repeating their SVG paths. Full result bodies remain fetched on demand. The 1,400,000-byte ceiling leaves 75,892 bytes, about 15 more rows at the measured P90 row plus recent-arrival entry cost of 4,917 bytes. The upstream 238-result runway target is retained. Three-run desktop/mobile light/dark and no-JS checks passed with CLS 0, maximum per-scenario medians of 444 ms LCP, 197 ms longest task and 155 ms blocking. Concurrent builds make these advisory measurements, not a controlled performance comparison. Evidence is tracked in think-xgqg; future runway work remains under think-v1qe. |
+| results.html | 1,800,000 | On 18 November 2026 the 326-result page measures 1,706,120 bytes in hosted run 44221608402, past the 1,700,000 ceiling, once #1009's import registers T-314 to T-326 on top of T-310 to T-313; the room the 12 November note expected through 318 results was used, and eight more registrations fitted in its margin. Main measures 1,660,295 bytes at 313 results the same day (run 44221820600), so the thirteen cost about 3.5 KB each. At a 90th-percentile row of 4,507 bytes the ceiling moves to 1,800,000 as the same measured choice, which leaves 93,880 bytes, 20 rows at that row cost with 3,740 bytes to spare, so the room runs through 346 results; its timing was not re-measured, and the lightening stays think-v1qe's. On 12 November 2026 the 297-result page measures 1,600,513 bytes in hosted run 43182861315, past the 1,600,000 ceiling, once #967's import registers T-297; the room the 5 November note expected through 291 results was used, and six more registrations fitted in its margin. Measured locally the page is 1,600,513 source bytes at a 90th-percentile row of 4,587 bytes. The ceiling moves to 1,700,000 as the same measured choice, which leaves 99,487 source bytes, 21 rows at that row cost with 3,160 bytes to spare, so the room runs through 318 results; its timing was not re-measured, and the lightening stays think-v1qe's. On 5 November 2026 the 273-result page measures 1,510,022 bytes in hosted run 42112356624, past the 1,500,000 ceiling, when one intake (#914) registers seven results, T-267 to T-273, at once; the room the 26 October note expected through 267 results was used as it said. Measured locally the page is 1,511,394 source bytes at a 90th-percentile row of 4,661 bytes. The ceiling moves to 1,600,000 as the same measured choice, which leaves 88,606 source bytes, 18 rows at that row cost with a margin, so the room runs through 291 results; its timing was not re-measured, and the lightening stays think-v1qe's. After the review and the adoptions of the same seven results the page measures 1,512,211 bytes on 6 November 2026, so 18 rows at 4,661 bytes reach 1,596,109, 3,891 bytes below the ceiling at 291 results, less than one row. On 26 October 2026 the 250-result page measures 1,418,298 bytes, past the 1,400,000 ceiling with T-248 to T-251, at a 90th-percentile row of 4,674 bytes; recent arrivals live on their own page and cost the archive nothing. The ceiling moves to 1,500,000 as a measured choice, which leaves 81,702 bytes, about 17 rows, so the room runs through 267 results; its timing was not re-measured, and the lightening stays think-v1qe's. On 22 October 2026 the complete 228-result page measured 1,324,108 bytes with shared popover expand/close controls, versus 1,248,215 on main. Reusing KPress sprite glyphs removes 80,940 bytes compared with repeating their SVG paths. Full result bodies remain fetched on demand. The 1,400,000-byte ceiling leaves 75,892 bytes, about 15 more rows at the measured P90 row plus recent-arrival entry cost of 4,917 bytes. The upstream 238-result runway target is retained. Three-run desktop/mobile light/dark and no-JS checks passed with CLS 0, maximum per-scenario medians of 444 ms LCP, 197 ms longest task and 155 ms blocking. Concurrent builds make these advisory measurements, not a controlled performance comparison. Evidence is tracked in think-xgqg; future runway work remains under think-v1qe. |
 | synopsis/the-program-at-a-glance.html | 650,000 | Main measures 599,314 bytes (hosted run 42692448089) and hosted run 42715322236 600,604 bytes on 9 November 2026, past the page budget of 600,000, once the results table lists T-284 and the document table #938's ledger, review and regularization runs: 1,290 bytes in four rows, about 320 bytes a row. The ceiling moves to 650,000 as a measured choice, room for about 150 more such rows, or about 38 single-result intakes. Its timing was not re-measured. How the page scales is think-3d9e. |
 | tutorial-advanced.html | 800,000 | The advanced tutorial retains the original technical derivations and reference tables; the complete authored text and prepared formulas measure 771,603 bytes. |
 

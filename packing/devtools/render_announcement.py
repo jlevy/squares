@@ -33,12 +33,18 @@ from the record, and the wording is chosen not to overstate it:
 - **(verified)** at `V3` and above, and **(reported)** below, which is never called
   verified. The rungs, and which code confirmed the result, are on its row, which the
   line links.
-- **Credit.** The result's finders: the names before `after` in the register's credit
-  line (`result_credit.credit_line`), each by its full name where the bibliography's
-  `credited_names` or a contributor profile gives one, and whose packing it refines or
-  regularizes, as its `regularizations` say, or its headline (`refinements of Ryan Xu's
-  packings`) and, where that names a request rather than a person, the entry its claim
-  names (`refined`). `--lineage` adds the names after `after`. The project's owner
+- **Credit.** Where the line says new best known and the case record at each of its
+  counts holds this result's source in its reported lane, the case record's own credit
+  there: its `found_by`, then `improved by` its `improved_by` (`case_credit`), as
+  `Joost de Winter, improved by Mykhailo Polkovskyi` at 262, where the owner credited a
+  measured continuation so (think-bx2a) and the source's key credits its author alone
+  (think-gpni). Otherwise the result's finders: the names before `after` in the
+  register's credit line (`result_credit.credit_line`). Either way each name shows by
+  its full name where the bibliography's `credited_names` or a contributor profile gives
+  one, with whose packing it refines or regularizes, as its `regularizations` say, or
+  its headline (`refinements of Ryan Xu's packings`) and, where that names a request
+  rather than a person, the entry its claim names (`refined`), unless the case's credit
+  already names an improver. `--lineage` adds the names after `after`. The project's owner
   (`result_credit.PROJECT_AUTHOR`) is never credited or tagged: the announcement is the
   owner's own post, and `after Levy` is this project's lineage, not a finding.
 
@@ -125,6 +131,9 @@ BIBLIOGRAPHY = ROOT / "resources" / "bibliography.yaml"
 #: Contributor profiles, one Markdown file a person (draft jlevy/squares#490); read when
 #: present.
 CONTRIBUTORS = ROOT / "contributors"
+#: The contributor profiles' own directory, read for the names each person answers to,
+#: which case records credit (`credit_tokens`).
+PEOPLE = CONTRIBUTORS / "people"
 
 #: The fewest decimal places a bound is printed to.
 PLACES = 5
@@ -505,6 +514,13 @@ class Names:
 
     handles: Mapping[str, Handle] = field(default_factory=dict[str, Handle])
     full: Mapping[str, str] = field(default_factory=dict[str, str])
+    #: Each name a case record credits (`Joost de Winter`, `Mishapolk`) and the token the
+    #: register's credit lines give that person (`de Winter`, `Polkovskyi`).
+    tokens: Mapping[str, str] = field(default_factory=dict[str, str])
+
+    def token(self, name: str) -> str:
+        """The credit token a case record's name stands for, else the name itself."""
+        return self.tokens.get(name, name)
 
     def show(self, token: str) -> str:
         name = _bare(token)
@@ -528,6 +544,30 @@ def full_names(credited: Mapping[str, str], profiles: Sequence[Profile] = ()) ->
                 if name not in credited.values():
                     found.setdefault(name, set()).add(profile.real_name)
     return {name: next(iter(fulls)) for name, fulls in found.items() if len(fulls) == 1}
+
+
+def credit_tokens(
+    credited: Mapping[str, str], profiles: Sequence[Profile] = ()
+) -> dict[str, str]:
+    """Each name a case record may credit, mapped to the token the register's credit
+    lines use for that person: the bibliography's `credited_names` (`Joost de Winter: de
+    Winter`, and for `Nate Chaoweeraprasit (itsnaka)` the name and the login alike), then
+    every name a contributor profile answers to that no token yet names otherwise, by its
+    real name's token (`Mishapolk`, which `credited_names` keeps as itself for the sources
+    that credit the handle, is Mykhailo Polkovskyi's `Polkovskyi`)."""
+    tokens: dict[str, str] = {}
+    for full, token in credited.items():
+        tokens[full] = token
+        if match := NAMED_LOGIN.match(full):
+            tokens.setdefault(match.group(1), token)
+            tokens.setdefault(match.group(2), token)
+    for profile in profiles:
+        token = credited.get(profile.real_name)
+        if token:
+            for name in sorted(profile.names):
+                if tokens.get(name, name) == name:
+                    tokens[name] = token
+    return tokens
 
 
 def frontmatter(text: str) -> str:
@@ -981,6 +1021,35 @@ def worked_on(
     return f"refining packings by {listed(shown_)}"
 
 
+def case_credit(
+    record: Mapping[str, Any], group: Sequence[Count], records: Records
+) -> tuple[tuple[str, ...], tuple[str, ...]] | None:
+    """The case records' own credit for the packing a new-best line announces: the
+    `found_by` and `improved_by` of the reported upper lane at every count of `group`,
+    where each count is an upper bound best known, each case's reported lane cites one of
+    the result's own sources, and every count agrees. None otherwise, and then the line
+    credits the register's credit line. A source's key credits its author, while the case
+    record keeps whose packing the certificate continues: at 262 and 292 Mykhailo
+    Polkovskyi's issue-1009 certificates continue Joost de Winter's packings, credited "de
+    Winter, improved by Polkovskyi" by the owner's answer of 17 November 2026
+    (think-bx2a), as 260 and 268 continue Evan Daniel's and Doğa Özden's (think-gpni)."""
+    if not group or any(not c.best or c.direction != UPPER for c in group):
+        return None
+    keys = set((record.get("attribution") or {}).get("source_keys") or ())
+    agreed: set[tuple[tuple[str, ...], tuple[str, ...]]] = set()
+    for c in group:
+        lane_ = (records.cases.get(c.n) or {}).get("reported_upper_bound") or {}
+        if not keys or lane_.get("source_key") not in keys:
+            return None
+        found = tuple(str(name) for name in lane_.get("found_by") or ())
+        improved = tuple(str(name) for name in lane_.get("improved_by") or ())
+        agreed.add((found, improved))
+    if len(agreed) != 1:
+        return None
+    ((found, improved),) = agreed
+    return (found, improved) if found else None
+
+
 def credit_phrase(
     record: Mapping[str, Any],
     group: Sequence[Count],
@@ -989,24 +1058,49 @@ def credit_phrase(
     *,
     lineage: bool = False,
 ) -> str:
-    """Who the line credits: the result's finders, the names before `after` in its credit
-    line, as `Names` shows them; whose packing it refines or regularizes; and with
-    `lineage`, the names after `after`. Never the project's owner."""
+    """Who the line credits: the case records' credit where `case_credit` gives one, else
+    the result's finders, the names before `after` in its credit line, as `Names` shows
+    them; whose packing it refines or regularizes, unless the case's credit names an
+    improver; and with `lineage`, the names after `after`. Never the project's owner."""
     finders, after = credit_parts(credit_text(record, records.sources))
-    phrase = listed([names.show(token) for token in people(finders)])
+    held = case_credit(record, group, records)
+    if held is None:
+        phrase = listed([names.show(token) for token in people(finders)])
+    else:
+        found, improved = held
+        phrase = listed([names.show(token) for token in people(map(names.token, found))])
+        improvers = [names.show(token) for token in people(map(names.token, improved))]
+        if improvers:
+            phrase = f"{phrase}, improved by {listed(improvers)}"
     chain = [names.show(token) for token in people(after)]
     if lineage and chain:
         phrase = f"{phrase} after {listed(chain)}" if phrase else f"after {listed(chain)}"
-    work = worked_on(record, group, records, names)
+    work = "" if held is not None and held[1] else worked_on(record, group, records, names)
     if work:
         phrase = f"{phrase}, {work}" if phrase else work
     return phrase
 
 
-def credited_people(record: Mapping[str, Any], records: Records, *, lineage: bool) -> list[str]:
-    """Every name a line about `record` may print, for handles to be found for."""
+def credited_people(
+    record: Mapping[str, Any],
+    records: Records,
+    *,
+    lineage: bool,
+    tokens: Mapping[str, str] | None = None,
+) -> list[str]:
+    """Every name a line about `record` may print, for handles to be found for: its credit
+    line's, and the case records' at its counts where they cite its source (`case_credit`),
+    as their `tokens`."""
     finders, after = credit_parts(credit_text(record, records.sources))
     found = [*finders, *(after if lineage else ())]
+    keys = set((record.get("attribution") or {}).get("source_keys") or ())
+    for n in scope_values(dict(record.get("scope") or {})) if keys else ():
+        lane_ = (records.cases.get(n) or {}).get("reported_upper_bound") or {}
+        if lane_.get("source_key") in keys:
+            found.extend(
+                (tokens or {}).get(str(name), str(name))
+                for name in (*(lane_.get("found_by") or ()), *(lane_.get("improved_by") or ()))
+            )
     for item in record.get("regularizations") or ():
         found.extend(
             primary_names(credit_text(records.results[str(item["of"])], records.sources))
@@ -1263,20 +1357,21 @@ def main(argv: Sequence[str] | None = None, *, fetch: Fetch = gh_user) -> int:
     chosen, skipped = select(
         records, ids=options.ids or (), since=since, min_significance=options.min_significance
     )
+    credited, profiles = credited_names(), load_profiles()
+    tokens = credit_tokens(credited, [*profiles, *load_profiles(PEOPLE)])
     people = list(
         dict.fromkeys(
             name
             for record in chosen
-            for name in credited_people(record, records, lineage=options.lineage)
+            for name in credited_people(record, records, lineage=options.lineage, tokens=tokens)
         )
     )
-    credited, profiles = credited_names(), load_profiles()
     github = _github(records, credited, fetch) if options.github else None
     handles, warnings = resolve_handles(people, profiles, github, record_handles())
     lines, left = announcement(
         records,
         chosen,
-        Names(handles, full_names(credited, profiles)),
+        Names(handles, full_names(credited, profiles), tokens),
         day=options.date or datetime.now(UTC).date(),
         keep_all=options.keep_all,
         lineage=options.lineage,

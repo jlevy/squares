@@ -1,0 +1,19 @@
+{
+ "program": "rb127_e1p.py",
+ "label": "1015",
+ "verdict": "REFUSE",
+ "width_less_height_sci": "-1.0850377e-15",
+ "crossing": [
+  122
+ ],
+ "restated_rule": [
+  122
+ ],
+ "frozen_rule": [
+  122
+ ],
+ "as_restated": true,
+ "as_frozen": true,
+ "least_E1c_top_clearance_sci": "0",
+ "least_E1c_right_clearance_sci": "1.0850377e-15"
+}

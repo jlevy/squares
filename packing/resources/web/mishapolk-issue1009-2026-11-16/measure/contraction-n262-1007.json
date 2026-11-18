@@ -1,0 +1,63 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 262,
+ "certificate": {
+  "label": "#1007",
+  "input": "center-direction-json",
+  "path": "n262_exact.json",
+  "outside_repository": true,
+  "sha256": "95875def0a2784e980ff92cacbe0508d84cc1ee03d6104130d9db4007a0ffa04"
+ },
+ "side": "166996934419035177/10000000000000000",
+ "lambda_star": "20443105212365549687500000000000000/20443105212455250946432298848817003",
+ "one_minus_lambda_star": "4.387849e-12",
+ "binding_pair": [
+  33,
+  179
+ ],
+ "contracted_side": "1365574360188697163487880726196810887/81772420849821003785729195395268012",
+ "margin": "14082822665899015749817677199731092714531/204431052124552509464322988488170030000000000000000",
+ "margin_float": "6.888788e-11",
+ "certificate_routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "1190389467830565391862193362381605465785291/265901401087913655394835506008184222955703125000000000",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "1190389467830565391862193362381605465785291/265901401087913655394835506008184222955703125000000000",
+   "failures": []
+  }
+ },
+ "routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes_accept": true,
+ "against": {
+  "certificate": {
+   "label": "mishapolk-1009",
+   "input": "packet",
+   "packet": "mishapolk-issue1009-2026-11-16"
+  },
+  "side": "521816094334356075877658927847/31250000000000000000000000000",
+  "gain": "49325725128852247341072153/31250000000000000000000000000",
+  "gain_float": "1.578423e-03",
+  "gain_over_margin": "22912929.0322",
+  "within_margin": false
+ },
+ "cpu_seconds": 13.97
+}
