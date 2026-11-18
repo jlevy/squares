@@ -5,7 +5,7 @@ title: "Stage 4 blind review of #1009's 13 certificates (Mishapolk/square-packin
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: w3-pass-1117r
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:09.288Z
-updated_at: 2026-11-17T23:13:33.513Z
+updated_at: 2026-11-18T00:42:45.260Z
 started_at: 2026-11-17T01:29:11.080Z
 ---
 
@@ -24,3 +24,5 @@ started_at: 2026-11-17T01:29:11.080Z
 2026-11-17T21:46Z w3-pass-1117r: took over the frozen branch (6a4f56b3d; both frozen digest lists verify). The review links a packet README the lane never wrote; wrote it from the review text, the programs' usage lines and receipts (no program, plan, receipt or frozen file changed), added the document-map entry and synopsis map (f0e997b4d). Draft PR #1014 (intake, S2), worktree /home/user/wt/w3-review-1009. rv1009_padding/sides/custody were never run (after-the-freeze); the import's measure/ stands in. Next: senior review via coordinator, address, merge, map in the import-1009 PR.
 
 coord-intake-1117r: senior review of #1014 (Review A, https://github.com/jlevy/squares/pull/1014#issuecomment-6963760081) was spawned by the coordinator on the tbd-strong agent definition: model claude-opus-5-5 at reasoning effort xhigh, as requested at spawn. This records the launch settings; the review's own header is self-reported (A5).
+
+2026-11-18T00:44Z w3-pass-1117r: #1014 re-merged main (#1011) at dc384d591; hosted CI running; merges before the import-1009 PR. Mapped in import-1009 (V-rv1009-review-check, E-mishapolk-1009-review-exact-feasibility).

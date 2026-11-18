@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: w3-pass-1117r
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-17T23:20:02.855Z
+updated_at: 2026-11-18T00:42:49.674Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -30,3 +30,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-17T23:20Z w3-pass-1117r (review A1 of #1014, option b): the 1009 review (#1014) measured no gains, padding, lineage, custody or author's checks and confirmed no significance (its after-the-freeze programs never ran). The significance scores and the padding/option-D judgments in the import-1009 PR rest on the import lane's own measurements (mishapolk-issue1009 packet measure/) and the owner's option D (think-b0w5), not on a blind review; the mapping must say so. Also: the replay entry's 'every wall clears by exactly 1e-28' must be corrected (right/top walls 1.0001e-28 to 1.0098e-28; top 1.073e-28 at 180, 5.6e-16 at 292). Owner answered think-bx2a: 262/292 credit de Winter, improved by Polkovskyi (applied).
 
 2026-11-17T23:30Z w3-pass-1117r (review A1 of #1013): R1's review of #1005-#1007 likewise made none of its after-the-freeze measurements, no comparison, no author questions and no significance confirmation; the import-1009 mapping must cite the import lanes' measure/ receipts (#1011's packets; mishapolk packet) for identity/padding and keep the draft scores as the import's, not R1's.
+
+2026-11-18T00:44Z w3-pass-1117r: regularization done (grid-slack 0.5/1/5 deg + evand driver on 13 counts; selection draws views at 11, decides 270 and 307; SETTLED drops 210/272; runs retained under packing/cases/regularized_drawings/think-i38n-2026-11-18/). Merged main (#1010, #1013, #908, #1011). Custody, exact-side register, case verifiers, certificate reach, URL amendments for T-310..T-313, no-public-change record (paper renders: only the explainer register count moved) done; test_house_adoption 92 passed. KKT register candidates at 260/268/270/272/292/295/299/307 (4e-19..1e-13 below) held for think-8yyy. Next: stamp, re-pin, draft PR, coordinator review.
