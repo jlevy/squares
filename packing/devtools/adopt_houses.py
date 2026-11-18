@@ -3052,7 +3052,14 @@ RESULTS: dict[str, Prose] = {
             "$1.71 \\times 10^{-13}$ below T-287 shrunk until its squares first touch, so "
             "under the owner’s option D of 17 November 2026 it is a new result, not a "
             "restatement of the padding. So Doğa Özden keeps the packing, and Mykhailo "
-            "Polkovskyi is credited with the re-solve."
+            "Polkovskyi is credited with the re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-287’s packing reached a "
+            "certified KKT point on 11 November 2026, held unregistered (think-xq4o) and "
+            "retained on main with pull request 949; run on this certificate it reaches "
+            "the same point exactly, 1.30e-19 above this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point lies above this side and is not registered."
         ),
         third_route=REVIEW_1009,
     ),
@@ -3080,7 +3087,14 @@ RESULTS: dict[str, Prose] = {
             "$1.25 \\times 10^{-13}$ below T-288 shrunk until its squares first touch, so "
             "under the owner’s option D of 17 November 2026 it is a new result, not a "
             "restatement of the padding. So Doğa Özden keeps the packing, and Mykhailo "
-            "Polkovskyi is credited with the re-solve."
+            "Polkovskyi is credited with the re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-288’s packing reached a "
+            "certified KKT point on 11 November 2026, held unregistered (think-xq4o) and "
+            "retained on main with pull request 949; run on this certificate it reaches "
+            "the same point exactly, 1.39e-19 above this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point lies above this side and is not registered."
         ),
         third_route=REVIEW_1009,
     ),
@@ -3215,7 +3229,15 @@ RESULTS: dict[str, Prose] = {
             "$3.55 \\times 10^{-14}$ below T-283 shrunk until its squares first touch, so "
             "under the owner’s option D of 17 November 2026 it is a new result, not a "
             "restatement of the padding. So Evan Daniel, as Doğa Özden improved it, keeps "
-            "the packing, and Mykhailo Polkovskyi is credited with the re-solve."
+            "the packing, and Mykhailo Polkovskyi is credited with the re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-283’s packing reached a "
+            "certified KKT point on 9 November 2026, held unregistered (think-he66) and "
+            "retained on main with pull request 937; run on this certificate it reaches "
+            "the same point exactly, 5.73e-15 below this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point, the smaller, stays a candidate for "
+            "registration (think-4z8z)."
         ),
         third_route=REVIEW_1009,
     ),
@@ -3331,7 +3353,15 @@ RESULTS: dict[str, Prose] = {
             "$1.23 \\times 10^{-13}$ below T-277 shrunk until its squares first touch, so "
             "under the owner’s option D of 17 November 2026 it is a new result, not a "
             "restatement of the padding. So Evan Daniel, as Doğa Özden improved it, keeps "
-            "the packing, and Mykhailo Polkovskyi is credited with the re-solve."
+            "the packing, and Mykhailo Polkovskyi is credited with the re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-277’s packing reached a "
+            "certified KKT point on 9 November 2026, held unregistered (think-463r) and "
+            "retained on main with pull request 932; run on this certificate it reaches "
+            "the same point exactly, 6.20e-15 below this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point, the smaller, stays a candidate for "
+            "registration (think-4z8z)."
         ),
         third_route=REVIEW_1009,
     ),
@@ -3360,7 +3390,15 @@ RESULTS: dict[str, Prose] = {
             "under the owner’s option D of 17 November 2026 it is a new result, not a "
             "restatement of the padding. So ntumlnoob, as Francisco Couzo and Doğa Özden "
             "improved it, keeps the packing, and Mykhailo Polkovskyi is credited with the "
-            "re-solve."
+            "re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-279’s packing reached a "
+            "certified KKT point on 9 November 2026, held unregistered (think-463r) and "
+            "retained on main with pull request 932; run on this certificate it reaches "
+            "the same point exactly, 1.34e-15 below this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point, the smaller, stays a candidate for "
+            "registration (think-4z8z)."
         ),
         third_route=REVIEW_1009,
     ),

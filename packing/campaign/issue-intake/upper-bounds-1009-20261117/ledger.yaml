@@ -129,7 +129,13 @@ reports:
       T-287 contracted rounds up at 12 places to this claim''s own print, so the gain over
       the padding, 1.71e-13, lies within the print; under the owner''s option D of 17 November
       2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first
-      contact, so it is a new result. The certificate''s own margin is 2.5964e-27 (contraction-n156-own.json).'
+      contact, so it is a new result. The certificate''s own margin is 2.5964e-27 (contraction-n156-own.json).
+      The project''s run of Evan Daniel''s driver on T-287''s packing reached a certified
+      KKT point on 11 November 2026, held unregistered (think-xq4o, pull request 949); run
+      on this certificate it reaches the same point exactly, 1.30e-19 above this side (review
+      A2 of #1023). Polkovskyi first reported and certified the packing, so by the owner''s
+      decision of 18 November 2026 (think-frl5) the claim keeps its new-result status and
+      his credit; the held point lies above it and is not registered.'
   - n: 180
     printed: '13.915618502788'
     rounding: up
@@ -155,7 +161,13 @@ reports:
       T-288 contracted rounds up at 12 places to this claim''s own print, so the gain over
       the padding, 1.25e-13, lies within the print; under the owner''s option D of 17 November
       2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first
-      contact, so it is a new result. The certificate''s own margin is 1.8662e-23 (contraction-n180-own.json).'
+      contact, so it is a new result. The certificate''s own margin is 1.8662e-23 (contraction-n180-own.json).
+      The project''s run of Evan Daniel''s driver on T-288''s packing reached a certified
+      KKT point on 11 November 2026, held unregistered (think-xq4o, pull request 949); run
+      on this certificate it reaches the same point exactly, 1.39e-19 above this side (review
+      A2 of #1023). Polkovskyi first reported and certified the packing, so by the owner''s
+      decision of 18 November 2026 (think-frl5) the claim keeps its new-result status and
+      his credit; the held point lies above it and is not registered.'
   - n: 210
     printed: '14.971214601589'
     rounding: up
@@ -277,7 +289,13 @@ reports:
       T-283 contracted rounds up at 12 places to this claim''s own print, so the gain over
       the padding, 3.55e-14, lies within the print; under the owner''s option D of 17 November
       2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first
-      contact, so it is a new result. The certificate''s own margin is 3.3863e-27 (contraction-n270-own.json).'
+      contact, so it is a new result. The certificate''s own margin is 3.3863e-27 (contraction-n270-own.json).
+      The project''s run of Evan Daniel''s driver on T-283''s packing reached a certified
+      KKT point on 9 November 2026, held unregistered (think-he66, pull request 937); run
+      on this certificate it reaches the same point exactly, 5.73e-15 below this side (review
+      A2 of #1023). Polkovskyi first reported and certified the packing, so by the owner''s
+      decision of 18 November 2026 (think-frl5) the claim keeps its new-result status and
+      his credit; the held point stays a candidate for registration (think-4z8z).'
   - n: 272
     printed: '16.965501175831'
     rounding: up
@@ -392,7 +410,13 @@ reports:
       2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first
       contact, so it is a new result. Against T-280, whose margin is 5.5511e-17, the gain
       is 2.3449e-12, about 4.22e+04 times it (packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299-t280.json).
-      The certificate''s own margin is 3.5612e-27 (contraction-n299-own.json).'
+      The certificate''s own margin is 3.5612e-27 (contraction-n299-own.json). The project''s
+      run of Evan Daniel''s driver on T-277''s packing reached a certified KKT point on 9
+      November 2026, held unregistered (think-463r, pull request 932); run on this certificate
+      it reaches the same point exactly, 6.20e-15 below this side (review A2 of #1023). Polkovskyi
+      first reported and certified the packing, so by the owner''s decision of 18 November
+      2026 (think-frl5) the claim keeps its new-result status and his credit; the held point
+      stays a candidate for registration (think-4z8z).'
   - n: 307
     printed: '17.979230960384'
     rounding: up
@@ -418,7 +442,13 @@ reports:
       T-279 contracted rounds up at 12 places to this claim''s own print, so the gain over
       the padding, 5.95e-14, lies within the print; under the owner''s option D of 17 November
       2026 (think-b0w5), which settles RV-3, the claim is below its house shrunk to first
-      contact, so it is a new result. The certificate''s own margin is 3.5960e-27 (contraction-n307-own.json).'
+      contact, so it is a new result. The certificate''s own margin is 3.5960e-27 (contraction-n307-own.json).
+      The project''s run of Evan Daniel''s driver on T-279''s packing reached a certified
+      KKT point on 9 November 2026, held unregistered (think-463r, pull request 932); run
+      on this certificate it reaches the same point exactly, 1.34e-15 below this side (review
+      A2 of #1023). Polkovskyi first reported and certified the packing, so by the owner''s
+      decision of 18 November 2026 (think-frl5) the claim keeps its new-result status and
+      his credit; the held point stays a candidate for registration (think-4z8z).'
   note: '#1009 names b637e6c, committed at 2026-11-16T23:31:56Z and pushed at 23:32:03Z as
     a force-push over b9b7fa7 (committed 23:27:09Z, pushed 23:27:18Z), which holds the same
     13 certificates byte for byte; the claims'' first commit is b9b7fa7''s. The push came

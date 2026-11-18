@@ -140,6 +140,18 @@ touches, and each enlargement closes its one pair or wall alone.
   margin, and the house contracted rounds up at 12 places to the claim’s own print, so
   the gain over the padding lies within the print. Each is below its house shrunk to
   first contact, so under the owner’s option D (think-b0w5) each is a new result.
+- **The project’s held solves at the same points.** Evan Daniel’s driver, run by this
+  project on the earlier houses, reached certified KKT points at all five refined counts
+  and held them unregistered at row 3: on T-283’s packing at 270 on 9 November 2026
+  (pull request 937, think-he66), on T-277’s and T-279’s at 299 and 307 the same day
+  (pull request 932, think-463r), and on T-287’s and T-288’s at 156 and 180 on 11
+  November (pull request 949, think-xq4o). Run on these certificates on 18 November
+  (think-i38n), it reaches the same points exactly: 5.73 × 10⁻¹⁵, 6.20 × 10⁻¹⁵ and
+  1.34 × 10⁻¹⁵ below the certificates at 270, 299 and 307, and 1.30 × 10⁻¹⁹ and
+  1.39 × 10⁻¹⁹ above them at 156 and 180 (review A2 of #1023). Polkovskyi first reported
+  and certified these packings, so by the owner’s decision of 18 November 2026
+  (think-frl5) the five keep their new-result status and his credit; the held points at
+  270, 299 and 307 stay candidates for registration (think-4z8z).
 - **147.** No symmetry pairs the certificate one to one with T-302’s packing, and 8
   squares move beyond a tenth; the gain is 1.16 times T-302’s margin and the side rounds
   up below T-302 contracted, so it is more than the padding.

@@ -252,3 +252,89 @@ def test_the_262_and_292_certificates_pair_one_to_one_with_the_earlier_reports()
         assert pairs(n)[label]["nearest_centre"]["one_to_one"] is paired
     assert pairs(262)["#1007"]["assignment"]["moved_beyond"]["1e-1"] == 3
     assert pairs(292)["#1006"]["assignment"]["moved_beyond"]["1e-1"] == 3
+
+
+#: Evan Daniel's driver's certified solves the project retained on the earlier houses of the
+#: five re-solved counts, held at row 3: on T-287's and T-288's packings on 11 November
+#: 2026 (think-xq4o), T-283's on 9 November (think-he66), and T-277's and T-279's the same
+#: day (think-463r).
+HELD_OPTIMA = {
+    156: "think-xq4o-2026-11-11/adopt-2026-11-11-n156-269-evand",
+    180: "think-xq4o-2026-11-11/adopt-2026-11-11-n156-269-evand",
+    270: "think-he66-2026-11-09/adopt-2026-11-09-n172-270-evand",
+    299: "think-463r-2026-11-09/adopt-2026-11-09-n232-307-evand",
+    307: "think-463r-2026-11-09/adopt-2026-11-09-n232-307-evand",
+}
+#: The same driver on the thirteen new houses in the pass of 18 November 2026.
+NEW_OPTIMA = "think-i38n-2026-11-18/adopt-2026-11-18-n147-307-evand"
+
+
+def _solve(directory: str, n: int) -> dict[str, Any]:
+    import gzip  # noqa: PLC0415
+
+    path = reports.ROOT / "cases/regularized_drawings" / directory / f"n-{n}" / "report.json.gz"
+    return json.loads(gzip.decompress(path.read_bytes()))["solve"] or {}
+
+
+def _contraction(n: int, suffix: str = "") -> dict[str, Any]:
+    """The packet's contraction receipt at `n`: against the earlier house, or with
+    `suffix` "-own", the new house's own first-contact margin."""
+    path = reports.packet_path(NAME) / "measure" / f"contraction-n{n}{suffix}.json"
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _own_contraction(n: int) -> dict[str, Any]:
+    return _contraction(n, "-own")
+
+
+def test_the_five_re_solves_sit_on_the_projects_held_optima() -> None:
+    """Review A2 of #1023: at 156, 180, 270, 299 and 307 the driver, run on the earlier
+    house, reached a certified KKT point the project holds at row 3, and run on #1009's
+    re-solve it reaches the same point exactly. At 270, 299 and 307 that point lies
+    5.73e-15, 6.20e-15 and 1.34e-15 below Polkovskyi's side, and at 156 and 180 1.30e-19
+    and 1.39e-19 above it; each lies 2.59e-12 to 3.53e-12 below its earlier house (the
+    packet's `measure/contraction-nNNN.json`). The owner's decision (think-frl5): Polkovskyi
+    first reported and certified these packings, so T-315, T-316, T-321, T-325 and T-326
+    keep their new-result status and his credit, and the held points at 270, 299 and 307
+    stay candidates for registration (think-4z8z)."""
+    expected = {
+        156: "1.30e-19",
+        180: "1.39e-19",
+        270: "-5.73e-15",
+        299: "-6.20e-15",
+        307: "-1.34e-15",
+    }
+    for n, directory in HELD_OPTIMA.items():
+        held, again = _solve(directory, n), _solve(NEW_OPTIMA, n)
+        assert held["gate"] == again["gate"] == "certified", n
+        assert held["cert_valid"], n
+        assert again["cert_valid"], n
+        assert held["S_cert"] == again["S_cert"], n
+        side = Fraction(_own_contraction(n)["side"])
+        assert f"{float(Fraction(held['S_cert']) - side):.2e}" == expected[n], n
+        earlier = _contraction(n)
+        below_earlier = Fraction(earlier["side"]) - Fraction(held["S_cert"])
+        assert Fraction("2.58e-12") < below_earlier < Fraction("3.54e-12"), n
+
+
+def test_the_held_solves_below_the_new_houses_pass_option_d() -> None:
+    """Review A3 of #1023: at eight counts the driver's certified solve on the new house
+    lies below its side, and each gain exceeds the house's own uniform-contraction margin
+    (the packet's `measure/contraction-nNNN-own.json`), so each solve is a new result under
+    option D (think-b0w5): 1.46 and 1.40 times it at 292 and 295, and about 1e10 to 3e12
+    times it at the six others. They wait for registration and stage 4 alone (think-4z8z).
+    At 147, 156, 180 and 262 the solve lies above the side, and at 210 none certified."""
+    below: dict[int, float] = {}
+    for n in COUNTS:
+        solve = _solve(NEW_OPTIMA, n)
+        if not solve.get("cert_valid"):
+            assert n == 210, n
+            continue
+        own = _own_contraction(n)
+        gain = Fraction(own["side"]) - Fraction(solve["S_cert"])
+        if gain > 0:
+            below[n] = float(gain / Fraction(own["margin"]))
+    assert sorted(below) == [260, 268, 270, 272, 292, 295, 299, 307]
+    assert round(below[292], 2) == 1.46
+    assert round(below[295], 2) == 1.40
+    assert all(ratio > 1e9 for n, ratio in below.items() if n not in (292, 295))

@@ -111,9 +111,17 @@ and 295, the witness):
 - **The KKT solves.** At eight counts the driver reached a KKT local minimum below the
   certificate’s side by 4.16 × 10⁻¹⁹ (295) to 1.03 × 10⁻¹³ (292), each solved view
   verified exactly by both routes.
-  Each is held at row 3 as a register candidate and not admitted; whether any is a new
-  result or a restatement of its house is option D’s measurement against the house
-  shrunk to first contact, which think-8yyy carries for the regularizer’s optima.
+  Each gain exceeds the new house’s own uniform-contraction margin (the packet’s
+  `measure/contraction-nNNN-own.json`): 1.46 times it at 292 (1.03 × 10⁻¹³ against 7.03
+  × 10⁻¹⁴), 1.40 times at 295 (4.16 × 10⁻¹⁹ against 2.97 × 10⁻¹⁹), and about 10¹⁰ to 3 ×
+  10¹² times at 260, 268, 270, 272, 299 and 307, whose margins lie near 3.4 × 10⁻²⁷. So
+  under the owner’s option D (think-b0w5) each is a new result below its house (review
+  A3 of #1023; `test_the_held_solves_below_the_new_houses_pass_option_d`). Each is held
+  at row 3 as a register candidate and not admitted: what it waits on is registration
+  and a stage 4 review, which think-4z8z carries with the project’s other candidates.
+  At 270, 299 and 307 they are the points the driver held on 9 November 2026
+  (think-he66, think-463r), which the owner left credited to Polkovskyi’s re-solves
+  (think-frl5).
 - The record’s comparison with the base branch (`default_drawings --compare`) is in the
   pull request: every count lands regularized or decided no better on its new witness,
   none pending, and no runs are owed.

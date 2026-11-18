@@ -857,9 +857,9 @@ def _sources() -> dict[str, Source]:
 #: T-283's, T-277's and T-279's at 156, 180, 270, 299 and 307, new results under the
 #: owner's option D of 17 November 2026 (think-b0w5), each packing's finder kept. T-146,
 #: T-269, T-277, T-279, T-283, T-287, T-288, T-289 and T-302 keep no house here; T-174 and
-#: T-193 still house other counts. The measured identity of the 262 and 292 certificates
-#: with Joost de Winter's packings of issues 1007 and 1006 is the owner's question
-#: (think-bx2a), and the source's credit stands meanwhile.
+#: T-193 still house other counts. The 262 and 292 certificates pair one to one with Joost
+#: de Winter's packings of issues 1007 and 1006, and the owner answered (think-bx2a): each is
+#: found by de Winter and improved by Polkovskyi, as `adopt_houses.CREDITS` gives them.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
