@@ -1,0 +1,6 @@
+{
+ "label": "T-289",
+ "kind": "house",
+ "verdict": "REFUSE",
+ "reason": "read: square 38 corner 3[0]: not a plain scalar"
+}
