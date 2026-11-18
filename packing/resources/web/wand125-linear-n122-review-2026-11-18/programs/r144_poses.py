@@ -62,6 +62,7 @@ def main():
     ap.add_argument("--grid", type=int, default=120)
     ap.add_argument("--fixed-per-node", type=int, default=4)
     ap.add_argument("--refine", type=int, default=6)
+    ap.add_argument("--draw", type=int, default=0, help="add this many search nodes, drawn from the rest by a generator seeded from the candidate's SHA-256")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     t0 = time.process_time()
@@ -96,7 +97,9 @@ def main():
                 least = (qa, x, y)
         part1.append({"j": j, "poses": len(poses), "least": float(least[0]), "least_minus_one": float(least[0] - 1), "at": [float(least[1]), float(least[2])]})
     part2 = []
-    for j in [int(v) for v in a.search_nodes.split(",")]:
+    named = [int(v) for v in a.search_nodes.split(",")]
+    drawn = sorted(random.Random(seed + 1).sample([j for j in range(201) if j not in named], a.draw)) if a.draw else []
+    for j in named + drawn:
         node = Node(cand, j, F(1), 1, 1)
         ang = node.ang
         lo, hi = node.lo, node.hi
@@ -136,6 +139,8 @@ def main():
     res = {
         "program": "r144_poses.py",
         "seed": seed,
+        "search_nodes_named": named,
+        "search_nodes_drawn": drawn,
         "part1_nodes": 201,
         "part1_poses": sum(r["poses"] for r in part1),
         "part1_methods_disagree": disagree,

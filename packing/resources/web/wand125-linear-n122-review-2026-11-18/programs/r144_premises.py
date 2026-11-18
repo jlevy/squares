@@ -382,8 +382,10 @@ def record_checks(rep: Report, cand: dict, a, inputs_sha: dict) -> dict:
 def comparisons(rep: Report, cand: dict, audit: dict) -> dict:
     L = cand["L"]
     out = {}
-    lo2, hi2 = isqrt_bounds(F(2), 60)
-    lo22, hi22 = isqrt_bounds(F(22), 60)
+    # 200 digits: the source's rational bound lies within 2e-60 of G_11 (it was formed
+    # from 90-digit square roots), so 60 digits cannot decide that comparison
+    lo2, hi2 = isqrt_bounds(F(2), 200)
+    lo22, hi22 = isqrt_bounds(F(22), 200)
     G_lo = 2 * lo2 - 1 + (1100 + 10 * lo22) / 122
     G_hi = 2 * hi2 - 1 + (1100 + 10 * hi22) / 122
     out["green_G11_interval"] = [f"{float(G_lo):.15f}", f"{float(G_hi):.15f}"]
