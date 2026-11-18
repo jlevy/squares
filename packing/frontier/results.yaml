@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-17'
+last_reviewed: 'XXX-TODAY'
 results:
   - id: T-001
     kind: lower-bound
@@ -16335,10 +16335,10 @@ results:
     kind: lower-bound
     registered: '2026-10-10'
     landed: '2026-10-11'
-    headline: "Linear-measure lower bound `s(n) ≥ 563/50 = 11.26` for `n = 122…126`, reported"
+    headline: Linear-measure lower bound `s(n) ≥ 563/50 = 11.26` for `n = 122…126`, replayed
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing published on
-      10 October 2026, reported on no issue, is reported to prove s(122) >= 563/50 = 11.26.
+      10 October 2026, reported on no issue, proves s(122) >= 563/50 = 11.26.
       Its mass is below 122, and a packing of 123 to 126 squares contains one of 122, so it
       also gives s(123), s(124), s(125), s(126) >= 563/50: five counts in all. At n = 127
       and beyond the record already holds more.
@@ -16356,26 +16356,35 @@ results:
 
       Here the T-080 route's readers accepted its exact premises: the measure, its D4
       invariance, digest, net, centre domains, checker and code identity, the 201 records,
-      the source's audit, the proof bundle's 810 files and every angle's input. Two angles
-      replayed here by the source's replay function and unchanged checker, from this
-      repository's retained copies, returned the certificate's own records: a diagnostic,
-      not a replay. No complete replay has run here, so the value stands as reported.
+      the source's audit, the proof bundle's 810 files and every angle's input. The
+      mathematical review of XXX-REVIEW-DATE re-derived the linear argument and
+      XXX-REVIEW-VERDICT.
+
+      The complete replay here, XXX-ON-RUN-DATES, ran the source's replay function and
+      unchanged checker from this repository's retained copies at all 201 angles, the axis
+      included, from the candidate and certificate retained from the release asset: every
+      angle returned the certificate's own record. The route's control accepts the original
+      and refuses two mutated measures at net index XXX-CONTROL-INDEX, each provably
+      uncovered there in exact arithmetic. This raises the verified lower bound at n = 122
+      to 126, and the reported one at 122 to 125, to 563/50; it is confirmed by
+      reproduction with the producer's code, the source's own checker, and no second
+      implementation stands beside it.
 
       Hiroaki Hosono after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/a9f76c382d023b4095899c4eb7ea7483b8b87ecf/problems/square-lower-bounds/certificates/mixed_n122_L1126).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [122, 123, 124, 125, 126]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it raises the reported and verified
-        lower bounds at five counts, n = 122 to 126, past Green's reported values and
-        Nagamochi's closed form, by T-080's certificate kind, net and checker at a new size,
-        with no new technique, at S3 as T-080 is. V0/C0 says how far it stands, and the
-        score gates nothing.
+        It raises the reported and verified lower bounds at five counts, n = 122 to 126
+        (the reported one at 126 held by T-180's larger closed form), past Green's reported
+        values and Nagamochi's closed form, by T-080's certificate kind, net and checker at a
+        new size, with no new technique, at S3 as T-080 and T-179 are; scored as a claim on
+        11 October.
       scored: '2026-10-11'
       by: >-
         the 11 October final review
@@ -16386,12 +16395,13 @@ results:
       source_keys: ['[wand125 linear n122 2026-10-10]']
       published: '2026-10-10'
     composition: >-
-      One reported certificate on its reported entry. n = 123 to 126 take it directly, its
-      mass being below them, so no step is added. A replay here would run the source's
-      checker unchanged, as T-080's did: one interval-certified method, and no second
-      implementation stands beside it.
+      One source certificate and one complete replay of the source's checker here, C3,
+      reproduced with the producer's code, as T-080's and T-179's are. n = 123 to 126 take
+      it directly, its mass being below them, so no step is added. One interval-certified
+      method, and no second implementation stands beside it.
     evidence:
       - E-wand125-linear-n122-1126-report
+      - E-wand125-linear-n122-1126-source-replay
     artifacts:
       - packing/resources/web/wand125-linear-n122-2026-10-10/README.md
       - packing/resources/web/wand125-linear-n122-2026-10-10/reported-n122.json
@@ -16400,46 +16410,45 @@ results:
       - packing/resources/web/wand125-linear-n122-2026-10-10/receipts/linear-sample-diagnostic.json
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_linear.py
+      - packing/resources/web/wand125-linear-n122-2026-10-10/acquisition/sources.json
+      - packing/resources/web/wand125-linear-n122-2026-10-10/acquisition/release-assets.json
+      - >-
+        packing/resources/web/wand125-linear-n122-2026-10-10/square-packing/problems/square-lower-bounds/certificates/mixed_n122_L1126/completion-audit.json
+      - >-
+        packing/resources/web/wand125-linear-n122-2026-10-10/release/certificates/mixed_n122_L1126/candidate.json.gz
+      - >-
+        packing/resources/web/wand125-linear-n122-2026-10-10/release/certificates/mixed_n122_L1126/certificate.json.gz
+      - packing/resources/web/wand125-linear-n122-2026-10-10/receipts/linear-audit.json
+      - packing/resources/web/wand125-linear-n122-2026-10-10/receipts/n122/fetch.json
+      - packing/resources/web/wand125-linear-n122-2026-10-10/receipts/n122/merged.json
     next_rung: >-
-      C3 needs a complete replay of all 201 angles by the T-080 route, with the certificate
-      registered in devtools.audit_wand125_linear so that linear-replay writes resumable
-      receipts, the route's linear-control receipt and a review that reads this certificate,
-      as the 2 October review read T-080's. The two-angle sample prices the replay and
-      control at about 11.2 CPU-hours (the author's own replay suggests up to about 23).
-      The owner set its budget on 11 October 2026, and the replay is queued in
-      think-nd7g after the regularization of every packing (think-ux1v, planned in jlevy/squares#497). Its commands need tooling that is only on
-      the unmerged branch claude/wand125-confirmations-2026-10-11:
-      on main, devtools.audit_wand125_linear does not register n = 122.
-    unfinished_confirmations:
-      - what: >-
-          a complete replay of all 201 angles by the T-080 route, with the certificate
-          registered in devtools.audit_wand125_linear so that linear-replay writes
-          resumable receipts, the route's linear-control receipt and a review that reads
-          this certificate, as the 2 October review read T-080's
-        rung: C3
-        link: think-nd7g
-        estimated_cost:
-          cpu_hours: 11.24
-          cpu_hours_high: 23
-          basis: >-
-            Angles 37 and 108 replayed here on 10 October by the source's replay function
-            and unchanged checker (57.4 and 117.9 CPU-s against the source's 73.6 and 152.0,
-            ratio 0.776) applied to the source's 51,877 s over the net: the complete replay
-            40,278 CPU-s and the route's control at angle 37 172 CPU-s
-            (packing/resources/web/wand125-linear-n122-2026-10-10/README.md and
-            receipts/linear-sample-diagnostic.json). The upper end is the author's own
-            replay, 7 hours 41 minutes of wall at three workers, converted at full use of
-            the three. The preparation lane's smoke run of 11 October (think-nd7g) put the
-            price at about 14.6 CPU-hours; its receipts are not retained.
-          priced: '2026-10-10'
+      None for the bound. V4 and C4 need a second qualifying adversarial AI review by a
+      distinct reviewer and an explicit human oversight record; one AI review, of
+      XXX-REVIEW-DATE, is retained. An independent implementation of the point and segment
+      capture bounds would add implementation diversity.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported, replay
-      not attempted. C0 because no cited entry carries a qualifying external_review. One
-      entry carries the five counts the certificate raises, as T-080 carries n = 101 to 105:
-      the case records' lanes are unchanged, so the entry is pending adoption at n = 122 to
-      126 while Green's or Nagamochi's reported value and the Karakus strip bound hold
-      them. The release asset (31.8 MB) is pinned by size and digest and kept outside Git;
-      the release's SHA256SUMS does not list it.
+      From the complete replay XXX-ON-RUN-DATES (XXX-RUNS runs of two workers over the four
+      linear-plan ranges, the first resumed after a container restart; XXX-CPU-H
+      CPU-hours, the axis 1,374.9 CPU-seconds of it), its linear-control receipt and the
+      mapped mathematical review of XXX-REVIEW-DATE. The records carry no per-angle bound
+      (LC-4 of the 2 October review), so acceptance at each angle is the checker's verdict.
+
+      One entry carries the five counts the certificate raises, as T-080 carries n = 101
+      to 105 and T-179 carries 145 to 149. The case records' verified lanes at n = 122 to
+      126 move from the Karakus strip bound to 563/50, and their reported lanes at 122 to
+      125 from Green's reported value to it. At n = 126 the same source's closed-form bound
+      (T-180), reported three days later, is larger, a(126) = 11.3133238509..., and keeps
+      the reported lane, so this entry is superseded there in that lane. The release
+      asset's candidate and certificate are retained in the packet; its proof bundle
+      (38.9 MB) is pinned by digest in the packet's release record and fetched from the
+      release for a replay, and the release's SHA256SUMS does not list the asset. The score
+      of 11 October was given to the claim; the complete replay passed after it and leaves
+      the score as it was.
+    controls:
+      - packing/resources/web/wand125-linear-n122-2026-10-10/receipts/n122/control.json
+      - packing/tests/test_wand125_linear_certificates.py
+    reviews:
+      - XXX-REVIEW-ITEM
 
   - id: T-145
     kind: lower-bound

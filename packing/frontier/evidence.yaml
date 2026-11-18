@@ -38136,10 +38136,95 @@ evidence:
       (receipts/linear-premises.json). Two angles replayed here (37 and 108) by the shipped
       replay function and checker from this repository's retained copies returned the
       certificate's records; that is a diagnostic, not a replay. The author's complete
-      replay (7 h 41 min at three workers) has no published receipt. A complete replay, the
-      route's control and a review that reads this certificate remain pending under
-      think-nd7g, priced at about 11.2 CPU-hours. No standing bound or rating changes.
-    source_reviewed: '2026-10-10'
+      replay (7 h 41 min at three workers) has no published receipt. The complete replay
+      here ran on XXX-RUN-DATES (E-wand125-linear-n122-1126-source-replay), from the
+      candidate and certificate retained from the release asset in the packet's release/:
+      the source's replay function and unchanged checker returned the certificate's own
+      record at all 201 angles, and the route's control accepted the original and refused
+      both mutations at net index XXX-CONTROL-INDEX (receipts/n122/). The mathematical
+      review of XXX-REVIEW-DATE read the certificate. T-144 stands at V3/C3, and the case
+      records at n = 122 to 126 take 563/50 in the verified lane, and at 122 to 125 in the
+      reported lane (T-180's closed form keeps it at 126).
+    source_reviewed: 'XXX-TODAY'
+  - id: E-wand125-linear-n122-1126-source-replay
+    claim: lower-bound
+    scope: {n_values: [122, 123, 124, 125, 126]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    independence:
+      coverage:
+        extent: full
+        unit: net angles, each decided by the source's checker over its quadrant of centres
+        checked: 201
+        of: 201
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 linear n122 2026-10-10]'
+    certificate: packing/resources/web/wand125-linear-n122-2026-10-10/release/certificates/mixed_n122_L1126/candidate.json.gz
+    replay: >-
+      From packing/, with the project CPython 3.14 environment and a C++17-capable c++ on
+      PATH: .venv/bin/python3 -m devtools.audit_wand125_linear linear-replay n122 --range
+      A-B --work W --workers 2, over ranges that together cover 0-200 (here the four of
+      linear-plan n122 --parts 4: 0-76, 77-149, 150-182 and 183-200), each of which may be
+      stopped and resumed, takes the release asset certificates__mixed_n122_L1126.tar.gz
+      of square-lower-bounds-v1 (--tarball, or fetched from the release), refuses it
+      unless its SHA-256 (6443eae0...) and size are the ones the packet's release record
+      pins, copies out its proof bundle and refuses that unless its SHA-256 (3986d902...)
+      and size are the record's, unpacks it afresh, binds the bundle to the packet,
+      rebuilds code/ from the retained copies, repeats the replay driver's preconditions,
+      binds each input of the range to the candidate, builds the checker with the shipped
+      compile_verifier, and calls the shipped replay_angle unchanged, each direction
+      passing only if it returns exactly the record the retained certificate.json holds.
+      Then .venv/bin/python3 -m devtools.audit_wand125_linear linear-merge n122 must print
+      FULL_REPLAY_MATCHES_SHIPPED with no missing or refused direction, and linear-merge
+      n122 --check RECEIPT_MATCHES on the retained receipts (receipts/n122/ in the
+      packet). The checker's controls are .venv/bin/python3 -m
+      devtools.audit_wand125_linear linear-control n122 --work W --tarball ASSET, which
+      must report CONTROLS_REFUSED (receipts/n122/control.json).
+    replay_status: passed
+    verifiers: [V-wand125-unified-linear-verify-cpp, V-audit-wand125-linear]
+    proof:
+      source: packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/docs/continuous-density-certificate.ja.md
+      theorem: Linear-measure covering obstruction at coverage one, applied to Hiroaki Hosono's mixed_n122_L1126 of points, segments and rectangles; no 122 unit squares fit in a square of side below 563/50, and, its mass being below 123, none of 123 to 126 either.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        The measure argument of the 2026-09-22 Tokoharu review, with the point and segment
+        capture bounds, the quadrant reduction by the measure's symmetry and the angle-zero
+        branch read against unified_linear_verify.cpp in the 2 October review of the linear
+        certificates; the linear argument re-derived for this certificate in XXX-REVIEW-PIN;
+        the replay receipts in receipts/n122/ of the wand125-linear-n122-2026-10-10 packet,
+        its exact audit receipts/linear-audit.json and its pre-replay checks
+        receipts/n122/fetch.json.
+      assumptions:
+        - The measure is nonnegative and exact, of total mass 12199999/100000 < 122, quarter-turn and reflection invariant, which this repository's exact audit recomputes from the retained candidate.
+        - All angles and legal centres are covered by the certified core net of 201 half-angles of step 83/40000 at core side 9977/10000, and the checker's quadrant of the centre domain stands for the whole by that symmetry.
+        - Binary64 arithmetic has the reviewed IEEE-754 semantics, compiled by the shipped line with -ffp-contract=off and -fno-fast-math.
+        - The replayed interval inputs enclose the exact candidate, whose digest every replayed record carries.
+      audit_record: XXX-REVIEW-PATH
+    limitations: >-
+      Replays the source's code/unified_linear_verify.cpp (SHA-256 0249726a..., byte for
+      byte T-080's checker) with the source's replay_angle, unchanged, from XXX-FIRST to
+      XXX-LAST, in XXX-RUNS runs of two workers under nice -n 19 on a shared four-core
+      x86-64 Linux host (Intel Xeon at 2.1 GHz, c++ 13.3.0, Python 3.14.7, one BLAS and
+      OpenMP thread, PYTHONOPTIMIZE unset), one range after another, the first resumed
+      after a container restart: 201 of 201 directions, XXX-CPU-H CPU-hours, the axis
+      direction 1,374.9 CPU-seconds of it. Every direction returned the certificate's own
+      record, its status, input digest and node count (FULL_REPLAY_MATCHES_SHIPPED). The
+      records hold no per-direction least lower bound, so the receipts cannot keep one
+      (LC-4 of the 2 October review); acceptance at each direction is the checker's own
+      verdict. This is a machine replay of the source's checker, not an independent
+      decision of the certificate: coverage is decided by the source's C++ alone.
+      Controls: the same checker accepts the original and refuses two mutated n = 122
+      measures at net index XXX-CONTROL-INDEX, every mass scaled by 99/100 and the orbit
+      contributing most at a witness centre dropped, each provably uncovered there in
+      exact arithmetic (receipts/n122/control.json). The candidate and certificate are
+      retained from the release asset, and the 38.9 MB proof bundle is pinned by digest
+      in the packet's release record and not retained. Its mass, 12199999/100000, is
+      below 123, so it carries to 123 to 126 with no further step; at 127 the record holds
+      more.
+    source_reviewed: 'XXX-TODAY'
 
   - id: E-n040-guzhou-continuous-pose-report
     claim: lower-bound

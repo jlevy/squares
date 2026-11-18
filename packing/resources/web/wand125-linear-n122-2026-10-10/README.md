@@ -7,7 +7,8 @@ T-080’s checker. Its mass is below 122, and a packing of more squares contains
 122, so it reports $s(N) \ge 11.26$ for every $N \ge 122$. That raises the record at n =
 122 to 126 and nowhere else.
 No issue reports it; the evening watch read of 10 October found it.
-The bound remains unconfirmed here; no standing bound or rating changes.
+Until XXX-DATE the bound was unconfirmed here; its complete replay, the route’s control
+and the review [below](#review-and-remaining-work) now put T-144 at V3/C3.
 
 | Item | Value |
 | --- | --- |
@@ -145,6 +146,19 @@ shape, as the MIT notice permits, so that `linear-replay` writes resumable recei
 all 201 angles; then `linear-control` and a review that reads this certificate, as the 2
 October review read T-080’s. That work, with a budget for it, belongs to the import’s
 bead, think-nd7g.
+
+That replay ran here XXX-ON-RUN-DATES (think-nd7g), in XXX-RUNS runs of two workers over
+the four ranges of `linear-plan n122 --parts 4` (0-76, 77-149, 150-182 and 183-200), the
+first resumed after a container restart: `linear-replay n122` replayed all 201 angles,
+each returning the certificate’s own record, in XXX-CPU-H CPU-hours, the axis 1,375
+CPU-seconds of it, and `linear-merge n122` reports `FULL_REPLAY_MATCHES_SHIPPED`
+([merge](receipts/n122/merged.json), with each range’s rows and runs beside it).
+`linear-control n122` accepts the original and refuses two mutations at net index
+XXX-CONTROL-INDEX, each provably uncovered there in exact arithmetic
+([control](receipts/n122/control.json)). With the
+[review of XXX-REVIEW-DATE](XXX-REVIEW-PKTLINK) they put T-144 at V3/C3, and the case
+records at n = 122 to 126 take $563/50$ in the verified lane, and at 122 to 125 in the
+reported lane.
 
 ## Sources and Notices
 

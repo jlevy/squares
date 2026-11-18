@@ -920,8 +920,8 @@ def test_each_price_rests_on_its_own_samples() -> None:
 
 
 #: The certificates whose linear-control receipt is retained: n101's of 2 October, which
-#: T-080 to T-082 cite, and n145's of T-179's replay.
-CONTROLLED = ("n101", "n145")
+#: T-080 to T-082 cite, n145's of T-179's replay and n122's of T-144's.
+CONTROLLED = ("n101", "n145", "n122")
 
 
 def _control(name: str = "n101") -> dict[str, Any]:
