@@ -165,7 +165,7 @@ The second route ran from `packing/` as
   and 124 within $10^{-40}$ of the top, the 14 that E1p’s restated rule names; at #1015
   and #1017, exactly the squares the frozen rule names.
 
-In all, about 0.2 CPU-hours before review A, and under 4 CPU-minutes after it.
+In all, about 0.2 CPU-hours before review A, and about 2.5 CPU-minutes after it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
