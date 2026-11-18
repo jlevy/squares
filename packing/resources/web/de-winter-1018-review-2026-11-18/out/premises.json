@@ -1,0 +1,91 @@
+{
+ "program": "rv1018_premises.py",
+ "verdict": "PREMISES_HOLD",
+ "failures": [],
+ "measure": {
+  "n": 108,
+  "L": "1063/100",
+  "B": "12487/12500",
+  "proof_net": {
+   "step": "83/80000",
+   "last": 400
+  },
+  "rows": 823,
+  "total_mass": "10799999/100000",
+  "n_minus_mass": "1/100000",
+  "expanded_images": 6584,
+  "expanded_distinct": 6524,
+  "max_density": 37567.88329266124,
+  "eight_times_max_density": 300543.0663412899,
+  "rows_thinner_than_1_500": 156,
+  "json_sha256": "d4d160901461bd9e3769db1dbace4b00d2e0afb57429dcd3c7467f06c5ced9d8",
+  "stored_sha256": "bd471f6541874a6f6a057c57b8804812563859d83a0f2e1a1aa7595dad32d0da",
+  "canonical_sha256": "e453c059bcd4742a0c037e56d27b47e8769dd39300503c8c54330bf41b154880"
+ },
+ "net": {
+  "conditions": {
+   "a_step_positive_and_count": true,
+   "b_B_times_1_plus_D": true,
+   "c_endpoint": true,
+   "d_tmax_at_most_half": true,
+   "e_tangent_form": true
+  },
+  "B_times_1_plus_D": "999996421/1000000000",
+  "tangent_form": "319998768697057/319999913887500",
+  "sharp_extent_2Bw(D/2)": "319998768697057/320000086112500",
+  "t_max": "83/200",
+  "t_max_poly": "89/40000",
+  "net_covers_tan_pi_8": true,
+  "last_bin_low_end": "66317/160000",
+  "last_bin_low_poly": "19384489/25600000000",
+  "last_bin_needed": false,
+  "second_last_bin_high_poly": "19384489/25600000000",
+  "nodes_whose_bin_holds_a_folded_angle": [
+   0,
+   399
+  ],
+  "count_nodes_used": 400,
+  "least_quadrant_width": 4.607893292629494,
+  "least_quadrant_width_at": 400
+ },
+ "enlargement": {
+  "z0": "83/160000",
+  "u": "319998768697057/320000086112500",
+  "u_equals_stated": true,
+  "one_minus_u": "1317415443/320000086112500",
+  "h": "707107/1000000",
+  "two_h_squared_minus_1": "309449/500000000000",
+  "S": "1700799526134255846599/159999384348528500000",
+  "S_decimal_40": "10.6300379408297263703123176570767509670882",
+  "S_12_places_rounded_down": "10.630037940829",
+  "claimed": "1700799526134255846599/159999384348528500000",
+  "S_equals_claimed": true,
+  "S_minus_L": 3.794082972637031e-05,
+  "margin_h_1_minus_u": 2.911104471784116e-06,
+  "gain_factor_1_over_u_minus_1": 4.116939100622596e-06
+ },
+ "file_matches_statements": {
+  "L": true,
+  "B": true,
+  "D": true,
+  "last": true,
+  "orbits": true,
+  "total_mass": true,
+  "n": true
+ },
+ "informational": {
+  "T216_L_B_D_last": [
+   "531/50",
+   "9977/10000",
+   "83/40000",
+   200
+  ],
+  "enlargement_at_T216_premises": "10.622135524982096",
+  "rescale_factor": "1063/1062",
+  "T216_core_scaled": "10605551/10620000",
+  "T216_core_scaled_times_1_plus_T216_D": "141700766911/141600000000",
+  "T216_certificate_transfers_to_rescaled_measure": false,
+  "new_core_at_old_scale": "6630597/6643750",
+  "new_core_at_old_scale_minus_T216_B": 0.00032024459078080906
+ }
+}
