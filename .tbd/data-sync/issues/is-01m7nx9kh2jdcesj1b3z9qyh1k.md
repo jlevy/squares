@@ -5,7 +5,7 @@ title: "Import #1018: Joost de Winter's raised lower bound for n = 108 and n = 1
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:54.594Z
-updated_at: 2026-11-18T03:06:27.765Z
+updated_at: 2026-11-18T03:15:21.281Z
 started_at: 2026-11-18T01:19:03.018Z
 ---
 
@@ -42,3 +42,7 @@ started_at: 2026-11-18T01:19:03.018Z
 ### R-108 (blind review)
 
 2026-11-18T03:06Z: findings frozen at b38c7535c (pushed), digest list frozen/findings-frozen-digests.txt in packing/resources/web/de-winter-1018-review-2026-11-18/. Verdict accepted, eight notes, S3 confirmed. This lane's own branch and bound decided all 400 rotated directions (973 CPU-s) and the axis decision direction 0; 38 of 38 controls as planned; the 99/100 copy refused at all 400 rotated directions. (The 02:38Z note's time was 02:33Z.) Next: post-freeze reads (check_lower.py, stretch_measure.py, T-216's reviews), comparison section, doc map, synopsis, draft PR.
+
+### R-108 (blind review)
+
+2026-11-18T03:22Z: draft PR #1027 (labels intake, S2) opened from claude/intake-2026-11-18-review-1018, head 1dcac30d7 (merged with main a1a8d0aae), base main. Freezes: checker 87e79188b, findings b38c7535c. Records tier passes locally; hosted CI pending. Messaging the coordinator for the senior review; this worktree (/home/user/wt/r108) stays untouched until it returns.
