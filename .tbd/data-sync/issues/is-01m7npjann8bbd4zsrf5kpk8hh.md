@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: w4r-records-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-18T08:45:03.011Z
+updated_at: 2026-11-18T08:47:03.181Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -60,3 +60,5 @@ Price: both maintained exact routes on one 109-square witness, minutes; sharp co
 Disposition: stages 2-3 on branch claude/keen-galileo-9gbz1a after think-a88h's PR merges; read_through moves to 2026-11-18T07:33:46Z; blocked:author lifts (files arrived) after the merge of that change.
 
 2026-11-18T09:05Z w10-1118, stage 1 measurements (scratch only, nothing committed; devtools.measure_identity from main's tree on binary64 forms of the two CSVs, converted by a scratch script): Kodaj's 109 (the attachment's CSV) against Samanyu-dev/squares_in_squares 53551d7 best_fit_101_500.csv's 109 (blob b2c6a7e0, file SHA-256 377b9177...6c04): nearest centres ONE TO ONE, largest displacement 0.0255, none beyond 0.1, 5 beyond 1e-2, 37 beyond 1e-3, 8 turned beyond 1e-6 (largest 0.0048 degrees), all 45 tilted squares paired same sign; side 1.94e-12 smaller. So it is Samanyu-dev's merged 109 arrangement, slightly refined, not a new arrangement relative to it. Against the house (Daniel's n-109.cert, T-101): not one to one, optimal assignment moves 56 squares beyond 0.1 (largest 0.824); 45 tilts near 23-29.5 degrees vs the house's 49 at 45 degrees: a new arrangement relative to the house. contraction_margin does not read binary64-xyd, so the predecessor's shrink-to-contact (option D) is not measured yet; the witness-corners adapter refuses the attachment's witness (square ids square-0.., not 1..n), so stage 2 needs a renumbered derived fact. Credit consequence: the arrangement's first publication found is Samanyu-dev's merge of 7 Nov (per-puzzle author unidentified) or Fonseca's 6 Nov pinwheel (not readable); Kodaj's CC0 dataset (13 Nov) is the certificate's source. OWNER QUESTION (bead to be opened at stage 3): credit at 109 -- Kodaj, as the source of the exact-certifiable coordinates, with Samanyu-dev's 7 Nov publication of the arrangement and Fonseca's 6 Nov pinwheel stated as priority; or Samanyu-dev (and the leaderboard author, unknown) as finder with Kodaj as refiner; and whether option D, which names registered predecessors, reaches an unregistered public predecessor like Samanyu-dev's.
+
+2026-11-18T09:15Z w10-1118, custody finding: JoostdeWinter/square-packing (watched) holds the same files in Git: aae089c37a2d3fb91b161a1b3a45f06a41277d18 (2026-11-18T07:30:49Z, 'Add Tomáš Kodaj's public coordinates for n = 109 (issue #1012)') adds n109_kaggle/{README.md, SHA256SUMS, n109_tomkodaj.csv, n109_tomkodaj.yaml, verification.txt}; 723232891 (07:31:33Z, 44 s later, the head) removes them; the attachment followed at 07:33:46Z. The attachment's csv, yaml and verification.txt have exactly the Git blobs at aae089c37 (9e22fad7, 9f270d76, 0d7862de); its README.txt (blob 3af7d38f) differs from n109_kaggle/README.md (8ad215d3). So stage 2 can pin a Git commit with devtools.acquire_source at aae089c37 (scope n109_kaggle/, LICENSE pinned identical_to the 227/229/260 packet's) and hold the attachment's digests to it, with upper_bound_reports for the replay. Caveat to state: the author removed the folder from his head 44 s later and chose the attachment, so the reply should say the record pins the commit that held it (or ask him). Tooling gap: the witness-corners adapter needs ids numbered from 1 (square-1..), this file numbers square-0..square-108, so stage 2 needs an adapter option for 0-based ids (a small W7 change with a test) or a derived fact.
