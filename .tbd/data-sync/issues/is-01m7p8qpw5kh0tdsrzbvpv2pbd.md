@@ -5,14 +5,14 @@ title: "Owner decision: apply option D (think-b0w5) retroactively to T-259 at 13
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - decision
   - owner-decision
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 created_at: 2026-11-18T02:45:51.109Z
-updated_at: 2026-11-18T02:45:51.109Z
+updated_at: 2026-11-18T08:27:10.310Z
 ---
 Raised by lane w7-optd-1118 (think-8yyy) on 18 November 2026; the coordinator (coord-intake-1117r) puts it to the owner.
 
@@ -24,3 +24,7 @@ Not listed, already recorded and adopted:
 
 Question: does option D reach results recorded before 17 November that it does not list? If yes, each is measured with devtools.contraction_margin and each restatement keeps its certificate (a house certificate stays the house) with its credit moved to the original finder.
 blocked_on: owner
+
+## Notes
+
+coord-intake-1117r, 2026-11-18: 207 is added to this question. T-173 (#573, Polkovskyi's re-solve at 207) measures 0.9984 of T-147's contraction margin, so it would be a restatement under D if D reached it. think-b0w5 doesn't list it. #1030 keeps T-173's standing and records the measurement only (#1030 Review A1). The question now covers T-259 at 130 (0.9193), T-173 at 207 (0.9984), and T-155's solved views, T-170 and T-195 (not measured).
