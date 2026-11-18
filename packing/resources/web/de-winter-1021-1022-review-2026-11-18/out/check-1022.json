@@ -1,0 +1,287 @@
+{
+ "label": "1022",
+ "kind": "report",
+ "read": {
+  "form_j": {
+   "sha256": "2bf77929c5920c6ff5561d0c5c5255f78e8effff96622ce5d4bb75c9c4021148",
+   "scalars": 1081,
+   "flags": [],
+   "flag_count": 0
+  },
+  "form_c": {
+   "sha256": "939011eb16ae4991fbb061f72abdd95d54e177eb86d818d35f075ef78024782d",
+   "scalars": 2161,
+   "flags": [],
+   "flag_count": 0,
+   "witness_id": "W-n270-de-winter",
+   "claim": {
+    "coordinate_provenance": "reported",
+    "method": "exact-algebraic",
+    "limitations": "Exact rational coordinates of a packing of 270 unit squares, given as four corners per square. verify_exact.py checks in rational arithmetic that every square lies in the container and that all pairs of squares have disjoint interiors. The file proves an upper bound for the side. It makes no statement on optimality."
+   },
+   "blocks": [],
+   "envelope_schema": "https://github.com/jlevy/squares/blob/main/packing/witnesses/witness.schema.yaml",
+   "envelope_status": "enforced"
+  }
+ },
+ "n": 270,
+ "side_exact": "16927314216351701364094693919616632628260321141481608494025753/1000000000000000000000000000000000000000000000000000000000000",
+ "side_text_equal": true,
+ "twin": {
+  "fail": [],
+  "listing": {
+   "offset 0 ccw": 270
+  }
+ },
+ "form_j": {
+  "accept": true,
+  "a_not_unit": [],
+  "b_not_unit": [],
+  "a_crossing": [],
+  "b_crossing": [],
+  "b_area_inside_not_1": [],
+  "a_overlaps": 0,
+  "b_overlaps": 0,
+  "first_overlaps": [],
+  "pair_disagreements": 0,
+  "wall_disagreements": 0,
+  "unit_disagreements": 0,
+  "a_pair_classes": {
+   "apart": 36315,
+   "contact": 0,
+   "overlap": 0
+  },
+  "b_pair_classes": {
+   "apart": 36315,
+   "contact": 0,
+   "overlap": 0
+  },
+  "cpu": {
+   "A": 0.26,
+   "B": 2.53
+  }
+ },
+ "form_c": {
+  "accept": true,
+  "a_not_unit": [],
+  "b_not_unit": [],
+  "a_crossing": [],
+  "b_crossing": [],
+  "b_area_inside_not_1": [],
+  "a_overlaps": 0,
+  "b_overlaps": 0,
+  "first_overlaps": [],
+  "pair_disagreements": 0,
+  "wall_disagreements": 0,
+  "unit_disagreements": 0,
+  "a_pair_classes": {
+   "apart": 36315,
+   "contact": 0,
+   "overlap": 0
+  },
+  "b_pair_classes": {
+   "apart": 36315,
+   "contact": 0,
+   "overlap": 0
+  },
+  "cpu": {
+   "A": 0.24,
+   "B": 2.53
+  },
+  "corner_sets_not_unit": []
+ },
+ "crossed": {
+  "margins_identical": true,
+  "clearances_identical": true,
+  "b_classes_identical": true
+ },
+ "verdict": "ACCEPT",
+ "describe": {
+  "least_margins": [
+   {
+    "pair": [
+     98,
+     101
+    ],
+    "margin": "1.5842151e-59"
+   },
+   {
+    "pair": [
+     22,
+     115
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     23,
+     121
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     23,
+     127
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     35,
+     127
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     76,
+     122
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     77,
+     123
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     78,
+     124
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     78,
+     125
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     113,
+     114
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     114,
+     119
+    ],
+    "margin": "1.6000000e-59"
+   },
+   {
+    "pair": [
+     119,
+     120
+    ],
+    "margin": "1.6000000e-59"
+   }
+  ],
+  "least_margin_exact": "990138091832431002813482531204456367608948534062592342163883246509639915450294987969054091900349602547456153596531001783/62500228965809881442613269050916170078077627026162537804696693193324704324699454214252295817530709302401932579354288001000000000000000000000000000000000000000000000000000000000000",
+  "pairs_below": {
+   "1e-27": 680,
+   "1e-12": 680,
+   "1e-9": 685,
+   "1e-6": 696,
+   "1e-3": 728
+  },
+  "pairs_zero": 0,
+  "pairs_negative": 0,
+  "distinct_margins_below_1e-3": 160,
+  "margins_sha256": "14cf024449fe8d9ff677839fbf6dfd9713d91acb7728027571750d8773a0eff4",
+  "walls": {
+   "left": {
+    "least": "2.0000000e-60",
+    "squares": [
+     5,
+     24,
+     25,
+     26,
+     27,
+     104,
+     105,
+     106,
+     107,
+     109,
+     267
+    ],
+    "touching": []
+   },
+   "bottom": {
+    "least": "2.0000000e-60",
+    "squares": [
+     75,
+     76,
+     79,
+     81,
+     110,
+     116,
+     122,
+     259
+    ],
+    "touching": []
+   },
+   "right": {
+    "least": "2.0000000e-60",
+    "squares": [
+     241,
+     242,
+     243,
+     244,
+     248,
+     258,
+     260,
+     261,
+     263,
+     264,
+     266,
+     268,
+     269,
+     270
+    ],
+    "touching": []
+   },
+   "top": {
+    "least": "2.0000000e-60",
+    "squares": [
+     245,
+     246,
+     247,
+     249,
+     250,
+     252,
+     253,
+     254,
+     255,
+     256,
+     257,
+     262,
+     263,
+     265,
+     267
+    ],
+    "touching": []
+   }
+  },
+  "least_right_or_top_clearance": "2.0000000e-60",
+  "least_right_or_top_clearance_exact": "1/500000000000000000000000000000000000000000000000000000000000",
+  "width_less_side": "4.0000000e-60",
+  "height_less_side": "4.0000000e-60",
+  "side_less_extent": "4.0000000e-60",
+  "side_less_extent_exact": "1/250000000000000000000000000000000000000000000000000000000000",
+  "extent_30": "16.927314216351701364094693919616",
+  "close_pairs_below_sqrt2": 642,
+  "upright": 187,
+  "turned_below_1deg": 5,
+  "turned_beyond_1deg": 78,
+  "largest_tilt_deg": 35.3652,
+  "distinct_turned_orientations": 18
+ },
+ "cpu_total": 6.17
+}
