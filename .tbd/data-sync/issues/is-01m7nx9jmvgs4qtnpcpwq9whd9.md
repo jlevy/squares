@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 22
+version: 23
 delegate: w6r-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T05:27:40.624Z
+updated_at: 2026-11-18T05:33:39.547Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -58,3 +58,5 @@ R-127b (blind review), 2026-11-18T03:53Z: draft PR #1028 (https://github.com/jle
 R-127b (blind review of record), 2026-11-18T05:27Z, lane r127b2-1118: PR #1028 merged at 05:25:00Z as 0f191a2d239c39f127b87ea840c536830653d1ff (merge commit; head 1e281a7567, main 3ac78a55f9 merged in; hosted CI green, 16 pass). Review A (https://github.com/jlevy/squares/pull/1028#issuecomment-6969042368) addressed in a dated addendum after the freeze (bcb047ed3f; README commands and rb127_e1p_walls.py in c932385e65); frozen lists still verify (22 and 42 OK); reply https://github.com/jlevy/squares/pull/1028#issuecomment-6969920966. For the mapping: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, verdict accepted at all three; questions for the author are 1, 3 and 4 (Question 2 withdrawn, F8 a note). Significance: this review reads #1015 S3, #1017 S2, #1020 S2 and does not govern; the S1/S2 rule near 1x the margin is the owner's (think-mu3t), and #1020, T-285 and T-286 should be scored by one reading.
 
 coord-intake-1117r: #1028 (R-127b) merged as 0f191a2d2 at 05:25Z. Its A2 fix added rb127_e1p_walls.py (89 lines, decides nothing) and a receipt after Review A. The coordinator accepts these without another review round, since they set no verdict; #1024's senior review should read them as part of the mapping.
+
+2026-11-18T05:33Z w6r-dewinter-1118: merged main 0f191a2d2 (#1028) at c002021f2; restored R-127's three \times macros in its addendum (live copy, e3d8af0df; frozen lists verify: checker 23 OK, findings 69 OK); mapped R-127b (review of record) and R-127 at 7115afc099: V-de-winter-1015-review-r127b-check, V-de-winter-1015-review-r127-check, E-de-winter-{1015,1017,1020}-review-exact-feasibility and -review-r127-exact-feasibility, external_review on the three reports, reviews on T-314..T-316 (provisional). #1020 kept at S1 (#1023's precedent) with both reviews' S2 reading and think-mu3t. Next: after #1023 merges, renumber, merge main, adopt #1020 at 127 and regularize.
