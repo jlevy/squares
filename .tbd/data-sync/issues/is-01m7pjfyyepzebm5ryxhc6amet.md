@@ -5,7 +5,7 @@ title: "Stage 4 review of T-144's mixed_n122_L1126 (wand125 s(122) >= 563/50, n 
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: r144-1118
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m4kbxna1xdmjd8nkka3wax60
 hold: null
 hold_until: null
 created_at: 2026-11-18T05:36:22.990Z
-updated_at: 2026-11-18T05:37:37.484Z
+updated_at: 2026-11-18T06:04:09.525Z
 started_at: 2026-11-18T05:37:37.484Z
 ---
 T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L1126, raising n = 122 to 126; V0/C0 on main) has no review that reads its certificate: the 11 October final review (docs/project/reviews/review-2026-10-11-final-lower-bounds.md) read the record and premises only. result-import.md stage 4 needs a mapped mathematical review before the complete replay's evidence moves the verified lane (check_results verified_lane_review_problems), as the 14 October review did for T-179 and the 4/11 November reviews for T-142 and T-143.
@@ -25,3 +25,7 @@ T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L
 - Who: a tbd-strong-max sub-agent at maximum reasoning in its own worktree, sharing no context with the replay lane; it reads the source as data, runs only code it writes, and does not read an earlier review of this or a sibling certificate (2 October T-080, 14 October T-179, 11 October final) until its findings are written.
 - Inputs: packet packing/resources/web/wand125-linear-n122-2026-10-10/ on branch claude/intake-2026-11-18-t144-replay (candidate and certificate retained under release/, four documents under square-packing/, the proof bundle pinned in acquisition/release-assets.json and fetchable from release square-lower-bounds-v1, asset certificates__mixed_n122_L1126.tar.gz, 31,784,537 B, 6443eae0...5deb).
 - Then: the replay lane (think-nd7g) maps it with the complete replay and control receipts; check_results derives the rungs.
+
+## Notes
+
+2026-11-18 06:25Z r144-1118: checker and controls plan frozen and pushed at ee66533d0f (branch claude/intake-2026-11-18-review-t144), packet packing/resources/web/wand125-linear-n122-review-2026-11-18/. Source fetched by this lane at a9f76c3 and the asset at 6443eae0...5deb (scratch only). Synthetic selftest passed. Next: run RC1-RC6 on the certificate.
