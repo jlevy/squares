@@ -412,9 +412,9 @@ Grades: blocking, major, minor, note.
 | --- | --- | --- | --- |
 | N-1 | note | the claim | the certificate proves the strict bound $s(108) > S$, and $s(109) \ge s(108)$ |
 | N-2 | note (author) | `README.md` line 24 | the README lists `SHA256SUMS`; the folder has none at the pin |
-| N-3 | note (author, record) | the run summaries | built with rustc 1.100.0 where this repository pins 1.98.0; no binary digest; the bundle omits `rust-toolchain.toml` and the crate’s tests |
+| N-3 | note (author, record) | each run summary’s `build.rustc`; `replay_lower.sh` line 2 | built with rustc 1.100.0 where this repository pins 1.98.0; no binary digest; the bundle omits `rust-toolchain.toml` and the crate’s tests |
 | N-4 | note | the net | direction 400 is required by the verifier’s premise (c) and holds no folded angle |
-| N-5 | note (author) | the archived runs | no control: no run of a mutated measure; this review’s decider refuses the 99/100 copy at all 400 rotated directions |
+| N-5 | note (author) | the archived runs; `lower_checks.txt` line 2 | no control: no run of a mutated measure; this review’s decider refuses the 99/100 copy at all 400 rotated directions |
 | N-6 | note (record) | the issue’s gain at 109 | the record holds 10.551290369783 (reported) and 10.4624294225 (verified) at 109, not 10.62 |
 | N-7 | note (record) | a replay here | a census replay runs the very crate the source ran |
 | N-8 | note (author) | `proof_n108.pdf`, first paragraph | the earlier figure 10.622222909689 is not reproduced |
@@ -428,14 +428,15 @@ checksums”; `git ls-tree` at the pin holds no such file in `lower_n108/` (othe
 of the repository have one).
 Add it, or drop the line.
 
-**N-3 — the build.** Every summary names `rustc 1.100.0 (0ef1bc386 2026-11-09)`. This
-repository pins `1.98.0` in `packing/sqverify_fast/rust-toolchain.toml`, which the
-bundle does not copy, nor `tests/adversarial.rs`, `tests/declared_net.rs`,
-`clippy.toml`, `README.md`, `INDEPENDENCE.md` or `independence-record.yaml`;
-`replay_lower.sh` therefore builds with whatever Rust is installed (“Rust 1.98 or
-later”). The source digest `d97758bb…` identifies the crate the runs were built from,
-and every bundled source file is byte for byte this repository’s at `910b6b12c` and
-`f9ddfeeef`, but no summary records the binary’s digest.
+**N-3 — the build.** Every summary’s `build.rustc` names
+`rustc 1.100.0 (0ef1bc386 2026-11-09)`. This repository pins `1.98.0` in
+`packing/sqverify_fast/rust-toolchain.toml`, which the bundle does not copy, nor
+`tests/adversarial.rs`, `tests/declared_net.rs`, `clippy.toml`, `README.md`,
+`INDEPENDENCE.md` or `independence-record.yaml`; `replay_lower.sh` therefore builds with
+whatever Rust is installed (its line 2: “Rust 1.98 or later”). The source digest
+`d97758bb…` identifies the crate the runs were built from, and every bundled source file
+is byte for byte this repository’s at `910b6b12c` and `f9ddfeeef`, but no summary
+records the binary’s digest.
 Nothing in the mathematics depends on it; it is why the runs stand as reported until
 replayed here with the pinned toolchain.
 
@@ -446,10 +447,10 @@ already do ($t_{399} + D/2$ and $t_{400} - D/2 = 66317/160000$ both give
 $19384489/25600000000 > 0$). So the run at $r = 400$ is required and unused; harmless.
 
 **N-5 — no control.** The archived runs decide the original measure only.
-`lower_checks.txt` reports that the axis capture at the argmin falls to $0.997404\ldots$
-when every mass is reduced by 1%, a single exact integration at one pose; it is correct
-(this review’s 99/100 axis decision refuses with that value), but it is not a run of the
-verifier on a mutated certificate.
+`lower_checks.txt` line 2 reports that the axis capture at the argmin falls to
+$0.997404\ldots$ when every mass is reduced by 1%, a single exact integration at one
+pose; it is correct (this review’s 99/100 axis decision refuses with that value), but it
+is not a run of the verifier on a mutated certificate.
 The census route runs the 99/100 copy at every direction
 ([result-import.md, stage 4](../../../packing/campaign/result-import.md#stage-4-validate)).
 What it should find: after its planned controls, this review ran the 99/100 copy through
@@ -613,8 +614,10 @@ What went wrong along the way, before the freeze it precedes:
 
 ## After the Freeze
 
-The findings above were frozen at 03:06:07Z on 18 November (`b38c7535c`). Afterwards
-this lane read the source’s two programs as data, and then the reviews of T-216.
+The findings above were frozen at 03:06:07Z on 18 November, the time of their digest
+list, and pushed at 03:06:14Z (`b38c7535c`), the time that makes the freeze checkable.
+Afterwards this lane read the source’s two programs as data, and then the reviews of
+T-216.
 
 **`stretch_measure.py`** (903 bytes) multiplies every coordinate of Hosono’s file by the
 new side over the old and rewrites `L`, `B` and `proof_net`, leaving the masses; that is
@@ -633,6 +636,32 @@ What it leaves to the verifier or does not check is what this review added: N0 (
 (e), complete trees and least-bound boxes in their quadrants, the summaries’ totals
 against their records, the merged expansion, any capture at a rotated direction, and any
 control beyond the one axis pose (N-5). Nothing in either program changes a finding.
+
+**For a soundness review of the decider.** Review A of the pull request (round 1, the
+same day) found two points in the frozen `rv1018_bnb.c` and `rv1018_decide.py` that the
+text above leaves implicit.
+Neither changes a verdict here; both are for the soundness review that would let the
+decider’s runs set a rung.
+
+- **The ring’s outer cuts are rounded outward** (Review A’s A3). Lines 203 and 208 of
+  `rv1018_bnb.c` put the strips’ outer cuts at `dn(-a - dn(τ))`, and lines 206 and 211
+  at `up(a + dn(τ))`, so a strip may run up to about two units in the last place of $a$,
+  about $1.1 \times 10^{-16}$, past the thickness $2b_u j/m$ that the comment at lines
+  177 to 185 and the decider paragraph above reason with.
+  The bound stays sound: every square of the box contains the strips with that excess,
+  since the $\delta = 10^{-12}$ taken off the half-side covers both the float frame’s
+  error, $\epsilon_{cs}\lvert\Delta\rvert_1 \le 1.1 \times 10^{-16}$, and the excess.
+  That is a second use of $\delta$’s slack, which the written argument does not state; a
+  later version should round the cuts inward.
+- **The chord allowance assumes offsets below 12** (A7). Lines 108 and 109 of
+  `rv1018_decide.py` set `zmax = 12.0` and the allowance
+  $256\,\mathrm{EPS}\,(1 + z_{\max})/\min(\sin\theta_r, \cos\theta_r)$ for the float
+  error of one chord, and nothing checks the offsets against `zmax`. Here the rectangles
+  and the centres lie in $[0, L]^2$ and the cuts within 1.5 of the centre, so every term
+  a chord evaluates is below about 12.2 in magnitude; by Review A’s count of one chord’s
+  error, about $4\,\mathrm{EPS}(1 + z)/\min(\sin\theta_r, \cos\theta_r)$ for offsets up
+  to $z$, the constant holds for offsets up to about 800. Sound as used; a later version
+  should derive `zmax` from its input or check it.
 
 ## Comparison With Earlier Reviews
 
@@ -680,6 +709,11 @@ sentence start; the Scope’s pointer to the reading of `check_lower.py` and
 were added. No finding, verdict or number of the frozen text changes; the last item of
 the comparison widens the census price’s lower end, which the frozen price table does
 not show.
+
+After Review A of the pull request (round 1, the same day), this lane also gave N-3 and
+N-5 the source lines they rest on (A9), added the push time of the findings freeze (A4),
+and added the paragraph “For a soundness review of the decider” in After the Freeze (A3,
+A7). These change no finding, verdict or number either.
 
 ## Reproduction
 
