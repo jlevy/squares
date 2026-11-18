@@ -9,14 +9,14 @@ The source is not retained here, and this directory is review-only.
 On `main` the import packet
 [`wand125-linear-n122-2026-10-10`](../wand125-linear-n122-2026-10-10/README.md) holds
 the manifest, not the candidate or the certificate, so this lane fetched them itself:
-the documents from wand125/square-packing at
-`a9f76c382d023b4095899c4eb7ea7483b8b87ecf` (blobless, 05:38Z on 18 November 2026), and
-the release asset `certificates__mixed_n122_L1126.tar.gz` of `square-lower-bounds-v1`
-(05:41:37Z). The asset is 31,784,537 bytes with SHA-256
+the documents from wand125/square-packing at `a9f76c382d023b4095899c4eb7ea7483b8b87ecf`
+(blobless, 05:38Z on 18 November 2026), and the release asset
+`certificates__mixed_n122_L1126.tar.gz` of `square-lower-bounds-v1` (05:41:37Z). The
+asset is 31,784,537 bytes with SHA-256
 `6443eae03c56dc99051965246dbf97f5f3540feb9c011eac96e6d094521f5deb`, the release API’s
 digest. Both stayed in the lane’s scratch space and were deleted when the review ended.
-The programs take their paths as arguments, so a rerun needs a fetch of the same pin
-and asset.
+The programs take their paths as arguments, so a rerun needs a fetch of the same pin and
+asset.
 
 ## Layout
 
@@ -24,8 +24,9 @@ and asset.
 - `frozen/`: the digests of the checker and the plan at their freeze
   (`checker-frozen-digests.txt`, 06:03:49Z), the findings’ digests at theirs
   (`findings-frozen-digest.txt`), and the frozen review text.
-- `out/`: the receipts. `out/bnb-all/` holds the complete decision of nodes 1 to 200,
-  one file per range of 25 nodes.
+- `out/`: the receipts.
+  `out/bnb-all/` holds the complete decision of nodes 1 to 200, one file per range of 25
+  nodes.
 
 ## Programs
 
@@ -52,10 +53,11 @@ They ran under CPython 3.14.7, the project interpreter, as `python -I -B` at
 | `r144_selftest.py` | nothing about the certificate: the controls on the programs above | synthetic measures, and mutated copies of the real candidate and node 37’s input | `out/selftest-*.json` |
 
 `r144_run_all.sh`, `r144_lanes.py` and `r144_release_sums.py` were written after the
-controls plan, and two frozen programs changed after the checker’s freeze. Both changes
-are disclosed in the review’s [What This Review Ran](../../../../docs/project/reviews/review-2026-11-18-wand125-linear-n122.md#what-this-review-ran).
-`r144_premises.py` takes its square roots of 2 and 22 to 200 digits instead of 60,
-since the source’s bound on $G_{11}$ lies within $2 \times 10^{-60}$ of it.
+controls plan, and two frozen programs changed after the checker’s freeze.
+Both changes are disclosed in the review’s
+[What This Review Ran](../../../../docs/project/reviews/review-2026-11-18-wand125-linear-n122.md#what-this-review-ran).
+`r144_premises.py` takes its square roots of 2 and 22 to 200 digits instead of 60, since
+the source’s bound on $G_{11}$ lies within $2 \times 10^{-60}$ of it.
 `r144_poses.py` gained `--draw`, which draws the six seeded search nodes.
 
 ## Running Them
@@ -88,11 +90,11 @@ $R/programs/r144_run_all.sh $BUNDLE $R/out/bnb-all 7200
 ```
 
 `r144_release_sums.py` takes the release’s `SHA256SUMS`, downloaded beside the asset,
-and the digest and update time that `gh api repos/wand125/square-packing/releases/tags/square-lower-bounds-v1`
-gives for it.
-Each program exits 0 and prints its verdict. Two receipts over 1,000 lines are kept as
-`gzip -9n` (table below), as the packet rule in
-[`packing/resources/README.md`](../../README.md) asks; a rerun writes them plain.
+and the digest and update time that
+`gh api repos/wand125/square-packing/releases/tags/square-lower-bounds-v1` gives for it.
+Each program exits 0 and prints its verdict.
+Two receipts over 1,000 lines are kept as `gzip -9n` (table below), as the packet rule
+in [`packing/resources/README.md`](../../README.md) asks; a rerun writes them plain.
 
 ## What They Printed
 
@@ -112,8 +114,8 @@ Each program exits 0 and prints its verdict. Two receipts over 1,000 lines are k
 | `r144_run_all.sh` | FULL_RUN_PLACEHOLDER | FULL_RUN_CPU |
 
 The first `r144_premises.py` run printed `PREMISES_FAIL`, with one failed check: at 60
-digits, its enclosure of $G_{11}$ could not separate it from the source’s bound. The
-200-digit rerun holds; nothing else failed along the way.
+digits, its enclosure of $G_{11}$ could not separate it from the source’s bound.
+The 200-digit rerun holds; nothing else failed along the way.
 
 ## Compressed Files
 
