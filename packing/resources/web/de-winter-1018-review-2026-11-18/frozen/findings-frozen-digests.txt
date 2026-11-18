@@ -1,0 +1,39 @@
+# Lane r108-1118 (blind stage 4 review of jlevy/squares#1018): findings frozen at 2026-11-18T03:06:07Z.
+# The review as frozen is frozen/review-2026-11-18-de-winter-1018.frozen.md; the mapped copy in
+# docs/project/reviews/ may differ afterwards only as its 'Note on This Copy' says.
+# Before this freeze this lane had not read check_lower.py, stretch_measure.py, any crate source, the reviews of T-216,
+# the import lane's work or the issue's comments.
+# Verify from packing/resources/web/de-winter-1018-review-2026-11-18 with: sha256sum -c frozen/findings-frozen-digests.txt
+2f1704da56c123fde8ba5e1f3e04669ed720865442e434c3731c76e901b3003e  frozen/review-2026-11-18-de-winter-1018.frozen.md
+787b36c2db2306ce2ebc1171347a8d388d73917d7ecd602367b78b38c203064c  README.md
+c96df8d97b334d3cc5c8c1aa57be4a8a8a83276cfc944cb3017f695069900c45  frozen/checker-frozen-digests.txt
+120d4714b6757b8e0622c921fe2416b2493e7ff1e69ede2210b8395e17b9aba5  programs/controls-plan.json
+b618a77e2178a3704e5944c61b94edffae3136fc3547af3a4933a31e8eac751c  programs/issue-1018.json
+60d88bac3cd8e78fe399ed5c30b72596577d490cbbf7d1c9f696007a58efebb6  programs/rv1018_axis.py
+24166d2af7f07f214918cacbd9f2a88be484ec0c52bd29b06a53ce2c28f2714e  programs/rv1018_common.py
+0669175de7d7fdbb898634ce98ff995d3a5c0cd65c25790bdaf9559d343e0288  programs/rv1018_controls.py
+864a02253fa9017d9634cefcb7dae051595261cffce75e9ad9fdcaaff9f9b634  programs/rv1018_custody.py
+755cae8d2c4902c670cfbd96eb1ede746e881b6b5fcebb2f0fd2890a59594b77  programs/rv1018_decide.py
+7ea7d0480845774c5bb635abd448db901607fef3f60a96017ccc7a08e50ae989  programs/rv1018_measure.py
+e25140c4af1a7bd84dbb7ac48f7c7a31bca4660fe644e3c49eaa05511e17ef37  programs/rv1018_poses.py
+d8f35cd42ad02df492610dc3de99c45972ec155021cec9bd723b75246d0f906c  programs/rv1018_premises.py
+c7dc522c18763a31aeef20a779cf8dcec116d5da65537f5a54bb4908b60ed3a1  programs/rv1018_runs.py
+927bd3d6fe4ccbe3bc9ace3c2835954435539e115bd1142cf1640d98383cffab  programs/rv1018_sample.py
+647ff41cf82dcdd7d9029037632354bce7c3c0c80799645e07ce90913a2df508  programs/rv1018_selftest.py
+1c0c6eae073457817e7a6ed11f8228583c52bd26febe33a9850b42f2a7a5ae2b  programs/rv1018_bnb.c
+935c2ba4a1c2514f26a761623646eb349ba6acf524b2c6a33aaa61ca9db38d4b  out/axis-99_100.json
+41284d52313486bed54d2a1110a092a00919e46b1a0dd11ed0cf362f660f0371  out/axis.json
+8bb34af1505c3b91db8e9c366117b4057c0190a29f65241d30c91b6d865df7b2  out/controls.json
+3580b45c40bb0f403981e288168c9ddf92917d761f06717c2cf559e5a4869447  out/custody.json
+693ba51c0cabb7d2fc7266bcd713cf64499e961f3b62d2f620e23c8011bba36b  out/decide-net-001-200.json
+47835c8de4707f1d6e2fb66f470e13b2fd7be0b15d6c29ec0817904fd4066447  out/decide-net-201-400.json
+0f16c202942a8d58f62b3bda3c74998ae90aa7052abfdf36849121eae24ba9ca  out/decide-net-99_100-001-200.json
+53a2e9b3e3961022aa9c5b00ff948b7820f0c93e46f6e6d55e796ba9d0e95195  out/decide-net-99_100-201-400.json
+9dd14b3b03454b666e3b88117f53c3760179efb142e4ba94cf657dd358eb3e28  out/decide-price-r200.json
+c6d8be5c4800331de5d6866625a4bea7626fe91c9e12e9342d8255ca20b6b65e  out/decide-sample.json
+a21dce14a7d5c305673f7b7ced520604c6c9ba262e2458dfc86443f1cc0d87ec  out/measure.json
+34137306a250559ced1836949100df45779d3086dd6a3c2f9be80840de9b5397  out/poses.json
+5b1ca8c9328e0bd71bb3b89fa882950db762dd82349e93589066946f9cd17cc0  out/premises.json
+4f5f638ee7e2b547ba673ac844e7ff0387eeae2c0b395f8676d5fbe6d9e2673c  out/runs.json
+20fda8415146109f8536daab35e00baeac5b6d8d3d2ae235cd4204639de3141b  out/sample.json
+d6eda85fe8e7c1958dfecc7f76199d23c0a133d8ff94244112c888f6c104befa  out/selftest.json

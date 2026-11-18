@@ -89,8 +89,51 @@ $PY $P/rv1018_controls.py --measure $M --base $BASE --runs $SRC/evidence/directi
   --scratch "${TMPDIR:-/tmp}" --out $R/out/controls.json
 ```
 
-What each printed, its CPU time, and what failed along the way are recorded below once the
-runs are done.
+The full net ran as two processes, `--directions 1,...,200` and `--directions 201,...,400`,
+written to `out/decide-net-001-200.json` and `out/decide-net-201-400.json`; the pricing
+run as `--directions 200` to `out/decide-price-r200.json`; and, outside the plan and after
+the controls, the 99/100 copy across the net with `--factor 99/100` to
+`out/decide-net-99_100-001-200.json` and `out/decide-net-99_100-201-400.json`.
+
+## What Each Program Printed
+
+| Program | Printed | CPU (s) |
+| --- | --- | ---: |
+| `rv1018_selftest.py` | `PASS [] points 2016` | 9.0 |
+| `rv1018_custody.py` | crate identical at `910b6b12c` and `f9ddfeeef`; T-216 copy identical; missing `SHA256SUMS` | 0.1 |
+| `rv1018_premises.py` | `PREMISES_HOLD []`, $S$ to 40 places | 0.5 |
+| `rv1018_measure.py` | `SCALED_COPY []` | 0.5 |
+| `rv1018_runs.py` | `RUNS_COVER_THE_NET []`, 401 directions, 266,337,510 rotated nodes | 0.3 |
+| `rv1018_axis.py` | `AXIS_DIRECTION_DECIDED`, rigorous least 1.0074788332233897, exact least 1.0074788336918701996 | 8.7 |
+| `rv1018_axis.py --factor 99/100` | `REFUSED_EXACT`, exact least 0.99740404535495149761 | 8.2 |
+| `rv1018_poses.py` | `ALL_POSES_CONSISTENT []`, least 1.0081365926529459 at r = 320 | 4.6 |
+| `rv1018_sample.py` | `NO_COUNTEREXAMPLE_IN_SAMPLE`, least 1.0046798276202321 at r = 375 | 10.4 |
+| `rv1018_decide.py`, r = 200 | `DECIDED`, 11,613 boxes | 2.8 |
+| `rv1018_decide.py`, the sample | 19 of 19 `DECIDED` | 54.8 |
+| `rv1018_decide.py`, the net | 400 of 400 `DECIDED`, 5,483,404 boxes (the summary’s label `ALL_SAMPLED_DIRECTIONS_DECIDED` means every requested direction) | 1,021.4 |
+| `rv1018_controls.py` | `ALL_CONTROLS_AS_PLANNED []`, 38 controls (A0 and D0 are the axis and net runs above) | 33.3 |
+| `rv1018_decide.py --factor 99/100`, the net, outside the plan | 400 of 400 `REFUSED_EXACT` (summary `REFUSED_WITH_EXACT_WITNESS`) | 157.3 |
+
+## What Failed Along the Way
+
+Before the checker’s freeze, on synthetic data only:
+
+- The first branch and bound bounded a box by its eroded square alone; on a uniform
+  synthetic measure with 0.1% slack it needed about $10^8$ boxes. A ring of strips beside
+  the eroded square, then one cumulative integration per rectangle and side, brought it to
+  about $4 \times 10^6$ boxes in 9 seconds.
+- The self-test failed twice on its own expectations: a threshold $10^{-9}$ above an
+  attained capture leaves a sliver the search need not find, and a small axis measure
+  without its background captured nothing. The decider then took two changes that leave
+  every acceptance unchanged: a candidate is any box centre estimated more than $10^{-12}$
+  below the threshold (it was $10^{-9}$), and the child with the lower centre estimate is
+  searched first.
+- Control D4 was first planned at $10^{-6}$ above the least capture found; synthetic
+  trials showed that leaves too small a set to hit at sharp minima, so it is $10^{-4}$.
+- The first push of the freeze was refused for want of credentials and was retried with
+  `gh` as the credential helper; the commit did not change.
+
+After the freeze nothing in `programs/` changed (`sha256sum -c` above).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
