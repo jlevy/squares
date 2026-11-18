@@ -7,6 +7,7 @@ paths:
   - packing/atlas/known-best/bound-citations.json
   - packing/atlas/known-best/composite-figure.json
   - packing/campaign/result-requests.yaml
+  - packing/devtools/site_urls.py
   - packing/frontier/n-108.md
   - packing/frontier/results.yaml
   - packing/frontier/source-coverage.yaml
@@ -24,11 +25,12 @@ reason: >-
   Winter's issue 1018 is retained, audited and replayed by the census, its stage 4 review
   (#1027) is mapped, and its lower bound at 108 and 109 is registered as T-327 at V3/C3, which
   moves both lower lanes at both counts; the requests entry, the coverage source, the case
-  records, the composite figure record and the bound citations follow. No paper prints 108's
+  records, the composite figure record and the bound citations follow, and site_urls.py raises
+  the byte ceilings of two result pages whose register lists now name T-327. No paper prints 108's
   or 109's lower bounds, this entry or that source. Against main 86284ec20 (#1023):
   devtools.compare_paper_renders rendered each paper into empty site directories, the math
   passes in /opt/pw-browsers/chromium-1243/chrome-linux64/chrome (SQPACK_CHROMIUM), twice from
-  this tree and once with that main's copies of the six paths above swapped in. The
+  this tree and once with that main's copies of the seven paths above swapped in. The
   optimality review, the threshold-bound review and the methods survey are byte-identical
   across the three, 43 files each. The explainer's 55 files are deterministic, and only its
   Markdown and HTML differ from the baseline; rendered again with main's copies of every path
