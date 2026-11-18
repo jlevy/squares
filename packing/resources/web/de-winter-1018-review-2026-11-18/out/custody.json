@@ -1,0 +1,131 @@
+{
+ "program": "rv1018_custody.py",
+ "source_files": {
+  "README.md": "c59235d441d7bb9d8b67944df06f2263ee3e8ba43b53aec339cb3f046f037841",
+  "check_lower.py": "4ac2a14ac2b48d7c4f13c5748a9ad297fcdc73450c33f068be25d6c0b128a19b",
+  "evidence/Hosono_n108.json.gz": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+  "evidence/SOUNDNESS.md": "1c268d3edfc75081668b090b0a0c6211b362b6bf9d270f24e635f15c6cd4575c",
+  "evidence/direction_runs/directions_000_030.jsonl.gz": "bc786015c7613c75563bd13ff646baba9ba7253ffd7e6d11fe7d1f3cf1a26ffd",
+  "evidence/direction_runs/directions_031_061.jsonl.gz": "88c93de96e6404368a83f272b526034fd552d4852f4aab429050c00f06c35a95",
+  "evidence/direction_runs/directions_062_092.jsonl.gz": "2f28406229e2abb4dbbdac44af7e5504703ba380b90edc244dfd336552969cb3",
+  "evidence/direction_runs/directions_093_122.jsonl.gz": "0ce36929a8ecbd1a78fb5625b1d361a17c9bc42cff64f46ad62800016476a483",
+  "evidence/direction_runs/directions_123_157.jsonl.gz": "635cfafe171138da889c5834430127f6d37389e905815ec8707c875852b5cf5a",
+  "evidence/direction_runs/directions_158_192.jsonl.gz": "1f4fa06e916d83adb27731fb6d674cae3782fd1c71ed71520d826218b0b39da7",
+  "evidence/direction_runs/directions_193_227.jsonl.gz": "0c2ded363c6a023593a1d246ddb620ad92df86fa5243b7a186c289e02425bef4",
+  "evidence/direction_runs/directions_228_262.jsonl.gz": "5c10e8a74815df23bfd234182bcd6d6cdf91d237a31a72c4e26deb688b531802",
+  "evidence/direction_runs/directions_263_297.jsonl.gz": "6177b9f11292ff792a9fa1381dc92ad013b4c2447d9ed736ac87a69492c9dfaa",
+  "evidence/direction_runs/directions_298_332.jsonl.gz": "0259bbc80ca60fe7951c665eed56362070553366cbb8fdefb618fa2b26ce9c61",
+  "evidence/direction_runs/directions_333_367.jsonl.gz": "a417861f032707759539f1013656b433cb95f080e2966b8a6becba2bf89edf15",
+  "evidence/direction_runs/directions_368_400.jsonl.gz": "93a66b9c0ba8959da14063ddaa6c70f03d3c022505fbb085f4103e1454543fcb",
+  "evidence/n108_measure.json.gz": "bd471f6541874a6f6a057c57b8804812563859d83a0f2e1a1aa7595dad32d0da",
+  "evidence/squares-project-license.txt": "37e843e6f72de34505f3d361b4c74f2556dcf634610672ec270b0cff77ebeb21",
+  "lower_checks.txt": "3161e51b565b0f961c21b61cc5225a7a8ef36106d0edbf85a8c5d7623970ba5d",
+  "proof_n108.pdf": "ffd5f6f60b1364df56c9475819efe72cb010eae28ac077c46e51037bffc38ce1",
+  "replay_lower.sh": "93b929876bf1455e1ad19c732cf0b304398faa293754287009444fa1cc2cf18d",
+  "sqverify_fast/Cargo.lock": "5c3206fa1eeabb23d52e93d76eec0d2c16820e6065ce02e8e13a7fa47693785c",
+  "sqverify_fast/Cargo.toml": "df5e6c24699f934dcabe1119273621ac332dfcd9c75dd0650acacfc827466665",
+  "sqverify_fast/LICENSE": "37e843e6f72de34505f3d361b4c74f2556dcf634610672ec270b0cff77ebeb21",
+  "sqverify_fast/build.rs": "1e238378117bc7716e50cdd4e3d0d3862e756e1ff863794b9b559ffe4b2743e6",
+  "sqverify_fast/src/axis.rs": "bf18bd9a0a82806bac6a3aa82df73349944eaa56a22ae5a9b67a67ab3d237e97",
+  "sqverify_fast/src/certificate.rs": "4bf5c5dc1e74dd97040360befbbb2b3e07438b4b3b11d7aa340bc2e20e2ea7d4",
+  "sqverify_fast/src/exact.rs": "b9d627b740c8a0c7ed069c1faac2563b9db72c03c10c9f88fb3c0234054f481a",
+  "sqverify_fast/src/interval.rs": "287da6570dfc1278e3ba6b4c09bfaca6409d16fba0713329bf0c4a5dcbfe5e56",
+  "sqverify_fast/src/lib.rs": "8a8f96380144511afc84734e667d1114bd2c1400623482d50d40eb394646aceb",
+  "sqverify_fast/src/main.rs": "e4a65d9570a5f91f41474a20c3c90e8804da568c11d32ca632da59605f5f84e8",
+  "sqverify_fast/src/oracle.rs": "3c993d66c6edb3a235a3e089a586bb4b42de02fb331fc519836b22cadb99c151",
+  "sqverify_fast/src/rotated.rs": "4bf878c4d0e8acaedcccedbfb52d8885e1ba2657876bad2048fe30e5f3c7ded3",
+  "sqverify_fast/src/rotated_tests.rs": "02472f4c41ab738bc029d7e88b66cdf3382bc1e5a74aa6a72f81573b292eec86",
+  "stretch_measure.py": "1a2e1ebdc0532cac19c769045fa5140c81d1fda5d8ade48ab13e2d3f58546a0f"
+ },
+ "file_count": 35,
+ "crate_comparison": {
+  "910b6b12c": {
+   "bundle_files": {
+    "Cargo.lock": "identical",
+    "Cargo.toml": "identical",
+    "LICENSE": "absent",
+    "build.rs": "identical",
+    "src/axis.rs": "identical",
+    "src/certificate.rs": "identical",
+    "src/exact.rs": "identical",
+    "src/interval.rs": "identical",
+    "src/lib.rs": "identical",
+    "src/main.rs": "identical",
+    "src/oracle.rs": "identical",
+    "src/rotated.rs": "identical",
+    "src/rotated_tests.rs": "identical"
+   },
+   "all_bundled_crate_sources_identical": true,
+   "in_repository_not_in_bundle": [
+    ".gitignore",
+    "INDEPENDENCE.md",
+    "README.md",
+    "SOUNDNESS.md",
+    "clippy.toml",
+    "independence-record.yaml",
+    "rust-toolchain.toml",
+    "tests/adversarial.rs",
+    "tests/declared_net.rs"
+   ]
+  },
+  "f9ddfeeef": {
+   "bundle_files": {
+    "Cargo.lock": "identical",
+    "Cargo.toml": "identical",
+    "LICENSE": "absent",
+    "build.rs": "identical",
+    "src/axis.rs": "identical",
+    "src/certificate.rs": "identical",
+    "src/exact.rs": "identical",
+    "src/interval.rs": "identical",
+    "src/lib.rs": "identical",
+    "src/main.rs": "identical",
+    "src/oracle.rs": "identical",
+    "src/rotated.rs": "identical",
+    "src/rotated_tests.rs": "identical"
+   },
+   "all_bundled_crate_sources_identical": true,
+   "in_repository_not_in_bundle": [
+    ".gitignore",
+    "INDEPENDENCE.md",
+    "README.md",
+    "SOUNDNESS.md",
+    "clippy.toml",
+    "independence-record.yaml",
+    "rust-toolchain.toml",
+    "tests/adversarial.rs",
+    "tests/declared_net.rs"
+   ]
+  }
+ },
+ "documents": {
+  "910b6b12c": {
+   "evidence/SOUNDNESS.md": false,
+   "evidence/squares-project-license.txt": false,
+   "sqverify_fast/LICENSE": false
+  },
+  "f9ddfeeef": {
+   "evidence/SOUNDNESS.md": true,
+   "evidence/squares-project-license.txt": true,
+   "sqverify_fast/LICENSE": true
+  }
+ },
+ "hosono_copy_sha256": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+ "retained_T216_sha256": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+ "hosono_copy_is_retained_T216": true,
+ "readme_names": [
+  "SHA256SUMS",
+  "check_lower.py",
+  "evidence/Hosono_n108.json.gz",
+  "evidence/SOUNDNESS.md",
+  "evidence/n108_measure.json.gz",
+  "evidence/squares-project-license.txt",
+  "lower_checks.txt",
+  "proof_n108.pdf",
+  "replay_lower.sh",
+  "stretch_measure.py"
+ ],
+ "readme_names_missing_from_folder": [
+  "SHA256SUMS"
+ ]
+}
