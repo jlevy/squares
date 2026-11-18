@@ -140,8 +140,16 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-007.html": (
-        800_000,
-        "Complete broad scope history and prepared exact bounds measure 711,115 bytes.",
+        850_000,
+        (
+            "Complete broad scope history and prepared exact bounds measure 711,115 bytes. "
+            "Main measures 794,770 bytes on 18 November 2026 (a1a8d0aae, hosted run "
+            "44221820600), and 811,974 once T-314 to T-326 (#1009) are listed at their "
+            "thirteen counts (run 44221608402), about 1.3 KB a result, past the 800,000 "
+            "ceiling, so the ceiling moves to 850,000 as a measured choice, room for about "
+            "29 more listed results. Those are byte measurements only; the timing is owed "
+            "under think-v4me."
+        ),
     ),
     "result/t-085.html": (
         800_000,
@@ -208,8 +216,18 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        1_700_000,
+        1_800_000,
         (
+            "On 18 November 2026 the 326-result page measures 1,706,120 bytes in hosted run "
+            "44221608402, past the 1,700,000 ceiling, once #1009's import registers T-314 to "
+            "T-326 on top of T-310 to T-313; the room the 12 November note expected through "
+            "318 results was used, and eight more registrations fitted in its margin. Main "
+            "measures 1,660,295 bytes at 313 results the same day (run 44221820600), so the "
+            "thirteen cost about 3.5 KB each. At a 90th-percentile row of 4,507 bytes the "
+            "ceiling moves to 1,800,000 as the same measured choice, which leaves 93,880 "
+            "bytes, 20 rows at that row cost with 3,740 bytes to spare, so the room runs "
+            "through 346 results; its timing was not re-measured, and the lightening stays "
+            "think-v1qe's. "
             "On 12 November 2026 the 297-result page measures 1,600,513 bytes in hosted run "
             "43182861315, past the 1,600,000 ceiling, once #967's import registers T-297; the "
             "room the 5 November note expected through 291 results was used, and six more "
@@ -265,7 +283,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-180.html": (
-        525_000,
+        550_000,
         (
             "The closed form's result, its scope of 264 counts and prepared math measure "
             "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
@@ -285,7 +303,11 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "are listed at 228 and 147, 2,276 bytes for the two, against 499,424 on #986's "
             "head 4544c4c96, so the ceiling moves to 525,000 as a measured choice, room for "
             "about 20 more listed results at about 1.14 KB each; the timing is still "
-            "think-v4me's."
+            "think-v4me's. Main measures 514,271 bytes on 18 November 2026 (a1a8d0aae, run "
+            "44221820600), and 531,877 once T-314 to T-326 (#1009) are listed at their "
+            "thirteen counts (run 44221608402), about 1.35 KB a result, past 525,000, so "
+            "the ceiling moves to 550,000 as a measured choice, room for about 13 more "
+            "listed results; the timing is still think-v4me's."
         ),
     ),
     "result/t-068.html": (
