@@ -72,11 +72,51 @@ re-solves, each shrunk to first contact, so it is a smaller packing than the hou
 registration, stage 4 review and adoption, crediting Couzo’s packing and this project’s
 re-solve with Evan Daniel’s regularizer, are think-4z8z’s, with the regularizer optimum
 at 303 (`../../regularized_drawings/think-463r-2026-11-09/option-d/`). At 307 a later
-house, Doğa Özden’s T-279, lies 2.03e-5 below T-256 since 9 November 2026, so the
-candidate is no smaller packing and no candidate under the house rule.
+house, Doğa Özden’s T-279, lies 2.03e-5 below T-256 since 9 November 2026, and Mykhailo
+Polkovskyi’s re-solve of it (T-326) lower still since 18 November 2026, so the candidate
+is no smaller packing and no candidate under the house rule.
 At 293 the candidate restates Daniel’s certificate, and RV-4 falls with it.
 Whether option D reaches T-259 itself, 0.9193 of T-254’s margin, is the owner’s question
 (think-7k8p).
+
+### The Project’s Ten Candidates
+
+On 18 November 2026 the pass recorded this project’s own solves below a house as
+classification and receipts only, and left their registration, stage 4 review and
+adoption to think-4z8z. Ten are new results under option D, each below the house at its
+count once the house is shrunk to first contact:
+
+| n | House | House’s margin | Gain | Share | The solve |
+| ---: | --- | ---: | ---: | ---: | --- |
+| 130 | T-259 | 2.183057e-13 | 2.500188e-13 | 1.1453 | this package’s `certificates/n-130.cert` |
+| 303 | T-278 | 3.402014e-12 | 3.481634e-12 | 1.0234 | `think-463r-2026-11-09/option-d/n-303-solve.cert` |
+| 260 | T-318 | 3.327643e-27 | 1.009592e-14 | 3.03e12 | the driver’s solve of the new house |
+| 268 | T-320 | 3.374431e-27 | 1.629958e-15 | 4.83e11 | the same |
+| 270 | T-321 | 3.386261e-27 | 5.727255e-15 | 1.69e12 | the same |
+| 272 | T-322 | 3.393487e-27 | 3.862102e-17 | 1.14e10 | the same |
+| 292 | T-323 | 7.030684e-14 | 1.026574e-13 | 1.46 | the same |
+| 295 | T-324 | 2.966130e-19 | 4.162390e-19 | 1.40 | the same |
+| 299 | T-325 | 3.561215e-27 | 6.195876e-15 | 1.74e12 | the same |
+| 307 | T-326 | 3.596022e-27 | 1.337350e-15 | 3.72e11 | the same |
+
+At 130 and 303 the receipts are `measure/contraction-n130-t259.json` here and
+`option-d/contraction-n303-t278.json` beside the 303 solve.
+At the eight counts of issue 1009 the house’s margin is its own
+(`resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-nNNN-own.json`) and
+the solve is Evan Daniel’s driver run on the new witness and held at row 3, its solved
+side in the run’s report
+(`../../regularized_drawings/think-i38n-2026-11-18/adopt-2026-11-18-n147-307-evand/n-NNN/report.json.gz`);
+lane w7r-optd-1118 re-measured all eight against `main` as merged with #1023
+(86284ec20), and
+`test_upper_bound_reports_1009.test_the_held_solves_below_the_new_houses_pass_option_d`
+holds the same shares.
+At 270, 299 and 307 the solves are the points the driver held on 9 November 2026
+(think-he66, think-463r). The owner left new-result status and the improved-by credit
+there with Polkovskyi, who first reported and certified the packings, the record noting
+the project’s earlier solves (think-frl5); the three stay candidates, registered where
+they are lower.
+At 156 and 180, the decision’s other two counts, the project’s solves lie
+above Polkovskyi’s sides, so the project holds no candidate there.
 
 ## What Is Retained
 

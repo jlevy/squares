@@ -491,6 +491,36 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # T-132's fine-net bound supersedes Hosono's check2 bound of 6 October at n = 29
         # (T-108), its one count, in both lanes, adopted in the pass of 17 November 2026.
         "T-108",
+        # The pass of 18 November 2026 (think-i38n) took the last houses of nine results to
+        # Mykhailo Polkovskyi's issue-1009 certificates (T-314 to T-326): T-302 at 147,
+        # T-287 at 156, T-288 at 180, T-269 at 260, T-289 at 268, T-283 at 270, T-146 at
+        # 292, T-277 at 299 and T-279 at 307. Doğa Özden's and Joost de Winter's
+        # certificates of issues 1005 to 1007 (T-310 to T-313), never houses, are
+        # superseded by his smaller ones at 262, 292 and 295 (T-319, T-323, T-324).
+        "T-302",
+        "T-287",
+        "T-288",
+        "T-269",
+        "T-289",
+        "T-283",
+        "T-146",
+        "T-277",
+        "T-279",
+        "T-310",
+        "T-311",
+        "T-312",
+        "T-313",
+        # Lane w7-optd-1118 (think-8yyy) took 172 and 199, the last houses of Doğa Özden's
+        # T-282 and T-284, to Joost de Winter's re-solves (T-286, T-285), new results under
+        # the owner's option D of 17 November 2026 (think-b0w5), in the same pass. It
+        # recorded Polkovskyi's and Yim's re-certifications (T-253, T-260, T-280, T-281) as
+        # restatements under the same ruling (`restatements`), which read superseded.
+        "T-282",
+        "T-284",
+        "T-253",
+        "T-260",
+        "T-280",
+        "T-281",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets

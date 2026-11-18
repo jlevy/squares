@@ -141,6 +141,11 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: from T-268, 232 from T-275 and 264 from T-186, to JoeGun's certificates (T-305 to T-309),
 #: each opened from contact by about 1e-11 or 1e-12 between pairs and touching three walls:
 #: 127 and 305 joined, and 204, 232 and 264 stayed.
+#: The pass of 18 November 2026 (think-i38n) moved it at thirteen, to Mykhailo Polkovskyi's
+#: certificates of issue 1009 (T-314 to T-326), each clearing every wall by at least 1e-28
+#: and every pair by at least 2e-28: 147, 156 and 268 left, their new certificates stable
+#: across the tolerances; 210, 262, 272 and 292 joined; and 180, 260, 270, 295, 299 and 307
+#: stayed, 295 stable as before.
 #: Re-screening the adopted counts with the screen's own `--update --n` rebuilds the
 #: retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -173,12 +178,13 @@ GOLDEN_UNSTABLE = {
         146,
         # 147 joined on 15 November 2026 with Roberto Ono's certificate there (T-302,
         # think-17ex), and 228 with his certificate there (T-301): their least pair margins,
-        # 3.0e-10 and 2.4e-10, lie between the screen's tolerances, as T-196's did.
-        147,
+        # 3.0e-10 and 2.4e-10, lie between the screen's tolerances, as T-196's did. 147 left
+        # on 18 November 2026: Mykhailo Polkovskyi's certificate there (T-314, think-i38n)
+        # is stable across tolerances.
         # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
         # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
-        # certificates there (T-287, T-288, think-xq4o).
-        156,
+        # certificates there (T-287, T-288, think-xq4o); 156 left on 18 November 2026 with
+        # Polkovskyi's re-solve of it (T-315), and 180 stayed with his of T-288 (T-316).
         175,
         176,
         177,
@@ -205,12 +211,13 @@ GOLDEN_UNSTABLE = {
         146,
         # 147 joined on 15 November 2026 with Roberto Ono's certificate there (T-302,
         # think-17ex), and 228 with his certificate there (T-301): their least pair margins,
-        # 3.0e-10 and 2.4e-10, lie between the screen's tolerances, as T-196's did.
-        147,
+        # 3.0e-10 and 2.4e-10, lie between the screen's tolerances, as T-196's did. 147 left
+        # on 18 November 2026: Mykhailo Polkovskyi's certificate there (T-314, think-i38n)
+        # is stable across tolerances.
         # 172 left on 9 November 2026: Doğa Özden's certificate there (T-282, think-he66) is
         # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
-        # certificates there (T-287, T-288, think-xq4o).
-        156,
+        # certificates there (T-287, T-288, think-xq4o); 156 left on 18 November 2026 with
+        # Polkovskyi's re-solve of it (T-315), and 180 stayed with his of T-288 (T-316).
         175,
         176,
         177,
@@ -220,7 +227,9 @@ GOLDEN_UNSTABLE = {
         204,
         206,
         # 207 left on 23 October 2026: T-174's algebraic witness there is stable across
-        # tolerances (think-ot5c).
+        # tolerances (think-ot5c). 210 joined on 18 November 2026 with Mykhailo Polkovskyi's
+        # certificate there (T-317, think-i38n).
+        210,
         227,
         228,
         229,
@@ -231,19 +240,25 @@ GOLDEN_UNSTABLE = {
         # wrote there (think-3guf), whose margins are 1e-12 and 1e-20 dilations.
         260,
         261,
+        # 262 joined on 18 November 2026 with Polkovskyi's certificate there (T-319).
+        262,
         264,
         266,
         267,
         # 268 left on 5 November 2026, when the adoption of issue 914 (T-270) wrote a
-        # witness stable across tolerances there (think-lrj4), and joined again on 9
-        # November 2026 with Doğa Özden's further arrangement of it (T-276, think-463r).
-        268,
+        # witness stable across tolerances there (think-lrj4), joined again on 9 November
+        # 2026 with Doğa Özden's further arrangement of it (T-276, think-463r), and left
+        # again on 18 November 2026 with Polkovskyi's further arrangement of T-289's (T-320).
         # 269 left on 13 November 2026: Doğa Özden's certificate of issue 967 there (T-297,
         # think-n73d) is stable across tolerances.
         # 270 joined on 9 November 2026 with Doğa Özden's further arrangement of T-224's
         # packing (T-283, think-he66).
         270,
+        # 272 and 292 joined on 18 November 2026 with Polkovskyi's certificates there
+        # (T-322, T-323).
+        272,
         273,
+        292,
         293,
         297,
         299,

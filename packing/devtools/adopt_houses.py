@@ -228,6 +228,17 @@ REVIEW_1001 = (
     "count, stated beforehand as rules, were each decided as stated"
 )
 
+#: What the stage 4 review of issue 1009 (lane c-review-1009-1117, think-evxy) decided on
+#: each of its thirteen certificates, the clause the case records write after the maintained
+#: routes.
+REVIEW_1009 = (
+    ", and the 17 November review’s clean-room checker, frozen before any producer, witness "
+    "or verifier code was read, decided it again by separating axes in integers from its "
+    "centres and half-angle tangents and by exact clipping in GMP rationals from its corners, "
+    "each run on both of its forms, over every square, wall and pair; its 37 controls at this "
+    "count, stated beforehand as rules, were each decided as stated"
+)
+
 #: Each adopted result, as its register entry and its review describe it.
 RESULTS: dict[str, Prose] = {
     "T-128": Prose(
@@ -3068,6 +3079,407 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-314": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the certificate a refinement of Roberto Ono’s packing (T-302), "
+            "this case’s house best packing before this adoption. Measured, no symmetry "
+            "pairs it one to one with T-302’s packing by nearest centres, and the optimal "
+            "assignment moves 8 squares beyond a tenth, at most 0.648: a further "
+            "arrangement of Ono’s packing, its gain 1.16 times T-302’s own "
+            "uniform-contraction margin. So Roberto Ono is the packing’s finder and "
+            "Mykhailo Polkovskyi its improver."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-315": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the certificate a refinement of the registered arrangement "
+            "(T-287), whose credit it leaves with the standing authors. Measured, nearest "
+            "centres pair it one to one with T-287’s packing, no square moving by more than "
+            "1.44e-5; the gain is 1.0709 times T-287’s own uniform-contraction margin, "
+            "$1.71 \\times 10^{-13}$ below T-287 shrunk until its squares first touch, so "
+            "under the owner’s option D of 17 November 2026 it is a new result, not a "
+            "restatement of the padding. So Doğa Özden keeps the packing, and Mykhailo "
+            "Polkovskyi is credited with the re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-287’s packing reached a "
+            "certified KKT point on 11 November 2026, held unregistered (think-xq4o) and "
+            "retained on main with pull request 949; run on this certificate it reaches "
+            "the same point exactly, 1.30e-19 above this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point lies above this side and is not registered."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-316": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the certificate a refinement of the registered arrangement "
+            "(T-288), whose credit it leaves with the standing authors. Measured, nearest "
+            "centres pair it one to one with T-288’s packing, no square moving by more than "
+            "1.43e-5; the gain is 1.0485 times T-288’s own uniform-contraction margin, "
+            "$1.25 \\times 10^{-13}$ below T-288 shrunk until its squares first touch, so "
+            "under the owner’s option D of 17 November 2026 it is a new result, not a "
+            "restatement of the padding. So Doğa Özden keeps the packing, and Mykhailo "
+            "Polkovskyi is credited with the re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-288’s packing reached a "
+            "certified KKT point on 11 November 2026, held unregistered (think-xq4o) and "
+            "retained on main with pull request 949; run on this certificate it reaches "
+            "the same point exactly, 1.39e-19 above this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point lies above this side and is not registered."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-317": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the packing a new arrangement. Against T-174’s packing, "
+            "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s "
+            "packing and this case’s house best packing before this adoption, it is one: no "
+            "symmetry pairs nearest centres one to one, and the optimal assignment moves 61 "
+            "squares beyond a tenth, at most 0.973. So Mykhailo Polkovskyi is its finder, "
+            "as the issue asks."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-318": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the packing an improved packing after Evan Daniel’s (T-269). "
+            "Measured, nearest centres pair it one to one with T-269’s packing; 39 squares "
+            "move beyond 1e-3 and none beyond a tenth, at most 0.0397: a further "
+            "arrangement of Daniel’s packing, its gain 665 times T-269’s own "
+            "uniform-contraction margin. So Evan Daniel is the packing’s finder and "
+            "Mykhailo Polkovskyi its improver, as the issue asks."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-319": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the packing a new arrangement and names no packing it started "
+            "from. Against the case’s own house, the Kingbird catalogue’s 45-degree packing "
+            "at 16 + √2/2, it is one: no symmetry pairs nearest centres one to one, and 78 "
+            "squares move beyond a tenth. Against Joost de Winter’s packing of issue 1007 "
+            "(T-312), reported hours earlier and $1.58 \\times 10^{-3}$ above it, nearest "
+            "centres pair it one to one under a symmetry of the box, 3 squares beyond a "
+            "tenth, at most 0.315: measured, it continues de Winter’s arrangement. By the "
+            "owner’s answer of 17 November 2026 (think-bx2a), “de Winter, improved by "
+            "Polkovskyi”, Joost de Winter is the packing’s finder and Mykhailo Polkovskyi "
+            "its improver, though the issue calls the packing new."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-320": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the packing an improved packing after Doğa Özden’s (T-289). "
+            "Measured, no symmetry pairs it one to one with T-289’s packing, and the "
+            "optimal assignment moves 10 squares beyond a tenth, at most 0.809: a further "
+            "arrangement of Özden’s packing. So Doğa Özden is the packing’s finder and "
+            "Mykhailo Polkovskyi its improver, as the issue asks."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-321": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the certificate a refinement of the registered arrangement "
+            "(T-283), whose credit it leaves with the standing authors. Measured, nearest "
+            "centres pair it one to one with T-283’s packing, no square moving by more than "
+            "1.44e-5; the gain is 1.0111 times T-283’s own uniform-contraction margin, "
+            "$3.55 \\times 10^{-14}$ below T-283 shrunk until its squares first touch, so "
+            "under the owner’s option D of 17 November 2026 it is a new result, not a "
+            "restatement of the padding. So Evan Daniel, as Doğa Özden improved it, keeps "
+            "the packing, and Mykhailo Polkovskyi is credited with the re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-283’s packing reached a "
+            "certified KKT point on 9 November 2026, held unregistered (think-he66) and "
+            "retained on main with pull request 937; run on this certificate it reaches "
+            "the same point exactly, 5.73e-15 below this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point, the smaller, stays a candidate for "
+            "registration (think-4z8z)."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-322": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the packing a new arrangement. Against T-174’s packing, "
+            "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing and this "
+            "case’s house best packing before this adoption, it is one: no symmetry pairs "
+            "nearest centres one to one, and the optimal assignment moves 36 squares beyond "
+            "a tenth, at most 0.933. So Mykhailo Polkovskyi is its finder, as the issue "
+            "asks."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-323": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the packing a new arrangement and names no packing it started "
+            "from. Against T-146’s packing, Evan Daniel’s display regularization of Nate "
+            "Chaoweeraprasit’s SQUISH packing and this case’s house best packing before "
+            "this adoption, it is one: no symmetry pairs nearest centres one to one, and 70 "
+            "squares move beyond a tenth. Against Joost de Winter’s packing of issue 1006 "
+            "(T-311), reported hours earlier and $3.62 \\times 10^{-9}$ above it, nearest "
+            "centres pair it one to one under a symmetry of the box, 3 squares beyond a "
+            "tenth, at most 0.478: measured, it continues de Winter’s arrangement, and its "
+            "gain is 72 times that certificate’s own uniform-contraction margin, so under "
+            "the owner’s option D of 17 November 2026 it is a new result. By the owner’s "
+            "answer of 17 November 2026 (think-bx2a), “de Winter, improved by Polkovskyi”, "
+            "Joost de Winter is the packing’s finder and Mykhailo Polkovskyi its improver, "
+            "though the issue calls the packing new."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-324": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the packing a new arrangement. Against T-193’s 45-degree "
+            "packing at its exact contact, this case’s house best packing before this "
+            "adoption, it is one: no symmetry pairs nearest centres one to one, and 203 "
+            "squares move beyond a tenth; nor is it one to one with Joost de Winter’s "
+            "packing of issue 1007 (T-313). The 17 November review finds it to be the "
+            "arrangement of the same issue’s 262 certificate (T-319) in an L-shaped border "
+            "of 33 squares solved again, its side $5.93 \\times 10^{-19}$ above that "
+            "certificate’s side plus 1, so both print alike at 12 places. So Mykhailo "
+            "Polkovskyi is its finder, as the issue asks."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-325": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the certificate a refinement of the registered arrangement "
+            "(T-277), whose credit it leaves with the standing authors. Measured, nearest "
+            "centres pair it one to one with T-277’s packing, no square moving by more than "
+            "1.03e-3; the gain is 1.0361 times T-277’s own uniform-contraction margin, "
+            "$1.23 \\times 10^{-13}$ below T-277 shrunk until its squares first touch, so "
+            "under the owner’s option D of 17 November 2026 it is a new result, not a "
+            "restatement of the padding. So Evan Daniel, as Doğa Özden improved it, keeps "
+            "the packing, and Mykhailo Polkovskyi is credited with the re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-277’s packing reached a "
+            "certified KKT point on 9 November 2026, held unregistered (think-463r) and "
+            "retained on main with pull request 932; run on this certificate it reaches "
+            "the same point exactly, 6.20e-15 below this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point, the smaller, stays a candidate for "
+            "registration (think-4z8z)."
+        ),
+        third_route=REVIEW_1009,
+    ),
+    "T-326": Prose(
+        author="Mykhailo Polkovskyi",
+        reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
+        producer_route=False,
+        ai=(
+            "Issue 1009 says the packings were discovered by Mykhailo Polkovskyi, assisted "
+            "by Gemini."
+        ),
+        routes=(
+            "Both routes read the certificate through an adapter transcribed from Evan "
+            "Daniel’s checkers, the family of the source’s own checker, and the second is "
+            "the independent rational corner checker the issue says the author ran on the "
+            "same packing’s Witness/v2 file, so the replay shares the producer’s "
+            "components. The review’s checker shares no code with either maintained route "
+            "or the source, and the independent re-implementation rests on it."
+        ),
+        lineage=(
+            "The issue calls the certificate a refinement of the registered arrangement "
+            "(T-279), whose credit it leaves with the standing authors. Measured, nearest "
+            "centres pair it one to one with T-279’s packing, no square moving by more than "
+            "1.42e-7; the gain is 1.0174 times T-279’s own uniform-contraction margin, "
+            "$5.95 \\times 10^{-14}$ below T-279 shrunk until its squares first touch, so "
+            "under the owner’s option D of 17 November 2026 it is a new result, not a "
+            "restatement of the padding. So ntumlnoob, as Francisco Couzo and Doğa Özden "
+            "improved it, keeps the packing, and Mykhailo Polkovskyi is credited with the "
+            "re-solve. "
+            "The project’s own run of Evan Daniel’s regularizer on T-279’s packing reached a "
+            "certified KKT point on 9 November 2026, held unregistered (think-463r) and "
+            "retained on main with pull request 932; run on this certificate it reaches "
+            "the same point exactly, 1.34e-15 below this side. "
+            "Polkovskyi was the first to report and certify this packing, so by the owner’s "
+            "decision of 18 November 2026 (think-frl5) the re-solve keeps its new-result "
+            "status and his credit; the held point, the smaller, stays a candidate for "
+            "registration (think-4z8z)."
+        ),
+        third_route=REVIEW_1009,
+    ),
 }
 
 XU = "Ryan Xu"
@@ -3320,11 +3732,12 @@ CREDITS: dict[int, Credit] = {
     # credited as the start, so the phrase names it, as the 156 and 268 phrases name the
     # packings their strip cuts were taken from, and the closed form it is the first below,
     # as the 157 phrase names the grid.
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-314).
     147: Credit(
         (ONO,),
-        (),
-        "Roberto Ono’s packing from a band cut of Evan Daniel’s n = 229 packing, the first "
-        "below 7 + 4√2",
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s further arrangement of Roberto Ono’s packing from a band "
+        "cut of Evan Daniel’s n = 229 packing",
     ),
     # PingYou Ltd's algebraic certificate of its own n = 153 packing (T-174's regularization
     # of T-148, by the source's statement), the one root of a degree-7 polynomial; issue
@@ -3363,12 +3776,12 @@ CREDITS: dict[int, Credit] = {
     # most of the box (F8, F10). The phrase names the seed; the seed's own lineage, through
     # T-188 to Joost de Winter's T-057 (jlevy/squares#1008), is in T-287's claim and credit
     # line.
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-315).
     156: Credit(
         (OZDEN,),
-        (),
-        "Doğa Özden’s packing from a strip cut of Evan Daniel’s n = 182 packing, below "
-        "Daniil Ostashev’s packing as Francisco Couzo, PingYou Ltd and Mykhailo Polkovskyi "
-        "refined it",
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s re-solve of Doğa Özden’s packing from a strip cut of Evan "
+        "Daniel’s n = 182 packing",
     ),
     # T-293 (adopted on 11 November 2026), Joost de Winter's issue 958: a pinwheel grown from
     # Samanyu-dev's 109 by two cut-and-fill steps through his 132, the first packing of 157
@@ -3430,12 +3843,12 @@ CREDITS: dict[int, Credit] = {
     # to T-174's packing, 49 squares beyond a tenth, found by transplant search from an L added
     # to Evan Daniel's n = 154 packing as Francisco Couzo improved it, the author's account,
     # which the 11 November review's cut model cannot tell from the house (F8, F10).
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-316).
     180: Credit(
         (OZDEN,),
-        (),
-        "Doğa Özden’s packing from an L added to Evan Daniel’s n = 154 packing, below Nate "
-        "Chaoweeraprasit’s SQUISH packing as Siddharth Gupta, Francisco Couzo and PingYou Ltd "
-        "refined it",
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s re-solve of Doğa Özden’s packing from an L added to Evan "
+        "Daniel’s n = 154 packing",
     ),
     # T-174's regularization of T-151's packing re-solved, measured one to one, no square
     # moved beyond 1.5e-4 (the 14 October review of PR 574).
@@ -3524,10 +3937,12 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-174's regularization of T-098's packing, 33 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-317).
     210: Credit(
-        (COUZO,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+        (POLKOVSKYI,),
+        (),
+        "Mykhailo Polkovskyi’s packing, below PingYou Ltd’s refinement of Evan Daniel’s "
+        "exact optimum of Francisco Couzo’s packing",
     ),
     # Couzo's further arrangement of Ostashev's issue-575 design, five squares beyond a
     # tenth against T-182 and T-175 (RT-1 of the 16 October review; T-188 records no
@@ -3654,12 +4069,12 @@ CREDITS: dict[int, Credit] = {
     # packing, half-turned and raised one unit, the frame rebuilt: one to one with neither
     # T-265's nor T-257's packing under any symmetry (the 5 November review's F8), so a new
     # arrangement with that packing's credit, Kirill Tymchishin's Kaggle s(260) the start.
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-318).
     260: Credit(
         (DANIEL,),
-        (),
-        "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
-        "multi-gadget fault DP around the tilted island of his n = 260 packing from a search "
-        "started from Kirill Tymchishin’s Kaggle notebook packing",
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s further arrangement of Evan Daniel’s packing built by his "
+        "fault-line composer",
     ),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
@@ -3667,6 +4082,31 @@ CREDITS: dict[int, Credit] = {
         (XU,),
         (BARNETT, PINGYOU),
         "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
+    ),
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-319).
+    # The owner's answer of 17 November 2026 (think-bx2a): "de Winter, improved by
+    # Polkovskyi", as measured one to one with de Winter's issue 1007 packing (T-312).
+    262: Credit(
+        (DE_WINTER,),
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s further arrangement of Joost de Winter’s band packing, the "
+        "first below the Kingbird catalogue’s 16 + √2/2 at 262 the record adopts",
+    ),
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-323).
+    # The owner's answer of 17 November 2026 (think-bx2a): "de Winter, improved by
+    # Polkovskyi", as measured one to one with de Winter's issue 1006 packing (T-311).
+    292: Credit(
+        (DE_WINTER,),
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s further arrangement of Joost de Winter’s ribbon packing, "
+        "after Evan Daniel’s and Ryan Xu’s n = 146 packing",
+    ),
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-324).
+    295: Credit(
+        (POLKOVSKYI,),
+        (),
+        "Mykhailo Polkovskyi’s packing, his n = 262 arrangement in an L-shaped border "
+        "solved again",
     ),
     # T-174's regularization of T-146's view, measured one to one, no square moved beyond
     # 1e-12 (the 14 October review of PR 574).
@@ -3690,12 +4130,12 @@ CREDITS: dict[int, Credit] = {
     # to his own T-276, 125 squares beyond a tenth, found by transplant search from a strip cut
     # of PingYou Ltd's n = 302 packing, which the 11 November review's cut model fits over most
     # of the box (F8, F10).
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-320).
     268: Credit(
         (OZDEN,),
-        (),
-        "Doğa Özden’s packing from a strip cut of PingYou Ltd’s n = 302 packing as Francisco "
-        "Couzo, Mishapolk and Evan Daniel improved it, below his own further arrangement of "
-        "Evan Daniel’s packing",
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s further arrangement of Doğa Özden’s packing from a strip "
+        "cut of PingYou Ltd’s n = 302 packing",
     ),
     # T-297 (adopted in the pass of 13 November 2026), Doğa Özden's issue 967: a new
     # arrangement relative to his own T-296's packing, 53 squares beyond a tenth, and to
@@ -3723,13 +4163,12 @@ CREDITS: dict[int, Credit] = {
     # T-283 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-224's
     # packing, one to one with it under the identity, 1 square beyond a tenth (the 9
     # November review of issues 935 and 936).
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-321).
     270: Credit(
         (DANIEL,),
-        (OZDEN,),
-        "Doğa Özden’s further arrangement of Evan Daniel’s arrangement, in a search started "
-        "from Nate Chaoweeraprasit’s SQUISH packing, of that packing’s design, composed from "
-        "SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird catalogue’s former n = 19 "
-        "packing",
+        (OZDEN, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s re-solve of Doğa Özden’s further arrangement of Evan "
+        "Daniel’s arrangement",
     ),
     # Evan Daniel's tilt-swap from the register's witness (T-186's tightening of issue 561's
     # packing): issue 561's arrangement continued, three squares beyond a tenth (RV-2 of the
@@ -3745,10 +4184,12 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-174's regularization of T-151's packing, as T-171 re-solved it, measured one to
     # one, no square moved beyond 1.5e-4 (the 14 October review of PR 574).
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-322).
     272: Credit(
-        (SQUISH,),
-        (PINGYOU,),
-        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing",
+        (POLKOVSKYI,),
+        (),
+        "Mykhailo Polkovskyi’s packing, below PingYou Ltd’s exact re-solve of Nate "
+        "Chaoweeraprasit’s SQUISH packing",
     ),
     # T-174's regularization of T-098's packing, 49 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
@@ -3757,7 +4198,8 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
+    # Before the pass of 18 November 2026: Evan Daniel's display regularization of Nate
+    # Chaoweeraprasit's SQUISH packing (T-146), _regularized(SQUISH, ...).
     # T-271 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
     # build whose gadget donors were not recorded: one to one with T-257's under no symmetry,
     # 193 squares beyond a tenth (the 5 November review).
@@ -3767,7 +4209,8 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
         "multi-gadget fault DP",
     ),
-    295: _exact_form(XU, (DANIEL, PINGYOU), "his display regularization of Ryan Xu’s"),
+    # Before the pass of 18 November 2026: Evan Daniel's exact form (T-193),
+    # _exact_form(XU, ...).
     # T-299 (adopted in the pass of 14 November 2026), Joost de Winter's issue 977: the layout
     # of T-174's packing, Francisco Couzo's as Evan Daniel and PingYou Ltd improved it, with a
     # double step in each staircase taken from his own 132 and 157 pinwheels and the band's
@@ -3790,12 +4233,12 @@ CREDITS: dict[int, Credit] = {
     # T-263 arrangement, 12 squares beyond a tenth under the identity assignment, not one
     # to one by nearest centres only through the bottom row's slide (the 9 November
     # review's F6).
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-325).
     299: Credit(
         (DANIEL,),
-        (OZDEN,),
-        "Doğa Özden’s second further arrangement of Evan Daniel’s packing from his n = 299 "
-        "packing of 26 October, built by his implementation of Chris Deotte’s fault-line DP "
-        "from Deotte’s public Kaggle packing",
+        (OZDEN, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s re-solve of Doğa Özden’s second further arrangement of "
+        "Evan Daniel’s packing",
     ),
     # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
     # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
@@ -3848,11 +4291,12 @@ CREDITS: dict[int, Credit] = {
     # T-279 (adopted on 9 November 2026), Doğa Özden's further arrangement of T-256's
     # packing, one to one with it under the identity, 5 squares beyond a tenth (the 9
     # November review).
+    # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-326).
     307: Credit(
         (NTUMLNOOB,),
-        (COUZO, OZDEN),
-        "Doğa Özden’s further arrangement of Francisco Couzo’s refinement of ntumlnoob’s "
-        "Kaggle notebook packing",
+        (COUZO, OZDEN, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s re-solve of Doğa Özden’s further arrangement of Francisco "
+        "Couzo’s refinement of ntumlnoob’s Kaggle notebook packing",
     ),
     # T-174's regularization of T-141's packing, 25 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).

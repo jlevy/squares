@@ -78,6 +78,20 @@ def test_a_restated_count_improves_on_nothing(records: view.Records) -> None:
     )
 
 
+def test_a_restated_count_is_superseded_by_the_bounds_its_case_rests_on(
+    records: view.Records,
+) -> None:
+    """Restated at 130, T-281's stated side is below T-259's, so no lane there ties or
+    beats its words; the mark still names T-259, the bound the case rests on, which the
+    predecessor shrunk to first contact proves at least as much as. Without the
+    restatement the same words name nothing at 130."""
+    record = _restated(records, _item())
+    assert view.superseding(record, records) == ("T-259",)
+    assert view.position_marks(record, view.SUPERSEDED, records) == ["superseded by T-259"]
+    unrestated = {**record, "restatements": []}
+    assert view.superseding(unrestated, records) == ()
+
+
 def test_a_restated_report_is_no_current_record(records: view.Records) -> None:
     """The profile index counts a report that improves nowhere as no current record."""
     record = _restated(records, _item())

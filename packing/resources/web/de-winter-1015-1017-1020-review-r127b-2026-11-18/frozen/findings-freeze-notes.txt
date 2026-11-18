@@ -1,0 +1,20 @@
+Lane r127b-1118: the findings, frozen at 2026-11-18T03:42:32Z, before PR #1025 (R-127), its branch, its scratch or its bead
+notes, the import lane's work (PR #1024 and its branch), the source's README.md, REGISTRATION.md, verify_exact.py,
+check_area.py and figure, or this repository's witness, verifier, promotion, contraction or identity code were read.
+
+Verify from this packet's directory, the one stated directory for this list:
+
+    sha256sum -c frozen/findings-frozen.sha256
+
+It covers the frozen review text, the checker's frozen lists and notes, the three programs written after the checker's freeze
+(rb127_routes.py, rb127_e1p.py and rb127_describe.py, which decide nothing), and every receipt under out/, the second route's
+included.
+
+Read between the checker's freeze (03:18:41Z, commit 7987712380) and this one: the help texts of devtools.contraction_margin and
+devtools.measure_identity, the adapter names (and first docstring lines) of devtools.upper_bound_reports, and the receipts those
+two tools wrote here when run as the second route. GraphQL was asked for the three issue bodies' edit history, timestamps only
+(out/issue-edits.json: no edits). raw.githubusercontent.com was read at 03:35:38Z for the third fetch of the six files.
+
+Run between the freezes: the frozen programs on the four certificates; the two repository tools, unread, as the second route; and
+the three later programs. The control E1p came out other than stated at #1020 (the review's F3), and rb127_e1p.py restates its
+rule; the frozen plan and programs are unchanged.

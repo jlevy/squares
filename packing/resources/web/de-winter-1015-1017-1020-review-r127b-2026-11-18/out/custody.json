@@ -1,0 +1,186 @@
+{
+ "program": "rb127_custody.py",
+ "clone_head": "838c5ea8736f64ab383ebd5457066b6b4bd0dda7",
+ "linear_history": true,
+ "pins": {
+  "1015": {
+   "pin": "35b576a355297942bca9c195bee5cd74f0b27f40",
+   "is_commit": true,
+   "committed": "2026-11-17T23:09:10+01:00",
+   "subject": "Name GPT-6.2 Sol as the model used for n = 127",
+   "issue_created": "2026-11-17T22:14:33Z",
+   "files": {
+    "n127_exact.json": {
+     "blob": "369badb291372aa883340ff9b0460cf64086ae82",
+     "bytes": 111008,
+     "sha256_git": "a4c9beb8b7b656072fa60150c70d2ea685907bc0e10e19e77963464c0f946772",
+     "sha256_contents_api": "a4c9beb8b7b656072fa60150c70d2ea685907bc0e10e19e77963464c0f946772",
+     "routes_agree": true,
+     "sha256sums_at_pin_lists": [
+      "a4c9beb8b7b656072fa60150c70d2ea685907bc0e10e19e77963464c0f946772"
+     ],
+     "sha256sums_at_pin_matches": true,
+     "next_commit": "cc20a26845789c2502950041c26709eda8a71081",
+     "sha256sums_at_next_commit_matches": true,
+     "first_later_change": {
+      "commit": "cc20a26845789c2502950041c26709eda8a71081",
+      "committed": "2026-11-17T23:26:24+01:00",
+      "blob": "a9d633fcf6b3b166217802af9eef4d3c0c9b9563"
+     }
+    },
+    "n127_witness.yaml": {
+     "blob": "ec517cd53432ad4c0058f9f9ab9fbc375b100051",
+     "bytes": 439901,
+     "sha256_git": "c1d4ee460abe4cbcd0479af32b0b28c4ad1793786120dc0111b892c2bfb65bb0",
+     "sha256_contents_api": "c1d4ee460abe4cbcd0479af32b0b28c4ad1793786120dc0111b892c2bfb65bb0",
+     "routes_agree": true,
+     "sha256sums_at_pin_lists": [
+      "c1d4ee460abe4cbcd0479af32b0b28c4ad1793786120dc0111b892c2bfb65bb0"
+     ],
+     "sha256sums_at_pin_matches": true,
+     "next_commit": "cc20a26845789c2502950041c26709eda8a71081",
+     "sha256sums_at_next_commit_matches": true,
+     "first_later_change": {
+      "commit": "cc20a26845789c2502950041c26709eda8a71081",
+      "committed": "2026-11-17T23:26:24+01:00",
+      "blob": "b0fe7cbdeefcf79888d2f73fbf855f66594c282d"
+     }
+    }
+   },
+   "later_commits_unchanged_stated": false,
+   "later_commits_unchanged_now": false,
+   "later_commits_unchanged_when_opened": true
+  },
+  "1017": {
+   "pin": "cc20a26845789c2502950041c26709eda8a71081",
+   "is_commit": true,
+   "committed": "2026-11-17T23:26:24+01:00",
+   "subject": "Add the new n = 127 certificate, the lower bound for n = 108 and the packings for n between 1,036 and 9,928",
+   "issue_created": "2026-11-17T22:27:04Z",
+   "files": {
+    "n127_exact.json": {
+     "blob": "a9d633fcf6b3b166217802af9eef4d3c0c9b9563",
+     "bytes": 19192,
+     "sha256_git": "bb883631dc01343198a07826d2a84faf029789b13beb88403478db736ac27c9b",
+     "sha256_contents_api": "bb883631dc01343198a07826d2a84faf029789b13beb88403478db736ac27c9b",
+     "routes_agree": true,
+     "sha256sums_at_pin_lists": [
+      "a4c9beb8b7b656072fa60150c70d2ea685907bc0e10e19e77963464c0f946772"
+     ],
+     "sha256sums_at_pin_matches": false,
+     "next_commit": "67fb815dc5064b1c1d3f35f7f4641d2af7039013",
+     "sha256sums_at_next_commit_matches": true,
+     "first_later_change": {
+      "commit": "a1ba5019e787e407646293d7bef81d63c9951b32",
+      "committed": "2026-11-17T23:48:48+01:00",
+      "blob": "722628c9e12e5a7097db426e809aa25fa53eabc5"
+     }
+    },
+    "n127_witness.yaml": {
+     "blob": "b0fe7cbdeefcf79888d2f73fbf855f66594c282d",
+     "bytes": 69441,
+     "sha256_git": "8245da32e92e9780a22a5cf9cd42911674e3be4d816c235fe42743f9a90a085d",
+     "sha256_contents_api": "8245da32e92e9780a22a5cf9cd42911674e3be4d816c235fe42743f9a90a085d",
+     "routes_agree": true,
+     "sha256sums_at_pin_lists": [
+      "c1d4ee460abe4cbcd0479af32b0b28c4ad1793786120dc0111b892c2bfb65bb0"
+     ],
+     "sha256sums_at_pin_matches": false,
+     "next_commit": "67fb815dc5064b1c1d3f35f7f4641d2af7039013",
+     "sha256sums_at_next_commit_matches": true,
+     "first_later_change": {
+      "commit": "a1ba5019e787e407646293d7bef81d63c9951b32",
+      "committed": "2026-11-17T23:48:48+01:00",
+      "blob": "c5e0dec86b7caeb84980aafef1b5290641cb5ae2"
+     }
+    }
+   },
+   "later_commits_unchanged_stated": true,
+   "later_commits_unchanged_now": false,
+   "later_commits_unchanged_when_opened": true
+  },
+  "1020": {
+   "pin": "a1ba5019e787e407646293d7bef81d63c9951b32",
+   "is_commit": true,
+   "committed": "2026-11-17T23:48:48+01:00",
+   "subject": "Add packings for n = 268 and n = 270 and a smaller certificate for n = 127",
+   "issue_created": "2026-11-17T22:49:35Z",
+   "files": {
+    "n127_exact.json": {
+     "blob": "722628c9e12e5a7097db426e809aa25fa53eabc5",
+     "bytes": 66014,
+     "sha256_git": "3a66f38276be9e986fc46fa1f859de54754ec77fc4694b3442de58381056a835",
+     "sha256_contents_api": "3a66f38276be9e986fc46fa1f859de54754ec77fc4694b3442de58381056a835",
+     "routes_agree": true,
+     "sha256sums_at_pin_lists": [
+      "bb883631dc01343198a07826d2a84faf029789b13beb88403478db736ac27c9b"
+     ],
+     "sha256sums_at_pin_matches": false,
+     "next_commit": "838c5ea8736f64ab383ebd5457066b6b4bd0dda7",
+     "sha256sums_at_next_commit_matches": true,
+     "first_later_change": null
+    },
+    "n127_witness.yaml": {
+     "blob": "c5e0dec86b7caeb84980aafef1b5290641cb5ae2",
+     "bytes": 255546,
+     "sha256_git": "19597239cdf162cbac5c12a6e60547ce0771f0b02078446517ad3e5d3dabb31e",
+     "sha256_contents_api": "19597239cdf162cbac5c12a6e60547ce0771f0b02078446517ad3e5d3dabb31e",
+     "routes_agree": true,
+     "sha256sums_at_pin_lists": [
+      "8245da32e92e9780a22a5cf9cd42911674e3be4d816c235fe42743f9a90a085d"
+     ],
+     "sha256sums_at_pin_matches": false,
+     "next_commit": "838c5ea8736f64ab383ebd5457066b6b4bd0dda7",
+     "sha256sums_at_next_commit_matches": true,
+     "first_later_change": null
+    }
+   },
+   "later_commits_unchanged_stated": true,
+   "later_commits_unchanged_now": true,
+   "later_commits_unchanged_when_opened": true
+  }
+ },
+ "file_history": {
+  "n127_exact.json": [
+   {
+    "commit": "689bc795851e4a60899c1233ad23969a1126e5f8",
+    "committed": "2026-11-17T23:07:57+01:00",
+    "blob": "369badb291372aa883340ff9b0460cf64086ae82",
+    "subject": "Add the packing and registration request for n = 127"
+   },
+   {
+    "commit": "cc20a26845789c2502950041c26709eda8a71081",
+    "committed": "2026-11-17T23:26:24+01:00",
+    "blob": "a9d633fcf6b3b166217802af9eef4d3c0c9b9563",
+    "subject": "Add the new n = 127 certificate, the lower bound for n = 108 and the packings for n between 1,036 and 9,928"
+   },
+   {
+    "commit": "a1ba5019e787e407646293d7bef81d63c9951b32",
+    "committed": "2026-11-17T23:48:48+01:00",
+    "blob": "722628c9e12e5a7097db426e809aa25fa53eabc5",
+    "subject": "Add packings for n = 268 and n = 270 and a smaller certificate for n = 127"
+   }
+  ],
+  "n127_witness.yaml": [
+   {
+    "commit": "689bc795851e4a60899c1233ad23969a1126e5f8",
+    "committed": "2026-11-17T23:07:57+01:00",
+    "blob": "ec517cd53432ad4c0058f9f9ab9fbc375b100051",
+    "subject": "Add the packing and registration request for n = 127"
+   },
+   {
+    "commit": "cc20a26845789c2502950041c26709eda8a71081",
+    "committed": "2026-11-17T23:26:24+01:00",
+    "blob": "b0fe7cbdeefcf79888d2f73fbf855f66594c282d",
+    "subject": "Add the new n = 127 certificate, the lower bound for n = 108 and the packings for n between 1,036 and 9,928"
+   },
+   {
+    "commit": "a1ba5019e787e407646293d7bef81d63c9951b32",
+    "committed": "2026-11-17T23:48:48+01:00",
+    "blob": "c5e0dec86b7caeb84980aafef1b5290641cb5ae2",
+    "subject": "Add packings for n = 268 and n = 270 and a smaller certificate for n = 127"
+   }
+  ]
+ },
+ "pins_in_order_of_history": true
+}

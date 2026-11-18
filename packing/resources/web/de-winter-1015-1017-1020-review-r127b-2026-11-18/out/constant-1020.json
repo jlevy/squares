@@ -1,0 +1,52 @@
+{
+ "program": "rb127_constant.py",
+ "label": "1020",
+ "must_refuse_by_real_verdict": [
+  "E1p",
+  "G1",
+  "G2",
+  "G3",
+  "K1p",
+  "K1s",
+  "S1a",
+  "S1d",
+  "S1f"
+ ],
+ "must_accept_by_real_verdict": [
+  "E1c",
+  "G4",
+  "G5",
+  "G6",
+  "G7",
+  "K1c",
+  "S1b",
+  "S1c",
+  "S1e"
+ ],
+ "always_accept_fails": [
+  "E1p",
+  "G1",
+  "G2",
+  "G3",
+  "K1p",
+  "K1s",
+  "S1a",
+  "S1d",
+  "S1f"
+ ],
+ "always_refuse_fails": [
+  "E1c",
+  "E1p",
+  "G4",
+  "G5",
+  "G6",
+  "G7",
+  "K1c",
+  "S1b",
+  "S1c",
+  "S1e"
+ ],
+ "always_accept_fails_every_must_refuse": true,
+ "always_refuse_fails_every_must_accept": true,
+ "plan_catches_both": true
+}

@@ -1567,8 +1567,12 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_decide_undecided_comparisons.py": {
             "test_the_whole_receipt_is_current",  # 5.0s
         },
-        # 7s of call time across 1.
+        # 7s of call time across 1, and the reach test review A6 of #1023 retained (OR-1):
+        # 40.4s of call time on 2026-11-18 on a contended four-core host at `nice -n 19`,
+        # where the atlas test beside it took 24.7s against its 6.5s, so about 11s in CI.
+        # It renders every house witness and regularized view's colour classes.
         "test_render_colors.py": {
+            "test_only_292_holds_a_pinned_square_in_an_unpinned_class",  # 40.4s local
             "test_right_angles_and_diagonals_are_pinned_across_the_atlas",  # 6.5s
         },
         # 35.73s of call time on 2026-09-06 (`BC-241`), in the focused review file.

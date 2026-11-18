@@ -65061,6 +65061,26 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-17'
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor (a sentence of #1007) and the rest notes, and 340 of 340 controls as stated,
+        51 on each report's first file and 34 on its twin, in a plan hashed before any
+        program read a certificate: at 292 #1005's claim is its side's 12-place ceiling,
+        accepted in the box of the claim and refused in that of its floor; no pair touches,
+        the least gap 2.01869e-13; the JSON twin is the same packing; the file's provenance
+        words are the promotion tool's. Its clean-room run is
+        E-ozden-1005-review-exact-feasibility, and the replay
+        E-ozden-1005-exact-feasibility.
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at dec930b,
       n-292-candidate.yaml, posted in issue 1005 on Doğa Özden's behalf by his AI agent. A
@@ -65136,6 +65156,26 @@ evidence:
       2.0187e-13. The receipt's controls are gross, and the packet's sharp controls meet
       those margins. Finite feasibility only.
     source_reviewed: '2026-11-17'
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor (a sentence of #1007) and the rest notes, and 340 of 340 controls as stated,
+        51 on each report's first file and 34 on its twin, in a plan hashed before any
+        program read a certificate: at 292 #1005's claim is its side's 12-place ceiling,
+        accepted in the box of the claim and refused in that of its floor; no pair touches,
+        the least gap 2.01869e-13; the JSON twin is the same packing; the file's provenance
+        words are the promotion tool's. Its clean-room run is
+        E-ozden-1005-review-exact-feasibility, and the replay
+        E-ozden-1005-exact-feasibility.
   - id: E-de-winter-1006-certificate-report
     claim: upper-bound
     scope:
@@ -65152,6 +65192,26 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-17'
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor (a sentence of #1007) and the rest notes, and 340 of 340 controls as stated,
+        51 on each report's first file and 34 on its twin, in a plan hashed before any
+        program read a certificate: at 292 #1006's claim is its side's 12-place ceiling,
+        accepted in the box of the claim and refused in that of its floor; no pair touches,
+        the least gap 3.03125e-12; the twin is the same packing; of the issue's 233
+        axis-aligned squares 17 are exactly upright. Its clean-room run is
+        E-de-winter-1006-review-exact-feasibility, and the replay
+        E-de-winter-1006-exact-feasibility.
     limitations: >-
       This atom records the source author's report, in issue 1006, of 1 exact rational
       certificate at 796ff3b, n292/n292_exact.json, with its Witness/v2 twin n292_witness.yaml:
@@ -65248,6 +65308,26 @@ evidence:
       of exactly 0, and every pair clears by at least 3.0312e-12. The receipt's controls are
       gross, and the packet's sharp controls meet those margins. Finite feasibility only.
     source_reviewed: '2026-11-17'
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor (a sentence of #1007) and the rest notes, and 340 of 340 controls as stated,
+        51 on each report's first file and 34 on its twin, in a plan hashed before any
+        program read a certificate: at 292 #1006's claim is its side's 12-place ceiling,
+        accepted in the box of the claim and refused in that of its floor; no pair touches,
+        the least gap 3.03125e-12; the twin is the same packing; of the issue's 233
+        axis-aligned squares 17 are exactly upright. Its clean-room run is
+        E-de-winter-1006-review-exact-feasibility, and the replay
+        E-de-winter-1006-exact-feasibility.
   - id: E-de-winter-1007-certificate-report
     claim: upper-bound
     scope:
@@ -65265,6 +65345,27 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-17'
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor and the rest notes, and 340 of 340 controls as stated, 51 on each report's
+        first file and 34 on its twin, in a plan hashed before any program read a
+        certificate: at 262 and 295 each claim is its side's 12-place ceiling, accepted in
+        the box of the claim and refused in that of its floor; no pair touches, the least
+        gaps 4.47681e-12 and 1.52004e-12; each twin is the same packing; the 295 file is not
+        the 262 file with a border (F8), and its first 262 squares prove s(262) <=
+        16.6996934417125687, 1.90949e-10 below the 262 side (F9), which is not registered.
+        Its clean-room run is E-de-winter-1007-review-exact-feasibility, and the replay
+        E-de-winter-1007-exact-feasibility.
     limitations: >-
       This atom records the source author's report, in issue 1007, of 2 exact rational
       certificates at 853b92e, n262/n262_exact.json and n295/n295_exact.json, with their
@@ -65363,5 +65464,594 @@ evidence:
       job wall seconds, the longest job 7.63 seconds. In every positive squares touch the box, a
       least wall clearance of exactly 0, and every pair clears by at least 1.52e-12. The
       receipt's controls are gross, and the packet's sharp controls meet those margins. Finite
+      feasibility only.
+    source_reviewed: '2026-11-17'
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor and the rest notes, and 340 of 340 controls as stated, 51 on each report's
+        first file and 34 on its twin, in a plan hashed before any program read a
+        certificate: at 262 and 295 each claim is its side's 12-place ceiling, accepted in
+        the box of the claim and refused in that of its floor; no pair touches, the least
+        gaps 4.47681e-12 and 1.52004e-12; each twin is the same packing; the 295 file is not
+        the 262 file with a border (F8), and its first 262 squares prove s(262) <=
+        16.6996934417125687, 1.90949e-10 below the 262 side (F9), which is not registered.
+        Its clean-room run is E-de-winter-1007-review-exact-feasibility, and the replay
+        E-de-winter-1007-exact-feasibility.
+  - id: E-ozden-1005-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 292
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s292 upper bound 2026-11-16]'
+    certificate: packing/resources/web/ozden-s292-upper-bound-2026-11-16/source/n-292-candidate.yaml
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B at nice 19 on a shared
+      host, 17 November 2026, from the review-only directory
+      ozden-de-winter-1005-1007-review-2026-11-17: lane R1 ran its frozen r1_check.py on
+      #1005's corner Witness/v2 candidate n-292-candidate.yaml and its JSON twin
+      n292-witness.json at dec930b (out/check-1005-n292-yaml.json and
+      out/check-1005-n292-json.json, ACCEPT in both), deciding every format hypothesis,
+      every square a unit square, every wall and all 42,486 pairs by separating axes in
+      Python integers over each square's own denominator and again by exact
+      vertex-enumerated intersections in gmpy2.mpq, with containment by area and no distance
+      filter: every pair strictly apart, the least margin 2.01869e-13 (squares 154 and 155),
+      five exact wall contacts, the side the packing's height. r1_twin.py found the two
+      files one packing. r1_controls.py decided the 51 controls the plan hashed beforehand
+      states on the candidate and its 34 on the twin (out/controls-1005-n292-*.json), all as
+      stated, among them the squares accepted in the box of the claim and refused in that of
+      its 12-place floor, and every pair closed along its centre line to exact contact and
+      1e-30 past it. r1_selftest.py passed 24,389 checks, and each of its 14 broken copies
+      failed it.
+    replay_status: passed
+    verifiers:
+    - V-r1-1005-1007-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at 292 and its JSON twin: every square, every wall and every pair,
+          by two exact methods in two arithmetic libraries that share only the readers, with
+          the stated controls decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane R1 of issues 1005 to 1007
+          (c-review-1005-1117, under think-p3g8), strongest tier (tbd-strong-max) at the
+          maximum reasoning setting its agent definition configures
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1005 says the search, checks and filing were AI-assisted throughout, by a
+          Claude Sonnet 5.5 director, and that this repository's packing-witness promote
+          made the coordinates. The checker was written from the mathematics, the Witness/v2
+          schema text and the files, and frozen at 2026-11-17T03:46:57Z
+          (frozen/checker-frozen-digests.txt), before its author read the sources' READMEs,
+          checkers or outputs or this repository's witness, verifier or promotion code; it
+          shares no code with the source's sqcheck.py, this repository's maintained routes
+          or promotion, or any earlier review's programs.
+    independence_record: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor (a sentence of #1007) and the rest notes, and 340 of 340 controls as stated,
+        51 on each report's first file and 34 on its twin, in a plan hashed before any
+        program read a certificate: at 292 #1005's claim is its side's 12-place ceiling,
+        accepted in the box of the claim and refused in that of its floor; no pair touches,
+        the least gap 2.01869e-13; the JSON twin is the same packing; the file's provenance
+        words are the promotion tool's. Its clean-room run is
+        E-ozden-1005-review-exact-feasibility, and the replay
+        E-ozden-1005-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the retained certificate and its twin by two exact methods in
+      one program, which share its readers. The review ran on its own copy of the source at
+      the pin; the two files' digests equal the packet's. Finite feasibility only.
+    source_reviewed: '2026-11-17'
+  - id: E-de-winter-1006-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 292
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s292 upper bound 2026-11-16]'
+    certificate: packing/resources/web/de-winter-s292-upper-bound-2026-11-16/source/n292/n292_exact.json.gz
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B at nice 19 on a shared
+      host, 17 November 2026, from the review-only directory
+      ozden-de-winter-1005-1007-review-2026-11-17: lane R1 ran its frozen r1_check.py on
+      #1006's centre-direction certificate n292/n292_exact.json and its Witness/v2 twin
+      n292_witness.yaml at 796ff3b (out/check-1006-n292-exact.json and
+      out/check-1006-n292-witness.json, ACCEPT in both), deciding every format hypothesis,
+      every square a unit square, every wall and all 42,486 pairs by separating axes in
+      Python integers over each square's own denominator and again by exact
+      vertex-enumerated intersections in gmpy2.mpq, with containment by area and no distance
+      filter: every pair strictly apart, the least margin 3.03125e-12 (squares 278 and 279),
+      three exact wall contacts, the side the packing's height. r1_twin.py found the two
+      files one packing. r1_controls.py decided the 51 controls the plan hashed beforehand
+      states on the certificate and its 34 on the twin (out/controls-1006-n292-*.json), all
+      as stated. r1_selftest.py passed 24,389 checks, and each of its 14 broken copies
+      failed it.
+    replay_status: passed
+    verifiers:
+    - V-r1-1005-1007-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at 292 and its Witness/v2 twin: every square, every wall and every
+          pair, by two exact methods in two arithmetic libraries that share only the
+          readers, with the stated controls decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane R1 of issues 1005 to 1007
+          (c-review-1005-1117, under think-p3g8), strongest tier (tbd-strong-max) at the
+          maximum reasoning setting its agent definition configures
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1006 says the construction and search ran with Gemini Carbon (Google) and
+          the checking, the witness file and the figure with Claude (Anthropic), under Joost
+          de Winter's direction. The checker was written from the mathematics, the
+          Witness/v2 schema text, the centre file's format sentence and the files, and
+          frozen at 2026-11-17T03:46:57Z (frozen/checker-frozen-digests.txt), before its
+          author read the sources' READMEs, verify_exact.py, check_area.py or outputs or
+          this repository's witness or verifier code; it shares no code with them or with
+          any earlier review's programs.
+    independence_record: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor (a sentence of #1007) and the rest notes, and 340 of 340 controls as stated,
+        51 on each report's first file and 34 on its twin, in a plan hashed before any
+        program read a certificate: at 292 #1006's claim is its side's 12-place ceiling,
+        accepted in the box of the claim and refused in that of its floor; no pair touches,
+        the least gap 3.03125e-12; the twin is the same packing; of the issue's 233
+        axis-aligned squares 17 are exactly upright. Its clean-room run is
+        E-de-winter-1006-review-exact-feasibility, and the replay
+        E-de-winter-1006-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the retained certificate and its twin by two exact methods in
+      one program, which share its readers. The review ran on its own copy of the source at
+      the pin; the two files' digests equal the packet's. Finite feasibility only.
+    source_reviewed: '2026-11-17'
+  - id: E-de-winter-1007-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 262
+      - 295
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter upper bounds 262 295 2026-11-16]'
+    certificate: packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/source/
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B at nice 19 on a shared
+      host, 17 November 2026, from the review-only directory
+      ozden-de-winter-1005-1007-review-2026-11-17: lane R1 ran its frozen r1_check.py on
+      #1007's two centre-direction certificates, n262/n262_exact.json and
+      n295/n295_exact.json, and their Witness/v2 twins at 853b92e
+      (out/check-1007-n262-*.json and out/check-1007-n295-*.json, ACCEPT in all four),
+      deciding every format hypothesis, every square a unit square, every wall and all
+      34,191 and 43,365 pairs by separating axes in Python integers over each square's own
+      denominator and again by exact vertex-enumerated intersections in gmpy2.mpq, with
+      containment by area and no distance filter: every pair strictly apart, the least
+      margins 4.47681e-12 (262, squares 33 and 37) and 1.52004e-12 (295, squares 55 and 56),
+      four exact wall contacts at each, each side the packing's width. r1_twin.py found each
+      pair of files one packing. r1_controls.py decided the 51 controls the plan hashed
+      beforehand states on each certificate and its 34 on each twin
+      (out/controls-1007-*.json), all as stated. After the checker's freeze, r1_inner.py
+      took the 295 file's first 262 squares as a packing of their own and the frozen checker
+      accepted it at side 16.6996934417125687, its controls as stated
+      (out/inner-1007-n295.json, out/check-derived-n262-*.json,
+      out/controls-derived-n262-*.json); that bound is not registered. r1_selftest.py passed
+      24,389 checks, and each of its 14 broken copies failed it.
+    replay_status: passed
+    verifiers:
+    - V-r1-1005-1007-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the two certificates at 262 and 295 and their Witness/v2 twins: every square,
+          every wall and every pair, by two exact methods in two arithmetic libraries that
+          share only the readers, with the stated controls decided by both
+        checked: 2
+        of: 2
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane R1 of issues 1005 to 1007
+          (c-review-1005-1117, under think-p3g8), strongest tier (tbd-strong-max) at the
+          maximum reasoning setting its agent definition configures
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1007 says the construction, search and rational certificates were produced
+          with Gemini Carbon (Google) and the conversion to the witness format and the
+          checks with Claude (Anthropic), under Joost de Winter's direction. The checker was
+          written from the mathematics, the Witness/v2 schema text, the centre file's format
+          sentence and the files, and frozen at 2026-11-17T03:46:57Z
+          (frozen/checker-frozen-digests.txt), before its author read the sources' READMEs,
+          verify_exact.py, check_area.py or outputs or this repository's witness or verifier
+          code; it shares no code with them or with any earlier review's programs.
+    independence_record: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at the maximum reasoning setting
+        its agent definition configures), the stage 4 mathematical review lane R1 of issues
+        1005 to 1007 (c-review-1005-1117, under think-p3g8), prompted separately from the
+        import lane (c-import-1005-1117, think-qag8) and blind to its work until its
+        findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md accepted all
+        four certificates of issues 1005 to 1007, in eight files, with twelve findings, F8
+        minor and the rest notes, and 340 of 340 controls as stated, 51 on each report's
+        first file and 34 on its twin, in a plan hashed before any program read a
+        certificate: at 262 and 295 each claim is its side's 12-place ceiling, accepted in
+        the box of the claim and refused in that of its floor; no pair touches, the least
+        gaps 4.47681e-12 and 1.52004e-12; each twin is the same packing; the 295 file is not
+        the 262 file with a border (F8), and its first 262 squares prove s(262) <=
+        16.6996934417125687, 1.90949e-10 below the 262 side (F9), which is not registered.
+        Its clean-room run is E-de-winter-1007-review-exact-feasibility, and the replay
+        E-de-winter-1007-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the two retained certificates and their twins by two exact
+      methods in one program, which share its readers. The review ran on its own copy of the
+      source at the pin; the four files' digests equal the packet's. The bound the 295
+      file's first 262 squares prove is the review's derivation, not a claim of the issue,
+      and is not registered. Finite feasibility only.
+    source_reviewed: '2026-11-17'
+  - id: E-mishapolk-1009-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 147
+      - 156
+      - 180
+      - 210
+      - 260
+      - 262
+      - 268
+      - 270
+      - 272
+      - 292
+      - 295
+      - 299
+      - 307
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Mishapolk issue 1009 2026-11-16]'
+    certificate: packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-17'
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-polkovskyi-1009.md accepted all thirteen
+        certificates, each in its two files, with ten findings, all notes, and 481 of 481
+        controls as stated, 37 a count, in a plan hashed before any program read a
+        certificate: each claim is its side's 12-place ceiling, accepted in the box of the
+        claim and crossing the walls of the box one unit of the twelfth place smaller; the
+        two forms are one packing; every wall clears by at least 1e-28, exactly that at the
+        left and bottom walls, and every pair is strictly apart, the least margins 2.0e-28
+        at ten counts, 1.44e-24 at 180, 1.78e-20 at 295 and 4.24e-15 at 292; the 295
+        certificate is the 262 arrangement in an L border solved again, 5.93e-19 above the
+        262 side plus 1 (F8). Its clean-room run is
+        E-mishapolk-1009-review-exact-feasibility, and the replay
+        E-mishapolk-1009-exact-feasibility.
+    limitations: >-
+      This atom records the source author's report, in issue 1009, of 13 exact rational
+      centre/half-angle certificates in Evan Daniel's format at
+      Mishapolk/square-packing-records b637e6c, certificates/0000-0999/nN.cert at 147, 156,
+      180, 210, 260, 262, 268, 270, 272, 292, 295, 299 and 307, each beside a Witness/v2
+      corner file of the same packing under witnesses/2026-11-16/, first committed in
+      b9b7fa7 (23:27:09Z), which b637e6c force-pushed over with the same bytes. The issue
+      says verify_bound_certificate.py --strict and verify_area_exact.py --strict accept
+      every certificate and this repository's check_rational_witness_independent.py reports
+      VERIFIED on every Witness/v2 file; none was run here. A separate complete repository
+      replay is retained for all 13 counts: 13 positives and 26 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 2490354 pair
+      decisions; summed over the 39 jobs, the receipts record 599.51 route CPU seconds and
+      862.91 job wall seconds, the longest job 67.08 seconds. Every positive clears every
+      wall by at least 1e-28 and every pair by at least 2.00e-28, the left and bottom walls
+      by exactly 1e-28. The packet's sharp controls meet those margins on both routes. The
+      replay is E-mishapolk-1009-exact-feasibility, and the stage 4 review's clean-room run
+      E-mishapolk-1009-review-exact-feasibility, at all thirteen counts.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent rational
+      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and
+      the separating-axis method. No local optimality, KKT, rigidity, human oversight or
+      optimality is claimed.
+  - id: E-mishapolk-1009-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 147
+      - 156
+      - 180
+      - 210
+      - 260
+      - 262
+      - 268
+      - 270
+      - 272
+      - 292
+      - 295
+      - 299
+      - 307
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+    - >-
+      the certificate parser and half-angle map of devtools.evand_exact_certificates (the
+      evand-cert adapter), through which both maintained routes read the certificates, written in
+      Evan Daniel's format: its reader's line filter and corner construction are transcribed from
+      Daniel's verify_cert.py and verify_cert2.py, and the source's own checker,
+      verify_bound_certificate.py, is Daniel's separating-axis verifier
+    - >-
+      devtools.check_rational_witness_independent, the second route, which the issue says the
+      author ran on the Witness/v2 files of the same packings
+    - CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk issue 1009 2026-11-16]'
+    certificate: packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports mishapolk-issue1009-2026-11-16
+      certify --workers 2 wrote the receipts, one per count, on 17 November 2026 from the packet's
+      retained certificates, read by the evand-cert reader and each held to the source's
+      Witness/v2 corner file of the same packing (witness-corners), and check --replay decided all
+      39 retained jobs again, each certificate with its duplicate-square and outside-container
+      controls, through both maintained routes; check-claims rebuilds the frozen comparison.
+      python -m devtools.upper_bound_reports mishapolk-issue1009-2026-11-16 sharp-controls wrote
+      the packet's sharp controls, one receipt per count, all 143 as stated in advance on both
+      routes: contact accepted at margin 0 and refused 1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the thirteen certificates from 147 to 307 that T-314 to T-326 cite, every wall and
+          every pair decided by both maintained routes; the kernel's controls are retained
+          in the packet's receipts
+        checked: 13
+        of: 13
+    limitations: >-
+      A replay of the retained certificates by two maintained exact routes that share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method, and with
+      the producer's checking the evand-cert reader's line filter and corner construction and the
+      independent corner checker the author ran. The 39 jobs hold 2490354 pair decisions. Every
+      wall clears by at least 1e-28, exactly that at the left and bottom walls, and every pair by
+      at least 2.00e-28, above the sharp controls' 1e-30. The source's own verifiers were not run
+      here. Finite feasibility only.
+    source_reviewed: '2026-11-17'
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-polkovskyi-1009.md accepted all thirteen
+        certificates, each in its two files, with ten findings, all notes, and 481 of 481
+        controls as stated, 37 a count, in a plan hashed before any program read a
+        certificate: each claim is its side's 12-place ceiling, accepted in the box of the
+        claim and crossing the walls of the box one unit of the twelfth place smaller; the
+        two forms are one packing; every wall clears by at least 1e-28, exactly that at the
+        left and bottom walls, and every pair is strictly apart, the least margins 2.0e-28
+        at ten counts, 1.44e-24 at 180, 1.78e-20 at 295 and 4.24e-15 at 292; the 295
+        certificate is the 262 arrangement in an L border solved again, 5.93e-19 above the
+        262 side plus 1 (F8). Its clean-room run is
+        E-mishapolk-1009-review-exact-feasibility, and the replay
+        E-mishapolk-1009-exact-feasibility.
+  - id: E-mishapolk-1009-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 147
+      - 156
+      - 180
+      - 210
+      - 260
+      - 262
+      - 268
+      - 270
+      - 272
+      - 292
+      - 295
+      - 299
+      - 307
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Mishapolk issue 1009 2026-11-16]'
+    certificate: packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B at nice 19 on a shared
+      host, 17 November 2026, from the review-only directory
+      polkovskyi-1009-review-2026-11-17: the review lane ran its frozen rv1009_check.py on
+      each of #1009's thirteen counts at b637e6c, the centre/half-angle file
+      certificates/0000-0999/nN.cert and the Witness/v2 corner file
+      witnesses/2026-11-16/n-N.yaml (out/check-nNNN.json, ACCEPT at all thirteen), deciding
+      every format hypothesis, every square a unit square, every wall and all 415,059 pairs
+      by separating axes in Python integers from the poses and again by exact convex
+      clipping in gmpy2.mpq from the corners, each method run on both forms, with no
+      distance filter: every pair strictly apart and every wall cleared by at least 1e-28,
+      exactly that at the left and bottom walls; the least pair margins 2.0e-28 at ten
+      counts, 1.44492e-24 at 180, 1.77633e-20 at 295 and 4.23790e-15 at 292; the two forms
+      the same squares at all 3,218. rv1009_controls.py decided the 37 controls a count the
+      plan hashed beforehand states (out/controls-nNNN.json), all 481 as stated, among them
+      the squares accepted in the box of the claim and crossing the walls of the box one
+      unit of the twelfth place smaller, and every pair closed along its line of centres to
+      exact contact and past it. rv1009_selftest.py passed 34,183 checks, and each of its
+      six broken copies failed it.
+    replay_status: passed
+    verifiers:
+    - V-rv1009-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the thirteen certificates in both forms: every square, every wall and every pair,
+          by two exact methods in two arithmetic libraries that share only the readers, with
+          the stated controls decided by both
+        checked: 13
+        of: 13
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issue 1009 (c-review-1009-1117, under
+          think-evxy), strongest tier (tbd-strong-max) at maximum reasoning
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1009 says the packings were discovered by Mykhailo Polkovskyi assisted by
+          Gemini. The checker was written from the mathematics, the Witness/v2 schema text
+          and the files, and frozen at 2026-11-17T03:33:14Z
+          (frozen/checker-frozen-digests.txt), before its author read the source's README,
+          submission note, verifiers or indexes, or this repository's witness, verifier,
+          promotion, identity or contraction code; it imports nothing from this repository
+          or the source and reuses no code of any earlier review, lane L186's, the model for
+          its method, among them, whose programs it did not open.
+    independence_record: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-17'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1009 (c-review-1009-1117, under think-evxy),
+        prompted separately from the import lane (c-import-1009-1117, think-i38n) and blind
+        to its work until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-17-polkovskyi-1009.md accepted all thirteen
+        certificates, each in its two files, with ten findings, all notes, and 481 of 481
+        controls as stated, 37 a count, in a plan hashed before any program read a
+        certificate: each claim is its side's 12-place ceiling, accepted in the box of the
+        claim and crossing the walls of the box one unit of the twelfth place smaller; the
+        two forms are one packing; every wall clears by at least 1e-28, exactly that at the
+        left and bottom walls, and every pair is strictly apart, the least margins 2.0e-28
+        at ten counts, 1.44e-24 at 180, 1.78e-20 at 295 and 4.24e-15 at 292; the 295
+        certificate is the 262 arrangement in an L border solved again, 5.93e-19 above the
+        262 side plus 1 (F8). Its clean-room run is
+        E-mishapolk-1009-review-exact-feasibility, and the replay
+        E-mishapolk-1009-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the thirteen retained certificates, each in its two forms, by
+      two exact methods in one program, which share its readers. The review ran on its own
+      clone of the source at the pin; the 26 files' digests equal the packet's. Finite
       feasibility only.
     source_reviewed: '2026-11-17'

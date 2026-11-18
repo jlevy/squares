@@ -210,8 +210,16 @@ carries to another count.
 ## Stage 4 Review
 
 The blind stage 4 review of this certificate is lane R1’s (think-p3g8), with de Winter’s
-three; this lane has not read it. Until it lands and is mapped, the result stands at the
-replay’s rungs, and nothing here is its finding.
+three: [review-2026-11-17-ozden-de-winter-1005-1007.md](../../../../docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md), read only after this packet’s replay,
+controls, measurements and registration were committed, and mapped with #1009’s import.
+It accepts the certificate and its JSON twin, decided by a clean-room checker by two
+exact methods with 51 and 34 controls stated in advance, with no blocking or major
+finding. Its least margin, 2.01869e-13 at squares 154 and 155, is the replay’s; it adds
+that the side is the packing’s height exactly (F4), that the near pairs lie in one band
+around 2.06e-13 (F5), and that the file’s `verified`, source path and parent witness id
+are the promotion tool’s words, so the record states its own provenance (F10).
+T-310 is confirmed, independently re-implemented, at V3/C3, and stays the first report
+at 292 in the walk; the house at 292 takes Polkovskyi’s smaller T-323.
 
 ## What Is Not Established
 
