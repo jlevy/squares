@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 45
+version: 46
 delegate: coord-intake-1117r
 labels: []
 dependencies: []
@@ -51,7 +51,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-18T04:16:05.684Z
+updated_at: 2026-11-18T04:38:09.121Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -62,3 +62,5 @@ started_at: 2026-11-17T01:28:43.493Z
 2026-11-17T22:05Z coord-intake-1117r lanes: w1-holds-1117r (#953 -> #908 -> #909, think-vshs/4ul6/i85v/r333; /home/user/wt/w1); w2-credit-1117r (#1010 + #1008 reply, think-dp8t; /home/user/wt/w2); w3-pass-1117r (review-1005 PR, #1011 adopt+regularize, import-1009 PR, review-1009 PR, think-qag8/p3g8/i38n/evxy; /home/user/wt/w3*); w4-records-1117r (owner-decision records think-8gvd, #1012 think-wvr8, later the replies' records; branch claude/keen-galileo-9gbz1a in /home/user/squares); w5-audit-1117r (stalled beads, think-uz0m, beads only). Queued: think-8yyy (option D) after w4's first PR. Merge authority: github-merge autonomous + owner's in-conversation instruction to resume every intake PR end to end.
 
 2026-11-18T01:25Z coord-intake-1117r: the worker restarted at about 01:00Z and every lane sub-agent was lost. State on resume: merged #953 (e01cffa62), #1010 (23:26Z), #1013 (23:34Z), #908 (2be743b07), #1011 (45f0288b5), #1014 (eb50f54e9). Replies posted on #1008, #776 and #777 (both closed), #532 and #446. Open: #909 (Review A addressed, no dispositions reply yet), #1016 (dispositions posted, CI running), import-1009 (84 local commits; the coordinator pushed them at c82c06859; 6 files modified and uncommitted). Respawned lanes: w1r-holds-1118 (#909), w3r-pass-1118 (import-1009), w4r-records-1118 (#1016 plus the replies' records), w6-dewinter-1118 (#1015/#1017 at 127 and #1018 on claude/intake-2026-11-18-*; the owner approved that branch pattern in conversation). Queued: think-8yyy (option D).
+
+2026-11-18T04:45Z coord-intake-1117r: second worker restart at about 04:30Z; all lanes lost again. On main since the first restart: #909, #1016, #1025, #1026 and #1027. Open: #1023 (Review A changes requested, being addressed), #1028 (Review A approves after a post-freeze note), #1024 and #1029 (imports), option D (prep commits backed up to claude/intake-2026-11-18-option-d-prep at 0cb68cd1b). Owner decided think-frl5: Polkovskyi keeps credit and the record notes the project's prior held solves. Respawned: w3r2 (#1023), r127b2 (#1028), w6r (#1029, #1024, think-gqzz), w7r (think-8yyy).
