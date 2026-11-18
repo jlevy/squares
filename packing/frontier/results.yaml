@@ -22786,16 +22786,18 @@ results:
       PingYou Ltd's packings: at 207 every square pairs with one of T-147's within 2.8e-04,
       three turned by at most 0.012 degrees, a re-solve of PingYou's packing and not a new
       arrangement by pose; at 153 it is T-148's design with 100 squares moved beyond 1e-03
-      and six beyond a tenth, another arrangement of PingYou's design. At 207 the owner's
-      option D of 17 November 2026 (think-b0w5) decides the credit: a re-certification of a
-      standing packing is a new result only if its side is below the predecessor's once the
-      predecessor is shrunk until its squares first touch, and T-147's certificate so
-      contracted lies at or below this one (its gain is 0.9984 of T-147's margin, and 0.1966
-      of the margin of PingYou's own tighter realization, T-167), so at 207 it is a
-      restatement of PingYou Ltd's packing, credited to PingYou Ltd. Whether to credit 153
-      as a new arrangement stays the owner's decision 1 on pull request 602 (think-g0o4). It
-      discloses that Gemini was used for the search implementation, verification
-      orchestration and issue preparation, directed by the author.
+      and six beyond a tenth, another arrangement of PingYou's design.
+
+      At 207 the owner's option D of 17 November 2026 (think-b0w5) decides the credit: a
+      re-certification of a standing packing is a new result only if its side is below the
+      predecessor's once the predecessor is shrunk until its squares first touch, and
+      T-147's certificate so contracted lies at or below this one (its gain is 0.9984 of
+      T-147's margin, and 0.1966 of the margin of PingYou's own tighter realization, T-167),
+      so at 207 it is a restatement of PingYou Ltd's packing, credited to PingYou Ltd.
+      Whether to credit 153 as a new arrangement stays the owner's decision 1 on pull
+      request 602 (think-g0o4). It discloses that Gemini was used for the search
+      implementation, verification orchestration and issue preparation, directed by the
+      author.
 
       On 15 October 2026 the case records adopted this entry as the house at 153 and 207, each
       case's reported and verified upper bounds moving together and PingYou Ltd's certificates
@@ -36558,10 +36560,12 @@ results:
       each house certificate contracted to first contact lies at or below this entry's
       certificate at its count, which gains 1.0000 of the house certificate's own margin at
       every count: the house's 1 + 1e-20 dilation replaced by about 1 + 1e-30 (RV-2 of the
-      31 October review). So each is a restatement, credited to the house's finder: the
-      entry records the report, proves no new bound, stays below the stage 4 exit and moves
-      no house. The 31 October review accepted every certificate for finite feasibility and
-      recommended reading them as restatements.
+      31 October review).
+
+      So each is a restatement, credited to the house's finder: the entry records the
+      report, proves no new bound, stays below the stage 4 exit and moves no house. The 31
+      October review accepted every certificate for finite feasibility and recommended
+      reading them as restatements.
 
       The certificates lie 1.3e-19 to 1.7e-19 below the houses' certificates at their counts (T-222,
       T-197, T-220, T-188, T-225, T-218, T-190, T-182 and T-219), each a re-certification of the house's packing. At six counts every square stays within 1.6e-6 of the house's; at 154, 183 and 227 47, 24 and 16 squares move beyond 1e-3, by at most 0.078, 0.358 and 0.168, in a region that deforms without changing the side, which equals the house's contact side to within 1e-30 (RV-4).
@@ -36754,10 +36758,11 @@ results:
       (this certificate 1.0000 of it); T-218 by 1.586193e-19 at 236 (this certificate 1.0000
       of it); T-190 by 1.590260e-19 at 237 (this certificate 1.0000 of it); T-182 by
       1.598712e-19 at 241 (this certificate 1.0000 of it); T-219 by 1.694895e-19 at 271
-      (this certificate 1.0000 of it). At each count the house contracted lies at or below
-      this certificate. At 154, 183 and 227 tens of squares move (above) in the region the
-      house's padding leaves free, one to one with the house's packing, so each is a
-      re-certification of it and a restatement.
+      (this certificate 1.0000 of it).
+
+      At each count the house contracted lies at or below this certificate. At 154, 183 and
+      227 tens of squares move (above) in the region the house's padding leaves free, one to
+      one with the house's packing, so each is a re-certification of it and a restatement.
     next_rung: >-
       None: a restatement at every count under the owner's option D (think-b0w5), decided on
       18 November 2026 by the contraction receipts in the packet's measure/, so no rung is
@@ -37997,12 +38002,14 @@ results:
       only if its side is below the predecessor's once the predecessor is shrunk until its
       squares first touch (devtools.contraction_margin). Measured so on 18 November 2026,
       each gain is under 1% of the house certificate's own margin: 0.0093 at 105, 0.0079 at
-      146, 0.0077 at 156, 0.0064 at 229 and 0.0056 at 308. So each is a restatement,
-      credited to the house's finder: the entry records the report, proves no new bound,
-      stays below the stage 4 exit and moves no house. The 31 October review accepted every
-      certificate for finite feasibility and recommended reading them as restatements. These
-      counts were registered on #852's branch within T-259, as the review read it, and were
-      split from it so that the question held only them.
+      146, 0.0077 at 156, 0.0064 at 229 and 0.0056 at 308.
+
+      So each is a restatement, credited to the house's finder: the entry records the
+      report, proves no new bound, stays below the stage 4 exit and moves no house. The 31
+      October review accepted every certificate for finite feasibility and recommended
+      reading them as restatements. These counts were registered on #852's branch within
+      T-259, as the review read it, and were split from it so that the question held only
+      them.
 
       The issue says every certificate yields valid and strictly valid, with positive wall
       and pair margin signs, under verify_bound_certificate.py --strict, Evan Daniel's MIT
@@ -42807,7 +42814,7 @@ results:
       polynomial was identified numerically from 108 digits; and that local optimality has
       no formal proof. The source's README at the pin (n199/README.md) added that in that
       solution all 734 load-bearing or forced contacts close exactly and all other gaps stay
-      open; the author took the number out of it on 14 November 2026 (commit 6760360).
+      open; the author took the number out of it on 14 November 2026.
 
       Checked here exactly: the quintic is irreducible over Q, exactly one of its three real roots
       lies in [S - 1e-98, S], and S lies 1.36e-99 above it. The certificate proves s(199) <= S and
@@ -42968,9 +42975,9 @@ results:
       already does both. Its clean-room run is E-de-winter-939-review-exact-feasibility
       (decide-939.json).
 
-      The pin: the packet keeps 702c7af, the commit the issue names; the author asks that
-      c4e65d0b be cited, and the Git diff from 702c7af to c4e65d0 is empty for n199/ and
-      LICENSE, so both commits name this certificate. The adoption of 18 November 2026 (lane
+      The pin: the packet keeps the commit the issue names, and the commit the author asks the
+      record to cite holds the same n199/ files and licence byte for byte, so both name this
+      certificate. The adoption of 18 November 2026 (lane
       w7-optd-1118, think-8yyy) moved 199 from T-284 to this certificate under the house
       rule, with both strong generators' regularization of the new house.
     next_rung: >-
@@ -43027,7 +43034,8 @@ results:
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at the
       exact side it states, a rational with a denominator of 670 digits: s(172) <=
-      13.6146898532835806, that side rounded up at 16 places. It is the side of n172_witness.yaml
+      13.61468985328358057514628890087947061618972730200175…, which rounds up to
+      13.6146898532835806 at 16 places. It is the side of n172_witness.yaml
       at JoostdeWinter/square-packing as #946 names it; rounded up at 12 places it is
       13.614689853284, as the source's README prints it, 2.63e-12 below T-282's side, Doğa
       Özden's #935 and the case's house, across its 12-place print (...287). #946 prints the side
