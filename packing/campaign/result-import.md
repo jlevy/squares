@@ -568,14 +568,21 @@ record’s statement of the rule:
   the publication that states it, and #732’s 985, which ties Couzo’s `4e4c8ce` bound
   there, is not recorded.
   The walk records the bound and the chain passes over it.
-  That it has no row of its own is the decision’s recommendation, not yet the owner’s
-  word; think-kzme asks that, whether an issue claiming the count (743, 798, 855, 985)
-  gives it a row, and about the three bounds that delete two or three squares (751, 752
-  and 927), which stay held.
-  Above 1024 the walk applies the answer the same way
+- **A deletion-made bound gets a row only where a report claims the count with a
+  certificate file of its own** (think-gmoj, answering think-kzme’s questions 1 and 2).
+  On 17 November 2026 the owner selected the option labelled “Only where someone claims
+  the count (Recommended)”; the rest is the question the coordinator asked.
+  So #941’s 809, the 810 certificate less its last square, which the issue claims with
+  its own file `above324/n0809.cert`, is a row, and an index deletion bound has none,
+  claimed by an issue or not: 743, 798, 855 and 985, which #715 and #732 claim, and
+  #763’s 683 (`beyond_horizon_replay.CLAIMED_DELETION_ANSWER`). A later certificate file
+  at an index bound’s side, as #732’s `n985.cert` at 985, is a tie, which report order
+  does not record. Whether a bound that deletes two or three squares is an earlier report
+  too, as at 751, 752 and 927, was not part of that answer, so those three stay held on
+  think-kzme. Above 1024 the walk applies both answers the same way
   (`beyond_horizon_replay.deletion_holds`): a bound one square below the next count’s
-  certificate is settled, and one deleting two or more squares, or one an issue claims,
-  waits on think-kzme.
+  certificate, claimed by an issue or not, is settled with no row, and any bound
+  deleting two or more squares, claimed or not, waits on think-kzme.
   A deletion from a construction no certificate file states, as 23aff0c’s from
   Friedman’s, waits with that construction (D2, think-zkxy).
 - **A recipe is a row once the maintained checker decides it** (D2 on think-f2io):

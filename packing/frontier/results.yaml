@@ -6203,9 +6203,10 @@ results:
       That proof is now reported complete: Hiroaki Hosono's Lean kernel proof of Valid7,
       merged into the source on 11 October and re-checked as version 2 on 17
       October, is registered as T-250, a reported formalization of this result at V0/C0;
-      its build (about 798 CPU-hours for version 2) or a sample of its roots is the owner's
-      decision (think-qu37, #537). think-kqi1 tracks a scope that can state an infinite
-      family.
+      its full build (about 798 CPU-hours for version 2) was declined by the owner over the
+      40 CPU-hour item cap on 17 November 2026 (think-l7j0, #537), and a sample of its roots,
+      about 8 CPU-hours, stays runnable and moves no rung (think-qu37). think-kqi1 tracks a
+      scope that can state an infinite family.
 
       The source also reports an interval-certified checker: its zmx2 with area density
       decides Valid7 by a sweep of the whole pose space, about 400 CPU-seconds at the
@@ -20650,6 +20651,11 @@ results:
       meantime, in every record, view, test and tool that names it. The review of 12
       October is stored as its reviewer wrote it and is not edited: its "T-155" is this
       entry, T-159, and its "T-154" is T-158.
+
+      The report-order rule of 14 October would not record it, since T-146 is smaller at 102
+      and came first, and the owner decided on 17 November 2026 to keep it registered
+      (think-x30l), as T-120, T-137 and T-150 were kept: an S2 entry crediting Rio Calle with
+      an independent arrangement of Ryan Xu's design, which moves no case.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
       retained human oversight record; one AI review, of 12 October, is retained.
@@ -33729,9 +33735,10 @@ results:
       V3 and C3 need a complete build here or by a third party retained here, from the
       retained scripts and Daniel's library staged from the 7 October evand packet,
       with its axiom receipt (think-cs9x): about 862 CPU-hours by the source's receipt, with
-      9.8 GB per Part process and 35 GB for the last two modules, so it is held above the
-      owner's 40 CPU-hour item cap and this host. A build of Pts.lean alone decides the
-      cover's data facts in Lean and moves no rung.
+      9.8 GB per Part process and 35 GB for the last two modules, above the owner's 40
+      CPU-hour item cap and this host, and the owner declined it at that price on 17
+      November 2026 (think-l7j0). A build of Pts.lean alone decides the cover's data facts in
+      Lean and moves no rung.
     unfinished_confirmations:
       - what: >-
           the stage 4 mathematical review of s59_eq_8, its statement, the batch structure
@@ -36175,9 +36182,10 @@ results:
       gen_main.py and the generators, read from the retained packets. V3 and C3 need a
       complete build here or by a third party retained here, with the axiom receipt: version
       2's is about 798 CPU-hours with 37 GB per leaf module and 51 GB for Main.lean, about 20
-      times the owner's 40 CPU-hour item cap, and a sample of roots is a component check
-      that moves no rung; which to run, if either, is the owner's decision (think-qu37,
-      #537). Rung 5 needs a human expert's review of the formalization beside it.
+      times the owner's 40 CPU-hour item cap, which the owner declined at that price on 17
+      November 2026 (think-l7j0, #537). A sample of about 100 roots, about 8 CPU-hours under
+      the cap, stays runnable (think-qu37) and is a component check that moves no rung. Rung
+      5 needs a human expert's review of the formalization beside it.
     unfinished_confirmations:
       - what: >-
           the stage 4 mathematical review of valid7, bentz and validTilt7, Bridge.lean, the
@@ -36440,7 +36448,8 @@ results:
       separately prompted lane that shared none of it. V5 needs the covering statement proved in a proof
       assistant and an expert formalization review. zm_mixed.py's complete pass, about 138
       CPU-hours by the source's records (think-qvp6), would be a second machine method by
-      the producer and raises no rung.
+      the producer and raises no rung; the owner declined it over the 40 CPU-hour item cap
+      at that price on 17 November 2026 (think-l7j0).
     unfinished_confirmations:
       - what: >-
           a human oversight record that checks the trust boundary, the certificate's meaning
@@ -46498,6 +46507,11 @@ results:
       jobs run no faster than at the source; and the build of lean/K2m5, a few CPU-hours on
       a host with at least 24 GB of memory or swap and about 10 GB of disk. Then replayed
       entries for Valid11 and the reduction, and the verified lower bounds at k = 11 to 18.
+
+      The owner decided on 17 November 2026 to hold all of it (think-k2lh), the subsets under
+      the item cap included, the 35 CPU-hour zmx2 sweep with the coverage dumps and the Lean
+      build: none of it runs in a pass until the owner says otherwise, and T-298 keeps its
+      standing.
 
       The stage 4 review's two major findings stand beside that: zmx2's area-density and
       first-order lemmas, on which the 12,024 general-position roots rest, have no review in

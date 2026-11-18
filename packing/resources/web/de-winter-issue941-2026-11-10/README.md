@@ -221,16 +221,20 @@ Lavrentev’s, since the identity measurement pairs it one to one with that pack
 square beyond a tenth; the issue calls it a sub-window of his 539, and both can hold
 (the stage 4 review’s F14).
 
-- **Fourteen rows.** Each is a current beyond-horizon row of this source, at assurance
+- **Fifteen rows.** Each is a current beyond-horizon row of this source, at assurance
   `verified`, and supersedes the row it is below.
-- **809 is held.** The 809 is the 810 certificate less its last square, at 810’s side: a
-  one-square deletion bound the issue claims beside the 810 it is taken from (the
-  review’s F5). Whether an issue-claimed deletion bound gets a row is the owner’s open
-  question, think-kzme, and the record gives none at 743, 798, 855 and 985, where #715
-  and #732 claim such bounds.
-  So 809 has no row, the row of `couzo-issue763-2026-10-23` stays current there, the
-  declaration requests no row at 809, and think-kzme’s notes name it.
-  Both routes and the review accept the 809 certificate.
+- **809 has its row since 17 November.** The 809 is the 810 certificate less its last
+  square, at 810’s side: a one-square deletion bound the issue claims beside the 810 it
+  is taken from (the review’s F5), with a certificate file of its own,
+  `above324/n0809.cert`. It was held without a row from 11 November for the owner’s open
+  question, think-kzme, which the owner answered on 17 November 2026 (think-gmoj): a
+  deletion-made bound gets a row only where a report claims the count with its own
+  certificate file, as here, and none where it has no file, as the index deletion bounds
+  at 743, 798, 855 and 985 that #715 and #732 claim.
+  So the declaration requests a row at 809, which supersedes the row of
+  `couzo-issue763-2026-10-23` there.
+  Both routes and the review accept the 809 certificate, and the two evidence atoms
+  cover it.
 
 These are bounds below the record, not the best known packings at 14 of the 15 counts:
 the issue says public Kaggle submissions hold smaller ones at all but 543, though none
@@ -256,7 +260,7 @@ receipts are in its own packet.
   `E-de-winter-941-review-exact-feasibility`, and the review is recorded under
   `external_review` on `E-de-winter-941-certificate-report`. Its checker is
   `V-de-winter-941-942-review-check`, clean room, of the producer’s system family
-  (Claude). The fourteen rows are verified from the two runs.
+  (Claude). The fifteen rows are verified from the two runs.
 - **Its findings on the record**, answered here and in the other two packets: F5 (809,
   above), F7 (the refined README’s twenty-two, in the
   [a0c4fc8 packet](../de-winter-a0c4fc8-2026-11-10/README.md#what-the-source-claims)),
@@ -292,7 +296,8 @@ Intake lane L103 (think-acm0) recorded them.
 **809.** It is the deletion bound from 810: the 810 certificate with its last square
 removed, at the same side.
 He asks that it be handled under the rule the project adopts for deletion bounds.
-So 809 stays held for think-kzme, as above, and its notes record the answer.
+So 809 stayed held for think-kzme, whose notes record the answer, until the owner’s
+answer of 17 November 2026 gave it its row, as above.
 
 **The margin.** The review’s reading is right, he says: the margin is the certificate’s
 side less the side of the floating-point result of the local optimization, at 494, 738,
@@ -332,8 +337,8 @@ This packet keeps the folder at `71da0d5` and does not retain that edition.
 - **The consequences.** The sides here also bound counts the issue does not claim, by
   deletion (one to three squares fewer) and by the border step s(n + 2⌊s⌋ + 1) ≤ s(n) +
   1\. Those bounds have no rows.
-  Whether a deletion bound gets a row, claimed or not, is the owner’s open question
-  (think-kzme).
+  By the owner’s answer of 17 November 2026 (think-gmoj), a deletion bound gets a row
+  only where a report claims the count with its own certificate file.
 
 ## Credit and Licence
 

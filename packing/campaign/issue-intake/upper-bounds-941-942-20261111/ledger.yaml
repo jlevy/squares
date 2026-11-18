@@ -263,14 +263,14 @@ reports:
         810'''
       continues: the 810 certificate of this report, one square removed
     note: '809 is the 810 certificate less its last square, at 810''s side: a one-square deletion
-      bound this report claims beside the 810 it is taken from. Whether an issue-claimed deletion
-      bound gets a row is the owner''s open question (think-kzme), which the record leaves
-      without a row at 743, 798, 855 and 985; so 809 is held without a row, the row of couzo-issue763-2026-10-23
-      stays current there, and think-kzme''s notes name it. Unlike the four, whose held bounds
-      are index deletions with no file of their own, 809 is the issue''s own certificate file,
-      so it is also a stated bound with a certificate (question 1). The rule''s verdict stands
-      as the walk gives it. The row''s certificate''s uniform-contraction margin is 5.734e-12
-      (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n809.json);
+      bound this report claims beside the 810 it is taken from, with a certificate file of
+      its own, above324/n0809.cert. It was held without a row from 11 November for the owner''s
+      question think-kzme, which the owner answered on 17 November 2026 (think-gmoj): a deletion-made
+      bound gets a row only where a report claims the count with its own certificate file,
+      as here, and none at 743, 798, 855 and 985, whose index bounds have no file of their
+      own. So 809 has its row, which supersedes the row of couzo-issue763-2026-10-23 there.
+      The rule''s verdict stands as the walk gives it. The row''s certificate''s uniform-contraction
+      margin is 5.734e-12 (packing/resources/web/de-winter-issue941-2026-11-10/measure/contraction-n809.json);
       the gain, 1.191e-4, is 2.076e+07 times it, far outside it, so the gain is no re-certification
       of the row''s padding and not RV-3 material.'
   - n: 810

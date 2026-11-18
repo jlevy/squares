@@ -28,7 +28,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-11-15'
+last_reviewed: '2026-11-17'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -8407,12 +8407,15 @@ issues:
         Credit for T-159 as an independent arrangement of Ryan Xu's design. The per-count
         rule would not record it, since T-146 is smaller and came first, and the owner
         decides whether it stays registered.
-      state: queued
+      state: done
       source: body
       bead: think-xnj5
       note: >-
         The confirmation of 14 October put the decision to the owner on jlevy/squares#543
-        and kept the issue open for it.
+        and kept the issue open for it. The owner decided on 17 November 2026 to keep T-159
+        registered (think-x30l, answering "Keep it registered (Recommended)"), as T-120, T-137
+        and T-150 were kept: T-159 stays an S2 entry at 102, credited to Rio Calle as an
+        independent arrangement of Ryan Xu's design, superseded by T-146 and moving no case.
     beads:
     - think-s2i8
     answer_bead: think-s2i8
@@ -8436,15 +8439,19 @@ issues:
       - result: valley-bottom
       - result: earlier-layout
       - result: private-certificate
-    blocked:
-      type: owner-decision
-      reason: >-
-        The owner decides whether the record keeps T-159, credited as an independent
-        arrangement of Ryan Xu's design, which the per-count rule would not record (think-
-        xnj5).
     close_when: The import and its disposition are on main, the credit relation to Ryan Xu's
-      packing is measured and stated, and the resulting state has been posted; optimality and
-      the author's private certificate are outside this request.
+      packing is measured and stated, T-159 stays registered as the owner chose on 17 November
+      2026, and the resulting state has been posted; optimality and the author's private
+      certificate are outside this request.
+    notes: >-
+      Asked on 17 November 2026 whether to keep T-159, 2.43e-11 above the house at 102, as
+      T-120, T-137 and T-150 were kept, the owner answered "Keep it registered (Recommended)"
+      (think-x30l, recorded by the intake pass of that day, think-p02d). That settles the
+      author's queued ask and the owner-decision block of 14 October, and the issue waits on
+      nobody: its final comment follows the merge of the change that records the decision,
+      rendered with `check_requests --draft 529` from main, and closes it, and its
+      blocked:owner-decision label goes with the close. The decision was tracked on
+      jlevy/squares#543, which gets a follow-up too.
   - number: 532
     title: Replay wand125's lower bounds T-142, T-143 and T-144 (with T-132) and their whole-net controls
     author: jlevy
@@ -8844,14 +8851,17 @@ issues:
         reported formalization of T-064 at V0/C0, and T-064's next_rung names it. Version 2's
         README's step table sums to 797.7 CPU-hours, which resolves the 18 October note.
     - what: The owner's decision on a sample rebuild, the full rebuild, or neither.
-      state: queued
+      state: done
       source: body
       bead: think-qu37
       note: >-
         Priced on 26 October 2026: the full version 2 build at about 798 CPU-hours with 37 GB per
         leaf module and 51 GB for Main.lean (about 20 times the 40 CPU-hour item cap), version 1's
         at about 6,650; a sample of about 100 roots at about 8 CPU-hours, a component check that
-        moves no rung. Gated on the owner's decision (think-qu37).
+        moves no rung. Decided by the owner on 17 November 2026 (think-l7j0, answering "Decline
+        all three (Recommended)"): the full build is declined over the cap at that price, and
+        the sample, which fits under the cap, stays runnable as think-qu37's. T-250 keeps its
+        rung, V0/C0.
     beads:
     - think-0ayk
     - think-qu37
@@ -8872,19 +8882,27 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
-    blocked:
-      type: owner-decision
-      reason: >-
-        sample rebuild (~8 CPU-h), full rebuild (~798 CPU-h) or neither: the owner's decision
-        (think-qu37)
-    close_when: The packet and the evidence entry are on main, and the owner has decided on a sample or
-      a full rebuild.
-    notes: ' The author comment of 18 October (issuecomment-6247112302) is new evidence for T-064, held
-      by think-0ayk. It reports 9,800 unchanged root certificates with re-certified leaves, peak 37 GB for
-      one module and 51 GB for Main.lean, 29.4 wall-hours on 48 vCPU. The quoted component CPU figures do
-      not sum to the quoted total; the source receipt must resolve that before a new price is accepted.
-      The full build remains outside this pass: no CPU-hour replay or large-memory build is launched. The
-      draft reply must acknowledge version 2 and avoid the stale version-1 price as the only option.'
+    close_when: The packet and the evidence entry are on main, and the rebuild's disposition of 17
+      November 2026 (the full build declined over the cap, the sample runnable under it) is on main
+      and stated in a reply.
+    notes: >-
+      The author comment of 18 October (issuecomment-6247112302) is new evidence for T-064, held
+      by think-0ayk. It reports 9,800 unchanged root certificates with re-certified leaves, peak 37
+      GB for one module and 51 GB for Main.lean, 29.4 wall-hours on 48 vCPU. The quoted component
+      CPU figures do not sum to the quoted total; the source receipt must resolve that before a new
+      price is accepted. The full build remains outside this pass: no CPU-hour replay or
+      large-memory build is launched. The draft reply must acknowledge version 2 and avoid the
+      stale version-1 price as the only option.
+
+      Asked on 17 November 2026 about the full rebuild of Valid7 (about 798 CPU-hours; the sample
+      of about 8 runs anyway) with two other confirmation runs over the 40 CPU-hour item cap, the
+      owner answered "Decline all three (Recommended)" (think-l7j0, recorded by the intake pass of
+      that day, think-p02d). The decision settles the queued ask and the owner-decision block of
+      26 October, and the issue waits on nobody: its final comment follows the merge of the change
+      that records the decision, rendered with `check_requests --draft 537` from main, says that
+      the full build is declined at its price and that the sample stays runnable under the cap on
+      think-qu37 and moves no rung, and closes it; its blocked:owner-decision label goes with the
+      close. T-250's next_rung and its unfinished confirmation state the decline with the price.
   - number: 538
     title: Workbench trajectory cost check flakes over 400 ms under CI load
     author: jlevy
@@ -9275,6 +9293,10 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+      outdated:
+      - >-
+        whether to keep T-159 (#529) is the owner's decision: the owner decided on 17
+        November 2026 to keep it registered
     blocked:
       type: owner-decision
       reason: >-
@@ -9286,7 +9308,9 @@ issues:
       credit alias and RR-1 from the round-1 reviews of #563 (think-7j5d gives the three scores
       a reviewing lane); the second adds one decision from the 12 October intake, whether to
       keep T-159 (#529, Rio Calle at 102), which the per-count rule would not record
-      (think-xnj5). T-159 stays until the owner decides.
+      (think-xnj5). The owner decided on 17 November 2026 to keep it registered (think-x30l),
+      which settles that decision; the follow-up saying so follows the merge of the change that
+      records it.
   - number: 544
     title: 'Intake pass of 2026-10-11: remaining work'
     author: jlevy
@@ -10352,8 +10376,9 @@ issues:
       sqpack's exact witness verifier accepted the four algebraic ones over their fields. At its
       other counts it ties or trails an earlier report; of the 21 comparisons the ledger first
       left undecided, devtools.decide_undecided_comparisons decided 17 exactly, none below the
-      standing side, and 29, 55, 71 and 83 stay undecided. Whether to merge the pull request is
-      the owner's call.
+      standing side, and 29, 55, 71 and 83 stay undecided. The owner decided on 17 November 2026
+      to close the pull request unmerged, with a thank-you note pointing to the register entries
+      its results became (think-0mup), and lifted the hold on posting here for that note.
     read_through: '2026-10-13T00:13:11Z'
     results:
     - key: pr574-certificates
@@ -10367,26 +10392,18 @@ issues:
       - E-pingyou-574-algebraic-report
     asks:
     - what: Complete and record the disposition of the full 148-count submission and the pull request.
-      state: queued
+      state: done
       source: body
       bead: think-9v2k
-      note: The existing intake owner retains the supplement and per-count decisions. Accepted certificates,
-        ties, superseded reports and reasoned non-imports remain distinct; unimported does not by itself
-        require a new replay. The algebraic house writer is separately tracked under think-ot5c.
-    held:
-      by: owner
-      basis: recorded-reservation
-      since: '2026-10-23'
-      beads: [think-9v2k, think-l3oo, think-5ip2]
       note: >-
-        The reply waits on the owner's decision on pull request #574: think-9v2k (16 October
-        2026) holds it until the owner decides the pull request or tells a pass to post,
-        and think-l3oo item 1 (16 October) asks the owner to decide it.
-        think-5ip2 lists #557, #565, #570 and #574 as owner-reserved, and the coordinator
-        recorded this hold on 23 October 2026. Asked in conversation on 23 October which of
-        the four should stay reserved, the owner stated no preference. As on think-qh3s's
-        question, no preference keeps the status quo, so the four holds stand (think-5ip2).
-        No instruction in the owner's own words is recorded.
+        Done by the owner's decision of 17 November 2026 (think-0mup), answering "Close with a
+        thank-you note (Recommended)": the pull request is closed unmerged, with a note pointing
+        to the register entries its results became. T-174 registers the 68 counts the 14 October
+        ledger records, and the 80 others are the ledger's reasoned non-imports, each tying or
+        trailing an earlier report, or undecided at 29, 55, 71 and 83; unimported does not by
+        itself require a new replay. The
+        algebraic house writer stays with think-ot5c. The owner's decision ends the recorded
+        reservation of 23 October, so the hold is lifted.
     beads:
     - think-9v2k
     answer_bead: think-9v2k
@@ -10422,14 +10439,9 @@ issues:
         id: T-174
         verification: V3
         confirmation: C3
-    blocked:
-      type: owner-decision
-      reason: >-
-        Held for the owner's decision to merge or close the pull request and its 148-count
-        submission (think-9v2k).
-    close_when: The import and its disposition are on main, the owner has decided the pull request and
-      posted the resulting state with T-174's id, and the review and second route that would confirm
-      T-174 are owned by its bead; optimality is outside this request.
+    close_when: The import and its disposition are on main, and the thank-you note the owner decided
+      on 17 November 2026 states the resulting state with T-174's id and closes the pull request;
+      optimality is outside this request.
     notes: >-
       A pull request, held here as an issue is because it reports results. The report-order verdict
       comment (https://github.com/jlevy/squares/issues/574#issuecomment-6173395031) was edited at
@@ -10454,6 +10466,18 @@ issues:
       T-193's smaller sides are staged at twelve others under think-ot5c; at 236 Evan Daniel's issue
       659 reports a smaller side, whose import adopts it, with T-174 still staged under think-3mry
       until then.
+
+      Asked on 17 November 2026 what to do with the held pull request, whose results T-174 had
+      registered, the owner answered "Close with a thank-you note (Recommended)" (think-0mup,
+      recorded by the intake pass of that day, think-p02d). The answer settles the queued ask and
+      the hold of 23 October: the owner lifted the hold on posting here for that one note, so the
+      entry is held no longer and the pull request waits on nobody, and its blocked:owner-decision
+      label goes with the close. The note follows the merge of the change that records the
+      decision, rendered with `check_requests --draft 574` from main: T-174 at V3/C3 and
+      confirmed, E-pingyou-574-certificate-report and E-pingyou-574-algebraic-report reviewed,
+      the houses it became and the later packings that replaced some of them, the follow-ups
+      that waited on this hold at 179, 180, 228 and 269, and a thank-you; it closes the pull
+      request, and the next change records it as `final`.
   - number: 575
     title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
       registration request'
@@ -20508,8 +20532,9 @@ issues:
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
         It is an index deletion bound, one square below the next count's certificate, an earlier
         report by the owner's answer of 23 October 2026 on D6 (think-f2io), and this claim of its
-        side is not recorded; on the decision's recommendation the bound has no row of its own
-        (think-kzme).
+        side is not recorded; the bound has no row of its own, by the owner's answer of 17
+        November 2026 (think-gmoj): a deletion-made bound gets a row only where a report claims
+        the count with a certificate file of its own, and this one has none.
       queued: false
     - key: n744
       claim: s(744) <= 27.798989873256, rounded upward; exact certificate side is authoritative.
@@ -20667,7 +20692,8 @@ issues:
         square from its 799 certificate, published on 2026-10-15, and both round up to the same
         12-place print. By the owner's answer of 23 October 2026 (think-fwa9) it restates that
         bound, so no row is recorded. The bound is an earlier report by the owner's answer on D6
-        (think-f2io) and, on that decision's recommendation, has no row of its own (think-kzme).
+        (think-f2io) and has no row of its own, by the owner's answer of 17 November 2026
+        (think-gmoj), since no report claims the count with a certificate file of its own.
       queued: false
     - key: n799
       claim: s(799) <= 28.798989873256, rounded upward; exact certificate side is authoritative.
@@ -20836,7 +20862,8 @@ issues:
         square from its 856 certificate, published on 2026-10-15, and both round up to the same
         12-place print. By the owner's answer of 23 October 2026 (think-fwa9) it restates that
         bound, so no row is recorded. The bound is an earlier report by the owner's answer on D6
-        (think-f2io) and, on that decision's recommendation, has no row of its own (think-kzme).
+        (think-f2io) and has no row of its own, by the owner's answer of 17 November 2026
+        (think-gmoj), since no report claims the count with a certificate file of its own.
       queued: false
     - key: n856
       claim: s(856) <= 29.798989873256, rounded upward; exact certificate side is authoritative.
@@ -21243,8 +21270,9 @@ issues:
         count, first published at 4e4c8ce on 2026-10-15, at the same exact side, an earlier report.
         It is an index deletion bound, one square below the next count's certificate, an earlier
         report by the owner's answer of 23 October 2026 on D6 (think-f2io), and this claim of its
-        side is not recorded; on the decision's recommendation the bound has no row of its own
-        (think-kzme).
+        side is not recorded; the bound has no row of its own, by the owner's answer of 17
+        November 2026 (think-gmoj): a deletion-made bound gets a row only where a report claims
+        the count with a certificate file of its own, and this one has none.
       queued: false
     - key: n986
       claim: s(986) <= 31.920310216821, rounded upward; exact certificate side is authoritative.
@@ -21334,8 +21362,9 @@ issues:
         reader. The rows wait on R1, the first records slice of think-llit's plan, which walks
         every count above 1024 in report order, adds the #715 release above 1024, stages the
         hosted manifest, replays each certificate on both maintained routes and decides each
-        recipe; the deletion bounds the issue claims wait on think-kzme. Nothing is retained or
-        replayed above 1024 yet.
+        recipe; the deletion bounds the issue claims, which name no certificate file of their
+        own, have no rows by the owner's answer of 17 November 2026 (think-gmoj). Nothing is
+        retained or replayed above 1024 yet.
       queued: true
       bead: think-cyal
       blocked_on:
@@ -23990,8 +24019,12 @@ issues:
       not_registered: >-
         Beyond the corpus. Equal to the bound Couzo's 4e4c8ce index states at 985 by deleting a
         square from the 986 certificate. By the owner's answer of 23 October 2026 on D6
-        (think-f2io) such a bound is an earlier report, so this tie is not recorded. Whether
-        the bound itself gets a row where an issue claims the count is think-kzme.
+        (think-f2io) such a bound is an earlier report, so this tie is not recorded. The bound
+        itself has no row: by the owner's answer of 17 November 2026 (think-gmoj) a
+        deletion-made bound gets a row only where a report claims the count with a certificate
+        file of its own, and the index bound has none; this issue's own n985.cert, at the
+        bound's side, is a tie, which report order does not record. The current row at 985
+        is couzo-issue763-2026-10-23's, below both.
       queued: false
     - key: rows-above-1024
       claim: >-
@@ -24563,12 +24596,13 @@ issues:
         s(683) <= 26.656854249501, rounded up: 684's certificate at 964ee2b less one square.
       source: body
       not_registered: >-
-        The walk records it below the standing side and holds it from a row: whether a
-        deletion bound an issue claims gets a row is think-kzme's question 2.
-      queued: true
-      bead: think-2z2n
-      blocked_on:
-      - think-kzme
+        The walk records it below the standing side, an index deletion bound the issue claims
+        with no certificate file of its own, and it has no row: by the owner's answer of 17
+        November 2026 to think-kzme's question 2 (think-gmoj), a deletion-made bound gets a
+        row only where a report claims the count with its own certificate file, as #941 does
+        at 809. The walk settles it so (beyond_horizon_replay's CLAIMED_DELETION_ANSWER), and
+        the verdicts at 683 that rested on it rest on nothing.
+      queued: false
     - key: rows-above-1024
       claim: >-
         233 upper bounds at n = 1029 to 9802: 6 certificates (1486, 1647, 1648, 1765, 1898 and
@@ -24685,7 +24719,7 @@ issues:
         of the push's notebook rows. 797
         and 847 restate this issue's rows (think-fwa9); 367 is above 23aff0c's deletion from
         Friedman's construction at 368, which the walks hold (think-zkxy); 690 has no row by
-        the owner's D6 answer (think-kzme). Both project exact routes accept the 106
+        the owner's D6 answer (think-f2io) and the answer of 17 November 2026 (think-gmoj). Both project exact routes accept the 106
         certificates with every control refused, and the construction checker decides the 16
         recipes. The 831 above 1024 wait on the slice above 1024 (think-llit).
       queued: false
@@ -24864,6 +24898,11 @@ issues:
       - result: n683
       - result: rows-above-1024
       beads: [think-2z2n, think-llit]
+      outdated:
+      - >-
+        n683 held from a row on think-2z2n until the project decides whether an issue-claimed
+        deletion bound gets a row: the owner's answer of 17 November 2026 settles it with no
+        row, since the issue claims it with no certificate file of its own
     blocked:
       type: author
       reason: >-
@@ -25463,7 +25502,8 @@ issues:
       that day, "This state of all reviews should be tracked in the GitHub issues.", as
       #772 to #780 were: one issue for each pending review that had none. The result maps to
       T-235 at V0/C0, recorded; C1, the stage 4 review, is think-xk3f's, and C3, a complete
-      build of about 862 CPU-hours held above the item cap, is think-cs9x's.
+      build of about 862 CPU-hours above the item cap, think-cs9x's, was declined by the owner
+      at that price on 17 November 2026 (think-l7j0).
     read_through: '2026-10-24T06:12:39Z'
     results:
     - key: n59-lean-kernel
@@ -25493,15 +25533,23 @@ issues:
       - result: n59-lean-kernel
         id: E-n059-wand125-lean-kernel-report
         status: recorded
+      outdated:
+      - >-
+        the complete build C3 needs, about 862 CPU-hours, held above the item cap for the
+        owner's decision: the owner declined it at that price on 17 November 2026
     review_track: true
-    blocked:
-      type: owner-decision
-      reason: >-
-        The build its C3 needs is priced at about 862 CPU-hours, above the owner's 40 CPU-
-        hour item cap (think-cs9x); its C1 review (think-xk3f) is the project's own.
     close_when: >-
       The review its C1 needs has landed on main, the build its C3 needs has landed or the
       record says why it will not, and the reply that reports the resulting rungs is posted.
+    notes: >-
+      Asked on 17 November 2026 about the complete build its C3 needs, about 862 CPU-hours by
+      the source's receipt, with two other confirmation runs over the 40 CPU-hour item cap,
+      the owner answered "Decline all three (Recommended)" (think-l7j0, recorded by the
+      intake pass of that day, think-p02d). The build is declined at that price, which is
+      why it will not land, and T-235 keeps its rung, V0/C0; the owner-decision block of 24
+      October lifts with it, and its blocked:owner-decision label goes after the merge of the
+      change that records the decision, with the follow-up that posts it here. The C1 review
+      stays the project's own (think-xk3f), so the review track stays open for it.
   - number: 784
     title: "T-236: Daniel reports Lean proofs of Fang's Theorems 1 and 2, `s(n² − n + 1) < n` for `n ≥ 15` —
       review tracking"
@@ -27798,8 +27846,9 @@ issues:
       mathematical defect, the second, review A on pull request 851, by a separately
       prompted lane sharing no context with the import lane. Registered as T-252 at
       V3/C3, and n-044 moves to proved.
-      zm_mixed.py's complete pass is priced and held over the pass's cap (think-qvp6); it
-      raises no rung. Claude assistance disclosed.
+      zm_mixed.py's complete pass is priced at about 138 CPU-hours (think-qvp6), and the owner
+      declined it over the 40 CPU-hour item cap on 17 November 2026 (think-l7j0); it raises no
+      rung. Claude assistance disclosed.
     read_through: '2026-11-01T16:01:00Z'
     results:
     - key: s44-equals-7
@@ -31416,7 +31465,9 @@ issues:
       ledger of 11 November records all fifteen. Fourteen are verified beyond-horizon rows, 7.08e-05
       (539) to 5.33e-03 (753) below the rows they supersede; 494 is a refinement of Couzo's packing
       at 494 by the identity measurement. 809, the 810 certificate less its last square, is a
-      deletion bound the issue claims, held without a row for the owner's think-kzme. These are
+      deletion bound the issue claims with its own certificate file, held without a row for the
+      owner's think-kzme until the owner's answer of 17 November 2026 gave it its row
+      (think-gmoj), the fifteenth verified row. These are
       bounds below the record, not the best known packings at 14 of the 15 counts: the issue says
       public Kaggle submissions hold smaller ones at all but 543. The 11 November stage 4 review
       (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96), written
@@ -31446,12 +31497,17 @@ issues:
         71da0d5, the 810 certificate less its last square.
       source: body
       not_registered: >-
-        The walk records it below the standing side and holds it from a row: whether a
-        deletion bound an issue claims gets a row is think-kzme's question 2.
-      queued: true
+        Beyond the n <= 324 corpus: a row of source-coverage.yaml (source
+        de-winter-issue941-2026-11-10) at assurance verified, not a register entry. The walk
+        of 11 November records it below the standing side, 1.19e-04 below the row of
+        couzo-issue763-2026-10-23, which it supersedes. It was held from a row until the
+        owner answered think-kzme on 17 November 2026 (think-gmoj): a deletion-made bound
+        gets a row only where a report claims the count with its own certificate file, as
+        this issue does with above324/n0809.cert. Both maintained exact routes and the stage
+        4 review's clean-room checker accept it (E-de-winter-941-exact-feasibility and
+        E-de-winter-941-review-exact-feasibility, which cover it since).
+      queued: false
       bead: think-cen3
-      blocked_on:
-      - think-kzme
     beads:
     - think-cen3
     - think-kzme
@@ -31466,9 +31522,9 @@ issues:
       - result: n809
       beads: [think-kzme]
     close_when: >-
-      The fourteen rows are on main, verified, 809 has a row or a recorded disposition under
-      think-kzme, and the reply on main says so and asks the review's questions; nothing the
-      author asked for is queued.
+      The fifteen rows are on main, verified, 809's among them since the answer of 17 November
+      2026 on think-kzme (think-gmoj), and the reply on main says so and asks the review's
+      questions; nothing the author asked for is queued.
     notes: >-
       Read on 11 November 2026 from main 8afdabe8f; no comment yet. Report order: d3a020e
       (2026-11-09T23:59:23Z) first published nine of the certificates and 71da0d5
@@ -31573,6 +31629,16 @@ issues:
       with #941 open, until the project decides whether a deletion bound an issue claims gets a
       row of its own. It is a reply on #958, not on this issue, so it is not recorded under this
       issue's replies.
+
+      The owner answered think-kzme's questions 1 and 2 on 17 November 2026, "Only where
+      someone claims the count (Recommended)" (think-gmoj, recorded by the intake pass of that
+      day, think-p02d): a deletion-made bound gets a row only where a report claims the count
+      with its own certificate file, as at 809 here, and no row elsewhere. So 809 has its row,
+      at assurance verified from the two atoms that now cover it (their receipts and the
+      review's check-n0809.json decided it with the others on 11 November), and the row of
+      couzo-issue763-2026-10-23 there is superseded. Nothing on the issue waits any longer: the
+      reply that says so follows the merge of the change that records it, rendered with
+      `check_requests --draft 941` from main, and closes the issue as its final comment.
   - number: 942
     title: 'Sixteen lowered upper bounds for n between 632 and 989: registration request'
     author: JoostdeWinter
@@ -33571,6 +33637,10 @@ issues:
         verification: V0
         confirmation: C1
         status: reviewed
+      outdated:
+      - >-
+        the full replay priced and held for the maintainer's budget decision: on 17 November
+        2026 the owner held all of it, the subsets under the item cap included
     close_when: >-
       T-298 is on main with the stage 4 review mapped, and the reply on main says what was
       retained and run, what the review found, and that the full replay is priced and owned
@@ -33860,6 +33930,14 @@ issues:
       T-298 stays at V0/C1, reviewed. No reply is due: the comment was read on the day of the
       last reply, the follow-up of 05:54:33Z, and asks nothing; the follow-up promised when
       T-298's levels change still stands. The Lean build's price is restated on think-0h7r.
+
+      Asked on 17 November 2026 whether to run the 35 CPU-hour part of the replay only, fund
+      the full replay of about 145 to 320 CPU-hours, or hold it, the owner answered "Hold all
+      of it" (think-k2lh, recorded by the intake pass of that day, think-p02d): nothing of the
+      replay runs in a pass, the Lean build and the zmx2 sweep with the coverage dumps
+      included, until the owner says otherwise. think-0h7r keeps the replay, held for the
+      owner, and T-298 keeps its standing, V0/C1, as its next_rung says. The follow-up that
+      posts this decision here follows the merge of the change that records it.
   - number: 977
     title: 'Lowered upper bound for n = 297 (side 17.739455558289): registration request'
     author: JoostdeWinter
@@ -34120,7 +34198,7 @@ issues:
       contraction margins are 1.874e-19 and 1.546e-9, so neither gain is padding. Two L steps
       from the 297 give 369 its side plus 2, 19.7395, above Göbel's construction there (19 +
       sqrt(2)/2, 19.7071), so no bound; deletions bound counts below each certificate, which no
-      report claims, so they have no rows (think-kzme). build.py, verify_exact.py
+      report claims, so they have no rows (think-gmoj). build.py, verify_exact.py
       and check_area.py are retained as data and were not run. The review's F13: the corner
       square is at 44.999964 degrees, edge direction (803761, 803760)/1136689, not 45; F14: the
       409 row lies 3.164e-9 above T-174 + 3 and is placed otherwise, so the README's "built in
@@ -36179,3 +36257,76 @@ issues:
     close_when: >-
       The 13 bounds are triaged, retained and registered on main, and the reply on main says
       what was registered, replayed and reviewed.
+  - number: 1012
+    title: 'Public Kaggle packings below the register for n = 109 and n = 270: pointer'
+    author: JoostdeWinter
+    opened: '2026-11-17'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter points to public Kaggle notebooks (Apache 2.0, he says) whose submission.csv
+      packings have sides below the record at two counts: at 109, 10.949289580943 in Navneet
+      Prabhat's and Tomáš Kodaj's notebooks, 4.58e-04 below the house, 10.94974746830584 (T-101's
+      exact side); at 270, 16.927469593519 in Danil Malyshev's and 16.927469594094 in Kodaj's,
+      6.79e-04 below the house, T-283's 16.9281486033428544, and below the refinement there that
+      Mykhailo Polkovskyi's #1009 reports, which the issue calls its author's own. He asks that the notebooks' authors be credited, claiming none himself,
+      and says exact rational Witness/v2 versions of the Kaggle coordinates, which are stored as
+      float64 and need a Kaggle login to download, are attached. None is: the issue's body holds
+      no attachment and links only the three notebook pages. Triaged read-only on 17 November
+      2026 (think-wvr8): no packing or certificate is retrievable at a pinned revision. Kaggle
+      answered this session's plain requests for the notebook pages with HTTP 404 and an empty
+      body, and the files need a login the session lacks, so the source is not checked; the
+      author's watched repository, JoostdeWinter/square-packing, holds no such file at its head,
+      d02237a. Nothing is retained, walked or registered, and the import waits for an exact
+      certificate the author can attach or commit. Claude assistance is not stated.
+    read_through: '2026-11-17T07:08:47Z'
+    results:
+    - key: n109-kaggle
+      claim: >-
+        s(109) <= 10.949289580943, the side of the submission.csv packing in Navneet Prabhat's
+        and Tomáš Kodaj's public Kaggle notebooks, 4.58e-04 below the record's
+        10.949747468306.
+      source: body
+      not_registered: >-
+        No packing is in hand: the Witness/v2 file the issue says is attached is not on the
+        issue, and the notebooks' files need a Kaggle login; Kaggle was not reachable from this
+        session (HTTP 404 with an empty body). Nothing is retained, walked or registered at 109
+        until an exact certificate reaches this repository.
+      queued: true
+      bead: think-wvr8
+    - key: n270-kaggle
+      claim: >-
+        s(270) <= 16.927469593519 (Danil Malyshev's notebook) and 16.927469594094 (Tomáš
+        Kodaj's), the sides of the submission.csv packings in their public Kaggle notebooks,
+        6.79e-04 below the record's 16.928148603343 and below #1009's refinement at 270.
+      source: body
+      not_registered: >-
+        No packing is in hand, as at 109: the Witness/v2 file is not attached and Kaggle was
+        not reachable from this session. Kodaj's side was quoted on #1001 too, as context
+        only. Nothing is walked or registered at 270 until an exact certificate reaches this
+        repository.
+      queued: true
+      bead: think-wvr8
+    beads:
+    - think-wvr8
+    answer_bead: think-wvr8
+    replies: []
+    close_when: >-
+      Each pointed-to packing is imported from an exact certificate that reached this
+      repository (registered with credit to the notebooks' authors, or recorded as not
+      registered with the reason), or the record says why it will not be, and the reply on main
+      says so; nothing the author asked for is queued.
+    notes: >-
+      Read on 17 November 2026 from main f9ddfeeef; no comment yet. The issue carries the intake
+      label, added by this pass; neither count has a case label. The acknowledgement follows the
+      merge of the change that records this triage: what was received, that no attachment came
+      with the issue and the notebooks' files need a login, so nothing was retained or checked,
+      and that an exact certificate attached to the issue or committed to his repository starts
+      the import, with the credit he asks for, Prabhat and Kodaj at 109, Malyshev and Kodaj at
+      270. At 270 the import would follow #1009's, Mykhailo Polkovskyi's issue, which the issue
+      calls its author's own; another lane imports it (think-i38n) and registers his refinement
+      there. At 109 the record's house is T-101's exact side. #1022, which the same author filed
+      later that day, reports s(270) <= 16.927314216352 below the Kaggle sides here, with a
+      certificate in his repository's n270/; it is an import of its own, and this issue's
+      acknowledgement reads it first.
