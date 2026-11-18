@@ -69,9 +69,58 @@ At all five counts Evan Daniel’s regularizer solved the witness to a certified
 below its side, by 3.30 to 3.53 × 10⁻¹² (232: 3.37, 268: 3.30, 299: 3.53, 303: 3.48,
 307: 3.48), and the selection held each at row 3 as a register candidate: a smaller
 packing is registered and reviewed as a result of its own first, and is never admitted
-here. Nothing here registers them.
+here. Nothing here registers them;
+[The Held Points Under Option D](#the-held-points-under-option-d) says what each is now.
 The strong views of the earlier witnesses lapsed with the houses; each count is decided
 here on its new witness, so nothing is owed.
+
+## The Held Points Under Option D
+
+The owner’s option D of 17 November 2026 (think-b0w5) settles the question the five held
+points waited on (think-5c9z): a re-certification of a standing packing is a new result
+only if its side is below its predecessor’s once the predecessor is shrunk until its
+squares first touch (`devtools.contraction_margin`). On 18 November 2026 lanes
+w7-optd-1118 and w7r2-optd-1118 (think-8yyy) measured each point against the house it
+was solved from, and against the house that stands now:
+
+| n | Solved from | That house’s margin | Gain | Share | The house now | Disposition |
+| ---: | --- | ---: | ---: | ---: | --- | --- |
+| 232 | T-275 | 2.997814e-12 | 3.372932e-12 | 1.1251 | T-307, 1.88e-3 below the point | no candidate |
+| 268 | T-276 | 3.192868e-12 | 3.295234e-12 | 1.0321 | T-320, 6.02e-4 below the point | no candidate |
+| 299 | T-277 |  |  |  | T-325, 6.20e-15 above the point | candidate, credit by think-frl5 |
+| 303 | T-278 | 3.402014e-12 | 3.481634e-12 | 1.0234 | T-278, above the point | candidate |
+| 307 | T-279 |  |  |  | T-326, 1.34e-15 above the point | candidate, credit by think-frl5 |
+
+At 232 and 268 each point is a new result against the house it was solved from, but a
+later house, T-307 (Kodaj’s packing as JoeGun improved it) since 16 November and
+Polkovskyi’s T-320 since 18 November, lies below it, so neither is a smaller packing
+than the house and neither is a candidate under the house rule.
+The receipts are each house’s own margin, both maintained routes deciding the
+certificate and its contraction
+([option-d/contraction-n232-t275.json](option-d/contraction-n232-t275.json),
+[option-d/contraction-n268-t276.json](option-d/contraction-n268-t276.json)), against the
+solved side in the driver’s report
+(`adopt-2026-11-09-n232-307-evand/n-N/report.json.gz`). At 303 the solve was regenerated
+as a certificate and measured against T-278 directly
+([option-d/contraction-n303-t278.json](option-d/contraction-n303-t278.json), beside
+[option-d/n-303-solve.cert](option-d/n-303-solve.cert)). At 299 and 307 the points are
+the ones the driver reaches on Polkovskyi’s re-solves (T-325, T-326) of #1023, measured
+there against those houses’ own margins; the owner left new-result status and credit
+with Polkovskyi, the record noting the project’s earlier solves (think-frl5). The three
+candidates, at 299, 303 and 307, are classification and receipts only: their
+registration, stage 4 review and adoption are think-4z8z’s, beside the candidate at 130
+([think-ruu2-2026-10-31](../../register_candidates/think-ruu2-2026-10-31/README.md)).
+`tests/test_restatements.py` holds the shares at 232, 268 and 303 and each point’s place
+against today’s house.
+
+From `packing/`, each house’s own margin:
+
+```bash
+python -m devtools.contraction_margin --n 232 'T-275=packet:ozden-s232-upper-bound-2026-11-09' \
+  --out cases/regularized_drawings/think-463r-2026-11-09/option-d/contraction-n232-t275.json
+python -m devtools.contraction_margin --n 268 'T-276=packet:ozden-s268-upper-bound-2026-11-09' \
+  --out cases/regularized_drawings/think-463r-2026-11-09/option-d/contraction-n268-t276.json
+```
 
 ## Files
 

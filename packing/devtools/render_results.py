@@ -49,7 +49,7 @@ from strif import atomic_output_file
 
 from devtools.check_results import confirmation_code, kind_label
 from devtools.register_prose import paragraphs
-from devtools.render_recent_results import load_records, position_marks, standing
+from devtools.render_recent_results import listed, load_records, position_marks, standing
 from devtools.result_credit import (
     OTHERS,
     credit_line,
@@ -119,6 +119,28 @@ def _scope(record: dict) -> str:
     if "n_values" in scope:
         return ", ".join(str(n) for n in scope["n_values"])
     return f"{scope['n_min']}-{scope['n_max']}"
+
+
+def restated_position(record: Mapping[str, Any], position: list[str]) -> list[str]:
+    """The marks a row draws after its status, a restated entry's first: `restates T-222,
+    T-197 and T-220 (option D)`, the results whose packings it restates. Where every count
+    of its scope is restated that mark stands alone, so the row cannot read as an
+    improvement later superseded (review A11 of #1030); elsewhere the entry's other marks
+    follow it."""
+    items = record.get("restatements") or ()
+    if not items:
+        return position
+    held = sorted({str(item["of"]) for item in items}, key=lambda rid: int(rid[2:]))
+    mark = f"restates {listed(held)} (option D)"
+    scope = record["scope"]
+    counts = (
+        set(scope["n_values"])
+        if "n_values" in scope
+        else set(range(int(scope["n_min"]), int(scope["n_max"]) + 1))
+    )
+    if {int(item["n"]) for item in items} >= counts:
+        return [mark]
+    return [mark, *position]
 
 
 def claim_cell(record: dict) -> str:
@@ -358,7 +380,9 @@ def render() -> str:
     evidence = records.register.evidence
 
     def status(record: dict) -> str:
-        position = position_marks(record, standing(record, records), records)
+        position = restated_position(
+            record, position_marks(record, standing(record, records), records)
+        )
         return status_line(record, evidence, position, how=confirmed_how(record, evidence))
 
     lines.append("| id | n | kind | credit | V | C | S | status | novelty | claim |")

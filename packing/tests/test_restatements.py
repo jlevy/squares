@@ -14,13 +14,17 @@ receipt that measured it.
 from __future__ import annotations
 
 import dataclasses
+import gzip
+import json
 from collections.abc import Mapping
+from fractions import Fraction
 from typing import Any
 
 import pytest
 
-from devtools import check_requests, check_results, check_standing, profile_records
+from devtools import check_requests, check_results, check_standing, profile_records, render_results
 from devtools import render_recent_results as view
+from sqpack.yamlio import safe_load
 
 #: Kaelan Yim's 130 (T-281) against T-259's certificate: 0.0896 of its margin.
 WITHIN = "packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n130.json"
@@ -218,3 +222,58 @@ def test_a_restatement_measured_through_a_construction_is_read_at_its_own_count(
 
     assert found(631) == []
     assert any("receipt at n = 490" in line for line in found(490))
+
+
+
+def test_the_results_table_says_what_a_restated_entry_restates(records: view.Records) -> None:
+    """RESULTS.md's status names the results whose packings an entry restates, alone where
+    every count of its scope is restated, so the row cannot read as an improvement later
+    superseded; an entry restated at some counts keeps its other marks after it (review
+    A11 of #1030)."""
+    record = records.results["T-253"]
+    marks = render_results.restated_position(record, ["superseded by T-182"])
+    assert marks == [
+        "restates T-182, T-188, T-190, T-197, T-218, T-219, T-220, T-222 and T-225 (option D)"
+    ]
+    partial = {**record, "restatements": record["restatements"][:1]}
+    assert render_results.restated_position(partial, ["superseded by T-182"]) == [
+        "restates T-222 (option D)",
+        "superseded by T-182",
+    ]
+    assert render_results.restated_position(records.results["T-285"], ["x"]) == ["x"]
+
+
+def _house_side(n: int) -> Fraction:
+    """The exact verified upper bound a case record states, its house's side."""
+    text = (check_results.ROOT / "frontier" / f"n-{n}.md").read_text(encoding="utf-8")
+    record = safe_load(text.split("---", 2)[1])["packing"]
+    return Fraction(record["verified_upper_bound"]["exact_form"])
+
+
+def test_the_held_points_of_9_november_are_classified_under_option_d() -> None:
+    """think-5c9z: Evan Daniel's regularizer solved the five houses of 9 November to
+    certified KKT points below their sides (think-463r). Against T-275 at 232 and T-276 at
+    268 they gain 1.1251 and 1.0321 of each certificate's own uniform-contraction margin,
+    new results there, but both lie above today's houses, T-307 and T-320, so neither is
+    a candidate; at 303 the point is 1.0234 of T-278's margin and below the house, a
+    candidate for think-4z8z (review A5 of #1030)."""
+    package = check_results.ROOT / "cases/regularized_drawings/think-463r-2026-11-09"
+    for n, held, share in ((232, "t275", "1.1251"), (268, "t276", "1.0321")):
+        receipt = json.loads(
+            (package / "option-d" / f"contraction-n{n}-{held}.json").read_text(encoding="utf-8")
+        )
+        assert receipt["routes_accept"] is True
+        report = package / "adopt-2026-11-09-n232-307-evand" / f"n-{n}" / "report.json.gz"
+        solve = json.loads(gzip.decompress(report.read_bytes()))["solve"]
+        assert solve["cert_valid"] is True
+        point = Fraction(solve["S_cert"])
+        gain = Fraction(receipt["side"]) - point
+        assert f"{float(gain / Fraction(receipt['margin'])):.4f}" == share
+        assert point > _house_side(n), n
+    receipt = json.loads(
+        (package / "option-d" / "contraction-n303-t278.json").read_text(encoding="utf-8")
+    )
+    against = receipt["against"]
+    assert (against["gain_over_margin"], against["within_margin"]) == ("1.0234", False)
+    assert Fraction(against["side"]) < _house_side(303)
+
