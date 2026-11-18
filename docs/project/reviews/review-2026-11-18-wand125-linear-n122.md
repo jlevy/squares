@@ -157,8 +157,9 @@ sides along $(c_j, s_j)$ and $(-s_j, c_j)$.
    open interior of $S$ with the same measure, by invariance.
 7. **Count.** The cores of distinct squares lie in disjoint open interiors, so
    $122 \le \sum_S \mu(\mathrm{core}(S)) \le \mu(K) = 122 - 1/100000$, a contradiction.
-   A packing in a smaller square is one in $K$, so $s(122) > L$; and a packing of
-   $N \ge 122$ squares contains one of 122, so $s(N) > L$.
+   A packing in a smaller square is one in $K$, and the infimum defining $s(122)$ is
+   attained (the packings in a closed square form a compact set), so $s(122) > L$; a
+   packing of $N \ge 122$ squares contains one of 122, so $s(N) > L$.
 
 **The quarter turn.** At a fixed angle the rotation by $\pi/2$ about $(L/2, L/2)$ maps
 $Q_j(c)$ to $Q_j$ at the rotated centre and preserves $\mu$, and the four images of the
@@ -218,9 +219,10 @@ wide, and your bound on $G_{11}$ lies inside it.
 At 200 digits your bound exceeds $G_{11}$ by $1.42 \times 10^{-90}$, as 90-digit roots
 rounded up would give, and the check holds; nothing else changed.
 `r144_poses.py` gained `--draw`, which draws the six seeded search nodes.
-Four programs were added after the plan, none of which decides a capture:
-`r144_run_all.sh`, which runs the complete decision with the frozen `r144_bnb.py`,
-`r144_summarize.py`, which gathers its receipts, `r144_lanes.py` and
+Five programs were added after the plan, none of which decides a capture:
+`r144_run_all.sh`, which runs the complete decision with the frozen `r144_bnb.py`;
+`r144_summarize.py`, which gathers its receipts; `r144_mutate.py`, which writes the
+second mutated certificate for the frozen deciders; `r144_lanes.py`; and
 `r144_release_sums.py`.
 The plan priced the complete run without running it, and the coordinator approved it at
 06:13Z, after the five-node sample had measured its cost (one process, `nice -n 19`, a
@@ -310,6 +312,17 @@ It found nothing below one and nothing below your record’s `lower` at its node
 least exact capture found is $1.0017586$ at node 196, at $(6.0988, 6.0746)$, and the
 median of the per-node least is $1.00265$.
 
+**The full replay’s price.** This review did not run your checker, so it prices a
+complete replay from your records and the record. The 201 records sum to 51,876.8
+checker-seconds, 14.4 CPU-hours on your machine. The import packet’s two-angle sample
+ran your checker on this host at 0.776 of the recorded times, which prices a complete
+replay at about 11.2 CPU-hours, plus about 170 CPU-seconds for the route’s control at
+angle 37; your own replay of 7 h 41 min at three workers bounds it near 23 CPU-hours.
+That replay is the replay lane’s, on two of the host’s four cores. This review’s complete
+decision cost FULL_CPU_HOURS CPU-hours on one, because each of its boxes evaluates only the
+images that can reach its cell of the starting grid, a few hundred, where your checker
+evaluates all 14,184 (N-3).
+
 **Controls on this review’s programs.** The controls plan was frozen with the checker,
 and each control fails an always-accept or an always-refuse checker:
 
@@ -384,8 +397,8 @@ The rectangles are handled differently (exact clipping against the trimmed core 
 centre value and a derivative bound in yours), and node 0 here is decided by a different
 argument. All share the mathematics (steps 1 to 7 and the quarter turn) and the reading
 of the format, which this review checked against the inputs row by row.
-Authorship overlaps at the system family: the source’s commit names Claude Opus 5.5 as
-co-author, and this review is a Claude agent with its own prompt and files.
+Authorship overlaps at the system family: the source’s commit names Claude as co-author,
+and this review is a Claude agent with its own prompt and files.
 
 ## Findings
 
@@ -428,9 +441,10 @@ $1.0017586$ over the search.
 
 **N-3 — note. The checker’s cost is linear in the measure.** Every box evaluates every
 image (`unified_linear_verify.cpp` lines 109 to 111, 128 and 141): 14,184 per box over
-73.7 million boxes. A spatial cull leaves about 250 per box; this review’s numpy branch
-and bound decided nodes 1 to 200 in FULL_CPU_HOURS CPU-hours, against 14.4 hours of
-checker time in your records.
+73.7 million boxes. A spatial cull leaves a few hundred per box, since a core of side
+about one meets only the images within its reach: this review’s numpy branch and bound,
+which culls by its starting grid’s cells, decided nodes 1 to 200 in FULL_CPU_HOURS
+CPU-hours, against 14.4 hours of checker time in your records.
 
 **N-4 — note. The README compares with $\sqrt N$.** Line 8 says the bound improves on
 $\sqrt N$ at 122 to 126. True, but the record’s comparisons are Green’s report (122 to
@@ -458,8 +472,8 @@ bound hold them”; the limitations of `E-wand125-linear-n122-1126-report` call 
 “the strongest report at those counts”, 123 to 126. Since 14 October the reported lane
 at 126 is T-180’s $a(126) = 11.313323850997\ldots$, above 563/50
 (`packing/frontier/n-126.md`), as T-180’s own entry says.
-So T-144 would raise the reported lane at 122 to 125, and the verified lane at 122 to
-126. The comparisons themselves are exact and correct.
+So T-144 would raise the reported lane at $n = 122$ to $125$, and the verified lane at
+$n = 122$ to $126$. The comparisons themselves are exact and correct.
 
 **R-2 — note, record.
 The pending-review clauses.** T-144’s `next_rung`, `unfinished_confirmations` and
@@ -493,11 +507,14 @@ claim, as the change that maps this review records.
 **This review’s complete decision.** Its programs decided all 201 angles of the net, the
 whole of step 6, apart from the source’s code.
 The runbook counts a first-party implementation as the replay when its soundness has
-been adversarially reviewed and its independence recorded (stage 4, “The replay”).
-Registered in [`verifiers.yaml`](../../../packing/frontier/verifiers.yaml) with that
-record, and once a review of its soundness is recorded, the decision supports `V3/C3`:
-confirmed, independently re-implemented (clean-room), by a Claude agent, a system family
-the producer also used.
+been adversarially reviewed and its independence recorded, and asks that two mutated
+certificates be refused by every checker that accepted the original, with a test that
+holds them (stage 4, “The replay”). Here both deciders refused two: every mass times
+99/100, and MUTANT2_SUMMARY. What the decision still needs is the review of its
+soundness, its registration in
+[`verifiers.yaml`](../../../packing/frontier/verifiers.yaml) with its independence
+record, and the test; with those it supports `V3/C3`: confirmed, independently
+re-implemented (clean-room), by a Claude agent, a system family the producer also used.
 Until then it sets no rung.
 The replay lane’s complete replay by the T-080 route would support `V3/C3` as reproduced
 with the producer’s code; the two together would stand beside each other, as the runbook

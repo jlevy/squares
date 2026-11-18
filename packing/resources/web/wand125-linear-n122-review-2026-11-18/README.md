@@ -34,11 +34,12 @@ Every program is the lane’s own, written for this review from the mathematics 
 certificate’s documents (its README, `manifest.json`, `completion-audit.json` and the
 shape of `candidate.json` and `input.txt`). None imports anything from this repository
 or from the source. The programs that decide were written before any of the source’s
-code was read: `code/` was hashed, not opened, until the checker froze. The four written
-after that freeze, `r144_run_all.sh`, `r144_lanes.py`, `r144_release_sums.py` and
-`r144_summarize.py`, decide nothing about the capture: the first drives the frozen
-`r144_bnb.py`, the others compare the record’s lanes, read the release’s sums and gather
-receipts.
+code was read: `code/` was hashed, not opened, until the checker froze. The five written
+after that freeze, `r144_run_all.sh`, `r144_mutate.py`, `r144_lanes.py`,
+`r144_release_sums.py` and `r144_summarize.py`, decide nothing about the capture: the
+first drives the frozen `r144_bnb.py`, the second writes a mutated candidate for the
+frozen deciders, and the others compare the record’s lanes, read the release’s sums and
+gather receipts.
 They ran under CPython 3.14.7, the project interpreter, as `python -I -B` at
 `nice -n 19`, one process at a time, with numpy 2.5.2 on one OpenBLAS thread, and
 `r144_lanes.py` with PyYAML.
@@ -55,11 +56,12 @@ They ran under CPython 3.14.7, the project interpreter, as `python -I -B` at
 | `r144_poses.py` | nothing: exact captures at 1,608 fixed poses and a seeded search at 24 nodes, compared with 1 and with the source’s least leaf bounds | the candidate and the 201 records | `out/poses.json.gz` |
 | `r144_lanes.py` | which lanes of the case records 563/50 would raise at 122 to 127 | `packing/frontier/n-122.md` to `n-127.md` | `out/lanes.json` |
 | `r144_release_sums.py` | whether the release’s `SHA256SUMS` lists the asset | that file and its API digest | `out/release-sums.json` |
+| `r144_mutate.py` | nothing: writes the second mutated candidate (the heaviest segment orbit removed) for the frozen deciders | the candidate | a scratch directory and `out/mutant-segment.json` |
 | `r144_summarize.py` | nothing: gathers node 0’s decision and the 200 nodes’ receipts into one, with the source’s node counts beside them | the receipts and the 201 records | `out/complete-decision.json` |
 | `r144_selftest.py` | nothing about the certificate: the controls on the programs above | synthetic measures, and mutated copies of the real candidate and node 37’s input | `out/selftest-*.json` |
 
-`r144_run_all.sh`, `r144_lanes.py`, `r144_release_sums.py` and `r144_summarize.py` were
-written after the controls plan, and two frozen programs changed after the checker’s freeze.
+`r144_run_all.sh`, `r144_mutate.py`, `r144_lanes.py`, `r144_release_sums.py` and
+`r144_summarize.py` were written after the controls plan, and two frozen programs changed after the checker’s freeze.
 Both changes are disclosed in the review’s
 [What This Review Ran](../../../../docs/project/reviews/review-2026-11-18-wand125-linear-n122.md#what-this-review-ran).
 `r144_premises.py` takes its square roots of 2 and 22 to 200 digits instead of 60, since
