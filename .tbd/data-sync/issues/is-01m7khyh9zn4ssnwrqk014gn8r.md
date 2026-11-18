@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: w3r-pass-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T01:19:30.507Z
+updated_at: 2026-11-18T01:19:38.613Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -32,3 +32,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-17T23:30Z w3-pass-1117r (review A1 of #1013): R1's review of #1005-#1007 likewise made none of its after-the-freeze measurements, no comparison, no author questions and no significance confirmation; the import-1009 mapping must cite the import lanes' measure/ receipts (#1011's packets; mishapolk packet) for identity/padding and keep the draft scores as the import's, not R1's.
 
 2026-11-18T00:44Z w3-pass-1117r: regularization done (grid-slack 0.5/1/5 deg + evand driver on 13 counts; selection draws views at 11, decides 270 and 307; SETTLED drops 210/272; runs retained under packing/cases/regularized_drawings/think-i38n-2026-11-18/). Merged main (#1010, #1013, #908, #1011). Custody, exact-side register, case verifiers, certificate reach, URL amendments for T-310..T-313, no-public-change record (paper renders: only the explainer register count moved) done; test_house_adoption 92 passed. KKT register candidates at 260/268/270/272/292/295/299/307 (4e-19..1e-13 below) held for think-8yyy. Next: stamp, re-pin, draft PR, coordinator review.
+
+2026-11-18T01:19Z w3r-pass-1118: took over from w3-pass-1117r (killed by a worker restart about 01:00Z). Resuming from c82c06859 plus six uncommitted files in /home/user/wt/w3-import-1009; #1013, #1011 and #1014 merged before the restart.
