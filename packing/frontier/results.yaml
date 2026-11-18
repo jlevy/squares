@@ -49479,9 +49479,10 @@ results:
       oversight or optimality is claimed.
     next_rung: >-
       Stays as the first report at 292 in the walk and is not adopted: T-311 is 8.78e-05
-      below it, and Mykhailo Polkovskyi's T-323, validated in the same change, is smaller
-      again and takes the house at 292. V4 and C4 then need a second accepted adversarial
-      review by a distinct reviewer and a retained human oversight record.
+      below it, and Mykhailo Polkovskyi's T-323, validated and adopted in the pass of 18
+      November 2026, is smaller again and takes the house at 292. V4 and C4 then need a
+      second accepted adversarial review by a distinct reviewer and a retained human
+      oversight record.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
       kind: adversarial
@@ -49705,12 +49706,12 @@ results:
       not replayed. Licensed MIT by LICENSE at the pin. No human oversight or optimality is
       claimed.
     next_rung: >-
-      Not adopted: Mykhailo Polkovskyi's T-323 (#1009), validated in the same change, is
-      3.62e-09 below it at 292, 72 times this certificate's own contraction margin of
-      5.0288e-11, so under the owner's option D of 17 November (think-b0w5) it is a new
-      result and the house rule adopts it there instead. V4 and C4 then need a second
-      accepted adversarial review by a distinct reviewer and a retained human oversight
-      record.
+      Not adopted: Mykhailo Polkovskyi's T-323 (#1009), validated and adopted in the pass of
+      18 November 2026, is 3.62e-09 below it at 292, 72 times this certificate's own
+      contraction margin of 5.0288e-11, so under the owner's option D of 17 November
+      (think-b0w5) it is a new result and the house rule adopts it there instead. V4 and C4
+      then need a second accepted adversarial review by a distinct reviewer and a retained
+      human oversight record.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
       kind: adversarial
@@ -49900,10 +49901,10 @@ results:
       described, not retained. Licensed MIT by LICENSE at the pin. No human oversight or
       optimality is claimed.
     next_rung: >-
-      Not adopted: Mykhailo Polkovskyi's T-319 (#1009), validated in the same change, is
-      1.58e-03 below it at 262, and the house rule adopts it there instead. V4 and C4 then
-      need a second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      Not adopted: Mykhailo Polkovskyi's T-319 (#1009), validated and adopted in the pass of
+      18 November 2026, is 1.58e-03 below it at 262, and the house rule adopts it there
+      instead. V4 and C4 then need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
       kind: adversarial
@@ -50096,10 +50097,10 @@ results:
       running on the twin. Licensed MIT by LICENSE at the pin. No human oversight or optimality
       is claimed.
     next_rung: >-
-      Not adopted: Mykhailo Polkovskyi's T-324 (#1009), validated in the same change, is
-      1.58e-03 below it at 295, and the house rule adopts it there instead. V4 and C4 then
-      need a second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      Not adopted: Mykhailo Polkovskyi's T-324 (#1009), validated and adopted in the pass of
+      18 November 2026, is 1.58e-03 below it at 295, and the house rule adopts it there
+      instead. V4 and C4 then need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-ozden-de-winter-1005-1007.md
       kind: adversarial
@@ -50277,11 +50278,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 147 in place of T-302 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 147, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-302, with both strong
+      generators' regularization of the new house; T-302 keeps its certificate as history.
     regularizations:
     - n: 147
       of: T-302
@@ -50476,11 +50477,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 156 in place of T-287 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 156, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-287, with both strong
+      generators' regularization of the new house; T-287 keeps its certificate as history.
     regularizations:
     - n: 156
       of: T-287
@@ -50676,11 +50677,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 180 in place of T-288 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 180, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-288, with both strong
+      generators' regularization of the new house; T-288 keeps its certificate as history.
     regularizations:
     - n: 180
       of: T-288
@@ -50866,11 +50867,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 210 in place of T-174 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 210, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-174, with both strong
+      generators' regularization of the new house; T-174 keeps its certificate as history.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
       kind: adversarial
@@ -51041,11 +51042,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 260 in place of T-269 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 260, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-269, with both strong
+      generators' regularization of the new house; T-269 keeps its certificate as history.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
       kind: adversarial
@@ -51231,11 +51232,12 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 262 in place of the Kingbird catalogue's 16 + √2/2 under the house rule,
-      the smallest validated side there, in the pass of the day this change merges, with
-      both strong generators' regularization of the new house and its flip in the same
-      change. V4 and C4 then need a second accepted adversarial review by a distinct
-      reviewer and a retained human oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 262, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of the Kingbird
+      catalogue's 16 + √2/2 packing, with both strong generators' regularization of the new
+      house; that packing keeps T-101's exact certificate and T-155's ceiling as history.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
       kind: adversarial
@@ -51405,11 +51407,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 268 in place of T-289 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 268, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-289, with both strong
+      generators' regularization of the new house; T-289 keeps its certificate as history.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
       kind: adversarial
@@ -51593,11 +51595,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 270 in place of T-283 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 270, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-283, with both strong
+      generators' regularization of the new house; T-283 keeps its certificate as history.
     regularizations:
     - n: 270
       of: T-283
@@ -51783,11 +51785,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 272 in place of T-174 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 272, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-174, with both strong
+      generators' regularization of the new house; T-174 keeps its certificate as history.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
       kind: adversarial
@@ -51977,11 +51979,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 292 in place of T-146 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 292, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-146, with both strong
+      generators' regularization of the new house; T-146 keeps its certificate as history.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
       kind: adversarial
@@ -52163,11 +52165,12 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 295 in place of T-193 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 295, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-193, with both strong
+      generators' regularization of the new house; T-193 keeps its exact algebraic side as
+      history.
     reviews:
     - path: docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
       kind: adversarial
@@ -52352,11 +52355,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 299 in place of T-277 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 299, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-277, with both strong
+      generators' regularization of the new house; T-277 keeps its certificate as history.
     regularizations:
     - n: 299
       of: T-277
@@ -52553,11 +52556,11 @@ results:
       on the Witness/v2 files. Licensed MIT by LICENSE at the pin. No human oversight or global
       optimality is claimed.
     next_rung: >-
-      Adopt it at 307 in place of T-279 under the house rule, the smallest validated side
-      there, in the pass of the day this change merges, with both strong generators'
-      regularization of the new house and its flip in the same change. V4 and C4 then need a
-      second accepted adversarial review by a distinct reviewer and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 17 November, is
+      retained. It is the smallest validated side at 307, and the case adopted it there in
+      the pass of 18 November 2026 under the house rule, in place of T-279, with both strong
+      generators' regularization of the new house; T-279 keeps its certificate as history.
     regularizations:
     - n: 307
       of: T-279
