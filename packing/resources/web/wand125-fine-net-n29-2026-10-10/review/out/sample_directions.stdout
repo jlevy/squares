@@ -1,0 +1,281 @@
+{
+ "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+ "binary_command": "--candidate /home/user/squares/.claude/worktrees/review-1lri/packing/resources/web/wand125-fine-net-n29-2026-10-10/release/certificates/mixed_n29_L582/candidate.json.gz --n 29 --side 291/50 --directions 1947,603,1595,1173,2068,886,312 --threads 2 --confirm",
+ "exit": 0,
+ "wall_seconds": 21.374348402023315,
+ "summary": {
+  "build": {
+   "profile": "release",
+   "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+   "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+   "target": "x86_64-unknown-linux-gnu"
+  },
+  "direction_cpu_seconds": 36.54262747200001,
+  "direction_seconds": 37.210447996,
+  "directions": 7,
+  "fault_injected_at_box": null,
+  "kind": "sqverify-fast-summary/v1",
+  "nodes": 2388371,
+  "premises": {
+   "B": "4999/5000",
+   "D": "1/5002",
+   "L": "291/50",
+   "angle_count": 2073,
+   "centre_domain": "per-bin",
+   "expanded_points": 0,
+   "expanded_rectangles": 5156,
+   "expanded_segments": 0,
+   "format": "M",
+   "input_sha256": "16750ea3ee45118958b4433d90d7de1349eaabb35053cdb70e3fbfc2447893a5",
+   "mass_below_n": "1/100000",
+   "mass_exact": "2899999/100000",
+   "n": 29,
+   "net_last_tangent": "1036/2501",
+   "net_origin": "proof_net",
+   "shrink_bound": "25009997/25010000",
+   "source_rectangles": 650
+  },
+  "refused_directions": [],
+  "status": "PARTIAL",
+  "threads": 2,
+  "threshold": "1",
+  "wall_seconds": 21.0732118
+ },
+ "directions": [
+  {
+   "r": 1947,
+   "verdict": "verified",
+   "nodes": 448209,
+   "bound": 1.0000000000046825,
+   "cpu_seconds": 7.3513950789999996,
+   "source_cpu_seconds": 9.828794078999977,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true,
+    "mean_boundary_rectangles": true,
+    "audits": true,
+    "audit_every": true
+   },
+   "exact_centre": 1.0329575906907915,
+   "exact_least_of_five": 1.032230104080379,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 603,
+   "verdict": "verified",
+   "nodes": 226303,
+   "bound": 1.000000000011783,
+   "cpu_seconds": 3.259013012,
+   "source_cpu_seconds": 4.169826322999995,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true,
+    "mean_boundary_rectangles": true,
+    "audits": true,
+    "audit_every": true
+   },
+   "exact_centre": 1.0552158229020865,
+   "exact_least_of_five": 1.0522136796813417,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 1595,
+   "verdict": "verified",
+   "nodes": 384671,
+   "bound": 1.000000000023072,
+   "cpu_seconds": 6.0983020660000005,
+   "source_cpu_seconds": 8.251223120999953,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true,
+    "mean_boundary_rectangles": true,
+    "audits": true,
+    "audit_every": true
+   },
+   "exact_centre": 1.0026357567873203,
+   "exact_least_of_five": 1.0025207485707701,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 1173,
+   "verdict": "verified",
+   "nodes": 349637,
+   "bound": 1.0000000000269689,
+   "cpu_seconds": 5.226658530000001,
+   "source_cpu_seconds": 6.390133644000002,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true,
+    "mean_boundary_rectangles": true,
+    "audits": true,
+    "audit_every": true
+   },
+   "exact_centre": 1.021052405298239,
+   "exact_least_of_five": 1.0193385028541009,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 2068,
+   "verdict": "verified",
+   "nodes": 472517,
+   "bound": 1.0000000060422543,
+   "cpu_seconds": 7.632800563,
+   "source_cpu_seconds": 10.406139239999902,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true,
+    "mean_boundary_rectangles": true,
+    "audits": true,
+    "audit_every": true
+   },
+   "exact_centre": 1.0015141480791963,
+   "exact_least_of_five": 1.00141460124805,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 886,
+   "verdict": "verified",
+   "nodes": 295115,
+   "bound": 1.000000000049488,
+   "cpu_seconds": 4.473138725,
+   "source_cpu_seconds": 5.959082047000038,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true,
+    "mean_boundary_rectangles": true,
+    "audits": true,
+    "audit_every": true
+   },
+   "exact_centre": 1.000989736091725,
+   "exact_least_of_five": 1.000989736091725,
+   "five_ge_bound_and_1": true
+  },
+  {
+   "r": 312,
+   "verdict": "verified",
+   "nodes": 211919,
+   "bound": 1.00000003298731,
+   "cpu_seconds": 2.5013194970000003,
+   "source_cpu_seconds": 3.3124074420000085,
+   "equal_to_source": {
+    "verdict": true,
+    "nodes": true,
+    "leaves": true,
+    "max_depth": true,
+    "min_certified_lower_bound": true,
+    "least_bound_box": true,
+    "method": true,
+    "mean_boundary_rectangles": true,
+    "audits": true,
+    "audit_every": true
+   },
+   "exact_centre": 1.0011061694219632,
+   "exact_least_of_five": 1.0011048813274868,
+   "five_ge_bound_and_1": true
+  }
+ ],
+ "checklist_item_3": {
+  "format_M": true,
+  "centre_domain_per_bin": true,
+  "net_origin_proof_net": true,
+  "D_equals_step": true,
+  "angle_count_equals_last_plus_1": true,
+  "net_last_tangent_equals_(N-1)D": true,
+  "B_equals_file": true,
+  "shrink_bound_equals_B(1+D)": true,
+  "mass_exact_n_minus_1e-5_below_n": true,
+  "expanded_points_segments_0": true,
+  "fault_injected_null": true,
+  "source_sha256_is_d97758bb": true,
+  "profile_release_rustc_1.98.0": true,
+  "input_sha256_is_retained_gz": true
+ },
+ "mutant": {
+  "factor": "99/100",
+  "exit": 1,
+  "command": "--candidate /tmp/claude-0/-home-user-squares/0a01ddbe-91e2-5d1d-98f8-365093a10337/scratchpad/review-1lri/data/scratch/mutant-29-99_100.json --n 29 --side 291/50 --directions 0,1947,2068 --threads 2 --confirm",
+  "wall_seconds": 1.2446024417877197,
+  "rows": [
+   {
+    "r": 1947,
+    "verdict": "counterexample-candidate",
+    "cpu_seconds": 0.327169143,
+    "pose": [
+     3.392027015714628,
+     3.11658300673484
+    ],
+    "exact": 0.9999715823924512,
+    "below_1": true,
+    "in_domain": true,
+    "equals_crate": true
+   },
+   {
+    "r": 2068,
+    "verdict": "counterexample-candidate",
+    "cpu_seconds": 0.284275939,
+    "pose": [
+     3.2972274636085297,
+     3.181059224525971
+    ],
+    "exact": 0.9975158935487748,
+    "below_1": true,
+    "in_domain": true,
+    "equals_crate": true
+   },
+   {
+    "r": 0,
+    "verdict": "refused",
+    "cpu_seconds": 0.9101094200000001,
+    "argmin": [
+     "33205022475534637/10000000000000000",
+     "133/25"
+    ],
+    "exact": 0.9908643543768428,
+    "below_1": true,
+    "bound": 0.9908643538541804,
+    "bound_le_exact": true,
+    "gap": 5.226625155136206e-10
+   }
+  ],
+  "summary_status": "REFUSED"
+ },
+ "cpu_seconds_python": 2.15875,
+ "cpu_seconds_binary": 38.652818,
+ "wall_seconds_total": 24.725261211395264,
+ "problems": [],
+ "status": "SAMPLE_AGREES"
+}
+
+real	0m24.812s
+user	0m40.790s
+sys	0m0.037s
