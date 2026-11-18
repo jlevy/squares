@@ -3,9 +3,9 @@ type: is
 id: is-01m7kqn1kjvjkmqbcs4yfq84fc
 title: "Lift the regularize-first hold (owner, 17 Nov, think-fibh): bring #953, #908 and #909 up to date with main, get CI green, senior review, merge in that order"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 13
+version: 14
 delegate: w1r-holds-1118
 labels: []
 dependencies: []
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T03:08:49.138Z
-updated_at: 2026-11-18T02:14:58.837Z
+updated_at: 2026-11-18T02:43:40.751Z
 started_at: 2026-11-17T03:08:51.346Z
+closed_at: 2026-11-18T02:43:40.751Z
+close_reason: "Owner's hold lifted (think-fibh): #953 merged e01cffa62, #908 merged 2be743b07, #909 merged a1a8d0aaeded (18 Nov 02:14Z); Pages deploys verified; replies posted on #776, #777, #532 (x2), #446 (x2), recorded in the notes for the records lane. check_bead_tree --before-close on main a1a8d0aae: ok."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
