@@ -1,0 +1,49 @@
+Lane r127-1118, blind stage 4 review of #1015, #1017 and #1020 (s(127), Joost de Winter).
+Checker, controls plan, self-test receipt and mutant receipt frozen at 2026-11-18T02:02:04Z, before any
+program of this lane read a certificate. frozen/checker-frozen.sha256 binds them, with the
+six retained source files and T-305's retained certificate; from this packet's directory:
+
+    sha256sum -c frozen/checker-frozen.sha256
+
+Read before the freeze: the lane's two briefs and the coordinator's task message; AGENTS.md;
+packing/campaign/result-import.md (stage 4 and "Several Reports at One Count");
+epistemics.md (Significance and Novelty); the house-format reviews
+review-2026-11-17-ozden-de-winter-1005-1007.md (whole), review-2026-11-17-polkovskyi-1009.md
+(summary, verdict, What I Ran, Note on This Copy) and
+review-2026-11-11-wand125-fine-net-n28-n30.md (Questions, Rungs and Significance,
+Reproduction, Comparison), not their programs or receipts; owner decision bead think-b0w5;
+the title of bead think-zqot (no notes); issues #1015, #1017 and #1020 by REST, bodies only,
+no comments, fetched 2026-11-18T01:33:59Z; the pinned trees' listings (names, blob ids,
+sizes) and the authors' SHA256SUMS files at the three pins (digest lists only); the six
+certificate files' structure by head, tail, grep, awk, cut and wc, to write the readers;
+of T-305's packet packing/resources/web/joegun-upper-bounds-2026-11-16/: its file list, the
+README lines a grep for "127" or "T-305" printed (which state, among others, that T-305
+replaced T-174 at 127, that T-174's contraction margin at 127 is 0 and T-305's certificate's
+own margin is 1.2099e-10, that its least pair gap at 127 is about 1.1203e-11, and that 56
+squares turn beyond a degree), and the non-square lines of source/n-127-candidate.yaml; the
+significance blocks of T-174, T-198, T-226, T-239, T-253, T-260, T-280, T-281, T-285, T-286
+and T-305 to T-313 in packing/frontier/results.yaml; the key structure of
+packing/witnesses/witness.schema.yaml; the module docstrings of devtools.contraction_margin
+(for the definition of the margin; none of its code) and devtools.retained_data (and its
+compress and main functions, used to store the witness files); the retained-data paragraphs
+of development.md and the Ruff exclusions of packing/pyproject.toml.
+
+Not read before the freeze: the authors' README.md, REGISTRATION.md, verify_exact.py,
+check_area.py and figures; any issue comment; the import lane's branch, packets, receipts,
+ledger or bead notes; T-305's packet's measure/ and receipts/ files and its README beyond
+the grep above; the code of devtools.contraction_margin, devtools.measure_identity and
+devtools.upper_bound_reports; this repository's sqpack witness, verifier and promotion code.
+
+Before the freeze the programs ran only on synthetic packings, in scratch space: the
+self-test, the mutant runs, and r127_check, r127_controls (real and both constant
+checkers), r127_contract and r127_identity on synthetic files of 16, 40 and 127 squares.
+A first mutant run had three broken copies passing; two were equivalent to the program
+(B's diagonal test is implied by its sides and shoelace tests given unit sides, and no
+contact gives fewer than three candidate points) and were replaced by B's unit test by
+its sides alone and B calling a zero-area intersection apart; the third (the twin
+comparison reading only the first corner) showed a gap in the self-test, which now moves
+one non-first corner. The frozen run has every broken copy failing (out/mutants.json).
+
+Pricing, from a synthetic packing of 127 squares with 60-digit scalars: a full decision
+15 CPU-seconds; the controls of a first file about 7 CPU-minutes; the whole run under one
+CPU-hour, no single job above a quarter of an hour.
