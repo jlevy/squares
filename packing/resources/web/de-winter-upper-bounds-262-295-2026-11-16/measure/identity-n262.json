@@ -1,0 +1,97 @@
+{
+ "format": "measure-identity-v1",
+ "n": 262,
+ "inputs": {
+  "DEWINTER": {
+   "input": "packet",
+   "packet": "de-winter-upper-bounds-262-295-2026-11-16",
+   "side": "166996934419035177/10000000000000000"
+  },
+  "T-155": {
+   "input": "witness-center-basis",
+   "path": "packing/cases/regularized_bounds/views/n-262.yaml.gz",
+   "sha256": "32f6375803a44af2c30d421b521ba5bff108cf9d4dbf6e3a84c4e0d2c895c09f",
+   "side": "16707106781186547524567915429917/1000000000000000000000000000000"
+  }
+ },
+ "tilts": {
+  "DEWINTER": {
+   "exactly_turned": 72,
+   "tilted_beyond_1_degree": 72,
+   "tilted_positive": 72,
+   "tilted_negative": 0,
+   "tilt_range_degrees": [
+    24.94249514205676,
+    29.73116912697133
+   ],
+   "near_upright": 0,
+   "near_upright_beyond_1e-3_degrees": []
+  },
+  "T-155": {
+   "exactly_turned": 20,
+   "tilted_beyond_1_degree": 20,
+   "tilted_positive": 20,
+   "tilted_negative": 0,
+   "tilt_range_degrees": [
+    45.0,
+    45.0
+   ],
+   "near_upright": 0,
+   "near_upright_beyond_1e-3_degrees": []
+  }
+ },
+ "pairs": [
+  {
+   "view": "DEWINTER",
+   "against": "T-155",
+   "side_difference": "-7.413339e-03",
+   "side_difference_exact": "-7413339283029824567915429917/1000000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.897603",
+    "moved_beyond": {
+     "1e-9": 261,
+     "1e-6": 261,
+     "1e-3": 261,
+     "1e-2": 91,
+     "1e-1": 78
+    },
+    "largest_turn_degrees": "29.73",
+    "turned_beyond_1e-6": 72
+   },
+   "bands": {
+    "assignment": "identity, least total squared centre displacement",
+    "tilted_paired_same_sign": 20,
+    "tilted_paired_same_sign_within_1e-1": 0,
+    "tilted_paired_opposite_sign": 0,
+    "tilted_paired_opposite_sign_beyond_1e-1": 0,
+    "tilted_paired_with_untilted": 52,
+    "tilt_angles_shared_within_1e-4_degrees": 0
+   },
+   "centred": {
+    "alignment": "box centres",
+    "symmetry": 0,
+    "total_squared": "27.1783",
+    "runner_up_symmetry": 2,
+    "runner_up_total_squared": "27.1783",
+    "largest_move": "0.89891",
+    "rms_move": "0.322077",
+    "bottleneck": "0.89891",
+    "moved_beyond": {
+     "1e-9": 262,
+     "1e-6": 262,
+     "1e-3": 262,
+     "1e-2": 90,
+     "1e-1": 78
+    },
+    "nearest_one_to_one": false,
+    "turned_beyond_1_degree": 72,
+    "tilts_reversed_beyond_1_degree": 0
+   }
+  }
+ ]
+}
