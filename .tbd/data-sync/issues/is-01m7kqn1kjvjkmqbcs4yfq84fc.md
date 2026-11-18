@@ -5,7 +5,7 @@ title: "Lift the regularize-first hold (owner, 17 Nov, think-fibh): bring #953, 
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: w1r-holds-1118
 labels: []
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T03:08:49.138Z
-updated_at: 2026-11-18T01:47:09.724Z
+updated_at: 2026-11-18T02:14:58.837Z
 started_at: 2026-11-17T03:08:51.346Z
 ---
 
@@ -32,3 +32,5 @@ started_at: 2026-11-17T03:08:51.346Z
 2026-11-18 w1r-holds-1118: took over from w1-holds-1117r (killed by a worker restart ~01:00Z). Remaining: #909 (head 9fc9310e5): verify review A addressed, dispositions reply, merge origin/main (eb50f54e9), re-pin, CI, ready, merge; Pages+site; replies #446/#532 per check_requests; bead closes.
 
 2026-11-18T01:5xZ w1r-holds-1118: #909: merged main eb50f54e9 (#1014, dd5f1affd, clean) and then 2980557a2 (#1016, eda3ee5cd, pin conflict only); A8 leftover reflow 70455f73d; no-change records 67ef0a919 (vs eb50f54e9) and 425412224 (vs 2980557a2), both byte-identical 55/43/43/43; re-pinned last 5d931e1a0 (DATA_REVISION eda3ee5c); records tier 55/55 at 5d931e1a0. Waiting on hosted CI at 5d931e1a0, then dispositions reply, gate, merge.
+
+2026-11-18 w1r-holds-1118: #909 MERGED 2026-11-18T02:14:45Z, merge commit a1a8d0aaeded4f066755ffafcb7dbdc7b16cfa27, at head 5d931e1a0 (review A https://github.com/jlevy/squares/pull/909#issuecomment-6964495841; dispositions https://github.com/jlevy/squares/pull/909#issuecomment-6966950958; CI at head: Packing validation 44217999343, Certificate page 44217999444, Branch mergeability 44217991160, success). Next: Pages deploy + check_published_site, then #446 and #532 follow-ups from main.
