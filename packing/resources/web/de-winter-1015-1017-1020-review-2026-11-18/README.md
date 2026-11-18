@@ -135,7 +135,30 @@ C20="#1020=center-direction-json:$R/source/i1020-a1ba501/n127/n127_exact.json"
 
 ## What They Printed
 
-RECEIPTS
+Each program printed one line a run (the receipts hold the rest):
+
+| Receipt | What it says |
+| --- | --- |
+| `out/selftest.json` | `PASSED`: 10,486 checks, no failure |
+| `out/mutants.json` | `ALL_MUTANTS_FAIL`: each of the 18 broken copies fails 1 to 2,483 checks; the unmutated copy passes |
+| `out/check-1015-exact.json`, `out/check-1015-witness.json` | `ACCEPT`: 8,001 pairs apart, least $3.73044 \times 10^{-70}$ (31, 34); no wall touched; the claim the 12-place ceiling |
+| `out/check-1017-exact.json`, `out/check-1017-witness.json` | `ACCEPT`: least $3.84839 \times 10^{-15}$ (35, 88); left 52 and bottom 43, 48, 54, 67 touched; the stated fraction and decimal equal the side; the title the ceiling |
+| `out/check-1020-exact.json`, `out/check-1020-witness.json` | `ACCEPT`: least $1.64827 \times 10^{-59}$ (84, 99); no wall touched; the claim the ceiling |
+| `out/check-t305.json` | `ACCEPT`: T-305 at its side, least $1.12027 \times 10^{-11}$ (50, 54) |
+| `out/twin-1015.json`, `out/twin-1017.json`, `out/twin-1020.json` | `SAME_PACKING`: each witness lists the centre file’s corners from $c + (u + v)/2$ |
+| `out/contract.json` | margins $1.20994 \times 10^{-10}$ (T-305), $7.73937 \times 10^{-63}$ (#1015), $4.19030 \times 10^{-14}$ (#1017), $1.82026 \times 10^{-58}$ (#1020); every step beats its predecessor’s, the least by 4.29 (#1017 to #1020) |
+| `out/identity.json`, `out/identity.txt` | the tilts; no symmetry matches any report to T-305; each later report one to one with the earlier |
+| `out/controls-1015-exact.json`, `out/controls-1017-exact.json` | `EVERY_CONTROL_AS_STATED`, 49 of 49 |
+| `out/controls-1015-witness.json`, `out/controls-1017-witness.json` | 31 of 31 as stated; the verdict string `SOME_CONTROL_NOT_AS_STATED` because S0 and S1b ran outside the plan’s twin tier |
+| `out/controls-1020-exact.json`, `out/controls-1020-witness.json` | 41 of 46 and 25 of 28: W1 had no subject at three walls, and W2p at the right and top crossed more than the nearest squares |
+| `out/controls-*-exact-always-accept.json`, `-always-refuse.json` | `SOME_CONTROL_NOT_AS_STATED`: every must-refuse (always-accept) or must-accept (always-refuse) control that ran fails |
+| `out/tables.json` | the controls tabulated against the plan: 226 of 234 as stated; the constant checkers’ statement holds in all six runs |
+| `out/bands.json` | the near pairs and near walls, and the issues’ stated differences |
+| `out/compare-maintained.json` | all six contraction steps equal the maintained tool’s, exactly |
+| `out/maintained/contraction-*.json` | the maintained tool: the same margins and gains, none within the margin, both maintained routes accepting |
+| `out/maintained/identity-*.json` | the maintained tool: the same moves; against T-174 farther still |
+
+The `out/controls-*.log` files are the controls’ one-line prints.
 
 ## Compressed Files
 
