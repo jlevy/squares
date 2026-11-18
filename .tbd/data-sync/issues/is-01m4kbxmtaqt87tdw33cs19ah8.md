@@ -5,8 +5,8 @@ title: "Import wand125: s(28) >= 2297/400 and s(30) >= 2357/400 by fine-net chec
 kind: task
 status: in_progress
 priority: 2
-version: 21
-delegate: w1-holds-1117r
+version: 22
+delegate: w1r-holds-1118
 labels:
   - result-import
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-10T16:56:42.570Z
-updated_at: 2026-11-18T00:55:56.097Z
+updated_at: 2026-11-18T01:19:16.882Z
 started_at: 2026-11-04T15:03:02.888Z
 ---
 Found by the 2026-10-10 evening reads (think-0nkn): wand125/square-packing 36b85b9 and ff9f269 add problems/square-lower-bounds/certificates/mixed_n28_L57425/ and mixed_n30_L58925/, check2 bundles on the 2,073-direction net (core 4999/5000, step 1/5002), reporting s(28) >= 2297/400 = 5.7425 (mass 2799999/100000; +3/400 over T-107's 1147/200; +1/400 over #446's unadopted 287/50) and s(30) >= 2357/400 = 5.8925 (mass 2999999/100000; +9/1000 over T-109's 11767/2000). Data: square-lower-bounds-v1 assets certificates__mixed_n28_L57425.tar.gz (627,191 B, SHA-256 7d0f910768d47fcdba6233334798487471db7ef2fe556400269c34c3116d3bf3) and certificates__mixed_n30_L58925.tar.gz (638,622 B, 0d11fe0554909e1457d70efa425c82344e622006590ac6ee58a481b69d1b61ba). Author: 772 s and 1790.3 s, 0.985 control at 32 directions. No issue reports them. Stages 1-3 as T-132 (#446 s(29)) did with devtools.fine_net_followup; full capture likely CPU-hours (owner budget).

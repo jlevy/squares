@@ -5,8 +5,8 @@ title: "Stage 4 review of T-142's mixed_n28_L57425 and T-143's mixed_n30_L58925 
 kind: task
 status: closed
 priority: 2
-version: 9
-delegate: w1-holds-1117r
+version: 10
+delegate: w1r-holds-1118
 labels:
   - result-import
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m4kbxmtaqt87tdw33cs19ah8
 hold: null
 hold_until: null
 created_at: 2026-11-04T16:00:43.636Z
-updated_at: 2026-11-18T00:55:52.688Z
+updated_at: 2026-11-18T01:19:16.877Z
 started_at: 2026-11-11T10:57:38.005Z
 closed_at: 2026-11-18T00:55:52.688Z
 close_reason: "Both stage 4 reviews of T-142 and T-143 (4 and 11 November) are on main: #953 merged e01cffa62 (17 Nov), #908 merged 2be743b07 (18 Nov), which maps both and takes T-142/T-143 to V3/C3. check_bead_tree --before-close think-4ul6 on main 45f0288b5: may close."

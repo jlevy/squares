@@ -5,8 +5,8 @@ title: "Lift the regularize-first hold (owner, 17 Nov, think-fibh): bring #953, 
 kind: task
 status: in_progress
 priority: 1
-version: 9
-delegate: w1-holds-1117r
+version: 10
+delegate: w1r-holds-1118
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T03:08:49.138Z
-updated_at: 2026-11-18T00:37:54.699Z
+updated_at: 2026-11-18T01:19:16.869Z
 started_at: 2026-11-17T03:08:51.346Z
 ---
 
