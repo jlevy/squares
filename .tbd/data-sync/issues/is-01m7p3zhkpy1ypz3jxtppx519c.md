@@ -5,7 +5,7 @@ title: "Import #1021, #1022: Joost de Winter's s(268) <= 16.870013850405 and s(2
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: w6r2-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T01:22:44.981Z
-updated_at: 2026-11-18T07:10:12.703Z
+updated_at: 2026-11-18T07:18:47.146Z
 started_at: 2026-11-18T01:23:11.221Z
 ---
 
@@ -36,3 +36,5 @@ R-1021 (blind review), 06:15Z: checker and controls plan frozen and pushed at 06
 R-1021 (blind review), 06:58Z: draft PR #1033 (labels intake, S2), head 521c23a3ee, base main 86284ec203 (#1023 merged in). Checker frozen e220d02c4f (pushed 06:08:52Z), findings frozen ba9bceb65b (pushed 06:51:05Z). Verdict: #1021 and #1022 accepted (both files, both methods, natively and crossed); stated sides are the files' sides (12-place ceilings). Option D: new against T-320 (gain 1.854284698e-3, margin 3.374431279e-27), T-289 (2.015998680e-3, 3.204483004e-12), T-321 (8.343869879e-4, 3.386260668e-27), T-283 (8.343869912e-4, 3.211509047e-12); each margin computed on the predecessor's own certificate, confirmed exactly by devtools.contraction_margin. Identity: new arrangements relative to all four (no symmetry one to one), so the packing credit is de Winter's. 246/246 controls as stated. Significance read: #1021 S3, #1022 S3. F3 (minor, this review): post-freeze adapter r1021_post.py for the predecessors' layouts. F14 (author): READMEs say GPT-6.2 Sol, issues say GPT-6.2 Astra. About 0.7 CPU-hours.
 
 R-1021 (blind review), 07:10Z: lane r1021b-1118 resumed after the container restart (about 06:55Z). Finished the uncommitted post-freeze edit (F3's lines: r1021_read.py 225, 249, 206, 176; r1021_measure.py 117 and 89, each checked against the frozen programs) and added a disclosure in After the Freeze: on resuming, a 'tbd show think-gqzz' at about 07:04Z printed this bead whole, so the import lane's notes were seen, after the findings freeze; nothing in the review draws on them. Commit 23860a5751, pushed 07:09:55Z. Both frozen lists verify from the packet directory (checker 22 OK, findings 49 OK); live copy lines 1-739 equal the frozen text; packet unchanged since ba9bceb65b. main still 86284ec203 (in the branch). Next: PR body update, CI on 23860a5751, then the coordinator for the senior review.
+
+R-1021 (blind review), 07:18Z: lane r1021b-1118 handed back before hosted CI finished, because the harness asked for the report. State: draft PR #1033, head 23860a5751 (pushed 07:09:55Z), base main 86284ec203 (also the merge base), tree clean at /home/user/wt/r1021. PR description rewritten in the template; check_pr_description --label intake --title passes. Local at 23860a5751: frozen lists 22/49 OK; review lines 1-739 equal the frozen text; packet unchanged since ba9bceb65b; records tier 55/55 (203.9 s); render_document_map --check, retained_data check and release_pin --check pass; a third fetch at the pin (07:14Z) matches sources-pins. Hosted CI on 23860a5751 at 07:18Z: pass=3 pending=11 skipping=37 (failing: none). Not done: hosted CI green, the senior review (requested from the coordinator in the handback), addressing it, the merge, removing the worktree. Main's post-merge slow lane timed out at 1800 s at 86284ec203; that lane is not part of this PR's gate.
