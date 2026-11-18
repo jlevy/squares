@@ -140,6 +140,13 @@ on its only branch, and the README, 84 bytes, names none. Credit is read from th
 source’s own files, so T-057’s stays de Winter until a published revision names those
 sources (think-a88h); the AI collaborator is recorded now, as the author’s statement.
 
+The author published that revision on 18 November 2026, `43e15330`, which changes the
+README alone. The [2026-11-18 packet](../de-winter-square-packing-211-2026-11-18/README.md)
+retains it under **[de Winter n211 2026-11-18]**, and T-057’s credit is read from that
+key since: *de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth*.
+Every line in the chain above names the five after de Winter.
+This packet stays the certificate’s: the packing is the same file, byte for byte.
+
 The issue also compares the packings with this one by an optimal assignment under the
 box’s symmetries. `devtools.measure_identity` repeats that here, a measurement for
 credit that decides nothing, and the issue’s figures hold:

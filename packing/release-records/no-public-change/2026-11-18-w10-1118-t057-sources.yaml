@@ -1,0 +1,36 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane w10-1118 of 18 November (think-a88h): the follow-up of Joost de Winter's credit
+  request #1008 at 211. His README revision 43e15330 names T-057's sources, so the packet
+  de-winter-square-packing-211-2026-11-18 retains it, a new key carries T-057's credit (de
+  Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth), and by attribution.md's
+  chain rule the credit lines of T-098, T-175, T-181, T-182, T-188, T-243, T-253 and T-287 name
+  the five after de Winter. T-057 and those eight entries gain claim and notes sentences; a
+  coverage source holds the new key; the 2026-09-16 packet's README gains a paragraph; and the
+  requests entry for #1008 records the ask as done. No result is registered, and no rung,
+  side, bound, house or finder changes; T-098's key gains a short credit. Against origin/main
+  50962004c (#1032): devtools.compare_paper_renders rendered each paper into empty site
+  directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
+  tree and once with that main's copies of the four paths above swapped in. All four are
+  byte-identical across the three: the explainer's 55 files and 43 files each of the
+  optimality review, the threshold-bound review and the methods survey. No PDF was printed;
+  each prints from that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and
+  v0.2.7.
