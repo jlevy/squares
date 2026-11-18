@@ -15389,7 +15389,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-10'
-  lastmod: '2026-11-17'
+  lastmod: '2026-11-18'
   status: live
   identity:
     kind: lower-bound
@@ -15446,7 +15446,7 @@ urls:
       - packing/resources/web/wand125-fine-net-n29-2026-10-10/receipts/sample-diagnostic.json
       - packing/devtools/fine_net_followup.py
       - packing/devtools/audit_wand125_declared_net.py
-  - date: '2026-11-17'
+  - date: '2026-11-18'
     reason: The stage 4 review of 4 November (think-1lri) and the complete sqverify-fast census replay
       of mixed_n29_L582 at all 2,073 directions with its whole-net control (think-r333), both of 4
       November, are cited, the replay as evidence, and the capture agreement, check2 receipt, review
