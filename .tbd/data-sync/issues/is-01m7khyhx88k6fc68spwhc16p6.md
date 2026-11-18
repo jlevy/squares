@@ -5,15 +5,15 @@ title: "Stage 4 blind review of #1009's 13 certificates (Mishapolk/square-packin
 kind: task
 status: in_progress
 priority: 1
-version: 8
-delegate: w3r-pass-1118
+version: 9
+delegate: w3r2-pass-1118
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:09.288Z
-updated_at: 2026-11-18T01:19:30.509Z
+updated_at: 2026-11-18T04:37:43.591Z
 started_at: 2026-11-17T01:29:11.080Z
 ---
 

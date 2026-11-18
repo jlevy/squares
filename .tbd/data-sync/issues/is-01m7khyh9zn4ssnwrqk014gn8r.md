@@ -5,15 +5,15 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 15
-delegate: w3r-pass-1118
+version: 16
+delegate: w3r2-pass-1118
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T03:38:15.405Z
+updated_at: 2026-11-18T04:37:43.589Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
