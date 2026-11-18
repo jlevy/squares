@@ -199,6 +199,7 @@ MIXED_PACKETS = (
     "wand125-fine-net-n28-n30-2026-10-10",
     "ozden-s94-lower-bound-2026-11-03",
     "ozden-s94-lower-bound-9972-2026-11-05",
+    "de-winter-s108-lower-bound-2026-11-17",
 )
 #: A packet that is not Hosono's and keeps a format M certificate at its own upstream
 #: path, by the census name it is given (`mixed_nN_LDIGITS`, the format's convention) and
@@ -211,6 +212,11 @@ MIXED_FILES: dict[str, dict[str, str]] = {
     },
     "ozden-s94-lower-bound-9972-2026-11-05": {
         "mixed_n94_L9972": "source/certificate/n94-L9972.json.gz",
+    },
+    # Joost de Winter's rescaling of Hosono's mixed_n108_L1062 by 1063/1062 onto a net of
+    # 401 directions (jlevy/squares#1018), `lower_n108/evidence/n108_measure.json.gz`.
+    "de-winter-s108-lower-bound-2026-11-17": {
+        "mixed_n108_L1063": "source/lower_n108/evidence/n108_measure.json.gz",
     },
 }
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
@@ -1619,9 +1625,13 @@ INDEPENDENT_MIXED_PACKETS = frozenset(
 #: Packets whose producer decided the certificate with this repository's own
 #: `sqverify-fast`, unmodified, so a census row of it reproduces the producer's run: the
 #: #890 dilation and #910's, whose receipts name the crate source `d97758bb...` at
-#: e6e8d577.
+#: e6e8d577, and #1018's rescaling, whose twelve runs name the same source at f9ddfeeef.
 SAME_CRATE_PACKETS = frozenset(
-    {"ozden-s94-lower-bound-2026-11-03", "ozden-s94-lower-bound-9972-2026-11-05"}
+    {
+        "ozden-s94-lower-bound-2026-11-03",
+        "ozden-s94-lower-bound-9972-2026-11-05",
+        "de-winter-s108-lower-bound-2026-11-17",
+    }
 )
 
 

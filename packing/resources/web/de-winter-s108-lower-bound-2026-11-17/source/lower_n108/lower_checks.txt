@@ -1,0 +1,4 @@
+PASS. 401 directions verified, 266,337,510 branch-and-bound nodes.
+Independent axis integration = 1.007478833692. Scaling all masses by 99/100 gives 0.997404045355, below 1.
+Mass 10799999/100000 in 823 rectangle orbits. Base side 1063/100.
+Lower bound for 108 and 109 = 1700799526134255846599/159999384348528500000 = 10.6300379408297263703123176570767509670882582933393041651329...

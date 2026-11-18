@@ -1,0 +1,27 @@
+{
+  "kind": "dilated-measure-audit/v1",
+  "packet": "de-winter-s108-lower-bound-2026-11-17",
+  "certificate": "mixed_n108_L1063",
+  "n": 108,
+  "L": "1063/100",
+  "digests": {
+    "candidate": "packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/n108_measure.json.gz",
+    "candidate_sha256": "bd471f6541874a6f6a057c57b8804812563859d83a0f2e1a1aa7595dad32d0da",
+    "candidate_sha256_stated": "bd471f6541874a6f6a057c57b8804812563859d83a0f2e1a1aa7595dad32d0da",
+    "text_sha256": "d4d160901461bd9e3769db1dbace4b00d2e0afb57429dcd3c7467f06c5ced9d8",
+    "text_sha256_stated": "d4d160901461bd9e3769db1dbace4b00d2e0afb57429dcd3c7467f06c5ced9d8",
+    "base": "packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz",
+    "base_stored_sha256": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+    "base_stored_sha256_stated": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+    "base_text_sha256": "4d72da64052667a3ebf057f7e78ea9d40f1521a0b86ddef210a2be319d27042a",
+    "base_text_sha256_stated": "4d72da64052667a3ebf057f7e78ea9d40f1521a0b86ddef210a2be319d27042a",
+    "regenerated_text_sha256": "d4d160901461bd9e3769db1dbace4b00d2e0afb57429dcd3c7467f06c5ced9d8"
+  },
+  "file": {"n_matches":true,"side_matches":true,"format_m":true,"keys_known":true,"every_row_a_rectangle_of_four_and_a_mass":true,"scaling_factor":null,"scaling_factor_absent_or_one":true,"proof_net_keys":["last","step"],"proof_net_exact_keys":true,"count_is_last_plus_one":true,"no_top_level_net":true,"no_certificate_metadata":true,"rows":823,"every_mass_nonnegative":true,"every_rectangle_nondegenerate":true,"every_rectangle_inside":true,"total_mass":"10799999/100000","total_mass_equals_stated":true,"mass_gap":"1/100000","mass_is_n_minus_1_100000":true,"mass_below_n":true,"densest_row":"252836932726824493665261697200000000000000000000000000000000/841266896637397690382438530126291369095325320131939977","densest_row_approx":300543.0663412899,"eight_densest_within_2_32":true},
+  "lemma_n0": {"B":"12487/12500","D":"83/80000","angle_count":401,"net_last_tangent":"83/200","a_step_positive_and_count_in_range":true,"b_shrink":"999996421/1000000000","b_shrink_below_one":true,"c_endpoint":"89/40000","c_endpoint_positive":true,"d_last_tangent_at_most_half":true,"e_tangent_form":"319998768697057/319999913887500","e_tangent_form_below_one":true},
+  "dilation": {"lambda":"1063/1062","core_is_the_declared_core":true,"same_row_count":true,"every_rectangle_lambda_times_base":true,"every_mass_equal":true,"total_mass_equal":true,"regenerated_text_is_the_certificate":true},
+  "enlargement": {"z0":"83/160000","u":"319998768697057/320000086112500","u_approx":0.9999958830778485,"h":"707107/1000000","side":"1700799526134255846599/159999384348528500000","side_approx":10.630037940829727,"claimed":"1700799526134255846599/159999384348528500000","side_is_the_claim":true,"claim_above_L":true,"h_squared_above_half":true,"two_h_below_L":true,"u_between_zero_and_one":true,"w_increases_through_z0":true,"scaled_box_is_L":true},
+  "observations": {"base_net":{"step":"83/40000","last":200},"base_step":"83/40000","dilated_core_on_base_net":"141700766911/141600000000","base_net_admits_dilated_core":false,"axis_domain_growth_in_base_coordinates":"1/2126","shared_node_growth_in_base_coordinates":{"shared_nodes":201,"new_nodes":200,"least":"-15874295702912724889/348325058549272867514014","least_approx":-4.5573223382282736e-05,"least_at":2,"most":"318041969097825952079/478109041386617559000046","most_approx":0.00066520802069636,"most_at":400},"route_ceiling":"106200/9977","side_below_ceiling":true,"lambda_times_base_core":"10605551/10620000","declared_core_above_lambda_times_base_core":true},
+  "status": "PREMISES_HOLD",
+  "decides": "no coverage: the premises, the dilation and the regeneration only, and the enlargement's arithmetic; the observations are reported and required of nothing"
+}
