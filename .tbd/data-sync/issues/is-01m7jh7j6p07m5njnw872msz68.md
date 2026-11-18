@@ -5,15 +5,15 @@ title: "Stage 4 blind review of #1005's, #1006's and #1007's certificates (292 t
 kind: task
 status: in_progress
 priority: 1
-version: 11
-delegate: w3-pass-1117r
+version: 12
+delegate: w3r-pass-1118
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:21.494Z
-updated_at: 2026-11-18T00:42:41.190Z
+updated_at: 2026-11-18T01:19:30.506Z
 started_at: 2026-11-16T15:58:24.873Z
 ---
 
