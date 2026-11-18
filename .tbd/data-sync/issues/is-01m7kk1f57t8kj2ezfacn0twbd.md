@@ -5,7 +5,7 @@ title: "#1008 follow-up: record T-057's own sources (Arslanov, Mustafin and Shan
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: w10-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:48:13.350Z
-updated_at: 2026-11-18T08:10:19.638Z
+updated_at: 2026-11-18T08:28:06.634Z
 started_at: 2026-11-18T07:57:12.045Z
 ---
 Joost de Winter's jlevy/squares#1008 (2026-11-16T22:06:21Z) says T-057 uses the construction of Arslanov, Mustafin and Shangitbayev (2021), two tilted components combined with two grids, '[and other sources]', made with GPT-6 Astra, and that he has added these sources to the README of JoostdeWinter/square-packing-211. Read at 2026-11-17T01:37Z: head still 702df9bb (2026-09-16), README 84 bytes, no sources; no other branch. By runbook stage 2 (credit is read from the source's own files) and attribution.md (Credit Text and Lineage) the credit stays 'de Winter' until a published revision names them. When it does: retain/pin the new revision (a new bibliography key for that release, epistemics.md 'When a later release changes its attribution'), set T-057's credit to de Winter after the named sources, and carry them by the chain rule to every line through T-057 at 211: T-098 ([evand exact optima 2026-10-05]), T-175, T-181, T-182, T-188, T-253 and, through T-188, T-243 at 182. Blocked on the author (blocked:author on #1008).
@@ -27,3 +27,5 @@ Joost de Winter's jlevy/squares#1008 (2026-11-16T22:06:21Z) says T-057 uses the 
 2026-11-18T07:57Z w9-records-1118: #1032 merged 07:53:49Z as 50962004c (the read of 43e15330, question answered, blocked removed); #1008's blocked:author label removed after the merge. This bead owns the remaining recording and the #1008 follow-up check_requests --report marks due.
 
 2026-11-18T08:25Z w10-1118: claimed. Branch claude/keen-galileo-9gbz1a reset to main 50962004c; WIP 2d4884a18 pushed: packet de-winter-square-packing-211-2026-11-18 retains README.md at 43e15330 (SHA-256 10f0fba2910e028340e1c2e89903c10c27c3d5cfa19297d4443dc9523e72f9a7, 1413 bytes; json/svg pinned, unchanged blobs), key [de Winter n211 2026-11-18] (credit de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth; short de Winter after Arslanov et al.), T-057 attribution -> new key (evidence stays 09-16), chain credits T-098/T-175/T-181/T-182/T-188/T-243/T-253/T-287 gain the five names after de Winter (a name already held keeps its place), coverage source added, n-211.md packing paragraph rewritten. NEXT: contributor_census --reconcile + joins, regenerate RESULTS.md/n-241.md, result-requests #1008, release record, validate, PR.
+
+2026-11-18T08:50Z w10-1118: draft PR https://github.com/jlevy/squares/pull/1035 (labels intake, S2) at head ebe331da1 (base main 50962004c). Commits: 2d4884a18 packet+key+register; e4387243e census joins + renders; 066f32dc2 requests ask done + no-public-change record; 5c4c6cbe4 re-pin (subject wrongly says 066f32dc; pin was e4387243); 786ab6aae URL amendment for result/t-057 + paragraph splits (subject mislabelled 're-pin to e4387243' after a lock refused the records commit); ebe331da1 re-pin to 786ab6aa. Papers unchanged (184 files byte-identical). Records tier rerun in progress. NEXT: green CI, then SendMessage coordinator for senior review.
