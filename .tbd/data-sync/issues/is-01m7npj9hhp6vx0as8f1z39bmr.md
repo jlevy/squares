@@ -5,7 +5,7 @@ title: "Apply the 17 November owner decisions' record changes: close #574 with t
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: w4r-records-1118
 labels:
   - intake
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.249Z
-updated_at: 2026-11-18T02:55:46.691Z
+updated_at: 2026-11-18T03:15:36.289Z
 started_at: 2026-11-17T21:29:36.275Z
 ---
 
@@ -39,3 +39,5 @@ started_at: 2026-11-17T21:29:36.275Z
 2026-11-18T02:45Z w4r-records-1118: records PR https://github.com/jlevy/squares/pull/1026 (draft, intake), head 708a002d6 (c38f6e7b3 other lanes' replies, d0f2ad96c this lane's replies + #1012 blocked: author + #1008 answer bead think-a88h, 8e221bb09 merge of main a1a8d0aae, 708a002d6 no-change record), base main a1a8d0aae. Records tier 55/55, test_check_requests 126 passed; edit tier running. Closed already (settled by #1016's merge, check_bead_tree ok): think-x6nk, think-xnj5, think-cs9x, think-qvp6, think-2z2n, think-x5l3. Next: hosted CI, review request to the coordinator, address, merge, label #1012, close beads.
 
 2026-11-18T02:55Z w4r-records-1118: #1026 head 1a1dbc103 (adds 6c1aa5198, w1r's #446/#532 replies after #909 and #532's T-132 ask done; 1a1dbc103 no-change record re-measured). Records tier 55/55; edit tier 70/71 (type floor timed out at 900 s under load; basedpyright/ruff clean on the one changed test file). Waiting for hosted CI, then the review request.
+
+2026-11-18T03:15Z w4r-records-1118: #1026 green at 1a1dbc103 (runs 44226177904, 44226177903, 44226170161), mergeable CLEAN against main a1a8d0aae; review requested from the coordinator. Worktree held untouched until the review returns.
