@@ -5,17 +5,19 @@ title: "R-1031: blind stage 4 review of #1031 (de Winter s(299)), the review lan
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: r1031-1118
 labels:
   - intake
   - validation
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+child_order_hints:
+  - is-01m7pxznydeyqez4h6snhegtmc
 hold: null
 hold_until: null
 created_at: 2026-11-18T07:47:50.877Z
-updated_at: 2026-11-18T08:35:13.547Z
+updated_at: 2026-11-18T08:57:12.397Z
 started_at: 2026-11-18T07:48:37.747Z
 ---
 
