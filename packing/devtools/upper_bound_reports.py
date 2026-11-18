@@ -1877,6 +1877,13 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[de Winter upper bounds 262 295 2026-11-16]": _import(
         "de-winter-upper-bounds-262-295-2026-11-16"
     ),
+    # Lane w6-dewinter-1118 of 18 November (think-zqot): Joost de Winter's three reports at
+    # 127 on 17 November, issues 1015, 1017 and 1020, each a smaller certificate of a band of
+    # 57 tilted squares from an arrangement in the Kaggle compilations of Alex Chilton and
+    # Asterios Panoras, at the three commits that carried them. One packet per pin.
+    "[de Winter s127 issue 1015 2026-11-17]": _import("de-winter-s127-issue1015-2026-11-17"),
+    "[de Winter s127 issue 1017 2026-11-17]": _import("de-winter-s127-issue1017-2026-11-17"),
+    "[de Winter s127 issue 1020 2026-11-17]": _import("de-winter-s127-issue1020-2026-11-17"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
