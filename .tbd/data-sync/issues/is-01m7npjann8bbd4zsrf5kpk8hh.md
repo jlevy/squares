@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: w4r-records-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-18T08:22:09.031Z
+updated_at: 2026-11-18T08:45:03.011Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -58,3 +58,5 @@ Credit (proposal, to settle at stage 3 after measuring identity): the certificat
 Price: both maintained exact routes on one 109-square witness, minutes; sharp controls (plan hashed first); measure_identity vs the house and vs Samanyu-dev's 53551d7 109; contraction_margin; then a blind stage 4 review; adoption and both strong regularizers at 109 (house rule), each minutes to an hour. Far under the 40 CPU-h cap.
 
 Disposition: stages 2-3 on branch claude/keen-galileo-9gbz1a after think-a88h's PR merges; read_through moves to 2026-11-18T07:33:46Z; blocked:author lifts (files arrived) after the merge of that change.
+
+2026-11-18T09:05Z w10-1118, stage 1 measurements (scratch only, nothing committed; devtools.measure_identity from main's tree on binary64 forms of the two CSVs, converted by a scratch script): Kodaj's 109 (the attachment's CSV) against Samanyu-dev/squares_in_squares 53551d7 best_fit_101_500.csv's 109 (blob b2c6a7e0, file SHA-256 377b9177...6c04): nearest centres ONE TO ONE, largest displacement 0.0255, none beyond 0.1, 5 beyond 1e-2, 37 beyond 1e-3, 8 turned beyond 1e-6 (largest 0.0048 degrees), all 45 tilted squares paired same sign; side 1.94e-12 smaller. So it is Samanyu-dev's merged 109 arrangement, slightly refined, not a new arrangement relative to it. Against the house (Daniel's n-109.cert, T-101): not one to one, optimal assignment moves 56 squares beyond 0.1 (largest 0.824); 45 tilts near 23-29.5 degrees vs the house's 49 at 45 degrees: a new arrangement relative to the house. contraction_margin does not read binary64-xyd, so the predecessor's shrink-to-contact (option D) is not measured yet; the witness-corners adapter refuses the attachment's witness (square ids square-0.., not 1..n), so stage 2 needs a renumbered derived fact. Credit consequence: the arrangement's first publication found is Samanyu-dev's merge of 7 Nov (per-puzzle author unidentified) or Fonseca's 6 Nov pinwheel (not readable); Kodaj's CC0 dataset (13 Nov) is the certificate's source. OWNER QUESTION (bead to be opened at stage 3): credit at 109 -- Kodaj, as the source of the exact-certifiable coordinates, with Samanyu-dev's 7 Nov publication of the arrangement and Fonseca's 6 Nov pinwheel stated as priority; or Samanyu-dev (and the leaderboard author, unknown) as finder with Kodaj as refiner; and whether option D, which names registered predecessors, reaches an unregistered public predecessor like Samanyu-dev's.
