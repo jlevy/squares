@@ -1054,6 +1054,7 @@ case or experiment separately.
 | [Regularization of the Exact Algebraic Houses (think-mbdw)](packing/cases/regularized_drawings/think-mbdw-2026-10-26/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs on the Four Decimal Kingbird Witnesses (think-yk2h)](packing/cases/regularized_drawings/think-yk2h-2026-10-31/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the 24 October Adoption of T-231 (think-h01y)](packing/cases/regularized_drawings/think-h01y-2026-10-24/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption at 172 and 199 (think-8yyy)](packing/cases/regularized_drawings/think-8yyy-2026-11-18/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
