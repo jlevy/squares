@@ -5,7 +5,7 @@ title: "Stage 4 review of T-144's mixed_n122_L1126 (wand125 s(122) >= 563/50, n 
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: r144-1118
 labels:
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m4kbxna1xdmjd8nkka3wax60
 hold: null
 hold_until: null
 created_at: 2026-11-18T05:36:22.990Z
-updated_at: 2026-11-18T06:04:09.525Z
+updated_at: 2026-11-18T06:14:13.951Z
 started_at: 2026-11-18T05:37:37.484Z
 ---
 T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L1126, raising n = 122 to 126; V0/C0 on main) has no review that reads its certificate: the 11 October final review (docs/project/reviews/review-2026-10-11-final-lower-bounds.md) read the record and premises only. result-import.md stage 4 needs a mapped mathematical review before the complete replay's evidence moves the verified lane (check_results verified_lane_review_problems), as the 14 October review did for T-179 and the 4/11 November reviews for T-142 and T-143.
@@ -29,3 +29,5 @@ T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L
 ## Notes
 
 2026-11-18 06:25Z r144-1118: checker and controls plan frozen and pushed at ee66533d0f (branch claude/intake-2026-11-18-review-t144), packet packing/resources/web/wand125-linear-n122-review-2026-11-18/. Source fetched by this lane at a9f76c3 and the asset at 6443eae0...5deb (scratch only). Synthetic selftest passed. Next: run RC1-RC6 on the certificate.
+
+2026-11-18 06:14Z r144-1118: correction, the freeze note's time was 06:03:49Z (commit ee66533d0f), not 06:25Z. Receipts of RC1 to RC6 pushed at 15d8a8ab8b: premises hold, 201 inputs encode the candidate, node 0 decided exactly (least capture 1.0039577044...), nodes 37, 108, 180, 200, 1 decided by the lane's branch and bound, 99/100 mutants refused with exact witnesses, no capture below 1 at 1,608 poses and a 24-node search. The coordinator approved deciding all 201 nodes (1 process, nice 19, stop at 2 CPU-hours): running from 06:14Z, receipts under out/bnb-all/.
