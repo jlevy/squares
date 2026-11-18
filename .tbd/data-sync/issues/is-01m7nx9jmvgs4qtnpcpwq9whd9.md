@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T02:21:40.163Z
+updated_at: 2026-11-18T02:26:15.245Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -34,3 +34,5 @@ R-127 (blind review), 2026-11-18 02:03Z: checker and controls plan frozen and pu
 2026-11-18T02:21Z w6-dewinter-1118: records committed and pushed at d4d2866de (merged main a1a8d0aae, #909): T-314..T-316 PROVISIONAL ids for #1015/#1017/#1020 (S3/S2/S1, V3/C3 on the replay); renumber to T-327..T-329 when import-1009 (T-314..T-326) merges first. Records tier passed but for the synopsis count (fixed). No-public-change record written (explainer differs only by register count 316 vs 313). Waiting on: R-127 review to map; import-1009 merge; then adoption at 127 (house -> #1020's) and regularization.
 
 R-127 (blind review), 2026-11-18 02:40Z: runs done and pushed (branch claude/intake-2026-11-18-review-1015). Writing the findings; freeze next.
+
+2026-11-18T02:31Z w6-dewinter-1118: draft PR https://github.com/jlevy/squares/pull/1024 opened at d4d2866de (labels intake, S3), provisional ids T-314..T-316 (to be T-327..T-329 after #1023, import-1009, merges).
