@@ -4845,6 +4845,14 @@ issues:
       - result: fine-net-n27-5655-followup
         id: E-wand125-fine-net-n27-5655-followup-sqverify-fast-replay
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6965326853
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n28
+        id: E-wand125-fine-net-lower-bounds-446-report
+        status: recorded
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -8516,6 +8524,12 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/532#issuecomment-6965326217
+      date: '2026-11-18'
+      by: jlevy
+      kind: follow-up
+      reported: []
+      beads: [think-r333, think-nd7g]
     blocked:
       type: compute
       reason: >-
@@ -25158,7 +25172,8 @@ issues:
       declared net — review tracking'
     author: jlevy
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -25172,8 +25187,8 @@ issues:
       whole-net control passed (think-i85v); the separately prompted review of 11 November
       accepted it again. T-142 is V3/C3, and the case record at n = 28 takes 2297/400 in both
       lower lanes in the pass of 17 November, when the owner lifted the order of 11 October
-      that had queued the replay after think-ux1v (think-fibh, #908); the reply that reports
-      the rungs is owed.
+      that had queued the replay after think-ux1v (think-fibh, #908). The final reply of 18
+      November 2026 reports the rungs and closes the issue.
     read_through: '2026-10-24T05:13:16Z'
     results:
     - key: mixed-n28-57425
@@ -25201,6 +25216,37 @@ issues:
       - result: mixed-n28-57425
         id: E-wand125-fine-net-n28-57425-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/776#issuecomment-6963938807
+      date: '2026-11-17'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: mixed-n28-57425
+        id: T-142
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: mixed-n28-57425
+        id: E-wand125-fine-net-n28-57425-report
+        status: reviewed
+    - url: https://github.com/jlevy/squares/issues/776#issuecomment-6965313743
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: mixed-n28-57425
+        id: T-142
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: mixed-n28-57425
+        id: E-wand125-fine-net-n28-57425-report
+        status: reviewed
+      - result: mixed-n28-57425
+        id: E-wand125-fine-net-n28-57425-sqverify-fast-replay
+        status: confirmed
     review_track: true
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
@@ -25210,7 +25256,8 @@ issues:
       declared net — review tracking'
     author: jlevy
     opened: '2026-10-24'
-    state: open
+    state: closed
+    closed: '2026-11-18'
     kind: result-report
     triage: done
     summary: >-
@@ -25224,8 +25271,8 @@ issues:
       whole-net control passed (think-i85v); the separately prompted review of 11 November
       accepted it again. T-143 is V3/C3, and the case record at n = 30 takes 2357/400 in both
       lower lanes in the pass of 17 November, when the owner lifted the order of 11 October
-      that had queued the replay after think-ux1v (think-fibh, #908); the reply that reports
-      the rungs is owed.
+      that had queued the replay after think-ux1v (think-fibh, #908). The final reply of 18
+      November 2026 reports the rungs and closes the issue.
     read_through: '2026-10-24T05:13:18Z'
     results:
     - key: mixed-n30-58925
@@ -25253,6 +25300,37 @@ issues:
       - result: mixed-n30-58925
         id: E-wand125-fine-net-n30-58925-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/777#issuecomment-6963939109
+      date: '2026-11-17'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: mixed-n30-58925
+        id: T-143
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: pending adoption
+      - result: mixed-n30-58925
+        id: E-wand125-fine-net-n30-58925-report
+        status: reviewed
+    - url: https://github.com/jlevy/squares/issues/777#issuecomment-6965314300
+      date: '2026-11-18'
+      by: jlevy
+      kind: final
+      reported:
+      - result: mixed-n30-58925
+        id: T-143
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: mixed-n30-58925
+        id: E-wand125-fine-net-n30-58925-report
+        status: reviewed
+      - result: mixed-n30-58925
+        id: E-wand125-fine-net-n30-58925-sqverify-fast-replay
+        status: confirmed
     review_track: true
     close_when: >-
       The census, its control and the review its C3 needs have landed on main, and the reply
@@ -36060,12 +36138,26 @@ issues:
         November 2026 its head was still 702df9bb of 16 September, on its only branch, with the
         84-byte README naming none, and the issue leaves the other sources unnamed. think-a88h
         records them when a published revision names them.
+    awaiting_author:
+    - question: >-
+        Could you push the README revision of JoostdeWinter/square-packing-211 that names T-057's
+        sources, and name the "other sources" in it? When last read, at 21:37Z on 17 November
+        2026, its head was still 702df9bb, whose 84-byte README names no prior work.
+      changes: lineage
+      asked: https://github.com/jlevy/squares/issues/1008#issuecomment-6964537872
+      state: awaiting
     beads:
     - think-dp8t
     - think-a88h
     - think-dw3n
     answer_bead: think-dp8t
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1008#issuecomment-6964537872
+      date: '2026-11-17'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+      beads: [think-a88h]
     blocked:
       type: author
       reason: >-
