@@ -4,6 +4,8 @@ components:
   - paper:n11-threshold-bound-review
   - paper:square-packing-methods-survey
 paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
   - packing/campaign/result-requests.yaml
   - packing/frontier/n-108.md
   - packing/frontier/results.yaml
@@ -18,21 +20,23 @@ outputs:
   - papers/square-packing-methods-survey.html
   - papers/square-packing-methods-survey.md
 reason: >-
-  Intake lane w6-dewinter-1118 of 18 November (think-i5en): Joost de Winter's issue 1018 is
-  retained, audited and replayed by the census, and its lower bound at 108 and 109 is
-  registered as T-314, which moves the reported lower lanes at both counts; the requests entry,
-  the coverage source and the case records follow. No paper prints 108's or 109's lower bounds,
-  this entry or that source. Against origin/main a1a8d0aae (#909): devtools.compare_paper_renders
-  rendered each paper into empty site directories, the math passes in
-  /opt/pw-browsers/chromium-1243/chrome-linux64/chrome (SQPACK_CHROMIUM), twice from this tree
-  and once with that main's copies of the four paths above swapped in. The optimality review,
-  the threshold-bound review and the methods survey are byte-identical across the three, 43
-  files each. The explainer's 55 files are deterministic, and only its Markdown and HTML differ
-  from the baseline; rendered again from this tree and with main's results.yaml swapped in, the
-  one difference in each is the register count the explainer reads ("one of N results the
-  framework has registered so far"), 314 here and 313 on main. The novelty count is unchanged
-  (T-314 is previously-published), and the bound citation it reads is n = 11's, which this
-  change does not touch. So the change is the live register count, which follows the site's
-  data and is not a revision of the paper, as the earlier intake records say. No PDF was
-  printed; each prints from that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4
-  and v0.2.7.
+  Intake lanes w6-dewinter-1118 and w6r-dewinter-1118 of 18 November (think-i5en): Joost de
+  Winter's issue 1018 is retained, audited and replayed by the census, its stage 4 review
+  (#1027) is mapped, and its lower bound at 108 and 109 is registered as T-314 at V3/C3, which
+  moves both lower lanes at both counts; the requests entry, the coverage source, the case
+  records, the composite figure record and the bound citations follow. No paper prints 108's
+  or 109's lower bounds, this entry or that source. Against main 3ac78a55f9 (#1027):
+  devtools.compare_paper_renders rendered each paper into empty site directories, the math
+  passes in /opt/pw-browsers/chromium-1243/chrome-linux64/chrome (SQPACK_CHROMIUM), twice from
+  this tree and once with that main's copies of the six paths above swapped in. The
+  optimality review, the threshold-bound review and the methods survey are byte-identical
+  across the three, 43 files each. The explainer's 55 files are deterministic, and only its
+  Markdown and HTML differ from the baseline; rendered again with main's copies of every path
+  but results.yaml swapped in, all 55 are byte-identical, so the difference is results.yaml's
+  alone: the register count the explainer reads ("one of N results the framework has
+  registered so far"), 314 here and 313 on main, as the first measurement of this record found
+  against a1a8d0aae. The novelty count is unchanged (T-314 is previously-published), and the
+  bound citation it reads is n = 11's, which this change does not touch. So the change is the
+  live register count, which follows the site's data and is not a revision of the paper, as
+  the earlier intake records say. No PDF was printed; each prints from that HTML. Every paper
+  keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
