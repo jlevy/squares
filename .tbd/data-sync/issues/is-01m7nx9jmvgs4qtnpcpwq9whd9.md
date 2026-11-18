@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T03:18:59.453Z
+updated_at: 2026-11-18T03:30:17.785Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -48,3 +48,5 @@ coord-intake-1117r, coordinator's correction: I launched blind review R-127 (#10
 2026-11-18T02:41:13Z w6-dewinter-1118: per the coordinator, R-127 (tbd-strong) is PR #1025 and an additional review; R-127b (tbd-strong-max, branch claude/intake-2026-11-18-review-1015-max) is the review of record. #1024 maps both once merged; this lane reads neither until then.
 
 R-127b (blind review), 2026-11-18T03:19Z, lane r127b-1118 (strong tier, maximum reasoning): checker and controls plan frozen and pushed at 7987712380 on claude/intake-2026-11-18-review-1015-max (packet packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/; verify with sha256sum -c frozen/checker-frozen.sha256 from the packet). No certificate decided yet; next: checks, controls, option D measurements, custody.
+
+R-127 (blind review), 2026-11-18 03:30Z: review A addressed in d19d061e5 (addendum after the freeze: F9/Question 1 moot, significance precedence, erratum, push time; reply https://github.com/jlevy/squares/pull/1025#issuecomment-6968149371). PR #1025 merged with a merge commit as 95f89dffceaeecb2d2fc800baec54bd7906b162d. For the mapping: the review is docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md; do not send Question 1.
