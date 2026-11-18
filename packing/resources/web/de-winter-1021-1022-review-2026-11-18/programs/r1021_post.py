@@ -12,6 +12,12 @@ T-289 and T-283.  The frozen reader refuses two layouts these predecessors use:
 - Polkovskyi's evand-cert text files: a comment line, "n side", then one line
   "x y r" per square, r a rational whose meaning this program does not assume.
 
+The frozen reader also takes only ASCII, and the house witnesses on main before #1023
+name Ozden with a diaeresis in their source key; the comparison with them decides
+nothing, and this program replaces that character by '?' on lines holding no scalar
+and removes their certificate block (a verifier's result holding the flow collection
+`failures: []`, which the frozen reader also refuses).
+
 This program removes the quotes from side and corner lines only, checks with
 PyYAML's loader that every value is unchanged, and reads each .cert line by the
 frozen scalar grammar.  It tries four readings of r (r = tan(t/2), r = cot(t/2),
@@ -22,6 +28,7 @@ r1021_identity, r1021_measure's functions, r1021_controls' writer).
 
 Usage: python -I -B r1021_post.py SRC_DIR T289 T283 POLK_DIR WIT0_DIR WIT1_DIR OUT_DIR
        python -I -B r1021_post.py unquote IN OUT
+       python -I -B r1021_post.py compare IN OUT
        python -I -B r1021_post.py cert CERT UNQUOTED_WITNESS OUT_FORM_J
 
 SRC_DIR holds de Winter's four files; T289 and T283 the houses' certificates;
@@ -79,6 +86,56 @@ def unquote(raw: bytes) -> tuple[bytes, int, bool]:
         and str(sa["id"]) == str(sb["id"])
         for sa, sb in zip(a["squares"], b["squares"], strict=True))
     return new, changed, same
+
+
+def to_ascii(raw: bytes) -> tuple[bytes, int, bool]:
+    """Replace each non-ASCII character by '?' on lines that hold no scalar of the side or a
+    square (the frozen reader takes only ASCII; on main the old house witnesses' source key
+    names Ozden with a diaeresis).  Return the bytes, the lines changed, and whether PyYAML
+    reads the side, n and every square of the two files as the same text."""
+    text = raw.decode("utf-8")
+    out = []
+    changed = 0
+    for ln in text.split("\n"):
+        if any(ord(ch) > 127 for ch in ln):
+            if ln.startswith(("  side:", "    - ", "      - ", "    center:", "    basis:")):
+                msg = "non-ASCII text on a scalar line"
+                raise rd.ReadError(msg)
+            ln = "".join(ch if ord(ch) < 128 else "?" for ch in ln)
+            changed += 1
+        out.append(ln)
+    new = "\n".join(out).encode("ascii")
+    a = yaml.load(raw, Loader=yaml.CSafeLoader)["witness"]
+    b = yaml.load(new, Loader=yaml.CSafeLoader)["witness"]
+    same = str(a["side"]) == str(b["side"]) and a["n"] == b["n"] and a["squares"] == b["squares"]
+    return new, changed, same
+
+
+def for_comparison(raw: bytes) -> tuple[bytes, dict]:
+    """A house witness made readable by the frozen centre-basis reader, for a comparison that
+    decides nothing: to_ascii, then the witness's certificate block (a verifier's result,
+    holding the flow collection `failures: []`) removed.  PyYAML must read the side, n, the
+    squares and the claim of the two files alike."""
+    asc, changed, same = to_ascii(raw)
+    lines = asc.decode("ascii").split("\n")
+    out = []
+    skipping = False
+    dropped = 0
+    for ln in lines:
+        if ln == "  certificate:":
+            skipping = True
+        elif skipping and not ln.startswith("    ") and ln.strip():
+            skipping = False
+        if skipping:
+            dropped += 1
+            continue
+        out.append(ln)
+    new = "\n".join(out).encode("ascii")
+    a = yaml.load(raw, Loader=yaml.CSafeLoader)["witness"]
+    b = yaml.load(new, Loader=yaml.CSafeLoader)["witness"]
+    keep = all(a[k] == b[k] for k in ("side", "n", "squares", "claim"))
+    return new, {"ascii_lines_changed": changed, "certificate_block_lines_dropped": dropped,
+                 "values_unchanged": same and keep}
 
 
 def read_cert(raw: bytes):
@@ -166,6 +223,11 @@ def main(argv: list[str]) -> int:
         write(argv[2], new)
         print(argv[1], "lines unquoted", changed, "values unchanged", same, "sha256", sha(new))
         return 0 if same else 1
+    if len(argv) == 3 and argv[0] == "compare":  # r1021_post.py compare IN OUT
+        new, conv = for_comparison(open(argv[1], "rb").read())
+        write(argv[2], new)
+        print(argv[1], conv, "sha256", sha(new))
+        return 0 if conv["values_unchanged"] else 1
     if len(argv) == 4 and argv[0] == "cert":  # r1021_post.py cert CERT UNQUOTED_WITNESS OUT_FORM_J
         fw = rd.read_corners(open(argv[2], "rb").read(), "square-k", "form C")
         raw_j, info = cert_to_form_j(open(argv[1], "rb").read(), fw["squares"])
@@ -228,10 +290,11 @@ def main(argv: list[str]) -> int:
             step(house_id, house, s_house, c_h, succ_label, succ, s_succ),
             step(house_id, house, s_house, c_h, polk_id, polk_poses, s_polk),
         ]
-        entry["house_witness_on_main_before_1023"] = msr.house_witness_compare(house, s_house,
-                                                                                open(_os.path.join(wit0, f"n-{n}.yaml"), "rb").read())
-        entry["house_witness_on_main_after_1023"] = msr.house_witness_compare(polk_poses, s_polk,
-                                                                               open(_os.path.join(wit1, f"n-{n}.yaml"), "rb").read())
+        for key, wdir, poses_, side_ in (("house_witness_on_main_before_1023", wit0, house, s_house),
+                                         ("house_witness_on_main_after_1023", wit1, polk_poses, s_polk)):
+            raw_w = open(_os.path.join(wdir, f"n-{n}.yaml"), "rb").read()
+            raw_wa, conv = for_comparison(raw_w)
+            entry[key] = {"witness_sha256": sha(raw_w), **conv, **msr.house_witness_compare(poses_, side_, raw_wa)}
         rec["counts"][str(n)] = entry
         for s_ in entry["steps"]:
             print(n, s_["step"], "gain", s_["gain"], "margin", s_["predecessor_margin"], "ratio", s_["gain_over_margin"],
