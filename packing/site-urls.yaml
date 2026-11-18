@@ -25860,6 +25860,80 @@ urls:
     - packing/devtools/measure_identity.py
     - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
+- path: result/t-331.html
+  canonical: result/t-331.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-18'
+  lastmod: '2026-11-18'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 268
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s268 upper bound 2026-11-17]'
+      published: '2026-11-17'
+    builds_on: null
+    evidence:
+    - E-de-winter-1021-certificate-report
+    - E-de-winter-1021-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/source/n268/n268_exact.json.gz
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/contraction-n268.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/contraction-n268-own.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/controls-plan-268-270.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+- path: result/t-332.html
+  canonical: result/t-332.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-18'
+  lastmod: '2026-11-18'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 270
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s270 upper bound 2026-11-17]'
+      published: '2026-11-17'
+    builds_on: null
+    evidence:
+    - E-de-winter-1022-certificate-report
+    - E-de-winter-1022-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/source/n270/n270_exact.json.gz
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/contraction-n270.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/contraction-n270-own.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/controls-plan-268-270.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
 - path: results.html
   canonical: results.html
   kind: page
