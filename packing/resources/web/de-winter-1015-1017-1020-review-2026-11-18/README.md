@@ -28,9 +28,9 @@ lists check from this directory alone; the import lane retains its own copies.
 | #1020 | the same | `source/i1020-a1ba501/n127/n127_witness.yaml.gz` | `c5e0dec86b7caeb84980aafef1b5290641cb5ae2` | `19597239cdf162cbac5c12a6e60547ce0771f0b02078446517ad3e5d3dabb31e` |
 
 The Git blobs and SHA-256 are of the uncompressed bytes; the blobs equal the pinned
-trees’. The issues state no digest. The authors’ `n127/SHA256SUMS` at `35b576a` lists the
-first two digests; at `cc20a26` it is the same file, and at `a1ba501` it lists the two
-`cc20a26` digests (the review’s F9).
+trees’. The issues state no digest.
+The authors’ `n127/SHA256SUMS` at `35b576a` lists the first two digests; at `cc20a26` it
+is the same file, and at `a1ba501` it lists the two `cc20a26` digests (the review’s F9).
 
 T-305, the house at 127, is read from its retained copy in
 [`../joegun-upper-bounds-2026-11-16/source/n-127-candidate.yaml`](../joegun-upper-bounds-2026-11-16/source/n-127-candidate.yaml)
@@ -50,9 +50,10 @@ T-305, the house at 127, is read from its retained copy in
 
 Every program is lane r127-1118’s own, written for this review as a clean-room
 implementation: it imports nothing from this repository or the sources, and reuses no
-code of any earlier review. Each was run with CPython 3.14.7 (the project interpreter)
-as `python -I -B`, under `nice -n 19`, at most two at a time; the entry points put
-their own directory on the module path, since `-I` leaves it off.
+code of any earlier review.
+Each was run with CPython 3.14.7 (the project interpreter) as `python -I -B`, under
+`nice -n 19`, at most two at a time; the entry points put their own directory on the
+module path, since `-I` leaves it off.
 
 | Program | Decides | Reads | Writes |
 | --- | --- | --- | --- |
@@ -73,10 +74,10 @@ their own directory on the module path, since `-I` leaves it off.
 | `r127_compare.py` | nothing: this review’s contraction receipt against the maintained tool’s, exactly; written after the checker freeze | receipts | `out/compare-maintained.json` |
 
 `programs/controls-plan.json` is the plan, written and hashed before any program read a
-certificate; its outcomes are rules over each certificate’s exact facts. Each report’s
-centre file runs every control and its witness file the ones the plan marks for twins;
-the twin runs also carry S0 and S1b, which the plan lists for the first files only (the
-review’s F12).
+certificate; its outcomes are rules over each certificate’s exact facts.
+Each report’s centre file runs every control and its witness file the ones the plan
+marks for twins; the twin runs also carry S0 and S1b, which the plan lists for the first
+files only (the review’s F12).
 
 ## Running It
 
