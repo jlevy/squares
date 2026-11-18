@@ -1058,19 +1058,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-171.svg"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s172-upper-bound/blob/2ce1f7c7621859437e0bcc1f9ad2b00822b2c605/n-172-candidate.yaml at 2ce1f7c7621859437e0bcc1f9ad2b00822b2c605",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/c4e65d0b8c4d32e45bf32a907e8b760502f137af/n172/n172_witness.yaml at c4e65d0b8c4d32e45bf32a907e8b760502f137af",
       "kind": "packet-derived-facts",
-      "license_status": "CC-BY-4.0",
+      "license_status": "MIT",
       "listed_n": [
         172
       ],
       "n": 172,
-      "path": "resources/web/ozden-s172-upper-bound-2026-11-09/source/n-172-candidate.yaml",
+      "path": "resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/n172_witness.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-09",
+      "retrieved": "2026-11-11",
       "source_n": 172,
-      "url": "https://github.com/kenaznia-doga/s172-upper-bound/blob/2ce1f7c7621859437e0bcc1f9ad2b00822b2c605/n-172-candidate.yaml"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/c4e65d0b8c4d32e45bf32a907e8b760502f137af/n172/n172_witness.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1263,19 +1263,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-198.svg"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s199-upper-bound/blob/d03ee0bdb223e00fe124e818ed242f6cbd714fad/n-199-candidate.yaml at d03ee0bdb223e00fe124e818ed242f6cbd714fad",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/702c7af2db04c9b69696455ee3d33883a2935e8a/n199/n199_witness.yaml at 702c7af2db04c9b69696455ee3d33883a2935e8a",
       "kind": "packet-derived-facts",
-      "license_status": "CC-BY-4.0",
+      "license_status": "MIT",
       "listed_n": [
         199
       ],
       "n": 199,
-      "path": "resources/web/ozden-s199-upper-bound-2026-11-09/source/n-199-candidate.yaml",
+      "path": "resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/n199_witness.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
       "retrieved": "2026-11-09",
       "source_n": 199,
-      "url": "https://github.com/kenaznia-doga/s199-upper-bound/blob/d03ee0bdb223e00fe124e818ed242f6cbd714fad/n-199-candidate.yaml"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/702c7af2db04c9b69696455ee3d33883a2935e8a/n199/n199_witness.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
