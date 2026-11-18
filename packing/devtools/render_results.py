@@ -28,6 +28,8 @@ Under the tables, each result whose certificate regularizes packings other resul
 lists its `regularizations`, one sentence a count (`result_credit.regularization_sentence`),
 and the register's `regularized_drawings`, this project's own regularizations of the
 packings the atlas draws regularized, follow in the same sentences.
+Each result whose report restates a packing another result holds, under the owner's
+option D (think-b0w5), lists its `restatements` after them, one line a count.
 The closing list gives each result's next action, its `next_rung`, and under it each of
 its `unfinished_confirmations` with the rung it would reach and its estimated cost.
 
@@ -217,6 +219,45 @@ def regularizations(results: list[dict], sources: Mapping[str, Mapping[str, Any]
     return lines
 
 
+def restatements(results: list[dict]) -> list[str]:
+    """The section listing each result's `restatements`, by id, one item a count; none
+    where no result carries one."""
+    carrying = [record for record in results if record.get("restatements")]
+    if not carrying:
+        return []
+    lines = [
+        "## Restatements",
+        "",
+        (
+            f"Where the certificate a result records is a re-certification of a packing "
+            f"another result holds, its padding removed or the same arrangement re-solved, "
+            f"and its side is not below that result{APOSTROPHE}s once that certificate is "
+            "shrunk until its squares first touch, the owner"
+            f"{APOSTROPHE}s option D of 17 November 2026 (think-b0w5) makes it a "
+            "restatement: no new result, credited to the original finder through the "
+            "result it restates, and adopted nowhere. Each line names that result, the "
+            f"gain as a share of its certificate{APOSTROPHE}s uniform-contraction margin "
+            "(`devtools.contraction_margin`) and the receipt."
+        ),
+        "",
+    ]
+    for record in sorted(carrying, key=lambda item: item["id"]):
+        items = record["restatements"]
+        lines.append(
+            f"- **{record['id']}** — {len(items)} {'count' if len(items) == 1 else 'counts'}:"
+        )
+        for item in items:
+            share = item.get("gain_over_margin")
+            measured = f"{share} of its margin" if share is not None else "its margin 0"
+            lines.append(
+                f"  - n = {item['n']}: restates {item['of']}{APOSTROPHE}s packing "
+                f"({measured}; [`{Path(item['measured_in']).name}`]"
+                f"(../../{item['measured_in']}))."
+            )
+    lines.append("")
+    return lines
+
+
 def regularized_drawings(
     drawings: Mapping[str, Any] | None, sources: Mapping[str, Mapping[str, Any]]
 ) -> list[str]:
@@ -355,6 +396,7 @@ def render() -> str:
             )
             lines.append("")
     lines.extend(regularizations(results, sources))
+    lines.extend(restatements(results))
     lines.extend(regularized_drawings(register.get("regularized_drawings"), sources))
     lines.extend(verification_code(results, evidence))
     lines.append("## Next actions")

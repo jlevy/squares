@@ -20,8 +20,15 @@ measurement the review of 31 October 2026 made at 130, 293 and 307 (think-ruu2's
 with a retained program of its own,
 ``cases/register_candidates/think-ruu2-2026-10-31/review/code/contract.py``; this module
 is that measurement once (OR-1), and it reproduces that program's contracted side at 130
-exactly. The owner's question it serves, whether such a re-certification is a new result,
-is open (think-ruu2 RV-3, think-ikku); the module decides nothing about it.
+exactly. The owner answered the question it serves on 17 November 2026 (think-b0w5,
+option D): a re-certification of a standing packing, its padding removed or the same
+arrangement re-solved to its exact local optimum, is a new result only if its side is
+below the predecessor's once the predecessor is shrunk until its squares first touch,
+measured through any construction; otherwise it is a restatement, credited to the original
+finder. So ``against.within_margin`` is that test, sides compared exactly: true is a
+restatement, which a register entry records in its ``restatements`` with this receipt
+(`devtools.check_results`), and false a new result. The module measures; the import lane
+records (packing/campaign/result-import.md, "Several Reports at One Count").
 
 A certificate that is no packing at its own side is refused before anything is
 measured. Every square's exact axis extent must lie in its box, and ``lambda*`` must not

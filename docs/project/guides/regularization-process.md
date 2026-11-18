@@ -354,11 +354,17 @@ owner admitted on 16 October 2026; `--check-atlas` names which lapsed.
 ## Register Candidates
 
 A view whose side is below $U$ is a smaller packing than the house best packing, and it
-is registered as a result (row 3), however it was made.
-It is taken through the import runbook’s stages like any report, crediting the packing’s
-finder and the regularizer, and once validated it is adopted as the house best packing
-in the pass that validates it, by the
-[house rule](../../../packing/campaign/result-import.md#the-house-rule).
+is registered as a result (row 3), however it was made, unless it restates the house:
+under the owner’s option D of 17 November 2026 (think-b0w5) a view that re-solves the
+house’s own packing to its exact local optimum is a new result only where its side is
+below the house’s certificate shrunk until its squares first touch
+(`devtools.contraction_margin`), and a view within that margin is no candidate.
+Evan Daniel’s regularizer reaches such points, a few times $10^{-12}$ below a robust
+rational house, and most lie about at its margin: T-282’s at 172 is 1.04 of it, and the
+same optimum, reported by Joost de Winter, is T-286. It is taken through the import
+runbook’s stages like any report, crediting the packing’s finder and the regularizer,
+and once validated it is adopted as the house best packing in the pass that validates
+it, by the [house rule](../../../packing/campaign/result-import.md#the-house-rule).
 Its bound is new only where no earlier certificate already stated that side exactly, as
 one had at the 33 counts where the record carried Evan Daniel’s side rounded up, and no
 larger count’s verified upper bound is at or below it; otherwise the result says which
