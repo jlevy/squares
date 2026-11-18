@@ -36514,8 +36514,14 @@ issues:
       (think-i5en) as T-314: a lower bound, so the house rule does not reach it. The premises,
       the dilation, the regeneration of the file from T-216's and the enlargement's arithmetic
       hold exactly, and the author's runs cover every direction once, of reviewed crate source.
-      The complete census replay of all 401 directions and its whole-net controls ran here and passed, equal to the author's runs; the replay's evidence entry waits for the stage 4 review, so the entry stands at V0/C0. The stage 4 review (R-108) is a separate lane, and the verified lanes at 108
-      and 109 move only once it is accepted.
+      The complete census replay of all 401 directions and its whole-net controls ran here and
+      passed, equal to the author's runs. The blind stage 4 review of 18 November (R-108, PR
+      #1027) accepts the argument, the enlargement included, with every finding a note, and
+      decided all 401 directions with clean-room code of its own. Mapped with the replay, the
+      entry is V3/C3, confirmed, reproduced with the producer's code, and both lower lanes at
+      108 and 109 take the claimed side: 0.0100 above T-216 at 108, and at 109 0.0787 above the
+      reported a(109) (T-180) and 0.1676 above Karakuş's verified strip bound. The review's
+      notes N-2, N-3, N-5 and N-8 and its four questions go to the author with the reply.
     read_through: '2026-11-17T22:27:34Z'
     results:
     - key: n108-n109-dilated-measure
@@ -36528,6 +36534,7 @@ issues:
       - T-314
       evidence:
       - E-de-winter-1018-n108-report
+      - E-de-winter-1018-n108-sqverify-fast-replay
       validation:
       - think-i5en
     beads:

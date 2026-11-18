@@ -1387,8 +1387,9 @@ PACKET_PROVENANCE = {
             " 1063/1062 at core side 12487/12500"
         ),
         custody=(
-            "The candidate is the retained original gzip whose SHA-256 the source's checksums"
-            " state and the packet's acquisition record pins, which"
+            "The candidate is the retained original gzip whose SHA-256 the SHA256SUMS the"
+            " source added in 67fb815, the commit after the pin, states and the packet's"
+            " acquisition record pins, which"
             " devtools.audit_dilated_measure regenerates byte for byte from the T-216"
             " packet's retained mixed_n108_L1062 by the source's stretch_measure.py rule."
         ),

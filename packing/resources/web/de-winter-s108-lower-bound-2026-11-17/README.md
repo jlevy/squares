@@ -164,26 +164,37 @@ by the crate and by the independent evaluator. The author’s twelve runs carry 
 their own, so these are the only controls on the certificate.
 
 The triage priced the census at about 1.2 CPU-hours, from T-216’s 136,113,602 nodes in
-2,087 CPU-seconds scaled to the author’s 266,337,510 nodes; it ran in 4,624 CPU-seconds.
+2,087 CPU-seconds scaled to the author’s 266,337,510 nodes, and the stage 4 review’s
+frozen price for the capture was 1.38 to 1.50 CPU-hours (1.13 at T-216’s rate, after its
+freeze); it ran in 4,624 CPU-seconds, 1.28 CPU-hours, about 17.4 µs a node, and the
+controls in about 530 more.
 
 ## Stage 4 Review
 
-The blind stage 4 review of #1018 is lane R-108’s (under think-i5en); this lane has not
-read it. The verified lower lanes at 108 and 109 move only once it is accepted and mapped
-(`check_results`, `verified_lane_review_problems`); until then they stay at T-216’s
-$531/50$ at 108 and Karakuş’s strip bound at 109.
+The blind stage 4 review of #1018, lane R-108’s (under think-i5en), is
+[`review-2026-11-18-de-winter-1018.md`](../../../../docs/project/reviews/review-2026-11-18-de-winter-1018.md),
+merged in #1027; its programs and receipts are in
+[`de-winter-1018-review-2026-11-18/`](../de-winter-1018-review-2026-11-18/README.md).
+It accepts the argument, the enlargement lemma included, with every finding a note, and
+decided all 401 directions with clean-room code of its own, which sets no rung until a
+soundness review accepts its decider (`E-de-winter-1018-n108-review-decision`).
+This lane read it after its own receipts were committed. Mapped with the census replay
+(`E-de-winter-1018-n108-sqverify-fast-replay`, the review its audit record), the entry is
+V3/C3 and the verified lower lanes at 108 and 109 take the claimed side.
 
 ## What Is Not Established
 
-- **The enlargement.** The audit checks the proof’s arithmetic, not that its premises
-  carry the bound: that a square of side $u$ at angle $\theta$, centred at least its axis
-  half-width from each wall, holds a concentric core of side $B$ at its nearest net
-  direction inside the per-bin domain of `sqverify_fast/SOUNDNESS.md`, lemma D, is the
-  review’s to read. The format M theorem the census decides proves $s(108) \ge L = 10.63$
-  by itself.
+- **The enlargement by machine.** This lane’s audit checks the proof’s arithmetic, not
+  that its premises carry the bound: that a square of side $u$ at angle $\theta$, centred
+  at least its axis half-width from each wall, holds a concentric core of side $B$ at its
+  nearest net direction inside the per-bin domain of `sqverify_fast/SOUNDNESS.md`, lemma
+  D, is a step of the argument the stage 4 review read and accepted, and no program
+  decides. The format M theorem the census decides proves $s(108) \ge L = 10.63$ by
+  itself.
 - **Independence.** The source decided the certificate with this repository’s
-  `sqverify-fast`, so the census replay is reproduced with the producer’s code; no second
-  complete implementation or second method stands beside it.
+  `sqverify-fast`, so the census replay is reproduced with the producer’s code; the
+  review’s clean-room decision of all 401 directions stands beside it, independently
+  re-implemented, with a decider no soundness review has yet read.
 - **The author’s checks.** `check_lower.py` was not run here; its axis integration and
   hash checks are the author’s statements.
 - **Optimality and human oversight**: none is claimed; no oversight record is retained.

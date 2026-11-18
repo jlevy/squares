@@ -9495,3 +9495,153 @@ verifiers:
       (docs/project/reviews/review-2026-11-04-wand125-fine-net-n29.md, its section 11);
       kept in the n29 packet's review/ with its README and receipts. oblique_sample.py,
       a driver kept beside it, decides nothing and is not registered.
+
+  - id: V-de-winter-1018-review-premises
+    program: rv1018_premises.py, rv1018_measure.py and rv1018_runs.py (with rv1018_common.py)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes in exact rationals, apart from the crate and the import lane's tools, every
+      premise of #1018's rescaled measure on its declared net: the format, the rows, their D4
+      expansion and the mass 10799999/100000 < 108, lemma N0 on 401 half-angles of step
+      83/80000 at core side 12487/12500, the per-bin domain, and the proof's enlargement (u,
+      h and the claimed side, uS + 2h(1 - u) = L); reads the measure row by row against
+      T-216's retained mixed_n108_L1062 times 1063/1062; and reads the twelve archived run
+      logs for coverage of r = 0 to 400, each verified at threshold 1 on those premises, of
+      reviewed crate source. Printed PREMISES_HOLD, SCALED_COPY and RUNS_COVER_THE_NET.
+    source:
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_premises.py
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_measure.py
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_runs.py
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1018.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the blind stage 4 mathematical review lane r108-1118 of the #1018 import
+            (think-i5en), tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source says its files and checks were produced with Claude agents. Written by
+          a Claude agent prompted separately from the source and from the import lane, in
+          files of its own that import nothing from this repository or the source.
+      note: >-
+        Written from SOUNDNESS.md's theorem, lemma N0, lemma D and the direction lemmas,
+        read as a specification, the proof's one page and the certificate's own JSON. Its
+        author compared the source's bundled crate with this repository's by SHA-256 only
+        and read none of it, nor the census driver; the source's check_lower.py and
+        stretch_measure.py were read only after the findings were frozen.
+    note: >-
+      Written and run on 18 November 2026 by the blind stage 4 review of #1018
+      (docs/project/reviews/review-2026-11-18-de-winter-1018.md); kept in the packet
+      packing/resources/web/de-winter-1018-review-2026-11-18/ with its README and receipts.
+      rv1018_custody.py, rv1018_poses.py, rv1018_sample.py, rv1018_selftest.py and
+      rv1018_controls.py, kept beside it, decide nothing and are not registered.
+
+  - id: V-de-winter-1018-review-axis
+    program: rv1018_axis.py (with rv1018_common.py)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [numerical-f64, exact-algebraic]
+    role: decides
+    summary: >-
+      Decides direction 0 of a format M measure over its whole per-bin quadrant: the
+      capture is bilinear on each cell of the grid of exact, sorted events, so its least is
+      at a vertex; every vertex is bounded below from one binary64 matrix product of
+      nonnegative terms under a proved a priori error bound, and the 64 least are evaluated
+      exactly. Decided direction 0 of #1018's measure, rigorous least 1.0074788332233897,
+      exact least 1.0074788336918701996 at the source's argmin, and refused the 99/100 copy
+      there, exact least 0.99740404535495.
+    source:
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_axis.py
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1018.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the blind stage 4 mathematical review lane r108-1118 of the #1018 import
+            (think-i5en), tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source says its files and checks were produced with Claude agents. Written by
+          a Claude agent prompted separately from the source and from the import lane, in
+          files of its own that import nothing from this repository or the source.
+      note: >-
+        Written from SOUNDNESS.md's theorem and the axis lemma, read as a specification, and
+        the certificate's own JSON; its author read neither axis.rs nor any other crate
+        source, and the source's run logs only to take their logged poses.
+    note: >-
+      Written and run on 18 November 2026 by the blind stage 4 review of #1018
+      (docs/project/reviews/review-2026-11-18-de-winter-1018.md); kept in the packet
+      packing/resources/web/de-winter-1018-review-2026-11-18/ with its README and receipts.
+
+  - id: V-de-winter-1018-review-bnb
+    program: rv1018_decide.py with rv1018_bnb.c (and rv1018_common.py)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python, C]
+    methods: [interval-certified, exact-algebraic]
+    role: decides
+    summary: >-
+      Decides one rotated direction of a format M measure over its whole per-bin quadrant
+      by a branch and bound of its own: a box of centres is accepted when the capture of the
+      square every core of the box contains, with a ring of strips beside it, is bounded
+      below by the threshold through one cumulative integration per rectangle and side, in
+      binary64 with directed rounding, the half-side, quadrant, rectangles, densities and
+      masses rounded the safe way; a candidate below the threshold is confirmed in exact
+      rationals and refused with that witness. Decided all 400 rotated directions of #1018's measure (5,483,404
+      boxes) and refused the 99/100 copy at all 400 with exact witnesses.
+    source:
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_decide.py
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_bnb.c
+      - packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1018.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the blind stage 4 mathematical review lane r108-1118 of the #1018 import
+            (think-i5en), tbd-strong-max tier, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source says its files and checks were produced with Claude agents. Written by
+          a Claude agent prompted separately from the source and from the import lane, in
+          files of its own that import nothing from this repository or the source.
+      note: >-
+        Written for this review from SOUNDNESS.md's direction lemmas, read as a
+        specification; its author read none of the crate's search code (rotated.rs,
+        interval.rs, axis.rs). Its soundness has not been adversarially reviewed: Review A
+        of #1027 found the ring's outer cuts rounded outward (a second use of the half-side
+        allowance) and the chord allowance's offset bound unchecked, both sound as used, for
+        the soundness review that would let its runs set a rung.
+    note: >-
+      Written and run on 18 November 2026 by the blind stage 4 review of #1018
+      (docs/project/reviews/review-2026-11-18-de-winter-1018.md); kept in the packet
+      packing/resources/web/de-winter-1018-review-2026-11-18/ with its README and receipts.

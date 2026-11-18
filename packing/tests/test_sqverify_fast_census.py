@@ -1655,6 +1655,56 @@ def test_the_910_replay_entry_is_what_the_census_prints() -> None:
     assert "replay-comparison.json" in flat
 
 
+def test_the_1018_rescaling_is_read_at_its_upstream_path_and_reproduces_the_producer() -> None:
+    """#1018's rescaling of T-216's measure is a case at its own upstream path, on its
+    declared net of 401 directions, classified as #890's and #910's are: the source ran
+    this repository's own crate, so the row reproduces the producer's run. It verifies
+    every direction of that net and refuses none."""
+    packet = "de-winter-s108-lower-bound-2026-11-17"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert list(found) == ["mixed_n108_L1063"]
+    case = found["mixed_n108_L1063"]
+    assert case.candidate == census.WEB / packet / "source/lower_n108/evidence/n108_measure.json.gz"
+    assert (case.n, case.side) == (108, "1063/100")
+    assert census.net_directions(case) == 401
+    assert packet in census.SAME_CRATE_PACKETS
+    assert packet not in census.SHARED_CRATE_PACKETS | census.INDEPENDENT_MIXED_PACKETS
+    fields, _ = census.mixed_relationship(case)
+    assert fields == ["    relationship_to_generator: same-implementation"]
+    row = entries()["mixed_n108_L1063"]
+    assert (row["status"], row["L"], row["n"]) == ("VERIFIED", "1063/100", 108)
+    assert row["directions_verified"] == census.net_directions(case)
+    assert row["refused_directions"] == []
+    assert row["least_certified_bound"] >= 1
+
+
+def test_the_1018_replay_entry_is_what_the_census_prints() -> None:
+    """E-de-winter-1018-n108-sqverify-fast-replay is `--evidence`'s entry for
+    mixed_n108_L1063, field for field, with the stage 4 review of 18 November as its audit
+    record: de Winter's rescaling as the theorem's subject, the controls of the same day,
+    the replay's agreement with the author's twelve runs, the enlargement left to the
+    review, and no clean-room wording."""
+    name = "mixed_n108_L1063"
+    text = census.evidence_entry(
+        cases()[name],
+        FOLDER,
+        entries()[name],
+        audit_record="docs/project/reviews/review-2026-11-18-de-winter-1018.md",
+        date="2026-11-18",
+    )
+    (generated,) = safe_load(text)
+    assert generated["id"] == "E-de-winter-1018-n108-sqverify-fast-replay"
+    register = safe_load(EVIDENCE.read_text(encoding="utf-8"))
+    (committed,) = (item for item in register["evidence"] if item["id"] == generated["id"])
+    assert generated == committed
+    flat = " ".join(text.split())
+    for wording in ("Hiroaki Hosono's mixed_n108_L1063", "mixed-fetch", "tarball", "clean-room"):
+        assert wording not in flat, wording
+    assert "applied to Joost de Winter's mixed_n108_L1063" in flat
+    assert "replay-comparison.json" in flat
+    assert "enlargement from 1063/100 to its claimed side is a separate step" in flat
+
+
 def test_the_890_replay_entry_is_what_the_census_prints() -> None:
     """E-ozden-890-n94-9965-sqverify-fast-replay is `--evidence`'s entry for
     mixed_n94_L9965, field for field (F1 of #898's review): Özden's dilation as the
