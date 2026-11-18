@@ -1,0 +1,47 @@
+# Lane c-review-1009-1117 checker and controls plan, frozen at 2026-11-17T03:33:14Z, before any program of this lane read a certificate, and before the source's README.md, SUBMISSION_2026_11_16.md, ISSUE_*.md, verify_bound_certificate.py, verify_area_exact.py, verify_algebraic_bounds.py, check_packing.py, certified_bounds.json, upper_bounds.json, licence files or figures, this repository's witness, verifier, promotion, identity or contraction code, the register entries, case records or house witnesses at 147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299 or 307, issues #1005, #1006 and #1007 and their sources, or any import lane's or other review lane's work was read.
+# Read before the freeze: the lane's briefs and rules; issue #1009's body (REST, 01:34:03Z); result-import.md (stages 1 and 4, the house rule, the labels), epistemics.md and attribution.md; the bead think-ruu2 on RV-3, whose notes name the record's entries at 299 and 307 among others; the review of #1001 (lane L186), its packet README and frozen lists, and the claim section of the review of #996; packing/witnesses/witness.schema.yaml; the source's commit subjects and tree listing at the pin, its two SHA256SUMS files, and the 26 certificate files' structure (line kinds, field counts, tabs, line ends, the head of n147.cert and of n-147.yaml) by grep, awk, head and od, as needed to write the readers.
+# The session's worker restarted at about 02:00Z, before this freeze; nothing had been frozen and no program of this lane had read a certificate. A process listing at 03:07Z showed other lanes' command lines (file names of #1005 to #1007's certificates and an import packet's name), none of whose outputs was read.
+# source files (blobless clone of Mishapolk/square-packing-records at b637e6cf59c23781c813e8442bfdccb5aa5f3954, the remote head when cloned at 01:34:15Z; digests by sha256sum, compared with the issue's list in the check receipts):
+160cf8af8276377ffd8a9e51b135c147ddbf8a2a3bdc6e86486d5e92e11d955e  b637e6c:certificates/0000-0999/n147.cert
+05e95f39700a9ef8180c204eac199889e6d179e32674a00118175fc4d9a0da07  b637e6c:certificates/0000-0999/n156.cert
+bfe9c58f0f97d2ac2e6051c3e979ed4cfda01137e92093a6aaeb22276ce4104b  b637e6c:certificates/0000-0999/n180.cert
+a8c474129b3f432390bb33f4e7818ecf4d11650cd3acda9091584d65120683b4  b637e6c:certificates/0000-0999/n210.cert
+b059dfa9d855aa14b04635ca1d4ea7d01d8171b64b7c5e21a02bb3914124654f  b637e6c:certificates/0000-0999/n260.cert
+c5ff84393899ddd099f2c987ea73d7e82f3a65e9136afb9bdc3282a06b3c19bd  b637e6c:certificates/0000-0999/n262.cert
+9a6b2bf4a1139eaeefb1b885789acf15e54e4556783aa8ae2c94e6d4e5633755  b637e6c:certificates/0000-0999/n268.cert
+1602ede9a47b7868b0f93268bc45794e48950125d8a405d18c9801f28dcedb6f  b637e6c:certificates/0000-0999/n270.cert
+0cd6d68332f84a8856cb47a2f0bfc36116901e6b200dc6041a54fe5552f68778  b637e6c:certificates/0000-0999/n272.cert
+bc044512137a02bcf4024898844760b65215984883f1d1f9f42ac65aa540a57b  b637e6c:certificates/0000-0999/n292.cert
+7778560e076f207db1913635e1148607011b80e6a0aa96dd614049613abf2cc5  b637e6c:certificates/0000-0999/n295.cert
+f20dd01d27f7921d136d9a9211351b5eda1c4103e2de69dc18c94eb01a52e355  b637e6c:certificates/0000-0999/n299.cert
+96a54741c680c97e037ebc4f80082802d3da5187b0d3b234ecc6e5c8ea39c963  b637e6c:certificates/0000-0999/n307.cert
+98e826488dc6f6e8c84e2c0179c0b022480222292a340f86db193ab19b18fb48  b637e6c:witnesses/2026-11-16/n-147.yaml
+960128de917763696159caa5214da444f4059edd8eed22ea85f08b847e054bb8  b637e6c:witnesses/2026-11-16/n-156.yaml
+2688e96447c5d3712682347de7eb1f40733b307db04189e97cc2460ac7acaafc  b637e6c:witnesses/2026-11-16/n-180.yaml
+55ff12cb30a82618d7ec9bbf305a3b7b452fdc362bff1641d1dc41f2f1621e1b  b637e6c:witnesses/2026-11-16/n-210.yaml
+63d42f58e72e800a8816c4ebf2fe55d9b930935da234b18b5be7db56fb649170  b637e6c:witnesses/2026-11-16/n-260.yaml
+b9bc614080bd1874c8d1bec7fc0df295e5d925b8e7d3d7a251d128017b1a7513  b637e6c:witnesses/2026-11-16/n-262.yaml
+93cb968796493699515cf6f859f385a8025ce7b2544592a99b9d448d759b6461  b637e6c:witnesses/2026-11-16/n-268.yaml
+8d50402b24290053aa534ae71fa14c684730cdcedb34f8bfa62d5634c5799eaa  b637e6c:witnesses/2026-11-16/n-270.yaml
+ec24d11c0c94ad19e7c3c8d6feb6626f5c04923cbc3d33acba8e01e84fa17d18  b637e6c:witnesses/2026-11-16/n-272.yaml
+207a7af131548627c83d5b1cc4b1087dcccd863ef40aeecea63b245c764a6c2c  b637e6c:witnesses/2026-11-16/n-292.yaml
+faa40ba28a0cdc3d35d16be9fd3f8b999f4a57c02bd3e0e95dacd50768f3120a  b637e6c:witnesses/2026-11-16/n-295.yaml
+a2d19c925ba44a452e17f4d3ccd3b7782ed01e95c03438ddb31c0da2d486198f  b637e6c:witnesses/2026-11-16/n-299.yaml
+3f2d737a687c404eb30b202998d54024fb4c8d5b0f026f7a8e6b423ad7caccb1  b637e6c:witnesses/2026-11-16/n-307.yaml
+# checker programs, the controls program, the controls plan and the issue as fetched:
+c14b34e598e7466e0231682571edb74676fae8ff52e26a4cf43a3847cc066081  rv1009_reader.py
+6ef503144a6e68793dd49cf70a0d40c5770f592fe5f21c9860a4c9fc39c0db0f  rv1009_axes.py
+c895ed0c74f7ecff1d8adb5a782687bb7a5f89929543f3879ce87a84aace5f5f  rv1009_clip.py
+9f1c65e3d4dce19197d9a85c0c1d688c356a7a8ba08b86f8e9b3ae5d6b2db20b  rv1009_forms.py
+32fa12d61e4cecf3aee8933e197eea2af83efaaa70e3bfa7f9295124e98be895  rv1009_decide.py
+f1e70d1c214f1f801ee1bb4164b069de2716b3ed3381306fb1ded6aff29d9c92  rv1009_files.py
+6a765f2e44982f2fd7ad542761528985192ff7199b9229f7a71af60e800778a4  rv1009_geom.py
+2450fc57a9220d964727fb7d1379061d81ae37c8d6a53d35706c34c6f6a0a62c  rv1009_write.py
+d5b0ba8849ab8a4d984b94e2d3d09431db92ef601ef8c99e07708d2246e20ae3  rv1009_issue.py
+70c63dcb14af141dd7c3fdc3d94ee488b13a310c51dbdf78515e155d283d6a94  rv1009_check.py
+c2f08ca1456b7afe7acb78c49e92b0c7aaf5d086393b22edf91a44e81d472e5c  rv1009_selftest.py
+e6dfeeeb9775f09c7301a36e9bf832a3805374afc9f2e040d54a518365270adb  rv1009_controls.py
+a26628bc0a4080d9fb610eb083c91095fd5ad6fd145e4a27630ea87a9fe03228  controls-plan.json
+37415ba04a99cab6d144e23eeaffe68702b727223594c61ebbe4977961b3bbdf  issue-1009.json
+# receipt written by the frozen self-test (it reads no certificate):
+0497d02d86a38849894ab265fd1d75c0d49eb306444162a30954633d4c2bdbe6  out/selftest.json

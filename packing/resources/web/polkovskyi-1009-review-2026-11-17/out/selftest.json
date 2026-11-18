@@ -1,0 +1,39 @@
+{
+ "program": "rv1009_selftest.py",
+ "lane": "c-review-1009-1117",
+ "verdict": "PASSED",
+ "cases": 34183,
+ "failed": 0,
+ "first_failures": [],
+ "broken_copies": {
+  "method A with only the first square's normals": {
+   "cases": 34183,
+   "failed": 1485
+  },
+  "method A counting a zero margin as apart": {
+   "cases": 34183,
+   "failed": 91
+  },
+  "method B clipping with open half-planes": {
+   "cases": 34183,
+   "failed": 1509
+  },
+  "form P read with the other rotation sense": {
+   "cases": 34183,
+   "failed": 5976
+  },
+  "method B without the diagonal test": {
+   "cases": 34183,
+   "failed": 1
+  },
+  "a reader that takes a plus sign": {
+   "cases": 34183,
+   "failed": 3
+  }
+ },
+ "after_the_broken_copies": {
+  "cases": 34183,
+  "failed": 0
+ },
+ "cpu_seconds": 9.8
+}
