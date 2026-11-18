@@ -1,8 +1,10 @@
 # Stage 4 Review of T-144: Programs, Frozen Files and Receipts
 
-This directory keeps the programs and receipts of lane r144-1118’s blind stage 4 review
-of T-144, wand125’s linear certificate `mixed_n122_L1126` for $s(122) \ge 563/50$ and
-its transfer to $n = 123$ to $126$:
+This directory keeps the programs and receipts of the blind stage 4 review of T-144,
+wand125’s linear certificate `mixed_n122_L1126` for $s(122) \ge 563/50$ and its transfer
+to $n = 123$ to $126$, by lane r144-1118 and, after a container restart stopped that lane
+at about 06:59Z on 18 November 2026, by lane r144b-1118, which finished the run from the
+pushed branch:
 [`docs/project/reviews/review-2026-11-18-wand125-linear-n122.md`](../../../../docs/project/reviews/review-2026-11-18-wand125-linear-n122.md).
 
 The source is not retained here, and this directory is review-only.
@@ -14,9 +16,9 @@ the documents from wand125/square-packing at `a9f76c382d023b4095899c4eb7ea7483b8
 `certificates__mixed_n122_L1126.tar.gz` of `square-lower-bounds-v1` (05:41:37Z). The
 asset is 31,784,537 bytes with SHA-256
 `6443eae03c56dc99051965246dbf97f5f3540feb9c011eac96e6d094521f5deb`, the release API’s
-digest. Both stayed in the lane’s scratch space and were deleted when the review ended.
-The programs take their paths as arguments, so a rerun needs a fetch of the same pin and
-asset.
+digest. Both stayed in scratch space, outside Git, and the extracted bundle was deleted
+when the run ended. The programs take their paths as arguments, so a rerun needs a fetch
+of the same pin and asset.
 
 ## Layout
 
@@ -26,7 +28,10 @@ asset.
   (`findings-frozen-digest.txt`), and the frozen review text.
 - `out/`: the receipts.
   `out/bnb-all/` holds the complete decision of nodes 1 to 200, one file per range of 25
-  nodes.
+  nodes, the driver’s `run.log`, and `killed-range-176-200.stdout.txt`, the lines that
+  the first run of range 176 to 200 printed (nodes 176 to 193) before the container
+  restart killed it; the driver then ran that range again from scratch.
+  `out/complete-decision.json.gz` gathers node 0 and the 200 nodes into one receipt.
 
 ## Programs
 

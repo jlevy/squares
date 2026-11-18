@@ -1,9 +1,12 @@
 # wand125’s Linear Certificate for $s(122) \ge 563/50$: Mathematical Review
 
 2026-11-18. Reviewer: Claude (Anthropic), `tbd-strong-max` tier at maximum reasoning,
-lane r144-1118 (bead `think-rxs3`, under the import `think-nd7g`), prompted separately
-from the replay lane and sharing none of its context beyond the brief and the committed
-record. Workflow:
+lane r144-1118 (bead `think-rxs3`, under the import `think-nd7g`), and, after a
+container restart stopped that lane at about 06:59Z, lane r144b-1118 at the same tier
+and setting, which resumed from the pushed branch, finished the run and froze the
+findings. Both were prompted separately from the replay lane and shared none of its
+context beyond their briefs and the committed record.
+Workflow:
 [result-import.md, stage 4](../../../packing/campaign/result-import.md#stage-4-validate),
 “The review”. Scope: `mixed_n122_L1126`, wand125/square-packing at `a9f76c3`, with its
 release asset `certificates__mixed_n122_L1126.tar.gz` at SHA-256 `6443eae0…5deb`, and
@@ -36,7 +39,8 @@ share no code with it:
 - nodes 1 to 200 by a rigorous branch and bound of this review’s own, FULL_SUMMARY;
 - every exact premise; that each of the 201 checker inputs encloses exactly the
   candidate’s 14,184 images; and the comparison with Green’s $G_{11}$, which your bound
-  exceeds by more than $0.0307191$, as your README says.
+  exceeds by more than $0.0307191$, as your README says (that comparison’s precision was
+  raised after the freeze, as disclosed below).
 
 Both deciders refuse the 99/100 mutant with exact witnesses.
 The least capture found in a seeded search at 24 angles is $1.00176$ (angle 196); the
@@ -47,10 +51,10 @@ Your checker, read as data after this review’s programs were frozen, decides w
 records say it decides, by sound interval arithmetic.
 There is no blocking or major finding.
 Two minor findings concern the bundle’s custody and wording: the release’s `SHA256SUMS`
-does not list the asset (M-1), and the README’s statement of what was checked omits the
-centre domain (M-2). One minor finding is the record’s: at $n = 126$ the reported lane
-is now T-180’s $a(126) = 11.3133\ldots$, above $563/50$, so T-144 would raise the
-reported lane at four counts and the verified lane at five (R-1).
+does not list the asset (M-1), and the README’s statement of what was checked overstates
+it and leaves the centre domain undefined (M-2). One minor finding is the record’s: at
+$n = 126$ the reported lane is now T-180’s $a(126) = 11.3133\ldots$, above $563/50$, so
+T-144 would raise the reported lane at four counts and the verified lane at five (R-1).
 
 ## The Claims
 
@@ -68,8 +72,8 @@ reported lane at four counts and the verified lane at five (R-1).
 On `main` the reported lower bounds are Green’s $11.22928087555$ (DS7 Theorem 9 with
 $k = 11$) at 122 to 125, and Hosono’s closed form $a(126) = 11.313323850997$ (T-180) at
 126; the verified lower bounds are Karakuş’s strip bounds, $11.0475115548$ to
-$11.2354552767$. The upper bounds run from $11.5355339059$ at $n = 122$ to $11.7426406871$ at
-$n = 126$.
+$11.2354552767$. The upper bounds run from $11.5355339059$ at $n = 122$ to
+$11.7426406871$ at $n = 126$.
 
 | $n$ | Reported lane on `main` | Verified lane on `main` | 563/50 raises |
 | ---: | --- | --- | --- |
@@ -80,19 +84,22 @@ $n = 126$.
 | 126 | T-180, $11.31332\ldots$ | Karakuş, $11.23546\ldots$ (+0.02454) | verified only |
 | 127 | T-180, $11.37167\ldots$ | Karakuş, $11.28193\ldots$ | neither |
 
-The comparisons are exact
-([`out/lanes.json`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/lanes.json)):
-$563/50 - G_{11} > 0.030719124449$, $563/50 - (1 + \sqrt{105}) > 0.013049234$, and
-$(563/50 - 1/2)^2 > N - 11 + 1/4$ for $N \le 126$ but not at 127.
+The comparisons are exact: $563/50 - G_{11} = 0.0307191244486\ldots$, by 200-digit
+enclosures of $\sqrt 2$ and $\sqrt{22}$, and $563/50 - (1 + \sqrt{105}) =
+0.0130492340404\ldots$, decided by squaring
+([`out/premises.json.gz`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/premises.json.gz));
+and $(563/50 - 1/2)^2 > N - 11 + 1/4$ for $N \le 126$ but not at 127, by squaring
+([`out/lanes.json`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/out/lanes.json),
+which reads the lanes from the case records).
 
 ## What Was Read
 
-**Before the checker froze (06:03:40Z, commit `ee66533d0f`), as data.** The lane’s briefs and the bead
-`think-rxs3`; `result-import.md` stage 4; the house review of 11 November
-(`review-2026-11-11-wand125-fine-net-n28-n30.md`) as the format model, and PRs #1013 and
-#1014’s structure; on `main`, the import packet’s README and `source-manifest.json`;
-grep lines naming Green’s, Nagamochi’s and the closed form’s values in
-`packing/frontier/`. From the source at `a9f76c3`: the commit, the tree, the
+**Before the checker froze (06:03:40Z, commit `ee66533d0f`), as data.** The lane’s
+briefs and the bead `think-rxs3`; `result-import.md` stage 4; the house review of 11
+November (`review-2026-11-11-wand125-fine-net-n28-n30.md`) as the format model, and PRs
+#1013 and #1014’s structure; on `main`, the import packet’s README and
+`source-manifest.json`; grep lines naming Green’s, Nagamochi’s and the closed form’s
+values in `packing/frontier/`. From the source at `a9f76c3`: the commit, the tree, the
 certificate’s `README.md`, `manifest.json`, `completion-audit.json`, `ASSET.json` and
 `requirements.txt`, `mixed_n101_L1028/README.md`, and the first 250 lines of
 `docs/lower-bounds.md`. From the asset and its bundle, to write the readers: the
@@ -107,6 +114,27 @@ in `unified_linear_full_verify.py` and `interval` in `mixed_rotated_verify.py`, 
 data; the register entries T-144 and T-180; the front matter of `n-122.md` to
 `n-127.md`; the release’s current `SHA256SUMS`.
 
+**Lane r144b-1118, on resuming, before the findings froze.** Its two briefs and the bead
+`think-rxs3`; this branch, its draft and its receipts, and the killed run’s partial
+receipts; the source’s `unified_linear_verify.cpp` in full, and the lines of
+`unified_linear_verify.py`, `unified_measure.py`, `README.md`, `manifest.json`,
+`ASSET.json` and `completion-audit.json` that this review cites, to check each citation;
+T-144’s register entry and `E-wand125-linear-n122-1126-report` on `main`; the front
+matter of `n-122.md`, `n-126.md` and `n-127.md`; and, as format models, the file lists
+of PRs #1013 and #1014, the freeze statements and closing note of the review of #1009,
+and the headings of the review of 11 November.
+
+**A departure from the brief.** The coordinator’s brief allowed the source’s checker to
+be read as data only after the findings froze.
+Lane r144-1118 read it after this review’s checker froze and before its findings froze,
+to give the checker’s trust boundary, which the bead asks for, and lane r144b-1118 read
+it again before the freeze to check the line numbers cited here.
+What rests on that reading is the section on the source’s checker, the citations in H1
+and H9, and N-3 and N-5. No decision about the capture rests on it: every program that
+decides was frozen before the checker was opened, and the two changes made to frozen
+programs afterwards (below) touch the comparison with $G_{11}$ and the draw of six
+search nodes.
+
 **Not read.** The other files of `code/` (hashed only); the replay lane’s branch,
 receipts and notes; the import packet’s `receipts/` and `reported-n122.json`; this
 repository’s `devtools.audit_wand125_linear` and `devtools.fine_net_followup`, which
@@ -114,10 +142,13 @@ this review neither read nor ran; and the earlier reviews of this certificate an
 siblings, read only after the findings were written
 ([Comparison With Earlier Reviews](#comparison-with-earlier-reviews)).
 
-**Disclosed.** `tbd show think-rxs3` printed the parent bead `think-nd7g`’s notes of 10
-to 12 October, which report that the intake’s readers held the premises and that two
-angles replayed with the source’s checker; and the import packet’s README summarizes the
-same. This review decided nothing from either.
+**Disclosed.** For both lanes, `tbd show think-rxs3` printed the parent bead
+`think-nd7g`’s notes of 10 to 12 October, which report that the intake’s readers held
+the premises, that angles 37 and 108 replayed with the source’s checker, and that the
+route’s control refused at angle 37 in a preparation smoke run; for lane r144b-1118 the
+display cut the notes off after 12 October, and it read no later line.
+The import packet’s README summarizes the same.
+This review decided nothing from either.
 
 ## The Argument, Re-Derived
 
@@ -195,8 +226,8 @@ Every program is this lane’s own, kept with its outputs in the packet’s
 [`programs/`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/README.md).
 They use CPython 3.14.7 (`fractions`, `hashlib`, `json`, `tarfile`), numpy 2.5.2 on one
 OpenBLAS thread and, in `r144_lanes.py`, PyYAML, and import nothing from this repository
-or the source.
-The checker and the controls plan were frozen at 06:03:40Z (commit `ee66533d0f`)
+or the source. The checker and the controls plan were frozen at 06:03:40Z (commit
+`ee66533d0f`)
 ([`frozen/checker-frozen-digests.txt`](../../../packing/resources/web/wand125-linear-n122-review-2026-11-18/frozen/checker-frozen-digests.txt)),
 after the selftest had passed on synthetic measures and before any program read the
 certificate.
@@ -223,10 +254,9 @@ Five programs were added after the plan, none of which decides a capture:
 `r144_run_all.sh`, which runs the complete decision with the frozen `r144_bnb.py`;
 `r144_summarize.py`, which gathers its receipts; `r144_mutate.py`, which writes the
 second mutated certificate for the frozen deciders; `r144_lanes.py`; and
-`r144_release_sums.py`.
-The plan priced the complete run without running it, and the coordinator approved it at
-06:13Z, after the five-node sample had measured its cost (one process, `nice -n 19`, a
-stop at 2 CPU-hours).
+`r144_release_sums.py`. The plan priced the complete run without running it, and the
+coordinator approved it at 06:13Z, after the five-node sample had measured its cost (one
+process, `nice -n 19`, a stop at 2 CPU-hours).
 
 **Premises.** The reader is strict: no float token, no duplicate key, every number `p`,
 `p/q` or (for `L` and `B`) a plain decimal, exactly the keys `schema`, `n`, `L`, `B`,
@@ -262,7 +292,11 @@ cell, is at a corner.
 With every coordinate a multiple of $10^{-12}$, the breakpoints are exact integers: 119
 in each axis, 14,161 corners, four one-sided values at each.
 The corner values are binary64 matrix products of nonnegative factors, so the true value
-is at least the computed one over $(1 + u)^4 (1 + \gamma_k)$.
+is at least the computed one over $(1 + u)^4 (1 + \gamma_k)$. The 16 least corners were
+evaluated again in exact rationals.
+The next-least value, $1.0039992\ldots$, lies $4.2 \times 10^{-5}$ above the least, far
+outside that error bound (about $5 \times 10^{-13}$ at the 4,432 terms of a block), so
+the least exact corner value below is the infimum itself.
 
 |  | Value |
 | --- | --- |
@@ -298,8 +332,8 @@ there falls below $1 - 10^{-9}$, and a capture below one would refute the node.
 FULL_RUN_PARAGRAPH
 
 The 99/100 mutant is refuted at nodes 37 and 180, at the first box whose centre estimate
-fell below $1 - 10^{-9}$: exact captures $0.99953403$ and $0.99910313$ at $(5.74367, 6.40593)$ and
-$(5.76951, 6.08703)$.
+fell below $1 - 10^{-9}$: exact captures $0.99953403$ and $0.99910313$ at
+$(5.74367, 6.40593)$ and $(5.76951, 6.08703)$.
 
 **Poses and a seeded search.** At every node the four corners of the quadrant and four
 seeded poses were evaluated exactly by both methods: 1,608 poses, no disagreement, the
@@ -313,15 +347,16 @@ least exact capture found is $1.0017586$ at node 196, at $(6.0988, 6.0746)$, and
 median of the per-node least is $1.00265$.
 
 **The full replay’s price.** This review did not run your checker, so it prices a
-complete replay from your records and the record. The 201 records sum to 51,876.8
-checker-seconds, 14.4 CPU-hours on your machine. The import packet’s two-angle sample
-ran your checker on this host at 0.776 of the recorded times, which prices a complete
-replay at about 11.2 CPU-hours, plus about 170 CPU-seconds for the route’s control at
-angle 37; your own replay of 7 h 41 min at three workers bounds it near 23 CPU-hours.
-That replay is the replay lane’s, on two of the host’s four cores. This review’s complete
-decision cost FULL_CPU_HOURS CPU-hours on one, because each of its boxes evaluates only the
-images that can reach its cell of the starting grid, a few hundred, where your checker
-evaluates all 14,184 (N-3).
+complete replay from your records and the record.
+The 201 records sum to 51,876.8 checker-seconds, 14.4 CPU-hours on your machine.
+The import packet’s two-angle sample ran your checker on this host at 0.776 of the
+recorded times, which prices a complete replay at about 11.2 CPU-hours, plus about 170
+CPU-seconds for the route’s control at angle 37; your own replay of 7 h 41 min at three
+workers bounds it near 23 CPU-hours.
+That replay is the replay lane’s. This review’s complete decision cost FULL_CPU_HOURS
+CPU-hours on one core, because each of its boxes evaluates only the images within reach
+of its cell of the $32 \times 32$ starting grid, where your checker evaluates all 14,184
+at every box (N-3).
 
 **Controls on this review’s programs.** The controls plan was frozen with the checker,
 and each control fails an always-accept or an always-refuse checker:
@@ -371,7 +406,8 @@ This reading found no unsound step.
 constants; that the measure is $D_4$-invariant, which the quarter turn needs; that $E$
 is the right domain; the budget $M < n\gamma$; the net premises; and the meaning of the
 weight fields. Its driver writes the inputs and checks the budget and the net
-(`unified_measure.py` lines 40 to 72); this review recomputed every one of these apart
+(`unified_linear_verify.py` lines 18 to 35, calling `validate` and `net_check` in
+`unified_measure.py` lines 40 to 72); this review recomputed every one of these apart
 from both. It also trusts the compiler, the C++ library’s `stod` on hexadecimal floats,
 IEEE binary64, and the compile command that keeps assertions on.
 
@@ -419,13 +455,14 @@ Custody rests on `ASSET.json` in the pinned commit and on the release API, which
 `ASSET.json` line 25 also gives `"commit": null`.
 
 **M-2 — minor, author.
-The README does not say where the capture is checked.** `README.md` line 15 says “every
-closed core of side `B` at that angle has measure `>= 1`”, and `manifest.json` line 16
-“every admissible centre”, without saying which centres.
-A core that pokes out of $K$ can capture less than one.
+The README does not define where the capture is checked.** `README.md` line 15 says
+“every closed core of side `B` at that angle has measure `>= 1`”, which a core that
+pokes out of $K$ need not satisfy; line 16 says the verifier proves the bound “over
+every centre domain” without saying what the domain is, and `manifest.json` line 16 says
+“every admissible centre”.
 The checker decides the cores inside $K$, by the quadrant $[L/2, L/2 + E_j]^2$ and the
 quarter turn, and step 5 above shows that suffices.
-Say so, and give $E_j = L/2 - (B/2)(\cos\theta_j + \sin\theta_j)$.
+Say so in line 15, and give $E_j = L/2 - (B/2)(\cos\theta_j + \sin\theta_j)$.
 
 **N-1 — note. The certificate proves the strict bound.** No packing fits at side $L$
 (`README.md` line 3), so $s(122) > L$; line 1 and the record state $\ge$, which is what
@@ -441,10 +478,10 @@ $1.0017586$ over the search.
 
 **N-3 — note. The checker’s cost is linear in the measure.** Every box evaluates every
 image (`unified_linear_verify.cpp` lines 109 to 111, 128 and 141): 14,184 per box over
-73.7 million boxes. A spatial cull leaves a few hundred per box, since a core of side
-about one meets only the images within its reach: this review’s numpy branch and bound,
-which culls by its starting grid’s cells, decided nodes 1 to 200 in FULL_CPU_HOURS
-CPU-hours, against 14.4 hours of checker time in your records.
+73.7 million boxes. A core of side about one meets only the images within its reach (at
+most FULL_MAXTERMS contributed to any box here), so a spatial cull pays: this review’s
+numpy branch and bound, which culls by its starting grid’s cells, decided nodes 1 to 200
+in FULL_CPU_HOURS CPU-hours, against 14.4 hours of checker time in your records.
 
 **N-4 — note. The README compares with $\sqrt N$.** Line 8 says the bound improves on
 $\sqrt N$ at 122 to 126. True, but the record’s comparisons are Green’s report (122 to
@@ -465,15 +502,14 @@ machine or output.
 **R-1 — minor, record.
 T-144’s text on $n = 126$ predates T-180.** T-144’s `claim` compares 563/50 with
 Nagamochi’s $1 + \sqrt{105} = 11.2469507659\ldots$ at $n = 126$, its significance
-rationale says it “raises the
-reported and verified lower bounds at five counts”, and its `notes` say the entry is
-pending adoption “while Green’s or Nagamochi’s reported value and the Karakus strip
-bound hold them”; the limitations of `E-wand125-linear-n122-1126-report` call the value
-“the strongest report at those counts”, 123 to 126. Since 14 October the reported lane
-at 126 is T-180’s $a(126) = 11.313323850997\ldots$, above 563/50
-(`packing/frontier/n-126.md`), as T-180’s own entry says.
-So T-144 would raise the reported lane at $n = 122$ to $125$, and the verified lane at
-$n = 122$ to $126$. The comparisons themselves are exact and correct.
+rationale says it “raises the reported and verified lower bounds at five counts”, and
+its `notes` say the entry is pending adoption “while Green’s or Nagamochi’s reported
+value and the Karakus strip bound hold them”; the limitations of
+`E-wand125-linear-n122-1126-report` call the value “the strongest report at those
+counts”, 123 to 126. Since 14 October the reported lane at 126 is T-180’s
+$a(126) = 11.313323850997\ldots$, above 563/50 (`packing/frontier/n-126.md`), as T-180’s
+own entry says. So T-144 would raise the reported lane at $n = 122$ to $125$, and the
+verified lane at $n = 122$ to $126$. The comparisons themselves are exact and correct.
 
 **R-2 — note, record.
 The pending-review clauses.** T-144’s `next_rung`, `unfinished_confirmations` and
