@@ -3,16 +3,20 @@ type: is
 id: is-01m7pjfyyepzebm5ryxhc6amet
 title: "Stage 4 review of T-144's mixed_n122_L1126 (wand125 s(122) >= 563/50, n = 122 to 126): the review that reads the linear certificate, owed before its replay evidence can be mapped"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: r144-1118
 labels:
   - result-import
   - validation
 dependencies: []
 parent_id: is-01m4kbxna1xdmjd8nkka3wax60
+hold: null
+hold_until: null
 created_at: 2026-11-18T05:36:22.990Z
-updated_at: 2026-11-18T05:36:22.990Z
+updated_at: 2026-11-18T05:37:37.484Z
+started_at: 2026-11-18T05:37:37.484Z
 ---
 T-144 (wand125's s(122) >= 563/50 = 11.26 by the linear certificate mixed_n122_L1126, raising n = 122 to 126; V0/C0 on main) has no review that reads its certificate: the 11 October final review (docs/project/reviews/review-2026-10-11-final-lower-bounds.md) read the record and premises only. result-import.md stage 4 needs a mapped mathematical review before the complete replay's evidence moves the verified lane (check_results verified_lane_review_problems), as the 14 October review did for T-179 and the 4/11 November reviews for T-142 and T-143.
 
