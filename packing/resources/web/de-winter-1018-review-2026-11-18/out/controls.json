@@ -1,0 +1,275 @@
+{
+ "program": "rv1018_controls.py",
+ "verdict": "ALL_CONTROLS_AS_PLANNED",
+ "not_as_planned": [],
+ "controls": {
+  "P0": {
+   "expected": "PREMISES_HOLD",
+   "got": "PREMISES_HOLD",
+   "as_planned": true,
+   "detail": null
+  },
+  "P1": {
+   "expected": "PREMISES_FAIL",
+   "got": "PREMISES_FAIL",
+   "as_planned": true,
+   "detail": "total mass 108 (row 0 heavier by 1/100000)"
+  },
+  "P2": {
+   "expected": "PREMISES_FAIL",
+   "got": "PREMISES_FAIL",
+   "as_planned": true,
+   "detail": "B = 12488/12500"
+  },
+  "P3": {
+   "expected": "PREMISES_FAIL",
+   "got": "PREMISES_FAIL",
+   "as_planned": true,
+   "detail": "last = 399"
+  },
+  "P4": {
+   "expected": "PREMISES_FAIL",
+   "got": "PREMISES_FAIL",
+   "as_planned": true,
+   "detail": "step 83/79000"
+  },
+  "P5": {
+   "expected": "PREMISES_FAIL",
+   "got": "PREMISES_FAIL",
+   "as_planned": true,
+   "detail": "h = 7071/10000"
+  },
+  "P6": {
+   "expected": "PREMISES_FAIL",
+   "got": "PREMISES_FAIL",
+   "as_planned": true,
+   "detail": "S + 1e-30"
+  },
+  "M0": {
+   "expected": "SCALED_COPY",
+   "got": "SCALED_COPY",
+   "as_planned": true,
+   "detail": null
+  },
+  "M1": {
+   "expected": "NOT_A_SCALED_COPY",
+   "got": "NOT_A_SCALED_COPY",
+   "as_planned": true,
+   "detail": "row 400 x0 + 1e-30"
+  },
+  "M2": {
+   "expected": "NOT_A_SCALED_COPY",
+   "got": "NOT_A_SCALED_COPY",
+   "as_planned": true,
+   "detail": "row 0 mass changed"
+  },
+  "M3": {
+   "expected": "NOT_A_SCALED_COPY",
+   "got": "NOT_A_SCALED_COPY",
+   "as_planned": true,
+   "detail": "1064/1062"
+  },
+  "M4": {
+   "expected": "NOT_A_SCALED_COPY",
+   "got": "NOT_A_SCALED_COPY",
+   "as_planned": true,
+   "detail": {
+    "multiset": true
+   }
+  },
+  "R0": {
+   "expected": "RUNS_COVER_THE_NET",
+   "got": "RUNS_COVER_THE_NET",
+   "as_planned": true,
+   "detail": null
+  },
+  "R1": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "direction 200 deleted"
+  },
+  "R2": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "direction 17 duplicated into the last file"
+  },
+  "R3": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "direction 300 refused"
+  },
+  "R4": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "direction 50 bound 0.99999"
+  },
+  "R5": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "input digest changed"
+  },
+  "R6": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "B changed to T-216's"
+  },
+  "R7": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "crate source changed"
+  },
+  "R8": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "a summary's node total + 1"
+  },
+  "R9": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "standard centre domain"
+  },
+  "R10": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "angle count 201"
+  },
+  "R11": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "direction 7 tree incomplete"
+  },
+  "R12": {
+   "expected": "RUNS_DO_NOT_COVER_THE_NET",
+   "got": "RUNS_DO_NOT_COVER_THE_NET",
+   "as_planned": true,
+   "detail": "direction 123 box centre moved past U_r"
+  },
+  "W0": {
+   "expected": "ACCEPTED",
+   "got": "ACCEPTED",
+   "as_planned": true,
+   "detail": {
+    "what": "right reading",
+    "poses": 101,
+    "below_logged_bound": 0,
+    "axis_exact_minus_bound": 6.972501284323211e-11
+   }
+  },
+  "W1": {
+   "expected": "REFUSED",
+   "got": "REFUSED",
+   "as_planned": true,
+   "detail": {
+    "what": "rows without their D4 images",
+    "poses": 101,
+    "below_logged_bound": 101,
+    "axis_exact_minus_bound": -1.0074788336221452
+   }
+  },
+  "W2": {
+   "expected": "REFUSED",
+   "got": "REFUSED",
+   "as_planned": true,
+   "detail": {
+    "what": "T-216's rows not rescaled",
+    "poses": 101,
+    "below_logged_bound": 1,
+    "axis_exact_minus_bound": 0.12132521178730785
+   }
+  },
+  "W3": {
+   "expected": "REFUSED",
+   "got": "REFUSED",
+   "as_planned": true,
+   "detail": {
+    "what": "T-216's core B = 9977/10000",
+    "poses": 101,
+    "below_logged_bound": 1,
+    "axis_exact_minus_bound": -0.003088760692301619
+   }
+  },
+  "W4": {
+   "expected": "REFUSED",
+   "got": "REFUSED",
+   "as_planned": true,
+   "detail": {
+    "what": "the standard step 83/40000",
+    "poses": 101,
+    "below_logged_bound": 2,
+    "axis_exact_minus_bound": 6.972501284323211e-11
+   }
+  },
+  "W5": {
+   "expected": "REFUSED",
+   "got": "REFUSED",
+   "as_planned": true,
+   "detail": {
+    "what": "field order [x0, x1, y0, y1] (49 rows degenerate)",
+    "poses": 101,
+    "below_logged_bound": 56,
+    "axis_exact_minus_bound": 0.8569137732058361
+   }
+  },
+  "A1": {
+   "expected": "REFUSED_EXACT",
+   "got": "REFUSED_EXACT",
+   "as_planned": true,
+   "detail": {
+    "least": "0.99740404535495149761"
+   }
+  },
+  "D1": {
+   "expected": "REFUSED_EXACT",
+   "got": "REFUSED_EXACT",
+   "as_planned": true,
+   "detail": {
+    "r": 1,
+    "nodes": 807,
+    "witness": "0.99993473907738846864"
+   }
+  },
+  "D2": {
+   "expected": "REFUSED_EXACT",
+   "got": "REFUSED_EXACT",
+   "as_planned": true,
+   "detail": {
+    "r": 200,
+    "nodes": 19,
+    "witness": "0.99961442340636913409"
+   }
+  },
+  "D3": {
+   "expected": "REFUSED_EXACT",
+   "got": "REFUSED_EXACT",
+   "as_planned": true,
+   "detail": {
+    "r": 399,
+    "nodes": 9,
+    "witness": "0.99967766144218609017"
+   }
+  },
+  "D4": {
+   "expected": "REFUSED_EXACT",
+   "got": "REFUSED_EXACT",
+   "as_planned": true,
+   "detail": {
+    "r": 375,
+    "threshold": "10047798276202321/10000000000000000",
+    "nodes": 38221,
+    "witness": "1.004764211079702429"
+   }
+  }
+ },
+ "cpu_seconds": 26.2
+}
