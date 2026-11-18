@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-31: #836-#847 new reports, #816, open drafts #817 #8
 kind: epic
 status: in_progress
 priority: 1
-version: 370
+version: 371
 delegate: bold-ritchie-l2
 labels:
   - result-import
@@ -122,7 +122,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T04:53:02.444Z
-updated_at: 2026-11-16T15:58:20.027Z
+updated_at: 2026-11-18T04:58:00.199Z
 started_at: 2026-10-31T08:37:28.427Z
 ---
 
@@ -336,3 +336,4 @@ started_at: 2026-10-31T08:37:28.427Z
 - 2026-11-16T13:57Z renewal (intake317): no change; queue empty, no lanes.
 - 2026-11-16T14:56Z renewal (intake318): no change; queue empty, no lanes.
 - 2026-11-16T16:00Z renewal (intake319): new #1005 (Özden, s(292) <= 17.590104218682, 15:27Z) and #1006 (de Winter, s(292) <= 17.590016442847, 15:39Z, lower). Both labelled intake; beads think-qag8 (import, L193) and think-p3g8 (blind review, L192); both lanes launched. The de Winter watched-repo row (fe13d47) is in L193's scope.
+- 2026-11-18T05:00Z: this session was paused by the weekly usage limit from about 16:30Z on 16 November until 04:00Z on 18 November; lanes L192 and L193 (#1005/#1006) stopped mid-work and are superseded, not resumed. Another session (branches claude/intake-2026-11-1[78]-*) took over intake: #1011 imported #1005-#1007 as T-310 to T-313 under think-qag8, #1013 reviewed them, and #908, #909, #953 merged and #574 closed. Open intake PRs #1023, #1024, #1028, #1029 belong to that session. This session's local L192/L193 worktrees are removed (branches kept, unpushed L193 commit superseded). Holding new lanes until the owner says which session owns the hourly intake.
