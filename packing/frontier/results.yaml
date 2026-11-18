@@ -50142,7 +50142,7 @@ results:
   - id: T-314
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's refinement of Ono's packing at 147, 3.42e-09 below T-302
     claim: >-
@@ -50336,7 +50336,7 @@ results:
   - id: T-315
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's re-solve of T-287's packing at 156, 2.59e-12 below it, beyond its padding
     claim: >-
@@ -50535,7 +50535,7 @@ results:
   - id: T-316
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's re-solve of T-288's packing at 180, 2.71e-12 below it, beyond its padding
     claim: >-
@@ -50735,7 +50735,7 @@ results:
   - id: T-317
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's new packing of 210 squares, 1.79e-03 below T-174
     claim: >-
@@ -50910,7 +50910,7 @@ results:
   - id: T-318
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's further arrangement of Daniel's packing at 260, 1.10e-08 below T-269
     claim: >-
@@ -51085,7 +51085,7 @@ results:
   - id: T-319
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       de Winter's packing at 262 improved by Polkovskyi, 8.99e-03 below 16 + √2/2, 1.58e-03
       below T-312
@@ -51276,7 +51276,7 @@ results:
   - id: T-320
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's improvement of Özden's packing at 268, 1.62e-04 below T-289
     claim: >-
@@ -51450,7 +51450,7 @@ results:
   - id: T-321
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's re-solve of T-283's packing at 270, 3.25e-12 below it, beyond its padding
     claim: >-
@@ -51653,7 +51653,7 @@ results:
   - id: T-322
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's new packing of 272 squares, 8.53e-05 below T-174
     claim: >-
@@ -51828,7 +51828,7 @@ results:
   - id: T-323
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       de Winter's packing at 292 improved by Polkovskyi, 1.36e-03 below T-146, 3.62e-09
       below T-311
@@ -52022,7 +52022,7 @@ results:
   - id: T-324
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's packing of 295 squares, 6.12e-03 below (22 + 22 sqrt 2)/3 and 1.58e-03 below
       #1007
@@ -52209,7 +52209,7 @@ results:
   - id: T-325
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's re-solve of T-277's packing at 299, 3.53e-12 below it, beyond its padding
     claim: >-
@@ -52413,7 +52413,7 @@ results:
   - id: T-326
     kind: upper-bound
     registered: '2026-11-17'
-    landed: '2026-11-17'
+    landed: '2026-11-18'
     headline: >-
       Polkovskyi's re-solve of T-279's packing at 307, 3.48e-12 below it, beyond its padding
     claim: >-
