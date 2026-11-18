@@ -1,0 +1,189 @@
+{
+ "program": "r127_compare.py",
+ "decides": "nothing",
+ "contraction": [
+  {
+   "step": "#1015 -> #1017",
+   "receipt": "contraction-1015-1017.json",
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "contracted_side_equal": true,
+   "margin_equal": true,
+   "gain_equal": true,
+   "binding_pair_maintained": [
+    31,
+    34
+   ],
+   "binding_pairs_ours": [
+    [
+     31,
+     34
+    ]
+   ],
+   "within_margin_maintained": false,
+   "beats_ours": true,
+   "routes_accept_maintained": true,
+   "gain_over_margin_maintained": "252681585973133287080932524917764497070574789496810766336.0000",
+   "cpu_seconds_maintained": 39.6,
+   "agree": true
+  },
+  {
+   "step": "#1015 -> #1020",
+   "receipt": "contraction-1015-1020.json",
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "contracted_side_equal": true,
+   "margin_equal": true,
+   "gain_equal": true,
+   "binding_pair_maintained": [
+    31,
+    34
+   ],
+   "binding_pairs_ours": [
+    [
+     31,
+     34
+    ]
+   ],
+   "within_margin_maintained": false,
+   "beats_ours": true,
+   "routes_accept_maintained": true,
+   "gain_over_margin_maintained": "252681609199891275412332889013116040252256011144065449984.0000",
+   "cpu_seconds_maintained": 40.16,
+   "agree": true
+  },
+  {
+   "step": "#1017 -> #1020",
+   "receipt": "contraction-1017-1020.json",
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "contracted_side_equal": true,
+   "margin_equal": true,
+   "gain_equal": true,
+   "binding_pair_maintained": [
+    35,
+    88
+   ],
+   "binding_pairs_ours": [
+    [
+     35,
+     88
+    ]
+   ],
+   "within_margin_maintained": false,
+   "beats_ours": true,
+   "routes_accept_maintained": true,
+   "gain_over_margin_maintained": "4.2899",
+   "cpu_seconds_maintained": 4.6,
+   "agree": true
+  },
+  {
+   "step": "T-305 -> #1015",
+   "receipt": "contraction-t305-1015.json",
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "contracted_side_equal": true,
+   "margin_equal": true,
+   "gain_equal": true,
+   "binding_pair_maintained": [
+    89,
+    93
+   ],
+   "binding_pairs_ours": [
+    [
+     89,
+     93
+    ]
+   ],
+   "within_margin_maintained": false,
+   "beats_ours": true,
+   "routes_accept_maintained": true,
+   "gain_over_margin_maintained": "7919468.3901",
+   "cpu_seconds_maintained": 22.18,
+   "agree": true
+  },
+  {
+   "step": "T-305 -> #1017",
+   "receipt": "contraction-t305-1017.json",
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "contracted_side_equal": true,
+   "margin_equal": true,
+   "gain_equal": true,
+   "binding_pair_maintained": [
+    89,
+    93
+   ],
+   "binding_pairs_ours": [
+    [
+     89,
+     93
+    ]
+   ],
+   "within_margin_maintained": false,
+   "beats_ours": true,
+   "routes_accept_maintained": true,
+   "gain_over_margin_maintained": "7935631.1601",
+   "cpu_seconds_maintained": 20.75,
+   "agree": true
+  },
+  {
+   "step": "T-305 -> #1020",
+   "receipt": "contraction-t305-1020.json",
+   "side_equal": true,
+   "lambda_star_equal": true,
+   "contracted_side_equal": true,
+   "margin_equal": true,
+   "gain_equal": true,
+   "binding_pair_maintained": [
+    89,
+    93
+   ],
+   "binding_pairs_ours": [
+    [
+     89,
+     93
+    ]
+   ],
+   "within_margin_maintained": false,
+   "beats_ours": true,
+   "routes_accept_maintained": true,
+   "gain_over_margin_maintained": "7935631.1615",
+   "cpu_seconds_maintained": 21.23,
+   "agree": true
+  }
+ ],
+ "all_contraction_rows_agree": true,
+ "identity_receipts": [
+  {
+   "receipt": "identity-1015.json",
+   "keys": [
+    "format",
+    "inputs",
+    "n",
+    "pairs",
+    "tilts"
+   ]
+  },
+  {
+   "receipt": "identity-1017.json",
+   "keys": [
+    "format",
+    "inputs",
+    "n",
+    "pairs",
+    "tilts"
+   ]
+  },
+  {
+   "receipt": "identity-1020.json",
+   "keys": [
+    "format",
+    "inputs",
+    "n",
+    "pairs",
+    "tilts"
+   ]
+  }
+ ]
+}
