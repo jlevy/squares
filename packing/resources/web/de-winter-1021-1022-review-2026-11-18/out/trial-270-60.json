@@ -1,0 +1,16 @@
+{
+ "n": 270,
+ "digits": 60,
+ "decide_accept": true,
+ "cpu_A": 0.33,
+ "cpu_B": 4.26,
+ "cpu_contraction": 0.55,
+ "lambda_less_1": 0.024623876679471537,
+ "cpu_identity": 0.41,
+ "cpu_C0_per_pair": 0.00029895384199999996,
+ "price": {
+  "one_decision_both_methods_s": 4.6,
+  "check_report_s": 9.2,
+  "C0_all_pairs_s": 10.9
+ }
+}
