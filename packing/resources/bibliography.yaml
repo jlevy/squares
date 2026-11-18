@@ -563,7 +563,7 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-10-05'
-    credit: Daniel after Couzo, de Winter, Ellsworth, Levy
+    credit: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, Levy
     lineage: builds-on-project
     note: >-
       evand/square-packing at 13ee36e5807727d12a5da36b9b90a96bdba272bf
@@ -586,6 +586,9 @@ sources:
       web/evand-square-packing-2026-10-05/ retains those 125 certificates, both checkers,
       the solver and the reports, and pins the rest by digest; the n = 17 certificate is
       held and left out (think-x4v4).
+      Since 18 November 2026 the credit also names T-057's own sources, which the README of
+      [de Winter n211 2026-11-18] names: Arslanov, Mustafin and Shangitbayev, Friedman and
+      Ellsworth (think-a88h).
   - key: '[squarepacker s12 2026]'
     authors: [Ryu]
     year: 2026
@@ -1434,8 +1437,39 @@ sources:
       combined with two grids, and other sources it does not name; that it was made with
       GPT-6 Astra as AI collaborator; and that he has added those sources to the
       repository's README. Read at 01:37Z on 17 November 2026, the repository's head is
-      still 702df9bb and its README, 84 bytes, names none, so the credit stays de Winter
-      until a published revision names them (think-a88h).
+      still 702df9bb and its README, 84 bytes, names none. The author published that revision
+      on 18 November 2026, 43e15330, a key of its own, [de Winter n211 2026-11-18], which
+      carries T-057's credit since; this key stays the certificate's.
+  - key: '[de Winter n211 2026-11-18]'
+    authors: [de Winter]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-18'
+    credit: de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth
+    short_credit: de Winter after Arslanov et al.
+    lineage: independent
+    ai_assistance:
+      sentence: 'The repository’s README says the numerical search and refinement were performed with GPT-6 Astra under the direction of Joost de Winter, and that earlier solutions and optimization scripts supplied to the model had been developed with Claude Opus and previous GPT models.'
+      marker: 'Claude Opus and previous GPT models'
+      anchor: 'square-packing-211'
+    note: >-
+      JoostdeWinter/square-packing-211 at 43e15330, 2026-11-18: the README revision the
+      author pushed in answer to jlevy/squares#1008 and named there in his comment of that
+      day. It changes the README alone; the packing of 211 unit squares at side
+      14.99796070496771500150 and its figure are the same files, byte for byte, as at
+      702df9bb, which [de Winter n211 2026-09-16] cites and whose packet certifies. The
+      README says the packing combines a 64-square rectangular component from Arslanov,
+      Mustafin and Shangitbayev (2021), a computationally found 30-square component and
+      two aligned grids of 99 and 18 squares, and names its sources: [Arslanov et al.], for
+      the construction of tilted components combined with grids and for the 64-square
+      component; Erich Friedman's collection and his survey [Friedman DS7]; and David
+      Ellsworth's records, the last two as starting points and for comparison. So T-057's
+      credit is read from this key. The README says the search and refinement were done
+      with GPT-6 Astra under the author's direction, from earlier solutions and scripts
+      developed with Claude Opus and previous GPT models. No licence; the README is retained
+      on the presumption of permission from submission (think-cnn7; the licence follow-up
+      is think-zx9y), and the packing is not retained again
+      (web/de-winter-square-packing-211-2026-11-18/README.md). Dated by that revision.
   - key: '[griffcass square-packing 2026-09-23]'
     authors: [Casson]
     year: 2026
@@ -2709,7 +2743,7 @@ sources:
     venue: GitHub
     dated: '2026-10-13'
     lineage: builds-on-project
-    credit: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth, Levy
+    credit: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, BuddenPing, Fang, Ellsworth, Levy
     short_credit: Couzo after Daniel et al.
     note: >-
       Fourteen complete exact certificates at b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d, nine
@@ -2723,6 +2757,9 @@ sources:
       issue. The source checks with Squares Project (Levy) verification code; this project
       lineage is not independent. The certificates are retained as factual data; the
       unlicensed prose is hash-pinned. No optimizer, local or global claim.
+      Since 18 November 2026 the credit also names T-057's own sources, which the README of
+      [de Winter n211 2026-11-18] names: Arslanov, Mustafin and Shangitbayev, Friedman and
+      Ellsworth (think-a88h).
   - key: '[PingYou n153 refinement 2026-10-12]'
     authors: [PingYou Ltd]
     year: 2026
@@ -2813,7 +2850,7 @@ sources:
     venue: GitHub
     dated: '2026-10-13'
     lineage: builds-on-project
-    credit: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+    credit: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, Fang, Ellsworth, Levy
     short_credit: Couzo after Daniel et al.
     note: >-
       Seven complete exact certificates at 45966700cf15d3f42e064fd6da51fcb9a5def2be that
@@ -2825,6 +2862,9 @@ sources:
       Fang's 380-382. The source checks with Squares Project (Levy) verification code; this
       project lineage is not independent. The certificates are retained as factual data; the
       unlicensed prose is hash-pinned. No optimizer, local or global claim.
+      Since 18 November 2026 the credit also names T-057's own sources, which the README of
+      [de Winter n211 2026-11-18] names: Arslanov, Mustafin and Shangitbayev, Friedman and
+      Ellsworth (think-a88h).
   - key: '[Mishapolk exact certificates 2026-10-12]'
     authors: [Polkovskyi]
     year: 2026
@@ -2862,7 +2902,7 @@ sources:
     venue: GitHub
     dated: '2026-10-13'
     lineage: builds-on-project
-    credit: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
+    credit: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, Couzo, Levy, Xu
     short_credit: Ostashev after Nakajima et al.
     note: >-
       Four complete exact certificates at b909e1b74cda50906e12b4373e010ddee39e47e4 in the
@@ -2877,6 +2917,9 @@ sources:
       mpmath cross-check pinned against the issue-501 packet, neither run here. AI
       assistance stated: AI agents wrote and ran the search and verification code. No local
       or global optimality is registered.
+      Since 18 November 2026 the credit also names T-057's own sources, which the README of
+      [de Winter n211 2026-11-18] names: Arslanov, Mustafin and Shangitbayev, Friedman and
+      Ellsworth (think-a88h).
   - key: '[Mishapolk records 2026-10-14]'
     authors: [Polkovskyi]
     year: 2026
@@ -2986,7 +3029,7 @@ sources:
     venue: GitHub
     dated: '2026-10-14'
     lineage: builds-on-project
-    credit: Couzo after Ostashev, Daniel, de Winter, Levy
+    credit: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, Levy
     short_credit: Couzo after Ostashev et al.
     note: >-
       The author's verified-bounds index at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d,
@@ -3003,6 +3046,9 @@ sources:
       index are hash-pinned; they state nothing about AI assistance, and the author's
       issues of 13 and 14 October disclose OpenAI Codex and Claude Code assistance. No
       optimizer, local or global claim is replayed.
+      Since 18 November 2026 the credit also names T-057's own sources, which the README of
+      [de Winter n211 2026-11-18] names: Arslanov, Mustafin and Shangitbayev, Friedman and
+      Ellsworth (think-a88h).
   - key: '[Couzo certificates 2026-10-14]'
     authors: [Couzo]
     year: 2026
@@ -4277,7 +4323,7 @@ sources:
     venue: GitHub
     dated: '2026-10-25'
     lineage: builds-on-project
-    credit: Daniel after Couzo, Ostashev, de Winter, Levy
+    credit: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, Levy
     short_credit: Daniel after Couzo et al.
     note: >-
       One complete exact certificate at evand/square-packing@d99925d1298262c4ddb81c95abbb6f45adca8d3d,
@@ -4299,6 +4345,9 @@ sources:
       retained beside it. MIT-licensed; Claude assistance disclosed. The KKT and
       local-minimum statements are the author's numerical evidence; no global optimality
       claim. Retained in web/evand-n182-2026-10-25/.
+      Since 18 November 2026 the credit also names T-057's own sources, which the README of
+      [de Winter n211 2026-11-18] names: Arslanov, Mustafin and Shangitbayev, Friedman and
+      Ellsworth (think-a88h).
   - key: '[Daniel S12H Lean 2026-09-28]'
     authors: [Daniel]
     year: 2026
@@ -4505,7 +4554,7 @@ sources:
     venue: GitHub
     dated: '2026-10-30'
     lineage: builds-on-project
-    credit: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit, Levy
+    credit: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
     short_credit: Polkovskyi after Daniel et al.
     note: >-
       Thirteen complete exact certificates first committed in ten commits of 23 October 2026 (e386aab
@@ -4513,6 +4562,9 @@ sources:
       which the packet pins, with no issue: re-certifications about 1e-19 below the houses at 154,
       155, 183, 211, 227, 236, 237, 241 and 271, and certificates at 88, 126, 152, 204 and 270 the
       ledger does not record. MIT-licensed (LICENSE at 17cc220). Retained in web/mishapolk-1023-refinements-2026-10-30/.
+      Since 18 November 2026 the credit also names T-057's own sources, which the README of
+      [de Winter n211 2026-11-18] names: Arslanov, Mustafin and Shangitbayev, Friedman and
+      Ellsworth (think-a88h).
   - key: '[Couzo n130 2026-10-27]'
     authors:
     - Couzo
@@ -5120,7 +5172,7 @@ sources:
     venue: GitHub
     dated: '2026-11-10'
     lineage: builds-on-project
-    credit: 'Ozden after Daniel, Couzo, Ostashev, de Winter, Levy'
+    credit: 'Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, Levy'
     short_credit: 'Ozden after Daniel et al.'
     note: >-
       kenaznia-doga/s156-upper-bound at 87c92921a64216d38914a7af488a7d7a91cf1eb7
@@ -5146,6 +5198,9 @@ sources:
       re-hardened from Daniel's exact optimum of Joost de Winter's packing (T-057), so since
       jlevy/squares#1008 the credit carries that seed's line by attribution.md's chain rule,
       where it had named the seed's finder alone.
+      Since 18 November 2026 the credit also names T-057's own sources, which the README of
+      [de Winter n211 2026-11-18] names: Arslanov, Mustafin and Shangitbayev, Friedman and
+      Ellsworth (think-a88h).
   - key: '[Özden s180 upper bound 2026-11-10]'
     authors:
     - 'Özden'

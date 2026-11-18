@@ -2402,7 +2402,8 @@ LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
 #: polynomial anywhere" with the polynomial it registers (25 October 2026). Joost de
 #: Winter's credit request #1008 (17 November 2026, think-dp8t) rewrote n = 211's packing
 #: paragraph, which had said T-057's source "says nothing about AI assistance", with the
-#: AI collaborator and the unpublished sources his issue names.
+#: AI collaborator and the unpublished sources his issue names; think-a88h (18 November
+#: 2026) rewrote it again with the sources and assistance his README's revision names.
 LATER_HISTORY_REWRITES: dict[tuple[int, str], tuple[str, str, str]] = {
     (29, "T-195"): (
         "**The minimal polynomial (T-246).**",
@@ -2416,9 +2417,9 @@ LATER_HISTORY_REWRITES: dict[tuple[int, str], tuple[str, str, str]] = {
     (211, "T-188"): (
         (
             "It reports an outward interval check at 80 digits but publishes no boxes or "
-            "checker. The repository says"
+            "checker. Its README, since the revision"
         ),
-        "so the credit stays de Winter’s until a published revision does.",
+        "had been developed with Claude Opus and previous GPT models.",
         (
             "It reports an outward interval check at 80 digits but publishes no boxes or "
             "checker, and it says nothing about AI assistance."

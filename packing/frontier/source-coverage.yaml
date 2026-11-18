@@ -2815,6 +2815,33 @@ sources:
     Q here (T-057). The source''s author-reported interval check publishes no boxes or checker. It
     was found on 2026-09-29 alongside issue #227 and is not in the live catalogue. On 2026-10-05 Evan
     Daniel''s exact optimum of the same packing (T-098) superseded it.'
+- id: de-winter-square-packing-211-2026-11-18
+  title: square-packing-211, README revision
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing-211/tree/43e15330bab7dd11588067167a2dd370137ef2b7
+  local: resources/web/de-winter-square-packing-211-2026-11-18/
+  source_key: '[de Winter n211 2026-11-18]'
+  scope:
+    n_values:
+    - 211
+  reviewed: '2026-11-18'
+  source_date: '2026-11-18'
+  disposition: superseded-covered
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-211.md
+  - witnesses/de-winter-2026/n-211-rational.yaml.gz
+  evidence:
+  - E-n211-de-winter-report
+  - E-n211-de-winter-exact-replay
+  - E-n211-de-winter-interval-replay
+  notes: 'Joost de Winter''s repository at 43e15330bab7dd11588067167a2dd370137ef2b7, the README revision
+    of 18 November 2026 he named on jlevy/squares#1008, retained on 2026-11-18 as its README alone. It
+    changes the README only: its packing of 211 squares at side 14.99796070496771500150 is the file
+    the 2026-09-16 revision holds, byte for byte, so it claims nothing that source does not, and the
+    evidence is that source''s (T-057). The README names the packing''s sources, Arslanov, Mustafin
+    and Shangitbayev (2021), Erich Friedman''s collection and survey and David Ellsworth''s records,
+    so T-057''s credit is read from this key since that day.'
 - id: casson-square-packing-2026
   title: 'Squares in squares: 39 improved packings (n = 103-307)'
   role: source-repository
