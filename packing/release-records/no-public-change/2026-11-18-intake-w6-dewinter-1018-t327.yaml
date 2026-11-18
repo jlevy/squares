@@ -41,4 +41,8 @@ reason: >-
   bound citation it reads is n = 11's, which this change does not touch. So the change is the
   live register count, which follows the site's data and is not a revision of the paper, as
   the earlier intake records say. No PDF was printed; each prints from that HTML. Every paper
-  keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
+  keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7. Review A of #1029 changed
+  two of these paths again, T-327's notes in results.yaml and a ceiling reason in site_urls.py;
+  measured again on 18 November with devtools.compare_paper_renders against ed8933486, the
+  head before that round, with its copies of both swapped in, all four papers are
+  byte-identical across the three renders (55, 43, 43 and 43 files).
