@@ -1,0 +1,43 @@
+{
+  "status": "BUNDLE_READY",
+  "certificate": "n122",
+  "environment": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "PYTHONOPTIMIZE": null
+  },
+  "tarball": {
+    "status": "TARBALL_MATCHES_PIN",
+    "path": "problems/square-lower-bounds/certificates/mixed_n122_L1126/n122-L11.26-proof-bundle.tar.gz",
+    "revision": "a9f76c382d023b4095899c4eb7ea7483b8b87ecf",
+    "sha256": "3986d902d11ba2c91a8e56c9b18bb07bf8876c24451587480b2a86c4ba9a55d0",
+    "bytes": 38912523,
+    "origin": "certificates/mixed_n122_L1126/n122-L11.26-proof-bundle.tar.gz of the release asset certificates__mixed_n122_L1126.tar.gz (supplied), held to its pin 6443eae03c56dc99051965246dbf97f5f3540feb9c011eac96e6d094521f5deb",
+    "refused_routes": []
+  },
+  "bindings": {
+    "status": "BUNDLE_BOUND_TO_PACKET",
+    "files": 810,
+    "checker_copies": 202,
+    "upstream_seconds": 51876.8
+  },
+  "preconditions": {
+    "status": "DRIVER_PRECONDITIONS_HOLD",
+    "candidate_digest": "c91a750977764335d3668599bf7e599539b30f7c81969372fc27ad90561e9ed4",
+    "angles": 201,
+    "total_mass": "12199999/100000",
+    "checker_sha256": "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d"
+  },
+  "inputs": {
+    "status": "ALL_INPUTS_ENCLOSE_THE_CANDIDATE",
+    "inputs": 201,
+    "images": {
+      "rectangle": 24,
+      "point": 4016,
+      "segment": 10144
+    },
+    "gamma": "1",
+    "scope": "Each input hashes to its recorded digest and every interval encloses the exact datum recomputed from the candidate; coverage is not decided here."
+  },
+  "bundle": "/tmp/claude-0/-home-user-squares/bd74155c-bf06-5d6c-a727-558842453a91/scratchpad/w8/work-n122/unpacked/n122-L11.26-proof-bundle"
+}

@@ -1,0 +1,16 @@
+{
+  "status": "AUDITED_AND_PACKAGED",
+  "n": 122,
+  "L": "563/50",
+  "total_mass": "12199999/100000",
+  "compared_with": "136997226681726948745326834984261099397688222112609270139116687497990897107228651469431571451/12200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "compared_note": "Green G_11 = 2*sqrt2-1+(1100+10*sqrt22)/122 (Friedman DS7, Theorem 9 with k = 11), rational upper bound from 90-digit integer square roots; Green's published proof has gaps for k>=4",
+  "improvement_lower": "374773318273051254673165015738900602311777887390729860883312502009102892771348530568428549/12200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "candidate_digest": "c91a750977764335d3668599bf7e599539b30f7c81969372fc27ad90561e9ed4",
+  "all_angles": 201,
+  "certificate_sha256": "6b57cddadcb75c6f29fbfc3384b521f86dca5deb5d9620df0ee78fbb39dfe709",
+  "verifier_source_sha256": "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d",
+  "archive_sha256": "3986d902d11ba2c91a8e56c9b18bb07bf8876c24451587480b2a86c4ba9a55d0",
+  "replay_scope": "All angles including axis use regenerated inputs and the SAME outward-rounded implementation. Not an independent second algorithm or proof-assistant formalization.",
+  "bundle": "n122-L11.26-proof-bundle"
+}

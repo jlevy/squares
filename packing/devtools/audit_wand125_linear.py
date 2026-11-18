@@ -99,10 +99,14 @@ N82_PACKET = mixed.WEB / "wand125-linear-n82-2026-10-02"
 #: pins the bundle in its release record (`mixed.release_members`).
 N145_REVISION = "22f06b31a9295c8185be5d30a1a7b19982b16847"
 N145_PACKET = mixed.WEB / "wand125-linear-n145-2026-10-13"
+#: ``mixed_n122_L1126`` of wand125/square-packing (T-144), held the same way: the packet
+#: retains its candidate and certificate from the release asset and pins the bundle.
+N122_REVISION = "a9f76c382d023b4095899c4eb7ea7483b8b87ecf"
+N122_PACKET = mixed.WEB / "wand125-linear-n122-2026-10-10"
 #: Where a packet of wand125/square-packing keeps the source's tree, and the certificate
 #: directories' folder in it; every other packet is of wand125/square-packing-bounds.
 SQUARE_PACKING_LAYOUT = ("square-packing", Path("problems/square-lower-bounds"))
-LAYOUTS = {N145_PACKET: SQUARE_PACKING_LAYOUT}
+LAYOUTS = {N122_PACKET: SQUARE_PACKING_LAYOUT, N145_PACKET: SQUARE_PACKING_LAYOUT}
 LINEAR_SCHEMA = "point_line_rectangle_v1"
 #: ``unified_linear_verify.cpp``, the checker every linear certificate names.
 LINEAR_CHECKER_SHA256 = "0249726ab1e67dc481e0c53f43b524902a48f95d051b1b08865a3cf3ef89a06d"
@@ -200,6 +204,17 @@ _LINEAR_ROWS: tuple[tuple[Path, str, int, str, Fraction, int, int, int, str], ..
         222,
         774,
         "5ddb7ed328ca3250e8d0ffaab577a68acd8a2debfa600a43500e05e5ee019606",
+    ),
+    (
+        N122_PACKET,
+        N122_REVISION,
+        122,
+        "11.26",
+        Fraction(563, 50),
+        502,
+        1268,
+        3,
+        "c91a750977764335d3668599bf7e599539b30f7c81969372fc27ad90561e9ed4",
     ),
     (
         N145_PACKET,
@@ -1077,16 +1092,27 @@ def linear_replay(
 #: the replays, as (certificate, net index, CPU seconds here, the source's seconds for the
 #: same angle in its bundle's ``summary.json``): 2026-10-02 on a 4-core KVM guest (Intel
 #: Xeon at 2.10 GHz) with its other cores busy, checker built by the shipped
-#: ``compile_verifier``. The receipts are in the 2026-10-02 linear packet.
+#: ``compile_verifier``. The receipts are in the 2026-10-02 linear packet. n = 122's two
+#: are the 2026-10-10 diagnostic sample on the same kind of host, two workers at once
+#: (`devtools.fine_net_followup linear-sample`, ``receipts/linear-sample-diagnostic.json``
+#: in its packet).
 PRICE_SAMPLES: tuple[tuple[str, int, float, float], ...] = (
     ("n101", 150, 123.841, 133.350),
     ("n83", 50, 273.307, 249.558),
+    ("n122", 37, 57.358, 73.635),
+    ("n122", 108, 117.857, 152.037),
 )
 
 #: The source's own seconds for each complete run, summed over its bundle's 201 records.
 #: n = 82's run was resumed and finished on other machines (its ``completion-audit.json``),
 #: and has no sampled angle here.
-UPSTREAM_SECONDS = {"n101": 31303.5, "n83": 75685.9, "n82": 118941.6, "n145": 109342.3}
+UPSTREAM_SECONDS = {
+    "n101": 31303.5,
+    "n83": 75685.9,
+    "n82": 118941.6,
+    "n122": 51876.8,
+    "n145": 109342.3,
+}
 
 
 def linear_costs(certificate: LinearCertificate) -> list[float]:
