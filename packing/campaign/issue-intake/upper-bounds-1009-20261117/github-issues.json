@@ -1,0 +1,9 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [
+    {"report":"#1005","kind":"issue","number":1005,"url":"https://github.com/jlevy/squares/issues/1005","author":"kenaznia-doga","created_at":"2026-11-16T15:27:38Z","state":"open","closed_at":null,"title":"s(292) ≤ 17.590104218682: improved packing (registration request)"},
+    {"report":"#1006","kind":"issue","number":1006,"url":"https://github.com/jlevy/squares/issues/1006","author":"JoostdeWinter","created_at":"2026-11-16T15:39:16Z","state":"open","closed_at":null,"title":"Lowered upper bound for n = 292 (side 17.590016442847): registration request"},
+    {"report":"#1007","kind":"issue","number":1007,"url":"https://github.com/jlevy/squares/issues/1007","author":"JoostdeWinter","created_at":"2026-11-16T21:28:27Z","state":"open","closed_at":null,"title":"Lowered upper bounds for n = 262 (side 16.699693441904) and n = 295 (side 17.699693441716): registration request"},
+    {"report":"#1009","kind":"issue","number":1009,"url":"https://github.com/jlevy/squares/issues/1009","author":"Mishapolk","created_at":"2026-11-16T23:38:22Z","state":"open","closed_at":null,"title":"Lowered upper bounds for 7 counts (n = 210, 260, 262, 268, 272, 292, 295) and 6 exact 12-place refinements (n = 147, 156, 180, 270, 299, 307): registration request"}
+  ]
+}

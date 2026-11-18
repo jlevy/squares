@@ -40,11 +40,12 @@ from sqpack.witness import load_witness
 #: above the 52 at Couzo's n = 301. Since 12 November 2026 Doğa Özden's n = 237 (T-295)
 #: carries 103, above the 85 at Couzo's n = 267. Since 16 November 2026 JoeGun's n = 305
 #: (T-309, think-0y9m), whose turned squares keep the binary64 pose's many slightly
-#: different angles, carries 131, above Özden's 103 at n = 237.
+#: different angles, carries 131, above Özden's 103 at n = 237. Since 18 November 2026
+#: Mykhailo Polkovskyi's n = 295 (T-324, think-i38n) carries 165, above JoeGun's 131.
 GOLDEN_MAX_ANGLE_CLASSES: dict[str, tuple[int, int]] = {
     "n=1..100": (14, 69),
     "n=1..200": (67, 182),
-    "n=1..324": (131, 305),
+    "n=1..324": (165, 295),
 }
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
@@ -447,10 +448,11 @@ def _angle_classes_by_case() -> dict[int, dict[int, list[tuple[int, float]]]]:
 
 
 def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries() -> None:
-    """The current corpus asks for 131 angle classes in one frame; the palette has 20.
+    """The current corpus asks for 165 angle classes in one frame; the palette has 20.
 
     The renderer colors per frame, so the relevant count is the largest class count
-    in any single frame: 131 at JoeGun's n = 305 (T-309) since its adoption on 16 November
+    in any single frame: 165 at Mykhailo Polkovskyi's n = 295 (T-324) since its adoption on
+    18 November 2026, 131 at JoeGun's n = 305 (T-309) from its adoption on 16 November
     2026, and 103 at Doğa Özden's n = 237 (T-295) from its adoption on 12 November 2026,
     against 14 when the corpus stopped at 100. Before that it was 85 at
     Couzo's n = 267 (T-134) from the house adoption of 11 October 2026. It was 106 at the
@@ -463,8 +465,11 @@ def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries()
 
     Hues 0 and 1 survive the wrap by construction -- `RESERVED_HUES` is subtracted
     before the modulus -- and that is what the last assertion checks on the record: in
-    every frame, a class takes hue 0 exactly when it holds a right angle and hue 1
-    exactly when it holds a 45 degree tilt, wrapping frames included.
+    every frame, a square takes hue 0 exactly when it is a right angle and hue 1 exactly
+    when it is a 45 degree tilt, wrapping frames included; the class's other squares
+    share one hue, which is 0 or 1 only where the class holds that angle. A class seeded
+    just outside the tolerance can hold a square inside it, which takes the pin alone:
+    n = 292's class 0 since 18 November 2026 (T-323, review A5 of #1023).
     """
     classes_by_case = _angle_classes_by_case()
     largest, case = max((len(classes), n) for n, classes in classes_by_case.items() if classes)
@@ -513,22 +518,35 @@ def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries()
 
     tolerance = float(spec.angle_tolerance_radians)
     wrapped_cases = 0
+    straddling: set[tuple[int, int]] = set()
     for n, classes in classes_by_case.items():
         if len(classes) > unpinned_slots:
             wrapped_cases += 1
         for angle_class, members in classes.items():
-            hue_indices = {hue for hue, _radians in members}
-            assert len(hue_indices) == 1, (n, angle_class, hue_indices)
-            hue = hue_indices.pop()
-            assert hue < spec.hue_count
-            right_angle = any(
-                min(radians, QUARTER_TURN - radians) <= tolerance for _hue, radians in members
-            )
-            diagonal = any(
-                abs(radians - QUARTER_TURN / 2) <= tolerance for _hue, radians in members
-            )
-            assert (hue == 0) == right_angle, (n, angle_class, hue)
-            assert (hue == 1) == diagonal, (n, angle_class, hue)
+            right = [min(r, QUARTER_TURN - r) <= tolerance for _hue, r in members]
+            diagonal = [abs(r - QUARTER_TURN / 2) <= tolerance for _hue, r in members]
+            for (hue, _radians), at_right, at_diagonal in zip(
+                members, right, diagonal, strict=True
+            ):
+                assert hue < spec.hue_count
+                if at_right:
+                    assert hue == 0, (n, angle_class, hue)
+                if at_diagonal:
+                    assert hue == 1, (n, angle_class, hue)
+            rest = {
+                hue
+                for (hue, _radians), at_right, at_diagonal in zip(
+                    members, right, diagonal, strict=True
+                )
+                if not (at_right or at_diagonal)
+            }
+            assert len(rest) <= 1, (n, angle_class, rest)
+            if rest == {0}:
+                assert any(right), (n, angle_class)
+            if rest == {1}:
+                assert any(diagonal), (n, angle_class)
+            if rest and any(right) and rest != {0}:
+                straddling.add((n, angle_class))
         unreserved = [
             next(iter({hue for hue, _ in members}))
             for members in classes.values()
@@ -537,6 +555,9 @@ def test_the_palette_holds_at_the_largest_angle_class_count_the_corpus_carries()
         if len(unreserved) > unpinned_slots:
             assert len(set(unreserved)) < len(unreserved), n
     assert wrapped_cases > 0
+    # The one class whose right angle takes the pin alone: 292's, 0.92 microradians off
+    # in a class seeded 1.87 off.
+    assert straddling == {(292, 0)}
 
 
 def test_color_parameters_reject_nonpositive_values() -> None:
@@ -603,6 +624,89 @@ def test_right_angles_and_diagonals_are_pinned_across_the_atlas() -> None:
                 diagonal_hues.add(color.hue_index)
     assert right_angle_hues == {0}
     assert diagonal_hues == {1}
+
+
+def test_a_square_at_a_right_angle_takes_hue_zero_whatever_its_class() -> None:
+    """Greedy seeding put n = 292's square 0.92 microradians off the axis into a class
+    seeded 1.87 microradians off, whose mean, 1.48 off, lies outside the 1-microradian
+    tolerance (18 November 2026, T-323). The square takes the pin, and the class's other
+    squares keep the class's hue, as n = 110's class 1.6 microradians off does (review A5
+    of #1023)."""
+    from sqpack.render import color  # noqa: PLC0415
+
+    tolerance = RenderSpec().angle_tolerance_radians
+    quarter = color.QUARTER_TURN_RADIANS
+    orientations = (
+        quarter - Decimal("1.87e-6"),
+        quarter - Decimal("1.64e-6"),
+        quarter - Decimal("1.48e-6"),
+        quarter - Decimal("0.92e-6"),
+        color.HALF_QUARTER_RADIANS + Decimal("0.5e-6"),
+        Decimal("0.3"),
+    )
+    square_hues = color._square_hues  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    hues = square_hues(
+        (9, 1, 4), {0: 0, 1: 0, 2: 0, 3: 0, 4: 1, 5: 2}, orientations, tolerance=tolerance
+    )
+    assert hues == {0: 9, 1: 9, 2: 9, 3: 0, 4: 1, 5: 4}
+    representative = color._orientation_representative(orientations, (0, 1, 2, 3))  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert color._pinned_hue(representative, tolerance=tolerance) is None  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+
+def _regularized_frames() -> list[tuple[str, PackingFrame]]:
+    """Every regularized view the layer retains, as a frame, with its file's name."""
+    import gzip  # noqa: PLC0415
+
+    from sqpack.witness import validate_witness_document  # noqa: PLC0415
+    from sqpack.yamlio import load_yaml  # noqa: PLC0415
+
+    frames = []
+    for path in sorted((ATLAS / "known-best/regularized").glob("n-*-regularized.yaml.gz")):
+        document = load_yaml(gzip.decompress(path.read_bytes()).decode("utf-8"))
+        frames.append(
+            (path.name, frame_from_witness(validate_witness_document(document, path=path)))
+        )
+    return frames
+
+
+@pytest.mark.slow
+def test_only_292_holds_a_pinned_square_in_an_unpinned_class() -> None:
+    """Review A6 of #1023 (OR-1): the per-square pin of `_square_hues` changes a drawing
+    only where a class whose representative is unpinned holds a square at a pinned angle.
+    Over the 324 house witnesses and every retained regularized view, that is n = 292's
+    house alone (T-323, one class of four squares 0.92 to 1.87 microradians off the
+    axis), measured here rather than once in scratch."""
+    from sqpack.render import color  # noqa: PLC0415
+
+    spec = RenderSpec(overlays=frozenset())
+    tolerance = spec.angle_tolerance_radians
+    witnesses = sorted((ROOT / "witnesses/known-best").glob("n-*.yaml"))
+    frames = [(path.name, frame_from_witness(load_witness(path))) for path in witnesses]
+    frames += _regularized_frames()
+    found = set()
+    for name, frame in frames:
+        orientations = tuple(color._square_orientation(square) for square in frame.squares)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        contacts = color._full_side_contacts(  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+            frame,
+            orientations=orientations,
+            angle_tolerance=tolerance,
+            contact_tolerance=spec.full_side_contact_tolerance,
+        )
+        classes, _, _ = color._angle_classes(orientations, tolerance=tolerance)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        classes, representatives = color._merge_contact_angle_classes(  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+            classes,
+            orientations=orientations,
+            contacts_by_square=contacts,
+            square_ids=tuple(square.square_id for square in frame.squares),
+        )
+        for members, representative in zip(classes, representatives, strict=True):
+            if color._pinned_hue(representative, tolerance=tolerance) is None and any(  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+                color._pinned_hue(orientations[member], tolerance=tolerance) is not None  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+                for member in members
+            ):
+                found.add((name, len(members)))
+    assert len(frames) == 324 + len(list((ATLAS / "known-best/regularized").glob("*.yaml.gz")))
+    assert found == {("n-292.yaml", 4)}
 
 
 def test_unpinned_classes_take_hues_by_descending_class_size() -> None:
