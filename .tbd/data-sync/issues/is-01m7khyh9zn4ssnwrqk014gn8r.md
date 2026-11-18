@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: w3r2-pass-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T04:48:17.850Z
+updated_at: 2026-11-18T05:10:01.653Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -42,3 +42,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-18T03:38Z w3r-pass-1118: CI fixes done and pushed; head 0377a7f51 (merged main through #1025 at ac721bcee). Colorizer fix a3e92c5f0 (_class_pin: only 292's house frame changes, measured over 424 frames). No-public-change record re-measured against a1a8d0aae with 15 paths (007b19063). Local: records tier 55/55, 1,573 tests in the 22 affected modules pass, sweeps census fixed. Waiting for hosted CI on 0377a7f51, then the coordinator's senior review.
 
 2026-11-18T04:58Z w3r2-pass-1118: took over from w3r-pass-1118 (killed by a worker restart about 04:30Z). Already on the branch from the dead lane: 57466324a (A1, render_announcement credits the case record's finder and improver, think-gpni) and ff07d4e69 (A5/A6, per-square pin plus retained reach test). Finished its uncommitted A2/A3 start with the owner's answer (think-frl5): 571bc0c80 pushed (five case records, ledger notes, packet README, runs' README, tests; A7 comment). Next: merge origin/main 3ac78a55f (#1026, #1027), stamp, re-pin, PR description, CI, dispositions, round-2 check.
+
+2026-11-18T05:17Z w3r2-pass-1118: review A addressed. Head b003ae7c5 (merged main 3ac78a55f #1027 at 2d41cc5d2; stamp no-op; re-pin 0db1e5b4f to 571bc0c8; b003ae7c5 registers the A6 slow test's cost after hosted shard A failed on 0db1e5b4f). Description updated (announcement pasted unedited from the fixed tool; A3 row; A8 outputs). Dispositions https://github.com/jlevy/squares/pull/1023#issuecomment-6969700612. Next: hosted CI on b003ae7c5, round-2 check of A1/A5 by the coordinator, merge on 18 Nov.
