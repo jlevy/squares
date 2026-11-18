@@ -1,0 +1,30 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/frontier/results.yaml
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane L45, the senior review of #908 (accept with fixes): #532's summary, ask
+  note and block reason, and #776's and #777's summaries, say that T-142's and T-143's
+  replays ran on 4 November ahead of the owner's order of 11 October and that their
+  adoption waits on the owner's decision about it; T-142's and T-143's notes say the
+  same, and that #892 adopted the enclosure rule while #543's question to the owner on
+  T-142's control tolerance is still open; T-143's notes name its pre-publication
+  receipt as the check2 run's own record. No result, rung, side, bound, mark or credit
+  changes, and the register still holds 264 results. Against the branch head f2b64a4ea:
+  devtools.compare_paper_renders --baseline HEAD with the two paths named here swapped
+  in, SQPACK_CHROMIUM /usr/bin/google-chrome: 55, 43, 43 and 43 files, byte-identical
+  across its three renders of each paper. No PDF was printed; each prints from that
+  HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
