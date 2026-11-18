@@ -25,7 +25,7 @@ reason: >-
   (#1027) is mapped, and its lower bound at 108 and 109 is registered as T-327 at V3/C3, which
   moves both lower lanes at both counts; the requests entry, the coverage source, the case
   records, the composite figure record and the bound citations follow. No paper prints 108's
-  or 109's lower bounds, this entry or that source. Against main 3ac78a55f9 (#1027):
+  or 109's lower bounds, this entry or that source. Against main 86284ec20 (#1023):
   devtools.compare_paper_renders rendered each paper into empty site directories, the math
   passes in /opt/pw-browsers/chromium-1243/chrome-linux64/chrome (SQPACK_CHROMIUM), twice from
   this tree and once with that main's copies of the six paths above swapped in. The
@@ -34,8 +34,8 @@ reason: >-
   Markdown and HTML differ from the baseline; rendered again with main's copies of every path
   but results.yaml swapped in, all 55 are byte-identical, so the difference is results.yaml's
   alone: the register count the explainer reads ("one of N results the framework has
-  registered so far"), 314 here and 313 on main, as the first measurement of this record found
-  against a1a8d0aae. The novelty count is unchanged (T-327 is previously-published), and the
+  registered so far"), 327 here and 326 on main, as the first measurement of this record found
+  against a1a8d0aae and the second against 3ac78a55f9. The novelty count is unchanged (T-327 is previously-published), and the
   bound citation it reads is n = 11's, which this change does not touch. So the change is the
   live register count, which follows the site's data and is not a revision of the paper, as
   the earlier intake records say. No PDF was printed; each prints from that HTML. Every paper
