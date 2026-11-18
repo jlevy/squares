@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T02:28:13.213Z
+updated_at: 2026-11-18T02:39:22.085Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -40,3 +40,5 @@ R-127 (blind review), 2026-11-18 02:40Z: runs done and pushed (branch claude/int
 R-127 (blind review), 2026-11-18 02:27Z: findings frozen and pushed at 3db7ac1fe (checker freeze 950cf3106 at 02:02Z). Verdict: all three certificates (#1015, #1017, #1020) accepted, both files each; every report-order step beats its predecessor's contraction margin (closest #1017 to #1020: gain 1.79761e-13, margin 4.19030e-14, ratio 4.29). Significance confirmed here: #1015 S3, #1017 S2, #1020 S2. (Correction: the previous note's 02:40Z should read 02:20Z.) Next: post-freeze comparison, doc map, synopsis, draft PR.
 
 2026-11-18T02:28:01Z w6-dewinter-1118: correction: the note headed 02:31Z (PR #1024 opened) was written at about 02:24Z, and the one headed 02:21Z at about 02:20Z; times were mistyped.
+
+R-127 (blind review), 2026-11-18 02:40Z: draft PR #1025 opened (labels intake, S2), head b11797085 (main a1a8d0aae merged in), base a1a8d0aae; coordinator messaged for a senior review; hosted CI pending at handoff. Review: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md; packet packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/. About 0.55 CPU-hours in all. Lane r127-1118 stops here; worktree /home/user/wt/r127 is left untouched for the review round.
