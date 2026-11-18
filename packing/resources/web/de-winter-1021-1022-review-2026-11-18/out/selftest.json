@@ -1,0 +1,89 @@
+{
+ "checks": 67,
+ "failed": [],
+ "mutants": {
+  "M1 method A on square i's axes only": {
+   "caught": true,
+   "checks_failed": 6,
+   "first": [
+    "j-axis apart margin 1/10",
+    "turned vertex contact margin 0",
+    "turned vertex overlap margin -1/10"
+   ]
+  },
+  "M2 method A's H without |sin D|": {
+   "caught": true,
+   "checks_failed": 7,
+   "first": [
+    "j-axis apart margin 1/10",
+    "j-axis apart, reversed pair",
+    "turned vertex contact margin 0"
+   ]
+  },
+  "M3 margin 0 classed as overlap": {
+   "caught": true,
+   "checks_failed": 3,
+   "first": [
+    "shrunk packing accepted, binding pair touching",
+    "decide accepts touching",
+    "decide accepts clockwise listings"
+   ]
+  },
+  "M4 method B with open half-planes": {
+   "caught": true,
+   "checks_failed": 8,
+   "first": [
+    "edge contact B",
+    "vertex contact B",
+    "turned vertex contact B"
+   ]
+  },
+  "M5 method B ignoring the listing sense": {
+   "caught": true,
+   "checks_failed": 1,
+   "first": [
+    "decide accepts clockwise listings"
+   ]
+  },
+  "M6 contraction at the least factor": {
+   "caught": true,
+   "checks_failed": 5,
+   "first": [
+    "unequal factors lambda 2/3",
+    "unequal factors shrunk 8/3, margin 5/6",
+    "shrunk packing accepted, binding pair touching"
+   ]
+  },
+  "M7 half-extent 1/2 at every angle": {
+   "caught": true,
+   "checks_failed": 1,
+   "first": [
+    "turned clearances 0"
+   ]
+  },
+  "M8 twin accepting any corner order": {
+   "caught": true,
+   "checks_failed": 3,
+   "first": [
+    "twin offset 2 ccw",
+    "twin reversed cw",
+    "twin swap is none"
+   ]
+  },
+  "M9 identity orientation on raw directions": {
+   "caught": true,
+   "checks_failed": 1,
+   "first": [
+    "identity orientation modulo quarter turns"
+   ]
+  },
+  "M10 scalar accepting a plus sign": {
+   "caught": true,
+   "checks_failed": 1,
+   "first": [
+    "form J refuses plus"
+   ]
+  }
+ },
+ "verdict": "PASSED"
+}
