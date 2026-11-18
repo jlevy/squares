@@ -49960,8 +49960,11 @@ results:
       the same sign, where T-305 has 56, 26.42 to 31.83 degrees, all one way. So it is close
       to T-305's arrangement, its band rearranged, but not one to one with it.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (R-127, under think-zqot).
+      Both maintained exact routes accept the certificate. The blind stage 4 review of record of
+      18 November (R-127b), at the tier stage 4 names, accepts it with no blocking or major
+      finding, as the additional blind review R-127 does, each by a clean-room checker of its
+      own deciding every square, wall and pair by two exact methods: confirmed, independently
+      re-implemented.
 
       The issue says the author's two checkers, verify_exact.py (separating axes) and
       check_area.py (the area of each close pair's clipped intersection), both Fraction and the
@@ -49994,7 +49997,9 @@ results:
         where new and continued arrangements are S3, as T-304 at 90 and T-320 at 268. No
         technique is new, so not S4. No lower bound or optimum.
       scored: '2026-11-18'
-      by: think-zqot Joost de Winter import (intake lane w6-dewinter-1118), a draft for the stage 4 review
+      by: >-
+        the stage 4 review of record of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md), confirming the registering
+        lane's draft (think-zqot), as the additional review (docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md) does
     novelty: previously-published
     attribution:
       source_keys:
@@ -50003,6 +50008,36 @@ results:
     evidence:
     - E-de-winter-1015-certificate-report
     - E-de-winter-1015-exact-feasibility
+    - E-de-winter-1015-review-exact-feasibility
+    - E-de-winter-1015-review-r127-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review of record, lane r127b-1118, separately prompted from the import lane and from R-127
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 127 of the certificates of issues 1015, 1017 and 1020 and their twins,
+        decided again by a clean-room exact checker by two methods with the controls a plan
+        hashed beforehand states, custody in the source's history, the sides and the issues'
+        numbers, option D's gains and contraction margins exactly, identity against T-305 and
+        each other, and the significance; compared with R-127 after its findings were frozen.
+      verdict: accepted
+      covers: [T-314, T-315, T-316]
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strong tier (tbd-strong) at xhigh reasoning, below the tier stage 4 names (its F13); the additional blind stage 4 review, lane r127-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 127 of the same three certificates and their twins by a clean-room
+        exact checker by two methods with planned controls, the claims' arithmetic, option D's
+        contraction margins and identity, and the significance; findings frozen before the
+        import lane's receipts were read.
+      verdict: accepted
+      covers: [T-314, T-315, T-316]
     artifacts:
     - packing/resources/web/de-winter-s127-issue1015-2026-11-17/README.md
     - packing/resources/web/de-winter-s127-issue1015-2026-11-17/acquisition/claims.json
@@ -50018,6 +50053,12 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/README.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/check-1015.json
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/controls-1015.json
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_w6_1118.py
@@ -50062,10 +50103,24 @@ results:
       9 squares turn by more than a degree and one reverses its tilt. The L-step scan
       (measure/l-step-scan.json), with this side stood in for 127's ceiling, finds main's
       consequences unchanged; the L step from 127 lands at 150 above its ceiling.
+
+      The blind stage 4 review of record of 18 November (R-127b, lane r127b-1118, PR #1028)
+      accepts all three certificates with fifteen findings, none blocking or major: F3, E1p's
+      frozen rule too narrow at #1020 and restated after the freeze, is the review's own; F9,
+      #1017's statement that later commits leave its files unchanged, false since a1ba501, is
+      minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
+      since each push that published a pin also fixed it; the rest are notes. The additional
+      review R-127 (lane r127-1118, PR #1025), at the strong tier and xhigh reasoning (its F13),
+      accepts them too, with thirteen findings, all notes, its F9 and Question 1 moot after its
+      addendum. R-127b's Questions 1 (the compilation certificate the search started from), 3
+      (amending #1017's statement) and 4 (#1020's squares 69 and 91, turned by about 0.035
+      degrees) go to the author with the reply, and its Question 2 is withdrawn. Each review's
+      clean-room run on this certificate is registered: E-de-winter-1015-review-exact-feasibility
+      (R-127b) and E-de-winter-1015-review-r127-exact-feasibility (R-127).
     next_rung: >-
-      The stage 4 exit: the blind review (R-127, under think-zqot) accepted and mapped, with
-      the house decision at 127, where T-316 is smaller; V4 and C4 need a second qualifying
-      adversarial review by a distinct reviewer and an explicit human oversight record.
+      None for the bound; the house decision at 127 takes T-316, which is smaller. V4 and C4
+      need an explicit human oversight record beside the two adversarial AI reviews of 18
+      November, R-127b and R-127.
   - id: T-315
     kind: upper-bound
     registered: '2026-11-18'
@@ -50085,8 +50140,11 @@ results:
       all 57 tilted squares paired with tilted squares of the same sign, as the issue's second
       stage, which shifted the tilted cap at the top of the band, says.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (R-127, under think-zqot).
+      Both maintained exact routes accept the certificate. The blind stage 4 review of record of
+      18 November (R-127b), at the tier stage 4 names, accepts it with no blocking or major
+      finding, as the additional blind review R-127 does, each by a clean-room checker of its
+      own deciding every square, wall and pair by two exact methods: confirmed, independently
+      re-implemented.
 
       The issue says the author's two checkers, unchanged from #1015's, each report 127
       squares and 312 close pairs, and that no test of local optimality was run. Those
@@ -50112,7 +50170,9 @@ results:
         T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), as T-323's 3.62e-09 at 292 (S2); the
         arrangement is T-314's (S3). No lower bound or optimum.
       scored: '2026-11-18'
-      by: think-zqot Joost de Winter import (intake lane w6-dewinter-1118), a draft for the stage 4 review
+      by: >-
+        the stage 4 review of record of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md), confirming the registering
+        lane's draft (think-zqot), as the additional review (docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md) does
     novelty: previously-published
     attribution:
       source_keys:
@@ -50121,6 +50181,36 @@ results:
     evidence:
     - E-de-winter-1017-certificate-report
     - E-de-winter-1017-exact-feasibility
+    - E-de-winter-1017-review-exact-feasibility
+    - E-de-winter-1017-review-r127-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review of record, lane r127b-1118, separately prompted from the import lane and from R-127
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 127 of the certificates of issues 1015, 1017 and 1020 and their twins,
+        decided again by a clean-room exact checker by two methods with the controls a plan
+        hashed beforehand states, custody in the source's history, the sides and the issues'
+        numbers, option D's gains and contraction margins exactly, identity against T-305 and
+        each other, and the significance; compared with R-127 after its findings were frozen.
+      verdict: accepted
+      covers: [T-314, T-315, T-316]
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strong tier (tbd-strong) at xhigh reasoning, below the tier stage 4 names (its F13); the additional blind stage 4 review, lane r127-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 127 of the same three certificates and their twins by a clean-room
+        exact checker by two methods with planned controls, the claims' arithmetic, option D's
+        contraction margins and identity, and the significance; findings frozen before the
+        import lane's receipts were read.
+      verdict: accepted
+      covers: [T-314, T-315, T-316]
     artifacts:
     - packing/resources/web/de-winter-s127-issue1017-2026-11-17/README.md
     - packing/resources/web/de-winter-s127-issue1017-2026-11-17/acquisition/claims.json
@@ -50137,6 +50227,12 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/README.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/check-1017.json
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/controls-1017.json
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_w6_1118.py
@@ -50174,10 +50270,24 @@ results:
       Measured pose by pose (measure/identity.json): against T-305 no symmetry pairs it one to
       one, and the optimal assignment moves 11 squares beyond a tenth (largest 0.789). The
       L-step scan finds main's consequences unchanged.
+
+      The blind stage 4 review of record of 18 November (R-127b, lane r127b-1118, PR #1028)
+      accepts all three certificates with fifteen findings, none blocking or major: F3, E1p's
+      frozen rule too narrow at #1020 and restated after the freeze, is the review's own; F9,
+      #1017's statement that later commits leave its files unchanged, false since a1ba501, is
+      minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
+      since each push that published a pin also fixed it; the rest are notes. The additional
+      review R-127 (lane r127-1118, PR #1025), at the strong tier and xhigh reasoning (its F13),
+      accepts them too, with thirteen findings, all notes, its F9 and Question 1 moot after its
+      addendum. R-127b's Questions 1 (the compilation certificate the search started from), 3
+      (amending #1017's statement) and 4 (#1020's squares 69 and 91, turned by about 0.035
+      degrees) go to the author with the reply, and its Question 2 is withdrawn. Each review's
+      clean-room run on this certificate is registered: E-de-winter-1017-review-exact-feasibility
+      (R-127b) and E-de-winter-1017-review-r127-exact-feasibility (R-127).
     next_rung: >-
-      The stage 4 exit: the blind review (R-127, under think-zqot) accepted and mapped, with
-      the house decision at 127, where T-316 is smaller; V4 and C4 need a second qualifying
-      adversarial review by a distinct reviewer and an explicit human oversight record.
+      None for the bound; the house decision at 127 takes T-316, which is smaller. V4 and C4
+      need an explicit human oversight record beside the two adversarial AI reviews of 18
+      November, R-127b and R-127.
   - id: T-316
     kind: upper-bound
     registered: '2026-11-18'
@@ -50203,8 +50313,11 @@ results:
       it lies 1.38e-13 below T-315's certificate shrunk to first contact, so under the owner's
       option D of 17 November 2026 (think-b0w5) it is a new result, not a restatement.
 
-      Both maintained exact routes accept the certificate; the stage 4 review is a separate
-      lane, blind to this one (R-127, under think-zqot).
+      Both maintained exact routes accept the certificate. The blind stage 4 review of record of
+      18 November (R-127b), at the tier stage 4 names, accepts it with no blocking or major
+      finding, as the additional blind review R-127 does, each by a clean-room checker of its
+      own deciding every square, wall and pair by two exact methods: confirmed, independently
+      re-implemented.
 
       The issue says the author's two checkers, unchanged from #1015's, each report 127
       squares and 308 close pairs, and that no test of local optimality was run. Those
@@ -50232,11 +50345,16 @@ results:
         moves one square beyond a tenth. The arrangement is T-314's (S3). No lower bound or
         optimum. The stage 4 review of 18 November (#1025) reads S2 at its floor: a further
         state of T-315's arrangement, its step 4.29 times T-315's contraction margin and not a
-        padding re-certification; the record keeps S1, as #1009's import did for its re-solves
-        at 1.01 to 1.07 times their margins, and the S1/S2 reading of such steps is with the
-        owner (think-mu3t).
+        padding re-certification, and the review of record (R-127b) reads S2 too, with S1 as its
+        alternative, on #1020's identity and ratio; both leave the rule to the owner. The record
+        keeps S1, as #1009's import did for its re-solves at 1.01 to 1.07 times their margins,
+        and the S1/S2 reading of such steps is the owner's (think-mu3t), by which #1020, T-285
+        and T-286 are to be scored alike.
       scored: '2026-11-18'
-      by: think-zqot Joost de Winter import (intake lane w6-dewinter-1118), a draft for the stage 4 review
+      by: >-
+        think-zqot Joost de Winter import (intake lanes w6-dewinter-1118 and w6r-dewinter-1118),
+        under #1009's import's precedent for re-solves near one times their predecessors'
+        margins; the stage 4 reviews of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md and docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md) read S2
     novelty: previously-published
     attribution:
       source_keys:
@@ -50245,6 +50363,36 @@ results:
     evidence:
     - E-de-winter-1020-certificate-report
     - E-de-winter-1020-exact-feasibility
+    - E-de-winter-1020-review-exact-feasibility
+    - E-de-winter-1020-review-r127-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review of record, lane r127b-1118, separately prompted from the import lane and from R-127
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 127 of the certificates of issues 1015, 1017 and 1020 and their twins,
+        decided again by a clean-room exact checker by two methods with the controls a plan
+        hashed beforehand states, custody in the source's history, the sides and the issues'
+        numbers, option D's gains and contraction margins exactly, identity against T-305 and
+        each other, and the significance; compared with R-127 after its findings were frozen.
+      verdict: accepted
+      covers: [T-314, T-315, T-316]
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strong tier (tbd-strong) at xhigh reasoning, below the tier stage 4 names (its F13); the additional blind stage 4 review, lane r127-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 127 of the same three certificates and their twins by a clean-room
+        exact checker by two methods with planned controls, the claims' arithmetic, option D's
+        contraction margins and identity, and the significance; findings frozen before the
+        import lane's receipts were read.
+      verdict: accepted
+      covers: [T-314, T-315, T-316]
     artifacts:
     - packing/resources/web/de-winter-s127-issue1020-2026-11-17/README.md
     - packing/resources/web/de-winter-s127-issue1020-2026-11-17/acquisition/claims.json
@@ -50261,6 +50409,12 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/README.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/check-1020.json
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/controls-1020.json
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/README.md
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_w6_1118.py
@@ -50300,11 +50454,24 @@ results:
       squares beyond a tenth); against T-305 no symmetry pairs it one to one, and the optimal
       assignment moves 9 squares beyond a tenth (largest 0.789). The L-step scan finds main's
       consequences unchanged.
+
+      The blind stage 4 review of record of 18 November (R-127b, lane r127b-1118, PR #1028)
+      accepts all three certificates with fifteen findings, none blocking or major: F3, E1p's
+      frozen rule too narrow at #1020 and restated after the freeze, is the review's own; F9,
+      #1017's statement that later commits leave its files unchanged, false since a1ba501, is
+      minor and the author's; F8, the checksum file at the #1017 and #1020 pins, is a note,
+      since each push that published a pin also fixed it; the rest are notes. The additional
+      review R-127 (lane r127-1118, PR #1025), at the strong tier and xhigh reasoning (its F13),
+      accepts them too, with thirteen findings, all notes, its F9 and Question 1 moot after its
+      addendum. R-127b's Questions 1 (the compilation certificate the search started from), 3
+      (amending #1017's statement) and 4 (#1020's squares 69 and 91, turned by about 0.035
+      degrees) go to the author with the reply, and its Question 2 is withdrawn. Each review's
+      clean-room run on this certificate is registered: E-de-winter-1020-review-exact-feasibility
+      (R-127b) and E-de-winter-1020-review-r127-exact-feasibility (R-127).
     next_rung: >-
-      The stage 4 exit: the blind review (R-127, under think-zqot) accepted and mapped, and the
-      house rule's adoption at 127, regularized in the same pull request; V4 and C4 need a
-      second qualifying adversarial review by a distinct reviewer and an explicit human
-      oversight record.
+      The house rule's adoption at 127, regularized in the same pull request. V4 and C4 need an
+      explicit human oversight record beside the two adversarial AI reviews of 18 November,
+      R-127b and R-127.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

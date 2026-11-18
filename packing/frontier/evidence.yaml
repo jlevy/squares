@@ -65082,6 +65082,21 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-18'
+    external_review:
+      state: informally-verified
+      date: '2026-11-18'
+      reviewed_by: >-
+        Claude (AI review), strongest tier (tbd-strong-max) at maximum reasoning, the blind stage
+        4 review of record, lane r127b-1118, and the additional blind review R-127 at the strong
+        tier and xhigh reasoning, lane r127-1118, each prompted separately from the import lane
+        and blind to it until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, the review of
+        record, accepts the certificate #1015 names, with fifteen findings, none blocking or
+        major; docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md (R-127) accepts
+        it too, with thirteen. Their clean-room runs on this certificate are
+        E-de-winter-1015-review-exact-feasibility and E-de-winter-1015-review-r127-exact-feasibility,
+        and the replay E-de-winter-1015-exact-feasibility.
     limitations: >-
       This atom records the source author's report, in issue 1015, of 1 exact rational
       certificate at 35b576a, n127/n127_exact.json, with its Witness/v2 twin n127_witness.yaml:
@@ -65186,6 +65201,21 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-18'
+    external_review:
+      state: informally-verified
+      date: '2026-11-18'
+      reviewed_by: >-
+        Claude (AI review), strongest tier (tbd-strong-max) at maximum reasoning, the blind stage
+        4 review of record, lane r127b-1118, and the additional blind review R-127 at the strong
+        tier and xhigh reasoning, lane r127-1118, each prompted separately from the import lane
+        and blind to it until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, the review of
+        record, accepts the certificate #1017 names, with fifteen findings, none blocking or
+        major; docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md (R-127) accepts
+        it too, with thirteen. Their clean-room runs on this certificate are
+        E-de-winter-1017-review-exact-feasibility and E-de-winter-1017-review-r127-exact-feasibility,
+        and the replay E-de-winter-1017-exact-feasibility.
     limitations: >-
       This atom records the source author's report, in issue 1017, of 1 exact rational
       certificate at cc20a26, n127/n127_exact.json, with its Witness/v2 twin n127_witness.yaml:
@@ -65290,6 +65320,21 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-11-18'
+    external_review:
+      state: informally-verified
+      date: '2026-11-18'
+      reviewed_by: >-
+        Claude (AI review), strongest tier (tbd-strong-max) at maximum reasoning, the blind stage
+        4 review of record, lane r127b-1118, and the additional blind review R-127 at the strong
+        tier and xhigh reasoning, lane r127-1118, each prompted separately from the import lane
+        and blind to it until its findings were frozen
+      note: >-
+        docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, the review of
+        record, accepts the certificate #1020 names, with fifteen findings, none blocking or
+        major; docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md (R-127) accepts
+        it too, with thirteen. Their clean-room runs on this certificate are
+        E-de-winter-1020-review-exact-feasibility and E-de-winter-1020-review-r127-exact-feasibility,
+        and the replay E-de-winter-1020-exact-feasibility.
     limitations: >-
       This atom records the source author's report, in issue 1020, of 1 exact rational
       certificate at a1ba501, n127/n127_exact.json, with its Witness/v2 twin n127_witness.yaml:
@@ -65377,4 +65422,259 @@ evidence:
       the 3 jobs, the receipt records 12.90 route CPU seconds. No square touches the box: every wall clears by at least 2e-60, and every pair by at least 1.6483e-59. The receipt's
       controls are gross, and the packet's sharp controls meet those margins. Finite
       feasibility only.
+    source_reviewed: '2026-11-18'
+  - id: E-de-winter-1015-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s127 issue 1015 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s127-issue1015-2026-11-17/source/n127/n127_exact.json
+    replay: >-
+      With the project interpreter (CPython 3.14.7) as python -I -B at nice 19 on a shared
+      host, 18 November 2026, from packing/ with R the review-only directory
+      packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18: the review of record's frozen rb127_check.py, run in pair mode on #1015's centre
+      file and its Witness/v2 twin at 35b576a (R/out/check-1015.json, ACCEPT), decided each
+      file natively and in the other form's terms, every one of the 127 squares a unit square
+      inside the box, every wall and all 8,001 pairs by separating axes in Python integers and
+      again by exact clipping in GMP rationals, with no distance filter and no tolerance, the
+      two methods' classes equal and every pair apart; the twin holds, the stated side is the
+      file's side and the claim, 11.800795682214, its 12-place ceiling. rb127_controls.py decided
+      the controls a plan hashed beforehand states (R/out/controls-1015.json), all 35 as stated; and
+      rb127_selftest.py passed 4,729 checks.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-1015-review-r127b-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 127 and its twin: every square, every wall and every pair, by
+          two exact methods in two arithmetic libraries that share only the readers
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, which share its readers, by the stage 4 review of record (lane
+      r127b-1118, under think-zqot). Finite feasibility only.
+    source_reviewed: '2026-11-18'
+  - id: E-de-winter-1015-review-r127-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s127 issue 1015 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s127-issue1015-2026-11-17/source/n127/n127_exact.json
+    replay: >-
+      With the project interpreter (CPython 3.14.7) as python -I -B at nice 19 on a shared
+      host, 18 November 2026, from the review-only directory packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18: the additional review's
+      frozen r127_check.py on #1015's centre file and, again, on its Witness/v2 twin, both as
+      retained there under source/i1015-35b576a/n127/ (out/check-1015-exact.json and
+      out/check-1015-witness.json, ACCEPT), deciding every square a unit square inside the box,
+      every wall and all 8,001 pairs by separating axes in Python integers and by exact
+      intersection in gmpy2.mpq with containment by area, with no distance filter, the two
+      methods required to agree, and the claim 11.800795682214 against the side; r127_twin.py
+      holds the two files to one packing, and r127_controls.py decided the plan's controls on
+      both (out/controls-1015-exact.json, out/controls-1015-witness.json), all as stated;
+      r127_selftest.py passed 10,486 checks.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-1015-review-r127-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 127 and its twin: every square, every wall and every pair, by
+          two exact methods that share only the reader
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, by the additional stage 4 review R-127 (lane r127-1118), which ran at
+      the tbd-strong tier and xhigh reasoning rather than the tier stage 4 names (its F13);
+      R-127b is the review of record. Finite feasibility only.
+    source_reviewed: '2026-11-18'
+  - id: E-de-winter-1017-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s127 issue 1017 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s127-issue1017-2026-11-17/source/n127/n127_exact.json
+    replay: >-
+      With the project interpreter (CPython 3.14.7) as python -I -B at nice 19 on a shared
+      host, 18 November 2026, from packing/ with R the review-only directory
+      packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18: the review of record's frozen rb127_check.py, run in pair mode on #1017's centre
+      file and its Witness/v2 twin at cc20a26 (R/out/check-1017.json, ACCEPT), decided each
+      file natively and in the other form's terms, every one of the 127 squares a unit square
+      inside the box, every wall and all 8,001 pairs by separating axes in Python integers and
+      again by exact clipping in GMP rationals, with no distance filter and no tolerance, the
+      two methods' classes equal and every pair apart; the twin holds, the stated side is the
+      file's side and the claim, 11.800793726616, its 12-place ceiling. rb127_controls.py decided
+      the controls a plan hashed beforehand states (R/out/controls-1017.json), all 35 as stated; and
+      rb127_selftest.py passed 4,729 checks.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-1015-review-r127b-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 127 and its twin: every square, every wall and every pair, by
+          two exact methods in two arithmetic libraries that share only the readers
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, which share its readers, by the stage 4 review of record (lane
+      r127b-1118, under think-zqot). Finite feasibility only.
+    source_reviewed: '2026-11-18'
+  - id: E-de-winter-1017-review-r127-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s127 issue 1017 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s127-issue1017-2026-11-17/source/n127/n127_exact.json
+    replay: >-
+      With the project interpreter (CPython 3.14.7) as python -I -B at nice 19 on a shared
+      host, 18 November 2026, from the review-only directory packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18: the additional review's
+      frozen r127_check.py on #1017's centre file and, again, on its Witness/v2 twin, both as
+      retained there under source/i1017-cc20a26/n127/ (out/check-1017-exact.json and
+      out/check-1017-witness.json, ACCEPT), deciding every square a unit square inside the box,
+      every wall and all 8,001 pairs by separating axes in Python integers and by exact
+      intersection in gmpy2.mpq with containment by area, with no distance filter, the two
+      methods required to agree, and the claim 11.800793726616 against the side; r127_twin.py
+      holds the two files to one packing, and r127_controls.py decided the plan's controls on
+      both (out/controls-1017-exact.json, out/controls-1017-witness.json), all as stated;
+      r127_selftest.py passed 10,486 checks.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-1015-review-r127-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 127 and its twin: every square, every wall and every pair, by
+          two exact methods that share only the reader
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, by the additional stage 4 review R-127 (lane r127-1118), which ran at
+      the tbd-strong tier and xhigh reasoning rather than the tier stage 4 names (its F13);
+      R-127b is the review of record. Finite feasibility only.
+    source_reviewed: '2026-11-18'
+  - id: E-de-winter-1020-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s127 issue 1020 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s127-issue1020-2026-11-17/source/n127/n127_exact.json
+    replay: >-
+      With the project interpreter (CPython 3.14.7) as python -I -B at nice 19 on a shared
+      host, 18 November 2026, from packing/ with R the review-only directory
+      packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18: the review of record's frozen rb127_check.py, run in pair mode on #1020's centre
+      file and its Witness/v2 twin at a1ba501 (R/out/check-1020.json, ACCEPT), decided each
+      file natively and in the other form's terms, every one of the 127 squares a unit square
+      inside the box, every wall and all 8,001 pairs by separating axes in Python integers and
+      again by exact clipping in GMP rationals, with no distance filter and no tolerance, the
+      two methods' classes equal and every pair apart; the twin holds, the stated side is the
+      file's side and the claim, 11.800793726615, its 12-place ceiling. rb127_controls.py decided
+      the controls a plan hashed beforehand states (R/out/controls-1020.json), 34 of 35 as stated, and E1p, whose frozen rule was too narrow for a packing whose width and height differ by less than 1e-40, as restated after the freeze (rb127_e1p.py; the review's F3); and
+      rb127_selftest.py passed 4,729 checks.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-1015-review-r127b-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 127 and its twin: every square, every wall and every pair, by
+          two exact methods in two arithmetic libraries that share only the readers
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, which share its readers, by the stage 4 review of record (lane
+      r127b-1118, under think-zqot). Finite feasibility only.
+    source_reviewed: '2026-11-18'
+  - id: E-de-winter-1020-review-r127-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter s127 issue 1020 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s127-issue1020-2026-11-17/source/n127/n127_exact.json
+    replay: >-
+      With the project interpreter (CPython 3.14.7) as python -I -B at nice 19 on a shared
+      host, 18 November 2026, from the review-only directory packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18: the additional review's
+      frozen r127_check.py on #1020's centre file and, again, on its Witness/v2 twin, both as
+      retained there under source/i1020-a1ba501/n127/ (out/check-1020-exact.json and
+      out/check-1020-witness.json, ACCEPT), deciding every square a unit square inside the box,
+      every wall and all 8,001 pairs by separating axes in Python integers and by exact
+      intersection in gmpy2.mpq with containment by area, with no distance filter, the two
+      methods required to agree, and the claim 11.800793726615 against the side; r127_twin.py
+      holds the two files to one packing, and r127_controls.py decided the plan's controls on
+      both (out/controls-1020-exact.json, out/controls-1020-witness.json), all as stated but eight of the plan's own step, which at #1020 had no subject or named too few squares (the review's F12);
+      r127_selftest.py passed 10,486 checks.
+    replay_status: passed
+    verifiers:
+    - V-de-winter-1015-review-r127-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 127 and its twin: every square, every wall and every pair, by
+          two exact methods that share only the reader
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    limitations: >-
+      A clean-room decision of the one retained certificate and its twin by two exact methods
+      in one program, by the additional stage 4 review R-127 (lane r127-1118), which ran at
+      the tbd-strong tier and xhigh reasoning rather than the tier stage 4 names (its F13);
+      R-127b is the review of record. Finite feasibility only.
     source_reviewed: '2026-11-18'
