@@ -21,6 +21,7 @@ is passed on and refused by the deciding methods.
 
 from __future__ import annotations
 
+import gzip
 import json
 import re
 from dataclasses import dataclass, field
@@ -343,16 +344,28 @@ def centre_corners(c: tuple[Fraction, Fraction], u: tuple[Fraction, Fraction]
     return out
 
 
-def read_path(path: str) -> Packing:
+def read_bytes(path: str) -> bytes:
+    """The file's bytes; a stored ``X.gz`` (gzip -9n, as the repository keeps large
+    retained files) is decompressed, bounded at 64 MiB."""
     with open(path, "rb") as fh:
         raw = fh.read()
+    if path.endswith(".gz"):
+        raw = gzip.decompress(raw)
+        if len(raw) > 64 * 1024 * 1024:
+            raise ReadError("decompressed file too large")
+    return raw
+
+
+def read_path(path: str) -> Packing:
+    raw = read_bytes(path)
     try:
         text = raw.decode("utf-8")
     except UnicodeDecodeError:
         raise ReadError("not UTF-8") from None
-    if path.endswith(".json"):
+    name = path[:-3] if path.endswith(".gz") else path
+    if name.endswith(".json"):
         return read_centre(text)
-    if path.endswith(".yaml"):
+    if name.endswith(".yaml"):
         return read_witness(text)
     raise ReadError("unknown file form")
 

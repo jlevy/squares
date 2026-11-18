@@ -331,6 +331,13 @@ def test_whole_files():
     check(T.compare(rr, w)["verdict"] == "DIFFERENT", "twin reordered differs")
     rs = Y.from_frames(r.side + E30, r.centres, r.directions)
     check(T.compare(rs, w)["verdict"] == "DIFFERENT", "twin resized differs")
+    for k in (1, 2, 3):
+        cr = [list(x) for x in w.corners]
+        cr[5][k] = (cr[5][k][0], cr[5][k][1] + E30)
+        w2 = R.read_witness(R.write_witness(r.n, r.side, cr))
+        res = T.compare(r, w2)
+        check(res["verdict"] == "DIFFERENT" and res["unequal_squares"] == [6],
+              f"twin differs at corner {k} of square 6")
 
 
 def test_contraction():

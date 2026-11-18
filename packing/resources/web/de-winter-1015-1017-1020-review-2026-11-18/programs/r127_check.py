@@ -82,9 +82,12 @@ def main() -> int:
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     t0 = time.process_time()
-    raw = open(a.file, "rb").read()
+    stored = open(a.file, "rb").read()
+    raw = R.read_bytes(a.file)
     receipt: dict = {"program": "r127_check.py", "file": a.file,
                      "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
+    if a.file.endswith(".gz"):
+        receipt["stored_sha256"] = hashlib.sha256(stored).hexdigest()
     try:
         p = R.read_path(a.file)
     except R.ReadError as exc:

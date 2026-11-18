@@ -138,7 +138,7 @@ def main() -> int:
             return 1
         labels.append(label)
         packs.append((p, c))
-        rec[label] = {"file": path, "sha256": hashlib.sha256(open(path, "rb").read()).hexdigest(),
+        rec[label] = {"file": path, "sha256": hashlib.sha256(R.read_bytes(path)).hexdigest(),
                       "side": D.fs(p.side), "side_decimal": D.dec(p.side, 30),
                       **{k: v for k, v in c.items() if not k.startswith("_")}}
         print(f"{label}: S={D.dec(p.side, 18)} lambda*=1-{c['one_less_lambda_star']} "

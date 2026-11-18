@@ -56,7 +56,7 @@ def main() -> int:
     a = ap.parse_args()
     p, q = R.read_path(a.first), R.read_path(a.second)
     res = compare(p, q)
-    res["files"] = {f: hashlib.sha256(open(f, "rb").read()).hexdigest() for f in (a.first, a.second)}
+    res["files"] = {f: hashlib.sha256(R.read_bytes(f)).hexdigest() for f in (a.first, a.second)}
     json.dump(res, open(a.out, "w"), indent=1)
     print(f"{a.first} vs {a.second}: {res['verdict']} unequal={res['unequal_count']} "
           f"listing={res['listing']}")
