@@ -3,9 +3,9 @@ type: is
 id: is-01m74fep2rzsgrq8ry7tty1bga
 title: "Import #941, #942: Joost de Winter's 31 lowered upper bounds for n between 413 and 989"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 17
+version: 18
 delegate: w4r-records-1118
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-11T04:56:55.639Z
-updated_at: 2026-11-18T01:19:03.507Z
+updated_at: 2026-11-18T03:54:57.913Z
 started_at: 2026-11-11T09:58:23.522Z
+closed_at: 2026-11-18T03:54:57.913Z
+close_reason: "#941 closed on 18 November 2026 with its final comment (issuecomment-6967033493): all fifteen rows verified, 809's by the owner's answer of 17 November (think-gmoj, row in #1016, merged 2980557a2); recorded closed in #1026 (merged 46510a0dc). Multi-square deletions stay on think-kzme; no count of #941 depends on them. check_bead_tree --before-close on main 46510a0dc: ok (w4r-records-1118)."
+resolution: null
+duplicate_of: null
 ---
 #941 (2026-11-10T13:30Z) fifteen lowered upper bounds n 413-910; #942 (14:41Z) sixteen n 632-989; JoostdeWinter. Beyond the atlas's 324, below the 1024 horizon: beyond-horizon rows. Precedent: Yim's 553-700 rows (PR #934). Starts after the Özden lane to stay within usage limits.
 

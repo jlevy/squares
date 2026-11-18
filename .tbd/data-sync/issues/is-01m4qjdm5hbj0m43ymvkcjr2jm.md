@@ -3,9 +3,9 @@ type: is
 id: is-01m4qjdm5hbj0m43ymvkcjr2jm
 title: "Import Rio Calle: s(102) <= 10.605828696455852 (#529)"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 10
+version: 11
 delegate: null
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:07:15.376Z
-updated_at: 2026-11-17T22:07:06.391Z
+updated_at: 2026-11-18T03:54:57.198Z
 started_at: 2026-10-12T08:07:43.538Z
+closed_at: 2026-11-18T03:54:57.197Z
+close_reason: "#529 closed on 18 November 2026 with its final comment (issuecomment-6967032263): T-159 kept by the owner (think-x30l), V3/C3, confirmed, superseded by T-193; recorded closed in #1026 (merged 46510a0dc). check_bead_tree --before-close on main 46510a0dc: ok (w4r-records-1118)."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/529 (2026-10-12T04:32:54Z). riocalle/my-repo at 831368623f2d4dcef2e9434fd85c3e154083c97d: n102_s10.605828696455852.txt (decimal centres and radian angles), JSON and SVG copies, verify_exact.py (60-digit decimal, not exact). The author's exact certificate comes from a private engine; the record's exact certificate must be built here from the layout. Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports.
 

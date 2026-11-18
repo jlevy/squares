@@ -3,9 +3,9 @@ type: is
 id: is-01m7khyjgjhvyjyzctxqbhxp5a
 title: "#1008: de Winter's credit request at 211 (T-188 derives from T-175, which re-hardens Daniel's T-098 of de Winter's T-057, after Arslanov, Mustafin and Shangitbayev 2021): verify the chain from the sources, correct the credit lines, reply"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 10
 delegate: w2-credit-1117r
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:09.906Z
-updated_at: 2026-11-17T23:54:32.078Z
+updated_at: 2026-11-18T03:54:58.673Z
 started_at: 2026-11-17T01:29:11.445Z
+closed_at: 2026-11-18T03:54:58.673Z
+close_reason: "#1008's chain check and credit changes landed in #1010 (240e3de0c) and its acknowledgement was posted (issuecomment-6964537872, w2-credit-1117r); #1026 (merged 46510a0dc) records the reply and its question (awaiting_author) and moves the answer bead to think-a88h, which waits on de Winter's sources. check_bead_tree --before-close on main 46510a0dc: ok (w4r-records-1118)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

@@ -3,9 +3,9 @@ type: is
 id: is-01m7npjb7gjrfe0cqpmnad6kc7
 title: "Stalled-bead audit of the 17 November sweep: renew or re-own each of the 84 quiet items (owner, what it waits on now, or close), so the sweep's Needs Action holds only live work"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: w5-audit-1117r
 labels:
   - intake
@@ -14,8 +14,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.976Z
-updated_at: 2026-11-17T21:54:17.993Z
+updated_at: 2026-11-18T03:54:59.627Z
 started_at: 2026-11-17T21:31:53.486Z
+closed_at: 2026-11-18T03:54:59.627Z
+close_reason: "The stalled-bead audit of the 17 November sweep is done (w5-audit-1117r); its findings were applied by the pass's lanes (809's row in #1016, the replies recorded in #1026, merged 46510a0dc). check_bead_tree --before-close on main 46510a0dc: ok (w4r-records-1118)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
