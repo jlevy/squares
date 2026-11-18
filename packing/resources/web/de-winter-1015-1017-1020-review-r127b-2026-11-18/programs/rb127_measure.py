@@ -61,6 +61,8 @@ def dec(text: str) -> Fraction:
 def sig_print(f: Fraction, figures: int) -> str:
     """``f`` rounded half away from zero to ``figures`` significant figures, as a plain
     decimal, from the exact value."""
+    if f == 0:
+        return "0"
     s = F.sci(f, figures)
     mant, _, exp = s.partition("e")
     e = int(exp)

@@ -257,18 +257,21 @@ def _second_reading(text: str) -> dict[str, Any]:
 def read_center_basis(data: bytes) -> dict[str, Any]:
     """Read a Witness/v2 file in ``center-basis`` form (the house witness on ``main``).
 
-    Used only to compare the house witness with the certificate it stands for; it is
-    read with the same node checks, without the line-by-line second reading.
+    Used only to compare the house witness with the certificate it stands for, never to
+    decide a packing: it is read with PyYAML's safe loader (the file's certificate block
+    holds booleans and flow sequences, which form C's node checks refuse), and its
+    centres and bases are parsed as strictly as any scalar.
     """
     text = _hygiene(data, "form CB", final_newline=True)
     try:
-        docs = list(yaml.compose_all(text, Loader=yaml.SafeLoader))
+        docs = list(yaml.safe_load_all(text))
     except yaml.YAMLError as exc:
         raise ReadError(f"form CB: not YAML ({str(exc)[:200]})") from None
     if len(docs) != 1 or docs[0] is None:
         raise ReadError("form CB: not one document")
-    _check_nodes(docs[0], set(), "$")
-    top = _build(docs[0])
+    top = docs[0]
+    if not isinstance(top, dict) or not isinstance(top.get("witness"), dict):
+        raise ReadError("form CB: no witness mapping")
     w = top["witness"]
     if w.get("representation") != "center-basis":
         raise ReadError(f"form CB: representation {w.get('representation')!r}")

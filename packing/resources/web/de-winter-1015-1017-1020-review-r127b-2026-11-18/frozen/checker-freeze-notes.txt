@@ -1,0 +1,54 @@
+Lane r127b-1118: the checker and the controls plan, frozen at 2026-11-18T03:18Z, before any program of this lane decided a certificate.
+
+Verify from this packet's directory, the one stated directory for this list:
+
+    sha256sum -c frozen/checker-frozen.sha256
+
+It covers the twenty programs and data files under programs/ (the plan, the three issues' saved REST responses, sixteen
+programs) and the two receipts made before the freeze on synthetic packings only, out/selftest.json and out/trial.json.
+
+The sources. frozen/sources-pins.sha256 lists the six certificate files at their pins, as fetched through GitHub's contents API
+at 02:45:23Z and, identically, by git from a full clone made at 02:44:29Z, checked from a directory holding NNNN/<file> for
+NNNN = 1015, 1017, 1020. frozen/sources-repo.sha256 lists the house certificate of T-305 and the house witness on main,
+checked from the repository root. The pins: #1015 35b576a355297942bca9c195bee5cd74f0b27f40, #1017
+cc20a26845789c2502950041c26709eda8a71081, #1020 a1ba5019e787e407646293d7bef81d63c9951b32, all on the one linear branch of
+JoostdeWinter/square-packing, whose head was 838c5ea8736f64ab383ebd5457066b6b4bd0dda7 when cloned.
+
+Read before the freeze:
+- the lane's briefs (blind-review-brief.md, common-brief.md, and the senior reviewer's brief, which a combined print showed);
+- the three issues' titles, bodies and metadata (REST, 02:43:56Z to 02:43:57Z; comments not fetched, all three showing 0);
+- packing/campaign/result-import.md (stage 4, the house rule, labels and significance), epistemics.md (significance), AGENTS.md;
+- the house format: the review of #1009 (docs/project/reviews/review-2026-11-17-polkovskyi-1009.md) in full, its packet README
+  and the heads of its two frozen lists; of the review of #1005 to #1007, its claims section, F11, F12, verdict and note on
+  the copy, and the heads of its frozen lists; neither review's programs, plans or receipts;
+- the owner decision bead think-b0w5's title and description (option D); its notes were empty;
+- in packing/frontier/results.yaml, the claims (first 200 characters) and significance of T-174, T-198, T-226, T-239,
+  T-253, T-260, T-280, T-283 to T-286, T-302, T-304 to T-306 and T-310 to T-313; grep hits for 'option D' and 'RV-3' in
+  RESULTS.md, results.yaml, result-requests.yaml and two dated reviews;
+- packing/witnesses/witness.schema.yaml; the Ruff, BasedPyright, Flowmark, Biome and lefthook exclusions and hooks;
+- the T-305 packet's README (lines 1 to 80), its file list, the structure of n-127-candidate.yaml (head, non-corner lines,
+  quoted scalars) and the key names of measure/contraction-n127-own.json, printed without its numbers; the head and the
+  non-square lines of packing/witnesses/known-best/n-127.yaml;
+- the help text of devtools.contraction_margin;
+- the source: its commit list and subjects, the files each commit changes under n127/, the tree listings at the three pins,
+  n127/SHA256SUMS at the pins and at the commits after them, and the six files' structure by head, tail, sed, grep, wc and od
+  (keys, line kinds, scalar forms and quoting, signs, line ends; the first 1,500 and last 600 bytes of each JSON file, the
+  first 60 and last 12 lines of each YAML file, squares 43, 44, 52 and 53 of #1017's YAML, the three negative scalars of
+  #1017's JSON).
+
+Seen, not opened: in the shared scratch directory and /home/user/wt, the names of other lanes' directories, among them r127,
+review-1025, w6-import-1015, w6-import-1018 and w7-optd.
+
+Run before the freeze: the programs on synthetic packings only (out/selftest.json, out/trial.json, and earlier trial runs in
+scratch that the final ones replace); and once, to confirm it parses, the centre-basis reader rb127_read.read_center_basis on
+the house witness packing/witnesses/known-best/n-127.yaml (it read 127 squares; nothing was decided or compared).
+
+Not read before the freeze: the source's README.md, REGISTRATION.md, verify_exact.py, check_area.py and n127_record.png;
+this repository's sqpack witness, verifier and promotion code and the code of devtools.contraction_margin,
+devtools.measure_identity and devtools.upper_bound_reports; the case record at 127; the import lane's branches, PR #1024,
+packets, receipts, ledger and beads; the earlier review R-127 (PR #1025, its branch, its scratch, its bead notes); issue
+comments; the bead think-zqot.
+
+Price, from out/trial.json on a synthetic packing of 127 squares at the certificates' scale: the check about 2 CPU-seconds and
+the controls about 18 CPU-seconds a certificate; for the four certificates, with scalars up to twice as long, at most half a
+CPU-hour in all and no single job above 10 CPU-minutes.
