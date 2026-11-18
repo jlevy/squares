@@ -129,8 +129,9 @@ marks a certificate whose only receipt failed closed, kept as
 | `mixed_n96_L997` | 96 | M | VERIFIED | 201 | 59,643,606 | 1.0000000000057894 | clears | 978.8 | 11.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n101_L1028` | 101 | L | VERIFIED | 201 | 53,145,987 | 1.000000000300333 | clears | 128.4 | 4.0 | all 201 | 27,669 | 128.0 | 216x | - |
 | `mixed_n108_L1062` | 108 | M | VERIFIED | 201 | 136,113,602 | 1.0000000001765084 | clears | 2086.8 | 9.5 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
+| `mixed_n108_L1063` | 108 | M | VERIFIED | 401 | 266,337,510 | 1.0000000000543061 | clears | 4624.0 | 3.3 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 
-102 of 102 certificates verified; 294731 recorded aggregate process CPU seconds in all.
+103 of 103 certificates verified; 299355 recorded aggregate process CPU seconds in all.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

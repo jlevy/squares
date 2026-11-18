@@ -199,6 +199,7 @@ MIXED_PACKETS = (
     "wand125-fine-net-n28-n30-2026-10-10",
     "ozden-s94-lower-bound-2026-11-03",
     "ozden-s94-lower-bound-9972-2026-11-05",
+    "de-winter-s108-lower-bound-2026-11-17",
 )
 #: A packet that is not Hosono's and keeps a format M certificate at its own upstream
 #: path, by the census name it is given (`mixed_nN_LDIGITS`, the format's convention) and
@@ -211,6 +212,11 @@ MIXED_FILES: dict[str, dict[str, str]] = {
     },
     "ozden-s94-lower-bound-9972-2026-11-05": {
         "mixed_n94_L9972": "source/certificate/n94-L9972.json.gz",
+    },
+    # Joost de Winter's rescaling of Hosono's mixed_n108_L1062 by 1063/1062 onto a net of
+    # 401 directions (jlevy/squares#1018), `lower_n108/evidence/n108_measure.json.gz`.
+    "de-winter-s108-lower-bound-2026-11-17": {
+        "mixed_n108_L1063": "source/lower_n108/evidence/n108_measure.json.gz",
     },
 }
 #: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
@@ -1299,6 +1305,10 @@ class PacketProvenance:
     says what of the source's own checking was not run here. `comparison` and `history`
     are optional sentences after the run's facts and after the controls: the replay's
     agreement with the source's own receipts, and a control receipt kept as it failed.
+    `consequence` is an optional sentence the theorem states after the census's own
+    conclusion, where the bound the case records hold follows from it by a further step
+    (#1018's enlargement and monotonicity, as T-016's entry carries n = 18 and 19), and
+    `pinpoint` names where that step is read and recomputed.
     """
 
     subject: str
@@ -1306,6 +1316,8 @@ class PacketProvenance:
     closing: str
     comparison: str = ""
     history: str = ""
+    consequence: str = ""
+    pinpoint: str = ""
 
 
 #: Hiroaki Hosono's packets (wand125), fetched by `fine_net_followup mixed-fetch`.
@@ -1370,6 +1382,53 @@ PACKET_PROVENANCE = {
             "Every direction's row equals the source's selected archive line on every field "
             "the line keeps, apart from timings, and the node totals are equal "
             "(receipts/replay-comparison.json in the packet). "
+        ),
+    ),
+    # #1018: Hosono's mixed_n108_L1062 dilated by 1063/1062 onto 401 directions at a core
+    # the source chose; its receipts are twelve native runs of this repository's crate built
+    # by another compiler, each with its own summary (audit_dilated_measure's NativeRuns).
+    "de-winter-s108-lower-bound-2026-11-17": PacketProvenance(
+        subject=(
+            "Joost de Winter's {certificate}, Hiroaki Hosono's mixed_n108_L1062 dilated by"
+            " 1063/1062 at core side 12487/12500"
+        ),
+        custody=(
+            "The candidate is the retained original gzip whose SHA-256 the SHA256SUMS the"
+            " source added in 67fb815, the commit after the pin, states and the packet's"
+            " acquisition record pins, which"
+            " devtools.audit_dilated_measure regenerates byte for byte from the T-216"
+            " packet's retained mixed_n108_L1062 by the source's stretch_measure.py rule."
+        ),
+        closing=(
+            "The source's exact audit, check_lower.py, is retained in the packet and was not"
+            " run here. The enlargement from 1063/100 to the claimed side is exact"
+            " arithmetic on the certificate, not a computation this replay runs; the"
+            " theorem states it with the monotonicity step to 109."
+        ),
+        comparison=(
+            "Every direction's row equals the source's twelve native runs, built by rustc"
+            " 1.100.0 from the same reviewed source, on every field but the timings, and the"
+            " node totals are equal (receipts/replay-comparison.json in the packet). "
+        ),
+        consequence=(
+            " The census decides more than that: at each of the 401 net directions, every"
+            " closed core of side 12487/12500 centred in format M's per-bin domain captures"
+            " mass at least 1. The source's enlargement carries this coverage to the side"
+            " S = 1700799526134255846599/159999384348528500000 = 10.6300379408297...: the"
+            " map x -> ux + h(1 - u), with u = 2Bw(D/2) = 319998768697057/320000086112500"
+            " and h = 707107/1000000, takes a packing of 108 unit squares in a square of"
+            " side S to 108 squares of side u with disjoint interiors in the square of side"
+            " 1063/100, each centred in the per-bin domain of its folded net direction and"
+            " containing a core of that direction, so the cores' masses add to at least"
+            " 108 > 10799999/100000, a contradiction, and s(108) >= S. And s(109) >= s(108)"
+            " >= S by monotonicity: a packing of 109 unit squares contains a packing of 108."
+        ),
+        pinpoint=(
+            "; the enlargement in the source's proof_n108.pdf (retained in the packet),"
+            " re-derived in that review's The Argument, Re-Derived, steps 3 to 7, and"
+            " recomputed in exact rationals by devtools.audit_dilated_measure"
+            " (V-audit-dilated-measure) in the packet's receipts/dilation-audit.json, its"
+            " enlargement block"
         ),
     ),
 }
@@ -1619,9 +1678,13 @@ INDEPENDENT_MIXED_PACKETS = frozenset(
 #: Packets whose producer decided the certificate with this repository's own
 #: `sqverify-fast`, unmodified, so a census row of it reproduces the producer's run: the
 #: #890 dilation and #910's, whose receipts name the crate source `d97758bb...` at
-#: e6e8d577.
+#: e6e8d577, and #1018's rescaling, whose twelve runs name the same source at f9ddfeeef.
 SAME_CRATE_PACKETS = frozenset(
-    {"ozden-s94-lower-bound-2026-11-03", "ozden-s94-lower-bound-9972-2026-11-05"}
+    {
+        "ozden-s94-lower-bound-2026-11-03",
+        "ozden-s94-lower-bound-9972-2026-11-05",
+        "de-winter-s108-lower-bound-2026-11-17",
+    }
 )
 
 
@@ -1921,7 +1984,8 @@ def evidence_entry(
             "The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; "
             "Formats M and L, lemma D for format M's per-bin domain), applied to "
             f"{provenance.subject.format(certificate=case.certificate)}: no {case.n} unit "
-            f"squares pack in a square of side {side}, so s({case.n}) >= {side}.",
+            f"squares pack in a square of side {side}, so s({case.n}) >= {side}."
+            + provenance.consequence,
             indent=6,
         ),
         (
@@ -1936,7 +2000,9 @@ def evidence_entry(
                 if declared
                 else later_source
             )
-            + f"; the certificate's mathematics read in {audit_record}; "
+            + f"; the certificate's mathematics read in {audit_record}"
+            + provenance.pinpoint
+            + "; "
             + (
                 ""
                 if audit_record == ROUTE_REVIEW

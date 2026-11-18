@@ -5900,6 +5900,31 @@ sources:
       and the conversion and checks run with Claude (Anthropic), under his direction. No local
       or global optimality claim. Licensed MIT by LICENSE at the pin. Retained in
       web/de-winter-upper-bounds-262-295-2026-11-16/.
+  - key: '[de Winter s108 lower bound 2026-11-17]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-17'
+    lineage: builds-on-project
+    credit: de Winter after Hosono, Tokoharu, Levy
+    short_credit: de Winter after Hosono, Tokoharu et al.
+    note: >-
+      JoostdeWinter/square-packing at cc20a26845789c2502950041c26709eda8a71081
+      (2026-11-17T22:26:24Z), Joost de Winter's lower bound s(109) >= s(108) >=
+      1700799526134255846599/159999384348528500000 = 10.6300379408297..., 70 seconds before
+      jlevy/squares#1018, which requested its registration: Hiroaki Hosono's mixed_n108_L1062
+      rectangle measure (T-216) dilated by 1063/1062, masses kept, total 10799999/100000, on a
+      declared net of 401 half-angle directions of step 83/80000 at core side 12487/12500
+      (lower_n108/evidence/n108_measure.json.gz), with twelve native runs of this repository's
+      sqverify-fast covering every direction, and a one-page proof (proof_n108.pdf) that
+      enlarges the bound from the measure's side 10.63 to the claimed side by scaling a packing
+      into [0, 10.63]^2. It asks for credit to de Winter after Hosono, and names this
+      repository's verifier, its soundness argument and T-216 for the measure, which T-216
+      credits after Tokoharu and Levy. It says the rescaling, the computation and the proof
+      were produced with GPT-6.2 Astra (OpenAI) and the repository files and checks with Claude
+      (Anthropic), under his direction. No optimality claim. Licensed MIT by LICENSE at the
+      pin. Retained in web/de-winter-s108-lower-bound-2026-11-17/.
   - key: '[Mishapolk issue 1009 2026-11-16]'
     authors:
     - Polkovskyi

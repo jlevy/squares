@@ -5379,7 +5379,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/109.html
   canonical: cases/109.html
@@ -5387,7 +5387,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-18'
   status: live
 - path: cases/11.html
   canonical: cases/11.html
@@ -25893,6 +25893,44 @@ urls:
     - packing/devtools/measure_identity.py
     - docs/project/reviews/review-2026-11-17-polkovskyi-1009.md
     - packing/resources/web/polkovskyi-1009-review-2026-11-17/README.md
+- path: result/t-327.html
+  canonical: result/t-327.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-18'
+  lastmod: '2026-11-18'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 108
+      - 109
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s108 lower bound 2026-11-17]'
+      published: '2026-11-17'
+    builds_on: null
+    evidence:
+    - E-de-winter-1018-n108-report
+    - E-de-winter-1018-n108-sqverify-fast-replay
+    artifacts:
+    - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/acquisition/sources.json
+    - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/n108_measure.json.gz
+    - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/proof_n108.pdf
+    - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/receipts/controls-plan-108.txt
+    - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/receipts/dilation-audit.json
+    - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/receipts/native-receipt-audit.json
+    - packing/resources/web/de-winter-s108-lower-bound-2026-11-17/receipts/replay-comparison.json
+    - packing/devtools/audit_dilated_measure.py
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.control.json
+    - docs/project/reviews/review-2026-11-18-de-winter-1018.md
+    - packing/resources/web/de-winter-1018-review-2026-11-18/README.md
 - path: results.html
   canonical: results.html
   kind: page

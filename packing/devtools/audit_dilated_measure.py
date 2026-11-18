@@ -4,7 +4,11 @@ Doğa Özden's `s(94) >= 1993/200` (jlevy/squares#890) is Hiroaki Hosono's
 `mixed_n94_L995` measure dilated about the origin by `λ = 1993/1990`, with a finer net
 declared (`proof_net`) so that the dilated core still fits a unit square, and his
 `s(94) >= 2493/250` (#910) is the same measure dilated by `λ = 4986/4975` onto a net of
-4,972 half-angles of step `1/12000`. Each bound rests on a complete coverage decision by
+4,972 half-angles of step `1/12000`. Joost de Winter's `s(109) >= s(108) >= S` (#1018)
+dilates Hiroaki Hosono's `mixed_n108_L1062` (T-216) by `λ = 1063/1062` onto a net of 401
+half-angles of step `83/80000`, at a core side the source declares rather than `λ B₀`
+(`Dilation.core`), and claims a side `S` above the certificate's `L` by a rational
+enlargement of its own (`Enlargement`). Each bound rests on a complete coverage decision by
 `sqverify-fast`, which `devtools.sqverify_fast_census` runs and keeps; this tool is the
 first-party premise check of their imports, the comparison of that decision with the
 producer's receipts, and the audit of a producer's own receipt archive. It decides no
@@ -23,14 +27,25 @@ source's rescale tool states (`Dilation.canonical`, `Dilation.derived_from`).
     container, the masses totalling exactly the stated `total_mass`, `n - 1/100000`,
     below `n`;
   - lemma N0's (a) to (e) on the declared net (`sqverify_fast/SOUNDNESS.md`);
-  - the dilation: `L = λ L₀` and `B = λ B₀`, the same row count, each rectangle `λ`
-    times the base's row by row, and each mass equal;
-  - the regeneration: the base rewritten as the source's `tools/rescale.py` says,
-    serialized as that script writes it (Python's `json.dump` for #890, canonical JSON
-    with sorted keys and compact separators for #910), is byte for byte the retained
-    file's decompressed text. The receipt records each text's SHA-256 beside the one the
-    source states, and the stored files' too where the source states them, as data: Git
-    holds the retained bytes (OR-16), and the stage 2 custody check compared them once;
+  - the dilation: `L = λ L₀` and `B = λ B₀`, or `B` the core the source declares where
+    it declares one (`Dilation.core`; #1018's 12487/12500 is not `λ B₀`), the same row
+    count, each rectangle `λ` times the base's row by row, and each mass equal;
+  - the regeneration: the base rewritten as the source's rescale tool says, serialized
+    as that script writes it (Python's `json.dump` for #890's `tools/rescale.py`,
+    canonical JSON with sorted keys and compact separators for #910's, and for #1018's
+    `stretch_measure.py` the base as `json.load` reads it with `L`, `B` and `proof_net`
+    updated in place, written compact with a final newline, `Dilation.stretch`), is byte
+    for byte the retained file's decompressed text. The receipt records each text's
+    SHA-256 beside the one the source states, and the stored files' too where the source
+    states them, as data: Git holds the retained bytes (OR-16), and the stage 2 custody
+    check compared them once;
+  - the enlargement, where the source claims a side `S` above `L` (`Enlargement`, #1018's
+    proof): with `z₀ = D/2`, `w(t) = (1 + 2t - t²) / (2 (1 + t²))`, `u = 2 B w(z₀)` and the
+    source's shift `h`, that `h² > 1/2`, `0 < u < 1`, `z₀² + 2 z₀ - 1 < 0` (so `w` increases
+    on `[0, z₀]`), `2h < L`, that `S = 2h + (L - 2h)/u` is the claimed side exactly, and that
+    `[0, S]²` scaled by `u` and translated by `h (1 - u)` is `[0, L]²` exactly. Whether
+    these premises carry the bound is the stage 4 review's question; this checks the
+    arithmetic only;
   - and, as observations its status requires nothing of, what the dilation does not
     carry: `λ B₀ (1 + D₀)` on the base's own net (its declared step, else the standard
     one), the direction-0 centre domain's growth `ρ₀ (1 - 1/λ)` in the base's
@@ -54,6 +69,12 @@ source's rescale tool states (`Dilation.canonical`, `Dilation.derived_from`).
   times its factor, refused natively, with its exact witnesses' captures recomputed by
   `check_sqverify_fast.mixed_exact`, written apart from the crate, below 1 at centres in
   the per-bin domain. It records the nodes of the selected rows, which price a replay.
+  For a producer's several native runs that each carry their own summary and together
+  are the whole net, with no index or selection (`NativeRuns`, #1018's twelve
+  `direction_runs`), it audits each stream the same way, its premises recomputed apart
+  from `input_sha256`, which is recorded against the certificate's stored and
+  decompressed bytes, and requires the streams' rows to be each direction of the
+  declared net exactly once.
 
 - ``compare`` reads the census capture (`census-mixed/PACKET/NAME.jsonl.gz`) and each
   receipt of the producer's own `sqverify-fast` runs, and compares them direction by
@@ -64,6 +85,9 @@ source's rescale tool states (`Dilation.canonical`, `Dilation.derived_from`).
   producer's receipts are an archive of several runs (#910), it compares the capture
   with the archive's selected line at every direction instead, on every field the line
   keeps but the timings, and the capture's node total with the archive's selected nodes.
+  Where they are several native runs (#1018), it compares the capture with their rows at
+  every direction on every field but the timings, its summary's premises with each run's
+  apart from `input_sha256`, and its node total with the runs' summed nodes.
 
 ``--check`` recomputes a receipt and fails unless it equals the retained one and passes
 (`PREMISES_HOLD`, `EVERY_DIRECTION_AGREES`, `RECEIPTS_HOLD`). A capture or receipt with
@@ -81,6 +105,12 @@ From ``packing/``::
         ozden-s94-lower-bound-9972-2026-11-05 --check
     .venv/bin/python3 -m devtools.audit_dilated_measure receipts \\
         ozden-s94-lower-bound-9972-2026-11-05 --check
+    .venv/bin/python3 -m devtools.audit_dilated_measure audit \\
+        de-winter-s108-lower-bound-2026-11-17 --check
+    .venv/bin/python3 -m devtools.audit_dilated_measure receipts \\
+        de-winter-s108-lower-bound-2026-11-17 --check
+    .venv/bin/python3 -m devtools.audit_dilated_measure compare \\
+        de-winter-s108-lower-bound-2026-11-17 --check
 """
 
 from __future__ import annotations
@@ -177,6 +207,24 @@ class ReceiptArchive:
 
 
 @dataclass(frozen=True)
+class NativeRuns:
+    """A producer's native `sqverify-fast` runs, each with its own summary line, whose
+    rows together are every direction of the net once, with no index or selection."""
+
+    #: Each stream, relative to the packet, an original gzip of native lines.
+    files: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class Enlargement:
+    """A side the source claims above the certificate's `L`, by scaling a packing of the
+    claimed side into `[0, L]²` (#1018's proof): the shift `h` and the claimed side."""
+
+    shift: Fraction
+    side: Fraction
+
+
+@dataclass(frozen=True)
 class Dilation:
     """One dilated certificate and the retained one it dilates."""
 
@@ -208,7 +256,34 @@ class Dilation:
     gzip_os: int | None = None
     #: The producer's receipt archive of several native runs.
     archive: ReceiptArchive | None = None
+    #: The core side the source declares, where it is not `λ B₀`.
+    core: Fraction | None = None
+    #: Whether the source's rescale is `stretch_measure.py`'s rule (`stretched_text`).
+    stretch: bool = False
+    #: A side above `L` the source claims by enlargement.
+    enlargement: Enlargement | None = None
+    #: The producer's native runs, each with its own summary.
+    runs: NativeRuns | None = None
 
+
+#: #1018's twelve archived runs, by the directions each holds.
+DE_WINTER_1018_RUNS = tuple(
+    f"source/lower_n108/evidence/direction_runs/directions_{span}.jsonl.gz"
+    for span in (
+        "000_030",
+        "031_061",
+        "062_092",
+        "093_122",
+        "123_157",
+        "158_192",
+        "193_227",
+        "228_262",
+        "263_297",
+        "298_332",
+        "333_367",
+        "368_400",
+    )
+)
 
 DILATIONS: dict[str, Dilation] = {
     "ozden-s94-lower-bound-2026-11-03": Dilation(
@@ -259,6 +334,31 @@ DILATIONS: dict[str, Dilation] = {
             witness="source/controls/control.json",
             crate="source/verifier/sqverify_fast",
         ),
+    ),
+    # #1018: Hosono's T-216 measure dilated by 1063/1062 onto a net of 401 directions at
+    # the core 12487/12500 the source chose, which is not 1063/1062 times T-216's 9977/10000;
+    # its proof enlarges the bound from L = 1063/100 to the claimed side, and its receipts
+    # are twelve native runs of this repository's sqverify-fast.
+    "de-winter-s108-lower-bound-2026-11-17": Dilation(
+        name="mixed_n108_L1063",
+        n=108,
+        side=Fraction(1063, 100),
+        candidate="source/lower_n108/evidence/n108_measure.json.gz",
+        base=(
+            "wand125-fine-net-lower-bounds-2026-10-16/release/certificates/"
+            "mixed_n108_L1062/candidate.json.gz"
+        ),
+        base_sha256="4d72da64052667a3ebf057f7e78ea9d40f1521a0b86ddef210a2be319d27042a",
+        text_sha256="d4d160901461bd9e3769db1dbace4b00d2e0afb57429dcd3c7467f06c5ced9d8",
+        stored_sha256="bd471f6541874a6f6a057c57b8804812563859d83a0f2e1a1aa7595dad32d0da",
+        base_stored_sha256="acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+        core=Fraction(12487, 12500),
+        stretch=True,
+        enlargement=Enlargement(
+            shift=Fraction(707107, 10**6),
+            side=Fraction(1700799526134255846599, 159999384348528500000),
+        ),
+        runs=NativeRuns(files=DE_WINTER_1018_RUNS),
     ),
 }
 
@@ -408,6 +508,64 @@ def rescaled_text(
     return json.dumps(out).encode()
 
 
+def stretched_text(
+    base_text: bytes, side: Fraction, core: Fraction, step: Fraction, last: int
+) -> bytes:
+    """The base rewritten as #1018's `stretch_measure.py` says, as that script writes it.
+
+    It reads the base with `json.load`, scales every rectangle coordinate by `λ` as
+    `str(Fraction(x) * λ)`, keeps each mass as `json.load` read it, updates `L`, `B` and
+    `proof_net` in place (`L` and `B` keep their places, `proof_net` is appended), and
+    writes compact JSON with a final newline, keeping every other key in its order.
+    """
+    data = json.loads(base_text)
+    scale = side / Fraction(data["L"])
+    for row in data["rectangles"]:
+        row["rectangle"] = [str(Fraction(value) * scale) for value in row["rectangle"]]
+    data.update(L=str(side), B=str(core), proof_net={"step": str(step), "last": last})
+    return (json.dumps(data, separators=(",", ":")) + "\n").encode()
+
+
+def w_of(t: Fraction) -> Fraction:
+    """`w(t) = (1 + 2t - t²) / (2 (1 + t²))`: half the axis width of a unit square turned
+    by the angle whose half-angle tangent is `t` (lemma D's `rho`)."""
+    return (1 + 2 * t - t * t) / (2 * (1 + t * t))
+
+
+def enlargement_checks(data: dict[str, Any], enlargement: Enlargement) -> dict[str, Any]:
+    """The arithmetic of a claimed side above `L` (#1018's proof), in exact rationals.
+
+    A packing of the claimed side `S` is scaled by `u = 2 B w(D/2)` and translated by
+    `h (1 - u)`, so that it lies in `[0, L]²`; each square's concentric core of side `B`
+    at its nearest net direction then fits inside it, and lies in the per-bin domain when
+    `h ≥ 1/√2`. Every boolean is a condition the audit's status requires; whether they
+    carry the bound is the review's.
+    """
+    side, core = Fraction(data["L"]), Fraction(data["B"])
+    step = Fraction(data["proof_net"]["step"])
+    z0 = step / 2
+    u = 2 * core * w_of(z0)
+    h = enlargement.shift
+    claimed = enlargement.side
+    computed = 2 * h + (side - 2 * h) / u
+    return {
+        "z0": as_text(z0),
+        "u": as_text(u),
+        "u_approx": float(u),
+        "h": as_text(h),
+        "side": as_text(computed),
+        "side_approx": float(computed),
+        "claimed": as_text(claimed),
+        "side_is_the_claim": computed == claimed,
+        "claim_above_L": claimed > side,
+        "h_squared_above_half": h * h > Fraction(1, 2),
+        "two_h_below_L": 2 * h < side,
+        "u_between_zero_and_one": 0 < u < 1,
+        "w_increases_through_z0": z0 >= 0 and z0 * z0 + 2 * z0 - 1 < 0,
+        "scaled_box_is_L": u * claimed + 2 * h * (1 - u) == side,
+    }
+
+
 def stated_gzip(text: bytes, os_byte: int) -> bytes:
     """`text` as the source states its gzip: level 9, mtime 0, no name, its OS byte."""
     data = bytearray(gzip.compress(text, compresslevel=9, mtime=0))
@@ -466,17 +624,25 @@ def shared_node_growth(data: dict[str, Any], base: dict[str, Any]) -> dict[str, 
     }
 
 
-def dilation_checks(data: dict[str, Any], base: dict[str, Any]) -> dict[str, Any]:
+def dilation_checks(
+    data: dict[str, Any], base: dict[str, Any], core: Fraction | None = None
+) -> dict[str, Any]:
     """That the certificate is the base dilated, row by row, in exact rationals. Every
-    boolean here is a condition the audit's status requires."""
+    boolean here is a condition the audit's status requires. The core is `λ B₀`, or the
+    `core` the source declares where it gives one (`Dilation.core`)."""
     side, base_side = Fraction(data["L"]), Fraction(base["L"])
     scale = side / base_side
     rows, base_rows = rectangles(data), rectangles(base)
     paired = list(zip(rows, base_rows, strict=False))
     base_core = Fraction(base["B"])
+    cores = (
+        {"core_is_lambda_times_base": Fraction(data["B"]) == scale * base_core}
+        if core is None
+        else {"core_is_the_declared_core": Fraction(data["B"]) == core}
+    )
     return {
         "lambda": as_text(scale),
-        "core_is_lambda_times_base": Fraction(data["B"]) == scale * base_core,
+        **cores,
         "same_row_count": len(rows) == len(base_rows),
         "every_rectangle_lambda_times_base": len(rows) == len(base_rows)
         and all(box == [scale * v for v in base_box] for (box, _), (base_box, _) in paired),
@@ -519,20 +685,29 @@ def audit(packet: str) -> dict[str, Any]:
     base = json.loads(base_text, parse_float=str)
     step = Fraction(data["proof_net"]["step"])
     last = int(data["proof_net"]["last"])
-    regenerated = rescaled_text(
-        base_text,
-        dilation.side,
-        step,
-        last,
-        canonical=dilation.canonical,
-        derived_from=dilation.derived_from,
+    regenerated = (
+        stretched_text(base_text, dilation.side, Fraction(data["B"]), step, last)
+        if dilation.stretch
+        else rescaled_text(
+            base_text,
+            dilation.side,
+            step,
+            last,
+            canonical=dilation.canonical,
+            derived_from=dilation.derived_from,
+        )
     )
     file = file_checks(data, dilation)
     net = lemma_n0(data)
     if not file["every_row_a_rectangle_of_four_and_a_mass"]:
         message = f"{path}: a row is not a rectangle of four coordinates and a mass"
         raise SystemExit(message)
-    scaled = dilation_checks(data, base)
+    scaled = dilation_checks(data, base, dilation.core)
+    enlarged = (
+        enlargement_checks(data, dilation.enlargement)
+        if dilation.enlargement is not None
+        else None
+    )
     # The digests are recorded beside the source's stated ones, for a reader and the
     # test; Git holds the retained bytes (OR-16), so the gate is the byte comparison.
     stored = path.read_bytes()
@@ -554,8 +729,18 @@ def audit(packet: str) -> dict[str, Any]:
         all(value is True for value in file.values() if isinstance(value, bool))
         and all(value is True for value in net.values() if isinstance(value, bool))
         and all(value is True for value in scaled.values() if isinstance(value, bool))
+        and (
+            enlarged is None or all(v is True for v in enlarged.values() if isinstance(v, bool))
+        )
     )
     observations = dilation_observations(data, base)
+    if dilation.core is not None:
+        # The core the source declares in place of `λ B₀`; the dilation does not set it.
+        lambda_core = Fraction(dilation.side) / Fraction(base["L"]) * Fraction(base["B"])
+        observations["lambda_times_base_core"] = as_text(lambda_core)
+        observations["declared_core_above_lambda_times_base_core"] = (
+            Fraction(data["B"]) > lambda_core
+        )
     if dilation.gzip_os is not None:
         # The stored gzip's bytes depend on the deflate implementation as well as the
         # text; the text is what the certificate is, so this is an observation.
@@ -572,11 +757,13 @@ def audit(packet: str) -> dict[str, Any]:
         "file": file,
         "lemma_n0": net,
         "dilation": scaled,
+        **({} if enlarged is None else {"enlargement": enlarged}),
         "observations": observations,
         "status": "PREMISES_HOLD" if passes else "PREMISES_FAIL",
         "decides": (
-            "no coverage: the premises, the dilation and the regeneration only; the"
-            " observations are reported and required of nothing"
+            "no coverage: the premises, the dilation and the regeneration only"
+            + ("" if enlarged is None else ", and the enlargement's arithmetic")
+            + "; the observations are reported and required of nothing"
         ),
     }
 
@@ -766,11 +953,119 @@ def compare_archive(packet: str, dilation: Dilation, archive: ReceiptArchive) ->
     }
 
 
+def run_streams(
+    packet: str, runs: NativeRuns
+) -> list[tuple[str, bytes, dict[int, dict[str, Any]], dict[str, Any]]]:
+    """Each native run of `runs`: its path, stored bytes, rows by direction and summary."""
+    streams: list[tuple[str, bytes, dict[int, dict[str, Any]], dict[str, Any]]] = []
+    for relative in runs.files:
+        path = WEB / packet / relative
+        raw = read_original_gzip_bytes(path)
+        lines, summary = direction_lines(gzip.decompress(raw), str(path))
+        if summary is None:
+            message = f"{path}: no summary"
+            raise SystemExit(message)
+        rows = {index: json.loads(line) for index, line in lines.items()}
+        streams.append((str(path.relative_to(PROJECT.parent)), raw, rows, summary))
+    return streams
+
+
+def without_input(premises: dict[str, Any]) -> dict[str, Any]:
+    return {key: value for key, value in premises.items() if key != "input_sha256"}
+
+
+def compare_runs(packet: str, dilation: Dilation, runs: NativeRuns) -> dict[str, Any]:
+    """The census capture against a producer's several native runs, direction by
+    direction on every field but the two timings, its premises against each run's apart
+    from `input_sha256` (which names the file a run read, stored or decompressed), and
+    its node total against the runs' summed nodes. Only runs whose audit holds
+    (`RECEIPTS_HOLD`) can agree."""
+    capture = CENSUS / packet / f"{dilation.name}.jsonl.gz"
+    ours, summary = read_rows(capture)
+    data = json.loads(text_of(WEB / packet / dilation.candidate), parse_float=str)
+    count = int(lemma_n0(data)["angle_count"])
+    streams = run_streams(packet, runs)
+    theirs: dict[int, dict[str, Any]] = {}
+    for _path, _raw, rows, _summary in streams:
+        theirs.update(rows)
+    differing: dict[str, list[str]] = {}
+    for index in sorted(set(ours) | set(theirs)):
+        mine, other = untimed(ours.get(index, {})), untimed(theirs.get(index, {}))
+        fields = sorted(
+            key for key in set(mine) | set(other) if mine.get(key) != other.get(key)
+        )
+        if index not in ours or index not in theirs:
+            fields = ["direction missing"]
+        if fields:
+            differing[str(index)] = fields
+    premises = without_input(summary.get("premises") or {})
+    premises_equal = [
+        without_input(stream_summary.get("premises") or {}) == premises
+        for _path, _raw, _rows, stream_summary in streams
+    ]
+    audited = receipts(packet)
+    run_nodes = sum(int(stream_summary.get("nodes") or 0) for *_rest, stream_summary in streams)
+    stated = (summary.get("premises") or {}).get("angle_count")
+    agree = (
+        sorted(ours) == sorted(theirs) == list(range(count))
+        and stated == count
+        and not differing
+        and all(premises_equal)
+        and summary.get("status") == "VERIFIED"
+        and summary.get("nodes") == run_nodes
+        and audited["status"] == "RECEIPTS_HOLD"
+    )
+    least = min(
+        (row["min_certified_lower_bound"] for row in ours.values()),
+        default=None,
+    )
+    return {
+        "kind": "dilated-measure-replay-comparison/v1",
+        "packet": packet,
+        "certificate": dilation.name,
+        "capture": str(capture.relative_to(PROJECT.parent)),
+        "capture_sha256": sha256(capture.read_bytes()),
+        "directions": count,
+        "capture_states_the_declared_net": stated == count,
+        "status": summary.get("status"),
+        "nodes": summary.get("nodes"),
+        "runs_receipts_status": audited["status"],
+        "run_nodes": run_nodes,
+        "nodes_equal_run_nodes": summary.get("nodes") == run_nodes,
+        "capture_input_sha256": (summary.get("premises") or {}).get("input_sha256"),
+        "premises_equal_each_run_apart_from_input": all(premises_equal),
+        "least_certified_bound": least,
+        "build": summary.get("build"),
+        "threads": summary.get("threads"),
+        "direction_cpu_seconds": summary.get("direction_cpu_seconds"),
+        "run_direction_cpu_seconds": round(
+            sum(
+                float(stream_summary.get("direction_cpu_seconds") or 0)
+                for *_r, stream_summary in streams
+            ),
+            3,
+        ),
+        "runs": [path for path, *_rest in streams],
+        "run_directions": len(theirs),
+        "identical_directions": sum(
+            1 for index in set(ours) & set(theirs) if str(index) not in differing
+        ),
+        "differing": differing,
+        "verdict": "EVERY_DIRECTION_AGREES" if agree else "DIRECTIONS_DIFFER",
+        "compared": (
+            "every field of every direction row but cpu_seconds and seconds, the premises"
+            " apart from input_sha256, and the node total against the runs' summed nodes"
+        ),
+    }
+
+
 def compare(packet: str) -> dict[str, Any]:
     """The `compare` receipt: the census capture against the producer's receipts."""
     dilation = DILATIONS[packet]
     if dilation.archive is not None:
         return compare_archive(packet, dilation, dilation.archive)
+    if dilation.runs is not None:
+        return compare_runs(packet, dilation, dilation.runs)
     if not dilation.receipts or not dilation.second_checker:
         # With no complete producer receipt every comparison would hold vacuously.
         message = f"{packet}: no complete producer receipt to compare; see `receipts`"
@@ -1096,9 +1391,126 @@ STREAM_CHECKS = (
 )
 
 
+#: What each native run of `NativeRuns` must hold for its audit to pass.
+RUN_CHECKS = (
+    "summary_directions_are_the_rows",
+    "status_succeeded",
+    "refuses_nothing",
+    "no_fault_injected",
+    "threshold_one",
+    "every_bound_finite_and_at_least_one",
+    "premises_recomputed_apart_from_input",
+    "input_is_the_certificate",
+    "source_reviewed_for_declared_nets",
+)
+
+
+def runs_audit(packet: str, dilation: Dilation, runs: NativeRuns) -> dict[str, Any]:
+    """The `receipts` receipt for a producer's several native runs, each with its own
+    summary (#1018): each run audited as a stream is, its premises recomputed apart from
+    `input_sha256`, which must name the certificate's stored or decompressed bytes, and
+    the runs' rows together each direction of the declared net exactly once. A run built
+    by another compiler from the same reviewed source is admitted, and the receipt says
+    whether its build is the census binary's (#1018's runs name rustc 1.100.0, the census
+    binary 1.98.0): the census capture, not the producer's run, is the replay."""
+    folder = WEB / packet
+    stored = (folder / dilation.candidate).read_bytes()
+    text = text_of(folder / dilation.candidate)
+    data = json.loads(text, parse_float=str)
+    premises = native_premises(data)
+    count = int(premises["angle_count"])
+    census = json.loads((CENSUS / "census.json").read_text(encoding="utf-8"))
+    reference = census["cases"][REFERENCE_ROW]["build"]
+    inputs = {sha256(stored): "stored", sha256(text): "decompressed"}
+    reports: list[dict[str, Any]] = []
+    seen: list[int] = []
+    for path, raw, rows, summary in run_streams(packet, runs):
+        stated = summary.get("premises") or {}
+        build = build_checks(summary.get("build") or {}, reference)
+        seen.extend(rows)
+        reports.append(
+            {
+                "receipt": path,
+                "archive_sha256": sha256(raw),
+                "rows": len(rows),
+                "first": min(rows, default=None),
+                "last": max(rows, default=None),
+                "summary_directions_are_the_rows": summary.get("directions") == len(rows),
+                "status": summary.get("status"),
+                "status_succeeded": summary.get("status") in ("PARTIAL", "VERIFIED"),
+                "refuses_nothing": summary.get("refused_directions") == []
+                and all(row.get("verdict") == "verified" for row in rows.values()),
+                "no_fault_injected": summary.get("fault_injected_at_box") is None
+                and all(row.get("fault_injected_at_box") is None for row in rows.values()),
+                "threshold_one": summary.get("threshold") == "1"
+                and all(row.get("threshold") == "1" for row in rows.values()),
+                "every_bound_finite_and_at_least_one": all(
+                    finite_bound_at_least_one(row) for row in rows.values()
+                ),
+                "premises_recomputed_apart_from_input": all(
+                    stated.get(key) == premises[key] for key in premises
+                ),
+                "premises_differing": sorted(
+                    key for key in premises if stated.get(key) != premises[key]
+                ),
+                "input_sha256": stated.get("input_sha256"),
+                "input_read": inputs.get(str(stated.get("input_sha256"))),
+                "input_is_the_certificate": str(stated.get("input_sha256")) in inputs,
+                "build": summary.get("build"),
+                **build,
+                "nodes": summary.get("nodes"),
+                "direction_cpu_seconds": summary.get("direction_cpu_seconds"),
+                "threads": summary.get("threads"),
+            }
+        )
+    least = min(
+        (
+            (Fraction(row["min_certified_lower_bound"]), index)
+            for _path, _raw, rows, _summary in run_streams(packet, runs)
+            for index, row in rows.items()
+            if finite_bound_at_least_one(row)
+        ),
+        default=None,
+    )
+    coverage = {
+        "directions": len(seen),
+        "net_directions": count,
+        "every_index_once": sorted(seen) == list(range(count)),
+        "least_certified_bound": float(least[0]) if least else None,
+        "least_bound_direction": least[1] if least else None,
+    }
+    passes = (
+        all(item[key] is True for item in reports for key in RUN_CHECKS)
+        and coverage["every_index_once"]
+    )
+    return {
+        "kind": "dilated-measure-native-runs-audit/v1",
+        "packet": packet,
+        "certificate": dilation.name,
+        "candidate_sha256": sha256(stored),
+        "candidate_text_sha256": sha256(text),
+        "premises": premises,
+        "reference_build": {"row": REFERENCE_ROW, **reference},
+        "runs": reports,
+        "coverage": coverage,
+        "nodes": sum(int(item["nodes"] or 0) for item in reports),
+        "direction_cpu_seconds": round(
+            sum(float(item["direction_cpu_seconds"] or 0) for item in reports), 3
+        ),
+        "status": "RECEIPTS_HOLD" if passes else "RECEIPTS_FAIL",
+        "decides": (
+            "no coverage here: the producer's retained native runs are read, held to the"
+            " certificate's premises and a reviewed build, and to the net once; no"
+            " direction was run"
+        ),
+    }
+
+
 def receipts(packet: str) -> dict[str, Any]:
     """The `receipts` receipt: a producer's native receipt archive, audited."""
     dilation = DILATIONS[packet]
+    if dilation.runs is not None:
+        return runs_audit(packet, dilation, dilation.runs)
     archive = dilation.archive
     if archive is None:
         message = f"{packet}: no receipt archive"

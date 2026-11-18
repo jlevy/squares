@@ -249,8 +249,9 @@ the platform supplies no direction CPU.
 | `mixed_n96_L997` | M | 96 | 997/100 | VERIFIED | 978.8 | 978.7 | 1.0000000000057894 | none | yes |
 | `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 128.0 | 1.000000000300333 | complete | no |
 | `mixed_n108_L1062` | M | 108 | 531/50 | VERIFIED | 2086.8 | 2086.5 | 1.0000000001765084 | none | yes |
+| `mixed_n108_L1063` | M | 108 | 1063/100 | VERIFIED | 4624.0 | 4623.6 | 1.0000000000543061 | none | yes |
 
-231 of 231 certificates verified; 145 of them are the first complete check of their
+232 of 232 certificates verified; 146 of them are the first complete check of their
 certificate in this repository.
 
 <!-- This document follows common-doc-guidelines.md.
