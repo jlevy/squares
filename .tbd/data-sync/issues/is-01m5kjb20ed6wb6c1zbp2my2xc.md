@@ -5,7 +5,7 @@ title: "Apply the owner's D1 answer: track beyond-horizon rows above 1024 (#666,
 kind: task
 status: open
 priority: 1
-version: 32
+version: 33
 spec_path: docs/project/specs/active/plan-2026-10-24-rows-above-1024.md
 delegate: null
 labels:
@@ -13,6 +13,8 @@ labels:
 dependencies:
   - type: blocks
     target: is-01m5pjxq31vpw03t0emgwnvhfe
+  - type: blocks
+    target: is-01m7p3zjypq71dcn3q21r67qc4
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 child_order_hints:
   - is-01m5qby09kkaa1rny3x82s2784
@@ -20,7 +22,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-23T05:04:35.342Z
-updated_at: 2026-11-17T21:52:53.081Z
+updated_at: 2026-11-18T01:22:47.719Z
 started_at: 2026-10-23T05:05:14.273Z
 ---
 Owner decision of 23 October (think-f2io note): yes, no ceiling. Needs a plan: the rows' walks above 1024 (report order), custody without Git blobs (D4 hosted-data manifest; OR-18), the replay price at thousands of certificates (compute cap), and the frontier README rule. Stage 1 triage and pricing first, read-only.
