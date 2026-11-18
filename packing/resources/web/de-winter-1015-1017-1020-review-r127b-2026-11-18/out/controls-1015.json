@@ -1,0 +1,353 @@
+{
+ "program": "rb127_controls.py",
+ "label": "1015",
+ "mode": "pair",
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "controls": 35,
+ "not_as_stated": [],
+ "results": [
+  {
+   "control": "R1-C",
+   "stated": "form C refused: the count stated exceeds the squares listed",
+   "as_stated": true,
+   "outcome": "form C: n = 127 stated, 126 squares listed"
+  },
+  {
+   "control": "R1-J",
+   "stated": "form J refused: the count stated exceeds the squares listed",
+   "as_stated": true,
+   "outcome": "form J: n = 127 stated, 126 squares listed"
+  },
+  {
+   "control": "R2-C",
+   "stated": "read; the same value and corners; the side flagged as not in lowest terms",
+   "as_stated": true,
+   "outcome": [
+    "side not in lowest terms"
+   ]
+  },
+  {
+   "control": "R2-J",
+   "stated": "read; the same value and rows; the side flagged as not in lowest terms",
+   "as_stated": true,
+   "outcome": [
+    "side not in lowest terms"
+   ]
+  },
+  {
+   "control": "R3-C",
+   "stated": "form C refused: ids out of order",
+   "as_stated": true,
+   "outcome": "form C: square 1 has id 'square-2', out of order"
+  },
+  {
+   "control": "R3-J",
+   "stated": "form J read; the twin fails at exactly squares 1 and 2",
+   "as_stated": true,
+   "outcome": [
+    1,
+    2
+   ]
+  },
+  {
+   "control": "R4-C-quoted",
+   "stated": "refused: not a scalar p or p/q, or a YAML float",
+   "as_stated": true,
+   "outcome": "form C side: not a scalar p or p/q: '11.8007956822135694109185003574386427045272'"
+  },
+  {
+   "control": "R4-C-plain",
+   "stated": "refused: not a scalar p or p/q, or a YAML float",
+   "as_stated": true,
+   "outcome": "form C: scalar of tag tag:yaml.org,2002:float at $.witness.side: '11.8007956822135694109185003574386427045'"
+  },
+  {
+   "control": "R4-J",
+   "stated": "refused: not a scalar p or p/q",
+   "as_stated": true,
+   "outcome": "form J side: not a scalar p or p/q: '11.8007956822135694109185003574386427045272'"
+  },
+  {
+   "control": "R5-C",
+   "stated": "refused, naming the coordinate",
+   "as_stated": true,
+   "outcome": "form C square 1 corner 1 x: not a scalar p or p/q: '+94105728818304054991828422899537719428207863107041433168593'"
+  },
+  {
+   "control": "R6-C",
+   "stated": "refused: a corner scalar that is not a string",
+   "as_stated": true,
+   "outcome": "form C square 1 corner 1 x: not a string scalar (int)"
+  },
+  {
+   "control": "R5-J",
+   "stated": "refused, naming the coordinate",
+   "as_stated": true,
+   "outcome": "form J square 1 center_x: not a scalar p or p/q: '+50307069426365032638314747206088642054890182790871691760490'"
+  },
+  {
+   "control": "R6-J",
+   "stated": "refused: a JSON number in place of a scalar string",
+   "as_stated": true,
+   "outcome": "form J square 1 center_x: not a string scalar (int)"
+  },
+  {
+   "control": "G1",
+   "stated": "refused; (1, n) at margin -1 with B area 1 the only overlap; each (k, n) at the original (1, k)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlaps": [
+     [
+      1,
+      127
+     ]
+    ]
+   }
+  },
+  {
+   "control": "G2",
+   "stated": "refused: square 1's clearances exactly (L+S, B, R-S, T), none of it inside, no pair overlapping",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "inside_b": "0"
+   }
+  },
+  {
+   "control": "G3",
+   "stated": "refused: square 1 not a unit square by A or B; the twin fails at square 1 only",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "twin_failures": [
+     1
+    ]
+   }
+  },
+  {
+   "control": "G4",
+   "stated": "accepted with every listing clockwise; margins identical; the twin holds",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "senses": [
+     -1
+    ],
+    "listings": {
+     "offset 1, clockwise": 127
+    }
+   }
+  },
+  {
+   "control": "G5",
+   "stated": "accepted; transposed: margins identical; (L,B,R,T) -> (B,L,T,R)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT"
+   }
+  },
+  {
+   "control": "G6",
+   "stated": "accepted; quarter turn: margins identical; (L,B,R,T) -> (T,L,B,R)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT"
+   }
+  },
+  {
+   "control": "G7",
+   "stated": "accepted; mirrored: margins identical; (L,B,R,T) -> (R,B,L,T)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT"
+   }
+  },
+  {
+   "control": "S1a",
+   "stated": "the side lowered by 1e-40; by the side rule refused",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "1.00000e-40",
+    "verdict": "REFUSE",
+    "touching": 0,
+    "crossing": 1
+   }
+  },
+  {
+   "control": "S1b",
+   "stated": "the side lowered by 1/q, q its denominator; by the side rule refused",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "2.00000e-62",
+    "verdict": "REFUSE",
+    "touching": 0,
+    "crossing": 1
+   }
+  },
+  {
+   "control": "S1c",
+   "stated": "the side lowered by W, the least right-or-top clearance; by the side rule accepted",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "7.73937e-63",
+    "verdict": "PARTIAL",
+    "touching": 1,
+    "crossing": 0
+   }
+  },
+  {
+   "control": "S1d",
+   "stated": "the side lowered by W + 1e-40; by the side rule refused",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "1.00000e-40",
+    "verdict": "REFUSE",
+    "touching": 0,
+    "crossing": 1
+   }
+  },
+  {
+   "control": "S1e",
+   "stated": "the side set to the claim 11.800795682214; by the side rule accepted",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "-4.30589e-13",
+    "verdict": "PARTIAL",
+    "touching": 0,
+    "crossing": 0
+   }
+  },
+  {
+   "control": "S1f",
+   "stated": "the side set to the claim less 1e-12; by the side rule refused",
+   "as_stated": true,
+   "outcome": {
+    "delta_sci": "5.69411e-13",
+    "verdict": "REFUSE",
+    "touching": 0,
+    "crossing": 13
+   }
+  },
+  {
+   "control": "E1c",
+   "stated": "every square moved by the least left and bottom clearances, the side its extent X: accepted; margins identical; walls touched exactly by the squares at the least clearances and at the larger extent",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "side_less_extent_sci": "7.7393745e-63",
+    "touching": {
+     "left": 1,
+     "bottom": 1,
+     "right": 0,
+     "top": 1
+    },
+    "width_equals_height": false
+   }
+  },
+  {
+   "control": "E1p",
+   "stated": "the same with the side X - 1e-40: refused, exactly the squares at the larger extent crossing",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "crossing": 1
+   }
+  },
+  {
+   "control": "K1c",
+   "stated": "centres scaled by lambda*, the first contact, in the box of the shrunk side: accepted; every margin exactly lambda* M - H; the touching pairs exactly the binding pairs",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "lambda_star": "5586495341490528115763423735025122275076930587586925944440384237948501377772661199590064820948164509304400146074758105845632799878626204793335513782205802373015829718617018574839083880204923783249833866478432196403032063680911270466987220293942902184351826460248756612488666848562000000000000000000000000000000000000000000000000000000000000000000000/5586495341490528115763423735025122275076930587586925944440384237948503459163985435808715130511214118493579500671350194654170858423178554467066689259229653566138214611222664799852355630250845692019029469425138478248725646689516214962824571698176904811056587641642624359901475446199845382579185290702629636943819910692239156163156966623699857363049899",
+    "touching_pairs": [
+     [
+      31,
+      34
+     ]
+    ],
+    "shrunk_side": "643799708052418399917789897696357883706962578587767224402079098436414112281991679940282914185451207352609406261026921641656156706292882336304287434713026895339576984673356082648781747802059763022657790420896486308027192659595635807120026965343657139554749870984104513208154474629606678181759183722848922956780143296231382335989789948347181463106753933145075141667471658036255247575062951259466600480665164084612944110346024564162362578201404032294842504538283812882251039760803439236678837190623935655908773465541010515586842218724203202356064062896291739457988334978773028282459974695045618517920872128603317870270001384051695/54555618569243438630502184912376146026822324143154415779447011008850824911549358877967205677081718404933944837898162078527575355738609557317294641513451840507743985583555092150590103859672240350213712970708029136365924458066956400896861188757954928483698665567438158609508148444977293922099980551129382601015925157265383514762283999961644729714927267978811622026539415640479682544012850738225925294658707242789226665914227208719845648333013609327382172313863493069832039568285144986976615593662990103849867354066542475948686236489758372145329049429521840872075936154183119002699962332854517009813143724846008382595608216239171",
+    "margin_sci": "7.7393785e-63"
+   }
+  },
+  {
+   "control": "K1p",
+   "stated": "scaled by lambda*(1 - 1e-40) in its own extent: refused; the overlaps exactly the pairs whose factor exceeds it; no wall crossed",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlaps": [
+     [
+      31,
+      34
+     ]
+    ]
+   }
+  },
+  {
+   "control": "K1s",
+   "stated": "K1c's packing in a box 1e-40 smaller: refused at the right or top wall only",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "crossing": {
+     "left": 0,
+     "bottom": 0,
+     "right": 0,
+     "top": 1
+    }
+   }
+  },
+  {
+   "control": "C0",
+   "stated": "every margin from the form C corners' projections, and every clearance from their extremes, equal to method A's from the poses",
+   "as_stated": true,
+   "outcome": {
+    "pairs": 8001,
+    "pair_mismatches": [],
+    "wall_mismatches": []
+   }
+  },
+  {
+   "control": "X1",
+   "stated": "each direction (c, s) read as (c, -s): the twin fails at exactly the squares not upright",
+   "as_stated": true,
+   "outcome": {
+    "twin_failures": 127,
+    "not_upright": 127
+   }
+  },
+  {
+   "control": "WALL",
+   "stated": "every square moved to its nearest wall and 1e-40 past: A's clearance exactly 0 and -1e-40; B touching and crossing; B's area inside 1 and below 1",
+   "as_stated": true,
+   "outcome": {
+    "moves": 254,
+    "failures": []
+   }
+  },
+  {
+   "control": "PALL",
+   "stated": "every pair closed along its line of centres to contact and 1e-40 past: A's margin exactly 0 and -1e-40, the corner projections exactly 0 at contact, B touching and overlapping both ways round",
+   "as_stated": true,
+   "outcome": {
+    "closings": 16002,
+    "failures": []
+   }
+  }
+ ],
+ "cpu_seconds_by_group": {
+  "reader": 2.03,
+  "geometry": 36.35,
+  "side": 2.78,
+  "extent": 11.32,
+  "contraction": 43.26,
+  "C0": 5.34,
+  "X1": 0.02,
+  "WALL": 0.23,
+  "PALL": 71.61
+ },
+ "cpu_seconds": 172.94,
+ "plan_mismatch": []
+}

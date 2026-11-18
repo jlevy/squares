@@ -1,0 +1,542 @@
+{
+ "program": "rb127_check.py",
+ "mode": "pair",
+ "label": "1017",
+ "pin": "cc20a26845789c2502950041c26709eda8a71081",
+ "files": {
+  "exact_json": {
+   "path": "/tmp/claude-0/-home-user-squares/bd74155c-bf06-5d6c-a727-558842453a91/scratchpad/r127b/src/git-1017/n127_exact.json",
+   "sha256": "bb883631dc01343198a07826d2a84faf029789b13beb88403478db736ac27c9b",
+   "bytes": 19192
+  },
+  "witness_yaml": {
+   "path": "/tmp/claude-0/-home-user-squares/bd74155c-bf06-5d6c-a727-558842453a91/scratchpad/r127b/src/git-1017/n127_witness.yaml",
+   "sha256": "8245da32e92e9780a22a5cf9cd42911674e3be4d816c235fe42743f9a90a085d",
+   "bytes": 69441
+  }
+ },
+ "issue": {
+  "number": 1017,
+  "title": "Lowered upper bound for n = 127 (side 11.800793726616)",
+  "created_at": "2026-11-17T22:27:04Z",
+  "updated_at": "2026-11-17T23:26:06Z",
+  "author": "JoostdeWinter",
+  "comments_count_at_fetch": 0,
+  "title_side_print": "11.800793726616",
+  "claim_print_rounded_up": null,
+  "claim_exact": "5900396863307571/500000000000000",
+  "claim_exact_decimal": "11.800793726615142",
+  "house_print": "11.8017538904864874",
+  "gain_print": "0.00096",
+  "commit": "cc20a26845789c2502950041c26709eda8a71081",
+  "close_pairs": [
+   312,
+   312
+  ],
+  "kaggle_side": "11.800793726617185",
+  "kaggle_difference_print": "2.04e-12",
+  "kaggle_difference_sense": "this packing below kaggle",
+  "band_squares": null,
+  "later_commits_unchanged_stated": true,
+  "files_named": [
+   "n127/check_area.py",
+   "n127/n127_exact.json",
+   "n127/n127_record.png",
+   "n127/n127_witness.yaml",
+   "n127/verify_exact.py"
+  ],
+  "ai_statement": "The search, optimization and rational certificate were produced with GPT-6.2 Sol (OpenAI). The repository files, checks and figure were produced with Claude (Anthropic). Both worked under my direction."
+ },
+ "reading": {
+  "form_J": {
+   "n": 127,
+   "key_order": [
+    "n",
+    "side",
+    "square_size",
+    "format",
+    "squares"
+   ],
+   "flags": [],
+   "scalars": 509
+  },
+  "form_C": {
+   "n": 127,
+   "id_style": "square-k",
+   "witness_id": "W-n127-de-winter",
+   "schema": "https://github.com/jlevy/squares/blob/main/packing/witnesses/witness.schema.yaml",
+   "claim": {
+    "coordinate_provenance": "reported",
+    "method": "exact-algebraic",
+    "limitations": "Exact rational coordinates of a packing of 127 unit squares, given as four corners per square. verify_exact.py checks in rational arithmetic that every square lies in the container and that all pairs of squares have disjoint interiors. The file proves an upper bound for the side. It makes no statement on optimality."
+   },
+   "has_source": false,
+   "has_certificate": false,
+   "flags": [],
+   "scalars": 1017
+  }
+ },
+ "sides_equal_as_values": true,
+ "sides_equal_as_written": true,
+ "twin": {
+  "holds": true,
+  "failures": [],
+  "listings": {
+   "offset 2, counterclockwise": 127
+  }
+ },
+ "decision_native": {
+  "verdict": "ACCEPT",
+  "problems": [],
+  "problem_count": 0,
+  "squares_decided": 127,
+  "pairs_decided": 8001,
+  "pair_classes_a": {
+   "apart": 8001
+  },
+  "pair_classes_b": {
+   "apart": 8001
+  },
+  "wall_classes_a": {
+   "clear": 503,
+   "touch": 5
+  },
+  "wall_classes_b": {
+   "clear": 503,
+   "touch": 5
+  },
+  "least_margins": [
+   {
+    "pair": [
+     35,
+     88
+    ],
+    "margin": "288244623766466685570412029154747971460849877259/74900010864835657446827982501228435591031428667640686035156250",
+    "margin_float": "3.848392282434e-15"
+   },
+   {
+    "pair": [
+     36,
+     37
+    ],
+    "margin": "945292487485031659632519636578249018219057/214157389735577350536065340697500630110561561584472656250",
+    "margin_float": "4.414008261177e-15"
+   },
+   {
+    "pair": [
+     34,
+     37
+    ],
+    "margin": "86124381445555372245267873336496580007539291/19106635263002879411078213529439495231783767795562744140625",
+    "margin_float": "4.507564009050e-15"
+   },
+   {
+    "pair": [
+     33,
+     36
+    ],
+    "margin": "11359995433501386145701579177012550607314397237/2461105734551285049976993752103873567575589646148681640625000",
+    "margin_float": "4.615809582668e-15"
+   },
+   {
+    "pair": [
+     32,
+     33
+    ],
+    "margin": "369360432924761446166550281942199456366845016093/74299373679508752314329539288579172294664759082794189453125000",
+    "margin_float": "4.971245578974e-15"
+   },
+   {
+    "pair": [
+     29,
+     32
+    ],
+    "margin": "30151749515804005876543608665255669674940311/5575080697657467821532058512879551030685291290283203125000",
+    "margin_float": "5.408307278579e-15"
+   },
+   {
+    "pair": [
+     17,
+     21
+    ],
+    "margin": "650974410167760577482469478412133287486429977771/120346545497545704662889131957588842458015533094787597656250000",
+    "margin_float": "5.409165734475e-15"
+   },
+   {
+    "pair": [
+     38,
+     42
+    ],
+    "margin": "1090557859653641728857/201471457771281650824737548828125000",
+    "margin_float": "5.412964554471e-15"
+   },
+   {
+    "pair": [
+     28,
+     32
+    ],
+    "margin": "5668921713679480030656561988996720572356088739/1013784400029878933199087567761698734697396321487426757812500",
+    "margin_float": "5.591841533084e-15"
+   },
+   {
+    "pair": [
+     12,
+     13
+    ],
+    "margin": "490438426781406151720323666570497829584444743383/84532615006368345708195951886002026300752658424377441406250000",
+    "margin_float": "5.801765705988e-15"
+   },
+   {
+    "pair": [
+     35,
+     39
+    ],
+    "margin": "1710520592260623566182007/289414808824441558138492202758789062500",
+    "margin_float": "5.910273213760e-15"
+   },
+   {
+    "pair": [
+     19,
+     23
+    ],
+    "margin": "55178196402564954753904478990949383300912543607/9187602091623052884669579415986587822229158845901489257812500",
+    "margin_float": "6.005723348955e-15"
+   }
+  ],
+  "least_wall_clearances": [
+   {
+    "wall": "left",
+    "clearance": "0",
+    "clearance_float": "0.000000000000e+00",
+    "squares": [
+     52
+    ]
+   },
+   {
+    "wall": "bottom",
+    "clearance": "0",
+    "clearance_float": "0.000000000000e+00",
+    "squares": [
+     43,
+     48,
+     54,
+     67
+    ]
+   },
+   {
+    "wall": "right",
+    "clearance": "527/1562500000000000000",
+    "clearance_float": "3.372800000000e-16",
+    "squares": [
+     51,
+     105,
+     106,
+     107,
+     121,
+     125,
+     127
+    ]
+   },
+   {
+    "wall": "top",
+    "clearance": "527/1562500000000000000",
+    "clearance_float": "3.372800000000e-16",
+    "squares": [
+     113,
+     115,
+     119,
+     120,
+     121,
+     122,
+     124
+    ]
+   }
+  ]
+ },
+ "decision_crossed": {
+  "verdict": "ACCEPT",
+  "problems": [],
+  "problem_count": 0,
+  "squares_decided": 127,
+  "pairs_decided": 8001,
+  "pair_classes_a": {
+   "apart": 8001
+  },
+  "pair_classes_b": {
+   "apart": 8001
+  },
+  "wall_classes_a": {
+   "clear": 503,
+   "touch": 5
+  },
+  "wall_classes_b": {
+   "clear": 503,
+   "touch": 5
+  },
+  "least_margins": [
+   {
+    "pair": [
+     35,
+     88
+    ],
+    "margin": "288244623766466685570412029154747971460849877259/74900010864835657446827982501228435591031428667640686035156250",
+    "margin_float": "3.848392282434e-15"
+   },
+   {
+    "pair": [
+     36,
+     37
+    ],
+    "margin": "945292487485031659632519636578249018219057/214157389735577350536065340697500630110561561584472656250",
+    "margin_float": "4.414008261177e-15"
+   },
+   {
+    "pair": [
+     34,
+     37
+    ],
+    "margin": "86124381445555372245267873336496580007539291/19106635263002879411078213529439495231783767795562744140625",
+    "margin_float": "4.507564009050e-15"
+   },
+   {
+    "pair": [
+     33,
+     36
+    ],
+    "margin": "11359995433501386145701579177012550607314397237/2461105734551285049976993752103873567575589646148681640625000",
+    "margin_float": "4.615809582668e-15"
+   },
+   {
+    "pair": [
+     32,
+     33
+    ],
+    "margin": "369360432924761446166550281942199456366845016093/74299373679508752314329539288579172294664759082794189453125000",
+    "margin_float": "4.971245578974e-15"
+   },
+   {
+    "pair": [
+     29,
+     32
+    ],
+    "margin": "30151749515804005876543608665255669674940311/5575080697657467821532058512879551030685291290283203125000",
+    "margin_float": "5.408307278579e-15"
+   },
+   {
+    "pair": [
+     17,
+     21
+    ],
+    "margin": "650974410167760577482469478412133287486429977771/120346545497545704662889131957588842458015533094787597656250000",
+    "margin_float": "5.409165734475e-15"
+   },
+   {
+    "pair": [
+     38,
+     42
+    ],
+    "margin": "1090557859653641728857/201471457771281650824737548828125000",
+    "margin_float": "5.412964554471e-15"
+   },
+   {
+    "pair": [
+     28,
+     32
+    ],
+    "margin": "5668921713679480030656561988996720572356088739/1013784400029878933199087567761698734697396321487426757812500",
+    "margin_float": "5.591841533084e-15"
+   },
+   {
+    "pair": [
+     12,
+     13
+    ],
+    "margin": "490438426781406151720323666570497829584444743383/84532615006368345708195951886002026300752658424377441406250000",
+    "margin_float": "5.801765705988e-15"
+   },
+   {
+    "pair": [
+     35,
+     39
+    ],
+    "margin": "1710520592260623566182007/289414808824441558138492202758789062500",
+    "margin_float": "5.910273213760e-15"
+   },
+   {
+    "pair": [
+     19,
+     23
+    ],
+    "margin": "55178196402564954753904478990949383300912543607/9187602091623052884669579415986587822229158845901489257812500",
+    "margin_float": "6.005723348955e-15"
+   }
+  ],
+  "least_wall_clearances": [
+   {
+    "wall": "left",
+    "clearance": "0",
+    "clearance_float": "0.000000000000e+00",
+    "squares": [
+     52
+    ]
+   },
+   {
+    "wall": "bottom",
+    "clearance": "0",
+    "clearance_float": "0.000000000000e+00",
+    "squares": [
+     43,
+     48,
+     54,
+     67
+    ]
+   },
+   {
+    "wall": "right",
+    "clearance": "527/1562500000000000000",
+    "clearance_float": "3.372800000000e-16",
+    "squares": [
+     51,
+     105,
+     106,
+     107,
+     121,
+     125,
+     127
+    ]
+   },
+   {
+    "wall": "top",
+    "clearance": "527/1562500000000000000",
+    "clearance_float": "3.372800000000e-16",
+    "squares": [
+     113,
+     115,
+     119,
+     120,
+     121,
+     122,
+     124
+    ]
+   }
+  ]
+ },
+ "agreement": {
+  "margins_identical_A_J_vs_A_C": true,
+  "B_identical_B_C_vs_B_J": true,
+  "clearances_identical": true,
+  "B_walls_identical": true,
+  "form_J_alone_pairs_agree": true,
+  "form_C_alone_pairs_agree": true,
+  "form_J_alone_walls_agree": true,
+  "form_C_alone_walls_agree": true,
+  "all": true
+ },
+ "margins_digest_native": "836a36535a6e74b77d7b37cf86a39a77100ebf94f290dc2ef94bfdbfe6f11e9e",
+ "margins_digest_crossed": "836a36535a6e74b77d7b37cf86a39a77100ebf94f290dc2ef94bfdbfe6f11e9e",
+ "clearances_digest_native": "510c271dd4796cd23bb9ad82f71ecd01d519f4684a6e30e16bc2e8633c92b2af",
+ "clearances_digest_crossed": "510c271dd4796cd23bb9ad82f71ecd01d519f4684a6e30e16bc2e8633c92b2af",
+ "counts": {
+  "touching_pairs": 0,
+  "touching_pairs_list": [],
+  "wall_contacts": 5,
+  "wall_contacts_list": [
+   [
+    43,
+    "bottom"
+   ],
+   [
+    48,
+    "bottom"
+   ],
+   [
+    52,
+    "left"
+   ],
+   [
+    54,
+    "bottom"
+   ],
+   [
+    67,
+    "bottom"
+   ]
+  ],
+  "pairs_with_margin_below": {
+   "1e-27": 0,
+   "1e-18": 0,
+   "1e-12": 223,
+   "1e-9": 223,
+   "1e-3": 255
+  }
+ },
+ "side_facts": {
+  "side_exact": "5900396863307571/500000000000000",
+  "side_as_written": "5900396863307571/500000000000000",
+  "side_in_lowest_terms": true,
+  "side_terminates_at_places": 15,
+  "side_decimal_exact": "11.800793726615142",
+  "side_floor_30": "11.800793726615142000000000000000",
+  "side_ceil_12": "11.800793726616",
+  "side_ceil_16": "11.8007937266151420",
+  "side_nearest_16": "11.8007937266151420",
+  "extent_left_bottom": [
+   "0",
+   "0"
+  ],
+  "extent_right_top": [
+   "144052657795594991/12207031250000000",
+   "144052657795594991/12207031250000000"
+  ],
+  "width": "144052657795594991/12207031250000000",
+  "height": "144052657795594991/12207031250000000",
+  "side_less_width_sci": "3.3728000e-16",
+  "side_less_height_sci": "3.3728000e-16",
+  "side_less_extent": "527/1562500000000000000",
+  "side_less_extent_sci": "3.3728000e-16",
+  "side_equals_extent": false,
+  "side_at_least_extent": true
+ },
+ "tilts": {
+  "exactly_upright": 69,
+  "tilted": 58,
+  "tilted_by_angle_description": {
+   "below 1e-9 degrees": 0,
+   "1e-9 to 1e-3 degrees": 0,
+   "1e-3 to 1 degrees": 1,
+   "beyond 1 degree": 57
+  },
+  "largest_turn_degrees_description": "30.246678",
+  "distinct_tilted_orientations": 39
+ },
+ "claims": {
+  "close_pairs_centres_below_sqrt2": 312,
+  "close_pairs_stated": [
+   312,
+   312
+  ],
+  "close_pairs_as_stated": true,
+  "commit_as_pinned": true,
+  "side_ceil_12": "11.800793726616",
+  "title_print": "11.800793726616",
+  "title_print_is_ceil_12": true,
+  "body_exact": "5900396863307571/500000000000000",
+  "body_exact_equals_side": true,
+  "body_exact_as_written_in_files": true,
+  "body_exact_decimal": "11.800793726615142",
+  "side_decimal_exact": "11.800793726615142",
+  "body_exact_decimal_is_exact": true,
+  "claim_box_title": {
+   "side": "1475099215827/125000000000",
+   "verdict_walls_only": "PARTIAL",
+   "problems": []
+  },
+  "kaggle_side": "11.800793726617185",
+  "kaggle_less_side_sci": "2.04300e-12",
+  "kaggle_difference_print": "2.04e-12",
+  "kaggle_difference_sense": "this packing below kaggle"
+ },
+ "problems": [],
+ "verdict": "ACCEPT",
+ "cpu_seconds": 2.09
+}
