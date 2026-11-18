@@ -13833,11 +13833,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-139).
 - n: 127
-  source_id: joegun-upper-bounds-2026-11-16
-  value: '11.8017538904864874'
-  evidence: E-joegun-1001-certificate-report
+  source_id: de-winter-s127-issue1020-2026-11-17
+  value: '11.8007937266149623'
+  evidence: E-de-winter-1020-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-16 (T-305).
+    a replay here and an accepted review, adopted on 2026-11-18 (T-330).
 - n: 129
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '11.87001385040446435'
@@ -14555,7 +14555,7 @@ superseded_reports:
 - n: 127
   source_id: evand-square-packing-2026-10-05
   value: '11.822875655532295295369036633375'
-  superseded_by: joegun-upper-bounds-2026-11-16
+  superseded_by: de-winter-s127-issue1020-2026-11-17
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -15812,9 +15812,9 @@ superseded_reports:
 - n: 127
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8109366475118110'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-305's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-330's exact
     side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 129
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8720298492118721'
@@ -16293,8 +16293,8 @@ superseded_reports:
   source_id: couzo-451-exact-refinements
   value: '11.8108787875891799'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-305's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 130
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.9044830325157865'
@@ -16887,8 +16887,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.81087878758917984'
   reason: The house from 2026-10-17 until 2026-11-16; its certificate stays retained and verified,
-    and T-305's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 204
   source_id: evand-issue914-2026-11-05
   value: '14.8043613836518588'
@@ -16985,6 +16985,12 @@ superseded_reports:
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
     and T-326's exact side is smaller.
   superseded_by: mishapolk-issue1009-2026-11-16
+- n: 127
+  source_id: joegun-upper-bounds-2026-11-16
+  value: '11.8017538904864874'
+  reason: The house from 2026-11-16 until 2026-11-18; its certificate stays retained and verified,
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
