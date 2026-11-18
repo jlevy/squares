@@ -10,8 +10,9 @@ the record each certificate is compared with, the ledger's verdicts, the retaine
 controls, the identity and contraction measurements the register's notes cite, and the
 holds: T-280 (299, 303) and T-281 (130) stayed below the stage 4 exit for the owner
 (think-ruu2's RV-3, think-ikku), at C1 with the stage 4 review mapped and no case moved,
-until the owner's option D made both restatements (think-b0w5, think-8yyy), while the eleven sides above the corpus are current, verified beyond-horizon rows. Every
-test reads the packets, the ledger and the record only; none needs the network.
+until the owner's option D made both restatements (think-b0w5, think-8yyy), while the
+eleven sides above the corpus are current, verified beyond-horizon rows. Every test reads
+the packets, the ledger and the record only; none needs the network.
 """
 
 from __future__ import annotations
