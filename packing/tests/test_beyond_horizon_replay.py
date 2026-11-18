@@ -1964,15 +1964,16 @@ def test_a_deletion_bound_from_a_certificate_is_an_earlier_report_with_no_row() 
     """The owner's answer of 23 October 2026 on D6 (think-f2io): 4e4c8ce's 36 index bounds
     that delete one square from the next count's certificate are earlier reports. The walk
     records each, the chain passes over it, and a later equal side is not recorded: #732's
-    985 ties it. That such a bound has no row of its own is the decision's recommendation,
-    which the owner has not confirmed (think-kzme). 23aff0c's deletions from Friedman's
-    constructions, which no certificate file states, stay held."""
+    985 ties it. That such a bound has no row of its own was the decision's recommendation
+    until the owner confirmed it on 17 November 2026 (think-gmoj). 23aff0c's deletions from
+    Friedman's constructions, which no certificate file states, stay held."""
     history = replay.WALKS[replay.HISTORY]
     deletions, beyond = replay.HISTORY_HELD["franciscouzo/square-packing@4e4c8ce"]
     assert (deletions.kind, deletions.bead) == (replay.CONSEQUENCE, "think-f2io")
     assert deletions.answer == replay.DELETION_ANSWER
     assert len(deletions.counts) == 36
-    assert "not confirmed (think-kzme)" in replay.DELETION_ANSWER
+    assert "17 November 2026 (think-gmoj)" in replay.DELETION_ANSWER
+    assert "not confirmed" not in replay.DELETION_ANSWER
     assert not {751, 752, 927} & deletions.counts
     assert (beyond.kind, beyond.bead, beyond.answer) == (replay.CONSEQUENCE, "think-kzme", "")
     friedman = replay.HISTORY_HELD["franciscouzo/square-packing@23aff0c"]
@@ -2093,9 +2094,9 @@ def _steps_763() -> dict[str, dict[int, dict[str, Any]]]:
 def test_763_s_claims_are_the_claim_map_s_and_its_rows_what_its_walk_records() -> None:
     """Issue #763 has no table: its claims to 1024 are the claim map's (`CLAIM_MAP`), and
     the walk records 200 of its 203. 268 and 303 are in the corpus and are the register's,
-    683 is held, and the other 197, 184 certificates and the 13 recipes the construction
-    checker decides (think-g2qy), are declared rows at their exact sides rounded up; 328,
-    850 and 909 restate f1ceee4's rows below the print."""
+    683 is held, settled with no row (think-gmoj), and the other 197, 184 certificates and
+    the 13 recipes the construction checker decides (think-g2qy), are declared rows at their
+    exact sides rounded up; 328, 850 and 909 restate f1ceee4's rows below the print."""
     chosen = replay.release(763)
     mapped = [
         item for item in replay.mapped_claims(chosen) if item["n"] <= replay.FROZEN_THROUGH
@@ -2191,16 +2192,19 @@ def test_the_index_s_unrequested_rows_are_a_publication_of_their_own() -> None:
 
 def test_the_763_walk_holds_683_and_names_what_rests_on_holds() -> None:
     """The walk held #763's 13 recipes until the construction checker decided them in
-    43f666c's import (think-g2qy); it holds only the deletion bound at 683 now."""
+    43f666c's import (think-g2qy); it holds only the deletion bound at 683 now, which the
+    issue claims with no certificate file of its own, so the owner's answer of 17 November
+    2026 settles it with no row (think-gmoj), and nothing rests on it."""
     walk = replay.WALKS[replay.ISSUE_763]
     (deletion,) = walk.held["#763"]
     assert (deletion.kind, deletion.bead, deletion.also) == (
         replay.CONSEQUENCE,
-        "think-2z2n",
-        ("think-kzme",),
+        "think-gmoj",
+        (),
     )
     assert sorted(deletion.counts) == [683]
-    assert not deletion.answer
+    assert deletion.answer == replay.CLAIMED_DELETION_ANSWER
+    assert not [item for item in replay.resting_on_holds(walk) if 683 in item.counts]
     assert set(replay.resting_on_holds(walk)) == set(walk.resting)
     assert not [problem for problem in replay.resting_problems() if replay.ISSUE_763 in problem]
 

@@ -10,8 +10,10 @@ digest lists against the retained files, each print against its exact side, the 
 certificate is compared with, the ledger's verdicts, the retained sharp controls, the
 contraction measurements the ledger's notes cite, and the rows: each count's current row
 is this import's, at the side its source prints, and the row it beat is marked
-superseded, but at 809, a deletion bound #941 claims, which is held for the owner
-(think-kzme); and the stage 4 review of 11 November is mapped, so the rows are verified.
+superseded, 809 included, a deletion bound #941 claims with a certificate file of its own,
+which was held for the owner (think-kzme) until the owner's answer of 17 November 2026
+gave it its row (think-gmoj); and the stage 4 review of 11 November is mapped, so the rows
+are verified.
 Every test reads the packets, the ledger and the record only; none needs the network.
 """
 
@@ -134,9 +136,6 @@ SUPERSEDED = {
 #: Counts whose row is an L-border recipe on a parent certificate: the base count whose
 #: margin the row carries.
 RECIPE_BASES = {910: 851, 632: 583, 744: 691, 970: 850}
-#: 809 is the 810 certificate less its last square, a deletion bound #941 claims: held
-#: without a row for the owner's think-kzme, as 743, 798, 855 and 985 are.
-HELD = frozenset({809})
 REVIEW = "docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md"
 REVIEW_CHECK = "V-de-winter-941-942-review-check"
 EVIDENCE = {P941: "941", P942: "942", PA0C: "a0c4fc8"}
@@ -190,7 +189,7 @@ def test_the_retained_certificates_are_the_ones_the_source_digest_list_names(
 def test_each_print_is_its_exact_side_rounded_up_at_ten_places(packet: str) -> None:
     declaration = reports.load_declaration(reports.packet_path(packet))
     assert declaration["replayed"] == list(PRINTED[packet])
-    assert declaration["requested"] == [n for n in PRINTED[packet] if n not in HELD]
+    assert declaration["requested"] == list(PRINTED[packet])
     assert declaration["houses"] == []
     facts = reports.read_facts(reports.packet_path(packet))
     for row in declaration["certificates"]:
@@ -276,15 +275,6 @@ def test_the_rows() -> None:
     document = yaml.safe_load(coverage.COVERAGE.read_text("utf-8"))
     current = coverage.current_beyond_horizon(document)
     for packet, n in ALL:
-        if n in HELD:
-            assert current[n]["source_id"] == SUPERSEDED[n]
-            assert not [
-                row
-                for row in document["beyond_horizon_claims"]
-                if row["n"] == n and row["source_id"] == packet
-            ]
-            assert n not in coverage.load_claims(reports.packet_path(packet) / reports.BEYOND)
-            continue
         assert current[n]["source_id"] == packet
         assert current[n]["value"] == PRINTED[packet][n]
         assert current[n]["assurance"] == "verified"
@@ -312,7 +302,7 @@ def test_the_stage_4_review_is_mapped(packet: str) -> None:
     report = evidence[f"E-de-winter-{key}-certificate-report"]
     assert report["assurance"] == "reported"
     assert REVIEW in report["external_review"]["note"]
-    rows = [n for n in PRINTED[packet] if n not in HELD]
+    rows = list(PRINTED[packet])
     replay = evidence[f"E-de-winter-{key}-exact-feasibility"]
     review = evidence[f"E-de-winter-{key}-review-exact-feasibility"]
     for entry in (replay, review):

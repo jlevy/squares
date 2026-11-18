@@ -2095,17 +2095,18 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
     joined them on 7 November as an owner decision on reuse terms (think-8h80), and #939
     and #946 on 11 November, held for the owner's RV-3 (think-ruu2; think-2h88). #1008
     joined them on 17 November, waiting on the README its author says names T-057's
-    sources (think-a88h). #776 and #777 left them on 17 November, when T-142's and
-    T-143's censuses, controls and review were recorded (think-i85v); each now owes only
-    its reply. Each carries its type, and the label taxonomy names every type the record
-    uses."""
+    sources (think-a88h), and #529, #537, #574 and #783 left them the same day, on the
+    owner's decisions of that day (think-x30l, think-l7j0, think-0mup). #776 and #777 left
+    them on 17 November too, when T-142's and T-143's censuses, controls and review were
+    recorded (think-i85v); each now owes only its reply. Each carries its type, and the
+    label taxonomy names every type the record uses."""
     by_type: dict[str, set[int]] = {}
     for entry in check_requests.load_record()["issues"]:
         if entry.get("blocked"):
             assert entry["state"] == "open", entry["number"]
             by_type.setdefault(entry["blocked"]["type"], set()).add(entry["number"])
     assert {kind: len(numbers) for kind, numbers in by_type.items()} == {
-        "owner-decision": 27,
+        "owner-decision": 23,
         "owner-reply": 2,
         "standing-hold": 9,
         "author": 2,

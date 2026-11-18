@@ -10028,8 +10028,9 @@ sources:
     retains the Lean directory's built files, scripts, batch list and the source's per-task
     receipt (862 CPU-hours), and pins SOURCES.sha256 and INDEX.json by digest; the library's
     19 closure modules are retained byte for byte in the 7 October evand packet. T-235 records
-    it as a formalization of T-066. Not built here (think-cs9x, held); the case record is
-    unchanged.
+    it as a formalization of T-066. Not built here: the full build was declined by the owner
+    over the 40 CPU-hour item cap on 17 November 2026 (think-cs9x, think-l7j0); the case
+    record is unchanged.
 - id: wand125-validtilt9-lean-2026-10-16
   title: Hosono's Lean kernel proof of Daniel's ValidTilt9, s(k^2 - 4) = k for every k >= 8
   role: source-repository
@@ -10078,7 +10079,9 @@ sources:
     The packet retains the Valid7 closure (55 modules and the three build pins), VALID7.md
     and the generators, and pins the release asset v7cert.tar.zst by SHA-256 in its
     root-name audit. T-250 records it as a formalization of T-064, with version 2. Not built
-    here (think-qu37, an owner decision); the case records are unchanged.
+    here: the full build was declined by the owner over the 40 CPU-hour item cap on 17
+    November 2026, and a sample of roots stays runnable (think-qu37, think-l7j0); the case
+    records are unchanged.
 - id: wand125-valid7-lean-v2-2026-10-17
   title: Hosono's Lean kernel proof of Daniel's Valid7, version 2
   role: source-repository
@@ -11878,8 +11881,9 @@ sources:
     with the grid. The intake's replay of the source's checker, zmx2 over the D4 region
     and over the unreduced pose space, each root equal to the source's log, is
     E-khalili-842-cover-replay; with the two 31 October reviews, the independent one by
-    a separately prompted lane, it puts T-252 at V3/C3 and n-044 at proved. The source's zm_mixed.py records were read and not replayed
-    (think-qvp6).
+    a separately prompted lane, it puts T-252 at V3/C3 and n-044 at proved. The source's zm_mixed.py records were read and not replayed;
+    their complete pass was declined by the owner over the 40 CPU-hour item cap on 17
+    November 2026 (think-qvp6, think-l7j0).
 - id: mishapolk-1023-refinements-2026-10-30
   title: >-
     Mykhailo Polkovskyi's certificates of 23 October at e386aab to fbc1749, no issue
@@ -12879,7 +12883,7 @@ sources:
     851, 851 and 868 (issue 763, 43f666c), re-optimized, 753 a sub-window of the 810 here, six
     borders of axis-aligned squares on these and 809 the 810 less one square. The ledger of 11
     November for this import (campaign/issue-intake/upper-bounds-941-942-20261111), walked from
-    starts frozen at main 8afdabe8f, records all 15; 14 are current beyond-horizon rows, 7.08e-05 to
+    starts frozen at main 8afdabe8f, records all 15, and all 15 are current beyond-horizon rows, 7.08e-05 to
     5.33e-03 below the rows of couzo-issue763-2026-10-23, couzo-43f666c-2026-10-24,
     tymchishin-22-3662-2026-10-23 and couzo-issue763-2026-10-23-recipes, which they supersede, and
     below Göbel's construction; both maintained routes accept all 15 certificates and refuse their
@@ -12887,10 +12891,13 @@ sources:
     (docs/project/reviews/review-2026-11-11-dewinter-941-942-upper-bounds.md, lane L96) decides all
     fifteen again by a clean-room checker, so the rows are verified from
     E-de-winter-941-exact-feasibility and E-de-winter-941-review-exact-feasibility. 809 is the 810
-    certificate less its last square, a one-square deletion bound the issue claims at 810's side:
-    whether an issue-claimed deletion bound gets a row is the owner's open question think-kzme, as
-    at 743, 798, 855 and 985, so 809 has no row here and the row of couzo-issue763-2026-10-23 stays
-    current there.
+    certificate less its last square, a one-square deletion bound the issue claims at 810's side
+    with a certificate file of its own, above324/n0809.cert. It was held without a row from 11
+    November until the owner answered think-kzme on 17 November 2026 (think-gmoj): a
+    deletion-made bound gets a row only where a report claims the count with its own certificate
+    file, as here, and the index deletion bounds at 743, 798, 855 and 985, which have none, get
+    no row. So 809 has its row, 1.19e-04 below the row of couzo-issue763-2026-10-23, which it
+    supersedes.
   claims_record: resources/web/de-winter-issue941-2026-11-10/acquisition/beyond-horizon-claims.json
 - id: de-winter-issue942-2026-11-10
   title: Joost de Winter's sixteen certificates above the corpus at JoostdeWinter/square-packing a9486ed, issue 942
@@ -29441,7 +29448,8 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '28.908036098650'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: de-winter-issue941-2026-11-10
   bead: think-ptkk
 - n: 810
   source_id: couzo-issue763-2026-10-23
@@ -32578,6 +32586,13 @@ beyond_horizon_claims:
   source_id: de-winter-issue941-2026-11-10
   claim: upper-bound
   value: '28.6912835939'
+  assurance: verified
+  disposition: tracked-outside-case-corpus
+  bead: think-cen3
+- n: 809
+  source_id: de-winter-issue941-2026-11-10
+  claim: upper-bound
+  value: '28.9079170470'
   assurance: verified
   disposition: tracked-outside-case-corpus
   bead: think-cen3
