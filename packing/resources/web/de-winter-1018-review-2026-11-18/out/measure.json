@@ -1,0 +1,56 @@
+{
+ "factor": "1063/1062",
+ "n": [
+  108,
+  108
+ ],
+ "L": [
+  "531/50",
+  "1063/100"
+ ],
+ "B": [
+  "9977/10000",
+  "12487/12500"
+ ],
+ "proof_net": [
+  {
+   "step": "83/40000",
+   "last": 200
+  },
+  {
+   "step": "83/80000",
+   "last": 400
+  }
+ ],
+ "total_mass": [
+  "10799999/100000",
+  "10799999/100000"
+ ],
+ "rows": [
+  823,
+  823
+ ],
+ "rows_scaled_in_file_order": true,
+ "first_row_that_differs": null,
+ "rows_scaled_as_multiset": true,
+ "expanded_distinct": [
+  6524,
+  6524
+ ],
+ "new_is_pushforward_of_old": true,
+ "failures": [],
+ "verdict": "SCALED_COPY",
+ "program": "rv1018_measure.py",
+ "base_digests": {
+  "stored": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+  "json": "4d72da64052667a3ebf057f7e78ea9d40f1521a0b86ddef210a2be319d27042a",
+  "canonical": "5ce2449f2cd10f8541939c124055327dcad41a94cb9927e399704033d4ace1a9"
+ },
+ "new_digests": {
+  "stored": "bd471f6541874a6f6a057c57b8804812563859d83a0f2e1a1aa7595dad32d0da",
+  "json": "d4d160901461bd9e3769db1dbace4b00d2e0afb57429dcd3c7467f06c5ced9d8",
+  "canonical": "e453c059bcd4742a0c037e56d27b47e8769dd39300503c8c54330bf41b154880"
+ },
+ "source_copy_sha256": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+ "source_copy_is_retained_base": true
+}
