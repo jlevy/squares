@@ -1,0 +1,20 @@
+Lane r127-1118, blind stage 4 review of #1015, #1017 and #1020 (s(127), Joost de Winter).
+Findings frozen at 2026-11-18T02:26:42Z: frozen/review-2026-11-18-de-winter-1015-1017-1020.frozen.md is
+the review text as it stood then, and frozen/findings-frozen.sha256 binds it with the
+checker freeze, every program, every receipt (this review's and the maintained tools'),
+the six retained sources and T-305's certificate. From this packet's directory:
+
+    sha256sum -c frozen/findings-frozen.sha256
+
+Not read before this freeze: the authors' README.md, REGISTRATION.md, verify_exact.py,
+check_area.py and figures; any issue comment; the import lane's branch, packets,
+receipts, ledger or bead notes; T-305's packet's measure/ and receipts/ files and its
+README beyond the grep the checker freeze notes; the code of devtools.contraction_margin,
+devtools.measure_identity and devtools.upper_bound_reports beyond the tools' --help text
+and the adapter names of upper_bound_reports.ADAPTERS; this repository's sqpack witness,
+verifier and promotion code; the case record and register entries at 127 beyond the
+significance lines the review names.
+
+Written after the checker freeze and before this one, and not in the checker's list:
+programs/r127_bands.py, programs/r127_compare.py and programs/r127_tables.py, which
+decide nothing.

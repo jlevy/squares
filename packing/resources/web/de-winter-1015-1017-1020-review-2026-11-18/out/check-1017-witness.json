@@ -1,0 +1,139 @@
+{
+ "program": "r127_check.py",
+ "file": "source/i1017-cc20a26/n127/n127_witness.yaml.gz",
+ "sha256": "8245da32e92e9780a22a5cf9cd42911674e3be4d816c235fe42743f9a90a085d",
+ "bytes": 69441,
+ "stored_sha256": "ced2f7f88fc5ba39bb6882be0eba46e9187e98985cd96ef2722415d376fe3343",
+ "form": "witness",
+ "scalars": 1017,
+ "not_lowest_terms": [],
+ "not_lowest_terms_count": 0,
+ "ids_first_last": [
+  "square-1",
+  "square-127"
+ ],
+ "meta": {
+  "id": "W-n127-de-winter",
+  "claim": {
+   "coordinate_provenance": "reported",
+   "method": "exact-algebraic",
+   "limitations": "Exact rational coordinates of a packing of 127 unit squares, given as four corners per square. verify_exact.py checks in rational arithmetic that every square lies in the container and that all pairs of squares have disjoint interiors. The file proves an upper bound for the side. It makes no statement on optimality."
+  },
+  "schema": "https://github.com/jlevy/squares/blob/main/packing/witnesses/witness.schema.yaml"
+ },
+ "decision": {
+  "n": 127,
+  "side": "5900396863307571/500000000000000",
+  "side_decimal": "11.800793726615142000000000000000",
+  "units_A": 127,
+  "units_B": 127,
+  "senses_A": {
+   "ccw": 127,
+   "cw": 0
+  },
+  "senses_B": {
+   "ccw": 127,
+   "cw": 0
+  },
+  "pairs": 8001,
+  "pair_classes_A": {
+   "apart": 8001,
+   "contact": 0,
+   "overlap": 0
+  },
+  "pair_classes_agree": 8001,
+  "overlap_area_sum_B": "0",
+  "touching_pairs": [],
+  "overlapping_pairs": [],
+  "least_margin": {
+   "pair": [
+    35,
+    88
+   ],
+   "exact": "288244623766466685570412029154747971460849877259/74900010864835657446827982501228435591031428667640686035156250",
+   "decimal": "3.84839e-15"
+  },
+  "positive_margins_below": {
+   "1e-30": 0,
+   "1e-20": 0,
+   "1e-15": 0,
+   "1e-14": 220,
+   "1e-13": 223,
+   "1e-12": 223,
+   "1e-11": 223,
+   "1e-10": 223,
+   "1e-9": 223,
+   "1e-6": 224,
+   "1e-3": 255,
+   "1e-1": 347
+  },
+  "square_wall_decisions": 508,
+  "square_wall_agree": 508,
+  "wall_contacts": {
+   "left": [
+    52
+   ],
+   "bottom": [
+    43,
+    48,
+    54,
+    67
+   ],
+   "right": [],
+   "top": []
+  },
+  "least_clearance": {
+   "left": {
+    "square": 52,
+    "exact": "0",
+    "decimal": "0"
+   },
+   "bottom": {
+    "square": 43,
+    "exact": "0",
+    "decimal": "0"
+   },
+   "right": {
+    "square": 51,
+    "exact": "527/1562500000000000000",
+    "decimal": "3.37280e-16"
+   },
+   "top": {
+    "square": 113,
+    "exact": "527/1562500000000000000",
+    "decimal": "3.37280e-16"
+   }
+  },
+  "extent": {
+   "min_x": "0",
+   "max_x": "144052657795594991/12207031250000000",
+   "min_y": "0",
+   "max_y": "144052657795594991/12207031250000000",
+   "width": "144052657795594991/12207031250000000",
+   "height": "144052657795594991/12207031250000000",
+   "side_less_max_x": "3.37280e-16",
+   "side_less_max_y": "3.37280e-16"
+  },
+  "areas_inside_all_one": true,
+  "problems": [],
+  "problem_count": 0,
+  "verdict": "ACCEPT"
+ },
+ "claim": {
+  "claim": "11.800793726616",
+  "claim_places": 12,
+  "claim_at_least_side": true,
+  "claim_less_side": "429/500000000000000",
+  "claim_less_side_decimal": "8.58000e-13",
+  "ceiling_at_claim_places": "11.800793726616",
+  "claim_is_ceiling": true,
+  "floor_at_claim_places": "11.800793726615",
+  "stated_exact": "5900396863307571/500000000000000",
+  "stated_exact_equals_side": true,
+  "stated_decimal": "11.800793726615142",
+  "stated_decimal_equals_side": true,
+  "side_less_stated_decimal": "0"
+ },
+ "verdict": "ACCEPT",
+ "cpu_seconds": 1.54
+}
