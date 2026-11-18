@@ -607,6 +607,33 @@ def test_right_angles_and_diagonals_are_pinned_across_the_atlas() -> None:
     assert diagonal_hues == {1}
 
 
+def test_a_class_holding_a_right_angle_takes_hue_zero_whatever_its_mean() -> None:
+    """Greedy seeding put n = 292's square 0.9 microradians off the axis into a class
+    seeded 1.87 microradians off, whose mean is 1.47 off, outside the 1-microradian
+    tolerance, so the right angle took hue 9 (18 November 2026, T-323). A class that
+    holds a square at a pinned angle takes that pin, and one that holds none keeps the
+    representative's verdict."""
+    from sqpack.render import color  # noqa: PLC0415
+
+    tolerance = RenderSpec().angle_tolerance_radians
+    quarter = color.QUARTER_TURN_RADIANS
+    straddling = (
+        quarter - Decimal("1.87e-6"),
+        quarter - Decimal("1.64e-6"),
+        quarter - Decimal("1.48e-6"),
+        quarter - Decimal("0.9e-6"),
+    )
+    members = (0, 1, 2, 3)
+    representative = color._orientation_representative(straddling, members)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    pin = color._class_pin  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert color._pinned_hue(representative, tolerance=tolerance) is None  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert pin(members, representative, orientations=straddling, tolerance=tolerance) == 0
+    assert pin(members, representative, orientations=None, tolerance=tolerance) is None
+    off_axis = (quarter - Decimal("1.87e-6"), quarter - Decimal("1.64e-6"))
+    representative = color._orientation_representative(off_axis, (0, 1))  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert pin((0, 1), representative, orientations=off_axis, tolerance=tolerance) is None
+
+
 def test_unpinned_classes_take_hues_by_descending_class_size() -> None:
     """Everything past the two pinned angles is ordered by how many squares it holds."""
     spec = RenderSpec(overlays=frozenset())

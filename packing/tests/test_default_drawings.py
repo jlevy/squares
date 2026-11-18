@@ -757,6 +757,11 @@ def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> N
             f"n={n}: SETTLED names run grid-slack-3a-rerun-deg05-1016 as evand-regularize's, "
             "and its record as regularize_grid_slack/1's"
         ),
+        # That run never covered 273, as it covered 272, so its record says so too.
+        (
+            f"n={n}: SETTLED names run grid-slack-3a-rerun-deg05-1016, whose record shows it "
+            f"ran 105, 129, 146, 156, 176, 204, 271, 272, 303, not {n}"
+        ),
     ]
     # Without the retained evidence, only the index's blocks hold a run, and that is not
     # enough (below).
