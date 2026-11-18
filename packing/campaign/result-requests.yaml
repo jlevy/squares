@@ -36154,3 +36154,55 @@ issues:
       later that day, reports s(270) <= 16.927314216352 below the Kaggle sides here, with a
       certificate in his repository's n270/; it is an import of its own, and this issue's
       acknowledgement reads it first.
+  - number: 1018
+    title: Raised lower bound for n = 108 and n = 109 (side 10.630037940829)
+    author: JoostdeWinter
+    opened: '2026-11-17'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(109) >= s(108) >=
+      1700799526134255846599/159999384348528500000 = 10.6300379408297..., 0.0100 above T-216's
+      531/50 at 108, from his watched repository JoostdeWinter/square-packing at cc20a26:
+      Hiroaki Hosono's T-216 measure dilated by 1063/1062 onto a declared net of 401 directions
+      at core side 12487/12500, twelve native runs of this repository's sqverify-fast, and a
+      one-page proof that enlarges the bound from 10.63 by scaling a packing into the measure's
+      square. Triaged, retained and registered on 18 November 2026 in lane w6-dewinter-1118
+      (think-i5en) as T-314: a lower bound, so the house rule does not reach it. The premises,
+      the dilation, the regeneration of the file from T-216's and the enlargement's arithmetic
+      hold exactly, and the author's runs cover every direction once, of reviewed crate source.
+      The complete census replay of all 401 directions and its whole-net controls ran here and passed, equal to the author's runs; the replay's evidence entry waits for the stage 4 review, so the entry stands at V0/C0. The stage 4 review (R-108) is a separate lane, and the verified lanes at 108
+      and 109 move only once it is accepted.
+    read_through: '2026-11-17T22:27:34Z'
+    results:
+    - key: n108-n109-dilated-measure
+      claim: >-
+        s(109) >= s(108) >= 1700799526134255846599/159999384348528500000 (lower_n108/ at
+        JoostdeWinter/square-packing cc20a26), T-216's measure dilated by 1063/1062 onto 401
+        declared-net directions, with a rational enlargement from 10.63.
+      source: body
+      register:
+      - T-314
+      evidence:
+      - E-de-winter-1018-n108-report
+      validation:
+      - think-i5en
+    beads:
+    - think-i5en
+    answer_bead: think-i5en
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, its stage 4 review mapped, and the
+      reply on main says what was registered, replayed and reviewed, and where the lower lanes
+      at 108 and 109 stand.
+    notes: >-
+      Read on 18 November 2026 from main eb50f54e9; no comment on the issue, which carried the
+      intake label when read. The issue names cc20a26 (22:26:24Z, pushed with 67fb815 at
+      22:26:28Z), 70 seconds before it; 67fb815 adds lower_n108/REGISTRATION.md and SHA256SUMS,
+      and later commits leave lower_n108/ unchanged. It asks for credit to de Winter after
+      Hiroaki Hosono; the record credits de Winter after Hosono, Tokoharu and Levy, the chain
+      through T-216's credit and this repository's verifier, which the source names. The record
+      credits people, not AI agents (attribution.md): the issue says the rescaling, the
+      computation and the proof were produced with GPT-6.2 Astra (OpenAI) and the files and
+      checks with Claude (Anthropic), under his direction. Licensed MIT by LICENSE at the pin.

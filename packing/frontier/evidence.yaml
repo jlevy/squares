@@ -65066,3 +65066,38 @@ evidence:
       receipt's controls are gross, and the packet's sharp controls meet those margins. Finite
       feasibility only.
     source_reviewed: '2026-11-17'
+  - id: E-de-winter-1018-n108-report
+    claim: lower-bound
+    scope: {n_values: [108, 109]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter s108 lower bound 2026-11-17]'
+    certificate: packing/resources/web/de-winter-s108-lower-bound-2026-11-17/source/lower_n108/evidence/n108_measure.json.gz
+    replay_status: not-attempted
+    verifiers: []
+    limitations: >-
+      The author reports s(108) >= 1700799526134255846599/159999384348528500000 =
+      10.6300379408297..., and the same at 109 by monotonicity, from Hiroaki Hosono's
+      mixed_n108_L1062 measure (T-216) dilated by 1063/1062: 823 rectangle orbits, masses
+      unchanged, total 10799999/100000, core side 12487/12500, on a net the candidate declares
+      of 401 half-angles of step 83/80000, and a one-page rational enlargement from the
+      measure's side 10.63 (proof_n108.pdf). It reports this repository's sqverify-fast at the
+      source of f9ddfeeef (crate source d97758bb..., built by rustc 1.100.0) VERIFIED at all
+      401 directions in twelve native runs, 266,337,510 nodes, and its own exact audit,
+      check_lower.py, which this lane did not run. The source says the rescaling, the
+      computation and the proof were produced with GPT-6.2 Astra (OpenAI) and the files and
+      checks with Claude (Anthropic). devtools.audit_dilated_measure recomputes from the
+      retained bytes the premises, lemma N0 on the declared net, the dilation row by row
+      against the T-216 packet's retained mixed_n108_L1062, the certificate's text regenerated
+      from it byte for byte by the source's stretch_measure.py rule, and the enlargement's
+      arithmetic (receipts/dilation-audit.json in the packet); and it audits the author's runs,
+      every direction once, of reviewed crate source (receipts/native-receipt-audit.json). None
+      of it decides coverage. The author's sqverify-fast is this repository's V-sqverify-fast,
+      named here in prose only, since an entry that lists it is a replay here. The census
+      replay of all 401 directions and its whole-net controls ran here on 18 November 2026 and
+      passed (the packet's README); its evidence entry is written with the stage 4 review.
+    source_reviewed: '2026-11-18'

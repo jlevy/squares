@@ -1378,6 +1378,31 @@ PACKET_PROVENANCE = {
             "(receipts/replay-comparison.json in the packet). "
         ),
     ),
+    # #1018: Hosono's mixed_n108_L1062 dilated by 1063/1062 onto 401 directions at a core
+    # the source chose; its receipts are twelve native runs of this repository's crate built
+    # by another compiler, each with its own summary (audit_dilated_measure's NativeRuns).
+    "de-winter-s108-lower-bound-2026-11-17": PacketProvenance(
+        subject=(
+            "Joost de Winter's {certificate}, Hiroaki Hosono's mixed_n108_L1062 dilated by"
+            " 1063/1062 at core side 12487/12500"
+        ),
+        custody=(
+            "The candidate is the retained original gzip whose SHA-256 the source's checksums"
+            " state and the packet's acquisition record pins, which"
+            " devtools.audit_dilated_measure regenerates byte for byte from the T-216"
+            " packet's retained mixed_n108_L1062 by the source's stretch_measure.py rule."
+        ),
+        closing=(
+            "The source's exact audit, check_lower.py, is retained in the packet and was not"
+            " run here; the source's enlargement from 1063/100 to its claimed side is a"
+            " separate step that this theorem does not state."
+        ),
+        comparison=(
+            "Every direction's row equals the source's twelve native runs, built by rustc"
+            " 1.100.0 from the same reviewed source, on every field but the timings, and the"
+            " node totals are equal (receipts/replay-comparison.json in the packet). "
+        ),
+    ),
 }
 
 
