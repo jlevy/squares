@@ -67,8 +67,8 @@ houses:
     result: T-187
     landed: '2026-10-17'
   - n: 147
-    result: T-302
-    landed: '2026-11-15'
+    result: T-314
+    landed: '2026-11-18'
   - n: 153
     result: T-174
     landed: '2026-10-24'
@@ -79,8 +79,8 @@ houses:
     result: T-197
     landed: '2026-10-20'
   - n: 156
-    result: T-287
-    landed: '2026-11-11'
+    result: T-315
+    landed: '2026-11-18'
   - n: 157
     result: T-293
     landed: '2026-11-12'
@@ -97,8 +97,8 @@ houses:
     result: T-294
     landed: '2026-11-12'
   - n: 180
-    result: T-288
-    landed: '2026-11-11'
+    result: T-316
+    landed: '2026-11-18'
   - n: 181
     result: T-174
     landed: '2026-10-19'
@@ -127,8 +127,8 @@ houses:
     result: T-174
     landed: '2026-10-19'
   - n: 210
-    result: T-174
-    landed: '2026-10-19'
+    result: T-317
+    landed: '2026-11-18'
   - n: 211
     result: T-188
     landed: '2026-10-17'
@@ -169,11 +169,14 @@ houses:
     result: T-193
     landed: '2026-10-24'
   - n: 260
-    result: T-269
-    landed: '2026-11-06'
+    result: T-318
+    landed: '2026-11-18'
   - n: 261
     result: T-174
     landed: '2026-10-19'
+  - n: 262
+    result: T-319
+    landed: '2026-11-18'
   - n: 263
     result: T-174
     landed: '2026-10-19'
@@ -184,38 +187,38 @@ houses:
     result: T-134
     landed: '2026-10-12'
   - n: 268
-    result: T-289
-    landed: '2026-11-11'
+    result: T-320
+    landed: '2026-11-18'
   - n: 269
     result: T-297
     landed: '2026-11-13'
   - n: 270
-    result: T-283
-    landed: '2026-11-09'
+    result: T-321
+    landed: '2026-11-18'
   - n: 271
     result: T-219
     landed: '2026-10-20'
   - n: 272
-    result: T-174
-    landed: '2026-10-19'
+    result: T-322
+    landed: '2026-11-18'
   - n: 273
     result: T-174
     landed: '2026-10-19'
   - n: 292
-    result: T-146
-    landed: '2026-10-12'
+    result: T-323
+    landed: '2026-11-18'
   - n: 293
     result: T-271
     landed: '2026-11-06'
   - n: 295
-    result: T-193
-    landed: '2026-10-24'
+    result: T-324
+    landed: '2026-11-18'
   - n: 297
     result: T-299
     landed: '2026-11-14'
   - n: 299
-    result: T-277
-    landed: '2026-11-09'
+    result: T-325
+    landed: '2026-11-18'
   - n: 302
     result: T-193
     landed: '2026-10-24'
@@ -232,8 +235,8 @@ houses:
     result: T-174
     landed: '2026-10-19'
   - n: 307
-    result: T-279
-    landed: '2026-11-09'
+    result: T-326
+    landed: '2026-11-18'
   - n: 308
     result: T-221
     landed: '2026-10-20'
