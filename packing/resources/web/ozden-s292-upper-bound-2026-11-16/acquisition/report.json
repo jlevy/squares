@@ -1,0 +1,76 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1005",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s292 upper bound 2026-11-16]",
+  "report_evidence": "E-ozden-1005-certificate-report",
+  "receipt_format": "ozden-1005-exact-replay-v1",
+  "witness_prefix": "W-ozden-1005-n",
+  "claim_limitations": "Complete 2026-11-16 rational corner Witness/v2 at 292, promoted to exact rationals by this repository's packing-witness promote, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-17",
+  "read_at_main": "f9ddfeeef9070ede581142154ab992149b278ab0",
+  "certificates": [
+    {
+      "n": 292,
+      "path": "n-292-candidate.yaml",
+      "format": "witness-corners",
+      "offered": "17.590104218682",
+      "first_committed": "2026-11-16T15:27:16Z",
+      "same_packing": [
+        {
+          "path": "n292-witness.json",
+          "format": "witness-corners"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    292
+  ],
+  "replayed": [
+    292
+  ],
+  "houses": [
+    {
+      "n": 292,
+      "reader": "[Daniel regularized lists 2026-10-10]",
+      "source_key": "[Daniel regularized lists 2026-10-10]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel",
+      "result": "T-146",
+      "reported_value": "17.5913781454976982",
+      "verified_value": "17.5913781454976982",
+      "evidence": [
+        "E-evand-regularized-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 292,
+      "report": "T-193 (#639)",
+      "url": "https://github.com/jlevy/squares/issues/639",
+      "holders": "Evan Daniel, of the house's packing",
+      "result": "T-193",
+      "printed": "17.5913781454976981594349494020130208086995",
+      "rounding": "unstated"
+    }
+  ],
+  "register": {
+    "title": "Doğa Özden's packing of 292 squares at kenaznia-doga/s292-upper-bound dec930b, issue 1005",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-qag8",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER"
+    }
+  }
+}
