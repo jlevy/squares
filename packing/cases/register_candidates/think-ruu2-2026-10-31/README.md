@@ -6,8 +6,8 @@ The house rule asks the record to register every exactly verified packing below 
 however it was made
 ([result-import.md](../../../campaign/result-import.md#the-house-rule);
 [Register Candidates](../../../../docs/project/guides/regularization-process.md#register-candidates)).
-**All three are held unregistered for the owner, and no house moves.** This package
-retains what a registration would cite.
+**The owner’s option D of 17 November 2026 decides all three (think-b0w5), and none is
+registered yet.** This package retains what a registration would cite.
 
 | n | Certificate | Side | Below the house | 12-place print | House |
 | ---: | --- | --- | ---: | --- | --- |
@@ -50,6 +50,34 @@ certificate this project made before any of the three is registered.
 If the answers keep one, the registration cites this package’s certificate and receipts,
 the review’s run as a second route, and the review itself.
 
+## Option D
+
+The owner answered RV-3 and RV-1 on 17 November 2026 with option D (think-b0w5): a
+re-certification of a standing packing, with its padding removed or the same arrangement
+re-solved to its exact local optimum, is a new result only if its side is below its
+predecessor’s once the predecessor is shrunk until its squares first touch, measured
+through any construction (`devtools.contraction_margin`). Lane w7-optd-1118 (think-8yyy)
+measured each candidate against its house on 18 November 2026, both maintained routes
+deciding each house certificate and its contraction (`measure/contraction-*.json`):
+
+| n | Against | Margin | Gain | Share | Under option D |
+| ---: | --- | ---: | ---: | ---: | --- |
+| 130 | T-259 | 2.183057e-13 | 2.500188e-13 | 1.1453 | a new result, below the house that stands |
+| 130 | T-254, Couzo’s #843 | 2.265559e-12 | 2.332819e-12 | 1.0297 | a new result |
+| 293 | T-257 | 1.761685e-11 | 8.980000e-13 | 0.0510 | a restatement of T-257’s packing, Evan Daniel’s |
+| 307 | T-256 | 3.528959e-12 | 3.751694e-12 | 1.0631 | a new result, but no candidate |
+
+At 130 the candidate is below both T-259, the house, and Couzo’s certificate T-259
+re-solves, each shrunk to first contact, so it is a smaller packing than the house: its
+registration, stage 4 review and adoption, crediting Couzo’s packing and this project’s
+re-solve with Evan Daniel’s regularizer, are think-4z8z’s, with the regularizer optimum
+at 303 (`../../regularized_drawings/think-463r-2026-11-09/option-d/`). At 307 a later
+house, Doğa Özden’s T-279, lies 2.03e-5 below T-256 since 9 November 2026, so the
+candidate is no smaller packing and no candidate under the house rule.
+At 293 the candidate restates Daniel’s certificate, and RV-4 falls with it.
+Whether option D reaches T-259 itself, 0.9193 of T-254’s margin, is the owner’s question
+(think-7k8p).
+
 ## What Is Retained
 
 - **`certificates/`**: the certificate each entry registers.
@@ -65,8 +93,9 @@ the review’s run as a second route, and the review itself.
 - **`receipts/`**: the kernel’s three jobs on both maintained exact routes
   (`exact-certification-nNNN.json.xz`) and the six sharp controls
   (`sharp-controls-nNNN.json`).
-- **`measure/`**: `devtools.measure_identity` against each house’s certificate.
-  It is a measurement and decides nothing.
+- **`measure/`**: `devtools.measure_identity` against each house’s certificate, a
+  measurement that decides nothing, and `devtools.contraction_margin` of each house’s
+  certificate against the candidate (`contraction-nNNN-T.json`), which option D reads.
 - **`review/`**: the review’s programs (`code/`, with its README), its receipts
   (`out/`), and the run files it read that the repository holds nowhere else
   (`inputs/`): the two drawn views and the two regularized certificates.
