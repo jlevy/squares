@@ -51072,8 +51072,8 @@ results:
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's further arrangement of de Winter's packing at 262, 8.99e-03 below 16 +
-      sqrt(2)/2 and 1.58e-03 below T-312
+      de Winter's packing at 262 improved by Polkovskyi, 8.99e-03 below 16 + √2/2, 1.58e-03
+      below T-312
     claim: >-
       One complete rational certificate proves s(262) <= 16.698115018699394428085085691104. That
       side is 16.6981150186993945 rounded up at 16 places and 16.698115018700 at 12, as #1009
@@ -51814,8 +51814,8 @@ results:
     registered: '2026-11-17'
     landed: '2026-11-17'
     headline: >-
-      Polkovskyi's further arrangement of de Winter's packing at 292, 1.36e-03 below T-146
-      and 3.62e-09 below T-311
+      de Winter's packing at 292 improved by Polkovskyi, 1.36e-03 below T-146, 3.62e-09
+      below T-311
     claim: >-
       One complete rational certificate proves s(292) <= 17.590016439230092219882547056721. That
       side is 17.5900164392300923 rounded up at 16 places and 17.590016439231 at 12, as #1009

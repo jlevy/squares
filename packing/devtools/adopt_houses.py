@@ -4079,8 +4079,8 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    # Before the pass of 18 November 2026: Evan Daniel’s display regularization of Nate
-    # Chaoweeraprasit’s SQUISH packing (T-146), _regularized(SQUISH, ...).
+    # Before the pass of 18 November 2026: Evan Daniel's display regularization of Nate
+    # Chaoweeraprasit's SQUISH packing (T-146), _regularized(SQUISH, ...).
     # T-271 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, a composer
     # build whose gadget donors were not recorded: one to one with T-257's under no symmetry,
     # 193 squares beyond a tenth (the 5 November review).
