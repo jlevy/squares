@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: w4r-records-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-18T01:19:03.505Z
+updated_at: 2026-11-18T03:55:17.933Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -36,3 +36,5 @@ blocked_on: jlevy/squares#1012 (the author's exact Witness/v2 files, which only 
 
 Draft acknowledgement (post after the records PR merges, from main with check_requests --draft 1012, edited to the house style):
 Thank you for the pointer. The issue says the exact rational Witness/v2 files are attached, but none came through: the issue holds only the links to the three notebooks, and their submission files need a Kaggle login, which this project's sessions do not have, so nothing could be retained or checked yet. Could you attach the two Witness/v2 files to this issue, or commit them to JoostdeWinter/square-packing? Once a file is here, it is retained at that revision, replayed on both of the project's exact routes, compared with the record at 109 and 270 (and at 270 with your #1009 refinement), and registered as reported with the credit you ask for: Navneet Prabhat and Tomas Kodaj at 109, Danil Malyshev and Tomas Kodaj at 270.
+
+2026-11-18T03:55Z w4r-records-1118: acknowledgement posted 18 November (https://github.com/jlevy/squares/issues/1012#issuecomment-6967037708) asking for the two Witness/v2 files; JoostdeWinter/square-packing head 838c5ea read the same day holds no 109 file, and its n270/ (a1ba501) is #1022's packing. #1026 (merged 46510a0dc) records it and #1012's blocked: author; the blocked:author label was added after the merge. Stays open: both results queued on the author's files.

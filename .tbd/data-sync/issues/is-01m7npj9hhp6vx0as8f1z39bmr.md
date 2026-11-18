@@ -3,9 +3,9 @@ type: is
 id: is-01m7npj9hhp6vx0as8f1z39bmr
 title: "Apply the 17 November owner decisions' record changes: close #574 with the thank-you note (think-0mup, think-9v2k); keep T-159 and settle #529's ask (think-x30l, think-xnj5); record the three declines over the cap (think-l7j0: think-xk3f, think-qu37, think-qvp6); #973 held (think-k2lh, think-0h7r); no deletion rows (think-gmoj: think-kzme, think-2z2n); site handoff (think-k8vt: think-v1qe, think-lsam, think-3oxz)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 16
+version: 18
 delegate: w4r-records-1118
 labels:
   - intake
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.249Z
-updated_at: 2026-11-18T03:40:59.893Z
+updated_at: 2026-11-18T03:55:22.909Z
 started_at: 2026-11-17T21:29:36.275Z
+closed_at: 2026-11-18T03:55:22.908Z
+close_reason: "The 17 November owner decisions' records landed in #1016 (2980557a2) and every reply they owed is posted and recorded in #1026 (46510a0dc); see the notes for URLs and what stays open. check_bead_tree --before-close on main 46510a0dc: ok (w4r-records-1118)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
@@ -45,3 +49,5 @@ started_at: 2026-11-17T21:29:36.275Z
 2026-11-18T03:33Z w4r-records-1118: review A of #1026 (issuecomment-6968182762): approve after A1, A2. A1: posted the correction on #543 https://github.com/jlevy/squares/issues/543#issuecomment-6968200183 (#909 had merged before the follow-up said 'still open'); recording it with corrects. Addressing A2-A5, then merge main 95f89dffc.
 
 2026-11-18T03:40Z w4r-records-1118: review A of #1026 addressed (dispositions issuecomment-6968319802): A1 correction posted on #543 (issuecomment-6968200183) and recorded (outdated + corrects), A2 S1 applied and News none, A3/A4 in d7197aa37, A5 description. Main 95f89dffc merged at 7abe0085f; no-change record re-measured at 3314adc46 (pushed); pin unchanged (eda3ee5cd303). Records tier 55/55. Waiting for hosted CI on 3314adc46, then ready and merge.
+
+2026-11-18T03:55Z w4r-records-1118 DONE: #1016 merged 2980557a2 (01:28:28Z); replies posted after the verified deploy (6416/6416); records PR #1026 reviewed (A, approve after A1/A2; dispositions issuecomment-6968319802), merged 46510a0dc (03:54:26Z). #543 correction posted (issuecomment-6968200183). Labels: blocked:owner-decision removed from #574/#529/#537/#783, blocked:compute from #776/#777, blocked:author added to #1012. Closed: think-x6nk, think-xnj5, think-cs9x, think-qvp6, think-2z2n, think-x5l3, think-oh19, think-9v2k, think-s2i8, think-cen3, think-dp8t, think-r333, think-uz0m. Left open: think-wvr8 (#1012 files), think-0ayk (live child think-qu37, the Valid7 sample), think-a88h (de Winter's T-057 sources), think-kzme (question 3: 751, 752, 927, the owner's), think-0h7r (held for the owner), think-xk3f (T-235's C1 review).
