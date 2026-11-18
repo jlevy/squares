@@ -5,7 +5,7 @@ title: "Import #1009: Polkovskyi's 13 exact certificates (lowered: 210, 260, 262
 kind: task
 status: in_progress
 priority: 1
-version: 25
+version: 26
 delegate: w3r2-pass-1118
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:29:08.671Z
-updated_at: 2026-11-18T06:50:25.608Z
+updated_at: 2026-11-18T07:33:27.062Z
 started_at: 2026-11-17T01:29:10.698Z
 ---
 
@@ -58,3 +58,5 @@ started_at: 2026-11-17T01:29:10.698Z
 2026-11-18T06:50Z w9-records-1118: draft PR #1032 (intake, S1) records #1009's final and close; head 8e10dc630, base 86284ec20. Next: hosted CI, review, merge, then close via --before-close.
 
 2026-11-18T06:50Z w9-records-1118 STOPPED (handback requested) before review/merge. State: draft PR #1032 (intake, S1), head 8e10dc630, base 86284ec20, hosted CI in progress; review request sent to main (squares-e0 unreachable). Remaining: senior review + addressing pass, CI green on head, merge (merge commit) after re-checking main, then close this bead via check_bead_tree --before-close on main.
+
+2026-11-18T07:40Z w9-records-1118: #1032 review A addressed at a70edb475; next CI, merge, then close via --before-close.
