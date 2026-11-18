@@ -80,6 +80,7 @@ Written after the findings’ freeze:
 | Program | What it does | Writes |
 | --- | --- | --- |
 | `rb127_constant.py` | runs the controls against an accept-everything and a refuse-everything checker | `out/constant-1017.json`, `out/constant-1020.json` |
+| `rb127_e1p_walls.py` | written after review A of PR #1028 (its A2): lists the squares of E1c’s packing within $10^{-40}$ of the right and the top wall; decides nothing | `out/e1p-walls.json` |
 
 ## How to Run Them
 
@@ -105,6 +106,32 @@ $PY $R/programs/rb127_measure.py $T305 $PIN/1015/n127_exact.json $PIN/1017/n127_
   $R/programs/issue-1020.json $R/out/measure.json
 ```
 
+The other programs run from the same place, with `S` an empty scratch directory, `CLONE`
+a full clone of JoostdeWinter/square-packing (its head is still `838c5ea`), and `APIDIR`
+the six files as fetched at the pins, in `PIN`’s layout (the contents API’s copies for
+`custody.json`, `raw.githubusercontent.com`’s for `custody-raw.json`; `PIN`’s copies are
+the same bytes). `rb127_constant.py` runs for `N` = 1017 and 1020:
+
+```bash
+$PY $R/programs/rb127_trial.py $S $R/out/trial.json
+$PY $R/programs/rb127_custody.py CLONE APIDIR $R/programs/issue-1015.json \
+  $R/programs/issue-1017.json $R/programs/issue-1020.json $R/out/custody.json
+$PY $R/programs/rb127_routes.py $R/out/measure.json $R/out/second-route $R/out/routes.json
+$PY $R/programs/rb127_e1p.py pair N $PIN/N/n127_exact.json $PIN/N/n127_witness.yaml \
+  $R/out/e1p-restated-N.json
+$PY $R/programs/rb127_e1p.py house T-305 $T305 $R/out/e1p-restated-T305.json
+$PY $R/programs/rb127_describe.py $T305 $PIN/1015/n127_exact.json $PIN/1017/n127_exact.json \
+  $PIN/1020/n127_exact.json $R/out/describe.json
+$PY $R/programs/rb127_constant.py N $PIN/N/n127_exact.json $PIN/N/n127_witness.yaml C \
+  $R/out/controls-N.json $R/out/constant-N.json
+$PY $R/programs/rb127_e1p_walls.py $PIN $R/out $R/out/e1p-walls.json
+```
+
+To compare a run with its retained receipt, write it to another directory.
+On 18 November, after review A, the six programs before `rb127_e1p_walls.py` were run
+again that way, with a fresh clone at `838c5ea` as `CLONE` and `PIN` as `APIDIR`, and
+each wrote its receipt’s bytes; `trial.json` differs only in its times.
+
 The second route ran from `packing/` as
 `python -m devtools.contraction_margin --n 127 SPEC --against SPEC --out ...` and
 `python -m devtools.measure_identity --n 127 VIEW AGAINST... --out ...`, with
@@ -120,10 +147,25 @@ The second route ran from `packing/` as
 - `rb127_controls.py`: 35, 35, 35 and 29 controls; all as stated but E1p at #1020.
 - `rb127_measure.py`: every step’s successor below its shrunk predecessor; #1017 → #1020
   at 4.2899266 times #1017’s contraction margin.
+- `rb127_custody.py`: the three pins on the source’s one linear branch in issue order, its
+  head `838c5ea`; each file’s SHA-256 the same by both routes and equal to its blob at the
+  pin; `n127/SHA256SUMS` listing the pinned files at #1015’s pin, the previous
+  certificate’s at #1017’s and #1020’s, and the pinned files’ at the next commit; #1017’s
+  statement that later commits leave its files unchanged true when it was opened and not
+  now. `custody-raw.json` has the same bytes.
+- `rb127_describe.py`, which decides nothing: #1015’s side is its extent rounded up at 62
+  places and #1017’s at 15, #1020’s lies $4 \times 10^{-60}$ above its extent and T-305’s
+  is its extent; with each certificate’s walls touched, its near pairs by decade, and the
+  squares turned by less than a degree (71, 70, 1 and 6 at T-305, #1015, #1017 and
+  #1020).
 - `rb127_routes.py`: the two routes equal everywhere; `rb127_e1p.py`: E1p as restated at
   all four; `rb127_constant.py`: both constant checkers caught at #1017 and #1020.
+- `rb127_e1p_walls.py`: at #1020, squares 51, 75, 105, 106, 107, 121, 125 and 127 within
+  $10^{-40}$ of the right wall, only 107 touching it, and 113, 115, 119, 120, 121, 122
+  and 124 within $10^{-40}$ of the top, the 14 that E1p’s restated rule names; at #1015
+  and #1017, exactly the squares the frozen rule names.
 
-In all, about 0.2 CPU-hours.
+In all, about 0.2 CPU-hours before review A, and under 4 CPU-minutes after it.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
