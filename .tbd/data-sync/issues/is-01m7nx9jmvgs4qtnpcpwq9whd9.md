@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: w6-dewinter-1118
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T01:38:57.483Z
+updated_at: 2026-11-18T01:48:54.820Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -24,3 +24,5 @@ started_at: 2026-11-18T01:19:03.008Z
 2026-11-18T01:27Z w6-dewinter-1118: claimed; worktree /home/user/wt/w6-import-1015, branch claude/intake-2026-11-18-import-1015. Triage: #1015 (22:14:33Z, pin 35b576a, cert first committed 689bc79 22:07:57Z) side 11.80079568221357 (ceil12 11.800795682214), 9.582e-4 below T-305; #1017 (22:27:04Z, pin cc20a26 22:26:24Z) exact 5900396863307571/500000000000000, 1.9556e-6 below #1015 (not 1.96e-9); #1020 (22:49:35Z, pin a1ba501 22:48:48Z, folded in by the coordinator) 11.80079372661496 (ceil12 ...615), 1.798e-13 below #1017. Controls plan for all three, written before any route or measuring program read a certificate: packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/controls-plan-127.txt, SHA-256 7f287382016b993970e1162a06b0d7faea75f560bcbd2fed9cf5be80b34743ff, hashed 2026-11-18T01:26:53Z.
 
 R-127 (blind review), 2026-11-18 01:42Z: lane r127-1118 started on branch claude/intake-2026-11-18-review-1015 (worktree /home/user/wt/r127, from main 2980557a2). Six certificate files fetched twice at the three pins, bytes equal. Writing the clean-room checker and controls plan; nothing run on a certificate yet.
+
+2026-11-18T02:05Z w6-dewinter-1118: stages 1-2 and the replay done, pushed at 128d28c94 on claude/intake-2026-11-18-import-1015. Packets de-winter-s127-issue1015/1017/1020-2026-11-17. Replay: 9 jobs on both routes, 144,018 pair decisions, all positives accepted and gross controls refused; 33 sharp controls all as planned (verdicts), the near-wall branch differing from the plan's expectation at #1015 and #1020, which clear every wall. Margins T-305 1.2099e-10, #1015 7.74e-63, #1017 4.19e-14, #1020 1.82e-58; steps outside padding (narrowest #1020 over #1017 at 4.29x), so option D makes all three new results. Identity: none one to one with T-305 (10/11/9 beyond 0.1); #1017 = #1015 moved, #1020 = #1017 moved. Ledger upper-bounds-1015-1020-20261118 records all three. Next: register as T-327..T-329 after import-1009 merges; map R-127 when it lands, adopt #1020's at 127, regularize. CPU so far about 0.3 h.
