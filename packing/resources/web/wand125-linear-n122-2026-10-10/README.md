@@ -127,6 +127,13 @@ The source credits wand125; the commit is authored by Hiroaki Hosono.
 Its README says parts of the work were produced with AI assistance under human
 direction, and the commit names Claude Opus 5.5 as co-author.
 
+## Compressed Files
+
+| Stored file | Origin | Git blob (decompressed) | SHA-256 (decompressed) |
+| --- | --- | --- | --- |
+| `release/certificates/mixed_n122_L1126/candidate.json.gz` | upstream | `50b46ace41f84cbdb49ff0126a795fe0140d2c5e` | `cd427ddb238b69b7d9ba32ac01616a8669f154af2e70abdff827c313a1ea500c` |
+| `release/certificates/mixed_n122_L1126/certificate.json.gz` | upstream | `542414fee42cedbd5d62396f154b10deba5f4d17` | `6b57cddadcb75c6f29fbfc3384b521f86dca5deb5d9620df0ee78fbb39dfe709` |
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
