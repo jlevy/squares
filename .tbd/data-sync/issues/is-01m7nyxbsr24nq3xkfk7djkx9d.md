@@ -3,9 +3,9 @@ type: is
 id: is-01m7nyxbsr24nq3xkfk7djkx9d
 title: "Address PR #909 review A: senior review of T-132 to V3/C3"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 10
+version: 11
 labels: []
 dependencies: []
 parent_id: is-01m7kqn1kjvjkmqbcs4yfq84fc
@@ -20,5 +20,9 @@ child_order_hints:
   - is-01m7nyxkeqg0ttwa04v5xa8n3t
   - is-01m7nyxmc05t42a5rknx2xv49j
 created_at: 2026-11-17T23:54:10.615Z
-updated_at: 2026-11-17T23:54:19.391Z
+updated_at: 2026-11-18T02:42:45.193Z
+closed_at: 2026-11-18T02:42:45.193Z
+close_reason: "Review A of PR #909 addressed: A1-A9 fixed; reply https://github.com/jlevy/squares/pull/909#issuecomment-6966950958; merged a1a8d0aaeded at head 5d931e1a0."
+resolution: null
+duplicate_of: null
 ---
