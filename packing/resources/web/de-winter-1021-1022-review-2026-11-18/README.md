@@ -10,9 +10,10 @@ Every program here was written for this review and imports nothing from this
 repository or from the source.
 The checker, the measurements, the controls plan and the self-test were frozen before
 any of them read a certificate (`frozen/checker-frozen.sha256`, pushed 06:08:52Z on 18
-November 2026). One program, `r1021_post.py`, was written after that freeze; it
-converts the predecessors’ file layouts for the frozen modules and decides nothing
-itself (see below).
+November 2026). Two programs were written after that freeze, and neither decides
+anything itself: `r1021_post.py` converts the predecessors’ file layouts for the frozen
+modules, and `r1021_routes.py` compares this review’s route with the second (see
+below).
 
 The source files are not retained here.
 `out/custody.json` gives their SHA-256 and Git blob ids, and
@@ -35,6 +36,7 @@ The source files are not retained here.
 | `r1021_synth.py`, `r1021_trial.py`, `r1021_ctrial.py` | Synthetic packings, pricing, and the controls under each broken copy | synthetic files only |
 | `r1021_fmt.py` | Exact decimal prints; decides nothing | — |
 | `r1021_post.py` | Written after the checker freeze: unquotes side and corner scalars, reads `.cert` files, makes house witnesses ASCII and drops their certificate block, each checked with PyYAML to leave every value unchanged; then decides and measures through the frozen modules | the predecessors’ files |
+| `r1021_routes.py` | Written after the checker freeze: compares this review’s route with the second exactly ($\lambda^*$, the binding pair, the shrunk side and the margin as fractions; each gain; the identity counts); decides nothing | `out/post-measure.json` and `out/second-route/` |
 | `issue-1021.json`, `issue-1022.json` | The issues as the REST API returned them at 05:36:49Z | — |
 
 ## How to Run Them
@@ -72,11 +74,47 @@ $PY r1021_controls.py report 1021 $SRC/n268_exact.json $SRC/n268_witness.yaml ..
 $PY r1021_controls.py report 1022 $SRC/n270_exact.json $SRC/n270_witness.yaml ../out/controls-1022.json
 $PY r1021_controls.py house T-289 $CONV/unquoted-T-289.yaml ../out/controls-T289.json
 $PY r1021_controls.py house T-283 $CONV/unquoted-T-283.yaml ../out/controls-T283.json
+$PY r1021_controls.py report T-320 $CONV/form-j-T-320.json $CONV/unquoted-T-320.yaml ../out/controls-T320.json
+$PY r1021_controls.py report T-321 $CONV/form-j-T-321.json $CONV/unquoted-T-321.yaml ../out/controls-T321.json
 ```
 
 `POLK` holds `n268.cert`, `n270.cert`, `polk-n-268.yaml` and `polk-n-270.yaml` (#1009’s
 files as `main` retains them), and `WIT0` and `WIT1` the house witnesses `n-268.yaml`
 and `n-270.yaml` at `0f191a2d23` and `86284ec203`.
+T-320 and T-321 are decided as reports, their `.cert` read as form J and their
+Witness/v2 file as form C, through the conversions above.
+
+The second route, after the checker freeze, is the repository’s
+`devtools.contraction_margin` and `devtools.measure_identity`, run from `packing/` with
+`SRC` an absolute path:
+
+```bash
+O=resources/web/de-winter-1021-1022-review-2026-11-18/out/second-route
+R="nice -n 19 uv run --frozen --all-extras --group dev python -m"
+J268="1021=center-direction-json:$SRC/n268_exact.json"
+J270="1022=center-direction-json:$SRC/n270_exact.json"
+T289="T-289=witness-corners:resources/web/ozden-s268-upper-bound-2026-11-10/source/n-268-candidate.yaml"
+T283="T-283=witness-corners:resources/web/ozden-s270-upper-bound-2026-11-09/source/n-270-candidate.yaml"
+T320="T-320=evand-cert:resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n268.cert"
+T321="T-321=evand-cert:resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n270.cert"
+$R devtools.contraction_margin --n 268 "$T289" --against "$J268" --no-routes --out $O/contraction-T289-vs-1021.json
+$R devtools.contraction_margin --n 268 "$T320" --against "$J268" --no-routes --out $O/contraction-T320-vs-1021.json
+$R devtools.contraction_margin --n 268 "$J268" --no-routes --out $O/contraction-1021-own.json
+$R devtools.contraction_margin --n 270 "$T283" --against "$J270" --no-routes --out $O/contraction-T283-vs-1022.json
+$R devtools.contraction_margin --n 270 "$T321" --against "$J270" --no-routes --out $O/contraction-T321-vs-1022.json
+$R devtools.contraction_margin --n 270 "$J270" --no-routes --out $O/contraction-1022-own.json
+$R devtools.measure_identity --n 268 "$J268" "$T289" "$T320" --out $O/identity-1021.json
+$R devtools.measure_identity --n 270 "$J270" "$T283" "$T321" --out $O/identity-1022.json
+```
+
+Then, from `programs/` again, the two routes compared:
+
+```bash
+$PY r1021_routes.py ../out
+```
+
+Each command writes into `out/`, so a rerun meant to be compared with the receipts
+writes to a scratch directory instead.
 
 ## What They Printed
 
