@@ -52835,7 +52835,7 @@ results:
   - id: T-328
     kind: upper-bound
     registered: '2026-11-18'
-    landed: '2026-11-18'
+    landed: '2026-11-20'
     headline: >-
       de Winter's band packing at 127, close to T-305's arrangement, 9.58e-04 below T-305
     claim: >-
@@ -53019,7 +53019,7 @@ results:
   - id: T-329
     kind: upper-bound
     registered: '2026-11-18'
-    landed: '2026-11-18'
+    landed: '2026-11-20'
     headline: >-
       de Winter's further arrangement of his T-328 at 127, 1.96e-06 below it
     claim: >-
@@ -53187,7 +53187,7 @@ results:
   - id: T-330
     kind: upper-bound
     registered: '2026-11-18'
-    landed: '2026-11-18'
+    landed: '2026-11-20'
     headline: >-
       de Winter's further arrangement of his T-329 at 127, 1.80e-13 below it, beyond its padding
     claim: >-
