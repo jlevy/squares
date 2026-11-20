@@ -32,10 +32,13 @@ is a proved bound in its own right. ``--no-routes`` skips both route decisions a
 the exact wall and pair checks.
 
 **Inputs** are `devtools.measure_identity`'s specs, ``[LABEL=]KIND:TARGET``: ``packet:NAME``
-(an import packet's admitted certificate, held to its custody) or ``FORMAT:PATH`` with a
-format of `devtools.upper_bound_reports.ADAPTERS`. ``--against`` names a later certificate
-of the same count, held to the same exact wall and pair checks, whose gain over the first
-is compared with the margin.
+(an import packet's admitted certificate, held to its custody), ``FORMAT:PATH`` with a
+format of `devtools.upper_bound_reports.ADAPTERS`, or ``binary64-xyd:PATH`` or
+``kaggle-csv:PATH``, a binary64 packing read exactly at its own extent (`boxed_binary64`,
+`devtools.measure_identity.read_kaggle_csv`), as a public float packing that an exact
+certificate may re-solve is (#1012's 109, think-wvr8). ``--against``
+names a later certificate of the same count, held to the same exact wall and pair checks,
+whose gain over the first is compared with the margin.
 
 **Through an L step.** A certificate built by one L step, such as #938's and #939's at
 199, has margin 0, since its grid squares touch; its padding is its base's. The base is
@@ -115,6 +118,14 @@ def read_certificate(spec: str, n: int) -> Read:
             source: dict[str, Any] = {"input": identity.PACKET, "packet": target}
         elif kind == identity.L_BASE:
             certificate, source = identity.read_l_base(target, n)
+        elif kind in (identity.BINARY64, identity.KAGGLE):
+            path = Path(target)
+            raw = retained_data.read_retained_bytes(path, limit=reports.MAX_SOURCE_BYTES)
+            if kind == identity.BINARY64:
+                certificate = boxed_binary64(raw, n)
+            else:
+                certificate = _certificate(n, identity.read_kaggle_csv(raw, n))
+            source = {"input": kind, **_where(path), "sha256": hashlib.sha256(raw).hexdigest()}
         elif kind in reports.ADAPTERS:
             path = Path(target)
             raw = retained_data.read_retained_bytes(path, limit=reports.MAX_SOURCE_BYTES)
@@ -129,6 +140,26 @@ def read_certificate(spec: str, n: int) -> Read:
     if certificate.n != n or len(certificate.poses) != n:
         raise ContractionError(f"{plain}: not a certificate of {n} squares")
     return Read(label or plain, source, certificate)
+
+
+def boxed_binary64(raw: bytes, n: int) -> legacy.Certificate:
+    """A binary64 ``n side`` / ``x y degrees`` packing, exactly, boxed at its own extent.
+
+    `devtools.measure_identity.read_binary64` reads each centre as its binary64 value and
+    each angle as an exact rotation ``(c, s)`` on the unit circle, folded into a quarter
+    turn; `devtools.measure_identity.boxed` translates the squares exactly so their least
+    axis extent is 0 on both axes, at the larger exact extent. The printed side is not
+    read: it is the producer's rounding of that extent. Whether the squares are disjoint is
+    the pair check's to decide, as for any input.
+    """
+    return _certificate(n, identity.boxed(identity.read_binary64(raw, n)[1]))
+
+
+def _certificate(n: int, measured: identity.Measured) -> legacy.Certificate:
+    """A measured packing as a certificate: ``c > 0`` after the fold, so ``t = s / (1 + c)``."""
+    side, squares = measured
+    poses = tuple(legacy.Pose(x, y, s / (1 + c)) for x, y, c, s in squares)
+    return legacy.Certificate(n, side, poses)
 
 
 def _where(path: Path) -> dict[str, Any]:

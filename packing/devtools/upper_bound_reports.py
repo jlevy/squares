@@ -687,6 +687,8 @@ def pingyou_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
 #: measured against his JSON of the same packing (think-32cl). Either way the document is
 #: validated against this repository's schema file.
 CORNER_FRAME = {"origin": "lower-left", "axes": "x-right-y-up", "angle_unit": "not-applicable"}
+#: The `witness_corners` option naming the number of a witness's first square.
+FIRST_ID = "first_id"
 CORNER_SCHEMA = "witness.schema.yaml"
 CORNER_SCHEMA_URL = (
     "https://github.com/jlevy/squares/blob/main/packing/witnesses/witness.schema.yaml"
@@ -724,9 +726,18 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
     exactly that pose's, which holds only for a unit square in that order. Corners listed
     from another vertex draw the same square at another ``t``, and a comparison of poses
     reads them as another packing.
+
+    One option is read, ``first_id``, ``"0"`` or ``"1"`` (the default): the number of the
+    first square. Joost de Winter's transcription of Tomáš Kodaj's 109 (#1012) numbers its
+    squares ``square-0`` to ``square-108``, as the Kaggle rows it transcribes do; declared
+    so, they must be numbered ``0`` to ``n - 1`` in order, and are read as squares 1 to
+    ``n``.
     """
-    _no_options(options, "witness-corners")
-    return _corner_witness(raw, n, start=0)
+    _require(
+        set(options) <= {FIRST_ID} and options.get(FIRST_ID, "1") in ("0", "1"),
+        f"witness-corners reads only {FIRST_ID}, 0 or 1: {sorted(options.items())[:2]}",
+    )
+    return _corner_witness(raw, n, start=0, first=int(options.get(FIRST_ID, "1")))
 
 
 def witness_corners_opposite(
@@ -746,8 +757,9 @@ def witness_corners_opposite(
     return _corner_witness(raw, n, start=2)
 
 
-def _corner_witness(raw: bytes, n: int, *, start: int) -> legacy.Certificate:
-    """`witness_corners`, its corner lists read from their corner ``start`` (0 to 3)."""
+def _corner_witness(raw: bytes, n: int, *, start: int, first: int = 1) -> legacy.Certificate:
+    """`witness_corners`, its corner lists read from their corner ``start`` (0 to 3), its
+    squares numbered from ``first``."""
     try:
         document = load_yaml(_text(raw))
     except yaml.YAMLError as error:
@@ -774,9 +786,10 @@ def _corner_witness(raw: bytes, n: int, *, start: int) -> legacy.Certificate:
     rows = []
     for index, square in enumerate(witness["squares"], start=1):
         where = f"n={n} square {index}"
+        number = index - 1 + first
         _require(
-            square["id"] in (index, f"square-{index}"),
-            f"{where}: squares are not numbered 1..n in order",
+            square["id"] in (number, f"square-{number}"),
+            f"{where}: squares are not numbered {first}..{'n' if first else 'n-1'} in order",
         )
         listed = [(_literal(x, where), _literal(y, where)) for x, y in square["corners"]]
         corners = listed[start:] + listed[:start]

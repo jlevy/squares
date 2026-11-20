@@ -26,6 +26,13 @@ measures any two packings of a count for credit and lineage.
   them; blank lines and lines starting ``#`` are comments. Each number is read as the
   binary64 value its decimal names, and each angle, reduced modulo a quarter turn, as the
   exact rotation whose half-angle tangent is the binary64 tangent of half of it;
+- ``kaggle-csv:PATH``, the rows of count ``n`` in a Kaggle "Squares in Squares"
+  submission, ``id,n,square_id,x,y,angle`` with the angle in radians (`read_kaggle_csv`),
+  such as Tomáš Kodaj's 109 rows that #1012 attaches or a public ``submission.csv`` whose
+  digest pins it: each number read as its binary64 value, each angle as the exact rotation
+  whose half-angle tangent is the binary64 tangent of half of it, folded into a quarter
+  turn, and the squares boxed exactly at their own extent (`boxed`), since a submission
+  states no side and centres its squares anywhere;
 - ``l-base:packet:NAME``, the ``n``-square packing that an import packet's certificate was
   built on by one L step (`read_l_base`): its first ``n`` squares at its side less one.
 
@@ -117,6 +124,9 @@ FORMAT = "measure-identity-v1"
 BOUNDS = ("1e-9", "1e-6", "1e-3", "1e-2", "1e-1")
 PACKET = "packet"
 BINARY64 = "binary64-xyd"
+KAGGLE = "kaggle-csv"
+#: The header row of a Kaggle "Squares in Squares" submission.
+KAGGLE_HEADER = ("id", "n", "square_id", "x", "y", "angle")
 L_BASE = "l-base"
 MAX_INPUT_BYTES = reports.MAX_SOURCE_BYTES
 SYMMETRIES = 8
@@ -201,6 +211,56 @@ def read_binary64(raw: bytes, n: int) -> Measured:
         x, y, degrees = (_decimal(token, where) for token in row)
         squares.append((Fraction(x), Fraction(y), *rotation_from_degrees(degrees)))
     return Fraction(side), squares
+
+
+def rotation_from_radians(radians: float) -> tuple[Fraction, Fraction]:
+    """`rotation_from_degrees` for a binary64 angle in radians, folded the same way."""
+    quarter = math.pi / 2
+    folded = (radians + quarter / 2) % quarter - quarter / 2
+    return area.rotation(Fraction(math.tan(folded / 2)))
+
+
+def boxed(squares: list[Placed]) -> Measured:
+    """Squares translated exactly so their least axis extent is 0 on both axes, with the
+    larger exact extent as the side: a packing's own box, whatever side it prints."""
+    halves = [(abs(c) + abs(s)) / 2 for _, _, c, s in squares]
+    pairs = list(zip(squares, halves, strict=True))
+    left = min(x - half for (x, _, _, _), half in pairs)
+    bottom = min(y - half for (_, y, _, _), half in pairs)
+    right = max(x + half for (x, _, _, _), half in pairs)
+    top = max(y + half for (_, y, _, _), half in pairs)
+    moved = [(x - left, y - bottom, c, s) for x, y, c, s in squares]
+    return max(right - left, top - bottom), moved
+
+
+def read_kaggle_csv(raw: bytes, n: int) -> Measured:
+    """The ``n`` rows of count ``n`` of a Kaggle submission, boxed exactly (`boxed`).
+
+    The header must be `KAGGLE_HEADER`; rows of other counts are skipped, read only for
+    their count; the count's rows must number its squares ``0`` to ``n - 1`` in order.
+    """
+    try:
+        text = raw.decode("ascii")
+    except UnicodeDecodeError as error:
+        raise MeasureError("a Kaggle submission is ASCII text") from error
+    lines = text.splitlines()
+    if not lines or tuple(lines[0].strip().split(",")) != KAGGLE_HEADER:
+        raise MeasureError(f"the header is not {','.join(KAGGLE_HEADER)}")
+    squares: list[Placed] = []
+    for number, line in enumerate(lines[1:], start=2):
+        fields = line.strip().split(",")
+        if len(fields) != len(KAGGLE_HEADER):
+            raise MeasureError(f"line {number}: {len(fields)} fields, not {len(KAGGLE_HEADER)}")
+        if _COUNT.fullmatch(fields[1]) is None or int(fields[1]) != n:
+            continue
+        where = f"line {number}"
+        if fields[2] != str(len(squares)):
+            raise MeasureError(f"{where}: square {fields[2]!r} out of order for n = {n}")
+        x, y, radians = (_decimal(token, where) for token in fields[3:])
+        squares.append((Fraction(x), Fraction(y), *rotation_from_radians(radians)))
+    if len(squares) != n:
+        raise MeasureError(f"{len(squares)} rows of count {n}, not {n}")
+    return boxed(squares)
 
 
 def _from_certificate(certificate: legacy.Certificate) -> Measured:
@@ -316,11 +376,13 @@ def read_packing(spec: str, n: int) -> Packing:
     elif kind == L_BASE:
         base, source = read_l_base(target, n)
         side, squares = _from_certificate(base)
-    elif kind == BINARY64 or kind in reports.ADAPTERS:
+    elif kind in (BINARY64, KAGGLE) or kind in reports.ADAPTERS:
         path = Path(target)
         raw = _file_bytes(path)
         if kind == BINARY64:
             side, squares = read_binary64(raw, n)
+        elif kind == KAGGLE:
+            side, squares = read_kaggle_csv(raw, n)
         else:
             try:
                 side, squares = _from_certificate(reports.parse_certificate(raw, n, kind))
