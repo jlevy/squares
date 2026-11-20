@@ -3,9 +3,9 @@ type: is
 id: is-01m7w07nbcjc2d1w1t4g8am1k3
 title: "Stage 4 blind review of #1038's s(228) certificate (46ab8bf)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 delegate: r1038
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T08:12:43.244Z
-updated_at: 2026-11-20T09:11:00.334Z
+updated_at: 2026-11-20T09:34:43.061Z
 started_at: 2026-11-20T08:14:07.359Z
+closed_at: 2026-11-20T09:34:43.061Z
+close_reason: "r1038 blind review of #1038 merged in #1044 (02bdd1fb8)."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
