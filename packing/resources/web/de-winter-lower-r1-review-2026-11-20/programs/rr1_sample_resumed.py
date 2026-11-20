@@ -14,9 +14,12 @@ in three at most twice.  What it adds is orchestration:
     are a uniform sample of its partition and not its first angles;
   * batches of 2 * procs bins, with the results appended to a checkpoint after each batch;
     no batch starts after the cap, and a run killed inside a batch keeps the batches before.
+  * with --own-sessions, each C process in a session of its own (setsid), because this
+    host schedules by session (sched_autogroup) and gives the three processes of one session
+    one share between them; the wrapper only starts the built program.
 
 Usage: rr1_sample_resumed.py --root SRC_FOLDER --scratch DIR --out-dir DIR
-       [--procs 3] [--wall-cap 1800] [--labels a,b] [--finalize]
+       [--procs 3] [--wall-cap 1800] [--labels a,b] [--own-sessions] [--finalize]
 """
 
 from __future__ import annotations
@@ -80,6 +83,7 @@ def main() -> int:
     ap.add_argument("--procs", type=int, default=3)
     ap.add_argument("--wall-cap", type=float, default=1800.0)
     ap.add_argument("--labels", default="")
+    ap.add_argument("--own-sessions", action="store_true")
     ap.add_argument("--finalize", action="store_true", help="write the receipt of a killed run from its checkpoint")
     a = ap.parse_args()
     root = Path(a.root)
@@ -92,6 +96,11 @@ def main() -> int:
         raise SystemExit("the sample is not the frozen rule's")
     todo = a.labels.split(",") if a.labels else R.SAMPLE
     exe = None if a.finalize else C.build_c(scratch)
+    if exe is not None and a.own_sessions:
+        wrapper = scratch / "rr1_decide_own_session"
+        wrapper.write_text(f'#!/bin/sh\nexec setsid "{exe}" "$@"\n')
+        wrapper.chmod(0o755)
+        exe = wrapper
     for lab in todo:
         i = R.SAMPLE.index(lab)
         name = lab.replace("/", "-")
