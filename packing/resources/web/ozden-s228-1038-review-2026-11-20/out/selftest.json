@@ -1,0 +1,8 @@
+{
+ "program": "r1038_selftest.py",
+ "outcome": "PASSED",
+ "checks": 36910,
+ "passed": 36910,
+ "failed": [],
+ "cpu_seconds": 2.8
+}
