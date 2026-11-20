@@ -25953,6 +25953,7 @@ urls:
     evidence:
     - E-ozden-1038-certificate-report
     - E-ozden-1038-exact-feasibility
+    - E-ozden-1038-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s228-upper-bound-2026-11-18/README.md
     - packing/resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
@@ -25969,6 +25970,10 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-20-ozden-1038.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/README.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/check-n228.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
 - path: results.html
   canonical: results.html
   kind: page

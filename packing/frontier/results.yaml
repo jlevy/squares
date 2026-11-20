@@ -47597,10 +47597,10 @@ results:
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 14 November, is
-      retained. It is the smallest validated side at 228, and the case adopted it there in the
-      pass of 15 November 2026 under the house rule, in place of T-300, with both strong
-      generators' runs on the new house; T-300, T-174, T-128, T-098, T-092 and T-056 keep
-      their certificates as history. The review's questions for the author hold no rung, and
+      retained. The case adopted it at 228 in the pass of 15 November 2026 under the house
+      rule, in place of T-300, with both strong generators' runs on the new house, and Doğa
+      Özden's certificate of #1038, T-334, replaced it there in the pass of 20 November 2026;
+      it keeps its certificate as history, as T-300, T-174, T-128, T-098, T-092 and T-056 do. The review's questions for the author hold no rung, and
       the contracted side its F11 measures and the regularizer's KKT side are the owner's RV-3
       question, not registered.
     reviews:
@@ -53139,13 +53139,35 @@ results:
       This lane recorded its replay, controls and measurements and registered this entry at
       08:50Z on 20 November, and read the review, merged at 09:34Z, at 09:37Z, before mapping
       it. No disagreement.
+
+      Adopted at 228 in the pass of 20 November 2026 under the house rule, in place of T-301,
+      which the pass of 15 November had adopted there. The packing's credit goes to Roberto
+      Ono, its finder, and to jazivxt for the further arrangement, the certificate to Doğa
+      Özden, with both strong generators' regularization of the new house, measured against
+      the new witness, in the same change. T-301 keeps its certificate as history, a verified
+      bound at V3/C3, and houses no other count.
+
+      The rigidity block was derived again on the new witness and stays not rigid: 170 of its
+      228 squares translate, against T-301's 110. Both strong generators ran on the new
+      witness (packing/cases/regularized_drawings/think-91fu-2026-11-20/): grid-slack's views
+      at 0.5, 1 and 5 degrees are each admitted at row 10, and the selection draws the
+      0.5-degree view (20 uneven squares, no near-axis one and 632 full shared sides, against
+      the axis tool's 17, 1 and 644 on T-301's witness), in the published pose by the flip
+      record, so 228 is regularized and leaves default_drawings.SETTLED.
+
+      Evan Daniel's driver, run on this certificate, reached a KKT point, a local minimum of
+      the side strict modulo 123 exact flat motions, whose certificate validated, at exactly
+      the side of its 15 November solve from T-301's witness, 9.659e-14 below this side. It is
+      held at row 3 as a register candidate and not admitted (think-4z8z), as the owner's
+      decision at #1009's re-solves leaves it (think-frl5).
     next_rung: >-
-      Independently review the certificate (stage 4, a separate lane blind to this one,
-      think-3ape): its mathematics, a clean-room exact checker with sharp controls, and the
-      identity against T-301, mapped as an adversarial review. The case's house then moves to
-      the smallest validated side at 228, this one, in the pass dated the day this change
-      merges, with both strong generators' regularization of the new house; T-301 keeps its
-      certificate as history.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 20 November, is
+      retained. It is the smallest validated side at 228, and the case adopted it there in the
+      pass of 20 November 2026 under the house rule, in place of T-301, with both strong
+      generators' runs on the new house; T-301, T-300, T-174, T-128, T-098, T-092 and T-056
+      keep their certificates as history. The driver's KKT solve below it is a register
+      candidate (think-4z8z), and the review's questions for the author hold no rung.
     reviews:
     - path: docs/project/reviews/review-2026-11-20-ozden-1038.md
       kind: adversarial
@@ -54015,17 +54037,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-227-regularized.yaml.gz
     - n: 228
-      of: T-301
+      of: T-334
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 48
-        max_move: 0.290442
-        max_turn_deg: 0.0032148
+        moved: 56
+        max_move: 0.1990877
+        max_turn_deg: 0.201949
       view: packing/atlas/known-best/regularized/n-228-regularized.yaml.gz
     - n: 229
       of: T-225

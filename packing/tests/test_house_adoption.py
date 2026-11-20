@@ -301,11 +301,12 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # since lane L154 moved 297 to Joost de Winter's issue-977 certificate (T-299) in the
     # pass of 14 November. 28 since lane L160 moved 228 to Doğa Özden's issue-983
     # certificate (T-300) in the same pass, and lane L164 on to Roberto Ono's issue-984
-    # certificate (T-301) in the pass of 15 November. 26 since lane L187 moved 127 and 305 to
-    # JoeGun's issue-1001 certificates (T-305, T-309) in the pass of 16 November, below
-    # T-174's sides there. 23 since the pass of 18 November moved 210 and 272 to Mykhailo
-    # Polkovskyi's issue-1009 certificates (T-317, T-322), below T-174's sides there, and
-    # 292, staged for T-193, to his T-323 (`OVERTAKEN`).
+    # certificate (T-301) in the pass of 15 November, and lane i1038 on to Doğa Özden's
+    # issue-1038 certificate (T-334) in the pass of 20 November. 26 since lane L187 moved
+    # 127 and 305 to JoeGun's issue-1001 certificates (T-305, T-309) in the pass of 16
+    # November, below T-174's sides there. 23 since the pass of 18 November moved 210 and
+    # 272 to Mykhailo Polkovskyi's issue-1009 certificates (T-317, T-322), below T-174's
+    # sides there, and 292, staged for T-193, to his T-323 (`OVERTAKEN`).
     assert len(held_counts) == 23
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -331,7 +332,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         210: "T-317",
         268: "T-320",
         269: "T-297",
-        228: "T-301",
+        228: "T-334",
         270: "T-321",
         272: "T-322",
         297: "T-299",
@@ -1829,7 +1830,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 204 from T-268, 232 from T-275 and 264 from T-186 to JoeGun's certificates of issue
     # 1001 (T-305 to T-309) in the same pass. Lane w3-pass-1117r moved 147, 156, 180, 210,
     # 260, 268, 270, 272, 292, 295, 299 and 307 to Mykhailo Polkovskyi's certificates of
-    # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November.
+    # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November. Lane
+    # i1038 moved 228 on to Doğa Özden's certificate of issue 1038 (T-334) in the pass of 20
+    # November.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1863,7 +1866,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         157: "T-293",
         237: "T-295",
         297: "T-299",
-        228: "T-301",
+        228: "T-334",
         90: "T-304",
         127: "T-305",
         264: "T-308",

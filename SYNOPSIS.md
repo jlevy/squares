@@ -1063,6 +1063,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issue 997 (think-32cl)](packing/cases/regularized_drawings/think-32cl-2026-11-16/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 1001 (think-0y9m)](packing/cases/regularized_drawings/think-0y9m-2026-11-16/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 1009 (think-i38n)](packing/cases/regularized_drawings/think-i38n-2026-11-18/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs After the Adoption of Issue 1038 (think-91fu)](packing/cases/regularized_drawings/think-91fu-2026-11-20/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 958 (think-bcfs)](packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 959 (think-89i7)](packing/cases/regularized_drawings/think-89i7-2026-11-12/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 960 (think-my76)](packing/cases/regularized_drawings/think-my76-2026-11-11/README.md) | source retention and archive policy | record | retained | — |

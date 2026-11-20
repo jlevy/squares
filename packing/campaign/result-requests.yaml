@@ -37397,7 +37397,10 @@ issues:
       (think-b0w5). The blind stage 4 review of 20 November (lane r1038, think-3ape; #1044)
       accepts it with no blocking or major finding and its 36 controls as stated, and finds
       the factor the issue prints as 1 + 4.6e-18 to be 1 + 4.56e-15 (F6), so the entry is
-      confirmed, independently re-implemented, at V3/C3, S2.
+      confirmed, independently re-implemented, at V3/C3, S2. Adopted at 228 in the pass of 20
+      November 2026 in place of T-301, regularized with both strong generators; the record
+      credits Ono for the arrangement, jazivxt for the further arrangement and Özden for the
+      certificate, and the driver's KKT solve 9.66e-14 below it stays a candidate (think-4z8z).
     read_through: '2026-11-18T23:09:08Z'
     results:
     - key: n228-kaggle-certificate

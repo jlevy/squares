@@ -239,6 +239,16 @@ REVIEW_1009 = (
     "count, stated beforehand as rules, were each decided as stated"
 )
 
+#: What the stage 4 review of issue 1038 (lane r1038, think-3ape) decided on its certificate,
+#: the clause the case record writes after the maintained routes.
+REVIEW_1038 = (
+    ", and the 20 November review’s clean-room checker, frozen before any producer, witness "
+    "or verifier code was read, decided it again by separating axes in integers from its "
+    "centres and unit bases and by exact clipping in GMP rationals from its corners over "
+    "every square, wall and pair; its 36 controls, stated beforehand as rules, were each "
+    "decided as stated"
+)
+
 #: Each adopted result, as its register entry and its review describe it.
 RESULTS: dict[str, Prose] = {
     "T-128": Prose(
@@ -3028,6 +3038,39 @@ RESULTS: dict[str, Prose] = {
         ),
         third_route=REVIEW_1009,
     ),
+    "T-334": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#1038](https://github.com/jlevy/squares/issues/1038)",
+        producer_route=True,
+        ai=(
+            "Issue 1038 says Doğa Özden’s lab converted and checked the packing with OpenAI "
+            "Codex, that the Kaggle notebook it comes from credits ChatGPT and Codex, and that "
+            "his AI agent, which uses the account kenaznia-doga, prepared and posted the issue "
+            "and the repository on his behalf."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, so on that route the replay is reproduced with the "
+            "producer’s code; the independent rational corner checker shares no verification "
+            "code with it, and the review’s checker shares no code with either route or the "
+            "source."
+        ),
+        lineage=(
+            "The issue says the packing is jazivxt’s, published in the Kaggle notebook Boxed "
+            "In Sub from the dataset Boxed In v63, whose crowdsourced coordinates name no "
+            "finder for this count, converted to exact rationals by Doğa Özden’s lab under one "
+            "clearance factor of 1 + 4.56 × 10⁻¹⁵; it claims no discovery and has no "
+            "information on which came first, this packing or Roberto Ono’s (T-301), this "
+            "case’s house best packing before this adoption. Measured, nearest centres pair "
+            "it one to one with T-301’s packing, and the optimal assignment moves 5 squares "
+            "beyond a tenth, at most 0.238: a further arrangement of Ono’s packing, its gain "
+            "1.23 times T-301’s own uniform-contraction margin, a new result under the "
+            "owner’s option D. So Roberto Ono is the packing’s finder, jazivxt its improver "
+            "and Doğa Özden the certificate’s author."
+        ),
+        third_route=REVIEW_1038,
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-315": Prose(
         author="Mykhailo Polkovskyi",
         reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
@@ -3899,11 +3942,14 @@ CREDITS: dict[int, Credit] = {
     # 96 squares beyond a tenth. The issue asks that Couzo's packing be credited as the start,
     # so the phrase names it, as the 156 and 268 phrases name the packings their strip cuts
     # were taken from, and names the packing it is below, as the 179 and 269 phrases do.
+    # The pass of 20 November 2026 (think-91fu): Doğa Özden's issue 1038 (T-334), his exact
+    # certificate of jazivxt's public Kaggle packing, one to one with T-301's packing, five
+    # squares beyond a tenth; the arrangement stays Ono's, as T-314's does at 147.
     228: Credit(
         (ONO,),
-        (),
-        "Roberto Ono’s packing from a band cut of Francisco Couzo’s n = 404 packing, below "
-        "Doğa Özden’s column-band packing",
+        (JAZIVXT,),
+        "the packing Roberto Ono found from a band cut of Francisco Couzo’s n = 404 packing, "
+        "as jazivxt’s public Kaggle packing further arranges it and Doğa Özden certified it",
     ),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of his own
     # issue-674 packing (T-199), polished to its exact side 1.91e-11 below #674's

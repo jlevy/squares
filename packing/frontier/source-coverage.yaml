@@ -14016,11 +14016,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 228
-  source_id: ono-issue984-2026-11-14
-  value: '15.5960431209207917'
-  evidence: E-ono-984-certificate-report
+  source_id: ozden-s228-upper-bound-2026-11-18
+  value: '15.5960431166317666'
+  evidence: E-ozden-1038-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-15 (T-301).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-334).
 - n: 229
   source_id: evand-regularized-2026-10-20
   value: '15.6501615138764311'
@@ -14955,20 +14955,20 @@ superseded_reports:
 - n: 228
   source_id: casson-square-packing-2026
   value: '15.60895620815939289'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026
   value: '15.604638007678682'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026-10-03
   value: '15.604602454552252'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 229
@@ -15881,9 +15881,9 @@ superseded_reports:
 - n: 228
   source_id: evand-square-packing-2026-10-05
   value: '15.604602454546056967137037190451'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-301's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-334's exact
     side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 236
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.8678008394199166'
@@ -16374,8 +16374,8 @@ superseded_reports:
   source_id: couzo-451-exact-refinements
   value: '15.6046014757296743'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 238
   source_id: squish-500-fourth-request-2026-10-11
   value: '15.9241067853214947'
@@ -16866,14 +16866,14 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.60460147572967429'
   reason: The house from 2026-10-17 until 2026-11-14; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 228
   source_id: ozden-s228-upper-bound-2026-11-14
   value: '15.6008017348117539'
   reason: The house from 2026-11-14 until 2026-11-15; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 90
   source_id: jazivxt-s90-upper-bound-2026-11-15
   value: '9.9982771669260000'
@@ -16982,6 +16982,12 @@ superseded_reports:
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
     and T-326's exact side is smaller.
   superseded_by: mishapolk-issue1009-2026-11-16
+- n: 228
+  source_id: ono-issue984-2026-11-14
+  value: '15.5960431209207917'
+  reason: The house from 2026-11-15 until 2026-11-20; its certificate stays retained and verified,
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
