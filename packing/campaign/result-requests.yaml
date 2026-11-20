@@ -37260,7 +37260,8 @@ issues:
     title: Raised lower bound for n = 108 and n = 109 (side 10.630037940829)
     author: JoostdeWinter
     opened: '2026-11-17'
-    state: open
+    state: closed
+    closed: '2026-11-20'
     kind: result-report
     triage: done
     summary: >-
@@ -37282,7 +37283,7 @@ issues:
       108 and 109 take the claimed side: 0.0100 above T-216 at 108, and at 109 0.0787 above the
       reported a(109) (T-180) and 0.1676 above Karakuş's verified strip bound. The review's
       notes N-2, N-3, N-5 and N-8 and its four questions go to the author with the reply.
-    read_through: '2026-11-17T22:27:34Z'
+    read_through: '2026-11-20T08:46:10Z'
     results:
     - key: n108-n109-dilated-measure
       claim: >-
@@ -37300,7 +37301,24 @@ issues:
     beads:
     - think-i5en
     answer_bead: think-i5en
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1018#issuecomment-7034745518
+      date: '2026-11-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n108-n109-dilated-measure
+        id: T-327
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n108-n109-dilated-measure
+        id: E-de-winter-1018-n108-sqverify-fast-replay
+        status: confirmed
+      - result: n108-n109-dilated-measure
+        id: E-de-winter-1018-n108-report
+        status: reviewed
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped, and the
       reply on main says what was registered, replayed and reviewed, and where the lower lanes
@@ -37315,3 +37333,44 @@ issues:
       credits people, not AI agents (attribution.md): the issue says the rescaling, the
       computation and the proof were produced with GPT-6.2 Astra (OpenAI) and the files and
       checks with Claude (Anthropic), under his direction. Licensed MIT by LICENSE at the pin.
+
+      Closed on 20 November 2026 with the final reply (issuecomment-7034745518, posted by
+      jlevy at 08:46:10Z), after #1029 merged on 18 November with the import, the census
+      replay, the stage 4 review of #1027 mapped and both lower lanes at 108 and 109; the
+      issue was closed as completed at 08:46:11Z. Intake lane c6-records (think-tei5)
+      drafted it from main 935e79c36 with check_requests --draft 1018 and the record, and
+      the posted text is that draft but for a blank line before the footer; it is recorded
+      in #1043. It states T-327, s(109) >= s(108) >=
+      1700799526134255846599/159999384348528500000, printed 10.630037940829, at V3/C3,
+      confirmed, reproduced with the producer's code, significance S3, its position current:
+      both lower lanes take it at both counts, 0.0100 above T-216 at 108, the gap to the
+      upper bound falling from 0.2848 to 0.2748, and at 109 0.0787 above the reported lane
+      (T-180, Hosono's a(109)) and 0.1676 above Karakuş's verified strip bound, the gap
+      falling to 0.3197, as the review's N-6 has it. T-216, kept as a verified bound and
+      superseded at 108, and T-180 are named as context, not as this issue's results, and
+      are not recorded under reported.
+
+      It names E-de-winter-1018-n108-sqverify-fast-replay, confirmed, and
+      E-de-winter-1018-n108-report, the author's report, so both are recorded under reported
+      with check_requests' statuses, the report's reviewed. It credits the author after
+      Hosono, as the issue asks, quoting the register's line, de Winter after Hosono,
+      Tokoharu, Levy, the chain through T-216's credit and this repository's verifier, and
+      names GPT-6.2 Astra and Claude as the AI tools, in the author's words, without
+      crediting them. It says what was checked: the premises, lemma N0 on the declared net,
+      the dilation row by row, the file's regeneration from T-216's and the enlargement's
+      arithmetic, recomputed exactly; the complete census replay with the pinned toolchain,
+      equal to the author's twelve runs at every direction but for the timings, and its
+      whole-net controls, a rerun of the author's own checker rather than an independent
+      one; and the blind stage 4 review, accepted with every finding a note, whose
+      clean-room programs decided all 401 directions and set no rung until a soundness
+      review accepts their decider.
+
+      It passes on the review's N-2, answered by the source's next commit, 67fb815, which
+      adds lower_n108/SHA256SUMS (read on 20 November), so the review's first question is
+      not asked; N-3, whose half on the record's side the census replay settles; N-5; and
+      N-8. It asks the review's other three questions: which binary produced the runs,
+      whether its digest can be recorded and whether the pinned toolchain will be used;
+      whether the verifier was run on a mutated measure, and the least capture at each
+      direction; and how 10.622222909689 was obtained. They are informational and hold
+      nothing open, since no answer could falsify the credit, the derivation or the files
+      the record names. It names no bead.
