@@ -2675,13 +2675,17 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     (think-i38n) credits Mykhailo Polkovskyi (Mishapolk) as the improver at 147, 156, 180,
     260, 262, 268, 270, 292, 299 and 307 and as the finder at 210, 272 and 295 (T-314 to
     T-326), a name the block already prints, as is de Winter's at 262 and 292, so the hold
-    is unchanged and holds Özden and Ono where they are still credited."""
+    is unchanged and holds Özden and Ono where they are still credited. Lane i1038 of 20
+    November 2026 (think-91fu) credits jazivxt as the improver at 228 (T-334, Ono still the
+    finder), a name the block does not print yet, so the hold holds it there beside Ono, as
+    it does at 90, and Özden, whose certificate is the count's source."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
             (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
         ),
-        **dict.fromkeys((147, 228), ("Roberto Ono",)),
+        147: ("Roberto Ono",),
+        228: ("Roberto Ono", "jazivxt", "Doğa Özden"),
         90: ("jazivxt",),
         **dict.fromkeys((127, 204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
     }
@@ -2695,7 +2699,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (199, ["Evan Daniel"], ["Doğa Özden"]),
         (90, ["jazivxt"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
-        (228, ["Roberto Ono"], []),
+        (228, ["Roberto Ono"], ["jazivxt"]),
         (127, ["Tomáš Kodaj"], ["JoeGun"]),
         (204, ["Tomáš Kodaj"], ["JoeGun"]),
         (232, ["Tomáš Kodaj"], ["JoeGun"]),

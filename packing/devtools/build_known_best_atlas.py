@@ -2818,12 +2818,16 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: the hold still holds jazivxt alone there. Lane L187 (think-0y9m) credits Tomáš Kodaj as
 #: the finder and JoeGun as the improver at 127, 204, 232, 264 and 305 (T-305 to T-309, in
 #: the same pass), two new names, so the hold holds both there, and Özden no longer at 232,
-#: where no case record names him now.
+#: where no case record names him now. Lane i1038 (think-91fu) credits jazivxt as the
+#: improver at 228 (T-334, in the pass of 20 November), Ono still the finder, a name the
+#: block does not print yet, so the hold holds jazivxt there beside Ono, and Özden, whose
+#: certificate the count's source is.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(
         (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
     ),
-    **dict.fromkeys((147, 228), ("Roberto Ono",)),
+    147: ("Roberto Ono",),
+    228: ("Roberto Ono", "jazivxt", "Doğa Özden"),
     90: ("jazivxt",),
     **dict.fromkeys((127, 204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
 }
