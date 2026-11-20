@@ -5,6 +5,7 @@ components:
   - paper:square-packing-methods-survey
 paths:
   - packing/campaign/result-requests.yaml
+  - packing/devtools/site_urls.py
   - packing/frontier/results.yaml
   - packing/frontier/source-coverage.yaml
   - packing/resources/web/de-winter-square-packing-211-2026-09-16/README.md
@@ -34,3 +35,9 @@ reason: >-
   optimality review, the threshold-bound review and the methods survey. No PDF was printed;
   each prints from that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and
   v0.2.7.
+  On 20 November lane c5-fixes changed two of these paths again: T-098's note in results.yaml
+  (its key gains a short credit), and site_urls.py, where results.html's byte ceiling moves
+  to 1,900,000 (think-v1qe). Measured again with devtools.compare_paper_renders against
+  main 7b6bc29e8 (#1034), /usr/bin/google-chrome as SQPACK_CHROMIUM, with its copies of the
+  five paths above swapped in: all four papers are byte-identical across the three renders
+  (55, 43, 43 and 43 files).
