@@ -5,7 +5,7 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: in_progress
 priority: 1
-version: 23
+version: 24
 delegate: c12-optd-land
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-20T16:27:13.962Z
+updated_at: 2026-11-20T16:44:27.042Z
 started_at: 2026-11-18T02:28:47.344Z
 ---
 
@@ -51,3 +51,6 @@ started_at: 2026-11-18T02:28:47.344Z
 2026-11-20T11:05Z c4-optd (handoff): #1030 head 78ee6a944 (main a9e5261a2 merged; stamp ab7e52f34 is the pin and still the last data commit). Hosted: Packing validation 44718785323 green; Branch mergeability 44718772955 green; Certificate page 44718785210 green but font-loading (webkit) ("native MathML was visible before enhancement: s(11)", first-paint timing on the n=11 page, passed on every other recent run incl. main a9e5261a2 and this branch's 7b70e7e66) - reported, not re-run. PR body final (cost first). Merge waits on the owner's option D confirmation via the coordinator; if main moves before it, merge main, run stamp_landed --apply and release_pin --update last. Worktree removed. After merge: replies on #846/#939/#946/#573 (coordinator); close or annotate think-ikku, think-ruu2, think-oqjd, think-5c9z (review A13).
 
 2026-11-20T12:05Z c11-fix1030 (senior review B of #1030, at 78ee6a944): 9df27ae19 answers S1 (T-286's claim and the coverage notes of T-285/T-286 date the adoption 20 November; RESULTS.md re-rendered), S2 (independence_record dropped from E-de-winter-939/946-exact-feasibility, the -review- entries keep theirs; render_verifiers --update no change), S3 (#846 stays blocked:owner-decision, moved from think-ikku to think-7k8p, close_when names that answer, notes say the reply after the merge is not final and leaves #846 open; test_check_requests counts 21 owner-decision blocks; think-7k8p notes gain T-281's dependency), N5 (T-253's dangling "(above)"); 36d549703 re-pins DATA_REVISION to 9df27ae19 (stamp_landed: nothing to stamp). Main unchanged at a9e5261a2; #1024 not merged. Local: --records green, --edit green (71 steps, 577 s), compare_paper_renders vs a9e5261a2 with the 13 record paths 55/43/43/43 byte-identical, 770 touched tests pass. Pushed 36d549703; PR body updated (review B, #846's non-final reply, footer). After the merge #846 keeps its blocked:owner-decision label.
+
+
+2026-11-20T17:00Z c12-optd-land (coordinator bold-ritchie-coord1120): owner decision status: confirmed by the owner on 20 November 2026: option D compares sides (exact sides, not 12-place prints), so #1030 may merge on that basis (relayed by the coordinator from the owner's conversation of 20 November; think-b0w5 stays closed). Main moved to 25e9ea100 (#1024, 127 in the pass of 20 November), so #1030's adoption at 172/199 moves to the pass of 21 November: merged main fd9d98d7e (20 Nov archive and LATER_PASSES[2026-11-20] = main's {127}; LATER_PASSES[2026-11-21] = {172, 199}, house-adoption-prior-state-2026-11-21.json.xz via retain_history from main's n-172.md/n-199.md, rows equal to the branch's earlier ones); e7b186f3b re-dates the records (adopt_houses --refresh --n 172 199, claims, next_rung, coverage, requests, READMEs) and rebuilds the derived records (escape screen at 172/199: SCREEN_FINDINGS n=1..200 68/555/182/2425, n=1..324 126/3027/302/7798; contact-shade census; INVENTORY/RESULTS/VERIFIERS/STATUS/URL register; custody 77 houses). adopt_houses --check, default_drawings --check-state, 460 touched tests pass. Next: merge main after #1048 (c2's 2026-11-20 pass), stamp_landed --apply and release_pin --update after 00:00Z 21 November, push.
