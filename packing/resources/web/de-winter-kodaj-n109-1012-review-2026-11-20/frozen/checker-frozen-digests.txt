@@ -1,0 +1,18 @@
+# Lane r1012 checker and controls plan, frozen at 2026-11-20T11:31:47Z, before any program of this lane read the certificate (its blob was not yet fetched), and before the source's README.md, SHA256SUMS, n109_tomkodaj.csv or verification.txt, issue 1012's comments, this repository's witness, verifier or promotion code, packing/frontier/n-109.md, the register entry at 109 (T-101), the record of issue 958, the earlier reviews at 109, or any import lane's work (draft PR 1047, its branch and its packet) was read.
+# Read before the freeze: the lane's brief and lane-env notes; bead think-2ut8 and its parent epic's header; result-import.md stage 4; the review of issue 1038 (lane r1038) with its packet README and frozen digest lists, not its programs; packing/witnesses/witness.schema.yaml; the first 40 lines of packing/witnesses/known-best/n-001.yaml with every digit redacted, for the envelope's layout; the Ruff and BasedPyright exclusions of packing/pyproject.toml; the source repository's commit list and the names and blob ids of the files commits aae089c and 7232328 add and remove (metadata of a blobless fetch).
+# Disclosed: an earlier blobless clone's 'git ls-tree -l' lazily fetched blobs to report sizes, among them the five n109_kaggle blobs, into a scratch object store; it was stopped, nothing of them was displayed or opened, and the store was deleted unread at 2026-11-20T11:17:17Z before a fresh blobless fetch.
+# the certificate, identified by the source tree only (git blob id, content not fetched): JoostdeWinter/square-packing aae089c37a2d3fb91b161a1b3a45f06a41277d18:n109_kaggle/n109_tomkodaj.yaml
+9f270d766597af325b3222003fb9b76aa06445ba  git-blob:aae089c:n109_kaggle/n109_tomkodaj.yaml
+# checker programs, the writer, the self-test, the controls program and the controls plan (SHA-256):
+3fcf5daaad00c54a991c318fe64290fb3bc9e148b01e3e56289fcffdb19400af  r1012_reader.py
+23a0885797a6002a2a2f8e53c34d9bafebad28630eed7b9a67bdffaad315b6d2  r1012_sat.py
+d5222310cbff5a19a2deb56b88be7085feb3fb9a564c1a8d81ad58988f0db2b6  r1012_clip.py
+afb52f75c91741df56b5efc82957434bcc73e18b8767999741fd368e8b2c38e0  r1012_decide.py
+ff76ea384a3bcdcb1b54d5654e5a86c1e0f5093b347d45bd38848e41c39ef520  r1012_geom.py
+fbe4f3b0522dda59f80abd55bca7db6eff70af9cffd622b167ca0706152670a5  r1012_writer.py
+96e7a9973a2bdd7825fb18555854233392a6041fc6b26678dbb80d4e26b18b1b  r1012_check.py
+8bc80acaf60c5cac4c3b0afd8f7f50a55c70fc44db7df02ba63156a229a76d05  r1012_selftest.py
+420cbb59b211cd55531cf1839b700ac2034de168f175b39cbc709ea72eeacea5  r1012_controls.py
+3c2b0930773d08b3ef41f54da80a5b90e182e112a4dd6a2dd011af7f31171bf4  controls-plan.json
+# receipt written by the frozen self-test (it reads no certificate):
+e0a773680bb028550c7d4a0286c312826228619b4c017e03e13e61e2a086671c  out/selftest.json
