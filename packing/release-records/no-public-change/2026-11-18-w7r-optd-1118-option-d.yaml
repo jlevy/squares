@@ -27,18 +27,19 @@ outputs:
   - papers/square-packing-methods-survey.html
   - papers/square-packing-methods-survey.md
 reason: >-
-  Lane w7r-optd-1118 of the 17 November intake pass (think-8yyy) applies the owner's
-  option D of 17 November (think-b0w5): T-253, T-260, T-280, T-281 and T-173 at 207 are
-  recorded as restatements (the new restatements field, read by check_results,
-  check_standing, render_results and render_recent_results, whose supersession mark names
-  the bounds a restated count rests on), and Joost de Winter's T-285 and T-286 are raised
-  to V3/C3 and adopted at 199 and 172 (adopt_houses, upper_bound_houses, the case records,
-  the coverage register, the composite figure and the bound citations, which credit de
+  Lanes w7r-optd-1118 and c4-optd of the 17 November intake pass (think-8yyy) apply the
+  owner's option D of 17 November (think-b0w5): T-253, T-260, T-280 and T-281 are recorded
+  as restatements (the new restatements field, read by check_results, check_standing,
+  render_results, whose status names what a restated entry restates, and
+  render_recent_results, whose supersession mark names the bounds a restated count rests
+  on), and Joost de Winter's T-285 and T-286 are raised to V3/C3 and adopted at 199 and 172
+  in the pass of 20 November 2026 (adopt_houses, upper_bound_houses, the case records, the
+  coverage register, the composite figure and the bound citations, which credit de
   Winter's re-solves), with the requests record following, and the translation-escape
   screen's pinned totals in validate.py follow the new witnesses. The composite figure's
-  displayed ceilings at 172 and 199 are unchanged at six places. Against main 86284ec20
-  (#1023, merged into the branch): devtools.compare_paper_renders --baseline origin/main
-  with the thirteen paths named here swapped in, SQPACK_CHROMIUM
-  /usr/bin/google-chrome: 55, 43, 43 and 43 files, byte-identical across its three renders
-  of each paper, as against main 3ac78a55f before it. No PDF was printed; each prints from
-  that HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
+  displayed ceilings at 172 and 199 are unchanged at six places. Against main 7b6bc29e8 (#1034),
+  merged into the branch: devtools.compare_paper_renders --baseline origin/main with the
+  thirteen paths named here swapped in, SQPACK_CHROMIUM /usr/bin/google-chrome: 55, 43, 43
+  and 43 files, byte-identical across its three renders of each paper, as against main
+  86284ec20 and 3ac78a55f before it. No PDF was printed; each prints from that HTML. Every
+  paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
