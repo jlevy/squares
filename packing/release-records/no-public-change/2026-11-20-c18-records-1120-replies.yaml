@@ -7,14 +7,15 @@ outputs:
   - papers/square-packing-methods-survey.md
 reason: >-
   Records lane c18-records of the 20 November intake pass (think-6b5u): the final replies
-  and closes of 20 November on #1008, #1015, #1017 and #1020 are recorded under each
-  issue's replies, with T-328 and T-329 reported superseded and T-330 current, and the
-  review evidence of #1015, #1017 and #1020 joins each result's evidence; #1001's
-  follow-up reports T-305 superseded at 127, with no corrects; and Joost de Winter's
-  comments of 20 November on #1017, #1018 and #1020 are read into their entries. No
-  result, rung, side, bound, house, mark or credit changes. Measured against origin/main
-  298e773a2 (#1048): devtools.compare_paper_renders rendered the methods survey into
-  empty site directories, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM),
-  twice from this tree and once with that main's result-requests.yaml swapped in: 43
-  files each, all byte-identical across the three. No PDF was printed; it prints from
-  that HTML. The paper keeps its version, v0.2.7.
+  and closes of 20 November on #1008, #1015, #1017, #1020, #1021, #1022 and #1031 are
+  recorded under each issue's replies, with T-328 and T-329 reported superseded and T-330
+  to T-333 current, and the review evidence of #1015, #1017 and #1020 joins each result's
+  evidence; #1001's follow-up reports T-305 superseded at 127, with no corrects; and
+  Joost de Winter's comments of 20 November on #1017, #1018 and #1020 are read into their
+  entries. No result, rung, side, bound, house, mark or credit changes. Measured after the
+  last of those records, against origin/main 298e773a2 (#1048):
+  devtools.compare_paper_renders rendered the methods survey into empty site directories,
+  its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this tree and once
+  with that main's result-requests.yaml swapped in: 43 files each, all byte-identical
+  across the three. No PDF was printed; it prints from that HTML. The paper keeps its
+  version, v0.2.7.
