@@ -52946,7 +52946,7 @@ results:
   - id: T-331
     kind: upper-bound
     registered: '2026-11-18'
-    landed: '2026-11-18'
+    landed: '2026-11-20'
     headline: >-
       de Winter's nine-slice packing at 268, a new arrangement, 1.85e-03 below T-320
     claim: >-
@@ -53084,7 +53084,7 @@ results:
   - id: T-332
     kind: upper-bound
     registered: '2026-11-18'
-    landed: '2026-11-18'
+    landed: '2026-11-20'
     headline: >-
       de Winter's re-optimization of Panoras's compilation's 270, a new arrangement, 8.34e-04 below T-321
     claim: >-
