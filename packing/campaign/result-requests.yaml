@@ -37392,7 +37392,8 @@ issues:
       the exact side, both maintained exact routes accept the certificate and refuse its gross
       and sharp controls, and it is measured close to T-305's arrangement, ten squares beyond a
       tenth and not one to one by nearest centres. It is the first of his three reports at 127
-      that evening; #1017 and #1020 are lower. The stage 4 review (R-127) is a separate lane.
+      that evening; #1017 and #1020 are lower. The stage 4 review of record is R-127b (#1028),
+      with R-127 (#1025) an additional blind review; both accept it and both are mapped.
     read_through: '2026-11-17T22:14:33Z'
     results:
     - key: n127-band-35b576a
@@ -37443,7 +37444,8 @@ issues:
       routes accept the certificate and refuse its gross and sharp controls; measured, it is
       #1015's arrangement moved, one to one with it, and its step lies far outside #1015's
       padding, so under option D (think-b0w5) it is a new result. #1020 is lower. The stage 4
-      review (R-127) is a separate lane.
+      review of record is R-127b (#1028), with R-127 (#1025) an additional blind review; both
+      accept it and both are mapped.
     read_through: '2026-11-17T22:27:04Z'
     results:
     - key: n127-band-cc20a26
@@ -37487,8 +37489,9 @@ issues:
       the certificate and refuse its gross and sharp controls; measured, it is #1017's
       arrangement moved, one to one with it, and the step is 4.29 times #1017's contraction
       margin, so it lies below #1017 shrunk to first contact and under option D (think-b0w5) is
-      a new result. It is the smallest of the three at 127. The stage 4 review (R-127) is a
-      separate lane.
+      a new result. It is the smallest of the three at 127. The stage 4 review of record is
+      R-127b (#1028), with R-127 (#1025) an additional blind review; both accept it and both
+      are mapped.
     read_through: '2026-11-17T22:49:35Z'
     results:
     - key: n127-band-a1ba501

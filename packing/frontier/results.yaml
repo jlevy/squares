@@ -52996,11 +52996,11 @@ results:
     significance:
       score: 3
       rationale: >-
-        A continued arrangement at 127 of T-305's packing, ten squares moved beyond a tenth and
-        none paired one to one by nearest centres, 9.58e-04 below the house, above the S2/S3
-        line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3),
-        where new and continued arrangements are S3, as T-304 at 90 and T-320 at 268. No
-        technique is new, so not S4. No lower bound or optimum.
+        A new arrangement at 127 relative to T-305's packing, close to it but with ten squares
+        beyond a tenth and none paired one to one by nearest centres, 9.58e-04 below the house,
+        above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's
+        1.88e-05 (S3), where new and continued arrangements are S3, as T-304 at 90 and T-320 at
+        268. No technique is new, so not S4. No lower bound or optimum.
       scored: '2026-11-18'
       by: >-
         the stage 4 review of record of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md), confirming the registering

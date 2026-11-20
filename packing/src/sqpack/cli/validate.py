@@ -294,6 +294,11 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: Mykhailo Polkovskyi's certificates of issue 1009 (T-314 to T-326), each clearing every
 #: wall by at least 1e-28 and every pair by at least 2e-28, so n=1..200 has 773 separating
 #: squares and 2,471 translating ones, and n=1..324 3,245 and 7,844, in the same records.
+#: The pass of 20 November 2026 (think-zqot) moved 127 from T-305 to Joost de Winter's
+#: certificate of issue 1020 (T-330), a new arrangement relative to T-305's packing:
+#: separating and translating squares 8 and 41 against T-305's 90 and 92, so n=1..200 has
+#: 691 separating squares and 2,420 translating ones, and n=1..324 3,163 and 7,793, in the
+#: same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
     "n=1..200": (68, 691, 182, 2420),
