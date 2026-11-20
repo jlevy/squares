@@ -5,7 +5,7 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: c4-optd
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-20T07:32:49.188Z
+updated_at: 2026-11-20T08:48:09.504Z
 started_at: 2026-11-18T02:28:47.344Z
 ---
 
@@ -43,3 +43,5 @@ started_at: 2026-11-18T02:28:47.344Z
 2026-11-18T07:58Z w7r2-optd-1118: hosted CI green at 8d62fe249 (Packing validation 44259793422, Certificate page 44259793298, mergeability 44259785190); PR body updated; sent head/base (86284ec20) to the coordinator for the senior review. Worktree untouched until it returns.
 
 2026-11-20T08:20Z c4-optd (resumes after three lost lanes; worktree scratchpad/c4-optd): prep b6b7cac6e was already in the PR head 6cb20889c. Merged main 1015fc175 (#1029; conflicts only in generated INVENTORY/VERIFIERS and the pin) and 7b6bc29e8 (#1034, clean); no house moved on main since 86284ec20, so no option D outcome changed. Fixed what hosted CI found at 6cb20889c (ruff x5, test_result_status reads restated_position, test_restatements declared in the verified-upper-bound contract). Moved the adoption at 172/199 to the pass of 2026-11-20 (LATER_PASSES, prior states to house-adoption-prior-state-2026-11-20.json.xz, 18 Nov archive back to main's, adopt_houses --refresh --n 172 199, source_reviewed, prose re-dated); custody 77 houses; STATUS.md and URL register regenerated. Local: --edit green (71 steps), --records green, touched tests pass. Pushed 81bac1e5c (interim pin). Known red until #1035 lands: test_the_results_page_has_room_through_its_room_count (projected 1,800,044 / 1,800,000). Still owed: merge main after #1035, compare_paper_renders + release record text (still names T-173 and 86284ec20), stamp_landed --apply, release_pin --update, PR body.
+
+2026-11-20T09:05Z c4-optd: hosted at 81bac1e5c (run 44695742018) green but the room test, as expected. #1035 and #1036 merged: merged main 935e79c36 (590248684; conflict only T-253's claim, where #1035's #1008 credit paragraph and the option D paragraphs are both kept; RESULTS.md re-rendered). No house moved on main at any option D count. compare_paper_renders vs 935e79c36 (13 paths): 55/43/43/43 byte-identical; no-change record text updated (no T-173, adoption 20 Nov). stamp_landed --apply (172 T-286, 199 T-285 -> 2026-11-20) ab7e52f34; release_pin --update 7b70e7e66 (last commit). Local: --records green; --edit green but type floor timed out at 900 s (host load 15), basedpyright on changed files 0 errors; 307 touched tests pass incl. room test and test_release. Pushed 7b70e7e66; hosted CI running. Final PR body: scratchpad c4-optd-body-final.md.
