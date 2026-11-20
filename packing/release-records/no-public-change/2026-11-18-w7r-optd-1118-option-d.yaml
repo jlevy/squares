@@ -37,9 +37,9 @@ reason: >-
   coverage register, the composite figure and the bound citations, which credit de
   Winter's re-solves), with the requests record following, and the translation-escape
   screen's pinned totals in validate.py follow the new witnesses. The composite figure's
-  displayed ceilings at 172 and 199 are unchanged at six places. Against main 7b6bc29e8 (#1034),
+  displayed ceilings at 172 and 199 are unchanged at six places. Against main 935e79c36 (#1035),
   merged into the branch: devtools.compare_paper_renders --baseline origin/main with the
   thirteen paths named here swapped in, SQPACK_CHROMIUM /usr/bin/google-chrome: 55, 43, 43
   and 43 files, byte-identical across its three renders of each paper, as against main
-  86284ec20 and 3ac78a55f before it. No PDF was printed; each prints from that HTML. Every
+  7b6bc29e8, 86284ec20 and 3ac78a55f before it. No PDF was printed; each prints from that HTML. Every
   paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
