@@ -5,7 +5,7 @@ title: "Import #1031: Joost de Winter's s(299) <= 17.793636991744 (0.0074 below 
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: c2-imports
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T07:26:42.911Z
-updated_at: 2026-11-20T07:02:58.023Z
+updated_at: 2026-11-20T07:04:17.535Z
 started_at: 2026-11-18T07:33:41.966Z
 ---
 
@@ -28,3 +28,5 @@ started_at: 2026-11-18T07:33:41.966Z
 2026-11-18T08:33Z w6r2-dewinter-1118: for #1031's PR Limits: at about 08:30Z the coordinator's message relayed R-1031's summary verdict (accept; 7.37e-3 below T-325, about 2e24 times T-325's margin; a new arrangement; S3), before this lane ran any measurement of #1031 beyond the triage's side and gain (07:33Z). The import's replay, controls, identity and margin measurements will be its own programs' outputs under a controls plan hashed before they run.
 
 2026-11-18T09:00Z w6r2-dewinter-1118: for #1031's PR Limits (coordinator): the 08:30Z relay of R-1031's verdict included its S3 reading before this lane scored #1031, so the import's significance score is not blind to the review; and at about 08:58Z the coordinator relayed that R-1031's senior review found 210 of 299 squares coinciding with T-325 under one rigid motion (the review lane is measuring whether generic or a continuation). The credit at 299 is not settled until #1036 merges with that answer; the import's own identity measurement (measure_identity against T-325 and T-277) will be run and reported as its own.
+
+2026-11-20T07:05Z c2-imports (coordinator bold-ritchie-coord1120): claimed from w6r2. Controls plan for 299, written before any program of this lane read the certificate: packing/campaign/issue-intake/upper-bounds-1031-20261120/controls-plan-299.txt, SHA-256 b8a816b21af8d6b6346791170c82f925197d30b35d4d047c344019f0a3ea247f, hashed 2026-11-20T07:04:05Z; worktree scratchpad/c2-imports, branch claude/intake-2026-11-20-import-1021 (from main 1015fc175f), one PR for #1021, #1022 and #1031. Watched repo read at 21d944c (19 Nov 18:44:48Z): n299/ last touched by 3293038 (REGISTRATION.md, SHA256SUMS); pin 497eb47 as the issue names. This lane has read this bead's earlier notes (the 08:30Z and 08:58Z relays of R-1031) and will say so in the PR's Limits; it does not read #1036 or think-r3tn until the coordinator says #1036 merged.
