@@ -59894,7 +59894,6 @@ evidence:
       for n = 199: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 118206 pair decisions; summed over the 3 jobs, the receipt records 35.39 route CPU seconds, the longest job 12.38 seconds. The grid squares touch the walls and each other, a least wall clearance and a least pair gap of exactly 0, and the packet's sharp controls meet those margins on both routes. Finite feasibility only: no optimum, local optimality or
       the quintic's root is decided.
     source_reviewed: '2026-11-18'
-    independence_record: docs/project/reviews/review-2026-11-11-de-winter-939-946.md
     external_review:
       state: informally-verified
       date: '2026-11-11'
@@ -60046,7 +60045,6 @@ evidence:
       for n = 172: 1 positive and 2 duplicate-square and outside-container controls passed their required outcomes on both routes, 14,706 pairs a job and route; summed over the 3 jobs, the receipt records 130.67 route CPU seconds. The least wall clearance is 1.5e-320 and the least pair gap 1e-320, and the packet's sharp controls meet those margins on both routes. Finite feasibility only: no optimum, local optimality or
       the quintic's root is decided.
     source_reviewed: '2026-11-18'
-    independence_record: docs/project/reviews/review-2026-11-11-de-winter-939-946.md
     external_review:
       state: informally-verified
       date: '2026-11-11'

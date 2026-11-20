@@ -36818,8 +36818,8 @@ results:
       (this certificate 1.0000 of it).
 
       At each count the house contracted lies at or below this certificate. At 154, 183 and
-      227 tens of squares move (above) in the region the house's padding leaves free, one to
-      one with the house's packing, so each is a re-certification of it and a restatement.
+      227 47, 24 and 16 squares move beyond 1e-3, as measured pose by pose, in the region the
+      house's padding leaves free, one to one with the house's packing, so each is a re-certification of it and a restatement.
 
       2026-11-18 (jlevy/squares#1008, think-a88h): the credit line gains T-057's own
       sources after de Winter, Arslanov, Mustafin, Shangitbayev, Friedman and Ellsworth,
@@ -43120,7 +43120,7 @@ results:
       predecessor is shrunk until its squares first touch, measured through any construction
       (devtools.contraction_margin). This certificate lies 1.0107e-13 below T-282's
       certificate so contracted, so it is a new result, and the case adopted it as the house
-      at 172 on 18 November 2026. The issue calls it the same type of result as T-098, which
+      at 172 on 20 November 2026. The issue calls it the same type of result as T-098, which
       registered Evan Daniel's exact optima of 48 known-best packings on 5 October 2026,
       before RV-3 was raised.
 

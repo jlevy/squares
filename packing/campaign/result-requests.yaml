@@ -27909,6 +27909,7 @@ issues:
     - think-pg1y
     - think-ikku
     - think-8yyy
+    - think-7k8p
     answer_bead: think-pg1y
     replies:
     - url: https://github.com/jlevy/squares/issues/846#issuecomment-6543938921
@@ -27948,11 +27949,18 @@ issues:
       - result: sub-print
         id: E-mishapolk-846-certificate-report
         status: reviewed
+    blocked:
+      type: owner-decision
+      reason: >-
+        Whether the owner's option D (think-b0w5) reaches T-259 at 130, adopted before it and
+        0.9193 of T-254's contraction margin, which decides whether the 130 packing is credited
+        to Couzo alone; T-281, which restates T-259, waits on the same answer (think-7k8p).
     close_when: >-
       The results are registered with their replay and their review, 130 is adopted, the owner
       answered on 17 November 2026 (option D, think-b0w5) and the record follows the answer at
-      the fourteen other counts, and the reply on main says so; nothing the author asked for is
-      queued.
+      the fourteen other counts, the owner has answered whether option D reaches T-259 at 130
+      (think-7k8p) and the record follows that answer, and the reply on main says so; nothing
+      the author asked for is queued.
     notes: >-
       Read on 31 October 2026 from main 3978a7f61. The commit 52aa267 precedes the issue by 6
       minutes 42 seconds; GitHub's activity log was not readable, so no push is dated. The ten
@@ -27974,8 +27982,15 @@ issues:
       margin (0.0056 to 0.0093) and every one of T-253 1.0000 of it, within it: restatements,
       credited to the houses' finders, recorded as such (restatements), and no house moves.
       T-259 at 130 stays as adopted (whether option D reaches it is think-7k8p's question for
-      the owner). The blocked: owner-decision block lifts with this change; the label goes after
-      its merge.
+      the owner).
+
+      Corrected on 20 November 2026 in lane c11-fix1030 (think-8yyy), after the senior review
+      of the branch: think-ikku's question is settled, but the issue's block moves to
+      think-7k8p's rather than lifting, since T-259, registered from this issue, is the open
+      owner question at 130, and T-281 restates it. The issue keeps its blocked:owner-decision
+      label. The reply owed after the merge states T-253 and T-260 as restatements and names
+      T-259's standing at 130 as the owner's open question; it is not a final reply, and the
+      issue stays open until think-7k8p is answered.
   - number: 836
     title: '1182–9944: 2484 new and 1434 lowered upper bounds, two-strip construction (Zenodo v5): registration request'
     author: mohsensbu-jpg
