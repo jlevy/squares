@@ -1886,6 +1886,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # packing re-solved by regions, both at JoostdeWinter/square-packing a1ba501.
     "[de Winter s268 upper bound 2026-11-17]": _import("de-winter-s268-upper-bound-2026-11-17"),
     "[de Winter s270 upper bound 2026-11-17]": _import("de-winter-s270-upper-bound-2026-11-17"),
+    # Lane c2-imports of 20 November (think-10mx): Joost de Winter's issue 1031 at 299,
+    # diagonal slices of Panoras's compilation's 372 and 335, at JoostdeWinter/square-packing
+    # 497eb47.
+    "[de Winter s299 upper bound 2026-11-18]": _import("de-winter-s299-upper-bound-2026-11-18"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
