@@ -37181,3 +37181,58 @@ issues:
       pushed with 838c5ea at 22:48:50Z), the commit that first committed n270/; later commits leave
       it unchanged. It quotes Panoras's compilation at 16.92746606488242 and Danil Malyshev's coordinates of #1012 at 16.927469593519, both 1.55e-04 above this side, and the Kaggle per-puzzle table's 16.927314216351814 at 270 (the team [NUP] Junie is all you need, 9 November), 1.1e-13 above it, with no coordinates; the last states no packing. The record credits people, not AI agents (attribution.md), and
       states the assistance in the issue's words.
+  - number: 1031
+    title: Lowered upper bound for n = 299 (side 17.793636991744)
+    author: JoostdeWinter
+    opened: '2026-11-18'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(299) <= 17.793636991744, rounded up at 12
+      places from the exact side of a centre-direction certificate at 497eb47 in his watched
+      repository, 7.37e-03 below the house, T-325 (Mykhailo Polkovskyi's re-solve of Doğa
+      Özden's T-277, after Evan Daniel): diagonal slices of the 372- and 335-square packings in
+      Asterios Panoras's public Kaggle compilation, locally optimized, with part of one tilted
+      group reflected across the diagonal. Triaged on 18 November 2026 (lane w6r2-dewinter-1118)
+      and retained, replayed and registered on 20 November in lane c2-imports (think-10mx) as
+      T-333: both maintained exact routes accept the certificate and refuse its gross and sharp
+      controls; the gain lies wholly outside T-325's contraction margin, so under option D
+      (think-b0w5) it is a new result; no symmetry of the box pairs it with T-325's packing.
+      Its blind stage 4 review (R-1031, draft PR #1036) is mapped when it merges, and it
+      measures a rigid motion against T-325's packing, which settles the credit. The house at
+      299 moves to it by the house rule once that review is mapped (think-78aj).
+    read_through: '2026-11-18T06:44:45Z'
+    results:
+    - key: n299-497eb47
+      claim: >-
+        s(299) <= 17.793636991744 rounded up at 12 places (the exact side of n299/n299_exact.json
+        at JoostdeWinter/square-packing 497eb47), diagonal slices of the 372- and 335-square
+        packings in Asterios Panoras's public Kaggle compilation, locally optimized, with part of
+        one tilted group reflected across the diagonal.
+      source: body
+      register:
+      - T-333
+      evidence:
+      - E-de-winter-1031-certificate-report
+      - E-de-winter-1031-exact-feasibility
+      validation:
+      - think-10mx
+    beads:
+    - think-10mx
+    - think-78aj
+    answer_bead: think-10mx
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, its stage 4 review mapped and the
+      house at 299 decided, and the reply on main says what was registered, replayed, reviewed
+      and adopted.
+    notes: >-
+      Read on 18 November 2026 and again on 20 November; no comment on the issue. The issue names
+      497eb47 (06:34:51Z), the commit that first committed n299/; 3293038, the same second, adds
+      only its registration text and checksums, and later commits leave the folder unchanged.
+      It names T-277 at 17.801004434255294 as the case page's value on 18 November; #1009's pass
+      had moved the house to T-325, 3.53e-12 below it, that day. It quotes the Kaggle per-puzzle
+      leaderboard's 17.793636991746555 at 299 (Nick Sarris, 18 November, 01:07:56 UTC), 3.5e-12
+      above this side, with no coordinates, so it states no packing. The record credits people,
+      not AI agents (attribution.md), and states the assistance in the issue's words.

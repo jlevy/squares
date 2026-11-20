@@ -103,3 +103,12 @@ deferrals:
     reason: Joost de Winter's certificate of issue 1022 at 270, below T-321. think-gqzz maps
       its stage 4 review (R-1021) and adopts it at 270 by the house rule, regularized in the same
       change; the case record then cites this evidence, and this entry is removed in that change.
+  - evidence: E-de-winter-1031-exact-feasibility
+    results:
+    - T-333
+    bead: think-10mx
+    blocked_on: think-10mx
+    recorded: '2026-11-20'
+    reason: Joost de Winter's certificate of issue 1031 at 299, below T-325. think-10mx maps
+      its stage 4 review (R-1031) and adopts it at 299 by the house rule, regularized in the same
+      change; the case record then cites this evidence, and this entry is removed in that change.

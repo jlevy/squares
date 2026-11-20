@@ -13727,6 +13727,32 @@ sources:
     November for this lane (campaign/issue-intake/upper-bounds-1021-1022-20261118) records it after
     #1009's. All 3 native jobs have full outcomes. No selected override or superseded claim is
     created at this stage; current cases and earlier source ownership remain unchanged.
+- id: de-winter-s299-upper-bound-2026-11-18
+  title: Joost de Winter's packing of 299 squares from diagonal slices of Asterios Panoras's compilation at JoostdeWinter/square-packing 497eb47, issue 1031
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/497eb478b790175ea8690671b66785b70c97f9f2
+  local: resources/web/de-winter-s299-upper-bound-2026-11-18/
+  source_key: '[de Winter s299 upper bound 2026-11-18]'
+  scope:
+    n_values:
+    - 299
+  reviewed: '2026-11-20'
+  source_date: '2026-11-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/claims.json
+  evidence:
+  - E-de-winter-1031-certificate-report
+  - E-de-winter-1031-exact-feasibility
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints: 17.793636991744 at 12 places, the issue's
+    print. T-333 records the in-horizon report, 7.37e-03 below T-325 at 299; the ledger of 20
+    November for this lane (campaign/issue-intake/upper-bounds-1031-20261120) records it. All 3
+    native jobs have full outcomes. No selected override or superseded claim is created at this
+    stage; current cases and earlier source ownership remain unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

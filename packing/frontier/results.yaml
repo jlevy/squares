@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-18'
+last_reviewed: '2026-11-20'
 results:
   - id: T-001
     kind: lower-bound
@@ -52862,7 +52862,9 @@ results:
       of local optimality was run. Those statements are the author's; no source program ran
       here.
 
-      The issue says the search divided the container into nine diagonal slices and filled each from a transformed copy of a published packing: the first two and the last four slices from 302 squares, the third from 153 and the fourth and fifth from 129, holding 8, 22, 40, 42, 60, 48, 30, 16 and 2 squares along the diagonal, then optimized every position and angle and enclosed the result in rationals; the inputs came from the public Kaggle compilations of Navneet Prabhat (129 and 153) and Danil Malyshev (302) and from Francisco Couzo's certificate (302). It asks for credit to Joost de Winter, the slices from packings by Ostashev (129) and PingYou Ltd (153, 302); the record names the finder at 129 Daniil Ostashev, where the issue writes Dmitry. It quotes the Kaggle per-puzzle table's 16.870013850412470 at 268 (the team Thinking inside the box, 15 November), 8.0e-12 above this side, with no coordinates, so it states no packing.
+      The issue says the search divided the container into nine diagonal slices and filled each from a transformed copy of a published packing: the first two and the last four slices from 302 squares, the third from 153 and the fourth and fifth from 129, holding 8, 22, 40, 42, 60, 48, 30, 16 and 2 squares along the diagonal, then optimized every position and angle and enclosed the result in rationals; the inputs came from the public Kaggle compilations of Navneet Prabhat (129 and 153) and Danil Malyshev (302) and from Francisco Couzo's certificate (302).
+
+      It asks for credit to Joost de Winter, the slices from packings by Ostashev (129) and PingYou Ltd (153, 302); the record names the finder at 129 Daniil Ostashev, where the issue writes Dmitry. It quotes the Kaggle per-puzzle table's 16.870013850412470 at 268 (the team Thinking inside the box, 15 November), 8.0e-12 above this side, with no coordinates, so it states no packing.
 
       The issue says the search, optimization and rational certificate were produced with
       GPT-6.2 Astra (OpenAI) and the repository files, checks and figure with Claude
@@ -52937,7 +52939,7 @@ results:
 
       The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
       before any route ran stated (campaign/issue-intake/upper-bounds-1021-1022-20261118/
-      controls-plan-268-270.txt, SHA-256 c4a974659d11...7e45, hashed at 02:27:48Z on 18 November),
+      controls-plan-268-270.txt, hashed at 02:27:48Z on 18 November),
       lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
       every square toward its nearer near wall by its least clearance: both routes accepted each
       at exact contact, margin 0, and refused each 1e-30 past it. They refused a square enlarged
@@ -52997,7 +52999,9 @@ results:
       of local optimality was run. Those statements are the author's; no source program ran
       here.
 
-      The issue says the search started from the 270-square packing in Asterios Panoras's public Kaggle compilation (version 17, side 16.92746606488242), a merge of many contributors that does not name the finder of this arrangement, removed and relaxed its two end regions in turn, compressed a 68-square region at the bottom inside a rectangle, reassembled the packing and optimized the position and angle of every square. It asks for credit to Joost de Winter, after the arrangement in Panoras's compilation. It quotes Panoras's compilation at 16.92746606488242 and Danil Malyshev's coordinates of #1012 at 16.927469593519, both 1.55e-04 above this side, and the Kaggle per-puzzle table's 16.927314216351814 at 270 (the team [NUP] Junie is all you need, 9 November), 1.1e-13 above it, with no coordinates; the last states no packing.
+      The issue says the search started from the 270-square packing in Asterios Panoras's public Kaggle compilation (version 17, side 16.92746606488242), a merge of many contributors that does not name the finder of this arrangement, removed and relaxed its two end regions in turn, compressed a 68-square region at the bottom inside a rectangle, reassembled the packing and optimized the position and angle of every square.
+
+      It asks for credit to Joost de Winter, after the arrangement in Panoras's compilation. It quotes Panoras's compilation at 16.92746606488242 and Danil Malyshev's coordinates of #1012 at 16.927469593519, both 1.55e-04 above this side, and the Kaggle per-puzzle table's 16.927314216351814 at 270 (the team [NUP] Junie is all you need, 9 November), 1.1e-13 above it, with no coordinates; the last states no packing.
 
       The issue says the search, optimization and rational certificate were produced with
       GPT-6.2 Astra (OpenAI) and the repository files, checks and figure with Claude
@@ -53072,7 +53076,7 @@ results:
 
       The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
       before any route ran stated (campaign/issue-intake/upper-bounds-1021-1022-20261118/
-      controls-plan-268-270.txt, SHA-256 c4a974659d11...7e45, hashed at 02:27:48Z on 18 November),
+      controls-plan-268-270.txt, hashed at 02:27:48Z on 18 November),
       lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
       every square toward its nearer near wall by its least clearance: both routes accepted each
       at exact contact, margin 0, and refused each 1e-30 past it. They refused a square enlarged
@@ -53102,6 +53106,131 @@ results:
       18 November and a day's archive holds one prior state a count, regularized in that pull
       request; V4 and C4 need a second qualifying adversarial review by a distinct reviewer
       and an explicit human oversight record.
+  - id: T-333
+    kind: upper-bound
+    registered: '2026-11-20'
+    landed: '2026-11-20'
+    headline: >-
+      de Winter's diagonal-slice packing at 299, 7.37e-03 below T-325
+    claim: >-
+      One complete rational certificate proves s(299) <=
+      17793636991743040580325825384225613703947282755372586749208848013397/1000000000000000000000000000000000000000000000000000000000000000000.
+      That side is 17.7936369917430406 rounded up at 16 places and 17.793636991744 at 12, as
+      #1031 prints it.
+
+      It is 7.37e-03 below T-325 (Mykhailo Polkovskyi's re-solve of Doğa Özden's T-277, after
+      Evan Daniel), the case's house in both lanes since the pass of 18 November 2026, and below
+      T-277, the house before it, by the same to three figures; the ledger of 20 November
+      records the report.
+
+      Measured here, no symmetry of the box pairs it one to one with
+      T-325's packing by nearest centres, and the optimal assignment moves 127 squares beyond a
+      tenth (largest 1.07); 18 of its 114 tilted squares pair with tilted squares of T-325 of
+      the same sign; against T-277's likewise. Whether a rigid motion off the box's symmetries
+      pairs part of it with T-325's packing is the stage 4 review's measurement, and the credit
+      relative to T-325 waits on it. It has 114 squares tilted, 2.18 to 27.89 degrees by
+      magnitude, 55 one way and 59 the other, one turned by 0.0065 degrees, and the other 184
+      exactly upright.
+
+      Both maintained exact routes accept the certificate.
+
+      The issue says the author's two checkers, verify_exact.py (separating axes) and
+      check_area.py (the area of each close pair's clipped intersection), both Fraction and the
+      standard library only, each report 299 squares and 714 close pairs, and that no test of
+      local optimality was run. Those statements are the author's; no source program ran here.
+
+      The issue says the search divided the container into diagonal slices and filled each from
+      a reflected or translated copy of a public packing, the outer slices from 372 squares and
+      the seven middle slices from 335, both from Asterios Panoras's public Kaggle compilation
+      (version 17), which Kaggle's community explorer links to prvsiyan's notebook "A Square
+      Deal" (372) and to four notebooks with the same score, by areebbb, jazivxt, alexchilton
+      and prvsiyan (335); a local optimization exchanged the separating edges of touching pairs,
+      and reflecting part of one tilted group across the diagonal x + y = S, its neighbours
+      released, gave the final gain.
+
+      It asks for credit to Joost de Winter, after the 335- and
+      372-square packings in Panoras's compilation. It quotes the Kaggle per-puzzle
+      leaderboard's 17.793636991746555 at 299 (Nick Sarris, 18 November), 3.5e-12 above this
+      side, with no coordinates, so it states no packing.
+
+      The issue says the search, optimization and rational certificate were produced with
+      GPT-6.2 Sol (OpenAI) and the repository files, checks and figure with Claude (Anthropic),
+      both under his direction.
+    scope:
+      n_values:
+      - 299
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A packing at 299 that no symmetry of the box pairs with T-325's or T-277's, 127 squares moved beyond a tenth under the best one, 7.37e-03 below the house, far above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-331 and T-332. A slice composition of published packings is no new technique, so not S4. No lower bound or optimum. A draft until the stage 4 review's measurement of a rigid motion against T-325's packing is mapped.
+      scored: '2026-11-20'
+      by: think-10mx Joost de Winter import (intake lane c2-imports), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s299 upper bound 2026-11-18]'
+      published: '2026-11-18'
+    evidence:
+    - E-de-winter-1031-certificate-report
+    - E-de-winter-1031-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/README.md
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/claims.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/source/n299/n299_exact.json.gz
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/identity.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299-t277.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299-own.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1031-20261120/README.md
+    - packing/campaign/issue-intake/upper-bounds-1031-20261120/controls-plan-299.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 299: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 267306 pair decisions; summed over the 3 jobs, the receipt records 73.25 route CPU
+      seconds. Squares touch the box, a least wall clearance of exactly 0, and every pair clears
+      by at least 1.04e-74. The certificate is read by the center-direction-json reader, and its
+      corner twin is held to it as the same packing by the witness-corners-opposite reader. The
+      replay is E-de-winter-1031-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated (campaign/issue-intake/upper-bounds-1031-20261120/
+      controls-plan-299.txt, hashed at 07:04:05Z on 20 November),
+      lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
+      every square toward its nearer near wall by its least clearance, 0 here: both routes
+      accepted each at exact contact, margin 0, and refused each 1e-30 past it. They refused a
+      square enlarged to its pair at contact for the shape alone and 1e-30 past it for the
+      overlap as well, accepted a square at its wall grown by 0 and refused it 1e-30 past, and
+      refused a duplicated square.
+
+      Ten came out as the plan states; the eleventh, the wall
+      enlargement past contact, names overlap besides the wall and the shape, since no square
+      near a wall here can grow by 1e-30 without closing a pair, every pair gap being far
+      smaller, and the module then predicts the overlap exactly; the plan's line names the wall
+      and the shape only, and the packet's README records the difference.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-325's
+      certificate's margin is 3.5612e-27 (squares 71 and 140; measure/contraction-n299.json), so
+      the gain of 7.3674e-3 lies wholly outside T-325's padding and the claim is a new result.
+      T-277's margin is 3.4040e-12 (squares 179 and 194; measure/contraction-n299-t277.json), and
+      this certificate's own 6.4244e-67 (squares 137 and 175; measure/contraction-n299-own.json).
+      The L-step scan (measure/l-step-scan.json), with this side stood in for 299's ceiling,
+      finds main's consequences unchanged.
+    next_rung: >-
+      The stage 4 exit: the blind review (R-1031, draft PR #1036) mapped, which also measures a
+      rigid motion against T-325's packing and so settles the credit, and the house rule's
+      adoption at 299, regularized in the same pull request; V4 and C4 need a second qualifying
+      adversarial review by a distinct reviewer and an explicit human oversight record.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
