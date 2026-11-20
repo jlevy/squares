@@ -3,9 +3,9 @@ type: is
 id: is-01m7jh7hf7vrnd0zg133rk1bfh
 title: "Import #1005, #1006 and #1007: s(292) by Özden and by de Winter, s(262) and s(295) by de Winter (T-310 to T-313), adopt and regularize in the 2026-11-17 pass"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 16
+version: 22
 delegate: w3r2-pass-1118
 labels: []
 dependencies:
@@ -15,8 +15,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-16T15:57:20.740Z
-updated_at: 2026-11-18T04:37:43.581Z
+updated_at: 2026-11-18T07:54:20.516Z
 started_at: 2026-11-16T15:59:56.835Z
+closed_at: 2026-11-18T07:54:20.516Z
+close_reason: "Done: #1005, #1006 and #1007 answered with final comments (6970908422, 6970908715, 6970909007) and closed 06:23Z on 18 Nov after #1023 (86284ec20); #1032 recorded them closed and merged 07:53:49Z as 50962004c. check_bead_tree --before-close on main 50962004c: no record names it, no live child."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
@@ -42,3 +46,13 @@ Adoption target: the 2026-11-16 pass; switch to 2026-11-17 if adoption + stamps 
 2026-11-17T23:00Z w3-pass-1117r: #1011 registration-only (coordinator decision): R1 not mapped here; think-i38n maps it with #1014 and adopts. Review A (https://github.com/jlevy/squares/pull/1011#issuecomment-6962939466) addressed in 8fe7a0500 (pushed), dispositions https://github.com/jlevy/squares/pull/1011#issuecomment-6963510453: A1-A9 fixed (A3 measured: T-187 is Xu's line not Cantrell's; credit de Winter after Daniel, Xu; A5: queued stage4-mapping-and-house rows hold #1005-#1007 open), A10 -> think-2hw5, n-146.md stale prose -> think-r4yl. Controls plan scratch file gone (A4). Remaining before merge: #1013 merge, merge main, stamp_landed --apply + release_pin --update on merge day, hosted CI green, merge.
 
 2026-11-18T00:44Z w3-pass-1117r: #1011 merged at 00:30:34Z as 45f0288b5 (merge commit; head d4e3305e7, hosted CI 31 pass; stamps T-310..T-313 2026-11-18, DATA_REVISION 8444308c). First replies on #1005-#1007 rendered from main with check_requests --draft; posting waits for the deploy of 45f0288b5 (Certificate page run 44208401769 queued).
+
+2026-11-18T06:27Z w3r2-pass-1118: final replies posted from main 86284ec20 after the verified deploy (Pages run 44246610603), and the issues closed (06:23Z): #1005 https://github.com/jlevy/squares/issues/1005#issuecomment-6970908422 (T-310 V3/C3, superseded; T-323 the house), #1006 https://github.com/jlevy/squares/issues/1006#issuecomment-6970908715 (T-311 V3/C3, superseded; T-323 credited de Winter improved by Polkovskyi), #1007 https://github.com/jlevy/squares/issues/1007#issuecomment-6970909007 (T-312/T-313 V3/C3, superseded by T-319/T-324). OWED: the records change recording these replies (kind final, reported ids/rungs/positions) and state closed/closed date in result-requests.yaml; close this bead only after that change merges (check_bead_tree --before-close HOLDs on #1005-#1007 now). Each reply carries one informational question (no awaiting_author).
+
+2026-11-18T06:55Z w9-records-1118: records change c6e5814e6 pushed on claude/keen-galileo-9gbz1a (from main 86284ec20): #1005, #1006, #1007 recorded closed 2026-11-18 with their final replies (T-310..T-313 V3/C3 confirmed superseded). Next: checks, draft PR, coordinator review, merge, then close via check_bead_tree --before-close.
+
+2026-11-18T06:50Z w9-records-1118 (correction: the previous note's 06:55Z was 06:40Z): draft PR #1032 opened (intake, S1), head 8e10dc630 (c6e5814e6 records the four finals and closes; 8e10dc630 the no-public-change record), base main 86284ec20. Records tier 55/55; check_requests --github 15 -> 7 differences (the 8 for #1005-#1009 closed). Next: hosted CI, coordinator's senior review.
+
+2026-11-18T06:50Z w9-records-1118 STOPPED (handback requested) before review/merge. State: draft PR #1032 (intake, S1), head 8e10dc630, base 86284ec20, hosted CI in progress; review request sent to main (squares-e0 unreachable). Remaining: senior review + addressing pass, CI green on head, merge (merge commit) after re-checking main, then close this bead via check_bead_tree --before-close on main.
+
+2026-11-18T07:40Z w9-records-1118: review A of #1032 (approve, A1/A2 Low) addressed: 121db5424 reads #1006's answer (06:44:18Z) and #1008's README revision 43e15330 (question answered, blocked removed, think-a88h owes the recording); a70edb475 updates the no-change record. Next: records tier, CI on a70edb475, dispositions, merge, --before-close.

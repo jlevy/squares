@@ -3,15 +3,21 @@ type: is
 id: is-01m4kbxna1xdmjd8nkka3wax60
 title: "Import wand125: s(122) >= 563/50 by the mixed_n122_L1126 linear certificate, raising n = 122 to 126 (no issue)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 13
+version: 21
+delegate: w8b-t144-1118
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
+child_order_hints:
+  - is-01m7pjfyyepzebm5ryxhc6amet
+hold: null
+hold_until: null
 created_at: 2026-10-10T16:56:43.073Z
-updated_at: 2026-11-17T21:55:37.841Z
+updated_at: 2026-11-18T08:46:29.779Z
+started_at: 2026-11-18T05:27:59.949Z
 ---
 Found by the 2026-10-10 evening reads (think-0nkn): wand125/square-packing a9f76c3 adds problems/square-lower-bounds/certificates/mixed_n122_L1126/, a linear certificate (502 points, 1,268 segments, 3 rectangles, mass 12199999/100000) on mixed_n101_L1028's 201-direction net (core 9977/10000, step 83/40000), checked by unified_linear_verify.cpp (SHA-256 0249726a..., V-wand125-unified-linear-verify-cpp, the T-080 route). Reports s(122) >= 563/50 = 11.26, hence s(N) >= 11.26 for N >= 122: above Green's reported 11.22928087555 at 122-125 and Nagamochi's 11.24695076595 at 126, and the verified Karakus strip bounds at 122-126; 127's 11.29563 stands. Data: square-lower-bounds-v1 asset certificates__mixed_n122_L1126.tar.gz (31,784,537 B, SHA-256 6443eae03c56dc99051965246dbf97f5f3540feb9c011eac96e6d094521f5deb). The author's full replay took 7 h 41 min at 3 workers (about 23 CPU-hours): stages 1-3 only; the replay waits for an owner budget. No issue reports it.
 
@@ -48,3 +54,13 @@ Register: one entry at V0/C0 (T-NN placeholder) with scope n_values [122, 123, 1
 2026-11-17 w5-audit-1117r (think-uz0m, the stalled-bead audit of the 17 November intake pass, think-p02d; read against main f9ddfeeef): (b) unblocked by the owner's decision of 17 November (think-fibh): the 11 October regularize-first hold under think-ux1v no longer applies to the lower-bound confirmations, and T-144 (s(n) >= 563/50 at 122 to 126, V0/C0 on main) is one. What it now owes: #532's ask, T-144's complete linear replay and control carried to 122 to 126 with a review, about 11.2 to 14.6 CPU-h, under the cap; the replay tooling at claude/wand125-confirmations-2026-10-11 (44eb6a0) is on neither main nor #908's head, so the lane ports it or reuses #908's (w1, think-i85v). Bookkeeping owed: think-ux1v still carries a `blocks` edge to this bead (and to think-i85v and think-r333), and #532's three asks name think-ux1v as blocked_on in result-requests.yaml; both should drop it. Listed for the coordinator (about one lane-day plus the CPU); unclaimed.
 
 2026-11-17T23:15Z coord-intake-1117r: think-fibh (owner, 17 Nov) lifted the ux1v regularize-first hold for lower bounds; removed the ux1v blocks edges to nd7g, i85v and r333. T-144's linear replay and control at n = 122-126 with its review (~11-15 CPU-h, under the cap; tooling at 44eb6a0 not on main) is unstarted live work, queued after the current lanes.
+
+2026-11-18T05:35Z w8-t144-1118 (branch claude/intake-2026-11-18-t144-replay, worktree /home/user/wt/w8-t144): tooling recovered. 44eb6a017 is on origin/claude/wand125-confirmations-2026-10-11 only; its n122 retention tool (retain_wand125_release, --via release) was superseded on main by T-179's route (fine_net_followup retain, mixed.release_members, LAYOUTS). Ported only the n122 registration (a9d8bd4a3) onto main's route: acquire_source packet (a9f76c3, tree b1bafa03 unchanged through head ea1c454), fine_net_followup retain of the asset (6443eae0...5deb, = API digest), n122 in LINEAR. linear-audit holds (2.7 s); linear-fetch BUNDLE_READY, 810 files, 201 inputs enclose the candidate (46 s). Commits 82cae689f, pushed. Smoke at angle 37 running; then the full replay in four ranges (linear-plan --parts 4) at two workers, nice 19.
+
+2026-11-18T05:50Z w8-t144-1118: replay running (detached runner, scratch bin/run-n122.sh; four linear-plan ranges 0-76, 77-149, 150-182, 183-200; 2 workers, nice 19; started 05:36Z). Smoke angle 37: 73.0 CPU-s vs source 73.6 (0.99); priced 14.5-16.5 CPU-h in all, approved by the coordinator. Stage 4 review bead think-rxs3 created; coordinator started blind review R-144 on its own branch claude/intake-2026-11-18-review-t144 (/home/user/wt/r144), landing in its own PR; this lane maps it into its PR after that merges.
+
+2026-11-18T07:07Z w8b-t144-1118 (resumes w8-t144-1118 after the ~06:57Z container restart): range 0-76 was cut off with directions 0-7 replayed (receipts committed and pushed at aa2aa7daf on claude/intake-2026-11-18-t144-replay); 8 and 9 were in flight and lost. CPU spent so far about 1.6-1.7 CPU-h (smoke 73 s, range rows 5,635.9 s, fetch and audit about 50 s, in-flight loss at most a few minutes). Ratio to the source's seconds over 0-7 is 0.921, so the whole replay projects to about 13.3 CPU-h, inside the approved 14.3-16.3 and the 20 CPU-h stop. Resumed 07:06Z with scratch w8/bin/run-n122-v2.sh (detached; linear-replay resumes per direction; commits, pushes and notes this bead after each range, then the control and linear-merge). A successor re-runs that script: completed ranges are skipped.
+
+2026-11-18T07:53Z w8b-t144-1118: replay at 26 of 201 angles (range 0-76 running; ratio to source 0.978, projecting about 14.1 CPU-h in all, under the 20 CPU-h stop). Records exit drafted on the branch with XXX tokens for the run dates, CPU, control index and the review (WIP commits 77b13f623, 5167523596): replay evidence entry E-wand125-linear-n122-1126-source-replay, T-144 claim/notes/next_rung at V3/C3, case records n-122..126 (verified lanes to 563/50, reported 122-125; 126 keeps T-180), coverage, bibliography, resources README, verifier summary, packet README, occurrences, tests. A dry run of the records tier with provisional values found the remaining generator steps; scratch w8/bin/finalize.sh runs them, then the result/t-144.html URL amendment, compare_paper_renders for a no-public-change record, and the records tier. Requests record (#532 ask, #778 review track) left for the post-merge follow-up change, as #889/#904 did for T-179.
+
+2026-11-18T08:46Z w8b-t144-1118 (runner): range 0-76 done: RANGE_REPLAYED 77 of 77 cpu 13162.2. Receipts committed and pushed at b8ccd3f0e on claude/intake-2026-11-18-t144-replay.

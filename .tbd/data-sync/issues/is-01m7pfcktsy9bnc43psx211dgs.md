@@ -3,9 +3,9 @@ type: is
 id: is-01m7pfcktsy9bnc43psx211dgs
 title: "Address PR #1028 review A: R-127b, the stage 4 review of record of #1015/#1017/#1020 (post-freeze addendum, merge of main, merge)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 11
 delegate: r127b2-1118
 labels: []
 dependencies: []
@@ -19,11 +19,17 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-18T04:42:07.576Z
-updated_at: 2026-11-18T04:56:43.940Z
+updated_at: 2026-11-18T05:25:56.797Z
 started_at: 2026-11-18T04:42:35.192Z
+closed_at: 2026-11-18T05:25:56.797Z
+close_reason: "Review A of PR #1028 addressed: A1 to A6 fixed (addendum bcb047ed3f, README and rb127_e1p_walls.py c932385e65, PR description), reply https://github.com/jlevy/squares/pull/1028#issuecomment-6969920966; origin/main 3ac78a55f9 merged in 1e281a7567; hosted CI green; PR merged with a merge commit as 0f191a2d239c39f127b87ea840c536830653d1ff"
+resolution: null
+duplicate_of: null
 ---
 Review A of PR #1028 (https://github.com/jlevy/squares/pull/1028#issuecomment-6969042368), head d015c165bd, approve once A1 is fixed by a post-freeze note; A2 to A6 Low. Lane r127b2-1118 addresses all six in a dated post-freeze addendum, frozen files unchanged; then merges origin/main 3ac78a55f9, gets hosted CI green, marks ready and merges with a merge commit.
 
 ## Notes
 
 2026-11-18T04:58Z r127b2-1118: A5 and A2's program in c932385e65; addendum (A1 to A5) in bcb047ed3f, both pushed on claude/intake-2026-11-18-review-1015-max; frozen lists verify (22 and 42 OK). Next: merge origin/main 3ac78a55f9, records tier, CI, PR description (A6), disposition reply, ready, merge.
+
+2026-11-18T05:08Z r127b2-1118: origin/main 3ac78a55f9 merged in 1e281a7567 (doc map and synopsis map: both lines kept), pushed; packing-validate --records at 1e281a7567: 55 records steps passed, 112.9 s wall; hosted CI running (runs 44240866612, 44240860737, 44240866629). Disposition reply and PR description drafted in scratch; next: CI green, reply, description, ready, merge.

@@ -5,8 +5,8 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 20
-delegate: w6r-dewinter-1118
+version: 27
+delegate: w6r2-dewinter-1118
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-18T04:38:15.064Z
+updated_at: 2026-11-18T07:47:04.018Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -54,3 +54,15 @@ R-127 (blind review), 2026-11-18 03:30Z: review A addressed in d19d061e5 (addend
 R-127b (blind review), 2026-11-18T03:43Z: findings frozen and pushed at ee8cbc0b12 (verify with sha256sum -c frozen/findings-frozen.sha256 from the packet). Verdict: #1015, #1017, #1020 accepted (feasible; stated sides are the files' sides; prints are 12-place ceilings). Option D (think-b0w5), exact: T-305 margin 1.2099401e-10, gains 9.582e-4/9.6016e-4/9.6016e-4 (new); #1015 margin 7.7393785e-63, #1015->#1017 gain 1.9555984e-6 (new); #1017 margin 4.1902971e-14, #1017->#1020 gain 1.7976067e-13 = 4.29x margin, #1020 1.3786e-13 below shrunk #1017 (new). devtools.contraction_margin and measure_identity agree exactly (second route). Identity: #1017, #1020 one to one with predecessor under identity (5 and 1 beyond a tenth); none one to one with T-305. Significance: #1015 S3, #1017 S2, #1020 S2 (S1 alt). 133/134 controls as stated; E1p at #1020 a plan-rule defect (F3, minor). Minor custody: stale SHA256SUMS at #1017/#1020 pins (F8); #1017's 'later commits unchanged' now false (F9). Next: compare with R-127 (#1025), docs copy, draft PR. CPU ~0.2 h.
 
 R-127b (blind review), 2026-11-18T03:53Z: draft PR #1028 (https://github.com/jlevy/squares/pull/1028), labels intake and S2, head 485556fdab, base main 95f89dffce (#1025 merged in). Review: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, packet packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/. After the freeze: read R-127 (#1025) and compared (exact agreement on verdicts, margins, contraction and identity; this review adds F9, F10, F12, F15); F8 downgraded to a note on the source's push log (pins pushed together with their checksum fixes); author's checkers read as data (sound for the centre file); constant checkers caught at #1017 and #1020. Local records tier running.
+
+R-127b (blind review of record), 2026-11-18T05:27Z, lane r127b2-1118: PR #1028 merged at 05:25:00Z as 0f191a2d239c39f127b87ea840c536830653d1ff (merge commit; head 1e281a7567, main 3ac78a55f9 merged in; hosted CI green, 16 pass). Review A (https://github.com/jlevy/squares/pull/1028#issuecomment-6969042368) addressed in a dated addendum after the freeze (bcb047ed3f; README commands and rb127_e1p_walls.py in c932385e65); frozen lists still verify (22 and 42 OK); reply https://github.com/jlevy/squares/pull/1028#issuecomment-6969920966. For the mapping: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, verdict accepted at all three; questions for the author are 1, 3 and 4 (Question 2 withdrawn, F8 a note). Significance: this review reads #1015 S3, #1017 S2, #1020 S2 and does not govern; the S1/S2 rule near 1x the margin is the owner's (think-mu3t), and #1020, T-285 and T-286 should be scored by one reading.
+
+coord-intake-1117r: #1028 (R-127b) merged as 0f191a2d2 at 05:25Z. Its A2 fix added rb127_e1p_walls.py (89 lines, decides nothing) and a receipt after Review A. The coordinator accepts these without another review round, since they set no verdict; #1024's senior review should read them as part of the mapping.
+
+2026-11-18T05:33Z w6r-dewinter-1118: merged main 0f191a2d2 (#1028) at c002021f2; restored R-127's three \times macros in its addendum (live copy, e3d8af0df; frozen lists verify: checker 23 OK, findings 69 OK); mapped R-127b (review of record) and R-127 at 7115afc099: V-de-winter-1015-review-r127b-check, V-de-winter-1015-review-r127-check, E-de-winter-{1015,1017,1020}-review-exact-feasibility and -review-r127-exact-feasibility, external_review on the three reports, reviews on T-314..T-316 (provisional). #1020 kept at S1 (#1023's precedent) with both reviews' S2 reading and think-mu3t. Next: after #1023 merges, renumber, merge main, adopt #1020 at 127 and regularize.
+
+2026-11-18T06:48Z w6r-dewinter-1118: renumbered #1024's results T-314..T-316 -> T-328..T-330 (1864652667; #1029 takes T-327), merged main 86284ec20 at 521fcb983 (register contiguous once #1029 merges), adopted T-330 at 127 (460ef0112; upper_bound_houses ADOPTED/LATER_PASSES 2026-11-18, adopt_houses RESULTS/CREDITS: de Winter after Chilton, Panoras), redrew 127 (axis view; grid view lapsed). Strong generators running now under nice 19 (grid 0.5/1/5 and evand, run dirs adopt-2026-11-18-n127-*, in scratch).
+
+2026-11-18T07:15Z w6r2-dewinter-1118 (resumed after the 06:55Z restart): the strong runs had finished before the restart (grid-slack 0.5/1/5 and the driver, 06:48-06:54Z); the dotted grid dirs (grid-0.5) were renamed grid-deg05/deg1/deg5 (run ids ^[a-z0-9-]+$) and the selection re-run (07:08Z, same table): no adoptable view; the driver's KKT solve 7.06e-19 below T-330 (3.9e39 x its own margin 1.82e-58) is a register candidate held at row 3 (for think-4z8z). 127 settled decided-no-better (_RUNZQOT), receipts in packing/cases/regularized_drawings/think-zqot-2026-11-18/, render and record done; 0 pending. Pushed 340ce0c76. Next: the other CI failures (occurrences, bound-citations, censuses, tables, synopsis, inventory, ceremony, ruff).
+
+2026-11-18T07:48Z w6r2-dewinter-1118: #1024's CI fixes pushed through 2e3de675a (on 340ce0c76, a4363b4e5, adf87d668): derived records (bound citations, escape screen, family census, contributor census reconciled, research tables, inventory, doc map, synopsis count 329, certificate reach, case verifiers, landing), 127's record refreshed through the writer (its 18 Nov paragraph was above the closed form), custody re-run (T-305 had been left a source with no house; fixed, and the comment that T-305 still housed 204-305 corrected: T-306..T-309 do), print-credit hold released at 127, test pins at 127, superseded set +T-305/T-328/T-329, ceremony fixes. Records tier and 16 affected test files pass locally but for the register's gap at T-327 (fills when #1029 merges). Next: after #1029 merges, merge main, renumber nothing (T-328..T-330 already follow T-327), re-stamp, re-pin, green CI, then the senior review request.
