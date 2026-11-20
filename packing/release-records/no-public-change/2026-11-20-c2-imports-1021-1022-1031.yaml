@@ -34,14 +34,14 @@ reason: >-
   the importer's house readers, the views drawn at 270 and 299 and the settlement at 268,
   the composite figure, the bound citations at the three counts, the requests entries and
   the coverage text that follow. No paper prints those counts, these records or those
-  cards. Against origin/main a9e5261a2: devtools.compare_paper_renders --baseline origin/main with
+  cards. Against origin/main 25e9ea100 (#1024 merged): devtools.compare_paper_renders --baseline origin/main with
   the eleven paths above swapped in, SQPACK_CHROMIUM /usr/bin/google-chrome: the optimality
   review, the threshold-bound review and the methods survey are byte-identical across the
   three renders, 43 files each. The explainer's 55 files are deterministic, and only its
   Markdown and HTML differ from the baseline; rendered again from this tree and with the
   same eleven paths swapped in, and diffed, the one difference in each is the register count
   the explainer reads (registered_results, "one of N results the framework has registered
-  so far"), 330 here and 327 on that main, at one line each. The novelty count is unchanged
+  so far"), 333 here and 330 on that main, at one line each. The novelty count is unchanged
   at 32 (T-331 to T-333 are previously-published), and the bound citation it reads is
   n = 11's, which this change does not touch. No PDF was printed; each prints from that
   HTML. Every paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
