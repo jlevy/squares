@@ -27,11 +27,11 @@ ed0c9d344aef4938a2ec34f93cc89746f081ee0ca50b51134cc86373f961708b  programs/rr1_s
 # cap. The running sample was moved to nice 0 at 21:14Z, three minutes into 1042/n136, and a loop renices the driver and
 # its children to 0 every 15 seconds for the rest of the sample. Three processes at most, as planned. No program changed.
 #
-# A4, 2026-11-20 21:20Z, by the resumed lane, operational only. A3's reading was wrong: the host schedules by session
+# A4, 2026-11-20 21:18Z, by the resumed lane, operational only. A3's reading was wrong: the host schedules by session
 # (sched_autogroup), so the sample's three processes shared one session's share whatever their nice value, about 0.1 of
 # a core each beside a dozen other sessions. The sample's first attempt under A2 (21:10:46Z to 21:17:50Z, 1042/n136, no
 # batch finished, no receipt) was stopped, and the driver gained --own-sessions, which starts each C process through
-# setsid so that it is scheduled like any other session's process. The sample was started again at 21:20Z from its first
+# setsid so that it is scheduled like any other session's process. The sample was started again at 21:18:33Z from its first
 # certificate with that option, at nice 0, three processes at most. The decisions are the frozen rr1_decide.decide's.
 # The driver as it ran (it replaces the digest under A2):
 8caea924cefda43c0f6f9104e950bcf831de11eb06a535e97510bf0af5621c18  programs/rr1_sample_resumed.py
