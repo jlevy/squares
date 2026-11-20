@@ -5,7 +5,7 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: in_progress
 priority: 1
-version: 25
+version: 26
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-20T23:24:43.298Z
+updated_at: 2026-11-20T23:47:14.847Z
 started_at: 2026-11-18T02:28:47.344Z
 ---
 
@@ -54,3 +54,5 @@ started_at: 2026-11-18T02:28:47.344Z
 
 
 2026-11-20T17:00Z c12-optd-land (coordinator bold-ritchie-coord1120): owner decision status: confirmed by the owner on 20 November 2026: option D compares sides (exact sides, not 12-place prints), so #1030 may merge on that basis (relayed by the coordinator from the owner's conversation of 20 November; think-b0w5 stays closed). Main moved to 25e9ea100 (#1024, 127 in the pass of 20 November), so #1030's adoption at 172/199 moves to the pass of 21 November: merged main fd9d98d7e (20 Nov archive and LATER_PASSES[2026-11-20] = main's {127}; LATER_PASSES[2026-11-21] = {172, 199}, house-adoption-prior-state-2026-11-21.json.xz via retain_history from main's n-172.md/n-199.md, rows equal to the branch's earlier ones); e7b186f3b re-dates the records (adopt_houses --refresh --n 172 199, claims, next_rung, coverage, requests, READMEs) and rebuilds the derived records (escape screen at 172/199: SCREEN_FINDINGS n=1..200 68/555/182/2425, n=1..324 126/3027/302/7798; contact-shade census; INVENTORY/RESULTS/VERIFIERS/STATUS/URL register; custody 77 houses). adopt_houses --check, default_drawings --check-state, 460 touched tests pass. Next: merge main after #1048 (c2's 2026-11-20 pass), stamp_landed --apply and release_pin --update after 00:00Z 21 November, push.
+
+Local continuation in the existing Squares checkout on codex/intake-option-d-20261120, tracking #1030. The 14 conflicts from merging c3f4a59dc1 are resolved and staged. Both parents' house changes are present. The combined atlas uses 45 referenced runs. Custody regenerated and passed for 77 houses, 256 inputs and 102 refused/restored mutations. Contact census and the three frontier views were regenerated. The four-paper comparison against c3f4a59dc1 was byte-identical across all renders. Targeted restatement, result-status, house-adoption and custody tests passed. The independent index review verified 17 restatement receipts and found two local changes that are now staged: typed errors for malformed receipt metadata and corrected 21 November chronology in screen test comments. Full local edit validation and the live sweep were stopped when parallel BasedPyright caused swap growth and internal space fell below 1 GiB. All worker groups have exited. Proceed with source checks in a single process, preserve the working directory's earlier user files, and stamp landings only for the actual UTC adoption day.
