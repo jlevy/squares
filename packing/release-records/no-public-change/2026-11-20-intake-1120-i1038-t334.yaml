@@ -4,8 +4,13 @@ components:
   - paper:n11-threshold-bound-review
   - paper:square-packing-methods-survey
 paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
   - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/default_drawings.py
   - packing/devtools/site_resources.py
+  - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/results.yaml
   - packing/frontier/source-coverage.yaml
@@ -21,19 +26,23 @@ outputs:
 reason: >-
   Intake lane i1038 of 20 November (think-91fu): Doğa Özden's issue 1038 is retained and
   replayed, and its certificate at 228 is registered as T-334 (a provisional id after #1024's
-  and lane c2's), read by the existing witness-center-basis adapter. The importer gains the
-  packet's house reader; the requests entry, the coverage source and the other-projects card
-  follow. No paper prints 228's record, this entry or that card. Against origin/main
-  935e79c36 (#1035): devtools.compare_paper_renders rendered each paper into empty site
-  directories, the math passes in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from this
-  tree and once with that main's copies of the five paths above swapped in. The optimality
-  review, the threshold-bound review and the methods survey are byte-identical across the
-  three, 43 files each. The explainer's 55 files are deterministic, and only its Markdown and
-  HTML differ from the baseline; rendered again by hand from this tree and with main's
-  results.yaml swapped in, the one difference in each is the register count the explainer
-  reads (registered_results, "one of N results the framework has registered so far"), 328
-  here and 327 on main. The novelty count is unchanged (T-334 is previously-published), and
-  the bound citation it reads is n = 11's, which this change does not touch. So the change is
-  the live register count, which follows the site's data and is not a revision of the paper,
-  as the earlier intake records say. No PDF was printed; each prints from that HTML. Every
-  paper keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
+  and lane c2's), read by the existing witness-center-basis adapter; the blind stage 4 review
+  of #1044 is mapped into it, and the house rule adopts it at 228 in the pass of 20 November in
+  place of T-301, with both strong generators' regularization. The importer gains the
+  packet's house reader, the adoption its house, prose and credit, and the drawings record
+  drops 228's settlement; the requests entry, the coverage source, the other-projects card,
+  the bound citations and the composite figure follow. No paper prints 228's record, this
+  entry or that card. Against origin/main a9e5261a2 (#1046): devtools.compare_paper_renders
+  rendered each paper into empty site directories, the math passes in /usr/bin/google-chrome
+  (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of the ten paths
+  above swapped in. The optimality review, the threshold-bound review and the methods survey
+  are byte-identical across the three, 43 files each. The explainer's 55 files are
+  deterministic, and only its Markdown and HTML differ from the baseline; rendered again by
+  hand from this tree and with main's copies of the ten paths swapped in, the one difference
+  in each is the register count the explainer reads (registered_results, "one of N results
+  the framework has registered so far"), 328 here and 327 on main. The novelty count is
+  unchanged (T-334 is previously-published), and the bound citation it reads is n = 11's,
+  which this change does not touch. So the change is the live register count, which follows
+  the site's data and is not a revision of the paper, as the earlier intake records say. No
+  PDF was printed; each prints from that HTML. Every paper keeps its version: v0.4.35,
+  v0.1.11, v0.1.4 and v0.2.7.
