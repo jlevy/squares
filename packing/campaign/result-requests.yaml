@@ -37823,7 +37823,8 @@ issues:
     title: Lowered upper bound for n = 268 (side 16.870013850405)
     author: JoostdeWinter
     opened: '2026-11-17'
-    state: open
+    state: closed
+    closed: '2026-11-20'
     kind: result-report
     triage: done
     summary: >-
@@ -37840,7 +37841,7 @@ issues:
       The case adopted it as the house at 268 by the house rule in the pass of 20 November
       2026 (think-78aj), regularized in the same pull request; #1009's pass had moved 268 on
       18 November, and a day's archive holds one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
-    read_through: '2026-11-17T22:49:55Z'
+    read_through: '2026-11-20T18:34:53Z'
     results:
     - key: n268-a1ba501
       claim: >-
@@ -37859,7 +37860,27 @@ issues:
     - think-gqzz
     - think-78aj
     answer_bead: think-gqzz
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1021#issuecomment-7047576688
+      date: '2026-11-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n268-a1ba501
+        id: T-331
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n268-a1ba501
+        id: E-de-winter-1021-exact-feasibility
+        status: confirmed
+      - result: n268-a1ba501
+        id: E-de-winter-1021-certificate-report
+        status: reviewed
+      - result: n268-a1ba501
+        id: E-de-winter-1021-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       house at 268 decided, and the reply on main says what was registered, replayed, reviewed
@@ -37869,11 +37890,38 @@ issues:
       pushed with 838c5ea at 22:48:50Z), the commit that first committed n268/; later commits leave
       it unchanged. It quotes the Kaggle per-puzzle table's 16.870013850412470 at 268 (the team Thinking inside the box, 15 November), 8.0e-12 above this side, with no coordinates, so it states no packing. The record credits people, not AI agents (attribution.md), and
       states the assistance in the issue's words.
+
+      Closed on 20 November 2026 with the final reply (issuecomment-7047576688, posted by
+      jlevy at 18:34:53Z), after #1048 merged with T-331 to T-333, their stage 4 reviews
+      mapped and the three houses adopted; the issue was closed as completed at 18:34:54Z.
+      Recorded in intake lane c18-records (think-6b5u). It states T-331 at V3/C3, confirmed,
+      independently re-implemented, significance S3, 1.85e-3 below T-320 (#1009), the house
+      it replaced, and 2.02e-3 below T-289, the house the issue names. The pass of 20
+      November adopted it at 268 in place of T-320, so it is the reported and the verified
+      upper bound there: its position is current.
+
+      It names E-de-winter-1021-exact-feasibility and the review's
+      E-de-winter-1021-review-exact-feasibility (R-1021, #1033), each confirmed, and the
+      author's report, E-de-winter-1021-certificate-report, reviewed, so all three are
+      recorded under reported with check_requests' statuses. T-320 and T-289 are named as
+      context and are not recorded under reported. It credits the author after Ostashev,
+      PingYou, Prabhat, Malyshev and Couzo, quoting the register's line and noting that the
+      record writes Daniil Ostashev where the issue writes Dmitry, and names GPT-6.2 Astra and
+      Claude, noting the folder's GPT-6.2 Sol, without crediting them.
+
+      It says what was checked: the replay and its 13 controls, the review's clean-room
+      checker and 45 controls, the clearances, T-320's contraction margin, the arrangement,
+      new against T-320 and T-289, and Evan Daniel's driver, whose solve came out above the
+      side. It passes on the review's F9 and F10. Its two questions hold nothing open: the
+      files the search started from, and which model produced the search, an answer that
+      covers #1022 and #1020 too. It names no bead and says that nothing asked is still
+      queued. read_through moves to the reply.
   - number: 1022
     title: Lowered upper bound for n = 270 (side 16.927314216352)
     author: JoostdeWinter
     opened: '2026-11-17'
-    state: open
+    state: closed
+    closed: '2026-11-20'
     kind: result-report
     triage: done
     summary: >-
@@ -37890,7 +37938,7 @@ issues:
       The case adopted it as the house at 270 by the house rule in the pass of 20 November
       2026 (think-78aj), regularized in the same pull request; #1009's pass had moved 270 on
       18 November, and a day's archive holds one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
-    read_through: '2026-11-17T22:50:19Z'
+    read_through: '2026-11-20T18:34:55Z'
     results:
     - key: n270-a1ba501
       claim: >-
@@ -37909,7 +37957,27 @@ issues:
     - think-gqzz
     - think-78aj
     answer_bead: think-gqzz
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1022#issuecomment-7047577489
+      date: '2026-11-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n270-a1ba501
+        id: T-332
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n270-a1ba501
+        id: E-de-winter-1022-exact-feasibility
+        status: confirmed
+      - result: n270-a1ba501
+        id: E-de-winter-1022-certificate-report
+        status: reviewed
+      - result: n270-a1ba501
+        id: E-de-winter-1022-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       house at 270 decided, and the reply on main says what was registered, replayed, reviewed
@@ -37919,11 +37987,37 @@ issues:
       pushed with 838c5ea at 22:48:50Z), the commit that first committed n270/; later commits leave
       it unchanged. It quotes Panoras's compilation at 16.92746606488242 and Danil Malyshev's coordinates of #1012 at 16.927469593519, both 1.55e-04 above this side, and the Kaggle per-puzzle table's 16.927314216351814 at 270 (the team [NUP] Junie is all you need, 9 November), 1.1e-13 above it, with no coordinates; the last states no packing. The record credits people, not AI agents (attribution.md), and
       states the assistance in the issue's words.
+
+      Closed on 20 November 2026 with the final reply (issuecomment-7047577489, posted by
+      jlevy at 18:34:55Z), after #1048 merged; the issue was closed as completed at
+      18:34:56Z. Recorded in intake lane c18-records (think-6b5u). It states T-332 at V3/C3,
+      confirmed, independently re-implemented, significance S3, 8.34e-4 below both T-321
+      (#1009), the house it replaced, and T-283, the house the issue names. The pass of 20
+      November adopted it at 270 in place of T-321, so it is the reported and the verified
+      upper bound there: its position is current.
+
+      It names E-de-winter-1022-exact-feasibility and the review's
+      E-de-winter-1022-review-exact-feasibility (R-1021, #1033), each confirmed, and the
+      author's report, E-de-winter-1022-certificate-report, reviewed, so all three are
+      recorded under reported with check_requests' statuses. T-321 and T-283 are named as
+      context and are not recorded under reported. It credits the author after Panoras,
+      quoting the register's line, and names GPT-6.2 Astra and Claude, noting the folder's
+      GPT-6.2 Sol, without crediting them.
+
+      It says what was checked: the replay, whose eleventh sharp control differs from the
+      plan's wording but not its prediction, the review's clean-room checker and 45 controls,
+      the clearances, T-321's contraction margin, the arrangement, new against T-321 and
+      T-283, and Evan Daniel's KKT solve 4.56e-18 below the side, held and not registered.
+      Its two questions hold nothing open: which file the search started from, version 17 of
+      Panoras's compilation by the author's answer on #1017, and whether five slightly turned
+      squares are design or residue. It names no bead and says that nothing asked is still
+      queued. read_through moves to the reply.
   - number: 1031
     title: Lowered upper bound for n = 299 (side 17.793636991744)
     author: JoostdeWinter
     opened: '2026-11-18'
-    state: open
+    state: closed
+    closed: '2026-11-20'
     kind: result-report
     triage: done
     summary: >-
@@ -37943,7 +38037,7 @@ issues:
       confirmed, independently re-implemented, at V3/C3. The case adopted it as the house at
       299 by the house rule in the pass of 20 November 2026 (think-78aj), regularized in the
       same pull request. The review's Questions 1 to 3 go to the author with the reply.
-    read_through: '2026-11-18T06:44:45Z'
+    read_through: '2026-11-20T18:34:57Z'
     results:
     - key: n299-497eb47
       claim: >-
@@ -37964,7 +38058,27 @@ issues:
     - think-10mx
     - think-78aj
     answer_bead: think-10mx
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1031#issuecomment-7047578344
+      date: '2026-11-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n299-497eb47
+        id: T-333
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n299-497eb47
+        id: E-de-winter-1031-exact-feasibility
+        status: confirmed
+      - result: n299-497eb47
+        id: E-de-winter-1031-certificate-report
+        status: reviewed
+      - result: n299-497eb47
+        id: E-de-winter-1031-review-exact-feasibility
+        status: confirmed
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       house at 299 decided, and the reply on main says what was registered, replayed, reviewed
@@ -37978,3 +38092,31 @@ issues:
       leaderboard's 17.793636991746555 at 299 (Nick Sarris, 18 November, 01:07:56 UTC), 3.5e-12
       above this side, with no coordinates, so it states no packing. The record credits people,
       not AI agents (attribution.md), and states the assistance in the issue's words.
+
+      Closed on 20 November 2026 with the final reply (issuecomment-7047578344, posted by
+      jlevy at 18:34:57Z), after #1048 merged; the issue was closed as completed at
+      18:34:59Z. Recorded in intake lane c18-records (think-6b5u). It states T-333 at V3/C3,
+      confirmed, independently re-implemented, significance S3, 7.37e-3 below T-325 (#1009),
+      the house it replaced, and below T-277, which the issue cites. The pass of 20 November
+      adopted it at 299 in place of T-325, so it is the reported and the verified upper bound
+      there: its position is current.
+
+      It names E-de-winter-1031-exact-feasibility and the review's
+      E-de-winter-1031-review-exact-feasibility (R-1031, #1036), each confirmed, and the
+      author's report, E-de-winter-1031-certificate-report, reviewed, so all three are
+      recorded under reported with check_requests' statuses. T-325, T-277 and T-248 are named
+      as context and are not recorded under reported. It credits the author after Panoras,
+      prvsiyan, areebbb, jazivxt and Chilton, quoting the register's line, and names GPT-6.2
+      Sol and Claude without crediting them.
+
+      It says what was checked: the replay, whose eleventh sharp control differs from the
+      plan's wording but not its prediction, the review's clean-room checker, two of whose 36
+      controls were off by a defect of its plan (F3), the clearances, T-325's contraction
+      margin, the arrangement, new against every packing the record holds at 299, and Evan
+      Daniel's driver, which stopped at its time limit with no result. It names no bead and
+      says that nothing asked is still queued. read_through moves to the reply.
+
+      Its three questions hold nothing open: which rows of Panoras's compilation the slices
+      came from; whether the donors already carried the tilted band whose first holder in
+      the record is T-248, or the search used any of the record's packings at 299; and
+      whether Nick Sarris's value is public beyond the leaderboard.
