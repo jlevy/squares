@@ -1,0 +1,55 @@
+{
+ "program": "r144_selftest.py",
+ "mode": "real",
+ "S4_reader_refusals": {
+  "cases": {
+   "float token": "refused: ReadError",
+   "duplicate key": "refused: ReadError",
+   "unknown key": "refused: ReadError"
+  },
+  "ok": true
+ },
+ "S5_premise_refusals": {
+  "newly_failed_checks": {
+   "total mass n": [
+    "total = 12199999/100000 = n - 1/100000",
+    "total mass below n (the budget)"
+   ],
+   "negative mass": [
+    "every mass is positive",
+    "masses sum to the stated total",
+    "total = 12199999/100000 = n - 1/100000"
+   ],
+   "point outside K": [
+    "every primitive lies in K = [0, L]^2"
+   ],
+   "degenerate segment": [
+    "no degenerate segment or rectangle"
+   ],
+   "net stops at 199": [
+    "t_last^2 + 2 t_last - 1 > 0 fails"
+   ],
+   "step 1/430": [
+    "B(1 + D) < 1 fails"
+   ]
+  },
+  "ok": true
+ },
+ "S6_input_check": {
+  "cases": {
+   "original": "accepted",
+   "moved coordinate": "refused",
+   "dropped row": "refused",
+   "duplicated row": "refused",
+   "wrong E": "refused"
+  },
+  "ok": true
+ },
+ "S7_real_input_mutation": {
+  "original_body_encodes": true,
+  "moved_coordinate_accepted": false,
+  "ok": true
+ },
+ "all_ok": true,
+ "cpu_seconds": 7.29
+}

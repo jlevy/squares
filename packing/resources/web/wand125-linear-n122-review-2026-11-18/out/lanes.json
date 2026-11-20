@@ -1,0 +1,191 @@
+{
+ "program": "r144_lanes.py",
+ "L": "563/50",
+ "rows": [
+  {
+   "n": 122,
+   "reported_lower": {
+    "value": "11.22928087555",
+    "exact_form": "5*sqrt(22)/61 + 2*sqrt(2) + 489/61",
+    "source_key": "[Friedman DS7]",
+    "evidence": [
+     "E-green-ds7-theorem9-reported-lower"
+    ],
+    "L_above_value": true,
+    "L_above_exact": null,
+    "exact_method": "none (decimal value only)"
+   },
+   "verified_lower": {
+    "value": "11.0475115548",
+    "exact_form": "1/2 + sqrt(122 - floor(sqrt(122)) + 1/4)",
+    "source_key": null,
+    "evidence": [
+     "E-karakus-strip-lower",
+     "E-karakus-strip-measure-interval"
+    ],
+    "L_above_value": true,
+    "L_above_exact": true,
+    "exact_method": "Karakus strip form, by squaring"
+   },
+   "raises_reported": true,
+   "raises_verified": true
+  },
+  {
+   "n": 123,
+   "reported_lower": {
+    "value": "11.22928087555",
+    "exact_form": "5*sqrt(22)/61 + 2*sqrt(2) + 489/61",
+    "source_key": "[Friedman DS7]",
+    "evidence": [
+     "E-green-ds7-theorem9-reported-lower"
+    ],
+    "L_above_value": true,
+    "L_above_exact": null,
+    "exact_method": "none (decimal value only)"
+   },
+   "verified_lower": {
+    "value": "11.0948100502",
+    "exact_form": "1/2 + sqrt(123 - floor(sqrt(123)) + 1/4)",
+    "source_key": null,
+    "evidence": [
+     "E-karakus-strip-lower",
+     "E-karakus-strip-measure-interval"
+    ],
+    "L_above_value": true,
+    "L_above_exact": true,
+    "exact_method": "Karakus strip form, by squaring"
+   },
+   "raises_reported": true,
+   "raises_verified": true
+  },
+  {
+   "n": 124,
+   "reported_lower": {
+    "value": "11.22928087555",
+    "exact_form": "5*sqrt(22)/61 + 2*sqrt(2) + 489/61",
+    "source_key": "[Friedman DS7]",
+    "evidence": [
+     "E-green-ds7-theorem9-reported-lower"
+    ],
+    "L_above_value": true,
+    "L_above_exact": null,
+    "exact_method": "none (decimal value only)"
+   },
+   "verified_lower": {
+    "value": "11.1418983268",
+    "exact_form": "1/2 + sqrt(124 - floor(sqrt(124)) + 1/4)",
+    "source_key": null,
+    "evidence": [
+     "E-karakus-strip-lower",
+     "E-karakus-strip-measure-interval"
+    ],
+    "L_above_value": true,
+    "L_above_exact": true,
+    "exact_method": "Karakus strip form, by squaring"
+   },
+   "raises_reported": true,
+   "raises_verified": true
+  },
+  {
+   "n": 125,
+   "reported_lower": {
+    "value": "11.22928087555",
+    "exact_form": "5*sqrt(22)/61 + 2*sqrt(2) + 489/61",
+    "source_key": "[Friedman DS7]",
+    "evidence": [
+     "E-green-ds7-theorem9-reported-lower"
+    ],
+    "L_above_value": true,
+    "L_above_exact": null,
+    "exact_method": "none (decimal value only)"
+   },
+   "verified_lower": {
+    "value": "11.1887791632",
+    "exact_form": "1/2 + sqrt(125 - floor(sqrt(125)) + 1/4)",
+    "source_key": null,
+    "evidence": [
+     "E-karakus-strip-lower",
+     "E-karakus-strip-measure-interval"
+    ],
+    "L_above_value": true,
+    "L_above_exact": true,
+    "exact_method": "Karakus strip form, by squaring"
+   },
+   "raises_reported": true,
+   "raises_verified": true
+  },
+  {
+   "n": 126,
+   "reported_lower": {
+    "value": "11.313323850997",
+    "exact_form": "11313323850997974097849202861841/1000000000000000000000000000000",
+    "source_key": "[wand125 closed form 2026-10-14]",
+    "evidence": [
+     "E-wand125-closed-form-report"
+    ],
+    "L_above_value": false,
+    "L_above_exact": false,
+    "exact_method": "rational"
+   },
+   "verified_lower": {
+    "value": "11.2354552767",
+    "exact_form": "1/2 + sqrt(126 - floor(sqrt(126)) + 1/4)",
+    "source_key": null,
+    "evidence": [
+     "E-karakus-strip-lower",
+     "E-karakus-strip-measure-interval"
+    ],
+    "L_above_value": true,
+    "L_above_exact": true,
+    "exact_method": "Karakus strip form, by squaring"
+   },
+   "raises_reported": false,
+   "raises_verified": true
+  },
+  {
+   "n": 127,
+   "reported_lower": {
+    "value": "11.371666575347",
+    "exact_form": "11371666575347155125075549070184/1000000000000000000000000000000",
+    "source_key": "[wand125 closed form 2026-10-14]",
+    "evidence": [
+     "E-wand125-closed-form-report"
+    ],
+    "L_above_value": false,
+    "L_above_exact": false,
+    "exact_method": "rational"
+   },
+   "verified_lower": {
+    "value": "11.2819293264",
+    "exact_form": "1/2 + sqrt(127 - floor(sqrt(127)) + 1/4)",
+    "source_key": null,
+    "evidence": [
+     "E-karakus-strip-lower",
+     "E-karakus-strip-measure-interval"
+    ],
+    "L_above_value": false,
+    "L_above_exact": false,
+    "exact_method": "Karakus strip form, by squaring"
+   },
+   "raises_reported": false,
+   "raises_verified": false
+  }
+ ],
+ "raises_reported_at": [
+  122,
+  123,
+  124,
+  125
+ ],
+ "raises_verified_at": [
+  122,
+  123,
+  124,
+  125,
+  126
+ ],
+ "green_G11_decimal": "11.229280875551",
+ "L_minus_green_lower": "0.030719124449",
+ "L_above_1_plus_sqrt105": true,
+ "L_minus_1_plus_sqrt105": "0.013049234040"
+}
