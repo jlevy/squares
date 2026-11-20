@@ -66,7 +66,7 @@
     {"id":"grid-slack-adopt-2026-11-16-n127-305-grid-deg5","generator":"regularize_grid_slack/2","finished":"2026-11-16","parameters":{"near_axis_degrees":5.0,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":5,"decisions":{"admit":5},"cost":{"cpu_seconds":115.22,"wall_seconds":115.22,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}},
     {"id":"evand-regularize-adopt-2026-11-18-n147-307-evand","generator":"evand-regularize","finished":"2026-11-17","interpreter":"CPython 3.14.7","parameters":{"variant":"conservative","style":"coincide","orient":"0","frame":"kkt","same_mode":"relax","from_stage":"input","dps":80,"eps":"1e-20","timeout":600.0,"regularize_timeout":600.0,"workers":1},"counts":13,"decisions":{"admit":3,"held":6,"no-view":1,"refuse":1,"review":2},"cost":{"cpu_seconds":3660.78,"wall_seconds":4370.05,"workers":1}},
     {"id":"grid-slack-adopt-2026-11-18-n147-307-grid-deg05","generator":"regularize_grid_slack/2","finished":"2026-11-17","parameters":{"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":13,"decisions":{"admit":11,"no-view":1,"review":1},"cost":{"cpu_seconds":387.06,"wall_seconds":387.06,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}},
-    {"id":"grid-slack-adopt-2026-11-20-n228-grid-0.5","generator":"regularize_grid_slack/2","finished":"2026-11-20","parameters":{"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":1,"decisions":{"admit":1},"cost":{"cpu_seconds":11.25,"wall_seconds":11.25,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}}
+    {"id":"grid-slack-adopt-2026-11-20-n228-grid-deg05","generator":"regularize_grid_slack/2","finished":"2026-11-20","parameters":{"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":1,"decisions":{"admit":1},"cost":{"cpu_seconds":11.25,"wall_seconds":11.25,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}}
   ],
   "totals": {"records":324,"statuses":{"refused":46,"regularized":100,"unchanged":178},"refusals":{"promotion-overlap":44,"unsupported-scalar-kind":2},"shades":{"house":{"green_before":44346,"light_before":8612,"green_after":45498,"light_after":5563},"stage":{"green_before":45529,"light_before":6785,"green_after":45551,"light_after":5522}},"shades_of_regularized_records":{"house":{"green_before":12065,"light_before":6319,"green_after":13217,"light_after":3270},"stage":{"green_before":13248,"light_before":4492,"green_after":13270,"light_after":3229}},"residual_regressions":{"house":0,"stage":0},"held_squares":4,"views_by_generator":{"regularize_axis_components/2":18,"evand-regularize":43,"regularize_grid_slack/1":11,"regularize_grid_slack/2":28}},
   "entries": [
@@ -1772,10 +1772,10 @@
       "n": 228,
       "status": "regularized",
       "generator": "regularize_grid_slack/2",
-      "run": {"id":"grid-slack-adopt-2026-11-20-n228-grid-0.5","output":"grid"},
+      "run": {"id":"grid-slack-adopt-2026-11-20-n228-grid-deg05","output":"grid"},
       "source": {"witness":"packing/witnesses/known-best/n-228.yaml","id":"W-known-best-n228","scalar_kind":"rational","sha256":"bb5d69648f1a684fad6254daf48d56451b959568f6ec456cd153aa216cfb9040"},
       "side": {"reported":"389901077915794162667528670804703057/25000000000000000000000000000000000","view":"389901077915794162667528670804703057/25000000000000000000000000000000000","relation":"same","view_minus_reported":"0.000e+00","view_minus_verified_upper_bound":"0.000e+00"},
-      "view": {"path":"packing/atlas/known-best/regularized/n-228-regularized.yaml.gz","sha256":"0976fa4333c785591353a98f43727976eb9b3abc59db525751cd02d16a437474"},
+      "view": {"path":"packing/atlas/known-best/regularized/n-228-regularized.yaml.gz","sha256":"779ce91ce2107fdf600b8d7b62ab3b7aa3c6321d74377dcb18acf889adac062f"},
       "shades": {"house":{"green_before":152,"light_before":134,"green_after":174,"light_after":51},"stage":{"green_before":174,"light_before":105,"green_after":174,"light_after":51}},
       "exact_verification": {"repository_verifier":true,"independent_checker":true,"passed":true},
       "decision": {"row":10,"decision":"admit","reason":"every admission condition holds"},

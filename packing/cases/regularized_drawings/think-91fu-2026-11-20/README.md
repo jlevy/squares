@@ -22,7 +22,9 @@ shared with other lanes, the commands `devtools.adopt_houses` printed:
 
 - `build_known_best_atlas --update`, `regularize_axis_components --update-atlas --n 228`
   and `default_drawings --update`, which read 228 pending;
-- `regularize_grid_slack --n 228` at 0.5, 1 and 5 degrees (`--near-axis-degrees`);
+- `regularize_grid_slack --n 228` at 0.5, 1 and 5 degrees (`--near-axis-degrees`), into
+  the run directories `adopt_houses` printed, `adopt-2026-11-20-n228-grid-0.5`,
+  `-grid-1` and `-grid-5`;
 - `regularize_evand run --n 228 --workers 1`, Evan Daniel’s driver;
 - `regularize_select` over the four runs and the `regularize_evand layer` command it
   printed;
@@ -62,11 +64,18 @@ shared sides (house and stage), against the axis tool’s view of the new witnes
 - The flip record decides the new picture’s pose (`flip_regularization --n 228`): a half
   turn with a flip, mirrored across the rising diagonal, by quadrants.
 
+The layer’s index refuses a run id with a dot, so after the layer wrote the 0.5-degree
+run as `grid-slack-adopt-2026-11-20-n228-grid-0.5` the three runs were renamed
+`-grid-deg05`, `-grid-deg1` and `-grid-deg5`, as earlier passes name theirs, in the
+index, the view’s provenance line (its digest in the index moved with it), the drawings
+record and the run blocks here.
+The selection’s report and table keep the names the selection read.
+
 ## Retained Here
 
 | Directory or file | What |
 | --- | --- |
-| `adopt-2026-11-20-n228-grid-0.5/`, `-grid-1/`, `-grid-5/` | each run’s block, `run.json`, summed from its report, and the report, `n-228/report.json.gz` |
+| `adopt-2026-11-20-n228-grid-deg05/`, `-grid-deg1/`, `-grid-deg5/` | each run’s block, `run.json`, summed from its report, and the report, `n-228/report.json.gz` |
 | `adopt-2026-11-20-n228-evand/` | the driver’s `receipt.json` and its report |
 | `selection-adopt-2026-11-20-n228.json.gz`, `.md` | the selection’s report and table |
 

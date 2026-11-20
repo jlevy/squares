@@ -37414,8 +37414,7 @@ issues:
       evidence:
       - E-ozden-1038-certificate-report
       - E-ozden-1038-exact-feasibility
-      validation:
-      - think-3ape
+      - E-ozden-1038-review-exact-feasibility
     - key: n228-leaderboard-side-only
       claim: >-
         The Kaggle per-puzzle leaderboard lists 15.596043116631669919627353 at 228 (Nevska, 8

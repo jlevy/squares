@@ -1,9 +1,9 @@
 {
-  "id": "grid-slack-adopt-2026-11-20-n228-grid-0.5",
+  "id": "grid-slack-adopt-2026-11-20-n228-grid-deg1",
   "generator": "regularize_grid_slack/2",
   "finished": "2026-11-20",
   "parameters": {
-    "near_axis_degrees": 0.5,
+    "near_axis_degrees": 1.0,
     "trust": 0.45,
     "time_limit": 120.0,
     "stage_margin": 0.0099
@@ -13,8 +13,8 @@
     "admit": 1
   },
   "cost": {
-    "cpu_seconds": 11.25,
-    "wall_seconds": 11.25,
+    "cpu_seconds": 15.26,
+    "wall_seconds": 15.26,
     "workers": 1,
     "note": "per-count seconds the reports record, summed; no receipt of the run's own"
   }
