@@ -1,0 +1,201 @@
+{
+ "arith": "gmpy2 2.3.1 GMP GMP 6.3.0",
+ "claim": {
+  "accepted_in_box_of_claim_a": true,
+  "accepted_in_box_of_claim_b": true,
+  "ceiling_of_side_at_places": "8000000000001/1000000000000",
+  "claim_is_ceiling": true,
+  "claim_less_side": "9999999999999981/10000000000000000000000000000",
+  "claim_less_side_short": "1.00000000000e-12",
+  "exact": "8000000000001/1000000000000",
+  "places": 12,
+  "text": "8.000000000001"
+ },
+ "cpu_s_total": 0.03,
+ "crossed": {
+  "clearances_identical_to_direct": true,
+  "compare": {
+   "inside_not_one": [],
+   "pair_mismatches": [],
+   "wall_mismatches": []
+  },
+  "cpu_s": {
+   "a": 0.0,
+   "b": 0.0
+  },
+  "margins_identical_to_direct": true,
+  "margins_sha256": "0c3eb087b201c676e65c34b5942c16220892d6e16b633a404b85a15c9f94b81f",
+  "method_b_classes_and_areas_identical_to_direct": true
+ },
+ "direct": {
+  "compare": {
+   "inside_not_one": [],
+   "pair_mismatches": [],
+   "wall_mismatches": []
+  },
+  "cpu_s": {
+   "a": 0.0,
+   "b": 0.0
+  },
+  "method_a": {
+   "classes": {
+    "apart": 78,
+    "contact": 0,
+    "overlap": 0
+   },
+   "clearances_sha256": "cb01f72010f4c462278d0a4e077fd9e53edd4213ff47d14d6c93da969c301444",
+   "contact_pairs": [],
+   "contact_pairs_listed_all": true,
+   "least_clearance": {
+    "exact": "1/5000000000000000000000000000",
+    "short": "2.00000000000e-28",
+    "square": 1,
+    "wall": "left"
+   },
+   "least_margin": {
+    "exact": "1/5000000000000000000000000000",
+    "pair": [
+     1,
+     2
+    ],
+    "short": "2.00000000000e-28"
+   },
+   "least_positive_clearance": {
+    "exact": "1/5000000000000000000000000000",
+    "short": "2.00000000000e-28",
+    "square": 1,
+    "wall": "bottom"
+   },
+   "least_positive_margin": {
+    "exact": "1/5000000000000000000000000000",
+    "pair": [
+     1,
+     2
+    ],
+    "short": "2.00000000000e-28"
+   },
+   "margins_sha256": "0c3eb087b201c676e65c34b5942c16220892d6e16b633a404b85a15c9f94b81f",
+   "overlap_pairs": [],
+   "pairs": 78,
+   "positive_margins_below": {
+    "1e-1": 20,
+    "1e-12": 20,
+    "1e-15": 20,
+    "1e-2": 20,
+    "1e-20": 20,
+    "1e-3": 20,
+    "1e-30": 0,
+    "1e-6": 20,
+    "1e-9": 20
+   },
+   "wall_contacts": [],
+   "walls": {
+    "bottom": {
+     "clear": 13,
+     "contact": 0,
+     "cross": 0
+    },
+    "left": {
+     "clear": 13,
+     "contact": 0,
+     "cross": 0
+    },
+    "right": {
+     "clear": 13,
+     "contact": 0,
+     "cross": 0
+    },
+    "top": {
+     "clear": 13,
+     "contact": 0,
+     "cross": 0
+    }
+   }
+  },
+  "method_b": {
+   "classes": {
+    "apart": 78,
+    "contact": 0,
+    "overlap": 0
+   },
+   "overlap_area_total": "0",
+   "pairs": 78,
+   "senses": {
+    "ccw": 13,
+    "cw": 0
+   },
+   "squares_with_area_inside_one": 13
+  }
+ },
+ "extent": {
+  "box_is_tight": false,
+  "height": "40000000000000000000000000007/5000000000000000000000000000",
+  "side_less_height": "1/2000000000000000000000000000",
+  "side_less_width": "1/2000000000000000000000000000",
+  "width": "40000000000000000000000000007/5000000000000000000000000000",
+  "xmax": "5000000000000000000000000001/625000000000000000000000000",
+  "xmin": "1/5000000000000000000000000000",
+  "ymax": "5000000000000000000000000001/625000000000000000000000000",
+  "ymin": "1/5000000000000000000000000000"
+ },
+ "inputs": {
+  "json": {
+   "path": "out/synthetic/dilated.json",
+   "sha256": "76069bbed6b30524f14fb5a46c204a0fc83fcbadcaf6bd5f3d949ff22157d331"
+  },
+  "witness": {
+   "path": "out/synthetic/dilated.yaml",
+   "sha256": "53f8713c97dcbeaf72ca14278d57aa67da91a7abef8a478470848dd9c77dd699"
+  }
+ },
+ "platform": "Linux-6.18.44-fc-v595-x86_64-with-glibc2.39",
+ "problems": [],
+ "program": "rv1031_check.py",
+ "python": "3.14.7",
+ "reading": {
+  "json": {
+   "final_newline": false,
+   "format": "synthetic",
+   "lines": 86,
+   "n": 13,
+   "note_count": 0,
+   "notes": [],
+   "side_text": "80000000000000000000000000019/10000000000000000000000000000"
+  },
+  "witness": {
+   "claim": {
+    "coordinate_provenance": "reported",
+    "limitations": "synthetic",
+    "method": "exact-algebraic"
+   },
+   "envelope_status": "enforced",
+   "final_newline": true,
+   "has_certificate": false,
+   "has_source": false,
+   "id": "W-n013-synthetic",
+   "id_style": "square-k",
+   "lines": 152,
+   "n": 13,
+   "note_count": 0,
+   "notes": [],
+   "origin": "lower-left",
+   "representation": "corners",
+   "side_text": "80000000000000000000000000019/10000000000000000000000000000"
+  }
+ },
+ "side": {
+  "exact": "80000000000000000000000000019/10000000000000000000000000000",
+  "same_in_both_forms": true,
+  "same_text": true,
+  "short": "8.00000000000000000000000000190e+0"
+ },
+ "twin": {
+  "fail_count": 0,
+  "fails_at": [],
+  "holds_at": 13,
+  "listings": {
+   "offset 0 ccw": 13
+  }
+ },
+ "verdict": "ACCEPT"
+}

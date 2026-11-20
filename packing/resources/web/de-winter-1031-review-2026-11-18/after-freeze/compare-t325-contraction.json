@@ -1,0 +1,21 @@
+{
+ "agree": true,
+ "ours_first_contact_pairs": [
+  [
+   71,
+   140
+  ]
+ ],
+ "ours_margin_short": "3.56121490758e-27",
+ "program": "rv1031_compare.py",
+ "record_binding_pair": [
+  71,
+  140
+ ],
+ "record_margin_float": "3.561215e-27",
+ "record_receipt": "/home/user/wt/r1031/packing/resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-n299-own.json",
+ "same_contracted_side": true,
+ "same_factor": true,
+ "same_margin": true,
+ "same_side": true
+}

@@ -1,0 +1,76 @@
+{
+ "added_after_pin": [
+  "REGISTRATION.md",
+  "SHA256SUMS"
+ ],
+ "head_listing_names": [
+  "README.md",
+  "REGISTRATION.md",
+  "SHA256SUMS",
+  "check_area.py",
+  "n299_exact.json",
+  "n299_record.png",
+  "n299_witness.yaml",
+  "verify_exact.py"
+ ],
+ "pin": "497eb478b790175ea8690671b66785b70c97f9f2",
+ "pin_committed": "2026-11-18T06:34:51Z",
+ "pin_files_changed": [
+  "README.md",
+  "n299/README.md",
+  "n299/check_area.py",
+  "n299/n299_exact.json",
+  "n299/n299_record.png",
+  "n299/n299_witness.yaml",
+  "n299/verify_exact.py"
+ ],
+ "pin_listing_names": [
+  "README.md",
+  "check_area.py",
+  "n299_exact.json",
+  "n299_record.png",
+  "n299_witness.yaml",
+  "verify_exact.py"
+ ],
+ "program": "rv1031_custody.py",
+ "routes": {
+  "api": {
+   "n299_exact.json": {
+    "blob_as_listed_at_head": true,
+    "blob_as_listed_at_pin": true,
+    "bytes": 182141,
+    "git_blob": "0a8e81206df2297ff757ce9276a07da585ea34b8",
+    "sha256": "199e6132eeb4104d9894e4296f2bac3d244175f745163f63130e9f2065ed4a9c",
+    "sha256_as_in_source_SHA256SUMS": true
+   },
+   "n299_witness.yaml": {
+    "blob_as_listed_at_head": true,
+    "blob_as_listed_at_pin": true,
+    "bytes": 712311,
+    "git_blob": "7b6331f2f2978a85342deeafbe2829291fef5183",
+    "sha256": "bb52b883e96f4bab4119d0e2c66bc1004f9b35ceee33b24cc4b9d123ddea95a6",
+    "sha256_as_in_source_SHA256SUMS": true
+   }
+  },
+  "raw": {
+   "n299_exact.json": {
+    "blob_as_listed_at_head": true,
+    "blob_as_listed_at_pin": true,
+    "bytes": 182141,
+    "git_blob": "0a8e81206df2297ff757ce9276a07da585ea34b8",
+    "sha256": "199e6132eeb4104d9894e4296f2bac3d244175f745163f63130e9f2065ed4a9c",
+    "sha256_as_in_source_SHA256SUMS": true
+   },
+   "n299_witness.yaml": {
+    "blob_as_listed_at_head": true,
+    "blob_as_listed_at_pin": true,
+    "bytes": 712311,
+    "git_blob": "7b6331f2f2978a85342deeafbe2829291fef5183",
+    "sha256": "bb52b883e96f4bab4119d0e2c66bc1004f9b35ceee33b24cc4b9d123ddea95a6",
+    "sha256_as_in_source_SHA256SUMS": true
+   }
+  }
+ },
+ "routes_agree": true,
+ "verdict": "CUSTODY_HOLDS"
+}
