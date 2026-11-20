@@ -551,9 +551,10 @@ _README_I38N = (
     "(think-i38n), beside the runs' receipt, blocks and reports"
 )
 
-#: Both generators on the witness the pass of 18 November 2026 adopted at 127 from Joost
-#: de Winter's issue 1020 (T-330, think-zqot): Evan Daniel's regularizer and grid-slack at
-#: 0.5, 1 and 5 degrees. None draws an adoptable view, so the selection decides 127.
+#: Both generators, run on 18 November 2026, on the witness the pass of 20 November 2026
+#: adopted at 127 from Joost de Winter's issue 1020 (T-330, think-zqot): Evan Daniel's
+#: regularizer and grid-slack at 0.5, 1 and 5 degrees. None draws an adoptable view, so the
+#: selection decides 127.
 _RUNZQOT = (
     ("evand-regularize", "evand-regularize-adopt-2026-11-18-n127-evand"),
     ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-18-n127-grid-deg05"),

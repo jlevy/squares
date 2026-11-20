@@ -13863,7 +13863,7 @@ selected_overrides:
   value: '11.8007937266149623'
   evidence: E-de-winter-1020-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-330).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-330).
 - n: 129
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '11.87001385040446435'

@@ -2818,7 +2818,7 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: the hold still holds jazivxt alone there. Lane L187 (think-0y9m) credits Tomáš Kodaj as
 #: the finder and JoeGun as the improver at 127, 204, 232, 264 and 305 (T-305 to T-309, in
 #: the same pass), two new names, so the hold holds both there, and Özden no longer at 232,
-#: where no case record names him now. The pass of 18 November 2026 (think-zqot) adopts
+#: where no case record names him now. The pass of 20 November 2026 (think-zqot) adopts
 #: Joost de Winter's packing at 127 (T-330), crediting him alone there, a name the block
 #: already prints, so the hold holds Kodaj and JoeGun at the other four only.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {

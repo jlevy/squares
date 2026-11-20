@@ -3638,11 +3638,12 @@ CREDITS: dict[int, Credit] = {
     # identity). Kodaj is the finder and JoeGun the improver, as the issue asks; Kodaj's
     # packing is not in hand, so that lineage is the issue's statement. The same for 204,
     # 232, 264 and 305 below.
-    # The pass of 18 November 2026 (think-zqot, lane w6r-dewinter-1118): Joost de Winter's
-    # issue 1020 (T-330), the third and smallest of his reports at 127 that evening, from an
-    # arrangement in the Kaggle compilations of Alex Chilton and Asterios Panoras whose finder
-    # the issues could not establish; a new arrangement relative to T-305's packing (no
-    # symmetry one to one, 9 squares beyond a tenth), so de Winter is its finder.
+    # The pass of 20 November 2026 (think-zqot, lanes w6r-dewinter-1118 and c1-127): Joost
+    # de Winter's issue 1020 (T-330), the third and smallest of his reports at 127 on the
+    # evening of 17 November, from an arrangement in the Kaggle compilations of Alex Chilton
+    # and Asterios Panoras whose finder the issues could not establish; a new arrangement
+    # relative to T-305's packing (no symmetry one to one, 9 squares beyond a tenth), so de
+    # Winter is its finder.
     127: Credit(
         (DE_WINTER,),
         (),

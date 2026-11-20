@@ -1830,8 +1830,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 1001 (T-305 to T-309) in the same pass. Lane w3-pass-1117r moved 147, 156, 180, 210,
     # 260, 268, 270, 272, 292, 295, 299 and 307 to Mykhailo Polkovskyi's certificates of
     # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November, and lane
-    # w6r-dewinter-1118 127 on from T-305 to Joost de Winter's certificate of issue 1020
-    # (T-330) in the same pass.
+    # c1-127 127 on from T-305 to Joost de Winter's certificate of issue 1020 (T-330) in the
+    # pass of 20 November.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",

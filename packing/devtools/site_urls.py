@@ -269,7 +269,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-174.html": (
-        375_000,
+        400_000,
         (
             "The complete 68-case result and its 89-step history with prepared math "
             "measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS "
@@ -278,8 +278,12 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "(31ddae6fe), and 353,469 once T-305 and T-309 (#1001) are listed at 127 and "
             "305, about 2.3 KB a result, past the 350,000 ceiling, and 353,877 once they "
             "are adopted there in T-174's place, so the ceiling moves to 375,000 as a "
-            "measured choice, room for about 9 more listed results. Those are byte "
-            "measurements only; the timing is owed under think-v4me."
+            "measured choice, room for about 9 more listed results. Hosted run 44270272824 "
+            "measures 371,984 bytes on main 1015fc175 on 18 November 2026, and run "
+            "44270940873 376,172 once T-328 to T-330 (#1015, #1017, #1020) are listed at "
+            "127, about 1.4 KB a result, past the 375,000 ceiling, so the ceiling moves to "
+            "400,000 as a measured choice, room for about 17 more listed results at that "
+            "cost. Those are byte measurements only; the timing is owed under think-v4me."
         ),
     ),
     "result/t-180.html": (

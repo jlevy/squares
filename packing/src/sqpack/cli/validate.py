@@ -296,8 +296,8 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: squares and 2,471 translating ones, and n=1..324 3,245 and 7,844, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
-    "n=1..200": (68, 773, 182, 2471),
-    "n=1..324": (126, 3245, 302, 7844),
+    "n=1..200": (68, 691, 182, 2420),
+    "n=1..324": (126, 3163, 302, 7793),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
