@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **278** programs: **57** external and **221** first-party; **192** decide claims and **86** check premises.
-- **791** of **1016** evidence entries name the programs that verified them: 387 independently re-implemented, 323 reproduced with the producer’s code, 57 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **281** programs: **57** external and **224** first-party; **194** decide claims and **87** check premises.
+- **793** of **1019** evidence entries name the programs that verified them: 388 independently re-implemented, 324 reproduced with the producer’s code, 57 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -182,7 +182,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 4 | 4 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 173 | 37 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 174 | 38 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 8 | 8 |
 | [`V-replay-k2m5-family`](#v-replay-k2m5-family) | devtools.replay_k2m5_family | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -310,6 +310,9 @@ second implementation agrees.
 | [`V-wand125-n29-review-exact-capture`](#v-wand125-n29-review-exact-capture) | fine_net_exact.capture | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-wand125-n29-review-axis-decision`](#v-wand125-n29-review-axis-decision) | axis_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-wand125-n29-review-oblique-decision`](#v-wand125-n29-review-oblique-decision) | oblique_decide.py (with fine_net_exact.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-de-winter-1018-review-premises`](#v-de-winter-1018-review-premises) | rv1018_premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-de-winter-1018-review-axis`](#v-de-winter-1018-review-axis) | rv1018_axis.py (with rv1018_common.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-de-winter-1018-review-bnb`](#v-de-winter-1018-review-bnb) | rv1018_decide.py with rv1018_bnb.c (and rv1018_common.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 
 ## By Program
 
@@ -3456,6 +3459,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-wand125-fine-net-n39-66625-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 2,073 of 2,073: complete legal core-centre domains at every declared-net direction | T-176 |
 | `E-ozden-890-n94-9965-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 600 of 600: complete legal core-centre domains at every declared-net direction | T-262 |
 | `E-ozden-910-n94-9972-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 4,972 of 4,972: complete legal core-centre domains at every declared-net direction | T-266 |
+| `E-de-winter-1018-n108-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | full, 401 of 401: complete legal core-centre domains at every declared-net direction | T-327 |
 
 ### `V-replay-chelokot-lean`
 
@@ -5648,6 +5652,54 @@ Decides one oblique direction of a format M certificate over its whole per-bin d
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-wand125-fine-net-n29-582-review-sample` | replayed here | independently re-implemented after reading the producer’s code | sample, 10 of 2,073: net directions, each decided over its whole per-bin domain | - |
+
+### `V-de-winter-1018-review-premises`
+
+**rv1018_premises.py, rv1018_measure.py and rv1018_runs.py (with rv1018_common.py)** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes in exact rationals, apart from the crate and the import lane's tools, every premise of #1018's rescaled measure on its declared net: the format, the rows, their D4 expansion and the mass 10799999/100000 < 108, lemma N0 on 401 half-angles of step 83/80000 at core side 12487/12500, the per-bin domain, and the proof's enlargement (u, h and the claimed side, uS + 2h(1 - u) = L); reads the measure row by row against T-216's retained mixed_n108_L1062 times 1063/1062; and reads the twelve archived run logs for coverage of r = 0 to 400, each verified at threshold 1 on those premises, of reviewed crate source. Printed PREMISES_HOLD, SCALED_COPY and RUNS_COVER_THE_NET.
+
+- Source: [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_premises.py`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_premises.py), [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_measure.py`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_measure.py), [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_runs.py`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_runs.py), [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-18-de-winter-1018.md`](../../docs/project/reviews/review-2026-11-18-de-winter-1018.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the blind stage 4 mathematical review lane r108-1118 of the #1018 import (think-i5en), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source says its files and checks were produced with Claude agents. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that import nothing from this repository or the source.
+- Note: Written and run on 18 November 2026 by the blind stage 4 review of #1018 (docs/project/reviews/review-2026-11-18-de-winter-1018.md); kept in the packet packing/resources/web/de-winter-1018-review-2026-11-18/ with its README and receipts. rv1018_custody.py, rv1018_poses.py, rv1018_sample.py, rv1018_selftest.py and rv1018_controls.py, kept beside it, decide nothing and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-1018-n108-review-decision` | replayed here | independently re-implemented, clean-room | full, 401 of 401: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-de-winter-1018-review-axis`
+
+**rv1018_axis.py (with rv1018_common.py)** · Squares Project (Levy) · first-party · decides · Python · numerical-f64, exact-algebraic
+
+Decides direction 0 of a format M measure over its whole per-bin quadrant: the capture is bilinear on each cell of the grid of exact, sorted events, so its least is at a vertex; every vertex is bounded below from one binary64 matrix product of nonnegative terms under a proved a priori error bound, and the 64 least are evaluated exactly. Decided direction 0 of #1018's measure, rigorous least 1.0074788332233897, exact least 1.0074788336918701996 at the source's argmin, and refused the 99/100 copy there, exact least 0.99740404535495.
+
+- Source: [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_axis.py`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_axis.py), [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-18-de-winter-1018.md`](../../docs/project/reviews/review-2026-11-18-de-winter-1018.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the blind stage 4 mathematical review lane r108-1118 of the #1018 import (think-i5en), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source says its files and checks were produced with Claude agents. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that import nothing from this repository or the source.
+- Note: Written and run on 18 November 2026 by the blind stage 4 review of #1018 (docs/project/reviews/review-2026-11-18-de-winter-1018.md); kept in the packet packing/resources/web/de-winter-1018-review-2026-11-18/ with its README and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-1018-n108-review-decision` | replayed here | independently re-implemented, clean-room | full, 401 of 401: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-de-winter-1018-review-bnb`
+
+**rv1018_decide.py with rv1018_bnb.c (and rv1018_common.py)** · Squares Project (Levy) · first-party · decides · Python, C · interval-certified, exact-algebraic
+
+Decides one rotated direction of a format M measure over its whole per-bin quadrant by a branch and bound of its own: a box of centres is accepted when the capture of the square every core of the box contains, with a ring of strips beside it, is bounded below by the threshold through one cumulative integration per rectangle and side, in binary64 with directed rounding, the half-side, quadrant, rectangles, densities and masses rounded the safe way; a candidate below the threshold is confirmed in exact rationals and refused with that witness. Decided all 400 rotated directions of #1018's measure (5,483,404 boxes) and refused the 99/100 copy at all 400 with exact witnesses.
+
+- Source: [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_decide.py`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_decide.py), [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_bnb.c`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_bnb.c), [`packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py`](../../packing/resources/web/de-winter-1018-review-2026-11-18/programs/rv1018_common.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-18-de-winter-1018.md`](../../docs/project/reviews/review-2026-11-18-de-winter-1018.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the blind stage 4 mathematical review lane r108-1118 of the #1018 import (think-i5en), tbd-strong-max tier, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source says its files and checks were produced with Claude agents. Written by a Claude agent prompted separately from the source and from the import lane, in files of its own that import nothing from this repository or the source.
+- Note: Written and run on 18 November 2026 by the blind stage 4 review of #1018 (docs/project/reviews/review-2026-11-18-de-winter-1018.md); kept in the packet packing/resources/web/de-winter-1018-review-2026-11-18/ with its README and receipts.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-1018-n108-review-decision` | replayed here | independently re-implemented, clean-room | full, 401 of 401: net directions, each decided over its whole quadrant of centres | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

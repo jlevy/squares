@@ -321,12 +321,27 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-261.html": (
-        500_000,
+        525_000,
         (
             "The grade-C local minima at 233 counts, the scopes of its three evidence "
             "entries and prepared math measure 470,189 bytes on 31 October 2026, as T-124's "
-            "roster of 178 configurations needs its own exception. A byte measurement only; "
-            "the page's timing is owed under think-v4me."
+            "roster of 178 configurations needs its own exception. Hosted run 44247789006 "
+            "measures 502,411 bytes on 18 November 2026 at PR #1029's db76300d2, past 500,000 "
+            "once its register list at 108 and 109 names T-327 (#1018) after #1009's "
+            "thirteen results (T-314 to T-326), so the ceiling moves to 525,000 as a "
+            "measured choice, 22,589 bytes of room, about nine more such rows at about 2.4 "
+            "KB. A byte measurement only; the page's timing is owed under think-v4me."
+        ),
+    ),
+    "result/t-101.html": (
+        325_000,
+        (
+            "The exact certificate at 109, its register list there and prepared math "
+            "measure 300,939 bytes on 18 November 2026 at PR #1029's db76300d2 (hosted run "
+            "44247789006), past the result budget of 300,000 once that list names T-327 "
+            "(#1018), about 2.6 KB with its headline's prepared math. The ceiling moves to "
+            "325,000 as a measured choice, room for about nine more such rows. A byte "
+            "measurement only; the page's timing is owed under think-v4me."
         ),
     ),
     "tutorial-advanced.html": (

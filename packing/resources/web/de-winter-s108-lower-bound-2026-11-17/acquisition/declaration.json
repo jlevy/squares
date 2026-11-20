@@ -1,0 +1,75 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "de-winter-s108-lower-bound-2026-11-17",
+  "source_url": "https://github.com/JoostdeWinter/square-packing",
+  "source_ref": "main",
+  "source_commit": "cc20a26845789c2502950041c26709eda8a71081",
+  "retrieved_at_utc": "2026-11-18T01:21Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, a watched repository, fetched at 01:21Z on 18 November 2026 for the intake of jlevy/squares#1015, #1017, #1018 and #1020 (lane w6-dewinter-1118, beads think-zqot and think-i5en), when git ls-remote read main's head as 838c5ea (2026-11-17T22:48:48Z). The pin is cc20a26 (committed 2026-11-17T22:26:24Z, 'Add the new n = 127 certificate, the lower bound for n = 108 and the packings for n between 1,036 and 9,928', the author's message), the commit #1018 (22:27:34Z) names, 70 seconds before it; GitHub's activity log, read on 18 November, gives its push with the next commit, 67fb815, at 22:26:28Z. It first commits lower_n108/: the one-page proof, the rescaled measure and Hosono's original, twelve archived sqverify-fast runs covering the 401 directions, a copy of this repository's sqverify_fast crate and SOUNDNESS.md with its licence, the rescaling script, the author's exact audit and its output, and a replay script. The same commit's n127/ is #1017's certificate, which the de-winter-s127-issue1017-2026-11-17 packet retains, and its above1000/ is #1019's, held for think-1tkk; neither is in this packet's scope. 67fb815 (22:26:24Z) adds lower_n108/REGISTRATION.md, the issue's text in the registration template's form, and lower_n108/SHA256SUMS, whose 36 digests match the pin's files but for REGISTRATION.md itself, which the pin lacks; later commits leave lower_n108/ unchanged through the head. The scope is the licence, the root README and the whole of lower_n108/. LICENSE is pinned against its byte-identical copy in the de-winter-upper-bounds-227-229-260-2026-10-17 packet, and Hosono_n108.json.gz, the crate copy, SOUNDNESS.md and the two copies of this repository's LICENSE by digest only, each compared at intake with this repository's file, Hosono_n108.json.gz with the copy of T-216's candidate the wand125-fine-net-lower-bounds-2026-10-16 packet retains. No source program ran in writing this packet; check_lower.py, stretch_measure.py and replay_lower.sh are retained as data and never executed here.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The measure rescales Hiroaki Hosono's T-216 certificate, MIT by its own packet's licence, and the crate copy and SOUNDNESS.md are this repository's files under its own LICENSE, which the source bundles.",
+  "claims": [
+    "lower_n108/README.md, proof_n108.pdf and #1018 state s(108) >= 1700799526134255846599/159999384348528500000 = 10.6300379408297263703..., rounded down at 12 places as 10.630037940829, and the same bound for s(109), since a packing of 109 squares contains one of 108; #1018 names the record's lower bound 10.62 at 108 (T-216, Hiroaki Hosono) and the gain, 0.0100, at both counts.",
+    "lower_n108/evidence/n108_measure.json.gz is Hosono's measure of T-216 with every rectangle coordinate multiplied by 1063/1062 and every mass kept: total mass 10799999/100000 in the square of side 1063/100, 823 rectangle orbits under the square's eight symmetries, with the core side B = 12487/12500 and a declared net of 401 half-angle tangents r 83/80000, r = 0 to 400 (proof_net step 83/80000, last 400). The twelve files under evidence/direction_runs/ are said to be the unmodified outputs of this repository's sqverify_fast (jlevy/squares at f9ddfeeef, format M, per-bin centre domains) for the 401 directions, every one verified, 266,337,510 branch-and-bound nodes in all.",
+    "proof_n108.pdf argues: for each direction the verifier certifies that every closed square of side B at that direction with its centre in [w(a_r), L - w(a_r)]^2 captures mass at least one, w(t) = (1 + 2t - t^2)/(2(1 + t^2)) and a_r = max(0, rD - D/2); with z0 = D/2, u = 2B w(z0) = 319998768697057/320000086112500 and h = 707107/10^6 > 1/sqrt 2, the claimed side is S = 2h + (L - 2h)/u; a packing of 108 unit squares in [0, S]^2, scaled by u and translated by h(1 - u), lies in [0, L]^2 with each square's centre clear of every wall by at least its axis half-width, so each contains a core at its nearest grid direction inside the verified domain, and 108 cores with disjoint interiors would capture at least 108, more than the total mass. check_lower.py (Fraction arithmetic, standard library) is said to rebuild the measure, check the receipts' input and source hashes and one verified record per direction, integrate all eight images of every rectangle at the axis direction independently (minimum capture 1.007478833692, 0.997404045355 with every mass reduced by 1%) and check the enlargement; lower_checks.txt is its output. #1018 says the full replay has not been repeated independently, that the bound is not claimed to be close to optimal, asks for credit to Joost de Winter, Delft University of Technology, after Hiroaki Hosono, and says the rescaling, computation and proof were produced with GPT-6.2 Astra (OpenAI) and the repository files and checks with Claude (Anthropic), both under his direction. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "LICENSE",
+    "README.md",
+    "lower_n108"
+  ],
+  "original_gzip": [
+    "lower_n108/evidence/n108_measure.json.gz",
+    "lower_n108/evidence/direction_runs/directions_000_030.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_031_061.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_062_092.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_093_122.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_123_157.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_158_192.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_193_227.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_228_262.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_263_297.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_298_332.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_333_367.jsonl.gz",
+    "lower_n108/evidence/direction_runs/directions_368_400.jsonl.gz"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+      "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+    },
+    {
+      "match": "lower_n108/sqverify_fast/src/*.rs",
+      "reason": "This repository's own sqverify_fast crate as the source bundled it, file for file the packing/sqverify_fast/src/ of jlevy/squares at f9ddfeeef9070ede581142154ab992149b278ab0 and of main at eb50f54e9 (crate source d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88 by build.rs's rule, the source the declared-net soundness review of 6 October 2026 accepted), compared at intake; pinned by digest and not copied, since the replay builds the crate from this repository's tree."
+    },
+    {
+      "match": "lower_n108/sqverify_fast/Cargo.toml",
+      "reason": "This repository's own sqverify_fast crate as the source bundled it, file for file the packing/sqverify_fast/Cargo.toml of jlevy/squares at f9ddfeeef9070ede581142154ab992149b278ab0 and of main at eb50f54e9 (crate source d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88 by build.rs's rule, the source the declared-net soundness review of 6 October 2026 accepted), compared at intake; pinned by digest and not copied, since the replay builds the crate from this repository's tree."
+    },
+    {
+      "match": "lower_n108/sqverify_fast/Cargo.lock",
+      "reason": "This repository's own sqverify_fast crate as the source bundled it, file for file the packing/sqverify_fast/Cargo.lock of jlevy/squares at f9ddfeeef9070ede581142154ab992149b278ab0 and of main at eb50f54e9 (crate source d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88 by build.rs's rule, the source the declared-net soundness review of 6 October 2026 accepted), compared at intake; pinned by digest and not copied, since the replay builds the crate from this repository's tree."
+    },
+    {
+      "match": "lower_n108/sqverify_fast/build.rs",
+      "reason": "This repository's own sqverify_fast crate as the source bundled it, file for file the packing/sqverify_fast/build.rs of jlevy/squares at f9ddfeeef9070ede581142154ab992149b278ab0 and of main at eb50f54e9 (crate source d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88 by build.rs's rule, the source the declared-net soundness review of 6 October 2026 accepted), compared at intake; pinned by digest and not copied, since the replay builds the crate from this repository's tree."
+    },
+    {
+      "match": "lower_n108/sqverify_fast/LICENSE",
+      "reason": "This repository's root LICENSE, byte for byte at main eb50f54e9, bundled with the crate copy; pinned by digest only."
+    },
+    {
+      "match": "lower_n108/evidence/squares-project-license.txt",
+      "reason": "This repository's root LICENSE, byte for byte at main eb50f54e9, as the source copied it beside SOUNDNESS.md; pinned by digest only."
+    },
+    {
+      "match": "lower_n108/evidence/SOUNDNESS.md",
+      "reason": "This repository's packing/sqverify_fast/SOUNDNESS.md, byte for byte at main eb50f54e9, as the source copied it; pinned by digest only."
+    },
+    {
+      "match": "lower_n108/evidence/Hosono_n108.json.gz",
+      "reason": "Hiroaki Hosono's mixed_n108_L1062 candidate, T-216's certificate, as gzip: its stored bytes (SHA-256 acaf2759...835b) are byte for byte packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz, that packet's gzip of the file T-216 rests on, compared at intake; it is retained there under that packet's custody, and the rescaling audit reads the base from there."
+    }
+  ]
+}

@@ -18811,22 +18811,14 @@ occurrences:
     path: packing/frontier/n-108.md
     record_key: '108'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: de Winter
   start: 0
-  end: 6
-  label: Hosono
+  end: 9
+  label: de Winter
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  note: Reviewed packing/frontier/n-108.md [108] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage. The lower bound's source,
-    [wand125 fine-net lower bounds 2026-10-16], is a set of commits to wand125/square-packing;
-    the join rests on that repository being the wand125 account's own, which the owner
-    decision of 13 October 2026 identifies as Hiroaki Hosono, and the packet's retained
-    commit-author metadata names him as author of all 18 commits.
-  contributor_id: hiroaki-hosono
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-108.md
     record_key: '108'
@@ -18863,19 +18855,14 @@ occurrences:
     path: packing/frontier/n-109.md
     record_key: '109'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: de Winter
   start: 0
-  end: 6
-  label: Hosono
+  end: 9
+  label: de Winter
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-109.md [109] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-110.md
     record_key: '110'
@@ -33735,6 +33722,66 @@ occurrences:
     Levy
   start: 66
   end: 70
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s108 lower bound 2026-11-17]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s108 lower bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Hosono, Tokoharu, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s108 lower bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Hosono, Tokoharu, Levy
+  start: 16
+  end: 22
+  label: Hosono
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s108 lower bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Hosono, Tokoharu, Levy
+  start: 24
+  end: 32
+  label: Tokoharu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s108 lower bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Hosono, Tokoharu, Levy
+  start: 34
+  end: 38
   label: Levy
   role: prerequisite
   disposition: unresolved
