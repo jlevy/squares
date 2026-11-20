@@ -1,0 +1,5 @@
+# Plan freeze, lane rR2-lower (bead think-bgi2). Written before any source program was opened or run.
+# Frozen at 2026-11-20T19:51:16Z. Verify from this directory: sha256sum -c frozen/plan-frozen-digest.txt
+35498601ec54b8d9884d678446bf3924f7e9647051f5f6641579e9a579d72b37  programs/review-plan.md
+c8189dde93224c08315bf94ea969bf17d89c89343846f0093d5abbce54ff2810  programs/issues-1039-1041-1042.json
+88343469da2b04dc1fdbbac5a534cd6dc8e003f6c236355f4e6d1bdefe29ef32  programs/source-files.sha256
