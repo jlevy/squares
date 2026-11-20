@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 84
+version: 85
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -79,7 +79,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-20T22:48:16.498Z
+updated_at: 2026-11-20T23:02:31.061Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -136,3 +136,15 @@ The /Volumes/spud-ext2 scratch drive is unmounted and no project virtualenv is p
 - #1037 triaged in think-36ui. All seven reported ceilings improve the displayed houses. Validate the exact comparisons and certificates before an adoption.
 - Records follow-ups in think-qc3o. Verified the three author archives on #1017, #1022 and #1031 and read all four comments. #1017's missing-file ask has an answer. Record the #1009 and #1017 comments already posted instead of posting them again. Main lacks the six noted comment IDs and the #1055 entry.
 - After merging any intake PR, verify its deploy, render replies with check_requests from main, post and record the replies, close settled issues and repeat the intake sweep.
+
+### Follow-up before pausing local validation
+
+Searched the local Claude project/session logs, Git reflogs, stashes, and registered worktrees for the interrupted session and its checkout names. The previous cloud checkout files were not recovered. Continue from the published PR heads above.
+
+Posted read-only findings on #1030 (7052635527), #1045 (7052636150), #1047 (7052636677) and #1051 (7052637275). These notes do not satisfy the full engineering review gate. Added the intake label to #1040, #1047 and #1051. Updated #1045’s title to show adoption pending and #1047’s status for #1049, the recorded credit decision and the recovered 259 archives. #1047 now has its draft’s stated S3 label.
+
+For #1051, compared all 449 members of the original #1041 ZIP to the acquisition manifest for 21d944c. At their original paths, 445 match, including all 290 proof members. Three metadata files differ (README.md, RESULTS.md and SHA256SUMS). The newer top-level verify.py dispatches to different releases by count. Its verify_previous.py is byte-identical to the original ZIP’s verifier (SHA-256 05a863e3d5754eb5f5cfda211aecc77d465929b1dd551820d680215a43008a3e). Run the original ZIP to certify the original archive, with its original checksum list.
+
+For #1030’s Review A, 3fe9c94e09 carries A1/A3/A6/A9, 0364df4c5d carries A2/A7/A8, 6cb20889cd carries A5/A11 and d8845d17ed repairs subsequent hosted findings. The PR description records earlier evidence for A10/A12 and assigns post-merge bead follow-up for A13. A4 recurred as main moved. Use this evidence when drafting the marked dispositions after conflict resolution, regeneration and the exact-head checks.
+
+The Kingbird comparison page and Evan Daniel’s packing site each returned HTTP 200. The live GitHub source checks in this session were partial. The full make intake sweep is due once the validation environment is available.
