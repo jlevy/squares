@@ -14,8 +14,9 @@ Intake lane L78 (think-2h88) retained the source and replayed the certificate on
 November 2026, and on 10 November, after #938’s import (lane L76, PR #940) made T-284 the
 house at 199, compared it with T-284, measured it and registered it as **T-285, held at
 V0/C1** for the owner’s RV-3 (think-ruu2). The owner’s option D of 17 November 2026
-(think-b0w5) made it a new result, and on 18 November 2026 lane w7-optd-1118 (think-8yyy)
-raised it to V3/C3 and adopted it as the house at 199, in place of T-284
+(think-b0w5) made it a new result: on 18 November 2026 lane w7-optd-1118 (think-8yyy)
+raised it to V3/C3, and on 20 November 2026 the branch’s pass adopted it as the house at
+199, in place of T-284
 ([Padding (Option D)](#padding-option-d)).
 
 ## What the Source Claims
@@ -248,8 +249,8 @@ new result.
 Lane w7-optd-1118 (think-8yyy) entered, on 18 November 2026, the replay above
 (`E-de-winter-939-exact-feasibility`) and the stage 4 review’s clean-room run
 (`E-de-winter-939-review-exact-feasibility`) as evidence, raised T-285 to V3/C3, and
-adopted it as the house at 199 under the house rule, with both strong generators’
-regularization of the new witness
+regularized the new witness with both strong generators; the pass of 20 November 2026
+adopted it as the house at 199 under the house rule
 ([think-8yyy-2026-11-18](../../../cases/regularized_drawings/think-8yyy-2026-11-18/README.md)).
 The packet keeps `702c7af`, the commit the issue names; the author’s `c4e65d0b` holds the
 same `n199/` files byte for byte, and T-285 says so.

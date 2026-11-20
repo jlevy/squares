@@ -42767,7 +42767,7 @@ results:
       predecessor is shrunk until its squares first touch, measured through any construction
       (devtools.contraction_margin). This certificate lies 1.0107e-13 below T-284's base so
       contracted with the L written on it, so it is a new result, and the case adopted it as
-      the house at 199 on 18 November 2026. Its core's bound at 172 is not claimed here;
+      the house at 199 on 20 November 2026. Its core's bound at 172 is not claimed here;
       #946 reports that core, tightened, and T-286 records it, adopted at 172 alike.
 
       The issue says the side is less than 1e-98 above the real root near 14.6147 of 62x^5 -
@@ -42918,7 +42918,7 @@ results:
       The implied s(172) bound, this certificate's first 172 squares at S - 1, is not
       claimed here and not registered from this entry: it is think-wju3's held solve with
       less padding. #946 reported the same core a day later, 1.36e-99 lower, and T-286
-      records it, the house at 172 since 18 November 2026.
+      records it, the house at 172 since 20 November 2026.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share certificate parsing,
@@ -42939,14 +42939,14 @@ results:
 
       The pin: the packet keeps the commit the issue names, and the commit the author asks the
       record to cite holds the same n199/ files and licence byte for byte, so both name this
-      certificate. The adoption of 18 November 2026 (lane
-      w7-optd-1118, think-8yyy) moved 199 from T-284 to this certificate under the house
+      certificate. The adoption of 20 November 2026 (lane
+      c4-optd, think-8yyy) moved 199 from T-284 to this certificate under the house
       rule, with both strong generators' regularization of the new house.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 11 November, is
       retained. It is the smallest validated side at 199, a new result under the owner's
-      option D (think-b0w5), and the case adopted it there on 18 November 2026 under the
+      option D (think-b0w5), and the case adopted it there on 20 November 2026 under the
       house rule, with both strong generators' regularization of the new house; T-284 keeps
       its certificate as history. The review's six questions for the author, answered on 14
       November 2026, hold no rung.
@@ -43151,7 +43151,7 @@ results:
       root, which this entry does. Its clean-room run is
       E-de-winter-946-review-exact-feasibility (decide-946.json).
 
-      The adoption of 18 November 2026 (lane w7-optd-1118, think-8yyy) moved 172 from T-282
+      The adoption of 20 November 2026 (lane c4-optd, think-8yyy) moved 172 from T-282
       to this certificate under the house rule, with both strong generators' regularization
       of the new house. Evan Daniel's regularizer reached the same KKT point from T-282's
       witness on 9 November (think-wju3), 1.3615e-19 above this side and never registered;
@@ -43160,7 +43160,7 @@ results:
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 11 November, is
       retained. It is the smallest validated side at 172, a new result under the owner's
-      option D (think-b0w5), and the case adopted it there on 18 November 2026 under the
+      option D (think-b0w5), and the case adopted it there on 20 November 2026 under the
       house rule, with both strong generators' regularization of the new house; T-282 keeps
       its certificate as history. The review's six questions for the author, answered on 14
       November 2026, hold no rung.

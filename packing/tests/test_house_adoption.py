@@ -225,7 +225,7 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: certificate (T-284), T-282's packing with one L step, 2.88e-3 below T-193's side there.
 #: The pass of 18 November 2026 took 292, one of the nine waiting for think-8ido's
 #: correction, to Mykhailo Polkovskyi's issue-1009 certificate (T-323), 1.36e-3 below
-#: T-146 and below T-193's side there, and lane w7-optd-1118 took 199 on to Joost de
+#: T-146 and below T-193's side there, and the pass of 20 November took 199 on to Joost de
 #: Winter's re-solve of T-284's core (T-285), a new result under option D (think-b0w5).
 OVERTAKEN = {175: "T-267", 199: "T-285", 204: "T-306", 232: "T-307", 292: "T-323"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
@@ -306,8 +306,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # JoeGun's issue-1001 certificates (T-305, T-309) in the pass of 16 November, below
     # T-174's sides there. 23 since the pass of 18 November moved 210 and 272 to Mykhailo
     # Polkovskyi's issue-1009 certificates (T-317, T-322), below T-174's sides there, and
-    # 292, staged for T-193, to his T-323 (`OVERTAKEN`). The same pass moved 172 on from
-    # T-282 to Joost de Winter's re-solve of it (T-286), which leaves the count unchanged.
+    # 292, staged for T-193, to his T-323 (`OVERTAKEN`). The pass of 20 November moved 172
+    # on from T-282 to Joost de Winter's re-solve of it (T-286), which leaves the count
+    # unchanged.
     assert len(held_counts) == 23
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -1832,8 +1833,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 1001 (T-305 to T-309) in the same pass. Lane w3-pass-1117r moved 147, 156, 180, 210,
     # 260, 268, 270, 272, 292, 295, 299 and 307 to Mykhailo Polkovskyi's certificates of
     # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November, and
-    # lane w7-optd-1118 172 and 199 to Joost de Winter's re-solves of issues 946 and 939
-    # (T-286, T-285) in the same pass.
+    # the pass of 20 November 172 and 199 to Joost de Winter's re-solves of issues 946 and
+    # 939 (T-286, T-285).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",

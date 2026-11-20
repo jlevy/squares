@@ -13856,7 +13856,7 @@ selected_overrides:
   value: '13.6146898532835806'
   evidence: E-de-winter-946-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-286).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-286).
 - n: 175
   source_id: evand-issue914-2026-11-05-n175
   value: '13.7640500515431752'
@@ -13910,7 +13910,7 @@ selected_overrides:
   value: '14.6146898532835806'
   evidence: E-de-winter-939-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-285).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-285).
 - n: 204
   source_id: joegun-upper-bounds-2026-11-16
   value: '14.8026468431066121'

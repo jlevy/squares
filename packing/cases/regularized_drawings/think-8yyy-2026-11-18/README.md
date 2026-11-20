@@ -1,7 +1,7 @@
 # Regularization Runs After the Adoption at 172 and 199 (think-8yyy)
 
-These are the strong generators’ runs on the two witnesses that the adoption of 18
-November 2026 wrote under
+These are the strong generators’ runs, of 18 November 2026, on the two witnesses that
+the adoption at 172 and 199 wrote under
 [the house rule](../../../campaign/result-import.md#the-house-rule), once the owner’s
 option D of 17 November 2026 (think-b0w5) made Joost de Winter’s re-solves new results:
 each is below its predecessor’s certificate shrunk until its squares first touch, 1.0399
@@ -12,8 +12,13 @@ accepts both certificates.
 
 | n | House | Replaces | Adopted |
 | ---: | --- | --- | --- |
-| 172 | T-286, issue 946 | T-282 | 18 November 2026 |
-| 199 | T-285, issue 939 | T-284 | 18 November 2026 |
+| 172 | T-286, issue 946 | T-282 | 20 November 2026 |
+| 199 | T-285, issue 939 | T-284 | 20 November 2026 |
+
+The adoption was written on 18 November and moved to the pass of 20 November 2026, the
+day the branch merges, since a day’s archive holds one prior state a count; the
+witnesses it writes are built from the retained packets and did not change, so these
+runs and their directory names stand.
 
 ## How They Were Run
 
