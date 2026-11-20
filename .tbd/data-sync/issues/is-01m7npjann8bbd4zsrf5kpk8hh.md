@@ -5,8 +5,8 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 13
-delegate: c7-pointers
+version: 14
+delegate: c14-109
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-20T11:08:21.877Z
+updated_at: 2026-11-20T16:41:43.388Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
