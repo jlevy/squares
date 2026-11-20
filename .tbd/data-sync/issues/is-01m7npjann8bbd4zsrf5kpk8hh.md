@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: c7-pointers
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-20T10:37:04.618Z
+updated_at: 2026-11-20T11:08:21.877Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -74,3 +74,4 @@ Control plan hashed before any program decided the certificate: scratch controls
 Results (c7-pointers, 2026-11-20, branch claude/intake-2026-11-20-pointers-109-259, commits e3e923e44 devtools, d5e220e4c intake, 83bebae6b records): packet de-winter-kodaj-n109-2026-11-18 at aae089c; both routes accept (3 jobs, 35,316 pair decisions, least gap 2.0e-15, wall 0); 11/11 sharp controls as planned. 4.5789e-4 below T-101's ceiling; new arrangement vs the house. Against Samanyu-dev 53551d7 best_fit_101_500.csv (SHA-256 377b9177...6c04): one to one, 37 squares > 1e-3 (max 0.0256); Samanyu's binary64 rows read exactly at their extent are a packing (both routes), contracted to first contact margin 1.9960e-12, 5.57e-14 below Kodaj's side; gain/margin 0.9721 -> option D restatement. Kodaj CSV vs witness 1.8e-15. Ledger upper-bounds-1012-20261120 records it. T-335 (provisional), V3/C3, S3 draft. Review bead think-2ut8 (unclaimed). OWNER: credit (proposed Samanyu-dev as original finder; Fonseca 6 Nov 10.949392392 unmeasured; kmmmvs merge per Samanyu README; Kaggle unreadable). Samanyu-dev's file held the 45-degree 109 at 1d95296 and 942db6d.
 
 PR https://github.com/jlevy/squares/pull/1047 (draft), head 550d73fca; records/edit tiers pass but the contiguity rule (T-335 provisional). Adoption at 109 waits on think-2ut8 and the owner's credit answer.
+Head 0261ad5c4 (tests moved into test_upper_bound_reports.py for the suite shard record). Hosted CI: contiguity-only failures (validate, suite-a); frontend 'site table layout in Chromium' hit its 900 s timeout silently (passed on 550d73fca), not re-run. Worktree removed at handoff.
