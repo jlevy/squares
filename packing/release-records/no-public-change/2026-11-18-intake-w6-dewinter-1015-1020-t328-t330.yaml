@@ -11,7 +11,6 @@ paths:
   - packing/devtools/build_known_best_atlas.py
   - packing/devtools/default_drawings.py
   - packing/devtools/site_resources.py
-  - packing/devtools/site_urls.py
   - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/n-127.md
@@ -36,16 +35,16 @@ reason: >-
   T-330 in the pass of 20 November, with its credit, the house writer's prose and source,
   the settlement of 127's drawing, the composite figure's and bound citations' entries at
   127, the rigidity scope at 127, the requests entries and the coverage text that follow.
-  The gate's pinned translation-screen findings (validate.SCREEN_FINDINGS) and the
-  ceiling of result/t-174.html (site_urls) follow the new witness and the three rows. No
-  paper prints 127's records, these entries or that card. Against origin/main 935e79c36
-  (#1035): devtools.compare_paper_renders rendered each paper into empty site
+  The gate's pinned translation-screen findings (validate.SCREEN_FINDINGS) follow the
+  new witness; the result pages' budgets are #1046's, on main. No
+  paper prints 127's records, these entries or that card. Against origin/main a9e5261a2
+  (#1046): devtools.compare_paper_renders rendered each paper into empty site
   directories, the math passes in /opt/pw-browsers/chromium-1243/chrome-linux64/chrome
   (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of the
-  fourteen paths above swapped in. The optimality review, the threshold-bound review and
+  thirteen paths above swapped in. The optimality review, the threshold-bound review and
   the methods survey are byte-identical across the three, 43 files each. The explainer's
   55 files are deterministic, and only its Markdown and HTML differ from the baseline;
-  rendered again from this tree and with the same fourteen paths swapped in, and diffed,
+  rendered again from this tree and with the same thirteen paths swapped in, and diffed,
   the one difference in each is the register count the explainer reads ("one of N
   results the framework has registered so far"), 330 here and 327 on that main, at one
   line each. The novelty count is unchanged at 32 (T-328 to T-330 are
