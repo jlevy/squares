@@ -1,0 +1,148 @@
+{
+ "program": "r144_bnb.py",
+ "factor": "1",
+ "delta": 1e-13,
+ "sum_factor": 1.000000000002,
+ "nodes": [
+  {
+   "j": 37,
+   "t": "3071/40000",
+   "verdict": "NODE_DECIDED",
+   "quadrant": [
+    5.63,
+    10.69084682110518
+   ],
+   "grid": 32,
+   "stats": {
+    "nodes": 105532,
+    "discharged": 53278,
+    "max_depth": 24,
+    "rect_exact": 3474,
+    "centre_checks_exact": 0,
+    "least_margin": 3.4493487022224656e-07,
+    "least_margin_box": [
+     8.16042341055259,
+     8.199961276342474,
+     9.66286231056819,
+     9.702400176358076
+    ],
+    "max_terms": 248
+   },
+   "witness": null,
+   "undischarged": [],
+   "cpu_seconds": 3.49
+  },
+  {
+   "j": 108,
+   "t": "2241/10000",
+   "verdict": "NODE_DECIDED",
+   "quadrant": [
+    5.63,
+    10.595966386981516
+   ],
+   "grid": 32,
+   "stats": {
+    "nodes": 214812,
+    "discharged": 107918,
+    "max_depth": 28,
+    "rect_exact": 7620,
+    "centre_checks_exact": 0,
+    "least_margin": 9.161018366121709e-08,
+    "least_margin_box": [
+     7.82200860050356,
+     7.831707753603133,
+     6.978182280840684,
+     6.987881433940258
+    ],
+    "max_terms": 250
+   },
+   "witness": null,
+   "undischarged": [],
+   "cpu_seconds": 6.86
+  },
+  {
+   "j": 180,
+   "t": "747/2000",
+   "verdict": "NODE_DECIDED",
+   "quadrant": [
+    5.63,
+    10.556271461870743
+   ],
+   "grid": 32,
+   "stats": {
+    "nodes": 756604,
+    "discharged": 378814,
+    "max_depth": 27,
+    "rect_exact": 35842,
+    "centre_checks_exact": 0,
+    "least_margin": 5.968393557154172e-09,
+    "least_margin_box": [
+     5.892189252609331,
+     5.893391955602952,
+     8.129216820743993,
+     8.130419523737615
+    ],
+    "max_terms": 252
+   },
+   "witness": null,
+   "undischarged": [],
+   "cpu_seconds": 27.35
+  },
+  {
+   "j": 200,
+   "t": "83/200",
+   "verdict": "NODE_DECIDED",
+   "quadrant": [
+    5.63,
+    10.55452019983365
+   ],
+   "grid": 32,
+   "stats": {
+    "nodes": 1185588,
+    "discharged": 593306,
+    "max_depth": 28,
+    "rect_exact": 136144,
+    "centre_checks_exact": 0,
+    "least_margin": 1.101429414340771e-08,
+    "least_margin_box": [
+     6.1301465827956045,
+     6.134955684553255,
+     6.279228737282756,
+     6.284037839040407
+    ],
+    "max_terms": 264
+   },
+   "witness": null,
+   "undischarged": [],
+   "cpu_seconds": 59.8
+  },
+  {
+   "j": 1,
+   "t": "83/40000",
+   "verdict": "NODE_DECIDED",
+   "quadrant": [
+    5.63,
+    10.759084077117153
+   ],
+   "grid": 32,
+   "stats": {
+    "nodes": 1987982,
+    "discharged": 994503,
+    "max_depth": 32,
+    "rect_exact": 3570,
+    "centre_checks_exact": 0,
+    "least_margin": 1.4865878750214279e-08,
+    "least_margin_box": [
+     9.762631768922335,
+     9.762788296146368,
+     10.661254562096456,
+     10.661411089320488
+    ],
+    "max_terms": 244
+   },
+   "witness": null,
+   "undischarged": [],
+   "cpu_seconds": 23.97
+  }
+ ]
+}

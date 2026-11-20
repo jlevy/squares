@@ -1,0 +1,77 @@
+{
+ "program": "r144_selftest.py",
+ "mode": "synthetic",
+ "S1_evaluators_agree": {
+  "poses": 200,
+  "disagreements": 0,
+  "ok": true
+ },
+ "S2_axis_lattice": {
+  "verdict": "AXIS_DECIDED",
+  "least_exact": "10001/10000",
+  "expected": "10001/10000",
+  "seeded_below_least": 0,
+  "mutant_verdict": "AXIS_REFUSED",
+  "mutant_witness": "990099/1000000",
+  "ok": true
+ },
+ "S3_bnb_grid": {
+  "verdict": "NODE_DECIDED",
+  "boxes": 448,
+  "rect_exact": 143,
+  "least_seeded_capture": 1.1422715049034047,
+  "seeded_below_one": 0,
+  "mutant_verdict": "NODE_REFUTED",
+  "mutant_witness": {
+   "x": "14034819056695025/9007199254740992",
+   "y": "14034819056695025/9007199254740992",
+   "capture": "543491212961041279/1514827580000000000",
+   "capture_float": 0.35878090690759756
+  },
+  "ok": true
+ },
+ "S4_reader_refusals": {
+  "cases": {
+   "float token": "refused: ReadError",
+   "duplicate key": "refused: ReadError",
+   "unknown key": "refused: ReadError"
+  },
+  "ok": true
+ },
+ "S5_premise_refusals": {
+  "newly_failed_checks": {
+   "total mass n": [
+    "total mass below n (the budget)"
+   ],
+   "negative mass": [
+    "every mass is positive",
+    "masses sum to the stated total"
+   ],
+   "point outside K": [
+    "every primitive lies in K = [0, L]^2"
+   ],
+   "degenerate segment": [
+    "no degenerate segment or rectangle"
+   ],
+   "net stops at 199": [
+    "t_last^2 + 2 t_last - 1 > 0 fails"
+   ],
+   "step 1/430": [
+    "B(1 + D) < 1 fails"
+   ]
+  },
+  "ok": true
+ },
+ "S6_input_check": {
+  "cases": {
+   "original": "accepted",
+   "moved coordinate": "refused",
+   "dropped row": "refused",
+   "duplicated row": "refused",
+   "wrong E": "refused"
+  },
+  "ok": true
+ },
+ "all_ok": true,
+ "cpu_seconds": 1.54
+}
