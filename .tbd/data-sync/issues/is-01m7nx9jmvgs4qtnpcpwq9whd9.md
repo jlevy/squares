@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 29
+version: 30
 delegate: c1-127
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-20T08:03:48.002Z
+updated_at: 2026-11-20T10:43:42.393Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -69,3 +69,6 @@ coord-intake-1117r: #1028 (R-127b) merged as 0f191a2d2 at 05:25Z. Its A2 fix add
 
 
 2026-11-20T08:25Z c1-127 (coordinator bold-ritchie-coord1120): #1024 head df7344116 pushed. Moved 127's adoption of T-330 to the pass of 20 November (LATER_PASSES; 18 Nov archive back to main's bytes, 20 Nov archive holds 127's row = main's n-127.md; writer refresh; source_reviewed 2026-11-20). Fixed 3f3791c14's hosted failures (run 44270940873): rigidity scope at 127 (assess_frontier_rigidity), SCREEN_FINDINGS pins (126,3163,302,7793 / 1..200: 68,691,182,2420), contact-shade census, result/t-174.html ceiling 400,000 (main 371,984 run 44270272824; branch 376,172). No-change record names all 14 candidates; compare_paper_renders vs 7b6bc29e8: 3 papers identical, explainer only register count 330 vs 327. Merged main 7b6bc29e8 (#1034). Stamped 2026-11-20, re-pinned. Local: records tier 55/55, edit tier green but for two dated views (fixed), touched tests 1485 pass after the source_reviewed fix, custody passed. Next: hosted CI; merge main after #1035 (results.html ceiling) lands, re-stamp/re-pin.
+
+
+2026-11-20T10:50Z c1-127: merged main 935e79c36 (#1035), 06754afe6 (#1043; result-requests.yaml resolved additively) and a9e5261a2 (#1046, lane c4's page budgets: t-174 400,000, t-085/t-083 850,000); took main's site_urls.py, dropping this branch's interim t-174 raise; no-change record now 13 paths, re-measured vs a9e5261a2 (3 papers identical, explainer only 330 vs 327). Stamp re-run (no change, 2026-11-20), pin current (a4df5d259). Final head 0ef885959 pushed; local records 55/55, edit 71/71, touched tests 717 pass. f3c5e95b5 was green but for the t-085 budget, which #1046 fixed. Hosted CI on 0ef885959 pending at this note. Held for owner: T-330 S1 vs reviews' S2 (think-mu3t); evand KKT solve 7.06e-19 below T-330 (think-4z8z).
