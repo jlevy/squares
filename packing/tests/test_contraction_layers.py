@@ -261,4 +261,3 @@ def test_a_malformed_rival_and_a_through_without_a_base_are_refused(
     plain = _plain(tmp_path, _composite(GAP, Fraction(21, 10), 1), "plain.cert")
     assert cm.main(["--n", "7", plain, "--against", plain, "--through", "--no-routes"]) == 2
     assert "--through needs an l-base" in capsys.readouterr().err
-

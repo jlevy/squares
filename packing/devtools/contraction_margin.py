@@ -376,6 +376,27 @@ def margin(
     return record
 
 
+def _rival(read: Read, against: str | None, n: int, *, through: bool) -> Read | None:
+    """The `--against` certificate, read where `main` compares it, or None without one.
+
+    Through the construction, the rival is read at the extended count; otherwise at `n`,
+    as the base itself is.
+    """
+    if through and (read.layered is None or not against):
+        raise ContractionError("--through needs an l-base certificate and an --against")
+    if not against:
+        return None
+    through_n = read.layered.extended.n if read.layered is not None else n
+    try:
+        return read_certificate(against, through_n if through else n)
+    except ContractionError as error:
+        if read.layered is None or through:
+            raise
+        raise ContractionError(
+            f"{error} (to compare it through the construction, at {through_n}, pass --through)"
+        ) from error
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="How much of a certificate's side is padding: its contraction margin."
@@ -394,23 +415,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         read = read_certificate(args.certificate, args.n)
-        against = None
-        if args.through and (read.layered is None or not args.against):
-            raise ContractionError("--through needs an l-base certificate and an --against")
-        if args.against:
-            # Through the construction, the rival is read at the extended count; otherwise
-            # at --n, as the base itself is.
-            through_n = read.layered.extended.n if read.layered is not None else args.n
-            count = through_n if args.through else args.n
-            try:
-                against = read_certificate(args.against, count)
-            except ContractionError as error:
-                if read.layered is None or args.through:
-                    raise
-                raise ContractionError(
-                    f"{error} (to compare it through the construction, at {through_n}, "
-                    "pass --through)"
-                ) from error
+        against = _rival(read, args.against, args.n, through=args.through)
         record = margin(read, routes=not args.no_routes, against=against, through=args.through)
     except (ContractionError, identity.MeasureError) as error:
         print(f"refused: {error}", file=sys.stderr)

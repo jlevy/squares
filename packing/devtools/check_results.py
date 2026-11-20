@@ -1653,7 +1653,8 @@ def restatements_problems(
                 receipt = None
             if receipt is not None:
                 against = receipt.get("against") or {}
-                through = str(against.get("compared", "")).startswith("through the construction")
+                compared = str(against.get("compared", ""))
+                through = compared.startswith("through the construction")
                 at = against.get("n") if through else receipt.get("n")
                 certificate = receipt.get("certificate") or {}
                 rival = against.get("certificate") or {}

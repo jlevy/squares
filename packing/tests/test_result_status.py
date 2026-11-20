@@ -168,8 +168,12 @@ def test_every_registered_result_has_exactly_one_status_from_the_record() -> Non
         else:
             assert word == (CONFIRMED if rank >= 2 else REVIEWED if rank == 1 else RECORDED)
             assert open_issues(entry, evidence) == [], entry["id"]
-        marks = render_recent_results.position_marks(
-            entry, render_recent_results.standing(entry, records), records
+        # A restated entry's row names what it restates first (`restated_position`).
+        marks = render_results.restated_position(
+            entry,
+            render_recent_results.position_marks(
+                entry, render_recent_results.standing(entry, records), records
+            ),
         )
         line = status_line(
             entry, evidence, marks, how=render_results.confirmed_how(entry, evidence)

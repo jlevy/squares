@@ -22,7 +22,13 @@ from typing import Any
 
 import pytest
 
-from devtools import check_requests, check_results, check_standing, profile_records, render_results
+from devtools import (
+    check_requests,
+    check_results,
+    check_standing,
+    profile_records,
+    render_results,
+)
 from devtools import render_recent_results as view
 from sqpack.yamlio import safe_load
 
@@ -36,11 +42,13 @@ OUTSIDE = (
 )
 #: T-259 at 130 against T-254's certificate, within its margin: a receipt of another pair.
 OTHER_PAIR = (
-    "packing/resources/web/yim-certificates-2026-11-09/measure/precedent-contraction-n130-t259.json"
+    "packing/resources/web/yim-certificates-2026-11-09/measure/"
+    "precedent-contraction-n130-t259.json"
 )
 #: #719's 631 against Couzo's 490 through his three layers: n is the base's, 490.
 THROUGH = (
-    "packing/resources/web/mishapolk-issue719-2026-10-22/measure/contraction-n631-through-490.json"
+    "packing/resources/web/mishapolk-issue719-2026-10-22/measure/"
+    "contraction-n631-through-490.json"
 )
 
 
@@ -224,7 +232,6 @@ def test_a_restatement_measured_through_a_construction_is_read_at_its_own_count(
     assert any("receipt at n = 490" in line for line in found(490))
 
 
-
 def test_the_results_table_says_what_a_restated_entry_restates(records: view.Records) -> None:
     """RESULTS.md's status names the results whose packings an entry restates, alone where
     every count of its scope is restated, so the row cannot read as an improvement later
@@ -276,4 +283,3 @@ def test_the_held_points_of_9_november_are_classified_under_option_d() -> None:
     against = receipt["against"]
     assert (against["gain_over_margin"], against["within_margin"]) == ("1.0234", False)
     assert Fraction(against["side"]) < _house_side(303)
-

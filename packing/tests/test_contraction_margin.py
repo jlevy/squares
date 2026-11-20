@@ -167,7 +167,8 @@ def test_a_one_step_base_against_a_certificate_at_its_own_count_is_compared_dire
     assert cm.main(command) == 0
     record = json.loads(out.read_text(encoding="utf-8"))
     assert record["against"] == retained["against"]
-    assert "construction" not in record and "construction" not in retained
+    assert "construction" not in record
+    assert "construction" not in retained
 
 
 def test_a_one_step_base_compares_a_rival_through_its_step_only_when_asked(
@@ -204,4 +205,3 @@ def test_a_one_step_base_compares_a_rival_through_its_step_only_when_asked(
     ]
     assert cm.main(command) == 2
     assert "pass --through" in capsys.readouterr().err
-
