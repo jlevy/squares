@@ -5,7 +5,7 @@ title: "Import #1031: Joost de Winter's s(299) <= 17.793636991744 (0.0074 below 
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: c2-imports
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T07:26:42.911Z
-updated_at: 2026-11-20T08:59:19.010Z
+updated_at: 2026-11-20T12:30:54.546Z
 started_at: 2026-11-18T07:33:41.966Z
 ---
 
@@ -34,3 +34,5 @@ started_at: 2026-11-18T07:33:41.966Z
 2026-11-20T07:27Z c2-imports: packet de-winter-s299-upper-bound-2026-11-18 (licence, root README, n299/ at 497eb47; checkers pinned against byte-identical copies, never run; figure by digest; the certificate and witness digests equal 3293038's SHA256SUMS), claims against main 1015fc175: 7.3674e-3 below T-325. Replay at a203f4a752 (07:07-07:10Z): both routes accept, duplicate and outside refused, check --replay admits 3 jobs; sharp controls 11/11 as_expected (branches W1: far-wall clearance 6.42e-67; P1: least gap 1.05e-74, squares 175/137; N0: a square touches a near wall; E0). Difference from the plan's letter: the E0 wall enlargement (square 129) is not clean, so past contact both routes name overlap as well as container and shape; the module predicts that exactly for a square that cannot grow without closing a pair (every pair gap here is far below 1e-30), and the plan's E0 line names wall and shape only. Recorded here, in the packet README and the PR. Margins (devtools.contraction_margin): T-325 3.5612e-27 (squares 71, 140), T-277 3.4040e-12 (179, 194), own 6.4244e-67 (137, 175); option D: new. Identity (measure_identity vs T-325, T-277): no box symmetry pairs it one to one; under symmetry 3 the optimal assignment moves 127 squares beyond 0.1 (largest 1.074), 18 of its 114 tilted squares pair with tilted squares of the same sign. The relayed rigid-motion finding (210 of 299) is not a box symmetry and this tool does not measure it; credit at 299 waits on #1036. L-step scan: main's consequences unchanged.
 
 2026-11-20T09:00Z c2-imports: T-333 registered at 07:36Z (5b2adb973f), after the replay (a203f4a752, 07:23Z) and ledger (647d806b21, 07:24Z). Coordinator reported #1036 merged (4443f7f90) at about 08:12Z; this lane read docs/project/reviews/review-2026-11-18-de-winter-1031.md from origin/main at 08:12:33Z, after all its own 299 work was committed. Mapped: V-de-winter-1031-review-check, E-de-winter-1031-review-exact-feasibility (rv1031_check ACCEPT, 44,551 pairs, 36 controls: 34 as stated, 2 as the side rule gives, F3), external_review on the report evidence, T-333 reviews block (accepted, covers T-333), novelty previously-published per After the Freeze A1 (not the frozen N5 line), credit Joost de Winter after the compilation's packings: a new arrangement relative to every packing at 299; the 210-square T-325 motion is a generic upright lattice plus the T-248 band (A2), not a continuation. Significance S3 confirmed by the review. Adopted at 299 in the pass of 20 November (adopt_houses 08:57Z); strong runs on 299 next.
+
+2026-11-20T12:45Z c2-imports: draft PR #1048 (claude/intake-2026-11-20-import-1021), head 484e392ced, main a9e5261a2 merged; T-331 (268), T-332 (270), T-333 (299) provisional after #1024's T-328 to T-330; all three adopted and regularized in the pass of 20 November; stamps and pin at c3aa6d5773/484e392ced, to be redone after #1024 merges (retain_history on main's 20 November archive). Local: records and edit tiers green but the expected contiguity gap; hosted CI running.
