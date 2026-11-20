@@ -1,0 +1,15 @@
+{
+ "replay": {
+  "code": 0,
+  "text": "112-113-10.795-120-phase replayed 552 checks",
+  "error": ""
+ },
+ "spot": {
+  "code": 0,
+  "text": "112-113-10.795-120-phase 4 independent polygon integrations",
+  "error": ""
+ },
+ "n": 112,
+ "side": "2159/200",
+ "manifest_sha256": "3871543d3488b0f072728fd6034385e26ddd0c25f5e5bed91db08ce417b8b452"
+}

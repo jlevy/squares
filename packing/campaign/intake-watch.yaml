@@ -2335,6 +2335,23 @@ repositories:
       the author's audit; 67fb815 adds its registration text and checksums. think-i5en
       retains it in the de-winter-s108-lower-bound-2026-11-17 packet in its own change, which
       removes this read.
+  # Lane c15-lower of 20 November 2026 (think-fv42).
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 21d944c43098e2261ab7d713cd10f02a5eb13f3d
+    read_on: '2026-11-20'
+    bead: think-fv42
+    note: >-
+      Read through 21d944c (18:44:48Z on 19 November), the head at 16:57Z and 17:12Z on 20
+      November, one commit past 7232328, whose ten commits since d02237a the imports of
+      jlevy/squares#1012, #1021, #1022 and #1031 read. 21d944c, "Add lower bounds for 48
+      counts between 50 and 218", adds lower_bounds_2026_11_19/ and two lines of the root
+      README: #1042's 48 bounds and its 161 follow-up under followup/, the 34 certificates
+      of #1041's attachment at the folder's top level, and #1039's attachment,
+      lower-bounds-56.zip, byte for byte at followup/mass_reserve/. The
+      de-winter-lower-bounds-2026-11-19 packet pins it and retains the folder's text, its
+      measures and receipts pinned by digest. The folder's 67 corner bounds, 16 edge-strip
+      refinements and upper-bound refinements are claimed by no issue; the 155-count archive
+      of #1042's comment 7022143149 replays against this folder and is think-4iec's.
   # Lane L187 of 16 November 2026 (think-0y9m).
   - url: https://github.com/JonathanGun/square-packing-upper-bounds
     read_through: 0aac839e551fd8cb7d7717c20494b095429131a1

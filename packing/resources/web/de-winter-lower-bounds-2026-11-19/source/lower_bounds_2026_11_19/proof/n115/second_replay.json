@@ -1,0 +1,16 @@
+{
+  "replay": {
+    "code": 0,
+    "stdout": "n115_10.875_farm_3766bb8d replayed 120 checks",
+    "error": ""
+  },
+  "spot": {
+    "code": 0,
+    "stdout": "n115_10.875_farm_3766bb8d 3 independent polygon integrations",
+    "error": ""
+  },
+  "n": 115,
+  "side": "87/8",
+  "manifest_sha256": "f195928bcd0a6a003831c78c98d3b335366a35e2dc4258aa3db0f0c97cc3d451",
+  "elapsed_seconds": 1137.04
+}

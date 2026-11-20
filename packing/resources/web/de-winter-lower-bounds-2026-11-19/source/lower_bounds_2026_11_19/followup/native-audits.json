@@ -1,0 +1,329 @@
+[
+  {
+    "proof": "104-104-10.433-150-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "104-104-10.433-150-uniform replayed 368 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "104-104-10.433-150-uniform 4 independent polygon integrations",
+      "error": ""
+    },
+    "n": 104,
+    "side": "10433/1000",
+    "manifest_sha256": "bc337f0ed4f15b96b2c99bf51afc1dfec595a48785dac94113f3ed20366922b6"
+  },
+  {
+    "proof": "112-113-10.795-120-phase",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "112-113-10.795-120-phase replayed 552 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "112-113-10.795-120-phase 4 independent polygon integrations",
+      "error": ""
+    },
+    "n": 112,
+    "side": "2159/200",
+    "manifest_sha256": "3871543d3488b0f072728fd6034385e26ddd0c25f5e5bed91db08ce417b8b452"
+  },
+  {
+    "proof": "114-114-10.887-96-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "114-114-10.887-96-uniform replayed 156 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "114-114-10.887-96-uniform 4 independent polygon integrations",
+      "error": ""
+    },
+    "n": 114,
+    "side": "10887/1000",
+    "manifest_sha256": "bd36665f89b3eefbca890705e8c4740493d80ac63288228d37b7660ee0742daf"
+  },
+  {
+    "proof": "115-114-10.889-96-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "115-114-10.889-96-uniform replayed 122 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "115-114-10.889-96-uniform 4 independent polygon integrations",
+      "error": ""
+    },
+    "n": 115,
+    "side": "10889/1000",
+    "manifest_sha256": "bf711fac770009eee440c374eb6573b26efd077b4af281cc710d6252ec4f446c"
+  },
+  {
+    "proof": "128-130-11.431-110-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "128-130-11.431-110-uniform replayed 112 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "128-130-11.431-110-uniform 2 independent polygon integrations",
+      "error": ""
+    },
+    "n": 128,
+    "side": "11431/1000",
+    "manifest_sha256": "caaefc7becd3edfb991f9b9c177cecdbccd40d6257a82c7ceddaa96268ad34ff"
+  },
+  {
+    "proof": "129-130-11.466-110-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "129-130-11.466-110-uniform replayed 112 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "129-130-11.466-110-uniform 2 independent polygon integrations",
+      "error": ""
+    },
+    "n": 129,
+    "side": "5733/500",
+    "manifest_sha256": "dc225a1bec054a4bb5cd01d04dabfb1d92cef5ffda0ba88eb4c6f8006d2550ce"
+  },
+  {
+    "proof": "132-134-11.618-112-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "132-134-11.618-112-uniform replayed 114 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "132-134-11.618-112-uniform 2 independent polygon integrations",
+      "error": ""
+    },
+    "n": 132,
+    "side": "5809/500",
+    "manifest_sha256": "71d1a5745117b5e12590df155b8db928d01087743b250c56c5bb0a1500529673"
+  },
+  {
+    "proof": "133-134-11.66-115-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "133-134-11.66-115-uniform replayed 117 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "133-134-11.66-115-uniform 2 independent polygon integrations",
+      "error": ""
+    },
+    "n": 133,
+    "side": "583/50",
+    "manifest_sha256": "f81ac2f53dd88425dcdf52d59c5fa4ce79a83e6c307fb73a466de0a7a53cc97b"
+  },
+  {
+    "proof": "161--719858-12.858-100-uniform_farm",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "161--719858-12.858-100-uniform_farm replayed 260 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "161--719858-12.858-100-uniform_farm 3 independent polygon integrations",
+      "error": ""
+    },
+    "n": 161,
+    "side": "6429/500",
+    "manifest_sha256": "ab94c427dfbabbce659e4d43713c4be9ce4d2fc6331ee335973cce1852d2034d"
+  },
+  {
+    "proof": "50-50-7.417-115-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "50-50-7.417-115-uniform replayed 1420 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "50-50-7.417-115-uniform 7 independent polygon integrations",
+      "error": ""
+    },
+    "n": 50,
+    "side": "7417/1000",
+    "manifest_sha256": "60a1ef703c8ad346e633d4a4a391e252c2d59113bd315cf58c338b0d355e97fe"
+  },
+  {
+    "proof": "57-57-7.880-105-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "57-57-7.880-105-uniform replayed 215 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "57-57-7.880-105-uniform 3 independent polygon integrations",
+      "error": ""
+    },
+    "n": 57,
+    "side": "197/25",
+    "manifest_sha256": "55e6a7c14fc2d3cb3cd901c08bd5b6641a1a4ed14205e01eb511f9664814c432"
+  },
+  {
+    "proof": "58-58-7.942-105-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "58-58-7.942-105-uniform replayed 227 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "58-58-7.942-105-uniform 3 independent polygon integrations",
+      "error": ""
+    },
+    "n": 58,
+    "side": "3971/500",
+    "manifest_sha256": "8ec504c8b0fa47c5314e9215201bebacf9339d92b0f8c181b72029c23f895dc6"
+  },
+  {
+    "proof": "65-65-8.360-110-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "65-65-8.360-110-uniform replayed 240 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "65-65-8.360-110-uniform 3 independent polygon integrations",
+      "error": ""
+    },
+    "n": 65,
+    "side": "209/25",
+    "manifest_sha256": "b6d4dcdfa2453153484652ab39226bd586761550c6707547c9976448a5c031d1"
+  },
+  {
+    "proof": "67-67-8.497-110-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "67-67-8.497-110-uniform replayed 418 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "67-67-8.497-110-uniform 4 independent polygon integrations",
+      "error": ""
+    },
+    "n": 67,
+    "side": "8497/1000",
+    "manifest_sha256": "cd8de14c74c81b71d310dac336933a053b5d397be27a2abb532841e4d6db9bbc"
+  },
+  {
+    "proof": "69-69-8.639-115-uniform",
+    "scope": "full",
+    "replay": {
+      "code": 0,
+      "text": "69-69-8.639-115-uniform replayed 738 checks",
+      "error": ""
+    },
+    "spot": {
+      "code": 0,
+      "text": "69-69-8.639-115-uniform 4 independent polygon integrations",
+      "error": ""
+    },
+    "n": 69,
+    "side": "8639/1000",
+    "manifest_sha256": "a5c265352e3f76135ea31b1c780ab38e2f4cb24bffb0d4de091d4753854f3658"
+  },
+  {
+    "proof": "109-109-10.705-112-uniform_finish",
+    "scope": "sample",
+    "replay": "109-109-10.705-112-uniform_finish replayed 8 checks",
+    "polygon": "109-109-10.705-112-uniform_finish 5 independent polygon integrations",
+    "manifest_sha256": "7d71d450bc090bee3cad20e464de34ed0c6f934355c62cf280a6f221196a7593",
+    "sample_rule": "One accepted interval with the most center boxes at each angular level, one reduced-mass negative control per level, and independent rational polygon integrations."
+  },
+  {
+    "proof": "161--719858-12.858-100-uniform_farm",
+    "scope": "sample",
+    "replay": "161--719858-12.858-100-uniform_farm replayed 6 checks",
+    "polygon": "161--719858-12.858-100-uniform_farm 3 independent polygon integrations",
+    "manifest_sha256": "ab94c427dfbabbce659e4d43713c4be9ce4d2fc6331ee335973cce1852d2034d",
+    "sample_rule": "One accepted interval with the most center boxes at each angular level, one reduced-mass negative control per level, and independent rational polygon integrations."
+  },
+  {
+    "proof": "161--749858-12.858-100-uniform",
+    "scope": "sample",
+    "replay": "161--749858-12.858-100-uniform replayed 6 checks",
+    "polygon": "161--749858-12.858-100-uniform 4 independent polygon integrations",
+    "manifest_sha256": "341060bb2cd5512839af9034605714c973eb1ae3a6851bab14a365519960c58a",
+    "sample_rule": "One accepted interval with the most center boxes at each angular level, one reduced-mass negative control per level, and independent rational polygon integrations."
+  },
+  {
+    "proof": "162--719881-12.881-100-uniform_finish",
+    "scope": "sample",
+    "manifest_sha256": "c8dec2229734729bc1701cf7647c8bb2fa3a65a8a8addd755f4aa4df49a6eabf",
+    "replay": "162--719881-12.881-100-uniform_finish replayed 4 checks",
+    "polygon": "162--719881-12.881-100-uniform_finish 3 independent polygon integrations",
+    "sample_rule": "Most subdivided accepted interval at each angular level, one reduced-mass negative control per level, and three independent polygon integrations."
+  },
+  {
+    "proof": "162--931866-12.866-100-uniform",
+    "scope": "sample",
+    "replay": "162--931866-12.866-100-uniform replayed 4 checks",
+    "polygon": "162--931866-12.866-100-uniform 3 independent polygon integrations",
+    "manifest_sha256": "3d9784aa65eef9eea0fa6e243c1c7061b02448347b73f7b6d19555a01b15035a",
+    "sample_rule": "One accepted interval with the most center boxes at each angular level, one reduced-mass negative control per level, and independent rational polygon integrations."
+  },
+  {
+    "proof": "50-50-7.417-115-uniform",
+    "scope": "sample",
+    "replay": "50-50-7.417-115-uniform replayed 12 checks",
+    "polygon": "50-50-7.417-115-uniform 7 independent polygon integrations",
+    "manifest_sha256": "60a1ef703c8ad346e633d4a4a391e252c2d59113bd315cf58c338b0d355e97fe",
+    "sample_rule": "One accepted interval with the most center boxes at each angular level, one reduced-mass negative control per level, and independent rational polygon integrations."
+  },
+  {
+    "proof": "84--3020084-9.4335-102-uniform",
+    "scope": "sample",
+    "replay": "84--3020084-9.4335-102-uniform replayed 4 checks",
+    "polygon": "84--3020084-9.4335-102-uniform 3 independent polygon integrations",
+    "manifest_sha256": "bc286b770e2348017cd4ff63d3813d2284cfc7b462213b90b486f11bab8fec77",
+    "sample_rule": "One accepted interval with the most center boxes at each angular level, one reduced-mass negative control per level, and independent rational polygon integrations."
+  },
+  {
+    "proof": "86--3020086-9.5386-102-uniform",
+    "scope": "sample",
+    "replay": "86--3020086-9.5386-102-uniform replayed 4 checks",
+    "polygon": "86--3020086-9.5386-102-uniform 3 independent polygon integrations",
+    "manifest_sha256": "0fc068d7ae1ca2b541b9bcb737a1da98ee67d2942510b73d663afb66e238aa07",
+    "sample_rule": "One accepted interval with the most center boxes at each angular level, one reduced-mass negative control per level, and independent rational polygon integrations."
+  },
+  {
+    "proof": "91--3020091-9.7990-102-uniform",
+    "scope": "sample",
+    "replay": "91--3020091-9.7990-102-uniform replayed 4 checks",
+    "polygon": "91--3020091-9.7990-102-uniform 3 independent polygon integrations",
+    "manifest_sha256": "383a88a9c5a63764703ef62604f1bdbf8b8c42ad5cbc8a93afe20d0f70cc5008",
+    "sample_rule": "One accepted interval with the most center boxes at each angular level, one reduced-mass negative control per level, and independent rational polygon integrations."
+  }
+]

@@ -1,0 +1,15 @@
+{
+ "replay": {
+  "code": 0,
+  "text": "161--719858-12.858-100-uniform_farm replayed 260 checks",
+  "error": ""
+ },
+ "spot": {
+  "code": 0,
+  "text": "161--719858-12.858-100-uniform_farm 3 independent polygon integrations",
+  "error": ""
+ },
+ "n": 161,
+ "side": "6429/500",
+ "manifest_sha256": "ab94c427dfbabbce659e4d43713c4be9ce4d2fc6331ee335973cce1852d2034d"
+}

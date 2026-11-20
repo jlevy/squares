@@ -1,0 +1,52 @@
+{
+ "n": 103,
+ "side": "10309/1000",
+ "kernel": "octagon-gram",
+ "native_sha256": "97ba749fb59c0fb967244c6969c7e30fd1746d409a193ce1b8231aff1d37022a",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "levels": [
+  {
+   "K": 108,
+   "measure": "k108.json.gz",
+   "receipts": "k108_receipts.jsonl.gz",
+   "rectangles": 7184,
+   "rects_sha256": "2896816336ac9e3fc44545df3b19307653752ee41d7cdbc324de59e792ea493a",
+   "measure_sha256": "b9f9228bb9bb363e0169613d787acaf6d3df8bbf0f9f1c41c0f9301fa330648a",
+   "receipts_sha256": "960c0a3ee7e2e7d68f204181c4cdbab2b74c746c2a5605ea18937aa6c424057d"
+  },
+  {
+   "K": 324,
+   "measure": "k324.json.gz",
+   "receipts": "k324_receipts.jsonl.gz",
+   "rectangles": 7184,
+   "rects_sha256": "2896816336ac9e3fc44545df3b19307653752ee41d7cdbc324de59e792ea493a",
+   "measure_sha256": "2eb68c1eaa5bd6797c2ecdf110154582d998344303f7f4a07fd78a7651542acb",
+   "receipts_sha256": "e836403540e37f35b81a0a327e3f37873bad83b82ce12d4df84242e9c7e105aa"
+  },
+  {
+   "K": 972,
+   "measure": "k972.json.gz",
+   "receipts": "k972_receipts.jsonl.gz",
+   "rectangles": 7184,
+   "rects_sha256": "2896816336ac9e3fc44545df3b19307653752ee41d7cdbc324de59e792ea493a",
+   "measure_sha256": "81db127be0fa4dddaa76d4c5f0997d71d941af7ae738207d52240e07ab67d173",
+   "receipts_sha256": "0af82209bf33cb57a700af29c88f19c9da400c354417c2e483d3b42def89c889"
+  },
+  {
+   "K": 2916,
+   "measure": "k2916.json.gz",
+   "receipts": "k2916_receipts.jsonl.gz",
+   "rectangles": 7184,
+   "rects_sha256": "2896816336ac9e3fc44545df3b19307653752ee41d7cdbc324de59e792ea493a",
+   "measure_sha256": "a70fa1e131cf4d7d0978de066ec4e4f4f66fb6cf05db6762d4d28e1b68ae6865",
+   "receipts_sha256": "72dcd5db983074e7d222764b8f707ecd14413a2bfaa039f78981587df0d9c59b"
+  }
+ ],
+ "directions": 201,
+ "nodes": 1848417,
+ "target_total_mass": "102999999/1000000",
+ "source_n": 103,
+ "source_sha256": "1ba17504c175610323fed041c7564f3daa608fb196ed194418ad1045b25a0d71",
+ "source_measure": "n103/k130.json.gz",
+ "mode": "uniform"
+}

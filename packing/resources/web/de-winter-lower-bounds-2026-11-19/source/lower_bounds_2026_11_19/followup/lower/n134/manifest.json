@@ -1,0 +1,52 @@
+{
+ "n": 134,
+ "side": "11699/1000",
+ "kernel": "octagon-gram",
+ "native_sha256": "97ba749fb59c0fb967244c6969c7e30fd1746d409a193ce1b8231aff1d37022a",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "levels": [
+  {
+   "K": 106,
+   "measure": "k106.json.gz",
+   "receipts": "k106_receipts.jsonl.gz",
+   "rectangles": 19340,
+   "rects_sha256": "c5285718828bfa37bd792443098cad81eb1368ddd90486f10260eae058e7eecb",
+   "measure_sha256": "c30fe1cd65fab13d247ba7a32fefdd819f1e14777ab42b0438f56a08d072c28c",
+   "receipts_sha256": "a3d1e666197a7d74f27a5fe5c1027c7be60a6b8432837f0abe2a5b527179b10f"
+  },
+  {
+   "K": 318,
+   "measure": "k318.json.gz",
+   "receipts": "k318_receipts.jsonl.gz",
+   "rectangles": 19340,
+   "rects_sha256": "c5285718828bfa37bd792443098cad81eb1368ddd90486f10260eae058e7eecb",
+   "measure_sha256": "2a456bad4448588c5cd7e53f58646b73020e226d39e26d21fa3efda00249110d",
+   "receipts_sha256": "b8dacb3d8fa88e32b6352d1f3a84ae2ba965ccf417e03ffa626607b8f0bb17f8"
+  },
+  {
+   "K": 954,
+   "measure": "k954.json.gz",
+   "receipts": "k954_receipts.jsonl.gz",
+   "rectangles": 19340,
+   "rects_sha256": "c5285718828bfa37bd792443098cad81eb1368ddd90486f10260eae058e7eecb",
+   "measure_sha256": "34ff4e488a431171a212bf0ea9b22a7ba8f142fc615e8472a96d4fb0334a32d2",
+   "receipts_sha256": "7396d39b4206f19d3841c39756b56ffcf2ea155ac2163e1c627515ebc3c9b1a2"
+  },
+  {
+   "K": 2862,
+   "measure": "k2862.json.gz",
+   "receipts": "k2862_receipts.jsonl.gz",
+   "rectangles": 19340,
+   "rects_sha256": "c5285718828bfa37bd792443098cad81eb1368ddd90486f10260eae058e7eecb",
+   "measure_sha256": "2504bc57d24d72ee53f8d3e61a7eb1b65c8d3c2ab8113f675cda42d063905c0a",
+   "receipts_sha256": "74c0d1be35b8d9b81fd1988c78e17203d93d8bbe8e97df8feacc95cea4c3bd60"
+  }
+ ],
+ "directions": 142,
+ "nodes": 2682220,
+ "target_total_mass": "133999999/1000000",
+ "source_n": 134,
+ "source_sha256": "c04122ae9313d7b35e44781693ee655950219a7e65b898d092a23b2acb49093c",
+ "source_measure": "n134/k112.json.gz",
+ "mode": "uniform"
+}

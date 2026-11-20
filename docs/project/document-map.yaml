@@ -109,6 +109,7 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-959-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-960-20261111/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/lower-bounds-de-winter-20261120/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-962-20261112/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-967-20261112/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-977-979-20261114/README.md, role: generated-view, authority: generated, lifecycle: generated}

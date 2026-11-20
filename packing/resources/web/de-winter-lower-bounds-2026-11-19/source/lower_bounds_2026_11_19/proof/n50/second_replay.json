@@ -1,0 +1,16 @@
+{
+  "replay": {
+    "code": 0,
+    "stdout": "n50_7p415_50_160_w0 replayed 450 checks",
+    "error": ""
+  },
+  "spot": {
+    "code": 0,
+    "stdout": "n50_7p415_50_160_w0 4 independent polygon integrations",
+    "error": ""
+  },
+  "n": 50,
+  "side": "1483/200",
+  "manifest_sha256": "f62cd7621f4567b170cbad702a9f0a0b88173e564d8c3d477ae2d40923c853a6",
+  "elapsed_seconds": 833.38
+}

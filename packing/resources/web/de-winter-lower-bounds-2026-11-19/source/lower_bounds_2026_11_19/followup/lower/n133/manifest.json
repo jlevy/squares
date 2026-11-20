@@ -1,0 +1,24 @@
+{
+ "n": 133,
+ "side": "583/50",
+ "kernel": "octagon-gram",
+ "native_sha256": "97ba749fb59c0fb967244c6969c7e30fd1746d409a193ce1b8231aff1d37022a",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "levels": [
+  {
+   "K": 115,
+   "measure": "k115.json.gz",
+   "receipts": "k115_receipts.jsonl.gz",
+   "rectangles": 19340,
+   "rects_sha256": "a418a572e46662237bdb6ce02d12acdaec66b2927878f1fc4290ac56197931fd",
+   "measure_sha256": "68a54c0ee385c328e5b8dfbdd66d68385c8824414dc01d87e41362e40ddaa3be",
+   "receipts_sha256": "167bcb096befd86ed3f8ee9c1dade5981bba8803581cb98dbc03750253072e35"
+  }
+ ],
+ "directions": 116,
+ "nodes": 1268164,
+ "source_n": 134,
+ "source_sha256": "c04122ae9313d7b35e44781693ee655950219a7e65b898d092a23b2acb49093c",
+ "source_measure": "n134/k112.json.gz",
+ "mode": "uniform"
+}

@@ -1,0 +1,42 @@
+{
+ "n": 113,
+ "side": "5431/500",
+ "kernel": "octagon-gram",
+ "native_sha256": "97ba749fb59c0fb967244c6969c7e30fd1746d409a193ce1b8231aff1d37022a",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "levels": [
+  {
+   "K": 110,
+   "measure": "k110.json.gz",
+   "receipts": "k110_receipts.jsonl.gz",
+   "rectangles": 71736,
+   "rects_sha256": "8b72e2697ee0111fa75b41b6c43607e5392071a0208ab3f3d2ce90e0dcb25c49",
+   "measure_sha256": "9c3464e924b8557803f7d6e25c053c1f47cb72f75d75e904bdf089d5aece60b0",
+   "receipts_sha256": "5f83e6f097ff852888009ae15af924cb9e69e41ac26ab00df758df8ae00eff00"
+  },
+  {
+   "K": 330,
+   "measure": "k330.json.gz",
+   "receipts": "k330_receipts.jsonl.gz",
+   "rectangles": 71736,
+   "rects_sha256": "8b72e2697ee0111fa75b41b6c43607e5392071a0208ab3f3d2ce90e0dcb25c49",
+   "measure_sha256": "49a2542577fc040076ccc77fd5a2477436ac27a210228fcc439589eda4ed6c83",
+   "receipts_sha256": "d3c555ad67cde816378d4b43e976003230691f5676fff2a2c7f4f1550d19488c"
+  },
+  {
+   "K": 990,
+   "measure": "k990.json.gz",
+   "receipts": "k990_receipts.jsonl.gz",
+   "rectangles": 71736,
+   "rects_sha256": "8b72e2697ee0111fa75b41b6c43607e5392071a0208ab3f3d2ce90e0dcb25c49",
+   "measure_sha256": "bca29bb219afb8348ded21fe7181f8fdd52ceba5625471bee1931cbd7299e203",
+   "receipts_sha256": "59e6c0aad095e749646466eadc14ddcfcb7493774f612f8f9d6e056231895233"
+  }
+ ],
+ "directions": 181,
+ "nodes": 2643833,
+ "source_n": -886201,
+ "source_sha256": "1c9a6d83c2a766e7c648f756047f4d93b0e0188a197ae972bf4aa88e139249fa",
+ "source_measure": "mix/886201/measure.json.gz",
+ "mode": "uniform"
+}

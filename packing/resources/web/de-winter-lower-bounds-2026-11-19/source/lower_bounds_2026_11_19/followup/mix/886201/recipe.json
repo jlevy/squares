@@ -1,0 +1,350 @@
+{
+  "n": 113,
+  "side": "5431/500",
+  "coordinate_grid": 100000000,
+  "mass_grid": 1000000000000,
+  "grouped": true,
+  "components": [
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        0,
+        false,
+        false
+      ],
+      "units": 5516809,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        0,
+        false,
+        true
+      ],
+      "units": 3023888,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        0,
+        true,
+        false
+      ],
+      "units": 2122235,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        0,
+        true,
+        true
+      ],
+      "units": 119637,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        1,
+        false,
+        false
+      ],
+      "units": 5630181,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        1,
+        false,
+        true
+      ],
+      "units": 9801338,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        1,
+        true,
+        false
+      ],
+      "units": 412532,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        1,
+        true,
+        true
+      ],
+      "units": 1669269,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        2,
+        false,
+        false
+      ],
+      "units": 17534107,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        2,
+        false,
+        true
+      ],
+      "units": 12077591,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 0,
+      "group": [
+        2,
+        true,
+        false
+      ],
+      "units": 10174,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        0,
+        false,
+        false
+      ],
+      "units": 8923,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        0,
+        false,
+        true
+      ],
+      "units": 11125,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        0,
+        true,
+        true
+      ],
+      "units": 6982,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        1,
+        false,
+        false
+      ],
+      "units": 137071,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        1,
+        false,
+        true
+      ],
+      "units": 68349,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        1,
+        true,
+        false
+      ],
+      "units": 30677,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        1,
+        true,
+        true
+      ],
+      "units": 1971,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        2,
+        false,
+        false
+      ],
+      "units": 536491,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 113,
+      "warp_percent": 100,
+      "group": [
+        2,
+        false,
+        true
+      ],
+      "units": 779363,
+      "source_sha256": "d5f73f68006fd3ad80d2e176ff5e65675185488d45a6831363ed6e9d51d3dafa"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        0,
+        false,
+        false
+      ],
+      "units": 908743,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        0,
+        false,
+        true
+      ],
+      "units": 507350,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        0,
+        true,
+        false
+      ],
+      "units": 365063,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        0,
+        true,
+        true
+      ],
+      "units": 48594,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        1,
+        false,
+        false
+      ],
+      "units": 4376486,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        1,
+        false,
+        true
+      ],
+      "units": 12218102,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        1,
+        true,
+        false
+      ],
+      "units": 2019162,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        1,
+        true,
+        true
+      ],
+      "units": 319521,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        2,
+        false,
+        false
+      ],
+      "units": 9207459,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        2,
+        false,
+        true
+      ],
+      "units": 10530171,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    },
+    {
+      "n": 115,
+      "warp_percent": 100,
+      "group": [
+        2,
+        true,
+        false
+      ],
+      "units": 636,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+[
+  {
+    "tag": "162--719870-12.870-100-uniform",
+    "n": 162,
+    "source": -719870,
+    "side_text": "12.870",
+    "K": 100,
+    "mode": "uniform",
+    "recorded_directions": 520,
+    "verified_bins": 373,
+    "measure_sha256": "3873f2e3999c07087080c251888c92c374dbfe6d83a1d47c7d06a083632e68a8"
+  },
+  {
+    "tag": "161--2017217-12.856-100-uniform",
+    "n": 161,
+    "source": -2017217,
+    "side_text": "12.856",
+    "K": 100,
+    "mode": "uniform",
+    "recorded_directions": 363,
+    "verified_bins": 267,
+    "measure_sha256": "90d0649c1993b1c86f012a40c2d97ac90df2927f5fbd1517c193b0c5837cf01f"
+  },
+  {
+    "tag": "161--939860-12.860-100-uniform",
+    "n": 161,
+    "source": -939860,
+    "side_text": "12.860",
+    "K": 100,
+    "mode": "uniform",
+    "recorded_directions": 272,
+    "verified_bins": 202,
+    "measure_sha256": "ac2c17be36ae4ae034501ff5cdf49b5fadf986d7b73731e928aa196b55f84acc"
+  },
+  {
+    "tag": "161--2017830-12.830-100-uniform",
+    "n": 161,
+    "source": -2017830,
+    "side_text": "12.830",
+    "K": 100,
+    "mode": "uniform",
+    "recorded_directions": 238,
+    "verified_bins": 161,
+    "measure_sha256": "6685611df4a8d463d2346b971893a282c3c8a98d935b2d0db03d6cf68ba37dd7"
+  },
+  {
+    "tag": "162--939877-12.877-100-uniform",
+    "n": 162,
+    "source": -939877,
+    "side_text": "12.877",
+    "K": 100,
+    "mode": "uniform",
+    "recorded_directions": 60,
+    "verified_bins": 50,
+    "measure_sha256": "641456bafaba35bd8e93347049a3f79e68970f969b53b8c4bb077e01d5fff671"
+  },
+  {
+    "tag": "163--939890-12.890-100-uniform",
+    "n": 163,
+    "source": -939890,
+    "side_text": "12.890",
+    "K": 100,
+    "mode": "uniform",
+    "recorded_directions": 132,
+    "verified_bins": 61,
+    "measure_sha256": "fc0797d014a1737baae607560f1cfdb842d0205c689826b54f3ce91a2bb316e5"
+  },
+  {
+    "tag": "161--2017260-12.860-100-uniform",
+    "n": 161,
+    "source": -2017260,
+    "side_text": "12.860",
+    "K": 100,
+    "mode": "uniform",
+    "recorded_directions": 102,
+    "verified_bins": 70,
+    "measure_sha256": "950d925d94d1b21e015f1f885512c69d63324eb1a01d63322204e8757d1dbf29"
+  },
+  {
+    "tag": "161--2017248-12.856-100-uniform",
+    "n": 161,
+    "source": -2017248,
+    "side_text": "12.856",
+    "K": 100,
+    "mode": "uniform",
+    "recorded_directions": 129,
+    "verified_bins": 76,
+    "measure_sha256": "2581aa82c673b66db86ab12bbac84cbaab18d9dfc8f4e7fcf690c15d4e2b031c"
+  },
+  {
+    "tag": "92--3020092-9.8716-102-uniform",
+    "n": 92,
+    "source": -3020092,
+    "side_text": "9.8716",
+    "K": 102,
+    "mode": "uniform",
+    "recorded_directions": 177,
+    "verified_bins": 134,
+    "measure_sha256": "51f6820cc99be79b982669f11a5adccdce7f5294a11b1348b4e8b5a5ff08f8ec"
+  },
+  {
+    "tag": "90--3020090-9.7915-102-uniform",
+    "n": 90,
+    "source": -3020090,
+    "side_text": "9.7915",
+    "K": 102,
+    "mode": "uniform",
+    "recorded_directions": 73,
+    "verified_bins": 50,
+    "measure_sha256": "3c130d5fbf5f87cfee4a2814a75c73b5a774ec13fb4442790fe1a7ac9eb0aae7"
+  },
+  {
+    "tag": "19--3020019-4.8283-102-uniform",
+    "n": 19,
+    "source": -3020019,
+    "side_text": "4.8283",
+    "K": 102,
+    "mode": "uniform",
+    "recorded_directions": 477,
+    "verified_bins": 311,
+    "measure_sha256": "b66957a9defece0b6cec850146a883319a72e08bb864f391959505d589407235"
+  },
+  {
+    "tag": "105-105-10.500-112-uniform",
+    "n": 105,
+    "source": 105,
+    "side_text": "10.500",
+    "K": 112,
+    "mode": "uniform",
+    "recorded_directions": 246,
+    "verified_bins": 159,
+    "measure_sha256": "0a7e407f8656ab379230267b0b0e957dc4b921b827d28f02066566f915186b74"
+  },
+  {
+    "tag": "30--3020030-5.8933-102-uniform",
+    "n": 30,
+    "source": -3020030,
+    "side_text": "5.8933",
+    "K": 102,
+    "mode": "uniform",
+    "recorded_directions": 252,
+    "verified_bins": 157,
+    "measure_sha256": "20856f763ec4a48a9450e362dd185c239366a5b92d8e6c1398f45f37d122565b"
+  },
+  {
+    "tag": "29--3020029-5.8208-102-uniform",
+    "n": 29,
+    "source": -3020029,
+    "side_text": "5.8208",
+    "K": 102,
+    "mode": "uniform",
+    "recorded_directions": 250,
+    "verified_bins": 156,
+    "measure_sha256": "16750ea3ee45118958b4433d90d7de1349eaabb35053cdb70e3fbfc2447893a5"
+  },
+  {
+    "tag": "39--3020039-6.6633-102-uniform",
+    "n": 39,
+    "source": -3020039,
+    "side_text": "6.6633",
+    "K": 102,
+    "mode": "uniform",
+    "recorded_directions": 184,
+    "verified_bins": 114,
+    "measure_sha256": "1392d69122ca95cabc336f053ead5411cf036ac7f4710886ea27820fef5c6d4e"
+  }
+]

@@ -893,6 +893,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-de-winter-132-157-20261111/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-959-20261111/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-960-20261111/README.md) | generated status view | generated | generated | — |
+| [Lower Bounds of Issues 1039, 1041 and 1042: Report Order](packing/campaign/issue-intake/lower-bounds-de-winter-20261120/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-962-20261112/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-967-20261112/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-977-979-20261114/README.md) | generated status view | generated | generated | — |
