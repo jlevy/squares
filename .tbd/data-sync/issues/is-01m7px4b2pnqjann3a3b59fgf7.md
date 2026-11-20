@@ -3,17 +3,21 @@ type: is
 id: is-01m7px4b2pnqjann3a3b59fgf7
 title: "Adopt T-331 at 268, T-332 at 270 and #1031's result at 299 on 19 November 2026 (the day after #1009 moved all three), and regularize them"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 3
+delegate: c2-imports
 labels:
   - regularization
   - validation
   - intake
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+hold: null
+hold_until: null
 created_at: 2026-11-18T08:42:16.533Z
-updated_at: 2026-11-18T08:42:16.533Z
+updated_at: 2026-11-20T07:02:59.267Z
+started_at: 2026-11-20T07:02:59.266Z
 ---
 The pass's adoption of 19 November 2026 (UTC) under the house rule, in one pull request: Joost de Winter's T-331 at 268 (issue 1021), T-332 at 270 (issue 1022) and #1031's result at 299 (think-10mx), each a validated, reviewed packing below the house, which cannot be adopted on 18 November because #1009's pass (think-i38n) already moved 268, 270 and 299 that day and a day's archive holds one prior state a count (upper_bound_houses.LATER_PASSES; the precedent of 268 on 25 and 26 October, T-240 then T-242). Each count is staged in select_houses.PENDING_ADOPTION ("next pull request") under this bead by its registering PR: think-gqzz's for 268 and 270, think-10mx's for 299.
 
