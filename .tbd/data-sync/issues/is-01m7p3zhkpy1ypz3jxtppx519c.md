@@ -5,7 +5,7 @@ title: "Import #1021, #1022: Joost de Winter's s(268) <= 16.870013850405 and s(2
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: c2-imports
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T01:22:44.981Z
-updated_at: 2026-11-20T12:30:53.939Z
+updated_at: 2026-11-20T17:07:57.126Z
 started_at: 2026-11-18T01:23:11.221Z
 ---
 
@@ -44,3 +44,5 @@ R-1021 (blind review), 07:18Z: lane r1021b-1118 handed back before hosted CI fin
 2026-11-20T07:58Z c2-imports (coordinator bold-ritchie-coord1120): claimed from w6r2; one PR for #1021, #1022 and #1031 on claude/intake-2026-11-20-import-1021 (from main 1015fc175), the 18 November branch merged in at c6a78b00e0. T-ids T-331 (268), T-332 (270), T-333 (299), provisional after #1024's T-328 to T-330. Correction found on re-reading the receipts: at 270 the pair enlargement (square 101 grown to its gap with 98, not clean) is refused at contact for shape AND overlap, as upper_bound_sharp_controls predicts for a non-clean enlargement; the plan (c4a97465...) says shape alone at contact, so 10 of 11 came out as the plan's letter states, not 11 (all 11 as the module predicts). T-332's notes, E-de-winter-1022-exact-feasibility and the packet README now say so. 268's 11 match the plan. Adoption of 268 and 270 under think-78aj in the pass of 20 November started 07:39Z (adopt_houses: T-331, T-332); regularization runs next.
 
 2026-11-20T12:45Z c2-imports: draft PR #1048 (claude/intake-2026-11-20-import-1021), head 484e392ced, main a9e5261a2 merged; T-331 (268), T-332 (270), T-333 (299) provisional after #1024's T-328 to T-330; all three adopted and regularized in the pass of 20 November; stamps and pin at c3aa6d5773/484e392ced, to be redone after #1024 merges (retain_history on main's 20 November archive). Local: records and edit tiers green but the expected contiguity gap; hosted CI running.
+
+2026-11-20T17:10Z c2-imports: PR #1048 green on main 7a3b186a2 (head abdeb73873; packing-required run 44777222780, pages-required run 44777222634), labels intake and S3. Final merge after #1024: archive combined with adopt_houses.retain_history (127, 268, 270, 299), LATER_PASSES unioned, SCREEN_FINDINGS n=1..324 (126, 2985, 302, 7449), paper comparison re-measured (explainer register count 333 vs 330 only), stamps unchanged (2026-11-20), DATA_REVISION re-pinned to 64a48c24. Not merged; stage 7 replies remain (the coordinator's).

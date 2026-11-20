@@ -5,7 +5,7 @@ title: "Import #1031: Joost de Winter's s(299) <= 17.793636991744 (0.0074 below 
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: c2-imports
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T07:26:42.911Z
-updated_at: 2026-11-20T12:30:54.546Z
+updated_at: 2026-11-20T17:07:57.809Z
 started_at: 2026-11-18T07:33:41.966Z
 ---
 
@@ -36,3 +36,5 @@ started_at: 2026-11-18T07:33:41.966Z
 2026-11-20T09:00Z c2-imports: T-333 registered at 07:36Z (5b2adb973f), after the replay (a203f4a752, 07:23Z) and ledger (647d806b21, 07:24Z). Coordinator reported #1036 merged (4443f7f90) at about 08:12Z; this lane read docs/project/reviews/review-2026-11-18-de-winter-1031.md from origin/main at 08:12:33Z, after all its own 299 work was committed. Mapped: V-de-winter-1031-review-check, E-de-winter-1031-review-exact-feasibility (rv1031_check ACCEPT, 44,551 pairs, 36 controls: 34 as stated, 2 as the side rule gives, F3), external_review on the report evidence, T-333 reviews block (accepted, covers T-333), novelty previously-published per After the Freeze A1 (not the frozen N5 line), credit Joost de Winter after the compilation's packings: a new arrangement relative to every packing at 299; the 210-square T-325 motion is a generic upright lattice plus the T-248 band (A2), not a continuation. Significance S3 confirmed by the review. Adopted at 299 in the pass of 20 November (adopt_houses 08:57Z); strong runs on 299 next.
 
 2026-11-20T12:45Z c2-imports: draft PR #1048 (claude/intake-2026-11-20-import-1021), head 484e392ced, main a9e5261a2 merged; T-331 (268), T-332 (270), T-333 (299) provisional after #1024's T-328 to T-330; all three adopted and regularized in the pass of 20 November; stamps and pin at c3aa6d5773/484e392ced, to be redone after #1024 merges (retain_history on main's 20 November archive). Local: records and edit tiers green but the expected contiguity gap; hosted CI running.
+
+2026-11-20T17:10Z c2-imports: PR #1048 green on main 7a3b186a2 (head abdeb73873; packing-required run 44777222780, pages-required run 44777222634), labels intake and S3. Final merge after #1024: archive combined with adopt_houses.retain_history (127, 268, 270, 299), LATER_PASSES unioned, SCREEN_FINDINGS n=1..324 (126, 2985, 302, 7449), paper comparison re-measured (explainer register count 333 vs 330 only), stamps unchanged (2026-11-20), DATA_REVISION re-pinned to 64a48c24. Not merged; stage 7 replies remain (the coordinator's).
