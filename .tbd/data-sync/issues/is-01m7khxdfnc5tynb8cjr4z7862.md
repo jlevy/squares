@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 77
+version: 78
 delegate: bold-ritchie-coord1120
 labels: []
 dependencies: []
@@ -75,7 +75,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-20T19:31:14.623Z
+updated_at: 2026-11-20T20:42:32.333Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -100,3 +100,14 @@ started_at: 2026-11-17T01:28:43.493Z
 2026-11-20T16:40Z bold-ritchie-coord1120: OWNER DECISIONS in conversation today: (1) option D compares exact sides, not 12-place prints; #1030 may merge on that basis (answers c8-senior's B1). (2) Credit at 109 (#1012/#1047): Samanyu-dev as finder; source credit "de Winter after Kodaj, Samanyu-dev". Merged #1024 (25e9ea100; T-328..T-330 at 127, T-330 house, 20 Nov pass) after senior review c9 and fix lane c10. Open: #1048 (c2: T-331..T-333 at 268/270/299, finishing the 20 Nov pass), #1030 (c12 moving its 172/199 adoption to the 21 Nov pass), #1045 (#1038, T-334 at 228; to 21 Nov pass after #1030), #1047 (#1012 at 109, T-335 provisional; #1040 recorded, 259 needs the zip), #1049 (r1012 review). Replies owed: #1015/#1017/#1020 (drafting, lane c13), #1008 reply to record, then #1021/#1022/#1031, #939/#946/#846 (846 stays open on think-7k8p), #1038, #1012. Queued intake: #1037, #1039/#1041/#1042, #1019. Tool defect: adopt_houses RUN_DIRECTORIES prints grid-0.5 names the index schema refuses (both lanes hit it) — needs a bead.
 
 2026-11-20T18:55Z bold-ritchie-coord1120: merged #1049 (r1012 review), #1048 (T-331..T-333 at 268/270/299, 20 Nov pass; credit at 268/299 widened per attribution.md). 20 Nov pass complete: 127, 268, 270, 299. Posted and closed: #1015/#1017/#1020 (16:41Z), #1021/#1022/#1031 (18:34Z); #1001 follow-up (17:56Z). Opened #1050 (Mira's s(18) proof; review lane r1050 running; import lane refused by the permission classifier — owner to decide). New: #1052 (s(305), think-kzwl, queued). #1051 lower bounds: 73 current claims, phase 1 replays all matching; phase 2 and a 17-set census gap (7 counts, ~34 CPU-h) to validation beads. Running: c12 (#1030 → 21 Nov pass), r1050, c14 (#1047), c15 (#1051), rR1 (lower-bound review R1), c18 (records PR). Host load 11-16 on 4 cores: no new lanes until some finish.
+
+## Handoff 2026-11-20 ~20:45Z: weekly usage limit hit (resets 25 Nov 04:00Z)
+All sub-agent lanes stopped mid-work at about 20:40Z. Resume each by SendMessage to its agent once the limit resets (transcripts saved), or start a fresh lane from this note if the container was reclaimed.
+- PR 1054 (s(18) review, think-5jr0): CI green except overview (synopsis page 652,743 > 650,000). Waits on PR 1056.
+- PR 1056 (synopsis ceiling 650,000 -> 750,000, branch claude/intake-2026-11-20-synopsis-budget, head 76c40def9): pushed; local validation cut off, hosted CI is the gate. Merge first, then merge main into 1054, 1057 and every review branch that adds a SYNOPSIS row.
+- PR 1057 (s(305) review, think-d788): accept, option D new (6.52e-6 below T-309 at first contact), S2. Overview will fail until 1056 lands. Next: import lane for 1052 (think-kzwl).
+- c12 (#1030, option D, 172/199): was resolving merge conflicts for the 21 Nov pass in local worktree c12-optd-land; it cannot land on 21 Nov now. Redo the main merge, archive combination and stamps on the UTC day it will actually merge. #1045 (228) follows in the same pass.
+- c14 (#1047 at 109, Samanyu-dev credit): local worktree c14-109, committed for a 22 Nov pass, validation interrupted. Re-check the pass day before pushing.
+- c15 (#1051 lower bounds): worktree c15-lower has 105 uncommitted files (replays and register entries in progress).
+- rR1 (think-dhjz) and rR2 (think-bgi2): blind reviews mid-run; rR2's plan freeze 3a02ec8d2 is committed but not pushed. Keep the freeze order when resuming.
+- Sweep at 20:00Z, new items: #1055 (s(20) > 99/20, de Winter, new issue, needs intake label, bead and record entry); de Winter's comments at 20:00Z on #1017, #1021, #1022 and #1031 are unread; JoostdeWinter/square-packing has 5 new commits (n=20 lower bound). Records still owed: the #1009 follow-up (7048385373) and the #1017 ask (7048389052).
