@@ -5,14 +5,14 @@ title: "Owner decision: apply option D (think-b0w5) retroactively to T-259 at 13
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - decision
   - owner-decision
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 created_at: 2026-11-18T02:45:51.109Z
-updated_at: 2026-11-18T08:27:10.310Z
+updated_at: 2026-11-20T11:14:40.890Z
 ---
 Raised by lane w7-optd-1118 (think-8yyy) on 18 November 2026; the coordinator (coord-intake-1117r) puts it to the owner.
 
@@ -28,3 +28,5 @@ blocked_on: owner
 ## Notes
 
 coord-intake-1117r, 2026-11-18: 207 is added to this question. T-173 (#573, Polkovskyi's re-solve at 207) measures 0.9984 of T-147's contraction margin, so it would be a restatement under D if D reached it. think-b0w5 doesn't list it. #1030 keeps T-173's standing and records the measurement only (#1030 Review A1). The question now covers T-259 at 130 (0.9193), T-173 at 207 (0.9984), and T-155's solved views, T-170 and T-195 (not measured).
+
+c11-fix1030, 2026-11-20 (think-8yyy, #1030's senior review S3): T-281 depends on this answer too. T-281, Yim's translation of T-259's certificate at 130, is recorded in #1030 as a restatement of T-259 (0.0896 of T-259's contraction margin, packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n130.json). If option D reaches T-259, T-259 becomes a restatement of T-254 (Couzo's #843 packing), and T-281's restatement and its "superseded by" mark follow that answer. #846, where T-259 was registered, keeps blocked:owner-decision on this bead: its reply after #1030 merges names T-259's standing as this open question and leaves the issue open until this is answered.
