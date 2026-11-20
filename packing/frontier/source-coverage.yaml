@@ -13675,6 +13675,58 @@ sources:
     padding. The ledger of 17 November for this lane
     (campaign/issue-intake/upper-bounds-1009-20261117) records all 13. All 39 native jobs have
     full outcomes.
+- id: de-winter-s268-upper-bound-2026-11-17
+  title: Joost de Winter's packing of 268 squares from nine diagonal slices at JoostdeWinter/square-packing a1ba501, issue 1021
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a1ba5019e787e407646293d7bef81d63c9951b32
+  local: resources/web/de-winter-s268-upper-bound-2026-11-17/
+  source_key: '[de Winter s268 upper bound 2026-11-17]'
+  scope:
+    n_values:
+    - 268
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1021-certificate-report
+  - E-de-winter-1021-exact-feasibility
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints: 16.870013850405 at 12 places, the issue's
+    print. T-331 records the in-horizon report, 1.85e-03 below T-320 at 268; the ledger of 18
+    November for this lane (campaign/issue-intake/upper-bounds-1021-1022-20261118) records it after
+    #1009's. All 3 native jobs have full outcomes. No selected override or superseded claim is
+    created at this stage; current cases and earlier source ownership remain unchanged.
+- id: de-winter-s270-upper-bound-2026-11-17
+  title: Joost de Winter's packing of 270 squares from Asterios Panoras's compilation at JoostdeWinter/square-packing a1ba501, issue 1022
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a1ba5019e787e407646293d7bef81d63c9951b32
+  local: resources/web/de-winter-s270-upper-bound-2026-11-17/
+  source_key: '[de Winter s270 upper bound 2026-11-17]'
+  scope:
+    n_values:
+    - 270
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1022-certificate-report
+  - E-de-winter-1022-exact-feasibility
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints: 16.927314216352 at 12 places, the issue's
+    print. T-332 records the in-horizon report, 8.34e-04 below T-321 at 270; the ledger of 18
+    November for this lane (campaign/issue-intake/upper-bounds-1021-1022-20261118) records it after
+    #1009's. All 3 native jobs have full outcomes. No selected override or superseded claim is
+    created at this stage; current cases and earlier source ownership remain unchanged.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

@@ -1881,6 +1881,11 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # counts from 147 to 307, centre/half-angle certificates beside Witness/v2 corner
     # files of the same packings, in one repository and one packet.
     "[Mishapolk issue 1009 2026-11-16]": _import("mishapolk-issue1009-2026-11-16"),
+    # Lane w6-dewinter-1118 of 18 November (think-gqzz): Joost de Winter's issues 1021 at 268,
+    # nine diagonal slices of published packings, and 1022 at 270, Panoras's compilation's
+    # packing re-solved by regions, both at JoostdeWinter/square-packing a1ba501.
+    "[de Winter s268 upper bound 2026-11-17]": _import("de-winter-s268-upper-bound-2026-11-17"),
+    "[de Winter s270 upper bound 2026-11-17]": _import("de-winter-s270-upper-bound-2026-11-17"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

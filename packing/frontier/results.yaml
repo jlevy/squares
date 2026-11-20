@@ -52832,6 +52832,276 @@ results:
       producer's own crate, as this entry's wording says; N-8, the PDF's earlier figure
       10.622222909689 is not reproduced and is no part of the claim. N-2, N-3, N-5 and N-8,
       and the review's four questions, go to the author with the reply.
+  - id: T-331
+    kind: upper-bound
+    registered: '2026-11-18'
+    landed: '2026-11-18'
+    headline: >-
+      de Winter's nine-slice packing at 268, a new arrangement, 1.85e-03 below T-320
+    claim: >-
+      One complete rational certificate proves s(268) <=
+      8435006925202232172230076700390296999482947661447087509257467/500000000000000000000000000000000000000000000000000000000000.
+      That side is 16.8700138504044644 rounded up at 16 places and 16.870013850405 at 12, as
+      #1021 prints it.
+
+      It is 1.85e-03 below T-320 (Mykhailo Polkovskyi's further arrangement of Doğa Özden's T-289), the case's house in both lanes since
+      the pass of 18 November 2026, and 2.02e-03 below T-289, the house before it; the
+      ledger of 18 November records the report after #1009's. Measured here, no symmetry of the
+      box pairs it one to one with T-320's packing by nearest centres, and the optimal
+      assignment moves 46 squares beyond a tenth (largest 0.901); against T-289's, 56.
+      So it is a new arrangement relative to both. It has 46 squares tilted, 36.85 to 43.09 degrees by magnitude, 15 one way and 31 the other, and the other 222 exactly upright.
+
+      Both maintained exact routes accept the certificate. The blind stage 4 review of 18
+      November (R-1021), at the tier stage 4 names, accepts it with no blocking or major
+      finding, by a clean-room checker of its own deciding every square, wall and pair by two
+      exact methods: confirmed, independently re-implemented.
+
+      The issue says the author's two checkers, verify_exact.py (separating axes) and
+      check_area.py (the area of each close pair's clipped intersection), both Fraction and the
+      standard library only, each report 268 squares and 620 close pairs, and that no test
+      of local optimality was run. Those statements are the author's; no source program ran
+      here.
+
+      The issue says the search divided the container into nine diagonal slices and filled each from a transformed copy of a published packing: the first two and the last four slices from 302 squares, the third from 153 and the fourth and fifth from 129, holding 8, 22, 40, 42, 60, 48, 30, 16 and 2 squares along the diagonal, then optimized every position and angle and enclosed the result in rationals; the inputs came from the public Kaggle compilations of Navneet Prabhat (129 and 153) and Danil Malyshev (302) and from Francisco Couzo's certificate (302). It asks for credit to Joost de Winter, the slices from packings by Ostashev (129) and PingYou Ltd (153, 302); the record names the finder at 129 Daniil Ostashev, where the issue writes Dmitry. It quotes the Kaggle per-puzzle table's 16.870013850412470 at 268 (the team Thinking inside the box, 15 November), 8.0e-12 above this side, with no coordinates, so it states no packing.
+
+      The issue says the search, optimization and rational certificate were produced with
+      GPT-6.2 Astra (OpenAI) and the repository files, checks and figure with Claude
+      (Anthropic), both under his direction.
+    scope:
+      n_values:
+      - 268
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 268 relative to T-320's packing and to T-289's, 46 and 56 squares moved beyond a tenth and none paired one to one by nearest centres, 1.85e-03 below the house, above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-320 and T-328. A slice composition of published packings is no new technique, so not S4. No lower bound or optimum.
+      scored: '2026-11-18'
+      by: >-
+        the stage 4 review of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md), confirming the registering
+        lane's draft (think-gqzz)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s268 upper bound 2026-11-17]'
+      published: '2026-11-17'
+    evidence:
+    - E-de-winter-1021-certificate-report
+    - E-de-winter-1021-exact-feasibility
+    - E-de-winter-1021-review-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review, lane r1021-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 268 and 270 of the certificates of issues 1021 and 1022 and their
+        twins, decided again by a clean-room exact checker by two methods with the controls a
+        plan frozen beforehand states, custody in the source's history, the sides and the
+        issues' numbers, option D's gains and contraction margins exactly against T-289,
+        T-320, T-283 and T-321, identity against each, and the significance.
+      verdict: accepted
+      covers: [T-331, T-332]
+    artifacts:
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/source/n268/n268_exact.json.gz
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/contraction-n268.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/contraction-n268-own.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/controls-plan-268-270.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/check-1021.json
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/controls-1021.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 268: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 214668 pair decisions; summed over the 3 jobs, the receipt records 25.6 route
+      CPU seconds. No square touches the box: every wall clears by at least 2.00e-60, and every pair
+      by at least 1.66e-59. The certificate is read by the center-direction-json reader, and its
+      corner twin is held to it as the same packing by the witness-corners-opposite reader. The
+      replay is E-de-winter-1021-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated (campaign/issue-intake/upper-bounds-1021-1022-20261118/
+      controls-plan-268-270.txt, SHA-256 c4a974659d11...7e45, hashed at 02:27:48Z on 18 November),
+      lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
+      every square toward its nearer near wall by its least clearance: both routes accepted each
+      at exact contact, margin 0, and refused each 1e-30 past it. They refused a square enlarged
+      to its pair and a square enlarged to its wall at contact for the shape alone and 1e-30
+      past it for the overlap or the wall as well, and refused a duplicated square; all 11 came
+      out as the plan states, by its branches for a box no square touches.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-320's
+      certificate's margin is 3.3744e-27 (squares 228 and 264; measure/contraction-n268.json), so the gain
+      of 1.8543e-3 lies wholly outside T-320's padding and the claim is a new result. This
+      certificate's own margin is 2.6855e-58 (squares 49 and 52; measure/contraction-n268-own.json).
+      The L-step scan (measure/l-step-scan.json), with this side stood in for 268's ceiling, finds
+      main's consequences unchanged.
+
+      The blind stage 4 review of 18 November (R-1021, lane r1021-1118, PR #1033) accepts both
+      certificates with fourteen findings, none blocking or major: F3, the frozen reader's
+      strictness with the predecessors' files, met by a reader written after the freeze, is the
+      review's own; F8 notes that the houses the issues name were replaced by T-320 and T-321
+      while they were open; F14, after the freeze, that the source's READMEs name GPT-6.2 Sol
+      where the issues name GPT-6.2 Astra; the rest are notes. Its option D measurements and
+      identity agree with this lane's exactly. Its Questions 1 (the start files), 2 (#1022's
+      five slightly turned squares) and 3 (which model) go to the author with the reply. Its
+      clean-room run on this certificate is E-de-winter-1021-review-exact-feasibility.
+    next_rung: >-
+      The house rule's adoption at 268 in the pass's next pull request, on 19 November 2026
+      (think-78aj), staged in select_houses.PENDING_ADOPTION because #1009's pass moved 268 on
+      18 November and a day's archive holds one prior state a count, regularized in that pull
+      request; V4 and C4 need a second qualifying adversarial review by a distinct reviewer
+      and an explicit human oversight record.
+  - id: T-332
+    kind: upper-bound
+    registered: '2026-11-18'
+    landed: '2026-11-18'
+    headline: >-
+      de Winter's re-optimization of Panoras's compilation's 270, a new arrangement, 8.34e-04 below T-321
+    claim: >-
+      One complete rational certificate proves s(270) <=
+      16927314216351701364094693919616632628260321141481608494025753/1000000000000000000000000000000000000000000000000000000000000.
+      That side is 16.9273142163517014 rounded up at 16 places and 16.927314216352 at 12, as
+      #1022 prints it.
+
+      It is 8.34e-04 below T-321 (Mykhailo Polkovskyi's re-solve of T-283, Evan Daniel's packing as Doğa Özden improved it), the case's house in both lanes since
+      the pass of 18 November 2026, and 8.34e-04 below T-283, the house before it; the
+      ledger of 18 November records the report after #1009's. Measured here, no symmetry of the
+      box pairs it one to one with T-321's packing by nearest centres, and the optimal
+      assignment moves 94 squares beyond a tenth (largest 1.024); against T-283's, 94.
+      So it is a new arrangement relative to both. It has 78 squares tilted beyond a degree, 19.78 to 35.37 degrees, all one way, 5 within a degree of upright and the rest exactly upright.
+
+      Both maintained exact routes accept the certificate. The blind stage 4 review of 18
+      November (R-1021), at the tier stage 4 names, accepts it with no blocking or major
+      finding, by a clean-room checker of its own deciding every square, wall and pair by two
+      exact methods: confirmed, independently re-implemented.
+
+      The issue says the author's two checkers, verify_exact.py (separating axes) and
+      check_area.py (the area of each close pair's clipped intersection), both Fraction and the
+      standard library only, each report 270 squares and 642 close pairs, and that no test
+      of local optimality was run. Those statements are the author's; no source program ran
+      here.
+
+      The issue says the search started from the 270-square packing in Asterios Panoras's public Kaggle compilation (version 17, side 16.92746606488242), a merge of many contributors that does not name the finder of this arrangement, removed and relaxed its two end regions in turn, compressed a 68-square region at the bottom inside a rectangle, reassembled the packing and optimized the position and angle of every square. It asks for credit to Joost de Winter, after the arrangement in Panoras's compilation. It quotes Panoras's compilation at 16.92746606488242 and Danil Malyshev's coordinates of #1012 at 16.927469593519, both 1.55e-04 above this side, and the Kaggle per-puzzle table's 16.927314216351814 at 270 (the team [NUP] Junie is all you need, 9 November), 1.1e-13 above it, with no coordinates; the last states no packing.
+
+      The issue says the search, optimization and rational certificate were produced with
+      GPT-6.2 Astra (OpenAI) and the repository files, checks and figure with Claude
+      (Anthropic), both under his direction.
+    scope:
+      n_values:
+      - 270
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 270 relative to T-321's packing and to T-283's, 94 squares moved beyond a tenth and none paired one to one by nearest centres, 8.34e-04 below the house, above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-320 and T-328. Re-optimizing a compilation's packing by regions is no new technique, so not S4. No lower bound or optimum.
+      scored: '2026-11-18'
+      by: >-
+        the stage 4 review of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md), confirming the registering
+        lane's draft (think-gqzz)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s270 upper bound 2026-11-17]'
+      published: '2026-11-17'
+    evidence:
+    - E-de-winter-1022-certificate-report
+    - E-de-winter-1022-exact-feasibility
+    - E-de-winter-1022-review-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review, lane r1021-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 268 and 270 of the certificates of issues 1021 and 1022 and their
+        twins, decided again by a clean-room exact checker by two methods with the controls a
+        plan frozen beforehand states, custody in the source's history, the sides and the
+        issues' numbers, option D's gains and contraction margins exactly against T-289,
+        T-320, T-283 and T-321, identity against each, and the significance.
+      verdict: accepted
+      covers: [T-331, T-332]
+    artifacts:
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/source/n270/n270_exact.json.gz
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/contraction-n270.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/contraction-n270-own.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/controls-plan-268-270.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/check-1022.json
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/controls-1022.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 270: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 217890 pair decisions; summed over the 3 jobs, the receipt records 37.71 route
+      CPU seconds. No square touches the box: every wall clears by at least 2.00e-60, and every pair
+      by at least 1.58e-59. The certificate is read by the center-direction-json reader, and its
+      corner twin is held to it as the same packing by the witness-corners-opposite reader. The
+      replay is E-de-winter-1022-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated (campaign/issue-intake/upper-bounds-1021-1022-20261118/
+      controls-plan-268-270.txt, SHA-256 c4a974659d11...7e45, hashed at 02:27:48Z on 18 November),
+      lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
+      every square toward its nearer near wall by its least clearance: both routes accepted each
+      at exact contact, margin 0, and refused each 1e-30 past it. They refused a square enlarged
+      to its pair and a square enlarged to its wall at contact for the shape alone and 1e-30
+      past it for the overlap or the wall as well, and refused a duplicated square; all 11 came
+      out as the plan states, by its branches for a box no square touches.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-321's
+      certificate's margin is 3.3863e-27 (squares 164 and 193; measure/contraction-n270.json), so the gain
+      of 8.3439e-4 lies wholly outside T-321's padding and the claim is a new result. This
+      certificate's own margin is 2.5584e-58 (squares 98 and 101; measure/contraction-n270-own.json).
+      The L-step scan (measure/l-step-scan.json), with this side stood in for 270's ceiling, finds
+      main's consequences unchanged.
+
+      The blind stage 4 review of 18 November (R-1021, lane r1021-1118, PR #1033) accepts both
+      certificates with fourteen findings, none blocking or major: F3, the frozen reader's
+      strictness with the predecessors' files, met by a reader written after the freeze, is the
+      review's own; F8 notes that the houses the issues name were replaced by T-320 and T-321
+      while they were open; F14, after the freeze, that the source's READMEs name GPT-6.2 Sol
+      where the issues name GPT-6.2 Astra; the rest are notes. Its option D measurements and
+      identity agree with this lane's exactly. Its Questions 1 (the start files), 2 (#1022's
+      five slightly turned squares) and 3 (which model) go to the author with the reply. Its
+      clean-room run on this certificate is E-de-winter-1022-review-exact-feasibility.
+    next_rung: >-
+      The house rule's adoption at 270 in the pass's next pull request, on 19 November 2026
+      (think-78aj), staged in select_houses.PENDING_ADOPTION because #1009's pass moved 270 on
+      18 November and a day's archive holds one prior state a count, regularized in that pull
+      request; V4 and C4 need a second qualifying adversarial review by a distinct reviewer
+      and an explicit human oversight record.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
