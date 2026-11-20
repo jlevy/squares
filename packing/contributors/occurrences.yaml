@@ -24238,41 +24238,11 @@ occurrences:
     path: packing/frontier/n-299.md
     record_key: '299'
     field: /reported_upper_bound/found_by/0
-  expected_text: Evan Daniel
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Joost de Winter
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  note: 'Reviewed packing/frontier/n-299.md /reported_upper_bound/found_by/0: the
-    case''s credit after the house adoption of 31 October 2026 names Evan Daniel as
-    construction finder, as the adopted result''s register entry and its stage 4 review
-    credit them; the label is the source''s.'
-  contributor_id: evan-daniel
-- origin:
-    path: packing/frontier/n-299.md
-    record_key: '299'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Doğa Özden
-  start: 0
-  end: 10
-  label: Doğa Özden
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-299.md
-    record_key: '299'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
   disposition: unresolved
   evidence: []
   note: Identity review pending.

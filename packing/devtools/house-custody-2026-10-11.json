@@ -5,11 +5,11 @@
   "command": "python -m devtools.upper_bound_houses custody",
   "runtime": "CPython 3.14.7",
   "host": "vm",
-  "setup_seconds": 15.11,
-  "call_seconds": 55.15,
+  "setup_seconds": 25.24,
+  "call_seconds": 76.64,
   "child_timeout_seconds": 120,
   "snapshot_cap_bytes": 536870912,
-  "snapshot_source_bytes": 394718996,
+  "snapshot_source_bytes": 395145053,
   "fresh_geometric_deciders": false,
   "houses": {
     "29": "T-195",
@@ -81,7 +81,7 @@
     "293": "T-271",
     "295": "T-324",
     "297": "T-299",
-    "299": "T-325",
+    "299": "T-333",
     "302": "T-193",
     "303": "T-278",
     "304": "T-273",
@@ -326,8 +326,6 @@
     {"path":"packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n292.json.xz","bytes":21932,"sha256":"27192cbd76f3ab712b9e720159e270cd74cf2dd4dd1b93e5bb021e207a61d6dc"},
     {"path":"packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n295.cert","bytes":140823,"sha256":"7778560e076f207db1913635e1148607011b80e6a0aa96dd614049613abf2cc5"},
     {"path":"packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n295.json.xz","bytes":30324,"sha256":"bd46a8a51cffacbfbd50faa52b6323d96610a136a1380f9c638f510519d70690"},
-    {"path":"packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n299.cert","bytes":231916,"sha256":"f20dd01d27f7921d136d9a9211351b5eda1c4103e2de69dc18c94eb01a52e355"},
-    {"path":"packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n299.json.xz","bytes":30856,"sha256":"86994067791cd4a5e942f0391ad0fa7cf741c02dfda2f520706ba4ea4d7e1b01"},
     {"path":"packing/resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n307.cert","bytes":232201,"sha256":"96a54741c680c97e037ebc4f80082802d3da5187b0d3b234ecc6e5c8ea39c963"},
     {"path":"packing/resources/web/mishapolk-issue1009-2026-11-16/receipts/exact-certification-n307.json.xz","bytes":27700,"sha256":"bdda8537a99255264e76550f01bd613fdc05afaacb83170128b5ca674c1f6901"},
     {"path":"packing/resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/report.json","bytes":2365,"sha256":"1259592a5152d7d6697095256404a2d476553598631d9813ed1242ed0b098713"},
@@ -339,13 +337,18 @@
     {"path":"packing/resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/sources.json","bytes":6998,"sha256":"72e82beb09c66f826ad3ef9719ec1c756a95a56bbce4b01be9be85b8dc5625f3"},
     {"path":"packing/resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/upstream-subtree.sha256","bytes":682,"sha256":"12cd3b86631a02d602c28d0aba9400f981c2b20e874235e3f41c5801a0a49fa9"},
     {"path":"packing/resources/web/de-winter-s270-upper-bound-2026-11-17/source/n270/n270_exact.json.gz","bytes":12063,"sha256":"6d8e50eb0466c7e84625f2b91133204b2815ef38b34ab9d52984db850cc18187"},
-    {"path":"packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/exact-certification.json.xz","bytes":8448,"sha256":"bc0148abab8ea68692ad44c2712cd52afb037e2766f70e374c15aa4d1a1cf9fe"}
+    {"path":"packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/exact-certification.json.xz","bytes":8448,"sha256":"bc0148abab8ea68692ad44c2712cd52afb037e2766f70e374c15aa4d1a1cf9fe"},
+    {"path":"packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/report.json","bytes":2428,"sha256":"e7ace7ebba5c747f808f2069991a8217c127e4c52cab58b244428472f1f8d939"},
+    {"path":"packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/sources.json","bytes":7082,"sha256":"a2b113032a01fb6e69b080a989d82b39af3a529c09634b51fae214ca6cbbf1be"},
+    {"path":"packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/upstream-subtree.sha256","bytes":682,"sha256":"39d5bedef3a9f89ce162232a492cf07fc75e91e43d62b9b85b38cc339c3b2e76"},
+    {"path":"packing/resources/web/de-winter-s299-upper-bound-2026-11-18/source/n299/n299_exact.json.gz","bytes":21625,"sha256":"78ebdbd39ca8007a2d4c5fa7ee27d901245e5d8dc1fe36959b6455e422add2f6"},
+    {"path":"packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/exact-certification.json.xz","bytes":13668,"sha256":"9c4e6be67747326d12d009e6d4f05bb1343722bb7d7be4c5eeabc180ed48c54e"}
   ],
   "mutations_refused_and_restored": [
     "T-195 n=29: outside-control verdict","T-195 n=29: certificate bytes","T-174 n=68: outside-control verdict","T-174 n=68: certificate bytes","T-304 n=90: outside-control verdict","T-304 n=90: certificate bytes","T-193 n=102: outside-control verdict","T-193 n=102: certificate bytes","T-229 n=105: outside-control verdict","T-229 n=105: certificate bytes","T-139 n=126: outside-control verdict","T-139 n=126: certificate bytes","T-305 n=127: outside-control verdict","T-305 n=127: certificate bytes","T-186 n=129: outside-control verdict","T-186 n=129: certificate bytes","T-259 n=130: outside-control verdict","T-259 n=130: certificate bytes","T-292 n=132: outside-control verdict","T-292 n=132: certificate bytes","T-187 n=146: outside-control verdict","T-187 n=146: certificate bytes","T-314 n=147: outside-control verdict","T-314 n=147: certificate bytes","T-222 n=154: outside-control verdict","T-222 n=154: certificate bytes","T-197 n=155: outside-control verdict",
     "T-197 n=155: certificate bytes","T-315 n=156: outside-control verdict","T-315 n=156: certificate bytes","T-293 n=157: outside-control verdict","T-293 n=157: certificate bytes","T-282 n=172: outside-control verdict","T-282 n=172: certificate bytes","T-267 n=175: outside-control verdict","T-267 n=175: certificate bytes","T-294 n=179: outside-control verdict","T-294 n=179: certificate bytes","T-316 n=180: outside-control verdict","T-316 n=180: certificate bytes","T-243 n=182: outside-control verdict","T-243 n=182: certificate bytes","T-220 n=183: outside-control verdict","T-220 n=183: certificate bytes","T-284 n=199: outside-control verdict","T-284 n=199: certificate bytes","T-306 n=204: outside-control verdict","T-306 n=204: certificate bytes","T-317 n=210: outside-control verdict","T-317 n=210: certificate bytes","T-188 n=211: outside-control verdict","T-188 n=211: certificate bytes","T-225 n=227: outside-control verdict","T-225 n=227: certificate bytes",
     "T-301 n=228: outside-control verdict","T-301 n=228: certificate bytes","T-307 n=232: outside-control verdict","T-307 n=232: certificate bytes","T-218 n=236: outside-control verdict","T-218 n=236: certificate bytes","T-295 n=237: outside-control verdict","T-295 n=237: certificate bytes","T-182 n=241: outside-control verdict","T-182 n=241: certificate bytes","T-318 n=260: outside-control verdict","T-318 n=260: certificate bytes","T-319 n=262: outside-control verdict","T-319 n=262: certificate bytes","T-308 n=264: outside-control verdict","T-308 n=264: certificate bytes","T-134 n=267: outside-control verdict","T-134 n=267: certificate bytes","T-331 n=268: outside-control verdict","T-331 n=268: certificate bytes","T-297 n=269: outside-control verdict","T-297 n=269: certificate bytes","T-332 n=270: outside-control verdict","T-332 n=270: certificate bytes","T-219 n=271: outside-control verdict","T-219 n=271: certificate bytes","T-322 n=272: outside-control verdict",
-    "T-322 n=272: certificate bytes","T-323 n=292: outside-control verdict","T-323 n=292: certificate bytes","T-271 n=293: outside-control verdict","T-271 n=293: certificate bytes","T-324 n=295: outside-control verdict","T-324 n=295: certificate bytes","T-299 n=297: outside-control verdict","T-299 n=297: certificate bytes","T-325 n=299: outside-control verdict","T-325 n=299: certificate bytes","T-278 n=303: outside-control verdict","T-278 n=303: certificate bytes","T-273 n=304: outside-control verdict","T-273 n=304: certificate bytes","T-309 n=305: outside-control verdict","T-309 n=305: certificate bytes","T-326 n=307: outside-control verdict","T-326 n=307: certificate bytes","T-221 n=308: outside-control verdict","T-221 n=308: certificate bytes"
+    "T-322 n=272: certificate bytes","T-323 n=292: outside-control verdict","T-323 n=292: certificate bytes","T-271 n=293: outside-control verdict","T-271 n=293: certificate bytes","T-324 n=295: outside-control verdict","T-324 n=295: certificate bytes","T-299 n=297: outside-control verdict","T-299 n=297: certificate bytes","T-333 n=299: outside-control verdict","T-333 n=299: certificate bytes","T-278 n=303: outside-control verdict","T-278 n=303: certificate bytes","T-273 n=304: outside-control verdict","T-273 n=304: certificate bytes","T-309 n=305: outside-control verdict","T-309 n=305: certificate bytes","T-326 n=307: outside-control verdict","T-326 n=307: certificate bytes","T-221 n=308: outside-control verdict","T-221 n=308: certificate bytes"
   ],
   "original_inputs_byte_equal": true,
   "restored_worker_inputs_byte_equal": true
