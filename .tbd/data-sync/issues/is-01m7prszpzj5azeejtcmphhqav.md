@@ -5,8 +5,8 @@ title: "Import #1031: Joost de Winter's s(299) <= 17.793636991744 (0.0074 below 
 kind: task
 status: in_progress
 priority: 1
-version: 12
-delegate: c2-imports
+version: 13
+delegate: c17-fix1048
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T07:26:42.911Z
-updated_at: 2026-11-20T17:07:57.809Z
+updated_at: 2026-11-20T17:21:53.342Z
 started_at: 2026-11-18T07:33:41.966Z
 ---
 
