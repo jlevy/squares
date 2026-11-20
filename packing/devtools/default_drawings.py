@@ -551,6 +551,22 @@ _README_I38N = (
     "(think-i38n), beside the runs' receipt, blocks and reports"
 )
 
+#: Both generators, run on 18 November 2026, on the witness the pass of 20 November 2026
+#: adopted at 127 from Joost de Winter's issue 1020 (T-330, think-zqot): Evan Daniel's
+#: regularizer and grid-slack at 0.5, 1 and 5 degrees. None draws an adoptable view, so the
+#: selection decides 127.
+_RUNZQOT = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-18-n127-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-18-n127-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-18-n127-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-18-n127-grid-deg5"),
+)
+_README_ZQOT = (
+    "packing/cases/regularized_drawings/think-zqot-2026-11-18/README.md and "
+    "selection-adopt-2026-11-18-n127.md, the selection of 18 November 2026 "
+    "(think-zqot), beside the runs' receipt, blocks and reports"
+)
+
 
 #: Both generators on the four decimal Kingbird witnesses at 39, 55, 290 and 291 that an
 #: agent set aside on 15 October 2026 with no strong run (think-yk2h), run on 31 October
@@ -984,6 +1000,22 @@ SETTLED: dict[int, Settled] = {
         "the side, beyond the certificate's own contraction margin, is held at row 3 as a "
         "register candidate, never admitted here; the axis tool's view stays drawn",
         _README_17EX,
+    ),
+    127: Settled(
+        DECIDED,
+        "[de Winter s127 issue 1020 2026-11-17]",
+        "resources/web/de-winter-s127-issue1020-2026-11-17/source/n127/n127_exact.json",
+        "a1ba5019e787e407646293d7bef81d63c9951b32",
+        "5900396863307481119664515678048233366964863482714849291045437/"
+        "500000000000000000000000000000000000000000000000000000000000",
+        _RUNZQOT,
+        "on T-330's witness grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed "
+        "rows overlap at this side), Evan Daniel's same-side view is refused (unmatched "
+        "rotation), and his KKT solve, verified exactly 7.06e-19 below the side, beyond the "
+        "certificate's own contraction margin, is held "
+        "at row 3 as a register candidate, never admitted here; the axis tool's view "
+        "stays drawn",
+        _README_ZQOT,
     ),
 }
 

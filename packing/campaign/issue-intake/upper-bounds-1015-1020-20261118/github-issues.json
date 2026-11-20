@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#1015","kind":"issue","number":1015,"url":"https://github.com/jlevy/squares/issues/1015","author":"JoostdeWinter","created_at":"2026-11-17T22:14:33Z","state":"open","closed_at":null,"title":"Lowered upper bound for n = 127 (side 11.800795682214)"},{"report":"#1017","kind":"issue","number":1017,"url":"https://github.com/jlevy/squares/issues/1017","author":"JoostdeWinter","created_at":"2026-11-17T22:27:04Z","state":"open","closed_at":null,"title":"Lowered upper bound for n = 127 (side 11.800793726616)"},{"report":"#1020","kind":"issue","number":1020,"url":"https://github.com/jlevy/squares/issues/1020","author":"JoostdeWinter","created_at":"2026-11-17T22:49:35Z","state":"open","closed_at":null,"title":"Lowered upper bound for n = 127 (side 11.800793726615)"}]
+}

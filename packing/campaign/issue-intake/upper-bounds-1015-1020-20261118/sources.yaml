@@ -1,0 +1,156 @@
+# What `python -m devtools.intake_ledger gather` reads: the three upper bounds at 127 that Joost de Winter reported
+# on 17 November 2026 and lane w6-dewinter-1118 of the intake pass takes in on 18 November (think-zqot), each a
+# certificate in his watched repository JoostdeWinter/square-packing. #1015 (22:14:33Z) names 35b576a (22:09:10Z),
+# whose parent 689bc79 (22:07:57Z) first committed the certificate; #1017 (22:27:04Z) names cc20a26 (22:26:24Z),
+# which first committed its smaller certificate; #1020 (22:49:35Z) names a1ba501 (22:48:48Z), which first committed
+# the smallest. GitHub's activity log, read on 18 November, gives the pushes: 689bc79 at 22:07:59Z, 35b576a at
+# 22:09:12Z, cc20a26 with 67fb815 at 22:26:28Z and a1ba501 with 838c5ea at 22:48:50Z, each before its issue. By the
+# owner's rule of 14 October each push would date its claim, but no other report reached 127 between any push and
+# its issue, so the issues date the claims, with the first commits kept, and the verdicts are the same either way.
+# No later issue withdraws an earlier one: each is a report of its own. The start is frozen at main eb50f54e9
+# (#1014's merge): at 127 T-305 (JoeGun's improvement of Tomáš Kodaj's Kaggle packing), in both lanes, with no
+# register bound pending adoption below it. Each claim's exact side is its certificate's, read by the packet's
+# claim record (acquisition/claims.json), which the lane wrote from main eb50f54e9; #1015 and #1020 print their
+# sides rounded up at 12 places and #1017 states its exact side, and the claim records' admission holds each print
+# to it. The issues quote Luka Cvetkovic's side 11.800793726617185 (and 11.800793726618) on the Kaggle per-puzzle
+# leaderboard of 16 November, with no coordinates: it states no packing and is no report.
+format: intake-ledger-sources-v1
+read_at_main: eb50f54e9b765a45c92686c5d8f289370c66d7ec
+read_on: '2026-11-18'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: w6
+  branch: claude/intake-2026-11-18-import-1015
+  commit: eb50f54e9b765a45c92686c5d8f289370c66d7ec
+  note: The packets' claim records, written on the lane's branch from main eb50f54e9 and read here by path.
+reports:
+- report: '#1015'
+  issue: 1015
+  holders: Joost de Winter
+  bead: think-zqot
+  lanes:
+  - lane: w6
+    packet: de-winter-s127-issue1015-2026-11-17
+    record: claims.json
+    counts: [127]
+  claims:
+  - n: 127
+    measured:
+      against: T-305
+      finding: no symmetry of the box pairs it one to one with T-305's packing by nearest centres; the optimal
+        assignment, under the identity of the box, moves 116 squares beyond 1e-3, 77 beyond 1e-2 and 10 beyond 0.1
+        (largest 0.789455) and turns 85 squares by more than 1e-6 radians, by up to 33.19 degrees; 57 squares are
+        tilted beyond a degree, 1.20 to 30.12 degrees, 55 one way and 2 the other, against T-305's 56 (26.42 to
+        31.83) all one way, and 55 of its tilted squares pair with tilted squares of T-305 of the same sign; the
+        house witness and its regularized view measure as T-305; T-305's arrangement with the band rearranged, not
+        one to one with it
+      source: packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/identity.json
+    new_packing:
+      source: '#1015: ''The search started from an exact certificate of an arrangement in the public Kaggle coordinate
+        compilations of Alex Chilton and Asterios Panoras. Its original finder could not be established. The search
+        changed the sliding offsets of the columns in the tilted central band and then optimized the positions and
+        angles of individual squares.'''
+      continues: an arrangement in the Kaggle compilations of Alex Chilton and Asterios Panoras, whose finder the
+        source could not establish, by a search over the sliding offsets of the tilted band's columns; measured, close
+        to T-305's arrangement, Tomáš Kodaj's Kaggle packing as JoeGun improved it, but not one to one with it
+    note: >-
+      T-305's uniform-contraction margin at 127 is 1.2099e-10 (squares 89 and 93), so the gain, 9.5821e-4, about
+      7.9e6 times it, lies wholly outside T-305's padding
+      (packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/contraction-n127.json); under the owner's
+      option D of 17 November 2026 (think-b0w5) the claim is below the house shrunk to first contact, so it is a new
+      result. The certificate's own margin is 7.7394e-63 (squares 31 and 34; contraction-n127-own.json).
+  note: >-
+    #1015 names 35b576a, committed at 2026-11-17T22:09:10Z, 323 seconds before it; its parent, 689bc79 (22:07:57Z),
+    first committed the certificate, which 35b576a leaves unchanged, renaming only the model used. It asks for credit
+    to Joost de Winter, Delft University of Technology, after the arrangement in the Chilton and Panoras
+    compilations, and says the search, optimization and rational certificate were produced with GPT-6.2 Sol (OpenAI)
+    and the repository files, checks and figure with Claude (Anthropic), both under his direction.
+- report: '#1017'
+  issue: 1017
+  holders: Joost de Winter
+  bead: think-zqot
+  lanes:
+  - lane: w6
+    packet: de-winter-s127-issue1017-2026-11-17
+    record: claims.json
+    counts: [127]
+  claims:
+  - n: 127
+    measured:
+      against: '#1015'
+      finding: >-
+        one to one with #1015's packing by nearest centres under the identity of the box, which moves 63 squares
+        beyond 1e-3, 27 beyond 1e-2 and 5 beyond 0.1 (largest 0.328312) and turns squares by up to 1.495 degrees; all 57
+        tilted squares pair with tilted squares of #1015 of the same sign; against T-305 no symmetry pairs it one to
+        one, and the optimal assignment moves 11 squares beyond 0.1 (largest 0.789453); #1015's arrangement moved
+      source: packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/identity.json
+    new_packing:
+      source: '#1017: ''A second stage repeatedly changed the aspect ratio of the enclosing rectangle while moving and
+        rotating squares, and then returned to a square, which shifted the tilted cap at the top of the band.'''
+      continues: >-
+        the source's own packing of #1015, its tilted cap shifted by a second stage of the search
+    note: >-
+      #1015's uniform-contraction margin is 7.7394e-63 (squares 31 and 34), so the step from it, 1.9556e-6, lies
+      wholly outside its padding (packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/contraction-n127-1015.json);
+      under the owner's option D of 17 November 2026 (think-b0w5) the claim is below #1015 shrunk to first contact,
+      so it is a new result. T-305's margin is 1.2099e-10 (contraction-n127.json). The certificate's own margin is
+      4.1903e-14 (squares 35 and 88; contraction-n127-own.json).
+  note: >-
+    #1017 names cc20a26, committed at 2026-11-17T22:26:24Z, 40 seconds before it, the commit that first committed the
+    certificate. It states the exact side 5900396863307571/500000000000000 = 11.800793726615142, and its title rounds
+    it up at 12 places. It asks for credit to Joost de Winter after the arrangement in the Chilton and Panoras
+    compilations, and states the same AI assistance as #1015.
+- report: '#1020'
+  issue: 1020
+  holders: Joost de Winter
+  bead: think-zqot
+  lanes:
+  - lane: w6
+    packet: de-winter-s127-issue1020-2026-11-17
+    record: claims.json
+    counts: [127]
+  claims:
+  - n: 127
+    measured:
+      against: '#1017'
+      finding: >-
+        one to one with #1017's packing by nearest centres under the identity of the box, which moves 46 squares
+        beyond 1e-3, 28 beyond 1e-2 and 1 beyond 0.1 (largest 0.107338) and turns squares by up to 3.981 degrees; all
+        57 tilted squares pair with tilted squares of #1017 of the same sign within 0.1 degrees, 52 within 1e-4
+        degrees; against T-305 no symmetry pairs it one to one, and the optimal assignment moves 9 squares beyond 0.1
+        (largest 0.789453); #1017's arrangement moved
+      source: packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/identity.json
+    new_packing:
+      source: '#1020: ''It changed the sliding offsets of the columns in the tilted band, shifted two groups of squares
+        in the band lengthwise, and optimized the positions and angles of all squares.'''
+      continues: >-
+        the source's own packing of #1017, two groups of the band's squares shifted lengthwise and every square
+        re-optimized
+    note: >-
+      #1017's uniform-contraction margin is 4.1903e-14 (squares 35 and 88), and the step from it, 1.7976e-13, is 4.29
+      times that margin, so the claim lies 1.3786e-13 below #1017 shrunk to first contact
+      (packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127-1017.json); under the
+      owner's option D of 17 November 2026 (think-b0w5) it is a new result, not a restatement of #1017's packing. The
+      12-place prints differ (11.800793726616 and 11.800793726615), so the restatement ruling (think-fwa9) does not
+      reach it either. T-305's margin is 1.2099e-10 (contraction-n127.json). The certificate's own margin is 1.8203e-58
+      (squares 84 and 99; contraction-n127-own.json).
+  note: >-
+    #1020 names a1ba501, committed at 2026-11-17T22:48:48Z, 47 seconds before it, the commit that first committed the
+    certificate; the head, 838c5ea, adds only the registration texts and checksums. It asks for credit to Joost de
+    Winter after the arrangement in the Chilton and Panoras compilations. It says the search, optimization and
+    rational certificate were produced with GPT-6.2 Astra (OpenAI), where the pin's n127/README.md and the head's
+    n127/REGISTRATION.md name GPT-6.2 Sol, and the repository files, checks and figure with Claude (Anthropic), both
+    under his direction.
+exceptions: []
+other_items:
+- issue: '#1017'
+  url: https://github.com/jlevy/squares/issues/1017
+  holders: Luka Cvetkovic
+  kind: side-only leaderboard entry, no packing
+  bead: think-zqot
+  disposition: 'All three issues quote the Kaggle per-puzzle table''s side at 127, 11.800793726617185 (Luka
+    Cvetkovic, 16 November; #1015 prints it as 11.800793726618), which #1017 and #1020 lie 2.04e-12 and 2.2e-12 below;
+    it states no packing, so it is no report and is recorded as context only, as #1005''s ledger treated the side
+    quoted at 292.'

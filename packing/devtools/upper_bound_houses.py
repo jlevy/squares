@@ -725,7 +725,8 @@ def _sources() -> dict[str, Source]:
         # Kodaj's public Kaggle packings as JoeGun improved them, each a new arrangement
         # relative to the house it replaces, one result a count read from one packet. T-174
         # and T-186 keep their other houses.
-        packet_source("T-305", "joegun-upper-bounds-2026-11-16"),
+        # The pass of 20 November 2026 (think-zqot) moved 127, T-305's only house, to T-330, so
+        # T-305 is no source here now.
         packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
@@ -742,6 +743,11 @@ def _sources() -> dict[str, Source]:
             packet_source(f"T-{number}", "mishapolk-issue1009-2026-11-16")
             for number in range(314, 327)
         ),
+        # The pass of 20 November 2026 (think-zqot) moved 127 from T-305, its only house
+        # (T-306 to T-309 still house 204, 232, 264 and 305 through the same packet), to Joost
+        # de Winter's issue 1020 (T-330), the smallest of his three reports there on the
+        # evening of 17 November.
+        packet_source("T-330", "de-winter-s127-issue1020-2026-11-17"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -859,7 +865,12 @@ def _sources() -> dict[str, Source]:
 #: T-269, T-277, T-279, T-283, T-287, T-288, T-289 and T-302 keep no house here; T-174 and
 #: T-193 still house other counts. The 262 and 292 certificates pair one to one with Joost
 #: de Winter's packings of issues 1007 and 1006, and the owner answered (think-bx2a): each is
-#: found by de Winter and improved by Polkovskyi, as `adopt_houses.CREDITS` gives them.
+#: found by de Winter and improved by Polkovskyi, as `adopt_houses.CREDITS` gives them. The
+#: pass of 20 November 2026 (think-zqot) moved 127 from T-305 to Joost de Winter's
+#: issue 1020 (T-330), a further arrangement of his own #1017 (T-329) and #1015 (T-328),
+#: from an arrangement in the Kaggle compilations of Alex Chilton and Asterios Panoras: a new
+#: arrangement relative to T-305's packing (no symmetry one to one, 9 squares beyond a
+#: tenth). T-305 keeps no house here; T-306 to T-309 still house 204, 232, 264 and 305.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -874,7 +885,7 @@ ADOPTED: dict[int, str] = {
     110: "T-174",
     123: "T-193",
     126: "T-139",
-    127: "T-305",
+    127: "T-330",
     129: "T-186",
     130: "T-259",
     131: "T-174",
@@ -1081,6 +1092,11 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: from T-174 (T-305, T-309), 204 from T-268 (T-306), 232 from T-275 (T-307) and 264 from
 #: T-186 (T-308); none of the five had moved that day, so the day's archive takes a row for
 #: each beside 90's.
+#: The pass of 18 November 2026 (think-i38n) adopted Mykhailo Polkovskyi's issue 1009 at 13
+#: counts. The pass of 20 November 2026 (think-zqot) adopted T-330 at 127, Joost de
+#: Winter's issue 1020, from T-305, which the pass of 16 November had adopted; lane
+#: w6r-dewinter-1118 prepared it on 18 November and lane c1-127 adopted it on the day its
+#: merge landed, so that day's archive takes the row for 127.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1172,6 +1188,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-15": frozenset({90, 147, 228}),
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
+    "2026-11-20": frozenset({127}),
 }
 
 

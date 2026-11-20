@@ -5547,7 +5547,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-16'
+  lastmod: '2026-11-20'
   status: live
 - path: cases/128.html
   canonical: cases/128.html
@@ -25931,6 +25931,143 @@ urls:
     - packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.control.json
     - docs/project/reviews/review-2026-11-18-de-winter-1018.md
     - packing/resources/web/de-winter-1018-review-2026-11-18/README.md
+- path: result/t-328.html
+  canonical: result/t-328.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-18'
+  lastmod: '2026-11-18'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 127
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s127 issue 1015 2026-11-17]'
+      published: '2026-11-17'
+    builds_on: null
+    evidence:
+    - E-de-winter-1015-certificate-report
+    - E-de-winter-1015-exact-feasibility
+    - E-de-winter-1015-review-exact-feasibility
+    - E-de-winter-1015-review-r127-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/README.md
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/source/n127/n127_exact.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/contraction-n127.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/contraction-n127-own.json
+    - packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/controls-plan-127.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/README.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/check-1015.json
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/controls-1015.json
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/README.md
+- path: result/t-329.html
+  canonical: result/t-329.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-18'
+  lastmod: '2026-11-18'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 127
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s127 issue 1017 2026-11-17]'
+      published: '2026-11-17'
+    builds_on: null
+    evidence:
+    - E-de-winter-1017-certificate-report
+    - E-de-winter-1017-exact-feasibility
+    - E-de-winter-1017-review-exact-feasibility
+    - E-de-winter-1017-review-r127-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/README.md
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/source/n127/n127_exact.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/contraction-n127.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/contraction-n127-1015.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/contraction-n127-own.json
+    - packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/controls-plan-127.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/README.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/check-1017.json
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/controls-1017.json
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/README.md
+- path: result/t-330.html
+  canonical: result/t-330.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-18'
+  lastmod: '2026-11-18'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 127
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s127 issue 1020 2026-11-17]'
+      published: '2026-11-17'
+    builds_on: null
+    evidence:
+    - E-de-winter-1020-certificate-report
+    - E-de-winter-1020-exact-feasibility
+    - E-de-winter-1020-review-exact-feasibility
+    - E-de-winter-1020-review-r127-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/README.md
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/source/n127/n127_exact.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127-1017.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127-own.json
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/controls-plan-127.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/README.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/check-1020.json
+    - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/controls-1020.json
+    - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/README.md
 - path: results.html
   canonical: results.html
   kind: page

@@ -513,6 +513,13 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-311",
         "T-312",
         "T-313",
+        # The pass of 20 November 2026 (think-zqot) took 127, the only house of JoeGun's
+        # issue-1001 certificate there (T-305), to Joost de Winter's issue-1020 certificate
+        # (T-330), which supersedes it and his own two earlier stages that evening, never
+        # houses (T-328, T-329).
+        "T-305",
+        "T-328",
+        "T-329",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
