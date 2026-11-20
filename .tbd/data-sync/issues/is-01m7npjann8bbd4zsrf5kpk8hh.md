@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: c7-pointers
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-20T09:29:41.586Z
+updated_at: 2026-11-20T09:57:27.862Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -70,3 +70,5 @@ Claim taken over from the lost lane (tbd update --delegate c7-pointers; start sk
 Custody: the attachment URL answers this session's proxy with 403 (policy: 'sessions are bound to their configured repositories'); not routed around. The same three data files are in the author's watched repository at aae089c (2026-11-18T07:30:49Z, 'Add Tomáš Kodaj's public coordinates for n = 109 (issue #1012)'), removed 44 s later at 7232328, 3 min before the comment that attaches the zip: n109_tomkodaj.csv c4f76a5a..., n109_tomkodaj.yaml 56b4655f..., verification.txt d9647ac1..., byte-identical by SHA-256 to the zip members w10-1118 recorded above; README.md there (2,038 B, e61c503e...) is not the zip's README.txt (3,298 B). The packet pins aae089c.
 
 Control plan hashed before any program decided the certificate: scratch controls-plan-1012-n109.md, SHA-256 323a526f22032acd4a7636381d0a170ac914192eb770329aec92a9efbfdcd49b, 2026-11-20T09:29:30Z.
+
+Results (c7-pointers, 2026-11-20, branch claude/intake-2026-11-20-pointers-109-259, commits e3e923e44 devtools, d5e220e4c intake, 83bebae6b records): packet de-winter-kodaj-n109-2026-11-18 at aae089c; both routes accept (3 jobs, 35,316 pair decisions, least gap 2.0e-15, wall 0); 11/11 sharp controls as planned. 4.5789e-4 below T-101's ceiling; new arrangement vs the house. Against Samanyu-dev 53551d7 best_fit_101_500.csv (SHA-256 377b9177...6c04): one to one, 37 squares > 1e-3 (max 0.0256); Samanyu's binary64 rows read exactly at their extent are a packing (both routes), contracted to first contact margin 1.9960e-12, 5.57e-14 below Kodaj's side; gain/margin 0.9721 -> option D restatement. Kodaj CSV vs witness 1.8e-15. Ledger upper-bounds-1012-20261120 records it. T-335 (provisional), V3/C3, S3 draft. Review bead think-2ut8 (unclaimed). OWNER: credit (proposed Samanyu-dev as original finder; Fonseca 6 Nov 10.949392392 unmeasured; kmmmvs merge per Samanyu README; Kaggle unreadable). Samanyu-dev's file held the 45-degree 109 at 1d95296 and 942db6d.
