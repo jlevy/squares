@@ -1,0 +1,314 @@
+{
+ "arith": "gmpy2 2.3.1 GMP GMP 6.3.0",
+ "claim": {
+  "accepted_in_box_of_claim_a": true,
+  "accepted_in_box_of_claim_b": true,
+  "ceiling_of_side_at_places": "69506394499/3906250000",
+  "claim_is_ceiling": true,
+  "claim_less_side": "959419674174615774386296052717244627413250791151986603/1000000000000000000000000000000000000000000000000000000000000000000",
+  "claim_less_side_short": "9.59419674175e-13",
+  "exact": "69506394499/3906250000",
+  "places": 12,
+  "text": "17.793636991744"
+ },
+ "cpu_s_total": 25.07,
+ "crossed": {
+  "clearances_identical_to_direct": true,
+  "compare": {
+   "inside_not_one": [],
+   "pair_mismatches": [],
+   "wall_mismatches": []
+  },
+  "cpu_s": {
+   "a": 3.4,
+   "b": 8.45
+  },
+  "margins_identical_to_direct": true,
+  "margins_sha256": "6d20ef8e6ab8ad6480fc403809bc3a3d206aefffbca653a467324fb35642aaa3",
+  "method_b_classes_and_areas_identical_to_direct": true
+ },
+ "direct": {
+  "compare": {
+   "inside_not_one": [],
+   "pair_mismatches": [],
+   "wall_mismatches": []
+  },
+  "cpu_s": {
+   "a": 2.83,
+   "b": 8.95
+  },
+  "method_a": {
+   "classes": {
+    "apart": 44551,
+    "contact": 0,
+    "overlap": 0
+   },
+   "clearances_sha256": "f9c8e980b4d72943f4ba9d7de0a1e49409593ab2cdf25127819ce5ae60964c77",
+   "contact_pairs": [],
+   "contact_pairs_listed_all": true,
+   "least_clearance": {
+    "exact": "0",
+    "short": "0",
+    "square": 129,
+    "wall": "left"
+   },
+   "least_margin": {
+    "exact": "656301604454248398923269832856066914331226116899604547327675557400724858806253930677559138822291889075987715494885443469214830037673591405127276134156416739147339936839542401/62652016681127797368772739862066217536578465044751997391166087823410160214177755376630257514026598587386512427157751568024579851156102336624950031947002086582054984100000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "pair": [
+     137,
+     175
+    ],
+    "short": "1.04753468319e-74"
+   },
+   "least_positive_clearance": {
+    "exact": "635086161329244299734793496548517534559676135245024183610656303222434220307162104358648217018517199559306666778868661188255052581853512063261987270091241895238173400300575218661/13092322519805180631844504831724337077757985343798907246303853733876341328021393985566019805235537567471667421026396041067553036612968899275850640909005658439635720845000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "short": "4.85082887600e-71",
+    "square": 270,
+    "wall": "left"
+   },
+   "least_positive_margin": {
+    "exact": "656301604454248398923269832856066914331226116899604547327675557400724858806253930677559138822291889075987715494885443469214830037673591405127276134156416739147339936839542401/62652016681127797368772739862066217536578465044751997391166087823410160214177755376630257514026598587386512427157751568024579851156102336624950031947002086582054984100000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "pair": [
+     137,
+     175
+    ],
+    "short": "1.04753468319e-74"
+   },
+   "margins_sha256": "6d20ef8e6ab8ad6480fc403809bc3a3d206aefffbca653a467324fb35642aaa3",
+   "overlap_pairs": [],
+   "pairs": 44551,
+   "positive_margins_below": {
+    "1e-1": 941,
+    "1e-12": 737,
+    "1e-15": 734,
+    "1e-2": 848,
+    "1e-20": 734,
+    "1e-3": 769,
+    "1e-30": 734,
+    "1e-6": 745,
+    "1e-9": 737
+   },
+   "wall_contacts": [
+    [
+     129,
+     "left"
+    ],
+    [
+     138,
+     "bottom"
+    ],
+    [
+     167,
+     "left"
+    ],
+    [
+     168,
+     "left"
+    ],
+    [
+     170,
+     "left"
+    ],
+    [
+     177,
+     "bottom"
+    ],
+    [
+     178,
+     "bottom"
+    ],
+    [
+     179,
+     "bottom"
+    ],
+    [
+     215,
+     "left"
+    ],
+    [
+     216,
+     "left"
+    ],
+    [
+     219,
+     "bottom"
+    ],
+    [
+     220,
+     "bottom"
+    ],
+    [
+     244,
+     "left"
+    ],
+    [
+     245,
+     "left"
+    ],
+    [
+     247,
+     "bottom"
+    ],
+    [
+     248,
+     "bottom"
+    ],
+    [
+     249,
+     "bottom"
+    ],
+    [
+     273,
+     "left"
+    ],
+    [
+     274,
+     "left"
+    ],
+    [
+     275,
+     "bottom"
+    ],
+    [
+     276,
+     "bottom"
+    ],
+    [
+     277,
+     "bottom"
+    ],
+    [
+     292,
+     "bottom"
+    ],
+    [
+     293,
+     "bottom"
+    ],
+    [
+     296,
+     "left"
+    ],
+    [
+     298,
+     "bottom"
+    ],
+    [
+     299,
+     "left"
+    ],
+    [
+     299,
+     "bottom"
+    ]
+   ],
+   "walls": {
+    "bottom": {
+     "clear": 283,
+     "contact": 16,
+     "cross": 0
+    },
+    "left": {
+     "clear": 287,
+     "contact": 12,
+     "cross": 0
+    },
+    "right": {
+     "clear": 299,
+     "contact": 0,
+     "cross": 0
+    },
+    "top": {
+     "clear": 299,
+     "contact": 0,
+     "cross": 0
+    }
+   }
+  },
+  "method_b": {
+   "classes": {
+    "apart": 44551,
+    "contact": 0,
+    "overlap": 0
+   },
+   "overlap_area_total": "0",
+   "pairs": 44551,
+   "senses": {
+    "ccw": 299,
+    "cw": 0
+   },
+   "squares_with_area_inside_one": 299
+  }
+ },
+ "extent": {
+  "box_is_tight": false,
+  "height": "1779363699174304058032582538422561370394728275537258674920884801339635756369407125583/100000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "side_less_height": "64243630592874417/100000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "side_less_width": "32121970296437171/50000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "width": "889681849587152029016291269211280685197364137768629337460442400669817878029703562829/50000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "xmax": "889681849587152029016291269211280685197364137768629337460442400669817878029703562829/50000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "xmin": "0",
+  "ymax": "1779363699174304058032582538422561370394728275537258674920884801339635756369407125583/100000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "ymin": "0"
+ },
+ "inputs": {
+  "json": {
+   "path": "/tmp/claude-0/-home-user-squares/bd74155c-bf06-5d6c-a727-558842453a91/scratchpad/review-1031/src-raw/n299_exact.json",
+   "sha256": "199e6132eeb4104d9894e4296f2bac3d244175f745163f63130e9f2065ed4a9c"
+  },
+  "witness": {
+   "path": "/tmp/claude-0/-home-user-squares/bd74155c-bf06-5d6c-a727-558842453a91/scratchpad/review-1031/src-raw/n299_witness.yaml",
+   "sha256": "bb52b883e96f4bab4119d0e2c66bc1004f9b35ceee33b24cc4b9d123ddea95a6"
+  }
+ },
+ "platform": "Linux-6.18.44-fc-v595-x86_64-with-glibc2.39",
+ "problems": [],
+ "program": "rv1031_check.py",
+ "python": "3.14.7",
+ "reading": {
+  "json": {
+   "final_newline": false,
+   "format": "each square: [center_x, center_y, cos, sin] as exact rationals; (cos, sin) is the unit direction of one edge",
+   "lines": 1802,
+   "n": 299,
+   "note_count": 0,
+   "notes": [],
+   "side_text": "17793636991743040580325825384225613703947282755372586749208848013397/1000000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "witness": {
+   "claim": {
+    "coordinate_provenance": "reported",
+    "limitations": "Exact rational coordinates of a packing of 299 unit squares, given as four corners per square. verify_exact.py checks in rational arithmetic that every square lies in the container and that all pairs of squares have disjoint interiors. The file proves an upper bound for the side. It makes no statement on optimality.",
+    "method": "exact-algebraic"
+   },
+   "envelope_status": "enforced",
+   "final_newline": true,
+   "has_certificate": false,
+   "has_source": false,
+   "id": "W-n299-de-winter",
+   "id_style": "square-k",
+   "lines": 3012,
+   "n": 299,
+   "note_count": 0,
+   "notes": [],
+   "origin": "lower-left",
+   "representation": "corners",
+   "side_text": "17793636991743040580325825384225613703947282755372586749208848013397/1000000000000000000000000000000000000000000000000000000000000000000"
+  }
+ },
+ "side": {
+  "exact": "17793636991743040580325825384225613703947282755372586749208848013397/1000000000000000000000000000000000000000000000000000000000000000000",
+  "same_in_both_forms": true,
+  "same_text": true,
+  "short": "1.77936369917430405803258253842e+1"
+ },
+ "twin": {
+  "fail_count": 0,
+  "fails_at": [],
+  "holds_at": 299,
+  "listings": {
+   "offset 0 ccw": 299
+  }
+ },
+ "verdict": "ACCEPT"
+}

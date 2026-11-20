@@ -36440,9 +36440,13 @@ issues:
       and T-175's already did, the short credits are unchanged, and the house phrase at 211 names
       the chain. The record's
       devtools.measure_identity repeats his comparison and his figures hold. The README he names
-      was unchanged when read (head 702df9bb, 84 bytes, no sources), so T-057's credit stays de
-      Winter until a published revision names them (think-a88h); the GPT-6 Astra statement is
-      recorded now as his.
+      was unchanged when read (head 702df9bb, 84 bytes, no sources), so T-057's credit stayed de
+      Winter until a published revision named them (think-a88h); the GPT-6 Astra statement was
+      recorded as his. The author published that revision on 18 November 2026, 43e15330, whose
+      README names Arslanov, Mustafin and Shangitbayev (2021), Erich Friedman's collection and
+      survey and David Ellsworth's records; T-057's credit is read from its key since, de Winter
+      after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, and the eight lines through
+      T-057 name the five after de Winter (think-a88h).
     read_through: '2026-11-18T06:45:20Z'
     results: []
     asks:
@@ -36471,7 +36475,7 @@ issues:
     - what: >-
         Name T-057's own sources, Arslanov, Mustafin and Shangitbayev (2021) and others, in its
         credit and through the chain.
-      state: queued
+      state: done
       source: body
       bead: think-a88h
       note: >-
@@ -36486,6 +36490,15 @@ issues:
         recording itself: pin the revision as a new bibliography key, set T-057's credit to de
         Winter after the sources it names, and carry them by the chain rule to every line
         through T-057 (T-098, T-175, T-181, T-182, T-188, T-253, T-243 at 182 and T-287 at 156).
+        Applied on 18 November 2026 (think-a88h): the packet
+        de-winter-square-packing-211-2026-11-18 retains the README at 43e15330 (the packing and
+        its figure are the 16 September files, byte for byte), and its key, [de Winter n211
+        2026-11-18], carries T-057's credit, de Winter after Arslanov, Mustafin, Shangitbayev,
+        Friedman, Ellsworth (short: de Winter after Arslanov et al.). By the chain rule the
+        lines of T-098, T-175, T-181, T-182, T-188 and T-253 at 211, T-243 at 182 and T-287 at
+        156 name the five after de Winter, a name a line already held keeping its place; T-098's
+        line, now over 66 characters, gains the short credit Daniel after Couzo et al., and the
+        other short credits are unchanged. No rung, side, bound, house or finder changes.
     awaiting_author:
     - question: >-
         Could you push the README revision of JoostdeWinter/square-packing-211 that names T-057's
@@ -36539,6 +36552,10 @@ issues:
       label follows the merge of this change. What remains is the project's own: think-a88h
       records the sources in T-057's credit and carries them down the chain, and the
       follow-up that reports it follows the merge of that change.
+
+      On 18 November 2026 lane w10-1118 (think-a88h) recorded the sources: the queued ask is
+      done (its note says how), and the follow-up that reports it is posted from main after
+      the merge of that change and its deploy, which closes the issue under close_when.
   - number: 1009
     title: 'Lowered upper bounds for 7 counts (n = 210, 260, 262, 268, 272, 292, 295) and 6 exact 12-place refinements (n = 147, 156, 180, 270, 299, 307): registration request'
     author: Mishapolk
