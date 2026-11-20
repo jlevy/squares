@@ -1,0 +1,246 @@
+{
+ "program": "rr2_envelope.py",
+ "E": 40,
+ "claims": {
+  "K1000e": {
+   "n": 1000,
+   "side": "8",
+   "seam": "4",
+   "r": "707107/1000000",
+   "disk": false,
+   "hypotheses": {
+    "r_squared_at_least_half": true,
+    "regions_fit_in_anchor": true,
+    "overlap_inside_board": true,
+    "on_grid": true
+   },
+   "mass_upper": {
+    "exact": "253667090111471/34359738368000",
+    "approx": 7.382683983057243
+   },
+   "mass_lower": {
+    "exact": "126833545047689/17179869184000",
+    "approx": 7.382683982588874
+   },
+   "bracket_width": 4.683679435402155e-10,
+   "slack_upper": {
+    "exact": "34106071277888529/34359738368000",
+    "approx": 992.6173160169427
+   },
+   "slabs": 36,
+   "cells": 304,
+   "straddling_cells": 0,
+   "stated_mass": {
+    "exact": "1",
+    "approx": 1.0
+   },
+   "lower_at_most_stated": false,
+   "upper_at_most_stated": false,
+   "stated_minus_upper": -6.382683983057243,
+   "decided": true,
+   "refused": false,
+   "anchor": "followup/envelopes/162--719881-12.881-100-uniform_finish/proof/k100.json.gz",
+   "anchor_side": "9",
+   "anchor_mass": {
+    "exact": "21731/2310",
+    "approx": 9.407359307359307
+   },
+   "same_primitives_as_repeated_anchor": true
+  },
+  "K1001e": {
+   "n": 1001,
+   "side": "80001/10000",
+   "seam": "80001/20000",
+   "r": "707107/1000000",
+   "disk": true,
+   "hypotheses": {
+    "r_squared_at_least_half": true,
+    "regions_fit_in_anchor": true,
+    "overlap_inside_board": true,
+    "on_grid": true
+   },
+   "mass_upper": {
+    "exact": "25369802283496964587/3435973836800000000",
+    "approx": 7.383584243797512
+   },
+   "mass_lower": {
+    "exact": "101479209127550469347/13743895347200000000",
+    "approx": 7.38358424332913
+   },
+   "bracket_width": 4.683816951728659e-10,
+   "slack_upper": {
+    "exact": "3414040008353303035413/3435973836800000000",
+    "approx": 993.6164157562025
+   },
+   "slabs": 46,
+   "cells": 432,
+   "straddling_cells": 0,
+   "stated_mass": {
+    "exact": "1",
+    "approx": 1.0
+   },
+   "lower_at_most_stated": false,
+   "upper_at_most_stated": false,
+   "stated_minus_upper": -6.383584243797512,
+   "decided": true,
+   "refused": false,
+   "anchor": "followup/envelopes/162--719881-12.881-100-uniform_finish/proof/k100.json.gz",
+   "anchor_side": "9",
+   "anchor_mass": {
+    "exact": "21731/2310",
+    "approx": 9.407359307359307
+   },
+   "same_primitives_as_repeated_anchor": true
+  },
+  "K1e": {
+   "n": 1,
+   "side": "9001/1000",
+   "seam": "9001/2000",
+   "r": "707107/1000000",
+   "disk": true,
+   "hypotheses": {
+    "r_squared_at_least_half": true,
+    "regions_fit_in_anchor": true,
+    "overlap_inside_board": true,
+    "on_grid": true
+   },
+   "mass_upper": {
+    "exact": "40443825853238239/4294967296000000",
+    "approx": 9.416562005234471
+   },
+   "mass_lower": {
+    "exact": "1294202427222094747/137438953472000000",
+    "approx": 9.416562004641271
+   },
+   "bracket_width": 5.932008280069568e-10,
+   "slack_upper": {
+    "exact": "-36148858557238239/4294967296000000",
+    "approx": -8.416562005234471
+   },
+   "slabs": 54,
+   "cells": 520,
+   "straddling_cells": 0,
+   "stated_mass": {
+    "exact": "1",
+    "approx": 1.0
+   },
+   "lower_at_most_stated": false,
+   "upper_at_most_stated": false,
+   "stated_minus_upper": -8.416562005234471,
+   "decided": false,
+   "refused": true,
+   "anchor": "followup/envelopes/162--719881-12.881-100-uniform_finish/proof/k100.json.gz",
+   "anchor_side": "9",
+   "anchor_mass": {
+    "exact": "21731/2310",
+    "approx": 9.407359307359307
+   },
+   "same_primitives_as_repeated_anchor": true
+  },
+  "K161f": {
+   "n": 161,
+   "side": "8036307/625000",
+   "seam": "18553/5000",
+   "r": "707107/1000000",
+   "disk": false,
+   "hypotheses": {
+    "r_squared_at_least_half": true,
+    "regions_fit_in_anchor": false,
+    "overlap_inside_board": true,
+    "on_grid": true
+   },
+   "decided": false,
+   "refused_by": [
+    "regions_fit_in_anchor"
+   ],
+   "anchor": "followup/repeated/161--749858-12.858-100-uniform/proof/k100.json.gz",
+   "anchor_side": "9",
+   "anchor_mass": {
+    "exact": "21731/2310",
+    "approx": 9.407359307359307
+   }
+  }
+ },
+ "cross_check_T_equals_S_minus_1": {
+  "strip_mass_M_minus_1": {
+   "exact": "8527/1155",
+   "approx": 7.382683982683982
+  },
+  "mass_upper": {
+   "exact": "253667090111471/34359738368000",
+   "approx": 7.382683983057243
+  },
+  "mass_lower": {
+   "exact": "126833545047689/17179869184000",
+   "approx": 7.382683982588874
+  },
+  "contains": true
+ },
+ "controls": {
+  "r_707106": {
+   "refused": true,
+   "hypotheses": {
+    "r_squared_at_least_half": false,
+    "regions_fit_in_anchor": false,
+    "overlap_inside_board": true,
+    "on_grid": true
+   }
+  },
+  "seam_one_half": {
+   "refused": true,
+   "hypotheses": {
+    "r_squared_at_least_half": true,
+    "regions_fit_in_anchor": false,
+    "overlap_inside_board": false,
+    "on_grid": true
+   }
+  },
+  "all_refused": true,
+  "side_plus_one_thousandth": {
+   "K1000e": {
+    "side": "8001/1000",
+    "mass_upper": {
+     "exact": "31747052554854239/4294967296000000",
+     "approx": 7.391686680459939
+    },
+    "mass_lower": {
+     "exact": "1015905681690944747/137438953472000000",
+     "approx": 7.391686679991433
+    },
+    "refused": false
+   },
+   "K1001e": {
+    "side": "80011/10000",
+    "mass_upper": {
+     "exact": "25400735384952732527/3435973836800000000",
+     "approx": 7.392586961200208
+    },
+    "mass_lower": {
+     "exact": "101602941533371650987/13743895347200000000",
+     "approx": 7.392586960731689
+    },
+    "refused": false
+   },
+   "K1e": {
+    "side": "4501/500",
+    "mass_upper": {
+     "exact": "161933407986445249/17179869184000000",
+     "approx": 9.42576490263718
+    },
+    "mass_lower": {
+     "exact": "323866815952503047/34359738368000000",
+     "approx": 9.425764902043827
+    },
+    "refused": true
+   },
+   "K161f": {
+    "side": "2009233/156250",
+    "mass_upper": null,
+    "mass_lower": null,
+    "refused": null
+   }
+  }
+ },
+ "controls_verdict": "ALL_CONTROLS_REFUSED",
+ "verdict": "NOT_DECIDED"
+}

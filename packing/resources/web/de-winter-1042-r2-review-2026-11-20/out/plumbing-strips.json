@@ -1,0 +1,290 @@
+{
+ "program": "rr2_strips.py",
+ "strips": {
+  "162--719881-12.881-100-uniform_finish": {
+   "side": "9",
+   "primitives": 8,
+   "images": 64,
+   "M": {
+    "exact": "21731/2310",
+    "approx": 9.407359307359307
+   },
+   "bx": {
+    "exact": "409/385",
+    "approx": 1.0623376623376624
+   },
+   "by": {
+    "exact": "409/385",
+    "approx": 1.0623376623376624
+   },
+   "c": {
+    "exact": "1/10",
+    "approx": 0.1
+   },
+   "bx_equals_by": true,
+   "strip_and_cell_masses_equal": true,
+   "periodic": {
+    "p": 3,
+    "band": [
+     "3",
+     "6"
+    ],
+    "holds": true,
+    "corners_x": 36,
+    "mismatches_x": [],
+    "corners_y": 36,
+    "mismatches_y": []
+   },
+   "widest_centred_periodic_band": 3,
+   "family_matches": {
+    "base_mass": true,
+    "strip_mass": true,
+    "cell_mass": true,
+    "side": true
+   },
+   "levels": {
+    "levels": [
+     "k100.json.gz",
+     "k300.json.gz"
+    ],
+    "same_primitives": true
+   },
+   "claims": [
+    {
+     "n": 8,
+     "d": -1,
+     "side": "8",
+     "mass": {
+      "exact": "8527/1155",
+      "approx": 7.382683982683982
+     },
+     "slack": {
+      "exact": "713/1155",
+      "approx": 0.6173160173160173
+     },
+     "equals_stated_mass": true,
+     "checks": {
+      "p_at_least_3": true,
+      "p_plus_d_at_least_2": true,
+      "side_is_S_plus_d": true,
+      "mass_below_n": true
+     },
+     "decided": true,
+     "anchor_side_matches": true,
+     "family_claim_matches": true
+    },
+    {
+     "n": 12,
+     "d": 1,
+     "side": "10",
+     "mass": {
+      "exact": "2687/231",
+      "approx": 11.632034632034632
+     },
+     "slack": {
+      "exact": "85/231",
+      "approx": 0.36796536796536794
+     },
+     "equals_stated_mass": true,
+     "checks": {
+      "p_at_least_3": true,
+      "p_plus_d_at_least_2": true,
+      "side_is_S_plus_d": true,
+      "mass_below_n": true
+     },
+     "decided": true,
+     "anchor_side_matches": true,
+     "family_claim_matches": true
+    },
+    {
+     "n": 15,
+     "d": 2,
+     "side": "11",
+     "mass": {
+      "exact": "32471/2310",
+      "approx": 14.056709956709957
+     },
+     "slack": {
+      "exact": "2179/2310",
+      "approx": 0.9432900432900433
+     },
+     "equals_stated_mass": true,
+     "checks": {
+      "p_at_least_3": true,
+      "p_plus_d_at_least_2": true,
+      "side_is_S_plus_d": true,
+      "mass_below_n": true
+     },
+     "decided": true,
+     "anchor_side_matches": true,
+     "family_claim_matches": true
+    }
+   ]
+  }
+ },
+ "corner": {
+  "162--719881-12.881-100-uniform_finish": {
+   "folder": "162--719881-12.881-100-uniform_finish",
+   "anchor_side": "9",
+   "corner": "1",
+   "factor": {
+    "exact": "1",
+    "approx": 1.0
+   },
+   "multipliers": 1,
+   "placement": {
+    "inside_corner_square": 1,
+    "outside": []
+   },
+   "negative_multipliers": [],
+   "band_misses_corner_squares": true,
+   "anchor": {
+    "side": "9",
+    "primitives": 8,
+    "images": 64,
+    "M": {
+     "exact": "21731/2310",
+     "approx": 9.407359307359307
+    },
+    "bx": {
+     "exact": "409/385",
+     "approx": 1.0623376623376624
+    },
+    "by": {
+     "exact": "409/385",
+     "approx": 1.0623376623376624
+    },
+    "c": {
+     "exact": "1/10",
+     "approx": 0.1
+    },
+    "bx_equals_by": true,
+    "strip_and_cell_masses_equal": true,
+    "periodic": {
+     "p": 3,
+     "band": [
+      "3",
+      "6"
+     ],
+     "holds": true,
+     "corners_x": 36,
+     "mismatches_x": [],
+     "corners_y": 36,
+     "mismatches_y": []
+    },
+    "widest_centred_periodic_band": 3
+   },
+   "modified": {
+    "side": "9",
+    "primitives": 8,
+    "images": 64,
+    "M": {
+     "exact": "10673/1155",
+     "approx": 9.240692640692641
+    },
+    "bx": {
+     "exact": "409/385",
+     "approx": 1.0623376623376624
+    },
+    "by": {
+     "exact": "409/385",
+     "approx": 1.0623376623376624
+    },
+    "c": {
+     "exact": "1/10",
+     "approx": 0.1
+    },
+    "bx_equals_by": true,
+    "strip_and_cell_masses_equal": true,
+    "periodic": {
+     "p": 3,
+     "band": [
+      "3",
+      "6"
+     ],
+     "holds": true,
+     "corners_x": 36,
+     "mismatches_x": [],
+     "corners_y": 36,
+     "mismatches_y": []
+    },
+    "widest_centred_periodic_band": 3
+   },
+   "levels": {
+    "levels": [
+     "k100.json.gz"
+    ],
+    "same_primitives": true
+   },
+   "band_unchanged": true,
+   "removed_mass": {
+    "exact": "1/6",
+    "approx": 0.16666666666666666
+   },
+   "removed_matches": true,
+   "old_mass_matches": true,
+   "new_mass_matches": true,
+   "removed_without_factor": {
+    "exact": "1/6",
+    "approx": 0.16666666666666666
+   },
+   "claim": {
+    "n": 14,
+    "d": 2,
+    "side": "11",
+    "mass": {
+     "exact": "16043/1155",
+     "approx": 13.89004329004329
+    },
+    "slack": {
+     "exact": "127/1155",
+     "approx": 0.10995670995670996
+    },
+    "equals_stated_mass": true,
+    "checks": {
+     "p_at_least_3": true,
+     "p_plus_d_at_least_2": true,
+     "side_is_S_plus_d": true,
+     "mass_below_n": true
+    },
+    "decided": true
+   },
+   "checks": {
+    "all_modified_inside_corner_square": true,
+    "band_misses_corner_squares": true,
+    "modified_periodic": true,
+    "band_unchanged": true,
+    "strip_claim": true
+   },
+   "decided": true
+  }
+ },
+ "verdict": "STRIP_AND_CORNER_CLAIMS_DECIDED",
+ "controls": {
+  "band_primitive_moved_1e-8": {
+   "primitive": 1,
+   "refused": true
+  },
+  "band_primitive_mass_times_1+1e-12": {
+   "primitive": 1,
+   "refused": true
+  },
+  "p_one_above_widest": {
+   "p": 4,
+   "refused": true
+  },
+  "n_minus_1_at_189": {
+   "refused": false
+  },
+  "corner_multiplier_outside_corner_square": {
+   "primitive": 0,
+   "refused": true
+  },
+  "corner_negative_multiplier": {
+   "primitive": 7,
+   "refused": true
+  },
+  "all_refused": false
+ },
+ "controls_verdict": "CONTROL_ACCEPTED"
+}
