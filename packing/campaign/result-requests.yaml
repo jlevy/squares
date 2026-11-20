@@ -36165,6 +36165,17 @@ issues:
         status: confirmed
       - result: n270-kodaj-quoted
       - result: local-minimum-check
+    - url: https://github.com/jlevy/squares/issues/1001#issuecomment-7046770834
+      date: '2026-11-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n127-kodaj-improved
+        id: T-305
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-305 to T-309 are on main with the stage 4 review mapped and each adopted as its case's
       house, and the reply on main says what was retained, replayed and reviewed and that the
@@ -36291,6 +36302,20 @@ issues:
       the author asked for is still queued, so the issue is closed with it, and that answers are
       welcome at any time. The issue was closed as completed at 11:55:54Z; it has no comment after
       the reply, and read_through moves to it.
+
+      The follow-up of 20 November 2026 (issuecomment-7046770834, posted by jlevy at
+      17:56:20Z) is recorded in intake lane c18-records (think-6b5u). It answers the final
+      reply's statement of T-305 as current. It says that #1020 (Joost de Winter) is now
+      registered as T-330 and was adopted at 127, 9.60e-4 below T-305 (#1024); that T-305
+      itself is unchanged, at V3/C3, confirmed; that its position is now superseded; and that
+      it stays in the record. T-330 is #1020's result, named as context, and is not recorded
+      under reported; the follow-up names no evidence id and no bead.
+
+      It says that T-306 to T-309 are unchanged, that nothing else in the earlier reply
+      changes and that the issue stays closed. It names no reply in `corrects`, as #989's
+      follow-up of 16 November does: T-305's moved position is a field the register shows,
+      which `reported` records, and the final reply was not wrong when made. read_through is
+      unchanged.
   - number: 1005
     title: 's(292) ≤ 17.590104218682: improved packing (registration request)'
     author: kenaznia-doga
@@ -36593,7 +36618,8 @@ issues:
     title: 'Credit request for n = 211: the current record derives from T-057'
     author: JoostdeWinter
     opened: '2026-11-16'
-    state: open
+    state: closed
+    closed: '2026-11-20'
     kind: correction
     triage: done
     summary: >-
@@ -36622,7 +36648,7 @@ issues:
       survey and David Ellsworth's records; T-057's credit is read from its key since, de Winter
       after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth, and the eight lines through
       T-057 name the five after de Winter (think-a88h).
-    read_through: '2026-11-18T06:45:20Z'
+    read_through: '2026-11-20T09:54:46Z'
     results: []
     asks:
     - what: >-
@@ -36704,6 +36730,11 @@ issues:
       kind: acknowledgement
       reported: []
       beads: [think-a88h]
+    - url: https://github.com/jlevy/squares/issues/1008#issuecomment-7036532459
+      date: '2026-11-20'
+      by: jlevy
+      kind: final
+      reported: []
     close_when: >-
       T-057's sources are named in a published revision and carried through the chain at 211,
       or the author withdraws the ask, and the author has received a reply verified against
@@ -36731,6 +36762,23 @@ issues:
       On 18 November 2026 lane w10-1118 (think-a88h) recorded the sources: the queued ask is
       done (its note says how), and the follow-up that reports it is posted from main after
       the merge of that change and its deploy, which closes the issue under close_when.
+
+      Closed on 20 November 2026 with the final reply (issuecomment-7036532459, posted by
+      jlevy at 09:54:46Z), after #1035 merged with T-057's sources; the issue was closed as
+      completed at 09:54:47Z. Recorded in intake lane c18-records (think-6b5u). It thanks the
+      author for the README revision and says that it is now a source of its own, [de Winter
+      n211 2026-11-18], whose packing files are byte-identical to the pinned ones, and that
+      T-057's credit names the sources the README gives. It tabulates the credit lines of
+      T-057, T-188 (the house at 211), T-243 at 182 and T-287 at 156, and says that T-098,
+      T-175, T-181, T-182 and T-253 gain the same names.
+
+      The issue registers no result of its own, and the reply names those results as credit
+      lines, so `reported` is empty, as on the acknowledgement of 17 November. It names GPT-6
+      Astra and the earlier Claude Opus and GPT models as the author's AI tools without
+      crediting them, and says that a credit line kept per source shows the names at counts
+      where T-057 is no antecedent. It corrects no earlier reply and names no bead. It says
+      that nothing the author asked for is still queued, so the issue is closed with it, and
+      that corrections are welcome. read_through moves to the reply.
   - number: 1009
     title: 'Lowered upper bounds for 7 counts (n = 210, 260, 262, 268, 272, 292, 295) and 6 exact 12-place refinements (n = 147, 156, 180, 270, 299, 307): registration request'
     author: Mishapolk
@@ -37283,7 +37331,7 @@ issues:
       108 and 109 take the claimed side: 0.0100 above T-216 at 108, and at 109 0.0787 above the
       reported a(109) (T-180) and 0.1676 above Karakuş's verified strip bound. The review's
       notes N-2, N-3, N-5 and N-8 and its four questions go to the author with the reply.
-    read_through: '2026-11-20T08:46:10Z'
+    read_through: '2026-11-20T17:14:46Z'
     results:
     - key: n108-n109-dilated-measure
       claim: >-
@@ -37374,11 +37422,47 @@ issues:
       direction; and how 10.622222909689 was obtained. They are informational and hold
       nothing open, since no answer could falsify the credit, the derivation or the files
       the record names. It names no bead.
+
+      The author's comment of 20 November 2026 at 17:14:46Z (issuecomment-7045828213), read
+      in intake lane c18-records (think-6b5u), agrees with the reply's statement of the gains,
+      0.0100 at 108 and 0.0787 and 0.1676 in the reported and verified lanes at 109, answers
+      the reply's three questions and asks nothing; it claims no new result. Which binary: all
+      twelve runs used a release build of this repository's sqverify-fast at a commit he
+      names, compiled with rustc 1.100.0 for x86_64-unknown-linux-gnu. He did not record the
+      executable's digest and has not recovered it, and says he will use the pinned toolchain
+      and record that digest in future runs.
+
+      At the commit he names, the crate's Cargo.toml, Cargo.lock, build.rs and src/ are the
+      same git objects as at the source the census replay built, so his build is of the
+      reviewed crate source the replay ran; only the crate's documents and a test differ.
+      The mutated measure: he ran none in the submission, his 99/100 check being one exact
+      calculation at the axis, where the capture falls from about 1.007478833692 to
+      0.997404045355.
+
+      He has since bounded the least capture at every direction, from below by the original
+      logs and from above by integrating the measure at the review's rational centres, and
+      every upper end is below 100/99 (at direction 375 the least capture lies between
+      1.000000024174 and 1.004679827621), so at each direction some centre gives the 99/100
+      copy a capture below one. The exact minima at the 400 rotated directions stay unknown.
+
+      10.622222909689: he reconstructs all twelve printed places from Hosono's 201-direction
+      certificate. The review's 10.622135524982 is right under the PDF's common wall-clearance
+      formula; the larger figure lets the certified core shift inside each shrunken square by
+      an amount that depends on the direction, the limiting case being the switch from
+      direction 18 to 19, at 10.622222909689003887809569, checked in exact rational arithmetic
+      over all 400 angular intervals. The original script is not found, so this is a
+      reconstruction.
+
+      His attachment (a build receipt, the capture intervals, the derivation, the T-216
+      receipt and scripts) was not read: this session's proxy refused its download. No
+      answer could falsify the credit, the derivation or the files the record names, so none
+      changes the record, and nothing is registered or reopened.
   - number: 1015
     title: Lowered upper bound for n = 127 (side 11.800795682214)
     author: JoostdeWinter
     opened: '2026-11-17'
-    state: open
+    state: closed
+    closed: '2026-11-20'
     kind: result-report
     triage: done
     summary: >-
@@ -37394,7 +37478,7 @@ issues:
       tenth and not one to one by nearest centres. It is the first of his three reports at 127
       that evening; #1017 and #1020 are lower. The stage 4 review of record is R-127b (#1028),
       with R-127 (#1025) an additional blind review; both accept it and both are mapped.
-    read_through: '2026-11-17T22:14:33Z'
+    read_through: '2026-11-20T16:41:50Z'
     results:
     - key: n127-band-35b576a
       claim: >-
@@ -37408,12 +37492,37 @@ issues:
       evidence:
       - E-de-winter-1015-certificate-report
       - E-de-winter-1015-exact-feasibility
+      - E-de-winter-1015-review-exact-feasibility
+      - E-de-winter-1015-review-r127-exact-feasibility
       validation:
       - think-zqot
     beads:
     - think-zqot
     answer_bead: think-zqot
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1015#issuecomment-7045101595
+      date: '2026-11-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n127-band-35b576a
+        id: T-328
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n127-band-35b576a
+        id: E-de-winter-1015-exact-feasibility
+        status: confirmed
+      - result: n127-band-35b576a
+        id: E-de-winter-1015-certificate-report
+        status: reviewed
+      - result: n127-band-35b576a
+        id: E-de-winter-1015-review-exact-feasibility
+        status: confirmed
+      - result: n127-band-35b576a
+        id: E-de-winter-1015-review-r127-exact-feasibility
+        status: confirmed
     close_when: >-
       The bound is triaged, retained and registered on main, and the reply on main says what was
       registered, replayed and reviewed, and where the house at 127 stands.
@@ -37428,11 +37537,43 @@ issues:
       files, checks and figure with Claude (Anthropic), under his direction. Licensed MIT by
       LICENSE at the pin. The Kaggle side it quotes, Luka Cvetkovic's 11.800793726618, states no
       packing and is no report.
+
+      Closed on 20 November 2026 with the final reply (issuecomment-7045101595, posted by
+      jlevy at 16:41:50Z), after #1024 merged with T-328 to T-330, both stage 4 reviews
+      mapped and T-330 adopted at 127; the issue was closed as completed at 16:41:51Z.
+      Recorded in intake lane c18-records (think-6b5u). It states T-328 at V3/C3, confirmed,
+      independently re-implemented, significance S3, 9.58e-4 below T-305 and a new
+      arrangement relative to it, and superseded by the author's later #1017 and #1020, the
+      pass of 20 November having adopted T-330 in place of T-305: its position is superseded.
+
+      It names E-de-winter-1015-exact-feasibility, the replay, and the two reviews'
+      E-de-winter-1015-review-exact-feasibility (R-127b, of record) and
+      E-de-winter-1015-review-r127-exact-feasibility (R-127, additional), each confirmed, and
+      the author's report, E-de-winter-1015-certificate-report, reviewed. All four are
+      recorded under reported with check_requests' statuses, and the two review entries join
+      the result's evidence. T-305, T-329 and T-330 are named as context, not as this issue's
+      results, and are not recorded under reported.
+
+      It credits the author after the arrangement in the Kaggle compilations of Alex Chilton
+      and Asterios Panoras, quoting the register's line, and names GPT-6.2 Sol and Claude as
+      the AI tools without crediting them. It says what was checked: the replay's two exact
+      routes and 13 controls, both reviews' clean-room checkers, the clearances, T-305's
+      contraction margin and the arrangement measured against T-305. It names no bead, says
+      that nothing asked is still queued and corrects no earlier reply. read_through moves to
+      the reply.
+
+      Its two questions hold nothing open: which certificate in the compilations the search
+      started from, and whether that arrangement is Kodaj's; and whether the wall offset is
+      part of the rational rounding. The author answered the first for all three of his
+      reports at 127 in his comment on #1017 of 20 November (issuecomment-7046509586),
+      recorded there. He has not answered the second here; on #1020 he calls that
+      certificate's wall offset removable padding of its rational certificate.
   - number: 1017
     title: Lowered upper bound for n = 127 (side 11.800793726616)
     author: JoostdeWinter
     opened: '2026-11-17'
-    state: open
+    state: closed
+    closed: '2026-11-20'
     kind: result-report
     triage: done
     summary: >-
@@ -37446,7 +37587,7 @@ issues:
       padding, so under option D (think-b0w5) it is a new result. #1020 is lower. The stage 4
       review of record is R-127b (#1028), with R-127 (#1025) an additional blind review; both
       accept it and both are mapped.
-    read_through: '2026-11-17T22:27:04Z'
+    read_through: '2026-11-20T17:44:15Z'
     results:
     - key: n127-band-cc20a26
       claim: >-
@@ -37458,12 +37599,37 @@ issues:
       evidence:
       - E-de-winter-1017-certificate-report
       - E-de-winter-1017-exact-feasibility
+      - E-de-winter-1017-review-exact-feasibility
+      - E-de-winter-1017-review-r127-exact-feasibility
       validation:
       - think-zqot
     beads:
     - think-zqot
     answer_bead: think-zqot
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1017#issuecomment-7045102674
+      date: '2026-11-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n127-band-cc20a26
+        id: T-329
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n127-band-cc20a26
+        id: E-de-winter-1017-exact-feasibility
+        status: confirmed
+      - result: n127-band-cc20a26
+        id: E-de-winter-1017-certificate-report
+        status: reviewed
+      - result: n127-band-cc20a26
+        id: E-de-winter-1017-review-exact-feasibility
+        status: confirmed
+      - result: n127-band-cc20a26
+        id: E-de-winter-1017-review-r127-exact-feasibility
+        status: confirmed
     close_when: >-
       The bound is triaged, retained and registered on main, and the reply on main says what was
       registered, replayed and reviewed, and where the house at 127 stands.
@@ -37473,11 +37639,68 @@ issues:
       22:26:28Z), 40 seconds before it, and says later commits leave the files unchanged; it does
       not withdraw #1015, so both are reports. It asks for credit as #1015 does and states the
       same AI assistance. The Kaggle side it quotes, 11.800793726617185, states no packing.
+
+      Closed on 20 November 2026 with the final reply (issuecomment-7045102674, posted by
+      jlevy at 16:41:53Z), after #1024 merged; the issue was closed as completed at
+      16:41:54Z. Recorded in intake lane c18-records (think-6b5u). It states T-329 at V3/C3,
+      confirmed, independently re-implemented, significance S2, 1.96e-6 below #1015 (T-328)
+      and 9.60e-4 below T-305, and superseded by the author's later #1020 (T-330), which the
+      pass of 20 November adopted at 127 in place of T-305: its position is superseded.
+
+      It names E-de-winter-1017-exact-feasibility, E-de-winter-1017-review-exact-feasibility
+      (R-127b, of record) and E-de-winter-1017-review-r127-exact-feasibility (R-127,
+      additional), each confirmed, and the author's report,
+      E-de-winter-1017-certificate-report, reviewed. All four are recorded under reported
+      with check_requests' statuses, and the two review entries join the result's evidence.
+      T-305, T-328 and T-330 are named as context and are not recorded under reported.
+
+      It credits the author after the Chilton and Panoras compilations, quoting the
+      register's line, names GPT-6.2 Sol and Claude without crediting them, and says what was
+      checked, as on #1015, with the step below #1015 far beyond T-328's contraction margin
+      and the arrangement one to one with T-328's. It passes on the reviews' question on the
+      pin's checksums, which both withdrew. Its two questions hold nothing open: the start of
+      the search, shared with #1015 and #1020, and whether the author would amend the issue's
+      statement that later commits leave its files unchanged. It names no bead and says that
+      nothing asked is still queued. read_through moves to the author's comment below.
+
+      The author's comment of 20 November 2026 at 17:44:15Z (issuecomment-7046509586), read
+      in lane c18-records, answers both and asks nothing new. Question 1: two public files
+      from before #1015 hold the starting arrangement, the 127-square rows of Alex Chilton's
+      best_current.csv in version 82 of his Kaggle dataset Squares in Squares starter kit and
+      of Asterios Panoras's submission.csv in version 17 of his Squares in Squares - Best
+      Packings. They agree within 7.7e-10 at every centre, and against #1015 all 127 squares
+      are mutual nearest neighbours in file order (largest move 0.10549, RMS 0.01788), as for
+      #1017 and #1020. He has not recovered the rational seed the optimizer loaded.
+
+      On Kodaj, he says that Chilton's version 75 matches all 127 squares of Kodaj's notebook
+      of 13 November in file order (largest move 0.08875), and that the later arrangement is
+      close to Kodaj's, but that he found no per-puzzle record of how it was made and cannot
+      establish descent from Kodaj's file or from T-305. He asks that the arrangement be
+      credited as the sources support, and is content for the line to name Kodaj or JoeGun if
+      the record finds a closer link.
+
+      Question 2: he retracts the issue's sentence that later commits leave the files
+      unchanged. The two certificate files are byte-identical at the issue's pin and at the
+      commit pushed with it, which also holds their matching checksums, and he asks that the
+      folder at that second commit be used for this result. The packet already names it as
+      the commit whose checksums match, and the record keeps the commit the issue named as
+      its pin, as for #1001. He adds that #1020 holds the smallest side and that #1015 and
+      #1017 can be closed in its favour, as they are.
+
+      The comment says an attachment holds the coordinate rows and comparisons, and #1020's
+      comment points to it, but none is attached: its text and rendered page link only
+      Kaggle pages, issues and the source folder. The named files are not in
+      JoostdeWinter/square-packing at its head when read, after 18:00Z on 20 November, and
+      www.kaggle.com answered this session's requests for the version page and its download
+      with an empty 404, so neither was read and nothing is measured from them. The credit
+      stays de Winter after Chilton, Panoras, the antecedents the source names; whether the
+      arrangement descends from Kodaj's stays open, with the author's account above.
   - number: 1020
     title: Lowered upper bound for n = 127 (side 11.800793726615)
     author: JoostdeWinter
     opened: '2026-11-17'
-    state: open
+    state: closed
+    closed: '2026-11-20'
     kind: result-report
     triage: done
     summary: >-
@@ -37492,7 +37715,7 @@ issues:
       a new result. It is the smallest of the three at 127. The stage 4 review of record is
       R-127b (#1028), with R-127 (#1025) an additional blind review; both accept it and both
       are mapped.
-    read_through: '2026-11-17T22:49:35Z'
+    read_through: '2026-11-20T17:46:13Z'
     results:
     - key: n127-band-a1ba501
       claim: >-
@@ -37506,12 +37729,37 @@ issues:
       evidence:
       - E-de-winter-1020-certificate-report
       - E-de-winter-1020-exact-feasibility
+      - E-de-winter-1020-review-exact-feasibility
+      - E-de-winter-1020-review-r127-exact-feasibility
       validation:
       - think-zqot
     beads:
     - think-zqot
     answer_bead: think-zqot
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1020#issuecomment-7045103651
+      date: '2026-11-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n127-band-a1ba501
+        id: T-330
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n127-band-a1ba501
+        id: E-de-winter-1020-exact-feasibility
+        status: confirmed
+      - result: n127-band-a1ba501
+        id: E-de-winter-1020-certificate-report
+        status: reviewed
+      - result: n127-band-a1ba501
+        id: E-de-winter-1020-review-exact-feasibility
+        status: confirmed
+      - result: n127-band-a1ba501
+        id: E-de-winter-1020-review-r127-exact-feasibility
+        status: confirmed
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       house at 127 decided, and the reply on main says what was registered, replayed, reviewed
@@ -37523,3 +37771,51 @@ issues:
       only registration texts and checksums. It names GPT-6.2 Astra (OpenAI) where the pinned
       folder's README and the head's REGISTRATION.md name GPT-6.2 Sol; the record states the
       issue's words. The Kaggle side it quotes, 11.800793726617185, states no packing.
+
+      Closed on 20 November 2026 with the final reply (issuecomment-7045103651, posted by
+      jlevy at 16:41:55Z), after #1024 merged; the issue was closed as completed at
+      16:41:56Z. Recorded in intake lane c18-records (think-6b5u). It states T-330 at V3/C3,
+      confirmed, independently re-implemented, significance S1 for now, both reviews reading
+      it as S2 while the maintainer's rule for such steps, which also scores T-285 and T-286,
+      is pending. The pass of 20 November adopted it at 127 in place of T-305, so it is the
+      reported and the verified upper bound there: its position is current.
+
+      It names E-de-winter-1020-exact-feasibility, E-de-winter-1020-review-exact-feasibility
+      (R-127b, of record) and E-de-winter-1020-review-r127-exact-feasibility (R-127,
+      additional), each confirmed, and the author's report,
+      E-de-winter-1020-certificate-report, reviewed. All four are recorded under reported
+      with check_requests' statuses, and the two review entries join the result's evidence.
+      T-305, T-328 and T-329 are named as context and are not recorded under reported.
+
+      It credits the author after the Chilton and Panoras compilations, quoting the
+      register's line, and names GPT-6.2 Astra and Claude as the issue does, noting the
+      pinned README's GPT-6.2 Sol, without crediting them. Beyond what #1015's reply says was
+      checked, it gives R-127b's one control restated (F3) and R-127's eight planned too
+      coarse (F12), the step at 4.29 times T-329's contraction margin, the arrangement one to
+      one with T-329's, and Evan Daniel's KKT solve 7.06e-19 below the side, held and not
+      registered. It passes on the withdrawn checksum question, names no bead and says that
+      nothing asked is still queued.
+
+      Its four questions hold nothing open: the start of the search; whether #1017's
+      certificate was the input; whether the wall offset is part of the rational rounding;
+      and whether the small turns of squares 69 and 91 are design or residue. The author's
+      comment of 20 November 2026 at 17:46:13Z (issuecomment-7046558736), read in lane
+      c18-records, answers all four and asks nothing. (1) He refers to his answer on #1017,
+      recorded there.
+
+      (2) #1020 is a further refinement of the same arrangement: all 127 squares correspond
+      in file order, with an RMS centre move of 0.01642 from #1017, the search shifting two
+      groups lengthwise in the band and optimizing every square. He has not recovered a log
+      that shows whether the run loaded #1017's filed certificate or an intermediate state,
+      so he confirms the continuity but not the input file. (3) The offset is removable
+      padding: moving every centre left and down by 2e-60 fits the same packing in a square
+      4e-60 smaller, the left and bottom gaps being exactly 2e-60, the top 9.86e-58 and the
+      right about 9.68e-115 more than 2e-60; the export setting is not recovered.
+
+      (4) The two turns are incidental: with both squares set upright, every centre, other
+      direction and the side kept, all 8,001 pairs and every wall still pass in exact
+      arithmetic, as they do with squares 61, 72, 107 and 126 straightened as well, so the
+      frame can be 70 exactly upright squares around the band of 57. No result is claimed:
+      the 4e-60 is below the certificate's own contraction margin, 1.82e-58, and the upright
+      frame is a variant at the same side with no file attached, so nothing is registered
+      and no rung, side, house or credit changes.
