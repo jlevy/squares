@@ -5,7 +5,7 @@ title: "Intake 2026-11-20 lane c6-records: record eight position-superseded foll
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c6-records
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T08:00:26.654Z
-updated_at: 2026-11-20T08:22:24.387Z
+updated_at: 2026-11-20T08:56:33.797Z
 started_at: 2026-11-20T08:00:30.189Z
 ---
 Lane c6-records of the 2026-11-20 intake pass (coordinator bold-ritchie-coord1120). One draft PR on claude/intake-2026-11-20-records-followups: (1) record the eight follow-ups the coordinator posted from main at 07:54Z as kind: follow-up replies naming only the superseded result(s), no corrects; (2) draft the #1018 stage 7 final reply to the scratchpad, not posted; (3) read #1012 issuecomment-6972165182 and record it per result-import.md (bead think-wvr8).
@@ -29,3 +29,9 @@ Branch claude/intake-2026-11-20-records-followups (worktree in the scratchpad, r
 - 3bc2051e1 release: no-public-change record 2026-11-20-c6-records-1120-followups.yaml (methods survey 43 files byte-identical vs 935e79c36). release_pin --check: pin is last data commit; stamp_landed: nothing.
 - #1018 stage 7 draft (not posted): scratchpad c6-1018-reply.md; names T-327, T-216, T-180, E-de-winter-1018-n108-report, E-de-winter-1018-n108-sqverify-fast-replay.
 - intake_sweep before/after: the 8 "owes a follow-up" rows, the 8 "reply missing" rows, the #1012 unread-comment row and the n270-kaggle queued row are gone; one new row: #1012 carries blocked:author the record no longer names (clears when the label is removed after merge).
+
+## 2026-11-20 later: #1018 recorded (coordinator's request)
+
+- The coordinator posted the draft as issuecomment-7034745518 (08:46:10Z) and closed #1018 as completed (08:46:11Z); read back identical to the draft but for a blank line before the footer.
+- aa32d6dd1 records: #1018 replies gets the final reply (T-327 V3/C3 confirmed current; E-de-winter-1018-n108-sqverify-fast-replay confirmed; E-de-winter-1018-n108-report reviewed), state closed, closed 2026-11-20, read_through 2026-11-20T08:46:10Z, three notes paragraphs; the release record names it, re-measured (43 files byte-identical vs 935e79c36).
+- check_requests: #1018 closed 1/1 settled; records tier 55/55; test_check_requests + test_release 146 passed; release_pin --check ok; intake_sweep: #1018's rows gone. Pushed aa32d6dd1 to #1043.
