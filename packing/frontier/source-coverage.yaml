@@ -13660,6 +13660,93 @@ sources:
     1063/1062 onto a 401-direction declared net at a core side the source chose; the proof
     enlarges the bound from 10.63 to 10.6300379408297..., above T-216's 531/50 by 0.0100, and
     the same bound holds at 109 by monotonicity. T-327 records the claim.
+- id: de-winter-s127-issue1015-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing 35b576a, issue 1015
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/35b576a355297942bca9c195bee5cd74f0b27f40/n127
+  local: resources/web/de-winter-s127-issue1015-2026-11-17/
+  source_key: '[de Winter s127 issue 1015 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1015-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1015-certificate-report
+  - E-de-winter-1015-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1015 at 35b576a, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-328 records the in-horizon report,
+    9.58e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
+- id: de-winter-s127-issue1017-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing cc20a26, issue 1017
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/cc20a26845789c2502950041c26709eda8a71081/n127
+  local: resources/web/de-winter-s127-issue1017-2026-11-17/
+  source_key: '[de Winter s127 issue 1017 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1017-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1017-certificate-report
+  - E-de-winter-1017-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1017 at cc20a26, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-329 records the in-horizon report,
+    1.96e-06 below T-328 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
+- id: de-winter-s127-issue1020-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing a1ba501, issue 1020
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a1ba5019e787e407646293d7bef81d63c9951b32/n127
+  local: resources/web/de-winter-s127-issue1020-2026-11-17/
+  source_key: '[de Winter s127 issue 1020 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1020-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1020-certificate-report
+  - E-de-winter-1020-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1020 at a1ba501, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-330 records the in-horizon report,
+    1.80e-13 below T-329, 1.96e-06 below T-328 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
 - id: mishapolk-issue1009-2026-11-16
   title: Mykhailo Polkovskyi's 13 packings from 147 to 307 squares at Mishapolk/square-packing-records b637e6c, issue 1009
   role: source-repository
@@ -13801,11 +13888,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-139).
 - n: 127
-  source_id: joegun-upper-bounds-2026-11-16
-  value: '11.8017538904864874'
-  evidence: E-joegun-1001-certificate-report
+  source_id: de-winter-s127-issue1020-2026-11-17
+  value: '11.8007937266149623'
+  evidence: E-de-winter-1020-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-16 (T-305).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-330).
 - n: 129
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '11.87001385040446435'
@@ -14523,7 +14610,7 @@ superseded_reports:
 - n: 127
   source_id: evand-square-packing-2026-10-05
   value: '11.822875655532295295369036633375'
-  superseded_by: joegun-upper-bounds-2026-11-16
+  superseded_by: de-winter-s127-issue1020-2026-11-17
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -15780,9 +15867,9 @@ superseded_reports:
 - n: 127
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8109366475118110'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-305's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-330's exact
     side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 129
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8720298492118721'
@@ -16261,8 +16348,8 @@ superseded_reports:
   source_id: couzo-451-exact-refinements
   value: '11.8108787875891799'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-305's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 130
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.9044830325157865'
@@ -16855,8 +16942,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.81087878758917984'
   reason: The house from 2026-10-17 until 2026-11-16; its certificate stays retained and verified,
-    and T-305's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 204
   source_id: evand-issue914-2026-11-05
   value: '14.8043613836518588'
@@ -16953,16 +17040,22 @@ superseded_reports:
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
     and T-326's exact side is smaller.
   superseded_by: mishapolk-issue1009-2026-11-16
+- n: 127
+  source_id: joegun-upper-bounds-2026-11-16
+  value: '11.8017538904864874'
+  reason: The house from 2026-11-16 until 2026-11-18; its certificate stays retained and verified,
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 172
   source_id: ozden-s172-upper-bound-2026-11-09
   value: '13.6146898532862152'
-  reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
+  reason: The house from 2026-11-09 until 2026-11-21; its certificate stays retained and verified,
     and T-286's exact side is smaller.
   superseded_by: de-winter-s172-upper-bound-2026-11-10
 - n: 199
   source_id: ozden-s199-upper-bound-2026-11-09
   value: '14.6146898532862152'
-  reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
+  reason: The house from 2026-11-09 until 2026-11-21; its certificate stays retained and verified,
     and T-285's exact side is smaller.
   superseded_by: de-winter-s199-upper-bound-2026-11-09
 beyond_horizon_claims:

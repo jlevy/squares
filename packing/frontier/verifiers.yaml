@@ -9792,3 +9792,123 @@ verifiers:
       Written and run on 18 November 2026 by the blind stage 4 review of #1018
       (docs/project/reviews/review-2026-11-18-de-winter-1018.md); kept in the packet
       packing/resources/web/de-winter-1018-review-2026-11-18/ with its README and receipts.
+
+  - id: V-de-winter-1015-review-r127b-check
+    program: rb127_check.py with rb127_read.py, rb127_axes.py, rb127_clip.py, rb127_decide.py and rb127_twin.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 18 November stage 4 review of record's exact checker of Joost de Winter's rational
+      centre-direction certificates of issues 1015, 1017 and 1020 (127) and their corner
+      Witness/v2 twins, with strict readers of its own for both forms (rb127_read.py): every
+      square a unit square, every wall and every pair, with no distance filter and no
+      tolerance, by separating axes in Python integers from the poses (rb127_axes.py, method A)
+      and by exact Sutherland-Hodgman clipping in GMP rationals from the corners
+      (rb127_clip.py, method B), each file decided natively and in the other form's terms
+      (rb127_twin.py), the two methods required to agree (rb127_decide.py), and the side and
+      the issue's stated numbers checked against the file. rb127_controls.py decides the 35
+      controls a plan hashed before any program read a certificate states for each report
+      (29 for the house); rb127_selftest.py holds the programs to 4,729 hand-derived checks
+      and seven broken copies. Decided all three certificates and T-305's ACCEPT.
+    source:
+      - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/programs/rb127_check.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/programs/rb127_read.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/programs/rb127_axes.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/programs/rb127_clip.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/programs/rb127_decide.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/programs/rb127_twin.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/programs/rb127_controls.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/programs/rb127_selftest.py
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the blind stage 4 mathematical review of record, lane r127b-1118 of the 18
+            November intake pass (under think-zqot), tbd-strong-max tier, maximum reasoning,
+            prompted separately from the import lane and from R-127
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues name GPT-6.2 Astra (OpenAI) for the search, optimization and rational
+          certificate and Claude (Anthropic) for the repository files, checks and figure,
+          under Joost de Winter's direction. The checker was frozen at 03:18:41Z on 18
+          November (7987712380) before any of its programs read a certificate; it imports
+          nothing from this repository or the source, reuses no code of any earlier review,
+          and its author read neither the author's checkers nor R-127's programs before its
+          findings were frozen.
+    note: >-
+      Written and run on 18 November 2026 for
+      docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md, kept with its
+      receipts in the review-only directory de-winter-1015-1017-1020-review-r127b-2026-11-18.
+      rb127_contract.py, rb127_identity.py, rb127_measure.py, rb127_custody.py,
+      rb127_routes.py, rb127_e1p.py, rb127_e1p_walls.py, rb127_describe.py,
+      rb127_constant.py, rb127_trial.py and the formatting modules, kept beside it, decide
+      no certificate's feasibility and are not registered.
+
+  - id: V-de-winter-1015-review-r127-check
+    program: r127_check.py with r127_read.py, r127_axes.py, r127_area.py, r127_decide.py and r127_frame.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 18 November additional stage 4 review's exact checker (R-127) of Joost de Winter's
+      certificates of issues 1015, 1017 and 1020 (127) and their corner twins, with a strict
+      reader of its own for both forms (r127_read.py): every square a unit square, every wall
+      and every pair, with no distance filter, by separating axes on the corners over one
+      integer denominator a square (r127_axes.py, method A) and by the exact intersection,
+      enumerated vertex by vertex and measured by its hull, with containment by area, in
+      gmpy2.mpq (r127_area.py, method B), the two required to agree (r127_decide.py), and the
+      claim's arithmetic against the side. r127_controls.py decides the controls a plan
+      hashed before any program read a certificate states, on each centre file and its
+      twin; r127_selftest.py holds the programs to 10,486 checks and r127_mutants.py to 18
+      broken copies. Decided all six files and T-305's ACCEPT.
+    source:
+      - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/programs/r127_check.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/programs/r127_read.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/programs/r127_axes.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/programs/r127_area.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/programs/r127_decide.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/programs/r127_frame.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/programs/r127_controls.py
+      - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/programs/r127_selftest.py
+    independence_record: docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the blind stage 4 mathematical review lane r127-1118 of the 18 November intake
+            pass (under think-zqot), tbd-strong tier at xhigh reasoning, below the tier stage
+            4 names (its F13), prompted separately from the import lane
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The issues name GPT-6.2 Astra (OpenAI) for the search, optimization and rational
+          certificate and Claude (Anthropic) for the repository files, checks and figure,
+          under Joost de Winter's direction. The checker was frozen at 02:02Z on 18 November
+          (950cf3106) before any of its programs read a certificate; it imports nothing from
+          this repository or the source and reuses no code of any earlier review.
+    note: >-
+      Written and run on 18 November 2026 for
+      docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md, kept with its
+      receipts in the review-only directory de-winter-1015-1017-1020-review-2026-11-18.
+      r127_twin.py, r127_contract.py, r127_identity.py, r127_bands.py, r127_compare.py,
+      r127_synth.py, r127_tables.py and r127_mutants.py, kept beside it, decide no
+      certificate's feasibility and are not registered.

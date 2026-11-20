@@ -1,0 +1,67 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1015",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter s127 issue 1015 2026-11-17]",
+  "report_evidence": "E-de-winter-1015-certificate-report",
+  "receipt_format": "de-winter-1015-exact-replay-v1",
+  "witness_prefix": "W-de-winter-1015-n",
+  "claim_limitations": "Complete 2026-11-17 exact rational centre-direction certificate at 127, read exactly from the retained source file n127/n127_exact.json at 35b576a, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#1015 names: a tilted central band of 57 squares inside a frame of axis-aligned squares, from an arrangement in the Kaggle compilations of Alex Chilton and Asterios Panoras. Finite construction feasibility only; local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-18",
+  "read_at_main": "eb50f54e9b765a45c92686c5d8f289370c66d7ec",
+  "certificates": [
+    {
+      "n": 127,
+      "path": "n127/n127_exact.json",
+      "format": "center-direction-json",
+      "offered": "11.800795682214",
+      "first_committed": "2026-11-17T22:07:57Z",
+      "same_packing": [
+        {
+          "path": "n127/n127_witness.yaml",
+          "format": "witness-corners-opposite"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    127
+  ],
+  "replayed": [
+    127
+  ],
+  "houses": [
+    {
+      "n": 127,
+      "reader": "[JoeGun upper bounds 2026-11-16]",
+      "source_key": "[JoeGun upper bounds 2026-11-16]",
+      "holders": "Tomáš Kodaj, improved by JoeGun",
+      "result": "T-305",
+      "reported_value": "11.8017538904864874",
+      "verified_value": "11.8017538904864874",
+      "evidence": [
+        "E-joegun-1001-exact-feasibility",
+        "E-joegun-1001-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing 35b576a, issue 1015",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-zqot",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER"
+    }
+  }
+}

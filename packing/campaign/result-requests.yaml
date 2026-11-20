@@ -37411,3 +37411,152 @@ issues:
       direction; and how 10.622222909689 was obtained. They are informational and hold
       nothing open, since no answer could falsify the credit, the derivation or the files
       the record names. It names no bead.
+  - number: 1015
+    title: Lowered upper bound for n = 127 (side 11.800795682214)
+    author: JoostdeWinter
+    opened: '2026-11-17'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(127) <= 11.800795682214, rounded up at 12
+      places from the exact rational side of a centre-direction certificate in his watched
+      repository JoostdeWinter/square-packing at 35b576a (first committed at 689bc79), 9.58e-04
+      below T-305, the house at eb50f54e9: a tilted band of 57 squares inside a frame of
+      axis-aligned squares, from an arrangement in the Kaggle compilations of Alex Chilton and
+      Asterios Panoras whose finder he could not establish. Triaged, retained and registered on
+      18 November 2026 in lane w6-dewinter-1118 (think-zqot) as T-328: the print rounds up from
+      the exact side, both maintained exact routes accept the certificate and refuse its gross
+      and sharp controls, and it is measured close to T-305's arrangement, ten squares beyond a
+      tenth and not one to one by nearest centres. It is the first of his three reports at 127
+      that evening; #1017 and #1020 are lower. The stage 4 review of record is R-127b (#1028),
+      with R-127 (#1025) an additional blind review; both accept it and both are mapped.
+    read_through: '2026-11-17T22:14:33Z'
+    results:
+    - key: n127-band-35b576a
+      claim: >-
+        s(127) <= 11.800795682214 rounded up at 12 places (the exact side
+        590039784110678470545925017871932135226358204819969425332092601/5 x 10^61 of
+        n127/n127_exact.json at JoostdeWinter/square-packing 35b576a), a tilted band of 57
+        squares in a frame of axis-aligned squares.
+      source: body
+      register:
+      - T-328
+      evidence:
+      - E-de-winter-1015-certificate-report
+      - E-de-winter-1015-exact-feasibility
+      validation:
+      - think-zqot
+    beads:
+    - think-zqot
+    answer_bead: think-zqot
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, and the reply on main says what was
+      registered, replayed and reviewed, and where the house at 127 stands.
+    notes: >-
+      Read on 18 November 2026 from main eb50f54e9; no comment on the issue, which carried the
+      intake label when read. The issue names 35b576a (22:09:10Z, pushed 22:09:12Z), 323 seconds
+      before it; its parent 689bc79 (22:07:57Z, pushed 22:07:59Z) first committed the certificate,
+      and 35b576a renames only the model in three files and their checksums. The credit name,
+      Joost de Winter, Delft University of Technology, is the issue's, and his contributor
+      profile exists. The record credits people, not AI agents (attribution.md): the issue says
+      the search, optimization and certificate were produced with GPT-6.2 Sol (OpenAI) and the
+      files, checks and figure with Claude (Anthropic), under his direction. Licensed MIT by
+      LICENSE at the pin. The Kaggle side it quotes, Luka Cvetkovic's 11.800793726618, states no
+      packing and is no report.
+  - number: 1017
+    title: Lowered upper bound for n = 127 (side 11.800793726616)
+    author: JoostdeWinter
+    opened: '2026-11-17'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(127) <= 5900396863307571/500000000000000 =
+      11.800793726615142, the exact side of a centre-direction certificate at cc20a26 in his
+      watched repository, 1.96e-06 below his #1015 and 9.60e-04 below T-305: #1015's band with
+      its tilted cap shifted by a second stage of the search. Triaged, retained and registered
+      on 18 November 2026 in lane w6-dewinter-1118 (think-zqot) as T-329: both maintained exact
+      routes accept the certificate and refuse its gross and sharp controls; measured, it is
+      #1015's arrangement moved, one to one with it, and its step lies far outside #1015's
+      padding, so under option D (think-b0w5) it is a new result. #1020 is lower. The stage 4
+      review of record is R-127b (#1028), with R-127 (#1025) an additional blind review; both
+      accept it and both are mapped.
+    read_through: '2026-11-17T22:27:04Z'
+    results:
+    - key: n127-band-cc20a26
+      claim: >-
+        s(127) <= 5900396863307571/500000000000000 = 11.800793726615142 (n127/n127_exact.json at
+        JoostdeWinter/square-packing cc20a26), #1015's band with its tilted cap shifted.
+      source: body
+      register:
+      - T-329
+      evidence:
+      - E-de-winter-1017-certificate-report
+      - E-de-winter-1017-exact-feasibility
+      validation:
+      - think-zqot
+    beads:
+    - think-zqot
+    answer_bead: think-zqot
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, and the reply on main says what was
+      registered, replayed and reviewed, and where the house at 127 stands.
+    notes: >-
+      Read on 18 November 2026 from main eb50f54e9; no comment on the issue, which carried the
+      intake label when read. The issue names cc20a26 (22:26:24Z, pushed with 67fb815 at
+      22:26:28Z), 40 seconds before it, and says later commits leave the files unchanged; it does
+      not withdraw #1015, so both are reports. It asks for credit as #1015 does and states the
+      same AI assistance. The Kaggle side it quotes, 11.800793726617185, states no packing.
+  - number: 1020
+    title: Lowered upper bound for n = 127 (side 11.800793726615)
+    author: JoostdeWinter
+    opened: '2026-11-17'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(127) <= 11.800793726615, rounded up at 12
+      places from the exact side of a centre-direction certificate at a1ba501 in his watched
+      repository, 1.80e-13 below his #1017: its band with two groups of squares shifted
+      lengthwise and every square re-optimized. Triaged, retained and registered on 18 November
+      2026 in lane w6-dewinter-1118 (think-zqot) as T-330: both maintained exact routes accept
+      the certificate and refuse its gross and sharp controls; measured, it is #1017's
+      arrangement moved, one to one with it, and the step is 4.29 times #1017's contraction
+      margin, so it lies below #1017 shrunk to first contact and under option D (think-b0w5) is
+      a new result. It is the smallest of the three at 127. The stage 4 review of record is
+      R-127b (#1028), with R-127 (#1025) an additional blind review; both accept it and both
+      are mapped.
+    read_through: '2026-11-17T22:49:35Z'
+    results:
+    - key: n127-band-a1ba501
+      claim: >-
+        s(127) <= 11.800793726615 rounded up at 12 places (the exact side
+        5900396863307481119664515678048233366964863482714849291045437/5 x 10^59 of
+        n127/n127_exact.json at JoostdeWinter/square-packing a1ba501), #1017's band with two
+        groups shifted lengthwise.
+      source: body
+      register:
+      - T-330
+      evidence:
+      - E-de-winter-1020-certificate-report
+      - E-de-winter-1020-exact-feasibility
+      validation:
+      - think-zqot
+    beads:
+    - think-zqot
+    answer_bead: think-zqot
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, its stage 4 review mapped and the
+      house at 127 decided, and the reply on main says what was registered, replayed, reviewed
+      and adopted.
+    notes: >-
+      Read on 18 November 2026 from main eb50f54e9; no comment on the issue. The intake label
+      was added at 01:30Z on 18 November under the github-workflows grant. The issue names
+      a1ba501 (22:48:48Z, pushed with 838c5ea at 22:48:50Z), 47 seconds before it; the head adds
+      only registration texts and checksums. It names GPT-6.2 Astra (OpenAI) where the pinned
+      folder's README and the head's REGISTRATION.md name GPT-6.2 Sol; the record states the
+      issue's words. The Kaggle side it quotes, 11.800793726617185, states no packing.

@@ -297,6 +297,16 @@ I1_1117 = (
 #: centre/half-angle certificates read by ``evand-cert``, each held to the source's
 #: Witness/v2 corner file, under MIT.
 ISSUE_1009 = "mishapolk-issue1009-2026-11-16"
+#: The intake pass's lane w6-dewinter-1118 of 18 November 2026
+#: (`test_upper_bound_reports_w6_1118`): Joost de Winter's #1015, #1017 and #1020 at 127,
+#: three certificates of one band filed that evening, each below the last, his
+#: centre-direction JSON read by ``center-direction-json``, under MIT. #1017's touches the
+#: box; #1015's and #1020's clear every wall.
+W6_1118 = (
+    "de-winter-s127-issue1015-2026-11-17",
+    "de-winter-s127-issue1017-2026-11-17",
+    "de-winter-s127-issue1020-2026-11-17",
+)
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -373,6 +383,7 @@ EVERY = (
     L187_1116,
     *I1_1117,
     ISSUE_1009,
+    *W6_1118,
 )
 
 
@@ -1523,10 +1534,11 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
     # to #931, #935, #936, #938, #943 to #947, #954, #959, #960 and #962, Yim's #895 and de
-    # Winter's #958, #977, #979, #997, #1006 and #1007, JoeGun's #1001 and Özden's #1005
-    # touches the box. Couzo's #672 touches at 229 and clears every wall at 227, so its walls
-    # mix, as de Winter's #941 does, whose borders touch the box and whose other
-    # certificates clear it; every other source's clear it.
+    # Winter's #958, #977, #979, #997, #1006, #1007 and #1017, JoeGun's #1001 and Özden's
+    # #1005 touches the box. Couzo's #672 touches at 229 and clears every wall at 227, so its
+    # walls mix, as de Winter's #941 does, whose borders touch the box and whose other
+    # certificates clear it; every other source's clear it, de Winter's #1015 and #1020 by
+    # about 2e-70 and 2e-60.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
@@ -1556,6 +1568,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L181_1115,
         L187_1116,
         *I1_1117,
+        W6_1118[1],
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1862,6 +1875,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L187_1116: "2026-11-16",
         **dict.fromkeys(I1_1117, "2026-11-16"),
         ISSUE_1009: "2026-11-16",
+        **dict.fromkeys(W6_1118, "2026-11-17"),
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

@@ -517,11 +517,19 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-311",
         "T-312",
         "T-313",
-        # Lane w7-optd-1118 (think-8yyy) took 172 and 199, the last houses of Doğa Özden's
-        # T-282 and T-284, to Joost de Winter's re-solves (T-286, T-285), new results under
-        # the owner's option D of 17 November 2026 (think-b0w5), in the same pass. It
-        # recorded Polkovskyi's and Yim's re-certifications (T-253, T-260, T-280, T-281) as
-        # restatements under the same ruling (`restatements`), which read superseded.
+        # The pass of 20 November 2026 (think-zqot) took 127, the only house of JoeGun's
+        # issue-1001 certificate there (T-305), to Joost de Winter's issue-1020 certificate
+        # (T-330), which supersedes it and his own two earlier stages that evening, never
+        # houses (T-328, T-329).
+        "T-305",
+        "T-328",
+        "T-329",
+        # The pass of 21 November 2026 (think-8yyy) took 172 and 199, the last houses of
+        # Doğa Özden's T-282 and T-284, to Joost de Winter's re-solves (T-286, T-285), new
+        # results under the owner's option D of 17 November 2026 (think-b0w5). Lane
+        # w7-optd-1118 recorded Polkovskyi's and Yim's re-certifications (T-253, T-260,
+        # T-280, T-281) as restatements under the same ruling (`restatements`), which read
+        # superseded.
         "T-282",
         "T-284",
         "T-253",

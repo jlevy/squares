@@ -797,6 +797,7 @@
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 7.404,
     "packing/tests/test_upper_bound_reports_regularized.py": 5.364,
     "packing/tests/test_upper_bound_reports_regularized_1020.py": 0.692,
+    "packing/tests/test_upper_bound_reports_w6_1118.py": 4.857,
     "packing/tests/test_validation_cli.py": 32.063,
     "packing/tests/test_validation_report.py": 0.046,
     "packing/tests/test_validation_timing.py": 0.966,
@@ -1102,6 +1103,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-1009-2026-11-17.json",
           "provenance": {},
           "tests": 31
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_w6_1118.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-w6-1118-2026-11-18.json",
+          "provenance": {},
+          "tests": 33
         }
       ]
     },
