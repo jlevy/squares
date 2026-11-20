@@ -53040,7 +53040,6 @@ results:
     - packing/devtools/measure_identity.py
     controls:
     - packing/tests/test_upper_bound_reports.py
-    - packing/tests/test_upper_bound_reports_1012.py
     - packing/resources/web/de-winter-kodaj-n109-2026-11-18/receipts/sharp-controls.json
     notes: >-
       A separate complete repository replay is retained for n = 109: 1 positive and 2
