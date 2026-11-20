@@ -1,0 +1,11 @@
+# Lane r1012 findings, frozen at 2026-11-20T11:41:02Z, before the comment on issue 1012 and the rest of the issue, the source's README.md, SHA256SUMS, n109_tomkodaj.csv or verification.txt, this repository's witness, verifier, promotion, identity or contraction code, packing/frontier/n-109.md, the register entry at 109 (T-101), the record of issue 958, the earlier reviews at 109, Samanyu-dev's repository, Kodaj's notebook and dataset, or any import lane's work (draft PR 1047, its branch and its packet) was read.
+# the frozen review text, and every receipt and program it cites:
+5675cb9ed61d146c666b6e159fcd76a4b7c99d4d0481c6883d6393e2f5be7b11  frozen/review-2026-11-20-de-winter-1012-n109.frozen.md
+43fe998908898328027d1b67d0cd8bab3dfd3bd0cdfcff0d8710fba084d9da81  frozen/checker-frozen-digests.txt
+868237416709621268e936a54ee481a1acedbc9f3c89d1dd2c63ee047e365c44  programs/r1012_describe.py
+c6736f0f2b9d757ef99ec98068c89aec841293e786de57f1908d03a13e0f57dc  out/check-n109.json
+6d086147973d3232a406ba3bbf79ad905a9e18ab44858bb4201659c534abc434  out/controls-n109.json
+796c9c105d80cbc277e104c3eeb7186f987037365de90187030cb14371fe80b6  out/describe-n109.json
+e0a773680bb028550c7d4a0286c312826228619b4c017e03e13e61e2a086671c  out/selftest.json
+# the certificate as fetched by its blob id after the checker's freeze (git blob 9f270d766597af325b3222003fb9b76aa06445ba):
+56b4655fada7dfd5d54c1483b021d5b700ecb5c41beba2865a6a8ef7e223b3fb  aae089c:n109_kaggle/n109_tomkodaj.yaml

@@ -298,11 +298,13 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: certificate of issue 1020 (T-330), a new arrangement relative to T-305's packing:
 #: separating and translating squares 8 and 41 against T-305's 90 and 92, so n=1..200 has
 #: 691 separating squares and 2,420 translating ones, and n=1..324 3,163 and 7,793, in the
-#: same records.
+#: same records. The same pass (think-78aj) moved 268, 270 and 299 to his certificates of
+#: issues 1021, 1022 and 1031 (T-331 to T-333), whose least pair gaps are 1e-59 to 1e-74,
+#: so n=1..324 has 2,985 separating squares and 7,449 translating ones, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
     "n=1..200": (68, 691, 182, 2420),
-    "n=1..324": (126, 3163, 302, 7793),
+    "n=1..324": (126, 2985, 302, 7449),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

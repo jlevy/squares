@@ -198,9 +198,11 @@ ADOPTED_NEXT_DAY = {268: ("T-242", "2026-10-26"), 260: ("T-269", "2026-11-06")}
 #: the adoption of 5 November 2026 took 268 to Evan Daniel's issue-914 certificate (T-270),
 #: and that of 9 November 2026 to Doğa Özden's further arrangement of it (T-276), and that of
 #: 11 November 2026 to his issue-945 certificate, a new arrangement (T-289), and the pass of
-#: 18 November 2026 to Mykhailo Polkovskyi's further arrangement of it (T-320); the same
-#: pass took 260 from T-269 to his further arrangement of that packing (T-318).
-MOVED_AFTER_NEXT_DAY = {268: ("T-320", "2026-11-18"), 260: ("T-318", "2026-11-18")}
+#: 18 November 2026 to Mykhailo Polkovskyi's further arrangement of it (T-320), and that of
+#: 20 November 2026 to Joost de Winter's issue-1021 certificate, a new arrangement (T-331);
+#: the pass of 18 November took 260 from T-269 to his further arrangement of that packing
+#: (T-318).
+MOVED_AFTER_NEXT_DAY = {268: ("T-331", "2026-11-20"), 260: ("T-318", "2026-11-18")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -329,10 +331,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         180: "T-316",
         182: "T-243",
         210: "T-317",
-        268: "T-320",
+        268: "T-331",
         269: "T-297",
         228: "T-301",
-        270: "T-321",
+        270: "T-332",
         272: "T-322",
         297: "T-299",
         305: "T-309",
@@ -1831,13 +1833,14 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 260, 268, 270, 272, 292, 295, 299 and 307 to Mykhailo Polkovskyi's certificates of
     # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November, and lane
     # c1-127 127 on from T-305 to Joost de Winter's certificate of issue 1020 (T-330) in the
-    # pass of 20 November.
+    # pass of 20 November. Lane c2-imports moved 268, 270 and 299 on to his certificates of
+    # issues 1021, 1022 and 1031 (T-331 to T-333) in the same pass.
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
         175: "T-267",
         182: "T-243",
-        268: "T-320",
+        268: "T-331",
         293: "T-271",
         303: "T-278",
         304: "T-273",
@@ -1851,7 +1854,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         260: "T-318",
         308: "T-221",
         227: "T-225",
-        270: "T-321",
+        270: "T-332",
         130: "T-259",
         172: "T-282",
         199: "T-284",
