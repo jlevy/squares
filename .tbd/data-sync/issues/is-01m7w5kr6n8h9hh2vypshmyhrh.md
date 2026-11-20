@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: GeiserX's public 259-square packing below the regi
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: c7-pointers
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T09:46:42.260Z
-updated_at: 2026-11-20T09:57:42.294Z
+updated_at: 2026-11-20T10:37:05.925Z
 started_at: 2026-11-20T09:46:48.225Z
 ---
 jlevy/squares#1040 (JoostdeWinter, 2026-11-19T04:54:13Z, no comments): Sergio Fernández Rubio (GeiserX) published a packing of 259 unit squares with side 16.590016439573 in GeiserX/squares-in-squares data/submission-best.csv.gz at f822b34 (CC BY 4.0), joining tilted bands from his 292- and 445-square packings; 0.00136 below T-193's 16.591378145498. Nevska reached the same side on Kaggle on 8 November 2026 without published coordinates (side-only, context). The issue attaches packing-259.zip, an exact rational Witness/v2 of the packing with a verifier, and asks that the packing be credited to GeiserX.
@@ -26,3 +26,5 @@ blocked_on: jlevy/squares#1040
 ## Notes
 
 2026-11-20 c7-pointers: triage measurement in scratch only (not in the record): the 259 rows of data/submission-best.csv.gz at f822b34 (CSV SHA-256 1378c9fd...4332, matching data/README.md), read exactly by devtools.measure_identity's kaggle-csv reader and boxed at their extent by devtools.contraction_margin, are a packing at 16.5900164395730757571... that both maintained routes accept (least pair gap 2.20e-11, as the source's gate says, wall 0), 1.36e-3 below T-193; contraction margin 3.43e-10 (squares 184 and 190). So the pointer's side is real; the import still waits for the issue's exact Witness/v2 (packing-259.zip, user-attachments/files/35066502), which this session's proxy refuses (403). A session that can read it should retain it (or the binary64 rows could be imported as the project's own exact reading, an owner decision, not taken here).
+
+Recorded in PR https://github.com/jlevy/squares/pull/1047 (requests entry #1040 triage done, n259-geiserx queued here; packet geiserx-squares-in-squares-2026-11-18).
