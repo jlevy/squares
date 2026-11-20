@@ -1,0 +1,18 @@
+# Lane r1038 checker and controls plan, frozen at 2026-11-20T08:32:15Z, before any program of this lane read the certificate, and before the source's README.md, verifier/README.md, verifier/sqcheck.py, sqcheck-228.txt, verify-228.txt, checks/, records/, source/, PROVENANCE.json, LICENSE.md or n228-witness.json, this repository's witness, verifier or promotion code, packing/frontier/n-228.md, the register entry T-301, the earlier reviews at 228, or any import lane's work was read.
+# Read before the freeze: issue 1038's body (REST, programs/issue-1038.json), result-import.md stage 4, the review of issue 1001 (L186) with its packet README and frozen digest lists, packing/witnesses/witness.schema.yaml, the bead think-3ape, and the certificate's structure (keys, scalar forms, line kinds, tabs and line ends) by grep with every digit redacted, as needed to parse.
+# source file (clone of kenaznia-doga/s228-upper-bound-1559604311 at 46ab8bf425f5cad886a8bc4023bfff904f43af99, its only commit; digest by sha256sum, equal to the issue's):
+1b816e2e9302ad58ca2d5bb5882f4f98b2c8fb4f9e5746a8ed3f823cfd4a3387  46ab8bf:n-228-candidate.yaml
+# checker programs, the controls program and the controls plan:
+ef6c4a7a7bba125b8cc6867058a43979d63a74893c3fe460019094eb8e64cffd  r1038_reader.py
+a4c5078298fc90b82bb19815bd367c649cb25f2e652d400d74fe2ba2bbf48243  r1038_sat.py
+3451c72ff3863676bcca46b3e25c8c96a93486ed67b8106c86de2fd81a85832f  r1038_clip.py
+022893c3634c79f5c809f92f048969959d0a81b9bfae032f0e5d73a36defcb2e  r1038_decide.py
+bad9b0d2a24606d226ad54f063b161dde2805d74e2a455110e555ef15b118cd4  r1038_geom.py
+eef19f6b2944cde6fce876492f34cf65dee4b4713bbd04905a27b2357d2f8bc2  r1038_check.py
+edc1179bc274d3e8f64c5dd6900b077f305280286aeb99f82861e8ff2e542bb3  r1038_selftest.py
+27115e4ffbc9467b50f5490ef37223e3cd4253e84c4e78c776b528e8b0e3452f  r1038_controls.py
+1844728c00f4f9c6efef5686b83b79a48c032bbe1419a27bab8c4d6a713a0db1  controls-plan.json
+# the issue as read through the REST API before any program was written:
+c8c6715c4886bcf3f70ec0c284088b9e5f9f65553b617b7580a5eac740381ca4  issue-1038.json
+# receipt written by the frozen self-test (it reads no certificate):
+3b4903e3c5642fa00285a5ad6531bb84db3dbe0627c48c75a0460ab10523eaaf  out/selftest.json
