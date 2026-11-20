@@ -37099,9 +37099,9 @@ issues:
       margin, so under option D (think-b0w5) it is a new result. The blind stage 4 review of 18
       November (R-1021, PR #1033) accepts it with no blocking or major finding, and its
       clean-room run is mapped, so T-331 is confirmed, independently re-implemented, at V3/C3.
-      The house at 268 moves to it by the house rule in the pass's next pull request, on 19
-      November (think-78aj): #1009's pass moved 268 on 18 November, and a day's archive holds
-      one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
+      The case adopted it as the house at 268 by the house rule in the pass of 20 November
+      2026 (think-78aj), regularized in the same pull request; #1009's pass had moved 268 on
+      18 November, and a day's archive holds one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
     read_through: '2026-11-17T22:49:55Z'
     results:
     - key: n268-a1ba501
@@ -37149,9 +37149,9 @@ issues:
       margin, so under option D (think-b0w5) it is a new result. The blind stage 4 review of 18
       November (R-1021, PR #1033) accepts it with no blocking or major finding, and its
       clean-room run is mapped, so T-332 is confirmed, independently re-implemented, at V3/C3.
-      The house at 270 moves to it by the house rule in the pass's next pull request, on 19
-      November (think-78aj): #1009's pass moved 270 on 18 November, and a day's archive holds
-      one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
+      The case adopted it as the house at 270 by the house rule in the pass of 20 November
+      2026 (think-78aj), regularized in the same pull request; #1009's pass had moved 270 on
+      18 November, and a day's archive holds one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
     read_through: '2026-11-17T22:50:19Z'
     results:
     - key: n270-a1ba501

@@ -225,20 +225,10 @@ class Pending:
 #: (think-1goz) took 199 off: Doğa Özden's certificate of issue 938 (T-284), T-282's packing
 #: with one L step, is 2.88e-3 below T-193's algebraic side there. The pass of 18 November
 #: 2026 (think-i38n) took 292 off: Mykhailo Polkovskyi's certificate of issue 1009 (T-323)
-#: is 1.36e-3 below T-193's algebraic side there. The same pass moved 268 and 270 to his
-#: T-320 and T-321, and Joost de Winter's issues 1021 and 1022 (T-331, T-332), validated and
-#: reviewed the same day, are smaller there; one day's archive holds one prior state a count,
-#: so both are staged for the pass's next pull request, the adoption of 19 November 2026
-#: (think-78aj).
-#: The bead that owns the adoption of 19 November 2026 at 268 and 270 (and 299, #1031).
-NOVEMBER_19_BEAD = "think-78aj"
+#: is 1.36e-3 below T-193's algebraic side there.
 PENDING_ADOPTION: dict[int, Pending] = {
-    **{
-        n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
-        for n in (88, 126, 266, 267, 301)
-    },
-    268: Pending(house="T-331", bead=NOVEMBER_19_BEAD, why=NEXT_PULL_REQUEST),
-    270: Pending(house="T-332", bead=NOVEMBER_19_BEAD, why=NEXT_PULL_REQUEST),
+    n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
+    for n in (88, 126, 266, 267, 301)
 }  # fmt: skip
 
 

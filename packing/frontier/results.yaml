@@ -52964,11 +52964,12 @@ results:
       five slightly turned squares) and 3 (which model) go to the author with the reply. Its
       clean-room run on this certificate is E-de-winter-1021-review-exact-feasibility.
     next_rung: >-
-      The house rule's adoption at 268 in the pass's next pull request, on 19 November 2026
-      (think-78aj), staged in select_houses.PENDING_ADOPTION because #1009's pass moved 268 on
-      18 November and a day's archive holds one prior state a count, regularized in that pull
-      request; V4 and C4 need a second qualifying adversarial review by a distinct reviewer
-      and an explicit human oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 18 November, is
+      retained. It is the smallest validated side at 268, and the case adopted it there in
+      the pass of 20 November 2026 under the house rule, in place of T-320, with both strong
+      generators' regularization of the new house; T-320 keeps its certificate as history.
+      The review's questions for the author hold no rung.
   - id: T-332
     kind: upper-bound
     registered: '2026-11-18'
@@ -53080,9 +53081,16 @@ results:
       lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
       every square toward its nearer near wall by its least clearance: both routes accepted each
       at exact contact, margin 0, and refused each 1e-30 past it. They refused a square enlarged
-      to its pair and a square enlarged to its wall at contact for the shape alone and 1e-30
-      past it for the overlap or the wall as well, and refused a duplicated square; all 11 came
-      out as the plan states, by its branches for a box no square touches.
+      to its wall at contact for the shape alone and 1e-30 past it for the wall as well, a
+      square enlarged to its pair at contact and past it for the shape and an overlap, and a
+      duplicated square. Ten came out as the plan states, by its branches for a box no square
+      touches.
+
+      The eleventh differs from the plan's letter, as this lane found on 20 November: square
+      101, grown to its least gap with square 98, already overlaps another neighbour at
+      contact, since none of the near pairs the module tries can be grown to its gap without
+      closing another pair, and the module then predicts that overlap exactly beforehand;
+      the plan's line names the shape alone at contact. The packet's README records it.
 
       Measured against padding (option D of 17 November 2026, think-b0w5): T-321's
       certificate's margin is 3.3863e-27 (squares 164 and 193; measure/contraction-n270.json), so the gain
@@ -53101,11 +53109,12 @@ results:
       five slightly turned squares) and 3 (which model) go to the author with the reply. Its
       clean-room run on this certificate is E-de-winter-1022-review-exact-feasibility.
     next_rung: >-
-      The house rule's adoption at 270 in the pass's next pull request, on 19 November 2026
-      (think-78aj), staged in select_houses.PENDING_ADOPTION because #1009's pass moved 270 on
-      18 November and a day's archive holds one prior state a count, regularized in that pull
-      request; V4 and C4 need a second qualifying adversarial review by a distinct reviewer
-      and an explicit human oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 18 November, is
+      retained. It is the smallest validated side at 270, and the case adopted it there in
+      the pass of 20 November 2026 under the house rule, in place of T-321, with both strong
+      generators' regularization of the new house; T-321 keeps its certificate as history.
+      The review's questions for the author hold no rung.
   - id: T-333
     kind: upper-bound
     registered: '2026-11-20'

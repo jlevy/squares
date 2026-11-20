@@ -7083,12 +7083,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"2108983516887772284036428313677/125000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"8435006925202232172230076700390296999482947661447087509257467/500000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(268) ≥ 16.382380","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.3823801742"},
         "n": 268,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"16.8718681351021783","source_url":"https://github.com/Mishapolk/square-packing-records/blob/b637e6cf59c23781c813e8442bfdccb5aa5f3954/certificates/0000-0999/n268.cert","witness_id":"W-known-best-n268","witness_path":"packing/witnesses/known-best/n-268.yaml"},
+          "assessed_geometry": {"reported_side":"16.8700138504044644","source_url":"https://github.com/JoostdeWinter/square-packing/blob/a1ba5019e787e407646293d7bef81d63c9951b32/n268/n268_exact.json","witness_id":"W-known-best-n268","witness_path":"packing/witnesses/known-best/n-268.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -7105,7 +7105,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(268) ≤ 16.871869","provenance":"frontier","relation":"upper-bound","value":"16.8718681351021783"}
+        "side": {"display":"s(268) ≤ 16.870014","provenance":"frontier","relation":"upper-bound","value":"16.8700138504044644"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
@@ -7135,12 +7135,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"16928148603339607384058475178539/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"16927314216351701364094693919616632628260321141481608494025753/1000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(270) ≥ 16.445218","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.4452187191"},
         "n": 270,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"16.9281486033396074","source_url":"https://github.com/Mishapolk/square-packing-records/blob/b637e6cf59c23781c813e8442bfdccb5aa5f3954/certificates/0000-0999/n270.cert","witness_id":"W-known-best-n270","witness_path":"packing/witnesses/known-best/n-270.yaml"},
+          "assessed_geometry": {"reported_side":"16.9273142163517014","source_url":"https://github.com/JoostdeWinter/square-packing/blob/a1ba5019e787e407646293d7bef81d63c9951b32/n270/n270_exact.json","witness_id":"W-known-best-n270","witness_path":"packing/witnesses/known-best/n-270.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -7157,7 +7157,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(270) ≤ 16.928149","provenance":"frontier","relation":"upper-bound","value":"16.9281486033396074"}
+        "side": {"display":"s(270) ≤ 16.927315","provenance":"frontier","relation":"upper-bound","value":"16.9273142163517014"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

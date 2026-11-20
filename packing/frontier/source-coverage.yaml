@@ -14144,11 +14144,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-134).
 - n: 268
-  source_id: mishapolk-issue1009-2026-11-16
-  value: '16.8718681351021783'
-  evidence: E-mishapolk-1009-certificate-report
+  source_id: de-winter-s268-upper-bound-2026-11-17
+  value: '16.8700138504044644'
+  evidence: E-de-winter-1021-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-320).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-331).
 - n: 269
   source_id: ozden-s269-upper-bound-2026-11-12
   value: '16.8897300735956367'
@@ -14156,11 +14156,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-13 (T-297).
 - n: 270
-  source_id: mishapolk-issue1009-2026-11-16
-  value: '16.9281486033396074'
-  evidence: E-mishapolk-1009-certificate-report
+  source_id: de-winter-s270-upper-bound-2026-11-17
+  value: '16.9273142163517014'
+  evidence: E-de-winter-1022-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-321).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-332).
 - n: 271
   source_id: evand-n271-2026-10-17
   value: '16.9489477337136576'
@@ -15206,14 +15206,14 @@ superseded_reports:
 - n: 268
   source_id: casson-square-packing-2026
   value: '16.87895510935973675'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 268
   source_id: franciscouzo-square-packing-2026
   value: '16.878814821018413'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 269
@@ -15232,14 +15232,14 @@ superseded_reports:
 - n: 270
   source_id: casson-square-packing-2026
   value: '16.94057158197226087'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
   reason: 'Larger than Francisco Couzo''s side at this count; the case record states both sources''
     dates and values; since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that
     packing (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 270
   source_id: franciscouzo-square-packing-2026
   value: '16.937810329390629'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
   reason: 'Superseded on 2026-10-05 by Evan Daniel''s exact optimum of the same packing, certified
     here (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 271
@@ -15654,7 +15654,7 @@ superseded_reports:
 - n: 270
   source_id: evand-square-packing-2026-10-05
   value: '16.937810329340954110200218669924'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
   reason: 'The complete #399 construction has a strictly smaller side; the earlier report and its
     full certificates remain historical.'
 - n: 272
@@ -15943,9 +15943,9 @@ superseded_reports:
 - n: 270
   source_id: evand-new-arrangements-2026-10-07
   value: '16.937807228446029110709567408515'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-321's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-332's exact
     side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 292
   source_id: rehwaldt-couzo-refinements-2026-10-07
   value: '17.597249391156465040471442005510391858592626557'
@@ -16046,8 +16046,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-10
   value: '16.9297753535413596'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 305
   source_id: couzo-certificates-2026-10-10
   value: '17.9511397722069976'
@@ -16429,9 +16429,9 @@ superseded_reports:
 - n: 268
   source_id: evand-square-packing-2026-10-05
   value: '16.878814821006764724747121053018'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-320's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-331's exact
     side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 269
   source_id: evand-regularized-2026-10-10
   value: '16.9015135821891322'
@@ -16442,8 +16442,8 @@ superseded_reports:
   source_id: squish-500-fourth-request-2026-10-11
   value: '16.9281969933290166'
   reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 272
   source_id: pingyou-n272-refinement-2026-10-12
   value: '16.9655864748376707'
@@ -16526,8 +16526,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.92819699332901659'
   reason: The house from 2026-10-17 until 2026-10-21; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 260
   source_id: de-winter-upper-bounds-2026-10-17
   value: '16.6457788041813798'
@@ -16646,8 +16646,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.8788148210067647246'
   reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 303
   source_id: amundsk-n303-2026-10-23
   value: '17.9097623274752568'
@@ -16670,8 +16670,8 @@ superseded_reports:
   source_id: couzo-issue763-2026-10-23-in-corpus
   value: '16.8743617158738255'
   reason: The house from 2026-10-25 until 2026-10-26; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 130
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.90448303251578644'
@@ -16748,8 +16748,8 @@ superseded_reports:
   source_id: evand-kaggle-descents-2026-10-24
   value: '16.8743617158693459'
   reason: The house from 2026-10-26 until 2026-11-05; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 293
   source_id: evand-issue845-2026-10-29
   value: '17.6339825021227820'
@@ -16778,8 +16778,8 @@ superseded_reports:
   source_id: evand-issue914-2026-11-05
   value: '16.8724995181350307'
   reason: The house from 2026-11-05 until 2026-11-09; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 299
   source_id: ozden-s299-upper-bound-2026-11-03
   value: '17.8012385339790622'
@@ -16808,8 +16808,8 @@ superseded_reports:
   source_id: evand-n270-sweep-2026-10-20
   value: '16.9281622521967502'
   reason: The house from 2026-10-21 until 2026-11-09; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 199
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.6175721735928069'
@@ -16832,8 +16832,8 @@ superseded_reports:
   source_id: ozden-s268-upper-bound-2026-11-09
   value: '16.8724698978362125'
   reason: The house from 2026-11-09 until 2026-11-11; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 269
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.901513582189132199'
@@ -16964,14 +16964,14 @@ superseded_reports:
   source_id: ozden-s268-upper-bound-2026-11-10
   value: '16.8720298490844502'
   reason: The house from 2026-11-11 until 2026-11-18; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 270
   source_id: ozden-s270-upper-bound-2026-11-09
   value: '16.9281486033428544'
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 272
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.96558647483767064'
@@ -17002,6 +17002,18 @@ superseded_reports:
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
     and T-326's exact side is smaller.
   superseded_by: mishapolk-issue1009-2026-11-16
+- n: 268
+  source_id: mishapolk-issue1009-2026-11-16
+  value: '16.8718681351021783'
+  reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
+- n: 270
+  source_id: mishapolk-issue1009-2026-11-16
+  value: '16.9281486033396074'
+  reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

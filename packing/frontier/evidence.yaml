@@ -66219,8 +66219,9 @@ evidence:
       certificate with its duplicate-square and outside-container controls, through both
       maintained routes; check-claims rebuilds the frozen comparison. python -m
       devtools.upper_bound_reports de-winter-s270-upper-bound-2026-11-17 sharp-controls wrote the packet's sharp controls, all 11
-      with the verdicts a plan hashed before any route ran stated: contact accepted at margin 0
-      and refused 1e-30 past it.
+      as the module predicts them and 10 with the verdicts a plan hashed before any route ran
+      stated, the pair enlargement's overlap at contact the exception the packet's README
+      explains: contact accepted at margin 0 and refused 1e-30 past it.
     replay_status: passed
     verifiers:
     - V-sqpack-verify
