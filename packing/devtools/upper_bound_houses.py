@@ -739,15 +739,21 @@ def _sources() -> dict[str, Source]:
         # T-288's, T-283's, T-277's and T-279's at 156, 180, 270, 299 and 307, new results
         # under the owner's option D of 17 November 2026 (think-b0w5). T-174 and T-193 keep
         # their other houses.
+        # The pass of 20 November 2026 (think-78aj) moved 268, 270 and 299 from T-320, T-321 and
+        # T-325 to Joost de Winter's issues 1021, 1022 and 1031 (T-331 to T-333), new
+        # arrangements relative to each, so T-320, T-321 and T-325 are no sources here now.
         *(
             packet_source(f"T-{number}", "mishapolk-issue1009-2026-11-16")
-            for number in range(314, 327)
+            for number in (*range(314, 320), 322, 323, 324, 326)
         ),
         # The pass of 20 November 2026 (think-zqot) moved 127 from T-305, its only house
         # (T-306 to T-309 still house 204, 232, 264 and 305 through the same packet), to Joost
         # de Winter's issue 1020 (T-330), the smallest of his three reports there on the
         # evening of 17 November.
         packet_source("T-330", "de-winter-s127-issue1020-2026-11-17"),
+        packet_source("T-331", "de-winter-s268-upper-bound-2026-11-17"),
+        packet_source("T-332", "de-winter-s270-upper-bound-2026-11-17"),
+        packet_source("T-333", "de-winter-s299-upper-bound-2026-11-18"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -871,6 +877,10 @@ def _sources() -> dict[str, Source]:
 #: from an arrangement in the Kaggle compilations of Alex Chilton and Asterios Panoras: a new
 #: arrangement relative to T-305's packing (no symmetry one to one, 9 squares beyond a
 #: tenth). T-305 keeps no house here; T-306 to T-309 still house 204, 232, 264 and 305.
+#: Lane c2-imports (think-78aj) adopted Joost de Winter's issues 1021, 1022 and 1031 in the
+#: pass of 20 November 2026: T-331 at 268, T-332 at 270 and T-333 at 299, each a new
+#: arrangement relative to the house it replaces (T-320, T-321, T-325) and to the house
+#: before it; T-320, T-321 and T-325 keep no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -931,9 +941,9 @@ ADOPTED: dict[int, str] = {
     263: "T-174",
     264: "T-308",
     267: "T-134",
-    268: "T-320",
+    268: "T-331",
     269: "T-297",
-    270: "T-321",
+    270: "T-332",
     271: "T-219",
     272: "T-322",
     273: "T-174",
@@ -941,7 +951,7 @@ ADOPTED: dict[int, str] = {
     293: "T-271",
     295: "T-324",
     297: "T-299",
-    299: "T-325",
+    299: "T-333",
     302: "T-193",
     303: "T-278",
     304: "T-273",
@@ -1188,7 +1198,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-15": frozenset({90, 147, 228}),
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
-    "2026-11-20": frozenset({127}),
+    "2026-11-20": frozenset({127, 268, 270, 299}),
 }
 
 

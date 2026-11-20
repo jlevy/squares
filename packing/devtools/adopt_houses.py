@@ -248,6 +248,26 @@ REVIEW_1020 = (
     "after its freeze; an additional blind review’s checker decided it again too"
 )
 
+#: What the stage 4 review of issues 1021 and 1022 (lane r1021-1118, think-gqzz) decided on
+#: each of their two certificates, the clause the case records write after the maintained
+#: routes.
+REVIEW_1021 = (
+    ", and the 18 November review’s clean-room checker, frozen before any certificate was "
+    "read, decided it and its Witness/v2 twin again by separating axes in integers and by "
+    "exact clipping in GMP rationals over every square, wall and pair; its 45 controls at "
+    "this count, stated beforehand, were each decided as stated"
+)
+
+#: What the stage 4 review of issue 1031 (lane r1031-1118, think-r3tn) decided on its
+#: certificate, the clause the case record writes after the maintained routes.
+REVIEW_1031 = (
+    ", and the 18 November review’s clean-room checker, frozen before any certificate was "
+    "read, decided it and its Witness/v2 twin again by separating axes in exact rationals "
+    "and by exact clipping in GMP rationals over every square, wall and pair; 34 of its 36 "
+    "controls, stated beforehand, were decided as stated, and two as the side rule gives, "
+    "against a rule its plan stated wrongly for this certificate"
+)
+
 #: Each adopted result, as its register entry and its review describe it.
 RESULTS: dict[str, Prose] = {
     "T-128": Prose(
@@ -3441,6 +3461,96 @@ RESULTS: dict[str, Prose] = {
         diversity="by Claude agents, a system family that also produced the files and checks",
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-331": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1021](https://github.com/jlevy/squares/issues/1021)",
+        producer_route=False,
+        ai=(
+            "The issue says the search, optimization and rational certificate were produced "
+            "with GPT-6.2 Astra (OpenAI), where the source’s README names GPT-6.2 Sol, and the "
+            "repository files, checks and figure with Claude (Anthropic), under Joost de "
+            "Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the search divided the box into nine diagonal slices and filled "
+            "each from a transformed copy of a published packing, Daniil Ostashev’s at 129 and "
+            "PingYou Ltd’s at 153 and 302, taken from the public compilations of Navneet "
+            "Prabhat and Danil Malyshev and from Francisco Couzo’s certificate at 302, then "
+            "optimized every square. Against T-320’s packing, this case’s house best packing "
+            "before this adoption, it is a new arrangement: no symmetry pairs nearest centres "
+            "one to one, and the optimal assignment moves 46 squares beyond a tenth, at most "
+            "0.901; against T-289’s, the house before it, 56. So Joost de Winter is the "
+            "packing’s finder, from slices of Ostashev’s and PingYou Ltd’s packings through "
+            "Prabhat’s and Malyshev’s compilations and Couzo’s certificate, as the issue asks."
+        ),
+        third_route=REVIEW_1021,
+        diversity=(
+            "by a Claude agent, a system family that also produced the source’s files and "
+            "checks"
+        ),
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-332": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1022](https://github.com/jlevy/squares/issues/1022)",
+        producer_route=False,
+        ai=(
+            "The issue says the search, optimization and rational certificate were produced "
+            "with GPT-6.2 Astra (OpenAI), where the source’s README names GPT-6.2 Sol, and the "
+            "repository files, checks and figure with Claude (Anthropic), under Joost de "
+            "Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the search started from the 270-square packing in Asterios "
+            "Panoras’s public Kaggle compilation, a merge of many contributors that does not "
+            "name its finder, removed and relaxed its two end regions, compressed a 68-square "
+            "region and re-optimized every square. Against T-321’s packing, this case’s house "
+            "best packing before this adoption, it is a new arrangement: no symmetry pairs "
+            "nearest centres one to one, and the optimal assignment moves 94 squares beyond a "
+            "tenth, at most 1.024; against T-283’s, the house before it, likewise. So Joost de "
+            "Winter is the packing’s finder, after the compilation’s arrangement, as the issue "
+            "asks."
+        ),
+        third_route=REVIEW_1021,
+        diversity=(
+            "by a Claude agent, a system family that also produced the source’s files and "
+            "checks"
+        ),
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-333": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1031](https://github.com/jlevy/squares/issues/1031)",
+        producer_route=False,
+        ai=(
+            "The issue and the source’s README say the search, optimization and rational "
+            "certificate were produced with GPT-6.2 Sol (OpenAI), and the repository files, "
+            "checks and figure with Claude (Anthropic), under Joost de Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the search divided the box into diagonal slices and filled each "
+            "from a reflected or translated copy of a public packing, the outer slices from "
+            "372 squares and the seven middle slices from 335, both from Asterios Panoras’s "
+            "public Kaggle compilation, which it links to the notebooks of prvsiyan (372) and "
+            "of areebbb, jazivxt, alexchilton and prvsiyan (335), then optimized every square "
+            "and reflected part of one tilted group across the diagonal. Against T-325’s "
+            "packing, this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 127 squares beyond a tenth, at most 1.074; the 18 November "
+            "review finds it so against every "
+            "packing the record holds at 299. Each of its two tilted groups shares, for 50 "
+            "to 53 squares, the tilted band every house here has carried since Evan Daniel’s "
+            "T-248, under a rigid motion of its own; the record does not credit a "
+            "resemblance. So Joost de Winter is the packing’s finder, after Panoras’s "
+            "compilation and those notebooks’ authors, as the issue asks."
+        ),
+        third_route=REVIEW_1031,
+        diversity=(
+            "by a Claude agent, a system family that also produced the source’s files and "
+            "checks"
+        ),
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -4096,11 +4206,14 @@ CREDITS: dict[int, Credit] = {
     # of PingYou Ltd's n = 302 packing, which the 11 November review's cut model fits over most
     # of the box (F8, F10).
     # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-320).
+    # The pass of 20 November 2026 (think-78aj): Joost de Winter's issue 1021 (T-331), nine
+    # diagonal slices of Daniil Ostashev's 129 and PingYou Ltd's 153 and 302; a new
+    # arrangement relative to T-320's packing, 46 squares beyond a tenth, and to T-289's, 56.
     268: Credit(
-        (OZDEN,),
-        (POLKOVSKYI,),
-        "Mykhailo Polkovskyi’s further arrangement of Doğa Özden’s packing from a strip "
-        "cut of PingYou Ltd’s n = 302 packing",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s packing of nine diagonal slices of Daniil Ostashev’s and PingYou "
+        "Ltd’s published packings",
     ),
     # T-297 (adopted in the pass of 13 November 2026), Doğa Özden's issue 967: a new
     # arrangement relative to his own T-296's packing, 53 squares beyond a tenth, and to
@@ -4129,11 +4242,14 @@ CREDITS: dict[int, Credit] = {
     # packing, one to one with it under the identity, 1 square beyond a tenth (the 9
     # November review of issues 935 and 936).
     # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-321).
+    # The pass of 20 November 2026 (think-78aj): Joost de Winter's issue 1022 (T-332), the
+    # 270-square packing of Asterios Panoras's compilation re-optimized by regions; a new
+    # arrangement relative to T-321's packing, 94 squares beyond a tenth, and to T-283's.
     270: Credit(
-        (DANIEL,),
-        (OZDEN, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s re-solve of Doğa Özden’s further arrangement of Evan "
-        "Daniel’s arrangement",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s re-optimization by regions of the 270-square packing in Asterios "
+        "Panoras’s public Kaggle compilation",
     ),
     # Evan Daniel's tilt-swap from the register's witness (T-186's tightening of issue 561's
     # packing): issue 561's arrangement continued, three squares beyond a tenth (RV-2 of the
@@ -4199,11 +4315,15 @@ CREDITS: dict[int, Credit] = {
     # to one by nearest centres only through the bottom row's slide (the 9 November
     # review's F6).
     # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-325).
+    # The pass of 20 November 2026 (think-78aj): Joost de Winter's issue 1031 (T-333),
+    # diagonal slices of the 372- and 335-square packings in Panoras's compilation; a new
+    # arrangement relative to every packing the record holds at 299 (the 18 November
+    # review), its two tilted groups each sharing the band of the houses since T-248.
     299: Credit(
-        (DANIEL,),
-        (OZDEN, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s re-solve of Doğa Özden’s second further arrangement of "
-        "Evan Daniel’s packing",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s packing of diagonal slices of the 372- and 335-square packings "
+        "in Asterios Panoras’s public Kaggle compilation",
     ),
     # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
     # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
