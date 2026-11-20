@@ -249,6 +249,9 @@ GOLDEN_UNSTABLE = {
         # witness stable across tolerances there (think-lrj4), joined again on 9 November
         # 2026 with Doğa Özden's further arrangement of it (T-276, think-463r), and left
         # again on 18 November 2026 with Polkovskyi's further arrangement of T-289's (T-320).
+        # It joined again on 20 November 2026 with Joost de Winter's certificate there
+        # (T-331, think-78aj), whose margins are about 1e-59.
+        268,
         # 269 left on 13 November 2026: Doğa Özden's certificate of issue 967 there (T-297,
         # think-n73d) is stable across tolerances.
         # 270 joined on 9 November 2026 with Doğa Özden's further arrangement of T-224's
