@@ -5,7 +5,7 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: in_progress
 priority: 1
-version: 21
+version: 22
 delegate: c11-fix1030
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-20T11:11:04.097Z
+updated_at: 2026-11-20T11:37:46.765Z
 started_at: 2026-11-18T02:28:47.344Z
 ---
 
@@ -49,3 +49,5 @@ started_at: 2026-11-18T02:28:47.344Z
 2026-11-20T10:35Z c4-optd: hosted at 7b70e7e66 red only on result/t-174.html's budget (376,161 vs 375,000; main 374,826). On the coordinator's word made budget PR #1046 (t-174 to 400,000, t-085 and t-083 to 850,000, measured; no-change record; green: PV 44712551549, CP 44712551570); the coordinator merged it (a9e5261a2). Merged main 02bdd1fb8 (#1043/#1044; test_check_requests docstring conflict, both kept, owner-decision 20, author 1) and a9e5261a2 into #1030; no house moved at any option D count. No-change record re-measured vs a9e5261a2 (55/43/43/43 byte-identical). stamp_landed --apply: nothing new (172/199 already 2026-11-20); release_pin --check: pin ab7e52f34 still the last data commit (no re-pin owed). Local at 78ee6a944: --edit green (71), --records green, 255 touched tests pass. Pushed 78ee6a944; hosted CI running. Merge waits on the owner's option D confirmation (coordinator).
 
 2026-11-20T11:05Z c4-optd (handoff): #1030 head 78ee6a944 (main a9e5261a2 merged; stamp ab7e52f34 is the pin and still the last data commit). Hosted: Packing validation 44718785323 green; Branch mergeability 44718772955 green; Certificate page 44718785210 green but font-loading (webkit) ("native MathML was visible before enhancement: s(11)", first-paint timing on the n=11 page, passed on every other recent run incl. main a9e5261a2 and this branch's 7b70e7e66) - reported, not re-run. PR body final (cost first). Merge waits on the owner's option D confirmation via the coordinator; if main moves before it, merge main, run stamp_landed --apply and release_pin --update last. Worktree removed. After merge: replies on #846/#939/#946/#573 (coordinator); close or annotate think-ikku, think-ruu2, think-oqjd, think-5c9z (review A13).
+
+2026-11-20T12:05Z c11-fix1030 (senior review B of #1030, at 78ee6a944): 9df27ae19 answers S1 (T-286's claim and the coverage notes of T-285/T-286 date the adoption 20 November; RESULTS.md re-rendered), S2 (independence_record dropped from E-de-winter-939/946-exact-feasibility, the -review- entries keep theirs; render_verifiers --update no change), S3 (#846 stays blocked:owner-decision, moved from think-ikku to think-7k8p, close_when names that answer, notes say the reply after the merge is not final and leaves #846 open; test_check_requests counts 21 owner-decision blocks; think-7k8p notes gain T-281's dependency), N5 (T-253's dangling "(above)"); 36d549703 re-pins DATA_REVISION to 9df27ae19 (stamp_landed: nothing to stamp). Main unchanged at a9e5261a2; #1024 not merged. Local: --records green, --edit green (71 steps, 577 s), compare_paper_renders vs a9e5261a2 with the 13 record paths 55/43/43/43 byte-identical, 770 touched tests pass. Pushed 36d549703; PR body updated (review B, #846's non-final reply, footer). After the merge #846 keeps its blocked:owner-decision label.
