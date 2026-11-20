@@ -7,3 +7,16 @@
 # changed; the self-test was re-run on the amended code (PASS, 5,933 checks) before the premises run that is retained.
 # The amended file:
 c84207f1345306cffaf2b1f2060b25e0abc445ed4104ac4190c1f98c25c52954  programs/rr1_common.py
+#
+# A2, 2026-11-20 about 21:12Z, by the agent that resumed the lane. The lane's first agent was cut off at about 20:40Z
+# with the whole-certificate sample (rr1_runs.py sample, started 18:48Z on 1042/n136 with three processes) still on its
+# first certificate; that driver writes a receipt only when a certificate is complete, the machine restarted at 20:53Z,
+# and nothing of the run survived but its scratch inputs. The resumed lane was told to stop any single computation at
+# 30 minutes and record it undecided. programs/rr1_sample_resumed.py is the sample's driver under that rule: the frozen
+# order, every bin decided by the frozen rr1_decide.decide with the frozen limits, one certificate per computation under
+# a 1,800 second wall cap, a certificate's bins in a seeded order (so a capped run is a uniform sample of its bins),
+# and a checkpoint after each batch of six bins. It was run before this entry only on the first agent's synthetic tree
+# (3 x 3 uniform measures under the 77 folder names): DECIDED on two labels, and NOT_COMPLETED_WALL_CAP under a cap of
+# 0.3 seconds. No frozen program changed. The frozen plan's CPU rule (24 CPU-hours for the sample) still binds, and
+# nine capped computations at three processes cannot reach it.
+ed0c9d344aef4938a2ec34f93cc89746f081ee0ca50b51134cc86373f961708b  programs/rr1_sample_resumed.py
