@@ -1,0 +1,33 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "geiserx-squares-in-squares-2026-11-18",
+  "source_url": "https://github.com/GeiserX/squares-in-squares",
+  "source_ref": "main",
+  "source_commit": "f822b34456b29addec9b59478aac4eb2306f7566",
+  "retrieved_at_utc": "2026-11-20T09:33Z",
+  "git_scope": "A blobless clone of GeiserX/squares-in-squares, fetched at 09:33Z on 20 November 2026 for the intake of jlevy/squares#1040 (lane c7-pointers, bead think-squj), when git ls-remote read main's head as f822b34, the commit the issue names (committed 2026-11-18T18:37:44Z, 'docs: give the repo a logo of nested tilted squares (#3)'). The repository's history is five commits; the first, c409de5 (15:41:34Z, 'feat: publish the Squares in Squares work as a free head start, with credit to GeiserX'), publishes the whole tree, data/submission-best.csv.gz included, and the later four add or change documents, images and repository settings (security policy, dependency updates, review and agent configuration), the root README and data/README.md among them, and nothing under results/; data/submission-best.csv.gz and results/round33-best-2026-11-17.tsv have the same Git blob at c409de5 and the pin. The scope is the attribution files at the root (README.md, LICENSE, LICENSE-CC-BY-4.0.txt, NOTICE, AUTHORS, AI_NOTICE.md and CITATION.cff), data/ and results/round33-best-2026-11-17.tsv, the last table that lists n = 259 and so, by data/README.md, the one that gives the source of the 259 layout in the submission. The rest of the tree, about 5,250 files of scripts, notes and tables, is not in scope. No source program ran in writing this packet.",
+  "archived_dir": "source",
+  "license": "By NOTICE and README.md at the pin: the code (.py and .sh files) is under the Apache License 2.0 (LICENSE), and everything else, layouts, tables and documents included, under CC BY 4.0 (LICENSE-CC-BY-4.0.txt), with the credit 'Sergio Fernández Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares' required on redistribution; third-party layouts keep their own terms, which NOTICE and the results tables list. Nothing retained here is code.",
+  "claims": [
+    "data/submission-best.csv.gz is, by data/README.md, the gzip of the author's best Kaggle submission for the competition 'Squares in Squares' (round 38 a, Kaggle ref 58514241), one packing for every n from 1 to 1000 in the competition's format id,n,square_id,x,y,angle, centres and angles in radians as binary64 decimals, public score 22.1124018632 (rank 29 of 2,226 at 15:00 UTC on 18 November 2026), with the SHA-256 of the CSV 1378c9fd83966c98e4273fa9b9685ea6270802d81a9d0d890255068369714332 and of the .gz c490841279b793a963129680483a21b075fb55e8e26c24d37901c0655c704989; the author's gate reports its smallest gap between two squares as 2.2e-11. It states no exact coordinates and no certificate.",
+    "results/round33-best-2026-11-17.tsv lists n = 259 at side L 16.590016439573077, from 'k123_join.py 292-445r-j6-13-s-5: first band up to chain 6 joined with second band from chain 13, shift -5 rows; k123_turn.py and fq loop', built from the author's own held packings at 292 and 445, with the licence cell 'our own construction on held packings (upstream notices in the named ancestry)'; data/README.md says the latest table that lists an n gives the source of its layout in the submission.",
+    "README.md, NOTICE, AUTHORS and AI_NOTICE.md ask that any reuse of the layouts credit 'Sergio Fernández Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares' and keep NOTICE; NOTICE lists the third-party sources the layouts build on, among them Samanyu-dev/squares_in_squares, franciscouzo/square-packing, Evan Daniel's evand/square-packing, Doğa Özden's repositories and jlevy/squares. AI_NOTICE.md addresses automated agents; the README says the work was AI-assisted in the author's words there."
+  ],
+  "scope": [
+    "README.md",
+    "LICENSE",
+    "LICENSE-CC-BY-4.0.txt",
+    "NOTICE",
+    "AUTHORS",
+    "AI_NOTICE.md",
+    "CITATION.cff",
+    "data",
+    "results/round33-best-2026-11-17.tsv"
+  ],
+  "pinned_only": [
+    {
+      "match": "data/submission-best.csv.gz",
+      "reason": "The 1,000-count submission, 7,437,306 bytes compressed: above OR-18's per-blob ceiling, and binary64 rows with no certificate, so pinned by digest only; its 259 rows are what #1040 points to."
+    }
+  ]
+}
