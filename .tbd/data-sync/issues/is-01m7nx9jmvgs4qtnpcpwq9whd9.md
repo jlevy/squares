@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 28
+version: 29
 delegate: c1-127
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-20T07:04:11.106Z
+updated_at: 2026-11-20T08:03:48.002Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -66,3 +66,6 @@ coord-intake-1117r: #1028 (R-127b) merged as 0f191a2d2 at 05:25Z. Its A2 fix add
 2026-11-18T07:15Z w6r2-dewinter-1118 (resumed after the 06:55Z restart): the strong runs had finished before the restart (grid-slack 0.5/1/5 and the driver, 06:48-06:54Z); the dotted grid dirs (grid-0.5) were renamed grid-deg05/deg1/deg5 (run ids ^[a-z0-9-]+$) and the selection re-run (07:08Z, same table): no adoptable view; the driver's KKT solve 7.06e-19 below T-330 (3.9e39 x its own margin 1.82e-58) is a register candidate held at row 3 (for think-4z8z). 127 settled decided-no-better (_RUNZQOT), receipts in packing/cases/regularized_drawings/think-zqot-2026-11-18/, render and record done; 0 pending. Pushed 340ce0c76. Next: the other CI failures (occurrences, bound-citations, censuses, tables, synopsis, inventory, ceremony, ruff).
 
 2026-11-18T07:48Z w6r2-dewinter-1118: #1024's CI fixes pushed through 2e3de675a (on 340ce0c76, a4363b4e5, adf87d668): derived records (bound citations, escape screen, family census, contributor census reconciled, research tables, inventory, doc map, synopsis count 329, certificate reach, case verifiers, landing), 127's record refreshed through the writer (its 18 Nov paragraph was above the closed form), custody re-run (T-305 had been left a source with no house; fixed, and the comment that T-305 still housed 204-305 corrected: T-306..T-309 do), print-credit hold released at 127, test pins at 127, superseded set +T-305/T-328/T-329, ceremony fixes. Records tier and 16 affected test files pass locally but for the register's gap at T-327 (fills when #1029 merges). Next: after #1029 merges, merge main, renumber nothing (T-328..T-330 already follow T-327), re-stamp, re-pin, green CI, then the senior review request.
+
+
+2026-11-20T08:25Z c1-127 (coordinator bold-ritchie-coord1120): #1024 head df7344116 pushed. Moved 127's adoption of T-330 to the pass of 20 November (LATER_PASSES; 18 Nov archive back to main's bytes, 20 Nov archive holds 127's row = main's n-127.md; writer refresh; source_reviewed 2026-11-20). Fixed 3f3791c14's hosted failures (run 44270940873): rigidity scope at 127 (assess_frontier_rigidity), SCREEN_FINDINGS pins (126,3163,302,7793 / 1..200: 68,691,182,2420), contact-shade census, result/t-174.html ceiling 400,000 (main 371,984 run 44270272824; branch 376,172). No-change record names all 14 candidates; compare_paper_renders vs 7b6bc29e8: 3 papers identical, explainer only register count 330 vs 327. Merged main 7b6bc29e8 (#1034). Stamped 2026-11-20, re-pinned. Local: records tier 55/55, edit tier green but for two dated views (fixed), touched tests 1485 pass after the source_reviewed fix, custody passed. Next: hosted CI; merge main after #1035 (results.html ceiling) lands, re-stamp/re-pin.
