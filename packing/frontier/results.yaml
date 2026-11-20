@@ -10472,7 +10472,8 @@ results:
       a name the line already held keeping its place. Joost de Winter's README names
       them as the sources of his 211 packing since its revision of that day, which [de
       Winter n211 2026-11-18] pins, so by attribution.md's chain rule every line through
-      that packing names them; the short credit is unchanged.
+      that packing names them. T-098's key, its line now over 66 characters, gains the
+      short credit "Daniel after Couzo et al.".
 
   - id: T-099
     kind: lower-bound
