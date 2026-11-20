@@ -20,7 +20,7 @@ triage. None of the 37 is in this scope or imported here.
 Intake lane L78 (think-2h88) retained it, replayed it and registered it on 11 November
 2026 as **T-286, held at V0/C1** for the owner’s RV-3 (think-ruu2), beside #939’s T-285.
 The owner’s option D of 17 November 2026 (think-b0w5) made it a new result: on
-18 November 2026 lane w7-optd-1118 (think-8yyy) raised it to V3/C3, and on 20 November
+18 November 2026 lane w7-optd-1118 (think-8yyy) raised it to V3/C3, and on 21 November
 2026 the branch’s pass adopted it as the house at 172, in place of T-282 ([Padding (Option D)](#padding-option-d)).
 
 ## What the Source Claims
@@ -164,7 +164,7 @@ lies 1.010713 × 10⁻¹³ above this certificate, whose gain is 1.0399 of T-282
 Lane w7-optd-1118 (think-8yyy) entered, on 18 November 2026, the replay above
 (`E-de-winter-946-exact-feasibility`) and the stage 4 review’s clean-room run
 (`E-de-winter-946-review-exact-feasibility`) as evidence, raised T-286 to V3/C3, and
-regularized the new witness with both strong generators; the pass of 20 November 2026
+regularized the new witness with both strong generators; the pass of 21 November 2026
 adopted it as the house at 172 under the house rule
 ([think-8yyy-2026-11-18](../../../cases/regularized_drawings/think-8yyy-2026-11-18/README.md)).
 The share is the one Evan Daniel’s held solve at 172 has (think-wju3), which stays the

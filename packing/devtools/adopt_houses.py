@@ -3845,7 +3845,7 @@ CREDITS: dict[int, Credit] = {
     # packing: 15 squares beyond a tenth under the identity assignment, not one to one by
     # nearest centres only through one shared centre in a block near 45 degrees (the 9
     # November review of issues 935 and 936, F6).
-    # The pass of 20 November 2026 (think-8yyy): Joost de Winter's issue 946 (T-286), T-282's
+    # The pass of 21 November 2026 (think-8yyy): Joost de Winter's issue 946 (T-286), T-282's
     # packing re-solved, a new result under the owner's option D (think-b0w5).
     172: Credit(
         (DANIEL,),
@@ -3931,7 +3931,7 @@ CREDITS: dict[int, Credit] = {
     # whose improver is Özden; the 172 line started from this count's former house, T-127's
     # packing, by an L-cut (issue 845), against which this is a new arrangement, 81 squares
     # beyond a tenth (the 9 November review of issue 938, F10 and F13).
-    # The pass of 20 November 2026 (think-8yyy): Joost de Winter's issue 939 (T-285), T-284's
+    # The pass of 21 November 2026 (think-8yyy): Joost de Winter's issue 939 (T-285), T-284's
     # packing with its 172-square core re-solved, a new result under option D (think-b0w5).
     199: Credit(
         (DANIEL,),

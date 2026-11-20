@@ -12,10 +12,10 @@ accepts both certificates.
 
 | n | House | Replaces | Adopted |
 | ---: | --- | --- | --- |
-| 172 | T-286, issue 946 | T-282 | 20 November 2026 |
-| 199 | T-285, issue 939 | T-284 | 20 November 2026 |
+| 172 | T-286, issue 946 | T-282 | 21 November 2026 |
+| 199 | T-285, issue 939 | T-284 | 21 November 2026 |
 
-The adoption was written on 18 November and moved to the pass of 20 November 2026, the
+The adoption was written on 18 November and moved to the pass of 21 November 2026, the
 day the branch merges, since a day’s archive holds one prior state a count; the
 witnesses it writes are built from the retained packets and did not change, so these
 runs and their directory names stand.

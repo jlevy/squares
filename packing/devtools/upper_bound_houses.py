@@ -655,13 +655,13 @@ def _sources() -> dict[str, Source]:
         # The same day's later pass (think-he66) moved 172 from T-257 and 270 from T-224 to
         # Doğa Özden's further arrangements of issues 935 and 936, T-282 and T-283, one packet
         # each; T-257 and T-224 keep no house here now.
-        # The pass of 20 November 2026 (think-8yyy) moved 172, T-282's only house, to Joost de
+        # The pass of 21 November 2026 (think-8yyy) moved 172, T-282's only house, to Joost de
         # Winter's re-solve of it (T-286), so T-282 is no source here now.
         # The pass of 18 November 2026 (think-i38n) moved 270, T-283's only house, to Mykhailo
         # Polkovskyi's re-solve of it (T-321), so T-283 is no source here now.
         # The same day's last pass (think-1goz) moved 199, which no pass had adopted, from
         # T-127 to Doğa Özden's issue 938, T-282's packing with one L step (T-284); the pass of
-        # 20 November 2026 (think-8yyy) moved it on to Joost de Winter's re-solve of T-284's
+        # 21 November 2026 (think-8yyy) moved it on to Joost de Winter's re-solve of T-284's
         # core (T-285), so T-284 is no source here now.
         # Lane L81 of 11 November 2026 (think-xq4o) moved 156, 180, 268 and 269 to Doğa Özden's
         # issues 943, 944, 945 and 947 (T-287 to T-290), each a new arrangement relative to the
@@ -733,7 +733,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-309", "joegun-upper-bounds-2026-11-16"),
-        # The pass of 20 November 2026 (think-8yyy) moved 199 and 172 to Joost de Winter's
+        # The pass of 21 November 2026 (think-8yyy) moved 199 and 172 to Joost de Winter's
         # issues 939 and 946 (T-285, T-286), T-284's and T-282's packings re-solved to the
         # exact local optimum of T-282's arrangement, new results under the owner's option D
         # of 17 November 2026 (think-b0w5), one packet each.
