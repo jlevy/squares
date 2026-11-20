@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 53
+version: 54
 delegate: bold-ritchie-coord1120
 labels: []
 dependencies: []
@@ -55,7 +55,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-20T06:57:54.980Z
+updated_at: 2026-11-20T06:59:37.804Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -72,3 +72,5 @@ started_at: 2026-11-17T01:28:43.493Z
 2026-11-18T07:10Z coord-intake-1117r: the container restarted at about 06:55Z (the third restart), killing all agents and background compute. Files and commits survived. r144's 11 local commits are now pushed. Lost mid-run: the T-144 replay (range 0-76 partial) and R-144's node range 176-200; both lanes resume from their last committed range. Respawned: senior reviews of #1029 and #1032, w6r2 (#1029, #1024, think-gqzz), w7r2 (#1030), r1021b (#1033), r144b (think-rxs3), w8b (think-nd7g). Main is at 86284ec20 (#1023). Open PRs: #1024, #1029, #1030, #1032, #1033.
 
 2026-11-18T08:35Z coord-intake-1117r: the 15 senior reviews this session spawned named a model identifier in their reviewer lines, copying #953's Review A format. All 15 comments are now edited to 'strong tier, xhigh reasoning', no comment since 17 Nov 21:00Z names one, and the reviewer brief forbids it. On main, the only identifiers added since f9ddfeeef are the two lines in R1's frozen, digest-bound copy (#1013), which are disclosed. Older evidence.yaml reviewed_by fields name models by the October convention; I left them unchanged.
+
+2026-11-20T07:10Z bold-ritchie-coord1120 (session_01E8g3iMDhVT21veLdEABoxV): reclaimed on the owner's instruction in conversation ("pick up all intakes on squares that need to be revisited and continue that work process end to end"). coord-intake-1117r silent since about 09:00Z on 18 November (open drafts #1024, #1030, #1034, #1035, #1036 untouched 46 h). Sweep 06:55Z: 25 unowned (new issues 1031, 1037-1042, plus 1015/1017/1019-1022 unrecorded on main, #1012 comment, de Winter repo 21d944c and square-packing-211 43e1533), 8 superseded follow-ups owed (#366, #914, #929, #931, #943, #944, #945, #985), #1018 closeable. Wave 1 lanes: c1-127 (#1024, think-zqot), c2-imports (#1021/#1022/#1031 new PR, think-gqzz + new bead), c3-senior (read-only review of #1034, #1035, #1036), c4-optd (#1030 merge main, think-8yyy; merge waits on owner confirming think-b0w5). Wave 2 queued: #1037/#1040 GeiserX pointers, #1038 s(228), #1039/#1041/#1042 lower bounds, #1012 comment, #1018 reply, #1019 (think-1tkk, beyond horizon), the eight follow-ups.
