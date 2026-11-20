@@ -2103,8 +2103,10 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
     (think-wvr8), and #1008 left them the same day, when its author published the README
     revision (43e15330) that names T-057's sources, which think-a88h records. #846, #939 and
     #946 left them on 18 November too, when the owner's option D of 17 November settled the
-    question each waited on (think-b0w5; think-8yyy). Each carries its type, and the label
-    taxonomy names every type the record uses."""
+    question each waited on (think-b0w5; think-8yyy). #1012 left them on 20 November, when
+    its author attached the exact file at 109 and withdrew the pointer at 270 (think-tei5),
+    leaving the import queued on think-wvr8. Each carries its type, and the label taxonomy
+    names every type the record uses."""
     by_type: dict[str, set[int]] = {}
     for entry in check_requests.load_record()["issues"]:
         if entry.get("blocked"):
@@ -2114,7 +2116,7 @@ def test_the_live_record_blocks_each_issue_the_review_of_26_october_lists() -> N
         "owner-decision": 20,
         "owner-reply": 2,
         "standing-hold": 9,
-        "author": 2,
+        "author": 1,
         "compute": 4,
     }
     assert set(by_type) <= set(check_requests.BLOCK_TYPES)
