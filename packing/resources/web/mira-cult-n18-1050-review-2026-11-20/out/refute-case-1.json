@@ -1,0 +1,29 @@
+{
+ "program": "r1050_refute.py",
+ "mode": "case",
+ "slices": 32,
+ "max_rounds": 60,
+ "cap": "1205719/250000",
+ "results": [
+  {
+   "kind": "case",
+   "free": [
+    [
+     359,
+     797
+    ],
+    [
+     716,
+     1000
+    ],
+    [
+     1641,
+     1203
+    ]
+   ],
+   "verdict": "UNDECIDED",
+   "stdout": "UNDECIDED nodes 131 rounds 2765 depth 24 seconds 1200.8",
+   "cpu_seconds": 0.0
+  }
+ ]
+}

@@ -1,0 +1,130 @@
+{
+ "program": "r1050_locate.py",
+ "construction": "six-tilt18.json",
+ "terminals_found": 4,
+ "labels": [
+  "[[0, 0, 0], \"chord\"]"
+ ],
+ "any_empty_terminal": false,
+ "chord_equality_at_base_placement": {
+  "P": [
+   "1 + (0)*sqrt(7)",
+   "3 + (0)*sqrt(7)"
+  ],
+  "Q": [
+   "3/2 + (1/2)*sqrt(7)",
+   "5/2 + (1/2)*sqrt(7)"
+  ],
+  "QP_squared": "4 + (0)*sqrt(7)",
+  "QP_is_2": true,
+  "half_QP_is_tilted_axis_of_mark5_square": true,
+  "projections_on_axis": {
+   "5": [
+    "-1/2 + (0)*sqrt(7)",
+    "3/2 + (0)*sqrt(7)"
+   ],
+   "11": [
+    "-3/2 + (0)*sqrt(7)",
+    "1/2 + (0)*sqrt(7)"
+   ]
+  }
+ },
+ "found": [
+  {
+   "offset": 0.0,
+   "symmetry": 0,
+   "tau": 3.1614378277661475,
+   "slab": [
+    null,
+    3250000
+   ],
+   "path": [],
+   "params": [
+    160,
+    8,
+    640,
+    100
+   ],
+   "label": [
+    [
+     0,
+     0,
+     0
+    ],
+    "chord"
+   ]
+  },
+  {
+   "offset": 0.0,
+   "symmetry": 3,
+   "tau": 3.1614378277661475,
+   "slab": [
+    null,
+    3250000
+   ],
+   "path": [],
+   "params": [
+    160,
+    8,
+    640,
+    100
+   ],
+   "label": [
+    [
+     0,
+     0,
+     0
+    ],
+    "chord"
+   ]
+  },
+  {
+   "offset": 3.4446770458274045e-07,
+   "symmetry": 0,
+   "tau": 3.1614378277661475,
+   "slab": [
+    null,
+    3250000
+   ],
+   "path": [],
+   "params": [
+    160,
+    8,
+    640,
+    100
+   ],
+   "label": [
+    [
+     0,
+     0,
+     0
+    ],
+    "chord"
+   ]
+  },
+  {
+   "offset": 3.4446770458274045e-07,
+   "symmetry": 3,
+   "tau": 3.1614378277661475,
+   "slab": [
+    null,
+    3250000
+   ],
+   "path": [],
+   "params": [
+    160,
+    8,
+    640,
+    100
+   ],
+   "label": [
+    [
+     0,
+     0,
+     0
+    ],
+    "chord"
+   ]
+  }
+ ]
+}

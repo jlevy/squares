@@ -1,0 +1,7 @@
+# Checker freeze 2, lane r1050 (bead think-5jr0): C5 (the refuter), its driver, and plan amendment 1.
+# Frozen at 2026-11-20T17:28:46Z, before C5 ran at the source's cap and before any source program was opened or run.
+# Freeze 1's files are unchanged (sha256sum -c frozen/checker-frozen-digests-1.txt).
+# Verify from this directory: sha256sum -c frozen/checker-frozen-digests-2.txt
+cef6e57e0450ca87700c73b1cf057adaeef4bc7863c9018e627ebe7628ddf511  programs/r1050_refute.cpp
+9e4be0504f15dee36c9f661333ba2576158c8acc8c87d50488940b047c70d829  programs/r1050_refute.py
+a01acb63b80d4fafabcbda4ee5ba0573a1efb3943da8a11e7abf9fdf7b282ab3  programs/plan-amendment-1.md
