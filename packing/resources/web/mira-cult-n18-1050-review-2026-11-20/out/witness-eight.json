@@ -1,0 +1,62 @@
+{
+ "program": "r1050_orbits.py --construction",
+ "placements": 72,
+ "orbits_from_placements": {
+  "[[617, 617], [1000, 1000], [1383, 1383]]": [
+   "offset (0.000e+00,0.000e+00) symmetry 0",
+   "offset (0.000e+00,0.000e+00) symmetry 1",
+   "offset (0.000e+00,0.000e+00) symmetry 2",
+   "offset (0.000e+00,0.000e+00) symmetry 3",
+   "... 72 in all"
+  ]
+ },
+ "loose_moves": [
+  {
+   "tile": 2,
+   "direction": "+x",
+   "steps": 451
+  },
+  {
+   "tile": 11,
+   "direction": "-x",
+   "steps": 451
+  },
+  {
+   "tile": 9,
+   "direction": "+y",
+   "steps": 74
+  },
+  {
+   "tile": 18,
+   "direction": "-y",
+   "steps": 74
+  }
+ ],
+ "orbits_from_moves": {
+  "[[617, 617], [1000, 1000], [1383, 1383]]": [
+   "tile 2 +x 1*1/1000",
+   "tile 2 +x 2*1/1000",
+   "tile 2 +x 3*1/1000",
+   "tile 2 +x 4*1/1000",
+   "... 1050 in all"
+  ]
+ },
+ "witness_orbits": [
+  [
+   [
+    617,
+    617
+   ],
+   [
+    1000,
+    1000
+   ],
+   [
+    1383,
+    1383
+   ]
+  ]
+ ],
+ "problems": [],
+ "verdict": "WITNESSES_CLASSIFIED"
+}

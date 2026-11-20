@@ -1,0 +1,67 @@
+{
+ "program": "r1050_rack.py",
+ "premises": {
+  "marks_from_orbits": 21,
+  "marks_declared": 21,
+  "reflection_invariant": true,
+  "d4_invariant": true,
+  "T_exceeds_tan_pi_8": true,
+  "cap": "1205719/250000",
+  "cap_exceeds_H": true
+ },
+ "erosion": "3/100",
+ "dropped": null,
+ "marks_used": 21,
+ "leaves_captured": 0,
+ "leaves_infeasible": 0,
+ "max_depth": 3,
+ "captures_per_mark": {
+  "359,797": 0,
+  "359,1203": 0,
+  "390,390": 0,
+  "390,1610": 0,
+  "617,617": 0,
+  "617,1383": 0,
+  "716,1000": 0,
+  "797,359": 0,
+  "797,1641": 0,
+  "1000,716": 0,
+  "1000,1000": 0,
+  "1000,1284": 0,
+  "1203,359": 0,
+  "1203,1641": 0,
+  "1284,1000": 0,
+  "1383,617": 0,
+  "1383,1383": 0,
+  "1610,390": 0,
+  "1610,1610": 0,
+  "1641,797": 0,
+  "1641,1203": 0
+ },
+ "witnesses": [
+  {
+   "cell_float": [
+    0.0,
+    0.4143,
+    3.617157,
+    4.822876,
+    2.411438,
+    4.822876
+   ],
+   "depth": 3,
+   "witness": {
+    "cx": "3617157/1000000",
+    "cy": "1205719/500000",
+    "t": "0",
+    "float": [
+     3.617157,
+     2.411438,
+     0.0
+    ]
+   }
+  }
+ ],
+ "undecided": [],
+ "cpu_seconds": 0.0,
+ "verdict": "UNCOVERED_POSE_FOUND"
+}
