@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **283** programs: **57** external and **226** first-party; **196** decide claims and **87** check premises.
-- **798** of **1027** evidence entries name the programs that verified them: 393 independently re-implemented, 324 reproduced with the producer’s code, 57 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **285** programs: **57** external and **228** first-party; **198** decide claims and **87** check premises.
+- **804** of **1036** evidence entries name the programs that verified them: 399 independently re-implemented, 324 reproduced with the producer’s code, 57 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -92,8 +92,8 @@ second implementation agrees.
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 19 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 146 | 154 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 138 | 154 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 149 | 157 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 141 | 157 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -200,10 +200,10 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 119 | 137 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 122 | 140 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-build-field-configuration`](#v-build-field-configuration) | devtools.build_field_configuration | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 114 | 132 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 117 | 135 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -315,6 +315,8 @@ second implementation agrees.
 | [`V-de-winter-1018-review-bnb`](#v-de-winter-1018-review-bnb) | rv1018_decide.py with rv1018_bnb.c (and rv1018_common.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-de-winter-1015-review-r127b-check`](#v-de-winter-1015-review-r127b-check) | rb127_check.py with rb127_read.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
 | [`V-de-winter-1015-review-r127-check`](#v-de-winter-1015-review-r127-check) | r127_check.py with r127_read.py | Squares Project (Levy) | first-party | decides | 3 | 3 |
+| [`V-de-winter-1021-review-check`](#v-de-winter-1021-review-check) | r1021_check.py with r1021_read.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
+| [`V-de-winter-1031-review-check`](#v-de-winter-1031-review-check) | rv1031_check.py with rv1031_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -1641,6 +1643,9 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-de-winter-1015-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-328 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-328 |
 | `E-de-winter-1017-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-329 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-329 |
 | `E-de-winter-1020-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-330 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-330 |
+| `E-de-winter-1021-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 268 that T-331 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-331 |
+| `E-de-winter-1022-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-332 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-332 |
+| `E-de-winter-1031-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 299 that T-333 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-333 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1793,6 +1798,9 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-de-winter-1015-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-328 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-328 |
 | `E-de-winter-1017-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-329 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-329 |
 | `E-de-winter-1020-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-330 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-330 |
+| `E-de-winter-1021-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 268 that T-331 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-331 |
+| `E-de-winter-1022-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-332 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-332 |
+| `E-de-winter-1031-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 299 that T-333 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-333 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -3846,6 +3854,9 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-de-winter-1015-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-328 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-328 |
 | `E-de-winter-1017-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-329 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-329 |
 | `E-de-winter-1020-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-330 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-330 |
+| `E-de-winter-1021-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 268 that T-331 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-331 |
+| `E-de-winter-1022-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-332 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-332 |
+| `E-de-winter-1031-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 299 that T-333 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-333 |
 
 ### `V-algebraic-witness-reports`
 
@@ -4001,6 +4012,9 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-de-winter-1015-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-328 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-328 |
 | `E-de-winter-1017-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-329 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-329 |
 | `E-de-winter-1020-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 127 that T-330 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-330 |
+| `E-de-winter-1021-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 268 that T-331 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-331 |
+| `E-de-winter-1022-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 270 that T-332 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-332 |
+| `E-de-winter-1031-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 299 that T-333 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-333 |
 
 ### `V-rehwaldt-n68-verify`
 
@@ -5739,6 +5753,39 @@ The 18 November additional stage 4 review's exact checker (R-127) of Joost de Wi
 | `E-de-winter-1015-review-r127-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 127 and its twin: every square, every wall and every pair, by two exact methods that share only the reader | T-328 |
 | `E-de-winter-1017-review-r127-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 127 and its twin: every square, every wall and every pair, by two exact methods that share only the reader | T-329 |
 | `E-de-winter-1020-review-r127-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 127 and its twin: every square, every wall and every pair, by two exact methods that share only the reader | T-330 |
+
+### `V-de-winter-1021-review-check`
+
+**r1021_check.py with r1021_read.py, r1021_geom.py and r1021_clip.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 18 November blind stage 4 review's exact checker (R-1021) of Joost de Winter's rational centre-direction certificates of issues 1021 (268) and 1022 (270) and their corner Witness/v2 twins, with strict readers of its own for both forms (r1021_read.py): every square a unit square, every wall and every pair, with no distance filter and no tolerance, by separating axes on the poses in Python integers (r1021_geom.py, method A) and by exact Sutherland-Hodgman clipping in GMP rationals from the corners, both ways round, with the area inside the box (r1021_clip.py, method B), each form decided by both methods natively and crossed, the two forms held to one packing, and the side checked against both files (r1021_check.py). r1021_controls.py decides the 45 controls a plan frozen before any program read a certificate states for each report (33 for a house); r1021_selftest.py holds the programs to 67 hand-derived checks and ten broken copies. Decided both certificates ACCEPT, and the four predecessors T-289, T-320, T-283 and T-321 ACCEPT through a reader written after the freeze (r1021_post.py; the review's F3).
+
+- Source: [`packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_check.py`](../../packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_check.py), [`packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_read.py`](../../packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_read.py), [`packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_geom.py`](../../packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_geom.py), [`packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_clip.py`](../../packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_clip.py), [`packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_controls.py`](../../packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_controls.py), [`packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/controls-plan.json`](../../packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/controls-plan.json), [`packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_selftest.py`](../../packing/resources/web/de-winter-1021-1022-review-2026-11-18/programs/r1021_selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md`](../../docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the blind stage 4 mathematical review, lane r1021-1118 of the 18 November intake pass, tbd-strong-max tier, maximum reasoning, prompted separately from the import lane), with its own prompt and code; authorship in common with the producer’s: system-family, The issues name GPT-6.2 Astra (OpenAI) for the search, optimization and rational certificates, the source's READMEs GPT-6.2 Sol (the review's F14), and Claude (Anthropic) for the repository files, checks and figures, under Joost de Winter's direction. The checker was frozen at 06:08:52Z on 18 November (e220d02c4f) before any of its programs read a certificate; it imports nothing from this repository or the source and reuses no code of any earlier review, and its author read the author's checkers only as data, after the findings were frozen.
+- Note: Written and run on 18 November 2026 for docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md, kept with its receipts in the review-only directory de-winter-1021-1022-review-2026-11-18. r1021_contract.py, r1021_identity.py, r1021_measure.py, r1021_custody.py, r1021_post.py, r1021_routes.py, r1021_synth.py, r1021_trial.py, r1021_ctrial.py and r1021_fmt.py, kept beside it, decide no certificate's feasibility and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-1021-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 268 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the readers | T-331 |
+| `E-de-winter-1022-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 270 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the readers | T-332 |
+
+### `V-de-winter-1031-review-check`
+
+**rv1031_check.py with rv1031_reader.py, rv1031_axes.py, rv1031_clip.py and rv1031_decide.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 18 November blind stage 4 review's exact checker (R-1031) of Joost de Winter's rational centre-direction certificate of issue 1031 (299) and its corner Witness/v2 twin, with strict readers of its own for both forms (rv1031_reader.py): every square a unit square inside the box with area exactly 1, every wall and every one of the 44,551 pairs, with no distance filter and no tolerance, by separating axes on the poses in exact rationals (rv1031_axes.py, method A) and by exact Sutherland-Hodgman clipping in GMP rationals from the corners (rv1031_clip.py, method B), each form decided by both methods directly and crossed, the two forms held to one packing, and the claim decided in its own box (rv1031_check.py, rv1031_decide.py). rv1031_controls.py decides the 36 controls a plan frozen before any program read a certificate states; rv1031_selftest.py holds the programs to 14,785 hand-derived checks and seven broken copies. Decided the certificate ACCEPT.
+
+- Source: [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_check.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_check.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_reader.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_reader.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_axes.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_axes.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_clip.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_clip.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_decide.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_decide.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_controls.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_controls.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/controls-plan.json`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/controls-plan.json), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_selftest.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-18-de-winter-1031.md`](../../docs/project/reviews/review-2026-11-18-de-winter-1031.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the blind stage 4 mathematical review, lane r1031-1118 of the 18 November intake pass, tbd-strong-max tier, maximum reasoning, prompted separately from the import lane), with its own prompt and code; authorship in common with the producer’s: system-family, The issue names GPT-6.2 Sol (OpenAI) for the search, optimization and rational certificate, and Claude (Anthropic) for the repository files, checks and figure, under Joost de Winter's direction. The checker and its controls plan were frozen on 18 November before any of its programs read a certificate; it imports nothing from this repository or the source and reuses no code of any earlier review, and its author read the author's checkers only as data, after the findings were frozen.
+- Note: Written and run on 18 November 2026 for docs/project/reviews/review-2026-11-18-de-winter-1031.md, kept with its receipts in the review-only directory de-winter-1031-review-2026-11-18. rv1031_contract.py, rv1031_custody.py, rv1031_identity.py, rv1031_describe.py, rv1031_lineage.py, rv1031_measures.py, rv1031_synth.py, rv1031_price.py and the after-freeze rv1031_compare.py and rv1031_generic.py, kept beside it, decide no certificate's feasibility and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-1031-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 299 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the readers | T-333 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
