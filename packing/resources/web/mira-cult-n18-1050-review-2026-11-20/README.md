@@ -124,8 +124,9 @@ and one change made after the findings freeze: `r1050_mutations.py` now finds th
 file by glob instead of naming it, because this repository’s embedded-JavaScript scan
 reads the literal file name as JavaScript (`window.json`). The mutations’ receipt came
 from its frozen bytes, SHA-256 `05f747d8…`, which are at commit `08d98848d3`; the current
-bytes are `9832dc61…`, so `sha256sum -c frozen/findings-frozen-digests.txt` reports that
-one entry as changed, by design.
+bytes are `9832dc61…`. `sha256sum -c frozen/findings-frozen-digests.txt` therefore
+reports two entries as changed, by design: that program, and this README, which gained
+this paragraph after the freeze (its frozen bytes are also at `08d98848d3`).
 The first launch of the source’s replay failed before running anything, because the host
 has no `/usr/bin/time`; it was relaunched with the shell’s `time`.
 
