@@ -3,9 +3,9 @@ type: is
 id: is-01m7x68251msk8rwg94dvwk13q
 title: "Stage 4 blind review of #1052's s(305) certificate"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 8
+version: 9
 delegate: r1052
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T19:17:02.241Z
-updated_at: 2026-11-20T20:36:37.354Z
+updated_at: 2026-11-20T21:17:18.294Z
 started_at: 2026-11-20T19:17:10.691Z
+closed_at: 2026-11-20T21:17:18.294Z
+close_reason: Review merged in PR 1057 (c3f4a59dc)
+resolution: null
+duplicate_of: null
 ---
 R-1052: blind stage 4 review (packing/campaign/result-import.md) of Joost de Winter's s(305) <= 17.945755838742 certificate (JoostdeWinter/square-packing n305/, data db8efcb, registration 5282edd), the review lane's own bead. Clean-room exact checker (two methods sharing only the reader) and pre-stated controls frozen and pushed before any program reads the certificate; findings frozen; then custody, record at 305 (T-309), identity, option D contraction facts, credit facts, significance proposal, questions. Branch claude/intake-2026-11-20-review-1052; review docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md. The import lane (think-kzwl) is not read before the findings freeze.
 
