@@ -37156,12 +37156,14 @@ issues:
       and says exact rational Witness/v2 versions of the Kaggle coordinates, which are stored as
       float64 and need a Kaggle login to download, are attached. None is: the issue's body holds
       no attachment and links only the three notebook pages. Triaged read-only on 17 November
-      2026 (think-wvr8): no packing or certificate is retrievable at a pinned revision. Kaggle
-      answered this session's plain requests for the notebook pages with HTTP 404 and an empty
-      body, and the files need a login the session lacks, so the source is not checked; the
-      author's watched repository, JoostdeWinter/square-packing, holds no such file at its head,
-      d02237a. Nothing is retained, walked or registered, and the import waits for an exact
-      certificate the author can attach or commit. Claude assistance is not stated.
+      2026 (think-wvr8), when no packing was retrievable. The author's comment of 18 November
+      attaches the exact Witness/v2 at 109, his transcription of Kodaj's CC0 rows, and withdraws
+      270. Imported on 20 November 2026 in lane c7-pointers from the same files at aae089c in
+      his watched repository: both maintained exact routes accept it, and it is T-335 (a
+      provisional id), 4.58e-04 below the house at 109. Measured, it restates Samanyu-dev's
+      public pinwheel of 7 November within that packing's padding (option D), so the credit is
+      put to the owner; the stage 4 review is a separate lane (think-2ut8). The transcription
+      was made with GPT-6.2 Sol (OpenAI) and checked with Claude (Anthropic), by the source.
     read_through: '2026-11-18T07:33:46Z'
     results:
     - key: n109-kaggle
@@ -37170,15 +37172,13 @@ issues:
         and Tomáš Kodaj's public Kaggle notebooks, 4.58e-04 below the record's
         10.949747468306.
       source: body
-      not_registered: >-
-        Not yet imported. The Witness/v2 file the issue said was attached was not on the issue,
-        and the notebooks' files need a Kaggle login (HTTP 404 with an empty body here); the
-        author's comment of 18 November (issuecomment-6972165182) attaches it, with Kodaj's
-        rows, at side 547464479047171949843/50000000000000000000, so s(109) <=
-        10.949289580944 rounded up. Nothing is retained, walked or registered at 109 until the
-        import retains and checks it.
-      queued: true
-      bead: think-wvr8
+      register:
+      - T-335
+      evidence:
+      - E-de-winter-1012-n109-report
+      - E-de-winter-1012-n109-exact-feasibility
+      validation:
+      - think-2ut8
     - key: n270-kaggle
       claim: >-
         s(270) <= 16.927469593519 (Danil Malyshev's notebook) and 16.927469594094 (Tomáš
@@ -37194,6 +37194,7 @@ issues:
       queued: false
     beads:
     - think-wvr8
+    - think-2ut8
     answer_bead: think-wvr8
     replies:
     - url: https://github.com/jlevy/squares/issues/1012#issuecomment-6967037708
@@ -37256,6 +37257,21 @@ issues:
       n270-kaggle is no longer queued. With the file at 109 attached and the pointer at 270
       withdrawn, nothing waits on the author, so the block lifts; the blocked:author label
       comes off after the merge of the change that records this.
+
+      Imported on 20 November 2026 in intake lane c7-pointers (think-wvr8). The attachment is
+      refused by this session's proxy (HTTP 403), so the packet de-winter-kodaj-n109-2026-11-18
+      retains the same files from the author's watched repository at aae089c (07:30:49Z on 18
+      November), first committed 2 minutes 57 seconds before the comment and deleted at
+      7232328; their digests are the zip members' that lane w10-1118 recorded. Both maintained
+      exact routes accept the witness and refuse its gross and sharp controls, and the ledger
+      upper-bounds-1012-20261120 records the comment's claim at 109, 4.58e-04 below the house,
+      as T-335 (a provisional id). Measured, the witness states Kodaj's rows, and they restate
+      Samanyu-dev's public pinwheel of 7 November (53551d7): one to one, and within that
+      packing's padding (0.9721 of its contraction margin), so under option D (think-b0w5) the
+      packing's credit goes to its original finder. The record's sources point to Samanyu-dev
+      but do not settle the finder against Fonseca's earlier pinwheel or the public merges
+      Samanyu-dev's README names, so the credit is put to the owner; the stage 4 review is a
+      separate lane (think-2ut8).
   - number: 1018
     title: Raised lower bound for n = 108 and n = 109 (side 10.630037940829)
     author: JoostdeWinter
@@ -37374,3 +37390,65 @@ issues:
       direction; and how 10.622222909689 was obtained. They are informational and hold
       nothing open, since no answer could falsify the credit, the derivation or the files
       the record names. It names no bead.
+  - number: 1040
+    title: GeiserX's public 259-square packing is below the register (pointer)
+    author: JoostdeWinter
+    opened: '2026-11-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter points to a packing of 259 unit squares with side 16.590016439573 that
+      Sergio Fernández Rubio (GeiserX) published in GeiserX/squares-in-squares,
+      data/submission-best.csv.gz at f822b34 (CC BY 4.0), joining tilted bands from his 292- and
+      445-square packings, 0.00136 below T-193's 16.591378145498. He says Nevska reached the same
+      side on Kaggle on 8 November 2026 without published coordinates, attaches packing-259.zip,
+      an exact rational Witness/v2 of the packing with a verifier, and asks that the packing be
+      credited to GeiserX. Triaged on 20 November 2026 in lane c7-pointers (think-squj): the
+      cited source is retained at f822b34 as packet geiserx-squares-in-squares-2026-11-18, and
+      its file holds binary64 rows with angles in radians, no certificate and no exact
+      coordinates, so nothing is imported from it. The attachment is refused by this session's
+      proxy (HTTP 403) and was not read, so the result waits for it.
+    read_through: '2026-11-19T04:54:13Z'
+    results:
+    - key: n259-geiserx
+      claim: >-
+        s(259) <= 16.590016439573, the side of the 259-square packing in GeiserX's
+        data/submission-best.csv.gz at f822b34, Sergio Fernández Rubio's join of tilted bands
+        from his own 292 and 445, 0.00136 below T-193.
+      source: body
+      not_registered: >-
+        Not yet imported. The public source states binary64 rows, not a certificate; the exact
+        Witness/v2 the issue attaches (user-attachments files/35066502) was not readable from
+        this session. Once a session retains it, it is replayed on both maintained routes,
+        measured against T-193's packing, walked at 259 and registered with the credit the
+        issue asks for.
+      queued: true
+      bead: think-squj
+    - key: n259-leaderboard-side-only
+      claim: >-
+        The Kaggle per-puzzle leaderboard reached the same side at 259 (Nevska, 8 November 2026),
+        which the issue quotes and does not claim.
+      source: body
+      not_registered: >-
+        A side-only entry that states no packing, so it is no report: context only, as #1038's
+        quoted leaderboard side was.
+      queued: false
+    beads:
+    - think-squj
+    answer_bead: think-squj
+    replies: []
+    close_when: >-
+      The packing is imported from an exact certificate that reached this repository and
+      registered with the credit the issue asks for, or the record says why it will not be, and
+      the reply on main says so.
+    notes: >-
+      Read on 20 November 2026 from main 06754afe6; no comment on the issue. The issue names
+      f822b34 (18:37:44Z on 18 November), the repository's head when read; its first commit,
+      c409de5 (15:41:34Z), published the submission and the results tables with the same blobs.
+      By data/README.md, results/round33-best-2026-11-17.tsv gives the source of the 259 layout,
+      the author's own k123 join of his held 292 and 445 packings, side L 16.590016439573077.
+      The repository is not watched; the issue is the report. NOTICE and AI_NOTICE.md ask for
+      credit to 'Sergio Fernández Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares'.
+      The issue does not say how the attached Witness/v2 was made, nor that AI assistance was
+      used for it.

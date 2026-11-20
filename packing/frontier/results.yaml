@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-18'
+last_reviewed: '2026-11-20'
 results:
   - id: T-001
     kind: lower-bound
@@ -52943,6 +52943,165 @@ results:
       producer's own crate, as this entry's wording says; N-8, the PDF's earlier figure
       10.622222909689 is not reproduced and is no part of the claim. N-2, N-3, N-5 and N-8,
       and the review's four questions, go to the author with the reply.
+
+  - id: T-335
+    kind: upper-bound
+    registered: '2026-11-20'
+    landed: '2026-11-20'
+    headline: >-
+      Kodaj's 109 pinwheel, transcribed exactly by de Winter, 4.58e-04 below 6 + (7/2)√2
+    claim: >-
+      One complete rational certificate proves s(109) <=
+      547464479047171949843/50000000000000000000 = 10.94928958094343899686, a side that
+      terminates at 20 places; #1012's comment of 18 November prints it rounded up at 12
+      places, 10.949289580944. The issue's first print, 10.949289580943, was rounded to
+      nearest and is below the exact side.
+
+      It is 4.58e-04 below the case's house, the Kingbird catalogue's 6 + (7/2)√2, verified
+      by T-101's rational ceiling 10.949747468305832670915408009418. Measured here it is a new
+      arrangement relative to the house's packing: no symmetry of the box pairs it one to one
+      with T-101's exact view by nearest centres, and the optimal assignment moves 56 squares
+      beyond a tenth (largest 0.824). It is a pinwheel with 45 squares tilted beyond a degree,
+      23.23 to 29.50 degrees, all one way, where the house has 49, all at 45 degrees.
+
+      Both maintained exact routes accept the certificate; the stage 4 review is a separate
+      lane, blind to this one.
+
+      The comment says the witness is Joost de Winter's exact transcription of the 109 rows of
+      Tomáš Kodaj's Kaggle dataset 'Squares in Squares: strips and bands (coordinates)',
+      version 2 of 13 November 2026, under CC0, each orientation a rational tan(angle/2), and
+      that this repository's independent rational-corner checker accepts it (109 squares, 5,886
+      pairs). Measured here, the witness states Kodaj's rows to within 1.8e-15. Kaggle was not
+      read here: this session's network refuses it, so the dataset's date, licence and digest
+      are the source's word.
+
+      Under the owner's option D (think-b0w5) this packing restates an earlier one. Samanyu-dev
+      published the same arrangement on 7 November 2026, in Samanyu-dev/squares_in_squares
+      53551d7 (best_fit_101_500.csv, its rows of count 109). Nearest centres pair the two one
+      to one, with the same 45 tilted squares, and 37 squares sit more than 1e-3 apart (largest
+      0.0256). Read exactly, those binary64 rows are a packing at their own extent,
+      10.9492895809453793, which both maintained routes accept. Shrunk until its squares first
+      touch, that packing reaches 10.9492895809433833, 5.57e-14 below this side: this side's
+      gain on it, 1.9403e-12, is 0.9721 of its margin, 1.9960e-12.
+
+      Credit, proposed and held for the owner: the packing to Samanyu-dev, as option D credits
+      a restatement to the original finder and as T-292 and T-293 credit the pinwheel at 109
+      they grow from. Kodaj published the restated coordinates and refers to his source
+      notebooks for the original credits; the certificate and its registration are de Winter's,
+      who says the packing is not his work.
+
+      The record's sources do not settle the finder further. Guilherme Dias da Fonseca published a 109-square pinwheel on 6 November 2026 at
+      10.949392392, by the comment's word, 1.03e-04 above this side and not read here. Navneet
+      Prabhat's public compilation holds the same packing, by the comment's word. Samanyu-dev's
+      README credits its submission to per-puzzle merges of public notebooks and, at 109, to its
+      own stretch-and-quench chains after a merge of kmmmvs's notebook. No source here states a
+      lineage from Fonseca's packing, so none is credited.
+
+      The comment says the transcription was made with GPT-6.2 Sol (OpenAI) and checked again
+      with Claude (Anthropic), under de Winter's direction.
+    scope:
+      n_values:
+      - 109
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        The first packing of 109 squares below the catalogue's 45-degree form that the record
+        holds, 4.58e-04 below it, a new arrangement relative to the house as T-312 was at 262
+        (S3). The arrangement is a public pinwheel published before the report, restated within
+        its padding, so the result is the exact certification of that packing, not a new
+        technique; not S4. No lower bound or optimum.
+      scored: '2026-11-20'
+      by: think-wvr8 Joost de Winter import (intake lane c7-pointers), a draft for the stage 4 review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter Kodaj n109 2026-11-18]'
+      published: '2026-11-18'
+    evidence:
+    - E-de-winter-1012-n109-report
+    - E-de-winter-1012-n109-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/README.md
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/acquisition/claims.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/source/n109_kaggle/n109_tomkodaj.yaml
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/source/n109_kaggle/n109_tomkodaj.csv
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/receipts/controls-plan-1012-n109.md
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/identity.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/contraction-n109-samanyu.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/contraction-n109-own.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1012-20261120/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_1012.py
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 109: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 35316 pair decisions; summed over the 3 jobs, the receipt records 8.22 route CPU
+      seconds. Squares touch the box, a least wall clearance of exactly 0, and every pair clears
+      by at least 2.00e-15 (squares 60 and 70). The witness numbers its squares from 0, as the
+      Kaggle rows do, and the witness-corners reader reads it with its first_id option, 0. The
+      replay is E-de-winter-1012-n109-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), stated before they ran (a plan
+      hashed on think-wvr8 at 09:29Z on 20 November, retained as
+      receipts/controls-plan-1012-n109.md), lowered the side to the packing's extent, closed the
+      least-gap pair (square 70 toward square 60) by its gap and moved every square toward the
+      nearer near wall by the least clearance, 0: both routes accepted each at exact contact,
+      margin 0, and refused each 1e-30 past it. They refused square 70 enlarged to its pair at
+      contact for its shape alone and 1e-30 past it for the overlap as well; square 39, at its
+      wall, enlarged by 0 was accepted and 1e-30 past it refused for the wall and its shape, the
+      branch stated in advance; and they refused a duplicated square.
+
+      At n = 109 the certificate is below the case's ceiling (the Kingbird catalogue, verified
+      by T-101's exact ceiling) by 4.58e-04, and below the reported lane's print,
+      10.94974746830583; smallest: this certificate. No register bound was pending adoption at
+      109; T-327 there is a lower bound, 10.630037940829. The ledger of 20 November for this lane
+      (campaign/issue-intake/upper-bounds-1012-20261120) walks the comment from a start frozen on
+      main that day and records it as a new packing relative to the record. Samanyu-dev's 109 is
+      in no watched repository and was never reported here, so it is no report of that walk.
+
+      Measured against padding: T-101's ceiling lies 1.1e-19 above 6 + (7/2)√2, so the gain on
+      the house lies wholly outside its padding. Samanyu-dev's 109, read by the kaggle-csv
+      reader from best_fit_101_500.csv at 53551d7 (SHA-256 377b9177...6c04, read from a clone,
+      not retained) and boxed at its exact extent, contracted uniformly to first contact, has
+      margin 1.9960e-12 (squares 17 and 73; measure/contraction-n109-samanyu.json), and this
+      certificate's gain on it is 0.9721 of that, within it (option D). This certificate's own
+      margin is 1.9898e-14 (squares 60 and 70; measure/contraction-n109-own.json).
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing):
+      against Samanyu-dev's 109 the pairing is one to one under symmetry 1 of the box, with 40
+      squares moved beyond 1e-6, 37 beyond 1e-3 and 5 beyond 1e-2, and 8 turned by more than
+      1e-6 degrees, by at most 0.0048. Samanyu-dev's file held the house's 45-degree packing at
+      10.949747468316 at its two earlier versions, 1d95296 (30 October) and 942db6d (7
+      November).
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side stood in
+      for 109's ceiling, finds the L-step and monotonicity consequences main finds, so this
+      bound carries to no other count.
+
+      The two maintained routes share this repository's corner witness reader (certificate
+      parsing and half-angle conversion), Fraction arithmetic and the separating-axis method;
+      the second, the independent rational corner checker, is the checker the source reports
+      running. The transcription made the exact coordinates. CC0 for the coordinates by the
+      source's word, and MIT by the LICENSE at the pin for the transcription. No human oversight
+      or optimality is claimed.
+    next_rung: >-
+      Independently review the certificate (stage 4, a separate lane blind to this one): its
+      mathematics, a clean-room exact checker with sharp controls, the identity against T-101
+      and against Samanyu-dev's 109, and the option D comparison, mapped as an adversarial
+      review. With the owner's answer on the credit, the case's house then moves to the smallest
+      validated side at 109, this one, in the pass dated the day that change merges, with both
+      strong generators' regularization of the new house; T-101 keeps its certificate as
+      history.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

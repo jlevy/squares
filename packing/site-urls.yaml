@@ -5387,7 +5387,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-18'
+  lastmod: '2026-11-20'
   status: live
 - path: cases/11.html
   canonical: cases/11.html
@@ -25931,6 +25931,44 @@ urls:
     - packing/benchmarks/measure-verifier/census-mixed/de-winter-s108-lower-bound-2026-11-17/mixed_n108_L1063.control.json
     - docs/project/reviews/review-2026-11-18-de-winter-1018.md
     - packing/resources/web/de-winter-1018-review-2026-11-18/README.md
+- path: result/t-335.html
+  canonical: result/t-335.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-20'
+  lastmod: '2026-11-20'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 109
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter Kodaj n109 2026-11-18]'
+      published: '2026-11-18'
+    builds_on: null
+    evidence:
+    - E-de-winter-1012-n109-report
+    - E-de-winter-1012-n109-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/README.md
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/acquisition/claims.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/source/n109_kaggle/n109_tomkodaj.yaml
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/source/n109_kaggle/n109_tomkodaj.csv
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/receipts/controls-plan-1012-n109.md
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/identity.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/contraction-n109-samanyu.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/contraction-n109-own.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1012-20261120/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
 - path: results.html
   canonical: results.html
   kind: page

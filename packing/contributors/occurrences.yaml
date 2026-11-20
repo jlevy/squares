@@ -34556,6 +34556,78 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter Kodaj n109 2026-11-18]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter Kodaj n109 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Kodaj, Samanyu-dev
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter Kodaj n109 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Kodaj, Samanyu-dev
+  start: 16
+  end: 21
+  label: Kodaj
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter Kodaj n109 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Kodaj, Samanyu-dev
+  start: 23
+  end: 34
+  label: Samanyu-dev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX squares-in-squares 2026-11-18]'
+    field: /authors/0
+  expected_text: Fernández Rubio
+  start: 0
+  end: 15
+  label: Fernández Rubio
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX squares-in-squares 2026-11-18]'
+    field: /credit
+  expected_text: Fernández Rubio
+  start: 0
+  end: 15
+  label: Fernández Rubio
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

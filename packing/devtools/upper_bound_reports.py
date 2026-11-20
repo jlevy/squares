@@ -1894,6 +1894,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # counts from 147 to 307, centre/half-angle certificates beside Witness/v2 corner
     # files of the same packings, in one repository and one packet.
     "[Mishapolk issue 1009 2026-11-16]": _import("mishapolk-issue1009-2026-11-16"),
+    # The intake pass of 20 November (think-wvr8): Joost de Winter's exact transcription of
+    # Tomáš Kodaj's 109 (issue 1012), a corner Witness/v2 numbered from 0.
+    "[de Winter Kodaj n109 2026-11-18]": _import("de-winter-kodaj-n109-2026-11-18"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

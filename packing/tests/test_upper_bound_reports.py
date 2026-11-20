@@ -297,6 +297,10 @@ I1_1117 = (
 #: centre/half-angle certificates read by ``evand-cert``, each held to the source's
 #: Witness/v2 corner file, under MIT.
 ISSUE_1009 = "mishapolk-issue1009-2026-11-16"
+#: The intake pass of 20 November 2026, lane c7-pointers (`test_upper_bound_reports_1012`):
+#: Joost de Winter's exact transcription of Tomáš Kodaj's 109 (#1012), a corner Witness/v2
+#: numbered from 0, read by ``witness-corners`` with ``first_id`` 0, under CC0 and MIT.
+ISSUE_1012 = "de-winter-kodaj-n109-2026-11-18"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -373,6 +377,7 @@ EVERY = (
     L187_1116,
     *I1_1117,
     ISSUE_1009,
+    ISSUE_1012,
 )
 
 
@@ -1556,6 +1561,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L181_1115,
         L187_1116,
         *I1_1117,
+        ISSUE_1012,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1862,6 +1868,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L187_1116: "2026-11-16",
         **dict.fromkeys(I1_1117, "2026-11-16"),
         ISSUE_1009: "2026-11-16",
+        ISSUE_1012: "2026-11-18",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

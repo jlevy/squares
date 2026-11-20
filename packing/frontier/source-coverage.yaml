@@ -13702,6 +13702,36 @@ sources:
     padding. The ledger of 17 November for this lane
     (campaign/issue-intake/upper-bounds-1009-20261117) records all 13. All 39 native jobs have
     full outcomes.
+- id: de-winter-kodaj-n109-2026-11-18
+  title: Tomáš Kodaj's 109 as Joost de Winter transcribed it exactly, at JoostdeWinter/square-packing aae089c, issue 1012
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/aae089c37a2d3fb91b161a1b3a45f06a41277d18
+  local: resources/web/de-winter-kodaj-n109-2026-11-18/
+  source_key: '[de Winter Kodaj n109 2026-11-18]'
+  scope:
+    n_values:
+    - 109
+  reviewed: '2026-11-20'
+  source_date: '2026-11-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-kodaj-n109-2026-11-18/acquisition/claims.json
+  evidence:
+  - E-de-winter-1012-n109-report
+  - E-de-winter-1012-n109-exact-feasibility
+  notes: >-
+    The corner Witness/v2, Kodaj's 109 Kaggle rows it transcribes, the folder's README,
+    SHA256SUMS and the checker log are retained for jlevy/squares#1012 at aae089c, which first
+    committed them 2 minutes 57 seconds before the comment of 18 November that attaches the same
+    files; the next commit deletes the folder, and the licence is pinned against a byte-identical
+    copy. The attachment and Kaggle were not read here (the session's proxy refuses both). The
+    certificate is admitted only where its exact side equals the side the comment states. CC0 for
+    the coordinates by the source's word, MIT by the LICENSE at the pin for the transcription.
+    T-335 records the in-horizon report, 4.58e-04 below the house at 109; the ledger of 20
+    November for this lane (campaign/issue-intake/upper-bounds-1012-20261120) records it. All 3
+    native jobs have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

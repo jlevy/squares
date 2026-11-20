@@ -85,3 +85,14 @@ deferrals:
     reason: The same configuration at 297 decided on sqpack's exact verifier over its field (route 1
       of route B, think-ozx8); cited with route B's verify_exact.py run when the house adopts T-247
       (think-vv1q owns that adoption).
+  - evidence: E-de-winter-1012-n109-exact-feasibility
+    results:
+    - T-335
+    bead: think-wvr8
+    blocked_on: think-2ut8
+    recorded: '2026-11-20'
+    reason: Joost de Winter's exact transcription of Tomáš Kodaj's 109 (issue 1012), below the
+      house at 109 and a restatement of Samanyu-dev's public pinwheel under option D, the credit
+      put to the owner. think-wvr8 maps its stage 4 review (think-2ut8) and adopts it at 109 in
+      the pass of the day that change merges; the case record then cites this evidence as the
+      house, and this entry is removed in that change.
