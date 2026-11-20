@@ -5,7 +5,7 @@ title: "Retain and measure de Winter's 20 November donor evidence: the 127 extra
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T21:09:50.253Z
-updated_at: 2026-11-20T22:45:07.830Z
+updated_at: 2026-11-20T22:46:47.780Z
 started_at: 2026-11-20T22:45:07.829Z
 ---
 Joost de Winter's four comments of 20 November 2026, about 20:00Z, answer the questions of that day's final replies and attach three archives. Lane rec1120 read the comments into result-requests.yaml and did not open or import any attachment.
@@ -24,3 +24,13 @@ Joost de Winter's four comments of 20 November 2026, about 20:00Z, answer the qu
 4. #1031, issuecomment-7049355325 (20:02:14Z): issue1031_donor_evidence.zip (files/35183320), said to hold the 335- and 372-square rows of Panoras v17; the 372 packing gave the outer slices, the 335 the seven middle ones. Both donors already carried the tilted band (51 of T-248's 52 strongly tilted squares matched in the 335 donor, all 52 in the 372 donor, within 0.1 in centre and 2 degrees). He agrees T-248 (Evan Daniel) should be acknowledged as the band's first appearance in the 299 record. A separate search from the public 299 packing reached 17.80100443443642. Nick Sarris: score verified in leaderboard notebook version 36, no public coordinates found.
 
 Owed: retain the three archives with digests; measure what they claim (file-order pairing at 127, 270; the straightening check; the band match at 299); then decide what the record states: the provenance sentences of T-329 to T-333, the model-variant wording at T-330 to T-332 (now "GPT-6.2" with the variant unsettled by the author), and whether the credit line at 299 names Daniel's T-248 for the band, which is the owner's call. A follow-up reply is owed on #1017, #1021, #1022 and #1031 once that lands (each has a comment read after its last reply).
+
+## Notes
+
+20 November 2026 recovery. All three archives are readable from the current host. Streamed bytes without extracting or executing files.
+
+- #1017, issuecomment-7049310959, attachment 35183266. SHA-256 7af65ce5516a5212ea45f848e87e9fcb867e2d1b3fef3922d4cef35cb8ace148.
+- #1022, issuecomment-7049331576 and #1021, issuecomment-7049341938, attachment 35183289. SHA-256 c78070b14fb196e5c6f05a2cddf5123ce428b0dace8b6780a76ec6b9723a9c36.
+- #1031, issuecomment-7049355325, attachment 35183320. SHA-256 0b3a833ce549389c3fa2fedaaaae2d809d7f39a69e80b0a71107f28c4bf3e887.
+
+The missing-file ask on #1017 (7048389052) was answered. Retain the extracts before running think-e026; cite the answer as well as the ask in result-requests.yaml. In the same records PR record the already-posted #1009 follow-up (7048385373), which reports T-320, T-321 and T-325 as superseded, and advance each read-through only for material the branch has recorded. Archive the bytes and measure the donor claims before amending credit. Current main c3f4a59dc1 lacks these six comment IDs.

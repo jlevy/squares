@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 82
+version: 84
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -75,10 +75,11 @@ child_order_hints:
   - is-01m7xcpf5d7hhsa84btecxknv8
   - is-01m7xcphnxzwwaqtcamh0c8h35
   - is-01m7xcpkhdfjyanpytvnb8njv7
+  - is-01m7xj9b3k6ctgsh29jp0m6fzj
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-20T22:45:29.078Z
+updated_at: 2026-11-20T22:48:16.498Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -114,3 +115,24 @@ All sub-agent lanes stopped mid-work at about 20:40Z. Resume each by SendMessage
 - c15 (#1051 lower bounds): worktree c15-lower has 105 uncommitted files (replays and register entries in progress).
 - rR1 (think-dhjz) and rR2 (think-bgi2): blind reviews mid-run; rR2's plan freeze 3a02ec8d2 is committed but not pushed. Keep the freeze order when resuming.
 - Sweep at 20:00Z, new items: #1055 (s(20) > 99/20, de Winter, new issue, needs intake label, bead and record entry); de Winter's comments at 20:00Z on #1017, #1021, #1022 and #1031 are unread; JoostdeWinter/square-packing has 5 new commits (n=20 lower bound). Records still owed: the #1009 follow-up (7048385373) and the #1017 ask (7048389052).
+
+## 20 November 2026 Codex takeover
+
+The owner requested end-to-end continuation in the current conversation. Fetched all origin branches and pulled tbd. Main at c3f4a59dc189edb05de32a19aab975ecb4eb68d5 contains #1054 (s(18), partly verified, no gap found) and #1057 (s(305), accepted, option D new). GitHub Pages published and verified deployment at that commit in run 44818889419. Packing validation 44818889190 attempt 1 reached the 1,800-second slow behavioral limit after 92% with no assertion failure in the log. The existing issue is think-m2th. Started attempt 2 for the failed jobs only.
+
+The /Volumes/spud-ext2 scratch drive is unmounted and no project virtualenv is present in this checkout. Local replay, builds, and the complete make intake sweep await an authorized environment. The earlier Claude c12-optd-land, c14-109, c15-lower and i1052 worktrees are absent from the local worktree and remote ref inventories. The prior handoff reports 105 uncommitted #1051 paths and an unpushed #1047 adoption commit. The i1052 bead names the pre-replay controls plan and digest but the import branch is unpublished. Recover those files from the previous session if available, preserve proof freeze boundaries, and check the date on all recovered adoption work. Triage notes and issue attachment checks below record the work this host could do.
+
+### Open pull requests
+
+- #1030 at 5734d077308d552f1bd7b323fb87ddbecfe404c5 conflicts with main in at least 14 files. The 172 and 199 predecessor houses and validation inputs are still current. Reuse the existing exact witnesses and regularization evidence, merge main and rebuild the combined generated records. The older 268, 270 and 299 candidates now sit above T-331 through T-333. think-4z8z records those retirements. Bring the think-463r and think-ruu2 READMEs and PR description into line with that bead. Apply the actual UTC adoption day to the archive and landing records, keeping the original T-285 and T-286 result dates. Review A is published on the PR without a marked disposition. Review B is reflected in commit 9df27ae198 and the bead. Complete dedicated correctness coverage and fresh CI from the resolved head. The JSON shape guard in check_results.py can report a typed finding instead of raising on a parseable non-object receipt.
+- #1045 at 1342a4dec0bc279e44cdc6ab30c98b99d663ba93 is the original 228 import. Keep T-334 after the existing T-331–333, follow #1030's integration order, and rebuild the actual UTC adoption archive. The source digest matches the retained certificate and #1044 is accepted and mapped. The draft case text credits Ono as finder on a chronology that remains unresolved. Keep geometric similarity distinct from priority. The new exact follow-up at #1038 is think-d4b0 and needs replay and review before it can decide a house. Hosted failures on this old head trace to ID contiguity.
+- #1047 at 0261ad5c4be6f2822c497c744eef33d81be4007f follows T-334. Its issue #1012 attachment's witness, CSV and verification log match the Git packet byte for byte. Apply merged review #1049 and the earlier owner credit decision (Samanyu-dev as finder, source credit de Winter after Kodaj, Samanyu-dev). In measure_identity.py the new float modulo maps a represented 1e-17 rad tilt to zero. Preserve the represented pose during the exact contraction path, with a near-axis control and regenerated receipts. This finding concerns the general reader and the independent math review tested the specific 109 import separately. The old head failed ID contiguity and one 900-second Chromium layout run. #1040's original rational archive and PR comment repost are identical (SHA-256 2073b4b8ab2ba1af7ea2623eb361953c36ad7de54f932292a135c6150113d38c). The degree-five follow-up is readable too (9d89478f25ef08c4cafe7fa9b6a520025652a19528b706108761b2370ac57eff). Retain and replay both on think-squj and put both in the report-order walk.
+- #1051 at d366b6a9807eb2a57addc927b504c3a957901a39 is the published draft with triage, retention and the prospective replay plan. Its current CI failures are four unregistered digest comparisons in replay_rectangle_receipts.py and unrecorded suite-shard ratio 22/213. Upstream JoostdeWinter/square-packing at 20b6f0ec6de38ff75e132088683c09830e7cc852 now holds both attachments under attachments/. Their streamed SHA-256 digests match the originals from #1039 (9641ca15ac63213db22ad32854efb0bc0575d7c0beeb646fd6931f50ae183452) and #1041 (d8d0d6966f7ac7f9a69f24d578619ee2323a158e5c6c9c7e6be9039c401445df). Record the original version and its relationship to the newer retained folder before assigning replay evidence. The R1 branch at cf1ee8f713 has findings frozen before source review and checked 155 of 18,989 bins. Its post-freeze source audit and report remain. The R2 branch at 1e86fd925a has the checker freeze and synthetic controls. Continue against pinned data with a fresh isolated reviewer and freeze findings before reconciliation. The #1039 heterogeneous, mixed and rescaling obligations still need their coverage checked. Phase 2 and inherited coverage remain tracked on think-8zi6 and think-xtxy.
+
+### New and returning items
+
+- #1052 import think-kzwl. Verified the two exact source files at db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef match #1057's SHA-256 digests. Preserve the witness as published and record the derived read copy that supplies Witness/v2 claim metadata. Recover the pre-replay controls plan identified in the bead, then run the maintained routes and map #1057. Adopt and regularize at 305 with the run and default-drawing records in the same PR if the validated exact side decides the house. No result ID or adoption date was allocated in this session.
+- #1055 triaged in think-6ul3. Pin the reported strict s(20) lower bound at 3a5130340b0882e72e9d04ad2419b0437cae99aa and track the kernel premises shared with #1050. #1050's published verdict does not certify the full optimality proof, and the prior handoff left its import on hold after a permission classifier refusal.
+- #1037 triaged in think-36ui. All seven reported ceilings improve the displayed houses. Validate the exact comparisons and certificates before an adoption.
+- Records follow-ups in think-qc3o. Verified the three author archives on #1017, #1022 and #1031 and read all four comments. #1017's missing-file ask has an answer. Record the #1009 and #1017 comments already posted instead of posting them again. Main lacks the six noted comment IDs and the #1055 entry.
+- After merging any intake PR, verify its deploy, render replies with check_requests from main, post and record the replies, close settled issues and repeat the intake sweep.
