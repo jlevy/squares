@@ -37523,3 +37523,162 @@ issues:
       only registration texts and checksums. It names GPT-6.2 Astra (OpenAI) where the pinned
       folder's README and the head's REGISTRATION.md name GPT-6.2 Sol; the record states the
       issue's words. The Kaggle side it quotes, 11.800793726617185, states no packing.
+  - number: 1021
+    title: Lowered upper bound for n = 268 (side 16.870013850405)
+    author: JoostdeWinter
+    opened: '2026-11-17'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(268) <= 16.870013850405, rounded up at 12 places
+      from the exact side of a centre-direction certificate at a1ba501 in his watched repository,
+      1.85e-03 below the house, T-320 (Mykhailo Polkovskyi's further arrangement of Doğa Özden's T-289): nine diagonal slices of published packings, Daniil Ostashev's at 129 and PingYou Ltd's at 153 and 302, through the compilations of Navneet Prabhat and Danil Malyshev and Francisco Couzo's certificate.
+      Triaged, retained and registered on 18 November 2026 in lanes w6-dewinter-1118 and
+      w6r-dewinter-1118 (think-gqzz) as T-331: both maintained exact routes accept the certificate
+      and refuse its gross and sharp controls; measured, it is a new arrangement relative to
+      T-320's packing and to T-289's, and the gain lies wholly outside T-320's contraction
+      margin, so under option D (think-b0w5) it is a new result. The blind stage 4 review of 18
+      November (R-1021, PR #1033) accepts it with no blocking or major finding, and its
+      clean-room run is mapped, so T-331 is confirmed, independently re-implemented, at V3/C3.
+      The case adopted it as the house at 268 by the house rule in the pass of 20 November
+      2026 (think-78aj), regularized in the same pull request; #1009's pass had moved 268 on
+      18 November, and a day's archive holds one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
+    read_through: '2026-11-17T22:49:55Z'
+    results:
+    - key: n268-a1ba501
+      claim: >-
+        s(268) <= 16.870013850405 rounded up at 12 places (the exact side of n268/n268_exact.json at
+        JoostdeWinter/square-packing a1ba501), nine diagonal slices of published packings, Daniil Ostashev's at 129 and PingYou Ltd's at 153 and 302, through the compilations of Navneet Prabhat and Danil Malyshev and Francisco Couzo's certificate.
+      source: body
+      register:
+      - T-331
+      evidence:
+      - E-de-winter-1021-certificate-report
+      - E-de-winter-1021-exact-feasibility
+      - E-de-winter-1021-review-exact-feasibility
+      validation:
+      - think-gqzz
+    beads:
+    - think-gqzz
+    - think-78aj
+    answer_bead: think-gqzz
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, its stage 4 review mapped and the
+      house at 268 decided, and the reply on main says what was registered, replayed, reviewed
+      and adopted.
+    notes: >-
+      Read on 18 November 2026; no comment on the issue. The issue names a1ba501 (22:48:48Z,
+      pushed with 838c5ea at 22:48:50Z), the commit that first committed n268/; later commits leave
+      it unchanged. It quotes the Kaggle per-puzzle table's 16.870013850412470 at 268 (the team Thinking inside the box, 15 November), 8.0e-12 above this side, with no coordinates, so it states no packing. The record credits people, not AI agents (attribution.md), and
+      states the assistance in the issue's words.
+  - number: 1022
+    title: Lowered upper bound for n = 270 (side 16.927314216352)
+    author: JoostdeWinter
+    opened: '2026-11-17'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(270) <= 16.927314216352, rounded up at 12 places
+      from the exact side of a centre-direction certificate at a1ba501 in his watched repository,
+      8.34e-04 below the house, T-321 (Mykhailo Polkovskyi's re-solve of T-283, Evan Daniel's packing as Doğa Özden improved it): the 270-square packing in Asterios Panoras's public Kaggle compilation, its end regions relaxed and a 68-square region compressed, every square re-optimized.
+      Triaged, retained and registered on 18 November 2026 in lanes w6-dewinter-1118 and
+      w6r-dewinter-1118 (think-gqzz) as T-332: both maintained exact routes accept the certificate
+      and refuse its gross and sharp controls; measured, it is a new arrangement relative to
+      T-321's packing and to T-283's, and the gain lies wholly outside T-321's contraction
+      margin, so under option D (think-b0w5) it is a new result. The blind stage 4 review of 18
+      November (R-1021, PR #1033) accepts it with no blocking or major finding, and its
+      clean-room run is mapped, so T-332 is confirmed, independently re-implemented, at V3/C3.
+      The case adopted it as the house at 270 by the house rule in the pass of 20 November
+      2026 (think-78aj), regularized in the same pull request; #1009's pass had moved 270 on
+      18 November, and a day's archive holds one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
+    read_through: '2026-11-17T22:50:19Z'
+    results:
+    - key: n270-a1ba501
+      claim: >-
+        s(270) <= 16.927314216352 rounded up at 12 places (the exact side of n270/n270_exact.json at
+        JoostdeWinter/square-packing a1ba501), the 270-square packing in Asterios Panoras's public Kaggle compilation, its end regions relaxed and a 68-square region compressed, every square re-optimized.
+      source: body
+      register:
+      - T-332
+      evidence:
+      - E-de-winter-1022-certificate-report
+      - E-de-winter-1022-exact-feasibility
+      - E-de-winter-1022-review-exact-feasibility
+      validation:
+      - think-gqzz
+    beads:
+    - think-gqzz
+    - think-78aj
+    answer_bead: think-gqzz
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, its stage 4 review mapped and the
+      house at 270 decided, and the reply on main says what was registered, replayed, reviewed
+      and adopted.
+    notes: >-
+      Read on 18 November 2026; no comment on the issue. The issue names a1ba501 (22:48:48Z,
+      pushed with 838c5ea at 22:48:50Z), the commit that first committed n270/; later commits leave
+      it unchanged. It quotes Panoras's compilation at 16.92746606488242 and Danil Malyshev's coordinates of #1012 at 16.927469593519, both 1.55e-04 above this side, and the Kaggle per-puzzle table's 16.927314216351814 at 270 (the team [NUP] Junie is all you need, 9 November), 1.1e-13 above it, with no coordinates; the last states no packing. The record credits people, not AI agents (attribution.md), and
+      states the assistance in the issue's words.
+  - number: 1031
+    title: Lowered upper bound for n = 299 (side 17.793636991744)
+    author: JoostdeWinter
+    opened: '2026-11-18'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter asks for the registration of s(299) <= 17.793636991744, rounded up at 12
+      places from the exact side of a centre-direction certificate at 497eb47 in his watched
+      repository, 7.37e-03 below the house, T-325 (Mykhailo Polkovskyi's re-solve of Doğa
+      Özden's T-277, after Evan Daniel): diagonal slices of the 372- and 335-square packings in
+      Asterios Panoras's public Kaggle compilation, locally optimized, with part of one tilted
+      group reflected across the diagonal. Triaged on 18 November 2026 (lane w6r2-dewinter-1118)
+      and retained, replayed and registered on 20 November in lane c2-imports (think-10mx) as
+      T-333: both maintained exact routes accept the certificate and refuse its gross and sharp
+      controls; the gain lies wholly outside T-325's contraction margin, so under option D
+      (think-b0w5) it is a new result. The blind stage 4 review of 18 November (R-1031, PR
+      #1036) accepts it with no blocking or major finding and finds it a new arrangement
+      relative to every packing the record holds at 299, its two tilted groups each sharing
+      the band of the houses since T-248, and its clean-room run is mapped, so T-333 is
+      confirmed, independently re-implemented, at V3/C3. The case adopted it as the house at
+      299 by the house rule in the pass of 20 November 2026 (think-78aj), regularized in the
+      same pull request. The review's Questions 1 to 3 go to the author with the reply.
+    read_through: '2026-11-18T06:44:45Z'
+    results:
+    - key: n299-497eb47
+      claim: >-
+        s(299) <= 17.793636991744 rounded up at 12 places (the exact side of n299/n299_exact.json
+        at JoostdeWinter/square-packing 497eb47), diagonal slices of the 372- and 335-square
+        packings in Asterios Panoras's public Kaggle compilation, locally optimized, with part of
+        one tilted group reflected across the diagonal.
+      source: body
+      register:
+      - T-333
+      evidence:
+      - E-de-winter-1031-certificate-report
+      - E-de-winter-1031-exact-feasibility
+      - E-de-winter-1031-review-exact-feasibility
+      validation:
+      - think-10mx
+    beads:
+    - think-10mx
+    - think-78aj
+    answer_bead: think-10mx
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, its stage 4 review mapped and the
+      house at 299 decided, and the reply on main says what was registered, replayed, reviewed
+      and adopted.
+    notes: >-
+      Read on 18 November 2026 and again on 20 November; no comment on the issue. The issue names
+      497eb47 (06:34:51Z), the commit that first committed n299/; 3293038, the same second, adds
+      only its registration text and checksums, and later commits leave the folder unchanged.
+      It names T-277 at 17.801004434255294 as the case page's value on 18 November; #1009's pass
+      had moved the house to T-325, 3.53e-12 below it, that day. It quotes the Kaggle per-puzzle
+      leaderboard's 17.793636991746555 at 299 (Nick Sarris, 18 November, 01:07:56 UTC), 3.5e-12
+      above this side, with no coordinates, so it states no packing. The record credits people,
+      not AI agents (attribution.md), and states the assistance in the issue's words.

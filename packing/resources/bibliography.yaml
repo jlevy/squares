@@ -6019,6 +6019,65 @@ sources:
       project: the refinements re-solve this registry's houses, and the author ran this
       repository's independent corner checker on the Witness/v2 files. MIT-licensed (LICENSE at
       17cc220). Retained in web/mishapolk-issue1009-2026-11-16/.
+  - key: '[de Winter s268 upper bound 2026-11-17]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-17'
+    lineage: independent
+    credit: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+    short_credit: de Winter after Ostashev et al.
+    note: 'JoostdeWinter/square-packing at a1ba5019e787e407646293d7bef81d63c9951b32 (2026-11-17T22:48:48Z),
+      Joost de Winter''s certificate for s(268) <= 16.8700138504044644 (the exact side rounded up at
+      16 places), printed 16.870013850405 rounded up at 12 places, in jlevy/squares#1021, which requested
+      its registration: a rational centre-direction JSON (n268/n268_exact.json) and the same packing
+      as a corner Witness/v2 (n268/n268_witness.yaml), nine diagonal slices of published packings, Daniil
+      Ostashev''s at 129 and PingYou Ltd''s at 153 and 302, through the compilations of Navneet Prabhat
+      and Danil Malyshev and Francisco Couzo''s certificate, a new arrangement relative to the house''s
+      packing (T-320). It says the search, optimization and rational certificate were produced with
+      GPT-6.2 Astra (OpenAI) and the repository files, checks and figure with Claude (Anthropic), under
+      his direction. No local or global optimality claim. Licensed MIT by LICENSE at the pin. Retained
+      in web/de-winter-s268-upper-bound-2026-11-17/.'
+  - key: '[de Winter s270 upper bound 2026-11-17]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-17'
+    lineage: independent
+    credit: de Winter after Panoras
+    note: 'JoostdeWinter/square-packing at a1ba5019e787e407646293d7bef81d63c9951b32 (2026-11-17T22:48:48Z),
+      Joost de Winter''s certificate for s(270) <= 16.9273142163517014 (the exact side rounded up at
+      16 places), printed 16.927314216352 rounded up at 12 places, in jlevy/squares#1022, which requested
+      its registration: a rational centre-direction JSON (n270/n270_exact.json) and the same packing
+      as a corner Witness/v2 (n270/n270_witness.yaml), the 270-square packing in Asterios Panoras''s
+      public Kaggle compilation, its end regions relaxed and a 68-square region compressed, every square
+      re-optimized, a new arrangement relative to the house''s packing (T-321). It says the search,
+      optimization and rational certificate were produced with GPT-6.2 Astra (OpenAI) and the repository
+      files, checks and figure with Claude (Anthropic), under his direction. No local or global optimality
+      claim. Licensed MIT by LICENSE at the pin. Retained in web/de-winter-s270-upper-bound-2026-11-17/.'
+  - key: '[de Winter s299 upper bound 2026-11-18]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-18'
+    lineage: independent
+    credit: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+    short_credit: de Winter after Panoras et al.
+    note: 'JoostdeWinter/square-packing at 497eb478b790175ea8690671b66785b70c97f9f2 (2026-11-18T06:34:51Z),
+      Joost de Winter''s certificate for s(299) <= 17.7936369917430406 (the exact side rounded up at
+      16 places), printed 17.793636991744 rounded up at 12 places, in jlevy/squares#1031, which requested
+      its registration: a rational centre-direction JSON (n299/n299_exact.json) and the same packing
+      as a corner Witness/v2 (n299/n299_witness.yaml), diagonal slices of the 372- and 335-square packings
+      in Asterios Panoras''s public Kaggle compilation (version 17), which Kaggle''s community explorer
+      links to prvsiyan''s notebook (372) and to notebooks by areebbb, jazivxt, alexchilton and prvsiyan
+      (335), locally optimized, with part of one tilted group reflected across the diagonal, a new arrangement relative to the house''s packing
+      (T-325) and every other the record holds at 299. It says the search, optimization and rational certificate were produced with GPT-6.2 Sol
+      (OpenAI) and the repository files, checks and figure with Claude (Anthropic), under his direction.
+      No local or global optimality claim. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s299-upper-bound-2026-11-18/.'
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden
