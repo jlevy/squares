@@ -59,7 +59,8 @@ reports:
   note: >-
     #1038 names 46ab8bf, committed at 2026-11-18T23:08:45Z, 23 seconds before it, the repository's only commit and its
     head. It says the packing is a public Kaggle packing by jazivxt (notebook Boxed In Sub, dataset Boxed In v63,
-    Apache 2.0 as declared there), converted to exact rationals under one uniform clearance dilation of 1 + 4.6e-18,
+    Apache 2.0 as declared there), converted to exact rationals under one uniform clearance factor, which it prints as 1 + 4.6e-18
+    and which is 1 + 4.56e-15 (the stage 4 review's F6),
     that the dataset describes crowdsourced coordinates and the notebook gives no per-count credit, so the original
     finder is unresolved, and that Özden made the certificate and the registration and claims no discovery.
 exceptions: []

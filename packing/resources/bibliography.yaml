@@ -5966,7 +5966,8 @@ sources:
       exact side rounded up at 16 places), printed 15.596043116632 rounded up at 12 places: a
       rational centre-basis Witness/v2, his lab's exact conversion of a public Kaggle packing by
       jazivxt (notebook Boxed In Sub, run 370961355, copying the dataset Boxed In v63; Apache 2.0
-      as declared there) under one uniform clearance dilation of 1 + 4.6e-18 about the origin.
+      as declared there) under one uniform clearance factor of 1 + 4.56e-15 about the box centre
+      (the issue prints 1 + 4.6e-18).
       The source says the dataset describes crowdsourced coordinates and the notebook gives no
       per-count credit, so the original finder is unresolved, and that Özden claims no
       discovery; it calls the packing a close relative of the house's (T-301, Roberto Ono's),

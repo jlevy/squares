@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **281** programs: **57** external and **224** first-party; **194** decide claims and **87** check premises.
-- **790** of **1017** evidence entries name the programs that verified them: 384 independently re-implemented, 325 reproduced with the producer’s code, 57 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **282** programs: **57** external and **225** first-party; **195** decide claims and **87** check premises.
+- **791** of **1018** evidence entries name the programs that verified them: 385 independently re-implemented, 325 reproduced with the producer’s code, 57 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -313,6 +313,7 @@ second implementation agrees.
 | [`V-de-winter-1018-review-premises`](#v-de-winter-1018-review-premises) | rv1018_premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-de-winter-1018-review-axis`](#v-de-winter-1018-review-axis) | rv1018_axis.py (with rv1018_common.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-de-winter-1018-review-bnb`](#v-de-winter-1018-review-bnb) | rv1018_decide.py with rv1018_bnb.c (and rv1018_common.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-r1038-review-check`](#v-r1038-review-check) | r1038_check.py with r1038_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -5693,6 +5694,22 @@ Decides one rotated direction of a format M measure over its whole per-bin quadr
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-de-winter-1018-n108-review-decision` | replayed here | independently re-implemented, clean-room | full, 401 of 401: net directions, each decided over its whole quadrant of centres | - |
+
+### `V-r1038-review-check`
+
+**r1038_check.py with r1038_reader.py, r1038_sat.py, r1038_clip.py, r1038_geom.py and r1038_decide.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 20 November stage 4 review's exact checker of Doğa Özden's centre-basis Witness/v2 certificate of issue 1038 at 228, with a strict reader of its own (r1038_reader.py: one YAML document of strings, integers, mappings and sequences, the envelope and witness keys the schema lists, every scalar p or p/q, handed out as exact rationals): every square a unit square, every wall and every pair with no distance filter, by separating axes in Python integers from the centres and unit bases, each square written over one denominator (r1038_sat.py, method A), and by exact Sutherland-Hodgman clipping in gmpy2.mpq from corners it builds itself, each square a unit square by its sides and diagonals, containment and walls by the clipped area (r1038_clip.py, method B); r1038_decide.py runs both and requires their classes to agree, and r1038_check.py adds the file's digest and the claim's 12-place arithmetic. r1038_controls.py decides 36 controls stated as rules in a plan hashed before any program read the certificate; r1038_selftest.py holds both methods and the reader to 36,910 checks.
+
+- Source: [`packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_check.py`](../../packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_check.py), [`packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_reader.py`](../../packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_reader.py), [`packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_sat.py`](../../packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_sat.py), [`packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_clip.py`](../../packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_clip.py), [`packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_geom.py`](../../packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_geom.py), [`packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_decide.py`](../../packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_decide.py), [`packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_selftest.py`](../../packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_selftest.py), [`packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_controls.py`](../../packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_controls.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-20-ozden-1038.md`](../../docs/project/reviews/review-2026-11-20-ozden-1038.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of issue 1038 (r1038, under think-3ape), strongest tier (tbd-strong-max) at maximum reasoning, prompted separately from the import lane (i1038, think-91fu)), with its own prompt and code; authorship in common with the producer’s: none, Issue 1038 says the conversion and checks were done by Özden's lab with OpenAI Codex. The checker was written from the mathematics, the Witness/v2 schema text and the file, and frozen at 2026-11-20T08:32:15Z (frozen/checker-frozen-digests.txt), before its author read the source's README, sqcheck.py, outputs or checks, or this repository's witness, verifier, promotion, identity or contraction code; it imports nothing from this repository or the source and reuses no code of any earlier review, lane L186's, the model for its method, among them, whose programs it did not open.
+- Note: Written and run on 20 November 2026 for docs/project/reviews/review-2026-11-20-ozden-1038.md, and kept with its receipts in the review-only directory ozden-s228-1038-review-2026-11-20 beside the import lane's packet. r1038_describe.py and r1038_sides.py, kept beside them, decide no certificate and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-1038-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 228: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the reader, with the stated controls decided by both | T-334 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

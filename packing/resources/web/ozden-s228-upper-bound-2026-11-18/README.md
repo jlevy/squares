@@ -10,7 +10,8 @@ his behalf. The lane fetched the repository at 08:14Z on 20 November; #1038 had 
 comment then.
 
 Intake lane i1038 (think-91fu) retained it, replayed it and measured it on 20 November
-2026. Its stage 4 review is a separate lane, blind to this one (think-3ape).
+2026. Its stage 4 review was a separate lane, blind to this one (think-3ape), and is
+mapped below.
 
 ## What the Source Claims
 
@@ -26,8 +27,11 @@ Intake lane i1038 (think-91fu) retained it, replayed it and measured it on 20 No
   which copies the `submission.csv` of the dataset *Boxed In* v63, Apache 2.0 as declared
   there. The lab converted jazivxt’s decimal centres and orientations to rational
   half-angle form and applied one uniform clearance factor about the origin,
-  2500000000000011391221/2500000000000000000000 (1 + 4.6 × 10⁻¹⁸), so that every pair
-  has strictly positive clearance; nothing else changed.
+  2500000000000011391221/2500000000000000000000, so that every pair has strictly
+  positive clearance; nothing else changed. The issue, the README and the file print the
+  factor as 1 + 4.6 × 10⁻¹⁸; it is 1 + 4.5564884 × 10⁻¹⁵ (the stage 4 review’s F6 and
+  F15), and the origin is the box centre, since jazivxt’s slice is in centred
+  coordinates (F13).
   `checks/source-exact-as-produced.json` is the unmodified conversion output and
   `source/hit-228.txt` jazivxt’s decimal slice, side 15.59604311663169367…, 7.28 × 10⁻¹⁴
   below the certificate’s, the cost of the clearance.
@@ -201,6 +205,23 @@ registration (think-4z8z).
 [measure/l-step-scan.json](measure/l-step-scan.json) is `devtools.l_step_scan` with this
 side stood in for 228’s ceiling. It finds exactly main’s L-step and monotonicity
 consequences, so no bound carries to another count.
+
+## Stage 4 Review
+
+The blind stage 4 review of this certificate is lane r1038’s (think-3ape):
+[review-2026-11-20-ozden-1038.md](../../../../docs/project/reviews/review-2026-11-20-ozden-1038.md),
+merged at 09:34Z on 20 November and read at 09:37Z, after this packet’s replay, controls,
+measurements and registration were committed at 08:50Z, and mapped then.
+It accepts the certificate, decided by a clean-room checker by two exact methods with 36
+controls stated in advance, with no blocking or major finding. Its least margin,
+3.62672 × 10⁻²³ at squares 156 and 166, is the replay’s; it finds 33 exact wall contacts
+at all four walls (F1, F4), the factor the source prints as 1 + 4.6 × 10⁻¹⁸ to be
+1 + 4.5564884 × 10⁻¹⁵ (F6, F15), and the certificate to be a packing of side
+15.5960431166317 exactly, with 197 pairs at contact and 16 overlapping by up to
+5.49 × 10⁻¹⁵, opened by that factor about the box centre (F7, F13).
+After its freeze it measured the identity, the contraction margins and the held view’s
+side as this packet does, with the same results (F10 to F12), and proposes S2.
+T-334 is confirmed, independently re-implemented, at V3/C3.
 
 ## What Is Not Established
 

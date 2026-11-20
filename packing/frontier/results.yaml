@@ -52967,8 +52967,9 @@ results:
       restatement of T-301's padding.
 
       Both maintained exact routes accept the certificate, read by the centre-basis witness
-      reader and held to the source's JSON twin of the same packing; the stage 4 review is a
-      separate lane, blind to this one (think-3ape).
+      reader and held to the source's JSON twin of the same packing, and the stage 4 review
+      of 20 November 2026 accepts it, its clean-room checker deciding every square, wall and
+      pair by two exact methods, so the bound is confirmed, independently re-implemented.
 
       The issue says this repository's packing-witness verify, run unmodified on the witness,
       reports VERIFIED (exact-algebraic over Q, 25878 pairs, least wall clearance 0); that
@@ -52980,8 +52981,9 @@ results:
 
       The issue says the packing is jazivxt's, published in the Kaggle notebook Boxed In Sub
       from the dataset Boxed In v63 (Apache 2.0 as declared there), converted by the lab to
-      rational half-angle form and opened by one uniform clearance factor of 1 + 4.6e-18 about
-      the origin, nothing else changed. The dataset describes crowdsourced coordinates and the
+      rational half-angle form and opened by one uniform clearance factor about the origin of
+      its centred coordinates, the box centre, nothing else changed. The issue prints the
+      factor as 1 + 4.6e-18; the fraction it gives is 1 + 4.56e-15 (the review's F6, F13). The dataset describes crowdsourced coordinates and the
       notebook gives no per-count credit, so the original finder is unresolved, as the issue
       says. The notebook and dataset were not read here: this session's network refuses
       www.kaggle.com, and the source retains jazivxt's decimal slice.
@@ -53013,7 +53015,9 @@ results:
         beyond a tenth: like T-314's 3.42e-09 at 147 (S2), 1.16 times T-302's margin with
         eight moved; the arrangement is Ono's (T-301, S3). No lower bound or optimum.
       scored: '2026-11-20'
-      by: think-91fu Doğa Özden import (intake lane i1038), a draft for the stage 4 review
+      by: >-
+        think-91fu Doğa Özden import (intake lane i1038), confirmed by the stage 4 review of
+        20 November (lane r1038), which proposes S2
     novelty: previously-published
     attribution:
       source_keys:
@@ -53022,6 +53026,7 @@ results:
     evidence:
     - E-ozden-1038-certificate-report
     - E-ozden-1038-exact-feasibility
+    - E-ozden-1038-review-exact-feasibility
     artifacts:
     - packing/resources/web/ozden-s228-upper-bound-2026-11-18/README.md
     - packing/resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
@@ -53038,10 +53043,15 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-20-ozden-1038.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/README.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/check-n228.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_1038.py
     - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
     notes: >-
       A separate complete repository replay is retained for n = 228: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -53102,6 +53112,33 @@ results:
       conversion made the exact coordinates. Licensed CC BY 4.0 and MIT by LICENSE.md at the
       pin, the coordinates Apache 2.0 as the source declares them. No human oversight or
       optimality is claimed.
+
+      The stage 4 review of 20 November 2026
+      (docs/project/reviews/review-2026-11-20-ozden-1038.md, lane r1038), written in a separate
+      lane blind to this one until its findings were frozen, accepts the certificate:
+      its clean-room checker decides every square, wall and all 25,878 pairs by separating
+      axes in Python integers and by exact clipping in gmpy2.mpq, no pair touching, the least
+      margin 3.62672e-23 at squares 156 and 166, the replay's, and all 36 of its controls,
+      stated beforehand, came out as stated (F1 to F3; E-ozden-1038-review-exact-feasibility).
+
+      Its findings are notes but two minor ones about the author's prose: the factor the
+      issue, the README and the file print as 1 + 4.6e-18 is 1 + 4.5564884e-15 (F6, F15).
+      Divided out about the box centre, the factor leaves a packing of side 15.5960431166317
+      exactly, with 197 pairs at contact and 16 overlapping by up to 5.49e-15, so the
+      certificate is that packing opened by the factor (F7, F13). The file's own claim and
+      source words are the producer's (F8).
+
+      After its freeze it measured what this lane measured and found the same: one to one
+      with T-301, 5 squares beyond a tenth (F10); 1.2298 of T-301's margin, 8.02e-10 below
+      T-301 shrunk to first contact (F11); the held view 9.66e-14 below this side, of which
+      the factor is 6.65e-14, the rounding of jazivxt's side to 13 places 6.33e-15, and
+      jazivxt's own print 2.37e-14 (F12). It notes that the record states the held solve's
+      certificate both as invalid and, in the same report, as a view both routes accept
+      (F12). It proposes S2. Its questions for the author go with the reply.
+
+      This lane recorded its replay, controls and measurements and registered this entry at
+      08:50Z on 20 November, and read the review, merged at 09:34Z, at 09:37Z, before mapping
+      it. No disagreement.
     next_rung: >-
       Independently review the certificate (stage 4, a separate lane blind to this one,
       think-3ape): its mathematics, a clean-room exact checker with sharp controls, and the
@@ -53109,13 +53146,35 @@ results:
       the smallest validated side at 228, this one, in the pass dated the day this change
       merges, with both strong generators' regularization of the new house; T-301 keeps its
       certificate as history.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-20-ozden-1038.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1038 (r1038, under think-3ape), prompted
+        separately from the import lane (i1038, think-91fu) and blind to its work until its
+        findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-20'
+      scope: >-
+        Finite feasibility of #1038's centre-basis Witness/v2 certificate at 228, decided by
+        the review's clean-room exact checker, frozen before any producer, witness or
+        verifier code was read, by two methods, with 36 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        clearance factor; after the freeze, custody, the sides against the record, the
+        identity against T-301, the contraction margins, the held KKT point, option D, the
+        licence, the credit and the significance.
+      verdict: accepted
+      covers:
+      - T-334
     regularizations:
     - n: 228
       of: T-301
       by: '[Özden s228 upper bound 2026-11-18]'
       method: >-
         jazivxt's published decimal packing, converted by the source to exact rationals under one
-        uniform clearance factor of 1 + 4.6e-18 (the source states no method for the packing and
+        uniform clearance factor of 1 + 4.56e-15 (the source states no method for the packing and
         no relation to T-301's)
       side: solved
       identity:
