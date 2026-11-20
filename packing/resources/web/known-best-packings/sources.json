@@ -750,19 +750,19 @@
       "url": "https://github.com/evand/square-packing/blob/268af529546176a25224ea3b2c7d29cef8d9e911/search/trio126/n126_xu.cert"
     },
     {
-      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-127-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/a1ba5019e787e407646293d7bef81d63c9951b32/n127/n127_exact.json at a1ba5019e787e407646293d7bef81d63c9951b32",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         127
       ],
       "n": 127,
-      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-127-candidate.yaml",
+      "path": "resources/web/de-winter-s127-issue1020-2026-11-17/source/n127/n127_exact.json",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-16",
+      "retrieved": "2026-11-18",
       "source_n": 127,
-      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-127-candidate.yaml"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/a1ba5019e787e407646293d7bef81d63c9951b32/n127/n127_exact.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

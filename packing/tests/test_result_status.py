@@ -513,6 +513,13 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-311",
         "T-312",
         "T-313",
+        # The pass of 20 November 2026 (think-zqot) took 127, the only house of JoeGun's
+        # issue-1001 certificate there (T-305), to Joost de Winter's issue-1020 certificate
+        # (T-330), which supersedes it and his own two earlier stages that evening, never
+        # houses (T-328, T-329).
+        "T-305",
+        "T-328",
+        "T-329",
         # The pass of 20 November 2026 (think-78aj) took the last houses of three of them to
         # Joost de Winter's certificates of issues 1021, 1022 and 1031 (T-331 to T-333):
         # T-320 at 268, T-321 at 270 and T-325 at 299.

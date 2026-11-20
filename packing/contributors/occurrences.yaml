@@ -19666,10 +19666,10 @@ occurrences:
     path: packing/frontier/n-127.md
     record_key: '127'
     field: /reported_upper_bound/found_by/0
-  expected_text: Tomáš Kodaj
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: Tomáš Kodaj
+  end: 15
+  label: Joost de Winter
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -19691,18 +19691,6 @@ occurrences:
   note: Reviewed packing/frontier/n-127.md [127] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-127.md
-    record_key: '127'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: JoeGun
-  start: 0
-  end: 6
-  label: JoeGun
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
 - origin:
     path: packing/frontier/n-128.md
     record_key: '128'
@@ -23556,10 +23544,10 @@ occurrences:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_upper_bound/found_by/0
-  expected_text: Joost de Winter
+  expected_text: Doğa Özden
   start: 0
-  end: 15
-  label: Joost de Winter
+  end: 10
+  label: Doğa Özden
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -23581,6 +23569,18 @@ occurrences:
   note: Reviewed packing/frontier/n-268.md [268] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-268.md
+    record_key: '268'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-269.md
     record_key: '269'
@@ -23614,14 +23614,20 @@ occurrences:
     path: packing/frontier/n-270.md
     record_key: '270'
     field: /reported_upper_bound/found_by/0
-  expected_text: Joost de Winter
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Joost de Winter
+  end: 11
+  label: Evan Daniel
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  contributor_id: evan-daniel
+  note: Reviewed packing/frontier/n-270.md [270] /reported_upper_bound/found_by/0
+    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
+    matches the repository whose retained licence names Evan Daniel. Keep finder,
+    improver and solver roles distinct.
 - origin:
     path: packing/frontier/n-270.md
     record_key: '270'
@@ -23639,6 +23645,30 @@ occurrences:
   note: Reviewed packing/frontier/n-270.md [270] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-270.md
+    record_key: '270'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-270.md
+    record_key: '270'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -24238,11 +24268,41 @@ occurrences:
     path: packing/frontier/n-299.md
     record_key: '299'
     field: /reported_upper_bound/found_by/0
-  expected_text: Joost de Winter
+  expected_text: Evan Daniel
   start: 0
-  end: 15
-  label: Joost de Winter
+  end: 11
+  label: Evan Daniel
   role: construction-finder
+  disposition: resolved
+  evidence:
+  - repository-license
+  - bibliography
+  note: 'Reviewed packing/frontier/n-299.md /reported_upper_bound/found_by/0: the
+    case''s credit after the house adoption of 31 October 2026 names Evan Daniel as
+    construction finder, as the adopted result''s register entry and its stage 4 review
+    credit them; the label is the source''s.'
+  contributor_id: evan-daniel
+- origin:
+    path: packing/frontier/n-299.md
+    record_key: '299'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-299.md
+    record_key: '299'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Mishapolk
+  start: 0
+  end: 9
+  label: Mishapolk
+  role: construction-improver
   disposition: unresolved
   evidence: []
   note: Identity review pending.
@@ -34486,7 +34546,7 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    record_key: '[de Winter s127 issue 1015 2026-11-17]'
     field: /authors/0
   expected_text: de Winter
   start: 0
@@ -34498,9 +34558,9 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    record_key: '[de Winter s127 issue 1015 2026-11-17]'
     field: /credit
-  expected_text: de Winter after Ostashev, PingYou
+  expected_text: de Winter after Chilton, Panoras
   start: 0
   end: 9
   label: de Winter
@@ -34510,59 +34570,23 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    record_key: '[de Winter s127 issue 1015 2026-11-17]'
     field: /credit
-  expected_text: de Winter after Ostashev, PingYou
-  start: 16
-  end: 24
-  label: Ostashev
-  role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s268 upper bound 2026-11-17]'
-    field: /credit
-  expected_text: de Winter after Ostashev, PingYou
-  start: 26
-  end: 33
-  label: PingYou
-  role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s270 upper bound 2026-11-17]'
-    field: /authors/0
-  expected_text: de Winter
-  start: 0
-  end: 9
-  label: de Winter
-  role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s270 upper bound 2026-11-17]'
-    field: /credit
-  expected_text: de Winter after Panoras
-  start: 0
-  end: 9
-  label: de Winter
-  role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s270 upper bound 2026-11-17]'
-    field: /credit
-  expected_text: de Winter after Panoras
+  expected_text: de Winter after Chilton, Panoras
   start: 16
   end: 23
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1015 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 25
+  end: 32
   label: Panoras
   role: prerequisite
   disposition: unresolved
@@ -34570,7 +34594,7 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    record_key: '[de Winter s127 issue 1017 2026-11-17]'
     field: /authors/0
   expected_text: de Winter
   start: 0
@@ -34582,9 +34606,9 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    record_key: '[de Winter s127 issue 1017 2026-11-17]'
     field: /credit
-  expected_text: de Winter after Panoras
+  expected_text: de Winter after Chilton, Panoras
   start: 0
   end: 9
   label: de Winter
@@ -34594,11 +34618,71 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
-    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    record_key: '[de Winter s127 issue 1017 2026-11-17]'
     field: /credit
-  expected_text: de Winter after Panoras
+  expected_text: de Winter after Chilton, Panoras
   start: 16
   end: 23
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1017 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 25
+  end: 32
+  label: Panoras
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1020 2026-11-17]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1020 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1020 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 16
+  end: 23
+  label: Chilton
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s127 issue 1020 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Chilton, Panoras
+  start: 25
+  end: 32
   label: Panoras
   role: prerequisite
   disposition: unresolved

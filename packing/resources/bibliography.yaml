@@ -5925,6 +5925,74 @@ sources:
       were produced with GPT-6.2 Astra (OpenAI) and the repository files and checks with Claude
       (Anthropic), under his direction. No optimality claim. Licensed MIT by LICENSE at the
       pin. Retained in web/de-winter-s108-lower-bound-2026-11-17/.
+  - key: '[de Winter s127 issue 1015 2026-11-17]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-17'
+    lineage: independent
+    credit: de Winter after Chilton, Panoras
+    note: >-
+      JoostdeWinter/square-packing at 35b576a355297942bca9c195bee5cd74f0b27f40
+      (2026-11-17T22:09:10Z), Joost de Winter's certificate for s(127) <=
+      590039784110678470545925017871932135226358204819969425332092601/5 x 10^61 =
+      11.8007956822135695 rounded up at 16 places (printed 11.800795682214 rounded up at 12),
+      first committed at 689bc79 (22:07:57Z), 6 minutes 36 seconds before jlevy/squares#1015,
+      which requested its registration: a rational centre-direction JSON (n127/n127_exact.json)
+      and the same packing as a corner Witness/v2. A tilted central band of 57 squares inside a
+      frame of axis-aligned squares, from an exact certificate of an arrangement in the public
+      Kaggle coordinate compilations of Alex Chilton and Asterios Panoras, whose original finder
+      the issue could not establish, by a search over the sliding offsets of the band's columns
+      and an optimization of individual squares; measured here close to T-305's arrangement
+      (Tomáš Kodaj's, as JoeGun improved it), ten squares beyond a tenth and not one to one by
+      nearest centres. It asks for credit to de Winter after the arrangement in the Chilton and
+      Panoras compilations, and says the search, optimization and certificate were produced with
+      GPT-6.2 Sol (OpenAI) and the files, checks and figure with Claude (Anthropic), under his
+      direction. No local or global optimality claim. Licensed MIT by LICENSE at the pin.
+      Retained in web/de-winter-s127-issue1015-2026-11-17/.
+  - key: '[de Winter s127 issue 1017 2026-11-17]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-17'
+    lineage: independent
+    credit: de Winter after Chilton, Panoras
+    note: >-
+      JoostdeWinter/square-packing at cc20a26845789c2502950041c26709eda8a71081
+      (2026-11-17T22:26:24Z), Joost de Winter's certificate for s(127) <=
+      5900396863307571/500000000000000 = 11.800793726615142 (printed 11.800793726616 rounded up
+      at 12), 40 seconds before jlevy/squares#1017, which requested its registration and states
+      the exact side: the centre-direction JSON and corner Witness/v2 of #1015's band with its
+      tilted cap shifted by a second stage of the search, which repeatedly changed the aspect
+      ratio of the enclosing rectangle and returned to a square; measured here one to one with
+      #1015's packing, 1.9556e-6 below it. It asks for credit to de Winter after the arrangement
+      in the Chilton and Panoras compilations, with #1015's AI assistance. No local or global
+      optimality claim. Licensed MIT by LICENSE at the pin. Retained in
+      web/de-winter-s127-issue1017-2026-11-17/.
+  - key: '[de Winter s127 issue 1020 2026-11-17]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-17'
+    lineage: independent
+    credit: de Winter after Chilton, Panoras
+    note: >-
+      JoostdeWinter/square-packing at a1ba5019e787e407646293d7bef81d63c9951b32
+      (2026-11-17T22:48:48Z), Joost de Winter's certificate for s(127) <=
+      5900396863307481119664515678048233366964863482714849291045437/5 x 10^59 =
+      11.8007937266149623 rounded up at 16 places (printed 11.800793726615 rounded up at 12),
+      47 seconds before jlevy/squares#1020, which requested its registration: the
+      centre-direction JSON and corner Witness/v2 of #1017's band with two groups of its squares
+      shifted lengthwise and every square re-optimized; measured here one to one with #1017's
+      packing, 1.7976e-13 below it and 4.29 times its uniform-contraction margin. It asks for
+      credit to de Winter after the arrangement in the Chilton and Panoras compilations; the
+      issue names GPT-6.2 Astra (OpenAI) for the search, optimization and certificate, where
+      the pinned folder's README names GPT-6.2 Sol, and Claude (Anthropic) for the files,
+      checks and figure, under his direction. No local or global optimality claim. Licensed MIT
+      by LICENSE at the pin. Retained in web/de-winter-s127-issue1020-2026-11-17/.
   - key: '[Mishapolk issue 1009 2026-11-16]'
     authors:
     - Polkovskyi
@@ -6062,6 +6130,7 @@ credited_names:
   Hyukdong Kim: Kim
   Chris Deotte: Deotte
   Alex Chilton: Chilton
+  Asterios Panoras: Panoras
   ntumlnoob: ntumlnoob
   unnir: unnir
   Roberto Ono: Ono

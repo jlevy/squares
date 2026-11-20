@@ -294,14 +294,17 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: Mykhailo Polkovskyi's certificates of issue 1009 (T-314 to T-326), each clearing every
 #: wall by at least 1e-28 and every pair by at least 2e-28, so n=1..200 has 773 separating
 #: squares and 2,471 translating ones, and n=1..324 3,245 and 7,844, in the same records.
-#: The pass of 20 November 2026 (think-78aj) moved 268, 270 and 299 to Joost de Winter's
-#: certificates of issues 1021, 1022 and 1031 (T-331 to T-333), whose least pair gaps are
-#: 1e-59 to 1e-74, so n=1..324 has 3,067 separating squares and 7,500 translating ones, in
-#: the same records.
+#: The pass of 20 November 2026 (think-zqot) moved 127 from T-305 to Joost de Winter's
+#: certificate of issue 1020 (T-330), a new arrangement relative to T-305's packing:
+#: separating and translating squares 8 and 41 against T-305's 90 and 92, so n=1..200 has
+#: 691 separating squares and 2,420 translating ones, and n=1..324 3,163 and 7,793, in the
+#: same records. The same pass (think-78aj) moved 268, 270 and 299 to his certificates of
+#: issues 1021, 1022 and 1031 (T-331 to T-333), whose least pair gaps are 1e-59 to 1e-74,
+#: so n=1..324 has 2,985 separating squares and 7,449 translating ones, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
-    "n=1..200": (68, 773, 182, 2471),
-    "n=1..324": (126, 3067, 302, 7500),
+    "n=1..200": (68, 691, 182, 2420),
+    "n=1..324": (126, 2985, 302, 7449),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

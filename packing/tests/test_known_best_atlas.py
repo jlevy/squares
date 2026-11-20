@@ -2509,10 +2509,12 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # Daniel's issue 914 n260 packet and regularized lists of 10 October (T-146 at 292), or
     # Özden's s156, s180, s268, s270, s299 and s307 packets, which held nothing else: nine
     # fewer. PingYou Ltd's PR 574 certificates and Daniel's issue 639 forms keep others.
-    # The pass of 20 November 2026 (think-78aj) draws 268, 270 and 299 from Joost de
-    # Winter's three packets of issues 1021, 1022 and 1031, three more sources with no new
-    # name; Polkovskyi's issue 1009 packet keeps its other counts.
-    assert len(expected_sources) == 42
+    # Its adoption at 127 (think-zqot) draws 127 from Joost de Winter's issue 1020 packet
+    # (T-330), one more source with no new name; JoeGun's packet still holds 204, 232, 264
+    # and 305. The same pass (think-78aj) draws 268, 270 and 299 from his three packets of
+    # issues 1021, 1022 and 1031, three more sources with no new name; Polkovskyi's issue
+    # 1009 packet keeps its other counts.
+    assert len(expected_sources) == 43
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2678,7 +2680,9 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     (think-i38n) credits Mykhailo Polkovskyi (Mishapolk) as the improver at 147, 156, 180,
     260, 262, 268, 270, 292, 299 and 307 and as the finder at 210, 272 and 295 (T-314 to
     T-326), a name the block already prints, as is de Winter's at 262 and 292, so the hold
-    is unchanged and holds Özden and Ono where they are still credited."""
+    is unchanged and holds Özden and Ono where they are still credited. Its adoption at 127
+    (think-zqot) credits Joost de Winter alone there (T-330), a printed name, so the hold
+    holds Kodaj and JoeGun at 204, 232, 264 and 305 only."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
@@ -2686,7 +2690,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         ),
         **dict.fromkeys((147, 228), ("Roberto Ono",)),
         90: ("jazivxt",),
-        **dict.fromkeys((127, 204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
+        **dict.fromkeys((204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
     }
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
@@ -2699,7 +2703,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (90, ["jazivxt"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, ["Roberto Ono"], []),
-        (127, ["Tomáš Kodaj"], ["JoeGun"]),
+        (127, ["Joost de Winter"], []),
         (204, ["Tomáš Kodaj"], ["JoeGun"]),
         (232, ["Tomáš Kodaj"], ["JoeGun"]),
         (264, ["Tomáš Kodaj"], ["JoeGun"]),

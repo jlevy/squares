@@ -1,0 +1,61 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "eb50f54e9b765a45c92686c5d8f289370c66d7ec",
+  "read_on": "2026-11-18",
+  "counts": [
+    {
+      "n": 127,
+      "start": [{"label":"record T-305","holders":"Tomáš Kodaj, improved by JoeGun","side":"11.801753890487","exact":true}],
+      "steps": [
+        {
+          "report": "#1015",
+          "kind": "issue",
+          "reported_at": "2026-11-17T22:14:33Z",
+          "side": "11.800795682214",
+          "exact": true,
+          "verdict": "recorded",
+          "reason": "below",
+          "decided_against": ["record T-305"],
+          "difference": "below by 9.58e-04",
+          "first_committed": "2026-11-17T22:07:57Z",
+          "measured": "no symmetry of the box pairs it one to one with T-305's packing by nearest centres; the optimal assignment, under the identity of the box, moves 116 squares beyond 1e-3, 77 beyond 1e-2 and 10 beyond 0.1 (largest 0.789455) and turns 85 squares by more than 1e-6 radians, by up to 33.19 degrees; 57 squares are tilted beyond a degree, 1.20 to 30.12 degrees, 55 one way and 2 the other, against T-305's 56 (26.42 to 31.83) all one way, and 55 of its tilted squares pair with tilted squares of T-305 of the same sign; the house witness and its regularized view measure as T-305; T-305's arrangement with the band rearranged, not one to one with it",
+          "packing": {"kind":"new packing","continues":"an arrangement in the Kaggle compilations of Alex Chilton and Asterios Panoras, whose finder the source could not establish, by a search over the sliding offsets of the tilted band's columns; measured, close to T-305's arrangement, Tomáš Kodaj's Kaggle packing as JoeGun improved it, but not one to one with it"}
+        },
+        {"report":"#1017","kind":"issue","reported_at":"2026-11-17T22:27:04Z","side":"11.800793726616","exact":true,"verdict":"recorded","reason":"below","decided_against":["#1015"],"difference":"below by 1.96e-06","first_committed":"2026-11-17T22:26:24Z","measured":"one to one with #1015's packing by nearest centres under the identity of the box, which moves 63 squares beyond 1e-3, 27 beyond 1e-2 and 5 beyond 0.1 (largest 0.328312) and turns squares by up to 1.495 degrees; all 57 tilted squares pair with tilted squares of #1015 of the same sign; against T-305 no symmetry pairs it one to one, and the optimal assignment moves 11 squares beyond 0.1 (largest 0.789453); #1015's arrangement moved","packing":{"kind":"new packing","continues":"the source's own packing of #1015, its tilted cap shifted by a second stage of the search"}},
+        {"report":"#1020","kind":"issue","reported_at":"2026-11-17T22:49:35Z","side":"11.800793726615","exact":true,"verdict":"recorded","reason":"below","decided_against":["#1017"],"difference":"below by 1.80e-13","first_committed":"2026-11-17T22:48:48Z","measured":"one to one with #1017's packing by nearest centres under the identity of the box, which moves 46 squares beyond 1e-3, 28 beyond 1e-2 and 1 beyond 0.1 (largest 0.107338) and turns squares by up to 3.981 degrees; all 57 tilted squares pair with tilted squares of #1017 of the same sign within 0.1 degrees, 52 within 1e-4 degrees; against T-305 no symmetry pairs it one to one, and the optimal assignment moves 9 squares beyond 0.1 (largest 0.789453); #1017's arrangement moved","packing":{"kind":"new packing","continues":"the source's own packing of #1017, two groups of the band's squares shifted lengthwise and every square re-optimized"}}
+      ],
+      "best_now": [{"label":"#1020","holders":"Joost de Winter","side":"11.800793726615","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":1,"claims":3,"recorded_new":3,"recorded_new_continuing":3,"recorded_refinement":0,"recorded_unclassified":0,"recorded_by_exception":0,"not_recorded":0,"undecided":0},
+  "cross_check": [],
+  "reports": [
+    {"report":"#1015","url":"https://github.com/jlevy/squares/issues/1015","kind":"issue","holders":"Joost de Winter","reported_at":"2026-11-17T22:14:33Z","bead":"think-zqot","counts":[127],"recorded":[127],"recorded_new":[127],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {"report":"#1017","url":"https://github.com/jlevy/squares/issues/1017","kind":"issue","holders":"Joost de Winter","reported_at":"2026-11-17T22:27:04Z","bead":"think-zqot","counts":[127],"recorded":[127],"recorded_new":[127],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[]},
+    {"report":"#1020","url":"https://github.com/jlevy/squares/issues/1020","kind":"issue","holders":"Joost de Winter","reported_at":"2026-11-17T22:49:35Z","bead":"think-zqot","counts":[127],"recorded":[127],"recorded_new":[127],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[]}
+  ],
+  "owner_decisions": {
+    "exact_ties": [],
+    "first_commit_before_report": [],
+    "undecided": [],
+    "publication_dependent": [],
+    "unknown_times": [],
+    "refinement_chains": [],
+    "key_reason_candidates": [],
+    "measured_identity": [
+      {
+        "n": 127,
+        "report": "#1015",
+        "verdict": "recorded",
+        "source_says": "a new packing seeded from an arrangement in the Kaggle compilations of Alex Chilton and Asterios Panoras, whose finder the source could not establish, by a search over the sliding offsets of the tilted band's columns; measured, close to T-305's arrangement, Tomáš Kodaj's Kaggle packing as JoeGun improved it, but not one to one with it",
+        "against": "T-305",
+        "finding": "no symmetry of the box pairs it one to one with T-305's packing by nearest centres; the optimal assignment, under the identity of the box, moves 116 squares beyond 1e-3, 77 beyond 1e-2 and 10 beyond 0.1 (largest 0.789455) and turns 85 squares by more than 1e-6 radians, by up to 33.19 degrees; 57 squares are tilted beyond a degree, 1.20 to 30.12 degrees, 55 one way and 2 the other, against T-305's 56 (26.42 to 31.83) all one way, and 55 of its tilted squares pair with tilted squares of T-305 of the same sign; the house witness and its regularized view measure as T-305; T-305's arrangement with the band rearranged, not one to one with it",
+        "source": "packing/resources/web/de-winter-s127-issue1015-2026-11-17/measure/identity.json"
+      },
+      {"n":127,"report":"#1017","verdict":"recorded","source_says":"a new packing seeded from the source's own packing of #1015, its tilted cap shifted by a second stage of the search","against":"#1015","finding":"one to one with #1015's packing by nearest centres under the identity of the box, which moves 63 squares beyond 1e-3, 27 beyond 1e-2 and 5 beyond 0.1 (largest 0.328312) and turns squares by up to 1.495 degrees; all 57 tilted squares pair with tilted squares of #1015 of the same sign; against T-305 no symmetry pairs it one to one, and the optimal assignment moves 11 squares beyond 0.1 (largest 0.789453); #1015's arrangement moved","source":"packing/resources/web/de-winter-s127-issue1017-2026-11-17/measure/identity.json"},
+      {"n":127,"report":"#1020","verdict":"recorded","source_says":"a new packing seeded from the source's own packing of #1017, two groups of the band's squares shifted lengthwise and every square re-optimized","against":"#1017","finding":"one to one with #1017's packing by nearest centres under the identity of the box, which moves 46 squares beyond 1e-3, 28 beyond 1e-2 and 1 beyond 0.1 (largest 0.107338) and turns squares by up to 3.981 degrees; all 57 tilted squares pair with tilted squares of #1017 of the same sign within 0.1 degrees, 52 within 1e-4 degrees; against T-305 no symmetry pairs it one to one, and the optimal assignment moves 9 squares beyond 0.1 (largest 0.789453); #1017's arrangement moved","source":"packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/identity.json"}
+    ]
+  },
+  "other_items": [{"issue":"#1017","url":"https://github.com/jlevy/squares/issues/1017","holders":"Luka Cvetkovic","kind":"side-only leaderboard entry, no packing","bead":"think-zqot","disposition":"All three issues quote the Kaggle per-puzzle table's side at 127, 11.800793726617185 (Luka Cvetkovic, 16 November; #1015 prints it as 11.800793726618), which #1017 and #1020 lie 2.04e-12 and 2.2e-12 below; it states no packing, so it is no report and is recorded as context only, as #1005's ledger treated the side quoted at 292."}]
+}

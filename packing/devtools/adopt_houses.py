@@ -239,6 +239,15 @@ REVIEW_1009 = (
     "count, stated beforehand as rules, were each decided as stated"
 )
 
+REVIEW_1020 = (
+    ", and the 18 November review of record’s clean-room checker, frozen before any producer, "
+    "witness or verifier code was read, decided it again by separating axes in integers from "
+    "its poses and by exact clipping in GMP rationals from its corners, each form natively "
+    "and in the other’s terms, over every square, wall and pair; its 35 controls, stated "
+    "beforehand as rules, were each decided as stated but one whose rule the review restated "
+    "after its freeze; an additional blind review’s checker decided it again too"
+)
+
 #: What the stage 4 review of issues 1021 and 1022 (lane r1021-1118, think-gqzz) decided on
 #: each of their two certificates, the clause the case records write after the maintained
 #: routes.
@@ -3422,6 +3431,36 @@ RESULTS: dict[str, Prose] = {
         ),
         third_route=REVIEW_1009,
     ),
+    "T-330": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1020](https://github.com/jlevy/squares/issues/1020)",
+        producer_route=False,
+        ai=(
+            "Issue 1020 says the search, optimization and rational certificate were produced "
+            "with GPT-6.2 Astra (OpenAI) and the repository files, checks and figure with "
+            "Claude (Anthropic), both under Joost de Winter’s direction."
+        ),
+        routes=(
+            "Neither maintained route is the source’s own code: the issue reports its two "
+            "checkers, verify_exact.py and check_area.py, which were not run here, and the "
+            "review’s checkers share no code with either maintained route or the source."
+        ),
+        lineage=(
+            "The issues say the search started from an exact certificate of an arrangement in "
+            "the public Kaggle compilations of Alex Chilton and Asterios Panoras, whose "
+            "original finder could not be established, and that #1015, #1017 and #1020 are its "
+            "three stages that evening. Measured, this certificate is #1017’s arrangement "
+            "moved, one to one by nearest centres (one square beyond a tenth), and #1017 is "
+            "#1015’s; against T-305’s packing, Tomáš Kodaj’s as JoeGun improved it and this "
+            "case’s house best packing before this adoption, no symmetry pairs nearest centres "
+            "one to one, and the optimal assignment moves 9 squares beyond a tenth, at most "
+            "0.789. So Joost de Winter is the packing’s finder, after the arrangement in those "
+            "compilations, as the issues ask."
+        ),
+        third_route=REVIEW_1020,
+        diversity="by Claude agents, a system family that also produced the files and checks",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-331": Prose(
         author="Joost de Winter",
         reported="on [jlevy/squares#1021](https://github.com/jlevy/squares/issues/1021)",
@@ -3707,10 +3746,17 @@ CREDITS: dict[int, Credit] = {
     # identity). Kodaj is the finder and JoeGun the improver, as the issue asks; Kodaj's
     # packing is not in hand, so that lineage is the issue's statement. The same for 204,
     # 232, 264 and 305 below.
+    # The pass of 20 November 2026 (think-zqot, lanes w6r-dewinter-1118 and c1-127): Joost
+    # de Winter's issue 1020 (T-330), the third and smallest of his reports at 127 on the
+    # evening of 17 November, from an arrangement in the Kaggle compilations of Alex Chilton
+    # and Asterios Panoras whose finder the issues could not establish; a new arrangement
+    # relative to T-305's packing (no symmetry one to one, 9 squares beyond a tenth), so de
+    # Winter is its finder.
     127: Credit(
-        (KODAJ,),
-        (JOEGUN,),
-        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a fault-line DP",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s band packing, after an arrangement in the Kaggle compilations of "
+        "Alex Chilton and Asterios Panoras",
     ),
     # Mykhailo Polkovskyi's KKT refinement of PR 574's re-solve of issue 562's packing
     # (T-186's regularization of T-174), no square moved beyond 1e-3.

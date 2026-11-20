@@ -2315,6 +2315,49 @@ repositories:
       entry and the packet's README, and the Lean build's price on think-0h7r. The commit adds
       no bound, certificate or claim, nothing of it is retained, and the packet keeps its pin;
       T-298 stays at V0/C1. Nothing to import.
+  # Lane w6-dewinter-1118 of 18 November 2026 (think-zqot): three reads through the head,
+  # each holding for its bead what no packet of this change retains.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 838c5ea8736f64ab383ebd5457066b6b4bd0dda7
+    read_on: '2026-11-18'
+    bead: think-1tkk
+    note: >-
+      Read through 838c5ea (22:48:50Z push on 17 November), the head at 01:21Z on 18
+      November, six commits past the d02237a read. cc20a26 (22:26:24Z) adds above1000/, the
+      exact certificates of 2,837 counts from 1,036 to 9,928 that jlevy/squares#1019
+      (22:27:56Z) reports, with their generators, checkers, comparisons and examples, and
+      67fb815 (22:26:24Z) adds above1000/REGISTRATION.md; no packet retains above1000/, which
+      think-1tkk imports with the rows-above-1024 lane (think-llit) once #732's question on
+      the N = 10,000 cap is settled. The same commit's n127/ and lower_n108/ are retained by
+      the de-winter-s127-issue1017-2026-11-17 and de-winter-s108-lower-bound-2026-11-17
+      packets (the second in its own change, think-i5en, whose read is below), and 689bc79
+      and 35b576a, which first committed and then renamed the model of #1015's n127/, by the
+      de-winter-s127-issue1015-2026-11-17 packet at 35b576a.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 838c5ea8736f64ab383ebd5457066b6b4bd0dda7
+    read_on: '2026-11-18'
+    bead: think-gqzz
+    note: >-
+      Read through 838c5ea, as above. a1ba501 (22:48:48Z) adds n268/ and n270/, the exact
+      centre-direction certificates at 268 and 270 that jlevy/squares#1021 (22:49:55Z) and
+      #1022 (22:50:19Z) report, with their witnesses, checkers, figures and READMEs, and the
+      head, 838c5ea, adds their registration texts and checksums; no packet retains them yet,
+      and think-gqzz imports both after #1009's import, whose claims at 268 and 270 the
+      report order walks first. a1ba501's n127/, #1020's certificate, is retained by the
+      de-winter-s127-issue1020-2026-11-17 packet; 838c5ea's n127/REGISTRATION.md and
+      n127/SHA256SUMS restate it.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 838c5ea8736f64ab383ebd5457066b6b4bd0dda7
+    read_on: '2026-11-18'
+    bead: think-i5en
+    note: >-
+      Read through 838c5ea, as above. cc20a26 adds lower_n108/, the lower bound
+      s(109) >= s(108) >= 1700799526134255846599/159999384348528500000 that
+      jlevy/squares#1018 (22:27:34Z) reports: Hiroaki Hosono's T-216 measure rescaled by
+      1063/1062, 401 direction runs of this repository's sqverify-fast, a one-page proof and
+      the author's audit; 67fb815 adds its registration text and checksums. think-i5en
+      retains it in the de-winter-s108-lower-bound-2026-11-17 packet in its own change, which
+      removes this read.
   # Lane L187 of 16 November 2026 (think-0y9m).
   - url: https://github.com/JonathanGun/square-packing-upper-bounds
     read_through: 0aac839e551fd8cb7d7717c20494b095429131a1
