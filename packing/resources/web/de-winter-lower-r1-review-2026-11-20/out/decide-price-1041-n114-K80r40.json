@@ -1,0 +1,45 @@
+{
+ "program": "rr1_decide.py",
+ "label": "1041/n114",
+ "n": 114,
+ "L": "87/8",
+ "factor": "1",
+ "stretch": "1",
+ "threshold": "1",
+ "widen": 0,
+ "bins_requested": "80:40",
+ "partition_gaps": [],
+ "lattice_Q": 16000000000,
+ "lattice_rounded": false,
+ "G": 110,
+ "rectangles": 25184,
+ "verdict": "DECIDED",
+ "bins_decided": 1,
+ "bins_split": 0,
+ "nodes": 11135,
+ "c_seconds": 11.34,
+ "cpu_seconds": 12.657,
+ "wall_seconds": 73.328,
+ "results": [
+  {
+   "id": "K80r40",
+   "K": 80,
+   "r": 40,
+   "l": "6557/32000",
+   "h": "6723/32000",
+   "depth": 0,
+   "verdict": "ACCEPT",
+   "nodes": 11135,
+   "clips": 29575612,
+   "tree_depth": 20,
+   "seconds": 11.34,
+   "min_accepted": "18446828065925225348",
+   "polygon_vertices": 16,
+   "polygon_area": 0.9950757652714344,
+   "domain": [
+    87000000000,
+    163498322022
+   ]
+  }
+ ]
+}

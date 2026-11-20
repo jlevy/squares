@@ -1,0 +1,9 @@
+# Lane rR1-lower: amendments to the frozen checker (frozen/checker-frozen-digests.txt), in the order made.
+#
+# A1, 2026-11-20 about 18:41Z. The first premises run stopped at 1042/n161: its measure files carry a key
+# 'fixed_mass' that the source's documents do not describe and the frozen strict reader refused. Found in
+# 1042/n161 (k100, k300, k900) and 1042/n162 (k100, k300) only, each equal to the file's total_mass. The reader
+# (rr1_common.read_measure) now accepts the key only when it equals total_mass, and reports it. Nothing else
+# changed; the self-test was re-run on the amended code (PASS, 5,933 checks) before the premises run that is retained.
+# The amended file:
+c84207f1345306cffaf2b1f2060b25e0abc445ed4104ac4190c1f98c25c52954  programs/rr1_common.py

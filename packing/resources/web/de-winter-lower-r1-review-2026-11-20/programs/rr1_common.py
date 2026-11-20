@@ -51,9 +51,13 @@ def read_measure(path: Path) -> dict:
     raw = gzip.decompress(path.read_bytes())
     d = json.loads(raw)
     keys = set(d)
-    allowed = {"n", "L", "total_mass", "points", "rectangles", "proof_net", "B"}
+    allowed = {"n", "L", "total_mass", "points", "rectangles", "proof_net", "B", "fixed_mass"}
     if not keys <= allowed or not {"n", "L", "rectangles"} <= keys:
         raise ValueError(f"unexpected measure keys {sorted(keys)}")
+    # Amendment after the checker freeze: 1042/n161 and n162 carry `fixed_mass`, which the
+    # source's documents do not describe; it is accepted only when it equals `total_mass`.
+    if "fixed_mass" in d and ("total_mass" not in d or rat(d["fixed_mass"]) != rat(d["total_mass"])):
+        raise ValueError("fixed_mass present and not equal to total_mass")
     rows = []
     for r in d["rectangles"]:
         if set(r) != {"rectangle", "mass"} or len(r["rectangle"]) != 4:
@@ -70,6 +74,7 @@ def read_measure(path: Path) -> dict:
         "step": rat(net["step"]) if "step" in net else None,
         "last": int(net["last"]) if "last" in net else None,
         "net_keys": sorted(net),
+        "fixed_mass_equals_total": "fixed_mass" in d,
         "sha256_raw": hashlib.sha256(raw).hexdigest(),
     }
 
