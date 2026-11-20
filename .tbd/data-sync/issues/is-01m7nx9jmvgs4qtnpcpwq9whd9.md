@@ -5,7 +5,7 @@ title: "Import #1015, #1017: Joost de Winter's s(127) <= 11.800795682214 and the
 kind: task
 status: in_progress
 priority: 1
-version: 31
+version: 32
 delegate: c10-fix1024
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T23:25:53.691Z
-updated_at: 2026-11-20T11:10:01.513Z
+updated_at: 2026-11-20T11:37:28.925Z
 started_at: 2026-11-18T01:19:03.008Z
 ---
 
@@ -72,3 +72,7 @@ coord-intake-1117r: #1028 (R-127b) merged as 0f191a2d2 at 05:25Z. Its A2 fix add
 
 
 2026-11-20T10:50Z c1-127: merged main 935e79c36 (#1035), 06754afe6 (#1043; result-requests.yaml resolved additively) and a9e5261a2 (#1046, lane c4's page budgets: t-174 400,000, t-085/t-083 850,000); took main's site_urls.py, dropping this branch's interim t-174 raise; no-change record now 13 paths, re-measured vs a9e5261a2 (3 papers identical, explainer only 330 vs 327). Stamp re-run (no change, 2026-11-20), pin current (a4df5d259). Final head 0ef885959 pushed; local records 55/55, edit 71/71, touched tests 717 pass. f3c5e95b5 was green but for the t-085 budget, which #1046 fixed. Hosted CI on 0ef885959 pending at this note. Held for owner: T-330 S1 vs reviews' S2 (think-mu3t); evand KKT solve 7.06e-19 below T-330 (think-4z8z).
+
+
+
+2026-11-20T11:37Z c10-fix1024 (coordinator bold-ritchie-coord1120): senior review fixes pushed, head 2b6cb7ef1 on #1024: S1 T-328 rationale now a new arrangement relative to T-305 (S3 kept), PR row too; N2 #1015/#1017/#1020 request summaries name R-127b (#1028) review of record and R-127 (#1025), both mapped; S2 SCREEN_FINDINGS narrative gains the 20 Nov pass (127: 8/41 vs 90/92; 691/2,420, 3,163/7,793); N1 custody re-run; N4 PR footer fixed. stamp_landed --apply no change; release_pin -> 478618716 (2b6cb7ef1). Local: records 55/55, edit 71/71, house adoption + w6_1118 + release tests 145 pass. Hosted runs 44728861168 (Packing validation), 44728860912 (Certificate page) pending at handback; 44728851568 mergeability success.
