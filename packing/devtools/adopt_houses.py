@@ -3445,7 +3445,10 @@ RESULTS: dict[str, Prose] = {
             "issue asks."
         ),
         third_route=REVIEW_1021,
-        diversity="by a Claude agent, a system family that also produced the source’s files and checks",
+        diversity=(
+            "by a Claude agent, a system family that also produced the source’s files and "
+            "checks"
+        ),
         squares="a rational centre and the cosine and sine of its rotation",
     ),
     "T-332": Prose(
@@ -3470,7 +3473,10 @@ RESULTS: dict[str, Prose] = {
             "asks."
         ),
         third_route=REVIEW_1021,
-        diversity="by a Claude agent, a system family that also produced the source’s files and checks",
+        diversity=(
+            "by a Claude agent, a system family that also produced the source’s files and "
+            "checks"
+        ),
         squares="a rational centre and the cosine and sine of its rotation",
     ),
     "T-333": Prose(
@@ -3484,21 +3490,24 @@ RESULTS: dict[str, Prose] = {
         ),
         lineage=(
             "The issue says the search divided the box into diagonal slices and filled each "
-            "from a reflected or translated copy of a public packing, the outer slices from 372 "
-            "squares and the seven middle slices from 335, both from Asterios Panoras’s public "
-            "Kaggle compilation, then optimized every square and reflected part of one tilted "
-            "group across the diagonal. Against T-325’s packing, this case’s house best "
-            "packing before this adoption, it is a new arrangement: no symmetry pairs nearest "
-            "centres one to one, and the optimal assignment moves 127 squares beyond a tenth, "
-            "at most 1.074; the 18 November review finds it so against every packing the "
-            "record holds at 299. Each of its two tilted groups shares, for 50 to 53 squares, "
-            "the tilted band every house here has carried since Evan Daniel’s T-248, under a "
-            "rigid motion of its own; the record does not credit a resemblance. So Joost de "
-            "Winter is the packing’s finder, after the compilation’s packings, as the issue "
-            "asks."
+            "from a reflected or translated copy of a public packing, the outer slices from "
+            "372 squares and the seven middle slices from 335, both from Asterios Panoras’s "
+            "public Kaggle compilation, then optimized every square and reflected part of "
+            "one tilted group across the diagonal. Against T-325’s packing, this case’s "
+            "house best packing before this adoption, it is a new arrangement: no symmetry "
+            "pairs nearest centres one to one, and the optimal assignment moves 127 squares "
+            "beyond a tenth, at most 1.074; the 18 November review finds it so against every "
+            "packing the record holds at 299. Each of its two tilted groups shares, for 50 "
+            "to 53 squares, the tilted band every house here has carried since Evan Daniel’s "
+            "T-248, under a rigid motion of its own; the record does not credit a "
+            "resemblance. So Joost de Winter is the packing’s finder, after the "
+            "compilation’s packings, as the issue asks."
         ),
         third_route=REVIEW_1031,
-        diversity="by a Claude agent, a system family that also produced the source’s files and checks",
+        diversity=(
+            "by a Claude agent, a system family that also produced the source’s files and "
+            "checks"
+        ),
         squares="a rational centre and the cosine and sine of its rotation",
     ),
 }
