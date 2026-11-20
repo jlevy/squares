@@ -1,7 +1,8 @@
 # Regularization Runs After the Adoption at 127 of Issue 1020 (think-zqot)
 
-These are the strong generators’ runs on the witness that the pass of 18 November 2026
-wrote at n = 127 when it adopted Joost de Winter’s issue-1020 certificate, under
+These are the strong generators’ runs, on 18 November 2026, on the witness the records
+branch wrote at n = 127 when it adopted Joost de Winter’s issue-1020 certificate for the
+pass of 20 November 2026, the day its merge lands, under
 [the house rule](../../../campaign/result-import.md#the-house-rule), on the accepted
 verdicts of the two stage 4 reviews of 18 November 2026
 ([review-2026-11-18-de-winter-1015-1017-1020-r127b.md](../../../../docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020-r127b.md),
@@ -11,7 +12,7 @@ pull request 1025):
 
 | n | House | Replaces | Adopted |
 | ---: | --- | --- | --- |
-| 127 | T-330 | T-305 | 18 November 2026 |
+| 127 | T-330 | T-305 | 20 November 2026 |
 
 T-330 is the last of the evening’s three stages (#1015, #1017, #1020, registered as
 T-328 to T-330), each a new result under option D (think-b0w5). The new witness’s view

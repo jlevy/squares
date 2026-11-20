@@ -5547,7 +5547,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-18'
+  lastmod: '2026-11-20'
   status: live
 - path: cases/128.html
   canonical: cases/128.html
