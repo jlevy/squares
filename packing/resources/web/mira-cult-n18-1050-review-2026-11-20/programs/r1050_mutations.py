@@ -56,7 +56,7 @@ def m5(rows: list) -> None:
 
 MUTATIONS = [
     ("M1", "six-tilt18.json", m1, ["six_tilt18.py"]),
-    ("M2", "stabs18-endpoint-window.json", m2, ["check_stabs.py", "stabs18-endpoint-window.json"]),
+    ("M2", "{rack}", m2, ["check_stabs.py", "{rack}"]),
     ("M3", "n18-482-base.json", m3, ["verify_six_endpoint_classes.py", "--workers", "{w}"]),
     ("M4", "full-endpoint-mask-cases.json", m4, ["verify_full_endpoint_mask.py", "--workers", "{w}"]),
     ("M5", "second-endpoint-mask-cases.json", m5, ["verify_second_endpoint_mask.py", "--workers", "{w}"]),
@@ -72,7 +72,11 @@ def main() -> int:
     ap.add_argument("--python", default=sys.executable)
     a = ap.parse_args()
     results = []
+    # The rack is the folder's one stabs18-*.json file (found by glob, not named here).
+    rack = next(p.name for p in sorted(a.replay.glob("stabs18-*.json")))
     for name, target, fn, cmd in MUTATIONS:
+        target = target.replace("{rack}", rack)
+        cmd = [c.replace("{rack}", rack) for c in cmd]
         d = a.scratch / f"mutation-{name}"
         if d.exists():
             shutil.rmtree(d)
