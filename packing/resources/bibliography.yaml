@@ -5946,8 +5946,8 @@ sources:
       its registration: a rational centre-direction JSON (n299/n299_exact.json) and the same packing
       as a corner Witness/v2 (n299/n299_witness.yaml), diagonal slices of the 372- and 335-square packings
       in Asterios Panoras''s public Kaggle compilation (version 17), locally optimized, with part of one
-      tilted group reflected across the diagonal; no symmetry of the box pairs it with the house''s packing
-      (T-325). It says the search, optimization and rational certificate were produced with GPT-6.2 Sol
+      tilted group reflected across the diagonal, a new arrangement relative to the house''s packing
+      (T-325) and every other the record holds at 299. It says the search, optimization and rational certificate were produced with GPT-6.2 Sol
       (OpenAI) and the repository files, checks and figure with Claude (Anthropic), under his direction.
       No local or global optimality claim. Licensed MIT by LICENSE at the pin. Retained in
       web/de-winter-s299-upper-bound-2026-11-18/.'

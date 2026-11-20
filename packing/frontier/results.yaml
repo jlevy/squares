@@ -53135,13 +53135,25 @@ results:
       Measured here, no symmetry of the box pairs it one to one with
       T-325's packing by nearest centres, and the optimal assignment moves 127 squares beyond a
       tenth (largest 1.07); 18 of its 114 tilted squares pair with tilted squares of T-325 of
-      the same sign; against T-277's likewise. Whether a rigid motion off the box's symmetries
-      pairs part of it with T-325's packing is the stage 4 review's measurement, and the credit
-      relative to T-325 waits on it. It has 114 squares tilted, 2.18 to 27.89 degrees by
+      the same sign; against T-277's likewise. So it is a new arrangement relative to both, as
+      the stage 4 review measures it against every packing the record holds at 299. It has 114
+      squares tilted, 2.18 to 27.89 degrees by
       magnitude, 55 one way and 59 the other, one turned by 0.0065 degrees, and the other 184
       exactly upright.
 
-      Both maintained exact routes accept the certificate.
+      Both maintained exact routes accept the certificate. The blind stage 4 review of 18
+      November (R-1031), at the tier stage 4 names, accepts it with no blocking or major
+      finding, by a clean-room checker of its own deciding every square, wall and pair by two
+      exact methods: confirmed, independently re-implemented.
+
+      The review finds each of its two tilted groups coinciding, for 50 to 53 of its squares,
+      with the tilted band every house at 299 has carried since T-248 (Evan Daniel's #824),
+      under a rigid motion of its own, a quarter turn and a mirror of T-325's packing; the best
+      such motion lines up 210 squares in all, 157 of them upright, as an unrelated packing's
+      lattice does under many shifts, and leaves 89 without a partner, a whole tilted group
+      among them. The record does not infer lineage from resemblance, so this is a measurement
+      and a question for the author, not a credit; were the band credited, its first holder in
+      the record is T-248, not T-325.
 
       The issue says the author's two checkers, verify_exact.py (separating axes) and
       check_area.py (the area of each close pair's clipped intersection), both Fraction and the
@@ -53173,9 +53185,11 @@ results:
     significance:
       score: 3
       rationale: >-
-        A packing at 299 that no symmetry of the box pairs with T-325's or T-277's, 127 squares moved beyond a tenth under the best one, 7.37e-03 below the house, far above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-331 and T-332. A slice composition of published packings is no new technique, so not S4. No lower bound or optimum. A draft until the stage 4 review's measurement of a rigid motion against T-325's packing is mapped.
+        A new arrangement at 299 relative to every packing the record holds there, 127 squares moved beyond a tenth from T-325's under the best symmetry, 7.37e-03 below the house, the second-largest step the record holds at this count after T-248's, far above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-331 and T-332. A slice composition of published packings with a reflection is no new technique, so not S4. No lower bound or optimum.
       scored: '2026-11-20'
-      by: think-10mx Joost de Winter import (intake lane c2-imports), a draft for the stage 4 review
+      by: >-
+        the stage 4 review of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1031.md), confirming the registering
+        lane's draft (think-10mx)
     novelty: previously-published
     attribution:
       source_keys:
@@ -53184,6 +53198,23 @@ results:
     evidence:
     - E-de-winter-1031-certificate-report
     - E-de-winter-1031-exact-feasibility
+    - E-de-winter-1031-review-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1031.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review, lane r1031-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 299 of the certificate of issue 1031 and its twin, decided again by a
+        clean-room exact checker by two methods with the controls a plan frozen beforehand
+        states, custody in the source's history, the side and the issue's numbers, option D's
+        gain and contraction margin exactly against T-325, identity against every packing the
+        record holds at 299, the band the houses share, the reflection across the diagonal, and
+        the significance.
+      verdict: accepted
+      covers: [T-333]
     artifacts:
     - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/README.md
     - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/claims.json
@@ -53200,6 +53231,12 @@ results:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1031.md
+    - packing/resources/web/de-winter-1031-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/check.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/controls.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/identity.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/after-freeze/generic.json
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/sharp-controls.json
@@ -53235,11 +53272,29 @@ results:
       this certificate's own 6.4244e-67 (squares 137 and 175; measure/contraction-n299-own.json).
       The L-step scan (measure/l-step-scan.json), with this side stood in for 299's ceiling,
       finds main's consequences unchanged.
+
+      The blind stage 4 review of 18 November (R-1031, lane r1031-1118, PR #1036) accepts the
+      certificate with fourteen findings, none blocking or major: F3, two rules of its own
+      controls plan that assumed a gap this certificate does not have, is the review's own;
+      F7 is the band its two tilted groups share with every house since T-248; F9 notes that
+      the house the issue names, T-277, was replaced by T-325 while it was being written; the
+      rest are notes. Its contraction margin of T-325 and its gain agree with this lane's
+      exactly. After its findings were frozen it answered its pull request's review: the
+      novelty is previously-published, as for every result by others, and its frozen N5 line
+      saying otherwise stands corrected there; and the 210 squares one motion lines up with
+      T-325's are a generic lattice of upright squares and the band, not a continuation. Its
+      Questions 1 (the donor files), 2 (the band) and 3 (Nick Sarris's value) go to the author
+      with the reply. Its clean-room run on this certificate is
+      E-de-winter-1031-review-exact-feasibility. This lane read the review at 08:12Z on 20
+      November, after its own replay, controls, measurements, ledger and registration were
+      committed.
     next_rung: >-
-      The stage 4 exit: the blind review (R-1031, draft PR #1036) mapped, which also measures a
-      rigid motion against T-325's packing and so settles the credit, and the house rule's
-      adoption at 299, regularized in the same pull request; V4 and C4 need a second qualifying
-      adversarial review by a distinct reviewer and an explicit human oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 18 November, is
+      retained. It is the smallest validated side at 299, and the case adopted it there in
+      the pass of 20 November 2026 under the house rule, in place of T-325, with both strong
+      generators' regularization of the new house; T-325 keeps its certificate as history.
+      The review's questions for the author hold no rung.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

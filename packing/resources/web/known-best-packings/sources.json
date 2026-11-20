@@ -2075,19 +2075,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-298.svg"
     },
     {
-      "attribution": "Mishapolk, https://github.com/Mishapolk/square-packing-records/blob/b637e6cf59c23781c813e8442bfdccb5aa5f3954/certificates/0000-0999/n299.cert at b637e6cf59c23781c813e8442bfdccb5aa5f3954",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/497eb478b790175ea8690671b66785b70c97f9f2/n299/n299_exact.json at 497eb478b790175ea8690671b66785b70c97f9f2",
       "kind": "packet-derived-facts",
       "license_status": "MIT",
       "listed_n": [
         299
       ],
       "n": 299,
-      "path": "resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n299.cert",
+      "path": "resources/web/de-winter-s299-upper-bound-2026-11-18/source/n299/n299_exact.json.gz",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-17",
+      "retrieved": "2026-11-20",
       "source_n": 299,
-      "url": "https://github.com/Mishapolk/square-packing-records/blob/b637e6cf59c23781c813e8442bfdccb5aa5f3954/certificates/0000-0999/n299.cert"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/497eb478b790175ea8690671b66785b70c97f9f2/n299/n299_exact.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

@@ -14204,11 +14204,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-14 (T-299).
 - n: 299
-  source_id: mishapolk-issue1009-2026-11-16
-  value: '17.8010044342517669'
-  evidence: E-mishapolk-1009-certificate-report
+  source_id: de-winter-s299-upper-bound-2026-11-18
+  value: '17.7936369917430406'
+  evidence: E-de-winter-1031-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-325).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-333).
 - n: 301
   source_id: evand-square-packing-2026-10-05
   value: '17.846667192843489783121781262887'
@@ -15359,7 +15359,7 @@ superseded_reports:
 - n: 299
   source_id: evand-square-packing-2026-10-05
   value: '17.822875655532295295429036633375'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -16718,8 +16718,8 @@ superseded_reports:
   source_id: evand-n299-update-2026-10-29
   value: '17.8012385493885841'
   reason: The house from 2026-10-31 until 2026-11-04; its certificate stays retained and verified,
-    and T-325's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-333's exact side is smaller.
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
 - n: 260
   source_id: evand-issue845-2026-10-29
   value: '16.6339825021218840'
@@ -16784,8 +16784,8 @@ superseded_reports:
   source_id: ozden-s299-upper-bound-2026-11-03
   value: '17.8012385339790622'
   reason: The house from 2026-11-04 until 2026-11-09; its certificate stays retained and verified,
-    and T-325's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-333's exact side is smaller.
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
 - n: 303
   source_id: evand-issue914-2026-11-05
   value: '17.9018327508540488'
@@ -16994,8 +16994,8 @@ superseded_reports:
   source_id: ozden-s299-upper-bound-2026-11-09
   value: '17.8010044342552937'
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
-    and T-325's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-333's exact side is smaller.
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
 - n: 307
   source_id: ozden-s307-upper-bound-2026-11-09
   value: '17.9792309603873628'
@@ -17014,6 +17014,12 @@ superseded_reports:
   reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
     and T-332's exact side is smaller.
   superseded_by: de-winter-s270-upper-bound-2026-11-17
+- n: 299
+  source_id: mishapolk-issue1009-2026-11-16
+  value: '17.8010044342517669'
+  reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
+    and T-333's exact side is smaller.
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

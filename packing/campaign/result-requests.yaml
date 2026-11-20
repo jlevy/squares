@@ -37198,10 +37198,13 @@ issues:
       and retained, replayed and registered on 20 November in lane c2-imports (think-10mx) as
       T-333: both maintained exact routes accept the certificate and refuse its gross and sharp
       controls; the gain lies wholly outside T-325's contraction margin, so under option D
-      (think-b0w5) it is a new result; no symmetry of the box pairs it with T-325's packing.
-      Its blind stage 4 review (R-1031, draft PR #1036) is mapped when it merges, and it
-      measures a rigid motion against T-325's packing, which settles the credit. The house at
-      299 moves to it by the house rule once that review is mapped (think-78aj).
+      (think-b0w5) it is a new result. The blind stage 4 review of 18 November (R-1031, PR
+      #1036) accepts it with no blocking or major finding and finds it a new arrangement
+      relative to every packing the record holds at 299, its two tilted groups each sharing
+      the band of the houses since T-248, and its clean-room run is mapped, so T-333 is
+      confirmed, independently re-implemented, at V3/C3. The case adopted it as the house at
+      299 by the house rule in the pass of 20 November 2026 (think-78aj), regularized in the
+      same pull request. The review's Questions 1 to 3 go to the author with the reply.
     read_through: '2026-11-18T06:44:45Z'
     results:
     - key: n299-497eb47
@@ -37216,6 +37219,7 @@ issues:
       evidence:
       - E-de-winter-1031-certificate-report
       - E-de-winter-1031-exact-feasibility
+      - E-de-winter-1031-review-exact-feasibility
       validation:
       - think-10mx
     beads:

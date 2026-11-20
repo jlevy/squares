@@ -249,6 +249,16 @@ REVIEW_1021 = (
     "this count, stated beforehand, were each decided as stated"
 )
 
+#: What the stage 4 review of issue 1031 (lane r1031-1118, think-r3tn) decided on its
+#: certificate, the clause the case record writes after the maintained routes.
+REVIEW_1031 = (
+    ", and the 18 November review’s clean-room checker, frozen before any certificate was "
+    "read, decided it and its Witness/v2 twin again by separating axes in exact rationals "
+    "and by exact clipping in GMP rationals over every square, wall and pair; 34 of its 36 "
+    "controls, stated beforehand, were decided as stated, and two as the side rule gives, "
+    "against a rule its plan stated wrongly for this certificate"
+)
+
 #: Each adopted result, as its register entry and its review describe it.
 RESULTS: dict[str, Prose] = {
     "T-128": Prose(
@@ -3463,6 +3473,34 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family that also produced the source’s files and checks",
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-333": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1031](https://github.com/jlevy/squares/issues/1031)",
+        producer_route=False,
+        ai=(
+            "The issue and the source’s README say the search, optimization and rational "
+            "certificate were produced with GPT-6.2 Sol (OpenAI), and the repository files, "
+            "checks and figure with Claude (Anthropic), under Joost de Winter’s direction."
+        ),
+        lineage=(
+            "The issue says the search divided the box into diagonal slices and filled each "
+            "from a reflected or translated copy of a public packing, the outer slices from 372 "
+            "squares and the seven middle slices from 335, both from Asterios Panoras’s public "
+            "Kaggle compilation, then optimized every square and reflected part of one tilted "
+            "group across the diagonal. Against T-325’s packing, this case’s house best "
+            "packing before this adoption, it is a new arrangement: no symmetry pairs nearest "
+            "centres one to one, and the optimal assignment moves 127 squares beyond a tenth, "
+            "at most 1.074; the 18 November review finds it so against every packing the "
+            "record holds at 299. Each of its two tilted groups shares, for 50 to 53 squares, "
+            "the tilted band every house here has carried since Evan Daniel’s T-248, under a "
+            "rigid motion of its own; the record does not credit a resemblance. So Joost de "
+            "Winter is the packing’s finder, after the compilation’s packings, as the issue "
+            "asks."
+        ),
+        third_route=REVIEW_1031,
+        diversity="by a Claude agent, a system family that also produced the source’s files and checks",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
 }
 
 XU = "Ryan Xu"
@@ -4220,11 +4258,15 @@ CREDITS: dict[int, Credit] = {
     # to one by nearest centres only through the bottom row's slide (the 9 November
     # review's F6).
     # The pass of 18 November 2026 (think-i38n): Mykhailo Polkovskyi's issue 1009 (T-325).
+    # The pass of 20 November 2026 (think-78aj): Joost de Winter's issue 1031 (T-333),
+    # diagonal slices of the 372- and 335-square packings in Panoras's compilation; a new
+    # arrangement relative to every packing the record holds at 299 (the 18 November
+    # review), its two tilted groups each sharing the band of the houses since T-248.
     299: Credit(
-        (DANIEL,),
-        (OZDEN, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s re-solve of Doğa Özden’s second further arrangement of "
-        "Evan Daniel’s packing",
+        (DE_WINTER,),
+        (),
+        "Joost de Winter’s packing of diagonal slices of the 372- and 335-square packings "
+        "in Asterios Panoras’s public Kaggle compilation",
     ),
     # Evan Daniel's exact form (T-193, of T-186 by its item) of issue 583's continuation of
     # PingYou Ltd's arrangement, padded (T-186's regularization of T-181; RT-4).
