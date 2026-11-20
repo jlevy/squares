@@ -34620,10 +34620,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[GeiserX squares-in-squares 2026-11-18]'
     field: /credit
-  expected_text: Fernández Rubio
+  expected_text: Fernandez Rubio
   start: 0
   end: 15
-  label: Fernández Rubio
+  label: Fernandez Rubio
   role: credited-contributor
   disposition: unresolved
   evidence: []
