@@ -1150,6 +1150,7 @@ case or experiment separately.
 | [De Winter’s Certificates of s(268) and s(270), #1021 and #1022: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md) | dated review record | record | retained | — |
 | [De Winter’s Packing for $s(299) \le 17.793636991744$ (#1031): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1031.md) | dated review record | record | retained | — |
 | [Özden’s s(228) Certificate of #1038: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-20-ozden-1038.md) | dated review record | record | retained | — |
+| [de Winter’s Transcription of Kodaj’s s(109) Packing, #1012: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md) | dated review record | record | retained | — |
 | [wand125’s Linear Certificate for $s(122) \ge 563/50$: Mathematical Review](docs/project/reviews/review-2026-11-18-wand125-linear-n122.md) | dated review record | record | retained | — |
 | [The Construction of #992 by Miguel Lara: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-15-lara-992.md) | dated review record | record | retained | — |
 | [Proof Review: Khalili and Gharabaghi’s `s(k² − 5) = k` for Every `k ≥ 7`](docs/project/reviews/review-2026-11-14-khalili-gharabaghi-k2m5-973.md) | dated review record | record | retained | — |
