@@ -152,12 +152,29 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-085.html": (
-        800_000,
-        "Complete broad scope history and prepared exact bounds measure 694,374 bytes.",
+        850_000,
+        (
+            "Complete broad scope history and prepared exact bounds measure 694,374 bytes. "
+            "Hosted run 44700685021 measures 796,607 bytes on main 935e79c36 on 20 November "
+            "2026, 3,393 under the 800,000 ceiling; run 44705338373 measures 798,150 on "
+            "#1030's head (1,543 bytes) and run 44707408353 800,795 on #1024's, once T-328 to "
+            "T-330 are listed at 127 (4,188 bytes, about 1.4 KB a result), past it. The "
+            "ceiling moves to 850,000 as a measured choice: about 47,660 bytes stay once both "
+            "land, room for about 34 more listed results at 1.4 KB. Its timing was not "
+            "re-measured, and is owed under think-v4me."
+        ),
     ),
     "result/t-083.html": (
-        800_000,
-        "Complete broad scope history and prepared exact bounds measure 688,505 bytes.",
+        850_000,
+        (
+            "Complete broad scope history and prepared exact bounds measure 688,505 bytes. "
+            "Hosted run 44700685021 measures 794,733 bytes on main 935e79c36 on 20 November "
+            "2026, 5,267 under the 800,000 ceiling; run 44705338373 measures 796,276 on "
+            "#1030's head (1,543 bytes) and run 44707408353 798,921 on #1024's (4,188 bytes, "
+            "T-328 to T-330 listed at 127), about 800,460 once both land, past it. The "
+            "ceiling moves to 850,000 as a measured choice, room for about 35 more listed "
+            "results at 1.4 KB. Its timing was not re-measured, and is owed under think-v4me."
+        ),
     ),
     "result/t-058.html": (
         600_000,
