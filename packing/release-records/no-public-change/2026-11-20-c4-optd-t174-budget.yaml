@@ -1,0 +1,24 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/devtools/site_urls.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Lane c4-optd of the 20 November intake pass raises result/t-174.html's page budget in
+  site_urls.PAGE_BUDGET_EXCEPTIONS from 375,000 to 400,000 bytes, a measured choice with
+  its reason in the entry; no paper reads the budget. Against main 935e79c36:
+  devtools.compare_paper_renders --baseline origin/main with site_urls.py swapped in,
+  SQPACK_CHROMIUM /usr/bin/google-chrome: 55, 43, 43 and 43 files, byte-identical across its
+  three renders of each paper. No PDF was printed; each prints from that HTML. Every paper
+  keeps its version: v0.4.35, v0.1.11, v0.1.4 and v0.2.7.
