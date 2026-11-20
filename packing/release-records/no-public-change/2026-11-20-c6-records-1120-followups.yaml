@@ -1,0 +1,20 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane c6-records of the 20 November intake pass (think-tei5): the eight
+  position follow-ups posted on 20 November on #366, #914, #929, #931, #943, #944, #945 and
+  #985 are recorded under each issue's replies, each reporting only the result it names as
+  superseded, with no corrects; and de Winter's comment of 18 November on #1012 is read in:
+  it attaches the exact file at 109, whose import stays queued on think-wvr8, and withdraws
+  the pointer at 270, so n270-kaggle is no longer queued and #1012's block on the author
+  lifts. No result, rung, side, bound, house, mark or credit changes. Against origin/main
+  935e79c36 (#1035): devtools.compare_paper_renders rendered the methods survey into empty
+  site directories, its math pass in /usr/bin/google-chrome (SQPACK_CHROMIUM), twice from
+  this tree and once with that main's result-requests.yaml swapped in: 43 files each, all
+  byte-identical across the three. No PDF was printed; it prints from that HTML. The paper
+  keeps its version, v0.2.7.
