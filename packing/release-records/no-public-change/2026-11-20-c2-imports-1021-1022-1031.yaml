@@ -9,6 +9,7 @@ paths:
   - packing/campaign/result-requests.yaml
   - packing/devtools/adopt_houses.py
   - packing/devtools/default_drawings.py
+  - packing/devtools/site_urls.py
   - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/results.yaml
@@ -28,16 +29,17 @@ reason: >-
   Winter's issues 1021, 1022 and 1031 are registered as T-331 to T-333, their stage 4
   reviews (pull requests 1033 and 1036) mapped, and the three counts 268, 270 and 299 adopt
   them in the pass of 20 November, with their credits, the house writer's prose and sources, the gate's pinned translation-screen findings
-  (validate.SCREEN_FINDINGS) at the three new witnesses,
+  (validate.SCREEN_FINDINGS) at the three new witnesses, a measured page budget for
+  cases/268.html (site_urls),
   the importer's house readers, the views drawn at 270 and 299 and the settlement at 268,
   the composite figure, the bound citations at the three counts, the requests entries and
   the coverage text that follow. No paper prints those counts, these records or those
   cards. Against origin/main a9e5261a2: devtools.compare_paper_renders --baseline origin/main with
-  the ten paths above swapped in, SQPACK_CHROMIUM /usr/bin/google-chrome: the optimality
+  the eleven paths above swapped in, SQPACK_CHROMIUM /usr/bin/google-chrome: the optimality
   review, the threshold-bound review and the methods survey are byte-identical across the
   three renders, 43 files each. The explainer's 55 files are deterministic, and only its
   Markdown and HTML differ from the baseline; rendered again from this tree and with the
-  same ten paths swapped in, and diffed, the one difference in each is the register count
+  same eleven paths swapped in, and diffed, the one difference in each is the register count
   the explainer reads (registered_results, "one of N results the framework has registered
   so far"), 330 here and 327 on that main, at one line each. The novelty count is unchanged
   at 32 (T-331 to T-333 are previously-published), and the bound citation it reads is
