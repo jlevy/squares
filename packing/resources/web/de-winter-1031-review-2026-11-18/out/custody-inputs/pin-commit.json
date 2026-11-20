@@ -1,0 +1,76 @@
+{
+ "commit": {
+  "author": {
+   "date": "2026-11-18T06:34:51Z",
+   "email": "31475448+JoostdeWinter@users.noreply.github.com",
+   "name": "Joost de Winter"
+  },
+  "committer": {
+   "date": "2026-11-18T06:34:51Z",
+   "email": "31475448+JoostdeWinter@users.noreply.github.com",
+   "name": "Joost de Winter"
+  },
+  "message": "Add the packing for n = 299\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01STkyfRy3TJsNpb62UwXydy",
+  "tree": {
+   "sha": "8dd58b11534e60f7f3dbef76c62a4b81a13ddda6",
+   "url": "https://api.github.com/repos/JoostdeWinter/square-packing/git/trees/8dd58b11534e60f7f3dbef76c62a4b81a13ddda6"
+  }
+ },
+ "files": [
+  {
+   "additions": 2,
+   "deletions": 1,
+   "filename": "README.md",
+   "sha": "330f4e21f9f48dad993a9e1086f38fcb2c9e1ede",
+   "status": "modified"
+  },
+  {
+   "additions": 32,
+   "deletions": 0,
+   "filename": "n299/README.md",
+   "sha": "ea031348fae4e7cdb8ea7d6d2996336c6a3a7d4f",
+   "status": "added"
+  },
+  {
+   "additions": 91,
+   "deletions": 0,
+   "filename": "n299/check_area.py",
+   "sha": "87d48575a3cc103dc052188eb78762c18d5c9dc7",
+   "status": "added"
+  },
+  {
+   "additions": 1802,
+   "deletions": 0,
+   "filename": "n299/n299_exact.json",
+   "sha": "0a8e81206df2297ff757ce9276a07da585ea34b8",
+   "status": "added"
+  },
+  {
+   "additions": 0,
+   "deletions": 0,
+   "filename": "n299/n299_record.png",
+   "sha": "a8f06bd7a86a1ee0ed408f5fdeb233b0850022f1",
+   "status": "added"
+  },
+  {
+   "additions": 3012,
+   "deletions": 0,
+   "filename": "n299/n299_witness.yaml",
+   "sha": "7b6331f2f2978a85342deeafbe2829291fef5183",
+   "status": "added"
+  },
+  {
+   "additions": 68,
+   "deletions": 0,
+   "filename": "n299/verify_exact.py",
+   "sha": "e33049d69f19d2ad7970f3aa445f3d90d2efcf38",
+   "status": "added"
+  }
+ ],
+ "parents": [
+  {
+   "sha": "838c5ea8736f64ab383ebd5457066b6b4bd0dda7"
+  }
+ ],
+ "sha": "497eb478b790175ea8690671b66785b70c97f9f2"
+}

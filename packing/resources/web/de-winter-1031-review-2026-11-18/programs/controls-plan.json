@@ -1,0 +1,53 @@
+{
+ "plan": "Controls of the blind stage 4 review of jlevy/squares#1031 (lane r1031-1118), stated before any program of this lane read a certificate. Each outcome is a rule over the certificate's exact facts (its rows, side and corners, and method A's margins and clearances on the original), evaluated exactly by rv1031_controls.py and compared with what both methods decide on the changed packing; a decision in which the methods disagree fails its control. 'Contact' is a margin or clearance of exactly 0; 'past' is 10^-40 beyond it. A control that changes one square decides again the n - 1 pairs that hold it and checks that every other square reads back as the original's; a control that changes only the side decides no pair again. EPS = 10^-40.",
+ "controls": [
+  {"id": "C0", "change": "none: every margin recomputed from the form C corners by projecting the eight corners of each pair on its four edge directions, and every clearance from the form C corners in Fractions", "stated": "equal to method A on the form J poses at every pair and every wall"},
+  {"id": "R1", "change": "the last square deleted from the original bytes, the count as stated; each form apart", "stated": "the changed form's reader refuses: n stated, n - 1 listed"},
+  {"id": "R2", "change": "the side written as 2p/2q in both forms", "stated": "read; values equal to the original's; the side flagged not in lowest terms; accepted"},
+  {"id": "R3", "change": "form J: squares 1 and 2 exchanged; form C: the ids of squares 1 and 2 exchanged", "stated": "form J read, and the twin relation fails at exactly squares 1 and 2, so the check refuses; form C refused by its reader, ids out of order"},
+  {"id": "R4", "change": "the side as a 40-place decimal: in form J, in form C quoted, in form C unquoted", "stated": "the reader refuses each: not a scalar twice, a YAML float (not a string) once"},
+  {"id": "R5", "change": "a leading + on square 1's first coordinate in the original bytes; each form apart", "stated": "the changed form's reader refuses"},
+  {"id": "R6", "change": "a duplicate key: n repeated, in each form apart", "stated": "the changed form's reader refuses"},
+  {"id": "R7", "change": "form J: the first square that is not upright has 10^-40 added to its cos", "stated": "the reader refuses: not a unit vector"},
+  {"id": "G1", "change": "square n given square 1's pose and corners", "stated": "refused: the margins of the n - 1 pairs with square n exactly predicted ((1, n) at -1, each (k, n) at the original (1, k)); overlapping pairs exactly [(1, n)], with B area 1"},
+  {"id": "G2", "change": "square 1 translated by (S, 0)", "stated": "refused: square 1's clearances exactly (L + S, B, R - S, T); its area inside 0; no pair with it overlaps; other squares unchanged"},
+  {"id": "G3", "change": "in form C, square 1's first corner moved by 10^-40 in x", "stated": "refused: square 1, and only square 1, not a unit square by B; no pose from its corners; the twin relation fails at square 1 only"},
+  {"id": "G4", "change": "in form C, every square listed in reverse", "stated": "the original's verdict with A on the poses taken from the changed corners and B on the changed corners; margins and clearances identical; every sense clockwise"},
+  {"id": "G5", "change": "in form C, every square listed from its second corner", "stated": "the same, senses unchanged, every twin offset moved by one"},
+  {"id": "G6", "change": "every square transposed: (x, y) -> (y, x), (cos, sin) -> (sin, cos), corners likewise", "stated": "margins identical; clearances (L, B, R, T) -> (B, L, T, R); the original's verdict"},
+  {"id": "G7", "change": "a quarter turn about the box centre: (x, y) -> (S - y, x), (cos, sin) -> (-sin, cos)", "stated": "margins identical; clearances (L, B, R, T) -> (T, L, B, R); the original's verdict"},
+  {"id": "G8", "change": "mirrored: x -> S - x, (cos, sin) -> (-cos, sin)", "stated": "margins identical; clearances (L, B, R, T) -> (R, B, L, T); the original's verdict"},
+  {"id": "S1a", "change": "the side lowered by delta = 10^-40", "stated": "the side rule: right and top clearances lowered by exactly delta, left and bottom unchanged, every pose and corner the original's; crossings exactly where an original right or top clearance is below delta, contacts exactly where it equals delta; accepted exactly when there is no crossing"},
+  {"id": "S1b", "change": "the side lowered by 1/q, q its denominator", "stated": "the side rule with delta = 1/q"},
+  {"id": "S1c", "change": "the side lowered by W, the least right-or-top clearance (W may be 0)", "stated": "the side rule with delta = W: accepted, contacts exactly at the squares that attain W"},
+  {"id": "S1d", "change": "the side lowered by W + 10^-40", "stated": "the side rule: refused, exactly the squares that attain W crossing"},
+  {"id": "S1e", "change": "the side set to the claim C", "stated": "the side rule with delta = S - C"},
+  {"id": "S1f", "change": "the side set to the claim less 10^-12", "stated": "the side rule with delta = S - C + 10^-12"},
+  {"id": "E1c", "change": "every square translated by minus the least left and bottom clearances, and the side set to the extent X, the larger of the packing's width and height", "stated": "the extent rule: every clearance predicted, margins identical; accepted; left, bottom and the wall of each larger extent touched exactly by the squares that attain the least clearances"},
+  {"id": "E1p", "change": "the same with the side X - 10^-40", "stated": "refused; exactly the squares at the wall of each larger extent cross"},
+  {"id": "K1c", "change": "every centre and the side multiplied by 1 + 10^-40 (a dilation about the origin)", "stated": "accepted, with every margin exactly (1 + EPS) M - H, every clearance predicted, and no contact anywhere"},
+  {"id": "K1p", "change": "every centre contracted towards the box centre by 1 - 10^-40, the side kept", "stated": "overlaps exactly the pairs with (1 - EPS) M < H; every clearance exactly L + EPS (S/2 - x) and so on; no crossing"},
+  {"id": "P1c", "change": "the pair of least positive margin that is eligible closed along its line of centres to exact contact, its second square moved (or its first, or the next pair, when not eligible: eligible means no other pair of the moved square changes class and no wall of it is crossed, at contact and 10^-40 past)", "stated": "that pair's margin exactly 0, touching by A and B; the moved square's other pairs keep their classes; other squares unchanged; accepted"},
+  {"id": "P1p", "change": "the same, 10^-40 past", "stated": "refused: of the moved square's pairs exactly that pair overlaps, margin exactly -10^-40"},
+  {"id": "P0p", "change": "the first pair in contact (if any), its second square moved 10^-40 past contact along the line of centres", "stated": "refused: that pair's margin exactly -10^-40; the moved square's overlapping pairs exactly those method A's rule gives, that pair among them; B agrees at every pair of the moved square"},
+  {"id": "W1c", "change": "at each wall, the eligible square of least positive clearance moved to it (eligible: no pair of it changes class, at the wall and 10^-40 past)", "stated": "that clearance exactly 0, the opposite one raised by the move, all else unchanged; accepted"},
+  {"id": "W1p", "change": "the same, 10^-40 further", "stated": "refused: the only crossing that square at that wall, by exactly -10^-40"},
+  {"id": "W0p", "change": "at each wall, the first eligible square in contact with it (if any) pushed 10^-40 past it (eligible: no pair of it becomes an overlap)", "stated": "refused: the only crossing that square at that wall, by exactly -10^-40"},
+  {"id": "WALL", "change": "every square moved to its nearest wall and 10^-40 past (square-level)", "stated": "A's clearance exactly 0 and -10^-40; B's wall term the same, touching and crossing; B's area inside 1 and below 1"},
+  {"id": "PALL", "change": "every pair closed along its line of centres to contact and 10^-40 past (pair-level)", "stated": "A's margin exactly 0 and -10^-40; the corner projections' exactly 0 and -10^-40; B touching and overlapping, both orders agreeing"},
+  {"id": "X1", "change": "form J with every sin replaced by -sin (the edge direction read the other way), against the original form C; and the changed packing decided", "stated": "the twin relation fails at exactly the squares with cos*sin != 0 and |cos| != |sin|; on the changed packing the two methods agree at every pair and wall"},
+  {"id": "T1", "change": "the contraction program on the original and on the K1c dilation", "stated": "on the original: g* = 1 exactly when some pair is in contact, and then the contraction margin is S - X; on the dilation: g* = 1/(1 + EPS) exactly when the original has a pair in contact, and the contraction margin is (1 + EPS) S - X; the program's own verification passes on both"}
+ ],
+ "priors": [
+  "the certificate is accepted in both forms, the twin relation holding at every square",
+  "the claim 17.793636991744 is the 12-place ceiling of the file's side",
+  "the packing has exact contacts, between pairs and at walls (square 299's row is (1/2, 1/2, 1, 0))",
+  "S1a refuses if some square touches the right or the top wall",
+  "X1's changed packing is refused"
+ ],
+ "run_plan": {
+  "order": ["rv1031_selftest.py", "rv1031_check.py", "rv1031_controls.py", "rv1031_contract.py on #1031", "rv1031_contract.py on T-325's own certificate (form C, with form P as its twin)"],
+  "pricing": "a synthetic packing of 299 squares with 84-digit centre denominators: method A 1.1 CPU-s, method B 2.1 CPU-s, the contraction program 1.5 CPU-s for every pair; the corner projections 0.14 ms a pair. The certificate's tilted rows have about twice those lengths, so the check is priced at under 2 CPU-minutes, the controls (about 12 whole-packing decisions, 89,102 pair closings, 598 wall moves) at under 1 CPU-hour, each contraction run at under 5 CPU-minutes. Any single run priced above 4 CPU-hours, or a total above 10, stops for the coordinator.",
+  "limits": "nice -n 19, at most two processes, python -I -B under the project interpreter"
+ }
+}

@@ -1,0 +1,31 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "de-winter-square-packing-211-2026-11-18",
+  "source_url": "https://github.com/JoostdeWinter/square-packing-211",
+  "source_ref": "main",
+  "source_commit": "43e15330bab7dd11588067167a2dd370137ef2b7",
+  "retrieved_at_utc": "2026-11-18T08:02:46Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing-211, fetched at 08:02:46Z on 18 November 2026 for think-a88h (the follow-up of jlevy/squares#1008), when main, its only branch, was at the pin. The pin is 43e15330 (committed 2026-11-18T05:36:16Z, 'Name the construction and the sources of the 211 packing in the README', the author's message), the revision the author's comment on #1008 of 06:45:20Z (issuecomment-6971284605) names. Its parent is 702df9bb of 16 September 2026, the revision T-057 cites, which the de-winter-square-packing-211-2026-09-16 packet records. The commit changes README.md only, from 84 to 1,413 bytes; n211__record.json and n211__record.svg have the same Git blobs and SHA-256 as at 702df9bb. The scope is the whole tree, three files.",
+  "archived_dir": "source",
+  "license": "None published: the tree has no LICENSE and README.md states no reuse terms. Joost de Winter submitted this revision to the repository on jlevy/squares#1008, naming it in his comment of 18 November 2026 (issuecomment-6971284605) in answer to the record's question, and the owner ruled on 24 October 2026 that a source its author submitted carries a presumption of permission to retain and import it (think-cnn7). The presumption covers README.md, the author's own statement of his sources; the licence follow-up is think-zx9y, which does not hold this import. The packing itself is not retained here: the 2026-09-16 packet keeps it as derived facts.",
+  "claims": [
+    "README.md says the 211-square packing combines a 64-square rectangular component from Arslanov, Mustafin and Shangitbayev (2021), a computationally found 30-square component, and two aligned grids containing 99 and 18 squares; that the numerical search and refinement were performed with GPT-6 Astra under the direction of Joost de Winter; and that earlier solutions and optimization scripts supplied to the model had been developed with Claude Opus and previous GPT models.",
+    "Its Sources section names M. Z. Arslanov, S. A. Mustafin and Z. K. Shangitbayev (2021), 'Improved packings of n(n - 1) unit squares in a square', The Electronic Journal of Combinatorics 28(4), P4.22, doi:10.37236/8586, as the source of the construction with tilted components combined with grids and of the 64-square rectangular component; Erich Friedman's collection of square packings (Packing Center, 'Squares in Squares') and his survey, E. Friedman (2009), 'Packing unit squares in squares: A survey and new results', The Electronic Journal of Combinatorics, Dynamic Survey DS7, doi:10.37236/28, as the source of the known packings used as starting points and for comparison; and David Ellsworth's records of square packings, used as starting points and for comparison.",
+    "Its Files section lists n211__record.json, the coordinates of the packing, and n211__record.svg, its figure: the same files, byte for byte, as at 702df9bb, which T-057 registers at side 14.99796070496771500150."
+  ],
+  "scope": [
+    "README.md",
+    "n211__record.json",
+    "n211__record.svg"
+  ],
+  "pinned_only": [
+    {
+      "match": "n211__record.json",
+      "reason": "The packing, unchanged since 702df9bb (the same SHA-256 the de-winter-square-packing-211-2026-09-16 packet pins), which that packet keeps as derived facts only because the repository carries no licence; pinned by digest only."
+    },
+    {
+      "match": "n211__record.svg",
+      "reason": "A figure of the packing, unchanged since 702df9bb, which decides nothing; pinned by digest only."
+    }
+  ]
+}

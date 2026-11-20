@@ -1697,7 +1697,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[evand exact optima 2026-10-05]'
     field: /credit
-  expected_text: Daniel after Couzo, de Winter, Ellsworth, Levy
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 0
   end: 6
   label: Daniel
@@ -1710,7 +1711,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[evand exact optima 2026-10-05]'
     field: /credit
-  expected_text: Daniel after Couzo, de Winter, Ellsworth, Levy
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 13
   end: 18
   label: Couzo
@@ -1723,7 +1725,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[evand exact optima 2026-10-05]'
     field: /credit
-  expected_text: Daniel after Couzo, de Winter, Ellsworth, Levy
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 20
   end: 29
   label: de Winter
@@ -1739,9 +1742,82 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[evand exact optima 2026-10-05]'
     field: /credit
-  expected_text: Daniel after Couzo, de Winter, Ellsworth, Levy
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 31
-  end: 40
+  end: 39
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[evand exact optima 2026-10-05]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 41
+  end: 49
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[evand exact optima 2026-10-05]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 51
+  end: 63
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[evand exact optima 2026-10-05]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 65
+  end: 73
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: erich-friedman
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[evand exact optima 2026-10-05]'
+    field: /credit
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 75
+  end: 84
   label: Ellsworth
   role: prerequisite
   disposition: resolved
@@ -1753,9 +1829,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[evand exact optima 2026-10-05]'
     field: /credit
-  expected_text: Daniel after Couzo, de Winter, Ellsworth, Levy
-  start: 42
-  end: 46
+  expected_text: Daniel after Couzo, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 86
+  end: 90
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -11397,8 +11474,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
-    Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
   start: 0
   end: 5
   label: Couzo
@@ -11416,8 +11493,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
-    Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
   start: 12
   end: 18
   label: Daniel
@@ -11435,8 +11512,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
-    Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
   start: 20
   end: 28
   label: Ostashev
@@ -11452,8 +11529,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
-    Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
   start: 30
   end: 39
   label: de Winter
@@ -11472,10 +11549,82 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
-    Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
   start: 41
-  end: 51
+  end: 49
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
+  start: 51
+  end: 59
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
+  start: 61
+  end: 73
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
+  start: 75
+  end: 83
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: erich-friedman
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
+  start: 85
+  end: 95
   label: BuddenPing
   role: prerequisite
   disposition: unresolved
@@ -11487,10 +11636,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
-    Levy
-  start: 53
-  end: 57
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
+  start: 97
+  end: 101
   label: Fang
   role: prerequisite
   disposition: resolved
@@ -11504,10 +11653,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
-    Levy
-  start: 59
-  end: 68
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
+  start: 103
+  end: 112
   label: Ellsworth
   role: prerequisite
   disposition: resolved
@@ -11522,10 +11671,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, BuddenPing, Fang, Ellsworth,
-    Levy
-  start: 70
-  end: 74
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, BuddenPing, Fang, Ellsworth, Levy
+  start: 114
+  end: 118
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -12100,7 +12249,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
   start: 0
   end: 5
   label: Couzo
@@ -12118,7 +12268,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
   start: 12
   end: 18
   label: Daniel
@@ -12136,7 +12287,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
   start: 20
   end: 28
   label: Ostashev
@@ -12152,7 +12304,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
   start: 30
   end: 39
   label: de Winter
@@ -12171,9 +12324,82 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
   start: 41
-  end: 45
+  end: 49
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue-583 certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
+  start: 51
+  end: 59
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue-583 certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
+  start: 61
+  end: 73
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue-583 certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
+  start: 75
+  end: 83
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: erich-friedman
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo issue-583 certificates 2026-10-13]'
+    field: /credit
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
+  start: 85
+  end: 89
   label: Fang
   role: prerequisite
   disposition: resolved
@@ -12187,9 +12413,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
-  start: 47
-  end: 56
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
+  start: 91
+  end: 100
   label: Ellsworth
   role: prerequisite
   disposition: resolved
@@ -12205,9 +12432,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo issue-583 certificates 2026-10-13]'
     field: /credit
-  expected_text: Couzo after Daniel, Ostashev, de Winter, Fang, Ellsworth, Levy
-  start: 58
-  end: 62
+  expected_text: Couzo after Daniel, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Fang, Ellsworth, Levy
+  start: 102
+  end: 106
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -12569,7 +12797,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
     field: /credit
-  expected_text: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
   start: 0
   end: 8
   label: Ostashev
@@ -12585,7 +12814,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
     field: /credit
-  expected_text: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
   start: 15
   end: 23
   label: Nakajima
@@ -12594,14 +12824,15 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
+  contributor_id: yohei-nakajima
   note: Reviewed 2026-10-21 against the named profile sources; the printed source
     text and credit role are retained.
-  contributor_id: yohei-nakajima
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
     field: /credit
-  expected_text: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
   start: 25
   end: 31
   label: Daniel
@@ -12619,7 +12850,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
     field: /credit
-  expected_text: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
   start: 33
   end: 42
   label: de Winter
@@ -12635,9 +12867,100 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
     field: /credit
-  expected_text: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
   start: 44
-  end: 49
+  end: 52
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev merged bands 2026-10-13]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
+  start: 54
+  end: 62
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev merged bands 2026-10-13]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
+  start: 64
+  end: 76
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev merged bands 2026-10-13]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
+  start: 78
+  end: 86
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: erich-friedman
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev merged bands 2026-10-13]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
+  start: 88
+  end: 97
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Ostashev merged bands 2026-10-13]'
+    field: /credit
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
+  start: 99
+  end: 104
   label: Couzo
   role: prerequisite
   disposition: resolved
@@ -12653,9 +12976,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
     field: /credit
-  expected_text: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
-  start: 51
-  end: 55
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
+  start: 106
+  end: 110
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -12671,9 +12995,10 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev merged bands 2026-10-13]'
     field: /credit
-  expected_text: Ostashev after Nakajima, Daniel, de Winter, Couzo, Levy, Xu
-  start: 57
-  end: 59
+  expected_text: Ostashev after Nakajima, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Couzo, Levy, Xu
+  start: 112
+  end: 114
   label: Xu
   role: prerequisite
   disposition: resolved
@@ -13353,7 +13678,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 0
   end: 5
   label: Couzo
@@ -13371,7 +13697,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 12
   end: 20
   label: Ostashev
@@ -13387,7 +13714,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 22
   end: 28
   label: Daniel
@@ -13405,7 +13733,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 30
   end: 39
   label: de Winter
@@ -13424,9 +13753,100 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo verified bounds 2026-10-14]'
     field: /credit
-  expected_text: Couzo after Ostashev, Daniel, de Winter, Levy
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 41
-  end: 45
+  end: 49
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 51
+  end: 59
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 61
+  end: 73
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 75
+  end: 83
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: erich-friedman
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 85
+  end: 94
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Couzo verified bounds 2026-10-14]'
+    field: /credit
+  expected_text: Couzo after Ostashev, Daniel, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 96
+  end: 100
   label: Levy
   role: prerequisite
   disposition: resolved
@@ -28645,7 +29065,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /credit
-  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 0
   end: 6
   label: Daniel
@@ -28654,15 +29075,16 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
+  contributor_id: evan-daniel
   note: 'Reviewed packing/resources/bibliography.yaml [[Daniel n182 2026-10-25]] /credit
     span 0:6: Evan Daniel''s new packing at 182, in the repository whose retained
     licence names him. Keep finder, improver and solver roles distinct.'
-  contributor_id: evan-daniel
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /credit
-  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 13
   end: 18
   label: Couzo
@@ -28670,17 +29092,18 @@ occurrences:
   disposition: resolved
   evidence:
   - primary-byline
+  contributor_id: francisco-couzo
   note: Reviewed source credit matches the evidenced person and printed name; the
     register's s(211) packing that issue 806 names as its start is T-188, Francisco
     Couzo's arrangement of Daniil Ostashev's design (T-175) at franciscouzo/square-packing
     487b058, which the issue's lineage table names beside Ostashev, and the certificate
     follows T-188 where the two differ (M-1 of the 25 October review).
-  contributor_id: francisco-couzo
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /credit
-  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 20
   end: 28
   label: Ostashev
@@ -28689,16 +29112,17 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
+  contributor_id: daniil-ostashev
   note: Reviewed source credit matches the evidenced person and printed name; issue
     806 names the register's s(211) packing as the start its L-cut search began from
     and asks that Daniil Ostashev be credited; that packing, T-188, is Francisco Couzo's
     arrangement of Ostashev's design (T-175), and the original credit role is retained.
-  contributor_id: daniil-ostashev
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /credit
-  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 30
   end: 39
   label: de Winter
@@ -28717,21 +29141,112 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel n182 2026-10-25]'
     field: /credit
-  expected_text: Daniel after Couzo, Ostashev, de Winter, Levy
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
   start: 41
-  end: 45
+  end: 49
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 51
+  end: 59
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 61
+  end: 73
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 75
+  end: 83
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: erich-friedman
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 85
+  end: 94
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Daniel n182 2026-10-25]'
+    field: /credit
+  expected_text: Daniel after Couzo, Ostashev, de Winter, Arslanov, Mustafin, Shangitbayev,
+    Friedman, Ellsworth, Levy
+  start: 96
+  end: 100
   label: Levy
   role: prerequisite
   disposition: resolved
   evidence:
   - primary-byline
   - announcement-account
+  contributor_id: joshua-levy
   note: Reviewed packing/resources/bibliography.yaml [[Daniel n182 2026-10-25]] /credit
     span 41:45. The issue names this project's register as where its start came from;
     the first-party jlevy/squares record is the Joshua Levy identity established by
     LICENSE and the retained ojoshe receipt, and project credit does not imply sole
     personal authorship.
-  contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Kim exact forms 2026-10-25]'
@@ -29576,8 +30091,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk refinements 2026-10-23]'
     field: /credit
-  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
-    Levy
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
   start: 0
   end: 10
   label: Polkovskyi
@@ -29586,17 +30101,17 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
+  contributor_id: mykhailo-polkovskyi
   note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
     /credit span 0:10: the 23 October Mishapolk/square-packing-records certificates,
     which the source and its report credit to this author. Keep finder, improver and
     solver roles distinct.'
-  contributor_id: mykhailo-polkovskyi
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk refinements 2026-10-23]'
     field: /credit
-  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
-    Levy
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
   start: 17
   end: 23
   label: Daniel
@@ -29605,17 +30120,17 @@ occurrences:
   evidence:
   - repository-license
   - bibliography
+  contributor_id: evan-daniel
   note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
     /credit span 17:23: a prerequisite credit of the 23 October Mishapolk/square-packing-records
     certificates, as the source or its report names it; the original credit role is
     retained. Keep finder, improver and solver roles distinct.'
-  contributor_id: evan-daniel
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk refinements 2026-10-23]'
     field: /credit
-  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
-    Levy
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
   start: 25
   end: 30
   label: Couzo
@@ -29624,17 +30139,17 @@ occurrences:
   evidence:
   - primary-byline
   - bibliography
+  contributor_id: francisco-couzo
   note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
     /credit span 25:30: a prerequisite credit of the 23 October Mishapolk/square-packing-records
     certificates, as the source or its report names it; the original credit role is
     retained. Keep finder, improver and solver roles distinct.'
-  contributor_id: francisco-couzo
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk refinements 2026-10-23]'
     field: /credit
-  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
-    Levy
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
   start: 32
   end: 40
   label: Ostashev
@@ -29643,17 +30158,17 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
+  contributor_id: daniil-ostashev
   note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
     /credit span 32:40: a prerequisite credit of the 23 October Mishapolk/square-packing-records
     certificates, as the source or its report names it; the original credit role is
     retained. Keep finder, improver and solver roles distinct.'
-  contributor_id: daniil-ostashev
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk refinements 2026-10-23]'
     field: /credit
-  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
-    Levy
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
   start: 42
   end: 51
   label: de Winter
@@ -29662,49 +30177,139 @@ occurrences:
   evidence:
   - source-intake
   - bibliography
+  contributor_id: joost-de-winter
   note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
     /credit span 42:51: a prerequisite credit of the 23 October Mishapolk/square-packing-records
     certificates, as the source or its report names it; the original credit role is
     retained. Keep finder, improver and solver roles distinct.'
-  contributor_id: joost-de-winter
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk refinements 2026-10-23]'
     field: /credit
-  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
-    Levy
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
   start: 53
-  end: 68
+  end: 61
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
+  start: 63
+  end: 71
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
+  start: 73
+  end: 85
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
+  start: 87
+  end: 95
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: erich-friedman
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
+  start: 97
+  end: 106
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Mishapolk refinements 2026-10-23]'
+    field: /credit
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
+  start: 108
+  end: 123
   label: Chaoweeraprasit
   role: prerequisite
   disposition: resolved
   evidence:
   - source-intake
   - bibliography
+  contributor_id: nate-chaoweeraprasit
   note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
     /credit span 53:68: a prerequisite credit of the 23 October Mishapolk/square-packing-records
     certificates, as the source or its report names it; the original credit role is
     retained. Keep finder, improver and solver roles distinct.'
-  contributor_id: nate-chaoweeraprasit
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk refinements 2026-10-23]'
     field: /credit
-  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Chaoweeraprasit,
-    Levy
-  start: 70
-  end: 74
+  expected_text: Polkovskyi after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Chaoweeraprasit, Levy
+  start: 125
+  end: 129
   label: Levy
   role: prerequisite
   disposition: resolved
   evidence:
   - primary-byline
   - announcement-account
+  contributor_id: joshua-levy
   note: 'Reviewed packing/resources/bibliography.yaml [[Mishapolk refinements 2026-10-23]]
     /credit span 70:74: a prerequisite credit of the 23 October Mishapolk/square-packing-records
     certificates, as the source or its report names it; the original credit role is
     retained. Keep finder, improver and solver roles distinct.'
-  contributor_id: joshua-levy
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n130 2026-10-27]'
@@ -31699,7 +32304,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
   start: 0
   end: 5
   label: Ozden
@@ -31711,7 +32317,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
   start: 12
   end: 18
   label: Daniel
@@ -31723,7 +32330,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
   start: 20
   end: 25
   label: Couzo
@@ -31735,7 +32343,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
   start: 27
   end: 35
   label: Ostashev
@@ -31747,7 +32356,8 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
   start: 37
   end: 46
   label: de Winter
@@ -31759,9 +32369,75 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s156 upper bound 2026-11-10]'
     field: /credit
-  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Levy
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
   start: 48
-  end: 52
+  end: 56
+  label: Arslanov
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s156 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
+  start: 58
+  end: 66
+  label: Mustafin
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s156 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
+  start: 68
+  end: 80
+  label: Shangitbayev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s156 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
+  start: 82
+  end: 90
+  label: Friedman
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s156 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
+  start: 92
+  end: 101
+  label: Ellsworth
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s156 upper bound 2026-11-10]'
+    field: /credit
+  expected_text: Ozden after Daniel, Couzo, Ostashev, de Winter, Arslanov, Mustafin,
+    Shangitbayev, Friedman, Ellsworth, Levy
+  start: 103
+  end: 107
   label: Levy
   role: prerequisite
   disposition: unresolved
@@ -33691,6 +34367,123 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n211 2026-11-18]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed author byline matches the retained source intake and bibliography
+    identity.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n211 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: Reviewed source credit matches the evidenced person and printed name; the
+    original credit role is retained.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n211 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth
+  start: 16
+  end: 24
+  label: Arslanov
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: mz-arslanov
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n211 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth
+  start: 26
+  end: 34
+  label: Mustafin
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: sa-mustafin
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n211 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth
+  start: 36
+  end: 48
+  label: Shangitbayev
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - paper-byline
+  - bibliography
+  contributor_id: zk-shangitbayev
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n211 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth
+  start: 50
+  end: 58
+  label: Friedman
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - primary-byline
+  - bibliography
+  contributor_id: erich-friedman
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n211 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Arslanov, Mustafin, Shangitbayev, Friedman, Ellsworth
+  start: 60
+  end: 69
+  label: Ellsworth
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - bibliography
+  - catalogue-byline
+  contributor_id: david-ellsworth
+  note: 'Reviewed 2026-11-18 (think-a88h): a source of T-057 that Joost de Winter''s
+    README names at 43e15330, carried by attribution.md''s chain rule; matched against
+    the named profile sources, and the printed source text and credit role are retained.'
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s108 lower bound 2026-11-17]'

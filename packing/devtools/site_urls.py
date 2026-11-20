@@ -216,8 +216,19 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        1_800_000,
+        1_900_000,
         (
+            "On 20 November 2026 #1035 carries T-057's sources down the chain at 211, 182 "
+            "and 156 and registers no result; its credit lines add 3,441 bytes to the "
+            "327-result page, which measures 1,716,490 source bytes against main's "
+            "1,713,049. At a 90th-percentile row of 4,512 bytes the room through 346 results "
+            "projects to 1,802,218 bytes in hosted run 44271657178, past the 1,800,000 "
+            "ceiling. The ceiling moves to 1,900,000, the 100,000-byte step that think-k8vt "
+            "sets for intake, which leaves 183,510 bytes, 40 rows at that row cost with "
+            "3,030 bytes to spare, so the room runs through 367 results and the imports of "
+            "the following days fit without another raise. The 2,000,000-byte hard limit is "
+            "then about 62 rows away. The page's timing was not re-measured, and the "
+            "lightening stays think-v1qe's. "
             "On 18 November 2026 the 326-result page measures 1,706,120 bytes in hosted run "
             "44221608402, past the 1,700,000 ceiling, once #1009's import registers T-314 to "
             "T-326 on top of T-310 to T-313; the room the 12 November note expected through "
