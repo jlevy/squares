@@ -6795,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-18'
+  lastmod: '2026-11-20'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -6819,7 +6819,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-18'
+  lastmod: '2026-11-20'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -26037,6 +26037,7 @@ urls:
     evidence:
     - E-de-winter-1031-certificate-report
     - E-de-winter-1031-exact-feasibility
+    - E-de-winter-1031-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/README.md
     - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/claims.json
@@ -26053,6 +26054,12 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - packing/devtools/contraction_margin.py
     - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1031.md
+    - packing/resources/web/de-winter-1031-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/check.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/controls.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/identity.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/after-freeze/generic.json
 - path: results.html
   canonical: results.html
   kind: page

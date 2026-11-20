@@ -855,10 +855,10 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/265.html | cases/265.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/266.html | cases/266.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/267.html | cases/267.html | record | overview | 2026-10-03 | 2026-10-31 | live |
-| cases/268.html | cases/268.html | record | overview | 2026-10-03 | 2026-11-18 | live |
+| cases/268.html | cases/268.html | record | overview | 2026-10-03 | 2026-11-20 | live |
 | cases/269.html | cases/269.html | record | overview | 2026-10-03 | 2026-11-13 | live |
 | cases/27.html | cases/27.html | record | overview | 2026-10-03 | 2026-11-04 | live |
-| cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-11-18 | live |
+| cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-11-20 | live |
 | cases/271.html | cases/271.html | record | overview | 2026-10-03 | 2026-10-31 | live |
 | cases/272.html | cases/272.html | record | overview | 2026-10-03 | 2026-11-18 | live |
 | cases/273.html | cases/273.html | record | overview | 2026-10-03 | 2026-10-23 | live |

@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **282** programs: **57** external and **225** first-party; **195** decide claims and **87** check premises.
-- **794** of **1023** evidence entries name the programs that verified them: 389 independently re-implemented, 324 reproduced with the producer’s code, 57 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **283** programs: **57** external and **226** first-party; **196** decide claims and **87** check premises.
+- **795** of **1024** evidence entries name the programs that verified them: 390 independently re-implemented, 324 reproduced with the producer’s code, 57 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -314,6 +314,7 @@ second implementation agrees.
 | [`V-de-winter-1018-review-axis`](#v-de-winter-1018-review-axis) | rv1018_axis.py (with rv1018_common.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-de-winter-1018-review-bnb`](#v-de-winter-1018-review-bnb) | rv1018_decide.py with rv1018_bnb.c (and rv1018_common.py) | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-de-winter-1021-review-check`](#v-de-winter-1021-review-check) | r1021_check.py with r1021_read.py | Squares Project (Levy) | first-party | decides | 2 | 2 |
+| [`V-de-winter-1031-review-check`](#v-de-winter-1031-review-check) | rv1031_check.py with rv1031_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -5719,6 +5720,22 @@ The 18 November blind stage 4 review's exact checker (R-1021) of Joost de Winter
 | --- | --- | --- | --- | --- |
 | `E-de-winter-1021-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 268 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the readers | T-331 |
 | `E-de-winter-1022-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 270 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the readers | T-332 |
+
+### `V-de-winter-1031-review-check`
+
+**rv1031_check.py with rv1031_reader.py, rv1031_axes.py, rv1031_clip.py and rv1031_decide.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The 18 November blind stage 4 review's exact checker (R-1031) of Joost de Winter's rational centre-direction certificate of issue 1031 (299) and its corner Witness/v2 twin, with strict readers of its own for both forms (rv1031_reader.py): every square a unit square inside the box with area exactly 1, every wall and every one of the 44,551 pairs, with no distance filter and no tolerance, by separating axes on the poses in exact rationals (rv1031_axes.py, method A) and by exact Sutherland-Hodgman clipping in GMP rationals from the corners (rv1031_clip.py, method B), each form decided by both methods directly and crossed, the two forms held to one packing, and the claim decided in its own box (rv1031_check.py, rv1031_decide.py). rv1031_controls.py decides the 36 controls a plan frozen before any program read a certificate states; rv1031_selftest.py holds the programs to 14,785 hand-derived checks and seven broken copies. Decided the certificate ACCEPT.
+
+- Source: [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_check.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_check.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_reader.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_reader.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_axes.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_axes.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_clip.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_clip.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_decide.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_decide.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_controls.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_controls.py), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/controls-plan.json`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/controls-plan.json), [`packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_selftest.py`](../../packing/resources/web/de-winter-1031-review-2026-11-18/programs/rv1031_selftest.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-18-de-winter-1031.md`](../../docs/project/reviews/review-2026-11-18-de-winter-1031.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the blind stage 4 mathematical review, lane r1031-1118 of the 18 November intake pass, tbd-strong-max tier, maximum reasoning, prompted separately from the import lane), with its own prompt and code; authorship in common with the producer’s: system-family, The issue names GPT-6.2 Sol (OpenAI) for the search, optimization and rational certificate, and Claude (Anthropic) for the repository files, checks and figure, under Joost de Winter's direction. The checker and its controls plan were frozen on 18 November before any of its programs read a certificate; it imports nothing from this repository or the source and reuses no code of any earlier review, and its author read the author's checkers only as data, after the findings were frozen.
+- Note: Written and run on 18 November 2026 for docs/project/reviews/review-2026-11-18-de-winter-1031.md, kept with its receipts in the review-only directory de-winter-1031-review-2026-11-18. rv1031_contract.py, rv1031_custody.py, rv1031_identity.py, rv1031_describe.py, rv1031_lineage.py, rv1031_measures.py, rv1031_synth.py, rv1031_price.py and the after-freeze rv1031_compare.py and rv1031_generic.py, kept beside it, decide no certificate's feasibility and are not registered.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-1031-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: the certificate at n = 299 and its twin: every square, every wall and every pair, by two exact methods in two arithmetic libraries that share only the readers | T-333 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
