@@ -1561,6 +1561,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L181_1115,
         L187_1116,
         *I1_1117,
+        ISSUE_1038,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
