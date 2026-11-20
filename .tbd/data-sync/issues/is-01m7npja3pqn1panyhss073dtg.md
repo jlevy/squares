@@ -5,8 +5,8 @@ title: "Apply option D (think-b0w5) at every count it settles: measure each re-c
 kind: task
 status: in_progress
 priority: 1
-version: 24
-delegate: c12-optd-land
+version: 25
+delegate: codex-intake-1119-01a1fb
 labels:
   - intake
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-20T16:44:27.042Z
+updated_at: 2026-11-20T23:24:43.298Z
 started_at: 2026-11-18T02:28:47.344Z
 ---
 
