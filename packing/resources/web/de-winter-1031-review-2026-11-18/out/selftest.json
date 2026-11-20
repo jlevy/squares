@@ -1,0 +1,20 @@
+{
+ "arith": "gmpy2 2.3.1 GMP GMP 6.3.0",
+ "checks": 14785,
+ "cpu_s": 12.84,
+ "every_mutant_fails": true,
+ "failure_count": 0,
+ "failures": [],
+ "mutants": {
+  "a reader that takes a leading plus": 3,
+  "form P read clockwise": 1,
+  "method A counting a zero margin as overlap": 1013,
+  "method A with one square's normals only": 831,
+  "method A with sin D signed in H": 1076,
+  "method B taking every listing as counterclockwise": 1084,
+  "method B with open half-planes": 1009
+ },
+ "program": "rv1031_selftest.py",
+ "python": "3.14.7",
+ "verdict": "PASSED"
+}

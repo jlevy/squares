@@ -1,0 +1,31 @@
+{
+ "lane": "r144-1118 (bead think-rxs3), blind stage 4 review of T-144, mixed_n122_L1126",
+ "written": "2026-11-18, before any program of this lane read the certificate's candidate.json, certificate.json, summary.json, result.json or input.txt files",
+ "principle": "Every program that can accept must also be shown to refuse: each control below fails an always-accept checker (a mutant it must refuse) and an always-refuse checker (the original it must accept, or a synthetic case with a known positive answer).",
+ "synthetic_controls_run_before_the_freeze": {
+  "program": "r144_selftest.py --synthetic",
+  "cases": {
+   "S1": "exact evaluators A and B agree at 200 seeded poses at nodes 0, 1, 37, 108, 200 of a segment-grid measure with a point and a rectangle orbit",
+   "S2": "point lattice of spacing B/5, mass (1 + 1/10000)/25: axis decider must return AXIS_DECIDED with least exactly 10001/10000, no seeded exact capture below it, and AXIS_REFUSED with an exact witness below 1 at factor 99/100",
+   "S3": "segment grid: branch and bound must return NODE_DECIDED at node 37 at factor 1 with no seeded exact capture below 1, and NODE_REFUTED with an exact witness at factor 3/10",
+   "S4": "strict reader refuses a float token, a duplicate key and an unknown key",
+   "S5": "premise checks newly fail the named check for: total mass equal to n, a negative mass, a point outside K, a degenerate segment; the net premise fails for a net ending at index 199 and for step 1/430 (B(1 + D) >= 1)",
+   "S6": "input check accepts a synthetic input written from the measure and refuses: a coordinate interval moved one ulp above its exact value, a dropped row, a duplicated row replacing another, a header E for the wrong node"
+  },
+  "result": "SELFTEST_PASS before the freeze (synthetic data only)"
+ },
+ "controls_on_the_certificate_after_the_freeze": [
+  {"id": "RC1", "program": "r144_premises.py", "input": "the retained source at a9f76c3, the asset and its bundle", "expect": "PREMISES_HOLD", "fails_always_refuse": true},
+  {"id": "RC2", "program": "r144_selftest.py --real", "input": "mutated copies of the real candidate and of node 37's input", "expect": "S4 refusals; S5 each mutation newly fails its named check; S6 the input written from the real candidate is accepted and its four mutations refused; S7 the real node-37 body encodes the candidate and a copy with one coordinate interval moved past its exact value is refused", "fails_always_accept": true, "fails_always_refuse": true},
+  {"id": "RC3", "program": "r144_inputs.py", "input": "all 201 inputs", "expect": "INPUTS_ENCODE_CANDIDATE", "fails_always_refuse": true},
+  {"id": "RC4a", "program": "r144_axis.py --factor 1", "input": "node 0", "expect": "AXIS_DECIDED if the certificate is valid at node 0", "prediction": "rigorous least >= 1; if the source's leaf bounds are sound, the exact least is >= its node-0 'lower' 1.0000000870668393"},
+  {"id": "RC4b", "program": "r144_axis.py --factor 99/100", "input": "node 0, every mass times 99/100", "expect": "AXIS_REFUSED with an exact witness pose below 1", "fails_always_accept": true},
+  {"id": "RC5a", "program": "r144_bnb.py --factor 1", "input": "nodes 37 (fewest source nodes), 108 (near the median), 180 (least source leaf margin), 200 (the last node), 1 (first rotated), run in this order while the review's compute stays under its caps (one process; stop before 4 CPU-hours in one job or 10 in all)", "expect": "NODE_DECIDED at each node run if the certificate is valid there"},
+  {"id": "RC5b", "program": "r144_bnb.py --factor 99/100", "input": "nodes 37 and 180", "expect": "NODE_REFUTED with an exact witness below 1", "fails_always_accept": true},
+  {"id": "RC6", "program": "r144_poses.py", "input": "fixed poses at all 201 nodes; seeded search at nodes 0, 1, 2, 25, 36, 37, 83, 108, 150, 155, 157, 163, 164, 180, 185, 196, 199, 200 and six drawn by a generator seeded from the candidate's SHA-256", "expect": "methods A and B agree everywhere; no exact capture below 1; none below the source's least leaf bound at its node (a capture below it would show a source leaf bound unsound)"}
+ ],
+ "not_planned": [
+  "a complete decision of all 201 nodes (priced in the review, not run, unless the measured cost is small enough to stay under the caps and the coordinator agrees)",
+  "running any program of the source, including unified_linear_verify.cpp, which this lane reads as data only, after this freeze"
+ ]
+}

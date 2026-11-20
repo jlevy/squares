@@ -6418,8 +6418,14 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: ceiling moves to 1,700,000, room for 21 more rows (think-v1qe). On 18 November #1009's
 #: T-314 to T-326 take the page to 326 results and 1,706,120 source bytes, past 1,700,000,
 #: at a P90 row of 4,507 bytes; the ceiling moves to 1,800,000, room for 20 more rows
-#: (think-v1qe).
-PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_800_000}
+#: (think-v1qe). On 20 November #1035 carries T-057's sources down the chain at 211, 182
+#: and 156 and registers no result: its credit lines add 3,441 bytes to the 327-result
+#: page, 1,716,490 source bytes against main's 1,713,049, and at a P90 row of 4,512 bytes
+#: the room through 346 projects to 1,802,218, past 1,800,000 (hosted run 44271657178).
+#: The ceiling moves to 1,900,000, the 100,000-byte step think-k8vt sets for intake: room
+#: for 40 more rows, so the imports of the following days fit without another raise; the
+#: 2,000,000-byte hard limit is then about 62 rows away (think-v1qe).
+PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_900_000}
 #: How many results the results page's ceiling was set to hold, each result past the
 #: register's count at what the table's 90th-percentile row costs now and an average
 #: entry of the seven days: 160 on 14 October and 40 more, then, at 1,250,000 bytes, 217
@@ -6435,8 +6441,9 @@ PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_800_00
 #: 3,891 bytes; at 1,700,000 bytes, 297 on 12 November and 21 more (4,587 bytes each, in
 #: the 99,487 bytes left, 3,160 to spare), timing not re-measured; at 1,800,000 bytes, 326
 #: on 18 November and 20 more (4,507 bytes each, in the 93,880 bytes left, 3,740 to
-#: spare), timing not re-measured.
-RESULTS_ROOM_THROUGH = 346
+#: spare), timing not re-measured; at 1,900,000 bytes, 327 on 20 November and 40 more
+#: (4,512 bytes each, in the 183,510 bytes left, 3,030 to spare), timing not re-measured.
+RESULTS_ROOM_THROUGH = 367
 
 
 def test_no_page_carries_a_result_overview(

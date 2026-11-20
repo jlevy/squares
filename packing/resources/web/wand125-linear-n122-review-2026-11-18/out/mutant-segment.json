@@ -1,0 +1,20 @@
+{
+ "program": "r144_mutate.py",
+ "mutation": "the heaviest segment orbit removed",
+ "removed_index": 627,
+ "removed": {
+  "kind": "segment",
+  "geometry": [
+   "897840207/1000000000",
+   "99760023/50000000",
+   "99760023/100000000",
+   "99760023/50000000"
+  ],
+  "mass": "908418962364586981052150/762499937500000110480491"
+ },
+ "removed_mass": 1.1913692286231654,
+ "removed_mass_per_image": 0.14892115357789568,
+ "total_mass_after": "9211656578763605149756664719509/76249993750000011048049100000",
+ "original_sha256": "cd427ddb238b69b7d9ba32ac01616a8669f154af2e70abdff827c313a1ea500c",
+ "mutant_sha256": "f4096554be5d256ca5fe5538fa23dbf628ec6aa4fdd2b7ea8e9471257405754c"
+}

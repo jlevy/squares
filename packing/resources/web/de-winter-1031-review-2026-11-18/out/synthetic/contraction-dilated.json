@@ -1,0 +1,146 @@
+{
+ "contraction_margin": "19/10000000000000000000000000000",
+ "contraction_margin_short": "1.90000000000e-27",
+ "contraction_part": "7/5000000000000000000000000000",
+ "contraction_part_short": "1.40000000000e-27",
+ "cpu_s_factors": 0.0,
+ "extent_at_g_star": {
+  "height": "8",
+  "side_needed": "8",
+  "side_needed_short": "8.00000000000000000000000000000e+0",
+  "width": "8"
+ },
+ "extent_at_one": {
+  "height": "40000000000000000000000000007/5000000000000000000000000000",
+  "side_needed": "40000000000000000000000000007/5000000000000000000000000000",
+  "width": "40000000000000000000000000007/5000000000000000000000000000"
+ },
+ "first_contact_pair_count": 20,
+ "first_contact_pairs": [
+  [
+   1,
+   2
+  ],
+  [
+   1,
+   4
+  ],
+  [
+   1,
+   5
+  ],
+  [
+   2,
+   3
+  ],
+  [
+   2,
+   4
+  ],
+  [
+   2,
+   5
+  ],
+  [
+   2,
+   6
+  ],
+  [
+   3,
+   5
+  ],
+  [
+   3,
+   6
+  ],
+  [
+   4,
+   5
+  ],
+  [
+   4,
+   7
+  ],
+  [
+   4,
+   8
+  ],
+  [
+   5,
+   6
+  ],
+  [
+   5,
+   7
+  ],
+  [
+   5,
+   8
+  ],
+  [
+   5,
+   9
+  ],
+  [
+   6,
+   8
+  ],
+  [
+   6,
+   9
+  ],
+  [
+   7,
+   8
+  ],
+  [
+   8,
+   9
+  ]
+ ],
+ "g_star": "5000000000000000000000000000/5000000000000000000000000001",
+ "input": {
+  "kind": "json",
+  "n": 13,
+  "path": "out/synthetic/dilated.json",
+  "sha256": "76069bbed6b30524f14fb5a46c204a0fc83fcbadcaf6bd5f3d949ff22157d331",
+  "side": "80000000000000000000000000019/10000000000000000000000000000"
+ },
+ "label": "",
+ "n": 13,
+ "next_factors_short": [
+  "2.00016450744e-1",
+  "5.00000000000e-1",
+  "5.00000000000e-1",
+  "5.00000000000e-1",
+  "5.00000000000e-1"
+ ],
+ "one_less_g_star": "1/5000000000000000000000000001",
+ "one_less_g_star_short": "2.00000000000e-28",
+ "pairs": 78,
+ "pairs_touching_at_scale_one": 0,
+ "program": "rv1031_contract.py",
+ "python": "3.14.7",
+ "side": "80000000000000000000000000019/10000000000000000000000000000",
+ "side_short": "8.00000000000000000000000000190e+0",
+ "twin": {
+  "differing_count": 0,
+  "kind": "witness",
+  "one_packing": true,
+  "path": "out/synthetic/dilated.yaml",
+  "same_count_and_side": true,
+  "sha256": "53f8713c97dcbeaf72ca14278d57aa67da91a7abef8a478470848dd9c77dd699",
+  "squares_differing": []
+ },
+ "verdict": "MEASURED",
+ "verify": {
+  "contracted_accepted_contacts_exactly_first_pairs": true,
+  "contracted_contacts": 20,
+  "contracted_wall_contacts": 9,
+  "cpu_s": 0.0,
+  "past_overlap_count": 20,
+  "past_overlaps_exactly_pairs_above": true
+ },
+ "wall_slack": "1/2000000000000000000000000000",
+ "wall_slack_short": "5.00000000000e-28"
+}

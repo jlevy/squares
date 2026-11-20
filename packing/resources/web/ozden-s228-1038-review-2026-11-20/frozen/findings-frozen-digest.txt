@@ -1,0 +1,9 @@
+# Lane r1038 findings, frozen at 2026-11-20T08:41:53Z, before the author's README.md, verifier/README.md, verifier/sqcheck.py, sqcheck-228.txt, verify-228.txt, checks/, records/, source/, PROVENANCE.json, LICENSE.md or n228-witness.json, this repository's witness, verifier, promotion, identity or contraction code, packing/frontier/n-228.md, the register entry at 228 (T-301), the earlier reviews at 228, jazivxt's notebook and dataset, or any import lane's work was read.
+# the frozen review text, and every receipt and program it cites:
+c6008b980022502a93cf4799266d4494dff7c60975021f9fe419b43b9ee6bf75  frozen/review-2026-11-20-ozden-1038.frozen.md
+b22ca6238265da9b9fd9b13f2fa0403794929d7a07165c474779386dad40c5c6  frozen/checker-frozen-digests.txt
+81658e89c9a89b026cb5344d1319e6870e427515c754993eff3d4c774e96f703  programs/r1038_describe.py
+fa69bc3fc845404d5edc10ea7ca894097a00a9877c5194e6b3306e1308a46702  out/check-n228.json
+7214aac1654de968679c06cb3e8b04903cb7a18bab085e1fcf8728706310777a  out/controls-n228.json
+bbd243659f704b571e10aea4fe090edb0e1657364fa2b7a6d9d3d94e2839ca06  out/describe-n228.json
+3b4903e3c5642fa00285a5ad6531bb84db3dbe0627c48c75a0460ab10523eaaf  out/selftest.json

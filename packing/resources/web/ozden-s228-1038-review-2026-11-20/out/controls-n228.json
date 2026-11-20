@@ -1,0 +1,946 @@
+{
+ "program": "r1038_controls.py",
+ "certificate": "n-228-candidate.yaml",
+ "original_verdict": "ACCEPT",
+ "controls": [
+  {
+   "id": "C0",
+   "stated": "equal to method A for every pair and every square-wall",
+   "as_stated": true,
+   "outcome": {
+    "pairs": 25878,
+    "squares": 228,
+    "mismatches": 0
+   },
+   "cpu_seconds": 5.86
+  },
+  {
+   "id": "R1",
+   "stated": "the reader refuses: n stated, n - 1 listed",
+   "as_stated": true,
+   "outcome": {
+    "refused": "n is 228 but 227 squares are listed"
+   },
+   "cpu_seconds": 0.11
+  },
+  {
+   "id": "R2",
+   "stated": "read; every value equal to the original's; the non-canonical scalars exactly the original's and the side",
+   "as_stated": true,
+   "outcome": {
+    "values_equal": true,
+    "noncanonical": [
+     "side"
+    ]
+   },
+   "cpu_seconds": 0.11
+  },
+  {
+   "id": "R3",
+   "stated": "the reader refuses: an id out of order",
+   "as_stated": true,
+   "outcome": {
+    "refused": "square 1: id 2 out of order"
+   },
+   "cpu_seconds": 0.11
+  },
+  {
+   "id": "R4",
+   "stated": "the reader refuses: a YAML float",
+   "as_stated": true,
+   "outcome": {
+    "refused": "$.witness.side: a scalar of type tag:yaml.org,2002:float ('15.5960431166317665067011468321881222800000')"
+   },
+   "cpu_seconds": 0.11
+  },
+  {
+   "id": "R5",
+   "stated": "the reader refuses: not p or p/q",
+   "as_stated": true,
+   "outcome": {
+    "refused": "square 1.center.x: '+409249533242474293545619674740333569/31250000000000000000000000000000000' is not p or p/q"
+   },
+   "cpu_seconds": 0.11
+  },
+  {
+   "id": "R6",
+   "stated": "the reader refuses: not a list of two scalars",
+   "as_stated": true,
+   "outcome": {
+    "refused": "square 1.basis: not a list of two scalars"
+   },
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "R7",
+   "stated": "the reader refuses: a key twice",
+   "as_stated": true,
+   "outcome": {
+    "refused": "$.witness: the key 'side' twice"
+   },
+   "cpu_seconds": 0.11
+  },
+  {
+   "id": "R8",
+   "stated": "the reader refuses: an anchor",
+   "as_stated": true,
+   "outcome": {
+    "refused": "an anchor"
+   },
+   "cpu_seconds": 0.0
+  },
+  {
+   "id": "R9",
+   "stated": "the reader refuses: not center-basis",
+   "as_stated": true,
+   "outcome": {
+    "refused": "representation 'corners', not center-basis"
+   },
+   "cpu_seconds": 0.1
+  },
+  {
+   "id": "G1",
+   "stated": "REFUSE; m'(1,n) = -1 exactly; m'(k,n) = m(1,k) for 1 < k < n; every other pair unchanged; square n's clearances equal square 1's; overlapping pairs exactly (1,n) with any (k,n) where m(1,k) < 0 and the original's overlapping pairs without n; B's area for (1,n) exactly 1",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "overlapping": [
+     [
+      1,
+      228
+     ]
+    ],
+    "area_1n_B": "1"
+   },
+   "cpu_seconds": 2.93
+  },
+  {
+   "id": "G2",
+   "stated": "REFUSE; square 1's clearances L_1 + S, B_1, R_1 - S, T_1; the crossings exactly square 1 at the right wall with the original's other crossings; B's area inside for square 1 exactly 0 when L_1 >= 0; the overlapping pairs exactly the original's without square 1; every pair without square 1 unchanged",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "crossings": [
+     [
+      1,
+      2
+     ]
+    ],
+    "right_clearance_1": "-1.359598506375918e+1",
+    "inside_area_1_B": "0"
+   },
+   "cpu_seconds": 3.04
+  },
+  {
+   "id": "G3",
+   "stated": "REFUSE; square 1, and only square 1, not a unit square by A and by B (unless its first basis component is -eps/2)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "REFUSE",
+    "not_unit_A": [
+     1
+    ],
+    "not_unit_B": [
+     1
+    ]
+   },
+   "cpu_seconds": 2.91
+  },
+  {
+   "id": "G4",
+   "stated": "the original's verdict; every margin and clearance identical",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "senses_B": {
+     "ccw": 228,
+     "cw": 0
+    }
+   },
+   "cpu_seconds": 3.17
+  },
+  {
+   "id": "G5",
+   "stated": "the original's verdict; every margin and clearance identical",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "senses_B": {
+     "ccw": 228,
+     "cw": 0
+    }
+   },
+   "cpu_seconds": 3.52
+  },
+  {
+   "id": "G6",
+   "stated": "the original's verdict; margins identical; clearances (L, B, R, T) to (B, L, T, R)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "senses_B": {
+     "ccw": 228,
+     "cw": 0
+    }
+   },
+   "cpu_seconds": 3.66
+  },
+  {
+   "id": "G7",
+   "stated": "the original's verdict; margins identical; clearances (L, B, R, T) to (T, L, B, R)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "senses_B": {
+     "ccw": 228,
+     "cw": 0
+    }
+   },
+   "cpu_seconds": 3.37
+  },
+  {
+   "id": "G8",
+   "stated": "the original's verdict; margins identical; clearances (L, B, R, T) to (R, B, L, T)",
+   "as_stated": true,
+   "outcome": {
+    "verdict": "ACCEPT",
+    "senses_B": {
+     "ccw": 228,
+     "cw": 0
+    }
+   },
+   "cpu_seconds": 3.19
+  },
+  {
+   "id": "S1a",
+   "stated": "the side rule with delta = eps",
+   "as_stated": true,
+   "outcome": {
+    "delta": "1.000000000000000e-30",
+    "verdict": "REFUSE",
+    "square_walls_crossing": 15,
+    "crossing_squares": [
+     114,
+     142,
+     144,
+     146,
+     147,
+     148,
+     149,
+     150,
+     151,
+     222,
+     224,
+     225,
+     226,
+     227,
+     228
+    ],
+    "contacts": [
+     [
+      1,
+      1
+     ],
+     [
+      17,
+      0
+     ],
+     [
+      18,
+      0
+     ],
+     [
+      19,
+      0
+     ],
+     [
+      20,
+      0
+     ],
+     [
+      21,
+      0
+     ],
+     [
+      22,
+      0
+     ],
+     [
+      23,
+      0
+     ],
+     [
+      24,
+      0
+     ],
+     [
+      30,
+      1
+     ],
+     [
+      31,
+      1
+     ],
+     [
+      32,
+      1
+     ],
+     [
+      33,
+      1
+     ],
+     [
+      34,
+      1
+     ],
+     [
+      93,
+      1
+     ],
+     [
+      97,
+      1
+     ],
+     [
+      140,
+      0
+     ],
+     [
+      141,
+      0
+     ]
+    ]
+   },
+   "cpu_seconds": 2.99
+  },
+  {
+   "id": "S1b",
+   "stated": "the side rule with delta = 1/q",
+   "as_stated": true,
+   "outcome": {
+    "delta": "4.000000000000000e-35",
+    "verdict": "REFUSE",
+    "square_walls_crossing": 15,
+    "crossing_squares": [
+     114,
+     142,
+     144,
+     146,
+     147,
+     148,
+     149,
+     150,
+     151,
+     222,
+     224,
+     225,
+     226,
+     227,
+     228
+    ],
+    "contacts": [
+     [
+      1,
+      1
+     ],
+     [
+      17,
+      0
+     ],
+     [
+      18,
+      0
+     ],
+     [
+      19,
+      0
+     ],
+     [
+      20,
+      0
+     ],
+     [
+      21,
+      0
+     ],
+     [
+      22,
+      0
+     ],
+     [
+      23,
+      0
+     ],
+     [
+      24,
+      0
+     ],
+     [
+      30,
+      1
+     ],
+     [
+      31,
+      1
+     ],
+     [
+      32,
+      1
+     ],
+     [
+      33,
+      1
+     ],
+     [
+      34,
+      1
+     ],
+     [
+      93,
+      1
+     ],
+     [
+      97,
+      1
+     ],
+     [
+      140,
+      0
+     ],
+     [
+      141,
+      0
+     ]
+    ]
+   },
+   "cpu_seconds": 3.44
+  },
+  {
+   "id": "S1c",
+   "stated": "the side rule with delta = W; ACCEPT",
+   "as_stated": true,
+   "outcome": {
+    "delta": "0",
+    "verdict": "ACCEPT",
+    "square_walls_crossing": 0,
+    "crossing_squares": [],
+    "contacts": [
+     [
+      1,
+      1
+     ],
+     [
+      17,
+      0
+     ],
+     [
+      18,
+      0
+     ],
+     [
+      19,
+      0
+     ],
+     [
+      20,
+      0
+     ],
+     [
+      21,
+      0
+     ],
+     [
+      22,
+      0
+     ],
+     [
+      23,
+      0
+     ],
+     [
+      24,
+      0
+     ],
+     [
+      30,
+      1
+     ],
+     [
+      31,
+      1
+     ],
+     [
+      32,
+      1
+     ],
+     [
+      33,
+      1
+     ],
+     [
+      34,
+      1
+     ],
+     [
+      93,
+      1
+     ],
+     [
+      97,
+      1
+     ],
+     [
+      114,
+      3
+     ],
+     [
+      140,
+      0
+     ],
+     [
+      141,
+      0
+     ],
+     [
+      142,
+      2
+     ]
+    ]
+   },
+   "cpu_seconds": 3.37
+  },
+  {
+   "id": "S1d",
+   "stated": "the side rule with delta = W + eps; REFUSE",
+   "as_stated": true,
+   "outcome": {
+    "delta": "1.000000000000000e-30",
+    "verdict": "REFUSE",
+    "square_walls_crossing": 15,
+    "crossing_squares": [
+     114,
+     142,
+     144,
+     146,
+     147,
+     148,
+     149,
+     150,
+     151,
+     222,
+     224,
+     225,
+     226,
+     227,
+     228
+    ],
+    "contacts": [
+     [
+      1,
+      1
+     ],
+     [
+      17,
+      0
+     ],
+     [
+      18,
+      0
+     ],
+     [
+      19,
+      0
+     ],
+     [
+      20,
+      0
+     ],
+     [
+      21,
+      0
+     ],
+     [
+      22,
+      0
+     ],
+     [
+      23,
+      0
+     ],
+     [
+      24,
+      0
+     ],
+     [
+      30,
+      1
+     ],
+     [
+      31,
+      1
+     ],
+     [
+      32,
+      1
+     ],
+     [
+      33,
+      1
+     ],
+     [
+      34,
+      1
+     ],
+     [
+      93,
+      1
+     ],
+     [
+      97,
+      1
+     ],
+     [
+      140,
+      0
+     ],
+     [
+      141,
+      0
+     ]
+    ]
+   },
+   "cpu_seconds": 3.37
+  },
+  {
+   "id": "S1e",
+   "stated": "the side rule with delta = S - C",
+   "as_stated": true,
+   "outcome": {
+    "delta": "-2.334932988531678e-13",
+    "verdict": "ACCEPT",
+    "square_walls_crossing": 0,
+    "crossing_squares": [],
+    "contacts": [
+     [
+      1,
+      1
+     ],
+     [
+      17,
+      0
+     ],
+     [
+      18,
+      0
+     ],
+     [
+      19,
+      0
+     ],
+     [
+      20,
+      0
+     ],
+     [
+      21,
+      0
+     ],
+     [
+      22,
+      0
+     ],
+     [
+      23,
+      0
+     ],
+     [
+      24,
+      0
+     ],
+     [
+      30,
+      1
+     ],
+     [
+      31,
+      1
+     ],
+     [
+      32,
+      1
+     ],
+     [
+      33,
+      1
+     ],
+     [
+      34,
+      1
+     ],
+     [
+      93,
+      1
+     ],
+     [
+      97,
+      1
+     ],
+     [
+      140,
+      0
+     ],
+     [
+      141,
+      0
+     ]
+    ]
+   },
+   "cpu_seconds": 3.61
+  },
+  {
+   "id": "S1f",
+   "stated": "the side rule with delta = S - C + 10^-12",
+   "as_stated": true,
+   "outcome": {
+    "delta": "7.665067011468322e-13",
+    "verdict": "REFUSE",
+    "square_walls_crossing": 15,
+    "crossing_squares": [
+     114,
+     142,
+     144,
+     146,
+     147,
+     148,
+     149,
+     150,
+     151,
+     222,
+     224,
+     225,
+     226,
+     227,
+     228
+    ],
+    "contacts": [
+     [
+      1,
+      1
+     ],
+     [
+      17,
+      0
+     ],
+     [
+      18,
+      0
+     ],
+     [
+      19,
+      0
+     ],
+     [
+      20,
+      0
+     ],
+     [
+      21,
+      0
+     ],
+     [
+      22,
+      0
+     ],
+     [
+      23,
+      0
+     ],
+     [
+      24,
+      0
+     ],
+     [
+      30,
+      1
+     ],
+     [
+      31,
+      1
+     ],
+     [
+      32,
+      1
+     ],
+     [
+      33,
+      1
+     ],
+     [
+      34,
+      1
+     ],
+     [
+      93,
+      1
+     ],
+     [
+      97,
+      1
+     ],
+     [
+      140,
+      0
+     ],
+     [
+      141,
+      0
+     ]
+    ]
+   },
+   "cpu_seconds": 3.05
+  },
+  {
+   "id": "P1c",
+   "stated": "the original's verdict; that pair's margin exactly 0 by A and by the corner formulation, contact by B both ways; every pair without the moved square unchanged; the moved square's other pairs apart and its clearances positive",
+   "as_stated": true,
+   "outcome": {
+    "pair": [
+     156,
+     166
+    ],
+    "moved": 166,
+    "original_margin": "3.626716878761469e-23",
+    "verdict": "ACCEPT"
+   },
+   "cpu_seconds": 3.22
+  },
+  {
+   "id": "P1p",
+   "stated": "REFUSE; the overlapping pairs exactly that pair, its margin exactly -eps by A and by the corner formulation, overlap by B both ways; no crossing",
+   "as_stated": true,
+   "outcome": {
+    "pair": [
+     156,
+     166
+    ],
+    "moved": 166,
+    "original_margin": "3.626716878761469e-23",
+    "verdict": "REFUSE"
+   },
+   "cpu_seconds": 3.58
+  },
+  {
+   "id": "W1c-left",
+   "stated": "the original's verdict; its left clearance exactly 0, its right clearance raised by its original left clearance, bottom and top unchanged; its pairs apart; every other square and pair unchanged (fallback: the translated packing, margins unchanged, the least left clearance 0)",
+   "as_stated": true,
+   "outcome": {
+    "square": 17,
+    "original_clearance": "0",
+    "verdict": "ACCEPT"
+   },
+   "cpu_seconds": 2.83
+  },
+  {
+   "id": "W1c-bottom",
+   "stated": "as W1c-left, at the bottom wall, the top clearance raised",
+   "as_stated": true,
+   "outcome": {
+    "square": 1,
+    "original_clearance": "0",
+    "verdict": "ACCEPT"
+   },
+   "cpu_seconds": 3.43
+  },
+  {
+   "id": "W1c-right",
+   "stated": "as W1c-left, at the right wall, the left clearance raised",
+   "as_stated": true,
+   "outcome": {
+    "square": 142,
+    "original_clearance": "0",
+    "verdict": "ACCEPT"
+   },
+   "cpu_seconds": 3.2
+  },
+  {
+   "id": "W1c-top",
+   "stated": "as W1c-left, at the top wall, the bottom clearance raised",
+   "as_stated": true,
+   "outcome": {
+    "square": 114,
+    "original_clearance": "0",
+    "verdict": "ACCEPT"
+   },
+   "cpu_seconds": 2.98
+  },
+  {
+   "id": "W1p-left",
+   "stated": "REFUSE; the only crossing that square at the left wall, its clearance exactly -eps; no overlapping pair (fallback: the crossings exactly the squares whose left clearance was the least, each at -eps)",
+   "as_stated": true,
+   "outcome": {
+    "square": 17,
+    "original_clearance": "0",
+    "verdict": "REFUSE"
+   },
+   "cpu_seconds": 2.98
+  },
+  {
+   "id": "W1p-bottom",
+   "stated": "as W1p-left, at the bottom wall",
+   "as_stated": true,
+   "outcome": {
+    "square": 1,
+    "original_clearance": "0",
+    "verdict": "REFUSE"
+   },
+   "cpu_seconds": 2.75
+  },
+  {
+   "id": "W1p-right",
+   "stated": "as W1p-left, at the right wall",
+   "as_stated": true,
+   "outcome": {
+    "square": 142,
+    "original_clearance": "0",
+    "verdict": "REFUSE"
+   },
+   "cpu_seconds": 3.23
+  },
+  {
+   "id": "W1p-top",
+   "stated": "as W1p-left, at the top wall",
+   "as_stated": true,
+   "outcome": {
+    "square": 114,
+    "original_clearance": "0",
+    "verdict": "REFUSE"
+   },
+   "cpu_seconds": 3.24
+  },
+  {
+   "id": "WALL",
+   "stated": "A's and the corner formulation's clearance there exactly 0 and -eps; B touching and crossing there; B's area inside exactly 1 and below 1",
+   "as_stated": true,
+   "outcome": {
+    "moves": 456,
+    "failures": []
+   },
+   "cpu_seconds": 0.14
+  },
+  {
+   "id": "PALL",
+   "stated": "A's and the corner formulation's margins exactly 0 and -eps; B contact and overlap, both ways agreeing",
+   "as_stated": true,
+   "outcome": {
+    "closings": 51756,
+    "failures": []
+   },
+   "cpu_seconds": 39.2
+  }
+ ],
+ "as_stated": 36,
+ "of": 36,
+ "outcome": "EVERY_CONTROL_AS_STATED",
+ "whole_file_decisions": 25,
+ "cpu_seconds": 126.3
+}
