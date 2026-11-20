@@ -8,6 +8,7 @@ paths:
   - packing/atlas/known-best/composite-figure.json
   - packing/campaign/result-requests.yaml
   - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
   - packing/devtools/default_drawings.py
   - packing/devtools/site_resources.py
   - packing/devtools/upper_bound_houses.py
@@ -29,16 +30,16 @@ reason: >-
   and lane c2's), read by the existing witness-center-basis adapter; the blind stage 4 review
   of #1044 is mapped into it, and the house rule adopts it at 228 in the pass of 20 November in
   place of T-301, with both strong generators' regularization. The importer gains the
-  packet's house reader, the adoption its house, prose and credit, and the drawings record
-  drops 228's settlement; the requests entry, the coverage source, the other-projects card,
+  packet's house reader, the adoption its house, prose and credit, the drawings record
+  drops 228's settlement, and the posters' credit hold holds jazivxt and Özden at 228; the requests entry, the coverage source, the other-projects card,
   the bound citations and the composite figure follow. No paper prints 228's record, this
   entry or that card. Against origin/main a9e5261a2 (#1046): devtools.compare_paper_renders
   rendered each paper into empty site directories, the math passes in /usr/bin/google-chrome
-  (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of the ten paths
+  (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of the eleven paths
   above swapped in. The optimality review, the threshold-bound review and the methods survey
   are byte-identical across the three, 43 files each. The explainer's 55 files are
   deterministic, and only its Markdown and HTML differ from the baseline; rendered again by
-  hand from this tree and with main's copies of the ten paths swapped in, the one difference
+  hand from this tree and with main's copies of the eleven paths swapped in, the one difference
   in each is the register count the explainer reads (registered_results, "one of N results
   the framework has registered so far"), 328 here and 327 on main. The novelty count is
   unchanged (T-334 is previously-published), and the bound citation it reads is n = 11's,
