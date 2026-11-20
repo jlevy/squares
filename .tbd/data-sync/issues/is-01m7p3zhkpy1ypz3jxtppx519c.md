@@ -5,7 +5,7 @@ title: "Import #1021, #1022: Joost de Winter's s(268) <= 16.870013850405 and s(2
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: c2-imports
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-18T01:22:44.981Z
-updated_at: 2026-11-20T07:02:57.009Z
+updated_at: 2026-11-20T07:54:59.978Z
 started_at: 2026-11-18T01:23:11.221Z
 ---
 
@@ -40,3 +40,5 @@ R-1021 (blind review), 07:10Z: lane r1021b-1118 resumed after the container rest
 R-1021 (blind review), 07:18Z: lane r1021b-1118 handed back before hosted CI finished, because the harness asked for the report. State: draft PR #1033, head 23860a5751 (pushed 07:09:55Z), base main 86284ec203 (also the merge base), tree clean at /home/user/wt/r1021. PR description rewritten in the template; check_pr_description --label intake --title passes. Local at 23860a5751: frozen lists 22/49 OK; review lines 1-739 equal the frozen text; packet unchanged since ba9bceb65b; records tier 55/55 (203.9 s); render_document_map --check, retained_data check and release_pin --check pass; a third fetch at the pin (07:14Z) matches sources-pins. Hosted CI on 23860a5751 at 07:18Z: pass=3 pending=11 skipping=37 (failing: none). Not done: hosted CI green, the senior review (requested from the coordinator in the handback), addressing it, the merge, removing the worktree. Main's post-merge slow lane timed out at 1800 s at 86284ec203; that lane is not part of this PR's gate.
 
 2026-11-18T08:20Z w6r2-dewinter-1118: for the 268/270 PR's Limits (coordinator, #1033's A1): this bead carried R-1021's notes beside the import lane's (the helper rewrites the whole notes). The import's measurements were made by its own programs under the plan hashed 02:27:48Z: replay, controls, identity and margins at 97ae1b663 (06:24Z), ledger 807c2eb3d (06:26Z), register 16107dfa2 (06:53Z); w6r recorded R-1021 as not read at 06:26Z. Lane w6r2 read the bead's R-1021 sections, its 06:58Z verdict and figures included, at about 07:05Z on resuming, after every one of those commits; nothing in the import's measurements came from them. No PR is open yet for this branch; it waits on #1033 (R-1021) merging.
+
+2026-11-20T07:58Z c2-imports (coordinator bold-ritchie-coord1120): claimed from w6r2; one PR for #1021, #1022 and #1031 on claude/intake-2026-11-20-import-1021 (from main 1015fc175), the 18 November branch merged in at c6a78b00e0. T-ids T-331 (268), T-332 (270), T-333 (299), provisional after #1024's T-328 to T-330. Correction found on re-reading the receipts: at 270 the pair enlargement (square 101 grown to its gap with 98, not clean) is refused at contact for shape AND overlap, as upper_bound_sharp_controls predicts for a non-clean enlargement; the plan (c4a97465...) says shape alone at contact, so 10 of 11 came out as the plan's letter states, not 11 (all 11 as the module predicts). T-332's notes, E-de-winter-1022-exact-feasibility and the packet README now say so. 268's 11 match the plan. Adoption of 268 and 270 under think-78aj in the pass of 20 November started 07:39Z (adopt_houses: T-331, T-332); regularization runs next.
