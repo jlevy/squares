@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 85
+version: 86
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -79,7 +79,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-20T23:02:31.061Z
+updated_at: 2026-11-20T23:06:35.450Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -148,3 +148,7 @@ For #1051, compared all 449 members of the original #1041 ZIP to the acquisition
 For #1030’s Review A, 3fe9c94e09 carries A1/A3/A6/A9, 0364df4c5d carries A2/A7/A8, 6cb20889cd carries A5/A11 and d8845d17ed repairs subsequent hosted findings. The PR description records earlier evidence for A10/A12 and assigns post-merge bead follow-up for A13. A4 recurred as main moved. Use this evidence when drafting the marked dispositions after conflict resolution, regeneration and the exact-head checks.
 
 The Kingbird comparison page and Evan Daniel’s packing site each returned HTTP 200. The live GitHub source checks in this session were partial. The full make intake sweep is due once the validation environment is available.
+
+F-2 post-freeze follow-up completed and synced on think-aoqm under think-dhjz. The read-only audit verifies that at 21d944c the two kernels drop a rectangle's contribution for each interpolation cell with a zero corner. The result is limited to F-2 control flow. Preserve the original freeze and report the handover. The remaining R1 obligations and final review stay open.
+
+The #1051 PR note also records that replay_rectangle_receipts imports bm.py and check.py before pin validation and compiles the selected kernel before its manifest comparison. Resolve this ordering at the actual source boundary before replay or rebasing the allowlist.
