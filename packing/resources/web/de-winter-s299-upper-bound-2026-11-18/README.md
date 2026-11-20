@@ -100,9 +100,9 @@ A measurement for credit; it decides nothing.
   turned by 0.0065 degrees; the other 184 exactly upright.
 
 The tool aligns the two packings by the box’s symmetries only.
-Whether a rigid motion off them, such as a translation along the diagonal, pairs a large
-part of this packing with T-325’s is not measured here; the stage 4 review measures it
-(below), and the credit relative to T-325 waits on that.
+A rigid motion off them, such as a translation along the diagonal, is not measured here;
+the stage 4 review measured it (below) and found no continuation of T-325’s packing.
+So it is a new arrangement relative to both.
 
 ## Exact Replay
 
@@ -160,27 +160,45 @@ ceiling, finds main’s consequences unchanged.
 
 ## Stage 4 Review
 
-The blind stage 4 review is lane r1031-1118’s, draft PR #1036, which this lane has not
-read. It is mapped once it merges.
+The blind stage 4 review is lane r1031-1118’s, PR #1036:
+[review-2026-11-18-de-winter-1031.md](../../../../docs/project/reviews/review-2026-11-18-de-winter-1031.md),
+read at 08:12Z on 20 November and mapped after this packet’s replay, controls,
+measurements, ledger and registration were committed.
+It accepts the certificate and its Witness/v2 twin, decided again by a clean-room
+checker frozen before any certificate was read, by two exact methods with 36 controls at
+this count stated in advance, with fourteen findings, none blocking or major.
+F3 is the review’s own: two rules of its controls plan assumed a gap this certificate
+does not have, and those two controls were decided as the side rule gives.
+Its contraction margin of T-325 and its gain agree with this packet’s exactly.
+After its findings were frozen it measured the 210 squares one rigid motion lines up
+with T-325’s: a generic lattice of upright squares and the tilted band every house at
+299 has carried since T-248 (Evan Daniel’s #824), which this packing holds twice, with
+89 squares, a whole tilted group among them, left without a partner.
+So it is not a continuation of T-325’s packing.
+The record does not infer lineage from resemblance, and the band is a measurement and
+the review’s Question 2 for the author, not a credit.
+T-333 is confirmed, independently re-implemented, at V3/C3, and is the house at 299 from
+the pass of 20 November 2026.
+
 Before this lane ran anything, the import bead’s notes of 18 November recorded two
-relays of its progress: an accepting verdict, and that its senior review found 210 of
-the 299 squares coinciding with T-325’s under one rigid motion, which the review was
-measuring as generic or as a continuation.
+relays of the review’s progress: an accepting verdict, and the 210-square coincidence.
 Nothing in this packet’s measurements came from those relays.
 
 ## What Is Not Established
 
 - **The search**: the slices, the optimization and the reflection are described, not
   retained; the lineage beyond the measurements above is the issue’s.
-- **The credit relative to T-325’s packing**, until the review’s rigid-motion
-  measurement is mapped.
 - **Local optimality, rigidity or KKT**: none is claimed or replayed.
 - **Human oversight**: no record is retained.
 
 ## Credit and Licence
 
-The issue credits the packing to Joost de Winter, after the 335- and 372-square packings
-in Panoras’s compilation.
+The packing is Joost de Winter’s, a new arrangement at 299 after the 372- and
+335-square packings in Asterios Panoras’s compilation, which the issue links to the
+notebooks of prvsiyan (372) and of areebbb, jazivxt, alexchilton and prvsiyan (335).
+The bibliography credits it as de Winter after Panoras, prvsiyan, areebbb, jazivxt,
+Chilton, the last the record’s spelling for alexchilton since #942’s source, which names
+the account Alex Chilton.
 The record credits people, not AI agents ([attribution.md](../../../../attribution.md)),
 and states the assistance in the source’s words.
 The bibliography key is **[de Winter s299 upper bound 2026-11-18]**. `LICENSE` at the

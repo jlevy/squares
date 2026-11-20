@@ -34632,7 +34632,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s268 upper bound 2026-11-17]'
     field: /credit
-  expected_text: de Winter after Ostashev, PingYou
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
   start: 0
   end: 9
   label: de Winter
@@ -34644,7 +34644,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s268 upper bound 2026-11-17]'
     field: /credit
-  expected_text: de Winter after Ostashev, PingYou
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
   start: 16
   end: 24
   label: Ostashev
@@ -34656,7 +34656,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s268 upper bound 2026-11-17]'
     field: /credit
-  expected_text: de Winter after Ostashev, PingYou
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
   start: 26
   end: 33
   label: PingYou
@@ -34666,6 +34666,42 @@ occurrences:
   note: Identity review pending.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 35
+  end: 42
+  label: Prabhat
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 44
+  end: 52
+  label: Malyshev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 54
+  end: 59
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[de Winter s270 upper bound 2026-11-17]'
     field: /authors/0
   expected_text: de Winter
@@ -34716,7 +34752,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s299 upper bound 2026-11-18]'
     field: /credit
-  expected_text: de Winter after Panoras
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
   start: 0
   end: 9
   label: de Winter
@@ -34728,10 +34764,58 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[de Winter s299 upper bound 2026-11-18]'
     field: /credit
-  expected_text: de Winter after Panoras
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
   start: 16
   end: 23
   label: Panoras
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 25
+  end: 33
+  label: prvsiyan
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 35
+  end: 42
+  label: areebbb
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 44
+  end: 51
+  label: jazivxt
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 53
+  end: 60
+  label: Chilton
   role: prerequisite
   disposition: unresolved
   evidence: []

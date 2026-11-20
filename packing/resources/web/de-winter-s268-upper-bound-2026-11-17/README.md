@@ -164,7 +164,10 @@ Astra. T-331 is confirmed, independently re-implemented, at V3/C3, and is the ho
 ## Credit and Licence
 
 The packing is Joost de Winter’s, a new arrangement at 268 from slices of Daniil
-Ostashev’s and PingYou Ltd’s published packings.
+Ostashev’s and PingYou Ltd’s published packings, through the compilations of Navneet
+Prabhat and Danil Malyshev and Francisco Couzo’s certificate.
+The bibliography credits it as de Winter after Ostashev, PingYou, Prabhat, Malyshev,
+Couzo.
 The record credits people, not AI agents ([attribution.md](../../../../attribution.md)),
 and states the assistance in the source’s words.
 The bibliography key is **[de Winter s268 upper bound 2026-11-17]**. `LICENSE` at the

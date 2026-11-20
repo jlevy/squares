@@ -3480,8 +3480,8 @@ RESULTS: dict[str, Prose] = {
             "before this adoption, it is a new arrangement: no symmetry pairs nearest centres "
             "one to one, and the optimal assignment moves 46 squares beyond a tenth, at most "
             "0.901; against T-289’s, the house before it, 56. So Joost de Winter is the "
-            "packing’s finder, from slices of Ostashev’s and PingYou Ltd’s packings, as the "
-            "issue asks."
+            "packing’s finder, from slices of Ostashev’s and PingYou Ltd’s packings through "
+            "Prabhat’s and Malyshev’s compilations and Couzo’s certificate, as the issue asks."
         ),
         third_route=REVIEW_1021,
         diversity=(
@@ -3531,16 +3531,18 @@ RESULTS: dict[str, Prose] = {
             "The issue says the search divided the box into diagonal slices and filled each "
             "from a reflected or translated copy of a public packing, the outer slices from "
             "372 squares and the seven middle slices from 335, both from Asterios Panoras’s "
-            "public Kaggle compilation, then optimized every square and reflected part of "
-            "one tilted group across the diagonal. Against T-325’s packing, this case’s "
-            "house best packing before this adoption, it is a new arrangement: no symmetry "
-            "pairs nearest centres one to one, and the optimal assignment moves 127 squares "
-            "beyond a tenth, at most 1.074; the 18 November review finds it so against every "
+            "public Kaggle compilation, which it links to the notebooks of prvsiyan (372) and "
+            "of areebbb, jazivxt, alexchilton and prvsiyan (335), then optimized every square "
+            "and reflected part of one tilted group across the diagonal. Against T-325’s "
+            "packing, this case’s house best packing before this adoption, it is a new "
+            "arrangement: no symmetry pairs nearest centres one to one, and the optimal "
+            "assignment moves 127 squares beyond a tenth, at most 1.074; the 18 November "
+            "review finds it so against every "
             "packing the record holds at 299. Each of its two tilted groups shares, for 50 "
             "to 53 squares, the tilted band every house here has carried since Evan Daniel’s "
             "T-248, under a rigid motion of its own; the record does not credit a "
-            "resemblance. So Joost de Winter is the packing’s finder, after the "
-            "compilation’s packings, as the issue asks."
+            "resemblance. So Joost de Winter is the packing’s finder, after Panoras’s "
+            "compilation and those notebooks’ authors, as the issue asks."
         ),
         third_route=REVIEW_1031,
         diversity=(
