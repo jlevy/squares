@@ -3,14 +3,18 @@ type: is
 id: is-01m7xcpkhdfjyanpytvnb8njv7
 title: "Retain and measure de Winter's 20 November donor evidence: the 127 extracts (#1017, unblocks think-e026), the 268/270 donors and straightening check (#1021, #1022), the 299 donors and band match (#1031); then the provenance, model-variant and T-248 wording"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+hold: null
+hold_until: null
 created_at: 2026-11-20T21:09:50.253Z
-updated_at: 2026-11-20T21:09:50.253Z
+updated_at: 2026-11-20T22:45:07.830Z
+started_at: 2026-11-20T22:45:07.829Z
 ---
 Joost de Winter's four comments of 20 November 2026, about 20:00Z, answer the questions of that day's final replies and attach three archives. Lane rec1120 read the comments into result-requests.yaml and did not open or import any attachment.
 
