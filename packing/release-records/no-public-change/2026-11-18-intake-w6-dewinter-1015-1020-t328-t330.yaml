@@ -38,8 +38,8 @@ reason: >-
   127, the rigidity scope at 127, the requests entries and the coverage text that follow.
   The gate's pinned translation-screen findings (validate.SCREEN_FINDINGS) and the
   ceiling of result/t-174.html (site_urls) follow the new witness and the three rows. No
-  paper prints 127's records, these entries or that card. Against origin/main 7b6bc29e8
-  (#1034): devtools.compare_paper_renders rendered each paper into empty site
+  paper prints 127's records, these entries or that card. Against origin/main 935e79c36
+  (#1035): devtools.compare_paper_renders rendered each paper into empty site
   directories, the math passes in /opt/pw-browsers/chromium-1243/chrome-linux64/chrome
   (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of the
   fourteen paths above swapped in. The optimality review, the threshold-bound review and
