@@ -1,0 +1,70 @@
+{
+  "classification": "public coordinate recovery candidate",
+  "n": 228,
+  "source": {
+    "url": "https://raw.githubusercontent.com/GeiserX/squares-in-squares/f822b34456b29addec9b59478aac4eb2306f7566/data/submission-best.csv.gz",
+    "blob_sha": "6b9b1389072b700fa74c6362e68f3376fc1585c8",
+    "credit": "Sergio Fern\u00e1ndez Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares",
+    "license": "CC BY 4.0 for layouts, with third-party terms retained; see upstream NOTICE.",
+    "attribution": "Sergio Fern\u00e1ndez Rubio source round 30 explicitly credits jazivxt/boxed-in-sub for 228 and documents 2.2e-11 floatsafe.",
+    "container_sha256": "c490841279b793a963129680483a21b075fb55e8e26c24d37901c0655c704989",
+    "uncompressed_sha256": "1378c9fd83966c98e4273fa9b9685ea6270802d81a9d0d890255068369714332",
+    "source_228_row": {
+      "source_rows": "696c2f7162a0079b2c9133329784d05b265e24cb155a0c4087d0bdd467c4dbe6",
+      "geometry_strings": "988295c49ab49c82058fe17e0793e2d4cb6c69263d2133776e1d588e52591e9d",
+      "identical_to": null
+    },
+    "slice": "geiser.csv",
+    "slice_sha256": "049f04cdaaefa975ca67ef04a52d1233bcb3ed5e5f44138040fb093fc99447d0",
+    "rows": 228,
+    "ancestry_url": "https://github.com/GeiserX/squares-in-squares/blob/f822b34456b29addec9b59478aac4eb2306f7566/results/round30-best-2026-11-15.tsv"
+  },
+  "pose": "hit-228.txt",
+  "pose_sha256": "2a72008da43d25d926462785f6d61da0c3a27f38b72ef0e8a59cb7bc2ea21eb1",
+  "side": "15.5960431169528",
+  "metrics": {
+    "side": "15.5960431169528",
+    "spans": [
+      "15.5960431169528",
+      "15.596043116952798"
+    ],
+    "max_overlap": "0.0",
+    "close_pairs": 151
+  },
+  "comparison": {
+    "registry": "87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680",
+    "side_only": "15.59604311663166991962735384207686132467904538537536"
+  },
+  "method": "Public centers preserved up to rational conversion and uniform clearance dilation.",
+  "AI": "Audit directed by Do\u011fa \u00d6zden with OpenAI Codex assistance; donor provenance stays with source.",
+  "donor_and_license_trace_required": true,
+  "exact_pose": "hit-228-exact.json",
+  "exact_sha256": "c7cb523dbc9b75fdf26b5d6be3c55d31ef77f0456945883bda5524d610a40c37",
+  "exact_side": "19495053896191/1250000000000",
+  "factor": "1",
+  "check_exits": {
+    "sqcheck": 0,
+    "independent": 0
+  },
+  "exact_below": {
+    "registry": true,
+    "side_only": false
+  },
+  "pose_angle_unit": "radians",
+  "aligned_with_registry": {
+    "transform": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "max_center": 0.23337738208540296,
+    "rms_center": 0.03676545578047746,
+    "moved_gt_1e-3": 228,
+    "max_angle_rad": 0.03414132915810009
+  }
+}

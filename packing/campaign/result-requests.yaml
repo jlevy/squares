@@ -37098,3 +37098,68 @@ issues:
       credits people, not AI agents (attribution.md): the issue says the rescaling, the
       computation and the proof were produced with GPT-6.2 Astra (OpenAI) and the files and
       checks with Claude (Anthropic), under his direction. Licensed MIT by LICENSE at the pin.
+  - number: 1038
+    title: 's(228) ≤ 15.596043116632: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-18'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The account kenaznia-doga, Doğa Özden's AI agent, asks on his behalf for the registration
+      of s(228) <= 15.596043116632, rounded up at 12 places from the exact rational side of a
+      centre-basis Witness/v2 certificate in kenaznia-doga/s228-upper-bound-1559604311 at
+      46ab8bf, 4.29e-9 below the record (T-301, Roberto Ono's). It says the packing is jazivxt's
+      public Kaggle packing (Boxed In Sub, dataset Boxed In v63), converted to exact rationals
+      under one uniform clearance factor, that its original finder is unresolved, and that Özden
+      claims no discovery. It discloses first a side-only Kaggle leaderboard entry at 228 below
+      the claim, which states no packing. Triaged, retained and registered on 20 November 2026 in
+      lane i1038 (think-91fu) as T-334, a provisional id: the print rounds up from its exact
+      side, both maintained exact routes accept the certificate and refuse its gross and sharp
+      controls, and measured here it is a further arrangement of T-301's packing, one to one with
+      it, whose gain is 1.23 times T-301's contraction margin, so a new result under option D
+      (think-b0w5). Its stage 4 review is a separate lane (think-3ape).
+    read_through: '2026-11-18T23:09:08Z'
+    results:
+    - key: n228-kaggle-certificate
+      claim: >-
+        s(228) <= 15.596043116632 rounded up at 12 places (the exact rational side of
+        n-228-candidate.yaml at kenaznia-doga/s228-upper-bound-1559604311 46ab8bf), Özden's exact
+        certificate of jazivxt's public Kaggle packing.
+      source: body
+      register:
+      - T-334
+      evidence:
+      - E-ozden-1038-certificate-report
+      - E-ozden-1038-exact-feasibility
+      validation:
+      - think-3ape
+    - key: n228-leaderboard-side-only
+      claim: >-
+        The Kaggle per-puzzle leaderboard lists 15.596043116631669919627353 at 228 (Nevska, 8
+        November), 9.66e-14 below this side, which the issue discloses first and does not claim.
+      source: body
+      not_registered: >-
+        A side-only entry that states no packing, so it is no report: context only, as #984's
+        and #1005's ledgers treated their quoted leaderboard sides.
+      queued: false
+    beads:
+    - think-91fu
+    - think-3ape
+    answer_bead: think-91fu
+    replies: []
+    close_when: >-
+      The bound is triaged, retained and registered on main, its stage 4 review mapped and the
+      case adopted where it is the smallest validated side, and the reply on main says what was
+      registered, replayed, reviewed and adopted, and how the credit stands.
+    notes: >-
+      Read on 20 November 2026 from main 935e79c3; no comment on the issue, which carried the
+      intake label when read. The issue names 46ab8bf (23:08:45Z), 23 seconds before it, the
+      repository's only commit. It asks for credit to jazivxt for the packing and to Özden for
+      the certificate and the registration; measured, the packing is one to one with T-301's, so
+      the record credits Ono for the arrangement, jazivxt for the further arrangement and Özden
+      for the certificate, as T-314 does at 147, and asks the author whether anything dates
+      jazivxt's packing before T-301's. The Kaggle notebook and dataset were not read: this
+      session's network refuses www.kaggle.com. The project's run of Evan Daniel's driver on
+      T-301 reached a view 9.66e-14 below this side on 15 November, held unregistered; by
+      think-frl5 the claim keeps its status and the view stays a candidate (think-4z8z).

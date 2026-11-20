@@ -5951,6 +5951,34 @@ sources:
       project: the refinements re-solve this registry's houses, and the author ran this
       repository's independent corner checker on the Witness/v2 files. MIT-licensed (LICENSE at
       17cc220). Retained in web/mishapolk-issue1009-2026-11-16/.
+  - key: '[Özden s228 upper bound 2026-11-18]'
+    authors:
+    - 'Özden'
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-18'
+    lineage: builds-on-project
+    credit: 'Ozden after jazivxt, Levy'
+    short_credit: 'Ozden after jazivxt et al.'
+    note: >-
+      kenaznia-doga/s228-upper-bound-1559604311 at 46ab8bf425f5cad886a8bc4023bfff904f43af99
+      (2026-11-18T23:08:45Z), Doğa Özden's certificate for s(228) <= 15.5960431166317666 (the
+      exact side rounded up at 16 places), printed 15.596043116632 rounded up at 12 places: a
+      rational centre-basis Witness/v2, his lab's exact conversion of a public Kaggle packing by
+      jazivxt (notebook Boxed In Sub, run 370961355, copying the dataset Boxed In v63; Apache 2.0
+      as declared there) under one uniform clearance dilation of 1 + 4.6e-18 about the origin.
+      The source says the dataset describes crowdsourced coordinates and the notebook gives no
+      per-count credit, so the original finder is unresolved, and that Özden claims no
+      discovery; it calls the packing a close relative of the house's (T-301, Roberto Ono's),
+      with no information on which came first. Registration was requested in
+      jlevy/squares#1038, posted on the author's behalf by his AI agent's account kenaznia-doga;
+      the conversion and checks were done with OpenAI Codex, and the notebook's overview credits
+      ChatGPT and Codex. It discloses first a side-only Kaggle leaderboard entry at 228,
+      15.596043116631669919627353 (Nevska), below this side and with no packing. The lineage
+      builds on this project: the author checked the certificate with this repository's
+      packing-witness verify. No optimality claim. Licensed CC BY 4.0 and MIT by LICENSE.md at
+      the pin; the coordinates Apache 2.0 as the source declares them. Retained in
+      web/ozden-s228-upper-bound-2026-11-18/.
 credited_names:
   Kaelan Yim: Yim
   Doğa Özden: Özden

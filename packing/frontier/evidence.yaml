@@ -65990,3 +65990,95 @@ evidence:
       that review (outward-rounded ring cuts, an unchecked offset bound in the chord
       allowance), both sound as used.
     source_reviewed: '2026-11-18'
+  - id: E-ozden-1038-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 228
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s228 upper bound 2026-11-18]'
+    certificate: packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-20'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 46ab8bf,
+      n-228-candidate.yaml, posted in issue 1038 on Doğa Özden's behalf by his AI agent: his
+      lab's exact conversion of jazivxt's public Kaggle decimal packing under one uniform
+      clearance dilation of 1 + 4.6e-18, the original finder unresolved, as the source says. A
+      separate complete repository replay is retained for n = 228: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 155268 pair decisions; summed over the 3 jobs, the receipt records 16.96 route CPU
+      seconds and 100.62 job wall seconds, the longest job 40.52 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 3.62e-23. The packet's sharp controls meet those margins on both routes. The replay
+      is E-ozden-1038-exact-feasibility. The source's own sqcheck.py and its second exact
+      checker were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share this repository's centre-basis witness reader (certificate
+      parsing and half-angle conversion), Fraction arithmetic and the separating-axis method;
+      the first is the packing-witness verify the author ran on the same file, so on that route
+      the replay is reproduced with the producer's code, and the second shares no verification
+      code with it. The lab's own conversion made the exact coordinates, not this repository's
+      promotion. No human oversight or optimality is claimed.
+  - id: E-ozden-1038-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 228
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s228 upper bound 2026-11-18]'
+    certificate: packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/n-228-candidate.yaml
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports
+      ozden-s228-upper-bound-2026-11-18 certify --workers 2 wrote the receipt on 20 November
+      2026 from the packet's retained witness, read by the witness-center-basis reader, its JSON
+      twin held to it as the same packing, and check --replay decided all 3 retained jobs again,
+      the witness with its duplicate-square and outside-container controls, through both
+      maintained routes; check-claims rebuilds the frozen comparison. python -m
+      devtools.upper_bound_reports ozden-s228-upper-bound-2026-11-18 sharp-controls wrote the
+      packet's sharp controls, all 11 as stated in a plan hashed on think-91fu before they ran
+      (receipts/controls-plan-1038.md) on both routes: contact accepted at margin 0 and refused
+      1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 228 that T-334 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    limitations: >-
+      A replay of the one retained witness by two maintained exact routes that share this
+      repository's centre-basis witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The first route is the code the
+      author ran (packing-witness verify); the second shares no verification code with it, so
+      the replay is recorded as reproduced with the producer's code, as for the earlier Özden
+      replays; the independent route is the stage 4 review's clean-room checker, a separate
+      lane. The source's sqcheck.py and its second exact checker were not run here. A separate
+      complete repository replay is retained for n = 228: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 155268 pair
+      decisions; summed over the 3 jobs, the receipt records 16.96 route CPU seconds and 100.62
+      job wall seconds, the longest job 40.52 seconds. In every positive squares touch the box,
+      a least wall clearance of exactly 0, and every pair clears by at least 3.62e-23. The
+      receipt's controls are gross, and the packet's sharp controls meet those margins. Finite
+      feasibility only.
+    source_reviewed: '2026-11-20'

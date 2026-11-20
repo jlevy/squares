@@ -1592,6 +1592,7 @@ jobs:
             /packing/resources/web/de-winter-s292-upper-bound-2026-11-16/
             /packing/resources/web/de-winter-upper-bounds-262-295-2026-11-16/
             /packing/resources/web/mishapolk-issue1009-2026-11-16/
+            /packing/resources/web/ozden-s228-upper-bound-2026-11-18/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg

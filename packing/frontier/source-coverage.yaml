@@ -13702,6 +13702,37 @@ sources:
     padding. The ledger of 17 November for this lane
     (campaign/issue-intake/upper-bounds-1009-20261117) records all 13. All 39 native jobs have
     full outcomes.
+- id: ozden-s228-upper-bound-2026-11-18
+  title: Doğa Özden's exact certificate of jazivxt's public Kaggle packing of 228 squares at kenaznia-doga/s228-upper-bound-1559604311 46ab8bf, issue 1038
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s228-upper-bound-1559604311/tree/46ab8bf425f5cad886a8bc4023bfff904f43af99
+  local: resources/web/ozden-s228-upper-bound-2026-11-18/
+  source_key: '[Özden s228 upper bound 2026-11-18]'
+  scope:
+    n_values:
+    - 228
+  reviewed: '2026-11-20'
+  source_date: '2026-11-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
+  evidence:
+  - E-ozden-1038-certificate-report
+  - E-ozden-1038-exact-feasibility
+  notes: >-
+    The centre-basis Witness/v2 certificate, its JSON twin, the unmodified conversion output,
+    jazivxt's decimal slice as the source holds it, Sergio Fernández Rubio's rounded layout and
+    its NOTICE, the check reports and outputs, PROVENANCE.json, the README and the licences are
+    retained for jlevy/squares#1038 at 46ab8bf, the repository's only commit; the lab's checker
+    and its README and the comparison figures are pinned by digest or against byte-identical
+    copies. The Kaggle notebook and dataset were not read here (the session's proxy refuses
+    www.kaggle.com). The certificate is admitted only where its exact side rounds up to the side
+    the issue prints. Licensed CC BY 4.0 and MIT by LICENSE.md at the pin, the coordinates Apache
+    2.0 as the source declares them. T-334 records the in-horizon report, 4.29e-9 below T-301 at
+    228; the ledger of 20 November for this lane (campaign/issue-intake/upper-bounds-1038-20261120)
+    records it. All 3 native jobs have full outcomes.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

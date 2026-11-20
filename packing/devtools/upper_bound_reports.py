@@ -1881,6 +1881,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # counts from 147 to 307, centre/half-angle certificates beside Witness/v2 corner
     # files of the same packings, in one repository and one packet.
     "[Mishapolk issue 1009 2026-11-16]": _import("mishapolk-issue1009-2026-11-16"),
+    # The intake pass of 20 November (think-91fu): Doğa Özden's issue 1038 at 228, his exact
+    # certificate of jazivxt's public Kaggle packing, a centre/half-angle Witness/v2.
+    "[Özden s228 upper bound 2026-11-18]": _import("ozden-s228-upper-bound-2026-11-18"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
