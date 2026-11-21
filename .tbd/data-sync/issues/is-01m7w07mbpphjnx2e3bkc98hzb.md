@@ -5,7 +5,7 @@ title: "Import #1038: Özden's s(228) <= 15.596043116632 (jazivxt's Boxed In coo
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T08:12:42.230Z
-updated_at: 2026-11-21T00:36:23.645Z
+updated_at: 2026-11-21T02:27:43.810Z
 started_at: 2026-11-20T08:13:34.461Z
 ---
 
@@ -26,3 +26,5 @@ started_at: 2026-11-20T08:13:34.461Z
 2026-11-20T11:25Z lane i1038 (correction: the previous note's 09:40Z was written at about 09:17Z): review #1044 (lane r1038, think-3ape) merged 09:34Z, read 09:37Z after this lane's replay/measurements/registration were committed (08:50Z); mapped (E-ozden-1038-review-exact-feasibility, V-r1038-review-check), V3/C3; factor corrected to 1 + 4.56e-15 (F6). Adopted T-334 at 228 in the 2026-11-20 pass: grid-slack 0.5-degree view drawn (runs renamed grid-deg05/1/5: adopt_houses prints grid-0.5, which the index schema refuses), driver reaches the 15 Nov KKT side exactly (9.659e-14 below; held row 3, think-4z8z); screen, rigidity (170 translate), bound citations, census, poster hold (jazivxt and Özden at 228), SCREEN_FINDINGS, suite-file admission, release record. Main merged through a9e5261 (#1046). Stamped and re-pinned. PR #1045 head cda9817a7. Pending: final same-day merge after #1024 and c2 (archive via retain_history, LATER_PASSES union, re-stamp/pin), or move to the 21 Nov pass; contiguity step red until T-328..T-333 land.
 
 2026-11-20T11:58Z lane i1038: hosted CI on 25e6156b1 (run 44729481729) green but validate/suite A (contiguity; plus superseded-set pin, fixed in 1342a4dec); censuses and composite figure rebuilt (9987b761e). Head 1342a4dec, pushed. Remaining for the final merge after #1024 and c2: same-day procedure (scratchpad same-day-pass.md), re-stamp and re-pin; or move to the 21 Nov pass. Worktree removed; branch holds everything.
+
+#1045 merged on 21 November UTC as 9b21535f3dab55181920665492b279c35bf81279. The final exact review head e143c9f4c1 passed all three hosted merge checks. The source and verifier citation credit is “Ozden after jazivxt, Levy”, with finder and improver fields unresolved and T-301's credit retained. The scoped R1 merge was combined byte-for-byte outside the shared documentation additions. Await the live Pages verification at run 44855793759 before the #1038 reply and its receipt. The later attachment remains in think-d4b0.

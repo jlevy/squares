@@ -5,7 +5,7 @@ title: "Import #1052: de Winter's s(305) <= 17.945755838742 (refines T-309, Koda
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:56:46.484Z
-updated_at: 2026-11-21T00:29:05.715Z
+updated_at: 2026-11-21T02:27:44.145Z
 started_at: 2026-11-20T21:05:08.431Z
 ---
 
@@ -29,3 +29,5 @@ started_at: 2026-11-20T21:05:08.431Z
 - Bound the two original certificates to commit db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef and compared them with 5282edd875419bef5a19da1fa726fec53ff04a47's registration manifest. Exact JSON SHA-256 e6c7d0280396a2fa61804a24a7c757365320869dbb89e8cf94316bb8b6a7831f. Original YAML SHA-256 b11a6e65a275d3282e1400b89b4cdbd9ca01cf99d01a8e9f0a38a56c20081a46. The official acquisition check passed on packet de-winter-n305-2026-11-20.
 - The replacement plan precedes any maintained replay in this continuation and discloses the completed blind review. Proposed path packing/resources/web/de-winter-n305-2026-11-20/receipts/controls-plan-1052-n305.md, SHA-256 452108abc712094e006f74109aad98d258f458bbcfac43fed71375f67940d67d. Use the centre/direction JSON, 305 units and 46,360 pairs on both maintained routes, plus gross duplicate and wall rejection and the standard exact sharp controls at contact and 1e-30 past. Per-job ceiling 600 seconds with one guarded worker. Reuse #1057's independent standing, identity and Option D evidence.
 - The next steps are the packet registration and controlled replay, provisionally after T-334 and T-335, followed by house regularization and merge-day stamping once admitted. Source copies and prepared packet are in the existing Squares checkout's task scratch. The external scratch volume is still unmounted.
+
+The prepared packet is now in the reused checkout on codex/intake-305-20261121 at packing/resources/web/de-winter-n305-2026-11-20/. Acquisition and claims passed. The completed maintained receipt f709941eec2e5bae1bd245df6fd59d36197d097242eddb884806006a3fdd7c82 records the accepted positive certificate and both planned refusals through two routes, 278,160 pair decisions and 111.304106 CPU seconds. The exact receipt recheck passed and the sharp controls are running under the same one-worker memory guard. The independent source comparison confirms the receipt consumes precisely #1057's approved JSON geometry and #1057 already binds the T-309 Option D measurements. Registration and adoption remain pending.
