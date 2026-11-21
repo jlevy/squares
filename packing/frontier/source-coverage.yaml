@@ -13904,6 +13904,61 @@ sources:
     publisher; T-301 retains Roberto Ono's credit, and Doğa Özden is credited for this
     certificate. T-334's finder, publication order and direction of derivation remain
     unresolved; the later related de Winter attachment awaits comparison in think-d4b0.
+- id: de-winter-kodaj-n109-2026-11-18
+  title: Tomáš Kodaj's 109 as Joost de Winter transcribed it exactly, at JoostdeWinter/square-packing
+    aae089c, issue 1012
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/aae089c37a2d3fb91b161a1b3a45f06a41277d18
+  local: resources/web/de-winter-kodaj-n109-2026-11-18/
+  source_key: '[de Winter Kodaj n109 2026-11-18]'
+  scope:
+    n_values:
+    - 109
+  reviewed: '2026-11-20'
+  source_date: '2026-11-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/n-109.md
+  - resources/web/de-winter-kodaj-n109-2026-11-18/acquisition/claims.json
+  evidence:
+  - E-de-winter-1012-n109-report
+  - E-de-winter-1012-n109-exact-feasibility
+  notes: The corner Witness/v2, Kodaj's 109 Kaggle rows it transcribes, the folder's
+    README, SHA256SUMS and the checker log are retained for jlevy/squares#1012 at
+    aae089c, which first committed them 2 minutes 57 seconds before the comment of
+    18 November that attaches the same files; the next commit deletes the folder,
+    and the licence is pinned against a byte-identical copy. The attachment and Kaggle
+    were not read here (the session's proxy refuses both). The certificate is admitted
+    only where its exact side equals the side the comment states. CC0 for the coordinates
+    by the source's word, MIT by the LICENSE at the pin for the transcription. The 20
+    November report-order walk records this certificate. Under Option D it remains an
+    unregistered restatement of T-335, credited to de Winter after Kodaj, Samanyu-dev.
+    All three replay jobs have full outcomes.
+- id: samanyu-n109-2026-11-07
+  title: Samanyu-dev's 109-square pinwheel from the public Kaggle submission
+  role: source-repository
+  url: https://github.com/Samanyu-dev/squares_in_squares/tree/53551d77513a9f5c180a731f291baf7eda7c3009
+  local: resources/web/samanyu-n109-2026-11-07/
+  source_key: '[Samanyu-dev square packing 2026-11-07]'
+  scope:
+    n_values:
+    - 109
+  reviewed: '2026-11-21'
+  source_date: '2026-11-07'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/samanyu-n109-2026-11-07/acquisition/claims.json
+  evidence:
+  - E-samanyu-n109-numerical-report
+  - E-samanyu-n109-exact-feasibility
+  - E-samanyu-n109-canonical-independent-feasibility
+  notes: The upstream CSV is pinned by digest. The portable rational derivation proves the
+    12-place upward print 10.949289580946. Both maintained routes and the independently
+    implemented corners checker accepted it. T-335 records Samanyu-dev’s original packing;
+    the house adoption is pending under think-wvr8.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

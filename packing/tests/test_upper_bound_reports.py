@@ -26,6 +26,7 @@ from devtools import check_standing, goebel_construction
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools import upper_bound_reports as reports
+from devtools import upper_bound_sharp_controls as sharp
 
 COUZO = "couzo-exact-certificates-2026-10-09"
 FANG = "fang-two-wedge-certificates-2026-10-10"
@@ -297,6 +298,10 @@ I1_1117 = (
 #: centre/half-angle certificates read by ``evand-cert``, each held to the source's
 #: Witness/v2 corner file, under MIT.
 ISSUE_1009 = "mishapolk-issue1009-2026-11-16"
+#: The intake pass of 20 November 2026, lane c7-pointers (the issue 1012 section below):
+#: Joost de Winter's exact transcription of Tomáš Kodaj's 109 (#1012), a corner Witness/v2
+#: numbered from 0, read by ``witness-corners`` with ``first_id`` 0, under CC0 and MIT.
+ISSUE_1012 = "de-winter-kodaj-n109-2026-11-18"
 #: The intake pass's lane w6-dewinter-1118 of 18 November 2026
 #: (`test_upper_bound_reports_w6_1118`): Joost de Winter's #1015, #1017 and #1020 at 127,
 #: three certificates of one band filed that evening, each below the last, his
@@ -387,6 +392,7 @@ EVERY = (
     L187_1116,
     *I1_1117,
     ISSUE_1009,
+    ISSUE_1012,
     *W6_1118,
     ISSUE_1038,
 )
@@ -439,6 +445,19 @@ def test_custody_admits_every_declared_certificate_at_its_printed_side(name: str
             continue
         places = len(row["offered"].partition(".")[2])
         assert legacy.ceiling_decimal(certificate.side, places) == row["offered"]
+
+
+def test_kaggle_csv_preserves_a_tiny_rotation_and_derives_the_extent() -> None:
+    raw = b"id,n,square_id,x,y,angle\n11,2,0,8.5,7.5,0\n12,1,0,2.5,7.5,1.7453292519943298e-17\n"
+    certificate = reports.parse_certificate(raw, 1, "kaggle-csv")
+    (pose,) = certificate.poses
+    assert 0 < pose.t < Fraction(1, 10**16)
+    xs, ys = zip(*reports.pose_corners(pose), strict=True)
+    assert min(xs) == min(ys) == 0
+    assert max(xs) == max(ys) == certificate.side > 1
+
+    with pytest.raises(reports.ReportError, match="square IDs"):
+        reports.parse_certificate(raw.replace(b"12,1,0", b"12,1,1"), 1, "kaggle-csv")
 
 
 def test_n183_house_reader_keeps_source_custody_and_original_certificate_scope(
@@ -1573,6 +1592,7 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L181_1115,
         L187_1116,
         *I1_1117,
+        ISSUE_1012,
         W6_1118[1],
         ISSUE_1038,
     }
@@ -1881,6 +1901,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         L187_1116: "2026-11-16",
         **dict.fromkeys(I1_1117, "2026-11-16"),
         ISSUE_1009: "2026-11-16",
+        ISSUE_1012: "2026-11-18",
         **dict.fromkeys(W6_1118, "2026-11-17"),
         ISSUE_1038: "2026-11-18",
     }
@@ -2428,3 +2449,165 @@ def test_a_declaration_read_from_23_october_stands_beyond_324_on_goebel_s_constr
     monkeypatch.setattr(goebel_construction, "MAX_BUILD", 1100)
     with pytest.raises(reports.ReportError, match="n = 1074: no build to 1100 proves"):
         reports.claim_row(row, certificate, declaration, _unread)
+
+
+# --------------------------------------------------------------------------- issue 1012
+# The intake pass's lane c7-pointers of 20 November 2026 (think-wvr8): Joost de Winter's
+# corner Witness/v2 at 109 (#1012's comment of 18 November), his exact transcription of
+# Tomáš Kodaj's CC0 Kaggle rows. These hold what is particular to the packet: the digests
+# lane w10-1118 recorded for the attachment's members, the exact side the comment states, the
+# house and the gain, the ledger's verdict, the retained control plan and sharp controls, the
+# identity measurements, the option D comparison with Samanyu-dev's public 109 shrunk to first
+# contact, and the L-step scan the register's notes cite. They read the packet and the ledger
+# only, and live here rather than in a module of their own so that the suite's shard record
+# names them (test_suite_files).
+
+I1012_LEDGER = reports.ROOT / "campaign/issue-intake/upper-bounds-1012-20261120"
+#: The SHA-256 of the attachment's members, as lane w10-1118 recorded them on think-wvr8 on
+#: 18 November from its own retrieval of the zip.
+I1012_MEMBERS = {
+    "n109_kaggle/n109_tomkodaj.csv": (
+        "c4f76a5a0dcf6055da754bc35a8ea23abb832109b4d0dc4c534924f47b631e8b"
+    ),
+    "n109_kaggle/n109_tomkodaj.yaml": (
+        "56b4655fada7dfd5d54c1483b021d5b700ecb5c41beba2865a6a8ef7e223b3fb"
+    ),
+    "n109_kaggle/verification.txt": (
+        "d9647ac120a2bfeaac88dc12f48ea60c8fddb451cd855ff007b94aec20ac38d4"
+    ),
+}
+#: The control plan's SHA-256, recorded on think-wvr8 before any route decided the certificate.
+I1012_PLAN = "323a526f22032acd4a7636381d0a170ac914192eb770329aec92a9efbfdcd49b"
+#: The SHA-256 of best_fit_101_500.csv at Samanyu-dev/squares_in_squares 53551d7.
+I1012_SAMANYU = "377b9177febf1b89f08d655531880fb683666e494a3b303f10645e7440996c04"
+I1012_SIDE = Fraction(547464479047171949843, 50000000000000000000)
+
+
+def test_the_packet_holds_the_attachments_members_byte_for_byte() -> None:
+    text = (_packet(ISSUE_1012) / "acquisition/upstream-subtree.sha256").read_text("utf-8")
+    manifest = {
+        path.removeprefix("./"): digest
+        for digest, path in (line.split(maxsplit=1) for line in text.splitlines())
+    }
+    assert {path: manifest[path] for path in I1012_MEMBERS} == I1012_MEMBERS
+
+
+def test_the_side_is_the_comments_exact_fraction_read_from_squares_numbered_from_zero() -> None:
+    declaration = reports.load_declaration(_packet(ISSUE_1012))
+    assert declaration["issue"].endswith("/issues/1012")
+    assert declaration["requested"] == declaration["replayed"] == [109]
+    (row,) = declaration["certificates"]
+    assert row["offered"] == "547464479047171949843/50000000000000000000"
+    assert reports.row_options(row) == {reports.FIRST_ID: "0"}
+    assert reports.read_facts(_packet(ISSUE_1012), {109})[109].side == I1012_SIDE
+    # The issue's first print, rounded to nearest, lies below the side and bounds nothing.
+    assert Fraction("10.949289580943") < I1012_SIDE <= Fraction("10.949289580944")
+
+
+def test_the_certificate_is_below_the_house_by_the_gain() -> None:
+    row = reports.check_claims(_packet(ISSUE_1012))["results"][0]
+    case = row["case"]
+    assert (row["smallest"], case["relation"], case["result"]) == (
+        reports.THIS,
+        "below",
+        "T-101",
+    )
+    assert row["pending"] == []
+    assert f"{float(Fraction(case['difference'])):.4e}" == "4.5789e-04"
+
+
+def test_the_ledger_records_the_comment_as_a_new_packing() -> None:
+    ledger = _json(I1012_LEDGER / "ledger.json")
+    walked = {
+        count["n"]: [(step["report"], step["verdict"]) for step in count["steps"]]
+        for count in ledger["counts"]
+    }
+    assert walked == {109: [("#1012 update", "recorded")]}
+
+
+def test_the_control_plan_is_the_one_hashed_on_the_bead() -> None:
+    plan = (_packet(ISSUE_1012) / "receipts/controls-plan-1012-n109.md").read_bytes()
+    assert hashlib.sha256(plan).hexdigest() == I1012_PLAN
+
+
+def test_the_retained_sharp_controls_meet_contact_and_refuse_1e30_past_it() -> None:
+    """Square 39 touches its wall, so it grows by 0 and is accepted at contact; the least
+    pair gap, about 2.0e-15 at squares 60 and 70, exceeds the step, so square 70 enlarged to
+    its partner is refused at contact for its shape alone."""
+    record = _json(sharp.receipt_path(_packet(ISSUE_1012), [109], 109))
+    assert (record["n"], record["packet"], record["all_as_expected"]) == (109, ISSUE_1012, True)
+    assert record["epsilon"] == str(kernel.SHARP_EPSILON)
+    assert {row["control"] for row in record["controls"]} == set(sharp.CONTROLS)
+    assert len(record["controls"]) == 11
+    for row in record["controls"]:
+        assert row["as_expected"] is True
+        verdicts = {
+            route: (
+                outcome["passed"],
+                tuple(outcome["failures"]),
+                outcome["wall"],
+                outcome["gap"],
+            )
+            for route, outcome in row["routes"].items()
+        }
+        assert set(verdicts) == set(kernel.ROUTES)
+        assert len(set(verdicts.values())) == 1
+    wall = [row for row in record["controls"] if row["control"] == sharp.ENLARGED_WALL]
+    assert wall[0]["detail"]["square"] == 39
+    assert Fraction(wall[0]["detail"]["wall_clearance"]) == 0
+    pair = next(
+        row
+        for row in record["controls"]
+        if row["control"] == sharp.ENLARGED_PAIR and row["where"] == "at-contact"
+    )
+    assert (pair["detail"]["square"], pair["detail"]["partner"]) == (70, 60)
+    assert pair["expected_failures"] == ["shape"]
+
+
+def test_the_identity_pairs_it_with_samanyu_devs_109_and_kodajs_rows_not_the_house() -> None:
+    record = _json(_packet(ISSUE_1012) / "measure/identity.json")
+    assert record["inputs"]["SAMANYU-53551d7"]["sha256"] == I1012_SAMANYU
+    pairs = {pair["against"]: pair for pair in record["pairs"]}
+    assert pairs["T-101"]["nearest_centre"]["one_to_one"] is False
+    assert pairs["T-101"]["assignment"]["moved_beyond"]["1e-1"] == 56
+    samanyu = pairs["SAMANYU-53551d7"]
+    assert samanyu["nearest_centre"]["one_to_one"] is True
+    assert samanyu["assignment"]["moved_beyond"]["1e-3"] == 37
+    assert samanyu["assignment"]["moved_beyond"]["1e-1"] == 0
+    rows = pairs["KODAJ-ROWS"]
+    assert rows["assignment"]["moved_beyond"]["1e-9"] == 0
+    assert record["tilts"]["KODAJ"]["tilted_beyond_1_degree"] == 45
+    assert record["tilts"]["SAMANYU-53551d7"]["tilted_beyond_1_degree"] == 45
+
+
+def test_option_d_the_certificate_lies_within_samanyu_devs_padding() -> None:
+    """The owner's option D (think-b0w5): Samanyu-dev's 109, read exactly and boxed at its
+    own extent, contracted uniformly to first contact has margin 1.9960e-12; the gain is
+    0.9721 of it, so the contracted predecessor lies 5.57e-14 below this certificate, which
+    restates it. Its own margin is 1.99e-14."""
+    record = _json(_packet(ISSUE_1012) / "measure/contraction-n109-samanyu.json")
+    assert record["certificate"]["sha256"] == I1012_SAMANYU
+    assert (record["certificate"]["label"], record["binding_pair"]) == (
+        "SAMANYU-53551d7",
+        [17, 73],
+    )
+    assert record["routes_accept"] is True
+    assert all(verdict["passed"] for verdict in record["certificate_routes"].values())
+    against = record["against"]
+    assert against["certificate"] == {"label": "KODAJ", "input": "packet", "packet": ISSUE_1012}
+    assert Fraction(against["side"]) == I1012_SIDE
+    assert against["within_margin"] is True
+    assert against["gain_over_margin"] == "0.9721"
+    below = I1012_SIDE - Fraction(record["contracted_side"])
+    assert Fraction(55, 10**15) < below < Fraction(56, 10**15)
+    own = _json(_packet(ISSUE_1012) / "measure/contraction-n109-own.json")
+    assert (own["certificate"]["label"], own["binding_pair"]) == ("KODAJ", [60, 70])
+    assert 0 < Fraction(own["margin"]) < Fraction(2, 10**14)
+
+
+def test_the_l_step_scan_stands_the_side_in_and_carries_it_nowhere() -> None:
+    record = _json(_packet(ISSUE_1012) / "measure/l-step-scan.json")
+    assert {int(n): Fraction(side) for n, side in record["with"].items()} == {109: I1012_SIDE}
+    steps = record["l_step"]["improves"] + record["l_step"]["extensions"]
+    assert not [row for row in steps if 109 in (row["n"], row["from"])]
+    assert record["monotonicity"]["improves"] == []

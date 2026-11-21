@@ -1,0 +1,69 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1012",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter Kodaj n109 2026-11-18]",
+  "report_evidence": "E-de-winter-1012-n109-report",
+  "receipt_format": "de-winter-1012-exact-replay-v1",
+  "witness_prefix": "W-kodaj-1012-n",
+  "claim_limitations": "A complete rational corner Witness/v2 at 109, n109_kaggle/n109_tomkodaj.yaml at aae089c in the watched repository JoostdeWinter/square-packing, byte-identical to the member of the attachment of jlevy/squares#1012's comment of 18 November: Joost de Winter's exact transcription of the 109 rows of Tomáš Kodaj's CC0 Kaggle dataset (version 2, 13 November 2026), a pinwheel. Finite construction feasibility only; local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-20",
+  "read_at_main": "06754afe6f44953e7e327eb4d421c79af0939eed",
+  "certificates": [
+    {
+      "n": 109,
+      "path": "n109_kaggle/n109_tomkodaj.yaml",
+      "format": "witness-corners",
+      "offered": "547464479047171949843/50000000000000000000",
+      "first_committed": "2026-11-18T07:30:49Z",
+      "options": [
+        {
+          "name": "first_id",
+          "value": "0"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    109
+  ],
+  "replayed": [
+    109
+  ],
+  "houses": [
+    {
+      "n": 109,
+      "reader": "[evand exact optima 2026-10-05]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue, verified by T-101's exact ceiling",
+      "result": "T-101",
+      "reported_value": "10.94974746830583",
+      "verified_value": "10.94974746830584",
+      "evidence": [
+        "E-evand-exact-ceilings-2026-10-05-exact-replay",
+        "E-evand-exact-ceilings-2026-10-05-source-replay",
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Tomáš Kodaj's 109 as Joost de Winter transcribed it exactly, at JoostdeWinter/square-packing aae089c, issue 1012",
+    "headline": "Kodaj's 109 pinwheel, transcribed exactly by de Winter, 4.58e-04 below 6 + (7/2)√2",
+    "significance": 3,
+    "source_checks": "Both maintained exact routes, both gross controls and the 11 sharp controls",
+    "credit": "de Winter after Kodaj, Samanyu-dev",
+    "next_rung": "stage 4 review",
+    "bead": "think-wvr8",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "independent",
+      "credit": "de Winter after Kodaj, Samanyu-dev",
+      "note": "see bibliography.yaml",
+      "short_credit": "de Winter after Kodaj et al."
+    }
+  }
+}

@@ -6108,7 +6108,71 @@ sources:
       packing-witness verify. No optimality claim. Licensed CC BY 4.0 and MIT by LICENSE.md at
       the pin; the coordinates Apache 2.0 as the source declares them. Retained in
       web/ozden-s228-upper-bound-2026-11-18/.
+  - key: '[de Winter Kodaj n109 2026-11-18]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-18'
+    lineage: independent
+    credit: de Winter after Kodaj, Samanyu-dev
+    short_credit: de Winter after Kodaj et al.
+    note: 'JoostdeWinter/square-packing at aae089c37a2d3fb91b161a1b3a45f06a41277d18
+      (2026-11-18T07:30:49Z), the folder n109_kaggle/: Joost de Winter''s exact rational
+      corner Witness/v2 for s(109) <= 547464479047171949843/50000000000000000000 = 10.94928958094343899686,
+      printed 10.949289580944 rounded up at 12 places, his transcription of the 109
+      rows of Tomáš Kodaj''s Kaggle dataset ''Squares in Squares: strips and bands (coordinates)'',
+      version 2 of 13 November 2026 under CC0, which the folder also holds. The next
+      commit, 7232328, deletes the folder; the comment of 18 November on jlevy/squares#1012
+      attaches the same files and asks for credit as this repository''s sources support.
+      The source says Kodaj refers to his source notebooks for the original credits,
+      that Navneet Prabhat''s compilation holds the same packing, that Guilherme Dias
+      da Fonseca published a 109-square pinwheel first (6 November 2026, 10.949392392),
+      and that Samanyu-dev''s public file holds one at 10.94928958094538. Measured here,
+      it is Samanyu-dev''s 7 November pinwheel (Samanyu-dev/squares_in_squares 53551d7)
+      restated within that packing''s padding (option D), so the credit names Kodaj''s
+      rows and Samanyu-dev''s packing after the transcription. The owner credits Samanyu-dev
+      as finder for T-335 (think-wvr8). Priority among the earlier reports remains unresolved.
+      The transcription was
+      made with GPT-6.2 Sol (OpenAI) and checked with Claude (Anthropic) under de Winter''s
+      direction. CC0 for the coordinates by the source''s word; MIT by the LICENSE at
+      the pin. Retained in web/de-winter-kodaj-n109-2026-11-18/.'
+  - key: '[GeiserX squares-in-squares 2026-11-18]'
+    authors:
+    - Fernández Rubio
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-18'
+    lineage: independent
+    credit: Fernandez Rubio
+    note: 'GeiserX/squares-in-squares at f822b34456b29addec9b59478aac4eb2306f7566 (2026-11-18T18:37:44Z):
+      Sergio Fernández Rubio''s (GeiserX) code, layouts and notes for the Kaggle competition
+      ''Squares in Squares'', first published whole at c409de5 that day. jlevy/squares#1040
+      points to the 259-square packing in data/submission-best.csv.gz, side 16.590016439573
+      by the issue and L = 16.590016439573077 by results/round33-best-2026-11-17.tsv,
+      his k123 join of tilted bands from his own 292 and 445, below T-193 at 259. The
+      file holds binary64 rows, not a certificate; the issue''s attached exact Witness/v2
+      was not read here, so nothing is registered from this source (think-squj). CC
+      BY 4.0 for the layouts and Apache 2.0 for the code by NOTICE at the pin, which
+      asks for credit to ''Sergio Fernández Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares''.
+      Retained in web/geiserx-squares-in-squares-2026-11-18/ (attribution files and
+      the provenance table; the submission pinned by digest only).'
+  - key: '[Samanyu-dev square packing 2026-11-07]'
+    authors:
+    - Samanyu-dev
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-07'
+    lineage: independent
+    credit: Samanyu-dev
+    note: Samanyu-dev/squares_in_squares at 53551d77513a9f5c180a731f291baf7eda7c3009, committed 2026-11-07T20:20:31Z,
+      publishes n109 rows in best_fit_101_500.csv. The owner credits Samanyu-dev as finder. The project
+      canonical rational conversion and its exact upward print are recorded in web/samanyu-n109-2026-11-07/.
+      Upstream README and CSV are pinned by digest; no licence file is present at the pin. De Winter
+      after Kodaj, Samanyu-dev is the separate later restatement source, not the author of these original
+      rows.
 credited_names:
+  Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim
   Doğa Özden: Özden
   Benjamin Greff: Greff
@@ -6170,3 +6234,4 @@ credited_names:
   jazivxt: jazivxt
   Tomáš Kodaj: Kodaj
   JoeGun: JoeGun
+  Sergio Fernández Rubio: Fernández Rubio

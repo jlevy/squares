@@ -67609,3 +67609,221 @@ evidence:
       program, which share its reader. The review ran on its own clone of the source at the
       pin; the certificate's digest equals the packet's. Finite feasibility only.
     source_reviewed: '2026-11-20'
+  - id: E-de-winter-1012-n109-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 109
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter Kodaj n109 2026-11-18]'
+    certificate: packing/resources/web/de-winter-kodaj-n109-2026-11-18/source/n109_kaggle/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-20'
+    limitations: 'This atom records the source author''s report, in the comment of 18
+      November on issue 1012, of 1 exact rational certificate at aae089c, n109_kaggle/n109_tomkodaj.yaml:
+      his transcription of the 109 rows of Tomáš Kodaj''s CC0 Kaggle dataset (version
+      2, 13 November 2026), a pinwheel, beside the rows themselves. The comment attaches
+      the same files, whose digests the retained ones have; the attachment was not read
+      here. It says this repository''s independent rational-corner checker at f9ddfeeef
+      accepts the witness, and its log is retained as verification.txt. A separate complete
+      repository replay is retained for n = 109: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 35316
+      pair decisions, 8.22 route CPU seconds. Squares touch the box exactly, and every
+      pair clears by at least 2.00e-15. The packet''s sharp controls meet those margins
+      on both routes. The replay is E-de-winter-1012-n109-exact-feasibility.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method; the second is the checker the source
+      reports running. The source''s statements of provenance and licence rest on Kaggle,
+      which was not read here. No human oversight or optimality is claimed.'
+  - id: E-de-winter-1012-n109-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 109
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter Kodaj n109 2026-11-18]'
+    certificate: packing/resources/web/de-winter-kodaj-n109-2026-11-18/source/n109_kaggle/
+    replay: 'From packing/ with the project interpreter (Python 3.14.7) on a shared
+      four-core host, on two cores: python -m devtools.upper_bound_reports de-winter-kodaj-n109-2026-11-18
+      certify --workers 2 wrote the receipt on 20 November 2026 from the packet''s retained
+      witness, read by the witness-corners reader with its first_id option 0, and check
+      --replay decided all 3 retained jobs again, the certificate with its duplicate-square
+      and outside-container controls, through both maintained routes; check-claims rebuilds
+      the frozen comparison. python -m devtools.upper_bound_reports de-winter-kodaj-n109-2026-11-18
+      sharp-controls wrote the packet''s sharp controls, all 11 as stated in advance
+      on both routes: contact accepted at margin 0 and refused 1e-30 past it.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: de Winter’s restatement certificate at 109, every wall and every pair decided
+          by both maintained routes; the kernel's controls are retained in the packet's
+          receipt
+        checked: 1
+        of: 1
+      read:
+      - specification
+      - certificate-format
+      clean_room: false
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: the project's verification lanes that wrote sqpack's exact verifier
+          and the independent rational corner checker over September and October 2026,
+          and the import lanes that wrote the corner readers; each lane's tier and reasoning
+          setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The source says the transcription was made with GPT-6.2 Sol (OpenAI) and
+          checked again with Claude (Anthropic) under Joost de Winter's direction; the
+          project's routes are Claude's too, written from prompts of their own long
+          before this certificate. One maintained route, the independent rational corner
+          checker (V-check-rational-witness-independent), is the checker the source
+          reports running, so the independence rests on sqpack's exact verifier (V-sqpack-verify).
+          The routes' authors read other sources' formats and, in earlier lanes, other
+          sources' checkers, so the record does not call them clean room.
+    limitations: 'A replay of the retained certificate by two maintained exact routes
+      that share this repository''s corner witness reader (certificate parsing and half-angle
+      conversion), Fraction arithmetic and the separating-axis method. A separate complete
+      repository replay is retained for n = 109: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 35316
+      pair decisions; summed over the 3 jobs, the receipt records 8.22 route CPU seconds.
+      In every positive squares touch the box, a least wall clearance of exactly 0,
+      and every pair clears by at least 2.00e-15. The receipt''s controls are gross,
+      and the packet''s sharp controls meet those margins. Finite feasibility only.'
+    source_reviewed: '2026-11-20'
+  - id: E-samanyu-n109-numerical-report
+    claim: witness-feasibility
+    scope:
+      n_values:
+      - 109
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    novelty: previously-published
+    source_key: '[Samanyu-dev square packing 2026-11-07]'
+    replay_status: not-attempted
+    limitations: This atom records the public numerical rows at Samanyu-dev/squares_in_squares 53551d77513a9f5c180a731f291baf7eda7c3009.
+      It attributes no exact rational bound or checker execution to the source. The safe print 10.949289580946
+      belongs to this repository canonical conversion; the exact upper-bound atoms are separate. The
+      upstream README and CSV are pinned by digest, and the packet retains the derived numerical fact.
+    source_reviewed: '2026-11-21'
+  - id: E-samanyu-n109-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 109
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+    - The canonical fact reader in devtools.upper_bound_reports used by the project conversion/replay
+      pipeline.
+    - The rational half-angle and basis representation in devtools.evand_exact_certificates.
+    - CPython fractions.Fraction arithmetic.
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Samanyu-dev square packing 2026-11-07]'
+    certificate: packing/resources/web/samanyu-n109-2026-11-07/facts/n-109.yaml.gz
+    replay: 'The packet receipts/exact-certification.json.xz records the canonical fact at n=109 on
+      exact_verify and independent: the positive accepted and the duplicate-square and outside-container
+      controls refused, three jobs, two routes, 35,316 pair decisions. receipts/sharp-controls.json
+      records all 11 controls as expected at contact and 1e-30 past it. The replay plan is receipts/controls-plan-samanyu-n109.md.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: 'The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained
+          routes.'
+        checked: 1
+        of: 1
+    limitations: This repository generates the rational fact from the source numerical rows. This
+      atom conservatively records the conversion/replay pipeline shared components; it makes no clean-room
+      claim. The independently implemented r1012 execution is a separate atom. These receipts concern
+      the canonical fact, not the older libm witness. Finite feasibility only.
+    source_reviewed: '2026-11-21'
+  - id: E-samanyu-n109-canonical-independent-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 109
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Samanyu-dev square packing 2026-11-07]'
+    certificate: packing/resources/web/samanyu-n109-2026-11-07/facts/n-109.yaml.gz
+    replay: 'On 21 November 2026 the retained r1012_check.py was run on the canonical fact through
+      a corners copy at the same exact side, with claim 10.949289580946. receipts/canonical-independent-check.json
+      records ACCEPT: all 109 squares and 5,886 pairs, both exact methods agreeing, zero problems
+      and the claim confirmed as the upward 12-place print. receipts/canonical-independent-binding.json
+      binds the source fact, retained corners copy and output receipt by digest.'
+    replay_status: passed
+    verifiers:
+    - V-r1012-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: 'The canonical n109 fact through its exact corners copy: every square, every wall and
+          all 5,886 pairs.'
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: The separately prompted stage 4 review lane r1012 of 20 November 2026; tbd-strong-max
+          at maximum reasoning.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: The checker was written and frozen before the canonical Kaggle adapter and this exact
+          fact were produced, and imports no project or producer verifier code. Samanyu-dev search
+          authorship was not audited. The 21 November run reuses the retained checker; it is not a
+          newly blinded review.
+    independence_record: docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md
+    limitations: The implementation was independently written and frozen for the earlier r1012 review;
+      this is a new execution of that unchanged checker, not a new blind review. It checks the canonical
+      rational geometry, not the mathematical exactness of the source radian angles. The old mapped
+      review accepted a different libm-derived Samanyu witness and does not itself accept this canonical
+      binding. The canonical binding is accepted in the 21 November confirming review. The 37
+      controls in the de Winter review apply to its certificate.
+    source_reviewed: '2026-11-21'

@@ -450,6 +450,16 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Improved packings for n = 103, 105 and other cases.",
     ),
     (
+        "https://github.com/Samanyu-dev/squares_in_squares",
+        "Samanyu-dev",
+        (
+            "Public numerical centres and radian angles for a 109-square pinwheel. "
+            "A rational derivation is verified here as T-335; its [retained packet]"
+            "(https://github.com/jlevy/squares/blob/main/packing/resources/web/"
+            "samanyu-n109-2026-11-07/README.md) records the source and exact checks."
+        ),
+    ),
+    (
         "https://github.com/JoostdeWinter/square-packing-211",
         "Joost de Winter",
         "A packing of 211 squares in a square of side under 15.",

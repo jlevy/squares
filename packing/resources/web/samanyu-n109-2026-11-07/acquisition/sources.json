@@ -1,0 +1,44 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-21T00:13Z",
+  "git_scope": "A filtered checkout at the exact pinned source commit. The packet covers its README and the CSV with every row used for n = 109.",
+  "sources": [
+    {
+      "id": "samanyu-dev-squares-in-squares",
+      "source_url": "https://github.com/Samanyu-dev/squares_in_squares",
+      "source_ref": "main",
+      "source_commit": "53551d77513a9f5c180a731f291baf7eda7c3009",
+      "committed_utc": "2026-11-07T20:20:31Z",
+      "git_tree": "3a1df45c6e3599332e5105326472996768338ae5",
+      "archived_path": "packing/resources/web/samanyu-n109-2026-11-07/source",
+      "subtree_manifest": "packing/resources/web/samanyu-n109-2026-11-07/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "best_fit_101_500.csv"
+      ],
+      "subtree_file_count": 2,
+      "subtree_total_bytes": 5592604,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 15454,
+          "sha256": "d7f7838b51085d2fce5b5b98da22d936f34888d21e306c7b14d84c4611cad266",
+          "reason": "Author provenance and workflow, pinned by digest."
+        },
+        {
+          "path": "best_fit_101_500.csv",
+          "bytes": 5577150,
+          "sha256": "377b9177febf1b89f08d655531880fb683666e494a3b303f10645e7440996c04",
+          "reason": "The public submission's numerical layout. Retain its digest and derive the exact 109-square witness as facts/n-109.yaml."
+        }
+      ],
+      "license": "The pinned tree contains no licence file. The original source files are pinned by digest, and the packet retains the derived numerical witness.",
+      "claims": [
+        "The pinned CSV publishes 109 numerical unit-square poses for n = 109."
+      ]
+    }
+  ]
+}
