@@ -240,6 +240,7 @@ ALGEBRAIC_ADOPTED = {
     70: "T-174", 153: "T-174", 207: "T-174",
     102: "T-193", 123: "T-193", 258: "T-193", 302: "T-193",
 }  # fmt: skip
+CURRENT_ALGEBRAIC_ADOPTED = {**ALGEBRAIC_ADOPTED, 179: "T-339"}
 #: The algebraic houses a later pass moved to a rational one, with the house and the day:
 #: 295's T-193, 22(1 + sqrt 2)/3, adopted on 23 October 2026, which the pass of 18 November
 #: 2026 replaced with T-324, 6.12e-3 below it. Its derived number-field fact stays in the
@@ -339,7 +340,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         132: "T-292",
         155: "T-197",
         172: "T-286",
-        179: "T-294",
+        179: "T-339",
         180: "T-316",
         182: "T-243",
         210: "T-317",
@@ -875,7 +876,7 @@ def test_an_algebraic_house_is_written_exactly_in_both_lanes_and_read_back_as_it
     the side rounded up. `select_houses.parse_case` and the layer's `verified_bound` read
     each record back as the house's own side, so the selection moves nothing there and
     `adopt_houses --check` holds the lanes to the side the witness rebuilds."""
-    for n, result in ALGEBRAIC_ADOPTED.items():
+    for n, result in CURRENT_ALGEBRAIC_ADOPTED.items():
         side = houses.side(n)
         assert isinstance(side, select.exact_sides.Algebraic), n
         packing = _front(select.case_path(n).read_text(encoding="utf-8"))
@@ -909,7 +910,7 @@ def test_an_algebraic_house_is_written_exactly_in_both_lanes_and_read_back_as_it
         assert reported["source_key"] == houses.source_for(n).key, n
         assert houses.ADOPTED[n] == result, n
     assert all(not problem.startswith(f"n={n}:") for problem in adopt.check()
-               for n in ALGEBRAIC_ADOPTED)  # fmt: skip
+               for n in CURRENT_ALGEBRAIC_ADOPTED)  # fmt: skip
 
 
 def test_an_algebraic_house_is_its_number_field_fact_with_its_jobs_over_the_field() -> None:
@@ -921,7 +922,7 @@ def test_an_algebraic_house_is_its_number_field_fact_with_its_jobs_over_the_fiel
     retained forms, whose squares' bases it computes in the field."""
     from devtools import algebraic_witness_reports as fields  # noqa: PLC0415
 
-    for n in ALGEBRAIC_ADOPTED:
+    for n in CURRENT_ALGEBRAIC_ADOPTED:
         witness = houses.expected_house(n)
         assert witness["scalar"]["kind"] == "algebraic-number-field", n
         assert witness["certificate"]["kind"] == "exact-number-field-sat", n
@@ -929,7 +930,7 @@ def test_an_algebraic_house_is_its_number_field_fact_with_its_jobs_over_the_fiel
         assert witness["certificate"]["result"]["id"] == f"W-known-best-n{n:03d}", n
         assert witness["claim"]["coordinate_provenance"] == "verified", n
         assert select.exact_sides.of_field_element(fields.side_of(witness)) == houses.side(n)
-    houses.check_houses(sorted(ALGEBRAIC_ADOPTED))
+    houses.check_houses(sorted(CURRENT_ALGEBRAIC_ADOPTED))
     packet = houses.sources()["T-193"].packet
     rows = fields.derive_forms(packet, check=True)
     assert [row.stored for row in rows] == [
@@ -946,7 +947,7 @@ def test_an_algebraic_house_is_its_number_field_fact_with_its_jobs_over_the_fiel
     }
     inputs = set(houses.private_input_paths())
     assert set(controls.COPY_SEPARATELY) >= inputs
-    for n in ALGEBRAIC_ADOPTED:
+    for n in CURRENT_ALGEBRAIC_ADOPTED:
         source = houses.source_for(n)
         assert source.stored(n) in inputs, n
         assert source.receipt(n) in inputs, n
@@ -1878,13 +1879,13 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         156: "T-315",
         180: "T-316",
         269: "T-297",
-        179: "T-294",
+        179: "T-339",
         132: "T-292",
         157: "T-293",
         237: "T-295",
         297: "T-299",
         228: "T-334",
-        90: "T-304",
+        90: "T-338",
         127: "T-330",
         264: "T-308",
         305: "T-336",

@@ -80,7 +80,7 @@ from pathlib import Path
 from typing import Any, cast
 
 from devtools import algebraic_witness_reports as algebraic_reports
-from devtools import exact_sides
+from devtools import exact_sides, n179_algebraic_report
 from devtools import upper_bound_reports as reports
 from devtools.check_results import scope_values
 from devtools.exact_sides import Side
@@ -576,7 +576,11 @@ def algebraic_counts(key: str) -> frozenset[int]:
     packet = reports.import_packet(key)
     if packet is None or not (packet / algebraic_reports.DECLARATION).is_file():
         return frozenset()
-    rational = {row["n"] for row in reports.load_declaration(packet)["certificates"]}
+    rational = (
+        {row["n"] for row in reports.load_declaration(packet)["certificates"]}
+        if (packet / reports.DECLARATION).is_file()
+        else set()
+    )
     stated = {row["n"] for row in algebraic_reports.load_declaration(packet)["witnesses"]}
     return frozenset(stated - rational)
 
@@ -626,6 +630,7 @@ def evand_exact_side(n: int) -> Side:
 #: whose source has no reader here or there is unread, and `--check` fails where it states
 #: a side below its case (`unread_pending`): the cure is a reader, never a hold.
 ALGEBRAIC_READERS: dict[str, Callable[[int], Side]] = {
+    n179_algebraic_report.SOURCE_KEY: n179_algebraic_report.exact_side,
     "[Daniel exact current records 2026-10-16]": evand_exact_side,
 }
 
