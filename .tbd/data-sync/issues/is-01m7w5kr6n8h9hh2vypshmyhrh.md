@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: GeiserX's public 259-square packing below the regi
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T09:46:42.260Z
-updated_at: 2026-11-21T11:43:51.371Z
+updated_at: 2026-11-21T11:59:45.199Z
 started_at: 2026-11-20T09:46:48.225Z
 ---
 jlevy/squares#1040 (JoostdeWinter, 2026-11-19T04:54:13Z, no comments): Sergio Fernández Rubio (GeiserX) published a packing of 259 unit squares with side 16.590016439573 in GeiserX/squares-in-squares data/submission-best.csv.gz at f822b34 (CC BY 4.0), joining tilted bands from his 292- and 445-square packings; 0.00136 below T-193's 16.591378145498. Nevska reached the same side on Kaggle on 8 November 2026 without published coordinates (side-only, context). The issue attaches packing-259.zip, an exact rational Witness/v2 of the packing with a verifier, and asks that the packing be credited to GeiserX.
@@ -30,3 +30,5 @@ blocked_on: jlevy/squares#1040
 Recorded in PR https://github.com/jlevy/squares/pull/1047 (requests entry #1040 triage done, n259-geiserx queued here; packet geiserx-squares-in-squares-2026-11-18).
 
 2026-11-21T11:35Z: Recovered exact #1040 attachment from live issue link, HTTP 200, 446768 bytes, SHA-256 2073b4b8ab2ba1af7ea2623eb361953c36ad7de54f932292a135c6150113d38c. Manifest checks passed; exact 259 primary JSON poses and submitted witness corner sets agree. Exact side rounds up to 16.590016439230. Two separate verified-reversible reading copies preserve the exact geometry, supply missing Witness/v2 metadata and normalize identifiers. One square needs the opposite-corner adapter. Source credit and Option D remain under review. No author program ran.
+
+2026-11-21T11:58Z: Guarded first feasibility replay at 88d1219c2c accepted the normalized corner reading copy on both maintained routes. Each checked 259 squares and 33,411 pairs; exact-algebraic failures are empty, minimum containment clearance is zero and minimum pair gap agrees exactly between the receipts. The safe 12-place ceiling is 16.590016439230. Custody packet admission, gross and sharp controls, measured identity/Option D, independent review and registration remain open.
