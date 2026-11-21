@@ -1,0 +1,44 @@
+{
+  "format": "independent-construction-replay-v1",
+  "started_at_utc": "2026-11-21T16:57:32Z",
+  "finished_at_utc": "2026-11-21T16:57:33Z",
+  "python_version": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "workload_processes": 1,
+  "command": [
+    "python3.14",
+    "-B",
+    "-I",
+    "packing/resources/web/mira-cult-n18-1050-review-2026-11-20/programs/r1050_construction.py",
+    "--construction",
+    "packing/resources/web/mira-cult-n18-construction-2026-11-20/source/notes/geometry/unit-square-packing-18/replay/six-tilt18.json",
+    "--out",
+    "packing/resources/web/mira-cult-n18-construction-2026-11-20/receipts/construction.json"
+  ],
+  "checker_sha256": {
+    "r1050_construction.py": "401a7e9fa45ec60cfe10675a97e333bb80cf67da6bde6a6cab4d5a4211611454",
+    "r1050_q7.py": "7f0937a6cace9f3f266904354583bb84bf33197f87852ea6865875459cc84828"
+  },
+  "input_sha256": "bda21ee2ed4382bf4b33201f546449eee37d6ce66c3d87205c80a7b37f780ba0",
+  "input_git_blob": "0f4842e1fa016b989c55fa8e98b0b57b00e5915a",
+  "workload_pid": 87328,
+  "checker_exit_code": 0,
+  "wall_seconds_including_guard_startup": 1.8226978750317357,
+  "guard_attached_before_checker": true,
+  "guard_command": [
+    "python3.14",
+    "-B",
+    "memory_guard.py",
+    "--pid",
+    "87328",
+    "--observe-only",
+    "--interval",
+    "0.1",
+    "--log",
+    "construction-observe.jsonl",
+    "--no-progress"
+  ],
+  "guard_exit_code": 0,
+  "guard_journal": "construction-observe.jsonl (retained with the local supervision logs)",
+  "producer_programs_executed": false,
+  "result_file": "receipts/construction.json"
+}

@@ -1,0 +1,33 @@
+{
+  "status": "reading copies prepared; custody, exact-byte reversibility and maintained reader admission only",
+  "checkout_head": "f1d8c74e013e95bdfc1e56f05507efb3368044ec",
+  "original_witness_sha256": "3d4bd6326ed60439aa3fc933bfbfc4b5716e4de8d181ce837161b97fdc88a031",
+  "original_primary_gzip_sha256": "bfd1b2890ad846efe030113f5e4535a79f786ed6c2f0371257dd342ddd48970c",
+  "original_primary_json_sha256": "b9d2d6f480c829289cc1a6673c94d8db89952d0db00710414ac8026f73d49442",
+  "witness_reading_copy": {
+    "bytes": 768136,
+    "sha256": "830c20e1697a0c797068aec8f16044cd2895b91d2be261ba1b76f60eb944287a",
+    "retention": "Temporary parser copy; original corner witness retained."
+  },
+  "json_reading_copy": {
+    "path": "derived/packing-reading-copy.json",
+    "bytes": 143156,
+    "sha256": "ddcca336ed73306682b12c7290ce1cde636d8b39fdb4d4eeaa8af3fc68617d8a"
+  },
+  "reversible_to_original_bytes": true,
+  "all_original_geometry_strings_unchanged": true,
+  "mapped_square_ids": 259,
+  "maintained_load_witness": "accepted",
+  "primary_adapter": "ono-json",
+  "accepted_corner_adapters": [
+    "witness-corners-opposite"
+  ],
+  "refused_corner_adapters": {
+    "witness-corners": "n=259 square 67: no finite half-angle"
+  },
+  "n": 259,
+  "side": "8295008219614994781143527184138157614865452268963473035780950495090016439229989562287054368276315229730904537926946071561900959/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "pairwise_replay": false,
+  "controls_run": false,
+  "limits": "These reader results establish admissible data shapes and preserved geometry only, not nonoverlap, containment, validity of the upper bound or independence of verification."
+}

@@ -1,0 +1,1 @@
+This separate contraction is 3.20427e-81 below the filed side. The orientation variants in the review retain the filed side. Run python3 -B check_vertices.py n305-candidate.json.gz from this directory.

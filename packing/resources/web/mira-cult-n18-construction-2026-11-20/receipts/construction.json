@@ -1,0 +1,298 @@
+{
+ "program": "r1050_construction.py",
+ "tiles": 18,
+ "tilted": 6,
+ "side_is_H": true,
+ "frames_orthonormal": true,
+ "side_float": 4.822875655532295,
+ "check": {
+  "walls_checked": 72,
+  "pairs_checked": 153,
+  "wall_failures": [],
+  "pair_failures": [],
+  "wall_contacts": [
+   [
+    1,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    2
+   ],
+   [
+    3,
+    0
+   ],
+   [
+    7,
+    2
+   ],
+   [
+    8,
+    3
+   ],
+   [
+    12,
+    2
+   ],
+   [
+    13,
+    3
+   ],
+   [
+    17,
+    1
+   ],
+   [
+    18,
+    1
+   ],
+   [
+    18,
+    3
+   ],
+   [
+    19,
+    1
+   ]
+  ],
+  "pair_contacts": [
+   [
+    1,
+    4
+   ],
+   [
+    1,
+    5
+   ],
+   [
+    2,
+    4
+   ],
+   [
+    2,
+    7
+   ],
+   [
+    3,
+    8
+   ],
+   [
+    4,
+    6
+   ],
+   [
+    4,
+    7
+   ],
+   [
+    5,
+    8
+   ],
+   [
+    5,
+    11
+   ],
+   [
+    6,
+    9
+   ],
+   [
+    7,
+    9
+   ],
+   [
+    9,
+    12
+   ],
+   [
+    9,
+    14
+   ],
+   [
+    9,
+    15
+   ],
+   [
+    11,
+    13
+   ],
+   [
+    11,
+    14
+   ],
+   [
+    12,
+    15
+   ],
+   [
+    12,
+    17
+   ],
+   [
+    13,
+    18
+   ],
+   [
+    13,
+    20
+   ],
+   [
+    14,
+    15
+   ],
+   [
+    15,
+    19
+   ],
+   [
+    18,
+    20
+   ],
+   [
+    19,
+    20
+   ]
+  ],
+  "min_wall_slack": "0 + (0)*sqrt(7)",
+  "min_pair_slack": "0 + (0)*sqrt(7)",
+  "valid": true
+ },
+ "controls": [
+  {
+   "control": "side H - 1e-30",
+   "refused": true,
+   "wall_failures": 6
+  },
+  {
+   "control": "pair 1-4 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 1-5 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 2-4 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 2-7 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 3-8 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 4-6 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 4-7 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 5-8 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 5-11 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 6-9 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 7-9 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 9-12 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 9-14 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 9-15 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 11-13 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 11-14 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 12-15 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 12-17 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 13-18 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 13-20 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 14-15 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 15-19 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 18-20 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "pair 19-20 closed by 1e-30",
+   "refused": true
+  },
+  {
+   "control": "tile 5 orientation flipped",
+   "refused": true
+  },
+  {
+   "control": "tile 6 orientation flipped",
+   "refused": true
+  },
+  {
+   "control": "tile 9 orientation flipped",
+   "refused": true
+  },
+  {
+   "control": "tile 11 orientation flipped",
+   "refused": true
+  },
+  {
+   "control": "tile 14 orientation flipped",
+   "refused": true
+  },
+  {
+   "control": "tile 15 orientation flipped",
+   "refused": true
+  },
+  {
+   "control": "tile 1 duplicated",
+   "refused": true
+  }
+ ],
+ "verdict": "CONSTRUCTION_VALID",
+ "controls_verdict": "ALL_CONTROLS_REFUSED"
+}

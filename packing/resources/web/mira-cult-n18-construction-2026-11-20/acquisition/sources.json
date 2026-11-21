@@ -1,0 +1,30 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-21T16:56:44Z",
+  "git_scope": "One 775-byte factual construction certificate obtained with the GitHub connector's fetch_file tool at the pinned commit using base64 encoding. The returned blob id, recomputed Git blob id and SHA-256 match the pinned contents metadata and published SHA256SUMS. No clone was made. No producer program or prose was acquired for this packet.",
+  "sources": [
+    {
+      "id": "mira-cult-n18-construction-2026-11-20",
+      "source_url": "https://github.com/Mira-Cult/math",
+      "source_ref": "78bec6aacebf304d942a9225e16c2f18165778ff",
+      "source_commit": "78bec6aacebf304d942a9225e16c2f18165778ff",
+      "committed_utc": "2026-11-20T16:11:46Z",
+      "git_tree": "78adf8421830ff820da24bbee6b159c075780c28",
+      "archived_path": "packing/resources/web/mira-cult-n18-construction-2026-11-20/source",
+      "subtree_manifest": "packing/resources/web/mira-cult-n18-construction-2026-11-20/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "notes/geometry/unit-square-packing-18/replay/six-tilt18.json"
+      ],
+      "subtree_file_count": 1,
+      "subtree_total_bytes": 775,
+      "retained_file_count": 1,
+      "retained_total_bytes": 775,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "No licence is stated for this source folder. The root README's licence references cover other results, and issue #1050 was opened by the maintainer rather than submitted by the author. The single coordinate certificate is retained as factual data under packing/resources/web/known-best-packings/README.md, Retained Factual Data (recorded owner decision of 2026-10-09). Retention grants no licence and relicenses nothing. The source's prose and programs are not retained or executed by this packet.",
+      "claims": [
+        "The source's six-tilt18.json specifies an 18-square construction over Q(sqrt(7)) at side (7+sqrt(7))/2, with twelve axis-parallel squares and six tilted squares. This packet checks only finite construction feasibility; it makes no lower-bound or optimality claim."
+      ]
+    }
+  ]
+}
