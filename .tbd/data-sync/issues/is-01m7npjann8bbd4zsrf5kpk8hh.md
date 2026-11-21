@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-21T02:13:31.132Z
+updated_at: 2026-11-21T02:35:14.977Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -84,3 +84,5 @@ The corrected radian reader preserves represented tiny tilts and keeps the later
 The 5,577,150-byte CSV is verified at Samanyu-dev/squares_in_squares 53551d77513a9f5c180a731f291baf7eda7c3009 (SHA-256 377b9177febf1b89f08d655531880fb683666e494a3b303f10645e7440996c04). Re-running the existing #1049 reader and independent checker under the memory guard gives an accepted 109-square witness and all 5,886 pairs, with zero disagreements and the same exact side as #1049: 10.949289580945379363234535713286, ceil 10.949289580946 at 12 digits. The new witness SHA-256 is cbc2d8b462b08d12f835abdecc1bc29cfb1eeadc7d19c21112caeaf9efc8943b, distinct from #1049's scratch-only ab84814548fc28d18a22945b3a8bb3be6c4335a7310e93fe8ea032925842bb28. Keep each receipt with its own hash. Local continuation artifacts are in .worktrees/intake-scratch-20261120/review-1047/reviewer-rerun/. The original source pin has no explicit license file. Retain the normalized numerical witness and source digest; the raw CSV need not be added to the repository.
 
 Next: integrate after T-334, register the earlier packing with normal maintained replay and controls, preserve the #1049 review evidence and replay its applicability if needed, then run 109 house selection, regularization and exact-head gates. The original c14 external workspace is unavailable.
+
+Portable n109 positive preflight passed through both maintained routes, 5,886 pairs each. Canonical derived-source campaign plan 6b642abb4d5912a67819187e534eb71bd308b18537f8666373b3d037f3f0daf0, hashed before the official three-job replay and sharp controls. The original binary64 witness and the portable derivation keep separate receipts.
