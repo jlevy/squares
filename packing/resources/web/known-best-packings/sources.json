@@ -1718,19 +1718,19 @@
       "url": "https://github.com/evand/square-packing/blob/7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1/search/exact/cur/data/n-258.minpoly.json.gz"
     },
     {
-      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1/search/exact/cur/data/n-259.minpoly.json.gz at 7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1",
+      "attribution": "Sergio Fernández Rubio (GeiserX), refined and certified by Joost de Winter, https://github.com/user-attachments/files/35066502/packing-259.zip#upper/n259/packing.json.gz at GitHub issue attachment 35066502",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         259
       ],
       "n": 259,
-      "path": "resources/web/evand-exact-cur-2026-10-16/facts/alg-n-259.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-16",
+      "path": "resources/web/geiserx-n259-1040-2026-11-19/source/upper/n259/packing.json.gz",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-11-21",
       "source_n": 259,
-      "url": "https://github.com/evand/square-packing/blob/7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1/search/exact/cur/data/n-259.minpoly.json.gz"
+      "url": "https://github.com/user-attachments/files/35066502/packing-259.zip#upper/n259/packing.json.gz"
     },
     {
       "attribution": "Mishapolk, https://github.com/Mishapolk/square-packing-records/blob/b637e6cf59c23781c813e8442bfdccb5aa5f3954/certificates/0000-0999/n260.cert at b637e6cf59c23781c813e8442bfdccb5aa5f3954",

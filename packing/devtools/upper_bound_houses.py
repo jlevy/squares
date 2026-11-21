@@ -567,6 +567,144 @@ def couzo_678_source() -> Source:
     )
 
 
+def geiserx_1040_source(result: str) -> Source:
+    """Issue 1040's attachment-backed rational certificate, before result assignment.
+
+    The original JSON gzip and corner witness are bound to their acquisition member
+    digests. Only the informational decimal's key is changed in memory for the maintained
+    JSON reader; both original encodings must state the same 259 squares and exact side.
+    Native jobs supply feasibility, so custody checks run no geometric decision.
+    """
+    packet = reports.packet_path("geiserx-n259-1040-2026-11-19")
+    acquisition = packet / "acquisition/sources.json"
+    receipt = packet / "receipts/exact-certification.json.xz"
+    member_root = "upper/n259"
+    key = "[GeiserX issue 1040 2026-11-19]"
+    attachment_url = "https://github.com/user-attachments/files/35066502/packing-259.zip"
+    witness_prefix = "W-geiserx-1040-n"
+    claim_limitations = "Finite rational feasibility at the submitted side."
+
+    def require_count(n: int) -> None:
+        _require(type(n) is int and n == 259, f"n={n}: issue 1040 houses only 259")
+
+    def path(n: int, name: str) -> Path:
+        require_count(n)
+        return packet / "source" / member_root / name
+
+    def receipt_path(n: int) -> Path:
+        require_count(n)
+        return receipt
+
+    def record() -> Mapping[str, Any]:
+        reports.ensure_private(acquisition)
+        value = json.loads(acquisition.read_text(encoding="utf-8"))
+        message = f"{packet.name}: not issue 1040's attachment acquisition record"
+        _require(type(value) is dict, message)
+        document = cast("dict[str, Any]", value)
+        members = document.get("members")
+        attachment = document.get("attachment")
+        _require(
+            document.get("format") == "issue-attachment-sources-v1"
+            and document.get("issue") == "https://github.com/jlevy/squares/issues/1040"
+            and isinstance(members, list)
+            and all(type(row) is dict for row in members)
+            and isinstance(attachment, dict)
+            and attachment.get("url") == attachment_url
+            and type(document.get("retrieved_utc")) is str,
+            message,
+        )
+        return document
+
+    def member(n: int, name: str) -> bytes:
+        stored = path(n, name)
+        reports.ensure_private(stored)
+        rows = [
+            row for row in record()["members"] if row.get("path") == f"{member_root}/{name}"
+        ]
+        _require(len(rows) == 1, f"n={n}: attachment member {name} is not unique")
+        row = rows[0]
+        with stored.open("rb") as stream:
+            raw = stream.read(reports.MAX_SOURCE_BYTES + 1)
+        _require(
+            len(raw) <= reports.MAX_SOURCE_BYTES
+            and row.get("retained_at") == stored.relative_to(packet).as_posix()
+            and type(row.get("bytes")) is int
+            and len(raw) == row["bytes"]
+            and hashlib.sha256(raw).hexdigest() == row.get("sha256"),
+            f"n={n}: attachment member {name} differs from its pinned bytes",
+        )
+        return raw
+
+    def certificate(n: int) -> legacy.Certificate:
+        raw = retained_data.gunzip_bytes(
+            member(n, "packing.json.gz"),
+            limit=reports.MAX_SOURCE_BYTES,
+            name="issue 1040 packing.json.gz",
+        )
+        value = json.loads(raw, object_pairs_hook=kernel.unique_object)
+        _require(
+            type(value) is dict
+            and "side_decimal" in value
+            and "side_decimal_info_only" not in value,
+            f"n={n}: not issue 1040's original JSON encoding",
+        )
+        value["side_decimal_info_only"] = value.pop("side_decimal")
+        exact = reports.parse_certificate(json.dumps(value).encode("utf-8"), n, "ono-json")
+        reports.admit(exact, "16.590016439230")
+        member(n, "witness.yaml")
+        corners, corner_side = legacy.independent.parse(path(n, "witness.yaml"))
+        _require(
+            len(corners) == n
+            and exact.side == corner_side
+            and [frozenset(square) for square in legacy.corner_squares(exact)]
+            == [frozenset(square) for square in corners],
+            f"n={n}: original attachment encodings differ in exact geometry",
+        )
+        return exact
+
+    def jobs(n: int, exact: legacy.Certificate) -> Mapping[str, Any]:
+        require_count(n)
+        _require(n == exact.n, f"n={n}: the certificate is another count's")
+        return _validated_jobs(
+            receipt_cases(receipt, "issue-1040-exact-replay-v1"),
+            exact,
+            witness_prefix=witness_prefix,
+            claim_limitations=claim_limitations,
+        )
+
+    def origin(n: int) -> Origin:
+        return Origin(
+            key=key,
+            path=path(n, "packing.json.gz"),
+            url=f"{attachment_url}#{member_root}/packing.json.gz",
+            revision="GitHub issue attachment 35066502",
+            retrieved=str(record()["retrieved_utc"])[:10],
+            author="Sergio Fernández Rubio (GeiserX), refined and certified by Joost de Winter",
+            licence_status=NO_LICENCE,
+            raw_asset_retained=True,
+            retention_policy=RAW_RETENTION,
+        )
+
+    def inputs(numbers: Sequence[int]) -> tuple[Path, ...]:
+        for n in numbers:
+            require_count(n)
+        return acquisition, path(259, "packing.json.gz"), path(259, "witness.yaml"), receipt
+
+    return Source(
+        result=result,
+        key=key,
+        packet=packet,
+        certificate=certificate,
+        jobs=jobs,
+        origin=origin,
+        inputs=inputs,
+        witness_prefix=witness_prefix,
+        claim_limitations=claim_limitations,
+        stored=lambda n: path(n, "packing.json.gz"),
+        receipt=receipt_path,
+    )
+
+
 #: The counts each result houses by its algebraic witness, whose side is irrational: PR
 #: #574's three algebraic certificates the house rule adopts (T-174), and the exact forms of
 #: issue 639 whose facts its packet derives (T-193). Issue 639's other staged counts wait:
@@ -770,6 +908,7 @@ def _sources() -> dict[str, Source]:
         # de Winter's issue-1052 refinement. T-309 has no current house; the
         # JoeGun packet still supplies T-306, T-307 and T-308 above.
         packet_source("T-336", "de-winter-n305-2026-11-20"),
+        geiserx_1040_source("T-337"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -961,7 +1100,7 @@ ADOPTED: dict[int, str] = {
     240: "T-174",
     241: "T-182",
     258: "T-193",
-    259: "T-193",
+    259: "T-337",
     260: "T-318",
     261: "T-174",
     262: "T-319",
@@ -1141,7 +1280,7 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: a day's archive holds one prior state a count.
 #: The same UTC day (think-91fu) adopted T-334 at 228 from T-301, then T-335 at 109
 #: (think-wvr8) and T-336 at 305 from T-309 (think-kzwl). The archive keeps each
-#: prior case once, preserving the existing 109, 172, 199 and 228 rows when 305 joins.
+#: prior case once. T-337 at 259 replaced T-193 under think-squj on the same day.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1234,7 +1373,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
     "2026-11-20": frozenset({127, 268, 270, 299}),
-    "2026-11-21": frozenset({109, 172, 199, 228, 305}),
+    "2026-11-21": frozenset({109, 172, 199, 228, 259, 305}),
 }
 
 

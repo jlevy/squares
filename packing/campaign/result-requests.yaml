@@ -38733,12 +38733,12 @@ issues:
         data/submission-best.csv.gz at f822b34, Sergio Fernández Rubio's join of tilted
         bands from his own 292 and 445, 0.00136 below T-193.
       source: body
-      not_registered: >-
-        The submitted rational refinement is now retained and has exact side below
-        T-193 and below the public GeiserX rows contracted to first contact. The nearest
-        centres fail to pair with T-193 under all eight box symmetries. The independent
-        mathematical review and formal registration remain under think-squj.
-      queued: true
+      register:
+      - T-337
+      evidence:
+      - E-geiserx-1040-certificate-report
+      - E-geiserx-1040-exact-feasibility
+      - E-geiserx-1040-review-exact-feasibility
       bead: think-squj
     - key: n259-leaderboard-side-only
       claim: The Kaggle per-puzzle leaderboard reached the same side at 259 (Nevska,

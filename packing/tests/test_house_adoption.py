@@ -238,13 +238,14 @@ OVERTAKEN = {175: "T-267", 199: "T-285", 204: "T-306", 232: "T-307", 292: "T-323
 #: (T-324), a rational side below T-193's (`ALGEBRAIC_MOVED`).
 ALGEBRAIC_ADOPTED = {
     70: "T-174", 153: "T-174", 207: "T-174",
-    102: "T-193", 123: "T-193", 258: "T-193", 259: "T-193", 302: "T-193",
+    102: "T-193", 123: "T-193", 258: "T-193", 302: "T-193",
 }  # fmt: skip
 #: The algebraic houses a later pass moved to a rational one, with the house and the day:
 #: 295's T-193, 22(1 + sqrt 2)/3, adopted on 23 October 2026, which the pass of 18 November
 #: 2026 replaced with T-324, 6.12e-3 below it. Its derived number-field fact stays in the
 #: packet (`upper_bound_houses.FIELD_COUNTS`), so the earlier pass still replays.
-ALGEBRAIC_MOVED = {295: ("T-324", "2026-11-18")}
+#: T-193's n259 form likewise remains as history after T-337 took the house.
+ALGEBRAIC_MOVED = {259: ("T-337", "2026-11-21"), 295: ("T-324", "2026-11-18")}
 
 
 def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted(
