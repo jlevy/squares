@@ -1,0 +1,14 @@
+# Lane rR1-lower (blind stage 4 review R1 of issues 1041 and 1042, bead think-dhjz): checker and controls plan frozen at 2026-11-20T18:33:31Z,
+# before any program of this lane read a certificate's rectangles, masses or receipts. Before this freeze the programs ran only
+# on synthetic data: rr1_selftest.py, a synthetic uniform measure, a synthetic 24,000-rectangle measure, and a synthetic copy of
+# the source tree that reused only the 77 folder names (one 3 x 3 uniform measure in every folder).
+# Read since the plan freeze (frozen/plan-frozen-digests.txt): nothing of the source or the record.
+# Verify from this directory with: sha256sum -c frozen/checker-frozen-digests.txt
+1262c47ccad56d287d167eb6686898a5d3fc7aae05094dc1f86e412b87089dbe  programs/controls-plan.json
+319995e5e4e72c7e76e07130f321c1ffdc378f66930dae6c4a71d4fad33460fd  programs/rr1_common.py
+a9fc48ecde09ff36d5148e0a0d949360558696976b4690736f01dc6dc660f3a0  programs/rr1_decide.c
+41b69bbeab1dec375a590712ec7582ed3dd2f714fc37cbb68b25ebc0c3bd0951  programs/rr1_decide.py
+1d3d105048704b4336cc67e5d97d350385244b9d2508998d6e836784ad0ab76f  programs/rr1_premises.py
+070ae7b1b65d143467e90556e8e24a17223121ce7e4585d9ed5420e28275cc5e  programs/rr1_runs.py
+37dacd28abac29058ca17378e7831a924b1d14a22c6226d4f572af538bdbbf2f  programs/rr1_search.py
+925bd52c8c7ea31fc8f73adff6059aa0803dd5b65ad776c41597116c5c3a0480  programs/rr1_selftest.py

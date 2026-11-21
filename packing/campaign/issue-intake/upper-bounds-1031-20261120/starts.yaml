@@ -1,0 +1,24 @@
+format: intake-ledger-starts-v2
+read_at_main: 1015fc175fa4e2c01f912d915d784100e36d3bab
+counts:
+- n: 299
+  members:
+  - label: record T-325
+    kind: record
+    holders: Evan Daniel, improved by Doğa Özden, Mishapolk
+    model: exact
+    low: 2225125554281470853018439796251/125000000000000000000000000000
+    high: 2225125554281470853018439796251/125000000000000000000000000000
+    open_low: false
+    open_high: false
+    shown: '17.801004434252'
+    decide: ''
+    lanes:
+    - - reported
+      - '17.8010044342517669'
+      - 2225125554281470853018439796251/125000000000000000000000000000
+      - ''
+    - - verified
+      - '17.8010044342517669'
+      - 2225125554281470853018439796251/125000000000000000000000000000
+      - ''

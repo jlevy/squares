@@ -1,0 +1,67 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1038",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s228 upper bound 2026-11-18]",
+  "report_evidence": "E-ozden-1038-certificate-report",
+  "receipt_format": "ozden-1038-exact-replay-v1",
+  "witness_prefix": "W-ozden-1038-n",
+  "claim_limitations": "Complete 2026-11-18 rational centre-basis Witness/v2 at 228, the source's exact conversion of jazivxt's public Kaggle decimal packing under one uniform clearance dilation, read exactly from the retained source file. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-11-20",
+  "read_at_main": "935e79c36354addfc296f18e7b1c50479ffa9e5a",
+  "certificates": [
+    {
+      "n": 228,
+      "path": "n-228-candidate.yaml",
+      "format": "witness-center-basis",
+      "offered": "15.596043116632",
+      "first_committed": "2026-11-18T23:08:45Z",
+      "same_packing": [
+        {
+          "path": "n228-witness.json",
+          "format": "witness-center-basis"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    228
+  ],
+  "replayed": [
+    228
+  ],
+  "houses": [
+    {
+      "n": 228,
+      "reader": "[Ono issue 984 2026-11-14]",
+      "source_key": "[Ono issue 984 2026-11-14]",
+      "holders": "Roberto Ono",
+      "result": "T-301",
+      "reported_value": "15.5960431209207917",
+      "verified_value": "15.5960431209207917",
+      "evidence": [
+        "E-ono-984-exact-feasibility",
+        "E-ono-984-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Doğa Özden's exact certificate of jazivxt's public Kaggle packing of 228 squares at kenaznia-doga/s228-upper-bound-1559604311 46ab8bf, issue 1038",
+    "headline": "PLACEHOLDER",
+    "significance": 2,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-91fu",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+ "label": "1041/n111",
+ "n": 111,
+ "L": "10781/1000",
+ "factor": "1",
+ "stretch": "1",
+ "threshold": "1",
+ "widen": 2,
+ "bins": 1,
+ "verdict": "UNDECIDED",
+ "nodes": 78221,
+ "c_seconds": 18.563,
+ "cpu_seconds": 20.517,
+ "wall_seconds": 151.6,
+ "lattice_Q": 34359738368,
+ "lattice_rounded": true,
+ "G": 110,
+ "results": [
+  {
+   "id": "K1188r0",
+   "K": 1188,
+   "r": 0,
+   "l": "-83/95040",
+   "h": "83/95040",
+   "depth": 0,
+   "verdict": "UNDECIDED",
+   "nodes": 78221,
+   "clips": 36841376,
+   "tree_depth": 56,
+   "seconds": 18.563,
+   "min_accepted": "18446744382539256070",
+   "polygon_vertices": 16,
+   "polygon_area": 0.9991282071789641,
+   "domain": [
+    185216169672,
+    353252470162
+   ],
+   "fail_box": [
+    250222902889,
+    250222903515,
+    250221993335,
+    250221993961
+   ],
+   "fail_bound": "18446743950230552948",
+   "fail_corners": [
+    "18446751227239624416",
+    "18446748268408722476",
+    "18446748664829732408",
+    "18446745705999099678"
+   ]
+  }
+ ],
+ "control": "A4",
+ "expected": [
+  "REFUSED_EXACT",
+  "UNDECIDED"
+ ],
+ "as_planned": true
+}

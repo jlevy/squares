@@ -198,9 +198,11 @@ ADOPTED_NEXT_DAY = {268: ("T-242", "2026-10-26"), 260: ("T-269", "2026-11-06")}
 #: the adoption of 5 November 2026 took 268 to Evan Daniel's issue-914 certificate (T-270),
 #: and that of 9 November 2026 to Doğa Özden's further arrangement of it (T-276), and that of
 #: 11 November 2026 to his issue-945 certificate, a new arrangement (T-289), and the pass of
-#: 18 November 2026 to Mykhailo Polkovskyi's further arrangement of it (T-320); the same
-#: pass took 260 from T-269 to his further arrangement of that packing (T-318).
-MOVED_AFTER_NEXT_DAY = {268: ("T-320", "2026-11-18"), 260: ("T-318", "2026-11-18")}
+#: 18 November 2026 to Mykhailo Polkovskyi's further arrangement of it (T-320), and that of
+#: 20 November 2026 to Joost de Winter's issue-1021 certificate, a new arrangement (T-331);
+#: the pass of 18 November took 260 from T-269 to his further arrangement of that packing
+#: (T-318).
+MOVED_AFTER_NEXT_DAY = {268: ("T-331", "2026-11-20"), 260: ("T-318", "2026-11-18")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -225,8 +227,9 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: certificate (T-284), T-282's packing with one L step, 2.88e-3 below T-193's side there.
 #: The pass of 18 November 2026 took 292, one of the nine waiting for think-8ido's
 #: correction, to Mykhailo Polkovskyi's issue-1009 certificate (T-323), 1.36e-3 below
-#: T-146 and below T-193's side there.
-OVERTAKEN = {175: "T-267", 199: "T-284", 204: "T-306", 232: "T-307", 292: "T-323"}
+#: T-146 and below T-193's side there, and the pass of 21 November took 199 on to Joost de
+#: Winter's re-solve of T-284's core (T-285), a new result under option D (think-b0w5).
+OVERTAKEN = {175: "T-267", 199: "T-285", 204: "T-306", 232: "T-307", 292: "T-323"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -305,7 +308,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # JoeGun's issue-1001 certificates (T-305, T-309) in the pass of 16 November, below
     # T-174's sides there. 23 since the pass of 18 November moved 210 and 272 to Mykhailo
     # Polkovskyi's issue-1009 certificates (T-317, T-322), below T-174's sides there, and
-    # 292, staged for T-193, to his T-323 (`OVERTAKEN`).
+    # 292, staged for T-193, to his T-323 (`OVERTAKEN`). The pass of 21 November moved 172
+    # on from T-282 to Joost de Winter's re-solve of it (T-286), which leaves the count
+    # unchanged, as does lane i1038's move of 228 to Doğa Özden's issue-1038 certificate
+    # (T-334) in the same pass.
     assert len(held_counts) == 23
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -320,19 +326,19 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
         29: "T-195",
         105: "T-229",
-        127: "T-305",
+        127: "T-330",
         130: "T-259",
         132: "T-292",
         155: "T-197",
-        172: "T-282",
+        172: "T-286",
         179: "T-294",
         180: "T-316",
         182: "T-243",
         210: "T-317",
-        268: "T-320",
+        268: "T-331",
         269: "T-297",
-        228: "T-301",
-        270: "T-321",
+        228: "T-334",
+        270: "T-332",
         272: "T-322",
         297: "T-299",
         305: "T-309",
@@ -1829,13 +1835,18 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # 204 from T-268, 232 from T-275 and 264 from T-186 to JoeGun's certificates of issue
     # 1001 (T-305 to T-309) in the same pass. Lane w3-pass-1117r moved 147, 156, 180, 210,
     # 260, 268, 270, 272, 292, 295, 299 and 307 to Mykhailo Polkovskyi's certificates of
-    # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November.
+    # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November, and lane
+    # c1-127 127 on from T-305 to Joost de Winter's certificate of issue 1020 (T-330) in the
+    # pass of 20 November. Lane c2-imports moved 268, 270 and 299 on to his certificates of
+    # issues 1021, 1022 and 1031 (T-331 to T-333) in the same pass. The pass of 21 November
+    # moved 172 and 199 to Joost de Winter's re-solves of issues 946 and 939 (T-286, T-285),
+    # and lane i1038 moved 228 to Doğa Özden's certificate of issue 1038 (T-334).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
         175: "T-267",
         182: "T-243",
-        268: "T-320",
+        268: "T-331",
         293: "T-271",
         303: "T-278",
         304: "T-273",
@@ -1849,10 +1860,10 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         260: "T-318",
         308: "T-221",
         227: "T-225",
-        270: "T-321",
+        270: "T-332",
         130: "T-259",
-        172: "T-282",
-        199: "T-284",
+        172: "T-286",
+        199: "T-285",
         232: "T-307",
         307: "T-326",
         156: "T-315",
@@ -1863,9 +1874,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         157: "T-293",
         237: "T-295",
         297: "T-299",
-        228: "T-301",
+        228: "T-334",
         90: "T-304",
-        127: "T-305",
+        127: "T-330",
         264: "T-308",
         305: "T-309",
         210: "T-317",

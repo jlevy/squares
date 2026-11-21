@@ -1,0 +1,118 @@
+{
+ "label": "1041/n107",
+ "n": 107,
+ "L": "10607597/1000000",
+ "factor": "1",
+ "stretch": "1001/1000",
+ "threshold": "1",
+ "widen": 0,
+ "bins": 1,
+ "verdict": "DECIDED",
+ "nodes": 50933,
+ "c_seconds": 13.767,
+ "cpu_seconds": 14.683,
+ "wall_seconds": 65.4,
+ "lattice_Q": 34359738368,
+ "lattice_rounded": true,
+ "G": 109,
+ "results": [
+  {
+   "id": "K160r60",
+   "K": 160,
+   "r": 60,
+   "l": "9877/64000",
+   "h": "10043/64000",
+   "depth": 0,
+   "verdict": "SPLIT",
+   "nodes": 10254,
+   "clips": 8348200,
+   "tree_depth": 56,
+   "seconds": 3.06,
+   "min_accepted": "18446744118821252724",
+   "polygon_vertices": 16,
+   "polygon_area": 0.9974803645157506,
+   "domain": [
+    182237128816,
+    342914385464
+   ],
+   "fail_box": [
+    310826006949,
+    310826007548,
+    196788488017,
+    196788488615
+   ],
+   "fail_bound": "18446744068574121198",
+   "fail_corners": [
+    "18446744276682117797",
+    "18446744136585282492",
+    "18446744224448420773",
+    "18446744084357513760"
+   ]
+  },
+  {
+   "id": "K160r60s10",
+   "K": 160,
+   "r": 60,
+   "l": "9877/64000",
+   "h": "29797/192000",
+   "depth": 1,
+   "verdict": "ACCEPT",
+   "nodes": 13539,
+   "clips": 10212764,
+   "tree_depth": 23,
+   "seconds": 3.588,
+   "min_accepted": "18446778496865611024",
+   "polygon_vertices": 16,
+   "polygon_area": 0.9991570638990693,
+   "domain": [
+    182237128816,
+    342914385464
+   ]
+  },
+  {
+   "id": "K160r60s11",
+   "K": 160,
+   "r": 60,
+   "l": "29797/192000",
+   "h": "29963/192000",
+   "depth": 1,
+   "verdict": "ACCEPT",
+   "nodes": 13549,
+   "clips": 10258736,
+   "tree_depth": 23,
+   "seconds": 3.522,
+   "min_accepted": "18446992689998128391",
+   "polygon_vertices": 16,
+   "polygon_area": 0.9991572844261282,
+   "domain": [
+    182237128816,
+    342895500457
+   ]
+  },
+  {
+   "id": "K160r60s12",
+   "K": 160,
+   "r": 60,
+   "l": "29963/192000",
+   "h": "10043/64000",
+   "depth": 1,
+   "verdict": "ACCEPT",
+   "nodes": 13591,
+   "clips": 10290064,
+   "tree_depth": 23,
+   "seconds": 3.597,
+   "min_accepted": "18446753682484115598",
+   "polygon_vertices": 16,
+   "polygon_area": 0.9991575060049761,
+   "domain": [
+    182237128816,
+    342876681911
+   ]
+  }
+ ],
+ "control": "A3",
+ "expected": [
+  "REFUSED_EXACT"
+ ],
+ "as_planned": false
+}

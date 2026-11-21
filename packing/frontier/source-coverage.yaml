@@ -12659,13 +12659,14 @@ sources:
   - resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/claims.json
   evidence:
   - E-de-winter-939-certificate-report
+  - E-de-winter-939-exact-feasibility
+  - E-de-winter-939-review-exact-feasibility
   notes: >-
     The licence, the root README and the folder n199/ of the commit 702c7af are retained for
     jlevy/squares#939, the licence pinned against the byte-identical copy the
     de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and the figure by digest; the
     certificate is admitted only where its exact side rounds up to the side the issue prints. It is
-    T-284's packing with its 172-square core re-solved. T-285 records the in-horizon report at
-    V0/C1, held below the stage 4 exit for the owner's RV-3 (think-ruu2); the house stays T-284.
+    T-284's packing with its 172-square core re-solved. T-285 records the in-horizon report, a new result under the owner's option D (think-b0w5), at V3/C3, and the house since 21 November 2026.
     The ledger of 11 November for this lane (campaign/issue-intake/upper-bounds-939-946-20261111)
     records it as a refinement of T-284's packing. All 3 native jobs have full outcomes.
 - id: de-winter-s172-upper-bound-2026-11-10
@@ -12687,14 +12688,15 @@ sources:
   - resources/web/de-winter-s172-upper-bound-2026-11-10/acquisition/claims.json
   evidence:
   - E-de-winter-946-certificate-report
+  - E-de-winter-946-exact-feasibility
+  - E-de-winter-946-review-exact-feasibility
   notes: >-
     The licence, the root README and the folder n172/ of the commit c4e65d0 are retained for
     jlevy/squares#946, the licence pinned against the byte-identical copy the
     de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and the figure by digest; the
     certificate is admitted only where its exact side rounds up to the side the source's README
     prints. It is T-282's packing re-solved, the core of #939's certificate with less padding.
-    T-286 records the in-horizon report at V0/C1, held below the stage 4 exit for the owner's
-    RV-3 (think-ruu2); the house stays T-282. The ledger of 11 November for this lane
+    T-286 records the in-horizon report, a new result under the owner's option D (think-b0w5), at V3/C3, and the house since 21 November 2026. The ledger of 11 November for this lane
     (campaign/issue-intake/upper-bounds-939-946-20261111) records it as a refinement of T-282's
     packing. The four commits between the two pins of this lane add certificates at 37 counts
     above 324, outside this scope: #941 reports the 15 under above324/ and #942 the 16 under
@@ -13658,6 +13660,93 @@ sources:
     1063/1062 onto a 401-direction declared net at a core side the source chose; the proof
     enlarges the bound from 10.63 to 10.6300379408297..., above T-216's 531/50 by 0.0100, and
     the same bound holds at 109 by monotonicity. T-327 records the claim.
+- id: de-winter-s127-issue1015-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing 35b576a, issue 1015
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/35b576a355297942bca9c195bee5cd74f0b27f40/n127
+  local: resources/web/de-winter-s127-issue1015-2026-11-17/
+  source_key: '[de Winter s127 issue 1015 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1015-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1015-certificate-report
+  - E-de-winter-1015-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1015 at 35b576a, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-328 records the in-horizon report,
+    9.58e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
+- id: de-winter-s127-issue1017-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing cc20a26, issue 1017
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/cc20a26845789c2502950041c26709eda8a71081/n127
+  local: resources/web/de-winter-s127-issue1017-2026-11-17/
+  source_key: '[de Winter s127 issue 1017 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1017-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1017-certificate-report
+  - E-de-winter-1017-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1017 at cc20a26, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-329 records the in-horizon report,
+    1.96e-06 below T-328 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
+- id: de-winter-s127-issue1020-2026-11-17
+  title: Joost de Winter's packing of 127 squares at JoostdeWinter/square-packing a1ba501, issue 1020
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a1ba5019e787e407646293d7bef81d63c9951b32/n127
+  local: resources/web/de-winter-s127-issue1020-2026-11-17/
+  source_key: '[de Winter s127 issue 1020 2026-11-17]'
+  scope:
+    n_values:
+    - 127
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s127-issue1020-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1020-certificate-report
+  - E-de-winter-1020-exact-feasibility
+  notes: >-
+    The centre-direction certificate, its corner Witness/v2 twin, the folder's README,
+    registration text and checksums and the root README are retained for
+    jlevy/squares#1020 at a1ba501, the commit the issue names in the watched repository; the
+    licence and the two checkers are pinned against byte-identical copies, and the figure by
+    digest. The certificate is admitted only where its exact side rounds up to the side the
+    issue prints. Licensed MIT by LICENSE at the pin. T-330 records the in-horizon report,
+    1.80e-13 below T-329, 1.96e-06 below T-328 and 9.60e-04 below T-305 at 127; the ledger of 18 November for this lane
+    (campaign/issue-intake/upper-bounds-1015-1020-20261118) records #1015, #1017 and #1020, in
+    order. All 3 native jobs have full outcomes.
 - id: mishapolk-issue1009-2026-11-16
   title: Mykhailo Polkovskyi's 13 packings from 147 to 307 squares at Mishapolk/square-packing-records b637e6c, issue 1009
   role: source-repository
@@ -13702,8 +13791,122 @@ sources:
     padding. The ledger of 17 November for this lane
     (campaign/issue-intake/upper-bounds-1009-20261117) records all 13. All 39 native jobs have
     full outcomes.
+- id: de-winter-s268-upper-bound-2026-11-17
+  title: Joost de Winter's packing of 268 squares from nine diagonal slices at JoostdeWinter/square-packing a1ba501, issue 1021
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a1ba5019e787e407646293d7bef81d63c9951b32
+  local: resources/web/de-winter-s268-upper-bound-2026-11-17/
+  source_key: '[de Winter s268 upper bound 2026-11-17]'
+  scope:
+    n_values:
+    - 268
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1021-certificate-report
+  - E-de-winter-1021-exact-feasibility
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints: 16.870013850405 at 12 places, the issue's
+    print. T-331 records the in-horizon report, 1.85e-03 below T-320 at 268; the ledger of 18
+    November for this lane (campaign/issue-intake/upper-bounds-1021-1022-20261118) records it after
+    #1009's. All 3 native jobs have full outcomes. The 20 November pass adopted T-331 at 268.
+    T-320's exact certificate remains in the record.
+- id: de-winter-s270-upper-bound-2026-11-17
+  title: Joost de Winter's packing of 270 squares from Asterios Panoras's compilation at JoostdeWinter/square-packing a1ba501, issue 1022
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/a1ba5019e787e407646293d7bef81d63c9951b32
+  local: resources/web/de-winter-s270-upper-bound-2026-11-17/
+  source_key: '[de Winter s270 upper bound 2026-11-17]'
+  scope:
+    n_values:
+    - 270
+  reviewed: '2026-11-18'
+  source_date: '2026-11-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/claims.json
+  evidence:
+  - E-de-winter-1022-certificate-report
+  - E-de-winter-1022-exact-feasibility
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints: 16.927314216352 at 12 places, the issue's
+    print. T-332 records the in-horizon report, 8.34e-04 below T-321 at 270; the ledger of 18
+    November for this lane (campaign/issue-intake/upper-bounds-1021-1022-20261118) records it after
+    #1009's. All 3 native jobs have full outcomes. The 20 November pass adopted T-332 at 270.
+    T-321's exact certificate remains in the record.
+- id: de-winter-s299-upper-bound-2026-11-18
+  title: Joost de Winter's packing of 299 squares from diagonal slices of Asterios Panoras's compilation at JoostdeWinter/square-packing 497eb47, issue 1031
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/497eb478b790175ea8690671b66785b70c97f9f2
+  local: resources/web/de-winter-s299-upper-bound-2026-11-18/
+  source_key: '[de Winter s299 upper bound 2026-11-18]'
+  scope:
+    n_values:
+    - 299
+  reviewed: '2026-11-20'
+  source_date: '2026-11-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/claims.json
+  evidence:
+  - E-de-winter-1031-certificate-report
+  - E-de-winter-1031-exact-feasibility
+  notes: >-
+    The 1 complete certificate is retained as the source wrote it, admitted only where its exact
+    side equals, or rounds up to, the side its source prints: 17.793636991744 at 12 places, the issue's
+    print. T-333 records the in-horizon report, 7.37e-03 below T-325 at 299; the ledger of 20
+    November for this lane (campaign/issue-intake/upper-bounds-1031-20261120) records it. All 3
+    native jobs have full outcomes. The 20 November pass adopted T-333 at 299. T-325's exact
+    certificate remains in the record.
+
+- id: ozden-s228-upper-bound-2026-11-18
+  title: Doğa Özden's exact certificate of the packing published in jazivxt's Kaggle notebook at 228 squares, kenaznia-doga/s228-upper-bound-1559604311 46ab8bf, issue 1038
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s228-upper-bound-1559604311/tree/46ab8bf425f5cad886a8bc4023bfff904f43af99
+  local: resources/web/ozden-s228-upper-bound-2026-11-18/
+  source_key: '[Özden s228 upper bound 2026-11-18]'
+  scope:
+    n_values:
+    - 228
+  reviewed: '2026-11-20'
+  source_date: '2026-11-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
+  evidence:
+  - E-ozden-1038-certificate-report
+  - E-ozden-1038-exact-feasibility
+  notes: >-
+    The centre-basis Witness/v2 certificate, its JSON twin, the unmodified conversion output,
+    jazivxt's decimal slice as the source holds it, Sergio Fernández Rubio's rounded layout and
+    its NOTICE, the check reports and outputs, PROVENANCE.json, the README and the licences are
+    retained for jlevy/squares#1038 at 46ab8bf, the repository's only commit; the lab's checker
+    and its README and the comparison figures are pinned by digest or against byte-identical
+    copies. The Kaggle notebook and dataset were not read here (the session's proxy refuses
+    www.kaggle.com). The certificate is admitted only where its exact side rounds up to the side
+    the issue prints. Licensed CC BY 4.0 and MIT by LICENSE.md at the pin, the coordinates Apache
+    2.0 as the source declares them. T-334 records the in-horizon report, 4.29e-9 below T-301 at
+    228; the ledger of 20 November for this lane (campaign/issue-intake/upper-bounds-1038-20261120)
+    records it. All 3 native jobs have full outcomes. jazivxt is the notebook and snapshot
+    publisher; T-301 retains Roberto Ono's credit, and Doğa Özden is credited for this
+    certificate. T-334's finder, publication order and direction of derivation remain
+    unresolved; the later related de Winter attachment awaits comparison in think-d4b0.
 - id: de-winter-kodaj-n109-2026-11-18
-  title: Tomáš Kodaj's 109 as Joost de Winter transcribed it exactly, at JoostdeWinter/square-packing aae089c, issue 1012
+  title: Tomáš Kodaj's 109 as Joost de Winter transcribed it exactly, at JoostdeWinter/square-packing
+    aae089c, issue 1012
   role: source-repository
   url: https://github.com/JoostdeWinter/square-packing/tree/aae089c37a2d3fb91b161a1b3a45f06a41277d18
   local: resources/web/de-winter-kodaj-n109-2026-11-18/
@@ -13716,22 +13919,46 @@ sources:
   disposition: current-report
   replay_disposition: case-specific
   represented_by:
-  - frontier/results.yaml
+  - frontier/n-109.md
   - resources/web/de-winter-kodaj-n109-2026-11-18/acquisition/claims.json
   evidence:
   - E-de-winter-1012-n109-report
   - E-de-winter-1012-n109-exact-feasibility
-  notes: >-
-    The corner Witness/v2, Kodaj's 109 Kaggle rows it transcribes, the folder's README,
-    SHA256SUMS and the checker log are retained for jlevy/squares#1012 at aae089c, which first
-    committed them 2 minutes 57 seconds before the comment of 18 November that attaches the same
-    files; the next commit deletes the folder, and the licence is pinned against a byte-identical
-    copy. The attachment and Kaggle were not read here (the session's proxy refuses both). The
-    certificate is admitted only where its exact side equals the side the comment states. CC0 for
-    the coordinates by the source's word, MIT by the LICENSE at the pin for the transcription.
-    T-335 records the in-horizon report, 4.58e-04 below the house at 109; the ledger of 20
-    November for this lane (campaign/issue-intake/upper-bounds-1012-20261120) records it. All 3
-    native jobs have full outcomes.
+  notes: The corner Witness/v2, Kodaj's 109 Kaggle rows it transcribes, the folder's
+    README, SHA256SUMS and the checker log are retained for jlevy/squares#1012 at
+    aae089c, which first committed them 2 minutes 57 seconds before the comment of
+    18 November that attaches the same files; the next commit deletes the folder,
+    and the licence is pinned against a byte-identical copy. The attachment and Kaggle
+    were not read here (the session's proxy refuses both). The certificate is admitted
+    only where its exact side equals the side the comment states. CC0 for the coordinates
+    by the source's word, MIT by the LICENSE at the pin for the transcription. The 20
+    November report-order walk records this certificate. Under Option D it remains an
+    unregistered restatement of T-335, credited to de Winter after Kodaj, Samanyu-dev.
+    All three replay jobs have full outcomes.
+- id: samanyu-n109-2026-11-07
+  title: Samanyu-dev's 109-square pinwheel from the public Kaggle submission
+  role: source-repository
+  url: https://github.com/Samanyu-dev/squares_in_squares/tree/53551d77513a9f5c180a731f291baf7eda7c3009
+  local: resources/web/samanyu-n109-2026-11-07/
+  source_key: '[Samanyu-dev square packing 2026-11-07]'
+  scope:
+    n_values:
+    - 109
+  reviewed: '2026-11-21'
+  source_date: '2026-11-07'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/samanyu-n109-2026-11-07/acquisition/claims.json
+  evidence:
+  - E-samanyu-n109-numerical-report
+  - E-samanyu-n109-exact-feasibility
+  - E-samanyu-n109-canonical-independent-feasibility
+  notes: The upstream CSV is pinned by digest. The portable rational derivation proves the
+    12-place upward print 10.949289580946. Both maintained routes and the independently
+    implemented corners checker accepted it. T-335 records Samanyu-dev’s original packing;
+    the house adoption is pending under think-wvr8.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -13829,11 +14056,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-139).
 - n: 127
-  source_id: joegun-upper-bounds-2026-11-16
-  value: '11.8017538904864874'
-  evidence: E-joegun-1001-certificate-report
+  source_id: de-winter-s127-issue1020-2026-11-17
+  value: '11.8007937266149623'
+  evidence: E-de-winter-1020-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-16 (T-305).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-330).
 - n: 129
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '11.87001385040446435'
@@ -13907,11 +14134,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-11 (T-293).
 - n: 172
-  source_id: ozden-s172-upper-bound-2026-11-09
-  value: '13.6146898532862152'
-  evidence: E-ozden-935-certificate-report
+  source_id: de-winter-s172-upper-bound-2026-11-10
+  value: '13.6146898532835806'
+  evidence: E-de-winter-946-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-09 (T-282).
+    a replay here and an accepted review, adopted on 2026-11-21 (T-286).
 - n: 175
   source_id: evand-issue914-2026-11-05-n175
   value: '13.7640500515431752'
@@ -13961,11 +14188,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-19 (T-220).
 - n: 199
-  source_id: ozden-s199-upper-bound-2026-11-09
-  value: '14.6146898532862152'
-  evidence: E-ozden-938-certificate-report
+  source_id: de-winter-s199-upper-bound-2026-11-09
+  value: '14.6146898532835806'
+  evidence: E-de-winter-939-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-09 (T-284).
+    a replay here and an accepted review, adopted on 2026-11-21 (T-285).
 - n: 204
   source_id: joegun-upper-bounds-2026-11-16
   value: '14.8026468431066121'
@@ -14015,11 +14242,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 228
-  source_id: ono-issue984-2026-11-14
-  value: '15.5960431209207917'
-  evidence: E-ono-984-certificate-report
+  source_id: ozden-s228-upper-bound-2026-11-18
+  value: '15.5960431166317666'
+  evidence: E-ozden-1038-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-15 (T-301).
+    a replay here and an accepted review, adopted on 2026-11-21 (T-334).
 - n: 229
   source_id: evand-regularized-2026-10-20
   value: '15.6501615138764311'
@@ -14123,11 +14350,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-134).
 - n: 268
-  source_id: mishapolk-issue1009-2026-11-16
-  value: '16.8718681351021783'
-  evidence: E-mishapolk-1009-certificate-report
+  source_id: de-winter-s268-upper-bound-2026-11-17
+  value: '16.8700138504044644'
+  evidence: E-de-winter-1021-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-320).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-331).
 - n: 269
   source_id: ozden-s269-upper-bound-2026-11-12
   value: '16.8897300735956367'
@@ -14135,11 +14362,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-13 (T-297).
 - n: 270
-  source_id: mishapolk-issue1009-2026-11-16
-  value: '16.9281486033396074'
-  evidence: E-mishapolk-1009-certificate-report
+  source_id: de-winter-s270-upper-bound-2026-11-17
+  value: '16.9273142163517014'
+  evidence: E-de-winter-1022-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-321).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-332).
 - n: 271
   source_id: evand-n271-2026-10-17
   value: '16.9489477337136576'
@@ -14183,11 +14410,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-14 (T-299).
 - n: 299
-  source_id: mishapolk-issue1009-2026-11-16
-  value: '17.8010044342517669'
-  evidence: E-mishapolk-1009-certificate-report
+  source_id: de-winter-s299-upper-bound-2026-11-18
+  value: '17.7936369917430406'
+  evidence: E-de-winter-1031-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-18 (T-325).
+    a replay here and an accepted review, adopted on 2026-11-20 (T-333).
 - n: 301
   source_id: evand-square-packing-2026-10-05
   value: '17.846667192843489783121781262887'
@@ -14551,7 +14778,7 @@ superseded_reports:
 - n: 127
   source_id: evand-square-packing-2026-10-05
   value: '11.822875655532295295369036633375'
-  superseded_by: joegun-upper-bounds-2026-11-16
+  superseded_by: de-winter-s127-issue1020-2026-11-17
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -14716,7 +14943,7 @@ superseded_reports:
 - n: 172
   source_id: franciscouzo-square-packing-2026
   value: '13.618988956935731'
-  superseded_by: ozden-s172-upper-bound-2026-11-09
+  superseded_by: de-winter-s172-upper-bound-2026-11-10
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 173
@@ -14820,7 +15047,7 @@ superseded_reports:
 - n: 199
   source_id: franciscouzo-square-packing-2026
   value: '14.618988956907218'
-  superseded_by: ozden-s199-upper-bound-2026-11-09
+  superseded_by: de-winter-s199-upper-bound-2026-11-09
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 200
@@ -14954,20 +15181,20 @@ superseded_reports:
 - n: 228
   source_id: casson-square-packing-2026
   value: '15.60895620815939289'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026
   value: '15.604638007678682'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026-10-03
   value: '15.604602454552252'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 229
@@ -15185,14 +15412,14 @@ superseded_reports:
 - n: 268
   source_id: casson-square-packing-2026
   value: '16.87895510935973675'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 268
   source_id: franciscouzo-square-packing-2026
   value: '16.878814821018413'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 269
@@ -15211,14 +15438,14 @@ superseded_reports:
 - n: 270
   source_id: casson-square-packing-2026
   value: '16.94057158197226087'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
   reason: 'Larger than Francisco Couzo''s side at this count; the case record states both sources''
     dates and values; since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that
     packing (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 270
   source_id: franciscouzo-square-packing-2026
   value: '16.937810329390629'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
   reason: 'Superseded on 2026-10-05 by Evan Daniel''s exact optimum of the same packing, certified
     here (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 271
@@ -15338,7 +15565,7 @@ superseded_reports:
 - n: 299
   source_id: evand-square-packing-2026-10-05
   value: '17.822875655532295295429036633375'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -15508,7 +15735,7 @@ superseded_reports:
 - n: 199
   source_id: evand-square-packing-2026-10-05
   value: '14.61898895689939842900969151892'
-  superseded_by: ozden-s199-upper-bound-2026-11-09
+  superseded_by: de-winter-s199-upper-bound-2026-11-09
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 207
@@ -15633,7 +15860,7 @@ superseded_reports:
 - n: 270
   source_id: evand-square-packing-2026-10-05
   value: '16.937810329340954110200218669924'
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
   reason: 'The complete #399 construction has a strictly smaller side; the earlier report and its
     full certificates remain historical.'
 - n: 272
@@ -15645,7 +15872,7 @@ superseded_reports:
 - n: 199
   source_id: squish-second-update-2026-10-07
   value: '14.6175721735980400'
-  superseded_by: ozden-s199-upper-bound-2026-11-09
+  superseded_by: de-winter-s199-upper-bound-2026-11-09
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 207
   source_id: squish-second-update-2026-10-07
@@ -15808,9 +16035,9 @@ superseded_reports:
 - n: 127
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8109366475118110'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-305's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-330's exact
     side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 129
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8720298492118721'
@@ -15880,9 +16107,9 @@ superseded_reports:
 - n: 228
   source_id: evand-square-packing-2026-10-05
   value: '15.604602454546056967137037190451'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-301's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-334's exact
     side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 236
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.8678008394199166'
@@ -15922,9 +16149,9 @@ superseded_reports:
 - n: 270
   source_id: evand-new-arrangements-2026-10-07
   value: '16.937807228446029110709567408515'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-321's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-332's exact
     side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 292
   source_id: rehwaldt-couzo-refinements-2026-10-07
   value: '17.597249391156465040471442005510391858592626557'
@@ -16025,8 +16252,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-10
   value: '16.9297753535413596'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 305
   source_id: couzo-certificates-2026-10-10
   value: '17.9511397722069976'
@@ -16289,8 +16516,8 @@ superseded_reports:
   source_id: couzo-451-exact-refinements
   value: '11.8108787875891799'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-305's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 130
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.9044830325157865'
@@ -16318,9 +16545,9 @@ superseded_reports:
 - n: 172
   source_id: evand-square-packing-2026-10-05
   value: '13.61898895689939842899969151892'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-282's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-286's exact
     side is smaller.
-  superseded_by: ozden-s172-upper-bound-2026-11-09
+  superseded_by: de-winter-s172-upper-bound-2026-11-10
 - n: 179
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '13.8837954905108985'
@@ -16373,8 +16600,8 @@ superseded_reports:
   source_id: couzo-451-exact-refinements
   value: '15.6046014757296743'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 238
   source_id: squish-500-fourth-request-2026-10-11
   value: '15.9241067853214947'
@@ -16408,9 +16635,9 @@ superseded_reports:
 - n: 268
   source_id: evand-square-packing-2026-10-05
   value: '16.878814821006764724747121053018'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-320's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-331's exact
     side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 269
   source_id: evand-regularized-2026-10-10
   value: '16.9015135821891322'
@@ -16421,8 +16648,8 @@ superseded_reports:
   source_id: squish-500-fourth-request-2026-10-11
   value: '16.9281969933290166'
   reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 272
   source_id: pingyou-n272-refinement-2026-10-12
   value: '16.9655864748376707'
@@ -16505,8 +16732,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.92819699332901659'
   reason: The house from 2026-10-17 until 2026-10-21; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 260
   source_id: de-winter-upper-bounds-2026-10-17
   value: '16.6457788041813798'
@@ -16625,8 +16852,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.8788148210067647246'
   reason: The house from 2026-10-17 until 2026-10-25; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 303
   source_id: amundsk-n303-2026-10-23
   value: '17.9097623274752568'
@@ -16649,8 +16876,8 @@ superseded_reports:
   source_id: couzo-issue763-2026-10-23-in-corpus
   value: '16.8743617158738255'
   reason: The house from 2026-10-25 until 2026-10-26; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 130
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.90448303251578644'
@@ -16661,8 +16888,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '13.6189889568993984289'
   reason: The house from 2026-10-17 until 2026-10-31; its certificate stays retained and verified,
-    and T-282's exact side is smaller.
-  superseded_by: ozden-s172-upper-bound-2026-11-09
+    and T-286's exact side is smaller.
+  superseded_by: de-winter-s172-upper-bound-2026-11-10
 - n: 204
   source_id: mishapolk-n204-2026-10-22
   value: '14.8086428305130872'
@@ -16697,8 +16924,8 @@ superseded_reports:
   source_id: evand-n299-update-2026-10-29
   value: '17.8012385493885841'
   reason: The house from 2026-10-31 until 2026-11-04; its certificate stays retained and verified,
-    and T-325's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-333's exact side is smaller.
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
 - n: 260
   source_id: evand-issue845-2026-10-29
   value: '16.6339825021218840'
@@ -16727,8 +16954,8 @@ superseded_reports:
   source_id: evand-kaggle-descents-2026-10-24
   value: '16.8743617158693459'
   reason: The house from 2026-10-26 until 2026-11-05; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 293
   source_id: evand-issue845-2026-10-29
   value: '17.6339825021227820'
@@ -16757,14 +16984,14 @@ superseded_reports:
   source_id: evand-issue914-2026-11-05
   value: '16.8724995181350307'
   reason: The house from 2026-11-05 until 2026-11-09; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 299
   source_id: ozden-s299-upper-bound-2026-11-03
   value: '17.8012385339790622'
   reason: The house from 2026-11-04 until 2026-11-09; its certificate stays retained and verified,
-    and T-325's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-333's exact side is smaller.
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
 - n: 303
   source_id: evand-issue914-2026-11-05
   value: '17.9018327508540488'
@@ -16781,20 +17008,20 @@ superseded_reports:
   source_id: evand-issue845-2026-10-29
   value: '13.6179356983814155'
   reason: The house from 2026-10-31 until 2026-11-09; its certificate stays retained and verified,
-    and T-282's exact side is smaller.
-  superseded_by: ozden-s172-upper-bound-2026-11-09
+    and T-286's exact side is smaller.
+  superseded_by: de-winter-s172-upper-bound-2026-11-10
 - n: 270
   source_id: evand-n270-sweep-2026-10-20
   value: '16.9281622521967502'
   reason: The house from 2026-10-21 until 2026-11-09; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 199
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.6175721735928069'
-  reason: The house until 2026-11-09; its certificate stays retained and verified, and T-284's exact
+  reason: The house until 2026-11-09; its certificate stays retained and verified, and T-285's exact
     side is smaller.
-  superseded_by: ozden-s199-upper-bound-2026-11-09
+  superseded_by: de-winter-s199-upper-bound-2026-11-09
 - n: 156
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '12.97916585383427646'
@@ -16811,8 +17038,8 @@ superseded_reports:
   source_id: ozden-s268-upper-bound-2026-11-09
   value: '16.8724698978362125'
   reason: The house from 2026-11-09 until 2026-11-11; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 269
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.901513582189132199'
@@ -16865,14 +17092,14 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.60460147572967429'
   reason: The house from 2026-10-17 until 2026-11-14; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 228
   source_id: ozden-s228-upper-bound-2026-11-14
   value: '15.6008017348117539'
   reason: The house from 2026-11-14 until 2026-11-15; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 90
   source_id: jazivxt-s90-upper-bound-2026-11-15
   value: '9.9982771669260000'
@@ -16883,8 +17110,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.81087878758917984'
   reason: The house from 2026-10-17 until 2026-11-16; its certificate stays retained and verified,
-    and T-305's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
 - n: 204
   source_id: evand-issue914-2026-11-05
   value: '14.8043613836518588'
@@ -16943,14 +17170,14 @@ superseded_reports:
   source_id: ozden-s268-upper-bound-2026-11-10
   value: '16.8720298490844502'
   reason: The house from 2026-11-11 until 2026-11-18; its certificate stays retained and verified,
-    and T-320's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
 - n: 270
   source_id: ozden-s270-upper-bound-2026-11-09
   value: '16.9281486033428544'
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
-    and T-321's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
 - n: 272
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.96558647483767064'
@@ -16973,14 +17200,57 @@ superseded_reports:
   source_id: ozden-s299-upper-bound-2026-11-09
   value: '17.8010044342552937'
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
-    and T-325's exact side is smaller.
-  superseded_by: mishapolk-issue1009-2026-11-16
+    and T-333's exact side is smaller.
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
 - n: 307
   source_id: ozden-s307-upper-bound-2026-11-09
   value: '17.9792309603873628'
   reason: The house from 2026-11-09 until 2026-11-18; its certificate stays retained and verified,
     and T-326's exact side is smaller.
   superseded_by: mishapolk-issue1009-2026-11-16
+- n: 127
+  source_id: joegun-upper-bounds-2026-11-16
+  value: '11.8017538904864874'
+  reason: The house from 2026-11-16 until 2026-11-18; its certificate stays retained and verified,
+    and T-330's exact side is smaller.
+  superseded_by: de-winter-s127-issue1020-2026-11-17
+- n: 172
+  source_id: ozden-s172-upper-bound-2026-11-09
+  value: '13.6146898532862152'
+  reason: The house from 2026-11-09 until 2026-11-21; its certificate stays retained and verified,
+    and T-286's exact side is smaller.
+  superseded_by: de-winter-s172-upper-bound-2026-11-10
+- n: 199
+  source_id: ozden-s199-upper-bound-2026-11-09
+  value: '14.6146898532862152'
+  reason: The house from 2026-11-09 until 2026-11-21; its certificate stays retained and verified,
+    and T-285's exact side is smaller.
+  superseded_by: de-winter-s199-upper-bound-2026-11-09
+- n: 268
+  source_id: mishapolk-issue1009-2026-11-16
+  value: '16.8718681351021783'
+  reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
+    and T-331's exact side is smaller.
+  superseded_by: de-winter-s268-upper-bound-2026-11-17
+- n: 270
+  source_id: mishapolk-issue1009-2026-11-16
+  value: '16.9281486033396074'
+  reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
+    and T-332's exact side is smaller.
+  superseded_by: de-winter-s270-upper-bound-2026-11-17
+- n: 299
+  source_id: mishapolk-issue1009-2026-11-16
+  value: '17.8010044342517669'
+  reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
+    and T-333's exact side is smaller.
+  superseded_by: de-winter-s299-upper-bound-2026-11-18
+
+- n: 228
+  source_id: ono-issue984-2026-11-14
+  value: '15.5960431209207917'
+  reason: The house from 2026-11-15 until 2026-11-21 UTC; its certificate stays retained and verified,
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

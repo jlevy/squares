@@ -1,0 +1,19 @@
+# Lane r1052 checker and controls plan, frozen at 2026-11-20T19:42:44Z, before any program of this lane read the certificate (its two blobs were not yet fetched), and before the source's README.md, REGISTRATION.md, SHA256SUMS, verify_exact.py, check_area.py or n305_record.png, comments on issue 1052 (none when read), this repository's witness, verifier or promotion code, packing/frontier/n-305.md, the register entry at 305 (T-309), the record of issue 1001, the earlier reviews at 305, or the import lane's work (bead think-kzwl, its branch and its packet) was read.
+# Read before the freeze: the lane's brief and lane-env notes; issue 1052's body through the REST API (19:17:22Z); bead think-d788 (this lane's), and one 'tbd list --parent think-p02d' listing of the epic's children, which prints the import bead think-kzwl's title; result-import.md stage 4; the review of issue 1012 (lane r1012) with its packet README and frozen digest lists, not its programs; lines 1-40 and 100-230 of the review of issue 1031 (how it read form J and form C), not its programs; packing/witnesses/witness.schema.yaml; the layout of packing/resources/web/de-winter-s299-upper-bound-2026-11-18/source/n299/n299_exact.json.gz (its first 1,200 and last 300 characters) and the first 45 lines of n299_witness.yaml there, every digit redacted; the Ruff and BasedPyright exclusions of packing/pyproject.toml, lefthook.yml and biome.json's files block; the source repository's commit list and the names and blob ids of the files under n305/ at db8efcb, 5282edd and 20b6f0e (a bare blobless clone of commits and trees, listed with git ls-tree without sizes).
+# Disclosed: one shell line ran the system python3 on an empty program (a stray heredoc), against the repository's rule; it read nothing and decided nothing. Before the freeze the programs ran only on synthetic packings, in scratch space: the self-test, fourteen and then four deliberate mutations of the programs, and the controls program on two synthetic two-form certificates (4 and 30 squares), each EVERY_CONTROL_AS_STATED 51 of 51.
+# the certificate, identified by the source tree only (git blob ids, content not fetched): JoostdeWinter/square-packing db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef:n305/, the same blobs at 5282edd and 20b6f0e
+355cbe46ff685c00c1bb292443b974084dc0b9c4  git-blob:db8efcb:n305/n305_exact.json
+58ab84e20c2eb6d533f59d8f3141de3d4bfbf4f1  git-blob:db8efcb:n305/n305_witness.yaml
+# checker programs, the writer, the self-test, the controls program and the controls plan (SHA-256):
+8669f655aa58efffd6ca4822de977237fc5cbd808a822dc2e568e402b3a2cf9f  r1052_reader.py
+65c3f51be583a034cef9f5210ec2d6b0c993760b56c97213141ca81af2ebbc6d  r1052_poses.py
+c51e03fedf7bb622591fe682107279238f64417a0d5b58e13e19b750cf79bc74  r1052_clip.py
+05be945ee49105ef72f665b937aaf09903cf2d365a574a15e8be1e3c5bb2dcd1  r1052_decide.py
+84034564a27f28b2f8be5585bca202a505d373bc30c443c4a9115e50aa7f7efa  r1052_geom.py
+44267603d24743cbe3b236878a54e7fea445f256878170936d848b274aa4187e  r1052_writer.py
+e54607ec20ded0d5c83a387f0a846ab4db765fb9babca446dcc0055a1f641474  r1052_check.py
+c1bd7b8dc0613842631e13688bcdd495e775783c756783e004d8934a9ed6b1ff  r1052_selftest.py
+4043b859db2a5b375407ec912ed38da51d04cd1b15429e8b7e16d184ae0aae4d  r1052_controls.py
+c85b33964e0a792b2d914f4f7ed41ec6d83a4a265acc4f7bcd10dcdaf38880bc  controls-plan.json
+# receipt written by the frozen self-test (it reads no certificate):
+1a53979a56f6e47ee9f2359085e9f1d62b56825ede087265ba523ef95960132f  out/selftest.json

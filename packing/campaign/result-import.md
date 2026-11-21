@@ -492,7 +492,37 @@ the inputs and the comparison:
   cannot decide is undecided, never guessed.
 - **A refinement** of a standing packing is recorded like a new packing and credited to
   its finder after the finder of the packing it refines, as a regularization
-  ([stage 3](#stage-3-record)), unless it restates the report below the print.
+  ([stage 3](#stage-3-record)), unless it restates the report below the print, or its
+  side is not below its predecessor shrunk to first contact (option D, below).
+
+**A re-certification is a new result only if it beats its predecessor shrunk to first
+contact** (think-b0w5). On 17 November 2026 the owner selected the option labelled “Only
+if it beats the gap-free original (Recommended)”; the rest is the option as the decision
+bead records it, not the owner’s words: a re-certification of a standing packing, with
+its padding removed or the same arrangement re-solved to its exact local optimum, is a
+new result only if its side is below its predecessor’s side once the predecessor is
+itself shrunk until its squares first touch, measured through any construction;
+otherwise it is a restatement, credited to the original finder.
+It applies at every count, inside the corpus as beyond it, extending the 23 October
+ruling below, and it compares sides, not prints.
+
+- **The measurement** is `devtools.contraction_margin`’s: the predecessor’s certificate,
+  `--against` the re-certification, at the count, or at the base’s count through an L
+  step (`l-base:`), with its receipt in the packet’s `measure/`. `within_margin: true`
+  is a restatement; a gain beyond the margin by any amount is a new result.
+  `devtools.measure_identity` says whether it is a re-certification at all: a new
+  arrangement is compared by sides alone.
+- **A restatement is not recorded as a new result.** Where its report is already
+  registered, the entry stays as the record of the report, never raised: its
+  `restatements` name, count by count, the result that holds the predecessor and the
+  receipt, it carries no `regularizations` there, no house moves, and no profile counts
+  it current (`check_standing.restated`; T-253, T-260, T-280 and T-281, decided on 18
+  November 2026). Where it is not, it is not registered.
+- **A new result is registered and adopted** like any refinement: T-285 and T-286 are
+  1.0399 of the margin T-282’s certificate carries, at 199 through T-284’s L step.
+- **Results recorded before the answer** that its decision bead does not name keep their
+  standing and credit until the owner says (think-7k8p): T-259 at 130 is 0.9193 of
+  T-254’s margin, and T-155’s solved views, T-170 and T-195 are not measured.
 
 **One report registered as two entries is credited in both.** A tie stays with the
 earlier report, but two register entries can carry one report: T-073 and T-080 register
@@ -516,12 +546,20 @@ record’s statement of the rule:
   The record reads a sub-print re-certification as a side below an earlier report at its
   count by less than one unit in the 12th place, with both rounding up to the same
   12-place print. The walk measures the distance to the member of the standing side the
-  claim is closest below, a report and not a construction; whether the answer also
-  reaches a side within the print below a construction is open (think-oqjd), and no such
-  side exists to 1024. A claim in the ruling’s words that an earlier ledger recorded and
-  the answer did not name waits on the owner (`awaiting_owner`). #719’s 631 is the one
-  such claim to 1024: another holder’s re-certification of Couzo’s `4e4c8ce`
-  certificate, which #722 recorded (think-oqjd).
+  claim is closest below, a report and not a construction.
+  A claim in the ruling’s words that an earlier ledger recorded and the answer did not
+  name waits on the owner (`awaiting_owner`); #719’s 631 was the one such claim to 1024,
+  another holder’s re-certification of Couzo’s `4e4c8ce` certificate, which #722
+  recorded. Option D (above) answers think-oqjd’s two questions.
+  A construction with no padding, as Göbel’s are, gives up nothing when shrunk, so any
+  side below it is a new result, and no such side within the print exists to 1024.
+  #719’s 631 restates Couzo’s certificate: that certificate is his 490 with three L
+  layers, dilated by 1 + 1e-24, and carries 2.6048e-11 through that construction, where
+  #719’s lies 2.7293e-13 below it (its packet’s `measure/`). The walks still record it
+  until think-wtdz takes it out.
+  #732’s 631, the row, lies within the same margin (3.4337e-12 below), which the
+  decision does not name; whether option D reaches a recorded row beyond the horizon is
+  the owner’s question (think-1ell), and the row stands meanwhile.
 - **Göbel’s classical constructions are earlier reports** (think-8krd,
   [#613](https://github.com/jlevy/squares/issues/613)): “Goebel’s classical
   constructions count as earlier reports beyond n = 324 (the baseline): a rational row
@@ -743,7 +781,7 @@ raise C beyond a qualifying read.
 An announcement, source scan, private run summary with unresolved build coverage, or
 partial build does not qualify as complete execution.
 
-The eight record rules are:
+The nine record rules are:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
@@ -783,6 +821,12 @@ The eight record rules are:
   is credited with the regularization; the `identity` stays the source’s claim until a
   measurement here decides it
   ([epistemics.md](../../epistemics.md#parallel-projects-and-their-credit)).
+- **A restatement is listed as one.** Where a registered report proves to restate a
+  packing the record already holds under option D
+  ([Several Reports at One Count](#several-reports-at-one-count)), the entry lists each
+  such count in `restatements`, naming the result that holds the predecessor, the ruling
+  and the contraction receipt, in place of a `regularizations` item there: the original
+  finder keeps the credit, and the entry improves on no case record.
 - **The `T-NNN` is taken last.** An id is its row’s position and cannot be reserved
   across branches, so take it in the commit that registers the result, merge that day,
   and quote it to no author until it is on `main`.
@@ -1058,6 +1102,10 @@ No adoption waits for the owner’s word, and each case that once did is decided
   ([epistemics.md](../../epistemics.md#parallel-projects-and-their-credit)), and adopted
   once validated (the regularization guide’s
   [Register Candidates](../../docs/project/guides/regularization-process.md#register-candidates)).
+- **A restatement is no smaller packing.** A certificate whose side is not below its
+  predecessor shrunk to first contact (option D, think-b0w5) is never raised past the
+  report it records, so no house adopts it, whatever its side against the house’s stated
+  one ([Several Reports at One Count](#several-reports-at-one-count)).
 - **Equal sides** keep the earlier report, by the
   [report-order rule](#several-reports-at-one-count) the ledger applies, which governs
   wherever two orders could differ.

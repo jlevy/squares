@@ -1,0 +1,67 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1031",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter s299 upper bound 2026-11-18]",
+  "report_evidence": "E-de-winter-1031-certificate-report",
+  "receipt_format": "de-winter-1031-exact-replay-v1",
+  "witness_prefix": "W-de-winter-1031-n",
+  "claim_limitations": "Complete 2026-11-18 exact rational centre-direction certificate at 299, read exactly from the retained source file n299/n299_exact.json at 497eb47, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#1031 names: diagonal slices from published packings of 372 and 335 squares, locally optimized, with part of one tilted group reflected across the diagonal. Finite construction feasibility only; local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-20",
+  "read_at_main": "1015fc175fa4e2c01f912d915d784100e36d3bab",
+  "certificates": [
+    {
+      "n": 299,
+      "path": "n299/n299_exact.json",
+      "format": "center-direction-json",
+      "offered": "17.793636991744",
+      "first_committed": "2026-11-18T06:34:51Z",
+      "same_packing": [
+        {
+          "path": "n299/n299_witness.yaml",
+          "format": "witness-corners-opposite"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    299
+  ],
+  "replayed": [
+    299
+  ],
+  "houses": [
+    {
+      "n": 299,
+      "reader": "[Mishapolk issue 1009 2026-11-16]",
+      "source_key": "[Mishapolk issue 1009 2026-11-16]",
+      "holders": "Evan Daniel, improved by Doğa Özden and Mykhailo Polkovskyi",
+      "result": "T-325",
+      "reported_value": "17.8010044342517669",
+      "verified_value": "17.8010044342517669",
+      "evidence": [
+        "E-mishapolk-1009-exact-feasibility",
+        "E-mishapolk-1009-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Joost de Winter's packing of 299 squares at JoostdeWinter/square-packing 497eb47, issue 1031",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-10mx",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "independent",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER"
+    }
+  }
+}

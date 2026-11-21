@@ -165,13 +165,17 @@ def test_every_record_file_is_small(records: dict[str, str]) -> None:
     # 326,923 locally after T-278's adoption (think-463r); its ceiling, 360,000, allows one
     # more adoption at the larger growth. T-306's adoption at 204 (#1001, think-0y9m, 16
     # November 2026) took 204 to 437,573 bytes in hosted CI, past 430,000, so its ceiling
-    # moves to 475,000 as a measured choice for one more adoption.
+    # moves to 475,000 as a measured choice for one more adoption. 268 measured 305,839 bytes
+    # in hosted CI (run 44736391021) after T-331's adoption (think-78aj, 20 November 2026),
+    # its eleventh house, past 300,000, so its ceiling moves to 340,000 as a measured choice
+    # for one more adoption, as `site_urls` publishes it.
     exceptions = {
         "cases/11.html": 500_000,
         "cases/17.html": 550_000,
         "cases/18.html": 350_000,
         "cases/204.html": 475_000,
         "cases/260.html": 355_000,
+        "cases/268.html": 340_000,
         "cases/303.html": 360_000,
     }
     for name, size in sizes.items():

@@ -1,0 +1,56 @@
+{
+ "program": "r1050_mutations.py",
+ "results": [
+  {
+   "mutation": "M1",
+   "file": "six-tilt18.json",
+   "command": "six_tilt18.py",
+   "exit": 1,
+   "refused": true,
+   "stdout_tail": "",
+   "stderr_tail": "AssertionError",
+   "wall_seconds": 0.1
+  },
+  {
+   "mutation": "M2",
+   "file": "stabs18-endpoint-window.json",
+   "command": "check_stabs.py stabs18-endpoint-window.json",
+   "exit": 0,
+   "refused": true,
+   "stdout_tail": "{'status': 'UNRESOLVED', 't': '16405/196608', 'u': '21875/262144', 'passed': 13}",
+   "stderr_tail": "",
+   "wall_seconds": 0.2
+  },
+  {
+   "mutation": "M3",
+   "file": "n18-482-base.json",
+   "command": "verify_six_endpoint_classes.py --workers {w}",
+   "exit": 1,
+   "refused": true,
+   "stdout_tail": "",
+   "stderr_tail": "AssertionError",
+   "wall_seconds": 0.5
+  },
+  {
+   "mutation": "M4",
+   "file": "full-endpoint-mask-cases.json",
+   "command": "verify_full_endpoint_mask.py --workers {w}",
+   "exit": 1,
+   "refused": true,
+   "stdout_tail": "",
+   "stderr_tail": "AssertionError: ((None, 3250000, [5, 2, 3250000], [160, 8, 640, 100], ['empty']), 'OPEN 0 20 41 640')",
+   "wall_seconds": 123.7
+  },
+  {
+   "mutation": "M5",
+   "file": "second-endpoint-mask-cases.json",
+   "command": "verify_second_endpoint_mask.py --workers {w}",
+   "exit": 1,
+   "refused": true,
+   "stdout_tail": "",
+   "stderr_tail": "AssertionError",
+   "wall_seconds": 0.8
+  }
+ ],
+ "verdict": "ALL_MUTATIONS_REFUSED"
+}

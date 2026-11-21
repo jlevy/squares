@@ -34,7 +34,11 @@ measures any two packings of a count for credit and lineage.
   turn, and the squares boxed exactly at their own extent (`boxed`), since a submission
   states no side and centres its squares anywhere;
 - ``l-base:packet:NAME``, the ``n``-square packing that an import packet's certificate was
-  built on by one L step (`read_l_base`): its first ``n`` squares at its side less one.
+  built on by one L step (`read_l_base`): its first ``n`` squares at its side less one;
+- ``l-base:M:FORMAT:PATH``, the ``n``-square packing that the ``M``-square certificate in
+  a file was built on by ``k`` L steps and then a uniform dilation, ``k`` and the factor
+  found from the file and every layer held exactly (`read_l_layers`), as Francisco Couzo's
+  ``4e4c8ce`` certificate at 631 is his 490 with three layers, dilated by ``1 + 1e-24``.
 
 The receipt names each file by its repository-relative path, or by its name alone where
 it lies outside the repository, with the SHA-256 of the bytes read after any
@@ -216,7 +220,9 @@ def read_binary64(raw: bytes, n: int) -> Measured:
 def rotation_from_radians(radians: float) -> tuple[Fraction, Fraction]:
     """`rotation_from_degrees` for a binary64 angle in radians, folded the same way."""
     quarter = math.pi / 2
-    folded = (radians + quarter / 2) % quarter - quarter / 2
+    folded = math.remainder(radians, quarter)
+    if folded == quarter / 2:
+        folded = -folded
     return area.rotation(Fraction(math.tan(folded / 2)))
 
 
@@ -356,6 +362,131 @@ def read_l_base(target: str, n: int) -> tuple[legacy.Certificate, dict[str, Any]
     return base, {"input": L_BASE, "packet": name, "extended_n": m}
 
 
+#: The most L layers `read_l_layers` looks for.
+MAX_LAYERS = 64
+
+
+@dataclass(frozen=True)
+class LayeredBase:
+    """The base an L construction was built on, and how: ``layers`` L steps on ``base``,
+    then every coordinate and the side multiplied by ``dilation``, give ``extended``."""
+
+    base: legacy.Certificate
+    layers: int
+    dilation: Fraction
+    extended: legacy.Certificate
+    source: dict[str, Any]
+
+
+def _layer(width: Fraction, *, corner_on_top: bool) -> list[legacy.Pose]:
+    """One L step's squares on a packing of side ``width``: ``floor(width)`` along the top
+    and up the right, with the corner square on the top row or on the right column."""
+    half = Fraction(1, 2)
+    top = math.floor(width) + (1 if corner_on_top else 0)
+    right = math.floor(width) + (0 if corner_on_top else 1)
+    return [legacy.Pose(k + half, width + half, Fraction(0)) for k in range(top)] + [
+        legacy.Pose(width + half, k + half, Fraction(0)) for k in range(right)
+    ]
+
+
+def peel_layers(
+    extended: legacy.Certificate, n: int
+) -> tuple[legacy.Certificate, int, Fraction]:
+    """The ``n``-square base, the number of L steps and the dilation that build
+    ``extended``, exactly, or refused.
+
+    ``k`` steps on a base of side ``B`` add ``k^2 + 2 k floor(B)`` squares, so each ``k``
+    with an integer ``floor(B)`` is a candidate. The dilation is twice the least centre
+    coordinate of the added squares, the lowest square of the innermost right column or
+    the leftmost of the top row, and must be at least 1. Undilated, the first ``n`` squares
+    are the base and must lie in ``[0, B]^2``, and the rest must be the ``k`` layers on it,
+    each with its corner square on either arm, as a set: a packing is a set of squares,
+    and a source may write a layer's arms in either order."""
+    m = extended.n
+    for layers in range(1, MAX_LAYERS + 1):
+        rest = m - n - layers * layers
+        if rest <= 0 or rest % (2 * layers):
+            continue
+        added = extended.poses[n:]
+        if any(pose.t != 0 for pose in added):
+            continue
+        dilation = 2 * min(min(pose.x, pose.y) for pose in added)
+        if dilation < 1:
+            continue
+        poses = tuple(legacy.Pose(p.x / dilation, p.y / dilation, p.t) for p in extended.poses)
+        side = extended.side / dilation - layers
+        if math.floor(side) != rest // (2 * layers) or side <= 0:
+            continue
+        base = legacy.Certificate(n, side, poses[:n])
+        if not all(
+            min(p.x, p.y) - h >= 0 and max(p.x, p.y) + h <= side
+            for p in base.poses
+            for h in [_half_extent(p)]
+        ):
+            continue
+        key = _pose_key
+        found = sorted(poses[n:], key=key)
+        for corners in range(2**layers):
+            built = [
+                pose
+                for layer in range(layers)
+                for pose in _layer(side + layer, corner_on_top=bool(corners >> layer & 1))
+            ]
+            if sorted(built, key=key) == found:
+                return base, layers, dilation
+    raise MeasureError(f"no L construction on {n} squares builds the certificate of {m}")
+
+
+def _half_extent(pose: legacy.Pose) -> Fraction:
+    c, s = pose.basis
+    return (abs(c) + abs(s)) / 2
+
+
+def _pose_key(pose: legacy.Pose) -> tuple[Fraction, Fraction, Fraction]:
+    return pose.x, pose.y, pose.t
+
+
+def read_l_layers(target: str, n: int) -> LayeredBase:
+    """The ``n``-square base of the ``M``-square certificate a file states, ``target``
+    being ``M:FORMAT:PATH``, with the L steps and dilation that build it (`peel_layers`).
+    The source names the file by path and SHA-256, as any file input."""
+    count, colon, rest = target.partition(":")
+    form, colon2, where = rest.partition(":")
+    if not (colon and colon2 and count.isdigit() and form in reports.ADAPTERS and where):
+        raise MeasureError(f"{L_BASE}:{target}: an L base is read from M:FORMAT:PATH")
+    m = int(count)
+    if m <= n or m > MAX_COUNT:
+        raise MeasureError(f"{L_BASE}:{target}: {m} is no count above {n} this tool reads")
+    path = Path(where)
+    raw = _file_bytes(path)
+    try:
+        extended = reports.parse_certificate(raw, m, form)
+    except reports.ReportError as error:
+        raise MeasureError(f"{L_BASE}:{target}: {error}") from error
+    base, layers, dilation = peel_layers(extended, n)
+    source = {
+        "input": L_BASE,
+        "format": form,
+        **_where(path),
+        "sha256": hashlib.sha256(raw).hexdigest(),
+        "extended_n": m,
+        "layers": layers,
+        "dilation": legacy.literal(dilation),
+    }
+    return LayeredBase(base, layers, dilation, extended, source)
+
+
+def read_l_construction(target: str, n: int) -> LayeredBase:
+    """An L base by either form: ``packet:NAME`` (`read_l_base`, one undilated step) or
+    ``M:FORMAT:PATH`` (`read_l_layers`)."""
+    if target.startswith(f"{PACKET}:"):
+        base, source = read_l_base(target, n)
+        name = target.partition(":")[2]
+        extended = reports.read_facts(reports.packet_path(name), {source["extended_n"]})
+        return LayeredBase(base, 1, Fraction(1), extended[source["extended_n"]], source)
+    return read_l_layers(target, n)
+
+
 def read_packing(spec: str, n: int) -> Packing:
     """One packing of ``n`` squares, from its spec (see the module docstring)."""
     if type(n) is not int or n < 1:
@@ -374,8 +505,9 @@ def read_packing(spec: str, n: int) -> Packing:
         side, squares = _from_certificate(facts[n])
         source: dict[str, Any] = {"input": PACKET, "packet": target}
     elif kind == L_BASE:
-        base, source = read_l_base(target, n)
-        side, squares = _from_certificate(base)
+        layered = read_l_construction(target, n)
+        source = layered.source
+        side, squares = _from_certificate(layered.base)
     elif kind in (BINARY64, KAGGLE) or kind in reports.ADAPTERS:
         path = Path(target)
         raw = _file_bytes(path)

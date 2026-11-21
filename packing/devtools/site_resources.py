@@ -394,6 +394,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s228-upper-bound-1559604311",
+        "Doğa Özden",
+        (
+            "An exact certificate of the public Kaggle packing jazivxt published at 228,"
+            " measured one to one with T-301 and 4.29e-9 below it (T-334)."
+        ),
+    ),
+    (
         "https://github.com/RobertoOno/squares-in-square",
         "Roberto Ono",
         (
@@ -465,7 +473,9 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "A ribbon packing at 292 extending that of Ryan Xu's and Evan Daniel's 146, "
             "1.36e-3 below T-146 "
             "(T-311), and one band at 262 and 295, 7.41e-3 and 4.54e-3 below their houses "
-            "(T-312, T-313), are replayed here."
+            "(T-312, T-313), are replayed here. Three successive certificates at 127 of a "
+            "band from an arrangement in Kaggle compilations, the lowest 9.60e-4 below "
+            "T-305 (T-328 to T-330), are replayed here."
         ),
     ),
     (

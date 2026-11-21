@@ -145,9 +145,14 @@ The L-step scan, `devtools.l_step_scan` with this side stood in for 109’s ceil
 ([measure/l-step-scan.json](measure/l-step-scan.json)), finds exactly `main`’s
 consequences: the bound carries to no other count.
 
-## Credit
+The later comparison uses the canonical Samanyu-dev fact registered as T-335.
+The [canonical contraction receipt](measure/contraction-canonical-samanyu-vs-kodaj.json)
+puts this certificate’s gain at 0.9723 of that packing’s margin. The
+[canonical pose comparison](measure/identity-canonical-samanyu.json) pairs their
+centres one to one. Under Option D, the later certificate remains a restatement
+of the earlier arrangement.
 
-What the record’s sources settle:
+## Credit
 
 - The certificate is de Winter’s exact transcription of Kodaj’s 13 November rows.
 - Those rows restate Samanyu-dev’s 7 November pinwheel under option D. The pairing is
@@ -156,16 +161,11 @@ What the record’s sources settle:
   For 109 it names its own stretch-and-quench chains (“n=109 beats a leader”) and a
   `kmmmvs` merge (score step 15). It names no source for its 109.
 
-What they do not settle:
-
-- Whether Fonseca’s 6 November pinwheel, 1.03 × 10⁻⁴ above, is the same arrangement. If
-  it is, Samanyu-dev’s would be a refinement of it.
-- Whether Prabhat’s compilation, by de Winter’s reading at 10.94928958094337, or
-  `kmmmvs`’s merge holds it earlier.
-
-Kaggle is not readable from this session, so none of these was read.
-The register entry records the bound, with the proposal and the open question put to the
-owner in the pull request.
+The owner credited Samanyu-dev as finder of the construction registered as T-335.
+The source credit for the later certificate is “de Winter after Kodaj, Samanyu-dev.”
+The similarities to Fonseca’s 6 November pinwheel and the priority of the Prabhat and
+`kmmmvs` compilations remain unresolved. The intake could inspect Samanyu-dev’s public
+GitHub CSV, while the linked Kaggle notebooks were inaccessible.
 
 ## Commands
 

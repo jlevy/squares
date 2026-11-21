@@ -1,0 +1,110 @@
+{
+ "program": "r1012_sides.py",
+ "rows": [
+  {
+   "side": "the certificate",
+   "value": "10.949289580943438996860000000000",
+   "exact": true,
+   "certificate_less_it": "0",
+   "certificate_less_it_exact": "0/1"
+  },
+  {
+   "side": "the claim, issue 1012's comment of 18 November",
+   "value": "10.949289580944000000000000000000",
+   "exact": true,
+   "certificate_less_it": "-5.610031400e-13",
+   "certificate_less_it_exact": "-28050157/50000000000000000000"
+  },
+  {
+   "side": "the issue's first figure, rounded to nearest",
+   "value": "10.949289580943000000000000000000",
+   "exact": true,
+   "certificate_less_it": "4.389968600e-13",
+   "certificate_less_it_exact": "21949843/50000000000000000000"
+  },
+  {
+   "side": "T-101, the house: Evan Daniel's exact certificate (n-109.md verified_upper_bound)",
+   "value": "10.949747468305832670915408009418",
+   "exact": true,
+   "certificate_less_it": "-4.578873624e-4",
+   "certificate_less_it_exact": "-228943681196837027704004709/500000000000000000000000000000"
+  },
+  {
+   "side": "Samanyu-dev's 109 as #958's record prints its binary64 extent",
+   "value": "10.949289580945380000000000000000",
+   "exact": true,
+   "certificate_less_it": "-1.941003140e-12",
+   "certificate_less_it_exact": "-97050157/50000000000000000000"
+  },
+  {
+   "side": "Fonseca's pinwheel of 6 November, as the comment prints it",
+   "value": "10.949392392000000000000000000000",
+   "exact": true,
+   "certificate_less_it": "-1.028110566e-4",
+   "certificate_less_it_exact": "-5140552828050157/50000000000000000000"
+  },
+  {
+   "side": "Navneet Prabhat's compilation, 'about', as the source README prints it",
+   "value": "10.949289580943370000000000000000",
+   "exact": true,
+   "certificate_less_it": "6.899686000e-14",
+   "certificate_less_it_exact": "3449843/50000000000000000000"
+  },
+  {
+   "side": "6 + (7/2)sqrt(2), the catalogue's closed form at 109 (60 digits)",
+   "value": "10.949747468305832670805910534734",
+   "exact": false,
+   "certificate_less_it": "-4.578873624e-4"
+  },
+  {
+   "side": "Samanyu-dev's 109 read exactly here (r1012_binary64_rows.py), its extent",
+   "value": "10.949289580945379363234535713286",
+   "exact": true,
+   "certificate_less_it": "-1.940366375e-12",
+   "certificate_less_it_exact": "-89004551890226593538011574887945664194159085127959856800156110162445752000757832852617608163063547197337727154963/45869972319801414954446595397399320729199991123454880614239522163487541047896923008643008383211692831539200000000000000000000"
+  },
+  {
+   "side": "the certificate shrunk to first contact",
+   "value": "10.949289580943419098622821182389",
+   "exact": true,
+   "certificate_less_it": "1.989823718e-14",
+   "certificate_less_it_exact": "62160367299525289819478208758860769657948442942450837519044466730013058937406062295404852399442994482489366937682719617241438988161126908978677090626949668908707/3123913276382956919409524043829216280856285142723186047143225154495133701909745949613921443693141323338415979419203009663140230987121819065316288415642242450000000000000000000"
+  },
+  {
+   "side": "Samanyu-dev's 109 shrunk to first contact (this lane's reading)",
+   "value": "10.949289580943384026854930323003",
+   "exact": true,
+   "certificate_less_it": "5.497000507e-14",
+   "certificate_less_it_exact": "16365292896000030219035653078139831556526698650186002676865668548349148509686876049817182765876371456049900563128495804959427140087773002642933/297713141471540209617387912108045554571924219331945877852846536025773896301140086987255854803534460190297790150295897659195751926648012800000000000000000000"
+  },
+  {
+   "side": "T-101 shrunk to first contact",
+   "value": "10.949747468305832670805910534736",
+   "exact": true,
+   "certificate_less_it": "-4.578873624e-4",
+   "certificate_less_it_exact": "-104775080801160119801982320627353731425969739486188396424290048050779436015918402642213158752422919733250716731419665589/228822827198009746564128570377511796881089851081201255069171080421867587289268907369271065109658721278850000000000000000000"
+  },
+  {
+   "side": "Samanyu-dev's 109 shrunk to first contact (the import lane's receipt)",
+   "value": "10.949289580943383296954522533182",
+   "exact": true,
+   "certificate_less_it": "5.569990548e-14",
+   "certificate_less_it_exact": "1017568788181382788184882898364912767242432856013663/18268770466639953537202400630966412588713037050000000000000000000"
+  },
+  {
+   "side": "Samanyu-dev's 109 as the import lane read it, its side",
+   "value": "10.949289580945379296572639304941",
+   "exact": true,
+   "certificate_less_it": "-1.940299713e-12",
+   "certificate_less_it_exact": "-27043830937719579683485499709803616059003835150819/13937965749081639463459823920405397739929600000000000000000000"
+  },
+  {
+   "side": "Kodaj's rows in binary64 (cos, sin), the larger of width and height",
+   "value": "10.94928958094344",
+   "exact": false,
+   "width": "10.949289580943436",
+   "height": "10.94928958094344",
+   "certificate_less_it": "-4.070217118e-16"
+  }
+ ]
+}

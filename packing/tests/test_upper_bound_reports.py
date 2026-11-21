@@ -302,6 +302,20 @@ ISSUE_1009 = "mishapolk-issue1009-2026-11-16"
 #: Joost de Winter's exact transcription of Tomáš Kodaj's 109 (#1012), a corner Witness/v2
 #: numbered from 0, read by ``witness-corners`` with ``first_id`` 0, under CC0 and MIT.
 ISSUE_1012 = "de-winter-kodaj-n109-2026-11-18"
+#: The intake pass's lane w6-dewinter-1118 of 18 November 2026
+#: (`test_upper_bound_reports_w6_1118`): Joost de Winter's #1015, #1017 and #1020 at 127,
+#: three certificates of one band filed that evening, each below the last, his
+#: centre-direction JSON read by ``center-direction-json``, under MIT. #1017's touches the
+#: box; #1015's and #1020's clear every wall.
+W6_1118 = (
+    "de-winter-s127-issue1015-2026-11-17",
+    "de-winter-s127-issue1017-2026-11-17",
+    "de-winter-s127-issue1020-2026-11-17",
+)
+#: The intake pass of 20 November 2026, lane i1038 (`test_upper_bound_reports_1038`): Doğa
+#: Özden's #1038 at 228, his exact certificate of a public Kaggle snapshot published by
+#: jazivxt, a centre-basis Witness/v2 read by ``witness-center-basis``, under CC BY 4.0 and MIT.
+ISSUE_1038 = "ozden-s228-upper-bound-2026-11-18"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -379,6 +393,8 @@ EVERY = (
     *I1_1117,
     ISSUE_1009,
     ISSUE_1012,
+    *W6_1118,
+    ISSUE_1038,
 )
 
 
@@ -429,6 +445,19 @@ def test_custody_admits_every_declared_certificate_at_its_printed_side(name: str
             continue
         places = len(row["offered"].partition(".")[2])
         assert legacy.ceiling_decimal(certificate.side, places) == row["offered"]
+
+
+def test_kaggle_csv_preserves_a_tiny_rotation_and_derives_the_extent() -> None:
+    raw = b"id,n,square_id,x,y,angle\n11,2,0,8.5,7.5,0\n12,1,0,2.5,7.5,1.7453292519943298e-17\n"
+    certificate = reports.parse_certificate(raw, 1, "kaggle-csv")
+    (pose,) = certificate.poses
+    assert 0 < pose.t < Fraction(1, 10**16)
+    xs, ys = zip(*reports.pose_corners(pose), strict=True)
+    assert min(xs) == min(ys) == 0
+    assert max(xs) == max(ys) == certificate.side > 1
+
+    with pytest.raises(reports.ReportError, match="square IDs"):
+        reports.parse_certificate(raw.replace(b"12,1,0", b"12,1,1"), 1, "kaggle-csv")
 
 
 def test_n183_house_reader_keeps_source_custody_and_original_certificate_scope(
@@ -1529,10 +1558,11 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
     # Every positive of SQUISH's, #567's, #622's, Couzo's #670 and #675, Özden's #893, #927
     # to #931, #935, #936, #938, #943 to #947, #954, #959, #960 and #962, Yim's #895 and de
-    # Winter's #958, #977, #979, #997, #1006 and #1007, JoeGun's #1001 and Özden's #1005
-    # touches the box. Couzo's #672 touches at 229 and clears every wall at 227, so its walls
-    # mix, as de Winter's #941 does, whose borders touch the box and whose other
-    # certificates clear it; every other source's clear it.
+    # Winter's #958, #977, #979, #997, #1006, #1007 and #1017, JoeGun's #1001 and Özden's
+    # #1005 and #1038 touches the box. Couzo's #672 touches at 229 and clears every wall at 227,
+    # so its walls mix, as de Winter's #941 does, whose borders touch the box and whose other
+    # certificates clear it; every other source's clear it, de Winter's #1015 and #1020 by
+    # about 2e-70 and 2e-60.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
@@ -1563,6 +1593,8 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
         L187_1116,
         *I1_1117,
         ISSUE_1012,
+        W6_1118[1],
+        ISSUE_1038,
     }
     assert (walls == {0}) is (name in touching)
     assert (0 in walls and len(walls) > 1) is (name in {COUZO_672, L90_1111[0]})
@@ -1870,6 +1902,8 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         **dict.fromkeys(I1_1117, "2026-11-16"),
         ISSUE_1009: "2026-11-16",
         ISSUE_1012: "2026-11-18",
+        **dict.fromkeys(W6_1118, "2026-11-17"),
+        ISSUE_1038: "2026-11-18",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

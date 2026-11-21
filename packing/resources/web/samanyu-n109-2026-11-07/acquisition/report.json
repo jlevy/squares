@@ -1,0 +1,63 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1012",
+  "author": "Samanyu-dev",
+  "source_key": "[Samanyu-dev square packing 2026-11-07]",
+  "report_evidence": "E-samanyu-n109-numerical-report",
+  "receipt_format": "samanyu-n109-exact-replay-v1",
+  "witness_prefix": "W-samanyu-n109-n",
+  "claim_limitations": "The source gives numerical poses. The exact verification concerns the separately derived rational packing and establishes only a finite upper bound.",
+  "read_on": "2026-11-21",
+  "read_at_main": "508c155df2d5e1db2d19dd6d97734ba34017ca72",
+  "certificates": [
+    {
+      "n": 109,
+      "path": "best_fit_101_500.csv",
+      "format": "kaggle-csv",
+      "offered": "10.949289580946",
+      "first_committed": "2026-11-07T20:20:31Z",
+      "fact": "facts/n-109.yaml"
+    }
+  ],
+  "requested": [
+    109
+  ],
+  "replayed": [
+    109
+  ],
+  "houses": [
+    {
+      "n": 109,
+      "reader": "[evand exact optima 2026-10-05]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue, verified by T-101's exact ceiling",
+      "result": "T-101",
+      "reported_value": "10.94974746830583",
+      "verified_value": "10.94974746830584",
+      "evidence": [
+        "E-evand-exact-ceilings-2026-10-05-exact-replay",
+        "E-evand-exact-ceilings-2026-10-05-source-replay",
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Samanyu-dev's 109-square pinwheel from the public Kaggle submission",
+    "significance": 2,
+    "headline": "An exact rational derivation bounds s(109) by 10.949289580946.",
+    "source_checks": "Samanyu-dev publishes numerical rows; the maintained verification is separate.",
+    "credit": "Samanyu-dev",
+    "next_rung": "The exact derived witness, maintained controls and independent review carry separate receipts.",
+    "bead": "think-wvr8",
+    "bibliography": {
+      "authors": [
+        "Samanyu-dev"
+      ],
+      "lineage": "independent",
+      "credit": "Samanyu-dev",
+      "note": "Binary64 centres and angles for n = 109 in the pinned public Kaggle submission CSV."
+    }
+  }
+}

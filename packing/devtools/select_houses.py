@@ -227,9 +227,14 @@ class Pending:
 #: 2026 (think-i38n) took 292 off: Mykhailo Polkovskyi's certificate of issue 1009 (T-323)
 #: is 1.36e-3 below T-193's algebraic side there.
 PENDING_ADOPTION: dict[int, Pending] = {
-    n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
-    for n in (88, 126, 266, 267, 301)
-}  # fmt: skip
+    **{
+        n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
+        for n in (88, 126, 266, 267, 301)
+    },
+    # T-335 records Samanyu-dev's original arrangement. Its house and both required
+    # drawing runs land together in the next adoption change.
+    109: Pending(house="T-335", bead="think-wvr8", why=NEXT_PULL_REQUEST),
+}
 
 
 @dataclass(frozen=True)

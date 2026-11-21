@@ -1,0 +1,37 @@
+# Lane rR1-lower: amendments to the frozen checker (frozen/checker-frozen-digests.txt), in the order made.
+#
+# A1, 2026-11-20 about 18:41Z. The first premises run stopped at 1042/n161: its measure files carry a key
+# 'fixed_mass' that the source's documents do not describe and the frozen strict reader refused. Found in
+# 1042/n161 (k100, k300, k900) and 1042/n162 (k100, k300) only, each equal to the file's total_mass. The reader
+# (rr1_common.read_measure) now accepts the key only when it equals total_mass, and reports it. Nothing else
+# changed; the self-test was re-run on the amended code (PASS, 5,933 checks) before the premises run that is retained.
+# The amended file:
+c84207f1345306cffaf2b1f2060b25e0abc445ed4104ac4190c1f98c25c52954  programs/rr1_common.py
+#
+# A2, 2026-11-20 about 21:12Z, by the agent that resumed the lane. The lane's first agent was cut off at about 20:40Z
+# with the whole-certificate sample (rr1_runs.py sample, started 18:48Z on 1042/n136 with three processes) still on its
+# first certificate; that driver writes a receipt only when a certificate is complete, the machine restarted at 20:53Z,
+# and nothing of the run survived but its scratch inputs. The resumed lane was told to stop any single computation at
+# 30 minutes and record it undecided. programs/rr1_sample_resumed.py is the sample's driver under that rule: the frozen
+# order, every bin decided by the frozen rr1_decide.decide with the frozen limits, one certificate per computation under
+# a 1,800 second wall cap, a certificate's bins in a seeded order (so a capped run is a uniform sample of its bins),
+# and a checkpoint after each batch of six bins. It was run before this entry only on the first agent's synthetic tree
+# (3 x 3 uniform measures under the 77 folder names): DECIDED on two labels, and NOT_COMPLETED_WALL_CAP under a cap of
+# 0.3 seconds. No frozen program changed. The frozen plan's CPU rule (24 CPU-hours for the sample) still binds, and
+# nine capped computations at three processes cannot reach it.
+ed0c9d344aef4938a2ec34f93cc89746f081ee0ca50b51134cc86373f961708b  programs/rr1_sample_resumed.py
+#
+# A3, 2026-11-20 21:14Z, by the resumed lane, operational only. The frozen run plan says "at most three at once, nice 10".
+# The machine was shared with about eight other lanes (load average 20 on four cores), and at nice 10 the sample's three
+# processes had about 0.12 of a core each, under which no certificate of the sample could finish inside the 30-minute
+# cap. The running sample was moved to nice 0 at 21:14Z, three minutes into 1042/n136, and a loop renices the driver and
+# its children to 0 every 15 seconds for the rest of the sample. Three processes at most, as planned. No program changed.
+#
+# A4, 2026-11-20 21:18Z, by the resumed lane, operational only. A3's reading was wrong: the host schedules by session
+# (sched_autogroup), so the sample's three processes shared one session's share whatever their nice value, about 0.1 of
+# a core each beside a dozen other sessions. The sample's first attempt under A2 (21:10:46Z to 21:17:50Z, 1042/n136, no
+# batch finished, no receipt) was stopped, and the driver gained --own-sessions, which starts each C process through
+# setsid so that it is scheduled like any other session's process. The sample was started again at 21:18:33Z from its first
+# certificate with that option, at nice 0, three processes at most. The decisions are the frozen rr1_decide.decide's.
+# The driver as it ran (it replaces the digest under A2):
+8caea924cefda43c0f6f9104e950bcf831de11eb06a535e97510bf0af5621c18  programs/rr1_sample_resumed.py

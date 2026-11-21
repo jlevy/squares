@@ -198,6 +198,7 @@
     "packing/tests/test_contact_realization.py": 0.024,
     "packing/tests/test_contact_scaffold_atlas.py": 0.004,
     "packing/tests/test_continuous_pose_followup.py": 0.036,
+    "packing/tests/test_contraction_layers.py": 23.579,
     "packing/tests/test_contraction_margin.py": 1.769,
     "packing/tests/test_contributor_occurrences.py": 14.053,
     "packing/tests/test_contributors.py": 0.522,
@@ -628,6 +629,7 @@
     "packing/tests/test_report_n17_parent_geometry.py": 0.403,
     "packing/tests/test_rerun_starved.py": 0.444,
     "packing/tests/test_research_contracts.py": 0.049,
+    "packing/tests/test_restatements.py": 3.964,
     "packing/tests/test_restricted_orientation_discriminator.py": 2.638,
     "packing/tests/test_restricted_orientation_discriminator_review.py": 0.072,
     "packing/tests/test_restricted_orientation_packet_boundary_review.py": 0.007,
@@ -760,6 +762,7 @@
     "packing/tests/test_upper_bound_packets.py": 42.128,
     "packing/tests/test_upper_bound_reports.py": 127.895,
     "packing/tests/test_upper_bound_reports_1009.py": 36.02,
+    "packing/tests/test_upper_bound_reports_1038.py": 0.925,
     "packing/tests/test_upper_bound_reports_487b058.py": 1.331,
     "packing/tests/test_upper_bound_reports_488_489.py": 5.582,
     "packing/tests/test_upper_bound_reports_4e4c8ce.py": 1.132,
@@ -795,6 +798,7 @@
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 7.404,
     "packing/tests/test_upper_bound_reports_regularized.py": 5.364,
     "packing/tests/test_upper_bound_reports_regularized_1020.py": 0.692,
+    "packing/tests/test_upper_bound_reports_w6_1118.py": 4.857,
     "packing/tests/test_validation_cli.py": 32.063,
     "packing/tests/test_validation_report.py": 0.046,
     "packing/tests/test_validation_timing.py": 0.966,
@@ -1100,6 +1104,49 @@
           "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-1009-2026-11-17.json",
           "provenance": {},
           "tests": 31
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_1038.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-1038-2026-11-20.json",
+          "provenance": {},
+          "tests": 10
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_w6_1118.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/upper-bound-reports-w6-1118-2026-11-18.json",
+          "provenance": {},
+          "tests": 33
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_contraction_layers.py",
+        "packing/tests/test_restatements.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/option-d-restatements-contraction-layers-2026-11-18.json",
+          "provenance": {},
+          "tests": 13
         }
       ]
     }

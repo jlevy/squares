@@ -1,0 +1,19 @@
+{
+ "program": "r1052_envelope_copy.py",
+ "original_sha256": "b11a6e65a275d3282e1400b89b4cdbd9ca01cf99d01a8e9f0a38a56c20081a46",
+ "copy_sha256": "ab67001da5c28e87050b46ee1707a79a217d2680893b06b2d880be8d22012f26",
+ "inserted_lines": [
+  "  envelope: witness\n",
+  "  claim:\n",
+  "    coordinate_provenance: reported\n",
+  "    method: exact-algebraic\n",
+  "    limitations: inserted by lane r1052 into a reading copy; the published file has no claim block\n"
+ ],
+ "inserted_after_line": {
+  "envelope": 2,
+  "claim": 14
+ },
+ "copy_minus_insertions_is_original": true,
+ "original_bytes": 1144100,
+ "copy_bytes": 1144292
+}

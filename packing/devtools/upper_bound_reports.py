@@ -78,6 +78,7 @@ report prints.
 from __future__ import annotations
 
 import argparse
+import csv
 import functools
 import hashlib
 import io
@@ -1351,6 +1352,41 @@ def calle_txt(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certific
     return _certificate(n, Fraction(Decimal(sides[0].group(1))), rows)
 
 
+def kaggle_csv(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Derive a rational pose from binary64 centres and radian angles in Kaggle's CSV.
+
+    The CSV's angles describe a numerical packing. Its rational reading uses the
+    existing interval tangent floor at 50 decimal places and keeps the source's
+    orientation. The bounding box is measured from the resulting exact corners.
+    """
+    _no_options(options, "kaggle-csv")
+    _require(n > 0, "Kaggle CSV needs a positive square count")
+    header = ["id", "n", "square_id", "x", "y", "angle"]
+    poses: list[legacy.Pose] = []
+    try:
+        rows = csv.reader(io.StringIO(_text(raw)), strict=True)
+        _require(next(rows, None) == header, "Kaggle CSV header differs")
+        for line, row in enumerate(rows, start=2):
+            _require(len(row) == len(header), f"Kaggle CSV line {line}: expected six fields")
+            _, count, square_id, x, y, angle = row
+            if count != str(n):
+                continue
+            _require(
+                square_id == str(len(poses)), f"n={n}: square IDs must start at zero and ascend"
+            )
+            values = (float(x), float(y), float(angle))
+            _require(all(math.isfinite(value) for value in values), f"n={n}: nonfinite pose")
+            cx, cy, radians = (Fraction(value) for value in values)
+            poses.append(legacy.Pose(cx, cy, half_angle_tangent_radians(radians, 50)))
+    except (ValueError, csv.Error) as error:
+        raise ReportError(f"n={n}: invalid Kaggle CSV pose: {error}") from error
+    _require(len(poses) == n, f"{len(poses)} squares for n = {n}")
+    xs, ys = zip(*(corner for pose in poses for corner in pose_corners(pose)), strict=True)
+    x0, y0 = min(xs), min(ys)
+    side = max(max(xs) - x0, max(ys) - y0)
+    return _certificate(n, side, [(pose.x - x0, pose.y - y0, pose.t) for pose in poses])
+
+
 #: Every certificate format a declaration may name. The module docstring says how to add one.
 ADAPTERS: dict[str, Adapter] = {
     "evand-cert": evand_cert,
@@ -1368,6 +1404,7 @@ ADAPTERS: dict[str, Adapter] = {
     "decimal-dilation": decimal_dilation,
     "sqcert": sqcert,
     "calle-txt": calle_txt,
+    "kaggle-csv": kaggle_csv,
 }
 
 
@@ -1890,6 +1927,13 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[de Winter upper bounds 262 295 2026-11-16]": _import(
         "de-winter-upper-bounds-262-295-2026-11-16"
     ),
+    # Lane w6-dewinter-1118 of 18 November (think-zqot): Joost de Winter's three reports at
+    # 127 on 17 November, issues 1015, 1017 and 1020, each a smaller certificate of a band of
+    # 57 tilted squares from an arrangement in the Kaggle compilations of Alex Chilton and
+    # Asterios Panoras, at the three commits that carried them. One packet per pin.
+    "[de Winter s127 issue 1015 2026-11-17]": _import("de-winter-s127-issue1015-2026-11-17"),
+    "[de Winter s127 issue 1017 2026-11-17]": _import("de-winter-s127-issue1017-2026-11-17"),
+    "[de Winter s127 issue 1020 2026-11-17]": _import("de-winter-s127-issue1020-2026-11-17"),
     # The intake pass of 17 November (think-i38n): Mykhailo Polkovskyi's issue 1009 at 13
     # counts from 147 to 307, centre/half-angle certificates beside Witness/v2 corner
     # files of the same packings, in one repository and one packet.
@@ -1897,6 +1941,20 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # The intake pass of 20 November (think-wvr8): Joost de Winter's exact transcription of
     # Tomáš Kodaj's 109 (issue 1012), a corner Witness/v2 numbered from 0.
     "[de Winter Kodaj n109 2026-11-18]": _import("de-winter-kodaj-n109-2026-11-18"),
+    # The retained rational derivation of Samanyu-dev's earlier public arrangement.
+    "[Samanyu-dev square packing 2026-11-07]": _import("samanyu-n109-2026-11-07"),
+    # Lane w6-dewinter-1118 of 18 November (think-gqzz): Joost de Winter's issues 1021 at 268,
+    # nine diagonal slices of published packings, and 1022 at 270, Panoras's compilation's
+    # packing re-solved by regions, both at JoostdeWinter/square-packing a1ba501.
+    "[de Winter s268 upper bound 2026-11-17]": _import("de-winter-s268-upper-bound-2026-11-17"),
+    "[de Winter s270 upper bound 2026-11-17]": _import("de-winter-s270-upper-bound-2026-11-17"),
+    # Lane c2-imports of 20 November (think-10mx): Joost de Winter's issue 1031 at 299,
+    # diagonal slices of Panoras's compilation's 372 and 335, at JoostdeWinter/square-packing
+    # 497eb47.
+    "[de Winter s299 upper bound 2026-11-18]": _import("de-winter-s299-upper-bound-2026-11-18"),
+    # The intake pass of 20 November (think-91fu): Doğa Özden's issue 1038 at 228, his exact
+    # centre-basis Witness/v2 of the public Kaggle snapshot published by jazivxt.
+    "[Özden s228 upper bound 2026-11-18]": _import("ozden-s228-upper-bound-2026-11-18"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

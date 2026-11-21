@@ -1,0 +1,7 @@
+VERIFIED
+  id: W-candidate-n228-jazivxt
+  n: 228
+  side: 389901077915794162667528670804703057/25000000000000000000000000000000000
+  method: exact-algebraic
+  pairs tested: 25878
+  limits: Verifies witness feasibility and its upper bound, not global optimality.
