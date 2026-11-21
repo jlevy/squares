@@ -6177,14 +6177,15 @@ sources:
     year: 2026
     venue: GitHub
     dated: '2026-11-20'
-    lineage: builds-on-project
+    lineage: independent
     credit: de Winter after Kodaj, JoeGun
     note: JoostdeWinter/square-packing n305/ at db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef reports an
       improvement by Joost de Winter of the Kodaj–JoeGun arrangement, starting from coordinates in Alex
-      Chilton’s public compilation. T-309 records Tomáš Kodaj as finder, JoeGun as improver, Evan Daniel’s
-      quench code and the project’s rational promotion. The contributor’s primary rational JSON and
-      original corner file are retained. The accepted review discloses the corner file’s metadata defect
-      and confirms finite feasibility from the primary JSON. MIT at the pin.
+      Chilton’s public compilation. The source compares its result with T-309 and the project’s
+      regularized drawing. T-309 records Tomáš Kodaj as finder, JoeGun as improver, Evan Daniel’s
+      quench code and the project’s rational promotion. The contributor’s primary rational JSON
+      and original corner file are retained. The accepted review discloses the corner file’s
+      metadata defect and confirms finite feasibility from the primary JSON. MIT at the pin.
 credited_names:
   Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim
