@@ -2436,3 +2436,30 @@ repositories:
       (think-fv42). db8efcb supplies the #1052 packing at 305 and 5282edd adds its
       registration and checksums (think-kzwl). 3a51303 adds the #1055 lower bound at
       20 and its replay packet (think-6ul3).
+  - url: https://github.com/Samanyu-dev/squares_in_squares
+    read_through: 5e56c3cb8bd4de7fd22293f1c67d3403de657244
+    read_on: '2026-11-21'
+    note: >-
+      Eight commits after retained pin 53551d77513a9f5c180a731f291baf7eda7c3009.
+      README reports aggregate Kaggle scores 22.1349658847 submitted and 22.1337706316
+      locally certified across n=1..1000, not individual square-packing bounds.
+      The changes add research and larger-core plans, candidate structures and search
+      code. All committed coordinate banks remain unchanged, including the n109 rows;
+      neither newly claimed score has a corresponding updated bank in this tree.
+      No new certificate or per-count result to import.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc
+    read_on: '2026-11-21'
+    bead: think-p02d
+    note: >-
+      Read dad9c3fd (07:05:00Z on 21 November), one commit after 3a51303. Only
+      attachments/README.md, attachments/SHA256SUMS and ten new ZIP mirrors change. The new
+      n90-rational.zip belongs to #997 (think-zsei); n305-review-evidence.zip to #1052's
+      additional claims (think-rbyl); and n20-proof-499755.zip to #1055's stronger bound and
+      restricted claims (think-guls), with its original 4.95 proof still on think-6ul3. The
+      other seven ZIPs mirror A/B/C/D of #1060 (think-uz7g), algebraic-12.zip of #1061
+      (think-l9fk), n232-rational.zip of #1062 (think-eumc), and rational-enclosures.zip of
+      #1063 (think-3iqa); their declared SHA-256 values match the already recorded attachment
+      hashes. No ZIP was downloaded or executed for this watch read. The earlier #1039/#1041
+      ZIPs are unchanged. This adds source mirrors, not another independent result report; the
+      intake epic owns the mirror-retention follow-up across those issue beads.
