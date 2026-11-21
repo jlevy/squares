@@ -546,6 +546,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # (T-301), to Doğa Özden's issue-1038 certificate (T-334) in the pass of 21
         # November 2026 UTC.
         "T-301",
+        # T-336 superseded T-309 as the verified house at its only count, 305.
+        "T-309",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
