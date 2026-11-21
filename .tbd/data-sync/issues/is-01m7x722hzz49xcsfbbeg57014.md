@@ -5,15 +5,17 @@ title: "Blind stage-4 review R2: #1042 derived lower-bound arguments (strips, tr
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: codex-rr2-01a1fb
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+child_order_hints:
+  - is-01m7zadebh3xgwzr35prv0kvyx
 hold: null
 hold_until: null
 created_at: 2026-11-20T19:31:14.623Z
-updated_at: 2026-11-21T08:38:25.655Z
+updated_at: 2026-11-21T15:08:21.744Z
 started_at: 2026-11-20T19:31:48.413Z
 ---
 
