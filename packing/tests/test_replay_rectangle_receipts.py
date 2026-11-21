@@ -119,7 +119,7 @@ def test_main_imports_only_the_validated_snapshot(
         replay.main(["--source", str(checkout), "--out", str(tmp_path / "out"), "unused"])
 
 
-@pytest.mark.parametrize("changed", ("native_sha256", "wrapper_sha256"))
+@pytest.mark.parametrize("changed", ["native_sha256", "wrapper_sha256"])
 def test_receipt_source_mismatch_stops_before_compilation(
     producer_sources: tuple[Path, Path],
     tmp_path: Path,

@@ -18,3 +18,4 @@ reason: >-
   The 21 November continuation preserved both posted replies and routed the later
   #1038 attachment to its open response bead. Against main 552741cee2b8, all 43 methods
   survey files were again byte-identical across the same three renders.
+  After the #1065 merge, all 43 survey files also matched main 1fd323589a.
