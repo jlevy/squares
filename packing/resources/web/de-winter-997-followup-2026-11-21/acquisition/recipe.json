@@ -1,0 +1,30 @@
+{
+  "format": "n90-followup-custody-recipe-v1",
+  "source_key": "[de Winter issue 997 follow-up 2026-11-21]",
+  "source_origin": "GitHub issue attachment 35205206",
+  "frame_definition_source": "https://github.com/jlevy/squares/issues/997#issuecomment-7058975230",
+  "source_member": "90/candidate.json.gz",
+  "reading_copy": "derived/candidate-reading-copy.json",
+  "binding": "acquisition/normalization.json",
+  "normalizer": "normalize_candidate.py",
+  "approved_reader": "pingyou-json",
+  "claimed_upward_12": "9.994038766583",
+  "prior": "packet:de-winter-s90-upper-bound-2026-11-15",
+  "native_profile": {
+    "witness_prefix": "W-de-winter-997-followup-n",
+    "claim_limitations": "Finite rational feasibility of issue 997 follow-up at the submitted side."
+  },
+  "native_format": "issue-997-followup-exact-replay-v1",
+  "external_native_diagnostic": "receipts/external-diagnostic-native-jobs.json.gz",
+  "native_payload_key": "receipt_payload",
+  "native_repository_receipt_published": true,
+  "repository_writer_boundary_preserved": true,
+  "claims_registered": false,
+  "sharp_controls": "receipts/sharp-controls.json",
+  "normalizer_cwd": "packing",
+  "normalizer_environment": {
+    "PYTHONPATH": ".:src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "native_repository_receipt": "receipts/exact-certification.json.xz"
+}

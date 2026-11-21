@@ -1,0 +1,29 @@
+{
+  "configuration_source": "packing/pyproject.toml",
+  "configuration_sha256": "4d7137499d901294cb08680d96e6040c6da58ad78e926651f1309eae822953ea",
+  "ruff_version": "0.16.3",
+  "basedpyright_version": "1.39.10 (pyright 1.1.412)",
+  "files": [
+    "verify_independent.py",
+    "compare_replay.py"
+  ],
+  "checks": [
+    {
+      "command": "ruff check --no-cache --config pyproject.toml campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent.py campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/compare_replay.py",
+      "result": "All checks passed!",
+      "exit": 0
+    },
+    {
+      "command": "ruff format --check --config pyproject.toml campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent.py campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/compare_replay.py",
+      "result": "2 files already formatted",
+      "exit": 0
+    },
+    {
+      "command": "basedpyright --pythonpath /Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python --project pyproject.toml campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent.py campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/compare_replay.py",
+      "result": "0 errors, 0 warnings, 0 notes",
+      "exit": 0
+    }
+  ],
+  "config_mode": "Exact full project configuration copied to isolated quality/packing; no lint subset or added exclusions.",
+  "frozen_source": "Historical .py.txt files are preserved verbatim and are not rewritten by quality tools."
+}

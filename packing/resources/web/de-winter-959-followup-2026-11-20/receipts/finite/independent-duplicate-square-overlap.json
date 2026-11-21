@@ -1,0 +1,35 @@
+{
+  "stage": "independent-duplicate-square-overlap",
+  "route": "independent",
+  "case": "duplicate-square-overlap",
+  "n": 2,
+  "witness_content_sha256": "230575807ccd9322b206dae94f0432d084806168edf3b348bc926d30f6d32727",
+  "expected": "refuse-overlap",
+  "expected_outcome_met": true,
+  "pairs_accounted": 1,
+  "result": {
+    "verification_passed": false,
+    "coordinate_provenance": "not-established",
+    "method": "exact-algebraic",
+    "field": "Q(alpha), alpha the root of a degree-5 polynomial in its stated interval",
+    "checker": "devtools.check_algebraic_witness_independent",
+    "n": 2,
+    "side_decimal": "1.388096037155557915809822588926e+01",
+    "pairs_tested": 1,
+    "pairs_separated_by_sweep": 0,
+    "touching_pairs": 0,
+    "minimum_containment_clearance": "0.000000e+00",
+    "minimum_best_pair_gap": "-1.000000e+00",
+    "root_bisections": 160,
+    "gcd_decisions": 0,
+    "seconds": 0.012,
+    "failures": [
+      "1 overlapping pairs: squares 1 and 2 overlap"
+    ],
+    "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+  },
+  "report": null,
+  "wall_seconds": 0.012205208011437207,
+  "cpu_seconds": 0.009962000000000026,
+  "ru_maxrss_bytes": 93061120
+}

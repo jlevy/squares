@@ -1,0 +1,53 @@
+{
+  "scope": "Finite feasibility and source-to-reading equivalence only; no optimality, registration, identity-to-T294 or global novelty claim",
+  "wall_cap_seconds": 300,
+  "rss_stop_bytes": 268435456,
+  "pressure_policy": "One worker; passive observer; stop if pressure is not 1 or telemetry is stale; normal-pressure swap-disk warning allowed by coordinator",
+  "reader": "devtools.algebraic_witness_reports.evand_minpoly_geometry",
+  "routes": [
+    "devtools.check_algebraic_witness_independent.check_witness",
+    "sqpack.witness.exact_verify"
+  ],
+  "order": [
+    "source/custody and exact reading",
+    "independent positive n179",
+    "two-square positive and refused controls on both routes",
+    "primary positive n179"
+  ],
+  "controls": [
+    {
+      "name": "subset-positive",
+      "n": 2,
+      "expected": "accept",
+      "source_square_ids": [
+        1,
+        2
+      ]
+    },
+    {
+      "name": "duplicate-square-overlap",
+      "n": 2,
+      "expected": "refuse-overlap",
+      "mutation": "replace square 2 geometry by square 1, preserve id 2"
+    },
+    {
+      "name": "sharp-overlap",
+      "n": 2,
+      "expected": "refuse-overlap",
+      "mutation": "decrease square 2 y by exact 1/10^30; source squares 1 and 2 touch vertically"
+    },
+    {
+      "name": "sharp-outside",
+      "n": 2,
+      "expected": "refuse-container",
+      "mutation": "decrease square 1 y by exact 1/10^30; source square 1 touches y=0"
+    },
+    {
+      "name": "non-unit",
+      "n": 2,
+      "expected": "refuse-shape",
+      "mutation": "replace square 1 basis by (2,0)"
+    }
+  ],
+  "control_limitation": "Controls are exact source-derived two-square fixtures, not complete 179-square negative jobs."
+}

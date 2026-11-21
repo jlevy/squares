@@ -1,0 +1,46 @@
+{
+  "format": "n90-followup-attachment-v1",
+  "issue_comment": "https://github.com/jlevy/squares/issues/997#issuecomment-7058975230",
+  "attachment_url": "https://github.com/user-attachments/files/35205206/n90-rational.zip",
+  "retrieved_utc": "2026-11-21T17:18:34.202101+00:00",
+  "archive_bytes": 39377,
+  "archive_sha256": "c04a0a60ca91f15922f6077c878c50b654e759ee659c14d43096cadaae574afa",
+  "digest_stated_by_author_comment": false,
+  "members": [
+    {
+      "path": "check_vertices.py",
+      "bytes": 1169,
+      "sha256": "bcf003482161fa825e9675f2fbaae6077b1ebe563bdcba713103c2d89727ea75"
+    },
+    {
+      "path": "envelope.py",
+      "bytes": 2171,
+      "sha256": "991afc1c0a301aeb79c817cfd0a4633c41cced7df82108c3a11eefdc439a2ed8"
+    },
+    {
+      "path": "comparisons.csv",
+      "bytes": 8963,
+      "sha256": "798f9f754824a5c72d570ce66a5edce4c2ee7742a7725a16138738b684412601"
+    },
+    {
+      "path": "90/input.json.gz",
+      "bytes": 6080,
+      "sha256": "c519aa1822709897d541e7b83efdb027054ad636059bfb340acdb3e9c4a5fb9b"
+    },
+    {
+      "path": "90/candidate.json.gz",
+      "bytes": 26873,
+      "sha256": "3a8e8913d0b87ac0b68c3fc4ac24d6ad042074c9696a2cdbfae3682b2e0b96c7"
+    },
+    {
+      "path": "90/previous-comparisons.json",
+      "bytes": 4157,
+      "sha256": "3d9ba1c52a41c9c12d106d76fd35f46befef0227c702c0373a9c5ed058d5d6cc"
+    },
+    {
+      "path": "REPLAY.md",
+      "bytes": 158,
+      "sha256": "c2ed5ceacd2dff70943db24b61eac3743c54624ea6c7bc0a0944837235d2bacf"
+    }
+  ]
+}

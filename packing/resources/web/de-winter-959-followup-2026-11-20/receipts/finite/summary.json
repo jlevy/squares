@@ -1,0 +1,25 @@
+{
+  "status": "complete",
+  "geometry": "Two maintained exact routes accept full n179; both routes accept source-derived n2 positive and refuse all four n2 controls",
+  "completed": [
+    "independent-positive-n179",
+    "independent-subset-positive",
+    "primary-subset-positive",
+    "independent-duplicate-square-overlap",
+    "primary-duplicate-square-overlap",
+    "independent-sharp-overlap",
+    "primary-sharp-overlap",
+    "independent-sharp-outside",
+    "primary-sharp-outside",
+    "independent-non-unit",
+    "primary-non-unit",
+    "primary-positive-n179"
+  ],
+  "elapsed_seconds": 30.0639215419651,
+  "cpu_seconds": 21.802829,
+  "ru_maxrss_bytes": 93061120,
+  "wall_cap_seconds": 300,
+  "control_scope": "n2 source-derived fixtures, not n179 negative jobs",
+  "worker_pid": 51745,
+  "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]"
+}

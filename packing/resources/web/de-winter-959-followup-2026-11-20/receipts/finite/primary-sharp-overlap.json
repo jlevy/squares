@@ -1,0 +1,67 @@
+{
+  "stage": "primary-sharp-overlap",
+  "route": "primary",
+  "case": "sharp-overlap",
+  "n": 2,
+  "witness_content_sha256": "30c6f3d1cc001d58a59c18d3bce50f463ef5ae63102d13fbb47143e7a9bcba02",
+  "expected": "refuse-overlap",
+  "expected_outcome_met": true,
+  "pairs_accounted": 1,
+  "result": {
+    "operation": "verify",
+    "id": "W-n179-959-sharp-overlap",
+    "coordinate_provenance": "not-established",
+    "method": "exact-algebraic",
+    "verification_passed": false,
+    "n": 2,
+    "side": "13.88096037155557959469669157492336415899451456818",
+    "pairs_tested": 1,
+    "minimum_containment_clearance": "0",
+    "minimum_best_pair_gap": "-1E-30",
+    "field_certificate": {
+      "normalized_minimal_polynomial": [
+        "1",
+        "14",
+        "6",
+        "-4",
+        "-7",
+        "-2"
+      ],
+      "irreducible_over_q": true,
+      "irreducibility_method": "irreducible-reduction-mod-prime",
+      "irreducibility_prime": 3,
+      "declared_isolating_interval": [
+        "-3714053342624773158945462227140672067633/10000000000000000000000000000000000000000",
+        "-3714053342624773158945460227140672067633/10000000000000000000000000000000000000000"
+      ],
+      "root_count_method": "sturm-sequence-over-q",
+      "root_count_in_open_interval": 1,
+      "endpoints_are_not_roots": true
+    },
+    "failures": [
+      [
+        "overlap",
+        "squares 0 and 1 overlap"
+      ]
+    ],
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality."
+  },
+  "report": {
+    "valid": false,
+    "n": 2,
+    "container_contacts": 2,
+    "touching_pairs": 0,
+    "strict_pairs": 0,
+    "pairs_tested": 1,
+    "touching_pair_indices": [],
+    "failures": [
+      [
+        "overlap",
+        "squares 0 and 1 overlap"
+      ]
+    ]
+  },
+  "wall_seconds": 0.012138332996983081,
+  "cpu_seconds": 0.010602,
+  "ru_maxrss_bytes": 93061120
+}

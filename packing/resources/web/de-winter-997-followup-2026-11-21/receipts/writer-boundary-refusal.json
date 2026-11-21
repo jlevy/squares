@@ -1,0 +1,10 @@
+{
+  "format": "repository-writer-boundary-refusal-v1",
+  "operation": "kernel.save_xz(external_scratch_path, validated_replay)",
+  "error_type": "devtools.evand_arrangement_reports.ReportError",
+  "message": "retained evidence output must remain inside the repository",
+  "original_stderr": "receipts/worker-attempt3.stderr",
+  "checks_changed": false,
+  "kernel_REPO_changed": false,
+  "disposition": "Preserved; separately authorized external diagnostic JSON export only. Native repository receipt publication belongs to coordinator."
+}

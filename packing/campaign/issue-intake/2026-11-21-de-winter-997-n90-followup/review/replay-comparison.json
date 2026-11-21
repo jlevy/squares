@@ -1,0 +1,35 @@
+{
+  "frozen_result_sha256": "2e135584054b2c3b9a680f91394e4f825826b3638fb5c130aa087e7787ea2da4",
+  "working_result_sha256": "f807310a228bed8e672b98d91eee216f2dc42179667e202e92d6e4c7082cc7d8",
+  "frozen_program_sha256": "608c4ce81d4750df551ba64c5353a68112bbd6c9f3fb623ea4e5b8d32283cafe",
+  "working_program_sha256": "9c8ad005d77927d3b2d8e1d0a20990d65889944ed415158d6d9d7d806bb3dd82",
+  "program_identity_handling": "Compared separately; the working program intentionally has different bytes.",
+  "excluded_timing_keys": [
+    "elapsed_seconds",
+    "finished_at_utc",
+    "started_at_utc"
+  ],
+  "all_other_fields_match": true,
+  "geometry_sources_controls_and_verdicts_match": true,
+  "negative_control_changed_candidate_verdict_detected": true,
+  "compared_top_level_fields": [
+    "arithmetic",
+    "candidate",
+    "controls",
+    "controls_pass",
+    "enclosed_input",
+    "finite_feasibility_pass",
+    "independence_at_freeze",
+    "interpreter",
+    "kind",
+    "overall_review_run_pass",
+    "plan_sha256",
+    "python_version",
+    "reviewer",
+    "scope",
+    "source_identity_checks",
+    "source_manifest_sha256"
+  ],
+  "mismatched_top_level_fields": [],
+  "pass": true
+}

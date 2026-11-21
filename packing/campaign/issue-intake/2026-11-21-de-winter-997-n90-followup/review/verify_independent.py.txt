@@ -1,0 +1,528 @@
+#!/usr/bin/env python3
+"""Source-only rational packing review; standard library, no producer/project imports."""
+from __future__ import annotations
+
+import argparse
+import copy
+import csv
+import gzip
+import hashlib
+import itertools
+import json
+import math
+import os
+from pathlib import Path
+import re
+import sys
+import time
+from datetime import datetime, timezone
+from decimal import Decimal, localcontext
+from fractions import Fraction as F
+
+RATIONAL = re.compile(r"-?(?:0|[1-9][0-9]*)(?:/[1-9][0-9]*)?\Z")
+ROOT = Path(__file__).resolve().parent
+SOURCE = ROOT / "evidence/source"
+
+
+def utc():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def rational(value):
+    if not isinstance(value, str) or not RATIONAL.fullmatch(value):
+        raise ValueError("coordinate or side is not a strict rational string")
+    return F(value)
+
+
+def unique_object(pairs):
+    result = {}
+    for k, v in pairs:
+        if k in result:
+            raise ValueError("duplicate JSON key")
+        result[k] = v
+    return result
+
+
+def decode(raw):
+    return json.loads(
+        raw,
+        object_pairs_hook=unique_object,
+        parse_constant=lambda _: (_ for _ in ()).throw(ValueError("nonfinite JSON")),
+    )
+
+
+def load_member(name):
+    raw = (SOURCE / name).read_bytes()
+    if name.endswith(".gz"):
+        raw = gzip.decompress(raw)
+    return decode(raw)
+
+
+def parse_packing(doc, required_n=None):
+    if not isinstance(doc, dict) or type(doc.get("n")) is not int:
+        raise ValueError("n must be an integer")
+    n = doc["n"]
+    if n < 1 or (required_n is not None and n != required_n):
+        raise ValueError("wrong declared square count")
+    side = rational(doc["side"])
+    if side <= 0:
+        raise ValueError("nonpositive side")
+    entries = doc["squares"]
+    if not isinstance(entries, list) or len(entries) != n:
+        raise ValueError("coordinate count mismatch")
+    triples = []
+    for entry in entries:
+        if isinstance(entry, dict):
+            if set(entry) != {"cx", "cy", "t"}:
+                raise ValueError("unexpected coordinate dictionary fields")
+            values = [entry["cx"], entry["cy"], entry["t"]]
+        elif isinstance(entry, list) and len(entry) == 3:
+            values = entry
+        else:
+            raise ValueError("expected a coordinate triple")
+        triples.append(tuple(rational(v) for v in values))
+    return side, triples
+
+
+def add(a, b):
+    return a[0] + b[0], a[1] + b[1]
+
+
+def sub(a, b):
+    return a[0] - b[0], a[1] - b[1]
+
+
+def dot(a, b):
+    return a[0] * b[0] + a[1] * b[1]
+
+
+def cross(a, b):
+    return a[0] * b[1] - a[1] * b[0]
+
+
+def scale(k, a):
+    return k * a[0], k * a[1]
+
+
+def approximation(value, digits=100):
+    with localcontext() as context:
+        context.prec = digits
+        return str(Decimal(value.numerator) / Decimal(value.denominator))
+
+
+def exact_record(value):
+    return {"exact": str(value), "decimal_display_only": approximation(value)}
+
+
+class Polygon:
+    def __init__(self, triple):
+        x, y, t = triple
+        q = 1 + t * t
+        u = ((1 - t * t) / q, 2 * t / q)
+        v = (-u[1], u[0])
+        self.center = (x, y)
+        self.vertices = [
+            add(self.center, scale(F(1, 2), add(scale(e, u), scale(d, v))))
+            for e, d in [(-1, -1), (1, -1), (1, 1), (-1, 1)]
+        ]
+        edges = [
+            sub(self.vertices[(k + 1) % 4], self.vertices[k]) for k in range(4)
+        ]
+        # These are independent checks on the constructed vertices, not assumptions.
+        self.unit_edges = all(dot(e, e) == 1 for e in edges)
+        self.right_angles = all(dot(edges[k], edges[(k + 1) % 4]) == 0 for k in range(4))
+        self.center_exact = all(
+            sum(p[d] for p in self.vertices) / 4 == self.center[d] for d in range(2)
+        )
+        self.signed_twice_area = sum(
+            cross(self.vertices[k], self.vertices[(k + 1) % 4]) for k in range(4)
+        )
+        self.shape_ok = (
+            self.unit_edges
+            and self.right_angles
+            and self.center_exact
+            and self.signed_twice_area == 2
+        )
+        self.denominator = math.lcm(*(q.denominator for p in self.vertices for q in p))
+        self.integer_vertices = [
+            tuple(q.numerator * (self.denominator // q.denominator) for q in p)
+            for p in self.vertices
+        ]
+        # Derive the two unit normals from actual successive vertex edges.
+        # Each axis is integer (nx,ny)/d; no square roots or trig evaluations occur.
+        self.axes = []
+        for edge in edges[:2]:
+            normal = (-edge[1], edge[0])
+            if normal[0] < 0 or (normal[0] == 0 and normal[1] < 0):
+                normal = scale(-1, normal)
+            assert dot(normal, normal) == 1
+            d = math.lcm(*(z.denominator for z in normal))
+            nx, ny = [z.numerator * (d // z.denominator) for z in normal]
+            assert nx * nx + ny * ny == d * d
+            self.axes.append((nx, ny, d))
+
+    def projection_numerators(self, axis):
+        nx, ny, _ = axis
+        values = [nx * x + ny * y for x, y in self.integer_vertices]
+        return min(values), max(values)
+
+
+def pair_certificate(a, b):
+    best = None
+    axis_gaps = []
+    for owner, polygon in enumerate((a, b)):
+        for axis_index, axis in enumerate(polygon.axes):
+            amin, amax = a.projection_numerators(axis)
+            bmin, bmax = b.projection_numerators(axis)
+            forward = bmin * a.denominator - amax * b.denominator
+            backward = amin * b.denominator - bmax * a.denominator
+            numerator = max(forward, backward)
+            denominator = a.denominator * b.denominator * axis[2]
+            entry = (numerator, denominator, owner, axis_index,
+                     "a_before_b" if forward >= backward else "b_before_a")
+            axis_gaps.append((numerator, denominator))
+            if best is None or numerator * best[1] > best[0] * denominator:
+                best = entry
+    assert best is not None and len(axis_gaps) == 4
+    return best, axis_gaps
+
+
+def check_packing(side, triples, label, retain_pairs=False):
+    started = time.monotonic()
+    polygons = [Polygon(t) for t in triples]
+    shapes_ok = all(p.shape_ok for p in polygons)
+    wall_count = 0
+    wall_failure_count = 0
+    wall_zero_count = 0
+    wall_failures = []
+    min_wall = None
+    min_wall_at = None
+    for i, polygon in enumerate(polygons):
+        for corner, (x, y) in enumerate(polygon.vertices):
+            for wall, margin in [
+                ("left", x), ("right", side-x), ("bottom", y), ("top", side-y)
+            ]:
+                wall_count += 1
+                wall_zero_count += margin == 0
+                if min_wall is None or margin < min_wall:
+                    min_wall, min_wall_at = margin, [i, corner, wall]
+                if margin < 0:
+                    wall_failure_count += 1
+                    if len(wall_failures) < 32:
+                        wall_failures.append({"at":[i,corner,wall],"margin":str(margin)})
+    n = len(polygons)
+    pair_count = 0
+    failed_pairs = []
+    zero_pairs = []
+    min_pair = None
+    min_pair_at = None
+    axis_sign_counts = {"negative":0,"zero":0,"positive":0}
+    pair_path = ROOT / "evidence" / (label + "-pairs.csv")
+    stream = pair_path.open("w",newline="") if retain_pairs else None
+    writer = csv.writer(stream) if stream is not None else None
+    if writer is not None:
+        writer.writerow(["square_i","square_j","axis_square","axis_index","direction",
+                         "separation_numerator","separation_denominator"])
+    try:
+        for i, j in itertools.combinations(range(n),2):
+            best, gaps = pair_certificate(polygons[i],polygons[j])
+            pair_count += 1
+            num, den, owner, axis_index, direction = best
+            value = F(num,den)
+            for axis_num, _ in gaps:
+                axis_sign_counts["negative" if axis_num < 0 else
+                                 "positive" if axis_num > 0 else "zero"] += 1
+            if min_pair is None or value < min_pair:
+                min_pair, min_pair_at = value, [i,j]
+            if num < 0:
+                failed_pairs.append([i,j])
+            elif num == 0:
+                zero_pairs.append([i,j])
+            if writer is not None:
+                writer.writerow([i,j,i if owner == 0 else j,axis_index,direction,
+                                 value.numerator,value.denominator])
+    finally:
+        if stream is not None:
+            stream.close()
+    assert pair_count == n*(n-1)//2
+    assert sum(axis_sign_counts.values()) == 4*pair_count
+    assert wall_count == 16*n
+    answer = {
+        "label":label,"n":n,"side":exact_record(side),"shape_ok":shapes_ok,
+        "shape_checks":{"unit_edges":4*n,"right_angles":4*n,"areas":n,"centers":n},
+        "wall_inequalities":wall_count,"wall_failures":wall_failure_count,
+        "wall_failure_examples":wall_failures,"zero_wall_inequalities":wall_zero_count,
+        "minimum_wall_margin":exact_record(min_wall),"minimum_wall_at":min_wall_at,
+        "unordered_pairs":pair_count,"axis_tests":4*pair_count,
+        "axis_gap_sign_counts":axis_sign_counts,"failed_pairs":failed_pairs,
+        "zero_separation_pairs":zero_pairs,
+        "minimum_selected_pair_margin":exact_record(min_pair) if min_pair is not None else None,
+        "minimum_pair_at":min_pair_at,
+        "feasible":shapes_ok and wall_failure_count == 0 and not failed_pairs,
+        "elapsed_seconds":time.monotonic()-started,
+    }
+    if retain_pairs:
+        answer["pair_certificate"] = {
+            "path":str(pair_path.relative_to(ROOT)),"bytes":pair_path.stat().st_size,
+            "sha256":digest(pair_path),
+        }
+    print(json.dumps({"progress":label,"feasible":answer["feasible"],
+                      "pairs":pair_count,"wall_failures":wall_failure_count,
+                      "failed_pairs":len(failed_pairs),"seconds":answer["elapsed_seconds"]}),
+          flush=True)
+    return answer
+
+
+def run_controls(candidate_doc, candidate_side, candidate_triples):
+    epsilon = F(1,10**100)
+    half = F(1,2)
+    fixtures = [
+        ("axis_touch", F(2), [(half,half,F(0)), (F(3,2),half,F(0))],True),
+        ("tiny_overlap",F(2),[(half,half,F(0)),(F(3,2)-epsilon,half,F(0))],False),
+        ("tiny_wall_crossing",F(1),[(half-epsilon,half,F(0))],False),
+        ("rotated_wall_touch",F(7,5),[(F(7,10),F(7,10),half)],True),
+        ("rotated_pair_touch",F(11,5),[(F(7,10),F(7,10),half),
+                                      (F(13,10),F(3,2),half)],True),
+        ("coincident_squares",F(1),[(half,half,F(0)),(half,half,F(0))],False),
+    ]
+    controls = []
+    for name, side, triples, expected in fixtures:
+        result=check_packing(side,triples,name)
+        extra=True
+        if name in ("axis_touch","rotated_pair_touch"):
+            extra=result["zero_separation_pairs"] == [[0,1]]
+        if name in ("tiny_overlap","coincident_squares"):
+            extra=result["failed_pairs"] == [[0,1]]
+        if name == "tiny_wall_crossing":
+            extra=result["wall_failures"] > 0
+        if name == "rotated_wall_touch":
+            extra=result["zero_wall_inequalities"] > 0
+        if name == "rotated_pair_touch":
+            p0,p1 = [Polygon(t) for t in triples]
+            axis_aligned_gaps=[]
+            for axis in [(1,0,1),(0,1,1)]:
+                amin,amax=p0.projection_numerators(axis)
+                bmin,bmax=p1.projection_numerators(axis)
+                axis_aligned_gaps.append(max(
+                    bmin*p0.denominator-amax*p1.denominator,
+                    amin*p1.denominator-bmax*p0.denominator,
+                ))
+            extra=extra and all(g < 0 for g in axis_aligned_gaps)
+            result["x_y_interval_projections_overlap"]=all(g < 0 for g in axis_aligned_gaps)
+        controls.append({"name":name,"expected_feasible":expected,
+                         "pass":result["feasible"] is expected and extra,"result":result})
+    duplicate=list(candidate_triples)
+    duplicate[-1]=duplicate[0]
+    result=check_packing(candidate_side,duplicate,"candidate_duplicate")
+    controls.append({"name":"candidate_duplicate","expected_feasible":False,
+                     "pass":not result["feasible"] and [0,89] in result["failed_pairs"]
+                            and result["unordered_pairs"] == 4005,
+                     "result":result})
+    mutations=[]
+    bad=copy.deepcopy(candidate_doc);bad["squares"].pop()
+    mutations.append(("count_mismatch",bad))
+    for name,value in [("zero_denominator","1/0"),("floating_coordinate",0.5),
+                       ("nonfinite_coordinate","NaN")]:
+        bad=copy.deepcopy(candidate_doc);bad["squares"][0][0]=value
+        mutations.append((name,bad))
+    bad=copy.deepcopy(candidate_doc);bad["squares"][0]=bad["squares"][0][:2]
+    mutations.append(("bad_triple_shape",bad))
+    for name,doc in mutations:
+        try:
+            parse_packing(doc,90)
+        except (ValueError,KeyError,TypeError) as error:
+            controls.append({"name":name,"pass":True,"rejection":str(error)})
+        else:
+            controls.append({"name":name,"pass":False,"rejection":None})
+    try:
+        decode('{"n":90,"n":90}')
+    except ValueError as error:
+        controls.append({"name":"duplicate_json_key","pass":True,"rejection":str(error)})
+    else:
+        controls.append({"name":"duplicate_json_key","pass":False})
+    assert len(controls)==13
+    return controls
+
+
+def arithmetic_checks(candidate_doc,candidate_side,candidate_triples,
+                      input_side,input_triples):
+    alpha=rational(candidate_doc["center_scale"])
+    offset=sub(candidate_triples[0][:2],scale(alpha,input_triples[0][:2]))
+    transformations=[
+        candidate[:2] == add(scale(alpha,original[:2]),offset)
+        for candidate,original in zip(candidate_triples,input_triples,strict=True)
+    ]
+    orientations=[
+        candidate[2] == original[2]
+        for candidate,original in zip(candidate_triples,input_triples,strict=True)
+    ]
+    metadata={
+        "input_sha256_matches":candidate_doc["input_sha256"]==digest(SOURCE/"90/input.json.gz"),
+        "original_side_matches":rational(candidate_doc["original_side"])==input_side,
+        "gain_matches":rational(candidate_doc["gain"])==input_side-candidate_side,
+        "positive_contraction":0 < alpha < 1,
+        "all_90_centers_share_scale_and_translation":all(transformations),
+        "all_90_orientations_unchanged":all(orientations),
+        "reboxing_only_false":candidate_doc["reboxing_only"] is False and alpha != 1,
+    }
+    signed=[]
+    with (SOURCE/"comparisons.csv").open(newline="") as stream:
+        for row in csv.DictReader(stream):
+            reference=rational(row["reference"])
+            declared=rational(row["reference_minus_certified_side"])
+            actual=reference-candidate_side
+            signed.append({"source":row["comparison_source"],
+                           "reference":str(reference),"actual_gain":exact_record(actual),
+                           "matches":row["n"]=="90" and actual==declared})
+    previous=load_member("90/previous-comparisons.json")
+    previous_checks={
+        "input_side_matches":rational(previous["new_side_exact"])==input_side,
+        "rational_gains_match":all(
+            rational(entry["value"])-input_side==rational(entry["gain"])
+            for entry in previous["rational_comparisons"]
+        ),
+        "kaggle_gain_matches":F(previous["kaggle"]["L_full"])-input_side
+            ==rational(previous["kaggle_gain"]),
+    }
+    public_side=rational(previous["rational_comparisons"][0]["value"])
+    leaderboard=F(previous["kaggle"]["L_full"])
+    display_digits=len(previous["kaggle"]["L_full"].split(".")[1])
+    unit=10**display_digits
+    lower_display=F((candidate_side*unit).__floor__(),unit)
+    upper12=F((candidate_side*10**12).__ceil__(),10**12)
+    # This is a conditional certificate from four supplied old points only.
+    old=previous["previous_shape_comparison"]
+    old_points={int(k):tuple(rational(x) for x in v) for k,v in old["points"].items()}
+    sep_ids=old["separating_pair"]
+    a,b=[Polygon(old_points[k]) for k in sep_ids]
+    distance=sub(b.center,a.center)
+    thresholds=[]
+    for owner,polygon in enumerate((a,b)):
+        for axis_index,axis in enumerate(polygon.axes):
+            normal=(F(axis[0],axis[2]),F(axis[1],axis[2]))
+            distance_projection=abs(dot(distance,normal))
+            if distance_projection == 0:
+                continue
+            radii=sum(
+                max(abs(dot(sub(vertex,p.center),normal)) for vertex in p.vertices)
+                for p in (a,b)
+            )
+            thresholds.append((radii/distance_projection,owner,axis_index))
+    minimum_scale,owner,axis_index=min(thresholds)
+    left,right=old["width_pair"]
+    width_axis=old["width_axis"]
+    pleft,pright=[Polygon(old_points[k]) for k in (left,right)]
+    delta=pright.center[width_axis]-pleft.center[width_axis]
+    assert delta > 0
+    radii=sum(max(abs(v[width_axis]-p.center[width_axis]) for v in p.vertices)
+              for p in (pleft,pright))
+    enclosure_lower_bound=minimum_scale*delta+radii
+    old_checks={
+        "minimum_scale_matches":minimum_scale==rational(old["minimum_scale_from_pair"]),
+        "enclosure_lower_bound_matches":enclosure_lower_bound
+            ==rational(old["lower_limit_on_homothetic_enclosures"]),
+        "input_gain_beyond_matches":enclosure_lower_bound-input_side
+            ==rational(old["gain_beyond_homothetic_enclosures"]),
+        "candidate_strictly_below_conditional_bound":candidate_side<enclosure_lower_bound,
+    }
+    return {
+        "metadata_checks":metadata,
+        "candidate_gain_from_input":exact_record(input_side-candidate_side),
+        "candidate_gain_from_supplied_registered_side":exact_record(public_side-candidate_side),
+        "center_scale":exact_record(alpha),
+        "one_minus_center_scale":exact_record(1-alpha),
+        "translation":[str(v) for v in offset],
+        "unchanged_orientation_count":sum(orientations),
+        "matching_affine_center_count":sum(transformations),
+        "signed_comparison_rows":signed,
+        "previous_comparison_checks":previous_checks,
+        "leaderboard_comparison":{
+            "supplied_display_decimal_places":display_digits,
+            "candidate_equals_supplied_display_exactly":candidate_side==leaderboard,
+            "candidate_floor_to_display_precision_matches":lower_display==leaderboard,
+            "signed_display_minus_candidate":exact_record(leaderboard-candidate_side),
+            "round_up_12_places":str(upper12),
+            "round_up_12_places_matches_author":upper12==F("9.994038766583"),
+            "claim_50_decimal_places":previous["benchmark_status"],
+        },
+        "conditional_old_geometry":{
+            "scope":"Only four supplied old points, unchanged angles, positive uniform center scaling plus translation, axis-aligned enclosure; no authentication of full old witness.",
+            "separating_pair":sep_ids,"scale_threshold_axis_square":sep_ids[owner],
+            "scale_threshold_axis_index":axis_index,
+            "minimum_scale":exact_record(minimum_scale),
+            "width_pair":[left,right],"width_axis":width_axis,
+            "enclosure_lower_bound":exact_record(enclosure_lower_bound),
+            "candidate_gain_beyond":exact_record(enclosure_lower_bound-candidate_side),
+            "checks":old_checks,
+        },
+        "all_exact_metadata_and_comparison_checks_pass":all(metadata.values())
+            and all(r["matches"] for r in signed) and all(previous_checks.values())
+            and all(old_checks.values()),
+    }
+
+
+def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--wait-for")
+    args=parser.parse_args()
+    if args.wait_for:
+        (ROOT/"worker-ready.json").write_text(json.dumps({"pid":os.getpid(),"utc":utc()})+"\n")
+        deadline=time.monotonic()+60
+        while not Path(args.wait_for).exists():
+            if time.monotonic()>deadline:
+                raise TimeoutError("observe-only guard did not release worker")
+            time.sleep(0.05)
+    started=utc()
+    manifest=decode((ROOT/"evidence/source-manifest.json").read_bytes())
+    identity_checks=[]
+    for item in manifest["files"]:
+        path=SOURCE/item["member"]
+        identity_checks.append({"member":item["member"],"match":digest(path)==item["sha256"]})
+    assert all(c["match"] for c in identity_checks)
+    assert digest(SOURCE/"90/candidate.json.gz") == "3a8e8913d0b87ac0b68c3fc4ac24d6ad042074c9696a2cdbfae3682b2e0b96c7"
+    candidate_doc=load_member("90/candidate.json.gz")
+    input_doc=load_member("90/input.json.gz")
+    candidate_side,candidate_triples=parse_packing(candidate_doc,90)
+    input_side,input_triples=parse_packing(input_doc,90)
+    controls=run_controls(candidate_doc,candidate_side,candidate_triples)
+    candidate=check_packing(candidate_side,candidate_triples,"candidate",True)
+    original=check_packing(input_side,input_triples,"input",True)
+    arithmetic=arithmetic_checks(candidate_doc,candidate_side,candidate_triples,
+                                 input_side,input_triples)
+    finite_pass=candidate["feasible"] and all(c["pass"] for c in controls)
+    result={
+        "kind":"independent-stage4-frozen-result",
+        "reviewer":"/root/intake_n90_blind",
+        "started_at_utc":started,"finished_at_utc":utc(),
+        "interpreter":sys.executable,"python_version":sys.version,
+        "program_sha256":digest(Path(__file__)),
+        "plan_sha256":digest(ROOT/"plan-frozen.json"),
+        "source_manifest_sha256":digest(ROOT/"evidence/source-manifest.json"),
+        "source_identity_checks":identity_checks,
+        "candidate":candidate,"enclosed_input":original,
+        "controls":controls,"controls_pass":all(c["pass"] for c in controls),
+        "arithmetic":arithmetic,
+        "finite_feasibility_pass":finite_pass,
+        "overall_review_run_pass":finite_pass and original["feasible"]
+            and arithmetic["all_exact_metadata_and_comparison_checks_pass"],
+        "scope":"Finite exact rational feasibility and conditional arithmetic only. No optimality, priority, provenance authentication, or global frontier verdict.",
+        "independence_at_freeze":"No producer program, project geometry code, previous review, adjacent derived/receipt files or project workflow docs read or executed.",
+    }
+    path=ROOT/"result-frozen.json"
+    path.write_text(json.dumps(result,indent=2)+"\n")
+    path.chmod(0o444)
+    for name in ("candidate","input"):
+        (ROOT/"evidence"/(name+"-pairs.csv")).chmod(0o444)
+    print(json.dumps({"result":str(path),"sha256":digest(path),
+                      "finite_feasibility_pass":finite_pass,
+                      "overall_review_run_pass":result["overall_review_run_pass"],
+                      "controls":len(controls)}),flush=True)
+    return 0 if result["overall_review_run_pass"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

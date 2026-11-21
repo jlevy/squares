@@ -1,0 +1,10 @@
+10:02:40 WARNING: virtual memory is critical -- the swap volume /System/Volumes/VM has only 2.0GB free (swap 4178/5120MB used, suspension distance 3.0GB).
+10:02:40   macOS writes swapfiles to that volume, so when it fills the kernel loses its overflow valve: it suspends applications and reports that the system is out of APPLICATION MEMORY. That message names the wrong resource. The fix is free disk space, not more RAM and not a smaller workload.
+10:02:40   Until then this host reaches memory failure earlier than its RAM suggests, and the guard raises its effective floor to compensate (+5.0GB right now).
+10:02:40 observing pid=41670 with per-sample phys_footprint; no pause, shed, or termination actions
+10:02:40 logging measurements to /Volumes/spud-ext2/agent-evidence/n179-blind-20261121/frozen/memory-02.jsonl
+10:02:43 observed process exited
+10:02:43 watched 3s over 3 samples (0.93/s); reclaimable min 9.86GB p10 9.86GB; max pressure 1
+10:02:43 interventions: 0 pause(s) totalling 0s (0% of the watch), 0 harvest(s) over 0 round(s), 0 process(es) freeing ~0.0GB
+10:02:43 dispositions: 0 suspended, 0 exited on SIGTERM, 0 needed SIGKILL, 0 already gone
+10:02:43 watchdog health: 0 late heartbeat(s), lag max 0.1s p90 0.1s

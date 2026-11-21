@@ -1,0 +1,19 @@
+{
+  "format": "n90-sharp-controls-external-run-v1",
+  "outcome": "PASS",
+  "n": 90,
+  "controls": 11,
+  "all_as_expected": true,
+  "source_compressed_sha256": "3a8e8913d0b87ac0b68c3fc4ac24d6ad042074c9696a2cdbfae3682b2e0b96c7",
+  "derived_sha256": "f212ccd23b308a9d9ef67201cac4724bf576fac7bb6c8f53a043e95b0dda020a",
+  "profile": {
+    "witness_prefix": "W-de-winter-997-followup-n",
+    "claim_limitations": "Finite rational feasibility of issue 997 follow-up at the submitted side."
+  },
+  "function": "devtools.upper_bound_sharp_controls.control_rows",
+  "module": "/Users/levy/wrk/github/squares/packing/devtools/upper_bound_sharp_controls.py",
+  "output": "receipts/sharp-controls.json",
+  "output_sha256": "f0c7c370c3d8f6d9396f338aef050762727d132eefa4deb61d036c3fa1a9cefe",
+  "runtime_seconds": 77.02726308401907,
+  "producer_programs_executed": false
+}

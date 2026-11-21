@@ -1,0 +1,139 @@
+"""Data-only #959 side/custody probe; no producer or geometry checker executes."""
+import time
+from pathlib import Path
+work = Path(__file__).resolve().parent
+deadline = time.monotonic() + 15
+while not (work / "go").exists():
+    if (work / "abort").exists() or time.monotonic() > deadline:
+        raise SystemExit("preflight unavailable")
+    time.sleep(.1)
+
+import signal
+signal.alarm(8)
+
+import gzip
+import hashlib
+import importlib.util
+import json
+import re
+import resource
+import zipfile
+from decimal import Decimal, localcontext, ROUND_FLOOR, ROUND_CEILING
+from fractions import Fraction as F
+
+repo = Path("/Users/levy/wrk/github/squares")
+archive = repo / ".worktrees/intake-scratch-20261120/source-preparation/donor-attachments/n179-exact-construction.zip"
+spec = importlib.util.spec_from_file_location("retained_field", repo / "packing/src/sqpack/field.py")
+field = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(field)
+
+def header(path):
+    data = path.read_text().split("  squares:", 1)[0]
+    side = re.search(r"  side:\n((?:  - .+\n)+)", data).group(1)
+    poly = re.search(r"    minimal_polynomial:\n((?:    - .+\n)+)", data).group(1)
+    interval = re.search(r"    isolating_interval:\n((?:    - .+\n)+)", data).group(1)
+    parse = lambda s: [F(line.strip()[2:].strip("'\"")) for line in s.splitlines()]
+    return parse(side), list(reversed(parse(poly))), parse(interval)
+
+def enclosure(coefficients, interval):
+    lo = hi = F(0)
+    for c in reversed(coefficients):
+        products = [lo * interval[0], lo * interval[1], hi * interval[0], hi * interval[1]]
+        lo, hi = min(products) + c, max(products) + c
+    return [lo, hi]
+
+def describe(interval):
+    out = []
+    for value, rounding in zip(interval, [ROUND_FLOOR, ROUND_CEILING]):
+        with localcontext() as ctx:
+            ctx.prec = 60
+            ctx.rounding = rounding
+            out.append(str(Decimal(value.numerator) / Decimal(value.denominator)))
+    return {"exact": [str(x) for x in interval], "decimal_outward": out}
+
+with zipfile.ZipFile(archive) as z:
+    members = {i.filename: z.read(i.filename) for i in z.infolist() if not i.is_dir()}
+    expected = dict((name.lstrip("*"), digest) for digest, name in
+                    (line.split(maxsplit=1) for line in members["SHA256SUMS"].decode().splitlines() if line.strip()))
+    actual = {name: hashlib.sha256(data).hexdigest() for name, data in members.items()}
+    mismatches = {name: {"expected": digest, "actual": actual.get(name)}
+                  for name, digest in expected.items() if actual.get(name) != digest}
+    raw = json.loads(gzip.decompress(members["algebraic/n179/n179.minpoly.json.gz"]))
+    comparison = json.loads(members["algebraic/n179/comparison.json"])
+
+side70, poly70, int70 = header(repo / "packing/witnesses/known-best/n-070.yaml")
+side207, poly207, int207 = header(repo / "packing/witnesses/known-best/n-207.yaml")
+poly179 = [F(x) for x in raw["field"]["f"]]
+int179 = [F(x) for x in raw["field"]["t_interval"]]
+side179 = [F(x) for x in raw["S"]["in_K"]]
+mapped_side = [c * (-1)**i for i, c in enumerate(side179)]
+mapped_poly = [c * (-1)**i for i, c in enumerate(poly179)]
+assert mapped_poly == [-c for c in poly70]
+assert mapped_side == [side70[0] + 5] + side70[1:]
+assert mapped_side == [side207[0] - 1] + side207[1:]
+assert poly70 == poly207 and int70 == int207
+mapped_interval = [-int179[1], -int179[0]]
+intersection = [max(int70[0], mapped_interval[0]), min(int70[1], mapped_interval[1])]
+assert intersection[0] < intersection[1]
+root_counts = {
+    "retained_n70_interval": field._root_count(poly70, *int70),
+    "submitted_n179_interval": field._root_count(poly179, *int179),
+    "mapped_intersection": field._root_count(poly70, *intersection),
+}
+assert all(x == 1 for x in root_counts.values())
+bound = enclosure(mapped_side, intersection)
+declared_s = [F(x) for x in raw["S"]["interval"]]
+assert declared_s[0] <= bound[0] <= bound[1] <= declared_s[1]
+side_poly = [F(x) for x in raw["S"]["poly"]]
+assert field._root_count(side_poly, *declared_s) == 1
+
+# Verify the advertised side polynomial at the field element modulo its field polynomial.
+acc = [F(0)]
+for coefficient in reversed(side_poly):
+    product = [F(0)] * (len(acc) + len(side179) - 1)
+    for i, a in enumerate(acc):
+        for j, b in enumerate(side179):
+            product[i+j] += a*b
+    product[0] += coefficient
+    _, acc = field._poly_divmod(product, poly179)
+assert all(c == 0 for c in acc)
+
+receipt_path = repo / "packing/resources/web/ozden-s179-issue959-2026-11-11/measure/contraction-n179-own.json"
+receipt = json.loads(receipt_path.read_text())
+standing, contracted, margin = (F(receipt[k]) for k in ("side", "contracted_side", "margin"))
+assert standing - contracted == margin > 0
+gain = [standing - bound[1], standing - bound[0]]
+beyond = [contracted - bound[1], contracted - bound[0]]
+assert beyond[0] > 0
+report = {
+    "scope": "Exact side/custody comparison only; coordinates not verified and no producer code executed",
+    "archive_path": str(archive), "archive_size": archive.stat().st_size,
+    "archive_sha256": hashlib.sha256(archive.read_bytes()).hexdigest(),
+    "member_sha256": actual, "manifest_count": len(expected), "manifest_mismatches": mismatches,
+    "n": raw["n"], "coordinate_count": len(raw["squares"]),
+    "identity": "t=-alpha; S179=S70+5=S207-1",
+    "submitted_field_polynomial_ascending": list(map(str, poly179)),
+    "submitted_side_coefficients_ascending": list(map(str, side179)),
+    "submitted_side_polynomial_ascending": list(map(str, side_poly)),
+    "root_counts": root_counts, "side_polynomial_composition_zero": True,
+    "side_enclosure": describe(bound), "t294_side": describe([standing, standing]),
+    "t294_first_contact_side": describe([contracted, contracted]),
+    "gain_vs_t294": describe(gain), "gain_beyond_t294_margin": describe(beyond),
+    "gain_to_margin_ratio": describe([gain[0]/margin, gain[1]/margin]),
+    "strictly_below_t294_first_contact": True,
+    "comparison_data": comparison,
+    "inputs_sha256": {str(p.relative_to(repo)): hashlib.sha256(p.read_bytes()).hexdigest() for p in (
+        repo / "packing/witnesses/known-best/n-070.yaml",
+        repo / "packing/witnesses/known-best/n-207.yaml", receipt_path, repo / "packing/src/sqpack/field.py")},
+    "ru_maxrss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+}
+assert not mismatches and len(expected) == 10 and report["n"] == report["coordinate_count"] == 179
+(work / "side-comparison.json").write_text(json.dumps(report, indent=2) + "\n")
+(work / "done").write_text("complete\n")
+print(json.dumps({k: report[k] for k in (
+    "archive_sha256", "manifest_count", "manifest_mismatches", "identity", "root_counts",
+    "side_polynomial_composition_zero", "side_enclosure", "gain_vs_t294",
+    "gain_beyond_t294_margin", "gain_to_margin_ratio", "ru_maxrss_bytes")}, indent=2), flush=True)
+deadline = time.monotonic() + 15
+while not (work / "release").exists() and time.monotonic() < deadline:
+    time.sleep(.1)
