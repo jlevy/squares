@@ -8,11 +8,6 @@
       "sha256": "801efd15b935d7aaa1cec60e748569fb779d7cbd5a88b377740cce37db30cbf6"
     },
     {
-      "path": "programs/run_bounded.py",
-      "bytes": 4710,
-      "sha256": "19e4fb8c17315ac29b21fc6b458f1e0e5216f74254ae0162b6d2f1220f757c93"
-    },
-    {
       "path": "programs/audit_minimum_scope.py",
       "bytes": 7475,
       "sha256": "6dcfc6865876da4cabc5f33ab96c504d4450be75374dbe6d4c5dee2bd7659823"
