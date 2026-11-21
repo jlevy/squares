@@ -37389,7 +37389,8 @@ issues:
     title: 'Public Kaggle packings below the register for n = 109 and n = 270: pointer'
     author: JoostdeWinter
     opened: '2026-11-17'
-    state: open
+    state: closed
+    closed: '2026-11-21'
     kind: result-report
     triage: done
     summary: 'Joost de Winter points to public Kaggle notebooks (Apache 2.0, he says) whose submission.csv
@@ -37451,6 +37452,26 @@ issues:
       reported:
       - result: n109-kaggle
       - result: n270-kaggle
+    - url: https://github.com/jlevy/squares/issues/1012#issuecomment-7061659368
+      date: '2026-11-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n109-samanyu-canonical
+        id: T-335
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: pending adoption
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-exact-feasibility
+        status: confirmed
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-canonical-independent-feasibility
+        status: confirmed
+      - result: n109-kaggle
+      - result: n270-kaggle
+      beads: [think-wvr8]
     close_when: Each pointed-to packing is imported from an exact certificate that reached this repository
       (registered with credit to the notebooks' authors, or recorded as not registered with the reason),
       or the record says why it will not be, and the reply on main says so; nothing the author asked
@@ -37513,9 +37534,14 @@ issues:
       4 review is a separate lane (think-2ut8).
 
       The 21 November continuation registered the exact canonical derivation of the original
-      Samanyu-dev packing after its confirming review. The result remains pending house adoption
-      and publication feedback. The frozen 20 November walk keeps its historical measurement;
-      the canonical comparison gives 0.9723 of the original packing''s contraction margin.'
+      Samanyu-dev packing after its confirming review. The frozen 20 November walk keeps its
+      historical measurement; the canonical comparison gives 0.9723 of the original packing''s
+      contraction margin.
+
+      The final reply closed the issue on 21 November after #1047 merged at f54452c1d1 and
+      Pages run 44896268723 verified all 6,582 live checks. It gives T-335 at V3/C3 and the
+      two exact-replay evidence IDs, credits the retained restatement to de Winter after Kodaj,
+      Samanyu-dev, and records the withdrawal at 270. The house adoption remains on think-wvr8.'
   - number: 1018
     title: Raised lower bound for n = 108 and n = 109 (side 10.630037940829)
     author: JoostdeWinter
