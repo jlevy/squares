@@ -33,3 +33,5 @@ reason: >-
   each. The novelty count and n = 11 bound citation agree exactly. The papers retain their
   current versions v0.4.35, v0.1.11, v0.1.4 and v0.2.7. The comparison rendered the inputs
   to the PDFs without printing new PDFs.
+  After merging #1065, the methods survey was compared again against main 1fd323589a.
+  All 43 survey files remained byte-identical.
