@@ -708,9 +708,9 @@ def _sources() -> dict[str, Source]:
         # on to Roberto Ono's issue 984 (T-301) in the pass of 15 November 2026, five band
         # periods cut from Francisco Couzo's n = 404 packing, a new arrangement relative to
         # T-300's packing. 228 was T-300's only count, so T-300 is no source here now. Lane
-        # i1038 (think-91fu) moved 228 on to Doğa Özden's issue 1038 (T-334) in the pass of 20
-        # November 2026, his exact certificate of jazivxt's public Kaggle packing, a further
-        # arrangement of T-301's packing beyond its padding (option D, think-b0w5). 228 was
+        # i1038 (think-91fu) moved 228 on to Doğa Özden's issue 1038 (T-334) in the pass of 21
+        # November 2026. His exact certificate of the public snapshot jazivxt published
+        # lies below T-301 contracted to first contact (Option D, think-b0w5). 228 was
         # T-301's only count, so T-301 is no source here now.
         packet_source("T-334", "ozden-s228-upper-bound-2026-11-18"),
         # The same lane moved 147, first adopted here, from the case record's own house (the

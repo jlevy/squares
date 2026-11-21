@@ -20,6 +20,7 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+from devtools import build_bound_citations as citations
 from devtools import evand_arrangement_reports as kernel
 from devtools import upper_bound_reports as reports
 from devtools import upper_bound_sharp_controls as sharp
@@ -83,9 +84,8 @@ def test_the_certificate_is_below_t301_by_the_gain() -> None:
     assert f"{float(Fraction(case['difference'])):.4e}" == "4.2890e-09"
 
 
-def test_the_ledger_records_the_claim_unclassified() -> None:
-    """The source calls the packing a close relative of T-301's and says neither that it
-    refines it nor that it is new, so the walk records it and classifies nothing."""
+def test_the_record_keeps_geometry_and_finder_credit_distinct() -> None:
+    """The source reports geometric similarity. The record credits the certificate author."""
     ledger = _json(LEDGER / "ledger.json")
     walked = {
         count["n"]: [(step["report"], step["verdict"]) for step in count["steps"]]
@@ -93,6 +93,12 @@ def test_the_ledger_records_the_claim_unclassified() -> None:
     }
     assert walked == {228: [("#1038", "recorded")]}
     assert "packing" not in ledger["counts"][0]["steps"][0]
+
+    lane = citations.load_case(228)["reported_upper_bound"]
+    assert lane["found_by"] == lane["improved_by"] == []
+    row = next(entry for entry in citations.load_record()["entries"] if entry["n"] == 228)
+    assert row["upper"]["text"] == "Ozden 2026, GitHub"
+    assert row["upper"]["confirmed_by"] == ["T-334"]
 
 
 def test_the_control_plan_is_the_one_hashed_on_the_bead() -> None:
@@ -138,9 +144,10 @@ def test_the_retained_sharp_controls_meet_contact_and_refuse_1e30_past_it() -> N
 
 
 def test_the_identity_measurement_pairs_it_one_to_one_with_t301() -> None:
-    """A further arrangement of T-301's packing: one to one by nearest centres, five squares
-    beyond a tenth; the house witness measures as T-301's packet; T-300's packing is not
-    paired with it."""
+    """Nearest centres pair it one to one with T-301, with five squares beyond a tenth.
+
+    The house witness measures as T-301's packet. T-300 has no one-to-one pairing.
+    """
     record = _json(_packet() / "measure/identity.json")
     pairs = {pair["against"]: pair for pair in record["pairs"]}
     t301 = pairs["T-301"]

@@ -185,9 +185,9 @@ its tilt. Tilted beyond a degree: 54 here, at 41.00 to 42.10 degrees, 19 one way
 the other, against T-301’s 55, at 1.29 to 43.68 degrees, 19 and 36. The case’s drawn
 view, the axis tool’s view of T-301’s witness, is not paired one to one with it by
 nearest centres (18 squares beyond 0.1). Against T-300 no symmetry pairs it one to one,
-and 96 squares move beyond 0.1. So it is a further arrangement of T-301’s packing, five
-squares moved beyond a tenth, as T-314 is of T-302’s at 147. The issue’s own counts (7
-beyond 0.05) use a placement it does not name.
+and 96 squares move beyond 0.1. The optimal assignment against T-301 moves five
+squares beyond a tenth. The issue gives seven moves beyond 0.05 for a placement it
+does not name. Finder and publication order remain unresolved.
 
 ## The Project’s Held Solve at 228
 
@@ -200,10 +200,11 @@ solved view, which both maintained routes accepted, has side
 shrunk to first contact by 8.016 × 10⁻¹⁰. The driver’s KKT certificate did not validate;
 the view was held at row 3 as a register candidate, not registered, and is not retained.
 Its side agrees with the leaderboard entry the issue quotes at all 24 printed places.
-This certificate’s packing may be that minimum opened by its clearance factor; nothing
-here pairs the two. Özden first reported and certified a packing at that minimum, so by
-the owner’s decision of 18 November 2026 at #1009’s five re-solves (think-frl5) the
-claim keeps its new-result status and its credit, and the held view stays a candidate
+This certificate’s packing may be that minimum opened by its clearance factor. A
+pose comparison with the held view remains pending. Özden reported his certificate
+while that view remained unregistered. Under the owner’s decision of 18 November 2026
+at #1009’s five re-solves (think-frl5), his claim keeps its new-result status, and the
+held view stays a candidate
 for registration (think-4z8z).
 
 ## The L Step

@@ -33,8 +33,8 @@ reports:
         5 beyond 0.1 (largest 0.238073) and turns 50 squares by more than 1e-6 radians, by
         up to 1.956 degrees; aligned by box centres, 2 squares turn by more than a degree
         and none reverses its tilt; the house witness measures as T-301; against T-300 no
-        symmetry pairs it one to one, 96 squares beyond 0.1; a further arrangement of T-301's
-        packing
+        symmetry pairs it one to one, 96 squares beyond 0.1. The geometric comparison leaves
+        finder, order and derivation unresolved.
       source: packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/identity.json
     note: 'The source classifies the packing neither as a refinement nor as a new arrangement:
       it calls it a close relative of the registry arrangement and says it has no information
@@ -46,10 +46,10 @@ reports:
       is 4.3896e-22 (squares 156 and 166; contraction-n228-own.json). The project''s run of
       Evan Daniel''s driver on T-301''s witness on 15 November 2026 (think-17ex) reached a
       local minimum of the side whose solved view both maintained routes accepted, 15.596043116631669919783314273244,
-      9.66e-14 below this claim, held unregistered at row 3 and not retained; Özden first
-      reported and certified a packing at that minimum, so by the owner''s decision of 18
-      November 2026 (think-frl5) the claim keeps its new-result status, and the held view
-      stays a candidate for registration (think-4z8z).'
+      9.66e-14 below this claim. The solved view remained unregistered at row 3 when Özden''s
+      certificate was reported. The two have no retained pose comparison. Under the owner''s
+      decision of 18 November 2026 (think-frl5), his claim keeps its new-result status, and
+      the held view stays a candidate for registration (think-4z8z).'
   note: '#1038 names 46ab8bf, committed at 2026-11-18T23:08:45Z, 23 seconds before it, the
     repository''s only commit and its head. It says the packing is a public Kaggle packing
     by jazivxt (notebook Boxed In Sub, dataset Boxed In v63, Apache 2.0 as declared there),
