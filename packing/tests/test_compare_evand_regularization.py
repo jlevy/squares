@@ -184,30 +184,45 @@ def test_a_tilt_near_but_not_at_a_class_angle_is_refused() -> None:
     assert compare.record_class(["45", "other", "axis"]) == "other-tilt"
 
 
+HISTORICAL_N259_TILT = compare.KnownTilt(
+    0,
+    "5.21e-7",
+    "think-mbdw: the regularization of n = 259's exact house, drawn since 26 October "
+    "2026 with square 229 straightened; the witness keeps the tilt",
+)
+
+
+@pytest.fixture
+def historical_n259_index(tmp_path: Path) -> dict[int, dict[str, Any]]:
+    """Keep the original field witness's ambiguity controls after T-337 replaced it."""
+    fact = (
+        compare.REPO
+        / "packing/resources/web/evand-exact-cur-2026-10-16/facts/alg-n-259.yaml.gz"
+    )
+    witness = tmp_path / "historical-n259.yaml"
+    witness.write_bytes(gzip.decompress(fact.read_bytes()))
+    return {
+        259: {
+            "n": 259,
+            "status": "refused",
+            "source": {"witness": str(witness)},
+        }
+    }
+
+
 def test_the_refused_records_split_by_their_witness_tilts() -> None:
     index = compare.load_index()
     result = compare.refused_tilts(index)
     counts, records = result["counts"], result["records"]
     assert set(counts) == {"all-45", "other-tilt", "axis-only"}
     assert {kind: len(members) for kind, members in records.items()} == counts
-    # n = 259's house since 23 October 2026, issue 639's exact form (T-193, think-ot5c),
-    # holds square 229 5.21e-7 degrees from the axis, which the module will not round
-    # either way. `KNOWN_TILTS` records it with the bead that owes its regularization, so
-    # the record is held apart, in no class, and the rest split (review A6 of #756).
-    # n = 270's house from 9 to 18 November 2026 (T-283, think-he66), which the axis tool
-    # refused, held 13 near-axis squares the same way (think-wju3), until the pass of 18
-    # November 2026 moved 270 to a witness the axis tool draws (T-321, think-i38n).
-    assert {n for n, _square in compare.KNOWN_TILTS} == {259}
-    assert result["held"] == {
-        "259": {
-            "229": {
-                "near_degrees": 0,
-                "distance_degrees": "5.21e-7",
-                "owner": compare.KNOWN_TILTS[(259, 229)].owner,
-            }
-        },
-    }
-    assert compare.KNOWN_TILTS[(259, 229)].owner.startswith("think-mbdw: ")
+    # T-337 replaced T-193's near-axis field witness at 259 on 21 November 2026.
+    # The axis tool draws the new rational house, as it has drawn 270 since T-321's
+    # adoption on 18 November, so neither count is an ambiguous refusal now.
+    assert compare.KNOWN_TILTS == {}
+    assert result["held"] == {}
+    assert index[259]["status"] == "regularized"
+    assert index[259]["source"]["scalar_kind"] == "rational"
     assert index[270]["status"] != "refused"
     assert sum(counts.values()) + len(result["held"]) == result["refused"] == _axis_refused()
     # Every refused record holds a tilted square.
@@ -221,40 +236,61 @@ def test_the_refused_records_split_by_their_witness_tilts() -> None:
     assert tilts["18"] == ["24.2952"]
 
 
-def test_an_ambiguous_tilt_the_list_does_not_record_is_still_refused() -> None:
-    """The known-tilt list excuses that tilt and no other: without its entry the index is
-    refused at 259 as before, an entry at another distance or square no longer excuses
-    the tilt and is itself refused as stale, and so is one at a count the index no longer
-    refuses (review A6 of #756)."""
-    index = compare.load_index()
+def test_an_ambiguous_tilt_the_list_does_not_record_is_still_refused(
+    historical_n259_index: dict[int, dict[str, Any]],
+) -> None:
+    """The known-tilt list excuses only the original tilt. A different distance or
+    square is stale, as is an entry at a count the index no longer refuses (review A6
+    of #756). These controls read the historical T-193 fact after T-337's adoption."""
+    index = historical_n259_index
     with pytest.raises(
         compare.InputRefusedError, match=r"n = 259, square 229: a tilt 5\.21e-7 degrees from 0"
     ):
         compare.refused_tilts(index, known={})
-    elsewhere = {
-        (259, 228): compare.KNOWN_TILTS[(259, 229)],
-        **{key: value for key, value in compare.KNOWN_TILTS.items() if key != (259, 229)},
-    }
     with pytest.raises(compare.InputRefusedError, match="no longer holds"):
-        compare.refused_tilts(index, known=elsewhere)
-    moved = {(259, 229): compare.KNOWN_TILTS[(259, 229)]._replace(distance="5.22e-7")}
+        compare.refused_tilts(index, known={(259, 228): HISTORICAL_N259_TILT})
+    moved = {(259, 229): HISTORICAL_N259_TILT._replace(distance="5.22e-7")}
     with pytest.raises(compare.InputRefusedError, match="no longer holds"):
         compare.refused_tilts(index, known=moved)
-    unrefused = min(n for n, entry in index.items() if entry["status"] != "refused")
-    lapsed = {**compare.KNOWN_TILTS, (unrefused, 1): compare.KNOWN_TILTS[(259, 229)]}
+    lapsed = {(259, 229): HISTORICAL_N259_TILT}
     with pytest.raises(compare.InputRefusedError, match="no longer refuses"):
-        compare.refused_tilts(index, known=lapsed)
+        compare.refused_tilts({259: compare.load_index()[259]}, known=lapsed)
 
 
 def test_the_command_reports_a_held_record_and_succeeds(
+    historical_n259_index: dict[int, dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
+    monkeypatch.setattr(compare, "load_index", lambda _path: historical_n259_index)
+    monkeypatch.setattr(compare, "KNOWN_TILTS", {(259, 229): HISTORICAL_N259_TILT})
+    result = compare.refused_tilts(historical_n259_index)
+    assert result["held"] == {
+        "259": {
+            "229": {
+                "near_degrees": 0,
+                "distance_degrees": "5.21e-7",
+                "owner": HISTORICAL_N259_TILT.owner,
+            }
+        }
+    }
+    assert result["refused"] == 1
+    assert sum(result["counts"].values()) == 0
     assert compare.main(["refused-tilts"]) == 0
     out = capsys.readouterr().out
     assert (
         "held, a known ambiguous tilt: n = 259, square 229, 5.21e-7 degrees from 0 "
         "(think-mbdw: " in out
     )
+
+
+def test_the_command_reads_the_current_refusals_without_historical_holds(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    assert compare.main(["refused-tilts", "--json"]) == 0
+    result = json.loads(capsys.readouterr().out)
+    assert result["held"] == {}
+    assert result["refused"] == _axis_refused()
 
 
 def test_certificate_angles_read_each_rotation_exactly(tmp_path: Path) -> None:
