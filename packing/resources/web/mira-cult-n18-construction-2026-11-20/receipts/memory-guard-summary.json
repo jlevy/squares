@@ -1,0 +1,70 @@
+{
+  "record": "summary",
+  "ts": "2026-11-21T16:57:33.925+00:00",
+  "authority": "observe",
+  "watched_s": 1.7,
+  "samples": 10,
+  "percentile_samples": 10,
+  "sample_hz": 6.01,
+  "interventions": {
+    "pauses": 0,
+    "resumes": 0,
+    "paused_total_s": 0.0,
+    "paused_fraction": 0.0,
+    "harvests": 0,
+    "harvest_rounds": 0,
+    "processes_killed": 0,
+    "freed_gb_est": 0.0,
+    "aborted": false,
+    "processes_would_kill": 0,
+    "would_free_gb_est": 0.0,
+    "abort_refused": false
+  },
+  "dispositions": {
+    "suspensions": 0,
+    "terminated_on_sigterm": 0,
+    "force_killed_on_sigkill": 0,
+    "already_gone": 0,
+    "signal_denied": 0
+  },
+  "host": {
+    "reclaimable_gb": {
+      "min": 11.6,
+      "mean": 11.61,
+      "p1": 11.6,
+      "p10": 11.6,
+      "p50": 11.61
+    },
+    "max_pressure": 1
+  },
+  "tree": {
+    "cost_gb": {
+      "max": 0.01,
+      "p50": 0.01,
+      "p90": 0.01,
+      "p99": 0.01
+    },
+    "procs": {
+      "max": 1,
+      "p50": 1.0,
+      "p90": 1.0,
+      "p99": 1.0
+    },
+    "largest_worker_mb": {
+      "p50": 0.0,
+      "p90": 0.0,
+      "p99": 0.0
+    }
+  },
+  "watchdog_health": {
+    "heartbeats_late": 0,
+    "lag_s": {
+      "max": 0.07,
+      "p50": 0.07,
+      "p90": 0.07,
+      "p99": 0.07
+    }
+  },
+  "journal_sha256": "d4141ed98c5051ac18be281bc7aa694120ae4617252f91dac0024166e1b048d6",
+  "guard_log_location": "Dedicated external task scratch; raw journal is not part of the source packet."
+}

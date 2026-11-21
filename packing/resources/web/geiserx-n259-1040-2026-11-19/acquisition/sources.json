@@ -1,0 +1,37 @@
+{
+  "format": "issue-attachment-sources-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1040",
+  "published": "2026-11-19T04:54:13Z",
+  "author": "JoostdeWinter",
+  "retrieved_utc": "2026-11-21T11:30:57.687862+00:00",
+  "attachment": {
+    "url": "https://github.com/user-attachments/files/35066502/packing-259.zip",
+    "bytes": 446768,
+    "sha256": "2073b4b8ab2ba1af7ea2623eb361953c36ad7de54f932292a135c6150113d38c",
+    "sha256_stated_by_comment": false,
+    "raw_asset_retained": false,
+    "members_retained": "The factual comparator and the two original geometry files.",
+    "licence": "GeiserX underlying coordinates are CC BY 4.0 with retained NOTICE in the direct-source packet; de Winter's certificate is retained as mathematical data.",
+    "embedded_revision": "05bd5af79b231498ab4930bbf9cadbbc750acd11"
+  },
+  "members": [
+    {
+      "path": "upper/n259/comparison.json",
+      "bytes": 1831,
+      "sha256": "570830ba1ea4d1f08465a24ca40bcabae36a03644ce94344e4c4d201b30be762",
+      "retained_at": "source/upper/n259/comparison.json"
+    },
+    {
+      "path": "upper/n259/packing.json.gz",
+      "bytes": 30015,
+      "sha256": "bfd1b2890ad846efe030113f5e4535a79f786ed6c2f0371257dd342ddd48970c",
+      "retained_at": "source/upper/n259/packing.json.gz"
+    },
+    {
+      "path": "upper/n259/witness.yaml",
+      "bytes": 765842,
+      "sha256": "3d4bd6326ed60439aa3fc933bfbfc4b5716e4de8d181ce837161b97fdc88a031",
+      "retained_at": "source/upper/n259/witness.yaml"
+    }
+  ]
+}
