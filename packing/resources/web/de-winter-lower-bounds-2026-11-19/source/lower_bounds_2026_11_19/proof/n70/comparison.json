@@ -1,0 +1,52 @@
+{
+  "n": 70,
+  "source_file": "a95e6509129b941d552c_measure.json.gz",
+  "source_origin": "inputs/otherlower/rectangles/evidence/levels_freshfront_from70_n70_L8.67050_uniform/measure.json.gz",
+  "protected": [
+    {
+      "label": "SquareMath reported_lower_bound",
+      "kind": "rational",
+      "value": "3463/400",
+      "source": "https://squaremath.org/cases/70.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "SquareMath verified_lower_bound",
+      "kind": "rational",
+      "value": "3463/400",
+      "source": "https://squaremath.org/cases/70.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "Prior comparison enclosure",
+      "kind": "rational",
+      "value": "693/80",
+      "source": "lower-bounds-56.zip, attribution/strongest_prior_lower.json"
+    },
+    {
+      "label": "Earlier search exact lower bound",
+      "kind": "rational",
+      "value": "693/80",
+      "source": "integer/n70_86625_q"
+    },
+    {
+      "label": "Submitted issue 1039",
+      "kind": "rational",
+      "value": "6773829492135768749764453488497375225978634461/781264498360648486686298454074302273973893679",
+      "source": "https://github.com/jlevy/squares/issues/1039"
+    },
+    {
+      "label": "Earlier four-hour search",
+      "kind": "rational",
+      "value": "693/80",
+      "source": "squaremath_four_hour_20261118.zip, integer/n70_86625_q"
+    },
+    {
+      "label": "Hosono original formula, all 34 families",
+      "value": "84804878743735707769/10000000000000000000",
+      "kind": "rational",
+      "source": "https://squaremath.org/result/t-180.html",
+      "detail": "Upper endpoint of the original formula with outward 19-place square-root arithmetic"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "n": 138,
+  "side": "5941/500",
+  "coordinate_grid": 100000000,
+  "mass_grid": 1000000000000,
+  "components": [
+    {
+      "n": 115,
+      "warp_percent": 201,
+      "units": 1,
+      "source_sha256": "bf83510bc330b2126c81def2d6c0f8699256ef3fb508801d7d8138fec1ae43a9"
+    }
+  ]
+}

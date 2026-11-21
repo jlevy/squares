@@ -1,0 +1,51 @@
+{
+  "checked_utc": "2026-11-19T08:51:19.908563+00:00",
+  "registry_revision": "1015fc175fa4e2c01f912d915d784100e36d3bab",
+  "registry_url": "https://api.github.com/repos/jlevy/squares/commits/main",
+  "latest_issues": [
+    {
+      "number": 1040,
+      "title": "GeiserX's public 259-square packing is below the register (pointer)",
+      "updated_at": "2026-11-19T04:54:13Z",
+      "html_url": "https://github.com/jlevy/squares/issues/1040"
+    },
+    {
+      "number": 1039,
+      "title": "Raised lower bounds for 56 square counts, including s(112) \u2265 10.782475680330",
+      "updated_at": "2026-11-19T04:50:58Z",
+      "html_url": "https://github.com/jlevy/squares/issues/1039"
+    },
+    {
+      "number": 1038,
+      "title": "s(228) \u2264 15.596043116632: improved packing (registration request)",
+      "updated_at": "2026-11-18T23:09:08Z",
+      "html_url": "https://github.com/jlevy/squares/issues/1038"
+    },
+    {
+      "number": 1037,
+      "title": "Exact certificates for GeiserX's published packings of 202, 204, 210, 263, 264, 295 and 297 (pointer)",
+      "updated_at": "2026-11-18T20:06:25Z",
+      "html_url": "https://github.com/jlevy/squares/issues/1037"
+    },
+    {
+      "number": 1036,
+      "title": "review: the blind stage 4 review of issue 1031, de Winter's s(299) (lane r1031-1118)",
+      "updated_at": "2026-11-18T08:59:15Z",
+      "html_url": "https://github.com/jlevy/squares/pull/1036"
+    },
+    {
+      "number": 1035,
+      "title": "records(#1008): T-057's sources from de Winter's README, carried down the 211 chain",
+      "updated_at": "2026-11-18T08:58:50Z",
+      "html_url": "https://github.com/jlevy/squares/pull/1035"
+    }
+  ],
+  "newer_issue_changes": [],
+  "issue_comparison_url": "https://api.github.com/repos/jlevy/squares/issues?state=all&per_page=100",
+  "leaderboard_session_ids": [
+    "371230297"
+  ],
+  "leaderboard_url": "https://www.kaggle.com/code/inversion/squares-in-squares-per-puzzle-leaderboard",
+  "local_leaderboard_session": 371230297,
+  "local_output_sha256": "4022c9adece4acea4d90bb2d32139f39c29aae980a39fd6391c48f3b7d5395b0"
+}

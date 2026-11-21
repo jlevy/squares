@@ -1,0 +1,199 @@
+{
+  "sources": {
+    "sources": {
+      "jazivxt": {
+        "url": "https://www.kaggle.com/code/jazivxt/boxed-in-sub?scriptVersionId=370961355",
+        "dataset": "https://www.kaggle.com/datasets/jazivxt/boxed-in/versions/63",
+        "container_sha256": "0402785862f3fd4c0ecef4e48474f742a615d67b2ee28af630c4b71c6462821a",
+        "run_version": 370961355,
+        "source_dataset_version_id": 22369356,
+        "credit": "jazivxt (Kaggle Boxed In Sub / Boxed In dataset)",
+        "upstream_AI": "The pinned notebook credits ChatGPT and Codex in its submission overview.",
+        "license": "Apache 2.0 as declared on Boxed In v63. License text bundled.",
+        "attribution": "The published notebook copies the dataset submission.csv; the notebook supplies no per-count attribution.",
+        "slice": "jazivxt.csv",
+        "slice_sha256": "926c316681a48a3757981e6cd55fe8d88558cdc2419068a0c01a5821f49411d5",
+        "rows": 228
+      },
+      "geiser": {
+        "url": "https://raw.githubusercontent.com/GeiserX/squares-in-squares/f822b34456b29addec9b59478aac4eb2306f7566/data/submission-best.csv.gz",
+        "blob_sha": "6b9b1389072b700fa74c6362e68f3376fc1585c8",
+        "credit": "Sergio Fern\u00e1ndez Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares",
+        "license": "CC BY 4.0 for layouts, with third-party terms retained; see upstream NOTICE.",
+        "attribution": "Sergio Fern\u00e1ndez Rubio source round 30 explicitly credits jazivxt/boxed-in-sub for 228 and documents 2.2e-11 floatsafe.",
+        "container_sha256": "c490841279b793a963129680483a21b075fb55e8e26c24d37901c0655c704989",
+        "uncompressed_sha256": "1378c9fd83966c98e4273fa9b9685ea6270802d81a9d0d890255068369714332",
+        "source_228_row": {
+          "source_rows": "696c2f7162a0079b2c9133329784d05b265e24cb155a0c4087d0bdd467c4dbe6",
+          "geometry_strings": "988295c49ab49c82058fe17e0793e2d4cb6c69263d2133776e1d588e52591e9d",
+          "identical_to": null
+        },
+        "slice": "geiser.csv",
+        "slice_sha256": "049f04cdaaefa975ca67ef04a52d1233bcb3ed5e5f44138040fb093fc99447d0",
+        "rows": 228,
+        "ancestry_url": "https://github.com/GeiserX/squares-in-squares/blob/f822b34456b29addec9b59478aac4eb2306f7566/results/round30-best-2026-11-15.tsv"
+      },
+      "feeder": {
+        "url": "https://raw.githubusercontent.com/AHFE0924/Squares-Feeder/71c6bfa9ed22bbe304f165c06fbc2be01ab12d7b/latest_public.csv",
+        "blob_sha": "1c17dfead7bcf5a57f8682e82a60b0f8c7e6c482",
+        "credit": "AHFE0924 aggregated Kaggle notebook outputs.",
+        "license": "No license or per-puzzle source in this aggregate. Audit comparison only, pending original source tracing.",
+        "container_sha256": "cef314387f8f1d8b7fc6e1824ceea1f4993fce1e8c14e5191327486c14cbf17d",
+        "uncompressed_sha256": "cef314387f8f1d8b7fc6e1824ceea1f4993fce1e8c14e5191327486c14cbf17d",
+        "source_228_row": {
+          "source_rows": "0685aef8f0ade707834514f9a64e6e95db9cfd82f985360baf36f4fd6c24e74f",
+          "geometry_strings": "a09bc4cd3be132706e39ee95cb6be047904c4691a2cc34ba08e75a27d4c5e921",
+          "identical_to": null
+        },
+        "slice": "feeder.csv",
+        "slice_sha256": "464154df6b3e43e532edd9c016d6a129292bf53e53010beb82b54d898dbe0efb",
+        "rows": 228
+      }
+    },
+    "registry": {
+      "url": "https://github.com/RobertoOno/squares-in-square/blob/fce076f2bf459a25be3645d899e8950b93ed977c/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json",
+      "sha256": "98987101c5a14e84cc1bdcb7497cc139be6ef71a17f7e7ec9ce3f89c80274944",
+      "issue": "https://github.com/jlevy/squares/issues/984",
+      "credit": "Roberto Ono, with Claude, after Francisco Couzo at 404."
+    }
+  },
+  "bounds": {
+    "registry": "87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680",
+    "side_only": "15.59604311663166991962735384207686132467904538537536"
+  },
+  "leaderboard": {
+    "n": 228,
+    "L": "15.596043116632",
+    "L_full": "15.59604311663166991962735384207686132467904538537536",
+    "team": "Nevska",
+    "date": "2026-11-08 11:50:15 UTC"
+  },
+  "rows": {
+    "jazivxt": {
+      "side": "15.59604311663169366961883788654900048213176353153",
+      "spans": [
+        "15.59604311663169366961883788654900048213176353153",
+        "15.59604311663169366961883788654900048213176342311"
+      ],
+      "max_overlap": "0.0",
+      "close_pairs": 151,
+      "side_minus_bound": {
+        "registry": "-4.28909797735838281763606e-9",
+        "side_only": "2.37499914840444721391575e-14"
+      },
+      "aligned_with_registry": {
+        "transform": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "max_center": 0.23337738207872066,
+        "rms_center": 0.03676545578591252,
+        "moved_gt_1e-3": 228,
+        "max_angle_rad": 0.03414132915810009
+      }
+    },
+    "geiser": {
+      "side": "15.5960431169528",
+      "spans": [
+        "15.5960431169528",
+        "15.596043116952798"
+      ],
+      "max_overlap": "0.0",
+      "close_pairs": 151,
+      "side_minus_bound": {
+        "registry": "-3.96799164697722070418506e-9",
+        "side_only": "3.21130080372646157923139e-10"
+      },
+      "aligned_with_registry": {
+        "transform": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "max_center": 0.23337738208540296,
+        "rms_center": 0.03676545578047746,
+        "moved_gt_1e-3": 228,
+        "max_angle_rad": 0.03414132915810009
+      }
+    },
+    "feeder": {
+      "side": "15.596043116996643",
+      "spans": [
+        "15.596043116996643",
+        "15.596043116996643"
+      ],
+      "max_overlap": "0.0",
+      "close_pairs": 151,
+      "side_minus_bound": {
+        "registry": "-3.92414864697722070418506e-9",
+        "side_only": "3.64973080372646157923139e-10"
+      },
+      "aligned_with_registry": {
+        "transform": [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0
+          ]
+        ],
+        "max_center": 0.23337738208632366,
+        "rms_center": 0.03676545577973523,
+        "moved_gt_1e-3": 228,
+        "max_angle_rad": 0.03414132915810031
+      }
+    }
+  },
+  "hits": [
+    "results/public228/jazivxt/hit-228.json",
+    "results/public228/geiser/hit-228.json"
+  ],
+  "leaderboard_version": "https://www.kaggle.com/code/inversion/squares-in-squares-per-puzzle-leaderboard?scriptVersionId=371019944",
+  "pairwise": {
+    "jazivxt_vs_geiser": {
+      "transform": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "max_center": 2.2790277715872322e-10,
+      "rms_center": 1.3972309178883892e-10,
+      "moved_gt_1e-3": 0,
+      "max_angle_rad": 1.1102230246251565e-16
+    },
+    "jazivxt_vs_feeder": {
+      "transform": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "max_center": 2.590176689299178e-10,
+      "rms_center": 1.588010537429591e-10,
+      "moved_gt_1e-3": 0,
+      "max_angle_rad": 2.220446049250313e-16
+    }
+  }
+}

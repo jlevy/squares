@@ -1,0 +1,26 @@
+[
+ {
+  "source": "inputs/otherlower/rectangles/evidence/levels_feedback_n104_from104_n104_L10.42400_uniform_v9front_fit025/measure.json.gz",
+  "source_sha256": "914b96e5b5eb782b2f440b8ff7eb87fe1ab6498392811596f0a25dfeb66695a2",
+  "n": 104,
+  "side": "1304/125",
+  "minimum_width": "19/1000",
+  "fraction_widened": "1",
+  "input_file": "914b96e5b5eb782b_original.json.gz",
+  "input_sha256": "914b96e5b5eb782b2f440b8ff7eb87fe1ab6498392811596f0a25dfeb66695a2",
+  "input_origin": "inputs/otherlower/rectangles/evidence/levels_feedback_n104_from104_n104_L10.42400_uniform_v9front_fit025/measure.json.gz",
+  "output_file": "b67139a578e0236e36fa_measure.json.gz"
+ },
+ {
+  "source": "inputs/otherlower/rectangles/evidence/levels_feedback_n111_n111_from113_tuned_fit012/measure.json.gz",
+  "source_sha256": "a1b4749b7c28be85c0551afdf243156e0a714610ad66429993c6023e4f111c8e",
+  "n": 111,
+  "side": "10781/1000",
+  "minimum_width": "3/2000",
+  "fraction_widened": "1",
+  "input_file": "a1b4749b7c28be85_original.json.gz",
+  "input_sha256": "a1b4749b7c28be85c0551afdf243156e0a714610ad66429993c6023e4f111c8e",
+  "input_origin": "inputs/otherlower/rectangles/evidence/levels_feedback_n111_n111_from113_tuned_fit012/measure.json.gz",
+  "output_file": "ac2fe99c48696b964357_measure.json.gz"
+ }
+]

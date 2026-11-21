@@ -1,0 +1,52 @@
+{
+ "n": 135,
+ "side": "11751/1000",
+ "kernel": "octagon-gram",
+ "native_sha256": "97ba749fb59c0fb967244c6969c7e30fd1746d409a193ce1b8231aff1d37022a",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "levels": [
+  {
+   "K": 112,
+   "measure": "k112.json.gz",
+   "receipts": "k112_receipts.jsonl.gz",
+   "rectangles": 73216,
+   "rects_sha256": "6e14da94378c6e6834dd0bd709944a0cf8e507b473a0746984fc7a9d8ad1c2f5",
+   "measure_sha256": "7b873b7211b70524febee5bbaedaf89b98a0d032cbb21d81dcfe687b0531957a",
+   "receipts_sha256": "6613d3fc375dea41bca34667a6ce274436aacf663134f90e4ada272cf23158cc"
+  },
+  {
+   "K": 336,
+   "measure": "k336.json.gz",
+   "receipts": "k336_receipts.jsonl.gz",
+   "rectangles": 73216,
+   "rects_sha256": "6e14da94378c6e6834dd0bd709944a0cf8e507b473a0746984fc7a9d8ad1c2f5",
+   "measure_sha256": "0de593e846a90d0b52a9015921d59bc82165027a45c000333264ca7701fa3018",
+   "receipts_sha256": "c37b67cd55146d46ada73fb8468284a5c473e2fc075032ad0509accb3e5a78ad"
+  },
+  {
+   "K": 1008,
+   "measure": "k1008.json.gz",
+   "receipts": "k1008_receipts.jsonl.gz",
+   "rectangles": 73216,
+   "rects_sha256": "6e14da94378c6e6834dd0bd709944a0cf8e507b473a0746984fc7a9d8ad1c2f5",
+   "measure_sha256": "547f1f848236428b259ade327b533cb988b70aed26004758d2dfec2b6167727d",
+   "receipts_sha256": "76825f7c76a6d23a043bd9ccd53093ab21006ed2a657ec234248beee1bd335f4"
+  },
+  {
+   "K": 3024,
+   "measure": "k3024.json.gz",
+   "receipts": "k3024_receipts.jsonl.gz",
+   "rectangles": 73216,
+   "rects_sha256": "6e14da94378c6e6834dd0bd709944a0cf8e507b473a0746984fc7a9d8ad1c2f5",
+   "measure_sha256": "c755484d01395e758954c3809be22cfcb0fe8b802b432d89eb7cb81abf411bb3",
+   "receipts_sha256": "5ff09c199f96fa6f525838ca9d91a6fe1224736e925ae926ae1b7c93407227fd"
+  }
+ ],
+ "directions": 183,
+ "nodes": 5019769,
+ "target_total_mass": "134999999/1000000",
+ "source_n": 135,
+ "source_sha256": "89d5e16e1bec23959d7fe9c388ec4a8247a931732b1d1b585a499725afbafb3e",
+ "source_measure": "n135/k112.json.gz",
+ "mode": "uniform"
+}

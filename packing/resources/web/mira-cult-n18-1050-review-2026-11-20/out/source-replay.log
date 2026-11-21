@@ -1,0 +1,39 @@
+2026-11-20T17:36:26Z
+Running six_tilt18.py
+PASS sqrt(7) witness: 18 tiles, 6 tilted (rather than 8), 72 walls, 153 genuine pairs.
+Running verify_six_endpoint_classes.py
+32 0 94 [(('C', '1'), 93), (('C', '2'), 1)] 12e4dee3c60a50e0d852e52fc77f94d5b80d10e674ac615ef471680a168e6c44
+64 0 8 [(('C', '1'), 8)] 86e0b7ea5ef5201c2fffd9dc2bcd9131fc09c53016735313f593d7ad68b7669e
+128 0 6 [(('C', '1'), 6)] 6cfee18bd46e932cc2b47e1400cb9796bb4d629c1d725049992130737d340970
+128 1 127 [(('C', '1'), 94), (('F', '1'), 33)] e00a3441b396053916f0d7a027c297c5e92e1acf2f9378ea24ab2de17defcbd1
+PASS 181/187 complete mask classes empty at 4.822876; remaining indices and raw masks: [(53, 2030575), (55, 2030590), (82, 2078703), (92, 2080719), (115, 2094063), (137, 2096079)] 362.102
+Running verify_full_endpoint_mask.py
+Exact H achieved by two physical squares layouts; D4 minimum covers all 18-square poses on mask 2030575
+All 33 coordinate slabs / 114 full from-bare terminals: [('chord', 42), ('empty', 43), ('faces', 29)] c311c388630d7fd370a5728a471bcf110a3b21ac25c5530ae0fc405385bcdcbb
+PASS: exact optimum (7+sqrt(7))/2 in entire endpoint rack class; no globally smaller packing can belong to this class. 1122.205
+Running verify_second_endpoint_mask.py
+All 13 x9 slabs / 15 terminals. Ordered digest: [('chord', 4), ('empty', 8), ('faces', 3)] e587ae8a2011431f18aae77b42c562e8fd322a5c4ae42246a1b6e127228c9a34
+PASS all poses in mask 55 have side at least H. No assumption that the infimum in 55 is attained at H. 194.592
+Running verify_fork_mask.py
+All six naked full-chart leaves of orbit 137 independently reinitialized; all use orthogonal wall rows and the two-facing-square certificate.
+ORDERED a79288e709fd82664ea44d7a134e4e3e1e3b527ee92eb3467706bd4dc393c49d
+PASS no pose in 137 has enclosing side below H; no attainment in this class is claimed. 176.931
+Running verify_residual_masks.py 92
+Whole residual orbit 92 2080719 base regions 5 from-bare terminal cases 19 [('empty', 10), ('faces', 9)]
+Digest 8fd18406d11ed3fa626056090572311eaf786e7d8083a9a00329b66255219df8
+PASS no pose in that entire D4 class can improve on H; no attainment asserted. 407.4
+Running verify_residual_masks.py 82
+Whole residual orbit 82 2078703 base regions 13 from-bare terminal cases 20 [('empty', 14), ('faces', 6)]
+Digest c364e49a89d28afc97a06c7602b18788957ff1b6d1784b3e00cad3ff763aa5cb
+PASS no pose in that entire D4 class can improve on H; no attainment asserted. 360.048
+Running verify_residual_masks.py 115
+Whole residual orbit 115 2094063 base regions 13 from-bare terminal cases 19 [('empty', 14), ('faces', 5)]
+Digest 8fdb3c47841893079f872c620fd8151b847411ed73161f579861c820e79918f2
+PASS no pose in that entire D4 class can improve on H; no attainment asserted. 235.055
+PASS s(18)=(7+sqrt(7))/2: exact construction + all 187 physical mask classes; 428 lower-bound terminals. 2859.476
+
+real	47m39.644s
+user	29m29.751s
+sys	0m28.199s
+EXIT 0
+2026-11-20T18:24:06Z

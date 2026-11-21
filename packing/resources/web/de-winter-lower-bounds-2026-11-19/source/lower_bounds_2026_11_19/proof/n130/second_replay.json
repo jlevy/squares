@@ -1,0 +1,16 @@
+{
+  "replay": {
+    "code": 0,
+    "stdout": "n130_11p491_mix5-measure_112_w0_gram replayed 126 checks",
+    "error": ""
+  },
+  "spot": {
+    "code": 0,
+    "stdout": "n130_11p491_mix5-measure_112_w0_gram 3 independent polygon integrations",
+    "error": ""
+  },
+  "n": 130,
+  "side": "11491/1000",
+  "manifest_sha256": "be7cf285d06fe31250e6e682376d516cf55f5ddd6eb24151ce9a301c40322f93",
+  "elapsed_seconds": 434.69
+}

@@ -1,0 +1,324 @@
+{
+ "program": "r1052_controls.py",
+ "verdict": "EVERY_CONTROL_AS_STATED",
+ "as_stated": 51,
+ "controls": 51,
+ "planned_not_run": [],
+ "whole_file_decisions": 30,
+ "priors": {
+  "accepted": true,
+  "twins": true,
+  "claim_is_ceiling_12": true,
+  "S1e_accepted_S1f_refused": true
+ },
+ "rows": [
+  {
+   "id": "C0",
+   "stated": "equal to method A's at every pair and every square and wall",
+   "outcome": "as stated",
+   "detail": "0 margin and 0 clearance mismatches over 46360 pairs and 305 squares"
+  },
+  {
+   "id": "R0J",
+   "stated": "the same n, side and rows exactly; every scalar canonical",
+   "outcome": "as stated",
+   "detail": "305 rows; noncanonical 0"
+  },
+  {
+   "id": "R1J",
+   "stated": "refused: n is 305 and 304 squares are listed",
+   "outcome": "as stated",
+   "detail": "refused: form J: n is 305 and 304 squares are listed"
+  },
+  {
+   "id": "R2J",
+   "stated": "read; the same value; only the side flagged non-canonical",
+   "outcome": "as stated",
+   "detail": "noncanonical ['side']"
+  },
+  {
+   "id": "R3J",
+   "stated": "refused: a key twice",
+   "outcome": "as stated",
+   "detail": "refused: form J: the key 'side' twice in one object"
+  },
+  {
+   "id": "R4J",
+   "stated": "refused: a JSON number with a fraction",
+   "outcome": "as stated",
+   "detail": "refused: form J: a JSON number with a fraction or exponent (17.945755838741588671058)"
+  },
+  {
+   "id": "R5J",
+   "stated": "refused: an unexpected key",
+   "outcome": "as stated",
+   "detail": "refused: form J: keys missing [], unexpected ['origin']"
+  },
+  {
+   "id": "R6J",
+   "stated": "refused",
+   "outcome": "as stated",
+   "detail": "refused: form J: square 1 is not a list of four scalars"
+  },
+  {
+   "id": "R7J",
+   "stated": "refused: not an exact scalar",
+   "outcome": "as stated",
+   "detail": "refused: form J square 1 x: '+594957999867754228098317563564870736338' is not an exact scalar"
+  },
+  {
+   "id": "R8J",
+   "stated": "refused: not an exact scalar",
+   "outcome": "as stated",
+   "detail": "refused: form J side: '1794575583874158867105839833601382900316' is not an exact scalar"
+  },
+  {
+   "id": "R9J",
+   "stated": "refused",
+   "outcome": "as stated",
+   "detail": "refused: form J: square_size is not the string '1'"
+  },
+  {
+   "id": "R0C",
+   "stated": "the same n, side, ids and corners exactly; every scalar canonical",
+   "outcome": "as stated",
+   "detail": "305 squares; noncanonical 0"
+  },
+  {
+   "id": "R1C",
+   "stated": "refused: n is 305 and 304 squares are listed",
+   "outcome": "as stated",
+   "detail": "refused: witness: n is 305 and 304 squares are listed"
+  },
+  {
+   "id": "R2C",
+   "stated": "read; the same value; only the side flagged non-canonical",
+   "outcome": "as stated",
+   "detail": "noncanonical ['witness.side']"
+  },
+  {
+   "id": "R3C",
+   "stated": "refused: an id twice",
+   "outcome": "as stated",
+   "detail": "refused: witness square 2: the id 's1' twice"
+  },
+  {
+   "id": "R4C",
+   "stated": "refused: a YAML float",
+   "outcome": "as stated",
+   "detail": "refused: witness.side: a plain scalar YAML reads as float"
+  },
+  {
+   "id": "R5C",
+   "stated": "read; the side equals the claim exactly; one decimal scalar",
+   "outcome": "as stated",
+   "detail": "side 8972877919371/500000000000, forms {'decimal': 1, 'fraction': 2440}"
+  },
+  {
+   "id": "R6C",
+   "stated": "refused: five corners",
+   "outcome": "as stated",
+   "detail": "refused: witness square 1 corners: 5 items where 4 are required"
+  },
+  {
+   "id": "R7C",
+   "stated": "refused: a key twice",
+   "outcome": "as stated",
+   "detail": "refused: witness: the key 'side' twice"
+  },
+  {
+   "id": "R8C",
+   "stated": "refused at the anchor",
+   "outcome": "as stated",
+   "detail": "refused: form C: an anchor (c1)"
+  },
+  {
+   "id": "R9C",
+   "stated": "refused",
+   "outcome": "as stated",
+   "detail": "refused: witness.representation: 'center-angle' where ['corners'] is required"
+  },
+  {
+   "id": "R10C",
+   "stated": "refused: not an exact scalar",
+   "outcome": "as stated",
+   "detail": "refused: witness square 1 corner 1 x: '+497234275296066499223735427299539463818' is not an exact scalar"
+  },
+  {
+   "id": "R11C",
+   "stated": "refused",
+   "outcome": "as stated",
+   "detail": "refused: witness.square_size: '2' where ['1'] is required"
+  },
+  {
+   "id": "R12C",
+   "stated": "refused",
+   "outcome": "as stated",
+   "detail": "refused: witness.scalar.kind: 'decimal' where ['rational'] is required"
+  },
+  {
+   "id": "R13C",
+   "stated": "read; the corners handed on equal the original's",
+   "outcome": "as stated",
+   "detail": "corners equal"
+  },
+  {
+   "id": "R14C",
+   "stated": "refused: not an exact scalar",
+   "outcome": "as stated",
+   "detail": "refused: witness.side: '1794575583874158867105839833601382900316' is not an exact scalar"
+  },
+  {
+   "id": "R15C",
+   "stated": "refused: an explicit tag",
+   "outcome": "as stated",
+   "detail": "refused: form C: an explicit tag (tag:yaml.org,2002:str)"
+  },
+  {
+   "id": "T1",
+   "stated": "the twin test fails at exactly square 1; form C refused, with square 1 and only square 1 not a unit square by A and by B",
+   "outcome": "as stated",
+   "detail": "twin fails at [1]; ['square 1: not a unit square']"
+  },
+  {
+   "id": "T2",
+   "stated": "the twin test fails at exactly square 1; form J refused, with square 1 and only square 1 not a unit square by A and by B",
+   "outcome": "as stated",
+   "detail": "twin fails at [1]; ['square 1: not a unit square']"
+  },
+  {
+   "id": "T3",
+   "stated": "the twin test fails at exactly squares 1 and 2; form C alone decided with the original's verdict",
+   "outcome": "as stated",
+   "detail": "twin fails at [1, 2]; verdict ACCEPT"
+  },
+  {
+   "id": "T4",
+   "stated": "the original's verdict; every margin and clearance identical; the twin test still holds",
+   "outcome": "as stated",
+   "detail": "verdict ACCEPT; twin fails at []"
+  },
+  {
+   "id": "G1",
+   "stated": "refused: m(1, 305) = -1 with B's overlap area 1; m(k, 305) = m(1, k) for every other k; the overlapping pairs exactly (1, 305) and the (k, 305) with m(1, k) < 0; square 305's clearances those of square 1",
+   "outcome": "as stated",
+   "detail": "overlapping [(0, 304)]"
+  },
+  {
+   "id": "G2",
+   "stated": "refused: its clearances (L + S, B, R - S, T); the crossings exactly square 1 at the right wall; B's area inside 0; its margins as predicted, none negative; every other margin and clearance unchanged",
+   "outcome": "as stated",
+   "detail": "crossings [(0, 'right')]; least margin of square 1 1.718362e+0"
+  },
+  {
+   "id": "G3",
+   "stated": "the original's verdict; margins and clearances identical",
+   "outcome": "as stated",
+   "detail": "verdict ACCEPT"
+  },
+  {
+   "id": "G4",
+   "stated": "the original's verdict; margins and clearances identical; every sense flipped",
+   "outcome": "as stated",
+   "detail": "verdict ACCEPT"
+  },
+  {
+   "id": "G5",
+   "stated": "margins identical; clearances (L, B, R, T) -> (B, L, T, R); the original's verdict",
+   "outcome": "as stated",
+   "detail": "verdict ACCEPT"
+  },
+  {
+   "id": "G6",
+   "stated": "margins identical; clearances (L, B, R, T) -> (T, L, B, R); the original's verdict",
+   "outcome": "as stated",
+   "detail": "verdict ACCEPT"
+  },
+  {
+   "id": "G7",
+   "stated": "margins identical; clearances (L, B, R, T) -> (R, B, L, T); the original's verdict",
+   "outcome": "as stated",
+   "detail": "verdict ACCEPT"
+  },
+  {
+   "id": "G8",
+   "stated": "read with n = 306; refused: m(1, 306) = -1; m(k, 306) = m(1, k); the overlapping pairs exactly (1, 306) and the (k, 306) with m(1, k) < 0",
+   "outcome": "as stated",
+   "detail": "n 306; overlapping [(0, 305)]"
+  },
+  {
+   "id": "S1a",
+   "stated": "the side rule with delta = 1e-30",
+   "outcome": "as stated",
+   "detail": "delta 1.000000e-30; REFUSE; 15 crossings, squares [274, 276, 277, 294, 295, 296, 297, 298, 299, 300, 301, 302]..."
+  },
+  {
+   "id": "S1b",
+   "stated": "the side rule with delta = 1/q",
+   "outcome": "as stated",
+   "detail": "delta 1.000000e-82; ACCEPT; 0 crossings, squares []"
+  },
+  {
+   "id": "S1c",
+   "stated": "the side rule with delta = W: accepted if the original is",
+   "outcome": "as stated",
+   "detail": "delta 1.662732e-82; ACCEPT; 0 crossings, squares []"
+  },
+  {
+   "id": "S1d",
+   "stated": "the side rule with delta = W + 1e-30: refused",
+   "outcome": "as stated",
+   "detail": "delta 1.000000e-30; REFUSE; 15 crossings, squares [274, 276, 277, 294, 295, 296, 297, 298, 299, 300, 301, 302]..."
+  },
+  {
+   "id": "S1e",
+   "stated": "the side rule with delta = S - C",
+   "outcome": "as stated",
+   "detail": "delta -4.113289e-13; ACCEPT; 0 crossings, squares []"
+  },
+  {
+   "id": "S1f",
+   "stated": "the side rule with delta = S - C + 1e-12",
+   "outcome": "as stated",
+   "detail": "delta 5.886710e-13; REFUSE; 16 crossings, squares [274, 276, 277, 281, 294, 295, 296, 297, 298, 299, 300, 301]..."
+  },
+  {
+   "id": "P1c",
+   "stated": "m(i, j) exactly 0, contact by A and B; every pair without j unchanged; j's other margins and its clearances as predicted; the verdict the prediction gives",
+   "outcome": "as stated",
+   "detail": "pair (9, 12), square 12 moved from margin 1.715065e-82; ACCEPT"
+  },
+  {
+   "id": "P1p",
+   "stated": "m(i, j) exactly -1e-30, overlap by A and B; the rest as predicted; refused",
+   "outcome": "as stated",
+   "detail": "pair (9, 12), square 12 moved from margin 1.715065e-82; REFUSE"
+  },
+  {
+   "id": "W1c",
+   "stated": "that clearance exactly 0 and the opposite one raised by the move, the other two unchanged; its margins as predicted; the verdict the prediction gives",
+   "outcome": "as stated",
+   "detail": "left: square 5 moved 1.500000e-82, ACCEPT; bottom: square 115 moved 1.500000e-82, ACCEPT; right: square 274 moved 1.662732e-82, ACCEPT; top: square 296 moved 1.662732e-82, ACCEPT"
+  },
+  {
+   "id": "W1p",
+   "stated": "that clearance exactly -1e-30; refused, the only crossing that square at that wall; its margins as predicted",
+   "outcome": "as stated",
+   "detail": "left: square 5 moved 1.000000e-30, REFUSE; bottom: square 115 moved 1.000000e-30, REFUSE; right: square 274 moved 1.000000e-30, REFUSE; top: square 296 moved 1.000000e-30, REFUSE"
+  },
+  {
+   "id": "PALL",
+   "stated": "A's and the third formulation's margins exactly 0 and -1e-30; B contact and overlap, both clipping orders agreeing",
+   "outcome": "as stated",
+   "detail": "92720 closings, 0 not as stated"
+  },
+  {
+   "id": "WALL",
+   "stated": "A's and the third formulation's clearances exactly 0 and -1e-30; B contact and crossing; B's area inside exactly 1 and below 1",
+   "outcome": "as stated",
+   "detail": "610 moves, 0 not as stated"
+  }
+ ],
+ "cpu_seconds": 664.5,
+ "python": "3.14.7"
+}

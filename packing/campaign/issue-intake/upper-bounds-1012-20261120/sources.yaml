@@ -1,0 +1,71 @@
+# What `python -m devtools.intake_ledger gather` reads: the one upper bound at n <= 324 that lane c7-pointers of
+# the intake pass takes in on 20 November 2026 (think-wvr8). Joost de Winter's #1012 (2026-11-17T07:08:47Z) pointed
+# to public Kaggle packings at 109 and 270 with no file; his comment of 18 November (issuecomment-6972165182,
+# 07:33:46Z) attaches the exact rational Witness/v2 at 109, his transcription of Tomáš Kodaj's CC0 Kaggle rows, and
+# withdraws 270, where his own #1022 is lower. The same files were first committed at aae089c (07:30:49Z) in his
+# watched repository JoostdeWinter/square-packing and deleted again at 7232328 (07:31:33Z); the comment is the
+# report, and the packet pins aae089c, whose files have the attachment members' digests. The issue's own 109 print,
+# 10.949289580943, is rounded to nearest and below the exact side, so it bounds nothing; the claim is the comment's
+# exact side. The start is frozen at main 06754afe6 (#1043's merge): at 109 the Kingbird catalogue's 6 + (7/2)sqrt 2,
+# verified by T-101's rational ceiling, in both lanes; no register entry pending adoption states an upper bound
+# there. Samanyu-dev's public 109 (Samanyu-dev/squares_in_squares 53551d7, 7 November), which #958 recorded as
+# context and #1012's comment names, is in no watched repository and was never reported here, so it is no report of
+# this walk; the packet measures the claim against it for credit (option D, think-b0w5).
+format: intake-ledger-sources-v1
+read_at_main: 06754afe6f44953e7e327eb4d421c79af0939eed
+read_on: '2026-11-20'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: c7
+  branch: claude/intake-2026-11-20-pointers-109-259
+  commit: 06754afe6f44953e7e327eb4d421c79af0939eed
+  note: The packet's claim record, written on the lane's branch from main 06754afe6 and read here by path.
+reports:
+- report: '#1012 update'
+  comment: 6972165182
+  issue: 1012
+  holders: Tomáš Kodaj's rows, transcribed by Joost de Winter
+  bead: think-wvr8
+  lanes:
+  - lane: c7
+    packet: de-winter-kodaj-n109-2026-11-18
+    record: claims.json
+    counts: [109]
+  claims:
+  - n: 109
+    measured:
+      against: T-101
+      finding: >-
+        no symmetry of the box pairs it one to one with T-101's exact view of the house's packing by nearest
+        centres; the optimal assignment, under the identity of the box, moves 64 squares beyond 1e-3 and 56 beyond
+        0.1 (largest 0.824348); 45 squares are tilted beyond a degree, 23.23 to 29.50 degrees, all one way, against
+        the house's 49, all at 45 degrees; a new arrangement relative to the record's packing. Against Samanyu-dev's
+        public 109 at 53551d7, which no report here holds, nearest centres pair the squares one to one (symmetry 1),
+        with the same 45 tilted squares at 23.23 to 29.50 degrees, 37 squares placed apart by more than 1e-3 and 5
+        by more than 1e-2 (largest 0.0256); the transcription equals Kodaj's binary64 rows to 1.8e-15
+      source: packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/identity.json
+    new_packing:
+      source: >-
+        #1012's comment of 18 November: 'Kodaj publishes the coordinates and refers to his source notebooks for the
+        original credits. Navneet Prabhat's compilation contains the same packing. The pinwheel was first published
+        by Guilherme Dias da Fonseca (6 November 2026, 10.949392392), and #958 documents Samanyu-dev's version at
+        10.94928958094538.'
+      continues: >-
+        the public pinwheel at 109 of Samanyu-dev/squares_in_squares 53551d7 (7 November 2026), read exactly at its
+        own extent 10.94928958094538, whose uniform-contraction margin, 1.9960e-12 (squares 17 and 73), exceeds the
+        claim's gain on it, 1.9403e-12 (0.9721 of the margin): the predecessor shrunk to first contact lies 5.57e-14
+        below the claim (option D, think-b0w5)
+    note: >-
+      T-101's rational ceiling lies 1.1e-19 above 6 + (7/2)sqrt 2, so the gain on the house, 4.5789e-4, lies wholly
+      outside its padding. The certificate's own margin is 1.9898e-14 (squares 60 and 70; contraction-n109-own.json);
+      Samanyu-dev's contraction is contraction-n109-samanyu.json in the same directory.
+  note: >-
+    The comment names the archive Issue_1012_n109_Kodaj_Coordinates.zip, whose three data members are byte-identical
+    to the files aae089c first committed at 2026-11-18T07:30:49Z, 2 minutes 57 seconds before it. It asks that the
+    result be credited as this repository's sources support, since its author could not establish who made the last
+    refinement, and says the transcription was made with GPT-6.2 Sol (OpenAI) and checked again with Claude
+    (Anthropic) under his direction. The issue's 270 claim is withdrawn by the same comment.
+exceptions: []
+other_items: []

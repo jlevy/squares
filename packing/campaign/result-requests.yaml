@@ -28,7 +28,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-11-20'
+last_reviewed: '2026-11-21'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -4913,6 +4913,17 @@ issues:
       - result: fine-net-n29
         id: E-wand125-fine-net-lower-bounds-446-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-7063688317
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-18-1016
+        id: T-216
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -10421,7 +10432,7 @@ issues:
       packings measure as PingYou Ltd''s (T-148, T-147), and whether to credit them as new arrangements
       is the owner''s decision. Gemini assistance disclosed. On issue 593 he asks to be credited as Mykhailo
       Polkovskyi.'
-    read_through: '2026-10-14T08:07:21Z'
+    read_through: '2026-11-21T00:41:58Z'
     results:
     - key: n153-n207
       claim: s(153) <= 12.87001385040448 and s(207) <= 14.880960371558, by exact rational certificates.
@@ -10495,6 +10506,17 @@ issues:
         id: E-mishapolk-573-certificate-report
         status: reviewed
       - result: n103-n209-n258-n270
+    - url: https://github.com/jlevy/squares/issues/573#issuecomment-7054371750
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n153-n207
+        id: T-173
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     blocked:
       type: owner-decision
       reason: >-
@@ -10514,6 +10536,15 @@ issues:
       and 2.42e-12, without the "at least" of the 14 October ledger's Refinement Chains. It was
       edited in place at 03:46Z that day, with a visible note, to say at least, so the reply as it
       stands states nothing outdated (PR #637's review, A6).
+
+      Measured on 18 November 2026 in lane w7-optd-1118 (think-8yyy), as a receipt only:
+      devtools.contraction_margin finds T-173's 207 0.9984 of T-147's own uniform-contraction
+      margin and 0.1966 of T-167's, within both, one to one with T-147's packing
+      (resources/web/mishapolk-exact-certificates-2026-10-12/measure/). The owner's option D of
+      17 November 2026 (think-b0w5) does not list T-173, and a result recorded before it that
+      its decision bead does not name keeps its standing and credit until the owner says, so
+      T-173 stands as recorded at 153 and 207; whether option D reaches it is think-7k8p's
+      question, beside T-259 at 130. Both counts stay the owner's (think-g0o4).
   - number: 574
     title: 'research: submit 148 square-packing certificate refinements with exact endpoints'
     author: BuddenPing
@@ -27860,8 +27891,8 @@ issues:
       (upper-bounds-843-846-20261031) records six: 130, Francisco Couzo's #843 packing re-solved 2.08e-12 below it, and 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house, each a re-certification of the house certificate with every square unchanged. It records none of the other eight: 182, 268
       and 304 are above the houses (T-243, T-242), 204 and 260 above Evan Daniel's #845, 299 above his
       update to #824, and 211 and 241 are the author's own certificates of 23
-      October, which the ledger records from their commit (e386aab) as refinements. Registered as T-259 (130) and T-260 (the five others), and the 23 October certificates as T-253. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md) accepted all fifteen certificates for finite feasibility. At 130 T-259 is confirmed, independently re-implemented, at V3/C3, and the case adopts it under the house rule, with the packing's credit Couzo's. At the fourteen other counts each certificate is a sub-print re-certification of the house certificate, and whether the owner's 23 October restatement ruling reaches counts inside the corpus is the owner's question (think-ikku); T-253 and T-260 wait on it below the stage 4 exit, and no house moves there.
-    read_through: '2026-10-30T05:46:42Z'
+      October, which the ledger records from their commit (e386aab) as refinements. Registered as T-259 (130) and T-260 (the five others), and the 23 October certificates as T-253. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md) accepted all fifteen certificates for finite feasibility. At 130 T-259 is confirmed, independently re-implemented, at V3/C3, and the case adopts it under the house rule, with the packing's credit Couzo's. At the fourteen other counts each certificate re-certifies the house certificate within its own padding, and the owner's option D of 17 November 2026 (think-b0w5) makes each a restatement, credited to the house's finder: T-253 and T-260 record them so, below the stage 4 exit, and no house moves there.
+    read_through: '2026-11-21T00:41:56Z'
     results:
     - key: refinements
       claim: >-
@@ -27876,11 +27907,9 @@ issues:
       - E-mishapolk-846-review-exact-feasibility
     - key: sub-print
       claim: >-
-        s(105), s(146), s(156), s(229) and s(308) at the exact headers of certificates/0000-0999/nN.cert at 52aa267, each below the house certificate at its count by less than one unit in the 12th place: re-certifications of the house certificates, held for the owner's question (think-ikku).
+        s(105), s(146), s(156), s(229) and s(308) at the exact headers of certificates/0000-0999/nN.cert at 52aa267, each below the house certificate at its count by less than one unit in the 12th place: re-certifications of the house certificates within their own padding, restatements under the owner's option D (think-b0w5).
       source: body
       bead: think-pg1y
-      validation:
-      - think-ikku
       register:
       - T-260
       evidence:
@@ -27901,6 +27930,8 @@ issues:
     beads:
     - think-pg1y
     - think-ikku
+    - think-8yyy
+    - think-7k8p
     answer_bead: think-pg1y
     replies:
     - url: https://github.com/jlevy/squares/issues/846#issuecomment-6543938921
@@ -27940,16 +27971,41 @@ issues:
       - result: sub-print
         id: E-mishapolk-846-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/846#issuecomment-7054371283
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: refinements
+        id: T-259
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: sub-print
+        id: T-260
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: superseded
+      - result: refinements
+        id: E-mishapolk-846-exact-feasibility
+        status: confirmed
+      - result: refinements
+        id: E-mishapolk-846-review-exact-feasibility
+        status: confirmed
     blocked:
       type: owner-decision
       reason: >-
-        Whether the owner's 23 October restatement ruling (think-fwa9), applied beyond the
-        corpus, reaches counts inside it, which decides whether T-253 and T-260 are recorded
-        at 105, 146, 154, 155, 156, 183, 211, 227, 229, 236, 237, 241, 271 and 308; the
-        31 October review reads them as restatements (RV-1), a reading and not a verdict
-        (think-ikku).
+        Whether the owner's option D (think-b0w5) reaches T-259 at 130, adopted before it and
+        0.9193 of T-254's contraction margin, which decides whether the 130 packing is credited
+        to Couzo alone; T-281, which restates T-259, waits on the same answer (think-7k8p).
     close_when: >-
-      The results are registered with their replay and their review, 130 is adopted, the owner has answered think-ikku's question and the record follows the answer, and the reply on main says so; nothing the author asked for is queued.
+      The results are registered with their replay and their review, 130 is adopted, the owner
+      answered on 17 November 2026 (option D, think-b0w5) and the record follows the answer at
+      the fourteen other counts, the owner has answered whether option D reaches T-259 at 130
+      (think-7k8p) and the record follows that answer, and the reply on main says so; nothing
+      the author asked for is queued.
     notes: >-
       Read on 31 October 2026 from main 3978a7f61. The commit 52aa267 precedes the issue by 6
       minutes 42 seconds; GitHub's activity log was not readable, so no push is dated. The ten
@@ -27962,6 +28018,24 @@ issues:
       `check_requests --report` counts it closeable, but the owner's question (think-ikku) is
       a `blocked: owner-decision` the close condition names, so the issue closes once the
       record follows the answer.
+
+      Applied on 18 November 2026 in lane w7-optd-1118 (think-8yyy): the owner's option D of 17
+      November 2026 (think-b0w5), a re-certification of a standing packing is a new result only
+      if its side is below its predecessor's once the predecessor is shrunk until its squares
+      first touch, settles think-ikku's question. Measured with devtools.contraction_margin (the
+      packets' measure/), every certificate of T-260 gains under 1% of its house certificate's
+      margin (0.0056 to 0.0093) and every one of T-253 1.0000 of it, within it: restatements,
+      credited to the houses' finders, recorded as such (restatements), and no house moves.
+      T-259 at 130 stays as adopted (whether option D reaches it is think-7k8p's question for
+      the owner).
+
+      Corrected on 20 November 2026 in lane c11-fix1030 (think-8yyy), after the senior review
+      of the branch: think-ikku's question is settled, but the issue's block moves to
+      think-7k8p's rather than lifting, since T-259, registered from this issue, is the open
+      owner question at 130, and T-281 restates it. The issue keeps its blocked:owner-decision
+      label. The reply owed after the merge states T-253 and T-260 as restatements and names
+      T-259's standing at 130 as the owner's open question; it is not a final reply, and the
+      issue stays open until think-7k8p is answered.
   - number: 836
     title: '1182–9944: 2484 new and 1434 lowered upper bounds, two-strip construction (Zenodo v5): registration request'
     author: mohsensbu-jpg
@@ -30412,7 +30486,7 @@ issues:
       both strong generators' regularization of the new house run in the same change. The
       Kaggle side the issue quotes, 13.617935700905 (jazivxt), is above it and states no
       packing.
-    read_through: '2026-11-11T08:35:29Z'
+    read_through: '2026-11-21T00:42:00Z'
     results:
     - key: n172-from-t257
       claim: >-
@@ -30454,6 +30528,23 @@ issues:
       - result: n172-from-t257
         id: E-ozden-935-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/935#issuecomment-7054372250
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n172-from-t257
+        id: T-282
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n172-from-t257
+        id: E-ozden-935-exact-feasibility
+        status: confirmed
+      - result: n172-from-t257
+        id: E-ozden-935-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-282 is on main at V3/C3 as the house at 172, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -30550,7 +30641,7 @@ issues:
       both strong generators' regularization of the new house run in the same change. The
       Kaggle side the issue quotes, 16.928162252213 (kirilltym), is above it and states no
       packing.
-    read_through: '2026-11-11T08:36:12Z'
+    read_through: '2026-11-21T00:42:01Z'
     results:
     - key: n270-from-t224
       claim: >-
@@ -30592,6 +30683,23 @@ issues:
       - result: n270-from-t224
         id: E-ozden-936-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/936#issuecomment-7054372748
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n270-from-t224
+        id: T-283
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n270-from-t224
+        id: E-ozden-936-exact-feasibility
+        status: confirmed
+      - result: n270-from-t224
+        id: E-ozden-936-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-283 is on main at V3/C3 as the house at 270, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -30688,7 +30796,7 @@ issues:
       issue's statement at the print: 199 from 172 is the one step that crosses its count's
       12-place print, and monotonicity improves nothing. The Kaggle side the issue quotes,
       14.617572173606 (kirilltym), is above it and states no packing.
-    read_through: '2026-11-11T08:37:01Z'
+    read_through: '2026-11-21T00:42:03Z'
     results:
     - key: n199-from-t282
       claim: >-
@@ -30730,6 +30838,23 @@ issues:
       - result: n199-from-t282
         id: E-ozden-938-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/938#issuecomment-7054373209
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n199-from-t282
+        id: T-284
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n199-from-t282
+        id: E-ozden-938-exact-feasibility
+        status: confirmed
+      - result: n199-from-t282
+        id: E-ozden-938-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-284 is on main at V3/C3 as the house at 199, and the reply on main says what was retained
       and replayed, what the review found and that the case adopted it.
@@ -30801,7 +30926,8 @@ issues:
     title: 's(199) <= 14.6146898532835806: registration request'
     author: JoostdeWinter
     opened: '2026-11-09'
-    state: open
+    state: closed
+    closed: '2026-11-21'
     kind: result-report
     triage: done
     summary: >-
@@ -30820,18 +30946,14 @@ issues:
       the root check exactly (S lies 1.36e-99 above it). It is 2.63e-12 below T-284, one to one
       with its packing, the L unchanged: a refinement, which the ledger of 11 November records.
       The gain is 1.0399 of the padding T-284 carries from T-282 through the L step, and the core
-      is the KKT point the record holds unregistered at 172 (think-wju3). Registered as T-285,
-      held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-284. The 11 November
+      is the KKT point the record holds unregistered at 172 (think-wju3). Registered as T-285; under the owner's option D of 17 November 2026 (think-b0w5) a new result, confirmed at V3/C3 and adopted as the house at 199 on 21 November 2026. The 11 November
       stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, think-o53d,
       lane L82), written blind in a separate lane, accepts it with #946's, no finding blocking,
       and is mapped at C1; its F2 asks the author to credit #938 for the L step at 199, and its
       six questions for the author are informational.
-    read_through: '2026-11-14T11:04:59Z'
+    read_through: '2026-11-21T00:41:46Z'
     results:
     - key: n199-core-resolved
-      validation:
-      - think-2h88
-      - think-ruu2
       claim: >-
         s(199) <= 14.6146898532835806 (the exact rational side, rounded up at 16 places, of
         n199_witness.yaml at JoostdeWinter/square-packing 702c7af), T-284's packing with its
@@ -30841,6 +30963,8 @@ issues:
       - T-285
       evidence:
       - E-de-winter-939-certificate-report
+      - E-de-winter-939-exact-feasibility
+      - E-de-winter-939-review-exact-feasibility
     beads:
     - think-2h88
     - think-o53d
@@ -30870,18 +30994,27 @@ issues:
         verification: V0
         confirmation: C1
         status: reviewed
-    blocked:
-      type: owner-decision
-      reason: >-
-        Whether a re-certification at the contraction margin its predecessor carries, here
-        T-282's margin carried through T-284's L step, is a new result is the owner's RV-3
-        (think-ruu2); T-285 is held at V0/C1 until the answer, and the same answer settles the
-        held solve at 172 (think-wju3).
+    - url: https://github.com/jlevy/squares/issues/939#issuecomment-7054367979
+      date: '2026-11-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n199-core-resolved
+        id: T-285
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n199-core-resolved
+        id: E-de-winter-939-exact-feasibility
+        status: confirmed
+      - result: n199-core-resolved
+        id: E-de-winter-939-review-exact-feasibility
+        status: confirmed
     close_when: >-
-      The owner has answered RV-3 (think-ruu2), the record follows the answer for T-285
-      (withdrawn, or entered and adopted at 199), and the reply on main says so, with what was
-      retained, replayed and reviewed and that the gain is 1.0399 of the margin T-284 carries
-      through the L step.
+      T-285 is confirmed and adopted at 199 under the owner's option D (think-b0w5), and the
+      reply on main says so, with what was retained, replayed and reviewed and that the gain is
+      1.0399 of the margin T-284 carries through the L step.
     notes: >-
       Read on 10 November 2026 from main f54ad1048. The commit 702c7af precedes the issue by 9
       minutes; the issue carries the intake label and has no comments. The witness the issue calls
@@ -30982,11 +31115,24 @@ issues:
       SHA256SUMS lines; every square and side equals those at the s199 (702c7af) and s172
       (c4e65d0) packets' pins, compared as exact rationals, and packing-witness inspect now
       reads both files, which it refused at 6760360. T-285 and T-286 stand as recorded.
+
+      Applied on 18 November 2026 in lane w7-optd-1118 (think-8yyy): the owner's option D of 17
+      November 2026 (think-b0w5), a re-certification of a standing packing is a new result only
+      if its side is below its predecessor's once the predecessor is shrunk until its squares
+      first touch, measured through any construction. T-285 lies 1.0107e-13 below that (the
+      margin T-284 carries through the L step, 1.0399), so it is a new result: its replay and
+      the stage 4 review's clean-room run are entered (E-de-winter-939-exact-feasibility,
+      E-de-winter-939-review-exact-feasibility), it stands at V3/C3, and the case adopted it at
+      199 from T-284 with both strong generators' regularization. The packet keeps 702c7af, the
+      commit the issue names; the author's c4e65d0b holds the same n199/ files byte for byte,
+      and T-285 says so, which settles the pin question of the follow-up of 14 November. The
+      blocked: owner-decision block lifts with this change; the label goes after its merge.
   - number: 946
     title: 's(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request'
     author: JoostdeWinter
     opened: '2026-11-10'
-    state: open
+    state: closed
+    closed: '2026-11-21'
     kind: result-report
     triage: done
     summary: >-
@@ -31004,17 +31150,14 @@ issues:
       the root check exactly (S lies 1.56e-319 above it). It is 2.63e-12 below T-282, one to one
       with its packing, 1.0399 of T-282's own uniform-contraction margin: a refinement, which the
       ledger of 11 November records, and the KKT point the record holds unregistered (think-wju3).
-      Registered as T-286, held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-282.
+      Registered as T-286; under the owner's option D of 17 November 2026 (think-b0w5) a new result, confirmed at V3/C3 and adopted as the house at 172 on 21 November 2026.
       The 11 November stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md,
       think-o53d, lane L82), written blind in a separate lane, accepts it with #939's, no finding
       blocking, and is mapped at C1; its F1 asks the author to state the bound as the
       certificate's side, with the root as the asserted optimum, as the record has it.
-    read_through: '2026-11-14T11:02:01Z'
+    read_through: '2026-11-21T00:41:51Z'
     results:
     - key: n172-exact-local-optimum
-      validation:
-      - think-2h88
-      - think-ruu2
       claim: >-
         s(172) <= 13.614689853284 (the exact rational side, rounded up at 12 places, of
         n172_witness.yaml at JoostdeWinter/square-packing c4e65d0), T-282's packing re-solved,
@@ -31024,6 +31167,8 @@ issues:
       - T-286
       evidence:
       - E-de-winter-946-certificate-report
+      - E-de-winter-946-exact-feasibility
+      - E-de-winter-946-review-exact-feasibility
     beads:
     - think-2h88
     - think-o53d
@@ -31053,17 +31198,27 @@ issues:
         verification: V0
         confirmation: C1
         status: reviewed
-    blocked:
-      type: owner-decision
-      reason: >-
-        Whether a re-certification at its predecessor's own contraction margin is a new result
-        is the owner's RV-3 (think-ruu2); T-286 is held at V0/C1 until the answer, as T-285 is,
-        and the same answer settles the held solve at 172 (think-wju3).
+    - url: https://github.com/jlevy/squares/issues/946#issuecomment-7054369719
+      date: '2026-11-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n172-exact-local-optimum
+        id: T-286
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n172-exact-local-optimum
+        id: E-de-winter-946-exact-feasibility
+        status: confirmed
+      - result: n172-exact-local-optimum
+        id: E-de-winter-946-review-exact-feasibility
+        status: confirmed
     close_when: >-
-      The owner has answered RV-3 (think-ruu2), the record follows the answer for T-286
-      (withdrawn, or entered and adopted at 172), and the reply on main says so, with what was
-      retained, replayed and reviewed and that the gain is 1.0399 of T-282's own contraction
-      margin.
+      T-286 is confirmed and adopted at 172 under the owner's option D (think-b0w5), and the
+      reply on main says so, with what was retained, replayed and reviewed and that the gain is
+      1.0399 of T-282's own contraction margin.
     notes: >-
       Read on 11 November 2026 from main f54ad1048. The commit c4e65d0 precedes the issue by 47
       seconds; 8c0de9d, 6 minutes earlier, first published n172/ at 1.4e-99 above the same root,
@@ -31165,6 +31320,16 @@ issues:
       The issue stays open, blocked:owner-decision. The author's commit 66849f2, which
       changes the witness file's coordinate_provenance and no square or side, is recorded in
       #939's entry.
+
+      Applied on 18 November 2026 in lane w7-optd-1118 (think-8yyy): the owner's option D of 17
+      November 2026 (think-b0w5), a re-certification of a standing packing is a new result only
+      if its side is below its predecessor's once the predecessor is shrunk until its squares
+      first touch, measured through any construction. T-286 lies 1.0107e-13 below that (T-282's
+      own contraction margin, 1.0399), so it is a new result: its replay and the stage 4
+      review's clean-room run are entered (E-de-winter-946-exact-feasibility,
+      E-de-winter-946-review-exact-feasibility), it stands at V3/C3, and the case adopted it at
+      172 from T-282 with both strong generators' regularization. The blocked: owner-decision
+      block lifts with this change; the label goes after its merge.
   - number: 943
     title: 's(156) ≤ 12.977053087498: improved packing (registration request)'
     author: kenaznia-doga
@@ -32951,7 +33116,7 @@ issues:
       (kirilltym), is above it; the side-only leaderboard entry it quotes and states first,
       13.880960371556 (team Nevska, 7 November), 2.2e-12 below this side and the registry's
       s(70) + 5 at 12 places, is unpublished and states no packing, so it is context only.
-    read_through: '2026-11-12T05:23:56Z'
+    read_through: '2026-11-20T20:41:19Z'
     results:
     - key: n179-band-second
       claim: >-
@@ -32966,12 +33131,21 @@ issues:
       - E-ozden-959-certificate-report
       - E-ozden-959-exact-feasibility
       - E-ozden-959-review-exact-feasibility
+    - key: n179-algebraic-l70-plus-5
+      claim: >-
+        An algebraic certificate for 179 squares at exactly L70 + 5, where L70 is the
+        side of the published 70-square construction.
+      source: https://github.com/jlevy/squares/issues/959#issuecomment-7050119161
+      not_registered: Retention, exact replay and comparison with the register are queued.
+      queued: true
+      bead: think-esp4
     beads:
     - think-89i7
     - think-ruu2
     - think-ikku
     - think-tj4o
     - think-71uq
+    - think-esp4
     answer_bead: think-89i7
     replies:
     - url: https://github.com/jlevy/squares/issues/959#issuecomment-6815463268
@@ -32999,6 +33173,14 @@ issues:
       T-294 is on main at V3/C3 as the house at 179, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
     notes: >-
+      On 20 November Joost de Winter supplied an algebraic reconstruction of the 179-square
+      construction in issuecomment-7050119161. The archive claims exact side L70 + 5, with
+      L70 the published side of the 70-square construction. De Winter credits the 179
+      construction to Doğa Özden after Ryan Xu and Evan Daniel. The downloaded archive
+      matches its ten manifest rows and isolates the 179-square side between
+      13.8809603715555795946966 and 13.8809603715555795946967. Exact verification and
+      comparison with T-294 await triage in think-esp4.
+
       Read on 11 November 2026 from main b5b12c206; no comment yet. The commit 6ab3cfe precedes
       the issue by 12 seconds. The issue carries the intake label. Five seconds after it opened,
       at 21:18:29Z, the author commented on #954 (issuecomment-6807260149) that #959 supersedes
@@ -35004,6 +35186,17 @@ issues:
       - result: n228-band-cut
         id: E-ono-984-review-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/984#issuecomment-7063687883
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-band-cut
+        id: T-301
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-301 is on main with its stage 4 review mapped and adopted as the house at 228, and the
       reply on main says what was retained and replayed, what the review found and that the
@@ -35824,7 +36017,7 @@ issues:
       confirmed, independently re-implemented, at V3/C3, S3, and the case adopted it as its
       house at 90 in the pass of 16 November, in place of T-303, since the pass of 15 November
       had already moved 90.
-    read_through: '2026-11-16T02:51:52Z'
+    read_through: '2026-11-21T07:00:54Z'
     results:
     - key: n90-local-search
       claim: >-
@@ -35838,9 +36031,21 @@ issues:
       - E-de-winter-997-certificate-report
       - E-de-winter-997-exact-feasibility
       - E-de-winter-997-review-exact-feasibility
+    - key: n90-rational-follow-up
+      claim: >-
+        s(90) <= 9.994038766583, the claimed upward 12-place print of the exact rational side in
+        90/candidate.json.gz of n90-rational.zip. The source reports a side about 2.69816e-11
+        below T-304 and claims feasibility only.
+      source: https://github.com/jlevy/squares/issues/997#issuecomment-7058975230
+      not_registered: >-
+        The follow-up certificate awaits retention, exact feasibility, comparison with T-304
+        under Option D, and source-credit review.
+      queued: true
+      bead: think-zsei
     beads:
     - think-32cl
     - think-uhav
+    - think-zsei
     answer_bead: think-32cl
     replies:
     - url: https://github.com/jlevy/squares/issues/997#issuecomment-6905945943
@@ -35963,6 +36168,18 @@ issues:
       names no bead. It says that nothing the author asked for is still queued, so the issue
       is closed with it, and that answers are welcome at any time. The issue was closed as
       completed at 02:51:58Z; it has no comment but the reply, and read_through moves to it.
+
+      Read issuecomment-7058975230 on 21 November 2026. The attachment is n90-rational.zip (file
+      35205206), mirrored at attachments/n90-rational.zip at
+      dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc; its manifest declares SHA-256
+      c04a0a60ca91f15922f6077c878c50b654e759ee659c14d43096cadaae574afa. The archive was not
+      downloaded or executed in this triage. The source maps the coordinates to Sargis
+      Khachatryan and jazivxt via Nevska; that attribution is pending assessment and does not
+      rewrite T-304's credit. The final contraction is described as a precision change relative
+      to its input, not a measured identity with T-304. The corrected 44/40 leaning-square
+      counts and the unresolved earlier tiny rotation and historical LP output remain review
+      answers. The queued import is think-zsei; the issue's earlier final reply and closed state
+      remain.
   - number: 1001
     title: "s(127), s(204), s(232), s(264), s(305): lowered upper bounds on Tomáš Kodaj's public packings: registration request"
     author: JonathanGun
@@ -36816,7 +37033,7 @@ issues:
       re-implemented, at V3/C3, and the pass of 18 November 2026 adopts each one at its count
       under the house rule and regularizes the new house: eleven views drawn, and 270 and 307
       decided no better on the new witnesses.
-    read_through: '2026-11-16T23:38:22Z'
+    read_through: '2026-11-20T19:14:10Z'
     results:
     - key: n147-ono-refined
       claim: >-
@@ -37169,10 +37386,37 @@ issues:
         id: E-mishapolk-1009-review-exact-feasibility
         status: confirmed
       beads: [think-4z8z]
+    - url: https://github.com/jlevy/squares/issues/1009#issuecomment-7048385373
+      date: '2026-11-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n268-ozden-continued
+        id: T-320
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n270-ozden-refined
+        id: T-321
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n299-ozden-refined
+        id: T-325
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       The 13 bounds are triaged, retained and registered on main, and the reply on main says
       what was registered, replayed and reviewed.
     notes: >-
+      The 20 November follow-up (issuecomment-7048385373) records the supersession of
+      T-320, T-321 and T-325 by T-331, T-332 and T-333 after #1048. It preserves their
+      V3/C3 standing and the earlier reply for the other ten results.
+
       Closed on 18 November 2026 with the final comment (issuecomment-6970909384,
       06:23:25Z), posted by lane w3r2-pass-1118 after #1023 merged as 86284ec20 and its
       Pages deploy was verified (run 44246610603); recorded by the records lane
@@ -37191,57 +37435,60 @@ issues:
     title: 'Public Kaggle packings below the register for n = 109 and n = 270: pointer'
     author: JoostdeWinter
     opened: '2026-11-17'
-    state: open
+    state: closed
+    closed: '2026-11-21'
     kind: result-report
     triage: done
-    summary: >-
-      Joost de Winter points to public Kaggle notebooks (Apache 2.0, he says) whose submission.csv
-      packings have sides below the record at two counts: at 109, 10.949289580943 in Navneet
-      Prabhat's and Tomáš Kodaj's notebooks, 4.58e-04 below the house, 10.94974746830584 (T-101's
-      exact side); at 270, 16.927469593519 in Danil Malyshev's and 16.927469594094 in Kodaj's,
-      6.79e-04 below the house, T-283's 16.9281486033428544, and below the refinement there that
-      Mykhailo Polkovskyi's #1009 reports, which the issue calls its author's own. He asks that the notebooks' authors be credited, claiming none himself,
-      and says exact rational Witness/v2 versions of the Kaggle coordinates, which are stored as
-      float64 and need a Kaggle login to download, are attached. None is: the issue's body holds
-      no attachment and links only the three notebook pages. Triaged read-only on 17 November
-      2026 (think-wvr8): no packing or certificate is retrievable at a pinned revision. Kaggle
-      answered this session's plain requests for the notebook pages with HTTP 404 and an empty
-      body, and the files need a login the session lacks, so the source is not checked; the
-      author's watched repository, JoostdeWinter/square-packing, holds no such file at its head,
-      d02237a. Nothing is retained, walked or registered, and the import waits for an exact
-      certificate the author can attach or commit. Claude assistance is not stated.
+    summary: 'Joost de Winter points to public Kaggle notebooks (Apache 2.0, he says) whose submission.csv
+      packings have sides below the record at two counts: at 109, 10.949289580943 in Navneet Prabhat''s
+      and Tomáš Kodaj''s notebooks, 4.58e-04 below the house, 10.94974746830584 (T-101''s exact side);
+      at 270, 16.927469593519 in Danil Malyshev''s and 16.927469594094 in Kodaj''s, 6.79e-04 below
+      the house, T-283''s 16.9281486033428544, and below the refinement there that Mykhailo Polkovskyi''s
+      #1009 reports, which the issue calls its author''s own. He asks that the notebooks'' authors
+      be credited, claiming none himself, and says exact rational Witness/v2 versions of the Kaggle
+      coordinates, which are stored as float64 and need a Kaggle login to download, are attached.
+      None is: the issue''s body holds no attachment and links only the three notebook pages. Triaged
+      read-only on 17 November 2026 (think-wvr8), when no packing was retrievable. The author''s comment
+      of 18 November attaches the exact Witness/v2 at 109, his transcription of Kodaj''s CC0 rows,
+      and withdraws 270. Both maintained routes and the independent review accepted the certificate
+      retained from aae089c. Its gain is 0.9723 of the canonical Samanyu-dev packing''s contraction
+      margin. The owner credits Samanyu-dev as finder, and T-335 records the original packing.
+      The later certificate is an unregistered Option D restatement, credited to de Winter after
+      Kodaj, Samanyu-dev.'
     read_through: '2026-11-18T07:33:46Z'
     results:
+    - key: n109-samanyu-canonical
+      claim: Samanyu-dev's original 109-square packing is registered from its canonical exact rational
+        derivation. Its safe 12-place bound is 10.949289580946.
+      source: body
+      register:
+      - T-335
+      evidence:
+      - E-samanyu-n109-numerical-report
+      - E-samanyu-n109-exact-feasibility
+      - E-samanyu-n109-canonical-independent-feasibility
     - key: n109-kaggle
-      claim: >-
-        s(109) <= 10.949289580943, the side of the submission.csv packing in Navneet Prabhat's
-        and Tomáš Kodaj's public Kaggle notebooks, 4.58e-04 below the record's
-        10.949747468306.
+      claim: s(109) <= 10.949289580943, the side of the submission.csv packing in Navneet Prabhat's
+        and Tomáš Kodaj's public Kaggle notebooks, 4.58e-04 below the record's 10.949747468306.
       source: body
-      not_registered: >-
-        Not yet imported. The Witness/v2 file the issue said was attached was not on the issue,
-        and the notebooks' files need a Kaggle login (HTTP 404 with an empty body here); the
-        author's comment of 18 November (issuecomment-6972165182) attaches it, with Kodaj's
-        rows, at side 547464479047171949843/50000000000000000000, so s(109) <=
-        10.949289580944 rounded up. Nothing is retained, walked or registered at 109 until the
-        import retains and checks it.
-      queued: true
-      bead: think-wvr8
+      not_registered: The later de Winter/Kodaj certificate lies within the earlier Samanyu-dev packing's
+        contraction margin (0.9723 of it). Option D treats it as a restatement. The source credit
+        is de Winter after Kodaj, Samanyu-dev.
+      queued: false
     - key: n270-kaggle
-      claim: >-
-        s(270) <= 16.927469593519 (Danil Malyshev's notebook) and 16.927469594094 (Tomáš
-        Kodaj's), the sides of the submission.csv packings in their public Kaggle notebooks,
-        6.79e-04 below the record's 16.928148603343 and below #1009's refinement at 270.
+      claim: 's(270) <= 16.927469593519 (Danil Malyshev''s notebook) and 16.927469594094 (Tomáš Kodaj''s),
+        the sides of the submission.csv packings in their public Kaggle notebooks, 6.79e-04 below
+        the record''s 16.928148603343 and below #1009''s refinement at 270.'
       source: body
-      not_registered: >-
-        No packing is in hand: no Witness/v2 file came for 270 and Kaggle was not reachable
-        from this session. The author's comment of 18 November (issuecomment-6972165182)
-        withdraws the pointer, since his own #1022, an import of its own, reports a side below
-        both Kaggle sides. Kodaj's side was quoted on #1001 too, as context only. Nothing is
-        walked or registered at 270.
+      not_registered: 'No packing is in hand: no Witness/v2 file came for 270 and Kaggle was not reachable
+        from this session. The author''s comment of 18 November (issuecomment-6972165182) withdraws
+        the pointer, since his own #1022, an import of its own, reports a side below both Kaggle sides.
+        Kodaj''s side was quoted on #1001 too, as context only. Nothing is walked or registered at
+        270.'
       queued: false
     beads:
     - think-wvr8
+    - think-2ut8
     answer_bead: think-wvr8
     replies:
     - url: https://github.com/jlevy/squares/issues/1012#issuecomment-6967037708
@@ -37251,59 +37498,118 @@ issues:
       reported:
       - result: n109-kaggle
       - result: n270-kaggle
-    close_when: >-
-      Each pointed-to packing is imported from an exact certificate that reached this
-      repository (registered with credit to the notebooks' authors, or recorded as not
-      registered with the reason), or the record says why it will not be, and the reply on main
-      says so; nothing the author asked for is queued.
-    notes: >-
-      Read on 17 November 2026 from main f9ddfeeef; no comment yet. The issue carries the intake
-      label, added by this pass; neither count has a case label. The acknowledgement follows the
-      merge of the change that records this triage: what was received, that no attachment came
-      with the issue and the notebooks' files need a login, so nothing was retained or checked,
-      and that an exact certificate attached to the issue or committed to his repository starts
-      the import, with the credit he asks for, Prabhat and Kodaj at 109, Malyshev and Kodaj at
-      270. At 270 the import would follow #1009's, Mykhailo Polkovskyi's issue, which the issue
-      calls its author's own; another lane imports it (think-i38n) and registers his refinement
-      there. At 109 the record's house is T-101's exact side. #1022, which the same author filed
-      later that day, reports s(270) <= 16.927314216352 below the Kaggle sides here, with a
-      certificate in his repository's n270/; it is an import of its own, and this issue's
-      acknowledgement reads it first.
+    - url: https://github.com/jlevy/squares/issues/1012#issuecomment-7061659368
+      date: '2026-11-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n109-samanyu-canonical
+        id: T-335
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: pending adoption
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-exact-feasibility
+        status: confirmed
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-canonical-independent-feasibility
+        status: confirmed
+      - result: n109-kaggle
+      - result: n270-kaggle
+      beads: [think-wvr8]
+    - url: https://github.com/jlevy/squares/issues/1012#issuecomment-7063454100
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n109-samanyu-canonical
+        id: T-335
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-numerical-report
+        status: recorded
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-exact-feasibility
+        status: confirmed
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-canonical-independent-feasibility
+        status: confirmed
+      # The reply names this separate solver candidate, not further validation of T-335.
+      beads: [think-26s0]
+    close_when: Each pointed-to packing is imported from an exact certificate that reached this repository
+      (registered with credit to the notebooks' authors, or recorded as not registered with the reason),
+      or the record says why it will not be, and the reply on main says so; nothing the author asked
+      for is queued.
+    notes: 'Read on 17 November 2026 from main f9ddfeeef; no comment yet. The issue carries the intake
+      label, added by this pass; neither count has a case label. The acknowledgement follows the merge
+      of the change that records this triage: what was received, that no attachment came with the
+      issue and the notebooks'' files need a login, so nothing was retained or checked, and that an
+      exact certificate attached to the issue or committed to his repository starts the import, with
+      the credit he asks for, Prabhat and Kodaj at 109, Malyshev and Kodaj at 270. At 270 the import
+      would follow #1009''s, Mykhailo Polkovskyi''s issue, which the issue calls its author''s own;
+      another lane imports it (think-i38n) and registers his refinement there. At 109 the record''s
+      house is T-101''s exact side. #1022, which the same author filed later that day, reports s(270)
+      <= 16.927314216352 below the Kaggle sides here, with a certificate in his repository''s n270/;
+      it is an import of its own, and this issue''s acknowledgement reads it first.
 
-      The acknowledgement of 18 November 2026 (issuecomment-6967037708), posted after #1016
-      merged as 2980557a2 and its deploy was verified and recorded by the records lane
-      w4r-records-1118, says that no file came with the issue, that the notebooks' files need
-      a Kaggle login and Kaggle answered with HTTP 404, and that the author's repository holds
-      none either: read at its head 838c5ea (2026-11-17T22:48:48Z) on 18 November, it has no
-      file for 109, and its n270/ (first committed at a1ba501) is #1022's
-      packing. It asks him to attach the two Witness/v2 files or commit them, says how the
-      import runs once one arrives, with the credit he asks for, and that #1022 is an import
-      of its own. The issue now waits on the author's files (blocked: author), and its
-      blocked:author label follows the merge of the change that records the block.
+      The acknowledgement of 18 November 2026 (issuecomment-6967037708), posted after #1016 merged
+      as 2980557a2 and its deploy was verified and recorded by the records lane w4r-records-1118,
+      says that no file came with the issue, that the notebooks'' files need a Kaggle login and Kaggle
+      answered with HTTP 404, and that the author''s repository holds none either: read at its head
+      838c5ea (2026-11-17T22:48:48Z) on 18 November, it has no file for 109, and its n270/ (first
+      committed at a1ba501) is #1022''s packing. It asks him to attach the two Witness/v2 files or
+      commit them, says how the import runs once one arrives, with the credit he asks for, and that
+      #1022 is an import of its own. The issue now waits on the author''s files (blocked: author),
+      and its blocked:author label follows the merge of the change that records the block.
 
-      Read on 20 November 2026 in intake lane c6-records (think-tei5): the author's comment
-      of 18 November at 07:33:46Z (issuecomment-6972165182) attaches
-      Issue_1012_n109_Kodaj_Coordinates.zip. It says the archive holds the 109 rows of Tomáš
-      Kodaj's Kaggle dataset "Squares in Squares: strips and bands (coordinates)", version 2
-      of 13 November 2026 under CC0, unchanged, with the SHA-256 of its full submission.csv;
-      an exact rational Witness/v2 transcription of side
-      547464479047171949843/50000000000000000000 = 10.949289580943439, so s(109) <=
-      10.949289580944 rounded up, the issue's 10.949289580943 having been rounded to
-      nearest; and a log in which this repository's independent rational-corner checker, at
-      f9ddfeeef, accepts it (109 squares, 5,886 pairs). That is the certificate n109-kaggle
-      waited on, a result that still needs its import: it stays queued on think-wvr8, and
-      nothing is retained, checked or registered in this change.
+      Read on 20 November 2026 in intake lane c6-records (think-tei5): the author''s comment of 18
+      November at 07:33:46Z (issuecomment-6972165182) attaches Issue_1012_n109_Kodaj_Coordinates.zip.
+      It says the archive holds the 109 rows of Tomáš Kodaj''s Kaggle dataset "Squares in Squares:
+      strips and bands (coordinates)", version 2 of 13 November 2026 under CC0, unchanged, with the
+      SHA-256 of its full submission.csv; an exact rational Witness/v2 transcription of side 547464479047171949843/50000000000000000000
+      = 10.949289580943439, so s(109) <= 10.949289580944 rounded up, the issue''s 10.949289580943
+      having been rounded to nearest; and a log in which this repository''s independent rational-corner
+      checker, at f9ddfeeef, accepts it (109 squares, 5,886 pairs). That is the certificate n109-kaggle
+      waited on, a result that still needs its import: it stays queued on think-wvr8, and nothing
+      is retained, checked or registered in this change.
 
-      On credit the comment says that Kodaj publishes the coordinates and refers to his
-      source notebooks for the original credits; that Navneet Prabhat's compilation contains
-      the same packing; that Guilherme Dias da Fonseca first published the pinwheel, on 6
-      November 2026 at 10.949392392; and that #958 documents Samanyu-dev's version at
-      10.94928958094538. He could not establish who made the last refinement and asks that
-      it be credited as the record's sources support, which the import decides. At 270 it
-      says nothing needs importing, since his own #1022 is below both Kaggle sides, so
-      n270-kaggle is no longer queued. With the file at 109 attached and the pointer at 270
-      withdrawn, nothing waits on the author, so the block lifts; the blocked:author label
-      comes off after the merge of the change that records this.
+      On credit the comment says that Kodaj publishes the coordinates and refers to his source notebooks
+      for the original credits; that Navneet Prabhat''s compilation contains the same packing; that
+      Guilherme Dias da Fonseca first published the pinwheel, on 6 November 2026 at 10.949392392;
+      and that #958 documents Samanyu-dev''s version at 10.94928958094538. He could not establish
+      who made the last refinement and asks that it be credited as the record''s sources support,
+      which the import decides. At 270 it says nothing needs importing, since his own #1022 is below
+      both Kaggle sides, so n270-kaggle is no longer queued. With the file at 109 attached and the
+      pointer at 270 withdrawn, nothing waits on the author, so the block lifts; the blocked:author
+      label comes off after the merge of the change that records this.
+
+      Imported on 20 November 2026 in intake lane c7-pointers (think-wvr8). The attachment is refused
+      by this session''s proxy (HTTP 403), so the packet de-winter-kodaj-n109-2026-11-18 retains the
+      same files from the author''s watched repository at aae089c (07:30:49Z on 18 November), first
+      committed 2 minutes 57 seconds before the comment and deleted at 7232328; their digests are
+      the zip members'' that lane w10-1118 recorded. Both maintained exact routes accept the witness
+      and refuse its gross and sharp controls, and the ledger upper-bounds-1012-20261120 records the
+      comment''s claim at 109, 4.58e-04 below the house, in the frozen report-order walk. Measured, the
+      witness states Kodaj''s rows, and they restate Samanyu-dev''s public pinwheel of 7 November
+      (53551d7): one to one, and within that packing''s padding (0.9721 of its contraction margin),
+      so under option D (think-b0w5) the packing''s credit goes to its original finder. The record''s
+      sources point to Samanyu-dev but do not settle the finder against Fonseca''s earlier pinwheel
+      or the public merges Samanyu-dev''s README names, so the credit is put to the owner; the stage
+      4 review is a separate lane (think-2ut8).
+
+      The 21 November continuation registered the exact canonical derivation of the original
+      Samanyu-dev packing after its confirming review. The frozen 20 November walk keeps its
+      historical measurement; the canonical comparison gives 0.9723 of the original packing''s
+      contraction margin.
+
+      The final reply closed the issue on 21 November after #1047 merged at f54452c1d1 and
+      Pages run 44896268723 verified all 6,582 live checks. It gives T-335 at V3/C3 and the
+      two exact-replay evidence IDs, credits the retained restatement to de Winter after Kodaj,
+      Samanyu-dev, and records the withdrawal at 270. The house adoption remains on think-wvr8.'
   - number: 1018
     title: Raised lower bound for n = 108 and n = 109 (side 10.630037940829)
     author: JoostdeWinter
@@ -37587,7 +37893,7 @@ issues:
       padding, so under option D (think-b0w5) it is a new result. #1020 is lower. The stage 4
       review of record is R-127b (#1028), with R-127 (#1025) an additional blind review; both
       accept it and both are mapped.
-    read_through: '2026-11-20T17:44:15Z'
+    read_through: '2026-11-20T20:00:02Z'
     results:
     - key: n127-band-cc20a26
       claim: >-
@@ -37605,6 +37911,7 @@ issues:
       - think-zqot
     beads:
     - think-zqot
+    - think-qc3o
     answer_bead: think-zqot
     replies:
     - url: https://github.com/jlevy/squares/issues/1017#issuecomment-7045102674
@@ -37630,10 +37937,22 @@ issues:
       - result: n127-band-cc20a26
         id: E-de-winter-1017-review-r127-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/1017#issuecomment-7048389052
+      date: '2026-11-20'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: >-
       The bound is triaged, retained and registered on main, and the reply on main says what was
       registered, replayed and reviewed, and where the house at 127 stands.
     notes: >-
+      The owner asked for four 127-row coordinate extracts on 20 November
+      (issuecomment-7048389052) to measure against T-305 and T-328 through T-330.
+      De Winter replied in issuecomment-7049310959 with the four extracts and a README
+      naming their versions. The downloaded ZIP matches its eight manifest rows.
+      Retention and measurement are queued in think-qc3o and think-e026. The registered
+      credit still reads de Winter after Chilton and Panoras.
+
       Read on 18 November 2026 from main eb50f54e9; no comment on the issue, which carried the
       intake label when read. The issue names cc20a26 (22:26:24Z, pushed with 67fb815 at
       22:26:28Z), 40 seconds before it, and says later commits leave the files unchanged; it does
@@ -37841,7 +38160,7 @@ issues:
       The case adopted it as the house at 268 by the house rule in the pass of 20 November
       2026 (think-78aj), regularized in the same pull request; #1009's pass had moved 268 on
       18 November, and a day's archive holds one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
-    read_through: '2026-11-20T18:34:53Z'
+    read_through: '2026-11-20T20:01:34Z'
     results:
     - key: n268-a1ba501
       claim: >-
@@ -37859,6 +38178,7 @@ issues:
     beads:
     - think-gqzz
     - think-78aj
+    - think-qc3o
     answer_bead: think-gqzz
     replies:
     - url: https://github.com/jlevy/squares/issues/1021#issuecomment-7047576688
@@ -37886,6 +38206,14 @@ issues:
       house at 268 decided, and the reply on main says what was registered, replayed, reviewed
       and adopted.
     notes: >-
+      De Winter's 20 November reply (issuecomment-7049341938) names public copies of the
+      donor files. The 129 and 153 rows are from Navneet Prabhat's notebook run 370015472.
+      The 302 copies are from Danil Malyshev's version 166, run 370178985, and Francisco
+      Couzo's b85dee2. The reply says exact slice revisions were not recovered. For #1020
+      through #1022 he confirms GPT-6.2 for search, optimization and certification and
+      Claude for repository work, checks and figures. His records disagree about the
+      GPT-6.2 variant. Retention and comparisons are queued in think-qc3o.
+
       Read on 18 November 2026; no comment on the issue. The issue names a1ba501 (22:48:48Z,
       pushed with 838c5ea at 22:48:50Z), the commit that first committed n268/; later commits leave
       it unchanged. It quotes the Kaggle per-puzzle table's 16.870013850412470 at 268 (the team Thinking inside the box, 15 November), 8.0e-12 above this side, with no coordinates, so it states no packing. The record credits people, not AI agents (attribution.md), and
@@ -37938,7 +38266,7 @@ issues:
       The case adopted it as the house at 270 by the house rule in the pass of 20 November
       2026 (think-78aj), regularized in the same pull request; #1009's pass had moved 270 on
       18 November, and a day's archive holds one prior state a count. The review's Questions 1 to 3 and its F14 go to the author with the reply.
-    read_through: '2026-11-20T18:34:55Z'
+    read_through: '2026-11-20T20:01:04Z'
     results:
     - key: n270-a1ba501
       claim: >-
@@ -37956,6 +38284,7 @@ issues:
     beads:
     - think-gqzz
     - think-78aj
+    - think-qc3o
     answer_bead: think-gqzz
     replies:
     - url: https://github.com/jlevy/squares/issues/1022#issuecomment-7047577489
@@ -37983,6 +38312,13 @@ issues:
       house at 270 decided, and the reply on main says what was registered, replayed, reviewed
       and adopted.
     notes: >-
+      De Winter's 20 November reply (issuecomment-7049331576) names Panoras's version 17
+      submission.csv as the 270 donor and attaches its rows with claimed same-order
+      mutual-nearest correspondence. His fixed-centre tests say two small turns can be
+      straightened individually and three cannot. The downloaded ZIP matches its ten
+      manifest rows. The donor and exact straightening checks await retention and review
+      in think-qc3o.
+
       Read on 18 November 2026; no comment on the issue. The issue names a1ba501 (22:48:48Z,
       pushed with 838c5ea at 22:48:50Z), the commit that first committed n270/; later commits leave
       it unchanged. It quotes Panoras's compilation at 16.92746606488242 and Danil Malyshev's coordinates of #1012 at 16.927469593519, both 1.55e-04 above this side, and the Kaggle per-puzzle table's 16.927314216351814 at 270 (the team [NUP] Junie is all you need, 9 November), 1.1e-13 above it, with no coordinates; the last states no packing. The record credits people, not AI agents (attribution.md), and
@@ -38037,7 +38373,7 @@ issues:
       confirmed, independently re-implemented, at V3/C3. The case adopted it as the house at
       299 by the house rule in the pass of 20 November 2026 (think-78aj), regularized in the
       same pull request. The review's Questions 1 to 3 go to the author with the reply.
-    read_through: '2026-11-20T18:34:57Z'
+    read_through: '2026-11-20T20:02:14Z'
     results:
     - key: n299-497eb47
       claim: >-
@@ -38057,6 +38393,7 @@ issues:
     beads:
     - think-10mx
     - think-78aj
+    - think-qc3o
     answer_bead: think-10mx
     replies:
     - url: https://github.com/jlevy/squares/issues/1031#issuecomment-7047578344
@@ -38084,6 +38421,14 @@ issues:
       house at 299 decided, and the reply on main says what was registered, replayed, reviewed
       and adopted.
     notes: >-
+      De Winter's 20 November reply (issuecomment-7049355325) attaches Panoras version 17
+      extracts at 335 and 372 and describes their use in the middle and outer slices.
+      His measured band matches 51 of 52 and all 52 strongly tilted squares of T-248,
+      respectively, with the tolerances he states. He credits Evan Daniel with the band's
+      first appearance in the project's record and reports finding no public coordinates
+      or notebook for Nick Sarris's score. The downloaded ZIP matches its sixteen
+      manifest rows. Retention and measurement are queued in think-qc3o.
+
       Read on 18 November 2026 and again on 20 November; no comment on the issue. The issue names
       497eb47 (06:34:51Z), the commit that first committed n299/; 3293038, the same second, adds
       only its registration text and checksums, and later commits leave the folder unchanged.
@@ -38120,3 +38465,670 @@ issues:
       came from; whether the donors already carried the tilted band whose first holder in
       the record is T-248, or the search used any of the record's packings at 299; and
       whether Nick Sarris's value is public beyond the leaderboard.
+  - number: 1019
+    title: 'Lowered upper bounds for 2,837 counts between n = 1,036 and n = 9,928'
+    author: JoostdeWinter
+    opened: '2026-11-17'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter reports 2,837 upper bounds from 1,036 to 9,928 in above1000/ at cc20a26.
+      The beyond-horizon import bead owns the report-order and coverage decision.
+    read_through: '2026-11-17T22:27:56Z'
+    results: []
+    beads:
+    - think-1tkk
+    answer_bead: think-1tkk
+    replies: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+  - number: 1037
+    title: 'Exact certificates for GeiserX''s published packings of 202, 204, 210, 263, 264, 295 and 297 (pointer)'
+    author: JoostdeWinter
+    opened: '2026-11-18'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter points to exact certificates for seven published GeiserX packings. The
+      import bead owns the provenance, replay and standing comparison.
+    read_through: '2026-11-18T20:06:25Z'
+    results: []
+    beads:
+    - think-36ui
+    answer_bead: think-36ui
+    replies: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+  - number: 1038
+    title: 's(228) ≤ 15.596043116632: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-18'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      The account kenaznia-doga, Doğa Özden's AI agent, asks on his behalf for the registration
+      of s(228) <= 15.596043116632, rounded up at 12 places from the exact rational side of a
+      centre-basis Witness/v2 certificate in kenaznia-doga/s228-upper-bound-1559604311 at
+      46ab8bf, 4.29e-9 below the record (T-301, credited to Roberto Ono). It names jazivxt's
+      public Kaggle notebook as the publishing venue (Boxed In Sub, dataset Boxed In v63).
+      The lab converted the snapshot to exact rationals under one uniform clearance factor;
+      the issue says its original finder is unresolved and Özden claims no discovery. It
+      discloses first a side-only Kaggle leaderboard entry at 228 below
+      the claim, which states no packing. Triaged, retained and registered on 20 November 2026 in
+      lane i1038 (think-91fu) as T-334: the print rounds up from its exact
+      side, both maintained exact routes accept the certificate and refuse its gross and sharp
+      controls, and measured here it pairs one to one with T-301's packing, with no established
+      direction of derivation. Its gain is 1.2298 times T-301's contraction margin, so a new result under option D
+      (think-b0w5). The blind stage 4 review of 20 November (lane r1038, think-3ape; #1044)
+      accepts it with no blocking or major finding and its 36 controls as stated, and finds
+      the factor the issue prints as 1 + 4.6e-18 to be 1 + 4.56e-15 (F6), so the entry is
+      confirmed, independently re-implemented, at V3/C3, S2. Adopted at 228 in the pass of 21
+      November 2026 UTC in place of T-301, regularized with both strong generators. Ono retains
+      T-301's credit; jazivxt is credited for the public notebook and decimal snapshot, and
+      Özden for this certificate. This packing's finder and publication order remain unresolved.
+      The driver's KKT solve 9.66e-14 below it stays a candidate (think-4z8z), and the later
+      related de Winter attachment awaits independent comparison in think-d4b0.
+    read_through: '2026-11-20T17:53:48Z'
+    results:
+    - key: n228-kaggle-certificate
+      claim: >-
+        s(228) <= 15.596043116632 rounded up at 12 places (the exact rational side of
+        n-228-candidate.yaml at kenaznia-doga/s228-upper-bound-1559604311 46ab8bf), Özden's exact
+        certificate of the packing published in jazivxt's public Kaggle notebook.
+      source: body
+      register:
+      - T-334
+      evidence:
+      - E-ozden-1038-certificate-report
+      - E-ozden-1038-exact-feasibility
+      - E-ozden-1038-review-exact-feasibility
+    - key: n228-leaderboard-side-only
+      claim: >-
+        The Kaggle per-puzzle leaderboard lists 15.596043116631669919627353 at 228 (Nevska, 8
+        November), 9.66e-14 below this side, which the issue discloses first and does not claim.
+      source: body
+      not_registered: >-
+        A side-only entry that states no packing, so it is no report: context only, as #984's
+        and #1005's ledgers treated their quoted leaderboard sides.
+      queued: false
+    - key: n228-later-algebraic-attachment
+      claim: >-
+        De Winter attached a separate exact algebraic archive for n = 228.
+        Its comparison with T-334 awaits review.
+      source: https://github.com/jlevy/squares/issues/1038#issuecomment-7046716722
+      not_registered: The later attachment is queued for a separate comparison.
+      queued: true
+      bead: think-d4b0
+    beads:
+    - think-91fu
+    - think-3ape
+    - think-d4b0
+    answer_bead: think-d4b0
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1038#issuecomment-7059934377
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-kaggle-certificate
+        id: T-334
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-exact-feasibility
+        status: confirmed
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-review-exact-feasibility
+        status: confirmed
+      - result: n228-leaderboard-side-only
+      - result: n228-later-algebraic-attachment
+    - url: https://github.com/jlevy/squares/issues/1038#issuecomment-7063454444
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-certificate-report
+        status: recorded
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-exact-feasibility
+        status: confirmed
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-review-exact-feasibility
+        status: confirmed
+      - result: n228-later-algebraic-attachment
+      beads: [think-d4b0]
+    close_when: >-
+      The bound is triaged, retained and registered on main, its stage 4 review mapped and the
+      case adopted where it is the smallest validated side, and the reply on main says what was
+      registered, replayed, reviewed and adopted, and how the credit stands.
+    notes: >-
+      Read on 20 November 2026 from main 935e79c3; no comment on the issue, which carried the
+      intake label when read. The issue names 46ab8bf (23:08:45Z), 23 seconds before it, the
+      repository's only commit. It asks for credit to jazivxt for the packing and to Özden for
+      the certificate and the registration. Measured, the packing is one to one with T-301's;
+      that does not establish a common finder, publication order or directional derivation.
+      Ono retains T-301's credit, jazivxt is credited for the public notebook and decimal
+      snapshot, and Özden for this certificate. The original finder and order remain
+      unresolved in T-334. The Kaggle notebook and dataset were not read: this
+      session's network refuses www.kaggle.com. The project's run of Evan Daniel's driver on
+      T-301 reached a view 9.66e-14 below this side on 15 November, held unregistered; by
+      think-frl5 the claim keeps its status and the view stays a candidate (think-4z8z).
+  - number: 1039
+    title: Raised lower bounds for 56 square counts, including s(112) ≥ 10.782475680330
+    author: JoostdeWinter
+    opened: '2026-11-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter, after Hiroaki Hosono, asks for the registration of lower bounds at 56
+      counts from 19 to 148, 49 direct and 7 by monotonicity (102, 123-125, 146-148), each a
+      nonnegative rectangle, mixed or heterogeneous-core measure of mass below the count
+      whose cores capture mass one; the largest gain is at 112, 10.782475680330. The
+      attachment lower-bounds-56.zip is retained by digest in the de-winter-lower-bounds-2026-11-19
+      packet from JoostdeWinter/square-packing 21d944c, where it sits byte for byte. Triaged
+      on 20 November 2026 in lane c15-lower (think-fv42): every claim is above both lower
+      lanes of its case, and in report order 23 direct counts and the 7 consequences are
+      current, while #1041 and #1042 raise the other 26.
+    read_through: '2026-11-19T04:50:58Z'
+    results:
+    - key: n19-n148-lower-bounds
+      claim: >-
+        Lower bounds at 56 counts from 19 to 148 (exact_claims.csv in lower-bounds-56.zip,
+        SHA-256 9641ca15ac63213db22ad32854efb0bc0575d7c0beeb646fd6931f50ae183452), 49 direct
+        and 7 by monotonicity, from s(19) >= 4.827518289696 to s(145) >= 12.265486628825.
+      source: body
+      not_registered: >-
+        Triaged and retained on 20 November 2026; registration follows the replay plan of
+        think-fv42, which prices the certificate classes against the owner's cap.
+      queued: true
+      bead: think-fv42
+    beads:
+    - think-fv42
+    answer_bead: think-fv42
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1039#issuecomment-7061916668
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n19-n148-lower-bounds
+    close_when: >-
+      The bounds are triaged, retained, registered, replayed within the cap or held on
+      validation beads, and the reply on main says what was registered and what remains.
+    notes: >-
+      Read on 20 November 2026 from main 7a3b186a2e. The issue's own attachment comment
+      (04:50:58Z) links the zip; the session proxy refused that URL, and the bytes come
+      from followup/mass_reserve/lower-bounds-56.zip at 21d944c, whose SHA-256 is the one
+      the issue states. The source commit it names, e94e6ce, is not in the public
+      repository; the zip carries its raw commit objects in .source/. The report-order walk
+      is campaign/issue-intake/lower-bounds-de-winter-20261120/.
+  - number: 1040
+    title: GeiserX's public 259-square packing is below the register (pointer)
+    author: JoostdeWinter
+    opened: '2026-11-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Joost de Winter points to a packing of 259 unit squares with side 16.590016439573
+      that Sergio Fernández Rubio (GeiserX) published in GeiserX/squares-in-squares,
+      data/submission-best.csv.gz at f822b34 (CC BY 4.0), joining tilted bands from
+      his 292- and 445-square packings, 0.00136 below T-193''s 16.591378145498. He says
+      Nevska reached the same side on Kaggle on 8 November 2026 without published coordinates,
+      attaches packing-259.zip, an exact rational Witness/v2 of the packing with a verifier,
+      and asks that the packing be credited to GeiserX. Triaged on 20 November 2026
+      in lane c7-pointers (think-squj): the cited source is retained at f822b34 as packet
+      geiserx-squares-in-squares-2026-11-18, and its file holds binary64 rows with angles
+      in radians, no certificate and no exact coordinates, so nothing is imported from
+      it. The attachment is refused by this session''s proxy (HTTP 403) and was not
+      read, so the result waits for it.'
+    read_through: '2026-11-19T04:54:13Z'
+    results:
+    - key: n259-geiserx
+      claim: s(259) <= 16.590016439573, the side of the 259-square packing in GeiserX's
+        data/submission-best.csv.gz at f822b34, Sergio Fernández Rubio's join of tilted
+        bands from his own 292 and 445, 0.00136 below T-193.
+      source: body
+      not_registered: Not yet imported. The public source states binary64 rows, not
+        a certificate; the exact Witness/v2 the issue attaches (user-attachments files/35066502)
+        was not readable from this session. Once a session retains it, it is replayed
+        on both maintained routes, measured against T-193's packing, walked at 259 and
+        registered with the credit the issue asks for.
+      queued: true
+      bead: think-squj
+    - key: n259-leaderboard-side-only
+      claim: The Kaggle per-puzzle leaderboard reached the same side at 259 (Nevska,
+        8 November 2026), which the issue quotes and does not claim.
+      source: body
+      not_registered: 'A side-only entry that states no packing, so it is no report:
+        context only, as #1038''s quoted leaderboard side was.'
+      queued: false
+    beads:
+    - think-squj
+    answer_bead: think-squj
+    replies: []
+    close_when: The packing is imported from an exact certificate that reached this
+      repository and registered with the credit the issue asks for, or the record says
+      why it will not be, and the reply on main says so.
+    notes: Read on 20 November 2026 from main 06754afe6; no comment on the issue. The
+      issue names f822b34 (18:37:44Z on 18 November), the repository's head when read;
+      its first commit, c409de5 (15:41:34Z), published the submission and the results
+      tables with the same blobs. By data/README.md, results/round33-best-2026-11-17.tsv
+      gives the source of the 259 layout, the author's own k123 join of his held 292
+      and 445 packings, side L 16.590016439573077. The repository is not watched; the
+      issue is the report. NOTICE and AI_NOTICE.md ask for credit to 'Sergio Fernández
+      Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares'. The issue does
+      not say how the attached Witness/v2 was made, nor that AI assistance was used
+      for it.
+  - number: 1041
+    title: 'Raised lower bounds for 34 square counts, including s(114) ≥ 87/8 = 10.875 (follow-up to #1039)'
+    author: JoostdeWinter
+    opened: '2026-11-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter, after Hiroaki Hosono, asks for the registration of 34 direct lower
+      bounds from 50 to 137, each an exact rational with its own rectangle measure and a
+      complete octagon-kernel coverage check, raising #1039 at 22 counts and adding 12; the
+      largest gain is s(114) >= 87/8. Its attachment was refused by the session proxy; the
+      34 certificates are retained from the top level of lower_bounds_2026_11_19 at
+      JoostdeWinter/square-packing 21d944c, whose lower_bounds.csv states the same 34
+      values. Triaged on 20 November 2026 in lane c15-lower (think-fv42): all 34 are above
+      the record, 105 and 111 stay current, and #1042 raises the other 32.
+    read_through: '2026-11-19T12:05:56Z'
+    results:
+    - key: n50-n137-lower-bounds
+      claim: >-
+        Lower bounds at 34 counts from 50 to 137 (lower_bounds.csv and proof/nNNN/ of
+        lower_bounds_2026_11_19 at JoostdeWinter/square-packing 21d944c), from s(50) >=
+        1483/200 to s(137) >= 1478/125, with s(114) >= s(115)'s 87/8.
+      source: body
+      not_registered: >-
+        Triaged and retained on 20 November 2026; registration follows the replay plan of
+        think-fv42.
+      queued: true
+      bead: think-fv42
+    beads:
+    - think-fv42
+    answer_bead: think-fv42
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1041#issuecomment-7059934656
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/1041#issuecomment-7061917022
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n50-n137-lower-bounds
+    close_when: >-
+      The bounds are triaged, retained, registered, replayed within the cap or held on
+      validation beads, and the reply on main says what was registered and what remains.
+    notes: >-
+      Read on 20 November 2026 from main 7a3b186a2e; no comment. The issue links the
+      attachment squaremath_continued_20261119.zip twice (files 35084690 and 35084723) and
+      states SHA-256 d8d0d6966f7ac7f9a69f24d578619ee2323a158e5c6c9c7e6be9039c401445df; both
+      URLs were refused, so that digest is not compared here, and the packet's bytes were
+      committed at 18:44:48Z, after the report. The issue does not claim the 67 corner bounds
+      or the 260 packing of the attachment.
+  - number: 1042
+    title: Raised lower bounds for 48 square counts between 50 and 218, including s(136) ≥ 11.868
+    author: JoostdeWinter
+    opened: '2026-11-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Joost de Winter, after Hiroaki Hosono, asks for the registration of 48 lower bounds
+      from 50 to 218 in lower_bounds_2026_11_19 at JoostdeWinter/square-packing 21d944c: 43
+      standalone octagon-kernel certificates, 137, 138 and 162 by four translated regions,
+      188, 189 and 218 by repeated central strips, and 217 by corner reweighting on a
+      periodic board; the largest gain is at 136, 11.868. A comment raises 161 to
+      8036307/625000. Triaged on 20 November 2026 in lane c15-lower (think-fv42): all 49 are
+      above the record and every one is current but the issue's own 161. A later comment
+      claims 155 counts from 18 to 313, an import of its own (think-4iec).
+    read_through: '2026-11-20T02:02:32Z'
+    results:
+    - key: n50-n218-lower-bounds
+      claim: >-
+        Lower bounds at 48 counts from 50 to 218 (CLAIM.md and followup/best_by_count.csv of
+        lower_bounds_2026_11_19 at 21d944c), from s(50) >= 7417/1000 to s(218) >= 7433/500.
+      source: body
+      not_registered: >-
+        Triaged and retained on 20 November 2026; registration follows the replay plan of
+        think-fv42.
+      queued: true
+      bead: think-fv42
+    - key: n161-four-region-follow-up
+      claim: >-
+        s(161) >= 8036307/625000 = 12.8580912, the 363-interval measure at side 12.858 of
+        followup/repeated/161--749858-12.858-100-uniform with a four-region transfer split at
+        18553/5000.
+      source: https://github.com/jlevy/squares/issues/1042#issuecomment-7020627554
+      not_registered: >-
+        Triaged on 20 November 2026; it is recorded after the issue's 161 in report order,
+        and registration follows the replay plan of think-fv42.
+      queued: true
+      bead: think-fv42
+    - key: n18-n313-public-replay
+      claim: >-
+        Lower bounds at 155 counts from 18 to 313 in the base85 archive of the comment
+        (squaremath_public_replay.zip, SHA-256
+        2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab), replayed against
+        lower_bounds_2026_11_19 at 21d944c; 61 rows are corner families that rely on T-180's
+        global coverage.
+      source: https://github.com/jlevy/squares/issues/1042#issuecomment-7022143149
+      not_registered: >-
+        Found in triage on 20 November 2026 and not triaged here; an import of its own.
+      queued: true
+      bead: think-4iec
+    beads:
+    - think-fv42
+    - think-4iec
+    answer_bead: think-fv42
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1042#issuecomment-7059934954
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/1042#issuecomment-7061917411
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n50-n218-lower-bounds
+      - result: n161-four-region-follow-up
+      - result: n18-n313-public-replay
+    close_when: >-
+      The bounds and both follow-ups are triaged, retained, registered, replayed within the
+      cap or held on validation beads, and the reply on main says what was registered and
+      what remains.
+    notes: >-
+      Read on 20 November 2026 from main 7a3b186a2e. The issue names 21d944c (18:44:48Z),
+      50 seconds before it, the head when read. Three comments, all the author's: the 161
+      follow-up (19:59:12Z, edited 21:05:27Z); "OpenAI Codes should be 'GPT 6.2 Astra'"
+      (20:17:20Z), which the record reads as naming the model the folder's README calls
+      Codex; and the 155-count archive (21:02:44Z, edited 02:02:32Z on 20 November).
+  - number: 1050
+    title: 's(18) = (7+√7)/2: Mira Cult''s computer-assisted optimality proof (pointer, to import and review)'
+    author: jlevy
+    opened: '2026-11-20'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      This issue points to Mira Cult's computer-assisted proof at 18. The merged
+      independent review #1054 reports partial verification and found no gap.
+    read_through: '2026-11-20T16:38:03Z'
+    results: []
+    beads:
+    - think-8x11
+    answer_bead: think-8x11
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1050#issuecomment-7059935258
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+  - number: 1052
+    title: 'Lowered upper bound for n = 305 (side 17.945755838742)'
+    author: JoostdeWinter
+    opened: '2026-11-20'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'De Winter''s finite upper bound at 305 is registered as T-336 at V3/C3, S2, with maintained
+      replay and accepted independent review #1057 mapped to separate evidence. It lies below T-309 contracted
+      to first contact and is a new result under option D. House adoption remains pending in think-kzwl.'
+    read_through: '2026-11-20T17:51:36Z'
+    results:
+      - key: n305-rational-certificate
+        claim: s(305) <= 17.945755838742, the exact rational certificate's 12-place ceiling.
+        source: body
+        register:
+          - T-336
+        evidence:
+          - E-de-winter-1052-certificate-report
+          - E-de-winter-1052-exact-feasibility
+          - E-de-winter-1052-review-exact-feasibility
+      - key: n305-leaderboard-side-only
+        claim: Shadoks's quoted Kaggle side at 305 is 17.94575583874176, with no coordinates.
+        source: body
+        not_registered: A side-only comparison, without a packing, retained as context.
+        queued: false
+    beads:
+    - think-kzwl
+    answer_bead: think-kzwl
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7059935496
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+  - number: 1055
+    title: 'Raised lower bound for n = 20: s(20) > 99/20 = 4.95'
+    author: JoostdeWinter
+    opened: '2026-11-20'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter reports s(20) > 99/20, raising the recorded lower endpoint by 3/80. The
+      pinned proof at 3a5130340b08 uses Bentz's 22 marks and Mira Cult's exclusion kernel.
+      Source retention, mathematical review and controlled replay are queued.
+    read_through: '2026-11-21T06:59:02Z'
+    results:
+    - key: n20-lower-99-over-20
+      claim: >-
+        s(20) > 99/20 = 4.95 for unrestricted unit-square packing, the original issue-body claim
+        from lower_n20/ at JoostdeWinter/square-packing
+        3a5130340b0882e72e9d04ad2419b0437cae99aa.
+      source: body
+      not_registered: >-
+        The original pinned proof's mathematical review, complete controlled replay and
+        registration remain queued.
+      queued: true
+      bead: think-6ul3
+    - key: n20-lower-99951-over-20000
+      claim: >-
+        s(20) > 99951/20000 = 4.99755, a claimed exclusion of the closed board followed by
+        compactness, leaving a gap of 49/20000 = 0.00245 to the grid upper bound 5.
+      source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
+      not_registered: >-
+        The stronger attachment reuses earlier exclusions; source retention, the complete
+        dependency chain, mathematical review and controlled replay remain queued.
+      queued: true
+      bead: think-guls
+    - key: n20-equal-absolute-tilt
+      claim: >-
+        The minimum enclosing side for 20 unit squares is claimed to be 5 when every square has
+        the same absolute tilt, with its sign chosen independently; the argument is in
+        geometry/equal_magnitude.md of the attachment.
+      source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
+      not_registered: >-
+        The restricted equality is separate from unrestricted optimality and awaits retention
+        and review of its precise hypotheses.
+      queued: true
+      bead: think-guls
+    - key: n20-angle-diversity
+      claim: >-
+        Necessary angle-spread and near-axis conditions for a hypothetical packing of 20 unit
+        squares below side 5, stated in geometry/angle_diversity.md of the attachment.
+      source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
+      not_registered: >-
+        The comment gives a theorem pointer; its exact inequalities and hypotheses must be read
+        from the archive and reviewed before any claim is registered.
+      queued: true
+      bead: think-guls
+    - key: n20-one-axis-equal-magnitude
+      claim: >-
+        An exact-result pointer for one aligned square and nineteen equal-magnitude small tilts,
+        in geometry/one_axis_equal.md of the attachment.
+      source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
+      not_registered: >-
+        The comment does not specify the exact conclusion or angle domain; retain and read the
+        statement before assessing or registering it.
+      queued: true
+      bead: think-guls
+    beads:
+    - think-6ul3
+    - think-guls
+    answer_bead: think-6ul3
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7059935714
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
+      35205175) is mirrored at attachments/n20-proof-499755.zip at
+      dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc; the manifest declares SHA-256
+      475d7ef50e21ce4a83cfb4c8415c9e9852d619beeade5c4c8745c2c963d6c867. The archive was not
+      downloaded or executed in this triage. The source reports a side-five screen of 53,361
+      ordered mask pairs in 6,787 symmetry classes, with 1,142 retained matchings and 89 refined
+      terminal exclusions; the endpoint recipe reuses 1,141 earlier exclusions and reruns one
+      changed matching. These are producer claims, not new project replay evidence. The 4.95
+      source and think-6ul3 remain distinct from this extension and its restricted claims on
+      think-guls. Unrestricted equality at 5 remains open; the existing owner reply acknowledges
+      only the original 4.95 claim.
+
+  - number: 1060
+    title: 'Raised lower bounds for 166 counts, including s(129) > 11.49685 and s(318) > 17.97459518711171'
+    author: JoostdeWinter
+    opened: '2026-11-21'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter reports 166 lower-bound endpoints in attachment D's claims-final.csv,
+      superseding the earlier A/C tables and updating the 155-count supplement on
+      #1042. The source describes 153 strengthened prior counts and 13 additional
+      counts; 18 and 20 have separate threads. Intake must retain each row's
+      inequality and dependencies, including the reported reliance on T-180.
+    read_through: '2026-11-21T06:59:48Z'
+    results: []
+    beads: [think-uz7g]
+    answer_bead: think-uz7g
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1060#issuecomment-7061321357
+      date: '2026-11-21'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
+      counts from 26 to 318, with 126 non-strict and 40 strict endpoints. Sixty rows name
+      T-180, which remains V0/C1 on the pinned main. Counts 18 and 20 are absent.
+      Source SHA-256 A efc7a02b00b4231145c971295e94fbaec6820c18d00700b45dcc7da6b9dbf8bd,
+      B fbe704a02d7834ddbb93c2e71bb231824e2f40a2b256a241e219be4cd1cd5a7a,
+      C a671a2cba6152d3c38efef350a2b1abea3dab6ba7eebdb35b56273c9021dea4d,
+      D 1e1fd7ec9a42342f895434891e2b1a70be7e7bdffe7d612fb20e49a5e05aaf83.
+      The proof dependencies and endpoints await comparison and replay.
+  - number: 1061
+    title: 'Exact coordinates for 11 known construction sides and three relations between packing sides'
+    author: JoostdeWinter
+    opened: '2026-11-21'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter requests review of algebraic coordinates at 109, 129, 172, 175, 199,
+      237, 262, 268, 269, 292 and 295, with 259 included only as a dependency, and
+      three identities between construction sides. The submission claims root
+      attainment for the given layouts and retains the original credit.
+    read_through: '2026-11-21T07:00:16Z'
+    results: []
+    beads: [think-l9fk]
+    answer_bead: think-l9fk
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1061#issuecomment-7061321621
+      date: '2026-11-21'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      Route to the exact-side work tracked by #811. The claimed construction identities
+      are L199=L172+1, L268=L129+5 and L292=L259+1. The archive contains polynomial data
+      for all twelve counts, including the 259 dependency. Compare existing rational
+      witnesses at 172 and 199 before
+      assigning evidence or novelty. Coordinate with #1040/#1047 for 259 and #1037
+      for 295. No separate 259 intake is requested. The source credits Evan Daniel
+      for the contact solver, number-field reconstruction and primary verifier.
+      Source SHA-256 3511b3144994bb32a52364c9728a807a7b0a8adec36345955173203c9845cc8b.
+  - number: 1062
+    title: 'Exact rational witness at the previously reported local solution for n = 232 (side ≤ 15.759531623541)'
+    author: JoostdeWinter
+    opened: '2026-11-21'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter submits a rational n232 witness with upward-rounded ceiling
+      15.759531623541, from Alex Chilton's compilation, near JoeGun's previously
+      reported local solution and below the registered Kodaj–JoeGun witness.
+      The author requests preservation of prior layout and local-solve credits
+      and claims feasibility only.
+    read_through: '2026-11-21T07:01:14Z'
+    results: []
+    beads: [think-eumc]
+    answer_bead: think-eumc
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1062#issuecomment-7061321834
+      date: '2026-11-21'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      Compare the submitted exact fraction and geometry with both T-307's adopted
+      witness and the rational certificate already retained under
+      packing/resources/web/joegun-local-minimum-2026-11-16/source/local-minimum/n-232-input.cert.
+      That retained certificate is unregistered; its source log reports an exact
+      check at 15.759531623540125992637246151039. The new candidate is about 1.576e-19
+      smaller than that exact certificate and 8.856e-62 smaller than its own input.
+      All three have the same 12-place upward print. Geometric identity, the contraction
+      margin and feasibility remain to be checked. Source SHA-256 752b5efc0aaedfab63605b8c2f3112610a41164bfc31d843b629752cda4088c3.
+  - number: 1063
+    title: 'Supplementary rational enclosures for 13 existing packing witnesses'
+    author: JoostdeWinter
+    opened: '2026-11-21'
+    state: open
+    kind: other
+    intake: true
+    triage: pending
+    summary: >-
+      De Winter supplies precision enclosures at 105, 127, 130, 156, 180, 182, 260,
+      270, 272, 299, 304, 307 and 308. The source describes common center scaling
+      and translation with fixed orientations, preserving every input's 12-place
+      ceiling, and requests retention of original arrangement credits without
+      a displayed-ceiling change or priority claim.
+    read_through: '2026-11-21T07:02:21Z'
+    results: []
+    beads: [think-3iqa]
+    answer_bead: think-3iqa
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1063#issuecomment-7061322081
+      date: '2026-11-21'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      The downloaded attachment has 13 input and candidate pairs. An exact arithmetic
+      comparison confirms all candidate sides are smaller than their supplied inputs
+      and all 13 upward ceilings at 12 places agree. Credit, feasibility and relation
+      to the public witnesses need per-case review. Source SHA-256 872959c5a48a2fa785184030aefaa975c0b3fad2a5632c17db5f012e42d75390.

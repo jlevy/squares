@@ -2359,6 +2359,23 @@ repositories:
       the author's audit; 67fb815 adds its registration text and checksums. think-i5en
       retains it in the de-winter-s108-lower-bound-2026-11-17 packet in its own change, which
       removes this read.
+  # Lane c15-lower of 20 November 2026 (think-fv42).
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 21d944c43098e2261ab7d713cd10f02a5eb13f3d
+    read_on: '2026-11-20'
+    bead: think-fv42
+    note: >-
+      Read through 21d944c (18:44:48Z on 19 November), the head at 16:57Z and 17:12Z on 20
+      November, one commit past 7232328, whose ten commits since d02237a the imports of
+      jlevy/squares#1012, #1021, #1022 and #1031 read. 21d944c, "Add lower bounds for 48
+      counts between 50 and 218", adds lower_bounds_2026_11_19/ and two lines of the root
+      README: #1042's 48 bounds and its 161 follow-up under followup/, the 34 certificates
+      of #1041's attachment at the folder's top level, and #1039's attachment,
+      lower-bounds-56.zip, byte for byte at followup/mass_reserve/. The
+      de-winter-lower-bounds-2026-11-19 packet pins it and retains the folder's text, its
+      measures and receipts pinned by digest. The folder's 67 corner bounds, 16 edge-strip
+      refinements and upper-bound refinements are claimed by no issue; the 155-count archive
+      of #1042's comment 7022143149 replays against this folder and is think-4iec's.
   # Lane L187 of 16 November 2026 (think-0y9m).
   - url: https://github.com/JonathanGun/square-packing-upper-bounds
     read_through: 0aac839e551fd8cb7d7717c20494b095429131a1
@@ -2402,3 +2419,47 @@ repositories:
       the submission note's prose and the indexes' times and credits; b9b7fa7 is on no branch
       now. The mishapolk-issue1009-2026-11-16 packet pins b637e6c and retains the certificates,
       the witnesses and the verifiers. Nothing more to import.
+  - url: https://github.com/JoostdeWinter/joostdewinter.github.io
+    read_through: 26ab850fa9c9b0791b9830629bcc7f5443b4827a
+    read_on: '2026-11-21'
+    note: >-
+      The current website head and the 35c2d9c head read on 4 November have the same
+      Git tree, 02fd5e82fa53321af3ff397280c1af1e51beb634. The heads have different
+      histories and identical files. The earlier read still describes the site.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 3a5130340b0882e72e9d04ad2419b0437cae99aa
+    read_on: '2026-11-21'
+    bead: think-6ul3
+    note: >-
+      Five commits after the 7232328 read cover three intake paths. 21d944c reports 48
+      lower bounds and 20b6f0e supplies the original #1039 and #1041 attachments
+      (think-fv42). db8efcb supplies the #1052 packing at 305 and 5282edd adds its
+      registration and checksums (think-kzwl). 3a51303 adds the #1055 lower bound at
+      20 and its replay packet (think-6ul3).
+  - url: https://github.com/Samanyu-dev/squares_in_squares
+    read_through: 5e56c3cb8bd4de7fd22293f1c67d3403de657244
+    read_on: '2026-11-21'
+    note: >-
+      Eight commits after retained pin 53551d77513a9f5c180a731f291baf7eda7c3009.
+      README reports aggregate Kaggle scores 22.1349658847 submitted and 22.1337706316
+      locally certified across n=1..1000, not individual square-packing bounds.
+      The changes add research and larger-core plans, candidate structures and search
+      code. All committed coordinate banks remain unchanged, including the n109 rows;
+      neither newly claimed score has a corresponding updated bank in this tree.
+      No new certificate or per-count result to import.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc
+    read_on: '2026-11-21'
+    bead: think-p02d
+    note: >-
+      Read dad9c3fd (07:05:00Z on 21 November), one commit after 3a51303. Only
+      attachments/README.md, attachments/SHA256SUMS and ten new ZIP mirrors change. The new
+      n90-rational.zip belongs to #997 (think-zsei); n305-review-evidence.zip to #1052's
+      additional claims (think-rbyl); and n20-proof-499755.zip to #1055's stronger bound and
+      restricted claims (think-guls), with its original 4.95 proof still on think-6ul3. The
+      other seven ZIPs mirror A/B/C/D of #1060 (think-uz7g), algebraic-12.zip of #1061
+      (think-l9fk), n232-rational.zip of #1062 (think-eumc), and rational-enclosures.zip of
+      #1063 (think-3iqa); their declared SHA-256 values match the already recorded attachment
+      hashes. No ZIP was downloaded or executed for this watch read. The earlier #1039/#1041
+      ZIPs are unchanged. This adds source mirrors, not another independent result report; the
+      intake epic owns the mirror-retention follow-up across those issue beads.

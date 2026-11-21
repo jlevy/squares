@@ -227,8 +227,9 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: certificate (T-284), T-282's packing with one L step, 2.88e-3 below T-193's side there.
 #: The pass of 18 November 2026 took 292, one of the nine waiting for think-8ido's
 #: correction, to Mykhailo Polkovskyi's issue-1009 certificate (T-323), 1.36e-3 below
-#: T-146 and below T-193's side there.
-OVERTAKEN = {175: "T-267", 199: "T-284", 204: "T-306", 232: "T-307", 292: "T-323"}
+#: T-146 and below T-193's side there, and the pass of 21 November took 199 on to Joost de
+#: Winter's re-solve of T-284's core (T-285), a new result under option D (think-b0w5).
+OVERTAKEN = {175: "T-267", 199: "T-285", 204: "T-306", 232: "T-307", 292: "T-323"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -307,7 +308,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # JoeGun's issue-1001 certificates (T-305, T-309) in the pass of 16 November, below
     # T-174's sides there. 23 since the pass of 18 November moved 210 and 272 to Mykhailo
     # Polkovskyi's issue-1009 certificates (T-317, T-322), below T-174's sides there, and
-    # 292, staged for T-193, to his T-323 (`OVERTAKEN`).
+    # 292, staged for T-193, to his T-323 (`OVERTAKEN`). The pass of 21 November moved 172
+    # on from T-282 to Joost de Winter's re-solve of it (T-286), which leaves the count
+    # unchanged, as does lane i1038's move of 228 to Doğa Özden's issue-1038 certificate
+    # (T-334) in the same pass.
     assert len(held_counts) == 23
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -315,8 +319,17 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # 268, which T-240 took from the hold, was staged again and adopted for T-242
     # (`ADOPTED_NEXT_DAY`), so it is on neither side. A staged count a smaller house took
     # (`OVERTAKEN`) leaves the hold too.
+    # T-335's n109 intake is outside the historical lifted-hold adoption cohort.
+    assert 109 not in previous
+    assert 109 not in held_counts
+    # T-336's n305 refinement is staged after n305 already adopted T-309.
+    # It is outside the lifted hold's remaining adoption cohort.
+    assert 305 in previous
+    assert 305 not in held_counts
+    assert (houses.ADOPTED[305], houses.adopted_on(305)) == ("T-309", "2026-11-16")
+    staged_from_hold = set(select.PENDING_ADOPTION) - {305}
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
-        set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
+        staged_from_hold | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
@@ -326,14 +339,14 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         130: "T-259",
         132: "T-292",
         155: "T-197",
-        172: "T-282",
+        172: "T-286",
         179: "T-294",
         180: "T-316",
         182: "T-243",
         210: "T-317",
         268: "T-331",
         269: "T-297",
-        228: "T-301",
+        228: "T-334",
         270: "T-332",
         272: "T-322",
         297: "T-299",
@@ -1689,7 +1702,9 @@ def test_a_rational_house_staged_for_the_writer_fails_the_check(
     assert "the writer writes it, so stage it for the next pull request" in problem
 
 
-def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
+def test_the_staged_adoptions_name_their_beads_and_reasons(
+    selections: dict[int, select.Selection],
+) -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
@@ -1710,6 +1725,22 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
         assert n not in defaults.PENDING_ALLOWED
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
+        if n == 305:
+            assert pending == select.Pending(
+                house="T-336", bead="think-kzwl", why=select.NEXT_PULL_REQUEST
+            )
+            selection = selections[n]
+            assert selection.house is not None
+            assert selection.house.result == "T-336"
+            assert selection.house.side < selection.case.verified == houses.side(n)
+            assert selection.case.source_key == "[JoeGun upper bounds 2026-11-16]"
+            assert selection.case.evidence == (
+                "E-joegun-1001-exact-feasibility",
+                "E-joegun-1001-review-exact-feasibility",
+            )
+            assert (houses.ADOPTED[n], houses.adopted_on(n)) == ("T-309", "2026-11-16")
+            assert n not in defaults.PENDING_ALLOWED
+            continue
         algebraic = pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
@@ -1744,7 +1775,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     # that of 5 November 2026 took 175 off: T-267 is below it there, and the last pass of 9
     # November 2026 took 199 off: T-284 is below it there, and the pass of 18 November
     # 2026 took 292 off: T-323 is below it there (`OVERTAKEN`).
-    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 301]
+    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 301, 305]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
@@ -1834,9 +1865,12 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # issue 1009 and first adopted 262 (T-314 to T-326) in the pass of 18 November, and lane
     # c1-127 127 on from T-305 to Joost de Winter's certificate of issue 1020 (T-330) in the
     # pass of 20 November. Lane c2-imports moved 268, 270 and 299 on to his certificates of
-    # issues 1021, 1022 and 1031 (T-331 to T-333) in the same pass.
+    # issues 1021, 1022 and 1031 (T-331 to T-333) in the same pass. The pass of 21 November
+    # moved 172 and 199 to Joost de Winter's re-solves of issues 946 and 939 (T-286, T-285),
+    # and lane i1038 moved 228 to Doğa Özden's certificate of issue 1038 (T-334).
     later = {
         **ALGEBRAIC_ADOPTED,
+        109: "T-335",
         105: "T-229",
         175: "T-267",
         182: "T-243",
@@ -1856,8 +1890,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         227: "T-225",
         270: "T-332",
         130: "T-259",
-        172: "T-282",
-        199: "T-284",
+        172: "T-286",
+        199: "T-285",
         232: "T-307",
         307: "T-326",
         156: "T-315",
@@ -1868,7 +1902,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         157: "T-293",
         237: "T-295",
         297: "T-299",
-        228: "T-301",
+        228: "T-334",
         90: "T-304",
         127: "T-330",
         264: "T-308",
@@ -1923,8 +1957,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     }
     # 199 was first adopted on 9 November 2026 (T-284), 157 on 11 November 2026 (T-293) and
     # 147 and 90 on 15 November 2026 (T-302, T-303) and 262 on 18 November 2026 (T-319),
-    # after this receipt was retained.
-    for n in (90, 147, 157, 183, 199, 227, 229, 260, 262, 293, 299):
+    # after this receipt was retained, as was 109 on 21 November 2026 (T-335).
+    for n in (90, 109, 147, 157, 183, 199, 227, 229, 260, 262, 293, 299):
         del before[n]
     assert "183" not in historical["houses"]
     assert "260" not in historical["houses"]
@@ -2427,7 +2461,7 @@ def _fine_net_lower_projection(
 
 
 #: Registrations pending adoption entered at an adopted count after its last pass, keyed by
-#: the count and the result that pass adopted: the evidence id, the resource key and the
+#: the count and the result that pass adopted: the evidence ids, the resource key and the
 #: heading of the paragraph each adds. A registration writes none of the adoption writer's
 #: lanes, so it is checked exactly and projected out; once a later pass adopts at the count,
 #: the key no longer matches and that pass's replay reads the three as prior state. T-223's
@@ -2436,11 +2470,20 @@ def _fine_net_lower_projection(
 #: October 2026 (#706). A registration that states no bound is entered the same way and
 #: stays until a later pass at its count: T-246, Evan Daniel's degree-7213 minimal
 #: polynomial of the s(29) record side, an exact side, at 29 after T-195's pass.
-LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
+LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[tuple[str, ...], str, str]] = {
     (29, "T-195"): (
-        "E-n029-evand-minpoly-7213-report",
+        ("E-n029-evand-minpoly-7213-report",),
         "[Daniel exact and local reports 2026-10-12]",
         "**Exact side, 25 October 2026.**",
+    ),
+    (305, "T-309"): (
+        (
+            "E-de-winter-1052-certificate-report",
+            "E-de-winter-1052-exact-feasibility",
+            "E-de-winter-1052-review-exact-feasibility",
+        ),
+        "[de Winter n305 certificate 2026-11-20]",
+        "**Pending house adoption, 21 November 2026.**",
     ),
 }
 
@@ -2516,12 +2559,15 @@ def _later_pending_projection(
 ) -> str:
     """Check a later pending registration's three additions, then project them out.
 
-    Its evidence id and resource close their lists, and its paragraph is one paragraph of
-    the body; the record is returned without the paragraph, `held` without the two.
+    Its evidence ids and resource close their lists, and its paragraph is one paragraph
+    of the body; the record is returned without that paragraph and `held` without those
+    evidence and resource entries.
     """
     evidence, resource, heading = LATER_PENDING_REPORTS[key]
-    assert held["evidence"][-1] == evidence, f"n={key[0]}: {evidence} closes the evidence"
-    held["evidence"] = held["evidence"][:-1]
+    assert tuple(held["evidence"][-len(evidence) :]) == evidence, f"n={key[0]}: evidence tail"
+    for entry in evidence:
+        assert held["evidence"].count(entry) == 1, f"n={key[0]}: {entry} cited once"
+    held["evidence"] = held["evidence"][: -len(evidence)]
     assert held["resources"][-1]["key"] == resource, f"n={key[0]}: {resource} closes them"
     held["resources"] = held["resources"][:-1]
     _, front, body = committed.split("---\n", 2)
@@ -3201,6 +3247,12 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
         "and its drawing stayed as they were." in body204
     )
     assert "Until separate Stage 4 review and adoption" not in body204
+    body109 = _flat(select.case_path(109).read_text(encoding="utf-8"))
+    assert "**Earlier staging, 21 November 2026.**" in body109
+    assert (
+        "The case kept its previous house until T-335’s adoption on 21 November 2026" in body109
+    )
+    assert "The case keeps its house until the adoption" not in body109
 
 
 def test_each_count_of_one_result_states_its_own_lineage() -> None:
@@ -3308,8 +3360,8 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differed at 29 and 132, and differ at 29. Their opening, section
-    and history note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
+    """Where the replaced displays differ, the opening, section and history note use
+    the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
     #665). At 29 the catalogue print orders nothing; at 132 the reported exact side agrees
     with the verified side, but its display differs from the verified display. 308's did too
     when T-174 replaced T-141 on 17 October 2026, and 260's when T-196 replaced the
@@ -3326,7 +3378,8 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     7 + 4*sqrt(2) and T-155's verified ceiling differ, with T-302, so 147 joined it. The pass
     of 18 November 2026 replays 147 from T-302's record, whose two lanes agree, and replaced
     the catalogue's packing at 262, whose reported print of 16 + sqrt(2)/2 and the verified
-    ceiling of T-101 and T-155 differ, with T-319, so 262 joins 29."""
+    ceiling of T-101 and T-155 differ, with T-319, so 262 joins 29. The same distinction
+    applies at 109, where T-335 moved the house on 21 November 2026."""
     differing = {
         29: (
             Fraction(
@@ -3340,6 +3393,14 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
                 "is a print `9.19e-15` below the new side, within one unit of its last place, "
                 "so it does not order them"
             ),
+        ),
+        109: (
+            Fraction("5474873734152916335457704004709/500000000000000000000000000000"),
+            "10.94974746830583",
+            "10.94974746830584",
+            "T-101, T-155",
+            "[Kingbird]",
+            "lies `4.58e-04` above the new side",
         ),
         262: (
             Fraction("16707106781186547524567915429917/1000000000000000000000000000000"),

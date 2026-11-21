@@ -1,0 +1,46 @@
+{
+  "n": 58,
+  "source_file": "c358ddc4ba2b11433755_measure.json.gz",
+  "source_origin": "inputs/first/lower/n58/measure.json.gz",
+  "protected": [
+    {
+      "label": "SquareMath reported_lower_bound",
+      "kind": "rational",
+      "value": "1587/200",
+      "source": "https://squaremath.org/cases/58.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "SquareMath verified_lower_bound",
+      "kind": "rational",
+      "value": "1587/200",
+      "source": "https://squaremath.org/cases/58.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "Prior comparison enclosure",
+      "kind": "rational",
+      "value": "371503083274595848421199353755992087797480791/46808935345311305692896358335066675694322353",
+      "source": "lower-bounds-56.zip, attribution/strongest_prior_lower.json"
+    },
+    {
+      "label": "Earlier search exact lower bound",
+      "kind": "rational",
+      "value": "371503083274595848421199353755992087797480791/46808935345311305692896358335066675694322353",
+      "source": "lower/n58"
+    },
+    {
+      "label": "Earlier four-hour search",
+      "kind": "rational",
+      "value": "371503083274595848421199353755992087797480791/46808935345311305692896358335066675694322353",
+      "source": "squaremath_four_hour_20261118.zip, lower/n58"
+    },
+    {
+      "label": "Hosono original formula, all 34 families",
+      "value": "39/5",
+      "kind": "rational",
+      "source": "https://squaremath.org/result/t-180.html",
+      "detail": "Upper endpoint of the original formula with outward 19-place square-root arithmetic"
+    }
+  ]
+}

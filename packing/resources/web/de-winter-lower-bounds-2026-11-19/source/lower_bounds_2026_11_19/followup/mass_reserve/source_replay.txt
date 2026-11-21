@@ -1,0 +1,5 @@
+PASS. 631 source files match Git commit e94e6ce65a887f80dd4821454df53c0c18a4ba97.
+PASS. All 56 bounds recomputed, including 49 direct bounds and 7 consequences of monotonicity.
+82 squares: reproduced all 1830 rectangle-orbit weights and positions.
+112 squares: reproduced all 872 rectangle-orbit weights and positions.
+PASS. All submission checks completed.

@@ -92,6 +92,35 @@ measurement for credit; it decides nothing.
 - **229** ([measure/identity-n229.json](measure/identity-n229.json)): against T-225, one to one by nearest centres (symmetry 0), 0 squares beyond 1e-3 and 0 beyond 1e-9, the largest move 0.000000e+6 and turn 0 degrees. Tilted beyond 1 degree: #846 60, T-225 60.
 - **308** ([measure/identity-n308.json](measure/identity-n308.json)): against T-221, one to one by nearest centres (symmetry 0), 0 squares beyond 1e-3 and 0 beyond 1e-9, the largest move 0.000000e+6 and turn 0 degrees. Tilted beyond 1 degree: #846 102, T-221 102.
 
+## Padding (Option D)
+
+The owner answered on 17 November 2026 (think-b0w5, option D) the question the review of
+31 October left open at five of this issue’s counts (think-ikku’s RV-1, think-ruu2’s
+RV-3): a re-certification of a standing packing is a new result only if its side is below
+its predecessor’s once the predecessor is shrunk until its squares first touch
+(`devtools.contraction_margin`). Lane w7-optd-1118 (think-8yyy) measured the issue’s
+certificate at 105, 146, 156, 229 and 308 against the house certificate it re-certifies,
+on 18 November 2026, both maintained routes deciding each house certificate and its
+contraction. At each the gain is under 1% of the house certificate’s own margin, so each is
+a restatement of the house, credited to its finder, and T-260 records them so
+(`restatements`); 130, T-259, is not one of them (think-7k8p):
+
+| n | House | Its margin | Binding pair | Gain | Share | Receipt |
+| ---: | --- | ---: | --- | ---: | ---: | --- |
+| 105 | T-229 | 1.078930e-19 | 71 and 86 | 1.000000e-21 | 0.0093 | [contraction-n105.json](measure/contraction-n105.json) |
+| 146 | T-187 | 1.258378e-19 | 17 and 125 | 1.000000e-21 | 0.0079 | [contraction-n146.json](measure/contraction-n146.json) |
+| 156 | T-186 | 1.297917e-39 | 147 and 150 | 1.000000e-41 | 0.0077 | [contraction-n156.json](measure/contraction-n156.json) |
+| 229 | T-225 | 1.565016e-19 | 115 and 154 | 1.000000e-21 | 0.0064 | [contraction-n229.json](measure/contraction-n229.json) |
+| 308 | T-221 | 1.799715e-19 | 114 and 119 | 1.000000e-21 | 0.0056 | [contraction-n308.json](measure/contraction-n308.json) |
+
+From `packing/`, for each count and its house’s packet:
+
+```bash
+python -m devtools.contraction_margin --n 105 'T-229=packet:mishapolk-issue719-2026-10-22' \
+  --against 'T-260=packet:mishapolk-issue846-2026-10-30' \
+  --out resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n105.json
+```
+
 ## Exact Replay
 
 `devtools.upper_bound_reports certify` decided every certificate of the packet and its

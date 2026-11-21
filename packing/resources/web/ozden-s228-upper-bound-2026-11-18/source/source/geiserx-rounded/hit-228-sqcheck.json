@@ -1,0 +1,1 @@
+{"file": "results/public228/geiser/hit-228-exact.json", "n": 228, "mode": "exact-rational", "side": 15.5960431169528, "min_wall_margin": 0.0, "min_pair_margin": 2.1989873040660532e-11, "verdict": "VALID", "certified_side": 15.5960431169528, "certified_side_exact": "19495053896191/1250000000000"}

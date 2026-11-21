@@ -394,6 +394,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s228-upper-bound-1559604311",
+        "Doğa Özden",
+        (
+            "An exact certificate of the public Kaggle packing jazivxt published at 228,"
+            " measured one to one with T-301 and 4.29e-9 below it (T-334)."
+        ),
+    ),
+    (
         "https://github.com/RobertoOno/squares-in-square",
         "Roberto Ono",
         (
@@ -442,6 +450,16 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Improved packings for n = 103, 105 and other cases.",
     ),
     (
+        "https://github.com/Samanyu-dev/squares_in_squares",
+        "Samanyu-dev",
+        (
+            "Public numerical centres and radian angles for a 109-square pinwheel. "
+            "A rational derivation is verified here as T-335; its [retained packet]"
+            "(https://github.com/jlevy/squares/blob/main/packing/resources/web/"
+            "samanyu-n109-2026-11-07/README.md) records the source and exact checks."
+        ),
+    ),
+    (
         "https://github.com/JoostdeWinter/square-packing-211",
         "Joost de Winter",
         "A packing of 211 squares in a square of side under 15.",
@@ -467,7 +485,9 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "(T-311), and one band at 262 and 295, 7.41e-3 and 4.54e-3 below their houses "
             "(T-312, T-313), are replayed here. Three successive certificates at 127 of a "
             "band from an arrangement in Kaggle compilations, the lowest 9.60e-4 below "
-            "T-305 (T-328 to T-330), are replayed here."
+            "T-305 (T-328 to T-330), are replayed here. The refinement at 305 of "
+            "Kodaj and JoeGun\u2019s arrangement is replayed and reviewed as T-336; "
+            "its house adoption is pending."
         ),
     ),
     (

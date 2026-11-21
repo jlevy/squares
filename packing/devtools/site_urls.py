@@ -40,15 +40,15 @@ HARD_HTML_LIMIT = 2_000_000
 # Measured exceptions retain the global two-megabyte ceiling.
 PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
     "synopsis/the-program-at-a-glance.html": (
-        650_000,
+        750_000,
         (
-            "Main measures 599,314 bytes (hosted run 42692448089) and hosted run "
-            "42715322236 600,604 bytes on 9 November 2026, past the page budget of "
-            "600,000, once the results table lists T-284 and the document table #938's "
-            "ledger, review and regularization runs: 1,290 bytes in four rows, about 320 "
-            "bytes a row. The ceiling moves to 650,000 as a measured choice, room for "
-            "about 150 more such rows, or about 38 single-result intakes. Its timing was "
-            "not re-measured. How the page scales is think-3d9e."
+            "Main measures 649,931 bytes on 20 November 2026 (hosted run 44800220668), "
+            "69 under the earlier ceiling of 650,000, and the s(18) review's two rows "
+            "measure 652,743 (hosted run 44802841166): 2,812 bytes for one review, "
+            "since a review's SYNOPSIS row is longer than a result row. The ceiling "
+            "moves to 750,000 as a measured choice, room for about 35 more reviews of "
+            "that size or about 300 result rows, well inside the hard limit. Its timing "
+            "was not re-measured. How the page scales is think-3d9e."
         ),
     ),
     "index.html": (
@@ -332,7 +332,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-180.html": (
-        550_000,
+        575_000,
         (
             "The closed form's result, its scope of 264 counts and prepared math measure "
             "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
@@ -356,7 +356,12 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "44221820600), and 531,877 once T-314 to T-326 (#1009) are listed at their "
             "thirteen counts (run 44221608402), about 1.35 KB a result, past 525,000, so "
             "the ceiling moves to 550,000 as a measured choice, room for about 13 more "
-            "listed results; the timing is still think-v4me's."
+            "listed results; the timing is still think-v4me's. Hosted run 44908838826, "
+            "overview job 136860280935, measures 550,770 bytes on 21 November 2026 after "
+            "T-336 is listed at 305, 770 bytes above the 550,000 ceiling. This path alone "
+            "moves to 575,000 as a measured choice, leaving 24,230 bytes of room while "
+            "preserving the complete result chain. This is a byte measurement only; "
+            "the timing remains owed under think-v4me."
         ),
     ),
     "result/t-068.html": (

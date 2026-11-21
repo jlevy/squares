@@ -239,6 +239,16 @@ REVIEW_1009 = (
     "count, stated beforehand as rules, were each decided as stated"
 )
 
+#: What the stage 4 review of issue 1038 (lane r1038, think-3ape) decided on its certificate,
+#: the clause the case record writes after the maintained routes.
+REVIEW_1038 = (
+    ", and the 20 November review’s clean-room checker, frozen before any producer, witness "
+    "or verifier code was read, decided it again by separating axes in integers from its "
+    "centres and unit bases and by exact clipping in GMP rationals from its corners over "
+    "every square, wall and pair; its 36 controls, stated beforehand as rules, were each "
+    "decided as stated"
+)
+
 REVIEW_1020 = (
     ", and the 18 November review of record’s clean-room checker, frozen before any producer, "
     "witness or verifier code was read, decided it again by separating axes in integers from "
@@ -2271,6 +2281,84 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-285": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#939](https://github.com/jlevy/squares/issues/939)",
+        producer_route=False,
+        ai=(
+            "Issue 939 says the derivation, local optimization, high-precision solution, "
+            "rational certificate, checks and figure were produced with Claude (Anthropic) "
+            "under Joost de Winter’s direction."
+        ),
+        routes=(
+            "Both routes read the certificate through two readers written for the source’s "
+            "files and share no code with its `verify_exact.py`; the review’s checker shares "
+            "no code with either route or the source."
+        ),
+        lineage=(
+            "The certificate is Doğa Özden’s packing of issue 938 (T-284), this case’s house "
+            "best packing before this adoption, with its 172-square core, T-282’s "
+            "arrangement, re-solved to what the source calls the exact local optimum of that "
+            "arrangement, and T-284’s L of 27 squares unchanged: measured here, it is what "
+            "`devtools.construction_checker` writes for one L-border layer on its own first "
+            "172 squares, and nearest centres pair it one to one with T-284’s packing under "
+            "the identity, no square moving beyond 1e-3. T-284’s own uniform-contraction "
+            "margin is 0, since its grid squares touch, but its base, T-282’s certificate, "
+            "contracts by $2.53 \\times 10^{-12}$; this certificate’s gain is 1.0399 times "
+            "that, $1.01 \\times 10^{-13}$ below T-284’s base shrunk until its squares first "
+            "touch with the L written on it, so under the owner’s option D of 17 November "
+            "2026 it is a new result, not a restatement of the padding. So Evan Daniel keeps "
+            "the packing, as Doğa Özden improved and extended it, and Joost de Winter is "
+            "credited with the re-solve."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "repository verifier code was read, decided it again by separating axes in "
+            "rationals and by exact clipped areas in GMP rationals over every square, wall and "
+            "pair, from both of the source’s files; its controls, stated beforehand, were "
+            "each decided as stated"
+        ),
+        diversity="by a Claude agent, the system family the issue says made the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-286": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#946](https://github.com/jlevy/squares/issues/946)",
+        producer_route=False,
+        ai=(
+            "Issue 946 says the local optimization, high-precision solution, rational "
+            "certificate, checking and figure were produced with Claude (Anthropic) under "
+            "Joost de Winter’s direction."
+        ),
+        routes=(
+            "Both routes read the certificate through two readers written for the source’s "
+            "files and share no code with its `verify_exact.py`; the review’s checker shares "
+            "no code with either route or the source."
+        ),
+        lineage=(
+            "The certificate is Doğa Özden’s packing of issue 935 (T-282), this case’s house "
+            "best packing before this adoption, re-solved to what the source calls the exact "
+            "local optimum of its arrangement, the core of issue 939’s certificate at 199 "
+            "with less padding: nearest centres pair it one to one with T-282’s packing "
+            "under the identity, no square moving beyond 1e-3. Its gain is 1.0399 times "
+            "T-282’s own uniform-contraction margin of $2.53 \\times 10^{-12}$, $1.01 \\times "
+            "10^{-13}$ below T-282 shrunk until its squares first touch, so under the owner’s "
+            "option D of 17 November 2026 it is a new result, not a restatement of the "
+            "padding. Evan Daniel’s regularizer reached the same point from T-282’s witness "
+            "on 9 November, which the record held unregistered. So Evan Daniel keeps the "
+            "packing, as Doğa Özden improved it, and Joost de Winter is credited with the "
+            "re-solve, as the issue asks."
+        ),
+        third_route=(
+            ", and the 11 November review’s clean-room checker, frozen before any producer or "
+            "repository verifier code was read, decided it again by separating axes in "
+            "rationals and by exact clipped areas in GMP rationals over every square, wall and "
+            "pair, from both of the source’s files; its controls, stated beforehand, were "
+            "each decided as stated but one it mis-stated for this certificate and reports"
+        ),
+        diversity="by a Claude agent, the system family the issue says made the certificate",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-287": Prose(
         author="Doğa Özden",
         reported="on [jlevy/squares#943](https://github.com/jlevy/squares/issues/943)",
@@ -3057,6 +3145,67 @@ RESULTS: dict[str, Prose] = {
         ),
         third_route=REVIEW_1009,
     ),
+    "T-334": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#1038](https://github.com/jlevy/squares/issues/1038)",
+        producer_route=True,
+        ai=(
+            "Issue 1038 says Doğa Özden’s lab converted and checked the packing with OpenAI "
+            "Codex, that the Kaggle notebook it comes from credits ChatGPT and Codex, and that "
+            "his AI agent, which uses the account kenaznia-doga, prepared and posted the issue "
+            "and the repository on his behalf."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, so on that route the replay is reproduced with the "
+            "producer’s code; the independent rational corner checker shares no verification "
+            "code with it, and the review’s checker shares no code with either route or the "
+            "source."
+        ),
+        lineage=(
+            "Issue 1038 names jazivxt’s Kaggle notebook Boxed In Sub as the public source. "
+            "The Boxed In v63 compilation lists no finder at 228. Doğa Özden’s lab "
+            "converted the coordinates to exact rationals and applied a uniform clearance "
+            "factor 4.56 × 10⁻¹⁵ above one. Nearest centres pair the certificate one to "
+            "one with Roberto Ono’s T-301. The optimal assignment moves five squares "
+            "more than a tenth, at most 0.238. The gain is 1.2298 times T-301’s "
+            "contraction margin, so the bound is a new result under Option D. The "
+            "records leave the finder, publication order and any derivation between "
+            "the two public packings unresolved. Özden authors the exact certificate."
+        ),
+        third_route=REVIEW_1038,
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
+    "T-335": Prose(
+        author="Samanyu-dev",
+        reported=(
+            "in the [public Kaggle submission]"
+            "(https://github.com/Samanyu-dev/squares_in_squares/blob/"
+            "53551d77513a9f5c180a731f291baf7eda7c3009/best_fit_101_500.csv)"
+        ),
+        producer_route=False,
+        ai="",
+        routes=(
+            "The source publishes numerical rows. This repository’s rational derivation "
+            "and maintained exact checks are separate from that source; the independent "
+            "corners run is bound to the same canonical fact."
+        ),
+        lineage=(
+            "The source gives binary64 centres and radian angles. This repository derives "
+            "rational rotations by outward interval arithmetic, translates the minimum "
+            "corner coordinates to zero and takes the exact larger span of the original "
+            "poses. The owner credits Samanyu-dev as finder. De Winter’s later "
+            "certificate from Kodaj’s rows remains a separate unregistered Option D "
+            "restatement, with source credit de Winter after Kodaj, Samanyu-dev."
+        ),
+        third_route=(
+            ", and a separate run of the review’s independently implemented corners checker "
+            "accepted the exact corners copy of this canonical fact, all 109 squares and "
+            "5,886 pairs, with its own fact digest and receipt"
+        ),
+        retained="the derived rational fact",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-315": Prose(
         author="Mykhailo Polkovskyi",
         reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
@@ -3729,6 +3878,8 @@ CREDITS: dict[int, Credit] = {
         (COUZO, PINGYOU),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
     ),
+    # T-335 imports Samanyu-dev's numerical original through its canonical rational fact.
+    109: Credit(("Samanyu-dev",), (), "Samanyu-dev’s public 109-square pinwheel"),
     # T-174's regularization of T-098's packing, 5 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     110: Credit(
@@ -3877,11 +4028,14 @@ CREDITS: dict[int, Credit] = {
     # packing: 15 squares beyond a tenth under the identity assignment, not one to one by
     # nearest centres only through one shared centre in a block near 45 degrees (the 9
     # November review of issues 935 and 936, F6).
+    # The pass of 21 November 2026 (think-8yyy): Joost de Winter's issue 946 (T-286), T-282's
+    # packing re-solved, a new result under the owner's option D (think-b0w5).
     172: Credit(
         (DANIEL,),
-        (OZDEN,),
-        "Doğa Özden’s further arrangement of Evan Daniel’s packing from an L-cut of the "
-        "n = 199 record, Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
+        (OZDEN, DE_WINTER),
+        "Joost de Winter’s re-solve of Doğa Özden’s further arrangement of Evan Daniel’s "
+        "packing from an L-cut of the n = 199 record, Nate Chaoweeraprasit’s SQUISH packing "
+        "as Siddharth Gupta refined it",
     ),
     # T-267 (adopted on 5 November 2026), Evan Daniel's new packing of issue 914, built by his
     # fault-line composer, his implementation of Chris Deotte's multi-gadget fault DP, from
@@ -3960,12 +4114,15 @@ CREDITS: dict[int, Credit] = {
     # whose improver is Özden; the 172 line started from this count's former house, T-127's
     # packing, by an L-cut (issue 845), against which this is a new arrangement, 81 squares
     # beyond a tenth (the 9 November review of issue 938, F10 and F13).
+    # The pass of 21 November 2026 (think-8yyy): Joost de Winter's issue 939 (T-285), T-284's
+    # packing with its 172-square core re-solved, a new result under option D (think-b0w5).
     199: Credit(
         (DANIEL,),
-        (OZDEN,),
-        "Doğa Özden’s 172-square packing plus an L of 27, its 172 squares his further "
-        "arrangement of Evan Daniel’s packing from an L-cut of this count’s former record, "
-        "Nate Chaoweeraprasit’s SQUISH packing as Siddharth Gupta refined it",
+        (OZDEN, DE_WINTER),
+        "Joost de Winter’s re-solve of the core of Doğa Özden’s 172-square packing plus an "
+        "L of 27, its 172 squares Özden’s further arrangement of Evan Daniel’s packing from "
+        "an L-cut of this count’s former record, Nate Chaoweeraprasit’s SQUISH packing as "
+        "Siddharth Gupta refined it",
         construction="extension",
     ),
     # T-306 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 204, a new
@@ -4055,11 +4212,11 @@ CREDITS: dict[int, Credit] = {
     # 96 squares beyond a tenth. The issue asks that Couzo's packing be credited as the start,
     # so the phrase names it, as the 156 and 268 phrases name the packings their strip cuts
     # were taken from, and names the packing it is below, as the 179 and 269 phrases do.
+    # The pass of 21 November 2026 adopted T-334 from issue 1038 (think-91fu). The
+    # case names jazivxt's public snapshot and Özden's certificate. Finder and priority
+    # need evidence beyond the measured assignment to T-301.
     228: Credit(
-        (ONO,),
-        (),
-        "Roberto Ono’s packing from a band cut of Francisco Couzo’s n = 404 packing, below "
-        "Doğa Özden’s column-band packing",
+        (), (), "the packing in jazivxt’s public Kaggle submission as Doğa Özden certified it"
     ),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of his own
     # issue-674 packing (T-199), polished to its exact side 1.91e-11 below #674's
@@ -5801,6 +5958,29 @@ def _retained_672(text: str) -> str:
     )
 
 
+def _n109_history(text: str, until: str) -> str:
+    """Date the prior ceiling and the canonical intake's staging after the house moves."""
+    text = re.sub(
+        r"\bit\s+proves(?=\s+\$s\(109\)\s+\\le\s+10\.949747468305)",
+        "the earlier bound was",
+        text,
+    )
+    text = re.sub(
+        _spaced("**Staged house adoption, 21 November 2026.**"),
+        "**Earlier staging, 21 November 2026.**",
+        text,
+    )
+    return re.sub(
+        _spaced(
+            "The case keeps its house until the adoption, staged under think-wvr8, "
+            "moves it to T-335’s side after both required strong generator runs."
+        ),
+        f"The case kept its previous house until T-335’s adoption on {until}. "
+        "The staging note required both strong generator runs in the adoption change.",
+        text,
+    )
+
+
 def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
@@ -5848,6 +6028,8 @@ def historical(move: Move, text: str) -> str:
     text = _regularized_certificate(move, text)
     if n == 29:
         text = _n29_history(text)
+    if n == 109:
+        text = _n109_history(text, until)
     text = held_history(text)
     text = pending_history(text, until)
     if houses.adopted_on(n) >= RETAINED_672_FROM:

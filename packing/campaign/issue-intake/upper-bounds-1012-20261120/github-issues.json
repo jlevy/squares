@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#1012 update","kind":"comment","number":1012,"comment_id":6972165182,"url":"https://github.com/jlevy/squares/issues/1012#issuecomment-6972165182","author":"JoostdeWinter","created_at":"2026-11-18T07:33:46Z","issue_state":"open","issue_closed_at":null,"issue_title":"Public Kaggle packings below the register for n = 109 and n = 270: pointer"}]
+}

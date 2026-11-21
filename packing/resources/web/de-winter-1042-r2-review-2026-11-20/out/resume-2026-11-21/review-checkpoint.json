@@ -12,8 +12,8 @@
   },
   "c2": {
     "status": "passed",
-    "evidence": "checkpoint/c2-confirmed/c2.json",
-    "prior_receipt": "checkpoint/c2-run/c2.json (byte-identical report; timeout had been inside the guarded tree)",
+    "evidence": "packing/resources/web/de-winter-1042-r2-review-2026-11-20/out/resume-2026-11-21/c2-confirmed/c2.json",
+    "prior_receipt": "First scratch run: byte-identical to c2.evidence (SHA-256 dcf90c4b9b5d1fa53d05ccd469c9350de33f443a211f81701ec29f2f761c371d); timeout was inside the guarded tree. No separate first-run receipt is committed.",
     "matches": "D1, D3, D8, and the corner weight, placement and arithmetic checks in D7",
     "claim_masses": [
       {

@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this code, these layouts or these ideas, please cite them as below and keep the NOTICE file. Author on Kaggle: https://www.kaggle.com/sergiofernndezrubio"
+title: "Squares in Squares: code, layouts and notes for the Kaggle competition"
+authors:
+  - family-names: "Fernández Rubio"
+    given-names: "Sergio"
+    alias: "GeiserX"
+repository-code: "https://github.com/GeiserX/squares-in-squares"
+url: "https://github.com/GeiserX/squares-in-squares"
+identifiers:
+  - type: url
+    value: "https://www.kaggle.com/sergiofernndezrubio"
+    description: "The author's Kaggle profile (sergiofernndezrubio)"
+license: [Apache-2.0, CC-BY-4.0]
+date-released: "2026-11-18"
+type: software
+keywords:
+  - kaggle
+  - square packing
+  - squares in squares
+preferred-citation:
+  type: software
+  title: "Squares in Squares: code, layouts and notes for the Kaggle competition"
+  authors:
+    - family-names: "Fernández Rubio"
+      given-names: "Sergio"
+      alias: "GeiserX"
+  repository-code: "https://github.com/GeiserX/squares-in-squares"
+  url: "https://github.com/GeiserX/squares-in-squares"
+  license: [Apache-2.0, CC-BY-4.0]
+  year: 2026
+  date-released: "2026-11-18"

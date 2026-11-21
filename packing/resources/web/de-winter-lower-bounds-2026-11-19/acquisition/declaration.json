@@ -1,0 +1,53 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "de-winter-lower-bounds-2026-11-19",
+  "source_url": "https://github.com/JoostdeWinter/square-packing",
+  "source_ref": "main",
+  "source_commit": "21d944c43098e2261ab7d713cd10f02a5eb13f3d",
+  "retrieved_at_utc": "2026-11-20T16:57Z",
+  "git_scope": "A partial clone of JoostdeWinter/square-packing, a watched repository, fetched at 16:57Z on 20 November 2026 for the intake of jlevy/squares#1039, #1041 and #1042 (lane c15-lower, bead think-fv42), when git ls-remote read main's head as 21d944c, the pin, and again at 17:12Z. 21d944c (committed 2026-11-19T18:44:48Z, 'Add lower bounds for 48 counts between 50 and 218', the author's message) is the commit #1042 (18:45:38Z) names, 50 seconds before it, and one commit past 7232328. It adds the folder lower_bounds_2026_11_19/ (962 files) and two lines of the root README. The folder holds three reports' material: at its top level the packet #1041 attached as squaremath_continued_20261119.zip (34 direct certificates in proof/, lower_bounds.csv, the integer checker, the source measures, and the unclaimed corners/, upper/ and constructions/), whose attachment the session proxy refused, so its digest d8d0d696... is not compared here; in followup/ the 48 bounds #1042 claims (best_by_count.csv, lower/, repeated/, envelopes/, corner_trim/, mix/, search/) and the unclaimed edge-strip and upper-bound refinements; and at followup/mass_reserve/lower-bounds-56.zip the attachment of #1039, whose SHA-256 equals the 9641ca15... the issue states, byte for byte, since that attachment URL was refused too and #1039's source commit e94e6ce is not in the public repository. The scope is the licence, the root README and the whole folder. Text files are retained; gzip measures and receipts, the zip, the figures, the corner families and the upper-bound witnesses are pinned by digest only (OR-18), and later replays add what they read from this same pin. No source program ran in writing this packet.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains). The source measures are Hiroaki Hosono's, whose MIT notice the folder carries in notices/HOSONO_LICENSE.txt, and notices/SQUARES_PROJECT_LICENSE.txt is this repository's root LICENSE as the source copied it.",
+  "claims": [
+    "#1039 (body, 2026-11-19T04:49:37Z) claims lower bounds at 56 counts from 19 to 148, 49 direct and 7 by monotonicity, the exact values in exact_claims.csv inside followup/mass_reserve/lower-bounds-56.zip.",
+    "#1041 (body, 2026-11-19T12:05:56Z) claims 34 direct lower bounds from 50 to 137, exact rationals in lower_bounds.csv, each with proof/nNNN/ certificates decided by the integer octagon checker.",
+    "#1042 (body, 2026-11-19T18:45:38Z) claims 48 lower bounds from 50 to 218 listed in CLAIM.md and followup/best_by_count.csv: 43 standalone certificates, and 137, 138, 162 by four translated regions, 188, 189, 218 by repeated central strips and 217 by corner reweighting. Its comment of 19:59:12Z claims s(161) >= 8036307/625000 from followup/repeated/161--749858-12.858-100-uniform/proof with a four-region transfer.",
+    "Not claimed by any of the three: the 67 corner bounds in corners/, the 16 edge-strip refinements in followup/mass_reserve/, and the packings in upper/ and followup/upper/."
+  ],
+  "scope": [
+    "LICENSE",
+    "README.md",
+    "lower_bounds_2026_11_19"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains.",
+      "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+    },
+    {
+      "match": "lower_bounds_2026_11_19/followup/mass_reserve/lower-bounds-56.zip",
+      "reason": "The attachment of #1039 (16,227,097 bytes), SHA-256 9641ca15ac63213db22ad32854efb0bc0575d7c0beeb646fd6931f50ae183452 as the issue states; pinned by digest only (OR-18), its claims transcribed in campaign/issue-intake/lower-bounds-de-winter-20261120/claims.yaml."
+    },
+    {
+      "match": "lower_bounds_2026_11_19/upper/**",
+      "reason": "Upper-bound precision refinements, which no issue of this intake claims; pinned by digest only."
+    },
+    {
+      "match": "lower_bounds_2026_11_19/followup/upper/**",
+      "reason": "Upper-bound precision refinements, which no issue of this intake claims; pinned by digest only."
+    },
+    {
+      "match": "lower_bounds_2026_11_19/corners/families/**",
+      "reason": "The 67 corner families, which no issue of this intake claims (they inherit T-180's global coverage); pinned by digest only."
+    },
+    {
+      "match": "lower_bounds_2026_11_19/**/*.png",
+      "reason": "Figures; pinned by digest only."
+    },
+    {
+      "match": "lower_bounds_2026_11_19/**/*.gz",
+      "reason": "Gzip measures and per-direction receipts (OR-18: about 24 MB together); pinned by digest only until a replay retains the ones it reads."
+    }
+  ]
+}

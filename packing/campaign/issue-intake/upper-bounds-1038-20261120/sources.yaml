@@ -1,0 +1,68 @@
+# What `python -m devtools.intake_ledger gather` reads: the one upper bound at n <= 324 that lane i1038 of the
+# intake pass of 20 November 2026 takes in (think-91fu): Doğa Özden's #1038 at 228 (2026-11-18T23:09:08Z), posted
+# on his behalf by his AI agent, which uses the account kenaznia-doga, 23 seconds after 46ab8bf (23:08:45Z), the
+# commit it names and the only commit of kenaznia-doga/s228-upper-bound-1559604311, which first committed the
+# certificate. GitHub's activity log was not read, so no push time is recorded; no other report reached 228 between
+# the commit and the issue. The start is frozen at main 935e79c3 (#1035's merge): T-301 at 228 in both lanes (Roberto
+# Ono's packing, five band periods cut from Francisco Couzo's 404, adopted on 15 November), with no register bound
+# pending adoption below it. The claim's exact side is its certificate's, read by the packet's claim record
+# (acquisition/claims.json), which the lane wrote from main 935e79c3; the issue prints it rounded up at 12 places,
+# and the claim record's admission holds the print to it. The side-only Kaggle leaderboard entry the issue quotes
+# first (Nevska, 8 November), 9.66e-14 below the claim, states no packing and is no report, and neither is
+# jazivxt's own decimal side, which the claim converts. The project's own run of Evan Daniel's driver on T-301's
+# witness (15 November, think-17ex) reached a packing 9.66e-14 below the claim and held it unregistered at row 3;
+# it is the project's, not a report, and is recorded in the claim's note.
+format: intake-ledger-sources-v1
+read_at_main: 935e79c36354addfc296f18e7b1c50479ffa9e5a
+read_on: '2026-11-20'
+rule: If they are reported in order, then each one should be recorded as a result, as long as each one is stronger
+  than the last. If a stronger result is reported first, then the other one should not be recorded since it is weaker
+  after that, unless there is some key reason it should be recorded.
+lanes:
+- name: i1038
+  branch: claude/intake-2026-11-20-import-1038
+  commit: 935e79c36354addfc296f18e7b1c50479ffa9e5a
+  note: The packet's claim record, written on the lane's branch from main 935e79c3 and read here by path.
+reports:
+- report: '#1038'
+  issue: 1038
+  holders: Doğa Özden
+  bead: think-91fu
+  lanes:
+  - lane: i1038
+    packet: ozden-s228-upper-bound-2026-11-18
+    record: claims.json
+    counts: [228]
+  claims:
+  - n: 228
+    measured:
+      against: T-301
+      finding: nearest centres pair it one to one with T-301's packing under the identity of the box; the optimal
+        assignment moves 86 squares beyond 1e-3, 47 beyond 1e-2 and 5 beyond 0.1 (largest 0.238073) and turns 50
+        squares by more than 1e-6 radians, by up to 1.956 degrees; aligned by box centres, 2 squares turn by more than
+        a degree and none reverses its tilt; the house witness measures as T-301; against T-300 no symmetry pairs it
+        one to one, 96 squares beyond 0.1. The geometric comparison leaves finder, order and derivation unresolved.
+      source: packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/identity.json
+    note: >-
+      The source classifies the packing neither as a refinement nor as a new arrangement: it calls it a close relative
+      of the registry arrangement and says it has no information on which came first or whether one derived from the
+      other. T-301's uniform-contraction margin at 228 is 3.4875e-09 (squares 8 and 21), and the gain, 4.2890e-09, is
+      1.2298 of it, beyond it by 8.02e-10
+      (packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228.json): under the owner's
+      option D of 17 November 2026 (think-b0w5) the claim is below its house shrunk to first contact, so it is a new
+      result. The certificate's own margin is 4.3896e-22 (squares 156 and 166; contraction-n228-own.json). The
+      project's run of Evan Daniel's driver on T-301's witness on 15 November 2026 (think-17ex) reached a local
+      minimum of the side whose solved view both maintained routes accepted, 15.596043116631669919783314273244,
+      9.66e-14 below this claim. The solved view remained unregistered at row 3 when Özden's certificate was
+      reported. The two have no retained pose comparison. Under the owner's decision of 18 November 2026
+      (think-frl5), his claim keeps its new-result status, and the held view stays a candidate for registration
+      (think-4z8z).
+  note: >-
+    #1038 names 46ab8bf, committed at 2026-11-18T23:08:45Z, 23 seconds before it, the repository's only commit and its
+    head. It says the packing is a public Kaggle packing by jazivxt (notebook Boxed In Sub, dataset Boxed In v63,
+    Apache 2.0 as declared there), converted to exact rationals under one uniform clearance factor, which it prints as 1 + 4.6e-18
+    and which is 1 + 4.56e-15 (the stage 4 review's F6),
+    that the dataset describes crowdsourced coordinates and the notebook gives no per-count credit, so the original
+    finder is unresolved, and that Özden made the certificate and the registration and claims no discovery.
+exceptions: []
+other_items: []

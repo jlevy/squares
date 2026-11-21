@@ -1,0 +1,63 @@
+{
+ "format": "contraction-margin-v1",
+ "n": 631,
+ "certificate": {
+  "label": "couzo-4e4c8ce",
+  "input": "evand-cert",
+  "path": "packing/resources/web/couzo-index-2026-10-15/source/certificates/best/n631.cert",
+  "sha256": "fb46e7a3510289360565ce301ebc43f73e3615313a14b28fcc4f459db43e94ef"
+ },
+ "side": "23291540867878412117732677332540867878412117732654041/907809688645500000000000000000000000000000000000000",
+ "lambda_star": "1000000000000000000000000/1000000000000000000000001",
+ "one_minus_lambda_star": "1.000000e-24",
+ "binding_pair": [
+  491,
+  492
+ ],
+ "contracted_side": "23291540867878412117732654041/907809688645500000000000000",
+ "margin": "23291540867878412117732654041/907809688645500000000000000000000000000000000000000",
+ "margin_float": "2.565685e-23",
+ "certificate_routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "1/2000000000000000000000000",
+   "gap": "1/1000000000000000000000000",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "1/2000000000000000000000000",
+   "gap": "1/1000000000000000000000000",
+   "failures": []
+  }
+ },
+ "routes": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "0",
+   "failures": []
+  }
+ },
+ "routes_accept": true,
+ "against": {
+  "certificate": {
+   "label": "mishapolk-719",
+   "input": "witness-center-basis",
+   "path": "packing/resources/web/mishapolk-issue719-2026-10-22/facts/n-631.yaml.gz",
+   "sha256": "b1734bc81148d16e0ab91177d326f8a5527c70a4d1521ecc507278c3343ca92a"
+  },
+  "side": "7646338417982542848/298023223876953125",
+  "gain": "247767613309331869235289612117732654041/907809688645500000000000000000000000000000000000000",
+  "gain_float": "2.729290e-13",
+  "gain_over_margin": "10637665181.3118",
+  "within_margin": false
+ },
+ "cpu_seconds": 111.54
+}

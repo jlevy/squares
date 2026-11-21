@@ -1,0 +1,32 @@
+{
+ "lane": "rR1-lower",
+ "frozen_with_the_checker": true,
+ "note": "Must-refuse controls fail on a checker that accepts everything; must-accept controls fail on one that refuses everything. Outcomes are recorded as planned or not as planned, never re-run.",
+ "controls": [
+  {"id": "P0", "checker": "rr1_premises.py", "change": "none, all 77 certificates", "expected": "PREMISES_HOLD for every certificate"},
+  {"id": "P1", "checker": "rr1_premises.py", "change": "1042/n136: row 0's mass raised so the total is n", "expected": "refused"},
+  {"id": "P2", "checker": "rr1_premises.py", "change": "1042/n136: row 0's mass negated", "expected": "refused"},
+  {"id": "P3", "checker": "rr1_premises.py", "change": "1042/n136: the middle listed bin of the finest level deleted", "expected": "refused (coverage gap)"},
+  {"id": "P4", "checker": "rr1_premises.py", "change": "1042/n136: row 0's x1 set to L + 1/1000", "expected": "refused"},
+  {"id": "P5", "checker": "rr1_premises.py", "change": "1042/n136: a point mass added", "expected": "refused"},
+  {"id": "S0", "checker": "rr1_search.py", "change": "none, all 77", "expected": "no exact capture below 1"},
+  {"id": "S1", "checker": "rr1_search.py", "change": "every mass times 99/100, all 77, at the least pose found", "expected": "exact capture below 1 for every certificate"},
+  {"id": "A0", "checker": "rr1_runs.py sample", "change": "none, the sampled certificates, every bin", "expected": "DECIDED"},
+  {"id": "A1", "checker": "rr1_runs.py controls", "change": "every mass times 99/100, least-capture bin of each sampled certificate", "expected": "REFUSED_EXACT"},
+  {"id": "A2", "checker": "rr1_runs.py controls", "change": "threshold 1/10000 above the least exact capture found, that bin", "expected": "REFUSED_EXACT"},
+  {"id": "A3", "checker": "rr1_runs.py controls", "change": "coordinates and side times 1001/1000, masses kept, that bin", "expected": "REFUSED_EXACT"},
+  {"id": "A4", "checker": "rr1_runs.py controls", "change": "that bin widened by two steps on each side, no bin splitting", "expected": "UNDECIDED or REFUSED_EXACT (not accepted)"},
+  {"id": "T1", "checker": "rr1_selftest.py", "change": "broken variant: P is the square at the bin's middle angle", "expected": "caught"},
+  {"id": "T2", "checker": "rr1_selftest.py", "change": "broken variant: rectangles with a zero corner kept in the Brunn-Minkowski term", "expected": "caught"},
+  {"id": "T3", "checker": "rr1_selftest.py", "change": "broken variant: the centre domain from w at the bin's right end", "expected": "caught"}
+ ],
+ "run_plan": {
+  "order": ["rr1_selftest.py", "rr1_premises.py", "rr1_search.py (all 77)", "rr1_runs.py tier1 (all 77, two bins each)", "rr1_runs.py controls (the nine sampled certificates)", "rr1_runs.py sample (whole certificates in the frozen order)"],
+  "sample_order": ["1042/n136", "1041/n114", "1042/n129", "1042/n132", "1042/n115", "1041/n115", "1041/n107", "1042/n135", "1041/n111"],
+  "sample_cpu_cap_hours": 24,
+  "sample_rule": "stop before a certificate whose cost, projected from the mean CPU per bin of the certificates already run, would take the cumulative CPU past the cap",
+  "lane_cpu_cap_hours": 40,
+  "processes": "at most three at once, nice 10",
+  "decider_limits": {"nodes_per_bin": 1000000, "min_box_width_lattice_units": 1024, "bin_splits": "in three, at most twice"}
+ }
+}

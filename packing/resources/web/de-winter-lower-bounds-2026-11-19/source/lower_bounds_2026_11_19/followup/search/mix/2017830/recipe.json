@@ -1,0 +1,50 @@
+{
+  "n": 161,
+  "side": "1283/100",
+  "coordinate_grid": 100000000,
+  "mass_grid": 1000000000000,
+  "components": [
+    {
+      "n": 114,
+      "warp_percent": 201,
+      "period_group": 0,
+      "period_count": 3,
+      "units": 571093693,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 201,
+      "period_group": 1,
+      "period_count": 3,
+      "units": 350131931,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 201,
+      "period_group": 2,
+      "period_count": 3,
+      "units": 57109115,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c"
+    },
+    {
+      "n": 114,
+      "warp_percent": 201,
+      "period_group": 1,
+      "period_count": 3,
+      "units": 13918873,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c",
+      "uniform_regions": true
+    },
+    {
+      "n": 114,
+      "warp_percent": 201,
+      "period_group": 2,
+      "period_count": 3,
+      "units": 805483,
+      "source_sha256": "f44253fde88ba8b20e988fea899560ab3094477952aa0abd750e66ac31d65d3c",
+      "uniform_regions": true
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records six post-publication intake replies and queues the later n = 228 attachment
+  under think-d4b0. The replies describe work already published on main. On this
+  candidate and main 9b21535f3d, devtools.compare_paper_renders produced 43
+  byte-identical methods-survey files across both candidate renders and the baseline
+  render. The existing methods survey version v0.2.7 stands.

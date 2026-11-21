@@ -1,0 +1,16 @@
+{
+  "replay": {
+    "code": 0,
+    "stdout": "n113_10p808_levels_tuned_n113_from114phase_tight-measure_160_w200 replayed 275 checks",
+    "error": ""
+  },
+  "spot": {
+    "code": 0,
+    "stdout": "n113_10p808_levels_tuned_n113_from114phase_tight-measure_160_w200 4 independent polygon integrations",
+    "error": ""
+  },
+  "n": 113,
+  "side": "1351/125",
+  "manifest_sha256": "c4d2eaa8a03b5b6a926a7d08fbfec1ee8e7c372ace3b62a063cb75c2e8e819b8",
+  "elapsed_seconds": 338.36
+}

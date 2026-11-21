@@ -649,18 +649,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n108.cert.json"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Samanyu-dev, https://github.com/Samanyu-dev/squares_in_squares/blob/53551d77513a9f5c180a731f291baf7eda7c3009/best_fit_101_500.csv at 53551d77513a9f5c180a731f291baf7eda7c3009",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         109
       ],
       "n": 109,
+      "path": "resources/web/samanyu-n109-2026-11-07/facts/n-109.yaml.gz",
       "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "retrieved": "2026-11-21",
       "source_n": 109,
-      "url": "https://kingbird.myphotos.cc/packing/square-109.svg"
+      "url": "https://github.com/Samanyu-dev/squares_in_squares/blob/53551d77513a9f5c180a731f291baf7eda7c3009/best_fit_101_500.csv"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n110.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
@@ -1058,19 +1059,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-171.svg"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s172-upper-bound/blob/2ce1f7c7621859437e0bcc1f9ad2b00822b2c605/n-172-candidate.yaml at 2ce1f7c7621859437e0bcc1f9ad2b00822b2c605",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/c4e65d0b8c4d32e45bf32a907e8b760502f137af/n172/n172_witness.yaml at c4e65d0b8c4d32e45bf32a907e8b760502f137af",
       "kind": "packet-derived-facts",
-      "license_status": "CC-BY-4.0",
+      "license_status": "MIT",
       "listed_n": [
         172
       ],
       "n": 172,
-      "path": "resources/web/ozden-s172-upper-bound-2026-11-09/source/n-172-candidate.yaml",
+      "path": "resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/n172_witness.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-09",
+      "retrieved": "2026-11-11",
       "source_n": 172,
-      "url": "https://github.com/kenaznia-doga/s172-upper-bound/blob/2ce1f7c7621859437e0bcc1f9ad2b00822b2c605/n-172-candidate.yaml"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/c4e65d0b8c4d32e45bf32a907e8b760502f137af/n172/n172_witness.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1263,19 +1264,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-198.svg"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s199-upper-bound/blob/d03ee0bdb223e00fe124e818ed242f6cbd714fad/n-199-candidate.yaml at d03ee0bdb223e00fe124e818ed242f6cbd714fad",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/702c7af2db04c9b69696455ee3d33883a2935e8a/n199/n199_witness.yaml at 702c7af2db04c9b69696455ee3d33883a2935e8a",
       "kind": "packet-derived-facts",
-      "license_status": "CC-BY-4.0",
+      "license_status": "MIT",
       "listed_n": [
         199
       ],
       "n": 199,
-      "path": "resources/web/ozden-s199-upper-bound-2026-11-09/source/n-199-candidate.yaml",
+      "path": "resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/n199_witness.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
       "retrieved": "2026-11-09",
       "source_n": 199,
-      "url": "https://github.com/kenaznia-doga/s199-upper-bound/blob/d03ee0bdb223e00fe124e818ed242f6cbd714fad/n-199-candidate.yaml"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/702c7af2db04c9b69696455ee3d33883a2935e8a/n199/n199_witness.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1482,19 +1483,19 @@
       "url": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-227.cert.gz"
     },
     {
-      "attribution": "Roberto Ono, https://github.com/RobertoOno/squares-in-square/blob/b5636fd6694d2cc7aa5811ae33f441268b81b714/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json at b5636fd6694d2cc7aa5811ae33f441268b81b714",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s228-upper-bound-1559604311/blob/46ab8bf425f5cad886a8bc4023bfff904f43af99/n-228-candidate.yaml at 46ab8bf425f5cad886a8bc4023bfff904f43af99",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         228
       ],
       "n": 228,
-      "path": "resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json.gz",
+      "path": "resources/web/ozden-s228-upper-bound-2026-11-18/source/n-228-candidate.yaml",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-14",
+      "retrieved": "2026-11-20",
       "source_n": 228,
-      "url": "https://github.com/RobertoOno/squares-in-square/blob/b5636fd6694d2cc7aa5811ae33f441268b81b714/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json"
+      "url": "https://github.com/kenaznia-doga/s228-upper-bound-1559604311/blob/46ab8bf425f5cad886a8bc4023bfff904f43af99/n-228-candidate.yaml"
     },
     {
       "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-229.cert.gz at 0075967bace18a3deabcc0baa64c2fb294fc80a0",

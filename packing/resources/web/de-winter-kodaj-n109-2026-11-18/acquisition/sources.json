@@ -1,0 +1,42 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-20T09:26Z",
+  "git_scope": "A blobless clone of JoostdeWinter/square-packing, a watched repository, fetched at 09:26Z on 20 November 2026 for the intake of jlevy/squares#1012 (lane c7-pointers, bead think-wvr8), when git ls-remote read main's head as 21d944c (2026-11-19T18:44:48Z). The pin is aae089c (committed 2026-11-18T07:30:49Z, 'Add Tom\u00e1\u0161 Kodaj's public coordinates for n = 109 (issue #1012)', the author's message), which adds n109_kaggle/ (README.md, SHA256SUMS, n109_tomkodaj.csv, n109_tomkodaj.yaml and verification.txt) and nothing else. Its child 7232328 (07:31:33Z, 'Remove the n = 109 Kaggle coordinates') deletes the folder again, and the comment issuecomment-6972165182 (07:33:46Z) attaches Issue_1012_n109_Kodaj_Coordinates.zip instead. That attachment is not readable from this session (the session proxy answers user-attachments with HTTP 403); the zip's members n109_tomkodaj.csv, n109_tomkodaj.yaml and verification.txt have the SHA-256 digests the files retained here have, as lane w10-1118 recorded on think-wvr8 on 18 November from its own retrieval of the zip (42,790 bytes, SHA-256 b0134067b9093947fa0a86dd47458bac13b41a9ed54c77f834f93741c8d64db1), whose README.txt (3,298 bytes, f9296ea8...) is not this folder's README.md (2,038 bytes). The scope is the licence and the whole of n109_kaggle/. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains and is pinned against it. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "de-winter-kodaj-n109-2026-11-18",
+      "source_url": "https://github.com/JoostdeWinter/square-packing",
+      "source_ref": "aae089c37a2d3fb91b161a1b3a45f06a41277d18",
+      "source_commit": "aae089c37a2d3fb91b161a1b3a45f06a41277d18",
+      "committed_utc": "2026-11-18T07:30:49Z",
+      "git_tree": "0cf4c5f7fa91ac51eb99c49a389b0ed27404bf09",
+      "archived_path": "packing/resources/web/de-winter-kodaj-n109-2026-11-18/source",
+      "subtree_manifest": "packing/resources/web/de-winter-kodaj-n109-2026-11-18/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "n109_kaggle"
+      ],
+      "subtree_file_count": 6,
+      "subtree_total_bytes": 194594,
+      "retained_file_count": 5,
+      "retained_total_bytes": 193522,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+          "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+          "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+        }
+      ],
+      "license": "The coordinates: CC0 1.0 (Public Domain) by the author's statement of Tom\u00e1\u0161 Kodaj's Kaggle dataset 'Squares in Squares: strips and bands (coordinates)', version 2, 13 November 2026 (Kaggle is not readable from this session, so the licence is the comment's and the folder README's word). The transcription and the folder: MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, SHA-256 324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The author submitted the files to this repository on #1012, so retention is presumed permitted (result-import.md, stage 2) in any case.",
+      "claims": [
+        "n109_kaggle/n109_tomkodaj.yaml states 109 unit squares as a packing.squares:Witness/v2 document of rational corners at side 547464479047171949843/50000000000000000000 = 10.94928958094343899686, rounded up s(109) <= 10.949289580944; its squares are numbered square-0 to square-108. The README and the comment say it is an exact transcription of the 109 rows of n109_tomkodaj.csv, each orientation by a rational tan(angle/2) so every square has exactly unit sides, and the centres translated into the first quadrant. The comment says the issue's 10.949289580943 was rounded to nearest.",
+        "n109_kaggle/n109_tomkodaj.csv holds, by the README and the comment, the original header and the 109 rows for n = 109 of Tom\u00e1\u0161 Kodaj's Kaggle dataset 'Squares in Squares: strips and bands (coordinates)', version 2, 13 November 2026, CC0, unchanged (centres, angle in radians); his notebook squares-in-squares-22-1636 copies the same submission.csv to its output, whose full SHA-256 they give as 7700b20d7c901a831741d0dbabae0941fefe460381cc18d969ec29aa728e489b (not checkable here).",
+        "verification.txt says this repository's independent rational-corner checker at jlevy/squares f9ddfeeef9070ede581142154ab992149b278ab0 reports 'VERIFIED: 109 squares, 5886 pairs' with the exact side and a least pair gap of 3200000000000000400000000000001/1600000000000000000000000000000400000000000000 (about 2.0e-15).",
+        "On credit the README and the comment say that Kodaj publishes the coordinates and refers to his source notebooks for the original credits; that Navneet Prabhat's public compilation contains the same packing (side about 10.94928958094337); that Guilherme Dias da Fonseca published the 109-square pinwheel earlier (6 November 2026, side 10.949392392); that #958 documents a public pinwheel in Samanyu-dev's best_fit_101_500.csv at 10.94928958094538; and that who made the last numerical refinement is unconfirmed. The comment asks that it be credited as this repository's sources support. The README says the transcription was made with GPT-6.2 Sol (OpenAI) and checked again with Claude (Anthropic), under the direction of Joost de Winter, and that the packing is not his work."
+      ]
+    }
+  ]
+}

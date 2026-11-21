@@ -1,0 +1,69 @@
+{
+  "format": "n105-payload-recovery/v1",
+  "trusted_record": "f1d8c74e013e95bdfc1e56f05507efb3368044ec",
+  "source_repository": "JoostdeWinter/square-packing",
+  "source_commit": "21d944c43098e2261ab7d713cd10f02a5eb13f3d",
+  "manifest": "packing/resources/web/de-winter-lower-bounds-2026-11-19/source/lower_bounds_2026_11_19/proof/n105/manifest.json",
+  "started_at": "2026-11-21T11:18:59.843005+00:00",
+  "files": [
+    {
+      "name": "k160.json.gz",
+      "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/21d944c43098e2261ab7d713cd10f02a5eb13f3d/lower_bounds_2026_11_19/proof/n105/k160.json.gz",
+      "bytes": 45875,
+      "sha256": "0a7e407f8656ab379230267b0b0e957dc4b921b827d28f02066566f915186b74",
+      "wall_seconds": 0.367
+    },
+    {
+      "name": "k160_receipts.jsonl.gz",
+      "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/21d944c43098e2261ab7d713cd10f02a5eb13f3d/lower_bounds_2026_11_19/proof/n105/k160_receipts.jsonl.gz",
+      "bytes": 6763,
+      "sha256": "fe61a83d6b0ea4accf319531fd42f7cc6ea7359bb4c66c5b8603296321970022",
+      "wall_seconds": 0.257
+    },
+    {
+      "name": "k480.json.gz",
+      "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/21d944c43098e2261ab7d713cd10f02a5eb13f3d/lower_bounds_2026_11_19/proof/n105/k480.json.gz",
+      "bytes": 45877,
+      "sha256": "064b52fea497f7bc892646788854d61c4109566ca822785189f1cbb5eaa58cd5",
+      "wall_seconds": 0.314
+    },
+    {
+      "name": "k480_receipts.jsonl.gz",
+      "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/21d944c43098e2261ab7d713cd10f02a5eb13f3d/lower_bounds_2026_11_19/proof/n105/k480_receipts.jsonl.gz",
+      "bytes": 5002,
+      "sha256": "588f92de15e16671328f346339a6378814ca8896fe858e89f51a74fd9c590ad2",
+      "wall_seconds": 0.418
+    },
+    {
+      "name": "k1440.json.gz",
+      "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/21d944c43098e2261ab7d713cd10f02a5eb13f3d/lower_bounds_2026_11_19/proof/n105/k1440.json.gz",
+      "bytes": 45878,
+      "sha256": "07ab36de78346483340ed10a4bd71f9ae5b212a9a18316acc3b6d62a3227e82c",
+      "wall_seconds": 0.388
+    },
+    {
+      "name": "k1440_receipts.jsonl.gz",
+      "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/21d944c43098e2261ab7d713cd10f02a5eb13f3d/lower_bounds_2026_11_19/proof/n105/k1440_receipts.jsonl.gz",
+      "bytes": 2212,
+      "sha256": "ddae4a7e0f764a721d28086e15174848810d128f97f6eddfb41fee8c16ce8def",
+      "wall_seconds": 0.324
+    },
+    {
+      "name": "k4320.json.gz",
+      "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/21d944c43098e2261ab7d713cd10f02a5eb13f3d/lower_bounds_2026_11_19/proof/n105/k4320.json.gz",
+      "bytes": 45881,
+      "sha256": "895a9b07c9800c88e676855d503f1ff695422ddb2e58107da244a19017aff2af",
+      "wall_seconds": 0.374
+    },
+    {
+      "name": "k4320_receipts.jsonl.gz",
+      "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/21d944c43098e2261ab7d713cd10f02a5eb13f3d/lower_bounds_2026_11_19/proof/n105/k4320_receipts.jsonl.gz",
+      "bytes": 1072,
+      "sha256": "ca8da7997b808e25131236535576c2a34bb7205f20a63c1e9a234b0ee6c6f640",
+      "wall_seconds": 0.243
+    }
+  ],
+  "completed_at": "2026-11-21T11:19:02.532668+00:00",
+  "total_payload_bytes": 198560,
+  "source_programs_executed": false
+}

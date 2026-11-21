@@ -1,0 +1,18 @@
+{
+  "coordinate_provenance": "verified",
+  "failures": [],
+  "field_certificate": {
+    "field": "Q",
+    "preconditions": "degree-one rational field"
+  },
+  "id": "W-candidate-n228-jazivxt",
+  "limitations": "Verifies witness feasibility and its upper bound, not global optimality.",
+  "method": "exact-algebraic",
+  "minimum_best_pair_gap": "7419656657104237729564618131537107953/204583288553752924280716250000000000000000000000000000000000",
+  "minimum_containment_clearance": "0",
+  "n": 228,
+  "operation": "verify",
+  "pairs_tested": 25878,
+  "side": "389901077915794162667528670804703057/25000000000000000000000000000000000",
+  "verification_passed": true
+}

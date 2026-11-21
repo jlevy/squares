@@ -507,6 +507,41 @@ $defs:
               anyOf:
                 - required: [modifications]
                 - required: [modifications_unrecorded]
+      restatements:
+        type: array
+        minItems: 1
+        description: >-
+          The counts at which the certificate this entry records restates a packing the
+          register already holds, under the owner's option D of 17 November 2026
+          (think-b0w5): a re-certification of a standing packing, with its padding removed
+          or the same arrangement re-solved to its exact local optimum, is a new result
+          only if its side is below its predecessor's side once the predecessor is itself
+          shrunk until its squares first touch, measured through any construction
+          (`devtools.contraction_margin`); otherwise it is a restatement, credited to the
+          original finder. At `n` the result `of` holds the predecessor, and the finder of
+          its packing keeps the credit through `of`'s own attribution: the entry records
+          the report and proves no new bound there, takes no regularization credit there,
+          and improves on no case record (`check_standing.restated`), so it is never
+          adopted there and no profile counts it current. `ruling` names the owner's
+          decision. `measured_in` is the `contraction-margin-v1` receipt of the
+          predecessor's certificate against this one, whose `against.within_margin` is
+          true, and `gain_over_margin` is its `against.gain_over_margin`, the gain as a
+          share of the predecessor's margin (or null where that margin is 0). `identity`
+          is as a regularization's. `devtools.check_results` holds `n` to this result's
+          scope, once each and never also a `regularizations` count; `of` to a registered
+          result other than this one, whose scope holds `n` and whose date is no later;
+          and the receipt to its count and verdict.
+        items:
+          type: object
+          additionalProperties: false
+          required: [n, of, ruling, gain_over_margin, measured_in]
+          properties:
+            n: {type: integer, minimum: 1}
+            of: {type: string, pattern: '^T-[0-9]{3}$'}
+            ruling: {const: think-b0w5}
+            gain_over_margin: {type: [string, 'null'], pattern: '^[0-9]+\.[0-9]{4}$'}
+            measured_in: {type: string, minLength: 1}
+            identity: {$ref: '#/$defs/result/properties/regularizations/items/properties/identity'}
       attribution:
         type: object
         additionalProperties: false

@@ -1,0 +1,51 @@
+{
+ "n": 105,
+ "side": "10499/1000",
+ "kernel": "octagon",
+ "native_sha256": "372cb24b6f70fc9ea4d316bc10bbc6c46aed4f6d42eb81aebe91c471e6d1fad3",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "directions": 273,
+ "nodes": 5340305,
+ "source": "inputs/first/integer/n105_10495_step/k300.json.gz",
+ "source_sha256": "7b502935a52f46d315a8594a0902fc01460e0b3585f15743c1feca574f7fefef",
+ "warp": 0,
+ "levels": [
+  {
+   "K": 160,
+   "measure": "k160.json.gz",
+   "receipts": "k160_receipts.jsonl.gz",
+   "rectangles": 5852,
+   "rects_sha256": "719243ebefa731a895dcfab1ec7c6a0353c76b4845755275d651ee2fda1e99df",
+   "measure_sha256": "0a7e407f8656ab379230267b0b0e957dc4b921b827d28f02066566f915186b74",
+   "receipts_sha256": "fe61a83d6b0ea4accf319531fd42f7cc6ea7359bb4c66c5b8603296321970022"
+  },
+  {
+   "K": 480,
+   "measure": "k480.json.gz",
+   "receipts": "k480_receipts.jsonl.gz",
+   "rectangles": 5852,
+   "rects_sha256": "719243ebefa731a895dcfab1ec7c6a0353c76b4845755275d651ee2fda1e99df",
+   "measure_sha256": "064b52fea497f7bc892646788854d61c4109566ca822785189f1cbb5eaa58cd5",
+   "receipts_sha256": "588f92de15e16671328f346339a6378814ca8896fe858e89f51a74fd9c590ad2"
+  },
+  {
+   "K": 1440,
+   "measure": "k1440.json.gz",
+   "receipts": "k1440_receipts.jsonl.gz",
+   "rectangles": 5852,
+   "rects_sha256": "719243ebefa731a895dcfab1ec7c6a0353c76b4845755275d651ee2fda1e99df",
+   "measure_sha256": "07ab36de78346483340ed10a4bd71f9ae5b212a9a18316acc3b6d62a3227e82c",
+   "receipts_sha256": "ddae4a7e0f764a721d28086e15174848810d128f97f6eddfb41fee8c16ce8def"
+  },
+  {
+   "K": 4320,
+   "measure": "k4320.json.gz",
+   "receipts": "k4320_receipts.jsonl.gz",
+   "rectangles": 5852,
+   "rects_sha256": "719243ebefa731a895dcfab1ec7c6a0353c76b4845755275d651ee2fda1e99df",
+   "measure_sha256": "895a9b07c9800c88e676855d503f1ff695422ddb2e58107da244a19017aff2af",
+   "receipts_sha256": "ca8da7997b808e25131236535576c2a34bb7205f20a63c1e9a234b0ee6c6f640"
+  }
+ ],
+ "target_total_mass": "104999999/1000000"
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "n": 137,
+    "side": "59406523/5000000",
+    "mass": "856248861612082059903249/6250000000000000000000",
+    "grid_sha256": "fb209a6928ddb8235a0206b03e8d3505cb2b69293b98c9c810d5fb2f436a32b6",
+    "previous_upper_endpoint": "1478/125",
+    "previous_source": "Previous search, standalone proof",
+    "anchor": 162,
+    "folder": "162--719881-12.881-100-uniform_finish"
+  },
+  {
+    "n": 138,
+    "side": "59410049/5000000",
+    "mass": "862499976939436770424411/6250000000000000000000",
+    "round_steps": 8,
+    "grid_sha256": "fb209a6928ddb8235a0206b03e8d3505cb2b69293b98c9c810d5fb2f436a32b6",
+    "previous_upper_endpoint": "14837091169853479669994709/1250000000000000000000000",
+    "previous_source": "Original Hosono family 33",
+    "anchor": 162,
+    "folder": "162--719881-12.881-100-uniform_finish"
+  },
+  {
+    "n": 162,
+    "side": "2576221/200000",
+    "mass": "4049990903333908078118291/25000000000000000000000",
+    "round_steps": 8,
+    "grid_sha256": "fb209a6928ddb8235a0206b03e8d3505cb2b69293b98c9c810d5fb2f436a32b6",
+    "previous_upper_endpoint": "64177954723630776507141559/5000000000000000000000000",
+    "previous_source": "Original Hosono family 33",
+    "anchor": 162,
+    "folder": "162--719881-12.881-100-uniform_finish"
+  }
+]

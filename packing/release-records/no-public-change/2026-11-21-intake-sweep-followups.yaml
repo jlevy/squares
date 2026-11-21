@@ -1,0 +1,12 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The post-adoption replies and intake triage update the requests ledger.
+  The two candidate renders and the baseline at 41ed4588f9 produced 43
+  byte-identical files at a fixed link revision with Chrome on macOS.
+  The methods survey remains at v0.2.7.

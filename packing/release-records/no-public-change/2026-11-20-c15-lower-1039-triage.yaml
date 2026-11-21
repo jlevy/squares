@@ -1,0 +1,22 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records lane c15-lower of the 20 November intake pass (think-fv42): the triage of #1039,
+  #1041 and #1042, Joost de Winter's raised lower bounds, adds their three request entries,
+  each result queued for import, and names the 155-count comment on #1042 as an import of
+  its own (think-4iec). No result, rung, side, bound, house, mark or credit changes.
+  Measured against origin/main 7a3b186a2e (#1049): devtools.compare_paper_renders rendered
+  the methods survey into empty site directories, its math pass in /usr/bin/google-chrome
+  (SQPACK_CHROMIUM), twice from this tree and once with that main's result-requests.yaml
+  swapped in: 43 files each, all byte-identical across the three. No PDF was printed; it
+  prints from that HTML. The paper keeps its version, v0.2.7.
+  The 21 November continuation preserved both posted replies and routed the later
+  #1038 attachment to its open response bead. Against main 552741cee2b8, all 43 methods
+  survey files were again byte-identical across the same three renders.
+  After the #1065 merge, all 43 survey files also matched main 1fd323589a.
+  After the #1047 merge, the same 43 survey files matched main f54452c1d1.

@@ -1,0 +1,71 @@
+Replay and control plan for issues 1039, 1041 and 1042 (bead think-fv42, lane c15-lower)
+Written 2026-11-20, before any replay below runs. Its SHA-256 goes on think-fv42 first.
+
+Inputs. JoostdeWinter/square-packing at 21d944c43098e2261ab7d713cd10f02a5eb13f3d, a
+scratch checkout whose 964 files match the packet's acquisition/upstream-subtree.sha256
+(checked with sha256sum -c, exit 0), and the issue-1039 zip
+followup/mass_reserve/lower-bounds-56.zip (SHA-256 9641ca15...) extracted with Python's
+zipfile into its own directory. Kernels compiled by c++ (g++ 13.3.0) -O3 -std=c++17;
+Python 3.14.7 (the project interpreter), PYTHONDONTWRITEBYTECODE=1, nice 19, at most two
+workers.
+
+Done before this plan, for pricing and as smoke tests: the source's proof/replay.py on
+proof/n114 with --controls (199 CPU-s, "replayed 102 checks"); its --sample runs on
+proof/n103 and followup/lower/n113; mixed/replay.py n101_r400_s12_proj 2 through the
+fork wrapper below (PASS); bm.py on partial_n19_4144 direction 1 (PASS); and
+devtools.replay_rectangle_receipts at the first receipt per level of proof/n103,
+partial_n19_4144, heterogeneous/n66_8435_step and levels_fine_front_n82_smooth (all
+verified, all matching the archive) and the quarter mutant of proof/n103 (both
+directions refused on coverage). None of these is evidence; the runs below repeat them.
+
+Deciders and premise programs (the source's own, same-implementation):
+- K1 devtools.replay_rectangle_receipts with --source 21d944c/proof: every archived
+  receipt direction of a certificate folder, the source's kernel named by its manifest
+  (bmcheck.cpp, octagon.cpp or gram.cpp; digest checked), node cap 2,100,000.
+- P1 21d944c verify.py (python verify.py from lower_bounds_2026_11_19/): digests, exact
+  comparisons, measure construction and angular coverage for every direct certificate
+  of 1041 and 1042, the strip, region and corner arguments, and the folder's other
+  checks.
+- P2 the zip's verify.py: the .source commit check, check_claims.py (all 56 values
+  from their proofs) and rectangles/reproduce_measures.py.
+- K2 the zip's mixed/replay.py for each of the 13 runs under mixed/evidence/, run
+  through a wrapper that sets the multiprocessing start method to fork and then runs
+  the script unchanged (Python 3.14 starts workers by forkserver, and the script's
+  workers read globals set under __main__, so it cannot pass as published there).
+- P3 the follow-up of issue 1042 at 161: the comment's own snippet
+  (envelope_exact.verify on followup/repeated/161--749858-12.858-100-uniform/proof/k100.json.gz
+  with side 8036307/625000, seam 18553/5000), run from lower_bounds_2026_11_19/.
+
+Phase 1, the current claims (expected about 8 CPU-hours):
+- K1 on all 43 folders of followup/lower/ (issue 1042), on proof/n105 and proof/n111
+  (issue 1041), on followup/repeated/{161--749858-12.858-100-uniform,
+  162--719881-12.881-100-uniform_finish, 162--931866-12.866-100-uniform}/proof and
+  followup/corner_trim/161--932856-12.856-100-uniform_11-5_217_fastMix15/proof (the
+  envelopes anchor's manifest is byte-identical to the second repeated anchor's);
+- K1 on the issue-1039 sets for its current counts: rectangles/evidence/partial_n19_4144,
+  partial_n20_4144, partial_n26_4144, partial_n37_4144, refined_n90_400,
+  refined_n92_400, the 14 sets whose names contain n82, and heterogeneous/n66_8435_step,
+  n83_9375_expanded, n110_1075;
+- K2 on all 13 mixed runs; P1, P2, P3.
+Phase 2, the superseded claims (expected about 9 CPU-hours): K1 on the other 32
+folders of proof/, every other rectangles/evidence set with integer rows, and every
+other heterogeneous folder.
+
+Expected outcomes. Every original direction verified (PASS, exit 0, least bound at
+least 2^48); its nodes, leaves and least bound equal to the archived receipt (a
+difference with PASS is recorded, not a failure); P1 and P2 exit 0 with their PASS
+lines; every K2 run prints "PASS N directions"; P3 returns without an assertion.
+
+Controls, each stated before it runs:
+- Q, the source driver's own: K1 --mutant quarter --first-per-level on every folder
+  K1 replays in either phase. Expected: refused (UNDECIDED) at every direction run, on
+  coverage (the kernel reports an unresolved box, not the node cap).
+- N, near-threshold: K1 --mutant 99/100 at every archived direction of
+  followup/lower/n114 (gram kernel), proof/n105 (octagon kernel) and
+  rectangles/evidence/partial_n19_4144 (square kernel). Expected for each: refused on
+  coverage at one direction at least. A direction where the mutant still passes is
+  recorded, not a failure (it may have more than 1% slack there).
+- X, mixed: the zip's mixedproj on rows built by mixed/verify.py's integer_rows with
+  mass factor 1/4 at direction 2 of n101_r400_s12_proj. Expected: UNDECIDED.
+
+What decides nothing: the archived seconds; CPU times are measured here.

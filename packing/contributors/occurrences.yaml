@@ -20847,6 +20847,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-172.md
+    record_key: '172'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-173.md
     record_key: '173'
     field: /reported_lower_bound/proved_by/0
@@ -21498,6 +21510,18 @@ occurrences:
   note: Reviewed 2026-10-21 against the named profile sources; the printed source
     text and credit role are retained.
   contributor_id: trevor-green
+- origin:
+    path: packing/frontier/n-199.md
+    record_key: '199'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-200.md
     record_key: '200'
@@ -22256,18 +22280,6 @@ occurrences:
     its retained regularized certificate lineage. The existing named profile matches
     this construction-improver role; original found_by credit is unchanged.
   contributor_id: evan-daniel
-- origin:
-    path: packing/frontier/n-228.md
-    record_key: '228'
-    field: /reported_upper_bound/found_by/0
-  expected_text: Roberto Ono
-  start: 0
-  end: 11
-  label: Roberto Ono
-  role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
 - origin:
     path: packing/frontier/n-228.md
     record_key: '228'
@@ -34820,6 +34832,216 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s228 upper bound 2026-11-18]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s228 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: Ozden after jazivxt, Levy
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s228 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: Ozden after jazivxt, Levy
+  start: 12
+  end: 19
+  label: jazivxt
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s228 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: Ozden after jazivxt, Levy
+  start: 21
+  end: 25
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter Kodaj n109 2026-11-18]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter Kodaj n109 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Kodaj, Samanyu-dev
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter Kodaj n109 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Kodaj, Samanyu-dev
+  start: 16
+  end: 21
+  label: Kodaj
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter Kodaj n109 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Kodaj, Samanyu-dev
+  start: 23
+  end: 34
+  label: Samanyu-dev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX squares-in-squares 2026-11-18]'
+    field: /authors/0
+  expected_text: Fernández Rubio
+  start: 0
+  end: 15
+  label: Fernández Rubio
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX squares-in-squares 2026-11-18]'
+    field: /credit
+  expected_text: Fernandez Rubio
+  start: 0
+  end: 15
+  label: Fernandez Rubio
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Samanyu-dev square packing 2026-11-07]'
+    field: /authors/0
+  expected_text: Samanyu-dev
+  start: 0
+  end: 11
+  label: Samanyu-dev
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Samanyu-dev square packing 2026-11-07]'
+    field: /credit
+  expected_text: Samanyu-dev
+  start: 0
+  end: 11
+  label: Samanyu-dev
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/n-109.md
+    record_key: '109'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Samanyu-dev
+  start: 0
+  end: 11
+  label: Samanyu-dev
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n305 certificate 2026-11-20]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+    - n305-source
+    - bibliography
+  contributor_id: joost-de-winter
+  note: The retained source names Joost de Winter and identifies the antecedent construction separately.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n305 certificate 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Kodaj, JoeGun
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+    - n305-source
+    - bibliography
+  contributor_id: joost-de-winter
+  note: The retained source names Joost de Winter and identifies the antecedent construction separately.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n305 certificate 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Kodaj, JoeGun
+  start: 16
+  end: 21
+  label: Kodaj
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n305 certificate 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Kodaj, JoeGun
+  start: 23
+  end: 29
+  label: JoeGun
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
@@ -35479,3 +35701,10 @@ inspections:
   scope: Identity byline only
   locators:
   - 'Opening paper byline, Authors: Wolfram Bentz.'
+- path: packing/resources/web/de-winter-n305-2026-11-20/source/n305/README.md
+  status: inspected
+  scope: Identity byline and construction credit only
+  locators:
+    - Method and AI assistance names Joost de Winter as directing the work.
+    - Construction credits Tomáš Kodaj's arrangement as improved by JoeGun, starting from Chilton's
+      compilation and using Daniel's code in T-309.

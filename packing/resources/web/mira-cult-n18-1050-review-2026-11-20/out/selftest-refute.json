@@ -1,0 +1,52 @@
+{
+ "program": "r1050_refute.py",
+ "mode": "selftest",
+ "slices": 32,
+ "max_rounds": 60,
+ "results": [
+  {
+   "instance": "two-in-19/10",
+   "expected": "REFUTED",
+   "verdict": "REFUTED",
+   "stdout": "REFUTED nodes 1 rounds 1 depth 0 seconds 0.0",
+   "cpu_seconds": 0.0
+  },
+  {
+   "instance": "four-in-199/100",
+   "expected": "REFUTED",
+   "verdict": "REFUTED",
+   "stdout": "REFUTED nodes 15 rounds 31 depth 6 seconds 0.0",
+   "cpu_seconds": 0.0
+  },
+  {
+   "instance": "five-in-27/10",
+   "expected": "REFUTED",
+   "verdict": "REFUTED",
+   "stdout": "REFUTED nodes 323438 rounds 541267 depth 46 seconds 12.1",
+   "cpu_seconds": 0.0
+  },
+  {
+   "instance": "two-in-2001/1000",
+   "expected": "UNDECIDED",
+   "verdict": "UNDECIDED",
+   "stdout": "UNDECIDED nodes 5165843 rounds 5171885 depth 131 seconds 20.0",
+   "cpu_seconds": 0.0
+  },
+  {
+   "instance": "four-in-2001/1000",
+   "expected": "UNDECIDED",
+   "verdict": "UNDECIDED",
+   "stdout": "UNDECIDED nodes 1951518 rounds 1982243 depth 82 seconds 20.0",
+   "cpu_seconds": 0.0
+  },
+  {
+   "instance": "five-in-271/100",
+   "expected": "UNDECIDED",
+   "verdict": "UNDECIDED",
+   "stdout": "UNDECIDED nodes 440515 rounds 735629 depth 38 seconds 20.0",
+   "cpu_seconds": 0.0
+  }
+ ],
+ "unsound": [],
+ "weak": []
+}

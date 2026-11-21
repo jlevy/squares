@@ -299,12 +299,25 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: separating and translating squares 8 and 41 against T-305's 90 and 92, so n=1..200 has
 #: 691 separating squares and 2,420 translating ones, and n=1..324 3,163 and 7,793, in the
 #: same records. The same pass (think-78aj) moved 268, 270 and 299 to his certificates of
-#: issues 1021, 1022 and 1031 (T-331 to T-333), whose least pair gaps are 1e-59 to 1e-74,
-#: so n=1..324 has 2,985 separating squares and 7,449 translating ones, in the same records.
+#: issues 1021, 1022 and 1031 (T-331 to T-333), whose least pair gaps are 1e-59 to 1e-74.
+#: The full screen then found 2,985 separating squares and 7,449 translating ones.
+#: The pass of 21 November 2026 (think-8yyy) moved 172 and 199 to Joost de Winter's
+#: re-solves of issues 946 and 939 (T-286, T-285), T-282's arrangement at its exact local
+#: optimum: separating and translating squares 16 and 88 against T-282's 84 and 86 at 172,
+#: and 17 and 95 against T-284's 85 and 92 at 199, so n=1..200 has 555 separating squares
+#: and 2,425 translating ones, and n=1..324 has 2,849 separating squares and 7,454 translating
+#: ones. The same pass (think-91fu) moved 228 to Doğa Özden's certificate of issue 1038
+#: (T-334), whose public notebook is by jazivxt; its finder and order relative to T-301
+#: remain unresolved pending evidence. Separating and translating squares are 59 and 170
+#: against T-301's 76 and 110, so n=1..324 has 2,832 separating squares and 7,514 translating
+#: ones, in the same records.
+#: On 21 November 2026, Samanyu-dev's T-335 replaced T-101 at 109. It has 29 separating
+#: and 40 translating squares, against zero and eight on T-101. The screen is stable
+#: across its retained tolerances. The change reaches the 200- and 324-case totals.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
-    "n=1..200": (68, 691, 182, 2420),
-    "n=1..324": (126, 2985, 302, 7449),
+    "n=1..200": (69, 584, 182, 2457),
+    "n=1..324": (127, 2861, 302, 7546),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

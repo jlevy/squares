@@ -1,0 +1,40 @@
+{
+  "n": 114,
+  "source_file": "48366f80075982536186_measure.json.gz",
+  "source_origin": "continuation/robust_mix/n114_87d8_444/mix5/measure.json.gz",
+  "protected": [
+    {
+      "label": "SquareMath reported_lower_bound",
+      "kind": "rational",
+      "value": "54/5",
+      "source": "https://squaremath.org/cases/114.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "SquareMath verified_lower_bound",
+      "kind": "rational",
+      "value": "10710288928331068536040667546937212843461265735428161663810891072592248589/1000000000000000000000000000000000000000000000000000000000000000000000000",
+      "source": "https://squaremath.org/cases/114.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "Prior comparison enclosure",
+      "kind": "rational",
+      "value": "54/5",
+      "source": "lower-bounds-56.zip, attribution/strongest_prior_lower.json"
+    },
+    {
+      "label": "Submitted issue 1039",
+      "kind": "rational",
+      "value": "38600000000/3571494129",
+      "source": "https://github.com/jlevy/squares/issues/1039"
+    },
+    {
+      "label": "Hosono original formula, all 34 families",
+      "value": "54/5",
+      "kind": "rational",
+      "source": "https://squaremath.org/result/t-180.html",
+      "detail": "Upper endpoint of the original formula with outward 19-place square-root arithmetic"
+    }
+  ]
+}

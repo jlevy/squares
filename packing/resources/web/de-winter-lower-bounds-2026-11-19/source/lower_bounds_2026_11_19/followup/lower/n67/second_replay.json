@@ -1,0 +1,15 @@
+{
+ "replay": {
+  "code": 0,
+  "text": "67-67-8.497-110-uniform replayed 418 checks",
+  "error": ""
+ },
+ "spot": {
+  "code": 0,
+  "text": "67-67-8.497-110-uniform 4 independent polygon integrations",
+  "error": ""
+ },
+ "n": 67,
+ "side": "8497/1000",
+ "manifest_sha256": "cd8de14c74c81b71d310dac336933a053b5d397be27a2abb532841e4d6db9bbc"
+}

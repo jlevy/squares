@@ -1,0 +1,4 @@
+sample [(359, 797), (716, 1000), (1284, 1000)] UNDECIDED nodes 2133626 rounds 5820030 depth 79 seconds 1200.1
+sample [(390, 390), (617, 1383), (1284, 1000)] UNDECIDED nodes 2506221 rounds 4396306 depth 79 seconds 1200.0
+sample [(359, 797), (1000, 716), (1383, 1383)] UNDECIDED nodes 1592379 rounds 3652282 depth 71 seconds 1200.0
+sample [(359, 797), (1000, 1000), (1284, 1000)] UNDECIDED nodes 1353136 rounds 3598701 depth 63 seconds 1200.0

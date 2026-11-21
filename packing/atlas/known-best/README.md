@@ -962,6 +962,12 @@ The evidence is retained in
 The index draws 95 views: 27 by the axis tool, 37 by Evan Daniel’s regularizer, 18 by
 the grid-slack generator’s version 1 and 13 by its version 2.
 
+On 21 November 2026, T-335 became the house at 109. Both strong generators ran on the
+new witness. The axis view draws at T-335’s exact side, and the default drawing is
+settled as `decided-no-better`. The index holds 101 views, 91 of which are their count’s
+default drawing. The separate solved-side candidate is queued under `think-26s0`.
+[Run records](../../cases/regularized_drawings/think-wvr8-2026-11-21/README.md)
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

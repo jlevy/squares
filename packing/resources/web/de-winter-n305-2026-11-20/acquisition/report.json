@@ -1,0 +1,52 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1052",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter n305 certificate 2026-11-20]",
+  "report_evidence": "E-de-winter-1052-certificate-report",
+  "receipt_format": "de-winter-1052-exact-replay-v1",
+  "witness_prefix": "W-de-winter-1052-n",
+  "claim_limitations": "The retained source gives a finite rational certificate of 305 unit squares at its exact side. The claim is feasibility at that side. The source's comments on area, optimization and earlier arrangements are separate claims.",
+  "read_on": "2026-11-21",
+  "read_at_main": "305023c661c491335397652ff1ae9c9be051c553",
+  "certificates": [
+    {
+      "n": 305,
+      "path": "n305/n305_exact.json",
+      "format": "center-direction-json",
+      "offered": "17.945755838742",
+      "first_committed": "2026-11-20T17:50:11Z"
+    }
+  ],
+  "requested": [305],
+  "replayed": [305],
+  "houses": [
+    {
+      "n": 305,
+      "reader": "[JoeGun upper bounds 2026-11-16]",
+      "source_key": "[JoeGun upper bounds 2026-11-16]",
+      "holders": "Tomáš Kodaj and JoeGun",
+      "result": "T-309",
+      "reported_value": "17.9457623596589697",
+      "verified_value": "17.9457623596589697",
+      "evidence": ["E-joegun-1001-exact-feasibility", "E-joegun-1001-review-exact-feasibility"]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Joost de Winter's rational certificate for a packing of 305 unit squares, issue #1052",
+    "headline": "Joost de Winter reports a rational certificate for s(305) ≤ 17.945755838742.",
+    "significance": 2,
+    "source_checks": "The author gives a rational center-and-direction certificate and a corner serialization with a verification program. The independent Stage 4 review records its own exact checker and 51 controls.",
+    "credit": "de Winter after Kodaj, JoeGun, Levy",
+    "next_rung": "The maintained replay and sharp controls carry their own receipts. The accepted independent review #1057 covers the submitted certificate.",
+    "bead": "think-kzwl",
+    "bibliography": {
+      "authors": ["de Winter"],
+      "lineage": "credits-project",
+      "credit": "de Winter after Kodaj, JoeGun, Levy",
+      "note": "Exact certificate of issue #1052. De Winter identifies the predecessor as the packing of Kodaj and JoeGun, retained at T-309.",
+      "short_credit": "de Winter after Kodaj et al."
+    }
+  }
+}

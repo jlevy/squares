@@ -1,0 +1,27 @@
+{
+  "periods": 3,
+  "side": "12881/1000",
+  "anchor_n": 162,
+  "base_mass": "6195294667572573961101/38313604031114600000",
+  "strip_mass": "5026833793625762660197/383136040311146000000",
+  "cell_mass": "172807222422676067/163036612898360000",
+  "source_sha256": "6523c827fe88831fd31055d896d1a603f037d9f197122f5fe436a13bcafee6cc",
+  "claims": [
+    {
+      "n": 189,
+      "offset": 1,
+      "mass": "188999999/1000000",
+      "side": "13881/1000",
+      "previous_upper_endpoint": "138494809731274289248626267/10000000000000000000000000",
+      "previous_source": "Original Hosono family 33"
+    },
+    {
+      "n": 137,
+      "offset": -1,
+      "mass": "26152688030583751524033/191568020155573000000",
+      "side": "11881/1000",
+      "previous_upper_endpoint": "1478/125",
+      "previous_source": "Previous search, standalone proof"
+    }
+  ]
+}

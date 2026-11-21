@@ -1,0 +1,12 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records the final reply and closure of #1012 after the #1047 deployment verified
+  all 6,582 live checks. Against f54452c1d1, the methods-survey comparison found 43
+  byte-identical files across two candidate renders and one baseline render. The
+  survey keeps version v0.2.7.

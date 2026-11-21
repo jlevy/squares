@@ -1,0 +1,52 @@
+{
+  "n": 88,
+  "source_file": "c54e2e3d971657d570e8_measure.json.gz",
+  "source_origin": "inputs/first/lower/n88/measure.json.gz",
+  "protected": [
+    {
+      "label": "SquareMath reported_lower_bound",
+      "kind": "rational",
+      "value": "481/50",
+      "source": "https://squaremath.org/cases/88.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "SquareMath verified_lower_bound",
+      "kind": "rational",
+      "value": "481/50",
+      "source": "https://squaremath.org/cases/88.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "Prior comparison enclosure",
+      "kind": "rational",
+      "value": "450979683441988328125649353346073910865750016/46808935345311305692896358335066675694322353",
+      "source": "lower-bounds-56.zip, attribution/strongest_prior_lower.json"
+    },
+    {
+      "label": "Earlier search exact lower bound",
+      "kind": "rational",
+      "value": "450979683441988328125649353346073910865750016/46808935345311305692896358335066675694322353",
+      "source": "lower/n88"
+    },
+    {
+      "label": "Submitted issue 1039",
+      "kind": "rational",
+      "value": "7197747740002388481179024759873101765368620962771655896707324829367988990895869481083861824112064785365634132924949924201968490905122678475940355220971078126520655479700519779650002481447266533077739990334881388569175363721065531259038586003340715522560868/746420390879704237560680519658399266874301834240077753846117099958818881749021256886469866996985786110777682205776661312672564545961087444133317131810663937670922477827471924247080209364981786876426475074745567022967400692656694566916094722046648747942007",
+      "source": "https://github.com/jlevy/squares/issues/1039"
+    },
+    {
+      "label": "Earlier four-hour search",
+      "kind": "rational",
+      "value": "450979683441988328125649353346073910865750016/46808935345311305692896358335066675694322353",
+      "source": "squaremath_four_hour_20261118.zip, lower/n88"
+    },
+    {
+      "label": "Hosono original formula, all 34 families",
+      "value": "47412372968892564213/5000000000000000000",
+      "kind": "rational",
+      "source": "https://squaremath.org/result/t-180.html",
+      "detail": "Upper endpoint of the original formula with outward 19-place square-root arithmetic"
+    }
+  ]
+}

@@ -154,6 +154,10 @@ DEFECT = "defect recorded"
 OPEN = "open"
 QUEUED = "queued"
 NOT_REGISTERED = "not registered"
+#: A register entry whose report restates, at every count of its scope, a packing the
+#: register already holds, under the owner's option D (think-b0w5): settled, since no rung
+#: is owed on a restatement (`check_standing.restated`).
+RESTATED = "restated"
 #: The state of a question to the author (`awaiting_author`) whose answer has not come.
 AWAITING = "awaiting"
 #: What an awaited answer would change in the record, as a reply to the author says it.
@@ -514,7 +518,18 @@ def _register_entry(ident: str, register: Register) -> Entry:
         _rank(record["verification"]) >= CONFIRMED_RANK
         and _rank(record["confirmation"]) >= CONFIRMED_RANK
     )
+    if not confirmed and _restated_everywhere(record):
+        why = "a restatement under the owner's option D (think-b0w5) at every count"
+        return Entry(ident, rungs, RESTATED, status, why, "", position)
     return Entry(ident, rungs, CONFIRMED if confirmed else OPEN, status, "", how, position)
+
+
+def _restated_everywhere(record: Mapped) -> bool:
+    """Whether an entry's `restatements` name every count of its scope."""
+    from devtools.check_results import scope_values  # noqa: PLC0415
+
+    restated = {int(item["n"]) for item in record.get("restatements") or ()}
+    return bool(restated) and set(scope_values(dict(record["scope"]))) <= restated
 
 
 def _evidence_entry(ident: str, register: Register) -> Entry:
@@ -576,7 +591,9 @@ def result_state(result: Mapped, register: Register) -> ResultState:
     was checked of it. So a result is confirmed when every register entry it maps to is
     confirmed, or, mapping to evidence alone, when one of those entries is a passing
     confirmation; a report entry beside a confirmed register entry does not hold it open.
-    A defect or refutation on any mapped entry decides it. A reported defect
+    A defect or refutation on any mapped entry decides it, and so does a register entry
+    that restates its predecessor at every count under the owner's option D (`RESTATED`),
+    since no rung is owed on a restatement. A reported defect
     (`defect: true`) is settled when the record holds the defect against one of the entries
     it names. A result not registered is settled unless it is queued.
 
@@ -602,9 +619,12 @@ def result_state(result: Mapped, register: Register) -> ResultState:
         state = DEFECT
     elif (deciding and set(deciding) == {CONFIRMED}) or (not deciding and CONFIRMED in states):
         state = CONFIRMED
+    elif deciding and set(deciding) == {RESTATED}:
+        state = RESTATED
     else:
         state = OPEN
-    return ResultState(key, claim, entries, state, state in {CONFIRMED, REFUTED}, "", owners)
+    settled = state in {CONFIRMED, REFUTED, RESTATED}
+    return ResultState(key, claim, entries, state, settled, "", owners)
 
 
 def _current(entry: Entry) -> dict[str, str]:
@@ -1787,6 +1807,11 @@ def _plain_state(entry: Entry, record: Mapped | None, register: Register) -> str
         return f"refuted, by the review at {entry.why}"
     if entry.state == DEFECT:
         return f"a defect is recorded against it: {entry.why}"
+    if entry.state == RESTATED:
+        return (
+            f"recorded at {entry.rungs} as {entry.why}: no new result, credited to the "
+            "original finder"
+        )
     if not entry.id.startswith("T-"):
         return _plain_evidence(entry)
     ran = _run_here(record, register) if entry.status == result_status.RECORDED else ""

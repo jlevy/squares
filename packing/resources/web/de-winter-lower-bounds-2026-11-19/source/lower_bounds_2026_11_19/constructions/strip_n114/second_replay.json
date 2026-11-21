@@ -1,0 +1,16 @@
+{
+  "replay": {
+    "code": 0,
+    "stdout": "n114_10p826_measure_6e91ee6eb20b-measure_128_w0 replayed 192 checks",
+    "error": ""
+  },
+  "spot": {
+    "code": 0,
+    "stdout": "n114_10p826_measure_6e91ee6eb20b-measure_128_w0 4 independent polygon integrations",
+    "error": ""
+  },
+  "n": 114,
+  "side": "5413/500",
+  "manifest_sha256": "f480cb4add420a39edcd03d2d0dc8ec6680c2f2208bf48b7df9b747d9a8f5054",
+  "elapsed_seconds": 683.52
+}

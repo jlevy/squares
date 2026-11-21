@@ -1,0 +1,7 @@
+{
+  "n": 114,
+  "side": "87/8",
+  "manifest_sha256": "f4b35726c764685e06a81077fbd640db2a9f82e5b49492263ac9d11dcdaf09a2",
+  "sampled_angle_replay_with_negative_controls": "n114_10.875_farm_6681ad54 replayed 4 checks",
+  "independent_exact_integration": "n114_10.875_farm_6681ad54 3 independent polygon integrations"
+}
