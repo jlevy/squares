@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 18
+version: 19
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-21T08:38:26.331Z
+updated_at: 2026-11-21T09:28:22.088Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -90,3 +90,5 @@ Portable n109 positive preflight passed through both maintained routes, 5,886 pa
 Checked source-prep commits go into #1047 after its base integration. 54be5b33ced1d9dd0dff905af2566d4179083bb3 adds the portable adapter, regression, digest-only upstream acquisition, canonical n109 fact and exact maintained receipt. The fact reproduces from the pinned checkout, decompressed SHA-256 2938dddb54398f8f91afd4dce7e83a8bbd2a56db189b1e5a92c0877d85bca5d3. Its 35,316 pair decisions across three jobs and two routes gave the planned outcomes. Commit 01c2f91e9284be65215e051f07d7d1b0c9cc09bf retains all 11 successful sharp controls. The n109 primary result remains to be integrated into draft #1047 and registered before its gated adoption.
 
 The committed portable fact (decompressed SHA-256 2938dddb54398f8f91afd4dce7e83a8bbd2a56db189b1e5a92c0877d85bca5d3) also passed the retained independently implemented r1012_check.py after exact conversion to a corners witness. All 5,886 pairs accepted with zero disagreements at exact side 10.949289580945379338339554460712..., whose safe 12-place print is 10.949289580946. Its receipts are in the task's n109-independent directory. Use this binding for the portable fact and retain the earlier independent witness as a distinct reading. #1047 still needs the registry and adoption changes.
+
+21 November continuation checkpoint: #1047 integration at 77e6a919a5728c0c7d900df5b089e578b8556a14 on new main 552741cee2b8. Proposed T-335 now uses Samanyu-dev’s original pinned geometry, V3/C3 with the 21 November independent exact binding. Preserve de Winter after Kodaj, Samanyu-dev on the later unregistered restatement (0.9723 of the original contraction margin). 472 focused tests passed, then 7 Kaggle tests including the reviewed canonical adapter sharing. Four deterministic paper comparisons passed (only explainer live count 334 to 335). Data pin f96d6f4f2eab passes. Exact-head edit tier under memory guard with process CPU count capped to two is in flight. No publish or house adoption yet.
