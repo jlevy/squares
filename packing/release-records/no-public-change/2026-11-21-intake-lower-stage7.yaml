@@ -1,0 +1,12 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The retained issue replies update the intake ledger without changing the
+  methods survey. Two candidate renders and the baseline at 4685824045 produced
+  43 byte-identical files with a fixed link revision and Chrome on macOS.
+  The paper remains at v0.2.7.
