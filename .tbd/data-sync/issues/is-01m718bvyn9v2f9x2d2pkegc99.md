@@ -3,9 +3,9 @@ type: is
 id: is-01m718bvyn9v2f9x2d2pkegc99
 title: "Import #939: Joost de Winter's s(199) <= 14.6146898532835806, T-282's arrangement re-solved to its exact local optimum (quintic root) plus the L of 27"
 kind: task
-status: closed
+status: in_progress
 priority: 1
-version: 17
+version: 19
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,10 +15,10 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T22:55:20.020Z
-updated_at: 2026-11-21T00:59:04.219Z
+updated_at: 2026-11-21T01:12:57.731Z
 started_at: 2026-11-09T22:55:23.747Z
-closed_at: 2026-11-21T00:59:04.218Z
-close_reason: "T-285 and T-286 adopted in #1030, live Pages run 44843577490 verified, and #939/#946 received their final replies and closed on 21 November UTC."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -53,3 +53,5 @@ duplicate_of: null
 
 2026-11-14 ~16:45Z coordinator: answers recorded in #981 and acknowledgements posted on #946/#939 (recorded in #982, fa980f8e7). Open for the RV-3 follow-through: #939's packet pins 702c7af while the author asks to cite c4e65d0b (n199/ byte-identical); settle the pin, and whether T-285 keeps the 734 sentence, when the record next changes here.
 blocked_on: think-ruu2
+
+Reopened: The already deployed result is complete. Keep the bead open while main still uses it in the #939/#946 validation mappings. The #1058 follow-up removes those fulfilled deferrals before we close the bead.
