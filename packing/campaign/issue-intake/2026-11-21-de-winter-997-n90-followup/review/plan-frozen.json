@@ -1,0 +1,129 @@
+{
+  "kind": "independent-stage4-source-only-plan",
+  "reviewer": "/root/intake_n90_blind",
+  "frozen_at_utc": "2026-11-21T17:44:46.218786+00:00",
+  "source_manifest": "evidence/source-manifest.json",
+  "source_manifest_sha256": "97eddaead1b6952153edba1d81d6a1e8c702c5f2c2ab82890bfdddcd4c08716d",
+  "independence": {
+    "allowed_before_result_freeze": [
+      "delegation brief",
+      "exact author comment 7058975230",
+      "four original factual source members",
+      "host memory-guard usage documentation",
+      "own code and generated results"
+    ],
+    "not_read_or_executed": [
+      "adjacent derived/receipts files",
+      "maintained project geometry code",
+      "producer checker/programs",
+      "prior review results",
+      "project workflow documentation"
+    ],
+    "shared_checkout_mutations": false,
+    "tracker_or_GitHub_mutations": false
+  },
+  "claim": "90 closed unit squares fit inside the closed axis-aligned square [0,L]^2 with pairwise disjoint interiors at the exact rational side in candidate.json.gz.",
+  "interpretation": {
+    "triple": "cx,cy,t where t=tan(theta/2), theta counterclockwise from positive x axis",
+    "unit_basis": [
+      "u=((1-t*t)/(1+t*t),2*t/(1+t*t))",
+      "v=(-u_y,u_x)"
+    ],
+    "corners": "c + (epsilon*u + delta*v)/2 for epsilon,delta in {-1,+1}",
+    "touching": "allowed; wall and pair separation margins must be nonnegative exactly",
+    "arithmetic": "Python standard-library Fraction and arbitrary-precision integers; no floating point decisions or trigonometry"
+  },
+  "acceptance": [
+    "Require n=90 and exactly 90 rational triples, positive finite rational L, strict rational-string grammar; malformed shape, duplicate JSON keys and nonfinite/float coordinates reject.",
+    "Independently check each constructed quadrilateral has four unit edges, adjacent orthogonality, exact area one and the declared center.",
+    "Check all four corners against all four walls: 1440 exact nonnegative inequalities.",
+    "For each of all 4005 unordered pairs compute projection intervals on all four normals u_i,v_i,u_j,v_j; accept the pair iff at least one oriented projection gap is >= 0.",
+    "Reconstruct edge normals from vertices (rather than treating input angles as proof of shape); record the strongest exact separation margin, selected axis and direction for every pair.",
+    "Run the same full feasibility check on input.json.gz; recompute metadata and signed scalar comparisons independently.",
+    "Check candidate transformation from input against the claimed common positive scale plus one translation, unchanged orientations and unchanged square sizes; characterize precision gain separately from claimed registered gain.",
+    "Use only the four old points supplied in previous-comparisons.json for a conditional fixed-orientation common-center-scale obstruction; do not claim to authenticate the old full witness or provenance.",
+    "Accept finite feasibility only if every required positive and negative control gives its predeclared outcome; any deviation is a failed review run."
+  ],
+  "controls": [
+    {
+      "name": "axis_touch",
+      "fixture": "Two axis-aligned unit squares at (1/2,1/2),(3/2,1/2), L=2",
+      "expected": "feasible with a zero pair separation"
+    },
+    {
+      "name": "tiny_overlap",
+      "fixture": "Move axis_touch second center left by 1/10^100",
+      "expected": "reject pair (0,1), despite overlap below ordinary floating precision"
+    },
+    {
+      "name": "tiny_wall_crossing",
+      "fixture": "One axis-aligned unit square centered at (1/2-1/10^100,1/2), L=1",
+      "expected": "reject wall"
+    },
+    {
+      "name": "rotated_wall_touch",
+      "fixture": "One square t=1/2 centered at (7/10,7/10), L=7/5",
+      "expected": "feasible with exact wall contact"
+    },
+    {
+      "name": "rotated_pair_touch",
+      "fixture": "t=1/2 squares centered at (7/10,7/10),(13/10,3/2), L=11/5",
+      "expected": "feasible with zero gap along a tilted edge normal although x/y bounding intervals overlap"
+    },
+    {
+      "name": "coincident_squares",
+      "fixture": "Two copies of the axis-aligned square centered at (1/2,1/2), L=1",
+      "expected": "reject pair (0,1)"
+    },
+    {
+      "name": "candidate_duplicate",
+      "fixture": "Replace final candidate triple by the first; retain n=90 and L",
+      "expected": "reject, with pair (0,89) among failed pairs; still test all 4005 pairs"
+    },
+    {
+      "name": "count_mismatch",
+      "fixture": "Declare n=90 but remove one candidate square",
+      "expected": "reject parsing"
+    },
+    {
+      "name": "zero_denominator",
+      "fixture": "Set a coordinate to 1/0",
+      "expected": "reject parsing"
+    },
+    {
+      "name": "floating_coordinate",
+      "fixture": "Replace a rational string by a JSON number with fractional part",
+      "expected": "reject parsing"
+    },
+    {
+      "name": "nonfinite_coordinate",
+      "fixture": "Set a coordinate to NaN",
+      "expected": "reject parsing"
+    },
+    {
+      "name": "bad_triple_shape",
+      "fixture": "Use a two-element coordinate triple",
+      "expected": "reject parsing"
+    },
+    {
+      "name": "duplicate_json_key",
+      "fixture": "Repeat a top-level JSON key",
+      "expected": "reject parsing"
+    }
+  ],
+  "scope_limitations": [
+    "No lower bound or proof of global/local optimality.",
+    "No priority, credit, archive completeness, author identity, or historical solver execution claim.",
+    "Signed comparisons establish arithmetic against supplied scalar references only; external register state and leaderboard provenance remain unverified by this review.",
+    "A finite nonnegative separation certificate proves feasibility; it does not establish robustness to perturbation.",
+    "The compressed member identities bind the source bytes at this trust boundary; repository commit hashes do not enter mathematical verdicts."
+  ],
+  "execution": {
+    "interpreter": "/Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python",
+    "version": "3.14.7",
+    "worker_limit": 1,
+    "guard": "/Users/levy/.agents/skills/memory-guard/memory_guard.py --observe-only",
+    "environment": "env.sh",
+    "all_outputs": "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121"
+  }
+}

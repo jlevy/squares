@@ -1,0 +1,62 @@
+{
+  "stage": "primary-subset-positive",
+  "route": "primary",
+  "case": "subset-positive",
+  "n": 2,
+  "witness_content_sha256": "d5814979d3765a530315464c088d1e46b44d9352ab06869d5e5eb9c6d32e015c",
+  "expected": "accept",
+  "expected_outcome_met": true,
+  "pairs_accounted": 1,
+  "result": {
+    "operation": "verify",
+    "id": "W-n179-959-subset-positive",
+    "coordinate_provenance": "verified",
+    "method": "exact-algebraic",
+    "verification_passed": true,
+    "n": 2,
+    "side": "13.88096037155557959469669157492336415899451456818",
+    "pairs_tested": 1,
+    "minimum_containment_clearance": "0",
+    "minimum_best_pair_gap": "0",
+    "field_certificate": {
+      "normalized_minimal_polynomial": [
+        "1",
+        "14",
+        "6",
+        "-4",
+        "-7",
+        "-2"
+      ],
+      "irreducible_over_q": true,
+      "irreducibility_method": "irreducible-reduction-mod-prime",
+      "irreducibility_prime": 3,
+      "declared_isolating_interval": [
+        "-3714053342624773158945462227140672067633/10000000000000000000000000000000000000000",
+        "-3714053342624773158945460227140672067633/10000000000000000000000000000000000000000"
+      ],
+      "root_count_method": "sturm-sequence-over-q",
+      "root_count_in_open_interval": 1,
+      "endpoints_are_not_roots": true
+    },
+    "failures": [],
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality."
+  },
+  "report": {
+    "valid": true,
+    "n": 2,
+    "container_contacts": 2,
+    "touching_pairs": 1,
+    "strict_pairs": 0,
+    "pairs_tested": 1,
+    "touching_pair_indices": [
+      [
+        0,
+        1
+      ]
+    ],
+    "failures": []
+  },
+  "wall_seconds": 0.00867666699923575,
+  "cpu_seconds": 0.00803799999999999,
+  "ru_maxrss_bytes": 93061120
+}

@@ -1,0 +1,39 @@
+{
+  "finished_at_utc": "2026-11-21T17:53:49.353278+00:00",
+  "worker_command": [
+    "/Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python",
+    "-I",
+    "-B",
+    "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/working-run/verify_independent.py",
+    "--wait-for",
+    "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/working-run/guard-observing.go"
+  ],
+  "guard_command": [
+    "/Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python",
+    "-I",
+    "-B",
+    "/Users/levy/.agents/skills/memory-guard/memory_guard.py",
+    "--pid",
+    "5448",
+    "--observe-only",
+    "--interval",
+    "0.5",
+    "--log",
+    "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/working-run/memory-observe.jsonl"
+  ],
+  "worker_pid": 5448,
+  "guard_pid": 5458,
+  "worker_exit": 0,
+  "guard_exit": 0,
+  "guard_observed_before_work": true,
+  "worker_limit": 1,
+  "environment": {
+    "TMPDIR": "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/working-run/tmp",
+    "CARGO_TARGET_DIR": "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/working-run/cargo-target",
+    "UV_CACHE_DIR": "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/working-run/uv-cache",
+    "PYTEST_ADDOPTS": "-o tmp_path_retention_policy=failed -o tmp_path_retention_count=1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  }
+}

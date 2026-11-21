@@ -1,0 +1,269 @@
+"""Bounded maintained finite-feasibility slice; no contributor program executes."""
+import copy
+import gzip
+import hashlib
+import json
+import os
+from pathlib import Path
+import resource
+import signal
+import sys
+import time
+import traceback
+import zipfile
+from fractions import Fraction
+
+work = Path(__file__).resolve().parent
+repo = Path("/Users/levy/wrk/github/squares")
+started = time.monotonic()
+cpu_started = time.process_time()
+current_stage = "awaiting-passive-observer"
+completed = []
+events = work / "events.jsonl"
+limit = 300
+memory_limit = 256 * 1024 * 1024
+class SliceStopped(BaseException):
+    pass
+
+def write_json(path, value):
+    path.write_text(json.dumps(value, indent=2, default=str) + "\n")
+
+def note(kind, **values):
+    with events.open("a") as stream:
+        stream.write(json.dumps({"event": kind, "elapsed_seconds": time.monotonic()-started,
+                                 "cpu_seconds": time.process_time()-cpu_started, **values}, default=str) + "\n")
+    print(json.dumps({"event": kind, **values}, default=str), flush=True)
+
+def guard_sample():
+    path = work / "memory.jsonl"
+    if not path.exists():
+        return None
+    with path.open("rb") as stream:
+        stream.seek(max(0, path.stat().st_size - 32000))
+        lines = stream.read().splitlines()
+    for line in reversed(lines):
+        try:
+            row = json.loads(line)
+        except (ValueError, UnicodeError):
+            continue
+        if row.get("record") == "sample":
+            return row
+    return None
+
+def check_limits(_sig=None, _frame=None):
+    if time.monotonic() - started > limit:
+        raise SliceStopped("300-second initial wall cap")
+    if resource.getrusage(resource.RUSAGE_SELF).ru_maxrss > memory_limit:
+        raise SliceStopped("worker exceeded 256 MiB RSS ceiling")
+    sample = guard_sample()
+    if sample is not None:
+        if sample["host"]["pressure"] != 1:
+            raise SliceStopped("kernel memory pressure changed from normal")
+        if time.time() - (work / "memory.jsonl").stat().st_mtime > 8:
+            raise SliceStopped("passive telemetry stale for over 8 seconds")
+    elif time.monotonic() - started > 15:
+        raise SliceStopped("no passive telemetry")
+
+def h(data):
+    return hashlib.sha256(data).hexdigest()
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+
+plan = {
+    "scope": "Finite feasibility and source-to-reading equivalence only; no optimality, registration, identity-to-T294 or global novelty claim",
+    "wall_cap_seconds": limit, "rss_stop_bytes": memory_limit,
+    "pressure_policy": "One worker; passive observer; stop if pressure is not 1 or telemetry is stale; normal-pressure swap-disk warning allowed by coordinator",
+    "reader": "devtools.algebraic_witness_reports.evand_minpoly_geometry",
+    "routes": ["devtools.check_algebraic_witness_independent.check_witness", "sqpack.witness.exact_verify"],
+    "order": ["source/custody and exact reading", "independent positive n179", "two-square positive and refused controls on both routes", "primary positive n179"],
+    "controls": [
+        {"name": "subset-positive", "n": 2, "expected": "accept", "source_square_ids": [1,2]},
+        {"name": "duplicate-square-overlap", "n": 2, "expected": "refuse-overlap", "mutation": "replace square 2 geometry by square 1, preserve id 2"},
+        {"name": "sharp-overlap", "n": 2, "expected": "refuse-overlap", "mutation": "decrease square 2 y by exact 1/10^30; source squares 1 and 2 touch vertically"},
+        {"name": "sharp-outside", "n": 2, "expected": "refuse-container", "mutation": "decrease square 1 y by exact 1/10^30; source square 1 touches y=0"},
+        {"name": "non-unit", "n": 2, "expected": "refuse-shape", "mutation": "replace square 1 basis by (2,0)"}
+    ],
+    "control_limitation": "Controls are exact source-derived two-square fixtures, not complete 179-square negative jobs."
+}
+write_json(work / "finite-slice-plan.json", plan)
+signal.signal(signal.SIGALRM, check_limits)
+signal.setitimer(signal.ITIMER_REAL, 1, 1)
+summary = {}
+try:
+    while guard_sample() is None:
+        check_limits()
+        time.sleep(.1)
+    check_limits()
+    current_stage = "source-and-reader"
+    note("stage-start", stage=current_stage)
+    archive = repo / ".worktrees/intake-scratch-20261120/source-preparation/donor-attachments/n179-exact-construction.zip"
+    archive_bytes = archive.read_bytes()
+    assert h(archive_bytes) == "143e9298eaf8c96e0e36bd7346a41b765e1d8e77dc1be10c76e17846ce73c3c8"
+    member = "algebraic/n179/n179.minpoly.json.gz"
+    with zipfile.ZipFile(archive) as zipped:
+        raw = zipped.read(member)
+    assert h(raw) == "28edf9561e87037b5c681e4ff0051a1bd1b8e5401c1a8376fe2e66c2c18663d1"
+    (work / "source/n179.minpoly.json.gz").write_bytes(raw)
+    source = json.loads(gzip.decompress(raw))
+    sys.path[:0] = [str(repo / "packing"), str(repo / "packing/src")]
+    import yaml
+    from devtools.algebraic_witness_reports import evand_minpoly_geometry
+    from devtools import check_algebraic_witness_independent as independent
+    from sqpack.witness import exact_verify, validate_witness_document, witness_envelope
+
+    geometry = evand_minpoly_geometry(raw, {"n":179,"degree":5})
+    witness = {
+        "id":"W-n179-959-algebraic-reading", "n":179, "square_size":"1",
+        "coordinates":{"origin":"lower-left","axes":"x-right-y-up","angle_unit":"not-applicable"},
+        "claim":{"coordinate_provenance":"reported","method":"exact-algebraic",
+                 "limitations":"Finite feasibility under review; no global optimality claim."},
+        **geometry,
+    }
+    document = witness_envelope(witness, schema="witness.schema.yaml")
+    witness_path = work / "n179-reading.yaml"
+    witness_path.write_text(yaml.safe_dump(document, sort_keys=False))
+    admitted = validate_witness_document(document, path=witness_path,
+                 fallback_schema=repo / "packing/witnesses/witness.schema.yaml")
+    assert admitted == witness
+
+    # Independently bind every centre and basis to original x,y,u,m using route 2 arithmetic.
+    field = independent.Field(witness["scalar"]["minimal_polynomial"],
+                              [Fraction(x) for x in witness["scalar"]["isolating_interval"]])
+    one = field.rational(Fraction(1))
+    pose_rows = []
+    for idx, (src, dst) in enumerate(zip(source["squares"],witness["squares"],strict=True),1):
+        assert dst["id"] == idx
+        for axis,key in enumerate(("x","y")):
+            assert field.scalar(src[key]) == field.scalar(dst["center"][axis])
+        u = field.scalar(src["u"])
+        u2 = field.mul(u,u)
+        den = independent.add(one,u2)
+        c,s = (field.scalar(x) for x in dst["basis"])
+        for _ in range(src["m"]):
+            c,s = s,independent.scale(Fraction(-1),c)
+        assert field.reduce(independent.sub(field.mul(den,c),independent.sub(one,u2))) == field.rational(Fraction(0))
+        assert field.reduce(independent.sub(field.mul(den,s),independent.scale(Fraction(2),u))) == field.rational(Fraction(0))
+        assert field.sign(den) > 0
+        pose_rows.append({"id":idx,"source_pose_sha256":h(canonical(src)),
+                          "reading_pose_sha256":h(canonical(dst)),"centre_equal":True,"basis_identity":True})
+    assert field.scalar(source["S"]["in_K"]) == field.scalar(witness["side"])
+    write_json(work / "pose-binding.json", {
+        "source_member_sha256":h(raw), "reading_sha256":h(witness_path.read_bytes()),
+        "field_parameter":"Original t retained; side-comparison.json establishes t=-alpha against house n70/n207",
+        "basis_rule":"R^m((1-u^2)/(1+u^2),2u/(1+u^2))",
+        "independent_binding_arithmetic":"devtools.check_algebraic_witness_independent.Field",
+        "pose_count":len(pose_rows),"side_equal":True,"poses":pose_rows})
+    write_json(work / "source-overlay.json", {
+        "kind":"factual mathematical-source overlay, not a source licence grant",
+        "source_comment":"https://github.com/jlevy/squares/issues/959#issuecomment-7050119161",
+        "source_url":"https://github.com/user-attachments/files/35184249/n179-exact-construction.zip",
+        "archive_sha256":h(archive_bytes),"member":member,"member_sha256":h(raw),
+        "retained_member":"source/n179.minpoly.json.gz","retained_bytes_unchanged":True,
+        "reading":"n179-reading.yaml","reading_sha256":h(witness_path.read_bytes()),
+        "construction_credit":["Doğa Özden","Ryan Xu","Evan Daniel"],
+        "reconstruction_credit":"Joost de Winter, with disclosed OpenAI assistance",
+        "reported_numerical_donor":"Sergio Fernández Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares",
+        "reported_donor_input":"inputs/poses/n179_GeiserX.json",
+        "reported_donor_sha256":"fc9ee75c8d53b37b7dd97277b5f930eaac31a28a16cbc5f7a78802b9aa2fce5d",
+        "unresolved":["Donor file absent from attachment and no pinned donor commit",
+                      "Package verification/LICENSE.md names n232/n270 and does not resolve n179-specific licence scope",
+                      "No original author program or prose retained in this finite-slice source directory"],
+        "certificate_content_scope":"Original mathematical certificate includes field, side, poses and associated mathematical metadata.",
+        "project_sources_sha256":{p:h((repo/p).read_bytes()) for p in (
+            "packing/devtools/algebraic_witness_reports.py",
+            "packing/devtools/check_algebraic_witness_independent.py",
+            "packing/src/sqpack/field.py","packing/src/sqpack/witness.py","packing/src/sqpack/verify.py",
+            "packing/witnesses/witness.schema.yaml")},
+    })
+    note("reading-bound", poses=len(pose_rows))
+
+    def decide(route, name, fixture, expected):
+        global current_stage
+        current_stage = f"{route}-{name}"
+        check_limits()
+        note("stage-start", stage=current_stage, n=fixture["n"])
+        t0,c0 = time.monotonic(),time.process_time()
+        if route == "independent":
+            result = independent.check_witness(fixture)
+            report = None
+            pairs = result["pairs_tested"] + result["pairs_separated_by_sweep"]
+        else:
+            result, report = exact_verify(fixture)
+            pairs = result["pairs_tested"]
+        observed = bool(result["verification_passed"])
+        expected_pass = expected == "accept"
+        assert observed == expected_pass, (name,expected,result)
+        if expected_pass:
+            assert pairs == fixture["n"]*(fixture["n"]-1)//2
+        else:
+            failures = str(result["failures"]).lower()
+            expected_kind = expected.split("-")[1]
+            words = {"overlap":("overlap",),"container":("container",),"shape":("unit","shape")}
+            assert any(word in failures for word in words[expected_kind]), (expected,result)
+        row = {
+            "stage":current_stage,"route":route,"case":name,"n":fixture["n"],
+            "witness_content_sha256":h(canonical(fixture)),"expected":expected,
+            "expected_outcome_met":True,"pairs_accounted":pairs,"result":result,
+            "report":None if report is None else vars(report),
+            "wall_seconds":time.monotonic()-t0,"cpu_seconds":time.process_time()-c0,
+            "ru_maxrss_bytes":resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+        }
+        write_json(work / "receipts" / f"{current_stage}.json",row)
+        completed.append(current_stage)
+        note("stage-complete",stage=current_stage,passed=observed,pairs_accounted=pairs,
+             wall_seconds=row["wall_seconds"],cpu_seconds=row["cpu_seconds"])
+        return row
+
+    decide("independent","positive-n179",witness,"accept")
+    subset=copy.deepcopy(witness)
+    subset.update(id="W-n179-959-subset-positive",n=2,squares=copy.deepcopy(witness["squares"][:2]))
+    fixtures={"subset-positive":subset}
+    duplicate=copy.deepcopy(subset)
+    duplicate["squares"][1]={**copy.deepcopy(duplicate["squares"][0]),"id":2}
+    fixtures["duplicate-square-overlap"]=duplicate
+    epsilon=Fraction(1,10**30)
+    def shifted(value,amount):
+        values=[Fraction(x) for x in (value if isinstance(value,list) else [value])]
+        values[0]+=amount
+        return [str(x) for x in values] if len(values)>1 else str(values[0])
+    overlap=copy.deepcopy(subset)
+    overlap["squares"][1]["center"][1]=shifted(overlap["squares"][1]["center"][1],-epsilon)
+    fixtures["sharp-overlap"]=overlap
+    outside=copy.deepcopy(subset)
+    outside["squares"][0]["center"][1]=shifted(outside["squares"][0]["center"][1],-epsilon)
+    fixtures["sharp-outside"]=outside
+    shape=copy.deepcopy(subset)
+    shape["squares"][0]["basis"]=["2","0"]
+    fixtures["non-unit"]=shape
+    for item in plan["controls"]:
+        name=item["name"]
+        fixture=fixtures[name]
+        fixture["id"]="W-n179-959-"+name
+        control_doc=witness_envelope(fixture,schema="witness.schema.yaml")
+        path=work/"controls"/f"{name}.yaml"
+        path.write_text(yaml.safe_dump(control_doc,sort_keys=False))
+        validate_witness_document(control_doc,path=path,
+            fallback_schema=repo/"packing/witnesses/witness.schema.yaml")
+        for route in ("independent","primary"):
+            decide(route,name,fixture,item["expected"])
+    decide("primary","positive-n179",witness,"accept")
+    summary={"status":"complete","geometry":"Two maintained exact routes accept full n179; both routes accept source-derived n2 positive and refuse all four n2 controls"}
+except SliceStopped as error:
+    summary={"status":"capped-or-stopped","reason":str(error),"unfinished_stage":current_stage,
+             "geometry":"Only completed positive receipts, if any, establish their stated route"}
+    note("slice-stopped",**summary)
+except BaseException as error:
+    summary={"status":"error","exception":repr(error),"unfinished_stage":current_stage,
+             "traceback":traceback.format_exc()}
+    note("slice-error",exception=repr(error),stage=current_stage)
+finally:
+    signal.setitimer(signal.ITIMER_REAL,0)
+    summary.update(completed=completed,elapsed_seconds=time.monotonic()-started,
+                   cpu_seconds=time.process_time()-cpu_started,
+                   ru_maxrss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
+                   wall_cap_seconds=limit,control_scope="n2 source-derived fixtures, not n179 negative jobs",
+                   worker_pid=os.getpid(),python=sys.version)
+    write_json(work/"summary.json",summary)
+    print(json.dumps(summary,indent=2),flush=True)
+sys.exit(0 if summary["status"]=="complete" else 2)

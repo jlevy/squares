@@ -1,0 +1,531 @@
+"""Independent exact replay of the n179 algebraic construction, frozen before outcomes."""
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import json
+import math
+import signal
+import sys
+import time
+from dataclasses import dataclass
+from datetime import UTC, datetime
+from fractions import Fraction
+from functools import cache
+from itertools import zip_longest
+from pathlib import Path
+from typing import Any
+
+Q = Fraction
+type Poly = tuple[Fraction, ...]
+type Vector = tuple[Poly, Poly]
+ZERO: Poly = ()
+ONE: Poly = (Q(1),)
+T: Poly = (Q(0), Q(1))
+MOD: Poly = tuple(map(Q, (-2, -7, -4, 6, 14, 1)))
+SOURCE_SHA = '28edf9561e87037b5c681e4ff0051a1bd1b8e5401c1a8376fe2e66c2c18663d1'
+ROOT = (Q(0), Q(0))
+REFINEMENTS = 0
+PROGRESS: dict[str, Any] = {}
+START = time.monotonic()
+
+
+def trim(a: list[Fraction] | Poly) -> Poly:
+    b = list(a)
+    while b and b[-1] == 0:
+        b.pop()
+    return tuple(b)
+
+
+def add(a: Poly, b: Poly) -> Poly:
+    return trim([x + y for x, y in zip_longest(a, b, fillvalue=Q(0))])
+
+
+def scale(a: Poly, b: Fraction) -> Poly:
+    return trim([x * b for x in a])
+
+
+def sub(a: Poly, b: Poly) -> Poly:
+    return add(a, scale(b, Q(-1)))
+
+
+def pmul(a: Poly, b: Poly) -> Poly:
+    if not a or not b:
+        return ZERO
+    c = [Q(0)] * (len(a) + len(b) - 1)
+    for i, x in enumerate(a):
+        if x:
+            for j, y in enumerate(b):
+                if y:
+                    c[i + j] += x * y
+    return trim(c)
+
+
+def divide(a: Poly, b: Poly) -> tuple[Poly, Poly]:
+    if not b:
+        raise ZeroDivisionError('zero polynomial divisor')
+    r = list(a)
+    q = [Q(0)] * max(0, len(a) - len(b) + 1)
+    while r and len(r) >= len(b):
+        k = len(r) - len(b)
+        coefficient = r[-1] / b[-1]
+        q[k] = coefficient
+        for j, x in enumerate(b):
+            r[k + j] -= coefficient * x
+        while r and r[-1] == 0:
+            r.pop()
+    return trim(q), tuple(r)
+
+
+def mul(a: Poly, b: Poly) -> Poly:
+    return divide(pmul(a, b), MOD)[1]
+
+
+def inverse(a: Poly) -> Poly:
+    r0, r1 = MOD, a
+    s0, s1 = ZERO, ONE
+    while r1:
+        q, r = divide(r0, r1)
+        r0, r1 = r1, r
+        s0, s1 = s1, sub(s0, pmul(q, s1))
+    if len(r0) != 1:
+        raise ValueError('denominator is not invertible')
+    answer = divide(scale(s0, 1 / r0[0]), MOD)[1]
+    if mul(answer, a) != ONE:
+        raise ValueError('inverse product failed')
+    return answer
+
+
+def at(a: Poly, x: Fraction) -> Fraction:
+    r = Q(0)
+    for coefficient in reversed(a):
+        r = r * x + coefficient
+    return r
+
+
+def substitute(a: Poly, b: Poly) -> Poly:
+    r = ZERO
+    for coefficient in reversed(a):
+        r = add(mul(r, b), (coefficient,))
+    return r
+
+
+def sturm(a: Poly) -> list[Poly]:
+    result = [a, trim([Q(i) * a[i] for i in range(1, len(a))])]
+    while result[-1]:
+        rem = divide(result[-2], result[-1])[1]
+        if not rem:
+            break
+        result.append(scale(rem, Q(-1)))
+    return result
+
+
+def variations(sequence: list[Poly], x: Fraction) -> int:
+    signs = [1 if y > 0 else -1 for p in sequence if (y := at(p, x))]
+    return sum(a != b for a, b in zip(signs, signs[1:]))
+
+
+def root_count(sequence: list[Poly], left: Fraction, right: Fraction) -> int:
+    if left >= right or not at(sequence[0], left) or not at(sequence[0], right):
+        raise ValueError('interval endpoints must be ordered non-roots')
+    return variations(sequence, left) - variations(sequence, right)
+
+
+def interval(a: Poly, left: Fraction, right: Fraction) -> tuple[Fraction, Fraction]:
+    lo = hi = Q(0)
+    for coefficient in reversed(a):
+        candidates = (lo * left, lo * right, hi * left, hi * right)
+        lo, hi = min(candidates) + coefficient, max(candidates) + coefficient
+    return lo, hi
+
+
+@cache
+def sign(a: Poly) -> int:
+    global ROOT, REFINEMENTS
+    if not a:
+        return 0
+    for _ in range(257):
+        lo, hi = interval(a, *ROOT)
+        if lo > 0:
+            return 1
+        if hi < 0:
+            return -1
+        if REFINEMENTS >= 256:
+            raise ArithmeticError('sign unresolved after 256 root refinements')
+        left, right = ROOT
+        mid = (left + right) / 2
+        fm = at(MOD, mid)
+        if fm == 0:
+            raise ArithmeticError('unexpected rational root of irreducible quintic')
+        if at(MOD, left) * fm < 0:
+            ROOT = left, mid
+        else:
+            ROOT = mid, right
+        REFINEMENTS += 1
+    raise ArithmeticError('unreachable sign loop bound')
+
+
+def absolute(a: Poly) -> Poly:
+    return scale(a, Q(-1)) if sign(a) < 0 else a
+
+
+def dot(a: Vector, b: Vector) -> Poly:
+    return add(mul(a[0], b[0]), mul(a[1], b[1]))
+
+
+def parse_poly(values: list[str] | list[int]) -> Poly:
+    if len(values) > 5:
+        raise ValueError('field coordinate exceeds degree four')
+    return trim([Q(x) for x in values])
+
+
+def imod(a: list[int], p: int) -> list[int]:
+    b = [x % p for x in a]
+    while b and b[-1] == 0:
+        b.pop()
+    return b
+
+
+def irem(a: list[int], b: list[int], p: int) -> list[int]:
+    r = imod(a, p)
+    divisor = imod(b, p)
+    if not divisor:
+        raise ZeroDivisionError('finite-field zero divisor')
+    while r and len(r) >= len(divisor):
+        k = len(r) - len(divisor)
+        c = r[-1] * pow(divisor[-1], -1, p) % p
+        for j, x in enumerate(divisor):
+            r[k + j] = (r[k + j] - c * x) % p
+        r = imod(r, p)
+    return r
+
+
+def imul(a: list[int], b: list[int], modulus: list[int], p: int) -> list[int]:
+    if not a or not b:
+        return []
+    product = [0] * (len(a) + len(b) - 1)
+    for i, x in enumerate(a):
+        for j, y in enumerate(b):
+            product[i + j] += x * y
+    return irem(product, modulus, p)
+
+
+def ipower(a: list[int], power: int, modulus: list[int], p: int) -> list[int]:
+    result = [1]
+    base = a
+    while power:
+        if power % 2:
+            result = imul(result, base, modulus, p)
+        base = imul(base, base, modulus, p)
+        power //= 2
+    return result
+
+
+def irreducibility() -> dict[str, Any]:
+    f = [int(x) for x in MOD]
+    attempts: list[dict[str, Any]] = []
+    for p in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31):
+        xp = ipower([0, 1], p, f, p)
+        difference = xp + [0] * max(0, 2 - len(xp))
+        difference[1] = (difference[1] - 1) % p
+        a, b = imod(f, p), imod(difference, p)
+        while b:
+            a, b = b, irem(a, b, p)
+        gcd_degree = len(a) - 1
+        frobenius = ipower([0, 1], p**5, f, p)
+        attempts.append({'prime': p, 'gcd_degree': gcd_degree,
+                         'frobenius_p5': frobenius, 'x_p': xp})
+        if gcd_degree == 0 and frobenius == [0, 1]:
+            return {'proved': True, 'prime': p, 'attempts': attempts}
+    raise ArithmeticError(f'irreducibility unresolved: {attempts}')
+
+
+@dataclass(frozen=True)
+class Orientation:
+    e: Vector
+    v: Vector
+
+
+@dataclass(frozen=True)
+class Square:
+    center: Vector
+    orientation: int
+
+
+def orientation(u: Poly) -> Orientation:
+    square = mul(u, u)
+    denominator = add(ONE, square)
+    if sign(denominator) <= 0:
+        raise ValueError('nonpositive orientation denominator')
+    inv = inverse(denominator)
+    c, s = mul(sub(ONE, square), inv), mul(scale(u, Q(2)), inv)
+    result = Orientation((c, s), (scale(s, Q(-1)), c))
+    if dot(result.e, result.e) != ONE or dot(result.v, result.v) != ONE:
+        raise ValueError('orientation axes are not unit')
+    if dot(result.e, result.v):
+        raise ValueError('orientation axes are not perpendicular')
+    return result
+
+
+def support(o: Orientation, axis: Vector) -> Poly:
+    return scale(add(absolute(dot(o.e, axis)), absolute(dot(o.v, axis))), Q(1, 2))
+
+
+class Geometry:
+    def __init__(self, orientations: list[Orientation]) -> None:
+        self.orientations = orientations
+        self.axes = [axis for o in orientations for axis in (o.e, o.v)]
+        self.radii = [[support(o, axis) for axis in self.axes] for o in orientations]
+        self.pair_radii = {
+            (i, j, a): add(self.radii[i][a], self.radii[j][a])
+            for i in range(len(orientations))
+            for j in range(len(orientations))
+            for a in range(len(self.axes))
+        }
+        self.wall_radii = [(support(o, (ONE, ZERO)), support(o, (ZERO, ONE)))
+                           for o in orientations]
+        root_mid = sum(ROOT, Q(0)) / 2
+        self.float_axes = [(float(at(axis[0], root_mid)), float(at(axis[1], root_mid)))
+                           for axis in self.axes]
+        self.float_radii = {key: float(at(radius, root_mid))
+                            for key, radius in self.pair_radii.items()}
+        self.mid = root_mid
+
+    def walls(self, square: Square, side: Poly) -> list[Poly]:
+        x, y = square.center
+        rx, ry = self.wall_radii[square.orientation]
+        return [sub(x, rx), sub(sub(side, x), rx), sub(y, ry), sub(sub(side, y), ry)]
+
+    def separate(self, first: Square, second: Square) -> tuple[int, int, Poly] | None:
+        delta = (sub(second.center[0], first.center[0]),
+                 sub(second.center[1], first.center[1]))
+        dx, dy = float(at(delta[0], self.mid)), float(at(delta[1], self.mid))
+        indices = sorted({2 * first.orientation, 2 * first.orientation + 1,
+                          2 * second.orientation, 2 * second.orientation + 1})
+        def heuristic(a: int) -> float:
+            ax, ay = self.float_axes[a]
+            return abs(dx * ax + dy * ay) - self.float_radii[
+                first.orientation, second.orientation, a]
+        indices.sort(key=heuristic, reverse=True)
+        for a in indices:
+            projection = absolute(dot(delta, self.axes[a]))
+            gap = sub(projection, self.pair_radii[first.orientation, second.orientation, a])
+            gap_sign = sign(gap)
+            if gap_sign >= 0:
+                return a, gap_sign, gap
+        return None
+
+
+def controls(geometry: Geometry, squares: list[Square], side: Poly,
+             sequence: list[Poly]) -> list[dict[str, Any]]:
+    results: list[dict[str, Any]] = []
+    def require(name: str, condition: bool, detail: Any) -> None:
+        results.append({'name': name, 'passed': condition, 'detail': detail})
+        PROGRESS['controls'] = results
+        if not condition:
+            raise ValueError(f'control failed: {name}')
+    require('sign_zero_plus_minus_one',
+            [sign(ZERO), sign(ONE), sign((Q(-1),))] == [0, 1, -1], [0, 1, -1])
+    require('f_relation_and_plus_one', substitute(MOD, T) == ZERO
+            and substitute(add(MOD, ONE), T) == ONE, 'remainders zero and one')
+    count = root_count(sequence, Q(0), Q(1, 10))
+    require('wrong_root_interval_rejected', count == 0, count)
+    axis_geometry = Geometry([orientation(ZERO)])
+    first = Square(((Q(1, 2),), (Q(1, 2),)), 0)
+    second = Square(((Q(3, 2),), (Q(1, 2),)), 0)
+    margins = [sign(m) for m in axis_geometry.walls(first, ONE)]
+    require('single_unit_square_contacts', margins == [0, 0, 0, 0], margins)
+    touching = axis_geometry.separate(first, second)
+    contained = all(sign(m) >= 0 for s in (first, second)
+                    for m in axis_geometry.walls(s, (Q(2),)))
+    require('two_touching_unit_squares', touching is not None
+            and touching[1] == 0 and contained, str(touching))
+    require('duplicate_unit_square_rejected', axis_geometry.separate(first, first) is None,
+            'no separating axis')
+    outside = Square(((Q(-1, 10),), (Q(1, 2),)), 0)
+    margins = [sign(m) for m in axis_geometry.walls(outside, ONE)]
+    require('outside_wall_rejected', any(x < 0 for x in margins), margins)
+    require('source_square_duplicate_rejected',
+            geometry.separate(squares[0], squares[0]) is None, 'source pair 0,1 duplicated')
+    smaller = sub(side, (Q(1, 1000000),))
+    violations = [[i, wall] for i, s in enumerate(squares)
+                  for wall, m in enumerate(geometry.walls(s, smaller)) if sign(m) < 0]
+    require('source_side_shortening_rejected', bool(violations), violations)
+    return results
+
+
+def rational_strings(a: Poly) -> list[str]:
+    return list(map(str, a))
+
+
+def shift_polynomial(a: Poly, shift: Fraction) -> Poly:
+    result = [Q(0)] * len(a)
+    for i, coefficient in enumerate(a):
+        for j in range(i + 1):
+            result[j] += coefficient * math.comb(i, j) * shift ** (i - j)
+    return trim(result)
+
+
+def write_overlay(squares: list[Square], orientations: list[Orientation],
+                  side: Poly, output: Path) -> None:
+    midpoint = sum(ROOT, Q(0)) / 2
+    length = float(at(side, midpoint))
+    polygons = []
+    points_json = []
+    for i, square in enumerate(squares):
+        o = orientations[square.orientation]
+        x, y = (float(at(a, midpoint)) for a in square.center)
+        ex, ey = (float(at(a, midpoint)) for a in o.e)
+        vx, vy = (float(at(a, midpoint)) for a in o.v)
+        corners = [(x + a * ex + b * vx, y + a * ey + b * vy)
+                   for a, b in ((-.5, -.5), (.5, -.5), (.5, .5), (-.5, .5))]
+        points_json.append({'index': i, 'center': [x, y], 'corners': corners})
+        points = ' '.join(f'{px:.14g},{length-py:.14g}' for px, py in corners)
+        color = '#80b1d3' if square.orientation == 0 else '#fb8072'
+        polygons.append(f'<polygon points="{points}" fill="{color}" '
+                        f'stroke="#222" stroke-width="0.012"><title>Square {i}</title></polygon>')
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="-.1 -.1 {length+.2} {length+.2}" '
+           f'width="900" height="900"><rect width="{length}" height="{length}" '
+           'fill="white" stroke="black" stroke-width="0.02"/>' + ''.join(polygons) + '</svg>\n')
+    (output / 'overlay.svg').write_text(svg)
+    (output / 'overlay-coordinates.json').write_text(json.dumps(
+        {'proof': False, 'purpose': 'approximate visual overlay only', 'side': length,
+         'squares': points_json}, indent=2) + '\n')
+
+
+def verify(source: Path, output: Path) -> None:
+    global ROOT
+    raw = source.read_bytes()
+    digest = hashlib.sha256(raw).hexdigest()
+    if digest != SOURCE_SHA:
+        raise ValueError('source digest mismatch')
+    data: dict[str, Any] = json.loads(gzip.decompress(raw))
+    if tuple(map(Q, data['field']['f'])) != MOD:
+        raise ValueError('unexpected defining polynomial')
+    if data['n'] != 179 or len(data['squares']) != 179:
+        raise ValueError('expected exactly 179 squares')
+    left, right = map(Q, data['field']['t_interval'])
+    ROOT = left, right
+    sequence = sturm(MOD)
+    count = root_count(sequence, left, right)
+    if count != 1 or at(MOD, left) * at(MOD, right) >= 0:
+        raise ValueError('parameter interval is not a single simple crossing')
+    PROGRESS['field'] = {'source_sha256': digest, 'sturm_variations': [
+        variations(sequence, left), variations(sequence, right)],
+        'root_count': count, 'sturm_sequence': [rational_strings(p) for p in sequence],
+        'input_root_interval': list(map(str, ROOT)), 'irreducibility': irreducibility()}
+    side = parse_poly(data['S']['in_K'])
+    side_poly = tuple(map(Q, data['S']['poly']))
+    if substitute(side_poly, side):
+        raise ValueError('side polynomial does not vanish')
+    side_left, side_right = map(Q, data['S']['interval'])
+    if sign(sub(side, (side_left,))) <= 0 or sign(sub((side_right,), side)) <= 0:
+        raise ValueError('side outside its claimed interval')
+    if sign(side) <= 0:
+        raise ValueError('nonpositive container side')
+    shifted = sub(side, (Q(5),))
+    shifted_poly = shift_polynomial(side_poly, Q(5))
+    if substitute(shifted_poly, shifted):
+        raise ValueError('shifted side polynomial mismatch')
+    PROGRESS['side'] = {'in_K': rational_strings(side), 'polynomial': rational_strings(side_poly),
+                        'interval': [str(side_left), str(side_right)], 'positive': True,
+                        'polynomial_remainder': [], 'minus_five_in_K': rational_strings(shifted),
+                        'minus_five_polynomial': rational_strings(shifted_poly),
+                        'minus_five_interval': [str(side_left-5), str(side_right-5)],
+                        'published_L70_identity': 'not independently established'}
+    # Each square's u defines its orientation; m and classes are producer metadata.
+    class_u = list(dict.fromkeys(parse_poly(record['u']) for record in data['squares']))
+    orientations = [orientation(u) for u in class_u]
+    squares = []
+    for record in data['squares']:
+        index = class_u.index(parse_poly(record['u']))
+        squares.append(Square((parse_poly(record['x']), parse_poly(record['y'])), index))
+    PROGRESS['orientation_classes'] = [{'u': rational_strings(u),
+        'count': sum(s.orientation == i for s in squares),
+        'e': [rational_strings(c) for c in orientations[i].e],
+        'v': [rational_strings(c) for c in orientations[i].v]} for i, u in enumerate(class_u)]
+    geometry = Geometry(orientations)
+    PROGRESS['controls'] = controls(geometry, squares, side, sequence)
+    PROGRESS['walls_checked'] = 0
+    PROGRESS['pairs_checked'] = 0
+    walls = []
+    for i, square in enumerate(squares):
+        for wall, margin in enumerate(geometry.walls(square, side)):
+            verdict = sign(margin)
+            if verdict < 0:
+                raise ValueError(f'negative wall margin: square {i}, wall {wall}')
+            walls.append({'square': i, 'wall': wall, 'sign': verdict,
+                          'margin': rational_strings(margin)})
+            PROGRESS['walls_checked'] += 1
+    (output / 'walls.json').write_text(json.dumps(walls, indent=2) + '\n')
+    PROGRESS['wall_contacts'] = sum(w['sign'] == 0 for w in walls)
+    contacts = []
+    with (output / 'pairs.jsonl').open('w') as stream:
+        for i, first in enumerate(squares):
+            for j in range(i + 1, len(squares)):
+                result = geometry.separate(first, squares[j])
+                if result is None:
+                    raise ValueError(f'no separating axis: squares {i},{j}')
+                axis, verdict, gap = result
+                stream.write(json.dumps({'i': i, 'j': j, 'axis': axis, 'sign': verdict,
+                                         'margin': rational_strings(gap)}) + '\n')
+                if verdict == 0:
+                    contacts.append([i, j, axis])
+                PROGRESS['pairs_checked'] += 1
+                if PROGRESS['pairs_checked'] % 1000 == 0:
+                    stream.flush()
+                    sys.stdout.write(json.dumps({'event': 'progress', 'pairs': PROGRESS['pairs_checked'],
+                                                 'elapsed_s': time.monotonic() - START}) + '\n')
+                    sys.stdout.flush()
+    PROGRESS['pair_contacts'] = contacts
+    if PROGRESS['walls_checked'] != 716 or PROGRESS['pairs_checked'] != 15931:
+        raise ValueError('incomplete geometry enumeration')
+    write_overlay(squares, orientations, side, output)
+    PROGRESS['status'] = 'verified_finite_construction'
+
+
+def deadline(_signum: int, _frame: Any) -> None:
+    raise TimeoutError('300-second initial wall cap reached')
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--source', type=Path, required=True)
+    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--gate', type=Path)
+    args = parser.parse_args()
+    output: Path = args.output
+    output.mkdir(parents=True, exist_ok=False)
+    PROGRESS.update({'status': 'started', 'started_utc': datetime.now(UTC).isoformat(),
+                     'python_version': sys.version, 'wall_cap_seconds': 300,
+                     'program_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()})
+    signal.signal(signal.SIGALRM, deadline)
+    signal.setitimer(signal.ITIMER_REAL, 300)
+    exit_code = 1
+    try:
+        if args.gate:
+            while not args.gate.exists():
+                time.sleep(0.05)
+        verify(args.source, output)
+        exit_code = 0
+    except TimeoutError as exc:
+        PROGRESS.update({'status': 'partial_wall_cap', 'error': str(exc)})
+        exit_code = 124
+    except (ArithmeticError, ValueError, KeyError, TypeError, OSError) as exc:
+        PROGRESS.update({'status': 'failed_or_unresolved', 'error_type': type(exc).__name__,
+                         'error': str(exc)})
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        PROGRESS.update({'elapsed_seconds': time.monotonic() - START,
+                         'finished_utc': datetime.now(UTC).isoformat(),
+                         'final_root_interval': list(map(str, ROOT)),
+                         'root_refinements': REFINEMENTS,
+                         'sign_cache': str(sign.cache_info()), 'exit_code': exit_code})
+        (output / 'receipt.json').write_text(json.dumps(PROGRESS, indent=2) + '\n')
+        sys.stdout.write(json.dumps(PROGRESS, indent=2) + '\n')
+    return exit_code
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

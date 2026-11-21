@@ -1,0 +1,43 @@
+{
+  "format": "issue-attachment-sources-v1",
+  "issue": "https://github.com/jlevy/squares/issues/997",
+  "comment": "https://github.com/jlevy/squares/issues/997#issuecomment-7058975230",
+  "published": "2026-11-21T07:00:54Z",
+  "author": "JoostdeWinter",
+  "retrieved_utc": "2026-11-21T17:18:34.202101+00:00",
+  "attachment": {
+    "url": "https://github.com/user-attachments/files/35205206/n90-rational.zip",
+    "bytes": 39377,
+    "sha256": "c04a0a60ca91f15922f6077c878c50b654e759ee659c14d43096cadaae574afa",
+    "sha256_stated_by_comment": false,
+    "raw_asset_retained": false,
+    "members_retained": "Original factual candidate and input gzip files, signed previous-comparison JSON and comparisons CSV; no producer program or prose.",
+    "licence": "No specific licence is stated in the author comment or factual members. The author explicitly submitted this source in comment 7058975230; the packet records the submission presumption and factual-data retention policy, without relicensing."
+  },
+  "members": [
+    {
+      "path": "comparisons.csv",
+      "bytes": 8963,
+      "sha256": "798f9f754824a5c72d570ce66a5edce4c2ee7742a7725a16138738b684412601",
+      "retained_at": "source/comparisons.csv"
+    },
+    {
+      "path": "90/input.json.gz",
+      "bytes": 6080,
+      "sha256": "c519aa1822709897d541e7b83efdb027054ad636059bfb340acdb3e9c4a5fb9b",
+      "retained_at": "source/90/input.json.gz"
+    },
+    {
+      "path": "90/candidate.json.gz",
+      "bytes": 26873,
+      "sha256": "3a8e8913d0b87ac0b68c3fc4ac24d6ad042074c9696a2cdbfae3682b2e0b96c7",
+      "retained_at": "source/90/candidate.json.gz"
+    },
+    {
+      "path": "90/previous-comparisons.json",
+      "bytes": 4157,
+      "sha256": "3d9ba1c52a41c9c12d106d76fd35f46befef0227c702c0373a9c5ed058d5d6cc",
+      "retained_at": "source/90/previous-comparisons.json"
+    }
+  ]
+}

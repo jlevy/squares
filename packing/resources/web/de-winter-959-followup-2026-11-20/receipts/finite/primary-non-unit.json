@@ -1,0 +1,115 @@
+{
+  "stage": "primary-non-unit",
+  "route": "primary",
+  "case": "non-unit",
+  "n": 2,
+  "witness_content_sha256": "cf023e848ca6bf781517cfbe099ffb6f90189816eb24b978267b8da7a1c8fff8",
+  "expected": "refuse-shape",
+  "expected_outcome_met": true,
+  "pairs_accounted": 1,
+  "result": {
+    "operation": "verify",
+    "id": "W-n179-959-non-unit",
+    "coordinate_provenance": "not-established",
+    "method": "exact-algebraic",
+    "verification_passed": false,
+    "n": 2,
+    "side": "13.88096037155557959469669157492336415899451456818",
+    "pairs_tested": 1,
+    "minimum_containment_clearance": "-0.5",
+    "minimum_best_pair_gap": "-0.5",
+    "field_certificate": {
+      "normalized_minimal_polynomial": [
+        "1",
+        "14",
+        "6",
+        "-4",
+        "-7",
+        "-2"
+      ],
+      "irreducible_over_q": true,
+      "irreducibility_method": "irreducible-reduction-mod-prime",
+      "irreducibility_prime": 3,
+      "declared_isolating_interval": [
+        "-3714053342624773158945462227140672067633/10000000000000000000000000000000000000000",
+        "-3714053342624773158945460227140672067633/10000000000000000000000000000000000000000"
+      ],
+      "root_count_method": "sturm-sequence-over-q",
+      "root_count_in_open_interval": 1,
+      "endpoints_are_not_roots": true
+    },
+    "failures": [
+      [
+        "shape",
+        "square 0 edge 0 is not unit length"
+      ],
+      [
+        "shape",
+        "square 0 edge 1 is not unit length"
+      ],
+      [
+        "shape",
+        "square 0 edge 2 is not unit length"
+      ],
+      [
+        "shape",
+        "square 0 edge 3 is not unit length"
+      ],
+      [
+        "container",
+        "square 0 violates y>=0"
+      ],
+      [
+        "container",
+        "square 0 violates y>=0"
+      ],
+      [
+        "overlap",
+        "squares 0 and 1 overlap"
+      ]
+    ],
+    "limitations": "Verifies witness feasibility and its upper bound, not global optimality."
+  },
+  "report": {
+    "valid": false,
+    "n": 2,
+    "container_contacts": 0,
+    "touching_pairs": 0,
+    "strict_pairs": 0,
+    "pairs_tested": 1,
+    "touching_pair_indices": [],
+    "failures": [
+      [
+        "shape",
+        "square 0 edge 0 is not unit length"
+      ],
+      [
+        "shape",
+        "square 0 edge 1 is not unit length"
+      ],
+      [
+        "shape",
+        "square 0 edge 2 is not unit length"
+      ],
+      [
+        "shape",
+        "square 0 edge 3 is not unit length"
+      ],
+      [
+        "container",
+        "square 0 violates y>=0"
+      ],
+      [
+        "container",
+        "square 0 violates y>=0"
+      ],
+      [
+        "overlap",
+        "squares 0 and 1 overlap"
+      ]
+    ]
+  },
+  "wall_seconds": 0.03839895798591897,
+  "cpu_seconds": 0.00865500000000008,
+  "ru_maxrss_bytes": 93061120
+}

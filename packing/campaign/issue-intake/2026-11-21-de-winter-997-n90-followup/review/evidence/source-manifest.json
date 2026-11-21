@@ -1,0 +1,42 @@
+{
+  "copied_at_utc": "2026-11-21T17:44:46.218202+00:00",
+  "files": [
+    {
+      "member": "90/candidate.json.gz",
+      "original_path": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/packing/resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz",
+      "bytes": 26873,
+      "sha256": "3a8e8913d0b87ac0b68c3fc4ac24d6ad042074c9696a2cdbfae3682b2e0b96c7",
+      "decoded_bytes": 145827,
+      "decoded_sha256": "5f58ac1e3f082df767237ae430180d64a09a7332b3d0b00015503cfa3c9e2099"
+    },
+    {
+      "member": "90/input.json.gz",
+      "original_path": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/packing/resources/web/de-winter-997-followup-2026-11-21/source/90/input.json.gz",
+      "bytes": 6080,
+      "sha256": "c519aa1822709897d541e7b83efdb027054ad636059bfb340acdb3e9c4a5fb9b",
+      "decoded_bytes": 65520,
+      "decoded_sha256": "53efc701cdce250af67bbf9167213c96877ea55ffe6a684aa49c70fb23c2fa02"
+    },
+    {
+      "member": "90/previous-comparisons.json",
+      "original_path": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/packing/resources/web/de-winter-997-followup-2026-11-21/source/90/previous-comparisons.json",
+      "bytes": 4157,
+      "sha256": "3d9ba1c52a41c9c12d106d76fd35f46befef0227c702c0373a9c5ed058d5d6cc",
+      "decoded_bytes": 4157,
+      "decoded_sha256": "3d9ba1c52a41c9c12d106d76fd35f46befef0227c702c0373a9c5ed058d5d6cc"
+    },
+    {
+      "member": "comparisons.csv",
+      "original_path": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/packing/resources/web/de-winter-997-followup-2026-11-21/source/comparisons.csv",
+      "bytes": 8963,
+      "sha256": "798f9f754824a5c72d570ce66a5edce4c2ee7742a7725a16138738b684412601",
+      "decoded_bytes": 8963,
+      "decoded_sha256": "798f9f754824a5c72d570ce66a5edce4c2ee7742a7725a16138738b684412601"
+    }
+  ],
+  "author_comment": {
+    "url": "https://github.com/jlevy/squares/issues/997#issuecomment-7058975230",
+    "api_url": "https://api.github.com/repos/jlevy/squares/issues/comments/7058975230",
+    "retained_sha256": "9fbdfab824840848dbcaa019a8392ed9b50c9238efc7fa8eea19d6b05c6dd5bc"
+  }
+}

@@ -1,0 +1,280 @@
+---
+title: Independent Review of the N179 Algebraic Construction
+date: 2026-11-21
+status: accepted
+reviewer: Codex family, strong tier, maximum reasoning
+reviewer_kind: ai
+relation: project
+kind: adversarial
+verdict: accepted
+scope: The 179-square finite construction encoded in n179.minpoly.json.gz
+---
+# Independent Review of the N179 Algebraic Construction
+
+The original algebraic data defines 179 unit squares with disjoint interiors inside a
+square of exact side
+
+$$S=13.88096037155557959469669157\ldots.$$
+
+An independently written checker proved all 716 containment inequalities and a
+separating-axis inequality for every one of the 15,931 unordered pairs.
+It accepted exact contacts and rejected the predeclared overlap and containment
+mutations. The complete replay took 2.738 seconds under a 300-second wall cap.
+There is no open mathematical defect in this finite construction.
+
+The independent review accepts the construction at the explicitly defined algebraic side
+`S`. The statement that `S` is the published 70-square side plus five needs an
+additional source-identification step: this review proves the exact algebraic value
+`S-5`, but its permitted inputs do not identify the externally published 70-square
+construction. Neither the certificate nor this review establishes optimality.
+
+## Claim and Source
+
+The scope is the certificate attached to
+[Joost de Winter’s comment on issue #959](https://github.com/jlevy/squares/issues/959#issuecomment-7050119161),
+created 2026-11-20T20:41:05Z, last edited 2026-11-20T20:41:19Z. The comment credits Doğa
+Özden with the 179-square construction, building on Ryan Xu’s 70-square packing and Evan
+Daniel’s refinement, and credits Joost de Winter with OpenAI assistance for the
+algebraic reconstruction.
+Those are the author’s attribution statements; this review does not adjudicate
+historical priority.
+
+The mathematical input was the original `n179.minpoly.json.gz`, SHA-256
+`28edf9561e87037b5c681e4ff0051a1bd1b8e5401c1a8376fe2e66c2c18663d1`. The original
+mathematical file and author-comment API response are retained in the
+[evidence package](../../../packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/README.md).
+No new register identifier is assigned here; the coordinator owns the mapping of this
+review into the Stage 4 record.
+
+## Exact Construction
+
+Read coefficient arrays in ascending powers of `t`, where
+
+$$f(T)=T^5+14T^4+6T^3-4T^2-7T-2$$
+
+and `t` is the unique root in the source’s rational `field.t_interval`, centered near
+`-0.3714053342624773158945461227140672067633`. The replay’s rational Sturm sequence has
+three sign changes at the left endpoint and two at the right endpoint, proving exactly
+one root in that interval.
+The endpoints have opposite nonzero signs.
+
+The reduction of `f` modulo three is irreducible: the retained finite-field calculation
+gives `gcd(X^3-X,f)=1` and `X^243 mod f=X`. For a degree-five polynomial these are the
+irreducibility conditions, since five is prime; the latter condition also excludes
+repeated factors. As `f` is monic over the integers, irreducibility modulo three proves
+irreducibility over the rationals.
+Thus `K=Q[t]/(f)` is a degree-five number field, with the chosen real embedding fixed by
+the isolating interval.
+
+The source gives
+
+$$S=\frac{1199}{89}-\frac{209}{178}t-\frac{78}{89}t^2
+-\frac{335}{178}t^3-\frac{12}{89}t^4.$$
+
+Exact substitution in the source side polynomial proves
+
+$$89S^5-5450S^4+132794S^3-1608644S^2+9684049S-23168258=0.$$
+
+The replay also proves `S` positive and strictly between the two rational values in
+`S.interval`; it does not trust the displayed decimal value for this decision.
+The nonconstant reduced expression for `S` makes it nonrational.
+Since the extension degree is prime, `Q(S)=K`, so this degree-five relation gives its
+minimal polynomial up to a nonzero rational factor.
+
+For square `i`, let `c_i=(x_i,y_i)` be the two field elements from its record and let
+`u_i` be its explicit `u` field.
+Define
+
+$$e_i=\left(\frac{1-u_i^2}{1+u_i^2},\frac{2u_i}{1+u_i^2}\right),
+\qquad v_i=(-(e_i)_y,(e_i)_x).$$
+
+The constructed square is
+
+$$Q_i=\{c_i+a e_i+b v_i:-1/2\leq a,b\leq1/2\}.$$
+
+The replay checks every denominator is positive and checks the unit norms and zero dot
+products exactly. Consequently every `Q_i` is a genuine Euclidean unit square.
+There are 137 squares with `u=0`, 26 with `u=t`, and 16 with distinct rational `u`.
+Grouping these 18 orientations only avoids repeated arithmetic.
+The `m`, `classes`, `pins`, `equations`, `stationary` and `stats` metadata are not
+hypotheses of this construction proof.
+
+## Why the Finite Checks Prove a Packing
+
+For any axis `a`, the half-width of `Q_i` projected onto `a` is
+
+$$h_i(a)=\tfrac12\bigl(|e_i\cdot a|+|v_i\cdot a|\bigr).$$
+
+The four wall margins are
+
+$$x_i-h_i((1,0)),\quad S-x_i-h_i((1,0)),\quad
+ y_i-h_i((0,1)),\quad S-y_i-h_i((0,1)).$$
+
+Their nonnegativity proves that every point of `Q_i` lies in `[0,S]^2`. For each
+unordered pair `(i,j)`, the checker tries the two axes of each square and finds an axis
+`a` for which
+
+$$|(c_j-c_i)\cdot a|-h_i(a)-h_j(a)\geq0.$$
+
+The projected intervals then have disjoint interiors, so the interiors of the two
+squares cannot intersect.
+Equality permits boundary contact, as the packing problem requires.
+Every square and every unordered pair is included; the checker uses no contact-graph
+premise and does not assume that unlisted pairs are safe.
+These facts prove the upper bound `s(179) <= S` for the minimum enclosing side.
+
+Products and inverses use exact rational polynomial arithmetic modulo `f`. Zero is
+decided by a zero reduced coefficient vector.
+A nonzero expression is accepted as positive or negative only when rational interval
+Horner evaluation excludes zero.
+The root interval can be bisected exactly to resolve a sign; this replay needed two
+bisections in total.
+Floating-point values only order candidate separating axes and draw the overlay.
+Every accepted margin is decided again by exact arithmetic.
+
+## Replay and Controls
+
+The first implementation was frozen at 2026-11-21T18:00:37.114008Z. It failed before
+geometry because the reviewer had assumed `m` indexed `classes`. All source `m` values
+are zero, although the per-square `u` values vary.
+The original code and failure receipt remain in `frozen/`. A disclosed parser correction
+was frozen at 2026-11-21T18:02:22.171589Z, before any successful source-geometry
+outcome. The correction follows each square’s own `u`, which was already the explicit
+mathematical definition in the initial plan.
+No failed geometric condition was removed.
+
+The deciding program was
+[frozen/replay-v2.py](../../../packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/frozen/replay-v2.py.txt),
+SHA-256 `f5a657ad1f997f0f460d0030a5d05a48be45d80a74fd919968363e392d48cd99`. Its
+[receipt](../../../packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/frozen/run-02/receipt.json)
+records:
+
+| Check | Result |
+| --- | --- |
+| Square count and exact orientations | 179 squares, 18 orientations |
+| Root isolation and irreducibility | One real root in the interval; irreducible modulo three |
+| Side polynomial and interval | Exact remainder zero; positive side inside its interval |
+| Wall inequalities | 716 accepted, 42 equalities |
+| Unordered pair inequalities | 15,931 accepted, 417 selected witnesses with equality |
+| Predeclared controls | Nine passed |
+| Wall time and exit | 2.738 seconds; exit zero |
+
+The 417 equalities count the selected separating witnesses; this is not a complete
+classification of geometric contacts or contact-graph edges.
+
+The controls verify exact signs of zero and plus/minus one, a zero polynomial relation
+and its nonzero perturbation, rejection of a root-free interval, a unit square at exact
+wall contact, two squares at exact edge contact, rejection of coincident squares, and
+rejection of a square extending beyond a wall.
+On the source geometry, duplicating square zero fails pair separation and shortening `S`
+by `1/1000000` makes 20 wall margins negative.
+These mutations are applied to the decoded geometric objects and tested by the same
+exact predicates that accept the original; they are not merely digest mismatches.
+
+Each wall margin is retained in
+[walls.json](../../../packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/frozen/run-02/walls.json.gz),
+and each pair’s selected axis, margin polynomial and sign is retained in
+[pairs.jsonl](../../../packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/frozen/run-02/pairs.jsonl.gz).
+The
+[SVG overlay](../../../packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/frozen/run-02/overlay.svg)
+and its numeric coordinates are visual aids, not proof evidence.
+
+A dedicated observe-only memory guard watched the single Python 3.14.7 worker.
+It observed at most one worker process and a 0.03 GiB peak measured tree footprint; its
+three samples reported pressure level one and at least 9.86 GB reclaimable memory.
+The guard recorded low host swap-volume headroom, but no intervention or late heartbeat.
+Worker and guard both exited zero.
+Their logs and launcher receipt remain in `frozen/`.
+
+## Findings and Questions
+
+**N1 — Note, scope of the published-side identification.** Source:
+`n179.minpoly.json.gz`, `$.S`; author comment 7050119161, first paragraph.
+Exact algebra gives `L=S-5` and
+
+$$89L^5-3225L^4+46044L^3-322984L^2+1110284L-1492988=0,$$
+
+with `L=8.88096037155557959469669157...` in the shifted rational interval.
+This proves the shift for the certificate’s algebraic side, but no permitted source
+identified that root with the side of the externally published 70-square construction.
+The finite 179-square upper bound is accepted independently of that identification.
+The post-freeze maintained comparison below supplies the additional bridge.
+A combined claim using the published `L70` name should cite an independently checked
+bridge to the 70-square source.
+Which retained primary 70-square datum fixes that side?
+
+**N2 — Note, input metadata.** Source: `n179.minpoly.json.gz`, `$.squares[40].m`,
+`$.squares[40].u`, and `$.classes`. The reviewer’s initial class-index assumption was
+unsupported and failed closed.
+The explicit construction uses each square’s `u`, making the meaning of `m` unnecessary.
+A short schema description of `m` and `classes` would prevent this ambiguity for other
+readers. This is a documentation question, not a defect in the accepted geometry.
+
+There are no blocking, major or minor mathematical findings against the construction at
+`S`. The review does not assign a stronger claim to source stationarity or pins.
+For significance, the independently replayable exact construction certificate supports
+an S3 verification contribution.
+The permitted inputs establish neither a new best numerical bound nor a result that
+warrants S4/S5; the coordinator should compare this with the registered result’s
+existing significance rationale.
+
+## Independence and Trust Boundary
+
+Before the initial freeze, the reviewer read the original algebraic input and the single
+author comment. A minimal README query found no format terms; only its headings and
+Markdown/text filename inventory were displayed.
+The reviewer did not read any producer program, project verifier, prior review or prior
+receipt before either mathematical freeze.
+The independent arithmetic and geometry code imports only the Python standard library
+and shares no deciding implementation with the producer.
+The source numbers and the mathematical problem are the shared inputs.
+
+After the first failed run, the reviewer read the standard Stage 4 procedure and later
+the review-record and code-retention requirements.
+These supply publication rules, not mathematical premises.
+No earlier review outcome has been read while writing this review.
+No earlier review outcome informed those blind findings.
+The post-freeze comparison below records the later maintained evidence separately.
+
+The computational trust boundary includes CPython 3.14.7, its integer and Fraction
+arithmetic, file decoding, this retained implementation, and the hardware/OS execution.
+This is an exact computational verification with an explicit mathematical derivation; it
+is not a proof-assistant formalization or an independent human review.
+The source digest establishes continuity with the coordinator-supplied artifact.
+This lane did not independently download and bind the author’s ZIP attachment to that
+artifact, so archive extraction custody remains the coordinator’s evidence obligation.
+
+The
+[evidence package](../../../packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/README.md)
+retains the executed code, receipts and portable replay command.
+The coordinator owns verifier registration, mapped evidence entries and any
+verification-rung change.
+
+## Post-Freeze Comparison With Maintained Evidence
+
+After the independent findings were written, the reviewer read the retained maintained
+side comparison and finite replay summaries.
+The
+[side comparison](../../../packing/resources/web/de-winter-959-followup-2026-11-20/receipts/side-comparison.json)
+identifies the original parameter as `t=-alpha` for the retained n70 and n207 witnesses:
+it reports one root in each source interval and in their mapped intersection, and an
+exact zero side-polynomial composition.
+This supplies the later algebraic bridge `S179=L70+5=L207-1`; it was not a premise of
+the blind construction replay.
+The
+[maintained replay summary](../../../packing/resources/web/de-winter-959-followup-2026-11-20/receipts/finite/summary.json)
+reports acceptance of the full n179 geometry by both maintained exact routes, plus
+rejection of four source-derived n2 controls.
+The controls’ n2 scope is explicit.
+
+The archive-custody comparison binds the retained n179 gzip to the author attachment’s
+member. The starting GeiserX geometry hash remains unresolved, so no independent
+reconstruction of that historical input is claimed.
+Credit remains with Doğa Özden for the construction after Ryan Xu and Evan Daniel, and
+with Joost de Winter for the algebraic certificate.
+No contributor verification program or narrative was read or copied into this review
+package.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
