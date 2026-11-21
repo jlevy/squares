@@ -736,7 +736,6 @@ def _sources() -> dict[str, Source]:
         packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
         packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
-        packet_source("T-309", "joegun-upper-bounds-2026-11-16"),
         # The pass of 21 November 2026 (think-8yyy) moved 199 and 172 to Joost de Winter's
         # issues 939 and 946 (T-285, T-286), T-284's and T-282's packings re-solved to the
         # exact local optimum of T-282's arrangement, new results under the owner's option D
@@ -767,6 +766,10 @@ def _sources() -> dict[str, Source]:
         packet_source("T-332", "de-winter-s270-upper-bound-2026-11-17"),
         packet_source("T-333", "de-winter-s299-upper-bound-2026-11-18"),
         packet_source("T-335", "samanyu-n109-2026-11-07"),
+        # The pass of 21 November 2026 (think-kzwl) moves 305 from T-309 to
+        # de Winter's issue-1052 refinement. T-309 has no current house; the
+        # JoeGun packet still supplies T-306, T-307 and T-308 above.
+        packet_source("T-336", "de-winter-n305-2026-11-20"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -979,7 +982,7 @@ ADOPTED: dict[int, str] = {
     302: "T-193",
     303: "T-278",
     304: "T-273",
-    305: "T-309",
+    305: "T-336",
     306: "T-174",
     307: "T-326",
     308: "T-221",
@@ -1136,8 +1139,9 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: (think-b0w5); lanes w7-optd-1118 to w7r2-optd-1118 made the import and regularized the
 #: new witnesses on 18 November, and the adoption moved to the day the branch merges, since
 #: a day's archive holds one prior state a count.
-#: The same UTC day (think-91fu) adopted T-334 at 228 from T-301. The archive keeps
-#: the prior case records at 172, 199 and 228 together.
+#: The same UTC day (think-91fu) adopted T-334 at 228 from T-301, then T-335 at 109
+#: (think-wvr8) and T-336 at 305 from T-309 (think-kzwl). The archive keeps each
+#: prior case once, preserving the existing 109, 172, 199 and 228 rows when 305 joins.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1230,7 +1234,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
     "2026-11-20": frozenset({127, 268, 270, 299}),
-    "2026-11-21": frozenset({109, 172, 199, 228}),
+    "2026-11-21": frozenset({109, 172, 199, 228, 305}),
 }
 
 

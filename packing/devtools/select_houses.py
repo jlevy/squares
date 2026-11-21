@@ -231,9 +231,6 @@ PENDING_ADOPTION: dict[int, Pending] = {
         n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
         for n in (88, 126, 266, 267, 301)
     },
-    # T-336 refines T-309. Keep the adopted house and its drawing until both
-    # required strong drawing runs land with its next adoption change.
-    305: Pending(house="T-336", bead="think-kzwl", why=NEXT_PULL_REQUEST),
 }
 
 
