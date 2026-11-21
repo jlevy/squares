@@ -1,0 +1,28 @@
+{
+  "scope": "Administrative consistency and rendering audit of the retained packet; no new geometric decision.",
+  "checks": {
+    "rerun_geometry_matches_initial": true,
+    "frozen_artifacts_unchanged": true,
+    "all_predeclared_controls_reported": true,
+    "all_control_outcomes_passed": true,
+    "displayed_side_is_exact": true,
+    "report_prints_receipt_side": true,
+    "footprint_coverage_complete": true,
+    "one_footer_per_document": true,
+    "frozen_verifier_compiles": true
+  },
+  "frozen_artifacts": {
+    "predeclared-controls.json": true,
+    "verify_n259.py": true,
+    "results.json": true,
+    "run.sh": true,
+    "exit-status.json": true
+  },
+  "control_cases": 16,
+  "control_outcomes": 28,
+  "memory_samples": 44,
+  "max_workload_gib": 0.02,
+  "max_worker_processes": 1,
+  "max_host_pressure": 1,
+  "min_reclaimable_gb": 10.48
+}

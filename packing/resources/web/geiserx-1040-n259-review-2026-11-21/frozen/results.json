@@ -1,0 +1,298 @@
+{
+  "review_id": "n259-blind-20261121",
+  "accepted_finite_feasibility": true,
+  "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "source_issue": "https://github.com/jlevy/squares/issues/1040",
+  "source_identity": {
+    "packing.json.gz": {
+      "bytes": 30015,
+      "sha256": "bfd1b2890ad846efe030113f5e4535a79f786ed6c2f0371257dd342ddd48970c"
+    },
+    "witness.yaml": {
+      "bytes": 765842,
+      "sha256": "3d4bd6326ed60439aa3fc933bfbfc4b5716e4de8d181ce837161b97fdc88a031"
+    }
+  },
+  "side_exact": "8295008219614994781143527184138157614865452268963473035780950495090016439229989562287054368276315229730904537926946071561900959/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "side_decimal_approximation": "16.590016439229989562287054368276315229730904537926946071561900990180032878459979124574108736552630459461809075853892143123801918",
+  "upward_12_decimal_bound": "16.590016439230",
+  "upward_bound_valid": true,
+  "controls": [
+    {
+      "id": "unit_wall_contact",
+      "method": "centers",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "unit_wall_contact",
+      "method": "corners",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "edge_contact",
+      "method": "centers",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "edge_contact",
+      "method": "corners",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "vertex_contact",
+      "method": "centers",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "vertex_contact",
+      "method": "corners",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "tiny_pair_overlap",
+      "method": "centers",
+      "expected": "reject",
+      "actual": "overlap: center pair 1,2",
+      "passed": true
+    },
+    {
+      "id": "tiny_pair_overlap",
+      "method": "corners",
+      "expected": "reject",
+      "actual": "overlap: corner pair 1,2",
+      "passed": true
+    },
+    {
+      "id": "tiny_wall_escape",
+      "method": "centers",
+      "expected": "reject",
+      "actual": "containment: center square 1, wall 0",
+      "passed": true
+    },
+    {
+      "id": "tiny_wall_escape",
+      "method": "corners",
+      "expected": "reject",
+      "actual": "containment: corner square 1, corner 0, wall 0",
+      "passed": true
+    },
+    {
+      "id": "rotated_wall_contact",
+      "method": "centers",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "rotated_wall_contact",
+      "method": "corners",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "rotated_edge_contact",
+      "method": "centers",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "rotated_edge_contact",
+      "method": "corners",
+      "expected": "accept",
+      "actual": "accepted",
+      "passed": true
+    },
+    {
+      "id": "rotated_tiny_overlap",
+      "method": "centers",
+      "expected": "reject",
+      "actual": "overlap: center pair 1,2",
+      "passed": true
+    },
+    {
+      "id": "rotated_tiny_overlap",
+      "method": "corners",
+      "expected": "reject",
+      "actual": "overlap: corner pair 1,2",
+      "passed": true
+    },
+    {
+      "id": "self_crossing_corners",
+      "method": "corners",
+      "expected": "reject",
+      "actual": "shape: edge is not unit length",
+      "passed": true
+    },
+    {
+      "id": "nonunit_corners",
+      "method": "corners",
+      "expected": "reject",
+      "actual": "shape: edge is not unit length",
+      "passed": true
+    },
+    {
+      "id": "source_missing_square",
+      "method": "centers",
+      "expected": "reject",
+      "actual": "count: square count differs from n",
+      "passed": true
+    },
+    {
+      "id": "source_duplicate_square",
+      "method": "centers",
+      "expected": "reject",
+      "actual": "overlap: center pair 1,2",
+      "passed": true
+    },
+    {
+      "id": "source_small_container",
+      "method": "centers",
+      "expected": "reject",
+      "actual": "containment: center square 1, wall 2",
+      "passed": true
+    },
+    {
+      "id": "source_missing_square",
+      "method": "corners",
+      "expected": "reject",
+      "actual": "count: square count differs from n",
+      "passed": true
+    },
+    {
+      "id": "source_duplicate_square",
+      "method": "corners",
+      "expected": "reject",
+      "actual": "overlap: corner pair 1,2",
+      "passed": true
+    },
+    {
+      "id": "source_small_container",
+      "method": "corners",
+      "expected": "reject",
+      "actual": "containment: corner square 1, corner 0, wall 2",
+      "passed": true
+    },
+    {
+      "id": "invalid_rational",
+      "method": "zero_denominator",
+      "expected": "reject",
+      "actual": "scalar: Fraction(1, 0)",
+      "passed": true
+    },
+    {
+      "id": "invalid_rational",
+      "method": "nonfinite",
+      "expected": "reject",
+      "actual": "scalar: invalid rational syntax",
+      "passed": true
+    },
+    {
+      "id": "yaml_unrecognized_line",
+      "method": "parser",
+      "expected": "reject",
+      "actual": "yaml: incomplete square or unrecognized line",
+      "passed": true
+    },
+    {
+      "id": "json_duplicate_key",
+      "method": "parser",
+      "expected": "reject",
+      "actual": "json: duplicate key n",
+      "passed": true
+    }
+  ],
+  "center_check": {
+    "accepted": true,
+    "squares": 259,
+    "unit_rotation_identities": 259,
+    "wall_inequalities": 1036,
+    "unordered_pairs": 33411,
+    "axis_inequalities": 133644,
+    "zero_wall_margins": 24,
+    "zero_pair_margins": 0,
+    "axis_winners": [
+      9757,
+      9759,
+      6680,
+      7215
+    ],
+    "minimum_wall_margin": {
+      "exact": "0",
+      "decimal_approximation": "0",
+      "location": [
+        67,
+        0
+      ]
+    },
+    "minimum_pair_margin": {
+      "exact": "282508038733927372051132984302274638434836642830526476004950753192679220296401791110548295745030394986888527902529771322780107534191335635721890463847707204337285399890095184170737188803/227588384463724501284673832865850317904044231283906952372032974885460506432792053457526902500856873516723559892509630103304500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "decimal_approximation": "1.24131132350894014704164907350213363091875540163E-63",
+      "location": [
+        30,
+        31
+      ]
+    },
+    "elapsed_seconds": 0.6842151670134626
+  },
+  "corner_check": {
+    "accepted": true,
+    "squares": 259,
+    "unit_edge_checks": 1036,
+    "orthogonality_checks": 1036,
+    "closure_checks": 259,
+    "positive_orientation_checks": 259,
+    "wall_inequalities": 4144,
+    "unordered_pairs": 33411,
+    "edge_halfplane_tests": 267288,
+    "vertex_halfplane_inequalities": 1069152,
+    "zero_wall_margins": 48,
+    "zero_pair_margins": 0,
+    "edge_winners": [
+      3721,
+      3449,
+      6072,
+      6274,
+      3157,
+      3031,
+      4058,
+      3649
+    ],
+    "minimum_wall_margin": {
+      "exact": "0",
+      "decimal_approximation": "0",
+      "location": [
+        67,
+        1,
+        0
+      ]
+    },
+    "minimum_pair_margin": {
+      "exact": "282508038733927372051132984302274638434836642830526476004950753192679220296401791110548295745030394986888527902529771322780107534191335635721890463847707204337285399890095184170737188803/227588384463724501284673832865850317904044231283906952372032974885460506432792053457526902500856873516723559892509630103304500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "decimal_approximation": "1.24131132350894014704164907350213363091875540163E-63",
+      "location": [
+        30,
+        31
+      ]
+    },
+    "elapsed_seconds": 9.079949374950957
+  },
+  "encoding_agreement": {
+    "same_side": true,
+    "same_vertex_sets_in_row_order": 259
+  },
+  "elapsed_seconds": 9.894447708968073
+}

@@ -1,0 +1,205 @@
+{
+  "scope": "Administrative integrity and local-link checks only; the verifier was not executed.",
+  "passed": true,
+  "checks": {
+    "preserved:verify_n259.py": true,
+    "preserved:predeclared-controls.json": true,
+    "preserved:results.json": true,
+    "preserved:run.stdout": true,
+    "preserved:run.stderr": true,
+    "preserved:exit-status.json": true,
+    "preserved:receipt-audit.json": true,
+    "preserved:lint.stdout": true,
+    "preserved:frozen/verify_n259.py": true,
+    "preserved:frozen/predeclared-controls.json": true,
+    "preserved:frozen/findings-freeze.json": true,
+    "preserved:frozen/results.json": true,
+    "preserved:frozen/run.stdout": true,
+    "preserved:frozen/run.stderr": true,
+    "preserved:frozen/exit-status.json": true,
+    "freeze:predeclared-controls.json": true,
+    "freeze:verify_n259.py": true,
+    "freeze:results.json": true,
+    "freeze_external:run.sh": true,
+    "freeze:exit-status.json": true,
+    "freeze_has_only_declared_external_launcher": true,
+    "source_identities_agree": true,
+    "source_checksum_recipe_matches_receipts": true,
+    "initial_and_final_geometry_agree": true,
+    "initial_and_final_controls_agree": true,
+    "recorded_controls_all_passed": true,
+    "scope_and_receipts_state_same_side": true,
+    "receipt_decimal_is_exact": true,
+    "review_prints_exact_receipt_decimal": true,
+    "all_local_links_resolve": true,
+    "source_links_match_recorded_urls": true,
+    "no_host_paths_in_public_text": true
+  },
+  "copied_unchanged_count": 15,
+  "local_links_checked": 31,
+  "local_links": [
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "../../../../docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "scope.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "verify_n259.py",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "frozen/verify_n259.py",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "predeclared-controls.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "frozen/findings-freeze.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "frozen/results.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "frozen/run.stdout",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "frozen/run.stderr",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "frozen/exit-status.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "results.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "run.stdout",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "run.stderr",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "exit-status.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "receipt-audit.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "lint.stdout",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "retention.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "source-sha256.txt",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "source-link-check.json",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "check_public_packet.py",
+      "resolves": true
+    },
+    {
+      "from": "packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md",
+      "target": "public-integrity-check.json",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/results.json",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/predeclared-controls.json",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/frozen/findings-freeze.json",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/run.stdout",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/results.json",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/exit-status.json",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md#programs-and-evidence",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/README.md#reproduce-the-geometric-check",
+      "resolves": true
+    },
+    {
+      "from": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+      "target": "../../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/retention.json",
+      "resolves": true
+    }
+  ],
+  "external_urls_from_permitted_source": [
+    "https://github.com/jlevy/squares/issues/1040",
+    "https://github.com/user-attachments/files/35066502/packing-259.zip"
+  ],
+  "external_urls_network_checked_by_this_program": false,
+  "freeze_members_retained_externally": [
+    "run.sh"
+  ]
+}

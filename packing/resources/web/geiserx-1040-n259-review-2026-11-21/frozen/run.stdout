@@ -1,0 +1,4 @@
+Controls passed: 28 outcomes
+Center check: 33411 pairs accepted in 0.684s
+Corner check: 33411 pairs accepted in 9.080s
+PASS: finite feasibility; exact encodings agree; elapsed 9.894s

@@ -1,0 +1,18 @@
+{
+  "scope": "HTTP availability check of public source hyperlinks only; no source body downloaded and no geometric decision.",
+  "recorded_at": "2026-11-21T17:18:37.050393+00:00",
+  "method": "HEAD, redirects followed",
+  "checks": [
+    {
+      "url": "https://github.com/jlevy/squares/issues/1040",
+      "http_status": 200,
+      "curl_exit_status": 0
+    },
+    {
+      "url": "https://github.com/user-attachments/files/35066502/packing-259.zip",
+      "http_status": 200,
+      "curl_exit_status": 0
+    }
+  ],
+  "command_pattern": "curl --head --silent --show-error --fail --location --max-time 20 --output /dev/null --write-out '%{http_code}\\n' URL"
+}
