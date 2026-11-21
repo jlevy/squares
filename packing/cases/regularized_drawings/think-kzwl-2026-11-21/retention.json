@@ -1,0 +1,125 @@
+{
+  "format": "retained-drawing-run-evidence-v1",
+  "n": 305,
+  "source_context": "Completed 21 November 2026 UTC strong drawing runs for the T-336 adoption; runs/ paths identify their original run-tree locations.",
+  "scope": "Copies and explicit extracts of completed results. No generator, proof program or geometry replay was run when preparing this packet.",
+  "entries": [
+    {
+      "path": "adopt-2026-11-21-n305-evand/receipt.json",
+      "uncompressed_bytes": 3172,
+      "uncompressed_sha256": "f8831de01299447526da0bb16d74253ea1e2d84db5b5621307c4690eb31dc240",
+      "transformation": "none",
+      "source": "runs/adopt-2026-11-21-n305-evand/receipt.json",
+      "source_bytes": 3172,
+      "source_sha256": "f8831de01299447526da0bb16d74253ea1e2d84db5b5621307c4690eb31dc240"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-evand/n-305/report.json.gz",
+      "uncompressed_bytes": 12861,
+      "uncompressed_sha256": "ca46132c014d41cb8ee64c05b3fc5bc4cc7950ee5d12ff39f057bec607685183",
+      "transformation": "none",
+      "source": "runs/adopt-2026-11-21-n305-evand/n-305/report.json",
+      "source_bytes": 12861,
+      "source_sha256": "ca46132c014d41cb8ee64c05b3fc5bc4cc7950ee5d12ff39f057bec607685183"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-evand/n-305/regularize.cert.gz",
+      "uncompressed_bytes": 50161,
+      "uncompressed_sha256": "72278190f834c7adc3ebc7c622e22375a11e8321ff26362e36b16afb9a0e0bbe",
+      "transformation": "none",
+      "source": "runs/adopt-2026-11-21-n305-evand/n-305/regularize.cert",
+      "source_bytes": 50161,
+      "source_sha256": "72278190f834c7adc3ebc7c622e22375a11e8321ff26362e36b16afb9a0e0bbe"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-evand/n-305/view-solved.yaml.gz",
+      "uncompressed_bytes": 90075,
+      "uncompressed_sha256": "87615309d42c53e42c1f53b7b5e3f3dc15be43c8167633f138b91fa66db07fe4",
+      "transformation": "none",
+      "source": "runs/adopt-2026-11-21-n305-evand/n-305/view-solved.yaml",
+      "source_bytes": 90075,
+      "source_sha256": "87615309d42c53e42c1f53b7b5e3f3dc15be43c8167633f138b91fa66db07fe4"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-grid-0.5/n-305/report.json.gz",
+      "uncompressed_bytes": 10750,
+      "uncompressed_sha256": "36386632470cf5b115286e85e8980d412faae00ecacd80f7ca676465dfbcff83",
+      "transformation": "none",
+      "source": "runs/adopt-2026-11-21-n305-grid-0.5/n-305/report.json",
+      "source_bytes": 10750,
+      "source_sha256": "36386632470cf5b115286e85e8980d412faae00ecacd80f7ca676465dfbcff83"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-grid-0.5/run.json",
+      "uncompressed_bytes": 480,
+      "uncompressed_sha256": "2076460eda6ef7f633588ec4309efb2484eeeb9839e41a35a1c263cff9137494",
+      "transformation": "Derived summary in the maintained regularize_grid_slack.run_block shape. The cpu_seconds field repeats perf_counter elapsed seconds; no independent CPU receipt exists.",
+      "source": "runs/adopt-2026-11-21-n305-grid-0.5/n-305/report.json",
+      "source_bytes": 10750,
+      "source_sha256": "36386632470cf5b115286e85e8980d412faae00ecacd80f7ca676465dfbcff83"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-grid-1/n-305/report.json.gz",
+      "uncompressed_bytes": 10752,
+      "uncompressed_sha256": "86bfe4b8dd95f09b0e47aebd2e78fd361874a42c43216a549003afaf76fe448b",
+      "transformation": "none",
+      "source": "runs/adopt-2026-11-21-n305-grid-1/n-305/report.json",
+      "source_bytes": 10752,
+      "source_sha256": "86bfe4b8dd95f09b0e47aebd2e78fd361874a42c43216a549003afaf76fe448b"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-grid-1/run.json",
+      "uncompressed_bytes": 480,
+      "uncompressed_sha256": "819a9da8bd88ea4c9d2e691b6c0046862a006f2d031de82eb4daaf21defb69cf",
+      "transformation": "Derived summary in the maintained regularize_grid_slack.run_block shape. The cpu_seconds field repeats perf_counter elapsed seconds; no independent CPU receipt exists.",
+      "source": "runs/adopt-2026-11-21-n305-grid-1/n-305/report.json",
+      "source_bytes": 10752,
+      "source_sha256": "86bfe4b8dd95f09b0e47aebd2e78fd361874a42c43216a549003afaf76fe448b"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-grid-5/n-305/report.json.gz",
+      "uncompressed_bytes": 11098,
+      "uncompressed_sha256": "b785e063c7b9c8a5e2dac005532fc11a0eb62edf724a7d844116dcd76684895d",
+      "transformation": "none",
+      "source": "runs/adopt-2026-11-21-n305-grid-5/n-305/report.json",
+      "source_bytes": 11098,
+      "source_sha256": "b785e063c7b9c8a5e2dac005532fc11a0eb62edf724a7d844116dcd76684895d"
+    },
+    {
+      "path": "adopt-2026-11-21-n305-grid-5/run.json",
+      "uncompressed_bytes": 480,
+      "uncompressed_sha256": "b300329372dde120198a298c731a82ff9d03d5063cc7e0fffc09c3715003e855",
+      "transformation": "Derived summary in the maintained regularize_grid_slack.run_block shape. The cpu_seconds field repeats perf_counter elapsed seconds; no independent CPU receipt exists.",
+      "source": "runs/adopt-2026-11-21-n305-grid-5/n-305/report.json",
+      "source_bytes": 11098,
+      "source_sha256": "b785e063c7b9c8a5e2dac005532fc11a0eb62edf724a7d844116dcd76684895d"
+    },
+    {
+      "path": "selection-adopt-2026-11-21-n305.json.gz",
+      "uncompressed_bytes": 9570,
+      "uncompressed_sha256": "92c12f361caf8dd809bf5be2dff24c49fb5793ecfe5fca40f78c510c9f593fc9",
+      "transformation": "Nine path values only: tree becomes repository root dot; four run-list and four candidate-run paths become repository-relative retained packet paths.",
+      "source": "runs/adopt-2026-11-21-n305-selection.json",
+      "source_bytes": 9831,
+      "source_sha256": "e0c344fdd11de7f2fddf9991fc28d1038d021da24d407c08cc3ab7baa492fb1b"
+    },
+    {
+      "path": "selection-adopt-2026-11-21-n305.md",
+      "uncompressed_bytes": 269,
+      "uncompressed_sha256": "eb21ae6541676735c0eebf82c16827fd37c2f09ad853c75f25335083442efe19",
+      "transformation": "none",
+      "source": "runs/adopt-2026-11-21-n305-selection.md",
+      "source_bytes": 269,
+      "source_sha256": "eb21ae6541676735c0eebf82c16827fd37c2f09ad853c75f25335083442efe19"
+    },
+    {
+      "path": "memory-guard-summary.json",
+      "uncompressed_bytes": 892,
+      "uncompressed_sha256": "bf8bc9efb6dcecd2689674b6859032e3de35ec1c86bc25f741dda60e9875e850",
+      "transformation": "The single emitted summary record copied byte-for-byte from the JSONL session; process snapshots, host identity and session command details omitted.",
+      "source": "guarded-n305-adopt-strong-runs-64416.jsonl",
+      "source_bytes": 439208,
+      "source_sha256": "2471a587bc4ee027f65f8c3d491ae73b3d7066a554f94755ac0a625e41751308"
+    }
+  ]
+}

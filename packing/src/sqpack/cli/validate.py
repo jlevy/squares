@@ -314,10 +314,13 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: On 21 November 2026, Samanyu-dev's T-335 replaced T-101 at 109. It has 29 separating
 #: and 40 translating squares, against zero and eight on T-101. The screen is stable
 #: across its retained tolerances. The change reaches the 200- and 324-case totals.
+#: T-336 replaced T-309 at 305 on 21 November. It has 32 separating and 138
+#: translating squares, against 211 and 262 on T-309. The change reaches the
+#: 324-case totals.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
     "n=1..200": (69, 584, 182, 2457),
-    "n=1..324": (127, 2861, 302, 7546),
+    "n=1..324": (127, 2682, 302, 7422),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

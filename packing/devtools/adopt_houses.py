@@ -3206,6 +3206,49 @@ RESULTS: dict[str, Prose] = {
         retained="the derived rational fact",
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-336": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1052](https://github.com/jlevy/squares/issues/1052)",
+        producer_route=False,
+        ai=(
+            "The folder’s README and registration text name OpenAI Codex for the search, "
+            "optimization and rational certificate; the issue names GPT 6.2 Astra. Both "
+            "credit Anthropic Claude for the repository files, checks and figure, under "
+            "Joost de Winter’s direction."
+        ),
+        routes=(
+            "The maintained routes share parsing, half-angle conversion, Fraction "
+            "arithmetic and separating axes, so they are not two independent methods. "
+            "The independent re-implementation rests on the accepted review’s checker, "
+            "which shares no verification code with either maintained route or the "
+            "source. The source’s own checkers were not run here. The review accepted a "
+            "metadata-only reading copy of the corner serialization while retaining "
+            "the original."
+        ),
+        lineage=(
+            "The source reports starting from Alex Chilton’s public compilation of "
+            "Tomáš Kodaj’s arrangement as JoeGun improved it by quenches with Evan "
+            "Daniel’s code and a fault-line step. The review compares the certificate "
+            "with this project’s retained T-309 as a separate comparator: all 305 "
+            "squares pair one to one, the largest displacement is 0.0832, no square "
+            "moves beyond a tenth and no tilt reverses. The source’s 0.178 maximum "
+            "compares with the project’s regularized drawing instead. The exact side "
+            "is 6.520727e-6 below T-309 shrunk to first contact, so the bound is a new "
+            "result under Option D. Kodaj keeps the construction credit, JoeGun the "
+            "earlier improvement, and de Winter is credited as further improver and "
+            "certificate author. Shadoks’s leaderboard value supplies no coordinates "
+            "and remains context."
+        ),
+        third_route=(
+            ", and the 20 November review’s independently implemented checker decided "
+            "all 305 squares, walls and 46,360 pairs by integer separating axes and "
+            "exact polygon clipping in GMP rationals; its 51 predeclared controls "
+            "returned their stated outcomes"
+        ),
+        diversity="by a Claude agent",
+        retained="the unmodified primary exact JSON and its original corner serialization",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-315": Prose(
         author="Mykhailo Polkovskyi",
         reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
@@ -4511,14 +4554,15 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s packing built by his fault-line composer after Chris Deotte’s "
         "multi-gadget fault DP",
     ),
-    # T-309 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 305, a new
-    # arrangement relative to T-174's packing (113 squares beyond a tenth); the issue says
-    # two quench runs with Evan Daniel's code and then JoeGun's fault-line DP made his step.
+    # T-336 (21 November 2026, think-kzwl), de Winter's issue-1052 refinement of the
+    # Kodaj-JoeGun arrangement from Chilton's public compilation. The measured comparison
+    # with T-309 preserves its finder and preceding improver; the new source is external
+    # to this project, as its bibliography lineage states.
     305: Credit(
         (KODAJ,),
-        (JOEGUN,),
-        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by quenches with Evan "
-        "Daniel’s code and a fault-line DP",
+        (JOEGUN, DE_WINTER),
+        "Joost de Winter’s further refinement of Tomáš Kodaj’s public Kaggle packing "
+        "as JoeGun improved it",
     ),
     # T-174's regularization of T-128's packing, 34 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
@@ -5981,6 +6025,20 @@ def _n109_history(text: str, until: str) -> str:
     )
 
 
+def _n305_history(text: str) -> str:
+    """Keep T-336's custom staging paragraph as history after its house adoption."""
+    text = re.sub(
+        _spaced("**Pending house adoption, 21 November 2026.**"),
+        "**Earlier staging, 21 November 2026.**",
+        text,
+    )
+    return re.sub(
+        _spaced("Both required strong drawing runs remain part of that adoption change."),
+        "The staging note required both strong drawing runs in the adoption change.",
+        text,
+    )
+
+
 def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
@@ -6030,6 +6088,8 @@ def historical(move: Move, text: str) -> str:
         text = _n29_history(text)
     if n == 109:
         text = _n109_history(text, until)
+    if n == 305:
+        text = _n305_history(text)
     text = held_history(text)
     text = pending_history(text, until)
     if houses.adopted_on(n) >= RETAINED_672_FROM:
