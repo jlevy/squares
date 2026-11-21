@@ -38415,7 +38415,7 @@ results:
   - id: T-262
     kind: lower-bound
     registered: '2026-11-03'
-    landed: '2026-11-03'
+    landed: '2026-11-04'
     headline: "`s(94) ≥ 1993/200` verified, T-091's measure dilated onto a 600-direction net"
     claim: >-
       A rectangle measure of kenaznia-doga/s94-lower-bound, published on 3 November 2026 and
