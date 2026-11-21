@@ -3,9 +3,9 @@ type: is
 id: is-01m687bj11pzvr48e6pm14abna
 title: "Review Polkovskyi's 23 October and #846 refinements (stage 4): adopt 130; owner's question on the other fourteen counts"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 12
 delegate: codex-intake-1119-01a1fb
 labels:
   - validation
@@ -19,8 +19,12 @@ parent_id: is-01m685njhfc113wb8prbg15npb
 hold: null
 hold_until: null
 created_at: 2026-10-31T05:36:40.481Z
-updated_at: 2026-11-21T00:58:57.016Z
+updated_at: 2026-11-21T00:59:03.194Z
 started_at: 2026-10-31T08:37:28.980Z
+closed_at: 2026-11-21T00:59:03.193Z
+close_reason: "The #1030 Option D integration classified T-253 and T-260 and kept the existing T-259 standing. The remaining retroactivity decision belongs to think-7k8p."
+resolution: null
+duplicate_of: null
 ---
 Stage 4 review of Mykhailo Polkovskyi's certificates of 23 October (T-252 on the lane's branch: 154, 155, 183, 211, 227, 236, 237, 241 and 271, each about 1.3e-19 to 1.7e-19 below its house) and of #846 (T-258: 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house, and 130, a 2e-14 dilation of Couzo's #843 packing 2.08e-12 below it), and the adoption at each of the fifteen counts where it is the smallest validated side, crediting each packing to its finder and the refinement to Polkovskyi.
 

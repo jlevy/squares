@@ -5,7 +5,7 @@ title: Register the candidates below the new houses at 130, 293 and 307 (regular
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 13
 delegate: codex-intake-1119-01a1fb
 labels:
   - validation
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-31T09:17:32.462Z
-updated_at: 2026-11-21T00:58:57.030Z
+updated_at: 2026-11-21T00:59:04.844Z
 started_at: 2026-10-31T11:48:22.244Z
 ---
 Evan Daniel's regularizer (regularize_evand run, run adopt-2026-10-31-n130-307-evand, retained under packing/cases/regularized_drawings/think-3guf-2026-10-31/ on #852) solved two of the new witnesses the 31 October adoption wrote to exact KKT local minima below the house best packing's side:
@@ -64,3 +64,5 @@ The decision table held both at row 3 (register first), and the selection lists 
 2026-11-09 23:45Z coordinator: #939 (Joost de Winter, s(199), 22:03Z) adds a case. It is T-282's 172 arrangement re-solved to its exact local optimum (quintic root; equal in 63 places to Daniel's held KKT solve under think-wju3) plus #938's L of 27. Its gain over #938 (T-284 pending in PR #940) is 2.6345e-12 and crosses #938's 12-place print (...284 vs ...287). #938's and #939's whole-certificate contraction margins are both 0 (the grid squares touch), but T-282's margin (2.533e-12) carries through the L step: T-282 contracted plus the L is a valid 199-packing 1.0107e-13 above #939 with the same 12-place print. L78 (think-2h88) proposes option D: a re-solve is a restatement unless its 12-place print falls below that of the predecessor contracted to first contact, measured through any construction (here the L step); under D, #939 and Daniel's held 172 solve are restatements, T-265 stays a result. Pending the owner's answer #939 would be T-285 held at V0/C1, S1, with T-284 the house at 199. Brief: scratchpad l78/phase1-brief.md section 6.
 
 2026-11-17 coord-intake-1117: OWNER DECIDED (think-b0w5): "Only if it beats the gap-free original (Recommended)" = option D at every count: a re-certification is a new result only if its side is below its predecessor shrunk to first contact (devtools.contraction_margin); else a restatement credited to the original finder. Apply and close.
+
+21 November UTC: #1030 implemented the Option D classifications and published the new houses at 172 and 199. This decision work is settled. The remaining below-house candidate registrations are tracked in think-4z8z, and T-259 and T-173 keep their open standing questions in think-7k8p.

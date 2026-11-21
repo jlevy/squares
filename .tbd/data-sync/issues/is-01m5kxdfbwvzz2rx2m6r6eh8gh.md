@@ -3,9 +3,9 @@ type: is
 id: is-01m5kxdfbwvzz2rx2m6r6eh8gh
 title: "Decide: does the restatement ruling reach #719's 631, another holder's re-certification #722 recorded (think-fwa9 follow-up)?"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: codex-intake-1119-01a1fb
 labels:
   - decision
@@ -15,8 +15,12 @@ parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
 hold: null
 hold_until: null
 created_at: 2026-10-23T08:18:08.892Z
-updated_at: 2026-11-21T00:58:58.334Z
+updated_at: 2026-11-21T00:59:03.528Z
 started_at: 2026-11-21T00:58:58.333Z
+closed_at: 2026-11-21T00:59:03.526Z
+close_reason: "The #1030 Option D integration recorded the restatement at 631 from #719. The distinct #732 beyond-horizon decision remains in think-1ell."
+resolution: null
+duplicate_of: null
 ---
 **The question.** The owner's answer of 23 October (think-fwa9) is that a side below an earlier report at its count by less than the 12-place print, with both rounding up to the same 12-place print, restates that report: the earlier report stays the row. Does it also reach a re-certification by another holder that an earlier ledger recorded?
 
