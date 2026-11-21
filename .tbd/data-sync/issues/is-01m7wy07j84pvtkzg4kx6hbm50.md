@@ -5,15 +5,15 @@ title: "Import #1039, #1041, #1042: Joost de Winter's raised lower bounds (56 + 
 kind: task
 status: in_progress
 priority: 1
-version: 5
-delegate: c15-lower
+version: 6
+delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T16:52:57.032Z
-updated_at: 2026-11-20T17:40:01.789Z
+updated_at: 2026-11-21T09:45:51.064Z
 started_at: 2026-11-20T16:53:54.029Z
 ---
 
