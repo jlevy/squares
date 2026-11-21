@@ -10135,6 +10135,6 @@ verifiers:
           fact were produced, and imports no project or producer verifier code. Samanyu-dev search
           authorship was not audited. The 21 November run reuses the retained checker; it is not a
           newly blinded review.
-    note: The source review documents the checker freeze and authorship. The Samanyu canonical run
-      is new replay evidence; its custody and acceptance still require the proposed confirming review.
+    note: The 20 November source review documents the checker freeze and authorship.
+      The 21 November confirming review accepted the custody and binding of the canonical replay.
       No new checker-source checksum or copied verifier code is needed.

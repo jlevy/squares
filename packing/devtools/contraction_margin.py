@@ -40,10 +40,10 @@ the exact wall and pair checks.
 
 **Inputs** are `devtools.measure_identity`'s specs, ``[LABEL=]KIND:TARGET``: ``packet:NAME``
 (an import packet's admitted certificate, held to its custody), ``FORMAT:PATH`` with a
-format of `devtools.upper_bound_reports.ADAPTERS`, or ``binary64-xyd:PATH`` or
-``kaggle-csv:PATH``, a binary64 packing read exactly at its own extent (`boxed_binary64`,
-`devtools.measure_identity.read_kaggle_csv`), as a public float packing that an exact
-certificate may re-solve is (#1012's 109, think-wvr8). ``--against``
+format of `devtools.upper_bound_reports.ADAPTERS` such as the canonical
+``kaggle-csv:PATH``, or ``binary64-xyd:PATH`` and ``kaggle-csv-libm:PATH`` for
+binary64 packings read at their exact extent. The libm format reproduces earlier
+Kaggle comparisons such as #1012's n109. ``--against``
 names a later certificate of the same count, held to the same exact wall and pair checks,
 whose gain over the first is compared with the margin.
 
@@ -154,13 +154,13 @@ def read_certificate(spec: str, n: int) -> Read:
         elif kind == identity.L_BASE:
             layered = identity.read_l_construction(target, n)
             certificate, source = layered.base, layered.source
-        elif kind in (identity.BINARY64, identity.KAGGLE):
+        elif kind in (identity.BINARY64, identity.KAGGLE_LIBM):
             path = Path(target)
             raw = retained_data.read_retained_bytes(path, limit=reports.MAX_SOURCE_BYTES)
             if kind == identity.BINARY64:
                 certificate = boxed_binary64(raw, n)
             else:
-                certificate = _certificate(n, identity.read_kaggle_csv(raw, n))
+                certificate = _certificate(n, identity.read_kaggle_csv_libm(raw, n))
             source = {"input": kind, **_where(path), "sha256": hashlib.sha256(raw).hexdigest()}
         elif kind in reports.ADAPTERS:
             path = Path(target)

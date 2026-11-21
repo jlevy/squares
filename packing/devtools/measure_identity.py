@@ -26,13 +26,11 @@ measures any two packings of a count for credit and lineage.
   them; blank lines and lines starting ``#`` are comments. Each number is read as the
   binary64 value its decimal names, and each angle, reduced modulo a quarter turn, as the
   exact rotation whose half-angle tangent is the binary64 tangent of half of it;
-- ``kaggle-csv:PATH``, the rows of count ``n`` in a Kaggle "Squares in Squares"
-  submission, ``id,n,square_id,x,y,angle`` with the angle in radians (`read_kaggle_csv`),
-  such as Tomáš Kodaj's 109 rows that #1012 attaches or a public ``submission.csv`` whose
-  digest pins it: each number read as its binary64 value, each angle as the exact rotation
-  whose half-angle tangent is the binary64 tangent of half of it, folded into a quarter
-  turn, and the squares boxed exactly at their own extent (`boxed`), since a submission
-  states no side and centres its squares anywhere;
+- ``kaggle-csv:PATH`` reads Kaggle's ``id,n,square_id,x,y,angle`` rows through
+  `devtools.upper_bound_reports.kaggle_csv`, using its portable rational rotation and
+  exact extent. ``kaggle-csv-libm:PATH`` reproduces older comparisons on the same input
+  with a binary64 tangent of half the radian angle folded into a quarter turn
+  (`read_kaggle_csv_libm`), then boxes the squares at their exact extent (`boxed`);
 - ``l-base:packet:NAME``, the ``n``-square packing that an import packet's certificate was
   built on by one L step (`read_l_base`): its first ``n`` squares at its side less one;
 - ``l-base:M:FORMAT:PATH``, the ``n``-square packing that the ``M``-square certificate in
@@ -128,7 +126,7 @@ FORMAT = "measure-identity-v1"
 BOUNDS = ("1e-9", "1e-6", "1e-3", "1e-2", "1e-1")
 PACKET = "packet"
 BINARY64 = "binary64-xyd"
-KAGGLE = "kaggle-csv"
+KAGGLE_LIBM = "kaggle-csv-libm"
 #: The header row of a Kaggle "Squares in Squares" submission.
 KAGGLE_HEADER = ("id", "n", "square_id", "x", "y", "angle")
 L_BASE = "l-base"
@@ -239,8 +237,8 @@ def boxed(squares: list[Placed]) -> Measured:
     return max(right - left, top - bottom), moved
 
 
-def read_kaggle_csv(raw: bytes, n: int) -> Measured:
-    """The ``n`` rows of count ``n`` of a Kaggle submission, boxed exactly (`boxed`).
+def read_kaggle_csv_libm(raw: bytes, n: int) -> Measured:
+    """A historical libm reading of the ``n`` Kaggle rows, boxed exactly (`boxed`).
 
     The header must be `KAGGLE_HEADER`; rows of other counts are skipped, read only for
     their count; the count's rows must number its squares ``0`` to ``n - 1`` in order.
@@ -508,13 +506,13 @@ def read_packing(spec: str, n: int) -> Packing:
         layered = read_l_construction(target, n)
         source = layered.source
         side, squares = _from_certificate(layered.base)
-    elif kind in (BINARY64, KAGGLE) or kind in reports.ADAPTERS:
+    elif kind in (BINARY64, KAGGLE_LIBM) or kind in reports.ADAPTERS:
         path = Path(target)
         raw = _file_bytes(path)
         if kind == BINARY64:
             side, squares = read_binary64(raw, n)
-        elif kind == KAGGLE:
-            side, squares = read_kaggle_csv(raw, n)
+        elif kind == KAGGLE_LIBM:
+            side, squares = read_kaggle_csv_libm(raw, n)
         else:
             try:
                 side, squares = _from_certificate(reports.parse_certificate(raw, n, kind))

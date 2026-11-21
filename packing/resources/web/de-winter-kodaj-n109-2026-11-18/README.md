@@ -84,7 +84,8 @@ It is a measurement for credit and decides nothing.
   to the record’s packing.
 - **Against Samanyu-dev’s public 109**, the rows of count 109 in `best_fit_101_500.csv`
   at Samanyu-dev/squares_in_squares `53551d7` (committed 2026-11-07T20:20:31Z), read by
-  the `kaggle-csv` reader added for this import. That file was read from a blobless
+  the historical `kaggle-csv-libm` reader. The frozen receipt labels this input
+  `kaggle-csv`. That file was read from a blobless
   clone in scratch space and is not retained (5,577,150 bytes, SHA-256 `377b9177…6c04`,
   the blob of that commit). Nearest centres pair the squares one to one (symmetry 1),
   with the same 45 tilted squares at 23.23 to 29.50 degrees. 37 squares sit more than
@@ -128,7 +129,7 @@ separating-axis method. The second is the checker `verification.txt` reports run
 
 - **The house**, T-101’s ceiling, lies 1.1 × 10⁻¹⁹ above 6 + (7/2)√2, so the gain on it,
   4.5789 × 10⁻⁴, lies wholly outside its padding.
-- **Samanyu-dev’s public 109**, read exactly by the `kaggle-csv` reader and boxed at its
+- **Samanyu-dev’s public 109**, read by the historical `kaggle-csv-libm` reader and boxed at its
   own exact extent, 10.9492895809453792966: both routes accept it as a packing there.
   Contracted uniformly to first contact (squares 17 and 73), its margin is
   1.9960 × 10⁻¹² and its contracted side 10.9492895809433833, which both routes accept
@@ -184,10 +185,10 @@ python -m devtools.upper_bound_reports $P check --replay
 python -m devtools.upper_bound_reports $P sharp-controls
 python -m devtools.measure_identity --n 109 "KODAJ=packet:$P" \
   'T-101=witness-center-basis:cases/regularized_bounds/views/n-109.yaml.gz' \
-  "SAMANYU-53551d7=kaggle-csv:$SAMANYU" \
-  "KODAJ-ROWS=kaggle-csv:resources/web/$P/source/n109_kaggle/n109_tomkodaj.csv" \
+  "SAMANYU-53551d7=kaggle-csv-libm:$SAMANYU" \
+  "KODAJ-ROWS=kaggle-csv-libm:resources/web/$P/source/n109_kaggle/n109_tomkodaj.csv" \
   --out $M/identity.json
-python -m devtools.contraction_margin --n 109 "SAMANYU-53551d7=kaggle-csv:$SAMANYU" \
+python -m devtools.contraction_margin --n 109 "SAMANYU-53551d7=kaggle-csv-libm:$SAMANYU" \
   --against "KODAJ=packet:$P" --out $M/contraction-n109-samanyu.json
 python -m devtools.contraction_margin --n 109 "KODAJ=packet:$P" \
   --out $M/contraction-n109-own.json

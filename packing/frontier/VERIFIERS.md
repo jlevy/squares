@@ -5838,7 +5838,7 @@ Decides rational corner certificates with its own reader, separating axes in int
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md`](../../docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md)
 - Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (The separately prompted stage 4 review lane r1012 of 20 November 2026; tbd-strong-max at maximum reasoning.), with its own prompt and code; authorship in common with the producer’s: unknown, The checker was written and frozen before the canonical Kaggle adapter and this exact fact were produced, and imports no project or producer verifier code. Samanyu-dev search authorship was not audited. The 21 November run reuses the retained checker; it is not a newly blinded review.
-- Note: The source review documents the checker freeze and authorship. The Samanyu canonical run is new replay evidence; its custody and acceptance still require the proposed confirming review. No new checker-source checksum or copied verifier code is needed.
+- Note: The 20 November source review documents the checker freeze and authorship. The 21 November confirming review accepted the custody and binding of the canonical replay. No new checker-source checksum or copied verifier code is needed.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
