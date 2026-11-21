@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 20
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-21T09:28:22.088Z
+updated_at: 2026-11-21T10:47:40.005Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -92,3 +92,5 @@ Checked source-prep commits go into #1047 after its base integration. 54be5b33ce
 The committed portable fact (decompressed SHA-256 2938dddb54398f8f91afd4dce7e83a8bbd2a56db189b1e5a92c0877d85bca5d3) also passed the retained independently implemented r1012_check.py after exact conversion to a corners witness. All 5,886 pairs accepted with zero disagreements at exact side 10.949289580945379338339554460712..., whose safe 12-place print is 10.949289580946. Its receipts are in the task's n109-independent directory. Use this binding for the portable fact and retain the earlier independent witness as a distinct reading. #1047 still needs the registry and adoption changes.
 
 21 November continuation checkpoint: #1047 integration at 77e6a919a5728c0c7d900df5b089e578b8556a14 on new main 552741cee2b8. Proposed T-335 now uses Samanyu-dev’s original pinned geometry, V3/C3 with the 21 November independent exact binding. Preserve de Winter after Kodaj, Samanyu-dev on the later unregistered restatement (0.9723 of the original contraction margin). 472 focused tests passed, then 7 Kaggle tests including the reviewed canonical adapter sharing. Four deterministic paper comparisons passed (only explainer live count 334 to 335). Data pin f96d6f4f2eab passes. Exact-head edit tier under memory guard with process CPU count capped to two is in flight. No publish or house adoption yet.
+
+21 November follow-up: #1047 now points to 686aaf528407cf8dd6b51981196cb52782997356 after the six hosted behavioral fixes, updated STATUS and correct pin. Independently approved exact head in review 6004669659. The final six reruns, Ruff and 55 guarded records checks passed, and the survey comparison remained byte-identical against new main 1fd323589a. Exact hosted Pages and primary mergeability are green; packing gate still running. T-335 and its proof remain provisional until merge, and both strong generators are still owed.
