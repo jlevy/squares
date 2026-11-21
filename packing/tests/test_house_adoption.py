@@ -3235,7 +3235,7 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
     assert "The case keeps its house until the adoption" not in body109
     body305 = _flat(select.case_path(305).read_text(encoding="utf-8"))
     assert "**Earlier staging, 21 November 2026.**" in body305
-    assert "moved it to T-336’s side on 21 November 2026" in body305
+    assert "The case moved to T-336’s side on 21 November 2026" in body305
     assert "**Pending house adoption, 21 November 2026.**" not in body305
     assert "Both required strong drawing runs remain part" not in body305
 

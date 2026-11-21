@@ -30,7 +30,8 @@ reason: >-
   from the adoption inputs and once with the matching inputs at 6ffba4d358.
   All three outputs agreed byte for byte across 55 files for the lower-bounds
   explainer and 43 files each for the optimality review, threshold review and
-  methods survey. A second three-way survey comparison against cb1b61f3fc
-  covered the posted registration receipt and matched all 43 files again.
-  The comparisons include the PDF inputs. The paper versions stay
+  methods survey. The final comparison reran all four trees against cb1b61f3fc,
+  after recording the posted registration reply and stating T-336's exact fraction
+  in the register, and matched at the same four file counts. The comparisons
+  include the PDF inputs. The paper versions stay
   v0.4.35, v0.1.11, v0.1.4 and v0.2.7, respectively.

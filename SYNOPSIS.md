@@ -1080,6 +1080,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issues 1021, 1022 and 1031 (think-78aj)](packing/cases/regularized_drawings/think-78aj-2026-11-20/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs for the Adoption of Issue 1038 (think-91fu)](packing/cases/regularized_drawings/think-91fu-2026-11-20/README.md) | source retention and archive policy | record | retained | — |
 | [Drawing runs for the T-335 adoption at 109](packing/cases/regularized_drawings/think-wvr8-2026-11-21/README.md) | source retention and archive policy | record | retained | — |
+| [Drawing runs for the T-336 adoption at 305](packing/cases/regularized_drawings/think-kzwl-2026-11-21/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 958 (think-bcfs)](packing/cases/regularized_drawings/think-bcfs-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 959 (think-89i7)](packing/cases/regularized_drawings/think-89i7-2026-11-12/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issue 960 (think-my76)](packing/cases/regularized_drawings/think-my76-2026-11-11/README.md) | source retention and archive policy | record | retained | — |
