@@ -3,9 +3,9 @@ type: is
 id: is-01m7w07mbpphjnx2e3bkc98hzb
 title: "Import #1038: Özden's s(228) <= 15.596043116632 (jazivxt's Boxed In coordinates) at kenaznia-doga/s228-upper-bound-1559604311 46ab8bf; option D against T-301"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 9
+version: 10
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T08:12:42.230Z
-updated_at: 2026-11-21T02:27:43.810Z
+updated_at: 2026-11-21T09:03:45.077Z
 started_at: 2026-11-20T08:13:34.461Z
+closed_at: 2026-11-21T09:03:45.076Z
+close_reason: "T-334 adopted and live from #1045; #1038 response posted and receipt merged in #1064, later attachment remains in think-d4b0."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
