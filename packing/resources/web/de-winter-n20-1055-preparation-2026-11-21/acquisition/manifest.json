@@ -1,0 +1,75 @@
+{
+  "format": "n20-preparation-custody-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1055",
+  "comment": "https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337",
+  "source_repository": "https://github.com/JoostdeWinter/square-packing",
+  "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+  "archive": {
+    "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc/attachments/n20-proof-499755.zip",
+    "attachment_url": "https://github.com/user-attachments/files/35205175/n20-proof-499755.zip",
+    "bytes": 1425895,
+    "sha256": "475d7ef50e21ce4a83cfb4c8415c9e9852d619beeade5c4c8745c2c963d6c867",
+    "retained_in_public_packet": false,
+    "attachment_fetched_separately": false
+  },
+  "attribution": {
+    "research_direction": "Joost de Winter, TU Delft",
+    "author_reported_ai_author": "GPT6.2 Astra",
+    "mark_patterns": "Wolfram Bentz",
+    "upstream_geometry": "Mira Cult"
+  },
+  "license": {
+    "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc/LICENSE",
+    "path": "source/LICENSE",
+    "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+    "scope": "MIT, copyright 2026 Joost de Winter. Archive has no license member. No license for embedded Mira-Cult files established; source programs are pinned only. Retained coefficient data and factual receipts carry attribution and the source notice."
+  },
+  "retained_members": [
+    {
+      "member": "proofs/equal_tilt_through_24.json.gz",
+      "bytes": 5878,
+      "sha256": "009441b65a3364e5f2abc5736a07dc46632dfba32b03d880780fb7c6849e238f",
+      "retained_as": "source/equal_tilt_through_24.json.gz",
+      "storage": "original",
+      "scope": "Mathematical coefficient data"
+    },
+    {
+      "member": "runs/equal_24_standalone.json",
+      "bytes": 393,
+      "sha256": "4fab404357872fc88e55baebbbfa94ef9e7502cb8b96113fa1d5b2be0c797319",
+      "retained_as": "source/equal_24_standalone.json",
+      "storage": "original",
+      "scope": "Author-reported factual receipt; not independently replayed"
+    },
+    {
+      "member": "runs/equal_24_boolean.json",
+      "bytes": 212,
+      "sha256": "11279dec5bce6c6d86a9f6d7b7f6a4bb64f739815ad1508153ba263bb504c02f",
+      "retained_as": "source/equal_24_boolean.json",
+      "storage": "original",
+      "scope": "Author-reported factual receipt; not independently replayed"
+    },
+    {
+      "member": "runs/replay4997550_saved.json",
+      "bytes": 581,
+      "sha256": "8507adf1c9b1a3283a574c5731ea82680c64b95405d07c528d1fd250306a1214",
+      "retained_as": "source/replay4997550_saved.json",
+      "storage": "original",
+      "scope": "Author-reported factual receipt; not independently replayed"
+    },
+    {
+      "member": "runs/replay4997550_last_root.json",
+      "bytes": 350,
+      "sha256": "c0b6e5f71ab1f2c1adb25be3571140dd53181609fa72bf4351a3f6b6da25e0ed",
+      "retained_as": "source/replay4997550_last_root.json",
+      "storage": "original",
+      "scope": "Author-reported factual receipt; not independently replayed"
+    }
+  ],
+  "original_495": {
+    "commit": "3a5130340b0882e72e9d04ad2419b0437cae99aa",
+    "path": "lower_n20",
+    "replay_status": "not run in this slice"
+  },
+  "scope": "Preparation and local polynomial corroboration; no global lower-bound or restricted endpoint acceptance."
+}

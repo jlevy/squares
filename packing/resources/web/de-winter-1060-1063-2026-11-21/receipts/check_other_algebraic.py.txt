@@ -1,0 +1,76 @@
+"""Check the six exact field witnesses used by the three filed identities."""
+from copy import deepcopy
+from pathlib import Path
+from fractions import Fraction
+from zipfile import ZipFile
+import gzip
+import hashlib
+import json
+import signal
+import time
+
+from devtools import algebraic_witness_reports as algebraic
+from devtools import check_algebraic_witness_independent as exact
+from devtools import exact_sides
+
+home = Path(__file__).resolve().parent
+signal.alarm(240)
+started = time.monotonic()
+archive = home / "algebraic-12.zip"
+archive_sha = hashlib.sha256(archive.read_bytes()).hexdigest()
+assert archive_sha == "3511b3144994bb32a52364c9728a807a7b0a8adec36345955173203c9845cc8b"
+results = []
+receipt = home / "1061-other-fields-finite-replay.json"
+
+def case_witness(n, raw, field_degree):
+    geometry = algebraic.evand_minpoly_geometry(raw, {"n":n,"degree":field_degree})
+    return {"id":f"W-de-winter-1061-n{n:03d}","n":n,"square_size":"1",
+            "coordinates":{"origin":"lower-left","axes":"x-right-y-up","angle_unit":"not-applicable"},
+            "claim":{"coordinate_provenance":"reported","method":"exact-algebraic",
+                     "limitations":"Finite feasibility in the filed number field."}, **geometry}
+
+def test_controls(witness):
+    dup = deepcopy(witness)
+    dup["n"] = 2
+    dup["squares"] = deepcopy(witness["squares"][:2])
+    dup["squares"][1] = {**dup["squares"][0],"id":2}
+    duplicate = exact.check_witness(dup)
+    assert not duplicate["verification_passed"] and any("overlap" in item for item in duplicate["failures"])
+    outside = deepcopy(witness)
+    outside["n"] = 2
+    outside["squares"] = deepcopy(witness["squares"][:2])
+    outside["squares"][0]["center"][0] = "-2"
+    wall = exact.check_witness(outside)
+    assert not wall["verification_passed"] and any("leave the container" in item for item in wall["failures"])
+    return {"duplicate": duplicate, "outside": wall}
+
+with ZipFile(archive) as zipped:
+    for n in (175,237,262,269,295,109):
+        raw = zipped.read(f"n{n}/n{n}.minpoly.json.gz")
+        source = json.loads(gzip.decompress(raw))
+        degree = len(source["field"]["f"])-1
+        witness = case_witness(n,raw,degree)
+        side_field = algebraic.side_of(witness)
+        side_poly = source["S"]["poly"]
+        low, high = map(Fraction, source["S"]["interval"])
+        st = side_field.field
+        accum = st.zero
+        for term in reversed(side_poly):
+            accum = accum * side_field + term
+        assert accum.is_zero()
+        assert st.sign(side_field - low) > 0 and st.sign(side_field - high) < 0
+        root = exact_sides.algebraic(side_poly[::-1], (low,high))
+        report = exact.check_witness(witness)
+        assert report["n"] == n and report["verification_passed"]
+        assert report["pairs_tested"] + report["pairs_separated_by_sweep"] == n*(n-1)//2
+        controls = test_controls(witness)
+        results.append({"n":n,"sha256":hashlib.sha256(raw).hexdigest(),
+                        "field_degree":degree,"side_root":exact_sides.literal(root),
+                        "field_side_binds_to_isolated_root":True,"direct_geometry":report,"controls":controls})
+        document = {"format":"linked-algebraic-geometry-v1","archive_sha256":archive_sha,
+                    "scope":"Checked the six otherwise unlinked filed constructions by implementation-aware maintained replay.",
+                    "runtime_seconds":time.monotonic() - started,"cases":results}
+        receipt.write_text(json.dumps(document,indent=2)+"\n")
+        print(n,report["verification_passed"],n*(n-1)//2,"pairs",flush=True)
+signal.alarm(0)
+

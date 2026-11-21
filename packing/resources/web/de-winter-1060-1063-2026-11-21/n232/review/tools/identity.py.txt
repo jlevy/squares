@@ -1,0 +1,66 @@
+"""Post-freeze pose measurements using the maintained project implementation."""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import json
+import signal
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("repository", type=Path)
+    parser.add_argument("candidate", type=Path)
+    parser.add_argument("output", type=Path)
+    args = parser.parse_args()
+    started = time.monotonic()
+    signal.alarm(120)
+    repo = args.repository.resolve()
+    sys.path.insert(0, str(repo / "packing"))
+    sys.path.insert(0, str(repo / "packing" / "src"))
+    from devtools import check_half_angle_area as area  # noqa: PLC0415
+    from devtools import measure_identity as identity  # noqa: PLC0415
+
+    raw = gzip.decompress(args.candidate.read_bytes())
+    data = json.loads(raw)
+    rows = [(Fraction(x), Fraction(y), Fraction(t)) for x, y, t in data["squares"]]
+    candidate = identity.Packing(
+        "issue-1062-candidate",
+        {
+            "input": "original-candidate-json-member",
+            "path": "source/232/candidate.json.gz",
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "conversion": "Original side and [cx,cy,t] rows; maintained area.placed",
+        },
+        Fraction(data["side"]),
+        tuple(area.placed(rows)),
+    )
+    previous = (
+        repo
+        / "packing/resources/web/joegun-local-minimum-2026-11-16"
+        / "source/local-minimum/n-232-input.cert"
+    )
+    others = [
+        identity.read_packing("T-307=packet:joegun-upper-bounds-2026-11-16", 232),
+        identity.read_packing(
+            f"JoeGun-earlier-rational-certificate=evand-cert:{previous}", 232
+        ),
+    ]
+    result = identity.receipt(232, candidate, others)
+    result["post_freeze_review"] = {
+        "elapsed_seconds": time.monotonic() - started,
+        "scope": "Pose measurements for credit; no feasibility or optimality decision",
+    }
+    args.output.write_text(json.dumps(result, indent=2) + "\n")
+    sys.stdout.write(json.dumps(result["post_freeze_review"]) + "\n")
+    signal.alarm(0)
+
+
+if __name__ == "__main__":
+    main()

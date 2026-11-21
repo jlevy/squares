@@ -1,0 +1,14 @@
+{
+  "half_tangent_interval": "0 < t <= 1/24",
+  "exact_chain_polynomials": true,
+  "mixed_dihedral_representatives": 256,
+  "counts": {
+    "after_paired_chains": 3636,
+    "same_sign_delegated_to_parallel_proof": 240,
+    "signs_with_contact_graph": 2022,
+    "mixed_contact_graphs": 26611
+  },
+  "verified_polynomial_certificates": 117,
+  "certificates_used": 117,
+  "uncovered_graphs": 0
+}

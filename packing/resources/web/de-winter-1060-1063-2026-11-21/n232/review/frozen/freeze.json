@@ -1,0 +1,25 @@
+{
+  "freeze_utc": "2026-11-21T18:31:30Z",
+  "immutable_source": "frozen/verify.py.txt",
+  "immutable_source_sha256": "68b30fb3fad5f2e63428b8ada7a77181064ce7c3a1a775d3610632203a02394c",
+  "original_plan_sha256": "fa8b3f12b935ef94dd69e4de9c553c3aa376d0d1bfcbe9a6f56f0c5c770196f1",
+  "original_launcher_sha256": "23523fe39ebd59c8c6972a59b8e01b3383d963ac31ee703448d3ef3238a8f2f6",
+  "pre_freeze_inputs": [
+    "Assigned issue snapshot",
+    "Original archive factual candidate and input members",
+    "Coordinator brief"
+  ],
+  "pre_freeze_exclusions": [
+    "Producer geometry code",
+    "Project geometry code",
+    "Other validator results",
+    "Other reviewer findings"
+  ],
+  "post_freeze_work": [
+    "Portable input adapter and lint formatting",
+    "Maintained pose identity",
+    "Coordinator-provided Option D comparison",
+    "Maintained-route source audit"
+  ],
+  "historical_evidence": "Original plan, launcher, source archive and full monitor journals are retained in the external review evidence directory; absolute host paths are excluded from this overlay."
+}

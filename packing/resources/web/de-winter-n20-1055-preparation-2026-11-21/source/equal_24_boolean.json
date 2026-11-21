@@ -1,0 +1,9 @@
+{
+  "small_half_tangent_cutoff": "1/24",
+  "exact_polynomial_certificates": 117,
+  "unsatisfiable_by_independent_formulation": {
+    "sign_cover": 120,
+    "independent_graph_cover": 430
+  },
+  "unresolved": 0
+}

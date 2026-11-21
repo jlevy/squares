@@ -1,0 +1,27 @@
+{
+  "repository": "https://github.com/Mira-Cult/math",
+  "commit": "78bec6aacebf304d942a9225e16c2f18165778ff",
+  "path": "notes/geometry/unit-square-packing-18/replay",
+  "files": {
+    "adaptive_angles.py": "44f0dfe4248bc86855eb9aeb7b1b1e3ddeeeb4f6",
+    "angle_split_variant.py": "e3a503d27f167bbfacf2c52c1bea6c6748ddf62a",
+    "arc_pair_variant.py": "ebb64ae8009e1b694b8879280427abdbe662d22f",
+    "check_stabs.py": "917281b7e47f0feac7dc3037314d25e486972819",
+    "check_wall.py": "6773a2f7e716d6e7c7520d149719b0168e4616d1",
+    "edgeclip.py": "9c32df6578c37b81dc889e153a622d980f029746",
+    "export_lattice.py": "57a28a0d5e490f582d0f22236c605cba471ce169",
+    "export_native.py": "2f1e99878c72881b9d081a372b05b0dc0fcfc686",
+    "lattice_kernel.cpp": "ca71fde2d725b3b12d6036d5d7d2526f51b44571",
+    "nearest_init.py": "7d4b9f1bcc72fce729063409676bd3c9fe6b9283",
+    "nearest_rack.py": "b8150bb2a008f1944ded967d65f472806cc32329",
+    "pair_variant.py": "20a40fb3a46595441d4a837ce0516b39d8813a40",
+    "rack_lattice_input.py": "9fcb3358425fb02bb475fd097c38fbd4b028ab07",
+    "ragged_half_angles.inc": "013bd20ebab238f24d412ac457db69ddb27ac8e8",
+    "short_facets.py": "6d14e14dbf85a8cb61da4a3538dc13146f408f44",
+    "split_variant.py": "d878eb7c229fe3ff76d42ba2a14bba260083a2e3",
+    "verify_arc_lower.py": "348e679e7e0187457c85c17a4867ca9895d7dab6",
+    "verify_exit_lower.py": "dafd9efbceb81a3943c9d3029b2e582b959431db",
+    "verify_nearest_lower.py": "1b43a0ca8ecc615ddc5680b8e0592ffb158ff51b",
+    "verify_rack_angle.py": "fb33b935fbfb7a0a15fad0b97a7f7c65de372301"
+  }
+}
