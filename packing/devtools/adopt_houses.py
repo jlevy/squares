@@ -4993,7 +4993,13 @@ def plan(
                 f"packing it solves, which {owed.measured_in} measured to be {owed.measured}; "
                 f"correct the item first ({owed.bead}, select_houses.CORRECTIONS_OWED)"
             )
-        if house.algebraic and not select_houses.writable(house):
+        if not select_houses.writable(house):
+            if not house.algebraic:
+                raise AdoptionError(
+                    f"n={n}: {house.result} has an exact-side reader but no supported "
+                    "house writer; stage the count as no writer under its owning bead "
+                    "(select_houses.PENDING_ADOPTION)"
+                )
             raise AdoptionError(
                 f"n={n}: the house is {house.result}'s algebraic side, and no derived "
                 "number-field fact and receipt hold it (upper_bound_houses.FIELD_COUNTS); "
@@ -5492,9 +5498,12 @@ def _staged(n: int, result: str) -> str:
     return f", staged under {staged.bead},"
 
 
-def _writer_clause(staged: select_houses.Pending) -> str:
+def _writer_clause(staged: select_houses.Pending, n: int) -> str:
     """What a staged adoption that waits for the writer adds: when it can move the case."""
     if staged.why == select_houses.NO_WRITER:
+        found = _staged_house(n)
+        if found is not None and not found[1].algebraic:
+            return ", once a supported writer can adopt this rational certificate"
         return ", once the writer takes an algebraic side"
     return ""
 
@@ -5513,7 +5522,7 @@ def _keeps_until(n: int, result: str, keeps: str) -> str:
         return (
             f"The case keeps {keeps} until {staged.house}’s adoption, staged under "
             f"{staged.bead}, moves it to {staged.house}’s side, below {result}’s"
-            f"{_writer_clause(staged)}."
+            f"{_writer_clause(staged, n)}."
         )
     return (
         f"The case keeps {keeps} until {result}’s adoption{_staged(n, result)} moves it to "
@@ -5699,7 +5708,7 @@ def staged_sentences(
             f"{described[:-1]}. The owner’s house rule "
             f"of {words(select_houses.RULE_SET_ON)} adopts it: the case keeps {keeps} "
             f"until its adoption, staged under {staged.bead}, moves it to {staged.house}’s "
-            f"side{_writer_clause(staged)}."
+            f"side{_writer_clause(staged, n)}."
         )
     ]
 

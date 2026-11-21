@@ -121,7 +121,8 @@ NEXT_PULL_REQUEST = "next pull request"
 OVER_CAP = "over the item cap"
 #: or the writer cannot write the house yet, the one code gap the rule names: since 23
 #: October 2026 it writes an algebraic side, and the gap is one whose packet holds no derived
-#: number-field fact and receipt for the count (`upper_bound_houses.FIELD_COUNTS`, `writable`).
+#: number-field fact and receipt for the count (`upper_bound_houses.FIELD_COUNTS`, `writable`),
+#: or a rational source is currently exposed only through an exact-side reader.
 NO_WRITER = "no writer"
 STAGING_REASONS = (NEXT_PULL_REQUEST, OVER_CAP, NO_WRITER)
 
@@ -227,6 +228,7 @@ class Pending:
 #: 2026 (think-i38n) took 292 off: Mykhailo Polkovskyi's certificate of issue 1009 (T-323)
 #: is 1.36e-3 below T-193's algebraic side there.
 PENDING_ADOPTION: dict[int, Pending] = {
+    232: Pending(house="T-340", bead="think-eumc", why=NO_WRITER),
     **{
         n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
         for n in (88, 126, 266, 267, 301)
@@ -985,14 +987,14 @@ def table(selections: Mapping[int, Selection], *, everything: bool) -> str:
 
 
 def writable(house: Candidate) -> bool:
-    """Whether `adopt_houses` can write the house: a rational side, or an algebraic one whose
-    derived number-field fact and receipt `upper_bound_houses` reads (`FIELD_COUNTS`)."""
+    """Whether a supported source supplies the house writer. A side reader alone
+    establishes ordering, not a native receipt or the ability to write a witness."""
     from devtools import upper_bound_houses as houses  # noqa: PLC0415 -- the writer's half
 
     found = houses.writable_source(
         house.result, house.n, house.source_key, algebraic=house.algebraic
     )
-    return found is not None or not house.algebraic
+    return found is not None
 
 
 def check(selections: Mapping[int, Selection]) -> list[str]:
@@ -1021,7 +1023,7 @@ def check(selections: Mapping[int, Selection]) -> list[str]:
             pending.why == NO_WRITER
         ):
             # The writer's gap stages a house the writer cannot write and nothing else
-            # (review A1 of #660): an algebraic side no derived number-field fact holds.
+            # (review A1 of #660), now also including a rational side-only reader.
             problems.append(
                 f"FAIL: n={n} is staged as {pending.why!r} under {pending.bead}, but "
                 + (

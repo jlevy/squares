@@ -67957,3 +67957,79 @@ evidence:
       or optimality is established. The corner reading copy is explicitly derived; the original source
       bytes remain retained.
     source_reviewed: '2026-11-20'
+  - id: E-de-winter-1062-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 232
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter n232 rational certificate 2026-11-21]'
+    certificate: packing/resources/web/de-winter-1060-1063-2026-11-21/n232/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-21'
+    external_review:
+      state: informally-verified
+      date: '2026-11-21'
+      reviewed_by: Codex source-only mathematical reviewer
+      note: Complete independently implemented finite replay accepted; the source checker was not run.
+        See the mapped review.
+    limitations: The author report remains reported. No source checker execution, priority, local minimality
+      or global optimality is inferred.
+  - id: E-de-winter-1062-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 232
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter n232 rational certificate 2026-11-21]'
+    certificate: packing/resources/web/de-winter-1060-1063-2026-11-21/n232/candidate.json.gz
+    replay: 'From the retained n232/review directory, Python 3.14.7: python -I -B tools/verify.py.txt
+      source/232 EXTERNAL_SCRATCH/replay.json. The primary results/independent-feasibility.json records
+      the frozen run: 232 squares, all 3712 vertex-wall inequalities and 26796 unordered pairs, 26581
+      strict AABB certificates and 215 exact edge-axis decisions; no failures. Actual wall and pair
+      equality and the predeclared inward/outward controls pass. Elapsed 3.980607375 s; portable replay
+      1.297996708 s matches all mathematical fields. The maintained joint Fraction job hit its 300 s
+      wall cap without a result.'
+    replay_status: passed
+    verifiers:
+    - V-n232-1062-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: 'The submitted n232 certificate: every square, wall and unordered pair.'
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Separately prompted source-only review lane; tbd-strong, extra-high reasoning.
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The source credits an OpenAI GPT system. This Codex review froze its code and controls
+          before reading any producer or project geometry code, prior checker result or other review.
+          Its issue snapshot included the owner comparison comment; that did not determine feasibility.
+          Post-freeze maintained pose identity and coordinator Option D comparisons are separately attributed.
+    independence_record: packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md
+    source_reviewed: '2026-11-21'
+    limitations: One independently implemented exact method; no second maintained-route receipt, method
+      diversity, second distinct review or human oversight. No ordering against an unrounded local or
+      optimal limit.

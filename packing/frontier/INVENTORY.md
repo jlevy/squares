@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **1051** evidence records. **619** are formal; **610** of those were established here. **20** are samples, counted separately.
-- **406** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **1053** evidence records. **620** are formal; **611** of those were established here. **20** are samples, counted separately.
+- **407** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -1074,13 +1074,15 @@ results, it is a statement about what this repository has itself examined.
 | `E-de-winter-1052-certificate-report` | 1 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-de-winter-1052-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | `V-sqpack-verify`, `V-check-rational-witness-independent` |
 | `E-de-winter-1052-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: The certificate at 305, every square, wall and pair by both review methods. | `V-r1052-review-check` |
+| `E-de-winter-1062-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-de-winter-1062-review-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: The submitted n232 certificate: every square, wall and unordered pair. | `V-n232-1062-review-check` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 408, verified 638
-- **method**: exact-algebraic 373, interval-certified 247, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 408
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 990
-- **relationship to the producer's code**: generator 5, independent-implementation 408, not-applicable 38, same-implementation 536, shared-components 58, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 409, verified 639
+- **method**: exact-algebraic 374, interval-certified 247, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 409
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 992
+- **relationship to the producer's code**: generator 5, independent-implementation 409, not-applicable 38, same-implementation 537, shared-components 58, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

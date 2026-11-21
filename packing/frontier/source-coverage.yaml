@@ -14013,6 +14013,27 @@ sources:
     maintained jobs and 11 sharp controls have the stated outcomes; the accepted review independently
     checked the whole certificate and 51 controls. Source pin, later checksum list and review certificate
     identity agree.'
+- id: de-winter-1062-n232-2026-11-21
+  title: Joost de Winter's exact rational enclosure at 232
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/1062
+  local: resources/web/de-winter-1060-1063-2026-11-21/n232/
+  source_key: '[de Winter n232 rational certificate 2026-11-21]'
+  scope:
+    n_values:
+    - 232
+  reviewed: '2026-11-21'
+  source_date: '2026-11-21'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md
+  evidence:
+  - E-de-winter-1062-certificate-report
+  - E-de-winter-1062-review-exact-feasibility
+  notes: The independently accepted finite certificate is T-340. The current house stays
+    T-307 until the native writer can adopt the original exact input.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

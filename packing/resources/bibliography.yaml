@@ -6186,6 +6186,21 @@ sources:
       quench code and the project’s rational promotion. The contributor’s primary rational JSON
       and original corner file are retained. The accepted review discloses the corner file’s
       metadata defect and confirms finite feasibility from the primary JSON. MIT at the pin.
+  - key: '[de Winter n232 rational certificate 2026-11-21]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-21'
+    lineage: independent
+    credit: de Winter after Kodaj, JoeGun
+    note: Issue 1062 supplies Joost de Winter's exact rational feasibility certificate, from coordinates
+      in Alex Chilton's public compilation. The source explicitly retains the prior Kodaj-JoeGun layout
+      and local-solve lineage. Chilton is credited for source compilation, not as certificate author.
+      The maintained pose comparison differs from both retained comparators at the measured scale; this
+      measurement does not erase the historical credits. The exact side is below T-307 and JoeGun's
+      earlier rational recorded certificate, each contracted to first contact. There is no ordering
+      against an unrounded local or optimal limit and no optimality claim.
 credited_names:
   Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim

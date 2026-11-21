@@ -39308,12 +39308,11 @@ issues:
       claim: >-
         s(232) <= 15.759531623541, the upward 12-place print of the exact rational witness.
       source: body
-      not_registered: >-
-        Independent exact geometry accepts all 26,796 pairs. The certificate is below both
-        earlier rational first-contact sides. The maintained Fraction replay timed out before
-        a verdict. Stage 5 and house preparation stay open.
-      queued: true
-      bead: think-eumc
+      register:
+      - T-340
+      evidence:
+      - E-de-winter-1062-certificate-report
+      - E-de-winter-1062-review-exact-feasibility
     beads: [think-eumc]
     answer_bead: think-eumc
     replies:
@@ -39334,7 +39333,8 @@ issues:
       All three have the same 12-place upward print. Independent exact finite feasibility
       passes. The candidate is below both earlier certificates at first contact, and neither
       comparator has a bijective nearest-center pose match under the eight box symmetries.
-      No comparison with an unrounded local limit was made. See
+      The independent replay supports T-340. House adoption remains staged under
+      think-eumc. No comparison with an unrounded local limit was made. See
       packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md.
       Source SHA-256 752b5efc0aaedfab63605b8c2f3112610a41164bfc31d843b629752cda4088c3.
   - number: 1063

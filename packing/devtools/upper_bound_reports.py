@@ -1701,9 +1701,22 @@ def _evand_optima(n: int) -> Fraction:
     return legacy.parse(path.read_text(encoding="utf-8"), expected_n=n).side
 
 
+def _de_winter_n232_side(n: int) -> Fraction:
+    """Read only the original certificate's exact side; create no native-job receipt."""
+    _require(type(n) is int and n == 232, "the issue 1062 reader states only n=232")
+    path = WEB / "de-winter-1060-1063-2026-11-21/n232/candidate.json.gz"
+    value = _json(read_retained_bytes(path, limit=MAX_SOURCE_BYTES))
+    squares = _squares(value, n)
+    _require(len(squares) == n, "n=232: source square count differs")
+    side = _literal(value.get("side"), "n=232 side")
+    _require(side > 0, "n=232: source side must be positive")
+    return side
+
+
 #: How each holding source's exact side is rebuilt from its own retained packet, keyed by
 #: source key, so a comparison stays what it was however the case records later move.
 HOUSES: dict[str, Callable[[int], Fraction]] = {
+    "[de Winter n232 rational certificate 2026-11-21]": _de_winter_n232_side,
     "grid": grid_side,
     "[evand exact optima 2026-10-05]": _evand_optima,
     "[Rehwaldt n68 refinement 2026-10-07]": lambda n: Fraction(

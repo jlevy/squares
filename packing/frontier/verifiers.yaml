@@ -10181,3 +10181,39 @@ verifiers:
         note: The source says Claude handled repository files, checks and the figure. The review is
           also by Claude, but its checker was frozen before reading source or project verification code
           and reuses none of it. The overlap is of system family, not shared code or prompt.
+  - id: V-n232-1062-review-check
+    program: verify.py.txt (frozen source and portable input adapter)
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/tools/verify.py.txt
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/frozen/verify.py.txt
+    summary: 'Exact rational unit-square containment and exhaustive unordered interior separation: strict
+      AABB separation or four edge-axis SAT tests, including exact equality and predeclared inward controls.'
+    independence_record: packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Separately prompted source-only review lane; tbd-strong, extra-high reasoning.
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The source credits an OpenAI GPT system. This Codex review froze its code and controls
+          before reading any producer or project geometry code, prior checker result or other review.
+          Its issue snapshot included the owner comparison comment; that did not determine feasibility.
+          Post-freeze maintained pose identity and coordinator Option D comparisons are separately attributed.
+    note: Git holds first-party source integrity under OR-16. Existing frozen hashes document the historical
+      review boundary; no new code hash pin. The optional identity helper decides no feasibility claim.
