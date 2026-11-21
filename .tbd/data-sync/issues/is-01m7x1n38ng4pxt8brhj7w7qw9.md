@@ -5,7 +5,7 @@ title: "Import #1052: de Winter's s(305) <= 17.945755838742 (refines T-309, Koda
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:56:46.484Z
-updated_at: 2026-11-21T08:38:25.988Z
+updated_at: 2026-11-21T13:20:40.821Z
 started_at: 2026-11-20T21:05:08.431Z
 ---
 
@@ -35,3 +35,9 @@ The prepared packet is now in the reused checkout on codex/intake-305-20261121 a
 Durable packet and maintained receipt checkpoint e33458e5a2af4bbd6030fdfee22b77eeca598f81 on codex/intake-305-20261121. Staged blob-budget check passed. This commit precedes the in-progress sharp-control output and the register update.
 
 Completed independent receipt replay and all 11 maintained sharp controls. The full proof packet and its controls are committed locally on codex/intake-305-20261121 at 2f24aa1f997f197c705b01b7df205434d6e45346, integrated with main 9b21535f3d. Independently verified that the original JSON and YAML archive digests match #1057 and the maintained positive input gives all 305 poses at the exact same side. The author received the Stage 4 update at issuecomment-7059935496. Registration and house work remain open.
+
+### T-336 registration checkpoint, 21 November UTC
+
+The exact current registration tree is 0155b031463893f3221bf8eee00c70fb096fd374, with data pin 30bcad665711753bef7123369e07640d3c9a964d. Full guarded edit gate passed 65 steps and found six records issues. Corrected the significance headline and rational ceiling wording, maintained-route independence declaration, case math, URL register and synopsis. All six passed guarded targeted reruns. Five directly affected exact/attribution/adoption tests passed. Final paper comparison produced 55/43/43/43 deterministic files, with only the explainer's live register count changing from 335 to 336. Independent senior review approved the exact tree against dbd3337c05.
+
+T-336 is V3/C3 S2 with safe 12-place ceiling 17.945755838742, credited de Winter after Kodaj, JoeGun. The branch stages house adoption separately and leaves T-309 in place. Wait for #1068 to land before the standalone n305 PR, verify the integrated tree, then obtain exact-head CI and formal review. The adoption slice has a maintained JSON-to-Witness/v2 preview path and a one-worker guarded plan for both strong generators, translation screen, rigidity and history.
