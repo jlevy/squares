@@ -136,6 +136,21 @@ Otherwise it says whose claim the identity is, as `T-146` says that each view’
 rests on Evan Daniel’s sampled path test; measurements made here are recorded beside the
 claim and decide nothing.
 
+A restatement leaves the packing and its bound with the original finder.
+Under the owner’s option D of 17 November 2026 (think-b0w5), a re-certification of a
+standing packing, with its padding removed or the same arrangement re-solved to its
+exact local optimum, is a new result only if its side is below its predecessor’s once
+the predecessor is shrunk until its squares first touch (`devtools.contraction_margin`);
+otherwise it is a restatement, credited to the original finder.
+Its report, where the register records it, names the predecessor’s result as `of` in its
+`restatements`, takes no regularization credit, and counts as no current record of its
+author’s: `T-253` restates nine house certificates at the padding they carry, credited
+to their finders (the
+[runbook](packing/campaign/result-import.md#several-reports-at-one-count)). A
+re-certification beyond the margin is a refinement, credited as a regularization above,
+as `T-285` and `T-286` credit Joost de Winter’s re-solve of Doğa Özden’s further
+arrangement of Evan Daniel’s packing.
+
 ## Website and PDF Presentation
 
 Use the same preferred person credit in records, notes, tables and paper credits.

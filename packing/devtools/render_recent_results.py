@@ -656,7 +656,10 @@ def superseding(record: Mapping[str, Any], records: Records) -> tuple[str, ...]:
     the lanes whose bound ties or beats it there are named. A lane whose bound is worse
     than the entry's replaced nothing: a report beaten in the reported lane is not
     superseded by the holder of a worse verified bound. Where the words state none, both
-    lanes are named, as `held` reads them."""
+    lanes are named, as `held` reads them. At a count the entry restates under the owner's
+    option D (`check_standing.restated`) both lanes are named too, whatever its words
+    state: the predecessor shrunk to first contact proves at least as much, so the bounds
+    the case rests on supersede it there, even where its stated side is below them."""
     # `check_standing` reads this module, so its reader of stated bounds is imported here.
     from devtools.check_standing import (  # noqa: PLC0415
         BEATEN,
@@ -665,6 +668,7 @@ def superseding(record: Mapping[str, Any], records: Records) -> tuple[str, ...]:
         LOWER,
         UPPER,
         findings,
+        restated,
     )
 
     direction = UPPER if str(record["kind"]) == "upper-bound" else LOWER
@@ -673,10 +677,12 @@ def superseding(record: Mapping[str, Any], records: Records) -> tuple[str, ...]:
         for finding in findings(record, records)
         if finding.direction == direction
     }
+    restates_at = restated(record)
     found: set[str] = set()
     for n in _scope(record):
         if n in records.cases:
-            found |= lane_holders(n, records, direction, replaced.get(n, set(LANES)))
+            lanes = set(LANES) if n in restates_at else replaced.get(n, set(LANES))
+            found |= lane_holders(n, records, direction, lanes)
     found.discard(str(record["id"]))
     return tuple(
         sorted(entry for entry in found if records.results[entry]["kind"] in BOUND_KINDS)

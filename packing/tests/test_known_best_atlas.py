@@ -2696,10 +2696,10 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
     for n, found, improved in (
         (156, ["Doğa Özden"], ["Mishapolk"]),
-        (172, ["Evan Daniel"], ["Doğa Özden"]),
+        (172, ["Evan Daniel"], ["Doğa Özden", "Joost de Winter"]),
         (179, ["Doğa Özden"], []),
         (180, ["Doğa Özden"], ["Mishapolk"]),
-        (199, ["Evan Daniel"], ["Doğa Özden"]),
+        (199, ["Evan Daniel"], ["Doğa Özden", "Joost de Winter"]),
         (90, ["jazivxt"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, ["Roberto Ono"], []),

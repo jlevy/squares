@@ -204,6 +204,11 @@ DECLARED_CONSUMERS = {
         "result, confirming that equality is no strict improvement; the ceiling is "
         "never treated as s(n) or as an optimality claim"
     ),
+    "packing/tests/test_restatements.py": (
+        "reads a case's exact certified ceiling as its house's side, to compare the held "
+        "solves of 9 November with the house under option D; a side below the ceiling is a "
+        "packing, never s(n) or an optimality claim"
+    ),
     "packing/tests/test_confirm_gupta_records.py": (
         "tests finite ceiling confirmation, retained prior lanes and complete custody; "
         "a feasibility certificate confers neither s(n) nor optimality"

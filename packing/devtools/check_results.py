@@ -45,7 +45,11 @@ scope, each once, to a registered result (`of`, and `first_certified_in` where n
 dated no later whose scope holds the count, to a regularizer among the entry's own
 sources (or `project`, on a result of this project), and to measurements that are
 numbers no lower than zero, one at least where the identity was decided here
-(`regularizations_problems`). It ties each formalization review to the formal
+(`regularizations_problems`), and its `restatements`, the counts at which the report it
+records restates a registered packing under the owner's option D (think-b0w5), to the same
+counts and `of`, and to a `devtools.contraction_margin` receipt that finds the
+certificate within the predecessor's margin (`restatements_problems`). It ties each
+formalization review to the formal
 evidence it read (`formalization_of`), and with `--certificates` resolves the
 `certificate` of every machine-shaped evidence entry (`certificate_path_problems`).
 Human review owns evidence relevance, claim
@@ -64,12 +68,13 @@ resolved, because a negative-control worker prunes the packets most of them live
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from collections.abc import Iterable, Mapping, Sequence
 from datetime import date
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, cast
 
 from devtools.build_bound_citations import RECENT_SINCE
 from devtools.render_document_map import document_link
@@ -1576,6 +1581,145 @@ def regularizations_problems(
     return problems
 
 
+#: The owner's decision the `restatements` apply: option D, 17 November 2026.
+RESTATEMENT_RULING = "think-b0w5"
+#: The receipt a restatement rests on, `devtools.contraction_margin`'s.
+CONTRACTION_FORMAT = "contraction-margin-v1"
+
+
+def _receipt_object(value: object, field: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise TypeError(f"{field} must be a JSON object")
+    return cast("dict[str, Any]", value)
+
+
+def restatements_problems(
+    record: Mapping[str, Any],
+    dated: Mapping[str, str],
+    scopes: Mapping[str, set[int]],
+) -> list[str]:
+    """What is wrong with a result's `restatements`, the counts at which the report it
+    records restates a packing another registered result holds, under the owner's option
+    D (think-b0w5): its side is not below the predecessor's shrunk to first contact.
+
+    Each count lies in this result's scope, is listed once, and is no `regularizations`
+    count: a restatement takes no regularization credit. The result it names as `of` is
+    registered, is not this one, holds that count in its scope and is dated no later than
+    this one, as a regularization's `of` is. The ruling is `RESTATEMENT_RULING`. The
+    receipt `measured_in` is a repository file in `devtools.contraction_margin`'s format at
+    this count, measured against a later certificate whose side lies within the margin
+    (`against.within_margin`), and `gain_over_margin` is the share it records. A receipt
+    measured through a construction states the base's count in `n` and this count in
+    `against.n`, which is read as this count. The receipt measures `of`'s certificate
+    (its label) against this result's: the rival is labelled with this id or read from a
+    packet this result cites in its `artifacts` (review A7 of #1030). An identity measured
+    here carries at least one measurement.
+    """
+    items = record.get("restatements")
+    if not items:
+        return []
+    rid = str(record["id"])
+    own = scopes.get(rid, set())
+    regularized = {item.get("n") for item in record.get("regularizations") or ()}
+    problems: list[str] = []
+    seen: set[int] = set()
+    for item in items:
+        n = item.get("n")
+        name = f"{rid}: restatement at n = {n}"
+        if n in seen:
+            problems.append(f"{name} is listed twice")
+        seen.add(n)
+        if n not in own:
+            problems.append(f"{name} is outside this result's scope")
+        if n in regularized:
+            problems.append(f"{name} is also a regularization: a restatement takes no credit")
+        other = str(item.get("of"))
+        if other == rid:
+            problems.append(f"{name} names the result itself as the packing it restates")
+        elif other not in dated:
+            problems.append(f"{name} names {other}, which is not registered")
+        else:
+            if n not in scopes.get(other, set()):
+                problems.append(f"{name} names {other}, whose scope does not hold n = {n}")
+            if _earlier(dated[rid], dated[other]):
+                problems.append(
+                    f"{name} names {other}, dated {dated[other]}, after this result's "
+                    f"{dated[rid]}"
+                )
+        if item.get("ruling") != RESTATEMENT_RULING:
+            problems.append(f"{name} names no ruling but {RESTATEMENT_RULING}")
+        where = str(item.get("measured_in"))
+        if problem := repository_file_problem(where):
+            problems.append(f"{name}: measured_in {problem}: {where}")
+        else:
+            try:
+                receipt = _receipt_object(
+                    json.loads((REPO / where).read_text(encoding="utf-8")), "receipt"
+                )
+                against = _receipt_object(receipt.get("against", {}), "against")
+                certificate = _receipt_object(receipt.get("certificate", {}), "certificate")
+                rival = _receipt_object(against.get("certificate", {}), "against.certificate")
+            except (OSError, TypeError, ValueError) as error:
+                problems.append(f"{name}: measured_in is no JSON receipt: {error}")
+            else:
+                compared = str(against.get("compared", ""))
+                through = compared.startswith("through the construction")
+                at = against.get("n") if through else receipt.get("n")
+                cited = {
+                    str(path).split("/")[3]
+                    for path in record.get("artifacts") or ()
+                    if str(path).startswith("packing/resources/web/")
+                    and len(str(path).split("/")) > 4
+                }
+                rival_packet = rival.get("packet")
+                if rival_packet is not None and not isinstance(rival_packet, str):
+                    problems.append(f"{name}: the receipt's rival packet must be a string")
+                    rival_packet = None
+                rival_path = str(rival.get("path", ""))
+                if not rival_packet and rival_path.startswith("packing/resources/web/"):
+                    rival_packet = rival_path.split("/")[3]
+                if receipt.get("format") == CONTRACTION_FORMAT and at == n:
+                    if certificate.get("label") != other:
+                        problems.append(
+                            f"{name}: its receipt measures {certificate.get('label')!r}, "
+                            f"not {other}"
+                        )
+                    if rival.get("label") != rid and rival_packet not in cited:
+                        problems.append(
+                            f"{name}: its receipt's rival {rival.get('label')!r} is neither "
+                            f"{rid} nor read from a packet {rid} cites"
+                        )
+                if receipt.get("format") != CONTRACTION_FORMAT or at != n:
+                    problems.append(
+                        f"{name}: measured_in is no {CONTRACTION_FORMAT} receipt at n = {n}"
+                    )
+                elif against.get("within_margin") is not True:
+                    problems.append(
+                        f"{name}: its receipt measures the certificate outside the "
+                        "predecessor's margin, a new result under option D"
+                    )
+                elif against.get("gain_over_margin") != item.get("gain_over_margin"):
+                    problems.append(
+                        f"{name}: gain_over_margin {item.get('gain_over_margin')} is not "
+                        f"the receipt's {against.get('gain_over_margin')}"
+                    )
+        identity = item.get("identity") or {}
+        if identity.get("measured_in") and (
+            problem := repository_file_problem(str(identity["measured_in"]))
+        ):
+            problems.append(
+                f"{name}: identity.measured_in {problem}: {identity['measured_in']}"
+            )
+        if identity.get("basis") == "measured" and not any(
+            field in identity for field in IDENTITY_MEASUREMENTS
+        ):
+            problems.append(
+                f"{name}: an identity measured here carries at least one of "
+                f"{', '.join(IDENTITY_MEASUREMENTS)}"
+            )
+    return problems
+
+
 def regularized_drawings_problems(
     register: Mapping[str, Any], scopes: Mapping[str, set[int]], *, drift: bool = True
 ) -> list[str]:
@@ -2053,6 +2197,7 @@ def main(argv: Sequence[str] = ()) -> int:
             unfinished_confirmations_problems(record, str(register["last_reviewed"]))
         )
         problems.extend(regularizations_problems(record, dated, scopes))
+        problems.extend(restatements_problems(record, dated, scopes))
         problems.extend(confirmation_prose_problems(record))
 
         for kind, value in (record.get("produced_by") or {}).items():

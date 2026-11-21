@@ -1,0 +1,315 @@
+"""A restatement under the owner's option D improves on nothing and is held to its receipt.
+
+The owner's answer of 17 November 2026 (think-b0w5): a re-certification of a standing
+packing, its padding removed or the same arrangement re-solved to its exact local optimum,
+is a new result only if its side is below its predecessor's once the predecessor is shrunk
+until its squares first touch (`devtools.contraction_margin`); otherwise it restates the
+predecessor, credited to the original finder. A register entry that records such a report
+names each count in its `restatements`. `check_standing.restated` keeps those counts out of
+every improvement, so the entry is adopted nowhere and no profile counts it current, and
+`check_results.restatements_problems` holds each item to its scope, its predecessor and the
+receipt that measured it.
+"""
+
+from __future__ import annotations
+
+import dataclasses
+import gzip
+import json
+from collections.abc import Mapping
+from fractions import Fraction
+from pathlib import Path
+from typing import Any
+
+import pytest
+
+from devtools import (
+    check_requests,
+    check_results,
+    check_standing,
+    profile_records,
+    render_results,
+)
+from devtools import render_recent_results as view
+from sqpack.yamlio import safe_load
+
+#: Kaelan Yim's 130 (T-281) against T-259's certificate: 0.0896 of its margin.
+WITHIN = "packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n130.json"
+#: The same certificate's predecessor measured at 299 (T-280 against T-277).
+ELSEWHERE = "packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n299.json"
+#: The project's regularizer candidate at 130 against T-259: outside the margin.
+OUTSIDE = (
+    "packing/cases/register_candidates/think-ruu2-2026-10-31/measure/contraction-n130-t259.json"
+)
+#: T-259 at 130 against T-254's certificate, within its margin: a receipt of another pair.
+OTHER_PAIR = (
+    "packing/resources/web/yim-certificates-2026-11-09/measure/"
+    "precedent-contraction-n130-t259.json"
+)
+#: #719's 631 against Couzo's 490 through his three layers: n is the base's, 490.
+THROUGH = (
+    "packing/resources/web/mishapolk-issue719-2026-10-22/measure/"
+    "contraction-n631-through-490.json"
+)
+
+
+@pytest.fixture(scope="module")
+def records() -> view.Records:
+    return view.load_records()
+
+
+def _item(**changes: Any) -> dict[str, Any]:
+    item: dict[str, Any] = {
+        "n": 130,
+        "of": "T-259",
+        "ruling": "think-b0w5",
+        "gain_over_margin": "0.0896",
+        "measured_in": WITHIN,
+    }
+    item.update(changes)
+    return item
+
+
+def _restated(records: view.Records, *items: Mapping[str, Any]) -> dict[str, Any]:
+    """T-281 as a record of a restatement at the counts `items` name, and nowhere else."""
+    record = {**records.results["T-281"], "restatements": [dict(item) for item in items]}
+    record.pop("regularizations", None)
+    return record
+
+
+def _problems(records: view.Records, record: Mapping[str, Any]) -> list[str]:
+    results = records.register.results
+    dated = {str(other["id"]): check_results.result_date(other) for other in results}
+    scopes = {
+        str(other["id"]): set(check_results.scope_values(other["scope"])) for other in results
+    }
+    return check_results.restatements_problems(record, dated, scopes)
+
+
+def test_a_restated_count_improves_on_nothing(records: view.Records) -> None:
+    """Restated at 130, T-281 is better than no case record there, reads superseded, and
+    the superseded check does not hold its stated side against the reported lane."""
+    record = _restated(records, _item())
+    assert check_standing.restated(record) == frozenset({130})
+    assert check_standing.improvements(record, records) == []
+    assert view.standing(record, records) == view.SUPERSEDED
+    assert check_standing.problems(record, view.SUPERSEDED, records) == []
+    assert "restates its predecessor at n = 130" in check_standing.summary(
+        record, view.SUPERSEDED, records
+    )
+
+
+def test_a_restated_count_is_superseded_by_the_bounds_its_case_rests_on(
+    records: view.Records,
+) -> None:
+    """Restated at 130, T-281's stated side is below T-259's, so no lane there ties or
+    beats its words; the mark still names T-259, the bound the case rests on, which the
+    predecessor shrunk to first contact proves at least as much as. Without the
+    restatement the same words name nothing at 130."""
+    record = _restated(records, _item())
+    assert view.superseding(record, records) == ("T-259",)
+    assert view.position_marks(record, view.SUPERSEDED, records) == ["superseded by T-259"]
+    unrestated = {**record, "restatements": []}
+    assert view.superseding(unrestated, records) == ()
+
+
+def test_a_restated_report_is_no_current_record(records: view.Records) -> None:
+    """The profile index counts a report that improves nowhere as no current record."""
+    record = _restated(records, _item())
+    shadow = dataclasses.replace(records, results={**records.results, "T-281": record})
+    index = profile_records.build_record_index(shadow)
+    assert "T-281" not in index.current_results
+
+
+def test_a_restatement_is_held_to_its_scope_predecessor_and_receipt(
+    records: view.Records,
+) -> None:
+    assert _problems(records, _restated(records, _item())) == []
+    cases = {
+        "twice": (_restated(records, _item(), _item()), "listed twice"),
+        "scope": (_restated(records, _item(n=131)), "outside this result's scope"),
+        "itself": (_restated(records, _item(of="T-281")), "names the result itself"),
+        "unknown": (_restated(records, _item(of="T-999")), "not registered"),
+        "later": (_restated(records, _item(of="T-286")), "whose scope does not hold"),
+        "ruling": (_restated(records, _item(ruling="think-fwa9")), "names no ruling"),
+        "share": (_restated(records, _item(gain_over_margin="0.0897")), "is not the receipt"),
+        "count": (_restated(records, _item(measured_in=ELSEWHERE)), "receipt at n = 130"),
+        "outside": (
+            _restated(records, _item(measured_in=OUTSIDE)),
+            "outside the predecessor's margin",
+        ),
+        "missing": (
+            _restated(records, _item(measured_in="packing/no-such-receipt.json")),
+            "does not name a file",
+        ),
+        # Review A7 of #1030: the receipt is of this pair, `of`'s certificate against this
+        # result's, its rival labelled with this id or read from a packet this cites.
+        "pair": (
+            _restated(records, _item(measured_in=OTHER_PAIR, gain_over_margin="0.9193")),
+            "its receipt measures 'T-254', not T-259",
+        ),
+        "rival": (
+            _restated(records, _item(measured_in=OUTSIDE)),
+            "is neither T-281 nor read from a packet T-281 cites",
+        ),
+        "uncited": (
+            {**_restated(records, _item()), "artifacts": []},
+            "is neither T-281 nor read from a packet T-281 cites",
+        ),
+    }
+    for name, (record, words) in cases.items():
+        found = _problems(records, record)
+        assert any(words in line for line in found), (name, found)
+    regularized = [
+        {
+            "n": 130,
+            "of": "T-259",
+            "by": "[Yim certificates 2026-11-09]",
+            "method": "T-259's certificate under one common translation",
+            "side": "solved",
+            "identity": {"basis": "source-claim"},
+        }
+    ]
+    both = {**_restated(records, _item()), "regularizations": regularized}
+    assert any("also a regularization" in line for line in _problems(records, both))
+
+
+@pytest.mark.parametrize(
+    ("payload", "problem"),
+    [
+        (None, "must be a JSON object"),
+        ([1], "must be a JSON object"),
+        ({"against": [1]}, "must be a JSON object"),
+        ({"certificate": [1]}, "must be a JSON object"),
+        ({"against": {"certificate": [1]}}, "must be a JSON object"),
+        (
+            {"against": {"certificate": {"packet": ["not a name"]}}},
+            "rival packet must be a string",
+        ),
+    ],
+)
+def test_a_restatement_reports_malformed_receipt_metadata(
+    records: view.Records,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    payload: object,
+    problem: str,
+) -> None:
+    receipt = tmp_path / "receipt.json"
+    receipt.write_text(json.dumps(payload), encoding="utf-8")
+    record = _restated(records, _item(measured_in=receipt.name))
+    monkeypatch.setattr(check_results, "REPO", tmp_path)
+
+    assert any(problem in line for line in _problems(records, record))
+
+
+def test_the_register_records_the_restatements_option_d_settles(records: view.Records) -> None:
+    """T-253, T-260, T-280 and T-281 restate their houses at every count; none improves on
+    a case record there, so none is pending adoption or a current record, and a reply's
+    result mapped to one is settled (`check_requests.RESTATED`). T-173, which option D does
+    not list, keeps its standing at 207, measured and not applied (think-7k8p)."""
+    index = profile_records.load_record_index()
+    every = {"T-253": 9, "T-260": 5, "T-280": 2, "T-281": 1}
+    for ident, count in every.items():
+        record = records.results[ident]
+        assert len(check_standing.restated(record)) == count, ident
+        assert check_standing.improvements(record, records) == [], ident
+        assert view.standing(record, records) == view.SUPERSEDED, ident
+        assert ident not in index.current_results, ident
+        assert not record.get("regularizations"), ident
+    assert not records.results["T-173"].get("restatements")
+    register = check_requests.load_register()
+    state = check_requests.result_state(
+        {"key": "sub-print", "claim": "c", "register": ["T-260"]}, register
+    )
+    assert (state.state, state.settled) == (check_requests.RESTATED, True)
+    # A new result under option D is no restatement: T-285 and T-286 are confirmed.
+    for ident in ("T-285", "T-286"):
+        assert not records.results[ident].get("restatements")
+        assert (
+            records.results[ident]["verification"],
+            records.results[ident]["confirmation"],
+        ) == (
+            "V3",
+            "C3",
+        )
+
+
+def test_a_restatement_measured_through_a_construction_is_read_at_its_own_count() -> None:
+    """A receipt through a construction states the base's count in `n` (490 for Couzo's
+    631) and the compared count in `against.n`, so a restatement at 631 is held to it at
+    631 and refused at 490 (review A7 of #1030)."""
+
+    def found(n: int) -> list[str]:
+        record = {
+            "id": "mishapolk-719",
+            "artifacts": [],
+            "restatements": [
+                {
+                    "n": n,
+                    "of": "couzo-4e4c8ce",
+                    "ruling": "think-b0w5",
+                    "gain_over_margin": "0.0105",
+                    "measured_in": THROUGH,
+                }
+            ],
+        }
+        dated = {"mishapolk-719": "2026-10-22", "couzo-4e4c8ce": "2026-10-15"}
+        scopes = {"mishapolk-719": {490, 631}, "couzo-4e4c8ce": {490, 631}}
+        return check_results.restatements_problems(record, dated, scopes)
+
+    assert found(631) == []
+    assert any("receipt at n = 490" in line for line in found(490))
+
+
+def test_the_results_table_says_what_a_restated_entry_restates(records: view.Records) -> None:
+    """RESULTS.md's status names the results whose packings an entry restates, alone where
+    every count of its scope is restated, so the row cannot read as an improvement later
+    superseded; an entry restated at some counts keeps its other marks after it (review
+    A11 of #1030)."""
+    record = records.results["T-253"]
+    marks = render_results.restated_position(record, ["superseded by T-182"])
+    assert marks == [
+        "restates T-182, T-188, T-190, T-197, T-218, T-219, T-220, T-222 and T-225 (option D)"
+    ]
+    partial = {**record, "restatements": record["restatements"][:1]}
+    assert render_results.restated_position(partial, ["superseded by T-182"]) == [
+        "restates T-222 (option D)",
+        "superseded by T-182",
+    ]
+    assert render_results.restated_position(records.results["T-285"], ["x"]) == ["x"]
+
+
+def _house_side(n: int) -> Fraction:
+    """The exact verified upper bound a case record states, its house's side."""
+    text = (check_results.ROOT / "frontier" / f"n-{n}.md").read_text(encoding="utf-8")
+    record = safe_load(text.split("---", 2)[1])["packing"]
+    return Fraction(record["verified_upper_bound"]["exact_form"])
+
+
+def test_the_held_points_of_9_november_are_classified_under_option_d() -> None:
+    """think-5c9z: Evan Daniel's regularizer solved the five houses of 9 November to
+    certified KKT points below their sides (think-463r). Against T-275 at 232 and T-276 at
+    268 they gain 1.1251 and 1.0321 of each certificate's own uniform-contraction margin,
+    new results there, but both lie above today's houses, T-307 and T-331, so neither is
+    a candidate; at 303 the point is 1.0234 of T-278's margin and below the house, a
+    candidate for think-4z8z (review A5 of #1030)."""
+    package = check_results.ROOT / "cases/regularized_drawings/think-463r-2026-11-09"
+    for n, held, share in ((232, "t275", "1.1251"), (268, "t276", "1.0321")):
+        receipt = json.loads(
+            (package / "option-d" / f"contraction-n{n}-{held}.json").read_text(encoding="utf-8")
+        )
+        assert receipt["routes_accept"] is True
+        report = package / "adopt-2026-11-09-n232-307-evand" / f"n-{n}" / "report.json.gz"
+        solve = json.loads(gzip.decompress(report.read_bytes()))["solve"]
+        assert solve["cert_valid"] is True
+        point = Fraction(solve["S_cert"])
+        gain = Fraction(receipt["side"]) - point
+        assert f"{float(gain / Fraction(receipt['margin'])):.4f}" == share
+        assert point > _house_side(n), n
+    receipt = json.loads(
+        (package / "option-d" / "contraction-n303-t278.json").read_text(encoding="utf-8")
+    )
+    against = receipt["against"]
+    assert (against["gain_over_margin"], against["within_margin"]) == ("1.0234", False)
+    assert Fraction(against["side"]) < _house_side(303)

@@ -10514,6 +10514,15 @@ issues:
       and 2.42e-12, without the "at least" of the 14 October ledger's Refinement Chains. It was
       edited in place at 03:46Z that day, with a visible note, to say at least, so the reply as it
       stands states nothing outdated (PR #637's review, A6).
+
+      Measured on 18 November 2026 in lane w7-optd-1118 (think-8yyy), as a receipt only:
+      devtools.contraction_margin finds T-173's 207 0.9984 of T-147's own uniform-contraction
+      margin and 0.1966 of T-167's, within both, one to one with T-147's packing
+      (resources/web/mishapolk-exact-certificates-2026-10-12/measure/). The owner's option D of
+      17 November 2026 (think-b0w5) does not list T-173, and a result recorded before it that
+      its decision bead does not name keeps its standing and credit until the owner says, so
+      T-173 stands as recorded at 153 and 207; whether option D reaches it is think-7k8p's
+      question, beside T-259 at 130. Both counts stay the owner's (think-g0o4).
   - number: 574
     title: 'research: submit 148 square-packing certificate refinements with exact endpoints'
     author: BuddenPing
@@ -27860,7 +27869,7 @@ issues:
       (upper-bounds-843-846-20261031) records six: 130, Francisco Couzo's #843 packing re-solved 2.08e-12 below it, and 105, 146, 156, 229 and 308, 1e-21 to 1e-41 below each house, each a re-certification of the house certificate with every square unchanged. It records none of the other eight: 182, 268
       and 304 are above the houses (T-243, T-242), 204 and 260 above Evan Daniel's #845, 299 above his
       update to #824, and 211 and 241 are the author's own certificates of 23
-      October, which the ledger records from their commit (e386aab) as refinements. Registered as T-259 (130) and T-260 (the five others), and the 23 October certificates as T-253. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md) accepted all fifteen certificates for finite feasibility. At 130 T-259 is confirmed, independently re-implemented, at V3/C3, and the case adopts it under the house rule, with the packing's credit Couzo's. At the fourteen other counts each certificate is a sub-print re-certification of the house certificate, and whether the owner's 23 October restatement ruling reaches counts inside the corpus is the owner's question (think-ikku); T-253 and T-260 wait on it below the stage 4 exit, and no house moves there.
+      October, which the ledger records from their commit (e386aab) as refinements. Registered as T-259 (130) and T-260 (the five others), and the 23 October certificates as T-253. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md) accepted all fifteen certificates for finite feasibility. At 130 T-259 is confirmed, independently re-implemented, at V3/C3, and the case adopts it under the house rule, with the packing's credit Couzo's. At the fourteen other counts each certificate re-certifies the house certificate within its own padding, and the owner's option D of 17 November 2026 (think-b0w5) makes each a restatement, credited to the house's finder: T-253 and T-260 record them so, below the stage 4 exit, and no house moves there.
     read_through: '2026-10-30T05:46:42Z'
     results:
     - key: refinements
@@ -27876,11 +27885,9 @@ issues:
       - E-mishapolk-846-review-exact-feasibility
     - key: sub-print
       claim: >-
-        s(105), s(146), s(156), s(229) and s(308) at the exact headers of certificates/0000-0999/nN.cert at 52aa267, each below the house certificate at its count by less than one unit in the 12th place: re-certifications of the house certificates, held for the owner's question (think-ikku).
+        s(105), s(146), s(156), s(229) and s(308) at the exact headers of certificates/0000-0999/nN.cert at 52aa267, each below the house certificate at its count by less than one unit in the 12th place: re-certifications of the house certificates within their own padding, restatements under the owner's option D (think-b0w5).
       source: body
       bead: think-pg1y
-      validation:
-      - think-ikku
       register:
       - T-260
       evidence:
@@ -27901,6 +27908,8 @@ issues:
     beads:
     - think-pg1y
     - think-ikku
+    - think-8yyy
+    - think-7k8p
     answer_bead: think-pg1y
     replies:
     - url: https://github.com/jlevy/squares/issues/846#issuecomment-6543938921
@@ -27943,13 +27952,15 @@ issues:
     blocked:
       type: owner-decision
       reason: >-
-        Whether the owner's 23 October restatement ruling (think-fwa9), applied beyond the
-        corpus, reaches counts inside it, which decides whether T-253 and T-260 are recorded
-        at 105, 146, 154, 155, 156, 183, 211, 227, 229, 236, 237, 241, 271 and 308; the
-        31 October review reads them as restatements (RV-1), a reading and not a verdict
-        (think-ikku).
+        Whether the owner's option D (think-b0w5) reaches T-259 at 130, adopted before it and
+        0.9193 of T-254's contraction margin, which decides whether the 130 packing is credited
+        to Couzo alone; T-281, which restates T-259, waits on the same answer (think-7k8p).
     close_when: >-
-      The results are registered with their replay and their review, 130 is adopted, the owner has answered think-ikku's question and the record follows the answer, and the reply on main says so; nothing the author asked for is queued.
+      The results are registered with their replay and their review, 130 is adopted, the owner
+      answered on 17 November 2026 (option D, think-b0w5) and the record follows the answer at
+      the fourteen other counts, the owner has answered whether option D reaches T-259 at 130
+      (think-7k8p) and the record follows that answer, and the reply on main says so; nothing
+      the author asked for is queued.
     notes: >-
       Read on 31 October 2026 from main 3978a7f61. The commit 52aa267 precedes the issue by 6
       minutes 42 seconds; GitHub's activity log was not readable, so no push is dated. The ten
@@ -27962,6 +27973,24 @@ issues:
       `check_requests --report` counts it closeable, but the owner's question (think-ikku) is
       a `blocked: owner-decision` the close condition names, so the issue closes once the
       record follows the answer.
+
+      Applied on 18 November 2026 in lane w7-optd-1118 (think-8yyy): the owner's option D of 17
+      November 2026 (think-b0w5), a re-certification of a standing packing is a new result only
+      if its side is below its predecessor's once the predecessor is shrunk until its squares
+      first touch, settles think-ikku's question. Measured with devtools.contraction_margin (the
+      packets' measure/), every certificate of T-260 gains under 1% of its house certificate's
+      margin (0.0056 to 0.0093) and every one of T-253 1.0000 of it, within it: restatements,
+      credited to the houses' finders, recorded as such (restatements), and no house moves.
+      T-259 at 130 stays as adopted (whether option D reaches it is think-7k8p's question for
+      the owner).
+
+      Corrected on 20 November 2026 in lane c11-fix1030 (think-8yyy), after the senior review
+      of the branch: think-ikku's question is settled, but the issue's block moves to
+      think-7k8p's rather than lifting, since T-259, registered from this issue, is the open
+      owner question at 130, and T-281 restates it. The issue keeps its blocked:owner-decision
+      label. The reply owed after the merge states T-253 and T-260 as restatements and names
+      T-259's standing at 130 as the owner's open question; it is not a final reply, and the
+      issue stays open until think-7k8p is answered.
   - number: 836
     title: '1182–9944: 2484 new and 1434 lowered upper bounds, two-strip construction (Zenodo v5): registration request'
     author: mohsensbu-jpg
@@ -30820,8 +30849,7 @@ issues:
       the root check exactly (S lies 1.36e-99 above it). It is 2.63e-12 below T-284, one to one
       with its packing, the L unchanged: a refinement, which the ledger of 11 November records.
       The gain is 1.0399 of the padding T-284 carries from T-282 through the L step, and the core
-      is the KKT point the record holds unregistered at 172 (think-wju3). Registered as T-285,
-      held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-284. The 11 November
+      is the KKT point the record holds unregistered at 172 (think-wju3). Registered as T-285; under the owner's option D of 17 November 2026 (think-b0w5) a new result, confirmed at V3/C3 and adopted as the house at 199 on 21 November 2026. The 11 November
       stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, think-o53d,
       lane L82), written blind in a separate lane, accepts it with #946's, no finding blocking,
       and is mapped at C1; its F2 asks the author to credit #938 for the L step at 199, and its
@@ -30831,7 +30859,6 @@ issues:
     - key: n199-core-resolved
       validation:
       - think-2h88
-      - think-ruu2
       claim: >-
         s(199) <= 14.6146898532835806 (the exact rational side, rounded up at 16 places, of
         n199_witness.yaml at JoostdeWinter/square-packing 702c7af), T-284's packing with its
@@ -30841,6 +30868,8 @@ issues:
       - T-285
       evidence:
       - E-de-winter-939-certificate-report
+      - E-de-winter-939-exact-feasibility
+      - E-de-winter-939-review-exact-feasibility
     beads:
     - think-2h88
     - think-o53d
@@ -30870,18 +30899,10 @@ issues:
         verification: V0
         confirmation: C1
         status: reviewed
-    blocked:
-      type: owner-decision
-      reason: >-
-        Whether a re-certification at the contraction margin its predecessor carries, here
-        T-282's margin carried through T-284's L step, is a new result is the owner's RV-3
-        (think-ruu2); T-285 is held at V0/C1 until the answer, and the same answer settles the
-        held solve at 172 (think-wju3).
     close_when: >-
-      The owner has answered RV-3 (think-ruu2), the record follows the answer for T-285
-      (withdrawn, or entered and adopted at 199), and the reply on main says so, with what was
-      retained, replayed and reviewed and that the gain is 1.0399 of the margin T-284 carries
-      through the L step.
+      T-285 is confirmed and adopted at 199 under the owner's option D (think-b0w5), and the
+      reply on main says so, with what was retained, replayed and reviewed and that the gain is
+      1.0399 of the margin T-284 carries through the L step.
     notes: >-
       Read on 10 November 2026 from main f54ad1048. The commit 702c7af precedes the issue by 9
       minutes; the issue carries the intake label and has no comments. The witness the issue calls
@@ -30982,6 +31003,18 @@ issues:
       SHA256SUMS lines; every square and side equals those at the s199 (702c7af) and s172
       (c4e65d0) packets' pins, compared as exact rationals, and packing-witness inspect now
       reads both files, which it refused at 6760360. T-285 and T-286 stand as recorded.
+
+      Applied on 18 November 2026 in lane w7-optd-1118 (think-8yyy): the owner's option D of 17
+      November 2026 (think-b0w5), a re-certification of a standing packing is a new result only
+      if its side is below its predecessor's once the predecessor is shrunk until its squares
+      first touch, measured through any construction. T-285 lies 1.0107e-13 below that (the
+      margin T-284 carries through the L step, 1.0399), so it is a new result: its replay and
+      the stage 4 review's clean-room run are entered (E-de-winter-939-exact-feasibility,
+      E-de-winter-939-review-exact-feasibility), it stands at V3/C3, and the case adopted it at
+      199 from T-284 with both strong generators' regularization. The packet keeps 702c7af, the
+      commit the issue names; the author's c4e65d0b holds the same n199/ files byte for byte,
+      and T-285 says so, which settles the pin question of the follow-up of 14 November. The
+      blocked: owner-decision block lifts with this change; the label goes after its merge.
   - number: 946
     title: 's(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request'
     author: JoostdeWinter
@@ -31004,7 +31037,7 @@ issues:
       the root check exactly (S lies 1.56e-319 above it). It is 2.63e-12 below T-282, one to one
       with its packing, 1.0399 of T-282's own uniform-contraction margin: a refinement, which the
       ledger of 11 November records, and the KKT point the record holds unregistered (think-wju3).
-      Registered as T-286, held at V0/C1 for the owner's RV-3 (think-ruu2); the house stays T-282.
+      Registered as T-286; under the owner's option D of 17 November 2026 (think-b0w5) a new result, confirmed at V3/C3 and adopted as the house at 172 on 21 November 2026.
       The 11 November stage 4 review (docs/project/reviews/review-2026-11-11-de-winter-939-946.md,
       think-o53d, lane L82), written blind in a separate lane, accepts it with #939's, no finding
       blocking, and is mapped at C1; its F1 asks the author to state the bound as the
@@ -31014,7 +31047,6 @@ issues:
     - key: n172-exact-local-optimum
       validation:
       - think-2h88
-      - think-ruu2
       claim: >-
         s(172) <= 13.614689853284 (the exact rational side, rounded up at 12 places, of
         n172_witness.yaml at JoostdeWinter/square-packing c4e65d0), T-282's packing re-solved,
@@ -31024,6 +31056,8 @@ issues:
       - T-286
       evidence:
       - E-de-winter-946-certificate-report
+      - E-de-winter-946-exact-feasibility
+      - E-de-winter-946-review-exact-feasibility
     beads:
     - think-2h88
     - think-o53d
@@ -31053,17 +31087,10 @@ issues:
         verification: V0
         confirmation: C1
         status: reviewed
-    blocked:
-      type: owner-decision
-      reason: >-
-        Whether a re-certification at its predecessor's own contraction margin is a new result
-        is the owner's RV-3 (think-ruu2); T-286 is held at V0/C1 until the answer, as T-285 is,
-        and the same answer settles the held solve at 172 (think-wju3).
     close_when: >-
-      The owner has answered RV-3 (think-ruu2), the record follows the answer for T-286
-      (withdrawn, or entered and adopted at 172), and the reply on main says so, with what was
-      retained, replayed and reviewed and that the gain is 1.0399 of T-282's own contraction
-      margin.
+      T-286 is confirmed and adopted at 172 under the owner's option D (think-b0w5), and the
+      reply on main says so, with what was retained, replayed and reviewed and that the gain is
+      1.0399 of T-282's own contraction margin.
     notes: >-
       Read on 11 November 2026 from main f54ad1048. The commit c4e65d0 precedes the issue by 47
       seconds; 8c0de9d, 6 minutes earlier, first published n172/ at 1.4e-99 above the same root,
@@ -31165,6 +31192,16 @@ issues:
       The issue stays open, blocked:owner-decision. The author's commit 66849f2, which
       changes the witness file's coordinate_provenance and no square or side, is recorded in
       #939's entry.
+
+      Applied on 18 November 2026 in lane w7-optd-1118 (think-8yyy): the owner's option D of 17
+      November 2026 (think-b0w5), a re-certification of a standing packing is a new result only
+      if its side is below its predecessor's once the predecessor is shrunk until its squares
+      first touch, measured through any construction. T-286 lies 1.0107e-13 below that (T-282's
+      own contraction margin, 1.0399), so it is a new result: its replay and the stage 4
+      review's clean-room run are entered (E-de-winter-946-exact-feasibility,
+      E-de-winter-946-review-exact-feasibility), it stands at V3/C3, and the case adopted it at
+      172 from T-282 with both strong generators' regularization. The blocked: owner-decision
+      block lifts with this change; the label goes after its merge.
   - number: 943
     title: 's(156) ≤ 12.977053087498: improved packing (registration request)'
     author: kenaznia-doga

@@ -20847,6 +20847,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-172.md
+    record_key: '172'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-173.md
     record_key: '173'
     field: /reported_lower_bound/proved_by/0
@@ -21498,6 +21510,18 @@ occurrences:
   note: Reviewed 2026-10-21 against the named profile sources; the printed source
     text and credit role are retained.
   contributor_id: trevor-green
+- origin:
+    path: packing/frontier/n-199.md
+    record_key: '199'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-200.md
     record_key: '200'
