@@ -6443,7 +6443,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-20'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/229.html
   canonical: cases/229.html
