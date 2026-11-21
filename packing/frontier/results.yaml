@@ -54401,8 +54401,8 @@ results:
     registered: '2026-11-21'
     landed: '2026-11-21'
     headline: De Winter's rational refinement at 90 after jazivxt
-    claim: 'The exact rational certificate proves s(90) <= 283097290828433062400431254317097234439248852683102663418830216278332305959948738073773183281942509413305771080804753939783330863242170157550095973633087579198725959676783372420698609802953140657026017770845629744797804232145558959033371397710077808634454134575706283302518427812327221303833665806574374705101515921453620227217593400189656345684165330864292579767547387692201466190355530349739303723417126974888/28326615239379221810789364416434129669968904915114686353407118880620204374076650817760256940140475028161650688247701507442230362442862468879030277447161537073203535093323841480528455941097931502809848111311591800870227400461072285543158038901167057151654964432810489360950928816799550744689987469637659738662545878209056999259353234520372047980341155930915414876001901644295646775136930961803283801563962353985,
-      whose side rounds upward to 9.994038766583 at 12 decimal places. The arrangement is credited to
+    claim: 'The [exact rational certificate](../resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz)
+      proves s(90) <= 9.994038766583, rounding its side upward to 12 decimal places. The arrangement is credited to
       jazivxt, improved and refined by Joost de Winter. This submission supplies a feasible rational
       enclosure near the local solution already reported in issue 997.
 
@@ -54412,12 +54412,12 @@ results:
       contraction of the enclosed input is only about 8.994039e-73.
 
 
-      The [16 November project run](packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/report.json.gz)
+      The [16 November project run](../cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/report.json.gz)
       of Evan Daniel''s regularizer already reported a KKT local side whose 65-significant-digit display
       equals the rounding of this candidate. The candidate is about 9.99403876665e-20 below that run''s
       reported rational certificate. The retained record lacks the solved coordinates and a certified
       interval for the unrounded local side; pose identity, strict order against that local side, and
-      option D against row 3 itself remain undecided. The [bounded scalar audit](packing/resources/web/de-winter-997-followup-2026-11-21/receipts/held-row3-comparison.json)
+      option D against row 3 itself remain undecided. The [bounded scalar audit](../resources/web/de-winter-997-followup-2026-11-21/receipts/held-row3-comparison.json)
       records these distinctions. No first discovery of that limiting value is asserted.
 
 
@@ -54461,8 +54461,8 @@ results:
     - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/sharp-controls.json
     - packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/plan-frozen.json
     notes: The row 3 scalar audit is supporting context, not a second geometric certification. The earlier
-      KKT receipt changes the priority description but not feasibility or the option-D comparison with
-      T-304. House adoption is staged separately under think-zsei.
+      KKT receipt dates the earlier local value. The feasibility and option-D comparison concern the
+      exact rational certificate now used for the house.
     next_rung: A second adversarial review and documented human oversight would be needed for V4/C4.
     reviews:
     - path: docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md
@@ -54530,12 +54530,10 @@ results:
     controls:
     - packing/resources/web/de-winter-959-followup-2026-11-20/receipts/algebraic-route1-n179.json.xz
     - packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/frozen/run-02/receipt.json
-    notes: The source's programs were neither read nor run. The retained attachment member has SHA-256
-      28edf9561e87037b5c681e4ff0051a1bd1b8e5401c1a8376fe2e66c2c18663d1. Frozen original checkers are
-      retained as .py.txt; the formatted runnable copy reproduced every scientific receipt field and
-      ledger byte. The independent implementation uses the same separating-axis mathematics as the maintained
-      route, but shares no parser or arithmetic code. Registration enables the exact reader and house
-      adapter; house adoption remains a separate coordinator step.
+    notes: The maintained verifier and independent reviewer implemented their checks separately.
+      The independent check uses the same separating-axis mathematics with a separate parser and
+      arithmetic implementation. Its formatted replay reproduced all scientific receipt fields
+      and the ledger bytes. The exact reader supplies the current house.
     next_rung: V4/C4 requires a second distinct adversarial review and human oversight.
     reviews:
     - path: docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md
