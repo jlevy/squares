@@ -38656,7 +38656,12 @@ issues:
     results: []
     beads: [think-uz7g]
     answer_bead: think-uz7g
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1060#issuecomment-7061321357
+      date: '2026-11-21'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
@@ -38683,7 +38688,12 @@ issues:
     results: []
     beads: [think-l9fk]
     answer_bead: think-l9fk
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1061#issuecomment-7061321621
+      date: '2026-11-21'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Route to the exact-side work tracked by #811. The claimed construction identities
@@ -38711,7 +38721,12 @@ issues:
     results: []
     beads: [think-eumc]
     answer_bead: think-eumc
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1062#issuecomment-7061321834
+      date: '2026-11-21'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Compare the submitted exact fraction and geometry with both T-307's adopted
@@ -38740,7 +38755,12 @@ issues:
     results: []
     beads: [think-3iqa]
     answer_bead: think-3iqa
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1063#issuecomment-7061322081
+      date: '2026-11-21'
+      by: jlevy
+      kind: acknowledgement
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       The downloaded attachment has 13 input and candidate pairs. An exact arithmetic

@@ -1,0 +1,12 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records four acknowledgments sent after the #1065 publication verified all 6,575 live
+  checks. Every issue remains open and pending. Against main 1fd323589a, the maintained
+  paper comparison produced 43 byte-identical files across two candidate renders and
+  one baseline render. The methods survey keeps its current version v0.2.7.
