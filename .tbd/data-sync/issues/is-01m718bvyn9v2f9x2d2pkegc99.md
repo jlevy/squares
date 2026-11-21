@@ -3,9 +3,9 @@ type: is
 id: is-01m718bvyn9v2f9x2d2pkegc99
 title: "Import #939: Joost de Winter's s(199) <= 14.6146898532835806, T-282's arrangement re-solved to its exact local optimum (quintic root) plus the L of 27"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 19
+version: 20
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,10 +15,10 @@ parent_id: is-01m684vnbc5mmkjn950c3edw3w
 hold: null
 hold_until: null
 created_at: 2026-11-09T22:55:20.020Z
-updated_at: 2026-11-21T01:12:57.731Z
+updated_at: 2026-11-21T01:41:08.898Z
 started_at: 2026-11-09T22:55:23.747Z
-closed_at: null
-close_reason: null
+closed_at: 2026-11-21T01:41:08.897Z
+close_reason: "PR #1030 adopted T-285 on 21 November UTC. The main Pages run verified the change, issue #939 received the final response and was closed, and merged PR #1058 records the outcome and removes the fulfilled validation deferral."
 resolution: null
 duplicate_of: null
 ---
