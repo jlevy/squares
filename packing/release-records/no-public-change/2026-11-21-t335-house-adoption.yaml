@@ -4,13 +4,16 @@ components:
   - paper:n11-threshold-bound-review
   - paper:square-packing-methods-survey
 paths:
+  - packing/atlas/known-best/bound-citations.json
   - packing/atlas/known-best/composite-figure.json
   - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
   - packing/devtools/default_drawings.py
   - packing/devtools/select_houses.py
   - packing/devtools/upper_bound_houses.py
   - packing/frontier/results.yaml
   - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
 outputs:
   - papers/n11-lower-bounds-explainer.html
   - papers/n11-lower-bounds-explainer.md
@@ -22,12 +25,13 @@ outputs:
   - papers/square-packing-methods-survey.md
 reason: >-
   T-335 replaces T-101 as the house at 109. The paper comparison rendered each
-  paper twice from the adoption tree and once using the seven baseline inputs
+  paper twice from the adoption tree and once using the ten baseline inputs
   at f1d8c74e01, at the same link revision and with Chrome on macOS for math
   preparation. All three renders agreed byte for byte across 55 files for the
   lower-bounds explainer and 43 files each for the optimality review, threshold
   review and methods survey. After the n109 rigidity remeasurement updated the
   composite figure record, the explainer’s 55 files again agreed byte for byte.
-  All four papers agreed again after the case history and document map were
-  refreshed. The comparison covered the PDF inputs. The four paper versions stay
-  v0.4.35, v0.1.11, v0.1.4 and v0.2.7, respectively.
+  All four papers agreed again after the case history, document map, atlas
+  citation and print-edition credit hold were refreshed. The comparison covered
+  the PDF inputs. The four paper versions stay v0.4.35, v0.1.11, v0.1.4 and
+  v0.2.7, respectively.

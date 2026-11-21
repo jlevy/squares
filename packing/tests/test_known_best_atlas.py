@@ -97,8 +97,9 @@ from sqpack.yamlio import safe_load
 #: 260 onto Joost de Winter's issue 668 packet (T-196), and that of 21 October n = 260 onto
 #: Francisco Couzo's issue 678 packet (T-223), and that of 15 November n = 147 onto Roberto
 #: Ono's issue 985 packet (T-302), and that of 18 November n = 262 onto Mykhailo
-#: Polkovskyi's issue 1009 packet (T-319).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 21, "n=1..324": 39}
+#: Polkovskyi's issue 1009 packet (T-319). On 21 November n = 109 moved to Samanyu-dev's
+#: canonical packet (T-335).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 20, "n=1..324": 38}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -120,11 +121,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4),
     # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-220), and 157
     # from the grid to Joost de Winter's issue 958 packet on 11 November (T-293), and 90 from
-    # the grid to jazivxt's issue 989 packet on 15 November (T-303).
+    # the grid to jazivxt's issue 989 packet on 15 November (T-303). On 21 November 109
+    # moved from Kingbird to Samanyu-dev's canonical packet (T-335).
     "n=1..200": {
         "exact-grid": 111,
-        "kingbird-derived-facts": 50,
-        "packet-derived-facts": 39,
+        "kingbird-derived-facts": 49,
+        "packet-derived-facts": 40,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
@@ -139,11 +141,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # on 11 November 157 (from the grid), to Joost de Winter's issue 958 packet (T-293), and
     # on 15 November 147 (from Kingbird), to Roberto Ono's issue 985 packet (T-302), and 90
     # (from the grid), to jazivxt's issue 989 packet (T-303), and on 18 November 262 (from
-    # Kingbird), to Mykhailo Polkovskyi's issue 1009 packet (T-319).
+    # Kingbird), to Mykhailo Polkovskyi's issue 1009 packet (T-319). On 21 November 109
+    # moved from Kingbird to Samanyu-dev's canonical packet (T-335).
     "n=1..324": {
         "exact-grid": 172,
-        "kingbird-derived-facts": 68,
-        "packet-derived-facts": 84,
+        "kingbird-derived-facts": 67,
+        "packet-derived-facts": 85,
     },
 }
 
@@ -2513,8 +2516,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # (T-330), one more source with no new name; JoeGun's packet still holds 204, 232, 264
     # and 305. The same pass (think-78aj) draws 268, 270 and 299 from his three packets of
     # issues 1021, 1022 and 1031, three more sources with no new name; Polkovskyi's issue
-    # 1009 packet keeps its other counts.
-    assert len(expected_sources) == 43
+    # 1009 packet keeps its other counts. T-335 adds Samanyu-dev's source at 109, with
+    # the name on the current case and held for the next poster edition.
+    assert len(expected_sources) == 44
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2645,7 +2649,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     _assert_poster_text_clears_cards(information, canvas)
 
 
-def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
+def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """think-tj4o: the case record and the bound citation credit Doğa Özden as the
@@ -2686,7 +2690,8 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     (think-91fu) adopts T-334 at 228 with its finder and order relative to T-301 unresolved
     pending evidence. Its prose names jazivxt's public notebook and Doğa Özden's certificate;
     the hold holds Özden alone as the certificate source author used by the poster's
-    fallback."""
+    fallback. The same day T-335 adds Samanyu-dev's finder credit at 109. The full
+    roster then exceeds the current poster edition's three-line credit block."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
@@ -2695,6 +2700,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         147: ("Roberto Ono",),
         228: ("Doğa Özden",),
         90: ("jazivxt",),
+        109: ("Samanyu-dev",),
         **dict.fromkeys((204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
     }
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
@@ -2706,6 +2712,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (180, ["Doğa Özden"], ["Mishapolk"]),
         (199, ["Evan Daniel"], ["Doğa Özden", "Joost de Winter"]),
         (90, ["jazivxt"], ["Joost de Winter"]),
+        (109, ["Samanyu-dev"], []),
         (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, [], []),
         (127, ["Joost de Winter"], []),
@@ -2724,6 +2731,8 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert (reported["found_by"], reported["improved_by"]) == (found, improved), n
     assert citations[299]["upper"]["text"] == "de Winter 2026, GitHub"
+    assert citations[109]["upper"]["text"] == "Samanyu-dev 2026, GitHub"
+    assert citations[109]["upper"]["confirmed_by"] == ["T-335"]
     for n in (260,):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert reported["found_by"] == ["Evan Daniel"]
@@ -2734,45 +2743,31 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     credit_lines = known_best_builder._print_credit_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     attribution_lines = known_best_builder._print_attribution_lines  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
 
-    def printed() -> tuple[set[str], str, int]:
+    def printed_names() -> set[str]:
         read_credits.cache_clear()
         credit_lines.cache_clear()
         attribution_lines.cache_clear()
         packing_credits = read_credits(corpus.first_n, corpus.last_n)
-        return (
-            {name for credit in packing_credits for name in credit.names},
-            " ".join(credit_lines()),
-            known_best_builder.PRIMARY_COMPOSITE.height,
-        )
+        return {name for credit in packing_credits for name in credit.names}
 
-    names, lines, height = printed()
+    names = printed_names()
+    lines = " ".join(credit_lines())
+    height = known_best_builder.PRIMARY_COMPOSITE.height
     try:
-        monkeypatch.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
-        released, released_lines, released_height = printed()
+        with monkeypatch.context() as context:
+            context.setattr(known_best_builder, "PRINT_CREDIT_HELD", {})
+            released = printed_names()
+            with pytest.raises(
+                ValueError, match="poster packing credits exceed their three-line"
+            ):
+                credit_lines()
     finally:
-        monkeypatch.undo()
-        printed()
-    assert released - names == {"Özden", "Ono", "jazivxt", "Kodaj", "JoeGun"}
-    assert "Özden" not in lines
-    assert "Ono" not in lines
-    assert "jazivxt" not in lines
-    assert "Kodaj" not in lines
-    assert "JoeGun" not in lines
-    assert "Özden" in released_lines
-    assert "Ono" in released_lines
-    assert "jazivxt" in released_lines
-    assert "Kodaj" in released_lines
-    assert "JoeGun" in released_lines
-    assert "Yim" not in released_lines
-    assert released_lines != lines
+        printed_names()
+    assert released - names == {"Özden", "Ono", "jazivxt", "Kodaj", "JoeGun", "Samanyu-dev"}
+    assert all(name not in lines for name in released - names)
+    assert "Yim" not in released
     drawn = ET.fromstring((ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8"))
-    assert drawn.get("height") == str(height)
-    # Measured on 16 November 2026: with the hold the 1-100 canvas keeps its drawn height,
-    # 3,898; released, the block's lines, with Kodaj's and JoeGun's names and without
-    # Chilton's, laid the canvas out at 3,869. Measured on 18 November 2026, after
-    # Mishapolk's name moved up the block (think-i38n), released lines lay it out at 3,898
-    # too, so the next infographics cut changes the lines and not the height.
-    assert (height, released_height) == (3898, 3898)
+    assert drawn.get("height") == str(height) == "3898"
 
 
 def test_the_print_credit_hold_cannot_outlive_its_edition(

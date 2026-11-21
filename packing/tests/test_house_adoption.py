@@ -3325,8 +3325,8 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differed at 29 and 132, and differ at 29. Their opening, section
-    and history note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
+    """Where the replaced displays differ, the opening, section and history note use
+    the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
     #665). At 29 the catalogue print orders nothing; at 132 the reported exact side agrees
     with the verified side, but its display differs from the verified display. 308's did too
     when T-174 replaced T-141 on 17 October 2026, and 260's when T-196 replaced the
@@ -3343,7 +3343,8 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     7 + 4*sqrt(2) and T-155's verified ceiling differ, with T-302, so 147 joined it. The pass
     of 18 November 2026 replays 147 from T-302's record, whose two lanes agree, and replaced
     the catalogue's packing at 262, whose reported print of 16 + sqrt(2)/2 and the verified
-    ceiling of T-101 and T-155 differ, with T-319, so 262 joins 29."""
+    ceiling of T-101 and T-155 differ, with T-319, so 262 joins 29. The same distinction
+    applies at 109, where T-335 moved the house on 21 November 2026."""
     differing = {
         29: (
             Fraction(
@@ -3357,6 +3358,14 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
                 "is a print `9.19e-15` below the new side, within one unit of its last place, "
                 "so it does not order them"
             ),
+        ),
+        109: (
+            Fraction("5474873734152916335457704004709/500000000000000000000000000000"),
+            "10.94974746830583",
+            "10.94974746830584",
+            "T-101, T-155",
+            "[Kingbird]",
+            "lies `4.58e-04` above the new side",
         ),
         262: (
             Fraction("16707106781186547524567915429917/1000000000000000000000000000000"),

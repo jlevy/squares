@@ -34976,6 +34976,18 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/frontier/n-109.md
+    record_key: '109'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Samanyu-dev
+  start: 0
+  end: 11
+  label: Samanyu-dev
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
