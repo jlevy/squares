@@ -1,0 +1,17 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The 21 November UTC intake records (think-ck2q) transcribe already posted replies,
+  archive reads and the two issue closes after the Option D deployment. The entries
+  give ten pending reports their existing import beads and assign the new attachment
+  work. Result rungs, geometry, public case records and citations are unchanged.
+
+  With all seven Option D replies recorded, devtools.compare_paper_renders rendered
+  the methods survey twice from the candidate and once with result-requests.yaml
+  from main e87286443e. The three output trees each contain 43 byte-identical files.
+  The HTML and Markdown agree with the prior delivery and the paper remains v0.2.7.

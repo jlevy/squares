@@ -2402,3 +2402,20 @@ repositories:
       the submission note's prose and the indexes' times and credits; b9b7fa7 is on no branch
       now. The mishapolk-issue1009-2026-11-16 packet pins b637e6c and retains the certificates,
       the witnesses and the verifiers. Nothing more to import.
+  - url: https://github.com/JoostdeWinter/joostdewinter.github.io
+    read_through: 26ab850fa9c9b0791b9830629bcc7f5443b4827a
+    read_on: '2026-11-21'
+    note: >-
+      The current website head and the 35c2d9c head read on 4 November have the same
+      Git tree, 02fd5e82fa53321af3ff397280c1af1e51beb634. The heads have different
+      histories and identical files. The earlier read still describes the site.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 3a5130340b0882e72e9d04ad2419b0437cae99aa
+    read_on: '2026-11-21'
+    bead: think-6ul3
+    note: >-
+      Five commits after the 7232328 read cover three intake paths. 21d944c reports 48
+      lower bounds and 20b6f0e supplies the original #1039 and #1041 attachments
+      (think-fv42). db8efcb supplies the #1052 packing at 305 and 5282edd adds its
+      registration and checksums (think-kzwl). 3a51303 adds the #1055 lower bound at
+      20 and its replay packet (think-6ul3).

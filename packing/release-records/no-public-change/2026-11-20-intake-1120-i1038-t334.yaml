@@ -36,6 +36,8 @@ reason: >-
   On the integrated tree against main e87286443e, the guarded paper comparison used
   devtools.compare_paper_renders and the installed Chrome math pass. Each paper was
   rendered twice from the candidate and once with the twelve listed inputs from main.
+  After merging the request records from #1058, the survey was compared
+  again against main 305023c661. All 43 survey files remained byte-identical.
   The optimality review, threshold-bound review and methods survey each produced 43
   files byte-identical across the three renders. The explainer produced 55 files.
   Its two candidate renders agree, and the only baseline difference is the live
