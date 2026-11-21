@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: s(20) > 99/20 = 4.95, a raised lower bound by Bent
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T21:09:45.773Z
-updated_at: 2026-11-21T01:18:59.540Z
+updated_at: 2026-11-21T09:21:23.695Z
 started_at: 2026-11-20T22:43:14.476Z
 ---
 Issue jlevy/squares#1055 (Joost de Winter, 2026-11-20T19:58:09Z): s(20) > 99/20 = 4.95, against the case page's 393/80 = 4.9125 (Hosono) and the 4.912808 of his own #1039 and #1042, which the issue says this supersedes at 20.
@@ -38,3 +38,5 @@ Pin JoostdeWinter/square-packing 3a5130340b0882e72e9d04ad2419b0437cae99aa, lower
 The source is pinned and the issue already carries intake. Retention and the validation environment are pending. Draft acknowledgment for after the triage PR merges: Thank you for sending the strict bound at 20. We pinned lower_n20 at 3a51303 and will check the cover, vacancy classes and terminal exclusions, including the premises shared with #1050.
 
 21 November UTC triage: the #1055 source at 3a5130340b0882e72e9d04ad2419b0437cae99aa reports an improvement from the two lower lanes' 393/80 to a strict endpoint of 99/20, a gain of 3/80. Verified all eight listed SHA-256 entries in the nine-file lower_n20 packet. No producer or independent replay ran in this continuation. The proof uses Bentz's 22 marks and 20 Mira Cult replay files pinned at 78bec6aacebf304d942a9225e16c2f18165778ff. The pinned project tree lists no licence for that code, consistent with the independent #1050 review, whose own results are partial and do not decide the 20-square terminals. Record the separate basis for any public retention of the kernel. The producer driver accepts an offline --upstream directory. Before verified admission, review the covering reduction and closed cuts, predeclare controls, and replay all 75 terminals plus the feasible 16-square control. The pinned proof names 4.912808 as a private comparison, not the posted #1042 endpoint 4.91274373.
+
+21 November scoped independent reduction review: direct arbitrary-rotation mark coverage at side 99/100 of the submitted square, injective nearest-mark ownership, 67 two-mark vacancy orbits (3 size 1, 14 size 2 and 50 size 4), and strictness by compactness conditional on terminal exclusions. Inspected only the submitted proof exposition and archived Bentz text. No producer code, terminal replay or controls run. Exact private draft: /Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n20-reduction-review/n20-reduction-review.md. Its independent certificate audit and control plan still needs execution, including all 75 terminal exclusions.
