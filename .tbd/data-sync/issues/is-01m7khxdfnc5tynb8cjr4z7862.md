@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 102
+version: 103
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -92,7 +92,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-21T15:39:16.908Z
+updated_at: 2026-11-21T15:40:44.581Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -172,4 +172,4 @@ The #1051 PR note also records that replay_rectangle_receipts imports bm.py and 
 - Intake records #1058 review A found no issues on c1450c0d4a. Local guarded records/schema/bead checks passed. The posted Option D reply receipts are prepared in the reused checkout's task scratch, ready for the next records commit.
 - #1045 integration active in the same checkout (think-91fu). Adopt T-334 at 228 on 21 November UTC and leave finder/order unresolved while retaining Özden's certificate credit. #1047's guarded tiny-angle fix preserves the restatement comparison against Samanyu-dev, with ratio 0.9721594 on the corrected reader. #1052 original certificates and the replacement control plan are pinned in think-kzwl. #1055 source verified against its manifest and triaged.
 
-21 November 15:15 UTC. Recovered Hyukdong Kim's CC0 n297 exact configuration on #804, the previously inaccessible cheaper Route B for T-247 (think-vv1q). Both published hashes match: ZIP e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7 (77,023 bytes), n297.minpoly.json e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826 (347,690 bytes). Source issuecomment-6397593690. Retained in the task's t247-route-b-recovery folder. No geometry or certificate replay. Plan the controlled maintained Route B replay within the existing 40 CPU-hour cap; the more expensive Route A remains held.
+21 November 15:15 UTC. Recovered Hyukdong Kim's CC0 n297 exact configuration on #804, the previously inaccessible cheaper Route B for T-247 (think-vv1q). Both published hashes match: ZIP e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7 (77,023 bytes), n297.minpoly.json e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826 (347,690 bytes). Source issuecomment-6397593690. Retained in the task's t247-route-b-recovery folder. No new geometry or certificate replay was needed. The recovered bytes match the author’s public copy already retained on main. T-247’s Route B passed both exact routes on 1 November and is recorded at V3/C3. T-299 superseded T-247 when adopted at 297. The old resolved-blocker alert on think-vv1q is about the optional, more expensive Route A, which remains over the cap and would raise no rung.
