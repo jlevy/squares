@@ -1,0 +1,21 @@
+n105|none {"cpu_seconds_approx": 2.825, "directions": 4, "kernel": "octagon", "matches_archive": 4, "mutant": "none", "n": 105, "nodes": 222156, "refused_on_coverage": 0, "side": "10499/1000", "verified": 4}
+real 12.34
+user 4.11
+sys 0.36
+           131956736  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               22756  page reclaims
+                3611  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   2  signals received
+                1994  voluntary context switches
+                1258  involuntary context switches
+            14948578  instructions retired
+             8032373  cycles elapsed
+             1130808  peak memory footprint

@@ -2691,7 +2691,9 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     pending evidence. Its prose names jazivxt's public notebook and Doğa Özden's certificate;
     the hold holds Özden alone as the certificate source author used by the poster's
     fallback. The same day T-335 adds Samanyu-dev's finder credit at 109. The full
-    roster then exceeds the current poster edition's three-line credit block."""
+    roster then exceeds the current poster edition's three-line credit block. T-336
+    adds de Winter as the further improver at 305. His name already appears in the
+    printed credit block."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(

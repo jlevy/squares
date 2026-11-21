@@ -338,6 +338,7 @@ def test_not_found_alias_script_keeps_unknown_addresses_and_fragments() -> None:
         ("papers/n11-threshold-bound-review.html", 823_322),
         ("results.html", 1_141_207),  # 212 rows, each linking its complete result record.
         ("result/t-174.html", 305_917),  # Complete 68-case result with 89 history steps.
+        ("result/t-180.html", 550_770),  # Hosted #1070 chain with T-336 listed at 305.
     ],
 )
 def test_measured_budget_exception_preserves_the_hard_limit(

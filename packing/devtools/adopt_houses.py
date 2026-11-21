@@ -6025,16 +6025,29 @@ def _n109_history(text: str, until: str) -> str:
     )
 
 
-def _n305_history(text: str) -> str:
-    """Keep T-336's custom staging paragraph as history after its house adoption."""
+def _n305_history(text: str, until: str) -> str:
+    """Date the T-336 staging paragraph and the note in the T-309 certificate section."""
     text = re.sub(
         _spaced("**Pending house adoption, 21 November 2026.**"),
         "**Earlier staging, 21 November 2026.**",
         text,
     )
-    return re.sub(
+    text = re.sub(
         _spaced("Both required strong drawing runs remain part of that adoption change."),
         "The staging note required both strong drawing runs in the adoption change.",
+        text,
+    )
+    text = re.sub(
+        _spaced("T-336’s exact side at this count `6.52e-06` below this house, is"),
+        "T-336’s exact side at this count, `6.52e-06` below T-309’s side, is",
+        text,
+    )
+    return re.sub(
+        _spaced(
+            "The owner’s house rule of 16 October 2026 adopts it: the case keeps this house "
+            "until its adoption, staged under think-kzwl, moves it to T-336’s side."
+        ),
+        f"The case moved to T-336’s side on {until} under think-kzwl.",
         text,
     )
 
@@ -6089,7 +6102,7 @@ def historical(move: Move, text: str) -> str:
     if n == 109:
         text = _n109_history(text, until)
     if n == 305:
-        text = _n305_history(text)
+        text = _n305_history(text, until)
     text = held_history(text)
     text = pending_history(text, until)
     if houses.adopted_on(n) >= RETAINED_672_FROM:

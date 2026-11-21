@@ -1,0 +1,6 @@
+Exploratory same-implementation replay of n105 K1 first archived direction per level. One worker, submitted cap of 2100000, 600-second wall ceiling.
+This host/compiler is an exploratory portability deviation and earns no proof rung.
+Darwin arm64
+Apple clang version 21.0.0 (clang-2100.1.1.101)
+Target: arm64-apple-darwin25.5.0
+Thread model: posix

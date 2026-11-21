@@ -2441,7 +2441,7 @@ def _fine_net_lower_projection(
 
 
 #: Registrations pending adoption entered at an adopted count after its last pass, keyed by
-#: the count and the result that pass adopted: the evidence id, the resource key and the
+#: the count and the result that pass adopted: the evidence ids, the resource key and the
 #: heading of the paragraph each adds. A registration writes none of the adoption writer's
 #: lanes, so it is checked exactly and projected out; once a later pass adopts at the count,
 #: the key no longer matches and that pass's replay reads the three as prior state. T-223's
@@ -2450,11 +2450,20 @@ def _fine_net_lower_projection(
 #: October 2026 (#706). A registration that states no bound is entered the same way and
 #: stays until a later pass at its count: T-246, Evan Daniel's degree-7213 minimal
 #: polynomial of the s(29) record side, an exact side, at 29 after T-195's pass.
-LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
+LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[tuple[str, ...], str, str]] = {
     (29, "T-195"): (
-        "E-n029-evand-minpoly-7213-report",
+        ("E-n029-evand-minpoly-7213-report",),
         "[Daniel exact and local reports 2026-10-12]",
         "**Exact side, 25 October 2026.**",
+    ),
+    (305, "T-309"): (
+        (
+            "E-de-winter-1052-certificate-report",
+            "E-de-winter-1052-exact-feasibility",
+            "E-de-winter-1052-review-exact-feasibility",
+        ),
+        "[de Winter n305 certificate 2026-11-20]",
+        "**Pending house adoption, 21 November 2026.**",
     ),
 }
 
@@ -2530,12 +2539,15 @@ def _later_pending_projection(
 ) -> str:
     """Check a later pending registration's three additions, then project them out.
 
-    Its evidence id and resource close their lists, and its paragraph is one paragraph of
-    the body; the record is returned without the paragraph, `held` without the two.
+    Its evidence ids and resource close their lists, and its paragraph is one paragraph
+    of the body; the record is returned without that paragraph and `held` without those
+    evidence and resource entries.
     """
     evidence, resource, heading = LATER_PENDING_REPORTS[key]
-    assert held["evidence"][-1] == evidence, f"n={key[0]}: {evidence} closes the evidence"
-    held["evidence"] = held["evidence"][:-1]
+    assert tuple(held["evidence"][-len(evidence) :]) == evidence, f"n={key[0]}: evidence tail"
+    for entry in evidence:
+        assert held["evidence"].count(entry) == 1, f"n={key[0]}: {entry} cited once"
+    held["evidence"] = held["evidence"][: -len(evidence)]
     assert held["resources"][-1]["key"] == resource, f"n={key[0]}: {resource} closes them"
     held["resources"] = held["resources"][:-1]
     _, front, body = committed.split("---\n", 2)
