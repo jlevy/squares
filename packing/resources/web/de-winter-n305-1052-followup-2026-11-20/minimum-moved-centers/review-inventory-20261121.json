@@ -1,0 +1,185 @@
+{
+  "format": "n305-independent-review-inventory-v1",
+  "purpose": "Transport exact deciding receipts and first-party replay. Repository-input hashes record the reviewed environment, not an enduring code-verdict binding. Use maintained readers in an installed project environment.",
+  "required_packet_files": [
+    {
+      "path": "programs/__init__.py",
+      "bytes": 63,
+      "sha256": "801efd15b935d7aaa1cec60e748569fb779d7cbd5a88b377740cce37db30cbf6"
+    },
+    {
+      "path": "programs/run_bounded.py",
+      "bytes": 4710,
+      "sha256": "19e4fb8c17315ac29b21fc6b458f1e0e5216f74254ae0162b6d2f1220f757c93"
+    },
+    {
+      "path": "programs/audit_minimum_scope.py",
+      "bytes": 7475,
+      "sha256": "6dcfc6865876da4cabc5f33ab96c504d4450be75374dbe6d4c5dee2bd7659823"
+    },
+    {
+      "path": "programs/check_root_duals.py",
+      "bytes": 5114,
+      "sha256": "85942d821de571509fbec89a58fabe079e7050f0827d26c11c3c07e2e552723f"
+    },
+    {
+      "path": "programs/exact_local.py",
+      "bytes": 13426,
+      "sha256": "b722220615dda786813c797c7b3c7d01ea7fd035ea92f9a1c158b4b52e02c44c"
+    },
+    {
+      "path": "programs/branch_local.py",
+      "bytes": 12466,
+      "sha256": "e39c1681da7185c3bf521718d730d07f169ee97f6dbeb2c373a25c337cd1f667"
+    },
+    {
+      "path": "programs/complete_leaves.py",
+      "bytes": 11424,
+      "sha256": "90387b1420d8a1e72860163770498efe1f36581de0f45dec74516c7a99d2fbf6"
+    },
+    {
+      "path": "receipts/probe.json",
+      "bytes": 32659,
+      "sha256": "ad4a1bf4a03e334e1df1be8e995c649c87a1fbfe296839c953b69e2618813963"
+    },
+    {
+      "path": "receipts/branch-resumed-20261121.json",
+      "bytes": 442118,
+      "sha256": "a74ecff84f291a291d65a1abb186ea8ddb4b3c1ad384160323ff77b19f2a48fd"
+    },
+    {
+      "path": "receipts/root-dual-closure-observed-20261121.json",
+      "bytes": 49076,
+      "sha256": "8973294803ea684e5491811ecf63120c18c6683b380abf0faeec253d8f9f3115"
+    },
+    {
+      "path": "receipts/minimum-scope-audit-20261121.json",
+      "bytes": 23727,
+      "sha256": "909698f121c45bc9579566bd76754dc1ca6a66d3af19891c854ee3e08e43d8f5"
+    }
+  ],
+  "historical_packet_files": [
+    {
+      "path": "completion-plan.json",
+      "bytes": 1884,
+      "sha256": "a599f122563180bd9a22f7cb42adf038ee27a5c951f7a4499c3c1bea42b6bf56"
+    },
+    {
+      "path": "root-dual-check-plan.json",
+      "bytes": 858,
+      "sha256": "60fa8916b1f4c72624407e67b9754e90e631e24d595d6dca91a319b984a917db"
+    },
+    {
+      "path": "scope-audit-plan.json",
+      "bytes": 1156,
+      "sha256": "030ca4f9ec5675d9cbb2ddc95855df4dc7668f865591c095edad0da4e9458ed7"
+    },
+    {
+      "path": "receipts/completion-20261121.json",
+      "bytes": 476214,
+      "sha256": "4549d3c0728e5afb0a07c58833ee8ea5648dca2f7f22783c07ef326c14b7feef"
+    },
+    {
+      "path": "receipts/completion-cohort-12-rows.json.gz",
+      "bytes": 30706,
+      "sha256": "9cd9484c6152fd5617af756eedab5f087d8e4e9bbc4783ebfe7e16c68e1994d8"
+    },
+    {
+      "path": "receipts/completion-cohort-15-rows.json.gz",
+      "bytes": 37635,
+      "sha256": "a7e0f1d190bd1701aa27a2187b5eb922cecba135e476e00f5c7dbb1de0551d54"
+    },
+    {
+      "path": "receipts/completion-supervision-20261121.json",
+      "bytes": 728,
+      "sha256": "24eb3735df3a6908511f23cf05f8e1c8489e1730d350d5f0a27d7b365b5e5516"
+    },
+    {
+      "path": "receipts/root-dual-closure-observed-supervision-20261121.json",
+      "bytes": 741,
+      "sha256": "5aa81db3aa0cc0ba1f3d27dff35639471aa7322836649e244aacae2a55e9f6bd"
+    },
+    {
+      "path": "receipts/minimum-scope-supervision-20261121.json",
+      "bytes": 736,
+      "sha256": "9e3980c2b093630236daadb9c8168e1cc05e5fe7a6c4bd1530ba829561c98660"
+    }
+  ],
+  "primary_repository_inputs": [
+    {
+      "path": "packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz",
+      "bytes": 44081,
+      "sha256": "8d081c6d82af7757a5c51f89823a46b004829a6d323d7de4e28d0350e0f0f456"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_reader.py",
+      "bytes": 13813,
+      "sha256": "8669f655aa58efffd6ca4822de977237fc5cbd808a822dc2e568e402b3a2cf9f"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/source/local-move-conflicts.json",
+      "bytes": 2521,
+      "sha256": "7946ad6b31d875e5aff1fb7d873a897cbff586f98ba2bb165d0fc041646faa78"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/source/n305_37_aligned.json.gz",
+      "bytes": 42409,
+      "sha256": "25c6a7380dd3863b8f2a47ca1cb8c06b8a96d8bc9611c4f2986c0708880bf605"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/receipts/feasibility-37-aligned.json.xz",
+      "bytes": 26380,
+      "sha256": "6b6818edb748a7cf11af4f98443ce9fe59f4c3d3f5971f15adf5c0b9b613851c"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/receipts/square43-kept.json.xz",
+      "bytes": 26208,
+      "sha256": "c8e9c2a6859cbea52633948e129b457aaf75201a2063bc8de0de76e0a29aa04a"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/receipts/hitting-set.json.xz",
+      "bytes": 5000,
+      "sha256": "c286c9ab1d2413b3b36ba530bd05dccc6e54275ff9ad62667bfa63eb38f57af6"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/acquisition/manifest.json",
+      "bytes": 8494,
+      "sha256": "e9f67472b765d001f29c8b74b831f48cfa44c4583c129b9e5f6234c21cb201af"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/acquisition/completed-replays.json",
+      "bytes": 2392,
+      "sha256": "588bbd758a01f11e5776f073bb27ec9b3d7daa9e60aa6156891ed1f99ab68cad"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/programs/replay_alignment_results.py",
+      "bytes": 12609,
+      "sha256": "5360dcc55ea13ded98c125139dab47320c70704c7bdb4da3666f39aff6e4ea2e"
+    },
+    {
+      "path": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/programs/replay_comparisons.py",
+      "bytes": 11304,
+      "sha256": "fbc5e3e62d9819a93fb28f25db9bb0a8fe5c4cbdf2043d84f9c6844d919704e5"
+    },
+    {
+      "path": "packing/src/sqpack/exact_lp.py",
+      "bytes": 33328,
+      "sha256": "c7e2b92116ae41a7e5e081736be14731553d31bdc85f3ef78c107151aac108ba"
+    },
+    {
+      "path": "packing/devtools/select_n11_field_minimum.py",
+      "bytes": 13959,
+      "sha256": "b81b6d133dce5161ea91c2569f5576256af861382cc04cbdff647fd9aaf3eaa6"
+    }
+  ],
+  "additional_repository_dependency": "The existing follow-up packet in full is required by maintained.audit, including31-turn positive/control records, sharp controls, corrected-witness data and custody references. No missing optional component is treated as passed.",
+  "deciding_entry_point": "programs.audit_minimum_scope",
+  "expected": {
+    "verified_local_exclusions": 34,
+    "hitting_set_minimum": 9,
+    "minimizers": 1581,
+    "nodes": 10991,
+    "minimum_moved_centers_under_stated_hypotheses": 9,
+    "unrestricted_motion_or_rotation_minimum": false
+  }
+}

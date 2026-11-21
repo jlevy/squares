@@ -1,0 +1,11 @@
+{
+  "format": "n305-local-probe-supervision-v1",
+  "worker_exit": 0,
+  "guard_exit": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 120.435896,
+  "samples": 109,
+  "peak_tree_gib": 0.02,
+  "max_kernel_pressure": 1,
+  "guard_mode": "observe-only"
+}

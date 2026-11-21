@@ -39001,13 +39001,12 @@ issues:
         source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
         not_registered: >-
           The 31-turn witness and five exact blocking pairs establish maximum 31 at fixed
-          centers and side with the other directions fixed. Both exact routes also accept
-          the 36-turn variant with square 43 restored: nine moved centers suffice within
-          the 2e-11 coordinate limit. The 17 submitted conflict groups have minimum
-          hitting-set size nine (1,581 minimizers, 10,991 search nodes). A geometric
-          minimum still depends on the 34 unverified local geometric exclusions.
-        queued: true
-        bead: think-3n8h
+          centers and side. At $2\times10^{-11}$ per coordinate, all 34 local exclusions
+          are now verified. The resulting 17 groups require nine moved centers and both
+          feasible witnesses attain nine. The original exact side and other directions
+          remain fixed, with both square-43 choices checked. The exact proof is retained
+          in packing/resources/web/de-winter-n305-1052-followup-2026-11-20/minimum-moved-centers/README.md.
+        queued: false
       - key: n305-export-enclosure-identity
         claim: >-
           For Q = 10^82, the source claims every filed half-angle tangent is on the 1/Q grid,
@@ -39072,6 +39071,16 @@ issues:
         status: confirmed
         position: current
       beads: [think-kzwl, think-rbyl]
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7068082394
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-same-side-axis-variants
+      - result: n305-axis-variant-minimality
+      - result: n305-export-enclosure-identity
+      - result: n305-precision-enclosure
+      beads: [think-rbyl, think-3n8h]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its
@@ -39169,6 +39178,16 @@ issues:
       kind: follow-up
       reported: []
       beads: [think-6ul3, think-guls]
+    - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7068547576
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n20-lower-99951-over-20000
+      - result: n20-equal-absolute-tilt
+      - result: n20-angle-diversity
+      - result: n20-one-axis-equal-magnitude
+      beads: [think-guls]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
@@ -39220,6 +39239,13 @@ issues:
       kind: acknowledgement
       reported:
       - result: n26-n318-final-lower-166
+    - url: https://github.com/jlevy/squares/issues/1060#issuecomment-7068548600
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n26-n318-final-lower-166
+      beads: [think-uz7g]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
@@ -39277,6 +39303,14 @@ issues:
       reported:
       - result: exact-construction-sides-eleven
       - result: three-construction-side-identities
+    - url: https://github.com/jlevy/squares/issues/1061#issuecomment-7068549588
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: exact-construction-sides-eleven
+      - result: three-construction-side-identities
+      beads: [think-l9fk]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Route to the exact-side work tracked by #811. The claimed construction identities
@@ -39323,6 +39357,13 @@ issues:
       kind: acknowledgement
       reported:
       - result: n232-rational-follow-up
+    - url: https://github.com/jlevy/squares/issues/1062#issuecomment-7068550672
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n232-rational-follow-up
+      beads: [think-eumc]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Compare the submitted exact fraction and geometry with both T-307's adopted
@@ -39374,6 +39415,13 @@ issues:
       kind: acknowledgement
       reported:
       - result: thirteen-rational-enclosures
+    - url: https://github.com/jlevy/squares/issues/1063#issuecomment-7068551715
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: thirteen-rational-enclosures
+      beads: [think-3iqa]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       The exact feasibility and pose comparison receipts are indexed in
