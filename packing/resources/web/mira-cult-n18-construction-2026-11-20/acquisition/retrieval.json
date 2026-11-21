@@ -1,0 +1,19 @@
+{
+  "format": "pinned-file-retrieval-v1",
+  "recorded_at_utc": "2026-11-21T16:56:44Z",
+  "method": "GitHub connector fetch_file, base64",
+  "repository": "Mira-Cult/math",
+  "source_commit": "78bec6aacebf304d942a9225e16c2f18165778ff",
+  "path": "notes/geometry/unit-square-packing-18/replay/six-tilt18.json",
+  "source_url": "https://github.com/Mira-Cult/math/blob/78bec6aacebf304d942a9225e16c2f18165778ff/notes/geometry/unit-square-packing-18/replay/six-tilt18.json",
+  "contents_metadata_url": "https://api.github.com/repos/Mira-Cult/math/contents/notes/geometry/unit-square-packing-18/replay/six-tilt18.json?ref=78bec6aacebf304d942a9225e16c2f18165778ff",
+  "published_manifest_url": "https://github.com/Mira-Cult/math/blob/78bec6aacebf304d942a9225e16c2f18165778ff/notes/geometry/unit-square-packing-18/replay/SHA256SUMS",
+  "source_bytes": 775,
+  "returned_git_blob": "0f4842e1fa016b989c55fa8e98b0b57b00e5915a",
+  "computed_git_blob": "0f4842e1fa016b989c55fa8e98b0b57b00e5915a",
+  "published_sha256": "bda21ee2ed4382bf4b33201f546449eee37d6ce66c3d87205c80a7b37f780ba0",
+  "computed_sha256": "bda21ee2ed4382bf4b33201f546449eee37d6ce66c3d87205c80a7b37f780ba0",
+  "exact_bytes_retained": true,
+  "source_programs_acquired": false,
+  "source_prose_acquired": false
+}

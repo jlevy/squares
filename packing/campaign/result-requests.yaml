@@ -8599,9 +8599,9 @@ issues:
       source: body
       bead: think-nd7g
       note: >-
-        The owner lifted the order of 11 October (regularize every packing first,
-        think-ux1v) for the lower-bound confirmations on 17 November 2026 (think-fibh), so
-        this replay waits on compute alone (the block below).
+        The owner lifted the 11 October order for these lower-bound confirmations on
+        17 November 2026 (think-fibh). The continued T-144 replay and its controls still
+        need their remaining compute and review (the block below).
     - what: The complete replay of T-132 in the same lane, and a reply on issue 446.
       state: done
       source: body
@@ -33174,6 +33174,7 @@ issues:
       by: jlevy
       kind: follow-up
       reported:
+      - result: n179-algebraic-l70-plus-5
       - result: n179-band-second
         id: T-294
         status: confirmed
@@ -36083,6 +36084,7 @@ issues:
       by: jlevy
       kind: follow-up
       reported:
+      - result: n90-rational-follow-up
       - result: n90-local-search
         id: T-304
         status: confirmed
@@ -38712,11 +38714,11 @@ issues:
       Nevska reached the same side on Kaggle on 8 November 2026 without published coordinates,
       attaches packing-259.zip, an exact rational Witness/v2 of the packing with a verifier,
       and asks that the packing be credited to GeiserX. Triaged on 20 November 2026
-      in lane c7-pointers (think-squj): the cited source is retained at f822b34 as packet
-      geiserx-squares-in-squares-2026-11-18, and its file holds binary64 rows with angles
-      in radians, no certificate and no exact coordinates, so nothing is imported from
-      it. The attachment is refused by this session''s proxy (HTTP 403) and was not
-      read, so the result waits for it.'
+      in lane c7-pointers (think-squj), with the public source pinned in
+      geiserx-squares-in-squares-2026-11-18. The resumed lane recovered the exact
+      attachment and retained its geometry in geiserx-n259-1040-2026-11-19.
+      The submitted rational certificate rounds upward to 16.590016439230.
+      The original issue body cites the looser direct-source side.'
     read_through: '2026-11-19T04:54:13Z'
     results:
     - key: n259-geiserx
@@ -38724,11 +38726,11 @@ issues:
         data/submission-best.csv.gz at f822b34, Sergio Fernández Rubio's join of tilted
         bands from his own 292 and 445, 0.00136 below T-193.
       source: body
-      not_registered: Not yet imported. The public source states binary64 rows, not
-        a certificate; the exact Witness/v2 the issue attaches (user-attachments files/35066502)
-        was not readable from this session. Once a session retains it, it is replayed
-        on both maintained routes, measured against T-193's packing, walked at 259 and
-        registered with the credit the issue asks for.
+      not_registered: >-
+        The submitted rational refinement is now retained and has exact side below
+        T-193 and below the public GeiserX rows contracted to first contact. The nearest
+        centres fail to pair with T-193 under all eight box symmetries. The independent
+        mathematical review and formal registration remain under think-squj.
       queued: true
       bead: think-squj
     - key: n259-leaderboard-side-only
@@ -38900,12 +38902,31 @@ issues:
     opened: '2026-11-20'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
       This issue points to Mira Cult's computer-assisted proof at 18. The merged
       independent review #1054 reports partial verification and found no gap.
+      The six-tilt coordinate certificate is retained as factual data and passed
+      the maintained construction review replay with 32 controls.
     read_through: '2026-11-20T16:38:03Z'
-    results: []
+    results:
+    - key: n18-six-tilt-construction
+      claim: A six-tilt packing of 18 unit squares at the exact side (7+sqrt(7))/2.
+      source: body
+      not_registered: >-
+        Construction feasibility is independently checked and its source is retained.
+        Registry admission is separate from the existing eight-tilt house at the same side.
+      queued: true
+      bead: think-8x11
+    - key: n18-global-optimality
+      claim: Mira Cult asserts that no packing of 18 unit squares has smaller side.
+      source: body
+      not_registered: >-
+        The review reproduces the original terminal replay and establishes the stated
+        covering lemma and symmetry cases. Its independent terminal samples remained
+        undecided. Retention permission and further independent replay remain outstanding.
+      queued: true
+      bead: think-8x11
     beads:
     - think-8x11
     answer_bead: think-8x11
@@ -38951,8 +38972,8 @@ issues:
           axis-aligned squares, up from 176.
         source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
         not_registered: >-
-          The new same-side variants are separate from the original certificate; exact
-          feasibility, geometric identity and their relation to its drawing await review.
+          Both candidates match T-336's exact side. The 31-turn variant keeps all centers,
+          and the 37-turn variant changes nine. Full feasibility and drawing review remain open.
         queued: true
         bead: think-rbyl
       - key: n305-axis-variant-minimality
@@ -38963,10 +38984,11 @@ issues:
           centers is the claimed minimum needed to straighten all 36.
         source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
         not_registered: >-
-          The exact enumeration and 17-group hitting-set argument are source claims whose
-          hypotheses and completeness await review.
+          Five exact blocking pairs establish the upper limit of 31 at the fixed centers
+          with the other orientations fixed. Its feasible witness and the bounded nine-center
+          proof, including 34 local exclusions and the hitting set, are separate checks.
         queued: true
-        bead: think-rbyl
+        bead: think-3n8h
       - key: n305-export-enclosure-identity
         claim: >-
           For Q = 10^82, the source claims every filed half-angle tangent is on the 1/Q grid,
@@ -38976,10 +38998,9 @@ issues:
           3.16273e-82.
         source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
         not_registered: >-
-          The algebraic reconstruction of the export and its enclosure consequences await
-          checking against the retained original certificate.
-        queued: true
-        bead: think-rbyl
+          The reconstruction, grid and ceiling identities hold for the filed rational
+          coordinates and half-angles. They do not determine the historical export procedure.
+        queued: false
       - key: n305-precision-enclosure
         claim: >-
           A separate rational enclosure in the attachment's precision/ directory, at the
@@ -38987,13 +39008,14 @@ issues:
           side with the same upward 12-place ceiling.
         source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
         not_registered: >-
-          Retention, exact feasibility, identity and the exact comparison are pending; a smaller
-          rational enclosure is not yet a new registered result.
-        queued: true
-        bead: think-rbyl
+          The thinner enclosure's exact side and all 305 poses equal T-336's already checked
+          first-contact contraction. It repeats that contraction under option D and keeps
+          the same upward decimal ceiling.
+        queued: false
     beads:
     - think-kzwl
     - think-rbyl
+    - think-3n8h
     answer_bead: think-kzwl
     replies:
     - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7059935496

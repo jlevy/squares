@@ -1,0 +1,35 @@
+{
+  "site": "https://squaremath.org/cases/259.html",
+  "registry_polynomial_descending": [
+    1,
+    -80,
+    2596,
+    -43488,
+    393149,
+    -1792022,
+    3130777
+  ],
+  "registry_side_isolating_interval": [
+    "33182756290995396318869898804026041617399/2000000000000000000000000000000000000000",
+    "41478445363744245398587373505032552021749/2500000000000000000000000000000000000000"
+  ],
+  "new_side": "16.5900164392299895622870543682763152297309045379269460715619009901800328784599791245741087",
+  "registry_gain_lower": "0.00136170626770859714789503373670557896859546207305392843809900981996712154002087542589126345",
+  "registry_gain_upper": "0.00136170626770859714789503373670557896869546207305392843809900981996712154002087542589126345",
+  "geiser_round33_source_side": "16.590016439573077",
+  "source_report_minus_certificate": "3.43087437712945631723684770269095462073053928438099009819967121540020875425891263447369541E-10",
+  "kaggle_version": 37,
+  "kaggle_row": {
+    "n": 259,
+    "L": "16.590016439230",
+    "L_full": "16.59001643922998956228705436827631522973090453792695",
+    "team": "Nevska",
+    "date": "2026-11-08 11:50:15 UTC"
+  },
+  "kaggle_decimal_minus_certificate": "3.928438099009819967121540020875425891263447369540538190924146107856876198082E-51",
+  "source_repository": "https://github.com/GeiserX/squares-in-squares",
+  "source_commit": "f822b34456b29addec9b59478aac4eb2306f7566",
+  "source_file": "data/submission-best.csv.gz",
+  "file_sha256": "c490841279b793a963129680483a21b075fb55e8e26c24d37901c0655c704989",
+  "origin": "Sergio Fern\u00e1ndez Rubio (GeiserX), round 33, joined bands from packings of 292 and 445 squares. This search refined his coordinates and obtained a rational certificate. Nevska previously published the same side at the precision of the per-puzzle leaderboard."
+}

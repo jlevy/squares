@@ -1,0 +1,194 @@
+{
+  "format": "n305-followup-custody-v1",
+  "source_repository": "https://github.com/JoostdeWinter/square-packing",
+  "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+  "retrieved_at_utc": "2026-11-21T16:53:52Z",
+  "issue_comment": "https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734",
+  "archive": {
+    "url": "https://raw.githubusercontent.com/JoostdeWinter/square-packing/dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc/attachments/n305-review-evidence.zip",
+    "attachment_url": "https://github.com/user-attachments/files/35205180/n305-review-evidence.zip",
+    "bytes": 510763,
+    "sha256": "559ab31345d5b3df5ac1c63f92ab4101b619dac3c060fb0e3f78ac83e5292fca",
+    "git_blob": "cde8e260cf9cf343d998f80536310e2e092d794a",
+    "retained": false
+  },
+  "license": {
+    "upstream_path": "LICENSE",
+    "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE",
+    "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+    "basis": "MIT, copyright 2026 Joost de Winter. Retain the mathematical data and original attribution README; source programs are pinned only."
+  },
+  "members": [
+    {
+      "member": "37-aligned-verification.txt",
+      "bytes": 746,
+      "sha256": "66ccc90528ef1a035fb9c949563dbf0741468422e6661977bde4008618660135",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "README.md",
+      "bytes": 3511,
+      "sha256": "831f661a4c510af1f8eb634f4b42bcc271734d710ff9ede2624b117f3eb709c6",
+      "retained_as": "source/README.md",
+      "storage": "original"
+    },
+    {
+      "member": "axis-alignment-moves.csv",
+      "bytes": 1443,
+      "sha256": "6dadac193f1395a8f344b7b16b720f4f880bd17a34f520bb02c565e37275f323",
+      "retained_as": "source/axis-alignment-moves.csv",
+      "storage": "original"
+    },
+    {
+      "member": "check_alignment.py",
+      "bytes": 2974,
+      "sha256": "f0be6407232c7d884d63ad29e1038b770cd36998ae0333e62de204fdfd51ef72",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "check_area.py",
+      "bytes": 3541,
+      "sha256": "fc123d58a710229eb6f0c57014e1140e6820eeb04316d8b62f56890e78c1d81f",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "check_corrected.py",
+      "bytes": 2211,
+      "sha256": "23a6d2b2e3b47c23cddc1d39c468da06f00945b325f65aa7a662aec81c12dc34",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "check_minimum_moves.py",
+      "bytes": 5317,
+      "sha256": "6e03b5278f3d76bf6b4f390e002e2822ef6b3f1641f9ffa3f9b758c6122c48a9",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "corrected-check.json",
+      "bytes": 1310,
+      "sha256": "e99f2eb961c04128af15e69c3b1ef1cce42f1e6c805dc0b30a54dfde4e144c12",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "local-move-conflicts.json",
+      "bytes": 2521,
+      "sha256": "7946ad6b31d875e5aff1fb7d873a897cbff586f98ba2bb165d0fc041646faa78",
+      "retained_as": "source/local-move-conflicts.json",
+      "storage": "original"
+    },
+    {
+      "member": "n305_31_quarter_turns.json",
+      "bytes": 270727,
+      "sha256": "97fdbb544b9df751784999231a83e190e6d9cc14c2889d981c3f1268429e570f",
+      "retained_as": "source/n305_31_quarter_turns.json.gz",
+      "storage": "gzip"
+    },
+    {
+      "member": "n305_37_aligned.json",
+      "bytes": 271816,
+      "sha256": "11bbca8a3e2fc3a238cba51d2011779117a578c4db0c9365d49003c0d0f98500",
+      "retained_as": "source/n305_37_aligned.json.gz",
+      "storage": "gzip"
+    },
+    {
+      "member": "n305_exact.json",
+      "bytes": 289792,
+      "sha256": "e6c7d0280396a2fa61804a24a7c757365320869dbb89e8cf94316bb8b6a7831f",
+      "identical_to": "packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz"
+    },
+    {
+      "member": "n305_witness.yaml",
+      "bytes": 1144417,
+      "sha256": "1098f986ff0ab6ecc56454d19292f995627131cf7fdbf27cca2d68db6cfe4d82",
+      "retained_as": "source/n305_witness.yaml.gz",
+      "storage": "gzip"
+    },
+    {
+      "member": "orientation-history.csv",
+      "bytes": 15545,
+      "sha256": "4f2e7bc3b50ad8eea545ceec6306ca995967744609e6451928b59807d5c51498",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "quarter-turn-results.json",
+      "bytes": 1731,
+      "sha256": "ec3cd646a402b12872c1784d8fee56c779ddb6bb2c61943b9d0e5a29a7cb7c91",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "quarter_turns.py",
+      "bytes": 3672,
+      "sha256": "c54b721a2edd45f01a613a3d51c67e2d632eece166580942d98ab2a17bb201be",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "recover_enclosure.py",
+      "bytes": 2293,
+      "sha256": "a56c43fc8e5796dcb9830639507be466d99f667286214ab32e3f9ffa4883df7b",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "reviewer/r1052_poses.py",
+      "bytes": 5317,
+      "sha256": "65c3f51be583a034cef9f5210ec2d6b0c993760b56c97213141ca81af2ebbc6d",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "reviewer/r1052_reader.py",
+      "bytes": 13813,
+      "sha256": "8669f655aa58efffd6ca4822de977237fc5cbd808a822dc2e568e402b3a2cf9f",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "stages/first.json.gz",
+      "bytes": 23546,
+      "sha256": "6ace9d8ae341dc132a2954f794e26769954c43e19be51d6b48c29dfa2fc4e5b2",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "stages/intermediate.json.gz",
+      "bytes": 53813,
+      "sha256": "8bdc089b8d9a4fc74e891e594c7306db6a915795dd4aadb49eb8b0894a7e0b9c",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "verify_exact.py",
+      "bytes": 2631,
+      "sha256": "76119299b04f801fa39123a74d0e9c3e28d1f90fb0a55339abc6374c2514d189",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "precision/n305-candidate.json.gz",
+      "bytes": 96549,
+      "sha256": "ae59fb0d8b88020aa499e650263c250bd3908d51a5b0b48ed7e4ea646b45ba53",
+      "retained_as": "source/precision/n305-candidate.json.gz",
+      "storage": "original"
+    },
+    {
+      "member": "precision/check_vertices.py",
+      "bytes": 1169,
+      "sha256": "bcf003482161fa825e9675f2fbaae6077b1ebe563bdcba713103c2d89727ea75",
+      "pinned_only_reason": "Source program, producer receipt, or historical detail outside this factual comparison."
+    },
+    {
+      "member": "precision/input.json.gz",
+      "bytes": 31797,
+      "sha256": "a33f0888d982b27a2769234118f2c8e4c794bb232529a523528d8104df95dbd1",
+      "retained_as": "source/precision/input.json.gz",
+      "storage": "original"
+    },
+    {
+      "member": "precision/README.md",
+      "bytes": 201,
+      "sha256": "f262ada1eb664b381a43485703d995d3a63ea4c7cb5cb331e6f2070712d996a2",
+      "retained_as": "source/precision/README.md",
+      "storage": "original"
+    }
+  ],
+  "prior_evidence": {
+    "original_yaml": "packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_witness.yaml",
+    "contraction_receipt": "packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/contraction-1052.json"
+  },
+  "scope": "Factual custody and exact comparisons only. Whole-packing feasibility of variants and 34 bounded-motion solver checks remain pending.",
+  "committed_at_utc": "2026-11-21T07:05:00Z"
+}

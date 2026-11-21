@@ -1,0 +1,19 @@
+{
+  "format": "construction-packet-check-v1",
+  "checked_at_utc": "2026-11-21T16:59:31Z",
+  "method": "devtools.acquire_source.check(packet, overlay_root), plus exact input identities, independent receipt and guard checks",
+  "checks": {
+    "acquire_source_contract_problems": [],
+    "retained_source_file_count": 1,
+    "input_bytes": 775,
+    "input_sha256_matches": true,
+    "input_git_blob_matches": true,
+    "construction_receipt_equals_stage4": true,
+    "checker_exit_zero": true,
+    "guard_exit_zero": true,
+    "guard_attached_before_checker": true,
+    "controls_refused": true,
+    "one_guideline_footer": true
+  },
+  "verdict": "PACKET_MATCHES_ITS_CONTRACT"
+}

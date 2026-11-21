@@ -1,0 +1,13 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The intake records acknowledge two already posted replies and reconcile the
+  T-144 wait, the 259-square source, the six-tilt 18-square construction and the
+  305-square follow-up. The methods survey was rendered twice from these
+  inputs and once with the request record from main at c7a5add7a8, all with the
+  same link revision. All 43 files, including PDF inputs, matched byte for byte.
