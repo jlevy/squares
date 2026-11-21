@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: GeiserX's public 259-square packing below the regi
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T09:46:42.260Z
-updated_at: 2026-11-21T15:18:55.622Z
+updated_at: 2026-11-21T15:39:16.264Z
 started_at: 2026-11-20T09:46:48.225Z
 ---
 jlevy/squares#1040 (JoostdeWinter, 2026-11-19T04:54:13Z, no comments): Sergio Fernández Rubio (GeiserX) published a packing of 259 unit squares with side 16.590016439573 in GeiserX/squares-in-squares data/submission-best.csv.gz at f822b34 (CC BY 4.0), joining tilted bands from his 292- and 445-square packings; 0.00136 below T-193's 16.591378145498. Nevska reached the same side on Kaggle on 8 November 2026 without published coordinates (side-only, context). The issue attaches packing-259.zip, an exact rational Witness/v2 of the packing with a verifier, and asks that the packing be credited to GeiserX.
@@ -36,3 +36,5 @@ Recorded in PR https://github.com/jlevy/squares/pull/1047 (requests entry #1040 
 21 November 14:35 UTC. Recovered the pinned GeiserX f822b34456b29addec9b59478aac4eb2306f7566 public submission and verified both the declared gzip (c490841279b7…) and decoded CSV (1378c9fd8396…) digests. An exact-byte 259-row extraction with the original header and row order is retained in external n259-recovery/geiserx-direct, SHA-256 89595f52e350c2025906f1f1e06baf64c26f10af6f999f043ef171445369f659. The full 7,437,306-byte archive remains outside Git. The next controlled slice in STAGE4-COMPARISON-PLAN.md separates the current portable reader from the earlier libm route, tests contraction precisely near the claimed refinement margin, and compares the refined side to T-193 via its degree-six fact. T-193 arrangement identity still requires an explicit field-aware or numerical projection. Do not infer Option D from the rounded figures.
 
 21 November 14:51 UTC. The maintained identity measurement against the pinned public n259 CSV under the current portable reader finds 259 one-to-one nearest centres, maximum displacement 2.856714e-6, maximum turn 0.0001157 degrees, and all 59 materially tilted pairs preserving sign. The refined side is about 3.430863e-10 below that direct reader's side. The raw exact comparison is in n259-recovery/identity-refined-vs-geiserx-canonical.json. Option D depends on the exact contraction comparison with both geometry routes; the rounded figures do not decide it.
+
+21 November 15:37 UTC. The guarded maintained contraction comparison against the hash-checked public n259 rows with the portable kaggle-csv reader completed. Both routes accepted the direct enclosure and its contraction to first contact, binding pair 184 and 190. The exact direct-reader margin is about 3.429780e-10; the refined certificate is below the contracted side by 1.08266561E-13 (exact comparison within_margin=false). This passes the Option D side comparison against that reader; the packet controls, independent Stage 4 review, T-193 comparison and registration are pending. Raw exact receipt contraction-geiserx-canonical-vs-refined.json in the task n259-recovery area.
