@@ -3,9 +3,9 @@ type: is
 id: is-01m7xw8ht85t7w8yscwkmaed7n
 title: Publish the scoped R1 review of the integer octagon lower bounds
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -14,8 +14,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-21T01:41:46.951Z
-updated_at: 2026-11-21T02:07:56.363Z
+updated_at: 2026-11-21T02:17:29.453Z
 started_at: 2026-11-21T01:42:07.903Z
+closed_at: 2026-11-21T02:17:29.452Z
+close_reason: "Partial R1 review #1059 merged at 508c155df2 with all three required exact-head checks green, after both scope reviews and 55/55 guarded records checks. Frozen evidence is unchanged. The unfinished whole-certificate sample remains active under think-dhjz."
+resolution: null
+duplicate_of: null
 ---
 Retain R1's frozen checker, findings and partial receipts, add the reviewed document and disclose the interruption. Keep the independent whole-certificate sample open under think-dhjz and preserve R2's blind ordering.
 
