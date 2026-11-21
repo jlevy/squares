@@ -570,6 +570,8 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         # even in the atlas sweep's sparse checkout.
         "/packing/resources/web/rehwaldt-couzo-refinements-2026-10-07/",
         "/packing/resources/web/rehwaldt-n68-refinement-2026-10-07/",
+        # T-336's atlas source resolves through the retained report declaration.
+        "/packing/resources/web/de-winter-n305-2026-11-20/",
         "/packing/resources/papers/kingbird-square-29-provenance.svg",
         # X-049's two censuses compare against JSON retained beside the exploration, and
         # the campaign history is otherwise outside the slice; without this directory the
