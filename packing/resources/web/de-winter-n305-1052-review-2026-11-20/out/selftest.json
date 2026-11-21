@@ -1,0 +1,8 @@
+{
+ "program": "r1052_selftest.py",
+ "checks": 608,
+ "failed": [],
+ "verdict": "PASSED",
+ "cpu_seconds": 2.5,
+ "python": "3.14.7"
+}

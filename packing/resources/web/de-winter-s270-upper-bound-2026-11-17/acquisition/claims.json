@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1022",
+  "source": "https://github.com/JoostdeWinter/square-packing",
+  "revision": "a1ba5019e787e407646293d7bef81d63c9951b32",
+  "read_on": "2026-11-18",
+  "read_at_main": "86284ec203b63097b0a51fd5dffe931852430335",
+  "horizon": 324,
+  "results": [
+    {"n": 270, "certificate": "n270/n270_exact.json", "format": "center-direction-json", "requested": true, "replayed": true, "offered_side": "16.927314216352", "printed_in": "https://github.com/jlevy/squares/issues/1022", "exact_side": "16927314216351701364094693919616632628260321141481608494025753/1000000000000000000000000000000000000000000000000000000000000", "ceiling": "16.9273142163517014", "first_committed": "2026-11-17T22:48:48Z", "grid_side": "17", "case": {"source_key": "[Mishapolk issue 1009 2026-11-16]", "holders": "Evan Daniel, improved by Doğa Özden and Mykhailo Polkovskyi", "result": "T-321", "reported_value": "16.9281486033396074", "verified_value": "16.9281486033396074", "evidence": ["E-mishapolk-1009-exact-feasibility", "E-mishapolk-1009-review-exact-feasibility"], "exact_side": "16928148603339607384058475178539/1000000000000000000000000000000", "relation": "below", "difference": "834386987906019963781258922367371739678858518391505974247/1000000000000000000000000000000000000000000000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

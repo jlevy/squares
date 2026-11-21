@@ -800,12 +800,14 @@ def test_a_new_best_credits_the_case_records_finder_and_improver(
     the case records credit whose packing each certificate continues, at 262 and 292 by the
     owner's answer of 17 November 2026 (think-bx2a). A new-best line credits the case
     record's `found_by`, improved by its `improved_by`, where the case cites the result's
-    own source, and names Polkovskyi by his full name, not the handle the case keeps."""
+    own source, and names Polkovskyi by his full name, not the handle the case keeps.
+    T-320 left 268 in the pass of 20 November 2026 (T-331), so T-314 at 147, Roberto Ono's
+    packing as he improved it, stands in for it."""
     lines, _ = run(
         capsys,
         [
             "--ids",
-            *("T-318", "T-319", "T-320", "T-323"),
+            *("T-314", "T-318", "T-319", "T-323"),
             "--date",
             "2026-11-18",
             "--min-significance",
@@ -816,7 +818,7 @@ def test_a_new_best_credits_the_case_records_finder_and_improver(
     polkovskyi = "improved by Mykhailo Polkovskyi https://"
     assert credited["T-318"].startswith(f"Evan Daniel, {polkovskyi}")
     assert credited["T-319"].startswith(f"Joost de Winter, {polkovskyi}")
-    assert credited["T-320"].startswith(f"Doğa Özden, {polkovskyi}")
+    assert credited["T-314"].startswith(f"Roberto Ono, {polkovskyi}")
     assert credited["T-323"].startswith(f"Joost de Winter, {polkovskyi}")
     # The register's own credit line still credits the source's author first.
     finders, _after = ra.credit_parts(ra.credit_text(records.results["T-319"], records.sources))

@@ -1,0 +1,53 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "1015fc175fa4e2c01f912d915d784100e36d3bab",
+  "read_on": "2026-11-20",
+  "counts": [
+    {
+      "n": 299,
+      "start": [{"label":"record T-325","holders":"Evan Daniel, improved by Doğa Özden, Mishapolk","side":"17.801004434252","exact":true}],
+      "steps": [
+        {
+          "report": "#1031",
+          "kind": "issue",
+          "reported_at": "2026-11-18T06:44:45Z",
+          "side": "17.793636991744",
+          "exact": true,
+          "verdict": "recorded",
+          "reason": "below",
+          "decided_against": ["record T-325"],
+          "difference": "below by 7.37e-03",
+          "first_committed": "2026-11-18T06:34:51Z",
+          "measured": "no symmetry of the box pairs it one to one with T-325's packing by nearest centres; the optimal assignment, under the box's symmetry 3, moves 295 squares beyond 1e-3, 182 beyond 1e-2 and 127 beyond 0.1 (largest 1.07414) and turns 146 squares by more than 1e-6 radians, by up to 41.72 degrees; 18 of its 114 tilted squares pair with tilted squares of T-325 of the same sign; against T-277 likewise; by the box's symmetries it is neither packing, and whether a rigid motion off the box's symmetries pairs part of it with T-325's is the stage 4 review's measurement",
+          "packing": {"kind":"new packing","continues":"diagonal slices of the 372- and 335-square packings in Asterios Panoras's public Kaggle compilation (version 17), which Kaggle's community explorer links to prvsiyan's notebook and to notebooks by areebbb, jazivxt, alexchilton and prvsiyan, locally optimized, with part of one tilted group reflected across the diagonal"}
+        }
+      ],
+      "best_now": [{"label":"#1031","holders":"Joost de Winter","side":"17.793636991744","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":1,"claims":1,"recorded_new":1,"recorded_new_continuing":1,"recorded_refinement":0,"recorded_unclassified":0,"recorded_by_exception":0,"not_recorded":0,"undecided":0},
+  "cross_check": [],
+  "reports": [{"report":"#1031","url":"https://github.com/jlevy/squares/issues/1031","kind":"issue","holders":"Joost de Winter","reported_at":"2026-11-18T06:44:45Z","bead":"think-10mx","counts":[299],"recorded":[299],"recorded_new":[299],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[]}],
+  "owner_decisions": {
+    "exact_ties": [],
+    "first_commit_before_report": [],
+    "undecided": [],
+    "publication_dependent": [],
+    "unknown_times": [],
+    "refinement_chains": [],
+    "key_reason_candidates": [],
+    "measured_identity": [
+      {
+        "n": 299,
+        "report": "#1031",
+        "verdict": "recorded",
+        "source_says": "a new packing seeded from diagonal slices of the 372- and 335-square packings in Asterios Panoras's public Kaggle compilation (version 17), which Kaggle's community explorer links to prvsiyan's notebook and to notebooks by areebbb, jazivxt, alexchilton and prvsiyan, locally optimized, with part of one tilted group reflected across the diagonal",
+        "against": "T-325",
+        "finding": "no symmetry of the box pairs it one to one with T-325's packing by nearest centres; the optimal assignment, under the box's symmetry 3, moves 295 squares beyond 1e-3, 182 beyond 1e-2 and 127 beyond 0.1 (largest 1.07414) and turns 146 squares by more than 1e-6 radians, by up to 41.72 degrees; 18 of its 114 tilted squares pair with tilted squares of T-325 of the same sign; against T-277 likewise; by the box's symmetries it is neither packing, and whether a rigid motion off the box's symmetries pairs part of it with T-325's is the stage 4 review's measurement",
+        "source": "packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/identity.json"
+      }
+    ]
+  },
+  "other_items": [{"issue":"#1031","url":"https://github.com/jlevy/squares/issues/1031","holders":"Nick Sarris","kind":"side-only leaderboard entry, no packing","bead":"think-10mx","disposition":"#1031 quotes the Kaggle per-puzzle leaderboard's side at 299, 17.793636991746555 (Nick Sarris, a notebook completed 18 November, 01:07:56 UTC), which it lies 3.5e-12 below; it states no packing, so it is no report and is recorded as context only."}]
+}

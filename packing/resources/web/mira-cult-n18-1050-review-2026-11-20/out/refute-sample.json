@@ -1,0 +1,244 @@
+{
+ "program": "r1050_refute.py",
+ "mode": "sample",
+ "slices": 32,
+ "max_rounds": 60,
+ "seconds_per_case": 1200,
+ "sample": [
+  [
+   [
+    359,
+    797
+   ],
+   [
+    716,
+    1000
+   ],
+   [
+    1284,
+    1000
+   ]
+  ],
+  [
+   [
+    390,
+    390
+   ],
+   [
+    617,
+    1383
+   ],
+   [
+    1284,
+    1000
+   ]
+  ],
+  [
+   [
+    359,
+    797
+   ],
+   [
+    1000,
+    716
+   ],
+   [
+    1383,
+    1383
+   ]
+  ],
+  [
+   [
+    359,
+    797
+   ],
+   [
+    1000,
+    1000
+   ],
+   [
+    1284,
+    1000
+   ]
+  ],
+  [
+   [
+    359,
+    797
+   ],
+   [
+    716,
+    1000
+   ],
+   [
+    1641,
+    1203
+   ]
+  ],
+  [
+   [
+    359,
+    797
+   ],
+   [
+    390,
+    390
+   ],
+   [
+    1383,
+    617
+   ]
+  ]
+ ],
+ "note": "Cases 1 to 4 ran in the sequential driver; it was stopped after case 4 and cases 5, 6 and the witness ran in case mode in parallel, with the same settings and budget.",
+ "results": [
+  {
+   "kind": "sample",
+   "free": [
+    [
+     359,
+     797
+    ],
+    [
+     716,
+     1000
+    ],
+    [
+     1284,
+     1000
+    ]
+   ],
+   "stdout": "UNDECIDED nodes 2133626 rounds 5820030 depth 79 seconds 1200.1",
+   "verdict": "UNDECIDED",
+   "run": "sequential driver (r1050_refute.py sample)",
+   "source_case": 91
+  },
+  {
+   "kind": "sample",
+   "free": [
+    [
+     390,
+     390
+    ],
+    [
+     617,
+     1383
+    ],
+    [
+     1284,
+     1000
+    ]
+   ],
+   "stdout": "UNDECIDED nodes 2506221 rounds 4396306 depth 79 seconds 1200.0",
+   "verdict": "UNDECIDED",
+   "run": "sequential driver (r1050_refute.py sample)",
+   "source_case": 93
+  },
+  {
+   "kind": "sample",
+   "free": [
+    [
+     359,
+     797
+    ],
+    [
+     1000,
+     716
+    ],
+    [
+     1383,
+     1383
+    ]
+   ],
+   "stdout": "UNDECIDED nodes 1592379 rounds 3652282 depth 71 seconds 1200.0",
+   "verdict": "UNDECIDED",
+   "run": "sequential driver (r1050_refute.py sample)",
+   "source_case": 56
+  },
+  {
+   "kind": "sample",
+   "free": [
+    [
+     359,
+     797
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1284,
+     1000
+    ]
+   ],
+   "stdout": "UNDECIDED nodes 1353136 rounds 3598701 depth 63 seconds 1200.0",
+   "verdict": "UNDECIDED",
+   "run": "sequential driver (r1050_refute.py sample)",
+   "source_case": 86
+  },
+  {
+   "kind": "sample",
+   "free": [
+    [
+     359,
+     797
+    ],
+    [
+     716,
+     1000
+    ],
+    [
+     1641,
+     1203
+    ]
+   ],
+   "stdout": "UNDECIDED nodes 131 rounds 2765 depth 24 seconds 1200.8",
+   "verdict": "UNDECIDED",
+   "run": "case mode, out/refute-case-1.json",
+   "source_case": 2
+  },
+  {
+   "kind": "sample",
+   "free": [
+    [
+     359,
+     797
+    ],
+    [
+     390,
+     390
+    ],
+    [
+     1383,
+     617
+    ]
+   ],
+   "stdout": "UNDECIDED nodes 137 rounds 2846 depth 19 seconds 1204.9",
+   "verdict": "UNDECIDED",
+   "run": "case mode, out/refute-case-2.json",
+   "source_case": 80
+  },
+  {
+   "kind": "witness",
+   "free": [
+    [
+     617,
+     617
+    ],
+    [
+     1000,
+     1000
+    ],
+    [
+     1383,
+     1383
+    ]
+   ],
+   "stdout": "UNDECIDED nodes 227997 rounds 634352 depth 60 seconds 1200.1",
+   "verdict": "UNDECIDED",
+   "run": "case mode, out/refute-case-3.json",
+   "source_case": 53
+  }
+ ],
+ "refuted": 0
+}

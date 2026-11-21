@@ -26,27 +26,20 @@ outputs:
   - papers/square-packing-methods-survey.html
   - papers/square-packing-methods-survey.md
 reason: >-
-  Intake lane i1038 of 20 November (think-91fu): Doğa Özden's issue 1038 is retained and
-  replayed, and its certificate at 228 is registered as T-334 (a provisional id after #1024's
-  and lane c2's), read by the existing witness-center-basis adapter; the blind stage 4 review
-  of #1044 is mapped into it, and the house rule adopts it at 228 in the pass of 20 November in
-  place of T-301, with both strong generators' regularization. The importer gains the
-  packet's house reader, the adoption its house, prose and credit, the drawings record
-  drops 228's settlement, the posters' credit hold holds jazivxt and Özden at 228, and the
-  gate pins the translation screen's new findings; the requests entry, the coverage source, the other-projects card,
-  the bound citations and the composite figure follow. No paper prints 228's record, this
-  entry or that card. Against origin/main a9e5261a2 (#1046): devtools.compare_paper_renders
-  rendered each paper into empty site directories, the math passes in /usr/bin/google-chrome
-  (SQPACK_CHROMIUM), twice from this tree and once with that main's copies of the twelve paths
-  above swapped in. The optimality review, the threshold-bound review and the methods survey
-  are byte-identical across the three, 43 files each. The explainer's 55 files are
-  deterministic, and only its Markdown and HTML differ from the baseline; rendered again by
-  hand from this tree and with main's copies of the eleven paths other than validate.py
-  (whose screen pins no renderer reads) swapped in, the one difference
-  in each is the register count the explainer reads (registered_results, "one of N results
-  the framework has registered so far"), 328 here and 327 on main. The novelty count is
-  unchanged (T-334 is previously-published), and the bound citation it reads is n = 11's,
-  which this change does not touch. So the change is the live register count, which follows
-  the site's data and is not a revision of the paper, as the earlier intake records say. No
-  PDF was printed; each prints from that HTML. Every paper keeps its version: v0.4.35,
-  v0.1.11, v0.1.4 and v0.2.7.
+  Intake lane i1038 and its 21 November UTC continuation (think-91fu) retain and replay
+  Doğa Özden's certificate from #1038. T-334 has the accepted independent review
+  #1044. It was registered on 20 November and the 21 November UTC adoption moves the
+  house at 228 from T-301. The case credits the certificate and its published snapshot
+  and leaves finder and publication order unresolved. This update includes the drawing
+  selection, atlas screen, source coverage and intake requests record.
+
+  On the integrated tree against main e87286443e, the guarded paper comparison used
+  devtools.compare_paper_renders and the installed Chrome math pass. Each paper was
+  rendered twice from the candidate and once with the twelve listed inputs from main.
+  The optimality review, threshold-bound review and methods survey each produced 43
+  files byte-identical across the three renders. The explainer produced 55 files.
+  Its two candidate renders agree, and the only baseline difference is the live
+  register count from 333 to 334 in its Markdown and HTML. Replacing that count in
+  each makes it byte-identical to the baseline. The bound citation at n = 11 and the
+  novelty count are unchanged. The paper versions remain v0.4.35, v0.1.11, v0.1.4
+  and v0.2.7. This comparison rendered HTML and Markdown.

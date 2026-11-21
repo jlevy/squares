@@ -1,0 +1,44 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/check_results.py
+  - packing/devtools/check_standing.py
+  - packing/devtools/render_recent_results.py
+  - packing/devtools/render_results.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/frontier/n-199.md
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Lanes w7r-optd-1118 and c4-optd of the 17 November intake pass (think-8yyy) apply the
+  owner's option D of 17 November (think-b0w5): T-253, T-260, T-280 and T-281 are recorded
+  as restatements (the new restatements field, read by check_results, check_standing,
+  render_results, whose status names what a restated entry restates, and
+  render_recent_results, whose supersession mark names the bounds a restated count rests
+  on), and Joost de Winter's T-285 and T-286 are raised to V3/C3 and adopted at 199 and 172
+  in the pass of 21 November 2026 (adopt_houses, upper_bound_houses, the case records, the
+  coverage register, the composite figure and the bound citations, which credit de
+  Winter's re-solves), with the requests record following, and the translation-escape
+  screen's pinned totals in validate.py follow the new witnesses. The composite figure's
+  displayed ceilings at 172 and 199 are unchanged at six places. On macOS with Chrome,
+  devtools.compare_paper_renders --baseline origin/main swapped the thirteen paths named
+  here against c3f4a59dc1. The four papers produced 55, 43, 43 and 43 files, respectively.
+  Every file was byte-identical across its three renders. The run compared the HTML and its
+  assets without printing PDFs. The paper versions stay v0.4.35, v0.1.11, v0.1.4 and v0.2.7.

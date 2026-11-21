@@ -173,6 +173,28 @@ The owner’s answer of 23 October on re-certifications below the print reaches 
 words, as another holder’s re-certification of Couzo’s certificate; the walks keep it
 recorded until the owner says (think-oqjd).
 
+**Option D answers it (think-b0w5, 17 November 2026).** A re-certification of a standing
+packing is a new result only if its side is below its predecessor’s once the predecessor
+is shrunk until its squares first touch, measured through any construction. Couzo’s
+`4e4c8ce` certificate at 631 is his 490 with three L layers, the whole dilated by
+1 + 1e-24. Shrunk whole, it loses only that dilation, 2.565685e-23, since the grid squares
+bind ([measure/contraction-n631.json](measure/contraction-n631.json)). Through its
+construction, its 490 base contracts by 2.604763e-11, squares 171 and 172 binding, and
+both maintained routes accept the base, its contraction and the contraction with the
+three layers written on it, which is 2.604763e-11 below his side
+([measure/contraction-n631-through-490.json](measure/contraction-n631-through-490.json)).
+#719’s 631 lies 2.729290e-13 below his side, 0.0105 of that margin and within it: a
+restatement of Couzo’s certificate, credited to Couzo (lane w7-optd-1118, think-8yyy, 18
+November 2026). The walks still record it, under the restatement ruling’s
+`awaiting_owner`, until think-wtdz takes it out.
+
+#732’s 631, the row on `main` since 22 October, lies 3.433651e-12 below Couzo’s side,
+0.1318 of the same margin and within it
+([measure/contraction-n631-732-through-490.json](measure/contraction-n631-732-through-490.json)).
+The owner’s decision lists #719’s 631 and not this one, so the record states the
+measurement only and the row stands: whether option D reaches a recorded row beyond the
+horizon is the owner’s question (think-1ell).
+
 ## Exact Replay
 
 **Beyond the corpus.** `devtools.beyond_horizon_replay` decides each of the 112 rows
@@ -320,6 +342,18 @@ python -m devtools.beyond_horizon_replay earlier --issue 719 --couzo COUZO --eva
 python -m devtools.beyond_horizon_replay ledger-sources --issue 719 --read-at-main 0281e776342f2f1b63d3df66dc3c1737e8202945 --read-on 2026-10-22
 python -m devtools.beyond_horizon_replay check --issue 719 --replay --workers 2
 python resources/web/mishapolk-issue719-2026-10-22/measure/identity.py --out resources/web/mishapolk-issue719-2026-10-22/measure/identity.json
+```
+
+From `packing/`, the measurements through Couzo’s construction (lane w7-optd-1118):
+
+```bash
+COUZO=resources/web/couzo-index-2026-10-15/source/certificates/best/n631.cert
+python -m devtools.contraction_margin --n 490 "couzo-4e4c8ce=l-base:631:evand-cert:$COUZO" \
+  --against "mishapolk-719=witness-center-basis:resources/web/mishapolk-issue719-2026-10-22/facts/n-631.yaml.gz" \
+  --through --out resources/web/mishapolk-issue719-2026-10-22/measure/contraction-n631-through-490.json
+python -m devtools.contraction_margin --n 490 "couzo-4e4c8ce=l-base:631:evand-cert:$COUZO" \
+  --against "mishapolk-732=evand-cert:resources/web/mishapolk-issue732-2026-10-22/source/certificates/0000-0999/n631.cert" \
+  --through --out resources/web/mishapolk-issue719-2026-10-22/measure/contraction-n631-732-through-490.json
 ```
 
 ## Compressed Files

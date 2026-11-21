@@ -1993,12 +1993,36 @@ repositories:
       record. Nothing under theorem-a/, composites/ or the strip folders changes.
   # Lane L104 of 11 November 2026 (think-bcfs); lane L136 of 12 November (think-c3p2); lanes
   # L154 (think-g2ax), L157 (think-2h88) and L158 of 14 November; lane L181 of 15 November
-  # (think-32cl); lane c-import-1005-1117 of 17 November (think-qag8).
+  # (think-32cl); lane c-import-1005-1117 of 17 November (think-qag8); lane c2-imports of 20
+  # November (think-gqzz, think-10mx).
   - url: https://github.com/JoostdeWinter/square-packing
-    read_through: d02237aa809d3738e7968936d08e6ba9ddd01edb
-    read_on: '2026-11-17'
+    read_through: 7232328914bc74f94bd7a5026037ed90f868f73d
+    read_on: '2026-11-20'
     note: >-
-      Read through d02237a (21:26:39Z on 16 November), the head at 01:34Z on 17 November,
+      Read through 7232328 (07:31:33Z on 18 November) for jlevy/squares#1021, #1022 and #1031,
+      ten commits past the d02237a read; the head at 07:03Z on 20 November was 21d944c, one
+      commit later, whose lower_bounds_2026_11_19/ the lane importing #1039, #1041 and #1042
+      reads. 689bc79 (22:07:57Z on 17 November) and 35b576a (22:09:10Z) add and amend n127/,
+      #1015's certificate; cc20a26 and 67fb815 (22:26:24Z) add #1017's smaller n127/
+      certificate, lower_n108/ (#1018) and above1000/ (#1019) with their registration texts,
+      each read by its own import, the 127 and 108 packets pinning these commits.
+      a1ba501 (22:48:48Z), "Add packings for n = 268 and n = 270 and a smaller certificate for
+      n = 127", adds n268/ and n270/, the packings #1021 and #1022 report, and #1020's n127/;
+      the de-winter-s268-upper-bound-2026-11-17 and de-winter-s270-upper-bound-2026-11-17
+      packets pin it and retain the two folders. 838c5ea (22:48:48Z) adds only their
+      REGISTRATION.md and SHA256SUMS files and n127's, whose digests match a1ba501's files.
+      497eb47 (06:34:51Z on 18 November), "Add the packing for n = 299", adds n299/, the
+      packing #1031 reports, and a row of the root README; the
+      de-winter-s299-upper-bound-2026-11-18 packet pins it and retains the folder. 3293038
+      (06:34:51Z) adds only n299/REGISTRATION.md and n299/SHA256SUMS, whose digests match
+      497eb47's files. aae089c (07:30:49Z) adds n109_kaggle/, Tomáš Kodaj's public
+      coordinates at 109 that #1012 cites, and 7232328 (07:31:33Z) removes the folder again;
+      no packet retains either, and #1012's own record (think-wvr8) walks nothing until an
+      exact certificate arrives. Lane c2-imports registers #1021, #1022 and #1031 (T-331,
+      T-332, T-333) and adopts all three in the pass of 20 November. Nothing more to import
+      here.
+
+      The read of 17 November (lane c-import-1005-1117) was through d02237a (21:26:39Z on 16 November), the head at 01:34Z on 17 November,
       four commits past the 6c0ad56 read. 796ff3b (15:37:03Z), "Add a packing of 292 unit
       squares with side 17.590016442847", adds n292/, a packing of 292 squares that
       jlevy/squares#1006 (15:39:16Z) reports, and a row and a paragraph of the root README;
@@ -2292,6 +2316,49 @@ repositories:
       entry and the packet's README, and the Lean build's price on think-0h7r. The commit adds
       no bound, certificate or claim, nothing of it is retained, and the packet keeps its pin;
       T-298 stays at V0/C1. Nothing to import.
+  # Lane w6-dewinter-1118 of 18 November 2026 (think-zqot): three reads through the head,
+  # each holding for its bead what no packet of this change retains.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 838c5ea8736f64ab383ebd5457066b6b4bd0dda7
+    read_on: '2026-11-18'
+    bead: think-1tkk
+    note: >-
+      Read through 838c5ea (22:48:50Z push on 17 November), the head at 01:21Z on 18
+      November, six commits past the d02237a read. cc20a26 (22:26:24Z) adds above1000/, the
+      exact certificates of 2,837 counts from 1,036 to 9,928 that jlevy/squares#1019
+      (22:27:56Z) reports, with their generators, checkers, comparisons and examples, and
+      67fb815 (22:26:24Z) adds above1000/REGISTRATION.md; no packet retains above1000/, which
+      think-1tkk imports with the rows-above-1024 lane (think-llit) once #732's question on
+      the N = 10,000 cap is settled. The same commit's n127/ and lower_n108/ are retained by
+      the de-winter-s127-issue1017-2026-11-17 and de-winter-s108-lower-bound-2026-11-17
+      packets (the second in its own change, think-i5en, whose read is below), and 689bc79
+      and 35b576a, which first committed and then renamed the model of #1015's n127/, by the
+      de-winter-s127-issue1015-2026-11-17 packet at 35b576a.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 838c5ea8736f64ab383ebd5457066b6b4bd0dda7
+    read_on: '2026-11-18'
+    bead: think-gqzz
+    note: >-
+      Read through 838c5ea, as above. a1ba501 (22:48:48Z) adds n268/ and n270/, the exact
+      centre-direction certificates at 268 and 270 that jlevy/squares#1021 (22:49:55Z) and
+      #1022 (22:50:19Z) report, with their witnesses, checkers, figures and READMEs, and the
+      head, 838c5ea, adds their registration texts and checksums; no packet retains them yet,
+      and think-gqzz imports both after #1009's import, whose claims at 268 and 270 the
+      report order walks first. a1ba501's n127/, #1020's certificate, is retained by the
+      de-winter-s127-issue1020-2026-11-17 packet; 838c5ea's n127/REGISTRATION.md and
+      n127/SHA256SUMS restate it.
+  - url: https://github.com/JoostdeWinter/square-packing
+    read_through: 838c5ea8736f64ab383ebd5457066b6b4bd0dda7
+    read_on: '2026-11-18'
+    bead: think-i5en
+    note: >-
+      Read through 838c5ea, as above. cc20a26 adds lower_n108/, the lower bound
+      s(109) >= s(108) >= 1700799526134255846599/159999384348528500000 that
+      jlevy/squares#1018 (22:27:34Z) reports: Hiroaki Hosono's T-216 measure rescaled by
+      1063/1062, 401 direction runs of this repository's sqverify-fast, a one-page proof and
+      the author's audit; 67fb815 adds its registration text and checksums. think-i5en
+      retains it in the de-winter-s108-lower-bound-2026-11-17 packet in its own change, which
+      removes this read.
   # Lane L187 of 16 November 2026 (think-0y9m).
   - url: https://github.com/JonathanGun/square-packing-upper-bounds
     read_through: 0aac839e551fd8cb7d7717c20494b095429131a1

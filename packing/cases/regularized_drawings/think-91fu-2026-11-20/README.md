@@ -1,15 +1,15 @@
-# Regularization Runs After the Adoption of Issue 1038 (think-91fu)
+# Regularization Runs for the Adoption of Issue 1038 (think-91fu)
 
-These are the strong generators’ runs on the witness that the adoption of Doğa Özden’s
-issue 1038 wrote at 228 in the pass of 20 November 2026, under
-[the house rule](../../../campaign/result-import.md#the-house-rule), on the accepted
-verdict of the stage 4 review of 20 November 2026
+The strong generators ran on Doğa Özden’s witness at 228 on 20 November 2026. Their
+selected view supports the 21 November UTC adoption under
+[the house rule](../../../campaign/result-import.md#the-house-rule), following the
+accepted stage 4 review of 20 November 2026
 ([review-2026-11-20-ozden-1038.md](../../../../docs/project/reviews/review-2026-11-20-ozden-1038.md),
 pull request 1044):
 
 | n | House | Replaces | Adopted |
 | ---: | --- | --- | --- |
-| 228 | T-334 | T-301 | 20 November 2026 |
+| 228 | T-334 | T-301 | 21 November 2026 UTC |
 
 T-334 is Özden’s exact certificate of jazivxt’s public Kaggle packing, one to one with
 T-301’s packing and 1.23 times T-301’s contraction margin below it, so a new result

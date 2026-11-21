@@ -19,7 +19,9 @@ triage. None of the 37 is in this scope or imported here.
 
 Intake lane L78 (think-2h88) retained it, replayed it and registered it on 11 November
 2026 as **T-286, held at V0/C1** for the owner’s RV-3 (think-ruu2), beside #939’s T-285.
-The house at 172 stays T-282, and the case record is not touched.
+The owner’s option D of 17 November 2026 (think-b0w5) made it a new result: on
+18 November 2026 lane w7-optd-1118 (think-8yyy) raised it to V3/C3, and on 21 November
+2026 the branch’s pass adopted it as the house at 172, in place of T-282 ([Padding (Option D)](#padding-option-d)).
 
 ## What the Source Claims
 
@@ -132,8 +134,9 @@ and `devtools.contraction_margin` the `contraction-*.json` receipts under
 
 ## The Register
 
-T-286 records the claim, held at V0/C1, S1, with a regularization item naming T-282. The
-replay is not entered as evidence and nothing is adopted. Whether a re-certification at
+On 11 November T-286 recorded the claim, held at V0/C1, S1, with a regularization item
+naming T-282. The replay was not entered as evidence and nothing was adopted. Whether a
+re-certification at
 its predecessor’s own contraction margin is a new result is the owner’s RV-3
 (think-ruu2). The same answer settles T-285 at 199 and the held solve at 172
 (think-wju3).
@@ -145,7 +148,27 @@ through any construction, no certificate of this arrangement could count, since 
 optimum prints as the contracted house does. Under a rule that counts any gain, a gain
 across the predecessor’s own print, or a gain beyond its contraction margin, it counts. A
 case-by-case judgment of whether the 4% beyond the margin is padding could go either
-way. The question and its options are think-ruu2’s (RV-3); the record decides nothing.
+way. The question and its options were think-ruu2’s (RV-3), and the record decided
+nothing until the owner answered.
+
+## Padding (Option D)
+
+The owner answered RV-3 on 17 November 2026 (think-b0w5, option D): a re-certification of a
+standing packing is a new result only if its side is below its predecessor’s once the
+predecessor is shrunk until its squares first touch, measured through any construction
+(`devtools.contraction_margin`), and sides are compared, not prints. T-282 carries no L
+border, so there is no construction to measure through: contracted to first contact it
+lies 1.010713 × 10⁻¹³ above this certificate, whose gain is 1.0399 of T-282’s margin
+([contraction-n172.json](measure/contraction-n172.json)). T-286 is therefore a new result.
+
+Lane w7-optd-1118 (think-8yyy) entered, on 18 November 2026, the replay above
+(`E-de-winter-946-exact-feasibility`) and the stage 4 review’s clean-room run
+(`E-de-winter-946-review-exact-feasibility`) as evidence, raised T-286 to V3/C3, and
+regularized the new witness with both strong generators; the pass of 21 November 2026
+adopted it as the house at 172 under the house rule
+([think-8yyy-2026-11-18](../../../cases/regularized_drawings/think-8yyy-2026-11-18/README.md)).
+The share is the one Evan Daniel’s held solve at 172 has (think-wju3), which stays the
+project’s own point and is not registered.
 
 ## Stage 4 Review
 
