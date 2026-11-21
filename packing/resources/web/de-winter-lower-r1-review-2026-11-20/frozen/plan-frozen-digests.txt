@@ -1,0 +1,19 @@
+# Lane rR1-lower (blind stage 4 review R1 of issues 1041 and 1042, bead think-dhjz): review plan frozen at 2026-11-20T18:16:25Z,
+# before this lane wrote or ran any checker. Verify from this directory with: sha256sum -c frozen/plan-frozen-digests.txt
+# Source files read before the plan, at JoostdeWinter/square-packing@21d944c43098e2261ab7d713cd10f02a5eb13f3d (sha256sum, as comments):
+# 19eebfeca62baef9b642f1eb4c69e21c9847e9ced5309a3fc64fdf941d4a4482  lower_bounds_2026_11_19/README.md
+# 3c1d34f2702259dc348f4f582cd93ef3aaabb863abfb64460ed48f11077046a6  lower_bounds_2026_11_19/CLAIM.md
+# 1149a79e3f503adc4bc05b1b037c94cdf2cafa69701eb8dad77b9aadc3a59968  lower_bounds_2026_11_19/FOLLOWUP.md
+# b8daa532afada8c9e871dd872029f09353f235bd0fcb1bd4668e52dd332e0867  lower_bounds_2026_11_19/RESULTS.md
+# 80b3fa9699946cb656c6f7c8bb7f50f416b491a780bc80266617af1673aa1ec3  lower_bounds_2026_11_19/proof/INTEGER_CHECKER.md
+# 07510ef046a31952fd014ed276c8f22970ebf3c70febff20aaf75d932e9a60ed  lower_bounds_2026_11_19/constructions/README.md
+# 23916e938c6ca31b774553e5ed3d5d840f986c8482d389220c7095bcd175ee51  lower_bounds_2026_11_19/followup/repeated/PROOF.md
+# 8ee38fdaa601306e715b3cd21a11fed98aa0330ccffdecf7ffc201712267edc8  lower_bounds_2026_11_19/followup/envelopes/PROOF.md
+# c62e16c0240f2e012d90ed4e1ee3ae43a8f0b191ef9e08763c4aff4f19283e4f  lower_bounds_2026_11_19/followup/corner_trim/PROOF.md
+# 401c5fca078bbcfd3c423f396747ebf467efdf120d88aba40f8c0a6deec892e3  lower_bounds_2026_11_19/lower_bounds.csv
+# 7148316296ec74efb95ebfc2bed4f52b3f391afc303fb378510d52c5782cbf0a  lower_bounds_2026_11_19/followup/best_by_count.csv
+# e48f96821272e6c02453bf3b277b51b23904882f5f57a1ac305a24ec9d6e49bf  lower_bounds_2026_11_19/SHA256SUMS
+# The frozen plan and the retained issues:
+2a36c8e49f6dff1577da8b343ee5a1973d578d6535247b4774d9729e96656767  frozen/review-plan.md
+504e9ac7e72a80bbe07f5ec17fc0ec685ad12679d2bb30dd68a01e719e53dbe4  programs/issue-1041.json
+9043447fd07ad8e07d2836ce34ff439983dfb494ec91718b4d79195a89bc1047  programs/issue-1042.json

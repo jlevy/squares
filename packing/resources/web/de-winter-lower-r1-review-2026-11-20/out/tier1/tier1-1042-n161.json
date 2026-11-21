@@ -1,0 +1,68 @@
+{
+ "label": "1042/n161",
+ "n": 161,
+ "L": "6429/500",
+ "factor": "1",
+ "stretch": "1",
+ "threshold": "1",
+ "widen": 0,
+ "bins": 2,
+ "verdict": "DECIDED",
+ "nodes": 98466,
+ "c_seconds": 65.162,
+ "cpu_seconds": 66.847,
+ "wall_seconds": 185.0,
+ "lattice_Q": 12800000000,
+ "lattice_rounded": false,
+ "G": 110,
+ "results": [
+  {
+   "id": "K300r216",
+   "K": 300,
+   "r": 216,
+   "l": "35773/120000",
+   "h": "35939/120000",
+   "depth": 0,
+   "verdict": "ACCEPT",
+   "nodes": 17829,
+   "clips": 64101424,
+   "tree_depth": 19,
+   "seconds": 23.772,
+   "min_accepted": "18446746659281518581",
+   "polygon_vertices": 16,
+   "polygon_area": 0.9987332692314679,
+   "domain": [
+    82291200000,
+    155722719451
+   ]
+  },
+  {
+   "id": "K900r0",
+   "K": 900,
+   "r": 0,
+   "l": "-83/360000",
+   "h": "83/360000",
+   "depth": 0,
+   "verdict": "ACCEPT",
+   "nodes": 80637,
+   "clips": 106367620,
+   "tree_depth": 26,
+   "seconds": 41.39,
+   "min_accepted": "18446744445320766131",
+   "polygon_vertices": 16,
+   "polygon_area": 0.999769550668294,
+   "domain": [
+    82291200000,
+    158182400000
+   ]
+  }
+ ],
+ "least_bin": [
+  900,
+  0
+ ],
+ "seeded_bin": [
+  300,
+  216
+ ]
+}
