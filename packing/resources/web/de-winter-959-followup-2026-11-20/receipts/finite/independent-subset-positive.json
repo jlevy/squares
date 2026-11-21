@@ -1,0 +1,33 @@
+{
+  "stage": "independent-subset-positive",
+  "route": "independent",
+  "case": "subset-positive",
+  "n": 2,
+  "witness_content_sha256": "d5814979d3765a530315464c088d1e46b44d9352ab06869d5e5eb9c6d32e015c",
+  "expected": "accept",
+  "expected_outcome_met": true,
+  "pairs_accounted": 1,
+  "result": {
+    "verification_passed": true,
+    "coordinate_provenance": "verified",
+    "method": "exact-algebraic",
+    "field": "Q(alpha), alpha the root of a degree-5 polynomial in its stated interval",
+    "checker": "devtools.check_algebraic_witness_independent",
+    "n": 2,
+    "side_decimal": "1.388096037155557915809822588926e+01",
+    "pairs_tested": 1,
+    "pairs_separated_by_sweep": 0,
+    "touching_pairs": 1,
+    "minimum_containment_clearance": "0.000000e+00",
+    "minimum_best_pair_gap": "0.000000e+00",
+    "root_bisections": 160,
+    "gcd_decisions": 0,
+    "seconds": 0.01,
+    "failures": [],
+    "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+  },
+  "report": null,
+  "wall_seconds": 0.009992207982577384,
+  "cpu_seconds": 0.009079999999999977,
+  "ru_maxrss_bytes": 93061120
+}

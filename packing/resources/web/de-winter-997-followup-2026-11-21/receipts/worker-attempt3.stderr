@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/worker.py", line 153, in <module>
+    kernel.save_xz(root/"receipts/exact-certification.json.xz",replay)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/levy/wrk/github/squares/packing/devtools/evand_arrangement_reports.py", line 158, in save_xz
+    raise ReportError("retained evidence output must remain inside the repository")
+devtools.evand_arrangement_reports.ReportError: retained evidence output must remain inside the repository

@@ -1,0 +1,15 @@
+{
+  "format": "n90-normalization-custody-check-v1",
+  "outcome": "PASS",
+  "normalizer_exit_code": 0,
+  "normalizer_stdout": "",
+  "normalizer_stderr": "",
+  "normalizer_sha256": "2ab90a1000be143f4807dd0c13a8b0453e3abf9db2e1b4e220fb311113011c9f",
+  "derived_sha256": "f212ccd23b308a9d9ef67201cac4724bf576fac7bb6c8f53a043e95b0dda020a",
+  "original_member_digests_match": true,
+  "external_diagnostic_lossless": true,
+  "compressed_file_table_problems": [],
+  "plain_data_over_line_threshold": [],
+  "source_file_count": 4,
+  "producer_programs_retained": false
+}

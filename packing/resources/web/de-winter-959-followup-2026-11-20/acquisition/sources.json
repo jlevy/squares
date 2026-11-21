@@ -1,0 +1,37 @@
+{
+  "kind": "factual mathematical-source overlay, not a source licence grant",
+  "source_comment": "https://github.com/jlevy/squares/issues/959#issuecomment-7050119161",
+  "source_url": "https://github.com/user-attachments/files/35184249/n179-exact-construction.zip",
+  "archive_sha256": "143e9298eaf8c96e0e36bd7346a41b765e1d8e77dc1be10c76e17846ce73c3c8",
+  "member": "algebraic/n179/n179.minpoly.json.gz",
+  "member_sha256": "28edf9561e87037b5c681e4ff0051a1bd1b8e5401c1a8376fe2e66c2c18663d1",
+  "retained_member": "source/n179.minpoly.json.gz",
+  "retained_bytes_unchanged": true,
+  "reading": "derived/n179-reading.yaml",
+  "construction_credit": [
+    "Doğa Özden",
+    "Ryan Xu",
+    "Evan Daniel"
+  ],
+  "reconstruction_credit": "Joost de Winter, with disclosed OpenAI assistance",
+  "reported_numerical_donor": "Sergio Fernández Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares",
+  "reported_donor_input": "inputs/poses/n179_GeiserX.json",
+  "reported_donor_sha256": "fc9ee75c8d53b37b7dd97277b5f930eaac31a28a16cbc5f7a78802b9aa2fce5d",
+  "unresolved": [
+    "Donor file absent from attachment and no pinned donor commit",
+    "Package verification/LICENSE.md names n232/n270 and does not resolve n179-specific licence scope",
+    "No original author program or prose retained in this finite-slice source directory"
+  ],
+  "certificate_content_scope": "Original mathematical certificate includes field, side, poses and associated mathematical metadata.",
+  "project_sources_sha256": {
+    "packing/devtools/algebraic_witness_reports.py": "655ba77c53161b3f1729a20072fe4507d90e6068a674694c19d9c89ee1e2e922",
+    "packing/devtools/check_algebraic_witness_independent.py": "35b657ed1596a41d71f5c66e5355b184517b5f91b4adb2420b6d5da23dc0d656",
+    "packing/src/sqpack/field.py": "734a645d9b95bf43018b1d9662cf255fbf3b834b74ae5e1f10dcf2455a0e3de6",
+    "packing/src/sqpack/witness.py": "60bb51cc699ce30940f988013f1d052a49f54b80f5dea84c2cc253e008226db8",
+    "packing/src/sqpack/verify.py": "56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337",
+    "packing/witnesses/witness.schema.yaml": "754ddd6eea0558344c174302318ed1e7235d9665f37ef4f6fdea1f1e627664dc"
+  },
+  "original_reading_sha256": "3410186279a6ef7910828ebe02b004e2d7b5a101e280003600684532108435a0",
+  "reading_metadata_change": "The schema path is relative to the retained reading copy.",
+  "reading_sha256": "005e7ff60b9b053e420730ebb06b720ef2a39349f43c08943c82adea1d9a1857"
+}

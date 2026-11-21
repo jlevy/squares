@@ -1,0 +1,13 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The intake record adds exact checks of the n90 and n179 certificates and of
+  same-side n305 witnesses, and records the posted n18 reply. The maintained
+  comparator rendered the methods survey twice from the candidate and once with
+  the exact result-request input from main 5bd455d50e40. All 43 rendered files
+  match byte-for-byte, including the PDF inputs. The paper's version stays v0.2.7.

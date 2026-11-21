@@ -1,0 +1,54 @@
+{
+  "format": "n305-completed-replay-retention-v1",
+  "date": "2026-11-21",
+  "scope": "Completed first-party calculations; the 34 bounded-motion local geometric exclusions remain unverified. No T-336, registry or drawing change.",
+  "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+  "source_manifest": "acquisition/manifest.json",
+  "records": [
+    {
+      "path": "receipts/feasibility-31-aligned.json.xz",
+      "origin": "resumed-followups/de-winter-n305-1052-followup-2026-11-20/receipts/feasibility-31-aligned.json.xz",
+      "storage": "unchanged",
+      "bytes": 26804,
+      "sha256": "a95a8317654d8c45a14c89f85deb210171933d88bf28aa8db5e8e8dc61ff4290"
+    },
+    {
+      "path": "receipts/feasibility-37-aligned.json.xz",
+      "origin": "resumed-followups/de-winter-n305-1052-followup-2026-11-20/receipts/feasibility-37-aligned.json.xz",
+      "storage": "unchanged",
+      "bytes": 26380,
+      "sha256": "6b6818edb748a7cf11af4f98443ce9fe59f4c3d3f5971f15adf5c0b9b613851c"
+    },
+    {
+      "path": "receipts/sharp-controls-31-aligned.json",
+      "origin": "resumed-followups/de-winter-n305-1052-followup-2026-11-20/receipts/sharp-controls-31-aligned.json",
+      "storage": "unchanged",
+      "bytes": 33143,
+      "sha256": "da89db9f49dfc08e85b66e2ec3a337b4e225a77b3710449f6ee81a528b4232d5"
+    },
+    {
+      "path": "receipts/sharp-controls-37-aligned.json",
+      "origin": "resumed-followups/de-winter-n305-1052-followup-2026-11-20/receipts/sharp-controls-37-aligned.json",
+      "storage": "unchanged",
+      "bytes": 19529,
+      "sha256": "65c4b3197894de0f9ba6f65d9a0759577cd3af9711687a91ce71ecbcef96c909"
+    },
+    {
+      "path": "receipts/hitting-set.json.xz",
+      "origin": "resumed-followups/n305-minimality/hitting-set.json",
+      "storage": "xz",
+      "bytes": 169848,
+      "sha256": "871d3dfdb0bd18d81942b0360afdda273b8b0e76831db7fc8fbe92c29e0b7d30"
+    },
+    {
+      "path": "receipts/square43-kept.json.xz",
+      "origin": "resumed-followups/n305-minimality/square43-kept.json",
+      "storage": "xz",
+      "bytes": 232632,
+      "sha256": "21e7869486b2d59a62e2694373de1a8a9b835fa82aabf1f6b7a03d2f6e17d926"
+    }
+  ],
+  "new_upstream_material": false,
+  "source_programs_executed": false,
+  "source_notice": "Existing source attribution READMEs and MIT notice reference remain unchanged. New programs and measurements are first-party."
+}

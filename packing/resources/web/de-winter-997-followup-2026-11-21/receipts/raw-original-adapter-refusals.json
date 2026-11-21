@@ -1,0 +1,17 @@
+{
+  "format": "source-adapter-refusals-v1",
+  "refusals": [
+    {
+      "source": "90/candidate.json.gz",
+      "decoded_sha256": "5f58ac1e3f082df767237ae430180d64a09a7332b3d0b00015503cfa3c9e2099",
+      "reader": "pingyou-json",
+      "error": "n=90: PingYou certificate has missing, unknown or mistyped fields"
+    },
+    {
+      "source": "90/candidate.json.gz",
+      "decoded_sha256": "5f58ac1e3f082df767237ae430180d64a09a7332b3d0b00015503cfa3c9e2099",
+      "reader": "ono-json",
+      "error": "n=90: not a harness certificate with only the known fields"
+    }
+  ]
+}

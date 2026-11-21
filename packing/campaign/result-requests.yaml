@@ -33136,7 +33136,11 @@ issues:
         An algebraic certificate for 179 squares at exactly L70 + 5, where L70 is the
         side of the published 70-square construction.
       source: https://github.com/jlevy/squares/issues/959#issuecomment-7050119161
-      not_registered: Retention, exact replay and comparison with the register are queued.
+      not_registered: >-
+        The retained algebraic certificate passed both maintained whole-packing checks and
+        a source-only exact review. Its side is about 7.94e-14 below T-294 at first contact.
+        Registration and house selection are queued. The donor coordinates at the
+        source's stated digest are still needed to confirm that lineage.
       queued: true
       bead: think-esp4
     beads:
@@ -36049,8 +36053,11 @@ issues:
         below T-304 and claims feasibility only.
       source: https://github.com/jlevy/squares/issues/997#issuecomment-7058975230
       not_registered: >-
-        The follow-up certificate awaits retention, exact feasibility, comparison with T-304
-        under Option D, and source-credit review.
+        The retained rational certificate passed both maintained routes and a source-only
+        exact review. Its side is about 8.79e-12 below T-304 at first contact under Option D.
+        It is about 9.99e-20 below the earlier held solve's rational certificate side.
+        That solve's limiting side and poses cannot be recovered from its retained report.
+        Registration and house selection remain under think-zsei.
       queued: true
       bead: think-zsei
     beads:
@@ -38936,6 +38943,14 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/1050#issuecomment-7066884142
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n18-six-tilt-construction
+      - result: n18-global-optimality
+      beads: [think-8x11]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1052
     title: 'Lowered upper bound for n = 305 (side 17.945755838742)'
@@ -38972,8 +38987,9 @@ issues:
           axis-aligned squares, up from 176.
         source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
         not_registered: >-
-          Both candidates match T-336's exact side. The 31-turn variant keeps all centers,
-          and the 37-turn variant changes nine. Full feasibility and drawing review remain open.
+          The 31-turn and 37-turn variants use T-336's exact side. Both maintained routes
+          accept all 46,360 pairs in each variant. Both full-packing control families and
+          22 sharp cases produced all predicted outcomes. Drawing review remains open.
         queued: true
         bead: think-rbyl
       - key: n305-axis-variant-minimality
@@ -38984,9 +39000,12 @@ issues:
           centers is the claimed minimum needed to straighten all 36.
         source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
         not_registered: >-
-          Five exact blocking pairs establish the upper limit of 31 at the fixed centers
-          with the other orientations fixed. Its feasible witness and the bounded nine-center
-          proof, including 34 local exclusions and the hitting set, are separate checks.
+          The 31-turn witness and five exact blocking pairs establish maximum 31 at fixed
+          centers and side with the other directions fixed. Both exact routes also accept
+          the 36-turn variant with square 43 restored: nine moved centers suffice within
+          the 2e-11 coordinate limit. The 17 submitted conflict groups have minimum
+          hitting-set size nine (1,581 minimizers, 10,991 search nodes). A geometric
+          minimum still depends on the 34 unverified local geometric exclusions.
         queued: true
         bead: think-3n8h
       - key: n305-export-enclosure-identity

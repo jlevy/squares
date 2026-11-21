@@ -1,0 +1,62 @@
+{
+  "archive": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/source/n90-rational.zip",
+  "bytes": 39377,
+  "sha256": "c04a0a60ca91f15922f6077c878c50b654e759ee659c14d43096cadaae574afa",
+  "listing": [
+    {
+      "member": "check_vertices.py",
+      "bytes": 1169,
+      "compressed_bytes": 646
+    },
+    {
+      "member": "envelope.py",
+      "bytes": 2171,
+      "compressed_bytes": 1067
+    },
+    {
+      "member": "comparisons.csv",
+      "bytes": 8963,
+      "compressed_bytes": 2197
+    },
+    {
+      "member": "90/input.json.gz",
+      "bytes": 6080,
+      "compressed_bytes": 6085
+    },
+    {
+      "member": "90/candidate.json.gz",
+      "bytes": 26873,
+      "compressed_bytes": 26883
+    },
+    {
+      "member": "90/previous-comparisons.json",
+      "bytes": 4157,
+      "compressed_bytes": 1585
+    },
+    {
+      "member": "REPLAY.md",
+      "bytes": 158,
+      "compressed_bytes": 128
+    }
+  ],
+  "factual_member_matches": [
+    {
+      "member": "90/candidate.json.gz",
+      "equal": true
+    },
+    {
+      "member": "90/input.json.gz",
+      "equal": true
+    },
+    {
+      "member": "90/previous-comparisons.json",
+      "equal": true
+    },
+    {
+      "member": "comparisons.csv",
+      "equal": true
+    }
+  ],
+  "producer_programs_read": false,
+  "producer_programs_executed": false
+}

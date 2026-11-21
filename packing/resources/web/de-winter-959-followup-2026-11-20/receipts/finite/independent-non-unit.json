@@ -1,0 +1,37 @@
+{
+  "stage": "independent-non-unit",
+  "route": "independent",
+  "case": "non-unit",
+  "n": 2,
+  "witness_content_sha256": "cf023e848ca6bf781517cfbe099ffb6f90189816eb24b978267b8da7a1c8fff8",
+  "expected": "refuse-shape",
+  "expected_outcome_met": true,
+  "pairs_accounted": 1,
+  "result": {
+    "verification_passed": false,
+    "coordinate_provenance": "not-established",
+    "method": "exact-algebraic",
+    "field": "Q(alpha), alpha the root of a degree-5 polynomial in its stated interval",
+    "checker": "devtools.check_algebraic_witness_independent",
+    "n": 2,
+    "side_decimal": "1.388096037155557915809822588926e+01",
+    "pairs_tested": 1,
+    "pairs_separated_by_sweep": 0,
+    "touching_pairs": 0,
+    "minimum_containment_clearance": "-5.000000e-01",
+    "minimum_best_pair_gap": "5.000000e-01",
+    "root_bisections": 160,
+    "gcd_decisions": 0,
+    "seconds": 0.011,
+    "failures": [
+      "square 1: its first axis is not a unit vector",
+      "square 1: its second axis is not a unit vector",
+      "1 squares leave the container: 1"
+    ],
+    "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+  },
+  "report": null,
+  "wall_seconds": 0.011032375041395426,
+  "cpu_seconds": 0.010116999999999932,
+  "ru_maxrss_bytes": 93061120
+}
