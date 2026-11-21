@@ -4913,6 +4913,17 @@ issues:
       - result: fine-net-n29
         id: E-wand125-fine-net-lower-bounds-446-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-7063688317
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-18-1016
+        id: T-216
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
     notes: >-
@@ -33105,7 +33116,7 @@ issues:
       (kirilltym), is above it; the side-only leaderboard entry it quotes and states first,
       13.880960371556 (team Nevska, 7 November), 2.2e-12 below this side and the registry's
       s(70) + 5 at 12 places, is unpublished and states no packing, so it is context only.
-    read_through: '2026-11-20T20:41:05Z'
+    read_through: '2026-11-20T20:41:19Z'
     results:
     - key: n179-band-second
       claim: >-
@@ -35175,6 +35186,17 @@ issues:
       - result: n228-band-cut
         id: E-ono-984-review-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/984#issuecomment-7063687883
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-band-cut
+        id: T-301
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-301 is on main with its stage 4 review mapped and adopted as the house at 228, and the
       reply on main says what was retained and replayed, what the review found and that the
@@ -35995,7 +36017,7 @@ issues:
       confirmed, independently re-implemented, at V3/C3, S3, and the case adopted it as its
       house at 90 in the pass of 16 November, in place of T-303, since the pass of 15 November
       had already moved 90.
-    read_through: '2026-11-16T02:51:52Z'
+    read_through: '2026-11-21T07:00:54Z'
     results:
     - key: n90-local-search
       claim: >-
@@ -36009,9 +36031,21 @@ issues:
       - E-de-winter-997-certificate-report
       - E-de-winter-997-exact-feasibility
       - E-de-winter-997-review-exact-feasibility
+    - key: n90-rational-follow-up
+      claim: >-
+        s(90) <= 9.994038766583, the claimed upward 12-place print of the exact rational side in
+        90/candidate.json.gz of n90-rational.zip. The source reports a side about 2.69816e-11
+        below T-304 and claims feasibility only.
+      source: https://github.com/jlevy/squares/issues/997#issuecomment-7058975230
+      not_registered: >-
+        The follow-up certificate awaits retention, exact feasibility, comparison with T-304
+        under Option D, and source-credit review.
+      queued: true
+      bead: think-zsei
     beads:
     - think-32cl
     - think-uhav
+    - think-zsei
     answer_bead: think-32cl
     replies:
     - url: https://github.com/jlevy/squares/issues/997#issuecomment-6905945943
@@ -36134,6 +36168,18 @@ issues:
       names no bead. It says that nothing the author asked for is still queued, so the issue
       is closed with it, and that answers are welcome at any time. The issue was closed as
       completed at 02:51:58Z; it has no comment but the reply, and read_through moves to it.
+
+      Read issuecomment-7058975230 on 21 November 2026. The attachment is n90-rational.zip (file
+      35205206), mirrored at attachments/n90-rational.zip at
+      dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc; its manifest declares SHA-256
+      c04a0a60ca91f15922f6077c878c50b654e759ee659c14d43096cadaae574afa. The archive was not
+      downloaded or executed in this triage. The source maps the coordinates to Sargis
+      Khachatryan and jazivxt via Nevska; that attribution is pending assessment and does not
+      rewrite T-304's credit. The final contraction is described as a precision change relative
+      to its input, not a measured identity with T-304. The corrected 44/40 leaning-square
+      counts and the unresolved earlier tiny rotation and historical LP output remain review
+      answers. The queued import is think-zsei; the issue's earlier final reply and closed state
+      remain.
   - number: 1001
     title: "s(127), s(204), s(232), s(264), s(305): lowered upper bounds on Tomáš Kodaj's public packings: registration request"
     author: JonathanGun
@@ -37472,6 +37518,28 @@ issues:
       - result: n109-kaggle
       - result: n270-kaggle
       beads: [think-wvr8]
+    - url: https://github.com/jlevy/squares/issues/1012#issuecomment-7063454100
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n109-samanyu-canonical
+        id: T-335
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-numerical-report
+        status: recorded
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-exact-feasibility
+        status: confirmed
+      - result: n109-samanyu-canonical
+        id: E-samanyu-n109-canonical-independent-feasibility
+        status: confirmed
+      # The reply names this separate solver candidate, not further validation of T-335.
+      beads: [think-26s0]
     close_when: Each pointed-to packing is imported from an exact certificate that reached this repository
       (registered with credit to the notebooks' authors, or recorded as not registered with the reason),
       or the record says why it will not be, and the reply on main says so; nothing the author asked
@@ -38517,6 +38585,22 @@ issues:
         status: confirmed
       - result: n228-leaderboard-side-only
       - result: n228-later-algebraic-attachment
+    - url: https://github.com/jlevy/squares/issues/1038#issuecomment-7063454444
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-certificate-report
+        status: recorded
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-exact-feasibility
+        status: confirmed
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-review-exact-feasibility
+        status: confirmed
+      - result: n228-later-algebraic-attachment
+      beads: [think-d4b0]
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       case adopted where it is the smallest validated side, and the reply on main says what was
@@ -38710,7 +38794,7 @@ issues:
       8036307/625000. Triaged on 20 November 2026 in lane c15-lower (think-fv42): all 49 are
       above the record and every one is current but the issue's own 161. A later comment
       claims 155 counts from 18 to 313, an import of its own (think-4iec).
-    read_through: '2026-11-19T21:02:44Z'
+    read_through: '2026-11-20T02:02:32Z'
     results:
     - key: n50-n218-lower-bounds
       claim: >-
@@ -38829,10 +38913,63 @@ issues:
       De Winter reports s(20) > 99/20, raising the recorded lower endpoint by 3/80. The
       pinned proof at 3a5130340b08 uses Bentz's 22 marks and Mira Cult's exclusion kernel.
       Source retention, mathematical review and controlled replay are queued.
-    read_through: '2026-11-20T19:58:09Z'
-    results: []
+    read_through: '2026-11-21T06:59:02Z'
+    results:
+    - key: n20-lower-99-over-20
+      claim: >-
+        s(20) > 99/20 = 4.95 for unrestricted unit-square packing, the original issue-body claim
+        from lower_n20/ at JoostdeWinter/square-packing
+        3a5130340b0882e72e9d04ad2419b0437cae99aa.
+      source: body
+      not_registered: >-
+        The original pinned proof's mathematical review, complete controlled replay and
+        registration remain queued.
+      queued: true
+      bead: think-6ul3
+    - key: n20-lower-99951-over-20000
+      claim: >-
+        s(20) > 99951/20000 = 4.99755, a claimed exclusion of the closed board followed by
+        compactness, leaving a gap of 49/20000 = 0.00245 to the grid upper bound 5.
+      source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
+      not_registered: >-
+        The stronger attachment reuses earlier exclusions; source retention, the complete
+        dependency chain, mathematical review and controlled replay remain queued.
+      queued: true
+      bead: think-guls
+    - key: n20-equal-absolute-tilt
+      claim: >-
+        The minimum enclosing side for 20 unit squares is claimed to be 5 when every square has
+        the same absolute tilt, with its sign chosen independently; the argument is in
+        geometry/equal_magnitude.md of the attachment.
+      source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
+      not_registered: >-
+        The restricted equality is separate from unrestricted optimality and awaits retention
+        and review of its precise hypotheses.
+      queued: true
+      bead: think-guls
+    - key: n20-angle-diversity
+      claim: >-
+        Necessary angle-spread and near-axis conditions for a hypothetical packing of 20 unit
+        squares below side 5, stated in geometry/angle_diversity.md of the attachment.
+      source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
+      not_registered: >-
+        The comment gives a theorem pointer; its exact inequalities and hypotheses must be read
+        from the archive and reviewed before any claim is registered.
+      queued: true
+      bead: think-guls
+    - key: n20-one-axis-equal-magnitude
+      claim: >-
+        An exact-result pointer for one aligned square and nineteen equal-magnitude small tilts,
+        in geometry/one_axis_equal.md of the attachment.
+      source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
+      not_registered: >-
+        The comment does not specify the exact conclusion or angle domain; retain and read the
+        statement before assessing or registering it.
+      queued: true
+      bead: think-guls
     beads:
     - think-6ul3
+    - think-guls
     answer_bead: think-6ul3
     replies:
     - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7059935714
@@ -38841,6 +38978,19 @@ issues:
       kind: follow-up
       reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
+      35205175) is mirrored at attachments/n20-proof-499755.zip at
+      dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc; the manifest declares SHA-256
+      475d7ef50e21ce4a83cfb4c8415c9e9852d619beeade5c4c8745c2c963d6c867. The archive was not
+      downloaded or executed in this triage. The source reports a side-five screen of 53,361
+      ordered mask pairs in 6,787 symmetry classes, with 1,142 retained matchings and 89 refined
+      terminal exclusions; the endpoint recipe reuses 1,141 earlier exclusions and reruns one
+      changed matching. These are producer claims, not new project replay evidence. The 4.95
+      source and think-6ul3 remain distinct from this extension and its restricted claims on
+      think-guls. Unrestricted equality at 5 remains open; the existing owner reply acknowledges
+      only the original 4.95 claim.
+
   - number: 1060
     title: 'Raised lower bounds for 166 counts, including s(129) > 11.49685 and s(318) > 17.97459518711171'
     author: JoostdeWinter
