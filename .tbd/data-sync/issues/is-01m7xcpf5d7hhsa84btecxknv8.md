@@ -5,16 +5,18 @@ title: "Import JoostdeWinter: s(20) > 99/20 = 4.95, a raised lower bound by Bent
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+child_order_hints:
+  - is-01m7z5m4xj6exqr4bayhmw0tbp
 hold: null
 hold_until: null
 created_at: 2026-11-20T21:09:45.773Z
-updated_at: 2026-11-21T09:21:23.695Z
+updated_at: 2026-11-21T13:44:38.577Z
 started_at: 2026-11-20T22:43:14.476Z
 ---
 Issue jlevy/squares#1055 (Joost de Winter, 2026-11-20T19:58:09Z): s(20) > 99/20 = 4.95, against the case page's 393/80 = 4.9125 (Hosono) and the 4.912808 of his own #1039 and #1042, which the issue says this supersedes at 20.
