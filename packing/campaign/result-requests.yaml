@@ -38469,6 +38469,14 @@ issues:
         confirmation: C3
         status: confirmed
         position: current
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-exact-feasibility
+        status: confirmed
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-review-exact-feasibility
+        status: confirmed
+      - result: n228-leaderboard-side-only
+      - result: n228-later-algebraic-attachment
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       case adopted where it is the smallest validated side, and the reply on main says what was
