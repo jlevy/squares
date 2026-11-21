@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: s(20) > 99/20 = 4.95, a raised lower bound by Bent
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T21:09:45.773Z
-updated_at: 2026-11-20T22:46:47.436Z
+updated_at: 2026-11-21T01:18:59.540Z
 started_at: 2026-11-20T22:43:14.476Z
 ---
 Issue jlevy/squares#1055 (Joost de Winter, 2026-11-20T19:58:09Z): s(20) > 99/20 = 4.95, against the case page's 393/80 = 4.9125 (Hosono) and the 4.912808 of his own #1039 and #1042, which the issue says this supersedes at 20.
@@ -36,3 +36,5 @@ The issue got the `intake` label on 20 November (lane rec1120); no case label ex
 Pin JoostdeWinter/square-packing 3a5130340b0882e72e9d04ad2419b0437cae99aa, lower_n20/. The GitHub tree contains the proof, the two cover schedules, the exclusion tree, the producer replay and the receipt. The published receipt reports 67 vacancy classes, 75 terminal regions, a feasible 16-square control and verdict digest bd1877fc8a8348ed0f36a18f5827371f6ef0732828ac55dac4461aeb258f3048. These are source statements. The author reports two minutes on two cores, about four CPU-minutes for the producer replay. The independent review still needs pricing from a trial, with its own cover and case-reduction checks and an audit of the scope and premises of the shared pose-exclusion kernel at Mira-Cult/math 78bec6aacebf304d942a9225e16c2f18165778ff. Keep a producer rerun distinct from independent confirmation. No repository-maintained end-to-end checker for this exact combined argument was established during triage.
 
 The source is pinned and the issue already carries intake. Retention and the validation environment are pending. Draft acknowledgment for after the triage PR merges: Thank you for sending the strict bound at 20. We pinned lower_n20 at 3a51303 and will check the cover, vacancy classes and terminal exclusions, including the premises shared with #1050.
+
+21 November UTC triage: the #1055 source at 3a5130340b0882e72e9d04ad2419b0437cae99aa reports an improvement from the two lower lanes' 393/80 to a strict endpoint of 99/20, a gain of 3/80. Verified all eight listed SHA-256 entries in the nine-file lower_n20 packet. No producer or independent replay ran in this continuation. The proof uses Bentz's 22 marks and 20 Mira Cult replay files pinned at 78bec6aacebf304d942a9225e16c2f18165778ff. The pinned project tree lists no licence for that code, consistent with the independent #1050 review, whose own results are partial and do not decide the 20-square terminals. Record the separate basis for any public retention of the kernel. The producer driver accepts an offline --upstream directory. Before verified admission, review the covering reduction and closed cuts, predeclare controls, and replay all 75 terminals plus the feasible 16-square control. The pinned proof names 4.912808 as a private comparison, not the posted #1042 endpoint 4.91274373.
