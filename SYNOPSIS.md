@@ -1165,6 +1165,7 @@ case or experiment separately.
 | [De Winter’s Rescaled Measure for $s(109) \ge s(108) \ge 10.6300379408$ (#1018): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1018.md) | dated review record | record | retained | — |
 | [De Winter’s Certificates of s(268) and s(270), #1021 and #1022: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md) | dated review record | record | retained | — |
 | [De Winter’s Packing for $s(299) \le 17.793636991744$ (#1031): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1031.md) | dated review record | record | retained | — |
+| [The 259-Square Certificate in #1040: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md) | dated review record | record | retained | — |
 | [Mira Cult’s Computer-Assisted Proof of $s(18) = (7+\sqrt7)/2$ (#1050): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-20-mira-1050-n18.md) | dated review record | record | retained | — |
 | [Özden’s s(228) Certificate of #1038: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-20-ozden-1038.md) | dated review record | record | retained | — |
 | [de Winter’s Transcription of Kodaj’s s(109) Packing, #1012: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md) | dated review record | record | retained | — |

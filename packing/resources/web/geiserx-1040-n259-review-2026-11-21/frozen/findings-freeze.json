@@ -1,0 +1,61 @@
+{
+  "review_id": "n259-blind-20261121",
+  "frozen_at": "2026-11-21T16:59:25.864539+00:00",
+  "verdict": "finite feasibility accepted independently for both exact encodings",
+  "inputs_read": [
+    "source issue #1040 body",
+    "packing.json.gz",
+    "witness.yaml",
+    "author README lines 1-3 only"
+  ],
+  "not_read": [
+    "any project verdict",
+    "prior measurement files",
+    "any project or author checker implementation",
+    "nearby receipts"
+  ],
+  "scope_limits": [
+    "no optimality claim",
+    "no priority determination",
+    "no reconstruction of archive chain of custody",
+    "no assessment of floating-point antecedent"
+  ],
+  "accept_rule_satisfied": true,
+  "controls": {
+    "predeclared_cases": 16,
+    "outcomes": 28,
+    "all_passed": true
+  },
+  "coverage_per_encoding": {
+    "squares": 259,
+    "unordered_pairs": 33411
+  },
+  "minimum_pair_margin": {
+    "exact": "282508038733927372051132984302274638434836642830526476004950753192679220296401791110548295745030394986888527902529771322780107534191335635721890463847707204337285399890095184170737188803/227588384463724501284673832865850317904044231283906952372032974885460506432792053457526902500856873516723559892509630103304500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "decimal_approximation": "1.24131132350894014704164907350213363091875540163E-63",
+    "location": [
+      30,
+      31
+    ]
+  },
+  "minimum_wall_margin": {
+    "exact": "0",
+    "decimal_approximation": "0",
+    "location": [
+      67,
+      0
+    ]
+  },
+  "encodings_agree": {
+    "same_side": true,
+    "same_vertex_sets_in_row_order": 259
+  },
+  "artifact_sha256": {
+    "predeclared-controls.json": "5e0b0c38a55bdc95e3a742b03f1664cbdef572e81b7c913763163ce1a4143bdc",
+    "verify_n259.py": "3cf4a2479685fb6152d5ea0b8b4b62ffe5774781ae70253de0ae6bf8b79f9cb3",
+    "results.json": "0dd42a1313dd5224300cc74787efc83774f363ee36e318f4166df9459227b051",
+    "run.sh": "0e28cfe16ef1328c05a9f618243ebd152af4d90b54e2250203fe9e89f742c500",
+    "exit-status.json": "4943b006f44b3cac7eef5c18d604580352b0a8a6eff164991c7d52fdeacbacea"
+  },
+  "publication": "none; coordinator owns integration"
+}

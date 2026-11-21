@@ -1,0 +1,15 @@
+{
+  "scope": "Project-format integration rerun after the independent findings freeze.",
+  "program_sha256": "257d4b319863eaa5de6937b0eb0c5ad85dfb1ebd14d744d4a513e5326b4503b3",
+  "reviewed_program_sha256": "c346c3359e06b9818edcef63b60eddc323107ca8f981a3745c4f70a343a86e3a",
+  "frozen_program_sha256": "3cf4a2479685fb6152d5ea0b8b4b62ffe5774781ae70253de0ae6bf8b79f9cb3",
+  "recorded_results_sha256": "4ca41a2f10f8c94b5b9f2299d89037e4563b7f791687d9071243126b4aae122f",
+  "rerun_result_sha256": "9fbc89181d2c57f827a41bb53773d2601d54495a31bf351588c499b234da9ce6",
+  "same_results_except_elapsed_time_and_python_build": true,
+  "runtime_seconds": 9.94240300002275,
+  "pairs_per_route": [
+    33411,
+    33411
+  ],
+  "control_outcomes": 28
+}

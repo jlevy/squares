@@ -1,0 +1,431 @@
+from __future__ import annotations
+
+import argparse
+import copy
+import gzip
+import hashlib
+import json
+import math
+import os
+import re
+import signal
+import sys
+import time
+from dataclasses import dataclass
+from decimal import Decimal, localcontext
+from fractions import Fraction
+from pathlib import Path
+from typing import Any
+
+
+class Rejected(ValueError):
+    pass
+
+
+def need(condition: bool, reason: str) -> None:
+    if not condition:
+        raise Rejected(reason)
+
+
+def rational(value: Any) -> Fraction:
+    need(isinstance(value, str), 'scalar: expected rational string')
+    need(re.fullmatch(r'[+-]?\d+(?:/\d+)?', value) is not None,
+         'scalar: invalid rational syntax')
+    try:
+        return Fraction(value)
+    except (ValueError, ZeroDivisionError) as error:
+        raise Rejected(f'scalar: {error}') from error
+
+
+def unique_object(items: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in items:
+        need(key not in result, f'json: duplicate key {key}')
+        result[key] = value
+    return result
+
+
+def json_document(text: str) -> dict[str, Any]:
+    result = json.loads(text, object_pairs_hook=unique_object)
+    need(isinstance(result, dict), 'json: expected object')
+    need(set(result) == {'n', 'side', 'side_decimal', 'squares'}, 'json: unexpected keys')
+    need(type(result['n']) is int and result['n'] > 0, 'count: invalid n')
+    need(isinstance(result['squares'], list), 'json: squares must be a list')
+    need(isinstance(result['side_decimal'], str), 'json: side_decimal must be text')
+    return result
+
+
+def yaml_document(text: str) -> dict[str, Any]:
+    # This intentionally recognizes only the explicit subset used by this source.
+    # Every nonempty line is consumed; YAML aliases, tags, and unknown syntax fail.
+    lines = text.splitlines()
+    while lines and not lines[-1]:
+        lines.pop()
+    need(len(lines) >= 15, 'yaml: truncated header')
+    fixed = {
+        0: 'softschema:', 1: '  contract: packing.squares:Witness/v2', 2: 'witness:',
+        6: "  square_size: '1'", 7: '  representation: corners', 8: '  scalar:',
+        9: '    kind: rational', 10: '  coordinates:', 11: '    origin: lower-left',
+        12: '    axes: x-right-y-up', 13: '    angle_unit: not-applicable',
+        14: '  squares:',
+    }
+    for index, expected in fixed.items():
+        need(lines[index] == expected, f'yaml: unsupported header at line {index + 1}')
+    need(re.fullmatch(r'  id: [A-Za-z0-9_-]+', lines[3]) is not None, 'yaml: bad witness id')
+    count = re.fullmatch(r'  n: ([1-9]\d*)', lines[4])
+    side = re.fullmatch(r"  side: '([^']+)'", lines[5])
+    need(count is not None and side is not None, 'yaml: bad n or side')
+    if count is None or side is None:
+        raise Rejected('yaml: missing header')
+    need((len(lines) - 15) % 6 == 0, 'yaml: incomplete square or unrecognized line')
+    squares = []
+    seen = set()
+    for start in range(15, len(lines), 6):
+        identifier = re.fullmatch(r'    - id: ([A-Za-z0-9_-]+)', lines[start])
+        need(identifier is not None, f'yaml: bad square id at line {start + 1}')
+        if identifier is None:
+            raise Rejected('yaml: missing square id')
+        label = identifier.group(1)
+        need(label not in seen, 'yaml: duplicate square id')
+        seen.add(label)
+        need(lines[start + 1] == '      corners:', 'yaml: missing corners header')
+        corners = []
+        for offset in range(2, 6):
+            point = re.fullmatch(r"        - \['([^']+)', '([^']+)'\]", lines[start + offset])
+            need(point is not None, f'yaml: bad corner at line {start + offset + 1}')
+            if point is None:
+                raise Rejected('yaml: missing corner')
+            corners.append([point.group(1), point.group(2)])
+        squares.append({'id': label, 'corners': corners})
+    return {'n': int(count.group(1)), 'side': side.group(1), 'squares': squares}
+
+
+@dataclass(frozen=True)
+class Center:
+    x: int
+    y: int
+    q: int
+    c: int
+    s: int
+    d: int
+
+
+@dataclass(frozen=True)
+class Polygon:
+    points: tuple[tuple[int, int], ...]
+    scale: int
+
+
+def centers(document: dict[str, Any]) -> tuple[Fraction, list[Center]]:
+    side = rational(document['side'])
+    need(side > 0, 'container: side must be positive')
+    need(len(document['squares']) == document['n'], 'count: square count differs from n')
+    output = []
+    for row in document['squares']:
+        need(isinstance(row, dict) and set(row) == {'cx', 'cy', 't'}, 'json: invalid square')
+        x, y, t = (rational(row[key]) for key in ('cx', 'cy', 't'))
+        q = math.lcm(x.denominator, y.denominator)
+        a, b = t.numerator, t.denominator
+        c, s, d = b * b - a * a, 2 * a * b, b * b + a * a
+        need(d > 0 and c * c + s * s == d * d, 'shape: rotation identity failed')
+        output.append(Center(x.numerator * (q // x.denominator),
+                             y.numerator * (q // y.denominator), q, c, s, d))
+    return side, output
+
+
+def polygons(document: dict[str, Any]) -> tuple[Fraction, list[Polygon]]:
+    side = rational(document['side'])
+    need(side > 0, 'container: side must be positive')
+    need(len(document['squares']) == document['n'], 'count: square count differs from n')
+    output = []
+    for row in document['squares']:
+        need(len(row['corners']) == 4, 'shape: expected four corners')
+        values = [(rational(x), rational(y)) for x, y in row['corners']]
+        scale = math.lcm(*(value.denominator for point in values for value in point))
+        points = tuple((x.numerator * (scale // x.denominator),
+                        y.numerator * (scale // y.denominator)) for x, y in values)
+        edges = tuple((points[(i + 1) % 4][0] - points[i][0],
+                       points[(i + 1) % 4][1] - points[i][1]) for i in range(4))
+        need(all(ex * ex + ey * ey == scale * scale for ex, ey in edges),
+             'shape: edge is not unit length')
+        need(all(edges[i][0] * edges[(i + 1) % 4][0] +
+                 edges[i][1] * edges[(i + 1) % 4][1] == 0 for i in range(4)),
+             'shape: adjacent edges are not orthogonal')
+        need(points[0][0] + points[2][0] == points[1][0] + points[3][0] and
+             points[0][1] + points[2][1] == points[1][1] + points[3][1],
+             'shape: parallelogram closure failed')
+        need(edges[0][0] * edges[1][1] - edges[0][1] * edges[1][0] == scale * scale,
+             'shape: corners are not counterclockwise')
+        output.append(Polygon(points, scale))
+    return side, output
+
+
+def decimal_text(value: Fraction, precision: int = 48) -> str:
+    with localcontext() as context:
+        context.prec = precision
+        return str(Decimal(value.numerator) / Decimal(value.denominator))
+
+
+def margin_record(value: Fraction | None, location: Any) -> dict[str, Any] | None:
+    if value is None:
+        return None
+    return {'exact': str(value), 'decimal_approximation': decimal_text(value), 'location': location}
+
+
+def check_centers(document: dict[str, Any]) -> tuple[dict[str, Any], list[Center]]:
+    side, squares = centers(document)
+    minimum_wall: Fraction | None = None
+    wall_at = None
+    zero_walls = 0
+    for index, square in enumerate(squares):
+        halfwidth = Fraction(abs(square.c) + abs(square.s), 2 * square.d)
+        x, y = Fraction(square.x, square.q), Fraction(square.y, square.q)
+        margins = (x - halfwidth, y - halfwidth, side - x - halfwidth, side - y - halfwidth)
+        for wall, gap in enumerate(margins):
+            need(gap >= 0, f'containment: center square {index + 1}, wall {wall}')
+            zero_walls += gap == 0
+            if minimum_wall is None or gap < minimum_wall:
+                minimum_wall, wall_at = gap, [index + 1, wall]
+    minimum_pair: Fraction | None = None
+    pair_at = None
+    zero_pairs = 0
+    pair_count = 0
+    axis_wins = [0] * 4
+    for i, left in enumerate(squares):
+        for j in range(i + 1, len(squares)):
+            right = squares[j]
+            dx = right.x * left.q - left.x * right.q
+            dy = right.y * left.q - left.y * right.q
+            qq = left.q * right.q
+            crosssum = abs(left.c * right.c + left.s * right.s) + abs(left.c * right.s - left.s * right.c)
+            threshold = qq * (left.d * right.d + crosssum)
+            numerators = (
+                2 * abs(dx * left.c + dy * left.s) * right.d - threshold,
+                2 * abs(-dx * left.s + dy * left.c) * right.d - threshold,
+                2 * abs(dx * right.c + dy * right.s) * left.d - threshold,
+                2 * abs(-dx * right.s + dy * right.c) * left.d - threshold,
+            )
+            best = max(numerators)
+            need(best >= 0, f'overlap: center pair {i + 1},{j + 1}')
+            axis_wins[numerators.index(best)] += 1
+            zero_pairs += best == 0
+            pair_count += 1
+            gap = Fraction(best, 2 * qq * left.d * right.d)
+            if minimum_pair is None or gap < minimum_pair:
+                minimum_pair, pair_at = gap, [i + 1, j + 1]
+    need(pair_count == len(squares) * (len(squares) - 1) // 2, 'coverage: incomplete center pair scan')
+    return {
+        'accepted': True, 'squares': len(squares), 'unit_rotation_identities': len(squares),
+        'wall_inequalities': 4 * len(squares), 'unordered_pairs': pair_count,
+        'axis_inequalities': 4 * pair_count, 'zero_wall_margins': zero_walls,
+        'zero_pair_margins': zero_pairs, 'axis_winners': axis_wins,
+        'minimum_wall_margin': margin_record(minimum_wall, wall_at),
+        'minimum_pair_margin': margin_record(minimum_pair, pair_at),
+    }, squares
+
+
+def edge_gaps(owner: Polygon, other: Polygon) -> list[tuple[int, int]]:
+    # Positive margin puts all of the other square to the right of this CCW edge.
+    da, db = owner.scale, other.scale
+    denominator = da * da * db
+    result = []
+    for edge in range(4):
+        px, py = owner.points[edge]
+        nx, ny = owner.points[(edge + 1) % 4]
+        ex, ey = nx - px, ny - py
+        maximum = max(ex * (qy * da - py * db) - ey * (qx * da - px * db)
+                      for qx, qy in other.points)
+        result.append((-maximum, denominator))
+    return result
+
+
+def check_polygons(document: dict[str, Any]) -> tuple[dict[str, Any], list[Polygon]]:
+    side, squares = polygons(document)
+    minimum_wall: Fraction | None = None
+    wall_at = None
+    zero_walls = 0
+    for index, polygon in enumerate(squares):
+        for corner, (x, y) in enumerate(polygon.points):
+            for wall, numerator in enumerate((x * side.denominator, y * side.denominator,
+                                               side.numerator * polygon.scale - x * side.denominator,
+                                               side.numerator * polygon.scale - y * side.denominator)):
+                need(numerator >= 0, f'containment: corner square {index + 1}, corner {corner}, wall {wall}')
+                gap = Fraction(numerator, polygon.scale * side.denominator)
+                zero_walls += numerator == 0
+                if minimum_wall is None or gap < minimum_wall:
+                    minimum_wall, wall_at = gap, [index + 1, corner, wall]
+    minimum_pair: Fraction | None = None
+    pair_at = None
+    pair_count = 0
+    zero_pairs = 0
+    edge_wins = [0] * 8
+    for i, left in enumerate(squares):
+        for j in range(i + 1, len(squares)):
+            right = squares[j]
+            candidates = edge_gaps(left, right) + edge_gaps(right, left)
+            # Select by cross multiplication, independently of Fraction comparisons.
+            best_index = 0
+            for index in range(1, 8):
+                n, d = candidates[index]
+                bn, bd = candidates[best_index]
+                if n * bd > bn * d:
+                    best_index = index
+            numerator, denominator = candidates[best_index]
+            need(numerator >= 0, f'overlap: corner pair {i + 1},{j + 1}')
+            pair_count += 1
+            zero_pairs += numerator == 0
+            edge_wins[best_index] += 1
+            gap = Fraction(numerator, denominator)
+            if minimum_pair is None or gap < minimum_pair:
+                minimum_pair, pair_at = gap, [i + 1, j + 1]
+    need(pair_count == len(squares) * (len(squares) - 1) // 2, 'coverage: incomplete corner pair scan')
+    return {
+        'accepted': True, 'squares': len(squares), 'unit_edge_checks': 4 * len(squares),
+        'orthogonality_checks': 4 * len(squares), 'closure_checks': len(squares),
+        'positive_orientation_checks': len(squares), 'wall_inequalities': 16 * len(squares),
+        'unordered_pairs': pair_count, 'edge_halfplane_tests': 8 * pair_count,
+        'vertex_halfplane_inequalities': 32 * pair_count, 'zero_wall_margins': zero_walls,
+        'zero_pair_margins': zero_pairs, 'edge_winners': edge_wins,
+        'minimum_wall_margin': margin_record(minimum_wall, wall_at),
+        'minimum_pair_margin': margin_record(minimum_pair, pair_at),
+    }, squares
+
+
+def compare_encodings(jside: Fraction, yside: Fraction, center_rows: list[Center], polygon_rows: list[Polygon]) -> dict[str, Any]:
+    need(jside == yside and len(center_rows) == len(polygon_rows), 'agreement: side or count differs')
+    for index, (center, polygon) in enumerate(zip(center_rows, polygon_rows, strict=True)):
+        x, y = Fraction(center.x, center.q), Fraction(center.y, center.q)
+        c, s = Fraction(center.c, center.d), Fraction(center.s, center.d)
+        reconstructed = {(x + (u * c - v * s) / 2, y + (u * s + v * c) / 2)
+                         for u in (-1, 1) for v in (-1, 1)}
+        supplied = {(Fraction(px, polygon.scale), Fraction(py, polygon.scale)) for px, py in polygon.points}
+        need(reconstructed == supplied, f'agreement: different vertex set at square {index + 1}')
+    return {'same_side': True, 'same_vertex_sets_in_row_order': len(center_rows)}
+
+
+def synthetic(rows: list[tuple[Fraction, Fraction, Fraction]], side: Fraction) -> tuple[dict[str, Any], dict[str, Any]]:
+    center_doc = {'n': len(rows), 'side': str(side), 'side_decimal': decimal_text(side),
+                  'squares': [{'cx': str(x), 'cy': str(y), 't': str(t)} for x, y, t in rows]}
+    corner_rows = []
+    for index, (x, y, t) in enumerate(rows):
+        c, s = (1 - t * t) / (1 + t * t), 2 * t / (1 + t * t)
+        corners = [[str(x + (u * c - v * s) / 2), str(y + (u * s + v * c) / 2)]
+                   for u, v in ((-1, -1), (1, -1), (1, 1), (-1, 1))]
+        corner_rows.append({'id': f's{index + 1}', 'corners': corners})
+    return center_doc, {'n': len(rows), 'side': str(side), 'squares': corner_rows}
+
+
+def controls(jdoc: dict[str, Any], ydoc: dict[str, Any], ytext: str) -> list[dict[str, Any]]:
+    outcomes: list[dict[str, Any]] = []
+
+    def expect(name: str, method: str, operation: Any, rejection: str | None) -> None:
+        try:
+            operation()
+        except Rejected as error:
+            need(rejection is not None and str(error).startswith(rejection),
+                 f'control: {name}/{method} unexpected rejection: {error}')
+            outcomes.append({'id': name, 'method': method, 'expected': 'reject', 'actual': str(error), 'passed': True})
+        else:
+            need(rejection is None, f'control: {name}/{method} unexpectedly accepted')
+            outcomes.append({'id': name, 'method': method, 'expected': 'accept', 'actual': 'accepted', 'passed': True})
+
+    F = Fraction
+    e = F(1, 10**100)
+    cases = [
+        ('unit_wall_contact', [(F(1, 2), F(1, 2), F(0))], F(1), None),
+        ('edge_contact', [(F(1, 2), F(1, 2), F(0)), (F(3, 2), F(1, 2), F(0))], F(2), None),
+        ('vertex_contact', [(F(1, 2), F(1, 2), F(0)), (F(3, 2), F(3, 2), F(0))], F(2), None),
+        ('tiny_pair_overlap', [(F(1, 2), F(1, 2), F(0)), (F(3, 2)-e, F(1, 2), F(0))], F(2), 'overlap:'),
+        ('tiny_wall_escape', [(F(1, 2)-e, F(1, 2), F(0))], F(1), 'containment:'),
+        ('rotated_wall_contact', [(F(7, 10), F(7, 10), F(1, 2))], F(7, 5), None),
+        ('rotated_edge_contact', [(F(7, 10), F(7, 10), F(1, 2)), (F(13, 10), F(3, 2), F(1, 2))], F(11, 5), None),
+        ('rotated_tiny_overlap', [(F(7, 10), F(7, 10), F(1, 2)), (F(7, 10)+F(3, 5)*(1-e), F(7, 10)+F(4, 5)*(1-e), F(1, 2))], F(11, 5), 'overlap:'),
+    ]
+    for name, rows, side, rejection in cases:
+        jd, yd = synthetic(rows, side)
+        expect(name, 'centers', lambda jd=jd: check_centers(jd), rejection)
+        expect(name, 'corners', lambda yd=yd: check_polygons(yd), rejection)
+    _, unit = synthetic([(F(1, 2), F(1, 2), F(0))], F(1))
+    crossed = copy.deepcopy(unit)
+    points = crossed['squares'][0]['corners']
+    points[1], points[2] = points[2], points[1]
+    expect('self_crossing_corners', 'corners', lambda: check_polygons(crossed), 'shape:')
+    scaled = copy.deepcopy(unit)
+    scaled['squares'][0]['corners'] = [[str(F(x)*(1-e)), str(F(y)*(1-e))] for x, y in unit['squares'][0]['corners']]
+    expect('nonunit_corners', 'corners', lambda: check_polygons(scaled), 'shape:')
+    for method, original, check in (('centers', jdoc, check_centers), ('corners', ydoc, check_polygons)):
+        missing = copy.deepcopy(original)
+        missing['squares'].pop()
+        expect('source_missing_square', method, lambda d=missing, f=check: f(d), 'count:')
+        duplicate = copy.deepcopy(original)
+        if method == 'centers':
+            duplicate['squares'][1] = copy.deepcopy(duplicate['squares'][0])
+        else:
+            duplicate['squares'][1]['corners'] = copy.deepcopy(duplicate['squares'][0]['corners'])
+        expect('source_duplicate_square', method, lambda d=duplicate, f=check: f(d), 'overlap:')
+        small = copy.deepcopy(original)
+        small['side'] = '1'
+        expect('source_small_container', method, lambda d=small, f=check: f(d), 'containment:')
+    expect('invalid_rational', 'zero_denominator', lambda: rational('1/0'), 'scalar:')
+    expect('invalid_rational', 'nonfinite', lambda: rational('NaN'), 'scalar:')
+    expect('yaml_unrecognized_line', 'parser', lambda: yaml_document(ytext + '\nunknown: true\n'), 'yaml:')
+    expect('json_duplicate_key', 'parser', lambda: json_document('{"n":259,"n":258}'), 'json:')
+    return outcomes
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description='Independent exact feasibility check for issue #1040 source encodings.')
+    parser.add_argument('--source', type=Path, required=True)
+    parser.add_argument('--out', type=Path, required=True)
+    parser.add_argument('--startup-delay', type=float, default=0)
+    arguments = parser.parse_args()
+    signal.alarm(120)
+    time.sleep(arguments.startup_delay)
+    started = time.perf_counter()
+    jb = (arguments.source / 'packing.json.gz').read_bytes()
+    yb = (arguments.source / 'witness.yaml').read_bytes()
+    jd = json_document(gzip.decompress(jb).decode('utf-8'))
+    ytext = yb.decode('utf-8')
+    yd = yaml_document(ytext)
+    need(jd['n'] == 259 and yd['n'] == 259, 'count: source claim is not 259')
+    outcomes = controls(jd, yd, ytext)
+    print(f'Controls passed: {len(outcomes)} outcomes', flush=True)
+    first_start = time.perf_counter()
+    center_result, center_rows = check_centers(jd)
+    center_result['elapsed_seconds'] = time.perf_counter() - first_start
+    print(f'Center check: {center_result["unordered_pairs"]} pairs accepted in {center_result["elapsed_seconds"]:.3f}s', flush=True)
+    second_start = time.perf_counter()
+    corner_result, polygon_rows = check_polygons(yd)
+    corner_result['elapsed_seconds'] = time.perf_counter() - second_start
+    print(f'Corner check: {corner_result["unordered_pairs"]} pairs accepted in {corner_result["elapsed_seconds"]:.3f}s', flush=True)
+    agreement = compare_encodings(rational(jd['side']), rational(yd['side']), center_rows, polygon_rows)
+    need(center_result['minimum_pair_margin']['exact'] == corner_result['minimum_pair_margin']['exact'], 'agreement: pair margin differs')
+    need(center_result['minimum_wall_margin']['exact'] == corner_result['minimum_wall_margin']['exact'], 'agreement: wall margin differs')
+    side = rational(jd['side'])
+    result = {
+        'review_id': 'n259-blind-20261121', 'accepted_finite_feasibility': True,
+        'python': sys.version, 'source_issue': 'https://github.com/jlevy/squares/issues/1040',
+        'source_identity': {
+            'packing.json.gz': {'bytes': len(jb), 'sha256': hashlib.sha256(jb).hexdigest()},
+            'witness.yaml': {'bytes': len(yb), 'sha256': hashlib.sha256(yb).hexdigest()},
+        },
+        'side_exact': str(side), 'side_decimal_approximation': decimal_text(side, 140),
+        'upward_12_decimal_bound': '16.590016439230',
+        'upward_bound_valid': side <= Fraction('16.590016439230'),
+        'controls': outcomes, 'center_check': center_result, 'corner_check': corner_result,
+        'encoding_agreement': agreement, 'elapsed_seconds': time.perf_counter() - started,
+    }
+    need(result['upward_bound_valid'], 'rounding: proposed upper decimal is below exact side')
+    temporary = arguments.out.with_suffix('.tmp')
+    temporary.write_text(json.dumps(result, indent=2) + '\n')
+    os.replace(temporary, arguments.out)
+    print(f'PASS: finite feasibility; exact encodings agree; elapsed {result["elapsed_seconds"]:.3f}s', flush=True)
+    return 0
+
+
+if __name__ == '__main__':
+    try:
+        raise SystemExit(main())
+    except Rejected as error:
+        print(f'REJECTED: {error}', file=sys.stderr)
+        raise SystemExit(1) from error

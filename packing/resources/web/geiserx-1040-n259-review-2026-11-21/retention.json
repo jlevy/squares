@@ -1,0 +1,165 @@
+{
+  "purpose": "Identify byte-preserved execution evidence and explicitly excluded host-specific artifacts; no geometric decision.",
+  "copied_unchanged": [
+    {
+      "path": "verify_n259.py.txt",
+      "bytes": 21496,
+      "sha256": "c346c3359e06b9818edcef63b60eddc323107ca8f981a3745c4f70a343a86e3a"
+    },
+    {
+      "path": "predeclared-controls.json",
+      "bytes": 4289,
+      "sha256": "5e0b0c38a55bdc95e3a742b03f1664cbdef572e81b7c913763163ce1a4143bdc"
+    },
+    {
+      "path": "results.json",
+      "bytes": 8331,
+      "sha256": "4ca41a2f10f8c94b5b9f2299d89037e4563b7f791687d9071243126b4aae122f"
+    },
+    {
+      "path": "run.stdout",
+      "bytes": 183,
+      "sha256": "e35f92cb752c6835a1ad3db1f8b68669c620281f40c17ccbec2841c7343cca30"
+    },
+    {
+      "path": "run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "exit-status.json",
+      "bytes": 35,
+      "sha256": "4943b006f44b3cac7eef5c18d604580352b0a8a6eff164991c7d52fdeacbacea"
+    },
+    {
+      "path": "receipt-audit.json",
+      "bytes": 856,
+      "sha256": "50724822b001d280a64ba625c054761085847288f9cfd608c3dd6ad960446f15"
+    },
+    {
+      "path": "lint.stdout",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "frozen/verify_n259.py.txt",
+      "bytes": 21496,
+      "sha256": "3cf4a2479685fb6152d5ea0b8b4b62ffe5774781ae70253de0ae6bf8b79f9cb3"
+    },
+    {
+      "path": "frozen/predeclared-controls.json",
+      "bytes": 4289,
+      "sha256": "5e0b0c38a55bdc95e3a742b03f1664cbdef572e81b7c913763163ce1a4143bdc"
+    },
+    {
+      "path": "frozen/findings-freeze.json",
+      "bytes": 2224,
+      "sha256": "961c601e67ad1c40b3ba68522fc686655f43b77b5f5788423b5449da3ce8f125"
+    },
+    {
+      "path": "frozen/results.json",
+      "bytes": 8331,
+      "sha256": "0dd42a1313dd5224300cc74787efc83774f363ee36e318f4166df9459227b051"
+    },
+    {
+      "path": "frozen/run.stdout",
+      "bytes": 183,
+      "sha256": "bab7caab851da52a5d180c0feb8f44591455529805003203af42bb008dcc2fd6"
+    },
+    {
+      "path": "frozen/run.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "frozen/exit-status.json",
+      "bytes": 35,
+      "sha256": "4943b006f44b3cac7eef5c18d604580352b0a8a6eff164991c7d52fdeacbacea"
+    }
+  ],
+  "external_archive": {
+    "filename": "n259-blind-stage4-20261121.tar.gz",
+    "sha256": "9abaf2753bbb6f4e23b4e4bab9c4a4450f099b9b835529f2c17786cd97f29387",
+    "retention": "Coordinator external evidence archive; not a public relative link"
+  },
+  "retained_externally": [
+    {
+      "archive_member": "run.sh",
+      "bytes": 1099,
+      "sha256": "3691b7f5cb4d6c203632401f710ee0d51d19f6fb2e7213b124f7d2f24601f9f5"
+    },
+    {
+      "archive_member": "env.sh",
+      "bytes": 366,
+      "sha256": "b28e7795322c1e93b9bec0dc43a2d1932f9b7ee0eac11799628c44f61a19ac0a"
+    },
+    {
+      "archive_member": "guard.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_member": "guard.stderr",
+      "bytes": 1241,
+      "sha256": "1b2df386cf71c6ad1abb795e49996e97d34a8949b6b5d279798f5fd1bd865011"
+    },
+    {
+      "archive_member": "memory-observe-final.jsonl",
+      "bytes": 24956,
+      "sha256": "876a2257734b60640ac6530c349aa798fc64ad41c4428082b088a382092e2e29"
+    },
+    {
+      "archive_member": "workload.pid",
+      "bytes": 6,
+      "sha256": "ffc27310cfa3fd5482984434914ac7244ab55f06180587689bcad93d9ebdcde5"
+    },
+    {
+      "archive_member": "audit_packet.py",
+      "bytes": 3129,
+      "sha256": "be1c17df44e6447cbab8425f9fdd9bb2c934cf7f2be9a9b37325c6b1861c625e"
+    },
+    {
+      "archive_member": "audit.stdout",
+      "bytes": 856,
+      "sha256": "50724822b001d280a64ba625c054761085847288f9cfd608c3dd6ad960446f15"
+    },
+    {
+      "archive_member": "final-artifact-sha256.txt",
+      "bytes": 1009,
+      "sha256": "02661601208197725cb964a17f37b0cc5fae1290dbbec4dac9893d5694b76b7a"
+    },
+    {
+      "archive_member": "frozen/run.sh",
+      "bytes": 1093,
+      "sha256": "0e28cfe16ef1328c05a9f618243ebd152af4d90b54e2250203fe9e89f742c500"
+    },
+    {
+      "archive_member": "frozen/env.sh",
+      "bytes": 366,
+      "sha256": "b28e7795322c1e93b9bec0dc43a2d1932f9b7ee0eac11799628c44f61a19ac0a"
+    },
+    {
+      "archive_member": "frozen/guard.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_member": "frozen/guard.stderr",
+      "bytes": 1235,
+      "sha256": "d10f879d565ad9a3ce01d13e573efc47b77a91fe490fccbd13bf3a24813e144e"
+    },
+    {
+      "archive_member": "frozen/memory-observe.jsonl",
+      "bytes": 24974,
+      "sha256": "113de3eded315033b1cabdcca4a9413c00c4bbb2a686ca95241496b2cc8e02a0"
+    },
+    {
+      "archive_member": "frozen/workload.pid",
+      "bytes": 6,
+      "sha256": "72846934bc3552bfe1b7fd00b78f513ab4e4abd08683b36af388a3d7d0cddd60"
+    }
+  ],
+  "freeze_exception": "frozen/findings-freeze.json binds run.sh. That exact launcher is retained in the external archive as frozen/run.sh; it is excluded here because it contains host paths. The other four bound files are preserved beside the freeze.",
+  "raw_machine_logs_excluded": true,
+  "mathematics_rerun_for_public_overlay": false
+}

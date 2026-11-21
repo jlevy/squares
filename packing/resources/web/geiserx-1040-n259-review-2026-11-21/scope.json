@@ -1,0 +1,68 @@
+{
+  "review_id": "n259-blind-20261121",
+  "review_document": "docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md",
+  "kind": "adversarial",
+  "verdict": "accepted",
+  "scope": "Finite feasibility of the two exact rational 259-unit-square encodings attached to issue #1040, with identical rational side and vertex sets.",
+  "claim": "s(259) <= the exact rational side in both source files <= 16.590016439230",
+  "side_exact": "8295008219614994781143527184138157614865452268963473035780950495090016439229989562287054368276315229730904537926946071561900959/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "source": {
+    "issue_url": "https://github.com/jlevy/squares/issues/1040",
+    "attachment_url": "https://github.com/user-attachments/files/35066502/packing-259.zip",
+    "archive_members": {
+      "retained-data/upper/n259/packing.json.gz": {
+        "bytes": 30015,
+        "sha256": "bfd1b2890ad846efe030113f5e4535a79f786ed6c2f0371257dd342ddd48970c"
+      },
+      "retained-data/upper/n259/witness.yaml": {
+        "bytes": 765842,
+        "sha256": "3d4bd6326ed60439aa3fc933bfbfc4b5716e4de8d181ce837161b97fdc88a031"
+      }
+    },
+    "custody_limit": "Source members were supplied by the coordinator. This lane recorded their identity but did not reconstruct the attachment custody chain."
+  },
+  "independence": {
+    "relationship_to_generator": "independent-implementation",
+    "clean_room": true,
+    "read": [
+      "certificate-format",
+      "specification"
+    ],
+    "read_description": "Before the findings freeze: original certificate data, issue body, and author README lines 1-3 identifying the half-angle convention and asserting the bound. The geometric implication was re-derived in the review.",
+    "producer_components_shared": [],
+    "between_methods_shared": [
+      "rational scalar parser",
+      "CPython arbitrary-precision integers",
+      "Fraction",
+      "math.lcm",
+      "same authoring session",
+      "Euclidean separating-line implication"
+    ],
+    "written_by": "Codex (OpenAI), AI review, strongest tier (tbd-strong-max), maximum reasoning, separately prompted Stage 4 mathematical review lane",
+    "overlaps_producer": "unknown",
+    "separate_prompt": true,
+    "separate_code": true,
+    "coverage": {
+      "type": "full",
+      "encodings": 2,
+      "squares_per_encoding": 259,
+      "unordered_pairs_per_encoding": 33411
+    }
+  },
+  "controls": {
+    "predeclared_cases": 16,
+    "outcomes": 28,
+    "all_passed": true
+  },
+  "not_assessed": [
+    "optimality",
+    "priority",
+    "full Witness/v2 envelope conformance",
+    "identity with the earlier floating-point packing",
+    "novelty",
+    "contraction margin",
+    "significance score",
+    "producer AI-family overlap"
+  ],
+  "post_freeze": "Read reporting guidance and a different-count review; changed only import order in the deliverable verifier, then repeated the complete check. Original frozen bytes remain under frozen/. Public overlay preparation runs no geometry."
+}

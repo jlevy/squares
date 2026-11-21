@@ -1,0 +1,32 @@
+{
+  "review_id": "n259-blind-20261121",
+  "source_issue": "https://github.com/jlevy/squares/issues/1040",
+  "scope": "Finite feasibility of the exact 259-square certificates; no optimality, priority, or provenance-chain verdict",
+  "inputs_allowed_before_freeze": ["packing.json.gz", "witness.yaml", "source issue body", "first three lines of author README"],
+  "source_observations_before_declaration": "JSON schema with n=259, rational side, side_decimal, centers cx/cy and t; YAML corners header and sample coordinates; author README opening identifies t as rational half-angle tangent and asserts an upward-rounded side. No feasibility computations or external checker code read.",
+  "accept_rule": "Both independently parsed encodings must contain exactly 259 unit squares, all vertices inside the closed rational container, and each of all 33411 pairs must admit an exact separating line. All declared controls must produce expected outcomes. Exact vertex sets and side must agree across encodings for correspondence; no tolerances.",
+  "methods": {
+    "json": "Construct exact rational orthonormal axes from t=a/b using (b^2-a^2,2ab)/(b^2+a^2). Check containment by center support radius and all unordered pairs using the four unit support axes. Integer cross multiplication decides all inequalities.",
+    "yaml": "Parse the supplied corners directly with a strict, restricted grammar. Independently clear denominators per polygon. Check consecutive unit orthogonal edges, parallelogram closure and positive signed area. Check every corner against every wall. For each pair test whether some oriented edge of either square places all four corners of the other in its closed exterior half-plane, using integer cross products."
+  },
+  "shared_assumptions": ["CPython 3.14.7 integer arithmetic, Fraction parsing/normalization, and operating system/file reads", "Euclidean geometry and convex-hull/linear-projection implication", "The source files supplied by the coordinator are the original attachment members (chain of custody not independently checked)"],
+  "controls": [
+    {"id":"unit_wall_contact","input":"one axis-aligned unit square in [0,1]^2","expected":"accept both"},
+    {"id":"edge_contact","input":"two axis-aligned unit squares with centers (1/2,1/2),(3/2,1/2), side 2","expected":"accept both"},
+    {"id":"vertex_contact","input":"two axis-aligned unit squares with centers (1/2,1/2),(3/2,3/2), side 2","expected":"accept both"},
+    {"id":"tiny_pair_overlap","input":"edge_contact with second cx decreased by 10^-100","expected":"reject overlap both"},
+    {"id":"tiny_wall_escape","input":"unit_wall_contact with cx decreased by 10^-100","expected":"reject containment both"},
+    {"id":"rotated_wall_contact","input":"one t=1/2 square at (7/10,7/10), side 7/5","expected":"accept both"},
+    {"id":"rotated_edge_contact","input":"two t=1/2 squares at (7/10,7/10),(13/10,3/2), side 11/5","expected":"accept both"},
+    {"id":"rotated_tiny_overlap","input":"rotated_edge_contact with center difference multiplied by 1-10^-100","expected":"reject overlap both"},
+    {"id":"self_crossing_corners","input":"swap two adjacent supplied corners of unit square","expected":"reject shape YAML"},
+    {"id":"nonunit_corners","input":"scale unit square corners about origin by 1-10^-100","expected":"reject shape YAML"},
+    {"id":"source_missing_square","input":"remove last square but preserve n=259","expected":"reject count both"},
+    {"id":"source_duplicate_square","input":"replace second square geometry with first geometry, preserving count and distinct YAML ids","expected":"reject overlap both"},
+    {"id":"source_small_container","input":"set container side to 1","expected":"reject containment both"},
+    {"id":"invalid_rational","input":"zero denominator and non-finite scalar text","expected":"reject scalar parsing"},
+    {"id":"yaml_unrecognized_line","input":"append an unsupported nonempty source line","expected":"reject restricted YAML grammar"},
+    {"id":"json_duplicate_key","input":"duplicate a JSON mapping key","expected":"reject JSON grammar"}
+  ],
+  "workload": "One Python worker, sequential checks, no builds, observe-only memory_guard. Full pairwise scans have a 120-second workload ceiling; no approximate or broad-phase exclusions."
+}
