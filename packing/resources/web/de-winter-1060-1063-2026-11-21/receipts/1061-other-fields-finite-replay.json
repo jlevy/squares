@@ -1,0 +1,358 @@
+{
+  "format": "linked-algebraic-geometry-v1",
+  "archive_sha256": "3511b3144994bb32a52364c9728a807a7b0a8adec36345955173203c9845cc8b",
+  "scope": "Checked the six otherwise unlinked filed constructions by implementation-aware maintained replay.",
+  "runtime_seconds": 107.57091691700043,
+  "cases": [
+    {
+      "n": 175,
+      "sha256": "6ace303ff57e0b413b96199c148b05e312b516eaa4b17bac5b547314bbe34759",
+      "field_degree": 9,
+      "side_root": "root of [1, -78, 2642, -50884, 612504, -4765520, 23897398, -74268444, 129448767, -96246690] in (17205062564428968929727875707793316803687/1250000000000000000000000000000000000000, 17205062564428968929727875957793316803687/1250000000000000000000000000000000000000)",
+      "field_side_binds_to_isolated_root": true,
+      "direct_geometry": {
+        "verification_passed": true,
+        "coordinate_provenance": "verified",
+        "method": "exact-algebraic",
+        "field": "Q(alpha), alpha the root of a degree-9 polynomial in its stated interval",
+        "checker": "devtools.check_algebraic_witness_independent",
+        "n": 175,
+        "side_decimal": "1.376405005154317429116872517625e+01",
+        "pairs_tested": 553,
+        "pairs_separated_by_sweep": 14672,
+        "touching_pairs": 289,
+        "minimum_containment_clearance": "0.000000e+00",
+        "minimum_best_pair_gap": "0.000000e+00",
+        "root_bisections": 160,
+        "gcd_decisions": 0,
+        "seconds": 28.646,
+        "failures": [],
+        "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+      },
+      "controls": {
+        "duplicate": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-9 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.376405005154317429116872517625e+01",
+          "pairs_tested": 1,
+          "pairs_separated_by_sweep": 0,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "0.000000e+00",
+          "minimum_best_pair_gap": "-1.000000e+00",
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.267,
+          "failures": [
+            "1 overlapping pairs: squares 1 and 2 overlap"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        },
+        "outside": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-9 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.376405005154317429116872517625e+01",
+          "pairs_tested": 0,
+          "pairs_separated_by_sweep": 1,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "-2.500000e+00",
+          "minimum_best_pair_gap": null,
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.084,
+          "failures": [
+            "1 squares leave the container: 1"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        }
+      }
+    },
+    {
+      "n": 237,
+      "sha256": "e7516a74ebc4851e66780bf02a168dc554222c37f5afc863dd21027afecf1e1c",
+      "field_degree": 6,
+      "side_root": "root of [1, -84, 3089, -63304, 753683, -4877016, 13245020] in (31787611161138276194297737285296725508859/2000000000000000000000000000000000000000, 31787611161138276194297737685296725508859/2000000000000000000000000000000000000000)",
+      "field_side_binds_to_isolated_root": true,
+      "direct_geometry": {
+        "verification_passed": true,
+        "coordinate_provenance": "verified",
+        "method": "exact-algebraic",
+        "field": "Q(alpha), alpha the root of a degree-6 polynomial in its stated interval",
+        "checker": "devtools.check_algebraic_witness_independent",
+        "n": 237,
+        "side_decimal": "1.589380558056913805842214060249e+01",
+        "pairs_tested": 825,
+        "pairs_separated_by_sweep": 27141,
+        "touching_pairs": 192,
+        "minimum_containment_clearance": "0.000000e+00",
+        "minimum_best_pair_gap": "0.000000e+00",
+        "root_bisections": 160,
+        "gcd_decisions": 0,
+        "seconds": 5.431,
+        "failures": [],
+        "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+      },
+      "controls": {
+        "duplicate": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-6 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.589380558056913805842214060249e+01",
+          "pairs_tested": 1,
+          "pairs_separated_by_sweep": 0,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "6.089271e+00",
+          "minimum_best_pair_gap": "-1.000000e+00",
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.225,
+          "failures": [
+            "1 overlapping pairs: squares 1 and 2 overlap"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        },
+        "outside": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-6 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.589380558056913805842214060249e+01",
+          "pairs_tested": 0,
+          "pairs_separated_by_sweep": 1,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "-2.706271e+00",
+          "minimum_best_pair_gap": null,
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.166,
+          "failures": [
+            "1 squares leave the container: 1"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        }
+      }
+    },
+    {
+      "n": 262,
+      "sha256": "cb62178e58ea3361cc85f6b67b2a5f7cbe2f8ce8f2dfd74e811701e186d1583e",
+      "field_degree": 7,
+      "side_root": "root of [1, -85, 3020, -57736, 635572, -3978340, 12807616, -15013264] in (33396230037398788856170171175527516055283/2000000000000000000000000000000000000000, 33396230037398788856170171575527516055283/2000000000000000000000000000000000000000)",
+      "field_side_binds_to_isolated_root": true,
+      "direct_geometry": {
+        "verification_passed": true,
+        "coordinate_provenance": "verified",
+        "method": "exact-algebraic",
+        "field": "Q(alpha), alpha the root of a degree-7 polynomial in its stated interval",
+        "checker": "devtools.check_algebraic_witness_independent",
+        "n": 262,
+        "side_decimal": "1.669811501869939363018602307420e+01",
+        "pairs_tested": 868,
+        "pairs_separated_by_sweep": 33323,
+        "touching_pairs": 354,
+        "minimum_containment_clearance": "0.000000e+00",
+        "minimum_best_pair_gap": "0.000000e+00",
+        "root_bisections": 160,
+        "gcd_decisions": 0,
+        "seconds": 10.083,
+        "failures": [],
+        "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+      },
+      "controls": {
+        "duplicate": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-7 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.669811501869939363018602307420e+01",
+          "pairs_tested": 1,
+          "pairs_separated_by_sweep": 0,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "0.000000e+00",
+          "minimum_best_pair_gap": "-1.000000e+00",
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.056,
+          "failures": [
+            "1 overlapping pairs: squares 1 and 2 overlap"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        },
+        "outside": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-7 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.669811501869939363018602307420e+01",
+          "pairs_tested": 0,
+          "pairs_separated_by_sweep": 1,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "-2.500000e+00",
+          "minimum_best_pair_gap": null,
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.051,
+          "failures": [
+            "1 squares leave the container: 1"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        }
+      }
+    },
+    {
+      "n": 269,
+      "sha256": "e511cc0c60f999c425b7e878dafa3b4feac34d809af48aef5beec85ff7c864b5",
+      "field_degree": 7,
+      "side_root": "root of [4, -440, 20115, -494629, 7034873, -57374091, 244376672, -404961616] in (84448650367961369666811111975795384835683/5000000000000000000000000000000000000000, 84448650367961369666811112975795384835683/5000000000000000000000000000000000000000)",
+      "field_side_binds_to_isolated_root": true,
+      "direct_geometry": {
+        "verification_passed": true,
+        "coordinate_provenance": "verified",
+        "method": "exact-algebraic",
+        "field": "Q(alpha), alpha the root of a degree-7 polynomial in its stated interval",
+        "checker": "devtools.check_algebraic_witness_independent",
+        "n": 269,
+        "side_decimal": "1.688973007359227551660296740010e+01",
+        "pairs_tested": 940,
+        "pairs_separated_by_sweep": 35106,
+        "touching_pairs": 723,
+        "minimum_containment_clearance": "0.000000e+00",
+        "minimum_best_pair_gap": "0.000000e+00",
+        "root_bisections": 160,
+        "gcd_decisions": 0,
+        "seconds": 11.839,
+        "failures": [],
+        "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+      },
+      "controls": {
+        "duplicate": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-7 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.688973007359227551660296740010e+01",
+          "pairs_tested": 1,
+          "pairs_separated_by_sweep": 0,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "5.575194e-01",
+          "minimum_best_pair_gap": "-1.000000e+00",
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.166,
+          "failures": [
+            "1 overlapping pairs: squares 1 and 2 overlap"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        },
+        "outside": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-7 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.688973007359227551660296740010e+01",
+          "pairs_tested": 0,
+          "pairs_separated_by_sweep": 1,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "-2.706172e+00",
+          "minimum_best_pair_gap": null,
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.05,
+          "failures": [
+            "1 squares leave the container: 1"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        }
+      }
+    },
+    {
+      "n": 295,
+      "sha256": "b54f2414743b4ca2a856d253c478ac09bce94913002cef06f74b1054b1910008",
+      "field_degree": 12,
+      "side_root": "root of [1, -58, 695, 19000, -459273, -1400226, 107304541, -524526420, -8199780852, 77596779008, 113836091184, -3155959373376, 8412527841344] in (176980429293570370468160841920621809358591/10000000000000000000000000000000000000000, 176980429293570370468160843920621809358591/10000000000000000000000000000000000000000)",
+      "field_side_binds_to_isolated_root": true,
+      "direct_geometry": {
+        "verification_passed": true,
+        "coordinate_provenance": "verified",
+        "method": "exact-algebraic",
+        "field": "Q(alpha), alpha the root of a degree-12 polynomial in its stated interval",
+        "checker": "devtools.check_algebraic_witness_independent",
+        "n": 295,
+        "side_decimal": "1.769804292935703671219016541727e+01",
+        "pairs_tested": 984,
+        "pairs_separated_by_sweep": 42381,
+        "touching_pairs": 159,
+        "minimum_containment_clearance": "0.000000e+00",
+        "minimum_best_pair_gap": "0.000000e+00",
+        "root_bisections": 160,
+        "gcd_decisions": 0,
+        "seconds": 38.355,
+        "failures": [],
+        "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+      },
+      "controls": {
+        "duplicate": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-12 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.769804292935703671219016541727e+01",
+          "pairs_tested": 1,
+          "pairs_separated_by_sweep": 0,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "1.005956e+00",
+          "minimum_best_pair_gap": "-1.000000e+00",
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.432,
+          "failures": [
+            "1 overlapping pairs: squares 1 and 2 overlap"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        },
+        "outside": {
+          "verification_passed": false,
+          "coordinate_provenance": "not-established",
+          "method": "exact-algebraic",
+          "field": "Q(alpha), alpha the root of a degree-12 polynomial in its stated interval",
+          "checker": "devtools.check_algebraic_witness_independent",
+          "n": 2,
+          "side_decimal": "1.769804292935703671219016541727e+01",
+          "pairs_tested": 0,
+          "pairs_separated_by_sweep": 1,
+          "touching_pairs": 0,
+          "minimum_containment_clearance": "-2.680342e+00",
+          "minimum_best_pair_gap": null,
+          "root_bisections": 160,
+          "gcd_decisions": 0,
+          "seconds": 0.598,
+          "failures": [
+            "1 squares leave the container: 1"
+          ],
+          "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+        }
+      }
+    }
+  ]
+}

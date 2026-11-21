@@ -1,0 +1,13 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The intake ledger records the checked source, geometry and proof subsets for
+  issues 1055 and 1060 through 1063. The maintained comparator rendered the methods
+  survey twice from these records and once with the input from ebd90898951a,
+  the reviewed follow-up parent, using fresh output directories. All 43 rendered
+  files, including the PDF inputs, agree byte for byte. The paper stays v0.2.7.

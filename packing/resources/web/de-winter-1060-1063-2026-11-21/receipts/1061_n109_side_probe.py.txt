@@ -1,0 +1,263 @@
+"""Bounded independent exact side comparison; no project mathematical imports."""
+from __future__ import annotations
+import argparse
+import gzip
+import hashlib
+import io
+import json
+import math
+import resource
+import signal
+import sys
+import time
+import zipfile
+from datetime import UTC, datetime
+from fractions import Fraction as Q
+from pathlib import Path
+from typing import Any
+import yaml
+
+class StopRun(RuntimeError):
+    pass
+
+PROGRESS: dict[str, Any] = {'status':'started','geometry':'not-run-unpriced-degree-44'}
+START=0.0
+STAGE_END: float|None=None
+GUARD=Path('.')
+
+
+def health(_signum: int = 0, _frame: Any = None) -> None:
+    now=time.monotonic()
+    if now-START>=180:
+        raise StopRun('180-second wall cap')
+    if STAGE_END is not None and now>=STAGE_END:
+        raise StopRun('90-second side-polynomial identity sub-cap')
+    rss=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/(1024**3)
+    if rss>.30:
+        raise StopRun(f'worker maximum RSS {rss:.4f} GiB exceeds 0.30')
+    if not GUARD.is_file():
+        if now-START>8:raise StopRun('memory observer has no readable sample')
+        return
+    with GUARD.open('rb') as stream:
+        stream.seek(0,2);size=stream.tell();stream.seek(max(0,size-24000))
+        lines=stream.read().splitlines()
+    for line in reversed(lines):
+        try:sample=json.loads(line)
+        except (ValueError,UnicodeError):continue
+        if sample.get('record')!='sample':continue
+        pressure=sample['host']['pressure'];cost=sample['tree']['cost_gb']
+        PROGRESS['latest_memory']={'pressure':pressure,'tree_cost_gb':cost,'max_rss_gib':rss}
+        if pressure>=2 or cost>.30:
+            raise StopRun(f'memory threshold: pressure={pressure}, tree_cost_gb={cost}')
+        return
+    if now-START>8:raise StopRun('memory observer has no complete sample')
+
+
+def digest(path:Path)->str:
+    h=hashlib.sha256()
+    with path.open('rb') as stream:
+        while block:=stream.read(65536):h.update(block)
+    return h.hexdigest()
+
+
+def number(value:object)->Q:
+    if type(value) not in (str,int):raise ValueError('nonexact scalar encoding')
+    if len(str(value))>100000:raise ValueError('scalar exceeds declared character ceiling')
+    return Q(value)
+
+
+def value(poly:tuple[Q,...],x:Q)->Q:
+    out=Q(0)
+    for c in reversed(poly):out=out*x+c
+    return out
+
+
+def enclosure(poly:tuple[Q,...],lo:Q,hi:Q)->tuple[Q,Q]:
+    a=b=Q(0)
+    for c in reversed(poly):
+        products=(a*lo,a*hi,b*lo,b*hi)
+        a,b=min(products)+c,max(products)+c
+    return a,b
+
+
+def sign(x:Q)->int:return (x>0)-(x<0)
+
+
+def isolate(poly:tuple[Q,...],lo:Q,hi:Q)->dict[str,Any]:
+    if lo>=hi:raise ValueError('reversed or empty root interval')
+    left,right=value(poly,lo),value(poly,hi)
+    if sign(left)*sign(right)!=-1:raise ValueError('root endpoints do not have opposite signs')
+    derivative=tuple(i*c for i,c in enumerate(poly))[1:]
+    dlow,dhigh=enclosure(derivative,lo,hi)
+    if dlow<=0<=dhigh:raise ValueError('derivative interval does not prove a unique root')
+    return {'endpoint_signs':[sign(left),sign(right)],'derivative_interval':[str(dlow),str(dhigh)],'argument':'IVT and a derivative of strict constant sign on the complete source interval'}
+
+
+def narrow(poly:tuple[Q,...],lo:Q,hi:Q)->tuple[Q,Q]:
+    mid=(lo+hi)/2
+    s=sign(value(poly,mid))
+    if s==0:return mid,mid
+    return (lo,mid) if sign(value(poly,lo))!=s else (mid,hi)
+
+
+def trim(a:tuple[int,...])->tuple[int,...]:
+    while len(a)>1 and a[-1]==0:a=a[:-1]
+    return a
+
+
+def normalize(a:tuple[int,...],d:int)->tuple[tuple[int,...],int]:
+    common=math.gcd(d,*a)
+    a=tuple(x//common for x in a);d//=common
+    if d<0:a=tuple(-x for x in a);d=-d
+    return trim(a),d
+
+
+def rational_poly(a:tuple[Q,...])->tuple[tuple[int,...],int]:
+    d=math.lcm(*(x.denominator for x in a))
+    return normalize(tuple(x.numerator*(d//x.denominator) for x in a),d)
+
+
+def product_mod(left:tuple[tuple[int,...],int],right:tuple[tuple[int,...],int],f:tuple[int,...])->tuple[tuple[int,...],int]:
+    a,da=left;b,db=right
+    out=[0]*(len(a)+len(b)-1);den=da*db
+    for i,x in enumerate(a):
+        if x:
+            for j,y in enumerate(b):
+                if y:out[i+j]+=x*y
+    degree=len(f)-1;leading=f[-1]
+    for k in range(len(out)-1,degree-1,-1):
+        c=out[k]
+        if c==0:continue
+        q,r=divmod(c,leading)
+        if r:
+            out=[v*leading for v in out];den*=leading;q=c
+        for j,v in enumerate(f):out[k-degree+j]-=q*v
+    return normalize(tuple(out[:degree]),den)
+
+
+def add_constant(a:tuple[tuple[int,...],int],c:Q)->tuple[tuple[int,...],int]:
+    nums,den=a
+    out=[x*c.denominator for x in nums]
+    out[0]+=c.numerator*den
+    return normalize(tuple(out),den*c.denominator)
+
+
+def compose_mod(g:tuple[Q,...],side:tuple[Q,...],f:tuple[int,...])->tuple[tuple[int,...],int]:
+    out=((0,),1);s=rational_poly(side)
+    for index,c in enumerate(reversed(g)):
+        out=add_constant(product_mod(out,s,f),c)
+        PROGRESS['composition_steps']=index+1
+        health()
+    return out
+
+
+def controls()->list[dict[str,Any]]:
+    f=(Q(-2),Q(0),Q(1));isolate(f,Q(1),Q(2))
+    try:isolate(f,Q(2),Q(3))
+    except ValueError:pass
+    else:raise AssertionError('no-root control accepted')
+    lo,hi=Q(1),Q(2)
+    for _ in range(10):lo,hi=narrow(f,lo,hi)
+    assert hi<Q(3,2) and lo>Q(7,5)
+    assert compose_mod((Q(-1),Q(-2),Q(1)),(Q(1),Q(1)),(-2,0,1))[0]==(0,)
+    assert compose_mod((Q(0),Q(-2),Q(1)),(Q(1),Q(1)),(-2,0,1))[0]!=(0,)
+    return [{'name':name,'passed':True} for name in ['sqrt2-root','no-root-refusal','sqrt2-below-3/2','sqrt2-above-7/5','shifted-identity','identity-constant-mutation']]
+
+
+def decimal_outward(x:Q,places:int,upper:bool)->str:
+    scale=10**places
+    n=-((-x.numerator*scale)//x.denominator) if upper else (x.numerator*scale)//x.denominator
+    prefix='-' if n<0 else ''
+    integer,decimal=divmod(abs(n),scale)
+    return f'{prefix}{integer}.{decimal:0{places}d}'
+
+
+def run(args:argparse.Namespace)->None:
+    global STAGE_END
+    out=args.output
+    archive=args.archive
+    PROGRESS['archive']={'path':str(archive),'sha256':digest(archive),'provenance':'coordinator-supplied official attachment; not reacquired in this run'}
+    with zipfile.ZipFile(archive) as z:
+        info=z.getinfo('n109/n109.minpoly.json.gz')
+        if info.file_size>4000000:raise ValueError('gzip member exceeds 4,000,000-byte ceiling')
+        raw=z.read(info)
+    (out/'n109.minpoly.json.gz').write_bytes(raw)
+    with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:
+        text=stream.read(11000001)
+    if len(text)>11000000:raise ValueError('JSON exceeds 11,000,000-byte independent read ceiling')
+    data=json.loads(text)
+    PROGRESS['source']={'member':'n109/n109.minpoly.json.gz','compressed_bytes':len(raw),'decompressed_bytes':len(text),'gzip_sha256':hashlib.sha256(raw).hexdigest(),'json_sha256':hashlib.sha256(text).hexdigest(),'all_original_n_field_side_pose_bytes_retained':True}
+    del raw,text
+    if data['n']!=109 or len(data['squares'])!=109:raise ValueError('not exactly n109')
+    if not all(type(p) is dict and all(type(p.get(k)) is list for k in 'xyu') and type(p.get('m')) is int and 0<=p['m']<=3 for p in data['squares']):raise ValueError('unexpected original pose shape')
+    f=tuple(number(c) for c in data['field']['f']);side=tuple(number(c) for c in data['S']['in_K'])
+    lo,hi=map(number,data['field']['t_interval'])
+    if len(f)!=45 or f[-1]==0 or not 1<=len(side)<=44:raise ValueError('not the advertised degree44 field')
+    if any(x.denominator!=1 for x in f):raise ValueError('field polynomial not integral')
+    PROGRESS['shape']={'n':data['n'],'field_degree':len(f)-1,'side_degree_in_parameter':len(side)-1,'side_polynomial_degree':len(data['S']['poly'])-1,'pose_count':len(data['squares']),'side_keys':sorted(data['S']),'field_keys':sorted(data['field']),'max_side_coefficient_characters':max(len(str(c)) for c in data['S']['in_K'])}
+    (out/'field-side-original.json').write_text(json.dumps({'n':data['n'],'field':data['field'],'S':data['S']},indent=2)+'\n')
+    print(json.dumps({'stage':'read-original','source':PROGRESS['source'],'shape':PROGRESS['shape']}),flush=True)
+    PROGRESS['controls']=controls()
+    PROGRESS['field_root']=isolate(f,lo,hi)
+    PROGRESS['source_root_interval']=[str(lo),str(hi)]
+    print(json.dumps({'stage':'root-unique','controls':len(PROGRESS['controls'])}),flush=True)
+    old_bytes=args.witness.read_bytes()
+    old=yaml.safe_load(old_bytes)['witness']
+    if old['n']!=109 or old['id']!='W-known-best-n109' or old['scalar']['kind']!='rational':raise ValueError('not T335 rational n109 witness')
+    if old['source']['key']!='[Samanyu-dev square packing 2026-11-07]':raise ValueError('comparison witness source differs')
+    bound=number(old['side'])
+    PROGRESS['comparison_witness']={'result':'T-335','path':str(args.witness),'sha256':hashlib.sha256(old_bytes).hexdigest(),'source':old['source'],'side':str(bound),'feasibility':'prior retained verification is a premise; not replayed here'}
+    for iteration in range(2049):
+        a,b=enclosure(side,lo,hi)
+        if b<bound:order='strictly-below';break
+        if a>bound:order='strictly-above';break
+        if a==b==bound:order='equal';break
+        lo,hi=narrow(f,lo,hi)
+        health()
+    else:raise StopRun('side comparison remained undecided after 2048 bracket refinements')
+    PROGRESS['exact_side_comparison']={'status':'proved','relation_to_T335':order,'root_interval':[str(lo),str(hi)],'side_interval':[str(a),str(b)],'side_decimal_outward':[decimal_outward(a,60,False),decimal_outward(b,60,True)],'T335_minus_side_interval':[str(bound-b),str(bound-a)],'gain_decimal_outward':[decimal_outward(bound-b,60,False),decimal_outward(bound-a,60,True)],'refinements':iteration,'proof':'The unique source field root lies in the rational bracket; exact interval Horner encloses its original S.in_K value and is strictly ordered against the retained T335 fraction.'}
+    PROGRESS['status']='exact-side-comparison-proved'
+    (out/'side-comparison-before-composition.json').write_text(json.dumps(PROGRESS,indent=2)+'\n')
+    print(json.dumps({'stage':'exact-side-comparison','relation':order,'side':PROGRESS['exact_side_comparison']['side_decimal_outward'],'gain':PROGRESS['exact_side_comparison']['gain_decimal_outward']}),flush=True)
+    g=tuple(number(c) for c in data['S']['poly'])
+    fint=tuple(int(c) for c in f)
+    if fint[-1]<0:fint=tuple(-x for x in fint)
+    STAGE_END=time.monotonic()+90
+    remainder,den=compose_mod(g,side,fint)
+    STAGE_END=None
+    PROGRESS['advertised_side_polynomial']={'degree':len(g)-1,'composition_zero_mod_field':remainder==(0,),'remainder_degree':len(remainder)-1,'denominator_digits':len(str(den))}
+    if remainder!=(0,):raise ValueError('advertised side polynomial does not vanish at original S.in_K')
+    PROGRESS['status']='exact-side-and-advertised-polynomial-binding-proved'
+
+
+def main()->int:
+    global START,GUARD
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--archive',type=Path,required=True);p.add_argument('--witness',type=Path,required=True)
+    p.add_argument('--output',type=Path,required=True);p.add_argument('--gate',type=Path,required=True);p.add_argument('--guard-log',type=Path,required=True)
+    args=p.parse_args()
+    if args.output.exists():raise ValueError('output already exists')
+    args.output.mkdir(parents=True)
+    while not args.gate.exists():time.sleep(.05)
+    START=time.monotonic();GUARD=args.guard_log
+    sys.set_int_max_str_digits(100000)
+    signal.signal(signal.SIGALRM,health);signal.setitimer(signal.ITIMER_REAL,.5,.5)
+    exit_code=0
+    try:
+        health();run(args)
+    except StopRun as error:
+        PROGRESS['stopped_reason']=str(error)
+        PROGRESS['status']='partial' if 'exact_side_comparison' in PROGRESS else 'resource-or-time-stopped'
+        exit_code=124
+    except (ValueError,KeyError,AssertionError,OSError,OverflowError) as error:
+        PROGRESS['error']=str(error);PROGRESS['status']='side-proved-later-stage-failed' if 'exact_side_comparison' in PROGRESS else 'failed-or-unresolved';exit_code=1
+    finally:
+        signal.setitimer(signal.ITIMER_REAL,0)
+        PROGRESS['elapsed_seconds']=time.monotonic()-START
+        PROGRESS['finished_at']=datetime.now(UTC).isoformat()
+        PROGRESS['wall_cap_seconds']=180
+        (args.output/'receipt.json').write_text(json.dumps(PROGRESS,indent=2)+'\n')
+        print(json.dumps({'status':PROGRESS['status'],'elapsed':PROGRESS['elapsed_seconds'],'stop':PROGRESS.get('stopped_reason'),'error':PROGRESS.get('error'),'geometry':PROGRESS['geometry']}),flush=True)
+    return exit_code
+
+if __name__=='__main__':raise SystemExit(main())
