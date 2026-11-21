@@ -6085,7 +6085,8 @@ sources:
     venue: GitHub
     dated: '2026-11-18'
     lineage: builds-on-project
-    credit: 'Ozden'
+    credit: 'Ozden after jazivxt, Levy'
+    short_credit: 'Ozden after jazivxt et al.'
     note: >-
       kenaznia-doga/s228-upper-bound-1559604311 at 46ab8bf425f5cad886a8bc4023bfff904f43af99
       (2026-11-18T23:08:45Z), Doğa Özden's certificate for s(228) <= 15.5960431166317666 (the

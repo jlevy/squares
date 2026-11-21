@@ -85,7 +85,7 @@ def test_the_certificate_is_below_t301_by_the_gain() -> None:
 
 
 def test_the_record_keeps_geometry_and_finder_credit_distinct() -> None:
-    """The source reports geometric similarity. The record credits the certificate author."""
+    """Source and tool credit do not resolve the packing's finder or improver."""
     ledger = _json(LEDGER / "ledger.json")
     walked = {
         count["n"]: [(step["report"], step["verdict"]) for step in count["steps"]]
@@ -97,7 +97,7 @@ def test_the_record_keeps_geometry_and_finder_credit_distinct() -> None:
     lane = citations.load_case(228)["reported_upper_bound"]
     assert lane["found_by"] == lane["improved_by"] == []
     row = next(entry for entry in citations.load_record()["entries"] if entry["n"] == 228)
-    assert row["upper"]["text"] == "Ozden 2026, GitHub"
+    assert row["upper"]["text"] == "Ozden after jazivxt, Levy 2026, GitHub"
     assert row["upper"]["confirmed_by"] == ["T-334"]
 
 
