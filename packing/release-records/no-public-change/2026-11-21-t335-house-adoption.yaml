@@ -26,5 +26,7 @@ reason: >-
   at f1d8c74e01, at the same link revision and with Chrome on macOS for math
   preparation. All three renders agreed byte for byte across 55 files for the
   lower-bounds explainer and 43 files each for the optimality review, threshold
-  review and methods survey. The comparison covered the PDF inputs. The four
-  paper versions stay v0.4.35, v0.1.11, v0.1.4 and v0.2.7, respectively.
+  review and methods survey. After the n109 rigidity remeasurement updated the
+  composite figure record, the explainer’s 55 files again agreed byte for byte.
+  The comparison covered the PDF inputs. The four paper versions stay v0.4.35,
+  v0.1.11, v0.1.4 and v0.2.7, respectively.
