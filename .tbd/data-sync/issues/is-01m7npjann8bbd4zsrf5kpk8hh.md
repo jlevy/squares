@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 21
+version: 22
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-21T11:14:35.311Z
+updated_at: 2026-11-21T11:48:03.455Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -96,3 +96,5 @@ The committed portable fact (decompressed SHA-256 2938dddb54398f8f91afd4dce7e83a
 21 November follow-up: #1047 now points to 686aaf528407cf8dd6b51981196cb52782997356 after the six hosted behavioral fixes, updated STATUS and correct pin. Independently approved exact head in review 6004669659. The final six reruns, Ruff and 55 guarded records checks passed, and the survey comparison remained byte-identical against new main 1fd323589a. Exact hosted Pages and primary mergeability are green; packing gate still running. T-335 and its proof remain provisional until merge, and both strong generators are still owed.
 
 2026-11-21T11:05Z: #1047 merged at f54452c1d1, Pages 44896268723 verified 6,582 live checks, and #1012 was closed with final reply issuecomment-7061659368 after verifying the live T-335 page. T-335 is V3/C3. The receipt and house adoption are separate follow-ups. Both strong drawing generators are required for the house.
+
+2026-11-21T11:47Z: #1012 closure receipt merged in #1067 at 4685824045. Local adoption branch codex/intake-n109-adoption-20261121 exact head 88d1219c2c. Both strong generator families ran. Grid-slack supplied no view at 0.5°, 1° or 5°; Evan Daniel’s same-side attempt refused, and its solved-side candidate is held at row 3 under think-26s0. The exact axis view settles T-335. The n109 witness-scoped translation screen and atlas composite were remeasured; proof evidence for T-101 remains in the prior-state archive. Custody passed 78 houses, 260 inputs and 104 refused mutations. Four affected papers were byte-identical, including an explainer repeat after the rigidity correction. Exact guarded pre-push checks are running.
