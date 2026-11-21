@@ -68008,11 +68008,12 @@ evidence:
         system: Claude (Anthropic)
         setting: The project's maintained verification routes
       overlaps_producer:
-        extent: system-family
+        extent: unknown
         separate_prompt: true
         separate_code: true
         note: The maintained project routes predate this submission and read the mathematical geometry
-          rather than the author's checker.
+          rather than the author's checker. The evidence does not establish authorship
+          overlap between the maintained routes and the producer.
       coverage:
         extent: full
         unit: The original certificate and every square, wall and pair in both maintained routes.
