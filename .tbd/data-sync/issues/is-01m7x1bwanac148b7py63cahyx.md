@@ -5,7 +5,7 @@ title: "Stage 4 blind review R1 of #1041/#1042's integer octagon kernels (gram.c
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: codex-rr1-01a1fb
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:51:44.456Z
-updated_at: 2026-11-21T08:30:45.314Z
+updated_at: 2026-11-21T08:38:25.311Z
 started_at: 2026-11-20T17:52:35.760Z
 ---
 
@@ -29,3 +29,5 @@ started_at: 2026-11-20T17:52:35.760Z
 - about 20:40Z the lane's first agent was cut off by a usage limit (machine restarted 20:53Z); the whole-certificate sample, on its first certificate, left no receipt. Search (no capture below 1, least 1.00058), tier1 (154 bins of all 77, all DECIDED) and controls A1-A4 (24 of 36 as planned, none an unsound acceptance) were complete in the working tree.
 - 21:04Z resumed by a second agent (rR1b). Receipts committed f044b3378b; amendments A2-A4 (resumable sample driver, 30-minute cap per certificate, own sessions) 8b3aa53634, 45c3f685e4.
 - 21:20:28Z findings frozen (frozen/findings-frozen-digests.txt, frozen/review-2026-11-20-de-winter-lower-r1-octagon.frozen.md), commit cf1ee8f713, pushed, before any source program was opened. Sample restarted 21:18:33Z, running.
+
+21 November guarded continuation on mounted spud-ext2. Scope and all 124 findings entries verified. Recomputed the frozen sample order from all 77 pinned labels. First label 1042/n136 has 389 exact bins, 3/279/107 by partition, with zero gaps. Seven source inputs are pinned and staged. No sample was launched (0 sample CPU): the Mac has neither the admitted Linux/GCC 13.3.0 regime nor a configured VM, and the A4 attempt's stop time and CPU charge are still missing. Launch and checkpoint rules are retained in the task's r1-resume/continuation-readiness.txt and admission-verification.json. Keep the original sample open.

@@ -5,7 +5,7 @@ title: "Import #1052: de Winter's s(305) <= 17.945755838742 (refines T-309, Koda
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:56:46.484Z
-updated_at: 2026-11-21T02:31:17.607Z
+updated_at: 2026-11-21T08:38:25.988Z
 started_at: 2026-11-20T21:05:08.431Z
 ---
 
@@ -33,3 +33,5 @@ started_at: 2026-11-20T21:05:08.431Z
 The prepared packet is now in the reused checkout on codex/intake-305-20261121 at packing/resources/web/de-winter-n305-2026-11-20/. Acquisition and claims passed. The completed maintained receipt f709941eec2e5bae1bd245df6fd59d36197d097242eddb884806006a3fdd7c82 records the accepted positive certificate and both planned refusals through two routes, 278,160 pair decisions and 111.304106 CPU seconds. The exact receipt recheck passed and the sharp controls are running under the same one-worker memory guard. The independent source comparison confirms the receipt consumes precisely #1057's approved JSON geometry and #1057 already binds the T-309 Option D measurements. Registration and adoption remain pending.
 
 Durable packet and maintained receipt checkpoint e33458e5a2af4bbd6030fdfee22b77eeca598f81 on codex/intake-305-20261121. Staged blob-budget check passed. This commit precedes the in-progress sharp-control output and the register update.
+
+Completed independent receipt replay and all 11 maintained sharp controls. The full proof packet and its controls are committed locally on codex/intake-305-20261121 at 2f24aa1f997f197c705b01b7df205434d6e45346, integrated with main 9b21535f3d. Independently verified that the original JSON and YAML archive digests match #1057 and the maintained positive input gives all 305 poses at the exact same side. The author received the Stage 4 update at issuecomment-7059935496. Registration and house work remain open.
