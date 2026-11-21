@@ -38421,7 +38421,7 @@ issues:
       Özden for this certificate. This packing's finder and publication order remain unresolved.
       The driver's KKT solve 9.66e-14 below it stays a candidate (think-4z8z), and the later
       related de Winter attachment awaits independent comparison in think-d4b0.
-    read_through: '2026-11-18T23:09:08Z'
+    read_through: '2026-11-20T17:53:48Z'
     results:
     - key: n228-kaggle-certificate
       claim: >-
@@ -38444,11 +38444,39 @@ issues:
         A side-only entry that states no packing, so it is no report: context only, as #984's
         and #1005's ledgers treated their quoted leaderboard sides.
       queued: false
+    - key: n228-later-algebraic-attachment
+      claim: >-
+        De Winter attached a separate exact algebraic archive for n = 228.
+        Its comparison with T-334 awaits review.
+      source: https://github.com/jlevy/squares/issues/1038#issuecomment-7046716722
+      not_registered: The later attachment is queued for a separate comparison.
+      queued: true
+      bead: think-d4b0
     beads:
     - think-91fu
     - think-3ape
+    - think-d4b0
     answer_bead: think-91fu
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1038#issuecomment-7059934377
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-kaggle-certificate
+        id: T-334
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-exact-feasibility
+        status: confirmed
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-review-exact-feasibility
+        status: confirmed
+      - result: n228-leaderboard-side-only
+      - result: n228-later-algebraic-attachment
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       case adopted where it is the smallest validated side, and the reply on main says what was
@@ -38514,7 +38542,12 @@ issues:
     beads:
     - think-fv42
     answer_bead: think-fv42
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1041#issuecomment-7059934656
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1042
     title: 'Raised lower bounds for 48 square counts between 50 and 218, including s(136) ≥ 11.868'
@@ -38531,7 +38564,12 @@ issues:
     beads:
     - think-fv42
     answer_bead: think-fv42
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1042#issuecomment-7059934954
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1050
     title: 's(18) = (7+√7)/2: Mira Cult''s computer-assisted optimality proof (pointer, to import and review)'
@@ -38548,7 +38586,12 @@ issues:
     beads:
     - think-8x11
     answer_bead: think-8x11
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1050#issuecomment-7059935258
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1052
     title: 'Lowered upper bound for n = 305 (side 17.945755838742)'
@@ -38566,7 +38609,12 @@ issues:
     beads:
     - think-kzwl
     answer_bead: think-kzwl
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7059935496
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1055
     title: 'Raised lower bound for n = 20: s(20) > 99/20 = 4.95'
@@ -38584,5 +38632,10 @@ issues:
     beads:
     - think-6ul3
     answer_bead: think-6ul3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7059935714
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
