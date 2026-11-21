@@ -1,0 +1,13 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  The 21 November intake adds pending request records for #1060, #1061, #1062 and #1063,
+  with source archive digests and ownership. It routes the open #1038 reply to the bead for its
+  later attachment. Against main 552741cee2b8, devtools.compare_paper_renders produced 43
+  byte-identical methods-survey files across two candidate renders and one baseline render.
+  The current methods survey version remains v0.2.7.
