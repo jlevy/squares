@@ -420,15 +420,15 @@ def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None
         ]
 
 
-#: The exact algebraic houses adopted on 23 October 2026 (think-ot5c), each drawn
-#: unregularized while its regularization was owed to think-mbdw (review A4 of #756), and
-#: drawn by grid-slack's version 2 in its own number field since 26 October 2026.
-EXACT_HOUSES = (102, 123, 153, 207, 258, 259, 302)
+#: The still-current exact algebraic houses from the 23 October 2026 pass, drawn
+#: by grid-slack's version 2 in their number fields since 26 October (think-mbdw).
+#: T-337 replaced the algebraic house at 259 with a rational one on 21 November.
+EXACT_HOUSES = (102, 123, 153, 207, 258, 302)
 
 
 def test_the_exact_algebraic_houses_are_regularized_and_nothing_is_owed() -> None:
     # In the owner's words of 23 October 2026, a drawing is regularized or it is not. The
-    # seven exact houses were `regularization-owed` until grid-slack's version 2 drew each
+    # remaining exact houses owed regularization until grid-slack's version 2 drew each
     # in its own number field (think-mbdw): now each is regularized, drawn from that view,
     # with no `SETTLED` entry, and no count owes a regularization.
     record = _record()
@@ -439,6 +439,8 @@ def test_the_exact_algebraic_houses_are_regularized_and_nothing_is_owed() -> Non
         assert rows[n]["drawn"] == defaults.VIEW, n
         assert rows[n]["generator"] == "regularize_grid_slack/2", n
         assert n not in defaults.SETTLED, n
+    assert rows[259]["state"] == defaults.DECIDED
+    assert defaults.SETTLED[259].state == defaults.DECIDED
     totals = record["totals"]["states"]
     assert totals[defaults.OWED] == 0
     _found, listed = defaults.state_problems()
