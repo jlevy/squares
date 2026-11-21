@@ -23,7 +23,7 @@ outputs:
 reason: >-
   T-336 records de Winter’s n305 certificate, and T-309 is the current house.
   The maintained comparison rendered each paper twice on this tree and once
-  using the seven baseline inputs at 63d8084114, at a fixed link revision and
+  using the seven baseline inputs at dbd3337c05, at a fixed link revision and
   with Chrome on macOS. The optimality review, threshold review and methods
   survey each produced 43 byte-identical files. The explainer produced 55
   deterministic files. Its Markdown and HTML matched the baseline byte for byte
