@@ -23,4 +23,5 @@ reason: >-
   project rendered each paper twice from these inputs and once from main at
   a18c6355b3. All three renders matched byte for byte across 55 files for the
   lower-bounds explainer and 43 files each for the optimality review, threshold
-  review and methods survey. The comparison includes PDF inputs.
+  review and methods survey. The methods survey matched again across 43 files
+  after recording the two adoption replies. Both comparisons include PDF inputs.

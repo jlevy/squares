@@ -36413,6 +36413,17 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/1001#issuecomment-7065384936
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-kodaj-improved
+        id: T-309
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-305 to T-309 are on main with the stage 4 review mapped and each adopted as its case's
       house, and the reply on main says what was retained, replayed and reviewed and that the
@@ -39007,6 +39018,18 @@ issues:
       - result: n305-rational-certificate
         id: E-de-winter-1052-review-exact-feasibility
         status: confirmed
+      beads: [think-kzwl, think-rbyl]
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7065384484
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-rational-certificate
+        id: T-336
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
       beads: [think-kzwl, think-rbyl]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
