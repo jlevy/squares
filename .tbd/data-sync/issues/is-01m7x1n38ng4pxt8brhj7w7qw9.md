@@ -5,15 +5,15 @@ title: "Import #1052: de Winter's s(305) <= 17.945755838742 (refines T-309, Koda
 kind: task
 status: in_progress
 priority: 1
-version: 4
-delegate: i1052
+version: 5
+delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:56:46.484Z
-updated_at: 2026-11-20T21:08:10.361Z
+updated_at: 2026-11-21T00:27:50.735Z
 started_at: 2026-11-20T21:05:08.431Z
 ---
 
