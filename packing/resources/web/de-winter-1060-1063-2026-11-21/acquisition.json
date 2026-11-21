@@ -1,0 +1,357 @@
+{
+  "attachments": {
+    "lower-bounds-A.zip": {
+      "issue": "https://github.com/jlevy/squares/issues/1060",
+      "url": "https://github.com/user-attachments/files/35205191/lower-bounds-A.zip",
+      "bytes": 24406568,
+      "sha256": "efc7a02b00b4231145c971295e94fbaec6820c18d00700b45dcc7da6b9dbf8bd",
+      "member_count": 90
+    },
+    "lower-bounds-B.zip": {
+      "issue": "https://github.com/jlevy/squares/issues/1060",
+      "url": "https://github.com/user-attachments/files/35205190/lower-bounds-B.zip",
+      "bytes": 20941393,
+      "sha256": "fbe704a02d7834ddbb93c2e71bb231824e2f40a2b256a241e219be4cd1cd5a7a",
+      "member_count": 1
+    },
+    "lower-bounds-C.zip": {
+      "issue": "https://github.com/jlevy/squares/issues/1060",
+      "url": "https://github.com/user-attachments/files/35205192/lower-bounds-C.zip",
+      "bytes": 8422901,
+      "sha256": "a671a2cba6152d3c38efef350a2b1abea3dab6ba7eebdb35b56273c9021dea4d",
+      "member_count": 267
+    },
+    "lower-bounds-D.zip": {
+      "issue": "https://github.com/jlevy/squares/issues/1060",
+      "url": "https://github.com/user-attachments/files/35205189/lower-bounds-D.zip",
+      "bytes": 4055901,
+      "sha256": "1e1fd7ec9a42342f895434891e2b1a70be7e7bdffe7d612fb20e49a5e05aaf83",
+      "member_count": 239
+    },
+    "algebraic-12.zip": {
+      "issue": "https://github.com/jlevy/squares/issues/1061",
+      "url": "https://github.com/user-attachments/files/35205196/algebraic-12.zip",
+      "bytes": 4231049,
+      "sha256": "3511b3144994bb32a52364c9728a807a7b0a8adec36345955173203c9845cc8b",
+      "member_count": 38
+    },
+    "n232-rational.zip": {
+      "issue": "https://github.com/jlevy/squares/issues/1062",
+      "url": "https://github.com/user-attachments/files/35205219/n232-rational.zip",
+      "bytes": 179276,
+      "sha256": "752b5efc0aaedfab63605b8c2f3112610a41164bfc31d843b629752cda4088c3",
+      "member_count": 7
+    },
+    "rational-enclosures.zip": {
+      "issue": "https://github.com/jlevy/squares/issues/1063",
+      "url": "https://github.com/user-attachments/files/35205234/rational-enclosures.zip",
+      "bytes": 1840009,
+      "sha256": "872959c5a48a2fa785184030aefaa975c0b3fad2a5632c17db5f012e42d75390",
+      "member_count": 41
+    }
+  },
+  "facts": [
+    {
+      "archive": "lower-bounds-A.zip",
+      "archive_member": "claims-166.csv",
+      "retained": "lower/A/claims-166.csv.gz",
+      "source_stored_bytes": 26111,
+      "source_stored_sha256": "b4b809ce60de7af41c9648822fa2a7fe2da1c87409578d49b1ea76443a72028d"
+    },
+    {
+      "archive": "lower-bounds-C.zip",
+      "archive_member": "wall-bounds/claims-166-updated.csv",
+      "retained": "lower/C/claims-166-updated.csv.gz",
+      "source_stored_bytes": 26111,
+      "source_stored_sha256": "b4b809ce60de7af41c9648822fa2a7fe2da1c87409578d49b1ea76443a72028d"
+    },
+    {
+      "archive": "lower-bounds-D.zip",
+      "archive_member": "claims-final.csv",
+      "retained": "lower/D/claims-final.csv.gz",
+      "source_stored_bytes": 17258,
+      "source_stored_sha256": "81e11c944fd64f80fb59314f75c2969a5bf4cba433e74fc94995dc8b7bc3ca42"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n109/n109.minpoly.json.gz",
+      "retained": "algebraic/n109/n109.minpoly.json.gz",
+      "source_stored_bytes": 3928389,
+      "source_stored_sha256": "fd89b48c5d1f34a5a795262c1b03d3dd4d2893d21ef6bd56edb132aef6835434"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n129/n129.minpoly.json.gz",
+      "retained": "algebraic/n129/n129.minpoly.json.gz",
+      "source_stored_bytes": 22486,
+      "source_stored_sha256": "0fc41cc2193245aa7be8fb1c2e05babcfc3bb1036448f19de63d43f018dc2513"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n172/n172.minpoly.json.gz",
+      "retained": "algebraic/n172/n172.minpoly.json.gz",
+      "source_stored_bytes": 9843,
+      "source_stored_sha256": "a2482b4955b364382867903ed04f7a4ccd6aaea4af076459676bf18a8fbde651"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n175/n175.minpoly.json.gz",
+      "retained": "algebraic/n175/n175.minpoly.json.gz",
+      "source_stored_bytes": 135665,
+      "source_stored_sha256": "6ace303ff57e0b413b96199c148b05e312b516eaa4b17bac5b547314bbe34759"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n199/n199.minpoly.json.gz",
+      "retained": "algebraic/n199/n199.minpoly.json.gz",
+      "source_stored_bytes": 11339,
+      "source_stored_sha256": "feacc43ff836df92c80ea488f1fc992502c232efeb62db0246f261b00e0a0248"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n237/n237.minpoly.json.gz",
+      "retained": "algebraic/n237/n237.minpoly.json.gz",
+      "source_stored_bytes": 10870,
+      "source_stored_sha256": "e7516a74ebc4851e66780bf02a168dc554222c37f5afc863dd21027afecf1e1c"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n259/n259.minpoly.json.gz",
+      "retained": "algebraic/n259/n259.minpoly.json.gz",
+      "source_stored_bytes": 11708,
+      "source_stored_sha256": "6508a2980bde297d992b298b547e418d881e3b0ec9c6e1cbd65948c12b0f2bf4"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n262/n262.minpoly.json.gz",
+      "retained": "algebraic/n262/n262.minpoly.json.gz",
+      "source_stored_bytes": 15074,
+      "source_stored_sha256": "cb62178e58ea3361cc85f6b67b2a5f7cbe2f8ce8f2dfd74e811701e186d1583e"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n268/n268.minpoly.json.gz",
+      "retained": "algebraic/n268/n268.minpoly.json.gz",
+      "source_stored_bytes": 13705,
+      "source_stored_sha256": "19c8481e05ccf09bb93af0feebf9c4a1ddb16ebfd2e4f9ae0358da6fb95a8bf1"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n269/n269.minpoly.json.gz",
+      "retained": "algebraic/n269/n269.minpoly.json.gz",
+      "source_stored_bytes": 15700,
+      "source_stored_sha256": "e511cc0c60f999c425b7e878dafa3b4feac34d809af48aef5beec85ff7c864b5"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n292/n292.minpoly.json.gz",
+      "retained": "algebraic/n292/n292.minpoly.json.gz",
+      "source_stored_bytes": 12020,
+      "source_stored_sha256": "3402d50a061b634b6cd77ad9754788cde0502a68c931c869fc2e80266ecc743e"
+    },
+    {
+      "archive": "algebraic-12.zip",
+      "archive_member": "n295/n295.minpoly.json.gz",
+      "retained": "algebraic/n295/n295.minpoly.json.gz",
+      "source_stored_bytes": 27586,
+      "source_stored_sha256": "b54f2414743b4ca2a856d253c478ac09bce94913002cef06f74b1054b1910008"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "105/input.json.gz",
+      "retained": "supplements/105/input.json.gz",
+      "source_stored_bytes": 10639,
+      "source_stored_sha256": "6ebc0100117d0eb09a2568e7a6a948282999b05e840d994373880d1b4ef6bb8d"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "105/candidate.json.gz",
+      "retained": "supplements/105/candidate.json.gz",
+      "source_stored_bytes": 18354,
+      "source_stored_sha256": "4151af49b3c6e6900f196912e38ff6f941b3c2e908fee8bc64bafd394e48964f"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "127/input.json.gz",
+      "retained": "supplements/127/input.json.gz",
+      "source_stored_bytes": 30680,
+      "source_stored_sha256": "c594c948d8b2f0a1b260e249ab31ab6acc0c3477b895c0d4aa196709db2a816f"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "127/candidate.json.gz",
+      "retained": "supplements/127/candidate.json.gz",
+      "source_stored_bytes": 56151,
+      "source_stored_sha256": "3fc067333f8732f8db7f2a0865345cce877a37bad94d2d8b385b4ea5c5f8d115"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "130/input.json.gz",
+      "retained": "supplements/130/input.json.gz",
+      "source_stored_bytes": 6075,
+      "source_stored_sha256": "1848213c8c15749f86f28bf339654b6135382c1a1f768aea2681501ece5ab02e"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "130/candidate.json.gz",
+      "retained": "supplements/130/candidate.json.gz",
+      "source_stored_bytes": 29464,
+      "source_stored_sha256": "da00d5fef69ef24a3f012bbd74d8ff7ad5945f63dfedd7ae47fae79b7bdf58d0"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "156/input.json.gz",
+      "retained": "supplements/156/input.json.gz",
+      "source_stored_bytes": 13912,
+      "source_stored_sha256": "c689d70d445526d9394ece1fcab8e2c44e9844648159a51ea5570308a69abe20"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "156/candidate.json.gz",
+      "retained": "supplements/156/candidate.json.gz",
+      "source_stored_bytes": 62542,
+      "source_stored_sha256": "ba2ce3d6c17db7ae14a73d69243cd416053c038d795c23e872cd411d876f43bc"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "180/input.json.gz",
+      "retained": "supplements/180/input.json.gz",
+      "source_stored_bytes": 15442,
+      "source_stored_sha256": "a9f3189a6fa6e62f98b75aab99481e6a7ef27038fdc3ecd75b62b31071ade049"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "180/candidate.json.gz",
+      "retained": "supplements/180/candidate.json.gz",
+      "source_stored_bytes": 19568,
+      "source_stored_sha256": "83e94ebd41b5aea2881c77d03b6e13a39a8969e2a3edefe7b55fdf9c074c9095"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "182/input.json.gz",
+      "retained": "supplements/182/input.json.gz",
+      "source_stored_bytes": 13525,
+      "source_stored_sha256": "f845f5c45e18ce3ece06278ea8cbea63d5195affd3f65d483ce2832723d4ef91"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "182/candidate.json.gz",
+      "retained": "supplements/182/candidate.json.gz",
+      "source_stored_bytes": 39025,
+      "source_stored_sha256": "fdde2c3a9cdfd1d2a8b437857fee0e6d14d0d57ef5f231ea6239c0123f23bacd"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "260/input.json.gz",
+      "retained": "supplements/260/input.json.gz",
+      "source_stored_bytes": 69591,
+      "source_stored_sha256": "a2a05f0514ca40b8c7f555acbd4e4b2b900b36a368dc679a5400b94ad82c6b0a"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "260/candidate.json.gz",
+      "retained": "supplements/260/candidate.json.gz",
+      "source_stored_bytes": 184170,
+      "source_stored_sha256": "f9a255cc0dcd2e66a783f70a2c4f613595e2f4c348dbe68bb8dd9bfbd5cc744e"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "270/input.json.gz",
+      "retained": "supplements/270/input.json.gz",
+      "source_stored_bytes": 76851,
+      "source_stored_sha256": "bf6019f3b4caf789cc4bab9613e346b283fadc686192560c3886554a44d7a95b"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "270/candidate.json.gz",
+      "retained": "supplements/270/candidate.json.gz",
+      "source_stored_bytes": 383378,
+      "source_stored_sha256": "f76f733a28984c4413319ff5fec3280899421c6f9a058943a14315c5262f99a4"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "272/input.json.gz",
+      "retained": "supplements/272/input.json.gz",
+      "source_stored_bytes": 21727,
+      "source_stored_sha256": "4cf4a5114e4632b362f4d96682c351e9c3057a6aa8d9fb08033d5b6701e80e8f"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "272/candidate.json.gz",
+      "retained": "supplements/272/candidate.json.gz",
+      "source_stored_bytes": 49476,
+      "source_stored_sha256": "5d6d210b10e0a960ae7e0b0888fd4da86069d62df0d60336ef51c457f0faa6a6"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "299/input.json.gz",
+      "retained": "supplements/299/input.json.gz",
+      "source_stored_bytes": 24841,
+      "source_stored_sha256": "1da33424f9737ae06aaa69d440491a117fbdf689f7be0d4f803d94b621658e73"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "299/candidate.json.gz",
+      "retained": "supplements/299/candidate.json.gz",
+      "source_stored_bytes": 88520,
+      "source_stored_sha256": "5dcd55a4f0baeac30a8df94bbada6596ecd5b270c78650877d8bf0d110910a35"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "304/input.json.gz",
+      "retained": "supplements/304/input.json.gz",
+      "source_stored_bytes": 27753,
+      "source_stored_sha256": "8b580344539480c49cfc39a6d4c516f7b163204bc03d0b51647dd0713ea70825"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "304/candidate.json.gz",
+      "retained": "supplements/304/candidate.json.gz",
+      "source_stored_bytes": 187239,
+      "source_stored_sha256": "6a540f98a852b342f9fc243022d299a4bee35786fe18605d43728e1d222e7d1c"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "307/input.json.gz",
+      "retained": "supplements/307/input.json.gz",
+      "source_stored_bytes": 18616,
+      "source_stored_sha256": "cfe68d5d3018d0cf18f32c229d1969d1ebc9129fc1abf5b4301e74da6e74d449"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "307/candidate.json.gz",
+      "retained": "supplements/307/candidate.json.gz",
+      "source_stored_bytes": 94366,
+      "source_stored_sha256": "fd3038546959c7a14feed85b35053ea3be03f00a6f4f63eb6405903993a07428"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "308/input.json.gz",
+      "retained": "supplements/308/input.json.gz",
+      "source_stored_bytes": 25031,
+      "source_stored_sha256": "a25bb0aecc025c0054c28e63d724c7c649f2f2ff487cbf64ee0ee70f30c6d391"
+    },
+    {
+      "archive": "rational-enclosures.zip",
+      "archive_member": "308/candidate.json.gz",
+      "retained": "supplements/308/candidate.json.gz",
+      "source_stored_bytes": 165083,
+      "source_stored_sha256": "0038e14ebf39d983e2e6be6119b3464d52ba34de5206ec3a6f491705103e79d5"
+    },
+    {
+      "archive": "n232-rational.zip",
+      "archive_member": "232/input.json.gz",
+      "retained": "n232/input.json.gz",
+      "source_stored_bytes": 26364,
+      "source_stored_sha256": "9ae760cfbd190378872418cc93751846649658a40cd9d37130ca0ace9872ab7a"
+    },
+    {
+      "archive": "n232-rational.zip",
+      "archive_member": "232/candidate.json.gz",
+      "retained": "n232/candidate.json.gz",
+      "source_stored_bytes": 145472,
+      "source_stored_sha256": "b72b04c8c3f6b57c4372fd2db17b1666832dd22ad1d734094ed070aacddcf4fe"
+    }
+  ],
+  "scope": "Only the named numeric inputs and tables are retained. Archived proof programs and prose stay outside this packet."
+}

@@ -1,0 +1,46 @@
+{
+  "portable_replay_exit": 0,
+  "portable_replay_elapsed_seconds": 1.2979967080173083,
+  "frozen_mathematical_results_reproduced": true,
+  "comparison_excludes": [
+    "completed_utc",
+    "elapsed_seconds",
+    "source_validation"
+  ],
+  "frozen_source_identity_unchanged": true,
+  "post_replay_edit": "Extracted an unchanged display f-string into a local variable to satisfy line-length lint; no geometry or controls changed.",
+  "absolute_internal_paths_in_overlay": false,
+  "network_or_remote_service_writes": false,
+  "ruff_check": {
+    "exit": 0,
+    "result": "All checks passed",
+    "configuration": "REPOSITORY/packing/pyproject.toml",
+    "targets": [
+      "tools/verify.py",
+      "tools/identity.py"
+    ],
+    "cache": false
+  },
+  "ruff_format": {
+    "exit": 0,
+    "result": "2 files left unchanged"
+  },
+  "basedpyright": {
+    "exit": 0,
+    "errors": 0,
+    "warnings": 0,
+    "notes": 0,
+    "configuration": "REPOSITORY/packing/pyproject.toml"
+  },
+  "option_d_fraction_subtraction_checked": true,
+  "option_d_contact_factors": "Supplied by coordinator; no duplicate contraction run performed",
+  "portable_verifier_sha256": "d804bb4a9fbff9180158438bfcd4963576dc1d47b142b5aaecb450de17f6b833",
+  "identity_runner_sha256": "877cb1eb671e439de96b5b8d5765911beb69acf095853e54ae609ff138807132",
+  "identity_worker_exit": 0,
+  "identity_guard_exit": 0,
+  "identity_elapsed_seconds": 1.8472641250118613,
+  "identity_guard_max_processes": 1,
+  "identity_guard_max_footprint_gib": 0.11,
+  "identity_guard_max_pressure": 1,
+  "identity_guard_interventions": 0
+}

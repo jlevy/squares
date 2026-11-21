@@ -3349,7 +3349,7 @@ RESULTS: dict[str, Prose] = {
             "encoding with independently implemented exact separating axes; its 16 "
             "controls returned 28 stated outcomes"
         ),
-        retained="the original centre-direction JSON and half-angle witness",
+        retained="the original centre-and-half-angle JSON and corner witness",
         squares="a rational centre and the cosine and sine of its rotation",
     ),
     "T-315": Prose(

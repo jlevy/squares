@@ -8,7 +8,9 @@ paths:
   - packing/atlas/known-best/composite-figure.json
   - packing/campaign/result-requests.yaml
   - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
   - packing/devtools/default_drawings.py
+  - packing/devtools/site_resources.py
   - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/results.yaml
@@ -26,9 +28,9 @@ outputs:
 reason: >-
   T-337 registers and adopts the exact rational upper bound at 259. The maintained
   fixed-revision paper comparison used fresh output directories and Chrome on macOS.
-  After the bound citations and screen totals were refreshed, it rendered the
-  integrated adoption tree twice and main d7482eec4f0f once with the ten paths
-  above restored to their baseline versions. The three other papers matched all
+  After refreshing the source card, print credit hold, bound citations and screen
+  totals, it rendered the integrated adoption tree twice and main 8ba0e2a4a4ff once
+  with the 12 paths above restored to their baseline versions. The three other papers matched all
   43 files apiece byte-for-byte. The explainer produced 55 deterministic files.
   Restoring its live register count from 337 to 336 gives identical HTML and
   Markdown bytes. That is the only measured change, and the comparison covers

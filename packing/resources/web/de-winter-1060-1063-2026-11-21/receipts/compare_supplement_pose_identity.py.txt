@@ -1,0 +1,37 @@
+"""Measure each rational supplement against its registered predecessor."""
+from fractions import Fraction
+from pathlib import Path
+from zipfile import ZipFile
+import gzip
+import hashlib
+import json
+import signal
+from devtools import check_half_angle_area as area
+from devtools import measure_identity as identity
+from devtools import upper_bound_houses as houses
+
+home = Path(__file__).resolve().parent
+signal.alarm(180)
+summary = json.loads((home / "1063-exact-source-reading.json").read_text())
+receipt = home / "1063-prior-house-pose-identity.json"
+results = []
+with ZipFile(home / "rational-enclosures.zip") as bundle:
+    for row in summary:
+        n = row["n"]
+        packed = bundle.read(f"{n}/candidate.json.gz")
+        assert hashlib.sha256(packed).hexdigest() == row["candidate_sha256"]
+        candidate_json = json.loads(gzip.decompress(packed))
+        prior_fact = houses.certificate(n)
+        coords = [tuple(map(Fraction, pose)) for pose in candidate_json["squares"]]
+        prior_coords = [(pose.x,pose.y,pose.t) for pose in prior_fact.poses]
+        prior = identity.Packing(houses.ADOPTED[n], {"input":"retained exact house"}, prior_fact.side,
+                    tuple(area.placed(prior_coords)))
+        candidate = identity.Packing("submitted", {"input":f"{n}/candidate.json.gz"}, Fraction(candidate_json["side"]),
+                    tuple(area.placed(coords)))
+        result = identity.receipt(n, candidate, [prior])
+        result["scope"] = "Measured pose identity only. Historical credit from the original record and source."
+        results.append(result)
+        receipt.write_text(json.dumps(results,indent=2)+"\n")
+        print("completed",n,prior.label,flush=True)
+signal.alarm(0)
+

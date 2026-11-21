@@ -722,6 +722,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         "An exact certificate of Doğa Özden's construction at L70 + 5 (T-339).",
     ),
     (
+        "https://github.com/jlevy/squares/issues/1040",
+        "GeiserX's public 259-square packing is below the register (pointer)",
+        "Joost de Winter",
+        (
+            "Sergio Fernández Rubio's tilted-band construction, with Joost de Winter's "
+            "verified rational refinement."
+        ),
+    ),
+    (
         "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
         "Proposing a Better Lower Bound for n = 17 Square Packing",
         "Sam Burns",

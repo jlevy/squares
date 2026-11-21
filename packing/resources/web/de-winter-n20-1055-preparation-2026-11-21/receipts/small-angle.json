@@ -1,0 +1,16 @@
+{
+  "format": "n20-bounded-corroboration-v1",
+  "certificate_member_sha256": "009441b65a3364e5f2abc5736a07dc46632dfba32b03d880780fb7c6849e238f",
+  "polynomial_certificates_checked": 117,
+  "mutation_controls_rejected": 2,
+  "bridge_histogram": {
+    "4": 92,
+    "5": 24,
+    "6": 4
+  },
+  "one_diagonal_chain_sign_cases": 992,
+  "rank_domain": "0 < t <= 1/24",
+  "rank_constants_verified": true,
+  "scope": "Local necessary inequalities and certificate arithmetic only; exhaustive sign/graph coverage and large-angle/common-orientation exclusions remain unverified.",
+  "elapsed_seconds": 5.598457
+}
