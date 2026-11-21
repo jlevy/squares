@@ -10421,7 +10421,7 @@ issues:
       packings measure as PingYou Ltd''s (T-148, T-147), and whether to credit them as new arrangements
       is the owner''s decision. Gemini assistance disclosed. On issue 593 he asks to be credited as Mykhailo
       Polkovskyi.'
-    read_through: '2026-10-14T08:07:21Z'
+    read_through: '2026-11-21T00:41:58Z'
     results:
     - key: n153-n207
       claim: s(153) <= 12.87001385040448 and s(207) <= 14.880960371558, by exact rational certificates.
@@ -10495,6 +10495,17 @@ issues:
         id: E-mishapolk-573-certificate-report
         status: reviewed
       - result: n103-n209-n258-n270
+    - url: https://github.com/jlevy/squares/issues/573#issuecomment-7054371750
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n153-n207
+        id: T-173
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     blocked:
       type: owner-decision
       reason: >-
@@ -27870,7 +27881,7 @@ issues:
       and 304 are above the houses (T-243, T-242), 204 and 260 above Evan Daniel's #845, 299 above his
       update to #824, and 211 and 241 are the author's own certificates of 23
       October, which the ledger records from their commit (e386aab) as refinements. Registered as T-259 (130) and T-260 (the five others), and the 23 October certificates as T-253. The 31 October stage 4 review (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md) accepted all fifteen certificates for finite feasibility. At 130 T-259 is confirmed, independently re-implemented, at V3/C3, and the case adopts it under the house rule, with the packing's credit Couzo's. At the fourteen other counts each certificate re-certifies the house certificate within its own padding, and the owner's option D of 17 November 2026 (think-b0w5) makes each a restatement, credited to the house's finder: T-253 and T-260 record them so, below the stage 4 exit, and no house moves there.
-    read_through: '2026-10-30T05:46:42Z'
+    read_through: '2026-11-21T00:41:56Z'
     results:
     - key: refinements
       claim: >-
@@ -27949,6 +27960,29 @@ issues:
       - result: sub-print
         id: E-mishapolk-846-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/846#issuecomment-7054371283
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: refinements
+        id: T-259
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: sub-print
+        id: T-260
+        verification: V0
+        confirmation: C1
+        status: reviewed
+        position: superseded
+      - result: refinements
+        id: E-mishapolk-846-exact-feasibility
+        status: confirmed
+      - result: refinements
+        id: E-mishapolk-846-review-exact-feasibility
+        status: confirmed
     blocked:
       type: owner-decision
       reason: >-
@@ -30441,7 +30475,7 @@ issues:
       both strong generators' regularization of the new house run in the same change. The
       Kaggle side the issue quotes, 13.617935700905 (jazivxt), is above it and states no
       packing.
-    read_through: '2026-11-11T08:35:29Z'
+    read_through: '2026-11-21T00:42:00Z'
     results:
     - key: n172-from-t257
       claim: >-
@@ -30483,6 +30517,23 @@ issues:
       - result: n172-from-t257
         id: E-ozden-935-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/935#issuecomment-7054372250
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n172-from-t257
+        id: T-282
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n172-from-t257
+        id: E-ozden-935-exact-feasibility
+        status: confirmed
+      - result: n172-from-t257
+        id: E-ozden-935-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-282 is on main at V3/C3 as the house at 172, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -30579,7 +30630,7 @@ issues:
       both strong generators' regularization of the new house run in the same change. The
       Kaggle side the issue quotes, 16.928162252213 (kirilltym), is above it and states no
       packing.
-    read_through: '2026-11-11T08:36:12Z'
+    read_through: '2026-11-21T00:42:01Z'
     results:
     - key: n270-from-t224
       claim: >-
@@ -30621,6 +30672,23 @@ issues:
       - result: n270-from-t224
         id: E-ozden-936-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/936#issuecomment-7054372748
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n270-from-t224
+        id: T-283
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n270-from-t224
+        id: E-ozden-936-exact-feasibility
+        status: confirmed
+      - result: n270-from-t224
+        id: E-ozden-936-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-283 is on main at V3/C3 as the house at 270, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -30717,7 +30785,7 @@ issues:
       issue's statement at the print: 199 from 172 is the one step that crosses its count's
       12-place print, and monotonicity improves nothing. The Kaggle side the issue quotes,
       14.617572173606 (kirilltym), is above it and states no packing.
-    read_through: '2026-11-11T08:37:01Z'
+    read_through: '2026-11-21T00:42:03Z'
     results:
     - key: n199-from-t282
       claim: >-
@@ -30759,6 +30827,23 @@ issues:
       - result: n199-from-t282
         id: E-ozden-938-certificate-report
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/938#issuecomment-7054373209
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n199-from-t282
+        id: T-284
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: n199-from-t282
+        id: E-ozden-938-exact-feasibility
+        status: confirmed
+      - result: n199-from-t282
+        id: E-ozden-938-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-284 is on main at V3/C3 as the house at 199, and the reply on main says what was retained
       and replayed, what the review found and that the case adopted it.
@@ -30830,7 +30915,8 @@ issues:
     title: 's(199) <= 14.6146898532835806: registration request'
     author: JoostdeWinter
     opened: '2026-11-09'
-    state: open
+    state: closed
+    closed: '2026-11-21'
     kind: result-report
     triage: done
     summary: >-
@@ -30854,11 +30940,9 @@ issues:
       lane L82), written blind in a separate lane, accepts it with #946's, no finding blocking,
       and is mapped at C1; its F2 asks the author to credit #938 for the L step at 199, and its
       six questions for the author are informational.
-    read_through: '2026-11-14T11:04:59Z'
+    read_through: '2026-11-21T00:41:46Z'
     results:
     - key: n199-core-resolved
-      validation:
-      - think-2h88
       claim: >-
         s(199) <= 14.6146898532835806 (the exact rational side, rounded up at 16 places, of
         n199_witness.yaml at JoostdeWinter/square-packing 702c7af), T-284's packing with its
@@ -30899,6 +30983,23 @@ issues:
         verification: V0
         confirmation: C1
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/939#issuecomment-7054367979
+      date: '2026-11-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n199-core-resolved
+        id: T-285
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n199-core-resolved
+        id: E-de-winter-939-exact-feasibility
+        status: confirmed
+      - result: n199-core-resolved
+        id: E-de-winter-939-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-285 is confirmed and adopted at 199 under the owner's option D (think-b0w5), and the
       reply on main says so, with what was retained, replayed and reviewed and that the gain is
@@ -31019,7 +31120,8 @@ issues:
     title: 's(172): exact local optimum of the Daniel–Özden arrangement with closed form: registration request'
     author: JoostdeWinter
     opened: '2026-11-10'
-    state: open
+    state: closed
+    closed: '2026-11-21'
     kind: result-report
     triage: done
     summary: >-
@@ -31042,11 +31144,9 @@ issues:
       think-o53d, lane L82), written blind in a separate lane, accepts it with #939's, no finding
       blocking, and is mapped at C1; its F1 asks the author to state the bound as the
       certificate's side, with the root as the asserted optimum, as the record has it.
-    read_through: '2026-11-14T11:02:01Z'
+    read_through: '2026-11-21T00:41:51Z'
     results:
     - key: n172-exact-local-optimum
-      validation:
-      - think-2h88
       claim: >-
         s(172) <= 13.614689853284 (the exact rational side, rounded up at 12 places, of
         n172_witness.yaml at JoostdeWinter/square-packing c4e65d0), T-282's packing re-solved,
@@ -31087,6 +31187,23 @@ issues:
         verification: V0
         confirmation: C1
         status: reviewed
+    - url: https://github.com/jlevy/squares/issues/946#issuecomment-7054369719
+      date: '2026-11-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n172-exact-local-optimum
+        id: T-286
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n172-exact-local-optimum
+        id: E-de-winter-946-exact-feasibility
+        status: confirmed
+      - result: n172-exact-local-optimum
+        id: E-de-winter-946-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-286 is confirmed and adopted at 172 under the owner's option D (think-b0w5), and the
       reply on main says so, with what was retained, replayed and reviewed and that the gain is
