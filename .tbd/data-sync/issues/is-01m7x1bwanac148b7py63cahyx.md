@@ -5,8 +5,8 @@ title: "Stage 4 blind review R1 of #1041/#1042's integer octagon kernels (gram.c
 kind: task
 status: in_progress
 priority: 1
-version: 6
-delegate: rr1-lower
+version: 7
+delegate: codex-rr1-01a1fb
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:51:44.456Z
-updated_at: 2026-11-20T23:05:29.214Z
+updated_at: 2026-11-21T08:30:45.314Z
 started_at: 2026-11-20T17:52:35.760Z
 ---
 
