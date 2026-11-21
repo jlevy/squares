@@ -1,0 +1,31 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "de-winter-n305-2026-11-20",
+  "source_url": "https://github.com/JoostdeWinter/square-packing",
+  "source_ref": "db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef",
+  "source_commit": "db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef",
+  "retrieved_at_utc": "2026-11-21T00:14Z",
+  "git_scope": "The original n305/ subtree and root licence at db8efcb, read from raw GitHub and checked against a depth-one filtered fetch of the pinned commit. The later 5282edd registration checksum list independently agrees with both certificate bytes. The acquisition records the earlier commit only.",
+  "archived_dir": "source",
+  "license": "MIT, copyright 2026 Joost de Winter, from LICENSE at the pin. The submitter linked this material on jlevy/squares#1052.",
+  "claims": [
+    "n305/n305_exact.json gives an exact rational centre and unit direction for each of 305 unit squares. Its exact side is 17.9457558387415886710583983360138290031648651962347523515443824166144058057388817807. The submitted bound 17.945755838742 rounds this side upward at 12 places.",
+    "n305/n305_witness.yaml gives the same 305 squares as rational corners. The independent review found missing claim and envelope metadata and checked the geometry through a clearly identified reading copy.",
+    "Joost de Winter reports a refinement of the Kodaj–JoeGun arrangement. The source credits OpenAI Codex for search, optimization and exact certification and Anthropic Claude for repository files, checks and the figure."
+  ],
+  "scope": [
+    "LICENSE",
+    "n305"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "Byte-identical MIT licence retained by the 17 October de Winter packet.",
+      "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+    },
+    {
+      "match": "n305/n305_record.png",
+      "reason": "Contributor illustration pinned for provenance. The certificate contains the geometry needed for replay and rendering."
+    }
+  ]
+}

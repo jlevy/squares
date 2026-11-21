@@ -38781,13 +38781,26 @@ issues:
     opened: '2026-11-20'
     state: open
     kind: result-report
-    triage: pending
-    summary: >-
-      De Winter reports an upper bound at 305 from a refinement of the Kodaj–JoeGun
-      arrangement. The merged blind review #1057 accepted it and found a new result under
-      option D. Retention and its import replay are queued.
+    triage: done
+    summary: 'De Winter''s finite upper bound at 305 is registered as T-336 at V3/C3, S2, with maintained
+      replay and accepted independent review #1057 mapped to separate evidence. It lies below T-309 contracted
+      to first contact and is a new result under option D. House adoption remains pending in think-kzwl.'
     read_through: '2026-11-20T17:51:36Z'
-    results: []
+    results:
+      - key: n305-rational-certificate
+        claim: s(305) <= 17.945755838742, the exact rational certificate's 12-place ceiling.
+        source: body
+        register:
+          - T-336
+        evidence:
+          - E-de-winter-1052-certificate-report
+          - E-de-winter-1052-exact-feasibility
+          - E-de-winter-1052-review-exact-feasibility
+      - key: n305-leaderboard-side-only
+        claim: Shadoks's quoted Kaggle side at 305 is 17.94575583874176, with no coordinates.
+        source: body
+        not_registered: A side-only comparison, without a packing, retained as context.
+        queued: false
     beads:
     - think-kzwl
     answer_bead: think-kzwl

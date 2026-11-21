@@ -1943,6 +1943,7 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[de Winter Kodaj n109 2026-11-18]": _import("de-winter-kodaj-n109-2026-11-18"),
     # The retained rational derivation of Samanyu-dev's earlier public arrangement.
     "[Samanyu-dev square packing 2026-11-07]": _import("samanyu-n109-2026-11-07"),
+    "[de Winter n305 certificate 2026-11-20]": _import("de-winter-n305-2026-11-20"),
     # Lane w6-dewinter-1118 of 18 November (think-gqzz): Joost de Winter's issues 1021 at 268,
     # nine diagonal slices of published packings, and 1022 at 270, Panoras's compilation's
     # packing re-solved by regions, both at JoostdeWinter/square-packing a1ba501.

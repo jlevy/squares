@@ -67827,3 +67827,114 @@ evidence:
       binding. The canonical binding is accepted in the 21 November confirming review. The 37
       controls in the de Winter review apply to its certificate.
     source_reviewed: '2026-11-21'
+  - id: E-de-winter-1052-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+        - 305
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter n305 certificate 2026-11-20]'
+    certificate: packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-21'
+    limitations: The author's report of the certificate at db8efcb. The source's programs were not run
+      here. The maintained replay and accepted independent review have separate evidence atoms; they
+      do not change this atom's reported assurance.
+  - id: E-de-winter-1052-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+        - 305
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter n305 certificate 2026-11-20]'
+    certificate: packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz
+    replay: 'The 21 November maintained import replay retained in packing/resources/web/de-winter-n305-2026-11-20/receipts/exact-certification.json.xz:
+      center-direction-json input, 305 squares, all 46360 pairs on each route in the positive and both
+      gross controls; positive accepted and duplicate-square overlap and translated-outside-container
+      controls refused. The retained sharp-controls.json records all 11 controls as expected at contact
+      and 1e-30 beyond it. See receipts/controls-plan-1052-n305.md for the prior plan.'
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+    independence:
+      coverage:
+        extent: full
+        unit: The primary certificate at 305, every square, wall and pair on both maintained routes.
+        checked: 1
+        of: 1
+    independence_record: packing/resources/web/de-winter-n305-2026-11-20/README.md
+    limitations: The two maintained routes share parsing, half-angle conversion, Fraction arithmetic
+      and separating axes. The full independent implementation is the separately retained stage 4 review.
+      This replay used the two programs named in the verifier registry.
+    source_reviewed: '2026-11-21'
+  - id: E-de-winter-1052-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+        - 305
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter n305 certificate 2026-11-20]'
+    certificate: packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz
+    replay: The accepted review's CPython 3.14.7 run on 20 November, python -I -B under nice -n 19,
+      retained in packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/check-n305-reading-copy.json.
+      r1052_check.py returned ACCEPT for the primary JSON and disclosed corner reading copy, with no
+      disagreements or differing squares. Every square, wall and all 46360 pairs were decided by separating
+      axes in Python integers and clipping in gmpy2.mpq. out/controls-n305.json records all 51 predeclared
+      controls as stated. The original two-file receipt reports REFUSE solely because the original corners
+      envelope is incomplete; its primary JSON passes.
+    replay_status: passed
+    verifiers:
+      - V-r1052-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: The certificate at 305, every square, wall and pair by both review methods.
+        checked: 1
+        of: 1
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: Separately prompted stage 4 lane r1052, tbd-strong-max at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The source says Claude handled repository files, checks and the figure. The review is
+          also by Claude, but its checker was frozen before reading source or project verification code
+          and reuses none of it. The overlap is of system family, not shared code or prompt.
+    independence_record: docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-20'
+      reviewed_by: Claude AI agent, separately prompted stage 4 lane r1052
+      note: 'Accepted review #1057: complete finite feasibility, all 51 controls as stated; F4 concerns
+        original Witness/v2 metadata and does not affect the primary JSON certificate. No blocking or
+        major finding.'
+    limitations: One review with two methods sharing a reader. No human oversight, second distinct review
+      or optimality is established. The corner reading copy is explicitly derived; the original source
+      bytes remain retained.
+    source_reviewed: '2026-11-20'
