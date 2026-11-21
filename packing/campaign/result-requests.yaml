@@ -38566,7 +38566,13 @@ issues:
     beads:
     - think-fv42
     answer_bead: think-fv42
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1039#issuecomment-7061916668
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n19-n148-lower-bounds
     close_when: >-
       The bounds are triaged, retained, registered, replayed within the cap or held on
       validation beads, and the reply on main says what was registered and what remains.
@@ -38672,6 +38678,12 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/1041#issuecomment-7061917022
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n50-n137-lower-bounds
     close_when: >-
       The bounds are triaged, retained, registered, replayed within the cap or held on
       validation beads, and the reply on main says what was registered and what remains.
@@ -38743,6 +38755,14 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/1042#issuecomment-7061917411
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n50-n218-lower-bounds
+      - result: n161-four-region-follow-up
+      - result: n18-n313-public-replay
     close_when: >-
       The bounds and both follow-ups are triaged, retained, registered, replayed within the
       cap or held on validation beads, and the reply on main says what was registered and
