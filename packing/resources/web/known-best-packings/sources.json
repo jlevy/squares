@@ -649,18 +649,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n108.cert.json"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Samanyu-dev, https://github.com/Samanyu-dev/squares_in_squares/blob/53551d77513a9f5c180a731f291baf7eda7c3009/best_fit_101_500.csv at 53551d77513a9f5c180a731f291baf7eda7c3009",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         109
       ],
       "n": 109,
+      "path": "resources/web/samanyu-n109-2026-11-07/facts/n-109.yaml.gz",
       "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "retrieved": "2026-11-21",
       "source_n": 109,
-      "url": "https://kingbird.myphotos.cc/packing/square-109.svg"
+      "url": "https://github.com/Samanyu-dev/squares_in_squares/blob/53551d77513a9f5c180a731f291baf7eda7c3009/best_fit_101_500.csv"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n110.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

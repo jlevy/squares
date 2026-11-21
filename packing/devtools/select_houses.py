@@ -231,9 +231,6 @@ PENDING_ADOPTION: dict[int, Pending] = {
         n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
         for n in (88, 126, 266, 267, 301)
     },
-    # T-335 records Samanyu-dev's original arrangement. Its house and both required
-    # drawing runs land together in the next adoption change.
-    109: Pending(house="T-335", bead="think-wvr8", why=NEXT_PULL_REQUEST),
 }
 
 

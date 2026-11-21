@@ -54227,8 +54227,7 @@ results:
       November confirming review checked its canonical binding and safe print. The later exact transcription
       of Kodaj's rows is within the canonical original's contraction margin (ratio 0.9723) and remains
       a restatement under Option D.
-    next_rung: The house adoption, including the two required strong generators, is staged under think-wvr8.
-      V4/C4 need the additional reviews and human oversight in the project rules.
+    next_rung: V4/C4 need the additional reviews and human oversight in the project rules.
     reviews:
     - path: docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md
       kind: confirming
@@ -54542,6 +54541,19 @@ regularized_drawings:
         max_move: 6.388865e-95
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-108-regularized.yaml.gz
+    - n: 109
+      of: T-335
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 12
+        max_move: 0.008237086
+        max_turn_deg: 1.5e-14
+      view: packing/atlas/known-best/regularized/n-109-regularized.yaml.gz
     - n: 110
       of: T-174
       by: project

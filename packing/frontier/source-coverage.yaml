@@ -13957,8 +13957,7 @@ sources:
   - E-samanyu-n109-canonical-independent-feasibility
   notes: The upstream CSV is pinned by digest. The portable rational derivation proves the
     12-place upward print 10.949289580946. Both maintained routes and the independently
-    implemented corners checker accepted it. T-335 records Samanyu-dev’s original packing;
-    the house adoption is pending under think-wvr8.
+    implemented corners checker accepted it. T-335 records Samanyu-dev’s original packing.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -14037,6 +14036,12 @@ selected_overrides:
   evidence: E-pingyou-574-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+- n: 109
+  source_id: samanyu-n109-2026-11-07
+  value: '10.9492895809453794'
+  evidence: E-samanyu-n109-numerical-report
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-11-21 (T-335).
 - n: 110
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '10.9967833966315916396'
@@ -14725,7 +14730,7 @@ superseded_reports:
 - n: 109
   source_id: evand-square-packing-2026-10-05
   value: '10.949747468305832670915408009418'
-  superseded_by: kingbird-current
+  superseded_by: samanyu-n109-2026-11-07
   reason: Certifies the catalogue's packing at a side 2.7e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -17244,7 +17249,6 @@ superseded_reports:
   reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
     and T-333's exact side is smaller.
   superseded_by: de-winter-s299-upper-bound-2026-11-18
-
 - n: 228
   source_id: ono-issue984-2026-11-14
   value: '15.5960431209207917'

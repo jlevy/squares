@@ -713,6 +713,28 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
+    109: Settled(
+        DECIDED,
+        "[Samanyu-dev square packing 2026-11-07]",
+        "resources/web/samanyu-n109-2026-11-07/facts/n-109.yaml.gz",
+        "53551d77513a9f5c180a731f291baf7eda7c3009",
+        "770487757448707042490167368326104690864153247017676229186177571208327749619096502808"
+        "400345080880215966210115777058283674160281285504353081601787968229436588536816680107"
+        "45854836758324550270597468978493787420957347623/703687441776639800661571341402485506"
+        "636748433695111450038701185892470321689676081408144475605172069394712027933661704799"
+        "224369075700360524716610860532633422901896541451215805587110078646472336846172887337"
+        "4141120512",
+        (
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n109-grid-deg05"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n109-grid-1"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n109-grid-5"),
+            (EVAND_GENERATOR, "evand-regularize-adopt-2026-11-21-n109-evand"),
+        ),
+        "Grid-slack found no view at 0.5, 1 or 5 degrees. Evan Daniel's same-side solve "
+        "refused on unmatched rotation. The solved view is held at row 3 for separate "
+        "review under think-26s0. The axis view draws T-335 at its exact side.",
+        "packing/cases/regularized_drawings/think-wvr8-2026-11-21/README.md",
+    ),
     110: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",
