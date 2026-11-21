@@ -1,0 +1,230 @@
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import json
+import signal
+import sys
+import time
+from datetime import datetime, timezone
+from decimal import Decimal, localcontext
+from fractions import Fraction as Q
+from pathlib import Path
+from typing import NamedTuple
+from zipfile import ZipFile
+
+EXPECTED_ZIP = '752b5efc0aaedfab63605b8c2f3112610a41164bfc31d843b629752cda4088c3'
+Point = tuple[Q, Q]
+
+
+class Square(NamedTuple):
+    center: Point
+    axes: tuple[Point, Point]
+    vertices: tuple[Point, ...]
+    bounds: tuple[Q, Q, Q, Q]
+
+
+def dot(a: Point, b: Point) -> Q:
+    return a[0] * b[0] + a[1] * b[1]
+
+
+def square(cx: Q, cy: Q, t: Q) -> Square:
+    c = (1 - t * t) / (1 + t * t)
+    s = 2 * t / (1 + t * t)
+    u, v = (c, s), (-s, c)
+    assert dot(u, u) == dot(v, v) == 1 and dot(u, v) == 0
+    vertices = tuple(
+        (cx + (i * u[0] + j * v[0]) / 2,
+         cy + (i * u[1] + j * v[1]) / 2)
+        for i, j in ((1, 1), (1, -1), (-1, -1), (-1, 1))
+    )
+    xs, ys = [p[0] for p in vertices], [p[1] for p in vertices]
+    return Square((cx, cy), (u, v), vertices,
+                  (min(xs), max(xs), min(ys), max(ys)))
+
+
+def axis_data(a: Square, b: Square) -> list[tuple[Q, Q]]:
+    d = (b.center[0] - a.center[0], b.center[1] - a.center[1])
+    return [
+        (abs(dot(d, axis)),
+         sum((abs(dot(edge, axis)) for edge in a.axes + b.axes), Q(0)) / 2)
+        for axis in a.axes + b.axes
+    ]
+
+
+def gaps(a: Square, b: Square) -> list[Q]:
+    return [distance - radius for distance, radius in axis_data(a, b)]
+
+
+def translate_along(a: Square, b: Square, scale: Q) -> Square:
+    center = tuple(a.center[k] + scale * (b.center[k] - a.center[k]) for k in (0, 1))
+    shift = (center[0] - b.center[0], center[1] - b.center[1])
+    vertices = tuple((x + shift[0], y + shift[1]) for x, y in b.vertices)
+    bounds = (b.bounds[0] + shift[0], b.bounds[1] + shift[0],
+              b.bounds[2] + shift[1], b.bounds[3] + shift[1])
+    return Square((center[0], center[1]), b.axes, vertices, bounds)
+
+
+def wall_values(sq: Square, side: Q):
+    for vi, (x, y) in enumerate(sq.vertices):
+        for wall, slack in (('left', x), ('right', side - x),
+                            ('bottom', y), ('top', side - y)):
+            yield vi, wall, slack
+
+
+def decimal(q: Q) -> str:
+    with localcontext() as ctx:
+        ctx.prec = 65
+        return str(Decimal(q.numerator) / Decimal(q.denominator))
+
+
+def rational(value) -> Q:
+    if not isinstance(value, str):
+        raise TypeError('Coordinate and side literals must be strings')
+    return Q(value)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('archive', type=Path)
+    parser.add_argument('output', type=Path)
+    args = parser.parse_args()
+    started = time.monotonic()
+    signal.signal(signal.SIGALRM, lambda *_: (_ for _ in ()).throw(TimeoutError('300-second elapsed ceiling')))
+    signal.setitimer(signal.ITIMER_REAL, 300)
+    assert sys.version_info[:3] == (3, 14, 7), sys.version
+    archive_sha = hashlib.sha256(args.archive.read_bytes()).hexdigest()
+    assert archive_sha == EXPECTED_ZIP
+    with ZipFile(args.archive) as z:
+        candidate_raw = gzip.decompress(z.read('232/candidate.json.gz'))
+        input_raw = gzip.decompress(z.read('232/input.json.gz'))
+    candidate = json.loads(candidate_raw)
+    original = json.loads(input_raw)
+    assert candidate['n'] == original['n'] == 232
+    assert len(candidate['squares']) == len(original['squares']) == 232
+    rows = []
+    for row, old in zip(candidate['squares'], original['squares'], strict=True):
+        assert isinstance(row, list) and len(row) == 3
+        parsed = tuple(rational(x) for x in row)
+        assert parsed[2] == rational(old['t'])
+        rows.append(parsed)
+    side = rational(candidate['side'])
+    assert side > 0
+    squares = [square(*row) for row in rows]
+    print(json.dumps({'event': 'loaded', 'n': len(squares), 'elapsed': time.monotonic() - started}), flush=True)
+
+    # Controls are run before checking the submission; zero is an accepted boundary.
+    epsilon = Q(1, 10**80)
+    control_a = square(Q(5), Q(5), Q(1, 3))
+    control_b = translate_along(control_a, square(Q(29, 5), Q(28, 5), Q(1, 3)), Q(1))
+    control_contact = gaps(control_a, control_b)
+    assert max(control_contact) == 0
+    assert max(gaps(control_a, translate_along(control_a, control_b, 1 - epsilon))) < 0
+    assert max(gaps(control_a, translate_along(control_a, control_b, 1 + epsilon))) > 0
+    right = control_a.bounds[1]
+    assert min(right - x for x, _ in control_a.vertices) == 0
+    assert min(right - epsilon - x for x, _ in control_a.vertices) == -epsilon
+
+    wall_failures, wall_equalities = [], []
+    wall_min, wall_min_at = None, None
+    wall_count = 0
+    for i, sq in enumerate(squares):
+        for vi, wall, slack in wall_values(sq, side):
+            wall_count += 1
+            if slack < 0:
+                wall_failures.append({'square': i, 'vertex': vi, 'wall': wall, 'slack': str(slack)})
+            if slack == 0:
+                wall_equalities.append({'square': i, 'vertex': vi, 'wall': wall})
+            if wall_min is None or slack < wall_min:
+                wall_min, wall_min_at = slack, (i, vi, wall)
+    pair_count, aabb_count, sat_count = 0, 0, 0
+    overlaps, pair_equalities = [], []
+    nearest_margin, nearest_pair = None, None
+    for i, a in enumerate(squares):
+        for j in range(i + 1, len(squares)):
+            b = squares[j]
+            pair_count += 1
+            # A strict coordinate projection gap proves separation. Equality goes
+            # through the complete edge-axis calculation to classify actual contact.
+            if (a.bounds[0] > b.bounds[1] or b.bounds[0] > a.bounds[1]
+                    or a.bounds[2] > b.bounds[3] or b.bounds[2] > a.bounds[3]):
+                aabb_count += 1
+                continue
+            sat_count += 1
+            values = gaps(a, b)
+            margin = max(values)
+            if margin < 0:
+                overlaps.append({'pair': [i, j], 'gaps': list(map(str, values))})
+            if margin == 0:
+                pair_equalities.append({'pair': [i, j], 'gaps': list(map(str, values))})
+            if nearest_margin is None or margin < nearest_margin:
+                nearest_margin, nearest_pair = margin, (i, j)
+        if i % 40 == 0:
+            print(json.dumps({'event': 'pair_progress', 'i': i, 'pairs': pair_count,
+                              'sat_pairs': sat_count, 'elapsed': time.monotonic() - started}), flush=True)
+    assert pair_count == 26796 and wall_count == 3712
+    assert nearest_pair is not None
+    ai, bi = nearest_pair
+    a, b = squares[ai], squares[bi]
+    threshold = min(radius / distance for distance, radius in axis_data(a, b) if distance > 0)
+    source_contact = translate_along(a, b, threshold)
+    source_inward = translate_along(a, b, threshold * (1 - epsilon))
+    source_outward = translate_along(a, b, threshold * (1 + epsilon))
+    assert max(gaps(a, source_contact)) == 0
+    assert max(gaps(a, source_inward)) < 0
+    assert max(gaps(a, source_outward)) > 0
+    enclosing_side = max(max(sq.bounds[1], sq.bounds[3]) for sq in squares)
+    inward_side = enclosing_side - epsilon
+    inward_wall_failures = sum(slack < 0 for sq in squares for _, _, slack in wall_values(sq, inward_side))
+    assert inward_wall_failures > 0
+    ceiling12_units = -((-side.numerator * 10**12) // side.denominator)
+    result = {
+        'verdict': 'PASS' if not wall_failures and not overlaps else 'FAIL',
+        'completed_utc': datetime.now(timezone.utc).isoformat(),
+        'elapsed_seconds': time.monotonic() - started,
+        'python': sys.version,
+        'archive_sha256': archive_sha,
+        'candidate_json_sha256': hashlib.sha256(candidate_raw).hexdigest(),
+        'input_json_sha256': hashlib.sha256(input_raw).hexdigest(),
+        'n': 232, 'side_exact': str(side), 'side_decimal_65': decimal(side),
+        'side_ceiling_12_places': f'{ceiling12_units // 10**12}.{ceiling12_units % 10**12:012d}',
+        'input_minus_candidate_side_exact': str(rational(original['side']) - side),
+        'input_minus_candidate_side_decimal_65': decimal(rational(original['side']) - side),
+        'orientation_parameters_match_input': True,
+        'wall_inequalities': wall_count, 'wall_failures': wall_failures,
+        'wall_min_exact': str(wall_min), 'wall_min_at': wall_min_at,
+        'wall_equalities': wall_equalities,
+        'unordered_pairs': pair_count, 'strict_aabb_certificates': aabb_count,
+        'edge_axis_pairs': sat_count, 'overlapping_pairs': overlaps,
+        'pair_equalities': pair_equalities,
+        'min_edge_axis_margin_exact': str(nearest_margin),
+        'min_edge_axis_margin_at': nearest_pair,
+        'controls': {
+            'epsilon': str(epsilon),
+            'rotated_synthetic_contact_gaps': list(map(str, control_contact)),
+            'rotated_synthetic_inward_rejected': True,
+            'rotated_synthetic_outward_accepted': True,
+            'synthetic_wall_equality_accepted': True,
+            'synthetic_inward_wall_rejected': True,
+            'source_pair': [ai, bi], 'source_pair_contact_scale': str(threshold),
+            'source_pair_contact_gaps': list(map(str, gaps(a, source_contact))),
+            'source_pair_inward_gaps': list(map(str, gaps(a, source_inward))),
+            'source_pair_outward_max_gap': str(max(gaps(a, source_outward))),
+            'source_inward_wall_side': str(inward_side),
+            'source_inward_wall_failures': inward_wall_failures,
+        },
+    }
+    args.output.write_text(json.dumps(result, indent=2) + '\n')
+    print(json.dumps({'event': 'completed', 'verdict': result['verdict'],
+                      'elapsed_seconds': result['elapsed_seconds'],
+                      'wall_failures': len(wall_failures), 'overlaps': len(overlaps),
+                      'wall_equalities': len(wall_equalities),
+                      'pair_equalities': len(pair_equalities),
+                      'side_ceiling_12_places': result['side_ceiling_12_places']}), flush=True)
+    if result['verdict'] != 'PASS':
+        raise SystemExit(1)
+
+
+if __name__ == '__main__':
+    main()

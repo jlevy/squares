@@ -1,0 +1,68 @@
+"""Check exact final lower-table lineage and compare the two n232 predecessor receipts."""
+from pathlib import Path
+from fractions import Fraction
+from zipfile import ZipFile
+from collections import Counter
+import csv
+import hashlib
+import io
+import json
+import signal
+
+from devtools import contraction_margin as contract
+from devtools import upper_bound_reports as reports
+
+home = Path(__file__).resolve().parent
+signal.alarm(120)
+def write(name, obj):
+    (home / name).write_text(json.dumps(obj, ensure_ascii=False, indent=2) + "\n")
+def rows(file, member):
+    with ZipFile(home / file) as bundle:
+        raw = bundle.read(member)
+        value = list(csv.DictReader(io.StringIO(raw.decode("utf-8"))))
+        by_n = {int(row["n"]): row for row in value}
+        assert len(value) == len(by_n) == 166
+        return by_n, hashlib.sha256(raw).hexdigest()
+A, sha_a = rows("lower-bounds-A.zip", "claims-166.csv")
+C, sha_c = rows("lower-bounds-C.zip", "wall-bounds/claims-166-updated.csv")
+D, sha_d = rows("lower-bounds-D.zip", "claims-final.csv")
+assert A.keys() == C.keys() == D.keys()
+def bound(value):
+    return Fraction(value["endpoint"]), value["relation"] == ">"
+changes = [n for n in sorted(D) if bound(C[n]) != bound(D[n])]
+assert len(changes) == 22 and all(bound(D[n]) > bound(C[n]) for n in changes)
+assert all(Fraction(D[n]["previous_endpoint"]) == Fraction(C[n]["endpoint"]) for n in D)
+write("1060-final-baseline-comparison.json", {
+    "source_member_sha256":{"A":sha_a,"C":sha_c,"D":sha_d},
+    "A_to_C_changed": [n for n in sorted(C) if bound(A[n]) != bound(C[n])],
+    "C_to_D_strict_strengthenings": changes,
+    "C_to_D_unchanged":166-len(changes),
+    "verified_count_status": dict(Counter(D[n]["relation"] for n in D)),
+    "scope":"Exact printed endpoint and inequality comparison, with no proof of geometry.",
+})
+print("1060 final versus C: 22 strengthened, 144 unchanged", flush=True)
+n = 232
+source = json.loads((home / "1062-exact-source-reading.json").read_text())
+candidate_side = Fraction(source["exact_side"])
+paths = Path("resources/web/joegun-local-minimum-2026-11-16/source/local-minimum")
+known = contract.read_certificate("T-307=packet:joegun-upper-bounds-2026-11-16", n)
+raw = paths / "n-232-input.cert"
+prior = contract.read_certificate(f"JoeGun earlier exact certificate=evand-cert:{raw.resolve()}", n)
+comparison = {}
+for name, row in (("T-307", known), ("JoeGun-local-solve",prior)):
+    contract.check_walls(row.certificate)
+    factor, pair = contract.lambda_star(row.certificate)
+    assert 0 < factor <= 1
+    first = contract.contract(row.certificate, factor).side
+    comparison[name] = {
+        "rational_side": str(row.certificate.side), "first_contact_side": str(first),
+        "binding_pair": list(pair), "first_contact_factor": str(factor),
+        "gain_from_offered_side": str(row.certificate.side-candidate_side),
+        "gain_beyond_first_contact": str(first-candidate_side),
+        "gain_beyond_first_contact_float": float(first-candidate_side),
+        "candidate_below_first_contact": candidate_side < first,
+    }
+write("1062-comparison-to-prior-first-contact.json", comparison)
+print("1062 prior Option D comparisons", {name: row["gain_beyond_first_contact_float"] for name,row in comparison.items()}, flush=True)
+signal.alarm(0)
+

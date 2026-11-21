@@ -1,0 +1,20 @@
+{
+  "format": "n20-custody-check-v1",
+  "archive_sha256": "475d7ef50e21ce4a83cfb4c8415c9e9852d619beeade5c4c8745c2c963d6c867",
+  "archive_bytes": 1425895,
+  "archive_files": 661,
+  "manifest_members_checked": 660,
+  "upstream_git_blobs_checked": 20,
+  "retained_members_identical": 5,
+  "original_495_members_checked": {
+    "n20.py": "c8ea874e26faed6aaa1f3ceaa960e1bb9cc25bcbb7134351efffbcd24e7a9a45",
+    "n20_certificate.json": "07874bf4e658f1be40a627f37d95df07c6b62f2c10143cbf74d85c2cf3207e80",
+    "n20_verdicts.json": "c331bfa3444647a93109fd472cd91195cfb05963519062c567fe02ff563c8295",
+    "n20_receipt.json": "514f156d02ef58a17b2b218f4e4825b64733a1e4ebf1ea286f9302b4a2962238",
+    "n20_orientation_intervals.json": "df4b99ab408c0f1c52eea923b33586ea69bc92fad46d3efbd2a44a1f1297bdff",
+    "replay_log.txt": "d143073403b85990660cc060fe6433c324c186337fe241632b3bfb1b12160ae4",
+    "PROOF.md": "d4dcb445d90516a125e2c18220106614aa0a6519a18ddd58c64328c7bf0de843",
+    "README.md": "8d9a2878662f7b9dc939fbe162560d398818556e537876f8638d82c4fd133e17"
+  },
+  "elapsed_seconds": 0.047837
+}

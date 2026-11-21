@@ -1,0 +1,22 @@
+{
+  "sha256": "81e11c944fd64f80fb59314f75c2969a5bf4cba433e74fc94995dc8b7bc3ca42",
+  "count": 166,
+  "comparison_signs": {
+    ">": 40,
+    ">=": 126
+  },
+  "source_kinds": {
+    "overnight/results.csv": 22,
+    "wall-bounds/parallel-nov21/additional-counts": 1,
+    "wall": 6,
+    "baseline": 121,
+    "wall-bounds": 16
+  },
+  "dependency_flags": {
+    "": 80,
+    "Updated global certificate from the parallel study.": 10,
+    "Global rectangle-density certificate with exact wall replay.": 16,
+    "Corner modification uses Hosono T-180 for coverage away from changed corners": 60
+  },
+  "scope": "Original final-table inventory. No row geometry, proof or claimed improvement verified."
+}

@@ -1,0 +1,118 @@
+"""Inspect official intake archives with no contributor-code execution."""
+import csv
+from collections import Counter
+import gzip
+import hashlib
+import io
+import json
+from fractions import Fraction
+from math import comb
+from pathlib import Path
+from zipfile import ZipFile
+
+from devtools import exact_sides, evand_arrangement_reports as kernel
+from devtools import upper_bound_houses as houses, upper_bound_reports as reports
+
+BASE = Path("/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/live-1060-1063")
+SUPPLEMENTS = (105, 127, 130, 156, 180, 182, 260, 270, 272, 299, 304, 307, 308)
+ALGEBRAIC = (109, 129, 172, 175, 199, 237, 259, 262, 268, 269, 292, 295)
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+def save(name, value):
+    (BASE / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
+
+def member(bundle, name):
+    file = bundle.getinfo(name)
+    assert file.file_size <= 25_000_000
+    return bundle.read(file)
+
+def json_gz(bundle, name):
+    compressed = member(bundle, name)
+    raw = gzip.decompress(compressed)
+    assert len(raw) <= 25_000_000
+    return compressed, json.loads(raw, object_pairs_hook=kernel.unique_object)
+
+def rational_case(bundle, n):
+    candidate_bytes, candidate = json_gz(bundle, f"{n}/candidate.json.gz")
+    input_bytes, original = json_gz(bundle, f"{n}/input.json.gz")
+    assert digest(input_bytes) == candidate["input_sha256"]
+    assert n == original["n"] == candidate["n"]
+    side = Fraction(candidate["side"])
+    input_side = Fraction(original["side"])
+    assert input_side == Fraction(candidate["original_side"])
+    assert input_side - side == Fraction(candidate["gain"]) > 0
+    scale = Fraction(candidate["center_scale"])
+    assert 0 < scale < 1
+    initial = tuple(tuple(Fraction(row[k]) for k in ("cx", "cy", "t")) for row in original["squares"])
+    final = tuple(tuple(map(Fraction, row)) for row in candidate["squares"])
+    assert len(initial) == n == len(final)
+    assert all(a[2] == b[2] for a,b in zip(initial, final, strict=True))
+    offsets = {(b[0] - scale*a[0], b[1] - scale*a[1]) for a,b in zip(initial, final, strict=True)}
+    assert len(offsets) == 1
+    house = houses.side(n) if n in houses.ADOPTED else None
+    print(n, reports.legacy.ceiling_decimal(side, 12), flush=True)
+    return {
+        "n": n, "candidate_sha256": digest(candidate_bytes), "input_sha256": digest(input_bytes),
+        "exact_side": str(side), "input_gain": str(input_side - side), "same_rotations": True,
+        "uniform_center_scale": str(scale), "translation": [str(v) for v in next(iter(offsets))],
+        "upward_ceiling_12": reports.legacy.ceiling_decimal(side, 12),
+        "input_upward_ceiling_12": reports.legacy.ceiling_decimal(input_side, 12),
+        "house_result": houses.ADOPTED.get(n),
+        "compared_to_house": exact_sides.compare(side, house) if house is not None else None,
+    }
+
+with ZipFile(BASE / "n232-rational.zip") as bundle:
+    save("1062-exact-source-reading.json", rational_case(bundle, 232))
+with ZipFile(BASE / "rational-enclosures.zip") as bundle:
+    save("1063-exact-source-reading.json", [rational_case(bundle, n) for n in SUPPLEMENTS])
+
+def shifted(poly, displacement):
+    return [sum(poly[j] * comb(j, k) * (-displacement)**(j-k) for j in range(k, len(poly)))
+            for k in range(len(poly))]
+
+with ZipFile(BASE / "algebraic-12.zip") as bundle:
+    results = {}
+    side_specs = {}
+    for n in ALGEBRAIC:
+        raw, value = json_gz(bundle, f"n{n}/n{n}.minpoly.json.gz")
+        assert n == value["n"] == len(value["squares"])
+        spec = value["S"]
+        side_specs[n] = spec
+        results[n] = {
+            "source_sha256": digest(raw), "side_polynomial_degree": len(spec["poly"]) - 1,
+            "field_degree": len(value["field"]["f"]) - 1, "side_interval": spec["interval"],
+            "comparison_to_case": None,
+        }
+        if max(len(value["field"]["f"]), len(spec["poly"])) <= 14 and n in houses.ADOPTED:
+            root = exact_sides.algebraic(spec["poly"][::-1], tuple(map(Fraction, spec["interval"])))
+            results[n]["comparison_to_case"] = exact_sides.compare(root, houses.side(n))
+    relations = []
+    for smaller, larger, displacement in [(172,199,1),(129,268,5),(259,292,1)]:
+        first, second = side_specs[smaller], side_specs[larger]
+        assert shifted(first["poly"], displacement) == second["poly"]
+        a, b = (Fraction(value)+displacement for value in first["interval"])
+        c, d = map(Fraction, second["interval"])
+        left = exact_sides.algebraic(second["poly"][::-1], (a,b))
+        right = exact_sides.algebraic(second["poly"][::-1], (c,d))
+        assert left == right
+        relations.append({"smaller": smaller, "larger": larger, "shift": displacement,
+                          "translated_polynomial_and_isolated_roots_equal": True})
+    save("1061-exact-sides-and-relations.json",
+         {"scoped_counts": ALGEBRAIC, "dependency_only": [259], "members": results, "relations": relations,
+          "scope": "Source scalar and isolating-interval checks. No geometry verified."})
+
+with ZipFile(BASE / "lower-bounds-D.zip") as bundle:
+    raw = member(bundle, "claims-final.csv")
+    rows = list(csv.DictReader(io.StringIO(raw.decode())))
+    assert len(rows) == len({r["n"] for r in rows}) == 166
+    assert all(r["relation"] in {">", ">="} and Fraction(r["endpoint"]) > 0 for r in rows)
+    flags = Counter(r["dependency_note_from_base"] for r in rows)
+    save("1060-final-table-inventory.json", {
+        "sha256": digest(raw), "count": len(rows), "comparison_signs": dict(Counter(r["relation"] for r in rows)),
+        "source_kinds": dict(Counter(r["proof_source"] for r in rows)), "dependency_flags": dict(flags),
+        "scope": "Original final-table inventory. No row geometry, proof or claimed improvement verified.",
+    })
+print("All source-record comparisons completed", flush=True)
+

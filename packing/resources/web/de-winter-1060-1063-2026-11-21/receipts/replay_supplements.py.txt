@@ -1,0 +1,94 @@
+"""Replay the 13 supplemental rational packings using the n232 exact predicates."""
+import argparse
+import gzip
+from fractions import Fraction
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import signal
+import time
+from zipfile import ZipFile
+
+def exact_module(path):
+    spec = importlib.util.spec_from_file_location("supplement_exact_geometry", path)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+def replay(n, offered, exact):
+    side = exact.rational(offered["side"])
+    squares = tuple(exact.square(*map(exact.rational, row)) for row in offered["squares"])
+    assert n == offered["n"] == len(squares)
+    wall_count = 0
+    contacts = []
+    for i, square in enumerate(squares):
+        for corner,wall,slack in exact.wall_values(square,side):
+            assert slack >= 0, (n,i,corner,wall,str(slack))
+            wall_count += 1
+            if slack == 0:
+                contacts.append([i,corner,wall])
+    counted = screened = touch = 0
+    best = None
+    nearest = None
+    for i, a in enumerate(squares):
+        for j in range(i+1,n):
+            b = squares[j]
+            counted += 1
+            if (a.bounds[0] > b.bounds[1] or b.bounds[0] > a.bounds[1]
+                or a.bounds[2] > b.bounds[3] or b.bounds[2] > a.bounds[3]):
+                screened += 1
+                continue
+            margin = max(exact.gaps(a,b))
+            assert margin >= 0, (n,i,j,str(margin))
+            if margin == 0:
+                touch += 1
+            if best is None or margin < best:
+                best, nearest = margin, (i,j)
+    assert counted == n*(n-1)//2 and wall_count == 16*n
+    assert nearest is not None
+    a,b = (squares[i] for i in nearest)
+    threshold = min(radius/distance for distance,radius in exact.axis_data(a,b) if distance>0)
+    epsilon = Fraction(1,10**30)
+    for multiplier,relation in ((1-epsilon,-1),(1,0),(1+epsilon,1)):
+        actual = max(exact.gaps(a,exact.translate_along(a,b,threshold*multiplier)))
+        assert (actual>0)-(actual<0) == relation, (n,str(actual),relation)
+    enclosing_right_or_top = max(max(sq.bounds[1],sq.bounds[3]) for sq in squares)
+    assert any(slack<0 for sq in squares for _,_,slack in exact.wall_values(sq,enclosing_right_or_top-epsilon))
+    return {"n":n, "side":str(side), "verdict":"accepted",
+            "wall_inequalities":wall_count, "walls_at_equality":contacts,
+            "pairs":counted, "strict_axis_aligned_box_separations":screened,
+            "complete_edge_axis_decisions":counted-screened, "touching_nonoverlap_pairs":touch,
+            "sharp_control_pair":list(nearest), "contacts_controls_passed":3, "wall_escape_control_passed":True}
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("archive",type=Path)
+    parser.add_argument("checker",type=Path)
+    parser.add_argument("output",type=Path)
+    options = parser.parse_args()
+    signal.alarm(240)
+    exact = exact_module(options.checker)
+    started = time.monotonic()
+    result = {"format":"exact-rational-supplements-replay-v1",
+              "method":"Exact Fraction boxes then four axes for every remaining pair.",
+              "descent_claim":"The existing n232 proof supplies the predicates. This is an implementation-aware replay.",
+              "archive_sha256":hashlib.sha256(options.archive.read_bytes()).hexdigest(),
+              "cases":[]}
+    expected = (105,127,130,156,180,182,260,270,272,299,304,307,308)
+    with ZipFile(options.archive) as incoming:
+        for n in expected:
+            row_path = f"{n}/candidate.json.gz"
+            raw = incoming.read(row_path)
+            case = replay(n,json.loads(gzip.decompress(raw)),exact)
+            case["source_compressed_sha256"] = hashlib.sha256(raw).hexdigest()
+            result["cases"].append(case)
+            result["runtime_seconds"] = time.monotonic() - started
+            options.output.write_text(json.dumps(result,indent=2)+"\n")
+            print(n,case["verdict"],case["pairs"],flush=True)
+    signal.alarm(0)
+
+if __name__ == "__main__":
+    main()
+

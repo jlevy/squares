@@ -1,0 +1,205 @@
+{
+  "format": "n20-proof-dependencies-v1",
+  "commands_status": "Proposed future commands only; run in extracted source root with an external output directory, approved interpreter, assertions and a separately selected replay budget. No source command was executed here.",
+  "components": [
+    {
+      "id": "original-495",
+      "claim": "s(20)>99/20",
+      "source_commit": "3a5130340b0882e72e9d04ad2419b0437cae99aa",
+      "files": [
+        "lower_n20/PROOF.md",
+        "lower_n20/n20.py",
+        "lower_n20/n20_certificate.json",
+        "lower_n20/n20_orientation_intervals.json"
+      ],
+      "runtime": [
+        "Python with assertions",
+        "C++17 compiler",
+        "20 pinned Mira-Cult upstream files"
+      ],
+      "commands": [
+        "\"$PYTHON\" n20.py --upstream \"$UPSTREAM\" --cases n20_certificate.json --out \"$OUT/replay495\" --jobs 1"
+      ],
+      "status": "Source custody confirmed; earlier analytic cover/reduction review available; 67-root/75-terminal native proof and shared geometry kernel pending."
+    },
+    {
+      "id": "small-equal-tilt",
+      "claim": "No sub-5 packing with independent signs and 0<t<=1/24, conditional on separate uniform-sign lane",
+      "files": [
+        "geometry/equal_magnitude.md",
+        "geometry/global_small_tilt.md",
+        "geometry/equal_path_polynomial.py",
+        "geometry/verify_equal_magnitude.py",
+        "geometry/equal_tilt_signs.py",
+        "geometry/signed_angle_graphs.py",
+        "geometry/signed_linear.py",
+        "geometry/check_signed_duals.py",
+        "proofs/equal_tilt_through_24.json.gz"
+      ],
+      "runtime": [
+        "Python standard library with assertions"
+      ],
+      "commands": [
+        "\"$PYTHON\" geometry/verify_equal_magnitude.py proofs/equal_tilt_through_24.json.gz --Q 24 --exact-paths --out \"$OUT/equal-tilt.json\""
+      ],
+      "status": "117 conditional certificates, 992 local chains, rank constants and 120 bridge patterns independently corroborated. 3636 sign assignments, 256 representatives, 26611 graphs and coverage pending.",
+      "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+      "file_sha256": {
+        "geometry/equal_magnitude.md": "6ca9a3ac32bab0c33bb07add1a6479d2f397d79c7a781094543bbc8e782966c5",
+        "geometry/global_small_tilt.md": "527315a5c023670659123841a0411ceaad99aa9c748e5be52c14425ec6973bfd",
+        "geometry/equal_path_polynomial.py": "35abbe0bbed597c769e65ece0141e7c72527ae99e91bf2656008c91dfd4926ae",
+        "geometry/verify_equal_magnitude.py": "9501994d4afcc54659d338798fa381105a7cbffb3b8d2cbc4f55c1cffc0f3603",
+        "geometry/equal_tilt_signs.py": "e9d645a373850d6982dbc0f5abc79d330aee5d5e136389f9b66a7dc4729fde96",
+        "geometry/signed_angle_graphs.py": "87a1e69a64c43292060641fea35b4c497196a652b995c78f6415b20c18c51c0e",
+        "geometry/signed_linear.py": "ec4bf224caed5678308674dd8e4afc075f366a84b5518cb2a3d4f36c285f191c",
+        "geometry/check_signed_duals.py": "1138a3f0742eaaf027b1b833944a3044529e2a275253d34bf0305d694e6e12e6",
+        "proofs/equal_tilt_through_24.json.gz": "009441b65a3364e5f2abc5736a07dc46632dfba32b03d880780fb7c6849e238f"
+      }
+    },
+    {
+      "id": "small-equal-tilt-boolean",
+      "claim": "Independent formulation of small-angle sign and graph coverage",
+      "files": [
+        "geometry/check_equal_boolean.py",
+        "advanced/z3_lra.py",
+        "proofs/equal_tilt_through_24.json.gz"
+      ],
+      "runtime": [
+        "Python with assertions",
+        "system Z3 shared library resolved by ctypes"
+      ],
+      "commands": [
+        "\"$PYTHON\" geometry/check_equal_boolean.py proofs/equal_tilt_through_24.json.gz --Q 24 --jobs 1 --out \"$OUT/equal-boolean.json\""
+      ],
+      "status": "Author reports 120+430 UNSAT cases; no solver used or installed here.",
+      "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+      "file_sha256": {
+        "geometry/check_equal_boolean.py": "2314f200abbe45056990a44053c25d29173ddac6929fd79e49d2a285cf119a13",
+        "advanced/z3_lra.py": "249ad0467ef0c76e8260726acf79ad69cf588731a2f7bb83797fc1a71e554d2b",
+        "proofs/equal_tilt_through_24.json.gz": "009441b65a3364e5f2abc5736a07dc46632dfba32b03d880780fb7c6849e238f"
+      }
+    },
+    {
+      "id": "common-orientation",
+      "claim": "Parallel unit-square minimum 5; nonzero common tilt excludes closed side 5",
+      "files": [
+        "geometry/all_parallel.md",
+        "geometry/check_common.py",
+        "geometry/verify_parallel.py",
+        "geometry/parallel_certificates.json",
+        "geometry/common_all.py",
+        "geometry/parallel_fractional.py"
+      ],
+      "runtime": [
+        "Python standard library with assertions"
+      ],
+      "commands": [
+        "\"$PYTHON\" geometry/check_common.py --workers 1 --receipt \"$OUT/common.json\""
+      ],
+      "status": "41 certificates, 7360 subset exclusions/31 intervals and 27 weighted covers require separate review and replay.",
+      "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+      "file_sha256": {
+        "geometry/all_parallel.md": "71cc31b13d5d889de8d53d7500fbee7f1dc0f0c0f1eae30e544dd35ac347c1dc",
+        "geometry/check_common.py": "e9bd3a45e71f46166f11f9f13daed888de7f8e8f48441d45e6890131678b6ed3",
+        "geometry/verify_parallel.py": "9cd7cf9ac8f870ed8603c31afc3bebe78c50161b7876f745460d80ec562bfe33",
+        "geometry/parallel_certificates.json": "69d6488bef85ab0e80072958eb9ccd9f0db40f3812725b44123586cb8815560c",
+        "geometry/common_all.py": "4b9cea02ef0be17775f3bca6ac630cd863fb1ae479558862115c3cd4a4567b9a",
+        "geometry/parallel_fractional.py": "1a402c5187d346e5420c715b209116d3891e577c3adbe83bbe2469cbf55ad85a"
+      }
+    },
+    {
+      "id": "side-five-screen",
+      "claim": "Complete unrestricted labelled-assignment screen at strict side 5",
+      "files": [
+        "global/verify_screen.py",
+        "global/verify_cap.py",
+        "base496/prereqs.py",
+        "geometry/transfer.md",
+        "proofs/cap5000000/moves.txt"
+      ],
+      "runtime": [
+        "Python with assertions",
+        "C++17 compiler",
+        "20 pinned upstream files"
+      ],
+      "commands": [
+        "\"$PYTHON\" global/verify_screen.py 5000000 \"$OUT/screen500\" --jobs 1",
+        "\"$PYTHON\" global/verify_cap.py 5000000 proofs/cap5000000 \"$OUT/geometry500\" \"$OUT/screen500\" --jobs 1 --prepare-only"
+      ],
+      "status": "53361 ordered mask pairs/6787 classes/15017 enumerated matchings/1142 survivors are author-reported. Continuous mark cover, label completeness, transfer and geometry kernel pending.",
+      "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+      "file_sha256": {
+        "global/verify_screen.py": "ca6d45cfb7f33cba3cd27e9f71f165a2c0f0a43593b888c15a38e0c6b4f00a9b",
+        "global/verify_cap.py": "dd0c61b61db4a7ebd666c2fb190e3edd6521af09d0e66d8e698494e429090ffd",
+        "base496/prereqs.py": "239c74ba61a529f37694aedb06f7da8846bc1ccaabe3daf73b7ad5cb4b9b39a5",
+        "geometry/transfer.md": "85689f532ffad627c296ba74f88d7413db5113bf39ab56bdd9b49b61d97dfdb7",
+        "proofs/cap5000000/moves.txt": "8f1601227143e38e13f8b523ceecfff768414720f3677f68f086130c2c9aa9c3"
+      }
+    },
+    {
+      "id": "large-angle",
+      "claim": "No strict sub-5 packing when normalized half-angles all lie in [1/24,23/25]",
+      "files": [
+        "geometry/axis_diagonal.md",
+        "global/band_cases.py",
+        "global/refine_bands.py",
+        "runs/tilt_24_verified.json"
+      ],
+      "depends_on": [
+        "side-five-screen"
+      ],
+      "runtime": [
+        "Python with assertions",
+        "native C++ geometric exclusions from prepared endpoint geometry"
+      ],
+      "commands": [
+        "\"$PYTHON\" global/band_cases.py 1/24,23/25 --jobs 1 --screen \"$OUT/screen500\" --cold \"$OUT/geometry500\" --label reproduced_far24",
+        "\"$PYTHON\" global/refine_bands.py reproduced_far24 1/24,23/25 reproduced_far24 --jobs 1 --cold \"$OUT/geometry500\""
+      ],
+      "status": "Needs all 1142 assignments and the remaining nine angular ownership alternatives; not checked in this slice. Z3 axis/diagonal theorem is a separate result, not required by these two native band commands.",
+      "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+      "file_sha256": {
+        "geometry/axis_diagonal.md": "490416416074774d7dda81e781f935d2beafcebf4b756caff3dbf5335697158c",
+        "global/band_cases.py": "4da451d5606da8b6bc29d98e7a13162dc18c80fd08ccc4541e0e5c2c5b70846f",
+        "global/refine_bands.py": "9775e5a3ecf99f493eeaf0138af8400dbce26300ccfb234bc9fcdc03c6b20d3c",
+        "runs/tilt_24_verified.json": "0c27f320592d6b4e0ecaf89736743f6eda4e1ff6b88e09a5aa84fbf3196bffff"
+      }
+    },
+    {
+      "id": "unrestricted-499755",
+      "claim": "s(20)>99951/20000",
+      "files": [
+        "global/check_execution.py",
+        "global/verify_choice.py",
+        "proofs/release4997550.json.gz",
+        "proofs/ledger4997550.json.gz",
+        "geometry/transfer.md",
+        "runs/replay4997550_saved.json",
+        "runs/replay4997550_last_root.json"
+      ],
+      "depends_on": [
+        "side-five-screen"
+      ],
+      "runtime": [
+        "Python with assertions",
+        "C++17 compiler for cold replay",
+        "all source-selected cap profiles and native frame/refinement programs"
+      ],
+      "commands": [
+        "\"$PYTHON\" global/check_execution.py proofs/release4997550.json.gz proofs/ledger4997550.json.gz --out \"$OUT/saved-executions.json\"",
+        "\"$PYTHON\" global/verify_choice.py replay proofs/release4997550.json.gz \"$OUT/fresh-global\" --jobs 1"
+      ],
+      "status": "Saved ledger is a cross-check, not a native proof replay. Full recipe spans 1142 matchings, 1068 ownership exclusions, 47 root-frame exclusions, 27 refined matchings/89 terminals. Verify all 1141 inherited exclusions reach target and all four ownership choices are reopened; changed-root receipt alone is insufficient.",
+      "source_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+      "file_sha256": {
+        "global/check_execution.py": "d2d64af2fea5099550027d5c309339d7942860537665a7d5077c6efeb165393c",
+        "global/verify_choice.py": "72d255c7808aef844c6b58caf03372317370b6c7f238f2bb929f4499b76f9088",
+        "proofs/release4997550.json.gz": "0b8e86517911b3eb8989011684c51a79f0147a028dd89b30940aaa529f135055",
+        "proofs/ledger4997550.json.gz": "296b7b6734789072e9aa0b1955f9d4d3adc1affad466962ec6925d9a76e4bf65",
+        "geometry/transfer.md": "85689f532ffad627c296ba74f88d7413db5113bf39ab56bdd9b49b61d97dfdb7",
+        "runs/replay4997550_saved.json": "8507adf1c9b1a3283a574c5731ea82680c64b95405d07c528d1fd250306a1214",
+        "runs/replay4997550_last_root.json": "c0b6e5f71ab1f2c1adb25be3571140dd53181609fa72bf4351a3f6b6da25e0ed"
+      }
+    }
+  ]
+}

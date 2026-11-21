@@ -1,0 +1,38 @@
+{
+  "source_member_sha256": {
+    "A": "b4b809ce60de7af41c9648822fa2a7fe2da1c87409578d49b1ea76443a72028d",
+    "C": "b4b809ce60de7af41c9648822fa2a7fe2da1c87409578d49b1ea76443a72028d",
+    "D": "81e11c944fd64f80fb59314f75c2969a5bf4cba433e74fc94995dc8b7bc3ca42"
+  },
+  "A_to_C_changed": [],
+  "C_to_D_strict_strengthenings": [
+    26,
+    27,
+    30,
+    37,
+    39,
+    42,
+    115,
+    138,
+    162,
+    163,
+    190,
+    219,
+    247,
+    248,
+    249,
+    250,
+    280,
+    282,
+    283,
+    314,
+    317,
+    318
+  ],
+  "C_to_D_unchanged": 144,
+  "verified_count_status": {
+    ">": 40,
+    ">=": 126
+  },
+  "scope": "Exact printed endpoint and inequality comparison, with no proof of geometry."
+}

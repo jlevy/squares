@@ -1,0 +1,36 @@
+"""Measure new supplement sides against the retained houses' exact first contact."""
+from pathlib import Path
+from fractions import Fraction
+import json
+import signal
+from devtools import contraction_margin as contract
+from devtools import upper_bound_houses as houses
+
+home = Path(__file__).resolve().parent
+signal.alarm(180)
+inputs = json.loads((home / "1063-exact-source-reading.json").read_text())
+output = home / "1063-first-contact-comparison.json"
+comparisons = []
+for received in inputs:
+    n = received["n"]
+    if houses.algebraic(n):
+        comparisons.append({"n": n, "state": "algebraic house requires separate field comparison"})
+        continue
+    original = houses.certificate(n)
+    contract.check_walls(original)
+    factor, pair = contract.lambda_star(original)
+    assert 0 < factor <= 1
+    first_side = contract.contract(original, factor).side
+    new_side = Fraction(received["exact_side"])
+    delta = first_side - new_side
+    comparisons.append({
+        "n": n, "house_result": houses.ADOPTED[n], "house_side": str(original.side),
+        "first_contact_factor": str(factor), "binding_pair": list(pair),
+        "first_contact_side": str(first_side), "delta_beyond_first_contact": str(delta),
+        "delta_beyond_first_contact_float": float(delta), "candidate_below_first_contact": delta > 0,
+        "scope": "Exact side comparison; candidate feasibility and arrangement identity are separate."
+    })
+    output.write_text(json.dumps(comparisons, indent=2) + "\n")
+    print(n, houses.ADOPTED[n], f"{float(delta):.8g}", flush=True)
+signal.alarm(0)
+
