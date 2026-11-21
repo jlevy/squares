@@ -85,20 +85,3 @@ deferrals:
     reason: The same configuration at 297 decided on sqpack's exact verifier over its field (route 1
       of route B, think-ozx8); cited with route B's verify_exact.py run when the house adopts T-247
       (think-vv1q owns that adoption).
-  - evidence: E-samanyu-n109-exact-feasibility
-    results:
-    - T-335
-    bead: think-wvr8
-    blocked_on: think-wvr8
-    recorded: '2026-11-21'
-    reason: Both maintained routes accepted the exact reading of the original Samanyu-dev
-      packing. The case cites the certificate in its bounds when both strong drawing
-      generators have run and the house adopts T-335.
-  - evidence: E-samanyu-n109-canonical-independent-feasibility
-    results:
-    - T-335
-    bead: think-wvr8
-    blocked_on: think-wvr8
-    recorded: '2026-11-21'
-    reason: The independent corners checker accepted the same canonical certificate.
-      The ensuing house adoption cites both exact runs.

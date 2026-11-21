@@ -34952,6 +34952,30 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Samanyu-dev square packing 2026-11-07]'
+    field: /authors/0
+  expected_text: Samanyu-dev
+  start: 0
+  end: 11
+  label: Samanyu-dev
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Samanyu-dev square packing 2026-11-07]'
+    field: /credit
+  expected_text: Samanyu-dev
+  start: 0
+  end: 11
+  label: Samanyu-dev
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

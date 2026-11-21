@@ -6,6 +6,7 @@ components:
 paths:
   - packing/campaign/result-requests.yaml
   - packing/devtools/select_houses.py
+  - packing/devtools/site_resources.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/results.yaml
   - packing/frontier/source-coverage.yaml
@@ -24,7 +25,7 @@ reason: >-
   de Winter/Kodaj certificate stays as an unregistered restatement, and #1040 retains its
   source pointer under think-squj.
   Against main 552741cee2b8, devtools.compare_paper_renders rendered each paper twice from
-  this tree and once using main’s five inputs above. Each render used a fresh site directory
+  this tree and once using main’s six inputs above. Each render used a fresh site directory
   and Chrome on macOS for math preparation. The optimality review, threshold-bound review
   and methods survey were byte-identical across the three runs, with 43 files each. The
   explainer was deterministic across 55 files. Only its public Markdown and HTML differed
