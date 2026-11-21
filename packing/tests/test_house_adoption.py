@@ -319,8 +319,12 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # 268, which T-240 took from the hold, was staged again and adopted for T-242
     # (`ADOPTED_NEXT_DAY`), so it is on neither side. A staged count a smaller house took
     # (`OVERTAKEN`) leaves the hold too.
+    # T-335's n109 intake is staged separately from the lifted hold's adoption cohort.
+    assert 109 not in previous
+    assert 109 not in held_counts
+    staged_from_hold = set(select.PENDING_ADOPTION) - {109}
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
-        set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
+        staged_from_hold | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
@@ -1693,7 +1697,9 @@ def test_a_rational_house_staged_for_the_writer_fails_the_check(
     assert "the writer writes it, so stage it for the next pull request" in problem
 
 
-def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
+def test_the_staged_adoptions_name_their_beads_and_reasons(
+    selections: dict[int, select.Selection],
+) -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
@@ -1714,6 +1720,23 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
         assert n not in defaults.PENDING_ALLOWED
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
+        if n == 109:
+            assert pending == select.Pending(
+                house="T-335", bead="think-wvr8", why=select.NEXT_PULL_REQUEST
+            )
+            selection = selections[n]
+            assert selection.house is not None
+            assert selection.house.result == "T-335"
+            assert selection.house.side < selection.case.verified
+            assert selection.case.source_key == "[Kingbird]"
+            assert selection.case.evidence == (
+                "E-evand-exact-ceilings-2026-10-05-exact-replay",
+                "E-evand-exact-ceilings-2026-10-05-source-replay",
+                "E-regularized-bounds-2026-10-12-exact-decision",
+            )
+            assert n not in houses.ADOPTED
+            assert n not in defaults.PENDING_ALLOWED
+            continue
         algebraic = pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
@@ -1748,7 +1771,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     # that of 5 November 2026 took 175 off: T-267 is below it there, and the last pass of 9
     # November 2026 took 199 off: T-284 is below it there, and the pass of 18 November
     # 2026 took 292 off: T-323 is below it there (`OVERTAKEN`).
-    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 301]
+    assert sorted(select.PENDING_ADOPTION) == [88, 109, 126, 266, 267, 301]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:

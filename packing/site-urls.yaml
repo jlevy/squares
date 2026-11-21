@@ -5387,7 +5387,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-18'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/11.html
   canonical: cases/11.html
@@ -26438,6 +26438,43 @@ urls:
     - packing/resources/web/ozden-s228-1038-review-2026-11-20/README.md
     - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/check-n228.json
     - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
+- path: result/t-335.html
+  canonical: result/t-335.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-21'
+  lastmod: '2026-11-21'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 109
+    established: null
+    attribution:
+      source_keys:
+      - '[Samanyu-dev square packing 2026-11-07]'
+      published: '2026-11-07'
+    builds_on: null
+    evidence:
+    - E-samanyu-n109-numerical-report
+    - E-samanyu-n109-exact-feasibility
+    - E-samanyu-n109-canonical-independent-feasibility
+    artifacts:
+    - packing/resources/web/samanyu-n109-2026-11-07/README.md
+    - packing/resources/web/samanyu-n109-2026-11-07/acquisition/claims.json
+    - packing/resources/web/samanyu-n109-2026-11-07/facts/n-109.yaml.gz
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/exact-certification.json.xz
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/sharp-controls.json
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/controls-plan-samanyu-n109.md
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/canonical-independent-check.json
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/canonical-independent-binding.json
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/samanyu-canonical-corners.yaml
+    - docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md
+    - docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/contraction-canonical-samanyu-vs-kodaj.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/identity-canonical-samanyu.json
 - path: results.html
   canonical: results.html
   kind: page

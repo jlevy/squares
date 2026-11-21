@@ -10094,3 +10094,47 @@ verifiers:
       review-only directory ozden-s228-1038-review-2026-11-20 beside the import lane's
       packet. r1038_describe.py and r1038_sides.py, kept beside them, decide no certificate
       and are not registered.
+  - id: V-r1012-review-check
+    program: r1012_check.py with r1012_reader.py, r1012_sat.py, r1012_clip.py, r1012_geom.py and r1012_decide.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    source:
+    - packing/resources/web/de-winter-kodaj-n109-1012-review-2026-11-20/programs/r1012_check.py
+    - packing/resources/web/de-winter-kodaj-n109-1012-review-2026-11-20/programs/r1012_reader.py
+    - packing/resources/web/de-winter-kodaj-n109-1012-review-2026-11-20/programs/r1012_sat.py
+    - packing/resources/web/de-winter-kodaj-n109-1012-review-2026-11-20/programs/r1012_clip.py
+    - packing/resources/web/de-winter-kodaj-n109-1012-review-2026-11-20/programs/r1012_geom.py
+    - packing/resources/web/de-winter-kodaj-n109-1012-review-2026-11-20/programs/r1012_decide.py
+    summary: Decides rational corner certificates with its own reader, separating axes in integer
+      arithmetic and exact clipping in gmpy2.mpq, including unit-square shape, every wall, every pair
+      and upward claim arithmetic. The canonical n109 run uses the unchanged retained implementation.
+    independence_record: docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: The separately prompted stage 4 review lane r1012 of 20 November 2026; tbd-strong-max
+          at maximum reasoning.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: The checker was written and frozen before the canonical Kaggle adapter and this exact
+          fact were produced, and imports no project or producer verifier code. Samanyu-dev search
+          authorship was not audited. The 21 November run reuses the retained checker; it is not a
+          newly blinded review.
+    note: The 20 November source review documents the checker freeze and authorship.
+      The 21 November confirming review accepted the custody and binding of the canonical replay.
+      No new checker-source checksum or copied verifier code is needed.

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-20'
+last_reviewed: '2026-11-21'
 results:
   - id: T-001
     kind: lower-bound
@@ -54156,6 +54156,92 @@ results:
       verdict: accepted
       covers:
       - T-334
+
+  - id: T-335
+    kind: upper-bound
+    registered: '2026-11-21'
+    landed: '2026-11-21'
+    headline: Samanyu-dev's 109-square pinwheel, exactly certified below the catalogue
+    claim: 'The canonical rational reading of Samanyu-dev''s public 7 November 2026 packing proves
+      s(109) <= 77048775744870704249016736832610469086415324701767622918617757120832774961909650280840034508088021596621011577705828367416028128550435308160178796822943658853681668010745854836758324550270597468978493787420957347623/7036874417766398006615713414024855066367484336951114500387011858924703216896760814081444756051720693947120279336617047992243690757003605247166108605326334229018965414512158055871100786464723368461728873374141120512.
+      Its side is approximately 10.949289580945379338339554460712 and rounds upward at 12 places to
+      10.949289580946. The exact fraction, not the truncated decimal, is the bound.
+
+
+      The source publishes binary64 centres and radian angles. This repository derives rational rotations
+      by outward interval arithmetic, translates the minimum corner coordinates to zero and takes
+      the exact larger span. The record imports the original geometry at that extent, without contraction
+      or optimization. It is about 4.58e-4 below the catalogue arrangement held at 109 by T-101 and
+      T-155.
+
+
+      Both maintained exact routes accept the derived fact. A separate run of the retained r1012 checker
+      accepts a corners copy of that same fact, every square, wall and all 5,886 pairs, so its finite
+      feasibility is confirmed by an independently re-implemented checker. The new run is distinct
+      from the review''s older libm-based Samanyu witness and does not inherit that witness''s digest
+      or the de Winter certificate''s 37 controls.
+
+
+      The owner credits Samanyu-dev as finder. De Winter''s later certificate from Kodaj''s rows remains
+      a separate unregistered Option D restatement source, with source credit exactly ''de Winter
+      after Kodaj, Samanyu-dev''; it is not the certificate this result registers.'
+    scope:
+      n_values:
+      - 109
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: The pinwheel is a different arrangement from the catalogue packing and improves its
+        side by about 4.58e-4. The original r1012 review proposes S3 for that case improvement, comparable
+        to T-292 and T-293. Exact conversion of a previously published packing establishes no new
+        technique, optimum or lower bound.
+      scored: '2026-11-21'
+      by: think-wvr8 intake continuation
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Samanyu-dev square packing 2026-11-07]'
+      published: '2026-11-07'
+    evidence:
+    - E-samanyu-n109-numerical-report
+    - E-samanyu-n109-exact-feasibility
+    - E-samanyu-n109-canonical-independent-feasibility
+    artifacts:
+    - packing/resources/web/samanyu-n109-2026-11-07/README.md
+    - packing/resources/web/samanyu-n109-2026-11-07/acquisition/claims.json
+    - packing/resources/web/samanyu-n109-2026-11-07/facts/n-109.yaml.gz
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/exact-certification.json.xz
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/sharp-controls.json
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/controls-plan-samanyu-n109.md
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/canonical-independent-check.json
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/canonical-independent-binding.json
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/samanyu-canonical-corners.yaml
+    - docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md
+    - docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/contraction-canonical-samanyu-vs-kodaj.json
+    - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/identity-canonical-samanyu.json
+    controls:
+    - packing/resources/web/samanyu-n109-2026-11-07/receipts/sharp-controls.json
+    notes: The portable fact’s side improves n = 109's catalogue packing by about 4.58e-4. The 21
+      November confirming review checked its canonical binding and safe print. The later exact transcription
+      of Kodaj's rows is within the canonical original's contraction margin (ratio 0.9723) and remains
+      a restatement under Option D.
+    next_rung: The house adoption, including the two required strong generators, is staged under think-wvr8.
+      V4/C4 need the additional reviews and human oversight in the project rules.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md
+      kind: confirming
+      reviewer: Codex (OpenAI)
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-21'
+      scope: Finite feasibility of the canonical Samanyu n109 fact; exact centre-basis-to-corners
+        equality and digest binding; the 12-place ceiling; source/date/finder attribution; distinction
+        from the earlier libm witness and unregistered de Winter/Kodaj restatement.
+      verdict: accepted
+      covers:
+      - T-335
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

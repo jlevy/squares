@@ -78,6 +78,7 @@ report prints.
 from __future__ import annotations
 
 import argparse
+import csv
 import functools
 import hashlib
 import io
@@ -687,6 +688,8 @@ def pingyou_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certi
 #: measured against his JSON of the same packing (think-32cl). Either way the document is
 #: validated against this repository's schema file.
 CORNER_FRAME = {"origin": "lower-left", "axes": "x-right-y-up", "angle_unit": "not-applicable"}
+#: The `witness_corners` option naming the number of a witness's first square.
+FIRST_ID = "first_id"
 CORNER_SCHEMA = "witness.schema.yaml"
 CORNER_SCHEMA_URL = (
     "https://github.com/jlevy/squares/blob/main/packing/witnesses/witness.schema.yaml"
@@ -724,9 +727,18 @@ def witness_corners(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Ce
     exactly that pose's, which holds only for a unit square in that order. Corners listed
     from another vertex draw the same square at another ``t``, and a comparison of poses
     reads them as another packing.
+
+    One option is read, ``first_id``, ``"0"`` or ``"1"`` (the default): the number of the
+    first square. Joost de Winter's transcription of Tomáš Kodaj's 109 (#1012) numbers its
+    squares ``square-0`` to ``square-108``, as the Kaggle rows it transcribes do; declared
+    so, they must be numbered ``0`` to ``n - 1`` in order, and are read as squares 1 to
+    ``n``.
     """
-    _no_options(options, "witness-corners")
-    return _corner_witness(raw, n, start=0)
+    _require(
+        set(options) <= {FIRST_ID} and options.get(FIRST_ID, "1") in ("0", "1"),
+        f"witness-corners reads only {FIRST_ID}, 0 or 1: {sorted(options.items())[:2]}",
+    )
+    return _corner_witness(raw, n, start=0, first=int(options.get(FIRST_ID, "1")))
 
 
 def witness_corners_opposite(
@@ -746,8 +758,9 @@ def witness_corners_opposite(
     return _corner_witness(raw, n, start=2)
 
 
-def _corner_witness(raw: bytes, n: int, *, start: int) -> legacy.Certificate:
-    """`witness_corners`, its corner lists read from their corner ``start`` (0 to 3)."""
+def _corner_witness(raw: bytes, n: int, *, start: int, first: int = 1) -> legacy.Certificate:
+    """`witness_corners`, its corner lists read from their corner ``start`` (0 to 3), its
+    squares numbered from ``first``."""
     try:
         document = load_yaml(_text(raw))
     except yaml.YAMLError as error:
@@ -774,9 +787,10 @@ def _corner_witness(raw: bytes, n: int, *, start: int) -> legacy.Certificate:
     rows = []
     for index, square in enumerate(witness["squares"], start=1):
         where = f"n={n} square {index}"
+        number = index - 1 + first
         _require(
-            square["id"] in (index, f"square-{index}"),
-            f"{where}: squares are not numbered 1..n in order",
+            square["id"] in (number, f"square-{number}"),
+            f"{where}: squares are not numbered {first}..{'n' if first else 'n-1'} in order",
         )
         listed = [(_literal(x, where), _literal(y, where)) for x, y in square["corners"]]
         corners = listed[start:] + listed[:start]
@@ -1338,6 +1352,41 @@ def calle_txt(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certific
     return _certificate(n, Fraction(Decimal(sides[0].group(1))), rows)
 
 
+def kaggle_csv(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Derive a rational pose from binary64 centres and radian angles in Kaggle's CSV.
+
+    The CSV's angles describe a numerical packing. Its rational reading uses the
+    existing interval tangent floor at 50 decimal places and keeps the source's
+    orientation. The bounding box is measured from the resulting exact corners.
+    """
+    _no_options(options, "kaggle-csv")
+    _require(n > 0, "Kaggle CSV needs a positive square count")
+    header = ["id", "n", "square_id", "x", "y", "angle"]
+    poses: list[legacy.Pose] = []
+    try:
+        rows = csv.reader(io.StringIO(_text(raw)), strict=True)
+        _require(next(rows, None) == header, "Kaggle CSV header differs")
+        for line, row in enumerate(rows, start=2):
+            _require(len(row) == len(header), f"Kaggle CSV line {line}: expected six fields")
+            _, count, square_id, x, y, angle = row
+            if count != str(n):
+                continue
+            _require(
+                square_id == str(len(poses)), f"n={n}: square IDs must start at zero and ascend"
+            )
+            values = (float(x), float(y), float(angle))
+            _require(all(math.isfinite(value) for value in values), f"n={n}: nonfinite pose")
+            cx, cy, radians = (Fraction(value) for value in values)
+            poses.append(legacy.Pose(cx, cy, half_angle_tangent_radians(radians, 50)))
+    except (ValueError, csv.Error) as error:
+        raise ReportError(f"n={n}: invalid Kaggle CSV pose: {error}") from error
+    _require(len(poses) == n, f"{len(poses)} squares for n = {n}")
+    xs, ys = zip(*(corner for pose in poses for corner in pose_corners(pose)), strict=True)
+    x0, y0 = min(xs), min(ys)
+    side = max(max(xs) - x0, max(ys) - y0)
+    return _certificate(n, side, [(pose.x - x0, pose.y - y0, pose.t) for pose in poses])
+
+
 #: Every certificate format a declaration may name. The module docstring says how to add one.
 ADAPTERS: dict[str, Adapter] = {
     "evand-cert": evand_cert,
@@ -1355,6 +1404,7 @@ ADAPTERS: dict[str, Adapter] = {
     "decimal-dilation": decimal_dilation,
     "sqcert": sqcert,
     "calle-txt": calle_txt,
+    "kaggle-csv": kaggle_csv,
 }
 
 
@@ -1888,6 +1938,11 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # counts from 147 to 307, centre/half-angle certificates beside Witness/v2 corner
     # files of the same packings, in one repository and one packet.
     "[Mishapolk issue 1009 2026-11-16]": _import("mishapolk-issue1009-2026-11-16"),
+    # The intake pass of 20 November (think-wvr8): Joost de Winter's exact transcription of
+    # Tomáš Kodaj's 109 (issue 1012), a corner Witness/v2 numbered from 0.
+    "[de Winter Kodaj n109 2026-11-18]": _import("de-winter-kodaj-n109-2026-11-18"),
+    # The retained rational derivation of Samanyu-dev's earlier public arrangement.
+    "[Samanyu-dev square packing 2026-11-07]": _import("samanyu-n109-2026-11-07"),
     # Lane w6-dewinter-1118 of 18 November (think-gqzz): Joost de Winter's issues 1021 at 268,
     # nine diagonal slices of published packings, and 1022 at 270, Panoras's compilation's
     # packing re-solved by regions, both at JoostdeWinter/square-packing a1ba501.

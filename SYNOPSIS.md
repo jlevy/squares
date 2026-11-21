@@ -393,6 +393,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-331](packing/frontier/RESULTS.md) | 268 | `V3` | `C3` | `S3` | `previously-published` | One complete rational certificate proves s(268) <= 8435006925202232172230076700390296999482947661447087509257467/500000000000000000000000000000000000000000000000000000000000. |
 | [T-332](packing/frontier/RESULTS.md) | 270 | `V3` | `C3` | `S3` | `previously-published` | One complete rational certificate proves s(270) <= 16927314216351701364094693919616632628260321141481608494025753/1000000000000000000000000000000000000000000000000000000000000. |
 | [T-333](packing/frontier/RESULTS.md) | 299 | `V3` | `C3` | `S3` | `previously-published` | One complete rational certificate proves s(299) <= 17793636991743040580325825384225613703947282755372586749208848013397/1000000000000000000000000000000000000000000000000000000000000000000. |
+| [T-335](packing/frontier/RESULTS.md) | 109 | `V3` | `C3` | `S3` | `previously-published` | The canonical rational reading of Samanyu-dev’s public 7 November 2026 packing proves s(109) <= 77048775744870704249016736832610469086415324701767622918617757120832774961909650280840034508088021596621011577705828367416028128550435308160178796822943658853681668010745854836758324550270597468978493787420957347623/7036874417766398006615713414024855066367484336951114500387011858924703216896760814081444756051720693947120279336617047992243690757003605247166108605326334229018965414512158055871100786464723368461728873374141120512. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -537,7 +538,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 334 | 334 registered, 302 by others |
+| Frontier results | 335 | 335 registered, 303 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -910,6 +911,7 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1005-1007-20261117/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1015-1020-20261118/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1009-20261117/README.md) | generated status view | generated | generated | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1012-20261120/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1031-20261120/README.md) | generated status view | generated | generated | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-1038-20261120/README.md) | generated status view | generated | generated | — |
@@ -1923,6 +1925,7 @@ case or experiment separately.
 | [Evan Daniel’s New Arrangements: Independent Replay Review](docs/project/reviews/review-2026-10-08-evand-new-arrangements.md) | dated review record | record | retained | — |
 | [Restricted N17 Family Cell Audit](docs/project/research/research-2026-10-09-n17-family-cell-audit.md) | research synthesis | supporting | retained | — |
 | [Review of FN-1 Original Compressed Input Custody](docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md) | dated review record | record | retained | — |
+| [Samanyu-dev’s s(109) Packing: Confirming Review of the Exact Import](docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md) | dated review record | record | retained | — |
 | `packing/contributors/people/*.md` | hand-maintained registry | record | maintained | — |
 | `packing/site-changelog.yaml` | hand-maintained registry | current | maintained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
