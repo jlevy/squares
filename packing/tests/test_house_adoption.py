@@ -320,7 +320,8 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # (`ADOPTED_NEXT_DAY`), so it is on neither side. A staged count a smaller house took
     # (`OVERTAKEN`) leaves the hold too.
     # T-335's n109 intake is staged separately from the lifted hold's adoption cohort.
-    assert 109 not in previous and 109 not in held_counts
+    assert 109 not in previous
+    assert 109 not in held_counts
     staged_from_hold = set(select.PENDING_ADOPTION) - {109}
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
         staged_from_hold | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
@@ -1724,7 +1725,8 @@ def test_the_staged_adoptions_name_their_beads_and_reasons(
                 house="T-335", bead="think-wvr8", why=select.NEXT_PULL_REQUEST
             )
             selection = selections[n]
-            assert selection.house is not None and selection.house.result == "T-335"
+            assert selection.house is not None
+            assert selection.house.result == "T-335"
             assert selection.house.side < selection.case.verified
             assert selection.case.source_key == "[Kingbird]"
             assert selection.case.evidence == (
