@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **1051** evidence records. **619** are formal; **610** of those were established here. **20** are samples, counted separately.
-- **406** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **1054** evidence records. **621** are formal; **612** of those were established here. **20** are samples, counted separately.
+- **407** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -706,8 +706,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-bengreff-610-cover-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-zm-mixed-py` |
 | `E-bengreff-610-cover-replay` | 2 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | `V-evand-zmx2`, `V-evand-zm-mixed-py`, `V-replay-evand-zmx2`, `V-audit-evand-mixed-covers` |
 | `E-wand125-continuous-n28-5745-report` | 0 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-continuous`, `V-wand125-contpose-check3` |
-| `E-evand-639-exact-sides-report` | 5 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
-| `E-evand-639-verify-exact-replay` | 5 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full: the source's exact forms, one exact configuration a count: all 23 files of search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole | `V-evand-verify-exact`, `V-evand-639-replay-driver` |
+| `E-evand-639-exact-sides-report` | 4 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-639-verify-exact-replay` | 4 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full: the source's exact forms, one exact configuration a count: all 23 files of search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole | `V-evand-verify-exact`, `V-evand-639-replay-driver` |
 | `E-n019-fitzharding-lean-report` | 0 | exact-value | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-n019-fitzharding-endpoint-review` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the existence half: the nineteen squares of EndpointPacking.lean, their unit directions and containment, and the separation of all 171 pairs, in exact Q(sqrt 2), and their order and values against W-known-best-n019 | `V-sq19-review-endpoint` |
 | `E-n019-fitzharding-cover-census-review` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the cover and the census: the 25 cells' tiling of the centre box, the symmetry tables, the capacity data, the native facts Sq19.Cover.orbit_check, Sq19.Assembly.CensusRoute.route_checked and captureIndex_checked as predicates, the 38 survivor images, and the coverage of every non-survivor mask by the 269 certified patterns | `V-sq19-review-cover-census` |
@@ -1074,13 +1074,16 @@ results, it is a statement about what this repository has itself examined.
 | `E-de-winter-1052-certificate-report` | 1 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-de-winter-1052-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | `V-sqpack-verify`, `V-check-rational-witness-independent` |
 | `E-de-winter-1052-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: The certificate at 305, every square, wall and pair by both review methods. | `V-r1052-review-check` |
+| `E-geiserx-1040-certificate-report` | 1 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-geiserx-1040-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | `V-sqpack-verify`, `V-check-rational-witness-independent` |
+| `E-geiserx-1040-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: Every square, wall and pair in both original encodings. | `V-r1040-n259-review` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 408, verified 638
-- **method**: exact-algebraic 373, interval-certified 247, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 408
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 990
-- **relationship to the producer's code**: generator 5, independent-implementation 408, not-applicable 38, same-implementation 536, shared-components 58, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 409, verified 640
+- **method**: exact-algebraic 375, interval-certified 247, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 409
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 993
+- **relationship to the producer's code**: generator 5, independent-implementation 410, not-applicable 38, same-implementation 537, shared-components 58, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

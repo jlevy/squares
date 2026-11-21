@@ -3249,6 +3249,33 @@ RESULTS: dict[str, Prose] = {
         retained="the unmodified primary exact JSON and its original corner serialization",
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-337": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1040](https://github.com/jlevy/squares/issues/1040)",
+        producer_route=False,
+        ai="The certificate bundle acknowledges OpenAI Codex.",
+        routes=(
+            "The maintained routes share the rational arithmetic and source adapter. "
+            "The independent review read both original encodings with a separate exact "
+            "checker and proved their geometric agreement."
+        ),
+        lineage=(
+            "Sergio Fernández Rubio (GeiserX) joined tilted bands from his own 292- and "
+            "445-square packings. De Winter refined the coordinates and supplied this "
+            "certificate. No box symmetry pairs the nearest centres with T-193 one to "
+            "one. The exact side is about 0.001361706268 below T-193 and about "
+            "1.08266561e-13 below the verified first-contact contraction of GeiserX’s "
+            "public coordinates. Option D admits the refinement. The Nevska leaderboard "
+            "entry gives only a side and supplies no geometry for comparison."
+        ),
+        third_route=(
+            ", and the 21 November review checked all 33,411 pairs in each submitted "
+            "encoding with independently implemented exact separating axes; its 16 "
+            "controls returned 28 stated outcomes"
+        ),
+        retained="the original centre-direction JSON and half-angle witness",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-315": Prose(
         author="Mykhailo Polkovskyi",
         reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
@@ -4337,8 +4364,13 @@ CREDITS: dict[int, Credit] = {
         "his display regularization of Nate Chaoweeraprasit’s SQUISH",
         refined=" as Mishapolk refined it",
     ),
-    # T-193 of T-174 of T-136, SQUISH's own packing (T-174's item measured, none moved).
-    259: _exact_form(SQUISH, (PINGYOU, DANIEL), "Nate Chaoweeraprasit’s SQUISH"),
+    # T-337 adopts GeiserX's distinct n = 259 construction with de Winter's refinement.
+    259: Credit(
+        ("Sergio Fernández Rubio",),
+        (DE_WINTER,),
+        "Joost de Winter’s rational refinement of Sergio Fernández Rubio’s tilted-band "
+        "construction",
+    ),
     # T-269 (adopted on 6 November 2026, the day after T-265), Evan Daniel's new packing of
     # issue 914, which his fault-line composer built around the tilted island of his issue 845
     # packing, half-turned and raised one unit, the frame rebuilt: one to one with neither

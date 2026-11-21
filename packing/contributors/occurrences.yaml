@@ -23136,19 +23136,14 @@ occurrences:
     path: packing/frontier/n-259.md
     record_key: '259'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Sergio Fernández Rubio
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 22
+  label: Sergio Fernández Rubio
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
-    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
-    retained.
+  disposition: unresolved
+  evidence: []
+  note: Construction credit follows GeiserX's retained attribution notice.
 - origin:
     path: packing/frontier/n-259.md
     record_key: '259'
@@ -23168,34 +23163,17 @@ occurrences:
     path: packing/frontier/n-259.md
     record_key: '259'
     field: /reported_upper_bound/improved_by/0
-  expected_text: PingYou Ltd
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
-- origin:
-    path: packing/frontier/n-259.md
-    record_key: '259'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Evan Daniel
-  start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Joost de Winter
   role: construction-improver
   disposition: resolved
   evidence:
-  - repository-license
+  - source-intake
   - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-259.md [259] /reported_upper_bound/improved_by/1
-    span 0:11. The specific evand/square-packing exact form of issue 639 matches the
-    repository whose retained licence names Evan Daniel. Keep finder, improver and
-    solver roles distinct.
+  contributor_id: joost-de-winter
+  note: The exact certificate in issue 1040 names Joost de Winter as certifier.
 - origin:
     path: packing/frontier/n-260.md
     record_key: '260'
@@ -35054,6 +35032,60 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX issue 1040 2026-11-19]'
+    field: /authors/0
+  expected_text: Sergio Fernández Rubio (GeiserX)
+  start: 0
+  end: 32
+  label: Sergio Fernández Rubio (GeiserX)
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Construction credit follows GeiserX's retained attribution notice.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX issue 1040 2026-11-19]'
+    field: /authors/1
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: The exact certificate in issue 1040 names Joost de Winter as certifier.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX issue 1040 2026-11-19]'
+    field: /credit
+  expected_text: Sergio Fernandez Rubio (GeiserX), Joost de Winter
+  start: 0
+  end: 32
+  label: Sergio Fernandez Rubio (GeiserX)
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Construction credit follows GeiserX's retained attribution notice.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX issue 1040 2026-11-19]'
+    field: /credit
+  expected_text: Sergio Fernandez Rubio (GeiserX), Joost de Winter
+  start: 34
+  end: 49
+  label: Joost de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: The exact certificate in issue 1040 names Joost de Winter as certifier.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

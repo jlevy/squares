@@ -6186,6 +6186,20 @@ sources:
       quench code and the project’s rational promotion. The contributor’s primary rational JSON
       and original corner file are retained. The accepted review discloses the corner file’s
       metadata defect and confirms finite feasibility from the primary JSON. MIT at the pin.
+  - key: '[GeiserX issue 1040 2026-11-19]'
+    authors:
+      - Sergio Fernández Rubio (GeiserX)
+      - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-19'
+    lineage: independent
+    credit: Sergio Fernandez Rubio (GeiserX), Joost de Winter
+    note: >-
+      Sergio Fernández Rubio (GeiserX) published the construction from two tilted bands
+      in his 292- and 445-square layouts. Joost de Winter refined and certified it in
+      the attachment on issue 1040 and acknowledges OpenAI Codex for refinement and
+      verification. The exact data and reproducible receipts are retained in the intake packet.
 credited_names:
   Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim
