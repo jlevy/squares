@@ -3,16 +3,20 @@ type: is
 id: is-01m5kxdfbwvzz2rx2m6r6eh8gh
 title: "Decide: does the restatement ruling reach #719's 631, another holder's re-certification #722 recorded (think-fwa9 follow-up)?"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 4
+version: 5
+delegate: codex-intake-1119-01a1fb
 labels:
   - decision
   - result-import
 dependencies: []
 parent_id: is-01m5khvjtdjf8q14f59bmd8c1k
+hold: null
+hold_until: null
 created_at: 2026-10-23T08:18:08.892Z
-updated_at: 2026-11-17T03:07:31.813Z
+updated_at: 2026-11-21T00:58:58.334Z
+started_at: 2026-11-21T00:58:58.333Z
 ---
 **The question.** The owner's answer of 23 October (think-fwa9) is that a side below an earlier report at its count by less than the 12-place print, with both rounding up to the same 12-place print, restates that report: the earlier report stays the row. Does it also reach a re-certification by another holder that an earlier ledger recorded?
 
