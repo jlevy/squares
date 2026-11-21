@@ -5,7 +5,7 @@ title: "Import #1052: de Winter's s(305) <= 17.945755838742 (refines T-309, Koda
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:56:46.484Z
-updated_at: 2026-11-21T13:44:37.800Z
+updated_at: 2026-11-21T14:26:15.014Z
 started_at: 2026-11-20T21:05:08.431Z
 ---
 
@@ -43,3 +43,5 @@ Completed independent receipt replay and all 11 maintained sharp controls. The f
 The exact current registration tree is 0155b031463893f3221bf8eee00c70fb096fd374, with data pin 30bcad665711753bef7123369e07640d3c9a964d. Full guarded edit gate passed 65 steps and found six records issues. Corrected the significance headline and rational ceiling wording, maintained-route independence declaration, case math, URL register and synopsis. All six passed guarded targeted reruns. Five directly affected exact/attribution/adoption tests passed. Final paper comparison produced 55/43/43/43 deterministic files, with only the explainer's live register count changing from 335 to 336. Independent senior review approved the exact tree against dbd3337c05.
 
 T-336 is V3/C3 S2 with safe 12-place ceiling 17.945755838742, credited de Winter after Kodaj, JoeGun. The branch stages house adoption separately and leaves T-309 in place. Wait for #1068 to land before the standalone n305 PR, verify the integrated tree, then obtain exact-head CI and formal review. The adoption slice has a maintained JSON-to-Witness/v2 preview path and a one-worker guarded plan for both strong generators, translation screen, rigidity and history.
+
+T-336 registration merged in #1070 as 6ffba4d358c56d7828215588fdbb3ecb19a6654b at 14:24:11Z on 21 November. Exact head 4b05dcbc4f passed all three required hosted gates with formal senior review 6005812965. Certificate page 44913748659 audits its main deployment. Drafted the answer using check_requests from that merge and adjusted it for the open adoption and later four claims. Both strong drawing families completed under the guard for adoption. The local n305 drawing state is decided no better, drawing the exact axis view. Adoption still requires final atlas, release, and review gates.
