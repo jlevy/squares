@@ -10,11 +10,11 @@
     "issue_url": "https://github.com/jlevy/squares/issues/1040",
     "attachment_url": "https://github.com/user-attachments/files/35066502/packing-259.zip",
     "archive_members": {
-      "retained-data/upper/n259/packing.json.gz": {
+      "upper/n259/packing.json.gz": {
         "bytes": 30015,
         "sha256": "bfd1b2890ad846efe030113f5e4535a79f786ed6c2f0371257dd342ddd48970c"
       },
-      "retained-data/upper/n259/witness.yaml": {
+      "upper/n259/witness.yaml": {
         "bytes": 765842,
         "sha256": "3d4bd6326ed60439aa3fc933bfbfc4b5716e4de8d181ce837161b97fdc88a031"
       }

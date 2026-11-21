@@ -23,8 +23,8 @@ Those shared assumptions are disclosed in the review.
 
 | File | Purpose |
 | --- | --- |
-| [verify_n259.py](verify_n259.py) | Exact deciding program used in the final run. Reads the original JSON and YAML independently, runs the controls, checks every square and pair, then compares the encodings. |
-| [frozen/verify_n259.py](frozen/verify_n259.py.txt) | Exact deciding program used before the findings freeze. The reviewer’s final replay copy sorted the `pathlib.Path` import. |
+| [verify_n259.py.txt](verify_n259.py.txt) | Exact deciding program used in the reviewer’s final run. Reads the original JSON and YAML independently, runs the controls, checks every square and pair, then compares the encodings. |
+| [frozen/verify_n259.py.txt](frozen/verify_n259.py.txt) | Exact deciding program used before the findings freeze. The reviewer’s final replay copy sorted the `pathlib.Path` import. |
 | [predeclared-controls.json](predeclared-controls.json) | Acceptance rule and 16 control cases declared before either deciding run; 28 method-specific outcomes are required. |
 | [frozen/findings-freeze.json](frozen/findings-freeze.json) | Findings fixed at 16:59:25.864539 UTC on 2026-11-21, before any prior review or implementation for this result was read. |
 | [frozen/results.json](frozen/results.json), [frozen/run.stdout](frozen/run.stdout), [frozen/run.stderr](frozen/run.stderr), [frozen/exit-status.json](frozen/exit-status.json) | Original blind-run outputs, preserved byte for byte. |
@@ -59,8 +59,8 @@ It does not depend on an in-repository link to a separate custody packet.
 
 | Archive member | Bytes | SHA-256 |
 | --- | ---: | --- |
-| `retained-data/upper/n259/packing.json.gz` | 30,015 | `bfd1b2890ad846efe030113f5e4535a79f786ed6c2f0371257dd342ddd48970c` |
-| `retained-data/upper/n259/witness.yaml` | 765,842 | `3d4bd6326ed60439aa3fc933bfbfc4b5716e4de8d181ce837161b97fdc88a031` |
+| `upper/n259/packing.json.gz` | 30,015 | `bfd1b2890ad846efe030113f5e4535a79f786ed6c2f0371257dd342ddd48970c` |
+| `upper/n259/witness.yaml` | 765,842 | `3d4bd6326ed60439aa3fc933bfbfc4b5716e4de8d181ce837161b97fdc88a031` |
 
 These digests identify bytes across the external source boundary.
 They neither prove the geometry nor reconstruct the attachment’s custody chain.
@@ -92,8 +92,8 @@ curl --fail --location \
   --output "$TMPDIR/packing-259.zip" \
   https://github.com/user-attachments/files/35066502/packing-259.zip
 unzip -jo "$TMPDIR/packing-259.zip" \
-  retained-data/upper/n259/packing.json.gz \
-  retained-data/upper/n259/witness.yaml \
+  upper/n259/packing.json.gz \
+  upper/n259/witness.yaml \
   -d "$TMPDIR/n259-review-inputs"
 (
   cd "$TMPDIR/n259-review-inputs"
