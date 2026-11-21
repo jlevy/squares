@@ -5,8 +5,8 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 14
-delegate: c14-109
+version: 15
+delegate: codex-intake-1119-01a1fb
 labels:
   - intake
   - result-import
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-20T16:41:43.388Z
+updated_at: 2026-11-21T02:13:31.132Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -75,3 +75,12 @@ Results (c7-pointers, 2026-11-20, branch claude/intake-2026-11-20-pointers-109-2
 
 PR https://github.com/jlevy/squares/pull/1047 (draft), head 550d73fca; records/edit tiers pass but the contiguity rule (T-335 provisional). Adoption at 109 waits on think-2ut8 and the owner's credit answer.
 Head 0261ad5c4 (tests moved into test_upper_bound_reports.py for the suite shard record). Hosted CI: contiguity-only failures (validate, suite-a); frontend 'site table layout in Chromium' hit its 900 s timeout silently (passed on 550d73fca), not re-run. Worktree removed at handoff.
+
+## 21 November UTC continuation
+The user requested end-to-end takeover of the interrupted c14-109 lane. The existing draft #1047 is unchanged at 0261ad5c4be6f2822c497c744eef33d81be4007f. Transfer the stopped lane from c14-109 to codex-intake-1119-01a1fb. Keep the owner's Samanyu-dev finder ruling and the exact de Winter source credit “de Winter after Kodaj, Samanyu-dev”.
+
+The corrected radian reader preserves represented tiny tilts and keeps the later certificate within the original padding: gain 0.9721594 of Samanyu-dev's contraction margin, 5.5566661994e-14 above the contracted original. The Option D rule leaves an unregistered restatement unregistered. The next registry draft records the original Samanyu-dev geometry first as T-335, with T-101 as the old house and the de Winter certificate as retained restatement evidence. Its own reviewed and maintained receipts must be bound to its own exact witness.
+
+The 5,577,150-byte CSV is verified at Samanyu-dev/squares_in_squares 53551d77513a9f5c180a731f291baf7eda7c3009 (SHA-256 377b9177febf1b89f08d655531880fb683666e494a3b303f10645e7440996c04). Re-running the existing #1049 reader and independent checker under the memory guard gives an accepted 109-square witness and all 5,886 pairs, with zero disagreements and the same exact side as #1049: 10.949289580945379363234535713286, ceil 10.949289580946 at 12 digits. The new witness SHA-256 is cbc2d8b462b08d12f835abdecc1bc29cfb1eeadc7d19c21112caeaf9efc8943b, distinct from #1049's scratch-only ab84814548fc28d18a22945b3a8bb3be6c4335a7310e93fe8ea032925842bb28. Keep each receipt with its own hash. Local continuation artifacts are in .worktrees/intake-scratch-20261120/review-1047/reviewer-rerun/. The original source pin has no explicit license file. Retain the normalized numerical witness and source digest; the raw CSV need not be added to the repository.
+
+Next: integrate after T-334, register the earlier packing with normal maintained replay and controls, preserve the #1049 review evidence and replay its applicability if needed, then run 109 house selection, regularization and exact-head gates. The original c14 external workspace is unavailable.
