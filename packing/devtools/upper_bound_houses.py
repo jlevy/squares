@@ -766,6 +766,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-331", "de-winter-s268-upper-bound-2026-11-17"),
         packet_source("T-332", "de-winter-s270-upper-bound-2026-11-17"),
         packet_source("T-333", "de-winter-s299-upper-bound-2026-11-18"),
+        packet_source("T-335", "samanyu-n109-2026-11-07"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -914,6 +915,7 @@ ADOPTED: dict[int, str] = {
     103: "T-174",
     105: "T-229",
     108: "T-174",
+    109: "T-335",
     110: "T-174",
     123: "T-193",
     126: "T-139",
@@ -1228,7 +1230,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
     "2026-11-20": frozenset({127, 268, 270, 299}),
-    "2026-11-21": frozenset({172, 199, 228}),
+    "2026-11-21": frozenset({109, 172, 199, 228}),
 }
 
 

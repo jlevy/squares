@@ -39,6 +39,9 @@ houses:
   - n: 108
     result: T-174
     landed: '2026-10-19'
+  - n: 109
+    result: T-335
+    landed: '2026-11-21'
   - n: 110
     result: T-174
     landed: '2026-10-19'

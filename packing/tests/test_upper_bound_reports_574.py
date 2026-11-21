@@ -522,8 +522,10 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # certificate (T-302), below it, and that of 18 November 2026 (think-i38n) moved 147,
     # 260 and 299 on to Mykhailo Polkovskyi's issue-1009 certificates (T-314, T-318, T-325)
     # and 262 from the Kingbird catalogue's 16 + sqrt(2)/2, which PR #574 states, to his
-    # T-319, below it; every other side is at or below its case.
+    # T-319, below it. On 21 November 2026, T-335 moved n109 below the algebraic side
+    # from PR #574. Every other side is at or below its case.
     assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
+        109,
         147,
         227,
         229,
@@ -532,6 +534,7 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
         299,
         302,
     }
+    assert rows[109]["case"]["reported_source_key"] == "[Samanyu-dev square packing 2026-11-07]"
     for n in (227, 229):
         assert rows[n]["case"]["reported_source_key"] == "[Daniel regularized lists 2026-10-20]"
         assert rows[n]["case"]["reported_relation"] == "above"
@@ -540,12 +543,12 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # The pass of 20 November 2026 (think-78aj) moved 299 to Joost de Winter's issue-1031
     # certificate (T-333), lower again.
     assert rows[299]["case"]["reported_source_key"] == "[de Winter s299 upper bound 2026-11-18]"
-    for n in (147, 260, 262, 299):
+    for n in (109, 147, 260, 262, 299):
         assert rows[n]["case"]["reported_relation"] == "above"
     assert all(
         row["case"]["verified_relation"] in {"equal", "below"}
         for n, row in rows.items()
-        if n not in {147, 227, 229, 260, 262, 299, 302}
+        if n not in {109, 147, 227, 229, 260, 262, 299, 302}
     )
     # 207 was below every other report until its side became the house there.
     assert sorted(n for n, row in rows.items() if row["below_every_other"]) == []

@@ -3176,6 +3176,36 @@ RESULTS: dict[str, Prose] = {
         third_route=REVIEW_1038,
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-335": Prose(
+        author="Samanyu-dev",
+        reported=(
+            "in the [public Kaggle submission]"
+            "(https://github.com/Samanyu-dev/squares_in_squares/blob/"
+            "53551d77513a9f5c180a731f291baf7eda7c3009/best_fit_101_500.csv)"
+        ),
+        producer_route=False,
+        ai="",
+        routes=(
+            "The source publishes numerical rows. This repository’s rational derivation "
+            "and maintained exact checks are separate from that source; the independent "
+            "corners run is bound to the same canonical fact."
+        ),
+        lineage=(
+            "The source gives binary64 centres and radian angles. This repository derives "
+            "rational rotations by outward interval arithmetic, translates the minimum "
+            "corner coordinates to zero and takes the exact larger span of the original "
+            "poses. The owner credits Samanyu-dev as finder. De Winter’s later "
+            "certificate from Kodaj’s rows remains a separate unregistered Option D "
+            "restatement, with source credit de Winter after Kodaj, Samanyu-dev."
+        ),
+        third_route=(
+            ", and a separate run of the review’s independently implemented corners checker "
+            "accepted the exact corners copy of this canonical fact, all 109 squares and "
+            "5,886 pairs, with its own fact digest and receipt"
+        ),
+        retained="the derived rational fact",
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-315": Prose(
         author="Mykhailo Polkovskyi",
         reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
@@ -3848,6 +3878,8 @@ CREDITS: dict[int, Credit] = {
         (COUZO, PINGYOU),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
     ),
+    # T-335 imports Samanyu-dev's numerical original through its canonical rational fact.
+    109: Credit(("Samanyu-dev",), (), "Samanyu-dev’s public 109-square pinwheel"),
     # T-174's regularization of T-098's packing, 5 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     110: Credit(
@@ -5926,6 +5958,29 @@ def _retained_672(text: str) -> str:
     )
 
 
+def _n109_history(text: str, until: str) -> str:
+    """Date the prior ceiling and the canonical intake's staging after the house moves."""
+    text = re.sub(
+        r"\bit\s+proves(?=\s+\$s\(109\)\s+\\le\s+10\.949747468305)",
+        "the earlier bound was",
+        text,
+    )
+    text = re.sub(
+        _spaced("**Staged house adoption, 21 November 2026.**"),
+        "**Earlier staging, 21 November 2026.**",
+        text,
+    )
+    return re.sub(
+        _spaced(
+            "The case keeps its house until the adoption, staged under think-wvr8, "
+            "moves it to T-335’s side after both required strong generator runs."
+        ),
+        f"The case kept its previous house until T-335’s adoption on {until}. "
+        "The staging note required both strong generator runs in the adoption change.",
+        text,
+    )
+
+
 def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
@@ -5973,6 +6028,8 @@ def historical(move: Move, text: str) -> str:
     text = _regularized_certificate(move, text)
     if n == 29:
         text = _n29_history(text)
+    if n == 109:
+        text = _n109_history(text, until)
     text = held_history(text)
     text = pending_history(text, until)
     if houses.adopted_on(n) >= RETAINED_672_FROM:

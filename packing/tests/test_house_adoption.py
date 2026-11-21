@@ -319,10 +319,10 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # 268, which T-240 took from the hold, was staged again and adopted for T-242
     # (`ADOPTED_NEXT_DAY`), so it is on neither side. A staged count a smaller house took
     # (`OVERTAKEN`) leaves the hold too.
-    # T-335's n109 intake is staged separately from the lifted hold's adoption cohort.
+    # T-335's n109 intake is outside the historical lifted-hold adoption cohort.
     assert 109 not in previous
     assert 109 not in held_counts
-    staged_from_hold = set(select.PENDING_ADOPTION) - {109}
+    staged_from_hold = set(select.PENDING_ADOPTION)
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
         staged_from_hold | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
@@ -1697,9 +1697,7 @@ def test_a_rational_house_staged_for_the_writer_fails_the_check(
     assert "the writer writes it, so stage it for the next pull request" in problem
 
 
-def test_the_staged_adoptions_name_their_beads_and_reasons(
-    selections: dict[int, select.Selection],
-) -> None:
+def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
@@ -1720,23 +1718,6 @@ def test_the_staged_adoptions_name_their_beads_and_reasons(
         assert n not in defaults.PENDING_ALLOWED
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
-        if n == 109:
-            assert pending == select.Pending(
-                house="T-335", bead="think-wvr8", why=select.NEXT_PULL_REQUEST
-            )
-            selection = selections[n]
-            assert selection.house is not None
-            assert selection.house.result == "T-335"
-            assert selection.house.side < selection.case.verified
-            assert selection.case.source_key == "[Kingbird]"
-            assert selection.case.evidence == (
-                "E-evand-exact-ceilings-2026-10-05-exact-replay",
-                "E-evand-exact-ceilings-2026-10-05-source-replay",
-                "E-regularized-bounds-2026-10-12-exact-decision",
-            )
-            assert n not in houses.ADOPTED
-            assert n not in defaults.PENDING_ALLOWED
-            continue
         algebraic = pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
@@ -1771,7 +1752,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons(
     # that of 5 November 2026 took 175 off: T-267 is below it there, and the last pass of 9
     # November 2026 took 199 off: T-284 is below it there, and the pass of 18 November
     # 2026 took 292 off: T-323 is below it there (`OVERTAKEN`).
-    assert sorted(select.PENDING_ADOPTION) == [88, 109, 126, 266, 267, 301]
+    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 301]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
@@ -1866,6 +1847,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # and lane i1038 moved 228 to Doğa Özden's certificate of issue 1038 (T-334).
     later = {
         **ALGEBRAIC_ADOPTED,
+        109: "T-335",
         105: "T-229",
         175: "T-267",
         182: "T-243",
@@ -1952,8 +1934,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     }
     # 199 was first adopted on 9 November 2026 (T-284), 157 on 11 November 2026 (T-293) and
     # 147 and 90 on 15 November 2026 (T-302, T-303) and 262 on 18 November 2026 (T-319),
-    # after this receipt was retained.
-    for n in (90, 147, 157, 183, 199, 227, 229, 260, 262, 293, 299):
+    # after this receipt was retained, as was 109 on 21 November 2026 (T-335).
+    for n in (90, 109, 147, 157, 183, 199, 227, 229, 260, 262, 293, 299):
         del before[n]
     assert "183" not in historical["houses"]
     assert "260" not in historical["houses"]
@@ -3230,6 +3212,12 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
         "and its drawing stayed as they were." in body204
     )
     assert "Until separate Stage 4 review and adoption" not in body204
+    body109 = _flat(select.case_path(109).read_text(encoding="utf-8"))
+    assert "**Earlier staging, 21 November 2026.**" in body109
+    assert (
+        "The case kept its previous house until T-335’s adoption on 21 November 2026" in body109
+    )
+    assert "The case keeps its house until the adoption" not in body109
 
 
 def test_each_count_of_one_result_states_its_own_lineage() -> None:
@@ -3337,8 +3325,8 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differed at 29 and 132, and differ at 29. Their opening, section
-    and history note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
+    """Where the replaced displays differ, the opening, section and history note use
+    the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
     #665). At 29 the catalogue print orders nothing; at 132 the reported exact side agrees
     with the verified side, but its display differs from the verified display. 308's did too
     when T-174 replaced T-141 on 17 October 2026, and 260's when T-196 replaced the
@@ -3355,7 +3343,8 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     7 + 4*sqrt(2) and T-155's verified ceiling differ, with T-302, so 147 joined it. The pass
     of 18 November 2026 replays 147 from T-302's record, whose two lanes agree, and replaced
     the catalogue's packing at 262, whose reported print of 16 + sqrt(2)/2 and the verified
-    ceiling of T-101 and T-155 differ, with T-319, so 262 joins 29."""
+    ceiling of T-101 and T-155 differ, with T-319, so 262 joins 29. The same distinction
+    applies at 109, where T-335 moved the house on 21 November 2026."""
     differing = {
         29: (
             Fraction(
@@ -3369,6 +3358,14 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
                 "is a print `9.19e-15` below the new side, within one unit of its last place, "
                 "so it does not order them"
             ),
+        ),
+        109: (
+            Fraction("5474873734152916335457704004709/500000000000000000000000000000"),
+            "10.94974746830583",
+            "10.94974746830584",
+            "T-101, T-155",
+            "[Kingbird]",
+            "lies `4.58e-04` above the new side",
         ),
         262: (
             Fraction("16707106781186547524567915429917/1000000000000000000000000000000"),

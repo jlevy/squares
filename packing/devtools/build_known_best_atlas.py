@@ -2825,6 +2825,8 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: to T-301 unresolved pending evidence; jazivxt's public notebook and Doğa Özden's
 #: certificate are named in prose. No finder or improver is asserted there, so the hold
 #: holds Özden alone as the certificate source author used by the poster's fallback.
+#: The same day's adoption of T-335 credits Samanyu-dev as finder at 109. The current
+#: case, site and citations credit Samanyu-dev, and the next print edition adds the name.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(
         (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
@@ -2832,6 +2834,7 @@ PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     147: ("Roberto Ono",),
     228: ("Doğa Özden",),
     90: ("jazivxt",),
+    109: ("Samanyu-dev",),
     **dict.fromkeys((204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
 }
 #: The infographic edition the hold was set under. While the hold is not empty, a version
