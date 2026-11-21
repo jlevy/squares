@@ -38456,7 +38456,7 @@ issues:
     - think-91fu
     - think-3ape
     - think-d4b0
-    answer_bead: think-91fu
+    answer_bead: think-d4b0
     replies:
     - url: https://github.com/jlevy/squares/issues/1038#issuecomment-7059934377
       date: '2026-11-21'
@@ -38639,3 +38639,111 @@ issues:
       kind: follow-up
       reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
+  - number: 1060
+    title: 'Raised lower bounds for 166 counts, including s(129) > 11.49685 and s(318) > 17.97459518711171'
+    author: JoostdeWinter
+    opened: '2026-11-21'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter reports 166 lower-bound endpoints in attachment D's claims-final.csv,
+      superseding the earlier A/C tables and updating the 155-count supplement on
+      #1042. The source describes 153 strengthened prior counts and 13 additional
+      counts; 18 and 20 have separate threads. Intake must retain each row's
+      inequality and dependencies, including the reported reliance on T-180.
+    read_through: '2026-11-21T06:59:48Z'
+    results: []
+    beads: [think-uz7g]
+    answer_bead: think-uz7g
+    replies: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
+      counts from 26 to 318, with 126 non-strict and 40 strict endpoints. Sixty rows name
+      T-180, which remains V0/C1 on the pinned main. Counts 18 and 20 are absent.
+      Source SHA-256 A efc7a02b00b4231145c971295e94fbaec6820c18d00700b45dcc7da6b9dbf8bd,
+      B fbe704a02d7834ddbb93c2e71bb231824e2f40a2b256a241e219be4cd1cd5a7a,
+      C a671a2cba6152d3c38efef350a2b1abea3dab6ba7eebdb35b56273c9021dea4d,
+      D 1e1fd7ec9a42342f895434891e2b1a70be7e7bdffe7d612fb20e49a5e05aaf83.
+      The proof dependencies and endpoints await comparison and replay.
+  - number: 1061
+    title: 'Exact coordinates for 11 known construction sides and three relations between packing sides'
+    author: JoostdeWinter
+    opened: '2026-11-21'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter requests review of algebraic coordinates at 109, 129, 172, 175, 199,
+      237, 262, 268, 269, 292 and 295, with 259 included only as a dependency, and
+      three identities between construction sides. The submission claims root
+      attainment for the given layouts and retains the original credit.
+    read_through: '2026-11-21T07:00:16Z'
+    results: []
+    beads: [think-l9fk]
+    answer_bead: think-l9fk
+    replies: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      Route to the exact-side work tracked by #811. The claimed construction identities
+      are L199=L172+1, L268=L129+5 and L292=L259+1. The archive contains polynomial data
+      for all twelve counts, including the 259 dependency. Compare existing rational
+      witnesses at 172 and 199 before
+      assigning evidence or novelty. Coordinate with #1040/#1047 for 259 and #1037
+      for 295. No separate 259 intake is requested. The source credits Evan Daniel
+      for the contact solver, number-field reconstruction and primary verifier.
+      Source SHA-256 3511b3144994bb32a52364c9728a807a7b0a8adec36345955173203c9845cc8b.
+  - number: 1062
+    title: 'Exact rational witness at the previously reported local solution for n = 232 (side ≤ 15.759531623541)'
+    author: JoostdeWinter
+    opened: '2026-11-21'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: >-
+      De Winter submits a rational n232 witness with upward-rounded ceiling
+      15.759531623541, from Alex Chilton's compilation, near JoeGun's previously
+      reported local solution and below the registered Kodaj–JoeGun witness.
+      The author requests preservation of prior layout and local-solve credits
+      and claims feasibility only.
+    read_through: '2026-11-21T07:01:14Z'
+    results: []
+    beads: [think-eumc]
+    answer_bead: think-eumc
+    replies: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      Compare the submitted exact fraction and geometry with both T-307's adopted
+      witness and the rational certificate already retained under
+      packing/resources/web/joegun-local-minimum-2026-11-16/source/local-minimum/n-232-input.cert.
+      That retained certificate is unregistered; its source log reports an exact
+      check at 15.759531623540125992637246151039. The new candidate is about 1.576e-19
+      smaller than that exact certificate and 8.856e-62 smaller than its own input.
+      All three have the same 12-place upward print. Geometric identity, the contraction
+      margin and feasibility remain to be checked. Source SHA-256 752b5efc0aaedfab63605b8c2f3112610a41164bfc31d843b629752cda4088c3.
+  - number: 1063
+    title: 'Supplementary rational enclosures for 13 existing packing witnesses'
+    author: JoostdeWinter
+    opened: '2026-11-21'
+    state: open
+    kind: other
+    intake: true
+    triage: pending
+    summary: >-
+      De Winter supplies precision enclosures at 105, 127, 130, 156, 180, 182, 260,
+      270, 272, 299, 304, 307 and 308. The source describes common center scaling
+      and translation with fixed orientations, preserving every input's 12-place
+      ceiling, and requests retention of original arrangement credits without
+      a displayed-ceiling change or priority claim.
+    read_through: '2026-11-21T07:02:21Z'
+    results: []
+    beads: [think-3iqa]
+    answer_bead: think-3iqa
+    replies: []
+    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      The downloaded attachment has 13 input and candidate pairs. An exact arithmetic
+      comparison confirms all candidate sides are smaller than their supplied inputs
+      and all 13 upward ceilings at 12 places agree. Credit, feasibility and relation
+      to the public witnesses need per-case review. Source SHA-256 872959c5a48a2fa785184030aefaa975c0b3fad2a5632c17db5f012e42d75390.
