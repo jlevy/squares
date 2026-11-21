@@ -81,20 +81,20 @@ points waited on (think-5c9z): a re-certification of a standing packing is a new
 only if its side is below its predecessor’s once the predecessor is shrunk until its
 squares first touch (`devtools.contraction_margin`). On 18 November 2026 lanes
 w7-optd-1118 and w7r2-optd-1118 (think-8yyy) measured each point against the house it
-was solved from, and against the house that stands now:
+was solved from. The table compares the points with the current houses, including the
+adoptions at 268 and 299 in the pass of 20 November.
 
 | n | Solved from | That house’s margin | Gain | Share | The house now | Disposition |
 | ---: | --- | ---: | ---: | ---: | --- | --- |
 | 232 | T-275 | 2.997814e-12 | 3.372932e-12 | 1.1251 | T-307, 1.88e-3 below the point | no candidate |
-| 268 | T-276 | 3.192868e-12 | 3.295234e-12 | 1.0321 | T-320, 6.02e-4 below the point | no candidate |
-| 299 | T-277 |  |  |  | T-325, 6.20e-15 above the point | candidate, credit by think-frl5 |
+| 268 | T-276 | 3.192868e-12 | 3.295234e-12 | 1.0321 | T-331, below the point | no candidate |
+| 299 | T-277 |  |  |  | T-333, below the point | no candidate |
 | 303 | T-278 | 3.402014e-12 | 3.481634e-12 | 1.0234 | T-278, above the point | candidate |
 | 307 | T-279 |  |  |  | T-326, 1.34e-15 above the point | candidate, credit by think-frl5 |
 
-At 232 and 268 each point is a new result against the house it was solved from, but a
-later house, T-307 (Kodaj’s packing as JoeGun improved it) since 16 November and
-Polkovskyi’s T-320 since 18 November, lies below it, so neither is a smaller packing
-than the house and neither is a candidate under the house rule.
+At 232 and 268 each point is a new result against the house it was solved from.
+T-307 (Kodaj’s packing as JoeGun improved it) and de Winter’s T-331 now lie below the
+respective points. The house rule therefore excludes both points from adoption.
 The receipts are each house’s own margin, both maintained routes deciding the
 certificate and its contraction
 ([option-d/contraction-n232-t275.json](option-d/contraction-n232-t275.json),
@@ -106,9 +106,11 @@ as a certificate and measured against T-278 directly
 [option-d/n-303-solve.cert](option-d/n-303-solve.cert)). At 299 and 307 the points are
 the ones the driver reaches on Polkovskyi’s re-solves (T-325, T-326) of #1023, measured
 there against those houses’ own margins; the owner left new-result status and credit
-with Polkovskyi, the record noting the project’s earlier solves (think-frl5). The three
-candidates, at 299, 303 and 307, are classification and receipts only: their
-registration, stage 4 review and adoption are think-4z8z’s, beside the candidate at 130
+with Polkovskyi, the record noting the project’s earlier solves (think-frl5). T-333
+retired the candidate at 299. The remaining candidates at 303 and 307 have
+classification and receipts.
+Their registration, stage 4 review and adoption are think-4z8z’s, beside the candidate
+at 130
 ([think-ruu2-2026-10-31](../../register_candidates/think-ruu2-2026-10-31/README.md)).
 `tests/test_restatements.py` holds the shares at 232, 268 and 303 and each point’s place
 against today’s house.

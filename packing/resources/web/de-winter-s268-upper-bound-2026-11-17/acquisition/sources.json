@@ -1,0 +1,64 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-18T01:21Z",
+  "git_scope": "A full clone of JoostdeWinter/square-packing, a watched repository, fetched at 01:21Z on 18 November 2026 for the intake of jlevy/squares#1015 to #1022 (lane w6-dewinter-1118; this packet for bead think-gqzz), when git ls-remote read main's head as 838c5ea (2026-11-17T22:48:48Z). The pin is a1ba501 (committed 2026-11-17T22:48:48Z, 'Add packings for n = 268 and n = 270 and a smaller certificate for n = 127', the author's message), pushed with 838c5ea at 22:48:50Z by GitHub's activity log, read on 18 November. jlevy/squares#1021 (22:49:55Z) names it, 67 seconds after the commit. It adds n268/ (the certificate, the witness, two checkers, a figure and a README) and a row of the root README, and n268/ and n270/ together; #1021 and #1022 report one each, and each has its own packet at this pin. The same commit's n127/ is #1020's certificate, which the de-winter-s127-issue1020-2026-11-17 packet retains; the head, 838c5ea, adds only registration texts and checksums, and its n268/SHA256SUMS digests of the certificate, the witness, the figure, the two checkers and n268/README.md match the pin's files. The scope is the licence, the root README and the whole of n268/. LICENSE is byte-identical to the copy the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains, and n268/verify_exact.py and n268/check_area.py to the copies the de-winter-s90-64d5ee7-2026-11-15 packet retains; each is pinned against its copy. The figure is pinned by digest only. No source program ran in writing this packet; verify_exact.py and check_area.py are retained as data and never executed here.",
+  "sources": [
+    {
+      "id": "de-winter-s268-upper-bound-2026-11-17",
+      "source_url": "https://github.com/JoostdeWinter/square-packing",
+      "source_ref": "main",
+      "source_commit": "a1ba5019e787e407646293d7bef81d63c9951b32",
+      "committed_utc": "2026-11-17T22:48:48Z",
+      "git_tree": "f2eed0adfabc5f69612469071715bfa2ec758e42",
+      "archived_path": "packing/resources/web/de-winter-s268-upper-bound-2026-11-17/source",
+      "subtree_manifest": "packing/resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "n268"
+      ],
+      "subtree_file_count": 8,
+      "subtree_total_bytes": 598368,
+      "retained_file_count": 4,
+      "retained_total_bytes": 480866,
+      "compressed": [
+        "source/n268/n268_exact.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "sha256": "324f918c18cdddf76fb5365f1ff8b3c126bf83ab47937c59d1d2443ba61b9c7a",
+          "reason": "Joost de Winter's MIT licence, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains from 9bf5d9be.",
+          "identical_to": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/LICENSE"
+        },
+        {
+          "path": "n268/check_area.py",
+          "bytes": 3541,
+          "sha256": "fc123d58a710229eb6f0c57014e1140e6820eeb04316d8b62f56890e78c1d81f",
+          "reason": "The folder's clipped-area checker, byte-identical to the n90/check_area.py the de-winter-s90-64d5ee7-2026-11-15 packet retains from 64d5ee7; never executed here.",
+          "identical_to": "packing/resources/web/de-winter-s90-64d5ee7-2026-11-15/source/n90/check_area.py"
+        },
+        {
+          "path": "n268/n268_record.png",
+          "bytes": 110258,
+          "sha256": "3d7cdb96ca66122f661a5fb0d97e8418bdd89e6976fbaa0e1537bbc20c200938",
+          "reason": "A raster figure of the packing, which decides nothing; pinned by digest only."
+        },
+        {
+          "path": "n268/verify_exact.py",
+          "bytes": 2631,
+          "sha256": "76119299b04f801fa39123a74d0e9c3e28d1f90fb0a55339abc6374c2514d189",
+          "reason": "The folder's separating-axis checker, byte-identical to the n90/verify_exact.py the de-winter-s90-64d5ee7-2026-11-15 packet retains from 64d5ee7; never executed here.",
+          "identical_to": "packing/resources/web/de-winter-s90-64d5ee7-2026-11-15/source/n90/verify_exact.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Joost de Winter, by LICENSE at the pin (1,072 bytes, byte-identical to the LICENSE the de-winter-upper-bounds-227-229-260-2026-10-17 packet retains); the root README says all files are released under it. The source says the slices were taken from public Kaggle compilations of Navneet Prabhat and Danil Malyshev and from Francisco Couzo's certificate; no file of those is in the repository.",
+      "claims": [
+        "n268/n268_exact.json states 268 unit squares as centre and unit edge direction rows of exact rationals, with the side 8435006925202232172230076700390296999482947661447087509257467/500000000000000000000000000000000000000000000000000000000000; #1021 and the root README round it up at 12 places as 16.870013850405, and n268/README.md prints 16.870013850404465. n268/n268_witness.yaml states the same packing as a packing.squares:Witness/v2 document of rational corners. #1021 names the record's 16.87202984908445 at 268 (the witness at f9ddfeeef) and the gain, 0.0020; it says Mykhailo Polkovskyi filed an exact certificate at 16.871868135 (#1009), 0.0019 above this one, and that the Kaggle team Thinking inside the box reported 16.870013850412470 (15 November), 8.0e-12 above it, probably the same local optimum, its coordinates not found; it says later commits leave these files unchanged.",
+        "n268/README.md and #1021 describe the construction: nine diagonal slices, each filled from a transformed copy of a published packing (the first two and the last four from 302 squares, the third from 153, the fourth and fifth from 129), holding 8, 22, 40, 42, 60, 48, 30, 16 and 2 squares along the diagonal, then a local optimization of all positions and angles and a rational enclosure; the inputs came from the public Kaggle compilations of Navneet Prabhat (129 and 153 squares) and Danil Malyshev (302 squares) and from Francisco Couzo's certificate (302 squares), and the issue says this repository credits Dmitry Ostashev at 129 (the record names Daniil Ostashev) and PingYou Ltd at 153 and 302. They say no test of local optimality was run and no optimality is claimed. It asks for credit to Joost de Winter, Delft University of Technology, the slices coming from packings by Ostashev (129) and PingYou Ltd (153, 302) through the compilations of Prabhat, Malyshev and Couzo.",
+        "verify_exact.py (separating axes) and check_area.py (the area of each close pair's clipped intersection), Python's fractions.Fraction and its standard library only, are the folder's two exact checkers; #1021 says each reports 268 squares and 620 close pairs, that they share no code but have one author and read the same input file, and that the witness has not yet been run through this repository's checker; n268/README.md says 46 squares are tilted. #1021 says the search, optimization and rational certificate were produced with GPT-6.2 Astra (OpenAI), where n268/README.md names GPT-6.2 Sol, and the repository files, checks and figure with Claude (Anthropic), both under his direction. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

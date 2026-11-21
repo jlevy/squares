@@ -1,0 +1,462 @@
+{
+ "program": "r1012_controls.py",
+ "certificate_sha256": "56b4655fada7dfd5d54c1483b021d5b700ecb5c41beba2865a6a8ef7e223b3fb",
+ "certificate_git_blob": "9f270d766597af325b3222003fb9b76aa06445ba",
+ "original_verdict": "ACCEPT",
+ "outcome": "EVERY_CONTROL_AS_STATED",
+ "failing": [],
+ "controls": [
+  {
+   "id": "C0",
+   "stated": "equal to method A's exactly, on every pair and every square",
+   "outcome": "as stated",
+   "details": {
+    "pairs": 5886,
+    "squares": 109,
+    "mismatches": []
+   }
+  },
+  {
+   "id": "R0",
+   "stated": "read; count, side, ids and corners equal to the original's exactly; every scalar canonical",
+   "outcome": "as stated",
+   "details": {
+    "scalars": 873
+   }
+  },
+  {
+   "id": "R1",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "reader": "n is 109 but 108 squares are listed"
+   }
+  },
+  {
+   "id": "R2",
+   "stated": "read; values equal; the side, and only the side, flagged non-canonical",
+   "outcome": "as stated",
+   "details": {
+    "noncanonical": [
+     "side"
+    ]
+   }
+  },
+  {
+   "id": "R3",
+   "stated": "the reader refuses (an id twice)",
+   "outcome": "as stated",
+   "details": {
+    "reader": "squares[1]: the id 'square-0' twice"
+   }
+  },
+  {
+   "id": "R4",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "side_text": "10.9492895809434389968600000000000000000000",
+    "reader": "side: a scalar must be a string, found Other('tag:yaml.org,2002:float', '10.9492895809434389968600000000000000000000')"
+   }
+  },
+  {
+   "id": "R5",
+   "stated": "read; values equal; the side's form decimal. Not applicable, and recorded so, if the side's reduced denominator has a prime factor other than 2 and 5",
+   "outcome": "as stated",
+   "details": {
+    "side_text": "10.94928958094343899686",
+    "places": 20
+   }
+  },
+  {
+   "id": "R6",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "reader": "squares[0]: corners is not a list of four points"
+   }
+  },
+  {
+   "id": "R7",
+   "stated": "the reader refuses (a key twice)",
+   "outcome": "as stated",
+   "details": {
+    "reader": "$.witness: the key 'side' twice"
+   }
+  },
+  {
+   "id": "R8",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "reader": "an anchor"
+   }
+  },
+  {
+   "id": "R9",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "reader": "representation 'center-angle'"
+   }
+  },
+  {
+   "id": "R10",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "line": "    - ['+1000000000000003430768678308398",
+    "reader": "squares[0].corners[0][0]: not an exact rational scalar: '+10000000000000034307686783083988283597028437416422500715443108837853323/499999999999999840384339154200"
+   }
+  },
+  {
+   "id": "R11",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "reader": "square_size '2'"
+   }
+  },
+  {
+   "id": "R12",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "reader": "scalar kind 'decimal'"
+   }
+  },
+  {
+   "id": "R13",
+   "stated": "read; the corners handed on equal the original's exactly",
+   "outcome": "as stated",
+   "details": {
+    "origin": "container-center"
+   }
+  },
+  {
+   "id": "R14",
+   "stated": "the reader refuses",
+   "outcome": "as stated",
+   "details": {
+    "reader": "side: not an exact rational scalar: '547464479047171949843/0'"
+   }
+  },
+  {
+   "id": "G1",
+   "stated": "margins exactly predicted: pairs without the last unchanged; (k, last) equal to the original (k, first) for k other than the first; (first, last) exactly -1; the last square's clearances equal the first's; overlapping pairs exactly those predicted negative, with method B's area of (first, last) exactly 1; refused",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": [],
+    "overlapping_predicted": [
+     [
+      0,
+      108
+     ]
+    ],
+    "verdict": "REFUSE"
+   }
+  },
+  {
+   "id": "G2",
+   "stated": "refused; its clearances exactly (L + S, B, R - S, T) and the other squares' unchanged; its crossings exactly where those are negative (at least the right wall, since R - S < 0); method B's area inside exactly 0 if L >= 0; pairs without it unchanged; if L >= 0 and every other square's R >= 0, none of its pairs overlaps by either method",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": [],
+    "R_minus_S": "-2.000000e+0",
+    "separated_by_x_eq_S": true
+   }
+  },
+  {
+   "id": "G3",
+   "stated": "refused; that square, and only that square, not a unit square by A and by B; pairs among the others unchanged",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": []
+   }
+  },
+  {
+   "id": "G4",
+   "stated": "the original's verdict; margins and clearances identical; senses unchanged",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": []
+   }
+  },
+  {
+   "id": "G5",
+   "stated": "the original's verdict; margins and clearances identical; every sense flipped",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": []
+   }
+  },
+  {
+   "id": "G6",
+   "stated": "margins identical; clearances (L, B, R, T) to (B, L, T, R); every sense flipped; the original's verdict",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": []
+   }
+  },
+  {
+   "id": "G7",
+   "stated": "margins identical; clearances (L, B, R, T) to (T, L, B, R); senses unchanged; the original's verdict",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": []
+   }
+  },
+  {
+   "id": "G8",
+   "stated": "margins identical; clearances (L, B, R, T) to (R, B, L, T); every sense flipped; the original's verdict",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": []
+   }
+  },
+  {
+   "id": "G9",
+   "stated": "the new square's clearances equal the first's; (k, new) equal to the original (k, first); (first, new) exactly -1 with method B's area exactly 1; other pairs unchanged; refused",
+   "outcome": "as stated",
+   "details": {
+    "mismatches": []
+   }
+  },
+  {
+   "id": "S1a",
+   "stated": "the side rule with delta = 1e-30: right and top clearances lowered by exactly delta, left and bottom and every margin unchanged, contacts and crossings exactly those of the new clearances, method B's area inside 1 exactly for the squares whose new clearances are all >= 0, the verdict predicted",
+   "outcome": "as stated",
+   "details": {
+    "delta": "1.000000e-30",
+    "delta_exact": "1/1000000000000000000000000000000",
+    "verdict": "ACCEPT",
+    "crossing": [],
+    "crossing_count": 0,
+    "mismatches": []
+   }
+  },
+  {
+   "id": "S1b",
+   "stated": "the side rule with delta = 1/q",
+   "outcome": "as stated",
+   "details": {
+    "delta": "2.000000e-20",
+    "delta_exact": "1/50000000000000000000",
+    "verdict": "REFUSE",
+    "crossing": [
+     "square-66"
+    ],
+    "crossing_count": 1,
+    "mismatches": []
+   }
+  },
+  {
+   "id": "S1c",
+   "stated": "the side rule with delta = W; accepted if the original is accepted",
+   "outcome": "as stated",
+   "details": {
+    "delta": "5.828954e-21",
+    "delta_exact": "11380716353295025680779541885441856735750943680185260513038163488205395210245207121102781050903606285482858707/1952445797739343193516458179034788272940295790212651190593191996915460644869303096471755562168336288415642242450000000000000000000",
+    "verdict": "ACCEPT",
+    "crossing": [],
+    "crossing_count": 0,
+    "mismatches": []
+   }
+  },
+  {
+   "id": "S1d",
+   "stated": "the side rule; refused",
+   "outcome": "as stated",
+   "details": {
+    "delta": "5.828954e-21",
+    "delta_exact": "227614327104949429570377701579166298295714639062511126065016293575971744143213355319441682947507236953023899908312844849/39048915954786863870329163580695765458805915804253023811863839938309212897386061929435111243366725768312844849000000000000000000000000000000",
+    "verdict": "REFUSE",
+    "crossing": [
+     "square-66"
+    ],
+    "crossing_count": 1,
+    "mismatches": []
+   }
+  },
+  {
+   "id": "S1e",
+   "stated": "the side rule with delta = S - C",
+   "outcome": "as stated",
+   "details": {
+    "delta": "-5.610031e-13",
+    "delta_exact": "-28050157/50000000000000000000",
+    "verdict": "ACCEPT",
+    "crossing": [],
+    "crossing_count": 0,
+    "mismatches": []
+   }
+  },
+  {
+   "id": "S1f",
+   "stated": "the side rule with delta = S - C + 1e-12",
+   "outcome": "as stated",
+   "details": {
+    "delta": "4.389969e-13",
+    "delta_exact": "21949843/50000000000000000000",
+    "verdict": "REFUSE",
+    "crossing": [
+     "square-105",
+     "square-108",
+     "square-16",
+     "square-19",
+     "square-36",
+     "square-37",
+     "square-48",
+     "square-49",
+     "square-60",
+     "square-61",
+     "square-65",
+     "square-66",
+     "square-68",
+     "square-69",
+     "square-89",
+     "square-90",
+     "square-91",
+     "square-93",
+     "square-96"
+    ],
+    "crossing_count": 19,
+    "mismatches": []
+   }
+  },
+  {
+   "id": "P1c",
+   "stated": "that pair's margin exactly 0 by A and by the third formulation, touch by B; pairs without the moved square unchanged; the moved square's other pairs apart; its clearances exactly the original plus v; the original's verdict",
+   "outcome": "as stated",
+   "details": {
+    "pair": [
+     "square-59",
+     "square-69"
+    ],
+    "moved": "square-69",
+    "original_margin": "2.000000e-15",
+    "target": "0",
+    "verdict": "ACCEPT",
+    "mismatches": []
+   }
+  },
+  {
+   "id": "P1p",
+   "stated": "refused; that pair's margin exactly -eps, overlap by B; overlapping pairs exactly that pair plus any the original had; pairs without the moved square unchanged; the moved square's other pairs apart",
+   "outcome": "as stated",
+   "details": {
+    "pair": [
+     "square-59",
+     "square-69"
+    ],
+    "moved": "square-69",
+    "original_margin": "2.000000e-15",
+    "target": "-1.000000e-30",
+    "verdict": "REFUSE",
+    "mismatches": []
+   }
+  },
+  {
+   "id": "W1c",
+   "stated": "that clearance exactly 0, the opposite one exactly raised by c, the other two unchanged; pairs without it unchanged, its pairs apart; the original's verdict. Not applicable at a wall with no eligible square, recorded so, the wall then covered by WALL",
+   "outcome": "as stated",
+   "details": {
+    "left": {
+     "square": "square-38",
+     "clearance_before": "0",
+     "verdict": "ACCEPT",
+     "outcome": "as stated",
+     "mismatches": []
+    },
+    "bottom": {
+     "square": "square-63",
+     "clearance_before": "0",
+     "verdict": "ACCEPT",
+     "outcome": "as stated",
+     "mismatches": []
+    },
+    "right": {
+     "square": "square-65",
+     "clearance_before": "3.675038e-15",
+     "verdict": "ACCEPT",
+     "outcome": "as stated",
+     "mismatches": []
+    },
+    "top": {
+     "square": "square-66",
+     "clearance_before": "5.828954e-21",
+     "verdict": "ACCEPT",
+     "outcome": "as stated",
+     "mismatches": []
+    }
+   }
+  },
+  {
+   "id": "W1p",
+   "stated": "refused; the only crossing that square at that wall, at exactly -eps; the opposite clearance raised by exactly c + eps; pairs without it unchanged, its pairs apart",
+   "outcome": "as stated",
+   "details": {
+    "left": {
+     "square": "square-38",
+     "clearance_before": "0",
+     "verdict": "REFUSE",
+     "outcome": "as stated",
+     "mismatches": []
+    },
+    "bottom": {
+     "square": "square-63",
+     "clearance_before": "0",
+     "verdict": "REFUSE",
+     "outcome": "as stated",
+     "mismatches": []
+    },
+    "right": {
+     "square": "square-65",
+     "clearance_before": "3.675038e-15",
+     "verdict": "REFUSE",
+     "outcome": "as stated",
+     "mismatches": []
+    },
+    "top": {
+     "square": "square-66",
+     "clearance_before": "5.828954e-21",
+     "verdict": "REFUSE",
+     "outcome": "as stated",
+     "mismatches": []
+    }
+   }
+  },
+  {
+   "id": "WALL",
+   "stated": "A's and the third formulation's clearance exactly 0 and -eps; B touch and cross at that wall; B's area inside exactly 1 and below 1",
+   "outcome": "as stated",
+   "details": {
+    "squares": 109,
+    "moves": 218,
+    "mismatches": []
+   }
+  },
+  {
+   "id": "PALL",
+   "stated": "A's and the third formulation's margin exactly 0 and -eps; B touch and overlap, its two clipping orders agreeing",
+   "outcome": "as stated",
+   "details": {
+    "pairs": 5886,
+    "closings": 11772,
+    "mismatches": []
+   }
+  }
+ ],
+ "as_stated": 37,
+ "not_applicable": [],
+ "total": 37,
+ "whole_file_decisions": 25,
+ "priors": {
+  "the certificate is accepted by both methods": true,
+  "the claim 10.949289580944 is the 12-place ceiling of the side 547464479047171949843/50000000000000000000": true,
+  "S1e is accepted and S1f refused": true,
+  "no pair is at exact contact": true
+ },
+ "cpu_seconds": 121.8,
+ "python": "3.14.7"
+}

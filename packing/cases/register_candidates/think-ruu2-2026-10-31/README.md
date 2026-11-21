@@ -79,12 +79,12 @@ At 293 the candidate restates Daniel’s certificate, and RV-4 falls with it.
 Whether option D reaches T-259 itself, 0.9193 of T-254’s margin, is the owner’s question
 (think-7k8p).
 
-### The Project’s Ten Candidates
+### Ten Solves Below the 18 November Houses
 
 On 18 November 2026 the pass recorded this project’s own solves below a house as
-classification and receipts only, and left their registration, stage 4 review and
-adoption to think-4z8z. Ten are new results under option D, each below the house at its
-count once the house is shrunk to first contact:
+classification and receipts, and left their registration, stage 4 review and adoption to
+think-4z8z. At that checkpoint ten qualified as new results under option D, each below
+its house shrunk to first contact.
 
 | n | House | House’s margin | Gain | Share | The solve |
 | ---: | --- | ---: | ---: | ---: | --- |
@@ -113,10 +113,12 @@ holds the same shares.
 At 270, 299 and 307 the solves are the points the driver held on 9 November 2026
 (think-he66, think-463r). The owner left new-result status and the improved-by credit
 there with Polkovskyi, who first reported and certified the packings, the record noting
-the project’s earlier solves (think-frl5); the three stay candidates, registered where
-they are lower.
-At 156 and 180, the decision’s other two counts, the project’s solves lie
-above Polkovskyi’s sides, so the project holds no candidate there.
+the project’s earlier solves (think-frl5). The adoptions of T-331, T-332 and T-333 on 20
+November retired the older candidates at 268, 270 and 299. This table retains the
+comparisons to the houses of 18 November.
+Think-4z8z tracks the remaining candidates, including the separate solve of T-332 at
+270\. At 156 and 180, the decision’s other two counts, the project’s solves lie above
+Polkovskyi’s sides, so the project holds no candidate there.
 
 ## What Is Retained
 

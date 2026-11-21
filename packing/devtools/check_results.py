@@ -74,7 +74,7 @@ import sys
 from collections.abc import Iterable, Mapping, Sequence
 from datetime import date
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, cast
 
 from devtools.build_bound_citations import RECENT_SINCE
 from devtools.render_document_map import document_link
@@ -1587,6 +1587,12 @@ RESTATEMENT_RULING = "think-b0w5"
 CONTRACTION_FORMAT = "contraction-margin-v1"
 
 
+def _receipt_object(value: object, field: str) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise TypeError(f"{field} must be a JSON object")
+    return cast("dict[str, Any]", value)
+
+
 def restatements_problems(
     record: Mapping[str, Any],
     dated: Mapping[str, str],
@@ -1647,28 +1653,31 @@ def restatements_problems(
             problems.append(f"{name}: measured_in {problem}: {where}")
         else:
             try:
-                receipt = json.loads((REPO / where).read_text(encoding="utf-8"))
-            except (OSError, ValueError) as error:
+                receipt = _receipt_object(
+                    json.loads((REPO / where).read_text(encoding="utf-8")), "receipt"
+                )
+                against = _receipt_object(receipt.get("against", {}), "against")
+                certificate = _receipt_object(receipt.get("certificate", {}), "certificate")
+                rival = _receipt_object(against.get("certificate", {}), "against.certificate")
+            except (OSError, TypeError, ValueError) as error:
                 problems.append(f"{name}: measured_in is no JSON receipt: {error}")
-                receipt = None
-            if receipt is not None:
-                against = receipt.get("against") or {}
+            else:
                 compared = str(against.get("compared", ""))
                 through = compared.startswith("through the construction")
                 at = against.get("n") if through else receipt.get("n")
-                certificate = receipt.get("certificate") or {}
-                rival = against.get("certificate") or {}
                 cited = {
                     str(path).split("/")[3]
                     for path in record.get("artifacts") or ()
                     if str(path).startswith("packing/resources/web/")
                     and len(str(path).split("/")) > 4
                 }
-                rival_packet = rival.get("packet") or (
-                    str(rival.get("path", "")).split("/")[3]
-                    if str(rival.get("path", "")).startswith("packing/resources/web/")
-                    else None
-                )
+                rival_packet = rival.get("packet")
+                if rival_packet is not None and not isinstance(rival_packet, str):
+                    problems.append(f"{name}: the receipt's rival packet must be a string")
+                    rival_packet = None
+                rival_path = str(rival.get("path", ""))
+                if not rival_packet and rival_path.startswith("packing/resources/web/"):
+                    rival_packet = rival_path.split("/")[3]
                 if receipt.get("format") == CONTRACTION_FORMAT and at == n:
                     if certificate.get("label") != other:
                         problems.append(

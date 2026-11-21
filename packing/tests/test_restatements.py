@@ -18,6 +18,7 @@ import gzip
 import json
 from collections.abc import Mapping
 from fractions import Fraction
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -173,6 +174,35 @@ def test_a_restatement_is_held_to_its_scope_predecessor_and_receipt(
     assert any("also a regularization" in line for line in _problems(records, both))
 
 
+@pytest.mark.parametrize(
+    ("payload", "problem"),
+    [
+        (None, "must be a JSON object"),
+        ([1], "must be a JSON object"),
+        ({"against": [1]}, "must be a JSON object"),
+        ({"certificate": [1]}, "must be a JSON object"),
+        ({"against": {"certificate": [1]}}, "must be a JSON object"),
+        (
+            {"against": {"certificate": {"packet": ["not a name"]}}},
+            "rival packet must be a string",
+        ),
+    ],
+)
+def test_a_restatement_reports_malformed_receipt_metadata(
+    records: view.Records,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    payload: object,
+    problem: str,
+) -> None:
+    receipt = tmp_path / "receipt.json"
+    receipt.write_text(json.dumps(payload), encoding="utf-8")
+    record = _restated(records, _item(measured_in=receipt.name))
+    monkeypatch.setattr(check_results, "REPO", tmp_path)
+
+    assert any(problem in line for line in _problems(records, record))
+
+
 def test_the_register_records_the_restatements_option_d_settles(records: view.Records) -> None:
     """T-253, T-260, T-280 and T-281 restate their houses at every count; none improves on
     a case record there, so none is pending adoption or a current record, and a reply's
@@ -261,7 +291,7 @@ def test_the_held_points_of_9_november_are_classified_under_option_d() -> None:
     """think-5c9z: Evan Daniel's regularizer solved the five houses of 9 November to
     certified KKT points below their sides (think-463r). Against T-275 at 232 and T-276 at
     268 they gain 1.1251 and 1.0321 of each certificate's own uniform-contraction margin,
-    new results there, but both lie above today's houses, T-307 and T-320, so neither is
+    new results there, but both lie above today's houses, T-307 and T-331, so neither is
     a candidate; at 303 the point is 1.0234 of T-278's margin and below the house, a
     candidate for think-4z8z (review A5 of #1030)."""
     package = check_results.ROOT / "cases/regularized_drawings/think-463r-2026-11-09"

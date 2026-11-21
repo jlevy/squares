@@ -1,0 +1,67 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1021",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter s268 upper bound 2026-11-17]",
+  "report_evidence": "E-de-winter-1021-certificate-report",
+  "receipt_format": "de-winter-1021-exact-replay-v1",
+  "witness_prefix": "W-de-winter-1021-n",
+  "claim_limitations": "Complete 2026-11-17 exact rational centre-direction certificate at 268, read exactly from the retained source file n268/n268_exact.json at a1ba501, in the watched repository JoostdeWinter/square-packing, which jlevy/squares#1021 names: a slice composition of nine diagonal slices from published packings of 129, 153 and 302 squares. Finite construction feasibility only; local optimum, KKT, rigidity, same-packing, novelty, priority and global optimality are not replayed here.",
+  "read_on": "2026-11-18",
+  "read_at_main": "86284ec203b63097b0a51fd5dffe931852430335",
+  "certificates": [
+    {
+      "n": 268,
+      "path": "n268/n268_exact.json",
+      "format": "center-direction-json",
+      "offered": "16.870013850405",
+      "first_committed": "2026-11-17T22:48:48Z",
+      "same_packing": [
+        {
+          "path": "n268/n268_witness.yaml",
+          "format": "witness-corners-opposite"
+        }
+      ]
+    }
+  ],
+  "requested": [
+    268
+  ],
+  "replayed": [
+    268
+  ],
+  "houses": [
+    {
+      "n": 268,
+      "reader": "[Mishapolk issue 1009 2026-11-16]",
+      "source_key": "[Mishapolk issue 1009 2026-11-16]",
+      "holders": "Doğa Özden, improved by Mykhailo Polkovskyi",
+      "result": "T-320",
+      "reported_value": "16.8718681351021783",
+      "verified_value": "16.8718681351021783",
+      "evidence": [
+        "E-mishapolk-1009-exact-feasibility",
+        "E-mishapolk-1009-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Joost de Winter's packing of 268 squares at JoostdeWinter/square-packing a1ba501, issue 1021",
+    "headline": "PLACEHOLDER",
+    "significance": 3,
+    "source_checks": "PLACEHOLDER",
+    "credit": "PLACEHOLDER",
+    "next_rung": "PLACEHOLDER",
+    "bead": "think-gqzz",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "independent",
+      "credit": "PLACEHOLDER",
+      "note": "PLACEHOLDER",
+      "short_credit": "PLACEHOLDER"
+    }
+  }
+}

@@ -2511,8 +2511,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # fewer. PingYou Ltd's PR 574 certificates and Daniel's issue 639 forms keep others.
     # Its adoption at 127 (think-zqot) draws 127 from Joost de Winter's issue 1020 packet
     # (T-330), one more source with no new name; JoeGun's packet still holds 204, 232, 264
-    # and 305.
-    assert len(expected_sources) == 40
+    # and 305. The same pass (think-78aj) draws 268, 270 and 299 from his three packets of
+    # issues 1021, 1022 and 1031, three more sources with no new name; Polkovskyi's issue
+    # 1009 packet keeps its other counts.
+    assert len(expected_sources) == 43
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2707,16 +2709,16 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (264, ["Tomáš Kodaj"], ["JoeGun"]),
         (305, ["Tomáš Kodaj"], ["JoeGun"]),
         (237, ["Doğa Özden"], []),
-        (268, ["Doğa Özden"], ["Mishapolk"]),
+        (268, ["Joost de Winter"], []),
         (269, ["Doğa Özden"], []),
-        (270, ["Evan Daniel"], ["Doğa Özden", "Mishapolk"]),
-        (299, ["Evan Daniel"], ["Doğa Özden", "Mishapolk"]),
+        (270, ["Joost de Winter"], []),
+        (299, ["Joost de Winter"], []),
         (303, ["Evan Daniel"], ["Doğa Özden"]),
         (307, ["ntumlnoob"], ["Francisco Couzo", "Doğa Özden", "Mishapolk"]),
     ):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert (reported["found_by"], reported["improved_by"]) == (found, improved), n
-    assert citations[299]["upper"]["text"] == "Daniel et al., GitHub"
+    assert citations[299]["upper"]["text"] == "de Winter 2026, GitHub"
     for n in (260,):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert reported["found_by"] == ["Evan Daniel"]

@@ -254,11 +254,12 @@ def test_the_review_decides_each_file_on_both_methods(name: str) -> None:
 #: and the pass of 16 November 2026 took 204 to JoeGun's issue-1001 certificate (T-306), a
 #: new arrangement relative to T-268's packing, which stays as history. The pass of 18
 #: November 2026 took 260 and 268 to Mykhailo Polkovskyi's issue-1009 certificates, further
-#: arrangements of T-269's and T-289's packings (T-318, T-320).
+#: arrangements of T-269's and T-289's packings (T-318, T-320), and the pass of 20 November
+#: 2026 took 268 on to Joost de Winter's issue-1021 certificate (T-331), a new arrangement.
 MOVED_LATER = {
     204: ("T-306", "2026-11-16"),
     260: ("T-318", "2026-11-18"),
-    268: ("T-320", "2026-11-18"),
+    268: ("T-331", "2026-11-20"),
     303: ("T-278", "2026-11-09"),
 }
 

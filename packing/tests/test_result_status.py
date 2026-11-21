@@ -524,6 +524,12 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-305",
         "T-328",
         "T-329",
+        # The pass of 20 November 2026 (think-78aj) took the last houses of three of them to
+        # Joost de Winter's certificates of issues 1021, 1022 and 1031 (T-331 to T-333):
+        # T-320 at 268, T-321 at 270 and T-325 at 299.
+        "T-320",
+        "T-321",
+        "T-325",
         # The pass of 21 November 2026 (think-8yyy) took 172 and 199, the last houses of
         # Doğa Özden's T-282 and T-284, to Joost de Winter's re-solves (T-286, T-285), new
         # results under the owner's option D of 17 November 2026 (think-b0w5). Lane

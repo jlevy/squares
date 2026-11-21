@@ -1,0 +1,9 @@
+{
+ "program": "r1012_selftest.py",
+ "status": "PASSED",
+ "checks": 4593,
+ "failures": [],
+ "failure_count": 0,
+ "cpu_seconds": 0.88,
+ "python": "3.14.7"
+}
