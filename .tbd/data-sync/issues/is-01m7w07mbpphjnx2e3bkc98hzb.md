@@ -5,15 +5,15 @@ title: "Import #1038: Özden's s(228) <= 15.596043116632 (jazivxt's Boxed In coo
 kind: task
 status: in_progress
 priority: 1
-version: 7
-delegate: i1038
+version: 8
+delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T08:12:42.230Z
-updated_at: 2026-11-20T11:53:09.913Z
+updated_at: 2026-11-21T00:36:23.645Z
 started_at: 2026-11-20T08:13:34.461Z
 ---
 
