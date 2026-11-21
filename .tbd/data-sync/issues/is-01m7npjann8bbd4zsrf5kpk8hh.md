@@ -5,7 +5,7 @@ title: "Import #1012: public Kaggle packings below the register at n = 109 and n
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,7 +15,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-21T02:35:14.977Z
+updated_at: 2026-11-21T02:45:25.052Z
 started_at: 2026-11-17T21:29:36.291Z
 ---
 
@@ -86,3 +86,5 @@ The 5,577,150-byte CSV is verified at Samanyu-dev/squares_in_squares 53551d77513
 Next: integrate after T-334, register the earlier packing with normal maintained replay and controls, preserve the #1049 review evidence and replay its applicability if needed, then run 109 house selection, regularization and exact-head gates. The original c14 external workspace is unavailable.
 
 Portable n109 positive preflight passed through both maintained routes, 5,886 pairs each. Canonical derived-source campaign plan 6b642abb4d5912a67819187e534eb71bd308b18537f8666373b3d037f3f0daf0, hashed before the official three-job replay and sharp controls. The original binary64 witness and the portable derivation keep separate receipts.
+
+Checked source-prep commits go into #1047 after its base integration. 54be5b33ced1d9dd0dff905af2566d4179083bb3 adds the portable adapter, regression, digest-only upstream acquisition, canonical n109 fact and exact maintained receipt. The fact reproduces from the pinned checkout, decompressed SHA-256 2938dddb54398f8f91afd4dce7e83a8bbd2a56db189b1e5a92c0877d85bca5d3. Its 35,316 pair decisions across three jobs and two routes gave the planned outcomes. Commit 01c2f91e9284be65215e051f07d7d1b0c9cc09bf retains all 11 successful sharp controls. The n109 primary result remains to be integrated into draft #1047 and registered before its gated adoption.
