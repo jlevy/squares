@@ -110,11 +110,6 @@ workspace as `verify_independent.py`. Run
 `compare_replay.py FROZEN_JSON WORKING_JSON --out COMPARISON_JSON` with the project
 interpreter to compare results.
 
-These are proposed retained artifacts.
-The coordinator owns verifier/evidence registration, document mapping, result linkage,
-and publication. `record-proposals.json` contains integration guidance; registration has
-not been performed by this lane.
-
 ## Compressed Files
 
 | Stored file | Origin | Git blob of uncompressed bytes | Decompressed SHA-256 |

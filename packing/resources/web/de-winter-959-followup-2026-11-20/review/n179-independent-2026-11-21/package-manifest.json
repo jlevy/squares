@@ -2,7 +2,7 @@
   "format": "n179-independent-review-package-v1",
   "source": "packing/resources/web/de-winter-959-followup-2026-11-20/source/n179.minpoly.json.gz",
   "source_sha256": "28edf9561e87037b5c681e4ff0051a1bd1b8e5401c1a8376fe2e66c2c18663d1",
-  "runnable": "packing/campaign/issue-intake/de-winter-959-2026-11-20/review/n179_replay.py",
+  "runnable": "packing/campaign/issue-intake/de-winter-959-2026-11-20/review/n179_replay.py.txt",
   "runnable_sha256": "8f719595eb990d2d0e1a0b53c18bf22500e269919e5f50449428bd4652ba5ccc",
   "compressed_evidence": {
     "frozen/run-02/walls.json.gz": {
