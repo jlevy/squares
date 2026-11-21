@@ -3,9 +3,9 @@ type: is
 id: is-01m7npjann8bbd4zsrf5kpk8hh
 title: "Import #1012: public Kaggle packings below the register at n = 109 and n = 270 (pointer); triage, retain at a pinned revision, register as reported"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 22
+version: 23
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -15,8 +15,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:20.405Z
-updated_at: 2026-11-21T11:48:03.455Z
+updated_at: 2026-11-21T14:49:37.062Z
 started_at: 2026-11-17T21:29:36.291Z
+closed_at: 2026-11-21T14:49:37.055Z
+close_reason: "T-335 adopted and verified in #1068, the #1012 follow-up is durable in deployed #1071, and the separate solver candidate remains on think-26s0."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
