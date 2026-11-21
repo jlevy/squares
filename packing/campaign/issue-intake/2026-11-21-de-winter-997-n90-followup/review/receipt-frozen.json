@@ -1,0 +1,224 @@
+{
+  "kind": "frozen-independent-review-receipt",
+  "created_at_utc": "2026-11-21T18:03:56.688124+00:00",
+  "source_only_result_frozen_at_utc": "2026-11-21T17:48:28.842350+00:00",
+  "source_only_plan_frozen_at_utc": "2026-11-21T17:44:46.218786+00:00",
+  "author_comment": "https://github.com/jlevy/squares/issues/997#issuecomment-7058975230",
+  "reviewer": "Codex, strong tier (tbd-strong-max), maximum reasoning",
+  "claim": "All 90 unit squares fit at the exact candidate side, with pairwise disjoint interiors.",
+  "verdict": "accepted",
+  "source_identity": {
+    "copied_at_utc": "2026-11-21T17:44:46.218202+00:00",
+    "files": [
+      {
+        "member": "90/candidate.json.gz",
+        "original_path": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/packing/resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz",
+        "bytes": 26873,
+        "sha256": "3a8e8913d0b87ac0b68c3fc4ac24d6ad042074c9696a2cdbfae3682b2e0b96c7",
+        "decoded_bytes": 145827,
+        "decoded_sha256": "5f58ac1e3f082df767237ae430180d64a09a7332b3d0b00015503cfa3c9e2099"
+      },
+      {
+        "member": "90/input.json.gz",
+        "original_path": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/packing/resources/web/de-winter-997-followup-2026-11-21/source/90/input.json.gz",
+        "bytes": 6080,
+        "sha256": "c519aa1822709897d541e7b83efdb027054ad636059bfb340acdb3e9c4a5fb9b",
+        "decoded_bytes": 65520,
+        "decoded_sha256": "53efc701cdce250af67bbf9167213c96877ea55ffe6a684aa49c70fb23c2fa02"
+      },
+      {
+        "member": "90/previous-comparisons.json",
+        "original_path": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/packing/resources/web/de-winter-997-followup-2026-11-21/source/90/previous-comparisons.json",
+        "bytes": 4157,
+        "sha256": "3d9ba1c52a41c9c12d106d76fd35f46befef0227c702c0373a9c5ed058d5d6cc",
+        "decoded_bytes": 4157,
+        "decoded_sha256": "3d9ba1c52a41c9c12d106d76fd35f46befef0227c702c0373a9c5ed058d5d6cc"
+      },
+      {
+        "member": "comparisons.csv",
+        "original_path": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/packing/resources/web/de-winter-997-followup-2026-11-21/source/comparisons.csv",
+        "bytes": 8963,
+        "sha256": "798f9f754824a5c72d570ce66a5edce4c2ee7742a7725a16138738b684412601",
+        "decoded_bytes": 8963,
+        "decoded_sha256": "798f9f754824a5c72d570ce66a5edce4c2ee7742a7725a16138738b684412601"
+      }
+    ],
+    "author_comment": {
+      "url": "https://github.com/jlevy/squares/issues/997#issuecomment-7058975230",
+      "api_url": "https://api.github.com/repos/jlevy/squares/issues/comments/7058975230",
+      "retained_sha256": "9fbdfab824840848dbcaa019a8392ed9b50c9238efc7fa8eea19d6b05c6dd5bc"
+    }
+  },
+  "program": {
+    "historical_name": "verify_independent.py",
+    "retained_name": "verify_independent.py.txt",
+    "sha256": "608c4ce81d4750df551ba64c5353a68112bbd6c9f3fb623ea4e5b8d32283cafe"
+  },
+  "plan_sha256": "31e9b91959b50ba8605606686be3bc2b0cddadaba3f3a074f86e12804e25f33a",
+  "result_sha256": "2e135584054b2c3b9a680f91394e4f825826b3638fb5c130aa087e7787ea2da4",
+  "execution": {
+    "finished_at_utc": "2026-11-21T17:48:29.033154+00:00",
+    "worker_command": [
+      "/Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python",
+      "-I",
+      "-B",
+      "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/verify_independent.py",
+      "--wait-for",
+      "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/guard-observing.go"
+    ],
+    "guard_command": [
+      "/Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/levy/.agents/skills/memory-guard/memory_guard.py",
+      "--pid",
+      "64900",
+      "--observe-only",
+      "--interval",
+      "0.5",
+      "--log",
+      "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/memory-observe.jsonl"
+    ],
+    "worker_pid": 64900,
+    "guard_pid": 64911,
+    "worker_exit": 0,
+    "guard_exit": 0,
+    "guard_observed_before_work": true,
+    "worker_limit": 1,
+    "environment": {
+      "TMPDIR": "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/tmp",
+      "CARGO_TARGET_DIR": "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/cargo-target",
+      "UV_CACHE_DIR": "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/uv-cache",
+      "PYTEST_ADDOPTS": "-o tmp_path_retention_policy=failed -o tmp_path_retention_count=1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "memory_guard_summary": {
+    "record": "summary",
+    "ts": "2026-11-21T17:48:28.985+00:00",
+    "authority": "observe",
+    "watched_s": 3.5,
+    "samples": 6,
+    "percentile_samples": 6,
+    "sample_hz": 1.73,
+    "interventions": {
+      "pauses": 0,
+      "resumes": 0,
+      "paused_total_s": 0.0,
+      "paused_fraction": 0.0,
+      "harvests": 0,
+      "harvest_rounds": 0,
+      "processes_killed": 0,
+      "freed_gb_est": 0.0,
+      "aborted": false,
+      "processes_would_kill": 0,
+      "would_free_gb_est": 0.0,
+      "abort_refused": false
+    },
+    "dispositions": {
+      "suspensions": 0,
+      "terminated_on_sigterm": 0,
+      "force_killed_on_sigkill": 0,
+      "already_gone": 0,
+      "signal_denied": 0
+    },
+    "host": {
+      "reclaimable_gb": {
+        "min": 9.74,
+        "mean": 9.89,
+        "p1": 9.74,
+        "p10": 9.74,
+        "p50": 9.87
+      },
+      "max_pressure": 1
+    },
+    "tree": {
+      "cost_gb": {
+        "max": 0.02,
+        "p50": 0.02,
+        "p90": 0.02,
+        "p99": 0.02
+      },
+      "procs": {
+        "max": 1,
+        "p50": 1.0,
+        "p90": 1.0,
+        "p99": 1.0
+      },
+      "largest_worker_mb": {
+        "p50": 0.0,
+        "p90": 0.0,
+        "p99": 0.0
+      }
+    },
+    "watchdog_health": {
+      "heartbeats_late": 0,
+      "lag_s": {
+        "max": 0.09,
+        "p50": 0.08,
+        "p90": 0.09,
+        "p99": 0.09
+      }
+    }
+  },
+  "coverage": {
+    "kind": "full",
+    "squares": 90,
+    "wall_inequalities": 1440,
+    "unordered_pairs": 4005,
+    "axes": 16020,
+    "predeclared_controls": 13
+  },
+  "independence": {
+    "read": [
+      "mathematics",
+      "specification",
+      "certificate-format",
+      "producer-output"
+    ],
+    "clean_room": true,
+    "shares": [],
+    "written_by": [
+      "Codex, strong tier (tbd-strong-max), maximum reasoning, independent mathematical reviewer"
+    ],
+    "overlaps_producer": "system-family",
+    "separate_prompt": true,
+    "separate_code": true,
+    "note": "Producer output read was the supplied factual comparison/metadata claims. No producer verification code, project geometry implementation, earlier review or derived packet receipt was read before the original mathematical freeze. OpenAI system-family overlap is recorded conservatively; model-family independence is not claimed."
+  },
+  "post_freeze_reads": [
+    "packing/campaign/result-import.md, Stage 4 and significance rubric",
+    "epistemics.md, independence, review records and significance",
+    "packing/pyproject.toml, full Ruff and BasedPyright configuration",
+    "Reusable tbd, Practical Prose and Flowmark instructions",
+    "review-2026-11-15-de-winter-996.md, #997 addendum opening/custody/comparisons/padding/findings/questions",
+    "Pinned ZIP listing and four factual member byte comparisons"
+  ],
+  "not_read_or_run": [
+    "Producer check_vertices.py and envelope.py",
+    "Project geometry code",
+    "Adjacent derived/receipts files in the intake packet"
+  ],
+  "pair_ledger_retention": [
+    {
+      "decoded_path": "evidence/candidate-pairs.csv",
+      "decoded_bytes": 4460576,
+      "decoded_sha256": "7f48f75294c083c55445dac6448530859a83738d772ae2a03189216f556235fa",
+      "retained_path": "evidence/candidate-pairs.csv.gz",
+      "retained_bytes": 1113202,
+      "retained_sha256": "d2ee8f508f923285318780099a819c6346c32fd964f05663d73410ded27bf47f"
+    },
+    {
+      "decoded_path": "evidence/input-pairs.csv",
+      "decoded_bytes": 2516263,
+      "decoded_sha256": "75f0dc25727f2fd9792c4f91757989cdcfbb376c5293a649ddc5b44c9bcd03b5",
+      "retained_path": "evidence/input-pairs.csv.gz",
+      "retained_bytes": 605986,
+      "retained_sha256": "12c5e66a43dec181416158fa27d3b47a70d2ab7f9c7b6a7c8977f7724e71a403"
+    }
+  ],
+  "working_copy": "Working code and working-result.json are separate from the frozen source and result. replay-comparison.json verifies all scientific/source/control fields, omitting timings and checking program identities separately.",
+  "publication": "Draft overlay only. No checkout, tracker, Git or GitHub mutation performed by this lane."
+}

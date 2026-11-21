@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python",
+    "-B",
+    "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/sharp-worker.py"
+  ],
+  "guard_command": [
+    "/Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python",
+    "-B",
+    "/Users/levy/.agents/skills/memory-guard/memory_guard.py",
+    "--pid",
+    "37612",
+    "--observe-only",
+    "--interval",
+    "0.2",
+    "--log",
+    "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/n90-followup-work/guard/sharp-observe.jsonl",
+    "--no-progress"
+  ],
+  "guard_attached_before_worker": true,
+  "worker_exit_code": 0,
+  "guard_exit_code": 0
+}

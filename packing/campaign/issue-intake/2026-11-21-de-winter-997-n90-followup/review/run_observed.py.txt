@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+"""Run exactly one independent verifier worker under a passive memory observer."""
+from pathlib import Path
+import json
+import os
+import subprocess
+import sys
+import time
+from datetime import datetime, timezone
+
+ROOT=Path(__file__).resolve().parent
+PYTHON="/Users/levy/wrk/github/squares/.worktrees/intake-scratch-20261120/venv/bin/python"
+GUARD="/Users/levy/.agents/skills/memory-guard/memory_guard.py"
+environment=os.environ.copy()
+environment.update({
+    "TMPDIR":str(ROOT/"tmp"),"CARGO_TARGET_DIR":str(ROOT/"cargo-target"),
+    "UV_CACHE_DIR":str(ROOT/"uv-cache"),"PYTHONDONTWRITEBYTECODE":"1",
+    "OMP_NUM_THREADS":"1","OPENBLAS_NUM_THREADS":"1","MKL_NUM_THREADS":"1",
+    "PYTEST_ADDOPTS":"-o tmp_path_retention_policy=failed -o tmp_path_retention_count=1",
+})
+go=ROOT/"guard-observing.go"
+if go.exists() or (ROOT/"result-frozen.json").exists():
+    raise SystemExit("Refusing to overwrite a completed/started run.")
+with (ROOT/"worker.stdout.log").open("w") as out, \
+     (ROOT/"worker.stderr.log").open("w") as err, \
+     (ROOT/"guard.stdout.log").open("w") as gout, \
+     (ROOT/"guard.stderr.log").open("w") as gerr:
+    worker_cmd=[PYTHON,"-I","-B",str(ROOT/"verify_independent.py"),"--wait-for",str(go)]
+    worker=subprocess.Popen(worker_cmd,cwd=ROOT,env=environment,stdout=out,stderr=err)
+    deadline=time.monotonic()+40
+    while not (ROOT/"worker-ready.json").exists():
+        if worker.poll() is not None or time.monotonic()>deadline:
+            raise SystemExit("Worker did not become ready.")
+        time.sleep(0.05)
+    guard_cmd=[PYTHON,"-I","-B",GUARD,"--pid",str(worker.pid),"--observe-only",
+               "--interval","0.5","--log",str(ROOT/"memory-observe.jsonl")]
+    guard=subprocess.Popen(guard_cmd,cwd=ROOT,env=environment,stdout=gout,stderr=gerr)
+    journal=ROOT/"memory-observe.jsonl"
+    observed=False
+    while time.monotonic()<deadline:
+        if journal.exists():
+            observed=any(json.loads(line).get("record")=="sample"
+                         for line in journal.read_text().splitlines() if line.strip())
+        if observed:
+            break
+        if guard.poll() is not None:
+            break
+        time.sleep(0.1)
+    if not observed:
+        # Release no mathematical work when observation fails; worker times out itself.
+        print("Guard did not produce a startup sample; review not released.",flush=True)
+        worker_code=worker.wait(timeout=65)
+    else:
+        go.write_text(datetime.now(timezone.utc).isoformat()+"\n")
+        print(json.dumps({"worker_pid":worker.pid,"guard_pid":guard.pid,
+                          "guard_observed_before_work":True}),flush=True)
+        worker_code=worker.wait()
+    guard_code=guard.wait(timeout=15)
+    record={
+        "finished_at_utc":datetime.now(timezone.utc).isoformat(),
+        "worker_command":worker_cmd,"guard_command":guard_cmd,
+        "worker_pid":worker.pid,"guard_pid":guard.pid,
+        "worker_exit":worker_code,"guard_exit":guard_code,
+        "guard_observed_before_work":observed,"worker_limit":1,
+        "environment":{k:environment[k] for k in (
+            "TMPDIR","CARGO_TARGET_DIR","UV_CACHE_DIR","PYTEST_ADDOPTS",
+            "OMP_NUM_THREADS","OPENBLAS_NUM_THREADS","MKL_NUM_THREADS")},
+    }
+    (ROOT/"execution.json").write_text(json.dumps(record,indent=2)+"\n")
+    print(json.dumps(record),flush=True)
+    raise SystemExit(worker_code or guard_code)

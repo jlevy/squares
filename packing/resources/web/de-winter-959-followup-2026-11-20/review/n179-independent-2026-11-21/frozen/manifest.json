@@ -1,0 +1,9 @@
+{
+  "frozen_at": "2026-11-21T18:00:37.114008+00:00",
+  "before_any_controls_or_geometry_execution": true,
+  "files": {
+    "frozen/plan.md": "7e48708ece4921fcf4d815084aded745b6b4279a6a60061bb5ea8a558d150775",
+    "frozen/replay.py": "93e449885e6a9b120b29daafa2a87991e2010943664b790801d7eed7d4329d38",
+    "env.sh": "f8213ad59520fd6358da2257fe5956296c19262b869fccb70fd9941288b44b2d"
+  }
+}

@@ -376,6 +376,8 @@ documents:
   - {path: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-18-de-winter-1031.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-20-mira-1050-n18.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-20-ozden-1038.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-11-20-de-winter-1012-n109.md, role: review, authority: record, lifecycle: retained}
@@ -859,6 +861,7 @@ documents:
   - {path: packing/campaign/agenda-map.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-20261014/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-20261014/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/README.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-20261014/review/README.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-20261016/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-20261016/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}

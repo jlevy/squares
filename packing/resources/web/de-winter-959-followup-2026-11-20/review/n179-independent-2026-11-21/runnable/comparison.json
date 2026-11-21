@@ -1,0 +1,28 @@
+{
+  "frozen_status": "verified_finite_construction",
+  "runnable_status": "verified_finite_construction",
+  "runnable_elapsed_seconds": 2.7837021669838578,
+  "all_mathematical_receipt_fields_equal": true,
+  "files": {
+    "walls.json": {
+      "identical": true,
+      "bytes": 109534,
+      "sha256": "eca9a211b08e0b50d03ac41bf8de31c5f0ae280573b71a32d70020b419709d92"
+    },
+    "pairs.jsonl": {
+      "identical": true,
+      "bytes": 2480159,
+      "sha256": "490db2ee08edb4592efbe262da4909ccbe1cfb4eb9e61c1ff3199b8331579332"
+    },
+    "overlay.svg": {
+      "identical": true,
+      "bytes": 34330,
+      "sha256": "a5c6f9f747aa3bba99c788c71e737e81b86845ae014fa3e63f747087cc092b16"
+    },
+    "overlay-coordinates.json": {
+      "identical": true,
+      "bytes": 72939,
+      "sha256": "b595934fd17296a3732de202668a46425977fa8552092ad623763700dea3e28d"
+    }
+  }
+}

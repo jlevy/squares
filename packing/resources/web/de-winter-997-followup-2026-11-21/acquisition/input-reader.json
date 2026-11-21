@@ -1,0 +1,7 @@
+{
+  "source_member": "90/input.json.gz",
+  "source_compressed_sha256": "c519aa1822709897d541e7b83efdb027054ad636059bfb340acdb3e9c4a5fb9b",
+  "source_decoded_sha256": "53efc701cdce250af67bbf9167213c96877ea55ffe6a684aa49c70fb23c2fa02",
+  "reader": "ono-json",
+  "normalization": null
+}

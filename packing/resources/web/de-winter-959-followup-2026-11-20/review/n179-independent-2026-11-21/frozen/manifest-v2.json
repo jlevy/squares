@@ -1,0 +1,9 @@
+{
+  "frozen_at": "2026-11-21T18:02:22.171589+00:00",
+  "before_v2_execution": true,
+  "prior_run": "run-01/receipt.json",
+  "files": {
+    "frozen/replay-v2.py": "f5a657ad1f997f0f460d0030a5d05a48be45d80a74fd919968363e392d48cd99",
+    "frozen/amendment-v2.md": "b6fd3ece74aa2286ccceeaeee2b54ce53e33f2410d6f9f2a5dbc56ccc60af9f3"
+  }
+}
