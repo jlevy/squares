@@ -5,7 +5,7 @@ title: "Import #1052: de Winter's s(305) <= 17.945755838742 (refines T-309, Koda
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:56:46.484Z
-updated_at: 2026-11-21T14:26:15.014Z
+updated_at: 2026-11-21T16:06:23.069Z
 started_at: 2026-11-20T21:05:08.431Z
 ---
 
@@ -45,3 +45,5 @@ The exact current registration tree is 0155b031463893f3221bf8eee00c70fb096fd374,
 T-336 is V3/C3 S2 with safe 12-place ceiling 17.945755838742, credited de Winter after Kodaj, JoeGun. The branch stages house adoption separately and leaves T-309 in place. Wait for #1068 to land before the standalone n305 PR, verify the integrated tree, then obtain exact-head CI and formal review. The adoption slice has a maintained JSON-to-Witness/v2 preview path and a one-worker guarded plan for both strong generators, translation screen, rigidity and history.
 
 T-336 registration merged in #1070 as 6ffba4d358c56d7828215588fdbb3ecb19a6654b at 14:24:11Z on 21 November. Exact head 4b05dcbc4f passed all three required hosted gates with formal senior review 6005812965. Certificate page 44913748659 audits its main deployment. Drafted the answer using check_requests from that merge and adjusted it for the open adoption and later four claims. Both strong drawing families completed under the guard for adoption. The local n305 drawing state is decided no better, drawing the exact axis view. Adoption still requires final atlas, release, and review gates.
+
+T-336 house adoption merged as #1072 at a18c6355b32d2df42bb49fd6bba8bd7c7e644f7b, 2026-11-21T15:46:14Z. Exact head 7385a2dbc0 and senior Review B 6006317045 passed all hosted required checks. Certificate page 44920942095 verified the live case, supersession and registry. Adoption reply https://github.com/jlevy/squares/issues/1052#issuecomment-7065384484 and T-309 supersession reply https://github.com/jlevy/squares/issues/1001#issuecomment-7065384936 are posted. Follow-up claims remain open on think-rbyl.
