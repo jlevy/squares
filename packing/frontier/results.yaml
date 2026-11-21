@@ -54246,10 +54246,10 @@ results:
     kind: upper-bound
     registered: '2026-11-21'
     landed: '2026-11-21'
-    headline: De Winter's refinement of the Kodaj-JoeGun arrangement at 305, 6.52e-06 below T-309
-    claim: 'One complete rational certificate proves s(305) <= 17.9457558387415886710583983360138290031648651962347523515443824166144058057388817807.
-      Its 16-place ceiling is 17.9457558387415887 and its 12-place ceiling is 17.945755838742, the issue''s
-      claim.
+    headline: De Winter's refinement of the Kodaj-JoeGun arrangement at 305 below T-309
+    claim: 'One complete rational certificate proves s(305) <= 17.9457558387415887,
+      the 16-place ceiling of its exact side. The 12-place ceiling is 17.945755838742,
+      the bound in the issue.
 
       The accepted stage 4 review of issue 1052 independently decided every square, wall and all 46,360
       pairs by separating axes in Python integers and exact polygon clipping in gmpy2.mpq. Its 51 predeclared

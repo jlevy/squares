@@ -7131,7 +7131,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-16'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/306.html
   canonical: cases/306.html
@@ -26475,6 +26475,43 @@ urls:
     - docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md
     - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/contraction-canonical-samanyu-vs-kodaj.json
     - packing/resources/web/de-winter-kodaj-n109-2026-11-18/measure/identity-canonical-samanyu.json
+- path: result/t-336.html
+  canonical: result/t-336.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-21'
+  lastmod: '2026-11-21'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 305
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter n305 certificate 2026-11-20]'
+      published: '2026-11-20'
+    builds_on: null
+    evidence:
+    - E-de-winter-1052-certificate-report
+    - E-de-winter-1052-exact-feasibility
+    - E-de-winter-1052-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-n305-2026-11-20/README.md
+    - packing/resources/web/de-winter-n305-2026-11-20/acquisition/claims.json
+    - packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz
+    - packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_witness.yaml
+    - packing/resources/web/de-winter-n305-2026-11-20/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-n305-2026-11-20/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-n305-2026-11-20/receipts/controls-plan-1052-n305.md
+    - docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md
+    - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/check-n305.json
+    - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/check-n305-reading-copy.json
+    - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/controls-n305.json
+    - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/identity-n305.json
+    - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/contraction-T309-vs-1052.json
 - path: results.html
   canonical: results.html
   kind: page

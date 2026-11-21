@@ -67874,10 +67874,29 @@ evidence:
         unit: The primary certificate at 305, every square, wall and pair on both maintained routes.
         checked: 1
         of: 1
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: The project's earlier verification and import lanes. Their individual tiers
+            and reasoning settings are unrecorded.
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The maintained project routes predate this certificate and use none of the
+          author's deciding code. The source credits Codex for search, optimization and
+          certificate work and Claude for checks and repository files. The two project
+          routes have components in common with each other.
     independence_record: packing/resources/web/de-winter-n305-2026-11-20/README.md
     limitations: The two maintained routes share parsing, half-angle conversion, Fraction arithmetic
-      and separating axes. The full independent implementation is the separately retained stage 4 review.
-      This replay used the two programs named in the verifier registry.
+      and separating axes with each other. The separately retained stage 4 review uses different
+      code and also decides separation by exact clipping.
     source_reviewed: '2026-11-21'
   - id: E-de-winter-1052-review-exact-feasibility
     claim: upper-bound
