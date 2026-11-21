@@ -1,7 +1,8 @@
 {
   "format": "linked-algebraic-geometry-v1",
   "archive_sha256": "3511b3144994bb32a52364c9728a807a7b0a8adec36345955173203c9845cc8b",
-  "scope": "Checked the six otherwise unlinked filed constructions by implementation-aware maintained replay.",
+  "scope": "Five of six otherwise unlinked filed constructions completed by implementation-aware maintained replay.",
+  "incomplete": {"n": 109, "reason": "The maintained reader refused the original degree-44 input at its decompressed-size ceiling before geometry."},
   "runtime_seconds": 107.57091691700043,
   "cases": [
     {
