@@ -39181,8 +39181,9 @@ issues:
       terminal exclusions; the endpoint recipe reuses 1,141 earlier exclusions and reruns one
       changed matching. These are producer claims, not new project replay evidence. The 4.95
       source and think-6ul3 remain distinct from this extension and its restricted claims on
-      think-guls. Unrestricted equality at 5 remains open; the existing owner reply acknowledges
-      only the original 4.95 claim.
+      think-guls. Unrestricted equality at 5 remains open. The owner acknowledged the
+      improved 4.99755 bound and restricted claims in comment 7064402590. The scoped
+      exact checks are in packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review.md.
 
   - number: 1060
     title: 'Raised lower bounds for 166 counts, including s(129) > 11.49685 and s(318) > 17.97459518711171'
@@ -39228,7 +39229,9 @@ issues:
       B fbe704a02d7834ddbb93c2e71bb231824e2f40a2b256a241e219be4cd1cd5a7a,
       C a671a2cba6152d3c38efef350a2b1abea3dab6ba7eebdb35b56273c9021dea4d,
       D 1e1fd7ec9a42342f895434891e2b1a70be7e7bdffe7d612fb20e49a5e05aaf83.
-      The proof dependencies and endpoints await comparison and replay.
+      The exact C-to-D comparison confirms 22 raised endpoints. Proof coverage and
+      theorem inheritance still require replay. The comparison is in
+      packing/resources/web/de-winter-1060-1063-2026-11-21/receipts/1060-final-baseline-comparison.json.
   - number: 1061
     title: 'Exact coordinates for 11 known construction sides and three relations between packing sides'
     author: JoostdeWinter
@@ -39284,6 +39287,8 @@ issues:
       for 295. No separate 259 intake is requested. The source credits Evan Daniel
       for the contact solver, number-field reconstruction and primary verifier.
       Source SHA-256 3511b3144994bb32a52364c9728a807a7b0a8adec36345955173203c9845cc8b.
+      The field geometry, exact identities and bounded independent 109 comparison are indexed in
+      packing/resources/web/de-winter-1060-1063-2026-11-21/README.md.
   - number: 1062
     title: 'Exact rational witness at the previously reported local solution for n = 232 (side ≤ 15.759531623541)'
     author: JoostdeWinter
@@ -39326,8 +39331,12 @@ issues:
       That retained certificate is unregistered; its source log reports an exact
       check at 15.759531623540125992637246151039. The new candidate is about 1.576e-19
       smaller than that exact certificate and 8.856e-62 smaller than its own input.
-      All three have the same 12-place upward print. Geometric identity, the contraction
-      margin and feasibility remain to be checked. Source SHA-256 752b5efc0aaedfab63605b8c2f3112610a41164bfc31d843b629752cda4088c3.
+      All three have the same 12-place upward print. Independent exact finite feasibility
+      passes. The candidate is below both earlier certificates at first contact, and neither
+      comparator has a bijective nearest-center pose match under the eight box symmetries.
+      No comparison with an unrounded local limit was made. See
+      packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md.
+      Source SHA-256 752b5efc0aaedfab63605b8c2f3112610a41164bfc31d843b629752cda4088c3.
   - number: 1063
     title: 'Supplementary rational enclosures for 13 existing packing witnesses'
     author: JoostdeWinter
@@ -39367,6 +39376,8 @@ issues:
       - result: thirteen-rational-enclosures
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
+      The exact feasibility and pose comparison receipts are indexed in
+      packing/resources/web/de-winter-1060-1063-2026-11-21/README.md.
       The downloaded attachment has 13 input and candidate pairs. An exact arithmetic
       comparison confirms all candidate sides are smaller than their supplied inputs
       and all 13 upward ceilings at 12 places agree. Complete exact feasibility and
