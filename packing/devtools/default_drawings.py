@@ -524,18 +524,6 @@ _README_LRJ4 = (
 )
 
 
-_RUN17EX = (
-    ("evand-regularize", "evand-regularize-adopt-2026-11-15-n147-228-evand"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg05"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg1"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-15-n147-228-grid-deg5"),
-)
-_README_17EX = (
-    "packing/cases/regularized_drawings/think-17ex-2026-11-15/README.md and "
-    "selection-adopt-2026-11-15-n147-228.md, the selection of 15 November 2026 "
-    "(think-17ex), beside the runs' receipt, blocks and reports"
-)
-
 #: Both generators on the thirteen witnesses the pass of 18 November 2026 adopted from
 #: Mykhailo Polkovskyi's issue 1009 (think-i38n): Evan Daniel's regularizer and grid-slack
 #: at 0.5, 1 and 5 degrees. The selection draws a view at eleven and decides 270 and 307.
@@ -567,6 +555,19 @@ _README_ZQOT = (
     "(think-zqot), beside the runs' receipt, blocks and reports"
 )
 
+#: Both strong generators on the witnesses the pass of 20 November 2026 adopted at 268 and
+#: 270 (think-78aj): grid-slack at 0.5, 1 and 5 degrees and Evan Daniel's driver.
+_RUN78AJ = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-20-n268-270-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-20-n268-270-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-20-n268-270-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-20-n268-270-grid-deg5"),
+)
+_README_78AJ = (
+    "packing/cases/regularized_drawings/think-78aj-2026-11-20/README.md and "
+    "selection-adopt-2026-11-20-n268-270.md, the selection of 20 November 2026 "
+    "(think-78aj), beside the runs' receipt, blocks and reports"
+)
 
 #: Both generators on the four decimal Kingbird witnesses at 39, 55, 290 and 291 that an
 #: agent set aside on 15 October 2026 with no strong run (think-yk2h), run on 31 October
@@ -959,18 +960,18 @@ SETTLED: dict[int, Settled] = {
         "side)",
         _README_3MRY,
     ),
-    270: Settled(
+    268: Settled(
         DECIDED,
-        "[Mishapolk issue 1009 2026-11-16]",
-        "resources/web/mishapolk-issue1009-2026-11-16/source/certificates/0000-0999/n270.cert",
-        "b637e6cf59c23781c813e8442bfdccb5aa5f3954",
-        "16928148603339607384058475178539/1000000000000000000000000000000",
-        _RUNI38N,
-        "on T-321's witness grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed "
-        "rows overlap at this side), and Evan Daniel's KKT solve, verified exactly "
-        "5.73e-15 below the side, is held at row 3 as a register candidate, never "
-        "admitted here; the axis tool's view stays drawn",
-        _README_I38N,
+        "[de Winter s268 upper bound 2026-11-17]",
+        "resources/web/de-winter-s268-upper-bound-2026-11-17/source/n268/n268_exact.json.gz",
+        "a1ba5019e787e407646293d7bef81d63c9951b32",
+        "8435006925202232172230076700390296999482947661447087509257467/"
+        "500000000000000000000000000000000000000000000000000000000000",
+        _RUN78AJ,
+        "on T-331's witness grid-slack finds no view at 0.5, 1 or 5 degrees (a re-solved "
+        "centre moves 10.2, or relaxed rows overlap at this side), and Evan Daniel's solved "
+        "view is held at row 4, 1.69e-19 above the side; the axis tool's view stays drawn",
+        _README_78AJ,
     ),
     307: Settled(
         DECIDED,
@@ -984,22 +985,6 @@ SETTLED: dict[int, Settled] = {
         "solve, verified exactly 1.34e-15 below the side, is held at row 3 as a "
         "register candidate, never admitted here; the axis tool's view stays drawn",
         _README_I38N,
-    ),
-    228: Settled(
-        DECIDED,
-        "[Ono issue 984 2026-11-14]",
-        "resources/web/ono-issue984-2026-11-14/source/runs/2026-11-11_fable-5.2/certificates/"
-        "n228_S59604312.json.gz",
-        "b5636fd6694d2cc7aa5811ae33f441268b81b714",
-        "87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/"
-        "5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680",
-        _RUN17EX,
-        "on T-301's witness grid-slack's views at all three thresholds go to review at row 7, "
-        "2 per-square counts falling while no total does, Evan Daniel's same-side view is "
-        "refused at row 7, a total of shared sides falling, and his KKT solve, 4.29e-09 below "
-        "the side, beyond the certificate's own contraction margin, is held at row 3 as a "
-        "register candidate, never admitted here; the axis tool's view stays drawn",
-        _README_17EX,
     ),
     127: Settled(
         DECIDED,

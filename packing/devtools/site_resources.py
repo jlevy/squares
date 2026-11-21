@@ -394,6 +394,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s228-upper-bound-1559604311",
+        "Doğa Özden",
+        (
+            "An exact certificate of the public Kaggle packing jazivxt published at 228,"
+            " measured one to one with T-301 and 4.29e-9 below it (T-334)."
+        ),
+    ),
+    (
         "https://github.com/RobertoOno/squares-in-square",
         "Roberto Ono",
         (

@@ -15,3 +15,6 @@ reason: >-
   (SQPACK_CHROMIUM), twice from this tree and once with that main's result-requests.yaml
   swapped in: 43 files each, all byte-identical across the three. No PDF was printed; it
   prints from that HTML. The paper keeps its version, v0.2.7.
+  The 21 November continuation preserved both posted replies and routed the later
+  #1038 attachment to its open response bead. Against main 552741cee2b8, all 43 methods
+  survey files were again byte-identical across the same three renders.

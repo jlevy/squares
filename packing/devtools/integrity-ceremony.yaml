@@ -25,6 +25,15 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/replay_rectangle_receipts.py
+    kind: external-checkout
+    boundary: >-
+      The external rectangle-measure source is checked against the retained
+      de-winter-lower-bounds-2026-11-19 packet before any producer program is
+      imported or compiled, and execution uses a private copy of those checked bytes.
+      The four digest comparisons bind downloaded measure bytes, the external kernel
+      and wrapper, and regenerated integer input to the upstream producer's receipts.
+      These checks reproduce the recorded run; Git protects the retained source.
   - path: packing/devtools/audit_fine_net_receipt.py
     kind: generated-artifact
     boundary: >-

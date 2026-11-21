@@ -145,7 +145,9 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: certificates of issue 1009 (T-314 to T-326), each clearing every wall by at least 1e-28
 #: and every pair by at least 2e-28: 147, 156 and 268 left, their new certificates stable
 #: across the tolerances; 210, 262, 272 and 292 joined; and 180, 260, 270, 295, 299 and 307
-#: stayed, 295 stable as before.
+#: stayed, 295 stable as before. Lane w7-optd-1118 (think-8yyy) screened Joost de Winter's
+#: re-solves of T-282's arrangement (T-286, T-285) for the 21 November adoption at 172 and
+#: 199. With those houses, 199 left and 172 stayed out.
 #: Re-screening the adopted counts with the screen's own `--update --n` rebuilds the
 #: retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -185,12 +187,13 @@ GOLDEN_UNSTABLE = {
         # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
         # certificates there (T-287, T-288, think-xq4o); 156 left on 18 November 2026 with
         # Polkovskyi's re-solve of it (T-315), and 180 stayed with his of T-288 (T-316).
+        # 199 left on 21 November: Joost de Winter's re-solve there (T-285, think-8yyy) is
+        # stable across tolerances, and 172 stays out with his re-solve of T-282 (T-286).
         175,
         176,
         177,
         180,
         181,
-        199,
     ],
     "n=1..324": [
         68,
@@ -218,12 +221,13 @@ GOLDEN_UNSTABLE = {
         # stable across tolerances. 156 and 180 joined on 11 November 2026 with his
         # certificates there (T-287, T-288, think-xq4o); 156 left on 18 November 2026 with
         # Polkovskyi's re-solve of it (T-315), and 180 stayed with his of T-288 (T-316).
+        # 199 left on 21 November: Joost de Winter's re-solve there (T-285, think-8yyy) is
+        # stable across tolerances, and 172 stays out with his re-solve of T-282 (T-286).
         175,
         176,
         177,
         180,
         181,
-        199,
         204,
         206,
         # 207 left on 23 October 2026: T-174's algebraic witness there is stable across
@@ -249,6 +253,9 @@ GOLDEN_UNSTABLE = {
         # witness stable across tolerances there (think-lrj4), joined again on 9 November
         # 2026 with Doğa Özden's further arrangement of it (T-276, think-463r), and left
         # again on 18 November 2026 with Polkovskyi's further arrangement of T-289's (T-320).
+        # It joined again on 20 November 2026 with Joost de Winter's certificate there
+        # (T-331, think-78aj), whose margins are about 1e-59.
+        268,
         # 269 left on 13 November 2026: Doğa Özden's certificate of issue 967 there (T-297,
         # think-n73d) is stable across tolerances.
         # 270 joined on 9 November 2026 with Doğa Özden's further arrangement of T-224's

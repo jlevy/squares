@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1038",
+  "source": "https://github.com/kenaznia-doga/s228-upper-bound-1559604311",
+  "revision": "46ab8bf425f5cad886a8bc4023bfff904f43af99",
+  "read_on": "2026-11-20",
+  "read_at_main": "935e79c36354addfc296f18e7b1c50479ffa9e5a",
+  "horizon": 324,
+  "results": [
+    {"n": 228, "certificate": "n-228-candidate.yaml", "format": "witness-center-basis", "requested": true, "replayed": true, "offered_side": "15.596043116632", "printed_in": "https://github.com/jlevy/squares/issues/1038", "exact_side": "389901077915794162667528670804703057/25000000000000000000000000000000000", "ceiling": "15.5960431166317666", "first_committed": "2026-11-18T23:08:45Z", "grid_side": "16", "case": {"source_key": "[Ono issue 984 2026-11-14]", "holders": "Roberto Ono", "result": "T-301", "reported_value": "15.5960431209207917", "verified_value": "15.5960431209207917", "evidence": ["E-ono-984-exact-feasibility", "E-ono-984-review-exact-feasibility"], "exact_side": "87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680", "relation": "below", "difference": "14058904549328015704164150709714635855028028236952893656484210168845882726878934598754053139480811158819/3277878792853864926024737173213276321487936750587251178404892226364327474995200000000000000000000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

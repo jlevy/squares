@@ -1,0 +1,24 @@
+{
+ "program": "rr1_selftest.py",
+ "verdict": "PASS",
+ "failures": [],
+ "checks": {
+  "tstar": 1,
+  "polygon_inside_sampled_squares": 40,
+  "polygon_area_near_ideal": 40,
+  "T1_center_square_mutant_caught": 1,
+  "clip_not_above_exact": 2892,
+  "clip_close_to_exact": 2892,
+  "box_bound_not_above_exact": 40,
+  "T2_correct_bound_sound": 1,
+  "T2_keep_zero_mutant_caught": 1,
+  "domain_contains_admissible_centres": 20,
+  "T3_right_end_domain_mutant_caught": 1,
+  "uniform_ACCEPT": 1,
+  "uniform_REFUSED_EXACT": 1,
+  "synthetic_refused_above_least": 1,
+  "synthetic_accepted_below_least": 1
+ },
+ "synthetic_least": 1.8822065579084861,
+ "synthetic_nodes": 779
+}

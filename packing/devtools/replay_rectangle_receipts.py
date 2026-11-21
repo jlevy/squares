@@ -13,6 +13,10 @@ verdict, node and leaf totals and least certified bound, compared with the archi
 receipt, and the CPU it took. It is a replay with the producer's code
 (`same-implementation`), not a second implementation.
 
+Before importing or compiling any producer program, the supplied source files must
+match the retained packet's bytes. Only those validated bytes are copied into a private
+working directory and used by the replay; caller-supplied bytecode is never loaded.
+
 A certificate folder holds `manifest.json` and, per angular level, a gzip measure and a
 gzip receipt file whose digests the manifest names. For each level this
 
@@ -72,10 +76,31 @@ CAP = 2_100_000
 M = 2**48
 MUTANTS = {"none": Fraction(1), "quarter": Fraction(1, 4), "99/100": Fraction(99, 100)}
 FORMAT = "rectangle-receipt-replay/v1"
+PACKING = Path(__file__).resolve().parents[1]
+RETAINED_SOURCE = (
+    PACKING
+    / "resources/web/de-winter-lower-bounds-2026-11-19/source/lower_bounds_2026_11_19/proof"
+)
+SOURCE_FILES = ("bm.py", "check.py", *KERNELS.values())
 
 
 def sha256(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
+
+
+def stage_source(source: Path, workdir: Path) -> Path:
+    """Authenticate the external execution inputs and retain exactly the checked bytes."""
+    checked: dict[str, bytes] = {}
+    for name in SOURCE_FILES:
+        raw = (source / name).read_bytes()
+        if raw != (RETAINED_SOURCE / name).read_bytes():
+            raise SystemExit(f"{source / name}: differs from the retained source packet")
+        checked[name] = raw
+    staged = workdir / "source"
+    staged.mkdir()
+    for name, raw in checked.items():
+        (staged / name).write_bytes(raw)
+    return staged
 
 
 def load_source(source: Path) -> tuple[ModuleType, ModuleType]:
@@ -93,12 +118,12 @@ def load_source(source: Path) -> tuple[ModuleType, ModuleType]:
     return modules["bm"], modules["check"]
 
 
-def compile_kernel(source: Path, kernel: str, workdir: Path) -> tuple[Path, str]:
+def compile_kernel(source: Path, kernel: str, workdir: Path) -> Path:
     cpp = source / KERNELS[kernel]
     binary = workdir / f"kernel-{kernel}"
     if not binary.exists():
         subprocess.run(["c++", "-O3", "-std=c++17", str(cpp), "-o", str(binary)], check=True)
-    return binary, sha256(cpp.read_bytes())
+    return binary
 
 
 def scaled(rows: Sequence[Sequence[int]], factor: Fraction) -> list[tuple[int, ...]]:
@@ -221,12 +246,13 @@ def replay_folder(
         load_set(folder) if evidence_set else json.loads((folder / "manifest.json").read_text())
     )
     kernel = manifest.get("kernel") or "square"
-    binary, kernel_digest = compile_kernel(source, kernel, workdir)
+    kernel_digest = sha256((source / KERNELS[kernel]).read_bytes())
     wrapper_digest = sha256((source / "bm.py").read_bytes())
     if kernel_digest != manifest["native_sha256"] or (
         not evidence_set and wrapper_digest != manifest["wrapper_sha256"]
     ):
         raise SystemExit(f"{folder}: kernel or wrapper digest differs from the manifest")
+    binary = compile_kernel(source, kernel, workdir)
     rows_out: list[dict[str, Any]] = []
     for level in manifest["levels"]:
         if evidence_set:
@@ -316,13 +342,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--cap", type=int, default=CAP)
     args = parser.parse_args(argv)
-    source = args.source.resolve()
-    bm, check = load_source(source)
-    if (bm.G, bm.DS, bm.M) != (2**30, 2**32, M):
-        raise SystemExit("unexpected fixed-point units in the source wrapper")
     status = 0
     with tempfile.TemporaryDirectory() as tmp:
         workdir = Path(tmp)
+        source = stage_source(args.source.resolve(), workdir)
+        bm, check = load_source(source)
+        if (bm.G, bm.DS, bm.M) != (2**30, 2**32, M):
+            raise SystemExit("unexpected fixed-point units in the source wrapper")
         for folder in args.folders:
             rows = replay_folder(
                 folder.resolve(),

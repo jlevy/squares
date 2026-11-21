@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-18'
+last_reviewed: '2026-11-20'
 results:
   - id: T-001
     kind: lower-bound
@@ -36596,8 +36596,7 @@ results:
     registered: '2026-10-31'
     landed: '2026-10-31'
     headline: >-
-      Polkovskyi's sub-print re-certifications of nine house packings, 1.3e-19 to 1.7e-19 below
-      each
+      Polkovskyi's re-certifications of nine house certificates, restatements under option D
     claim: >-
       Nine complete rational source certificates report finite upper-bound improvements at the exact
       sides they state: s(154) <= 12.9211009407616805497273710781811018832596, s(155) <= 12.9522609446505640351376570514307748530773,
@@ -36606,14 +36605,19 @@ results:
       s(237) <= 15.9026036382595968800201182179071384887302, s(241) <= 15.9871170951502387581618869582526723489714
       and s(271) <= 16.9489477337136575105539116351026963841491.
 
-      Each is a sub-print re-certification of the house certificate at its count: the 31
-      October review measured the margin as the house certificate's padding, the contact
-      side unchanged, and no new arrangement. The owner's ruling of 23 October (think-fwa9)
-      makes such re-certifications restatements, and the record applies it beyond the corpus
-      only; whether it reaches counts inside the corpus is the owner's question (think-ikku,
-      RV-1 of the review), and it is recorded as a question, not a verdict. Until the answer
-      the entry stays below the stage 4 exit and no count is adopted; the review accepted
-      every certificate for finite feasibility.
+      Each restates the house certificate at its count. Under the owner's option D of 17
+      November 2026 (think-b0w5) a re-certification of a standing packing is a new result
+      only if its side is below the predecessor's once the predecessor is shrunk until its
+      squares first touch (devtools.contraction_margin). Measured so on 18 November 2026,
+      each house certificate contracted to first contact lies at or below this entry's
+      certificate at its count, which gains 1.0000 of the house certificate's own margin at
+      every count: the house's 1 + 1e-20 dilation replaced by about 1 + 1e-30 (RV-2 of the
+      31 October review).
+
+      So each is a restatement, credited to the house's finder: the entry records the
+      report, proves no new bound, stays below the stage 4 exit and moves no house. The 31
+      October review accepted every certificate for finite feasibility and recommended
+      reading them as restatements.
 
       The certificates lie 1.3e-19 to 1.7e-19 below the houses' certificates at their counts (T-222,
       T-197, T-220, T-188, T-225, T-218, T-190, T-182 and T-219), each a re-certification of the house's packing. At six counts every square stays within 1.6e-6 of the house's; at 154, 183 and 227 47, 24 and 16 squares move beyond 1e-3, by at most 0.078, 0.358 and 0.168, in a region that deforms without changing the side, which equals the house's contact side to within 1e-30 (RV-4).
@@ -36624,9 +36628,10 @@ results:
       Couzo's modifications, byte-identical to the copy the issue-678 packet retains. Those statements
       are the author's; no source program ran here.
 
-      Credit each packing to its finder, as the register credits the house it re-certifies, and
-      Mykhailo Polkovskyi (Mishapolk, https://github.com/Mishapolk/square-packing-records) for the
-      re-certification, as a regularization: the index says 'packing refined from Evan Daniel' at
+      Each packing and its bound are credited to its finder, as the register credits the house it
+      restates, and the re-certification, Mykhailo Polkovskyi's (Mishapolk,
+      https://github.com/Mishapolk/square-packing-records), takes no regularization credit:
+      the index says 'packing refined from Evan Daniel' at
       154, 155, 236 and 271 and 'from Evan Daniel & Francisco Couzo' at 183, and credits Polkovskyi
       alone at 211, 227, 237 and 241, whose houses are Daniil Ostashev's (211, 241), Joost de Winter's
       (227) and Nate Chaoweeraprasit's (237) packings. A publication in a watched repository that
@@ -36654,14 +36659,14 @@ results:
     significance:
       score: 1
       rationale: >-
-        Sub-print re-certifications of the house certificates at n = 154, 155, 183, 211,
-        227, 236, 237, 241 and 271, 1.29e-19 to 1.69e-19 below them: the house certificates'
-        padding, the contact side unchanged, as T-170's (S1) is. No lower bound or optimum.
-      scored: '2026-10-31'
+        Restatements under the owner's option D (think-b0w5) of the house certificates at n
+        = 154, 155, 183, 211, 227, 236, 237, 241 and 271, 1.29e-19 to 1.69e-19 below them
+        and 1.0000 of each house certificate's own uniform-contraction margin: the houses'
+        padding, no new result. No lower bound or optimum.
+      scored: '2026-11-18'
       by: >-
-        the 31 October review
-        (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md), lane
-        bold-ritchie-rv-polk, confirming the draft S1 of the stage 1 triage (think-pg1y)
+        lane w7-optd-1118 (think-8yyy), applying the owner's option D of 17 November 2026
+        (think-b0w5), the score unchanged
     novelty: previously-published
     attribution:
       source_keys:
@@ -36704,6 +36709,16 @@ results:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
     - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n154.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n155.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n183.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n211.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n227.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n236.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n237.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n241.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n271.json
+    - packing/devtools/contraction_margin.py
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l2_1031.py
@@ -36791,6 +36806,21 @@ results:
       margin. At each count the relative margin is 1e-20 to within 5.2e-12 of itself, which
       is the house certificate's 1 + 1e-20 dilation replaced by about 1 + 1e-30 (RV-2).
 
+      The padding (option D, think-b0w5): devtools.contraction_margin, on 18 November 2026,
+      took each house certificate to first contact, both maintained routes deciding it and
+      its contraction (measure/contraction-nNNN.json in the packet): T-222 by 1.292110e-19
+      at 154 (this certificate 1.0000 of it); T-197 by 1.295226e-19 at 155 (this certificate
+      1.0000 of it); T-220 by 1.399958e-19 at 183 (this certificate 1.0000 of it); T-188 by
+      1.499355e-19 at 211 (this certificate 1.0000 of it); T-225 by 1.556363e-19 at 227
+      (this certificate 1.0000 of it); T-218 by 1.586193e-19 at 236 (this certificate 1.0000
+      of it); T-190 by 1.590260e-19 at 237 (this certificate 1.0000 of it); T-182 by
+      1.598712e-19 at 241 (this certificate 1.0000 of it); T-219 by 1.694895e-19 at 271
+      (this certificate 1.0000 of it).
+
+      At each count the house contracted lies at or below this certificate. At 154, 183 and
+      227 47, 24 and 16 squares move beyond 1e-3, as measured pose by pose, in the region the
+      house's padding leaves free, one to one with the house's packing, so each is a re-certification of it and a restatement.
+
       2026-11-18 (jlevy/squares#1008, think-a88h): the credit line gains T-057's own
       sources after de Winter, Arslanov, Mustafin, Shangitbayev, Friedman and Ellsworth,
       a name the line already held keeping its place. Joost de Winter's README names
@@ -36798,36 +36828,16 @@ results:
       Winter n211 2026-11-18] pins, so by attribution.md's chain rule every line through
       that packing names them; the short credit is unchanged.
     next_rung: >-
-      Held for the owner's question (think-ikku): whether the 23 October restatement ruling
-      reaches counts inside the corpus. If it does, the entry is withdrawn and no house
-      moves; if it does not, the replay and review evidence are entered, both rungs rise to
-      V3 and C3, and each count is adopted under the house rule with both strong generators'
-      regularization. The 31 October review accepted every certificate for finite
-      feasibility and recommends reading them as restatements. At 237 T-295, adopted on 12
-      November 2026, lies 8.80e-03 below this certificate, so if the entry stays recorded it
-      is adopted at the other eight counts only.
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to whether the 23 October restatement ruling reaches counts
-        inside the corpus (RV-1 of the 31 October review); then, if the counts stay
-        recorded, the replay and review evidence already run, entered as the stage 4 exit
-      rung: C3
-      link: think-ikku
-      estimated_cost:
-        cpu_hours: 0.01
-        cpu_hours_high: 0.02
-        basis: >-
-          the replay and the review's checker ran on 31 October and their receipts are
-          retained; what remains is records work
-        priced: '2026-10-31'
-    regularizations:
+      None: a restatement at every count under the owner's option D (think-b0w5), decided on
+      18 November 2026 by the contraction receipts in the packet's measure/, so no rung is
+      owed and no count is adopted. The replay and the 31 October review's run stay retained
+      in the packet and are not entered.
+    restatements:
     - n: 154
       of: T-222
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n154.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n154.json
@@ -36837,11 +36847,9 @@ results:
         max_turn_deg: 0.8514
     - n: 155
       of: T-197
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n155.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n155.json
@@ -36851,11 +36859,9 @@ results:
         max_turn_deg: 5.0e-15
     - n: 183
       of: T-220
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n183.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n183.json
@@ -36865,11 +36871,9 @@ results:
         max_turn_deg: 6.237
     - n: 211
       of: T-188
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n211.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n211.json
@@ -36879,11 +36883,9 @@ results:
         max_turn_deg: 1.0e-14
     - n: 227
       of: T-225
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n227.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n227.json
@@ -36893,11 +36895,9 @@ results:
         max_turn_deg: 2.542
     - n: 236
       of: T-218
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n236.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n236.json
@@ -36907,11 +36907,9 @@ results:
         max_turn_deg: 5.717e-34
     - n: 237
       of: T-190
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n237.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n237.json
@@ -36921,11 +36919,9 @@ results:
         max_turn_deg: 7.0e-15
     - n: 241
       of: T-182
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n241.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n241.json
@@ -36935,11 +36931,9 @@ results:
         max_turn_deg: 5.0e-15
     - n: 271
       of: T-219
-      by: '[Mishapolk refinements 2026-10-23]'
-      method: >-
-        the house certificate's contact side re-dilated from 1 + 1e-20 to about 1 + 1e-30,
-        as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '1.0000'
+      measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n271.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n271.json
@@ -38052,7 +38046,8 @@ results:
     registered: '2026-10-31'
     landed: '2026-10-31'
     headline: >-
-      Polkovskyi's sub-print re-certifications at 105, 146, 156, 229 and 308, 1e-41 to 1e-21 below each
+      Polkovskyi's re-certifications at 105, 146, 156, 229 and 308, restatements under
+      option D
     claim: >-
       Five complete rational source certificates of issue 846 report finite upper-bound
       improvements at the exact sides they state: s(105) <=
@@ -38066,16 +38061,19 @@ results:
       certificate with every square unchanged and its side lowered by exactly 1e-21, and at
       156 by exactly 1e-41 (RV-2, RV-3).
 
-      Each is a sub-print re-certification of the house certificate at its count: the 31
-      October review measured the margin as the house certificate's padding, the contact
-      side unchanged, and no new arrangement. The owner's ruling of 23 October (think-fwa9)
-      makes such re-certifications restatements, and the record applies it beyond the corpus
-      only; whether it reaches counts inside the corpus is the owner's question (think-ikku,
-      RV-1 of the review), and it is recorded as a question, not a verdict. Until the answer
-      the entry stays below the stage 4 exit and no count is adopted; the review accepted
-      every certificate for finite feasibility. These counts were registered on #852's
-      branch within T-259, as the review read it, and are split from it so that the question
-      holds only them.
+      Each restates the house certificate at its count. Under the owner's option D of 17
+      November 2026 (think-b0w5) a re-certification of a standing packing is a new result
+      only if its side is below the predecessor's once the predecessor is shrunk until its
+      squares first touch (devtools.contraction_margin). Measured so on 18 November 2026,
+      each gain is under 1% of the house certificate's own margin: 0.0093 at 105, 0.0079 at
+      146, 0.0077 at 156, 0.0064 at 229 and 0.0056 at 308.
+
+      So each is a restatement, credited to the house's finder: the entry records the
+      report, proves no new bound, stays below the stage 4 exit and moves no house. The 31
+      October review accepted every certificate for finite feasibility and recommended
+      reading them as restatements. These counts were registered on #852's branch within
+      T-259, as the review read it, and were split from it so that the question held only
+      them.
 
       The issue says every certificate yields valid and strictly valid, with positive wall
       and pair margin signs, under verify_bound_certificate.py --strict, Evan Daniel's MIT
@@ -38085,10 +38083,10 @@ results:
       states larger margins at 156, 229 and 308 than the record's standing sides allow
       (RV-7). Those statements are the author's; no source program ran here.
 
-      Credit each packing to its finder, as the register credits the house it re-certifies,
-      and Mykhailo Polkovskyi (Mishapolk,
+      Each packing and its bound are credited to its finder, as the register credits the house
+      it restates, and the re-certification, Mykhailo Polkovskyi's (Mishapolk,
       https://github.com/Mishapolk/square-packing-records), with what the issue calls the
-      Antigravity Autonomous Research Lab, for the re-certification, as a regularization.
+      Antigravity Autonomous Research Lab, takes no regularization credit.
       The issue reports eight more counts that the ledger of 31 October does not record:
       182, 268 and 304 lie above each case's house, 204 and 260 above issue 845's
       certificates, 299 above Evan Daniel's update to issue 824, and 211 and 241 restate the
@@ -38105,14 +38103,14 @@ results:
     significance:
       score: 1
       rationale: >-
-        Sub-print re-certifications of the house certificates at n = 105, 146, 156, 229 and
-        308, 1.00e-41 to 1.00e-21 below them: the side lowered with every square unchanged,
-        the house certificate's padding, as T-170's (S1) is. No lower bound or optimum.
-      scored: '2026-10-31'
+        Restatements under the owner's option D (think-b0w5) of the house certificates at n
+        = 105, 146, 156, 229 and 308, 1.00e-41 to 1.00e-21 below them and under 1% of each
+        house certificate's own uniform-contraction margin: the side lowered with every
+        square unchanged, the houses' padding, no new result. No lower bound or optimum.
+      scored: '2026-11-18'
       by: >-
-        the 31 October review
-        (docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md), lane
-        bold-ritchie-rv-polk, confirming the draft S1 of the stage 1 triage (think-pg1y)
+        lane w7-optd-1118 (think-8yyy), applying the owner's option D of 17 November 2026
+        (think-b0w5), the score unchanged
     novelty: previously-published
     attribution:
       source_keys:
@@ -38143,6 +38141,12 @@ results:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
     - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n105.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n146.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n156.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n229.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n308.json
+    - packing/devtools/contraction_margin.py
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/tests/test_upper_bound_reports_l2_1031.py
@@ -38174,7 +38178,8 @@ results:
       (Evan Daniel, T-221) by 1.00e-21. Each rounds up to the house's 12-place print. The
       ledger of 31 October for this pass
       (campaign/issue-intake/upper-bounds-843-846-20261031) records each, since the
-      restatement ruling is applied beyond the corpus only.
+      restatement ruling of 23 October is applied beyond the corpus only; option D
+      makes each a restatement since 17 November 2026.
 
       Measured pose by pose (measure/ in the packet; a measurement, which decides nothing):
       at each of the five counts nearest centres pair it one to one with the house's packing
@@ -38193,37 +38198,27 @@ results:
       certificate parsing, half-angle conversion, Fraction arithmetic and the
       separating-axis method. No two independent methods, human oversight or optimality is
       claimed.
+
+      The padding (option D, think-b0w5): devtools.contraction_margin, on 18 November 2026,
+      took each house certificate to first contact, both maintained routes deciding it and
+      its contraction (measure/contraction-nNNN.json in the packet): T-229 by 1.078930e-19
+      at 105 (this certificate 0.0093 of it); T-187 by 1.258378e-19 at 146 (this certificate
+      0.0079 of it); T-186 by 1.297917e-39 at 156 (this certificate 0.0077 of it); T-225 by
+      1.565016e-19 at 229 (this certificate 0.0064 of it); T-221 by 1.799715e-19 at 308
+      (this certificate 0.0056 of it). At each count the house contracted lies below this
+      certificate.
     next_rung: >-
-      Held for the owner's question (think-ikku): whether the 23 October restatement ruling
-      reaches counts inside the corpus. If it does, the entry is withdrawn and no house moves;
-      if it does not, the replay and review evidence are entered, both rungs rise to V3 and C3,
-      and each count is adopted under the house rule with both strong generators'
-      regularization, except 156, where T-287, 2.11e-3 lower, is the house since 11 November
-      2026 and stays it whatever the answer (F15 of the review of 11 November). The 31 October
-      review accepted every certificate for finite feasibility and recommends reading them as
-      restatements.
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to whether the 23 October restatement ruling reaches counts
-        inside the corpus (RV-1 of the 31 October review); then, if the counts stay
-        recorded, the replay and review evidence already run, entered as the stage 4 exit
-      rung: C3
-      link: think-ikku
-      estimated_cost:
-        cpu_hours: 0.01
-        cpu_hours_high: 0.02
-        basis: >-
-          the replay and the review's checker ran on 31 October and their receipts are
-          retained; what remains is records work
-        priced: '2026-10-31'
-    regularizations:
+      None: a restatement at every count under the owner's option D (think-b0w5), decided on
+      18 November 2026 by the contraction receipts in the packet's measure/, so no rung is
+      owed and no count is adopted. At 156 the case's house lies 2.11e-3 below in any case.
+      The replay and the 31 October review's run stay retained in the packet and are not
+      entered.
+    restatements:
     - n: 105
       of: T-229
-      by: '[Mishapolk issue 846 2026-10-30]'
-      method: >-
-        the house certificate with every square unchanged and its side lowered by exactly
-        1e-21, as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '0.0093'
+      measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n105.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n105.json
@@ -38233,11 +38228,9 @@ results:
         max_turn_deg: 0.0
     - n: 146
       of: T-187
-      by: '[Mishapolk issue 846 2026-10-30]'
-      method: >-
-        the house certificate with every square unchanged and its side lowered by exactly
-        1e-21, as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '0.0079'
+      measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n146.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n146.json
@@ -38247,11 +38240,9 @@ results:
         max_turn_deg: 0.0
     - n: 156
       of: T-186
-      by: '[Mishapolk issue 846 2026-10-30]'
-      method: >-
-        the house certificate with every square unchanged and its side lowered by exactly
-        1e-41, as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '0.0077'
+      measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n156.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n156.json
@@ -38261,11 +38252,9 @@ results:
         max_turn_deg: 0.0
     - n: 229
       of: T-225
-      by: '[Mishapolk issue 846 2026-10-30]'
-      method: >-
-        the house certificate with every square unchanged and its side lowered by exactly
-        1e-21, as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '0.0064'
+      measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n229.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n229.json
@@ -38275,11 +38264,9 @@ results:
         max_turn_deg: 0.0
     - n: 308
       of: T-221
-      by: '[Mishapolk issue 846 2026-10-30]'
-      method: >-
-        the house certificate with every square unchanged and its side lowered by exactly
-        1e-21, as the 31 October review measured it (the source states no method)
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '0.0056'
+      measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n308.json
       identity:
         basis: measured
         measured_in: packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n308.json
@@ -41767,7 +41754,7 @@ results:
     registered: '2026-11-09'
     landed: '2026-11-09'
     headline: >-
-      Yim's re-solves of Özden's T-277 and T-278 at 299 and 303, within their padding; held
+      Yim's re-solves of Özden's T-277 and T-278 at 299 and 303: restatements under option D
     claim: >-
       Two complete rational source certificates report finite upper-bound improvements at the
       exact sides they state: s(299) <=
@@ -41785,9 +41772,11 @@ results:
       counts, so each lies within the house certificate's padding (0.35 and 0.97 of it;
       devtools.contraction_margin).
 
-      Whether such a re-certification is a new result is the owner's open question
-      (think-ruu2's RV-3, with think-ikku): until the answer the entry stays below the stage 4
-      exit and neither house moves. The certificate the source first published at 303, which
+      Under the owner's option D of 17 November 2026 (think-b0w5) a re-certification of a
+      standing packing is a new result only if its side is below the predecessor's once the
+      predecessor is shrunk until its squares first touch; neither is, so each restates its
+      house, credited to its finder, and the entry stays below the stage 4 exit and moves
+      neither house. The certificate the source first published at 303, which
       it later overwrote, lies 1.39e-10 above #930 and is not recorded.
 
       PACKINGS.md says two public checkers, Evan Daniel's verify_cert.py and verify_cert2.py,
@@ -41799,9 +41788,9 @@ results:
       pipeline and not these checks. No local-optimality, rigidity or formal check is
       claimed. Those statements are the author's; no source program ran here.
 
-      Credit each packing to its finder as the register credits the house it re-solves,
-      Evan Daniel's packing as Doğa Özden improved it, and Kaelan Yim (GitHub vitamoon) for
-      the re-solve, as a regularization; the source asks for "Kaelan Yim after Doğa Özden,
+      Each packing and its bound are credited to its finder as the register credits the house
+      it restates, Evan Daniel's packing as Doğa Özden improved it, and the re-solve, Kaelan
+      Yim's (GitHub vitamoon), takes no regularization credit; the source asks for "Kaelan Yim after Doğa Özden,
       Evan Daniel and Chris Deotte" at 299, with Griffin Casson's solver at 303. It calls
       each a refinement of Özden's arrangement and "not a new construction or material
       gain", says Hermes Agent was used for research, numerical search, implementation and
@@ -41815,14 +41804,15 @@ results:
     significance:
       score: 1
       rationale: >-
-        Re-solves of T-277's and T-278's packings at n = 299 and 303, 1.18e-12 and 3.29e-12
-        below them and within each house certificate's own uniform-contraction margin
-        (3.40e-12): the certificates' padding, as T-260's (S1) is, though across the print. No
-        new arrangement, lower bound or optimum.
-      scored: '2026-11-09'
+        Restatements under the owner's option D (think-b0w5) of T-277's and T-278's packings
+        at n = 299 and 303, 1.18e-12 and 3.29e-12 below them and within each house
+        certificate's own uniform-contraction margin (3.40e-12), at 0.3472 and 0.9674 of it:
+        the certificates' padding, no new result, though across the print. No new
+        arrangement, lower bound or optimum.
+      scored: '2026-11-18'
       by: >-
-        the stage 4 review of 9 November (docs/project/reviews/review-2026-11-09-yim-vitamoon.md),
-        lane L70 (think-i5a5), F12, confirming the import lane L65's draft S1 (think-h96r)
+        lane w7-optd-1118 (think-8yyy), applying the owner's option D of 17 November 2026
+        (think-b0w5), the score unchanged
     novelty: previously-published
     attribution:
       source_keys:
@@ -41871,8 +41861,8 @@ results:
       longest job 84.13 seconds. At 299 the least wall clearance is 2.78e-17 and the least
       pair gap 1.00e-30; at 303 they are 5.00e-31 and 5.79e-15. The packet's sharp controls
       (receipts/sharp-controls-nNNN.json) accepted each control at exact contact, margin 0,
-      on both routes and refused each 1e-30 past it. That replay is not entered as evidence
-      here while the entry is held, as T-260's was not.
+      on both routes and refused each 1e-30 past it. That replay is not entered as evidence,
+      since option D makes the entry a restatement.
 
       At n = 299 the certificate is below the case's ceiling (Evan Daniel, improved by Doğa
       Özden, T-277) by 1.18e-12, and at 303 (the same holders, T-278) by 3.29e-12. The ledger
@@ -41895,7 +41885,8 @@ results:
       decided again on both maintained routes, takes T-277 down by 3.403992e-12, to
       17.801004434251889681..., and T-278 by 3.402014e-12, to 17.901789273153088317.... Each
       gain is a share of that margin, 0.3472 at 299 and 0.9674 at 303, so each contracted
-      house lies below the certificate here, by 2.22e-12 at 299 and 1.11e-13 at 303. The
+      house lies below the certificate here, by 2.22e-12 at 299 and 1.11e-13 at 303, and
+      under the owner's option D (think-b0w5) each is a restatement of its house. The
       precedents measure the same way: T-259 over Couzo's #843 at 0.9193, and T-265 over T-257
       at 9.9679 (measure/precedent-contraction-*.json).
 
@@ -41921,13 +41912,10 @@ results:
       the hold stay until the owner answers, and the review is mapped here now, at C1, with the
       replay and its own run not entered, as T-260's are.
     next_rung: >-
-      Held for the owner's question (think-ruu2's RV-3, with think-ikku): whether a
-      re-certification within the earlier certificate's own padding is a new result. If it is
-      not, the entry is withdrawn and both houses stay; if it is, the replay and the review's
-      clean-room run are entered, both rungs rise to V3 and C3, and each count is adopted
-      under the house rule with both strong generators' regularization. The stage 4 review of
-      9 November is mapped now, at C1, as T-260's is; only the evidence and the adoption wait
-      on the owner.
+      None: a restatement at both counts under the owner's option D (think-b0w5), decided by
+      the contraction receipts in the packet's measure/, so no rung is owed and neither
+      count is adopted. The replay and the stage 4 review's clean-room run stay retained in
+      the packet and are not entered.
     reviews:
     - path: docs/project/reviews/review-2026-11-09-yim-vitamoon.md
       kind: adversarial
@@ -41949,27 +41937,12 @@ results:
       covers:
       - T-280
       - T-281
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to RV-3 (think-ruu2, think-ikku); then, if the counts stay recorded,
-        the replay and the review's clean-room run, both already retained, entered as the stage
-        4 exit
-      rung: C3
-      link: think-ruu2
-      estimated_cost:
-        cpu_hours: 0.05
-        cpu_hours_high: 0.2
-        basis: >-
-          the replay and the sharp controls ran on 9 November and their receipts are retained;
-          so is the stage 4 review's run; what remains is records work
-        priced: '2026-11-09'
-    regularizations:
+    restatements:
     - n: 299
       of: T-277
-      by: '[Yim certificates 2026-11-09]'
-      method: >-
-        what the source calls returned-anchor continuation, from #929's exact certificate
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '0.3472'
+      measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n299.json
       identity:
         basis: measured
         measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n299.json
@@ -41979,11 +41952,9 @@ results:
         max_turn_deg: 0.01723
     - n: 303
       of: T-278
-      by: '[Yim certificates 2026-11-09]'
-      method: >-
-        what the source calls a no-strain control refinement, from #930's exact certificate,
-        with Griffin Casson's c37 SLP for the recovery
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '0.9674'
+      measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n303.json
       identity:
         basis: measured
         measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n303.json
@@ -41996,7 +41967,7 @@ results:
     registered: '2026-11-09'
     landed: '2026-11-09'
     headline: >-
-      Yim's translation of T-259's certificate at 130, 1.96e-14 below it at the same print; held
+      Yim's translation of T-259's certificate at 130: a restatement under option D
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at the
       exact side it states: s(130) <=
@@ -42010,22 +41981,22 @@ results:
       the bottom and left walls and clearing the top by 1e-30, as the source says
       ("only a common translation and the containing-box size change").
 
-      It is a sub-print re-certification of the house certificate, in the words of the owner's
-      ruling of 23 October (think-fwa9), which the record applies beyond the corpus only; whether it
-      reaches counts inside the corpus is the owner's question (think-ikku's RV-1; think-oqjd
-      for another holder's re-certification), and it is recorded as a question, not a
-      verdict, as T-260 is. Until the answer the entry stays below the stage 4 exit and the
-      house does not move. Uniform contraction of T-259's own certificate already reaches
-      2.18e-13 below it.
+      It restates the house certificate. Under the owner's option D of 17 November 2026
+      (think-b0w5) a re-certification of a standing packing is a new result only if its side
+      is below the predecessor's once the predecessor is shrunk until its squares first
+      touch (devtools.contraction_margin): uniform contraction of T-259's own certificate
+      already reaches 2.18e-13 below it, and this certificate's gain is 0.0896 of that. So
+      the entry records the report, credited to the packing's finder, stays below the stage
+      4 exit and moves no house.
 
       PACKINGS.md calls it "an archival envelope-only variant ... not a new packing or
       numerical search gain", claims no Atlas credit and points to the #846 discussion of
       padding-only re-certifications; it says five local exact checks accepted it. Those
       statements are the author's; no source program ran here.
 
-      Credit the packing to its finder as T-259 credits it, Francisco Couzo's packing as
-      Mykhailo Polkovskyi re-solved it, and Kaelan Yim (GitHub vitamoon) for the
-      re-certification, as a regularization; the certificate carries Polkovskyi's MIT notice.
+      The packing and its bound are credited as T-259 credits them, Francisco Couzo's packing
+      as Mykhailo Polkovskyi re-solved it, and the re-certification, Kaelan Yim's (GitHub
+      vitamoon), takes no regularization credit; the certificate carries Polkovskyi's MIT notice.
     scope:
       n_values:
       - 130
@@ -42034,13 +42005,14 @@ results:
     significance:
       score: 1
       rationale: >-
-        A sub-print re-certification of the house certificate at n = 130, 1.96e-14 below it:
-        the packing moved as one and the box lowered to its extent, the certificate's padding,
-        as T-260's (S1) is. No lower bound or optimum.
-      scored: '2026-11-09'
+        A restatement under the owner's option D (think-b0w5) of the house certificate at n
+        = 130, 1.96e-14 below it and 0.0896 of its own uniform-contraction margin: the
+        packing moved as one and the box lowered to its extent, the certificate's padding,
+        no new result. No lower bound or optimum.
+      scored: '2026-11-18'
       by: >-
-        the stage 4 review of 9 November (docs/project/reviews/review-2026-11-09-yim-vitamoon.md),
-        lane L70 (think-i5a5), F12, confirming the import lane L65's draft S1 (think-h96r)
+        lane w7-optd-1118 (think-8yyy), applying the owner's option D of 17 November 2026
+        (think-b0w5), the score unchanged
     novelty: previously-published
     attribution:
       source_keys:
@@ -42106,15 +42078,10 @@ results:
       the hold stay until the owner answers, and the review is mapped here now, at C1, with the
       replay and its own run not entered, as T-260's are.
     next_rung: >-
-      Held for the owner's two questions: think-ikku's RV-1 (with think-oqjd), whether the 23
-      October restatement ruling reaches counts inside the corpus and another holder's
-      re-certification; and think-ruu2's RV-3, whether a re-certification within the earlier
-      certificate's own padding is a new result. If either answer makes it a restatement
-      (RV-1 yes, or RV-3's option (a)), the entry is withdrawn and no house moves; if both
-      leave it standing, the replay and the review's clean-room run are entered, both rungs
-      rise to V3 and C3, and 130 is adopted under the house rule with both strong generators'
-      regularization. The stage 4 review of 9 November is mapped now, at C1, as
-      T-260's is; only the evidence and the adoption wait on the owner.
+      None: a restatement under the owner's option D (think-b0w5), decided by the
+      contraction receipt in the packet's measure/, so no rung is owed and 130 is not
+      adopted. The replay and the stage 4 review's clean-room run stay retained in the
+      packet and are not entered.
     reviews:
     - path: docs/project/reviews/review-2026-11-09-yim-vitamoon.md
       kind: adversarial
@@ -42136,28 +42103,12 @@ results:
       covers:
       - T-280
       - T-281
-    unfinished_confirmations:
-    - what: >-
-        The owner's answers to think-ikku's RV-1 (and think-oqjd) and think-ruu2's RV-3; then,
-        if both leave the count recorded, the replay and the review's clean-room run, both already retained, entered as
-        the stage 4 exit
-      rung: C3
-      link: think-ikku
-      estimated_cost:
-        cpu_hours: 0.01
-        cpu_hours_high: 0.05
-        basis: >-
-          the replay and the sharp controls ran on 9 November and their receipts are retained;
-          so is the stage 4 review's run; what remains is records work
-        priced: '2026-11-09'
-    regularizations:
+    restatements:
     - n: 130
       of: T-259
-      by: '[Yim certificates 2026-11-09]'
-      method: >-
-        T-259's certificate under one common translation, with the box lowered to the packing's
-        extent plus 2e-30, as the source states
-      side: solved
+      ruling: think-b0w5
+      gain_over_margin: '0.0896'
+      measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/contraction-n130.json
       identity:
         basis: measured
         measured_in: packing/resources/web/yim-certificates-2026-11-09/measure/identity-n130.json
@@ -42888,7 +42839,8 @@ results:
     registered: '2026-11-10'
     landed: '2026-11-11'
     headline: >-
-      De Winter's re-solve of T-284's packing at 199, 1.0399 of its margin through the L step; held
+      De Winter's re-solve of T-284's packing at 199, beyond the margin it carries through
+      the L step
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at the
       exact side it states: s(199) <=
@@ -42912,17 +42864,21 @@ results:
       (think-wju3): that solve's side, printed at 63 places, is S - 1 in every one, and this core
       is its certificate with the padding trimmed (1.0000 of that certificate's own margin).
 
-      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
-      RV-3): until the answer the entry stays below the stage 4 exit and the house does not move.
-      Its core's bound at 172 is not claimed here; #946 reports that core, tightened, and T-286
-      records it, held alike.
+      Under the owner's option D of 17 November 2026 (think-b0w5) a re-certification of a
+      standing packing is a new result only if its side is below its predecessor's once the
+      predecessor is shrunk until its squares first touch, measured through any construction
+      (devtools.contraction_margin). This certificate lies 1.0107e-13 below T-284's base so
+      contracted with the L written on it, so it is a new result, and the case adopted it as
+      the house at 199 on 21 November 2026. Its core's bound at 172 is not claimed here;
+      #946 reports that core, tightened, and T-286 records it, adopted at 172 alike.
 
       The issue says the side is less than 1e-98 above the real root near 14.6147 of 62x^5 -
-      4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, the arrangement's local optimum by
-      a numerical solution of the optimality conditions to 130 digits; that the polynomial was
-      identified numerically from 108 digits; and that local optimality has no formal proof. The
-      source's README (n199/README.md) adds that in that solution all 734 load-bearing or forced
-      contacts close exactly and all other gaps stay open.
+      4426x^4 + 125017x^3 - 1746146x^2 + 12052670x - 32855154, the arrangement's local
+      optimum by a numerical solution of the optimality conditions to 130 digits; that the
+      polynomial was identified numerically from 108 digits; and that local optimality has
+      no formal proof. The source's README at the pin (n199/README.md) added that in that
+      solution all 734 load-bearing or forced contacts close exactly and all other gaps stay
+      open; the author took the number out of it on 14 November 2026.
 
       Checked here exactly: the quintic is irreducible over Q, exactly one of its three real roots
       lies in [S - 1e-98, S], and S lies 1.36e-99 above it. The certificate proves s(199) <= S and
@@ -42939,22 +42895,23 @@ results:
     scope:
       n_values:
       - 199
-    verification: V0
-    confirmation: C1
+    verification: V3
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
-        A re-solve of T-284's packing at 199, 2.63e-12 below it and across its 12-place print:
-        1.0399 of the uniform-contraction margin T-284 carries from T-282 through the L step,
-        1.0107e-13 beyond it, at the 12-place print of T-284's base contracted with the L written
-        on it, and the KKT point the record already holds unregistered at 172 (think-wju3).
-        Whether such a gain is a new result is the owner's RV-3; held at S1 as T-280 is, and the
-        answer may change the score. No new arrangement, lower bound or optimum.
-      scored: '2026-11-11'
+        A re-solve of T-284's packing at 199, 2.63e-12 below it and across its 12-place
+        print: 1.0399 of the uniform-contraction margin T-284 carries from T-282 through the
+        L step, 1.0107e-13 beyond it, a new result under the owner's option D (think-b0w5).
+        Scored S1 as the pass of 18 November 2026 scores the re-solves of issue 1009 that
+        beat their predecessors' margins by about 1x (T-315, T-316, T-321, T-325 and T-326);
+        the blind review of issues 1015, 1017 and 1020 scores #1020 at 127, 4.29 times its
+        predecessor's margin, at S2, and no written rule yet sets the line between them
+        (think-mu3t). No new arrangement, lower bound or optimum.
+      scored: '2026-11-18'
       by: >-
-        the import lane L78 (think-2h88), its rationale stated neutrally after the stage 4 review
-        of 11 November (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, F11), which
-        scores no significance
+        lane w7-optd-1118 (think-8yyy), applying the owner's option D of 17 November 2026
+        (think-b0w5), the score unchanged
     novelty: previously-published
     attribution:
       source_keys:
@@ -42962,6 +42919,8 @@ results:
       published: '2026-11-09'
     evidence:
     - E-de-winter-939-certificate-report
+    - E-de-winter-939-exact-feasibility
+    - E-de-winter-939-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/README.md
     - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/claims.json
@@ -42997,14 +42956,14 @@ results:
       seconds, the longest job 12.38 seconds. The grid squares touch the walls and each other, a
       least wall clearance and a least pair gap of exactly 0.
 
-      The packet's sharp controls (receipts/sharp-controls.json) are all as the module predicts
-      on both routes: at the three
-      zero margins the at-contact half is the certificate itself, accepted, and the 1e-30 half
-      refused; no square can be enlarged to close one pair alone, so the tightest pair's square
-      (174, against 173) was enlarged, accepted at contact and refused past it; a free square of
-      the core (48), 1.088e-3 from its wall, was refused at contact for its shape alone; and a
-      duplicated square was refused. That replay is not entered as evidence while the entry is
-      held, as T-280's is not.
+      The packet's sharp controls (receipts/sharp-controls.json) are all as the module
+      predicts on both routes: at the three zero margins the at-contact half is the
+      certificate itself, accepted, and the 1e-30 half refused; no square can be enlarged to
+      close one pair alone, so the tightest pair's square (174, against 173) was enlarged,
+      accepted at contact and refused past it; a free square of the core (48), 1.088e-3 from
+      its wall, was refused at contact for its shape alone; and a duplicated square was
+      refused. The replay is E-de-winter-939-exact-feasibility, entered on 18 November 2026
+      under option D.
 
       Both files the source publishes are read, by two readers written for them:
       n199_witness.yaml follows Witness/v2's witness object without the schema's envelope (no
@@ -43049,19 +43008,19 @@ results:
       root less one, consistent with the source's local-optimality claim.
 
       The stage 4 review observes (F4) that the gain lies 1.0107e-13 below the contracted
-      predecessor, at the same 12-place print as it and as the root. Under a rule that counts a
-      re-solve only if its 12-place print falls below the predecessor contracted to first
-      contact, through any construction, no certificate of this arrangement could count at 199
-      or at 172, since its optimum prints as the contracted house does. Under a rule that counts
-      any gain, a gain across the predecessor's own print, or a gain beyond its contraction
-      margin, it counts; a case-by-case judgment of whether the 4% beyond the margin is padding
-      could go either way. The question and its options are think-ruu2's (RV-3). The record
-      states this and decides nothing.
+      predecessor, at the same 12-place print as it and as the root. Under a rule that
+      counts a re-solve only if its 12-place print falls below the predecessor contracted to
+      first contact, through any construction, no certificate of this arrangement could
+      count at 199 or at 172, since its optimum prints as the contracted house does. Under a
+      rule that counts any gain, a gain across the predecessor's own print, or a gain beyond
+      its contraction margin, it counts; a case-by-case judgment of whether the 4% beyond
+      the margin is padding could go either way. The owner's option D (think-b0w5) compares
+      sides, not prints, so it counts.
 
-      The implied s(172) bound, this certificate's first 172 squares at S - 1, is not claimed
-      here and not registered from this entry: it is think-wju3's held solve with less padding.
-      #946 reported the same core a day later, 1.36e-99 lower, and T-286 records it, held; the
-      owner's RV-3 answer settles both counts alike.
+      The implied s(172) bound, this certificate's first 172 squares at S - 1, is not
+      claimed here and not registered from this entry: it is think-wju3's held solve with
+      less padding. #946 reported the same core a day later, 1.36e-99 lower, and T-286
+      records it, the house at 172 since 21 November 2026.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack rational
       witness verifier and the independent rational corner checker, share certificate parsing,
@@ -43075,18 +43034,24 @@ results:
       clipped areas in gmpy2.mpq, the two agreeing everywhere, with 21 controls stated before
       they ran, and its contraction receipts equal this entry's exactly.
 
-      F1 and F2 (minor) ask the author to state #946's bound as the certificate's side, the root
-      as the asserted optimum, and to credit #938 for the L step at 199; the record already does
-      both. The review is mapped here at C1; its run and the replay are not entered while the
-      entry is held.
+      F1 and F2 (minor) ask the author to state #946's bound as the certificate's side, the
+      root as the asserted optimum, and to credit #938 for the L step at 199; the record
+      already does both. Its clean-room run is E-de-winter-939-review-exact-feasibility
+      (decide-939.json).
+
+      The pin: the packet keeps the commit the issue names, and the commit the author asks the
+      record to cite holds the same n199/ files and licence byte for byte, so both name this
+      certificate. The adoption of 21 November 2026 (lane c12-optd-land, think-8yyy) moved
+      199 from T-284 to this certificate under the house rule, with both strong
+      generators' regularization of the new house.
     next_rung: >-
-      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at the
-      margin its predecessor carries, here through a construction, is a new result. If it is
-      not, the entry is withdrawn and T-284 stays the house; if it is, the replay and the stage 4
-      review's clean-room run are entered, both rungs rise to V3 and C3, and 199 is adopted under
-      the house rule with both strong generators' regularization and the flip, and think-wju3's
-      solve at 172 is decided the same way. The stage 4 review of 11 November is mapped, at C1;
-      only the evidence and the adoption wait on the owner.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 11 November, is
+      retained. It is the smallest validated side at 199, a new result under the owner's
+      option D (think-b0w5), and the case adopted it there on 21 November 2026 under the
+      house rule, with both strong generators' regularization of the new house; T-284 keeps
+      its certificate as history. The review's six questions for the author, answered on 14
+      November 2026, hold no rung.
     reviews:
     - path: docs/project/reviews/review-2026-11-11-de-winter-939-946.md
       kind: adversarial
@@ -43108,19 +43073,6 @@ results:
       covers:
       - T-285
       - T-286
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and
-        the stage 4 review's clean-room run, both retained, entered as the stage 4 exit
-      rung: C3
-      link: think-ruu2
-      estimated_cost:
-        cpu_hours: 0.05
-        cpu_hours_high: 0.5
-        basis: >-
-          the replay and the sharp controls ran on 9 November and their receipts are retained;
-          the review is one count, about 40 route seconds a method; what remains is records work
-        priced: '2026-11-10'
     regularizations:
     - n: 199
       of: T-284
@@ -43142,11 +43094,12 @@ results:
     registered: '2026-11-11'
     landed: '2026-11-11'
     headline: >-
-      De Winter's re-solve of T-282's packing at 172, T-285's core, 1.0399 of T-282's margin; held
+      De Winter's re-solve of T-282's packing at 172, T-285's core, beyond T-282's margin
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at the
       exact side it states, a rational with a denominator of 670 digits: s(172) <=
-      13.6146898532835806, that side rounded up at 16 places. It is the side of n172_witness.yaml
+      13.61468985328358057514628890087947061618972730200175…, which rounds up to
+      13.6146898532835806 at 16 places. It is the side of n172_witness.yaml
       at JoostdeWinter/square-packing as #946 names it; rounded up at 12 places it is
       13.614689853284, as the source's README prints it, 2.63e-12 below T-282's side, Doğa
       Özden's #935 and the case's house, across its 12-place print (...287). #946 prints the side
@@ -43162,11 +43115,14 @@ results:
       of T-282's own uniform-contraction margin (2.533e-12), the held solve's share, and T-282 so
       contracted rounds up at 12 places to 13.614689853284, as this certificate does.
 
-      Whether such a re-certification is a new result is the owner's open question (think-ruu2's
-      RV-3), which the issue says it understands: until the answer the entry stays below the
-      stage 4 exit and the house does not move. The issue calls it the same type of result as
-      T-098, which registered Evan Daniel's exact optima of 48 known-best packings on 5 October
-      2026, before RV-3 was raised.
+      Under the owner's option D of 17 November 2026 (think-b0w5) a re-certification of a
+      standing packing is a new result only if its side is below its predecessor's once the
+      predecessor is shrunk until its squares first touch, measured through any construction
+      (devtools.contraction_margin). This certificate lies 1.0107e-13 below T-282's
+      certificate so contracted, so it is a new result, and the case adopted it as the house
+      at 172 on 21 November 2026. The issue calls it the same type of result as T-098, which
+      registered Evan Daniel's exact optima of 48 known-best packings on 5 October 2026,
+      before RV-3 was raised.
 
       The issue says the side lies 1.6e-319 above the real root near 13.6147 of 62x^5 - 4116x^4 +
       107933x^3 - 1397031x^2 + 8918035x - 22427977, the arrangement's exact local optimum: a
@@ -43190,22 +43146,24 @@ results:
     scope:
       n_values:
       - 172
-    verification: V0
-    confirmation: C1
+    verification: V3
+    confirmation: C3
     significance:
       score: 1
       rationale: >-
-        A re-solve of T-282's packing at 172, 2.63e-12 below it and across its 12-place print:
-        1.0399 of T-282's own uniform-contraction margin, 1.0107e-13 beyond it, at the 12-place
-        print of T-282 contracted, and the KKT point the record already holds unregistered
-        (think-wju3). Whether such a gain is a new result is the owner's RV-3; held at S1 as T-280
-        and T-285 are, and the answer may change the score. No new arrangement, lower bound or
-        optimum.
-      scored: '2026-11-11'
+        A re-solve of T-282's packing at 172, 2.63e-12 below it and across its 12-place
+        print: 1.0399 of T-282's own uniform-contraction margin, 1.0107e-13 beyond it, a new
+        result under the owner's option D (think-b0w5), and the KKT point the record held
+        unregistered from Evan Daniel's regularizer (think-wju3) with less padding. Scored
+        S1 as the pass of 18 November 2026 scores the re-solves of issue 1009 that beat
+        their predecessors' margins by about 1x (T-315, T-316, T-321, T-325 and T-326); the
+        blind review of issues 1015, 1017 and 1020 scores #1020 at 127, 4.29 times its
+        predecessor's margin, at S2, and no written rule yet sets the line between them
+        (think-mu3t). No new arrangement, lower bound or optimum.
+      scored: '2026-11-18'
       by: >-
-        the import lane L78 (think-2h88), its rationale stated neutrally after the stage 4 review
-        of 11 November (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, F11), which
-        scores no significance
+        lane w7-optd-1118 (think-8yyy), applying the owner's option D of 17 November 2026
+        (think-b0w5), the score unchanged
     novelty: previously-published
     attribution:
       source_keys:
@@ -43213,6 +43171,8 @@ results:
       published: '2026-11-10'
     evidence:
     - E-de-winter-946-certificate-report
+    - E-de-winter-946-exact-feasibility
+    - E-de-winter-946-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/README.md
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/acquisition/claims.json
@@ -43238,10 +43198,11 @@ results:
     notes: >-
       A separate complete repository replay is retained for n = 172: 1 positive and 2
       duplicate-square and outside-container controls passed their required outcomes on both
-      routes, 14706 pairs a job and route; summed over the 3 jobs, the receipt records 130.67
-      route CPU seconds. The least wall clearance is 1.5e-320 and the least pair gap 1e-320. The
-      packet's sharp controls (receipts/sharp-controls.json) are as the module predicts on both
-      routes. That replay is not entered as evidence while the entry is held, as T-280's is not.
+      routes, 14706 pairs a job and route; summed over the 3 jobs, the receipt records
+      130.67 route CPU seconds. The least wall clearance is 1.5e-320 and the least pair gap
+      1e-320. The packet's sharp controls (receipts/sharp-controls.json) are as the module
+      predicts on both routes. The replay is E-de-winter-946-exact-feasibility, entered on
+      18 November 2026 under option D.
 
       At n = 172 the certificate is below the case's ceiling (Evan Daniel, improved by Doğa
       Özden, T-282) by 2.63e-12; smallest: this certificate. The ledger of 11 November for this
@@ -43270,34 +43231,41 @@ results:
       exact fractions beside them give 1.561469e-319 and 1.0e-320 (the review's F12).
 
       The stage 4 review observes (F4) that the gain lies 1.0107e-13 below the contracted
-      predecessor, at the same 12-place print as it and as the root. Under a rule that counts a
-      re-solve only if its 12-place print falls below the predecessor contracted to first
-      contact, through any construction, no certificate of this arrangement could count at 172
-      or at 199, since its optimum prints as the contracted house does. Under a rule that counts
-      any gain, a gain across the predecessor's own print, or a gain beyond its contraction
-      margin, it counts; a case-by-case judgment of whether the 4% beyond the margin is padding
-      could go either way. The question and its options are think-ruu2's (RV-3). The record
-      states this and decides nothing.
+      predecessor, at the same 12-place print as it and as the root. Under a rule that
+      counts a re-solve only if its 12-place print falls below the predecessor contracted to
+      first contact, through any construction, no certificate of this arrangement could
+      count at 172 or at 199, since its optimum prints as the contracted house does. Under a
+      rule that counts any gain, a gain across the predecessor's own print, or a gain beyond
+      its contraction margin, it counts; a case-by-case judgment of whether the 4% beyond
+      the margin is padding could go either way. The owner's option D (think-b0w5) compares
+      sides, not prints, so it counts.
 
       The source's own checker was not run here. The two maintained routes share certificate
       parsing (the readers written for #939's files), half-angle conversion, Fraction arithmetic
       and the separating-axis method. No human oversight or optimality is claimed.
 
-      The stage 4 review of 11 November 2026 (docs/project/reviews/review-2026-11-11-de-winter-939-946.md,
-      lane L82, think-o53d) accepts this certificate with T-285's, no finding blocking; its
-      clean-room checker decides every square, wall and pair by two exact methods, its controls
-      came out as stated but one it mis-stated for this certificate and reports (its F9), and
-      its margins equal this entry's exactly. F1 asks that the record carry the side, not the
-      root, which this entry does. The review is mapped here at C1; its run and the replay are
-      not entered while the entry is held.
+      The stage 4 review of 11 November 2026
+      (docs/project/reviews/review-2026-11-11-de-winter-939-946.md, lane L82, think-o53d)
+      accepts this certificate with T-285's, no finding blocking; its clean-room checker
+      decides every square, wall and pair by two exact methods, its controls came out as
+      stated but one it mis-stated for this certificate and reports (its F9), and its
+      margins equal this entry's exactly. F1 asks that the record carry the side, not the
+      root, which this entry does. Its clean-room run is
+      E-de-winter-946-review-exact-feasibility (decide-946.json).
+
+      The adoption of 21 November 2026 (lane c12-optd-land, think-8yyy) moved 172 from
+      T-282 to this certificate under the house rule, with both strong generators'
+      regularization of the new house. Evan Daniel's regularizer reached the same KKT point from T-282's
+      witness on 9 November (think-wju3), 1.3615e-19 above this side and never registered;
+      with this house, it is no smaller packing, so it is no register candidate.
     next_rung: >-
-      Held for the owner's question (think-ruu2's RV-3): whether a re-certification at its
-      predecessor's own contraction margin is a new result. If it is not, the entry is withdrawn
-      and T-282 stays the house; if it is, the replay and the stage 4 review's clean-room run are
-      entered, both rungs rise to V3 and C3, and 172 is adopted under the house rule with both
-      strong generators' regularization and the flip, with T-285 at 199 and think-wju3's solve
-      decided the same way. The stage 4 review of 11 November is mapped, at C1; only the
-      evidence and the adoption wait on the owner.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 11 November, is
+      retained. It is the smallest validated side at 172, a new result under the owner's
+      option D (think-b0w5), and the case adopted it there on 21 November 2026 under the
+      house rule, with both strong generators' regularization of the new house; T-282 keeps
+      its certificate as history. The review's six questions for the author, answered on 14
+      November 2026, hold no rung.
     reviews:
     - path: docs/project/reviews/review-2026-11-11-de-winter-939-946.md
       kind: adversarial
@@ -43319,19 +43287,6 @@ results:
       covers:
       - T-285
       - T-286
-    unfinished_confirmations:
-    - what: >-
-        The owner's answer to RV-3 (think-ruu2) and, if the count stays recorded, the replay and
-        the stage 4 review's clean-room run, both retained, entered as the stage 4 exit
-      rung: C3
-      link: think-ruu2
-      estimated_cost:
-        cpu_hours: 0.1
-        cpu_hours_high: 0.5
-        basis: >-
-          the replay and the sharp controls ran on 11 November and their receipts are retained;
-          the review is one count; what remains is records work
-        priced: '2026-11-11'
     regularizations:
     - n: 172
       of: T-282
@@ -47597,10 +47552,10 @@ results:
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 14 November, is
-      retained. It is the smallest validated side at 228, and the case adopted it there in the
-      pass of 15 November 2026 under the house rule, in place of T-300, with both strong
-      generators' runs on the new house; T-300, T-174, T-128, T-098, T-092 and T-056 keep
-      their certificates as history. The review's questions for the author hold no rung, and
+      retained. The case adopted it at 228 in the pass of 15 November 2026 under the house
+      rule, in place of T-300, with both strong generators' runs on the new house, and Doğa
+      Özden's certificate of #1038, T-334, replaced it there in the pass of 21 November 2026;
+      it keeps its certificate as history, as T-300, T-174, T-128, T-098, T-092 and T-056 do. The review's questions for the author hold no rung, and
       the contracted side its F11 measures and the regularizer's KKT side are the owner's RV-3
       question, not registered.
     reviews:
@@ -53482,6 +53437,725 @@ results:
       The house rule's adoption at 127, regularized in the same pull request. V4 and C4 need an
       explicit human oversight record beside the two adversarial AI reviews of 18 November,
       R-127b and R-127.
+  - id: T-331
+    kind: upper-bound
+    registered: '2026-11-18'
+    landed: '2026-11-20'
+    headline: >-
+      de Winter's nine-slice packing at 268, a new arrangement, 1.85e-03 below T-320
+    claim: >-
+      One complete rational certificate proves s(268) <=
+      8435006925202232172230076700390296999482947661447087509257467/500000000000000000000000000000000000000000000000000000000000.
+      That side is 16.8700138504044644 rounded up at 16 places and 16.870013850405 at 12, as
+      #1021 prints it.
+
+      It is 1.85e-03 below T-320 (Mykhailo Polkovskyi's further arrangement of Doğa Özden's T-289), the case's house in both lanes since
+      the pass of 18 November 2026, and 2.02e-03 below T-289, the house before it; the
+      ledger of 18 November records the report after #1009's. Measured here, no symmetry of the
+      box pairs it one to one with T-320's packing by nearest centres, and the optimal
+      assignment moves 46 squares beyond a tenth (largest 0.901); against T-289's, 56.
+      So it is a new arrangement relative to both. It has 46 squares tilted, 36.85 to 43.09 degrees by magnitude, 15 one way and 31 the other, and the other 222 exactly upright.
+
+      Both maintained exact routes accept the certificate. The blind stage 4 review of 18
+      November (R-1021), at the tier stage 4 names, accepts it with no blocking or major
+      finding, by a clean-room checker of its own deciding every square, wall and pair by two
+      exact methods: confirmed, independently re-implemented.
+
+      The issue says the author's two checkers, verify_exact.py (separating axes) and
+      check_area.py (the area of each close pair's clipped intersection), both Fraction and the
+      standard library only, each report 268 squares and 620 close pairs, and that no test
+      of local optimality was run. Those statements are the author's; no source program ran
+      here.
+
+      The issue says the search divided the container into nine diagonal slices and filled each from a transformed copy of a published packing: the first two and the last four slices from 302 squares, the third from 153 and the fourth and fifth from 129, holding 8, 22, 40, 42, 60, 48, 30, 16 and 2 squares along the diagonal, then optimized every position and angle and enclosed the result in rationals; the inputs came from the public Kaggle compilations of Navneet Prabhat (129 and 153) and Danil Malyshev (302) and from Francisco Couzo's certificate (302).
+
+      It asks for credit to Joost de Winter, the slices from packings by Ostashev (129) and PingYou Ltd (153, 302); the record names the finder at 129 Daniil Ostashev, where the issue writes Dmitry. It quotes the Kaggle per-puzzle table's 16.870013850412470 at 268 (the team Thinking inside the box, 15 November), 8.0e-12 above this side, with no coordinates, so it states no packing.
+
+      The issue says the search, optimization and rational certificate were produced with
+      GPT-6.2 Astra (OpenAI) and the repository files, checks and figure with Claude
+      (Anthropic), both under his direction.
+    scope:
+      n_values:
+      - 268
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 268 relative to T-320's packing and to T-289's, 46 and 56 squares moved beyond a tenth and none paired one to one by nearest centres, 1.85e-03 below the house, above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-320 and T-328. A slice composition of published packings is no new technique, so not S4. No lower bound or optimum.
+      scored: '2026-11-18'
+      by: >-
+        the stage 4 review of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md), confirming the registering
+        lane's draft (think-gqzz)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s268 upper bound 2026-11-17]'
+      published: '2026-11-17'
+    evidence:
+    - E-de-winter-1021-certificate-report
+    - E-de-winter-1021-exact-feasibility
+    - E-de-winter-1021-review-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review, lane r1021-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 268 and 270 of the certificates of issues 1021 and 1022 and their
+        twins, decided again by a clean-room exact checker by two methods with the controls a
+        plan frozen beforehand states, custody in the source's history, the sides and the
+        issues' numbers, option D's gains and contraction margins exactly against T-289,
+        T-320, T-283 and T-321, identity against each, and the significance.
+      verdict: accepted
+      covers: [T-331, T-332]
+    artifacts:
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/source/n268/n268_exact.json.gz
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/contraction-n268.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/contraction-n268-own.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/controls-plan-268-270.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/check-1021.json
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/controls-1021.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 268: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 214668 pair decisions; summed over the 3 jobs, the receipt records 25.6 route
+      CPU seconds. No square touches the box: every wall clears by at least 2.00e-60, and every pair
+      by at least 1.66e-59. The certificate is read by the center-direction-json reader, and its
+      corner twin is held to it as the same packing by the witness-corners-opposite reader. The
+      replay is E-de-winter-1021-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated (campaign/issue-intake/upper-bounds-1021-1022-20261118/
+      controls-plan-268-270.txt, hashed at 02:27:48Z on 18 November),
+      lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
+      every square toward its nearer near wall by its least clearance: both routes accepted each
+      at exact contact, margin 0, and refused each 1e-30 past it. They refused a square enlarged
+      to its pair and a square enlarged to its wall at contact for the shape alone and 1e-30
+      past it for the overlap or the wall as well, and refused a duplicated square; all 11 came
+      out as the plan states, by its branches for a box no square touches.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-320's
+      certificate's margin is 3.3744e-27 (squares 228 and 264; measure/contraction-n268.json), so the gain
+      of 1.8543e-3 lies wholly outside T-320's padding and the claim is a new result. This
+      certificate's own margin is 2.6855e-58 (squares 49 and 52; measure/contraction-n268-own.json).
+      The L-step scan (measure/l-step-scan.json), with this side stood in for 268's ceiling, finds
+      main's consequences unchanged.
+
+      The blind stage 4 review of 18 November (R-1021, lane r1021-1118, PR #1033) accepts both
+      certificates with fourteen findings, none blocking or major: F3, the frozen reader's
+      strictness with the predecessors' files, met by a reader written after the freeze, is the
+      review's own; F8 notes that the houses the issues name were replaced by T-320 and T-321
+      while they were open; F14, after the freeze, that the source's READMEs name GPT-6.2 Sol
+      where the issues name GPT-6.2 Astra; the rest are notes. Its option D measurements and
+      identity agree with this lane's exactly. Its Questions 1 (the start files), 2 (#1022's
+      five slightly turned squares) and 3 (which model) go to the author with the reply. Its
+      clean-room run on this certificate is E-de-winter-1021-review-exact-feasibility.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 18 November, is
+      retained. It is the smallest validated side at 268, and the case adopted it there in
+      the pass of 20 November 2026 under the house rule, in place of T-320, with both strong
+      generators' regularization of the new house; T-320 keeps its certificate as history.
+      The review's questions for the author hold no rung.
+  - id: T-332
+    kind: upper-bound
+    registered: '2026-11-18'
+    landed: '2026-11-20'
+    headline: >-
+      de Winter's re-optimization of Panoras's compilation's 270, a new arrangement, 8.34e-04 below T-321
+    claim: >-
+      One complete rational certificate proves s(270) <=
+      16927314216351701364094693919616632628260321141481608494025753/1000000000000000000000000000000000000000000000000000000000000.
+      That side is 16.9273142163517014 rounded up at 16 places and 16.927314216352 at 12, as
+      #1022 prints it.
+
+      It is 8.34e-04 below T-321 (Mykhailo Polkovskyi's re-solve of T-283, Evan Daniel's packing as Doğa Özden improved it), the case's house in both lanes since
+      the pass of 18 November 2026, and 8.34e-04 below T-283, the house before it; the
+      ledger of 18 November records the report after #1009's. Measured here, no symmetry of the
+      box pairs it one to one with T-321's packing by nearest centres, and the optimal
+      assignment moves 94 squares beyond a tenth (largest 1.024); against T-283's, 94.
+      So it is a new arrangement relative to both. It has 78 squares tilted beyond a degree, 19.78 to 35.37 degrees, all one way, 5 within a degree of upright and the rest exactly upright.
+
+      Both maintained exact routes accept the certificate. The blind stage 4 review of 18
+      November (R-1021), at the tier stage 4 names, accepts it with no blocking or major
+      finding, by a clean-room checker of its own deciding every square, wall and pair by two
+      exact methods: confirmed, independently re-implemented.
+
+      The issue says the author's two checkers, verify_exact.py (separating axes) and
+      check_area.py (the area of each close pair's clipped intersection), both Fraction and the
+      standard library only, each report 270 squares and 642 close pairs, and that no test
+      of local optimality was run. Those statements are the author's; no source program ran
+      here.
+
+      The issue says the search started from the 270-square packing in Asterios Panoras's public Kaggle compilation (version 17, side 16.92746606488242), a merge of many contributors that does not name the finder of this arrangement, removed and relaxed its two end regions in turn, compressed a 68-square region at the bottom inside a rectangle, reassembled the packing and optimized the position and angle of every square.
+
+      It asks for credit to Joost de Winter, after the arrangement in Panoras's compilation. It quotes Panoras's compilation at 16.92746606488242 and Danil Malyshev's coordinates of #1012 at 16.927469593519, both 1.55e-04 above this side, and the Kaggle per-puzzle table's 16.927314216351814 at 270 (the team [NUP] Junie is all you need, 9 November), 1.1e-13 above it, with no coordinates; the last states no packing.
+
+      The issue says the search, optimization and rational certificate were produced with
+      GPT-6.2 Astra (OpenAI) and the repository files, checks and figure with Claude
+      (Anthropic), both under his direction.
+    scope:
+      n_values:
+      - 270
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 270 relative to T-321's packing and to T-283's, 94 squares moved beyond a tenth and none paired one to one by nearest centres, 8.34e-04 below the house, above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-320 and T-328. Re-optimizing a compilation's packing by regions is no new technique, so not S4. No lower bound or optimum.
+      scored: '2026-11-18'
+      by: >-
+        the stage 4 review of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md), confirming the registering
+        lane's draft (think-gqzz)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s270 upper bound 2026-11-17]'
+      published: '2026-11-17'
+    evidence:
+    - E-de-winter-1022-certificate-report
+    - E-de-winter-1022-exact-feasibility
+    - E-de-winter-1022-review-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review, lane r1021-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 268 and 270 of the certificates of issues 1021 and 1022 and their
+        twins, decided again by a clean-room exact checker by two methods with the controls a
+        plan frozen beforehand states, custody in the source's history, the sides and the
+        issues' numbers, option D's gains and contraction margins exactly against T-289,
+        T-320, T-283 and T-321, identity against each, and the significance.
+      verdict: accepted
+      covers: [T-331, T-332]
+    artifacts:
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/source/n270/n270_exact.json.gz
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/contraction-n270.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/contraction-n270-own.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/controls-plan-268-270.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/check-1022.json
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/controls-1022.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 270: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 217890 pair decisions; summed over the 3 jobs, the receipt records 37.71 route
+      CPU seconds. No square touches the box: every wall clears by at least 2.00e-60, and every pair
+      by at least 1.58e-59. The certificate is read by the center-direction-json reader, and its
+      corner twin is held to it as the same packing by the witness-corners-opposite reader. The
+      replay is E-de-winter-1022-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated (campaign/issue-intake/upper-bounds-1021-1022-20261118/
+      controls-plan-268-270.txt, hashed at 02:27:48Z on 18 November),
+      lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
+      every square toward its nearer near wall by its least clearance: both routes accepted each
+      at exact contact, margin 0, and refused each 1e-30 past it. They refused a square enlarged
+      to its wall at contact for the shape alone and 1e-30 past it for the wall as well, a
+      square enlarged to its pair at contact and past it for the shape and an overlap, and a
+      duplicated square. Ten came out as the plan states, by its branches for a box no square
+      touches.
+
+      The eleventh differs from the plan's letter, as this lane found on 20 November: square
+      101, grown to its least gap with square 98, already overlaps another neighbour at
+      contact, since none of the near pairs the module tries can be grown to its gap without
+      closing another pair, and the module then predicts that overlap exactly beforehand;
+      the plan's line names the shape alone at contact. The packet's README records it.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-321's
+      certificate's margin is 3.3863e-27 (squares 164 and 193; measure/contraction-n270.json), so the gain
+      of 8.3439e-4 lies wholly outside T-321's padding and the claim is a new result. This
+      certificate's own margin is 2.5584e-58 (squares 98 and 101; measure/contraction-n270-own.json).
+      The L-step scan (measure/l-step-scan.json), with this side stood in for 270's ceiling, finds
+      main's consequences unchanged.
+
+      The blind stage 4 review of 18 November (R-1021, lane r1021-1118, PR #1033) accepts both
+      certificates with fourteen findings, none blocking or major: F3, the frozen reader's
+      strictness with the predecessors' files, met by a reader written after the freeze, is the
+      review's own; F8 notes that the houses the issues name were replaced by T-320 and T-321
+      while they were open; F14, after the freeze, that the source's READMEs name GPT-6.2 Sol
+      where the issues name GPT-6.2 Astra; the rest are notes. Its option D measurements and
+      identity agree with this lane's exactly. Its Questions 1 (the start files), 2 (#1022's
+      five slightly turned squares) and 3 (which model) go to the author with the reply. Its
+      clean-room run on this certificate is E-de-winter-1022-review-exact-feasibility.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 18 November, is
+      retained. It is the smallest validated side at 270, and the case adopted it there in
+      the pass of 20 November 2026 under the house rule, in place of T-321, with both strong
+      generators' regularization of the new house; T-321 keeps its certificate as history.
+      The review's questions for the author hold no rung.
+  - id: T-333
+    kind: upper-bound
+    registered: '2026-11-20'
+    landed: '2026-11-20'
+    headline: >-
+      de Winter's diagonal-slice packing at 299, 7.37e-03 below T-325
+    claim: >-
+      One complete rational certificate proves s(299) <=
+      17793636991743040580325825384225613703947282755372586749208848013397/1000000000000000000000000000000000000000000000000000000000000000000.
+      That side is 17.7936369917430406 rounded up at 16 places and 17.793636991744 at 12, as
+      #1031 prints it.
+
+      It is 7.37e-03 below T-325 (Mykhailo Polkovskyi's re-solve of Doğa Özden's T-277, after
+      Evan Daniel), the case's house in both lanes since the pass of 18 November 2026, and below
+      T-277, the house before it, by the same to three figures; the ledger of 20 November
+      records the report.
+
+      Measured here, no symmetry of the box pairs it one to one with
+      T-325's packing by nearest centres, and the optimal assignment moves 127 squares beyond a
+      tenth (largest 1.07); 18 of its 114 tilted squares pair with tilted squares of T-325 of
+      the same sign; against T-277's likewise. So it is a new arrangement relative to both, as
+      the stage 4 review measures it against every packing the record holds at 299. It has 114
+      squares tilted, 2.18 to 27.89 degrees by
+      magnitude, 55 one way and 59 the other, one turned by 0.0065 degrees, and the other 184
+      exactly upright.
+
+      Both maintained exact routes accept the certificate. The blind stage 4 review of 18
+      November (R-1031), at the tier stage 4 names, accepts it with no blocking or major
+      finding, by a clean-room checker of its own deciding every square, wall and pair by two
+      exact methods: confirmed, independently re-implemented.
+
+      The review finds each of its two tilted groups coinciding, for 50 to 53 of its squares,
+      with the tilted band every house at 299 has carried since T-248 (Evan Daniel's #824),
+      under a rigid motion of its own, a quarter turn and a mirror of T-325's packing; the best
+      such motion lines up 210 squares in all, 157 of them upright, as an unrelated packing's
+      lattice does under many shifts, and leaves 89 without a partner, a whole tilted group
+      among them. The record does not infer lineage from resemblance, so this is a measurement
+      and a question for the author, not a credit; were the band credited, its first holder in
+      the record is T-248, not T-325.
+
+      The issue says the author's two checkers, verify_exact.py (separating axes) and
+      check_area.py (the area of each close pair's clipped intersection), both Fraction and the
+      standard library only, each report 299 squares and 714 close pairs, and that no test of
+      local optimality was run. Those statements are the author's; no source program ran here.
+
+      The issue says the search divided the container into diagonal slices and filled each from
+      a reflected or translated copy of a public packing, the outer slices from 372 squares and
+      the seven middle slices from 335, both from Asterios Panoras's public Kaggle compilation
+      (version 17), which Kaggle's community explorer links to prvsiyan's notebook "A Square
+      Deal" (372) and to four notebooks with the same score, by areebbb, jazivxt, alexchilton
+      and prvsiyan (335); a local optimization exchanged the separating edges of touching pairs,
+      and reflecting part of one tilted group across the diagonal x + y = S, its neighbours
+      released, gave the final gain.
+
+      It asks for credit to Joost de Winter, after the 335- and
+      372-square packings in Panoras's compilation. It quotes the Kaggle per-puzzle
+      leaderboard's 17.793636991746555 at 299 (Nick Sarris, 18 November), 3.5e-12 above this
+      side, with no coordinates, so it states no packing.
+
+      The issue says the search, optimization and rational certificate were produced with
+      GPT-6.2 Sol (OpenAI) and the repository files, checks and figure with Claude (Anthropic),
+      both under his direction.
+    scope:
+      n_values:
+      - 299
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A new arrangement at 299 relative to every packing the record holds there, 127 squares moved beyond a tenth from T-325's under the best symmetry, 7.37e-03 below the house, the second-largest step the record holds at this count after T-248's, far above the S2/S3 line T-239's rationale draws between T-198's 1.15e-05 (S2) and T-226's 1.88e-05 (S3), where new arrangements are S3, as T-331 and T-332. A slice composition of published packings with a reflection is no new technique, so not S4. No lower bound or optimum.
+      scored: '2026-11-20'
+      by: >-
+        the stage 4 review of 18 November (docs/project/reviews/review-2026-11-18-de-winter-1031.md), confirming the registering
+        lane's draft (think-10mx)
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter s299 upper bound 2026-11-18]'
+      published: '2026-11-18'
+    evidence:
+    - E-de-winter-1031-certificate-report
+    - E-de-winter-1031-exact-feasibility
+    - E-de-winter-1031-review-exact-feasibility
+    reviews:
+    - path: docs/project/reviews/review-2026-11-18-de-winter-1031.md
+      kind: adversarial
+      reviewer: Claude (Anthropic), strongest tier (tbd-strong-max) at maximum reasoning; the blind stage 4 review, lane r1031-1118, separately prompted from the import lane
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-18'
+      scope: >-
+        Feasibility at n = 299 of the certificate of issue 1031 and its twin, decided again by a
+        clean-room exact checker by two methods with the controls a plan frozen beforehand
+        states, custody in the source's history, the side and the issue's numbers, option D's
+        gain and contraction margin exactly against T-325, identity against every packing the
+        record holds at 299, the band the houses share, the reflection across the diagonal, and
+        the significance.
+      verdict: accepted
+      covers: [T-333]
+    artifacts:
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/README.md
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/claims.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/source/n299/n299_exact.json.gz
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/identity.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299-t277.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299-own.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1031-20261120/README.md
+    - packing/campaign/issue-intake/upper-bounds-1031-20261120/controls-plan-299.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1031.md
+    - packing/resources/web/de-winter-1031-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/check.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/controls.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/identity.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/after-freeze/generic.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/sharp-controls.json
+    notes: >-
+      A separate complete repository replay is retained for n = 299: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 267306 pair decisions; summed over the 3 jobs, the receipt records 73.25 route CPU
+      seconds. Squares touch the box, a least wall clearance of exactly 0, and every pair clears
+      by at least 1.04e-74. The certificate is read by the center-direction-json reader, and its
+      corner twin is held to it as the same packing by the witness-corners-opposite reader. The
+      replay is E-de-winter-1031-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), whose verdicts a plan hashed
+      before any route ran stated (campaign/issue-intake/upper-bounds-1031-20261120/
+      controls-plan-299.txt, hashed at 07:04:05Z on 20 November),
+      lowered the side to the packing's extent, closed the least-gap pair by its gap and moved
+      every square toward its nearer near wall by its least clearance, 0 here: both routes
+      accepted each at exact contact, margin 0, and refused each 1e-30 past it. They refused a
+      square enlarged to its pair at contact for the shape alone and 1e-30 past it for the
+      overlap as well, accepted a square at its wall grown by 0 and refused it 1e-30 past, and
+      refused a duplicated square.
+
+      Ten came out as the plan states; the eleventh, the wall
+      enlargement past contact, names overlap besides the wall and the shape, since no square
+      near a wall here can grow by 1e-30 without closing a pair, every pair gap being far
+      smaller, and the module then predicts the overlap exactly; the plan's line names the wall
+      and the shape only, and the packet's README records the difference.
+
+      Measured against padding (option D of 17 November 2026, think-b0w5): T-325's
+      certificate's margin is 3.5612e-27 (squares 71 and 140; measure/contraction-n299.json), so
+      the gain of 7.3674e-3 lies wholly outside T-325's padding and the claim is a new result.
+      T-277's margin is 3.4040e-12 (squares 179 and 194; measure/contraction-n299-t277.json), and
+      this certificate's own 6.4244e-67 (squares 137 and 175; measure/contraction-n299-own.json).
+      The L-step scan (measure/l-step-scan.json), with this side stood in for 299's ceiling,
+      finds main's consequences unchanged.
+
+      The blind stage 4 review of 18 November (R-1031, lane r1031-1118, PR #1036) accepts the
+      certificate with fourteen findings, none blocking or major: F3, two rules of its own
+      controls plan that assumed a gap this certificate does not have, is the review's own;
+      F7 is the band its two tilted groups share with every house since T-248; F9 notes that
+      the house the issue names, T-277, was replaced by T-325 while it was being written; the
+      rest are notes. Its contraction margin of T-325 and its gain agree with this lane's
+      exactly.
+
+      After its findings were frozen it answered its pull request's review: the
+      novelty is previously-published, as for every result by others, and its frozen N5 line
+      saying otherwise stands corrected there; and the 210 squares one motion lines up with
+      T-325's are a generic lattice of upright squares and the band, not a continuation. Its
+      Questions 1 (the donor files), 2 (the band) and 3 (Nick Sarris's value) go to the author
+      with the reply. Its clean-room run on this certificate is
+      E-de-winter-1031-review-exact-feasibility. This lane read the review at 08:12Z on 20
+      November, after its own replay, controls, measurements, ledger and registration were
+      committed.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 18 November, is
+      retained. It is the smallest validated side at 299, and the case adopted it there in
+      the pass of 20 November 2026 under the house rule, in place of T-325, with both strong
+      generators' regularization of the new house; T-325 keeps its certificate as history.
+      The review's questions for the author hold no rung.
+
+  - id: T-334
+    kind: upper-bound
+    registered: '2026-11-20'
+    landed: '2026-11-21'
+    headline: >-
+      Özden's certificate at 228 from jazivxt's public snapshot, 4.29e-09 below T-301, beyond its padding
+    claim: >-
+      One complete rational certificate proves s(228) <= 15.59604311663176650670114683218812228,
+      a side that terminates at 35 places. That side is 15.5960431166317666 rounded up at 16
+      places and 15.596043116632 at 12, as #1038 prints it.
+
+      It is 4.29e-09 below T-301 (credited to Roberto Ono), the case's house before adoption, and
+      measured here nearest centres pair it one to one with T-301's packing under the identity
+      of the box; the optimal assignment moves 86 squares beyond 1e-3, 47 beyond a hundredth
+      and 5 beyond a tenth (largest 0.238073), and turns squares by up to 1.956 degrees.
+      This measured geometric relationship establishes no direction of derivation.
+
+      The gain is 1.2298 of T-301's own uniform-contraction margin, 3.4875e-09: below T-301
+      shrunk until its squares first touch by 8.02e-10 (devtools.contraction_margin), and
+      T-301 so contracted rounds up at 12 places to 15.596043117434, above this claim's print.
+      Under the owner's option D of 17 November 2026 (think-b0w5) it is a new result, not a
+      restatement of T-301's padding.
+
+      Both maintained exact routes accept the certificate, read by the centre-basis witness
+      reader and held to the source's JSON twin of the same packing, and the stage 4 review
+      of 20 November 2026 accepts it, its clean-room checker deciding every square, wall and
+      pair by two exact methods, so the bound is confirmed, independently re-implemented.
+
+      The issue says this repository's packing-witness verify, run unmodified on the witness,
+      reports VERIFIED (exact-algebraic over Q, 25878 pairs, least wall clearance 0); that
+      verifier/sqcheck.py, an exact checker the author's lab wrote separately, reports VALID;
+      and that a second, independently written exact Fraction separating-axis checker agrees.
+      It says the checkers share only the definitions of unit square, wall and non-overlap. No
+      optimality, KKT or rigidity claim is made. Those statements are the author's; no source
+      program ran here.
+
+      The issue names jazivxt's Kaggle notebook Boxed In Sub as the public venue for its
+      decimal source, from the dataset Boxed In v63 (Apache 2.0 as declared there), converted by the lab to
+      rational half-angle form and opened by one uniform clearance factor about the origin of
+      its centred coordinates, the box centre, nothing else changed. The issue prints the
+      factor as 1 + 4.6e-18; the fraction it gives is 1 + 4.56e-15 (the review's F6, F13). The dataset describes crowdsourced coordinates and the
+      notebook gives no per-count credit, so the original finder is unresolved, as the issue
+      says. The notebook and dataset were not read here: this session's network refuses
+      www.kaggle.com, and the source retains jazivxt's decimal slice.
+
+      Roberto Ono retains the credit recorded for T-301. Credit jazivxt for publishing the
+      decimal snapshot in the public Kaggle notebook
+      https://www.kaggle.com/code/jazivxt/boxed-in-sub, and Doğa Özden for this certificate
+      and registration; Özden claims no discovery. The original finder of this packing,
+      whether it shares T-301's finder, publication order relative to T-301, and whether
+      either derived from the other remain unresolved. Neither the one-to-one measurement
+      nor the retained archive establishes those facts.
+
+      The issue says the conversion and checks were done by his lab with OpenAI Codex and that
+      the notebook's overview credits ChatGPT and Codex, and that the issue and repository were
+      prepared and posted on his behalf by his AI agent, which uses the account kenaznia-doga.
+      It discloses first that this packing does not beat the side-only Kaggle per-puzzle
+      leaderboard entry at 228, 15.596043116631669919627353 (Nevska, 8 November), 9.66e-14
+      below this side; it states no packing, so it is no report and is recorded as context
+      only.
+    scope:
+      n_values:
+      - 228
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: >-
+        A packing measured one to one with T-301 at 228, 4.29e-09 below it, 1.2298 times T-301's
+        own contraction margin and below its 12-place print contracted, five squares moved
+        beyond a tenth: like T-314's 3.42e-09 at 147 (S2), 1.16 times T-302's margin with
+        eight moved. T-301 is credited to Ono (S3); this packing's finder and publication
+        order remain unresolved. No lower bound or optimum.
+      scored: '2026-11-20'
+      by: >-
+        think-91fu Doğa Özden import (intake lane i1038), confirmed by the stage 4 review of
+        20 November (lane r1038), which proposes S2
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Özden s228 upper bound 2026-11-18]'
+      published: '2026-11-18'
+    evidence:
+    - E-ozden-1038-certificate-report
+    - E-ozden-1038-exact-feasibility
+    - E-ozden-1038-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/README.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/n-228-candidate.yaml
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/source/hit-228.txt
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/controls-plan-1038.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/identity.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228-own.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1038-20261120/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-20-ozden-1038.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/README.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/check-n228.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_1038.py
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
+    notes: >-
+      A separate complete repository replay is retained for n = 228: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 155268 pair decisions; summed over the 3 jobs, the receipt records 16.96 route CPU
+      seconds and 100.62 job wall seconds, the longest job 40.52 seconds. Squares touch the box,
+      a least wall clearance of exactly 0, and every pair clears by at least 3.62e-23 (squares
+      156 and 166). The replay is E-ozden-1038-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), stated before they ran (a plan
+      hashed on think-91fu at 08:22Z on 20 November, retained as receipts/controls-plan-1038.md),
+      lowered the side to the packing's extent, by 0, closed the least-gap pair (square 166
+      toward square 156) by its gap and moved every square toward the nearer near wall by the
+      least clearance, 0: both routes accepted each at exact contact, margin 0, and refused each
+      1e-30 past it. They refused square 166 enlarged to its pair at contact for its shape alone
+      and 1e-30 past it for the overlap as well; square 1, at its wall, enlarged by 0 was
+      accepted and 1e-30 past it refused for the wall and its shape, the branch stated in
+      advance; and they refused a duplicated square.
+
+      At n = 228 the certificate is below the case's ceiling (Roberto Ono, T-301) by 4.29e-09;
+      smallest: this certificate. No other register bound was pending adoption at 228. The
+      ledger of 20 November for this lane (campaign/issue-intake/upper-bounds-1038-20261120)
+      walks #1038 from a start frozen on main that day and records it.
+
+      Measured against padding: T-301's certificate, contracted uniformly about the origin and
+      boxed, has margin 3.4875e-09 (1 - lambda* about 2.389e-10, squares 8 and 21;
+      measure/contraction-n228.json). This certificate's own margin is 4.3896e-22 (squares 156
+      and 166; measure/contraction-n228-own.json), the clearance factor's; contracted so, both
+      routes accept it at a side that much smaller, which nobody reported and which is not
+      registered.
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): the
+      house witness measures as T-301's packet, and its drawn view, the axis tool's, is not
+      paired one to one with this packing (18 squares beyond a tenth). Aligned by box centres, 2
+      squares turn by more than a degree and none reverses its tilt. Tilted beyond a degree: 54
+      here, 41.00 to 42.10 degrees, 19 one way and 35 the other, against T-301's 55, 1.29 to
+      43.68 degrees, 19 and 36. Against T-300 no symmetry pairs it one to one.
+
+      The project's run of Evan Daniel's driver on T-301's witness on 15 November 2026
+      (cases/regularized_drawings/think-17ex-2026-11-15/) reached a local minimum of the side,
+      strict modulo 129 exact flat motions, whose solved view both maintained routes accepted
+      at 15.596043116631669919783314273244, 9.66e-14 below this side; it was held at row 3,
+      not registered, and the view is not retained. This certificate's packing may be that
+      minimum opened by its clearance factor; no measurement here pairs the two.
+
+      Özden reported and certified this packing while the project's lower KKT view remained
+      unregistered. Under the owner's decision of 18 November 2026 at the five re-solved
+      counts of #1009 (think-frl5), this claim keeps its new-result status, and the held view,
+      below it by far more than its own margin, stays a candidate for registration
+      (think-4z8z). This registration order establishes no publication priority for the
+      underlying packing.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side stood in
+      for 228's ceiling, finds the L-step and monotonicity consequences main finds, so this
+      bound carries to no other count.
+
+      The source's own sqcheck.py and its second checker were not run here. The two maintained
+      routes share this repository's centre-basis witness reader (certificate parsing and
+      half-angle conversion), Fraction arithmetic and the separating-axis method, and the first
+      of them, sqpack's exact verifier, is the packing-witness verify the source ran. The lab's
+      conversion made the exact coordinates. Licensed CC BY 4.0 and MIT by LICENSE.md at the
+      pin, the coordinates Apache 2.0 as the source declares them. No human oversight or
+      optimality is claimed.
+
+      The stage 4 review of 20 November 2026
+      (docs/project/reviews/review-2026-11-20-ozden-1038.md, lane r1038; accepted in #1044), written in a separate
+      lane blind to this one until its findings were frozen, accepts the certificate:
+      its clean-room checker decides every square, wall and all 25,878 pairs by separating
+      axes in Python integers and by exact clipping in gmpy2.mpq, no pair touching, the least
+      margin 3.62672e-23 at squares 156 and 166, the replay's, and all 36 of its controls,
+      stated beforehand, came out as stated (F1 to F3; E-ozden-1038-review-exact-feasibility).
+
+      Its findings are notes but two minor ones about the author's prose: the factor the
+      issue, the README and the file print as 1 + 4.6e-18 is 1 + 4.5564884e-15 (F6, F15).
+      Divided out about the box centre, the factor leaves a packing of side 15.5960431166317
+      exactly, with 197 pairs at contact and 16 overlapping by up to 5.49e-15, so the
+      certificate is that packing opened by the factor (F7, F13). The file's own claim and
+      source words are the producer's (F8).
+
+      After its freeze it measured what this lane measured and found the same: one to one
+      with T-301, 5 squares beyond a tenth (F10); 1.2298 of T-301's margin, 8.02e-10 below
+      T-301 shrunk to first contact (F11); the held view 9.66e-14 below this side, of which
+      the factor is 6.65e-14, the rounding of jazivxt's side to 13 places 6.33e-15, and
+      jazivxt's own print 2.37e-14 (F12). It notes that the record states the held solve's
+      certificate both as invalid and, in the same report, as a view both routes accept
+      (F12). It proposes S2. Its questions for the author go with the reply.
+
+      This lane recorded its replay, controls and measurements and registered this entry at
+      08:50Z on 20 November, and read the review, merged at 09:34Z, at 09:37Z, before mapping
+      it. No disagreement.
+
+      Adopted at 228 in the pass of 21 November 2026 under the house rule, in place of
+      T-301, which the pass of 15 November had adopted there. Ono retains T-301's credit;
+      jazivxt is credited for the public notebook and decimal snapshot, and Doğa Özden for
+      this certificate. This packing's finder, publication order and direction of derivation
+      remain unresolved. Both strong generators' regularization of the new house, measured
+      against the new witness, is in the same change. T-301 keeps its certificate as history,
+      a verified bound at V3/C3, and houses no other count. The later related de Winter
+      attachment awaits independent comparison in think-d4b0.
+
+      The rigidity block was derived again on the new witness and stays not rigid: 170 of its
+      228 squares translate, against T-301's 110. Both strong generators ran on the new
+      witness (packing/cases/regularized_drawings/think-91fu-2026-11-20/): grid-slack's views
+      at 0.5, 1 and 5 degrees are each admitted at row 10, and the selection draws the
+      0.5-degree view (20 uneven squares, no near-axis one and 632 full shared sides, against
+      the axis tool's 17, 1 and 644 on T-301's witness), in the published pose by the flip
+      record, so 228 is regularized and leaves default_drawings.SETTLED.
+
+      Evan Daniel's driver, run on this certificate, reached a KKT point, a local minimum of
+      the side strict modulo 123 exact flat motions, whose certificate validated, at exactly
+      the side of its 15 November solve from T-301's witness, 9.659e-14 below this side. It is
+      held at row 3 as a register candidate and not admitted (think-4z8z), as the owner's
+      decision at #1009's re-solves leaves it (think-frl5).
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 20 November, is
+      retained. It is the smallest validated side at 228, and the case adopted it there in the
+      pass of 21 November 2026 under the house rule, in place of T-301, with both strong
+      generators' runs on the new house; T-301, T-300, T-174, T-128, T-098, T-092 and T-056
+      keep their certificates as history. The driver's KKT solve below it is a register
+      candidate (think-4z8z), and the review's questions for the author hold no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-20-ozden-1038.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1038 (r1038, under think-3ape), prompted
+        separately from the import lane (i1038, think-91fu) and blind to its work until its
+        findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-20'
+      scope: >-
+        Finite feasibility of #1038's centre-basis Witness/v2 certificate at 228, decided by
+        the review's clean-room exact checker, frozen before any producer, witness or
+        verifier code was read, by two methods, with 36 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        clearance factor; after the freeze, custody, the sides against the record, the
+        identity against T-301, the contraction margins, the held KKT point, option D, the
+        licence, the credit and the significance.
+      verdict: accepted
+      covers:
+      - T-334
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
@@ -54025,7 +54699,7 @@ regularized_drawings:
         max_turn_deg: 3.43775e-34
       view: packing/atlas/known-best/regularized/n-171-regularized.yaml.gz
     - n: 172
-      of: T-282
+      of: T-286
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
       modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
@@ -54036,8 +54710,8 @@ regularized_drawings:
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
         moved: 77
-        max_move: 0.1684587
-        max_turn_deg: 3.76255
+        max_move: 0.1685399
+        max_turn_deg: 3.75682
       view: packing/atlas/known-best/regularized/n-172-regularized.yaml.gz
     - n: 175
       of: T-267
@@ -54186,7 +54860,7 @@ regularized_drawings:
         max_turn_deg: 3.43775e-34
       view: packing/atlas/known-best/regularized/n-198-regularized.yaml.gz
     - n: 199
-      of: T-284
+      of: T-285
       by: project
       method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -54195,9 +54869,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 44
-        max_move: 0.05050868
-        max_turn_deg: 0.456662
+        moved: 61
+        max_move: 0.07764994
+        max_turn_deg: 0.462392
       view: packing/atlas/known-best/regularized/n-199-regularized.yaml.gz
     - n: 204
       of: T-306
@@ -54312,17 +54986,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-227-regularized.yaml.gz
     - n: 228
-      of: T-301
+      of: T-334
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 48
-        max_move: 0.290442
-        max_turn_deg: 0.0032148
+        moved: 56
+        max_move: 0.1990877
+        max_turn_deg: 0.201949
       view: packing/atlas/known-best/regularized/n-228-regularized.yaml.gz
     - n: 229
       of: T-225
@@ -54579,18 +55254,17 @@ regularized_drawings:
         max_turn_deg: 0.584252
       view: packing/atlas/known-best/regularized/n-267-regularized.yaml.gz
     - n: 268
-      of: T-320
+      of: T-331
       by: project
-      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 102
-        max_move: 0.06679351
-        max_turn_deg: 0.0293364
+        moved: 54
+        max_move: 0.01196281
+        max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-268-regularized.yaml.gz
     - n: 269
       of: T-297
@@ -54607,17 +55281,18 @@ regularized_drawings:
         max_turn_deg: 0.265586
       view: packing/atlas/known-best/regularized/n-269-regularized.yaml.gz
     - n: 270
-      of: T-321
+      of: T-332
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 1
-        max_move: 0.003322039
-        max_turn_deg: 0.000662939
+        moved: 44
+        max_move: 0.3380873
+        max_turn_deg: 0.313105
       view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
     - n: 271
       of: T-219
@@ -54718,7 +55393,7 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-297-regularized.yaml.gz
     - n: 299
-      of: T-325
+      of: T-333
       by: project
       method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -54727,9 +55402,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 70
-        max_move: 0.3063243
-        max_turn_deg: 0.33486
+        moved: 34
+        max_move: 0.3739581
+        max_turn_deg: 2.3191
       view: packing/atlas/known-best/regularized/n-299-regularized.yaml.gz
     - n: 301
       of: T-098

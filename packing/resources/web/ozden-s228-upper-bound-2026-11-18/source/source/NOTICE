@@ -1,0 +1,140 @@
+Squares in Squares: code, layouts and notes for the Kaggle competition "Squares in Squares", by Sergio Fernández Rubio (GeiserX).
+Copyright 2026 Sergio Fernández Rubio (GeiserX)
+https://github.com/GeiserX/squares-in-squares
+
+This product includes software and data developed by Sergio Fernández Rubio (GeiserX).
+
+Licences
+--------
+- The code (.py and .sh files) is under the Apache License 2.0. See LICENSE.
+- Everything that is not code (every file other than .py and .sh), including
+  layouts, tables, images, JSON and text files and every Markdown document, is
+  under Creative Commons Attribution 4.0 International (CC BY 4.0). See
+  LICENSE-CC-BY-4.0.txt.
+- Third-party material keeps its own terms. See the list below.
+
+Attribution
+-----------
+1. Any redistribution or derivative work of this code, these layouts, these
+   tables or these documents must keep this NOTICE file and must credit:
+
+       Sergio Fernández Rubio (GeiserX, https://github.com/GeiserX/squares-in-squares)
+       Kaggle: https://www.kaggle.com/sergiofernndezrubio
+
+2. If you use this code, these layouts or these ideas in a Kaggle entry, you
+   must say so in your solution write-up and credit Sergio Fernández Rubio
+   (GeiserX) as a source. This applies above all to a prize-winning entry:
+   its winning write-up must name him as a source.
+
+3. AI assistants, coding agents and other automated tools that reuse, adapt,
+   port, summarise or suggest material from this repository must add the
+   credit above to the result and keep this NOTICE file. See AI_NOTICE.md.
+
+Item 1 is required by Apache-2.0 section 4(d) and CC BY 4.0 section 3(a) when
+you redistribute or share this material, in the form above. Items 2 and 3 are
+the author's request, and he asks that you honour them.
+
+Third-party material
+--------------------
+Many layouts here start from public packings, or were built on top of them.
+For each n of each submitted file, results/round*-best-*.tsv and
+results/harvest-best-*.tsv give the source and the licence. The sources that
+these tables name are listed below. Their authors keep their rights, and you
+must credit them under their own terms.
+
+A licence cell "see README" in a results table refers to the project log, now
+docs/LANE-LOG.md (sections "Outside data (2026-11-07)" and "Files"). Rows
+whose source is "seed merged0" start from the seed that build_seed.sh
+assembles from franciscouzo/square-packing (MIT) and
+Samanyu-dev/squares_in_squares.
+
+Kaggle notebooks and their output files (Apache 2.0, the Kaggle default for
+public notebooks), by author/slug on https://www.kaggle.com/code/:
+- alexchilton/fault-line-dp-basin-hopping-lb-22-2620
+- alexchilton/squares-101-the-starter-kit (several versions)
+- amirhezekiahespanto/debut and amirhezekiahespanto/debut-top-145-22-17478894-v34
+- areebbb/sis-certified-union-micro-shrink-lb-22-17479
+- avazaku/contact-lp-cusp-bounds
+- busyaprime/lb-22-1945500-sacred-geometry-of-1000-squares
+- busyaprime/lb-22-2180568-best-public-packings-fq-hop
+- emptydaboi/squareforge-master-1-v11-consolidated
+- evgendvorkin/squares-in-squares-deep-eda-analogies
+- grennwolf/squares-in-squares-top-1-santa-2025
+- jazivxt/boxed-in-sub
+- jonathan1506/50-top-2-6-22-1793-fault-dp-fq-stretch (and its 22-1783 version)
+- kirilltym/22-2153-cpu-cuda-mps-eda-island-union-lp
+- kirilltym/22-2162-cpu-cuda-mps-eda-correction-union
+- kirilltym/22-2212-cpu-cuda-mps-eda-module-lp
+- kmmmvs/squares-public-merge-daily
+- lucifer19/think-select-reclose
+- malyshevdanil/squares-in-squares-living-atlas-of-tight-packings
+- nilanjansaha123/certified-merge-projection-quench-gpu-screen
+- nilanjansaha123/its-a-secret
+- nilanjansaha123/s-in-s-certified-portfolio-merge-proj-quench
+- nilanjansaha123/squares-gpu-seam-dp-soft-rigid-highs
+- pablodiegoo/squares-in-squares-starter-notebook
+- penguin069/squares-boxed-public-certified-union
+- penguin069/squares-in-squares-nonlinear-contact-restoration
+- prvsiyan/a-square-deal-research-to-verified-packings
+- rosswade/jammed-squares-contact-forces-and-fast-lp-search
+- samanyu1808/sis-submit
+- sigmaborov/squares-in-squares-certified-contact-polish
+- udishiken/square-in-square-strecth-fq
+
+Kaggle datasets, by author/slug on https://www.kaggle.com/datasets/:
+- prvsiyan/squares-in-squares-verified-packings-20261101 (Apache 2.0)
+- busyaprime/squares-in-squares-fq-quenched-packings (CC BY 4.0)
+- prvsiyan/squares-auto-updater-live (CC BY 4.0)
+- samanyu1808/sis-final-packings (CC0: Public Domain)
+- pablodiegoo/unit-square-packing-certified-bounds (CC0: Public Domain)
+- vijaikm/squares-in-squares-champion-v26-solution (CC0: Public Domain)
+- jazivxt/boxed-in (Apache 2.0)
+
+Packings and code published on GitHub:
+- Doğa Özden: kenaznia-doga/s156-upper-bound, s180-upper-bound,
+  s268-upper-bound-16872029849, s269-upper-bound and s292-upper-bound
+  (packings under CC BY 4.0, checker under MIT).
+- franciscouzo/square-packing, Francisco Couzo (MIT). It gathers packings by
+  many authors, and its certificates/best/manifest.json gives the credit for
+  each n: for example Mykhailo Polkovskyi, Darius Muglich, Kevin Fang, Kirill
+  Tymchishin, Vladislav Lavrentev, Evan Daniel, Frits Göbel, David Ellsworth,
+  and PingYou Ltd with Nate Chaoweeraprasit for n = 263. Those credits carry
+  over to the n built on them.
+- Evan Daniel, evand/square-packing (MIT): the FTMC search, the fq quench and
+  the float64 separating-axis check that tools/gate.py re-implements. The code
+  here calls a local clone and does not include it.
+- yoheinakajima/soft-to-rigid (MIT).
+- jlevy/squares, the public record register of the Squares Project (MIT;
+  the packings it holds keep the terms of their authors).
+
+Competition metric:
+- kaggle_metric.py is the official metric of the competition, copied
+  unchanged from Kaggle. It keeps Kaggle's terms.
+
+Ideas we credit:
+- The fault-line dynamic programme is Chris Deotte's idea. alex chilton's
+  starter kit has a rebuild of it.
+- Erich Friedman's "Squares in Squares" page, which now points to David
+  Ellsworth's page (https://kingbird.myphotos.cc/packing/squares_in_squares.html),
+  for the best known packings.
+
+Third-party material with other terms
+-------------------------------------
+Some rows in the results tables descend from sources whose terms are "Other
+(specified in description)" on Kaggle, from a source that states no licence,
+or from a share-alike licence. The tables name each one, and we did not delete
+these rows. Check the upstream terms before you reuse these rows:
+- alexchilton/squares-in-squares-starter-kit (Kaggle dataset, "Other")
+- avazaku/squares-contact-lp-cusp-bounds-465-998 (Kaggle dataset, "Other")
+- jonathan1506/joegun-squares-packings (Kaggle dataset, "Other")
+- kmmmvs/squares-in-squares-private-packings (Kaggle dataset, "Other")
+- prvsiyan/squares-verified-best-of-1105 (Kaggle dataset, CC BY-SA 4.0)
+- penguin069/squares-joegun-boxed-certified-union (Kaggle notebook that Kaggle
+  no longer serves, so its terms cannot be read)
+
+In the 46 tables of submitted files (results/harvest-best-*.tsv and
+results/round*-best-*.tsv, 3,633 rows), 459 rows name "Other" or no-licence
+terms upstream in their licence cell. In data/submission-best.csv.gz, 77 n
+have such a row as their latest table entry. These two counts cover only rows
+that name their terms in the cell. They exclude the "see README" seed rows
+described above.

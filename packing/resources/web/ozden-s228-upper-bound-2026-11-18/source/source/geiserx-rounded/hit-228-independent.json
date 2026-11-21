@@ -1,0 +1,1 @@
+{"file": "results/public228/geiser/hit-228-exact.json", "sha256": "c7cb523dbc9b75fdf26b5d6be3c55d31ef77f0456945883bda5524d610a40c37", "verdict": "VALID", "method": "independent exact Fraction SAT", "n": 228, "side_exact": "19495053896191/1250000000000", "nontrivial_pairs": 151}

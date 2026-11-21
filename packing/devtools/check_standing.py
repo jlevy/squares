@@ -41,6 +41,20 @@ An entry that still holds one case of several is not superseded, and this report
 cases it no longer holds without refusing them: `T-047` holds `n = 26, 29, 30` and is
 beaten at `n = 11, 27, 28, 31`.
 
+A **restatement** is no improvement (`restated`). The owner's option D of 17 November
+2026 (think-b0w5): a re-certification of a standing packing, padding removed or the same
+arrangement re-solved to its exact local optimum, is a new result only if its side is
+below its predecessor's once the predecessor is shrunk until its squares first touch,
+measured through any construction (`devtools.contraction_margin`); otherwise it restates
+the predecessor, credited to the original finder. An entry that records such a report
+names each count it restates in its `restatements`, with the predecessor and the
+receipt, which `devtools.check_results` holds. Its side there is below the case record's
+stated side by no more than the predecessor's padding, which the predecessor shrunk to
+first contact already proves, so at those counts it improves on nothing and is held to
+nothing: where it improves nowhere else it reads superseded, by the results the case
+records rest on now, and no profile counts it current. T-253, T-260, T-280 and T-281 are
+such records.
+
 A simplification or a formalization proves again a value the record holds, so one that
 states a bound strictly better than its case's reported one is refused whatever its
 standing: no lane holds that value. It moves no bound by itself, so one that a case bound
@@ -295,6 +309,13 @@ def directions(record: Mapping[str, Any], found: Sequence[Finding]) -> frozenset
     return frozenset(KIND_DIRECTIONS.get(kind, ()))
 
 
+def restated(record: Mapping[str, Any]) -> frozenset[int]:
+    """The counts at which an entry restates its predecessor under the owner's option D
+    (think-b0w5), as its `restatements` name them: no improvement there, whatever its
+    stated side, since the predecessor shrunk to first contact proves at least as much."""
+    return frozenset(int(item["n"]) for item in record.get("restatements") or ())
+
+
 def improvements(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
     """The bounds an entry states that are strictly better than its case record's bound of
     the same direction in a lane the entry can hold: the reported lane for a report
@@ -308,14 +329,17 @@ def improvements(record: Mapping[str, Any], records: view.Records) -> list[Findi
     records adopt the value it proves again is one. A tie is no improvement: the case
     record holds that value under another entry's citation. Compared as `relation`
     compares, by sets of numbers: cut decimals improve on a bound only where every number
-    they stand for is better than every number the case record's bound may be."""
+    they stand for is better than every number the case record's bound may be. A count
+    the entry restates (`restated`) improves on nothing."""
     report = str(record.get("confirmation")) in UNREPLAYED
     found = findings(record, records)
     claimed = directions(record, found)
+    restates_at = restated(record)
     return [
         finding
         for finding in found
         if finding.direction in claimed
+        and finding.n not in restates_at
         and (finding.reported == EXCEEDS or (not report and finding.verified == EXCEEDS))
     ]
 
@@ -427,6 +451,10 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
         if str(record.get("confirmation")) in UNREPLAYED:
             # Two lanes are never mixed: a report never holds the verified lane.
             stands = []
+        # A restatement improves on nothing at the counts it restates (`restated`).
+        restates_at = restated(record)
+        stands = [f for f in stands if f.n not in restates_at]
+        reported = [f for f in reported if f.n not in restates_at]
         if stands:
             wrong.append(
                 f"{entry} is superseded, yet at {_at(stands)} its stated bound is no "
@@ -529,6 +557,8 @@ def summary(record: Mapping[str, Any], standing: str, records: view.Records) -> 
         parts.append(f"equals the {lane} bound at {_at(holds)}")
     if beaten:
         parts.append(f"beaten at {_at(beaten)}")
+    if restates_at := restated(record):
+        parts.append(f"restates its predecessor at n = {compress(sorted(restates_at))}")
     return "  ".join(parts)
 
 

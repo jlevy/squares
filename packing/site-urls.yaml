@@ -5947,7 +5947,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-11'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/173.html
   canonical: cases/173.html
@@ -6179,7 +6179,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-10'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/2.html
   canonical: cases/2.html
@@ -6443,7 +6443,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-15'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/229.html
   canonical: cases/229.html
@@ -6795,7 +6795,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-18'
+  lastmod: '2026-11-20'
   status: live
 - path: cases/269.html
   canonical: cases/269.html
@@ -6819,7 +6819,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-18'
+  lastmod: '2026-11-20'
   status: live
 - path: cases/271.html
   canonical: cases/271.html
@@ -7067,7 +7067,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-18'
+  lastmod: '2026-11-20'
   status: live
 - path: cases/3.html
   canonical: cases/3.html
@@ -22560,7 +22560,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-31'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-18'
   status: live
   identity:
     kind: upper-bound
@@ -22618,6 +22618,77 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
     - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n154.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n155.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n183.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n211.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n227.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n236.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n237.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n241.json
+    - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n271.json
+    - packing/devtools/contraction_margin.py
+  amendments:
+  - date: '2026-11-18'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 154
+        - 155
+        - 183
+        - 211
+        - 227
+        - 236
+        - 237
+        - 241
+        - 271
+      established: null
+      attribution:
+        source_keys:
+        - '[Mishapolk refinements 2026-10-23]'
+        published: '2026-10-23'
+      builds_on: null
+      evidence:
+      - E-mishapolk-1023-certificate-report
+      artifacts:
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/README.md
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/acquisition/claims.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n154.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n155.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n183.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n211.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n227.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n236.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n237.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n241.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/source/certificates/0000-0999/n271.cert
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/exact-certification.json.xz
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n154.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n155.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n183.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n211.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n227.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n236.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n237.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n241.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/receipts/sharp-controls-n271.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n154.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n155.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n183.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n211.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n227.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n236.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n237.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n241.json
+      - packing/resources/web/mishapolk-1023-refinements-2026-10-30/measure/identity-n271.json
+      - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+      - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    reason: 'Under the owner''s option D of 17 November 2026 (think-b0w5), T-253''s nine re-certifications
+      are restatements of the houses (think-8yyy): their contraction receipts and the measuring module
+      join the result.'
 - path: result/t-254.html
   canonical: result/t-254.html
   kind: result
@@ -22852,7 +22923,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-31'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-18'
   status: live
   identity:
     kind: upper-bound
@@ -22894,6 +22965,57 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
     - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n105.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n146.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n156.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n229.json
+    - packing/resources/web/mishapolk-issue846-2026-10-30/measure/contraction-n308.json
+    - packing/devtools/contraction_margin.py
+  amendments:
+  - date: '2026-11-18'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 105
+        - 146
+        - 156
+        - 229
+        - 308
+      established: null
+      attribution:
+        source_keys:
+        - '[Mishapolk issue 846 2026-10-30]'
+        published: '2026-10-30'
+      builds_on: null
+      evidence:
+      - E-mishapolk-846-certificate-report
+      artifacts:
+      - packing/resources/web/mishapolk-issue846-2026-10-30/README.md
+      - packing/resources/web/mishapolk-issue846-2026-10-30/acquisition/claims.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n105.cert
+      - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n146.cert
+      - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n156.cert
+      - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n229.cert
+      - packing/resources/web/mishapolk-issue846-2026-10-30/source/certificates/0000-0999/n308.cert
+      - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/exact-certification.json.xz
+      - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n105.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n146.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n156.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n229.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/receipts/sharp-controls-n308.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n105.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n146.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n156.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n229.json
+      - packing/resources/web/mishapolk-issue846-2026-10-30/measure/identity-n308.json
+      - packing/campaign/issue-intake/upper-bounds-843-846-20261031/README.md
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-31-polkovskyi-846-and-23-oct.md
+      - packing/resources/web/mishapolk-issue846-2026-10-30/review/review-2026-10-31/README.md
+    reason: 'Under the owner''s option D of 17 November 2026 (think-b0w5), T-260''s five re-certifications
+      are restatements of the houses (think-8yyy): their contraction receipts and the measuring module
+      join the result.'
 - path: result/t-261.html
   canonical: result/t-261.html
   kind: result
@@ -24042,7 +24164,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-11-10'
-  lastmod: '2026-11-10'
+  lastmod: '2026-11-18'
   status: live
   identity:
     kind: upper-bound
@@ -24057,6 +24179,8 @@ urls:
     builds_on: null
     evidence:
     - E-de-winter-939-certificate-report
+    - E-de-winter-939-exact-feasibility
+    - E-de-winter-939-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/README.md
     - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/claims.json
@@ -24078,13 +24202,51 @@ urls:
     - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/README.md
     - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/decide-939.json
     - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/compare-lane.json
+  amendments:
+  - date: '2026-11-18'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 199
+      established: null
+      attribution:
+        source_keys:
+        - '[de Winter s199 upper bound 2026-11-09]'
+        published: '2026-11-09'
+      builds_on: null
+      evidence:
+      - E-de-winter-939-certificate-report
+      artifacts:
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/README.md
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/acquisition/claims.json
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/n199_witness.yaml
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/source/n199/n199_exact.json.gz
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/receipts/exact-certification.json.xz
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/receipts/sharp-controls.json
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n199.json
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/identity-n172-base.json
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n199.json
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n172-base.json
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/measure/contraction-n172-daniel-held.json
+      - packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md
+      - packing/devtools/upper_bound_reports.py
+      - packing/devtools/contraction_margin.py
+      - packing/devtools/measure_identity.py
+      - packing/devtools/construction_checker.py
+      - docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/README.md
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/decide-939.json
+      - packing/resources/web/de-winter-s199-upper-bound-2026-11-09/review/review-2026-11-11/compare-lane.json
+    reason: 'Under the owner''s option D of 17 November 2026 (think-b0w5), T-285 is a new result (think-8yyy):
+      its replay and the stage 4 review''s clean-room run join the result as evidence.'
 - path: result/t-286.html
   canonical: result/t-286.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-11-11'
-  lastmod: '2026-11-11'
+  lastmod: '2026-11-18'
   status: live
   identity:
     kind: upper-bound
@@ -24099,6 +24261,8 @@ urls:
     builds_on: null
     evidence:
     - E-de-winter-946-certificate-report
+    - E-de-winter-946-exact-feasibility
+    - E-de-winter-946-review-exact-feasibility
     artifacts:
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/README.md
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/acquisition/claims.json
@@ -24116,6 +24280,40 @@ urls:
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/README.md
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/decide-946.json
     - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/moves.json
+  amendments:
+  - date: '2026-11-18'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 172
+      established: null
+      attribution:
+        source_keys:
+        - '[de Winter s172 upper bound 2026-11-10]'
+        published: '2026-11-10'
+      builds_on: null
+      evidence:
+      - E-de-winter-946-certificate-report
+      artifacts:
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/README.md
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/acquisition/claims.json
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/n172_witness.yaml
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/source/n172/n172_exact.json.gz
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/receipts/exact-certification.json.xz
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/receipts/sharp-controls.json
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/identity-n172.json
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172.json
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/measure/contraction-n172-daniel-held.json
+      - packing/campaign/issue-intake/upper-bounds-939-946-20261111/README.md
+      - packing/devtools/upper_bound_reports.py
+      - packing/devtools/contraction_margin.py
+      - docs/project/reviews/review-2026-11-11-de-winter-939-946.md
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/README.md
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/decide-946.json
+      - packing/resources/web/de-winter-s172-upper-bound-2026-11-10/review/review-2026-11-11/moves.json
+    reason: 'Under the owner''s option D of 17 November 2026 (think-b0w5), T-286 is a new result (think-8yyy):
+      its replay and the stage 4 review''s clean-room run join the result as evidence.'
 - path: result/t-287.html
   canonical: result/t-287.html
   kind: result
@@ -26068,6 +26266,178 @@ urls:
     - packing/resources/web/de-winter-1015-1017-1020-review-r127b-2026-11-18/out/controls-1020.json
     - docs/project/reviews/review-2026-11-18-de-winter-1015-1017-1020.md
     - packing/resources/web/de-winter-1015-1017-1020-review-2026-11-18/README.md
+- path: result/t-331.html
+  canonical: result/t-331.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-18'
+  lastmod: '2026-11-18'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 268
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s268 upper bound 2026-11-17]'
+      published: '2026-11-17'
+    builds_on: null
+    evidence:
+    - E-de-winter-1021-certificate-report
+    - E-de-winter-1021-exact-feasibility
+    - E-de-winter-1021-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/source/n268/n268_exact.json.gz
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/contraction-n268.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/contraction-n268-own.json
+    - packing/resources/web/de-winter-s268-upper-bound-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/controls-plan-268-270.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/check-1021.json
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/controls-1021.json
+- path: result/t-332.html
+  canonical: result/t-332.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-18'
+  lastmod: '2026-11-18'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 270
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s270 upper bound 2026-11-17]'
+      published: '2026-11-17'
+    builds_on: null
+    evidence:
+    - E-de-winter-1022-certificate-report
+    - E-de-winter-1022-exact-feasibility
+    - E-de-winter-1022-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/README.md
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/acquisition/claims.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/source/n270/n270_exact.json.gz
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/identity.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/contraction-n270.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/contraction-n270-own.json
+    - packing/resources/web/de-winter-s270-upper-bound-2026-11-17/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/README.md
+    - packing/campaign/issue-intake/upper-bounds-1021-1022-20261118/controls-plan-268-270.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/check-1022.json
+    - packing/resources/web/de-winter-1021-1022-review-2026-11-18/out/controls-1022.json
+- path: result/t-333.html
+  canonical: result/t-333.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-20'
+  lastmod: '2026-11-20'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 299
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter s299 upper bound 2026-11-18]'
+      published: '2026-11-18'
+    builds_on: null
+    evidence:
+    - E-de-winter-1031-certificate-report
+    - E-de-winter-1031-exact-feasibility
+    - E-de-winter-1031-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/README.md
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/claims.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/source/n299/n299_exact.json.gz
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/identity.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299-t277.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299-own.json
+    - packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1031-20261120/README.md
+    - packing/campaign/issue-intake/upper-bounds-1031-20261120/controls-plan-299.txt
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-18-de-winter-1031.md
+    - packing/resources/web/de-winter-1031-review-2026-11-18/README.md
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/check.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/controls.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/out/identity.json
+    - packing/resources/web/de-winter-1031-review-2026-11-18/after-freeze/generic.json
+- path: result/t-334.html
+  canonical: result/t-334.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-20'
+  lastmod: '2026-11-20'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 228
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s228 upper bound 2026-11-18]'
+      published: '2026-11-18'
+    builds_on: null
+    evidence:
+    - E-ozden-1038-certificate-report
+    - E-ozden-1038-exact-feasibility
+    - E-ozden-1038-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/README.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/n-228-candidate.yaml
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/source/hit-228.txt
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/controls-plan-1038.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/identity.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228-own.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1038-20261120/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-20-ozden-1038.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/README.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/check-n228.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
 - path: results.html
   canonical: results.html
   kind: page

@@ -1,0 +1,5 @@
+# Plan freeze, lane r1050 (bead think-5jr0). Written before any source program was opened or run.
+# Frozen at 2026-11-20T16:54:02Z. Verify from this directory: sha256sum -c frozen/plan-frozen-digest.txt
+8c74ab4d52dbcacfc70f4828cf76793381ae9d4c0bde9e5c28a7f1646f377097  programs/review-plan.md
+d0ea00a82a9d09b4512b00145c0615b0c3f71d221d6bd6d95e2c4bab39b73e2b  programs/issue-1050.json
+e99801bccdc8b6429168b6733d3507edcd5f52765cf06bb65a7aa690b1fd53a9  programs/source-files.sha256

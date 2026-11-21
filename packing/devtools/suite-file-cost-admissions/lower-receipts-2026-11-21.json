@@ -1,0 +1,60 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 16,
+  "seconds": 0.239,
+  "files": [
+    {
+      "file": "packing/tests/test_lower_bound_claims.py",
+      "tests": 5,
+      "seconds": 0.206
+    },
+    {
+      "file": "packing/tests/test_replay_rectangle_receipts.py",
+      "tests": 11,
+      "seconds": 0.033
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_lower_bound_claims.py",
+      "packing/tests/test_replay_rectangle_receipts.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_lower_bound_claims.py": 5,
+      "packing/tests/test_replay_rectangle_receipts.py": 11
+    },
+    "deselected_tests": 0
+  }
+}

@@ -535,8 +535,11 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     for n in (227, 229):
         assert rows[n]["case"]["reported_source_key"] == "[Daniel regularized lists 2026-10-20]"
         assert rows[n]["case"]["reported_relation"] == "above"
-    for n in (147, 260, 262, 299):
+    for n in (147, 260, 262):
         assert rows[n]["case"]["reported_source_key"] == "[Mishapolk issue 1009 2026-11-16]"
+    # The pass of 20 November 2026 (think-78aj) moved 299 to Joost de Winter's issue-1031
+    # certificate (T-333), lower again.
+    assert rows[299]["case"]["reported_source_key"] == "[de Winter s299 upper bound 2026-11-18]"
     for n in (147, 260, 262, 299):
         assert rows[n]["case"]["reported_relation"] == "above"
     assert all(

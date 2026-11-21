@@ -28,6 +28,8 @@ Under the tables, each result whose certificate regularizes packings other resul
 lists its `regularizations`, one sentence a count (`result_credit.regularization_sentence`),
 and the register's `regularized_drawings`, this project's own regularizations of the
 packings the atlas draws regularized, follow in the same sentences.
+Each result whose report restates a packing another result holds, under the owner's
+option D (think-b0w5), lists its `restatements` after them, one line a count.
 The closing list gives each result's next action, its `next_rung`, and under it each of
 its `unfinished_confirmations` with the rung it would reach and its estimated cost.
 
@@ -47,7 +49,7 @@ from strif import atomic_output_file
 
 from devtools.check_results import confirmation_code, kind_label
 from devtools.register_prose import paragraphs
-from devtools.render_recent_results import load_records, position_marks, standing
+from devtools.render_recent_results import listed, load_records, position_marks, standing
 from devtools.result_credit import (
     OTHERS,
     credit_line,
@@ -117,6 +119,28 @@ def _scope(record: dict) -> str:
     if "n_values" in scope:
         return ", ".join(str(n) for n in scope["n_values"])
     return f"{scope['n_min']}-{scope['n_max']}"
+
+
+def restated_position(record: Mapping[str, Any], position: list[str]) -> list[str]:
+    """The marks a row draws after its status, a restated entry's first: `restates T-222,
+    T-197 and T-220 (option D)`, the results whose packings it restates. Where every count
+    of its scope is restated that mark stands alone, so the row cannot read as an
+    improvement later superseded (review A11 of #1030); elsewhere the entry's other marks
+    follow it."""
+    items = record.get("restatements") or ()
+    if not items:
+        return position
+    held = sorted({str(item["of"]) for item in items}, key=lambda rid: int(rid[2:]))
+    mark = f"restates {listed(held)} (option D)"
+    scope = record["scope"]
+    counts = (
+        set(scope["n_values"])
+        if "n_values" in scope
+        else set(range(int(scope["n_min"]), int(scope["n_max"]) + 1))
+    )
+    if {int(item["n"]) for item in items} >= counts:
+        return [mark]
+    return [mark, *position]
 
 
 def claim_cell(record: dict) -> str:
@@ -213,6 +237,45 @@ def regularizations(results: list[dict], sources: Mapping[str, Mapping[str, Any]
         items = record["regularizations"]
         lines.append(f"- **{record['id']}** — {len(items)} counts:")
         lines.extend(f"  - {regularization_sentence(item, sources)}" for item in items)
+    lines.append("")
+    return lines
+
+
+def restatements(results: list[dict]) -> list[str]:
+    """The section listing each result's `restatements`, by id, one item a count; none
+    where no result carries one."""
+    carrying = [record for record in results if record.get("restatements")]
+    if not carrying:
+        return []
+    lines = [
+        "## Restatements",
+        "",
+        (
+            f"Where the certificate a result records is a re-certification of a packing "
+            f"another result holds, its padding removed or the same arrangement re-solved, "
+            f"and its side is not below that result{APOSTROPHE}s once that certificate is "
+            "shrunk until its squares first touch, the owner"
+            f"{APOSTROPHE}s option D of 17 November 2026 (think-b0w5) makes it a "
+            "restatement: no new result, credited to the original finder through the "
+            "result it restates, and adopted nowhere. Each line names that result, the "
+            f"gain as a share of its certificate{APOSTROPHE}s uniform-contraction margin "
+            "(`devtools.contraction_margin`) and the receipt."
+        ),
+        "",
+    ]
+    for record in sorted(carrying, key=lambda item: item["id"]):
+        items = record["restatements"]
+        lines.append(
+            f"- **{record['id']}** — {len(items)} {'count' if len(items) == 1 else 'counts'}:"
+        )
+        for item in items:
+            share = item.get("gain_over_margin")
+            measured = f"{share} of its margin" if share is not None else "its margin 0"
+            lines.append(
+                f"  - n = {item['n']}: restates {item['of']}{APOSTROPHE}s packing "
+                f"({measured}; [`{Path(item['measured_in']).name}`]"
+                f"(../../{item['measured_in']}))."
+            )
     lines.append("")
     return lines
 
@@ -317,7 +380,9 @@ def render() -> str:
     evidence = records.register.evidence
 
     def status(record: dict) -> str:
-        position = position_marks(record, standing(record, records), records)
+        position = restated_position(
+            record, position_marks(record, standing(record, records), records)
+        )
         return status_line(record, evidence, position, how=confirmed_how(record, evidence))
 
     lines.append("| id | n | kind | credit | V | C | S | status | novelty | claim |")
@@ -355,6 +420,7 @@ def render() -> str:
             )
             lines.append("")
     lines.extend(regularizations(results, sources))
+    lines.extend(restatements(results))
     lines.extend(regularized_drawings(register.get("regularized_drawings"), sources))
     lines.extend(verification_code(results, evidence))
     lines.append("## Next actions")

@@ -1,0 +1,208 @@
+{
+  "n": 228,
+  "classification": "Public Kaggle coordinate recovery and exact certificate",
+  "publisher": "Kaggle user jazivxt, Boxed In Sub and Boxed In",
+  "original_finder": "Unresolved. The dataset describes crowdsourced coordinates and the notebook supplies no per-count credit.",
+  "source": {
+    "url": "https://www.kaggle.com/code/jazivxt/boxed-in-sub?scriptVersionId=370961355",
+    "dataset": "https://www.kaggle.com/datasets/jazivxt/boxed-in/versions/63",
+    "container_sha256": "0402785862f3fd4c0ecef4e48474f742a615d67b2ee28af630c4b71c6462821a",
+    "run_version": 370961355,
+    "source_dataset_version_id": 22369356,
+    "credit": "jazivxt (Kaggle Boxed In Sub / Boxed In dataset)",
+    "upstream_AI": "The pinned notebook credits ChatGPT and Codex in its submission overview.",
+    "license": "Apache 2.0 as declared on Boxed In v63. License text bundled.",
+    "attribution": "The published notebook copies the dataset submission.csv; the notebook supplies no per-count attribution.",
+    "slice": "jazivxt.csv",
+    "slice_sha256": "926c316681a48a3757981e6cd55fe8d88558cdc2419068a0c01a5821f49411d5",
+    "rows": 228
+  },
+  "license": "Apache 2.0 as declared by the Boxed In v63 public dataset. Apache text bundled. GeiserX archive includes its separate CC BY 4.0 text and NOTICE, with attribution to the Boxed In row.",
+  "method": "Convert the published decimal centers and orientations to rational half-angle form, apply only the uniform clearance dilation in the receipt, and verify by two rational SAT implementations.",
+  "AI": {
+    "upstream": "The pinned notebook credits ChatGPT and Codex in its submission overview.",
+    "certificate": "Doğa Özden directed the public audit with OpenAI Codex Sol assistance."
+  },
+  "corroboration": {
+    "url": "https://raw.githubusercontent.com/GeiserX/squares-in-squares/f822b34456b29addec9b59478aac4eb2306f7566/data/submission-best.csv.gz",
+    "blob_sha": "6b9b1389072b700fa74c6362e68f3376fc1585c8",
+    "credit": "Sergio Fernández Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares",
+    "license": "CC BY 4.0 for layouts, with third-party terms retained; see upstream NOTICE.",
+    "attribution": "Sergio Fernández Rubio source round 30 explicitly credits jazivxt/boxed-in-sub for 228 and documents 2.2e-11 floatsafe.",
+    "container_sha256": "c490841279b793a963129680483a21b075fb55e8e26c24d37901c0655c704989",
+    "uncompressed_sha256": "1378c9fd83966c98e4273fa9b9685ea6270802d81a9d0d890255068369714332",
+    "source_228_row": {
+      "source_rows": "696c2f7162a0079b2c9133329784d05b265e24cb155a0c4087d0bdd467c4dbe6",
+      "geometry_strings": "988295c49ab49c82058fe17e0793e2d4cb6c69263d2133776e1d588e52591e9d",
+      "identical_to": null
+    },
+    "slice": "geiser.csv",
+    "slice_sha256": "049f04cdaaefa975ca67ef04a52d1233bcb3ed5e5f44138040fb093fc99447d0",
+    "rows": 228,
+    "ancestry_url": "https://github.com/GeiserX/squares-in-squares/blob/f822b34456b29addec9b59478aac4eb2306f7566/results/round30-best-2026-11-15.tsv"
+  },
+  "registry_prior_credit": {
+    "url": "https://github.com/RobertoOno/squares-in-square/blob/fce076f2bf459a25be3645d899e8950b93ed977c/runs/2026-11-11_fable-5.2/certificates/n228_S59604312.json",
+    "sha256": "98987101c5a14e84cc1bdcb7497cc139be6ef71a17f7e7ec9ce3f89c80274944",
+    "issue": "https://github.com/jlevy/squares/issues/984",
+    "credit": "Roberto Ono, with Claude, after Francisco Couzo at 404."
+  },
+  "registry_commit": "1015fc175fa4e2c01f912d915d784100e36d3bab",
+  "comparisons": {
+    "registry": {
+      "reference": "87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680",
+      "candidate_minus_reference": "-4.289025140276073871996937132512595861210470695E-9",
+      "candidate_below": true
+    },
+    "kaggle_side_only": {
+      "reference": "15.59604311663166991962735384207686132467904538537536",
+      "candidate_minus_reference": "9.658707379299011126095532095461462464E-14",
+      "candidate_below": false
+    },
+    "public_jazivxt_decimal": {
+      "reference": "15.59604311663169366961883788654900048213176353153",
+      "candidate_minus_reference": "7.283708230894563912179786823646847E-14",
+      "candidate_below": false
+    },
+    "public_geiserx_decimal": {
+      "reference": "15.5960431169528",
+      "candidate_minus_reference": "-3.2103349329885316781187772E-10",
+      "candidate_below": true
+    },
+    "public_feeder_decimal": {
+      "reference": "15.596043116996643",
+      "candidate_minus_reference": "-3.6487649329885316781187772E-10",
+      "candidate_below": true
+    },
+    "public_busy_aprime_decimal": {
+      "reference": "15.604601475729696",
+      "candidate_minus_reference": "-0.00855835909792949329885316781187772",
+      "candidate_below": true
+    },
+    "public_prvsiyan_decimal": {
+      "reference": "15.604601475729696",
+      "candidate_minus_reference": "-0.00855835909792949329885316781187772",
+      "candidate_below": true
+    }
+  },
+  "alignment_to_registry": {
+    "transform": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "max_center": 0.23337738207872066,
+    "rms_center": 0.03676545578591252,
+    "moved_gt_1e-3": 228,
+    "max_angle_rad": 0.03414132915810009
+  },
+  "other_public_poses_alignment": {
+    "jazivxt_vs_geiser": {
+      "transform": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "max_center": 2.2790277715872322e-10,
+      "rms_center": 1.3972309178883892e-10,
+      "moved_gt_1e-3": 0,
+      "max_angle_rad": 1.1102230246251565e-16
+    },
+    "jazivxt_vs_feeder": {
+      "transform": [
+        [
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "max_center": 2.590176689299178e-10,
+      "rms_center": 1.588010537429591e-10,
+      "moved_gt_1e-3": 0,
+      "max_angle_rad": 2.220446049250313e-16
+    }
+  },
+  "leaderboard": {
+    "version": 37,
+    "render_session": 371019944,
+    "n": 228,
+    "L": "15.596043116632",
+    "L_full": "15.59604311663166991962735384207686132467904538537536",
+    "team": "Nevska",
+    "date": "2026-11-08 11:50:15 UTC",
+    "source": "https://www.kaggle.com/code/inversion/squares-in-squares-per-puzzle-leaderboard?scriptVersionId=371019944",
+    "relationship": "The leaderboard has a side only. The proximity of the numbers supplies no link between the leaderboard entry and this pose."
+  },
+  "witnesses": {
+    "jazivxt": {
+      "exact_side": "389901077915794162667528670804703057/25000000000000000000000000000000000",
+      "exact_side_decimal": "15.59604311663176650670114683218812228",
+      "sha256": "c149799d7d0efcd3c4c89ede54f836926b9e60098fc935df76b4c1f66478a2d9",
+      "decimal_pose_sha256": "f8db9d10f857fbaa6d39e771dba7fe2b649ce34ded27d78ca84a4a421a0de963",
+      "dilation": "2500000000000011391221/2500000000000000000000",
+      "sqcheck": {
+        "file": "results/public228/jazivxt/hit-228-exact.json",
+        "n": 228,
+        "mode": "exact-rational",
+        "side": 15.596043116631767,
+        "min_wall_margin": 0.0,
+        "min_pair_margin": 3.626716878761469e-23,
+        "verdict": "VALID",
+        "certified_side": 15.596043116631767,
+        "certified_side_exact": "389901077915794162667528670804703057/25000000000000000000000000000000000"
+      },
+      "independent": {
+        "file": "results/public228/jazivxt/hit-228-exact.json",
+        "sha256": "c149799d7d0efcd3c4c89ede54f836926b9e60098fc935df76b4c1f66478a2d9",
+        "verdict": "VALID",
+        "method": "independent exact Fraction SAT",
+        "n": 228,
+        "side_exact": "389901077915794162667528670804703057/25000000000000000000000000000000000",
+        "nontrivial_pairs": 151
+      },
+      "exact_pose": "results/witnesses/jazivxt-228/hit-228-exact.json"
+    },
+    "geiser": {
+      "exact_side": "19495053896191/1250000000000",
+      "exact_side_decimal": "15.5960431169528",
+      "sha256": "c7cb523dbc9b75fdf26b5d6be3c55d31ef77f0456945883bda5524d610a40c37",
+      "decimal_pose_sha256": "2a72008da43d25d926462785f6d61da0c3a27f38b72ef0e8a59cb7bc2ea21eb1",
+      "dilation": "1",
+      "sqcheck": {
+        "file": "results/public228/geiser/hit-228-exact.json",
+        "n": 228,
+        "mode": "exact-rational",
+        "side": 15.5960431169528,
+        "min_wall_margin": 0.0,
+        "min_pair_margin": 2.1989873040660532e-11,
+        "verdict": "VALID",
+        "certified_side": 15.5960431169528,
+        "certified_side_exact": "19495053896191/1250000000000"
+      },
+      "independent": {
+        "file": "results/public228/geiser/hit-228-exact.json",
+        "sha256": "c7cb523dbc9b75fdf26b5d6be3c55d31ef77f0456945883bda5524d610a40c37",
+        "verdict": "VALID",
+        "method": "independent exact Fraction SAT",
+        "n": 228,
+        "side_exact": "19495053896191/1250000000000",
+        "nontrivial_pairs": 151
+      },
+      "exact_pose": "results/witnesses/jazivxt-228/geiserx-rounded/hit-228-exact.json"
+    }
+  },
+  "published_report_scope": "Source pointer with exact certificate. Credit jazivxt as publisher. Avoid original discovery attribution to the auditor, publisher, or the leaderboard team."
+}
