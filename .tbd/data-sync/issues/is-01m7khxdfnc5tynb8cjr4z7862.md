@@ -5,7 +5,7 @@ title: "Intake pass 2026-11-17: #1005-#1009 (13 case counts: 147, 156, 180, 210,
 kind: epic
 status: in_progress
 priority: 1
-version: 103
+version: 104
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -92,7 +92,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-17T01:28:31.989Z
-updated_at: 2026-11-21T15:40:44.581Z
+updated_at: 2026-11-21T16:45:17.501Z
 started_at: 2026-11-17T01:28:43.493Z
 ---
 
@@ -173,3 +173,13 @@ The #1051 PR note also records that replay_rectangle_receipts imports bm.py and 
 - #1045 integration active in the same checkout (think-91fu). Adopt T-334 at 228 on 21 November UTC and leave finder/order unresolved while retaining Özden's certificate credit. #1047's guarded tiny-angle fix preserves the restatement comparison against Samanyu-dev, with ratio 0.9721594 on the corrected reader. #1052 original certificates and the replacement control plan are pinned in think-kzwl. #1055 source verified against its manifest and triaged.
 
 21 November 15:15 UTC. Recovered Hyukdong Kim's CC0 n297 exact configuration on #804, the previously inaccessible cheaper Route B for T-247 (think-vv1q). Both published hashes match: ZIP e08b5d0a64c5c68eed827ee7e323687929048a4cfea438bb77ef390bdd4147a7 (77,023 bytes), n297.minpoly.json e5c340b8af2ff75d01b9b414e32ef19d9c3d07ecce665c8fddad9c5952252826 (347,690 bytes). Source issuecomment-6397593690. Retained in the task's t247-route-b-recovery folder. No new geometry or certificate replay was needed. The recovered bytes match the author’s public copy already retained on main. T-247’s Route B passed both exact routes on 1 November and is recorded at V3/C3. T-299 superseded T-247 when adopted at 297. The old resolved-blocker alert on think-vv1q is about the optional, more expensive Route A, which remains over the cap and would raise no rung.
+
+### 21 November intake disposition
+
+- #1030 adopted the option D 172- and 199-square results. #1045 adopted T-334 at 228. #1047 registered Samanyu-dev’s T-335 at 109, and #1068 adopted it. #1070 registered T-336 at 305, and #1072 adopted it and superseded T-309. Each exact deployment passed before its outcome reply.
+- #1051 classified 139 lower-bound claims. #1059 retained a partial R1 review and #1073 retained bounded R2 C2 custody. Neither changed a proof rung. Keep full R1/R2 and #1050’s terminal replay open. R2’s full replay still needs the Linux compiler lane and reconciliation of its earlier compute receipts.
+- #1052’s four later claims stay open in think-rbyl. #1040’s attachment passed both exact feasibility routes. The recorded side is below the portable direct source’s first-contact contraction and below the retained exact side of T-193. Preserve the controls, arrangement comparison, independent Stage 4 review and registry admission as queued work in think-squj. The source and receipts are in the task’s durable external evidence directory.
+- Confirmed GitHub receipts and six manual source reads are in #1074, c7a5add7a8. The exact-main closing sweep checked 88 watched repositories and found 0 GitHub issues to triage, 0 Kingbird updates and 0 drawings owed regularization. Its 14 action rows are the existing stalled, resolved-blocker and follow-up queues. #959 and #997 have current acknowledgement replies and separate live import beads. The landing audit found 0 date differences in 336 registered results and 0 in house or source landings.
+- Preserve the older owner-held follow-ups and research children. The resumed pass reached its disposition through 17 merges, with the detailed sweep saved in the external intake evidence directory.
+
+Exact merged deployment c7a5add7a855cc08a1bf39f4196daf2a877598be passed its live verification in Certificate page run 44924808896, job 136911028125. Durable local evidence: /Volumes/spud-ext2/agent-evidence/squares-intake-20261121-01a1fb.
