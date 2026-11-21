@@ -33169,6 +33169,16 @@ issues:
         id: E-ozden-959-certificate-report
         status: reviewed
       beads: [think-ruu2, think-ikku, think-tj4o, think-71uq]
+    - url: https://github.com/jlevy/squares/issues/959#issuecomment-7064401822
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n179-band-second
+        id: T-294
+        status: confirmed
+        position: current
+      beads: [think-esp4]
     close_when: >-
       T-294 is on main at V3/C3 as the house at 179, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -36068,6 +36078,16 @@ issues:
       - result: n90-local-search
         id: E-de-winter-997-review-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/997#issuecomment-7064402262
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n90-local-search
+        id: T-304
+        status: confirmed
+        position: current
+      beads: [think-zsei]
     close_when: >-
       T-304 is on main with its stage 4 review mapped and adopted as the house at 90, and the
       reply on main says what was retained and replayed, what the review found and that the case
@@ -38990,6 +39010,12 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7064402590
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
+      beads: [think-6ul3, think-guls]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file

@@ -3228,7 +3228,7 @@ sources:
     - 322
     - 323
     - 324
-  reviewed: '2026-10-24'
+  reviewed: '2026-11-21'
   source_date: '2026-09-29'
   disposition: current-report
   replay_disposition: case-specific
@@ -3252,6 +3252,9 @@ sources:
     evidence cites (think-g6d5). Read again on 2026-10-24 (think-mdfr): the abstract page's
     submission history and the arXiv API both list only v1, submitted 2026-09-29T12:44:05Z, so
     there is no later version.
+    Read again on 2026-11-21: the arXiv abstract page's submission history still lists
+    only v1, submitted 2026-09-29T12:44:05Z. This read checked version metadata; the paper
+    was not re-read.
 - id: chelokot-nagamochi-counterexample-2026-09-05
   title: 'chelokot''s counterexample to Nagamochi''s Lemma 1 and Lean proof of s(k^2 - 2) = k'
   role: source-repository
@@ -3365,7 +3368,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-24'
+  reviewed: '2026-11-21'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -3397,7 +3400,10 @@ sources:
     datePublished 2026-07-29, and data/results.json are byte-identical to the retained copies
     (SHA-256 4cc4d80d... and dd7c1c62...), so there is no later release.
 
-    '
+    Read again on 2026-11-21: the page and data/results.json are byte-identical to the
+    retained results.html and results.json (SHA-256 4cc4d80d... and dd7c1c62...). The page
+    still names Release 1, published 29 July 2026, and the JSON still reports the same six
+    counts.'
 - id: schadt-n29-2025
   title: Squares-packing S(29) — New Record
   role: source-repository
@@ -3478,7 +3484,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-24'
+  reviewed: '2026-11-21'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -3516,7 +3522,12 @@ sources:
     campaign/issue-intake/intake-20261018/manual-source-receipt.json. Read again on 2026-10-24
     (think-mdfr): the comment still carries its 2026-10-07T18:33:04Z edit, issue 401 is still
     closed with its six comments, the last of 2026-10-07T22:54:51Z, and its only events since
-    are other issues referencing it, so nothing changed.'
+    are other issues referencing it, so nothing changed.
+
+    Read again on 2026-11-21: update comment 6043191866 still carries its
+    2026-10-07T18:33:04Z edit. Issue 401 remains closed with six comments, the last of
+    2026-10-07T22:54:51Z. This was a source-comment read; the certificate was not
+    downloaded or replayed.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository
@@ -8789,7 +8800,7 @@ sources:
     - 996
     - 997
     - 998
-  reviewed: '2026-10-21'
+  reviewed: '2026-11-21'
   source_date: '2026-10-19'
   disposition: current-report
   replay_disposition: case-specific
@@ -8819,6 +8830,12 @@ sources:
     so 9 of these rows name the report that beat each first: Couzo's 5a299b4 of 20 October,
     public on 21 October (couzo-reconcile-2026-10-20) at 9 counts: 453, 649, 810, 812, 933, 934,
     990, 991 and 997.
+    Read again on 2026-11-21: the issue body matches the retained acquisition record; both
+    attachment URLs and the declared SHA-256 are unchanged. Issue 686 remains open with
+    six comments: the latest author reply is the licence grant of 2026-10-20T21:38:52Z,
+    and the latest comment is the owner reply of 2026-10-23T02:25:22Z. The later owner
+    replies are already represented in campaign/result-requests.yaml. The archive bytes
+    were not fetched again.
   claims_record: resources/web/muglich-issue686-2026-10-19/acquisition/beyond-horizon-claims.json
 - id: couzo-issue715-2026-10-21
   title: Francisco Couzo's 109 exact certificates at 6b7391de, issue 715
@@ -11796,7 +11813,7 @@ sources:
   source_key: '[Kim exact forms 2026-10-25]'
   scope:
     n_values: [88, 126, 172, 199, 263]
-  reviewed: '2026-11-02'
+  reviewed: '2026-11-21'
   source_date: '2026-10-25'
   disposition: current-report
   replay_disposition: case-specific
@@ -11828,6 +11845,13 @@ sources:
     retained files byte for byte (E-hyukdongkim-804-configurations-exact-feasibility and
     E-hyukdongkim-804-configurations-verify-exact). The author's comment of 07:22:16Z
     concedes 88, 126 and 199 to issue 639. The case records are unchanged until adoption.
+    Read again on 2026-11-21: the issue body matches the retained acquisition record,
+    including the attachment URL and declared SHA-256. Issue 804 is closed with thirteen
+    comments; the latest author reply remains that of 2026-10-31T13:27:28Z. The author's
+    square-packing-exact-sides mirror still heads at
+    f480441e73824668fb18779151369e4d3ba6179a. The owner reply of 2026-11-14T15:56:07Z is
+    already represented in campaign/result-requests.yaml. The attachments were not fetched
+    again.
 - id: hyukdongkim-s297-2026-10-25
   title: Hyukdong Kim's exact degree-21 side at 297 in two issue 804 comments
   role: first-party-release
@@ -11836,7 +11860,7 @@ sources:
   source_key: '[Kim s297 2026-10-25]'
   scope:
     n_values: [297]
-  reviewed: '2026-11-01'
+  reviewed: '2026-11-21'
   source_date: '2026-10-25'
   disposition: current-report
   replay_disposition: case-specific
@@ -11861,6 +11885,12 @@ sources:
     with four mutated controls refused (E-hyukdongkim-804-s297-verify-exact), which puts
     T-247 at V3/C3; its exact_verify route is think-ozx8's. The case record is unchanged
     until adoption.
+    Read again on 2026-11-21: comments 6397363927 and 6397593690 match the retained
+    acquisition text and retain their 2026-10-25T12:00:41Z and 2026-10-25T12:23:57Z
+    timestamps. The configuration attachment URL and declared SHA-256 are unchanged, and
+    the author's mirror still heads at f480441e73824668fb18779151369e4d3ba6179a. Issue
+    804's latest owner reply, of 2026-11-14T15:56:07Z, is already represented in
+    campaign/result-requests.yaml. This read did not fetch or replay the configuration.
 - id: jatloe-n12-lean-2026-10-16
   title: Jatloe12SquaresFormalized, a Lean 4 proof that s(12) = 4
   role: source-repository
