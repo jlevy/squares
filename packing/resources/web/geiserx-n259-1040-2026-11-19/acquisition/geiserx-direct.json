@@ -1,0 +1,14 @@
+{
+  "upstream": "GeiserX/squares-in-squares",
+  "revision": "f822b34456b29addec9b59478aac4eb2306f7566",
+  "path": "data/submission-best.csv.gz",
+  "compressed_sha256": "c490841279b793a963129680483a21b075fb55e8e26c24d37901c0655c704989",
+  "csv_sha256": "1378c9fd83966c98e4273fa9b9685ea6270802d81a9d0d890255068369714332",
+  "compressed_bytes": 7437306,
+  "extraction": "preserve original header and raw n=259 rows, in source order",
+  "subset": "geiserx-n259.csv",
+  "subset_sha256": "89595f52e350c2025906f1f1e06baf64c26f10af6f999f043ef171445369f659",
+  "subset_bytes": 18788,
+  "rows": 259,
+  "retained_as": "derived/geiserx-n259.csv.gz"
+}
