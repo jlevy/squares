@@ -1,0 +1,52 @@
+{
+  "n": 68,
+  "source_file": "3cfdc3132c70bff37478_measure.json.gz",
+  "source_origin": "inputs/first/integer/n68_8535_q/k480.json.gz",
+  "protected": [
+    {
+      "label": "SquareMath reported_lower_bound",
+      "kind": "rational",
+      "value": "853/100",
+      "source": "https://squaremath.org/cases/68.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "SquareMath verified_lower_bound",
+      "kind": "rational",
+      "value": "853/100",
+      "source": "https://squaremath.org/cases/68.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "Prior comparison enclosure",
+      "kind": "rational",
+      "value": "1707/200",
+      "source": "lower-bounds-56.zip, attribution/strongest_prior_lower.json"
+    },
+    {
+      "label": "Earlier search exact lower bound",
+      "kind": "rational",
+      "value": "1707/200",
+      "source": "integer/n68_8535_q"
+    },
+    {
+      "label": "Submitted issue 1039",
+      "kind": "rational",
+      "value": "6373776586372330350857635931915289936147198230357141902255514772519753174963939888372353864276104569325964688880579558713594695927749031150771765700062326539889572140411248112365070497776726144549901983858051761559696629691787853808401909612624700944425093/746420390879704237560680519658399266874301834240077753846117099958818881749021256886469866996985786110777682205776661312672564545961087444133317131810663937670922477827471924247080209364981786876426475074745567022967400692656694566916094722046648747942007",
+      "source": "https://github.com/jlevy/squares/issues/1039"
+    },
+    {
+      "label": "Earlier four-hour search",
+      "kind": "rational",
+      "value": "1707/200",
+      "source": "squaremath_four_hour_20261118.zip, integer/n68_8535_q"
+    },
+    {
+      "label": "Hosono original formula, all 34 families",
+      "value": "83936379086300563499/10000000000000000000",
+      "kind": "rational",
+      "source": "https://squaremath.org/result/t-180.html",
+      "detail": "Upper endpoint of the original formula with outward 19-place square-root arithmetic"
+    }
+  ]
+}

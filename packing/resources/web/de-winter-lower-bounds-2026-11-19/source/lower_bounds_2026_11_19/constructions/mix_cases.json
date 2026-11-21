@@ -1,0 +1,316 @@
+[
+  {
+    "n": 109,
+    "side": "10703/1000",
+    "source_side": "10703/1000",
+    "output_file": "f1bf17515b09732f4e7d_measure.json.gz",
+    "quantized": true,
+    "sources": [
+      {
+        "source_n": 109,
+        "j": 0,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 87676731,
+        "input_file": "6a70ddebb767860e_original.json.gz",
+        "input_sha256": "6a70ddebb767860e990382358f4defc8e4a7d6e0735a737d253047b18d2437d8",
+        "input_origin": "inputs/otherlower/rectangles/evidence/subnet_109_fit025_n109_fit030_uniform/measure.json.gz"
+      },
+      {
+        "source_n": 89,
+        "j": 1,
+        "word": "asym",
+        "loc": "1.6",
+        "warp": 0,
+        "units": 12323269,
+        "input_file": "b556d00125b6be02_original.json.gz",
+        "input_sha256": "b556d00125b6be028bcebc5cea63e538c1e8ba426e50817e3a873fe4ceb794a4",
+        "input_origin": "inputs/first/integer/n89_969_expanded/k675.json.gz"
+      }
+    ]
+  },
+  {
+    "n": 114,
+    "side": "87/8",
+    "source_side": "87/8",
+    "output_file": "48366f80075982536186_measure.json.gz",
+    "quantized": true,
+    "sources": [
+      {
+        "source_n": 92,
+        "j": 1,
+        "word": "middle",
+        "loc": "0",
+        "warp": 1,
+        "units": 9184590,
+        "input_file": "51f6820cc99be79b_original.json.gz",
+        "input_sha256": "51f6820cc99be79b982669f11a5adccdce7f5294a11b1348b4e8b5a5ff08f8ec",
+        "input_origin": "inputs/first/lower/n92/measure.json.gz"
+      },
+      {
+        "source_n": 93,
+        "j": 1,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 73911664,
+        "input_file": "e4e4a7e26b6668c3_original.json.gz",
+        "input_sha256": "e4e4a7e26b6668c3bfcaf601fb45e8bd0c97ca7ce83ee378b1451d234ef557e4",
+        "input_origin": "inputs/first/lower/n93/measure.json.gz"
+      },
+      {
+        "source_n": 74,
+        "j": 2,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 16903746,
+        "input_file": "c47507fedc15b8a3_original.json.gz",
+        "input_sha256": "c47507fedc15b8a38cf0e869aa59d8d64565ac0311418803a71016bb4b06467c",
+        "input_origin": "inputs/first/integer/n74_88725_q/k480.json.gz"
+      }
+    ]
+  },
+  {
+    "n": 115,
+    "side": "87/8",
+    "source_side": "87/8",
+    "output_file": "31148327967e39978d6c_measure.json.gz",
+    "quantized": true,
+    "sources": [
+      {
+        "source_n": 74,
+        "j": 2,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 21045448,
+        "input_file": "1a0bf827c718e4c4_original.json.gz",
+        "input_sha256": "1a0bf827c718e4c49a1eefa6bf7a877c6376a2396dfb977d6c8e46532ff88ea5",
+        "input_origin": "inputs/first/lower/n74/measure.json.gz"
+      },
+      {
+        "source_n": 92,
+        "j": 1,
+        "word": "asym",
+        "loc": "2.3",
+        "warp": 0,
+        "units": 3777258,
+        "input_file": "51f6820cc99be79b_original.json.gz",
+        "input_sha256": "51f6820cc99be79b982669f11a5adccdce7f5294a11b1348b4e8b5a5ff08f8ec",
+        "input_origin": "inputs/first/lower/n92/measure.json.gz"
+      },
+      {
+        "source_n": 93,
+        "j": 1,
+        "word": "middle",
+        "loc": "0",
+        "warp": 1,
+        "units": 75177294,
+        "input_file": "e4e4a7e26b6668c3_original.json.gz",
+        "input_sha256": "e4e4a7e26b6668c3bfcaf601fb45e8bd0c97ca7ce83ee378b1451d234ef557e4",
+        "input_origin": "inputs/first/lower/n93/measure.json.gz"
+      }
+    ]
+  },
+  {
+    "n": 130,
+    "side": "11491/1000",
+    "source_side": "11491/1000",
+    "output_file": "8f9d036bc8a85db3f877_measure.json.gz",
+    "quantized": true,
+    "sources": [
+      {
+        "source_n": 105,
+        "j": 1,
+        "word": "asym",
+        "loc": "2.3",
+        "warp": 1,
+        "units": 27881767,
+        "input_file": "b04482a1daf3be90_original.json.gz",
+        "input_sha256": "b04482a1daf3be90fb028cef460226e2f28c2f8a7c420a64181dbd4421d8a166",
+        "input_origin": "inputs/first/integer/n105_1049_q/k720.json.gz"
+      },
+      {
+        "source_n": 86,
+        "j": 2,
+        "word": "middle",
+        "loc": "0",
+        "warp": 1,
+        "units": 17448336,
+        "input_file": "e1ed07e30426ed7e_original.json.gz",
+        "input_sha256": "e1ed07e30426ed7effe58eccdb34c4ea069f7ed209926be2c129fa8557b6ca67",
+        "input_origin": "inputs/first/lower/n86/measure.json.gz"
+      },
+      {
+        "source_n": 105,
+        "j": 1,
+        "word": "middle",
+        "loc": "0",
+        "warp": 1,
+        "units": 54669897,
+        "input_file": "b04482a1daf3be90_original.json.gz",
+        "input_sha256": "b04482a1daf3be90fb028cef460226e2f28c2f8a7c420a64181dbd4421d8a166",
+        "input_origin": "inputs/first/integer/n105_1049_q/k720.json.gz"
+      }
+    ]
+  },
+  {
+    "n": 131,
+    "side": "11551/1000",
+    "source_side": "11551/1000",
+    "output_file": "f399cda6e58a5e32f810_measure.json.gz",
+    "quantized": true,
+    "sources": [
+      {
+        "source_n": 106,
+        "j": 1,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 51291519,
+        "input_file": "149b06892b9e3898_original.json.gz",
+        "input_sha256": "149b06892b9e3898bff395e75da9e12a432534b4076ccb826cfec5b544d5a9ab",
+        "input_origin": "inputs/otherlower/rectangles/evidence/ladder_massladder_from107_to106_L10.527000_uniform/measure.json.gz"
+      },
+      {
+        "source_n": 87,
+        "j": 2,
+        "word": "asym",
+        "loc": "2.3",
+        "warp": 0,
+        "units": 3704884,
+        "input_file": "0ecb77e2bfb1ea05_original.json.gz",
+        "input_sha256": "0ecb77e2bfb1ea05846a0f346161982524ef04b19b778bb6b504dc3e2aaf66c7",
+        "input_origin": "inputs/first/integer/n87_9585_expanded/k675.json.gz"
+      },
+      {
+        "source_n": 107,
+        "j": 1,
+        "word": "asym",
+        "loc": "2.3",
+        "warp": 0,
+        "units": 45003597,
+        "input_file": "c745f28a1f9adcc8_original.json.gz",
+        "input_sha256": "c745f28a1f9adcc83d3295c0028ac450b095ffd1ebf8021eeaa675d8d2580031",
+        "input_origin": "inputs/first/lower/n107/measure.json.gz"
+      }
+    ]
+  },
+  {
+    "n": 134,
+    "side": "2339/200",
+    "source_side": "2339/200",
+    "output_file": "f25af8309a9fce658a14_measure.json.gz",
+    "quantized": true,
+    "sources": [
+      {
+        "source_n": 89,
+        "j": 2,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 23030766,
+        "input_file": "0f1f2c60ce17ac30_original.json.gz",
+        "input_sha256": "0f1f2c60ce17ac308bb3cec6c3f0f330d993eaff0eaa6ffb2df44e4ab443be49",
+        "input_origin": "inputs/first/lower/n89/measure.json.gz"
+      },
+      {
+        "source_n": 109,
+        "j": 1,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 76969234,
+        "input_file": "78ee3d2f9d31b8db_original.json.gz",
+        "input_sha256": "78ee3d2f9d31b8dbe98eec394734ad3cc82ac8757ebd65b886d24628fb911024",
+        "input_origin": "inputs/otherlower/rectangles/evidence/combined_core_n109_n109_L10.70_r800_fit030_49999d50000_base/measure.json.gz"
+      }
+    ]
+  },
+  {
+    "n": 135,
+    "side": "11747/1000",
+    "source_side": "11747/1000",
+    "output_file": "8bcfe340ba03f5a0d8dd_measure.json.gz",
+    "quantized": true,
+    "sources": [
+      {
+        "source_n": 112,
+        "j": 1,
+        "word": "middle",
+        "loc": "0",
+        "warp": 1,
+        "units": 43816770,
+        "input_file": "7a3918f0ee482a09_original.json.gz",
+        "input_sha256": "7a3918f0ee482a0948881cc20697c798dd8c847f372d8dc9ffe97923e12fbcd9",
+        "input_origin": "inputs/otherlower/rectangles/evidence/independent_n112/measure.json.gz"
+      },
+      {
+        "source_n": 110,
+        "j": 1,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 24648413,
+        "input_file": "81d8ef4ff622c251_original.json.gz",
+        "input_sha256": "81d8ef4ff622c25125f63dd8dc370c02391c7765f9d06ae401bd0c878acdac4c",
+        "input_origin": "inputs/first/lower/n110/measure.json.gz"
+      },
+      {
+        "source_n": 90,
+        "j": 2,
+        "word": "asym",
+        "loc": "2.3",
+        "warp": 1,
+        "units": 31534817,
+        "input_file": "3c130d5fbf5f87cf_original.json.gz",
+        "input_sha256": "3c130d5fbf5f87cfee4a2814a75c73b5a774ec13fb4442790fe1a7ac9eb0aae7",
+        "input_origin": "inputs/first/lower/n90/measure.json.gz"
+      }
+    ]
+  },
+  {
+    "n": 137,
+    "side": "1478/125",
+    "source_side": "1478/125",
+    "output_file": "f29e384ccfd9e1e13a1c_measure.json.gz",
+    "quantized": true,
+    "sources": [
+      {
+        "source_n": 73,
+        "j": 3,
+        "word": "middle",
+        "loc": "0",
+        "warp": 0,
+        "units": 59652415,
+        "input_file": "417128b353e72db7_original.json.gz",
+        "input_sha256": "417128b353e72db74248ac194e3c7003d85766dd27fa8ae18d6c24d1426fe95d",
+        "input_origin": "inputs/first/integer/n73_8818_q/k480.json.gz"
+      },
+      {
+        "source_n": 92,
+        "j": 2,
+        "word": "asym",
+        "loc": "1.6",
+        "warp": 0,
+        "units": 12998500,
+        "input_file": "51f6820cc99be79b_original.json.gz",
+        "input_sha256": "51f6820cc99be79b982669f11a5adccdce7f5294a11b1348b4e8b5a5ff08f8ec",
+        "input_origin": "inputs/first/lower/n92/measure.json.gz"
+      },
+      {
+        "source_n": 92,
+        "j": 2,
+        "word": "asym",
+        "loc": "2.3",
+        "warp": 0,
+        "units": 27349085,
+        "input_file": "51f6820cc99be79b_original.json.gz",
+        "input_sha256": "51f6820cc99be79b982669f11a5adccdce7f5294a11b1348b4e8b5a5ff08f8ec",
+        "input_origin": "inputs/first/lower/n92/measure.json.gz"
+      }
+    ]
+  }
+]

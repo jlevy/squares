@@ -1,0 +1,51 @@
+{
+ "n": 111,
+ "side": "10781/1000",
+ "kernel": "octagon-gram",
+ "native_sha256": "97ba749fb59c0fb967244c6969c7e30fd1746d409a193ce1b8231aff1d37022a",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "directions": 423,
+ "nodes": 11248217,
+ "source": "continuation/smoothed/n111_b7e75365fe45/measure.json.gz",
+ "source_sha256": "ac2fe99c48696b964357880948d06ef3c053f453b744b22a786ed20740b45534",
+ "warp": 0,
+ "levels": [
+  {
+   "K": 132,
+   "measure": "k132.json.gz",
+   "receipts": "k132_receipts.jsonl.gz",
+   "rectangles": 6944,
+   "rects_sha256": "c67295ae1b56c5d30e2e4e7d1e7665624fa48e136f2d78b5baefd4a3b26ad304",
+   "measure_sha256": "a8d690d896d65403cd410b948ef12ade9167fb4d66d92090536a3f5c533cde3a",
+   "receipts_sha256": "600a14bd0a577c22a8a4d0bd8fedfcdd10bae727ff7deaff9ace3d1e45ce849c"
+  },
+  {
+   "K": 396,
+   "measure": "k396.json.gz",
+   "receipts": "k396_receipts.jsonl.gz",
+   "rectangles": 6944,
+   "rects_sha256": "c67295ae1b56c5d30e2e4e7d1e7665624fa48e136f2d78b5baefd4a3b26ad304",
+   "measure_sha256": "1f8a5f22f8e9f6967fb588b93b477b2ee35c19b72c62a4bdcf8941c0afedbe3a",
+   "receipts_sha256": "94aeff7f0426d96efb0b9d6ea294a3b5811b90cfc739b473c051bfcbe0a9e051"
+  },
+  {
+   "K": 1188,
+   "measure": "k1188.json.gz",
+   "receipts": "k1188_receipts.jsonl.gz",
+   "rectangles": 6944,
+   "rects_sha256": "c67295ae1b56c5d30e2e4e7d1e7665624fa48e136f2d78b5baefd4a3b26ad304",
+   "measure_sha256": "f1f16c3ea07eb4028228e3d68bc14782d253e158be6d2def24d043eb9f9efc89",
+   "receipts_sha256": "584cb27fbbcd8b4e0f6e221ddd4e299da29ad36752fc3a576c82b548b38ce443"
+  },
+  {
+   "K": 3564,
+   "measure": "k3564.json.gz",
+   "receipts": "k3564_receipts.jsonl.gz",
+   "rectangles": 6944,
+   "rects_sha256": "c67295ae1b56c5d30e2e4e7d1e7665624fa48e136f2d78b5baefd4a3b26ad304",
+   "measure_sha256": "5e8d80f950b7f395f1ff6745cd2df21067dd12cb0602a7cd7f7588016f2b6f41",
+   "receipts_sha256": "1df39d7123aaf1056807b5b4c73cba53e4a781c3c0ca78fff6b3522c564e1e7c"
+  }
+ ],
+ "target_total_mass": "110999999/1000000"
+}

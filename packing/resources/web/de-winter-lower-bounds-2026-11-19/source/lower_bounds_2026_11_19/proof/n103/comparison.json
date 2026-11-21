@@ -1,0 +1,46 @@
+{
+  "n": 103,
+  "source_file": "39d379aa6cf18a87090e_measure.json.gz",
+  "source_origin": "inputs/first/integer/n103_mix_10305_a5/k160.json.gz",
+  "protected": [
+    {
+      "label": "SquareMath reported_lower_bound",
+      "kind": "rational",
+      "value": "257/25",
+      "source": "https://squaremath.org/cases/103.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "SquareMath verified_lower_bound",
+      "kind": "rational",
+      "value": "257/25",
+      "source": "https://squaremath.org/cases/103.html",
+      "detail": "Upper endpoint of exact comparator enclosure"
+    },
+    {
+      "label": "Prior comparison enclosure",
+      "kind": "rational",
+      "value": "2061/200",
+      "source": "lower-bounds-56.zip, attribution/strongest_prior_lower.json"
+    },
+    {
+      "label": "Earlier search exact lower bound",
+      "kind": "rational",
+      "value": "2061/200",
+      "source": "integer/n103_mix_10305_a5"
+    },
+    {
+      "label": "Earlier four-hour search",
+      "kind": "rational",
+      "value": "2061/200",
+      "source": "squaremath_four_hour_20261118.zip, integer/n103_mix_10305_a5"
+    },
+    {
+      "label": "Hosono original formula, all 34 families",
+      "value": "102217067959649204763/10000000000000000000",
+      "kind": "rational",
+      "source": "https://squaremath.org/result/t-180.html",
+      "detail": "Upper endpoint of the original formula with outward 19-place square-root arithmetic"
+    }
+  ]
+}

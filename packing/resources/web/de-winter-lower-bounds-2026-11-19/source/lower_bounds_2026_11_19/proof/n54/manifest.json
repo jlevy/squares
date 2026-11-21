@@ -1,0 +1,32 @@
+{
+ "n": 54,
+ "side": "768693/100000",
+ "kernel": "octagon",
+ "native_sha256": "372cb24b6f70fc9ea4d316bc10bbc6c46aed4f6d42eb81aebe91c471e6d1fad3",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "directions": 146,
+ "nodes": 1400078,
+ "source": "inputs/first/lower/n54/measure.json.gz",
+ "source_sha256": "39241ca0b17fe323bbaf72da968657779acd1a86e748561a057186f3d3f908a7",
+ "warp": 200,
+ "levels": [
+  {
+   "K": 120,
+   "measure": "k120.json.gz",
+   "receipts": "k120_receipts.jsonl.gz",
+   "rectangles": 2876,
+   "rects_sha256": "0cb8b8e7002611f1f782cfc78d5805858d03d588c4590aca9df3f5226ce323de",
+   "measure_sha256": "f71ce4f6be31e95c658c370da080d55de63afe0176809bf72a22ccd0a71ea360",
+   "receipts_sha256": "1a1b8b91e5ad983c9f085896718153e22f99e0fdb9d9ba50c3c4e2cd6aa05171"
+  },
+  {
+   "K": 360,
+   "measure": "k360.json.gz",
+   "receipts": "k360_receipts.jsonl.gz",
+   "rectangles": 2876,
+   "rects_sha256": "0cb8b8e7002611f1f782cfc78d5805858d03d588c4590aca9df3f5226ce323de",
+   "measure_sha256": "d6900adb8b2d2d690629209eaeda03d405f833f14039f413f75baf359eb5d120",
+   "receipts_sha256": "9cbd06c9d7b327a2ebb916efba5438c7c6de91ce42be2d530a01602720964c10"
+  }
+ ]
+}

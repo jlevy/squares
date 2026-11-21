@@ -1,0 +1,15 @@
+{
+  "n": 151,
+  "numerical_side": 12.822989799800983,
+  "reference": "(23 + sqrt(7)) / 2",
+  "numerical_gap": 0.0001141442686876104,
+  "case_url": "https://squaremath.org/cases/151.html",
+  "candidate_file": "pressure_151_8092.npz",
+  "starting_sources": [
+    "https://www.kaggle.com/datasets/prvsiyan/squares-verified-best-of-1105/versions/25",
+    "https://github.com/GeiserX/squares-in-squares"
+  ],
+  "attribution": "See upper/attribution in this archive and the per-size credits of the two public inputs.",
+  "starting_layout": "152-square packing with one tile removed, then relaxed numerically.",
+  "status": "Exploratory coordinates. The main results table contains the certified improvements."
+}

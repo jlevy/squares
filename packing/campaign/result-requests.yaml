@@ -38508,22 +38508,49 @@ issues:
       T-301 reached a view 9.66e-14 below this side on 15 November, held unregistered; by
       think-frl5 the claim keeps its status and the view stays a candidate (think-4z8z).
   - number: 1039
-    title: 'Raised lower bounds for 56 square counts, including s(112) ≥ 10.782475680330'
+    title: Raised lower bounds for 56 square counts, including s(112) ≥ 10.782475680330
     author: JoostdeWinter
     opened: '2026-11-19'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
-      De Winter reports 56 raised lower bounds using Hosono-style rectangle measures.
-      Report order, source retention and replay are tracked in #1051.
-    read_through: '2026-11-19T04:49:37Z'
-    results: []
+      Joost de Winter, after Hiroaki Hosono, asks for the registration of lower bounds at 56
+      counts from 19 to 148, 49 direct and 7 by monotonicity (102, 123-125, 146-148), each a
+      nonnegative rectangle, mixed or heterogeneous-core measure of mass below the count
+      whose cores capture mass one; the largest gain is at 112, 10.782475680330. The
+      attachment lower-bounds-56.zip is retained by digest in the de-winter-lower-bounds-2026-11-19
+      packet from JoostdeWinter/square-packing 21d944c, where it sits byte for byte. Triaged
+      on 20 November 2026 in lane c15-lower (think-fv42): every claim is above both lower
+      lanes of its case, and in report order 23 direct counts and the 7 consequences are
+      current, while #1041 and #1042 raise the other 26.
+    read_through: '2026-11-19T04:50:58Z'
+    results:
+    - key: n19-n148-lower-bounds
+      claim: >-
+        Lower bounds at 56 counts from 19 to 148 (exact_claims.csv in lower-bounds-56.zip,
+        SHA-256 9641ca15ac63213db22ad32854efb0bc0575d7c0beeb646fd6931f50ae183452), 49 direct
+        and 7 by monotonicity, from s(19) >= 4.827518289696 to s(145) >= 12.265486628825.
+      source: body
+      not_registered: >-
+        Triaged and retained on 20 November 2026; registration follows the replay plan of
+        think-fv42, which prices the certificate classes against the owner's cap.
+      queued: true
+      bead: think-fv42
     beads:
     - think-fv42
     answer_bead: think-fv42
     replies: []
-    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    close_when: >-
+      The bounds are triaged, retained, registered, replayed within the cap or held on
+      validation beads, and the reply on main says what was registered and what remains.
+    notes: >-
+      Read on 20 November 2026 from main 7a3b186a2e. The issue's own attachment comment
+      (04:50:58Z) links the zip; the session proxy refused that URL, and the bytes come
+      from followup/mass_reserve/lower-bounds-56.zip at 21d944c, whose SHA-256 is the one
+      the issue states. The source commit it names, e94e6ce, is not in the public
+      repository; the zip carries its raw commit objects in .source/. The report-order walk
+      is campaign/issue-intake/lower-bounds-de-winter-20261120/.
   - number: 1040
     title: GeiserX's public 259-square packing is below the register (pointer)
     author: JoostdeWinter
@@ -38587,12 +38614,29 @@ issues:
     opened: '2026-11-19'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
-      De Winter follows up #1039 with 34 raised lower bounds. Report order, source
-      retention and replay are tracked in #1051.
+      Joost de Winter, after Hiroaki Hosono, asks for the registration of 34 direct lower
+      bounds from 50 to 137, each an exact rational with its own rectangle measure and a
+      complete octagon-kernel coverage check, raising #1039 at 22 counts and adding 12; the
+      largest gain is s(114) >= 87/8. Its attachment was refused by the session proxy; the
+      34 certificates are retained from the top level of lower_bounds_2026_11_19 at
+      JoostdeWinter/square-packing 21d944c, whose lower_bounds.csv states the same 34
+      values. Triaged on 20 November 2026 in lane c15-lower (think-fv42): all 34 are above
+      the record, 105 and 111 stay current, and #1042 raises the other 32.
     read_through: '2026-11-19T12:05:56Z'
-    results: []
+    results:
+    - key: n50-n137-lower-bounds
+      claim: >-
+        Lower bounds at 34 counts from 50 to 137 (lower_bounds.csv and proof/nNNN/ of
+        lower_bounds_2026_11_19 at JoostdeWinter/square-packing 21d944c), from s(50) >=
+        1483/200 to s(137) >= 1478/125, with s(114) >= s(115)'s 87/8.
+      source: body
+      not_registered: >-
+        Triaged and retained on 20 November 2026; registration follows the replay plan of
+        think-fv42.
+      queued: true
+      bead: think-fv42
     beads:
     - think-fv42
     answer_bead: think-fv42
@@ -38602,21 +38646,70 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
-    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    close_when: >-
+      The bounds are triaged, retained, registered, replayed within the cap or held on
+      validation beads, and the reply on main says what was registered and what remains.
+    notes: >-
+      Read on 20 November 2026 from main 7a3b186a2e; no comment. The issue links the
+      attachment squaremath_continued_20261119.zip twice (files 35084690 and 35084723) and
+      states SHA-256 d8d0d6966f7ac7f9a69f24d578619ee2323a158e5c6c9c7e6be9039c401445df; both
+      URLs were refused, so that digest is not compared here, and the packet's bytes were
+      committed at 18:44:48Z, after the report. The issue does not claim the 67 corner bounds
+      or the 260 packing of the attachment.
   - number: 1042
-    title: 'Raised lower bounds for 48 square counts between 50 and 218, including s(136) ≥ 11.868'
+    title: Raised lower bounds for 48 square counts between 50 and 218, including s(136) ≥ 11.868
     author: JoostdeWinter
     opened: '2026-11-19'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
-      De Winter reports 48 raised lower bounds after #1039 and #1041. Report order, source
-      retention and replay are tracked in #1051.
-    read_through: '2026-11-19T18:45:38Z'
-    results: []
+      Joost de Winter, after Hiroaki Hosono, asks for the registration of 48 lower bounds
+      from 50 to 218 in lower_bounds_2026_11_19 at JoostdeWinter/square-packing 21d944c: 43
+      standalone octagon-kernel certificates, 137, 138 and 162 by four translated regions,
+      188, 189 and 218 by repeated central strips, and 217 by corner reweighting on a
+      periodic board; the largest gain is at 136, 11.868. A comment raises 161 to
+      8036307/625000. Triaged on 20 November 2026 in lane c15-lower (think-fv42): all 49 are
+      above the record and every one is current but the issue's own 161. A later comment
+      claims 155 counts from 18 to 313, an import of its own (think-4iec).
+    read_through: '2026-11-19T21:02:44Z'
+    results:
+    - key: n50-n218-lower-bounds
+      claim: >-
+        Lower bounds at 48 counts from 50 to 218 (CLAIM.md and followup/best_by_count.csv of
+        lower_bounds_2026_11_19 at 21d944c), from s(50) >= 7417/1000 to s(218) >= 7433/500.
+      source: body
+      not_registered: >-
+        Triaged and retained on 20 November 2026; registration follows the replay plan of
+        think-fv42.
+      queued: true
+      bead: think-fv42
+    - key: n161-four-region-follow-up
+      claim: >-
+        s(161) >= 8036307/625000 = 12.8580912, the 363-interval measure at side 12.858 of
+        followup/repeated/161--749858-12.858-100-uniform with a four-region transfer split at
+        18553/5000.
+      source: https://github.com/jlevy/squares/issues/1042#issuecomment-7020627554
+      not_registered: >-
+        Triaged on 20 November 2026; it is recorded after the issue's 161 in report order,
+        and registration follows the replay plan of think-fv42.
+      queued: true
+      bead: think-fv42
+    - key: n18-n313-public-replay
+      claim: >-
+        Lower bounds at 155 counts from 18 to 313 in the base85 archive of the comment
+        (squaremath_public_replay.zip, SHA-256
+        2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab), replayed against
+        lower_bounds_2026_11_19 at 21d944c; 61 rows are corner families that rely on T-180's
+        global coverage.
+      source: https://github.com/jlevy/squares/issues/1042#issuecomment-7022143149
+      not_registered: >-
+        Found in triage on 20 November 2026 and not triaged here; an import of its own.
+      queued: true
+      bead: think-4iec
     beads:
     - think-fv42
+    - think-4iec
     answer_bead: think-fv42
     replies:
     - url: https://github.com/jlevy/squares/issues/1042#issuecomment-7059934954
@@ -38624,7 +38717,16 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
-    close_when: The intake record gives the disposition and a reply records it on GitHub.
+    close_when: >-
+      The bounds and both follow-ups are triaged, retained, registered, replayed within the
+      cap or held on validation beads, and the reply on main says what was registered and
+      what remains.
+    notes: >-
+      Read on 20 November 2026 from main 7a3b186a2e. The issue names 21d944c (18:44:48Z),
+      50 seconds before it, the head when read. Three comments, all the author's: the 161
+      follow-up (19:59:12Z, edited 21:05:27Z); "OpenAI Codes should be 'GPT 6.2 Astra'"
+      (20:17:20Z), which the record reads as naming the model the folder's README calls
+      Codex; and the 155-count archive (21:02:44Z, edited 02:02:32Z on 20 November).
   - number: 1050
     title: 's(18) = (7+√7)/2: Mira Cult''s computer-assisted optimality proof (pointer, to import and review)'
     author: jlevy

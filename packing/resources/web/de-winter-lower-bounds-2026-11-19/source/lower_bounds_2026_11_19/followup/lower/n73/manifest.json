@@ -1,0 +1,52 @@
+{
+ "n": 73,
+ "side": "1104/125",
+ "kernel": "octagon-gram",
+ "native_sha256": "97ba749fb59c0fb967244c6969c7e30fd1746d409a193ce1b8231aff1d37022a",
+ "wrapper_sha256": "40e10cd13e6c14d5285fd20807791408f663fcd5b95055a1e39a8d64f2aa09e7",
+ "levels": [
+  {
+   "K": 100,
+   "measure": "k100.json.gz",
+   "receipts": "k100_receipts.jsonl.gz",
+   "rectangles": 3692,
+   "rects_sha256": "0365b80ee307a46f9d26ce53e837dee7c878cdec566a00142a2f636fe366a153",
+   "measure_sha256": "1630ecfbf929f2209ab4b5b7626387ff5ded4927810b67cf85f2dc3154a1166a",
+   "receipts_sha256": "f7a567fa6091dfb8957a5a7e6a62f189d58ce0fd83066f972065ae044f2d8cff"
+  },
+  {
+   "K": 300,
+   "measure": "k300.json.gz",
+   "receipts": "k300_receipts.jsonl.gz",
+   "rectangles": 3692,
+   "rects_sha256": "0365b80ee307a46f9d26ce53e837dee7c878cdec566a00142a2f636fe366a153",
+   "measure_sha256": "5429c9558d94bcc151a8a1c93943add6573f1c8d490242378e628c8dd25af87c",
+   "receipts_sha256": "bb4379806aaa04e8125d3dca4e717e5dfecf24c3592d9939c430ae837a2c59d1"
+  },
+  {
+   "K": 900,
+   "measure": "k900.json.gz",
+   "receipts": "k900_receipts.jsonl.gz",
+   "rectangles": 3692,
+   "rects_sha256": "0365b80ee307a46f9d26ce53e837dee7c878cdec566a00142a2f636fe366a153",
+   "measure_sha256": "73cc8f1498afc171d7b3d0860998a3a2a4313546c387af45fe3e411931e9ddb9",
+   "receipts_sha256": "b23a89663cf560a9d3b95a98a88e869745d2c2aebe240f410419fffb1cb7bd28"
+  },
+  {
+   "K": 2700,
+   "measure": "k2700.json.gz",
+   "receipts": "k2700_receipts.jsonl.gz",
+   "rectangles": 3692,
+   "rects_sha256": "0365b80ee307a46f9d26ce53e837dee7c878cdec566a00142a2f636fe366a153",
+   "measure_sha256": "8fd995290ba293939149be9981cc8534323f682b87687477d80d95b8ef23989f",
+   "receipts_sha256": "d33eac1461407da5b59fa35fba984318cae087b2046dbe25876d82baece8c4e0"
+  }
+ ],
+ "directions": 380,
+ "nodes": 7393178,
+ "target_total_mass": "72999999/1000000",
+ "source_n": 73,
+ "source_sha256": "b1aadb63248e6dd1e8601efa12f153b5d9e2647d236d3f9951908bc443761fe3",
+ "source_measure": "n73/k175.json.gz",
+ "mode": "uniform"
+}

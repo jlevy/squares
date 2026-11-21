@@ -362,6 +362,7 @@
     "packing/tests/test_lifted_q7_history.py": 0.291,
     "packing/tests/test_lint_floor_contract.py": 0.122,
     "packing/tests/test_log_rollup.py": 0.011,
+    "packing/tests/test_lower_bound_claims.py": 0.206,
     "packing/tests/test_math_loading.py": 0.376,
     "packing/tests/test_math_startup.py": 0.298,
     "packing/tests/test_measure_atlas_views.py": 0.03,
@@ -621,6 +622,7 @@
     "packing/tests/test_replay_h157_geometry.py": 6.792,
     "packing/tests/test_replay_n17_rational_upper.py": 0.003,
     "packing/tests/test_replay_owner_footprint_cover.py": 0.663,
+    "packing/tests/test_replay_rectangle_receipts.py": 0.033,
     "packing/tests/test_replay_tools.py": 2.17,
     "packing/tests/test_replay_weighted_atom_source.py": 0.577,
     "packing/tests/test_repo_links.py": 76.433,
@@ -1147,6 +1149,21 @@
           "report": "packing/devtools/suite-file-cost-admissions/option-d-restatements-contraction-layers-2026-11-18.json",
           "provenance": {},
           "tests": 13
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_lower_bound_claims.py",
+        "packing/tests/test_replay_rectangle_receipts.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/lower-receipts-2026-11-21.json",
+          "provenance": {},
+          "tests": 16
         }
       ]
     }
