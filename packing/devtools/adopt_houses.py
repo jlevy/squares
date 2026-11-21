@@ -239,6 +239,16 @@ REVIEW_1009 = (
     "count, stated beforehand as rules, were each decided as stated"
 )
 
+#: What the stage 4 review of issue 1038 (lane r1038, think-3ape) decided on its certificate,
+#: the clause the case record writes after the maintained routes.
+REVIEW_1038 = (
+    ", and the 20 November review’s clean-room checker, frozen before any producer, witness "
+    "or verifier code was read, decided it again by separating axes in integers from its "
+    "centres and unit bases and by exact clipping in GMP rationals from its corners over "
+    "every square, wall and pair; its 36 controls, stated beforehand as rules, were each "
+    "decided as stated"
+)
+
 REVIEW_1020 = (
     ", and the 18 November review of record’s clean-room checker, frozen before any producer, "
     "witness or verifier code was read, decided it again by separating axes in integers from "
@@ -3135,6 +3145,37 @@ RESULTS: dict[str, Prose] = {
         ),
         third_route=REVIEW_1009,
     ),
+    "T-334": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#1038](https://github.com/jlevy/squares/issues/1038)",
+        producer_route=True,
+        ai=(
+            "Issue 1038 says Doğa Özden’s lab converted and checked the packing with OpenAI "
+            "Codex, that the Kaggle notebook it comes from credits ChatGPT and Codex, and that "
+            "his AI agent, which uses the account kenaznia-doga, prepared and posted the issue "
+            "and the repository on his behalf."
+        ),
+        routes=(
+            "The first route, `sqpack`’s rational witness verifier, is the `packing-witness "
+            "verify` the source ran, so on that route the replay is reproduced with the "
+            "producer’s code; the independent rational corner checker shares no verification "
+            "code with it, and the review’s checker shares no code with either route or the "
+            "source."
+        ),
+        lineage=(
+            "Issue 1038 names jazivxt’s Kaggle notebook Boxed In Sub as the public source. "
+            "The Boxed In v63 compilation lists no finder at 228. Doğa Özden’s lab "
+            "converted the coordinates to exact rationals and applied a uniform clearance "
+            "factor 4.56 × 10⁻¹⁵ above one. Nearest centres pair the certificate one to "
+            "one with Roberto Ono’s T-301. The optimal assignment moves five squares "
+            "more than a tenth, at most 0.238. The gain is 1.2298 times T-301’s "
+            "contraction margin, so the bound is a new result under Option D. The "
+            "records leave the finder, publication order and any derivation between "
+            "the two public packings unresolved. Özden authors the exact certificate."
+        ),
+        third_route=REVIEW_1038,
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
     "T-315": Prose(
         author="Mykhailo Polkovskyi",
         reported="on [jlevy/squares#1009](https://github.com/jlevy/squares/issues/1009)",
@@ -4139,11 +4180,11 @@ CREDITS: dict[int, Credit] = {
     # 96 squares beyond a tenth. The issue asks that Couzo's packing be credited as the start,
     # so the phrase names it, as the 156 and 268 phrases name the packings their strip cuts
     # were taken from, and names the packing it is below, as the 179 and 269 phrases do.
+    # The pass of 21 November 2026 adopted T-334 from issue 1038 (think-91fu). The
+    # case names jazivxt's public snapshot and Özden's certificate. Finder and priority
+    # need evidence beyond the measured assignment to T-301.
     228: Credit(
-        (ONO,),
-        (),
-        "Roberto Ono’s packing from a band cut of Francisco Couzo’s n = 404 packing, below "
-        "Doğa Özden’s column-band packing",
+        (), (), "the packing in jazivxt’s public Kaggle submission as Doğa Özden certified it"
     ),
     # Evan Daniel's display regularization (T-225, adopted on 22 October 2026) of his own
     # issue-674 packing (T-199), polished to its exact side 1.91e-11 below #674's

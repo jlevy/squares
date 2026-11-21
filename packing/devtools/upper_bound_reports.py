@@ -1897,6 +1897,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # diagonal slices of Panoras's compilation's 372 and 335, at JoostdeWinter/square-packing
     # 497eb47.
     "[de Winter s299 upper bound 2026-11-18]": _import("de-winter-s299-upper-bound-2026-11-18"),
+    # The intake pass of 20 November (think-91fu): Doğa Özden's issue 1038 at 228, his exact
+    # centre-basis Witness/v2 of the public Kaggle snapshot published by jazivxt.
+    "[Özden s228 upper bound 2026-11-18]": _import("ozden-s228-upper-bound-2026-11-18"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

@@ -306,11 +306,15 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: optimum: separating and translating squares 16 and 88 against T-282's 84 and 86 at 172,
 #: and 17 and 95 against T-284's 85 and 92 at 199, so n=1..200 has 555 separating squares
 #: and 2,425 translating ones, and n=1..324 has 2,849 separating squares and 7,454 translating
-#: ones.
+#: ones. The same pass (think-91fu) moved 228 to Doğa Özden's certificate of issue 1038
+#: (T-334), whose public notebook is by jazivxt; its finder and order relative to T-301
+#: remain unresolved pending evidence. Separating and translating squares are 59 and 170
+#: against T-301's 76 and 110, so n=1..324 has 2,832 separating squares and 7,514 translating
+#: ones, in the same records.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 111, 86, 579),
     "n=1..200": (68, 555, 182, 2425),
-    "n=1..324": (126, 2849, 302, 7454),
+    "n=1..324": (126, 2832, 302, 7514),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

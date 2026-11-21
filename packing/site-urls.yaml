@@ -6443,7 +6443,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-15'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/229.html
   canonical: cases/229.html
@@ -26395,6 +26395,49 @@ urls:
     - packing/resources/web/de-winter-1031-review-2026-11-18/out/controls.json
     - packing/resources/web/de-winter-1031-review-2026-11-18/out/identity.json
     - packing/resources/web/de-winter-1031-review-2026-11-18/after-freeze/generic.json
+- path: result/t-334.html
+  canonical: result/t-334.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-20'
+  lastmod: '2026-11-20'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 228
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s228 upper bound 2026-11-18]'
+      published: '2026-11-18'
+    builds_on: null
+    evidence:
+    - E-ozden-1038-certificate-report
+    - E-ozden-1038-exact-feasibility
+    - E-ozden-1038-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/README.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/n-228-candidate.yaml
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/source/hit-228.txt
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/controls-plan-1038.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/identity.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228-own.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1038-20261120/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-20-ozden-1038.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/README.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/check-n228.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
 - path: results.html
   canonical: results.html
   kind: page

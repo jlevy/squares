@@ -1,0 +1,1 @@
+{"file": "results/public228/jazivxt/hit-228-exact.json", "sha256": "c149799d7d0efcd3c4c89ede54f836926b9e60098fc935df76b4c1f66478a2d9", "verdict": "VALID", "method": "independent exact Fraction SAT", "n": 228, "side_exact": "389901077915794162667528670804703057/25000000000000000000000000000000000", "nontrivial_pairs": 151}

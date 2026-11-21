@@ -1,0 +1,47 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/site_resources.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Intake lane i1038 and its 21 November UTC continuation (think-91fu) retain and replay
+  Doğa Özden's certificate from #1038. T-334 has the accepted independent review
+  #1044. It was registered on 20 November and the 21 November UTC adoption moves the
+  house at 228 from T-301. The case credits the certificate and its published snapshot
+  and leaves finder and publication order unresolved. This update includes the drawing
+  selection, atlas screen, source coverage and intake requests record.
+
+  On the integrated tree against main e87286443e, the guarded paper comparison used
+  devtools.compare_paper_renders and the installed Chrome math pass. Each paper was
+  rendered twice from the candidate and once with the twelve listed inputs from main.
+  After merging the request records from #1058, the survey was compared
+  again against main 305023c661. All 43 survey files remained byte-identical.
+  The optimality review, threshold-bound review and methods survey each produced 43
+  files byte-identical across the three renders. The explainer produced 55 files.
+  Its two candidate renders agree, and the only baseline difference is the live
+  register count from 333 to 334 in its Markdown and HTML. Replacing that count in
+  each makes it byte-identical to the baseline. The bound citation at n = 11 and the
+  novelty count are unchanged. The paper versions remain v0.4.35, v0.1.11, v0.1.4
+  and v0.2.7. This comparison rendered HTML and Markdown.

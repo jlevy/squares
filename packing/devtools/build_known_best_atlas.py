@@ -2820,12 +2820,17 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: the same pass), two new names, so the hold holds both there, and Özden no longer at 232,
 #: where no case record names him now. The pass of 20 November 2026 (think-zqot) adopts
 #: Joost de Winter's packing at 127 (T-330), crediting him alone there, a name the block
-#: already prints, so the hold holds Kodaj and JoeGun at the other four only.
+#: already prints, so the hold holds Kodaj and JoeGun at the other four only. The pass
+#: of 21 November 2026 (think-91fu) adopts T-334 at 228 with its finder and order relative
+#: to T-301 unresolved pending evidence; jazivxt's public notebook and Doğa Özden's
+#: certificate are named in prose. No finder or improver is asserted there, so the hold
+#: holds Özden alone as the certificate source author used by the poster's fallback.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(
         (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
     ),
-    **dict.fromkeys((147, 228), ("Roberto Ono",)),
+    147: ("Roberto Ono",),
+    228: ("Doğa Özden",),
     90: ("jazivxt",),
     **dict.fromkeys((204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
 }

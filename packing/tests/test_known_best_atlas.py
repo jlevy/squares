@@ -2682,13 +2682,18 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
     T-326), a name the block already prints, as is de Winter's at 262 and 292, so the hold
     is unchanged and holds Özden and Ono where they are still credited. Its adoption at 127
     (think-zqot) credits Joost de Winter alone there (T-330), a printed name, so the hold
-    holds Kodaj and JoeGun at 204, 232, 264 and 305 only."""
+    holds Kodaj and JoeGun at 204, 232, 264 and 305 only. The pass of 21 November 2026
+    (think-91fu) adopts T-334 at 228 with its finder and order relative to T-301 unresolved
+    pending evidence. Its prose names jazivxt's public notebook and Doğa Özden's certificate;
+    the hold holds Özden alone as the certificate source author used by the poster's
+    fallback."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
             (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
         ),
-        **dict.fromkeys((147, 228), ("Roberto Ono",)),
+        147: ("Roberto Ono",),
+        228: ("Doğa Özden",),
         90: ("jazivxt",),
         **dict.fromkeys((204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
     }
@@ -2702,7 +2707,7 @@ def test_print_credit_hold_keeps_ozden_off_the_poster_credits_alone(
         (199, ["Evan Daniel"], ["Doğa Özden", "Joost de Winter"]),
         (90, ["jazivxt"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
-        (228, ["Roberto Ono"], []),
+        (228, [], []),
         (127, ["Joost de Winter"], []),
         (204, ["Tomáš Kodaj"], ["JoeGun"]),
         (232, ["Tomáš Kodaj"], ["JoeGun"]),

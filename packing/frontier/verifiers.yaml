@@ -10032,3 +10032,65 @@ verifiers:
       rv1031_lineage.py, rv1031_measures.py, rv1031_synth.py, rv1031_price.py and the
       after-freeze rv1031_compare.py and rv1031_generic.py, kept beside it, decide no
       certificate's feasibility and are not registered.
+
+  - id: V-r1038-review-check
+    program: r1038_check.py with r1038_reader.py, r1038_sat.py, r1038_clip.py, r1038_geom.py and r1038_decide.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      The 20 November stage 4 review's exact checker of Doğa Özden's centre-basis Witness/v2
+      certificate of issue 1038 at 228, with a strict reader of its own (r1038_reader.py: one
+      YAML document of strings, integers, mappings and sequences, the envelope and witness
+      keys the schema lists, every scalar p or p/q, handed out as exact rationals): every
+      square a unit square, every wall and every pair with no distance filter, by separating
+      axes in Python integers from the centres and unit bases, each square written over one
+      denominator (r1038_sat.py, method A), and by exact Sutherland-Hodgman clipping in
+      gmpy2.mpq from corners it builds itself, each square a unit square by its sides and
+      diagonals, containment and walls by the clipped area (r1038_clip.py, method B);
+      r1038_decide.py runs both and requires their classes to agree, and r1038_check.py adds
+      the file's digest and the claim's 12-place arithmetic. r1038_controls.py decides 36
+      controls stated as rules in a plan hashed before any program read the certificate;
+      r1038_selftest.py holds both methods and the reader to 36,910 checks.
+    source:
+      - packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_check.py
+      - packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_reader.py
+      - packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_sat.py
+      - packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_clip.py
+      - packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_geom.py
+      - packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_decide.py
+      - packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_selftest.py
+      - packing/resources/web/ozden-s228-1038-review-2026-11-20/programs/r1038_controls.py
+    independence_record: docs/project/reviews/review-2026-11-20-ozden-1038.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 mathematical review lane of issue 1038 (r1038, under think-3ape),
+            strongest tier (tbd-strong-max) at maximum reasoning, prompted separately from
+            the import lane (i1038, think-91fu)
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1038 says the conversion and checks were done by Özden's lab with OpenAI
+          Codex. The checker was written from the mathematics, the Witness/v2 schema text and
+          the file, and frozen at 2026-11-20T08:32:15Z (frozen/checker-frozen-digests.txt),
+          before its author read the source's README, sqcheck.py, outputs or checks, or this
+          repository's witness, verifier, promotion, identity or contraction code; it imports
+          nothing from this repository or the source and reuses no code of any earlier
+          review, lane L186's, the model for its method, among them, whose programs it did
+          not open.
+    note: >-
+      Written and run on 20 November 2026 for
+      docs/project/reviews/review-2026-11-20-ozden-1038.md, and kept with its receipts in the
+      review-only directory ozden-s228-1038-review-2026-11-20 beside the import lane's
+      packet. r1038_describe.py and r1038_sides.py, kept beside them, decide no certificate
+      and are not registered.

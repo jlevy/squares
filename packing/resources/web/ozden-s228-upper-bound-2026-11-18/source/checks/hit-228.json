@@ -1,0 +1,66 @@
+{
+  "classification": "public coordinate recovery candidate",
+  "n": 228,
+  "source": {
+    "url": "https://www.kaggle.com/code/jazivxt/boxed-in-sub?scriptVersionId=370961355",
+    "dataset": "https://www.kaggle.com/datasets/jazivxt/boxed-in/versions/63",
+    "container_sha256": "0402785862f3fd4c0ecef4e48474f742a615d67b2ee28af630c4b71c6462821a",
+    "run_version": 370961355,
+    "source_dataset_version_id": 22369356,
+    "credit": "jazivxt (Kaggle Boxed In Sub / Boxed In dataset)",
+    "upstream_AI": "The pinned notebook credits ChatGPT and Codex in its submission overview.",
+    "license": "Apache 2.0 as declared on Boxed In v63. License text bundled.",
+    "attribution": "The published notebook copies the dataset submission.csv; the notebook supplies no per-count attribution.",
+    "slice": "jazivxt.csv",
+    "slice_sha256": "926c316681a48a3757981e6cd55fe8d88558cdc2419068a0c01a5821f49411d5",
+    "rows": 228
+  },
+  "pose": "hit-228.txt",
+  "pose_sha256": "f8db9d10f857fbaa6d39e771dba7fe2b649ce34ded27d78ca84a4a421a0de963",
+  "side": "15.59604311663169366961883788654900048213176353153",
+  "metrics": {
+    "side": "15.59604311663169366961883788654900048213176353153",
+    "spans": [
+      "15.59604311663169366961883788654900048213176353153",
+      "15.59604311663169366961883788654900048213176342311"
+    ],
+    "max_overlap": "0.0",
+    "close_pairs": 151
+  },
+  "comparison": {
+    "registry": "87826822442666945966724255742265945059258773453367852692507450271949865753506031747972123/5631352886223723345791082178378603613520748160915501042314589423455766194455456702791680",
+    "side_only": "15.59604311663166991962735384207686132467904538537536"
+  },
+  "method": "Public centers preserved up to rational conversion and uniform clearance dilation.",
+  "AI": "Audit directed by Do\u011fa \u00d6zden with OpenAI Codex assistance; donor provenance stays with source.",
+  "donor_and_license_trace_required": true,
+  "exact_pose": "hit-228-exact.json",
+  "exact_sha256": "c149799d7d0efcd3c4c89ede54f836926b9e60098fc935df76b4c1f66478a2d9",
+  "exact_side": "389901077915794162667528670804703057/25000000000000000000000000000000000",
+  "factor": "2500000000000011391221/2500000000000000000000",
+  "check_exits": {
+    "sqcheck": 0,
+    "independent": 0
+  },
+  "exact_below": {
+    "registry": true,
+    "side_only": false
+  },
+  "pose_angle_unit": "radians",
+  "aligned_with_registry": {
+    "transform": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "max_center": 0.23337738207872066,
+    "rms_center": 0.03676545578591252,
+    "moved_gt_1e-3": 228,
+    "max_angle_rad": 0.03414132915810009
+  }
+}

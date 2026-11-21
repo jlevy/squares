@@ -1,0 +1,73 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-20T08:14Z",
+  "git_scope": "A full clone of kenaznia-doga/s228-upper-bound-1559604311, fetched at 08:14Z on 20 November 2026 for the intake of jlevy/squares#1038 (lane i1038, bead think-91fu); the repository holds one commit, 46ab8bf (committed 2026-11-18T23:08:45Z, 's(228) <= 15.596043116632: exact certificate of jazivxt's public Kaggle packing (credit, provenance, checks)', the author's message), 23 seconds before the issue, of 28 files, and the scope is the whole tree. #1038 names this commit. The SHA-256 the issue and the README state for n-228-candidate.yaml, 1b816e2e...3387, matches the file. verifier/README.md is byte-identical to the copy the ozden-s299-upper-bound-2026-11-03 packet retains and is pinned against it; verifier/sqcheck.py is byte-identical to the copy the ozden-s232-upper-bound-2026-11-09 packet retains and is pinned against it; LICENSE.md is byte-identical to the one the lab's earlier packets retain. The Kaggle notebook and dataset the source names (jazivxt's Boxed In Sub, run 370961355, and Boxed In v63) were not read: www.kaggle.com is refused by this session's network proxy (CONNECT 403 at 08:21Z on 20 November 2026), so jazivxt's decimal slice is retained only as the source holds it, source/hit-228.txt, and its dates and licence only as the source states them. GitHub's activity log was not readable from this session, so the push time is not read. No source program ran in writing this packet.",
+  "sources": [
+    {
+      "id": "ozden-s228-upper-bound-2026-11-18",
+      "source_url": "https://github.com/kenaznia-doga/s228-upper-bound-1559604311",
+      "source_ref": "main",
+      "source_commit": "46ab8bf425f5cad886a8bc4023bfff904f43af99",
+      "committed_utc": "2026-11-18T23:08:45Z",
+      "git_tree": "15d47929511d7302e441f0f7324b7ec5c1e95e0d",
+      "archived_path": "packing/resources/web/ozden-s228-upper-bound-2026-11-18/source",
+      "subtree_manifest": "packing/resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE.md",
+        "PROVENANCE.json",
+        "README.md",
+        "checks",
+        "n-228-candidate.yaml",
+        "n228-witness.json",
+        "records",
+        "source",
+        "sqcheck-228.txt",
+        "verifier",
+        "verify-228.txt"
+      ],
+      "subtree_file_count": 28,
+      "subtree_total_bytes": 703927,
+      "retained_file_count": 24,
+      "retained_total_bytes": 352082,
+      "compressed": [
+        "source/checks/source-exact-as-produced.json.gz",
+        "source/n228-witness.json.gz",
+        "source/source/geiserx-rounded/hit-228-exact.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "records/n-228-candidate-diff.png",
+          "bytes": 254685,
+          "sha256": "c848e8fc621f9cf77818f6306ce82bd610463783bee0030230a5ac1e157e7cdb",
+          "reason": "A raster comparison of the candidate with the registry packing, which decides nothing; pinned by digest only, as the lab's earlier packets pin theirs."
+        },
+        {
+          "path": "records/n-228-candidate-diff.svg",
+          "bytes": 76065,
+          "sha256": "b3036c6e1278ff632c63c065bc20d38ebae4ec6ac855259f40e743c6d18380b9",
+          "reason": "The same comparison as a vector drawing, which decides nothing; pinned by digest only, as its raster twin is."
+        },
+        {
+          "path": "verifier/README.md",
+          "bytes": 3441,
+          "sha256": "596a5988a54715a6537dfa71a0c0f34c556d9c5dbfcd7d4d30ecddc4eb7766ce",
+          "reason": "The README of the author's exact checker, byte-identical to the copy the ozden-s299-upper-bound-2026-11-03 packet retains.",
+          "identical_to": "packing/resources/web/ozden-s299-upper-bound-2026-11-03/source/verifier/README.md"
+        },
+        {
+          "path": "verifier/sqcheck.py",
+          "bytes": 17654,
+          "sha256": "1d46b27c11d9a95d8e979ee691983e24b3a7b062d8306fcf7c284097bb479979",
+          "reason": "The author's exact checker, the source says written separately from this repository's code; byte-identical to the copy the ozden-s232-upper-bound-2026-11-09 packet retains, and never executed here.",
+          "identical_to": "packing/resources/web/ozden-s232-upper-bound-2026-11-09/source/verifier/sqcheck.py"
+        }
+      ],
+      "license": "CC BY 4.0 for the witness, the JSON, the check reports and outputs, the README, PROVENANCE.json and the comparison figures, and MIT for verifier/sqcheck.py, copyright (c) 2026 Do\u011fa \u00d6zden, as LICENSE.md at the pin states (1,484 bytes, SHA-256 5b8e14499bddd521ce875b7b1b30da6f7ea215f3c44e15cfabce3a493f18da4c, byte-identical to the LICENSE.md the lab's earlier repositories carry). LICENSE.md says the coordinates remain jazivxt's under Apache 2.0 as declared on the Kaggle dataset Boxed In v63; source/LICENSE-jazivxt-Apache-2.0 is the Apache License 2.0 text the source bundles for them, and source/hit-228.txt, jazivxt's decimal slice, is retained under it. source/NOTICE, source/CITATION.cff and source/LICENSE-CC-BY-4.0.txt are Sergio Fern\u00e1ndez Rubio's (GeiserX) NOTICE, citation file and CC BY 4.0 text for his squares-in-squares layouts, retained byte-identical as the NOTICE requires of a redistribution of the layouts under source/geiserx-rounded/, which the source used as a cross-check only.",
+      "claims": [
+        "n-228-candidate.yaml is a packing.squares:Witness/v2 file (centre and rational half-angle basis, rational scalars, 228 squares) whose exact rational side, 389901077915794162667528670804703057/25000000000000000000000000000000000, rounded up at 12 places, #1038 prints as the bound, 15.596043116632; the issue and README also print the exact side as 15.59604311663176650670114683..., and sqcheck-228.txt prints it rounded up at 15 places, 15.596043116631767. The issue and README say it is a public Kaggle packing by jazivxt (notebook Boxed In Sub, run 370961355, copying the dataset Boxed In v63's submission.csv), converted from its published decimal centres and orientations to rational half-angle form, after which one uniform radial clearance factor 2500000000000011391221/2500000000000000000000, which they print as 1 + 4.6e-18 and which is 1 + 4.56e-15, about the origin of jazivxt's centred coordinates was applied so that every pair has strictly positive clearance, and nothing else changed; checks/source-exact-as-produced.json is the unmodified conversion output and source/hit-228.txt jazivxt's decimal slice (first line '228 side', then a row of three numbers per square). The issue names the record s(228) <= 15.5960431209207917 at main 1015fc17 (Roberto Ono, T-301) and the gain on it, 4.289e-09 by exact Fraction comparison, relative 2.75e-10. An upper bound only: no optimality, KKT or rigidity claim.",
+        "n228-witness.json is the same witness as JSON. verify-228.txt is the author's unmodified run of this repository's packing-witness verify at 1015fc17 (VERIFIED, exact-algebraic over Q, 25878 pairs); checks/registry-verify.json reports the same run's least wall clearance, 0, and least pair gap, about 3.6e-23. sqcheck-228.txt is the author's run of verifier/sqcheck.py, an exact checker the source says was written separately from this registry's code (VALID, exact rational, the exact side rounded up at 15 places). checks/hit-228-independent.json is a second exact Fraction separating-axis checker the issue says was written independently (VALID, 151 near pairs), on squares identical to the witness's. The issue says the checkers share only the definitions of unit square, wall and non-overlap, and claims no proof-assistant check or outside human review. Those statements are the author's; no source program ran here.",
+        "The issue and README credit the packing to jazivxt (Kaggle) and say the dataset describes crowdsourced coordinates and the notebook gives no per-count credit, so the original finder of this arrangement is unresolved; that the notebook's overview credits ChatGPT and Codex; and that the exact rational certificate and the registration are Do\u011fa \u00d6zden's, with AI assistance (his OpenAI Codex Sol lab did the conversion and checks, and his AI agent posts from the account kenaznia-doga), claiming no discovery. They name Sergio Fern\u00e1ndez Rubio (GeiserX), whose round-30 table credits jazivxt/boxed-in-sub at 228, as a cross-check source; source/geiserx-rounded/ holds his rounded layout, the same packing to 2.3e-10, and its checks. Matched against T-301's packing up to the square's eight symmetries, they say 86 of 228 centres move by more than 0.001, 7 by more than 0.05 (largest 0.238), and 2 squares retilt by more than 1 degree, a close relative of the registry arrangement, with no information on which came first or whether one derived from the other. The issue first discloses a side-only Kaggle per-puzzle leaderboard entry at 228, 15.596043116631669919627353... (Nevska, 8 November), 9.66e-14 below this side, which this packing does not beat and which supplies no packing; and it quotes jazivxt's own decimal side, 15.59604311663169367, 7.28e-14 below, the cost of the clearance. PROVENANCE.json and checks/AUDIT-228.json record the source's digests of the Kaggle container and slice, the GeiserX archive and the comparisons."
+      ]
+    }
+  ]
+}

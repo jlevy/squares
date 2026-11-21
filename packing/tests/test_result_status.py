@@ -542,6 +542,10 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-260",
         "T-280",
         "T-281",
+        # Lane i1038 took 228, the only house of Roberto Ono's issue-984 certificate
+        # (T-301), to Doğa Özden's issue-1038 certificate (T-334) in the pass of 21
+        # November 2026 UTC.
+        "T-301",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets

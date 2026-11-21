@@ -67391,3 +67391,221 @@ evidence:
       r1031-1118). The source files are pinned by digest in the review's custody receipt and
       are the files this import retains. Finite feasibility only.
     source_reviewed: '2026-11-20'
+
+  - id: E-ozden-1038-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 228
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s228 upper bound 2026-11-18]'
+    certificate: packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-11-20'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1038 (r1038, under think-3ape), prompted separately
+        from the import lane (i1038, think-91fu) and blind to its work until its findings were
+        frozen
+      note: >-
+        docs/project/reviews/review-2026-11-20-ozden-1038.md accepted the certificate with
+        fifteen findings, F6 and F15 minor (the factor printed as 1 + 4.6e-18 is
+        1 + 4.5564884e-15) and the rest notes, and 36 of 36 controls as stated, in a plan
+        hashed before any program read the certificate: the claim is its side's 12-place
+        ceiling, accepted in the box of the claim and refused in that of its floor; no pair
+        touches, the least gap 3.62672e-23 at squares 156 and 166; 33 exact wall contacts at
+        all four walls. Its clean-room run is E-ozden-1038-review-exact-feasibility, and the
+        replay E-ozden-1038-exact-feasibility.
+    source_reviewed: '2026-11-20'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at 46ab8bf,
+      n-228-candidate.yaml, posted in issue 1038 on Doğa Özden's behalf by his AI agent: his
+      lab's exact conversion of the decimal packing published in jazivxt's Kaggle notebook under one uniform
+      clearance factor of 1 + 4.56e-15 (the issue prints 1 + 4.6e-18), the original finder
+      unresolved, as the source says. A
+      separate complete repository replay is retained for n = 228: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 155268 pair decisions; summed over the 3 jobs, the receipt records 16.96 route CPU
+      seconds and 100.62 job wall seconds, the longest job 40.52 seconds. In every positive
+      squares touch the box, a least wall clearance of exactly 0, and every pair clears by at
+      least 3.62e-23. The packet's sharp controls meet those margins on both routes. The replay
+      is E-ozden-1038-exact-feasibility. The source's own sqcheck.py and its second exact
+      checker were not run here.
+
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share this repository's centre-basis witness reader (certificate
+      parsing and half-angle conversion), Fraction arithmetic and the separating-axis method;
+      the first is the packing-witness verify the author ran on the same file, so on that route
+      the replay is reproduced with the producer's code, and the second shares no verification
+      code with it. The lab's own conversion made the exact coordinates, not this repository's
+      promotion. No human oversight or optimality is claimed.
+
+  - id: E-ozden-1038-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 228
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s228 upper bound 2026-11-18]'
+    certificate: packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/n-228-candidate.yaml
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core host, at
+      nice 19 on two cores: python -m devtools.upper_bound_reports
+      ozden-s228-upper-bound-2026-11-18 certify --workers 2 wrote the receipt on 20 November
+      2026 from the packet's retained witness, read by the witness-center-basis reader, its JSON
+      twin held to it as the same packing, and check --replay decided all 3 retained jobs again,
+      the witness with its duplicate-square and outside-container controls, through both
+      maintained routes; check-claims rebuilds the frozen comparison. python -m
+      devtools.upper_bound_reports ozden-s228-upper-bound-2026-11-18 sharp-controls wrote the
+      packet's sharp controls, all 11 as stated in a plan hashed on think-91fu before they ran
+      (receipts/controls-plan-1038.md) on both routes: contact accepted at margin 0 and refused
+      1e-30 past it.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-evand-arrangement-receipts
+    - V-upper-bound-reports
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the witness at n = 228 that T-334 cites, every wall and every pair decided by both
+          maintained routes; the kernel's controls are retained in the packet's receipt
+        checked: 1
+        of: 1
+    limitations: >-
+      A replay of the one retained witness by two maintained exact routes that share this
+      repository's centre-basis witness reader (certificate parsing and half-angle conversion),
+      Fraction arithmetic and the separating-axis method. The first route is the code the
+      author ran (packing-witness verify); the second shares no verification code with it, so
+      the replay is recorded as reproduced with the producer's code, as for the earlier Özden
+      replays; the independent route is the stage 4 review's clean-room checker, a separate
+      lane. The source's sqcheck.py and its second exact checker were not run here. A separate
+      complete repository replay is retained for n = 228: 1 positive and 2 duplicate-square and
+      outside-container controls passed their required outcomes on both routes, 155268 pair
+      decisions; summed over the 3 jobs, the receipt records 16.96 route CPU seconds and 100.62
+      job wall seconds, the longest job 40.52 seconds. In every positive squares touch the box,
+      a least wall clearance of exactly 0, and every pair clears by at least 3.62e-23. The
+      receipt's controls are gross, and the packet's sharp controls meet those margins. Finite
+      feasibility only.
+    external_review:
+      state: informally-verified
+      date: '2026-11-20'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1038 (r1038, under think-3ape), prompted separately
+        from the import lane (i1038, think-91fu) and blind to its work until its findings were
+        frozen
+      note: >-
+        docs/project/reviews/review-2026-11-20-ozden-1038.md accepted the certificate with
+        fifteen findings, F6 and F15 minor (the factor printed as 1 + 4.6e-18 is
+        1 + 4.5564884e-15) and the rest notes, and 36 of 36 controls as stated, in a plan
+        hashed before any program read the certificate: the claim is its side's 12-place
+        ceiling, accepted in the box of the claim and refused in that of its floor; no pair
+        touches, the least gap 3.62672e-23 at squares 156 and 166; 33 exact wall contacts at
+        all four walls. Its clean-room run is E-ozden-1038-review-exact-feasibility, and the
+        replay E-ozden-1038-exact-feasibility.
+    source_reviewed: '2026-11-20'
+
+  - id: E-ozden-1038-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 228
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s228 upper bound 2026-11-18]'
+    certificate: packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/n-228-candidate.yaml
+    replay: >-
+      With the project interpreter (Python 3.14.7) as python -I -B at nice 19 on a shared
+      host, 20 November 2026, from the review-only directory
+      ozden-s228-1038-review-2026-11-20: the review lane ran its frozen r1038_check.py on
+      #1038's centre-basis Witness/v2 at 46ab8bf, n-228-candidate.yaml (out/check-n228.json,
+      ACCEPT), deciding every format hypothesis, every square a unit square, every wall and
+      all 25,878 pairs by separating axes in Python integers from the centres and unit bases
+      and again by exact convex clipping in gmpy2.mpq from the corners, with no distance
+      filter: every pair strictly apart, the least margin 3.62672e-23 at squares 156 and 166,
+      and 33 exact wall contacts at all four walls. r1038_controls.py decided the 36 controls
+      the plan hashed beforehand states (out/controls-n228.json), all as stated, among them
+      the squares accepted in the box of the claim and crossing the walls of the box of its
+      12-place floor, and every pair closed along its line of centres to exact contact and
+      past it. r1038_selftest.py passed 36,910 checks.
+    replay_status: passed
+    verifiers:
+    - V-r1038-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 228: every square, every wall and every pair, by two exact
+          methods in two arithmetic libraries that share only the reader, with the stated
+          controls decided by both
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: 'Claude (Anthropic)'
+        setting: >-
+          the stage 4 mathematical review lane of issue 1038 (r1038, under think-3ape),
+          strongest tier (tbd-strong-max) at maximum reasoning
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          Issue 1038 says the conversion and checks were done by Özden's lab with OpenAI
+          Codex. The checker was written from the mathematics, the Witness/v2 schema text
+          and the file, and frozen at 2026-11-20T08:32:15Z (frozen/checker-frozen-digests.txt),
+          before its author read the source's README, sqcheck.py, outputs or checks, or this
+          repository's witness, verifier, promotion, identity or contraction code; it imports
+          nothing from this repository or the source and reuses no code of any earlier
+          review, lane L186's, the model for its method, among them, whose programs it did
+          not open.
+    independence_record: docs/project/reviews/review-2026-11-20-ozden-1038.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-20'
+      reviewed_by: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1038 (r1038, under think-3ape), prompted separately
+        from the import lane (i1038, think-91fu) and blind to its work until its findings were
+        frozen
+      note: >-
+        docs/project/reviews/review-2026-11-20-ozden-1038.md accepted the certificate with
+        fifteen findings, F6 and F15 minor (the factor printed as 1 + 4.6e-18 is
+        1 + 4.5564884e-15) and the rest notes, and 36 of 36 controls as stated, in a plan
+        hashed before any program read the certificate: the claim is its side's 12-place
+        ceiling, accepted in the box of the claim and refused in that of its floor; no pair
+        touches, the least gap 3.62672e-23 at squares 156 and 166; 33 exact wall contacts at
+        all four walls. Its clean-room run is E-ozden-1038-review-exact-feasibility, and the
+        replay E-ozden-1038-exact-feasibility.
+    limitations: >-
+      A clean-room decision of the one retained certificate by two exact methods in one
+      program, which share its reader. The review ran on its own clone of the source at the
+      pin; the certificate's digest equals the packet's. Finite feasibility only.
+    source_reviewed: '2026-11-20'

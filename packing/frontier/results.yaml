@@ -47552,10 +47552,10 @@ results:
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
       reviewer and a retained human oversight record; one AI review, of 14 November, is
-      retained. It is the smallest validated side at 228, and the case adopted it there in the
-      pass of 15 November 2026 under the house rule, in place of T-300, with both strong
-      generators' runs on the new house; T-300, T-174, T-128, T-098, T-092 and T-056 keep
-      their certificates as history. The review's questions for the author hold no rung, and
+      retained. The case adopted it at 228 in the pass of 15 November 2026 under the house
+      rule, in place of T-300, with both strong generators' runs on the new house, and Doğa
+      Özden's certificate of #1038, T-334, replaced it there in the pass of 21 November 2026;
+      it keeps its certificate as history, as T-300, T-174, T-128, T-098, T-092 and T-056 do. The review's questions for the author hold no rung, and
       the contracted side its F11 measures and the regularizer's KKT side are the owner's RV-3
       question, not registered.
     reviews:
@@ -53903,6 +53903,260 @@ results:
       generators' regularization of the new house; T-325 keeps its certificate as history.
       The review's questions for the author hold no rung.
 
+  - id: T-334
+    kind: upper-bound
+    registered: '2026-11-20'
+    landed: '2026-11-21'
+    headline: >-
+      Özden's certificate at 228 from jazivxt's public snapshot, 4.29e-09 below T-301, beyond its padding
+    claim: >-
+      One complete rational certificate proves s(228) <= 15.59604311663176650670114683218812228,
+      a side that terminates at 35 places. That side is 15.5960431166317666 rounded up at 16
+      places and 15.596043116632 at 12, as #1038 prints it.
+
+      It is 4.29e-09 below T-301 (credited to Roberto Ono), the case's house before adoption, and
+      measured here nearest centres pair it one to one with T-301's packing under the identity
+      of the box; the optimal assignment moves 86 squares beyond 1e-3, 47 beyond a hundredth
+      and 5 beyond a tenth (largest 0.238073), and turns squares by up to 1.956 degrees.
+      This measured geometric relationship establishes no direction of derivation.
+
+      The gain is 1.2298 of T-301's own uniform-contraction margin, 3.4875e-09: below T-301
+      shrunk until its squares first touch by 8.02e-10 (devtools.contraction_margin), and
+      T-301 so contracted rounds up at 12 places to 15.596043117434, above this claim's print.
+      Under the owner's option D of 17 November 2026 (think-b0w5) it is a new result, not a
+      restatement of T-301's padding.
+
+      Both maintained exact routes accept the certificate, read by the centre-basis witness
+      reader and held to the source's JSON twin of the same packing, and the stage 4 review
+      of 20 November 2026 accepts it, its clean-room checker deciding every square, wall and
+      pair by two exact methods, so the bound is confirmed, independently re-implemented.
+
+      The issue says this repository's packing-witness verify, run unmodified on the witness,
+      reports VERIFIED (exact-algebraic over Q, 25878 pairs, least wall clearance 0); that
+      verifier/sqcheck.py, an exact checker the author's lab wrote separately, reports VALID;
+      and that a second, independently written exact Fraction separating-axis checker agrees.
+      It says the checkers share only the definitions of unit square, wall and non-overlap. No
+      optimality, KKT or rigidity claim is made. Those statements are the author's; no source
+      program ran here.
+
+      The issue names jazivxt's Kaggle notebook Boxed In Sub as the public venue for its
+      decimal source, from the dataset Boxed In v63 (Apache 2.0 as declared there), converted by the lab to
+      rational half-angle form and opened by one uniform clearance factor about the origin of
+      its centred coordinates, the box centre, nothing else changed. The issue prints the
+      factor as 1 + 4.6e-18; the fraction it gives is 1 + 4.56e-15 (the review's F6, F13). The dataset describes crowdsourced coordinates and the
+      notebook gives no per-count credit, so the original finder is unresolved, as the issue
+      says. The notebook and dataset were not read here: this session's network refuses
+      www.kaggle.com, and the source retains jazivxt's decimal slice.
+
+      Roberto Ono retains the credit recorded for T-301. Credit jazivxt for publishing the
+      decimal snapshot in the public Kaggle notebook
+      https://www.kaggle.com/code/jazivxt/boxed-in-sub, and Doğa Özden for this certificate
+      and registration; Özden claims no discovery. The original finder of this packing,
+      whether it shares T-301's finder, publication order relative to T-301, and whether
+      either derived from the other remain unresolved. Neither the one-to-one measurement
+      nor the retained archive establishes those facts.
+
+      The issue says the conversion and checks were done by his lab with OpenAI Codex and that
+      the notebook's overview credits ChatGPT and Codex, and that the issue and repository were
+      prepared and posted on his behalf by his AI agent, which uses the account kenaznia-doga.
+      It discloses first that this packing does not beat the side-only Kaggle per-puzzle
+      leaderboard entry at 228, 15.596043116631669919627353 (Nevska, 8 November), 9.66e-14
+      below this side; it states no packing, so it is no report and is recorded as context
+      only.
+    scope:
+      n_values:
+      - 228
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: >-
+        A packing measured one to one with T-301 at 228, 4.29e-09 below it, 1.2298 times T-301's
+        own contraction margin and below its 12-place print contracted, five squares moved
+        beyond a tenth: like T-314's 3.42e-09 at 147 (S2), 1.16 times T-302's margin with
+        eight moved. T-301 is credited to Ono (S3); this packing's finder and publication
+        order remain unresolved. No lower bound or optimum.
+      scored: '2026-11-20'
+      by: >-
+        think-91fu Doğa Özden import (intake lane i1038), confirmed by the stage 4 review of
+        20 November (lane r1038), which proposes S2
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Özden s228 upper bound 2026-11-18]'
+      published: '2026-11-18'
+    evidence:
+    - E-ozden-1038-certificate-report
+    - E-ozden-1038-exact-feasibility
+    - E-ozden-1038-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/README.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/n-228-candidate.yaml
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/source/source/hit-228.txt
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/controls-plan-1038.md
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/identity.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/contraction-n228-own.json
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/measure/l-step-scan.json
+    - packing/campaign/issue-intake/upper-bounds-1038-20261120/README.md
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/contraction_margin.py
+    - packing/devtools/measure_identity.py
+    - docs/project/reviews/review-2026-11-20-ozden-1038.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/README.md
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/check-n228.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/tests/test_upper_bound_reports_1038.py
+    - packing/resources/web/ozden-s228-upper-bound-2026-11-18/receipts/sharp-controls.json
+    - packing/resources/web/ozden-s228-1038-review-2026-11-20/out/controls-n228.json
+    notes: >-
+      A separate complete repository replay is retained for n = 228: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 155268 pair decisions; summed over the 3 jobs, the receipt records 16.96 route CPU
+      seconds and 100.62 job wall seconds, the longest job 40.52 seconds. Squares touch the box,
+      a least wall clearance of exactly 0, and every pair clears by at least 3.62e-23 (squares
+      156 and 166). The replay is E-ozden-1038-exact-feasibility.
+
+      The packet's sharp controls (receipts/sharp-controls.json), stated before they ran (a plan
+      hashed on think-91fu at 08:22Z on 20 November, retained as receipts/controls-plan-1038.md),
+      lowered the side to the packing's extent, by 0, closed the least-gap pair (square 166
+      toward square 156) by its gap and moved every square toward the nearer near wall by the
+      least clearance, 0: both routes accepted each at exact contact, margin 0, and refused each
+      1e-30 past it. They refused square 166 enlarged to its pair at contact for its shape alone
+      and 1e-30 past it for the overlap as well; square 1, at its wall, enlarged by 0 was
+      accepted and 1e-30 past it refused for the wall and its shape, the branch stated in
+      advance; and they refused a duplicated square.
+
+      At n = 228 the certificate is below the case's ceiling (Roberto Ono, T-301) by 4.29e-09;
+      smallest: this certificate. No other register bound was pending adoption at 228. The
+      ledger of 20 November for this lane (campaign/issue-intake/upper-bounds-1038-20261120)
+      walks #1038 from a start frozen on main that day and records it.
+
+      Measured against padding: T-301's certificate, contracted uniformly about the origin and
+      boxed, has margin 3.4875e-09 (1 - lambda* about 2.389e-10, squares 8 and 21;
+      measure/contraction-n228.json). This certificate's own margin is 4.3896e-22 (squares 156
+      and 166; measure/contraction-n228-own.json), the clearance factor's; contracted so, both
+      routes accept it at a side that much smaller, which nobody reported and which is not
+      registered.
+
+      Measured pose by pose (measure/identity.json; a measurement, which decides nothing): the
+      house witness measures as T-301's packet, and its drawn view, the axis tool's, is not
+      paired one to one with this packing (18 squares beyond a tenth). Aligned by box centres, 2
+      squares turn by more than a degree and none reverses its tilt. Tilted beyond a degree: 54
+      here, 41.00 to 42.10 degrees, 19 one way and 35 the other, against T-301's 55, 1.29 to
+      43.68 degrees, 19 and 36. Against T-300 no symmetry pairs it one to one.
+
+      The project's run of Evan Daniel's driver on T-301's witness on 15 November 2026
+      (cases/regularized_drawings/think-17ex-2026-11-15/) reached a local minimum of the side,
+      strict modulo 129 exact flat motions, whose solved view both maintained routes accepted
+      at 15.596043116631669919783314273244, 9.66e-14 below this side; it was held at row 3,
+      not registered, and the view is not retained. This certificate's packing may be that
+      minimum opened by its clearance factor; no measurement here pairs the two.
+
+      Özden reported and certified this packing while the project's lower KKT view remained
+      unregistered. Under the owner's decision of 18 November 2026 at the five re-solved
+      counts of #1009 (think-frl5), this claim keeps its new-result status, and the held view,
+      below it by far more than its own margin, stays a candidate for registration
+      (think-4z8z). This registration order establishes no publication priority for the
+      underlying packing.
+
+      The L-step scan (devtools.l_step_scan, measure/l-step-scan.json), with this side stood in
+      for 228's ceiling, finds the L-step and monotonicity consequences main finds, so this
+      bound carries to no other count.
+
+      The source's own sqcheck.py and its second checker were not run here. The two maintained
+      routes share this repository's centre-basis witness reader (certificate parsing and
+      half-angle conversion), Fraction arithmetic and the separating-axis method, and the first
+      of them, sqpack's exact verifier, is the packing-witness verify the source ran. The lab's
+      conversion made the exact coordinates. Licensed CC BY 4.0 and MIT by LICENSE.md at the
+      pin, the coordinates Apache 2.0 as the source declares them. No human oversight or
+      optimality is claimed.
+
+      The stage 4 review of 20 November 2026
+      (docs/project/reviews/review-2026-11-20-ozden-1038.md, lane r1038; accepted in #1044), written in a separate
+      lane blind to this one until its findings were frozen, accepts the certificate:
+      its clean-room checker decides every square, wall and all 25,878 pairs by separating
+      axes in Python integers and by exact clipping in gmpy2.mpq, no pair touching, the least
+      margin 3.62672e-23 at squares 156 and 166, the replay's, and all 36 of its controls,
+      stated beforehand, came out as stated (F1 to F3; E-ozden-1038-review-exact-feasibility).
+
+      Its findings are notes but two minor ones about the author's prose: the factor the
+      issue, the README and the file print as 1 + 4.6e-18 is 1 + 4.5564884e-15 (F6, F15).
+      Divided out about the box centre, the factor leaves a packing of side 15.5960431166317
+      exactly, with 197 pairs at contact and 16 overlapping by up to 5.49e-15, so the
+      certificate is that packing opened by the factor (F7, F13). The file's own claim and
+      source words are the producer's (F8).
+
+      After its freeze it measured what this lane measured and found the same: one to one
+      with T-301, 5 squares beyond a tenth (F10); 1.2298 of T-301's margin, 8.02e-10 below
+      T-301 shrunk to first contact (F11); the held view 9.66e-14 below this side, of which
+      the factor is 6.65e-14, the rounding of jazivxt's side to 13 places 6.33e-15, and
+      jazivxt's own print 2.37e-14 (F12). It notes that the record states the held solve's
+      certificate both as invalid and, in the same report, as a view both routes accept
+      (F12). It proposes S2. Its questions for the author go with the reply.
+
+      This lane recorded its replay, controls and measurements and registered this entry at
+      08:50Z on 20 November, and read the review, merged at 09:34Z, at 09:37Z, before mapping
+      it. No disagreement.
+
+      Adopted at 228 in the pass of 21 November 2026 under the house rule, in place of
+      T-301, which the pass of 15 November had adopted there. Ono retains T-301's credit;
+      jazivxt is credited for the public notebook and decimal snapshot, and Doğa Özden for
+      this certificate. This packing's finder, publication order and direction of derivation
+      remain unresolved. Both strong generators' regularization of the new house, measured
+      against the new witness, is in the same change. T-301 keeps its certificate as history,
+      a verified bound at V3/C3, and houses no other count. The later related de Winter
+      attachment awaits independent comparison in think-d4b0.
+
+      The rigidity block was derived again on the new witness and stays not rigid: 170 of its
+      228 squares translate, against T-301's 110. Both strong generators ran on the new
+      witness (packing/cases/regularized_drawings/think-91fu-2026-11-20/): grid-slack's views
+      at 0.5, 1 and 5 degrees are each admitted at row 10, and the selection draws the
+      0.5-degree view (20 uneven squares, no near-axis one and 632 full shared sides, against
+      the axis tool's 17, 1 and 644 on T-301's witness), in the published pose by the flip
+      record, so 228 is regularized and leaves default_drawings.SETTLED.
+
+      Evan Daniel's driver, run on this certificate, reached a KKT point, a local minimum of
+      the side strict modulo 123 exact flat motions, whose certificate validated, at exactly
+      the side of its 15 November solve from T-301's witness, 9.659e-14 below this side. It is
+      held at row 3 as a register candidate and not admitted (think-4z8z), as the owner's
+      decision at #1009's re-solves leaves it (think-frl5).
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 20 November, is
+      retained. It is the smallest validated side at 228, and the case adopted it there in the
+      pass of 21 November 2026 under the house rule, in place of T-301, with both strong
+      generators' runs on the new house; T-301, T-300, T-174, T-128, T-098, T-092 and T-056
+      keep their certificates as history. The driver's KKT solve below it is a register
+      candidate (think-4z8z), and the review's questions for the author hold no rung.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-20-ozden-1038.md
+      kind: adversarial
+      reviewer: >-
+        AI agent (Claude, strongest tier tbd-strong-max, at maximum reasoning), the stage 4
+        mathematical review lane of issue 1038 (r1038, under think-3ape), prompted
+        separately from the import lane (i1038, think-91fu) and blind to its work until its
+        findings were frozen
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-20'
+      scope: >-
+        Finite feasibility of #1038's centre-basis Witness/v2 certificate at 228, decided by
+        the review's clean-room exact checker, frozen before any producer, witness or
+        verifier code was read, by two methods, with 36 controls stated in advance as rules;
+        the claim's arithmetic, the side against the packing's extent, the margins and the
+        clearance factor; after the freeze, custody, the sides against the record, the
+        identity against T-301, the contraction margins, the held KKT point, option D, the
+        licence, the credit and the significance.
+      verdict: accepted
+      covers:
+      - T-334
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
@@ -54732,17 +54986,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-227-regularized.yaml.gz
     - n: 228
-      of: T-301
+      of: T-334
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 48
-        max_move: 0.290442
-        max_turn_deg: 0.0032148
+        moved: 56
+        max_move: 0.1990877
+        max_turn_deg: 0.201949
       view: packing/atlas/known-best/regularized/n-228-regularized.yaml.gz
     - n: 229
       of: T-225

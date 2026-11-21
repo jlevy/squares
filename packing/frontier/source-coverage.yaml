@@ -13869,6 +13869,41 @@ sources:
     November for this lane (campaign/issue-intake/upper-bounds-1031-20261120) records it. All 3
     native jobs have full outcomes. The 20 November pass adopted T-333 at 299. T-325's exact
     certificate remains in the record.
+
+- id: ozden-s228-upper-bound-2026-11-18
+  title: Doğa Özden's exact certificate of the packing published in jazivxt's Kaggle notebook at 228 squares, kenaznia-doga/s228-upper-bound-1559604311 46ab8bf, issue 1038
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s228-upper-bound-1559604311/tree/46ab8bf425f5cad886a8bc4023bfff904f43af99
+  local: resources/web/ozden-s228-upper-bound-2026-11-18/
+  source_key: '[Özden s228 upper bound 2026-11-18]'
+  scope:
+    n_values:
+    - 228
+  reviewed: '2026-11-20'
+  source_date: '2026-11-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s228-upper-bound-2026-11-18/acquisition/claims.json
+  evidence:
+  - E-ozden-1038-certificate-report
+  - E-ozden-1038-exact-feasibility
+  notes: >-
+    The centre-basis Witness/v2 certificate, its JSON twin, the unmodified conversion output,
+    jazivxt's decimal slice as the source holds it, Sergio Fernández Rubio's rounded layout and
+    its NOTICE, the check reports and outputs, PROVENANCE.json, the README and the licences are
+    retained for jlevy/squares#1038 at 46ab8bf, the repository's only commit; the lab's checker
+    and its README and the comparison figures are pinned by digest or against byte-identical
+    copies. The Kaggle notebook and dataset were not read here (the session's proxy refuses
+    www.kaggle.com). The certificate is admitted only where its exact side rounds up to the side
+    the issue prints. Licensed CC BY 4.0 and MIT by LICENSE.md at the pin, the coordinates Apache
+    2.0 as the source declares them. T-334 records the in-horizon report, 4.29e-9 below T-301 at
+    228; the ledger of 20 November for this lane (campaign/issue-intake/upper-bounds-1038-20261120)
+    records it. All 3 native jobs have full outcomes. jazivxt is the notebook and snapshot
+    publisher; T-301 retains Roberto Ono's credit, and Doğa Özden is credited for this
+    certificate. T-334's finder, publication order and direction of derivation remain
+    unresolved; the later related de Winter attachment awaits comparison in think-d4b0.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -14152,11 +14187,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 228
-  source_id: ono-issue984-2026-11-14
-  value: '15.5960431209207917'
-  evidence: E-ono-984-certificate-report
+  source_id: ozden-s228-upper-bound-2026-11-18
+  value: '15.5960431166317666'
+  evidence: E-ozden-1038-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-15 (T-301).
+    a replay here and an accepted review, adopted on 2026-11-21 (T-334).
 - n: 229
   source_id: evand-regularized-2026-10-20
   value: '15.6501615138764311'
@@ -15091,20 +15126,20 @@ superseded_reports:
 - n: 228
   source_id: casson-square-packing-2026
   value: '15.60895620815939289'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026
   value: '15.604638007678682'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026-10-03
   value: '15.604602454552252'
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 229
@@ -16017,9 +16052,9 @@ superseded_reports:
 - n: 228
   source_id: evand-square-packing-2026-10-05
   value: '15.604602454546056967137037190451'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-301's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-334's exact
     side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 236
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.8678008394199166'
@@ -16510,8 +16545,8 @@ superseded_reports:
   source_id: couzo-451-exact-refinements
   value: '15.6046014757296743'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 238
   source_id: squish-500-fourth-request-2026-10-11
   value: '15.9241067853214947'
@@ -17002,14 +17037,14 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.60460147572967429'
   reason: The house from 2026-10-17 until 2026-11-14; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 228
   source_id: ozden-s228-upper-bound-2026-11-14
   value: '15.6008017348117539'
   reason: The house from 2026-11-14 until 2026-11-15; its certificate stays retained and verified,
-    and T-301's exact side is smaller.
-  superseded_by: ono-issue984-2026-11-14
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 - n: 90
   source_id: jazivxt-s90-upper-bound-2026-11-15
   value: '9.9982771669260000'
@@ -17154,6 +17189,13 @@ superseded_reports:
   reason: The house from 2026-11-18 until 2026-11-20; its certificate stays retained and verified,
     and T-333's exact side is smaller.
   superseded_by: de-winter-s299-upper-bound-2026-11-18
+
+- n: 228
+  source_id: ono-issue984-2026-11-14
+  value: '15.5960431209207917'
+  reason: The house from 2026-11-15 until 2026-11-21 UTC; its certificate stays retained and verified,
+    and T-334's exact side is smaller.
+  superseded_by: ozden-s228-upper-bound-2026-11-18
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

@@ -310,7 +310,8 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # Polkovskyi's issue-1009 certificates (T-317, T-322), below T-174's sides there, and
     # 292, staged for T-193, to his T-323 (`OVERTAKEN`). The pass of 21 November moved 172
     # on from T-282 to Joost de Winter's re-solve of it (T-286), which leaves the count
-    # unchanged.
+    # unchanged, as does lane i1038's move of 228 to Doğa Özden's issue-1038 certificate
+    # (T-334) in the same pass.
     assert len(held_counts) == 23
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     # T-193's adopted counts below T-174's held sides left the hold with their adoption.
@@ -336,7 +337,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         210: "T-317",
         268: "T-331",
         269: "T-297",
-        228: "T-301",
+        228: "T-334",
         270: "T-332",
         272: "T-322",
         297: "T-299",
@@ -1838,7 +1839,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # c1-127 127 on from T-305 to Joost de Winter's certificate of issue 1020 (T-330) in the
     # pass of 20 November. Lane c2-imports moved 268, 270 and 299 on to his certificates of
     # issues 1021, 1022 and 1031 (T-331 to T-333) in the same pass. The pass of 21 November
-    # moved 172 and 199 to Joost de Winter's re-solves of issues 946 and 939 (T-286, T-285).
+    # moved 172 and 199 to Joost de Winter's re-solves of issues 946 and 939 (T-286, T-285),
+    # and lane i1038 moved 228 to Doğa Özden's certificate of issue 1038 (T-334).
     later = {
         **ALGEBRAIC_ADOPTED,
         105: "T-229",
@@ -1872,7 +1874,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         157: "T-293",
         237: "T-295",
         297: "T-299",
-        228: "T-301",
+        228: "T-334",
         90: "T-304",
         127: "T-330",
         264: "T-308",

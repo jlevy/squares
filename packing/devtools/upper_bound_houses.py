@@ -707,8 +707,12 @@ def _sources() -> dict[str, Source]:
         # proposal designer; T-174 still houses other counts. Lane L164 (think-17ex) moved 228
         # on to Roberto Ono's issue 984 (T-301) in the pass of 15 November 2026, five band
         # periods cut from Francisco Couzo's n = 404 packing, a new arrangement relative to
-        # T-300's packing. 228 was T-300's only count, so T-300 is no source here now.
-        packet_source("T-301", "ono-issue984-2026-11-14"),
+        # T-300's packing. 228 was T-300's only count, so T-300 is no source here now. Lane
+        # i1038 (think-91fu) moved 228 on to Doğa Özden's issue 1038 (T-334) in the pass of 21
+        # November 2026. His exact certificate of the public snapshot jazivxt published
+        # lies below T-301 contracted to first contact (Option D, think-b0w5). 228 was
+        # T-301's only count, so T-301 is no source here now.
+        packet_source("T-334", "ozden-s228-upper-bound-2026-11-18"),
         # The same lane moved 147, first adopted here, from the case record's own house (the
         # Kingbird catalogue's 45-degree packing, verified by T-155's exact ceiling) to his
         # issue 985 (T-302), one band period cut from Evan Daniel's n = 229 packing.
@@ -895,6 +899,10 @@ def _sources() -> dict[str, Source]:
 #: certificate carries (at 199 through T-284's L step), new results under the owner's option
 #: D of 17 November 2026 (think-b0w5), Evan Daniel the finder and Doğa Özden and de Winter
 #: the improvers; T-282 and T-284 keep no house here.
+#: The pass of 21 November 2026 (think-91fu) adopted Doğa Özden's issue 1038 (T-334) at
+#: 228 from T-301. His certificate of jazivxt's public Kaggle packing gains 1.2298 times
+#: T-301's contraction margin. The measured assignment does not resolve its finder,
+#: publication order or derivation. T-301 keeps no house here.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -938,7 +946,7 @@ ADOPTED: dict[int, str] = {
     210: "T-317",
     211: "T-188",
     227: "T-225",
-    228: "T-301",
+    228: "T-334",
     229: "T-225",
     232: "T-307",
     236: "T-218",
@@ -1126,6 +1134,8 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: (think-b0w5); lanes w7-optd-1118 to w7r2-optd-1118 made the import and regularized the
 #: new witnesses on 18 November, and the adoption moved to the day the branch merges, since
 #: a day's archive holds one prior state a count.
+#: The same UTC day (think-91fu) adopted T-334 at 228 from T-301. The archive keeps
+#: the prior case records at 172, 199 and 228 together.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -1218,7 +1228,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
     "2026-11-20": frozenset({127, 268, 270, 299}),
-    "2026-11-21": frozenset({172, 199}),
+    "2026-11-21": frozenset({172, 199, 228}),
 }
 
 

@@ -1,0 +1,1 @@
+{"file": "n228.yaml", "n": 228, "mode": "exact-rational", "side": 15.596043116631767, "min_wall_margin": 0.0, "min_pair_margin": 3.626716878761469e-23, "verdict": "VALID", "certified_side": 15.596043116631767, "certified_side_upper": "15.596043116631767", "certified_side_exact": "389901077915794162667528670804703057/25000000000000000000000000000000000"}
