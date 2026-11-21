@@ -168,8 +168,12 @@ def test_every_registered_result_has_exactly_one_status_from_the_record() -> Non
         else:
             assert word == (CONFIRMED if rank >= 2 else REVIEWED if rank == 1 else RECORDED)
             assert open_issues(entry, evidence) == [], entry["id"]
-        marks = render_recent_results.position_marks(
-            entry, render_recent_results.standing(entry, records), records
+        # A restated entry's row names what it restates first (`restated_position`).
+        marks = render_results.restated_position(
+            entry,
+            render_recent_results.position_marks(
+                entry, render_recent_results.standing(entry, records), records
+            ),
         )
         line = status_line(
             entry, evidence, marks, how=render_results.confirmed_how(entry, evidence)
@@ -520,6 +524,24 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-305",
         "T-328",
         "T-329",
+        # The pass of 20 November 2026 (think-78aj) took the last houses of three of them to
+        # Joost de Winter's certificates of issues 1021, 1022 and 1031 (T-331 to T-333):
+        # T-320 at 268, T-321 at 270 and T-325 at 299.
+        "T-320",
+        "T-321",
+        "T-325",
+        # The pass of 21 November 2026 (think-8yyy) took 172 and 199, the last houses of
+        # Doğa Özden's T-282 and T-284, to Joost de Winter's re-solves (T-286, T-285), new
+        # results under the owner's option D of 17 November 2026 (think-b0w5). Lane
+        # w7-optd-1118 recorded Polkovskyi's and Yim's re-certifications (T-253, T-260,
+        # T-280, T-281) as restatements under the same ruling (`restatements`), which read
+        # superseded.
+        "T-282",
+        "T-284",
+        "T-253",
+        "T-260",
+        "T-280",
+        "T-281",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets

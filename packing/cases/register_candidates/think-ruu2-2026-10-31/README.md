@@ -6,8 +6,8 @@ The house rule asks the record to register every exactly verified packing below 
 however it was made
 ([result-import.md](../../../campaign/result-import.md#the-house-rule);
 [Register Candidates](../../../../docs/project/guides/regularization-process.md#register-candidates)).
-**All three are held unregistered for the owner, and no house moves.** This package
-retains what a registration would cite.
+**The owner’s option D of 17 November 2026 decides all three (think-b0w5), and none is
+registered yet.** This package retains what a registration would cite.
 
 | n | Certificate | Side | Below the house | 12-place print | House |
 | ---: | --- | --- | ---: | --- | --- |
@@ -50,6 +50,76 @@ certificate this project made before any of the three is registered.
 If the answers keep one, the registration cites this package’s certificate and receipts,
 the review’s run as a second route, and the review itself.
 
+## Option D
+
+The owner answered RV-3 and RV-1 on 17 November 2026 with option D (think-b0w5): a
+re-certification of a standing packing, with its padding removed or the same arrangement
+re-solved to its exact local optimum, is a new result only if its side is below its
+predecessor’s once the predecessor is shrunk until its squares first touch, measured
+through any construction (`devtools.contraction_margin`). Lane w7-optd-1118 (think-8yyy)
+measured each candidate against its house on 18 November 2026, both maintained routes
+deciding each house certificate and its contraction (`measure/contraction-*.json`):
+
+| n | Against | Margin | Gain | Share | Under option D |
+| ---: | --- | ---: | ---: | ---: | --- |
+| 130 | T-259 | 2.183057e-13 | 2.500188e-13 | 1.1453 | a new result, below the house that stands |
+| 130 | T-254, Couzo’s #843 | 2.265559e-12 | 2.332819e-12 | 1.0297 | a new result |
+| 293 | T-257 | 1.761685e-11 | 8.980000e-13 | 0.0510 | a restatement of T-257’s packing, Evan Daniel’s |
+| 307 | T-256 | 3.528959e-12 | 3.751694e-12 | 1.0631 | a new result, but no candidate |
+
+At 130 the candidate is below both T-259, the house, and Couzo’s certificate T-259
+re-solves, each shrunk to first contact, so it is a smaller packing than the house: its
+registration, stage 4 review and adoption, crediting Couzo’s packing and this project’s
+re-solve with Evan Daniel’s regularizer, are think-4z8z’s, with the regularizer optimum
+at 303 (`../../regularized_drawings/think-463r-2026-11-09/option-d/`). At 307 a later
+house, Doğa Özden’s T-279, lies 2.03e-5 below T-256 since 9 November 2026, and Mykhailo
+Polkovskyi’s re-solve of it (T-326) lower still since 18 November 2026, so the candidate
+is no smaller packing and no candidate under the house rule.
+At 293 the candidate restates Daniel’s certificate, and RV-4 falls with it.
+Whether option D reaches T-259 itself, 0.9193 of T-254’s margin, is the owner’s question
+(think-7k8p).
+
+### Ten Solves Below the 18 November Houses
+
+On 18 November 2026 the pass recorded this project’s own solves below a house as
+classification and receipts, and left their registration, stage 4 review and adoption to
+think-4z8z. At that checkpoint ten qualified as new results under option D, each below
+its house shrunk to first contact.
+
+| n | House | House’s margin | Gain | Share | The solve |
+| ---: | --- | ---: | ---: | ---: | --- |
+| 130 | T-259 | 2.183057e-13 | 2.500188e-13 | 1.1453 | this package’s `certificates/n-130.cert` |
+| 303 | T-278 | 3.402014e-12 | 3.481634e-12 | 1.0234 | `think-463r-2026-11-09/option-d/n-303-solve.cert` |
+| 260 | T-318 | 3.327643e-27 | 1.009592e-14 | 3.03e12 | the driver’s solve of the new house |
+| 268 | T-320 | 3.374431e-27 | 1.629958e-15 | 4.83e11 | the same |
+| 270 | T-321 | 3.386261e-27 | 5.727255e-15 | 1.69e12 | the same |
+| 272 | T-322 | 3.393487e-27 | 3.862102e-17 | 1.14e10 | the same |
+| 292 | T-323 | 7.030684e-14 | 1.026574e-13 | 1.46 | the same |
+| 295 | T-324 | 2.966130e-19 | 4.162390e-19 | 1.40 | the same |
+| 299 | T-325 | 3.561215e-27 | 6.195876e-15 | 1.74e12 | the same |
+| 307 | T-326 | 3.596022e-27 | 1.337350e-15 | 3.72e11 | the same |
+
+At 130 and 303 the receipts are `measure/contraction-n130-t259.json` here and
+`option-d/contraction-n303-t278.json` beside the 303 solve.
+At the eight counts of issue 1009 the house’s margin is its own
+(`resources/web/mishapolk-issue1009-2026-11-16/measure/contraction-nNNN-own.json`) and
+the solve is Evan Daniel’s driver run on the new witness and held at row 3, its solved
+side in the run’s report
+(`../../regularized_drawings/think-i38n-2026-11-18/adopt-2026-11-18-n147-307-evand/n-NNN/report.json.gz`);
+lane w7r-optd-1118 re-measured all eight against `main` as merged with #1023
+(86284ec20), and
+`test_upper_bound_reports_1009.test_the_held_solves_below_the_new_houses_pass_option_d`
+holds the same shares.
+At 270, 299 and 307 the solves are the points the driver held on 9 November 2026
+(think-he66, think-463r). The owner left new-result status and the improved-by credit
+there with Polkovskyi, who first reported and certified the packings, the record noting
+the project’s earlier solves (think-frl5). The adoptions of T-331, T-332 and T-333 on 20
+November retired the older candidates at 268, 270 and 299. This table retains the
+comparisons to the houses of 18 November.
+Think-4z8z tracks the remaining candidates, including the separate solve of T-332 at
+270\. At 156 and 180, the decision’s other two counts, the project’s solves lie above
+Polkovskyi’s sides, so the project holds no candidate there.
+
 ## What Is Retained
 
 - **`certificates/`**: the certificate each entry registers.
@@ -65,8 +135,9 @@ the review’s run as a second route, and the review itself.
 - **`receipts/`**: the kernel’s three jobs on both maintained exact routes
   (`exact-certification-nNNN.json.xz`) and the six sharp controls
   (`sharp-controls-nNNN.json`).
-- **`measure/`**: `devtools.measure_identity` against each house’s certificate.
-  It is a measurement and decides nothing.
+- **`measure/`**: `devtools.measure_identity` against each house’s certificate, a
+  measurement that decides nothing, and `devtools.contraction_margin` of each house’s
+  certificate against the candidate (`contraction-nNNN-T.json`), which option D reads.
 - **`review/`**: the review’s programs (`code/`, with its README), its receipts
   (`out/`), and the run files it read that the repository holds nowhere else
   (`inputs/`): the two drawn views and the two regularized certificates.

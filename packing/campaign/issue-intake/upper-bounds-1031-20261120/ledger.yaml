@@ -1,0 +1,70 @@
+format: intake-ledger-v1
+read_at_main: 1015fc175fa4e2c01f912d915d784100e36d3bab
+read_on: '2026-11-20'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: c2
+  branch: claude/intake-2026-11-20-import-1021
+  commit: a203f4a752a30890c12ae405cb498beaec73fc9b
+  note: The packet's claim record, written on the lane's branch against main 1015fc175 and
+    read here by path.
+reports:
+- report: '#1031'
+  url: https://github.com/jlevy/squares/issues/1031
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-11-18T06:44:45Z'
+  bead: think-10mx
+  claims:
+  - n: 299
+    printed: '17.793636991744'
+    rounding: up
+    exact: 17793636991743040580325825384225613703947282755372586749208848013397/1000000000000000000000000000000000000000000000000000000000000000000
+    exact_from: packing/resources/web/de-winter-s299-upper-bound-2026-11-18/acquisition/claims.json
+      at claude/intake-2026-11-20-import-1021@a203f4a752a30890c12ae405cb498beaec73fc9b
+    first_committed: '2026-11-18T06:34:51Z'
+    measured:
+      against: T-325
+      finding: no symmetry of the box pairs it one to one with T-325's packing by nearest
+        centres; the optimal assignment, under the box's symmetry 3, moves 295 squares beyond
+        1e-3, 182 beyond 1e-2 and 127 beyond 0.1 (largest 1.07414) and turns 146 squares by
+        more than 1e-6 radians, by up to 41.72 degrees; 18 of its 114 tilted squares pair
+        with tilted squares of T-325 of the same sign; against T-277 likewise; by the box's
+        symmetries it is neither packing, and whether a rigid motion off the box's symmetries
+        pairs part of it with T-325's is the stage 4 review's measurement
+      source: packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/identity.json
+    new_packing:
+      source: '#1031: ''The search divided the container into diagonal slices and filled each
+        slice from a reflected or translated copy of a public packing: the outer slices from
+        372 squares and the seven middle slices from 335 squares.'''
+      continues: diagonal slices of the 372- and 335-square packings in Asterios Panoras's
+        public Kaggle compilation (version 17), which Kaggle's community explorer links to
+        prvsiyan's notebook and to notebooks by areebbb, jazivxt, alexchilton and prvsiyan,
+        locally optimized, with part of one tilted group reflected across the diagonal
+    note: T-325's uniform-contraction margin at 299 is 3.5612e-27 (squares 71 and 140), so
+      the gain, 7.3674e-3, lies wholly outside T-325's padding (packing/resources/web/de-winter-s299-upper-bound-2026-11-18/measure/contraction-n299.json);
+      under the owner's option D of 17 November 2026 (think-b0w5) the claim is below the house
+      shrunk to first contact, so it is a new result. T-277's margin is 3.4040e-12 (squares
+      179 and 194; contraction-n299-t277.json), and the certificate's own 6.4244e-67 (squares
+      137 and 175; contraction-n299-own.json).
+  note: '#1031 names 497eb47, committed at 2026-11-18T06:34:51Z, 594 seconds before it, the
+    commit that first committed the certificate. It asks for credit to Joost de Winter after
+    the 335- and 372-square packings in Panoras''s compilation (prvsiyan, areebbb, jazivxt,
+    alexchilton), and says the search, optimization and rational certificate were produced
+    with GPT-6.2 Sol (OpenAI) and the repository files, checks and figure with Claude (Anthropic),
+    both under his direction.'
+exceptions: []
+key_reason_candidates: []
+other_items:
+- issue: '#1031'
+  url: https://github.com/jlevy/squares/issues/1031
+  holders: Nick Sarris
+  kind: side-only leaderboard entry, no packing
+  bead: think-10mx
+  disposition: '#1031 quotes the Kaggle per-puzzle leaderboard''s side at 299, 17.793636991746555
+    (Nick Sarris, a notebook completed 18 November, 01:07:56 UTC), which it lies 3.5e-12 below;
+    it states no packing, so it is no report and is recorded as context only.'
+cross_check: []

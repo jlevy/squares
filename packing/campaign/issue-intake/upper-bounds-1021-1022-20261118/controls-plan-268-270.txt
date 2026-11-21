@@ -1,0 +1,56 @@
+# Controls plan, lane w6-dewinter-1118, n = 268 and 270 (think-gqzz)
+
+Written 2026-11-18, before any route, checker or measuring program has decided either
+certificate below. Before writing it the lane had read each n268/n268_exact.json's and
+n270/n270_exact.json's side field and square count at JoostdeWinter/square-packing
+a1ba501 with a script of its own (Fraction arithmetic, no geometry).
+
+Certificates (centre-direction JSON, a1ba501):
+
+- C268, #1021: n268/n268_exact.json, side ceiling at 12 places 16.870013850405, below the
+  house at 268 (16.8720298490844502).
+- C270, #1022: n270/n270_exact.json, side ceiling at 12 places 16.927314216352, below the
+  house at 270 (16.9281486033428544).
+
+## Admission (upper_bound_reports check-claims)
+
+Each exact side rounds up at 12 places to its issue's print, and is below its house. Any
+other outcome stops the lane at that certificate.
+
+## Gross controls (upper_bound_reports certify), each certificate
+
+On both maintained exact routes: the positive accepted; the duplicate-square job refused
+(overlap); the outside-container job refused (container). `check --replay` decides every
+job again with the same verdicts.
+
+## Sharp controls (upper_bound_reports sharp-controls), each certificate
+
+11 controls a count. At exact contact both routes accept with margin exactly 0, and 1e-30
+past contact both refuse with margin exactly -1e-30 (within the enlarged square's window,
+or at most it), each route naming only the failure the control makes:
+
+- side-lowered-past-wall-contact: accepted at contact, refused past it (container), by
+  the least far-wall clearance, 0 if a square touches the top or right wall (branch W0)
+  or positive otherwise (W1);
+- tightest-pair-closed-past-contact: accepted at contact, refused past it (overlap), by 0
+  if a pair touches exactly (P0) or the least gap otherwise (P1);
+- squares-moved-past-near-wall-contact: accepted at contact, refused past it (container),
+  by 0 if a square touches the left or bottom wall (N0) or by the least near-wall
+  clearance otherwise (N1); no branch is expected over the other;
+- square-enlarged-past-pair-contact: refused at contact for its shape alone, past it for
+  shape and overlap;
+- square-enlarged-past-wall-contact: a square at its wall grown by 0 accepted at contact
+  and refused past it for wall and shape (E0), or refused at contact for shape alone and
+  past it for shape and container (E1);
+- duplicate-square: refused (overlap).
+
+## Contraction margins and identity
+
+contraction_margin refuses a certificate unless both routes accept it and every exact wall
+and pair check holds; it is expected to accept each house and each certificate, and the
+contracted packings. No expectation is stated for the margins or the identities; option D
+(think-b0w5) is applied to whatever they show.
+
+Any control that comes out otherwise than stated here is recorded on the bead, in the
+packet README and in the PR, and the certificate is not registered above V1 until the
+difference is explained.

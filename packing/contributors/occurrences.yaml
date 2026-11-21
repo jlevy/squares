@@ -20847,6 +20847,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-172.md
+    record_key: '172'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-173.md
     record_key: '173'
     field: /reported_lower_bound/proved_by/0
@@ -21498,6 +21510,18 @@ occurrences:
   note: Reviewed 2026-10-21 against the named profile sources; the printed source
     text and credit role are retained.
   contributor_id: trevor-green
+- origin:
+    path: packing/frontier/n-199.md
+    record_key: '199'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-200.md
     record_key: '200'
@@ -23544,10 +23568,10 @@ occurrences:
     path: packing/frontier/n-268.md
     record_key: '268'
     field: /reported_upper_bound/found_by/0
-  expected_text: Doğa Özden
+  expected_text: Joost de Winter
   start: 0
-  end: 10
-  label: Doğa Özden
+  end: 15
+  label: Joost de Winter
   role: construction-finder
   disposition: unresolved
   evidence: []
@@ -23569,18 +23593,6 @@ occurrences:
   note: Reviewed packing/frontier/n-268.md [268] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-268.md
-    record_key: '268'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
 - origin:
     path: packing/frontier/n-269.md
     record_key: '269'
@@ -23614,20 +23626,14 @@ occurrences:
     path: packing/frontier/n-270.md
     record_key: '270'
     field: /reported_upper_bound/found_by/0
-  expected_text: Evan Daniel
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Joost de Winter
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-270.md [270] /reported_upper_bound/found_by/0
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel. Keep finder,
-    improver and solver roles distinct.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-270.md
     record_key: '270'
@@ -23645,30 +23651,6 @@ occurrences:
   note: Reviewed packing/frontier/n-270.md [270] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
-- origin:
-    path: packing/frontier/n-270.md
-    record_key: '270'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Doğa Özden
-  start: 0
-  end: 10
-  label: Doğa Özden
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-270.md
-    record_key: '270'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -24268,41 +24250,11 @@ occurrences:
     path: packing/frontier/n-299.md
     record_key: '299'
     field: /reported_upper_bound/found_by/0
-  expected_text: Evan Daniel
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Joost de Winter
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - repository-license
-  - bibliography
-  note: 'Reviewed packing/frontier/n-299.md /reported_upper_bound/found_by/0: the
-    case''s credit after the house adoption of 31 October 2026 names Evan Daniel as
-    construction finder, as the adopted result''s register entry and its stage 4 review
-    credit them; the label is the source''s.'
-  contributor_id: evan-daniel
-- origin:
-    path: packing/frontier/n-299.md
-    record_key: '299'
-    field: /reported_upper_bound/improved_by/0
-  expected_text: Doğa Özden
-  start: 0
-  end: 10
-  label: Doğa Özden
-  role: construction-improver
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
-- origin:
-    path: packing/frontier/n-299.md
-    record_key: '299'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: Mishapolk
-  start: 0
-  end: 9
-  label: Mishapolk
-  role: construction-improver
   disposition: unresolved
   evidence: []
   note: Identity review pending.
@@ -34684,6 +34636,210 @@ occurrences:
   start: 25
   end: 32
   label: Panoras
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 16
+  end: 24
+  label: Ostashev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 26
+  end: 33
+  label: PingYou
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 35
+  end: 42
+  label: Prabhat
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 44
+  end: 52
+  label: Malyshev
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s268 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Ostashev, PingYou, Prabhat, Malyshev, Couzo
+  start: 54
+  end: 59
+  label: Couzo
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s270 upper bound 2026-11-17]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s270 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Panoras
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s270 upper bound 2026-11-17]'
+    field: /credit
+  expected_text: de Winter after Panoras
+  start: 16
+  end: 23
+  label: Panoras
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 16
+  end: 23
+  label: Panoras
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 25
+  end: 33
+  label: prvsiyan
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 35
+  end: 42
+  label: areebbb
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 44
+  end: 51
+  label: jazivxt
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter s299 upper bound 2026-11-18]'
+    field: /credit
+  expected_text: de Winter after Panoras, prvsiyan, areebbb, jazivxt, Chilton
+  start: 53
+  end: 60
+  label: Chilton
   role: prerequisite
   disposition: unresolved
   evidence: []

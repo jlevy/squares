@@ -8,10 +8,11 @@ packets through ``test_upper_bound_reports``; these hold what is particular to t
 source's own digest list against the retained files, each print against its exact side,
 the record each certificate is compared with, the ledger's verdicts, the retained sharp
 controls, the identity and contraction measurements the register's notes cite, and the
-holds: T-280 (299, 303) and T-281 (130) stay below the stage 4 exit for the owner
+holds: T-280 (299, 303) and T-281 (130) stayed below the stage 4 exit for the owner
 (think-ruu2's RV-3, think-ikku), at C1 with the stage 4 review mapped and no case moved,
-while the eleven sides above the corpus are current, verified beyond-horizon rows. Every
-test reads the packets, the ledger and the record only; none needs the network.
+until the owner's option D made both restatements (think-b0w5, think-8yyy), while the
+eleven sides above the corpus are current, verified beyond-horizon rows. Every test reads
+the packets, the ledger and the record only; none needs the network.
 """
 
 from __future__ import annotations
@@ -61,10 +62,12 @@ SUPERSEDED = {n: "couzo-issue763-2026-10-23" for n in PRINTED if n > 324} | {
 HOUSES = {130: ("T-259", "1.955e-14"), 299: ("T-277", "1.182e-12"), 303: ("T-278", "3.291e-12")}
 #: The source key of each house's reported lane, which the holds leave in place. The pass
 #: of 18 November 2026 (think-i38n) moved 299 from T-277 to Mykhailo Polkovskyi's
-#: re-solve of it (T-325), 2.34e-12 below T-280's held side; the holds stay as they were.
+#: re-solve of it (T-325), 2.34e-12 below T-280's held side, and the pass of 20 November
+#: 2026 (think-78aj) on to Joost de Winter's issue-1031 certificate (T-333), a new
+#: arrangement 7.37e-3 below; the holds stay as they were.
 HOUSE_KEYS = {
     130: "[Mishapolk issue 846 2026-10-30]",
-    299: "[Mishapolk issue 1009 2026-11-16]",
+    299: "[de Winter s299 upper bound 2026-11-18]",
     303: "[Özden s303 upper bound 2026-11-09]",
 }
 #: Each in-corpus certificate's gain over its house as a share of the house certificate's
@@ -187,10 +190,14 @@ def test_each_in_corpus_certificate_is_its_houses_packing(n: int) -> None:
 
 
 def test_the_holds_and_the_rows() -> None:
+    """T-280 and T-281 were held below the stage 4 exit for the owner (think-ruu2's RV-3,
+    think-ikku). The owner's option D of 17 November 2026 (think-b0w5) answered both: each
+    re-certification lies within its house's own padding, so each is recorded, at C1, as a
+    restatement at every count (think-8yyy), with no wait and no regularization credit."""
     register = yaml.safe_load((reports.ROOT / "frontier/results.yaml").read_text("utf-8"))
     entries = {entry["id"]: entry for entry in register["results"]}
-    holds = (("T-280", [299, 303], "think-ruu2"), ("T-281", [130], "think-ikku"))
-    for result, scope, link in holds:
+    holds = (("T-280", [299, 303], ["T-277", "T-278"]), ("T-281", [130], ["T-259"]))
+    for result, scope, restated in holds:
         entry = entries[result]
         assert entry["scope"]["n_values"] == scope
         assert (entry["verification"], entry["confirmation"]) == ("V0", "C1")
@@ -198,8 +205,11 @@ def test_the_holds_and_the_rows() -> None:
         (review,) = entry["reviews"]
         assert (review["path"], review["verdict"]) == (REVIEW, "accepted")
         assert entry["attribution"]["source_keys"] == [SOURCE_KEY]
-        assert entry["unfinished_confirmations"][0]["link"] == link
-        assert [item["n"] for item in entry["regularizations"]] == scope
+        assert "unfinished_confirmations" not in entry
+        assert "regularizations" not in entry
+        assert [item["n"] for item in entry["restatements"]] == scope
+        assert [item["of"] for item in entry["restatements"]] == restated
+        assert {item["ruling"] for item in entry["restatements"]} == {"think-b0w5"}
     for n, key in HOUSE_KEYS.items():
         case = coverage.parse_case(reports.ROOT / f"frontier/n-{n:03d}.md")
         assert case["reported_upper_bound"]["source_key"] == key

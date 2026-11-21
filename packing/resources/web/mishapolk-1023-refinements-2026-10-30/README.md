@@ -84,6 +84,40 @@ measurement for credit; it decides nothing.
 - **241** ([measure/identity-n241.json](measure/identity-n241.json)): against T-182, one to one by nearest centres (symmetry 0), 0 squares beyond 1e-3 and 1 beyond 1e-9, the largest move 1.562500e-6 and turn 5e-15 degrees. Tilted beyond 1 degree: 1023 85, T-182 85.
 - **271** ([measure/identity-n271.json](measure/identity-n271.json)): against T-219, one to one by nearest centres (symmetry 0), 0 squares beyond 1e-3 and 0 beyond 1e-9, the largest move 2.326232e-19 and turn 5.184e-34 degrees. Tilted beyond 1 degree: 1023 69, T-219 69.
 
+## Padding (Option D)
+
+The owner answered on 17 November 2026 (think-b0w5, option D) the question this packet’s
+review left open (think-ikku’s RV-1, think-ruu2’s RV-3): a re-certification of a standing
+packing is a new result only if its side is below its predecessor’s once the predecessor
+is shrunk until its squares first touch (`devtools.contraction_margin`). Lane
+w7-optd-1118 (think-8yyy) measured each certificate here against the house certificate it
+re-certifies, on 18 November 2026, both maintained routes deciding each house certificate
+and its contraction. At every count the house contracted to first contact lies at or
+below this packet’s certificate (`within_margin`), so each is a restatement of the house,
+credited to its finder, and T-253 records them so (`restatements`):
+
+| n | House | Its margin | Binding pair | Gain | Share | Receipt |
+| ---: | --- | ---: | --- | ---: | ---: | --- |
+| 154 | T-222 | 1.292110e-19 | 12 and 13 | 1.292110e-19 | 1.0000 | [contraction-n154.json](measure/contraction-n154.json) |
+| 155 | T-197 | 1.295226e-19 | 9 and 10 | 1.295226e-19 | 1.0000 | [contraction-n155.json](measure/contraction-n155.json) |
+| 183 | T-220 | 1.399958e-19 | 114 and 115 | 1.399958e-19 | 1.0000 | [contraction-n183.json](measure/contraction-n183.json) |
+| 211 | T-188 | 1.499355e-19 | 142 and 189 | 1.499355e-19 | 1.0000 | [contraction-n211.json](measure/contraction-n211.json) |
+| 227 | T-225 | 1.556363e-19 | 170 and 181 | 1.556363e-19 | 1.0000 | [contraction-n227.json](measure/contraction-n227.json) |
+| 236 | T-218 | 1.586193e-19 | 40 and 42 | 1.586193e-19 | 1.0000 | [contraction-n236.json](measure/contraction-n236.json) |
+| 237 | T-190 | 1.590260e-19 | 54 and 55 | 1.590260e-19 | 1.0000 | [contraction-n237.json](measure/contraction-n237.json) |
+| 241 | T-182 | 1.598712e-19 | 160 and 161 | 1.598712e-19 | 1.0000 | [contraction-n241.json](measure/contraction-n241.json) |
+| 271 | T-219 | 1.694895e-19 | 200 and 206 | 1.694895e-19 | 1.0000 | [contraction-n271.json](measure/contraction-n271.json) |
+
+The shares print as 1.0000: each certificate is its house’s packing with the house’s
+1 + 1e-20 dilation replaced by about 1 + 1e-30, so it lies about 1e-30 above the house
+contracted (RV-2 of the review). From `packing/`, for each count and its house’s packet:
+
+```bash
+python -m devtools.contraction_margin --n 154 'T-222=packet:evand-n154-sweep-2026-10-20' \
+  --against 'T-253=packet:mishapolk-1023-refinements-2026-10-30' \
+  --out resources/web/mishapolk-1023-refinements-2026-10-30/measure/contraction-n154.json
+```
+
 ## Exact Replay
 
 `devtools.upper_bound_reports certify` decided every certificate of the packet and its

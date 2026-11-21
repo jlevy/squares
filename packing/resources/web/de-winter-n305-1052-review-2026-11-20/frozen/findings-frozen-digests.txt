@@ -1,0 +1,17 @@
+# Lane r1052 findings, frozen at 2026-11-20T20:16:13Z, before the source's README.md, REGISTRATION.md, SHA256SUMS, verify_exact.py, check_area.py or n305_record.png, comments on issue 1052, this repository's witness, verifier, promotion, identity or contraction code, packing/frontier/n-305.md, the register entries at 305 (T-309 among them), issue 1001 and its import, the earlier reviews at 305, Kaggle, or the import lane's work (bead think-kzwl, its branch and its packet) was read.
+# After the checker's freeze the frozen check refused the published witness at the reading (no 'envelope' key in its softschema block; no 'claim' block); r1052_envelope_copy.py, written then, made a reading copy that inserts those two pieces of metadata only, and the frozen check and controls ran on form J as published and on that copy. No frozen program was changed.
+# the frozen review text, and every receipt and program it cites beyond the checker list:
+b163d75e2351d7c9c9cb8740be997ffcddb2b1b7f8d5984bb997d6bcc6ec9ff6  frozen/review-2026-11-20-de-winter-1052-n305.frozen.md
+9fb1d91e413ad204fd252cf450562f7807649aee9b047814f4ef35aba27d97fc  frozen/checker-frozen-digests.txt
+774fe190e4d47c23e053f6b4cc33defd46140e20d10211c76eb5da5c8f781779  programs/r1052_envelope_copy.py
+bbec63008f6e8c9604a6fa10f5f6d4212927560592096b565dcf55f892768caf  programs/r1052_describe.py
+45ad985934fcb4674b74ca225760535c645e007b9f12a191af9beba1d47da889  out/check-n305.json
+2a02ee20e69d5382572d1c328a0464f328d76f09d8c39d80a888b2f2c64b06a0  out/check-n305-reading-copy.json
+ff448074dea497ffe5744d9be8464e647f5272b4082e1099cc200e59e5b2bc53  out/controls-n305.json
+a922d0eda593b9182a70497a516c791470518924536ffd0b68eebd86fe53ad69  out/describe-n305.json
+1642d6c80adec841ff5fcb03b5cd97d7af846ae9eb3039381c0ce584479f9f4f  out/envelope-copy.json
+1a53979a56f6e47ee9f2359085e9f1d62b56825ede087265ba523ef95960132f  out/selftest.json
+# the certificate's files as fetched by their blob ids after the checker's freeze (355cbe46ff685c00c1bb292443b974084dc0b9c4, 58ab84e20c2eb6d533f59d8f3141de3d4bfbf4f1), and the reading copy of the witness:
+e6c7d0280396a2fa61804a24a7c757365320869dbb89e8cf94316bb8b6a7831f  db8efcb:n305/n305_exact.json
+b11a6e65a275d3282e1400b89b4cdbd9ca01cf99d01a8e9f0a38a56c20081a46  db8efcb:n305/n305_witness.yaml
+ab67001da5c28e87050b46ee1707a79a217d2680893b06b2d880be8d22012f26  reading copy of n305_witness.yaml (r1052_envelope_copy.py)

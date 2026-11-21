@@ -1,0 +1,8 @@
+# Checker freeze 1, lane r1050 (bead think-5jr0): C1 to C4 and their self-test.
+# Frozen at 2026-11-20T17:00:40Z, before any of them read the source's data and before any source program was opened or run.
+# Verify from this directory: sha256sum -c frozen/checker-frozen-digests-1.txt
+7f0937a6cace9f3f266904354583bb84bf33197f87852ea6865875459cc84828  programs/r1050_q7.py
+401a7e9fa45ec60cfe10675a97e333bb80cf67da6bde6a6cab4d5a4211611454  programs/r1050_construction.py
+27676969f2924e112ba8493162c88ca3dfdb388091e5fab2cc9f82ba9d62f502  programs/r1050_rack.py
+cac4f292e0e904e9ab1710a7e8456ac6724f1f4eb1ab3c9ed6fee63def3a43c0  programs/r1050_orbits.py
+68b4326b5c0fccfa2c64edf5e394b17b9c4bf305f8509a1016ce390d248d15b9  programs/r1050_selftest.py
