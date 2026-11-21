@@ -1,0 +1,68 @@
+{
+  "record": "summary",
+  "ts": "2026-11-21T18:14:13.771+00:00",
+  "authority": "pause-only",
+  "watched_s": 309.4,
+  "samples": 100,
+  "percentile_samples": 100,
+  "sample_hz": 0.32,
+  "interventions": {
+    "pauses": 25,
+    "resumes": 25,
+    "paused_total_s": 153.6,
+    "paused_fraction": 0.497,
+    "harvests": 0,
+    "harvest_rounds": 0,
+    "processes_killed": 0,
+    "freed_gb_est": 0.0,
+    "aborted": false,
+    "processes_would_kill": 0,
+    "would_free_gb_est": 0.0,
+    "abort_refused": false
+  },
+  "dispositions": {
+    "suspensions": 25,
+    "terminated_on_sigterm": 0,
+    "force_killed_on_sigkill": 0,
+    "already_gone": 0,
+    "signal_denied": 0
+  },
+  "host": {
+    "reclaimable_gb": {
+      "min": 8.97,
+      "mean": 9.96,
+      "p1": 8.97,
+      "p10": 9.6,
+      "p50": 9.95
+    },
+    "max_pressure": 1
+  },
+  "tree": {
+    "cost_gb": {
+      "max": 1.1,
+      "p50": 0.17,
+      "p90": 0.35,
+      "p99": 1.1
+    },
+    "procs": {
+      "max": 5,
+      "p50": 2.0,
+      "p90": 5.0,
+      "p99": 5.0
+    },
+    "largest_worker_mb": {
+      "p50": 0.0,
+      "p90": 0.0,
+      "p99": 947
+    }
+  },
+  "watchdog_health": {
+    "heartbeats_late": 0,
+    "lag_s": {
+      "max": 0.43,
+      "p50": 0.07,
+      "p90": 0.14,
+      "p99": 0.17
+    }
+  }
+}

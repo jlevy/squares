@@ -1701,6 +1701,13 @@ def _evand_optima(n: int) -> Fraction:
     return legacy.parse(path.read_text(encoding="utf-8"), expected_n=n).side
 
 
+def _geiserx_1040_side(n: int) -> Fraction:
+    """Read the exact side of the digest-bound issue 1040 attachment."""
+    from devtools import upper_bound_houses as houses  # noqa: PLC0415 -- reader cycle
+
+    return houses.geiserx_1040_source("T-337").certificate(n).side
+
+
 #: How each holding source's exact side is rebuilt from its own retained packet, keyed by
 #: source key, so a comparison stays what it was however the case records later move.
 HOUSES: dict[str, Callable[[int], Fraction]] = {
@@ -1944,6 +1951,7 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # The retained rational derivation of Samanyu-dev's earlier public arrangement.
     "[Samanyu-dev square packing 2026-11-07]": _import("samanyu-n109-2026-11-07"),
     "[de Winter n305 certificate 2026-11-20]": _import("de-winter-n305-2026-11-20"),
+    "[GeiserX issue 1040 2026-11-19]": _geiserx_1040_side,
     # Lane w6-dewinter-1118 of 18 November (think-gqzz): Joost de Winter's issues 1021 at 268,
     # nine diagonal slices of published packings, and 1022 at 270, Panoras's compilation's
     # packing re-solved by regions, both at JoostdeWinter/square-packing a1ba501.

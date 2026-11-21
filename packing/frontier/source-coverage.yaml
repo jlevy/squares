@@ -14013,6 +14013,29 @@ sources:
     maintained jobs and 11 sharp controls have the stated outcomes; the accepted review independently
     checked the whole certificate and 51 controls. Source pin, later checksum list and review certificate
     identity agree.'
+- id: geiserx-n259-1040-2026-11-19
+  title: Sergio Fernández Rubio’s 259-square packing, refined and certified by Joost de Winter
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/1040
+  local: resources/web/geiserx-n259-1040-2026-11-19/
+  source_key: '[GeiserX issue 1040 2026-11-19]'
+  scope:
+    n_values:
+    - 259
+  reviewed: '2026-11-21'
+  source_date: '2026-11-19'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/geiserx-n259-1040-2026-11-19/acquisition/sources.json
+  evidence:
+  - E-geiserx-1040-certificate-report
+  - E-geiserx-1040-exact-feasibility
+  - E-geiserx-1040-review-exact-feasibility
+  notes: T-337 records the distinct 259-square construction of Sergio Fernández Rubio (GeiserX), with
+    Joost de Winter’s rational refinement. Both maintained routes and the independent review checked
+    all pairs.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -14362,11 +14385,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-23 (T-193).
 - n: 259
-  source_id: evand-exact-cur-2026-10-16
-  value: '16.59137814549769816'
-  evidence: E-evand-639-exact-sides-report
+  source_id: geiserx-n259-1040-2026-11-19
+  value: '16.5900164392299896'
+  evidence: E-geiserx-1040-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-23 (T-193).
+    a replay here and an accepted review, adopted on 2026-11-21 (T-337).
 - n: 260
   source_id: mishapolk-issue1009-2026-11-16
   value: '16.6335209398397608'
@@ -15398,14 +15421,14 @@ superseded_reports:
 - n: 259
   source_id: casson-square-packing-2026
   value: '16.60256850594295841'
-  superseded_by: evand-exact-cur-2026-10-16
+  superseded_by: geiserx-n259-1040-2026-11-19
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 259
   source_id: franciscouzo-square-packing-2026
   value: '16.602568490497649'
-  superseded_by: evand-exact-cur-2026-10-16
+  superseded_by: geiserx-n259-1040-2026-11-19
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 260
@@ -16191,9 +16214,9 @@ superseded_reports:
 - n: 259
   source_id: evand-square-packing-2026-10-05
   value: '16.602568490493364515381155942934'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-193's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-337's exact
     side is smaller.
-  superseded_by: evand-exact-cur-2026-10-16
+  superseded_by: geiserx-n259-1040-2026-11-19
 - n: 267
   source_id: ry-xu-new-packings-2026-10-08
   value: '16.8388319611168389'
@@ -16882,8 +16905,8 @@ superseded_reports:
   source_id: squish-481-third-request-2026-10-09
   value: '16.5913781454976982'
   reason: The house from 2026-10-11 until 2026-10-23; its certificate stays retained and verified,
-    and T-193's exact side is smaller.
-  superseded_by: evand-exact-cur-2026-10-16
+    and T-337's exact side is smaller.
+  superseded_by: geiserx-n259-1040-2026-11-19
 - n: 295
   source_id: evand-regularized-2026-10-10
   value: '17.7042327907360304'
@@ -17316,6 +17339,12 @@ superseded_reports:
   reason: The house from 2026-11-16 until 2026-11-21; its certificate stays retained and verified,
     and T-336's exact side is smaller.
   superseded_by: de-winter-n305-2026-11-20
+- n: 259
+  source_id: evand-exact-cur-2026-10-16
+  value: '16.59137814549769816'
+  reason: The house from 2026-10-23 until 2026-11-21; its certificate stays retained and verified,
+    and T-337's exact side is smaller.
+  superseded_by: geiserx-n259-1040-2026-11-19
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

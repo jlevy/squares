@@ -10181,3 +10181,36 @@ verifiers:
         note: The source says Claude handled repository files, checks and the figure. The review is
           also by Claude, but its checker was frozen before reading source or project verification code
           and reuses none of it. The overlap is of system family, not shared code or prompt.
+  - id: V-r1040-n259-review
+    program: verify_n259.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    summary: Independent rational supports and corner half-plane checks decide every unit square, wall
+      and pair of the submitted 259-square packing and compare its two encodings.
+    source:
+    - packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py
+    - packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py.txt
+    independence_record: docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: tbd-strong-max at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The attachment credits Codex for refinement and verification. The reviewer's independent
+          prompt and deciding code were frozen before project-review context.

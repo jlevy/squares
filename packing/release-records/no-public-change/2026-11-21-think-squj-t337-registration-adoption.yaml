@@ -1,0 +1,39 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/atlas/known-best/bound-citations.json
+  - packing/atlas/known-best/composite-figure.json
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
+  - packing/devtools/default_drawings.py
+  - packing/devtools/site_resources.py
+  - packing/devtools/upper_bound_houses.py
+  - packing/devtools/upper_bound_reports.py
+  - packing/frontier/results.yaml
+  - packing/frontier/source-coverage.yaml
+  - packing/src/sqpack/cli/validate.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  T-337 registers and adopts the exact rational upper bound at 259. The maintained
+  fixed-revision paper comparison used fresh output directories and Chrome on macOS.
+  After refreshing the source card, print credit hold, bound citations and screen
+  totals, it rendered the integrated adoption tree twice and main 8ba0e2a4a4ff once
+  with the 12 paths above restored to their baseline versions. The three other papers matched all
+  43 files apiece byte-for-byte. The explainer produced 55 deterministic files.
+  Restoring its live register count from 337 to 336 gives identical HTML and
+  Markdown bytes. That is the only measured change, and the comparison covers
+  the PDF inputs. A later type-only clarification of the attachment reader keeps
+  its custody and geometry decisions unchanged. The paper versions stay v0.4.35,
+  v0.1.11, v0.1.4 and v0.2.7.

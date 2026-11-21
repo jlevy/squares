@@ -373,8 +373,10 @@ def test_an_exact_solve_of_the_house_is_called_one_and_an_owed_regularization_is
     and owed the regularization at 102, 123, 258, 259 and 302 until grid-slack's version 2
     drew them on 26 October 2026 (think-mbdw): now each note credits that view first and
     calls the house an exact solve after it, and nothing is owed; 295 read regular as
-    published until the pass of 18 November 2026 moved it to a rational house (T-324),
-    whose view is drawn. PR 574's algebraic certificates at 153 and 207 (T-174) attain PingYou's
+    published until the pass of 18 November 2026 moved it to a rational house (T-324).
+    The pass of 21 November moved 259 to a rational house too (T-337); both now draw
+    project views without the old exact-solve item. PR 574's algebraic certificates at
+    153 and 207 (T-174) attain PingYou's
     own packings exactly and are exact solves too, drawn alike (review B1 of #756); its
     other houses keep the register's word until think-xqpq decides their vocabulary, so
     70's algebraic house, which reads regular as published, keeps the word."""
@@ -399,8 +401,8 @@ def test_an_exact_solve_of_the_house_is_called_one_and_an_owed_regularization_is
 
     assert default_drawings.owed_beads() == {}
     fields = drawings.case_fields(drawings.index_document())
-    drawn = (102, 123, 153, 207, 258, 259, 302)
-    for n in (102, 123, 258, 259, 302):
+    drawn = (102, 123, 153, 207, 258, 302)
+    for n in (102, 123, 258, 302):
         (item,) = (found for found in fields[n]["items"] if found["by"] != "project")
         assert item["by"] in drawings.EXACT_SOLVES, n
         assert item["kind"] == drawings.EXACT_SOLVE, n
@@ -412,12 +414,16 @@ def test_an_exact_solve_of_the_house_is_called_one_and_an_owed_regularization_is
         assert own["generator"] == "regularize_grid_slack/2", n
         assert own["side"] == "same", n
         assert fields[n]["note"].startswith("Regularized by the Squares Project"), n
-    # 295 left T-193 on 18 November 2026 for Mykhailo Polkovskyi's rational certificate
-    # (T-324), which is no exact solve; the project's view of it is drawn.
-    (own,) = fields[295]["items"]
-    assert own["by"] == "project"
-    assert own["of"] == "T-324"
-    assert "exact solve" not in fields[295]["note"]
+    # 295 and 259 left T-193 for rational houses. Their source's historical exact
+    # solve remains in the register, while the project view follows the new house.
+    for n, result in ((259, "T-337"), (295, "T-324")):
+        (own,) = fields[n]["items"]
+        assert own["by"] == "project", n
+        assert own["of"] == result, n
+        assert own["side"] == "same", n
+        assert "exact solve" not in fields[n]["note"], n
+    assert fields[259]["items"][0]["generator"] == "regularize_axis_components/2"
+    assert drawings.exact_solve("[Daniel exact current records 2026-10-16]", 259)
     for n, of in ((153, "T-148"), (207, "T-147")):
         (item,) = (found for found in fields[n]["items"] if found["by"] != "project")
         assert item["by"] == "[PingYou PR 574 certificates 2026-10-13]", n

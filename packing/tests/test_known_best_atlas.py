@@ -375,6 +375,19 @@ def _assert_file_retains(row: dict[str, Any], path: Path) -> None:
     upstream file itself under its packet's archive: its bytes, or the bytes it holds
     compressed, carry the SHA-256 the packet's acquisition record pinned upstream."""
     packet = adopted_houses.source_for(row["n"]).packet
+    acquisition = packet / "acquisition/sources.json"
+    if acquisition.is_file():
+        record = json.loads(acquisition.read_text(encoding="utf-8"))
+        if record.get("format") == "issue-attachment-sources-v1":
+            archive, marker, name = row["url"].partition("#")
+            assert marker, row["url"]
+            assert archive == record["attachment"]["url"], row["url"]
+            (member,) = (entry for entry in record["members"] if entry["path"] == name)
+            assert path == packet / member["retained_at"], row["url"]
+            data = path.read_bytes()
+            assert len(data) == member["bytes"], row["url"]
+            assert hashlib.sha256(data).hexdigest() == member["sha256"], row["url"]
+            return
     revision, digests = _packet_acquisition(packet)
     _, marker, upstream = row["url"].partition(f"/blob/{revision}/")
     assert marker, row["url"]
@@ -2517,8 +2530,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # and 305. The same pass (think-78aj) draws 268, 270 and 299 from his three packets of
     # issues 1021, 1022 and 1031, three more sources with no new name; Polkovskyi's issue
     # 1009 packet keeps its other counts. T-335 adds Samanyu-dev's source at 109, with
-    # the name on the current case and held for the next poster edition.
-    assert len(expected_sources) == 45
+    # the name on the current case and held for the next poster edition. T-337 adds
+    # the issue 1040 attachment at 259. T-193 still holds other counts.
+    assert len(expected_sources) == 46
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2696,6 +2710,7 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     printed credit block."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
+        259: ("Sergio Fernández Rubio",),
         **dict.fromkeys(
             (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
         ),
@@ -2715,6 +2730,7 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         (199, ["Evan Daniel"], ["Doğa Özden", "Joost de Winter"]),
         (90, ["jazivxt"], ["Joost de Winter"]),
         (109, ["Samanyu-dev"], []),
+        (259, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, [], []),
         (127, ["Joost de Winter"], []),
@@ -2765,7 +2781,15 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
                 credit_lines()
     finally:
         printed_names()
-    assert released - names == {"Özden", "Ono", "jazivxt", "Kodaj", "JoeGun", "Samanyu-dev"}
+    assert released - names == {
+        "Özden",
+        "Ono",
+        "jazivxt",
+        "Kodaj",
+        "JoeGun",
+        "Samanyu-dev",
+        "Fernández Rubio",
+    }
     assert all(name not in lines for name in released - names)
     assert "Yim" not in released
     drawn = ET.fromstring((ATLAS / "known-best-1-100.svg").read_text(encoding="utf-8"))
