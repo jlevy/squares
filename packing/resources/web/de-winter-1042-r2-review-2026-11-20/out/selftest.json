@@ -1,0 +1,182 @@
+{
+ "measure": {
+  "eight_images_each": true,
+  "image_masses_sum_to_total": true,
+  "bad_files_refused": true
+ },
+ "strips": {
+  "periodic_measure_holds": true,
+  "formula_equals_built_extension_d-1": true,
+  "formula_equals_built_extension_d1": true,
+  "formula_equals_built_extension_d2": true,
+  "moved_rectangle_refused": true,
+  "heavier_rectangle_refused": true,
+  "p2_refused": true,
+  "p_plus_d_1_refused": true,
+  "mass_at_n_refused": true
+ },
+ "envelope": {
+  "uniform_T8.3_disk0_exact": true,
+  "uniform_T8.3_disk1_exact": true,
+  "uniform_T9.1_disk0_exact": true,
+  "uniform_T9.1_disk1_exact": true,
+  "disk_stress_cases": [
+   {
+    "case": "T_S_minus_1",
+    "brute": [
+     5.578037381357868,
+     5.580118385238144
+    ],
+    "sweep": [
+     5.579077704414604,
+     5.57907770444063
+    ],
+    "plain_sweep": [
+     11.266964285713799,
+     11.26696428571474
+    ],
+    "overlap": true,
+    "tight": true,
+    "disk_below_plain": true,
+    "straddling_cells": 200
+   },
+   {
+    "case": "T_above_S",
+    "brute": [
+     6.763109739591845,
+     6.763172443071632
+    ],
+    "sweep": [
+     6.7631410927593665,
+     6.763141092760072
+    ],
+    "plain_sweep": [
+     7.732968369500127,
+     7.732968369500657
+    ],
+    "overlap": true,
+    "tight": true,
+    "disk_below_plain": true,
+    "straddling_cells": 28
+   }
+  ],
+  "disk_stress_agree": true,
+  "random_cases": [
+   {
+    "case": 0,
+    "S": "6",
+    "T": "3091/500",
+    "q": "3091/1000",
+    "disk": true,
+    "brute": [
+     12.25709935620481,
+     12.25709935620481
+    ],
+    "sweep": [
+     12.257099356203916,
+     12.257099356205094
+    ],
+    "overlap": true,
+    "tight": true,
+    "straddling_cells": 0
+   },
+   {
+    "case": 1,
+    "S": "6",
+    "T": "771/125",
+    "q": "899/250",
+    "disk": true,
+    "brute": [
+     14.066587862510836,
+     14.066603588342305
+    ],
+    "sweep": [
+     14.066595725022864,
+     14.066595725023355
+    ],
+    "overlap": true,
+    "tight": true,
+    "straddling_cells": 3
+   },
+   {
+    "case": 2,
+    "S": "15/2",
+    "T": "1913/250",
+    "q": "1913/500",
+    "disk": false,
+    "brute": [
+     18.628660615384614,
+     18.628660615384614
+    ],
+    "sweep": [
+     18.628660615383804,
+     18.628660615384934
+    ],
+    "overlap": true,
+    "tight": true,
+    "straddling_cells": 0
+   },
+   {
+    "case": 3,
+    "S": "6",
+    "T": "1053/200",
+    "q": "4857/2000",
+    "disk": true,
+    "brute": [
+     9.07005625,
+     9.07005625
+    ],
+    "sweep": [
+     9.07005624999924,
+     9.07005625000068
+    ],
+    "overlap": true,
+    "tight": true,
+    "straddling_cells": 0
+   },
+   {
+    "case": 4,
+    "S": "6",
+    "T": "6047/1000",
+    "q": "6047/2000",
+    "disk": true,
+    "brute": [
+     13.358183940029813,
+     13.358183940029813
+    ],
+    "sweep": [
+     13.358183940029669,
+     13.358183940030266
+    ],
+    "overlap": true,
+    "tight": true,
+    "straddling_cells": 0
+   },
+   {
+    "case": 5,
+    "S": "15/2",
+    "T": "1309/200",
+    "q": "6367/2000",
+    "disk": false,
+    "brute": [
+     16.700562140018622,
+     16.700562140018622
+    ],
+    "sweep": [
+     16.700562140018214,
+     16.700562140018906
+    ],
+    "overlap": true,
+    "tight": true,
+    "straddling_cells": 0
+   }
+  ],
+  "random_cases_agree": true,
+  "random_cases_use_disk": true,
+  "disk_area_agrees_with_staircase": true,
+  "periodic_T_S_minus_1_gives_M_minus_1": true,
+  "r_707106_refused": true,
+  "seam_violating_fit_refused": true
+ },
+ "failed": []
+}

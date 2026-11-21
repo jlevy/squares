@@ -2165,19 +2165,19 @@
       "url": "https://github.com/evand/square-packing/blob/bb4cc78e5b35103c1f177db55e9cf08974e66563/search/packer/candidates/s304_1105.cert"
     },
     {
-      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-305-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef/n305/n305_exact.json at db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         305
       ],
       "n": 305,
-      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-305-candidate.yaml",
+      "path": "resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-16",
+      "retrieved": "2026-11-21",
       "source_n": 305,
-      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-305-candidate.yaml"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef/n305/n305_exact.json"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n306.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

@@ -322,14 +322,12 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # T-335's n109 intake is outside the historical lifted-hold adoption cohort.
     assert 109 not in previous
     assert 109 not in held_counts
-    # T-336's n305 refinement is staged after n305 already adopted T-309.
-    # It is outside the lifted hold's remaining adoption cohort.
+    # T-336 replaces T-309 after n305 left the hold; the historic cohort stays.
     assert 305 in previous
     assert 305 not in held_counts
-    assert (houses.ADOPTED[305], houses.adopted_on(305)) == ("T-309", "2026-11-16")
-    staged_from_hold = set(select.PENDING_ADOPTION) - {305}
+    assert (houses.ADOPTED[305], houses.adopted_on(305)) == ("T-336", "2026-11-21")
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
-        staged_from_hold | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
+        set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
@@ -350,7 +348,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         270: "T-332",
         272: "T-322",
         297: "T-299",
-        305: "T-309",
+        305: "T-336",
         307: "T-326",
         308: "T-221",
     }
@@ -1702,9 +1700,7 @@ def test_a_rational_house_staged_for_the_writer_fails_the_check(
     assert "the writer writes it, so stage it for the next pull request" in problem
 
 
-def test_the_staged_adoptions_name_their_beads_and_reasons(
-    selections: dict[int, select.Selection],
-) -> None:
+def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
@@ -1725,22 +1721,6 @@ def test_the_staged_adoptions_name_their_beads_and_reasons(
         assert n not in defaults.PENDING_ALLOWED
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
-        if n == 305:
-            assert pending == select.Pending(
-                house="T-336", bead="think-kzwl", why=select.NEXT_PULL_REQUEST
-            )
-            selection = selections[n]
-            assert selection.house is not None
-            assert selection.house.result == "T-336"
-            assert selection.house.side < selection.case.verified == houses.side(n)
-            assert selection.case.source_key == "[JoeGun upper bounds 2026-11-16]"
-            assert selection.case.evidence == (
-                "E-joegun-1001-exact-feasibility",
-                "E-joegun-1001-review-exact-feasibility",
-            )
-            assert (houses.ADOPTED[n], houses.adopted_on(n)) == ("T-309", "2026-11-16")
-            assert n not in defaults.PENDING_ALLOWED
-            continue
         algebraic = pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
@@ -1775,7 +1755,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons(
     # that of 5 November 2026 took 175 off: T-267 is below it there, and the last pass of 9
     # November 2026 took 199 off: T-284 is below it there, and the pass of 18 November
     # 2026 took 292 off: T-323 is below it there (`OVERTAKEN`).
-    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 301, 305]
+    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 301]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
@@ -1906,7 +1886,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         90: "T-304",
         127: "T-330",
         264: "T-308",
-        305: "T-309",
+        305: "T-336",
         210: "T-317",
         272: "T-322",
         292: "T-323",
@@ -3253,6 +3233,11 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
         "The case kept its previous house until T-335’s adoption on 21 November 2026" in body109
     )
     assert "The case keeps its house until the adoption" not in body109
+    body305 = _flat(select.case_path(305).read_text(encoding="utf-8"))
+    assert "**Earlier staging, 21 November 2026.**" in body305
+    assert "The case moved to T-336’s side on 21 November 2026" in body305
+    assert "**Pending house adoption, 21 November 2026.**" not in body305
+    assert "Both required strong drawing runs remain part" not in body305
 
 
 def test_each_count_of_one_result_states_its_own_lineage() -> None:

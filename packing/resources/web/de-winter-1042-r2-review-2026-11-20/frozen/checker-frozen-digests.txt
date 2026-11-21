@@ -1,0 +1,14 @@
+# Checker freeze 1, lane rR2b (bead think-bgi2), taking over lane rR2-lower after its interruption at about 20:40Z.
+# Written after the programs ran on synthetic inputs only (out/selftest.json, out/plumbing*.json) and before
+# they ran on the source's data and before any program of the source was opened or run.
+# Frozen at 2026-11-20T21:09:01Z. Verify from this directory: sha256sum -c frozen/checker-frozen-digests.txt
+9d1ced852402fb13a66fcbf8171d086bfc61cf32fd21e7332c6662c01d73ab3d  programs/rr2_measure.py
+58703932a4a40a60126691297456895390d38f202dffb398c7d4ee77f92f7216  programs/rr2_strips.py
+40829e0d815ca32418a78a2622f63012ed7d23472b23ed58439386f7745b29ae  programs/rr2_envelope.py
+055453187641b20295251d43bdb4d22f742329c15bdc981b93e59a20a30157c0  programs/rr2_envelope.cpp
+61968bf9aa1c4a11a1d460dee840881d055a46940cb7b6c4ea5c9835b120c0e8  programs/rr2_selftest.py
+3c04203ba2e1e3b7b46c95c65644d540dd174bcda478bb790413ae5f2e9804a4  programs/rr2_plumbing.py
+cc061acc88061278544c0a8c55b39d40252fb99669dcd17c0c4bd1ec111fe4b8  out/selftest.json
+bc04156b389e9a3db375719579391a86cee264014335c886ffd5908303e626c7  out/plumbing.json
+c3ef8233aa6d1cce7e0dd5c077d3dcf0460bdf7de50edac6480b45b13573eac9  out/plumbing-strips.json
+5cd5e72c4c61dea3c299da5bef7bc84fb46036043fde3b646c51ae9a0b52d44e  out/plumbing-envelope.json

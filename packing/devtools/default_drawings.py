@@ -954,6 +954,25 @@ SETTLED: dict[int, Settled] = {
         "than the axis tool's view of this witness (49 against 40), so that view stays drawn",
         _README_LRJ4,
     ),
+    305: Settled(
+        DECIDED,
+        "[de Winter n305 certificate 2026-11-20]",
+        "resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz",
+        "db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef",
+        "179457558387415886710583983360138290031648651962347523515443824166144058057388"
+        "817807/10000000000000000000000000000000000000000000000000000000000000000000000"
+        "000000000000",
+        (
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n305-grid-0.5"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n305-grid-1"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n305-grid-5"),
+            (EVAND_GENERATOR, "evand-regularize-adopt-2026-11-21-n305-evand"),
+        ),
+        "Grid-slack found no view at 0.5, 1 or 5 degrees. Evan Daniel's same-side "
+        "re-solve refused on literal-too-large, and the selector held the solved view "
+        "at row 4, about 1.795e-19 above U. The axis view draws T-336 at its exact side.",
+        "packing/cases/regularized_drawings/think-kzwl-2026-11-21/README.md",
+    ),
     306: Settled(
         DECIDED,
         "[PingYou PR 574 certificates 2026-10-13]",

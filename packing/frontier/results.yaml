@@ -38415,7 +38415,7 @@ results:
   - id: T-262
     kind: lower-bound
     registered: '2026-11-03'
-    landed: '2026-11-03'
+    landed: '2026-11-04'
     headline: "`s(94) ≥ 1993/200` verified, T-091's measure dilated onto a 600-direction net"
     claim: >-
       A rectangle measure of kenaznia-doga/s94-lower-bound, published on 3 November 2026 and
@@ -54247,9 +54247,9 @@ results:
     registered: '2026-11-21'
     landed: '2026-11-21'
     headline: De Winter's refinement of the Kodaj-JoeGun arrangement at 305 below T-309
-    claim: 'One complete rational certificate proves s(305) <= 17.9457558387415887,
-      the 16-place ceiling of its exact side. The 12-place ceiling is 17.945755838742,
-      the bound in the issue.
+    claim: 'One complete rational certificate proves s(305) <= 179457558387415886710583983360138290031648651962347523515443824166144058057388817807/10000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      Its side rounds upward to 17.9457558387415887 at 16 places and to 17.945755838742
+      at 12 places, the bound in the issue.
 
       The accepted stage 4 review of issue 1052 independently decided every square, wall and all 46,360
       pairs by separating axes in Python integers and exact polygon clipping in gmpy2.mpq. Its 51 predeclared
@@ -54310,10 +54310,8 @@ results:
       controls have all_as_expected true. The maintained routes share parsing, half-angle conversion,
       Fraction arithmetic and separating axes; they are not two independent methods. The source's own
       checkers were not run in this import. The independent evidence is the accepted review's separate
-      implementation. Registration alone does not adopt the house; adoption and regularization remain
-      separate work under think-kzwl.
-    next_rung: House adoption is pending under think-kzwl, together with both required strong drawing
-      runs. V4/C4 would require a second distinct adversarial review and human oversight.
+      implementation. Registration preceded the house adoption under think-kzwl.
+    next_rung: V4/C4 would require a second distinct adversarial review and human oversight.
     reviews:
       - path: docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md
         kind: adversarial
@@ -55648,18 +55646,17 @@ regularized_drawings:
         max_turn_deg: 0.00501006
       view: packing/atlas/known-best/regularized/n-304-regularized.yaml.gz
     - n: 305
-      of: T-309
+      of: T-336
       by: project
-      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 134
-        max_move: 0.2481037
-        max_turn_deg: 0.245779
+        moved: 25
+        max_move: 0.1780675
+        max_turn_deg: 1.14592e-28
       view: packing/atlas/known-best/regularized/n-305-regularized.yaml.gz
     - n: 306
       of: T-174

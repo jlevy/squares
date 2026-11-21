@@ -2518,7 +2518,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # issues 1021, 1022 and 1031, three more sources with no new name; Polkovskyi's issue
     # 1009 packet keeps its other counts. T-335 adds Samanyu-dev's source at 109, with
     # the name on the current case and held for the next poster edition.
-    assert len(expected_sources) == 44
+    assert len(expected_sources) == 45
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2691,7 +2691,9 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     pending evidence. Its prose names jazivxt's public notebook and Doğa Özden's certificate;
     the hold holds Özden alone as the certificate source author used by the poster's
     fallback. The same day T-335 adds Samanyu-dev's finder credit at 109. The full
-    roster then exceeds the current poster edition's three-line credit block."""
+    roster then exceeds the current poster edition's three-line credit block. T-336
+    adds de Winter as the further improver at 305. His name already appears in the
+    printed credit block."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         **dict.fromkeys(
@@ -2719,7 +2721,7 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         (204, ["Tomáš Kodaj"], ["JoeGun"]),
         (232, ["Tomáš Kodaj"], ["JoeGun"]),
         (264, ["Tomáš Kodaj"], ["JoeGun"]),
-        (305, ["Tomáš Kodaj"], ["JoeGun"]),
+        (305, ["Tomáš Kodaj"], ["JoeGun", "Joost de Winter"]),
         (237, ["Doğa Özden"], []),
         (268, ["Joost de Winter"], []),
         (269, ["Doğa Özden"], []),

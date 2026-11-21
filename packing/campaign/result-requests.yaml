@@ -38867,6 +38867,12 @@ issues:
       - result: n50-n218-lower-bounds
       - result: n161-four-region-follow-up
       - result: n18-n313-public-replay
+    - url: https://github.com/jlevy/squares/issues/1042#issuecomment-7065203149
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported: []
+      beads: [think-bgi2]
     close_when: >-
       The bounds and both follow-ups are triaged, retained, registered, replayed within the
       cap or held on validation beads, and the reply on main says what was registered and
@@ -38908,8 +38914,9 @@ issues:
     triage: done
     summary: 'De Winter''s finite upper bound at 305 is registered as T-336 at V3/C3, S2, with maintained
       replay and accepted independent review #1057 mapped to separate evidence. It lies below T-309 contracted
-      to first contact and is a new result under option D. House adoption remains pending in think-kzwl.'
-    read_through: '2026-11-20T17:51:36Z'
+      to first contact and is a new result under option D. T-336 replaced T-309 as the house on 21 November
+      2026. Both strong drawing families completed and the certified axis view stays drawn.'
+    read_through: '2026-11-21T06:59:22Z'
     results:
       - key: n305-rational-certificate
         claim: s(305) <= 17.945755838742, the exact rational certificate's 12-place ceiling.
@@ -38925,8 +38932,57 @@ issues:
         source: body
         not_registered: A side-only comparison, without a packing, retained as context.
         queued: false
+      - key: n305-same-side-axis-variants
+        claim: >-
+          Two claimed rational variants at the original filed side: 31 of the 36 near-axis
+          squares made exactly axis-aligned with centers fixed, and n305_37_aligned.json with
+          all 36 plus square 43 aligned after moving nine centers. The latter has 213 exactly
+          axis-aligned squares, up from 176.
+        source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
+        not_registered: >-
+          The new same-side variants are separate from the original certificate; exact
+          feasibility, geometric identity and their relation to its drawing await review.
+        queued: true
+        bead: think-rbyl
+      - key: n305-axis-variant-minimality
+        claim: >-
+          At the original centers and side with all other directions fixed, 31 of the 36
+          near-axis turns is the claimed maximum that can be snapped upright together. With each
+          center-coordinate change bounded by 2e-11 and other directions kept as filed, nine
+          centers is the claimed minimum needed to straighten all 36.
+        source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
+        not_registered: >-
+          The exact enumeration and 17-group hitting-set argument are source claims whose
+          hypotheses and completeness await review.
+        queued: true
+        bead: think-rbyl
+      - key: n305-export-enclosure-identity
+        claim: >-
+          For Q = 10^82, the source claims every filed half-angle tangent is on the 1/Q grid,
+          each filed center is a point on that grid multiplied by 1 + 3/Q, and the side is
+          exactly ceil(Q(1+3/Q)H)/Q for H the largest upper or right extent before center
+          dilation. A common translation and trim reportedly reduces the enclosing side by about
+          3.16273e-82.
+        source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
+        not_registered: >-
+          The algebraic reconstruction of the export and its enclosure consequences await
+          checking against the retained original certificate.
+        queued: true
+        bead: think-rbyl
+      - key: n305-precision-enclosure
+        claim: >-
+          A separate rational enclosure in the attachment's precision/ directory, at the
+          original filed orientations, is claimed to lie about 3.20e-81 below the original exact
+          side with the same upward 12-place ceiling.
+        source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
+        not_registered: >-
+          Retention, exact feasibility, identity and the exact comparison are pending; a smaller
+          rational enclosure is not yet a new registered result.
+        queued: true
+        bead: think-rbyl
     beads:
     - think-kzwl
+    - think-rbyl
     answer_bead: think-kzwl
     replies:
     - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7059935496
@@ -38934,7 +38990,39 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7064223904
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-rational-certificate
+        id: T-336
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: pending adoption
+      - result: n305-rational-certificate
+        id: E-de-winter-1052-exact-feasibility
+        status: confirmed
+      - result: n305-rational-certificate
+        id: E-de-winter-1052-review-exact-feasibility
+        status: confirmed
+      beads: [think-kzwl, think-rbyl]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
+    notes: >-
+      Read issuecomment-7058958734 on 21 November 2026 as source claims. Its
+      n305-review-evidence.zip (file 35205180) is mirrored at
+      attachments/n305-review-evidence.zip at dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc; the
+      manifest declares SHA-256
+      559ab31345d5b3df5ac1c63f92ab4101b619dac3c060fb0e3f78ac83e5292fca. The archive was not
+      downloaded or executed in this triage. The corrected n305_witness.yaml is claimed to add
+      only schema and claim metadata, recovering the original bytes when removed; that is an
+      artifact correction to compare, not another packing. The source confirms Codex
+      search/optimization credit and Claude repository preparation, but could not establish
+      which Chilton CSV started the search or whether its 305 rows were T-309. These answers do
+      not settle that provenance. The four additional claim rows remain on think-rbyl
+      independently of the original certificate's registration and review.
+
   - number: 1055
     title: 'Raised lower bound for n = 20: s(20) > 99/20 = 4.95'
     author: JoostdeWinter

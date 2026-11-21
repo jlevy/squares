@@ -1,0 +1,178 @@
+{
+  "review": "rR2, Squares issue 1042",
+  "producer": {
+    "repository": "JoostdeWinter/square-packing",
+    "commit": "21d944c43098e2261ab7d713cd10f02a5eb13f3d",
+    "verified_c2_data_files": 17
+  },
+  "freeze": {
+    "plan_commit": "3a02ec8d29190155dcaf1b806ff6b1474722b2f5",
+    "checker_tip": "1e86fd925a92b0458b65d8431b83f7327a6c46b6",
+    "verification": "all Git blob IDs and frozen SHA-256 values matched"
+  },
+  "c2": {
+    "status": "passed",
+    "evidence": "packing/resources/web/de-winter-1042-r2-review-2026-11-20/out/resume-2026-11-21/c2-confirmed/c2.json",
+    "prior_receipt": "First scratch run: byte-identical to c2.evidence (SHA-256 dcf90c4b9b5d1fa53d05ccd469c9350de33f443a211f81701ec29f2f761c371d); timeout was inside the guarded tree. No separate first-run receipt is committed.",
+    "matches": "D1, D3, D8, and the corner weight, placement and arithmetic checks in D7",
+    "claim_masses": [
+      {
+        "n": 137,
+        "d": -1,
+        "side": "11881/1000",
+        "mass": "26152688030583751524033/191568020155573000000",
+        "slack": "92130730729749475967/191568020155573000000"
+      },
+      {
+        "n": 188,
+        "d": 1,
+        "side": "6929/500",
+        "mass": "187999999/1000000",
+        "slack": "1/1000000"
+      },
+      {
+        "n": 189,
+        "d": 1,
+        "side": "13881/1000",
+        "mass": "188999999/1000000",
+        "slack": "1/1000000"
+      },
+      {
+        "n": 217,
+        "d": 2,
+        "side": "1857/125",
+        "mass": "21699999/100000",
+        "slack": "1/100000"
+      },
+      {
+        "n": 218,
+        "d": 2,
+        "side": "7433/500",
+        "mass": "217999999/1000000",
+        "slack": "1/1000000"
+      }
+    ],
+    "negative_controls": {
+      "band_primitive_moved_1e-8": {
+        "primitive": 1554,
+        "refused": true
+      },
+      "band_primitive_mass_times_1+1e-12": {
+        "primitive": 1554,
+        "refused": true
+      },
+      "p_one_above_widest": {
+        "p": 4,
+        "refused": true
+      },
+      "n_minus_1_at_189": {
+        "refused": true
+      },
+      "corner_multiplier_outside_corner_square": {
+        "primitive": 1,
+        "refused": true
+      },
+      "corner_negative_multiplier": {
+        "primitive": 0,
+        "refused": true
+      }
+    },
+    "limits": {
+      "max_workers": 1,
+      "wall_seconds": 1800,
+      "timeout_outside_guarded_tree": true
+    },
+    "run": {
+      "host": "Darwin 25.5.0 arm64",
+      "python": "Python 3.14.7",
+      "measured": "13.44 real        12.90 user         0.11 sys",
+      "checker_released_utc": "2026-11-21T08:34:54Z",
+      "supervision_finished_utc": "2026-11-21T08:35:19Z",
+      "workload_exit": 0,
+      "guard_exit": 0
+    },
+    "guard": {
+      "record": "summary",
+      "ts": "2026-11-21T08:35:19.357+00:00",
+      "authority": "full",
+      "watched_s": 24.7,
+      "samples": 8,
+      "percentile_samples": 8,
+      "sample_hz": 0.32,
+      "interventions": {
+        "pauses": 2,
+        "resumes": 2,
+        "paused_total_s": 18.5,
+        "paused_fraction": 0.747,
+        "harvests": 0,
+        "harvest_rounds": 0,
+        "processes_killed": 0,
+        "freed_gb_est": 0.0,
+        "aborted": false,
+        "processes_would_kill": 0,
+        "would_free_gb_est": 0.0,
+        "abort_refused": false
+      },
+      "dispositions": {
+        "suspensions": 2,
+        "terminated_on_sigterm": 0,
+        "force_killed_on_sigkill": 0,
+        "already_gone": 0,
+        "signal_denied": 0
+      },
+      "host": {
+        "reclaimable_gb": {
+          "min": 10.12,
+          "mean": 10.22,
+          "p1": 10.12,
+          "p10": 10.12,
+          "p50": 10.24
+        },
+        "max_pressure": 1
+      },
+      "tree": {
+        "cost_gb": {
+          "max": 0.09,
+          "p50": 0.0,
+          "p90": 0.09,
+          "p99": 0.09
+        },
+        "procs": {
+          "max": 2,
+          "p50": 2.0,
+          "p90": 2.0,
+          "p99": 2.0
+        },
+        "largest_worker_mb": {
+          "p50": 0.0,
+          "p90": 0.0,
+          "p99": 0.0
+        }
+      },
+      "watchdog_health": {
+        "heartbeats_late": 0,
+        "lag_s": {
+          "max": 0.14,
+          "p50": 0.07,
+          "p90": 0.14,
+          "p99": 0.14
+        }
+      }
+    },
+    "proof_dependencies_pending": [
+      "Anchor coverage and receipt measure identity (D0)",
+      "Local corner coverage for the exact modified measure (part of D7)",
+      "The construction lemmas and pigeonhole argument"
+    ]
+  },
+  "c3": {
+    "status": "undecided",
+    "reason": "Frozen recipe requires GNU g++ 13.3.0. The available Apple clang and Homebrew GNU g++ 14.2.0 were not substituted.",
+    "available_compilers": [
+      "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+      "g++-14 (Homebrew GCC 14.2.0_1) 14.2.0"
+    ],
+    "producer_envelope_files_fetched": 0
+  },
+  "c6_c7": "pending; no producer program was opened or run"
+}

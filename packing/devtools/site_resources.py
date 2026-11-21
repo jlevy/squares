@@ -486,8 +486,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "(T-312, T-313), are replayed here. Three successive certificates at 127 of a "
             "band from an arrangement in Kaggle compilations, the lowest 9.60e-4 below "
             "T-305 (T-328 to T-330), are replayed here. The refinement at 305 of "
-            "Kodaj and JoeGun\u2019s arrangement is replayed and reviewed as T-336; "
-            "its house adoption is pending."
+            "Kodaj and JoeGun\u2019s arrangement is replayed and reviewed as T-336 "
+            "and now supplies the house at 305."
         ),
     ),
     (

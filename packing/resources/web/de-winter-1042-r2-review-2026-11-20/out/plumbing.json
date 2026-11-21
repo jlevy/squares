@@ -1,0 +1,12 @@
+{
+ "rr2_strips.py": {
+  "returncode": 0,
+  "stdout": "STRIP_AND_CORNER_CLAIMS_DECIDED CONTROL_ACCEPTED\n",
+  "stderr": ""
+ },
+ "rr2_envelope.py": {
+  "returncode": 1,
+  "stdout": "K1000e decided\nK1001e decided\nK1e NOT decided\nK161f NOT decided\ncross-check True\nside+1/1000 K1000e False\nside+1/1000 K1001e False\nside+1/1000 K1e True\nside+1/1000 K161f None\nNOT_DECIDED ALL_CONTROLS_REFUSED\n",
+  "stderr": ""
+ }
+}
