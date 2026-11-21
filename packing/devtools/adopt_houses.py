@@ -5958,8 +5958,13 @@ def _retained_672(text: str) -> str:
     )
 
 
-def _n109_staging_history(text: str, until: str) -> str:
-    """Keep the canonical intake's staging paragraph as history after its house moves."""
+def _n109_history(text: str, until: str) -> str:
+    """Date the prior ceiling and the canonical intake's staging after the house moves."""
+    text = re.sub(
+        r"\bit\s+proves(?=\s+\$s\(109\)\s+\\le\s+10\.949747468305)",
+        "the earlier bound was",
+        text,
+    )
     text = re.sub(
         _spaced("**Staged house adoption, 21 November 2026.**"),
         "**Earlier staging, 21 November 2026.**",
@@ -5970,8 +5975,8 @@ def _n109_staging_history(text: str, until: str) -> str:
             "The case keeps its house until the adoption, staged under think-wvr8, "
             "moves it to T-335’s side after both required strong generator runs."
         ),
-        f"The case kept its previous house until T-335’s adoption on {until}; "
-        "the staging note required both strong generator runs in the adoption change.",
+        f"The case kept its previous house until T-335’s adoption on {until}. "
+        "The staging note required both strong generator runs in the adoption change.",
         text,
     )
 
@@ -6024,7 +6029,7 @@ def historical(move: Move, text: str) -> str:
     if n == 29:
         text = _n29_history(text)
     if n == 109:
-        text = _n109_staging_history(text, until)
+        text = _n109_history(text, until)
     text = held_history(text)
     text = pending_history(text, until)
     if houses.adopted_on(n) >= RETAINED_672_FROM:
