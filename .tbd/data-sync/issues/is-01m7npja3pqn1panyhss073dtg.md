@@ -3,9 +3,9 @@ type: is
 id: is-01m7npja3pqn1panyhss073dtg
 title: "Apply option D (think-b0w5) at every count it settles: measure each re-certification against its predecessor shrunk to first contact (devtools.contraction_margin), record new result or restatement, and lift blocked:owner-decision on #939, #946 and #846 (think-ruu2, think-ikku, think-oqjd, think-5c9z; T-253, T-260, T-280, T-281, T-285, T-286; candidates at 130/293/307; regularizer optima)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 27
+version: 28
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -14,8 +14,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-17T21:28:19.830Z
-updated_at: 2026-11-21T00:45:48.175Z
+updated_at: 2026-11-21T00:53:26.973Z
 started_at: 2026-11-18T02:28:47.344Z
+closed_at: 2026-11-21T00:53:26.969Z
+close_reason: "Option D landed in #1030 as e87286443e. Exact-head CI and all 6568 live site checks passed. Seven stage-7 replies were posted and #939/#946 closed. Reply receipt bookkeeping remains in think-ck2q."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
