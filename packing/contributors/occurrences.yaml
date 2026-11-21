@@ -34988,6 +34988,60 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n305 certificate 2026-11-20]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+    - n305-source
+    - bibliography
+  contributor_id: joost-de-winter
+  note: The retained source names Joost de Winter and identifies the antecedent construction separately.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n305 certificate 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Kodaj, JoeGun
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+    - n305-source
+    - bibliography
+  contributor_id: joost-de-winter
+  note: The retained source names Joost de Winter and identifies the antecedent construction separately.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n305 certificate 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Kodaj, JoeGun
+  start: 16
+  end: 21
+  label: Kodaj
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n305 certificate 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Kodaj, JoeGun
+  start: 23
+  end: 29
+  label: JoeGun
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
@@ -35647,3 +35701,10 @@ inspections:
   scope: Identity byline only
   locators:
   - 'Opening paper byline, Authors: Wolfram Bentz.'
+- path: packing/resources/web/de-winter-n305-2026-11-20/source/n305/README.md
+  status: inspected
+  scope: Identity byline and construction credit only
+  locators:
+    - Method and AI assistance names Joost de Winter as directing the work.
+    - Construction credits Tomáš Kodaj's arrangement as improved by JoeGun, starting from Chilton's
+      compilation and using Daniel's code in T-309.

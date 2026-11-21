@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **287** programs: **57** external and **230** first-party; **200** decide claims and **87** check premises.
-- **813** of **1048** evidence entries name the programs that verified them: 406 independently re-implemented, 325 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **288** programs: **57** external and **231** first-party; **201** decide claims and **87** check premises.
+- **815** of **1051** evidence entries name the programs that verified them: 408 independently re-implemented, 325 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -92,8 +92,8 @@ second implementation agrees.
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 19 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 154 | 161 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 146 | 161 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 155 | 162 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 147 | 162 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -319,6 +319,7 @@ second implementation agrees.
 | [`V-de-winter-1031-review-check`](#v-de-winter-1031-review-check) | rv1031_check.py with rv1031_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-r1038-review-check`](#v-r1038-review-check) | r1038_check.py with r1038_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-r1012-review-check`](#v-r1012-review-check) | r1012_check.py with r1012_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-r1052-review-check`](#v-r1052-review-check) | r1052_check.py with r1052_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -1653,6 +1654,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-ozden-1038-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 228 that T-334 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-334 |
 | `E-de-winter-1012-n109-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: de Winter’s restatement certificate at 109, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | - |
 | `E-samanyu-n109-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained routes. | T-335 |
+| `E-de-winter-1052-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | T-336 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1813,6 +1815,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-ozden-1038-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: the witness at n = 228 that T-334 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-334 |
 | `E-de-winter-1012-n109-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: de Winter’s restatement certificate at 109, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | - |
 | `E-samanyu-n109-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained routes. | T-335 |
+| `E-de-winter-1052-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | T-336 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -5843,6 +5846,21 @@ Decides rational corner certificates with its own reader, separating axes in int
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-samanyu-n109-canonical-independent-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: The canonical n109 fact through its exact corners copy: every square, every wall and all 5,886 pairs. | T-335 |
+
+### `V-r1052-review-check`
+
+**r1052_check.py with r1052_reader.py, r1052_poses.py, r1052_clip.py, r1052_geom.py and r1052_decide.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The accepted stage 4 review's exact checker for issue 1052 at 305, with a strict reader of its own, separating axes in Python integers and exact polygon clipping in gmpy2.mpq. It decides all squares, walls and pairs, checks the two formats are geometric twins and checks the claim's ceiling. Its 51 controls are declared before the certificate is read.
+
+- Source: [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_check.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_check.py), [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_reader.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_reader.py), [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_poses.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_poses.py), [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_clip.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_clip.py), [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_geom.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_geom.py), [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_decide.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_decide.py), [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_controls.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_controls.py), [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_selftest.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_selftest.py), [`packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_writer.py`](../../packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_writer.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md`](../../docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (Separately prompted stage 4 lane r1052, tbd-strong-max at maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source says Claude handled repository files, checks and the figure. The review is also by Claude, but its checker was frozen before reading source or project verification code and reuses none of it. The overlap is of system family, not shared code or prompt.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-1052-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: The certificate at 305, every square, wall and pair by both review methods. | T-336 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -322,7 +322,12 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # T-335's n109 intake is outside the historical lifted-hold adoption cohort.
     assert 109 not in previous
     assert 109 not in held_counts
-    staged_from_hold = set(select.PENDING_ADOPTION)
+    # T-336's n305 refinement is staged after n305 already adopted T-309.
+    # It is outside the lifted hold's remaining adoption cohort.
+    assert 305 in previous
+    assert 305 not in held_counts
+    assert (houses.ADOPTED[305], houses.adopted_on(305)) == ("T-309", "2026-11-16")
+    staged_from_hold = set(select.PENDING_ADOPTION) - {305}
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
         staged_from_hold | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
@@ -1697,7 +1702,9 @@ def test_a_rational_house_staged_for_the_writer_fails_the_check(
     assert "the writer writes it, so stage it for the next pull request" in problem
 
 
-def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
+def test_the_staged_adoptions_name_their_beads_and_reasons(
+    selections: dict[int, select.Selection],
+) -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
@@ -1718,6 +1725,22 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
         assert n not in defaults.PENDING_ALLOWED
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
+        if n == 305:
+            assert pending == select.Pending(
+                house="T-336", bead="think-kzwl", why=select.NEXT_PULL_REQUEST
+            )
+            selection = selections[n]
+            assert selection.house is not None
+            assert selection.house.result == "T-336"
+            assert selection.house.side < selection.case.verified == houses.side(n)
+            assert selection.case.source_key == "[JoeGun upper bounds 2026-11-16]"
+            assert selection.case.evidence == (
+                "E-joegun-1001-exact-feasibility",
+                "E-joegun-1001-review-exact-feasibility",
+            )
+            assert (houses.ADOPTED[n], houses.adopted_on(n)) == ("T-309", "2026-11-16")
+            assert n not in defaults.PENDING_ALLOWED
+            continue
         algebraic = pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
@@ -1752,7 +1775,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     # that of 5 November 2026 took 175 off: T-267 is below it there, and the last pass of 9
     # November 2026 took 199 off: T-284 is below it there, and the pass of 18 November
     # 2026 took 292 off: T-323 is below it there (`OVERTAKEN`).
-    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 301]
+    assert sorted(select.PENDING_ADOPTION) == [88, 126, 266, 267, 301, 305]
 
 
 def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
@@ -2438,7 +2461,7 @@ def _fine_net_lower_projection(
 
 
 #: Registrations pending adoption entered at an adopted count after its last pass, keyed by
-#: the count and the result that pass adopted: the evidence id, the resource key and the
+#: the count and the result that pass adopted: the evidence ids, the resource key and the
 #: heading of the paragraph each adds. A registration writes none of the adoption writer's
 #: lanes, so it is checked exactly and projected out; once a later pass adopts at the count,
 #: the key no longer matches and that pass's replay reads the three as prior state. T-223's
@@ -2447,11 +2470,20 @@ def _fine_net_lower_projection(
 #: October 2026 (#706). A registration that states no bound is entered the same way and
 #: stays until a later pass at its count: T-246, Evan Daniel's degree-7213 minimal
 #: polynomial of the s(29) record side, an exact side, at 29 after T-195's pass.
-LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
+LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[tuple[str, ...], str, str]] = {
     (29, "T-195"): (
-        "E-n029-evand-minpoly-7213-report",
+        ("E-n029-evand-minpoly-7213-report",),
         "[Daniel exact and local reports 2026-10-12]",
         "**Exact side, 25 October 2026.**",
+    ),
+    (305, "T-309"): (
+        (
+            "E-de-winter-1052-certificate-report",
+            "E-de-winter-1052-exact-feasibility",
+            "E-de-winter-1052-review-exact-feasibility",
+        ),
+        "[de Winter n305 certificate 2026-11-20]",
+        "**Pending house adoption, 21 November 2026.**",
     ),
 }
 
@@ -2527,12 +2559,15 @@ def _later_pending_projection(
 ) -> str:
     """Check a later pending registration's three additions, then project them out.
 
-    Its evidence id and resource close their lists, and its paragraph is one paragraph of
-    the body; the record is returned without the paragraph, `held` without the two.
+    Its evidence ids and resource close their lists, and its paragraph is one paragraph
+    of the body; the record is returned without that paragraph and `held` without those
+    evidence and resource entries.
     """
     evidence, resource, heading = LATER_PENDING_REPORTS[key]
-    assert held["evidence"][-1] == evidence, f"n={key[0]}: {evidence} closes the evidence"
-    held["evidence"] = held["evidence"][:-1]
+    assert tuple(held["evidence"][-len(evidence) :]) == evidence, f"n={key[0]}: evidence tail"
+    for entry in evidence:
+        assert held["evidence"].count(entry) == 1, f"n={key[0]}: {entry} cited once"
+    held["evidence"] = held["evidence"][: -len(evidence)]
     assert held["resources"][-1]["key"] == resource, f"n={key[0]}: {resource} closes them"
     held["resources"] = held["resources"][:-1]
     _, front, body = committed.split("---\n", 2)

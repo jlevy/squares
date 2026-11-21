@@ -332,7 +332,7 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "result/t-180.html": (
-        550_000,
+        575_000,
         (
             "The closed form's result, its scope of 264 counts and prepared math measure "
             "341,524 bytes, and 402,418 on 22 October 2026, when its register list on those "
@@ -356,7 +356,12 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "44221820600), and 531,877 once T-314 to T-326 (#1009) are listed at their "
             "thirteen counts (run 44221608402), about 1.35 KB a result, past 525,000, so "
             "the ceiling moves to 550,000 as a measured choice, room for about 13 more "
-            "listed results; the timing is still think-v4me's."
+            "listed results; the timing is still think-v4me's. Hosted run 44908838826, "
+            "overview job 136860280935, measures 550,770 bytes on 21 November 2026 after "
+            "T-336 is listed at 305, 770 bytes above the 550,000 ceiling. This path alone "
+            "moves to 575,000 as a measured choice, leaving 24,230 bytes of room while "
+            "preserving the complete result chain. This is a byte measurement only; "
+            "the timing remains owed under think-v4me."
         ),
     ),
     "result/t-068.html": (

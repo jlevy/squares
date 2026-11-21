@@ -13958,6 +13958,31 @@ sources:
   notes: The upstream CSV is pinned by digest. The portable rational derivation proves the
     12-place upward print 10.949289580946. Both maintained routes and the independently
     implemented corners checker accepted it. T-335 records Samanyu-dev’s original packing.
+- id: de-winter-n305-2026-11-20
+  title: Joost de Winter's rational certificate at 305, issue 1052
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef/n305
+  local: resources/web/de-winter-n305-2026-11-20/
+  source_key: '[de Winter n305 certificate 2026-11-20]'
+  scope:
+    n_values:
+      - 305
+  reviewed: '2026-11-21'
+  source_date: '2026-11-20'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+    - frontier/results.yaml
+    - resources/web/de-winter-n305-2026-11-20/acquisition/claims.json
+  evidence:
+    - E-de-winter-1052-certificate-report
+    - E-de-winter-1052-exact-feasibility
+    - E-de-winter-1052-review-exact-feasibility
+  notes: 'Primary rational JSON retained losslessly in gzip and original corner YAML retained unchanged.
+    The corner metadata defect is disclosed by review #1057. T-336 records the finite bound. All three
+    maintained jobs and 11 sharp controls have the stated outcomes; the accepted review independently
+    checked the whole certificate and 51 controls. Source pin, later checksum list and review certificate
+    identity agree. Selection/adoption is a separate change.'
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15

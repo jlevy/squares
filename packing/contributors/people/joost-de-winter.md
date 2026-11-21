@@ -21,6 +21,9 @@ contributor:
     - id: bibliography
       archive_path: packing/resources/bibliography.yaml
       locator: '[de Winter n211 2026-09-16] records the author credit de Winter. credited_names maps Joost de Winter to de Winter.'
+    - id: n305-source
+      archive_path: packing/resources/web/de-winter-n305-2026-11-20/source/n305/README.md
+      locator: The Method and AI assistance section names Joost de Winter as directing the work; Construction identifies Kodaj and JoeGun as antecedents, with Chilton's compilation and Daniel's code as publication and method lineage.
   provenance:
     - field: /display_name
       sources: [bibliography, source-intake]

@@ -10138,3 +10138,46 @@ verifiers:
     note: The 20 November source review documents the checker freeze and authorship.
       The 21 November confirming review accepted the custody and binding of the canonical replay.
       No new checker-source checksum or copied verifier code is needed.
+  - id: V-r1052-review-check
+    program: r1052_check.py with r1052_reader.py, r1052_poses.py, r1052_clip.py, r1052_geom.py and r1052_decide.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+      - Python
+    methods:
+      - exact-algebraic
+    role: decides
+    summary: The accepted stage 4 review's exact checker for issue 1052 at 305, with a strict reader
+      of its own, separating axes in Python integers and exact polygon clipping in gmpy2.mpq. It decides
+      all squares, walls and pairs, checks the two formats are geometric twins and checks the claim's
+      ceiling. Its 51 controls are declared before the certificate is read.
+    source:
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_check.py
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_reader.py
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_poses.py
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_clip.py
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_geom.py
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_decide.py
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_controls.py
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_selftest.py
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_writer.py
+    independence_record: docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md
+    independence:
+      read:
+        - mathematics
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: Separately prompted stage 4 lane r1052, tbd-strong-max at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The source says Claude handled repository files, checks and the figure. The review is
+          also by Claude, but its checker was frozen before reading source or project verification code
+          and reuses none of it. The overlap is of system family, not shared code or prompt.

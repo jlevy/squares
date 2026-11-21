@@ -54242,6 +54242,93 @@ results:
       covers:
       - T-335
 
+  - id: T-336
+    kind: upper-bound
+    registered: '2026-11-21'
+    landed: '2026-11-21'
+    headline: De Winter's refinement of the Kodaj-JoeGun arrangement at 305 below T-309
+    claim: 'One complete rational certificate proves s(305) <= 17.9457558387415887,
+      the 16-place ceiling of its exact side. The 12-place ceiling is 17.945755838742,
+      the bound in the issue.
+
+      The accepted stage 4 review of issue 1052 independently decided every square, wall and all 46,360
+      pairs by separating axes in Python integers and exact polygon clipping in gmpy2.mpq. Its 51 predeclared
+      controls returned their stated outcomes. The original corner Witness/v2 lacks required metadata;
+      the review disclosed a reading copy and proved that its corners represent the same geometry as
+      the primary JSON. The bound rests on the unmodified primary JSON.
+
+      The side is 6.520917e-06 below T-309 and 6.520727e-06 below T-309 shrunk to first contact, so
+      it is a new result under option D. The source identifies Kodaj''s packing as improved by JoeGun,
+      taken from Alex Chilton''s public compilation, as its starting arrangement. The review measured
+      the identity against the retained T-309 certificate: largest displacement 0.0832, no square beyond
+      a tenth, and no reversed tilt. The larger 0.178 displacement in the source compares with the regularized
+      drawing.
+
+      De Winter is credited for this further improvement and certificate. Kodaj and JoeGun retain the
+      arrangement''s antecedent credit. The Shadoks leaderboard number supplies no coordinates and remains
+      context. No optimum is claimed.'
+    scope:
+      n_values:
+        - 305
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: A citable refinement of the house arrangement at 305, 6.52e-06 below T-309, one to
+        one with it and no square moved beyond a tenth; the accepted review proposes S2. No lower bound
+        or optimum.
+      scored: '2026-11-21'
+      by: think-kzwl import, following the accepted stage 4 review of issue 1052
+    novelty: previously-published
+    attribution:
+      source_keys:
+        - '[de Winter n305 certificate 2026-11-20]'
+      published: '2026-11-20'
+    evidence:
+      - E-de-winter-1052-certificate-report
+      - E-de-winter-1052-exact-feasibility
+      - E-de-winter-1052-review-exact-feasibility
+    artifacts:
+      - packing/resources/web/de-winter-n305-2026-11-20/README.md
+      - packing/resources/web/de-winter-n305-2026-11-20/acquisition/claims.json
+      - packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz
+      - packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_witness.yaml
+      - packing/resources/web/de-winter-n305-2026-11-20/receipts/exact-certification.json.xz
+      - packing/resources/web/de-winter-n305-2026-11-20/receipts/sharp-controls.json
+      - packing/resources/web/de-winter-n305-2026-11-20/receipts/controls-plan-1052-n305.md
+      - docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/check-n305.json
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/check-n305-reading-copy.json
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/controls-n305.json
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/identity-n305.json
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/contraction-T309-vs-1052.json
+    controls:
+      - packing/resources/web/de-winter-n305-2026-11-20/receipts/sharp-controls.json
+      - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/controls-n305.json
+    notes: The maintained receipt contains one positive and two gross controls, all with the expected
+      outcome on both routes, 278160 pair decisions and 111.30 summed route CPU seconds. Its 11 sharp
+      controls have all_as_expected true. The maintained routes share parsing, half-angle conversion,
+      Fraction arithmetic and separating axes; they are not two independent methods. The source's own
+      checkers were not run in this import. The independent evidence is the accepted review's separate
+      implementation. Registration alone does not adopt the house; adoption and regularization remain
+      separate work under think-kzwl.
+    next_rung: House adoption is pending under think-kzwl, together with both required strong drawing
+      runs. V4/C4 would require a second distinct adversarial review and human oversight.
+    reviews:
+      - path: docs/project/reviews/review-2026-11-20-de-winter-1052-n305.md
+        kind: adversarial
+        reviewer: Claude AI agent, tbd-strong-max at maximum reasoning, separately prompted lane r1052
+        reviewer_kind: ai
+        relation: project
+        date: '2026-11-20'
+        scope: Complete finite feasibility of the primary exact JSON certificate and the disclosed reading
+          copy of its corner twin, every square, wall and pair by two exact methods; 51 predeclared
+          controls; after the freeze, custody, comparison with T-309, contraction margins, option D,
+          credit and significance.
+        verdict: accepted
+        covers:
+          - T-336
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
