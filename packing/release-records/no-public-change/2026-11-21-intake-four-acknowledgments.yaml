@@ -10,3 +10,4 @@ reason: >-
   checks. Every issue remains open and pending. Against main 1fd323589a, the maintained
   paper comparison produced 43 byte-identical files across two candidate renders and
   one baseline render. The methods survey keeps its current version v0.2.7.
+  After the #1047 merge, all 43 survey files also matched main f54452c1d1.

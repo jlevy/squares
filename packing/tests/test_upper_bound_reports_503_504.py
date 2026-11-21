@@ -426,3 +426,22 @@ def test_the_153_claims_read_the_regularized_side_the_issue_names() -> None:
     )
     # The side reduction issue #504 prints, exactly.
     assert Fraction(regularized["difference"]) == Fraction("0.002015998674135970992348937968")
+
+
+def test_a_corner_witness_numbered_from_zero_reads_back_when_declared() -> None:
+    """#1012's transcription numbers its squares ``square-0`` to ``square-108``, as the
+    Kaggle rows do: read by `witness-corners` with ``first_id`` 0, and refused without it,
+    with any other value, and with any other option."""
+    document = _corners(_expected())
+    for index, square in enumerate(document["witness"]["squares"]):
+        square["id"] = f"square-{index}"
+    raw = _bytes(document)
+    zero = {reports.FIRST_ID: "0"}
+    assert reports.parse_certificate(raw, 2, "witness-corners", zero) == _expected()
+    with pytest.raises(reports.ReportError, match=r"numbered 1\.\.n"):
+        reports.parse_certificate(raw, 2, "witness-corners")
+    with pytest.raises(reports.ReportError, match=r"numbered 0\.\.n-1"):
+        reports.parse_certificate(_bytes(_corners(_expected())), 2, "witness-corners", zero)
+    for options in ({reports.FIRST_ID: "2"}, {reports.FIRST_ID: "0", "dilation": "1"}):
+        with pytest.raises(reports.ReportError, match="reads only first_id"):
+            reports.parse_certificate(raw, 2, "witness-corners", options)
