@@ -35090,6 +35090,126 @@ occurrences:
   note: The exact certificate in issue 1040 names Joost de Winter as certifier.
 - origin:
     path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 997 follow-up 2026-11-21]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 997 follow-up 2026-11-21]'
+    field: /credit
+  expected_text: de Winter after jazivxt, credits Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 997 follow-up 2026-11-21]'
+    field: /credit
+  expected_text: de Winter after jazivxt, credits Levy
+  start: 16
+  end: 23
+  label: jazivxt
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 997 follow-up 2026-11-21]'
+    field: /credit
+  expected_text: de Winter after jazivxt, credits Levy
+  start: 25
+  end: 37
+  label: credits Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    field: /authors/1
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel; de Winter certificate
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel; de Winter certificate
+  start: 12
+  end: 14
+  label: Xu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel; de Winter certificate
+  start: 16
+  end: 22
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    field: /credit
+  expected_text: Ozden after Xu, Daniel; de Winter certificate
+  start: 24
+  end: 45
+  label: de Winter certificate
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
     record_key: '[GeiserX issue 1037 2026-11-18]'
     field: /authors/0
   expected_text: Sergio Fernández Rubio (GeiserX)

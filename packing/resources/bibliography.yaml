@@ -6200,6 +6200,38 @@ sources:
       in his 292- and 445-square layouts. Joost de Winter refined and certified it in
       the attachment on issue 1040 and acknowledges OpenAI Codex for refinement and
       verification. The exact data and reproducible receipts are retained in the intake packet.
+  - key: '[de Winter issue 997 follow-up 2026-11-21]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-21'
+    lineage: credits-project
+    credit: de Winter after jazivxt, credits Levy
+    note: 'Joost de Winter''s issue 997 comment of 21 November (https://github.com/jlevy/squares/issues/997#issuecomment-7058975230)
+      submits the rational enclosure and acknowledges the local solution already reported in the thread.
+      Retain the established lineage: jazivxt, improved and refined by Joost de Winter. A project run
+      using Evan Daniel''s regularizer recorded the matching limiting-side display on 16 November, without
+      the solved coordinates now retained. The comment''s source map additionally names Sargis Khachatryan
+      and jazivxt via Nevska; that map remains attributed source testimony. The author names GPT6.2
+      Astra as his tool. Four factual attachment members are retained with measured SHA-256 identities;
+      no specific licence is stated.'
+  - key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    authors:
+    - Özden
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-20'
+    lineage: independent
+    credit: Ozden after Xu, Daniel; de Winter certificate
+    note: Joost de Winter's issue 959 attachment gives an exact algebraic certificate at L70+5=L207-1.
+      The primary comment credits Doğa Özden's construction after Ryan Xu and Evan Daniel and discloses
+      OpenAI assistance with the algebraic reconstruction. The reported GeiserX starting coordinates
+      at their named digest are absent; no identity or donor-priority claim is inferred. Only mathematical
+      data and factual custody records are retained, not contributor verification code or narrative.
+      The attachment's licence excerpt names other cases and does not establish an n179-specific source-code
+      grant.
   - key: '[GeiserX issue 1037 2026-11-18]'
     authors:
       - Sergio Fernández Rubio (GeiserX)

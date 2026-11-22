@@ -1708,9 +1708,17 @@ def _geiserx_1040_side(n: int) -> Fraction:
     return houses.geiserx_1040_source("T-337").certificate(n).side
 
 
+def _de_winter_997_followup_side(n: int) -> Fraction:
+    """Read the exact side of the original issue 997 follow-up attachment."""
+    from devtools import upper_bound_houses as houses  # noqa: PLC0415 -- reader cycle
+
+    return houses.de_winter_997_followup_source("T-338").certificate(n).side
+
+
 #: How each holding source's exact side is rebuilt from its own retained packet, keyed by
 #: source key, so a comparison stays what it was however the case records later move.
 HOUSES: dict[str, Callable[[int], Fraction]] = {
+    "[de Winter issue 997 follow-up 2026-11-21]": _de_winter_997_followup_side,
     "grid": grid_side,
     "[evand exact optima 2026-10-05]": _evand_optima,
     "[Rehwaldt n68 refinement 2026-10-07]": lambda n: Fraction(
@@ -1971,6 +1979,10 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
 
 def import_packet(reader: str) -> Path | None:
     """The import packet a house reader reads its sides from, or None for another reader."""
+    from devtools import n179_algebraic_report as n179  # noqa: PLC0415
+
+    if reader == n179.SOURCE_KEY:
+        return packet_path(n179.PACKET_NAME)
     function = HOUSES.get(reader)
     if isinstance(function, functools.partial) and function.func is import_side:
         return packet_path(str(function.args[0]))

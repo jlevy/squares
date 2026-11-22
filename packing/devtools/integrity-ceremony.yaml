@@ -215,6 +215,12 @@ allowlist:
       changed picture is refused as a new reading. The receipt it writes is this
       repository's file, read from Git by the exact-side register and compared with
       nothing.
+  - path: packing/devtools/n179_algebraic_report.py
+    kind: download
+    boundary: >-
+      The original mathematical gzip member from de Winter's issue 959 attachment
+      is checked against its acquisition digest before decoding. Derived geometry
+      and its retained witness are compared structurally.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-

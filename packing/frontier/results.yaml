@@ -54396,6 +54396,161 @@ results:
       covers:
       - T-337
 
+  - id: T-338
+    kind: upper-bound
+    registered: '2026-11-21'
+    landed: '2026-11-22'
+    headline: De Winter's rational refinement at 90 after jazivxt
+    claim: 'The exact rational certificate proves s(90) <= 283097290828433062400431254317097234439248852683102663418830216278332305959948738073773183281942509413305771080804753939783330863242170157550095973633087579198725959676783372420698609802953140657026017770845629744797804232145558959033371397710077808634454134575706283302518427812327221303833665806574374705101515921453620227217593400189656345684165330864292579767547387692201466190355530349739303723417126974888/28326615239379221810789364416434129669968904915114686353407118880620204374076650817760256940140475028161650688247701507442230362442862468879030277447161537073203535093323841480528455941097931502809848111311591800870227400461072285543158038901167057151654964432810489360950928816799550744689987469637659738662545878209056999259353234520372047980341155930915414876001901644295646775136930961803283801563962353985.
+
+
+      The side rounds upward to 9.994038766583 at 12 places. The arrangement is credited to
+      jazivxt, improved and refined by Joost de Winter. This submission supplies a feasible rational
+      enclosure near the local solution already reported in issue 997.
+
+
+      The side is about 2.6981580737e-11 below T-304 and 8.7942390308e-12 below T-304 contracted to
+      its first contact, so it passes option D against that registered predecessor. Its final common-center
+      contraction of the enclosed input is only about 8.994039e-73.
+
+
+      The [16 November project run](../cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/report.json.gz)
+      of Evan Daniel''s regularizer already reported a KKT local side whose 65-significant-digit display
+      equals the rounding of this candidate. The candidate is about 9.99403876665e-20 below that run''s
+      reported rational certificate. The retained record lacks the solved coordinates and a certified
+      interval for the unrounded local side; pose identity, strict order against that local side, and
+      option D against row 3 itself remain undecided. The [bounded scalar audit](../resources/web/de-winter-997-followup-2026-11-21/receipts/held-row3-comparison.json)
+      records these distinctions. No first discovery of that limiting value is asserted.
+
+
+      Both maintained exact routes accept all 4,005 pairs and the prescribed controls. The independent
+      review accepts every square, wall and pair and all 13 predeclared controls. These are finite feasibility
+      results, not optimality or a lower bound.'
+    scope:
+      n_values:
+      - 90
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: A numerical refinement of the registered enclosure around an already reported local
+        solution; it lies below the predecessor's first-contact bound. T-304's cumulative arrangement
+        significance remains separate.
+      scored: '2026-11-21'
+      by: think-zsei intake
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter issue 997 follow-up 2026-11-21]'
+      published: '2026-11-21'
+    evidence:
+    - E-de-winter-997-followup-certificate-report
+    - E-de-winter-997-followup-exact-feasibility
+    - E-de-winter-997-followup-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-997-followup-2026-11-21/README.md
+    - packing/resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz
+    - packing/resources/web/de-winter-997-followup-2026-11-21/source/90/input.json.gz
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/contraction-T304-vs-followup.json
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/identity-vs-T304.json
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/held-row3-comparison.json
+    - packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/report.json.gz
+    - packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/receipt.json
+    - packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/receipt-frozen.json
+    - docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md
+    controls:
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/sharp-controls.json
+    - packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/plan-frozen.json
+    notes: The row 3 scalar audit is supporting context, not a second geometric certification. The earlier
+      KKT receipt dates the earlier local value. The feasibility and option-D comparison concern the
+      exact rational certificate now used for the house.
+    next_rung: A second adversarial review and documented human oversight would be needed for V4/C4.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md
+      kind: adversarial
+      reviewer: Codex (OpenAI), tbd-strong-max, maximum reasoning
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-21'
+      scope: All 90 unit squares, every wall inequality and every unordered square pair at the exact
+        candidate side, plus 13 predeclared controls.
+      verdict: accepted
+      covers:
+      - T-338
+  - id: T-339
+    kind: upper-bound
+    registered: '2026-11-21'
+    landed: '2026-11-22'
+    headline: De Winter's algebraic certificate of the Özden construction at 179, exactly L70 + 5
+    claim: 'A complete algebraic certificate proves s(179) <= S, where S = L70 + 5 = L207 - 1, approximately 13.8809603715555795947
+      . Here L70 and L207 are the exact sides of the retained 70- and 207-square witnesses; the side
+      comparison proves their common number-field identification. The 179-square side is the isolated
+      real root near 13.88096 of 89*S^5 - 5450*S^4 + 132794*S^3 - 1608644*S^2 + 9684049*S - 23168258.
+
+      The accepted Stage 4 review independently reconstructed the field and geometry from the original
+      mathematical attachment, then decided all 179 unit squares, 716 wall inequalities and all 15,931
+      unordered pairs in rational arithmetic. All nine predeclared controls behaved as stated. The maintained
+      native positive and two full-n179 gross controls were also recomputed and have their expected
+      outcomes.
+
+      S is 2.64543e-12 below T-294''s certificate side and 7.94242e-14 below T-294 at first contact.
+      The latter comparison establishes an improvement beyond its contraction margin. This is an exact
+      certificate of the construction credited to Doğa Özden after Ryan Xu and Evan Daniel. Joost de
+      Winter receives algebraic certificate credit. The reported GeiserX starting input is not retained
+      at its stated hash, so that historical lineage is unresolved. No optimum is claimed.'
+    scope:
+      n_values:
+      - 179
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 2
+      rationale: A citable exact algebraic certificate at L70+5, with a small strict improvement beyond
+        T-294's first-contact margin. The post-freeze source comparison supports S2; the blind review's
+        provisional S3 preceded that comparison. No new lower bound, optimum or historical-priority
+        conclusion.
+      scored: '2026-11-21'
+      by: think-esp4 import, following the accepted Stage 4 review and post-freeze comparison
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[de Winter n179 algebraic certificate 2026-11-20]'
+      published: '2026-11-20'
+    evidence:
+    - E-de-winter-959-algebraic-report
+    - E-de-winter-959-algebraic-feasibility
+    - E-de-winter-959-independent-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-959-followup-2026-11-20/README.md
+    - packing/resources/web/de-winter-959-followup-2026-11-20/acquisition/sources.json
+    - packing/resources/web/de-winter-959-followup-2026-11-20/source/n179.minpoly.json.gz
+    - packing/resources/web/de-winter-959-followup-2026-11-20/receipts/side-comparison.json
+    - packing/resources/web/de-winter-959-followup-2026-11-20/receipts/algebraic-route1-n179.json.xz
+    - packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/README.md
+    - docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md
+    controls:
+    - packing/resources/web/de-winter-959-followup-2026-11-20/receipts/algebraic-route1-n179.json.xz
+    - packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/frozen/run-02/receipt.json
+    notes: The maintained verifier and independent reviewer implemented their checks separately.
+      The independent check uses the same separating-axis mathematics with a separate parser and
+      arithmetic implementation. Its formatted replay reproduced all scientific receipt fields
+      and the ledger bytes. The exact reader supplies the current house.
+    next_rung: V4/C4 requires a second distinct adversarial review and human oversight.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md
+      kind: adversarial
+      reviewer: Codex AI agent, separately prompted strong-tier reviewer at maximum reasoning
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-21'
+      scope: Complete finite feasibility of the original n179 algebraic input, independent field and
+        separating-axis implementation, all nine predeclared controls; afterward, maintained exact-side
+        identities, custody and significance.
+      verdict: accepted
+      covers:
+      - T-339
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
@@ -54598,19 +54753,18 @@ regularized_drawings:
         max_turn_deg: 2.36147
       view: packing/atlas/known-best/regularized/n-088-regularized.yaml.gz
     - n: 90
-      of: T-304
+      of: T-338
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
-      changes: {re_angled: 1}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
         moved: 3
-        max_move: 0.3989638
-        max_turn_deg: 0.0519988
+        max_move: 0.3685266
+        max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-090-regularized.yaml.gz
     - n: 102
       of: T-193
@@ -55023,19 +55177,18 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-178-regularized.yaml.gz
     - n: 179
-      of: T-294
+      of: T-339
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
-      changes: {straightened: 7, re_angled: 6}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 56
-        max_move: 0.05477726
-        max_turn_deg: 2.96935
+        moved: 37
+        max_move: 0.06336464
+        max_turn_deg: 0.639656
       view: packing/atlas/known-best/regularized/n-179-regularized.yaml.gz
     - n: 180
       of: T-316

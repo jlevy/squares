@@ -39,6 +39,7 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
     # sensitivity sweep. The pass of 16 November 2026 (think-32cl) moves 90 on to Joost de
     # Winter's improvement of that packing (T-304): 87 squares structured in 13 components,
     # 48 internal slide degrees, unchanged under the sensitivity sweep.
+    # T-338 leaves the structured-square count unchanged and gives 47 slide degrees.
     assert profile["aggregate"] == {
         "case_count": 37,
         "contact_component_count": 176,
@@ -48,7 +49,7 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
             "at_least_90_percent": 28,
         },
         "fully_structured_cases": 9,
-        "internal_slide_dof": 918,
+        "internal_slide_dof": 917,
         "narrow_partition_status_counts": {
             "established": 3,
             "not-established": 25,
