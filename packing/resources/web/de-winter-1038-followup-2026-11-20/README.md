@@ -53,8 +53,10 @@ completed controls took 365.26 summed job-wall seconds and 172.12 CPU seconds.
 A separate implementation accepted the rational witness after checking all 25,878
 pairs and six predeclared controls. The maintained report-order walk places the
 unedited 20 November follow-up below T-334 for either exact form. The two forms
-belong to one report. Independent review of the degree-seven geometry and
-registration and drawing decisions continue on think-d4b0.
+belong to one report. A separate exact checker also accepted all 25,878 pairs
+of the degree-seven certificate and its eleven predeclared controls. Registration
+and drawing decisions continue on think-d4b0.
+[Independent degree-seven review](review/independent-degree-seven/README.md),
 [Independent rational review](review/independent-rational/README.md),
 [Report-order disposition](review/report-order.json)
 
@@ -66,6 +68,7 @@ registration and drawing decisions continue on think-d4b0.
 | `source/n228_algebraic.json.gz` | upstream | `5a38a5d48a43319544199051c6f74b159ff94d39` | `e32f6c3804e7bf61967a84e0b6ce520303e9b7c820b2431c342777bce7c8e1c9` |
 | `receipts/native-rational.json.gz` | receipt | `e33444d317aa760ab7458a5a6c45f8d9aa8eb817` | `3b451cbfe8804a1de5dcf600af2502231abe867935a3720d93c83dc2356f0d69` |
 | `licenses/CC-BY-4.0.txt.gz` | upstream | `da6ab6cc8f333d7e89a99812866df8f24374d47c` | `9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411` |
+| `review/independent-degree-seven/full-1.receipt.json.gz` | receipt | `e5b5d2ef0db7d735499b77cbb0f0033535e8c967` | `85aec431826e5b1fb7717b9e2a92d1e2450c4ca8a3b59f7918d9fb52b3df6158` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

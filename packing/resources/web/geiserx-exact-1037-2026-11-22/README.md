@@ -136,6 +136,19 @@ from `packing/` to check the stored files and the following table.
 | `source/rational/n295.cert.gz` | upstream | `044d18e2835dbd10cedc4920ebb9f2588cdac82f` | `a64679104231b98a4528d8dc20502a0e889032ac1f50f4ea5da383785eff5cc1` |
 | `source/rational/n297.cert.gz` | upstream | `43e2fa4100d19f24a0a0aa30e4e5d8374e18aafc` | `395cf9641de59262aeac43fe8c34204941becfd2dcbb6c3cc003620a0cdbb258` |
 
+## Comparisons with the earlier packings
+
+The retained GeiserX coordinates correspond one-to-one by nearest center to
+each rational certificate in the submitted frame. The comparisons measure these
+correspondences. At every count the rational certificate is strictly below
+GeiserX’s corresponding published packing contracted to first contact.
+[Seven measured correspondences and exact comparisons](review/published-coordinate-comparison.json)
+
+At 202 and 263 the reviewed quadratic sides lie strictly below the submitted
+rational sides and the preceding certified houses at first contact. At 263 the
+quadratic side also lies strictly below the pending T-244 side’s lower isolating
+endpoint. [Exact quadratic ordering](review/quadratic-standing.json)
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
