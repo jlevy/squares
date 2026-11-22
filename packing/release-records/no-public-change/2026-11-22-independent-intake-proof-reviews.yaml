@@ -1,0 +1,13 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records independent reviews of the later 228-square certificate, the
+  one-axis polynomial bank, and the final lower-bound report dependencies.
+  With fixed release links and Chrome on macOS, two candidate renders and
+  one render using the baseline inputs from 5b0c694732a8 produced the same
+  43 files byte for byte.

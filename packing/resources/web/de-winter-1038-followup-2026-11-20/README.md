@@ -53,8 +53,10 @@ completed controls took 365.26 summed job-wall seconds and 172.12 CPU seconds.
 A separate implementation accepted the rational witness after checking all 25,878
 pairs and six predeclared controls. The maintained report-order walk places the
 unedited 20 November follow-up below T-334 for either exact form. The two forms
-belong to one report. Independent review of the degree-seven geometry and
-registration and drawing decisions continue on think-d4b0.
+belong to one report. A separate exact checker also accepted all 25,878 pairs
+of the degree-seven certificate and its eleven predeclared controls. Registration
+and drawing decisions continue on think-d4b0.
+[Independent degree-seven review](review/independent-degree-seven/README.md),
 [Independent rational review](review/independent-rational/README.md),
 [Report-order disposition](review/report-order.json)
 

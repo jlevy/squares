@@ -126,6 +126,10 @@ upstream `rational-enclosures.zip`, that scratch checker and a fresh receipt pat
 | `n232/review/source/232/candidate.json.gz` | upstream | `921583586617e7cc412dadbf53217a589997bc66` | `b72b04c8c3f6b57c4372fd2db17b1666832dd22ad1d734094ed070aacddcf4fe` |
 | `n232/review/source/232/input.json.gz` | upstream | `c6a9fc9735db99988540ff1a31fc375a3d657195` | `9ae760cfbd190378872418cc93751846649658a40cd9d37130ca0ace9872ab7a` |
 
+The [independent dependency review](lower/review-dependencies/README.md) proves the
+coarse parallel-chord lemma and checks Attachment D’s final arithmetic. The
+sixty T-180-dependent rows retain their existing replay dependency.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

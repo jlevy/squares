@@ -1,0 +1,376 @@
+"""Conditional one-axis bank checker, independently implemented and not a graph proof."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import gzip
+import hashlib
+import io
+import json
+import math
+import os
+import resource
+import sys
+import tempfile
+import time
+from collections import Counter
+from collections.abc import Callable
+from fractions import Fraction as F
+from functools import lru_cache
+from pathlib import Path
+from typing import Any
+
+COMPRESSED_BYTES = 26877
+COMPRESSED_SHA256 = "451b1116cf5b6eaa78ecc8233ee4e4c931537e6dfd3bd4fba2a6d91b1922d257"
+EXPANDED_BYTES = 427596
+EXPANDED_SHA256 = "774cf1ffc704886c9ff3802600dc7d112ef87b25024d7147176bc2af4f14ee9f"
+EXPECTED_ROWS = 576
+EXPECTED_RULES = {
+    "same": 5458, "wall": 2521, "wall0": 201, "zero_favored": 202,
+    "zero_straight": 475, "rank": 302, "zero_flat": 25,
+    "mixedstraight": 491, "mixdiag": 102,
+}
+Q = 24
+Poly = tuple[int, ...]
+Rule = tuple[Any, ...]
+
+
+class ProofRefusal(Exception):
+    def __init__(self, code: str, detail: object = None):
+        super().__init__(f"{code}: {detail}")
+        self.code = code
+
+
+def require(condition: bool, code: str, detail: object = None) -> None:
+    if not condition:
+        raise ProofRefusal(code, detail)
+
+
+def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        require(key not in result, "duplicate-json-key", key)
+        result[key] = value
+    return result
+
+
+def polynomial(value: Any) -> Poly:
+    require(type(value) is list and 1 <= len(value) <= 65, "polynomial-shape")
+    require(all(type(x) is int and abs(x).bit_length() <= 256 for x in value),
+            "polynomial-coefficient")
+    result = list(value)
+    while len(result) > 1 and result[-1] == 0:
+        result.pop()
+    return tuple(result)
+
+
+def rule(value: Any) -> Rule:
+    require(type(value) is list and len(value) >= 2, "rule-shape")
+    kind, i, *tail = value
+    require(type(kind) is str and type(i) is int and 0 <= i < 25, "rule-cell")
+    require(all(type(x) is int for x in tail), "rule-integer")
+    if kind in ("wall", "wall0", "rank"):
+        require(len(tail) == (3 if kind == "rank" else 2), "rule-arity")
+        axis, sign = tail[:2]
+        require(axis in (0, 1) and sign in (-1, 1), "wall-axis-sign")
+        if kind == "rank":
+            require(tail[2] == (i // 5, i % 5)[axis], "rank-cell-mismatch")
+    else:
+        require(kind in ("same", "mixdiag", "mixedstraight", "aligned",
+                         "zero_flat", "zero_straight", "zero_favored"), "rule-kind")
+        require(len(tail) == 3, "rule-arity")
+        j, axis, sign = tail
+        require(0 <= j < 25 and axis in (0, 1), "pair-cell-axis")
+        delta = (j // 5 - i // 5, j % 5 - i % 5)
+        require(delta[axis] == 1, "pair-forward-rank")
+        transverse = delta[1 - axis]
+        if kind == "same":
+            require(sign in (-1, 1), "pair-sign")
+        elif kind in ("mixdiag", "zero_favored"):
+            require(sign == transverse and abs(sign) == 1, "diagonal-sign")
+        else:
+            require(sign == 0, "flat-sign")
+            if kind in ("mixedstraight", "zero_straight"):
+                require(transverse == 0, "straight-rank")
+            elif kind == "zero_flat":
+                require(abs(transverse) == 1, "diagonal-rank")
+    return tuple(value)
+
+
+def parse_row(value: Any) -> tuple[tuple[Rule, ...], tuple[Poly, ...], Poly]:
+    require(type(value) is dict and set(value) == {"rules", "multipliers", "margin"},
+            "certificate-fields")
+    rules = value["rules"]
+    weights = value["multipliers"]
+    require(type(rules) is list and type(weights) is list, "certificate-lists")
+    require(2 <= len(rules) == len(weights) <= 64, "certificate-arity")
+    return tuple(map(rule, rules)), tuple(map(polynomial, weights)), polynomial(value["margin"])
+
+
+@lru_cache(maxsize=4096)
+def bernstein(poly: Poly) -> tuple[F, ...]:
+    # Normalized basis conversion, independent of the producer's integer transform.
+    degree = len(poly) - 1
+    return tuple(
+        sum((F(poly[i] * math.comb(k, i), Q**i * math.comb(degree, i))
+             for i in range(k + 1)), F(0))
+        for k in range(degree + 1)
+    )
+
+
+def check_sign(poly: Poly, strict: bool) -> F:
+    coefficients = bernstein(poly)
+    require(all(x >= 0 for x in coefficients), "nonnegative", list(map(str, coefficients)))
+    if strict:
+        # B[n,n](x) is positive for every 0 < x <= 1.
+        require(coefficients[-1] > 0, "strict-endpoint")
+    return coefficients[-1]
+
+
+def at(poly: Poly, t: int) -> int:
+    result = 0
+    for coefficient in reversed(poly):
+        result = result * t + coefficient
+    return result
+
+
+def physical_row(r: Rule, t: F) -> tuple[tuple[tuple[int, F], ...], F]:
+    kind, i, *tail = r
+    denominator = 1 + t * t
+    c = (1 - t * t) / denominator
+    s = 2 * t / denominator
+    width = c + s
+    rank_error = width * (width - 1)
+    rhs_scale = 2 * denominator**3
+    if kind in ("wall", "wall0", "rank"):
+        axis, sign = tail[:2]
+        if kind == "rank":
+            rank = tail[2]
+            allowance = 4 - rank if sign == 1 else rank
+            bound = sign * (rank + F(1, 2)) + allowance * rank_error
+        else:
+            tile_width = F(1) if kind == "wall0" else width
+            bound = 5 - tile_width / 2 if sign == 1 else -tile_width / 2
+        return ((2 * i + axis, denominator * sign * c),), rhs_scale * c * bound
+
+    j, axis, sign = tail
+    transverse_normal = F(0)
+    if kind == "same":
+        transverse_normal = s * (sign if axis == 0 else -sign)
+        bound = -F(1)
+    elif kind == "mixdiag":
+        transverse_normal = s * sign
+        bound = -c * width
+    elif kind == "mixedstraight":
+        bound = -c * width + 4 * s * rank_error
+    elif kind == "zero_favored":
+        transverse_normal = s * sign
+        bound = -(1 + width) / 2
+    elif kind == "zero_flat":
+        bound = -c * (1 + width) / 2
+    elif kind == "zero_straight":
+        bound = -c * (1 + width) / 2 + 4 * s * rank_error
+    else:
+        require(kind == "aligned", "unexpected-rule")
+        bound = -c
+
+    # X = 2 D^2 x transforms physical normals to D times their value.
+    coefficients = (
+        (2 * i + axis, denominator * c),
+        (2 * j + axis, -denominator * c),
+        (2 * i + 1 - axis, denominator * transverse_normal),
+        (2 * j + 1 - axis, -denominator * transverse_normal),
+    )
+    return tuple((index, value) for index, value in coefficients if value), rhs_scale * bound
+
+
+@lru_cache(maxsize=16384)
+def integer_row(r: Rule, node: int) -> tuple[tuple[tuple[int, int], ...], int]:
+    coefficients, rhs = physical_row(r, F(node))
+    require(rhs.denominator == 1 and all(x.denominator == 1 for _, x in coefficients),
+            "denominator-clearing", [r, node])
+    return tuple((index, value.numerator) for index, value in coefficients), rhs.numerator
+
+
+def verify_row(value: Any) -> dict[str, Any]:
+    rules, weights, margin = parse_row(value)
+    maximum_degree = max(len(w) - 1 for w in weights)
+    identity_degree_bound = maximum_degree + 6
+    require(len(margin) - 1 <= identity_degree_bound, "margin-degree")
+    for weight in weights:
+        check_sign(weight, strict=False)
+    endpoint = check_sign(margin, strict=True)
+
+    # A polynomial of degree <= d with d+1 distinct zeroes is identically zero.
+    for node in range(identity_degree_bound + 1):
+        unknowns = [0] * 50
+        residual = at(margin, node)
+        for r, w in zip(rules, weights, strict=True):
+            multiplier = at(w, node)
+            if multiplier == 0:
+                continue
+            coefficients, bound = integer_row(r, node)
+            for index, coefficient in coefficients:
+                unknowns[index] += multiplier * coefficient
+            residual += multiplier * bound
+        require(not any(unknowns), "center-identity", {"node": node, "residuals": unknowns})
+        require(residual == 0, "rhs-identity", {"node": node, "residual": str(residual)})
+
+    return {
+        "accepted": True, "rules": len(rules),
+        "maximum_multiplier_degree": maximum_degree,
+        "margin_degree": len(margin) - 1,
+        "identity_nodes": identity_degree_bound + 1,
+        "margin_at_right_endpoint": str(endpoint),
+        "margin_at_zero": margin[0],
+    }
+
+
+def controls(first: dict[str, Any]) -> list[dict[str, Any]]:
+    outcomes: list[dict[str, Any]] = []
+
+    def expect(name: str, operation: Callable[[], object], refusal: str | None = None) -> None:
+        try:
+            operation()
+        except ProofRefusal as error:
+            require(error.code == refusal, "unexpected-control-refusal",
+                    {"control": name, "expected": refusal, "actual": error.code})
+            outcomes.append({"control": name, "expected_refusal": refusal, "passed": True})
+        else:
+            require(refusal is None, "control-falsely-accepted", name)
+            outcomes.append({"control": name, "expected": "accept", "passed": True})
+
+    for name, p, strict, refusal in (
+        ("zero-nonnegative", (0,), False, None),
+        ("zero-not-strict", (0,), True, "strict-endpoint"),
+        ("decreasing-positive", (2, -24), True, None),
+        ("negative-right-endpoint", (1, -48), False, "nonnegative"),
+        ("positive-open-left", (0, 1), True, None),
+        ("vanishing-right-endpoint", (0, 1, -24), True, "strict-endpoint"),
+    ):
+        expect(name, lambda p=p, strict=strict: check_sign(p, strict), refusal)
+
+    expect("first-original-row", lambda: verify_row(first))
+    bad = copy.deepcopy(first)
+    bad["margin"][0] += 1
+    expect("altered-margin-constant", lambda: verify_row(bad), "rhs-identity")
+    bad = copy.deepcopy(first)
+    bad["multipliers"][0][0] = -1
+    expect("negative-multiplier-constant", lambda: verify_row(bad), "nonnegative")
+    bad = copy.deepcopy(first)
+    bad["multipliers"][0][0] += 1
+    expect("altered-center-cancellation", lambda: verify_row(bad), "center-identity")
+    bad = copy.deepcopy(first)
+    require(bad["rules"][0][0] == "same", "control-source-rule")
+    bad["rules"][0][-1] *= -1
+    expect("flipped-transverse-sign", lambda: verify_row(bad), "center-identity")
+    bad = copy.deepcopy(first)
+    degree = max(len(polynomial(w)) - 1 for w in bad["multipliers"]) + 7
+    bad["margin"] = bad["margin"] + [0] * (degree + 1 - len(bad["margin"]))
+    bad["margin"][degree] = 1
+    expect("unjustified-margin-degree", lambda: verify_row(bad), "margin-degree")
+
+    fixtures = (
+        ("upper-tilted-wall", ["wall", 0, 0, 1], ((0, F(3, 4)),), F(645, 64)),
+        ("upper-rank-bound", ["rank", 12, 0, 1, 2], ((24, F(3, 4)),), F(543, 64)),
+        ("favorable-mixed-diagonal", ["zero_favored", 0, 6, 0, 1],
+         ((0, F(3, 4)), (12, F(-3, 4)), (1, F(1)), (13, F(-1))), F(-75, 16)),
+        ("vertical-same-sign", ["same", 0, 1, 1, 1],
+         ((1, F(3, 4)), (3, F(-3, 4)), (0, F(-1)), (2, F(1))), F(-125, 32)),
+    )
+    for name, literal_rule, coefficients, rhs in fixtures:
+        def check_fixture() -> None:
+            require(physical_row(rule(literal_rule), F(1, 2)) == (coefficients, rhs),
+                    "rule-fixture", name)
+        expect(name, check_fixture)
+    require(len(outcomes) == 16, "control-count")
+    return outcomes
+
+
+def read_bank(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    compressed = path.read_bytes()
+    require(len(compressed) == COMPRESSED_BYTES, "compressed-size")
+    require(hashlib.sha256(compressed).hexdigest() == COMPRESSED_SHA256, "compressed-digest")
+    with gzip.GzipFile(fileobj=io.BytesIO(compressed)) as stream:
+        expanded = stream.read(EXPANDED_BYTES + 1)
+    require(len(expanded) == EXPANDED_BYTES, "expanded-size")
+    require(hashlib.sha256(expanded).hexdigest() == EXPANDED_SHA256, "expanded-digest")
+    values = json.loads(expanded, object_pairs_hook=unique_object)
+    require(type(values) is list and len(values) == EXPECTED_ROWS, "bank-count")
+    parsed = [parse_row(value) for value in values]
+    counts = Counter(r[0] for rules, _, _ in parsed for r in rules)
+    census = {
+        "rows": len(values), "rule_uses": sum(counts.values()), "rule_kinds": dict(counts),
+        "maximum_rules_per_row": max(len(rules) for rules, _, _ in parsed),
+        "maximum_multiplier_degree": max(len(w) - 1 for _, weights, _ in parsed for w in weights),
+        "maximum_margin_degree": max(len(margin) - 1 for _, _, margin in parsed),
+        "maximum_coefficient_bits": max(abs(x).bit_length() for _, weights, margin in parsed
+                                        for poly in (*weights, margin) for x in poly),
+    }
+    require(dict(counts) == EXPECTED_RULES and census["rule_uses"] == 9777, "rule-census", census)
+    require((census["maximum_rules_per_row"], census["maximum_multiplier_degree"],
+             census["maximum_margin_degree"], census["maximum_coefficient_bits"]) == (28, 12, 18, 13),
+            "degree-census", census)
+    return values, census
+
+
+def publish_receipt(path: Path, result: dict[str, Any]) -> None:
+    require(not path.exists(), "output-already-exists", str(path))
+    temporary: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                         prefix=path.name + ".", suffix=".partial", delete=False) as stream:
+            temporary = stream.name
+            json.dump(result, stream, indent=2, allow_nan=False)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            Path(temporary).unlink(missing_ok=True)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--bank", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    started = time.monotonic()
+    cpu_started = time.process_time()
+    bank, census = read_bank(args.bank)
+    control_results = controls(bank[0])
+    rows = []
+    for index, entry in enumerate(bank):
+        try:
+            rows.append({"index_zero_based": index, **verify_row(entry)})
+        except ProofRefusal as error:
+            raise ProofRefusal("bank-row-refused", {"index": index, "reason": str(error)}) from error
+    require(len(rows) == EXPECTED_ROWS and all(row["accepted"] for row in rows), "incomplete-bank")
+    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    result = {
+        "format": "independent-one-axis-bank-v1", "status": "complete-conditional-bank-accepted",
+        "scope": "576 conditional polynomial contradictions only; graph and bridge coverage not checked.",
+        "interval": {"lower": "0", "lower_open_for_margin": True, "upper": "1/24", "upper_closed": True},
+        "input": {"compressed_sha256": COMPRESSED_SHA256, "expanded_sha256": EXPANDED_SHA256,
+                  "compressed_bytes": COMPRESSED_BYTES, "expanded_bytes": EXPANDED_BYTES},
+        "checker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "census": census, "controls": control_results, "certificates": rows,
+        "wall_seconds": time.monotonic() - started, "cpu_seconds": time.process_time() - cpu_started,
+        "peak_rss_bytes": rss if sys.platform == "darwin" else rss * 1024,
+        "guard": "External coordinator-owned guard required; this receipt does not assert guard success.",
+    }
+    publish_receipt(args.output, result)
+    print(json.dumps({"status": result["status"], "certificates": len(rows), "controls": len(control_results),
+                      "wall_seconds": result["wall_seconds"], "peak_rss_bytes": result["peak_rss_bytes"]}))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print(json.dumps({"status": "failed", "error_type": type(error).__name__, "error": str(error)}),
+              file=sys.stderr)
+        raise SystemExit(1) from error

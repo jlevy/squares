@@ -93,6 +93,9 @@ modified.
 | --- | --- | --- | --- |
 | `source/equal_tilt_through_24.json.gz` | upstream | `83a746a504c71501682bc81769f3665a2d895c6e` | `009441b65a3364e5f2abc5736a07dc46632dfba32b03d880780fb7c6849e238f` |
 
+The [independent one-axis polynomial-bank review](review-one-axis-bank/README.md) accepts
+576 conditional certificates. The graph enumeration and bridge coverage remain open.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
