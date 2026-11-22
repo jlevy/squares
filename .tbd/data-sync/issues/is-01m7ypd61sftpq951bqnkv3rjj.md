@@ -5,7 +5,7 @@ title: "Triage #1063: de Winter rational enclosures for 13 existing packing witn
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-21T09:18:41.719Z
-updated_at: 2026-11-22T23:23:44.964Z
+updated_at: 2026-11-22T23:48:13.596Z
 started_at: 2026-11-21T09:18:46.694Z
 ---
 Check source-side precision supplements, inherited attribution, and unchanged public ceilings count by count before any narrow evidence update.
@@ -28,3 +28,5 @@ Check source-side precision supplements, inherited attribution, and unchanged pu
 21 November: #1079 merged and deployed at 8ba0e2a4a4. Author reply https://github.com/jlevy/squares/issues/1063#issuecomment-7068551715. The exact finite receipt covers all thirteen candidates and 52 controls. Independent targeted verification covered source bindings, wall extents, contacts, prior-house comparisons and attribution. Continue scoped full Stage 4 with 304 and 308 retaining the source-only caveat.
 
 22 November UTC. Complete n105 sharp-control replay succeeded on both maintained exact GMP routes: eleven expected verdicts and exact margins, 48.929 s supervised and 95.875 MiB process peak RSS. The earlier Fraction workload reached its 300-second ceiling. #1086 retains the receipt and exact-source identity. Other counts stay at their recorded scope.
+
+23:43 UTC. PR #1086 landed as ad02e1650b1c with all required checks and the exact senior, correctness and performance reviews. Verify Certificate page run 45084785960 before the scoped #1063 reply. Future count registrations remain on this bead.

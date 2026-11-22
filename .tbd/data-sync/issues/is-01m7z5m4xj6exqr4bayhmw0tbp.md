@@ -5,7 +5,7 @@ title: "Review #1055 extension: s(20) > 4.99755 and restricted angle theorems"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m7xcpf5d7hhsa84btecxknv8
 hold: null
 hold_until: null
 created_at: 2026-11-21T13:44:38.577Z
-updated_at: 2026-11-22T23:23:48.500Z
+updated_at: 2026-11-22T23:48:17.904Z
 started_at: 2026-11-21T13:44:39.222Z
 ---
 Comment 7058955337 and dad9c3fd mirror report a stronger unrestricted lower bound 99951/20000 and restricted claims on equal absolute tilts, angle diversity and one axis-aligned square. Pin and map reused and new terminal premises and prepare independent review. Preserve the original 99/20 result and its proof/custody separately.
@@ -28,3 +28,5 @@ Comment 7058955337 and dad9c3fd mirror report a stronger unrestricted lower boun
 22 November UTC. The independent exact one-axis bank checker passed all 576 certificates, 9,777 first-match rule uses and 16 predeclared controls. Checker 0.379 seconds, 36.7 MiB peak RSS, guard pressure 1 at startup and both exits zero. Draft #1085 retains the frozen checker, original bank and full receipt. The conclusion is conditional on sign, graph and bridge coverage. No complete one-axis, angular-diversity or unrestricted lower-bound promotion.
 
 22 November UTC. Frozen independent bridge checker completed 3,488 local exclusions, 15,696 normal choices and all 12 controls. The 96 zero-cost profiles and global sign/vacancy/graph coverage stay open. Preparing exact source-bound review retention.
+
+23:34 UTC. Independent sign/vacancy check verified 2,400 cases, 29,368 assignments, 234,944 D4 images and 3,671 orbits. Twelve controls passed. Both complete receipts agree except measurements; local bridge and census evidence are staged together. General-path proofs and graph-to-bank coverage remain.
