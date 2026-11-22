@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **290** programs: **57** external and **233** first-party; **203** decide claims and **87** check premises.
-- **821** of **1059** evidence entries name the programs that verified them: 412 independently re-implemented, 327 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **821** of **1059** evidence entries name the programs that verified them: 413 independently re-implemented, 326 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -1658,8 +1658,8 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-samanyu-n109-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained routes. | T-335 |
 | `E-de-winter-1052-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | T-336 |
 | `E-geiserx-1040-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | T-337 |
-| `E-geiserx-1037-rational-native-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
-| `E-geiserx-1037-quadratic-native-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
+| `E-geiserx-1037-rational-native-replay` | replayed here | reproduced with the producer’s code | full, 7 of 7: Full rational certificates and both complete negative-control jobs. | - |
+| `E-geiserx-1037-quadratic-native-replay` | replayed here | independently re-implemented | full, 2 of 2: Full quadratic certificates and both complete negative-control jobs. | - |
 
 ### `V-check-rational-witness-independent`
 
@@ -1822,7 +1822,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-samanyu-n109-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained routes. | T-335 |
 | `E-de-winter-1052-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | T-336 |
 | `E-geiserx-1040-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | T-337 |
-| `E-geiserx-1037-rational-native-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
+| `E-geiserx-1037-rational-native-replay` | replayed here | reproduced with the producer’s code | full, 7 of 7: Full rational certificates and both complete negative-control jobs. | - |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
