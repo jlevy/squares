@@ -38568,7 +38568,12 @@ issues:
     beads:
     - think-1tkk
     answer_bead: think-1tkk
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1019#issuecomment-7087114402
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1037
     title: 'Exact certificates for GeiserX''s published packings of 202, 204, 210, 263, 264, 295 and 297 (pointer)'
@@ -38641,7 +38646,10 @@ issues:
         (1605 - 19 sqrt(3))/94. The 263-square witness has a lower-left box of side
         S263 - 2 containing 202 squares.
       source: body
-      not_registered: Independent finite verification complete. Registration and house comparison are queued.
+      not_registered: >-
+        Independent finite verification and exact first-contact comparisons are complete.
+        Both quadratic sides are smaller than the rational submissions. Registration
+        and strong drawing decisions stay open.
       queued: true
       bead: think-36ui
     - key: geiserx-algebraic-297
@@ -38655,7 +38663,21 @@ issues:
     beads:
     - think-36ui
     answer_bead: think-36ui
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1037#issuecomment-7086931714
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: geiserx-rational-202
+      - result: geiserx-rational-204
+      - result: geiserx-rational-210
+      - result: geiserx-rational-263
+      - result: geiserx-rational-264
+      - result: geiserx-rational-295
+      - result: geiserx-rational-297
+      - result: geiserx-quadratic-202-263
+      - result: geiserx-algebraic-297
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1038
     title: 's(228) ≤ 15.596043116632: improved packing (registration request)'
@@ -38686,7 +38708,8 @@ issues:
       T-301's credit; jazivxt is credited for the public notebook and decimal snapshot, and
       Özden for this certificate. This packing's finder and publication order remain unresolved.
       The driver's KKT solve 9.66e-14 below it stays a candidate (think-4z8z), and the later
-      related de Winter attachment awaits independent comparison in think-d4b0.
+      related de Winter attachment now has two independent finite-feasibility checks.
+      Registration and drawings stay on think-d4b0.
     read_through: '2026-11-20T17:53:48Z'
     results:
     - key: n228-kaggle-certificate
@@ -38723,7 +38746,8 @@ issues:
         route also accepted the algebraic packing and refused both gross controls.
         A separate checker accepted the rational packing and its six controls. The dated
         report-order walk places this follow-up below T-334 for either form, as one
-        report. Independent degree-seven review and registration stay on think-d4b0.
+        report. Independent degree-seven verification accepted all 25,878 pairs and the
+        eleven predeclared controls. Registration and drawing stay on think-d4b0.
       queued: true
       bead: think-d4b0
     beads:
@@ -38767,6 +38791,12 @@ issues:
         status: confirmed
       - result: n228-later-algebraic-attachment
       beads: [think-d4b0]
+    - url: https://github.com/jlevy/squares/issues/1038#issuecomment-7087115594
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-later-algebraic-attachment
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       case adopted where it is the smallest validated side, and the reply on main says what was
@@ -39103,7 +39133,8 @@ issues:
     title: 'Lowered upper bound for n = 305 (side 17.945755838742)'
     author: JoostdeWinter
     opened: '2026-11-20'
-    state: open
+    state: closed
+    closed: '2026-11-22'
     kind: result-report
     triage: done
     summary: 'De Winter''s finite upper bound at 305 is registered as T-336 at V3/C3, S2, with maintained
@@ -39237,6 +39268,12 @@ issues:
       - result: n305-rational-certificate
         id: E-de-winter-1052-certificate-report
       - result: n305-leaderboard-side-only
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7087112747
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-same-side-axis-variants
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its
@@ -39304,8 +39341,9 @@ issues:
         squares below side 5, stated in geometry/angle_diversity.md of the attachment.
       source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
       not_registered: >-
-        The comment gives a theorem pointer; its exact inequalities and hypotheses must be read
-        from the archive and reviewed before any claim is registered.
+        The sharp angle-spread and signed near-axis inequalities have been read from the
+        retained attachment. The small-angle banks and full large-angle coverage still
+        require independent verification.
       queued: true
       bead: think-guls
     - key: n20-one-axis-equal-magnitude
@@ -39314,8 +39352,9 @@ issues:
         in geometry/one_axis_equal.md of the attachment.
       source: https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337
       not_registered: >-
-        The comment does not specify the exact conclusion or angle domain; retain and read the
-        statement before assessing or registering it.
+        The source covers 0 <= tan(theta/2) <= 1/24 with 19 independently signed non-axis
+        tilts. A separate checker accepted all 576 conditional polynomial certificates
+        and 16 controls. Complete sign, graph and bridge coverage remains open.
       queued: true
       bead: think-guls
     beads:
@@ -39380,9 +39419,10 @@ issues:
         weak sign for each count.
       source: body
       not_registered: >-
-        The final inventory and 22 strengthenings over attachment C are verified as exact
-        endpoint comparisons. Sixty rows rely on T-180. Coverage and theorem inheritance
-        require replay.
+        The 22 strengthenings over attachment C pass exact endpoint comparisons. A
+        separate review proves the coarse parallel-chord lemma and verifies the n162
+        and n318 arithmetic conditional on the claimed area bounds. Sixty unchanged
+        rows still rely on T-180 coverage. Complete geometric replay remains open.
       queued: true
       bead: think-uz7g
     beads: [think-uz7g]

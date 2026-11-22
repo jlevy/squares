@@ -86,12 +86,17 @@ modified.
 | Stored path | Origin | Git blob | SHA-256 |
 | --- | --- | --- | --- |
 | `acquisition/archive-members.json.gz` | receipt | `bf693f1ffe981917724e03f53ed5b236053f6223` | `ecd4093ea60f982009919478f25b32b3e56b82ded1bc59fe300dd5d87d4f339d` |
+| `review-one-axis-bank/checker-receipt.json.gz` | receipt | `b72348118152f100e3adb3cb4fffd114af4eae83` | `5f8ca1a560ef390078f9938bc98ac63af1efec0cf0be43481dd60628a7598f4c` |
 
 ## Original Gzip Files
 
 | Stored path | Origin | Git blob | SHA-256 |
 | --- | --- | --- | --- |
 | `source/equal_tilt_through_24.json.gz` | upstream | `83a746a504c71501682bc81769f3665a2d895c6e` | `009441b65a3364e5f2abc5736a07dc46632dfba32b03d880780fb7c6849e238f` |
+| `review-one-axis-bank/one_axis_24.json.gz` | upstream | `69cdbf53f097cc89cb136adca3bb4bb81a71ccfc` | `451b1116cf5b6eaa78ecc8233ee4e4c931537e6dfd3bd4fba2a6d91b1922d257` |
+
+The [independent one-axis polynomial-bank review](review-one-axis-bank/README.md) accepts
+576 conditional certificates. The graph enumeration and bridge coverage remain open.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

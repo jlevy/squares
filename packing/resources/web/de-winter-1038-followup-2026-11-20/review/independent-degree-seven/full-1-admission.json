@@ -1,0 +1,19 @@
+{
+  "scope": "Independent acceptance of the submitted finite degree-seven packing",
+  "source_sha256": "e32f6c3804e7bf61967a84e0b6ce520303e9b7c820b2431c342777bce7c8e1c9",
+  "checker_sha256": "0514937ecfcd1a9ad62c6eae2d5e99b2d901dbe858923c1c4bfa48622df71c88",
+  "receipt_sha256": "85aec431826e5b1fb7717b9e2a92d1e2450c4ca8a3b59f7918d9fb52b3df6158",
+  "receipt_compressed_bytes": 67762,
+  "exact_pair_roster_complete": true,
+  "squares": 228,
+  "walls": 3648,
+  "pairs": 25878,
+  "controls": 11,
+  "wall_equalities": 66,
+  "pair_equalities": 302,
+  "elapsed_seconds": 40.49046212498797,
+  "maximum_observed_tree_gib": 0.14,
+  "maximum_pressure": 1,
+  "guard_exit": 0,
+  "worker_exit": 0
+}

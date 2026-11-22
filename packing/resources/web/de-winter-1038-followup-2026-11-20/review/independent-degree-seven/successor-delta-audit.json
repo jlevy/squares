@@ -1,0 +1,51 @@
+{
+  "audit_utc": "2026-11-22T22:22:32.403779+00:00",
+  "predecessor_sha256": "1548cbb144dc2dc6149e81a3530ace4515e3b81bd0286c4be2ff14e831f59268",
+  "successor_sha256": "0514937ecfcd1a9ad62c6eae2d5e99b2d901dbe858923c1c4bfa48622df71c88",
+  "unchanged_function_and_class_definitions": [
+    "Deadline",
+    "GeometryRefusal",
+    "Incomplete",
+    "NumberField",
+    "Square",
+    "check_unit",
+    "check_walls",
+    "controls",
+    "corners",
+    "dot",
+    "evaluate_polynomial",
+    "expect_refusal",
+    "finite_gcd",
+    "finite_multiply",
+    "finite_power",
+    "finite_remainder",
+    "irreducible_degree_seven_mod_three",
+    "pair_gap",
+    "perpendicular",
+    "point",
+    "point_add",
+    "point_subtract",
+    "polynomial_remainder",
+    "prepare_geometry",
+    "publish_json",
+    "rational",
+    "read_source",
+    "reject_duplicate_keys",
+    "sturm_sequence",
+    "sturm_variations",
+    "synthetic_square",
+    "trim"
+  ],
+  "unchanged_definition_count": 32,
+  "changed_definitions": [
+    "run_sample -> run_full_corpus",
+    "main"
+  ],
+  "other_changes": [
+    "module description",
+    "coverage constants"
+  ],
+  "comparison_method": "Python AST comparison only; successor not imported or executed.",
+  "arithmetic_and_geometric_predicates_preserved": true,
+  "controls_definition_preserved": true
+}

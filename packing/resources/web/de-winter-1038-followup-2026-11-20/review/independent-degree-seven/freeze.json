@@ -1,0 +1,58 @@
+{
+  "frozen_utc": "2026-11-22T22:23:43.236336+00:00",
+  "author": "resume_228_review",
+  "state": "frozen-full-corpus-unexecuted",
+  "files": {
+    "checker.py.txt": {
+      "bytes": 29274,
+      "sha256": "0514937ecfcd1a9ad62c6eae2d5e99b2d901dbe858923c1c4bfa48622df71c88"
+    },
+    "frozen-plan.md": {
+      "bytes": 4947,
+      "sha256": "0b4272a94221ae53c5940eaf383aa75767be5b05e8f3a3079f848ee1e173fc2c"
+    },
+    "successor.diff": {
+      "bytes": 5418,
+      "sha256": "90258157be804cdd745d7db4b362dde3cf50207f6b417def36bed10f4abdacb5"
+    },
+    "successor-delta-audit.json": {
+      "bytes": 1321,
+      "sha256": "5888a847a01357549e6fc2be48ec0ba44b60321bcecb9ed39e968d200d761285"
+    },
+    "pricing.json": {
+      "bytes": 1303,
+      "sha256": "088eb1fe51b835b2c951eda788f03eac678766e8df41b148ad67ca7e172a04fb"
+    }
+  },
+  "predecessor_sha256": "1548cbb144dc2dc6149e81a3530ace4515e3b81bd0286c4be2ff14e831f59268",
+  "predecessor_sample_receipt_sha256": "978fe25cd7ab98407e8158bd259cf7868828ff24c74e8f0b87b807d94c70c1ff",
+  "unchanged_arithmetic_geometry_control_definitions": 32,
+  "mode": "full-corpus",
+  "coverage": {
+    "unit_squares": 228,
+    "wall_inequalities": 3648,
+    "unordered_unique_pairs": 25878,
+    "pair_axes": 103512,
+    "controls": 11
+  },
+  "source_sha256": "e32f6c3804e7bf61967a84e0b6ce520303e9b7c820b2431c342777bce7c8e1c9",
+  "full_source_geometry_parsed_by_predecessor_after_predecessor_freeze": true,
+  "original_source_geometry_reopened_during_successor_preparation": false,
+  "successor_source_execution_occurs_after_this_freeze": true,
+  "prior_exposure": "Rational independent code/report, prior T-334 metadata, source README assertions and field metadata, several constant coordinate rows, static full encoding census, maintained outcome and field-certificate metadata, and own successful sample receipt.",
+  "syntax_parsed": true,
+  "successor_imported": false,
+  "successor_executed": false,
+  "new_geometry_runs": 0,
+  "limits": {
+    "internal_wall_seconds": 165,
+    "outer_wall_seconds": 180,
+    "workers": 1,
+    "tree_gib": 0.3,
+    "start_pressure": 1,
+    "stop_pressure": 2,
+    "total_refinements": 1024,
+    "refinements_per_sign": 256,
+    "sign_cache_entries": 100000
+  }
+}

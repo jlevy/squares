@@ -1,0 +1,717 @@
+"""Independent, bounded complete degree-seven geometry review for the later #1038 input."""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import itertools
+import json
+import os
+import tempfile
+import time
+from dataclasses import dataclass
+from fractions import Fraction
+from pathlib import Path
+
+from gmpy2 import mpq
+
+EXPECTED_SOURCE_SHA256 = "e32f6c3804e7bf61967a84e0b6ce520303e9b7c820b2431c342777bce7c8e1c9"
+EXPECTED_POLYNOMIAL_DESCENDING = (1, 11, -153, -1433, -1250, 4706, -6839, 2861)
+FIELD_DEGREE = 7
+MAX_SOURCE_BYTES = 200_000
+MAX_TOTAL_REFINEMENTS = 1024
+MAX_REFINEMENTS_PER_SIGN = 256
+MAX_SIGN_CACHE_ENTRIES = 100_000
+MAX_WORK_SECONDS = 165.0
+EXPECTED_SQUARE_COUNT = 228
+EXPECTED_WALL_INEQUALITIES = 3648
+EXPECTED_PAIR_COUNT = 25878
+
+Element = tuple[mpq, ...]
+Point = tuple[Element, Element]
+
+
+class Incomplete(Exception):
+    """A resource or representation limit prevented a scientific decision."""
+
+
+class GeometryRefusal(Exception):
+    """An exact geometric predicate found a declared defect."""
+
+    def __init__(self, reason: str, detail: object):
+        super().__init__(reason)
+        self.reason = reason
+        self.detail = detail
+
+
+class Deadline:
+    def __init__(self, seconds: float):
+        self.started = time.monotonic()
+        self.expires = self.started + seconds
+
+    def check(self) -> None:
+        if time.monotonic() >= self.expires:
+            raise Incomplete("internal wall ceiling reached")
+
+    def elapsed(self) -> float:
+        return time.monotonic() - self.started
+
+
+def rational(value: object) -> mpq:
+    if not isinstance(value, str) or not value or len(value) > 1024:
+        raise Incomplete("unsupported rational literal")
+    parsed = Fraction(value)
+    return mpq(parsed.numerator, parsed.denominator)
+
+
+def trim(coefficients: list) -> list:
+    result = list(coefficients)
+    while result and result[-1] == 0:
+        result.pop()
+    return result
+
+
+def polynomial_remainder(dividend: list, divisor: list) -> list:
+    result = trim(dividend)
+    denominator = trim(divisor)
+    if not denominator:
+        raise Incomplete("polynomial division by zero")
+    while len(result) >= len(denominator):
+        coefficient = result[-1] / denominator[-1]
+        offset = len(result) - len(denominator)
+        for index, divisor_coefficient in enumerate(denominator):
+            result[index + offset] -= coefficient * divisor_coefficient
+        result = trim(result)
+    return result
+
+
+def evaluate_polynomial(coefficients: list | tuple, point: mpq) -> mpq:
+    result = mpq(0)
+    for coefficient in reversed(coefficients):
+        result = result * point + coefficient
+    return result
+
+
+def sturm_sequence(polynomial: list[mpq]) -> list[list[mpq]]:
+    derivative = [index * coefficient for index, coefficient in enumerate(polynomial)][1:]
+    sequence = [trim(polynomial), trim(derivative)]
+    while sequence[-1]:
+        remainder = polynomial_remainder(sequence[-2], sequence[-1])
+        if not remainder:
+            break
+        sequence.append([-coefficient for coefficient in remainder])
+    return sequence
+
+
+def sturm_variations(sequence: list[list[mpq]], point: mpq) -> int:
+    values = [evaluate_polynomial(polynomial, point) for polynomial in sequence]
+    signs = [1 if value > 0 else -1 for value in values if value != 0]
+    return sum(left != right for left, right in itertools.pairwise(signs))
+
+
+def finite_remainder(dividend: list[int], divisor: list[int], prime: int) -> list[int]:
+    result = trim([coefficient % prime for coefficient in dividend])
+    denominator = trim([coefficient % prime for coefficient in divisor])
+    if not denominator:
+        raise Incomplete("finite-field polynomial division by zero")
+    inverse_leading = pow(denominator[-1], -1, prime)
+    while len(result) >= len(denominator):
+        multiplier = result[-1] * inverse_leading % prime
+        offset = len(result) - len(denominator)
+        for index, coefficient in enumerate(denominator):
+            result[index + offset] = (
+                result[index + offset] - multiplier * coefficient
+            ) % prime
+        result = trim(result)
+    return result
+
+
+def finite_multiply(
+    left: list[int], right: list[int], modulus: list[int], prime: int
+) -> list[int]:
+    if not left or not right:
+        return []
+    product = [0] * (len(left) + len(right) - 1)
+    for left_index, left_value in enumerate(left):
+        for right_index, right_value in enumerate(right):
+            product[left_index + right_index] += left_value * right_value
+    return finite_remainder(product, modulus, prime)
+
+
+def finite_power(
+    value: list[int], exponent: int, modulus: list[int], prime: int
+) -> list[int]:
+    result = [1]
+    power = value
+    while exponent:
+        if exponent % 2:
+            result = finite_multiply(result, power, modulus, prime)
+        power = finite_multiply(power, power, modulus, prime)
+        exponent //= 2
+    return result
+
+
+def finite_gcd(left: list[int], right: list[int], prime: int) -> list[int]:
+    first, second = trim(left), trim(right)
+    while second:
+        first, second = second, finite_remainder(first, second, prime)
+    if not first:
+        return []
+    inverse_leading = pow(first[-1], -1, prime)
+    return [coefficient * inverse_leading % prime for coefficient in first]
+
+
+def irreducible_degree_seven_mod_three(polynomial: list[int]) -> bool:
+    # Since seven is prime, Rabin's criterion needs only the degree-one gcd
+    # and the seventh Frobenius identity.
+    prime = 3
+    modulus = trim([coefficient % prime for coefficient in polynomial])
+    if len(modulus) != FIELD_DEGREE + 1:
+        return False
+    variable = [0, 1]
+    frobenius = variable
+    for iteration in range(1, FIELD_DEGREE + 1):
+        frobenius = finite_power(frobenius, prime, modulus, prime)
+        if iteration == 1:
+            difference = list(frobenius)
+            difference.extend([0] * max(0, len(variable) - len(difference)))
+            for index, coefficient in enumerate(variable):
+                difference[index] = (difference[index] - coefficient) % prime
+            if len(finite_gcd(modulus, trim(difference), prime)) != 1:
+                return False
+    return trim(frobenius) == variable
+
+
+class NumberField:
+    """Exact quotient arithmetic, with signs certified at one isolated real root."""
+
+    def __init__(self, polynomial: tuple[int, ...], lower: mpq, upper: mpq, deadline: Deadline):
+        self.deadline = deadline
+        self.polynomial = tuple(mpq(value) for value in reversed(polynomial))
+        self.lower = lower
+        self.upper = upper
+        self.sign_cache: dict[Element, int] = {}
+        self.counters = {
+            "sign_requests": 0,
+            "rational_signs": 0,
+            "zero_reductions": 0,
+            "cached_signs": 0,
+            "interval_enclosures": 0,
+            "root_refinements": 0,
+            "field_multiplications": 0,
+        }
+        if polynomial != EXPECTED_POLYNOMIAL_DESCENDING:
+            raise Incomplete("unexpected field polynomial")
+        if not irreducible_degree_seven_mod_three(list(reversed(polynomial))):
+            raise Incomplete("independent irreducibility check failed")
+        self.deadline.check()
+        if lower >= upper:
+            raise Incomplete("invalid root interval")
+        self.lower_polynomial_value = evaluate_polynomial(self.polynomial, lower)
+        upper_value = evaluate_polynomial(self.polynomial, upper)
+        if self.lower_polynomial_value == 0 or upper_value == 0:
+            raise Incomplete("root interval endpoint is a root")
+        sequence = sturm_sequence(list(self.polynomial))
+        root_count = sturm_variations(sequence, lower) - sturm_variations(sequence, upper)
+        if root_count != 1 or self.lower_polynomial_value * upper_value >= 0:
+            raise Incomplete("declared interval does not isolate one crossing root")
+        self.field_certificate = {
+            "polynomial_descending": [str(value) for value in polynomial],
+            "irreducible_modulo_prime": 3,
+            "rabin_checked_subdegree": 1,
+            "rabin_gcd_degree": 0,
+            "rabin_frobenius_exponent": 3**7,
+            "root_count": root_count,
+            "root_count_method": "independent exact rational Sturm sequence",
+            "initial_interval": [str(lower), str(upper)],
+            "endpoint_root": False,
+        }
+        self.zero = self.constant(0)
+        self.one = self.constant(1)
+
+    def constant(self, value: int | mpq) -> Element:
+        return (mpq(value),) + (mpq(0),) * (FIELD_DEGREE - 1)
+
+    def reduce(self, coefficients: list[mpq]) -> Element:
+        result = list(coefficients)
+        result.extend([mpq(0)] * max(0, FIELD_DEGREE - len(result)))
+        for degree in range(len(result) - 1, FIELD_DEGREE - 1, -1):
+            coefficient = result[degree]
+            if coefficient:
+                offset = degree - FIELD_DEGREE
+                for index in range(FIELD_DEGREE):
+                    result[offset + index] -= coefficient * self.polynomial[index]
+        return tuple(result[:FIELD_DEGREE])
+
+    def element(self, value: object) -> Element:
+        coefficients = value if isinstance(value, list) else [value]
+        if not coefficients or len(coefficients) > FIELD_DEGREE:
+            raise Incomplete("unsupported field element length")
+        return self.reduce([rational(coefficient) for coefficient in coefficients])
+
+    def add(self, left: Element, right: Element) -> Element:
+        return tuple(a + b for a, b in zip(left, right, strict=True))
+
+    def subtract(self, left: Element, right: Element) -> Element:
+        return tuple(a - b for a, b in zip(left, right, strict=True))
+
+    def negate(self, value: Element) -> Element:
+        return tuple(-coefficient for coefficient in value)
+
+    def scale(self, value: Element, multiplier: int | mpq) -> Element:
+        return tuple(coefficient * multiplier for coefficient in value)
+
+    def multiply(self, left: Element, right: Element) -> Element:
+        self.deadline.check()
+        self.counters["field_multiplications"] += 1
+        product = [mpq(0)] * (2 * FIELD_DEGREE - 1)
+        for left_index, left_value in enumerate(left):
+            if not left_value:
+                continue
+            for right_index, right_value in enumerate(right):
+                if right_value:
+                    product[left_index + right_index] += left_value * right_value
+        return self.reduce(product)
+
+    def interval(self, value: Element) -> tuple[mpq, mpq]:
+        self.counters["interval_enclosures"] += 1
+        lower = upper = mpq(0)
+        for coefficient in reversed(value):
+            products = (
+                lower * self.lower,
+                lower * self.upper,
+                upper * self.lower,
+                upper * self.upper,
+            )
+            lower = min(products) + coefficient
+            upper = max(products) + coefficient
+        return lower, upper
+
+    def refine_root(self) -> None:
+        self.deadline.check()
+        if self.counters["root_refinements"] >= MAX_TOTAL_REFINEMENTS:
+            raise Incomplete("total root refinement ceiling reached")
+        midpoint = (self.lower + self.upper) / 2
+        value = evaluate_polynomial(self.polynomial, midpoint)
+        if value == 0:
+            raise Incomplete("rational midpoint contradicts the irreducible field")
+        if self.lower_polynomial_value * value > 0:
+            self.lower = midpoint
+            self.lower_polynomial_value = value
+        else:
+            self.upper = midpoint
+        self.counters["root_refinements"] += 1
+
+    def sign(self, value: Element) -> int:
+        self.deadline.check()
+        self.counters["sign_requests"] += 1
+        if not any(value):
+            self.counters["zero_reductions"] += 1
+            return 0
+        if not any(value[1:]):
+            self.counters["rational_signs"] += 1
+            return 1 if value[0] > 0 else -1
+        if value in self.sign_cache:
+            self.counters["cached_signs"] += 1
+            return self.sign_cache[value]
+        for refinement in range(MAX_REFINEMENTS_PER_SIGN + 1):
+            lower, upper = self.interval(value)
+            if lower > 0 or upper < 0:
+                result = 1 if lower > 0 else -1
+                if len(self.sign_cache) >= MAX_SIGN_CACHE_ENTRIES:
+                    raise Incomplete("sign cache ceiling reached")
+                self.sign_cache[value] = result
+                return result
+            if refinement == MAX_REFINEMENTS_PER_SIGN:
+                break
+            self.refine_root()
+        raise Incomplete(
+            "sign unresolved within refinement ceiling: "
+            + json.dumps({"element": self.describe(value), "interval": [str(lower), str(upper)]})
+        )
+
+    def absolute(self, value: Element) -> Element:
+        return self.negate(value) if self.sign(value) < 0 else value
+
+    def describe(self, value: Element) -> list[str]:
+        return [str(coefficient) for coefficient in value]
+
+
+@dataclass(frozen=True)
+class Square:
+    identifier: int
+    center: Point
+    basis: Point
+    syntactically_nonconstant: bool
+
+
+def point(field: NumberField, value: object) -> Point:
+    if not isinstance(value, list) or len(value) != 2:
+        raise Incomplete("unsupported two-coordinate point")
+    return field.element(value[0]), field.element(value[1])
+
+
+def point_add(field: NumberField, left: Point, right: Point) -> Point:
+    return field.add(left[0], right[0]), field.add(left[1], right[1])
+
+
+def point_subtract(field: NumberField, left: Point, right: Point) -> Point:
+    return field.subtract(left[0], right[0]), field.subtract(left[1], right[1])
+
+
+def dot(field: NumberField, left: Point, right: Point) -> Element:
+    return field.add(
+        field.multiply(left[0], right[0]),
+        field.multiply(left[1], right[1]),
+    )
+
+
+def perpendicular(field: NumberField, basis: Point) -> Point:
+    return field.negate(basis[1]), basis[0]
+
+
+def corners(field: NumberField, square: Square) -> tuple[Point, ...]:
+    second = perpendicular(field, square.basis)
+    vertices = []
+    for first_sign, second_sign in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        offset = (
+            field.scale(field.add(
+                field.scale(square.basis[0], first_sign),
+                field.scale(second[0], second_sign),
+            ), mpq(1, 2)),
+            field.scale(field.add(
+                field.scale(square.basis[1], first_sign),
+                field.scale(second[1], second_sign),
+            ), mpq(1, 2)),
+        )
+        vertices.append(point_add(field, square.center, offset))
+    return tuple(vertices)
+
+
+def check_unit(field: NumberField, square: Square) -> None:
+    second = perpendicular(field, square.basis)
+    equalities = (
+        field.subtract(dot(field, square.basis, square.basis), field.one),
+        field.subtract(dot(field, second, second), field.one),
+        dot(field, square.basis, second),
+    )
+    if any(field.sign(expression) != 0 for expression in equalities):
+        raise GeometryRefusal("nonunit-basis", square.identifier)
+
+
+def check_walls(field: NumberField, side: Element, square: Square) -> dict:
+    check_unit(field, square)
+    tested = 0
+    equalities = 0
+    minimum = None
+    for corner_index, (x, y) in enumerate(corners(field, square)):
+        margins = (x, y, field.subtract(side, x), field.subtract(side, y))
+        for wall_index, margin in enumerate(margins):
+            sign = field.sign(margin)
+            tested += 1
+            if sign < 0:
+                raise GeometryRefusal(
+                    "outside-container",
+                    [square.identifier, corner_index, wall_index, field.describe(margin)],
+                )
+            equalities += sign == 0
+            if minimum is None or field.sign(field.subtract(margin, minimum)) < 0:
+                minimum = margin
+    return {"tested": tested, "equalities": equalities, "minimum": minimum}
+
+
+def pair_gap(field: NumberField, first: Square, second: Square) -> Element:
+    displacement = point_subtract(field, second.center, first.center)
+    first_perpendicular = perpendicular(field, first.basis)
+    second_perpendicular = perpendicular(field, second.basis)
+    axes = (first.basis, first_perpendicular, second.basis, second_perpendicular)
+    bases = (first.basis, first_perpendicular, second.basis, second_perpendicular)
+    best = None
+    for axis in axes:
+        center_distance = field.absolute(dot(field, displacement, axis))
+        support_sum = field.zero
+        for basis in bases:
+            support_sum = field.add(support_sum, field.absolute(dot(field, basis, axis)))
+        gap = field.subtract(center_distance, field.scale(support_sum, mpq(1, 2)))
+        if best is None or field.sign(field.subtract(gap, best)) > 0:
+            best = gap
+    if best is None:
+        raise Incomplete("pair produced no separating axes")
+    if field.sign(best) < 0:
+        raise GeometryRefusal(
+            "interior-overlap",
+            [first.identifier, second.identifier, field.describe(best)],
+        )
+    return best
+
+
+def synthetic_square(
+    field: NumberField, identifier: int, center_x: mpq, center_y: mpq
+) -> Square:
+    return Square(
+        identifier,
+        (field.constant(center_x), field.constant(center_y)),
+        (field.one, field.zero),
+        False,
+    )
+
+
+def expect_refusal(label: str, operation, reason: str) -> dict:
+    try:
+        operation()
+    except GeometryRefusal as error:
+        if error.reason != reason:
+            raise Incomplete(f"control {label} refused for {error.reason}")
+        return {"control": label, "expected": "refused", "reason": reason, "detail": error.detail}
+    raise Incomplete(f"control {label} was accepted")
+
+
+def controls(field: NumberField, selected: list[Square], side: Element) -> list[dict]:
+    alpha = field.reduce([mpq(0), mpq(1)])
+    zero_polynomial = field.reduce(list(field.polynomial))
+    if field.sign(alpha) != 1 or field.sign(field.negate(alpha)) != -1:
+        raise Incomplete("root sign control failed")
+    if field.sign(zero_polynomial) != 0:
+        raise Incomplete("modulus reduction control failed")
+    outcomes = [
+        {"control": "positive-root", "expected": "positive"},
+        {"control": "negative-root", "expected": "negative"},
+        {"control": "zero-modulus", "expected": "zero"},
+    ]
+    try:
+        NumberField(EXPECTED_POLYNOMIAL_DESCENDING, mpq(0), mpq(1, 100), field.deadline)
+    except Incomplete as error:
+        if str(error) != "declared interval does not isolate one crossing root":
+            raise
+        outcomes.append({"control": "wrong-root-interval", "expected": "refused", "reason": str(error)})
+    else:
+        raise Incomplete("wrong-root-interval control accepted")
+
+    unit = synthetic_square(field, 1001, mpq(1, 2), mpq(1, 2))
+    touching = synthetic_square(field, 1002, mpq(3, 2), mpq(1, 2))
+    check_walls(field, field.constant(2), unit)
+    check_walls(field, field.constant(2), touching)
+    if field.sign(pair_gap(field, unit, touching)) != 0:
+        raise Incomplete("shared-edge control did not touch exactly")
+    outcomes.append({"control": "exact-shared-edge", "expected": "accepted", "gap": "0"})
+    snug = check_walls(field, field.one, unit)
+    if snug["equalities"] != 8:
+        raise Incomplete("exact-unit-container control equality count")
+    outcomes.append({"control": "exact-unit-container", "expected": "accepted", "wall_equalities": 8})
+
+    inward = synthetic_square(field, 1002, mpq(3, 2) - mpq(1, 100), mpq(1, 2))
+    outward = synthetic_square(field, 1001, mpq(1, 2) - mpq(1, 100), mpq(1, 2))
+    corrupt = Square(1003, unit.center, (field.one, alpha), True)
+    outcomes.append(expect_refusal(
+        "inward-pair", lambda: pair_gap(field, unit, inward), "interior-overlap"
+    ))
+    outcomes.append(expect_refusal(
+        "outward-wall", lambda: check_walls(field, field.one, outward), "outside-container"
+    ))
+    outcomes.append(expect_refusal(
+        "corrupted-unit-basis", lambda: check_unit(field, corrupt), "nonunit-basis"
+    ))
+    original = selected[0]
+    duplicate = Square(-original.identifier, original.center, original.basis, original.syntactically_nonconstant)
+    outcomes.append(expect_refusal(
+        "source-duplicate-pair", lambda: pair_gap(field, original, duplicate), "interior-overlap"
+    ))
+    translated = Square(
+        original.identifier,
+        (field.subtract(original.center[0], field.scale(side, 2)), original.center[1]),
+        original.basis,
+        original.syntactically_nonconstant,
+    )
+    outcomes.append(expect_refusal(
+        "source-shifted-outside", lambda: check_walls(field, side, translated), "outside-container"
+    ))
+    return outcomes
+
+
+def reject_duplicate_keys(items: list[tuple[str, object]]) -> dict:
+    result = {}
+    for key, value in items:
+        if key in result:
+            raise Incomplete("duplicate JSON object key")
+        result[key] = value
+    return result
+
+
+def read_source(path: Path) -> tuple[bytes, dict]:
+    if path.stat().st_size > MAX_SOURCE_BYTES:
+        raise Incomplete("source file exceeds byte limit")
+    if path.suffix == ".gz":
+        with gzip.open(path, "rb") as stream:
+            raw = stream.read(MAX_SOURCE_BYTES + 1)
+    else:
+        raw = path.read_bytes()
+    if len(raw) > MAX_SOURCE_BYTES:
+        raise Incomplete("decompressed source exceeds byte limit")
+    if hashlib.sha256(raw).hexdigest() != EXPECTED_SOURCE_SHA256:
+        raise Incomplete("original source bytes do not match retained member")
+    document = json.loads(raw, object_pairs_hook=reject_duplicate_keys)
+    witness = document["witness"]
+    if (
+        witness.get("n") != 228
+        or witness.get("square_size") != "1"
+        or witness.get("representation") != "center-basis"
+        or witness.get("coordinates", {}).get("origin") != "lower-left"
+        or witness.get("coordinates", {}).get("axes") != "x-right-y-up"
+        or witness.get("scalar", {}).get("kind") != "algebraic-number-field"
+    ):
+        raise Incomplete("unsupported mathematical representation")
+    return raw, witness
+
+
+def prepare_geometry(field: NumberField, witness: dict) -> tuple[Element, list[Square]]:
+    rows = witness["squares"]
+    if len(rows) != 228:
+        raise Incomplete("wrong square count")
+    squares = []
+    identifiers = set()
+    for row in rows:
+        identifier = row["id"]
+        if not isinstance(identifier, int) or isinstance(identifier, bool) or identifier in identifiers:
+            raise Incomplete("invalid or repeated square ID")
+        identifiers.add(identifier)
+        source_values = [*row["center"], *row["basis"]]
+        nonconstant = any(isinstance(value, list) and len(value) > 1 for value in source_values)
+        squares.append(Square(identifier, point(field, row["center"]), point(field, row["basis"]), nonconstant))
+    return field.element(witness["side"]), sorted(squares, key=lambda square: square.identifier)
+
+
+def run_full_corpus(field: NumberField, side: Element, squares: list[Square]) -> dict:
+    selected = list(squares)
+    if len(selected) != EXPECTED_SQUARE_COUNT:
+        raise Incomplete("full corpus has the wrong square count")
+    pairs = list(itertools.combinations(selected, 2))
+    if len(pairs) != EXPECTED_PAIR_COUNT:
+        raise Incomplete("full corpus has the wrong pair count")
+    unit_wall_started = time.monotonic()
+    wall_count = 0
+    wall_equalities = 0
+    minimum_wall = None
+    for square in selected:
+        result = check_walls(field, side, square)
+        wall_count += result["tested"]
+        wall_equalities += result["equalities"]
+        margin = result["minimum"]
+        if minimum_wall is None or field.sign(field.subtract(margin, minimum_wall)) < 0:
+            minimum_wall = margin
+    unit_wall_seconds = time.monotonic() - unit_wall_started
+    pair_started = time.monotonic()
+    pair_times = []
+    pair_equalities = 0
+    minimum_pair = None
+    for first, second in pairs:
+        started = time.monotonic()
+        gap = pair_gap(field, first, second)
+        pair_times.append(time.monotonic() - started)
+        pair_equalities += field.sign(gap) == 0
+        if minimum_pair is None or field.sign(field.subtract(gap, minimum_pair)) < 0:
+            minimum_pair = gap
+    pair_seconds = time.monotonic() - pair_started
+    if wall_count != EXPECTED_WALL_INEQUALITIES or len(pair_times) != EXPECTED_PAIR_COUNT:
+        raise Incomplete("full corpus coverage is incomplete")
+    controls_started = time.monotonic()
+    control_results = controls(field, selected, side)
+    controls_seconds = time.monotonic() - controls_started
+    return {
+        "corpus_completed": True,
+        "candidate_accepted": True,
+        "full_geometry_completed": True,
+        "selected_square_ids": [square.identifier for square in selected],
+        "constant_square_ids": [square.identifier for square in selected if not square.syntactically_nonconstant],
+        "nonconstant_square_ids": [square.identifier for square in selected if square.syntactically_nonconstant],
+        "pair_ids": [[first.identifier, second.identifier] for first, second in pairs],
+        "unit_squares_tested": len(selected),
+        "wall_inequalities_tested": wall_count,
+        "wall_equalities": wall_equalities,
+        "minimum_wall_coefficients": field.describe(minimum_wall),
+        "pairs_tested": len(pairs),
+        "pair_equalities": pair_equalities,
+        "minimum_pair_max_axis_gap_coefficients": field.describe(minimum_pair),
+        "unit_wall_seconds": unit_wall_seconds,
+        "pair_seconds": pair_seconds,
+        "pair_average_seconds": sum(pair_times) / len(pair_times),
+        "pair_max_seconds": max(pair_times),
+        "controls_seconds": controls_seconds,
+        "controls": control_results,
+    }
+
+
+def publish_json(path: Path, document: dict) -> None:
+    """Publish one complete result, atomically refusing an existing destination."""
+    data = json.dumps(document, indent=2) + "\n"
+    with tempfile.NamedTemporaryFile(
+        mode="w", encoding="utf-8", dir=path.parent, prefix=f".{path.name}.", delete=False
+    ) as stream:
+        temporary = Path(stream.name)
+        stream.write(data)
+    try:
+        os.link(temporary, path)
+    finally:
+        temporary.unlink()
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("source", type=Path)
+    parser.add_argument("output", type=Path)
+    parser.add_argument("--wall-seconds", type=float, default=MAX_WORK_SECONDS)
+    args = parser.parse_args()
+    if not 0 < args.wall_seconds <= MAX_WORK_SECONDS:
+        parser.error(f"--wall-seconds must be in (0, {MAX_WORK_SECONDS}]")
+    deadline = Deadline(args.wall_seconds)
+    field = None
+    result = {
+        "status": "incomplete",
+        "mode": "full-corpus",
+        "corpus_completed": False,
+        "candidate_accepted": None,
+        "full_geometry_completed": False,
+        "original_source_sha256": EXPECTED_SOURCE_SHA256,
+        "scope": "Independent exact finite feasibility of the original 228-square degree-seven source and its declared controls; priority and optimality are outside this review.",
+        "limits": {
+            "internal_wall_seconds": args.wall_seconds,
+            "root_refinements_total": MAX_TOTAL_REFINEMENTS,
+            "root_refinements_per_sign": MAX_REFINEMENTS_PER_SIGN,
+            "sign_cache_entries": MAX_SIGN_CACHE_ENTRIES,
+        },
+    }
+    try:
+        started = time.monotonic()
+        raw, witness = read_source(args.source)
+        result["source_bytes"] = len(raw)
+        result["source_parse_seconds"] = time.monotonic() - started
+        metadata = witness["scalar"]
+        polynomial = tuple(int(value) for value in metadata["minimal_polynomial"])
+        lower, upper = (rational(value) for value in metadata["isolating_interval"])
+        started = time.monotonic()
+        field = NumberField(polynomial, lower, upper, deadline)
+        result["field_preparation_seconds"] = time.monotonic() - started
+        result["field_certificate"] = field.field_certificate
+        started = time.monotonic()
+        side, squares = prepare_geometry(field, witness)
+        result["side_coefficients_ascending"] = field.describe(side)
+        result["source_square_count"] = len(squares)
+        result["geometry_parse_seconds"] = time.monotonic() - started
+        result.update(run_full_corpus(field, side, squares))
+        result["status"] = "full-corpus-accepted"
+    except GeometryRefusal as error:
+        result.update(status="full-corpus-or-control-refused", reason=error.reason, detail=error.detail)
+    except Incomplete as error:
+        result["reason"] = str(error)
+    finally:
+        result["elapsed_seconds"] = deadline.elapsed()
+        if field is not None:
+            result["arithmetic_counters"] = field.counters
+            result["final_root_interval"] = [str(field.lower), str(field.upper)]
+        publish_json(args.output, result)
+    print(json.dumps(result), flush=True)
+    raise SystemExit(0 if result["status"] == "full-corpus-accepted" else 2)
+
+
+if __name__ == "__main__":
+    main()
