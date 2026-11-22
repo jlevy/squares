@@ -248,6 +248,7 @@
     "packing/tests/test_evand_square_packing.py": 0.725,
     "packing/tests/test_exact_construction_price.py": 0.061,
     "packing/tests/test_exact_contracts.py": 0.063,
+    "packing/tests/test_exact_gmp_backend.py": 0.737,
     "packing/tests/test_exact_jets.py": 0.01,
     "packing/tests/test_exact_lp_infeasibility.py": 0.208,
     "packing/tests/test_exact_sides.py": 0.182,
@@ -1181,6 +1182,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/n90-n179-readers-2026-11-22.json",
           "provenance": {},
           "tests": 23
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_exact_gmp_backend.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n232-exact-gmp-2026-11-22.json",
+          "provenance": {},
+          "tests": 21
         }
       ]
     }

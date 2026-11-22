@@ -2532,7 +2532,9 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # 1009 packet keeps its other counts. T-335 adds Samanyu-dev's source at 109, with
     # the name on the current case and held for the next poster edition. T-337 adds
     # the issue 1040 attachment at 259. T-193 still holds other counts.
-    assert len(expected_sources) == 46
+    # T-340 adds de Winter's issue-1062 packet at 232; JoeGun's packet keeps
+    # other counts, so this is one additional source.
+    assert len(expected_sources) == 47
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

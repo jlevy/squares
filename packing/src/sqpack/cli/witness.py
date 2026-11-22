@@ -53,6 +53,12 @@ def parser() -> argparse.ArgumentParser:
     verify = subcommands.add_parser("verify", help="replay exact or interval formal evidence")
     verify.add_argument("witness", type=Path)
     verify.add_argument("--json", action="store_true")
+    verify.add_argument(
+        "--rational-backend",
+        choices=("fraction", "gmp"),
+        default="fraction",
+        help="exact rational arithmetic implementation (default: fraction)",
+    )
 
     promote = subcommands.add_parser(
         "promote",
@@ -119,7 +125,7 @@ def _run(args: argparse.Namespace) -> int:
         )
         return 0 if report.valid else 1
     if args.operation == "verify":
-        result, report = exact_verify(witness)
+        result, report = exact_verify(witness, rational_backend=args.rational_backend)
         _print(
             result,
             "VERIFIED" if report.valid else "VERIFICATION FAILED",

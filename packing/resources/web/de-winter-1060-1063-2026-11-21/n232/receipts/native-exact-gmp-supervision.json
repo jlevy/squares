@@ -1,0 +1,29 @@
+[
+  {
+    "control": "positive",
+    "worker_exit": 0,
+    "guard_exit": 0,
+    "reason": null,
+    "wall_seconds_with_supervision": 36.92829974996857,
+    "peak_gib": 0.1,
+    "pressure": 1
+  },
+  {
+    "control": "duplicate-square-overlap",
+    "worker_exit": 0,
+    "guard_exit": 0,
+    "reason": null,
+    "wall_seconds_with_supervision": 41.7672910830006,
+    "peak_gib": 0.1,
+    "pressure": 1
+  },
+  {
+    "control": "square-translated-outside-container",
+    "worker_exit": 0,
+    "guard_exit": 0,
+    "reason": null,
+    "wall_seconds_with_supervision": 39.68281866697362,
+    "peak_gib": 0.1,
+    "pressure": 1
+  }
+]

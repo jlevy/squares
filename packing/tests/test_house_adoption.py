@@ -229,7 +229,8 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: correction, to Mykhailo Polkovskyi's issue-1009 certificate (T-323), 1.36e-3 below
 #: T-146 and below T-193's side there, and the pass of 21 November took 199 on to Joost de
 #: Winter's re-solve of T-284's core (T-285), a new result under option D (think-b0w5).
-OVERTAKEN = {175: "T-267", 199: "T-285", 204: "T-306", 232: "T-307", 292: "T-323"}
+#: The 22 November pass adopted de Winter's rational certificate as T-340 at 232.
+OVERTAKEN = {175: "T-267", 199: "T-285", 204: "T-306", 232: "T-340", 292: "T-323"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -678,6 +679,11 @@ def test_a_staged_count_passes_the_check_and_a_stale_or_unstaged_one_fails(
     assert [c.result for c in selected[7].candidates] == ["T-900", "T-901"]
     staged = {7: select.Pending(house="T-900", bead="think-test", why=select.NEXT_PULL_REQUEST)}
     monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
+    # Both synthetic packets provide a writer; next-PR staging requires that
+    # capability independently of their already mocked exact-side readers.
+    monkeypatch.setattr(
+        select, "writable", lambda candidate: candidate.result in {"T-900", "T-901"}
+    )
     # A synthetic register owes no correction (`CORRECTIONS_OWED`, review B1 of #658).
     monkeypatch.setattr(select, "CORRECTIONS_OWED", {})
     assert select.check(selected) == []
@@ -972,10 +978,24 @@ def test_a_house_is_held_to_its_native_result_exactly(
     witness = {"certificate": {"result": retained}}
     verified = type("Verified", (), {"valid": True})()
     monkeypatch.setattr(houses, "expected_house", lambda _n: witness)
-    monkeypatch.setattr(houses.legacy, "exact_verify", lambda _witness: (decided, verified))
+
+    def replay_decided(
+        _witness: dict[str, Any], *, rational_backend: str
+    ) -> tuple[dict[Any, Any], Any]:
+        assert rational_backend == "fraction"
+        return decided, verified
+
+    monkeypatch.setattr(houses.legacy, "exact_verify", replay_decided)
     with pytest.raises(houses.HouseError, match="differs from its retained native job"):
         houses.build_witness(70)
-    monkeypatch.setattr(houses.legacy, "exact_verify", lambda _witness: (retained, verified))
+
+    def replay_retained(
+        _witness: dict[str, Any], *, rational_backend: str
+    ) -> tuple[dict[str, Any], Any]:
+        assert rational_backend == "fraction"
+        return retained, verified
+
+    monkeypatch.setattr(houses.legacy, "exact_verify", replay_retained)
     assert houses.build_witness(70) is witness
 
 
@@ -1489,7 +1509,9 @@ def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history(
     assert _flat(adopt.held_history(wrapped)) == history
 
 
-def test_every_staged_count_names_its_house_and_bead_in_its_record() -> None:
+def test_every_staged_count_names_its_house_and_bead_in_its_record(
+    selections: dict[int, select.Selection],
+) -> None:
     """Every count staged for adoption says so in its record, with the house and the bead
     it waits under, and, where it waits for the writer, that it moves the case once the
     writer takes an algebraic side: the held and algebraic sentences of #660, and the
@@ -1501,7 +1523,14 @@ def test_every_staged_count_names_its_house_and_bead_in_its_record() -> None:
         assert f"staged under {pending.bead}," in text, n
         assert f"moves it to {pending.house}’s side" in text, n
         if pending.why == select.NO_WRITER:
-            assert "once the writer takes an algebraic side." in text, n
+            house = selections[n].house
+            assert house is not None
+            clause = (
+                "once the writer takes an algebraic side."
+                if house.algebraic
+                else "once a supported writer can adopt this rational certificate."
+            )
+            assert clause in text, n
     review = "../../docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
     for n in T193_COUNTS:
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
@@ -1685,10 +1714,11 @@ def test_a_reader_makes_an_unread_source_a_candidate_and_the_writer_waits_for_it
         select.Pending(house="T-088", bead="think-test", why="until the owner decides")
 
 
-def test_a_rational_house_staged_for_the_writer_fails_the_check(
+def test_a_supported_rational_house_staged_for_the_writer_fails_the_check(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """The writer's gap stages an algebraic house and nothing else (review A1 of #660)."""
+    """A real writer source forbids no-writer staging, for rational houses too."""
+    monkeypatch.setattr(houses, "writable_source", lambda *_args, **_kwargs: object())
     entry, evidence = _confirmed_entry()
     monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: Fraction(3))
     monkeypatch.setattr(select, "_side", lambda _key, _n: Fraction(3))
@@ -1850,6 +1880,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # issues 1021, 1022 and 1031 (T-331 to T-333) in the same pass. The pass of 21 November
     # moved 172 and 199 to Joost de Winter's re-solves of issues 946 and 939 (T-286, T-285),
     # and lane i1038 moved 228 to Doğa Özden's certificate of issue 1038 (T-334).
+    # The 22 November issue-1062 adoption moved 232 to de Winter's rational certificate
+    # of the Kodaj-JoeGun packing (T-340).
     later = {
         **ALGEBRAIC_ADOPTED,
         109: "T-335",
@@ -1874,7 +1906,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         130: "T-259",
         172: "T-286",
         199: "T-285",
-        232: "T-307",
+        232: "T-340",
         307: "T-326",
         156: "T-315",
         180: "T-316",
@@ -4146,3 +4178,50 @@ def test_an_overtaken_staged_adoption_reads_as_history() -> None:
     # 2026 Mykhailo Polkovskyi's further arrangement of T-269's packing (T-318) took 260.
     assert houses.ADOPTED[260] == "T-318"
     assert houses.ADOPTED[204] == "T-306"
+
+
+def test_a_rational_side_reader_stages_without_fabricating_a_writer(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    entry, evidence = _confirmed_entry()
+    monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: Fraction(3))
+    monkeypatch.setattr(select, "_side", lambda _key, _n: Fraction(3))
+    monkeypatch.setattr(houses, "writable_source", lambda *_args, **_kwargs: None)
+    case = select.Case(
+        n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
+    )
+    selected = select.select([entry], evidence, cases={7: case})
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    with pytest.raises(adopt.AdoptionError, match="no supported house writer"):
+        adopt.plan(selected)
+    staged = select.Pending(house="T-900", bead="think-test", why=select.NO_WRITER)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {7: staged})
+    assert select.check(selected) == []
+    assert adopt.plan(selected) == []
+    monkeypatch.setattr(adopt, "_staged_house", lambda _n: (staged, selected[7].house))
+    monkeypatch.setattr(adopt, "_review", lambda _: ("docs/review.md", "21 November 2026"))
+    sentence = adopt.staged_sentences(
+        7, Fraction(4), named=set(), below="this house", keeps="this house"
+    )
+    assert "rational certificate" in sentence[0]
+    monkeypatch.setattr(
+        select,
+        "PENDING_ADOPTION",
+        {7: dataclasses.replace(staged, why=select.NEXT_PULL_REQUEST)},
+    )
+    assert "stage it as 'no writer'" in select.check(selected)[0]
+
+
+def test_issue1062_side_reader_reads_the_original_fact() -> None:
+    value = json.loads(
+        gzip.decompress(
+            (
+                select.reports.WEB / "de-winter-1060-1063-2026-11-21/n232/candidate.json.gz"
+            ).read_bytes()
+        )
+    )
+    key = "[de Winter n232 rational certificate 2026-11-21]"
+    assert select.reports.house_side(key, 232) == Fraction(value["side"])
+    assert select.reports.import_packet(key) is None
+    with pytest.raises(select.reports.ReportError, match="only n=232"):
+        select.reports.house_side(key, 231)

@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **292** programs: **57** external and **235** first-party; **204** decide claims and **88** check premises.
-- **821** of **1061** evidence entries name the programs that verified them: 414 independently re-implemented, 325 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **293** programs: **57** external and **236** first-party; **205** decide claims and **88** check premises.
+- **822** of **1063** evidence entries name the programs that verified them: 415 independently re-implemented, 325 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -324,6 +324,7 @@ second implementation agrees.
 | [`V-de-winter-997-n90-independent-20261121`](#v-de-winter-997-n90-independent-20261121) | verify_independent.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-n179-algebraic-reader`](#v-n179-algebraic-reader) | devtools.n179_algebraic_report | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-n179-independent-review`](#v-n179-independent-review) | n179_replay.py.txt | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-n232-1062-review-check`](#v-n232-1062-review-check) | verify.py.txt (frozen source and portable input adapter) | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -5928,6 +5929,22 @@ The accepted Stage 4 review's independent standard-library Fraction checker: exa
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-de-winter-959-independent-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: The one n179 certificate, every square, wall and pair. | T-339 |
+
+### `V-n232-1062-review-check`
+
+**verify.py.txt (frozen source and portable input adapter)** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Exact rational unit-square containment and exhaustive unordered interior separation: strict AABB separation or four edge-axis SAT tests, including exact equality and predeclared inward controls.
+
+- Source: [`packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/tools/verify.py.txt`](../../packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/tools/verify.py.txt), [`packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/frozen/verify.py.txt`](../../packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/frozen/verify.py.txt)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md`](../../packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md)
+- Independence: its authors read mathematics, specification, certificate-format; it shares none of the producer’s code; written by Codex (OpenAI) (Separately prompted source-only review lane; tbd-strong, extra-high reasoning.), with its own prompt and code; authorship in common with the producer’s: system-family, The source credits an OpenAI GPT system. This Codex review froze its code and controls before reading any producer or project geometry code, prior checker result or other review. Its issue snapshot included the owner comparison comment; that did not determine feasibility. Post-freeze maintained pose identity and coordinator Option D comparisons are separately attributed.
+- Note: Git holds first-party source integrity under OR-16. Existing frozen hashes document the historical review boundary; no new code hash pin. The optional identity helper decides no feasibility claim.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-1062-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: The submitted n232 certificate: every square, wall and unordered pair. | T-340 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

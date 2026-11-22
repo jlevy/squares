@@ -624,6 +624,8 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # first run (38196351783).
     from devtools import upper_bound_houses  # noqa: PLC0415
 
+    # The issue-1062 reader needs its original acquisition manifest beside the
+    # compressed fact and native jobs, just as the earlier adopted packets do.
     assert {
         f"/packing/resources/web/{source.packet.name}/"
         for source in upper_bound_houses.sources().values()

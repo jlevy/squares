@@ -1073,6 +1073,12 @@ No adoption waits for the owner’s word, and each case that once did is decided
 - **Validated** is stage 4’s exit: the register entry at `V3` and `C3` with an accepted
   review covering it. One complete replay is what `C3` needs, so a certificate decided on
   one exact route, as a number-field witness is today, is adopted like any other.
+  A complete source-only replay can meet this requirement before the native house writer
+  supports its certificate.
+  An exact-side reader then allows ordering, and the adoption is staged as `no writer`
+  under its owning validation bead until a supported writer and its required receipts
+  exist. Such staging preserves the current proven witness; it does not manufacture
+  native receipts or raise a replay cap.
 - **Smaller** is decided by exact arithmetic, never by a print or a person.
   `devtools.exact_sides` holds each side exactly, as a fraction or as the one root of an
   irreducible polynomial in a rational interval, and the case’s ceiling the same way, a

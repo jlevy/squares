@@ -3053,6 +3053,30 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-340": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1062](https://github.com/jlevy/squares/issues/1062)",
+        producer_route=False,
+        ai="A separately prompted Codex agent wrote the source-only exact review.",
+        retained="the original gzip certificate",
+        lineage=(
+            "The source credits the earlier Kodaj–JoeGun layout and local solve, and "
+            "Alex Chilton’s compilation. Joost de Winter supplies the exact certificate. "
+            "Its side is about 4.00173e-9 below T-307 at first contact and 2.00880e-34 "
+            "below JoeGun’s earlier rational certificate at its first contact. "
+            "Neither comparison orders the unrounded local limit. The measured "
+            "layouts have no one-to-one nearest-center match under the box symmetries."
+        ),
+        routes=(
+            "The two maintained exact checkers accepted the submitted witness and refused "
+            "the duplicate and outside-container controls, testing 26,796 pairs in each "
+            "job on each route. Both used exact GMP rationals."
+        ),
+        third_route=(
+            ", and a separately implemented source-only checker independently verified "
+            "all 26,796 pairs, every wall and the predeclared sharp controls"
+        ),
+    ),
     "T-307": Prose(
         author="JoeGun",
         reported="on [jlevy/squares#1001](https://github.com/jlevy/squares/issues/1001)",
@@ -4388,7 +4412,7 @@ CREDITS: dict[int, Credit] = {
     232: Credit(
         (KODAJ,),
         (JOEGUN,),
-        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a fault-line DP",
+        "Joost de Winter’s rational certificate after Tomáš Kodaj and JoeGun",
     ),
     # Evan Daniel's basin explorer from a rebuild of issue 481's composition to a different
     # local minimum; the issue credits the composition for the construction, which the
@@ -5107,7 +5131,13 @@ def plan(
                 f"packing it solves, which {owed.measured_in} measured to be {owed.measured}; "
                 f"correct the item first ({owed.bead}, select_houses.CORRECTIONS_OWED)"
             )
-        if house.algebraic and not select_houses.writable(house):
+        if not select_houses.writable(house):
+            if not house.algebraic:
+                raise AdoptionError(
+                    f"n={n}: {house.result} has an exact-side reader but no supported "
+                    "house writer; stage the count as no writer under its owning bead "
+                    "(select_houses.PENDING_ADOPTION)"
+                )
             raise AdoptionError(
                 f"n={n}: the house is {house.result}'s algebraic side, and no derived "
                 "number-field fact and receipt hold it (upper_bound_houses.FIELD_COUNTS); "
@@ -5606,9 +5636,12 @@ def _staged(n: int, result: str) -> str:
     return f", staged under {staged.bead},"
 
 
-def _writer_clause(staged: select_houses.Pending) -> str:
+def _writer_clause(staged: select_houses.Pending, n: int) -> str:
     """What a staged adoption that waits for the writer adds: when it can move the case."""
     if staged.why == select_houses.NO_WRITER:
+        found = _staged_house(n)
+        if found is not None and not found[1].algebraic:
+            return ", once a supported writer can adopt this rational certificate"
         return ", once the writer takes an algebraic side"
     return ""
 
@@ -5627,7 +5660,7 @@ def _keeps_until(n: int, result: str, keeps: str) -> str:
         return (
             f"The case keeps {keeps} until {staged.house}’s adoption, staged under "
             f"{staged.bead}, moves it to {staged.house}’s side, below {result}’s"
-            f"{_writer_clause(staged)}."
+            f"{_writer_clause(staged, n)}."
         )
     return (
         f"The case keeps {keeps} until {result}’s adoption{_staged(n, result)} moves it to "
@@ -5813,7 +5846,7 @@ def staged_sentences(
             f"{described[:-1]}. The owner’s house rule "
             f"of {words(select_houses.RULE_SET_ON)} adopts it: the case keeps {keeps} "
             f"until its adoption, staged under {staged.bead}, moves it to {staged.house}’s "
-            f"side{_writer_clause(staged)}."
+            f"side{_writer_clause(staged, n)}."
         )
     ]
 

@@ -596,6 +596,31 @@ _T225 = "[Daniel regularized lists 2026-10-20]"
 _T225_CERTS = "resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/"
 _T225_REVISION = "0075967bace18a3deabcc0baa64c2fb294fc80a0"
 
+#: Completed strong runs on the issue-1062 certificate, retained for its settlement.
+_RUNEUMC = (
+    ("evand-regularize", "evand-regularize-adopt-2026-11-21-n232-evand"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n232-grid-deg05"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n232-grid-deg1"),
+    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n232-grid-deg5"),
+)
+_N232_DE_WINTER_SIDE = (
+    "92703127197294858779292063734133204959893252799943567545855881479020181105871844879478"
+    "19712951080632778709877682641406525792984329872459482528829890785707061495821652810135"
+    "54721957941275766601223758618633756721714700717261727809890036375810063132982646459073"
+    "46199898695829608756544458979094261177360542892752250197218749981984024175244876880895"
+    "53767430972198452589477200328335963025106448602551664593698321331048229820084561043844"
+    "78708903409606723444537481367374672976956468907916920068762561828923419113191989892722"
+    "0533576604045243998141553076352626536963615334791811819997/588235294117647058823529411"
+    "76470588235294117647058823529411766013974715925740146733636115119354686915110987553582"
+    "09662851003412409998613097415830870789023204721760176470588235294117647018137898377225"
+    "98667956670720086238899315152071578554137848370269991690764572029136234457299724620019"
+    "11827021396394902003797971062575126951949802345114397930387298286531342533652774172351"
+    "53087014584478669075254550569481310008387127959448657537089992278494012076503787907042"
+    "23290535374100416479150656560741613024941133941238391330897600414405049312657790600260"
+    "891462129807065622784225881935"
+)
+
+
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
 #: count `pending` again. Written from the evidence the audit of 15 October 2026 found
@@ -605,7 +630,21 @@ _T225_REVISION = "0075967bace18a3deabcc0baa64c2fb294fc80a0"
 #: 2026 (`_LEFTOVERS`). Recording each run's per-count outcome on the index, so that a
 #: decision needs no entry here, is think-4ov9. The gate fails on an entry whose witness
 #: has changed or whose count no longer needs it.
+
 SETTLED: dict[int, Settled] = {
+    232: Settled(
+        DECIDED,
+        "[de Winter n232 rational certificate 2026-11-21]",
+        "resources/web/de-winter-1060-1063-2026-11-21/n232/candidate.json.gz",
+        "n232-rational.zip, issue 1062 attachment 35205219",
+        _N232_DE_WINTER_SIDE,
+        _RUNEUMC,
+        "on the T-340 witness grid-slack finds no view at 0.5, 1 or 5 degrees because "
+        "the relaxed rows overlap; Evan Daniel's solved view passes both exact routes "
+        "but is held at row 4, about 1.58e-19 above the exact upper bound; no strong "
+        "view is adoptable and the axis tool's view stays drawn",
+        "packing/cases/regularized_drawings/think-eumc-2026-11-21/README.md",
+    ),
     29: Settled(
         DECIDED,
         "[PingYou PR 622 certificate 2026-10-15]",
