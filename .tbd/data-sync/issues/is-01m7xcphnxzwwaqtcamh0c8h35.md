@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: exact certificates of GeiserX's published packings
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T21:09:48.349Z
-updated_at: 2026-11-22T20:00:58.225Z
+updated_at: 2026-11-22T21:34:56.361Z
 started_at: 2026-11-20T22:45:07.840Z
 ---
 Issue jlevy/squares#1037 (Joost de Winter, 2026-11-18T20:06:25Z), a pointer: Sergio Fernández Rubio (GeiserX) published packings below the register at seven counts, in GeiserX/squares-in-squares (data/submission-best.csv.gz at c00281c2fb4b42a1c7071dc4fd493347cfd5a87b, CC BY 4.0 by the issue). De Winter says he is not the finder and asks that the packings be credited to Fernández Rubio.
@@ -32,3 +32,17 @@ Owed: stage 1 triage against the houses as they now stand (210 and 295 moved wit
 The 35051652 attachment is readable. Its streamed SHA-256 is 19c069b42d6a6fbe87dd419d358e7b046eadbba20dbaadd7f519faab1152c5e9. Pin the underlying coordinates at GeiserX/squares-in-squares c00281c2fb4b42a1c7071dc4fd493347cfd5a87b when retaining the packet. Replay the seven rational witnesses by the maintained exact routes and cost the separate algebraic claims. Preserve the 297 origin split and the 202/263 relationship in the review. The author identifies Sergio Fernández Rubio as the finder and himself as the certificate author. No feasibility or identity replay ran on this host.
 
 22 November 2026. Recovered original GeiserX_exact.zip (1,989,212 bytes, SHA-256 19c069b42d6a6fbe87dd419d358e7b046eadbba20dbaadd7f519faab1152c5e9) and retained it at /Volumes/spud-ext2/agent-evidence/squares-intake-20261121-01a1fb/1037-geiserx-20261122. The seven rational center/direction and corner encodings have identical exact side and square corner sets after the external provenance claim is treated as reported for schema reading. The original files are untouched. Both maintained exact routes accepted 20,301 pairs at 202 and 34,453 at 263, and refused both full-witness mutations for each. The remaining five native case jobs are in progress. Independent mathematical review, algebraic replays, exact report order and drawing decisions are still separate.
+
+22 November UTC. Stage 4 source review and original evidence on draft PR #1082,
+exact current head 9e4471c2a516785b7e8f9b4994a8ff0a8c11a83d. The source packet
+holds both maintained exact rational routes at seven counts, maintained field
+verification at 202 and 263, and independent exact review of rational and
+quadratic variants at those two counts. All seven original YAML/pose encodings
+match. All seven exact rational sides are strictly below their current retained
+predecessors at first contact; the exact baseline/receipts live under
+1037-geiserx-20261122/standing-comparison-summary.json in the external evidence.
+The exact issue arrival is 2026-11-18T20:06:25Z (GitHub body has no edit history).
+The report-order walk first handles 202 and 263; include T-244 alongside
+the T-174 house at 263, and keep #1061's n295 claim separately ordered.
+Source review deploy/reply, competing-report ordering, and drawing/registration
+remain open. The alternate algebraic witness at 297 remains unverified.
