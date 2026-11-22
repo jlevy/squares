@@ -1,0 +1,80 @@
+{
+  "scope": "Independent exact scalar/data-only check; no feasibility, pair separation, local optimality, pose identity or fresh contraction replay.",
+  "checks": [
+    "algebraic count and distinct ids",
+    "algebraic shape/frame declarations",
+    "rational count and distinct ids",
+    "rational shape/frame declarations",
+    "original count and distinct ids",
+    "original shape/frame declarations",
+    "original T334 JSON bytes identical",
+    "rational unit bases",
+    "declared degree-seven polynomial",
+    "side is 15+x",
+    "source root bracket in declared interval",
+    "root bracket signs",
+    "unique root by negative derivative interval",
+    "irreducible modulo 3 degree-seven criterion",
+    "wrong neighboring bracket refused",
+    "reversed bracket refused",
+    "retained contraction arithmetic binding",
+    "held source and status remain scoped",
+    "strict scalar order",
+    "held printed local side agrees as truncated prefix",
+    "Kaggle displayed nearest-rounding span contains algebraic root",
+    "rational candidate also within same Kaggle rounding span"
+  ],
+  "passed": true,
+  "polynomial_descending": [
+    "1",
+    "11",
+    "-153",
+    "-1433",
+    "-1250",
+    "4706",
+    "-6839",
+    "2861"
+  ],
+  "root_interval": [
+    "11920862332633398392547076841537226493580907707507114239700636544382440300998761/20000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "29802155831583495981367692103843066233952269268767785599251591360956100752496903/50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  ],
+  "side_interval": [
+    "311920862332633398392547076841537226493580907707507114239700636544382440300998761/20000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "779802155831583495981367692103843066233952269268767785599251591360956100752496903/50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  ],
+  "derivative_interval_on_0.59604_0.59605": [
+    "-483301291131322951924020762373/125000000000000000000000000",
+    "-483286586052523973121069292373/125000000000000000000000000"
+  ],
+  "irreducibility": "Over F3: gcd(P,x^3-x) constant and x^(3^7)-x=0 mod P; degree 7 is prime.",
+  "ordered_sides": {
+    "algebraic_lower": "15.59604311663166991962735384207686132467904538537535571198503182721912201504993805",
+    "algebraic_upper": "15.59604311663166991962735384207686132467904538537535571198503182721912201504993806",
+    "new_rational": "15.596043116631669919627353842076861324679045385375355711985032",
+    "held_rational": "15.596043116631669919783314273244",
+    "T334_first_contact": "15.596043116631766506700707873118953711244524668649209841211658129445792845088256419231343908488",
+    "T334": "15.59604311663176650670114683218812228"
+  },
+  "gaps": {
+    "T334_minus_new_rational_exact": "12073384224123763907619415119326828080536001871/125000000000000000000000000000000000000000000000000000000000",
+    "T334_first_contact_minus_new_rational_exact": "397157416280879166253967609378511087713744600507483528434632689684486608354981852801/4111910657289875129178445216586154853875000000000000000000000000000000000000000000000000000000000",
+    "T334_first_contact_minus_new_rational_decimal": "9.6587073354031042092386565479283273854129226626129445792845088256419231343908488392311886802728E-14",
+    "new_rational_minus_algebraic_interval": [
+      "1.7278087798495006194E-61",
+      "1.7278087798495006195E-61"
+    ],
+    "held_rational_minus_new_rational_exact": "19495053895892334415119326828080536001871/125000000000000000000000000000000000000000000000000000000000",
+    "held_rational_minus_new_rational_decimal": "1.55960431167138675320954614624644288014968E-19",
+    "T334_own_margin": "4.3895906916856875547533135079015878834187055420715491174358076865609151160768811319727247283177E-22"
+  },
+  "held_local_solve": {
+    "printed": "15.596043116631669919627353842076861324679045385375355711985031827",
+    "matching_fractional_places": 63,
+    "cert_valid": false,
+    "no_certified_exact_local_root_or_pose_comparison": true
+  },
+  "Kaggle": "Only the retained source benchmark decimal was read. Agreement with its rounding span is not superiority over its unrounded value and does not resolve source coordinates or priority.",
+  "wall_seconds": 0.021056,
+  "peak_rss_bytes": 24723456
+}

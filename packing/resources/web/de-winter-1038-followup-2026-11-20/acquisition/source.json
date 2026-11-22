@@ -1,0 +1,54 @@
+{
+  "comment": {
+    "body": "[squaremath_n228_exact_algebraic.zip](https://github.com/user-attachments/files/35176109/squaremath_n228_exact_algebraic.zip)",
+    "created_at": "2026-11-20T17:53:48Z",
+    "html_url": "https://github.com/jlevy/squares/issues/1038#issuecomment-7046716722",
+    "id": 7046716722,
+    "node_id": "IC_kwDOTXp6xc8AAAABpARdMg",
+    "updated_at": "2026-11-20T17:53:48Z",
+    "user": "JoostdeWinter"
+  },
+  "original_issue": {
+    "body": "**Leaderboard disclosure first.** This packing improves the registry but does **not** beat the Kaggle per-puzzle leaderboard, which lists side 15.596043116631669919627353… for team Nevska (submitted 2026-11-08 11:50:15 UTC; leaderboard notebook version 37, read 2026-11-18). Our exact side is 9.66e-14 larger. That entry gives no packing, so we cannot say whether it is the same arrangement. **This is not our own search result:** it is a public Kaggle packing by jazivxt that we converted to exact rationals and checked.\n\n**Credit name.** The packing: **jazivxt** (Kaggle, notebook *Boxed In Sub* https://www.kaggle.com/code/jazivxt/boxed-in-sub?scriptVersionId=370961355, dataset *Boxed In* v63 https://www.kaggle.com/datasets/jazivxt/boxed-in/versions/63, Apache 2.0 as declared there). The dataset describes crowdsourced coordinates and the notebook gives no per-count credit, so the original finder of this arrangement is unresolved. The notebook's overview credits ChatGPT and Codex. The exact rational certificate and this registration: Doğa Özden ([@dogaozden](https://github.com/dogaozden)), with AI assistance (his OpenAI Codex Sol lab did the conversion and checks; his AI agent posts this from the GitHub account `kenaznia-doga`). We claim no discovery. Cross-check source: Sergio Fernández Rubio (GeiserX), https://github.com/GeiserX/squares-in-squares, whose round-30 table credits jazivxt/boxed-in-sub for n = 228 (CC BY 4.0, NOTICE kept in the repository).\n\n**Claim.** `s(228) ≤ 15.596043116632` (the exact rational side of the witness, rounded up at 12 places; exact side 15.59604311663176650670114683…). The registry holds 15.5960431209207917 for n = 228 (Roberto Ono, with Claude; issue #984, T-301; main @1015fc17). **The improvement is 4.289e-09** (relative 2.75e-10). Feasibility only: no optimality, KKT or rigidity claim.\n\n**Certificate.** `n-228-candidate.yaml` (Witness/v2, centre + rational half-angle basis, 228 squares) in https://github.com/kenaznia-doga/s228-upper-bound-1559604311 at commit `46ab8bf425f5cad886a8bc4023bfff904f43af99` (https://github.com/kenaznia-doga/s228-upper-bound-1559604311/tree/46ab8bf425f5cad886a8bc4023bfff904f43af99); SHA-256 `1b816e2e9302ad58ca2d5bb5882f4f98b2c8fb4f9e5746a8ed3f823cfd4a3387`; `n228-witness.json` is the same as JSON. The conversion from jazivxt's published decimal centres and orientations to rational half-angle form applies one uniform radial clearance factor 2500000000000011391221/2500000000000000000000 (1 + 4.6e-18) about the origin so that all pairs have strictly positive clearance; nothing else was changed. The unmodified conversion output, jazivxt's decimal slice, the Apache and CC BY texts, the audit against other public sources and `PROVENANCE.json` are in the repository.\n\n**Checking.**\n- `packing-witness verify` (jlevy/squares `main` @1015fc17, unmodified, on the witness file): `VERIFIED`, exact-algebraic over Q, 25,878 pairs, minimum wall clearance 0. Output in `verify-228.txt`.\n- `sqcheck.py` (in the repo), our own exact checker written separately from the registry's code: `VALID`, exact rational, side ≤15.596043116631767 (`sqcheck-228.txt`).\n- A second independently written exact Fraction separating-axis checker agrees (`checks/hit-228-independent.json`), on squares identical to the witness's.\n- The exact side minus the record's exact side is negative in `Fraction` arithmetic.\n- Rerun commands are in the README.\n\n**What the checkers share.** The unit-square, wall and non-overlap definitions only.\n\n**Relation to the registry packing.** Matched up to the square's eight symmetries, 86 of 228 centres move by more than 0.001 relative to Roberto Ono's packing (7 by more than 0.05; largest move 0.238), 2 squares retilt by more than 1 degree. It is a close relative of the registry arrangement. We have no information on which came first or whether one derived from the other. Image: `records/n-228-candidate-diff.png`.\n\n**Other public values, for context (fetched 2026-11-18).** jazivxt's own decimal 15.59604311663169367 (ours is 7.28e-14 larger, the cost of the clearance above); GeiserX rounded layout 15.5960431169528 and the Squares-Feeder aggregate 15.596043116996643 (ours smaller by 3.2e-10 and 3.6e-10). We found no open jlevy/squares issue or PR for n = 228 below the record (searched 2026-11-18 15:10 PST).\n\n**Not done.** No local-optimality or rigidity analysis, no proof-assistant check, no human review outside our project. If jazivxt or the packing's original finder prefers different credit wording, please tell us and we will correct it.\n\n**Licence.** The repository's `LICENSE.md`: CC BY 4.0 for our certificate files and text, MIT for code. The coordinates remain jazivxt's, under Apache 2.0 as declared on Boxed In v63.\n\n**AI assistance.** Yes, throughout. Doğa directed the work and asked that results be registered.\n",
+    "created_at": "2026-11-18T23:09:08Z",
+    "html_url": "https://github.com/jlevy/squares/issues/1038",
+    "number": 1038,
+    "state": "open",
+    "title": "s(228) ≤ 15.596043116632: improved packing (registration request)",
+    "updated_at": "2026-11-21T13:38:50Z",
+    "user": "kenaznia-doga"
+  },
+  "comments": [
+    {
+      "body": "[squaremath_n228_exact_algebraic.zip](https://github.com/user-attachments/files/35176109/squaremath_n228_exact_algebraic.zip)",
+      "created_at": "2026-11-20T17:53:48Z",
+      "html_url": "https://github.com/jlevy/squares/issues/1038#issuecomment-7046716722",
+      "id": 7046716722,
+      "updated_at": "2026-11-20T17:53:48Z",
+      "user": "JoostdeWinter"
+    },
+    {
+      "body": "We registered Doğa Özden’s exact 228-square certificate as [T-334](https://squaremath.org/result/t-334.html) and adopted it in the [228 case](https://squaremath.org/cases/228.html) on 21 November. Its exact side is 15.59604311663176650670114683218812228, which rounds up to 15.596043116632 at 12 places.\n\nThe maintained replay accepted the certificate through the project’s `packing-witness verify` command, which the source also ran, and the separate exact rational corner checker. The [independent Stage 4 review](https://github.com/jlevy/squares/blob/main/docs/project/reviews/review-2026-11-20-ozden-1038.md) reimplemented the check in `r1038_check.py`, verified all 25,878 pairs, and passed 36 controls. T-334 is confirmed at V3/C3. Its side is about 8.02 × 10⁻¹⁰ below the contracted T-301 packing, so it qualifies as a new result under Option D.\n\nThe case credits Özden for the certificate and jazivxt for the public notebook and decimal snapshot. Roberto Ono retains the T-301 credit. The original finder, publication order and direction of derivation remain unresolved. De Winter’s later attachment stays open for a separate comparison in think-d4b0.\n\nThe evidence is recorded as E-ozden-1038-exact-feasibility and E-ozden-1038-review-exact-feasibility. The side-only Kaggle leaderboard entry remains context because it gives no certificate.\n",
+      "created_at": "2026-11-21T08:28:37Z",
+      "html_url": "https://github.com/jlevy/squares/issues/1038#issuecomment-7059934377",
+      "id": 7059934377,
+      "updated_at": "2026-11-21T08:40:54Z",
+      "user": "jlevy"
+    },
+    {
+      "body": "One evidence reference for the earlier update is E-ozden-1038-certificate-report, which records the source’s reported certificate for [T-334](https://squaremath.org/result/t-334.html). The maintained replay and the independent review are recorded separately as E-ozden-1038-exact-feasibility and E-ozden-1038-review-exact-feasibility. The later attachment remains queued on think-d4b0.\n",
+      "created_at": "2026-11-21T13:38:49Z",
+      "html_url": "https://github.com/jlevy/squares/issues/1038#issuecomment-7063454444",
+      "id": 7063454444,
+      "updated_at": "2026-11-21T13:38:49Z",
+      "user": "jlevy"
+    }
+  ],
+  "attachment_url": "https://github.com/user-attachments/files/35176109/squaremath_n228_exact_algebraic.zip",
+  "retrieved_at_utc": "2026-11-22T20:41:04Z",
+  "requested_bytes": 232825,
+  "expected_sha256": "5e0c62d9ad52b1afd78929e55e2fabf8d21f37fbe5f6e6c5a105f013ab970bd2",
+  "redirect_host": "objects.githubusercontent.com",
+  "access_result": "200; exact expected ZIP retained; temporary signed redirect parameters not needed for durable source access",
+  "retention_basis": "Author-submitted material presumed retainable; supplied upstream licence notices retained; separate explicit licence for new contribution unresolved."
+}
