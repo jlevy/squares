@@ -39080,7 +39080,6 @@ issues:
       - result: n305-axis-variant-minimality
       - result: n305-export-enclosure-identity
       - result: n305-precision-enclosure
-      beads: [think-rbyl, think-3n8h]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its
@@ -39187,7 +39186,6 @@ issues:
       - result: n20-equal-absolute-tilt
       - result: n20-angle-diversity
       - result: n20-one-axis-equal-magnitude
-      beads: [think-guls]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
@@ -39245,7 +39243,6 @@ issues:
       kind: follow-up
       reported:
       - result: n26-n318-final-lower-166
-      beads: [think-uz7g]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
@@ -39310,7 +39307,6 @@ issues:
       reported:
       - result: exact-construction-sides-eleven
       - result: three-construction-side-identities
-      beads: [think-l9fk]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Route to the exact-side work tracked by #811. The claimed construction identities
@@ -39363,7 +39359,6 @@ issues:
       kind: follow-up
       reported:
       - result: n232-rational-follow-up
-      beads: [think-eumc]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Compare the submitted exact fraction and geometry with both T-307's adopted
@@ -39421,7 +39416,6 @@ issues:
       kind: follow-up
       reported:
       - result: thirteen-rational-enclosures
-      beads: [think-3iqa]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       The exact feasibility and pose comparison receipts are indexed in
