@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: GeiserX's public 259-square packing below the regi
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-20T09:46:42.260Z
-updated_at: 2026-11-21T17:15:39.815Z
+updated_at: 2026-11-22T19:39:24.168Z
 started_at: 2026-11-20T09:46:48.225Z
 ---
 jlevy/squares#1040 (JoostdeWinter, 2026-11-19T04:54:13Z, no comments): Sergio Fernández Rubio (GeiserX) published a packing of 259 unit squares with side 16.590016439573 in GeiserX/squares-in-squares data/submission-best.csv.gz at f822b34 (CC BY 4.0), joining tilted bands from his 292- and 445-square packings; 0.00136 below T-193's 16.591378145498. Nevska reached the same side on Kaggle on 8 November 2026 without published coordinates (side-only, context). The issue attaches packing-259.zip, an exact rational Witness/v2 of the packing with a verifier, and asks that the packing be credited to GeiserX.
@@ -46,3 +46,5 @@ Recorded in PR https://github.com/jlevy/squares/pull/1047 (requests entry #1040 
 Durable local evidence on the external volume: /Volumes/spud-ext2/agent-evidence/squares-intake-20261121-01a1fb/n259-recovery. This includes the original attachment and direct GeiserX source bytes, reversible reading copies, feasibility receipts, exact contraction and T-193 comparison, and the next Stage 4 control plan.
 
 21 November resumed intake. Both maintained routes accepted all 33,411 pairs in the submitted packing and refused the duplicate and outside-box controls. Eleven sharp controls matched their exact predictions (guarded 320 s, 239 s paused, no signals beyond pause/resume). Two high-precision readings of the T-193 house show that no box symmetry pairs the nearest centres one to one; 59 versus 49 tilts of at least 1 degree. The blind reviewer froze independent acceptance of both written encodings, 33,411 pairs each and 16 controls with 28 outcomes. Custody on codex/intake-n259-custody-20261121, separate mathematical review being prepared. The source-adapter writer, registration and both strong drawing runs are next.
+
+22 November 2026. PR #1078 merged T-337 at ea41e2d36b3a. Certificate page run 44948168989 verified that exact deployment, and the public n=259 case shows the upward-rounded 16.590016439230. Posted https://github.com/jlevy/squares/issues/1040#issuecomment-7084376927 and closed #1040 on GitHub. The reply receipt is staged for the next intake records merge.
