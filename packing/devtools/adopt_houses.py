@@ -302,10 +302,10 @@ RESULTS: dict[str, Prose] = {
             "identity: the largest move is 0.0304373 and the largest turn 0.09344 degrees; "
             "all 40 tilted squares pair with the same tilt sign. The final contraction "
             "of the enclosed input is only about 8.994039e-73. "
-            "The [16 November project run of Evan Daniel's regularizer]"
-            "(regularized_drawings/think-32cl-2026-11-16/README.md) already recorded a "
+            "The [16 November project run of Evan Daniel’s regularizer]"
+            "(../cases/regularized_drawings/think-32cl-2026-11-16/README.md) already recorded a "
             "local-side display that matches this candidate at 65 significant digits. "
-            "The candidate is about 9.99404e-20 below that run's rational envelope. "
+            "The candidate is about 9.99404e-20 below that run’s rational envelope. "
             "The [supporting scalar audit]"
             "(../resources/web/de-winter-997-followup-2026-11-21/receipts/"
             "held-row3-comparison.json) "
@@ -319,7 +319,7 @@ RESULTS: dict[str, Prose] = {
             "squares, 1,440 vertex-wall inequalities and 4,005 pairs with 16,020 edge-normal "
             "tests; all 13 controls declared beforehand returned their stated outcomes"
         ),
-        diversity="by a Codex agent, sharing the producer's OpenAI system family",
+        diversity="by a Codex agent, sharing the producer’s OpenAI system family",
         retained="the original exact centre/half-angle gzip and its reversible reading copy",
         squares="a rational centre and the tangent of its signed counterclockwise half-angle",
     ),
@@ -3992,7 +3992,7 @@ CREDITS: dict[int, Credit] = {
     90: Credit(
         (JAZIVXT,),
         (DE_WINTER,),
-        "the packing jazivxt found from shifted copies of a crop of Joost de Winter's "
+        "the packing jazivxt found from shifted copies of a crop of Joost de Winter’s "
         "n = 157 packing, improved and refined by Joost de Winter",
     ),
     # Evan Daniel's exact form (T-193, of T-174 by its item) of PingYou Ltd's tighter

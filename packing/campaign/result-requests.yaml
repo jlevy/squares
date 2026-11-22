@@ -38708,7 +38708,8 @@ issues:
     title: GeiserX's public 259-square packing is below the register (pointer)
     author: JoostdeWinter
     opened: '2026-11-19'
-    state: open
+    state: closed
+    closed: '2026-11-22'
     kind: result-report
     triage: done
     summary: 'Joost de Winter points to a packing of 259 unit squares with side 16.590016439573
@@ -38747,7 +38748,18 @@ issues:
     beads:
     - think-squj
     answer_bead: think-squj
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1040#issuecomment-7084376927
+      date: '2026-11-22'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n259-geiserx
+        id: T-337
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
     close_when: The packing is imported from an exact certificate that reached this
       repository and registered with the credit the issue asks for, or the record says
       why it will not be, and the reply on main says so.

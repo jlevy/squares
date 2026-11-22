@@ -29,7 +29,7 @@ outputs:
   - papers/square-packing-methods-survey.md
 reason: >-
   Registers and adopts T-338 at 90 and T-339 at 179. For each of four papers,
-  two candidate renders and one render with the baseline b82697346acf inputs
+  two candidate renders and one render with the baseline ea41e2d36b3a inputs
   were made in fresh directories using Chrome on macOS. All 43 files apiece
   matched for the optimality review, threshold review and methods survey.
   The explainer produced 55 deterministic files. Its live register-count

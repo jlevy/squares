@@ -6207,7 +6207,7 @@ sources:
     venue: GitHub
     dated: '2026-11-21'
     lineage: credits-project
-    credit: de Winter after jazivxt
+    credit: de Winter after jazivxt, credits Levy
     note: 'Joost de Winter''s issue 997 comment of 21 November (https://github.com/jlevy/squares/issues/997#issuecomment-7058975230)
       submits the rational enclosure and acknowledges the local solution already reported in the thread.
       Retain the established lineage: jazivxt, improved and refined by Joost de Winter. A project run
