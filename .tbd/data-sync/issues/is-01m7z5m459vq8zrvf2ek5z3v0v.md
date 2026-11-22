@@ -3,9 +3,9 @@ type: is
 id: is-01m7z5m459vq8zrvf2ek5z3v0v
 title: "Review #1052 follow-up: exact 305-square axis variants and enclosure claims"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 6
+version: 7
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-21T13:44:37.800Z
-updated_at: 2026-11-22T21:34:54.115Z
+updated_at: 2026-11-22T23:23:39.788Z
 started_at: 2026-11-21T13:44:38.436Z
+closed_at: 2026-11-22T23:23:39.775Z
+close_reason: "Exact #1084 production deployment and completed drawing disposition verified. Reply 7087112747 and completed GitHub closure recorded on main by #1085."
+resolution: null
+duplicate_of: null
 ---
 Comment 7058958734 and dad9c3fd attachment mirror cover same-side 31/37-aligned variants, restricted maximality and minimum moved centres, export enclosure and a precision-only smaller candidate. Keep the original accepted T-336 primary certificate and any replacement corner metadata distinct. Pin the mirror and independently review its claims with controls.
 
