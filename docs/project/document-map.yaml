@@ -287,6 +287,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-0y9m-2026-11-16/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-i38n-2026-11-18/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-zqot-2026-11-18/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-eumc-2026-11-21/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-78aj-2026-11-20/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-91fu-2026-11-20/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-wvr8-2026-11-21/README.md, role: source-index, authority: record, lifecycle: retained}
@@ -1527,6 +1528,10 @@ documents:
     authority: record
     lifecycle: retained
   - path: docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-11-21-de-winter-1062-n232.md
     role: review
     authority: record
     lifecycle: retained

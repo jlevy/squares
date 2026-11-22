@@ -7,10 +7,11 @@ description = "Exact verification and LP-in-cell quenching for square packings"
 # published to an index, so the packaging metadata loses nothing by omitting it.
 requires-python = ">=3.14,<3.15"
 dependencies = [
-    # The kernel's rational type (`sqpack.hull_kernel.rational`). Pinned exactly: 2.3.1
+    # The hull kernel's rational type and the exact witness verifier's GMP backend.
+    # Pinned exactly: 2.3.1
     # (GMP 6.3.0, released 2026-06-24, past the cool-off) is the newest release with
     # CPython 3.14 wheels for manylinux x86_64 and for macOS x86_64 and arm64, so neither
-    # CI job builds it from source. The verifiers under devtools/ do not use it.
+    # CI job builds it from source.
     "gmpy2==2.3.1",
     "jsonschema>=4.26.0",
     # Pinned exactly, and to a release past the 14-day cool-off rather than to the

@@ -1,0 +1,14 @@
+{
+  "format": "exact-rational-backend-execution-v1",
+  "rational_backend": "gmp",
+  "implementation": "gmpy2",
+  "version": "2.3.1",
+  "complete_standard_jobs": [
+    "positive",
+    "duplicate-square-overlap",
+    "square-translated-outside-container"
+  ],
+  "status": "completed-native-replay",
+  "program": "devtools.n232_rational_source",
+  "note": "Three actual outputs of the explicitly selected exact scalar backend; ordinary Fraction APIs remain unchanged. Memory/wall guard logs accompany the run."
+}

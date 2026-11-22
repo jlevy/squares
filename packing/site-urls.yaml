@@ -6483,7 +6483,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-16'
+  lastmod: '2026-11-22'
   status: live
 - path: cases/233.html
   canonical: cases/233.html
@@ -26611,6 +26611,38 @@ urls:
     - packing/resources/web/de-winter-959-followup-2026-11-20/receipts/algebraic-route1-n179.json.xz
     - packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/README.md
     - docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md
+- path: result/t-340.html
+  canonical: result/t-340.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-21'
+  lastmod: '2026-11-21'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 232
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter n232 rational certificate 2026-11-21]'
+      published: '2026-11-21'
+    builds_on: null
+    evidence:
+    - E-de-winter-1062-certificate-report
+    - E-de-winter-1062-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/candidate.json.gz
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/source/acquisition.json
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/results/independent-feasibility.json
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/results/option-d-comparison.json
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/review/results/pose-identity.json
+    - docs/project/reviews/review-2026-11-21-de-winter-1062-n232.md
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/receipts/native-exact-gmp.json.xz
+    - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/receipts/native-exact-gmp-supervision.json
 - path: results.html
   canonical: results.html
   kind: page

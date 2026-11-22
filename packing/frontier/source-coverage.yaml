@@ -14084,6 +14084,26 @@ sources:
     to first contact. Original mathematical attachment bytes, native full-n179 jobs and the accepted
     independent review are retained. The reported GeiserX starting file remains unresolved. This release
     is the author's issue attachment, not a reconstructed upstream repository snapshot.
+- id: de-winter-1062-n232-2026-11-21
+  title: Joost de Winter's exact rational enclosure at 232
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/1062
+  local: resources/web/de-winter-1060-1063-2026-11-21/n232/
+  source_key: '[de Winter n232 rational certificate 2026-11-21]'
+  scope:
+    n_values:
+    - 232
+  reviewed: '2026-11-21'
+  source_date: '2026-11-21'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-1060-1063-2026-11-21/n232/review/README.md
+  evidence:
+  - E-de-winter-1062-certificate-report
+  - E-de-winter-1062-review-exact-feasibility
+  notes: The independently accepted finite certificate is T-340. Both native routes and their gross controls also passed using the exact original member.
 - id: geiserx-exact-1037-2026-11-22
   title: GeiserX's seven published packings with exact certificates from Joost de Winter
   role: first-party-release
@@ -14416,11 +14436,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-22 (T-225).
 - n: 232
-  source_id: joegun-upper-bounds-2026-11-16
-  value: '15.7595316275565730'
-  evidence: E-joegun-1001-certificate-report
+  source_id: de-winter-1062-n232-2026-11-21
+  value: '15.7595316235401260'
+  evidence: E-de-winter-1062-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-16 (T-307).
+    a replay here and an accepted review, adopted on 2026-11-22 (T-340).
 - n: 236
   source_id: evand-n236-2026-10-16
   value: '15.8619343906073587'
@@ -15383,7 +15403,7 @@ superseded_reports:
 - n: 232
   source_id: evand-square-packing-2026-10-05
   value: '15.778174593052022768567069729084'
-  superseded_by: joegun-upper-bounds-2026-11-16
+  superseded_by: de-winter-1062-n232-2026-11-21
   reason: Certifies the catalogue's packing at a side 2.8e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -16438,8 +16458,8 @@ superseded_reports:
   source_id: squish-481-third-request-2026-10-09
   value: '15.7674283499418417'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-307's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-340's exact side is smaller.
+  superseded_by: de-winter-1062-n232-2026-11-21
 - n: 153
   source_id: pingyou-n153-certificate-2026-10-11
   value: '12.8700138504070441'
@@ -16594,8 +16614,8 @@ superseded_reports:
   source_id: dostashev-records-2026-10-12
   value: '15.7641743174865967'
   reason: The house from 2026-10-12 until 2026-10-16; its certificate stays retained and verified,
-    and T-307's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-340's exact side is smaller.
+  superseded_by: de-winter-1062-n232-2026-11-21
 - n: 237
   source_id: mishapolk-records-2026-10-14
   value: '15.9027050578663668'
@@ -17062,8 +17082,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '15.76417431748659663'
   reason: The house from 2026-10-16 until 2026-10-31; its certificate stays retained and verified,
-    and T-307's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-340's exact side is smaller.
+  superseded_by: de-winter-1062-n232-2026-11-21
 - n: 260
   source_id: evand-regularized-2026-10-20
   value: '16.6457532505198122'
@@ -17140,8 +17160,8 @@ superseded_reports:
   source_id: couzo-issue844-2026-10-28
   value: '15.7616617594813300'
   reason: The house from 2026-10-31 until 2026-11-09; its certificate stays retained and verified,
-    and T-307's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-340's exact side is smaller.
+  superseded_by: de-winter-1062-n232-2026-11-21
 - n: 268
   source_id: evand-issue914-2026-11-05
   value: '16.8724995181350307'
@@ -17284,8 +17304,8 @@ superseded_reports:
   source_id: ozden-s232-upper-bound-2026-11-09
   value: '15.7614096448817244'
   reason: The house from 2026-11-09 until 2026-11-16; its certificate stays retained and verified,
-    and T-307's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-340's exact side is smaller.
+  superseded_by: de-winter-1062-n232-2026-11-21
 - n: 264
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '16.77473513238783285'
@@ -17436,6 +17456,12 @@ superseded_reports:
   reason: The house from 2026-11-12 until 2026-11-21; its certificate stays retained and verified,
     and T-339's exact side is smaller.
   superseded_by: de-winter-959-followup-2026-11-20
+- n: 232
+  source_id: joegun-upper-bounds-2026-11-16
+  value: '15.7595316275565730'
+  reason: The house from 2026-11-16 until 2026-11-22; its certificate stays retained and verified,
+    and T-340's exact side is smaller.
+  superseded_by: de-winter-1062-n232-2026-11-21
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

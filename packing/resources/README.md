@@ -2020,6 +2020,17 @@ The
 [soundness review of 23 October 2026](../../docs/project/reviews/review-2026-10-23-wand125-sqverify-continuous-soundness.md)
 found no blocking defect; no complete run of it has been replayed here.
 
+## Exact rational certificate for 232 squares
+
+**[de Winter n232 rational certificate 2026-11-21]** records Joost de Winter’s
+[submission](https://github.com/jlevy/squares/issues/1062) after Kodaj and JoeGun, using
+Alex Chilton’s compilation.
+The
+[original fact and exact replay](web/de-winter-1060-1063-2026-11-21/n232/review/README.md)
+support [T-340](../frontier/RESULTS.md).
+The maintained writer adopted the original exact source as T-340 on 22 November 2026,
+with complete native exact jobs and the independent review retained.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

@@ -69,7 +69,7 @@ from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, replace
 from functools import cache
 from pathlib import Path, PurePosixPath
-from typing import Any, NamedTuple, cast
+from typing import Any, Literal, NamedTuple, cast
 
 from devtools import algebraic_witness_reports as fields
 from devtools import couzo_678_replay as couzo_678
@@ -164,6 +164,8 @@ class Source:
     #: The counts whose house is the packet's algebraic witness, read from its derived
     #: number-field fact and the receipt of its jobs over the field (`_field_house`).
     fields: frozenset[int] = frozenset()
+    #: Explicit arithmetic execution for a rational source; ordinary sources keep Fraction.
+    rational_backend: Literal["fraction", "gmp"] = "fraction"
 
 
 # --------------------------------------------------------------------- generic packets
@@ -872,7 +874,10 @@ FIELD_COUNTS: dict[str, tuple[int, ...]] = {
 
 
 def _sources() -> dict[str, Source]:
+    from devtools import n232_rational_source  # noqa: PLC0415 -- source factory uses Source
+
     sources = [
+        n232_rational_source.house_source("T-340"),
         packet_source("T-134", "couzo-exact-certificates-2026-10-09"),
         packet_source("T-139", "evand-trio126-2026-10-09"),
         # The pass of 18 November 2026 (think-i38n) moved 292, T-146's only house, to Mykhailo
@@ -1028,7 +1033,7 @@ def _sources() -> dict[str, Source]:
         # The pass of 20 November 2026 (think-zqot) moved 127, T-305's only house, to T-330, so
         # T-305 is no source here now.
         packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
-        packet_source("T-307", "joegun-upper-bounds-2026-11-16"),
+        # T-340 replaced T-307 at its only house.
         packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
         # The pass of 21 November 2026 (think-8yyy) moved 199 and 172 to Joost de Winter's
         # issues 939 and 946 (T-285, T-286), T-284's and T-282's packings re-solved to the
@@ -1250,7 +1255,7 @@ ADOPTED: dict[int, str] = {
     227: "T-225",
     228: "T-334",
     229: "T-225",
-    232: "T-307",
+    232: "T-340",
     236: "T-218",
     237: "T-295",
     238: "T-174",
@@ -1532,6 +1537,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
     "2026-11-20": frozenset({127, 268, 270, 299}),
     "2026-11-21": frozenset({90, 109, 172, 179, 199, 228, 259, 305}),
+    "2026-11-22": frozenset({232}),
 }
 
 
@@ -1605,9 +1611,13 @@ def _house_witness(n: int, source: Source) -> dict[str, Any]:
     }
     native = copy.deepcopy(positive["exact_verify"])
     native["id"] = identifier
+    backend_option = " --rational-backend gmp" if source.rational_backend == "gmp" else ""
     witness["certificate"] = {
         "kind": "exact-rational-sat",
-        "replay": f"uv run --frozen packing-witness verify witnesses/known-best/n-{n:03d}.yaml",
+        "replay": (
+            f"uv run --frozen packing-witness verify witnesses/known-best/n-{n:03d}.yaml"
+            f"{backend_option}"
+        ),
         "result": native,
     }
     return witness
@@ -1619,7 +1629,10 @@ def build_witness(n: int) -> dict[str, Any]:
     two are compared as they are, with no encoding between them that could make unequal
     values equal (review A9 of #756)."""
     witness = expected_house(n)
-    native, verification = legacy.exact_verify(witness)
+    source = source_for(n)
+    native, verification = legacy.exact_verify(
+        witness, rational_backend=source.rational_backend
+    )
     _require(
         verification.valid and native == witness["certificate"]["result"],
         f"n={n}: the house's exact decision differs from its retained native job",

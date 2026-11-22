@@ -50,6 +50,13 @@ contact by about 2.00880e-34. The [independent review](n232/review/README.md) ac
 uses the earlier concrete certificates. It does not compare against the local solver’s
 unrounded limiting point.
 
+Both maintained routes replayed the 232-square witness and the duplicate-square and
+outside-container controls with [exact GMP rationals](n232/receipts/native-exact-gmp.json.xz).
+Each route checked all 26,796 pairs in each job. The three jobs took 35.19, 40.01 and
+37.72 seconds under [memory supervision](n232/receipts/native-exact-gmp-supervision.json).
+The package retains the original rational certificate and both routes’ complete
+input and output records.
+
 For all 13 supplements, the stated center scaling and a common translation reproduce
 every exact center and preserve the exact angles and the 12-place upward print of the
 enclosed input. All thirteen ends are strictly below the corresponding registered
