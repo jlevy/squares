@@ -37,7 +37,7 @@ same dated contribution as the independently verified rational witness.
 Registration, credit and the published drawing will use the separate project
 intake records.
 
-## Compressed files
+## Compressed Files
 
 | File | Origin | Git blob of original bytes | SHA-256 of original bytes |
 | --- | --- | --- | --- |

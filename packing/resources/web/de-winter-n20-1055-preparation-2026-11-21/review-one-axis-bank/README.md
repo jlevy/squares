@@ -18,12 +18,17 @@ Use the [frozen plan](frozen-plan.md), [checker](checker.py.txt),
 to reproduce this check. The original attachment and credit are recorded
 in the [source packet](../README.md).
 
-## Compressed files
+## Compressed Files
 
-| File | Origin | Git blob of original bytes | SHA-256 of original bytes |
+| Stored path | Origin | Git blob of original bytes | SHA-256 of original bytes |
 | --- | --- | --- | --- |
-| `one_axis_24.json.gz` | upstream | `8da04d8ac0d26dd442d7342c8e736dfad5d7f35a` | `774cf1ffc704886c9ff3802600dc7d112ef87b25024d7147176bc2af4f14ee9f` |
 | `checker-receipt.json.gz` | receipt | `b72348118152f100e3adb3cb4fffd114af4eae83` | `5f8ca1a560ef390078f9938bc98ac63af1efec0cf0be43481dd60628a7598f4c` |
+
+## Original Gzip Files
+
+| Stored path | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `one_axis_24.json.gz` | upstream | `69cdbf53f097cc89cb136adca3bb4bb81a71ccfc` | `451b1116cf5b6eaa78ecc8233ee4e4c931537e6dfd3bd4fba2a6d91b1922d257` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
