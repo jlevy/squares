@@ -1,0 +1,51 @@
+{
+  "review_subject": "Independent exact feasibility of the rational and quadratic n202 and n263 geometries in issue #1037",
+  "external_retention_manifest_sha256": "7b0add38e4ed60b3b9941ca9c9614a90e3c6372ee169eb737904b53468c47d86",
+  "retained_artifacts": [
+    {
+      "path": "review/verify_202_263.py.txt",
+      "bytes": 16626,
+      "sha256": "a007b236d26e7a9abc4d6dd1011b7d0ee3fa680549ce9a885f414747fe33776f"
+    },
+    {
+      "path": "review/verification.json",
+      "bytes": 12181,
+      "sha256": "a5df37e44867692b5a18cadb1fd28cb2ee33b857eceb6f13a2ba9cc26dc8793b"
+    },
+    {
+      "path": "review/plan.txt",
+      "bytes": 3517,
+      "sha256": "4376e30afe907500087eed42429ae6789341aadd00317a6783316aa5587d9652"
+    },
+    {
+      "path": "review/frozen-at.txt",
+      "bytes": 21,
+      "sha256": "60aa07ac8e927748550cc0e0c3b0a2f0f3a5ca0e3250f942cd9c7259e824fdd1"
+    },
+    {
+      "path": "review/frozen-sha256.txt",
+      "bytes": 159,
+      "sha256": "7f7958764ea13786fc4ec4e200aed272cce0e73e38181acdc802ba1b2d1d155f"
+    },
+    {
+      "path": "review/exit-status.txt",
+      "bytes": 27,
+      "sha256": "604d7022afcfda4f0eab11dc16d939ea7556d14c6867f66bb4f97fc972e181f6"
+    },
+    {
+      "path": "review/guard-summary.json",
+      "bytes": 691,
+      "sha256": "c176aa6402bbfd3bbb969e88418c55d40a95eb85ad4866109e300ce14b478690"
+    },
+    {
+      "path": "review/integration-replay.json",
+      "bytes": 476,
+      "sha256": "019d3f1b8511d9acc5e82bfeb307ee02a3a9d1ec7fa3edc383aa34c13132c2ef"
+    }
+  ],
+  "runtime": {
+    "python": "3.14.7",
+    "PyYAML": "6.0.3"
+  },
+  "replay_input": "Original attachment in acquisition/sources.json. The unchanged checker validates the full archive digest before reading only the seven members listed in its receipt."
+}

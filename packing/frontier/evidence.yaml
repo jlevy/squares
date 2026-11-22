@@ -68327,3 +68327,28 @@ evidence:
       data and its attachment custody are checked; the GeiserX starting input and historical priority
       remain unresolved. No local or global optimum.
     source_reviewed: '2026-11-21'
+  - id: E-geiserx-1037-original-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 202
+      - 204
+      - 210
+      - 263
+      - 264
+      - 295
+      - 297
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/rational/
+    novelty: previously-published
+    source_reviewed: '2026-11-22'
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    replay_status: not-attempted
+    verifiers: []
+    limitations: >-
+      The issue gives seven upward ceilings. The source's own verification programs
+      are outside the retained packet and its reported evidence remains attributed.

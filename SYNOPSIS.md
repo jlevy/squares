@@ -1171,6 +1171,7 @@ case or experiment separately.
 | [De Winter’s Certificates of s(268) and s(270), #1021 and #1022: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1021-1022.md) | dated review record | record | retained | — |
 | [De Winter’s Packing for $s(299) \le 17.793636991744$ (#1031): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-18-de-winter-1031.md) | dated review record | record | retained | — |
 | [The 259-Square Certificate in #1040: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md) | dated review record | record | retained | — |
+| [The 202- and 263-Square Certificates in Issue #1037](docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md) | dated review record | record | retained | — |
 | [De Winter’s n = 90 Follow-Up: Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md) | dated review record | record | retained | — |
 | [Independent Review of the N179 Algebraic Construction](docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md) | dated review record | record | retained | — |
 | [Mira Cult’s Computer-Assisted Proof of $s(18) = (7+\sqrt7)/2$ (#1050): Stage 4 Mathematical Review](docs/project/reviews/review-2026-11-20-mira-1050-n18.md) | dated review record | record | retained | — |

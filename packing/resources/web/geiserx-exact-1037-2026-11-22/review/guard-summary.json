@@ -1,0 +1,19 @@
+{
+  "mode": "observe-only",
+  "checker_workers": 1,
+  "watched_seconds": 13.5,
+  "sample_count": 17,
+  "peak_observed_process_tree_gb": 0.03,
+  "minimum_host_reclaimable_gb": 9.97,
+  "maximum_host_pressure_level": 1,
+  "startup_swap_volume_free_gb": 6.36,
+  "startup_swap_used_mb": 6872.3,
+  "startup_swap_total_mb": 8192.0,
+  "interventions": 0,
+  "worker_exit": 0,
+  "guard_exit": 0,
+  "checker_wall_seconds": 12.507762958004605,
+  "checker_cpu_seconds": 1.644506,
+  "raw_guard_journal_sha256": "3fe60c91e60c2bd5c7f6640b1accb2e075e14e52b2011fb2f8b5425eb0dc22fc",
+  "raw_guard_journal_custody": "External working evidence. This public summary omits machine identity and process details."
+}

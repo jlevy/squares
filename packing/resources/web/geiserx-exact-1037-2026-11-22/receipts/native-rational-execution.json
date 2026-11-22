@@ -1,0 +1,19 @@
+{
+  "backend": "gmp",
+  "gmpy2": "2.3.1",
+  "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "counts": [
+    202,
+    204,
+    210,
+    263,
+    264,
+    295,
+    297
+  ],
+  "controls": [
+    "positive",
+    "duplicate-square-overlap",
+    "square-translated-outside-container"
+  ]
+}

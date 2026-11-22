@@ -1,0 +1,47 @@
+Issue #1037, independent Stage 4 mathematical review, n=202 and n=263
+
+Inputs seen before freezing: the official issue body, the project stage-4 process,
+archive member names and byte sizes, the original raw rational corner YAML and pose
+.cert for both counts, and raw algebraic JSON and corner-index JSON with their
+schema and representative values. No producer script, validation output, earlier
+review, or other coordinator artifact was consulted. Do not use producer scripts.
+Pin the attachment by the SHA-256 supplied in the review brief and retain member
+identity hashes. No generator, repository verifier, or geometry package is loaded.
+
+Rational. Independently rebuild the four vertices in each raw .cert row about the
+specified center from (1-u^2, 2u)/(1+u^2). Canonicalize cyclic/reversed vertices only
+for equality. Parse raw rational YAML corners under a safe duplicate-key-rejecting
+loader. Require exact matching vertex sets, ordered records and side per count.
+Verify each original cyclic corner quadrilateral by two perpendicular unit edges
+at the first corner and the parallelogram completion. All vertices must lie within
+the closed box. Account for all unordered pairs. An exact axis-aligned projection
+separation can decide a pair early. Otherwise use projections of all four vertices
+on the perpendiculars to the two sides of each polygon. One weak separation means
+interiors are disjoint. Reject if no such axis exists. Derive ceil at 12 decimals
+with exact integer operations. Check which rational n263 squares lie wholly in the
+lower-left box of side R263-2, and count exact common poses with rational n202.
+
+Quadratic. Work in Q(sqrt(3)) with two rational coefficients; sign uses squared
+magnitudes when terms differ in sign. Interpret ascending coefficients in t, root
+(-6+sqrt(3))/11 of 11t^2+12t+3; the declared strict rational isolating interval must
+select exactly that root. Form u for each pose from its supplied coordinate. The
+observed m field is zero or the checker refuses as outside its input scope. Use
+the rational-function vertex construction plus geometry obligations above. Derive
+claimed sides separately from stated Q(sqrt(3)) formulas and check exact equality,
+polynomial substitution, exact smaller-root choice, and declared intervals. Check
+which sign convention for the nonzero shared tilt satisfies the stated linear
+identity. Prove the count wholly within the lower-left box, require set equality
+against declared indices, and count its exact common poses with the standalone
+algebraic n202 file. No reconstruction or source-pose provenance claims are derived
+from polygon feasibility, the corner count, or equality of sides. Generator pins,
+contact equations and stationarity are outside scope. Optimality is outside scope.
+
+Controls declared before computing any outcomes. For each accepted geometric input,
+shrink its exact measured maximum vertex coordinate by 10^-90 and require wall
+refusal, and replace the final square with a duplicate of the first and require pair
+refusal. Verify equality at the wall and require acceptance of two touching unit
+squares and refusal after a 10^-90 axial shift into one another. Keep strict failure
+paths for incorrect geometry, parser shape, encoding equality, claimed polynomial,
+and corner membership. Report the interpreter, receipt cost, process-tree guard
+journal, counts, intervals, and any deviation from this plan. Stage 4 review is a
+separate record from native replay and any upstream/submission identity decision.
