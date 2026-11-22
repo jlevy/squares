@@ -27,8 +27,8 @@ November. The exact retrieval time, retained members and pinned-only files are i
 | Claim | Computed finding | Remaining check |
 | --- | --- | --- |
 | Corrected witness | Removing seven metadata lines restores the original YAML bytes; all 1,220 corners equal the accepted JSON geometry | None for this artifact identity |
-| 31-turn variant | Same exact side, no moved centers, 31 changed directions, 207 axis-aligned squares; both routes accept all 46,360 pairs | Drawing review only; no new bound |
-| 37-turn variant | Same exact side, 37 changed directions, 213 axis-aligned squares; both routes accept all 46,360 pairs | Drawing review only; no new bound |
+| 31-turn variant | Same exact side, no moved centers, 31 changed directions, 207 axis-aligned squares; both routes accept all 46,360 pairs | The existing drawing remains selected |
+| 37-turn variant | Same exact side, 37 changed directions, 213 axis-aligned squares; both routes accept all 46,360 pairs | The existing drawing remains selected |
 | 36-turn version, square 43 kept | Restore only square 43’s original half-angle in the 37-turn candidate; both routes accept all 46,360 pairs, with the same nine centers moved by at most 2e-11 per coordinate | Attains the restricted minimum |
 | Maximum 31 fixed-center snaps | The feasible 31-turn witness and five exact blocking pairs establish maximum 31, with original centers and side, all other directions fixed, and each of the specified 36 directions kept or snapped | Complete for this restricted claim |
 | Minimum nine moved centers | The 17 submitted conflict groups have hitting-set minimum nine, with 1,581 minimizers and 10,991 search nodes; the nine moved IDs hit every group | The 34 exact exclusions prove necessity for both square-43 choices |
@@ -188,7 +188,29 @@ A failure or timeout is not a confirming replay.
 exclusions and the finite hitting set on the 17 fixed-center groups. Under the stated
 coordinate and orientation constraints, nine moved centers are necessary and
 sufficient in each square-43 case. Both exact-side variants remain feasible at T-336’s
-side. Drawing selection remains a separate review.
+side. The drawing comparison below retains the existing selection.
+
+## Drawing comparison, 22 November 2026
+
+All three verified variants use the exact side of the published 305-square view.
+The maintained drawing census measured the two source variants and the
+nine-center variant that leaves square 43 fixed. The comparison used the
+verified checker-input poses. It reproduced the current drawing’s retained
+measurements.
+
+| View | Light axis-aligned squares | Uneven axis-aligned squares | Near-axis squares | Tilt classes | Full-side contacts | Center-rule contacts |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Published view | 7 | 63 | 1 | 32 | 731 | 859 |
+| 31 aligned | 33 | 101 | 1 | 32 | 634 | 841 |
+| 37 aligned | 34 | 102 | 0 | 31 | 634 | 841 |
+| 36 aligned, square 43 fixed | 33 | 101 | 1 | 32 | 634 | 841 |
+
+All four views have 19 hues. The 37-turn variant removes one near-axis
+square and one tilt class from the published view. All three variants draw
+more light and uneven squares and fewer contacts. Under the
+[drawing improvement rule](../../../../docs/project/policies/regularization-policy.md#11-the-improvement-rule),
+the published selection remains.
+[Exact inputs and measurements](receipts/drawing-measurements.json)
 
 ## Compressed Files
 

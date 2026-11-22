@@ -39131,9 +39131,10 @@ issues:
         not_registered: >-
           The 31-turn and 37-turn variants use T-336's exact side. Both maintained routes
           accept all 46,360 pairs in each variant. Both full-packing control families and
-          22 sharp cases produced all predicted outcomes. Drawing review remains open.
-        queued: true
-        bead: think-rbyl
+          22 sharp cases produced all predicted outcomes. All three same-side views,
+          including the one with square 43 fixed, draw more light and uneven squares
+          and fewer contacts than the published drawing. The published view remains.
+        queued: false
       - key: n305-axis-variant-minimality
         claim: >-
           At the original centers and side with all other directions fixed, 31 of the 36
