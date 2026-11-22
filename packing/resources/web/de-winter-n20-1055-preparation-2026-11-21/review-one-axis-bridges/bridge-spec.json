@@ -1,0 +1,54 @@
+{
+  "format": "one-axis-local-bridge-spec-v1",
+  "source": {
+    "issue": "https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337",
+    "upstream_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+    "archive_sha256": "475d7ef50e21ce4a83cfb4c8415c9e9852d619beeade5c4c8745c2c963d6c867",
+    "statement": {
+      "member": "geometry/one_axis_equal.md",
+      "sha256": "e83002429b3610630265d1b9a173f9f431bdf74ac874004b1a30df651a95eed5"
+    },
+    "producer_path_formula_read": {
+      "member": "geometry/one_axis_paths.py",
+      "sha256": "e285368bf574de9a697b990a1c538eb3f8ce97c24498d0ae4ff3065de02b8765"
+    }
+  },
+  "prior_bank": {
+    "receipt": "../n20-one-axis-bank-independent-20261122/checker-receipt-01.json",
+    "sha256": "5f8ca1a560ef390078f9938bc98ac63af1efec0cf0be43481dd60628a7598f4c",
+    "certificates": 576,
+    "role": "Previously completed separate obligation; not a premise for local bridge exclusion."
+  },
+  "domain": {
+    "half_tangent_lower": "0",
+    "half_tangent_upper": "1/24",
+    "upper_closed": true,
+    "board_side_strictly_less_than": "5",
+    "chain_length": 5,
+    "rank_count": 5,
+    "allowed_signs": [
+      -1,
+      0,
+      1
+    ],
+    "maximum_aligned_tiles_on_chain": 1
+  },
+  "roster": {
+    "rank_rule": "Lexicographic tuples from range(5)^5 having exactly one nonzero consecutive difference, equal to -1 or +1.",
+    "sign_rule": "Lexicographic tuples from (-1,0,1)^5 containing at most one zero.",
+    "exclusion_rule": "Positive integer cost: abs(first)+abs(last)+sum(abs(a-b) on straight edges)-sum(h*(a+b) on diagonal edges).",
+    "serialization": "UTF-8 json.dumps(all profile dictionaries, sort_keys=True, separators=(',', ':')) without final newline."
+  },
+  "expected": {
+    "rank_profiles": 32,
+    "sign_profiles": 112,
+    "all_profiles": 3584,
+    "zero_cost_profiles": 96,
+    "excluded_profiles": 3488,
+    "excluded_without_zero": 992,
+    "excluded_with_one_zero": 2496,
+    "maximum_normal_branches_per_profile": 8,
+    "controls": 12
+  },
+  "scope": "Conditional local forward-separating chain exclusions only. No global vacancy/sign/graph enumeration, no theorem acceptance."
+}

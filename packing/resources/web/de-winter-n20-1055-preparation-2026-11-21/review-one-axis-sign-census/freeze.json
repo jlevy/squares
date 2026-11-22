@@ -1,0 +1,64 @@
+{
+  "format": "independent-one-axis-sign-census-freeze-v1",
+  "frozen_utc": "2026-11-22T23:29:50.642865+00:00",
+  "status": "prepared-not-executed",
+  "coordinator_bead": "think-guls",
+  "files": {
+    "census-spec.json": {
+      "bytes": 4112,
+      "sha256": "d7261e5ecd4a9cc96b6d01e24ba1925c39946cb7235504ba6db1c828534d8df6"
+    },
+    "check_one_axis_sign_census.py": {
+      "bytes": 18097,
+      "sha256": "fab558a42e84c70013f2fc1d06c4e43c029b8ac85d4158528b6529550ddf1a0c"
+    },
+    "bridge-verification.json.gz": {
+      "bytes": 169835,
+      "sha256": "575b2568620791141d7ffa23cb726512306adc0321d4bd360792b7842dba8203"
+    },
+    "frozen-plan.md": {
+      "bytes": 7976,
+      "sha256": "0365a602d150029505e1278a4bc222e1c7001afe32e916ab701ff8afaea91ddd"
+    }
+  },
+  "expected": {
+    "vacancy_permutations": 120,
+    "aligned_positions_per_vacancy": 20,
+    "vacancy_aligned_cases": 2400,
+    "bridge_histogram": {
+      "4": 92,
+      "5": 24,
+      "6": 4
+    },
+    "sign_assignments": 29368,
+    "D4_images": 234944,
+    "D4_representatives": 3671,
+    "orbit_size_histogram": {
+      "8": 3671
+    },
+    "controls": 12
+  },
+  "limits": {
+    "workers": 1,
+    "target_wall_seconds": 20,
+    "target_peak_rss_gib": 0.1,
+    "internal_wall_seconds": 55,
+    "supervised_wall_seconds": 60,
+    "sampled_tree_cost_gib": 0.25,
+    "stop_pressure": 2,
+    "search_nodes": 1000000,
+    "raw_assignment_emissions": 2000000,
+    "solutions_per_case": 50000,
+    "total_roster": 50000,
+    "maximum_expanded_input_bytes": 8388608
+  },
+  "exposure": "Reviewer previously read the contributor's theorem, path and sign/canonicalization programs and prior project review. Independent geometry construction, local integer-cost truth tables, constraint search and rotation/reflection implementation; not blind.",
+  "scope": "Complete sign/vacancy roster satisfying the accepted paired-bridge necessary conditions, and its D4 orbits. No general-path exclusions, separation-graph enumeration, graph-to-bank coverage, unrestricted theorem or Stage 4 acceptance.",
+  "execution": {
+    "checker_executed": false,
+    "checker_imported": false,
+    "compiled_or_syntax_checked": false,
+    "contributor_programs_executed": false,
+    "awaiting_serial_memory_guard_slot": true
+  }
+}

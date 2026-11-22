@@ -1,0 +1,361 @@
+"""Independent exact local-bridge exclusions; no global packing graph enumeration."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import itertools
+import json
+import math
+import os
+import resource
+import sys
+import tempfile
+import time
+from collections import Counter
+from collections.abc import Callable
+from fractions import Fraction as F
+from functools import lru_cache
+from pathlib import Path
+from typing import Any
+
+SPEC_SHA256 = "47433a8c18c451703ad7d9c1f853a29755149c472fcf746cbb832fd3a22f98b5"
+Q = 24
+Poly = tuple[int, ...]
+Ranks = tuple[int, ...]
+Signs = tuple[int, ...]
+Choice = tuple[str, int]
+Profile = tuple[int, int, tuple[str, ...], int, int]
+
+
+class Refusal(Exception):
+    def __init__(self, code: str, detail: object = None):
+        super().__init__(f"{code}: {detail}")
+        self.code = code
+
+
+def require(condition: bool, code: str, detail: object = None) -> None:
+    if not condition:
+        raise Refusal(code, detail)
+
+
+def polynomial_at(poly: Poly, t: F) -> F:
+    result = F(0)
+    for coefficient in reversed(poly):
+        result = result * t + coefficient
+    return result
+
+
+def check_identity(poly: Poly, function: Callable[[F], F], degree: int) -> None:
+    require(len(poly) - 1 <= degree, "polynomial-degree")
+    for k in range(degree + 2):
+        t = F(k, 8)
+        require(polynomial_at(poly, t) == function(t), "polynomial-identity", str(t))
+
+
+def interpolate(function: Callable[[F], F], degree: int) -> Poly:
+    # Forward differences use the basis binomial(8t,k), not the producer's expansion.
+    differences = [function(F(k, 8)) for k in range(degree + 1)]
+    basis = [F(1)]
+    result = [F(0)] * (degree + 1)
+    for order in range(degree + 1):
+        weight = differences[0] / math.factorial(order)
+        for i, coefficient in enumerate(basis):
+            result[i] += weight * coefficient
+        if order < degree:
+            differences = [b - a for a, b in zip(differences, differences[1:])]
+            advanced = [F(0)] * (len(basis) + 1)
+            for i, coefficient in enumerate(basis):
+                advanced[i] -= order * coefficient
+                advanced[i + 1] += 8 * coefficient
+            basis = advanced
+    require(all(x.denominator == 1 for x in result), "integer-cleared-polynomial")
+    coefficients = [x.numerator for x in result]
+    while len(coefficients) > 1 and coefficients[-1] == 0:
+        coefficients.pop()
+    poly = tuple(coefficients)
+    check_identity(poly, function, degree)
+    return poly
+
+
+@lru_cache(maxsize=4096)
+def positivity(poly: Poly, strict_closed: bool = False) -> tuple[F, ...]:
+    degree = len(poly) - 1
+    values = tuple(
+        sum((F(poly[i] * math.comb(k, i), Q**i * math.comb(degree, i))
+             for i in range(k + 1)), F(0))
+        for k in range(degree + 1)
+    )
+    require(all(x >= 0 for x in values), "nonnegative", tuple(map(str, values)))
+    if strict_closed:
+        require(values[0] > 0 and values[-1] > 0, "strict-closed-endpoints")
+    return values
+
+
+def trig(t: F) -> tuple[F, F, F, F]:
+    denominator = 1 + t * t
+    c = (1 - t * t) / denominator
+    s = 2 * t / denominator
+    u = c + s
+    return c, s, u, u * (u - 1)
+
+
+def prerequisite_value(t: F) -> F:
+    _, _, u, d = trig(t)
+    return 2 * (1 + t * t)**2 * (1 - 5 * d - ((1 + u) / 2) * t)
+
+
+def cleared_span(profile: Profile, t: F, threshold: int = 5) -> F:
+    left_tilted, right_tilted, constants, nominal_projection, error_maximum = profile
+    c, s, u, d = trig(t)
+    require(c != 0, "interpolation-pole")
+    mixed_support = (1 + u) / 2
+    left_width = u if left_tilted else F(1)
+    right_width = u if right_tilted else F(1)
+    span = (left_width + right_width) / 2
+    for kind in constants:
+        if kind == "secant":
+            span += 1 / c
+        elif kind == "tilted-width":
+            span += u
+        elif kind == "mixed-inclined":
+            span += mixed_support / c
+        elif kind == "mixed-flat":
+            span += mixed_support
+        else:
+            raise Refusal("unknown-step-constant", kind)
+    span -= (s / c) * (nominal_projection + d * error_maximum)
+    return (span - threshold) * 2 * (1 - t * t) * (1 + t * t)**2
+
+
+@lru_cache(maxsize=4096)
+def bound_polynomial(profile: Profile, threshold: int = 5) -> Poly:
+    return interpolate(lambda t: cleared_span(profile, t, threshold), degree=6)
+
+
+@lru_cache(maxsize=4096)
+def rank_box_maximum(ranks: Ranks, normals: tuple[int, ...]) -> int:
+    # A linear form attains its maximum at a box vertex; enumerate all 2^5 vertices.
+    require(len(ranks) == 5 and len(normals) == 4, "rank-box-dimension")
+    answer = max(
+        sum(normals[i] * (vertex[i + 1] - vertex[i]) for i in range(4))
+        for vertex in itertools.product(*[(-r, 4 - r) for r in ranks])
+    )
+    require(answer >= 0, "negative-rank-maximum")
+    return answer
+
+
+def step_options(a: int, b: int, h: int) -> tuple[Choice, ...]:
+    if a == b:
+        require(a != 0, "two-aligned-tiles")
+        return (("secant", a),)
+    if a != 0 and b != 0:
+        return (("tilted-width", h),) if h else (("tilted-width", -1), ("tilted-width", 1))
+    tilted_sign = a + b
+    require(tilted_sign in (-1, 1), "mixed-tile-sign")
+    if h * tilted_sign > 0:
+        return (("mixed-inclined", tilted_sign),)
+    if h:
+        return (("mixed-flat", 0),)
+    return (("mixed-flat", 0), ("mixed-inclined", tilted_sign))
+
+
+def integer_cost(ranks: Ranks, signs: Signs) -> int:
+    total = abs(signs[0]) + abs(signs[-1])
+    for i in range(4):
+        h = ranks[i + 1] - ranks[i]
+        total += abs(signs[i] - signs[i + 1]) if h == 0 else -h * (signs[i] + signs[i + 1])
+    return total
+
+
+def arm_condition(ranks: Ranks, signs: Signs) -> bool:
+    jump = next(i for i in range(4) if ranks[i + 1] != ranks[i])
+    direction = ranks[jump + 1] - ranks[jump]
+    arms = (signs[:jump + 1], tuple(reversed(signs[jump + 1:])))
+    return all(value * direction >= 0 for value in signs) and all(
+        abs(a) <= abs(b) for arm in arms for a, b in zip(arm, arm[1:])
+    )
+
+
+def branches(ranks: Ranks, signs: Signs) -> list[tuple[dict[str, Any], Profile, Poly]]:
+    require(integer_cost(ranks, signs) > 0, "not-exclusion-roster")
+    steps = tuple(ranks[i + 1] - ranks[i] for i in range(4))
+    options = [step_options(signs[i], signs[i + 1], steps[i]) for i in range(4)]
+    choices = tuple(itertools.product(*options))
+    require(1 <= len(choices) <= 8 and len(set(choices)) == len(choices), "normal-roster")
+    result = []
+    for choice in choices:
+        constants = tuple(kind for kind, _ in choice)
+        normals = tuple(value for _, value in choice)
+        projection = sum(a * b for a, b in zip(normals, steps, strict=True))
+        error = rank_box_maximum(ranks, normals)
+        profile = (abs(signs[0]), abs(signs[-1]), tuple(sorted(constants)), projection, error)
+        poly = bound_polynomial(profile)
+        positivity(poly)
+        result.append(({
+            "constant_kinds": list(constants), "normal_coefficients": list(normals),
+            "nominal_projection": projection, "rank_error_maximum": error,
+        }, profile, poly))
+    return result
+
+
+def canonical_roster() -> tuple[list[dict[str, Any]], dict[str, int]]:
+    rank_profiles = []
+    for ranks in itertools.product(range(5), repeat=5):
+        steps = [ranks[i + 1] - ranks[i] for i in range(4)]
+        nonzero = [h for h in steps if h]
+        if len(nonzero) == 1 and abs(nonzero[0]) == 1:
+            rank_profiles.append(ranks)
+    sign_profiles = [s for s in itertools.product((-1, 0, 1), repeat=5) if s.count(0) <= 1]
+    require((len(rank_profiles), len(sign_profiles)) == (32, 112), "roster-dimensions")
+    roster = []
+    counts: Counter[str] = Counter()
+    for ranks in rank_profiles:
+        for signs in sign_profiles:
+            cost = integer_cost(ranks, signs)
+            require(cost >= 0, "negative-bridge-cost")
+            require((cost == 0) == arm_condition(ranks, signs), "arm-cost-disagreement")
+            roster.append({"index": len(roster), "ranks": list(ranks), "signs": list(signs), "cost": cost})
+            counts["all_profiles"] += 1
+            if cost == 0:
+                counts["zero_cost_profiles"] += 1
+            else:
+                counts["excluded_profiles"] += 1
+                counts["excluded_with_one_zero" if 0 in signs else "excluded_without_zero"] += 1
+    expected = {"all_profiles": 3584, "zero_cost_profiles": 96, "excluded_profiles": 3488,
+                "excluded_without_zero": 992, "excluded_with_one_zero": 2496}
+    require(dict(counts) == expected, "roster-census", dict(counts))
+    return roster, {"rank_profiles": len(rank_profiles), "sign_profiles": len(sign_profiles), **counts}
+
+
+def controls(prerequisite: Poly) -> list[dict[str, Any]]:
+    outcomes: list[dict[str, Any]] = []
+
+    def expect(name: str, operation: Callable[[], object], refusal: str | None = None) -> None:
+        try:
+            operation()
+        except Refusal as error:
+            require(error.code == refusal, "unexpected-control-refusal",
+                    {"name": name, "expected": refusal, "actual": error.code})
+            outcomes.append({"control": name, "expected_refusal": refusal, "passed": True})
+        else:
+            require(refusal is None, "control-falsely-accepted", name)
+            outcomes.append({"control": name, "expected": "accept", "passed": True})
+
+    known = (2, -3, 5, -7, 0, 0, 11)
+    expect("known-degree-six-interpolation", lambda: require(
+        interpolate(lambda t: polynomial_at(known, t), 6) == known, "interpolation-fixture"))
+    expect("zero-path-bound", lambda: positivity((0,)))
+    expect("negative-constant", lambda: positivity((-1,)), "nonnegative")
+    expect("negative-right-endpoint", lambda: positivity((1, -48)), "nonnegative")
+    expect("vanishing-strict-endpoints", lambda: positivity((0, 1, -24), True),
+           "strict-closed-endpoints")
+    ranks = (0, 0, 0, 0, 1)
+    expect("negative-normals-box-maximum", lambda: require(
+        rank_box_maximum(ranks, (-1, -1, -1, -1)) == 5, "box-fixture"))
+    expect("alternating-normals-box-maximum", lambda: require(
+        rank_box_maximum(ranks, (1, -1, 1, -1)) == 17, "box-fixture"))
+    expect("baseline-excluded-bridge", lambda: branches(ranks, (-1, -1, -1, -1, -1)))
+    profile: Profile = (1, 1, ("secant",) * 4, -1, 5)
+    expect("raised-board-threshold", lambda: positivity(bound_polynomial(profile, 6)), "nonnegative")
+    original = bound_polynomial(profile)
+    altered = (original[0] + 1, *original[1:])
+    expect("altered-interpolated-constant", lambda: check_identity(
+        altered, lambda t: cleared_span(profile, t), 6), "polynomial-identity")
+    expect("original-mixed-diagonal-prerequisite", lambda: positivity(prerequisite, True))
+    expect("inverted-mixed-diagonal-prerequisite",
+           lambda: positivity(tuple(-x for x in prerequisite), True), "nonnegative")
+    require(len(outcomes) == 12, "control-count")
+    return outcomes
+
+
+def publish(path: Path, result: dict[str, Any]) -> None:
+    require(not path.exists(), "output-already-exists")
+    temporary: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                         prefix=path.name + ".", suffix=".partial", delete=False) as stream:
+            temporary = stream.name
+            json.dump(result, stream, indent=2, allow_nan=False)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary is not None:
+            Path(temporary).unlink(missing_ok=True)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--spec", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    started, cpu_started = time.monotonic(), time.process_time()
+    raw_spec = args.spec.read_bytes()
+    require(hashlib.sha256(raw_spec).hexdigest() == SPEC_SHA256, "spec-digest")
+    spec = json.loads(raw_spec)
+    prerequisite = interpolate(prerequisite_value, 4)
+    prerequisite_bernstein = positivity(prerequisite, strict_closed=True)
+    control_results = controls(prerequisite)
+    roster, census = canonical_roster()
+    roster_bytes = json.dumps(roster, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    bounds: list[dict[str, Any]] = []
+    bound_ids: dict[Poly, int] = {}
+    exclusions = []
+    zero_cost = []
+    branch_count = 0
+    for row in roster:
+        if row["cost"] == 0:
+            zero_cost.append(row)
+            continue
+        decided = []
+        try:
+            selected = branches(tuple(row["ranks"]), tuple(row["signs"]))
+        except Refusal as error:
+            raise Refusal("bridge-not-excluded", {"profile": row, "reason": str(error)}) from error
+        for data, _, poly in selected:
+            if poly not in bound_ids:
+                bound_ids[poly] = len(bounds)
+                bounds.append({"id": len(bounds), "power_coefficients": list(poly),
+                               "bernstein_coefficients": list(map(str, positivity(poly)))})
+            decided.append({**data, "polynomial_id": bound_ids[poly]})
+        branch_count += len(decided)
+        exclusions.append({**row, "verdict": "excluded", "normal_choices": decided})
+    require(len(exclusions) == 3488 and len(zero_cost) == 96, "incomplete-exclusions")
+    require(3488 <= branch_count <= 3488 * 8, "normal-choice-count")
+    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    result = {
+        "format": "independent-one-axis-bridges-v1", "status": "complete-local-bridge-exclusions",
+        "scope": spec["scope"], "input_sha256": SPEC_SHA256,
+        "checker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "half_tangent_domain": "[0,1/24] for scalar bounds; positive angle for global chain premises",
+        "census": {**census, "normal_choices_checked": branch_count, "distinct_bound_polynomials": len(bounds)},
+        "canonical_roster_sha256": hashlib.sha256(roster_bytes).hexdigest(),
+        "canonical_roster_serialization": spec["roster"]["serialization"],
+        "arm_cost_equivalence_checked": True,
+        "mixed_diagonal_prerequisite": {
+            "power_coefficients": list(prerequisite),
+            "bernstein_coefficients": list(map(str, prerequisite_bernstein)),
+            "strict_on_closed_interval": True,
+        },
+        "controls": control_results, "bound_polynomials": bounds,
+        "excluded_profiles": exclusions, "zero_cost_profiles_not_decided": zero_cost,
+        "wall_seconds": time.monotonic() - started, "cpu_seconds": time.process_time() - cpu_started,
+        "peak_rss_bytes": rss if sys.platform == "darwin" else rss * 1024,
+        "guard": "External coordinator-owned guard required; this receipt makes no guard-status claim.",
+    }
+    publish(args.output, result)
+    print(json.dumps({"status": result["status"], "excluded_profiles": len(exclusions),
+                      "normal_choices": branch_count, "controls": len(control_results),
+                      "wall_seconds": result["wall_seconds"], "peak_rss_bytes": result["peak_rss_bytes"]}))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print(json.dumps({"status": "failed", "error_type": type(error).__name__, "error": str(error)}),
+              file=sys.stderr)
+        raise SystemExit(1) from error
