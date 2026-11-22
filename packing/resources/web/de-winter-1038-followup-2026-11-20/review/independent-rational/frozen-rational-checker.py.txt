@@ -1,0 +1,223 @@
+"""Independent exact rational Witness/v2 geometry review; frozen before geometry."""
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import json
+import time
+from fractions import Fraction
+from pathlib import Path
+
+from gmpy2 import mpq
+
+Point = tuple[mpq, mpq]
+Polygon = tuple[Point, Point, Point, Point]
+
+
+class Refusal(Exception):
+    def __init__(self, reason: str, detail: object):
+        super().__init__(reason)
+        self.reason = reason
+        self.detail = detail
+
+
+def scalar(value: object) -> mpq:
+    if isinstance(value, list) and len(value) == 1:
+        value = value[0]
+    if not isinstance(value, str) or not value or len(value) > 15000:
+        raise Refusal("unsupported-exact-scalar", repr(value)[:120])
+    rational = Fraction(value)
+    # Integer numerator/denominator conversion: no float or decimal context.
+    return mpq(rational.numerator, rational.denominator)
+
+
+def point(value: object) -> Point:
+    if not isinstance(value, list) or len(value) != 2:
+        raise Refusal("bad-point", repr(value)[:120])
+    return scalar(value[0]), scalar(value[1])
+
+
+def add(a: Point, b: Point) -> Point:
+    return a[0] + b[0], a[1] + b[1]
+
+
+def subtract(a: Point, b: Point) -> Point:
+    return a[0] - b[0], a[1] - b[1]
+
+
+def dot(a: Point, b: Point) -> mpq:
+    return a[0] * b[0] + a[1] * b[1]
+
+
+def cross(a: Point, b: Point) -> mpq:
+    return a[0] * b[1] - a[1] * b[0]
+
+
+def load_document(document: dict) -> tuple[mpq, list[Polygon]]:
+    if document.get("n") != 228 or document.get("square_size") != "1":
+        raise Refusal("wrong-count-or-square-size", document.get("n"))
+    if document.get("scalar", {}).get("kind") != "rational":
+        raise Refusal("non-rational-source", document.get("scalar"))
+    coordinate = document.get("coordinates", {})
+    if coordinate.get("axes") != "x-right-y-up":
+        raise Refusal("unsupported-axes", coordinate)
+    origin = coordinate.get("origin")
+    if origin not in ("lower-left", "container-center"):
+        raise Refusal("unsupported-origin", coordinate)
+    side = scalar(document["side"])
+    if side <= 0:
+        raise Refusal("nonpositive-side", str(side))
+    squares = document.get("squares", [])
+    if len(squares) != 228 or len({str(s["id"]) for s in squares}) != 228:
+        raise Refusal("count-or-id-mismatch", len(squares))
+    representation = document.get("representation")
+    shift = (side / 2, side / 2) if origin == "container-center" else (mpq(0), mpq(0))
+    polygons = []
+    for square in squares:
+        if representation == "corners":
+            vertices = square.get("corners", [])
+            if len(vertices) != 4:
+                raise Refusal("bad-corner-count", square["id"])
+            polygon = tuple(add(point(p), shift) for p in vertices)
+        elif representation == "center-basis":
+            center = add(point(square["center"]), shift)
+            u = point(square["basis"])
+            v = (-u[1], u[0])
+            polygon = tuple(
+                (center[0] + (su * u[0] + sv * v[0]) / 2,
+                 center[1] + (su * u[1] + sv * v[1]) / 2)
+                for su, sv in ((-1, -1), (1, -1), (1, 1), (-1, 1))
+            )
+        else:
+            raise Refusal("unsupported-representation", representation)
+        polygons.append(polygon)
+    return side, polygons
+
+
+def validate_units(polygons: list[Polygon]) -> list[tuple[Point, Point]]:
+    bases = []
+    for index, polygon in enumerate(polygons):
+        if len(polygon) != 4:
+            raise Refusal("unit-membership", index)
+        edges = [subtract(polygon[(j + 1) % 4], polygon[j]) for j in range(4)]
+        signs = [cross(edges[j], edges[(j + 1) % 4]) for j in range(4)]
+        if (
+            any(dot(edge, edge) != 1 for edge in edges)
+            or any(dot(edges[j], edges[(j + 1) % 4]) != 0 for j in range(4))
+            or not (all(s == 1 for s in signs) or all(s == -1 for s in signs))
+        ):
+            raise Refusal("unit-membership", index)
+        bases.append((edges[0], edges[1]))
+    return bases
+
+
+def decide(side: mpq, polygons: list[Polygon], progress: bool = False) -> dict:
+    bases = validate_units(polygons)
+    minimum_wall = None
+    wall_equalities = 0
+    first_wall_equality = None
+    for index, polygon in enumerate(polygons):
+        for corner, (x, y) in enumerate(polygon):
+            for wall, margin in enumerate((x, y, side - x, side - y)):
+                if margin < 0:
+                    raise Refusal("outside-closed-container", [index, corner, wall, str(margin)])
+                minimum_wall = margin if minimum_wall is None else min(minimum_wall, margin)
+                if margin == 0:
+                    wall_equalities += 1
+                    first_wall_equality = first_wall_equality or [index, corner, wall]
+    minimum_pair = None
+    equality_pairs = 0
+    first_pair_equality = None
+    tested = 0
+    started = time.monotonic()
+    # Independent complete SAT: project all four vertices on both edge directions
+    # of each unit square. For a square these are also its edge-normal directions.
+    for i, a in enumerate(polygons):
+        for j in range(i + 1, len(polygons)):
+            b = polygons[j]
+            best = None
+            for axis in (*bases[i], *bases[j]):
+                pa = [dot(vertex, axis) for vertex in a]
+                pb = [dot(vertex, axis) for vertex in b]
+                gap = max(min(pb) - max(pa), min(pa) - max(pb))
+                best = gap if best is None else max(best, gap)
+            tested += 1
+            if best is None or best < 0:
+                raise Refusal("interior-overlap", [i, j, str(best), tested])
+            minimum_pair = best if minimum_pair is None else min(minimum_pair, best)
+            if best == 0:
+                equality_pairs += 1
+                first_pair_equality = first_pair_equality or [i, j]
+            if progress and tested % 4000 == 0:
+                print(json.dumps({"pairs": tested, "seconds": time.monotonic() - started}), flush=True)
+    return {
+        "accepted": True, "unit_squares": len(polygons), "pairs_tested": tested,
+        "minimum_wall_margin": str(minimum_wall), "wall_corner_equalities": wall_equalities,
+        "first_wall_equality_zero_based": first_wall_equality,
+        "minimum_pair_max_axis_gap": str(minimum_pair), "pair_equalities": equality_pairs,
+        "first_pair_equality_zero_based": first_pair_equality,
+    }
+
+
+def expected_refusal(label: str, side: mpq, polygons: list[Polygon], reason: str) -> dict:
+    try:
+        decide(side, polygons)
+    except Refusal as error:
+        if error.reason != reason:
+            raise AssertionError((label, reason, error.reason)) from error
+        return {"control": label, "refused": True, "reason": error.reason, "detail": error.detail}
+    raise AssertionError(f"Control accepted: {label}")
+
+
+def translated(polygon: Polygon, dx: mpq, dy: mpq) -> Polygon:
+    return tuple((x + dx, y + dy) for x, y in polygon)
+
+
+def controls(side: mpq, polygons: list[Polygon]) -> list[dict]:
+    duplicate = copy.copy(polygons)
+    duplicate[1] = duplicate[0]
+    outside = copy.copy(polygons)
+    outside[0] = translated(outside[0], -2 * side, mpq(0))
+    a = ((mpq(0), mpq(0)), (mpq(1), mpq(0)), (mpq(1), mpq(1)), (mpq(0), mpq(1)))
+    b = translated(a, mpq(1), mpq(0))
+    touching = decide(mpq(2), [a, b])
+    assert touching["pair_equalities"] == 1
+    assert touching["minimum_wall_margin"] == "0"
+    snug = decide(mpq(1), [a])
+    assert snug["minimum_wall_margin"] == "0"
+    return [
+        expected_refusal("duplicate-second-square", side, duplicate, "interior-overlap"),
+        expected_refusal("first-square-shifted-minus-two-sides", side, outside, "outside-closed-container"),
+        {"control": "exact-shared-edge-and-wall", **touching},
+        {"control": "exact-unit-container", **snug},
+        expected_refusal("inward-pair-1-over-100", mpq(2), [a, translated(b, -mpq(1, 100), mpq(0))], "interior-overlap"),
+        expected_refusal("outward-wall-1-over-100", mpq(1), [translated(a, -mpq(1, 100), mpq(0))], "outside-closed-container"),
+    ]
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("source", type=Path)
+    parser.add_argument("output", type=Path)
+    args = parser.parse_args()
+    started = time.monotonic()
+    raw = args.source.read_bytes()
+    document = json.loads(raw)
+    side, polygons = load_document(document)
+    result = decide(side, polygons, progress=True)
+    assert result["pairs_tested"] == 228 * 227 // 2
+    result.update(
+        source_sha256=hashlib.sha256(raw).hexdigest(),
+        side=str(side),
+        scalar_conversion="Fraction string parse then exact integer numerator/denominator to gmpy2.mpq",
+        controls=controls(side, polygons),
+        elapsed_seconds=time.monotonic() - started,
+        scope="Closed-container exact unit-square containment and every unordered pair's interior non-overlap; no optimality, priority, or comparison claim.",
+    )
+    args.output.write_text(json.dumps(result, indent=2) + "\n")
+    print(json.dumps(result), flush=True)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,36 @@
+{
+  "status": "passed-frozen-rational-checker-and-six-controls",
+  "role": "Coordinator-requested packaging correction and execution of another agent's frozen code; no checker authorship or independent re-review claimed.",
+  "source": {
+    "original_sha256": "58465564994035e8e6c7f40c6651c0638f12e5e04546bd4b5225ced7808ba1bc",
+    "reading_copy_sha256": "603efbf226b672576264431c21707047c416ad68ca93faa047dea385249ac883",
+    "parsed_inner_object_preserved": true,
+    "geometry_rows_preserved": 228
+  },
+  "checker_sha256": "98ceabc8ff67c87017d3db173b0cef7e53f74a930e0f3dea931c77c8b48ccb4a",
+  "unit_squares": 228,
+  "positive_pair_count": 25878,
+  "positive_wall_inequalities": 3648,
+  "wall_corner_equalities": 36,
+  "source_pair_equalities": 0,
+  "controls": {
+    "accepted": 2,
+    "refused": 4,
+    "count": 6,
+    "negative_jobs_stop_on_first_violation": true
+  },
+  "script_wall_seconds": 6.394162708020303,
+  "worker_wall_seconds": 6.823646,
+  "launcher_wall_seconds": 8.711294,
+  "worker_exit": 0,
+  "guard_exit": 0,
+  "guard": {
+    "mode": "observe-only",
+    "samples": 11,
+    "pressure_levels": [
+      1
+    ],
+    "max_sampled_tree_gib": 0.02
+  },
+  "scope": "Only the original rational witness and frozen predeclared controls. No degree-seven replay, comparison, priority, local or global optimality conclusion."
+}

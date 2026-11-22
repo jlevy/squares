@@ -1,0 +1,10 @@
+{
+  "frozen_utc": "2026-11-22T21:10:43.548627+00:00",
+  "files": {
+    "frozen-plan.md": "61f8940b78f1d9589c05096e64714bea2a3c450dcc35db290438f0f0eaea6a2d",
+    "frozen-rational-checker.py": "98ceabc8ff67c87017d3db173b0cef7e53f74a930e0f3dea931c77c8b48ccb4a"
+  },
+  "geometry_opened_before_freeze": false,
+  "project_geometry_imports": false,
+  "producer_implementation_read": false
+}

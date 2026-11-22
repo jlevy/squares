@@ -50,8 +50,13 @@ completed controls took 365.26 summed job-wall seconds and 172.12 CPU seconds.
 [Rational replay](receipts/native-rational.json.gz),
 [algebraic replay](receipts/native-algebraic.json)
 
-This packet records the candidate and replay results. Independent Stage 4 review
-and the report-order decision remain on think-d4b0.
+A separate implementation accepted the rational witness after checking all 25,878
+pairs and six predeclared controls. The maintained report-order walk places the
+unedited 20 November follow-up below T-334 for either exact form. The two forms
+belong to one report. Independent review of the degree-seven geometry and
+registration and drawing decisions continue on think-d4b0.
+[Independent rational review](review/independent-rational/README.md),
+[Report-order disposition](review/report-order.json)
 
 ## Compressed Files
 
