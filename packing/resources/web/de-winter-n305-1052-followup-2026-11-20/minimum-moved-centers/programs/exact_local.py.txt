@@ -1,0 +1,349 @@
+"""Bounded exact necessary-row corroboration of #1052 local exclusions."""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import importlib.util
+import json
+import signal
+import sys
+import time
+from fractions import Fraction
+from itertools import combinations
+from pathlib import Path
+from typing import Any
+
+from sqpack.exact_lp import (
+    ExactLP,
+    ExactLPError,
+    LinearRow,
+    check_infeasibility,
+    prove_infeasible,
+    rational_sign,
+)
+
+
+class StopSliceError(Exception):
+    pass
+
+
+def stop(_signum: int, _frame: Any) -> None:
+    raise StopSliceError("deadline or supervisor stop")
+
+
+def make_lp(rows: list[dict], width: int) -> ExactLP:
+    return ExactLP(
+        tuple(Fraction(0) for _ in range(width)),
+        tuple(LinearRow(r["label"], tuple(r["a"])) for r in rows),
+        tuple(r["b"] for r in rows),
+        Fraction(0),
+        Fraction(1),
+    )
+
+
+def combine(target: dict[int, Fraction], source: dict[int, Fraction], scale: Fraction) -> None:
+    for i, value in source.items():
+        target[i] = target.get(i, Fraction(0)) + scale * value
+        if target[i] == 0:
+            del target[i]
+
+
+def dual_result(
+    rows: list[dict], width: int, weights: dict[int, Fraction], method: str
+) -> dict:
+    dense = [weights.get(i, Fraction(0)) for i in range(len(rows))]
+    gap = check_infeasibility(make_lp(rows, width), dense, rational_sign)
+    return {
+        "method": method,
+        "gap": str(gap),
+        "multipliers": [[i, str(w)] for i, w in sorted(weights.items())],
+        "used_row_labels": [rows[i]["label"] for i in sorted(weights)],
+    }
+
+
+def propagate(rows: list[dict], width: int) -> dict | None:
+    lower = [Fraction(-1)] * width
+    upper = [Fraction(1)] * width
+    lo_dual = [{2 * i + 1: Fraction(1)} for i in range(width)]
+    hi_dual = [{2 * i: Fraction(1)} for i in range(width)]
+    for _ in range(20):
+        changed = False
+        for ri, row in enumerate(rows):
+            entries = [(k, a) for k, a in enumerate(row["a"]) if a]
+            selected = {k: (lower[k] if a > 0 else upper[k]) for k, a in entries}
+            selected_duals = {k: (lo_dual[k] if a > 0 else hi_dual[k]) for k, a in entries}
+            minimum = sum((a * selected[k] for k, a in entries), Fraction(0))
+            if minimum > row["b"]:
+                dual = {ri: Fraction(1)}
+                for k, a in entries:
+                    combine(dual, selected_duals[k], abs(a))
+                return dual_result(rows, width, dual, "rational-box-propagation")
+            for k, a in entries:
+                other_minimum = minimum - a * selected[k]
+                bound = (row["b"] - other_minimum) / a
+                if (a > 0 and bound >= upper[k]) or (a < 0 and bound <= lower[k]):
+                    continue
+                dual = {ri: Fraction(1)}
+                for j, coefficient in entries:
+                    if j != k:
+                        combine(dual, selected_duals[j], abs(coefficient))
+                dual = {index: value / abs(a) for index, value in dual.items()}
+                if a > 0:
+                    upper[k], hi_dual[k] = bound, dual
+                else:
+                    lower[k], lo_dual[k] = bound, dual
+                changed = True
+        if not changed:
+            break
+    return None
+
+
+def geometry(
+    original: dict, cohort: dict, *, snap43: bool, include_clauses: bool = False
+) -> tuple[list[dict], int, dict]:
+    radius = Fraction(1, 50000000000)
+    poses = list(original["poses"])
+    near = [
+        i
+        for i, (_, _, c, s) in enumerate(poses, 1)
+        if 0 < min(abs(c), abs(s)) < Fraction(1, 10**9)
+    ]
+    assert len(near) == 36
+    for i in near + ([43] if snap43 else []):
+        x, y, c, s = poses[i - 1]
+        poses[i - 1] = (
+            (x, y, Fraction(1 if c > 0 else -1), Fraction(0))
+            if abs(c) > abs(s)
+            else (x, y, Fraction(0), Fraction(1 if s > 0 else -1))
+        )
+    ids = cohort["squares"]
+    fixed = set(cohort["fixed"])
+    assert fixed <= set(ids)
+    free = [i for i in ids if i not in fixed]
+    index = {square: 2 * k for k, square in enumerate(free)}
+    width = 2 * len(free)
+    rows = []
+    for k in range(width):
+        for sign in (1, -1):
+            a = [Fraction(0)] * width
+            a[k] = Fraction(sign)
+            rows.append(
+                {"label": f"box:{free[k // 2]}:{k % 2}:{sign}", "a": a, "b": Fraction(1)}
+            )
+    for i in ids:
+        x, y, c, s = poses[i - 1]
+        extent = (abs(c) + abs(s)) / 2
+        for axis, center in enumerate((x, y)):
+            for sign, slack in ((-1, center - extent), (1, original["side"] - center - extent)):
+                a = [Fraction(0)] * width
+                if i in index:
+                    a[index[i] + axis] = Fraction(sign)
+                rows.append({"label": f"wall:{i}:{axis}:{sign}", "a": a, "b": slack / radius})
+    stats = {
+        "pairs": 0,
+        "always_separated_pairs": 0,
+        "mandatory_pairs": 0,
+        "unresolved_clauses": 0,
+        "discarded_alternatives": 0,
+        "empty_clauses": [],
+    }
+    clauses = []
+    for i, j in combinations(ids, 2):
+        stats["pairs"] += 1
+        xi, yi, ci, si = poses[i - 1]
+        xj, yj, cj, sj = poses[j - 1]
+        support = (1 + abs(ci * cj + si * sj) + abs(ci * sj - si * cj)) / 2
+        alternatives = []
+        always = False
+        for ax, ay in ((ci, si), (-si, ci), (cj, sj), (-sj, cj)):
+            for sign in (1, -1):
+                nx, ny = sign * ax, sign * ay
+                a = [Fraction(0)] * width
+                for tile, factor in ((i, 1), (j, -1)):
+                    if tile in index:
+                        a[index[tile]] += factor * nx
+                        a[index[tile] + 1] += factor * ny
+                rhs = ((xj - xi) * nx + (yj - yi) * ny - support) / radius
+                magnitude = sum(map(abs, a), Fraction(0))
+                if magnitude <= rhs:
+                    always = True
+                    break
+                if -magnitude > rhs:
+                    stats["discarded_alternatives"] += 1
+                    continue
+                row = {"label": f"pair:{i}:{j}:{nx}:{ny}", "a": a, "b": rhs}
+                if not any(row["a"] == old["a"] and rhs == old["b"] for old in alternatives):
+                    alternatives.append(row)
+            if always:
+                break
+        if always:
+            stats["always_separated_pairs"] += 1
+        elif len(alternatives) == 1:
+            rows.append(alternatives[0])
+            stats["mandatory_pairs"] += 1
+        elif alternatives:
+            stats["unresolved_clauses"] += 1
+            clauses.append(alternatives)
+        else:
+            # A separately checkable disjunctive proof is not emitted by this first slice.
+            stats["empty_clauses"].append([i, j])
+    if include_clauses:
+        stats["clauses"] = clauses
+    return rows, width, stats
+
+
+def controls() -> dict:
+    rows = [
+        {"label": "upper", "a": [Fraction(1)], "b": Fraction(0)},
+        {"label": "lower", "a": [Fraction(-1)], "b": Fraction(-1)},
+    ]
+    lp = make_lp(rows, 1)
+    proof = prove_infeasible(lp, rational_sign, pivot_budget=10)
+    assert check_infeasibility(lp, proof.multipliers, rational_sign) > 0
+    try:
+        check_infeasibility(lp, [Fraction(-1), Fraction(1)], rational_sign)
+    except ExactLPError as exc:
+        assert exc.kind == "invalid-certificate"
+    else:
+        raise AssertionError("bad dual accepted")
+    rows[1]["b"] = Fraction(1)
+    try:
+        prove_infeasible(make_lp(rows, 1), rational_sign, pivot_budget=10)
+    except ExactLPError as exc:
+        assert exc.kind == "feasible"
+    else:
+        raise AssertionError("feasible box excluded")
+    return {
+        "rational_contradiction": "accepted",
+        "corrupt_multiplier": "rejected",
+        "feasible_box": "refused",
+    }
+
+
+def load_inputs(repo: Path, followup: Path) -> tuple[dict, list[dict]]:
+    path = (
+        repo / "packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz"
+    )
+    raw = gzip.decompress(path.read_bytes())
+    assert (
+        hashlib.sha256(raw).hexdigest()
+        == "e6c7d0280396a2fa61804a24a7c757365320869dbb89e8cf94316bb8b6a7831f"
+    )
+    group_bytes = (followup / "source/local-move-conflicts.json").read_bytes()
+    assert (
+        hashlib.sha256(group_bytes).hexdigest()
+        == "7946ad6b31d875e5aff1fb7d873a897cbff586f98ba2bb165d0fc041646faa78"
+    )
+    source = (
+        repo
+        / "packing/resources/web/de-winter-n305-1052-review-2026-11-20/programs/r1052_reader.py"
+    )
+    spec = importlib.util.spec_from_file_location("maintained_n305_reader", source)
+    assert spec
+    assert spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.read_form_j(raw), json.loads(group_bytes)
+
+
+def save(path: Path, result: dict) -> None:
+    path.write_text(json.dumps(result, indent=2) + "\n")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", type=Path, required=True)
+    parser.add_argument("--followup", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--verify", type=Path)
+    args = parser.parse_args()
+    assert __debug__
+    signal.signal(signal.SIGTERM, stop)
+    signal.signal(signal.SIGALRM, stop)
+    signal.alarm(175)
+    started = time.monotonic()
+    result = {"format": "n305-exact-local-probe-v1", "cases": [], "controls": controls()}
+    active = None
+    try:
+        original, cohorts = load_inputs(args.repo, args.followup)
+        if args.verify:
+            previous = json.loads(args.verify.read_text())
+            for case in previous["cases"]:
+                if case["status"] != "verified-exclusion":
+                    continue
+                rows, width, _ = geometry(
+                    original,
+                    cohorts[case["cohort_index"]],
+                    snap43=case["square43"] == "snapped",
+                )
+                proof = case["proof"]
+                weights = {int(i): Fraction(w) for i, w in proof["multipliers"]}
+                found = dual_result(rows, width, weights, "certificate-recheck")
+                assert found["gap"] == proof["gap"]
+                result["cases"].append(
+                    {
+                        "cohort_index": case["cohort_index"],
+                        "square43": case["square43"],
+                        "status": "verified-exclusion",
+                        "proof": found,
+                    }
+                )
+        else:
+            for gi, cohort in sorted(
+                enumerate(cohorts), key=lambda pair: (len(pair[1]["squares"]), pair[0])
+            ):
+                for snapped in (False, True):
+                    active = {
+                        "cohort_index": gi,
+                        "fixed_ids": cohort["fixed"],
+                        "square43": "snapped" if snapped else "kept",
+                        "tile_count": len(cohort["squares"]),
+                    }
+                    begin = time.monotonic()
+                    rows, width, stats = geometry(original, cohort, snap43=snapped)
+                    active.update(
+                        {"free_coordinates": width, "rows": len(rows), "geometry": stats}
+                    )
+                    proof = propagate(rows, width)
+                    if proof is None and width <= 20:
+                        try:
+                            cert = prove_infeasible(
+                                make_lp(rows, width), rational_sign, pivot_budget=80
+                            )
+                            proof = dual_result(
+                                rows,
+                                width,
+                                {i: w for i, w in enumerate(cert.multipliers) if w},
+                                "maintained-exact-simplex",
+                            )
+                            proof["pivots"] = cert.pivots
+                        except ExactLPError as exc:
+                            active["lp_refusal"] = {"kind": exc.kind, "detail": str(exc)}
+                    active["status"] = "verified-exclusion" if proof else "pending"
+                    if proof:
+                        active["proof"] = proof
+                    active["elapsed_seconds"] = round(time.monotonic() - begin, 6)
+                    result["cases"].append(active)
+                    sys.stdout.write(
+                        json.dumps({k: v for k, v in active.items() if k != "proof"}) + "\n"
+                    )
+                    sys.stdout.flush()
+                    save(args.output, result)
+                    active = None
+    except StopSliceError as exc:
+        result["stopped"] = {"reason": str(exc), "active_case": active}
+    finally:
+        result["elapsed_seconds"] = round(time.monotonic() - started, 6)
+        result["verified_exclusions"] = sum(
+            case["status"] == "verified-exclusion" for case in result["cases"]
+        )
+        result["completed_cases"] = len(result["cases"])
+        result["pending_of_34"] = 34 - result["verified_exclusions"]
+        save(args.output, result)
+    sys.stdout.write(json.dumps({k: v for k, v in result.items() if k != "cases"}) + "\n")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,76 @@
+"""Check emitted leaf duals on original mandatory rows; no simplex or search."""
+from __future__ import annotations
+import argparse
+from fractions import Fraction as Q
+import gzip
+import hashlib
+import json
+import os
+from pathlib import Path
+import signal
+import time
+from programs.exact_local import geometry, load_inputs
+
+ROOT = Path(__file__).resolve().parents[1]
+
+def verify(rows, width, weights):
+    assert weights and all(0 <= i < len(rows) and w >= 0 for i,w in weights.items())
+    coefficients = [Q(0)] * width
+    rhs = Q(0)
+    for i,w in weights.items():
+        row=rows[i]
+        rhs += w*row['b']
+        for k,a in enumerate(row['a']):coefficients[k]+=w*a
+    assert all(v==0 for v in coefficients) and rhs<0
+    return -rhs
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--repo',type=Path,required=True);parser.add_argument('--followup',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
+    args=parser.parse_args();assert __debug__;signal.alarm(30);started=time.monotonic()
+    journal=Path(os.environ['N305_GUARD_JOURNAL'])
+    while True:
+        records=[json.loads(line) for line in journal.read_text().splitlines()] if journal.exists() else []
+        samples=[r for r in records if r.get('record')=='sample']
+        if samples:
+            assert samples[-1]['host']['pressure']<2 and samples[-1]['tree']['cost_gb']<=.30
+            break
+        assert time.monotonic()-started<7
+        time.sleep(.1)
+    source=ROOT/'receipts/completion-20261121.json';raw=source.read_bytes();completed=json.loads(raw)
+    original,cohorts=load_inputs(args.repo,args.followup)
+    output={'format':'n305-mandatory-row-duals-v1','source_receipt_sha256':hashlib.sha256(raw).hexdigest(),'new_solver_runs':0,'cohorts':[],'controls':{}}
+    for entry in completed['cohorts']:
+        gi=entry['cohort_index'];assert gi in (12,15) and 43 not in cohorts[gi]['squares']
+        frozen=gzip.decompress(Path(entry['row_artifact']).read_bytes());assert hashlib.sha256(frozen).hexdigest()==entry['row_payload_sha256']
+        data=json.loads(frozen)
+        base=[{'label':r['label'],'a':list(map(Q,r['a'])),'b':Q(r['b'])} for r in data['base_rows']]
+        proof=entry['actual_leaf_proof'];weights={i:Q(w) for i,w in proof['multipliers']};assert len(weights)==len(proof['multipliers'])
+        row={'cohort_index':gi,'fixed_ids':cohorts[gi]['fixed'],'status':'verified-exclusion','square43_variants':['kept','snapped'],'proof':proof,'original_mandatory_rows':len(base),'branch_rows_used':0,'source_row_payload_sha256':entry['row_payload_sha256'],'sparse_support':[]}
+        for snapped in (False,True):
+            rebuilt,width,stats=geometry(original,cohorts[gi],snap43=snapped,include_clauses=True)
+            assert rebuilt==base and width==data['width'] and not stats['empty_clauses']
+            gap=verify(rebuilt,width,weights);assert gap==Q(proof['gap'])
+        for i,w in weights.items():
+            r=base[i]
+            row['sparse_support'].append({'index':i,'label':r['label'],'multiplier':str(w),'coefficients':[[k,str(a)] for k,a in enumerate(r['a']) if a],'rhs':str(r['b'])})
+        try:verify(base,width,{next(iter(weights)):Q(-1)})
+        except AssertionError:output['controls']['negative_multiplier']='rejected'
+        else:raise AssertionError('negative multiplier accepted')
+        try:verify(base,width,{})
+        except AssertionError:output['controls']['empty_certificate']='rejected'
+        else:raise AssertionError('empty certificate accepted')
+        output['cohorts'].append(row)
+    prior_path=ROOT/'receipts/probe.json';branch_path=ROOT/'receipts/branch-resumed-20261121.json'
+    prior=json.loads(prior_path.read_bytes());branch=json.loads(branch_path.read_bytes())
+    accepted={(r['cohort_index'],r['square43']) for r in prior['cases'] if r['status']=='verified-exclusion'}
+    accepted|={(r['cohort_index'],mode) for r in branch['cohorts'] if r['status']=='verified-exclusion' for mode in ('kept','snapped')}
+    assert len(accepted)==30
+    accepted|={(r['cohort_index'],mode) for r in output['cohorts'] for mode in ('kept','snapped')}
+    assert accepted=={(i,mode) for i in range(17) for mode in ('kept','snapped')}
+    output.update({'prior_certificate_receipt_sha256':hashlib.sha256(prior_path.read_bytes()).hexdigest(),'branch_receipt_sha256':hashlib.sha256(branch_path.read_bytes()).hexdigest(),'verified_exclusions':len(accepted),'pending_of_34':0,'scope':'Only the submitted bounded-motion conflict models: the 36 near-axis directions snapped, square 43 kept or snapped, other directions fixed, each free center offset bounded by 1/50000000000 per coordinate, designated fixed centers unchanged. No claim about unrestricted motion or arbitrary rotations. Prior 30 proofs inherited from separately checked receipts; these 4 rechecked here.','elapsed_seconds':round(time.monotonic()-started,6)})
+    args.output.write_text(json.dumps(output,indent=2)+'\n');signal.alarm(0)
+    print(json.dumps({k:v for k,v in output.items() if k!='cohorts'}))
+
+if __name__=='__main__':main()

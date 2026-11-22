@@ -1,0 +1,12 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records the exact bounded-motion result at 305 and six posted intake replies.
+  Two candidate methods-survey renders and one render with the main
+  8ba0e2a4a4ff request ledger restored matched all 43 files byte for byte.
+  The methods survey remains v0.2.7.
