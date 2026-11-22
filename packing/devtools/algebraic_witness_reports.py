@@ -539,6 +539,10 @@ def derive_forms(packet: Path, *, check: bool = False) -> list[retained_data.Row
 
 def read_fact(packet: Path, declaration: Declaration, row: Witness) -> dict[str, Any]:
     """Admit one algebraic fact: a valid witness that rebuilds itself from its geometry."""
+    from devtools import n179_algebraic_report as n179  # noqa: PLC0415
+
+    if n179.accepts(packet):
+        return n179.read_witness(packet, row["n"])
     path = packet / row["fact"]
     reports.ensure_private(retained_data.compressed_path(path))
     try:
@@ -556,6 +560,10 @@ def read_fact(packet: Path, declaration: Declaration, row: Witness) -> dict[str,
 
 def read_facts(packet: Path, numbers: set[int] | None = None) -> dict[int, dict[str, Any]]:
     """Admit the declared witnesses, or those of ``numbers``, after the custody check."""
+    from devtools import n179_algebraic_report as n179  # noqa: PLC0415
+
+    if n179.accepts(packet):
+        return n179.read_facts(packet, numbers)
     reports.ensure_private(packet)
     declaration = load_declaration(packet)
     reports.acquisition(packet)

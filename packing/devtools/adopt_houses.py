@@ -280,6 +280,50 @@ REVIEW_1031 = (
 
 #: Each adopted result, as its register entry and its review describe it.
 RESULTS: dict[str, Prose] = {
+    "T-338": Prose(
+        author="Joost de Winter",
+        reported=(
+            "in his [21 November follow-up to issue 997]"
+            "(https://github.com/jlevy/squares/issues/997#issuecomment-7058975230)"
+        ),
+        producer_route=False,
+        ai="The author names GPT6.2 Astra as his AI tool for this certificate.",
+        routes=(
+            "Both maintained routes read the same exact rational certificate and share "
+            "rational arithmetic and separating-axis methods. The independent review "
+            "derived the corners and comparisons with separate source-only code; it read "
+            "no producer program or maintained geometry implementation before freezing."
+        ),
+        lineage=(
+            "Credit remains jazivxt, improved and refined by Joost de Winter. The new "
+            "side is about 2.6981580737e-11 below T-304 and 8.7942390308e-12 below T-304 "
+            "contracted to its first contact, so option D admits the refinement against "
+            "that registered predecessor. Nearest centres pair one to one under the "
+            "identity: the largest move is 0.0304373 and the largest turn 0.09344 degrees; "
+            "all 40 tilted squares pair with the same tilt sign. The final contraction "
+            "of the enclosed input is only about 8.994039e-73. "
+            "The [16 November project run of Evan Daniel’s regularizer]"
+            "(../cases/regularized_drawings/think-32cl-2026-11-16/README.md) "
+            "already recorded a "
+            "local-side display that matches this candidate at 65 significant digits. "
+            "The candidate is about 9.99404e-20 below that run’s rational envelope. "
+            "The [supporting scalar audit]"
+            "(../resources/web/de-winter-997-followup-2026-11-21/receipts/"
+            "held-row3-comparison.json) "
+            "does not establish pose identity or strict order against the unrounded "
+            "local minimum: the solved coordinates and a certified root interval are "
+            "not retained. This is an S2 numerical refinement, without a first-discovery "
+            "claim for that limiting value."
+        ),
+        third_route=(
+            ", and the 21 November independently prompted review checked all 90 unit "
+            "squares, 1,440 vertex-wall inequalities and 4,005 pairs with 16,020 edge-normal "
+            "tests; all 13 controls declared beforehand returned their stated outcomes"
+        ),
+        diversity="by a Codex agent, sharing the producer’s OpenAI system family",
+        retained="the original exact centre/half-angle gzip and its reversible reading copy",
+        squares="a rational centre and the tangent of its signed counterclockwise half-angle",
+    ),
     "T-128": Prose(
         author="Francisco Couzo",
         reported="on [jlevy/squares#451](https://github.com/jlevy/squares/issues/451)",
@@ -3259,6 +3303,39 @@ RESULTS: dict[str, Prose] = {
         retained="the unmodified primary exact JSON and its original corner serialization",
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-339": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#959](https://github.com/jlevy/squares/issues/959"
+        "#issuecomment-7050119161)",
+        producer_route=False,
+        ai=(
+            "Joost de Winter disclosed OpenAI assistance with the algebraic reconstruction "
+            "and certificate. A separately prompted Codex agent wrote the independent "
+            "reader and arithmetic and froze them before reading project verifiers or prior "
+            "outputs. The review discloses the shared system family."
+        ),
+        lineage=(
+            "The source credits Doğa Özden’s construction after Ryan Xu’s 70-square packing "
+            "and Evan Daniel’s refinement. De Winter supplies the algebraic certificate. "
+            "The retained exact comparison gives S179 = L70 + 5 = L207 − 1 and puts the side "
+            "about 7.94e-14 below T-294 at first contact. The reported GeiserX starting file "
+            "at its stated hash remains missing. Historical identity and pose identity "
+            "with T-294 remain unresolved."
+        ),
+        third_route=False,
+        confirmation="independently re-implemented",
+        diversity="by a separate Codex agent, with disclosed OpenAI system-family overlap",
+        retained="the original mathematical attachment and its exact derived field fact",
+        field_squares="its centre and an orthonormal pair of unit edge vectors",
+        field_routes=(
+            "The maintained exact separating-axis verifier accepted the full packing "
+            "and refused both gross controls, with 15,931 pairs in each native job. The "
+            "separate exact checker reconstructed the field, verified all 716 wall "
+            "inequalities and all pair separations, and passed nine predeclared controls. "
+            "It uses the same separating-axis mathematics and independently written "
+            "reader and arithmetic code."
+        ),
+    ),
     "T-337": Prose(
         author="Joost de Winter",
         reported="on [jlevy/squares#1040](https://github.com/jlevy/squares/issues/1040)",
@@ -3926,8 +4003,8 @@ CREDITS: dict[int, Credit] = {
     90: Credit(
         (JAZIVXT,),
         (DE_WINTER,),
-        "the packing jazivxt found from shifted copies of a crop of Joost de Winter’s n = 157 "
-        "packing, as de Winter improved it by a local search",
+        "the packing jazivxt found from shifted copies of a crop of Joost de Winter’s "
+        "n = 157 packing, improved and refined by Joost de Winter",
     ),
     # Evan Daniel's exact form (T-193, of T-174 by its item) of PingYou Ltd's tighter
     # certificate of his own display regularization of Ryan Xu's packing (T-174, of T-146,
@@ -4137,17 +4214,12 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s exact re-solve of Daniil Ostashev’s issue-575 n = 176 "
         "packing, after PingYou Ltd’s",
     ),
-    # T-294 (adopted on 12 November 2026), Doğa Özden's issue 959: a further arrangement of
-    # his own T-291 packing (issue 954, adopted the day before), one to one with it by nearest
-    # centres, 3 squares beyond a tenth, from a band of the tilted squares of Ryan Xu's n = 70
-    # packing as Evan Daniel and PingYou Ltd improved it, whose two ends it keeps in place to
-    # 1e-9 (lane L107's measure_core; the review of issue 959's F8, F9).
+    # T-339 certifies Özden's arrangement algebraically. De Winter is the certificate author.
     179: Credit(
         (OZDEN,),
         (),
-        "Doğa Özden’s further arrangement of his own packing from a band of the tilted "
-        "squares of Ryan Xu’s n = 70 packing as Evan Daniel and PingYou Ltd improved it, "
-        "below his earlier packing",
+        "Joost de Winter’s algebraic certificate of Doğa Özden’s construction "
+        "after Ryan Xu and Evan Daniel",
     ),
     # T-288 (adopted on 11 November 2026), Doğa Özden's issue 944: a new arrangement relative
     # to T-174's packing, 49 squares beyond a tenth, found by transplant search from an L added

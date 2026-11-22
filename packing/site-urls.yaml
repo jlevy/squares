@@ -6003,7 +6003,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-12'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/18.html
   canonical: cases/18.html
@@ -7811,7 +7811,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-16'
+  lastmod: '2026-11-21'
   status: live
 - path: cases/91.html
   canonical: cases/91.html
@@ -26545,6 +26545,72 @@ urls:
     - packing/resources/web/geiserx-n259-1040-2026-11-19/receipts/contraction-geiserx-canonical-vs-refined.json
     - packing/resources/web/geiserx-1040-n259-review-2026-11-21/results.json
     - docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md
+- path: result/t-338.html
+  canonical: result/t-338.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-21'
+  lastmod: '2026-11-21'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 90
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter issue 997 follow-up 2026-11-21]'
+      published: '2026-11-21'
+    builds_on: null
+    evidence:
+    - E-de-winter-997-followup-certificate-report
+    - E-de-winter-997-followup-exact-feasibility
+    - E-de-winter-997-followup-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-997-followup-2026-11-21/README.md
+    - packing/resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz
+    - packing/resources/web/de-winter-997-followup-2026-11-21/source/90/input.json.gz
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/contraction-T304-vs-followup.json
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/identity-vs-T304.json
+    - packing/resources/web/de-winter-997-followup-2026-11-21/receipts/held-row3-comparison.json
+    - packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/report.json.gz
+    - packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/receipt.json
+    - packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/receipt-frozen.json
+    - docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md
+- path: result/t-339.html
+  canonical: result/t-339.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-21'
+  lastmod: '2026-11-21'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 179
+    established: null
+    attribution:
+      source_keys:
+      - '[de Winter n179 algebraic certificate 2026-11-20]'
+      published: '2026-11-20'
+    builds_on: null
+    evidence:
+    - E-de-winter-959-algebraic-report
+    - E-de-winter-959-algebraic-feasibility
+    - E-de-winter-959-independent-feasibility
+    artifacts:
+    - packing/resources/web/de-winter-959-followup-2026-11-20/README.md
+    - packing/resources/web/de-winter-959-followup-2026-11-20/acquisition/sources.json
+    - packing/resources/web/de-winter-959-followup-2026-11-20/source/n179.minpoly.json.gz
+    - packing/resources/web/de-winter-959-followup-2026-11-20/receipts/side-comparison.json
+    - packing/resources/web/de-winter-959-followup-2026-11-20/receipts/algebraic-route1-n179.json.xz
+    - packing/resources/web/de-winter-959-followup-2026-11-20/review/n179-independent-2026-11-21/README.md
+    - docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md
 - path: results.html
   canonical: results.html
   kind: page

@@ -14036,6 +14036,54 @@ sources:
   notes: T-337 records the distinct 259-square construction of Sergio Fernández Rubio (GeiserX), with
     Joost de Winter’s rational refinement. Both maintained routes and the independent review checked
     all pairs.
+- id: de-winter-997-followup-2026-11-21
+  title: De Winter's rational follow-up at 90 after jazivxt
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/997#issuecomment-7058975230
+  local: resources/web/de-winter-997-followup-2026-11-21/
+  source_key: '[de Winter issue 997 follow-up 2026-11-21]'
+  scope:
+    n_values:
+    - 90
+  reviewed: '2026-11-21'
+  source_date: '2026-11-21'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-997-followup-2026-11-21/acquisition/sources.json
+  evidence:
+  - E-de-winter-997-followup-certificate-report
+  - E-de-winter-997-followup-exact-feasibility
+  - E-de-winter-997-followup-review-exact-feasibility
+  notes: T-338 records the S2 rational refinement, with finite feasibility at V3/C3. Credit remains
+    jazivxt, improved and refined by Joost de Winter. The supporting row 3 audit establishes a smaller
+    rational envelope than the 16 November project run, without claiming a new limiting value or coordinate
+    identity. The selected override moves only with house adoption.
+- id: de-winter-959-followup-2026-11-20
+  title: De Winter's n179 algebraic attachment to issue 959
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/959#issuecomment-7050119161
+  local: resources/web/de-winter-959-followup-2026-11-20/
+  source_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+  scope:
+    n_values:
+    - 179
+  reviewed: '2026-11-21'
+  source_date: '2026-11-20'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-959-followup-2026-11-20/acquisition/algebraic.json
+  evidence:
+  - E-de-winter-959-algebraic-report
+  - E-de-winter-959-algebraic-feasibility
+  - E-de-winter-959-independent-feasibility
+  notes: T-339 records finite feasibility at S179=L70+5=L207-1, below T-294 even after contraction
+    to first contact. Original mathematical attachment bytes, native full-n179 jobs and the accepted
+    independent review are retained. The reported GeiserX starting file remains unresolved. This release
+    is the author's issue attachment, not a reconstructed upstream repository snapshot.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -14079,11 +14127,11 @@ selected_overrides:
   reason: The complete rational precision refinement is strictly smaller than both previous exact
     upper lanes.
 - n: 90
-  source_id: de-winter-s90-upper-bound-2026-11-15
-  value: '9.9940387666098522'
-  evidence: E-de-winter-997-certificate-report
+  source_id: de-winter-997-followup-2026-11-21
+  value: '9.9940387665828706'
+  evidence: E-de-winter-997-followup-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-16 (T-304).
+    a replay here and an accepted review, adopted on 2026-11-21 (T-338).
 - n: 102
   source_id: evand-exact-cur-2026-10-16
   value: '10.60582869643157837'
@@ -14241,11 +14289,11 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 179
-  source_id: ozden-s179-issue959-2026-11-11
-  value: '13.8809603715582251'
-  evidence: E-ozden-959-certificate-report
+  source_id: de-winter-959-followup-2026-11-20
+  value: '13.8809603715555796'
+  evidence: E-de-winter-959-algebraic-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-12 (T-294).
+    a replay here and an accepted review, adopted on 2026-11-21 (T-339).
 - n: 180
   source_id: mishapolk-issue1009-2026-11-16
   value: '13.9156185027873162'
@@ -15073,7 +15121,7 @@ superseded_reports:
 - n: 179
   source_id: evand-square-packing-2026-10-05
   value: '13.895341069976490731724097384352'
-  superseded_by: ozden-s179-issue959-2026-11-11
+  superseded_by: de-winter-959-followup-2026-11-20
   reason: Certifies the catalogue's packing at a side 7.3e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -15806,7 +15854,7 @@ superseded_reports:
 - n: 179
   source_id: squish-update-2026-10-07
   value: '13.8913125657406980'
-  superseded_by: ozden-s179-issue959-2026-11-11
+  superseded_by: de-winter-959-followup-2026-11-20
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 180
@@ -15923,7 +15971,7 @@ superseded_reports:
 - n: 179
   source_id: ry-xu-new-packings-2026-10-08
   value: '13.8939549425138940'
-  superseded_by: ozden-s179-issue959-2026-11-11
+  superseded_by: de-winter-959-followup-2026-11-20
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 236
   source_id: ry-xu-new-packings-2026-10-08
@@ -15995,7 +16043,7 @@ superseded_reports:
 - n: 179
   source_id: squish-second-update-2026-10-07
   value: '13.8837954905121866'
-  superseded_by: ozden-s179-issue959-2026-11-11
+  superseded_by: de-winter-959-followup-2026-11-20
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 208
   source_id: squish-update-2026-10-07
@@ -16634,9 +16682,9 @@ superseded_reports:
 - n: 179
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '13.8837954905108985'
-  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-294's exact
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-339's exact
     side is smaller.
-  superseded_by: ozden-s179-issue959-2026-11-11
+  superseded_by: de-winter-959-followup-2026-11-20
 - n: 180
   source_id: couzo-451-exact-refinements
   value: '13.9169935224778325'
@@ -17133,14 +17181,14 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '13.88379549051089845'
   reason: The house from 2026-10-17 until 2026-11-11; its certificate stays retained and verified,
-    and T-294's exact side is smaller.
-  superseded_by: ozden-s179-issue959-2026-11-11
+    and T-339's exact side is smaller.
+  superseded_by: de-winter-959-followup-2026-11-20
 - n: 179
   source_id: ozden-s179-upper-bound-2026-11-11
   value: '13.8813671601098758'
   reason: The house from 2026-11-11 until 2026-11-12; its certificate stays retained and verified,
-    and T-294's exact side is smaller.
-  superseded_by: ozden-s179-issue959-2026-11-11
+    and T-339's exact side is smaller.
+  superseded_by: de-winter-959-followup-2026-11-20
 - n: 132
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.9856801988458088115'
@@ -17187,8 +17235,8 @@ superseded_reports:
   source_id: jazivxt-s90-upper-bound-2026-11-15
   value: '9.9982771669260000'
   reason: The house from 2026-11-15 until 2026-11-16; its certificate stays retained and verified,
-    and T-304's exact side is smaller.
-  superseded_by: de-winter-s90-upper-bound-2026-11-15
+    and T-338's exact side is smaller.
+  superseded_by: de-winter-997-followup-2026-11-21
 - n: 127
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.81087878758917984'
@@ -17345,6 +17393,18 @@ superseded_reports:
   reason: The house from 2026-10-23 until 2026-11-21; its certificate stays retained and verified,
     and T-337's exact side is smaller.
   superseded_by: geiserx-n259-1040-2026-11-19
+- n: 90
+  source_id: de-winter-s90-upper-bound-2026-11-15
+  value: '9.9940387666098522'
+  reason: The house from 2026-11-16 until 2026-11-21; its certificate stays retained and verified,
+    and T-338's exact side is smaller.
+  superseded_by: de-winter-997-followup-2026-11-21
+- n: 179
+  source_id: ozden-s179-issue959-2026-11-11
+  value: '13.8809603715582251'
+  reason: The house from 2026-11-12 until 2026-11-21; its certificate stays retained and verified,
+    and T-339's exact side is smaller.
+  superseded_by: de-winter-959-followup-2026-11-20
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

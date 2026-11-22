@@ -448,6 +448,7 @@
     "packing/tests/test_n11_threshold_certificate.py": 3.352,
     "packing/tests/test_n11_threshold_figures.py": 4.413,
     "packing/tests/test_n12_replay_independent.py": 0.64,
+    "packing/tests/test_n179_algebraic_report.py": 2.378,
     "packing/tests/test_n17_bb_native.py": 0.002,
     "packing/tests/test_n17_bb_native_edges.py": 0.003,
     "packing/tests/test_n17_bb_node_lifetime.py": 0.006,
@@ -483,6 +484,7 @@
     "packing/tests/test_n54_source_contract_independent.py": 4.024,
     "packing/tests/test_n5_local_rigidity.py": 6.531,
     "packing/tests/test_n5_rigidity.py": 6.141,
+    "packing/tests/test_n90_attachment_reader.py": 0.239,
     "packing/tests/test_nagamochi_bounds.py": 9.96,
     "packing/tests/test_nagamochi_lemma1_counterexample.py": 1.67,
     "packing/tests/test_native_parent_core_receipt.py": 9.525,
@@ -1164,6 +1166,21 @@
           "report": "packing/devtools/suite-file-cost-admissions/lower-receipts-2026-11-21.json",
           "provenance": {},
           "tests": 16
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_n179_algebraic_report.py",
+        "packing/tests/test_n90_attachment_reader.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/n90-n179-readers-2026-11-22.json",
+          "provenance": {},
+          "tests": 23
         }
       ]
     }

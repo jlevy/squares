@@ -74,7 +74,7 @@ from typing import Any, NamedTuple, cast
 from devtools import algebraic_witness_reports as fields
 from devtools import couzo_678_replay as couzo_678
 from devtools import evand_arrangement_reports as kernel
-from devtools import exact_sides, retained_data
+from devtools import exact_sides, n179_algebraic_report, retained_data
 from devtools import squish_second_update_house_links as house
 from devtools import upper_bound_reports as reports
 from devtools.git_storage import stored_size
@@ -447,6 +447,20 @@ def _field_jobs(packet: Path, n: int, witness: Mapping[str, Any]) -> dict[str, A
 
 
 def _field_origin(packet: Path, n: int) -> Origin:
+    if n179_algebraic_report.accepts(packet):
+        witness = n179_algebraic_report.read_witness(packet, n)
+        metadata = witness["source"]
+        return Origin(
+            key=n179_algebraic_report.SOURCE_KEY,
+            path=_field_stored(packet, n),
+            url=metadata["url"],
+            revision=metadata["revision"],
+            retrieved=metadata["retrieved"],
+            author="Doğa Özden; algebraic certificate by Joost de Winter",
+            licence_status=NO_LICENCE,
+            raw_asset_retained=False,
+            retention_policy=DERIVED_RETENTION,
+        )
     record = _record(packet)
     source = record["sources"][0]
     declaration = _fields(packet)
@@ -470,6 +484,10 @@ def _field_inputs(packet: Path, numbers: Sequence[int]) -> tuple[Path, ...]:
     and each receipt."""
     if not numbers:
         return ()
+    if n179_algebraic_report.accepts(packet):
+        for n in numbers:
+            n179_algebraic_report.require_count(n)
+        return n179_algebraic_report.inputs(packet)
     paths = [packet / fields.DECLARATION, packet / reports.acquire_source.RECORD]
     if any("form" in _field_row(packet, n) for n in numbers):
         paths.append(REPO / _record(packet)["sources"][0]["subtree_manifest"])
@@ -705,6 +723,143 @@ def geiserx_1040_source(result: str) -> Source:
     )
 
 
+def de_winter_997_followup_source(result: str) -> Source:
+    """Read issue 997's original n90 attachment through its reversible encoding.
+
+    The acquisition record binds the exact gzip bytes. Renaming ``side`` to ``s_exact``
+    and moving the other metadata into ``provenance`` gives the maintained reader's
+    encoding without changing any scalar or square order. Native jobs provide the
+    geometric decision; this custody reader runs no verification geometry.
+    """
+    packet = reports.packet_path("de-winter-997-followup-2026-11-21")
+    acquisition = packet / "acquisition/sources.json"
+    receipt = packet / "receipts/exact-certification.json.xz"
+    key = "[de Winter issue 997 follow-up 2026-11-21]"
+    attachment_url = "https://github.com/user-attachments/files/35205206/n90-rational.zip"
+    comment = "https://github.com/jlevy/squares/issues/997#issuecomment-7058975230"
+    witness_prefix = "W-de-winter-997-followup-n"
+    claim_limitations = (
+        "Finite rational feasibility of issue 997 follow-up at the submitted side."
+    )
+
+    def require_count(n: int) -> None:
+        _require(type(n) is int and n == 90, f"n={n}: issue 997 follow-up houses only 90")
+
+    def path(n: int) -> Path:
+        require_count(n)
+        return packet / "source/90/candidate.json.gz"
+
+    def receipt_path(n: int) -> Path:
+        require_count(n)
+        return receipt
+
+    def record() -> Mapping[str, Any]:
+        reports.ensure_private(acquisition)
+        value = json.loads(acquisition.read_text(encoding="utf-8"))
+        _require(
+            type(value) is dict
+            and value.get("format") == "issue-attachment-sources-v1"
+            and value.get("issue") == "https://github.com/jlevy/squares/issues/997"
+            and value.get("comment") == comment
+            and type(members := value.get("members")) is list
+            and all(type(row) is dict for row in members)
+            and type(attachment := value.get("attachment")) is dict
+            and attachment.get("url") == attachment_url
+            and type(value.get("retrieved_utc")) is str,
+            f"{packet.name}: not issue 997 follow-up's attachment acquisition record",
+        )
+        return value
+
+    def member(n: int) -> bytes:
+        stored = path(n)
+        reports.ensure_private(stored)
+        rows = [row for row in record()["members"] if row.get("path") == "90/candidate.json.gz"]
+        _require(len(rows) == 1, f"n={n}: attachment candidate member is not unique")
+        row = rows[0]
+        with stored.open("rb") as stream:
+            raw = stream.read(reports.MAX_SOURCE_BYTES + 1)
+        _require(
+            len(raw) <= reports.MAX_SOURCE_BYTES
+            and row.get("retained_at") == stored.relative_to(packet).as_posix()
+            and type(row.get("bytes")) is int
+            and len(raw) == row["bytes"]
+            and hashlib.sha256(raw).hexdigest() == row.get("sha256"),
+            f"n={n}: attachment candidate differs from its pinned bytes",
+        )
+        return raw
+
+    def certificate(n: int) -> legacy.Certificate:
+        raw = retained_data.gunzip_bytes(
+            member(n), limit=reports.MAX_SOURCE_BYTES, name="issue 997 candidate.json.gz"
+        )
+        original = json.loads(raw, object_pairs_hook=kernel.unique_object)
+        _require(
+            type(original) is dict
+            and type(original.get("n")) is int
+            and original["n"] == n
+            and {"side", "squares"} <= original.keys(),
+            f"n={n}: not issue 997 follow-up's original JSON encoding",
+        )
+        metadata = {
+            name: value
+            for name, value in original.items()
+            if name not in {"n", "side", "squares"}
+        }
+        readable = {
+            "n": original["n"],
+            "s_exact": original["side"],
+            "squares": original["squares"],
+            "provenance": metadata,
+        }
+        exact = reports.parse_certificate(
+            json.dumps(readable).encode("utf-8"), n, "pingyou-json"
+        )
+        reports.admit(exact, "9.994038766583")
+        return exact
+
+    def jobs(n: int, exact: legacy.Certificate) -> Mapping[str, Any]:
+        require_count(n)
+        _require(n == exact.n, f"n={n}: the certificate is another count's")
+        return _validated_jobs(
+            receipt_cases(receipt, "issue-997-followup-exact-replay-v1"),
+            exact,
+            witness_prefix=witness_prefix,
+            claim_limitations=claim_limitations,
+        )
+
+    def origin(n: int) -> Origin:
+        return Origin(
+            key=key,
+            path=path(n),
+            url=f"{attachment_url}#90/candidate.json.gz",
+            revision="GitHub issue attachment 35205206",
+            retrieved=str(record()["retrieved_utc"])[:10],
+            author="jazivxt, improved and refined by Joost de Winter",
+            licence_status=NO_LICENCE,
+            raw_asset_retained=True,
+            retention_policy=RAW_RETENTION,
+        )
+
+    def inputs(numbers: Sequence[int]) -> tuple[Path, ...]:
+        for n in numbers:
+            require_count(n)
+        return acquisition, path(90), receipt
+
+    return Source(
+        result=result,
+        key=key,
+        packet=packet,
+        certificate=certificate,
+        jobs=jobs,
+        origin=origin,
+        inputs=inputs,
+        witness_prefix=witness_prefix,
+        claim_limitations=claim_limitations,
+        stored=path,
+        receipt=receipt_path,
+    )
+
+
 #: The counts each result houses by its algebraic witness, whose side is irrational: PR
 #: #574's three algebraic certificates the house rule adopts (T-174), and the exact forms of
 #: issue 639 whose facts its packet derives (T-193). Issue 639's other staged counts wait:
@@ -822,7 +977,7 @@ def _sources() -> dict[str, Source]:
         # Lane L107 (think-89i7) moved 179 on to the same author's issue 959 (T-294) on 12
         # November 2026, a further arrangement of T-291's packing. 179 was T-291's only count,
         # so T-291 is no source here now.
-        packet_source("T-294", "ozden-s179-issue959-2026-11-11"),
+        # T-339 replaced T-294 at its only house in the 21 November pass.
         # Lane L110 (think-my76) moved 237 from T-190 to the same author's issue 960 (T-295)
         # on 12 November 2026, a new arrangement relative to T-190's packing, found by a
         # band-design search from two copies of the tilted squares of the registry's 70. 237
@@ -863,7 +1018,8 @@ def _sources() -> dict[str, Source]:
         # of 16 November 2026, which replaced his issue 996's certificate: T-303's packing as
         # his local search improved it, jazivxt its finder. 90 was T-303's only count, so
         # T-303 is no source here now.
-        packet_source("T-304", "de-winter-s90-upper-bound-2026-11-15"),
+        # The 2026-11-21 follow-up replaces T-304 at its only current house.
+        de_winter_997_followup_source("T-338"),
         # Lane L187 (think-0y9m) moved 127 and 305 from T-174, 204 from T-268, 232 from T-275
         # and 264 from T-186 to JoeGun's issue 1001 in the pass of 16 November 2026: Tomáš
         # Kodaj's public Kaggle packings as JoeGun improved them, each a new arrangement
@@ -910,6 +1066,8 @@ def _sources() -> dict[str, Source]:
         packet_source("T-336", "de-winter-n305-2026-11-20"),
         geiserx_1040_source("T-337"),
     ]
+    if result := n179_algebraic_report.registered_result():
+        sources.append(field_source(result, n179_algebraic_report.PACKET_NAME, (179,)))
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
     # sources are keyed by result, not by source key.
@@ -1052,7 +1210,7 @@ ADOPTED: dict[int, str] = {
     70: "T-174",
     84: "T-174",
     86: "T-174",
-    90: "T-304",
+    90: "T-338",
     102: "T-193",
     103: "T-174",
     105: "T-229",
@@ -1076,7 +1234,7 @@ ADOPTED: dict[int, str] = {
     172: "T-286",
     175: "T-267",
     176: "T-186",
-    179: "T-294",
+    179: "T-339",
     180: "T-316",
     181: "T-174",
     182: "T-243",
@@ -1373,7 +1531,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-16": frozenset({90, 127, 204, 232, 264, 305}),
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
     "2026-11-20": frozenset({127, 268, 270, 299}),
-    "2026-11-21": frozenset({109, 172, 199, 228, 259, 305}),
+    "2026-11-21": frozenset({90, 109, 172, 179, 199, 228, 259, 305}),
 }
 
 
@@ -1553,6 +1711,8 @@ def writable_source(result: str, n: int, key: str, *, algebraic: bool) -> Source
     found = sources().get(result)
     if found is not None:
         return found if not algebraic or n in found.fields else None
+    if key == "[de Winter issue 997 follow-up 2026-11-21]" and not algebraic and n == 90:
+        return de_winter_997_followup_source(result)
     packet = reports.import_packet(key)
     if algebraic or packet is None:
         return None

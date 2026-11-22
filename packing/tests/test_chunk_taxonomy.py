@@ -139,7 +139,7 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
                 (88, 16, 2),
                 (88, 25, 2),
                 (90, 11, 2),
-                (90, 23, 2),
+                (90, 18, 2),
             }, item
         else:
             assert item["walls_touched"] == 2, item

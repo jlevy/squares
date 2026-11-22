@@ -482,6 +482,10 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         # Lane L181 took 90, the only house of jazivxt's issue-989 certificate (T-303), to
         # Joost de Winter's issue-997 certificate (T-304) in the pass of 16 November 2026.
         "T-303",
+        # T-338 replaces T-304 at its only count, 90, on 2026-11-21.
+        "T-304",
+        # T-339 replaces T-294 at its only count, 179.
+        "T-294",
         # Lane L187 took 204 and 232, the only houses of Evan Daniel's issue-914 certificate
         # there (T-268) and of Doğa Özden's issue-927 certificate (T-275), to JoeGun's
         # issue-1001 certificates (T-306, T-307) in the same pass.

@@ -1,0 +1,207 @@
+"""Bounded read-only comparison of n90 follow-up with the retained 16 November row 3."""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+from datetime import UTC, datetime
+from decimal import Decimal, localcontext
+from fractions import Fraction
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parent
+REPO = Path("/Users/levy/wrk/github/squares")
+RUN = (
+    REPO
+    / "packing/cases/regularized_drawings/think-32cl-2026-11-16"
+    / "adopt-2026-11-16-n90-evand"
+)
+CANDIDATE = Path(
+    "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/evidence/source/90/candidate.json.gz"
+)
+CONTRACTION = (
+    REPO
+    / "packing/resources/web/de-winter-s90-upper-bound-2026-11-15"
+    / "measure/contraction-n090-own.json"
+)
+
+
+def identity(path: Path) -> dict[str, Any]:
+    data = path.read_bytes()
+    return {
+        "path": str(path),
+        "bytes": len(data),
+        "sha256": hashlib.sha256(data).hexdigest(),
+    }
+
+
+def record(value: Fraction) -> dict[str, str]:
+    with localcontext() as context:
+        context.prec = 110
+        display = str(Decimal(value.numerator) / Decimal(value.denominator))
+    return {"exact": str(value), "decimal_display_only": display}
+
+
+def enclosure(value: Fraction, places: int = 100) -> tuple[Fraction, Fraction]:
+    scale = 10**places
+    floor = (value * scale).__floor__()
+    return Fraction(floor, scale), Fraction(floor + 1, scale)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--wait-for", type=Path)
+    args = parser.parse_args()
+    if args.wait_for:
+        _ = (ROOT / "worker-ready.json").write_text(
+            json.dumps({"pid": os.getpid(), "utc": datetime.now(UTC).isoformat()}) + "\n"
+        )
+        deadline = time.monotonic() + 60
+        while not args.wait_for.exists():
+            if time.monotonic() > deadline:
+                raise TimeoutError("Passive observer did not release comparison worker.")
+            time.sleep(0.05)
+
+    report_path = RUN / "n-090/report.json.gz"
+    receipt_path = RUN / "receipt.json"
+    raw_report = gzip.decompress(report_path.read_bytes())
+    report = json.loads(raw_report)
+    receipt = json.loads(receipt_path.read_text())
+    candidate = json.loads(gzip.decompress(CANDIDATE.read_bytes()))
+    contraction = json.loads(CONTRACTION.read_text())
+    assert identity(CANDIDATE)["sha256"] == (
+        "3a8e8913d0b87ac0b68c3fc4ac24d6ad042074c9696a2cdbfae3682b2e0b96c7"
+    )
+    assert report["n"] == candidate["n"] == contraction["n"] == 90
+    assert report["decisions"]["solved"]["row"] == 3
+
+    new_side = Fraction(candidate["side"])
+    row3_side = Fraction(report["outputs"]["solved"]["side_exact"])
+    assert row3_side == Fraction(report["solve"]["S_cert"])
+    old_side = Fraction(report["source"]["s_W_exact"])
+    old_contracted = Fraction(contraction["contracted_side"])
+    printed_text = report["solve"]["S_exact"]
+    printed = Fraction(printed_text)
+    places = len(printed_text.split(".")[1])
+    unit = Fraction(1, 10**places)
+    rounding_cell = (printed - unit / 2, printed + unit / 2)
+    nearest = Fraction((new_side / unit + Fraction(1, 2)).__floor__(), 10**places)
+    new_interval = enclosure(new_side)
+    row3_interval = enclosure(row3_side)
+
+    blob = report["outputs"]["solved"]["git_blob"]
+    git_probe = subprocess.run(
+        ["git", "cat-file", "-e", blob],
+        cwd=REPO,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+    named_paths = [
+        "view-solved.yaml",
+        "solve/witness.exact.txt",
+        "solve/witness.contacts.json",
+        "solve/witness.cert",
+        "regularize.cert",
+    ]
+    path_availability = [
+        {"path": str(RUN / "n-090" / name), "exists": (RUN / "n-090" / name).is_file()}
+        for name in named_paths
+    ]
+    result = {
+        "kind": "n90-row3-bounded-comparison",
+        "created_at_utc": datetime.now(UTC).isoformat(),
+        "program_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "interpreter": sys.executable,
+        "python_version": sys.version,
+        "inputs": [
+            identity(path) for path in (CANDIDATE, report_path, receipt_path, CONTRACTION)
+        ],
+        "row3_run_finished": receipt["finished"],
+        "row3_generator": receipt["generator"],
+        "row3_solve_status_as_reported": report["solve"]["status"],
+        "row3_solve_gate_as_reported": report["solve"]["gate"],
+        "row3_second_order_as_reported": report["solve"]["second_order"],
+        "candidate_side": record(new_side),
+        "row3_exact_rational_certificate_side": record(row3_side),
+        "row3_rational_minus_candidate": record(row3_side - new_side),
+        "strict_rational_order": {
+            "candidate_less_than_row3_rational": new_side < row3_side,
+            "candidate_100_place_enclosure": [str(x) for x in new_interval],
+            "row3_100_place_enclosure": [str(x) for x in row3_interval],
+            "candidate_upper_less_than_row3_lower": new_interval[1] < row3_interval[0],
+        },
+        "row3_S_exact_display": {
+            "text": printed_text,
+            "fractional_places": places,
+            "significant_digits": len(printed_text.replace(".", "")),
+            "literal_decimal_minus_candidate": record(printed - new_side),
+            "candidate_rounds_to_same_display": nearest == printed,
+            "hypothetical_correct_rounding_cell": [str(x) for x in rounding_cell],
+            "candidate_strictly_inside_that_cell": rounding_cell[0]
+            < new_side
+            < rounding_cell[1],
+            "cell_is_certified": False,
+            "interpretation": (
+                "The retained decimal is not an algebraic definition or an isolating interval. "
+                "Even assuming it is correctly rounded from an exact local side, the candidate "
+                "lies strictly inside its rounding cell, so no strict local-side order follows."
+            ),
+        },
+        "comparison_with_registered_predecessor": {
+            "predecessor_side": record(old_side),
+            "predecessor_contracted_side_from_retained_receipt": record(old_contracted),
+            "row3_rational_gain": record(old_side - row3_side),
+            "candidate_gain": record(old_side - new_side),
+            "row3_below_contracted_predecessor_by": record(old_contracted - row3_side),
+            "candidate_below_contracted_predecessor_by": record(old_contracted - new_side),
+            "both_below_contracted_predecessor": new_side < row3_side < old_contracted,
+            "row3_own_contraction_margin_determined": False,
+        },
+        "row3_coordinate_artifacts": {
+            "named_paths": path_availability,
+            "named_git_blob": blob,
+            "git_cat_file_exit": git_probe.returncode,
+            "git_cat_file_stderr": git_probe.stderr.strip(),
+            "original_run_output_digests": receipt["solve_outputs"]["90"],
+            "full_coordinate_comparison_performed": False,
+            "reason": (
+                "The retained row3 packet names the solved view and solve files but does not "
+                "contain them; the named solved Git blob is unavailable in the current object "
+                "database. The admitted row10 same-side view has the predecessor side and is "
+                "not a substitute for row3 coordinates."
+            ),
+        },
+        "credit_as_retained_in_prior_run": report["source"]["provenance"],
+        "scope": (
+            "Exact comparison of supplied scalar references and bounded artifact availability. "
+            "No KKT, algebraic-root, local-optimality, or geometric replay was performed here."
+        ),
+    }
+    assert new_side < row3_side < old_contracted
+    assert new_interval[1] < row3_interval[0]
+    assert nearest == printed
+    assert rounding_cell[0] < new_side < rounding_cell[1]
+    _ = (ROOT / "row3-report-decoded.json").write_bytes(raw_report)
+    _ = (ROOT / "comparison-row3.json").write_text(json.dumps(result, indent=2) + "\n")
+    summary = {
+        "strict_rational_order": new_side < row3_side,
+        "rational_difference": record(row3_side - new_side)["decimal_display_only"],
+        "same_display_significant_digits": len(printed_text.replace(".", "")),
+        "candidate_inside_hypothetical_rounding_cell": True,
+        "row3_coordinate_blob_available": git_probe.returncode == 0,
+        "result": str(ROOT / "comparison-row3.json"),
+    }
+    _ = sys.stdout.write(json.dumps(summary, indent=2) + "\n")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -33136,13 +33136,12 @@ issues:
         An algebraic certificate for 179 squares at exactly L70 + 5, where L70 is the
         side of the published 70-square construction.
       source: https://github.com/jlevy/squares/issues/959#issuecomment-7050119161
-      not_registered: >-
-        The retained algebraic certificate passed both maintained whole-packing checks and
-        a source-only exact review. Its side is about 7.94e-14 below T-294 at first contact.
-        Registration and house selection are queued. The donor coordinates at the
-        source's stated digest are still needed to confirm that lineage.
-      queued: true
-      bead: think-esp4
+      register:
+      - T-339
+      evidence:
+      - E-de-winter-959-algebraic-report
+      - E-de-winter-959-algebraic-feasibility
+      - E-de-winter-959-independent-feasibility
     beads:
     - think-89i7
     - think-ruu2
@@ -36052,14 +36051,12 @@ issues:
         90/candidate.json.gz of n90-rational.zip. The source reports a side about 2.69816e-11
         below T-304 and claims feasibility only.
       source: https://github.com/jlevy/squares/issues/997#issuecomment-7058975230
-      not_registered: >-
-        The retained rational certificate passed both maintained routes and a source-only
-        exact review. Its side is about 8.79e-12 below T-304 at first contact under Option D.
-        It is about 9.99e-20 below the earlier held solve's rational certificate side.
-        That solve's limiting side and poses cannot be recovered from its retained report.
-        Registration and house selection remain under think-zsei.
-      queued: true
-      bead: think-zsei
+      register:
+      - T-338
+      evidence:
+      - E-de-winter-997-followup-certificate-report
+      - E-de-winter-997-followup-exact-feasibility
+      - E-de-winter-997-followup-review-exact-feasibility
     beads:
     - think-32cl
     - think-uhav
@@ -38711,7 +38708,8 @@ issues:
     title: GeiserX's public 259-square packing is below the register (pointer)
     author: JoostdeWinter
     opened: '2026-11-19'
-    state: open
+    state: closed
+    closed: '2026-11-22'
     kind: result-report
     triage: done
     summary: 'Joost de Winter points to a packing of 259 unit squares with side 16.590016439573
@@ -38750,7 +38748,18 @@ issues:
     beads:
     - think-squj
     answer_bead: think-squj
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1040#issuecomment-7084376927
+      date: '2026-11-22'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n259-geiserx
+        id: T-337
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
     close_when: The packing is imported from an exact certificate that reached this
       repository and registered with the credit the issue asks for, or the record says
       why it will not be, and the reply on main says so.

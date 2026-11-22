@@ -319,10 +319,12 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: 324-case totals.
 #: In the same pass, T-337 replaced T-193 at 259. Its retained screen records 109
 #: separating and 227 translating squares, against 54 and 190 on T-193.
+#: T-338 changed 90 from zero separating and 12 translating squares to 1 and 17.
+#: T-339 changed 179 from 64 separating and translating squares to 16 and 64.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (28, 111, 86, 579),
-    "n=1..200": (69, 584, 182, 2457),
-    "n=1..324": (127, 2737, 302, 7459),
+    "n=1..100": (29, 112, 86, 584),
+    "n=1..200": (70, 537, 182, 2462),
+    "n=1..324": (128, 2690, 302, 7464),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

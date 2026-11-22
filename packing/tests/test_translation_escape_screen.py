@@ -156,17 +156,12 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
-        # 90 joined on 15 November 2026 with jazivxt's certificate there (T-303,
-        # think-i8y9): its least pair margin, 1.2e-12, lies between the screen's
-        # tolerances.
-        90,
     ],
     "n=1..200": [
         68,
         84,
         86,
         88,
-        90,
         105,
         106,
         # 127 joined on 16 November 2026 with JoeGun's certificate there (T-305,
@@ -192,6 +187,8 @@ GOLDEN_UNSTABLE = {
         175,
         176,
         177,
+        # T-339 at 179 changes the screen's outcome across tolerances.
+        179,
         180,
         181,
     ],
@@ -200,7 +197,6 @@ GOLDEN_UNSTABLE = {
         84,
         86,
         88,
-        90,
         105,
         106,
         # 127 joined on 16 November 2026 with JoeGun's certificate there (T-305,
@@ -226,6 +222,8 @@ GOLDEN_UNSTABLE = {
         175,
         176,
         177,
+        # T-339 at 179 changes the screen's outcome across tolerances.
+        179,
         180,
         181,
         204,

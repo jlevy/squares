@@ -517,19 +517,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-89.svg"
     },
     {
-      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/fa53fb0d734fbf438bcfb73c1434a15894bb2bc5/n90/n90_exact.json at fa53fb0d734fbf438bcfb73c1434a15894bb2bc5",
+      "attribution": "jazivxt, improved and refined by Joost de Winter, https://github.com/user-attachments/files/35205206/n90-rational.zip#90/candidate.json.gz at GitHub issue attachment 35205206",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         90
       ],
       "n": 90,
-      "path": "resources/web/de-winter-s90-upper-bound-2026-11-15/source/n90/n90_exact.json",
+      "path": "resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-15",
+      "retrieved": "2026-11-21",
       "source_n": 90,
-      "url": "https://github.com/JoostdeWinter/square-packing/blob/fa53fb0d734fbf438bcfb73c1434a15894bb2bc5/n90/n90_exact.json"
+      "url": "https://github.com/user-attachments/files/35205206/n90-rational.zip#90/candidate.json.gz"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1161,19 +1161,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-178.svg"
     },
     {
-      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s179-upper-bound-13880960371/blob/6ab3cfe60db4d081092bed3b6bbb44c76b067230/n-179-candidate.yaml at 6ab3cfe60db4d081092bed3b6bbb44c76b067230",
+      "attribution": "Doğa Özden; algebraic certificate by Joost de Winter, https://github.com/user-attachments/files/35184249/n179-exact-construction.zip#algebraic/n179/n179.minpoly.json.gz at attachment-sha256:143e9298eaf8c96e0e36bd7346a41b765e1d8e77dc1be10c76e17846ce73c3c8",
       "kind": "packet-derived-facts",
-      "license_status": "CC-BY-4.0",
+      "license_status": "no-licence-published",
       "listed_n": [
         179
       ],
       "n": 179,
-      "path": "resources/web/ozden-s179-issue959-2026-11-11/source/n-179-candidate.yaml",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-11",
+      "path": "resources/web/de-winter-959-followup-2026-11-20/facts/alg-n-179.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "retrieved": "2026-11-21",
       "source_n": 179,
-      "url": "https://github.com/kenaznia-doga/s179-upper-bound-13880960371/blob/6ab3cfe60db4d081092bed3b6bbb44c76b067230/n-179-candidate.yaml"
+      "url": "https://github.com/user-attachments/files/35184249/n179-exact-construction.zip#algebraic/n179/n179.minpoly.json.gz"
     },
     {
       "attribution": "Mishapolk, https://github.com/Mishapolk/square-packing-records/blob/b637e6cf59c23781c813e8442bfdccb5aa5f3954/certificates/0000-0999/n180.cert at b637e6cf59c23781c813e8442bfdccb5aa5f3954",
