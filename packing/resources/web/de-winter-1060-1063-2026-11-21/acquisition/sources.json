@@ -1,0 +1,23 @@
+{
+  "format": "issue-attachment-sources-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1062",
+  "attachment": {
+    "url": "https://github.com/user-attachments/files/35205219/n232-rational.zip",
+    "sha256": "752b5efc0aaedfab63605b8c2f3112610a41164bfc31d843b629752cda4088c3",
+    "bytes": 179276
+  },
+  "members": [
+    {
+      "path": "232/candidate.json.gz",
+      "bytes": 145472,
+      "sha256": "b72b04c8c3f6b57c4372fd2db17b1666832dd22ad1d734094ed070aacddcf4fe",
+      "retained_at": "n232/candidate.json.gz"
+    },
+    {
+      "path": "232/input.json.gz",
+      "bytes": 26364,
+      "sha256": "9ae760cfbd190378872418cc93751846649658a40cd9d37130ca0ace9872ab7a",
+      "retained_at": "n232/input.json.gz"
+    }
+  ]
+}

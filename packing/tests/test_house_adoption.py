@@ -970,10 +970,24 @@ def test_a_house_is_held_to_its_native_result_exactly(
     witness = {"certificate": {"result": retained}}
     verified = type("Verified", (), {"valid": True})()
     monkeypatch.setattr(houses, "expected_house", lambda _n: witness)
-    monkeypatch.setattr(houses.legacy, "exact_verify", lambda _witness: (decided, verified))
+
+    def replay_decided(
+        _witness: dict[str, Any], *, rational_backend: str
+    ) -> tuple[dict[Any, Any], Any]:
+        assert rational_backend == "fraction"
+        return decided, verified
+
+    monkeypatch.setattr(houses.legacy, "exact_verify", replay_decided)
     with pytest.raises(houses.HouseError, match="differs from its retained native job"):
         houses.build_witness(70)
-    monkeypatch.setattr(houses.legacy, "exact_verify", lambda _witness: (retained, verified))
+
+    def replay_retained(
+        _witness: dict[str, Any], *, rational_backend: str
+    ) -> tuple[dict[str, Any], Any]:
+        assert rational_backend == "fraction"
+        return retained, verified
+
+    monkeypatch.setattr(houses.legacy, "exact_verify", replay_retained)
     assert houses.build_witness(70) is witness
 
 
@@ -1731,9 +1745,6 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
         assert n not in defaults.PENDING_ALLOWED
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
-        if n == 232 and pending.house == "T-340":
-            assert (pending.bead, pending.why) == ("think-eumc", select.NO_WRITER)
-            continue
         algebraic = pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
@@ -1861,6 +1872,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # issues 1021, 1022 and 1031 (T-331 to T-333) in the same pass. The pass of 21 November
     # moved 172 and 199 to Joost de Winter's re-solves of issues 946 and 939 (T-286, T-285),
     # and lane i1038 moved 228 to Doğa Özden's certificate of issue 1038 (T-334).
+    # The 22 November issue-1062 adoption moved 232 to de Winter's rational certificate
+    # of the Kodaj-JoeGun packing (T-340).
     later = {
         **ALGEBRAIC_ADOPTED,
         109: "T-335",
@@ -1885,7 +1898,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         130: "T-259",
         172: "T-286",
         199: "T-285",
-        232: "T-307",
+        232: "T-340",
         307: "T-326",
         156: "T-315",
         180: "T-316",

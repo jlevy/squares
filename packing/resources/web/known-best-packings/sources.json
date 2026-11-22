@@ -1541,19 +1541,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-231.svg"
     },
     {
-      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-232-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+      "attribution": "Joost de Winter after Kodaj and JoeGun; Alex Chilton source compilation, https://github.com/user-attachments/files/35205219/n232-rational.zip#232/candidate.json.gz at n232-rational.zip, issue 1062 attachment 35205219",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         232
       ],
       "n": 232,
-      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-232-candidate.yaml",
+      "path": "resources/web/de-winter-1060-1063-2026-11-21/n232/candidate.json.gz",
       "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-16",
+      "retention_policy": "Original gzip member retained byte-for-byte; acquisition manifest pins the upstream archive and member.",
+      "retrieved": "2026-11-21",
       "source_n": 232,
-      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-232-candidate.yaml"
+      "url": "https://github.com/user-attachments/files/35205219/n232-rational.zip#232/candidate.json.gz"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

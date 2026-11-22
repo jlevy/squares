@@ -228,7 +228,6 @@ class Pending:
 #: 2026 (think-i38n) took 292 off: Mykhailo Polkovskyi's certificate of issue 1009 (T-323)
 #: is 1.36e-3 below T-193's algebraic side there.
 PENDING_ADOPTION: dict[int, Pending] = {
-    232: Pending(house="T-340", bead="think-eumc", why=NO_WRITER),
     **{
         n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
         for n in (88, 126, 266, 267, 301)

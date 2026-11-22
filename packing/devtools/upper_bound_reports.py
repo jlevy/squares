@@ -1387,8 +1387,41 @@ def kaggle_csv(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certifi
     return _certificate(n, side, [(pose.x - x0, pose.y - y0, pose.t) for pose in poses])
 
 
+def rational_supplement_json(
+    raw: bytes, n: int, options: Mapping[str, str]
+) -> legacy.Certificate:
+    """The original issue-1062 side and center/half-angle rows, without rounded poses.
+
+    Its contraction metadata is read as source attribution and is not a certificate
+    premise. Every coordinate and the side go through the existing bounded reader.
+    """
+    _no_options(options, "rational-supplement-json")
+    value = _json(raw)
+    squares = _squares(value, n)
+    required = {"n", "side", "squares"}
+    metadata = {"center_scale", "original_side", "gain", "input_sha256", "reboxing_only"}
+    _require(required <= set(value) <= required | metadata, "unknown supplement fields")
+    for key in ("center_scale", "original_side", "gain"):
+        if key in value:
+            _literal(value[key], f"n={n} {key}")
+    _require(
+        "reboxing_only" not in value or type(value["reboxing_only"]) is bool,
+        "invalid supplement reboxing flag",
+    )
+    _require(
+        "input_sha256" not in value
+        or (
+            type(value["input_sha256"]) is str
+            and re.fullmatch(r"[0-9a-f]{64}", value["input_sha256"]) is not None
+        ),
+        "invalid original-input digest",
+    )
+    return _certificate(n, _literal(value["side"], f"n={n} side"), _triples(squares, n))
+
+
 #: Every certificate format a declaration may name. The module docstring says how to add one.
 ADAPTERS: dict[str, Adapter] = {
+    "rational-supplement-json": rational_supplement_json,
     "evand-cert": evand_cert,
     "squish-json": squish_json,
     "pingyou-json": pingyou_json,

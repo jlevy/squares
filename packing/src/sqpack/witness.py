@@ -10,10 +10,11 @@ from copy import deepcopy
 from dataclasses import asdict
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 import mpmath as mp
 import yaml
+from gmpy2 import mpq
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
@@ -474,7 +475,16 @@ def _pair_best_gap(
     return best
 
 
+def _gmp_fraction(value: Fraction) -> mpq:
+    """Embed a materialized rational in GMP using its integers, never a float."""
+    if not isinstance(value, Fraction):
+        raise TypeError("GMP execution requires exactly materialized Fraction scalars")
+    return mpq(value.numerator, value.denominator)
+
+
 def _number(value: Scalar, digits: int = 40) -> str:
+    if isinstance(value, mpq):
+        return str(Fraction(int(value.numerator), int(value.denominator)))
     if isinstance(value, Fraction):
         return str(value)
     if isinstance(value, FieldElement):
@@ -673,12 +683,26 @@ def _interval_verify(witness: Mapping[str, Any]) -> tuple[dict[str, Any], Report
     return result, compatible
 
 
-def exact_verify(witness: Mapping[str, Any]) -> tuple[dict[str, Any], Report]:
-    """Verify a rational or certified algebraic witness with exact predicates."""
+def exact_verify(
+    witness: Mapping[str, Any], *, rational_backend: Literal["fraction", "gmp"] = "fraction"
+) -> tuple[dict[str, Any], Report]:
+    """Verify with exact predicates; GMP is an explicit rational execution option.
+
+    Stock Fraction materialization completes before any conversion. Geometry, shape
+    checks, pair order, equality and both minimum margins are unchanged. Other scalar
+    kinds continue through their existing paths. The default remains Fraction.
+    """
+    if rational_backend not in ("fraction", "gmp"):
+        raise ValueError("unknown exact rational backend")
     if witness["claim"]["method"] == "interval-certified":
         return _interval_verify(witness)
     squares, side, field = _exact_materialize(witness)
     if field is None:
+        if rational_backend == "gmp":
+            squares = [
+                [(_gmp_fraction(x), _gmp_fraction(y)) for x, y in square] for square in squares
+            ]
+            side = _gmp_fraction(side)
         sign: Callable[[Scalar], int] = _rational_sign
         field_certificate = {"field": "Q", "preconditions": "degree-one rational field"}
     else:
@@ -797,7 +821,7 @@ def _literal(value: Fraction) -> str:
     )
 
 
-def _rational_sign(value: Fraction) -> int:
+def _rational_sign(value: Fraction | mpq) -> int:
     return (value > 0) - (value < 0)
 
 

@@ -3009,6 +3009,30 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-340": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1062](https://github.com/jlevy/squares/issues/1062)",
+        producer_route=False,
+        ai="A separately prompted Codex agent wrote the source-only exact review.",
+        retained="the original gzip certificate",
+        lineage=(
+            "The source credits the earlier Kodaj–JoeGun layout and local solve, and "
+            "Alex Chilton’s compilation. Joost de Winter supplies the exact certificate. "
+            "Its side is about 4.00173e-9 below T-307 at first contact and 2.00880e-34 "
+            "below JoeGun’s earlier rational certificate at its first contact. "
+            "Neither comparison orders the unrounded local limit. The measured "
+            "layouts have no one-to-one nearest-center match under the box symmetries."
+        ),
+        routes=(
+            "The two maintained exact checkers accepted the submitted witness and refused "
+            "the duplicate and outside-container controls, testing 26,796 pairs in each "
+            "job on each route. Both used exact GMP rationals."
+        ),
+        third_route=(
+            ", and a separately implemented source-only checker independently verified "
+            "all 26,796 pairs, every wall and the predeclared sharp controls"
+        ),
+    ),
     "T-307": Prose(
         author="JoeGun",
         reported="on [jlevy/squares#1001](https://github.com/jlevy/squares/issues/1001)",
@@ -4279,7 +4303,7 @@ CREDITS: dict[int, Credit] = {
     232: Credit(
         (KODAJ,),
         (JOEGUN,),
-        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a fault-line DP",
+        "Joost de Winter’s rational certificate after Tomáš Kodaj and JoeGun",
     ),
     # Evan Daniel's basin explorer from a rebuild of issue 481's composition to a different
     # local minimum; the issue credits the composition for the construction, which the

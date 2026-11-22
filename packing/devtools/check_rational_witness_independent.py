@@ -10,15 +10,19 @@ from __future__ import annotations
 
 import argparse
 import itertools
+from collections.abc import Sequence
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
+
+from gmpy2 import mpq
 
 from sqpack.yamlio import safe_load
 
-Point = tuple[Fraction, Fraction]
-Square = list[Point]
-Projection = tuple[Point, tuple[Fraction, Fraction]]
+type Rational = Fraction | mpq
+Point = tuple[Rational, Rational]
+Square = Sequence[Point]
+Projection = tuple[Point, tuple[Rational, Rational]]
 
 
 def parse(path: Path) -> tuple[list[Square], Fraction]:
@@ -77,7 +81,7 @@ def parse(path: Path) -> tuple[list[Square], Fraction]:
     return squares, Fraction(raw_side)
 
 
-def dot(left: Point, right: Point) -> Fraction:
+def dot(left: Point, right: Point) -> Rational:
     return left[0] * right[0] + left[1] * right[1]
 
 
@@ -109,7 +113,7 @@ def axes(square: Square) -> tuple[Point, Point]:
     return (-first[1], first[0]), (-second[1], second[0])
 
 
-def interval(square: Square, axis: Point) -> tuple[Fraction, Fraction]:
+def interval(square: Square, axis: Point) -> tuple[Rational, Rational]:
     values = [dot(point, axis) for point in square]
     return min(values), max(values)
 
@@ -126,13 +130,13 @@ def _own_intervals(square: Square) -> list[Projection]:
 
 def _separation(
     left: Square, right: Square, left_own: list[Projection], right_own: list[Projection]
-) -> Fraction:
+) -> Rational:
     """The pair's gap as `pair_gap` defines it, from the two squares' `_own_intervals`.
 
     It computes the same gaps in the same order as projecting all eight intervals afresh,
     so it returns the same exact maximum.
     """
-    gaps: list[Fraction] = []
+    gaps: list[Rational] = []
     for axis, (left_min, left_max) in left_own:
         right_min, right_max = interval(right, axis)
         gaps.extend((right_min - left_max, left_min - right_max))
@@ -142,7 +146,7 @@ def _separation(
     return max(gaps)
 
 
-def pair_gap(left: Square, right: Square) -> Fraction:
+def pair_gap(left: Square, right: Square) -> Rational:
     """The largest separating gap over the pair's four edge normals; negative exactly when
     the interiors overlap."""
     return _separation(left, right, _own_intervals(left), _own_intervals(right))
@@ -153,13 +157,31 @@ def check(path: Path) -> dict[str, Any]:
     return check_squares(squares, side)
 
 
-def check_squares(squares: list[Square], side: Fraction) -> dict[str, Any]:
+def check_squares(
+    squares: Sequence[Square],
+    side: Rational,
+    *,
+    rational_backend: Literal["fraction", "gmp"] = "fraction",
+) -> dict[str, Any]:
     """Decide exact unit squares, given as four rational corners each, in ``[0, side]^2``.
 
     The geometry `check` applies to a parsed witness, for a caller that holds its squares
     in another exact form and converts them itself: the conversion is then the caller's
     to state, and this decision is still this module's alone.
     """
+    if rational_backend not in ("fraction", "gmp"):
+        raise ValueError("unknown exact rational backend")
+    if rational_backend == "gmp":
+        # Scalar conversion is this checker's own; no geometry is shared with sqpack.
+        # Every integer ratio remains exact, including contact and inward controls.
+        squares = [
+            [
+                (mpq(x.numerator, x.denominator), mpq(y.numerator, y.denominator))
+                for x, y in square
+            ]
+            for square in squares
+        ]
+        side = mpq(side.numerator, side.denominator)
     failures = [
         failure
         for index, square in enumerate(squares, start=1)

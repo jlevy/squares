@@ -25,7 +25,7 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from strif import atomic_output_file
 
@@ -356,17 +356,31 @@ def run_case(
     *,
     witness_prefix: str = WITNESS_PREFIX,
     claim_limitations: str = CLAIM_LIMITATIONS,
+    rational_backend: str = "fraction",
 ) -> dict[str, Any]:
-    """Reuse the two exact routes in legacy.decide, retaining their full native results."""
+    """Run both exact routes; an explicit GMP backend changes arithmetic only.
+
+    The caller records the selected backend in its execution metadata. This result
+    envelope and its complete source/control binding remain the native contract.
+    """
+    if rational_backend == "fraction":
+        backend: Literal["fraction", "gmp"] = "fraction"
+    elif rational_backend == "gmp":
+        backend = "gmp"
+    else:
+        raise ValueError("unknown exact rational backend")
     actual = job_input(certificate, control)
     started = time.monotonic()
     cpu = time.process_time()
     first, _report = legacy.exact_verify(
-        to_witness(actual, witness_prefix=witness_prefix, claim_limitations=claim_limitations)
+        to_witness(actual, witness_prefix=witness_prefix, claim_limitations=claim_limitations),
+        rational_backend=backend,
     )
     first_seconds = time.process_time() - cpu
     cpu = time.process_time()
-    second = legacy.independent.check_squares(legacy.corner_squares(actual), actual.side)
+    second = legacy.independent.check_squares(
+        legacy.corner_squares(actual), actual.side, rational_backend=backend
+    )
     second_seconds = time.process_time() - cpu
     return json.loads(
         _json_bytes(

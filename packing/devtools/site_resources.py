@@ -667,6 +667,12 @@ CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
 #: `CATALOGUE_SITES` to one the record cites.
 OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
     (
+        "https://github.com/jlevy/squares/issues/1062",
+        "Exact Rational Certificate at 232 Squares",
+        "Joost de Winter",
+        "The certificate adopted as T-340, from the packing lineage of Tomáš Kodaj and JoeGun.",
+    ),
+    (
         "https://github.com/jlevy/squares/issues/401#issuecomment-6031977107",
         "SQUISH Packing of 153 Squares",
         "Nate Chaoweeraprasit",
