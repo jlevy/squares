@@ -5,7 +5,7 @@ title: "Triage Joost de Winter’s exact algebraic follow-up at 228 on #1038"
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T22:47:27.090Z
-updated_at: 2026-11-22T22:11:08.545Z
+updated_at: 2026-11-22T22:41:49.194Z
 started_at: 2026-11-22T20:51:38.299Z
 ---
 Joost de Winter supplied squaremath_n228_exact_algebraic.zip in issuecomment-7046716722 on #1038. The attachment is readable from this host. SHA-256 5e0c62d9ad52b1afd78929e55e2fabf8d21f37fbe5f6e6c5a105f013ab970bd2, 232,825 bytes. It claims a rational and a degree-7 algebraic refinement of Özden’s certificate, with a safe ceiling of 15.59604311663166991963. The difference from T-334’s candidate side is about 9.66e-14. The source gives lineage from the jazivxt coordinates through Özden and says the finder of the jazivxt packing is unresolved. It supplies no coordinates for Nevska’s same-print entry.
@@ -37,3 +37,5 @@ for #1083 remediation. Independent geometry, report order and drawing
 selection remain open. T-334 holds the case.
 
 22 November UTC. A separate frozen rational implementation accepted all 228 units, 3,648 walls and 25,878 pairs, with six declared controls behaving as expected. The original member and parsed inner reading copy agree, and the scientific checker is unchanged. Both dated alternative report-order drafts, on the unedited 20 November 17:53:48Z comment, recommend one unclassified report below T-334, zero unresolved and zero start drift. The rational review and ordering evidence are in draft #1084. Both native forms passed maintained checks, but the stronger degree-seven witness still needs independent geometry review, registration and drawing work.
+
+22 November UTC. A separate degree-seven implementation accepted the original later #1038 file after 228 unit, 3,648 wall, 25,878 pair and eleven control checks. It recorded 66 exact wall and 302 pair equalities. The guard observed 0.14 GiB sampled tree peak, pressure1 and a 41.05-second supervised worker. Complete source-bound proof receipt and disclosure are in draft #1085. The stronger field form and rational sibling are one dated contribution. The attachment-writer adapter is externally prepared with 31 structural assertions; result ID, registry and drawings remain open.
