@@ -1,0 +1,13 @@
+{
+  "kind": "unchanged-reading-copy-replay",
+  "checker": "review/verify_202_263.py.txt",
+  "checker_sha256": "a007b236d26e7a9abc4d6dd1011b7d0ee3fa680549ce9a885f414747fe33776f",
+  "archive_sha256": "19c069b42d6a6fbe87dd419d358e7b046eadbba20dbaadd7f519faab1152c5e9",
+  "matched_all_non_timing_receipt_fields": true,
+  "worker_exit": 0,
+  "guard_exit": 0,
+  "guard_mode": "observe-only",
+  "checker_workers": 1,
+  "wall_seconds": 18.832163625047542,
+  "cpu_seconds": 1.667084
+}

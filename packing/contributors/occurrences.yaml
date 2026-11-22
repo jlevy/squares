@@ -35256,6 +35256,54 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX issue 1037 2026-11-18]'
+    field: /authors/0
+  expected_text: Sergio Fernández Rubio (GeiserX)
+  start: 0
+  end: 32
+  label: Sergio Fernández Rubio (GeiserX)
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX issue 1037 2026-11-18]'
+    field: /authors/1
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX issue 1037 2026-11-18]'
+    field: /credit
+  expected_text: GeiserX, Joost de Winter
+  start: 0
+  end: 7
+  label: GeiserX
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[GeiserX issue 1037 2026-11-18]'
+    field: /credit
+  expected_text: GeiserX, Joost de Winter
+  start: 9
+  end: 24
+  label: Joost de Winter
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending

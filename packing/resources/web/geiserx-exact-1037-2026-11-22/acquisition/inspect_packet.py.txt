@@ -1,0 +1,75 @@
+"""Check the seven published case pairs against the original #1037 attachment."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+from zipfile import ZipFile
+
+from devtools import evand_exact_certificates as legacy
+from devtools import upper_bound_reports as reports
+
+root = Path(__file__).parent
+source = root / "GeiserX_exact.zip"
+geometry = root / "selected"
+geometry.mkdir(exist_ok=True)
+assert hashlib.sha256(source.read_bytes()).hexdigest() == "19c069b42d6a6fbe87dd419d358e7b046eadbba20dbaadd7f519faab1152c5e9"
+ceilings = {
+    202: "14.724372709109",
+    204: "14.802436041462",
+    210: "14.971210662216",
+    263: "16.724372709109",
+    264: "16.772843152678",
+    295: "17.698042929358",
+    297: "17.739455512004",
+}
+members = []
+pairs = []
+with ZipFile(source) as archive:
+    selected = [
+        f"rational/n{n}.{suffix}"
+        for n in ceilings
+        for suffix in ("cert", "yaml")
+    ] + [
+        "rational/n297_origins.json",
+        "algebraic/n202.minpoly.json",
+        "algebraic/n263.minpoly.json",
+        "algebraic/n297.minpoly.json.gz",
+        "algebraic/n297.bivariate.json.gz",
+        "algebraic/n297_side_polynomial.json",
+    ]
+    for name in selected:
+        original = f"GeiserX_exact/{name}"
+        assert archive.namelist().count(original) == 1
+        raw = archive.read(original)
+        path = geometry / name
+        path.parent.mkdir(exist_ok=True)
+        if path.exists():
+            assert path.read_bytes() == raw
+        else:
+            path.write_bytes(raw)
+        members.append({"member": original, "retained": f"selected/{name}", "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()})
+    for n, ceiling in ceilings.items():
+        cert_path = geometry / f"rational/n{n}.cert"
+        witness_path = geometry / f"rational/n{n}.yaml"
+        cert = legacy.parse(cert_path.read_text(), expected_n=n)
+
+        original = witness_path.read_bytes()
+        # The external claim field names verification but carries no replay declaration.
+        # Read the geometry as a report. The original in selected/ stays byte-for-byte.
+        claim = b"    coordinate_provenance: verified\n"
+        assert original.count(claim) == 1
+        reading_copy = original.replace(claim, b"    coordinate_provenance: reported\n")
+        witness = reports.parse_certificate(reading_copy, n, "witness-corners", {})
+        reports.admit(cert, ceiling)
+        assert witness.side == cert.side
+        actual = legacy.corner_squares(cert)
+        paired = legacy.corner_squares(witness)
+        assert [frozenset(square) for square in actual] == [frozenset(square) for square in paired]
+        pairs.append({
+            "n":n, "side":legacy.literal(cert.side), "ceiling_12":ceiling,
+            "matched_exact_corner_sets":n, "geometry_replay":"not-yet-run",
+        })
+        print(f"n={n}: {n} exact corner sets match the other source encoding, ceiling {ceiling}", flush=True)
+(root / "attachment-members.json").write_text(json.dumps({"source": source.name, "members": members, "pairs": pairs}, indent=2)+"\n")

@@ -6247,6 +6247,20 @@ sources:
       measurement does not erase the historical credits. The exact side is below T-307 and JoeGun's
       earlier rational recorded certificate, each contracted to first contact. There is no ordering
       against an unrounded local or optimal limit and no optimality claim.
+  - key: '[GeiserX issue 1037 2026-11-18]'
+    authors:
+      - Sergio Fernández Rubio (GeiserX)
+      - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-18'
+    lineage: independent
+    credit: GeiserX, Joost de Winter
+    note: >-
+      Sergio Fernández Rubio published the seven packings. Joost de Winter refined
+      and certified them for issue 1037 using Evan Daniel's solver. The source
+      identifies Asterios Panoras's compilation as a donor for 66 squares at 297.
+      Exact release geometry and an independent review at 202 and 263 are retained.
 credited_names:
   Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim

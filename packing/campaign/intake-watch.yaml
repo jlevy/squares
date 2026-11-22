@@ -2463,3 +2463,30 @@ repositories:
       hashes. No ZIP was downloaded or executed for this watch read. The earlier #1039/#1041
       ZIPs are unchanged. This adds source mirrors, not another independent result report; the
       intake epic owns the mirror-retention follow-up across those issue beads.
+
+  - url: https://github.com/evand/square-packing
+    read_through: cebf0e1087de8c466c14d9aba05cceb6a00b91cb
+    read_on: '2026-11-22'
+    note: >-
+      The 49 commits after c801ab47 changed 82 paths, all in the search packer apart
+      from two development notes. The grid-lock change uses the full chord of tilted
+      squares to estimate forced extent in its numerical search filter. It includes
+      seven synthetic tests. No exact bound, proof, or packing certificate changed.
+      The project vendor pin is unaffected.
+  - url: https://github.com/JoostdeWinter/joostdewinter.github.io
+    read_through: c8e40c489e21dd491f55c2673de310c1b43f69d0
+    read_on: '2026-11-22'
+    note: >-
+      The only commit after 26ab850 updates the heading and footer in index.html
+      and links Joost de Winter's Squares Project profile. The existing packing
+      portfolio is unchanged.
+  - url: https://github.com/Mira-Cult/math
+    read_through: a2ef8224ae9ebae0f6e1b855ef19c36b086de9f4
+    read_on: '2026-11-22'
+    note: >-
+      Of the 15 commits after held pin 78bec6a, only 9d5c99f changes packing
+      material. It corrects the README's decimal for (7 + sqrt(7))/2, the issue
+      our 20 November review recorded as F9. The exact expression, proof, SVG,
+      verification file, and replay objects are unchanged. The current Squares
+      case already displays the corrected value. Full-proof retention and replay
+      still wait on the author in think-8x11.

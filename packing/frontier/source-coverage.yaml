@@ -3228,7 +3228,7 @@ sources:
     - 322
     - 323
     - 324
-  reviewed: '2026-11-21'
+  reviewed: '2026-11-22'
   source_date: '2026-09-29'
   disposition: current-report
   replay_disposition: case-specific
@@ -3368,7 +3368,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-11-21'
+  reviewed: '2026-11-22'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -3484,7 +3484,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-11-21'
+  reviewed: '2026-11-22'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -8800,7 +8800,7 @@ sources:
     - 996
     - 997
     - 998
-  reviewed: '2026-11-21'
+  reviewed: '2026-11-22'
   source_date: '2026-10-19'
   disposition: current-report
   replay_disposition: case-specific
@@ -11813,7 +11813,7 @@ sources:
   source_key: '[Kim exact forms 2026-10-25]'
   scope:
     n_values: [88, 126, 172, 199, 263]
-  reviewed: '2026-11-21'
+  reviewed: '2026-11-22'
   source_date: '2026-10-25'
   disposition: current-report
   replay_disposition: case-specific
@@ -11860,7 +11860,7 @@ sources:
   source_key: '[Kim s297 2026-10-25]'
   scope:
     n_values: [297]
-  reviewed: '2026-11-21'
+  reviewed: '2026-11-22'
   source_date: '2026-10-25'
   disposition: current-report
   replay_disposition: case-specific
@@ -14022,7 +14022,7 @@ sources:
   scope:
     n_values:
     - 259
-  reviewed: '2026-11-21'
+  reviewed: '2026-11-22'
   source_date: '2026-11-19'
   disposition: current-report
   replay_disposition: case-specific
@@ -14104,6 +14104,37 @@ sources:
   - E-de-winter-1062-certificate-report
   - E-de-winter-1062-review-exact-feasibility
   notes: The independently accepted finite certificate is T-340. Both native routes and their gross controls also passed using the exact original member.
+- id: geiserx-exact-1037-2026-11-22
+  title: GeiserX's seven published packings with exact certificates from Joost de Winter
+  role: first-party-release
+  url: https://github.com/jlevy/squares/issues/1037
+  local: resources/web/geiserx-exact-1037-2026-11-22/
+  source_key: '[GeiserX issue 1037 2026-11-18]'
+  scope:
+    n_values:
+    - 202
+    - 204
+    - 210
+    - 263
+    - 264
+    - 295
+    - 297
+  reviewed: '2026-11-22'
+  source_date: '2026-11-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/geiserx-exact-1037-2026-11-22/acquisition/sources.json
+  - resources/web/geiserx-exact-1037-2026-11-22/receipts/native-rational.json.xz
+  - resources/web/geiserx-exact-1037-2026-11-22/receipts/native-quadratic-202-263.json.xz
+  - docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
+  evidence:
+  - E-geiserx-1037-original-report
+  notes: >-
+    The source identifies Sergio Fernández Rubio as the finder and Joost de Winter as the
+    certificate author. The independent review establishes finite rational and quadratic
+    feasibility at 202 and 263. Direct-source and earlier case identity, exact report order,
+    public registration and the drawing decisions remain on think-36ui.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
