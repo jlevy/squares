@@ -39555,7 +39555,9 @@ issues:
         All 13 candidates pass full exact geometry and fall strictly below their current house
         witnesses contracted to first contact. All nearest-center matches are bijective,
         the largest movement is 0.04834, and no turn exceeds a degree. Preserve the
-        standing construction credits. Independent review and adoption remain open.
+        standing construction credits. At 105 the independent check accepted all
+        5,460 pairs, and both maintained routes passed the eleven source-bound sharp
+        controls. The remaining independent, registration and drawing work stays open.
       queued: true
       bead: think-3iqa
     beads: [think-3iqa]
