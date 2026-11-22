@@ -85,6 +85,7 @@ upstream `rational-enclosures.zip`, that scratch checker and a fresh receipt pat
 | `lower/C/claims-166-updated.csv.gz` | upstream | `4d923694ac3d0fca88f48057bd3a277c1e56eecb` | `b4b809ce60de7af41c9648822fa2a7fe2da1c87409578d49b1ea76443a72028d` |
 | `lower/D/claims-final.csv.gz` | upstream | `3110257ab9aa6eaa70fcedf6bff84bb6e1a05f86` | `81e11c944fd64f80fb59314f75c2969a5bf4cba433e74fc94995dc8b7bc3ca42` |
 | `receipts/1063-prior-house-pose-identity.json.gz` | receipt | `dea4f8559005dfdd0c8d490dedd62221032572a8` | `42f6b70144521cf7d50774c72d67731bcc5c21fa7e10b62c0d58acb9a3b62fb2` |
+| `lower/review-dependencies/scalar-audit.json.gz` | receipt | `3974676e451376551edc5bfc13b1a833f56b4ed8` | `b09af7dd29b258798842deeca1e1e367520539d38d970561af8a92d07247636b` |
 
 ## Original Gzip Files
 

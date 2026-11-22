@@ -38568,7 +38568,12 @@ issues:
     beads:
     - think-1tkk
     answer_bead: think-1tkk
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1019#issuecomment-7087114402
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1037
     title: 'Exact certificates for GeiserX''s published packings of 202, 204, 210, 263, 264, 295 and 297 (pointer)'
@@ -38703,7 +38708,8 @@ issues:
       T-301's credit; jazivxt is credited for the public notebook and decimal snapshot, and
       Özden for this certificate. This packing's finder and publication order remain unresolved.
       The driver's KKT solve 9.66e-14 below it stays a candidate (think-4z8z), and the later
-      related de Winter attachment awaits independent comparison in think-d4b0.
+      related de Winter attachment now has two independent finite-feasibility checks.
+      Registration and drawings stay on think-d4b0.
     read_through: '2026-11-20T17:53:48Z'
     results:
     - key: n228-kaggle-certificate
@@ -38785,6 +38791,12 @@ issues:
         status: confirmed
       - result: n228-later-algebraic-attachment
       beads: [think-d4b0]
+    - url: https://github.com/jlevy/squares/issues/1038#issuecomment-7087115594
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-later-algebraic-attachment
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       case adopted where it is the smallest validated side, and the reply on main says what was
@@ -39121,7 +39133,8 @@ issues:
     title: 'Lowered upper bound for n = 305 (side 17.945755838742)'
     author: JoostdeWinter
     opened: '2026-11-20'
-    state: open
+    state: closed
+    closed: '2026-11-22'
     kind: result-report
     triage: done
     summary: 'De Winter''s finite upper bound at 305 is registered as T-336 at V3/C3, S2, with maintained
@@ -39255,6 +39268,12 @@ issues:
       - result: n305-rational-certificate
         id: E-de-winter-1052-certificate-report
       - result: n305-leaderboard-side-only
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7087112747
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-same-side-axis-variants
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its

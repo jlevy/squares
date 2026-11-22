@@ -7,7 +7,7 @@ conditional on the stated capture and fine-area bounds. Complete geometric
 replay remains open.
 
 The [source packet](../../README.md) records the original attachments and tables.
-The [scalar receipt](scalar-audit.json) binds the exact input values to this review.
+The [scalar receipt](scalar-audit.json.gz) binds the exact input values to this review.
 
 ## Exact Inheritance and the T-180 Boundary
 
@@ -160,10 +160,10 @@ A+dP+\pi d^2(m-1)\le c^2+4cd.
 $$
 
 Combining these inequalities and $A\le mb^2$ proves the source’s coarse integer-count
-area bound for any separately justified rational lower bound $p\le\pi$. It is enough to
+area bound for any separately justified rational lower bound $0\le p\le\pi$. It is enough to
 maximize over $1\le m\le\lceil c^2/b^2\rceil$, also including zero: after this
 threshold, the $mb^2$ bound has stopped binding and the perimeter-derived bound
-decreases. This review does not claim to have rerun the source’s Machin-series check of
+cannot increase. This review does not claim to have rerun the source’s Machin-series check of
 its numerical $p$.
 
 The interior-count refinement is also justified at the level of its argument.
@@ -202,6 +202,12 @@ Reading that accumulation and the final fractions does not establish all input i
 bounds or complete pose coverage.
 The exact positive margins therefore remain conditional, especially at their small
 scale; floating-point agreement would be inadequate.
+
+## Compressed Files
+
+| Stored path | Origin | Git blob | SHA-256 |
+| --- | --- | --- | --- |
+| `scalar-audit.json.gz` | receipt | `3974676e451376551edc5bfc13b1a833f56b4ed8` | `b09af7dd29b258798842deeca1e1e367520539d38d970561af8a92d07247636b` |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
