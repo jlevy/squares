@@ -1,13 +1,26 @@
 components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
   - paper:square-packing-methods-survey
 paths:
   - packing/campaign/result-requests.yaml
+  - packing/devtools/site_resources.py
+  - packing/frontier/n-295.md
   - packing/frontier/source-coverage.yaml
 outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
   - papers/square-packing-methods-survey.html
   - papers/square-packing-methods-survey.md
 reason: >-
-  Records the exact certificate evidence for issue 1037, verified watch reads,
-  and the deployed 305-square reply. Two renders of the updated inputs and one
-  using main 9ef2fa9f9533 rendered in separate directories with Chrome on macOS.
-  All 43 output files matched byte for byte across the three renders.
+  Records the exact certificate evidence for issue 1037, adds case citations and the
+  reviewed source card, updates source reads, and records the deployed 305-square
+  reply. Two renders of the candidate inputs and one render with exact main
+  e6a86b6edb19 ran in separate directories using Chrome on macOS. All
+  55 explainer files and all 43 files apiece for the other three papers were
+  byte-identical between runs.
