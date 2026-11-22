@@ -1,0 +1,95 @@
+{
+  "scope": "Measures the already verified exact variants against the currently drawn regularized view. No admission, generator run, or new geometry verification.",
+  "counts": [
+    305
+  ],
+  "drawn": {
+    "kind": "regularized-view",
+    "path": "packing/atlas/known-best/regularized/n-305-regularized.yaml.gz",
+    "generator": "regularize_axis_components/2"
+  },
+  "exact_side": "179457558387415886710583983360138290031648651962347523515443824166144058057388817807/10000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "standing_measures": {
+    "light_axis": 7,
+    "uneven_axis": 63,
+    "near_axis": 1,
+    "classes": 32,
+    "hues": 19,
+    "house_total": 731,
+    "stage_total": 859
+  },
+  "candidates": [
+    {
+      "label": "31-aligned",
+      "same_exact_side": true,
+      "source_sha256": "97fdbb544b9df751784999231a83e190e6d9cc14c2889d981c3f1268429e570f",
+      "positive_receipt": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/receipts/feasibility-31-aligned.json.xz",
+      "measures": {
+        "light_axis": 33,
+        "uneven_axis": 101,
+        "near_axis": 1,
+        "classes": 32,
+        "hues": 19,
+        "house_total": 634,
+        "stage_total": 841
+      },
+      "better": [],
+      "worse": [
+        "light_axis",
+        "uneven_axis",
+        "house_total",
+        "stage_total"
+      ],
+      "improves": false
+    },
+    {
+      "label": "37-aligned",
+      "same_exact_side": true,
+      "source_sha256": "11bbca8a3e2fc3a238cba51d2011779117a578c4db0c9365d49003c0d0f98500",
+      "positive_receipt": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/receipts/feasibility-37-aligned.json.xz",
+      "measures": {
+        "light_axis": 34,
+        "uneven_axis": 102,
+        "near_axis": 0,
+        "classes": 31,
+        "hues": 19,
+        "house_total": 634,
+        "stage_total": 841
+      },
+      "better": [
+        "near_axis",
+        "classes"
+      ],
+      "worse": [
+        "light_axis",
+        "uneven_axis",
+        "house_total",
+        "stage_total"
+      ],
+      "improves": false
+    },
+    {
+      "label": "36-aligned-keep43",
+      "same_exact_side": true,
+      "source_sha256": null,
+      "positive_receipt": "packing/resources/web/de-winter-n305-1052-followup-2026-11-20/receipts/square43-kept.json.xz",
+      "measures": {
+        "light_axis": 33,
+        "uneven_axis": 101,
+        "near_axis": 1,
+        "classes": 32,
+        "hues": 19,
+        "house_total": 634,
+        "stage_total": 841
+      },
+      "better": [],
+      "worse": [
+        "light_axis",
+        "uneven_axis",
+        "house_total",
+        "stage_total"
+      ],
+      "improves": false
+    }
+  ]
+}

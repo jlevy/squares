@@ -1,0 +1,156 @@
+{
+  "format": "n228-later-1038-algebraic-native-v1",
+  "routes": [
+    "exact_verify"
+  ],
+  "cases": [
+    {
+      "n": 228,
+      "control": "positive",
+      "exact_verify": {
+        "operation": "verify",
+        "id": "W-228-algebraic-refinement-positive",
+        "coordinate_provenance": "verified",
+        "method": "exact-algebraic",
+        "verification_passed": true,
+        "n": 228,
+        "side": "15.5960431166316699196273538420768613246790453853753557119850",
+        "pairs_tested": 25878,
+        "minimum_containment_clearance": "0",
+        "minimum_best_pair_gap": "0",
+        "field_certificate": {
+          "normalized_minimal_polynomial": [
+            "1",
+            "11",
+            "-153",
+            "-1433",
+            "-1250",
+            "4706",
+            "-6839",
+            "2861"
+          ],
+          "irreducible_over_q": true,
+          "irreducibility_method": "irreducible-reduction-mod-prime",
+          "irreducibility_prime": 3,
+          "declared_isolating_interval": [
+            "11920862332633398392547076841537226493580907707507114239700636544382440300998761/20000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "29802155831583495981367692103843066233952269268767785599251591360956100752496903/50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          ],
+          "root_count_method": "sturm-sequence-over-q",
+          "root_count_in_open_interval": 1,
+          "endpoints_are_not_roots": true
+        },
+        "failures": [],
+        "limitations": "Verifies witness feasibility and its upper bound, not global optimality."
+      },
+      "cpu_seconds": 57.677387,
+      "wall_seconds": 112.04536670801463
+    },
+    {
+      "n": 228,
+      "control": "duplicate-square-overlap",
+      "exact_verify": {
+        "operation": "verify",
+        "id": "W-228-algebraic-refinement-duplicate-square-overlap",
+        "coordinate_provenance": "not-established",
+        "method": "exact-algebraic",
+        "verification_passed": false,
+        "n": 228,
+        "side": "15.5960431166316699196273538420768613246790453853753557119850",
+        "pairs_tested": 25878,
+        "minimum_containment_clearance": "0",
+        "minimum_best_pair_gap": "-1",
+        "field_certificate": {
+          "normalized_minimal_polynomial": [
+            "1",
+            "11",
+            "-153",
+            "-1433",
+            "-1250",
+            "4706",
+            "-6839",
+            "2861"
+          ],
+          "irreducible_over_q": true,
+          "irreducibility_method": "irreducible-reduction-mod-prime",
+          "irreducibility_prime": 3,
+          "declared_isolating_interval": [
+            "11920862332633398392547076841537226493580907707507114239700636544382440300998761/20000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "29802155831583495981367692103843066233952269268767785599251591360956100752496903/50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          ],
+          "root_count_method": "sturm-sequence-over-q",
+          "root_count_in_open_interval": 1,
+          "endpoints_are_not_roots": true
+        },
+        "failures": [
+          [
+            "overlap",
+            "squares 0 and 1 overlap"
+          ]
+        ],
+        "limitations": "Verifies witness feasibility and its upper bound, not global optimality."
+      },
+      "cpu_seconds": 55.359353999999996,
+      "wall_seconds": 124.18602995900437
+    },
+    {
+      "n": 228,
+      "control": "square-translated-outside-container",
+      "exact_verify": {
+        "operation": "verify",
+        "id": "W-228-algebraic-refinement-square-translated-outside-container",
+        "coordinate_provenance": "not-established",
+        "method": "exact-algebraic",
+        "verification_passed": false,
+        "n": 228,
+        "side": "15.5960431166316699196273538420768613246790453853753557119850",
+        "pairs_tested": 25878,
+        "minimum_containment_clearance": "-15.595984897648",
+        "minimum_best_pair_gap": "0",
+        "field_certificate": {
+          "normalized_minimal_polynomial": [
+            "1",
+            "11",
+            "-153",
+            "-1433",
+            "-1250",
+            "4706",
+            "-6839",
+            "2861"
+          ],
+          "irreducible_over_q": true,
+          "irreducibility_method": "irreducible-reduction-mod-prime",
+          "irreducibility_prime": 3,
+          "declared_isolating_interval": [
+            "11920862332633398392547076841537226493580907707507114239700636544382440300998761/20000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "29802155831583495981367692103843066233952269268767785599251591360956100752496903/50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          ],
+          "root_count_method": "sturm-sequence-over-q",
+          "root_count_in_open_interval": 1,
+          "endpoints_are_not_roots": true
+        },
+        "failures": [
+          [
+            "container",
+            "square 0 violates x<=s"
+          ],
+          [
+            "container",
+            "square 0 violates x<=s"
+          ],
+          [
+            "container",
+            "square 0 violates x<=s"
+          ],
+          [
+            "container",
+            "square 0 violates x<=s"
+          ]
+        ],
+        "limitations": "Verifies witness feasibility and its upper bound, not global optimality."
+      },
+      "cpu_seconds": 59.080995,
+      "wall_seconds": 129.03034275001846
+    }
+  ]
+}
