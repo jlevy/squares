@@ -1,0 +1,112 @@
+{
+  "format": "n90-row3-audit-reading-copy-provenance-v1",
+  "status": "post-freeze-supporting-scalar-audit",
+  "frozen_feasibility_review_unmodified": true,
+  "program": {
+    "path": "packing/resources/web/de-winter-997-followup-2026-11-21/compare_row3.py.txt",
+    "sha256": "f07a357d600f139f6dab6e624a1cd14f0883cc2493af7def97c13b023a65f398",
+    "bytes": 8701
+  },
+  "raw_audit": {
+    "path": "packing/resources/web/de-winter-997-followup-2026-11-21/receipts/held-row3-comparison.raw.json",
+    "sha256": "aa9e047e502929ed4881d851af2bc3b07715ff65b0f2169bbbd57dbbb98f9987",
+    "bytes": 12943,
+    "original_external_path": "/Volumes/spud-ext2/agent-scratch/n90-row3-followup-20261121/comparison-row3.json"
+  },
+  "reading_copy": {
+    "path": "packing/resources/web/de-winter-997-followup-2026-11-21/receipts/held-row3-comparison.json",
+    "sha256": "e0ba9f4c37e830798f2fb3c54a12311718ee37f0272721714dbc8ef2d1f7128d",
+    "bytes": 12690
+  },
+  "only_changes": [
+    {
+      "field": [
+        "inputs",
+        0,
+        "path"
+      ],
+      "raw": "/Volumes/spud-ext2/agent-scratch/n90-blind-20261121/evidence/source/90/candidate.json.gz",
+      "reading_copy": "packing/resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz"
+    },
+    {
+      "field": [
+        "inputs",
+        1,
+        "path"
+      ],
+      "raw": "/Users/levy/wrk/github/squares/packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/report.json.gz",
+      "reading_copy": "packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/report.json.gz"
+    },
+    {
+      "field": [
+        "inputs",
+        2,
+        "path"
+      ],
+      "raw": "/Users/levy/wrk/github/squares/packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/receipt.json",
+      "reading_copy": "packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/receipt.json"
+    },
+    {
+      "field": [
+        "inputs",
+        3,
+        "path"
+      ],
+      "raw": "/Users/levy/wrk/github/squares/packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090-own.json",
+      "reading_copy": "packing/resources/web/de-winter-s90-upper-bound-2026-11-15/measure/contraction-n090-own.json"
+    },
+    {
+      "field": [
+        "row3_coordinate_artifacts",
+        "named_paths",
+        0,
+        "path"
+      ],
+      "raw": "/Users/levy/wrk/github/squares/packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/view-solved.yaml",
+      "reading_copy": "packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/view-solved.yaml"
+    },
+    {
+      "field": [
+        "row3_coordinate_artifacts",
+        "named_paths",
+        1,
+        "path"
+      ],
+      "raw": "/Users/levy/wrk/github/squares/packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/solve/witness.exact.txt",
+      "reading_copy": "packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/solve/witness.exact.txt"
+    },
+    {
+      "field": [
+        "row3_coordinate_artifacts",
+        "named_paths",
+        2,
+        "path"
+      ],
+      "raw": "/Users/levy/wrk/github/squares/packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/solve/witness.contacts.json",
+      "reading_copy": "packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/solve/witness.contacts.json"
+    },
+    {
+      "field": [
+        "row3_coordinate_artifacts",
+        "named_paths",
+        3,
+        "path"
+      ],
+      "raw": "/Users/levy/wrk/github/squares/packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/solve/witness.cert",
+      "reading_copy": "packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/solve/witness.cert"
+    },
+    {
+      "field": [
+        "row3_coordinate_artifacts",
+        "named_paths",
+        4,
+        "path"
+      ],
+      "raw": "/Users/levy/wrk/github/squares/packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/regularize.cert",
+      "reading_copy": "packing/cases/regularized_drawings/think-32cl-2026-11-16/adopt-2026-11-16-n90-evand/n-090/regularize.cert"
+    }
+  ],
+  "all_non_path_fields_equal": true,
+  "program_and_raw_audit_unchanged": true,
+  "scope": "Exact scalar ordering and bounded artifact availability only. No new geometry or KKT certification. The raw program and raw audit record the historical run; the reading copy is an integration convenience."
+}

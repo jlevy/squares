@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **289** programs: **57** external and **232** first-party; **202** decide claims and **87** check premises.
-- **816** of **1053** evidence entries name the programs that verified them: 409 independently re-implemented, 325 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **293** programs: **57** external and **236** first-party; **205** decide claims and **88** check premises.
+- **822** of **1062** evidence entries name the programs that verified them: 415 independently re-implemented, 325 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -92,8 +92,8 @@ second implementation agrees.
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 19 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 155 | 162 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 147 | 162 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 158 | 165 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 149 | 164 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -320,6 +320,10 @@ second implementation agrees.
 | [`V-r1038-review-check`](#v-r1038-review-check) | r1038_check.py with r1038_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-r1012-review-check`](#v-r1012-review-check) | r1012_check.py with r1012_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-r1052-review-check`](#v-r1052-review-check) | r1052_check.py with r1052_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-r1040-n259-review`](#v-r1040-n259-review) | verify_n259.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-de-winter-997-n90-independent-20261121`](#v-de-winter-997-n90-independent-20261121) | verify_independent.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-n179-algebraic-reader`](#v-n179-algebraic-reader) | devtools.n179_algebraic_report | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-n179-independent-review`](#v-n179-independent-review) | n179_replay.py.txt | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-n232-1062-review-check`](#v-n232-1062-review-check) | verify.py.txt (frozen source and portable input adapter) | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
@@ -1656,6 +1660,9 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-de-winter-1012-n109-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: de Winter’s restatement certificate at 109, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | - |
 | `E-samanyu-n109-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained routes. | T-335 |
 | `E-de-winter-1052-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | T-336 |
+| `E-geiserx-1040-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | T-337 |
+| `E-de-winter-997-followup-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: Every square, wall and unordered square pair in the original certificate. | T-338 |
+| `E-de-winter-959-algebraic-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original n179 certificate and both full-n179 gross mutations on the native route. | T-339 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1817,6 +1824,8 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-de-winter-1012-n109-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: de Winter’s restatement certificate at 109, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | - |
 | `E-samanyu-n109-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained routes. | T-335 |
 | `E-de-winter-1052-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | T-336 |
+| `E-geiserx-1040-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | T-337 |
+| `E-de-winter-997-followup-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: Every square, wall and unordered square pair in the original certificate. | T-338 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -5862,6 +5871,64 @@ The accepted stage 4 review's exact checker for issue 1052 at 305, with a strict
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-de-winter-1052-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: The certificate at 305, every square, wall and pair by both review methods. | T-336 |
+
+### `V-r1040-n259-review`
+
+**verify_n259.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Independent rational supports and corner half-plane checks decide every unit square, wall and pair of the submitted 259-square packing and compare its two encodings.
+
+- Source: [`packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py`](../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py), [`packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py.txt`](../../packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py.txt)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md`](../../docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Codex (OpenAI) (tbd-strong-max at maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The attachment credits Codex for refinement and verification. The reviewer's independent prompt and deciding code were frozen before project-review context.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-geiserx-1040-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: Every square, wall and pair in both original encodings. | T-337 |
+
+### `V-de-winter-997-n90-independent-20261121`
+
+**verify_independent.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Constructs exact rational vertices from signed half-angle triples, checks unit squares and every wall inequality, and separates all 4,005 unordered pairs by edge normals reconstructed from those vertices.
+
+- Source: [`packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent.py.txt`](../../packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent.py.txt), [`packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent-working.py.txt`](../../packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent-working.py.txt)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md`](../../docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Codex (OpenAI) (tbd-strong-max, maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source names GPT6.2 Astra. The independently prompted reviewer froze its own deciding code and result before reading project geometry, earlier reviews or derived receipts. OpenAI system-family overlap is disclosed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-997-followup-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: Every square, wall and unordered square pair in the original certificate. | T-338 |
+
+### `V-n179-algebraic-reader`
+
+**devtools.n179_algebraic_report** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits only the n179 mathematical attachment, checks its attachment/member custody and original gzip digest, rebuilds its exact field geometry through the maintained minpoly reader, and compares the derived fact and declaration. It connects the existing exact side and field-house APIs without substituting Git-commit custody for an attachment. It decides no geometric inequality.
+
+- Source: [`packing/devtools/n179_algebraic_report.py`](../../packing/devtools/n179_algebraic_report.py), [`packing/tests/test_n179_algebraic_report.py`](../../packing/tests/test_n179_algebraic_report.py)
+- Versions run: this repository's commits, which Git holds
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-959-algebraic-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original n179 certificate and both full-n179 gross mutations on the native route. | T-339 |
+
+### `V-n179-independent-review`
+
+**n179_replay.py.txt** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The accepted Stage 4 review's independent standard-library Fraction checker: exact field arithmetic, irreducibility modulo 3, Sturm root isolation, rational interval signs, unit bases, every wall and every pair via separating axes, and nine controls declared before replay. Original frozen bytes and the reproducible runnable copy are retained separately.
+
+- Source: [`packing/campaign/issue-intake/de-winter-959-2026-11-20/review/n179_replay.py.txt`](../../packing/campaign/issue-intake/de-winter-959-2026-11-20/review/n179_replay.py.txt)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md`](../../docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Codex (OpenAI) (Separately prompted strong-tier Stage 4 reviewer at maximum reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The contributor disclosed OpenAI assistance. The reviewer used a separate prompt and original data, froze independent code before reading producer or project verification code, and reused none of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-de-winter-959-independent-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: The one n179 certificate, every square, wall and pair. | T-339 |
 
 ### `V-n232-1062-review-check`
 

@@ -9,7 +9,7 @@
         "at_least_90_percent": 28
       },
       "fully_structured_cases": 9,
-      "internal_slide_dof": 918,
+      "internal_slide_dof": 917,
       "narrow_partition_status_counts": {
         "established": 3,
         "not-established": 25,
@@ -1115,13 +1115,13 @@
         "primary": {
           "angle_class_count": 13,
           "contact_component_count": 13,
-          "contact_edge_count": 105,
+          "contact_edge_count": 106,
           "free_square_count": 3,
-          "internal_slide_dof": 48,
+          "internal_slide_dof": 47,
           "largest_component_size": 24,
           "structured_fraction": "0.966666666667",
           "structured_square_count": 87,
-          "wall_seated_square_count": 31,
+          "wall_seated_square_count": 30,
           "within_six_components_and_three_free": false
         },
         "sensitivity_delta": {

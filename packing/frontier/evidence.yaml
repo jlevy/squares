@@ -67957,6 +67957,376 @@ evidence:
       or optimality is established. The corner reading copy is explicitly derived; the original source
       bytes remain retained.
     source_reviewed: '2026-11-20'
+  - id: E-geiserx-1040-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 259
+    source_key: '[GeiserX issue 1040 2026-11-19]'
+    certificate: packing/resources/web/geiserx-n259-1040-2026-11-19/source/upper/n259/packing.json.gz
+    novelty: previously-published
+    source_reviewed: '2026-11-21'
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The attachment reports the rational refinement and an upward 12-place ceiling. Its
+      programs were not used for admission.
+  - id: E-geiserx-1040-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 259
+    source_key: '[GeiserX issue 1040 2026-11-19]'
+    certificate: packing/resources/web/geiserx-n259-1040-2026-11-19/source/upper/n259/packing.json.gz
+    novelty: previously-published
+    source_reviewed: '2026-11-21'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    replay_status: passed
+    replay: Both maintained routes accepted each of 33,411 pairs and all walls in the positive. Both
+      refused the duplicate and outside-box cases and met all 11 sharp control predictions. See packing/resources/web/geiserx-n259-1040-2026-11-19/receipts/exact-certification.json.xz.
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: The project's maintained verification routes
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: The maintained project routes predate this submission and read the mathematical geometry
+          rather than the author's checker. The evidence does not establish authorship
+          overlap between the maintained routes and the producer.
+      coverage:
+        extent: full
+        unit: The original certificate and every square, wall and pair in both maintained routes.
+        checked: 1
+        of: 1
+    independence_record: packing/resources/web/geiserx-n259-1040-2026-11-19/README.md
+    limitations: The maintained routes share arithmetic and separating-axis methods. The independent
+      mathematical review has its own readers and geometry implementation.
+  - id: E-geiserx-1040-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 259
+    source_key: '[GeiserX issue 1040 2026-11-19]'
+    certificate: packing/resources/web/geiserx-n259-1040-2026-11-19/source/upper/n259/packing.json.gz
+    novelty: previously-published
+    source_reviewed: '2026-11-21'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    replay_status: passed
+    replay: 'Accepted review #1076 checked 33,411 pairs in each of two exact encodings and obtained
+      the predicted outcomes in all 16 controls and 28 outcomes. See packing/resources/web/geiserx-1040-n259-review-2026-11-21/results.json
+      and the integration replay.'
+    verifiers:
+    - V-r1040-n259-review
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: tbd-strong-max at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The attachment credits Codex for refinement and verification. The reviewer's independent
+          prompt and deciding code were frozen before project-review context.
+      coverage:
+        extent: full
+        unit: Every square, wall and pair in both original encodings.
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-21'
+      reviewed_by: Codex (OpenAI), separately prompted mathematical lane
+      note: 'Accepted review #1076 checks complete finite feasibility. The two original encodings agree
+        on every square and the exact side.'
+    limitations: The review covers finite feasibility. The full witness-envelope contract and comparisons
+      to other packings are separate record decisions.
+  - id: E-de-winter-997-followup-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 90
+    source_key: '[de Winter issue 997 follow-up 2026-11-21]'
+    certificate: packing/resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz
+    novelty: previously-published
+    source_reviewed: '2026-11-21'
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The author's attachment reports a feasible rational enclosure. Its producer programs
+      were not executed for admission.
+  - id: E-de-winter-997-followup-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 90
+    source_key: '[de Winter issue 997 follow-up 2026-11-21]'
+    certificate: packing/resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz
+    novelty: previously-published
+    source_reviewed: '2026-11-21'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    replay_status: passed
+    replay: Both maintained exact routes accepted all 4,005 pairs and walls, refused the duplicate and
+      outside-container controls, and met all 11 sharp-control predictions. See packing/resources/web/de-winter-997-followup-2026-11-21/receipts/exact-certification.json.xz.
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: The project's maintained verification routes
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: The maintained routes predate this attachment and do not execute its producer programs.
+          Their shared rational arithmetic and SAT method are disclosed.
+      coverage:
+        extent: full
+        unit: Every square, wall and unordered square pair in the original certificate.
+        checked: 1
+        of: 1
+    independence_record: packing/resources/web/de-winter-997-followup-2026-11-21/README.md
+    limitations: The maintained routes share arithmetic and separating-axis methods. The blind mathematical
+      review independently derives the corners and edge-normal comparisons.
+  - id: E-de-winter-997-followup-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 90
+    source_key: '[de Winter issue 997 follow-up 2026-11-21]'
+    certificate: packing/resources/web/de-winter-997-followup-2026-11-21/source/90/candidate.json.gz
+    novelty: previously-published
+    source_reviewed: '2026-11-21'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    replay_status: passed
+    replay: The accepted independent review checks all 90 unit squares, 1,440 vertex-wall inequalities
+      and 4,005 pairs with 16,020 axes, and passes all 13 predeclared controls. The frozen result is
+      packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/result-frozen.json;
+      the separately identified style replay agrees in every non-timing scientific field.
+    verifiers:
+    - V-de-winter-997-n90-independent-20261121
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: tbd-strong-max, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The source names GPT6.2 Astra. The independently prompted reviewer froze its own deciding
+          code and result before reading project geometry, earlier reviews or derived receipts. OpenAI
+          system-family overlap is disclosed.
+      coverage:
+        extent: full
+        unit: Every square, wall and unordered square pair in the original certificate.
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-21'
+      reviewed_by: Codex (OpenAI), independently prompted mathematical reviewer
+      note: The accepted source-only review establishes complete finite feasibility. Its result was
+        frozen before the earlier KKT receipt was revealed.
+    limitations: No optimality, authenticated leaderboard comparison, algebraic local-side ordering
+      or pose identity with the earlier held row 3 is established.
+  - id: E-de-winter-959-algebraic-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 179
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    certificate: packing/resources/web/de-winter-959-followup-2026-11-20/source/n179.minpoly.json.gz
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-21'
+    limitations: The author's algebraic certificate in issue comment 7050119161. The source's verification
+      programs were not run. Project replay and independent review are separate evidence atoms and do
+      not upgrade this reported atom. The reported GeiserX donor file at its stated digest remains unavailable.
+  - id: E-de-winter-959-algebraic-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 179
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    certificate: packing/resources/web/de-winter-959-followup-2026-11-20/source/n179.minpoly.json.gz
+    replay: The native receipt receipts/algebraic-route1-n179.json.xz in this source packet records
+      genuine full-n179 positive, duplicate-square-overlap and square-translated-outside-container jobs
+      through sqpack.witness.exact_verify. Every job tested all 15,931 pairs; the positive passed and
+      both mutations failed. Total elapsed time was 95.316 seconds under a 300-second cap. The original
+      finite/summary.json separately records both maintained routes on the original n179 geometry and
+      four source-derived n2 negative controls; its n2 controls are not represented as full-n179 checks.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-n179-algebraic-reader
+    independence:
+      coverage:
+        extent: full
+        unit: The original n179 certificate and both full-n179 gross mutations on the native route.
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: false
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: The maintained deciding verifier, attributed to earlier project lanes by the existing
+          verifier and intake records; individual tiers are unrecorded.
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Strong-tier n179 reader and integration lane at maximum reasoning.
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The source discloses OpenAI assistance. The native deciding code predates this attachment;
+          the current reader uses the maintained conversion and no contributor program. The reader's
+          author inspected project verification code only after freezing the independent review. Exact
+          historical model and tier attribution of the maintained verifier was not reconstructed.
+    independence_record: packing/resources/web/de-winter-959-followup-2026-11-20/README.md
+    limitations: The maintained verifier predates this attachment; the new reader uses its existing
+      minpoly conversion and field arithmetic. The native receipt has one deciding route. The independent
+      Stage 4 checker has its own reader and arithmetic; its evidence is a separate atom. Exact finite
+      feasibility only.
+    source_reviewed: '2026-11-21'
+  - id: E-de-winter-959-independent-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 179
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[de Winter n179 algebraic certificate 2026-11-20]'
+    certificate: packing/resources/web/de-winter-959-followup-2026-11-20/source/n179.minpoly.json.gz
+    replay: The accepted review's frozen run-02/receipt.json records 179 unit squares, 716 wall inequalities
+      and 15,931 unordered-pair separating-axis witnesses in Q[t]/(t^5+14*t^4+6*t^3-4*t^2-7*t-2), with
+      all nine predeclared controls passing. The exact replay took 2.738 seconds under a 300-second
+      cap. The maintained-floor runnable copy reproduced the scientific receipt fields and both ledgers
+      byte for byte. Reproduction commands and filename mappings are in the review packet README.
+    replay_status: passed
+    verifiers:
+    - V-n179-independent-review
+    independence:
+      coverage:
+        extent: full
+        unit: The one n179 certificate, every square, wall and pair.
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Separately prompted strong-tier Stage 4 reviewer at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The contributor disclosed OpenAI assistance. The review used Codex in a separate prompt
+          and froze its own verifier before reading project or contributor verifier implementations,
+          derived receipts or earlier reviews.
+    independence_record: docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-21'
+      reviewed_by: Codex AI agent, separately prompted strong-tier Stage 4 reviewer
+      note: Accepted complete finite construction. The first reviewer run failed closed on an unsupported
+        class-index assumption before geometry; the amended plan, second freeze and successful replay
+        are all retained. The later source comparison supplies the L70 and L207 identity independently
+        of the blind proof.
+    limitations: One distinct review, no human oversight or method-diversity claim. The original mathematical
+      data and its attachment custody are checked; the GeiserX starting input and historical priority
+      remain unresolved. No local or global optimum.
+    source_reviewed: '2026-11-21'
   - id: E-de-winter-1062-certificate-report
     claim: upper-bound
     scope:

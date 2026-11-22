@@ -1,0 +1,338 @@
+"""Independent certificate arithmetic, used-row geometry, witness holds and cover DP.
+
+No simplex, producer program, or full-packing geometric replay runs here. The packet's
+row enumeration is reused, but every nonzero dual premise and every branched clause is
+checked separately by exact corner projections before its certificate is admitted.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+from fractions import Fraction as Q
+import gzip
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import signal
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+RADIUS = Q(1, 50_000_000_000)
+
+
+def require(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+
+def read_json(path):
+    def unique(items):
+        result = {}
+        for key, value in items:
+            require(key not in result, f"duplicate JSON key: {key}")
+            result[key] = value
+        return result
+    raw = path.read_bytes()
+    if path.suffix == ".gz":
+        raw = gzip.decompress(raw)
+    return json.loads(raw, object_pairs_hook=unique), raw
+
+
+def poses_from(document):
+    require(document["n"] == 305 and document["square_size"] == "1", "pose count/size")
+    require(len(document["squares"]) == 305, "full source roster")
+    poses = []
+    for row in document["squares"]:
+        require(len(row) == 4 and all(type(v) is str for v in row), "exact pose scalars")
+        pose = tuple(map(Q, row))
+        require(pose[2] ** 2 + pose[3] ** 2 == 1, "nonunit direction")
+        poses.append(pose)
+    return poses
+
+
+def corners_about_center(pose):
+    _, _, c, s = pose
+    return tuple(((u*c-v*s)/2, (u*s+v*c)/2) for u in (-1, 1) for v in (-1, 1))
+
+
+def row_key(row):
+    return tuple(row["a"]), row["b"]
+
+
+class Premises:
+    def __init__(self, poses, side, cohort, rows, clauses):
+        self.poses = poses
+        self.side = side
+        self.ids = cohort["squares"]
+        self.free = [i for i in self.ids if i not in cohort["fixed"]]
+        self.columns = {i: 2*k for k, i in enumerate(self.free)}
+        self.width = 2*len(self.free)
+        self.rows = rows
+        self.clauses = clauses
+        self.pair_cache = {}
+        self.checked_rows = set()
+        self.checked_clauses = set()
+        self.checked_leaves = 0
+
+    def pair_alternatives(self, i, j):
+        if (i, j) in self.pair_cache:
+            return self.pair_cache[i, j]
+        require(i in self.ids and j in self.ids and i != j, "pair outside cohort")
+        p, q = self.poses[i-1], self.poses[j-1]
+        offsets_p, offsets_q = corners_about_center(p), corners_about_center(q)
+        alternatives = set()
+        universal = False
+        for c, s in (p[2:], q[2:]):
+            for base in ((c, s), (-s, c)):
+                for sign in (-1, 1):
+                    nx, ny = sign*base[0], sign*base[1]
+                    # Separation is max projection of square i <= min projection of j.
+                    upper_i = max(nx*x+ny*y for x, y in offsets_p)
+                    lower_j = min(nx*x+ny*y for x, y in offsets_q)
+                    b = (nx*(q[0]-p[0])+ny*(q[1]-p[1])+lower_j-upper_i)/RADIUS
+                    a = [Q(0)]*self.width
+                    for tile, direction in ((i, 1), (j, -1)):
+                        if tile in self.columns:
+                            k = self.columns[tile]
+                            a[k] += direction*nx
+                            a[k+1] += direction*ny
+                    maximum = sum(map(abs, a), Q(0))
+                    if b >= maximum:
+                        universal = True
+                    if b >= -maximum:
+                        alternatives.add((tuple(a), b))
+        self.pair_cache[i, j] = alternatives, universal
+        return alternatives, universal
+
+    def necessary(self, row):
+        identity = (row["label"], row_key(row))
+        if identity in self.checked_rows:
+            return
+        pieces = row["label"].split(":")
+        kind = pieces[0]
+        i, axis, sign = map(int, pieces[1:4]) if kind != "pair" else (0, 0, 0)
+        if kind == "box":
+            require(i in self.columns and axis in (0, 1) and sign in (-1, 1), "box id")
+            a = [Q(0)]*self.width
+            a[self.columns[i]+axis] = Q(sign)
+            require(row_key(row) == (tuple(a), Q(1)), "wrong coordinate normalization")
+        elif kind == "wall":
+            require(i in self.ids and axis in (0, 1) and sign in (-1, 1), "wall id")
+            pose = self.poses[i-1]
+            extrema = [corner[axis] for corner in corners_about_center(pose)]
+            b = (pose[axis]+min(extrema))/RADIUS if sign == -1 else (self.side-pose[axis]-max(extrema))/RADIUS
+            a = [Q(0)]*self.width
+            if i in self.columns:
+                a[self.columns[i]+axis] = Q(sign)
+            require(row_key(row) == (tuple(a), b), "wall row differs from projected corners")
+        elif kind == "pair":
+            i, j = map(int, pieces[1:3])
+            alternatives, universal = self.pair_alternatives(i, j)
+            require(not universal and alternatives == {row_key(row)}, "pair row not forced throughout cube")
+        else:
+            raise ValueError(f"unknown mandatory row: {kind}")
+        self.checked_rows.add(identity)
+
+    def clause(self, index):
+        if index in self.checked_clauses:
+            return
+        rows = self.clauses[index]
+        require(rows, "empty branch disjunction")
+        pairs = {tuple(map(int, row["label"].split(":")[1:3])) for row in rows}
+        require(len(pairs) == 1, "one clause mixes square pairs")
+        alternatives, universal = self.pair_alternatives(*next(iter(pairs)))
+        require(not universal and {row_key(row) for row in rows} == alternatives, "clause omits a possible separating axis")
+        require(len(rows) == len(alternatives), "clause repeats an alternative")
+        self.checked_clauses.add(index)
+
+    def dual(self, proof, appended=()):
+        rows = [*self.rows, *appended]
+        pairs = proof["multipliers"]
+        require(pairs and len({i for i, _ in pairs}) == len(pairs), "empty/duplicate multipliers")
+        coefficients = [Q(0)]*self.width
+        rhs = Q(0)
+        for i, raw_weight in pairs:
+            require(type(i) is int and 0 <= i < len(rows), "dual row index")
+            weight = Q(raw_weight)
+            require(weight >= 0, "negative multiplier")
+            if weight == 0:
+                continue
+            row = rows[i]
+            if i < len(self.rows):
+                self.necessary(row)
+            rhs += weight*row["b"]
+            for j, a in enumerate(row["a"]):
+                coefficients[j] += weight*a
+        require(not any(coefficients), "dual coefficients do not cancel")
+        require(rhs < 0 and -rhs == Q(proof["gap"]), "dual lacks its stated positive gap")
+        self.checked_leaves += 1
+
+    def tree(self, node, available, appended=()):
+        if node["kind"] == "closed":
+            self.dual(node["proof"], appended)
+            return
+        require(node["kind"] == "branch", "unclosed proof leaf")
+        ci = node["clause"]
+        require(type(ci) is int and ci in available, "repeated/unknown clause")
+        self.clause(ci)
+        children = node["children"]
+        indices = [child["alternative"] for child in children]
+        require(all(type(i) is int for i in indices) and sorted(indices) == list(range(len(self.clauses[ci]))), "incomplete branch coverage")
+        for child in children:
+            row = self.clauses[ci][child["alternative"]]
+            self.tree(child["node"], available-{ci}, (*appended, row))
+
+
+def cover_dp(groups):
+    # Process each center once; the two transitions omit or include that center.
+    # Every subset has exactly one transition path, so equal-cost counts are exact.
+    dp = {0: (0, 1)}
+    centers = sorted(set().union(*map(set, groups)))
+    for center in centers:
+        bits = sum(1 << i for i, group in enumerate(groups) if center in group)
+        nxt = dict(dp)
+        for mask, (cost, count) in dp.items():
+            target = mask | bits
+            proposal = cost+1
+            best, ways = nxt.get(target, (len(centers)+1, 0))
+            if proposal < best:
+                nxt[target] = proposal, count
+            elif proposal == best:
+                nxt[target] = best, ways+count
+        dp = nxt
+    return (*dp[(1 << len(groups))-1], len(dp), len(centers))
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", type=Path, required=True)
+    parser.add_argument("--followup", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    started = time.monotonic()
+    signal.alarm(150)
+    require(not args.output.exists(), "review output already exists")
+    journal = Path(os.environ["N305_GUARD_JOURNAL"])
+    while True:
+        records = [json.loads(line) for line in journal.read_text().splitlines()] if journal.exists() else []
+        samples = [row for row in records if row.get("record") == "sample"]
+        if samples:
+            require(samples[-1]["host"]["pressure"] == 1 and samples[-1]["tree"]["cost_gb"] <= .30, "initial memory condition")
+            break
+        require(time.monotonic()-started < 7, "no initial guard sample")
+        time.sleep(.1)
+    from programs.exact_local import geometry
+    inventory, _ = read_json(ROOT / "review-inventory-20261121.json")
+    data_inputs = []
+    for kind, base in (("required_packet_files", ROOT), ("primary_repository_inputs", args.repo)):
+        for item in inventory[kind]:
+            if item["path"].endswith(".py"):
+                continue
+            raw = (base/item["path"]).read_bytes()
+            require(len(raw) == item["bytes"] and hashlib.sha256(raw).hexdigest() == item["sha256"], "inventoried data bytes differ: "+item["path"])
+            data_inputs.append(item)
+    source = args.repo / "packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz"
+    obj, raw = read_json(source)
+    require(hashlib.sha256(raw).hexdigest() == "e6c7d0280396a2fa61804a24a7c757365320869dbb89e8cf94316bb8b6a7831f", "original decoded source")
+    original = {"n": 305, "side": Q(obj["side"]), "poses": poses_from(obj)}
+    cohorts, _ = read_json(args.followup/"source/local-move-conflicts.json")
+    require(len(cohorts) == 17, "cohort census")
+    near = [i for i, (_, _, c, s) in enumerate(original["poses"], 1) if 0 < min(abs(c), abs(s)) < Q(1, 10**9)]
+    require(len(near) == 36 and 43 not in near, "near-axis roster")
+    snapped = list(original["poses"])
+    for i in near:
+        x, y, c, s = snapped[i-1]
+        snapped[i-1] = (x, y, Q(1 if c > 0 else -1), Q(0)) if abs(c) > abs(s) else (x, y, Q(0), Q(1 if s > 0 else -1))
+    prior, _ = read_json(ROOT/"receipts/probe.json")
+    branches, _ = read_json(ROOT/"receipts/branch-resumed-20261121.json")
+    roots, _ = read_json(ROOT/"receipts/root-dual-closure-observed-20261121.json")
+    results = []
+    branch_control = None
+    for gi, cohort in enumerate(cohorts):
+        ids, fixed = cohort["squares"], cohort["fixed"]
+        require(len(ids) == len(set(ids)) and len(fixed) == len(set(fixed)), "duplicate cohort ids")
+        require(all(type(i) is int and 1 <= i <= 305 for i in ids) and set(fixed) <= set(ids) and 43 not in ids, "cohort scope")
+        rows, width, stats = geometry(original, cohort, snap43=False, include_clauses=True)
+        other = geometry(original, cohort, snap43=True, include_clauses=True)
+        require((rows, width, stats) == other and not stats["empty_clauses"], "orientation-mode/local row mismatch")
+        checker = Premises(snapped, original["side"], cohort, rows, stats["clauses"])
+        require(width == checker.width and stats["pairs"] == len(ids)*(len(ids)-1)//2, "free-coordinate/pair census")
+        for k in range(width):
+            for offset, sign in enumerate((1, -1)):
+                row = rows[2*k+offset]
+                require(row["label"] == f"box:{checker.free[k//2]}:{k%2}:{sign}", "box row order")
+                checker.necessary(row)
+        root = [row for row in roots["cohorts"] if row["cohort_index"] == gi]
+        branch = [row for row in branches["cohorts"] if row["cohort_index"] == gi and row["status"] == "verified-exclusion"]
+        previous = [row for row in prior["cases"] if row["cohort_index"] == gi and row["status"] == "verified-exclusion"]
+        if root:
+            require(len(root) == 1, "duplicate root proof")
+            checker.dual(root[0]["proof"])
+            origin = "root-dual-closure-observed-20261121.json"
+        elif branch:
+            require(len(branch) == 1, "duplicate tree proof")
+            checker.tree(branch[0]["tree"], set(range(len(stats["clauses"]))))
+            if branch_control is None and branch[0]["tree"]["kind"] == "branch":
+                branch_control = checker, branch[0]["tree"]
+            origin = "branch-resumed-20261121.json"
+        else:
+            require(len(previous) == 2 and {row["square43"] for row in previous} == {"kept", "snapped"}, "missing original-mode proof")
+            for row in previous:
+                checker.dual(row["proof"])
+            origin = "probe.json"
+        results.append({"cohort": gi, "fixed": fixed, "free_ids": checker.free, "both_modes": True, "proof_receipt": origin, "dual_checks": checker.checked_leaves, "checked_mandatory_rows": len(checker.checked_rows), "checked_branch_clauses": len(checker.checked_clauses), "corner_projected_pairs": len(checker.pair_cache)})
+    require(branch_control is not None, "missing complete-tree control")
+    checker, tree = branch_control
+    corrupt = copy.deepcopy(tree)
+    corrupt["children"].pop()
+    try:
+        checker.tree(corrupt, set(range(len(checker.clauses))))
+    except ValueError as exc:
+        require(str(exc) == "incomplete branch coverage", "unexpected branch control refusal")
+    else:
+        raise ValueError("missing alternative accepted")
+    toy = Premises([], Q(1), {"squares": [], "fixed": []}, [{"label": "contradiction", "a": [], "b": Q(-1)}], [])
+    for proof in ({"multipliers": [], "gap": "1"}, {"multipliers": [[0, "-1"]], "gap": "1"}):
+        try:
+            toy.dual(proof)
+        except ValueError:
+            pass
+        else:
+            raise ValueError("invalid multiplier control accepted")
+    sys.path.insert(0, str(args.followup/"programs"))
+    maintained = importlib.import_module("replay_alignment_results")
+    candidates, kept, retained = maintained.audit(args.repo, args.followup)
+    aligned_obj, _ = read_json(args.followup/"source/n305_37_aligned.json.gz")
+    aligned = poses_from(aligned_obj)
+    require(Q(aligned_obj["side"]) == original["side"], "aligned side")
+    witnesses = {}
+    for snap43, name, certificate in ((True, "37-aligned", candidates["37-aligned"]), (False, "36-aligned-keep43", kept)):
+        poses = list(aligned)
+        if not snap43:
+            poses[42] = (*poses[42][:2], *original["poses"][42][2:])
+        expected = list(snapped)
+        if snap43:
+            x, y, c, s = expected[42]
+            expected[42] = (x, y, Q(1 if c > 0 else -1), Q(0)) if abs(c) > abs(s) else (x, y, Q(0), Q(1 if s > 0 else -1))
+        require(poses == [(p.x, p.y, *p.basis) for p in certificate.poses] and certificate.side == original["side"], "retained positive input correspondence")
+        require(all(a[2:] == b[2:] for a, b in zip(poses, expected, strict=True)), "direction holds")
+        moved = [i for i, (a, b) in enumerate(zip(poses, original["poses"], strict=True), 1) if a[:2] != b[:2]]
+        extent = max(abs(a[k]-b[k]) for a, b in zip(poses, original["poses"], strict=True) for k in (0, 1))
+        require(moved == [108, 140, 141, 142, 143, 150, 153, 164, 175] and extent <= RADIUS, "center holds")
+        require(all(set(moved) & set(row["fixed"]) for row in cohorts), "witness misses conflict")
+        witnesses[name] = {"moved_ids": moved, "max_coordinate_move": str(extent), "radius_margin": str(RADIUS-extent), "same_side": True, "exact_direction_match": True, "retained_positive_margins": retained["positive_margins"][name]}
+    minimum, minimizers, states, centers = cover_dp([row["fixed"] for row in cohorts])
+    require((minimum, minimizers) == (9, 1581), "independent cover DP differs")
+    saved = maintained.read(args.followup, "hitting-set.json.xz")
+    require(saved["minimum_cardinality"] == minimum and len(saved["minimizers"]) == minimizers, "retained cover differs")
+    result = {"format": "n305-independent-mathematical-review-v1", "status": "PASS", "contexts_excluded": 2*len(results), "cohorts": results, "near_axis_ids": near, "side": str(original["side"]), "coordinate_radius": str(RADIUS), "witnesses": witnesses, "cover_dp": {"minimum": minimum, "minimizers": minimizers, "states": states, "center_ids": centers}, "controls": {"missing_branch": "rejected", "empty_multipliers": "rejected", "negative_multiplier": "rejected"}, "scientific_inputs": data_inputs, "independence": "Separate rational dual/tree checks, used-row corner projections and subset DP; reused packet row enumeration and maintained saved-feasibility admission. No full geometry or simplex replay.", "elapsed_seconds": round(time.monotonic()-started, 6)}
+    args.output.write_text(json.dumps(result, indent=2)+"\n")
+    print(json.dumps({key: value for key, value in result.items() if key not in ("cohorts", "witnesses", "scientific_inputs")}))
+    signal.alarm(0)
+
+
+if __name__ == "__main__":
+    main()

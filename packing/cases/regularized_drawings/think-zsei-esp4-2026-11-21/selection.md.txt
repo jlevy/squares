@@ -1,0 +1,11 @@
+| n | view | side - U | side - drawn | light / uneven / near-axis / classes / hues | house / stage sides | better on |
+| --- | --- | --- | --- | --- | --- | --- |
+| 90 | grid:n90-n179-write-and-strong-drawings-grid-0.5 | 0 | 0 | 0 / 0 / 0 / 13 / 13 -> 0 / 0 / 0 / 13 / 13 | 172 / 180 -> 176 / 180 | house_total |
+| 179 | grid:n90-n179-write-and-strong-drawings-grid-1 | 0 | 0 | 30 / 48 / 6 / 17 / 17 -> 0 / 0 / 0 / 10 / 10 | 406 / 531 -> 540 / 540 | light_axis, uneven_axis, near_axis, classes, hues, house_total, stage_total |
+
+2 counts chosen; 0 with no adoptable view (the JSON report gives each candidate's reasons).
+
+```bash
+python -m devtools.regularize_evand layer --run-dir "$(mktemp -d)" --repo-root .. --grid-run n90-n179-write-and-strong-drawings-grid-0.5 --grid-counts 90
+python -m devtools.regularize_evand layer --run-dir "$(mktemp -d)" --repo-root .. --grid-run n90-n179-write-and-strong-drawings-grid-1 --grid-counts 179
+```

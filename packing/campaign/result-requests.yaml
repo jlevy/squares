@@ -33136,13 +33136,12 @@ issues:
         An algebraic certificate for 179 squares at exactly L70 + 5, where L70 is the
         side of the published 70-square construction.
       source: https://github.com/jlevy/squares/issues/959#issuecomment-7050119161
-      not_registered: >-
-        The retained algebraic certificate passed both maintained whole-packing checks and
-        a source-only exact review. Its side is about 7.94e-14 below T-294 at first contact.
-        Registration and house selection are queued. The donor coordinates at the
-        source's stated digest are still needed to confirm that lineage.
-      queued: true
-      bead: think-esp4
+      register:
+      - T-339
+      evidence:
+      - E-de-winter-959-algebraic-report
+      - E-de-winter-959-algebraic-feasibility
+      - E-de-winter-959-independent-feasibility
     beads:
     - think-89i7
     - think-ruu2
@@ -36052,14 +36051,12 @@ issues:
         90/candidate.json.gz of n90-rational.zip. The source reports a side about 2.69816e-11
         below T-304 and claims feasibility only.
       source: https://github.com/jlevy/squares/issues/997#issuecomment-7058975230
-      not_registered: >-
-        The retained rational certificate passed both maintained routes and a source-only
-        exact review. Its side is about 8.79e-12 below T-304 at first contact under Option D.
-        It is about 9.99e-20 below the earlier held solve's rational certificate side.
-        That solve's limiting side and poses cannot be recovered from its retained report.
-        Registration and house selection remain under think-zsei.
-      queued: true
-      bead: think-zsei
+      register:
+      - T-338
+      evidence:
+      - E-de-winter-997-followup-certificate-report
+      - E-de-winter-997-followup-exact-feasibility
+      - E-de-winter-997-followup-review-exact-feasibility
     beads:
     - think-32cl
     - think-uhav
@@ -38711,7 +38708,8 @@ issues:
     title: GeiserX's public 259-square packing is below the register (pointer)
     author: JoostdeWinter
     opened: '2026-11-19'
-    state: open
+    state: closed
+    closed: '2026-11-22'
     kind: result-report
     triage: done
     summary: 'Joost de Winter points to a packing of 259 unit squares with side 16.590016439573
@@ -38733,12 +38731,12 @@ issues:
         data/submission-best.csv.gz at f822b34, Sergio Fernández Rubio's join of tilted
         bands from his own 292 and 445, 0.00136 below T-193.
       source: body
-      not_registered: >-
-        The submitted rational refinement is now retained and has exact side below
-        T-193 and below the public GeiserX rows contracted to first contact. The nearest
-        centres fail to pair with T-193 under all eight box symmetries. The independent
-        mathematical review and formal registration remain under think-squj.
-      queued: true
+      register:
+      - T-337
+      evidence:
+      - E-geiserx-1040-certificate-report
+      - E-geiserx-1040-exact-feasibility
+      - E-geiserx-1040-review-exact-feasibility
       bead: think-squj
     - key: n259-leaderboard-side-only
       claim: The Kaggle per-puzzle leaderboard reached the same side at 259 (Nevska,
@@ -38750,7 +38748,18 @@ issues:
     beads:
     - think-squj
     answer_bead: think-squj
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1040#issuecomment-7084376927
+      date: '2026-11-22'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n259-geiserx
+        id: T-337
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
     close_when: The packing is imported from an exact certificate that reached this
       repository and registered with the credit the issue asks for, or the record says
       why it will not be, and the reply on main says so.
@@ -39001,13 +39010,12 @@ issues:
         source: https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734
         not_registered: >-
           The 31-turn witness and five exact blocking pairs establish maximum 31 at fixed
-          centers and side with the other directions fixed. Both exact routes also accept
-          the 36-turn variant with square 43 restored: nine moved centers suffice within
-          the 2e-11 coordinate limit. The 17 submitted conflict groups have minimum
-          hitting-set size nine (1,581 minimizers, 10,991 search nodes). A geometric
-          minimum still depends on the 34 unverified local geometric exclusions.
-        queued: true
-        bead: think-3n8h
+          centers and side. At $2\times10^{-11}$ per coordinate, all 34 local exclusions
+          are now verified. The resulting 17 groups require nine moved centers and both
+          feasible witnesses attain nine. The original exact side and other directions
+          remain fixed, with both square-43 choices checked. The exact proof is retained
+          in packing/resources/web/de-winter-n305-1052-followup-2026-11-20/minimum-moved-centers/README.md.
+        queued: false
       - key: n305-export-enclosure-identity
         claim: >-
           For Q = 10^82, the source claims every filed half-angle tangent is on the 1/Q grid,
@@ -39072,6 +39080,15 @@ issues:
         status: confirmed
         position: current
       beads: [think-kzwl, think-rbyl]
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7068082394
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-same-side-axis-variants
+      - result: n305-axis-variant-minimality
+      - result: n305-export-enclosure-identity
+      - result: n305-precision-enclosure
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its
@@ -39169,6 +39186,15 @@ issues:
       kind: follow-up
       reported: []
       beads: [think-6ul3, think-guls]
+    - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7068547576
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n20-lower-99951-over-20000
+      - result: n20-equal-absolute-tilt
+      - result: n20-angle-diversity
+      - result: n20-one-axis-equal-magnitude
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
@@ -39218,6 +39244,12 @@ issues:
       date: '2026-11-21'
       by: jlevy
       kind: acknowledgement
+      reported:
+      - result: n26-n318-final-lower-166
+    - url: https://github.com/jlevy/squares/issues/1060#issuecomment-7068548600
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
       reported:
       - result: n26-n318-final-lower-166
     close_when: The intake record gives the disposition and a reply records it on GitHub.
@@ -39277,6 +39309,13 @@ issues:
       reported:
       - result: exact-construction-sides-eleven
       - result: three-construction-side-identities
+    - url: https://github.com/jlevy/squares/issues/1061#issuecomment-7068549588
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: exact-construction-sides-eleven
+      - result: three-construction-side-identities
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Route to the exact-side work tracked by #811. The claimed construction identities
@@ -39320,6 +39359,12 @@ issues:
       date: '2026-11-21'
       by: jlevy
       kind: acknowledgement
+      reported:
+      - result: n232-rational-follow-up
+    - url: https://github.com/jlevy/squares/issues/1062#issuecomment-7068550672
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
       reported:
       - result: n232-rational-follow-up
     close_when: The intake record gives the disposition and a reply records it on GitHub.
@@ -39372,6 +39417,12 @@ issues:
       date: '2026-11-21'
       by: jlevy
       kind: acknowledgement
+      reported:
+      - result: thirteen-rational-enclosures
+    - url: https://github.com/jlevy/squares/issues/1063#issuecomment-7068551715
+      date: '2026-11-21'
+      by: jlevy
+      kind: follow-up
       reported:
       - result: thirteen-rational-enclosures
     close_when: The intake record gives the disposition and a reply records it on GitHub.

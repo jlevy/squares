@@ -352,8 +352,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/kenaznia-doga/s179-upper-bound-13880960371",
         "Doğa Özden",
         (
-            "A further arrangement at 179 of his own T-291 band, 4.07e-4 below it, now the"
-            " record (T-294)."
+            "A further arrangement at 179 of his T-291 band, 4.07e-4 below it "
+            "(T-294, the former house)."
         ),
     ),
     (
@@ -479,7 +479,8 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
             "packing of 297 squares in T-174's layout with a double step in each "
             "staircase is replayed, reviewed and adopted here (T-299), and with borders "
             "it gives rows at 332 and 409 (#979). A local-search improvement of jazivxt's "
-            "packing at 90, 4.24e-3 below it, is replayed, reviewed and adopted here (T-304). "
+            "packing at 90, 4.24e-3 below it, became the house as T-304. De Winter's "
+            "later exact rational certificate (T-338) now supplies the house. "
             "A ribbon packing at 292 extending that of Ryan Xu's and Evan Daniel's 146, "
             "1.36e-3 below T-146 "
             "(T-311), and one band at 262 and 295, 7.41e-3 and 4.54e-3 below their houses "
@@ -712,6 +713,27 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         (
             "The degree-21 minimal polynomial of the record side at n = 297, with an exact"
             " configuration attached."
+        ),
+    ),
+    (
+        "https://github.com/jlevy/squares/issues/997#issuecomment-7058975230",
+        "Rational Refinement at 90 Squares",
+        "Joost de Winter",
+        "An exact rational refinement of jazivxt's packing at 90 (T-338).",
+    ),
+    (
+        "https://github.com/jlevy/squares/issues/959#issuecomment-7050119161",
+        "Algebraic Certificate for 179 Squares",
+        "Joost de Winter",
+        "An exact certificate of Doğa Özden's construction at L70 + 5 (T-339).",
+    ),
+    (
+        "https://github.com/jlevy/squares/issues/1040",
+        "GeiserX's public 259-square packing is below the register (pointer)",
+        "Joost de Winter",
+        (
+            "Sergio Fernández Rubio's tilted-band construction, with Joost de Winter's "
+            "verified rational refinement."
         ),
     ),
     (

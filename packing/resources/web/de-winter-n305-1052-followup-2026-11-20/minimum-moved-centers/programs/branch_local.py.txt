@@ -1,0 +1,340 @@
+"""Exhaust exact separation choices; every closed leaf carries a checked rational dual."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import json
+import signal
+import sys
+import time
+from fractions import Fraction
+from pathlib import Path
+
+from programs.exact_local import (
+    StopSliceError,
+    combine,
+    controls,
+    dual_result,
+    geometry,
+    load_inputs,
+    make_lp,
+    save,
+    stop,
+)
+from sqpack.exact_lp import ExactLPError, prove_infeasible, rational_sign
+
+
+class BudgetError(Exception):
+    pass
+
+
+def timeout(_signum: int, _frame: object) -> None:
+    raise BudgetError("per-cohort wall budget")
+
+
+def propagation(rows: list[dict], width: int, deadline: float) -> tuple[dict | None, tuple]:
+    low, high = [Fraction(-1)] * width, [Fraction(1)] * width
+    low_duals = [{2 * k + 1: Fraction(1)} for k in range(width)]
+    high_duals = [{2 * k: Fraction(1)} for k in range(width)]
+    for _ in range(20):
+        changed = False
+        for ri, row in enumerate(rows):
+            if time.monotonic() >= deadline:
+                raise BudgetError("per-cohort wall budget")
+            entries = [(k, a) for k, a in enumerate(row["a"]) if a]
+            selected = {k: (low[k] if a > 0 else high[k]) for k, a in entries}
+            duals = {k: (low_duals[k] if a > 0 else high_duals[k]) for k, a in entries}
+            minimum = sum((a * selected[k] for k, a in entries), Fraction())
+            if minimum > row["b"]:
+                weights = {ri: Fraction(1)}
+                for k, a in entries:
+                    combine(weights, duals[k], abs(a))
+                return dual_result(rows, width, weights, "branch-box-propagation"), (
+                    low,
+                    high,
+                    low_duals,
+                    high_duals,
+                )
+            for k, a in entries:
+                bound = (row["b"] - minimum + a * selected[k]) / a
+                if (a > 0 and bound >= high[k]) or (a < 0 and bound <= low[k]):
+                    continue
+                weights = {ri: Fraction(1)}
+                for j, b in entries:
+                    if j != k:
+                        combine(weights, duals[j], abs(b))
+                weights = {i: v / abs(a) for i, v in weights.items()}
+                if a > 0:
+                    high[k], high_duals[k] = bound, weights
+                else:
+                    low[k], low_duals[k] = bound, weights
+                changed = True
+        if not changed:
+            break
+    return None, (low, high, low_duals, high_duals)
+
+
+def extrema(row: dict, state: tuple) -> tuple[Fraction, Fraction]:
+    low, high, _, _ = state
+    minimum = sum(
+        (a * (low[k] if a > 0 else high[k]) for k, a in enumerate(row["a"]) if a), Fraction()
+    )
+    maximum = sum(
+        (a * (high[k] if a > 0 else low[k]) for k, a in enumerate(row["a"]) if a), Fraction()
+    )
+    return minimum, maximum
+
+
+def impossible_alternative(rows: list[dict], width: int, row: dict, state: tuple) -> dict:
+    _, _, low_duals, high_duals = state
+    weights = {len(rows): Fraction(1)}
+    for k, a in enumerate(row["a"]):
+        if a:
+            combine(weights, low_duals[k] if a > 0 else high_duals[k], abs(a))
+    return dual_result([*rows, row], width, weights, "branch-pruned-by-exact-box")
+
+
+def search(
+    rows: list[dict],
+    clauses: list[list[dict]],
+    width: int,
+    available: tuple[int, ...],
+    state: dict,
+    *,
+    deadline: float,
+    depth: int = 0,
+) -> dict:
+    state["nodes"] += 1
+    if state["nodes"] > 128:
+        raise BudgetError("128-node budget")
+    if depth > 24:
+        raise BudgetError("24-depth budget")
+    proof, bounds = propagation(rows, width, deadline)
+    if proof:
+        return {"kind": "closed", "proof": proof}
+    if width <= 20:
+        try:
+            cert = prove_infeasible(make_lp(rows, width), rational_sign, pivot_budget=40)
+            proof = dual_result(
+                rows,
+                width,
+                {i: w for i, w in enumerate(cert.multipliers) if w},
+                "branch-maintained-exact-LP",
+            )
+            proof["pivots"] = cert.pivots
+        except ExactLPError as exc:
+            state["lp_refusals"][exc.kind] = state["lp_refusals"].get(exc.kind, 0) + 1
+        else:
+            return {"kind": "closed", "proof": proof}
+    options = []
+    for ci in available:
+        intervals = [extrema(row, bounds) for row in clauses[ci]]
+        if any(hi <= row["b"] for (_, hi), row in zip(intervals, clauses[ci], strict=True)):
+            continue
+        possible = [
+            i
+            for i, ((lo, _), row) in enumerate(zip(intervals, clauses[ci], strict=True))
+            if lo <= row["b"]
+        ]
+        options.append((len(possible), ci, possible))
+    if not options:
+        return {
+            "kind": "open",
+            "reason": "necessary row system not excluded; no unresolved clause remains",
+        }
+    _, chosen, possible = min(options)
+    children = []
+    remaining = tuple(i for i in available if i != chosen)
+    for ai, row in enumerate(clauses[chosen]):
+        if ai not in possible:
+            child = {
+                "kind": "closed",
+                "proof": impossible_alternative(rows, width, row, bounds),
+            }
+        else:
+            child = search(
+                [*rows, row],
+                clauses,
+                width,
+                remaining,
+                state,
+                deadline=deadline,
+                depth=depth + 1,
+            )
+        children.append({"alternative": ai, "node": child})
+        if child["kind"] == "open":
+            return {
+                "kind": "open",
+                "reason": "open branch",
+                "clause": chosen,
+                "partial_children": children,
+            }
+    return {"kind": "branch", "clause": chosen, "children": children}
+
+
+def verify_tree(
+    node: dict,
+    rows: list[dict],
+    clauses: list[list[dict]],
+    width: int,
+    available: tuple[int, ...],
+) -> int:
+    if node["kind"] == "closed":
+        proof = node["proof"]
+        weights = {int(i): Fraction(w) for i, w in proof["multipliers"]}
+        assert len(weights) == len(proof["multipliers"])
+        assert all(0 <= i < len(rows) for i in weights)
+        got = dual_result(rows, width, weights, "independent-tree-walk")
+        assert got["gap"] == proof["gap"]
+        return 1
+    assert node["kind"] == "branch"
+    ci = node["clause"]
+    assert ci in available
+    children = node["children"]
+    assert sorted(c["alternative"] for c in children) == list(range(len(clauses[ci])))
+    remaining = tuple(i for i in available if i != ci)
+    return sum(
+        verify_tree(
+            c["node"], [*rows, clauses[ci][c["alternative"]]], clauses, width, remaining
+        )
+        for c in children
+    )
+
+
+def drop_branch(node: dict) -> bool:
+    if node["kind"] == "branch":
+        node["children"].pop()
+        return True
+    return False
+
+
+def require_time(remaining: float) -> None:
+    if remaining <= 0:
+        raise StopSliceError("total slice deadline")
+
+
+def main() -> None:
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--repo", type=Path, required=True)
+    p.add_argument("--followup", type=Path, required=True)
+    p.add_argument("--output", type=Path, required=True)
+    args = p.parse_args()
+    assert __debug__
+    signal.signal(signal.SIGTERM, stop)
+    signal.signal(signal.SIGALRM, timeout)
+    start = time.monotonic()
+    previous = json.loads(
+        (Path(__file__).resolve().parents[1] / "receipts/probe.json").read_text()
+    )
+    result = {"format": "n305-local-branch-probe-v1", "controls": controls(), "cohorts": []}
+    active = None
+    try:
+        original, cohorts = load_inputs(args.repo, args.followup)
+        assert all(43 not in cohort["squares"] for cohort in cohorts)
+        # Recheck all prior successful duals without search in this guarded slice.
+        prior_checked = 0
+        for case in previous["cases"]:
+            if case["status"] == "verified-exclusion":
+                rows, width, _ = geometry(
+                    original,
+                    cohorts[case["cohort_index"]],
+                    snap43=case["square43"] == "snapped",
+                )
+                proof = case["proof"]
+                weights = {int(i): Fraction(w) for i, w in proof["multipliers"]}
+                assert (
+                    dual_result(rows, width, weights, "prior-dual-recheck")["gap"]
+                    == proof["gap"]
+                )
+                prior_checked += 1
+        result["prior_duals_rechecked"] = prior_checked
+        pending = [
+            r for r in previous["cases"] if r["status"] == "pending" and r["square43"] == "kept"
+        ]
+        pending.sort(key=lambda r: (r["geometry"]["unresolved_clauses"], r["cohort_index"]))
+        for case in pending:
+            gi = case["cohort_index"]
+            begin = time.monotonic()
+            available_time = min(12, 175 - (begin - start))
+            require_time(available_time)
+            signal.setitimer(signal.ITIMER_REAL, available_time)
+            active = {
+                "cohort_index": gi,
+                "fixed_ids": cohorts[gi]["fixed"],
+                "square43_variants": ["kept", "snapped"],
+                "square43_absent": True,
+                "nodes": 0,
+                "lp_refusals": {},
+            }
+            try:
+                rows, width, stats = geometry(
+                    original, cohorts[gi], snap43=False, include_clauses=True
+                )
+                clauses = stats.pop("clauses")
+                active.update(
+                    {
+                        "geometry": stats,
+                        "free_coordinates": width,
+                        "rows": len(rows),
+                        "clause_choices": [len(c) for c in clauses],
+                    }
+                )
+                tree = search(
+                    rows,
+                    clauses,
+                    width,
+                    tuple(range(len(clauses))),
+                    active,
+                    deadline=begin + available_time,
+                )
+                if tree["kind"] != "open":
+                    leaves = verify_tree(tree, rows, clauses, width, tuple(range(len(clauses))))
+                    active.update(
+                        {"status": "verified-exclusion", "tree": tree, "checked_leaves": leaves}
+                    )
+                    bad = copy.deepcopy(tree)
+                    if drop_branch(bad):
+                        try:
+                            verify_tree(bad, rows, clauses, width, tuple(range(len(clauses))))
+                        except AssertionError:
+                            active["missing_branch_control"] = "rejected"
+                        else:
+                            raise AssertionError("missing branch accepted")
+                else:
+                    active.update(
+                        {"status": "pending", "reason": "open leaf", "partial_tree": tree}
+                    )
+            except BudgetError as exc:
+                active.update({"status": "pending", "reason": str(exc)})
+            finally:
+                signal.setitimer(signal.ITIMER_REAL, 0)
+            active["elapsed_seconds"] = round(time.monotonic() - begin, 6)
+            result["cohorts"].append(active)
+            sys.stdout.write(
+                json.dumps(
+                    {k: v for k, v in active.items() if k not in {"tree", "partial_tree"}}
+                )
+                + "\n"
+            )
+            sys.stdout.flush()
+            save(args.output, result)
+            active = None
+    except StopSliceError as exc:
+        result["stopped"] = {"reason": str(exc), "active": active}
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        result["elapsed_seconds"] = round(time.monotonic() - start, 6)
+        result["new_verified_exclusions"] = 2 * sum(
+            r["status"] == "verified-exclusion" for r in result["cohorts"]
+        )
+        result["total_verified_exclusions"] = (
+            previous["verified_exclusions"] + result["new_verified_exclusions"]
+        )
+        result["pending_of_34"] = 34 - result["total_verified_exclusions"]
+        save(args.output, result)
+    sys.stdout.write(json.dumps({k: v for k, v in result.items() if k != "cohorts"}) + "\n")
+
+
+if __name__ == "__main__":
+    main()

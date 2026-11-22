@@ -6,9 +6,10 @@ Both alignment variants are now verified at its exact side on both maintained ro
 with their positive, gross-refusal and sharp controls complete.
 A 36-turn version with square 43 restored is also feasible with the same nine moved
 centers.
-The finite hitting-set minimum is nine; the geometric minimum-nine claim remains
-conditional on 34 unverified local exclusions, tracked on think-3n8h. T-336’s accepted
-certificate and V3/C3 house standing remain unchanged.
+The [bounded-motion proof](minimum-moved-centers/README.md) verifies all 34 local
+exclusions. Nine moved centers are necessary and sufficient with square 43 kept
+or snapped, holding T-336’s exact side and the other directions fixed and limiting
+each coordinate change to $2\times10^{-11}$.
 
 Joost de Winter submitted these claims in
 [comment 7058958734](https://github.com/jlevy/squares/issues/1052#issuecomment-7058958734).
@@ -28,9 +29,9 @@ November. The exact retrieval time, retained members and pinned-only files are i
 | Corrected witness | Removing seven metadata lines restores the original YAML bytes; all 1,220 corners equal the accepted JSON geometry | None for this artifact identity |
 | 31-turn variant | Same exact side, no moved centers, 31 changed directions, 207 axis-aligned squares; both routes accept all 46,360 pairs | Drawing review only; no new bound |
 | 37-turn variant | Same exact side, 37 changed directions, 213 axis-aligned squares; both routes accept all 46,360 pairs | Drawing review only; no new bound |
-| 36-turn version, square 43 kept | Restore only square 43’s original half-angle in the 37-turn candidate; both routes accept all 46,360 pairs, with the same nine centers moved by at most 2e-11 per coordinate | This establishes sufficiency, not necessity |
+| 36-turn version, square 43 kept | Restore only square 43’s original half-angle in the 37-turn candidate; both routes accept all 46,360 pairs, with the same nine centers moved by at most 2e-11 per coordinate | Attains the restricted minimum |
 | Maximum 31 fixed-center snaps | The feasible 31-turn witness and five exact blocking pairs establish maximum 31, with original centers and side, all other directions fixed, and each of the specified 36 directions kept or snapped | Complete for this restricted claim |
-| Minimum nine moved centers | The 17 submitted conflict groups have hitting-set minimum nine, with 1,581 minimizers and 10,991 search nodes; the nine moved IDs hit every group | All 34 local geometric exclusions still require review and replay before nine is a geometric minimum |
+| Minimum nine moved centers | The 17 submitted conflict groups have hitting-set minimum nine, with 1,581 minimizers and 10,991 search nodes; the nine moved IDs hit every group | The 34 exact exclusions prove necessity for both square-43 choices |
 | Export reconstruction | All 610 center coordinates and 305 half-angle tangents satisfy the claimed grids and exact side-rounding identity | Historical export settings and intent are not established |
 | Precision candidate | Its exact side and all 305 poses equal the accepted first-contact contraction; the side difference is zero | No new upper-bound result follows |
 
@@ -131,7 +132,7 @@ No additional upstream data or code was retained for this update.
 The original custody manifest records the acquisition checkpoint; the completed-replay
 manifest and this README state the later results.
 
-## Reproduction and Remaining Proof
+## Reproduction
 
 [The comparison program](programs/replay_comparisons.py) reproduces the earlier
 artifact, reconstruction, five blocking-pair and contraction identities.
@@ -154,6 +155,8 @@ PYTHONPATH=.:src uv run --frozen --all-extras --group dev python -B \
 
 The `check` action verifies source custody and retained receipt identities, binds the
 native inputs, and checks saved outcomes and exact margin rules without a proof replay.
+It describes the alignment packet as checked before the local-exclusion proof. The
+proof and independent review give the later bounded-motion verdict.
 To repeat a deciding calculation, substitute one of the following actions and use a
 fresh `--out` path outside the retained packet:
 
@@ -181,39 +184,28 @@ restored witness or hitting-set replay to 120 seconds.
 `--startup-delay 5` gives a dedicated observer time to attach.
 A failure or timeout is not a confirming replay.
 
-[The complete hitting-set receipt](receipts/hitting-set.json.xz) records all 1,581
-minimum covers of the 17 submitted groups, decided by
-`devtools.select_n11_field_minimum.minimum_covers` in 10,991 nodes, with two small
-recovery controls. This is a combinatorial statement about the retained groups.
-If all 34 local geometric exclusions are correct, every admissible moved-center set must
-hit every group, so at least nine centers must move.
-The geometric premise remains unverified; this packet does not establish minimum nine.
-
-The outstanding input is [local-move-conflicts.json](source/local-move-conflicts.json),
-paired with the original exact certificate, the original side, aligned directions for
-the specified 36 squares and the $2\times10^{-11}$ coordinate bound.
-There are 17 subsets in each of two square-43 orientation cases.
-The next proof lane must independently derive the exact linear separation disjunctions,
-wall constraints and displacement bounds, preserve the relaxation from omitted tiles,
-and retain all 34 controlled solver inputs and results.
-The available Python 3.14.7 environment has no `z3` module or `z3` executable, so this
-publication pass installed nothing and ran no solver.
-The existing hitting-set and witness replay commands above need no new solver runtime.
-
-Drawing selection and the bounded-motion proof remain separate work.
-T-336’s original certificate, exact side, house drawing and V3/C3 standing are
-unchanged.
+[The bounded-motion proof](minimum-moved-centers/README.md) checks all 34 local
+exclusions and the finite hitting set on the 17 fixed-center groups. Under the stated
+coordinate and orientation constraints, nine moved centers are necessary and
+sufficient in each square-43 case. Both exact-side variants remain feasible at T-336’s
+side. Drawing selection remains a separate review.
 
 ## Compressed Files
 
-These rows bind decompressed upstream bytes.
-The original source names omit the archive-added `.gz` suffix.
+These rows bind decompressed source files and proof receipts.
+The original names omit the archive-added `.gz` suffix.
 
 | Stored file | Origin | Git blob of decompressed bytes | SHA-256 of decompressed bytes |
 | --- | --- | --- | --- |
 | `source/n305_31_quarter_turns.json.gz` | upstream | `52e3a4c0432d0c17bce01c931942f5f2a5fb6bdd` | `97fdbb544b9df751784999231a83e190e6d9cc14c2889d981c3f1268429e570f` |
 | `source/n305_37_aligned.json.gz` | upstream | `25c0354cbf7f547143fb3b9ab870628c2d4276fe` | `11bbca8a3e2fc3a238cba51d2011779117a578c4db0c9365d49003c0d0f98500` |
 | `source/n305_witness.yaml.gz` | upstream | `580e2c8b7b18bcac110f94672f7d2240e8f2a074` | `1098f986ff0ab6ecc56454d19292f995627131cf7fdbf27cca2d68db6cfe4d82` |
+| `minimum-moved-centers/receipts/branch-resumed-20261121.json.gz` | receipt | `ab2404f2d29e67317c9450fedd96f525a8cdaf1f` | `a74ecff84f291a291d65a1abb186ea8ddb4b3c1ad384160323ff77b19f2a48fd` |
+| `minimum-moved-centers/receipts/completion-20261121.json.gz` | receipt | `f7dc95d8a5d0fc0f9f58b366d09d3e32623d22d1` | `4549d3c0728e5afb0a07c58833ee8ea5648dca2f7f22783c07ef326c14b7feef` |
+| `minimum-moved-centers/receipts/completion-cohort-12-rows.json.gz` | receipt | `84aaca191402ef730c0c951f2a923421d9c37238` | `e8eb02b11a90d7e528a31133a888584787b0cfb80eb8d11fce8f03cdc0f4ed10` |
+| `minimum-moved-centers/receipts/completion-cohort-15-rows.json.gz` | receipt | `162ebd3f67ca35a91b95c8c6c48fa2a0bedc414e` | `2a98d2537521354e2f81891b22bd81d34dff38e967551048f10a1568836b89ec` |
+| `minimum-moved-centers/receipts/minimum-scope-audit-20261121.json.gz` | receipt | `db60e0a0aaf835dd5c28211a306e10a6df67665e` | `909698f121c45bc9579566bd76754dc1ca6a66d3af19891c854ee3e08e43d8f5` |
+| `minimum-moved-centers/receipts/probe.json.gz` | receipt | `613ca554221fd08ae06d8a606b7ac9245a4df871` | `ad4a1bf4a03e334e1df1be8e995c649c87a1fbfe296839c953b69e2618813963` |
 
 ## Original Gzip Files
 

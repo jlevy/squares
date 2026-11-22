@@ -10181,6 +10181,125 @@ verifiers:
         note: The source says Claude handled repository files, checks and the figure. The review is
           also by Claude, but its checker was frozen before reading source or project verification code
           and reuses none of it. The overlap is of system family, not shared code or prompt.
+  - id: V-r1040-n259-review
+    program: verify_n259.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    summary: Independent rational supports and corner half-plane checks decide every unit square, wall
+      and pair of the submitted 259-square packing and compare its two encodings.
+    source:
+    - packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py
+    - packing/resources/web/geiserx-1040-n259-review-2026-11-21/verify_n259.py.txt
+    independence_record: docs/project/reviews/review-2026-11-21-geiserx-1040-n259.md
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: tbd-strong-max at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The attachment credits Codex for refinement and verification. The reviewer's independent
+          prompt and deciding code were frozen before project-review context.
+  - id: V-de-winter-997-n90-independent-20261121
+    program: verify_independent.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    summary: Constructs exact rational vertices from signed half-angle triples, checks unit squares
+      and every wall inequality, and separates all 4,005 unordered pairs by edge normals reconstructed
+      from those vertices.
+    source:
+    - packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent.py.txt
+    - packing/campaign/issue-intake/2026-11-21-de-winter-997-n90-followup/review/verify_independent-working.py.txt
+    independence_record: docs/project/reviews/review-2026-11-21-de-winter-997-n90-rational-followup.md
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: tbd-strong-max, maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The source names GPT6.2 Astra. The independently prompted reviewer froze its own deciding
+          code and result before reading project geometry, earlier reviews or derived receipts. OpenAI
+          system-family overlap is disclosed.
+  - id: V-n179-algebraic-reader
+    program: devtools.n179_algebraic_report
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    summary: Admits only the n179 mathematical attachment, checks its attachment/member custody and
+      original gzip digest, rebuilds its exact field geometry through the maintained minpoly reader,
+      and compares the derived fact and declaration. It connects the existing exact side and field-house
+      APIs without substituting Git-commit custody for an attachment. It decides no geometric inequality.
+    source:
+    - packing/devtools/n179_algebraic_report.py
+    - packing/tests/test_n179_algebraic_report.py
+  - id: V-n179-independent-review
+    program: n179_replay.py.txt
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    summary: 'The accepted Stage 4 review''s independent standard-library Fraction checker: exact field
+      arithmetic, irreducibility modulo 3, Sturm root isolation, rational interval signs, unit bases,
+      every wall and every pair via separating axes, and nine controls declared before replay. Original
+      frozen bytes and the reproducible runnable copy are retained separately.'
+    source:
+    - packing/campaign/issue-intake/de-winter-959-2026-11-20/review/n179_replay.py.txt
+    independence_record: docs/project/reviews/review-2026-11-21-n179-independent-algebraic-certificate.md
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Separately prompted strong-tier Stage 4 reviewer at maximum reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: The contributor disclosed OpenAI assistance. The reviewer used a separate prompt and original
+          data, froze independent code before reading producer or project verification code, and reused
+          none of it.
   - id: V-n232-1062-review-check
     program: verify.py.txt (frozen source and portable input adapter)
     author: Squares Project (Levy)

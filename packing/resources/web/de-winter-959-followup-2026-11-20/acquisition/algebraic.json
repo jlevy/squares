@@ -1,0 +1,25 @@
+{
+  "format": "algebraic-witness-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/959#issuecomment-7050119161",
+  "author": "Do\u011fa \u00d6zden; algebraic reconstruction by Joost de Winter",
+  "source_key": "[de Winter n179 algebraic certificate 2026-11-20]",
+  "receipt_format": "de-winter-959-n179-algebraic-route1-v1",
+  "witness_prefix": "W-de-winter-959-alg-n",
+  "claim_limitations": "Finite feasibility of 179 unit squares at the exact algebraic side L70+5=L207-1. Construction credited to Do\u011fa \u00d6zden after Ryan Xu and Evan Daniel; algebraic certificate credited to Joost de Winter. The reported GeiserX starting file and its identity remain unresolved. No optimality, stationarity or historical-priority claim.",
+  "read_on": "2026-11-21",
+  "read_at_main": "857cdce4dc8ce446cee43f2aa713ceb74fa9939c",
+  "witnesses": [
+    {
+      "n": 179,
+      "path": "source/n179.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-179.yaml",
+      "degree": 5,
+      "first_committed": "2026-11-20T20:41:05Z"
+    }
+  ],
+  "replayed": [
+    179
+  ],
+  "pending": []
+}

@@ -1,0 +1,40 @@
+components:
+- paper:n11-lower-bounds-explainer
+- paper:n11-optimality-review
+- paper:n11-threshold-bound-review
+- paper:square-packing-methods-survey
+paths:
+- packing/atlas/known-best/composite-figure.json
+- packing/campaign/result-requests.yaml
+- packing/devtools/adopt_houses.py
+- packing/devtools/check_rational_witness_independent.py
+- packing/devtools/default_drawings.py
+- packing/devtools/evand_arrangement_reports.py
+- packing/devtools/n232_rational_source.py
+- packing/devtools/select_houses.py
+- packing/devtools/site_resources.py
+- packing/devtools/upper_bound_houses.py
+- packing/devtools/upper_bound_reports.py
+- packing/frontier/results.yaml
+- packing/frontier/source-coverage.yaml
+- packing/pyproject.toml
+- packing/src/sqpack/cli/validate.py
+- packing/src/sqpack/cli/witness.py
+- packing/src/sqpack/witness.py
+outputs:
+- papers/n11-lower-bounds-explainer.html
+- papers/n11-lower-bounds-explainer.md
+- papers/n11-optimality-review.html
+- papers/n11-optimality-review.md
+- papers/n11-threshold-bound-review.html
+- papers/n11-threshold-bound-review.md
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: 'Adopts T-340 at 232 with its original rational source and native exact jobs. Two candidate
+  renders and one render with the parent a4de7640f078 inputs used fixed link revisions and Chrome
+  on macOS. That parent''s tree equals main e6a86b6edb19. The optimality review, threshold review
+  and methods survey each produced 43 byte-identical files across all three renders. The explainer
+  produced 55 deterministic files: only its live registered-result count changes from 339 to
+  340 in HTML and Markdown; the other files match. All four printed paper editions retain their
+  published versions. After the final derived-record and aggregate-expectation refresh,
+  one fresh render of each paper reproduced its reviewed candidate output byte for byte.'

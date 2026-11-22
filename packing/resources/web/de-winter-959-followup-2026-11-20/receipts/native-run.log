@@ -1,0 +1,23 @@
+{"control": "positive", "passed": true, "pairs": 15931, "elapsed": 22.9678730420419}
+{"control": "duplicate-square-overlap", "passed": false, "pairs": 15931, "elapsed": 41.22425829200074}
+{"control": "square-translated-outside-container", "passed": false, "pairs": 15931, "elapsed": 95.30595020903274}
+{
+  "status": "complete",
+  "n": 179,
+  "jobs": [
+    "positive",
+    "duplicate-square-overlap",
+    "square-translated-outside-container"
+  ],
+  "elapsed_seconds": 95.31563204200938,
+  "wall_cap_seconds": 300,
+  "source_member_sha256": "28edf9561e87037b5c681e4ff0051a1bd1b8e5401c1a8376fe2e66c2c18663d1",
+  "native_receipt": "packing/resources/web/de-winter-959-followup-2026-11-20/receipts/algebraic-route1-n179.json.xz",
+  "positive_recomputed": true,
+  "negative_scope": "full n179, not n2",
+  "native_job_ids": [
+    "W-de-winter-959-alg-n179-positive",
+    "W-de-winter-959-alg-n179-duplicate-square-overlap",
+    "W-de-winter-959-alg-n179-square-translated-outside-container"
+  ]
+}

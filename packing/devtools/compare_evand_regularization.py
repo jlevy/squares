@@ -97,18 +97,12 @@ class KnownTilt(NamedTuple):
 #: it; a tilt at another distance, at another square or count, is refused as before
 #: (review A6 of #756).
 KNOWN_TILTS: dict[tuple[int, int], KnownTilt] = {
-    # n = 259's house since 23 October 2026 is issue 639's exact form (T-193,
-    # think-ot5c), an exact solve of T-174's packing: square 229 lies 5.21e-7 degrees off
-    # the axis, one of its 26 near-axis squares. The axis tool still refuses the
-    # number-field witness, so this tally reads it. Its regularization (think-mbdw,
-    # grid-slack's version 2, 26 October 2026) draws square 229 straightened; the witness
-    # keeps the tilt.
-    (259, 229): KnownTilt(
-        0,
-        "5.21e-7",
-        "think-mbdw: the regularization of n = 259's exact house, drawn since 26 October "
-        "2026 with square 229 straightened; the witness keeps the tilt",
-    ),
+    # n = 259's house from 23 October to 21 November 2026 was issue 639's exact form
+    # (T-193, think-ot5c): square 229 lay 5.21e-7 degrees off the axis. Grid-slack's
+    # version 2 drew it straightened while the field witness kept the tilt (think-mbdw).
+    # T-337 replaced that house with a rational construction the axis tool draws, so
+    # the index no longer refuses 259 and its known-tilt entry left. The retained T-193
+    # fact still exercises the historical ambiguity and stale-entry controls in tests.
     # n = 270's house from 9 to 18 November 2026, Doğa Özden's certificate of issue 936
     # (T-283, think-he66), held 13 near-axis squares 1.05e-12 to 2.38e-7 degrees off the
     # axis, which the axis tool refused (think-wju3). The pass of 18 November 2026

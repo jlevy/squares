@@ -1,0 +1,209 @@
+"""Bounded exact completion at the two retained n305 leaves; never executes source code."""
+from __future__ import annotations
+import argparse
+import copy
+from fractions import Fraction as Q
+import gzip
+import hashlib
+from itertools import combinations
+import json
+from pathlib import Path
+import signal
+import sys
+import time
+from programs import branch_local as branch
+from programs.exact_local import StopSliceError, controls, dual_result, geometry, load_inputs, make_lp, save, stop
+from sqpack.exact_lp import ExactLPError, auxiliary_program, rational_sign, solve
+
+ROOT = Path(__file__).resolve().parents[1]
+RADIUS = Q(1, 50000000000)
+
+
+def row_check(rows, point):
+    return all(sum((a*x for a,x in zip(r['a'],point,strict=True)),Q()) <= r['b'] for r in rows)
+
+
+def decide(rows, width):
+    lp = make_lp(rows, width)
+    auxiliary, initial = auxiliary_program(lp, rational_sign)
+    solution = solve(auxiliary, initial, rational_sign, pivot_budget=100)
+    relaxation = solution.vertex.point[width]
+    assert relaxation >= 0
+    if relaxation:
+        weights = {i:w for i,w in zip(solution.vertex.active,solution.vertex.multipliers,strict=True) if i < len(rows) and w}
+        proof = dual_result(rows,width,weights,'maintained-exact-phase1-leaf')
+        proof['pivots'] = solution.pivots
+        return {'kind':'closed','proof':proof}
+    point = solution.vertex.point[:width]
+    assert row_check(rows,point)
+    return {'kind':'feasible','point':point,'pivots':solution.pivots}
+
+
+def snapped_poses(original, snap43=False):
+    poses = list(original['poses'])
+    near = [i for i,(_,_,c,s) in enumerate(poses,1) if 0 < min(abs(c),abs(s)) < Q(1,10**9)]
+    assert len(near)==36
+    for i in near + ([43] if snap43 else []):
+        x,y,c,s=poses[i-1]
+        poses[i-1] = (x,y,Q(1 if c>0 else -1),Q(0)) if abs(c)>abs(s) else (x,y,Q(0),Q(1 if s>0 else -1))
+    return poses
+
+
+def corners(pose):
+    x,y,c,s=pose
+    assert c*c+s*s==1
+    return [(x+(c*u-s*v)/2,y+(s*u+c*v)/2) for u,v in [(-1,-1),(1,-1),(1,1),(-1,1)]]
+
+
+def check_geometry(poses, side, ids):
+    polygons={i:corners(poses[i-1]) for i in ids}
+    for i,p in polygons.items():
+        if any(x<0 or y<0 or x>side or y>side for x,y in p):
+            return {'valid':False,'failure':'outside','square':i}
+    checked=0
+    for i,j in combinations(ids,2):
+        p,q=polygons[i],polygons[j]
+        axes=[(poly[(k+1)%4][1]-poly[k][1],poly[k][0]-poly[(k+1)%4][0]) for poly in (p,q) for k in (0,1)]
+        separated=False
+        for a,b in axes:
+            pp=[a*x+b*y for x,y in p];qq=[a*x+b*y for x,y in q]
+            if max(pp)<=min(qq) or max(qq)<=min(pp):
+                separated=True
+                break
+        checked+=1
+        if not separated:
+            return {'valid':False,'failure':'overlap','pair':[i,j],'pairs_checked':checked}
+    return {'valid':True,'squares':len(ids),'pairs_checked':checked}
+
+
+def verify_candidate(original, cohort, point, rows):
+    free=[i for i in cohort['squares'] if i not in set(cohort['fixed'])]
+    assert len(point)==2*len(free) and all(abs(v)<=1 for v in point) and row_check(rows,point)
+    moved={i:(RADIUS*point[2*k],RADIUS*point[2*k+1]) for k,i in enumerate(free)}
+    result={'point':[str(x) for x in point],'offsets':{str(i):[str(x),str(y)] for i,(x,y) in moved.items()},'checks':{}}
+    for snap in (False,True):
+        poses=snapped_poses(original,snap)
+        before=list(poses)
+        for i,(dx,dy) in moved.items():
+            x,y,c,s=poses[i-1];poses[i-1]=(x+dx,y+dy,c,s)
+        assert all(poses[i-1][:2]==before[i-1][:2] for i in cohort['fixed'])
+        local=check_geometry(poses,original['side'],cohort['squares'])
+        assert local['valid'],local
+        whole=check_geometry(poses,original['side'],list(range(1,306)))
+        result['checks']['square43-snapped' if snap else 'square43-kept']={'cohort':local,'whole_packing':whole}
+    return result
+
+
+def leaf_path(node):
+    path=[]
+    while 'clause' in node:
+        candidates=[c for c in node['partial_children'] if c['node']['kind']=='open']
+        assert len(candidates)==1
+        chosen=candidates[0]
+        path.append((node['clause'],chosen['alternative']))
+        node=chosen['node']
+    assert node['kind']=='open'
+    return path
+
+
+def exhaust(rows, clauses, width, available, state, deadline, cache):
+    state['nodes']+=1
+    if state['nodes']>128 or time.monotonic()>=deadline:
+        raise branch.BudgetError('completion node or wall budget')
+    proof,bounds=branch.propagation(rows,width,deadline)
+    if proof:return {'kind':'closed','proof':proof}
+    choices=[]
+    for ci in available:
+        bounds_here=[branch.extrema(row,bounds) for row in clauses[ci]]
+        if any(hi<=r['b'] for (_,hi),r in zip(bounds_here,clauses[ci],strict=True)):continue
+        possible=[i for i,((lo,_),r) in enumerate(zip(bounds_here,clauses[ci],strict=True)) if lo<=r['b']]
+        choices.append((len(possible),ci,possible))
+    if not choices:
+        key=tuple(r['label'] for r in rows)
+        if key not in cache:cache[key]=decide(rows,width)
+        got=cache[key]
+        if got['kind']=='feasible':
+            state['candidate_point']=got['point']
+            state['candidate_rows']=rows
+            return {'kind':'open','reason':'exact feasible point','pivots':got['pivots']}
+        return got
+    _,ci,possible=min(choices)
+    children=[]
+    remaining=tuple(i for i in available if i!=ci)
+    for ai,row in enumerate(clauses[ci]):
+        child=({'kind':'closed','proof':branch.impossible_alternative(rows,width,row,bounds)} if ai not in possible else exhaust([*rows,row],clauses,width,remaining,state,deadline,cache))
+        children.append({'alternative':ai,'node':child})
+        if child['kind']=='open':return {'kind':'open','reason':'open branch','clause':ci,'partial_children':children}
+    return {'kind':'branch','clause':ci,'children':children}
+
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--repo',type=Path,required=True);p.add_argument('--followup',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
+    args=p.parse_args();assert __debug__
+    signal.signal(signal.SIGTERM,stop);signal.signal(signal.SIGALRM,branch.timeout)
+    started=time.monotonic()
+    result={'format':'n305-exact-leaf-completion-v1','baseline_verified_exclusions':30,'controls':{},'cohorts':[]}
+    active=None
+    try:
+        result['controls']=controls()
+        feasible_rows=[{'label':'upper','a':[Q(1)],'b':Q(1)},{'label':'lower','a':[Q(-1)],'b':Q(1)}]
+        got=decide(feasible_rows,1);assert got['kind']=='feasible' and row_check(feasible_rows,got['point'])
+        assert not row_check(feasible_rows,[Q(2)])
+        bad=check_geometry([(Q(1),Q(1),Q(1),Q(0))]*2,Q(3),[1,2]);assert not bad['valid'] and bad['failure']=='overlap'
+        result['controls'].update({'phase1_feasible_point':'accepted','corrupt_point':'rejected','duplicate_square_geometry':'rejected'})
+        source_bytes=(ROOT/'receipts/branch-resumed-20261121.json').read_bytes()
+        prior=json.loads(source_bytes);assert prior['total_verified_exclusions']==30
+        result['baseline_receipt_sha256']=hashlib.sha256(source_bytes).hexdigest()
+        result['programs']={str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in [Path(__file__),ROOT/'programs/exact_local.py',ROOT/'programs/branch_local.py',args.repo/'packing/src/sqpack/exact_lp.py']}
+        original,cohorts=load_inputs(args.repo,args.followup)
+        for old in [r for r in prior['cohorts'] if r['status']=='pending']:
+            begin=time.monotonic();remaining=min(78,173-(begin-started))
+            if remaining<=0:raise StopSliceError('total worker cap')
+            signal.setitimer(signal.ITIMER_REAL,remaining)
+            gi=old['cohort_index'];assert gi in (12,15)
+            active={'cohort_index':gi,'status':'pending','fixed_ids':cohorts[gi]['fixed'],'square43_absent':43 not in cohorts[gi]['squares']}
+            try:
+                rows,width,stats=geometry(original,cohorts[gi],snap43=False,include_clauses=True)
+                clauses=stats.pop('clauses');assert width==36 and not stats['empty_clauses']
+                path=leaf_path(old['partial_tree']);leaf_rows=rows+[clauses[c][a] for c,a in path]
+                encoded={'cohort':cohorts[gi],'width':width,'leaf_path':path,'base_rows':rows,'clauses':clauses,'leaf_rows':leaf_rows,'radius':str(RADIUS)}
+                raw=json.dumps(encoded,default=str,sort_keys=True).encode()
+                frozen=args.output.parent/f'completion-cohort-{gi}-rows.json.gz';frozen.write_bytes(gzip.compress(raw,mtime=0))
+                active.update({'geometry':stats,'leaf_path':path,'leaf_rows':len(leaf_rows),'row_artifact':str(frozen),'row_payload_sha256':hashlib.sha256(raw).hexdigest()})
+                save(args.output,result|{'active':active})
+                got=decide(leaf_rows,width)
+                if got['kind']=='feasible':
+                    active.update({'status':'verified-local-counterexample','candidate':verify_candidate(original,cohorts[gi],got['point'],leaf_rows),'pivots':got['pivots']})
+                else:
+                    active['actual_leaf_proof']=got['proof']
+                    cache={tuple(r['label'] for r in leaf_rows):got}
+                    state={'nodes':0}
+                    tree=exhaust(rows,clauses,width,tuple(range(len(clauses))),state,begin+remaining,cache)
+                    active['nodes']=state['nodes']
+                    if tree['kind']=='open':
+                        active.update({'status':'verified-local-counterexample','partial_tree':tree,'candidate':verify_candidate(original,cohorts[gi],state['candidate_point'],state['candidate_rows'])})
+                    else:
+                        leaves=branch.verify_tree(tree,rows,clauses,width,tuple(range(len(clauses))))
+                        active.update({'status':'verified-exclusion','tree':tree,'checked_leaves':leaves})
+                        altered=copy.deepcopy(tree)
+                        if branch.drop_branch(altered):
+                            try:branch.verify_tree(altered,rows,clauses,width,tuple(range(len(clauses))))
+                            except AssertionError:active['missing_branch_control']='rejected'
+                            else:raise AssertionError('incomplete tree accepted')
+            except (branch.BudgetError,ExactLPError) as exc:
+                active['reason']=str(exc);active['refusal_kind']=getattr(exc,'kind','wall-budget')
+            finally:signal.setitimer(signal.ITIMER_REAL,0)
+            active['elapsed_seconds']=round(time.monotonic()-begin,6)
+            result['cohorts'].append(active);active=None;save(args.output,result)
+    except StopSliceError as exc:result['stopped']={'reason':str(exc),'active':active}
+    finally:
+        signal.setitimer(signal.ITIMER_REAL,0)
+        result['new_verified_exclusions']=2*sum(r['status']=='verified-exclusion' for r in result['cohorts'])
+        result['total_verified_exclusions']=30+result['new_verified_exclusions']
+        result['local_counterexample_cohorts']=[r['cohort_index'] for r in result['cohorts'] if r['status']=='verified-local-counterexample']
+        result['elapsed_seconds']=round(time.monotonic()-started,6)
+        save(args.output,result)
+    print(json.dumps({k:v for k,v in result.items() if k not in ('programs','cohorts')}))
+
+if __name__=='__main__':main()
