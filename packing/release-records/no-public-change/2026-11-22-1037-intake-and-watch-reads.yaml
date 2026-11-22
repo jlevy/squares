@@ -6,7 +6,6 @@ components:
 paths:
   - packing/campaign/result-requests.yaml
   - packing/devtools/site_resources.py
-  - packing/frontier/n-295.md
   - packing/frontier/source-coverage.yaml
 outputs:
   - papers/n11-lower-bounds-explainer.html
@@ -18,9 +17,9 @@ outputs:
   - papers/square-packing-methods-survey.html
   - papers/square-packing-methods-survey.md
 reason: >-
-  Records the exact certificate evidence for issue 1037, adds case citations and the
-  reviewed source card, updates source reads, and records the deployed 305-square
-  reply. Two renders of the candidate inputs and one render with exact main
-  e6a86b6edb19 ran in separate directories using Chrome on macOS. All
-  55 explainer files and all 43 files apiece for the other three papers were
-  byte-identical between runs.
+  Retains the exact proof and replays for issue 1037 in the source packet,
+  adds the reviewed source card, updates source reads, and records the deployed
+  305-square reply. Against exact main e6a86b6edb19, the prior scoped comparisons
+  had 55 byte-identical explainer files and 43 apiece for the optimality and
+  threshold reviews; their published inputs are unchanged in the current revision.
+  Two current methods-survey renders and the exact-main render match all 43 files.

@@ -14105,13 +14105,11 @@ sources:
   replay_disposition: case-specific
   represented_by:
   - resources/web/geiserx-exact-1037-2026-11-22/acquisition/sources.json
+  - resources/web/geiserx-exact-1037-2026-11-22/receipts/native-rational.json.xz
+  - resources/web/geiserx-exact-1037-2026-11-22/receipts/native-quadratic-202-263.json.xz
   - docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
   evidence:
   - E-geiserx-1037-original-report
-  - E-geiserx-1037-rational-native-replay
-  - E-geiserx-1037-quadratic-native-replay
-  - E-geiserx-1037-rational-independent-review
-  - E-geiserx-1037-quadratic-independent-review
   notes: >-
     The source identifies Sergio Fernández Rubio as the finder and Joost de Winter as the
     certificate author. The independent review establishes finite rational and quadratic
