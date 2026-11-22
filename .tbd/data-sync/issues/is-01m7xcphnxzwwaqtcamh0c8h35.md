@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: exact certificates of GeiserX's published packings
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T21:09:48.349Z
-updated_at: 2026-11-22T21:34:56.361Z
+updated_at: 2026-11-22T22:10:40.411Z
 started_at: 2026-11-20T22:45:07.840Z
 ---
 Issue jlevy/squares#1037 (Joost de Winter, 2026-11-18T20:06:25Z), a pointer: Sergio Fernández Rubio (GeiserX) published packings below the register at seven counts, in GeiserX/squares-in-squares (data/submission-best.csv.gz at c00281c2fb4b42a1c7071dc4fd493347cfd5a87b, CC BY 4.0 by the issue). De Winter says he is not the finder and asks that the packings be credited to Fernández Rubio.
@@ -46,3 +46,5 @@ The report-order walk first handles 202 and 263; include T-244 alongside
 the T-174 house at 263, and keep #1061's n295 claim separately ordered.
 Source review deploy/reply, competing-report ordering, and drawing/registration
 remain open. The alternate algebraic witness at 297 remains unverified.
+
+22 November UTC. Source and scoped independent review merged in #1082 at cd609c43866272e25fcc0b22d0680ac29089309d after exact senior C, correctness D, and the three required checks. Certificate page run 45075594075 gates the contributor reply. Initial exact-base report-order walk for 202 and 263 passed with no drift or warnings and returns two recorded, unclassified recommendations, including T-244 beside the T-174 house. No registration or adoption decision yet. Published-coordinate comparisons show de Winter's rational forms at 202, 204 and 263 also beat GeiserX's original retained witnesses contracted to first contact. Continue with the remaining source comparisons and the independently reviewed quadratic witness and strong drawing gates.
