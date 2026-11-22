@@ -215,6 +215,13 @@ allowlist:
       changed picture is refused as a new reading. The receipt it writes is this
       repository's file, read from Git by the exact-side register and compared with
       nothing.
+  - path: packing/devtools/n232_rational_source.py
+    kind: download
+    boundary: >-
+      The original compressed mathematical member from de Winter's issue 1062
+      attachment is matched to its acquisition manifest's byte count and SHA-256
+      before decoding. This binds the external archive member; complete geometry,
+      native jobs and control membership are compared structurally.
   - path: packing/devtools/n179_algebraic_report.py
     kind: download
     boundary: >-

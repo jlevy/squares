@@ -229,7 +229,8 @@ T193_BELOW_T186 = (175, 204, 232, 302)
 #: correction, to Mykhailo Polkovskyi's issue-1009 certificate (T-323), 1.36e-3 below
 #: T-146 and below T-193's side there, and the pass of 21 November took 199 on to Joost de
 #: Winter's re-solve of T-284's core (T-285), a new result under option D (think-b0w5).
-OVERTAKEN = {175: "T-267", 199: "T-285", 204: "T-306", 232: "T-307", 292: "T-323"}
+#: The 22 November pass adopted de Winter's rational certificate as T-340 at 232.
+OVERTAKEN = {175: "T-267", 199: "T-285", 204: "T-306", 232: "T-340", 292: "T-323"}
 #: The algebraic houses the pass of 23 October 2026 adopted once the writer wrote an
 #: algebraic side (think-ot5c): PR #574's at 70, 153 and 207 (T-174), and issue 639's exact
 #: forms at the six counts whose forms the packet retains and that owe no correction
@@ -678,6 +679,11 @@ def test_a_staged_count_passes_the_check_and_a_stale_or_unstaged_one_fails(
     assert [c.result for c in selected[7].candidates] == ["T-900", "T-901"]
     staged = {7: select.Pending(house="T-900", bead="think-test", why=select.NEXT_PULL_REQUEST)}
     monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
+    # Both synthetic packets provide a writer; next-PR staging requires that
+    # capability independently of their already mocked exact-side readers.
+    monkeypatch.setattr(
+        select, "writable", lambda candidate: candidate.result in {"T-900", "T-901"}
+    )
     # A synthetic register owes no correction (`CORRECTIONS_OWED`, review B1 of #658).
     monkeypatch.setattr(select, "CORRECTIONS_OWED", {})
     assert select.check(selected) == []

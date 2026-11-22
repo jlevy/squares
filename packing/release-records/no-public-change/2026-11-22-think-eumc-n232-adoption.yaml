@@ -4,6 +4,7 @@ components:
 - paper:n11-threshold-bound-review
 - paper:square-packing-methods-survey
 paths:
+- packing/atlas/known-best/bound-citations.json
 - packing/atlas/known-best/composite-figure.json
 - packing/campaign/result-requests.yaml
 - packing/devtools/adopt_houses.py
@@ -15,6 +16,7 @@ paths:
 - packing/devtools/site_resources.py
 - packing/devtools/upper_bound_houses.py
 - packing/devtools/upper_bound_reports.py
+- packing/devtools/upper_bound_sharp_controls.py
 - packing/frontier/results.yaml
 - packing/frontier/source-coverage.yaml
 - packing/pyproject.toml
@@ -37,4 +39,6 @@ reason: 'Adopts T-340 at 232 with its original rational source and native exact 
   produced 55 deterministic files: only its live registered-result count changes from 339 to
   340 in HTML and Markdown; the other files match. All four printed paper editions retain their
   published versions. After the final derived-record and aggregate-expectation refresh,
-  one fresh render of each paper reproduced its reviewed candidate output byte for byte.'
+  one fresh render of each paper reproduced its reviewed candidate output byte for byte.
+  A further four-paper confirmation after the hosted type-contract, rigidity, citation
+  and contributor-census repairs reproduced those same candidate bytes.'

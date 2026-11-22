@@ -68,7 +68,7 @@ from collections.abc import Collection, Sequence
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, TypedDict
 
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
@@ -253,7 +253,18 @@ def tight_pairs(certificate: legacy.Certificate) -> list[tuple[Fraction, int, in
     )
 
 
-def enlarged_pair(certificate: legacy.Certificate) -> dict[str, Any]:
+class EnlargedPair(TypedDict):
+    """Exact pair contact and its two square indices."""
+
+    square: int
+    partner: int
+    gap: Fraction
+    at: Fraction
+    past: Fraction
+    clean: bool
+
+
+def enlarged_pair(certificate: legacy.Certificate) -> EnlargedPair:
     """A tight pair's square to enlarge past contact, preferring one that closes it alone.
 
     Over the pairs in `tight_pairs` order, the second square and then the first is grown
@@ -482,7 +493,7 @@ def control_rows(
             # `expect` whatever square was grown.
             if control == ENLARGED_WALL:
                 rule = EQUAL
-                detail = {"wall_clearance": found["clearance"]}
+                detail = {"wall_clearance": wall["clearance"]}
             else:
                 if OVERLAP not in failures:
                     rule = EQUAL
@@ -490,7 +501,7 @@ def control_rows(
                     rule = WINDOW
                 else:
                     rule = AT_MOST
-                detail = {"partner": _square(found["partner"]), "pair_gap": found["gap"]}
+                detail = {"partner": _square(pair["partner"]), "pair_gap": pair["gap"]}
             rows.append(
                 decided_row(
                     control,

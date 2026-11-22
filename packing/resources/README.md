@@ -2027,8 +2027,8 @@ Alex Chilton’s compilation.
 The
 [original fact and exact replay](web/de-winter-1060-1063-2026-11-21/n232/review/README.md)
 support [T-340](../frontier/RESULTS.md).
-The project has staged house adoption while its maintained writer gains support for the
-original exact source.
+The maintained writer adopted the original exact source as T-340 on 22 November 2026,
+with complete native exact jobs and the independent review retained.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
