@@ -35,6 +35,10 @@ The independent review also keeps the rational Witness/v2 corner inputs for 202 
 as alternate encodings.
 All 12 math members decompress to the original bytes.
 They total 1,939,969 bytes before compression and 264,658 bytes in the packet.
+The acquisition check matched the exact side and every corner set between the two
+original rational encodings at all seven counts. Its paths refer to the full
+attachment's scratch extraction. [Encoding comparison](acquisition/encoding-comparison.json),
+[comparison program](acquisition/inspect_packet.py.txt)
 
 | Count | Submitted rational side, rounded up to 12 places |
 | ---: | ---: |
@@ -63,7 +67,8 @@ refused both whole-certificate controls for each.
 [Maintained rational replay](receipts/native-rational.json.xz),
 [quadratic field replay](receipts/native-quadratic-202-263.json.xz)
 
-The degree-70 algebraic statement at 297 still awaits replay.
+The 297-square algebraic witness, whose side is reported as a root of a degree-70
+polynomial, still awaits replay.
 At 297, the issue attributes a 66-square bottom portion to Asterios Panoras’s version 17
 compilation.
 Pose identity with the pinned upstream input, prior registered packings, and

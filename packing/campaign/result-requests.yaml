@@ -38581,8 +38581,9 @@ issues:
       Joost de Winter supplies exact certificates for seven packings published by Sergio
       Fernández Rubio (GeiserX) at c00281c2fb4b42a1c7071dc4fd493347cfd5a87b.
       The rational corner and center/half-angle encodings agree exactly for all seven.
-      The source separately gives quadratic certificates at 202 and 263, a degree-70
-      form at 297, and a provenance map for the lower 66 squares of the 297 packing.
+      The source separately gives quadratic certificates at 202 and 263, an algebraic
+      witness with a degree-70 side polynomial at 297, and a provenance map for the
+      lower 66 squares of the 297 packing.
       The maintained exact replays cover every original rational certificate and both
       quadratic witnesses at 202 and 263, with both whole-certificate controls. The
       independent review verifies both rational and quadratic geometries at 202
@@ -38644,7 +38645,9 @@ issues:
       queued: true
       bead: think-36ui
     - key: geiserx-algebraic-297
-      claim: The 297-square construction has an exact degree-70 side and an algebraic witness.
+      claim: >-
+        The source reports that the 297-square side is a root of a degree-70 polynomial
+        and supplies a corresponding algebraic witness.
       source: body
       not_registered: The algebraic replay and comparison with competing 297 reports are queued.
       queued: true

@@ -722,6 +722,15 @@ OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
         "An exact certificate of Doğa Özden's construction at L70 + 5 (T-339).",
     ),
     (
+        "https://github.com/jlevy/squares/issues/1037",
+        "Exact Certificates for Seven GeiserX Packings",
+        "Joost de Winter",
+        (
+            "Rational certificates for Sergio Fernández Rubio's packings, with "
+            "quadratic certificates at 202 and 263."
+        ),
+    ),
+    (
         "https://github.com/jlevy/squares/issues/1040",
         "GeiserX's public 259-square packing is below the register (pointer)",
         "Joost de Winter",
