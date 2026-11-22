@@ -1,0 +1,94 @@
+"""Assemble the bounded-motion minimum from independently checked exact components."""
+from __future__ import annotations
+import argparse
+from fractions import Fraction as Q
+import hashlib
+import gzip
+import importlib
+import json
+import os
+from pathlib import Path
+import signal
+import sys
+import time
+from programs.exact_local import geometry, load_inputs, dual_result
+from programs.branch_local import verify_tree
+from programs.complete_leaves import snapped_poses
+from programs.check_root_duals import verify
+
+ROOT=Path(__file__).resolve().parents[1]
+RADIUS=Q(1,50000000000)
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--repo',type=Path,required=True);parser.add_argument('--followup',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
+    args=parser.parse_args();assert __debug__;signal.alarm(60);started=time.monotonic()
+    journal=Path(os.environ['N305_GUARD_JOURNAL'])
+    while True:
+        records=[json.loads(line) for line in journal.read_text().splitlines()] if journal.exists() else []
+        samples=[r for r in records if r.get('record')=='sample']
+        if samples:
+            assert samples[-1]['host']['pressure']<2 and samples[-1]['tree']['cost_gb']<=.30
+            break
+        assert time.monotonic()-started<7
+        time.sleep(.1)
+    original,cohorts=load_inputs(args.repo,args.followup)
+    assert original['n']==305 and len(cohorts)==17
+    loaded={}
+    for name in ('probe.json','branch-resumed-20261121.json','root-dual-closure-observed-20261121.json'):
+        raw=(ROOT/'receipts'/name).read_bytes();loaded[name]=(json.loads(raw),hashlib.sha256(raw).hexdigest())
+    checked=[];mappings=[]
+    for gi,cohort in enumerate(cohorts):
+        ids=cohort['squares'];fixed=cohort['fixed'];free=[i for i in ids if i not in fixed]
+        assert len(ids)==len(set(ids)) and len(fixed)==len(set(fixed)) and set(fixed)<=set(ids)<=set(range(1,306)) and 43 not in ids
+        rows,width,stats=geometry(original,cohort,snap43=False,include_clauses=True)
+        other_rows,other_width,other_stats=geometry(original,cohort,snap43=True,include_clauses=True)
+        assert rows==other_rows and width==other_width and stats==other_stats and width==2*len(free) and not stats['empty_clauses']
+        for k in range(width):
+            for offset,sign in enumerate((1,-1)):
+                row=rows[2*k+offset]
+                assert row['label']==f'box:{free[k//2]}:{k%2}:{sign}' and row['b']==1
+                assert row['a']==[Q(sign if j==k else 0) for j in range(width)]
+        origin=None;leaves=0
+        root=[r for r in loaded['root-dual-closure-observed-20261121.json'][0]['cohorts'] if r['cohort_index']==gi]
+        branches=[r for r in loaded['branch-resumed-20261121.json'][0]['cohorts'] if r['cohort_index']==gi and r['status']=='verified-exclusion']
+        prior=[r for r in loaded['probe.json'][0]['cases'] if r['cohort_index']==gi and r['status']=='verified-exclusion']
+        if root:
+            proof=root[0]['proof'];weights={i:Q(w) for i,w in proof['multipliers']}
+            assert verify(rows,width,weights)==Q(proof['gap']);origin='root-dual-closure-observed-20261121.json';leaves=1
+        elif branches:
+            clauses=stats['clauses'];leaves=verify_tree(branches[0]['tree'],rows,clauses,width,tuple(range(len(clauses))));origin='branch-resumed-20261121.json'
+        else:
+            assert {r['square43'] for r in prior}=={'kept','snapped'}
+            for row in prior:
+                proof=row['proof'];weights={int(i):Q(w) for i,w in proof['multipliers']}
+                assert dual_result(rows,width,weights,'assembly-certificate-recheck')['gap']==proof['gap']
+            origin='probe.json';leaves=1
+        checked.extend([[gi,'kept'],[gi,'snapped']])
+        mappings.append({'cohort_index':gi,'one_based_ids':ids,'fixed_ids':fixed,'free_ids_by_column_pair':free,'width':width,'mandatory_rows':len(rows),'unresolved_clauses':len(stats['clauses']),'square43_absent':True,'both_modes_identical':True,'proof_receipt':origin,'checked_leaves':leaves})
+    assert len(checked)==34 and len({tuple(k) for k in checked})==34
+    sys.path.insert(0,str(args.followup/'programs'))
+    maintained=importlib.import_module('replay_alignment_results')
+    candidates, kept_certificate, retained_summary=maintained.audit(args.repo,args.followup)
+    source_original=args.repo/'packing/resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz'
+    original_certificate=maintained.parse_certificate(gzip.decompress(source_original.read_bytes()),305,'center-direction-json')
+    assert original['side']==original_certificate.side
+    assert original['poses']==[(p.x,p.y,*p.basis) for p in original_certificate.poses]
+    witnesses={}
+    for snap,name,candidate in [(True,'37-aligned',candidates['37-aligned']),(False,'36-aligned-keep43',kept_certificate)]:
+        assert candidate.side==original['side']
+        expected=snapped_poses(original,snap);actual=[(p.x,p.y,*p.basis) for p in candidate.poses]
+        assert len(actual)==305 and all(a[2:]==b[2:] for a,b in zip(actual,expected,strict=True))
+        moved=[i for i,(a,b) in enumerate(zip(actual,original['poses'],strict=True),1) if a[:2]!=b[:2]]
+        max_move=max(abs(a[k]-b[k]) for a,b in zip(actual,original['poses'],strict=True) for k in (0,1))
+        assert moved==[108,140,141,142,143,150,153,164,175] and max_move<=RADIUS
+        assert all(set(moved)&set(c['fixed']) for c in cohorts)
+        witnesses[name]={'moved_ids':moved,'moved_count':len(moved),'maximum_coordinate_displacement':str(max_move),'within_radius':True,'same_side':True,'all_directions_match_model':True,'controlled_feasibility':'retained exact two-route positive bound to input; not rerun','positive_margins':retained_summary['positive_margins'][name]}
+    groups=[r['fixed'] for r in cohorts];cover=maintained.cover(groups);saved=maintained.read(args.followup,'hitting-set.json.xz')
+    assert cover.size==saved['minimum_cardinality']==9 and cover.nodes==saved['nodes']==10991
+    minimizers={tuple(sorted(map(int,v))) for v in cover.selections};assert minimizers=={tuple(r) for r in saved['minimizers']} and len(minimizers)==1581
+    output={'format':'n305-bounded-motion-minimum-assembly-v1','verified_local_exclusions':34,'cohort_mappings':mappings,'certificate_sources':{k:v[1] for k,v in loaded.items()},'side':str(original['side']),'coordinate_radius':str(RADIUS),'snapped_near_axis_ids':[i for i,(a,b) in enumerate(zip(original['poses'],snapped_poses(original),strict=True),1) if a[2:]!=b[2:]],'square43_modes':['original','snapped'],'other_directions':'fixed to original exact directions','local_relaxation':'Every cohort drops outside-tile constraints; every cohort tile outside its designated fixed group retains both bounded center variables. Restricting any admissible full packing with that fixed group unmoved therefore satisfies the local model. No omitted tile is silently fixed.','hitting_set':{'minimum':cover.size,'minimizers':len(minimizers),'nodes':cover.nodes,'fresh_replay':True},'witnesses':witnesses,'minimum_moved_centers_under_stated_hypotheses':9,'unrestricted_motion_or_rotation_minimum':False,'elapsed_seconds':round(time.monotonic()-started,6)}
+    args.output.write_text(json.dumps(output,indent=2)+'\n');signal.alarm(0)
+    print(json.dumps({k:v for k,v in output.items() if k not in ('cohort_mappings','witnesses')}))
+
+if __name__=='__main__':main()

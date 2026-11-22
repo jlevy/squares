@@ -1,0 +1,94 @@
+{
+  "verified 15": {
+    "cohorts": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      16
+    ],
+    "minimum_cardinality": 8,
+    "minimizers": 186,
+    "nodes": 3172
+  },
+  "including 12": {
+    "cohorts": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16
+    ],
+    "minimum_cardinality": 8,
+    "minimizers": 93,
+    "nodes": 3493
+  },
+  "including 15": {
+    "cohorts": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16
+    ],
+    "minimum_cardinality": 8,
+    "minimizers": 93,
+    "nodes": 3172
+  },
+  "all 17": {
+    "cohorts": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "minimum_cardinality": 9,
+    "minimizers": 1581,
+    "nodes": 10991
+  }
+}
