@@ -3,9 +3,9 @@ type: is
 id: is-01m7w5kr6n8h9hh2vypshmyhrh
 title: "Import JoostdeWinter: GeiserX's public 259-square packing below the register, pointer (#1040)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 16
+version: 17
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-20T09:46:42.260Z
-updated_at: 2026-11-22T19:39:24.168Z
+updated_at: 2026-11-22T20:47:24.663Z
 started_at: 2026-11-20T09:46:48.225Z
+closed_at: 2026-11-22T20:47:24.653Z
+close_reason: "T-337 adopted by PR #1078, exact deployment 44948168989 verified, author reply 7084376927 published on the completed issue, and the posted receipt is on main through PR #1080."
+resolution: null
+duplicate_of: null
 ---
 jlevy/squares#1040 (JoostdeWinter, 2026-11-19T04:54:13Z, no comments): Sergio Fernández Rubio (GeiserX) published a packing of 259 unit squares with side 16.590016439573 in GeiserX/squares-in-squares data/submission-best.csv.gz at f822b34 (CC BY 4.0), joining tilted bands from his 292- and 445-square packings; 0.00136 below T-193's 16.591378145498. Nevska reached the same side on Kaggle on 8 November 2026 without published coordinates (side-only, context). The issue attaches packing-259.zip, an exact rational Witness/v2 of the packing with a verifier, and asks that the packing be credited to GeiserX.
 
