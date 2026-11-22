@@ -1,0 +1,12 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records the latest intake custody, the same-side 305-square drawing review,
+  and the published 90-, 179-, 259-, and 305-square follow-up receipts. Two
+  candidate builds and the 9e4471c2a516 baseline build ran in separate
+  directories with Chrome on macOS. All 43 output files matched byte for byte.
