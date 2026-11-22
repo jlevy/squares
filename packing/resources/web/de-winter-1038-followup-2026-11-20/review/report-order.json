@@ -1,0 +1,37 @@
+{
+  "format": "intake-report-order-disposition-v1",
+  "read_at_main": "e6a86b6edb199502edea902697ef1ae6124bcc1e",
+  "comment": {
+    "author": {
+      "login": "JoostdeWinter"
+    },
+    "createdAt": "2026-11-20T17:53:48Z",
+    "lastEditedAt": null,
+    "url": "https://github.com/jlevy/squares/issues/1038#issuecomment-7046716722",
+    "userContentEdits": {
+      "totalCount": 0
+    }
+  },
+  "n": 228,
+  "verdicts": {
+    "rational": {
+      "exact": true,
+      "verdict": "recorded",
+      "reason": "below",
+      "decided_against": [
+        "record T-334"
+      ],
+      "reported_at": "2026-11-20T17:53:48Z"
+    },
+    "algebraic": {
+      "exact": false,
+      "verdict": "recorded",
+      "reason": "below",
+      "decided_against": [
+        "record T-334"
+      ],
+      "reported_at": "2026-11-20T17:53:48Z"
+    }
+  },
+  "scope": "Two alternative preparations for one report. Registration selects one form; this draft makes no adoption decision."
+}

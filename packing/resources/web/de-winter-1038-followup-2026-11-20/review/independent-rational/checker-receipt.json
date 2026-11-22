@@ -1,0 +1,101 @@
+{
+  "accepted": true,
+  "unit_squares": 228,
+  "pairs_tested": 25878,
+  "minimum_wall_margin": "0",
+  "wall_corner_equalities": 36,
+  "first_wall_equality_zero_based": [
+    0,
+    0,
+    1
+  ],
+  "minimum_pair_max_axis_gap": "22277354425836857781844101524708490896756428840662792325480967407583346608510804501907560603120694251148847895149846498996181395808473607/286272609176295732275630297478064756142717524908337476888692869234571952531474857421006081928569014460053456024262203798283598699658356100000000000000000000000000000000000000000000000000000000000000000000",
+  "pair_equalities": 0,
+  "first_pair_equality_zero_based": null,
+  "source_sha256": "603efbf226b672576264431c21707047c416ad68ca93faa047dea385249ac883",
+  "side": "1949505389578958739953419230259607665584880673171919463998129/125000000000000000000000000000000000000000000000000000000000",
+  "scalar_conversion": "Fraction string parse then exact integer numerator/denominator to gmpy2.mpq",
+  "controls": [
+    {
+      "control": "duplicate-second-square",
+      "refused": true,
+      "reason": "interior-overlap",
+      "detail": [
+        0,
+        1,
+        "-1",
+        1
+      ]
+    },
+    {
+      "control": "first-square-shifted-minus-two-sides",
+      "refused": true,
+      "reason": "outside-closed-container",
+      "detail": [
+        0,
+        0,
+        0,
+        "-1859610133561526345552234037861694044796805302420669968154324893023289/100000000000000000000000000000000000000000000000000000000000000000000"
+      ]
+    },
+    {
+      "control": "exact-shared-edge-and-wall",
+      "accepted": true,
+      "unit_squares": 2,
+      "pairs_tested": 1,
+      "minimum_wall_margin": "0",
+      "wall_corner_equalities": 8,
+      "first_wall_equality_zero_based": [
+        0,
+        0,
+        0
+      ],
+      "minimum_pair_max_axis_gap": "0",
+      "pair_equalities": 1,
+      "first_pair_equality_zero_based": [
+        0,
+        1
+      ]
+    },
+    {
+      "control": "exact-unit-container",
+      "accepted": true,
+      "unit_squares": 1,
+      "pairs_tested": 0,
+      "minimum_wall_margin": "0",
+      "wall_corner_equalities": 8,
+      "first_wall_equality_zero_based": [
+        0,
+        0,
+        0
+      ],
+      "minimum_pair_max_axis_gap": "None",
+      "pair_equalities": 0,
+      "first_pair_equality_zero_based": null
+    },
+    {
+      "control": "inward-pair-1-over-100",
+      "refused": true,
+      "reason": "interior-overlap",
+      "detail": [
+        0,
+        1,
+        "-1/100",
+        1
+      ]
+    },
+    {
+      "control": "outward-wall-1-over-100",
+      "refused": true,
+      "reason": "outside-closed-container",
+      "detail": [
+        0,
+        0,
+        0,
+        "-1/100"
+      ]
+    }
+  ],
+  "elapsed_seconds": 6.394162708020303,
+  "scope": "Closed-container exact unit-square containment and every unordered pair's interior non-overlap; no optimality, priority, or comparison claim."
+}

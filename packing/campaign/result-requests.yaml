@@ -33183,6 +33183,29 @@ issues:
         status: confirmed
         position: current
       beads: [think-esp4]
+    - url: https://github.com/jlevy/squares/issues/959#issuecomment-7085659999
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n179-algebraic-l70-plus-5
+        id: T-339
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n179-band-second
+        id: T-294
+        status: confirmed
+        position: superseded
+      - result: n179-algebraic-l70-plus-5
+        id: E-de-winter-959-algebraic-report
+      - result: n179-algebraic-l70-plus-5
+        id: E-de-winter-959-algebraic-feasibility
+        status: confirmed
+      - result: n179-algebraic-l70-plus-5
+        id: E-de-winter-959-independent-feasibility
+        status: confirmed
     close_when: >-
       T-294 is on main at V3/C3 as the house at 179, and the reply on main says what was
       retained and replayed, what the review found and that the case adopted it.
@@ -36094,6 +36117,29 @@ issues:
         status: confirmed
         position: current
       beads: [think-zsei]
+    - url: https://github.com/jlevy/squares/issues/997#issuecomment-7085659546
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n90-rational-follow-up
+        id: T-338
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n90-local-search
+        id: T-304
+        status: confirmed
+        position: superseded
+      - result: n90-rational-follow-up
+        id: E-de-winter-997-followup-certificate-report
+      - result: n90-rational-follow-up
+        id: E-de-winter-997-followup-exact-feasibility
+        status: confirmed
+      - result: n90-rational-follow-up
+        id: E-de-winter-997-followup-review-exact-feasibility
+        status: confirmed
     close_when: >-
       T-304 is on main with its stage 4 review mapped and adopted as the house at 90, and the
       reply on main says what was retained and replayed, what the review found and that the case
@@ -38510,8 +38556,13 @@ issues:
     kind: result-report
     triage: pending
     summary: >-
-      De Winter reports 2,837 upper bounds from 1,036 to 9,928 in above1000/ at cc20a26.
-      The beyond-horizon import bead owns the report-order and coverage decision.
+      De Winter reports 2,837 upper bounds from 1,036 to 9,928 in above1000/ at
+      cc20a26845789c2502950041c26709eda8a71081. The 22 November census found that all
+      2,837 submitted rows match the source archive and round upward. All 65 original
+      files are retained in external custody and passed an offline hosted archive
+      readback. The source's verifier reads the larger 5,186-row archive. Report
+      order, submitted-subset replay, replay pricing and publication remain on
+      think-1tkk under think-llit.
     read_through: '2026-11-17T22:27:56Z'
     results: []
     beads:
@@ -38661,10 +38712,18 @@ issues:
       queued: false
     - key: n228-later-algebraic-attachment
       claim: >-
-        De Winter attached a separate exact algebraic archive for n = 228.
-        Its comparison with T-334 awaits review.
+        De Winter supplied new rational and algebraic certificates for the 228-square
+        layout. The new rational side is about 9.6587073354e-14 below T-334 contracted
+        to first contact. The algebraic side is smaller again.
       source: https://github.com/jlevy/squares/issues/1038#issuecomment-7046716722
-      not_registered: The later attachment is queued for a separate comparison.
+      not_registered: >-
+        The original witness bytes and maintained replay receipts are retained in
+        packing/resources/web/de-winter-1038-followup-2026-11-20/. Both rational routes
+        accepted the packing and refused both gross controls. The maintained field
+        route also accepted the algebraic packing and refused both gross controls.
+        A separate checker accepted the rational packing and its six controls. The dated
+        report-order walk places this follow-up below T-334 for either form, as one
+        report. Independent degree-seven review and registration stay on think-d4b0.
       queued: true
       bead: think-d4b0
     beads:
@@ -38830,6 +38889,15 @@ issues:
         confirmation: C3
         status: confirmed
         position: current
+      - result: n259-geiserx
+        id: E-geiserx-1040-certificate-report
+      - result: n259-geiserx
+        id: E-geiserx-1040-exact-feasibility
+        status: confirmed
+      - result: n259-geiserx
+        id: E-geiserx-1040-review-exact-feasibility
+        status: confirmed
+      - result: n259-leaderboard-side-only
     close_when: The packing is imported from an exact certificate that reached this
       repository and registered with the credit the issue asks for, or the record says
       why it will not be, and the reply on main says so.
@@ -39068,9 +39136,10 @@ issues:
         not_registered: >-
           The 31-turn and 37-turn variants use T-336's exact side. Both maintained routes
           accept all 46,360 pairs in each variant. Both full-packing control families and
-          22 sharp cases produced all predicted outcomes. Drawing review remains open.
-        queued: true
-        bead: think-rbyl
+          22 sharp cases produced all predicted outcomes. All three same-side views,
+          including the one with square 43 fixed, draw more light and uneven squares
+          and fewer contacts than the published drawing. The published view remains.
+        queued: false
       - key: n305-axis-variant-minimality
         claim: >-
           At the original centers and side with all other directions fixed, 31 of the 36
@@ -39165,6 +39234,9 @@ issues:
       kind: follow-up
       reported:
       - result: n305-axis-variant-minimality
+      - result: n305-rational-certificate
+        id: E-de-winter-1052-certificate-report
+      - result: n305-leaderboard-side-only
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its

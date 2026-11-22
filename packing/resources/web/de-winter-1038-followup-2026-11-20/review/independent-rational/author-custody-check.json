@@ -1,0 +1,21 @@
+{
+  "checker_and_plan_match_freeze": true,
+  "archive_sha256": "5e0c62d9ad52b1afd78929e55e2fabf8d21f37fbe5f6e6c5a105f013ab970bd2",
+  "original_sha256": "58465564994035e8e6c7f40c6651c0638f12e5e04546bd4b5225ced7808ba1bc",
+  "reading_sha256": "603efbf226b672576264431c21707047c416ad68ca93faa047dea385249ac883",
+  "original_member_matches_archive_and_source": true,
+  "whole_inner_object_equal": true,
+  "duplicate_object_keys": false,
+  "stdout_equals_receipt": true,
+  "representation": "center-basis",
+  "coordinates": {
+    "origin": "lower-left",
+    "axes": "x-right-y-up",
+    "angle_unit": "not-applicable"
+  },
+  "scalar": {
+    "kind": "rational"
+  },
+  "side": "1949505389578958739953419230259607665584880673171919463998129/125000000000000000000000000000000000000000000000000000000000",
+  "rows": 228
+}
