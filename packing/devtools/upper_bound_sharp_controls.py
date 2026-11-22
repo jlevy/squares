@@ -64,11 +64,11 @@ from __future__ import annotations
 
 import json
 import time
-from collections.abc import Collection, Sequence
+from collections.abc import Callable, Collection, Iterator, Sequence
 from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
-from typing import Any, TypedDict
+from typing import Any, Literal, TypedDict
 
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
@@ -142,17 +142,28 @@ def _verdicts(first: dict[str, Any], second: dict[str, Any]) -> Verdicts:
     }
 
 
-def decide(certificate: legacy.Certificate, profile: dict[str, str]) -> Verdicts:
+def decide(
+    certificate: legacy.Certificate,
+    profile: dict[str, str],
+    *,
+    rational_backend: Literal["fraction", "gmp"] = "fraction",
+) -> Verdicts:
     """Both routes on a certificate of unit squares, as `kernel.run_sharp` decides one."""
-    first, _report = legacy.exact_verify(kernel.to_witness(certificate, **profile))
+    first, _report = legacy.exact_verify(
+        kernel.to_witness(certificate, **profile), rational_backend=rational_backend
+    )
     second = legacy.independent.check_squares(
-        legacy.corner_squares(certificate), certificate.side
+        legacy.corner_squares(certificate), certificate.side, rational_backend=rational_backend
     )
     return _verdicts(first, second)
 
 
 def decide_corners(
-    certificate: legacy.Certificate, squares: list[Square], profile: dict[str, str]
+    certificate: legacy.Certificate,
+    squares: list[Square],
+    profile: dict[str, str],
+    *,
+    rational_backend: Literal["fraction", "gmp"] = "fraction",
 ) -> Verdicts:
     """Both routes on squares given by their corners, which need not be unit squares."""
     witness = kernel.to_witness(certificate, **profile)
@@ -164,8 +175,10 @@ def decide_corners(
         }
         for index, square in enumerate(squares, start=1)
     ]
-    first, _report = legacy.exact_verify(witness)
-    second = legacy.independent.check_squares(squares, certificate.side)
+    first, _report = legacy.exact_verify(witness, rational_backend=rational_backend)
+    second = legacy.independent.check_squares(
+        squares, certificate.side, rational_backend=rational_backend
+    )
     return _verdicts(first, second)
 
 
@@ -435,17 +448,47 @@ def _square(index: int) -> int:
     return index + 1
 
 
-def control_rows(
-    certificate: legacy.Certificate, profile: dict[str, str]
-) -> list[dict[str, Any]]:
-    """Every control at contact and past it, and the duplicate square, decided."""
-    rows: list[dict[str, Any]] = []
+def iter_control_rows(
+    certificate: legacy.Certificate,
+    profile: dict[str, str],
+    *,
+    rational_backend: Literal["fraction", "gmp"] = "fraction",
+    selected: Collection[tuple[str, str]] | None = None,
+    stage: Callable[[str], None] | None = None,
+) -> Iterator[dict[str, Any]]:
+    """Yield completed native control rows with optional bounded-stage notifications.
+
+    Selection limits which verdicts run, and never represents a complete receipt by
+    itself. Planning remains Fraction arithmetic. A caller may retain each yielded row
+    before advancing to the next, and may time or interrupt a stage via its callback.
+    """
+    known = {
+        (control, where)
+        for control in CONTROLS[:-1]
+        for where in ("at-contact", "past-contact")
+    } | {(DUPLICATE, "gross")}
+    wanted = known if selected is None else set(selected)
+    if not wanted or not wanted <= known:
+        raise reports.ReportError("sharp-control selection is empty or unknown")
+    if rational_backend not in ("fraction", "gmp"):
+        raise ValueError("unknown exact rational backend")
+
+    def notify(name: str) -> None:
+        if stage is not None:
+            stage(name)
+
+    notify("plan:contacts:start")
     left, right, gap, _normal = legacy.tightest_pair(certificate)
     corners = legacy.corner_squares(certificate)
     near = min(min(x, y) for square in corners for x, y in square)
     clearance = legacy.top_clearance(certificate)
+    notify("plan:contacts:complete")
+    notify("plan:enlarged-pair:start")
     pair = enlarged_pair(certificate)
+    notify("plan:enlarged-pair:complete")
+    notify("plan:enlarged-wall:start")
     wall = enlarged_wall(certificate)
+    notify("plan:enlarged-wall:complete")
     for past in (False, True):
         where = "past-contact" if past else "at-contact"
         excess = EPSILON if past else Fraction(0)
@@ -460,27 +503,34 @@ def control_rows(
             ),
             (NEAR_WALL, "wall", CONTAINER, {"moved_by": near + excess}),
         ):
+            if (control, where) not in wanted:
+                continue
+            name = f"control:{control}:{where}"
+            notify(f"{name}:start")
             started = time.process_time()
             if control == NEAR_WALL:
                 actual = near_wall(certificate, past=past)
             else:
                 actual = kernel.sharp_input(certificate, control, past=past)
-            rows.append(
-                decided_row(
-                    control,
-                    where,
-                    margin,
-                    verdicts=decide(actual, profile),
-                    failures=[kind] if past else [],
-                    expected_margin=expect,
-                    detail=detail,
-                    started=started,
-                )
+            yield decided_row(
+                control,
+                where,
+                margin,
+                verdicts=decide(actual, profile, rational_backend=rational_backend),
+                failures=[kind] if past else [],
+                expected_margin=expect,
+                detail=detail,
+                started=started,
             )
+            notify(f"{name}:complete")
         for control, margin, found in (
             (ENLARGED_PAIR, "gap", pair),
             (ENLARGED_WALL, "wall", wall),
         ):
+            if (control, where) not in wanted:
+                continue
+            name = f"control:{control}:{where}"
+            notify(f"{name}:start")
             started = time.process_time()
             growth = found["past" if past else "at"]
             index = found["square"]
@@ -488,9 +538,8 @@ def control_rows(
             squares[index] = enlarge(certificate.poses[index], growth)
             failures = predicted_failures(squares, index, growth, certificate.side)
             edge = 1 + 2 * growth
-            # The grown square's clearance goes to exactly -excess, and every other wall
-            # and pair is as the admitted certificate states it, so the wall margin is
-            # `expect` whatever square was grown.
+            # The enlarged square's wall clearance is exactly -excess. All other
+            # walls and pairs retain the certificate's admitted geometry.
             if control == ENLARGED_WALL:
                 rule = EQUAL
                 detail = {"wall_clearance": wall["clearance"]}
@@ -502,41 +551,52 @@ def control_rows(
                 else:
                     rule = AT_MOST
                 detail = {"partner": _square(pair["partner"]), "pair_gap": pair["gap"]}
-            rows.append(
-                decided_row(
-                    control,
-                    where,
-                    margin,
-                    verdicts=decide_corners(certificate, squares, profile),
-                    failures=failures,
-                    expected_margin=expect,
-                    detail={
-                        "square": _square(index),
-                        **detail,
-                        "half_edge_grown_by": growth,
-                        "edge": edge,
-                        "clean": found["clean"],
-                    },
-                    started=started,
-                    rule=rule,
-                    edge=edge,
-                )
+            yield decided_row(
+                control,
+                where,
+                margin,
+                verdicts=decide_corners(
+                    certificate, squares, profile, rational_backend=rational_backend
+                ),
+                failures=failures,
+                expected_margin=expect,
+                detail={
+                    "square": _square(index),
+                    **detail,
+                    "half_edge_grown_by": growth,
+                    "edge": edge,
+                    "clean": found["clean"],
+                },
+                started=started,
+                rule=rule,
+                edge=edge,
             )
-    started = time.process_time()
-    duplicate = kernel.job_input(certificate, "duplicate-square-overlap")
-    rows.append(
-        decided_row(
+            notify(f"{name}:complete")
+    if (DUPLICATE, "gross") in wanted:
+        notify(f"control:{DUPLICATE}:gross:start")
+        started = time.process_time()
+        duplicate = kernel.job_input(certificate, "duplicate-square-overlap")
+        yield decided_row(
             DUPLICATE,
             "gross",
             "gap",
-            verdicts=decide(duplicate, profile),
+            verdicts=decide(duplicate, profile, rational_backend=rational_backend),
             failures=[OVERLAP],
             expected_margin=Fraction(-1),
             detail={"square": _square(1), "copy_of": _square(0)},
             started=started,
         )
-    )
-    # Each control at contact, then past it, in the order of `CONTROLS`.
+        notify(f"control:{DUPLICATE}:gross:complete")
+
+
+def control_rows(
+    certificate: legacy.Certificate,
+    profile: dict[str, str],
+    *,
+    rational_backend: Literal["fraction", "gmp"] = "fraction",
+) -> list[dict[str, Any]]:
+    """Every control in the existing receipt order; defaults to Fraction arithmetic."""
+    rows = list(iter_control_rows(certificate, profile, rational_backend=rational_backend))
     rows.sort(key=lambda row: (CONTROLS.index(row["control"]), row["where"] == "past-contact"))
     return rows
 
@@ -550,7 +610,9 @@ def certificate_path(packet: Path, row: reports.CertificateRow) -> str:
     return path.resolve().relative_to(reports.REPO.resolve()).as_posix()
 
 
-def sharp_controls(packet: Path, n: int) -> dict[str, Any]:
+def sharp_controls(
+    packet: Path, n: int, *, rational_backend: Literal["fraction", "gmp"] = "fraction"
+) -> dict[str, Any]:
     """The receipt of every control on the packet's certificate at ``n``."""
     declaration = reports.load_declaration(packet)
     rows = [row for row in declaration["certificates"] if row["n"] == n]
@@ -561,7 +623,7 @@ def sharp_controls(packet: Path, n: int) -> dict[str, Any]:
         "witness_prefix": declaration["witness_prefix"],
         "claim_limitations": declaration["claim_limitations"],
     }
-    controls = control_rows(certificate, profile)
+    controls = control_rows(certificate, profile, rational_backend=rational_backend)
     return {
         "format": FORMAT,
         "packet": packet.name,
