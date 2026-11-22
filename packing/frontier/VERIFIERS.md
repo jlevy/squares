@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **289** programs: **57** external and **232** first-party; **202** decide claims and **87** check premises.
-- **817** of **1054** evidence entries name the programs that verified them: 410 independently re-implemented, 325 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **290** programs: **57** external and **233** first-party; **203** decide claims and **87** check premises.
+- **821** of **1059** evidence entries name the programs that verified them: 412 independently re-implemented, 327 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -92,8 +92,8 @@ second implementation agrees.
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 19 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 156 | 163 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 148 | 163 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 158 | 163 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 149 | 163 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -321,6 +321,7 @@ second implementation agrees.
 | [`V-r1012-review-check`](#v-r1012-review-check) | r1012_check.py with r1012_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-r1052-review-check`](#v-r1052-review-check) | r1052_check.py with r1052_reader.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-r1040-n259-review`](#v-r1040-n259-review) | verify_n259.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-geiserx-1037-202-263-review`](#v-geiserx-1037-202-263-review) | verify_202_263.py | Squares Project (Levy) | first-party | decides | 2 | 0 |
 
 ## By Program
 
@@ -1657,6 +1658,8 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-samanyu-n109-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained routes. | T-335 |
 | `E-de-winter-1052-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | T-336 |
 | `E-geiserx-1040-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | T-337 |
+| `E-geiserx-1037-rational-native-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
+| `E-geiserx-1037-quadratic-native-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-check-rational-witness-independent`
 
@@ -1819,6 +1822,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-samanyu-n109-exact-feasibility` | replayed here | re-implemented, sharing named components | full, 1 of 1: The one canonical n109 fact: 109 squares, every wall and all 5,886 pairs, on both maintained routes. | T-335 |
 | `E-de-winter-1052-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The primary certificate at 305, every square, wall and pair on both maintained routes. | T-336 |
 | `E-geiserx-1040-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | T-337 |
+| `E-geiserx-1037-rational-native-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -5879,6 +5883,22 @@ Independent rational supports and corner half-plane checks decide every unit squ
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-geiserx-1040-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: Every square, wall and pair in both original encodings. | T-337 |
+
+### `V-geiserx-1037-202-263-review`
+
+**verify_202_263.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Independently checks the rational and quadratic 202- and 263-square witnesses, their walls and all pairs, the exact side formulas, nesting, and contact controls.
+
+- Source: [`packing/resources/web/geiserx-exact-1037-2026-11-22/review/verify_202_263.py.txt`](../../packing/resources/web/geiserx-exact-1037-2026-11-22/review/verify_202_263.py.txt)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md`](../../docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Codex (OpenAI) (Isolated mathematical review at high reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The producer discloses OpenAI assistance. The reviewer froze the independent code and controls before reading producer programs or earlier validations.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-geiserx-1037-rational-independent-review` | replayed here | independently re-implemented, clean-room | full, 2 of 2: Original certificates including every square, wall and pair in each. | - |
+| `E-geiserx-1037-quadratic-independent-review` | replayed here | independently re-implemented, clean-room | full, 2 of 2: Original certificates including every square, wall and pair in each. | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

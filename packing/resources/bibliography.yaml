@@ -6200,6 +6200,20 @@ sources:
       in his 292- and 445-square layouts. Joost de Winter refined and certified it in
       the attachment on issue 1040 and acknowledges OpenAI Codex for refinement and
       verification. The exact data and reproducible receipts are retained in the intake packet.
+  - key: '[GeiserX issue 1037 2026-11-18]'
+    authors:
+      - Sergio Fernández Rubio (GeiserX)
+      - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-18'
+    lineage: independent
+    credit: GeiserX, Joost de Winter
+    note: >-
+      Sergio Fernández Rubio published the seven packings. Joost de Winter refined
+      and certified them for issue 1037 using Evan Daniel's solver. The source
+      identifies Asterios Panoras's compilation as a donor for 66 squares at 297.
+      Exact release geometry and an independent review at 202 and 263 are retained.
 credited_names:
   Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim

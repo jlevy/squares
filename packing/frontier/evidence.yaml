@@ -68074,3 +68074,156 @@ evidence:
         on every square and the exact side.'
     limitations: The review covers finite feasibility. The full witness-envelope contract and comparisons
       to other packings are separate record decisions.
+  - id: E-geiserx-1037-original-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 202
+      - 204
+      - 210
+      - 263
+      - 264
+      - 295
+      - 297
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/rational/
+    novelty: previously-published
+    source_reviewed: '2026-11-22'
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    replay_status: not-attempted
+    verifiers: []
+    limitations: >-
+      The issue gives seven upward ceilings. The source's own verification programs
+      are outside the retained packet and its reported evidence remains attributed.
+  - id: E-geiserx-1037-rational-independent-review
+    claim: upper-bound
+    scope:
+      n_values:
+      - 202
+      - 263
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/rational/
+    novelty: previously-published
+    source_reviewed: '2026-11-22'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    replay_status: passed
+    replay: >-
+      Every rational square, wall and pair was decided. Both original encodings agree exactly. The 202 rational poses in the 263-square lower-left box match the standalone witness.
+      See packing/resources/web/geiserx-exact-1037-2026-11-22/review/verification.json.
+    verifiers:
+    - V-geiserx-1037-202-263-review
+    independence:
+      coverage:
+        extent: full
+        unit: Original certificates including every square, wall and pair in each.
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
+    limitations: >-
+      This review does not identify the configurations with earlier registered witnesses.
+  - id: E-geiserx-1037-quadratic-independent-review
+    claim: upper-bound
+    scope:
+      n_values:
+      - 202
+      - 263
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/
+    novelty: previously-published
+    source_reviewed: '2026-11-22'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    replay_status: passed
+    replay: >-
+      Every quadratic square, wall and pair was decided. The two exact side formulas and the size of the nested subset pass. Its coordinates match 119 of the standalone 202 poses in the given frame.
+      See packing/resources/web/geiserx-exact-1037-2026-11-22/review/verification.json.
+    verifiers:
+    - V-geiserx-1037-202-263-review
+    independence:
+      coverage:
+        extent: full
+        unit: Original certificates including every square, wall and pair in each.
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
+    limitations: >-
+      The source's plus-sign tilt identity uses the positive tilt magnitude. No optimality claim is made.
+  - id: E-geiserx-1037-rational-native-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 202
+      - 204
+      - 210
+      - 263
+      - 264
+      - 295
+      - 297
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/rational/
+    novelty: previously-published
+    source_reviewed: '2026-11-22'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    replay_status: passed
+    replay: >-
+      Both maintained exact routes accepted every wall and pair for all seven positive
+      rational certificates and refused a duplicated square and a square moved
+      outside the box for each. See packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/native-rational.json.xz.
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    independence:
+      coverage:
+        extent: full
+        unit: Full rational certificates and both complete negative-control jobs.
+        checked: 7
+        of: 7
+    limitations: >-
+      The report already used a copy of the project rational checker, so this
+      replay is recorded conservatively as sharing an implementation. This receipt
+      covers seven counts and the two whole-certificate controls per count. The
+      independent review at 202 and 263 and the sharp-control roster are separate.
+  - id: E-geiserx-1037-quadratic-native-replay
+    claim: upper-bound
+    scope:
+      n_values:
+      - 202
+      - 263
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/
+    novelty: previously-published
+    source_reviewed: '2026-11-22'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    replay_status: passed
+    replay: >-
+      The maintained field verifier accepted both complete quadratic packings,
+      deciding 20,301 and 34,453 pairs, and refused both whole-certificate controls
+      for each. See packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/native-quadratic-202-263.json.xz.
+    verifiers:
+    - V-sqpack-verify
+    independence:
+      coverage:
+        extent: full
+        unit: Full quadratic certificates and both complete negative-control jobs.
+        checked: 2
+        of: 2
+    limitations: Finite feasibility of the two degree-two witnesses only.

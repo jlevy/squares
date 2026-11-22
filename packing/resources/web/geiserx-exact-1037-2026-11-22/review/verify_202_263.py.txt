@@ -1,0 +1,437 @@
+"""Decide geometry of the retained #1037 rational and quadratic certificates."""
+
+import argparse
+from collections import Counter
+from dataclasses import dataclass
+from fractions import Fraction as F
+from functools import total_ordering
+from hashlib import sha256
+from io import BytesIO
+from itertools import combinations
+import json
+from pathlib import Path
+import platform
+from time import perf_counter, process_time
+from zipfile import ZipFile
+
+import yaml
+
+
+ARCHIVE_SHA256 = '19c069b42d6a6fbe87dd419d358e7b046eadbba20dbaadd7f519faab1152c5e9'
+PREFIX = 'GeiserX_exact/'
+COUNTS = (202, 263)
+EPSILON = F(1, 10**90)
+CLAIMS = {
+    202: (1417, (21349, -2834, 94), '14.724372709109'),
+    263: (1605, (27393, -3210, 94), '16.724372709109'),
+}
+
+
+class Rejected(ValueError):
+    """The exact data or geometry failed an obligation."""
+
+
+def require(condition, reason):
+    if not condition:
+        raise Rejected(reason)
+
+
+class UniqueKeysLoader(yaml.SafeLoader):
+    def construct_mapping(self, node, deep=False):
+        keys = set()
+        for key_node, _ in node.value:
+            key = self.construct_object(key_node, deep=deep)
+            require(key not in keys, ('duplicate-yaml-key', key))
+            keys.add(key)
+        return super().construct_mapping(node, deep=deep)
+
+
+def unique_json_keys(pairs):
+    result = {}
+    for key, value in pairs:
+        require(key not in result, ('duplicate-json-key', key))
+        result[key] = value
+    return result
+
+
+@total_ordering
+@dataclass(frozen=True)
+class Q:
+    """The value a + b sqrt(3), with its real embedding."""
+
+    a: F
+    b: F = F(0)
+
+    def __add__(self, other):
+        return Q(self.a + other.a, self.b + other.b)
+
+    def __sub__(self, other):
+        return Q(self.a - other.a, self.b - other.b)
+
+    def __neg__(self):
+        return Q(-self.a, -self.b)
+
+    def __mul__(self, other):
+        return Q(self.a * other.a + 3 * self.b * other.b,
+                 self.a * other.b + self.b * other.a)
+
+    def __truediv__(self, other):
+        norm = other.a * other.a - 3 * other.b * other.b
+        conjugate_product = self * Q(other.a, -other.b)
+        return Q(conjugate_product.a / norm, conjugate_product.b / norm)
+
+    def sign(self):
+        if self.a == 0:
+            return (self.b > 0) - (self.b < 0)
+        if self.b >= 0 and self.a > 0:
+            return 1
+        if self.b <= 0 and self.a < 0:
+            return -1
+        norm = self.a * self.a - 3 * self.b * self.b
+        if self.a > 0:
+            return (norm > 0) - (norm < 0)
+        return (norm < 0) - (norm > 0)
+
+    def __lt__(self, other):
+        return (self - other).sign() < 0
+
+
+def as_rational(token):
+    require(isinstance(token, str), 'coefficient must be an explicit rational string')
+    return F(token)
+
+
+def decode_q(coeffs, t):
+    require(isinstance(coeffs, list) and 1 <= len(coeffs) <= 2, 'bad Q(sqrt(3)) vector')
+    value = Q(as_rational(coeffs[0]))
+    if len(coeffs) == 2:
+        value += Q(as_rational(coeffs[1])) * t
+    return value
+
+
+def dot(left, right):
+    return left[0] * right[0] + left[1] * right[1]
+
+
+def delta(left, right):
+    return left[0] - right[0], left[1] - right[1]
+
+
+def orientation(u, one):
+    denominator = one + u * u
+    return (one - u * u) / denominator, (u + u) / denominator
+
+
+def centered_vertices(x, y, u, one):
+    c, s = orientation(u, one)
+    two = one + one
+    a = (c - s) / two
+    b = (c + s) / two
+    return ((x - a, y - b), (x + b, y - a), (x + a, y + b), (x - b, y + a))
+
+
+def as_pose_set(polygons):
+    return Counter(frozenset(points) for points in polygons)
+
+
+def decode_yaml(raw, n):
+    data = yaml.load(raw, Loader=UniqueKeysLoader)
+    require(data['softschema']['contract'] == 'packing.squares:Witness/v2', 'contract')
+    witness = data['witness']
+    require(type(witness['n']) is int and witness['n'] == n, 'wrong count')
+    require(witness['coordinates'] == {
+        'origin': 'lower-left', 'axes': 'x-right-y-up', 'angle_unit': 'not-applicable'
+    }, 'coordinate frame')
+    require(witness['representation'] == 'corners', 'non-corner input')
+    require(witness['scalar'] == {'kind': 'rational'}, 'non-rational input')
+    require(as_rational(witness['square_size']) == 1, 'wrong declared unit')
+    squares = witness['squares']
+    require(len(squares) == n, 'wrong row count')
+    require(len({square['id'] for square in squares}) == n, 'duplicate square id')
+    polygons = []
+    for index, square in enumerate(squares):
+        corners = square['corners']
+        require(len(corners) == 4 and all(len(point) == 2 for point in corners),
+                ('wrong corner shape', index))
+        polygons.append(tuple(tuple(map(as_rational, point)) for point in corners))
+    return as_rational(witness['side']), polygons, witness['source']
+
+
+def decode_cert(raw, n):
+    rows = raw.decode('ascii').splitlines()
+    count_spec, side = rows[0].split()
+    require(int(count_spec) == n and len(rows) == n + 1, 'pose row count')
+    polygons = []
+    for row in rows[1:]:
+        x, y, u = map(as_rational, row.split())
+        polygons.append(centered_vertices(x, y, u, F(1)))
+    return as_rational(side), polygons
+
+
+def eval_poly(coefficients, value):
+    total = Q(F(0))
+    for coefficient in reversed(coefficients):
+        total = Q(F(coefficient)) + value * total
+    return total
+
+
+def check_interval(interval, chosen, other, label):
+    low, high = (Q(as_rational(item)) for item in interval)
+    require(low < chosen < high and (other < low or other > high), label)
+
+
+def decode_algebraic(data, n):
+    require(type(data['n']) is int and data['n'] == n, 'wrong quadratic count')
+    field = data['field']
+    t = Q(F(-6, 11), F(1, 11))
+    other_t = Q(t.a, -t.b)
+    zero = Q(F(0))
+    one = Q(F(1))
+    require(field['f'] == [3, 12, 11] and eval_poly(field['f'], t) == zero
+            and eval_poly(field['f'], other_t) == zero, 'field polynomial')
+    check_interval(field['t_interval'], t, other_t, 'field isolating interval')
+    side_a, poly, _ = CLAIMS[n]
+    expected_side = Q(F(side_a, 94), F(-19, 94))
+    conjugate = Q(expected_side.a, -expected_side.b)
+    side = decode_q(data['S']['in_K'], t)
+    require(side == expected_side and side < conjugate, 'claimed smaller root')
+    require(data['S']['poly'] == list(poly) and eval_poly(poly, side) == zero
+            and eval_poly(poly, conjugate) == zero, 'side polynomial')
+    check_interval(data['S']['interval'], side, conjugate, 'side isolating interval')
+    require([decode_q(row['u'], t) for row in data['classes']] == [zero, t],
+            'declared tilt classes')
+    c, s = orientation(t, one)
+    signed = Q(F(4)) * c + Q(F(6)) * s
+    with_magnitude = Q(F(4)) * c - Q(F(6)) * s
+    require(s < zero and with_magnitude == Q(F(7)), 'claimed unsigned tilt identity')
+    require(len(data['squares']) == n, 'quadratic square row count')
+    polygons = []
+    for index, square in enumerate(data['squares']):
+        require(type(square['m']) is int and square['m'] == 0, ('unsupported m', index))
+        x, y, u = (decode_q(square[key], t) for key in ('x', 'y', 'u'))
+        polygons.append(centered_vertices(x, y, u, one))
+    return side, polygons, {
+        'polynomial': poly,
+        'side': [str(side.a), str(side.b)],
+        'side_distinct_conjugate_is_larger': True,
+        't': [str(t.a), str(t.b)],
+        'cos': [str(c.a), str(c.b)],
+        'signed_sin': [str(s.a), str(s.b)],
+        'four_cos_plus_six_signed_sin': [str(signed.a), str(signed.b)],
+        'four_cos_plus_six_sin_of_magnitude': str(with_magnitude.a),
+        'n_declared_tilt': sum(decode_q(row['u'], t) == t for row in data['squares']),
+        'isolating_intervals_checked': True,
+    }
+
+
+def edge_vectors(polygons, one):
+    zero = one - one
+    vectors = []
+    for index, (p, q, r, s) in enumerate(polygons):
+        u = delta(q, p)
+        v = delta(s, p)
+        require(dot(u, u) == one and dot(v, v) == one and dot(u, v) == zero
+                and delta(r, q) == v, ('unit-geometry', index))
+        vectors.append((u, v))
+    return vectors
+
+
+def coordinate_bound(points):
+    xs, ys = zip(*points, strict=True)
+    return min(xs), max(xs), min(ys), max(ys)
+
+
+def check_walls(boxes, side, one):
+    zero = one - one
+    require(side > zero, ('wall', 'nonpositive side'))
+    for index, (left, right, bottom, top) in enumerate(boxes):
+        require(min(left, bottom) >= zero and max(right, top) <= side,
+                ('wall', index))
+
+
+def projections_separate(limits_a, limits_b):
+    return limits_a[1] <= limits_b[0] or limits_b[1] <= limits_a[0]
+
+
+def axis_separates(points_a, points_b, axis):
+    normal = (-axis[1], axis[0])
+    a = tuple(dot(point, normal) for point in points_a)
+    b = tuple(dot(point, normal) for point in points_b)
+    return projections_separate((min(a), max(a)), (min(b), max(b)))
+
+
+def check_geometry(polygons, side, one):
+    axes = edge_vectors(polygons, one)
+    boxes = [coordinate_bound(points) for points in polygons]
+    check_walls(boxes, side, one)
+    aabb_pairs = 0
+    sat_pairs = 0
+    axis_tests = 0
+    for i, j in combinations(range(len(polygons)), 2):
+        a, b = boxes[i], boxes[j]
+        if projections_separate(a[:2], b[:2]) or projections_separate(a[2:], b[2:]):
+            aabb_pairs += 1
+            continue
+        sat_pairs += 1
+        for axis in (*axes[i], *axes[j]):
+            axis_tests += 1
+            if axis_separates(polygons[i], polygons[j], axis):
+                break
+        else:
+            raise Rejected(('pair', i, j))
+    return {
+        'unit_squares': len(polygons),
+        'vertex_box_checks': 4 * len(polygons),
+        'unordered_pairs': aabb_pairs + sat_pairs,
+        'aabb_separated': aabb_pairs,
+        'non_aabb_separated': sat_pairs,
+        'non_aabb_axis_tests': axis_tests,
+    }
+
+
+def must_reject(action, label):
+    try:
+        action()
+    except Rejected as exc:
+        require(exc.args[0][0] == label, ('incorrect rejection', exc.args))
+        return exc.args[0]
+    raise Rejected(('control erroneously accepted', label))
+
+
+def controls(polygons, side, one, epsilon):
+    boxes = [coordinate_bound(points) for points in polygons]
+    extent = max(max(bounds[1], bounds[3]) for bounds in boxes)
+    check_walls(boxes, extent, one)
+    wall = must_reject(lambda: check_walls(boxes, extent - epsilon, one), 'wall')
+    modified = polygons[:-1] + [polygons[0]]
+    duplicate = must_reject(lambda: check_geometry(modified, side, one), 'pair')
+    require(duplicate == ('pair', 0, len(polygons) - 1), ('wrong overlap pair', duplicate))
+    synthetic_left = centered_vertices(F(1, 2), F(1, 2), F(0), F(1))
+    synthetic_right = centered_vertices(F(3, 2), F(1, 2), F(0), F(1))
+    check_geometry([synthetic_left, synthetic_right], F(2), F(1))
+    moved = tuple((x - EPSILON, y) for x, y in synthetic_right)
+    shift = must_reject(lambda: check_geometry([synthetic_left, moved], F(2), F(1)), 'pair')
+    return {
+        'wall_at_extent_accepted': True,
+        'wall_below_extent_refused': wall,
+        'duplicate_square_refused': duplicate,
+        'touching_squares_accepted': True,
+        'shifted_touching_squares_refused': shift,
+        'epsilon': str(EPSILON),
+    }
+
+
+def round_up_side(side):
+    scale = 10**12
+    rounded = -(-side.numerator * scale // side.denominator)
+    return f'{rounded // scale}.{rounded % scale:012d}'
+
+
+def nesting(inner, outer, width, zero):
+    indices = []
+    for index, points in enumerate(outer):
+        left, right, bottom, top = coordinate_bound(points)
+        if min(left, bottom) >= zero and max(right, top) <= width:
+            indices.append(index)
+    common = as_pose_set(inner) & as_pose_set([outer[i] for i in indices])
+    return indices, sum(common.values())
+
+
+def rational_excess_exponent(rational, algebraic):
+    difference = Q(rational) - algebraic
+    require(difference > Q(F(0)), 'rational side must exceed proposed quadratic side')
+    for exponent in range(0, 200):
+        if difference > Q(F(1, 10**(exponent + 1))):
+            require(difference < Q(F(1, 10**exponent)), 'strict power bracket')
+            return exponent
+    raise Rejected('excess below bracket range')
+
+
+def verify(attachment):
+    archive_bytes = attachment.read_bytes()
+    archive_sha = sha256(archive_bytes).hexdigest()
+    require(archive_sha == ARCHIVE_SHA256, 'unexpected archive hash')
+    member_hashes = {}
+
+    def read_member(archive, name):
+        path = PREFIX + name
+        require(archive.namelist().count(path) == 1, ('ambiguous archive member', path))
+        member = archive.read(path)
+        member_hashes[name] = sha256(member).hexdigest()
+        return member
+
+    results = {}
+    rational = {}
+    quadratic = {}
+    with ZipFile(BytesIO(archive_bytes)) as archive:
+        for n in COUNTS:
+            side, polygons, source = decode_yaml(read_member(archive, f'rational/n{n}.yaml'), n)
+            pose_side, pose_polygons = decode_cert(read_member(archive, f'rational/n{n}.cert'), n)
+            encoding_pairs = sum(frozenset(corners) == frozenset(pose)
+                                 for corners, pose in zip(polygons, pose_polygons, strict=True))
+            require(side == pose_side and encoding_pairs == n, 'unequal rational encodings')
+            geometry = check_geometry(polygons, side, F(1))
+            rounded = round_up_side(side)
+            require(rounded == CLAIMS[n][2], 'issue rounding disagrees')
+            results[n] = {
+                'rational': {
+                    'side': str(side), 'rounded_up_12dp': rounded,
+                    'ordered_pose_rows_equal': encoding_pairs,
+                    'yaml_source_note': source,
+                    'geometry': geometry,
+                    'controls': controls(polygons, side, F(1), EPSILON),
+                }
+            }
+            rational[n] = side, polygons
+
+            data = json.loads(read_member(archive, f'algebraic/n{n}.minpoly.json'),
+                              object_pairs_hook=unique_json_keys)
+            exact_side, exact_polygons, algebra = decode_algebraic(data, n)
+            algebra['geometry'] = check_geometry(exact_polygons, exact_side, Q(F(1)))
+            algebra['controls'] = controls(exact_polygons, exact_side, Q(F(1)), Q(EPSILON))
+            algebra['rational_exceeds_quadratic_between_decimal_powers'] = [
+                -rational_excess_exponent(side, exact_side) - 1,
+                -rational_excess_exponent(side, exact_side),
+            ]
+            results[n]['quadratic'] = algebra
+            quadratic[n] = exact_side, exact_polygons
+
+        corner = json.loads(read_member(archive, 'algebraic/n202_corner.json'),
+                            object_pairs_hook=unique_json_keys)
+
+    rational_width = rational[263][0] - F(2)
+    require(rational_width == rational[202][0], 'rational side difference')
+    indices_r, common_r = nesting(rational[202][1], rational[263][1], rational_width, F(0))
+    exact_width = quadratic[263][0] - Q(F(2))
+    require(exact_width == quadratic[202][0], 'quadratic side difference')
+    indices_q, common_q = nesting(quadratic[202][1], quadratic[263][1], exact_width, Q(F(0)))
+    require(corner['outer_count'] == 263 and corner['inner_count'] == 202
+            and corner['corner'] == 'lower-left' and corner['width_difference'] == 2
+            and corner['outer_coordinates_file'] == 'n263.minpoly.json', 'corner parameters')
+    declared = corner['indices_0_based']
+    require(len(declared) == len(set(declared)) == len(indices_q) == 202
+            and set(declared) == set(indices_q), 'quadratic corner index declaration')
+    return {
+        'archive_sha256': archive_sha, 'member_sha256': member_hashes,
+        'by_count': results,
+        'nesting': {
+            'rational': {'wholly_inside': len(indices_r), 'exact_common_with_n202': common_r,
+                         'inside_indices_0_based': indices_r},
+            'quadratic': {'wholly_inside': len(indices_q), 'exact_common_with_n202': common_q,
+                          'inside_indices_0_based': indices_q,
+                          'declared_index_set_exact': True},
+        },
+    }
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('attachment', type=Path)
+    args = parser.parse_args()
+    wall_start, cpu_start = perf_counter(), process_time()
+    receipt = verify(args.attachment)
+    receipt['python'] = platform.python_version()
+    receipt['pyyaml'] = yaml.__version__
+    receipt['wall_seconds'] = perf_counter() - wall_start
+    receipt['cpu_seconds'] = process_time() - cpu_start
+    print(json.dumps(receipt, indent=2))

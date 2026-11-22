@@ -1,0 +1,13 @@
+components:
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/frontier/source-coverage.yaml
+outputs:
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Records the exact certificate evidence for issue 1037, verified watch reads,
+  and the deployed 305-square reply. Two renders of the updated inputs and one
+  using main 9ef2fa9f9533 rendered in separate directories with Chrome on macOS.
+  All 43 output files matched byte for byte across the three renders.

@@ -10214,3 +10214,37 @@ verifiers:
         separate_code: true
         note: The attachment credits Codex for refinement and verification. The reviewer's independent
           prompt and deciding code were frozen before project-review context.
+  - id: V-geiserx-1037-202-263-review
+    program: verify_202_263.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: decides
+    summary: >-
+      Independently checks the rational and quadratic 202- and 263-square witnesses,
+      their walls and all pairs, the exact side formulas, nesting, and contact controls.
+    source:
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/verify_202_263.py.txt
+    independence_record: docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
+    independence:
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Isolated mathematical review at high reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer discloses OpenAI assistance. The reviewer froze the independent
+          code and controls before reading producer programs or earlier validations.

@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **1054** evidence records. **621** are formal; **612** of those were established here. **20** are samples, counted separately.
-- **407** rest on an argument made elsewhere, of which **8** have been read by nobody here.
+- **1059** evidence records. **625** are formal; **616** of those were established here. **20** are samples, counted separately.
+- **408** rest on an argument made elsewhere, of which **8** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -1077,13 +1077,18 @@ results, it is a statement about what this repository has itself examined.
 | `E-geiserx-1040-certificate-report` | 1 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-geiserx-1040-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | `V-sqpack-verify`, `V-check-rational-witness-independent` |
 | `E-geiserx-1040-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: Every square, wall and pair in both original encodings. | `V-r1040-n259-review` |
+| `E-geiserx-1037-original-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-geiserx-1037-rational-independent-review` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: Original certificates including every square, wall and pair in each. | `V-geiserx-1037-202-263-review` |
+| `E-geiserx-1037-quadratic-independent-review` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: Original certificates including every square, wall and pair in each. | `V-geiserx-1037-202-263-review` |
+| `E-geiserx-1037-rational-native-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full, 7 of 7: Full rational certificates and both complete negative-control jobs. | `V-sqpack-verify`, `V-check-rational-witness-independent` |
+| `E-geiserx-1037-quadratic-native-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full, 2 of 2: Full quadratic certificates and both complete negative-control jobs. | `V-sqpack-verify` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 409, verified 640
-- **method**: exact-algebraic 375, interval-certified 247, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 409
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 993
-- **relationship to the producer's code**: generator 5, independent-implementation 410, not-applicable 38, same-implementation 537, shared-components 58, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 410, verified 644
+- **method**: exact-algebraic 379, interval-certified 247, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 410
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 998
+- **relationship to the producer's code**: generator 5, independent-implementation 412, not-applicable 38, same-implementation 540, shared-components 58, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

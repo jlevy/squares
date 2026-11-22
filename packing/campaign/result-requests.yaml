@@ -38528,12 +38528,79 @@ issues:
     opened: '2026-11-18'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
-      De Winter points to exact certificates for seven published GeiserX packings. The
-      import bead owns the provenance, replay and standing comparison.
+      Joost de Winter supplies exact certificates for seven packings published by Sergio
+      Fernández Rubio (GeiserX) at c00281c2fb4b42a1c7071dc4fd493347cfd5a87b.
+      The rational corner and center/half-angle encodings agree exactly for all seven.
+      The source separately gives quadratic certificates at 202 and 263, a degree-70
+      form at 297, and a provenance map for the lower 66 squares of the 297 packing.
+      The maintained exact replays cover every original rational certificate and both
+      quadratic witnesses at 202 and 263, with both whole-certificate controls. The
+      independent review verifies both rational and quadratic geometries at 202
+      and 263, their exact side formulas and their two lower-left restrictions. The
+      plus sign in the stated common tilt identity uses the positive tilt magnitude.
+      The two submitted standalone quadratic packings and the restriction are
+      distinct provenance claims despite their compatible sides.
     read_through: '2026-11-18T20:06:25Z'
-    results: []
+    results:
+    - key: geiserx-rational-202
+      claim: s(202) <= 14.724372709109, rounded upward from the exact rational witness.
+      source: body
+      not_registered: Exact report order, registration and the drawing decision remain queued.
+      queued: true
+      bead: think-36ui
+    - key: geiserx-rational-204
+      claim: s(204) <= 14.802436041462, rounded upward from the exact rational witness.
+      source: body
+      not_registered: Exact report order, registration and the drawing decision remain queued.
+      queued: true
+      bead: think-36ui
+    - key: geiserx-rational-210
+      claim: s(210) <= 14.971210662216, rounded upward from the exact rational witness.
+      source: body
+      not_registered: Exact report order, registration and the drawing decision remain queued.
+      queued: true
+      bead: think-36ui
+    - key: geiserx-rational-263
+      claim: s(263) <= 16.724372709109, rounded upward from the exact rational witness.
+      source: body
+      not_registered: Exact report order, registration and the drawing decision remain queued.
+      queued: true
+      bead: think-36ui
+    - key: geiserx-rational-264
+      claim: s(264) <= 16.772843152678, rounded upward from the exact rational witness.
+      source: body
+      not_registered: Exact report order, registration and the drawing decision remain queued.
+      queued: true
+      bead: think-36ui
+    - key: geiserx-rational-295
+      claim: s(295) <= 17.698042929358, rounded upward from the exact rational witness.
+      source: body
+      not_registered: Exact report order, registration and the drawing decision remain queued.
+      queued: true
+      bead: think-36ui
+    - key: geiserx-rational-297
+      claim: s(297) <= 17.739455512004, rounded upward from the exact rational witness.
+      source: body
+      not_registered: Exact report order, registration and the drawing decision remain queued.
+      queued: true
+      bead: think-36ui
+    - key: geiserx-quadratic-202-263
+      claim: >-
+        The two quadratic witnesses have exact sides (1417 - 19 sqrt(3))/94 and
+        (1605 - 19 sqrt(3))/94. The 263-square witness has a lower-left box of side
+        S263 - 2 containing 202 squares.
+      source: body
+      not_registered: Independent finite verification complete. Registration and house comparison are queued.
+      queued: true
+      bead: think-36ui
+    - key: geiserx-algebraic-297
+      claim: The 297-square construction has an exact degree-70 side and an algebraic witness.
+      source: body
+      not_registered: The algebraic replay and comparison with competing 297 reports are queued.
+      queued: true
+      bead: think-36ui
     beads:
     - think-36ui
     answer_bead: think-36ui
@@ -39080,6 +39147,12 @@ issues:
       - result: n305-axis-variant-minimality
       - result: n305-export-enclosure-identity
       - result: n305-precision-enclosure
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7085234329
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-axis-variant-minimality
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its
