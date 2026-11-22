@@ -68464,7 +68464,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
-    relationship_to_generator: independent-implementation
+    relationship_to_generator: unknown-historical
     origin: replayed-here
     replay_status: passed
     replay: >-
@@ -68479,4 +68479,7 @@ evidence:
         unit: Full quadratic certificates and both complete negative-control jobs.
         checked: 2
         of: 2
-    limitations: Finite feasibility of the two degree-two witnesses only.
+    limitations: >-
+      Finite feasibility of the two degree-two witnesses. The review did not
+      establish which field checker the submitter used. Independence is
+      documented in the separate frozen review.

@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **293** programs: **57** external and **236** first-party; **205** decide claims and **88** check premises.
-- **825** of **1065** evidence entries name the programs that verified them: 417 independently re-implemented, 326 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **825** of **1065** evidence entries name the programs that verified them: 416 independently re-implemented, 326 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report, 1 relation not recorded.
 
 ## Programs
 
@@ -1664,7 +1664,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-de-winter-997-followup-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: Every square, wall and unordered square pair in the original certificate. | T-338 |
 | `E-de-winter-959-algebraic-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original n179 certificate and both full-n179 gross mutations on the native route. | T-339 |
 | `E-geiserx-1037-rational-native-replay` | replayed here | reproduced with the producer’s code | full, 7 of 7: Full rational certificates and both complete negative-control jobs. | - |
-| `E-geiserx-1037-quadratic-native-replay` | replayed here | independently re-implemented | full, 2 of 2: Full quadratic certificates and both complete negative-control jobs. | - |
+| `E-geiserx-1037-quadratic-native-replay` | replayed here | unknown | full, 2 of 2: Full quadratic certificates and both complete negative-control jobs. | - |
 
 ### `V-check-rational-witness-independent`
 

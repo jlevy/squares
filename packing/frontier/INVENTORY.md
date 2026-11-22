@@ -1087,14 +1087,14 @@ results, it is a statement about what this repository has itself examined.
 | `E-geiserx-1037-rational-independent-review` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: Original certificates including every square, wall and pair in each. | `V-geiserx-1037-202-263-review` |
 | `E-geiserx-1037-quadratic-independent-review` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: Original certificates including every square, wall and pair in each. | `V-geiserx-1037-202-263-review` |
 | `E-geiserx-1037-rational-native-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | full, 7 of 7: Full rational certificates and both complete negative-control jobs. | `V-sqpack-verify`, `V-check-rational-witness-independent` |
-| `E-geiserx-1037-quadratic-native-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 2 of 2: Full quadratic certificates and both complete negative-control jobs. | `V-sqpack-verify` |
+| `E-geiserx-1037-quadratic-native-replay` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | unknown | full, 2 of 2: Full quadratic certificates and both complete negative-control jobs. | `V-sqpack-verify` |
 
 ## What the register rests on
 
 - **assurance**: numerically-checked 5, reported 412, verified 648
 - **method**: exact-algebraic 383, interval-certified 247, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 412
 - **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 1004
-- **relationship to the producer's code**: generator 5, independent-implementation 417, not-applicable 38, same-implementation 541, shared-components 58, unknown-historical 6
+- **relationship to the producer's code**: generator 5, independent-implementation 416, not-applicable 38, same-implementation 541, shared-components 58, unknown-historical 7
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
