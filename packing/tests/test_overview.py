@@ -4426,7 +4426,7 @@ def test_home_invitation_leads_to_the_complete_contribution_instructions(
 def test_the_sites_own_statement_follows_readmes_introduction(
     about: str, results: str, report: str
 ) -> None:
-    """About keeps the credited highlights and qualifies the two unverified reports.
+    """About keeps the credited highlights and qualifies both seventeen-square proofs.
     Every named result keeps its source, attribution, and verification claims; the
     contribution invitation retains the owner's two paragraphs."""
     narrative = about.split("</h1>", 1)[1].split("</div>", 1)[0]
@@ -4460,7 +4460,8 @@ def test_the_sites_own_statement_follows_readmes_introduction(
         ),
         (
             "Oscar Fitzharding\u2019s Lean proof report for seventeen squares, "
-            "also unverified here (V0/C1)."
+            "recorded at V3/C1 based on the inspected source build. Independent "
+            "confirmation of the complete build is pending."
         ),
     ]
     text = _rendered_text(narrative)

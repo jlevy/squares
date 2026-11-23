@@ -25,7 +25,8 @@ Contributions include:
   reported and unverified here (V0/C1).
 - Oscar Fitzharding’s
   [Lean proof report for seventeen squares](news.html#changelog-entry-fitzharding-n17-reported-proof),
-  also unverified here (V0/C1).
+  recorded at V3/C1 based on the inspected source build.
+  Independent confirmation of the complete build is pending.
 
 Other new results are tabulated on the [Results page](results.html).
 See the <a id="profiles" href="profiles/index.html">Contributor Profiles</a> for

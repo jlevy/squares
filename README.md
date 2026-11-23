@@ -74,8 +74,14 @@ The most significant since August 2026:
   $s(32) = 6$, $s(45) = 7$ and $s(60) = 8$
   ([T-052, T-051, T-053 and T-062](packing/frontier/RESULTS.md)), independently of this
   project. His $s(k^2 - 4) = k$ for every $k \ge 5$
-  ([T-081](packing/frontier/RESULTS.md)) awaits its full replay here, so its nine new
-  cases, $n = 96, 117, \ldots, 320$, are on the frontier as reported bounds.
+  ([T-081](https://squaremath.org/result/t-081.html)) added nine reported bounds,
+  $n = 96, 117, \ldots, 320$. The family awaits a full replay here.
+  Benjamin Greff independently established $s(96) = 10$
+  ([T-191](https://squaremath.org/result/t-191.html)).
+- **A reported family for deficit five:** Mohsen Khalili and Sara Gharabaghi report
+  $s(k^2 - 5) = k$ for every integer $k \ge 7$, adding reported bounds for eight open
+  counts, from $116$ to $319$. The project records it at V0/C1 pending a full replay
+  ([T-298](https://squaremath.org/result/t-298.html)).
 - **Seventeen squares reported proved:** on 12 October 2026 two proofs were published,
   by separate routes, that John Bidwell’s 1998 packing is optimal, so that
   $s(17) = 4.67553009360455\ldots$. Marc Leonard Overbeck (Kleddamag) published what he
@@ -88,14 +94,12 @@ The most significant since August 2026:
   within its stated trust boundary ([T-154](packing/frontier/RESULTS.md),
   [#565](https://github.com/jlevy/squares/issues/565)); its README says the project “was
   developed with substantial assistance from Claude and Codex”.
-  Reviews here read parts of both and found no mathematical defect in what they read,
-  but neither has been replayed in full: parts of T-153’s computation have been rerun
-  here, and T-154’s Lean build has not been repeated.
-  So the record holds both as reported (`V0/C1`), and until a replay passes, the
-  [case record](packing/frontier/n-017.md) keeps the verified bracket: Guzhou0806’s
-  lower bound $s(17) > 4.66044275$ ([T-093](packing/frontier/RESULTS.md)) and the upper
-  bound of Bidwell’s packing, certified exactly from Overbeck’s rational witness
-  ([T-065](packing/frontier/RESULTS.md)).
+  The project has partly replayed T-153, which remains at V0/C1. T-154 is at V3/C1 based
+  on the inspected source build, with independent confirmation of the complete build
+  pending. The [case record](packing/frontier/n-017.md) keeps the verified bracket with
+  Guzhou0806’s lower bound $s(17) > 4.66044275$ ([T-093](packing/frontier/RESULTS.md))
+  and the upper bound of Bidwell’s packing, certified exactly from Overbeck’s rational
+  witness ([T-065](packing/frontier/RESULTS.md)).
 
 ## Papers
 
@@ -115,7 +119,7 @@ local refinement, and upper-bound certification.
 
 The website deploys continuously from `main`; its last site edition, `v0.9.2`, is
 retained as history.
-The atlas posters are at edition `v0.6.4`, and each paper carries its own version.
+The atlas posters are at edition `v0.7.0`, and each paper carries its own version.
 
 ## Repository Guide
 

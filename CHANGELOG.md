@@ -1225,7 +1225,8 @@ Significance S5: This announces the S5 formalization report T-154; significance 
 [Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md) reports a Lean 4 proof that [John Bidwell](packing/contributors/people/john-bidwell.md)’s 1998 packing of 17 unit squares is
 optimal: $s(17) = 4.67553009360455\ldots$. It is the first proof-assistant proof of this
 value in the project’s records and uses a different argument from [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate
-proof. T-154 remains reported at V0/C1; the full Lean build has not been replayed here.
+proof. The record grades T-154 at V3/C1 based on the inspected source build.
+Independent confirmation of the complete build is pending.
 
 The source comparison traces 32 of the 35 patterns to the project’s certified
 sub-pattern ledger, including eleven from [Hiroaki Hosono](packing/contributors/people/hiroaki-hosono.md) (wand125). The review

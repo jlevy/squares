@@ -311,9 +311,10 @@ def test_news_keeps_both_reported_proofs_and_their_complete_qualification_text(
         assert 'data-news-topic="optimality">Optimality</span>' in card
         assert 'data-news-topic="verification">Verification</span>' in card
         assert 'data-news-topic="formalization"' not in card
-        assert "V0/C1" in card
         assert 'datetime="2026-10-13"' in card
-    assert "the full Lean build has not been replayed here" in fitzharding
+    assert "V0/C1" in overbeck
+    assert "V3/C1 based on the inspected source build" in fitzharding
+    assert "Independent confirmation of the complete build is pending" in fitzharding
     assert "The full capture computation" in overbeck
     assert "These samples do not confirm the whole" in overbeck
     assert 'href="https://squaremath.org/result/t-154.html"' in fitzharding
