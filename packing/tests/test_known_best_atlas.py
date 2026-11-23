@@ -399,11 +399,18 @@ def _assert_file_retains(row: dict[str, Any], path: Path) -> None:
     assert hashlib.sha256(data).hexdigest() == digests[upstream], row["url"]
 
 
+def _project_candidate_house(n: int) -> adopted_houses.Source | None:
+    if n not in adopted_houses.ADOPTED:
+        return None
+    source = adopted_houses.source_for(n)
+    return source if source.key in adopted_houses.reports.PROJECT_CANDIDATE_BATCHES else None
+
+
 def test_every_retained_packet_source_holds_its_upstream_bytes() -> None:
-    """A packet row marked `raw_asset_retained` keeps the file its `url` names, byte for
-    byte: the builder marks a row so when its `path` is a complete-certificate container
-    (`build_known_best_atlas._source_index`), and the container's entry for that url
-    carries the SHA-256 the packet's acquisition record pinned upstream."""
+    """An acquired raw asset matches the bytes pinned in its acquisition record.
+    A project candidate links directly to its own retained certificate. The witness
+    checks below verify that certificate against its native jobs.
+    """
     source_index = json.loads((SOURCES / "sources.json").read_text(encoding="utf-8"))
     rows = [
         record
@@ -414,6 +421,12 @@ def test_every_retained_packet_source_holds_its_upstream_bytes() -> None:
     containers: dict[str, dict[str, Any]] = {}
     for row in rows:
         path = ROOT / row["path"]
+        if (project := _project_candidate_house(row["n"])) is not None:
+            origin = project.origin(row["n"])
+            assert path.is_file()
+            assert path == origin.path
+            assert row["url"] == origin.url
+            continue
         if not row["path"].endswith(".json.xz"):
             _assert_file_retains(row, path)
             continue
@@ -666,7 +679,8 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert witness["source"]["path"] == entry["source"]["path"]
         assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "packet-derived-facts":
-        assert entry["source"]["path"].startswith("resources/web/")
+        if _project_candidate_house(n) is None:
+            assert entry["source"]["path"].startswith("resources/web/")
         evand_url = (
             f"{evand_reports.SOURCE}/blob/{evand_reports.REVISION}/{evand_reports.source_path(n)}"
             if n in evand_houses.NUMBERS

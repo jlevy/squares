@@ -260,6 +260,8 @@
     "packing/tests/test_fibonacci_torus.py": 5.355,
     "packing/tests/test_field_preconditions.py": 0.02,
     "packing/tests/test_fine_net_followup.py": 0.842,
+    "packing/tests/test_first_party_house_selection.py": 0.012,
+    "packing/tests/test_first_party_house_writer.py": 0.245,
     "packing/tests/test_fixed_angle_tree.py": 3.622,
     "packing/tests/test_fixed_core_calibration_profiles.py": 0.448,
     "packing/tests/test_fixed_core_packet.py": 18.641,
@@ -1196,6 +1198,21 @@
           "report": "packing/devtools/suite-file-cost-admissions/n232-exact-gmp-2026-11-22.json",
           "provenance": {},
           "tests": 21
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_first_party_house_selection.py",
+        "packing/tests/test_first_party_house_writer.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/first-party-houses-2026-11-23.json",
+          "provenance": {},
+          "tests": 9
         }
       ]
     }
