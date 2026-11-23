@@ -5,14 +5,14 @@ title: "Publish the intake drawing changelog and reconcile the existing #1055 ac
 kind: chore
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: codex-visual-intake-closeout
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-11-23T06:05:01.644Z
-updated_at: 2026-11-23T07:08:05.171Z
+updated_at: 2026-11-23T07:21:22.595Z
 started_at: 2026-11-23T06:05:03.990Z
 ---
 Record the shipped 109 violet adjustment and n304 drawing in the reader changelog after their verified deployments. Attach the already-posted original 99/20 acknowledgement to the correct #1055 claim key.
@@ -26,3 +26,5 @@ Checkpoint 723ae8c067 on codex/intake-visual-closeout-20261123 records the verif
 Closeout draft #1098 is open and independently reviewed on c9e2fca5c5. Both source deployments are verified, including #1097 main Pages run 45124879939; exact live n304 geometry, caption and case credit passed. The 43-file prepared survey matched the latest main again. The closeout PR awaits its own required hosted checks and publication.
 
 PR #1098 checkpoint c62a0a4771 addresses both hosted changelog findings. The latest displayed date uses the editorial and results union, and the complete archive keeps its anchored disclosures by reusing the date in the existing id. The homepage preview markup is preserved. The measured archive is 199,184 bytes under the existing 200,000-byte limit. Both focused tests, type and lint checks, release-impact check, and normal hooks passed. The four paper generators matched all eight pre-browser outputs against main; the prepared survey comparison still covers 43 matching files. Exact hosted checks and live changelog publication remain.
+
+Merged #1098 at b8bea996e3f25635f42bbd4f2563cbda23d51d3d after independent exact-head review and every required check. The source intake receipt is landed. Pages run 45130342496 must verify the public changelog lines before closeout. The original local adoption branch and its saved commit 8707ab11b1 were restored.
