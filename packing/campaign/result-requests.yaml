@@ -39718,3 +39718,36 @@ issues:
       comparison confirms all candidate sides are smaller than their supplied inputs
       and all 13 upward ceilings at 12 places agree. Complete exact feasibility and
       measurements against public witnesses are in the retained packet. Source SHA-256 872959c5a48a2fa785184030aefaa975c0b3fad2a5632c17db5f012e42d75390.
+  - number: 1099
+    title: 's(264) ≤ 16.772168305041: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-23'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden’s lab submits a rational corners Witness/v2 at 264, seeded from the
+      Kodaj–JoeGun packing T-308. Its exact side beats T-308 contracted to first contact and
+      the earlier GeiserX and de Winter certificate in #1037. T-343 records the verified
+      bound at V3/C3 and S3 and is the new house. The selected grid-slack drawing
+      keeps the same exact side. The additional sharp suite reached its run limit;
+      the reviewed near-contact controls are retained with the source.
+    read_through: '2026-11-23T10:55:47Z'
+    results:
+    - key: n264-rational-certificate
+      claim: s(264) <= 16.772168305041, rounded upward at 12 places from the rational witness.
+      source: body
+      register: [T-343]
+      evidence:
+      - E-ozden-1099-certificate-report
+      - E-ozden-1099-exact-feasibility
+      - E-ozden-1099-review-exact-feasibility
+    - key: n264-leaderboard-side-only
+      claim: Cats and boxes’s quoted Kaggle side at 264 is 16.770288527750, with no coordinates.
+      source: body
+      not_registered: The source disclosed the leaderboard side as context and supplied no packing for it.
+      queued: false
+    beads: [think-w0ca]
+    answer_bead: think-w0ca
+    replies: []
+    close_when: The result has an intake disposition and its reply is recorded.

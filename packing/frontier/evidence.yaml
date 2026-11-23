@@ -68540,3 +68540,110 @@ evidence:
     source_reviewed: '2026-11-23'
     limitations: Method provenance for the project runs from pin 675a5eaa8712542daac8b4515b0f69ad7044df44.
       The native packing claims have separate exact replays.
+  - id: E-ozden-1099-certificate-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 264
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Özden s264 upper bound 2026-11-23]'
+    certificate: packing/resources/web/ozden-s264-upper-bound-2026-11-23/source/n-264-candidate.yaml.gz
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-11-23'
+    limitations: >-
+      Source report in #1099. The pinned rational corners Witness/v2 bounds the claim
+      as stated. The source reports that the project verifier and the lab’s sqcheck.py each
+      accepted the certificate, and attributes the rational conversion to the same project
+      package as the first verifier. The registered replay and independent review have
+      separate evidence.
+
+  - id: E-ozden-1099-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [264]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s264 upper bound 2026-11-23]'
+    certificate: packing/resources/web/ozden-s264-upper-bound-2026-11-23/source/n-264-candidate.yaml.gz
+    replay: >-
+      packing/resources/web/ozden-s264-upper-bound-2026-11-23/receipts/exact-certification.json.xz retains the positive, duplicate-square and outside-container jobs with
+      complete native inputs and both exact route decisions. Both routes counted 34,716
+      unordered pairs per job, accepted the witness and refused the two malformed packings.
+      The arithmetic backend was GMP. The separate eleven-control sharp suite reached its
+      wall limit before it produced a receipt.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    independence:
+      coverage:
+        extent: full
+        unit: Every square, wall and pair in the retained 264-square witness.
+        checked: 1
+        of: 1
+    limitations: >-
+      The producer used this project’s rational promotion and verifier. The maintained routes
+      share exact arithmetic and aspects of the import representation. The separate review
+      checks the supplied corners with its own reader and geometry.
+    source_reviewed: '2026-11-23'
+
+  - id: E-ozden-1099-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values: [264]
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Özden s264 upper bound 2026-11-23]'
+    certificate: packing/resources/web/ozden-s264-upper-bound-2026-11-23/source/n-264-candidate.yaml.gz
+    replay: >-
+      packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check-result.json.gz retains the source-only replay of all 264 squares, 1,056
+      square-to-wall inequalities and 34,716 unordered pairs, plus eight passing analytic
+      controls. The checker directly parses exact rational vertices and uses integer
+      cross multiplication to decide the separating-axis tests.
+    replay_status: passed
+    verifiers:
+    - V-ozden-1099-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: Every square, wall and pair in the pinned rational-corners witness.
+        checked: 1
+        of: 1
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Separately prompted source-only Stage 4 review of issue #1099.
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: The source credits Claude agents. The Codex checker has its own reader and geometry.
+    independence_record: docs/project/reviews/review-2026-11-23-ozden-1099.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-23'
+      reviewed_by: Separately prompted Codex Stage 4 reviewer
+      note: >-
+        Accepted finite feasibility and the 12-place upward ceiling. One low finding distinguishes
+        the issued rational-corners file from the issue’s centre and half-angle wording.
+    limitations: >-
+      The review establishes finite feasibility at the exact side. Its scope excludes optimality,
+      rigidity, composition history, leaderboard ranking and the unretained decimal pose.
+    source_reviewed: '2026-11-23'

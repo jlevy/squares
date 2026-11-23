@@ -2493,3 +2493,11 @@ repositories:
       verification file, and replay objects are unchanged. The current Squares
       case already displays the corrected value. Full-proof retention and replay
       still wait on the author in think-8x11.
+  - url: https://github.com/kenaznia-doga/s264-upper-bound-1677216830
+    read_through: 72c4d195c85b6099002ad6c675b27df40fdaceac
+    read_on: '2026-11-23'
+    note: >-
+      The pinned commit contains the rational 264-square witness reported in #1099. The
+      packet retains the deciding YAML, source README and licences. The other files are
+      alternate encodings, a decimal search pose, figures and the source’s own checker
+      and outputs.

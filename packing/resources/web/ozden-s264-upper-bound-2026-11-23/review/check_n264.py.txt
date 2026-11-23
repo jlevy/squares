@@ -1,0 +1,324 @@
+"""Independently check the pinned n264 corner witness using exact integers.
+
+No sqpack, YAML loader, submitter module, or witness replay command is imported.
+The parser accepts the observed corner-list subset, not arbitrary Witness/v2 YAML.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import time
+from dataclasses import dataclass
+from decimal import Decimal, localcontext
+from fractions import Fraction
+from hashlib import sha256
+from itertools import combinations
+from math import lcm
+from pathlib import Path
+
+EXPECTED_SHA256 = "e79b705387160903c31dd287575407c6ef8b2b6e89b6374bcd0a2d71b2939e25"
+EXPECTED_N = 264
+NEAR_DENOMINATOR = 100_000_000
+THRESHOLD_DENOMINATORS = (100_000_000, 10_000_000_000, 1_000_000_000_000, 100_000_000_000_000)
+RATIONAL = re.compile(r"-?(?:0|[1-9][0-9]*)(?:/[1-9][0-9]*)?\Z")
+type Point = tuple[int, int]
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise ValueError(message)
+
+
+def sub(a: Point, b: Point) -> Point:
+    return a[0] - b[0], a[1] - b[1]
+
+
+def dot(a: Point, b: Point) -> int:
+    return a[0] * b[0] + a[1] * b[1]
+
+
+def cross(a: Point, b: Point) -> int:
+    return a[0] * b[1] - a[1] * b[0]
+
+
+@dataclass(frozen=True)
+class Square:
+    identifier: int
+    denominator: int
+    points: tuple[Point, ...]
+
+    @property
+    def bounds(self) -> tuple[int, int, int, int]:
+        xs, ys = zip(*self.points, strict=True)
+        return min(xs), max(xs), min(ys), max(ys)
+
+    @property
+    def axes(self) -> tuple[Point, Point]:
+        return sub(self.points[1], self.points[0]), sub(self.points[3], self.points[0])
+
+
+def integer_square(identifier: int, points: list[tuple[Fraction, Fraction]]) -> Square:
+    denominator = lcm(*(value.denominator for point in points for value in point))
+    return Square(identifier, denominator, tuple(
+        (int(x * denominator), int(y * denominator)) for x, y in points
+    ))
+
+
+def geometry(square: Square) -> None:
+    p = square.points
+    require(len(p) == 4, "not four corners")
+    edges = [sub(p[(i + 1) % 4], p[i]) for i in range(4)]
+    require(all(dot(e, e) == square.denominator**2 for e in edges),
+            f"square {square.identifier}: nonunit edge")
+    require(all(dot(edges[i], edges[(i + 1) % 4]) == 0 for i in range(4)),
+            f"square {square.identifier}: nonorthogonal adjacent edges")
+    require(p[0][0] + p[2][0] == p[1][0] + p[3][0]
+            and p[0][1] + p[2][1] == p[1][1] + p[3][1],
+            f"square {square.identifier}: not a parallelogram in supplied order")
+    require(cross(edges[0], edges[1]) != 0,
+            f"square {square.identifier}: degenerate")
+
+
+def parse_pinned(path: Path) -> tuple[Fraction, list[Square]]:
+    data = path.read_bytes()
+    require(sha256(data).hexdigest() == EXPECTED_SHA256, "pinned digest mismatch")
+    lines = data.decode("utf-8").splitlines()
+    for expected in ("witness:", "  n: 264", "  square_size: '1'",
+                     "  representation: corners", "    kind: rational"):
+        require(lines.count(expected) == 1, f"missing or repeated header: {expected}")
+    side_lines = [line for line in lines if line.startswith("  side: ")]
+    require(len(side_lines) == 1, "ambiguous side")
+    side_text = side_lines[0].removeprefix("  side: ")
+    require(RATIONAL.fullmatch(side_text) is not None, "side is not a rational literal")
+    side = Fraction(side_text)
+    require(side > 0, "nonpositive side")
+    require(lines.count("  squares:") == 1 and lines.count("  claim:") == 1,
+            "ambiguous corners section")
+    begin, end = lines.index("  squares:") + 1, lines.index("  claim:")
+    require(begin < end, "corners section order")
+    i, squares = begin, []
+    while i < end:
+        match = re.fullmatch(r"  - id: ([1-9][0-9]*)", lines[i])
+        require(match is not None, f"unexpected square header at line {i + 1}")
+        identifier = int(match.group(1))
+        require(lines[i + 1] == "    corners:", f"missing corners at line {i + 2}")
+        i += 2
+        points = []
+        for _ in range(4):
+            values = []
+            for prefix in ("    - - ", "      - "):
+                require(i < end and lines[i].startswith(prefix),
+                        f"unexpected coordinate structure at line {i + 1}")
+                token = lines[i].removeprefix(prefix)
+                if token.startswith("'") and token.endswith("'"):
+                    token = token[1:-1]
+                require(RATIONAL.fullmatch(token) is not None,
+                        f"nonrational coordinate at line {i + 1}")
+                values.append(Fraction(token))
+                i += 1
+            points.append((values[0], values[1]))
+        squares.append(integer_square(identifier, points))
+    require(len(squares) == EXPECTED_N, "wrong number of squares")
+    require({s.identifier for s in squares} == set(range(1, EXPECTED_N + 1)),
+            "IDs are not exactly 1 through 264")
+    return side, squares
+
+
+def bounds_gap(a: Square, b: Square) -> int:
+    ax0, ax1, ay0, ay1 = a.bounds
+    bx0, bx1, by0, by1 = b.bounds
+    da, db = a.denominator, b.denominator
+    return max(bx0 * da - ax1 * db, ax0 * db - bx1 * da,
+               by0 * da - ay1 * db, ay0 * db - by1 * da)
+
+
+def sat_gap(a: Square, b: Square) -> int:
+    """Return the largest unit-axis gap with denominator (Da*Db)**2."""
+    gaps = []
+    for own, other in ((a, b), (b, a)):
+        d, e = own.denominator, other.denominator
+        for axis in own.axes:
+            pa = [dot(axis, p) for p in own.points]
+            pb = [dot(axis, p) for p in other.points]
+            gaps.append(max(min(pb) * d - max(pa) * e,
+                            min(pa) * e - max(pb) * d) * e)
+    return max(gaps)
+
+
+def distance_squared_numerator(a: Square, b: Square) -> int:
+    """For disjoint squares, squared Euclidean distance has denominator (Da*Db)**4.
+
+    The minimum of vertex-to-segment distances covers both parallel-edge and
+    vertex cases. Geometry has already established that each edge has unit length.
+    """
+    pa = tuple((x * b.denominator, y * b.denominator) for x, y in a.points)
+    pb = tuple((x * a.denominator, y * a.denominator) for x, y in b.points)
+    q2 = (a.denominator * b.denominator)**2
+    candidates = []
+    for vertices, boundary in ((pa, pb), (pb, pa)):
+        for p in vertices:
+            for i in range(4):
+                start, end = boundary[i], boundary[(i + 1) % 4]
+                direction, offset = sub(end, start), sub(p, start)
+                t = dot(direction, offset)
+                if t <= 0:
+                    numerator = dot(offset, offset) * q2
+                elif t >= q2:
+                    offset = sub(p, end)
+                    numerator = dot(offset, offset) * q2
+                else:
+                    numerator = cross(direction, offset)**2
+                candidates.append(numerator)
+    return min(candidates)
+
+
+def controls() -> list[str]:
+    def shifted(dx: Fraction, dy: Fraction) -> Square:
+        return integer_square(0, [(dx, dy), (dx + 1, dy),
+                                  (dx + 1, dy + 1), (dx, dy + 1)])
+    a = shifted(Fraction(0), Fraction(0))
+    checks = [
+        ("edge touching", shifted(Fraction(1), Fraction(0)), 0, Fraction(0)),
+        ("corner touching", shifted(Fraction(1), Fraction(1)), 0, Fraction(0)),
+        ("positive edge gap", shifted(Fraction(11, 10), Fraction(0)), 1, Fraction(1, 100)),
+        ("positive diagonal gap", shifted(Fraction(11, 10), Fraction(11, 10)), 1, Fraction(1, 50)),
+        ("interior overlap", shifted(Fraction(9, 10), Fraction(0)), -1, None),
+        ("identical squares", a, -1, None),
+    ]
+    names = []
+    for name, b, expected_sign, expected_distance in checks:
+        geometry(b)
+        gap = sat_gap(a, b)
+        require((gap > 0) - (gap < 0) == expected_sign, f"control failed: {name}")
+        if expected_distance is not None:
+            actual = Fraction(distance_squared_numerator(a, b),
+                              (a.denominator * b.denominator)**4)
+            require(actual == expected_distance, f"distance control failed: {name}")
+        names.append(name)
+    rotated = integer_square(0, [(Fraction(0), Fraction(0)),
+        (Fraction(3, 5), Fraction(4, 5)), (Fraction(-1, 5), Fraction(7, 5)),
+        (Fraction(-4, 5), Fraction(3, 5))])
+    geometry(rotated)
+    rotated_touch = integer_square(0, [
+        (Fraction(x, rotated.denominator) + Fraction(3, 5),
+         Fraction(y, rotated.denominator) + Fraction(4, 5))
+        for x, y in rotated.points])
+    require(sat_gap(rotated, rotated_touch) == 0, "rotated contact control")
+    require(distance_squared_numerator(rotated, rotated_touch) == 0,
+            "rotated distance control")
+    names.append("rationally rotated edge touching")
+    malformed = Square(0, 1, ((0, 0), (1, 0), (2, 1), (0, 1)))
+    try:
+        geometry(malformed)
+    except ValueError:
+        names.append("nonsquare rejected")
+    else:
+        raise ValueError("nonsquare control accepted")
+    return names
+
+
+def decimal_text(value: Fraction, *, square_root: bool = False) -> str:
+    with localcontext() as context:
+        context.prec = 70
+        number = Decimal(value.numerator) / Decimal(value.denominator)
+        return str(number.sqrt() if square_root else number)
+
+
+def audit(path: Path) -> dict:
+    start = time.monotonic()
+    control_names = controls()
+    side, squares = parse_pinned(path)
+    wall_minimum = None
+    wall_positive_minimum = None
+    wall_contacts = []
+    for square in squares:
+        geometry(square)
+        x0, x1, y0, y1 = square.bounds
+        d = square.denominator
+        walls = {"left": Fraction(x0, d), "right": side - Fraction(x1, d),
+                 "bottom": Fraction(y0, d), "top": side - Fraction(y1, d)}
+        for wall, clearance in walls.items():
+            require(clearance >= 0, f"square {square.identifier} outside {wall} wall")
+            if wall_minimum is None or clearance < wall_minimum:
+                wall_minimum = clearance
+            if clearance == 0:
+                wall_contacts.append({"square": square.identifier, "wall": wall})
+            elif wall_positive_minimum is None or clearance < wall_positive_minimum:
+                wall_positive_minimum = clearance
+    pair_count, box_separations, sat_pairs = 0, 0, 0
+    near_candidates = []
+    for a, b in combinations(squares, 2):
+        pair_count += 1
+        q = a.denominator * b.denominator
+        if bounds_gap(a, b) * NEAR_DENOMINATOR > q:
+            box_separations += 1
+            continue
+        sat_pairs += 1
+        gap = sat_gap(a, b)
+        require(gap >= 0, f"interior overlap: squares {a.identifier}, {b.identifier}")
+        if gap * NEAR_DENOMINATOR <= q**2:
+            dsq = distance_squared_numerator(a, b)
+            require((gap == 0) == (dsq == 0),
+                    f"SAT/distance contact disagreement: {a.identifier}, {b.identifier}")
+            near_candidates.append((Fraction(dsq, q**4), a.identifier, b.identifier,
+                                    Fraction(gap, q**2)))
+    require(pair_count == EXPECTED_N * (EXPECTED_N - 1) // 2, "incomplete pair loop")
+    near_candidates.sort()
+    near = [row for row in near_candidates if row[0] * NEAR_DENOMINATOR**2 <= 1]
+    positive = [row for row in near if row[0] > 0]
+    require(positive, "no positive near distance: global positive minimum not resolved")
+    minimum, first_id, second_id, minimum_pair_gap = positive[0]
+    ceiling = Fraction(-(-(side.numerator * 10**12) // side.denominator), 10**12)
+    require(ceiling == Fraction("16.772168305041"), "12-place upward rounding differs")
+    return {
+        "verdict": "VALID_FINITE_UPPER_BOUND",
+        "source": str(path), "source_sha256": EXPECTED_SHA256,
+        "n": len(squares), "side_exact": str(side), "side_decimal": decimal_text(side),
+        "ceiling_12_places": "16.772168305041",
+        "unit_squares_checked": len(squares), "wall_constraints_checked": 4 * len(squares),
+        "minimum_wall_clearance": str(wall_minimum), "wall_contacts": wall_contacts,
+        "minimum_positive_square_wall_clearance": str(wall_positive_minimum),
+        "minimum_positive_square_wall_clearance_decimal": decimal_text(wall_positive_minimum),
+        "pairs_checked": pair_count, "axis_aligned_separations_over_near_threshold": box_separations,
+        "pairs_checked_on_four_square_axes": sat_pairs,
+        "near_threshold": f"1/{NEAR_DENOMINATOR}",
+        "exact_distance_candidates": len(near_candidates),
+        "pairs_within_near_threshold": len(near),
+        "exact_pair_contacts": [[i, j] for dsq, i, j, gap in near if dsq == 0],
+        "positive_pairs_at_most_threshold": {
+            f"1/{d}": sum(0 < dsq * d**2 <= 1 for dsq, i, j, gap in near)
+            for d in THRESHOLD_DENOMINATORS
+        },
+        "minimum_positive_pair_distance": {
+            "ids": [first_id, second_id], "distance_squared_exact": str(minimum),
+            "distance_decimal": decimal_text(minimum, square_root=True),
+            "maximum_square_axis_gap_exact": str(minimum_pair_gap),
+            "maximum_square_axis_gap_decimal": decimal_text(minimum_pair_gap),
+        },
+        "near_pairs": [{"ids": [i, j], "distance_decimal": decimal_text(dsq, square_root=True)}
+                       for dsq, i, j, gap in near],
+        "analytic_controls_passed": control_names,
+        "maximum_per_square_denominator_bits": max(s.denominator.bit_length() for s in squares),
+        "elapsed_seconds": round(time.monotonic() - start, 6),
+        "limits": ["Does not establish optimality, rigidity, KKT conditions, or provenance of the search.",
+                   "Does not certify the decimal pose or the submitter's programs.",
+                   "Decimal output is explanatory; all geometry and threshold decisions use exact integers.",
+                   "Accepts the observed pinned corner-list subset, not a general Witness/v2 schema."],
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("witness", type=Path)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    result = audit(args.witness)
+    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    print(json.dumps({key: result[key] for key in (
+        "verdict", "n", "pairs_checked", "pairs_checked_on_four_square_axes",
+        "pairs_within_near_threshold", "exact_pair_contacts", "elapsed_seconds")}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

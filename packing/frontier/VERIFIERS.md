@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **293** programs: **57** external and **236** first-party; **205** decide claims and **88** check premises.
-- **824** of **1068** evidence entries name the programs that verified them: 415 independently re-implemented, 327 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **294** programs: **57** external and **237** first-party; **206** decide claims and **88** check premises.
+- **826** of **1071** evidence entries name the programs that verified them: 416 independently re-implemented, 328 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -92,8 +92,8 @@ second implementation agrees.
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 19 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 160 | 167 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 151 | 166 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 161 | 168 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 152 | 167 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -325,6 +325,7 @@ second implementation agrees.
 | [`V-n179-algebraic-reader`](#v-n179-algebraic-reader) | devtools.n179_algebraic_report | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-n179-independent-review`](#v-n179-independent-review) | n179_replay.py.txt | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-n232-1062-review-check`](#v-n232-1062-review-check) | verify.py.txt (frozen source and portable input adapter) | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-ozden-1099-review-check`](#v-ozden-1099-review-check) | check_n264.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -1665,6 +1666,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-de-winter-959-algebraic-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original n179 certificate and both full-n179 gross mutations on the native route. | T-339 |
 | `E-squares-project-regularized-n127-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: all walls and unordered square pairs in the retained packing | T-341 |
 | `E-squares-project-regularized-n305-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: all walls and unordered square pairs in the retained packing | T-342 |
+| `E-ozden-1099-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: Every square, wall and pair in the retained 264-square witness. | T-343 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1830,6 +1832,7 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-de-winter-997-followup-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: Every square, wall and unordered square pair in the original certificate. | T-338 |
 | `E-squares-project-regularized-n127-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: all walls and unordered square pairs in the retained packing | T-341 |
 | `E-squares-project-regularized-n305-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: all walls and unordered square pairs in the retained packing | T-342 |
+| `E-ozden-1099-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: Every square, wall and pair in the retained 264-square witness. | T-343 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -5951,6 +5954,22 @@ Exact rational unit-square containment and exhaustive unordered interior separat
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-de-winter-1062-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: The submitted n232 certificate: every square, wall and unordered pair. | T-340 |
+
+### `V-ozden-1099-review-check`
+
+**check_n264.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Independently parses the source’s rational-corners data, checks unit-square geometry and containment, and uses exact integer bounding intervals and four projection axes to decide all unordered pairs. It also computes exact squared distances for near pairs.
+
+- Source: [`packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check_n264.py.txt`](../../packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check_n264.py.txt)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-23-ozden-1099.md`](../../docs/project/reviews/review-2026-11-23-ozden-1099.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Codex (OpenAI) (Separately prompted source-only Stage 4 review of issue), with its own prompt and code; authorship in common with the producer’s: none, The source credits Claude agents. The Codex reviewer used the issue and the pinned witness and imported neither producer code nor the project’s geometry or readers.
+- Note: The retained reading copy matches the reviewed checker, with import ordering adjusted after the successful numerical run. The review describes the initial quoted-zero parser refusal and the completed execution.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ozden-1099-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: Every square, wall and pair in the pinned rational-corners witness. | T-343 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

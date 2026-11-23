@@ -1093,7 +1093,11 @@ def _sources() -> dict[str, Source]:
         # T-305 is no source here now.
         packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
         # T-340 replaced T-307 at its only house.
-        packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
+        # T-343 is Özden's refinement of the Kodaj–JoeGun arrangement at 264.
+        replace(
+            packet_source("T-343", "ozden-s264-upper-bound-2026-11-23"),
+            rational_backend="gmp",
+        ),
         # The pass of 21 November 2026 (think-8yyy) moved 199 and 172 to Joost de Winter's
         # issues 939 and 946 (T-285, T-286), T-284's and T-282's packings re-solved to the
         # exact local optimum of T-282's arrangement, new results under the owner's option D
@@ -1318,7 +1322,7 @@ ADOPTED: dict[int, str] = {
     261: "T-174",
     262: "T-319",
     263: "T-174",
-    264: "T-308",
+    264: "T-343",
     267: "T-134",
     268: "T-331",
     269: "T-297",
@@ -1588,7 +1592,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-20": frozenset({127, 268, 270, 299}),
     "2026-11-21": frozenset({90, 109, 172, 179, 199, 228, 259, 305}),
     "2026-11-22": frozenset({232}),
-    "2026-11-23": frozenset({127, 305}),
+    "2026-11-23": frozenset({127, 264, 305}),
 }
 
 

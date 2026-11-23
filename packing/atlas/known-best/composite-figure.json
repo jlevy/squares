@@ -6993,12 +6993,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"1048362974875124931200045135165846110458139868651210718423626556399934406292049263215086241095736335587279162207436980729666772855226622435076783155619594773642655806836365008121431358257863038539839030649644483414811/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"52413025953251561123543319189069260371128934510917560364364409813461585167232269243571634089458939746021687638193439792537748709459989314659179367503761312109/3124999999999991273353740028372772249916468315131441015972668196711907312117879501595524371952697210414692126830406844613554507152302090371200200000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(264) ≥ 16.255951","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.2559512565"},
         "n": 264,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"16.7738075980019989","source_url":"https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-264-candidate.yaml","witness_id":"W-known-best-n264","witness_path":"packing/witnesses/known-best/n-264.yaml"},
+          "assessed_geometry": {"reported_side":"16.7721683050405464","source_url":"https://github.com/kenaznia-doga/s264-upper-bound-1677216830/blob/72c4d195c85b6099002ad6c675b27df40fdaceac/n-264-candidate.yaml","witness_id":"W-known-best-n264","witness_path":"packing/witnesses/known-best/n-264.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -7015,7 +7015,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(264) ≤ 16.773808","provenance":"frontier","relation":"upper-bound","value":"16.7738075980019989"}
+        "side": {"display":"s(264) ≤ 16.772169","provenance":"frontier","relation":"upper-bound","value":"16.7721683050405464"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

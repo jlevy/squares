@@ -14177,6 +14177,31 @@ sources:
     T-342 records the finite upper bound from the exact-solver restart using Evan Daniel’s
     MIT-licensed tools. The rational side lies below T-336’s first-contact side, and the
     batch retains the certificate and native checks.
+- id: ozden-s264-upper-bound-2026-11-23
+  title: Doğa Özden’s 264-square packing, submitted in issue 1099
+  role: source-repository
+  url: https://github.com/kenaznia-doga/s264-upper-bound-1677216830/tree/72c4d195c85b6099002ad6c675b27df40fdaceac
+  local: resources/web/ozden-s264-upper-bound-2026-11-23/
+  source_key: '[Özden s264 upper bound 2026-11-23]'
+  scope:
+    n_values:
+    - 264
+  reviewed: '2026-11-23'
+  source_date: '2026-11-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/ozden-s264-upper-bound-2026-11-23/acquisition/claims.json
+  evidence:
+  - E-ozden-1099-certificate-report
+  - E-ozden-1099-exact-feasibility
+  - E-ozden-1099-review-exact-feasibility
+  notes: >-
+    T-343 records the exact finite upper bound with a complete maintained replay and
+    a source-only independent review. The rational corners certificate, source
+    README and two licence notices are bound to the 23 November pin. The exact side improves
+    on T-308 contracted to first contact and on the earlier #1037 certificate.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -14556,11 +14581,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 264
-  source_id: joegun-upper-bounds-2026-11-16
-  value: '16.7738075980019989'
-  evidence: E-joegun-1001-certificate-report
+  source_id: ozden-s264-upper-bound-2026-11-23
+  value: '16.7721683050405464'
+  evidence: E-ozden-1099-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-16 (T-308).
+    a replay here and an accepted review, adopted on 2026-11-23 (T-343).
 - n: 266
   source_id: evand-new-arrangements-2026-10-07
   value: '16.823028750756475970708783711254'
@@ -15608,7 +15633,7 @@ superseded_reports:
 - n: 264
   source_id: evand-square-packing-2026-10-05
   value: '16.778174593052022768577069729084'
-  superseded_by: joegun-upper-bounds-2026-11-16
+  superseded_by: ozden-s264-upper-bound-2026-11-23
   reason: Certifies the catalogue's packing at a side 2.8e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -16668,8 +16693,8 @@ superseded_reports:
   source_id: dostashev-records-2026-10-12
   value: '16.7747351323878329'
   reason: The house from 2026-10-12 until 2026-10-16; its certificate stays retained and verified,
-    and T-308's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-343's exact side is smaller.
+  superseded_by: ozden-s264-upper-bound-2026-11-23
 - n: 271
   source_id: couzo-certificates-2026-10-12-in-corpus
   value: '16.9489923564512057'
@@ -17352,8 +17377,8 @@ superseded_reports:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '16.77473513238783285'
   reason: The house from 2026-10-16 until 2026-11-16; its certificate stays retained and verified,
-    and T-308's exact side is smaller.
-  superseded_by: joegun-upper-bounds-2026-11-16
+    and T-343's exact side is smaller.
+  superseded_by: ozden-s264-upper-bound-2026-11-23
 - n: 305
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.95046648213771228'
@@ -17516,6 +17541,12 @@ superseded_reports:
   reason: The house from 2026-11-21 until 2026-11-23; its certificate stays retained and verified,
     and T-342's exact side is smaller.
   superseded_by: squares-project-regularized-n305-2026-11-23
+- n: 264
+  source_id: joegun-upper-bounds-2026-11-16
+  value: '16.7738075980019989'
+  reason: The house from 2026-11-16 until 2026-11-23; its certificate stays retained and verified,
+    and T-343's exact side is smaller.
+  superseded_by: ozden-s264-upper-bound-2026-11-23
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08
