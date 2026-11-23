@@ -2734,8 +2734,8 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     fallback. The same day T-335 adds Samanyu-dev's finder credit at 109. The full
     roster then exceeds the current poster edition's three-line credit block. T-336
     adds de Winter as the further improver at 305. His name already appears in the
-    printed credit block. The 23 November pass credits Joshua Levy for
-    regularizing 127 and 305, with the printed credit held for the next cut.
+    printed credit block. The cases for 127 and 305 credit Joshua Levy in prose for the
+    regularization certificates, outside their construction credit fields.
     T-343 adds Özden's improvement credit at 264 and the print holds his name there too."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
@@ -2747,10 +2747,8 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         228: ("Doğa Özden",),
         90: ("jazivxt",),
         109: ("Samanyu-dev",),
-        127: ("Joshua Levy",),
-        **dict.fromkeys((204, 232), ("Tomáš Kodaj", "JoeGun")),
+        **dict.fromkeys((204, 232, 305), ("Tomáš Kodaj", "JoeGun")),
         264: ("Tomáš Kodaj", "JoeGun", "Doğa Özden"),
-        305: ("Tomáš Kodaj", "JoeGun", "Joshua Levy"),
     }
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
@@ -2767,11 +2765,11 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         (263, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, [], []),
-        (127, ["Joost de Winter"], ["Joshua Levy"]),
+        (127, ["Joost de Winter"], []),
         (204, ["Tomáš Kodaj"], ["JoeGun"]),
         (232, ["Tomáš Kodaj"], ["JoeGun"]),
         (264, ["Tomáš Kodaj"], ["JoeGun", "Doğa Özden"]),
-        (305, ["Tomáš Kodaj"], ["JoeGun", "Joost de Winter", "Joshua Levy"]),
+        (305, ["Tomáš Kodaj"], ["JoeGun", "Joost de Winter"]),
         (237, ["Doğa Özden"], []),
         (268, ["Joost de Winter"], []),
         (269, ["Doğa Özden"], []),
@@ -2824,7 +2822,6 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         "JoeGun",
         "Samanyu-dev",
         "Fernández Rubio",
-        "Levy",
     }
     assert all(name not in lines for name in released - names)
     assert "Yim" not in released
