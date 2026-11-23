@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from devtools import census_drawing_regularity as census
+from devtools import default_drawings
 from devtools import regularize_axis_components as axis
 from sqpack.witness import witness_document
 
@@ -175,6 +176,33 @@ def test_the_tree_decides_what_is_drawn(tmp_path: Path) -> None:
     assert next(row for row in rows if row["n"] == 4)["change"] == -4
     table = census.ranking_markdown(rows, top=5)
     assert "| 4 | witness | 0 / 4 / 4 | 0 | Evan view | 0 / 0 / 4 | 0 | 0 | -4 |" in table
+
+
+def test_default_drawings_measures_the_house_when_a_layer_view_is_held(tmp_path: Path) -> None:
+    tree = scratch_tree(tmp_path)
+    view = census.read_index(tree)[4]
+    record = {
+        "contract": default_drawings.CONTRACT,
+        "entries": [
+            {
+                "n": 4,
+                "view": view["view"]["path"],
+                "generator": view["generator"],
+                "default": default_drawings.HOUSE,
+            }
+        ],
+    }
+    (tree / default_drawings.RECORD_PATH).write_text(json.dumps(record), encoding="utf-8")
+    output = tmp_path / "selected.json"
+    args = ["--tree", str(tree), "--n", "4", "--output", str(output), "--default-drawings"]
+
+    assert census.main(args) == 0
+    document = json.loads(output.read_text(encoding="utf-8"))
+    (row,) = document["counts"]
+    assert document["rules"]["drawing_source"] == "default-drawings"
+    assert row["drawing"]["kind"] == "witness"
+    assert row["uneven_axis"] == 4
+    assert len(row["uneven_axis_squares"]) == 4
 
 
 def test_a_view_is_labelled_by_its_generator() -> None:
