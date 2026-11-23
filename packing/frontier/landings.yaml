@@ -52,8 +52,8 @@ houses:
     result: T-139
     landed: '2026-10-12'
   - n: 127
-    result: T-330
-    landed: '2026-11-20'
+    result: T-341
+    landed: '2026-11-23'
   - n: 129
     result: T-186
     landed: '2026-10-17'
@@ -232,8 +232,8 @@ houses:
     result: T-273
     landed: '2026-11-06'
   - n: 305
-    result: T-336
-    landed: '2026-11-21'
+    result: T-342
+    landed: '2026-11-23'
   - n: 306
     result: T-174
     landed: '2026-10-19'

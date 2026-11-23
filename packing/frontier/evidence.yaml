@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-25'
+last_reviewed: '2026-11-23'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -68428,3 +68428,115 @@ evidence:
     limitations: >-
       The issue gives seven upward ceilings. The source's own verification programs
       are outside the retained packet and its reported evidence remains attributed.
+
+  - id: E-squares-project-regularized-n127-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+    source_key: '[squares project regularized n127 2026-11-23]'
+    certificate: packing/cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert
+    source_reviewed: '2026-11-23'
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: generator
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The project supplies a native rational packing at side 11800793726614962238623103308879/1000000000000000000000000000000.
+      The separate replay decides feasibility.
+  - id: E-squares-project-regularized-n127-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 127
+    source_key: '[squares project regularized n127 2026-11-23]'
+    certificate: packing/cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert
+    source_reviewed: '2026-11-23'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    replay: From packing, run python -m devtools.register_candidates think-4z8z-2026-11-23 certify
+      --jobs-dir EXTERNAL_SCRATCH --workers 1 and python -m devtools.register_candidates think-4z8z-2026-11-23
+      controls --n 127. The positive and both full-certificate mutants ran on both maintained exact
+      routes. 8,001 unordered pairs in the positive certificate. The generator run evidence also
+      records the separate exact half-angle area decision.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-check-half-angle-area
+    independence:
+      coverage:
+        extent: full
+        unit: all walls and unordered square pairs in the retained packing
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md
+    limitations: Exact finite feasibility establishes the stated upper bound. It leaves contact-system
+      minimality and optimality open.
+  - id: E-squares-project-regularized-n305-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 305
+    source_key: '[squares project regularized n305 2026-11-23]'
+    certificate: packing/cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert
+    source_reviewed: '2026-11-23'
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: generator
+    replay_status: not-attempted
+    verifiers: []
+    limitations: The project supplies a native rational packing at side 44864389596853971677645995840034572507912162990586880878860956041536014514347204438234416389597/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      The separate replay decides feasibility.
+  - id: E-squares-project-regularized-n305-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 305
+    source_key: '[squares project regularized n305 2026-11-23]'
+    certificate: packing/cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert
+    source_reviewed: '2026-11-23'
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    replay: From packing, run python -m devtools.register_candidates think-huum-2026-11-23 certify
+      --jobs-dir EXTERNAL_SCRATCH --workers 1 and python -m devtools.register_candidates think-huum-2026-11-23
+      controls --n 305. The positive and both full-certificate mutants ran on both maintained exact
+      routes. 46,360 unordered pairs in the positive certificate. The generator run evidence also
+      records the separate exact half-angle area decision.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-check-half-angle-area
+    independence:
+      coverage:
+        extent: full
+        unit: all walls and unordered square pairs in the retained packing
+        checked: 1
+        of: 1
+    independence_record: docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md
+    limitations: Exact finite feasibility establishes the stated upper bound. It leaves contact-system
+      minimality and optimality open.
+  - id: E-squares-project-axis-regularizer-method
+    claim: derived-structure
+    scope:
+      n_values:
+      - 127
+      - 305
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    source_key: '[Daniel regularizer 2026-10-11]'
+    replay_status: not-attempted
+    source_reviewed: '2026-11-23'
+    limitations: Method provenance for the project runs from pin 675a5eaa8712542daac8b4515b0f69ad7044df44.
+      The native packing claims have separate exact replays.

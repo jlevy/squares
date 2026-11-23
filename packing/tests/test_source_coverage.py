@@ -403,10 +403,77 @@ def test_a_reason_that_names_the_house_names_the_one_that_supersedes_it() -> Non
     """Both ways a reason names its house hold to `superseded_by`, the source key matched
     through any of the source's coverage entries."""
     coverage, results = _named_houses()
-    assert coverage_check.house_reason_errors(coverage, results) == []
+    assert coverage_check.house_reason_errors(coverage, results, {}) == []
     unnamed = copy.deepcopy(coverage)
     unnamed["superseded_reports"][0]["reason"] = "Grid."
-    assert coverage_check.house_reason_errors(unnamed, results) == []
+    assert coverage_check.house_reason_errors(unnamed, results, {}) == []
+
+
+def _first_party_house() -> tuple[
+    dict[str, Any], list[dict[str, Any]], dict[str, dict[str, Any]]
+]:
+    coverage, results = _named_houses()
+    result = results[-1]
+    del result["attribution"]
+    result["evidence"] = ["report", "replay", "other-replay"]
+    report = {
+        "claim": "upper-bound",
+        "assurance": "reported",
+        "source_key": "[later]",
+        "scope": {"n_values": [7]},
+    }
+    replay = {
+        **report,
+        "assurance": "verified",
+        "origin": "replayed-here",
+        "performed_by": "repository",
+        "replay_status": "passed",
+    }
+    return (
+        coverage,
+        results,
+        {
+            "report": report,
+            "replay": replay,
+            "other-replay": {
+                **replay,
+                "source_key": "[earlier]",
+                "scope": {"n_values": [8]},
+            },
+        },
+    )
+
+
+def test_a_reason_can_name_a_first_party_house_from_its_scoped_evidence() -> None:
+    coverage, results, evidence = _first_party_house()
+    assert coverage_check.house_reason_errors(coverage, results, evidence) == []
+
+
+@pytest.mark.parametrize(
+    ("atom", "field", "value"),
+    [
+        ("report", "claim", "lower-bound"),
+        ("report", "source_key", "[earlier]"),
+        ("report", "scope", {"n_values": [8]}),
+        ("replay", "scope", {"n_values": [8]}),
+        ("replay", "replay_status", "failed"),
+        ("other-replay", "scope", {"n_values": [7]}),
+    ],
+)
+def test_a_first_party_house_needs_one_matching_reported_and_confirming_source(
+    atom: str, field: str, value: Any
+) -> None:
+    coverage, results, evidence = _first_party_house()
+    evidence[atom][field] = value
+    errors = coverage_check.house_reason_errors(coverage, results, evidence)
+    assert len(errors) == 3
+    assert all("later-in-corpus, which is not T-900's source" in error for error in errors)
+
+
+def test_an_attributed_house_can_still_name_any_of_its_sources() -> None:
+    coverage, results = _named_houses()
+    results[-1]["attribution"]["source_keys"].append("[earlier]")
+    assert coverage_check.house_reason_errors(coverage, results, {}) == []
 
 
 def test_a_reason_left_naming_the_earlier_house_is_refused() -> None:
@@ -418,7 +485,7 @@ def test_a_reason_left_naming_the_earlier_house_is_refused() -> None:
         "The house until 2026-10-11; its certificate stays retained and verified, and "
         "T-800's exact side is smaller."
     )
-    (error,) = coverage_check.house_reason_errors(stale, results)
+    (error,) = coverage_check.house_reason_errors(stale, results, {})
     assert "n=7 from older names T-800" in error
     assert "later-in-corpus, which is not T-800's source" in error
     dated = copy.deepcopy(coverage)
@@ -426,12 +493,12 @@ def test_a_reason_left_naming_the_earlier_house_is_refused() -> None:
         "A certificate of the same release that no register entry cites; the side it prints "
         "is above the house adopted here on 2026-10-11."
     )
-    (error,) = coverage_check.house_reason_errors(dated, results)
+    (error,) = coverage_check.house_reason_errors(dated, results, {})
     assert "names the house adopted on 2026-10-11" in error
     assert "was adopted on 2026-10-12" in error
     unadopted = copy.deepcopy(coverage)
     unadopted["selected_overrides"][0]["reason"] = "Selected by hand."
-    errors = coverage_check.house_reason_errors(unadopted, results)
+    errors = coverage_check.house_reason_errors(unadopted, results, {})
     assert errors == [
         (
             "superseded report n=7 from sibling names the house adopted on 2026-10-12, but "

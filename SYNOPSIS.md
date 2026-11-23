@@ -504,6 +504,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-325](packing/frontier/RESULTS.md) | 299 | `V3` | `C3` | `S1` | `previously-published` | One complete rational certificate proves s(299) <= 17.801004434251766824147518370008. |
 | [T-326](packing/frontier/RESULTS.md) | 307 | `V3` | `C3` | `S1` | `previously-published` | One complete rational certificate proves s(307) <= 17.97923096038388460435506303874. |
 | [T-330](packing/frontier/RESULTS.md) | 127 | `V3` | `C3` | `S1` | `previously-published` | One complete rational certificate proves s(127) <= 5900396863307481119664515678048233366964863482714849291045437/500000000000000000000000000000000000000000000000000000000000. |
+| [T-341](packing/frontier/RESULTS.md) | 127 | `V3` | `C3` | `S1` | `apparently-novel` | The retained rational centre and half-angle certificate proves s(127) <= 11800793726614962238623103308879/1000000000000000000000000000000. |
+| [T-342](packing/frontier/RESULTS.md) | 305 | `V3` | `C3` | `S1` | `apparently-novel` | The retained rational centre and half-angle certificate proves s(305) <= 44864389596853971677645995840034572507912162990586880878860956041536014514347204438234416389597/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000. |
 | [T-253](packing/frontier/RESULTS.md) | 154, 155, 183, 211, 227, 236, 237, 241, 271 | `V0` | `C1` | `S1` | `previously-published` | Nine complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(154) <= 12.9211009407616805497273710781811018832596, s(155) <= 12.9522609446505640351376570514307748530773, s(183) <= 13.9995801787362525019414750957971146726967, s(211) <= 14.993549626299421038785594964633603835513, s(227) <= 15.5636256523251490846368074671935498402163, s(236) <= 15.8619343906073586170851792275034202808198, s(237) <= 15.9026036382595968800201182179071384887302, s(241) <= 15.9871170951502387581618869582526723489714 and s(271) <= 16.9489477337136575105539116351026963841491. |
 | [T-260](packing/frontier/RESULTS.md) | 105, 146, 156, 229, 308 | `V0` | `C1` | `S1` | `previously-published` | Five complete rational source certificates of issue 846 report finite upper-bound improvements at the exact sides they state: s(105) <= 10.789303783742975392483567321744, s(146) <= 12.583782190151860342291508597077, s(156) <= 648958292691713822691804519015415761935308555406679/50000000000000000000000000000000000000000000000000, s(229) <= 15.650161513876431064008548865321 and s(308) <= 17.997149121270908735152160752315. |
 | [T-280](packing/frontier/RESULTS.md) | 299, 303 | `V0` | `C1` | `S1` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(299) <= 49520681639553253091959720304954604907070758384704238109808721459262431205131612278389503816375037/2781903786522383536263046420444731316926020496322871983755429706465280000000000000000000000000000 and s(303) <= 1159243312382833490764400031561352875121611202900949162484560193631809228369410184762453/64755723279645431239980480646475572327964543123998048064000000000000000000000000000000. |
@@ -543,7 +545,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 340 | 340 registered, 308 by others |
+| Frontier results | 342 | 342 registered, 308 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -1942,6 +1944,12 @@ case or experiment separately.
 | [Review of FN-1 Original Compressed Input Custody](docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md) | dated review record | record | retained | — |
 | [Samanyu-dev’s s(109) Packing: Confirming Review of the Exact Import](docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md) | dated review record | record | retained | — |
 | [Review of the Rational Certificate in Issue 1062](docs/project/reviews/review-2026-11-21-de-winter-1062-n232.md) | dated review record | record | retained | — |
+| [Exact 127-Square Regularization Review](docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md) | dated review record | record | retained | — |
+| [Exact 305-Square Regularization Review](docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md) | dated review record | record | retained | — |
+| [Exact Regularization at 127 Squares](packing/cases/register_candidates/think-4z8z-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [Exact Regularization at 305 Squares](packing/cases/register_candidates/think-huum-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [Drawing Runs for the Exact 127 and 305 Houses](packing/cases/regularized_drawings/think-huum-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [post-adoption-selection.md](packing/cases/regularized_drawings/think-huum-2026-11-23/post-adoption-selection.md) | source retention and archive policy | record | retained | — |
 | `packing/contributors/people/*.md` | hand-maintained registry | record | maintained | — |
 | `packing/site-changelog.yaml` | hand-maintained registry | current | maintained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |

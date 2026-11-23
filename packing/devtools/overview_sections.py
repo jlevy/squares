@@ -1425,15 +1425,13 @@ def added_entry(result: Result) -> str:
     on a quieter line, its cases (`added_cases`), its V and C rungs and its S score, and
     its credit
     (`credit_link`). An S4 or S5 score is set in the significance ink. A result since
-    superseded (`is_superseded`) is muted, its id titled so, and its quiet line ends
-    "superseded", where touch screens and screen readers see it too; its links keep their
-    colour (#514's review A, finding A4)."""
+    superseded (`is_superseded`) is muted and its quiet line ends "superseded", where
+    touch screens and screen readers see it. Its links retain their colour."""
     record = result.record
     level = significance(result)
     score = f"<b>S{level}</b>" if level >= INKED_SIGNIFICANCE else f"S{level}"
     superseded = is_superseded(result)
     mark = ' class="site-rollup-superseded"' if superseded else ""
-    title = ' title="Superseded"' if superseded else ""
     headline = link_prose(html.escape(plain_text(result.summary), quote=False))
     rungs = f"{_esc(record['verification'])} {_esc(record['confirmation'])} {score}"
     who = credit_link(
@@ -1441,7 +1439,7 @@ def added_entry(result: Result) -> str:
     )
     note = " · superseded" if superseded else ""
     return (
-        f'<li{mark}><a class="{ROLLUP_ID}" href="{_esc(result_url(result.id))}"{title}>'
+        f'<li{mark}><a class="{ROLLUP_ID}" href="{_esc(result_url(result.id))}">'
         f"{_esc(result.id)}</a> "
         f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}{note}</small></li>"
     )

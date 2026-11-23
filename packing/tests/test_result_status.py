@@ -554,6 +554,9 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-309",
         # T-340 superseded T-307 at its only count, 232, on 22 November 2026.
         "T-307",
+        # T-341 and T-342 superseded the earlier houses at 127 and 305 on 23 November.
+        "T-330",
+        "T-336",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets

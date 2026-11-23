@@ -6282,7 +6282,35 @@ sources:
       The archive has no separate LICENSE member and points to the pinned source's
       credit and licence notices. No source program ran during this custody triage.
 
+  - key: '[squares project regularized n127 2026-11-23]'
+    authors: [Levy]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-23'
+    credit: Levy after de Winter, Daniel
+    lineage: builds-on-project
+    note: >-
+      The Squares Project’s replayed exact regularization (T-341) of Joost de Winter’s
+      T-330 band packing using Evan Daniel’s vendored MIT solver and regularizer.
+      The arrangement preceding de Winter’s packing appeared in the Kaggle compilations
+      of Alex Chilton and Asterios Panoras. Both maintained rational routes and the
+      half-angle area checker accepted the certificate for finite feasibility.
+  - key: '[squares project regularized n305 2026-11-23]'
+    authors: [Levy]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-23'
+    credit: Levy after Kodaj, JoeGun, de Winter, Daniel
+    short_credit: Levy after Kodaj et al.
+    lineage: builds-on-project
+    note: >-
+      The Squares Project’s exact re-solve (T-342) from a regularized pose of T-336,
+      using Evan Daniel’s vendored MIT solver and regularizer. The original packing
+      is Tomáš Kodaj’s, improved by JoeGun and Joost de Winter. Both maintained
+      rational routes and the half-angle area checker accepted the certificate
+      for finite feasibility.
 credited_names:
+  Joshua Levy: Levy
   Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim
   Doğa Özden: Özden

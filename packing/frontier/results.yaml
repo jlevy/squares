@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-21'
+last_reviewed: '2026-11-23'
 results:
   - id: T-001
     kind: lower-bound
@@ -54615,6 +54615,147 @@ results:
       covers:
       - T-340
 
+  - id: T-341
+    kind: upper-bound
+    registered: '2026-11-23'
+    landed: '2026-11-23'
+    established: '2026-11-23'
+    headline: Exact regularization at 127 squares
+    claim: The retained rational centre and half-angle certificate proves s(127) <= 11800793726614962238623103308879/1000000000000000000000000000000.
+      It is 7.05928047217e-19 below T-330 and 7.05928047217e-19 below that predecessor at first contact.
+      Uneven axis-aligned squares fell from 15 to 2, and near-axis squares fell from 2 to zero. The
+      127 centres pair one to one with the predecessor, with 44 moves beyond 0.001 and a largest
+      move of 0.3364312. Joost de Winter’s packing keeps its credit. The Squares Project made this
+      regularization using Evan Daniel’s exact solver and conservative coincidence regularizer (MIT).
+    scope:
+      n_values:
+      - 127
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 1
+      rationale: The exact bound improves on the predecessor at first contact by less than one
+        unit at the previous display precision.
+      scored: '2026-11-23'
+      by: Codex, intake assessment
+    novelty: apparently-novel
+    builds_on:
+      credit:
+      - Daniel
+      source_keys:
+      - '[Daniel regularizer 2026-10-11]'
+    regularizations:
+    - n: 127
+      of: T-330
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/cases/regularized_drawings/think-4z8z-2026-11-23/n127-replay/n-127/report.json.gz
+        one_to_one: true
+        moved: 44
+        max_move: 0.3364312
+        max_turn_deg: 0.879038
+    evidence:
+    - E-squares-project-regularized-n127-report
+    - E-squares-project-regularized-n127-exact-feasibility
+    - E-squares-project-axis-regularizer-method
+    artifacts:
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/exact-certification-n127.json.xz
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/sharp-controls-n127.json
+    - packing/cases/regularized_drawings/think-4z8z-2026-11-23/n127-replay/n-127/report.json.gz
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127-own.json
+    - docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md
+    controls:
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/exact-certification-n127.json.xz
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/sharp-controls-n127.json
+    next_rung: V4 and C4 require a second distinct adversarial review and documented human oversight.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md
+      kind: adversarial
+      reviewer: Codex, separately prompted source-only review at extra-high reasoning
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-23'
+      scope: Certificate-to-bound argument, exact scalar comparison with the predecessor after contraction,
+        monotonicity, and lineage.
+      verdict: accepted
+      covers:
+      - T-341
+  - id: T-342
+    kind: upper-bound
+    registered: '2026-11-23'
+    landed: '2026-11-23'
+    established: '2026-11-23'
+    headline: Exact regularization at 305 squares
+    claim: The retained rational centre and half-angle certificate proves s(305) <= 44864389596853971677645995840034572507912162990586880878860956041536014514347204438234416389597/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      It is 5.40623344416e-81 below T-336 and 2.20196672468e-81 below that predecessor at first contact.
+      Uneven axis-aligned squares fell from 63 to 13. All shared-side totals increased, with three
+      individual contact losses against the previous selected drawing. Joost
+      de Winter’s packing keeps its credit. The refinement is credited to Levy after Daniel, whose exact solver and
+      conservative coincidence regularizer (MIT) supplied the method.
+    scope:
+      n_values:
+      - 305
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 1
+      rationale: The exact bound improves on the predecessor at first contact by less than one
+        unit at the previous display precision.
+      scored: '2026-11-23'
+      by: Codex, intake assessment
+    novelty: apparently-novel
+    builds_on:
+      credit:
+      - Daniel
+      source_keys:
+      - '[Daniel regularizer 2026-10-11]'
+    regularizations:
+    - n: 305
+      of: T-336
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications:
+      - 100-digit nonlinear restart from the regularized pose
+      - rational certificate padding 1e-84
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/cases/regularized_drawings/think-huum-2026-11-23/n305-nonlinear-restart/n-305/refined-decided.json.gz
+        one_to_one: true
+        moved: 87
+        max_move: 0.178068
+        max_turn_deg: 0.152924
+    evidence:
+    - E-squares-project-regularized-n305-report
+    - E-squares-project-regularized-n305-exact-feasibility
+    - E-squares-project-axis-regularizer-method
+    artifacts:
+    - packing/cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert
+    - packing/cases/register_candidates/think-huum-2026-11-23/receipts/exact-certification-n305.json.xz
+    - packing/cases/regularized_drawings/think-huum-2026-11-23/n305-nonlinear-restart/n-305/refined-decided.json.gz
+    - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/contraction-1052.json
+    - docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md
+    controls:
+    - packing/cases/register_candidates/think-huum-2026-11-23/receipts/exact-certification-n305.json.xz
+    next_rung: V4 and C4 require a second distinct adversarial review and documented human oversight.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md
+      kind: adversarial
+      reviewer: Codex, separately prompted source-only review at maximum reasoning
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-23'
+      scope: Certificate-to-bound argument, exact scalar comparison with the predecessor after contraction,
+        monotonicity, and lineage.
+      verdict: accepted
+      covers:
+      - T-342
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
@@ -54969,7 +55110,7 @@ regularized_drawings:
         max_turn_deg: 28.4472
       view: packing/atlas/known-best/regularized/n-126-regularized.yaml.gz
     - n: 127
-      of: T-330
+      of: T-341
       by: project
       method: regularize_axis_components/2
       side: same
@@ -54977,9 +55118,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 21
-        max_move: 0.3364312
-        max_turn_deg: 1.09194e-54
+        moved: 0
+        max_move: 6.519202e-20
+        max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-127-regularized.yaml.gz
     - n: 129
       of: T-186
@@ -55931,7 +56072,7 @@ regularized_drawings:
         max_turn_deg: 2.46738
       view: packing/atlas/known-best/regularized/n-304-regularized.yaml.gz
     - n: 305
-      of: T-336
+      of: T-342
       by: project
       method: regularize_axis_components/2
       side: same
@@ -55939,9 +56080,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 25
-        max_move: 0.1780675
-        max_turn_deg: 1.14592e-28
+        moved: 0
+        max_move: 1.698534e-83
+        max_turn_deg: 3.45053e-90
       view: packing/atlas/known-best/regularized/n-305-regularized.yaml.gz
     - n: 306
       of: T-174

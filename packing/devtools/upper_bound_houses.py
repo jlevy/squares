@@ -862,6 +862,63 @@ def de_winter_997_followup_source(result: str) -> Source:
     )
 
 
+def project_candidate_source(result: str, key: str) -> Source:
+    """Build a house from a registered project certificate and its native jobs."""
+    from devtools import register_candidates  # noqa: PLC0415 -- candidate custody uses readers
+
+    batch = register_candidates.BATCHES[reports.PROJECT_CANDIDATE_BATCHES[key]]
+
+    def stored(n: int) -> Path:
+        return register_candidates.certificate_path(batch, n)
+
+    def receipt(n: int) -> Path:
+        return register_candidates.receipt_path(batch, n)
+
+    def jobs(n: int, exact: legacy.Certificate) -> Mapping[str, Any]:
+        record = register_candidates.check_receipt(batch, n, exact=exact)
+        return {str(row["control"]): row for row in record["cases"]}
+
+    def origin(n: int) -> Origin:
+        path = stored(n)
+        return Origin(
+            key=key,
+            path=path,
+            url=f"https://github.com/jlevy/squares/blob/main/{path.relative_to(REPO).as_posix()}",
+            revision=batch.name,
+            retrieved=batch.date,
+            author=batch.author,
+            licence_status="CC-BY-4.0",
+            raw_asset_retained=True,
+            retention_policy="Complete project-generated certificate retained losslessly.",
+        )
+
+    def inputs(numbers: Sequence[int]) -> tuple[Path, ...]:
+        return tuple(
+            path
+            for n in numbers
+            for path in (
+                stored(n),
+                receipt(n),
+                register_candidates.report_path(batch.candidate(n)),
+            )
+        )
+
+    return Source(
+        result=result,
+        key=key,
+        packet=batch.package,
+        certificate=lambda n: register_candidates.read_certificate(batch, n),
+        jobs=jobs,
+        origin=origin,
+        inputs=inputs,
+        witness_prefix=batch.witness_prefix,
+        claim_limitations=batch.claim_limitations,
+        stored=stored,
+        receipt=receipt,
+        rational_backend=batch.rational_backend,
+    )
+
+
 #: The counts each result houses by its algebraic witness, whose side is irrational: PR
 #: #574's three algebraic certificates the house rule adopts (T-174), and the exact forms of
 #: issue 639 whose facts its packet derives (T-193). Issue 639's other staged counts wait:
@@ -877,6 +934,8 @@ def _sources() -> dict[str, Source]:
     from devtools import n232_rational_source  # noqa: PLC0415 -- source factory uses Source
 
     sources = [
+        project_candidate_source("T-341", reports.PROJECT_N127_KEY),
+        project_candidate_source("T-342", reports.PROJECT_N305_KEY),
         n232_rational_source.house_source("T-340"),
         packet_source("T-134", "couzo-exact-certificates-2026-10-09"),
         packet_source("T-139", "evand-trio126-2026-10-09"),
@@ -1056,19 +1115,10 @@ def _sources() -> dict[str, Source]:
             packet_source(f"T-{number}", "mishapolk-issue1009-2026-11-16")
             for number in (*range(314, 320), 322, 323, 324, 326)
         ),
-        # The pass of 20 November 2026 (think-zqot) moved 127 from T-305, its only house
-        # (T-306 to T-309 still house 204, 232, 264 and 305 through the same packet), to Joost
-        # de Winter's issue 1020 (T-330), the smallest of his three reports there on the
-        # evening of 17 November.
-        packet_source("T-330", "de-winter-s127-issue1020-2026-11-17"),
         packet_source("T-331", "de-winter-s268-upper-bound-2026-11-17"),
         packet_source("T-332", "de-winter-s270-upper-bound-2026-11-17"),
         packet_source("T-333", "de-winter-s299-upper-bound-2026-11-18"),
         packet_source("T-335", "samanyu-n109-2026-11-07"),
-        # The pass of 21 November 2026 (think-kzwl) moves 305 from T-309 to
-        # de Winter's issue-1052 refinement. T-309 has no current house; the
-        # JoeGun packet still supplies T-306, T-307 and T-308 above.
-        packet_source("T-336", "de-winter-n305-2026-11-20"),
         geiserx_1040_source("T-337"),
     ]
     if result := n179_algebraic_report.registered_result():
@@ -1224,7 +1274,7 @@ ADOPTED: dict[int, str] = {
     110: "T-174",
     123: "T-193",
     126: "T-139",
-    127: "T-330",
+    127: "T-341",
     129: "T-186",
     130: "T-259",
     131: "T-174",
@@ -1284,7 +1334,7 @@ ADOPTED: dict[int, str] = {
     302: "T-193",
     303: "T-278",
     304: "T-273",
-    305: "T-336",
+    305: "T-342",
     306: "T-174",
     307: "T-326",
     308: "T-221",
@@ -1538,6 +1588,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-20": frozenset({127, 268, 270, 299}),
     "2026-11-21": frozenset({90, 109, 172, 179, 199, 228, 259, 305}),
     "2026-11-22": frozenset({232}),
+    "2026-11-23": frozenset({127, 305}),
 }
 
 
@@ -1726,6 +1777,8 @@ def writable_source(result: str, n: int, key: str, *, algebraic: bool) -> Source
         return found if not algebraic or n in found.fields else None
     if key == "[de Winter issue 997 follow-up 2026-11-21]" and not algebraic and n == 90:
         return de_winter_997_followup_source(result)
+    if not algebraic and key in reports.PROJECT_CANDIDATE_BATCHES:
+        return project_candidate_source(result, key)
     packet = reports.import_packet(key)
     if algebraic or packet is None:
         return None

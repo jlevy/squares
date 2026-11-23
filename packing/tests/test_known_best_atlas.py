@@ -399,11 +399,18 @@ def _assert_file_retains(row: dict[str, Any], path: Path) -> None:
     assert hashlib.sha256(data).hexdigest() == digests[upstream], row["url"]
 
 
+def _project_candidate_house(n: int) -> adopted_houses.Source | None:
+    if n not in adopted_houses.ADOPTED:
+        return None
+    source = adopted_houses.source_for(n)
+    return source if source.key in adopted_houses.reports.PROJECT_CANDIDATE_BATCHES else None
+
+
 def test_every_retained_packet_source_holds_its_upstream_bytes() -> None:
-    """A packet row marked `raw_asset_retained` keeps the file its `url` names, byte for
-    byte: the builder marks a row so when its `path` is a complete-certificate container
-    (`build_known_best_atlas._source_index`), and the container's entry for that url
-    carries the SHA-256 the packet's acquisition record pinned upstream."""
+    """An acquired raw asset matches the bytes pinned in its acquisition record.
+    A project candidate links directly to its own retained certificate. The witness
+    checks below verify that certificate against its native jobs.
+    """
     source_index = json.loads((SOURCES / "sources.json").read_text(encoding="utf-8"))
     rows = [
         record
@@ -414,6 +421,12 @@ def test_every_retained_packet_source_holds_its_upstream_bytes() -> None:
     containers: dict[str, dict[str, Any]] = {}
     for row in rows:
         path = ROOT / row["path"]
+        if (project := _project_candidate_house(row["n"])) is not None:
+            origin = project.origin(row["n"])
+            assert path.is_file()
+            assert path == origin.path
+            assert row["url"] == origin.url
+            continue
         if not row["path"].endswith(".json.xz"):
             _assert_file_retains(row, path)
             continue
@@ -666,7 +679,8 @@ def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
         assert witness["source"]["path"] == entry["source"]["path"]
         assert "not a legal conclusion" in witness["claim"]["limitations"]
     elif entry["source"]["kind"] == "packet-derived-facts":
-        assert entry["source"]["path"].startswith("resources/web/")
+        if _project_candidate_house(n) is None:
+            assert entry["source"]["path"].startswith("resources/web/")
         evand_url = (
             f"{evand_reports.SOURCE}/blob/{evand_reports.REVISION}/{evand_reports.source_path(n)}"
             if n in evand_houses.NUMBERS
@@ -2534,6 +2548,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # the issue 1040 attachment at 259. T-193 still holds other counts.
     # T-340 adds de Winter's issue-1062 packet at 232; JoeGun's packet keeps
     # other counts, so this is one additional source.
+    # In the 23 November pass, T-341 and T-342 replaced the sources of 127 and 305.
     assert len(expected_sources) == 47
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
@@ -2709,7 +2724,8 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     fallback. The same day T-335 adds Samanyu-dev's finder credit at 109. The full
     roster then exceeds the current poster edition's three-line credit block. T-336
     adds de Winter as the further improver at 305. His name already appears in the
-    printed credit block."""
+    printed credit block. The 23 November pass credits Joshua Levy for
+    regularizing 127 and 305, with the printed credit held for the next cut."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         259: ("Sergio Fernández Rubio",),
@@ -2720,7 +2736,9 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         228: ("Doğa Özden",),
         90: ("jazivxt",),
         109: ("Samanyu-dev",),
-        **dict.fromkeys((204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
+        127: ("Joshua Levy",),
+        **dict.fromkeys((204, 232, 264), ("Tomáš Kodaj", "JoeGun")),
+        305: ("Tomáš Kodaj", "JoeGun", "Joshua Levy"),
     }
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
     citations = {entry["n"]: entry for entry in record["citations"]["entries"]}
@@ -2735,11 +2753,11 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         (259, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, [], []),
-        (127, ["Joost de Winter"], []),
+        (127, ["Joost de Winter"], ["Joshua Levy"]),
         (204, ["Tomáš Kodaj"], ["JoeGun"]),
         (232, ["Tomáš Kodaj"], ["JoeGun"]),
         (264, ["Tomáš Kodaj"], ["JoeGun"]),
-        (305, ["Tomáš Kodaj"], ["JoeGun", "Joost de Winter"]),
+        (305, ["Tomáš Kodaj"], ["JoeGun", "Joost de Winter", "Joshua Levy"]),
         (237, ["Doğa Özden"], []),
         (268, ["Joost de Winter"], []),
         (269, ["Doğa Özden"], []),
@@ -2791,6 +2809,7 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         "JoeGun",
         "Samanyu-dev",
         "Fernández Rubio",
+        "Levy",
     }
     assert all(name not in lines for name in released - names)
     assert "Yim" not in released

@@ -627,7 +627,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     # The issue-1062 reader needs its original acquisition manifest beside the
     # compressed fact and native jobs, just as the earlier adopted packets do.
     assert {
-        f"/packing/resources/web/{source.packet.name}/"
+        f"/{source.packet.relative_to(upper_bound_houses.REPO).as_posix()}/"
         for source in upper_bound_houses.sources().values()
     } <= sparse
     full_step = next(

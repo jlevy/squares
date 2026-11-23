@@ -546,22 +546,6 @@ _README_I38N = (
     "(think-i38n), beside the runs' receipt, blocks and reports"
 )
 
-#: Both generators, run on 18 November 2026, on the witness the pass of 20 November 2026
-#: adopted at 127 from Joost de Winter's issue 1020 (T-330, think-zqot): Evan Daniel's
-#: regularizer and grid-slack at 0.5, 1 and 5 degrees. None draws an adoptable view, so the
-#: selection decides 127.
-_RUNZQOT = (
-    ("evand-regularize", "evand-regularize-adopt-2026-11-18-n127-evand"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-18-n127-grid-deg05"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-18-n127-grid-deg1"),
-    ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-18-n127-grid-deg5"),
-)
-_README_ZQOT = (
-    "packing/cases/regularized_drawings/think-zqot-2026-11-18/README.md and "
-    "selection-adopt-2026-11-18-n127.md, the selection of 18 November 2026 "
-    "(think-zqot), beside the runs' receipt, blocks and reports"
-)
-
 #: Both strong generators on the witnesses the pass of 20 November 2026 adopted at 268 and
 #: 270 (think-78aj): grid-slack at 0.5, 1 and 5 degrees and Evan Daniel's driver.
 _RUN78AJ = (
@@ -1007,22 +991,19 @@ SETTLED: dict[int, Settled] = {
     ),
     305: Settled(
         DECIDED,
-        "[de Winter n305 certificate 2026-11-20]",
-        "resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz",
-        "db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef",
-        "179457558387415886710583983360138290031648651962347523515443824166144058057388"
-        "817807/10000000000000000000000000000000000000000000000000000000000000000000000"
-        "000000000000",
+        "[squares project regularized n305 2026-11-23]",
+        "cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert",
+        "think-huum-2026-11-23",
+        "44864389596853971677645995840034572507912162990586880878860956041536014514347204438234416389597/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
         (
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n305-grid-0.5"),
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n305-grid-1"),
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n305-grid-5"),
-            (EVAND_GENERATOR, "evand-regularize-adopt-2026-11-21-n305-evand"),
+            ("evand-regularize", "evand-regularize-adopt-2026-11-23-n305-evand-terminal"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-0.5"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-1"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-5"),
         ),
-        "Grid-slack found no view at 0.5, 1 or 5 degrees. Evan Daniel's same-side "
-        "re-solve refused on literal-too-large, and the selector held the solved view "
-        "at row 4, about 1.795e-19 above U. The axis view draws T-336 at its exact side.",
-        "packing/cases/regularized_drawings/think-kzwl-2026-11-21/README.md",
+        "Daniel's post-adoption solve and all three grid-slack attempts time out. "
+        "The exact house certificate supplies the selected drawing.",
+        "packing/cases/regularized_drawings/think-huum-2026-11-23/README.md",
     ),
     306: Settled(
         DECIDED,
@@ -1080,19 +1061,20 @@ SETTLED: dict[int, Settled] = {
     ),
     127: Settled(
         DECIDED,
-        "[de Winter s127 issue 1020 2026-11-17]",
-        "resources/web/de-winter-s127-issue1020-2026-11-17/source/n127/n127_exact.json",
-        "a1ba5019e787e407646293d7bef81d63c9951b32",
-        "5900396863307481119664515678048233366964863482714849291045437/"
-        "500000000000000000000000000000000000000000000000000000000000",
-        _RUNZQOT,
-        "on T-330's witness grid-slack finds no view at 0.5, 1 or 5 degrees (relaxed "
-        "rows overlap at this side), Evan Daniel's same-side view is refused (unmatched "
-        "rotation), and his KKT solve, verified exactly 7.06e-19 below the side, beyond the "
-        "certificate's own contraction margin, is held "
-        "at row 3 as a register candidate, never admitted here; the axis tool's view "
-        "stays drawn",
-        _README_ZQOT,
+        "[squares project regularized n127 2026-11-23]",
+        "cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert",
+        "think-4z8z-2026-11-23",
+        "11800793726614962238623103308879/1000000000000000000000000000000",
+        (
+            ("evand-regularize", "evand-regularize-adopt-2026-11-23-n127-evand-finished"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-0.5"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-1"),
+            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-5"),
+        ),
+        "Daniel's post-adoption run makes no visible change. The 0.5° grid-slack view ties "
+        "the house on the drawing measures, and the two remaining grid attempts time out. "
+        "The exact house certificate supplies the selected drawing.",
+        "packing/cases/regularized_drawings/think-huum-2026-11-23/README.md",
     ),
 }
 
