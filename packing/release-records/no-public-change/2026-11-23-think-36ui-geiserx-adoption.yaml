@@ -30,9 +30,13 @@ outputs:
 - papers/square-packing-methods-survey.md
 reason: >-
   Adopts the 202- and 263-square quadratic certificates as T-344. Two
-  candidate renders and one render with inputs from exact main 3b75cfdb43d4
-  used fixed link revisions and Chrome on macOS. The optimality review,
-  threshold review and methods survey each reproduced 43 files byte for byte.
-  The lower-bounds explainer reproduced 55 deterministic files. Its live
-  register count advances from 340 to 341 in HTML and Markdown, and its
-  remaining files match byte for byte. The printed editions keep their versions.
+  candidate renders and one render from the exact final T-343 checkout
+  9bb725c47b1a used the maintained renderers, matching publication pins and
+  fixed link revisions. All eight HTML and Markdown outputs were deterministic.
+  The optimality review, threshold review and methods survey matched byte
+  for byte. The lower-bounds explainer differed only in its live register
+  count, from 343 to 344; replacing that one sentence fragment restored byte
+  equality in both outputs. The 34 apparently new results stayed unchanged.
+  This comparison covers maintained render output before math preparation,
+  asset linking and PDF printing. Both checkouts stayed unchanged, and the
+  printed editions keep their versions.
