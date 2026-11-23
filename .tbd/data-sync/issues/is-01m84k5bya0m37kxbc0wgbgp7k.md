@@ -5,7 +5,7 @@ title: "Intake: verify Özden's 264-square packing (#1099)"
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: codex-intake-1099
 labels:
   - intake
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-11-23T16:17:26.473Z
-updated_at: 2026-11-23T18:42:28.802Z
+updated_at: 2026-11-23T18:59:25.866Z
 started_at: 2026-11-23T16:17:39.786Z
 ---
 Review https://github.com/jlevy/squares/issues/1099 and pinned rational-corners witness kenaznia-doga/s264-upper-bound-1677216830@72c4d195c85b6099002ad6c675b27df40fdaceac. Replay exact and independent verifiers, review provenance and compare with the T-308 house and GeiserX #1037 before disposition and potential adoption. Reviewed alongside the 23 November intake.
@@ -35,3 +35,5 @@ Thank you for submitting the exact witness. The registry now records **T-343 at 
 The project's maintained exact replay used `packing-witness verify` and `devtools.check_rational_witness_independent` with rational arithmetic. Both accepted the full witness and rejected the duplicate-square and outside-wall controls. A separately written exact checker also verified all 264 squares and 34,716 pairs directly from the pinned rational corners. The default drawing regularizes the packing at the same exact side. [Retained certificate and replays](https://github.com/jlevy/squares/tree/main/packing/resources/web/ozden-s264-upper-bound-2026-11-23).
 
 This completes your registration request. If coordinates for the quoted 16.770288527750 Kaggle result become public, could you link them here? They would help with a future comparison.
+
+2026-11-23 final hosted retry: #1102 at 9bb725c47b1ada2d50638a7ceb34a29a229f7107. The previously failing results-render and custody tests both pass locally. The maintained custody regenerated 78 houses, 268 inputs and 106 refused and restored mutations, rebinding the corrected report.json; release pin checked at bc26be0fe1dd. The independent scoped review is posted. Hosted gates, deployment verification, author close and S3 News remain in order.
