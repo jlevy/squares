@@ -4,9 +4,11 @@ components:
   - paper:n11-threshold-bound-review
   - paper:square-packing-methods-survey
 paths:
+  - packing/atlas/known-best/bound-citations.json
   - packing/atlas/known-best/composite-figure.json
   - packing/campaign/result-requests.yaml
   - packing/devtools/adopt_houses.py
+  - packing/devtools/build_known_best_atlas.py
   - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/results.yaml
@@ -46,4 +48,10 @@ reason: >-
   preparation and asset linking. The four renderers, paper templates, math
   preparation, asset linking, probes and kpress are unchanged from main, so the
   same content apart from that live tally enters unchanged postprocessing.
+  The later CI repair changed only the upper citation at n=264. All lower
+  citation entries are identical, and the published explainer's actual n=11
+  citation reader returned the same bound and credit before and after the
+  repair. The later atlas-builder change only extends the existing print-credit
+  hold at 264. The paper renderers read the retained composite assets and do not
+  construct their print credits. Those retained assets did not change.
   No PDF was printed. All four papers keep their existing editions.
