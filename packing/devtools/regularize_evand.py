@@ -3314,11 +3314,7 @@ def layer_view(admitted: Admitted) -> dict[str, Any]:
         "label": DRAWING_LABEL,
         "derived_from": admitted.source["id"],
         "generator": admitted.generator,
-        "credit": (
-            axis.EVAND_AUTHOR_CREDIT
-            if admitted.generator == axis.EVAND_AUTHOR_GENERATOR
-            else axis.EVAND_CREDIT
-        ),
+        "credit": axis.ADMITTED_CREDITS[admitted.generator],
         "run": admitted.run["id"],
         "regularization": admitted.regularization,
         "decision": admitted.decision,

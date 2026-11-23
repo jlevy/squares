@@ -394,6 +394,13 @@ Its drawing may still have uneven aligned squares.
    Run the existing exact and drawing checks on any replacement under the
    [improvement rule](../policies/regularization-policy.md#11-the-improvement-rule).
 
+For a localized grid seam with a rational house, a candidate can use
+`devtools.regularize_local_stencil` to fit a named axis-aligned stack in the exact frame
+while holding all other squares.
+Keep the recipe, both verifications, and the before-and-after admission receipt, as in
+the
+[127 repair](../../../packing/cases/regularized_drawings/think-1po1-2026-11-23/README.md).
+
 Keep the comparison and experiment receipts with the follow-up.
 Use the existing review record for candidates that require the owner’s decision.
 

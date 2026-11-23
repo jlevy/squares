@@ -19,6 +19,7 @@ import gzip
 import hashlib
 import json
 import os
+import signal
 from fractions import Fraction
 from pathlib import Path
 from typing import Any
@@ -208,6 +209,120 @@ def test_a_rerun_without_a_view_leaves_no_earlier_view_or_drawing(
     assert "view" not in report
     assert not (directory / "view.yaml.gz").exists()
     assert not (directory / "drawing.svg").exists()
+
+
+def test_timeout_keeps_completed_attempt_and_current_exact_variant(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    settle = slack.settle_variant
+    calls = 0
+
+    def interrupted(rows: str, **kwargs: Any) -> Any:
+        nonlocal calls
+        calls += 1
+        if calls == 6:
+            signal.raise_signal(signal.SIGALRM)
+        variant = settle(rows, **kwargs)
+        variant.refusal = variant.record["refusal"] = "forced refusal"
+        return variant
+
+    monkeypatch.setattr(slack, "settle_variant", interrupted)
+    report = slack.run_one(1, tmp_path, slack.Settings(), wall_timeout=60)
+    assert report["refusal"] == "wall-clock timeout; generator incomplete"
+    assert report["last_phase"] == {"name": "settle-variant", "rows": "all-tight"}
+    finished, partial = report["attempts"]
+    assert finished["frozen_tilted"] is False
+    assert finished["refusal"]
+    assert len(finished["exact"]["settled"]) == 4
+    assert partial["frozen_tilted"] is True
+    assert partial["placement"]["status"] == "placed"
+    assert [v["rows"] for v in partial["exact"]["settled"]] == ["witness-contacts"]
+    assert "verdicts" not in partial["exact"]
+    assert json.loads((tmp_path / "n-001/report.json").read_text()) == report
+    assert slack.decided(report, slack.load_source(1)).row == 1
+
+
+def test_timeout_while_drawing_leaves_only_a_no_view_report(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    directory = tmp_path / "n-001"
+
+    def interrupt(*_args: Any) -> str:
+        assert (directory / "view.yaml.gz").is_file()
+        signal.raise_signal(signal.SIGALRM)
+        pytest.fail("the wall timer did not interrupt the drawing")
+
+    monkeypatch.setattr(slack, "drawing", interrupt)
+    report = slack.run_one(1, tmp_path, slack.Settings(), wall_timeout=60)
+    assert report["last_phase"] == {"name": "drawing"}
+    assert report["attempts"][-1]["exact"]["verdicts"]["independent"]["passed"]
+    assert "measured" not in report
+    assert "view" not in report
+    assert [path.name for path in directory.iterdir()] == ["report.json"]
+    assert slack.decided(report, slack.load_source(1)).row == 1
+
+
+def test_negative_row_gaps_keep_pair_and_wall_identity_and_bound_unprintable_magnitudes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    tiny = Fraction(1, 10**5000)
+    large = 1 / tiny
+    normal = {"of": 2, "face": 0, "sign": 1}
+    pair = slack.same.Row("pair", {}, tiny, 1, {"squares": [1, 2], "normal": normal})
+    high = slack.same.Row("wall", {}, -large, -1, {"square": 2, "axis": "x", "wall": "high"})
+    clear = slack.same.Row("wall", {}, -tiny, 1)
+    tangent = slack.same.Row("wall", {}, Fraction(0), 1)
+    monkeypatch.setattr(slack, "NEGATIVE_ROW_SAMPLE_LIMIT", 2)
+    rows = [clear, pair, tangent, high, pair]
+    records = slack.negative_row_gaps(slack.same.Solution({}, [], [], rows, []))
+    assert records["total"] == 3
+    first, second = records["sample"]
+    assert first["squares"] == [1, 2]
+    assert first["normal"] == normal
+    assert (second["square"], second["axis"], second["wall"]) == (2, "x", "high")
+    for value, record in ((tiny, first), (large, second)):
+        assert record["sign"] == -1
+        assert Fraction(2) ** record["abs_lower_pow2"] < value
+        assert value < Fraction(2) ** record["abs_upper_pow2"]
+    assert len(json.dumps(records)) < 512
+
+
+def test_exact_variant_attaches_only_negative_gaps_to_its_refusal() -> None:
+    short = Fraction(1, 10**14)
+    witness = _basis_witness([(HALF, HALF, Fraction(1), Fraction(0))], side=str(1 - short))
+    frame = slack.same.exact_frame(witness)
+    poses = slack.view_poses(frame, [])
+    matched = slack.same.match_rotations(frame, poses, own=True)
+    variant = slack.settle_variant(
+        "all-tight",
+        frame=frame,
+        poses=poses,
+        matched=matched,
+        tight=slack.same.tight_rows(frame, poses, matched),
+        watched=[],
+        changed=set(),
+    )
+    assert variant.refusal == "penetrated: 2 selected separation rows violated at this side"
+    assert variant.record["max_displacement_square"] == 1
+    sample = variant.record["negative_row_gaps"]["sample"]
+    assert {r["axis"] for r in sample} == {"x", "y"}
+    for r in sample:
+        assert r["kind"] == "wall"
+        assert r["square"] == 1
+        assert r["wall"] in {"low", "high"}
+        assert Fraction(2) ** r["abs_lower_pow2"] < short < Fraction(2) ** r["abs_upper_pow2"]
+
+
+def test_negative_row_gaps_cover_a_number_field_enclosure() -> None:
+    frame = slack.same.exact_frame(slack.load_source(51), number_field=True)
+    # The field side is (16 + 5 sqrt(2))/3, strictly below eight.
+    row = slack.same.Row("wall", {}, 8 - frame.side, 1)
+    gaps = slack.negative_row_gaps(slack.same.Solution({}, [], [], [row], []))
+    (record,) = gaps["sample"]
+    assert record["sign"] == -1
+    magnitude = 8 - frame.side
+    assert Fraction(2) ** record["abs_lower_pow2"] < magnitude
+    assert magnitude < Fraction(2) ** record["abs_upper_pow2"]
 
 
 def _row(coefficients: dict[int, int], rhs: Fraction, priority: tuple[int, ...]) -> Any:

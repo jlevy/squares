@@ -60,16 +60,16 @@ from strif import atomic_output_file
 from devtools.build_known_best_atlas import frame_from_witness
 from devtools.flip_regularization import IDENTITY, Pose
 from devtools.regularize_axis_components import (
+    ADMITTED_CREDITS,
     ALGORITHM,
     ATLAS_CONTRACT,
     DRAWING_LABEL,
-    EVAND_AUTHOR_CREDIT,
     EVAND_AUTHOR_GENERATOR,
-    EVAND_CREDIT,
     EVAND_GENERATOR,
     GRID_GENERATOR,
     GRID_GENERATOR_V1,
     GRID_GENERATOR_V2,
+    LOCAL_STENCIL_GENERATOR,
 )
 from sqpack.render import render_packing_svg
 from sqpack.render.model import PackingFrame, RenderSpec
@@ -98,6 +98,9 @@ MADE_BY = {
     ),
     EVAND_AUTHOR_GENERATOR: (
         "Evan Daniel's original regularized view at the record's exact side"
+    ),
+    LOCAL_STENCIL_GENERATOR: (
+        "a local alignment of grid squares verified at the witness's exact side"
     ),
     **dict.fromkeys(
         (GRID_GENERATOR, GRID_GENERATOR_V1, GRID_GENERATOR_V2),
@@ -222,8 +225,7 @@ def render(entry: dict[str, Any], layout: Layout = LAYOUT) -> str:
     generator = entry.get("generator", ALGORITHM)
     credit = ""
     if generator != ALGORITHM:
-        line = EVAND_AUTHOR_CREDIT if generator == EVAND_AUTHOR_GENERATOR else EVAND_CREDIT
-        credit = f" {line}."
+        credit = f" {ADMITTED_CREDITS[generator]}."
     return render_packing_svg(
         regularized_frame(entry, layout),
         spec=RenderSpec(

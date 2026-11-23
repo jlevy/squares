@@ -21,6 +21,7 @@ import pytest
 
 from devtools import build_bound_citations as citations
 from devtools import register_regularized_bounds as registration
+from devtools import regularize_axis_components as axis_layer
 from devtools import regularized_drawings as drawings
 from devtools.check_results import regularized_drawings_problems
 from sqpack.yamlio import safe_load
@@ -390,6 +391,16 @@ def test_a_case_note_credits_the_regularizer_and_is_never_a_result() -> None:
     )
     assert own["credit"] == drawings.AXIS_CREDIT
     assert "modifications" not in own
+    local = {**entry(5, "same"), "generator": axis_layer.LOCAL_STENCIL_GENERATOR}
+    placed = drawings.project_case_item(
+        drawings.Drawn(
+            local, drawings.Resolved("T-001", "x"), drawings.project_modifications(local)
+        ),
+        {axis_layer.LOCAL_STENCIL_GENERATOR: {"credit": axis_layer.LOCAL_STENCIL_CREDIT}},
+    )
+    assert placed["credit"] == axis_layer.LOCAL_STENCIL_CREDIT
+    assert "modifications" not in placed
+    assert drawings.case_note([placed]).startswith(axis_layer.LOCAL_STENCIL_CREDIT + ".")
     source = {
         "by": "[A]",
         "credit": "A after B",

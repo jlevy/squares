@@ -161,11 +161,11 @@ ITEM_FIELDS = ("n", "of", "by", "method", "modifications", "side", "changes", "i
 AXIS_GENERATOR = "regularize_axis_components/2"
 EVAND_GENERATOR = "evand-regularize"
 EVAND_AUTHOR_GENERATOR = "evand-author-regularize/1"
-#: Whose code made each generator's view: this project's axis tool (`axis`), Evan Daniel's
-#: regularizer through the vendored driver (`evand`), or the grid-slack port of his
-#: placement (`grid`). A generator not named here is refused, not credited by a guess.
+#: The implementation that placed the squares determines the credit and modifications
+#: recorded for the view. Both the axis and local stencil tools are first-party.
 GENERATOR_KINDS = {
     AXIS_GENERATOR: "axis",
+    "regularize_local_stencil/1": "local",
     EVAND_GENERATOR: "evand",
     EVAND_AUTHOR_GENERATOR: "evand",
     "regularize_grid_slack/0": "grid",
@@ -512,8 +512,8 @@ def project_modifications(
     patches its `method` names, and the exact re-solve that brought it to the witness's
     side where that re-solve made the view (`run.output` is `same`); for a grid-slack
     view, the port of his placement, which is this project's code, and its re-solve. An
-    empty list: his regularizer ran unmodified. None: the view is this project's axis
-    tool's, which is not his regularizer.
+    empty list: his regularizer ran unmodified. None: the view was placed by a first-party
+    generator.
 
     The re-solve is read from the run's output, not from the side relation: a solve the
     re-solve refused can still sit at the witness's side (241 and 302, whose solves
@@ -524,7 +524,7 @@ def project_modifications(
     kind = generator_kind(generator)
     if kind == "grid":
         return grid_modifications(generator, same=relation(entry) == "same")
-    if kind == "axis":
+    if kind in {"axis", "local"}:
         return None
     if generator == EVAND_AUTHOR_GENERATOR:
         return []
@@ -618,7 +618,7 @@ def registered_modifications(
     same-side re-solve of a view at the witness's side; for a grid-slack view the port and
     its re-solve. Then what the item cannot establish: it records no solve, so where his
     regularizer made the view, whether the solve climbed a retry rung (`UNRECORDED_RUNGS`).
-    None, with nothing unrecorded: the axis tool's, which is not his regularizer.
+    None, with nothing unrecorded: a first-party generator placed the squares.
 
     `solve` is the layer's index entry that draws the very solve the item registered,
     where one does (`recorded_solves`): the entry records that solve's rungs, so the item
@@ -627,7 +627,7 @@ def registered_modifications(
     generator = method_generator(method, generators)
     kind = generator_kind(generator)
     same = str(record["side"]) == "same"
-    if kind == "axis":
+    if kind in {"axis", "local"}:
         return None, []
     if kind == "grid":
         return grid_modifications(generator, same=same), []
