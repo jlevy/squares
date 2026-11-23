@@ -68428,3 +68428,129 @@ evidence:
     limitations: >-
       The issue gives seven upward ceilings. The source's own verification programs
       are outside the retained packet and its reported evidence remains attributed.
+
+  - id: E-geiserx-1037-quadratic-report
+    claim: upper-bound
+    scope: {n_values: [202, 263]}
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/
+    novelty: previously-published
+    source_reviewed: '2026-11-22'
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    replay_status: not-attempted
+    verifiers: []
+    limitations: >-
+      The original attachment separately reports the standalone quadratic witnesses at
+      202 and 263, with sides (1417-19*sqrt(3))/94 and (1605-19*sqrt(3))/94. This atom
+      retains the author's report and does not inherit the project replay or review.
+      It does not cover the seven rational ceilings or the degree-70 claim at 297.
+  - id: E-geiserx-1037-quadratic-feasibility
+    claim: upper-bound
+    scope: {n_values: [202, 263]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/
+    replay: >-
+      From packing, use the project interpreter to run python -m
+      devtools.algebraic_witness_reports geiserx-exact-1037-2026-11-22 check --n 202 263
+      --replay. The retained native-quadratic-202-263.json.xz records the positive,
+      duplicate-square-overlap and square-translated-outside-container job at each
+      count through sqpack.witness.exact_verify over the original number field.
+      Both positives pass; both full-certificate mutations at each count fail.
+      The positive jobs cover all 20,301 and 34,453 unordered pairs respectively.
+      The per-count algebraic-route1 receipts preserve all six original native rows.
+      Ordinary check without --replay admits the retained jobs; it does not rerun them.
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-algebraic-witness-reports
+    - V-geiserx-1037-algebraic-reader
+    independence:
+      coverage:
+        extent: full
+        unit: Both original quadratic configurations and their two full-certificate gross controls.
+        checked: 2
+        of: 2
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: Maintained verifier attribution recorded by earlier project intake lanes; historical model and tier unrecorded.
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Attachment adapter and integration, using the maintained minpoly reader and native verifier.
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source discloses OpenAI production and Anthropic checking assistance.
+          The maintained project verifier predates this attachment, and the new
+          attachment reader executes no contributor program. Historical verifier
+          authorship is taken from the existing project record, not reconstructed
+          as a new clean-room claim.
+    independence_record: packing/resources/web/geiserx-exact-1037-2026-11-22/README.md
+    source_reviewed: '2026-11-22'
+    limitations: >-
+      One maintained exact field route, with separate parser and arithmetic work in
+      the independent review atom. The adapter checks custody and lossless fact
+      reconstruction and decides no geometry. Finite feasibility only; no local or
+      global optimality, rigidity, contact-system tightness or historical pose identity.
+  - id: E-geiserx-1037-quadratic-independent-feasibility
+    claim: upper-bound
+    scope: {n_values: [202, 263]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[GeiserX issue 1037 2026-11-18]'
+    certificate: packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/
+    replay: >-
+      From the repository root, with the original attachment in external custody:
+      python -B packing/resources/web/geiserx-exact-1037-2026-11-22/review/verify_202_263.py.txt
+      /absolute/path/to/GeiserX_exact.zip. CPython 3.14.7 and PyYAML 6.0.3 reproduce
+      review/verification.json. Its quadratic rows cover 202 and 263 unit squares,
+      808 and 1,052 contained vertices, and every one of 20,301 and 34,453 unordered
+      pairs. Exact wall contact, inward-wall, duplicate-square, touching and
+      inward-touching controls behave as predeclared. The unchanged reading-copy
+      replay matched every non-timing field, as review/integration-replay.json records.
+    replay_status: passed
+    verifiers:
+    - V-geiserx-1037-independent-review
+    independence:
+      coverage:
+        extent: full
+        unit: Both standalone quadratic certificates, every square, contained vertex and unordered pair.
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
+    external_review:
+      state: informally-verified
+      date: '2026-11-22'
+      reviewed_by: Codex (OpenAI), high reasoning, isolated mathematical review session
+      note: >-
+        Accepted finite rational and quadratic feasibility at 202 and 263, exact
+        quadratic side formulas, rational-to-quadratic strict inequalities, and
+        lower-left restrictions. This evidence atom uses the quadratic portion.
+        The review also clarifies the signed tilt and distinct nested quadratic poses.
+    source_reviewed: '2026-11-22'
+    limitations: >-
+      One distinct mathematical review, independently implemented with Fraction
+      arithmetic in Q(sqrt(3)). Its separating-axis mathematics is shared with the
+      maintained route, so method diversity is not claimed. No human oversight,
+      local or global optimality, tightness for contact systems, or pose-by-pose
+      attribution to upstream or earlier registered configurations. The 297
+      polynomial and configuration are outside this review.

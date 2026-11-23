@@ -523,7 +523,11 @@ FORMS: dict[str, Callable[[bytes, Witness], dict[str, Any]]] = {
 
 def derive_forms(packet: Path, *, check: bool = False) -> list[retained_data.Row]:
     """Write, or with ``check`` compare, each fact the packet declares as a retained form."""
+    from devtools import geiserx_1037_algebraic_report as geiserx  # noqa: PLC0415
+
     reports.ensure_private(packet)
+    if geiserx.accepts(packet):
+        return geiserx.derive_facts(packet, check=check)
     declaration = load_declaration(packet)
     # Custody is checked once, before any fact is written: a fact this writes is not yet
     # in the README's table of compressed files, which the check holds every one to.
@@ -539,8 +543,11 @@ def derive_forms(packet: Path, *, check: bool = False) -> list[retained_data.Row
 
 def read_fact(packet: Path, declaration: Declaration, row: Witness) -> dict[str, Any]:
     """Admit one algebraic fact: a valid witness that rebuilds itself from its geometry."""
+    from devtools import geiserx_1037_algebraic_report as geiserx  # noqa: PLC0415
     from devtools import n179_algebraic_report as n179  # noqa: PLC0415
 
+    if geiserx.accepts(packet):
+        return geiserx.read_witness(packet, row["n"])
     if n179.accepts(packet):
         return n179.read_witness(packet, row["n"])
     path = packet / row["fact"]
@@ -560,8 +567,11 @@ def read_fact(packet: Path, declaration: Declaration, row: Witness) -> dict[str,
 
 def read_facts(packet: Path, numbers: set[int] | None = None) -> dict[int, dict[str, Any]]:
     """Admit the declared witnesses, or those of ``numbers``, after the custody check."""
+    from devtools import geiserx_1037_algebraic_report as geiserx  # noqa: PLC0415
     from devtools import n179_algebraic_report as n179  # noqa: PLC0415
 
+    if geiserx.accepts(packet):
+        return geiserx.read_facts(packet, numbers)
     if n179.accepts(packet):
         return n179.read_facts(packet, numbers)
     reports.ensure_private(packet)

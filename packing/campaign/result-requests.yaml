@@ -38590,15 +38590,20 @@ issues:
       and 263, their exact side formulas and their two lower-left restrictions. The
       plus sign in the stated common tilt identity uses the positive tilt magnitude.
       The two submitted standalone quadratic packings and the restriction are
-      distinct provenance claims despite their compatible sides.
+      distinct provenance claims despite their compatible sides. T-341 registers
+      only the two independently reviewed standalone quadratic bounds. The other
+      five rational counts and the algebraic 297 claim remain queued separately.
     read_through: '2026-11-18T20:06:25Z'
     results:
     - key: geiserx-rational-202
       claim: s(202) <= 14.724372709109, rounded upward from the exact rational witness.
       source: body
-      not_registered: Exact report order, registration and the drawing decision remain queued.
-      queued: true
-      bead: think-36ui
+      not_registered: >-
+        The original rational 202-square certificate is retained and verified as
+        part of the same submitted contribution as its strictly stronger standalone
+        quadratic counterpart, registered in T-341. This weaker rational form
+        receives no separate result entry; this disposition does not assert pose identity.
+      queued: false
     - key: geiserx-rational-204
       claim: s(204) <= 14.802436041462, rounded upward from the exact rational witness.
       source: body
@@ -38614,9 +38619,12 @@ issues:
     - key: geiserx-rational-263
       claim: s(263) <= 16.724372709109, rounded upward from the exact rational witness.
       source: body
-      not_registered: Exact report order, registration and the drawing decision remain queued.
-      queued: true
-      bead: think-36ui
+      not_registered: >-
+        The original rational 263-square certificate is retained and verified as
+        part of the same submitted contribution as its strictly stronger standalone
+        quadratic counterpart, registered in T-341. This weaker rational form
+        receives no separate result entry; this disposition does not assert pose identity.
+      queued: false
     - key: geiserx-rational-264
       claim: s(264) <= 16.772843152678, rounded upward from the exact rational witness.
       source: body
@@ -38641,8 +38649,11 @@ issues:
         (1605 - 19 sqrt(3))/94. The 263-square witness has a lower-left box of side
         S263 - 2 containing 202 squares.
       source: body
-      not_registered: Independent finite verification complete. Registration and house comparison are queued.
-      queued: true
+      register: [T-341]
+      evidence:
+      - E-geiserx-1037-quadratic-report
+      - E-geiserx-1037-quadratic-feasibility
+      - E-geiserx-1037-quadratic-independent-feasibility
       bead: think-36ui
     - key: geiserx-algebraic-297
       claim: >-

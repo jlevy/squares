@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-21'
+last_reviewed: '2026-11-22'
 results:
   - id: T-001
     kind: lower-bound
@@ -54615,6 +54615,111 @@ results:
       covers:
       - T-340
 
+  - id: T-341
+    kind: upper-bound
+    registered: '2026-11-22'
+    landed: '2026-11-23'
+    headline: GeiserX's 202- and 263-square packings, with de Winter's exact quadratic certificates
+    claim: >-
+      Complete quadratic configurations prove
+      s(202) <= (1417-19*sqrt(3))/94 = 14.72437270910841841939338850… and
+      s(263) <= (1605-19*sqrt(3))/94 = 16.72437270910841841939338850….
+      Their sides round upward to 14.724372709109
+      and 16.724372709109 at 12 decimal places. Each exact side is the smaller
+      real root of its quadratic: 94*S^2-2834*S+21349 at 202, and
+      94*S^2-3210*S+27393 at 263.
+
+      The accepted independent Stage 4 review checks both standalone quadratic
+      configurations, all 465 unit squares, 1,860 contained vertices, and all
+      54,754 unordered pairs across the two configurations. Its separately written
+      rational and Q(sqrt(3)) arithmetic checks the stated side formulas, isolating
+      intervals and predeclared controls. The maintained exact field verifier also
+      accepts both original witnesses and refuses both full-certificate gross
+      controls at each count.
+
+      Both quadratic sides lie strictly below their submitted rational counterparts
+      by a quantity between 10^-67 and 10^-66. They also lie below the earlier
+      retained certificates contracted to first contact, by about 0.003549352 at
+      202 and 0.008793299 at 263. The 263 side is strictly below the lower endpoint
+      isolating T-244's degree-17 side. These comparisons establish improvement
+      beyond the earlier certificates' contraction margins; they do not settle an
+      unrounded local or optimal limit.
+
+      Sergio Fernández Rubio (GeiserX) published the underlying packings. Joost de
+      Winter refined and certified them, using Evan Daniel's solver as the source
+      credits. The 263-square quadratic configuration restricts to 202 squares in
+      its lower-left box of side S263-2=S202; only 119 of those poses equal the
+      standalone quadratic 202-square configuration in the submitted frame.
+      The plus-sign common-tilt identity uses the positive tilt magnitude. The
+      original signed tilt is negative. No optimality or contact-system tightness
+      is claimed, and direct-source historical pose attribution remains separate.
+    scope: {n_values: [202, 263]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        Two complete finite constructions improve the earlier exact first-contact
+        sides by about 0.00355 and 0.00879, with independently reviewed exact
+        quadratic certificates. This is a substantive case result, comparable to
+        T-337's 259-square improvement. No lower bound, optimum, new general
+        technique or historical-priority conclusion follows.
+      scored: '2026-11-22'
+      by: Codex, intake assessment for think-36ui
+    novelty: previously-published
+    attribution:
+      source_keys: ['[GeiserX issue 1037 2026-11-18]']
+      published: '2026-11-18'
+    evidence:
+    - E-geiserx-1037-quadratic-report
+    - E-geiserx-1037-quadratic-feasibility
+    - E-geiserx-1037-quadratic-independent-feasibility
+    artifacts:
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/README.md
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/acquisition/sources.json
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/acquisition/algebraic.json
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n202.minpoly.json.gz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n263.minpoly.json.gz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/facts/alg-n-202.yaml.gz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/facts/alg-n-263.yaml.gz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/native-quadratic-202-263.json.xz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/n202-first-contact.json.xz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/n263-first-contact.json.xz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/quadratic-standing.json
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/verification.json
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/integration-replay.json
+    - docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
+    controls:
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/algebraic-route1-n202.json.xz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/algebraic-route1-n263.json.xz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/plan.txt
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/verification.json
+    notes: >-
+      The original seven rational ceilings remain in their reported evidence atom.
+      This entry registers only the two standalone quadratic configurations. The
+      retained independent review also checks the two rational configurations and
+      both restrictions, but covers no 297-square algebraic claim. The coordinator's
+      later scalar-ordering comparison is distinct from that review's frozen scope.
+      T-244's other count and its historical evidence are unchanged. Adoption and
+      drawing disposition are recorded separately by the house workflow.
+    next_rung: V4/C4 requires a second distinct adversarial review and documented human oversight.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
+      kind: adversarial
+      reviewer: Codex (OpenAI), high reasoning, isolated mathematical review session
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-22'
+      scope: >-
+        Complete finite feasibility of the two original standalone quadratic
+        configurations at 202 and 263, exact side formulas and isolating intervals,
+        rational-to-quadratic strict inequalities, lower-left restrictions and
+        predeclared controls. Includes the tilt-sign and nested-pose clarifications;
+        excludes the later predecessor comparison, upstream pose attribution,
+        contact-system tightness, optimality and the 297 polynomial claim.
+      verdict: accepted
+      covers: [T-341]
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
@@ -55342,6 +55447,20 @@ regularized_drawings:
         max_move: 0.07764994
         max_turn_deg: 0.462392
       view: packing/atlas/known-best/regularized/n-199-regularized.yaml.gz
+    - n: 202
+      of: T-341
+      by: project
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 50
+        max_move: 0.09690293
+        max_turn_deg: 0.152273
+      view: packing/atlas/known-best/regularized/n-202-regularized.yaml.gz
     - n: 204
       of: T-306
       by: project
@@ -55665,17 +55784,18 @@ regularized_drawings:
         max_turn_deg: 0.352331
       view: packing/atlas/known-best/regularized/n-262-regularized.yaml.gz
     - n: 263
-      of: T-174
+      of: T-341
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 2.664462e-94
-        max_turn_deg: 0.0
+        moved: 73
+        max_move: 0.08841103
+        max_turn_deg: 0.372208
       view: packing/atlas/known-best/regularized/n-263-regularized.yaml.gz
     - n: 264
       of: T-308

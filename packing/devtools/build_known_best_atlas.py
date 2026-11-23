@@ -2827,8 +2827,8 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: holds Özden alone as the certificate source author used by the poster's fallback.
 #: The same day's adoption of T-335 credits Samanyu-dev as finder at 109. The current
 #: case, site and citations credit Samanyu-dev, and the next print edition adds the name.
-#: T-337 credits Sergio Fernández Rubio at 259. The current case credits him and the
-#: existing poster edition carries his name forward to its next cut.
+#: T-337 credits Sergio Fernández Rubio at 259 and T-341 credits him at 202 and 263.
+#: The cases credit him now and the poster adds his name at its next cut.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(
         (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
@@ -2837,7 +2837,7 @@ PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     228: ("Doğa Özden",),
     90: ("jazivxt",),
     109: ("Samanyu-dev",),
-    259: ("Sergio Fernández Rubio",),
+    **dict.fromkeys((202, 259, 263), ("Sergio Fernández Rubio",)),
     **dict.fromkeys((204, 232, 264, 305), ("Tomáš Kodaj", "JoeGun")),
 }
 #: The infographic edition the hold was set under. While the hold is not empty, a version

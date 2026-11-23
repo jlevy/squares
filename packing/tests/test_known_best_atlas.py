@@ -2534,7 +2534,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # the issue 1040 attachment at 259. T-193 still holds other counts.
     # T-340 adds de Winter's issue-1062 packet at 232; JoeGun's packet keeps
     # other counts, so this is one additional source.
-    assert len(expected_sources) == 47
+    # T-341 adds the issue-1037 quadratic packet at 202 and 263. The earlier
+    # sources retain other houses, so the poster adds one source and holds the
+    # finder’s name for the next poster edition.
+    assert len(expected_sources) == 48
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2712,7 +2715,7 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     printed credit block."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
-        259: ("Sergio Fernández Rubio",),
+        **dict.fromkeys((202, 259, 263), ("Sergio Fernández Rubio",)),
         **dict.fromkeys(
             (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
         ),
@@ -2732,7 +2735,9 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         (199, ["Evan Daniel"], ["Doğa Özden", "Joost de Winter"]),
         (90, ["jazivxt"], ["Joost de Winter"]),
         (109, ["Samanyu-dev"], []),
+        (202, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
         (259, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
+        (263, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, [], []),
         (127, ["Joost de Winter"], []),
