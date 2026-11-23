@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
-from math import sqrt
+from math import dist, sqrt
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -62,6 +62,8 @@ MINIMUM_BASE_OKLAB_DISTANCE = 0.035
 # for the sky blue. The bound exists to catch a shade derived from the WRONG
 # base, which would be tens of degrees out, not to police this few-degree walk.
 MAXIMUM_SHADE_HUE_DRIFT_DEGREES = 7.0
+# The version-pinned poster SVG, PNG and PDF retain this original family.
+V070_POSTER_SLOT_8 = ("#aa399d", "#bf3db0", "#ca53bc", "#d36bc7", "#dc84d2")
 
 
 def _point(x: Decimal | int | str, y: Decimal | int | str) -> Point2:
@@ -372,6 +374,16 @@ def test_requested_palette_dimensions_are_unique_and_configurable() -> None:
     assert square_fill_palette(hue_count=7, shades_per_hue=3) != palette
 
 
+def test_pinwheel_pinks_are_visually_separate() -> None:
+    palette = square_fill_palette(hue_count=20, shades_per_hue=5)
+    common_pink = palette[2][4]
+    rare_violet = palette[8][4]
+
+    assert common_pink == "#dd87b8"
+    # Both classes in n=109 have zero full-side contacts and use shade 4.
+    assert dist(_oklab(common_pink), _oklab(rare_violet)) >= 0.075
+
+
 def test_every_indexed_atlas_fill_matches_its_declared_color_contract() -> None:
     indexed_files = 0
     indexed_fills = 0
@@ -408,10 +420,18 @@ def test_every_indexed_atlas_fill_matches_its_declared_color_contract() -> None:
                 lightness_span=contract[2],
             ),
         )
+        pinned_poster = (
+            path.parent == ATLAS / "known-best"
+            and path.name in {"known-best-1-100.svg", "known-best-1-324.svg"}
+            and metadata.get("infographic-version") == "v0.7.0"
+        )
         for fill in fills:
             hue_index = int(fill.attrib["data-hue-index"])
             shade_index = int(fill.attrib["data-shade-index"])
-            assert fill.attrib["fill"] == palette[hue_index][shade_index], path
+            family = (
+                V070_POSTER_SLOT_8 if pinned_poster and hue_index == 8 else palette[hue_index]
+            )
+            assert fill.attrib["fill"] == family[shade_index], path
         indexed_fills += len(fills)
 
     assert known_best_cases == set(KNOWN_BEST_CORPUS.numbers)
