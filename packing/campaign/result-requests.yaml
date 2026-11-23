@@ -39375,9 +39375,11 @@ issues:
         and 16 controls. A separate local replay excludes all 3,488 positive-cost bridge
         profiles through 15,696 normal choices, with 12 controls. A further independent
         census checks all 2,400 vacancy/aligned-position cases and 29,368 sign assignments,
-        verifies 234,944 D4 images and 3,671 orbits, and passes 12 controls. General-path
-        exclusions, separation graphs and graph-to-certificate coverage remain open;
-        these restricted checks do not accept the full theorem.
+        verifies 234,944 D4 images and 3,671 orbits, and passes 12 controls. The independent
+        general-path checker classifies 29,008 local profiles through 67,626 normal choices:
+        23,286 are excluded and 5,722 are not certified; all 20 controls pass. Application
+        to global paths, separation-graph enumeration, rule extraction and graph-to-certificate
+        coverage remain open; these restricted checks do not accept the full theorem.
       queued: true
       bead: think-guls
     beads:
@@ -39405,6 +39407,13 @@ issues:
       - result: n20-equal-absolute-tilt
       - result: n20-angle-diversity
       - result: n20-one-axis-equal-magnitude
+    - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7088583244
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n20-one-axis-equal-magnitude
+      beads: [think-guls]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
