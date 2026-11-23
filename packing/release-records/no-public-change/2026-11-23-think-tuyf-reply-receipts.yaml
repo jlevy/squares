@@ -1,0 +1,16 @@
+components:
+- paper:square-packing-methods-survey
+paths:
+- packing/campaign/result-requests.yaml
+outputs:
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: >-
+  think-tuyf records three verified jlevy follow-ups of 23 November 2026 on
+  #1042, #1055 and #1061, preserving all existing receipt metadata and adding
+  no state or rung statements. Compared paired render_packing_methods outputs
+  with this ledger and the exact ledger from main
+  7c3edfded1ef2dadb4169079be7aede9b9c55564 in the same checkout, at link revision
+  0000000000000000000000000000000000000000. All 43 Methods Survey files were
+  byte-identical, including its prepared HTML and Markdown. The candidate ledger
+  was restored after the base render. The paper keeps v0.2.7.

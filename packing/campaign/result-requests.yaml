@@ -39087,6 +39087,13 @@ issues:
       kind: follow-up
       reported: []
       beads: [think-bgi2]
+    - url: https://github.com/jlevy/squares/issues/1042#issuecomment-7090120790
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n18-n313-public-replay
+      beads: [think-4iec, think-fv42]
     close_when: >-
       The bounds and both follow-ups are triaged, retained, registered, replayed within the
       cap or held on validation beads, and the reply on main says what was registered and
@@ -39418,6 +39425,13 @@ issues:
       kind: follow-up
       reported:
       - result: n20-one-axis-equal-magnitude
+    - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7089871432
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n20-one-axis-equal-magnitude
+      beads: [think-guls, think-6ul3]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
@@ -39552,6 +39566,14 @@ issues:
       reported:
       - result: exact-construction-sides-eleven
       - result: three-construction-side-identities
+    - url: https://github.com/jlevy/squares/issues/1061#issuecomment-7090121272
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: exact-construction-sides-eleven
+      - result: three-construction-side-identities
+      beads: [think-l9fk]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Route to the exact-side work tracked by #811. The claimed construction identities
