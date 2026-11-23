@@ -3529,7 +3529,7 @@ def test_the_coverage_of_a_count_adopted_again_names_the_new_house_throughout(
         *select.load_results(),
         {"id": "T-900", "attribution": {"source_keys": ["[new]"]}},
     ]
-    assert check_source_coverage.house_reason_errors(data, results) == []
+    assert check_source_coverage.house_reason_errors(data, results, {}) == []
 
 
 def test_a_conjecture_stands_unless_the_house_is_below_every_number_its_print_may_be(
