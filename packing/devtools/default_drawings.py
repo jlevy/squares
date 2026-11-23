@@ -171,7 +171,13 @@ from strif import atomic_output_file
 
 from devtools import improvement_rule
 from devtools.improvement_rule import MEASURES
-from devtools.regularize_axis_components import ABOVE_U, ALGORITHM, EVAND_GENERATOR, LAPSED
+from devtools.regularize_axis_components import (
+    ABOVE_U,
+    ALGORITHM,
+    EVAND_AUTHOR_GENERATOR,
+    EVAND_GENERATOR,
+    LAPSED,
+)
 from sqpack import retained_json
 from sqpack.workers import worker_count
 from sqpack.yamlio import load_yaml
@@ -234,7 +240,8 @@ EXEMPTION_REVIEW_DAYS = 14
 #: (policy section 4); a drawing it alone made waits for these to decide its witness.
 STRONG_GENERATORS = frozenset(
     {
-        "evand-regularize",
+        EVAND_GENERATOR,
+        EVAND_AUTHOR_GENERATOR,
         "regularize_grid_slack/0",
         "regularize_grid_slack/1",
         "regularize_grid_slack/2",
@@ -997,21 +1004,6 @@ SETTLED: dict[int, Settled] = {
         "re-solve refused on unmatched-rotation. The solved view is held at row 4, "
         "about 1.659e-19 above U. The axis view draws T-337 at its exact side.",
         "packing/cases/regularized_drawings/think-squj-2026-11-21/README.md",
-    ),
-    304: Settled(
-        DECIDED,
-        "[Daniel issue 914 2026-11-05]",
-        "resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/"
-        "s304_1105.cert",
-        "bb4cc78e5b35103c1f177db55e9cf08974e66563",
-        "17920944093340242061198022152503/1000000000000000000000000000000",
-        _RUNLRJ4,
-        "Evan Daniel's regularizer's certified KKT view at the witness's side is refused at "
-        "row 7, its house and stage totals of shared sides falling (703 and 720 against 759 "
-        "and 796), and grid-slack's views at 0.5, 1 and 5 degrees go to review at row 7, 50 "
-        "per-square contact counts falling while no total does, with more uneven squares "
-        "than the axis tool's view of this witness (49 against 40), so that view stays drawn",
-        _README_LRJ4,
     ),
     305: Settled(
         DECIDED,

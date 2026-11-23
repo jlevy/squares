@@ -47,6 +47,7 @@ properties:
     properties:
       regularize_axis_components/2: {$ref: '#/$defs/axis_generator'}
       evand-regularize: {$ref: '#/$defs/generator'}
+      evand-author-regularize/1: {$ref: '#/$defs/generator'}
       regularize_grid_slack/0: {$ref: '#/$defs/generator'}
       regularize_grid_slack/1: {$ref: '#/$defs/generator'}
       regularize_grid_slack/2: {$ref: '#/$defs/generator'}
@@ -64,8 +65,8 @@ properties:
     items: {$ref: '#/$defs/entry'}
 $defs:
   generator_id:
-    enum: [regularize_axis_components/2, evand-regularize, regularize_grid_slack/0,
-           regularize_grid_slack/1, regularize_grid_slack/2]
+    enum: [regularize_axis_components/2, evand-regularize, evand-author-regularize/1,
+           regularize_grid_slack/0, regularize_grid_slack/1, regularize_grid_slack/2]
   axis_generator:
     type: object
     additionalProperties: false
@@ -188,7 +189,7 @@ $defs:
           source_key: {type: [string, 'null']}
           found_by: {type: array, items: {type: string}}
           improved_by: {type: array, items: {type: string}}
-      by: {const: project}
+      by: {enum: [project, '[Daniel issue 914 2026-11-05]']}
       method: {type: string, minLength: 1}
       side: {enum: [same, solved]}
       changes:
@@ -293,8 +294,8 @@ $defs:
       n: {type: integer, minimum: 1}
       status: {const: regularized}
       generator:
-        enum: [evand-regularize, regularize_grid_slack/0, regularize_grid_slack/1,
-               regularize_grid_slack/2]
+        enum: [evand-regularize, evand-author-regularize/1, regularize_grid_slack/0,
+               regularize_grid_slack/1, regularize_grid_slack/2]
       run:
         type: object
         additionalProperties: false
@@ -315,7 +316,7 @@ $defs:
             type: array
             items: {enum: [dps-100, force-kkt, first-pass, stall-stop]}
           rungs_from: {type: string, pattern: '^[a-z0-9-]+$'}
-          output: {enum: [same, solved, grid]}
+          output: {enum: [same, solved, grid, author-certificate]}
       source: {$ref: '#/$defs/source'}
       side:
         type: object
@@ -390,6 +391,14 @@ $defs:
       regularization: {$ref: '#/$defs/regularization'}
       reference: {$ref: '#/$defs/axis_record'}
     allOf:
+      - if: {properties: {generator: {const: evand-author-regularize/1}}}
+        then:
+          properties:
+            regularization: {properties: {by: {const: '[Daniel issue 914 2026-11-05]'}}}
+            exact_verification:
+              required: [half_angle]
+              properties: {half_angle: {const: true}}
+        else: {properties: {regularization: {properties: {by: {const: project}}}}}
       - if: {properties: {decision: {properties: {decision: {const: review}}}}}
         then:
           required: [review]
