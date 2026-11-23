@@ -38173,6 +38173,17 @@ issues:
       - result: n127-band-a1ba501
         id: E-de-winter-1020-review-r127-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/1020#issuecomment-7109696738
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n127-band-a1ba501
+        id: T-330
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       house at 127 decided, and the reply on main says what was registered, replayed, reviewed
@@ -39298,6 +39309,17 @@ issues:
       kind: final
       reported:
       - result: n305-same-side-axis-variants
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7109697419
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-rational-certificate
+        id: T-336
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its

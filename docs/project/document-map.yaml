@@ -1552,6 +1552,7 @@ documents:
   - {path: packing/cases/register_candidates/think-4z8z-2026-11-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/register_candidates/think-huum-2026-11-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-huum-2026-11-23/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-w0ca-2026-11-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-huum-2026-11-23/post-adoption-selection.md, role: source-index, authority: record, lifecycle: retained}
 collections:
   - pattern: packing/contributors/people/*.md

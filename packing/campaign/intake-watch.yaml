@@ -2501,3 +2501,25 @@ repositories:
       packet retains the deciding YAML, source README and licences. The other files are
       alternate encodings, a decimal search pose, figures and the source’s own checker
       and outputs.
+  - url: https://github.com/Mira-Cult/math
+    read_through: 149831943806a656c9efaa14cacbd9c915b2a2ba
+    read_on: '2026-11-23'
+    note: >-
+      The six commits after a2ef8224 concern finite simple proper Bol loops,
+      Erdős–Borwein theorem notes and their README links. The square-packing
+      files are unchanged.
+  - url: https://github.com/larasmiguel/square-s977
+    read_through: 38b8963fd30edfd122d9615b0282fdc870be1ada
+    read_on: '2026-11-23'
+    note: >-
+      The only added file, code.cpp, enumerates integer centres at 0° and 45°
+      for caller-supplied n, L and rotados, then renders the first packing it
+      finds to SVG. Read the source without running it. The commit publishes
+      no packing instance, run result or bound.
+  - url: https://github.com/jlevy/squares
+    read_through: f6aa1e2eef678a2371a3f46715d917d62f31c969
+    read_on: '2026-11-23'
+    note: >-
+      Main through #1101. The project already retains #1100's T-341 and T-342,
+      and both adopted records and drawings are live. #1101 updates the README
+      thumbnail from the live homepage. No separate contributor material to import.

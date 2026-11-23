@@ -3194,7 +3194,10 @@ RESULTS: dict[str, Prose] = {
         author="Doğa Özden",
         reported="on [jlevy/squares#1099](https://github.com/jlevy/squares/issues/1099)",
         producer_route=True,
-        ai="Özden directed the work of Claude agents, who searched, checked and filed the report.",
+        ai=(
+            "Özden directed the work of Claude agents, "
+            "who searched, checked and filed the report."
+        ),
         routes=(
             "The source used the project’s rational promotion and verifier. "
             "The maintained replay used GMP arithmetic for both exact routes. "

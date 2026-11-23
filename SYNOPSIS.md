@@ -1951,6 +1951,7 @@ case or experiment separately.
 | [Exact Regularization at 127 Squares](packing/cases/register_candidates/think-4z8z-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
 | [Exact Regularization at 305 Squares](packing/cases/register_candidates/think-huum-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
 | [Drawing Runs for the Exact 127 and 305 Houses](packing/cases/regularized_drawings/think-huum-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [Drawing runs for the T-343 adoption at 264](packing/cases/regularized_drawings/think-w0ca-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
 | [post-adoption-selection.md](packing/cases/regularized_drawings/think-huum-2026-11-23/post-adoption-selection.md) | source retention and archive policy | record | retained | — |
 | `packing/contributors/people/*.md` | hand-maintained registry | record | maintained | — |
 | `packing/site-changelog.yaml` | hand-maintained registry | current | maintained | — |
