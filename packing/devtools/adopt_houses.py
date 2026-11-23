@@ -4185,7 +4185,7 @@ CREDITS: dict[int, Credit] = {
     # Winter is its finder.
     127: Credit(
         (DE_WINTER,),
-        ("Joshua Levy",),
+        (),
         "Joshua Levy’s regularization of Joost de Winter’s band packing "
         "using Evan Daniel’s method",
     ),
@@ -4794,7 +4794,7 @@ CREDITS: dict[int, Credit] = {
     # to this project, as its bibliography lineage states.
     305: Credit(
         (KODAJ,),
-        (JOEGUN, DE_WINTER, "Joshua Levy"),
+        (JOEGUN, DE_WINTER),
         "Joshua Levy’s regularization of Tomáš Kodaj’s packing as JoeGun and "
         "Joost de Winter refined it, using Evan Daniel’s method",
     ),

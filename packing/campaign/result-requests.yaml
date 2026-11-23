@@ -38139,7 +38139,7 @@ issues:
       a new result. It is the smallest of the three at 127. The stage 4 review of record is
       R-127b (#1028), with R-127 (#1025) an additional blind review; both accept it and both
       are mapped.
-    read_through: '2026-11-20T17:46:13Z'
+    read_through: '2026-11-23T21:01:21Z'
     results:
     - key: n127-band-a1ba501
       claim: >-
@@ -38195,6 +38195,22 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/1020#issuecomment-7114248040
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    asks:
+    - what: >-
+        Credit the packing at 127 to the established T-330 lineage and list T-341
+        as a regularized certificate with the same 12-place upper-bound print.
+      state: done
+      source: https://github.com/jlevy/squares/issues/1020#issuecomment-7113888098
+      note: >-
+        The case’s construction fields carry Joost de Winter’s packing credit. Joshua Levy
+        is credited for the regularized certificate using Evan Daniel’s method.
+        Both certificates print 11.800793726615 upward to 12 places. T-341 stays the
+        selected exact certificate because it fits below T-330 at first contact.
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       house at 127 decided, and the reply on main says what was registered, replayed, reviewed
@@ -39233,7 +39249,7 @@ issues:
       replay and accepted independent review #1057 mapped to separate evidence. It lies below T-309 contracted
       to first contact and is a new result under option D. T-336 replaced T-309 as the house on 21 November
       2026. Both strong drawing families completed and the certified axis view stays drawn.'
-    read_through: '2026-11-21T06:59:22Z'
+    read_through: '2026-11-23T21:01:46Z'
     results:
       - key: n305-rational-certificate
         claim: s(305) <= 17.945755838742, the exact rational certificate's 12-place ceiling.
@@ -39377,6 +39393,22 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7114248976
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    asks:
+    - what: >-
+        Credit the packing at 305 to the established T-336 lineage and list T-342
+        as a regularized certificate with the same 12-place upper-bound print.
+      state: done
+      source: https://github.com/jlevy/squares/issues/1052#issuecomment-7113897408
+      note: >-
+        The case’s construction fields carry Tomáš Kodaj, JoeGun and Joost de Winter’s packing credit. Joshua Levy
+        is credited for the regularized certificate using Evan Daniel’s method.
+        Both certificates print 17.945755838742 upward to 12 places. T-342 stays the
+        selected exact certificate because it fits below T-336 at first contact.
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its

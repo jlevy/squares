@@ -2831,6 +2831,8 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: The cases credit him now and the poster adds his name at its next cut.
 #: T-343 adds Özden as a further improver at 264. The case, site and citations credit
 #: him now and the print hold keeps the existing edition until the next cut.
+#: T-341 and T-342 credit Levy for the certificates in case prose, outside the poster
+#: construction credit block.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(
         (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
@@ -2840,10 +2842,8 @@ PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     90: ("jazivxt",),
     109: ("Samanyu-dev",),
     **dict.fromkeys((202, 259, 263), ("Sergio Fernández Rubio",)),
-    **dict.fromkeys((204, 232), ("Tomáš Kodaj", "JoeGun")),
+    **dict.fromkeys((204, 232, 305), ("Tomáš Kodaj", "JoeGun")),
     264: ("Tomáš Kodaj", "JoeGun", "Doğa Özden"),
-    127: ("Joshua Levy",),
-    305: ("Tomáš Kodaj", "JoeGun", "Joshua Levy"),
 }
 #: The infographic edition the hold was set under. While the hold is not empty, a version
 #: bump or a poster drawn for any other edition fails the pull-request suite
