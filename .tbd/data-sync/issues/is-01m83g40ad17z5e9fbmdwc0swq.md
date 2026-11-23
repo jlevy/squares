@@ -3,17 +3,21 @@ type: is
 id: is-01m83g40ad17z5e9fbmdwc0swq
 title: "Publish the intake drawing changelog and reconcile the existing #1055 acknowledgement"
 kind: chore
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 9
 delegate: codex-visual-intake-closeout
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-11-23T06:05:01.644Z
-updated_at: 2026-11-23T07:21:22.595Z
+updated_at: 2026-11-23T07:35:30.522Z
 started_at: 2026-11-23T06:05:03.990Z
+closed_at: 2026-11-23T07:35:30.517Z
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 Record the shipped 109 violet adjustment and n304 drawing in the reader changelog after their verified deployments. Attach the already-posted original 99/20 acknowledgement to the correct #1055 claim key.
 
@@ -28,3 +32,5 @@ Closeout draft #1098 is open and independently reviewed on c9e2fca5c5. Both sour
 PR #1098 checkpoint c62a0a4771 addresses both hosted changelog findings. The latest displayed date uses the editorial and results union, and the complete archive keeps its anchored disclosures by reusing the date in the existing id. The homepage preview markup is preserved. The measured archive is 199,184 bytes under the existing 200,000-byte limit. Both focused tests, type and lint checks, release-impact check, and normal hooks passed. The four paper generators matched all eight pre-browser outputs against main; the prepared survey comparison still covers 43 matching files. Exact hosted checks and live changelog publication remain.
 
 Merged #1098 at b8bea996e3f25635f42bbd4f2563cbda23d51d3d after independent exact-head review and every required check. The source intake receipt is landed. Pages run 45130342496 must verify the public changelog lines before closeout. The original local adoption branch and its saved commit 8707ab11b1 were restored.
+
+Pages 45130342496 and official verification job 137547698190 passed for b8bea996e3f25635f42bbd4f2563cbda23d51d3d. Verified both routine drawing entries in the open 23 November block on the live homepage and full Changelog. Workbench stamped the exact deploy. Published atlas SVGs for 109, 232, 304 and 305 are byte-identical to the canonical references. Durable receipt: external agent-evidence/squares-intake-20261121-01a1fb/drawing-audit-20261122/live-1098-visual-receipt.json.
