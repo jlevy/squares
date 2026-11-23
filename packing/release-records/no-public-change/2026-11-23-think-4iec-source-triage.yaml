@@ -1,0 +1,11 @@
+components:
+- paper:square-packing-methods-survey
+paths:
+- packing/campaign/result-requests.yaml
+outputs:
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: >-
+  Records the exact #1042 public replay intake, #1061 proof readiness and the
+  two verified contributor replies. Two candidate renders and one exact-base
+  render from 689a8ecf3546 matched all 43 methods-survey files byte for byte.
