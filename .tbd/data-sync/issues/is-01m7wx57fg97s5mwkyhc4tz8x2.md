@@ -5,15 +5,17 @@ title: "Import #1050: Mira Cult's s(18) = (7+sqrt 7)/2 optimality proof (Mira-Cu
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+child_order_hints:
+  - is-01m84wmf3k2en09cbykc8114dg
 hold: null
 hold_until: null
 created_at: 2026-11-20T16:38:12.208Z
-updated_at: 2026-11-21T17:10:54.930Z
+updated_at: 2026-11-23T19:02:58.415Z
 started_at: 2026-11-21T13:17:46.371Z
 ---
 
