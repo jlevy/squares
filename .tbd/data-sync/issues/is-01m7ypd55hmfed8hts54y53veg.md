@@ -3,9 +3,9 @@ type: is
 id: is-01m7ypd55hmfed8hts54y53veg
 title: "Triage #1062: de Winter exact n232 witness at the JoeGun local solution"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -14,8 +14,12 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-21T09:18:40.815Z
-updated_at: 2026-11-23T00:17:47.739Z
+updated_at: 2026-11-23T00:32:11.733Z
 started_at: 2026-11-21T09:18:45.531Z
+closed_at: 2026-11-23T00:32:11.724Z
+close_reason: "T-340 adopted and verified in production after #1083. Issue #1062 completed on GitHub and final reply 7087507310 with both named evidence IDs is retained on main by #1087 (689a8ecf3546)."
+resolution: null
+duplicate_of: null
 ---
 Bind the pinned certificate to the previously reported local solution and determine its numerical and attribution relationship to the current house and Option D.
 
