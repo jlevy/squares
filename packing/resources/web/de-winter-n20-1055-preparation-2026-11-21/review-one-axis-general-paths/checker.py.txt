@@ -1,0 +1,439 @@
+"""Independent exact general-path catalogue; no global graph enumeration."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import itertools
+import json
+import math
+import os
+import resource
+import sys
+import tempfile
+import time
+from collections import Counter
+from collections.abc import Callable
+from fractions import Fraction as F
+from functools import lru_cache
+from pathlib import Path
+from typing import Any
+
+SPEC_SHA256 = "73e09d72fa3094ee6e5eecb743428b3a3edb7ae20b3e1af598466fc662910a12"
+Q = 24
+Poly = tuple[int, ...]
+Ranks = tuple[int, ...]
+Signs = tuple[int, ...]
+Choice = tuple[str, int]
+Profile = tuple[int, int, tuple[str, ...], int, int]
+
+
+class Refusal(Exception):
+    def __init__(self, code: str, detail: object = None):
+        super().__init__(f"{code}: {detail}")
+        self.code = code
+
+
+def require(condition: bool, code: str, detail: object = None) -> None:
+    if not condition:
+        raise Refusal(code, detail)
+
+
+def polynomial_at(poly: Poly, t: F) -> F:
+    result = F(0)
+    for coefficient in reversed(poly):
+        result = result * t + coefficient
+    return result
+
+
+def check_identity(poly: Poly, function: Callable[[F], F], degree: int) -> None:
+    require(len(poly) - 1 <= degree, "polynomial-degree")
+    for k in range(degree + 2):
+        t = F(k, 8)
+        require(polynomial_at(poly, t) == function(t), "polynomial-identity", str(t))
+
+
+def interpolate(function: Callable[[F], F], degree: int) -> Poly:
+    # Forward differences use the basis binomial(8t,k), not the producer's expansion.
+    differences = [function(F(k, 8)) for k in range(degree + 1)]
+    basis = [F(1)]
+    result = [F(0)] * (degree + 1)
+    for order in range(degree + 1):
+        weight = differences[0] / math.factorial(order)
+        for i, coefficient in enumerate(basis):
+            result[i] += weight * coefficient
+        if order < degree:
+            differences = [b - a for a, b in zip(differences, differences[1:])]
+            advanced = [F(0)] * (len(basis) + 1)
+            for i, coefficient in enumerate(basis):
+                advanced[i] -= order * coefficient
+                advanced[i + 1] += 8 * coefficient
+            basis = advanced
+    require(all(x.denominator == 1 for x in result), "integer-cleared-polynomial")
+    coefficients = [x.numerator for x in result]
+    while len(coefficients) > 1 and coefficients[-1] == 0:
+        coefficients.pop()
+    poly = tuple(coefficients)
+    check_identity(poly, function, degree)
+    return poly
+
+
+@lru_cache(maxsize=4096)
+def positivity(poly: Poly, strict_closed: bool = False) -> tuple[F, ...]:
+    degree = len(poly) - 1
+    values = tuple(
+        sum((F(poly[i] * math.comb(k, i), Q**i * math.comb(degree, i))
+             for i in range(k + 1)), F(0))
+        for k in range(degree + 1)
+    )
+    require(all(x >= 0 for x in values), "nonnegative", tuple(map(str, values)))
+    if strict_closed:
+        require(values[0] > 0 and values[-1] > 0, "strict-closed-endpoints")
+    return values
+
+
+def trig(t: F) -> tuple[F, F, F, F]:
+    denominator = 1 + t * t
+    c = (1 - t * t) / denominator
+    s = 2 * t / denominator
+    u = c + s
+    return c, s, u, u * (u - 1)
+
+
+def prerequisite_value(t: F) -> F:
+    _, _, u, d = trig(t)
+    return 2 * (1 + t * t)**2 * (1 - 5 * d - ((1 + u) / 2) * t)
+
+
+def cleared_span(profile: Profile, t: F, threshold: int = 5) -> F:
+    left_tilted, right_tilted, constants, nominal_projection, error_maximum = profile
+    c, s, u, d = trig(t)
+    require(c != 0, "interpolation-pole")
+    mixed_support = (1 + u) / 2
+    left_width = u if left_tilted else F(1)
+    right_width = u if right_tilted else F(1)
+    span = (left_width + right_width) / 2
+    for kind in constants:
+        if kind == "secant":
+            span += 1 / c
+        elif kind == "tilted-width":
+            span += u
+        elif kind == "mixed-inclined":
+            span += mixed_support / c
+        elif kind == "mixed-flat":
+            span += mixed_support
+        else:
+            raise Refusal("unknown-step-constant", kind)
+    span -= (s / c) * (nominal_projection + d * error_maximum)
+    return (span - threshold) * 2 * (1 - t * t) * (1 + t * t)**2
+
+
+@lru_cache(maxsize=4096)
+def bound_polynomial(profile: Profile, threshold: int = 5) -> Poly:
+    return interpolate(lambda t: cleared_span(profile, t, threshold), degree=6)
+
+
+@lru_cache(maxsize=4096)
+def rank_box_maximum(ranks: Ranks, normals: tuple[int, ...]) -> int:
+    # A linear form attains its maximum at a box vertex; enumerate all 2^5 vertices.
+    require(len(ranks) == 5 and len(normals) == 4, "rank-box-dimension")
+    answer = max(
+        sum(normals[i] * (vertex[i + 1] - vertex[i]) for i in range(4))
+        for vertex in itertools.product(*[(-r, 4 - r) for r in ranks])
+    )
+    require(answer >= 0, "negative-rank-maximum")
+    return answer
+
+
+def step_options(a: int, b: int, h: int) -> tuple[Choice, ...]:
+    if a == b:
+        require(a != 0, "two-aligned-tiles")
+        return (("secant", a),)
+    if a != 0 and b != 0:
+        return (("tilted-width", h),) if h else (("tilted-width", -1), ("tilted-width", 1))
+    tilted_sign = a + b
+    require(tilted_sign in (-1, 1), "mixed-tile-sign")
+    if h * tilted_sign > 0:
+        return (("mixed-inclined", tilted_sign),)
+    if h:
+        return (("mixed-flat", 0),)
+    return (("mixed-flat", 0), ("mixed-inclined", tilted_sign))
+
+
+MAX_BOUND_RECORDS = 8192
+MAX_NORMAL_CHOICES = 464128
+INTERNAL_WALL_SECONDS = 55
+RANK_HISTOGRAM = {0: 5, 1: 32, 2: 84, 3: 96, 4: 42}
+PROFILE_HISTOGRAM = {0: 560, 1: 3584, 2: 9408, 3: 10752, 4: 4704}
+
+
+def validate_profile(ranks: Ranks, signs: Signs) -> None:
+    require(len(ranks) == len(signs) == 5, "profile-dimension")
+    require(all(type(r) is int and 0 <= r < 5 for r in ranks), "rank-domain")
+    require(all(abs(b - a) <= 1 for a, b in zip(ranks, ranks[1:])), "rank-step-domain")
+    require(all(type(s) is int and s in (-1, 0, 1) for s in signs)
+            and signs.count(0) <= 1, "sign-domain")
+
+
+@lru_cache(maxsize=8192)
+def bernstein_values(poly: Poly) -> tuple[F, ...]:
+    degree = len(poly) - 1
+    return tuple(
+        sum((F(poly[i] * math.comb(k, i), Q**i * math.comb(degree, i))
+             for i in range(k + 1)), F(0))
+        for k in range(degree + 1)
+    )
+
+
+def chain_cost(ranks: Ranks, signs: Signs) -> int:
+    return abs(signs[0]) + abs(signs[-1]) + sum(
+        abs(b - a) if h == 0 else -h * (a + b)
+        for a, b, h in zip(signs, signs[1:],
+                           (y - x for x, y in zip(ranks, ranks[1:])))
+    )
+
+
+class Catalogue:
+    def __init__(self) -> None:
+        self.records: list[dict[str, Any]] = []
+        self.ids: dict[Profile, int] = {}
+
+    def bound(self, physical: Profile) -> int:
+        if physical in self.ids:
+            return self.ids[physical]
+        require(len(self.records) < MAX_BOUND_RECORDS, "distinct-bound-record-cap")
+        polynomial = bound_polynomial(physical)
+        coefficients = bernstein_values(polynomial)
+        identifier = len(self.records)
+        self.ids[physical] = identifier
+        left, right, constants, projection, maximum = physical
+        self.records.append({
+            "id": identifier,
+            "physical_profile": {"endpoint_tilted": [left, right],
+                                 "sorted_step_constants": list(constants),
+                                 "nominal_projection": projection,
+                                 "rank_error_maximum": maximum},
+            "power_coefficients": list(polynomial),
+            "bernstein_coefficients": list(map(str, coefficients)),
+            "certifies_span_at_least_five": all(x >= 0 for x in coefficients),
+            "negative_bernstein_indices": [i for i, x in enumerate(coefficients) if x < 0],
+        })
+        return identifier
+
+    def classify(self, ranks: Ranks, signs: Signs) -> dict[str, Any]:
+        validate_profile(ranks, signs)
+        steps = tuple(b - a for a, b in zip(ranks, ranks[1:]))
+        options = tuple(step_options(a, b, h) for a, b, h in zip(signs, signs[1:], steps))
+        choices = tuple(itertools.product(*options))
+        expected = math.prod(map(len, options))
+        require(len(choices) == expected and 1 <= expected <= 16
+                and len(set(choices)) == expected, "normal-choice-roster")
+        identifiers = []
+        for choice in choices:
+            constants = tuple(kind for kind, _ in choice)
+            normals = tuple(n for _, n in choice)
+            nominal = sum(n * h for n, h in zip(normals, steps, strict=True))
+            maximum = rank_box_maximum(ranks, normals)
+            physical = (abs(signs[0]), abs(signs[-1]), tuple(sorted(constants)), nominal, maximum)
+            identifiers.append(self.bound(physical))
+        failed = [i for i, identifier in enumerate(identifiers)
+                  if not self.records[identifier]["certifies_span_at_least_five"]]
+        return {
+            "ranks": list(ranks), "signs": list(signs),
+            "transverse_jumps": sum(h != 0 for h in steps),
+            "integer_first_order_cost": chain_cost(ranks, signs),
+            "normal_choice_count": expected,
+            "bound_ids_in_normal_choice_order": identifiers,
+            "failed_normal_choice_indices": failed,
+            "excluded_from_strict_subfive_board": not failed,
+            "verdict": "excluded" if not failed else "not-certified-by-this-Bernstein-test",
+        }
+
+
+def complete_roster() -> tuple[list[Ranks], list[Signs]]:
+    rank_filter = [
+        r for r in itertools.product(range(5), repeat=5)
+        if all(abs(b - a) <= 1 for a, b in zip(r, r[1:]))
+    ]
+    rank_walks = [(r,) for r in range(5)]
+    for _ in range(4):
+        rank_walks = [(*prefix, following) for prefix in rank_walks
+                      for following in range(max(0, prefix[-1] - 1), min(4, prefix[-1] + 1) + 1)]
+    require(rank_filter == sorted(rank_walks), "independent-rank-enumerations-disagree")
+    histogram = Counter(sum(a != b for a, b in zip(r, r[1:])) for r in rank_filter)
+    require(dict(histogram) == RANK_HISTOGRAM and len(rank_filter) == 259, "rank-roster-count")
+    sign_filter = [s for s in itertools.product((-1, 0, 1), repeat=5) if s.count(0) <= 1]
+    sign_insertions = set(itertools.product((-1, 1), repeat=5))
+    for zero in range(5):
+        for tail in itertools.product((-1, 1), repeat=4):
+            sign_insertions.add((*tail[:zero], 0, *tail[zero:]))
+    require(sign_filter == sorted(sign_insertions) and len(sign_filter) == 112,
+            "independent-sign-enumerations-disagree")
+    return rank_filter, sign_filter
+
+
+def controls(prerequisite: Poly) -> list[dict[str, Any]]:
+    outcomes = []
+
+    def expect(name: str, operation: Callable[[], object], refusal: str | None = None) -> None:
+        try:
+            operation()
+        except Refusal as error:
+            require(error.code == refusal, "unexpected-control-refusal",
+                    {"name": name, "expected": refusal, "actual": error.code})
+            outcomes.append({"control": name, "expected": "refuse",
+                             "refusal": refusal, "passed": True})
+        else:
+            require(refusal is None, "control-falsely-accepted", name)
+            outcomes.append({"control": name, "expected": "accept", "passed": True})
+
+    fixture = (2, -3, 5, -7, 0, 0, 11)
+    expect("degree-six-interpolation", lambda: require(
+        interpolate(lambda t: polynomial_at(fixture, t), 6) == fixture, "interpolation-fixture"))
+    expect("zero-path-bound", lambda: positivity((0,)))
+    expect("negative-constant", lambda: positivity((-1,)), "nonnegative")
+    expect("negative-right-endpoint", lambda: positivity((1, -48)), "nonnegative")
+    expect("vanishing-strict-prerequisite-endpoints", lambda: positivity((0, 1, -24), True),
+           "strict-closed-endpoints")
+    ranks = (0, 0, 0, 0, 1)
+    expect("negative-normal-box-maximum", lambda: require(
+        rank_box_maximum(ranks, (-1,) * 4) == 5, "box-fixture"))
+    expect("alternating-normal-box-maximum", lambda: require(
+        rank_box_maximum(ranks, (1, -1, 1, -1)) == 17, "box-fixture"))
+    catalogue = Catalogue()
+
+    def excluded(r: Ranks, s: Signs = (-1,) * 5) -> None:
+        require(catalogue.classify(r, s)["excluded_from_strict_subfive_board"],
+                "path-not-certified")
+
+    expect("one-jump-bridge-regression", lambda: excluded(ranks))
+    physical: Profile = (1, 1, ("secant",) * 4, -1, 5)
+    expect("raised-board-threshold", lambda: positivity(bound_polynomial(physical, 6)), "nonnegative")
+    original = bound_polynomial(physical)
+    altered = (original[0] + 1, *original[1:])
+    expect("altered-interpolated-constant", lambda: check_identity(
+        altered, lambda t: cleared_span(physical, t), 6), "polynomial-identity")
+    expect("strict-mixed-diagonal-prerequisite", lambda: positivity(prerequisite, True))
+    expect("negated-mixed-diagonal-prerequisite",
+           lambda: positivity(tuple(-c for c in prerequisite), True), "nonnegative")
+    expect("zero-jump-path", lambda: excluded((0, 0, 0, 0, 0)))
+    expect("two-jump-path", lambda: excluded((0, 0, 0, 1, 2)))
+    expect("three-jump-path", lambda: excluded((0, 0, 1, 2, 3)))
+    expect("four-jump-path", lambda: excluded((0, 1, 2, 3, 4)))
+    expect("sixteen-straight-normal-choices", lambda: require(
+        catalogue.classify((2,) * 5, (1, -1, 1, -1, 1))["normal_choice_count"] == 16,
+        "normal-count-fixture"))
+    expect("favorable-monotone-positive-path", lambda: excluded((0, 1, 2, 3, 4), (1,) * 5),
+           "path-not-certified")
+    expect("transverse-jump-of-two", lambda: catalogue.classify((0, 0, 0, 0, 2), (-1,) * 5),
+           "rank-step-domain")
+    expect("two-aligned-tiles", lambda: catalogue.classify((0,) * 5, (0, 1, 0, 1, 1)),
+           "sign-domain")
+    require(len(outcomes) == 20, "control-count")
+    return outcomes
+
+
+def publish(path: Path, result: dict[str, Any]) -> None:
+    require(not path.exists(), "output-already-exists")
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                         prefix=path.name + ".", suffix=".partial",
+                                         delete=False) as stream:
+            temporary = stream.name
+            json.dump(result, stream, indent=2, allow_nan=False)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary:
+            Path(temporary).unlink(missing_ok=True)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--spec", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    started, cpu_started = time.monotonic(), time.process_time()
+    raw = args.spec.read_bytes()
+    require(hashlib.sha256(raw).hexdigest() == SPEC_SHA256, "spec-digest")
+    spec = json.loads(raw)
+    prerequisite = interpolate(prerequisite_value, 4)
+    prerequisite_bernstein = positivity(prerequisite, True)
+    control_results = controls(prerequisite)
+    ranks, signs = complete_roster()
+    catalogue = Catalogue()
+    rows = []
+    profile_histogram: Counter[int] = Counter()
+    excluded_by_jumps: Counter[int] = Counter()
+    not_certified_by_jumps: Counter[int] = Counter()
+    choices = bridge_profiles = bridge_choices = 0
+    for r in ranks:
+        require(time.monotonic() - started < INTERNAL_WALL_SECONDS, "internal-wall-ceiling")
+        for s in signs:
+            row = catalogue.classify(r, s)
+            row["index"] = len(rows)
+            rows.append(row)
+            j = row["transverse_jumps"]
+            profile_histogram[j] += 1
+            target = excluded_by_jumps if row["excluded_from_strict_subfive_board"] else not_certified_by_jumps
+            target[j] += 1
+            choices += row["normal_choice_count"]
+            require(choices <= MAX_NORMAL_CHOICES, "normal-choice-cap")
+            if j == 1 and row["integer_first_order_cost"] > 0:
+                require(row["excluded_from_strict_subfive_board"], "accepted-bridge-regression")
+                bridge_profiles += 1
+                bridge_choices += row["normal_choice_count"]
+    require(len(rows) == 29008 and dict(profile_histogram) == PROFILE_HISTOGRAM,
+            "complete-profile-count")
+    require(bridge_profiles == 3488 and bridge_choices == 15696, "complete-bridge-regression")
+    require(time.monotonic() - started < INTERNAL_WALL_SECONDS, "internal-wall-ceiling")
+    encoded = json.dumps(rows, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    result = {
+        "format": "independent-one-axis-general-path-catalogue-v1",
+        "status": "complete-local-general-path-classification",
+        "scope": spec["scope"],
+        "spec_sha256": SPEC_SHA256,
+        "checker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "domain": spec["domain"],
+        "counts": {"rank_profiles": len(ranks), "sign_profiles": len(signs),
+                   "local_profiles": len(rows), "normal_choices": choices,
+                   "physical_bound_records": len(catalogue.records),
+                   "excluded_profiles": sum(excluded_by_jumps.values()),
+                   "not_certified_profiles": sum(not_certified_by_jumps.values())},
+        "profile_histogram_by_jumps": dict(sorted(profile_histogram.items())),
+        "excluded_by_jumps": dict(sorted(excluded_by_jumps.items())),
+        "not_certified_by_jumps": dict(sorted(not_certified_by_jumps.items())),
+        "accepted_bridge_regression": {"positive_cost_profiles": bridge_profiles,
+                                       "normal_choices": bridge_choices},
+        "mixed_diagonal_prerequisite": {"power_coefficients": list(prerequisite),
+                                        "bernstein_coefficients": list(map(str, prerequisite_bernstein)),
+                                        "strict_on_closed_interval": True},
+        "controls": control_results,
+        "profile_roster_sha256": hashlib.sha256(encoded).hexdigest(),
+        "profile_roster_serialization": "UTF-8 json.dumps(profiles, sort_keys=True, separators=(',', ':')) without final newline",
+        "normal_choice_order": spec["normal_choice_order"],
+        "bound_records": catalogue.records,
+        "profiles": rows,
+        "wall_seconds": time.monotonic() - started,
+        "cpu_seconds": time.process_time() - cpu_started,
+        "peak_rss_bytes": rss if sys.platform == "darwin" else rss * 1024,
+        "guard": "External coordinator-owned supervisor required; no guard-status claim.",
+    }
+    publish(args.output, result)
+    print(json.dumps({"status": result["status"], "counts": result["counts"],
+                      "controls": len(control_results), "wall_seconds": result["wall_seconds"],
+                      "peak_rss_bytes": result["peak_rss_bytes"]}))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print(json.dumps({"status": "failed", "error_type": type(error).__name__,
+                          "error": str(error)}), file=sys.stderr)
+        raise SystemExit(1) from error
