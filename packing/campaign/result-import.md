@@ -1119,7 +1119,8 @@ No adoption waits for the owner’s word, and each case that once did is decided
   owner only as a possible exception to recording a result, and an exception changes no
   house best packing. `select_houses` replaces a house best packing only with a smaller
   one, so the case keeps its own at an exact tie; between validated candidates of one
-  side it keeps the earlier `attribution.published`, then the earlier entry.
+  side it keeps the earlier date (`attribution.published` for an external result or
+  `established` for a project result), then the earlier entry.
   That date is the last of an entry’s certificates where it has several, so it stands in
   for report order only where the two agree.
   On 16 October 2026 no two candidates at a count that moves are exactly equal.

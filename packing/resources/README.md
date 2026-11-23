@@ -2032,6 +2032,13 @@ support [T-340](../frontier/RESULTS.md).
 The maintained writer adopted the original exact source as T-340 on 22 November 2026,
 with complete native exact jobs and the independent review retained.
 
+## Project Regularization Certificates
+
+- **[squares project regularized n127 2026-11-23]** records the
+  [exact refinement at 127 squares](../cases/register_candidates/think-4z8z-2026-11-23/README.md).
+- **[squares project regularized n305 2026-11-23]** records the
+  [exact refinement at 305 squares](../cases/register_candidates/think-huum-2026-11-23/README.md).
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

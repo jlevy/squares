@@ -4,7 +4,8 @@
 Usage, from `packing/`, after
 `uv run --frozen --all-extras --group dev python -m devtools.regularize_grid_slack`:
 
-    --n 302 303 --run-dir DIR [--near-axis-degrees 0.5] [--trust 0.45] [--time-limit 120]
+    --n 302 303 --run-dir DIR [--near-axis-degrees 0.5] [--trust 0.45]
+        [--time-limit 120] [--wall-timeout SECONDS]
 
 A prototype generator for the regularized drawing layer
 (`docs/project/policies/regularization-policy.md`). The atlas shades a square by how many
@@ -94,6 +95,10 @@ trust region, not a proof that no placement closes more. Pairs whose rotations d
 less than the house's tolerance but are not one exact class cannot coincide here; a
 square straightened from a near-axis class loses the contacts it had with its own class
 until the placement closes them again, and the regression report says so.
+``--wall-timeout`` gives each count a wall-clock limit for the whole generation and
+drawing on POSIX. On timeout the run records an incomplete refusal and leaves only
+the report. A native solver call finishes or reaches its own limit before Python
+handles a pending timeout.
 """
 
 from __future__ import annotations
@@ -103,12 +108,15 @@ import gzip
 import hashlib
 import json
 import math
+import signal
 import time
 import warnings
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
+from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
 from fractions import Fraction
 from pathlib import Path
+from types import FrameType
 from typing import Any
 
 import numpy as np
@@ -1368,12 +1376,8 @@ def attempt(
     return exact, record, snaps
 
 
-def regularize(
-    witness: Mapping[str, Any], settings: Settings
-) -> tuple[dict[str, Any] | None, dict[str, Any]]:
-    """The view of one witness at `s_W`, else at `U`, or why there is none; and the report."""
-    started = time.perf_counter()
-    report: dict[str, Any] = {
+def _new_report(settings: Settings) -> dict[str, Any]:
+    return {
         "generator": GENERATOR,
         "settings": {
             "near_axis_degrees": settings.near_axis_degrees,
@@ -1383,6 +1387,14 @@ def regularize(
         },
         "attempts": [],
     }
+
+
+def regularize(
+    witness: Mapping[str, Any], settings: Settings
+) -> tuple[dict[str, Any] | None, dict[str, Any]]:
+    """The view of one witness at `s_W`, else at `U`, or why there is none; and the report."""
+    started = time.perf_counter()
+    report = _new_report(settings)
     for relation, freeze in attempts_for(witness):
         try:
             frame = frame_for(witness, relation)
@@ -1541,7 +1553,33 @@ def source_record(n: int, data: bytes, witness: Mapping[str, Any]) -> dict[str, 
     }
 
 
-def run_one(n: int, run_dir: Path, settings: Settings) -> dict[str, Any]:
+class _WallTimeoutError(TimeoutError):
+    """The deadline for one count's generation expired."""
+
+
+def _expire(_signum: int, _frame: FrameType | None) -> None:
+    raise _WallTimeoutError
+
+
+@contextmanager
+def _wall_timer(seconds: float | None) -> Iterator[None]:
+    if seconds is None:
+        yield
+        return
+    previous_timer = signal.getitimer(signal.ITIMER_REAL)
+    previous_handler = signal.signal(signal.SIGALRM, _expire)
+    try:
+        signal.setitimer(signal.ITIMER_REAL, seconds)
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous_handler)
+        signal.setitimer(signal.ITIMER_REAL, *previous_timer)
+
+
+def run_one(
+    n: int, run_dir: Path, settings: Settings, *, wall_timeout: float | None = None
+) -> dict[str, Any]:
     """Regularize one count into `run_dir/n-NNN/`, and its report.
 
     An earlier run's view, drawing and report are removed first, so a re-run that finds
@@ -1553,25 +1591,41 @@ def run_one(n: int, run_dir: Path, settings: Settings) -> dict[str, Any]:
     the view file as it is then and decides it again on both exact routes, with its side
     and id held to this report's (`admitted`, `view_decided`).
     """
+    if wall_timeout is not None and (not math.isfinite(wall_timeout) or wall_timeout <= 0):
+        raise GridSlackError("the wall-clock timeout must be a positive finite number")
     directory = _guard(run_dir) / f"n-{n:03d}"
     for stale in ("report.json", "view.yaml.gz", "drawing.svg"):
         (directory / stale).unlink(missing_ok=True)
     data = (KNOWN_BEST / f"n-{n:03d}.yaml").read_bytes()
     witness = load_yaml(data.decode("utf-8"))["witness"]
-    view, report = regularize(witness, settings)
+    source = source_record(n, data, witness)
+    started = time.perf_counter()
+    try:
+        with _wall_timer(wall_timeout):
+            view, report = regularize(witness, settings)
+            if view is not None:
+                text = witness_document(view)
+                validate_witness_document(
+                    load_yaml(text),
+                    path=directory / "view.yaml",
+                    fallback_schema=WITNESS_SCHEMA,
+                )
+                stored = gzip.compress(text.encode("utf-8"), mtime=0)
+                _write(directory / "view.yaml.gz", stored)
+                report["view"] = {"path": "view.yaml.gz", "git_blob": git_blob(stored)}
+                straightened = [row["square"] for row in report["straightened"]]
+                report["measured"] = measure(n, witness, view, straightened)
+                _write(directory / "drawing.svg", drawing(n, witness, view).encode("utf-8"))
+    except _WallTimeoutError:
+        for stale in ("view.yaml.gz", "drawing.svg"):
+            (directory / stale).unlink(missing_ok=True)
+        report = _new_report(settings)
+        report["refusal"] = "wall-clock timeout; generator incomplete"
+    if wall_timeout is not None:
+        report["settings"]["wall_timeout"] = wall_timeout
+        report["seconds"] = round(time.perf_counter() - started, 2)
     report["n"] = n
-    report["source"] = source_record(n, data, witness)
-    if view is not None:
-        text = witness_document(view)
-        validate_witness_document(
-            load_yaml(text), path=directory / "view.yaml", fallback_schema=WITNESS_SCHEMA
-        )
-        stored = gzip.compress(text.encode("utf-8"), mtime=0)
-        _write(directory / "view.yaml.gz", stored)
-        report["view"] = {"path": "view.yaml.gz", "git_blob": git_blob(stored)}
-        straightened = [row["square"] for row in report["straightened"]]
-        report["measured"] = measure(n, witness, view, straightened)
-        _write(directory / "drawing.svg", drawing(n, witness, view).encode("utf-8"))
+    report["source"] = source
     report["finished"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     _write(
         directory / "report.json", (json.dumps(report, indent=1, default=str) + "\n").encode()
@@ -1950,6 +2004,11 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--near-axis-degrees", type=float, default=NEAR_AXIS_DEGREES)
     command.add_argument("--trust", type=positive, default=TRUST)
     command.add_argument("--time-limit", type=float, default=TIME_LIMIT)
+    command.add_argument(
+        "--wall-timeout",
+        type=positive,
+        help="wall-clock seconds per count for generation and drawing",
+    )
     return command
 
 
@@ -1959,7 +2018,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     failed = 0
     for n in args.n:
         try:
-            print(summary(run_one(n, args.run_dir, settings)), flush=True)
+            report = run_one(n, args.run_dir, settings, wall_timeout=args.wall_timeout)
+            print(summary(report), flush=True)
         except (GridSlackError, same.SameSideError) as error:
             failed += 1
             print(f"n={n}: refused: {error}", flush=True)

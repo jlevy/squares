@@ -1,0 +1,22 @@
+{
+  "id": "grid-slack-adopt-2026-11-23-n127-305-grid-1",
+  "generator": "regularize_grid_slack/2",
+  "finished": "2026-11-23",
+  "parameters": {
+    "near_axis_degrees": 1.0,
+    "trust": 0.45,
+    "time_limit": 5.0,
+    "stage_margin": 0.0099,
+    "wall_timeout": 21.0
+  },
+  "counts": 2,
+  "decisions": {
+    "no-view": 2
+  },
+  "cost": {
+    "cpu_seconds": 42.02,
+    "wall_seconds": 42.02,
+    "workers": 1,
+    "note": "per-count seconds the reports record, summed; no receipt of the run's own"
+  }
+}

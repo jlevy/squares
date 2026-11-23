@@ -14135,6 +14135,48 @@ sources:
     certificate author. The independent review establishes finite rational and quadratic
     feasibility at 202 and 263. Direct-source and earlier case identity, exact report order,
     public registration and the drawing decisions remain on think-36ui.
+- id: squares-project-regularized-n127-2026-11-23
+  title: The Squares Project’s verified regularization of Joost de Winter’s 127-square packing
+  role: first-party-release
+  url: https://github.com/jlevy/squares/tree/main/packing/cases/register_candidates/think-4z8z-2026-11-23
+  local: cases/register_candidates/think-4z8z-2026-11-23/
+  source_key: '[squares project regularized n127 2026-11-23]'
+  scope: {n_values: [127]}
+  reviewed: '2026-11-23'
+  source_date: '2026-11-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - cases/register_candidates/think-4z8z-2026-11-23/README.md
+  evidence:
+  - E-squares-project-regularized-n127-report
+  - E-squares-project-regularized-n127-exact-feasibility
+  notes: >-
+    T-341 records the finite upper bound from a reproducible regularization of T-330 using
+    Evan Daniel’s MIT-licensed solver and regularizer. The rational side lies below
+    T-330’s first-contact side. The batch retains the certificate and native checks.
+- id: squares-project-regularized-n305-2026-11-23
+  title: The Squares Project’s verified regularization of the 305-square packing in T-336
+  role: first-party-release
+  url: https://github.com/jlevy/squares/tree/main/packing/cases/register_candidates/think-huum-2026-11-23
+  local: cases/register_candidates/think-huum-2026-11-23/
+  source_key: '[squares project regularized n305 2026-11-23]'
+  scope: {n_values: [305]}
+  reviewed: '2026-11-23'
+  source_date: '2026-11-23'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - cases/register_candidates/think-huum-2026-11-23/README.md
+  evidence:
+  - E-squares-project-regularized-n305-report
+  - E-squares-project-regularized-n305-exact-feasibility
+  notes: >-
+    T-342 records the finite upper bound from the exact-solver restart using Evan Daniel’s
+    MIT-licensed tools. The rational side lies below T-336’s first-contact side, and the
+    batch retains the certificate and native checks.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
@@ -14238,11 +14280,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-10-11 (T-139).
 - n: 127
-  source_id: de-winter-s127-issue1020-2026-11-17
-  value: '11.8007937266149623'
-  evidence: E-de-winter-1020-certificate-report
+  source_id: squares-project-regularized-n127-2026-11-23
+  value: '11.80079372661496224'
+  evidence: E-squares-project-regularized-n127-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-20 (T-330).
+    a replay here and an accepted review, adopted on 2026-11-23 (T-341).
 - n: 129
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '11.87001385040446435'
@@ -14622,11 +14664,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-05 (T-273).
 - n: 305
-  source_id: de-winter-n305-2026-11-20
-  value: '17.9457558387415887'
-  evidence: E-de-winter-1052-certificate-report
+  source_id: squares-project-regularized-n305-2026-11-23
+  value: '17.94575583874158868'
+  evidence: E-squares-project-regularized-n305-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-21 (T-336).
+    a replay here and an accepted review, adopted on 2026-11-23 (T-342).
 - n: 306
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.96343371749142574'
@@ -14960,7 +15002,7 @@ superseded_reports:
 - n: 127
   source_id: evand-square-packing-2026-10-05
   value: '11.822875655532295295369036633375'
-  superseded_by: de-winter-s127-issue1020-2026-11-17
+  superseded_by: squares-project-regularized-n127-2026-11-23
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -15808,14 +15850,14 @@ superseded_reports:
 - n: 305
   source_id: casson-square-packing-2026
   value: '17.96053668235995815'
-  superseded_by: de-winter-n305-2026-11-20
+  superseded_by: squares-project-regularized-n305-2026-11-23
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 305
   source_id: franciscouzo-square-packing-2026
   value: '17.952959459023539'
-  superseded_by: de-winter-n305-2026-11-20
+  superseded_by: squares-project-regularized-n305-2026-11-23
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 306
@@ -16217,9 +16259,9 @@ superseded_reports:
 - n: 127
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8109366475118110'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-330's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-341's exact
     side is smaller.
-  superseded_by: de-winter-s127-issue1020-2026-11-17
+  superseded_by: squares-project-regularized-n127-2026-11-23
 - n: 129
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8720298492118721'
@@ -16355,9 +16397,9 @@ superseded_reports:
 - n: 305
   source_id: evand-square-packing-2026-10-05
   value: '17.952959459015527962875662582531'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-336's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-342's exact
     side is smaller.
-  superseded_by: de-winter-n305-2026-11-20
+  superseded_by: squares-project-regularized-n305-2026-11-23
 - n: 306
   source_id: evand-square-packing-2026-10-05
   value: '17.963438139764002853611723469441'
@@ -16374,8 +16416,8 @@ superseded_reports:
   source_id: evand-record-hunt3-2026-10-10
   value: '17.951139772207'
   reason: A certificate of the same release that no register entry cites; its exact side equals T-140's,
-    the house from 11 to 12 October 2026; above the house adopted on 2026-11-21 (T-336).
-  superseded_by: de-winter-n305-2026-11-20
+    the house from 11 to 12 October 2026; above the house adopted on 2026-11-23 (T-342).
+  superseded_by: squares-project-regularized-n305-2026-11-23
 - n: 156
   source_id: evand-square-packing-2026-10-05
   value: '12.982082698516893102076828502036'
@@ -16440,8 +16482,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-10
   value: '17.9511397722069976'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-336's exact side is smaller.
-  superseded_by: de-winter-n305-2026-11-20
+    and T-342's exact side is smaller.
+  superseded_by: squares-project-regularized-n305-2026-11-23
 - n: 154
   source_id: squish-481-third-request-2026-10-09
   value: '12.9230702023011408'
@@ -16698,8 +16740,8 @@ superseded_reports:
   source_id: couzo-451-exact-refinements
   value: '11.8108787875891799'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-330's exact side is smaller.
-  superseded_by: de-winter-s127-issue1020-2026-11-17
+    and T-341's exact side is smaller.
+  superseded_by: squares-project-regularized-n127-2026-11-23
 - n: 130
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '11.9044830325157865'
@@ -16854,8 +16896,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-11-in-corpus
   value: '17.9504664821377123'
   reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
-    and T-336's exact side is smaller.
-  superseded_by: de-winter-n305-2026-11-20
+    and T-342's exact side is smaller.
+  superseded_by: squares-project-regularized-n305-2026-11-23
 - n: 306
   source_id: couzo-451-exact-refinements
   value: '17.9634337174914258'
@@ -17292,8 +17334,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.81087878758917984'
   reason: The house from 2026-10-17 until 2026-11-16; its certificate stays retained and verified,
-    and T-330's exact side is smaller.
-  superseded_by: de-winter-s127-issue1020-2026-11-17
+    and T-341's exact side is smaller.
+  superseded_by: squares-project-regularized-n127-2026-11-23
 - n: 204
   source_id: evand-issue914-2026-11-05
   value: '14.8043613836518588'
@@ -17316,8 +17358,8 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.95046648213771228'
   reason: The house from 2026-10-17 until 2026-11-16; its certificate stays retained and verified,
-    and T-336's exact side is smaller.
-  superseded_by: de-winter-n305-2026-11-20
+    and T-342's exact side is smaller.
+  superseded_by: squares-project-regularized-n305-2026-11-23
 - n: 147
   source_id: ono-issue985-2026-11-14
   value: '12.6510435565876945'
@@ -17394,8 +17436,8 @@ superseded_reports:
   source_id: joegun-upper-bounds-2026-11-16
   value: '11.8017538904864874'
   reason: The house from 2026-11-16 until 2026-11-18; its certificate stays retained and verified,
-    and T-330's exact side is smaller.
-  superseded_by: de-winter-s127-issue1020-2026-11-17
+    and T-341's exact side is smaller.
+  superseded_by: squares-project-regularized-n127-2026-11-23
 - n: 172
   source_id: ozden-s172-upper-bound-2026-11-09
   value: '13.6146898532862152'
@@ -17436,8 +17478,8 @@ superseded_reports:
   source_id: joegun-upper-bounds-2026-11-16
   value: '17.9457623596589697'
   reason: The house from 2026-11-16 until 2026-11-21; its certificate stays retained and verified,
-    and T-336's exact side is smaller.
-  superseded_by: de-winter-n305-2026-11-20
+    and T-342's exact side is smaller.
+  superseded_by: squares-project-regularized-n305-2026-11-23
 - n: 259
   source_id: evand-exact-cur-2026-10-16
   value: '16.59137814549769816'
@@ -17462,6 +17504,18 @@ superseded_reports:
   reason: The house from 2026-11-16 until 2026-11-22; its certificate stays retained and verified,
     and T-340's exact side is smaller.
   superseded_by: de-winter-1062-n232-2026-11-21
+- n: 127
+  source_id: de-winter-s127-issue1020-2026-11-17
+  value: '11.8007937266149623'
+  reason: The house from 2026-11-20 until 2026-11-23; its certificate stays retained and verified,
+    and T-341's exact side is smaller.
+  superseded_by: squares-project-regularized-n127-2026-11-23
+- n: 305
+  source_id: de-winter-n305-2026-11-20
+  value: '17.9457558387415887'
+  reason: The house from 2026-11-21 until 2026-11-23; its certificate stays retained and verified,
+    and T-342's exact side is smaller.
+  superseded_by: squares-project-regularized-n305-2026-11-23
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

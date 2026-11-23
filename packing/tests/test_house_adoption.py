@@ -328,7 +328,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     # T-336 replaces T-309 after n305 left the hold; the historic cohort stays.
     assert 305 in previous
     assert 305 not in held_counts
-    assert (houses.ADOPTED[305], houses.adopted_on(305)) == ("T-336", "2026-11-21")
+    assert (houses.ADOPTED[305], houses.adopted_on(305)) == ("T-342", "2026-11-23")
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
         set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
     )
@@ -336,7 +336,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
         29: "T-195",
         105: "T-229",
-        127: "T-330",
+        127: "T-341",
         130: "T-259",
         132: "T-292",
         155: "T-197",
@@ -351,7 +351,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         270: "T-332",
         272: "T-322",
         297: "T-299",
-        305: "T-336",
+        305: "T-342",
         307: "T-326",
         308: "T-221",
     }
@@ -1881,7 +1881,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # moved 172 and 199 to Joost de Winter's re-solves of issues 946 and 939 (T-286, T-285),
     # and lane i1038 moved 228 to Doğa Özden's certificate of issue 1038 (T-334).
     # The 22 November issue-1062 adoption moved 232 to de Winter's rational certificate
-    # of the Kodaj-JoeGun packing (T-340).
+    # of the Kodaj-JoeGun packing (T-340). The 23 November pass moved 127 and 305 to
+    # the project's first-party certificates T-341 and T-342.
     later = {
         **ALGEBRAIC_ADOPTED,
         109: "T-335",
@@ -1918,9 +1919,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         297: "T-299",
         228: "T-334",
         90: "T-338",
-        127: "T-330",
+        127: "T-341",
         264: "T-308",
-        305: "T-336",
+        305: "T-342",
         210: "T-317",
         272: "T-322",
         292: "T-323",
