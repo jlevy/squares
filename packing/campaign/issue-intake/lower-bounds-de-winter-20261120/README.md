@@ -33,9 +33,7 @@ uv run --frozen --all-extras --group dev python -m devtools.lower_bound_claims \
 | #1041 | 2026-11-19T12:05:56Z | 34 | `lower_bounds.csv` at 21d944c |
 | #1042 | 2026-11-19T18:45:38Z | 48 | `followup/best_by_count.csv` at 21d944c |
 | #1042, comment 7020627554 | 2026-11-19T19:59:12Z | 1 | the comment: $s(161) \ge 8036307/625000$ |
-
-| #1042, comment 7022143149 | 2026-11-19T21:02:44Z | 155 | `certificate.json` in the
-retained base85 archive |
+| #1042, comment 7022143149 | 2026-11-19T21:02:44Z | 155 | `certificate.json` in the retained base85 archive |
 
 The case baseline is `main` at `ad02e1650b1c`. The walk reads both lower lanes from 1 to
 313\. The last comment was edited at 02:02:32 UTC on 20 November and the packet retains

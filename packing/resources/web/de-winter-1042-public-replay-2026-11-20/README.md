@@ -99,6 +99,10 @@ command.
 
 ## Validation Scope
 
+The [portable first-party replay](replay/README.md) reconstructs the custody and
+scalar receipts using the exact retained inputs. Its bounded controls exercise
+input admission and receipt equality.
+
 The custody parser rejected duplicate JSON keys, required the exact comment identity and
 timestamps, bounded archive/member sizes, checked the archive digest, and refused any
 unexpected member or path traversal.
@@ -111,8 +115,9 @@ MiB peak RSS. Both worker and guard exits were zero; observed pressure remained 
 subsecond jobs each had one admission sample, so the worker’s process-accounting peak is
 reported separately from the sampled tree footprint.
 
-The maintained `devtools.lower_bound_claims` current-case walk and records/schema gates
-remain coordinator validation after the report fragment is integrated.
+The maintained `devtools.lower_bound_claims` check reproduces the [294-row current-case
+walk](../../../campaign/issue-intake/lower-bounds-de-winter-20261120/README.md).
+The full records and schema gates run in hosted CI.
 The earlier source bytes and the later #1060 table are comparison inputs, not a new
 proof check.
 
