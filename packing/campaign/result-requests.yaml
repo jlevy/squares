@@ -39133,10 +39133,10 @@ issues:
       claim: A six-tilt packing of 18 unit squares at the exact side (7+sqrt(7))/2.
       source: body
       not_registered: >-
-        Construction feasibility is independently checked and its source is retained.
-        Registry admission is separate from the existing eight-tilt house at the same side.
-      queued: true
-      bead: think-8x11
+        Independent replay confirms Mira Cult’s six-tilt layout at the same exact side as
+        Hämäläinen’s earlier eight-tilt packing. The case records the alternate construction.
+        The exact tie leaves the existing upper bound in the register.
+      queued: false
     - key: n18-global-optimality
       claim: Mira Cult asserts that no packing of 18 unit squares has smaller side.
       source: body
