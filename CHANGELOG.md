@@ -9,6 +9,24 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-11-23"></a>
+
+### 2026-11-23
+
+<a id="changelog-entry-distinguish-rare-violet-109-pinwheel"></a>
+
+#### A More Distinct Violet in the 109-Square Pinwheel
+
+Significance S2: A small rendering fix makes two angle groups easier to distinguish.
+
+The 109-square pinwheel uses a more distinct violet for its rare angle color. The usual pink still marks the same 21 squares in the regularized drawing.
+
+Published artifacts: [109-square case and pinwheel](https://squaremath.org/cases/109.html).
+
+First public: 2026-11-23 ([publication evidence](https://github.com/jlevy/squares/actions/runs/45119059616/job/137512140261)).
+
+PRs and supporting records: [PR \#1096](https://github.com/jlevy/squares/pull/1096).
+
 <a id="changelog-date-2026-11-14"></a>
 
 ### 2026-11-14

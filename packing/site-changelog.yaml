@@ -6,6 +6,25 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: distinguish-rare-violet-109-pinwheel
+    date: '2026-11-23'
+    title: A More Distinct Violet in the 109-Square Pinwheel
+    significance:
+      score: 2
+      rationale: A small rendering fix makes two angle groups easier to distinguish.
+    topics: [project]
+    categories: [site]
+    pull_requests: [1096]
+    summary: >-
+      The 109-square pinwheel uses a more distinct violet for its rare angle color.
+      The usual pink still marks the same 21 squares in the regularized drawing.
+    artifacts:
+      - kind: page
+        label: 109-square case and pinwheel
+        target: https://squaremath.org/cases/109.html
+    publication:
+      date: '2026-11-23'
+      evidence: https://github.com/jlevy/squares/actions/runs/45119059616/job/137512140261
   - id: khalili-gharabaghi-k2m5-family-reported
     date: '2026-11-14'
     title: Khalili and Gharabaghi Report s(k² − 5) = k for Every k ≥ 7
@@ -3050,6 +3069,16 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 1096
+  title: 'fix: distinguish the rare violet in the 109-square pinwheel'
+  merged_at: '2026-11-23T05:38:32Z'
+  base_ref: main
+  merge_commit: ce9d1d49fc3b77e090240db30ea914c592281f93
+- number: 1095
+  title: 'docs: require visual drawing follow-up during intake'
+  merged_at: '2026-11-23T05:12:28Z'
+  base_ref: main
+  merge_commit: 19bbdf0ef65c748ffff76ad963f7032e4bd43fb0
 - number: 974
   title: 'records(L145): import #973, s(k^2 - 5) = k for every k >= 7, as T-298 (reported, V0/C1)'
   merged_at: '2026-11-14T06:36:21Z'
@@ -3840,6 +3869,8 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 1096
+  - 1095
   - 974
   - 852
   - 840
@@ -3970,6 +4001,8 @@ coverage:
   - 615
   - 619
   omissions:
+  - pull_request: 1095
+    reason: S2 maintenance of internal drawing review and deployment instructions.
   - pull_request: 628
     reason: >-
       S1 intake bookkeeping: watched-source reads, request triage, labels and resolved

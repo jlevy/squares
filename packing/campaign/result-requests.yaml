@@ -39403,7 +39403,9 @@ issues:
       date: '2026-11-21'
       by: jlevy
       kind: follow-up
-      reported: []
+      reported:
+      - result: n20-lower-99-over-20
+      beads: [think-6ul3]
     - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7064402590
       date: '2026-11-21'
       by: jlevy
