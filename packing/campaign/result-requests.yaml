@@ -39744,7 +39744,8 @@ issues:
     title: 's(264) ≤ 16.772168305041: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-23'
-    state: open
+    state: closed
+    closed: '2026-11-23'
     kind: result-report
     triage: done
     summary: >-
@@ -39771,5 +39772,25 @@ issues:
       queued: false
     beads: [think-w0ca]
     answer_bead: think-w0ca
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1099#issuecomment-7111660035
+      date: '2026-11-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n264-rational-certificate
+        id: T-343
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n264-rational-certificate
+        id: E-ozden-1099-certificate-report
+      - result: n264-rational-certificate
+        id: E-ozden-1099-exact-feasibility
+        status: confirmed
+      - result: n264-rational-certificate
+        id: E-ozden-1099-review-exact-feasibility
+        status: confirmed
+      - result: n264-leaderboard-side-only
     close_when: The result has an intake disposition and its reply is recorded.
