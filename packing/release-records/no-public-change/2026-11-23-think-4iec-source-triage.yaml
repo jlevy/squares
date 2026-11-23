@@ -8,4 +8,4 @@ outputs:
 reason: >-
   Records the exact #1042 public replay intake, #1061 proof readiness and the
   two verified contributor replies. Two candidate renders and one exact-base
-  render from ad02e1650b1c matched all 43 methods-survey files byte for byte.
+  render from 689a8ecf3546 matched all 43 methods-survey files byte for byte.
