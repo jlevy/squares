@@ -41,6 +41,20 @@ Published artifacts: [304-square case and regularized drawing](https://squaremat
 
 PRs and supporting records: [PR \#1097](https://github.com/jlevy/squares/pull/1097).
 
+<a id="changelog-entry-geiserx-de-winter-202-and-263-verified-packings"></a>
+
+#### Two Smaller Verified Packings at 202 and 263 Squares
+
+Significance S3: Two independently verified improvements of about 0.00355 and 0.00879 below the preceding certified houses at first contact.
+
+Sergio Fernández Rubio (GeiserX) published the layouts, and Joost de Winter refined them and supplied exact certificates using Evan Daniel’s solver. The two packings fit in squares of side at most 14.724372709109 and 16.724372709109, respectively. The atlas shows regularized drawings certified at the same exact sides.
+
+Published artifacts: [202-square case and drawing](https://squaremath.org/cases/202.html) · [263-square case and drawing](https://squaremath.org/cases/263.html).
+
+[Publication evidence](https://github.com/jlevy/squares/actions/runs/45262101571).
+
+Issues, PRs and supporting records: [Issue \#1037](https://github.com/jlevy/squares/issues/1037) · [PR \#1090](https://github.com/jlevy/squares/pull/1090) · [Exact certificates and replay](packing/resources/web/geiserx-exact-1037-2026-11-22/README.md).
+
 <a id="changelog-entry-ozden-264-verified-packing"></a>
 
 #### A Smaller Verified Packing for 264 Squares

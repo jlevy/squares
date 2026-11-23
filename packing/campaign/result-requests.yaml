@@ -36487,6 +36487,17 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/1001#issuecomment-7112923428
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n264-kodaj-improved
+        id: T-308
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-305 to T-309 are on main with the stage 4 review mapped and each adopted as its case's
       house, and the reply on main says what was retained, replayed and reviewed and that the
@@ -38708,6 +38719,28 @@ issues:
       - result: geiserx-rational-297
       - result: geiserx-quadratic-202-263
       - result: geiserx-algebraic-297
+    - url: https://github.com/jlevy/squares/issues/1037#issuecomment-7113804892
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: geiserx-quadratic-202-263
+        id: T-344
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: geiserx-rational-202
+      - result: geiserx-rational-263
+      - result: geiserx-quadratic-202-263
+        id: E-geiserx-1037-quadratic-report
+      - result: geiserx-quadratic-202-263
+        id: E-geiserx-1037-quadratic-feasibility
+        status: confirmed
+      - result: geiserx-quadratic-202-263
+        id: E-geiserx-1037-quadratic-independent-feasibility
+        status: confirmed
+      beads: [think-36ui]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1038
     title: 's(228) ≤ 15.596043116632: improved packing (registration request)'
@@ -38826,6 +38859,15 @@ issues:
       by: jlevy
       kind: follow-up
       reported:
+      - result: n228-later-algebraic-attachment
+    - url: https://github.com/jlevy/squares/issues/1038#issuecomment-7112962303
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n228-kaggle-certificate
+        id: E-ozden-1038-certificate-report
+        status: reviewed
       - result: n228-later-algebraic-attachment
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
@@ -39171,6 +39213,13 @@ issues:
       - result: n18-six-tilt-construction
       - result: n18-global-optimality
       beads: [think-8x11]
+    - url: https://github.com/jlevy/squares/issues/1050#issuecomment-7112922646
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n18-six-tilt-construction
+      - result: n18-global-optimality
     close_when: The intake record gives the disposition and a reply records it on GitHub.
   - number: 1052
     title: 'Lowered upper bound for n = 305 (side 17.945755838742)'

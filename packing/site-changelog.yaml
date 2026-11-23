@@ -6,6 +6,37 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: geiserx-de-winter-202-and-263-verified-packings
+    date: '2026-11-23'
+    title: Two Smaller Verified Packings at 202 and 263 Squares
+    significance:
+      score: 3
+      rationale: >-
+        Two independently verified improvements of about 0.00355 and 0.00879
+        below the preceding certified houses at first contact.
+    topics: [upper-bound, exact-side]
+    categories: [records, regularization]
+    pull_requests: [1090]
+    issues: [1037]
+    result_ids: [T-344]
+    summary: >-
+      Sergio Fernández Rubio (GeiserX) published the layouts, and Joost de Winter
+      refined them and supplied exact certificates using Evan Daniel’s solver.
+      The two packings fit in squares of side at most 14.724372709109 and
+      16.724372709109, respectively. The atlas shows regularized drawings
+      certified at the same exact sides.
+    artifacts:
+      - kind: page
+        label: 202-square case and drawing
+        target: https://squaremath.org/cases/202.html
+      - kind: page
+        label: 263-square case and drawing
+        target: https://squaremath.org/cases/263.html
+    references:
+      - label: Exact certificates and replay
+        target: packing/resources/web/geiserx-exact-1037-2026-11-22/README.md
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/45262101571
   - id: ozden-264-verified-packing
     date: '2026-11-23'
     title: A Smaller Verified Packing for 264 Squares
@@ -3116,6 +3147,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 1090
+  title: 'research: adopt the exact 202- and 263-square GeiserX houses'
+  merged_at: '2026-11-23T20:42:10Z'
+  base_ref: main
+  merge_commit: 7690c7a4b67effd89ae754e0a3cbae36902b73b8
 - number: 1102
   title: "intake: adopt \xD6zden's exact 264-square bound and regularized drawing"
   merged_at: '2026-11-23T19:10:08Z'
@@ -3926,6 +3962,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 1090
   - 1102
   - 1097
   - 1096

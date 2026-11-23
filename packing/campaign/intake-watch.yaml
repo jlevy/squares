@@ -2517,9 +2517,11 @@ repositories:
       finds to SVG. Read the source without running it. The commit publishes
       no packing instance, run result or bound.
   - url: https://github.com/jlevy/squares
-    read_through: f6aa1e2eef678a2371a3f46715d917d62f31c969
+    read_through: 7690c7a4b67effd89ae754e0a3cbae36902b73b8
     read_on: '2026-11-23'
     note: >-
-      Main through #1101. The project already retains #1100's T-341 and T-342,
-      and both adopted records and drawings are live. #1101 updates the README
-      thumbnail from the live homepage. No separate contributor material to import.
+      Main through #1090. #1102 publishes T-343 and the 264-square drawing.
+      #1103 publishes its News entry, records the closing reply, and links the
+      18-square alternate construction. #1090 publishes T-344 and both
+      exact same-side drawings at 202 and 263. Main retains these results
+      and their reviewed source material.
