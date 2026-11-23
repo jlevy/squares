@@ -1,0 +1,14 @@
+components:
+- paper:square-packing-methods-survey
+paths:
+- packing/campaign/result-requests.yaml
+outputs:
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: >-
+  Reviewed the issue cross-references consumed by the Methods Survey's HTML and
+  Markdown. The maintained reporting_issues projection and every issue's opening
+  date match main. The two edited rows settle the equal-side construction at 18
+  and record the closing reply for the published 264 result. The survey reads
+  the result-to-issue mapping and opening dates from this input and uses neither
+  queue status nor replies for its cross-references. The edition stays current.

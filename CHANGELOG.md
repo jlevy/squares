@@ -41,6 +41,20 @@ Published artifacts: [304-square case and regularized drawing](https://squaremat
 
 PRs and supporting records: [PR \#1097](https://github.com/jlevy/squares/pull/1097).
 
+<a id="changelog-entry-ozden-264-verified-packing"></a>
+
+#### A Smaller Verified Packing for 264 Squares
+
+Significance S3: An independently verified improvement at one count, about 0.00164 below the preceding certified house.
+
+Doğa Özden improved the best verified packing for 264 unit squares by about 0.00164, bringing the side of the enclosing square to at most 16.772168305041. The result builds on a packing by Tomáš Kodaj and JoeGun and uses Evan Daniel’s optimizer. Two maintained exact verifiers and an independent checker accepted the witness. The atlas shows a regularized drawing certified at the same side.
+
+Published artifacts: [264-square case and drawing](https://squaremath.org/cases/264.html).
+
+[Publication evidence](https://github.com/jlevy/squares/actions/runs/45246082802).
+
+Issues, PRs and supporting records: [Issue \#1099](https://github.com/jlevy/squares/issues/1099) · [PR \#1102](https://github.com/jlevy/squares/pull/1102) · [Exact witness and replay](packing/resources/web/ozden-s264-upper-bound-2026-11-23/README.md).
+
 <a id="changelog-date-2026-11-14"></a>
 
 ### 2026-11-14
