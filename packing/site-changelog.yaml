@@ -6,6 +6,25 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: evan-daniel-regularized-304-diagram
+    date: '2026-11-23'
+    title: A More Regular Diagram for the 304-Square Packing
+    significance:
+      score: 2
+      rationale: A visual refinement of an existing packing at its published bound.
+    topics: [project]
+    categories: [regularization, site]
+    pull_requests: [1097]
+    summary: >-
+      The atlas selects Evan Daniel’s original regularized diagram for 304 squares.
+      The diagram uses seven angle colors, down from thirteen, and three exact
+      checkers accepted all 46,056 square pairs at the published bound.
+    artifacts:
+      - kind: page
+        label: 304-square case and regularized drawing
+        target: https://squaremath.org/cases/304.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/45124879939
   - id: distinguish-rare-violet-109-pinwheel
     date: '2026-11-23'
     title: A More Distinct Violet in the 109-Square Pinwheel
@@ -3069,6 +3088,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 1097
+  title: 'fix: Publish the verified regularized n304 diagram'
+  merged_at: '2026-11-23T06:33:15Z'
+  base_ref: main
+  merge_commit: 39d52547aea2fd7554032a5118e6068c63ba1ae1
 - number: 1096
   title: 'fix: distinguish the rare violet in the 109-square pinwheel'
   merged_at: '2026-11-23T05:38:32Z'
@@ -3869,6 +3893,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 1097
   - 1096
   - 1095
   - 974

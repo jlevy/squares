@@ -8,7 +8,7 @@ outputs:
 reason: >-
   think-x2gx associates the existing #1055 acknowledgement with De Winter's original
   strict 99/20 claim. The status report no longer asks for a duplicate reply.
-  Rendered the survey from main ce9d1d49fc3b77e090240db30ea914c592281f93 and from the
+  Rendered the survey from main 39d52547aea2fd7554032a5118e6068c63ba1ae1 and from the
   corrected record into empty site directories at the same fixed link revision.
   All 43 generated files, including the prepared HTML, Markdown, and linked assets,
   matched byte for byte. The survey keeps its current edition.

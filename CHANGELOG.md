@@ -27,6 +27,20 @@ First public: 2026-11-23 ([publication evidence](https://github.com/jlevy/square
 
 PRs and supporting records: [PR \#1096](https://github.com/jlevy/squares/pull/1096).
 
+<a id="changelog-entry-evan-daniel-regularized-304-diagram"></a>
+
+#### A More Regular Diagram for the 304-Square Packing
+
+Significance S2: A visual refinement of an existing packing at its published bound.
+
+The atlas selects Evan Daniel’s original regularized diagram for 304 squares. The diagram uses seven angle colors, down from thirteen, and three exact checkers accepted all 46,056 square pairs at the published bound.
+
+Published artifacts: [304-square case and regularized drawing](https://squaremath.org/cases/304.html).
+
+[Publication evidence](https://github.com/jlevy/squares/actions/runs/45124879939).
+
+PRs and supporting records: [PR \#1097](https://github.com/jlevy/squares/pull/1097).
+
 <a id="changelog-date-2026-11-14"></a>
 
 ### 2026-11-14
