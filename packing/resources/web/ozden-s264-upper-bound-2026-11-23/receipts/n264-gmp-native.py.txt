@@ -1,0 +1,60 @@
+import argparse
+import json
+from pathlib import Path
+
+from strif import atomic_output_file
+
+from devtools import evand_arrangement_reports as kernel
+from devtools import upper_bound_reports as reports
+from devtools import upper_bound_sharp_controls as sharp
+
+PACKET = "ozden-s264-upper-bound-2026-11-23"
+COUNT = 264
+
+
+def write_json(path: Path, record: dict) -> None:
+    with atomic_output_file(path) as temporary:
+        temporary.write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("mode", choices=("native", "sharp"))
+    parser.add_argument("--jobs", type=Path)
+    args = parser.parse_args()
+    packet = reports.packet_path(PACKET)
+    if args.mode == "sharp":
+        record = sharp.sharp_controls(packet, COUNT, rational_backend="gmp")
+        if not record["all_as_expected"]:
+            raise RuntimeError("Not all sharp controls returned their expected verdicts")
+        output = sharp.receipt_path(packet, [COUNT], COUNT)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        if output.exists():
+            raise FileExistsError(output)
+        write_json(output, record)
+        print(f"Validated {len(record['controls'])} sharp controls through both GMP routes.")
+        return
+
+    if args.jobs is None:
+        parser.error("native requires a fresh --jobs directory")
+    declaration, facts = reports.replayed_facts(packet)
+    if list(facts) != [COUNT]:
+        raise RuntimeError("Unexpected replay roster")
+    certificate = facts[COUNT]
+    profile = {
+        "witness_prefix": declaration["witness_prefix"],
+        "claim_limitations": declaration["claim_limitations"],
+    }
+    args.jobs.mkdir(parents=True)
+    for control in reports.JOBS:
+        row = kernel.run_case(certificate, control, rational_backend="gmp", **profile)
+        kernel.validate_job(row, certificate, control, **profile)
+        write_json(args.jobs / f"n{COUNT}-{control}.json", row)
+        print(f"Validated n{COUNT} {control} through both GMP routes.", flush=True)
+    reports.certify(packet, args.jobs, workers=1, finished=True)
+    reports.check_certification(packet, [COUNT])
+    print("Native finished-job receipt admitted.")
+
+
+if __name__ == "__main__":
+    main()

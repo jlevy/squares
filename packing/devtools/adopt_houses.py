@@ -3190,6 +3190,34 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-343": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#1099](https://github.com/jlevy/squares/issues/1099)",
+        producer_route=True,
+        ai=(
+            "Özden directed the work of Claude agents, "
+            "who searched, checked and filed the report."
+        ),
+        routes=(
+            "The source used the project’s rational promotion and verifier. "
+            "The maintained replay used GMP arithmetic for both exact routes. "
+            "The independent review read the original rational corners with its own parser."
+        ),
+        lineage=(
+            "The source identifies Tomáš Kodaj’s packing as improved by JoeGun (T-308) "
+            "as the seed, then perturbs and anneals it before refining it with Evan Daniel’s "
+            "ALM+SLP quench. The exact side is about 0.001639293 below T-308 contracted to "
+            "first contact, an improvement under option D. It is about 0.000674848 below "
+            "the separate, earlier certificate in #1037, credited to Sergio Fernández Rubio "
+            "(GeiserX) and Joost de Winter. The source’s smaller cited Kaggle side supplies "
+            "no coordinates."
+        ),
+        third_route=(
+            ", and a separately prompted review verified the exact corner geometry, "
+            "all 1,056 wall inequalities and all 34,716 square pairs with integer projections"
+        ),
+        squares="its four rational corners",
+    ),
     "T-309": Prose(
         author="JoeGun",
         reported="on [jlevy/squares#1001](https://github.com/jlevy/squares/issues/1001)",
@@ -4569,14 +4597,11 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
         "Chaoweeraprasit’s SQUISH packing",
     ),
-    # T-308 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 264, a new
-    # arrangement relative to T-186's packing (44 squares beyond a tenth); the issue says a
-    # 600-second quench with Evan Daniel's code made JoeGun's step.
+    # T-343 refines the T-308 packing and retains its finder and improvement credit.
     264: Credit(
         (KODAJ,),
-        (JOEGUN,),
-        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a quench with Evan "
-        "Daniel’s code",
+        (JOEGUN, OZDEN),
+        "Tomáš Kodaj’s packing, improved by JoeGun and further refined by Doğa Özden",
     ),
     267: _couzo("Xu"),
     # T-289 (adopted on 11 November 2026), Doğa Özden's issue 945: a new arrangement relative

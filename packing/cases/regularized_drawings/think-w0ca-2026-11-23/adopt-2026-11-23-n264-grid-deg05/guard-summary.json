@@ -1,0 +1,10 @@
+{
+  "command_name": "python",
+  "guard_mode": "native pause-only with owned-tree memory and wall caps",
+  "wall_limit_seconds": 330.0,
+  "tree_limit_gib": 1.4,
+  "worker_wall_seconds": 93.858,
+  "outcome": "completed",
+  "guard_exit": 0,
+  "worker_exit": 0
+}

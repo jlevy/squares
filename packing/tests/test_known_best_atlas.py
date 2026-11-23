@@ -2549,7 +2549,8 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # T-340 adds de Winter's issue-1062 packet at 232; JoeGun's packet keeps
     # other counts, so this is one additional source.
     # In the 23 November pass, T-341 and T-342 replaced the sources of 127 and 305.
-    assert len(expected_sources) == 47
+    # T-343 adds Özden's source at 264, while JoeGun's packet still holds 204.
+    assert len(expected_sources) == 48
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2725,7 +2726,8 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     roster then exceeds the current poster edition's three-line credit block. T-336
     adds de Winter as the further improver at 305. His name already appears in the
     printed credit block. The 23 November pass credits Joshua Levy for
-    regularizing 127 and 305, with the printed credit held for the next cut."""
+    regularizing 127 and 305, with the printed credit held for the next cut.
+    T-343 adds Özden's improvement credit at 264 and the print holds his name there too."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
         259: ("Sergio Fernández Rubio",),
@@ -2737,7 +2739,8 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         90: ("jazivxt",),
         109: ("Samanyu-dev",),
         127: ("Joshua Levy",),
-        **dict.fromkeys((204, 232, 264), ("Tomáš Kodaj", "JoeGun")),
+        **dict.fromkeys((204, 232), ("Tomáš Kodaj", "JoeGun")),
+        264: ("Tomáš Kodaj", "JoeGun", "Doğa Özden"),
         305: ("Tomáš Kodaj", "JoeGun", "Joshua Levy"),
     }
     record = json.loads((ATLAS / "bound-citations.json").read_text(encoding="utf-8"))
@@ -2756,7 +2759,7 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         (127, ["Joost de Winter"], ["Joshua Levy"]),
         (204, ["Tomáš Kodaj"], ["JoeGun"]),
         (232, ["Tomáš Kodaj"], ["JoeGun"]),
-        (264, ["Tomáš Kodaj"], ["JoeGun"]),
+        (264, ["Tomáš Kodaj"], ["JoeGun", "Doğa Özden"]),
         (305, ["Tomáš Kodaj"], ["JoeGun", "Joost de Winter", "Joshua Levy"]),
         (237, ["Doğa Özden"], []),
         (268, ["Joost de Winter"], []),
@@ -2771,6 +2774,7 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     assert citations[299]["upper"]["text"] == "de Winter 2026, GitHub"
     assert citations[109]["upper"]["text"] == "Samanyu-dev 2026, GitHub"
     assert citations[109]["upper"]["confirmed_by"] == ["T-335"]
+    assert citations[264]["upper"]["confirmed_by"] == ["T-343"]
     for n in (260,):
         reported = build_bound_citations.load_case(n)["reported_upper_bound"]
         assert reported["found_by"] == ["Evan Daniel"]

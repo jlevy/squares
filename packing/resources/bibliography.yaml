@@ -6309,6 +6309,23 @@ sources:
       is Tomáš Kodaj’s, improved by JoeGun and Joost de Winter. Both maintained
       rational routes and the half-angle area checker accepted the certificate
       for finite feasibility.
+  - key: '[Özden s264 upper bound 2026-11-23]'
+    authors:
+    - Özden
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-23'
+    lineage: builds-on-project
+    credit: Ozden after Kodaj, JoeGun, Levy
+    note: >-
+      Doğa Özden’s exact rational witness for s(264) <= 16.772168305041, rounded upward at
+      12 places, at kenaznia-doga/s264-upper-bound-1677216830 (72c4d195c85b6099002ad6c675b27df40fdaceac) and reported
+      in #1099. His lab reports that it perturbed Tomáš Kodaj’s packing as JoeGun improved it
+      (T-308), annealed and refined it using Evan Daniel’s ALM+SLP quench, and promoted the
+      decimal pose with the Squares Project’s rational promotion tool.
+      Claude agents assisted under Özden’s direction. The certificate and text are licensed
+      CC BY 4.0. The source code and optimizer have MIT notices. Retained in
+      web/ozden-s264-upper-bound-2026-11-23/.
 credited_names:
   Joshua Levy: Levy
   Samanyu-dev: Samanyu-dev

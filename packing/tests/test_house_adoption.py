@@ -1882,7 +1882,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # and lane i1038 moved 228 to Doğa Özden's certificate of issue 1038 (T-334).
     # The 22 November issue-1062 adoption moved 232 to de Winter's rational certificate
     # of the Kodaj-JoeGun packing (T-340). The 23 November pass moved 127 and 305 to
-    # the project's first-party certificates T-341 and T-342.
+    # the project's first-party certificates T-341 and T-342, and 264 from JoeGun's
+    # T-308 to Doğa Özden's refinement (T-343).
     later = {
         **ALGEBRAIC_ADOPTED,
         109: "T-335",
@@ -1920,7 +1921,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
         228: "T-334",
         90: "T-338",
         127: "T-341",
-        264: "T-308",
+        264: "T-343",
         305: "T-342",
         210: "T-317",
         272: "T-322",

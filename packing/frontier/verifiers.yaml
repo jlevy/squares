@@ -10336,3 +10336,37 @@ verifiers:
           Post-freeze maintained pose identity and coordinator Option D comparisons are separately attributed.
     note: Git holds first-party source integrity under OR-16. Existing frozen hashes document the historical
       review boundary; no new code hash pin. The optional identity helper decides no feasibility claim.
+
+  - id: V-ozden-1099-review-check
+    program: check_n264.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    source:
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check_n264.py.txt
+    summary: >-
+      Independently parses the source’s rational-corners data, checks unit-square geometry
+      and containment, and uses exact integer bounding intervals and four projection axes
+      to decide all unordered pairs. It also computes exact squared distances for near pairs.
+    independence_record: docs/project/reviews/review-2026-11-23-ozden-1099.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-output]
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: Separately prompted source-only Stage 4 review of issue #1099.
+      overlaps_producer:
+        extent: none
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source credits Claude agents. The Codex reviewer used the issue and the pinned
+          witness and imported neither producer code nor the project’s geometry or readers.
+    note: >-
+      The retained reading copy matches the reviewed checker, with import ordering adjusted
+      after the successful numerical run. The review describes the initial quoted-zero
+      parser refusal and the completed execution.

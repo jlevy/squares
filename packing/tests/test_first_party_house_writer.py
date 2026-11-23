@@ -1,6 +1,5 @@
 """A project-owned regularized house rebuilds from the certificate its run decided."""
 
-from dataclasses import replace
 from fractions import Fraction
 
 import pytest
@@ -42,10 +41,14 @@ def test_project_house_binds_receipts_to_geometry_instead_of_certificate_bytes(
     assert exact == source.certificate(n)
     assert source.jobs(n, exact)["positive"]["n"] == n
 
-    changed = replace(
-        exact,
-        poses=(replace(exact.poses[0], x=exact.poses[0].x + 1), *exact.poses[1:]),
-    )
+    # Exercise the custody control itself so the test covers the restored mutations.
+    kind, target, mutate = houses._mutants(n)[1]  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert kind == "certificate bytes"
+    assert target == register_candidates.certificate_path(batch, n)
+    changed = register_candidates.admitted(batch, n, mutate(raw))
+    assert changed.side == exact.side
+    assert changed.poses[0].x == exact.poses[0].x + 1
+    assert changed.poses[1:] == exact.poses[1:]
     with pytest.raises(kernel.ReportError, match="full native deciding input differs"):
         source.jobs(n, changed)
 

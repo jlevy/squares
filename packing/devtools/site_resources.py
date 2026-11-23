@@ -402,6 +402,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/kenaznia-doga/s264-upper-bound-1677216830",
+        "Doğa Özden",
+        (
+            "An exact 264-square witness refining the packing by Tomáš Kodaj and JoeGun,"
+            " 1.64e-3 below T-308 (T-343)."
+        ),
+    ),
+    (
         "https://github.com/RobertoOno/squares-in-square",
         "Roberto Ono",
         (

@@ -395,6 +395,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-333](packing/frontier/RESULTS.md) | 299 | `V3` | `C3` | `S3` | `previously-published` | One complete rational certificate proves s(299) <= 17793636991743040580325825384225613703947282755372586749208848013397/1000000000000000000000000000000000000000000000000000000000000000000. |
 | [T-335](packing/frontier/RESULTS.md) | 109 | `V3` | `C3` | `S3` | `previously-published` | The canonical rational reading of Samanyu-dev’s public 7 November 2026 packing proves s(109) <= 77048775744870704249016736832610469086415324701767622918617757120832774961909650280840034508088021596621011577705828367416028128550435308160178796822943658853681668010745854836758324550270597468978493787420957347623/7036874417766398006615713414024855066367484336951114500387011858924703216896760814081444756051720693947120279336617047992243690757003605247166108605326334229018965414512158055871100786464723368461728873374141120512. |
 | [T-337](packing/frontier/RESULTS.md) | 259 | `V3` | `C3` | `S3` | `previously-published` | One exact rational certificate proves s(259) <= 8295008219614994781143527184138157614865452268963473035780950495090016439229989562287054368276315229730904537926946071561900959/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, whose side rounds upward to 16.590016439230 at 12 places. |
+| [T-343](packing/frontier/RESULTS.md) | 264 | `V3` | `C3` | `S3` | `previously-published` | Doğa Özden reports s(264) <= 52413025953251561123543319189069260371128934510917560364364409813461585167232269243571634089458939746021687638193439792537748709459989314659179367503761312109/3124999999999991273353740028372772249916468315131441015972668196711907312117879501595524371952697210414692126830406844613554507152302090371200200000000000000. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -545,7 +546,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 342 | 342 registered, 308 by others |
+| Frontier results | 343 | 343 registered, 309 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -1944,11 +1945,13 @@ case or experiment separately.
 | [Review of FN-1 Original Compressed Input Custody](docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md) | dated review record | record | retained | — |
 | [Samanyu-dev’s s(109) Packing: Confirming Review of the Exact Import](docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md) | dated review record | record | retained | — |
 | [Review of the Rational Certificate in Issue 1062](docs/project/reviews/review-2026-11-21-de-winter-1062-n232.md) | dated review record | record | retained | — |
+| [Independent Review of Özden’s 264-Square Certificate](docs/project/reviews/review-2026-11-23-ozden-1099.md) | dated review record | record | retained | — |
 | [Exact 127-Square Regularization Review](docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md) | dated review record | record | retained | — |
 | [Exact 305-Square Regularization Review](docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md) | dated review record | record | retained | — |
 | [Exact Regularization at 127 Squares](packing/cases/register_candidates/think-4z8z-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
 | [Exact Regularization at 305 Squares](packing/cases/register_candidates/think-huum-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
 | [Drawing Runs for the Exact 127 and 305 Houses](packing/cases/regularized_drawings/think-huum-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [Drawing runs for the T-343 adoption at 264](packing/cases/regularized_drawings/think-w0ca-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
 | [post-adoption-selection.md](packing/cases/regularized_drawings/think-huum-2026-11-23/post-adoption-selection.md) | source retention and archive policy | record | retained | — |
 | `packing/contributors/people/*.md` | hand-maintained registry | record | maintained | — |
 | `packing/site-changelog.yaml` | hand-maintained registry | current | maintained | — |

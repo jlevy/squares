@@ -2829,6 +2829,8 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: case, site and citations credit Samanyu-dev, and the next print edition adds the name.
 #: T-337 credits Sergio Fernández Rubio at 259. The current case credits him and the
 #: existing poster edition carries his name forward to its next cut.
+#: T-343 adds Özden as a further improver at 264. The case, site and citations credit
+#: him now and the print hold keeps the existing edition until the next cut.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(
         (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
@@ -2838,7 +2840,8 @@ PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     90: ("jazivxt",),
     109: ("Samanyu-dev",),
     259: ("Sergio Fernández Rubio",),
-    **dict.fromkeys((204, 232, 264), ("Tomáš Kodaj", "JoeGun")),
+    **dict.fromkeys((204, 232), ("Tomáš Kodaj", "JoeGun")),
+    264: ("Tomáš Kodaj", "JoeGun", "Doğa Özden"),
     127: ("Joshua Levy",),
     305: ("Tomáš Kodaj", "JoeGun", "Joshua Levy"),
 }

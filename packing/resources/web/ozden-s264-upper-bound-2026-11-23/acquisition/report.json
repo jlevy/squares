@@ -1,0 +1,69 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1099",
+  "author": "Doğa Özden",
+  "source_key": "[Özden s264 upper bound 2026-11-23]",
+  "report_evidence": "E-ozden-1099-certificate-report",
+  "receipt_format": "ozden-1099-exact-replay-v1",
+  "witness_prefix": "W-ozden-1099-n",
+  "claim_limitations": "Complete rational corners Witness/v2 for 264 unit squares, promoted from a decimal pose. Certifies finite feasibility and an upper bound at its exact side.",
+  "read_on": "2026-11-23",
+  "read_at_main": "b8bea996e3f25635f42bbd4f2563cbda23d51d3d",
+  "certificates": [
+    {
+      "n": 264,
+      "path": "n-264-candidate.yaml",
+      "format": "witness-corners",
+      "offered": "16.772168305041",
+      "first_committed": "2026-11-23T10:55:30Z"
+    }
+  ],
+  "requested": [
+    264
+  ],
+  "replayed": [
+    264
+  ],
+  "houses": [
+    {
+      "n": 264,
+      "reader": "[JoeGun upper bounds 2026-11-16]",
+      "source_key": "[JoeGun upper bounds 2026-11-16]",
+      "holders": "Tomáš Kodaj, improved by JoeGun",
+      "result": "T-308",
+      "reported_value": "16.7738075980019989",
+      "verified_value": "16.7738075980019989",
+      "evidence": [
+        "E-joegun-1001-exact-feasibility",
+        "E-joegun-1001-review-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 264,
+      "report": "#1037",
+      "url": "https://github.com/jlevy/squares/issues/1037",
+      "holders": "Sergio Fernández Rubio (GeiserX), refined and certified by Joost de Winter",
+      "printed": "16.772843152678",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Doğa Özden’s 264-square packing, submitted in issue 1099",
+    "headline": "Özden’s refinement of the Kodaj–JoeGun packing at 264",
+    "significance": 3,
+    "source_checks": "The source reports that unmodified packing-witness verify and the lab's separately written sqcheck.py accepted the exact witness. It reports an interval check of its decimal search pose. Rational promotion and packing-witness verify share project code.",
+    "credit": "Doğa Özden directed the lab that perturbed Tomáš Kodaj's packing as improved by JoeGun (T-308). The lab reports using its annealer and Evan Daniel's ALM+SLP optimizer. Claude agents assisted under Özden's direction. His agent account kenaznia-doga filed #1099. GeiserX and de Winter retain their separate #1037 credit.",
+    "next_rung": "Retain the native replay and controls and complete a separately prompted Stage 4 review, including arrangement comparisons with T-308 and the earlier report #1037. Adopt under the house rule and retain both strong drawing runs with the selection.",
+    "bead": "think-w0ca",
+    "bibliography": {
+      "authors": [
+        "Özden"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Ozden after Kodaj, JoeGun, Levy",
+      "note": "Doğa Özden's rational corners Witness/v2 for s(264) <= 16.772168305041, published on 23 November 2026 and submitted in #1099. The source says his lab annealed and refined the registry's T-308 packing of Tomáš Kodaj, improved by JoeGun, and used Evan Daniel's ALM+SLP quench. Claude agents assisted under Özden's direction. The witness and text carry CC BY 4.0."
+    }
+  }
+}

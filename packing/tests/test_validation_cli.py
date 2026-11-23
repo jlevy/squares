@@ -3133,8 +3133,8 @@ def test_screen_output_guards_accept_current_and_refuse_previous_pose_findings(
     findings = validate._screen_findings()
     if stale:
         findings = (
-            "324 records screened, 128 with a square that separates (2720 squares), "
-            "302 with a square that translates at all (7558 squares), excluded: none"
+            "324 records screened, 128 with a square that separates (2705 squares), "
+            "302 with a square that translates at all (7447 squares), excluded: none"
         )
     output = (
         "translation escape screen sample check passed: 12 of 324 records replayed "
