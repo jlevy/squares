@@ -39575,8 +39575,15 @@ issues:
       reported:
       - result: n232-rational-follow-up
         id: T-340
+        verification: V3
+        confirmation: C3
         status: confirmed
         position: current
+      - result: n232-rational-follow-up
+        id: E-de-winter-1062-certificate-report
+      - result: n232-rational-follow-up
+        id: E-de-winter-1062-review-exact-feasibility
+        status: confirmed
       beads: [think-eumc]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
