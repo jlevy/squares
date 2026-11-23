@@ -39271,7 +39271,7 @@ issues:
     - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7087112747
       date: '2026-11-22'
       by: jlevy
-      kind: follow-up
+      kind: final
       reported:
       - result: n305-same-side-axis-variants
     close_when: The intake record gives the disposition and a reply records it on GitHub.
@@ -39571,7 +39571,7 @@ issues:
     - url: https://github.com/jlevy/squares/issues/1062#issuecomment-7087507310
       date: '2026-11-22'
       by: jlevy
-      kind: follow-up
+      kind: final
       reported:
       - result: n232-rational-follow-up
         id: T-340
