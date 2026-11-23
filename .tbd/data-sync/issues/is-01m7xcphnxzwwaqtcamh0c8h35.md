@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: exact certificates of GeiserX's published packings
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-20T21:09:48.349Z
-updated_at: 2026-11-22T22:41:44.472Z
+updated_at: 2026-11-23T00:17:55.080Z
 started_at: 2026-11-20T22:45:07.840Z
 ---
 Issue jlevy/squares#1037 (Joost de Winter, 2026-11-18T20:06:25Z), a pointer: Sergio Fernández Rubio (GeiserX) published packings below the register at seven counts, in GeiserX/squares-in-squares (data/submission-best.csv.gz at c00281c2fb4b42a1c7071dc4fd493347cfd5a87b, CC BY 4.0 by the issue). De Winter says he is not the finder and asks that the packings be credited to Fernández Rubio.
@@ -50,3 +50,5 @@ remain open. The alternate algebraic witness at 297 remains unverified.
 22 November UTC. Source and scoped independent review merged in #1082 at cd609c43866272e25fcc0b22d0680ac29089309d after exact senior C, correctness D, and the three required checks. Certificate page run 45075594075 gates the contributor reply. Initial exact-base report-order walk for 202 and 263 passed with no drift or warnings and returns two recorded, unclassified recommendations, including T-244 beside the T-174 house. No registration or adoption decision yet. Published-coordinate comparisons show de Winter's rational forms at 202, 204 and 263 also beat GeiserX's original retained witnesses contracted to first contact. Continue with the remaining source comparisons and the independently reviewed quadratic witness and strong drawing gates.
 
 22 November UTC. Exact production run 45075594075 verified #1082, and posted reply 7086931714 on #1037. Draft #1085 records the public reply, all seven exact first-contact comparisons against the matching original GeiserX layouts, and both quadratic improvements. The exact-base dated walk contains seven recorded/unclassified recommendations; no cross-check warnings or start drift; T-244 is included at n263. Registration and strong drawings remain open, with first 202/263 adapter preparation in flight. The alternative n297 witness with degree-70 side polynomial remains separate.
+
+23 November UTC. T-341 local cases and the two verified quadratic house witnesses are staged. Three grid thresholds and both Evan Daniel count runs completed; selector admitted exact same-side half-degree grid views at both counts, improving all seven drawing measures. Root guarded rendering and publication artifacts are still being regenerated.

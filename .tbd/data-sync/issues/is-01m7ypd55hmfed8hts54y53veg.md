@@ -5,7 +5,7 @@ title: "Triage #1062: de Winter exact n232 witness at the JoeGun local solution"
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: codex-intake-1119-01a1fb
 labels:
   - intake
@@ -14,7 +14,7 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 hold: null
 hold_until: null
 created_at: 2026-11-21T09:18:40.815Z
-updated_at: 2026-11-22T21:43:46.538Z
+updated_at: 2026-11-23T00:17:47.739Z
 started_at: 2026-11-21T09:18:45.531Z
 ---
 Bind the pinned certificate to the previously reported local solution and determine its numerical and attribution relationship to the current house and Option D.
@@ -36,3 +36,5 @@ and release-consumer contracts, generated records, credit and sparse inputs.
 Repairs passed focused validation and four publication comparisons. Required
 hosted CI, two exact-head reviews, merge, production verification, contributor
 reply and ledger receipt remain pending. The author reply draft is external.
+
+23 November UTC. #1062 posted reply 7087507310 and completed closure are verified. #1087 now records it as final with T-340V3/C3 and both evidence IDs stated. Focused check reports no reply due. Close this bead after the receipt lands.

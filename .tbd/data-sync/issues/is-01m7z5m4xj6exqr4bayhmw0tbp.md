@@ -5,7 +5,7 @@ title: "Review #1055 extension: s(20) > 4.99755 and restricted angle theorems"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m7xcpf5d7hhsa84btecxknv8
 hold: null
 hold_until: null
 created_at: 2026-11-21T13:44:38.577Z
-updated_at: 2026-11-22T23:48:17.904Z
+updated_at: 2026-11-23T00:17:46.257Z
 started_at: 2026-11-21T13:44:39.222Z
 ---
 Comment 7058955337 and dad9c3fd mirror report a stronger unrestricted lower bound 99951/20000 and restricted claims on equal absolute tilts, angle diversity and one axis-aligned square. Pin and map reused and new terminal premises and prepare independent review. Preserve the original 99/20 result and its proof/custody separately.
@@ -30,3 +30,5 @@ Comment 7058955337 and dad9c3fd mirror report a stronger unrestricted lower boun
 22 November UTC. Frozen independent bridge checker completed 3,488 local exclusions, 15,696 normal choices and all 12 controls. The 96 zero-cost profiles and global sign/vacancy/graph coverage stay open. Preparing exact source-bound review retention.
 
 23:34 UTC. Independent sign/vacancy check verified 2,400 cases, 29,368 assignments, 234,944 D4 images and 3,671 orbits. Twelve controls passed. Both complete receipts agree except measurements; local bridge and census evidence are staged together. General-path proofs and graph-to-bank coverage remain.
+
+23 November UTC. #1087 exact head df252b6f5a holds the completed bridge and sign/D4 checks and three reply/closure dispositions; hosted gates and deployment remain pending. Separate frozen general-path replay completed all29,008 profiles and20 controls: 23,286 excluded, 5,722 not certified, 67,626 normal choices, 417 bound records. 3.594s supervised, 69,795,840-byte peak worker RSS. Preserve this local scope and await global graph/application checks.
