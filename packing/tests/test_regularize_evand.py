@@ -2484,15 +2484,26 @@ def test_update_recovers_interrupted_install(
     monkeypatch.setattr(author, "REPO", tmp_path)
     view = tmp_path / "n304.yaml.gz"
     backup = view.with_name(f".{view.name}.before-author-install")
-    old = b"witness: {side: 1}\n"
+    common = (
+        f"softschema: {{contract: {drawings.WITNESS_CONTRACT}}}\n"
+        "witness:\n  n: 304\n  side: 1\n  certificate:\n"
+        f"    kind: {drawings.VIEW_KIND}\n    label: {drawings.DRAWING_LABEL}\n"
+        "    derived_from: n304\n"
+    )
+    old = f"{common}    generator: {axis.ALGORITHM}\n".encode()
     new = (
-        "witness:\n  side: 1\n  certificate:\n"
-        f"    generator: {axis.EVAND_AUTHOR_GENERATOR}\n    run: {author.RUN}\n"
+        f"{common}    generator: {axis.EVAND_AUTHOR_GENERATOR}\n    run: {author.RUN}\n"
     ).encode()
     view.write_bytes(gzip.compress(old, mtime=0))
     index = tmp_path / drive.LAYER_INDEX_PATH
     prior = {"path": view.name, "sha256": axis.digest(old)}
-    previous_entry = {"n": author.N, "generator": axis.ALGORITHM, "view": prior}
+    previous_entry = {
+        "n": author.N,
+        "generator": axis.ALGORITHM,
+        "view": prior,
+        "source": {"id": "n304"},
+        "exact_verification": {"passed": True},
+    }
     author_entry = {
         **previous_entry,
         "generator": axis.EVAND_AUTHOR_GENERATOR,
@@ -2545,6 +2556,11 @@ def test_update_recovers_interrupted_install(
     assert gzip.decompress(backup.read_bytes()) == old
     assert gzip.decompress(view.read_bytes()) == new
     if interrupted_after == "view":
+        backup.write_bytes(gzip.compress(b"unrelated view", mtime=0))
+        with pytest.raises(SystemExit, match="differs from the view"):
+            author.main(["--update"])
+        assert gzip.decompress(view.read_bytes()) == new
+        backup.write_bytes(gzip.compress(old, mtime=0))
         altered = drive.read_json(receipt_path)
         altered["comparison"]["before"]["hues"] = 14
         drive.write_json(receipt_path, altered)

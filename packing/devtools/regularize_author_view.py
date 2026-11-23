@@ -14,8 +14,7 @@ import json
 import math
 import time
 from collections.abc import Mapping, Sequence
-from dataclasses import asdict
-from hashlib import sha256
+from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any
 
@@ -28,6 +27,7 @@ from devtools import evand_exact_certificates as evand
 from devtools import regularize_axis_components as axis
 from devtools import regularize_evand as driver
 from devtools import regularize_select as select
+from devtools import render_regularized_atlas as atlas_views
 from sqpack.witness import exact_verify
 from sqpack.yamlio import load_yaml
 
@@ -51,14 +51,13 @@ METHOD = (
 def retained_source(
     root: Path,
 ) -> tuple[evand.Certificate, dict[str, Any], dict[str, str], str]:
-    """Read the certificate and bind its bytes and settings to the archived review."""
-    raw = (root / CERTIFICATE).read_bytes()
-    digest = sha256(raw).hexdigest()
+    """Read the retained certificate, its author settings and its archived review."""
+    text = (root / CERTIFICATE).read_bytes().decode("utf-8")
     review = driver.read_json(root / REVIEW)
-    text = raw.decode("utf-8")
     certificate = evand.parse(text, expected_n=N)
     if (
-        review["sha256"] != digest
+        review["label"] != CERTIFICATE.stem
+        or not Path(review["path"]).as_posix().endswith(f"/{CERTIFICATE.as_posix()}")
         or review["n"] != N
         or review["side"] != evand.literal(certificate.side)
         or review["pairs_expected"] != math.comb(N, 2)
@@ -81,7 +80,8 @@ def retained_source(
         "author": "Evan Daniel",
         "source_commit": SOURCE_COMMIT,
         "certificate": CERTIFICATE.as_posix(),
-        "sha256": digest,
+        # The acquisition packet holds custody. This is the archived review's provenance.
+        "sha256": review["sha256"],
         "author_report": AUTHOR_REPORT.as_posix(),
         "archived_review": REVIEW.as_posix(),
     }
@@ -121,11 +121,18 @@ def current_entry() -> dict[str, Any]:
     return next(row for row in index["entries"] if row["n"] == N)
 
 
-def restore_previous(view: Path, backup: Path, prior_view: Mapping[str, str]) -> None:
+def atlas_view(entry: dict[str, Any], *, at: Path | None = None) -> dict[str, Any]:
+    """Read an indexed view using the renderer's existing artifact contract."""
+    layout = replace(atlas_views.LAYOUT, repo=REPO)
+    if at is not None:
+        entry = {**entry, "view": {**entry["view"], "path": layout.relative(at)}}
+    return atlas_views.view_witness(entry, layout)
+
+
+def restore_previous(view: Path, backup: Path, entry: dict[str, Any]) -> None:
     """Recover the view named by the old index after an interrupted author install."""
+    atlas_view(entry, at=backup)
     original = backup.read_bytes()
-    if axis.digest(gzip.decompress(original)) != prior_view["sha256"]:
-        raise ValueError("the n304 recovery copy does not match the atlas index")
     installed = view.read_bytes()
     if installed == original:
         return
@@ -342,21 +349,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.update and backup.is_file() and entry["generator"] != axis.EVAND_AUTHOR_GENERATOR
     )
     if recovering:
-        restore_previous(view, backup, entry["view"])
+        restore_previous(view, backup, entry)
+    installed = atlas_view(entry) if args.update else None
     admitted, receipt = candidate(entry)
     if not args.update:
         print(json.dumps(receipt, indent=2, default=str))
         return 0
     if not receipt["comparison"]["gains"]:
+        if installed is None or source_problems(REPO, installed):
+            raise ValueError("the installed author drawing does not match its source")
         retained = original_receipt(receipt, recovering=False)
         if backup.is_file():
-            if axis.digest(gzip.decompress(view.read_bytes())) != entry["view"]["sha256"]:
-                raise ValueError("the installed author drawing does not match the atlas index")
-            if (
-                axis.digest(gzip.decompress(backup.read_bytes()))
-                != retained["prior_view"]["sha256"]
-            ):
-                raise ValueError("unexpected n304 recovery copy after installation")
+            atlas_view({**entry, "view": retained["prior_view"]}, at=backup)
             backup.unlink()
         print(f"n={N}: the original author drawing and admission receipt are already published")
         return 0
@@ -394,11 +398,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     # The shared installer writes the view before the index. Keep the incumbent for
     # recovery until both writes succeed, and retain its measured comparison first.
     if not recovering:
-        original = view.read_bytes()
-        if axis.digest(gzip.decompress(original)) != entry["view"]["sha256"]:
-            raise ValueError("the current atlas drawing does not match its index")
         with atomic_output_file(backup) as temporary:
-            temporary.write_bytes(original)
+            temporary.write_bytes(view.read_bytes())
     if recovering and (REPO / RECEIPT).is_file():
         run = original_receipt(receipt, recovering=True)["run"]
     else:
