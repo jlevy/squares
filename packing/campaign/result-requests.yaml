@@ -39141,10 +39141,10 @@ issues:
       claim: A six-tilt packing of 18 unit squares at the exact side (7+sqrt(7))/2.
       source: body
       not_registered: >-
-        Construction feasibility is independently checked and its source is retained.
-        Registry admission is separate from the existing eight-tilt house at the same side.
-      queued: true
-      bead: think-8x11
+        Independent replay confirms Mira Cult’s six-tilt layout at the same exact side as
+        Hämäläinen’s earlier eight-tilt packing. The case records the alternate construction.
+        The exact tie leaves the existing upper bound in the register.
+      queued: false
     - key: n18-global-optimality
       claim: Mira Cult asserts that no packing of 18 unit squares has smaller side.
       source: body
@@ -39752,7 +39752,8 @@ issues:
     title: 's(264) ≤ 16.772168305041: improved packing (registration request)'
     author: kenaznia-doga
     opened: '2026-11-23'
-    state: open
+    state: closed
+    closed: '2026-11-23'
     kind: result-report
     triage: done
     summary: >-
@@ -39779,5 +39780,25 @@ issues:
       queued: false
     beads: [think-w0ca]
     answer_bead: think-w0ca
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/1099#issuecomment-7111660035
+      date: '2026-11-23'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n264-rational-certificate
+        id: T-343
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n264-rational-certificate
+        id: E-ozden-1099-certificate-report
+      - result: n264-rational-certificate
+        id: E-ozden-1099-exact-feasibility
+        status: confirmed
+      - result: n264-rational-certificate
+        id: E-ozden-1099-review-exact-feasibility
+        status: confirmed
+      - result: n264-leaderboard-side-only
     close_when: The result has an intake disposition and its reply is recorded.

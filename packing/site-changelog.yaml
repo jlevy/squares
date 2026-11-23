@@ -6,6 +6,34 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: ozden-264-verified-packing
+    date: '2026-11-23'
+    title: A Smaller Verified Packing for 264 Squares
+    significance:
+      score: 3
+      rationale: >-
+        An independently verified improvement at one count, about 0.00164
+        below the preceding certified house.
+    topics: [upper-bound, exact-side]
+    categories: [records, regularization]
+    pull_requests: [1102]
+    issues: [1099]
+    result_ids: [T-343]
+    summary: >-
+      Doğa Özden improved the best verified packing for 264 unit squares by about
+      0.00164, bringing the side of the enclosing square to at most 16.772168305041.
+      The result builds on a packing by Tomáš Kodaj and JoeGun and uses Evan Daniel’s
+      optimizer. Two maintained exact verifiers and an independent checker accepted
+      the witness. The atlas shows a regularized drawing certified at the same side.
+    artifacts:
+      - kind: page
+        label: 264-square case and drawing
+        target: https://squaremath.org/cases/264.html
+    references:
+      - label: Exact witness and replay
+        target: packing/resources/web/ozden-s264-upper-bound-2026-11-23/README.md
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/45246082802
   - id: evan-daniel-regularized-304-diagram
     date: '2026-11-23'
     title: A More Regular Diagram for the 304-Square Packing
@@ -3088,6 +3116,11 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 1102
+  title: "intake: adopt \xD6zden's exact 264-square bound and regularized drawing"
+  merged_at: '2026-11-23T19:10:08Z'
+  base_ref: main
+  merge_commit: e22e51c597969147cb3b5e398993e82c297c0e84
 - number: 1097
   title: 'fix: Publish the verified regularized n304 diagram'
   merged_at: '2026-11-23T06:33:15Z'
@@ -3893,6 +3926,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 1102
   - 1097
   - 1096
   - 1095
