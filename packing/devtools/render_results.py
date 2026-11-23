@@ -293,7 +293,7 @@ def regularized_drawings(
         "## Regularized Drawings",
         "",
         (
-            f"The atlas draws these counts from views this project regularized at the side "
+            f"The atlas draws these counts from regularized views at the side "
             f"the record already states ([the regularization policy]"
             f"(../../docs/project/policies/regularization-policy.md)): each "
             f"is a regularization of the packing a registered result holds, which keeps "

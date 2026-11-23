@@ -63,6 +63,8 @@ from devtools.regularize_axis_components import (
     ALGORITHM,
     ATLAS_CONTRACT,
     DRAWING_LABEL,
+    EVAND_AUTHOR_CREDIT,
+    EVAND_AUTHOR_GENERATOR,
     EVAND_CREDIT,
     EVAND_GENERATOR,
     GRID_GENERATOR,
@@ -93,6 +95,9 @@ MADE_BY = {
     EVAND_GENERATOR: (
         "Evan Daniel's regularizer's view of it, its contacts re-solved exactly at the "
         "record's side"
+    ),
+    EVAND_AUTHOR_GENERATOR: (
+        "Evan Daniel's original regularized view at the record's exact side"
     ),
     **dict.fromkeys(
         (GRID_GENERATOR, GRID_GENERATOR_V1, GRID_GENERATOR_V2),
@@ -215,7 +220,10 @@ def render(entry: dict[str, Any], layout: Layout = LAYOUT) -> str:
     titled and described as the regularized derived view it is."""
     n = entry["n"]
     generator = entry.get("generator", ALGORITHM)
-    credit = "" if generator == ALGORITHM else f" {EVAND_CREDIT}."
+    credit = ""
+    if generator != ALGORITHM:
+        line = EVAND_AUTHOR_CREDIT if generator == EVAND_AUTHOR_GENERATOR else EVAND_CREDIT
+        credit = f" {line}."
     return render_packing_svg(
         regularized_frame(entry, layout),
         spec=RenderSpec(

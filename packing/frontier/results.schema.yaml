@@ -22,8 +22,8 @@ properties:
     additionalProperties: false
     required: [index, unregistered, items]
     description: >-
-      This project's own regularizations of packings the register already holds, as the
-      atlas's regularized layer draws them (docs/project/policies/regularization-policy.md):
+      Regularizations of packings the register already holds, as the atlas's regularized
+      layer draws them (docs/project/policies/regularization-policy.md):
       one item a drawn count, in the terms of a result's `regularizations` item, with
       `of` the registered result that holds the packing and `view` the layer's view it is
       drawn from. A drawing changes no side, frontier value, evidence tier or credit: a
@@ -40,7 +40,8 @@ properties:
       empty where his regularizer ran unmodified (the owner, 13 October 2026). Generated
       by `devtools.regularized_drawings` from the layer's `index`, which
       `devtools.check_results` holds it to: each `of` registered with the count in its
-      scope, `by` this project, the measurements numbers no lower than zero, and each
+      scope, `by` identifying the project or the author, the measurements numbers no
+      lower than zero, and each
       `measured_in` a repository file; the layer's own check holds each `view`.
     properties:
       index: {const: packing/atlas/known-best/regularized/index.json}
@@ -62,7 +63,7 @@ properties:
           properties:
             n: {type: integer, minimum: 1}
             of: {type: string, pattern: '^T-[0-9]{3}$'}
-            by: {const: project}
+            by: {enum: [project, '[Daniel issue 914 2026-11-05]']}
             method: {type: string, minLength: 1}
             modifications: {type: array, items: {type: string, minLength: 1}}
             side: {enum: [same, solved]}
@@ -71,6 +72,12 @@ properties:
             view:
               type: string
               pattern: '^packing/atlas/known-best/regularized/n-[0-9]{3}-regularized\.yaml\.gz$'
+          if: {properties: {by: {const: '[Daniel issue 914 2026-11-05]'}}}
+          then:
+            properties:
+              n: {const: 304}
+              side: {const: same}
+              method: {pattern: devtools\.regularize_author_view}
 $defs:
   review:
     type: object

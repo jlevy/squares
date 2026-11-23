@@ -55918,16 +55918,17 @@ regularized_drawings:
       view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
     - n: 304
       of: T-273
-      by: project
-      method: regularize_axis_components/2
+      by: "[Daniel issue 914 2026-11-05]"
+      method: "Evan Daniel's original regularization, evand/square-packing@bb4cc78e5b35103c1f177db55e9cf08974e66563, imported and verified by devtools.regularize_author_view"
+      modifications: []
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 46
-        max_move: 0.4038693
-        max_turn_deg: 0.00501006
+        moved: 83
+        max_move: 0.4126673
+        max_turn_deg: 2.46738
       view: packing/atlas/known-best/regularized/n-304-regularized.yaml.gz
     - n: 305
       of: T-336

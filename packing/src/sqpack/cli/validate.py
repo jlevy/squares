@@ -5989,6 +5989,9 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_author_view.py",
+            "packing/devtools/check_half_angle_area.py",
+            "packing/resources/web/evand-issue914-2026-11-05/**/s304_1105_regularized.*",
             "packing/atlas/known-best/regularized-atlas-index.schema.yaml",
             "packing/devtools/census_atlas_contact_shades.py",
             "packing/devtools/check_rational_witness_independent.py",
@@ -6010,6 +6013,9 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_author_view.py",
+            "packing/devtools/check_half_angle_area.py",
+            "packing/resources/web/evand-issue914-2026-11-05/**/s304_1105_regularized.*",
             "packing/devtools/census_atlas_contact_shades.py",
             "packing/devtools/check_rational_witness_independent.py",
             "packing/devtools/upper_bound_packets.py",
