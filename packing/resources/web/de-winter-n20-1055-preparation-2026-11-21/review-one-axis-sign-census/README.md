@@ -99,8 +99,10 @@ This census depends only on the paired-bridge necessary conditions.
 It does not use general-path clauses or the
 [576-certificate polynomial bank](../review-one-axis-bank/README.md).
 
-General five-tile path exclusions, complete separation-graph enumeration, geometric rule
-extraction and graph-to-bank coverage remain open.
+The separate [general-path review](../review-one-axis-general-paths/README.md)
+now classifies all 29,008 local profiles, excluding 23,286 and leaving 5,722 not
+certified. Applying these exclusions to global paths, complete separation-graph
+enumeration, geometric rule extraction and graph-to-bank coverage remain open.
 The source’s 273,584 graphs and 566 used certificates remain producer reports.
 The one-axis theorem has not cleared Stage 4, and neither the angular-diversity theorem
 nor an unrestricted lower bound is accepted by this finite census.

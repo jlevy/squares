@@ -13,8 +13,10 @@ do not enumerate sign assignments, separation graphs or bridge exclusions.
 The separate [bridge review](../review-one-axis-bridges/README.md) now accepts all
 3,488 positive-cost local profiles. The separate
 [sign and symmetry census](../review-one-axis-sign-census/README.md) now retains
-29,368 assignments in 3,671 D4 orbits. General-path exclusions, separation graphs and
-graph-to-certificate coverage remain open for the one-axis theorem. The angular diversity claim also needs the separate large-angle proof.
+29,368 assignments in 3,671 D4 orbits. The
+[general-path review](../review-one-axis-general-paths/README.md) now classifies
+all 29,008 local profiles. Application to global paths, separation graphs, rule
+extraction and graph-to-certificate coverage remain open for the one-axis theorem. The angular diversity claim also needs the separate large-angle proof.
 
 Use the [frozen plan](frozen-plan.md), [checker](checker.py.txt),
 [certificate bank](one_axis_24.json.gz), and [receipt](checker-receipt.json.gz)

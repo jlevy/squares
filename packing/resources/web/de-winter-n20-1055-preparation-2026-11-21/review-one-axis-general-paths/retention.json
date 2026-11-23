@@ -1,0 +1,238 @@
+{
+  "format": "general-path-retention-v1",
+  "source_head": "df252b6f5ac6c51e295def9f28176a42bb5cd5ea",
+  "receipt": {
+    "original_bytes": 14993939,
+    "original_sha256": "a60f45a70cb57d4e1a1e58bcbe01b1f9cf1c527fc80c0e931d7e856af22b33bb",
+    "original_git_blob": "ed24a599b04023febdd50708c7b584fb7f326a9c",
+    "stored_bytes": 444111,
+    "stored_sha256": "32182f37724fe649925fdbf1710d69f42fe64ac42ab892f7ea571f10e581d17c",
+    "compression": "gzip level6, mtime0, empty filename; 64KiB streaming buffer"
+  },
+  "metadata": {
+    "format": "independent-one-axis-general-path-catalogue-v1",
+    "status": "complete-local-general-path-classification",
+    "scope": "Complete conditional local general five-tile path classification for 0-4 transverse jumps only. No application to a vacancy/sign case, separation graph enumeration, rule extraction, graph-to-polynomial-bank coverage, unrestricted result or full Stage 4 acceptance.",
+    "spec_sha256": "73e09d72fa3094ee6e5eecb743428b3a3edb7ae20b3e1af598466fc662910a12",
+    "checker_sha256": "3b85d7e53b4e94a872450b9b61ed6177fca6be113065e067427c59ea05cdd395",
+    "domain": {
+      "half_tangent_lower": "0",
+      "half_tangent_upper": "1/24",
+      "geometry_positive_angle": true,
+      "scalar_bounds_include_zero": true,
+      "board_side": "S < 5",
+      "chain_length": 5,
+      "forward_rank_steps": "exactly one per edge",
+      "transverse_ranks": "Each r_i in {0,1,2,3,4}; adjacent differences in {-1,0,1}",
+      "signs": "Each sign in {-1,0,1}, at most one zero",
+      "coordinate_errors": "Transverse coordinate at rank r differs from nominal rank by d*eta, eta in [-r,4-r], d=(cos(theta)+sin(theta))*(cos(theta)+sin(theta)-1)",
+      "forward_separation": "All four pairs have a separating normal in the chain's forward direction.",
+      "mixed_prerequisite": "1-5d > ((1+cos(theta)+sin(theta))/2)*tan(theta/2)",
+      "vertical_frame": "Forward coordinate y and transverse rank 4-x; tilt sign unchanged."
+    },
+    "counts": {
+      "rank_profiles": 259,
+      "sign_profiles": 112,
+      "local_profiles": 29008,
+      "normal_choices": 67626,
+      "physical_bound_records": 417,
+      "excluded_profiles": 23286,
+      "not_certified_profiles": 5722
+    },
+    "profile_histogram_by_jumps": {
+      "0": 560,
+      "1": 3584,
+      "2": 9408,
+      "3": 10752,
+      "4": 4704
+    },
+    "excluded_by_jumps": {
+      "0": 560,
+      "1": 3488,
+      "2": 8392,
+      "3": 7976,
+      "4": 2870
+    },
+    "not_certified_by_jumps": {
+      "1": 96,
+      "2": 1016,
+      "3": 2776,
+      "4": 1834
+    },
+    "accepted_bridge_regression": {
+      "positive_cost_profiles": 3488,
+      "normal_choices": 15696
+    },
+    "mixed_diagonal_prerequisite": {
+      "power_coefficients": [
+        2,
+        -22,
+        -18,
+        58,
+        -20
+      ],
+      "bernstein_coefficients": [
+        "2",
+        "85/48",
+        "295/192",
+        "35885/27648",
+        "87607/82944"
+      ],
+      "strict_on_closed_interval": true
+    },
+    "controls": [
+      {
+        "control": "degree-six-interpolation",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "zero-path-bound",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "negative-constant",
+        "expected": "refuse",
+        "refusal": "nonnegative",
+        "passed": true
+      },
+      {
+        "control": "negative-right-endpoint",
+        "expected": "refuse",
+        "refusal": "nonnegative",
+        "passed": true
+      },
+      {
+        "control": "vanishing-strict-prerequisite-endpoints",
+        "expected": "refuse",
+        "refusal": "strict-closed-endpoints",
+        "passed": true
+      },
+      {
+        "control": "negative-normal-box-maximum",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "alternating-normal-box-maximum",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "one-jump-bridge-regression",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "raised-board-threshold",
+        "expected": "refuse",
+        "refusal": "nonnegative",
+        "passed": true
+      },
+      {
+        "control": "altered-interpolated-constant",
+        "expected": "refuse",
+        "refusal": "polynomial-identity",
+        "passed": true
+      },
+      {
+        "control": "strict-mixed-diagonal-prerequisite",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "negated-mixed-diagonal-prerequisite",
+        "expected": "refuse",
+        "refusal": "nonnegative",
+        "passed": true
+      },
+      {
+        "control": "zero-jump-path",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "two-jump-path",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "three-jump-path",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "four-jump-path",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "sixteen-straight-normal-choices",
+        "expected": "accept",
+        "passed": true
+      },
+      {
+        "control": "favorable-monotone-positive-path",
+        "expected": "refuse",
+        "refusal": "path-not-certified",
+        "passed": true
+      },
+      {
+        "control": "transverse-jump-of-two",
+        "expected": "refuse",
+        "refusal": "rank-step-domain",
+        "passed": true
+      },
+      {
+        "control": "two-aligned-tiles",
+        "expected": "refuse",
+        "refusal": "sign-domain",
+        "passed": true
+      }
+    ],
+    "profile_roster_sha256": "3af5c8ac3620ce9d6f37bade289efd8f4e67a9dc1cb423737cda799ebb33fc32",
+    "profile_roster_serialization": "UTF-8 json.dumps(profiles, sort_keys=True, separators=(',', ':')) without final newline",
+    "normal_choice_order": {
+      "product": "Left-to-right Cartesian product of the four step-option lists below, as itertools.product order. Each profile retains one bound id per choice, without early stopping.",
+      "same_nonzero": "[('secant',sign)]",
+      "opposite_diagonal": "[('tilted-width',transverse_step)]",
+      "opposite_straight": "[('tilted-width',-1),('tilted-width',+1)]",
+      "aligned_mixed_favorable_diagonal": "[('mixed-inclined',nonzero_sign)]",
+      "aligned_mixed_unfavorable_diagonal": "[('mixed-flat',0)]",
+      "aligned_mixed_straight": "[('mixed-flat',0),('mixed-inclined',nonzero_sign)]",
+      "constants": "secant=1/c; tilted-width=c+s; mixed-inclined=(1+c+s)/(2c); mixed-flat=(1+c+s)/2."
+    }
+  },
+  "worker": {
+    "status": "complete-local-general-path-classification",
+    "counts": {
+      "rank_profiles": 259,
+      "sign_profiles": 112,
+      "local_profiles": 29008,
+      "normal_choices": 67626,
+      "physical_bound_records": 417,
+      "excluded_profiles": 23286,
+      "not_certified_profiles": 5722
+    },
+    "controls": 20,
+    "wall_seconds": 2.1743383330176584,
+    "peak_rss_bytes": 69795840
+  },
+  "supervision": {
+    "command_name": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/runtime/venv/bin/python",
+    "guard_mode": "observe-only",
+    "wall_limit_seconds": 60.0,
+    "tree_limit_gib": 0.25,
+    "worker_wall_seconds": 3.594,
+    "outcome": "completed",
+    "guard_exit": 0,
+    "worker_exit": 0
+  },
+  "guard": {
+    "samples": 3,
+    "maximum_pressure": 1,
+    "maximum_sampled_tree_cost_gib": 0.05
+  },
+  "scope": "Conditional local path classification only; not-certified profiles remain undecided."
+}

@@ -1,0 +1,11 @@
+components:
+- paper:square-packing-methods-survey
+paths:
+- packing/campaign/result-requests.yaml
+outputs:
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: >-
+  Records the exact local general-path catalogue and the posted bridge and sign
+  census reply. Two candidate renders and one exact-base render from 689a8ecf3546
+  reproduced all 43 methods-survey output files byte for byte.
