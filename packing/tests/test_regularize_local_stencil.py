@@ -74,3 +74,54 @@ def test_restart_restores_only_interrupted_count(
     assert view.read_bytes() == b"previous"
     assert marker.read_bytes() == b"unchanged"
     assert not any(path.exists() for path in (state, backup, receipt))
+
+
+def test_new_run_on_a_stencil_count_reaches_admission(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(local, "REPO", tmp_path)
+    old = local.receipt_path(local.RECEIPTS / "old/receipt.json")
+    new = local.receipt_path(local.RECEIPTS / "new/receipt.json")
+    entry = {"generator": local.axis.LOCAL_STENCIL_GENERATOR, "run": {"id": local.run_id(old)}}
+    monkeypatch.setattr(local.census, "read_index", lambda _: {7: entry})
+
+    assert not local.already_installed(7, ["1", "2", "3"], new)
+    with pytest.raises(ValueError, match="original admission receipt"):
+        local.already_installed(7, ["1", "2", "3"], old)
+
+
+def test_installer_rolls_back_an_ordinary_write_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(local, "REPO", tmp_path)
+    view = tmp_path / local.view_path(7)
+    view.parent.mkdir(parents=True)
+    view.write_bytes(b"previous")
+    entry = {"generator": "old"}
+    monkeypatch.setattr(local.census, "read_index", lambda _: {7: entry})
+    receipt = local.receipt_path(local.RECEIPTS / "example/receipt.json")
+
+    def fail(*_args: object, **_kwargs: object) -> None:
+        assert receipt.is_file()
+        view.write_bytes(b"incomplete")
+        raise OSError("injected write failure before committing the index")
+
+    monkeypatch.setattr(local.driver, "admit_views", fail)
+    admitted = local.driver.Admitted(
+        n=7,
+        generator=local.axis.LOCAL_STENCIL_GENERATOR,
+        run={"id": local.run_id(receipt)},
+        source={},
+        side={},
+        view={},
+        provenance={},
+        routes={},
+        decision={},
+        measured={},
+        regularization={},
+        house_after=[],
+    )
+    with pytest.raises(OSError, match="injected write failure"):
+        local.install(admitted, {}, receipt, elapsed=1, cpu=1)
+    assert view.read_bytes() == b"previous"
+    assert not any(path.exists() for path in (*local.pending_paths(receipt), receipt))

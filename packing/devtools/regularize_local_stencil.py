@@ -250,10 +250,16 @@ def prepare(n: int, labels: Sequence[str], run: str) -> tuple[driver.Admitted, d
     return admitted, receipt
 
 
+def run_id(receipt: Path) -> str:
+    return f"local-stencil-{receipt.parent.name}"
+
+
 def already_installed(n: int, labels: Sequence[str], receipt: Path) -> bool:
     """Recognize a completed install only after matching both the recipe and view."""
     entry = census.read_index(REPO).get(n) or {}
-    if entry.get("generator") != axis.LOCAL_STENCIL_GENERATOR:
+    if entry.get("generator") != axis.LOCAL_STENCIL_GENERATOR or entry["run"]["id"] != run_id(
+        receipt
+    ):
         return False
     if not receipt.is_file():
         raise ValueError("the installed stencil needs its original admission receipt")
@@ -353,10 +359,15 @@ def install(
         with atomic_output_file(backup, make_parents=True) as temporary:
             temporary.write_bytes(target.read_bytes())
     driver.write_json(state, prior)
-    driver.write_json(path, {**receipt, "run": run})
-    result = driver.admit_views(
-        [admitted], REPO, generators={axis.LOCAL_STENCIL_GENERATOR: generator}, runs=[run]
-    )
+    try:
+        driver.write_json(path, {**receipt, "run": run})
+        result = driver.admit_views(
+            [admitted], REPO, generators={axis.LOCAL_STENCIL_GENERATOR: generator}, runs=[run]
+        )
+    except Exception:
+        if census.read_index(REPO).get(admitted.n) == prior["entry"]:
+            restore_interrupted(admitted.n, path)
+        raise
     if result["written"] != [admitted.n]:
         restore_interrupted(admitted.n, path)
         raise ValueError(f"the atlas did not accept the stack: {result}")
@@ -384,7 +395,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
     if path is not None:
         restore_interrupted(args.n, path)
-    run = f"local-stencil-{path.parent.name}" if path is not None else "local-stencil-preview"
+    run = run_id(path) if path is not None else "local-stencil-preview"
     admitted, receipt = prepare(args.n, args.stack, run)
     if path is not None:
         install(admitted, receipt, path, time.perf_counter() - start, time.process_time() - cpu)
