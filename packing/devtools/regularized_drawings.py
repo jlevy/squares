@@ -398,6 +398,7 @@ def packing_result(
     source_key: str | None,
     bound_holders: Sequence[str],
     side_at_bound: bool = False,
+    evidence: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> Resolved:
     """The registered result whose packing the drawn entry redraws (see the module).
     `side_at_bound` says the view's side is exactly the case's verified upper bound."""
@@ -414,8 +415,25 @@ def packing_result(
         if in_scope(result["scope"], n)
         and source_key in ((result.get("attribution") or {}).get("source_keys") or [])
     ]
+    first_party = False
+    if not holders and source_key and evidence is not None:
+        from devtools.select_houses import source_key_at  # noqa: PLC0415
+
+        holders = [
+            str(result["id"])
+            for result in results
+            if "attribution" not in result
+            and in_scope(result["scope"], n)
+            and source_key_at(result, evidence, n) == source_key
+        ]
+        first_party = bool(holders)
     if len(holders) == 1:
-        return Resolved(holders[0], "attributes the witness's source")
+        return Resolved(
+            holders[0],
+            "confirms and reports the witness's source"
+            if first_party
+            else "attributes the witness's source",
+        )
     if not holders and side_at_bound and len(bound_holders) == 1:
         return Resolved(
             bound_holders[0], "holds the verified upper bound the witness's side is exactly"
@@ -424,7 +442,12 @@ def packing_result(
         return Resolved(
             None, f"no registered result attributes the witness's source {source_key}"
         )
-    return Resolved(None, f"several results attribute the witness's source: {holders}")
+    return Resolved(
+        None,
+        f"several project results hold the witness's source: {holders}"
+        if first_party
+        else f"several results attribute the witness's source: {holders}",
+    )
 
 
 def rungs(entry: Mapping[str, Any]) -> list[str]:
@@ -838,6 +861,7 @@ def drawn_counts(
             source_key=witness_source_key(entry, repo, source_keys=source_keys),
             bound_holders=holders,
             side_at_bound=exact,
+            evidence=register.evidence,
         )
         found.append(Drawn(entry, resolved, project_modifications(entry)))
     return found

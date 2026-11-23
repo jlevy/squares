@@ -890,7 +890,11 @@ _ADOPTED_HOUSE = re.compile(
 _ADOPTED_ON = re.compile(r"\badopted on (\d{4}-\d{2}-\d{2}) \(T-\d+\)")
 
 
-def house_reason_errors(coverage: Mapping, results: Sequence[Mapping]) -> list[str]:
+def house_reason_errors(
+    coverage: Mapping,
+    results: Sequence[Mapping],
+    evidence: Mapping[str, Mapping[str, Any]],
+) -> list[str]:
     """Hold each superseded row's reason, where it names the house, to its `superseded_by`.
 
     A row says what beats it in prose: "T-NNN's exact side is smaller", or "the house
@@ -899,14 +903,14 @@ def house_reason_errors(coverage: Mapping, results: Sequence[Mapping]) -> list[s
     selected source; when an adoption moves the count again the writer re-points the row,
     and a reason left naming the earlier house is stale, which is what #518's review (A1)
     and #553's (B3) found by reading. Here the entry a reason names must be one whose
-    attribution names the source key of the source the row is superseded by, and the
+    attribution names the source key of the source the row is superseded by, or whose
+    first-party report and confirming evidence identify that source at the count. The
     day must be the one the count's selected override says its house was adopted.
     """
+    from devtools.select_houses import source_key_at  # noqa: PLC0415
+
     sources = {str(source["id"]): source for source in coverage["sources"]}
-    keys = {
-        str(entry["id"]): set((entry.get("attribution") or {}).get("source_keys") or ())
-        for entry in results
-    }
+    entries = {str(entry["id"]): entry for entry in results}
     overrides = {int(entry["n"]): entry for entry in coverage["selected_overrides"]}
     errors: list[str] = []
     for row in coverage["superseded_reports"]:
@@ -930,12 +934,18 @@ def house_reason_errors(coverage: Mapping, results: Sequence[Mapping]) -> list[s
                     f"it, was {held}"
                 )
         source_key = str((sources.get(by) or {}).get("source_key") or "")
-        errors.extend(
-            f"{where} names {result} as the house that beats it, but is superseded by "
-            f"{by}, which is not {result}'s source"
-            for result in named
-            if source_key not in keys.get(result, set())
-        )
+        for result in named:
+            entry = entries.get(result, {})
+            if "attribution" in entry:
+                keys = (entry.get("attribution") or {}).get("source_keys") or ()
+            else:
+                key = source_key_at(entry, evidence, n)
+                keys = (key,) if key else ()
+            if source_key not in keys:
+                errors.append(
+                    f"{where} names {result} as the house that beats it, but is superseded "
+                    f"by {by}, which is not {result}'s source"
+                )
     return errors
 
 
@@ -1096,7 +1106,9 @@ def main() -> int:
         if source.get("claims_record")
     }
     errors.extend(selection_errors(coverage, baseline, claims, adopted_house_sources()))
-    errors.extend(house_reason_errors(coverage, results))
+    errors.extend(
+        house_reason_errors(coverage, results, {str(entry["id"]): entry for entry in evidence})
+    )
 
     cases = {
         case["n"]: case

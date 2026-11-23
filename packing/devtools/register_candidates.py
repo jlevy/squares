@@ -20,8 +20,8 @@ file to it, and the repository holds the file since (OR-16). Sources include:
   every read holds its exact side to the solved side the run's report, retained under
   ``cases/regularized_drawings/``, records for the output the selection held at row 3;
 - **regularized**: a regularizer's output, copied from a run's
-  ``n-N/regularize.cert``. The retained digest identifies the specific pose and the
-  run's report binds the exact side to its three passed routes and row-3 decision.
+  ``n-N/regularize.cert``. The run's report binds the exact side to its three passed
+  routes and row-3 decision.
 - **refined**: an exact restart recertified from a saved pose, copied from
   ``n-N/refined.cert`` with its own verification report.
 - **l-strip**: a house certificate at a smaller count, read through its import packet's
@@ -37,7 +37,9 @@ exact routes, ``sqpack.witness.exact_verify`` and
 ``receipts/exact-certification-nNNN.json.xz``; and by the six sharp controls of
 `devtools.upper_bound_sharp_controls`, at exact contact and 1e-30 past it, into
 ``receipts/sharp-controls-nNNN.json``. A finite certificate proves an upper bound and
-nothing more.
+nothing more. When a retained receipt is read, ``check_receipt`` binds every exact
+input scalar to the certificate through ``kernel.validate_job``, so an equivalent text
+encoding reuses the result and changed geometry is refused.
 
 From ``packing/``, with the project interpreter::
 
@@ -52,7 +54,6 @@ From ``packing/``, with the project interpreter::
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import math
 import subprocess
@@ -346,10 +347,6 @@ def admitted(batch: Batch, n: int, raw: bytes) -> legacy.Certificate:
     if candidate.kind == SOLVE:
         _require(found.side == solved_side(candidate), f"n={n}: not the run's solved side")
     elif candidate.kind in (REGULARIZED, REFINED):
-        _require(
-            hashlib.sha256(raw).hexdigest() == candidate.sha256,
-            f"n={n}: {candidate.kind} certificate differs from the retained pose",
-        )
         side = (
             regularized_side(candidate)
             if candidate.kind == REGULARIZED

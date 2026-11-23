@@ -1,9 +1,11 @@
 """A project-owned regularized house rebuilds from the certificate its run decided."""
 
+from dataclasses import replace
 from fractions import Fraction
 
 import pytest
 
+from devtools import evand_arrangement_reports as kernel
 from devtools import register_candidates
 from devtools import upper_bound_houses as houses
 from devtools import upper_bound_reports as reports
@@ -23,13 +25,29 @@ def test_n127_project_house_rebuilds_the_registered_certificate() -> None:
     assert expected["certificate"]["result"]["verification_passed"] is True
 
 
-def test_project_house_refuses_a_different_copy_of_the_certified_pose() -> None:
-    batch = register_candidates.N127
-    raw = register_candidates.certificate_path(batch, 127).read_bytes()
-    with pytest.raises(
-        register_candidates.CandidateError, match="differs from the retained pose"
-    ):
-        register_candidates.admitted(batch, 127, raw + b"\n")
+@pytest.mark.parametrize(
+    ("batch", "result", "key"),
+    [
+        (register_candidates.N127, "T-341", reports.PROJECT_N127_KEY),
+        (register_candidates.N305, "T-342", reports.PROJECT_N305_KEY),
+    ],
+)
+def test_project_house_binds_receipts_to_geometry_instead_of_certificate_bytes(
+    batch: register_candidates.Batch, result: str, key: str
+) -> None:
+    n = batch.candidates[0].n
+    source = houses.project_candidate_source(result, key)
+    raw = register_candidates.certificate_path(batch, n).read_bytes()
+    exact = register_candidates.admitted(batch, n, raw + b"\n")
+    assert exact == source.certificate(n)
+    assert source.jobs(n, exact)["positive"]["n"] == n
+
+    changed = replace(
+        exact,
+        poses=(replace(exact.poses[0], x=exact.poses[0].x + 1), *exact.poses[1:]),
+    )
+    with pytest.raises(kernel.ReportError, match="full native deciding input differs"):
+        source.jobs(n, changed)
 
 
 def test_n305_project_house_rebuilds_the_gmp_checked_certificate() -> None:
