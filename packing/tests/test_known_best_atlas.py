@@ -2536,7 +2536,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # other counts, so this is one additional source.
     # T-341 adds the issue-1037 quadratic packet at 202 and 263. The earlier
     # sources retain other houses, so the poster adds one source and holds the
-    # finder’s name for the next poster edition.
+    # finder's name for the next poster edition.
     assert len(expected_sources) == 48
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
