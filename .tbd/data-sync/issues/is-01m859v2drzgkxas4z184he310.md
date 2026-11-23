@@ -5,7 +5,7 @@ title: Diagnose failed grid-slack rows and test localized grid repairs
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: codex-exact-grid-repair-1123
 labels:
   - regularization
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-23T22:53:46.287Z
-updated_at: 2026-11-23T23:25:20.470Z
+updated_at: 2026-11-23T23:41:59.603Z
 started_at: 2026-11-23T23:20:33.404Z
 ---
 The manual review of the deployed defaults measured 232 (112 uneven aligned squares),
@@ -60,3 +60,7 @@ same or a smaller exact side, require both independent maintained routes to acce
 the full placement, and apply the existing improvement rule to the measured drawing.
 A time limit or a failed search with a restricted model does not settle feasibility.
 Coordinate residual angle work with think-huum and manual review tooling with think-nijx.
+
+## Notes
+
+Astra review and guarded experiments: the exact two-square 127 stack on T-341 passes both 8001-pair routes and row 10, fixes both uneven squares, and improves totals 259/293 to 266/300 with no individual losses. On 596a0c7038 with release proof and pin at 8a7b8f1bc5. 259 anchored pair sample retains 21 exact selected-row violations in both variants; 232 and 305 reached the wall deadline within their first exact settling variant. Retained raw logs are in grid-repair-20261123 in the external drawing audit evidence. After publication, the next selected entry is 259 alternate axes on named conflicts before narrowing a local exact solve; no current view switches at those three counts.
