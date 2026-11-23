@@ -5,15 +5,19 @@ title: "Import #1042's comment 7022143149: de Winter's 155 lower bounds from 18 
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 6
 delegate: codex-intake-1119-01a1fb
 labels: []
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+child_order_hints:
+  - is-01m82ymsrjqg0rd0g49rn5ppkb
+  - is-01m82yn2j4z3xf1h0bb8jqsd7t
+  - is-01m82yn9jsfjm5f26a4ytmk1bf
 hold: null
 hold_until: null
 created_at: 2026-11-20T17:13:35.041Z
-updated_at: 2026-11-22T23:48:22.217Z
+updated_at: 2026-11-23T00:59:53.815Z
 started_at: 2026-11-22T23:26:20.297Z
 ---
 Found in stage 1 of think-fv42 (lane c15-lower, 20 November 2026). Joost de Winter's comment 7022143149 on jlevy/squares#1042 (created 21:02:44Z on 19 November 2026, edited 02:02:32Z on 20 November) requests registration of 155 strict improvements to lower bounds on s(n), at counts 18, 20, 26-31, 37-43, 50-58, 65-75, 82-94, 101-115, 122-125, 128-138, 145-148, 152-163, 179-189, 207-218, 235-240, 242-246, 248, 267-272, 274-279, 281, 301-313 (the comment's own list; 19 was withdrawn after T-194).
