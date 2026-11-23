@@ -1,0 +1,69 @@
+{
+  "format": "independent-one-axis-graph-pilot-freeze-v1",
+  "status": "prepared-before-first-execution",
+  "files": {
+    "check_graph_pilot.py": {
+      "bytes": 21957,
+      "sha256": "62da43f5300146146de221f6e3291afcc4f363f43332085ab6e760c00a25d317"
+    },
+    "implementation-freeze.md": {
+      "bytes": 6302,
+      "sha256": "46d6f49d253a7d910a0daa8d516834397ed8615190340d2fd34c21e684eb9b2a"
+    },
+    "graph-pilot-plan.md": {
+      "bytes": 5485,
+      "sha256": "1077cc5039cbc10de8ed2ec7382d3d9986cf6e54f838ec13e0069c6bc4b9c43d"
+    },
+    "case-clauses.json.gz": {
+      "bytes": 785142,
+      "sha256": "916f3c5692170312257d014126b6f64a4154648f0b474040ca7c771a97785808",
+      "original_bytes": 24888016,
+      "original_sha256": "d7dd3ba492405d5b9a61dbd6a18a21164dc9c18b9b1b64d6d4633de6c9f40237"
+    },
+    "strict-supervisor.py": {
+      "bytes": 4943,
+      "sha256": "5d1d513d393453ba070a52d12175a5b657b7fee3d2d3049f983ae06b61368206"
+    }
+  },
+  "selection": [
+    0,
+    244,
+    489,
+    734,
+    978,
+    1223,
+    1468,
+    1712,
+    1957,
+    2202,
+    2446,
+    2691,
+    2936,
+    3180,
+    3425,
+    3670
+  ],
+  "expected": {
+    "selected_cases": 16,
+    "source_cases_parsed": 3671,
+    "controls": 17,
+    "graph_count": "derive and report; no expected producer comparison"
+  },
+  "limits": {
+    "supervised_seconds": 60,
+    "internal_seconds": 55,
+    "owned_tree_gib": 0.25,
+    "internal_worker_rss_gib": 0.23,
+    "admission_pressure": 1,
+    "stop_pressure": 2,
+    "search_nodes": 1000000,
+    "total_models": 100000,
+    "models_per_case": 50000,
+    "json_parser_buffer_bytes": 1048576,
+    "raw_output_bytes": 16777216,
+    "compressed_output_bytes": 4194304
+  },
+  "scheduling": "Coordinator explicitly permits overlap with its guarded paper comparison and remote sweep at pressure1 under these strict caps; ping immediately before launch.",
+  "exposure": "Prior source-solver reading disclosed; new first-party enumeration and direct truth-table evaluator; no producer imports.",
+  "scope": "Only selected sixteen Boolean model sets; no full graph census, bank coverage or theorem promotion."
+}

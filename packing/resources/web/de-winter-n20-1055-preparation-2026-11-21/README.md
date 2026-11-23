@@ -91,6 +91,9 @@ modified.
 | `review-one-axis-sign-census/sign-census.json.gz` | receipt | `ddda8efa9ec50b03d75cf444dcacc6547642dd93` | `45d16648622df9321d4ca3105bf3b2014b049e3774f3b89b3955fbd8ddd4654a` |
 | `review-one-axis-sign-census/sign-census-isolated.json.gz` | receipt | `3cd64b80b74221bfbd0302d5b1ac5af3ef1033a0` | `fc75c5853c16cc99e3cbdda6661ddcfb5a0d6d2b0698c47c9f7747351ccd96fe` |
 | `review-one-axis-general-paths/general-path-catalogue.json.gz` | receipt | `ed24a599b04023febdd50708c7b584fb7f326a9c` | `a60f45a70cb57d4e1a1e58bcbe01b1f9cf1c527fc80c0e931d7e856af22b33bb` |
+| `review-one-axis-path-covariance/path-covariance.json.gz` | receipt | `765b49a96829d2f5122a65f1af4475b3634deb21` | `2a9a4d4df1c2e42b345225ebb1dfc5417c3a121e1562056e3a2d30456a533a90` |
+| `review-one-axis-case-clauses/results/case-clauses.json.gz` | receipt | `731a840b602de44262fd81b2537642f6186313ef` | `d7dd3ba492405d5b9a61dbd6a18a21164dc9c18b9b1b64d6d4633de6c9f40237` |
+| `review-one-axis-graph-pilot/results/graph-pilot.json.gz` | receipt | `77ef180183fb3c82c1613db7b0197414c284a386` | `d72757517d73ea27d483b5c10efe65de9b5072753a8b2c879f43ec7ecfe08352` |
 
 ## Original Gzip Files
 
@@ -99,14 +102,23 @@ modified.
 | `source/equal_tilt_through_24.json.gz` | upstream | `83a746a504c71501682bc81769f3665a2d895c6e` | `009441b65a3364e5f2abc5736a07dc46632dfba32b03d880780fb7c6849e238f` |
 | `review-one-axis-bank/one_axis_24.json.gz` | upstream | `69cdbf53f097cc89cb136adca3bb4bb81a71ccfc` | `451b1116cf5b6eaa78ecc8233ee4e4c931537e6dfd3bd4fba2a6d91b1922d257` |
 
-The [independent one-axis polynomial-bank review](review-one-axis-bank/README.md) accepts
-576 conditional certificates. The [independent bridge review](review-one-axis-bridges/README.md)
-now excludes all 3,488 positive-cost local profiles through 15,696 normal choices.
-The [independent sign and symmetry census](review-one-axis-sign-census/README.md)
-now checks all 2,400 vacancy/aligned-position cases, retains 29,368 assignments and
-verifies their 3,671 D4 orbits. The [general-path review](review-one-axis-general-paths/README.md)
-classifies all 29,008 local profiles: 23,286 are excluded and 5,722 are not certified.
-Application to global paths, separation-graph enumeration, rule extraction and
+The [independent one-axis polynomial-bank review](review-one-axis-bank/README.md)
+accepts 576 conditional certificates.
+The [independent bridge review](review-one-axis-bridges/README.md) now excludes all
+3,488 positive-cost local profiles through 15,696 normal choices.
+The [independent sign and symmetry census](review-one-axis-sign-census/README.md) now
+checks all 2,400 vacancy/aligned-position cases, retains 29,368 assignments and verifies
+their 3,671 D4 orbits.
+The [general-path review](review-one-axis-general-paths/README.md) classifies all 29,008
+local profiles: 23,286 are excluded and 5,722 are not certified.
+The [path covariance audit](review-one-axis-path-covariance/README.md) checks all 18,128
+occupied paths and their D4 maps.
+The [case-to-clause audit](review-one-axis-case-clauses/README.md) binds all 3,671
+canonical cases to 554,159 path applications: 339,191 are excluded and 214,968 remain
+not certified. A separate
+[sixteen-case graph pilot](review-one-axis-graph-pilot/README.md) completely enumerates
+1,280 Boolean models for its predeclared selection and passes 17 controls.
+Complete all-case separation-graph enumeration, geometric rule extraction and
 graph-to-certificate coverage remain open.
 
 <!-- This document follows common-doc-guidelines.md.

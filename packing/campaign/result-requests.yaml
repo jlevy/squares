@@ -39359,9 +39359,15 @@ issues:
         census checks all 2,400 vacancy/aligned-position cases and 29,368 sign assignments,
         verifies 234,944 D4 images and 3,671 orbits, and passes 12 controls. The independent
         general-path checker classifies 29,008 local profiles through 67,626 normal choices:
-        23,286 are excluded and 5,722 are not certified; all 20 controls pass. Application
-        to global paths, separation-graph enumeration, rule extraction and graph-to-certificate
-        coverage remain open; these restricted checks do not accept the full theorem.
+        23,286 are excluded and 5,722 are not certified; all 20 controls pass. A separate
+        covariance audit checks 18,128 occupied paths, 960 D4 geometry maps and 58,016 local
+        profile comparisons with 13 controls. A complete case-to-clause audit binds all
+        3,671 canonical cases to 554,159 path applications: 339,191 are excluded and 214,968
+        remain not certified; its 13 controls pass. A separately frozen sixteen-case graph
+        pilot completely enumerates 1,280 Boolean models for that selection and passes
+        17 controls. Complete all-case separation-graph enumeration, geometric rule extraction
+        and graph-to-certificate coverage remain open; these restricted checks do not accept
+        the full theorem.
       queued: true
       bead: think-guls
     beads:
@@ -39395,7 +39401,6 @@ issues:
       kind: follow-up
       reported:
       - result: n20-one-axis-equal-magnitude
-      beads: [think-guls]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
@@ -39460,7 +39465,6 @@ issues:
       kind: follow-up
       reported:
       - result: n26-n318-final-lower-166
-      beads: [think-uz7g]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
@@ -39593,7 +39597,6 @@ issues:
       - result: n232-rational-follow-up
         id: E-de-winter-1062-review-exact-feasibility
         status: confirmed
-      beads: [think-eumc]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Compare the submitted exact fraction and geometry with both T-307's adopted

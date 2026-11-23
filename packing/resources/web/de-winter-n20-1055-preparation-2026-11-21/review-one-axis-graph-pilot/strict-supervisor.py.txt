@@ -1,0 +1,112 @@
+"""Run one owned intake command group under a passive macOS memory guard."""
+from pathlib import Path
+import json
+import os
+import signal
+import subprocess
+import sys
+import time
+
+GUARD = Path("/Users/levy/.agents/skills/memory-guard/memory_guard.py")
+JOURNAL_POLL = 0.25
+STARTUP_TIMEOUT = 20
+
+
+def terminate_owned(child: subprocess.Popen) -> None:
+    if child.poll() is not None:
+        return
+    try:
+        os.killpg(child.pid, signal.SIGTERM)
+        child.wait(timeout=5)
+    except ProcessLookupError:
+        pass
+    except subprocess.TimeoutExpired:
+        os.killpg(child.pid, signal.SIGKILL)
+        child.wait()
+
+
+def stop_handler(signum: int, frame: object) -> None:
+    raise KeyboardInterrupt
+
+
+def read_samples(path: Path) -> list[dict]:
+    if not path.is_file():
+        return []
+    data = path.read_text()
+    return [row for line in data.splitlines(keepends=True) if line.endswith("\n")
+            and (row := json.loads(line)).get("record") == "sample"]
+
+
+def main() -> int:
+    name, wall_limit_value, tree_limit_value, *command = sys.argv[1:]
+    prefix = Path(name)
+    wall_limit, tree_limit = float(wall_limit_value), float(tree_limit_value)
+    result = {"command_name": command[0], "guard_mode": "observe-only",
+              "wall_limit_seconds": wall_limit, "tree_limit_gib": tree_limit}
+    observer = None
+    with (
+        prefix.with_suffix(".worker.log").open("x") as work_log,
+        prefix.with_suffix(".guard.stderr").open("x") as guard_log,
+    ):
+        child = subprocess.Popen(
+            ["/bin/bash", "-c", 'read -r go && test "$go" = go && exec "$@"', "guarded", *command],
+            stdin=subprocess.PIPE, stdout=work_log, stderr=subprocess.STDOUT,
+            start_new_session=True, text=True,
+        )
+        try:
+            guard_command = [sys.executable, "-B", str(GUARD), "--pid", str(child.pid)]
+            preflight = subprocess.run(
+                [*guard_command, "--once", "--format", "json"],
+                text=True, stdout=subprocess.PIPE, stderr=guard_log, timeout=STARTUP_TIMEOUT,
+            )
+            prefix.with_suffix(".preflight.json").write_text(preflight.stdout)
+            initial = json.loads(preflight.stdout)
+            if preflight.returncode or initial["pressure"] != 1 or initial["tree_cost_gb"] > tree_limit:
+                raise RuntimeError("pressure or footprint exceeds the start limit")
+            journal = prefix.with_suffix(".jsonl")
+            observer = subprocess.Popen(
+                [*guard_command, "--observe-only", "--no-progress", "--interval", "1", "--log", str(journal)],
+                stdout=guard_log, stderr=guard_log,
+            )
+            deadline = time.monotonic() + STARTUP_TIMEOUT
+            while not read_samples(journal):
+                if observer.poll() is not None or time.monotonic() > deadline:
+                    raise RuntimeError("memory guard did not start")
+                time.sleep(JOURNAL_POLL)
+            if any(sample["host"]["pressure"] != 1 or sample["tree"]["cost_gb"] > tree_limit
+                   for sample in read_samples(journal)):
+                raise RuntimeError("pressure or footprint changed before worker admission")
+            assert child.stdin is not None
+            child.stdin.write("go\n")
+            child.stdin.close()
+            started = time.monotonic()
+            while child.poll() is None:
+                if observer.poll() is not None:
+                    raise RuntimeError("memory guard telemetry stopped")
+                if time.monotonic() - started > wall_limit:
+                    raise RuntimeError("wall limit reached")
+                for sample in read_samples(journal):
+                    if sample["host"]["pressure"] >= 2 or sample["tree"]["cost_gb"] > tree_limit:
+                        raise RuntimeError("memory limit reached")
+                time.sleep(JOURNAL_POLL)
+            result["worker_wall_seconds"] = round(time.monotonic() - started, 3)
+            result["outcome"] = "completed" if child.returncode == 0 else "worker failed"
+            return child.returncode
+        except (KeyboardInterrupt, OSError, RuntimeError, subprocess.TimeoutExpired, ValueError) as error:
+            result["outcome"] = str(error) or type(error).__name__
+            terminate_owned(child)
+            return 3
+        finally:
+            if observer is not None and observer.poll() is None:
+                observer.send_signal(signal.SIGINT)
+                result["guard_exit"] = observer.wait(timeout=10)
+            if observer is not None and observer.poll() is not None:
+                result["guard_exit"] = observer.returncode
+            result["worker_exit"] = child.poll()
+            prefix.with_suffix(".run.json").write_text(json.dumps(result, indent=2) + "\n")
+            print(json.dumps(result))
+
+
+if __name__ == "__main__":
+    signal.signal(signal.SIGTERM, stop_handler)
+    raise SystemExit(main())

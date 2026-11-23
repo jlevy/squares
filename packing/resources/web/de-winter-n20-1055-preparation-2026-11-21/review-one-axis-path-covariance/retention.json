@@ -1,0 +1,33 @@
+{
+  "format": "one-axis-covariance-portable-retention-v1",
+  "preparation_base": "9d941fb44e7451de58bf9d47ee6f32f213d0c3b9",
+  "scope": "Complete occupied-path geometry, local polynomial/verdict covariance and D4 clause mapping; no graph enumeration or bank coverage.",
+  "receipt": {
+    "original_bytes": 1489518,
+    "original_sha256": "2a9a4d4df1c2e42b345225ebb1dfc5417c3a121e1562056e3a2d30456a533a90",
+    "original_git_blob": "765b49a96829d2f5122a65f1af4475b3634deb21",
+    "stored_bytes": 208695,
+    "stored_sha256": "3485f7e20e375fa686eb7426d75cccb26d95c41520d15984c7af63acb61a7509",
+    "compression": "gzip level6, mtime0, empty filename; 64KiB streaming buffer"
+  },
+  "raw_roundtrip_verified": true,
+  "frozen_name_resolution": [
+    {
+      "original_local_name": "check_path_covariance.py",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-path-covariance/checker.py.txt"
+    },
+    {
+      "original_local_name": "general-path-catalogue.json.gz",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-general-paths/general-path-catalogue.json.gz"
+    }
+  ],
+  "input_bytes_duplicated": false,
+  "source_freeze_unchanged": true,
+  "execution": {
+    "worker_exit": 0,
+    "guard_exit": 0,
+    "supervised_seconds": 3.838,
+    "worker_seconds": 3.5525694169919007,
+    "worker_peak_rss_bytes": 116080640
+  }
+}
