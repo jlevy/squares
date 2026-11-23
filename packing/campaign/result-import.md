@@ -1284,6 +1284,9 @@ Several counts can share a bead for the same remaining work.
 Give a reported visual concern the same disposition when the intake pass finds no
 admissible replacement.
 Record the exact reason the other candidates were held.
+Use the
+[residual grid review](../../docs/project/guides/regularization-process.md#review-residual-grid-unevenness)
+to investigate the displayed geometry and track any needed generator improvements.
 
 **Check the live drawing.** After the deployment verifies, check each moved count’s case
 page and the homepage atlas in Regularized mode against the selected rendering and flip

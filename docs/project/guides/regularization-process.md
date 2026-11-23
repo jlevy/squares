@@ -351,6 +351,52 @@ the two to each other.
 A record lapses with its witness or its generator’s version, as at n = 211, which the
 owner admitted on 16 October 2026; `--check-atlas` names which lapsed.
 
+### Review Residual Grid Unevenness
+
+Use this review for a reported uneven grid, a regression from the previous drawing, or a
+high residual you select from the measures in `default-drawings.json`. A settled
+selection records what the runs found.
+Its drawing may still have uneven aligned squares.
+
+1. Identify the displayed house or view in `default-drawings.json` and inspect it in
+   Regularized mode. Compare it with the previous drawing or the retained alternatives at
+   the same scale and orientation.
+   Label the layer view separately whenever it differs from the displayed default.
+
+2. Measure the displayed source from the deployed checkout, running from `packing/`:
+
+   ```bash
+   python -m devtools.census_drawing_regularity --default-drawings --n 232 259 \
+     --workers 1 --output "$RUNS/residual-grids.json"
+   ```
+
+   Use the uneven and near-axis square lists and the open-face counts to identify the
+   affected blocks in the drawing.
+   A tilted neighbour or open region can explain a light boundary square.
+   A staggered or misaligned neighbour suggests an internal offset.
+   A slack face is measured by moving one square at a time, so joint movement still
+   needs a placement test.
+   The census leaves a square’s faces unclassified when its contact replica disagrees
+   with the renderer.
+
+3. Read the retained generator and selection receipts.
+   Record the visible issue and the step that stopped the correction, such as a fixed
+   contact model that found no change, a time limit, an exact overlap, an exact side
+   above the bound, or a regression on the drawing measures.
+   Compare the actual snap sets before repeating angle thresholds.
+   Give a timeout or a missing receipt an inconclusive disposition.
+
+4. If there is a plausible way forward, link or open a regularization bead.
+   Name the affected squares or block when known, the constraint or generator change to
+   try, the current drawing as control, and the evidence that would justify adopting a
+   replacement. A generator improvement should address a confirmed limitation or preserve
+   the evidence needed to locate one.
+   Run the existing exact and drawing checks on any replacement under the
+   [improvement rule](../policies/regularization-policy.md#11-the-improvement-rule).
+
+Keep the comparison and experiment receipts with the follow-up.
+Use the existing review record for candidates that require the owner’s decision.
+
 ## Register Candidates
 
 A view whose side is below $U$ is a smaller packing than the house best packing, and it

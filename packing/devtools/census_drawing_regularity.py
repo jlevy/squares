@@ -4,7 +4,7 @@
 Usage, from `packing/`, each after
 `uv run --frozen --all-extras --group dev python -m devtools.census_drawing_regularity`:
 
-    [--tree DIR] [--n N ...] [--workers K] [--output FILE.json] [--json]
+    [--tree DIR] [--n N ...] [--workers K] [--default-drawings] [--output FILE.json] [--json]
     --compare BEFORE.json AFTER.json [--top K] [--markdown FILE.md]
 
 The homepage atlas draws each known-best packing with the house renderer
@@ -21,11 +21,12 @@ no square in it sits a hair off the axes. Two things break it:
   degree (`NEAR_AXIS_DEGREES`, the workbench's colour tolerance) of the axes is a class of
   its own: it takes another hue beside the grid, and it shares no full side with it.
 
-For each count this reads the drawing a tree's atlas shows -- the tree's regularized view
-where `packing/atlas/known-best/regularized/index.json` gives the count the status
-`regularized`, else the known-best witness -- and colours it with the house renderer
-itself (`build_known_best_atlas.frame_from_witness`, then `assign_square_colors` at the
-default `RenderSpec`), so the counts are the drawing's, not a replica's. It reports the
+For each count this reads the tree's regularized layer view, where its index marks
+one regularized, or the known-best witness. With `--default-drawings` it follows the
+site's retained selection on that tree, including counts where a layer view exists
+but the site draws the witness. It colours that source with the house renderer
+(`build_known_best_atlas.frame_from_witness`, then `assign_square_colors` at the default
+`RenderSpec`). It reports the
 axis squares (the renderer's orientation within `1e-6` radians of the axes) and their
 full-side histogram, the light ones, the near-axis squares and their signed tilts, the
 squares tilted between half a degree and two degrees (`SMALL_TILT_DEGREES`, reported but
@@ -143,7 +144,7 @@ def _text(path: Path) -> str:
 def drawing_for(
     tree: Path, n: int, entries: Mapping[int, Mapping[str, Any]]
 ) -> tuple[Drawing, dict[str, Any]]:
-    """The drawing a tree's atlas shows for `n`, and the witness body it is drawn from."""
+    """The drawing chosen by `entries` for `n` and the witness body it is drawn from."""
     entry = entries.get(n)
     if entry is not None and entry.get("status") == "regularized":
         relative = str(entry["view"]["path"])
@@ -249,6 +250,7 @@ def regularity(witness: Mapping[str, Any]) -> dict[str, Any]:
         "classes": len({color.angle_class for color in colors}),
         "hues": len({color.hue_index for color in colors}),
         "uneven_axis": len(uneven),
+        "uneven_axis_squares": [frame.squares[index].label for index in uneven],
         "variation": len(uneven) + len(near),
         "light_faces": _tally(causes, light),
         "open_faces": _tally(causes, open_squares),
@@ -293,9 +295,20 @@ def totals(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     return result
 
 
-def census(tree: Path, counts: Sequence[int], *, workers: int = 1) -> dict[str, Any]:
+def census(
+    tree: Path, counts: Sequence[int], *, workers: int = 1, use_default_drawings: bool = False
+) -> dict[str, Any]:
     """The census document for `counts` of `tree`'s atlas."""
     entries = read_index(tree)
+    drawing_source = "regularized-layer"
+    if use_default_drawings:
+        # The selector itself uses the census to measure its candidates.
+        from devtools.default_drawings import RECORD_PATH, regularized_defaults  # noqa: PLC0415
+
+        selected = regularized_defaults(tree / RECORD_PATH, tree / INDEX)
+        entries = {n: entries[n] for n in selected}
+        drawing_source = "default-drawings"
+
     units = [(tree, n, entries) for n in counts]
     if workers > 1 and len(units) > 1:
         with ProcessPoolExecutor(max_workers=workers) as pool:
@@ -307,6 +320,7 @@ def census(tree: Path, counts: Sequence[int], *, workers: int = 1) -> dict[str, 
         "generated_by": GENERATOR,
         "tree": str(tree),
         "rules": {
+            "drawing_source": drawing_source,
             "renderer": "sqpack.render.color.assign_square_colors at the default RenderSpec",
             "axis_tolerance_radians": str(AXIS_TOLERANCE),
             "contact_tolerance": str(SPEC.full_side_contact_tolerance),
@@ -399,6 +413,11 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--output", type=Path, help="write the census JSON here")
     command.add_argument("--json", action="store_true", help="print the census JSON")
     command.add_argument(
+        "--default-drawings",
+        action="store_true",
+        help="measure the site's selected defaults in this tree",
+    )
+    command.add_argument(
         "--compare", type=Path, nargs=2, metavar=("BEFORE", "AFTER"), help="rank two censuses"
     )
     command.add_argument("--top", type=int, default=25, help="rows of the ranking")
@@ -417,7 +436,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(table, end="")
         return 0
     counts = args.n or list(COUNTS)
-    document = census(args.tree.resolve(), counts, workers=args.workers)
+    document = census(
+        args.tree.resolve(),
+        counts,
+        workers=args.workers,
+        use_default_drawings=args.default_drawings,
+    )
     text = json.dumps(document, indent=1) + "\n"
     if args.output:
         _write(args.output, text)
