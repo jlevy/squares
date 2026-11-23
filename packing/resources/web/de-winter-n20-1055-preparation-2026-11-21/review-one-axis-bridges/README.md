@@ -4,9 +4,11 @@ The independent checker excludes all 3,488 positive-cost local bridge profiles f
 `0 < tan(theta/2) <= 1/24`. It checks every one of their 15,696 normal choices by exact
 rational polynomial bounds, with 83 distinct bound polynomials.
 All twelve predeclared controls pass.
-This completes the local bridge obligation. The separate
-[sign and symmetry census](../review-one-axis-sign-census/README.md) now completes
-that finite roster; general-path and graph coverage remain open.
+This completes the local bridge obligation.
+The separate [sign and symmetry census](../review-one-axis-sign-census/README.md) now
+completes that finite roster. The [case-to-clause audit](../review-one-axis-case-clauses/README.md)
+applies the general-path exclusions to every canonical case. Complete graph enumeration,
+rule extraction and graph-to-bank coverage remain open.
 
 The complete roster consists of 32 rank profiles and 112 sign profiles, or 3,584
 combinations. There are 992 exclusions without an aligned tile on the chain and 2,496
@@ -72,15 +74,18 @@ caught in a periodic guard sample.
 The standalone source replay for `--Q 24 --exact-paths` uses general five-tile path
 clauses, including chains with zero or multiple transverse jumps.
 Those clauses are not established by this single-jump bridge check.
-The separate sign/vacancy and D4 census now checks all 120 vacancy permutations
-and twenty aligned positions, retaining 29,368 assignments in 3,671 orbits.
+The separate sign/vacancy and D4 census now checks all 120 vacancy permutations and
+twenty aligned positions, retaining 29,368 assignments in 3,671 orbits.
 It uses only the paired-bridge conditions, not general-path clauses.
 
-The separate [general-path review](../review-one-axis-general-paths/README.md)
-now classifies all 29,008 local profiles, excluding 23,286 and leaving 5,722 not
-certified. Applying those local exclusions to global paths, complete separation-graph
-enumeration, rule extraction and graph-to-bank coverage remain open. The source’s 273,584 graphs and 566 used
-certificates remain producer reports.
+The separate [general-path review](../review-one-axis-general-paths/README.md) now
+classifies all 29,008 local profiles, excluding 23,286 and leaving 5,722 not certified.
+The [path covariance audit](../review-one-axis-path-covariance/README.md) and
+[case-to-clause audit](../review-one-axis-case-clauses/README.md) now check their
+application to all 3,671 canonical census cases.
+Complete separation-graph enumeration, geometric rule extraction and graph-to-bank
+coverage remain open.
+The source’s 273,584 graphs and 566 used certificates remain producer reports.
 
 No unrestricted lower bound, angular-diversity theorem, registry value or selected
 drawing is accepted by this review.

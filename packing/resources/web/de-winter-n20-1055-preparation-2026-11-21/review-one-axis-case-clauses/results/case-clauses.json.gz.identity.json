@@ -1,0 +1,28 @@
+{
+  "format": "case-clause-receipt-identity-v1",
+  "status": "complete-canonical-case-to-clause-audit",
+  "compressed_roundtrip_verified": true,
+  "raw": {
+    "bytes": 24888016,
+    "sha256": "d7dd3ba492405d5b9a61dbd6a18a21164dc9c18b9b1b64d6d4633de6c9f40237"
+  },
+  "stored": {
+    "bytes": 785142,
+    "sha256": "916f3c5692170312257d014126b6f64a4154648f0b474040ca7c771a97785808",
+    "compression": "gzip level6, mtime0, empty filename"
+  },
+  "wall_seconds": 6.886745374999009,
+  "cpu_seconds": 3.575113,
+  "peak_rss_bytes": 139329536,
+  "counts": {
+    "canonical_cases": 3671,
+    "path_applications": 554159,
+    "excluded_path_origins": 339191,
+    "not_certified_path_origins": 214968,
+    "deduplicated_clauses": 339191,
+    "horizontal_exclusion_clauses": 160115,
+    "vertical_exclusion_clauses": 179076
+  },
+  "controls": 13,
+  "guard": "External memory guard required; inspect its independent receipt."
+}

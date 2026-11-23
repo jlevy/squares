@@ -1,0 +1,423 @@
+"""Audit accepted local path data, occupied paths, and D4 clause covariance only."""
+import argparse
+from collections import Counter
+import gzip
+import hashlib
+import itertools
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+import tempfile
+import time
+
+INPUT_SHA256 = "a60f45a70cb57d4e1a1e58bcbe01b1f9cf1c527fc80c0e931d7e856af22b33bb"
+INPUT_BYTES = 14993939
+MAX_INPUT = 32 * 1024 * 1024
+MAX_OUTPUT = 16 * 1024 * 1024
+WALL_SECONDS = 55
+
+
+class Refusal(Exception):
+    pass
+
+
+def require(condition, code):
+    if not condition:
+        raise Refusal(code)
+
+
+def digest(value):
+    return hashlib.sha256(json.dumps(value, separators=(",", ":"), sort_keys=True).encode()).hexdigest()
+
+
+def clock_check(started):
+    require(time.monotonic() - started < WALL_SECONDS, "internal-wall-cap")
+
+
+def rank_walks():
+    prefixes = [(r,) for r in range(5)]
+    for unused in range(4):
+        next_prefixes = []
+        for prefix in prefixes:
+            for step in (-1, 0, 1):
+                following = prefix[-1] + step
+                if 0 <= following < 5:
+                    next_prefixes.append(prefix + (following,))
+        prefixes = next_prefixes
+    result = sorted(prefixes)
+    filtered = [
+        r for r in itertools.product(range(5), repeat=5)
+        if all(abs(b-a) <= 1 for a, b in zip(r, r[1:]))
+    ]
+    require(result == filtered and len(result) == 259, "rank-roster")
+    return result
+
+
+def record_entry(row, bounds):
+    ranks, signs = tuple(row["ranks"]), tuple(row["signs"])
+    require(len(ranks) == len(signs) == 5, "profile-length")
+    require(all(type(r) is int and 0 <= r < 5 for r in ranks), "rank-domain")
+    require(all(abs(a-b) <= 1 for a, b in zip(ranks, ranks[1:])), "rank-step")
+    require(all(type(s) is int and s in (-1, 0, 1) for s in signs)
+            and signs.count(0) <= 1, "sign-domain")
+    ids = row["bound_ids_in_normal_choice_order"]
+    require(1 <= len(ids) <= 16 and len(ids) == row["normal_choice_count"], "choice-count")
+    require(all(type(i) is int and 0 <= i < len(bounds) for i in ids), "bound-reference")
+    failed = [j for j, i in enumerate(ids) if not bounds[i][1]]
+    excluded = row["excluded_from_strict_subfive_board"]
+    require(type(excluded) is bool and excluded == (not failed), "profile-verdict")
+    require(failed == row["failed_normal_choice_indices"], "failed-choice-binding")
+    expected_text = "excluded" if excluded else "not-certified-by-this-Bernstein-test"
+    require(row["verdict"] == expected_text, "verdict-text")
+    return (ranks, signs), (excluded, tuple(sorted(bounds[i][0] for i in ids)))
+
+
+def insert_unique(table, key, value):
+    require(key not in table, "duplicate-profile")
+    table[key] = value
+
+
+def validate_roster(table, ranks):
+    signs = [s for s in itertools.product((-1, 0, 1), repeat=5) if s.count(0) <= 1]
+    require(len(signs) == 112 and len(table) == 29008, "profile-roster-size")
+    require(set(table) == {(r, s) for r in ranks for s in signs}, "profile-roster-domain")
+
+
+def read_catalogue(path, ranks):
+    with gzip.open(path, "rb") as stream:
+        raw = stream.read(MAX_INPUT + 1)
+    require(len(raw) <= MAX_INPUT, "expanded-input-cap")
+    require(len(raw) == INPUT_BYTES, "input-size")
+    require(hashlib.sha256(raw).hexdigest() == INPUT_SHA256, "input-sha256")
+    data = json.loads(raw)
+    del raw
+    require(data["status"] == "complete-local-general-path-classification", "input-status")
+    bounds = []
+    for i, record in enumerate(data["bound_records"]):
+        require(record["id"] == i, "bound-index")
+        polynomial = tuple(record["power_coefficients"])
+        require(polynomial and all(type(c) is int for c in polynomial), "polynomial-data")
+        decision = record["certifies_span_at_least_five"]
+        require(type(decision) is bool, "bound-verdict-type")
+        bounds.append((polynomial, decision))
+    require(len(bounds) == 417, "bound-count")
+    table = {}
+    for i, row in enumerate(data["profiles"]):
+        require(row["index"] == i, "profile-index")
+        key, value = record_entry(row, bounds)
+        insert_unique(table, key, value)
+    validate_roster(table, ranks)
+    counts = Counter(value[0] for value in table.values())
+    require(counts == {True: 23286, False: 5722}, "input-verdict-counts")
+    example = data["profiles"][0]
+    return table, bounds, example
+
+
+def local_transform(key, forward=False, transverse=False):
+    ranks, signs = key
+    if forward:
+        ranks = ranks[::-1]
+        signs = tuple(-s for s in signs[::-1])
+    if transverse:
+        ranks = tuple(4-r for r in ranks)
+        signs = tuple(-s for s in signs)
+    return ranks, signs
+
+
+def local_covariance(table):
+    counts = Counter()
+    pairs_hash = hashlib.sha256()
+    for key in sorted(table):
+        for name, forward, transverse in (("forward", True, False), ("transverse", False, True)):
+            target = local_transform(key, forward, transverse)
+            require(target in table, "local-image-missing")
+            require(table[key][0] == table[target][0], "local-verdict-covariance")
+            require(table[key][1] == table[target][1], "local-polynomial-multiset")
+            pairs_hash.update(json.dumps([name, key, target], separators=(",", ":")).encode() + b"\n")
+            counts[name] += 1
+    require(counts == {"forward": 29008, "transverse": 29008}, "local-image-count")
+    return {"comparisons": dict(counts), "ordered_images_sha256": pairs_hash.hexdigest(),
+            "polynomial_multisets_equal": True}
+
+
+def geometry(vacancy, walks):
+    cells = tuple((x, y) for x in range(5) for y in range(5) if vacancy[x] != y)
+    index = {point: i for i, point in enumerate(cells)}
+    edges = tuple(
+        (i, j) for i, j in itertools.combinations(range(20), 2)
+        if abs(cells[j][0]-cells[i][0]) == abs(cells[j][1]-cells[i][1]) == 1
+    )
+    neighbor_edges = []
+    for i, (x, y) in enumerate(cells):
+        for yy in (y-1, y+1):
+            other = index.get((x+1, yy))
+            if other is not None:
+                neighbor_edges.append((i, other))
+    require(edges == tuple(sorted(neighbor_edges)), "independent-edge-rosters")
+    edge_index = {edge: i for i, edge in enumerate(edges)}
+    first = []
+    for axis in (0, 1):
+        layers = [[i for i, p in enumerate(cells) if p[axis] == k] for k in range(5)]
+        require(all(len(layer) == 4 for layer in layers), "layer-size")
+        for path in itertools.product(*layers):
+            ranks = tuple(cells[i][1] if axis == 0 else 4-cells[i][0] for i in path)
+            if any(abs(a-b) > 1 for a, b in zip(ranks, ranks[1:])):
+                continue
+            mask = 0
+            for i, j, a, b in zip(path, path[1:], ranks, ranks[1:]):
+                if a != b:
+                    bit = 1 << edge_index[tuple(sorted((i, j)))]
+                    require(mask & bit == 0, "repeated-path-edge")
+                    mask |= bit
+            first.append((axis, path, ranks, mask))
+    second = []
+    for axis in (0, 1):
+        for ranks in walks:
+            points = tuple((k, ranks[k]) if axis == 0 else (4-ranks[k], k) for k in range(5))
+            if any(point not in index for point in points):
+                continue
+            path = tuple(index[point] for point in points)
+            used = {
+                tuple(sorted((index[a], index[b])))
+                for a, b in zip(points, points[1:])
+                if a[0] != b[0] and a[1] != b[1]
+            }
+            mask = sum(1 << k for k, edge in enumerate(edges) if edge in used)
+            require(mask.bit_count() == len(used), "path-edge-coverage")
+            second.append((axis, path, ranks, mask))
+    require(len(first) == len(set(first)), "duplicate-path")
+    require(sorted(first) == sorted(second), "independent-path-rosters")
+    require(len(first) <= 518 and len(edges) <= 32, "geometry-size-cap")
+    require(all(row[3] for row in first), "unexpected-zero-jump-occupied-path")
+    return {"vacancy": vacancy, "cells": cells, "edges": edges, "paths": tuple(sorted(first))}
+
+
+def transform(point, turns, mirror):
+    x, y = point
+    for unused in range(turns):
+        x, y = 4-y, x
+    return (4-x, y) if mirror else (x, y)
+
+
+def mapped_mask(mask, permutation):
+    return sum(1 << destination for source, destination in enumerate(permutation) if mask >> source & 1)
+
+
+def clause(axis, mask, excluded=True):
+    if not excluded:
+        return None
+    return (0, mask) if axis == 0 else (mask, 0)
+
+
+def clause_satisfied(value, graph):
+    if value is None:
+        return True
+    positive, negative = value
+    return bool((positive & graph) or (negative & ~graph))
+
+
+def covariance_for(source, target, turns, mirror):
+    points = source["cells"]
+    target_index = {point: i for i, point in enumerate(target["cells"])}
+    point_map = tuple(target_index[transform(point, turns, mirror)] for point in points)
+    require(set(point_map) == set(range(20)), "cell-map-bijection")
+    target_edges = {edge: i for i, edge in enumerate(target["edges"])}
+    edge_map = tuple(target_edges[tuple(sorted((point_map[i], point_map[j])))]
+                     for i, j in source["edges"])
+    require(set(edge_map) == set(range(len(target["edges"]))), "edge-map-bijection")
+    target_paths = {row: i for i, row in enumerate(target["paths"])}
+    path_map = []
+    determinant = -1 if mirror else 1
+    swap_axes = turns % 2
+    for axis, path, ranks, mask in source["paths"]:
+        new_axis = axis ^ swap_axes
+        unit = (1, 0) if axis == 0 else (0, 1)
+        origin = transform((0, 0), turns, mirror)
+        tip = transform(unit, turns, mirror)
+        alpha = tip[new_axis] - origin[new_axis]
+        require(alpha in (-1, 1), "forward-orientation")
+        beta = determinant * alpha
+        new_path = tuple(point_map[i] for i in path)
+        if alpha < 0:
+            new_path = new_path[::-1]
+        require(tuple(target["cells"][i][new_axis] for i in new_path) == tuple(range(5)),
+                "forward-rank-map")
+        new_ranks = tuple(target["cells"][i][1] if new_axis == 0 else 4-target["cells"][i][0]
+                          for i in new_path)
+        expected_ranks = ranks[::-1] if alpha < 0 else ranks
+        if beta < 0:
+            expected_ranks = tuple(4-r for r in expected_ranks)
+        require(new_ranks == expected_ranks, "transverse-rank-map")
+        fixture_signs = (-1, 1, 0, -1, 1)
+        signs_from_cells = tuple(determinant * s for s in fixture_signs)
+        if alpha < 0:
+            signs_from_cells = signs_from_cells[::-1]
+        expected = local_transform((ranks, fixture_signs), alpha < 0, beta < 0)
+        require(expected == (new_ranks, signs_from_cells), "profile-generator-map")
+        new_mask = mapped_mask(mask, edge_map)
+        new_row = (new_axis, new_path, new_ranks, new_mask)
+        require(new_row in target_paths, "transformed-path-missing")
+        path_map.append(target_paths[new_row])
+        positive, negative = clause(axis, mask)
+        transformed = (mapped_mask(positive, edge_map), mapped_mask(negative, edge_map))
+        if swap_axes:
+            transformed = transformed[::-1]
+        require(transformed == clause(new_axis, new_mask), "clause-covariance")
+    require(set(path_map) == set(range(len(target["paths"]))), "path-map-bijection")
+    return {"quarter_turns": turns, "mirror_x_after_rotation": bool(mirror),
+            "target_vacancy": target["vacancy"], "negate_tilt_signs": bool(mirror),
+            "complement_graph_bits": bool(swap_axes), "cell_permutation": point_map,
+            "edge_permutation": edge_map, "path_permutation": path_map}
+
+
+def controls(table, bounds, example, walks):
+    results = []
+
+    def accept(name, condition):
+        require(condition, "control-" + name)
+        results.append({"name": name, "expected": "accept", "passed": True})
+
+    def refuse(name, operation, code):
+        try:
+            operation()
+        except Refusal as error:
+            require(str(error) == code, "control-wrong-refusal-" + name)
+            results.append({"name": name, "expected": "refuse", "refusal": code, "passed": True})
+        else:
+            raise Refusal("control-false-acceptance-" + name)
+
+    accept("horizontal-truth-table", [clause_satisfied(clause(0, 5), g) for g in range(8)]
+           == [not ((g & 5) == 5) for g in range(8)])
+    accept("vertical-truth-table", [clause_satisfied(clause(1, 5), g) for g in range(8)]
+           == [bool(g & 5) for g in range(8)])
+    accept("empty-exclusion-clause", all(not clause_satisfied(clause(a, 0), g)
+                                        for a in (0, 1) for g in range(8)))
+    accept("not-certified-imposes-no-clause", all(clause_satisfied(clause(a, 5, False), g)
+                                                for a in (0, 1) for g in range(8)))
+    accept("wrong-polarity-detected", any(clause_satisfied(clause(0, 5), g)
+                                         != clause_satisfied(clause(1, 5), g) for g in range(8)))
+    accept("missing-literal-detected", any(clause_satisfied(clause(0, 3), g)
+                                         != clause_satisfied(clause(0, 1), g) for g in range(4)))
+    increasing = (0, 1, 2, 3, 4)
+    positive = (1,) * 5
+    accept("known-not-certified", not table[(increasing, positive)][0])
+    accept("wrong-reflection-sign-detected",
+           table[(increasing, positive)][0] != table[(increasing[::-1], positive)][0])
+    accept("wrong-vertical-frame-detected",
+           table[(tuple(4-r for r in increasing), positive)][0] != table[(increasing, positive)][0])
+    accept("omitted-quarter-turn-bit-complement-detected",
+           clause_satisfied(clause(0, 1), 0)
+           and clause_satisfied(clause(1, 1), 1)
+           and not clause_satisfied(clause(1, 1), 0))
+    missing = dict(table)
+    missing.pop(next(iter(missing)))
+    refuse("missing-profile", lambda: validate_roster(missing, walks), "profile-roster-size")
+    key = next(iter(table))
+    refuse("duplicate-profile", lambda: insert_unique({key: table[key]}, key, table[key]),
+           "duplicate-profile")
+    corrupted = dict(example)
+    corrupted["bound_ids_in_normal_choice_order"] = [len(bounds)] * example["normal_choice_count"]
+    refuse("corrupt-bound-reference", lambda: record_entry(corrupted, bounds), "bound-reference")
+    require(len(results) == 13, "control-count")
+    return results
+
+
+def publish(path, result, started):
+    require(not path.exists(), "output-already-exists")
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                         prefix=path.name + ".", suffix=".partial",
+                                         delete=False) as stream:
+            temporary = stream.name
+            encoder = json.JSONEncoder(separators=(",", ":"), allow_nan=False)
+            written = 0
+            next_clock_check = 65536
+            for piece in encoder.iterencode(result):
+                written += len(piece.encode())
+                require(written + 1 <= MAX_OUTPUT, "output-size-cap")
+                stream.write(piece)
+                if written >= next_clock_check:
+                    clock_check(started)
+                    next_clock_check = written + 65536
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        clock_check(started)
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary:
+            Path(temporary).unlink(missing_ok=True)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    require(not args.output.exists(), "output-already-exists")
+    started, cpu_started = time.monotonic(), time.process_time()
+    walks = rank_walks()
+    table, bounds, example = read_catalogue(args.input, walks)
+    control_results = controls(table, bounds, example, walks)
+    local = local_covariance(table)
+    clock_check(started)
+    geometries = {}
+    for vacancy in itertools.permutations(range(5)):
+        clock_check(started)
+        geometries[vacancy] = geometry(vacancy, walks)
+    maps = []
+    path_images = 0
+    for vacancy, source in sorted(geometries.items()):
+        clock_check(started)
+        for turns in range(4):
+            for mirror in (False, True):
+                vacant_points = sorted(transform((x, vacancy[x]), turns, mirror) for x in range(5))
+                require([x for x, y in vacant_points] == list(range(5)), "vacancy-permutation")
+                target_vacancy = tuple(y for x, y in vacant_points)
+                row = covariance_for(source, geometries[target_vacancy], turns, mirror)
+                row["source_vacancy"] = vacancy
+                maps.append(row)
+                path_images += len(source["paths"])
+    require(len(geometries) == 120 and len(maps) == 960, "global-map-count")
+    require(path_images <= 497280, "path-image-cap")
+    clock_check(started)
+    geometry_rows = list(geometries.values())
+    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    result = {
+        "format": "independent-one-axis-path-covariance-v1",
+        "status": "complete-geometry-and-local-covariance-audit",
+        "scope": "Accepted local catalogue and complete occupied-path geometry/D4 clause covariance only. No sign-case application roster, separation-graph enumeration, bank-rule extraction, graph-to-bank coverage or theorem promotion.",
+        "input_raw_sha256": INPUT_SHA256,
+        "checker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "counts": {"vacancy_patterns": len(geometries),
+                   "occupied_paths": sum(len(g["paths"]) for g in geometry_rows),
+                   "D4_geometry_maps": len(maps), "path_images": path_images,
+                   "local_profile_comparisons": 58016, "controls": len(control_results)},
+        "local_covariance": local,
+        "geometry_roster_sha256": digest(geometry_rows),
+        "D4_roster_sha256": digest(maps),
+        "geometries": geometry_rows, "D4_maps": maps,
+        "controls": control_results,
+        "wall_seconds_before_output": time.monotonic() - started,
+        "cpu_seconds_before_output": time.process_time() - cpu_started,
+        "peak_rss_bytes_before_output": rss if sys.platform == "darwin" else rss * 1024,
+        "guard": "External coordinator-owned memory guard required; no guard-status claim.",
+    }
+    publish(args.output, result, started)
+    print(json.dumps({"status": result["status"], "counts": result["counts"],
+                      "wall_seconds": time.monotonic() - started,
+                      "peak_rss_bytes": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                      * (1 if sys.platform == "darwin" else 1024)}))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print(json.dumps({"status": "failed", "error_type": type(error).__name__,
+                          "error": str(error)}), file=sys.stderr)
+        raise SystemExit(1) from error

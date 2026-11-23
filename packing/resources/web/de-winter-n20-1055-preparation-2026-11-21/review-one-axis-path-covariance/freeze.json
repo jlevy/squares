@@ -1,0 +1,58 @@
+{
+  "format": "independent-one-axis-path-covariance-freeze-v1",
+  "status": "prepared-only-not-executed-imported-compiled-or-syntax-checked",
+  "frozen_at_utc": "2026-11-23T00:50:24Z",
+  "reviewed_shared_checkout_head": "689a8ecf3546ea7f4b7003454f1cf7dcb8783044",
+  "scope": "Complete occupied-path geometry, local-profile polynomial/verdict covariance, and D4 edge/path/clause covariance only; no census-case application roster, graph enumeration or bank coverage.",
+  "files": {
+    "check_path_covariance.py": {
+      "bytes": 19180,
+      "sha256": "9e34b215975ffb7e9c6a733aec423490857e4942361bba7965ec9ee4b6ad27dd"
+    },
+    "frozen-review-plan.md": {
+      "bytes": 11692,
+      "sha256": "c697345f194873c9330cd279e20892c31c741902806579e0f1b5c4ee3b462a89"
+    },
+    "general-path-catalogue.json.gz": {
+      "bytes": 444111,
+      "sha256": "32182f37724fe649925fdbf1710d69f42fe64ac42ab892f7ea571f10e581d17c",
+      "original_bytes": 14993939,
+      "original_sha256": "a60f45a70cb57d4e1a1e58bcbe01b1f9cf1c527fc80c0e931d7e856af22b33bb"
+    }
+  },
+  "expected": {
+    "input_profiles": 29008,
+    "input_bound_records": 417,
+    "excluded_profiles": 23286,
+    "not_certified_profiles": 5722,
+    "local_generator_comparisons": 58016,
+    "vacancy_patterns": 120,
+    "D4_geometry_maps": 960,
+    "controls": 13
+  },
+  "limits": {
+    "workers": 1,
+    "target_wall_seconds": 30,
+    "target_rss_gib": 0.15,
+    "supervised_wall_seconds": 60,
+    "internal_wall_seconds": 55,
+    "owned_tree_gib": 0.25,
+    "stop_pressure": 2,
+    "input_expanded_bytes": 33554432,
+    "output_bytes": 16777216,
+    "path_roster_upper_bound": 62160,
+    "D4_path_images_upper_bound": 497280
+  },
+  "required_invocation": [
+    "PROJECT_PYTHON",
+    "-I",
+    "-B",
+    "check_path_covariance.py",
+    "--input",
+    "general-path-catalogue.json.gz",
+    "--output",
+    "NEW_EXTERNAL_OUTPUT/path-covariance.json"
+  ],
+  "execution_authority": "Coordinator-owned serialized memory-guard slot required before any execution.",
+  "exposure": "Read producer source and prior accepted first-party evidence. Independent combinatorial checker; accepted arithmetic results reused only as frozen data. Not blind and no producer imports."
+}

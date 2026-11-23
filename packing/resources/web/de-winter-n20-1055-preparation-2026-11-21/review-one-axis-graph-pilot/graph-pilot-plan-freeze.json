@@ -1,0 +1,38 @@
+{
+  "format": "one-axis-graph-pilot-plan-freeze-v1",
+  "status": "plan-only-no-checker-or-execution",
+  "plan": "graph-pilot-plan.md",
+  "plan_bytes": 5485,
+  "plan_sha256": "1077cc5039cbc10de8ed2ec7382d3d9986cf6e54f838ec13e0069c6bc4b9c43d",
+  "selected_case_indices": [
+    0,
+    244,
+    489,
+    734,
+    978,
+    1223,
+    1468,
+    1712,
+    1957,
+    2202,
+    2446,
+    2691,
+    2936,
+    3180,
+    3425,
+    3670
+  ],
+  "selection": "floor(i*3670/15) for i=0,...,15; fixed before any graph outcomes",
+  "input_raw_sha256": "d7dd3ba492405d5b9a61dbd6a18a21164dc9c18b9b1b64d6d4633de6c9f40237",
+  "limits": {
+    "supervised_seconds": 60,
+    "internal_seconds": 55,
+    "owned_tree_gib": 0.25,
+    "admission_pressure": 1,
+    "stop_pressure": 2,
+    "search_nodes": 1000000,
+    "total_models": 100000,
+    "models_per_case": 50000
+  },
+  "next_gate": "Freeze exact independent checker and controls, then obtain coordinator serial guarded slot."
+}
