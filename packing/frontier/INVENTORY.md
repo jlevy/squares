@@ -1087,9 +1087,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-de-winter-1062-review-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: The submitted n232 certificate: every square, wall and unordered pair. | `V-n232-1062-review-check` |
 | `E-geiserx-1037-original-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-squares-project-regularized-n127-report` | 1 | upper-bound | reported | - | - | - | *not assessed* | producer’s code | not recorded | *none held* |
-| `E-squares-project-regularized-n127-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | *not assessed* | independent | full, 1 of 1: all walls and unordered square pairs in the retained packing | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-check-half-angle-area` |
+| `E-squares-project-regularized-n127-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | *not assessed* | producer’s code | full, 1 of 1: all walls and unordered square pairs in the retained packing | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-check-half-angle-area` |
 | `E-squares-project-regularized-n305-report` | 1 | upper-bound | reported | - | - | - | *not assessed* | producer’s code | not recorded | *none held* |
-| `E-squares-project-regularized-n305-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | *not assessed* | independent | full, 1 of 1: all walls and unordered square pairs in the retained packing | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-check-half-angle-area` |
+| `E-squares-project-regularized-n305-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | *not assessed* | producer’s code | full, 1 of 1: all walls and unordered square pairs in the retained packing | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-check-half-angle-area` |
 | `E-squares-project-axis-regularizer-method` | 0 | derived-structure | reported | - | - | - | *not assessed* | no code | not recorded | - |
 
 ## What the register rests on
@@ -1097,7 +1097,7 @@ results, it is a statement about what this repository has itself examined.
 - **assurance**: numerically-checked 5, reported 416, verified 647
 - **method**: exact-algebraic 382, interval-certified 247, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 8, reported 416
 - **novelty**: apparently-novel 43, common-knowledge 4, not assessed 19, previously-published 1002
-- **relationship to the producer's code**: generator 7, independent-implementation 417, not-applicable 39, same-implementation 541, shared-components 58, unknown-historical 6
+- **relationship to the producer's code**: generator 7, independent-implementation 415, not-applicable 39, same-implementation 543, shared-components 58, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

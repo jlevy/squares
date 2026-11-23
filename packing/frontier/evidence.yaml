@@ -68456,7 +68456,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
-    relationship_to_generator: independent-implementation
+    relationship_to_generator: same-implementation
     origin: replayed-here
     replay: From packing, run python -m devtools.register_candidates think-4z8z-2026-11-23 certify
       --jobs-dir EXTERNAL_SCRATCH --workers 1 and python -m devtools.register_candidates think-4z8z-2026-11-23
@@ -68504,7 +68504,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
-    relationship_to_generator: independent-implementation
+    relationship_to_generator: same-implementation
     origin: replayed-here
     replay: From packing, run python -m devtools.register_candidates think-huum-2026-11-23 certify
       --jobs-dir EXTERNAL_SCRATCH --workers 1 and python -m devtools.register_candidates think-huum-2026-11-23

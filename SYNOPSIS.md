@@ -1942,6 +1942,12 @@ case or experiment separately.
 | [Review of FN-1 Original Compressed Input Custody](docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md) | dated review record | record | retained | — |
 | [Samanyu-dev’s s(109) Packing: Confirming Review of the Exact Import](docs/project/reviews/review-2026-11-21-samanyu-n109-canonical.md) | dated review record | record | retained | — |
 | [Review of the Rational Certificate in Issue 1062](docs/project/reviews/review-2026-11-21-de-winter-1062-n232.md) | dated review record | record | retained | — |
+| [Exact 127-Square Regularization Review](docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md) | dated review record | record | retained | — |
+| [Exact 305-Square Regularization Review](docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md) | dated review record | record | retained | — |
+| [Exact Regularization at 127 Squares](packing/cases/register_candidates/think-4z8z-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [Exact Regularization at 305 Squares](packing/cases/register_candidates/think-huum-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [Drawing Runs for the Exact 127 and 305 Houses](packing/cases/regularized_drawings/think-huum-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [post-adoption-selection.md](packing/cases/regularized_drawings/think-huum-2026-11-23/post-adoption-selection.md) | source retention and archive policy | record | retained | — |
 | `packing/contributors/people/*.md` | hand-maintained registry | record | maintained | — |
 | `packing/site-changelog.yaml` | hand-maintained registry | current | maintained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |
