@@ -57,7 +57,7 @@ from tests import site_renders
 #: The anchor has to agree with the date, since `archived_news_targets` forwards retired
 #: day bookmarks to `changelog-date-<day>` on this page.
 DAY = re.compile(
-    r'<details data-day="(\d{4}-\d{2}-\d{2})" id="changelog-date-\1"( open)?>(.*?)</details>',
+    r'<details id="changelog-date-(\d{4}-\d{2}-\d{2})"( open)?>(.*?)</details>',
     re.DOTALL,
 )
 #: One result in a day (`added_entry`), linked to its row in All Results: its id, its V,
@@ -327,11 +327,15 @@ def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
     introduction opens on the oldest day shown, so no block sits before it (#736's
     review A, finding A3, under the owner's wording of 26 October 2026)."""
     since, until = _window(overview)
+    document = render_changelog.load()
+    latest_change = max(
+        (date.fromisoformat(entry["date"]) for entry in document["entries"]), default=until
+    )
+    until = max(until, latest_change)
     shown = sorted(date.fromisoformat(day) for day in days)
     assert shown
     assert since <= shown[0]
     assert shown[-1] == until
-    document = render_changelog.load()
     assert overview_sections.changelog_since(overview, document) == overview_sections.day_label(
         shown[0]
     )
@@ -467,7 +471,7 @@ def test_the_home_page_shows_the_logs_newest_days_as_the_changelog_draws_them(
     front: str, days: dict[str, tuple[bool, str]]
 ) -> None:
     """The home page's Changelog is the head of the log: its newest days, as many as
-    `changelog_window` keeps, the newest open, each day's lines the Changelog page's own
+    `changelog_window` keeps, the newest two open, each day's lines the Changelog page's own
     for that day. Only the addresses differ, since the News box above it holds the
     Changelog's day and story anchors on the same page."""
     section = _front_section(front, "changelog", "recent-results")
@@ -479,7 +483,7 @@ def test_the_home_page_shows_the_logs_newest_days_as_the_changelog_draws_them(
     assert len(window) <= overview_sections.HOME_CHANGELOG_DAYS
     assert list(shown) == [day.isoformat() for day in window]
     assert [opened for opened, _ in shown.values()] == [
-        index < RECENT_OPEN for index in range(len(window))
+        index < overview_sections.HOME_CHANGELOG_OPEN for index in range(len(window))
     ]
     for day, (_, body) in shown.items():
         assert body == re.sub(r'<li id="changelog-entry-[^"]+">', "<li>", days[day][1]), day
@@ -528,11 +532,9 @@ def test_the_window_is_the_newest_days_that_hold_entries_however_old() -> None:
     both", 3 November 2026). The newest day is shown whole however long it is; an older
     one joins only while the lines stay within `HOME_CHANGELOG_LINES`."""
     cap = overview_sections.HOME_CHANGELOG_LINES
-    assert overview_sections.HOME_CHANGELOG_DAYS == 3
-    quiet = [(date(2025, 1, 2), 4), (date(2024, 6, 1), 2), (date(2023, 3, 3), 1)]
-    assert overview_sections.changelog_window([*quiet, (date(2022, 1, 1), 1)]) == [
-        day for day, _ in quiet
-    ]
+    assert overview_sections.HOME_CHANGELOG_DAYS == 7
+    quiet = [(date(year, 1, 1), 4) for year in range(2025, 2017, -1)]
+    assert overview_sections.changelog_window(quiet) == [day for day, _ in quiet[:7]]
     heavy = [(date(2026, 10, 14), cap + 40), (date(2026, 10, 13), 1)]
     assert overview_sections.changelog_window(heavy) == [date(2026, 10, 14)]
     split = [(date(2026, 10, 3), cap - 10), (date(2026, 10, 2), 10), (date(2026, 10, 1), 1)]
@@ -562,7 +564,7 @@ def test_the_home_changelog_is_never_empty_when_its_newest_entry_is_long_past(
         date.fromisoformat(day) < reference - timedelta(days=overview_sections.ADDED_DAYS)
         for day in shown
     )
-    assert rendered.count(" open>") == RECENT_OPEN
+    assert rendered.count(" open>") == overview_sections.HOME_CHANGELOG_OPEN
     empty = {**document, "entries": []}
     assert overview_sections.changelog_preview(overview, empty) == (
         overview_sections.CHANGELOG_NONE

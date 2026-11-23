@@ -3,22 +3,27 @@
 The house rule (``packing/campaign/result-import.md``, The House Rule) and the
 regularization guide's Register Candidates
 (``docs/project/guides/regularization-process.md``) send every exactly verified packing
-below a house best packing to the register, however it was made: a regularizer's solve
-held at row 3, or a construction a review found. `devtools.register_regularized_bounds`
-registered the batches of 12 and 13 October 2026 and writes their case records itself;
+below a house best packing to the register, however it was made: a solver or
+regularizer certificate held at row 3, or a construction a review found.
+`devtools.register_regularized_bounds` registered the batches of 12 and 13 October 2026
+and writes their case records itself;
 this module is the stage 2 to stage 4 half for a later batch, and writes no case record.
 
 A batch is one package, ``packing/cases/register_candidates/<name>/``, and one `Batch`
 here naming its candidates (`Candidate`). Each is one certificate file in Evan Daniel's
 ``n S`` / ``x y t`` format, retained as ``certificates/n-NNN.cert``. `Candidate.sha256`
 records the digest of the file the stage 4 review decided; the tests hold the retained
-file to it, and the repository holds the file since (OR-16). Each comes from one of two
-places:
+file to it, and the repository holds the file since (OR-16). Sources include:
 
 - **solve**: a regularization run's exact solve certificate, ``n-N/solve/witness.cert``
   of `devtools.regularize_evand run`. ``retain`` copies it from the run directory, and
   every read holds its exact side to the solved side the run's report, retained under
   ``cases/regularized_drawings/``, records for the output the selection held at row 3;
+- **regularized**: a regularizer's output, copied from a run's
+  ``n-N/regularize.cert``. The run's report binds the exact side to its three passed
+  routes and row-3 decision.
+- **refined**: an exact restart recertified from a saved pose, copied from
+  ``n-N/refined.cert`` with its own verification report.
 - **l-strip**: a house certificate at a smaller count, read through its import packet's
   custody (`devtools.upper_bound_reports.read_facts`), with one L strip of unit squares
   in ``[S, S + 1] x [0, S + 1] u [0, S + 1] x [S, S + 1]``, at side ``S + 1``, in a named
@@ -32,7 +37,9 @@ exact routes, ``sqpack.witness.exact_verify`` and
 ``receipts/exact-certification-nNNN.json.xz``; and by the six sharp controls of
 `devtools.upper_bound_sharp_controls`, at exact contact and 1e-30 past it, into
 ``receipts/sharp-controls-nNNN.json``. A finite certificate proves an upper bound and
-nothing more.
+nothing more. When a retained receipt is read, ``check_receipt`` binds every exact
+input scalar to the certificate through ``kernel.validate_job``, so an equivalent text
+encoding reuses the result and changed geometry is refused.
 
 From ``packing/``, with the project interpreter::
 
@@ -47,7 +54,6 @@ From ``packing/``, with the project interpreter::
 from __future__ import annotations
 
 import argparse
-import gzip
 import json
 import math
 import subprocess
@@ -58,12 +64,13 @@ from dataclasses import dataclass
 from fractions import Fraction
 from functools import cache
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from strif import atomic_output_file
 
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
+from devtools import retained_data
 from devtools import upper_bound_reports as reports
 from devtools import upper_bound_sharp_controls as sharp
 from sqpack.witness import witness_document
@@ -75,7 +82,14 @@ PACKAGES = ROOT / "cases/register_candidates"
 DRAWINGS = ROOT / "cases/regularized_drawings"
 RECEIPT_FORMAT = "register-candidates-exact-certification-v1"
 SOLVE = "solve"
+REGULARIZED = "regularized"
+REFINED = "refined"
 L_STRIP = "l-strip"
+RUN_CERTIFICATES = {
+    SOLVE: "solve/witness.cert",
+    REGULARIZED: "regularize.cert",
+    REFINED: "refined.cert",
+}
 HALF = Fraction(1, 2)
 #: The L strip's placements, as the 31 October review of think-ruu2 names them: a column
 #: of 17 flush with the top wall and a row of 16 flush with the left wall (the 293 house's
@@ -96,9 +110,9 @@ def _require(condition: object, message: str) -> None:
 class Candidate:
     """One count's certificate below its house.
 
-    - ``kind``: `SOLVE` or `L_STRIP`; ``sha256`` the retained file's digest.
+    - ``kind``: `SOLVE`, `REGULARIZED`, `REFINED` or `L_STRIP`; ``sha256`` the retained digest.
     - ``house``: the register result whose certificate is the case's house at ``n``.
-    - ``report``: for a solve, its run's report, relative to `DRAWINGS`.
+    - ``report``: the run or verification report relative to `DRAWINGS`.
     - ``parent_packet``, ``parent_n`` and ``placement``: for an L strip, the import packet
       holding the certificate at the smaller count, and where the strip lies.
     """
@@ -120,6 +134,9 @@ class Batch:
     witness_prefix: str
     claim_limitations: str
     candidates: tuple[Candidate, ...]
+    date: str = ""
+    author: str = ""
+    rational_backend: Literal["fraction", "gmp"] = "fraction"
 
     @property
     def package(self) -> Path:
@@ -177,7 +194,50 @@ RUU2 = Batch(
         ),
     ),
 )
-BATCHES = {RUU2.name: RUU2}
+N127 = Batch(
+    name="think-4z8z-2026-11-23",
+    bead="think-4z8z",
+    witness_prefix="W-register-candidate-1123-n",
+    claim_limitations=(
+        "A finite rational certificate for Joost de Winter's 127-square packing, "
+        "regularized by this project with Evan Daniel's solver and regularizer. "
+        "It certifies an upper bound and nothing more."
+    ),
+    candidates=(
+        Candidate(
+            127,
+            REGULARIZED,
+            "T-330",
+            "06b0d767e8ebd8ea461d28fcc0a48a1e26607cdf1e685e056129a01411bb4c60",
+            report="think-4z8z-2026-11-23/n127-replay/n-127/report.json.gz",
+        ),
+    ),
+    date="2026-11-23",
+    author="Joost de Winter, regularized by the Squares Project with Evan Daniel's regularizer",
+)
+N305 = Batch(
+    name="think-huum-2026-11-23",
+    bead="think-huum",
+    witness_prefix="W-register-nonlinear-1123-n",
+    claim_limitations=(
+        "A finite rational certificate from a nonlinear restart of the project's "
+        "regularization of Joost de Winter's 305-square packing, using Evan Daniel's "
+        "exact solver; it certifies an upper bound and nothing more."
+    ),
+    candidates=(
+        Candidate(
+            305,
+            REFINED,
+            "T-336",
+            "ea905df3ef09d9e9b597dd12501006d3abb8a60e454bc2c3cded23f27e51ee67",
+            report="think-huum-2026-11-23/n305-nonlinear-restart/n-305/refined-decided.json.gz",
+        ),
+    ),
+    date="2026-11-23",
+    author="Joost de Winter, regularized by the Squares Project with Evan Daniel's solver",
+    rational_backend="gmp",
+)
+BATCHES = {batch.name: batch for batch in (RUU2, N127, N305)}
 #: Where ``retain`` finds each kind's file: the run directory's solve, or the review's
 #: written construction.
 REVIEW_FILES = {293: "n293-s260-plus-L-17top+16.cert"}
@@ -190,8 +250,16 @@ def certificate_path(batch: Batch, n: int) -> Path:
     return batch.package / f"certificates/n-{n:03d}.cert"
 
 
+def report_path(candidate: Candidate) -> Path:
+    return DRAWINGS / candidate.report
+
+
 def run_report(candidate: Candidate) -> dict[str, Any]:
-    return json.loads(gzip.decompress((DRAWINGS / candidate.report).read_bytes()))
+    path = report_path(candidate)
+    reports.ensure_private(path)
+    return json.loads(
+        retained_data.read_retained_bytes(path), object_pairs_hook=kernel.unique_object
+    )
 
 
 def solved_side(candidate: Candidate) -> Fraction:
@@ -210,6 +278,38 @@ def solved_side(candidate: Candidate) -> Fraction:
         f"n={candidate.n}: the run did not accept its solve",
     )
     return Fraction(report["solve"]["S_cert"])
+
+
+def regularized_side(candidate: Candidate) -> Fraction:
+    report = run_report(candidate)
+    decision = report["decisions"]["solved"]
+    output = report["outputs"]["solved"]
+    stage = report["regularize"]
+    _require(
+        report.get("n") == candidate.n
+        and decision["row"] == 3
+        and decision["decision"] == "held"
+        and all(output["routes"].get(route) is True for route in (*kernel.ROUTES, "half_angle"))
+        and stage["cert_ok"] is True
+        and stage["verify_ok"] is True,
+        f"n={candidate.n}: the regularized output was not verified and held at row 3",
+    )
+    side = Fraction(output["side_exact"])
+    _require(Fraction(stage["S_cert"]) == side, f"n={candidate.n}: regularized sides differ")
+    return side
+
+
+def refined_side(candidate: Candidate) -> Fraction:
+    report = run_report(candidate)
+    routes = report["smallest"]["routes"]
+    _require(
+        report.get("n") == candidate.n
+        and report.get("half_angle") is True
+        and report.get("fits_U") is True
+        and all(routes[route]["passed"] is True for route in kernel.ROUTES),
+        f"n={candidate.n}: the refined certificate was not verified at or below the bound",
+    )
+    return Fraction(report["exact_side"])
 
 
 def l_strip(parent: legacy.Certificate, n: int, placement: str) -> legacy.Certificate:
@@ -241,12 +341,18 @@ def construction(batch: Batch, n: int) -> legacy.Certificate:
 
 
 def admitted(batch: Batch, n: int, raw: bytes) -> legacy.Certificate:
-    """The certificate in ``raw``, refused unless, for a solve, it is at its report's
-    solved side, or, for an L strip, it is its construction pose for pose."""
+    """A certificate held to its run or rebuilt construction."""
     candidate = batch.candidate(n)
     found = reports.evand_cert(raw, n, {})
     if candidate.kind == SOLVE:
         _require(found.side == solved_side(candidate), f"n={n}: not the run's solved side")
+    elif candidate.kind in (REGULARIZED, REFINED):
+        side = (
+            regularized_side(candidate)
+            if candidate.kind == REGULARIZED
+            else refined_side(candidate)
+        )
+        _require(found.side == side, f"n={n}: not the reported {candidate.kind} side")
     else:
         _require(found == construction(batch, n), f"n={n}: not its parent plus the L strip")
     return found
@@ -256,8 +362,8 @@ def retain(batch: Batch, run_dir: Path, review_out: Path) -> list[Path]:
     """Copy each candidate's file, from the run directory or the review's output."""
     written = []
     for candidate in batch.candidates:
-        if candidate.kind == SOLVE:
-            source = run_dir / f"n-{candidate.n}/solve/witness.cert"
+        if candidate.kind in RUN_CERTIFICATES:
+            source = run_dir / f"n-{candidate.n}" / RUN_CERTIFICATES[candidate.kind]
         else:
             source = review_out / REVIEW_FILES[candidate.n]
         raw = source.read_bytes()
@@ -270,10 +376,19 @@ def retain(batch: Batch, run_dir: Path, review_out: Path) -> list[Path]:
     return written
 
 
+def read_certificate(batch: Batch, n: int) -> legacy.Certificate:
+    """Read and admit the retained certificate without caching its bytes."""
+    path = certificate_path(batch, n)
+    reports.ensure_private(path)
+    with path.open("rb") as stream:
+        raw = stream.read(reports.MAX_SOURCE_BYTES + 1)
+    _require(len(raw) <= reports.MAX_SOURCE_BYTES, f"n={n}: oversized candidate certificate")
+    return admitted(batch, n, raw)
+
+
 @cache
 def certificate(batch: Batch, n: int) -> legacy.Certificate:
-    """The retained certificate at ``n``, admitted (`admitted`)."""
-    return admitted(batch, n, certificate_path(batch, n).read_bytes())
+    return read_certificate(batch, n)
 
 
 def side(batch: Batch, n: int) -> Fraction:
@@ -295,7 +410,9 @@ def controls_path(batch: Batch, n: int) -> Path:
 def decide_job(batch: Batch, n: int, control: str, output: Path) -> None:
     _require(not output.exists(), "refusing to overwrite a deciding job")
     found = certificate(batch, n)
-    row = kernel.run_case(found, control, **batch.profile)
+    row = kernel.run_case(
+        found, control, rational_backend=batch.rational_backend, **batch.profile
+    )
     kernel.validate_job(row, found, control, **batch.profile)
     output.write_text(json.dumps(row, sort_keys=True) + "\n", encoding="utf-8")
 
@@ -331,24 +448,37 @@ def certify(batch: Batch, directory: Path, workers: int) -> None:
                 "n": item.n,
                 "routes": list(kernel.ROUTES),
                 "cases": cases,
+                **(
+                    {"rational_backend": batch.rational_backend}
+                    if batch.rational_backend != "fraction"
+                    else {}
+                ),
             },
         )
 
 
-def check_receipt(batch: Batch, n: int, *, replay: bool = False) -> dict[str, Any]:
-    found = certificate(batch, n)
-    record = kernel.read_xz(receipt_path(batch, n))
+def check_receipt(
+    batch: Batch, n: int, *, exact: legacy.Certificate | None = None, replay: bool = False
+) -> dict[str, Any]:
+    found = certificate(batch, n) if exact is None else exact
+    _require(found.n == n, f"n={n}: the certificate is another count's")
+    path = receipt_path(batch, n)
+    reports.ensure_private(path)
+    record = kernel.read_xz(path)
     _require(
         record.get("format") == RECEIPT_FORMAT
         and record.get("n") == n
         and record.get("routes") == list(kernel.ROUTES)
+        and record.get("rational_backend", "fraction") == batch.rational_backend
         and len(record.get("cases", [])) == len(kernel.JOBS),
         f"n={n}: not this batch's receipt",
     )
     for row, control in zip(record["cases"], kernel.JOBS, strict=True):
         kernel.validate_job(row, found, control, **batch.profile)
         if replay:
-            again = kernel.run_case(found, control, **batch.profile)
+            again = kernel.run_case(
+                found, control, rational_backend=batch.rational_backend, **batch.profile
+            )
             _require(
                 kernel.stable_row(again) == kernel.stable_row(row), f"n={n}: the replay differs"
             )
@@ -358,7 +488,7 @@ def check_receipt(batch: Batch, n: int, *, replay: bool = False) -> dict[str, An
 def sharp_record(batch: Batch, n: int) -> dict[str, Any]:
     found = certificate(batch, n)
     where = certificate_path(batch, n).relative_to(REPO).as_posix()
-    rows = sharp.control_rows(found, batch.profile)
+    rows = sharp.control_rows(found, batch.profile, rational_backend=batch.rational_backend)
     return {
         "format": sharp.FORMAT,
         "batch": batch.name,
@@ -367,6 +497,11 @@ def sharp_record(batch: Batch, n: int) -> dict[str, Any]:
         "side": legacy.literal(found.side),
         "epsilon": legacy.literal(sharp.EPSILON),
         "routes": list(sharp.ROUTES),
+        **(
+            {"rational_backend": batch.rational_backend}
+            if batch.rational_backend != "fraction"
+            else {}
+        ),
         "controls": rows,
         "all_as_expected": all(row["as_expected"] for row in rows),
     }

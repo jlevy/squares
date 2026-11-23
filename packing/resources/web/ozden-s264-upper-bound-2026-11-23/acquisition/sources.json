@@ -1,0 +1,37 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-11-23T16:23:30Z",
+  "git_scope": "Four selected files from the pinned GitHub commit. The API returned the commit, its recursive tree and the source bytes. Each file matched the pinned blob and byte size. The manifest covers the certificate, source README and both licence notices.",
+  "sources": [
+    {
+      "id": "ozden-s264-upper-bound-2026-11-23",
+      "source_url": "https://github.com/kenaznia-doga/s264-upper-bound-1677216830",
+      "source_ref": "main",
+      "source_commit": "72c4d195c85b6099002ad6c675b27df40fdaceac",
+      "license": "CC BY 4.0 for certificates, data, receipts and text, copyright 2026 Doğa Özden, and MIT for source code, as LICENSE.md at the pin states. The MIT notice for Evan Daniel's optimizer is retained verbatim.",
+      "claims": [
+        "Issue #1099 reports s(264) <= 16.772168305041, rounded upward from a rational corners Witness/v2.",
+        "Özden's lab reports perturbing the Kodaj–JoeGun T-308 packing, annealing and refining it with Evan Daniel's ALM+SLP optimizer. Claude agents worked under Özden's direction.",
+        "The source reports exact feasibility, an earlier GeiserX certificate and a smaller side-only Kaggle entry. The claim is an upper bound."
+      ],
+      "committed_utc": "2026-11-23T10:55:30Z",
+      "git_tree": "d520149c866063c78710627219c4a58c8f79dc5d",
+      "archived_path": "packing/resources/web/ozden-s264-upper-bound-2026-11-23/source",
+      "subtree_manifest": "packing/resources/web/ozden-s264-upper-bound-2026-11-23/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE-evand-square-packing.txt",
+        "LICENSE.md",
+        "README.md",
+        "n-264-candidate.yaml"
+      ],
+      "subtree_file_count": 4,
+      "subtree_total_bytes": 729027,
+      "retained_file_count": 4,
+      "retained_total_bytes": 729027,
+      "compressed": [
+        "source/n-264-candidate.yaml.gz"
+      ],
+      "pinned_only": []
+    }
+  ]
+}

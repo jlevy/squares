@@ -22,10 +22,10 @@ in choosing it is a question for a person.
   below the case record's verified ceiling. Sides and ceilings are compared exactly
   (`devtools.exact_sides`): a fraction, or a real algebraic number held as the one root of
   its minimal polynomial in a rational interval, a closed-form ceiling included. Ties go
-  to the earlier finder, by the entry's `attribution.published`, and then to the earlier
-  entry; the case record keeps its own house where nothing is below it. A ceiling whose
-  exact form no reader here holds cannot be ordered, and `--check` fails on it as a defect
-  of this code (`Selection.unordered`);
+  to the earlier finder, by `attribution.published` or the project's `established` date,
+  and then to the earlier entry; the case record keeps its own house where nothing is
+  below it. A ceiling whose exact form no reader here holds cannot be ordered, and
+  `--check` fails on it as a defect of this code (`Selection.unordered`);
 - **credit** follows the entry, except that a candidate listed in its entry's
   `regularizations` at the count leaves the packing with the finder of the result it
   names as `of`, and credits the regularizer with the regularization
@@ -34,7 +34,8 @@ in choosing it is a question for a person.
   confirming evidence there, the replay that decided the certificate at that count, which
   a reported atom under the same key must also state (`source_key_at`): T-181's replays
   decided 211 and 241 from issue 583's revision and 302 from issue 586's, though both
-  reports state all three;
+  reports state all three. A first-party result has no attribution, and is read from a
+  unique confirming source where that source also reports the bound at the count;
 - **no result is held.** A house is adopted in the intake pass that validates it. Its
   adoption may follow in a later pull request of the same pass only where the count is
   staged in `PENDING_ADOPTION` with the open bead that adopts it, which `bead tree` holds
@@ -506,12 +507,15 @@ def reporting(
 ) -> tuple[str, ...]:
     """The entry's own reported evidence: the source's report, under the entry's key, and,
     given a count, whose scope reaches it (PR 574 reports its rational and its algebraic
-    certificates in two atoms)."""
+    certificates in two atoms). For a project entry, the report must state the upper bound
+    because the entry itself does not list its source in an attribution field.
+    """
     return tuple(
         str(identifier)
         for identifier in entry.get("evidence") or ()
         if (item := evidence.get(str(identifier)))
         and item.get("assurance") == "reported"
+        and ("attribution" in entry or item.get("claim") == "upper-bound")
         and item.get("source_key") == key
         and (n is None or "scope" not in item or n in scope_values(dict(item["scope"])))
     )
@@ -544,26 +548,27 @@ def source_key_at(
 ) -> str:
     """The source the entry's side at `n` is read from; empty where none is certain.
 
-    An entry over one source is read through it. An entry over several is read, count by
-    count, through the source of its confirming evidence at `n`, the replay that decided
-    the certificate there, and only where that is one of the entry's keys, the only one,
-    and a reported atom of the entry under it states the count too. The order of
-    `source_keys` decides nothing: two reports may both state a count that one replay
+    An attributed entry over one source is read through it. With several attributed
+    sources, or for a project entry without attribution, the count's confirming evidence
+    must identify one source, with a report under that key covering the count too.
+    For an attributed entry the key must also be one of its attributed sources. The order
+    of `source_keys` decides nothing: two reports may both state a count that one replay
     decided from one of them, as both of T-181's state 211 and 241 (review B of PR 614).
     """
-    keys = [str(key) for key in entry["attribution"]["source_keys"]]
+    attribution = entry.get("attribution")
+    keys = [str(key) for key in attribution["source_keys"]] if attribution is not None else []
     if len(keys) == 1:
         return keys[0]
     decided = {
-        str(evidence[identifier].get("source_key"))
+        str(evidence[identifier].get("source_key") or "")
         for identifier in confirming(entry, evidence, n)
     }
     if len(decided) != 1:
         return ""
     (key,) = decided
-    if key not in keys or not reporting(entry, evidence, key, n):
+    if not key or (attribution is not None and key not in keys):
         return ""
-    return key
+    return key if reporting(entry, evidence, key, n) else ""
 
 
 @cache
@@ -674,11 +679,17 @@ def candidates(
     for entry in results:
         if not eligible(entry) or (since and str(entry.get("registered")) < since):
             continue
-        keys = list(entry["attribution"]["source_keys"])
+        attribution = entry.get("attribution")
+        keys = attribution["source_keys"] if attribution is not None else ()
         if len(keys) == 1 and not _readable(str(keys[0])):
             if unread is not None:
                 unread.append(str(entry["id"]))
             continue
+        published = (
+            attribution.get("published")
+            if attribution is not None
+            else entry.get("established")
+        )
         missed = False
         for n in sorted(scope_values(dict(entry["scope"]))):
             if n > HORIZON:
@@ -702,7 +713,7 @@ def candidates(
                     n=n,
                     side=side,
                     source_key=key,
-                    published=str(entry["attribution"].get("published") or ""),
+                    published=str(published or ""),
                     report_evidence=reporting(entry, evidence, key, n),
                     confirming_evidence=proof,
                     regularizes=regularized(entry, n),

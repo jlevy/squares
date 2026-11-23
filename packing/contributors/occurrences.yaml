@@ -16354,6 +16354,30 @@ occurrences:
     the repository whose retained licence names Evan Daniel. Keep finder, improver
     and solver roles distinct.
 - origin:
+    path: packing/frontier/results.yaml
+    record_key: T-341
+    field: /builds_on/credit/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/frontier/results.yaml
+    record_key: T-342
+    field: /builds_on/credit/0
+  expected_text: Daniel
+  start: 0
+  end: 6
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-005.md
     record_key: '5'
     field: /reported_upper_bound/found_by/0
@@ -19691,6 +19715,18 @@ occurrences:
   note: Reviewed packing/frontier/n-127.md [127] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-127.md
+    record_key: '127'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Joshua Levy
+  start: 0
+  end: 11
+  label: Joshua Levy
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-128.md
     record_key: '128'
@@ -24537,6 +24573,18 @@ occurrences:
   note: Reviewed packing/frontier/n-305.md [305] /reported_lower_bound/proved_by/0
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+- origin:
+    path: packing/frontier/n-305.md
+    record_key: '305'
+    field: /reported_upper_bound/improved_by/2
+  expected_text: Joshua Levy
+  start: 0
+  end: 11
+  label: Joshua Levy
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-306.md
     record_key: '306'
@@ -35308,6 +35356,235 @@ occurrences:
   end: 24
   label: Joost de Winter
   role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 1042 public replay 2026-11-20]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: The retained issue comment identifies Joost de Winter as the person directing
+    the work.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 1042 public replay 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Hosono, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: The retained issue comment identifies Joost de Winter as the person directing
+    the work.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 1042 public replay 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Hosono, Levy
+  start: 16
+  end: 22
+  label: Hosono
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - github-profile
+  - bibliography
+  contributor_id: hiroaki-hosono
+  note: The issue comment credits Hiroaki Hosono for the underlying measures and T-180
+    coverage.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 1042 public replay 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Hosono, Levy
+  start: 24
+  end: 28
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: The packet names project measures and coverage receipts; this source does
+    not identify a person for that dependency.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n127 2026-11-23]'
+    field: /authors/0
+  expected_text: Levy
+  start: 0
+  end: 4
+  label: Levy
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n127 2026-11-23]'
+    field: /credit
+  expected_text: Levy after de Winter, Daniel
+  start: 0
+  end: 4
+  label: Levy
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n127 2026-11-23]'
+    field: /credit
+  expected_text: Levy after de Winter, Daniel
+  start: 11
+  end: 20
+  label: de Winter
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n127 2026-11-23]'
+    field: /credit
+  expected_text: Levy after de Winter, Daniel
+  start: 22
+  end: 28
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n305 2026-11-23]'
+    field: /authors/0
+  expected_text: Levy
+  start: 0
+  end: 4
+  label: Levy
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n305 2026-11-23]'
+    field: /credit
+  expected_text: Levy after Kodaj, JoeGun, de Winter, Daniel
+  start: 0
+  end: 4
+  label: Levy
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n305 2026-11-23]'
+    field: /credit
+  expected_text: Levy after Kodaj, JoeGun, de Winter, Daniel
+  start: 11
+  end: 16
+  label: Kodaj
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n305 2026-11-23]'
+    field: /credit
+  expected_text: Levy after Kodaj, JoeGun, de Winter, Daniel
+  start: 18
+  end: 24
+  label: JoeGun
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n305 2026-11-23]'
+    field: /credit
+  expected_text: Levy after Kodaj, JoeGun, de Winter, Daniel
+  start: 26
+  end: 35
+  label: de Winter
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[squares project regularized n305 2026-11-23]'
+    field: /credit
+  expected_text: Levy after Kodaj, JoeGun, de Winter, Daniel
+  start: 37
+  end: 43
+  label: Daniel
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s264 upper bound 2026-11-23]'
+    field: /authors/0
+  expected_text: Özden
+  start: 0
+  end: 5
+  label: Özden
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s264 upper bound 2026-11-23]'
+    field: /credit
+  expected_text: Ozden after Kodaj, JoeGun
+  start: 0
+  end: 5
+  label: Ozden
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s264 upper bound 2026-11-23]'
+    field: /credit
+  expected_text: Ozden after Kodaj, JoeGun
+  start: 12
+  end: 17
+  label: Kodaj
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s264 upper bound 2026-11-23]'
+    field: /credit
+  expected_text: Ozden after Kodaj, JoeGun
+  start: 19
+  end: 25
+  label: JoeGun
+  role: prerequisite
   disposition: unresolved
   evidence: []
   note: Identity review pending.

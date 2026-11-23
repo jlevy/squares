@@ -751,19 +751,19 @@
       "url": "https://github.com/evand/square-packing/blob/268af529546176a25224ea3b2c7d29cef8d9e911/search/trio126/n126_xu.cert"
     },
     {
-      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/a1ba5019e787e407646293d7bef81d63c9951b32/n127/n127_exact.json at a1ba5019e787e407646293d7bef81d63c9951b32",
+      "attribution": "Joost de Winter, regularized by the Squares Project with Evan Daniel's regularizer, https://github.com/jlevy/squares/blob/main/packing/cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert at think-4z8z-2026-11-23",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         127
       ],
       "n": 127,
-      "path": "resources/web/de-winter-s127-issue1020-2026-11-17/source/n127/n127_exact.json",
+      "path": "cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert",
       "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-18",
+      "retention_policy": "Complete project-generated certificate retained losslessly.",
+      "retrieved": "2026-11-23",
       "source_n": 127,
-      "url": "https://github.com/JoostdeWinter/square-packing/blob/a1ba5019e787e407646293d7bef81d63c9951b32/n127/n127_exact.json"
+      "url": "https://github.com/jlevy/squares/blob/main/packing/cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1794,19 +1794,19 @@
       "url": "https://github.com/user-attachments/files/35051652/GeiserX_exact.zip#GeiserX_exact/algebraic/n263.minpoly.json"
     },
     {
-      "attribution": "JoeGun, https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-264-candidate.yaml at bc10ce471c9d7841b9a53b383dae87d23dbe5a99",
+      "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s264-upper-bound-1677216830/blob/72c4d195c85b6099002ad6c675b27df40fdaceac/n-264-candidate.yaml at 72c4d195c85b6099002ad6c675b27df40fdaceac",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         264
       ],
       "n": 264,
-      "path": "resources/web/joegun-upper-bounds-2026-11-16/source/n-264-candidate.yaml",
+      "path": "resources/web/ozden-s264-upper-bound-2026-11-23/source/n-264-candidate.yaml.gz",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-16",
+      "retrieved": "2026-11-23",
       "source_n": 264,
-      "url": "https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-264-candidate.yaml"
+      "url": "https://github.com/kenaznia-doga/s264-upper-bound-1677216830/blob/72c4d195c85b6099002ad6c675b27df40fdaceac/n-264-candidate.yaml"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -2166,19 +2166,19 @@
       "url": "https://github.com/evand/square-packing/blob/bb4cc78e5b35103c1f177db55e9cf08974e66563/search/packer/candidates/s304_1105.cert"
     },
     {
-      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef/n305/n305_exact.json at db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef",
+      "attribution": "Joost de Winter, regularized by the Squares Project with Evan Daniel's solver, https://github.com/jlevy/squares/blob/main/packing/cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert at think-huum-2026-11-23",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "CC-BY-4.0",
       "listed_n": [
         305
       ],
       "n": 305,
-      "path": "resources/web/de-winter-n305-2026-11-20/source/n305/n305_exact.json.gz",
+      "path": "cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert",
       "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-11-21",
+      "retention_policy": "Complete project-generated certificate retained losslessly.",
+      "retrieved": "2026-11-23",
       "source_n": 305,
-      "url": "https://github.com/JoostdeWinter/square-packing/blob/db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef/n305/n305_exact.json"
+      "url": "https://github.com/jlevy/squares/blob/main/packing/cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n306.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

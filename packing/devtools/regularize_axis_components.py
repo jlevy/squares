@@ -167,6 +167,12 @@ ALGORITHM = "regularize_axis_components/2"
 check sees the index, not the code, so this is how it learns the views are out of date."""
 EVAND_GENERATOR = "evand-regularize"
 """Evan Daniel's regularizer as `devtools.regularize_evand` drives it (policy section 2)."""
+EVAND_AUTHOR_GENERATOR = "evand-author-regularize/1"
+"""An original author certificate imported by `devtools.regularize_author_view`."""
+
+EVAND_AUTHOR_CREDIT = "Regularized by Evan Daniel (evand/square-packing, MIT)"
+EVAND_AUTHOR_SOURCE_KEY = "[Daniel issue 914 2026-11-05]"
+
 GRID_GENERATOR = "regularize_grid_slack/0"
 """The grid-slack generator, `devtools.regularize_grid_slack`'s own version."""
 GRID_GENERATOR_V1 = "regularize_grid_slack/1"
@@ -177,7 +183,7 @@ GRID_GENERATOR_V2 = "regularize_grid_slack/2"
 """Its third version (think-mbdw, 26 October 2026): a witness over a number field is drawn
 in its own field, and each unchanged tilted square keeps its own exact rotation."""
 GRID_GENERATORS = (GRID_GENERATOR, GRID_GENERATOR_V1, GRID_GENERATOR_V2)
-GENERATORS = (ALGORITHM, EVAND_GENERATOR, *GRID_GENERATORS)
+GENERATORS = (ALGORITHM, EVAND_GENERATOR, EVAND_AUTHOR_GENERATOR, *GRID_GENERATORS)
 POLICY_DOCUMENT = "docs/project/policies/regularization-policy.md"
 EVAND_CREDIT = (
     "Regularized by the Squares Project with Evan Daniel's regularizer "
@@ -2482,6 +2488,14 @@ def _check_record(
         problems.extend(_regularization_problems(n, record, side=side, own=own))
         if drawn_elsewhere(record):
             problems.extend(_drawn_view_problems(record, decoded, own=own))
+        if generator == EVAND_AUTHOR_GENERATOR:
+            from devtools import regularize_author_view as author  # noqa: PLC0415
+
+            problems.extend(author.source_problems(layout.repo, load_yaml(decoded)["witness"]))
+            if not record["exact_verification"].get("half_angle"):
+                problems.append(
+                    f"n={n}: the original certificate needs an accepted half-angle check"
+                )
     elif status in {"unchanged", "refused"}:
         if drawn_elsewhere(record):
             problems.append(f"n={n}: {status} by {generator}, which records only views")
@@ -2513,7 +2527,7 @@ def _regularization_problems(
     n: int, record: dict[str, Any], *, side: Fraction, own: Fraction | None
 ) -> list[str]:
     """A drawn view's regularization, in the register's terms, is of this record's
-    witness, by this project, and names the generator that made it; its `side` is `same`
+    witness, credits its regularizer by origin, and names the generator; its `side` is `same`
     exactly when the view's side `s_V` is the witness's own `s_W` (#548 review B2), for
     every generator's view."""
     item = record.get("regularization")
@@ -2528,9 +2542,10 @@ def _regularization_problems(
         )
     if item.get("n") != n or item.get("of_witness") != record["source"]["id"]:
         problems.append(f"n={n}: the regularization is not of this record's witness")
-    if item.get("by") != PROJECT_REGULARIZER:
-        problems.append(f"n={n}: the regularization is by {item.get('by')!r}, not this project")
     generator = str(record.get("generator"))
+    by = EVAND_AUTHOR_SOURCE_KEY if generator == EVAND_AUTHOR_GENERATOR else PROJECT_REGULARIZER
+    if item.get("by") != by:
+        problems.append(f"n={n}: the regularization is by {item.get('by')!r}, expected {by!r}")
     mark = METHOD_MARKS.get(generator, generator)
     if mark not in str(item.get("method")):
         problems.append(f"n={n}: the regularization's method does not name {mark}")
@@ -2540,6 +2555,7 @@ def _regularization_problems(
 METHOD_MARKS = {
     ALGORITHM: ALGORITHM,
     EVAND_GENERATOR: "devtools.regularize_evand",
+    EVAND_AUTHOR_GENERATOR: "devtools.regularize_author_view",
     GRID_GENERATOR: GRID_GENERATOR,
     GRID_GENERATOR_V1: GRID_GENERATOR_V1,
     GRID_GENERATOR_V2: GRID_GENERATOR_V2,
@@ -2570,7 +2586,11 @@ def _drawn_view_problems(
         "label": DRAWING_LABEL,
         "derived_from": record["source"]["id"],
         "generator": record["generator"],
-        "credit": EVAND_CREDIT,
+        "credit": (
+            EVAND_AUTHOR_CREDIT
+            if record["generator"] == EVAND_AUTHOR_GENERATOR
+            else EVAND_CREDIT
+        ),
         "regularization": record["regularization"],
     }
     problems.extend(
@@ -3030,6 +3050,13 @@ def decide_drawn_view(
         problems.append(f"n={n}: the repository verifier refuses the drawn view")
     if squares and not independent.check_squares(squares, side)["verification_passed"]:
         problems.append(f"n={n}: the independent checker refuses the drawn view")
+    if record["generator"] == EVAND_AUTHOR_GENERATOR:
+        from devtools import check_half_angle_area as area  # noqa: PLC0415
+        from devtools import regularize_evand as driver  # noqa: PLC0415
+
+        author_side, placements, _corners = driver.view_geometry(view)
+        if not area.decide_placed(author_side, placements).passed:
+            problems.append(f"n={n}: the half-angle checker refuses the author's view")
     with tempfile.TemporaryDirectory() as scratch:
         plain = Path(scratch) / "view.yaml"
         plain.write_text(text, encoding="utf-8")

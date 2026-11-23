@@ -89,9 +89,13 @@ not rerun the mathematical checker.
 ## Remaining global work
 
 This result supplies a complete local catalogue for the exact path criterion.
-Applying those exclusions to every occupied-cell path, constructing the Boolean clauses
-with correct horizontal/vertical polarity, enumerating all separation graphs, extracting
-their geometric rules and proving graph-to-bank coverage are still open.
+The separate [path covariance audit](../review-one-axis-path-covariance/README.md)
+checks all 18,128 occupied paths and their D4 maps.
+The [case-to-clause audit](../review-one-axis-case-clauses/README.md) now binds every
+path in all 3,671 canonical cases to this catalogue, retaining 339,191 exclusions and
+214,968 not-certified path occurrences with correct literal polarity.
+Complete separation-graph enumeration, geometric rule extraction and graph-to-bank
+coverage remain open.
 
 In particular, the source’s 273,584 graphs and 566 used certificates are still producer
 reports. The 5,722 profiles not certified by this test must remain available when global

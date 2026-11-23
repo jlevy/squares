@@ -100,6 +100,12 @@ DECLARED_CONSUMERS = {
         "from the case record before deciding. It never reads the field as s(n) or as the "
         "witness's side, which it takes from the witness"
     ),
+    "packing/devtools/regularize_author_view.py": (
+        "reads the exact verified ceiling through regularize_evand.verified_bound and "
+        "requires the author certificate to equal that ceiling and the independently read "
+        "house side. The comparison governs admission of a same-side drawing and makes "
+        "no claim about optimality"
+    ),
     "packing/tests/test_regularize_evand.py": (
         "a synthetic report for the driver's tests carries U as the driver writes it, so the "
         "test can check a view at exactly U is decided as `bound`; it is a ceiling there, "

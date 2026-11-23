@@ -1,0 +1,143 @@
+{
+ "format": "evand-regularization-receipt-v1",
+ "generated_by": "python -m devtools.regularize_evand run",
+ "policy": "docs/project/policies/regularization-policy.md",
+ "finished": "2026-11-23T15:23:28Z",
+ "run_directory": "adopt-2026-11-23-n127-evand-finished",
+ "generator": {
+  "name": "evand-regularize",
+  "source_url": "https://github.com/evand/square-packing",
+  "pin": "675a5ea",
+  "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+  "patches": [],
+  "interpreter": "CPython 3.14.7"
+ },
+ "parameters": {
+  "timeout": 95.0,
+  "regularize_timeout": 65.0,
+  "variant": "conservative",
+  "orient": "0",
+  "from_stage": "input",
+  "same_mode": "relax",
+  "frame": "kkt",
+  "style": "coincide",
+  "dps": 80,
+  "eps": "1e-20",
+  "workers": 1,
+  "counts": [
+   127
+  ]
+ },
+ "counts": [
+  {
+   "n": 127,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "KKT local min",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "11.800793726614962238505095371612079547112856108271079486401967374",
+   "s_W": "11.800793726614962238623103308879",
+   "U": "11.80079372661496224",
+   "level": 2,
+   "moved": 5,
+   "groups": [
+    16,
+    13
+   ],
+   "symmetry": [],
+   "view": "same",
+   "s_V": "11.800793726614962238623103308879",
+   "relation": "same",
+   "same_refusal": null,
+   "one_to_one": true,
+   "max_move": "2.000004e-8",
+   "house": [
+    [
+     34,
+     22,
+     17,
+     13,
+     41
+    ],
+    [
+     34,
+     22,
+     17,
+     13,
+     41
+    ]
+   ],
+   "stage": [
+    [
+     15,
+     28,
+     28,
+     15,
+     41
+    ],
+    [
+     15,
+     28,
+     28,
+     15,
+     41
+    ]
+   ],
+   "row": 10,
+   "decision": "no-change",
+   "index_record": "unchanged",
+   "refusal": null,
+   "after_registration": null,
+   "solved_row": 10,
+   "seconds": {
+    "input": 0.019,
+    "solve": 12.65,
+    "regularize": 9.62,
+    "import": 2.691,
+    "same": 183.977,
+    "measure": 1.882
+   },
+   "cost": {
+    "cpu_seconds": 153.16,
+    "wall_seconds": 210.89
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 95.0,
+    "regularize_timeout": 65.0,
+    "from_stage": "input"
+   }
+  }
+ ],
+ "candidates": [],
+ "review_queue": [],
+ "index_records": {
+  "regularized": [],
+  "refused": [],
+  "unchanged": [
+   127
+  ]
+ },
+ "solve_outputs": {
+  "127": {
+   "input.txt": "243ba69480732126a7916b22bafb65985d6f5be9c0a7fac89151dd2851c27e82",
+   "solve/witness.exact.txt": "4f5204f75fa6b7ab5e0731c6f6d8819208e6bbe2d5e08d63ce819840c77a5443",
+   "solve/witness.contacts.json": "1623b76aae9b19bfde53427805d83281431c9866583eafc52964cf3c28e16591",
+   "regularize.cert": "cd5589204bec01bed5daf9777ed248833d9352b336de18123d824f17247d120c"
+  }
+ },
+ "cost": {
+  "cpu_seconds": 153.16,
+  "wall_seconds": 210.89,
+  "workers": 1,
+  "measured_by": "completed n127 count report; batch supervisor stopped the subsequent count, so batch time is excluded"
+ },
+ "previous_runs": []
+}

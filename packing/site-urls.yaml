@@ -5547,7 +5547,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-20'
+  lastmod: '2026-11-23'
   status: live
 - path: cases/128.html
   canonical: cases/128.html
@@ -6763,7 +6763,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-16'
+  lastmod: '2026-11-23'
   status: live
 - path: cases/265.html
   canonical: cases/265.html
@@ -7131,7 +7131,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-21'
+  lastmod: '2026-11-23'
   status: live
 - path: cases/306.html
   canonical: cases/306.html
@@ -26645,6 +26645,98 @@ urls:
     - packing/resources/web/de-winter-1060-1063-2026-11-21/n232/receipts/native-exact-gmp-supervision.json
 - path: result/t-341.html
   canonical: result/t-341.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-23'
+  lastmod: '2026-11-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 127
+    established: '2026-11-23'
+    attribution: null
+    builds_on:
+      credit:
+      - Daniel
+      source_keys:
+      - '[Daniel regularizer 2026-10-11]'
+    evidence:
+    - E-squares-project-regularized-n127-report
+    - E-squares-project-regularized-n127-exact-feasibility
+    - E-squares-project-axis-regularizer-method
+    artifacts:
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/exact-certification-n127.json.xz
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/sharp-controls-n127.json
+    - packing/cases/regularized_drawings/think-4z8z-2026-11-23/n127-replay/n-127/report.json.gz
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127-own.json
+    - docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md
+- path: result/t-342.html
+  canonical: result/t-342.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-23'
+  lastmod: '2026-11-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 305
+    established: '2026-11-23'
+    attribution: null
+    builds_on:
+      credit:
+      - Daniel
+      source_keys:
+      - '[Daniel regularizer 2026-10-11]'
+    evidence:
+    - E-squares-project-regularized-n305-report
+    - E-squares-project-regularized-n305-exact-feasibility
+    - E-squares-project-axis-regularizer-method
+    artifacts:
+    - packing/cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert
+    - packing/cases/register_candidates/think-huum-2026-11-23/receipts/exact-certification-n305.json.xz
+    - packing/cases/regularized_drawings/think-huum-2026-11-23/n305-nonlinear-restart/n-305/refined-decided.json.gz
+    - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/contraction-1052.json
+    - docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md
+- path: result/t-343.html
+  canonical: result/t-343.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-23'
+  lastmod: '2026-11-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 264
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s264 upper bound 2026-11-23]'
+      published: '2026-11-23'
+    builds_on: null
+    evidence:
+    - E-ozden-1099-certificate-report
+    - E-ozden-1099-exact-feasibility
+    - E-ozden-1099-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/README.md
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/acquisition/claims.json
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/acquisition/exact-comparison.json
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/source/n-264-candidate.yaml.gz
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check-result.json.gz
+    - docs/project/reviews/review-2026-11-23-ozden-1099.md
+- path: result/t-344.html
+  canonical: result/t-344.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview

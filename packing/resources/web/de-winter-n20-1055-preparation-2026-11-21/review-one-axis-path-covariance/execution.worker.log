@@ -1,0 +1,1 @@
+{"status": "complete-geometry-and-local-covariance-audit", "counts": {"vacancy_patterns": 120, "occupied_paths": 18128, "D4_geometry_maps": 960, "path_images": 145024, "local_profile_comparisons": 58016, "controls": 13}, "wall_seconds": 3.5525694169919007, "peak_rss_bytes": 116080640}

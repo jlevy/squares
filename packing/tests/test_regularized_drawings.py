@@ -87,6 +87,48 @@ def test_the_packing_is_the_result_holding_it_at_the_side_drawn() -> None:
     assert "no longer the verified upper bound" in moved.reason
 
 
+def test_first_party_drawings_resolve_from_the_count_scoped_report_and_replay(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    source = "[project packing]"
+    result = {
+        "id": "T-900",
+        "scope": {"n_values": [127, 131]},
+        "evidence": ["E-report", "E-replay"],
+    }
+    report = {
+        "claim": "upper-bound",
+        "assurance": "reported",
+        "source_key": source,
+        "scope": {"n_values": [127, 128]},
+    }
+    replay = {
+        **report,
+        "assurance": "verified",
+        "origin": "replayed-here",
+        "performed_by": "repository",
+        "replay_status": "passed",
+    }
+    register = citations.Register(
+        evidence={"E-report": report, "E-replay": replay},
+        results=[result],
+        sources={},
+        names={},
+    )
+    index = {
+        "entries": [{**entry(n), "generator": drawings.AXIS_GENERATOR} for n in (127, 128, 131)]
+    }
+    monkeypatch.setattr(drawings, "load_case", lambda _n: {})
+    monkeypatch.setattr(drawings, "witness_source_key", lambda *_args, **_kwargs: source)
+
+    drawn = drawings.drawn_counts(index, register=register)
+
+    assert [count.resolved.of for count in drawn] == ["T-900", None, None]
+    # Confirmation alone cannot identify the packing without its own matching report.
+    report["source_key"] = "[unrelated]"
+    assert drawings.drawn_counts(index, register=register)[0].resolved.of is None
+
+
 def test_an_axis_view_is_at_the_side_its_regularization_states() -> None:
     axis_view = entry(5)
     assert drawings.relation(axis_view) == "same"

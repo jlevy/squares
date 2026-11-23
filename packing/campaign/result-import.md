@@ -1119,7 +1119,8 @@ No adoption waits for the owner’s word, and each case that once did is decided
   owner only as a possible exception to recording a result, and an exception changes no
   house best packing. `select_houses` replaces a house best packing only with a smaller
   one, so the case keeps its own at an exact tie; between validated candidates of one
-  side it keeps the earlier `attribution.published`, then the earlier entry.
+  side it keeps the earlier date (`attribution.published` for an external result or
+  `established` for a project result), then the earlier entry.
   That date is the last of an entry’s certificates where it has several, so it stands in
   for report order only where the two agree.
   On 16 October 2026 no two candidates at a count that moves are exactly equal.
@@ -1272,6 +1273,24 @@ witness, that each settlement’s runs are retained and cover the count, that ea
 exemption quotes the owner, and that the state step,
 `every drawn picture is regularized, regular as published, decided or exempt on the owner's word`,
 printed `this change moves N houses` with the counts expected.
+
+**Drawing follow-up.** Compare the selected drawing with the previous default on all
+seven drawing measures in the
+[improvement rule](../../docs/project/policies/regularization-policy.md#11-the-improvement-rule).
+The default-drawing records retain the measures for both revisions.
+If a moved count loses a drawing goal, name the loss, the selected view, and the open
+follow-up bead in the adoption pull request.
+Several counts can share a bead for the same remaining work.
+Give a reported visual concern the same disposition when the intake pass finds no
+admissible replacement.
+Record the exact reason the other candidates were held.
+
+**Check the live drawing.** After the deployment verifies, check each moved count’s case
+page and the homepage atlas in Regularized mode against the selected rendering and flip
+record. Record which views are live in the owning intake bead.
+For a reported color problem, check the fill’s angle hue and full-side contact shade in
+the rendered view before changing either.
+Report a fallback as the view that shipped and link its follow-up bead.
 
 **An exemption is the owner’s alone.** An `exempt` entry in `SETTLED` carries the
 owner’s words exactly, the day they were given and the repository file that records them

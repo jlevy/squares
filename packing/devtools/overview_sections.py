@@ -1425,15 +1425,13 @@ def added_entry(result: Result) -> str:
     on a quieter line, its cases (`added_cases`), its V and C rungs and its S score, and
     its credit
     (`credit_link`). An S4 or S5 score is set in the significance ink. A result since
-    superseded (`is_superseded`) is muted, its id titled so, and its quiet line ends
-    "superseded", where touch screens and screen readers see it too; its links keep their
-    colour (#514's review A, finding A4)."""
+    superseded (`is_superseded`) is muted and its quiet line ends "superseded", where
+    touch screens and screen readers see it. Its links retain their colour."""
     record = result.record
     level = significance(result)
     score = f"<b>S{level}</b>" if level >= INKED_SIGNIFICANCE else f"S{level}"
     superseded = is_superseded(result)
     mark = ' class="site-rollup-superseded"' if superseded else ""
-    title = ' title="Superseded"' if superseded else ""
     headline = link_prose(html.escape(plain_text(result.summary), quote=False))
     rungs = f"{_esc(record['verification'])} {_esc(record['confirmation'])} {score}"
     who = credit_link(
@@ -1441,7 +1439,7 @@ def added_entry(result: Result) -> str:
     )
     note = " · superseded" if superseded else ""
     return (
-        f'<li{mark}><a class="{ROLLUP_ID}" href="{_esc(result_url(result.id))}"{title}>'
+        f'<li{mark}><a class="{ROLLUP_ID}" href="{_esc(result_url(result.id))}">'
         f"{_esc(result.id)}</a> "
         f"{headline}<small>{_esc(added_cases(result))} · {rungs} · {who}{note}</small></li>"
     )
@@ -1731,22 +1729,16 @@ def changelog_since(overview: Overview, document: ChangelogDocument) -> str:
 # so that it "consistently shows both and shows last few days of changelog below the last
 # few news items, each with its own section and button to go to the dedicated page".
 # The section is the head of the Changelog page's own log (`changelog_rollup`), drawn by
-# the same code: the same day blocks, the same lines, the newest day open.
+# the same code: the same day blocks and lines, with more recent days open at home.
 
-#: How many days the home page's Changelog shows: the newest three on which the record
-#: holds anything, however long ago they were. Days that hold entries, not a span of the
-#: calendar, so the section is never empty after a quiet week: on 3 November 2026 the
-#: newest three were 31, 26 and 25 October, and the last three days of the calendar held
-#: none of them. Three shows the newest day open with two more closed under it, enough to
-#: read the log's pace without the section becoming the log.
-HOME_CHANGELOG_DAYS = 3
-#: The most lines the home page's Changelog holds before it stops adding older days.
-#: The newest day is always shown whole, so the section is never empty and never cuts a
-#: day short; an older day joins only while the total stays within this. Measured on
-#: 3 November 2026 over the 34 three-day stretches of the record's 36 days: the newest
-#: three held 37 lines, a stretch held 6 to 68, and 60 trims only the three stretches
-#: that hold the 46-line 14 October, to two days each.
-HOME_CHANGELOG_LINES = 60
+#: The newest seven days with entries. A quiet stretch leaves the latest activity visible.
+HOME_CHANGELOG_DAYS = 7
+#: Expand the two newest days in the preview so their entries are immediately readable.
+HOME_CHANGELOG_OPEN = 2
+#: The line cap keeps the longer preview compact. The newest day appears whole, and
+#: older days are included whole while they fit. The seven most recent days held
+#: 71 lines on November 22, 2026, when the homepage preview was expanded.
+HOME_CHANGELOG_LINES = 74
 #: A day block's address in the home page's Changelog. It is not the Changelog page's
 #: `changelog-date-<day>`, which the home page's News box already gives the first card
 #: of each of its days (`render_changelog.render_news`).
@@ -1773,7 +1765,7 @@ def changelog_window(days: Sequence[tuple[date, int]]) -> list[date]:
 
 def changelog_preview(overview: Overview, document: ChangelogDocument) -> str:
     """The home page's Changelog: the log's newest days (`changelog_window`), drawn as
-    the Changelog page draws them, the newest open. A day block is addressed
+    the Changelog page draws them, with the two newest open. A day block is addressed
     `home-changelog-<day>` and a change's line carries no anchor, since the News box
     above it holds the Changelog's day and story anchors on the same page."""
     return _changelog_log(overview, document, preview=True)
@@ -1799,6 +1791,7 @@ def _changelog_log(overview: Overview, document: ChangelogDocument, *, preview: 
         if not ordered:
             return CHANGELOG_NONE
     prefix = HOME_CHANGELOG_DAY if preview else render_changelog.DAY_ANCHOR
+    open_days = HOME_CHANGELOG_OPEN if preview else RECENT_OPEN
     blocks = []
     for index, day in enumerate(ordered):
         recent = recents.get(day)
@@ -1818,10 +1811,11 @@ def _changelog_log(overview: Overview, document: ChangelogDocument, *, preview: 
         if today:
             tally.append(tally_count(len(today), f"change{'' if len(today) == 1 else 's'}"))
         shown = added_day_link(day, len(recent.results)) if recent and recent.results else ""
-        state = " open" if index < RECENT_OPEN else ""
+        state = " open" if index < open_days else ""
+        day_key = day.isoformat()
+        day_attribute = f' data-day="{day_key}"' if preview else ""
         blocks.append(
-            f'<details data-day="{day.isoformat()}" '
-            f'id="{prefix}{day.isoformat()}"{state}>'
+            f'<details{day_attribute} id="{prefix}{day_key}"{state}>'
             f"{tallied_summary(day_label(day), tally)}"
             f"<ul>{''.join(entries)}</ul>{shown}</details>"
         )
@@ -3408,11 +3402,11 @@ def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
     and carries both drawings, so Original switches every tile to its house drawing as
     published, in its source's pose. `regularized` says whether the default picture is
     the case's regularized view, whose generator's credit the Regularized title adds;
-    `side` is the default picture's. Where the pose turns the default picture, the
-    Regularized title says so, since the tile then does not draw it as published."""
+    `side` is the default picture's. The Regularized title identifies a selected view,
+    states when it keeps the house side and says when the canonical pose turns it."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.build_bound_citations import load_case  # noqa: PLC0415
-    from devtools.default_drawings import credit_line  # noqa: PLC0415
+    from devtools.default_drawings import credit_line, regularized_defaults  # noqa: PLC0415
     from devtools.pictured_source import pictured_source_key  # noqa: PLC0415
 
     upper = load_case(n)["reported_upper_bound"]
@@ -3421,7 +3415,12 @@ def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
     attribution = [part for part in (credit, source) if part]
     original_credit = ", ".join(["Packing as published", *attribution])
     turned = [] if frontier.default_pose(n).identity else ["turned to its canonical pose"]
-    shown = ", ".join(["Packing as published", *turned, *attribution])
+    label = "Packing as published"
+    if regularized:
+        label = "Regularized drawing"
+        if regularized_defaults()[n]["side"]["against_house"] == "same":
+            label += " at the published side"
+    shown = ", ".join([label, *turned, *attribution])
     title = f"{shown}. {credit_line(n)}" if regularized else shown
     choices = (
         f' data-atlas-original-src="{frontier.drawing_path(n)}"'

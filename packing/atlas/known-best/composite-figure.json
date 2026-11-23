@@ -3340,19 +3340,19 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"5900396863307481119664515678048233366964863482714849291045437/500000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"11800793726614962238623103308879/1000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(127) ≥ 11.281929","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"11.2819293264"},
         "n": 127,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"11.8007937266149623","source_url":"https://github.com/JoostdeWinter/square-packing/blob/a1ba5019e787e407646293d7bef81d63c9951b32/n127/n127_exact.json","witness_id":"W-known-best-n127","witness_path":"packing/witnesses/known-best/n-127.yaml"},
+          "assessed_geometry": {"reported_side":"11.80079372661496224","source_url":"https://github.com/jlevy/squares/blob/main/packing/cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert","witness_id":"W-known-best-n127","witness_path":"packing/witnesses/known-best/n-127.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
               "evidence_refs": ["E-translation-escape-not-rigid"],
               "method": "numerical-multiprecision",
               "property": "not-rigid",
-              "scope": "Square 2 of the retained witness (witness id 3) translates 0.322569 along (1, 0) with the packing still valid, so the configuration admits a non-trivial feasible motion; 41 of its 127 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
+              "scope": "Square 0 of the retained witness (witness id 1) translates 0.038625 along (0.707107, 0.707107) with the packing still valid, so the configuration admits a non-trivial feasible motion; 22 of its 127 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
               "sources": [{"date_note":"The current retained screen has no generation date; the historical source-review date does not date the current witness assessments.","date_reference":null,"determination_precision":"unknown","determined_at":null,"evidence_ref":"E-translation-escape-not-rigid","recorded_at":"2026-10-08","recording_event":"Import of the unified displayed-packing rigidity assessment after the 2026-10-08 source audit.","reference":"packing/atlas/known-best/translation-escape-screen.json","reviewed_at":"2026-09-07"}]
             }
           ],
@@ -3362,7 +3362,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(127) ≤ 11.800794","provenance":"frontier","relation":"upper-bound","value":"11.8007937266149623"}
+        "side": {"display":"s(127) ≤ 11.800794","provenance":"frontier","relation":"upper-bound","value":"11.80079372661496224"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
@@ -6986,19 +6986,19 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"1048362974875124931200045135165846110458139868651210718423626556399934406292049263215086241095736335587279162207436980729666772855226622435076783155619594773642655806836365008121431358257863038539839030649644483414811/62500000000000000000000000000050074178554068134084131762011431855803347089522008989856304041359994785280236306057026780627888878608590464729067840121405009311728634559429241152518025000000708874650090000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"52413025953251561123543319189069260371128934510917560364364409813461585167232269243571634089458939746021687638193439792537748709459989314659179367503761312109/3124999999999991273353740028372772249916468315131441015972668196711907312117879501595524371952697210414692126830406844613554507152302090371200200000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(264) ≥ 16.255951","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"16.2559512565"},
         "n": 264,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"16.7738075980019989","source_url":"https://github.com/JonathanGun/square-packing-upper-bounds/blob/bc10ce471c9d7841b9a53b383dae87d23dbe5a99/n-264-candidate.yaml","witness_id":"W-known-best-n264","witness_path":"packing/witnesses/known-best/n-264.yaml"},
+          "assessed_geometry": {"reported_side":"16.7721683050405464","source_url":"https://github.com/kenaznia-doga/s264-upper-bound-1677216830/blob/72c4d195c85b6099002ad6c675b27df40fdaceac/n-264-candidate.yaml","witness_id":"W-known-best-n264","witness_path":"packing/witnesses/known-best/n-264.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
               "evidence_refs": ["E-translation-escape-not-rigid"],
               "method": "numerical-multiprecision",
               "property": "not-rigid",
-              "scope": "Square 0 of the retained witness (witness id 1) translates 0.000121 along (0, 1) with the packing still valid, so the configuration admits a non-trivial feasible motion; 223 of its 264 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
+              "scope": "Square 1 of the retained witness (witness id 2) translates 0.002114 along (0, -1) with the packing still valid, so the configuration admits a non-trivial feasible motion; 91 of its 264 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
               "sources": [{"date_note":"The current retained screen has no generation date; the historical source-review date does not date the current witness assessments.","date_reference":null,"determination_precision":"unknown","determined_at":null,"evidence_ref":"E-translation-escape-not-rigid","recorded_at":"2026-10-08","recording_event":"Import of the unified displayed-packing rigidity assessment after the 2026-10-08 source audit.","reference":"packing/atlas/known-best/translation-escape-screen.json","reviewed_at":"2026-09-07"}]
             }
           ],
@@ -7008,7 +7008,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(264) ≤ 16.773808","provenance":"frontier","relation":"upper-bound","value":"16.7738075980019989"}
+        "side": {"display":"s(264) ≤ 16.772169","provenance":"frontier","relation":"upper-bound","value":"16.7721683050405464"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
@@ -8059,19 +8059,19 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"179457558387415886710583983360138290031648651962347523515443824166144058057388817807/10000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"44864389596853971677645995840034572507912162990586880878860956041536014514347204438234416389597/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(305) ≥ 17.477926","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"17.4779268463"},
         "n": 305,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"17.9457558387415887","source_url":"https://github.com/JoostdeWinter/square-packing/blob/db8efcb6bf05906e977bc62f1f6d8ccfcaa296ef/n305/n305_exact.json","witness_id":"W-known-best-n305","witness_path":"packing/witnesses/known-best/n-305.yaml"},
+          "assessed_geometry": {"reported_side":"17.94575583874158868","source_url":"https://github.com/jlevy/squares/blob/main/packing/cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert","witness_id":"W-known-best-n305","witness_path":"packing/witnesses/known-best/n-305.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
               "evidence_refs": ["E-translation-escape-not-rigid"],
               "method": "numerical-multiprecision",
               "property": "not-rigid",
-              "scope": "Square 31 of the retained witness (witness id 32) translates 0.006072 along (0.423153, 0.906058) with the packing still valid, so the configuration admits a non-trivial feasible motion; 138 of its 305 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
+              "scope": "Square 31 of the retained witness (witness id 32) translates 0.007197 along (0.423153, 0.906058) with the packing still valid, so the configuration admits a non-trivial feasible motion; 46 of its 305 squares do. Every constraint is exactly affine in the slide parameter, so the arithmetic carries no linearization error, but the coordinates are the witness's own finite-precision transcription: this settles the retained configuration, not the true optimum. Rigidity and optimality are independent, and this bears only on the former.",
               "sources": [{"date_note":"The current retained screen has no generation date; the historical source-review date does not date the current witness assessments.","date_reference":null,"determination_precision":"unknown","determined_at":null,"evidence_ref":"E-translation-escape-not-rigid","recorded_at":"2026-10-08","recording_event":"Import of the unified displayed-packing rigidity assessment after the 2026-10-08 source audit.","reference":"packing/atlas/known-best/translation-escape-screen.json","reviewed_at":"2026-09-07"}]
             }
           ],
@@ -8081,7 +8081,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(305) ≤ 17.945756","provenance":"frontier","relation":"upper-bound","value":"17.9457558387415887"}
+        "side": {"display":"s(305) ≤ 17.945756","provenance":"frontier","relation":"upper-bound","value":"17.94575583874158868"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

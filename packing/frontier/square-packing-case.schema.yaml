@@ -114,7 +114,8 @@ $defs:
       `side`, and `kind: exact-solve` where the source's certificate is an exact solve of
       that packing, a conversion to an exact packing and not a regularization, as issue
       639's exact forms are, T-193's, and PR 574's algebraic certificates at 153 and 207,
-      T-174's), then this project's (`by: project`): the layer's
+      T-174's), then the drawn regularization (`by: project` for a project run or
+      its source key for an imported author certificate): the layer's
       generator, its credit line, this project's `modifications` to Evan Daniel's
       regularizer where his method
       made the view (empty where none applied; absent for the project's own axis tool),
@@ -140,7 +141,7 @@ $defs:
             by: {type: string, pattern: '^(\[.+\]|project)$'}
             credit: {type: string, minLength: 1}
             generator:
-              enum: [regularize_axis_components/2, evand-regularize,
+              enum: [regularize_axis_components/2, evand-regularize, evand-author-regularize/1,
                      regularize_grid_slack/0, regularize_grid_slack/1,
                      regularize_grid_slack/2]
             modifications: {type: array, items: {type: string, minLength: 1}}
@@ -160,7 +161,17 @@ $defs:
           allOf:
             - if: {required: [first_certified_in]}
               then: {required: [registered_in]}
-            - if: {properties: {by: {const: project}}}
+            - if:
+                required: [generator]
+                properties: {generator: {const: evand-author-regularize/1}}
+              then:
+                required: [view]
+                properties: {by: {const: '[Daniel issue 914 2026-11-05]'}}
+            - if:
+                anyOf:
+                  - properties: {by: {const: project}}
+                  - required: [generator]
+                    properties: {generator: {const: evand-author-regularize/1}}
               then:
                 required: [generator]
                 if: {required: [view]}

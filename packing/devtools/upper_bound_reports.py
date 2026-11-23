@@ -1760,9 +1760,28 @@ def _de_winter_997_followup_side(n: int) -> Fraction:
     return houses.de_winter_997_followup_source("T-338").certificate(n).side
 
 
+PROJECT_N127_KEY = "[squares project regularized n127 2026-11-23]"
+PROJECT_N305_KEY = "[squares project regularized n305 2026-11-23]"
+PROJECT_CANDIDATE_BATCHES = {
+    PROJECT_N127_KEY: "think-4z8z-2026-11-23",
+    PROJECT_N305_KEY: "think-huum-2026-11-23",
+}
+
+
+def _project_candidate_side(key: str, n: int) -> Fraction:
+    from devtools import register_candidates  # noqa: PLC0415
+
+    batch = register_candidates.BATCHES[PROJECT_CANDIDATE_BATCHES[key]]
+    return register_candidates.read_certificate(batch, n).side
+
+
 #: How each holding source's exact side is rebuilt from its own retained packet, keyed by
 #: source key, so a comparison stays what it was however the case records later move.
 HOUSES: dict[str, Callable[[int], Fraction]] = {
+    **{
+        key: functools.partial(_project_candidate_side, key)
+        for key in PROJECT_CANDIDATE_BATCHES
+    },
     "[de Winter n232 rational certificate 2026-11-21]": _de_winter_n232_side,
     "[de Winter issue 997 follow-up 2026-11-21]": _de_winter_997_followup_side,
     "grid": grid_side,
@@ -2018,6 +2037,7 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     # The intake pass of 20 November (think-91fu): Doğa Özden's issue 1038 at 228, his exact
     # centre-basis Witness/v2 of the public Kaggle snapshot published by jazivxt.
     "[Özden s228 upper bound 2026-11-18]": _import("ozden-s228-upper-bound-2026-11-18"),
+    "[Özden s264 upper bound 2026-11-23]": _import("ozden-s264-upper-bound-2026-11-23"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

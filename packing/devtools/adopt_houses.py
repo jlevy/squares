@@ -3053,6 +3053,46 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
+    "T-341": Prose(
+        author="Joshua Levy",
+        reported="in this project’s 23 November intake",
+        producer_route=True,
+        ai="Codex replayed the regularization with Evan Daniel’s vendored tools.",
+        routes=(
+            "The producing run used these project checkers, and a separate replay checked "
+            "the retained certificate again. The area route parses the half-angle rows "
+            "separately and tests exact intersection areas."
+        ),
+        confirmation="reproduced with the producer’s code",
+        lineage=(
+            "The input was Joost de Winter’s T-330 band packing, developed from an "
+            "arrangement in Alex Chilton and Asterios Panoras’s Kaggle compilations whose "
+            "original finder could not be established. The new side is about 7.059e-19 "
+            "below T-330, well beyond its 1.820e-58 contraction margin."
+        ),
+        retained="the rational half-angle certificate",
+    ),
+    "T-342": Prose(
+        author="Joshua Levy",
+        reported="in this project’s 23 November intake",
+        producer_route=True,
+        ai=(
+            "Codex restarted Evan Daniel’s vendored exact solver from the cleaner "
+            "regularized pose and generated a rational certificate with reduced padding."
+        ),
+        routes=(
+            "The project repeated the exact checks of the narrowed certificate with its "
+            "maintained rational verifiers. The area route parses the half-angle rows "
+            "separately and tests exact intersection areas."
+        ),
+        confirmation="reproduced with the producer’s code",
+        lineage=(
+            "T-336’s packing keeps its published lineage: Tomáš Kodaj’s arrangement, "
+            "improved by JoeGun and then by Joost de Winter. The re-solve fits in a side "
+            "about 2.202e-81 below T-336 shrunk to first contact."
+        ),
+        retained="the rational half-angle certificate",
+    ),
     "T-344": Prose(
         author="Joost de Winter",
         reported="on [jlevy/squares#1037](https://github.com/jlevy/squares/issues/1037)",
@@ -3177,6 +3217,34 @@ RESULTS: dict[str, Prose] = {
         ),
         third_route=REVIEW_1001,
         diversity="by a Claude agent, a system family whose code made the coordinates",
+        squares="its four rational corners",
+    ),
+    "T-343": Prose(
+        author="Doğa Özden",
+        reported="on [jlevy/squares#1099](https://github.com/jlevy/squares/issues/1099)",
+        producer_route=True,
+        ai=(
+            "Özden directed the work of Claude agents, "
+            "who searched, checked and filed the report."
+        ),
+        routes=(
+            "The source used the project’s rational promotion and verifier. "
+            "The maintained replay used GMP arithmetic for both exact routes. "
+            "The independent review read the original rational corners with its own parser."
+        ),
+        lineage=(
+            "The source identifies Tomáš Kodaj’s packing as improved by JoeGun (T-308) "
+            "as the seed, then perturbs and anneals it before refining it with Evan Daniel’s "
+            "ALM+SLP quench. The exact side is about 0.001639293 below T-308 contracted to "
+            "first contact, an improvement under option D. It is about 0.000674848 below "
+            "the separate, earlier certificate in #1037, credited to Sergio Fernández Rubio "
+            "(GeiserX) and Joost de Winter. The source’s smaller cited Kaggle side supplies "
+            "no coordinates."
+        ),
+        third_route=(
+            ", and a separately prompted review verified the exact corner geometry, "
+            "all 1,056 wall inequalities and all 34,716 square pairs with integer projections"
+        ),
         squares="its four rational corners",
     ),
     "T-309": Prose(
@@ -4117,9 +4185,9 @@ CREDITS: dict[int, Credit] = {
     # Winter is its finder.
     127: Credit(
         (DE_WINTER,),
-        (),
-        "Joost de Winter’s band packing, after an arrangement in the Kaggle compilations of "
-        "Alex Chilton and Asterios Panoras",
+        ("Joshua Levy",),
+        "Joshua Levy’s regularization of Joost de Winter’s band packing "
+        "using Evan Daniel’s method",
     ),
     # Mykhailo Polkovskyi's KKT refinement of PR 574's re-solve of issue 562's packing
     # (T-186's regularization of T-174), no square moved beyond 1e-3.
@@ -4560,14 +4628,11 @@ CREDITS: dict[int, Credit] = {
         (DE_WINTER,),
         "Joost de Winter’s quadratic certificate of Sergio Fernández Rubio’s packing",
     ),
-    # T-308 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 264, a new
-    # arrangement relative to T-186's packing (44 squares beyond a tenth); the issue says a
-    # 600-second quench with Evan Daniel's code made JoeGun's step.
+    # T-343 refines the T-308 packing and retains its finder and improvement credit.
     264: Credit(
         (KODAJ,),
-        (JOEGUN,),
-        "Tomáš Kodaj’s public Kaggle packing, as JoeGun improved it by a quench with Evan "
-        "Daniel’s code",
+        (JOEGUN, OZDEN),
+        "Tomáš Kodaj’s packing, improved by JoeGun and further refined by Doğa Özden",
     ),
     267: _couzo("Xu"),
     # T-289 (adopted on 11 November 2026), Doğa Özden's issue 945: a new arrangement relative
@@ -4729,9 +4794,9 @@ CREDITS: dict[int, Credit] = {
     # to this project, as its bibliography lineage states.
     305: Credit(
         (KODAJ,),
-        (JOEGUN, DE_WINTER),
-        "Joost de Winter’s further refinement of Tomáš Kodaj’s public Kaggle packing "
-        "as JoeGun improved it",
+        (JOEGUN, DE_WINTER, "Joshua Levy"),
+        "Joshua Levy’s regularization of Tomáš Kodaj’s packing as JoeGun and "
+        "Joost de Winter refined it, using Evan Daniel’s method",
     ),
     # T-174's regularization of T-128's packing, 34 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
@@ -5297,10 +5362,13 @@ def _roster(move: Move) -> list[str]:
 
 
 def _resource(move: Move) -> dict[str, Any]:
+    packet = houses.source_for(move.n).packet
+    resources = ROOT / "resources"
+    local = packet.relative_to(resources if packet.is_relative_to(resources) else REPO)
     return {
         "key": move.house.source_key,
         "role": "upper-bound-report",
-        "local": f"web/{houses.source_for(move.n).packet.name}",
+        "local": local.as_posix(),
         "url": _source_url(move.house.source_key, move.n),
         "retrieved": True,
     }
@@ -5486,7 +5554,7 @@ def _anchor(move: Move) -> str:
 def section(move: Move) -> str:
     n, house, credit = move.n, move.house, CREDITS[move.n]
     prose = RESULTS[house.result]
-    packet = houses.source_for(n).packet.name
+    packet = houses.source_for(n).packet.relative_to(ROOT).as_posix()
     review, reviewed = _review(house.result)
     ceiling = shown(move.side, _above(move))
     if isinstance(move.side, exact_sides.Algebraic):
@@ -5524,7 +5592,7 @@ def section(move: Move) -> str:
             f"{credit.phrase[0].upper()}{credit.phrase[1:]}, {verb} {prose.reported}, "
             f"{side} ({house.result}). The certificate gives a rational side and, for each "
             f"of the {n} unit squares, {prose.squares}; "
-            f"the [retained packet](../resources/web/{packet}/README.md) holds "
+            f"the [retained packet](../{packet}/README.md) holds "
             f"{prose.retained} with the complete native jobs that decided it."
         ),
         (

@@ -1,0 +1,3 @@
+16:59:54 swap volume /System/Volumes/VM: 22.9GB free, suspension distance 24.4GB
+16:59:54 observing pid=84065 with per-sample phys_footprint; no pause, shed, or termination actions
+16:59:54 logging measurements to results/case-execution-01.jsonl

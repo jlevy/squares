@@ -322,12 +322,15 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: T-338 changed 90 from zero separating and 12 translating squares to 1 and 17.
 #: T-339 changed 179 from 64 separating and translating squares to 16 and 64.
 #: T-340 changed 232 from 48 separating and 76 translating squares to 78 and 170.
+#: T-341 changed 127 from 8 separating and 41 translating squares to 7 and 22.
+#: T-342 changed 305 from 32 separating and 138 translating squares to 18 and 46.
+#: T-343 changed 264 from 152 separating and 223 translating squares to 72 and 91.
 #: T-344 changed 202 from 26 separating and 44 translating squares to 14 and 84,
 #: and 263 from 12 and 33 to 27 and 143.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (29, 112, 86, 584),
-    "n=1..200": (70, 537, 182, 2462),
-    "n=1..324": (128, 2723, 302, 7708),
+    "n=1..200": (70, 536, 182, 2443),
+    "n=1..324": (128, 2628, 302, 7465),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -5991,6 +5994,9 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_author_view.py",
+            "packing/devtools/check_half_angle_area.py",
+            "packing/resources/web/evand-issue914-2026-11-05/**/s304_1105_regularized.*",
             "packing/atlas/known-best/regularized-atlas-index.schema.yaml",
             "packing/devtools/census_atlas_contact_shades.py",
             "packing/devtools/check_rational_witness_independent.py",
@@ -6012,6 +6018,9 @@ STEPS: tuple[Step, ...] = (
         touches=(
             *_CORE,
             "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/regularize_author_view.py",
+            "packing/devtools/check_half_angle_area.py",
+            "packing/resources/web/evand-issue914-2026-11-05/**/s304_1105_regularized.*",
             "packing/devtools/census_atlas_contact_shades.py",
             "packing/devtools/check_rational_witness_independent.py",
             "packing/devtools/upper_bound_packets.py",

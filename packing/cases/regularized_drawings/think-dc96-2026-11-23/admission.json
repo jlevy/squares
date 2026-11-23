@@ -1,0 +1,259 @@
+{
+ "n": 304,
+ "source": {
+  "author": "Evan Daniel",
+  "source_commit": "bb4cc78e5b35103c1f177db55e9cf08974e66563",
+  "certificate": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105_regularized.cert",
+  "sha256": "ee95b657f24d0f93b2b02c073922147b36faed4996fcdd6df587f713fccad065",
+  "author_report": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105_regularized.json",
+  "archived_review": "packing/resources/web/evand-issue914-2026-11-05/review/review-2026-11-05/out/feasibility/s304_1105_regularized.json"
+ },
+ "house": {
+  "witness": "packing/witnesses/known-best/n-304.yaml",
+  "id": "W-known-best-n304",
+  "scalar_kind": "rational",
+  "sha256": "ad55d74bdcc417bfd9d0b4d584279e7e97986b2d493df78fc66e248d38b32ed3"
+ },
+ "prior_view": {
+  "path": "packing/atlas/known-best/regularized/n-304-regularized.yaml.gz",
+  "sha256": "a3991a7dfb9a61b5fac950830df12132dc5b99bc0b389c7d31df58769052bb91"
+ },
+ "side": {
+  "reported": "17.920944093340242061198022152503",
+  "view": "17920944093340242061198022152503/1000000000000000000000000000000",
+  "relation": "same",
+  "view_minus_reported": "0.000e+00",
+  "view_minus_verified_upper_bound": "0.000e+00"
+ },
+ "author_settings": {
+  "policy": "conservative",
+  "level": 2,
+  "orientation_g": 0,
+  "shape": "arc",
+  "angle_changes": [
+   [
+    "free-angle straighten",
+    5,
+    9
+   ]
+  ]
+ },
+ "fresh_gmp_checks": {
+  "repository_verifier": {
+   "operation": "verify",
+   "id": "W-known-best-n304-regularized",
+   "coordinate_provenance": "verified",
+   "method": "exact-algebraic",
+   "verification_passed": true,
+   "n": 304,
+   "side": "17920944093340242061198022152503/1000000000000000000000000000000",
+   "pairs_tested": 46056,
+   "minimum_containment_clearance": "1/200000000000000000000",
+   "minimum_best_pair_gap": "2080640073061225440352538027650868122452634394659026160632162349688810280689945221409/208064007306122788987737389788185414963053386329201687337829522581042580000000000000000000000000000000000",
+   "field_certificate": {
+    "field": "Q",
+    "preconditions": "degree-one rational field"
+   },
+   "failures": [],
+   "limitations": "Verifies witness feasibility and its upper bound, not global optimality."
+  },
+  "independent_checker": {
+   "verification_passed": true,
+   "coordinate_provenance": "verified",
+   "method": "exact-algebraic",
+   "field": "Q",
+   "n": 304,
+   "side": "17920944093340242061198022152503/1000000000000000000000000000000",
+   "pairs_tested": 46056,
+   "minimum_containment_clearance": "1/200000000000000000000",
+   "minimum_best_pair_gap": "2080640073061225440352538027650868122452634394659026160632162349688810280689945221409/208064007306122788987737389788185414963053386329201687337829522581042580000000000000000000000000000000000",
+   "failures": [],
+   "limitations": "Verifies witness feasibility and its upper bound, not optimality."
+  }
+ },
+ "half_angle_check": {
+  "method": "devtools.check_half_angle_area.decide",
+  "source": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105_regularized.cert",
+  "side": "17920944093340242061198022152503/1000000000000000000000000000000",
+  "passed": true,
+  "pairs": 46056,
+  "clipped": 671,
+  "overlapping": 0,
+  "outside": 0,
+  "wall_clearance": "1/200000000000000000000",
+  "far_wall_clearance": "250000000021521/50000000000000000000000000000000000",
+  "closest": null,
+  "wall_contacts": 0
+ },
+ "identity": {
+  "basis": "measured",
+  "measured_in": "packing/atlas/known-best/regularized/index.json",
+  "one_to_one": true,
+  "moved": 83,
+  "max_move": 0.4126673,
+  "max_turn_deg": 2.46738
+ },
+ "contacts": {
+  "of": "author-certificate",
+  "measured_in": "devtools.census_atlas_contact_shades: edge_rule_contacts (house) and centre_rule_contacts (stage) on packings_from_witness",
+  "house": {
+   "before": [
+    81,
+    51,
+    75,
+    49,
+    48
+   ],
+   "after": [
+    25,
+    32,
+    70,
+    22,
+    155
+   ]
+  },
+  "stage": {
+   "before": [
+    32,
+    54,
+    97,
+    56,
+    65
+   ],
+   "after": [
+    20,
+    34,
+    73,
+    22,
+    155
+   ]
+  },
+  "regressions": [],
+  "against_current": {
+   "view": "packing/atlas/known-best/regularized/n-304-regularized.yaml.gz",
+   "regressions": [],
+   "histograms": {
+    "house": [
+     48,
+     32,
+     70,
+     29,
+     125
+    ],
+    "stage": [
+     25,
+     41,
+     84,
+     29,
+     125
+    ]
+   }
+  }
+ },
+ "decision": {
+  "row": 10,
+  "decision": "admit",
+  "index_record": "regularized",
+  "refusal": null,
+  "reason": "every admission condition holds; the pose changes: squares [45, 92, 93, 94, 95, 156, 241, 242, 243] turned without a recorded angle change"
+ },
+ "comparison": {
+  "before": {
+   "n": 304,
+   "drawing": {
+    "kind": "regularized-view",
+    "path": "packing/atlas/known-best/regularized/n-304-regularized.yaml.gz",
+    "generator": "regularize_axis_components/2"
+   },
+   "verified": true,
+   "side": "17920944093340242061198022152503/1000000000000000000000000000000",
+   "printed_side": null,
+   "light_axis": 10,
+   "uneven_axis": 40,
+   "near_axis": 5,
+   "classes": 13,
+   "hues": 13,
+   "house_total": 759,
+   "stage_total": 796,
+   "house": [
+    48,
+    32,
+    70,
+    29,
+    125
+   ],
+   "stage": [
+    25,
+    41,
+    84,
+    29,
+    125
+   ]
+  },
+  "after": {
+   "n": 304,
+   "drawing": {
+    "kind": "regularized-view",
+    "path": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105_regularized.cert",
+    "generator": "evand-author-regularize/1"
+   },
+   "verified": true,
+   "side": "17920944093340242061198022152503/1000000000000000000000000000000",
+   "printed_side": null,
+   "light_axis": 0,
+   "uneven_axis": 0,
+   "near_axis": 0,
+   "classes": 7,
+   "hues": 7,
+   "house_total": 858,
+   "stage_total": 866,
+   "house": [
+    25,
+    32,
+    70,
+    22,
+    155
+   ],
+   "stage": [
+    20,
+    34,
+    73,
+    22,
+    155
+   ]
+  },
+  "gains": [
+   "light_axis",
+   "uneven_axis",
+   "near_axis",
+   "classes",
+   "hues",
+   "house_total",
+   "stage_total"
+  ],
+  "losses": []
+ },
+ "run": {
+  "id": "evand-author-regularize-n304-2026-11-23",
+  "generator": "evand-author-regularize/1",
+  "finished": "2026-11-23",
+  "parameters": {
+   "certificate": "packing/resources/web/evand-issue914-2026-11-05/source/search/packer/candidates/s304_1105_regularized.cert",
+   "admission_receipt": "packing/cases/regularized_drawings/think-dc96-2026-11-23/admission.json",
+   "verification_backends": [
+    "gmp",
+    "half-angle area"
+   ]
+  },
+  "counts": 1,
+  "decisions": {
+   "admit": 1
+  },
+  "cost": {
+   "cpu_seconds": 4.803,
+   "wall_seconds": 7.233,
+   "workers": 1,
+   "note": "Measured import verification and admission checks. Author run cost was unreported."
+  }
+ }
+}

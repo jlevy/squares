@@ -6261,7 +6261,73 @@ sources:
       and certified them for issue 1037 using Evan Daniel's solver. The source
       identifies Asterios Panoras's compilation as a donor for 66 squares at 297.
       Exact release geometry and an independent review at 202 and 263 are retained.
+  - key: '[de Winter issue 1042 public replay 2026-11-20]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-20'
+    lineage: builds-on-project
+    credit: de Winter after Hosono, Levy
+    note: >-
+      Joost de Winter's issue 1042 comment 7022143149, first posted on 19 November
+      at 21:02:44 UTC and retained as edited on 20 November at 02:02:32 UTC,
+      requests 155 lower bounds. This date identifies the retained revision;
+      report order preserves the original comment timestamp. The exact 48,944-byte
+      base85 ZIP is retained at SHA-256 2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab.
+      Hiroaki Hosono supplied the underlying measures. The seven registered-boundary
+      rows explicitly reuse this project's retained source measures and coverage
+      receipts; that reuse is a dependency, not independent verification of the new
+      bound. The author names GPT6.2 Astra as the AI author under his direction.
+      The archive has no separate LICENSE member and points to the pinned source's
+      credit and licence notices. No source program ran during this custody triage.
+
+  - key: '[squares project regularized n127 2026-11-23]'
+    authors: [Levy]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-23'
+    credit: Levy after de Winter, Daniel
+    lineage: builds-on-project
+    note: >-
+      The Squares Project’s replayed exact regularization (T-341) of Joost de Winter’s
+      T-330 band packing using Evan Daniel’s vendored MIT solver and regularizer.
+      The arrangement preceding de Winter’s packing appeared in the Kaggle compilations
+      of Alex Chilton and Asterios Panoras. Both maintained rational routes and the
+      half-angle area checker accepted the certificate for finite feasibility.
+  - key: '[squares project regularized n305 2026-11-23]'
+    authors: [Levy]
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-23'
+    credit: Levy after Kodaj, JoeGun, de Winter, Daniel
+    short_credit: Levy after Kodaj et al.
+    lineage: builds-on-project
+    note: >-
+      The Squares Project’s exact re-solve (T-342) from a regularized pose of T-336,
+      using Evan Daniel’s vendored MIT solver and regularizer. The original packing
+      is Tomáš Kodaj’s, improved by JoeGun and Joost de Winter. Both maintained
+      rational routes and the half-angle area checker accepted the certificate
+      for finite feasibility.
+  - key: '[Özden s264 upper bound 2026-11-23]'
+    authors:
+    - Özden
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-23'
+    lineage: builds-on-project
+    credit: Ozden after Kodaj, JoeGun
+    note: >-
+      Doğa Özden’s exact rational witness for s(264) <= 16.772168305041, rounded upward at
+      12 places, at kenaznia-doga/s264-upper-bound-1677216830 (72c4d195c85b6099002ad6c675b27df40fdaceac) and reported
+      in #1099. His lab reports that it perturbed Tomáš Kodaj’s packing as JoeGun improved it
+      (T-308), annealed and refined it using Evan Daniel’s ALM+SLP quench, and promoted the
+      decimal pose with the Squares Project’s rational promotion tool.
+      Claude agents assisted under Özden’s direction. The certificate and text are licensed
+      CC BY 4.0. The source code and optimizer have MIT notices. Retained in
+      web/ozden-s264-upper-bound-2026-11-23/.
 credited_names:
+  Joshua Levy: Levy
   Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim
   Doğa Özden: Özden

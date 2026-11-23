@@ -14,20 +14,22 @@ deferrals:
     - T-180
     bead: think-3n1x
     blocked_on: think-tsox
-    recorded: '2026-10-14'
+    recorded: '2026-11-23'
     reason: 'cfcheck''s sample replay decides 2,909 leaves of the closed form''s intervals 1 and 34
       and no count: a sample sets no rung, and the 33 counts those intervals carry are proved by T-064,
       T-084 and T-086, whose case records the generator drafts. A case record cites it once a complete
-      replay moves the closed form''s verified lane.'
+      replay moves the closed form''s verified lane.
+      The complete intervals 1 and 34 replay remains held in think-o4kf. The later conditional Lean argument leaves the finite LocalCovers premises open.'
   - evidence: E-wand125-closed-form-replay4d-sample
     results:
     - T-180
     bead: think-tsox
     blocked_on: think-wu73
-    recorded: '2026-10-14'
+    recorded: '2026-11-23'
     reason: 'replay4d''s calibration replays 2 of the closed form''s 136 records, intervals 26 and 14
       top, and no count: a sample sets no rung. A case record cites it once a complete replay moves
-      the closed form''s verified lane, which think-wu73 holds over the owner''s 40 CPU-hour cap.'
+      the closed form''s verified lane, which think-wu73 holds over the owner''s 40 CPU-hour cap.
+      The complete 136-record replay remains held in think-wu73. The later conditional Lean argument does not discharge layer B or convert this calibration to a full replay.'
   - evidence: E-evand-gradec-local-minima-233-review-check
     results:
     - T-261

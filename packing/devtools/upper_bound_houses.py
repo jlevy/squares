@@ -882,6 +882,63 @@ def de_winter_997_followup_source(result: str) -> Source:
     )
 
 
+def project_candidate_source(result: str, key: str) -> Source:
+    """Build a house from a registered project certificate and its native jobs."""
+    from devtools import register_candidates  # noqa: PLC0415 -- candidate custody uses readers
+
+    batch = register_candidates.BATCHES[reports.PROJECT_CANDIDATE_BATCHES[key]]
+
+    def stored(n: int) -> Path:
+        return register_candidates.certificate_path(batch, n)
+
+    def receipt(n: int) -> Path:
+        return register_candidates.receipt_path(batch, n)
+
+    def jobs(n: int, exact: legacy.Certificate) -> Mapping[str, Any]:
+        record = register_candidates.check_receipt(batch, n, exact=exact)
+        return {str(row["control"]): row for row in record["cases"]}
+
+    def origin(n: int) -> Origin:
+        path = stored(n)
+        return Origin(
+            key=key,
+            path=path,
+            url=f"https://github.com/jlevy/squares/blob/main/{path.relative_to(REPO).as_posix()}",
+            revision=batch.name,
+            retrieved=batch.date,
+            author=batch.author,
+            licence_status="CC-BY-4.0",
+            raw_asset_retained=True,
+            retention_policy="Complete project-generated certificate retained losslessly.",
+        )
+
+    def inputs(numbers: Sequence[int]) -> tuple[Path, ...]:
+        return tuple(
+            path
+            for n in numbers
+            for path in (
+                stored(n),
+                receipt(n),
+                register_candidates.report_path(batch.candidate(n)),
+            )
+        )
+
+    return Source(
+        result=result,
+        key=key,
+        packet=batch.package,
+        certificate=lambda n: register_candidates.read_certificate(batch, n),
+        jobs=jobs,
+        origin=origin,
+        inputs=inputs,
+        witness_prefix=batch.witness_prefix,
+        claim_limitations=batch.claim_limitations,
+        stored=stored,
+        receipt=receipt,
+        rational_backend=batch.rational_backend,
+    )
+
+
 #: The counts each result houses by its algebraic witness, whose side is irrational: PR
 #: #574's three algebraic certificates the house rule adopts (T-174), and the exact forms of
 #: issue 639 whose facts its packet derives (T-193). Issue 639's other staged counts wait:
@@ -897,6 +954,8 @@ def _sources() -> dict[str, Source]:
     from devtools import n232_rational_source  # noqa: PLC0415 -- source factory uses Source
 
     sources = [
+        project_candidate_source("T-341", reports.PROJECT_N127_KEY),
+        project_candidate_source("T-342", reports.PROJECT_N305_KEY),
         n232_rational_source.house_source("T-340"),
         packet_source("T-134", "couzo-exact-certificates-2026-10-09"),
         packet_source("T-139", "evand-trio126-2026-10-09"),
@@ -1054,7 +1113,11 @@ def _sources() -> dict[str, Source]:
         # T-305 is no source here now.
         packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
         # T-340 replaced T-307 at its only house.
-        packet_source("T-308", "joegun-upper-bounds-2026-11-16"),
+        # T-343 is Özden's refinement of the packing by Kodaj and JoeGun at 264.
+        replace(
+            packet_source("T-343", "ozden-s264-upper-bound-2026-11-23"),
+            rational_backend="gmp",
+        ),
         # The pass of 21 November 2026 (think-8yyy) moved 199 and 172 to Joost de Winter's
         # issues 939 and 946 (T-285, T-286), T-284's and T-282's packings re-solved to the
         # exact local optimum of T-282's arrangement, new results under the owner's option D
@@ -1076,19 +1139,10 @@ def _sources() -> dict[str, Source]:
             packet_source(f"T-{number}", "mishapolk-issue1009-2026-11-16")
             for number in (*range(314, 320), 322, 323, 324, 326)
         ),
-        # The pass of 20 November 2026 (think-zqot) moved 127 from T-305, its only house
-        # (T-306 to T-309 still house 204, 232, 264 and 305 through the same packet), to Joost
-        # de Winter's issue 1020 (T-330), the smallest of his three reports there on the
-        # evening of 17 November.
-        packet_source("T-330", "de-winter-s127-issue1020-2026-11-17"),
         packet_source("T-331", "de-winter-s268-upper-bound-2026-11-17"),
         packet_source("T-332", "de-winter-s270-upper-bound-2026-11-17"),
         packet_source("T-333", "de-winter-s299-upper-bound-2026-11-18"),
         packet_source("T-335", "samanyu-n109-2026-11-07"),
-        # The pass of 21 November 2026 (think-kzwl) moves 305 from T-309 to
-        # de Winter's issue-1052 refinement. T-309 has no current house; the
-        # JoeGun packet still supplies T-306, T-307 and T-308 above.
-        packet_source("T-336", "de-winter-n305-2026-11-20"),
         geiserx_1040_source("T-337"),
     ]
     if result := n179_algebraic_report.registered_result():
@@ -1246,7 +1300,7 @@ ADOPTED: dict[int, str] = {
     110: "T-174",
     123: "T-193",
     126: "T-139",
-    127: "T-330",
+    127: "T-341",
     129: "T-186",
     130: "T-259",
     131: "T-174",
@@ -1291,7 +1345,7 @@ ADOPTED: dict[int, str] = {
     261: "T-174",
     262: "T-319",
     263: "T-344",
-    264: "T-308",
+    264: "T-343",
     267: "T-134",
     268: "T-331",
     269: "T-297",
@@ -1307,7 +1361,7 @@ ADOPTED: dict[int, str] = {
     302: "T-193",
     303: "T-278",
     304: "T-273",
-    305: "T-336",
+    305: "T-342",
     306: "T-174",
     307: "T-326",
     308: "T-221",
@@ -1561,6 +1615,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-20": frozenset({127, 268, 270, 299}),
     "2026-11-21": frozenset({90, 109, 172, 179, 199, 228, 259, 305}),
     "2026-11-22": frozenset({202, 232, 263}),
+    "2026-11-23": frozenset({127, 264, 305}),
 }
 
 
@@ -1749,6 +1804,8 @@ def writable_source(result: str, n: int, key: str, *, algebraic: bool) -> Source
         return found if not algebraic or n in found.fields else None
     if key == "[de Winter issue 997 follow-up 2026-11-21]" and not algebraic and n == 90:
         return de_winter_997_followup_source(result)
+    if not algebraic and key in reports.PROJECT_CANDIDATE_BATCHES:
+        return project_candidate_source(result, key)
     packet = reports.import_packet(key)
     if algebraic or packet is None:
         return None
@@ -1909,9 +1966,19 @@ def _mutants(n: int) -> list[tuple[str, Path, Callable[[bytes], bytes]]]:
         kernel.save_xz(path, record)
         return path.read_bytes()
 
+    def certificate_bytes(raw: bytes) -> bytes:
+        if source.key not in reports.PROJECT_CANDIDATE_BATCHES:
+            return raw + b"\n"
+        # Project receipts bind exact inputs. Change a centre rather than whitespace
+        # the reader is expected to accept as another encoding of the same pose.
+        certificate = reports.evand_cert(raw, n, {})
+        first, *rest = certificate.poses
+        changed = replace(certificate, poses=(replace(first, x=first.x + 1), *rest))
+        return legacy.serialize(changed).encode("utf-8")
+
     return [
         ("outside-control verdict", receipt_of(n), verdict),
-        ("certificate bytes", source.stored(n), lambda raw: raw + b"\n"),
+        ("certificate bytes", source.stored(n), certificate_bytes),
     ]
 
 

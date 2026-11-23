@@ -6,6 +6,44 @@ softschema:
   status: enforced
 repository: https://github.com/jlevy/squares
 entries:
+  - id: evan-daniel-regularized-304-diagram
+    date: '2026-11-23'
+    title: A More Regular Diagram for the 304-Square Packing
+    significance:
+      score: 2
+      rationale: A visual refinement of an existing packing at its published bound.
+    topics: [project]
+    categories: [regularization, site]
+    pull_requests: [1097]
+    summary: >-
+      The atlas selects Evan Daniel’s original regularized diagram for 304 squares.
+      The diagram uses seven angle colors, down from thirteen, and three exact
+      checkers accepted all 46,056 square pairs at the published bound.
+    artifacts:
+      - kind: page
+        label: 304-square case and regularized drawing
+        target: https://squaremath.org/cases/304.html
+    publication:
+      evidence: https://github.com/jlevy/squares/actions/runs/45124879939
+  - id: distinguish-rare-violet-109-pinwheel
+    date: '2026-11-23'
+    title: A More Distinct Violet in the 109-Square Pinwheel
+    significance:
+      score: 2
+      rationale: A small rendering fix makes two angle groups easier to distinguish.
+    topics: [project]
+    categories: [site]
+    pull_requests: [1096]
+    summary: >-
+      The 109-square pinwheel uses a more distinct violet for its rare angle color.
+      The usual pink still marks the same 21 squares in the regularized drawing.
+    artifacts:
+      - kind: page
+        label: 109-square case and pinwheel
+        target: https://squaremath.org/cases/109.html
+    publication:
+      date: '2026-11-23'
+      evidence: https://github.com/jlevy/squares/actions/runs/45119059616/job/137512140261
   - id: khalili-gharabaghi-k2m5-family-reported
     date: '2026-11-14'
     title: Khalili and Gharabaghi Report s(k² − 5) = k for Every k ≥ 7
@@ -1926,7 +1964,8 @@ entries:
       [Oscar Fitzharding](packing/contributors/people/oscar-fitzharding.md) reports a Lean 4 proof that [John Bidwell](packing/contributors/people/john-bidwell.md)’s 1998 packing of 17 unit squares is
       optimal: $s(17) = 4.67553009360455\ldots$. It is the first proof-assistant proof of this
       value in the project’s records and uses a different argument from [Marc Leonard Overbeck](packing/contributors/people/marc-leonard-overbeck.md)’s candidate
-      proof. T-154 remains reported at V0/C1; the full Lean build has not been replayed here.
+      proof. The record grades T-154 at V3/C1 based on the inspected source build.
+      Independent confirmation of the complete build is pending.
     artifacts:
       - kind: result
         label: Current 17-square Lean proof report
@@ -3049,6 +3088,21 @@ entries:
       - label: Revised verification and confirmation ladder
         target: https://github.com/jlevy/squares/pull/262
 deliveries:
+- number: 1097
+  title: 'fix: Publish the verified regularized n304 diagram'
+  merged_at: '2026-11-23T06:33:15Z'
+  base_ref: main
+  merge_commit: 39d52547aea2fd7554032a5118e6068c63ba1ae1
+- number: 1096
+  title: 'fix: distinguish the rare violet in the 109-square pinwheel'
+  merged_at: '2026-11-23T05:38:32Z'
+  base_ref: main
+  merge_commit: ce9d1d49fc3b77e090240db30ea914c592281f93
+- number: 1095
+  title: 'docs: require visual drawing follow-up during intake'
+  merged_at: '2026-11-23T05:12:28Z'
+  base_ref: main
+  merge_commit: 19bbdf0ef65c748ffff76ad963f7032e4bd43fb0
 - number: 974
   title: 'records(L145): import #973, s(k^2 - 5) = k for every k >= 7, as T-298 (reported, V0/C1)'
   merged_at: '2026-11-14T06:36:21Z'
@@ -3839,6 +3893,9 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 1097
+  - 1096
+  - 1095
   - 974
   - 852
   - 840
@@ -3969,6 +4026,8 @@ coverage:
   - 615
   - 619
   omissions:
+  - pull_request: 1095
+    reason: S2 maintenance of internal drawing review and deployment instructions.
   - pull_request: 628
     reason: >-
       S1 intake bookkeeping: watched-source reads, request triage, labels and resolved

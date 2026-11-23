@@ -1120,7 +1120,8 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     default picture, the Regularized title says it is turned to its canonical pose, and
     the Original credit stays the packing as published."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
-    from devtools.default_drawings import credit_line  # noqa: PLC0415
+    from devtools.default_drawings import credit_line, regularized_defaults  # noqa: PLC0415
+    from devtools.regularize_axis_components import EVAND_AUTHOR_CREDIT  # noqa: PLC0415
 
     page = overview_sections.atlas_grid()
     regularized = overview_sections.atlas_regularized()
@@ -1151,19 +1152,19 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         shown = re.findall(r' data-atlas-regularized-credit="([^"]*)"', drawing)[0]
         assert f' title="{shown}"' in drawing, n
         credit = html.unescape(shown)
-        assert ("Regularized by the Squares Project" in credit) is is_regularized
         original = html.unescape(
             re.findall(r' data-atlas-original-credit="([^"]*)"', drawing)[0]
         )
         assert original.startswith("Packing as published, "), n
         assert "canonical pose" not in original, n
-        drawn_as = (
-            original
-            if frontier.default_pose(n).identity
-            else original.replace(
-                "as published", "as published, turned to its canonical pose", 1
-            )
-        )
+        attribution = original.removeprefix("Packing as published, ")
+        turned = [] if frontier.default_pose(n).identity else ["turned to its canonical pose"]
+        label = "Packing as published"
+        if is_regularized:
+            label = "Regularized drawing"
+            if regularized_defaults()[n]["side"]["against_house"] == "same":
+                label += " at the published side"
+        drawn_as = ", ".join([label, *turned, attribution])
         assert credit == (f"{drawn_as}. {credit_line(n)}" if is_regularized else drawn_as), n
         titles[n] = (original, credit)
         assert "regularized" not in open_tag
@@ -1177,6 +1178,9 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         "Packing as published, John Bidwell 1998, [Kingbird]",
         "Packing as published, turned to its canonical pose, John Bidwell 1998, [Kingbird]",
     )
+
+    assert titles[304][1].startswith("Regularized drawing at the published side,")
+    assert titles[304][1].endswith(f". {EVAND_AUTHOR_CREDIT}")
 
     identical_thumbnails: set[int] = set()
     for n in regularized:
@@ -2712,10 +2716,7 @@ def test_other_projects_include_every_source_repository_the_record_reviews() -> 
 
 
 def test_every_source_the_coverage_register_reviews_has_a_card() -> None:
-    """Every source the source-coverage register reviews, on GitHub or off it, has a card
-    in Other Square Packing Projects: a repository's (a revision or a directory of it
-    names the repository), the catalogue's, a release's or a record's on Zenodo. No
-    address is listed twice."""
+    """Each external reviewed source has one card in Other Square Packing Projects."""
     coverage = safe_load(overview_sections.SOURCE_COVERAGE.read_text(encoding="utf-8"))
     listed = [
         overview_sections.source_repository(url) for url in overview_sections.project_urls()
@@ -2723,7 +2724,8 @@ def test_every_source_the_coverage_register_reviews_has_a_card() -> None:
     reviewed = {
         overview_sections.source_repository(source["url"]) for source in coverage["sources"]
     }
-    assert reviewed <= set(listed), sorted(reviewed - set(listed))
+    external = reviewed - {"https://github.com/jlevy/squares"}
+    assert external <= set(listed), sorted(external - set(listed))
     assert len(set(listed)) == len(listed)
 
 
@@ -4426,7 +4428,7 @@ def test_home_invitation_leads_to_the_complete_contribution_instructions(
 def test_the_sites_own_statement_follows_readmes_introduction(
     about: str, results: str, report: str
 ) -> None:
-    """About keeps the credited highlights and qualifies the two unverified reports.
+    """About keeps the credited highlights and qualifies both seventeen-square proofs.
     Every named result keeps its source, attribution, and verification claims; the
     contribution invitation retains the owner's two paragraphs."""
     narrative = about.split("</h1>", 1)[1].split("</div>", 1)[0]
@@ -4460,7 +4462,8 @@ def test_the_sites_own_statement_follows_readmes_introduction(
         ),
         (
             "Oscar Fitzharding\u2019s Lean proof report for seventeen squares, "
-            "also unverified here (V0/C1)."
+            "recorded at V3/C1 based on the inspected source build. Independent "
+            "confirmation of the complete build is pending."
         ),
     ]
     text = _rendered_text(narrative)

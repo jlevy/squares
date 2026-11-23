@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-11-22'
+last_reviewed: '2026-11-23'
 results:
   - id: T-001
     kind: lower-bound
@@ -54615,6 +54615,216 @@ results:
       covers:
       - T-340
 
+  - id: T-341
+    kind: upper-bound
+    registered: '2026-11-23'
+    landed: '2026-11-23'
+    established: '2026-11-23'
+    headline: Exact regularization at 127 squares
+    claim: The retained rational centre and half-angle certificate proves s(127) <= 11800793726614962238623103308879/1000000000000000000000000000000.
+      It is 7.05928047217e-19 below T-330 and 7.05928047217e-19 below that predecessor at first contact.
+      Uneven axis-aligned squares fell from 15 to 2, and near-axis squares fell from 2 to zero. The
+      127 centres pair one to one with the predecessor, with 44 moves beyond 0.001 and a largest
+      move of 0.3364312. Joost de Winter’s packing keeps its credit. The Squares Project made this
+      regularization using Evan Daniel’s exact solver and conservative coincidence regularizer (MIT).
+    scope:
+      n_values:
+      - 127
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 1
+      rationale: The exact bound improves on the predecessor at first contact by less than one
+        unit at the previous display precision.
+      scored: '2026-11-23'
+      by: Codex, intake assessment
+    novelty: apparently-novel
+    builds_on:
+      credit:
+      - Daniel
+      source_keys:
+      - '[Daniel regularizer 2026-10-11]'
+    regularizations:
+    - n: 127
+      of: T-330
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/cases/regularized_drawings/think-4z8z-2026-11-23/n127-replay/n-127/report.json.gz
+        one_to_one: true
+        moved: 44
+        max_move: 0.3364312
+        max_turn_deg: 0.879038
+    evidence:
+    - E-squares-project-regularized-n127-report
+    - E-squares-project-regularized-n127-exact-feasibility
+    - E-squares-project-axis-regularizer-method
+    artifacts:
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/exact-certification-n127.json.xz
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/sharp-controls-n127.json
+    - packing/cases/regularized_drawings/think-4z8z-2026-11-23/n127-replay/n-127/report.json.gz
+    - packing/resources/web/de-winter-s127-issue1020-2026-11-17/measure/contraction-n127-own.json
+    - docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md
+    controls:
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/exact-certification-n127.json.xz
+    - packing/cases/register_candidates/think-4z8z-2026-11-23/receipts/sharp-controls-n127.json
+    next_rung: V4 and C4 require a second distinct adversarial review and documented human oversight.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-23-squares-project-regularized-n127.md
+      kind: adversarial
+      reviewer: Codex, separately prompted source-only review at extra-high reasoning
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-23'
+      scope: Certificate-to-bound argument, exact scalar comparison with the predecessor after contraction,
+        monotonicity, and lineage.
+      verdict: accepted
+      covers:
+      - T-341
+  - id: T-342
+    kind: upper-bound
+    registered: '2026-11-23'
+    landed: '2026-11-23'
+    established: '2026-11-23'
+    headline: Exact regularization at 305 squares
+    claim: The retained rational centre and half-angle certificate proves s(305) <= 44864389596853971677645995840034572507912162990586880878860956041536014514347204438234416389597/2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.
+      It is 5.40623344416e-81 below T-336 and 2.20196672468e-81 below that predecessor at first contact.
+      Uneven axis-aligned squares fell from 63 to 13. All shared-side totals increased, with three
+      individual contact losses against the previous selected drawing. Joost
+      de Winter’s packing keeps its credit. The refinement is credited to Levy after Daniel, whose exact solver and
+      conservative coincidence regularizer (MIT) supplied the method.
+    scope:
+      n_values:
+      - 305
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 1
+      rationale: The exact bound improves on the predecessor at first contact by less than one
+        unit at the previous display precision.
+      scored: '2026-11-23'
+      by: Codex, intake assessment
+    novelty: apparently-novel
+    builds_on:
+      credit:
+      - Daniel
+      source_keys:
+      - '[Daniel regularizer 2026-10-11]'
+    regularizations:
+    - n: 305
+      of: T-336
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications:
+      - 100-digit nonlinear restart from the regularized pose
+      - rational certificate padding 1e-84
+      side: solved
+      identity:
+        basis: measured
+        measured_in: packing/cases/regularized_drawings/think-huum-2026-11-23/n305-nonlinear-restart/n-305/refined-decided.json.gz
+        one_to_one: true
+        moved: 87
+        max_move: 0.178068
+        max_turn_deg: 0.152924
+    evidence:
+    - E-squares-project-regularized-n305-report
+    - E-squares-project-regularized-n305-exact-feasibility
+    - E-squares-project-axis-regularizer-method
+    artifacts:
+    - packing/cases/register_candidates/think-huum-2026-11-23/certificates/n-305.cert
+    - packing/cases/register_candidates/think-huum-2026-11-23/receipts/exact-certification-n305.json.xz
+    - packing/cases/regularized_drawings/think-huum-2026-11-23/n305-nonlinear-restart/n-305/refined-decided.json.gz
+    - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/contraction-1052.json
+    - docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md
+    controls:
+    - packing/cases/register_candidates/think-huum-2026-11-23/receipts/exact-certification-n305.json.xz
+    next_rung: V4 and C4 require a second distinct adversarial review and documented human oversight.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md
+      kind: adversarial
+      reviewer: Codex, separately prompted source-only review at maximum reasoning
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-23'
+      scope: Certificate-to-bound argument, exact scalar comparison with the predecessor after contraction,
+        monotonicity, and lineage.
+      verdict: accepted
+      covers:
+      - T-342
+  - id: T-343
+    kind: upper-bound
+    registered: '2026-11-23'
+    landed: '2026-11-23'
+    headline: Özden’s refinement of the Kodaj–JoeGun packing at 264
+    claim: >-
+      Doğa Özden reports s(264) <= 52413025953251561123543319189069260371128934510917560364364409813461585167232269243571634089458939746021687638193439792537748709459989314659179367503761312109/3124999999999991273353740028372772249916468315131441015972668196711907312117879501595524371952697210414692126830406844613554507152302090371200200000000000000.
+      The exact rational side rounds upward to 16.7721683050405464 at 16 places and to
+      16.772168305041 at 12 places, the ceiling in #1099.
+
+      The side is about 0.001639293 below T-308 and about 0.001639293 below T-308 contracted
+      to first contact. It is about 0.000674848 below the earlier GeiserX and de Winter
+      certificate in #1037. It therefore improves on the predecessor’s packing under
+      option D. The quoted Kaggle leaderboard side of 16.770288527750 has no coordinates in
+      the submission and remains context.
+
+      Özden’s lab reports perturbing Tomáš Kodaj’s packing as improved by JoeGun (T-308),
+      running its annealer and refining it with Evan Daniel’s ALM+SLP quench.
+      Özden directed the work by Claude agents. The source claims finite feasibility.
+    scope:
+      n_values:
+      - 264
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A substantive improvement at one count, about 0.00164 below T-308 and 0.000675 below
+        the earlier #1037 report. The previous improvement at 264, about 0.000928, was S3
+        in T-308. The claim is a finite upper bound.
+      scored: '2026-11-23'
+      by: think-w0ca intake
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Özden s264 upper bound 2026-11-23]'
+      published: '2026-11-23'
+    evidence:
+    - E-ozden-1099-certificate-report
+    - E-ozden-1099-exact-feasibility
+    - E-ozden-1099-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/README.md
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/acquisition/claims.json
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/acquisition/exact-comparison.json
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/source/n-264-candidate.yaml.gz
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check-result.json.gz
+    - docs/project/reviews/review-2026-11-23-ozden-1099.md
+    controls:
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check-result.json.gz
+    notes: >-
+      Both maintained exact routes and a separately prompted integer-geometry review
+      accepted the pinned certificate. The review's one low finding concerns the issued
+      file's description. The earlier #1037 certificate retains its separate credit.
+    next_rung: V4 and C4 require a second distinct adversarial review and documented human oversight.
+    reviews:
+    - path: docs/project/reviews/review-2026-11-23-ozden-1099.md
+      kind: adversarial
+      reviewer: Codex, separately prompted source-only review
+      reviewer_kind: ai
+      relation: project
+      date: '2026-11-23'
+      scope: >-
+        Finite feasibility by direct integer geometry, the complete rational-corners witness,
+        exact near-pair distances and the claimed upward ceiling.
+      verdict: accepted
+      covers: [T-343]
+
   - id: T-344
     kind: upper-bound
     registered: '2026-11-22'
@@ -55074,7 +55284,7 @@ regularized_drawings:
         max_turn_deg: 28.4472
       view: packing/atlas/known-best/regularized/n-126-regularized.yaml.gz
     - n: 127
-      of: T-330
+      of: T-341
       by: project
       method: regularize_axis_components/2
       side: same
@@ -55082,9 +55292,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 21
-        max_move: 0.3364312
-        max_turn_deg: 1.09194e-54
+        moved: 0
+        max_move: 6.519202e-20
+        max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-127-regularized.yaml.gz
     - n: 129
       of: T-186
@@ -55798,7 +56008,7 @@ regularized_drawings:
         max_turn_deg: 0.372208
       view: packing/atlas/known-best/regularized/n-263-regularized.yaml.gz
     - n: 264
-      of: T-308
+      of: T-343
       by: project
       method: "regularize_grid_slack/2: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame, over its number field where it has one, and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
       modifications: ["port of his coincidence placement (regularize_grid_slack/2) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
@@ -55807,9 +56017,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 146
-        max_move: 0.1058555
-        max_turn_deg: 0.504454
+        moved: 65
+        max_move: 0.3646425
+        max_turn_deg: 0.84066
       view: packing/atlas/known-best/regularized/n-264-regularized.yaml.gz
     - n: 266
       of: T-119
@@ -56038,19 +56248,20 @@ regularized_drawings:
       view: packing/atlas/known-best/regularized/n-303-regularized.yaml.gz
     - n: 304
       of: T-273
-      by: project
-      method: regularize_axis_components/2
+      by: "[Daniel issue 914 2026-11-05]"
+      method: "Evan Daniel's original regularization, evand/square-packing@bb4cc78e5b35103c1f177db55e9cf08974e66563, imported and verified by devtools.regularize_author_view"
+      modifications: []
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 46
-        max_move: 0.4038693
-        max_turn_deg: 0.00501006
+        moved: 83
+        max_move: 0.4126673
+        max_turn_deg: 2.46738
       view: packing/atlas/known-best/regularized/n-304-regularized.yaml.gz
     - n: 305
-      of: T-336
+      of: T-342
       by: project
       method: regularize_axis_components/2
       side: same
@@ -56058,9 +56269,9 @@ regularized_drawings:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 25
-        max_move: 0.1780675
-        max_turn_deg: 1.14592e-28
+        moved: 0
+        max_move: 1.698534e-83
+        max_turn_deg: 3.45053e-90
       view: packing/atlas/known-best/regularized/n-305-regularized.yaml.gz
     - n: 306
       of: T-174

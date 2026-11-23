@@ -1,0 +1,499 @@
+"""Replay the retained #1042 custody and scalar decisions using data only.
+
+Run with Python 3.14 and --repo /path/to/squares. No contributor program is
+imported or executed, no network or Git command is used, and inputs are read-only.
+The historical receipt's timing/RSS are preserved, not claimed as this run's cost.
+"""
+
+from __future__ import annotations
+
+import argparse
+import base64
+import csv
+import gzip
+import hashlib
+import io
+import json
+import os
+import re
+import resource
+import sys
+import time
+import zipfile
+from collections import Counter
+from copy import deepcopy
+from datetime import datetime
+from fractions import Fraction
+from pathlib import Path, PurePosixPath
+
+PACKET = Path("packing/resources/web/de-winter-1042-public-replay-2026-11-20")
+EARLIER = "packing/campaign/issue-intake/lower-bounds-de-winter-20261120/classification.json"
+LATER = "packing/resources/web/de-winter-1060-1063-2026-11-21/lower/D/claims-final.csv.gz"
+SCOPE = (
+    "Exact scalar comparisons only. No current case-lane census, theorem, source-code "
+    "execution, coverage replay or rung promotion. Earlier rows cover only #1039, "
+    "#1041, #1042 and its 161 comment. Later comparison covers only #1060 Attachment D."
+)
+MEMBERS = {"README.md", "certificate.json", "replay_sources.json", "verify_public.py"}
+TELEMETRY = {"wall_seconds", "peak_rss_bytes"}
+
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def same_json(left, right):
+    """Ignore object-key order, but preserve JSON types as well as field values."""
+    options = {"sort_keys": True, "allow_nan": False, "separators": (",", ":")}
+    return json.dumps(left, **options) == json.dumps(right, **options)
+
+
+def unique(pairs):
+    result = {}
+    for key, value in pairs:
+        require(key not in result, f"duplicate JSON key: {key}")
+        result[key] = value
+    return result
+
+
+def parse_json(raw):
+    return json.loads(raw, object_pairs_hook=unique)
+
+
+def bounded(path, cap=2_000_000):
+    with path.open("rb") as stream:
+        raw = stream.read(cap + 1)
+    require(len(raw) <= cap, f"input too large: {path}")
+    return raw
+
+
+def gunzip(path, cap=2_000_000):
+    compressed = bounded(path, cap)
+    with gzip.GzipFile(fileobj=io.BytesIO(compressed)) as stream:
+        raw = stream.read(cap + 1)
+    require(len(raw) <= cap, f"decompressed input too large: {path}")
+    return raw
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def member_inventory(archive):
+    contents, rows = {}, []
+    with zipfile.ZipFile(io.BytesIO(archive)) as zipped:
+        infos = zipped.infolist()
+        require(
+            len(infos) == 4 and {x.filename for x in infos} == MEMBERS,
+            "archive must have exactly four distinct expected members",
+        )
+        require(sum(x.file_size for x in infos) <= 4_000_000, "archive expands too far")
+        for item in infos:
+            path = PurePosixPath(item.filename)
+            require(
+                not path.is_absolute() and ".." not in path.parts and not item.is_dir(),
+                "unsafe archive member",
+            )
+            require(
+                item.file_size <= 2_000_000 and item.compress_size <= 100_000,
+                "member exceeds size limit",
+            )
+            with zipped.open(item) as stream:
+                raw = stream.read(2_000_001)
+            require(len(raw) == item.file_size <= 2_000_000, "member length mismatch")
+            contents[item.filename] = raw
+            rows.append(
+                {
+                    "path": item.filename,
+                    "stored_bytes": item.compress_size,
+                    "bytes": len(raw),
+                    "sha256": digest(raw),
+                    "zip_compression_method": item.compress_type,
+                    "zip_timestamp": list(item.date_time),
+                }
+            )
+    return contents, rows
+
+
+def custody(packet, support):
+    manifest = parse_json(bounded(packet / "acquisition/comment-archive.json", 100_000))
+    raw_api = gunzip(support / "issuecomment-7022143149.api.json.gz", 300_000)
+    comment = parse_json(raw_api)
+    require(
+        comment["id"] == 7022143149 and comment["user"]["login"] == "JoostdeWinter",
+        "unexpected comment identity",
+    )
+    require(
+        comment["created_at"] == "2026-11-19T21:02:44Z"
+        and comment["updated_at"] == "2026-11-20T02:02:32Z",
+        "unexpected comment revision",
+    )
+    body = comment["body"].encode("utf-8")
+    require(len(body) < 100_000, "comment body exceeds limit")
+    blocks = re.findall(rb"^```base85\n([^\n]+)\n```$", body, flags=re.MULTILINE)
+    require(len(blocks) == 1 and len(blocks[0]) < 70_000, "expected one bounded base85 block")
+    archive = base64.b85decode(blocks[0])
+    require(
+        len(archive) == 48_944
+        and digest(archive) == "2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab",
+        "official archive identity mismatch",
+    )
+    require(
+        archive == bounded(packet / "source/squaremath_public_replay.zip", 100_000),
+        "retained ZIP differs from comment",
+    )
+    require(
+        body == bounded(packet / "source/issuecomment-7022143149.raw.md", 100_000),
+        "retained comment body differs from API response",
+    )
+    contents, members = member_inventory(archive)
+    for name, raw in contents.items():
+        require(raw == bounded(packet / "source" / name), f"retained member differs: {name}")
+    # Acquisition time and base revision are original historical metadata. Validate
+    # their types and cross-bind the revision to the original scalar receipt below;
+    # never use the revision to fetch or select executable code or comparison data.
+    require(
+        datetime.fromisoformat(manifest["retrieved_at"]).tzinfo is not None,
+        "retrieval timestamp must include timezone",
+    )
+    require(
+        re.fullmatch(r"[0-9a-f]{40}", manifest["base_main"]) is not None,
+        "invalid historical revision metadata",
+    )
+    expected = {
+        "format": "issue-comment-archive-sources-v1",
+        "source_key_proposed": "[de Winter issue 1042 public replay 2026-11-20]",
+        "comment_url": comment["html_url"],
+        "comment_id": comment["id"],
+        "author": comment["user"]["login"],
+        "created_at": comment["created_at"],
+        "updated_at": comment["updated_at"],
+        "retrieved_at": manifest["retrieved_at"],
+        "source_api_sha256": digest(raw_api),
+        "body_utf8_sha256": digest(body),
+        "archive": {
+            "path": "source/squaremath_public_replay.zip",
+            "bytes": len(archive),
+            "sha256": digest(archive),
+        },
+        "members": members,
+        "base_main": manifest["base_main"],
+        "source_programs_executed": False,
+        "geometry_or_coverage_checked": False,
+    }
+    require(same_json(manifest, expected), "custody manifest fields differ")
+    # Parse embedded program strings as JSON data only; never compile/import/eval.
+    embedded = parse_json(contents["replay_sources.json"])
+    require(
+        len(embedded) == 13 and all(isinstance(v, str) for v in embedded.values()),
+        "unexpected embedded-source inventory",
+    )
+    return parse_json(contents["certificate.json"]), manifest
+
+
+def projection(receipt, report_ids):
+    return [
+        {k: row[k] for k in ("n", "report", "kind", "value")}
+        for row in receipt["rows"]
+        if row["report"] in report_ids
+    ]
+
+
+def comparison_inputs(repo, support):
+    earlier = parse_json(gunzip(support / "earlier-classification.json.gz", 250_000))
+    require(len(earlier["rows"]) == 139, "sealed earlier receipt must contain 139 rows")
+    report_ids = [x["id"] for x in earlier["reports"]]
+    require(
+        report_ids == ["issue-1039", "issue-1041", "issue-1042", "issue-1042-comment-7020627554"],
+        "wrong earlier reports",
+    )
+    current = parse_json(bounded(repo / EARLIER))
+    require(
+        [r for r in current["reports"] if r["id"] in report_ids] == earlier["reports"],
+        "current report identity/order differs from the earlier basis",
+    )
+    require(
+        projection(current, report_ids) == projection(earlier, report_ids),
+        "current earlier-claim projection differs from the sealed 139-row basis",
+    )
+    later_raw = gunzip(repo / LATER, 250_000)
+    require(
+        later_raw == gunzip(support / "later-1060-D.csv.gz", 250_000),
+        "current later table differs from the original comparison basis",
+    )
+    later_list = list(csv.DictReader(io.StringIO(later_raw.decode("utf-8"))))
+    later = {int(r["n"]): r for r in later_list}
+    require(len(later_list) == len(later) == 166, "later table must contain 166 unique counts")
+    return earlier, later
+
+
+def scalar_rows(pack, previous, later):
+    claims = pack["claims"]
+    require(len(claims) == len({r["n"] for r in claims}) == 155, "expected 155 unique claims")
+    require(all(type(r["n"]) is int and 18 <= r["n"] <= 313 for r in claims), "bad claim count")
+    require(19 not in {r["n"] for r in claims}, "withdrawn count 19 is present")
+    prior_rows = []
+    for row in previous["rows"]:
+        value = Fraction(row["value"])
+        require(row["kind"] in ("rational", "sqrt") and value > 0, "bad earlier endpoint")
+        prior_rows.append(
+            {
+                "n": row["n"],
+                "report": row["report"],
+                "kind": row["kind"],
+                "exact_value": row["value"],
+                "side_squared": value if row["kind"] == "sqrt" else value * value,
+            }
+        )
+    rows = []
+    for claim in claims:
+        n, side = claim["n"], Fraction(claim["side"])
+        stated_prior = Fraction(claim["previous_upper_endpoint"])
+        require(side > stated_prior > 0, f"endpoint gain fails at {n}")
+        require(claim["source"] in pack["sources"], f"source absent at {n}")
+        mass = Fraction(claim["mass"]) if "mass" in claim else None
+        require(mass is None or 0 < mass < n, f"mass inequality fails at {n}")
+        eligible = [r for r in prior_rows if r["n"] <= n]
+        floor = max(eligible, key=lambda r: r["side_squared"]) if eligible else None
+        relation = (
+            None
+            if floor is None
+            else (
+                "stronger"
+                if side * side > floor["side_squared"]
+                else "equal"
+                if side * side == floor["side_squared"]
+                else "weaker"
+            )
+        )
+        direct = [r for r in prior_rows if r["n"] == n]
+        prior_at_n = max(direct, key=lambda r: r["side_squared"]) if direct else None
+        lower = [r for r in claims if r["n"] < n and Fraction(r["side"]) >= side]
+        same_floor = max(lower, key=lambda r: Fraction(r["side"])) if lower else None
+        disposition = "new-report-row"
+        if relation in ("equal", "weaker"):
+            disposition = "no-increase-over-earlier-report-floor"
+        elif same_floor is not None:
+            disposition = (
+                "same-report-monotonicity-consequence"
+                if Fraction(same_floor["side"]) == side
+                else "below-same-report-monotone-floor"
+            )
+        following = later.get(n)
+        later_result = None
+        if following:
+            endpoint = Fraction(following["endpoint"])
+            require(following["relation"] in (">", ">=", "≥"), "bad later relation")
+            later_relation = (
+                "strictly-larger-endpoint"
+                if endpoint > side
+                else "equal-endpoint-strict-later-claim"
+                if endpoint == side and following["relation"] == ">"
+                else "equal-endpoint"
+                if endpoint == side
+                else "smaller-endpoint"
+            )
+            later_result = {
+                "relation": following["relation"],
+                "endpoint": following["endpoint"],
+                "proof_source": following["proof_source"],
+                "comparison": later_relation,
+            }
+
+        def without_square(row):
+            return None if row is None else {k: v for k, v in row.items() if k != "side_squared"}
+
+        rows.append(
+            {
+                "n": n,
+                "method": claim["method"],
+                "original_claim": claim,
+                "source_spec": pack["sources"][claim["source"]],
+                "side": claim["side"],
+                "stated_previous_upper_endpoint": claim["previous_upper_endpoint"],
+                "stated_endpoint_gain": str(side - stated_prior),
+                "stated_endpoint_strictly_improved": True,
+                "mass_below_n": None if mass is None else True,
+                "depends_on_T180_global_coverage": claim["method"] == "family_cut",
+                "earlier_report_at_same_n": without_square(prior_at_n),
+                "earlier_report_monotone_floor": without_square(floor),
+                "against_earlier_report_monotone_floor": relation,
+                "same_report_floor_at": None if same_floor is None else same_floor["n"],
+                "scoped_report_order_disposition": disposition,
+                "later_1060_D": later_result,
+            }
+        )
+    return rows
+
+
+def summary(rows):
+    return {
+        "count": len(rows),
+        "methods": dict(Counter(r["method"] for r in rows)),
+        "same_count_earlier_claims": sum(r["earlier_report_at_same_n"] is not None for r in rows),
+        "earlier_report_floor": dict(
+            Counter(str(r["against_earlier_report_monotone_floor"]) for r in rows)
+        ),
+        "scoped_report_order": dict(Counter(r["scoped_report_order_disposition"] for r in rows)),
+        "later_1060_D": dict(
+            Counter(
+                "absent" if r["later_1060_D"] is None else r["later_1060_D"]["comparison"]
+                for r in rows
+            )
+        ),
+        "all_stated_endpoint_improvements": all(
+            r["stated_endpoint_strictly_improved"] for r in rows
+        ),
+        "mass_below_n_rows": sum(r["mass_below_n"] is True for r in rows),
+    }
+
+
+def substantive(receipt):
+    result = deepcopy(receipt)
+    for key in TELEMETRY:
+        value = result["summary"].pop(key)
+        require(type(value) in (int, float) and value > 0, f"invalid historical telemetry: {key}")
+    return result
+
+
+def tsv(rows):
+    lines = [
+        "n\tmethod\tside\tstated_previous_endpoint\tgain\tearlier_report_floor_relation\tscoped_disposition\tsame_report_parent\tT180_dependency\tlater_1060_D_endpoint\tlater_1060_D_relation"
+    ]
+    for row in rows:
+        later = row["later_1060_D"]
+        cells = [
+            row["n"],
+            row["method"],
+            row["side"],
+            row["stated_previous_upper_endpoint"],
+            row["stated_endpoint_gain"],
+            row["against_earlier_report_monotone_floor"] or "",
+            row["scoped_report_order_disposition"],
+            row["same_report_floor_at"] or "",
+            str(row["depends_on_T180_global_coverage"]).lower(),
+            "unavailable" if later is None else later["endpoint"],
+            "unavailable" if later is None else later["comparison"],
+        ]
+        lines.append("\t".join(map(str, cells)))
+    return ("\n".join(lines) + "\n").encode("utf-8")
+
+
+def controls(pack, previous, later, retained, expected):
+    passed = []
+
+    def rejects(name, action):
+        try:
+            action()
+        except (ValueError, KeyError):
+            passed.append(name)
+        else:
+            raise ValueError(f"negative control accepted: {name}")
+
+    rejects("duplicate-json-key", lambda: parse_json(b'{"a":1,"a":2}'))
+    bad = deepcopy(pack)
+    bad["claims"][0]["side"] = bad["claims"][0]["previous_upper_endpoint"]
+    rejects("non-improving-endpoint", lambda: scalar_rows(bad, previous, later))
+    bad = deepcopy(pack)
+    bad["claims"][0]["mass"] = str(bad["claims"][0]["n"])
+    rejects("mass-equals-count", lambda: scalar_rows(bad, previous, later))
+    for name, mutate in (
+        (
+            "changed-row-decision",
+            lambda r: r["rows"][0].update(scoped_report_order_disposition="wrong"),
+        ),
+        ("changed-summary", lambda r: r["summary"].update(count=154)),
+        ("changed-json-type", lambda r: r["rows"][0].update(stated_endpoint_strictly_improved=1)),
+        ("extra-telemetry-like-field", lambda r: r["summary"].update(cpu_seconds=1)),
+    ):
+        bad = deepcopy(retained)
+        mutate(bad)
+        rejects(name, lambda: require(same_json(substantive(bad), expected), "receipt differs"))
+    changed_cost = deepcopy(retained)
+    changed_cost["summary"].update(wall_seconds=1.0, peak_rss_bytes=1024)
+    require(
+        same_json(substantive(changed_cost), expected), "declared telemetry changes must be ignored"
+    )
+    passed.append("only-declared-telemetry-ignored")
+    # Reject a ZIP path before decompressing or writing anything.
+    stream = io.BytesIO()
+    with zipfile.ZipFile(stream, "w") as archive:
+        archive.writestr("../escape", b"x")
+    rejects("unexpected-zip-member", lambda: member_inventory(stream.getvalue()))
+    return passed
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--repo", type=Path, help="checkout root; defaults to ancestor containing packing/"
+    )
+    parser.add_argument(
+        "--self-test", action="store_true", help="also run bounded negative controls"
+    )
+    args = parser.parse_args()
+    support = Path(__file__).resolve().parent
+    repo = args.repo
+    if repo is None:
+        repo = next((p for p in support.parents if (p / EARLIER).is_file()), None)
+    require(repo is not None, "cannot locate checkout; supply --repo")
+    if os.environ.get("SOURCE_GUARD_BARRIER") == "1":
+        input()
+    start = time.monotonic()
+    packet = repo / PACKET
+    pack, manifest = custody(packet, support)
+    earlier, later = comparison_inputs(repo, support)
+    rows = scalar_rows(pack, earlier, later)
+    counts = summary(rows)
+    require(
+        counts["count"] == 155
+        and counts["mass_below_n_rows"] == 94
+        and counts["methods"]["family_cut"] == 61
+        and counts["later_1060_D"] == {"absent": 2, "strictly-larger-endpoint": 153},
+        "unexpected scalar coverage",
+    )
+    expected = {
+        "format": "public-replay-scalar-triage-v1",
+        "comparison_main": manifest["base_main"],
+        "earlier_report_receipt": EARLIER,
+        "later_report_table": LATER,
+        "scope": SCOPE,
+        "summary": counts,
+        "rows": rows,
+    }
+    retained = parse_json(gunzip(packet / "receipts/scalar-triage.json.gz"))
+    require(
+        same_json(substantive(retained), expected), "retained scalar receipt differs from replay"
+    )
+    require(
+        tsv(rows) == bounded(packet / "receipts/claim-dispositions.tsv"), "TSV differs from replay"
+    )
+    checks = controls(pack, earlier, later, retained, expected) if args.self_test else []
+    peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    if sys.platform != "darwin":
+        peak *= 1024
+    print(
+        json.dumps(
+            {
+                "result": "PASS",
+                "source_programs_executed": False,
+                "geometry_or_coverage_checked": False,
+                "earlier_claim_projection_rows": 139,
+                "summary": counts,
+                "controls": checks,
+                "original_telemetry_preserved": {
+                    k: retained["summary"][k] for k in sorted(TELEMETRY)
+                },
+                "replay_wall_seconds": time.monotonic() - start,
+                "replay_peak_rss_bytes": peak,
+            },
+            indent=2,
+            sort_keys=True,
+        )
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

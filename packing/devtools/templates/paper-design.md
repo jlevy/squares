@@ -3060,17 +3060,12 @@ pointer and by keyboard, and measures its label at 1280, 768 and 390 pixels.
   table, and the log measured 147,729 bytes over 35 day blocks and 2,332 line items the
   day it moved. The home page’s **Changelog** section, under News, is the head of this
   log, drawn by the same code (`overview_sections.changelog_preview`): the same day
-  blocks and lines, the newest open, then the **Changelog** button (the owner, 3
-  November 2026). Its window is the newest three days that hold anything, however long
-  ago (`HOME_CHANGELOG_DAYS`, `changelog_window`), never a span of the calendar, so a
-  quiet week cannot empty it: that day the newest three were 31, 26 and 25 October, and
-  the last three days of the calendar held none.
-  The newest day is shown whole; an older one joins only while the section stays within
-  60 lines (`HOME_CHANGELOG_LINES`); of the record’s 34 three-day stretches, that cap
-  trims only the three that hold the 46-line 14 October.
-  Three days show the log’s pace, one open and two closed under it, without the section
-  becoming the log; the section measured 37 lines and 12,073 bytes, against the home
-  page’s 40,000 for a section.
+  blocks and lines, followed by the **Changelog** button.
+  The homepage includes up to seven days with entries (`HOME_CHANGELOG_DAYS`,
+  `changelog_window`) and opens the two newest (`HOME_CHANGELOG_OPEN`). The newest day
+  appears in full. The preview includes older days in full while they fit within 74 lines
+  (`HOME_CHANGELOG_LINES`). On November 22, 2026, the seven most recent days held 71
+  lines, within the home page’s 40,000-byte section budget.
   That ceiling binds what the window adds to the newest day: a bulk import’s day shown
   alone weighs what it weighs, and past the ceiling the remedy is to cut that day short
   with a line to the rest, not a higher number.

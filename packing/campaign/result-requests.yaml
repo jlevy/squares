@@ -36476,6 +36476,17 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/1001#issuecomment-7088055122
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n232-kodaj-improved
+        id: T-307
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       T-305 to T-309 are on main with the stage 4 review mapped and each adopted as its case's
       house, and the reply on main says what was retained, replayed and reviewed and that the
@@ -38162,6 +38173,17 @@ issues:
       - result: n127-band-a1ba501
         id: E-de-winter-1020-review-r127-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/1020#issuecomment-7109696738
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n127-band-a1ba501
+        id: T-330
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       The bound is triaged, retained and registered on main, its stage 4 review mapped and the
       house at 127 decided, and the reply on main says what was registered, replayed, reviewed
@@ -39044,14 +39066,20 @@ issues:
       bead: think-fv42
     - key: n18-n313-public-replay
       claim: >-
-        Lower bounds at 155 counts from 18 to 313 in the base85 archive of the comment
-        (squaremath_public_replay.zip, SHA-256
-        2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab), replayed against
-        lower_bounds_2026_11_19 at 21d944c; 61 rows are corner families that rely on T-180's
-        global coverage.
+        Lower bounds at 155 counts from 18 to 313 in the base85 archive of comment
+        7022143149 (squaremath_public_replay.zip, SHA-256
+        2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab), replaying against
+        lower_bounds_2026_11_19 at 21d944c. The 61 family_cut rows depend on T-180's
+        unchanged-region coverage. The withdrawn 19-square row is absent.
       source: https://github.com/jlevy/squares/issues/1042#issuecomment-7022143149
       not_registered: >-
-        Found in triage on 20 November 2026 and not triaged here; an import of its own.
+        The exact archive and all four members are retained. A scoped exact comparison
+        verifies all 155 stated endpoint gains and all 94 stated mass inequalities.
+        Against the earlier three reports and 161 follow-up, there are 148 new report
+        rows and seven same-report monotonicity consequences. Attachment D of issue
+        1060 later raises all 153 shared endpoints; 18 and 20 are absent there.
+        This is scalar triage, not coverage verification. Current-case admission,
+        per-method review and registration remain open on think-4iec.
       queued: true
       bead: think-4iec
     beads:
@@ -39078,6 +39106,13 @@ issues:
       kind: follow-up
       reported: []
       beads: [think-bgi2]
+    - url: https://github.com/jlevy/squares/issues/1042#issuecomment-7090120790
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n18-n313-public-replay
+      beads: [think-4iec, think-fv42]
     close_when: >-
       The bounds and both follow-ups are triaged, retained, registered, replayed within the
       cap or held on validation beads, and the reply on main says what was registered and
@@ -39282,6 +39317,17 @@ issues:
       kind: final
       reported:
       - result: n305-same-side-axis-variants
+    - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7109697419
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n305-rational-certificate
+        id: T-336
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058958734 on 21 November 2026 as source claims. Its
@@ -39367,9 +39413,15 @@ issues:
         census checks all 2,400 vacancy/aligned-position cases and 29,368 sign assignments,
         verifies 234,944 D4 images and 3,671 orbits, and passes 12 controls. The independent
         general-path checker classifies 29,008 local profiles through 67,626 normal choices:
-        23,286 are excluded and 5,722 are not certified; all 20 controls pass. Application
-        to global paths, separation-graph enumeration, rule extraction and graph-to-certificate
-        coverage remain open; these restricted checks do not accept the full theorem.
+        23,286 are excluded and 5,722 are not certified; all 20 controls pass. A separate
+        covariance audit checks 18,128 occupied paths, 960 D4 geometry maps and 58,016 local
+        profile comparisons with 13 controls. A complete case-to-clause audit binds all
+        3,671 canonical cases to 554,159 path applications: 339,191 are excluded and 214,968
+        remain not certified; its 13 controls pass. A separately frozen sixteen-case graph
+        pilot completely enumerates 1,280 Boolean models for that selection and passes
+        17 controls. Complete all-case separation-graph enumeration, geometric rule extraction
+        and graph-to-certificate coverage remain open; these restricted checks do not accept
+        the full theorem.
       queued: true
       bead: think-guls
     beads:
@@ -39381,7 +39433,9 @@ issues:
       date: '2026-11-21'
       by: jlevy
       kind: follow-up
-      reported: []
+      reported:
+      - result: n20-lower-99-over-20
+      beads: [think-6ul3]
     - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7064402590
       date: '2026-11-21'
       by: jlevy
@@ -39403,7 +39457,13 @@ issues:
       kind: follow-up
       reported:
       - result: n20-one-axis-equal-magnitude
-      beads: [think-guls]
+    - url: https://github.com/jlevy/squares/issues/1055#issuecomment-7089871432
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n20-one-axis-equal-magnitude
+      beads: [think-guls, think-6ul3]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
@@ -39468,7 +39528,6 @@ issues:
       kind: follow-up
       reported:
       - result: n26-n318-final-lower-166
-      beads: [think-uz7g]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
@@ -39501,10 +39560,14 @@ issues:
         and 295. The 259 witness is a dependency.
       source: body
       not_registered: >-
-        The maintained field route accepts the ten reviewed counts plus the 259 dependency
-        within its input ceiling. An independent exact check places the degree-44 n109
-        side about 2.025696e-12 below T-335. The full n109 geometry exceeds the maintained
-        input ceiling and remains undecided. Registration and independent review stay open.
+        The maintained field route accepts all pairs at 129, 172, 175, 199, 237, 262,
+        268, 269, 292 and 295, plus dependency-only 259. Its duplicate and outside
+        controls are two-square slices, not whole-configuration controls. The degree-44
+        n109 side is independently below T-335; full geometry remains undecided above
+        the reader's size ceiling. Report order, complete controls and independent
+        mathematical review remain open. At 295 preserve GeiserX credit and compare
+        the algebraic reconstruction against the earlier #1037 rational certificate
+        before assigning another result.
       queued: true
       bead: think-l9fk
     - key: three-construction-side-identities
@@ -39512,8 +39575,10 @@ issues:
         L199 = L172 + 1, L268 = L129 + 5, and L292 = L259 + 1 for the stated constructions.
       source: body
       not_registered: >-
-        Exact polynomial shifts and isolated-root comparisons hold, and the maintained checker
-        accepts all six witness geometries. The exact-side register review remains open.
+        Exact polynomial shifts and isolated-root comparisons hold, and the maintained
+        checker accepts all six source configurations. These are relations between
+        construction sides, not optimal-packing values. The n259 input remains a
+        dependency. Independent review and exact-side register integration remain open.
       queued: true
       bead: think-l9fk
     beads: [think-l9fk]
@@ -39533,6 +39598,14 @@ issues:
       reported:
       - result: exact-construction-sides-eleven
       - result: three-construction-side-identities
+    - url: https://github.com/jlevy/squares/issues/1061#issuecomment-7090121272
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: exact-construction-sides-eleven
+      - result: three-construction-side-identities
+      beads: [think-l9fk]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Route to the exact-side work tracked by #811. The claimed construction identities
@@ -39601,7 +39674,6 @@ issues:
       - result: n232-rational-follow-up
         id: E-de-winter-1062-review-exact-feasibility
         status: confirmed
-      beads: [think-eumc]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Compare the submitted exact fraction and geometry with both T-307's adopted
@@ -39662,6 +39734,12 @@ issues:
       kind: follow-up
       reported:
       - result: thirteen-rational-enclosures
+    - url: https://github.com/jlevy/squares/issues/1063#issuecomment-7087973351
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: thirteen-rational-enclosures
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       The exact feasibility and pose comparison receipts are indexed in
@@ -39670,3 +39748,36 @@ issues:
       comparison confirms all candidate sides are smaller than their supplied inputs
       and all 13 upward ceilings at 12 places agree. Complete exact feasibility and
       measurements against public witnesses are in the retained packet. Source SHA-256 872959c5a48a2fa785184030aefaa975c0b3fad2a5632c17db5f012e42d75390.
+  - number: 1099
+    title: 's(264) ≤ 16.772168305041: improved packing (registration request)'
+    author: kenaznia-doga
+    opened: '2026-11-23'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Doğa Özden’s lab submits a rational corners Witness/v2 at 264, seeded from the
+      Kodaj–JoeGun packing T-308. Its exact side beats T-308 contracted to first contact and
+      the earlier GeiserX and de Winter certificate in #1037. T-343 records the verified
+      bound at V3/C3 and S3 and is the new house. The selected grid-slack drawing
+      keeps the same exact side. The additional sharp suite reached its run limit;
+      the reviewed near-contact controls are retained with the source.
+    read_through: '2026-11-23T10:55:47Z'
+    results:
+    - key: n264-rational-certificate
+      claim: s(264) <= 16.772168305041, rounded upward at 12 places from the rational witness.
+      source: body
+      register: [T-343]
+      evidence:
+      - E-ozden-1099-certificate-report
+      - E-ozden-1099-exact-feasibility
+      - E-ozden-1099-review-exact-feasibility
+    - key: n264-leaderboard-side-only
+      claim: Cats and boxes’s quoted Kaggle side at 264 is 16.770288527750, with no coordinates.
+      source: body
+      not_registered: The source disclosed the leaderboard side as context and supplied no packing for it.
+      queued: false
+    beads: [think-w0ca]
+    answer_bead: think-w0ca
+    replies: []
+    close_when: The result has an intake disposition and its reply is recorded.
