@@ -1,0 +1,39 @@
+{
+  "format": "independent-one-axis-bridges-freeze-v1",
+  "frozen_utc": "2026-11-22T23:10:57Z",
+  "status": "prepared-not-executed",
+  "coordinator_bead": "think-guls",
+  "files": {
+    "frozen-plan.md": "9373ad006c12135576b53e9c39683c46b60676a10a56b185bbf793e338412589",
+    "bridge-spec.json": "47433a8c18c451703ad7d9c1f853a29755149c472fcf746cbb832fd3a22f98b5",
+    "check_one_axis_bridges.py": "05be38c984078df7fc17c0444a4981c756d166b3f83743035a1ac88d6979eb16"
+  },
+  "expected": {
+    "rank_profiles": 32,
+    "sign_profiles": 112,
+    "all_profiles": 3584,
+    "zero_cost_profiles": 96,
+    "excluded_profiles": 3488,
+    "excluded_without_zero": 992,
+    "excluded_with_one_zero": 2496,
+    "maximum_normal_branches_per_profile": 8,
+    "controls": 12
+  },
+  "exposure": "Previously read producer proof and path implementation. Independent formula reconstruction, box-vertex maximization, interpolation and exact Bernstein arithmetic; not blind.",
+  "execution": {
+    "checker_executed": false,
+    "checker_imported": false,
+    "compiled_or_syntax_checked": false,
+    "contributor_programs_executed": false,
+    "awaiting_serial_memory_guard_slot": true
+  },
+  "proposed_limits": {
+    "target_wall_seconds": 20,
+    "target_peak_rss_gib": 0.1,
+    "hard_wall_seconds": 60,
+    "sampled_tree_ceiling_gib": 0.25,
+    "stop_pressure_level": 2,
+    "workers": 1
+  },
+  "scope": "Local bridge exclusions and favorable mixed-diagonal prerequisite only. General path clauses, global sign/vacancy/symmetry enumeration, graphs and graph-to-bank coverage remain separate."
+}

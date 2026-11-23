@@ -1,0 +1,8 @@
+15:32:36 swap volume /System/Volumes/VM: 19.2GB free, suspension distance 20.3GB
+15:32:36 observing pid=36433 with per-sample phys_footprint; no pause, shed, or termination actions
+15:32:36 logging measurements to /Volumes/spud-ext2/agent-evidence/squares-intake-20261121-01a1fb/n20-one-axis-sign-census-independent-20261122/execution-isolated.jsonl
+15:32:41 observed process exited
+15:32:41 watched 5s over 5 samples (0.91/s); reclaimable min 10.09GB p10 10.09GB; max pressure 1
+15:32:41 interventions: 0 pause(s) totalling 0s (0% of the watch), 0 harvest(s) over 0 round(s), 0 process(es) freeing ~0.0GB
+15:32:41 dispositions: 0 suspended, 0 exited on SIGTERM, 0 needed SIGKILL, 0 already gone
+15:32:41 watchdog health: 0 late heartbeat(s), lag max 0.1s p90 0.1s

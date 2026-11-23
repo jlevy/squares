@@ -87,6 +87,9 @@ modified.
 | --- | --- | --- | --- |
 | `acquisition/archive-members.json.gz` | receipt | `bf693f1ffe981917724e03f53ed5b236053f6223` | `ecd4093ea60f982009919478f25b32b3e56b82ded1bc59fe300dd5d87d4f339d` |
 | `review-one-axis-bank/checker-receipt.json.gz` | receipt | `b72348118152f100e3adb3cb4fffd114af4eae83` | `5f8ca1a560ef390078f9938bc98ac63af1efec0cf0be43481dd60628a7598f4c` |
+| `review-one-axis-bridges/bridge-verification.json.gz` | receipt | `69f62be84b71b713500296344d8a6f8c629d8ccc` | `a8b48b5cff9b0b101174e3eb513bb3ed502c05bbfb825e1f8b376fb0c017d286` |
+| `review-one-axis-sign-census/sign-census.json.gz` | receipt | `ddda8efa9ec50b03d75cf444dcacc6547642dd93` | `45d16648622df9321d4ca3105bf3b2014b049e3774f3b89b3955fbd8ddd4654a` |
+| `review-one-axis-sign-census/sign-census-isolated.json.gz` | receipt | `3cd64b80b74221bfbd0302d5b1ac5af3ef1033a0` | `fc75c5853c16cc99e3cbdda6661ddcfb5a0d6d2b0698c47c9f7747351ccd96fe` |
 
 ## Original Gzip Files
 
@@ -96,7 +99,12 @@ modified.
 | `review-one-axis-bank/one_axis_24.json.gz` | upstream | `69cdbf53f097cc89cb136adca3bb4bb81a71ccfc` | `451b1116cf5b6eaa78ecc8233ee4e4c931537e6dfd3bd4fba2a6d91b1922d257` |
 
 The [independent one-axis polynomial-bank review](review-one-axis-bank/README.md) accepts
-576 conditional certificates. The graph enumeration and bridge coverage remain open.
+576 conditional certificates. The [independent bridge review](review-one-axis-bridges/README.md)
+now excludes all 3,488 positive-cost local profiles through 15,696 normal choices.
+The [independent sign and symmetry census](review-one-axis-sign-census/README.md)
+now checks all 2,400 vacancy/aligned-position cases, retains 29,368 assignments and
+verifies their 3,671 D4 orbits. General-path exclusions, separation graphs and
+graph-to-certificate coverage remain open.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

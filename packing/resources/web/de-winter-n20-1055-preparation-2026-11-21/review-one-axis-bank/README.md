@@ -9,9 +9,12 @@ and used 36.7 MiB peak RSS. The guard observed normal pressure at startup.
 
 The reviewer read the source proof and the certificate representation, then wrote
 separate exact arithmetic and reconstruction code. The conditional certificates
-do not enumerate the sign assignments, ownership graphs or bridge exclusions.
-Those finite coverage checks remain open for the one-axis theorem. The angular
-diversity claim also needs the separate large-angle proof.
+do not enumerate sign assignments, separation graphs or bridge exclusions.
+The separate [bridge review](../review-one-axis-bridges/README.md) now accepts all
+3,488 positive-cost local profiles. The separate
+[sign and symmetry census](../review-one-axis-sign-census/README.md) now retains
+29,368 assignments in 3,671 D4 orbits. General-path exclusions, separation graphs and
+graph-to-certificate coverage remain open for the one-axis theorem. The angular diversity claim also needs the separate large-angle proof.
 
 Use the [frozen plan](frozen-plan.md), [checker](checker.py.txt),
 [certificate bank](one_axis_24.json.gz), and [receipt](checker-receipt.json.gz)

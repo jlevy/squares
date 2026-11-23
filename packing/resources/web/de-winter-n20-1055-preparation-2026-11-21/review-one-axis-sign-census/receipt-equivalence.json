@@ -1,0 +1,104 @@
+{
+  "format": "one-axis-census-receipt-equivalence-v1",
+  "status": "identical-except-measurements",
+  "method": "Streaming SHA-256 over original UTF-8 JSON lines after removing exactly the three root measurement fields, with all other bytes required identical.",
+  "receipts": {
+    "sign-census.json": {
+      "original_sha256": "45d16648622df9321d4ca3105bf3b2014b049e3774f3b89b3955fbd8ddd4654a",
+      "original_git_blob": "ddda8efa9ec50b03d75cf444dcacc6547642dd93",
+      "original_bytes": 5981124,
+      "substantive_sha256": "6da84de9f1b1ff4212d68a07ccd2e7372d042e4a5c21e4217a898bb3add71e11",
+      "omitted_root_fields": [
+        "wall_seconds",
+        "cpu_seconds",
+        "peak_rss_bytes"
+      ],
+      "measurements": {
+        "wall_seconds": 4.3030313340132125,
+        "cpu_seconds": 3.5300439999999997,
+        "peak_rss_bytes": 57671680
+      },
+      "counts": {
+        "vacancy_permutations": 120,
+        "aligned_positions_per_vacancy": 20,
+        "vacancy_aligned_cases": 2400,
+        "sign_assignments": 29368,
+        "D4_images_checked": 234944,
+        "D4_representatives": 3671
+      },
+      "roster_sha256": "b7203bf5e99c7df4e72819440a72b1487e84bac5478686ca7fe2e639bd142e5d",
+      "enumeration_work": {
+        "search_nodes": 3624,
+        "raw_assignment_emissions": 29368
+      }
+    },
+    "sign-census-isolated.json": {
+      "original_sha256": "fc75c5853c16cc99e3cbdda6661ddcfb5a0d6d2b0698c47c9f7747351ccd96fe",
+      "original_git_blob": "3cd64b80b74221bfbd0302d5b1ac5af3ef1033a0",
+      "original_bytes": 5981113,
+      "substantive_sha256": "6da84de9f1b1ff4212d68a07ccd2e7372d042e4a5c21e4217a898bb3add71e11",
+      "omitted_root_fields": [
+        "wall_seconds",
+        "cpu_seconds",
+        "peak_rss_bytes"
+      ],
+      "measurements": {
+        "wall_seconds": 4.950957708992064,
+        "cpu_seconds": 3.556086,
+        "peak_rss_bytes": 56147968
+      },
+      "counts": {
+        "vacancy_permutations": 120,
+        "aligned_positions_per_vacancy": 20,
+        "vacancy_aligned_cases": 2400,
+        "sign_assignments": 29368,
+        "D4_images_checked": 234944,
+        "D4_representatives": 3671
+      },
+      "roster_sha256": "b7203bf5e99c7df4e72819440a72b1487e84bac5478686ca7fe2e639bd142e5d",
+      "enumeration_work": {
+        "search_nodes": 3624,
+        "raw_assignment_emissions": 29368
+      }
+    }
+  },
+  "guard_runs": {
+    "execution": {
+      "supervision": {
+        "command_name": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/runtime/venv/bin/python",
+        "guard_mode": "observe-only",
+        "wall_limit_seconds": 60.0,
+        "tree_limit_gib": 0.25,
+        "worker_wall_seconds": 4.893,
+        "outcome": "completed",
+        "guard_exit": 0,
+        "worker_exit": 0
+      },
+      "samples": 5,
+      "max_pressure": 1,
+      "max_sampled_tree_cost_gib": 0.03,
+      "events": [
+        "vm_health"
+      ]
+    },
+    "execution-isolated": {
+      "supervision": {
+        "command_name": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/runtime/venv/bin/python",
+        "guard_mode": "observe-only",
+        "wall_limit_seconds": 60.0,
+        "tree_limit_gib": 0.25,
+        "worker_wall_seconds": 5.396,
+        "outcome": "completed",
+        "guard_exit": -2,
+        "worker_exit": 0
+      },
+      "samples": 5,
+      "max_pressure": 1,
+      "max_sampled_tree_cost_gib": 0.02,
+      "events": [
+        "vm_health"
+      ]
+    }
+  },
+  "isolated_guard_shutdown": "Supervisor reports observer -2 after worker exited zero; journal reports the observed process exited, no interventions and maximum pressure 1. Do not describe this observer exit as zero."
+}

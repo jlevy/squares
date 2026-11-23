@@ -1,0 +1,10 @@
+{
+  "command_name": "/Volumes/spud-ext2/agent-scratch/codex-intake-01a1fb-20261121/runtime/venv/bin/python",
+  "guard_mode": "observe-only",
+  "wall_limit_seconds": 60.0,
+  "tree_limit_gib": 0.25,
+  "worker_wall_seconds": 4.893,
+  "outcome": "completed",
+  "guard_exit": 0,
+  "worker_exit": 0
+}

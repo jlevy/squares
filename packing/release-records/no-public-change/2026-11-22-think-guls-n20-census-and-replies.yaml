@@ -1,0 +1,12 @@
+components:
+- paper:square-packing-methods-survey
+paths:
+- packing/campaign/result-requests.yaml
+outputs:
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: >-
+  Retains local bridge exclusions, a separate sign and symmetry census, and two
+  deployed contributor reply receipts. Two candidate renders and one exact-base
+  render from de145a9905bf reproduced all 43 methods-survey output files byte for
+  byte. The published paper and its edition stay as recorded.
