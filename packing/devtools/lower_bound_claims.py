@@ -62,6 +62,7 @@ from typing import Any
 
 from devtools.build_bound_citations import load_case
 from devtools.render_recent_results import span
+from sqpack import retained_json
 from sqpack.yamlio import safe_load
 
 ABOVE = "above"
@@ -278,7 +279,7 @@ def table(receipt: Mapping[str, Any]) -> str:
 
 def render(receipt: Mapping[str, Any]) -> str:
     """The receipt as the JSON text `--out` writes and `--check` compares."""
-    return json.dumps(receipt, indent=1, sort_keys=True) + "\n"
+    return retained_json.dumps(receipt, sort_keys=True)
 
 
 def main(argv: Sequence[str] | None = None) -> int:

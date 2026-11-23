@@ -1,13 +1,14 @@
 # Lower Bounds of Issues 1039, 1041 and 1042: Report Order
 
-Joost de Winter’s three reports of 19 November 2026 claim raised lower bounds at 80
-distinct counts from 19 to 218, 139 claims in all with #1042’s follow-up comment at 161.
-This directory transcribes them and walks them against the case records in report order,
-by the owner’s rule of 14 October 2026: each report is recorded as long as it is
-stronger than the last.
-The certificates are retained in the
-[`de-winter-lower-bounds-2026-11-19`](../../../resources/web/de-winter-lower-bounds-2026-11-19/README.md)
-packet; nothing here reads them.
+Joost de Winter’s reports and follow-ups of 19 November 2026 state 294 lower bounds at
+156 counts from 18 to 313. This directory walks their exact endpoints in report order
+against both lower lanes and the monotone floor, following the owner’s rule of 14
+October 2026.
+
+The first reports are retained in the
+[19 November packet](../../../resources/web/de-winter-lower-bounds-2026-11-19/README.md).
+The last follow-up’s four archive members are retained in the
+[155-count packet](../../../resources/web/de-winter-1042-public-replay-2026-11-20/README.md).
 
 | File | What it is |
 | --- | --- |
@@ -33,40 +34,32 @@ uv run --frozen --all-extras --group dev python -m devtools.lower_bound_claims \
 | #1042 | 2026-11-19T18:45:38Z | 48 | `followup/best_by_count.csv` at 21d944c |
 | #1042, comment 7020627554 | 2026-11-19T19:59:12Z | 1 | the comment: $s(161) \ge 8036307/625000$ |
 
-The start is the case records on `main` at `7a3b186a2e`, both lower lanes at every count
-from 1 to 218, and the monotone floor, the stronger lane at any smaller count.
+| #1042, comment 7022143149 | 2026-11-19T21:02:44Z | 155 | `certificate.json` in the
+retained base85 archive |
+
+The case baseline is `main` at `ad02e1650b1c`. The walk reads both lower lanes from 1 to
+313\. The last comment was edited at 02:02:32 UTC on 20 November and the packet retains
+that revision.
 
 ## The Walk
 
-Every one of the 139 claims is above both lower lanes of its case and above the monotone
-floor, and no later report is weaker than an earlier one at any count.
-
-| Report | Current | Superseded by a later report | Consequence | Not an improvement |
+| Report | Current within this walk | Superseded within this walk | Consequence | Below or equal to the floor |
 | --- | ---: | ---: | ---: | ---: |
-| #1039 | 23 | 26 | 7 | 0 |
-| #1041 | 2 | 32 | 0 | 0 |
-| #1042 | 47 | 1 | 0 | 0 |
-| #1042, comment at 161 | 1 | 0 | 0 | 0 |
+| #1039 | 1 | 48 | 7 | 0 |
+| #1041 | 0 | 34 | 0 | 0 |
+| #1042 | 0 | 48 | 0 | 0 |
+| #1042, comment 7020627554 | 0 | 1 | 0 | 0 |
+| #1042, comment 7022143149 | 148 | 0 | 7 | 0 |
 
-- **Current**, the strongest report at its count: #1039 at 19, 20, 26, 27, 29, 30, 31,
-  37–41, 43, 51, 66, 82, 83, 90, 92, 101, 110, 122 and 145; #1041 at 105 and 111; #1042
-  at its 47 other counts; the comment at 161.
-- **Superseded**, recorded in order and passed by a later report: #1039’s other 26
-  direct counts, all but 105 and 111 of #1041’s, and #1042’s 161.
-- **Consequences**, #1039’s seven monotonicity rows at 102, 123–125 and 146–148, equal
-  to its own 101, 122 and 145; they go in the parent’s scope.
-  #1041’s 115, a certificate of its own at 87/8, equals its 114 and is superseded by
-  #1042’s 115.
+The #1039 claim at 19 is the one earlier row still current within this walk.
+Each of the two sets of seven monotonicity rows inherits its report’s own 101, 122 and
+145 endpoints at 102, 123–125 and 146–148.
 
-## What This Does Not Decide
-
-Whether any certificate is sound.
-The walk compares numbers only; the replays and reviews of bead think-fv42 decide the
-bounds.
-
-A fourth report, #1042’s comment 7022143149 (21:02:44Z on 19 November, edited 02:02:32Z
-on 20 November), claims 155 counts from 18 to 313 in a base85 archive, many of them
-above the claims here; it is not walked here and is an import of its own.
+Issue #1060 later raises all 153 endpoints it shares with the final #1042 comment.
+Its table has no rows at 18 or 20. The 61 corner-family rows in the 155-count archive
+depend on T-180’s unchanged-region coverage.
+Numerical standing here leaves proof coverage and registration open under think-fv42 and
+think-4iec.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

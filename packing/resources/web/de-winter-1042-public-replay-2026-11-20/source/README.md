@@ -1,0 +1,3 @@
+# Square-packing lower bounds
+
+This is the compact public replay package. It reconstructs each new measure from the public source files and replays the exact angular intervals in certificate.json. Use Python 3.10+, a C++17 compiler, and the public repository `JoostdeWinter/square-packing` at commit `21d944c43098e2261ab7d713cd10f02a5eb13f3d`. Run `python3 verify_public.py --base path/to/square-packing/lower_bounds_2026_11_19 --workers 4`. Add `--replay-existing` to recompute checks that were already public, or `--n 92` to check one count. GPT6.2 Astra is the AI author of these new searches and certificates. Joost de Winter directed the project. Hiroaki Hosono supplied the underlying measures. Source credits and license notices appear with the pinned public code.

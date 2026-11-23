@@ -1,0 +1,82 @@
+{
+  "format": "issue-comment-archive-sources-v1",
+  "source_key_proposed": "[de Winter issue 1042 public replay 2026-11-20]",
+  "comment_url": "https://github.com/jlevy/squares/issues/1042#issuecomment-7022143149",
+  "comment_id": 7022143149,
+  "author": "JoostdeWinter",
+  "created_at": "2026-11-19T21:02:44Z",
+  "updated_at": "2026-11-20T02:02:32Z",
+  "retrieved_at": "2026-11-22T23:31:28.733667+00:00",
+  "source_api_sha256": "aa7143e402295d82c009e511ed8df176c5b9c678aa4037f7aa7bbc7700740c0d",
+  "body_utf8_sha256": "972ba2f525404387847571ec31d094caf72cfce6867da4cb059783163f7e5911",
+  "archive": {
+    "path": "source/squaremath_public_replay.zip",
+    "bytes": 48944,
+    "sha256": "2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab"
+  },
+  "members": [
+    {
+      "path": "README.md",
+      "stored_bytes": 469,
+      "bytes": 772,
+      "sha256": "db62f19f8c4da1332c165215494a7a890c20d1e63cbecd81303c77a1021ee7ec",
+      "zip_compression_method": 8,
+      "zip_timestamp": [
+        2026,
+        11,
+        19,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "certificate.json",
+      "stored_bytes": 27277,
+      "bytes": 118671,
+      "sha256": "8e9157c08aab9552094887456e1c03b17de18893d37d499e76d01071edb7f304",
+      "zip_compression_method": 14,
+      "zip_timestamp": [
+        2026,
+        11,
+        19,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "replay_sources.json",
+      "stored_bytes": 20391,
+      "bytes": 76356,
+      "sha256": "0f60b2f99f852b7eaefb890e4cb1db01b43e0498a2b6e76d06eaee85bcaf2f8a",
+      "zip_compression_method": 12,
+      "zip_timestamp": [
+        2026,
+        11,
+        19,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "path": "verify_public.py",
+      "stored_bytes": 361,
+      "bytes": 637,
+      "sha256": "5ef31bdce064aa88a9dac4fc166f5107c9ecf85351ea3d9510cb5ff3928114ca",
+      "zip_compression_method": 8,
+      "zip_timestamp": [
+        2026,
+        11,
+        19,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "base_main": "de145a9905bf6bbd6050d72ee06e5fc0770061b3",
+  "source_programs_executed": false,
+  "geometry_or_coverage_checked": false
+}

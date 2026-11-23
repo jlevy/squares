@@ -6261,6 +6261,27 @@ sources:
       and certified them for issue 1037 using Evan Daniel's solver. The source
       identifies Asterios Panoras's compilation as a donor for 66 squares at 297.
       Exact release geometry and an independent review at 202 and 263 are retained.
+  - key: '[de Winter issue 1042 public replay 2026-11-20]'
+    authors:
+    - de Winter
+    year: 2026
+    venue: GitHub
+    dated: '2026-11-20'
+    lineage: builds-on-project
+    credit: de Winter after Hosono
+    note: >-
+      Joost de Winter's issue 1042 comment 7022143149, first posted on 19 November
+      at 21:02:44 UTC and retained as edited on 20 November at 02:02:32 UTC,
+      requests 155 lower bounds. This date identifies the retained revision;
+      report order preserves the original comment timestamp. The exact 48,944-byte
+      base85 ZIP is retained at SHA-256 2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab.
+      Hiroaki Hosono supplied the underlying measures. The seven registered-boundary
+      rows explicitly reuse this project's retained source measures and coverage
+      receipts; that reuse is a dependency, not independent verification of the new
+      bound. The author names GPT6.2 Astra as the AI author under his direction.
+      The archive has no separate LICENSE member and points to the pinned source's
+      credit and licence notices. No source program ran during this custody triage.
+
 credited_names:
   Samanyu-dev: Samanyu-dev
   Kaelan Yim: Yim

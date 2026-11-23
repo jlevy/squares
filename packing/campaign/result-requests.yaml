@@ -36476,6 +36476,18 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/1001#issuecomment-7088055122
+      date: '2026-11-23'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n232-kodaj-improved
+        id: T-307
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      beads: [think-j9f4]
     close_when: >-
       T-305 to T-309 are on main with the stage 4 review mapped and each adopted as its case's
       house, and the reply on main says what was retained, replayed and reviewed and that the
@@ -39036,14 +39048,20 @@ issues:
       bead: think-fv42
     - key: n18-n313-public-replay
       claim: >-
-        Lower bounds at 155 counts from 18 to 313 in the base85 archive of the comment
-        (squaremath_public_replay.zip, SHA-256
-        2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab), replayed against
-        lower_bounds_2026_11_19 at 21d944c; 61 rows are corner families that rely on T-180's
-        global coverage.
+        Lower bounds at 155 counts from 18 to 313 in the base85 archive of comment
+        7022143149 (squaremath_public_replay.zip, SHA-256
+        2035790a40ac73479e047dc6a6a861137295468458ab6b015c4aad5ebd61c3ab), replaying against
+        lower_bounds_2026_11_19 at 21d944c. The 61 family_cut rows depend on T-180's
+        unchanged-region coverage. The withdrawn 19-square row is absent.
       source: https://github.com/jlevy/squares/issues/1042#issuecomment-7022143149
       not_registered: >-
-        Found in triage on 20 November 2026 and not triaged here; an import of its own.
+        The exact archive and all four members are retained. A scoped exact comparison
+        verifies all 155 stated endpoint gains and all 94 stated mass inequalities.
+        Against the earlier three reports and 161 follow-up, there are 148 new report
+        rows and seven same-report monotonicity consequences. Attachment D of issue
+        1060 later raises all 153 shared endpoints; 18 and 20 are absent there.
+        This is scalar triage, not coverage verification. Current-case admission,
+        per-method review and registration remain open on think-4iec.
       queued: true
       bead: think-4iec
     beads:
@@ -39472,10 +39490,14 @@ issues:
         and 295. The 259 witness is a dependency.
       source: body
       not_registered: >-
-        The maintained field route accepts the ten reviewed counts plus the 259 dependency
-        within its input ceiling. An independent exact check places the degree-44 n109
-        side about 2.025696e-12 below T-335. The full n109 geometry exceeds the maintained
-        input ceiling and remains undecided. Registration and independent review stay open.
+        The maintained field route accepts all pairs at 129, 172, 175, 199, 237, 262,
+        268, 269, 292 and 295, plus dependency-only 259. Its duplicate and outside
+        controls are two-square slices, not whole-configuration controls. The degree-44
+        n109 side is independently below T-335; full geometry remains undecided above
+        the reader's size ceiling. Report order, complete controls and independent
+        mathematical review remain open. At 295 preserve GeiserX credit and compare
+        the algebraic reconstruction against the earlier #1037 rational certificate
+        before assigning another result.
       queued: true
       bead: think-l9fk
     - key: three-construction-side-identities
@@ -39483,8 +39505,10 @@ issues:
         L199 = L172 + 1, L268 = L129 + 5, and L292 = L259 + 1 for the stated constructions.
       source: body
       not_registered: >-
-        Exact polynomial shifts and isolated-root comparisons hold, and the maintained checker
-        accepts all six witness geometries. The exact-side register review remains open.
+        Exact polynomial shifts and isolated-root comparisons hold, and the maintained
+        checker accepts all six source configurations. These are relations between
+        construction sides, not optimal-packing values. The n259 input remains a
+        dependency. Independent review and exact-side register integration remain open.
       queued: true
       bead: think-l9fk
     beads: [think-l9fk]
@@ -39615,6 +39639,13 @@ issues:
       kind: follow-up
       reported:
       - result: thirteen-rational-enclosures
+    - url: https://github.com/jlevy/squares/issues/1063#issuecomment-7087973351
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: thirteen-rational-enclosures
+      beads: [think-3iqa]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       The exact feasibility and pose comparison receipts are indexed in
