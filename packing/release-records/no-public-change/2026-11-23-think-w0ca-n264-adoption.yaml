@@ -9,6 +9,7 @@ paths:
   - packing/campaign/result-requests.yaml
   - packing/devtools/adopt_houses.py
   - packing/devtools/build_known_best_atlas.py
+  - packing/devtools/site_resources.py
   - packing/devtools/upper_bound_houses.py
   - packing/devtools/upper_bound_reports.py
   - packing/frontier/results.yaml
@@ -54,4 +55,7 @@ reason: >-
   repair. The later atlas-builder change only extends the existing print-credit
   hold at 264. The paper renderers read the retained composite assets and do not
   construct their print credits. Those retained assets did not change.
-  No PDF was printed. All four papers keep their existing editions.
+  The source-list repair adds one n264 repository to OTHER_PROJECTS for the
+  homepage and contributor profiles. Paper text and retained figures use
+  their own sources. No PDF was printed. All four papers keep their
+  existing editions.

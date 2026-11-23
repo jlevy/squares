@@ -23468,6 +23468,18 @@ occurrences:
   evidence: []
   note: Identity review pending.
 - origin:
+    path: packing/frontier/n-264.md
+    record_key: '264'
+    field: /reported_upper_bound/improved_by/1
+  expected_text: Doğa Özden
+  start: 0
+  end: 10
+  label: Doğa Özden
+  role: construction-improver
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/n-265.md
     record_key: '265'
     field: /reported_lower_bound/proved_by/0
@@ -35549,7 +35561,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s264 upper bound 2026-11-23]'
     field: /credit
-  expected_text: Ozden after Kodaj, JoeGun
+  expected_text: Ozden after Kodaj, JoeGun, Levy
   start: 0
   end: 5
   label: Ozden
@@ -35561,7 +35573,7 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s264 upper bound 2026-11-23]'
     field: /credit
-  expected_text: Ozden after Kodaj, JoeGun
+  expected_text: Ozden after Kodaj, JoeGun, Levy
   start: 12
   end: 17
   label: Kodaj
@@ -35573,10 +35585,22 @@ occurrences:
     path: packing/resources/bibliography.yaml
     record_key: '[Özden s264 upper bound 2026-11-23]'
     field: /credit
-  expected_text: Ozden after Kodaj, JoeGun
+  expected_text: Ozden after Kodaj, JoeGun, Levy
   start: 19
   end: 25
   label: JoeGun
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[Özden s264 upper bound 2026-11-23]'
+    field: /credit
+  expected_text: Ozden after Kodaj, JoeGun, Levy
+  start: 27
+  end: 31
+  label: Levy
   role: prerequisite
   disposition: unresolved
   evidence: []

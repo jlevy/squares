@@ -6316,7 +6316,7 @@ sources:
     venue: GitHub
     dated: '2026-11-23'
     lineage: builds-on-project
-    credit: Ozden after Kodaj, JoeGun
+    credit: Ozden after Kodaj, JoeGun, Levy
     note: >-
       Doğa Özden’s exact rational witness for s(264) <= 16.772168305041, rounded upward at
       12 places, at kenaznia-doga/s264-upper-bound-1677216830 (72c4d195c85b6099002ad6c675b27df40fdaceac) and reported
