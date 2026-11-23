@@ -1723,18 +1723,20 @@ def restatements_problems(
 def regularized_drawings_problems(
     register: Mapping[str, Any], scopes: Mapping[str, set[int]], *, drift: bool = True
 ) -> list[str]:
-    """What is wrong with the register's `regularized_drawings`, this project's own
-    regularizations of registered packings as the atlas's regularized layer draws them.
+    """What is wrong with the register's `regularized_drawings`, regularizations of
+    registered packings as the atlas's regularized layer draws them.
 
     Each item is held as a result's `regularizations` item is, less what a result alone
-    has: its count listed once, its `of` registered with the count in its scope, `by` this
-    project, the measurements numbers no lower than zero with `moved` no more squares than
-    the count holds, a measured identity carrying a measurement, and its `measured_in`
-    a repository file. The drawings date from the layer's own runs, which carry no
-    register date, so `of` is not held to a date, and each `view` is the layer's to hold
+    has: its count listed once, its `of` registered with the count in its scope, and
+    `by` identifying the project or the original author. Measurements are nonnegative
+    with `moved` no more than the count. A measured identity records a measurement
+    and names a repository file in `measured_in`. The layer's runs carry no register
+    date, so `of` is not held to a date, and each `view` is the layer's to hold
     (`regularize_axis_components --check-atlas`). The block as a whole must be what
     `devtools.regularized_drawings` generates from the layer's index (`drift`).
     """
+    from devtools.regularize_axis_components import EVAND_AUTHOR_SOURCE_KEY  # noqa: PLC0415
+
     drawings = register.get("regularized_drawings") or {}
     problems: list[str] = []
     seen: set[int] = set()
@@ -1749,7 +1751,13 @@ def regularized_drawings_problems(
             problems.append(f"{name} names {other}, which is not registered")
         elif n not in scopes[other]:
             problems.append(f"{name} names {other}, whose scope does not hold n = {n}")
-        if item.get("by") != PROJECT_REGULARIZER:
+        author_view = (
+            n == 304
+            and item.get("by") == EVAND_AUTHOR_SOURCE_KEY
+            and item.get("side") == "same"
+            and "devtools.regularize_author_view" in str(item.get("method"))
+        )
+        if item.get("by") != PROJECT_REGULARIZER and not author_view:
             problems.append(f"{name} is by {item.get('by')}, not `{PROJECT_REGULARIZER}`")
         problems.extend(_regularization_number_problems(name, item))
         identity = item.get("identity") or {}

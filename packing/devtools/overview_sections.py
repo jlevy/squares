@@ -3403,11 +3403,11 @@ def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
     and carries both drawings, so Original switches every tile to its house drawing as
     published, in its source's pose. `regularized` says whether the default picture is
     the case's regularized view, whose generator's credit the Regularized title adds;
-    `side` is the default picture's. Where the pose turns the default picture, the
-    Regularized title says so, since the tile then does not draw it as published."""
+    `side` is the default picture's. The Regularized title identifies a selected view,
+    states when it keeps the house side and says when the canonical pose turns it."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
     from devtools.build_bound_citations import load_case  # noqa: PLC0415
-    from devtools.default_drawings import credit_line  # noqa: PLC0415
+    from devtools.default_drawings import credit_line, regularized_defaults  # noqa: PLC0415
     from devtools.pictured_source import pictured_source_key  # noqa: PLC0415
 
     upper = load_case(n)["reported_upper_bound"]
@@ -3416,7 +3416,12 @@ def _atlas_drawing(n: int, *, regularized: bool, side: float) -> str:
     attribution = [part for part in (credit, source) if part]
     original_credit = ", ".join(["Packing as published", *attribution])
     turned = [] if frontier.default_pose(n).identity else ["turned to its canonical pose"]
-    shown = ", ".join(["Packing as published", *turned, *attribution])
+    label = "Packing as published"
+    if regularized:
+        label = "Regularized drawing"
+        if regularized_defaults()[n]["side"]["against_house"] == "same":
+            label += " at the published side"
+    shown = ", ".join([label, *turned, *attribution])
     title = f"{shown}. {credit_line(n)}" if regularized else shown
     choices = (
         f' data-atlas-original-src="{frontier.drawing_path(n)}"'

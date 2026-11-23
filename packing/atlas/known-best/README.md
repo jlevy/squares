@@ -195,20 +195,24 @@ decided it:
 - **The grid-slack generator**, `devtools.regularize_grid_slack`, a port of his
   coincidence placement that starts from the witness’s exact frame and closes free grid
   slack.
+- **Evan Daniel’s original author certificate** (`evand-author-regularize/1`), imported
+  by `devtools.regularize_author_view`. The two standard exact verifiers and the
+  half-angle checker reverify the retained certificate.
+  The view carries the original source’s bibliography key and author credit.
 
-A view from either of the last two enters only where the policy’s decision table admits
-it (row 10), by `python -m devtools.regularize_evand layer --select admitted` (a
-grid-slack run’s views by adding `--grid-run DIR --grid-counts N ...`, which draws that
-run’s view at those counts in place of Evan Daniel’s), and only where it is worse on no
-goal of the improvement rule than the picture drawn at that count today: the layer’s
-view where the rule draws it, else the house drawing
-(`regularize_evand.worse_than_drawn`). A tie is admitted; refusing one is the
-selection’s. The axis tool’s own record of that count stays beside it as `reference`.
-Such a view carries the credit line *Regularized by the Squares Project with Evan
-Daniel’s regularizer (evand/square-packing, MIT)*, in the index, in the view and in its
-drawing. The
-[regularization process](../../../docs/project/guides/regularization-process.md) gives
-the steps from a run to a merged view: generate, select with
+A driven view from the vendored regularizer or grid-slack enters only where the policy’s
+decision table admits it (row 10), by
+`python -m devtools.regularize_evand layer --select admitted` (a grid-slack run’s views
+by adding `--grid-run DIR --grid-counts N ...`, which draws that run’s view at those
+counts in place of Evan Daniel’s), and only where it is worse on no goal of the
+improvement rule than the picture drawn at that count today: the layer’s view where the
+rule draws it, else the house drawing (`regularize_evand.worse_than_drawn`). A tie is
+admitted; refusing one is the selection’s. The axis tool’s own record of that count
+stays beside it as `reference`. Such a view carries the credit line *Regularized by the
+Squares Project with Evan Daniel’s regularizer (evand/square-packing, MIT)*, in the
+index, in the view and in its drawing.
+The [regularization process](../../../docs/project/guides/regularization-process.md)
+gives the steps from a run to a merged view: generate, select with
 `python -m devtools.regularize_select`, admit, render, record and validate.
 
 On 13 October 2026 the index draws 90 views: 20 by the axis tool, 48 by Evan Daniel’s
@@ -967,6 +971,15 @@ new witness. The axis view draws at T-335’s exact side, and the default drawin
 settled as `decided-no-better`. The index holds 101 views, 91 of which are their count’s
 default drawing. The separate solved-side candidate is queued under `think-26s0`.
 [Run records](../../cases/regularized_drawings/think-wvr8-2026-11-21/README.md)
+
+On 23 November 2026 the atlas adopted Evan Daniel’s original regularization at 304 as
+its default drawing.
+Both exact checkers accepted all 46,056 pairs at T-273’s unchanged side.
+The view has seven displayed angle hues, down from thirteen, with no uneven or near-axis
+squares. The layer still holds 101 views, including 22 by the axis tool, 41 by the
+vendored Evan Daniel driver, one from an original author certificate, 11 by grid-slack
+version 1 and 26 by version 2.
+[Admission receipt](../../cases/regularized_drawings/think-dc96-2026-11-23/admission.json)
 
 ### The default picture
 

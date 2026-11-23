@@ -7,8 +7,9 @@ devtools.regularized_drawings`:
     [--check]
 
 The atlas's regularized layer (`atlas/known-best/regularized/index.json`) draws a view of
-a count's credited packing that this project regularized: by `regularize_axis_components/2`,
-by Evan Daniel's regularizer through `devtools.regularize_evand`, or by the grid-slack
+a count's credited packing, regularized by `regularize_axis_components/2`,
+by Evan Daniel's regularizer through `devtools.regularize_evand`, by Daniel himself,
+or by the grid-slack
 generator (`docs/project/policies/regularization-policy.md`). Each entry that draws a view
 carries its regularization in the register's terms, `results.schema.yaml`'s
 `regularizations` item, with `of_witness`, the source witness, standing in for `of`. The
@@ -42,9 +43,9 @@ packing from before this project began that no replay here ever registered has n
 name, and inventing one is not this tool's to do.
 
 **What is not a result.** A pure regularization, one that proves no new bound, is never
-a result. A drawing changes no side, frontier value, evidence tier or credit (the policy,
-section 1), so these items are not a register result and carry no rung: they are this
-project's regularizations of results the register already holds. A view whose side lies
+a result. A drawing changes no side, frontier value, evidence tier or packing credit
+(the policy, section 1). These items are regularizations of results the register
+already holds. A view whose side lies
 below the verified upper bound is a result first (row 3) and is registered by its own
 entry's `regularizations`, as T-155 registered 59 exact sides; where such a view is also
 drawn, at fifteen counts, its case note says that its exact side is registered as that
@@ -159,12 +160,14 @@ ITEM_FIELDS = ("n", "of", "by", "method", "modifications", "side", "changes", "i
 #: The layer's generators, as its index names them.
 AXIS_GENERATOR = "regularize_axis_components/2"
 EVAND_GENERATOR = "evand-regularize"
+EVAND_AUTHOR_GENERATOR = "evand-author-regularize/1"
 #: Whose code made each generator's view: this project's axis tool (`axis`), Evan Daniel's
 #: regularizer through the vendored driver (`evand`), or the grid-slack port of his
 #: placement (`grid`). A generator not named here is refused, not credited by a guess.
 GENERATOR_KINDS = {
     AXIS_GENERATOR: "axis",
     EVAND_GENERATOR: "evand",
+    EVAND_AUTHOR_GENERATOR: "evand",
     "regularize_grid_slack/0": "grid",
     "regularize_grid_slack/1": "grid",
     "regularize_grid_slack/2": "grid",
@@ -500,6 +503,8 @@ def project_modifications(
         return grid_modifications(generator, same=relation(entry) == "same")
     if kind == "axis":
         return None
+    if generator == EVAND_AUTHOR_GENERATOR:
+        return []
     found = rung_words(rungs(entry), entry.get("n"))
     found.extend(
         patch_words(str((entry.get("regularization") or {}).get("method") or ""), kinds)
@@ -970,14 +975,14 @@ def project_case_item(
     registered_in: str | None = None,
     first_certified_in: str | None = None,
 ) -> dict[str, Any]:
-    """This project's regularization of a drawn count, as its case record keeps it, with
+    """The layer's regularization of a drawn count, as its case record keeps it, with
     the result that registers it where one does (`registering_result`), and where that
     result's item names one, the earlier result whose certificate first stated its exact
     side (`FIRST_CERTIFIED`)."""
     entry = count.entry
     generator = str(entry["generator"])
     found: dict[str, Any] = {
-        "by": PROJECT_REGULARIZER,
+        "by": entry["regularization"]["by"],
         "credit": generator_credit(generator, generators),
         "generator": generator,
     }
@@ -1178,7 +1183,11 @@ def case_note(
     held = held or {}
     if owed:
         for found in items:
-            if found["by"] != PROJECT_REGULARIZER and found.get("kind") != EXACT_SOLVE:
+            if (
+                found["by"] != PROJECT_REGULARIZER
+                and "view" not in found
+                and found.get("kind") != EXACT_SOLVE
+            ):
                 raise RegularizedDrawingsError(
                     f"{found['by']}'s item of {found['of']}'s packing is its source's "
                     f"regularization, yet the count's regularization is owed ({owed}): name "
@@ -1186,7 +1195,7 @@ def case_note(
                 )
     sentences: list[str] = []
     for found in items:
-        if found["by"] != PROJECT_REGULARIZER or "view" not in found:
+        if "view" not in found:
             continue
         credit = credit_sentence(found)
         why = held.get(str(found["view"]))
@@ -1226,7 +1235,7 @@ def case_note(
             f"not drawn here; {words}."
         )
     for found in items:
-        if found["by"] == PROJECT_REGULARIZER:
+        if found["by"] == PROJECT_REGULARIZER or "view" in found:
             continue
         if found.get("kind") == EXACT_SOLVE:
             sentences.append(
