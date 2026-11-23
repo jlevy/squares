@@ -12,11 +12,13 @@ paths:
 - packing/devtools/build_known_best_atlas.py
 - packing/devtools/default_drawings.py
 - packing/devtools/geiserx_1037_algebraic_report.py
+- packing/devtools/register_regularized_bounds.py
 - packing/devtools/select_houses.py
 - packing/devtools/upper_bound_houses.py
 - packing/devtools/upper_bound_reports.py
 - packing/frontier/results.yaml
 - packing/frontier/source-coverage.yaml
+- packing/src/sqpack/cli/validate.py
 outputs:
 - papers/n11-lower-bounds-explainer.html
 - papers/n11-lower-bounds-explainer.md
@@ -28,7 +30,7 @@ outputs:
 - papers/square-packing-methods-survey.md
 reason: >-
   Adopts the 202- and 263-square quadratic certificates as T-341. Two
-  candidate renders and one render with inputs from exact main 689a8ecf3546
+  candidate renders and one render with inputs from exact main 3b75cfdb43d4
   used fixed link revisions and Chrome on macOS. The optimality review,
   threshold review and methods survey each reproduced 43 files byte for byte.
   The lower-bounds explainer reproduced 55 deterministic files. Its live
