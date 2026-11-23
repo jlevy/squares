@@ -5996,12 +5996,13 @@ def _earlier_ceiling(move: Move, text: str) -> str:
     bound = rf"\$s\({n}\)\s+\\le\s+[0-9.]+\$"
     # T-155 had already dated T-101's earlier rounded ceiling at n202; retain that
     # original interval when the later house moves both lanes.
-    text = re.sub(
-        rf":\s+it\s+proves\s+\$s\({n}\)\s+\\le\s+([0-9.]+)\$,"
-        r"\s+the\s+verified\s+upper\s+bound\s+from\b",
-        r". Its ceiling of $\1$ was the verified upper bound from",
-        text,
-    )
+    if n == 202:
+        text = re.sub(
+            rf":\s+it\s+proves\s+\$s\({n}\)\s+\\le\s+([0-9.]+)\$,"
+            r"\s+the\s+verified\s+upper\s+bound\s+from\b",
+            r". Its ceiling of $\1$ was the verified upper bound from",
+            text,
+        )
     text = re.sub(
         rf"\bit\s+proves\s+({bound}),\s+the\s+verified\s+upper\s+bound\s+\((T-\d+)\)\.",
         rf"it proved \1, the verified upper bound until {until} (\2).",
