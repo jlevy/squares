@@ -1409,7 +1409,7 @@ def test_news_and_the_changelog_each_have_a_section_and_a_button_with_and_withou
     """The owner, 3 November 2026: the home page "consistently shows both and shows last
     few days of changelog below the last few news items, each with its own section and
     button to go to the dedicated page". News closes on All News alone; the Changelog
-    section under it holds the log's newest days, the newest open and the rest closed,
+    section under it holds the log's newest days, with the newest two open,
     and closes on Changelog. No script draws the section, so it is laid out the same with
     scripts and without, in both schemes, every line inside its own box at both widths.
     The dark scheme is drawn by scripts: kpress's head bootstrap stamps the reader's
@@ -1462,14 +1462,11 @@ def test_news_and_the_changelog_each_have_a_section_and_a_button_with_and_withou
         assert [day["id"] for day in reading["days"]] == [
             f"{overview_sections.HOME_CHANGELOG_DAY}{day}" for day in days
         ], where
-        newest, *older = reading["days"]
-        assert newest["open"], where
-        assert newest["lines"] > 0, where
-        assert newest["visible"] == newest["lines"], where
-        for day in older:
-            assert not day["open"], (where, day["day"])
+        for index, day in enumerate(reading["days"]):
+            opened = index < overview_sections.HOME_CHANGELOG_OPEN
+            assert day["open"] == opened, (where, day["day"])
             assert day["lines"] > 0, (where, day["day"])
-            assert day["visible"] == 0, (where, day["day"])
+            assert day["visible"] == (day["lines"] if opened else 0), (where, day["day"])
         assert all(day["summary"] for day in reading["days"]), where
         assert reading["overflow"] == 0, where
         assert reading["outside"] == [], where
