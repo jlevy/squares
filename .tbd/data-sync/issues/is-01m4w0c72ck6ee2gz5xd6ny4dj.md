@@ -5,7 +5,7 @@ title: "Regularization follow-up: unify tilt angles in tilted blocks (176, 232 a
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: codex-drawing-follow-up
 labels:
   - stack-498-followup
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T01:28:06.988Z
-updated_at: 2026-11-23T04:50:21.691Z
+updated_at: 2026-11-23T05:32:12.575Z
 started_at: 2026-11-23T04:30:30.105Z
 ---
 Owner, 14 Oct 2026: 'some like 176 and 232 still look irregular'. After stack 498 merges: (1) rank every count by residual irregularity in its default drawing (tilt-angle classes and hues within tilted blocks, block misalignment, isolated tilted squares); (2) build an angle-unification generator: cluster each connected tilted block's angles, snap each cluster to one angle, re-solve positions exactly at s_W or U, admit only if exactly valid on both routes and the improvement rule (policy section 11) passes; (3) run Evan Daniel's re-solve where not yet tried on the ranked counts; (4) owner decisions: symmetry, sub-block alignment and point contacts as goals; the row-7 review queue (232, 297, 154, 175). Grid-slack keeps witness rotations and the axis tool only straightens near-axis squares, so neither can fix mixed angles.
@@ -27,3 +27,5 @@ Carried from #580 review C (14 Oct): C4, the process guide should say that repla
 Carried from #580 review D (14 Oct): D1, extend T-155's alias sentence to the provisional ids 'T-151' and 'T-147' as well (both are main's results now).
 
 22 Nov 2026 intake follow-up, n=232. The homepage atlas and case page currently select the axis-component fallback (270 degrees, no flip). The retained Daniel certificate exceeds the exact T-340 side by 1.576e-19. Exact contraction still exceeded it by 1.7870798633155325e-34 (binding pair 3,11). The 50-digit author pose with rationalized angles and exact uniform reboxing exceeded it by 8.24717520806e-48 (binding pair 66,76). The witness-frame conservative rerun refused for overlap; the grid variants already screened were also infeasible. A numerical fixed-angle position repair had negative clearance. The exploratory group-spin exact check was interrupted by the memory guard before a verdict. There is no admitted replacement. Keep the current view and retain this bead for a different exact same-side candidate and its per-square drawing review.
+
+The preceding drawing audit also checked T-336 at n=305. Its exact axis fallback is in the live case and atlas (270 degrees, no reflection). The retained strong regularizer result is 1.795e-19 above U and the retained aligned variants regress on contact shading or full shared sides. Keep the fallback and include n=305 in the same-side angle-unification follow-up. Evidence: external agent-evidence/squares-intake-20261121-01a1fb/drawing-audit-20261122/audit.md and n232-exact-follow-up receipts. The new intake review and public visual checks shipped in #1095.
