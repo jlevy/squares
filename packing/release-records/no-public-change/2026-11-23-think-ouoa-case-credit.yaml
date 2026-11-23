@@ -7,6 +7,7 @@ paths:
 - packing/atlas/known-best/bound-citations.json
 - packing/campaign/result-requests.yaml
 - packing/devtools/adopt_houses.py
+- packing/devtools/build_known_best_atlas.py
 - packing/frontier/n-127.md
 outputs:
 - papers/n11-lower-bounds-explainer.html
@@ -19,8 +20,9 @@ outputs:
 - papers/square-packing-methods-survey.md
 reason: >-
   Compared the maintained HTML and Markdown renderers on main 8daf03e21224
-  and the scoped credit commit cff3ab039e65. All eight outputs match byte
+  and the scoped credit and poster-hold commit 862abdc6720c. All eight outputs match byte
   for byte before math preparation, asset linking and PDF printing. The comparison uses
   the same fixed link revision in both checkouts. The case metadata separates construction
   attribution from the certificate role, and the issue follow-ups preserve result
-  cross-references and opening dates. The current paper editions stand.
+  cross-references and opening dates. The atlas holds keep the published poster
+  construction credit block at its current edition. The current paper editions stand.
