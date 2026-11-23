@@ -1,0 +1,21 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+paths:
+  - packing/src/sqpack/render/style.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+reason: >-
+  think-q53a changes the violet family at palette slot 8 to distinguish it from
+  the usual pink in the 109-square pinwheel. Compared the revised palette with
+  main 7e886b9f6ba82071dc4e93babfb60219074d1b92 in the same checkout. Baseline
+  subprocesses loaded main's style.py at the same module and resource paths.
+  The two preparations of n11-optimality-review used the same fixed link
+  revision and produced byte-identical HTML, Markdown and linked assets.
+  The explainer's render(WALKTHROUGH, full_sweep=False) returned byte-identical
+  HTML and Markdown before unchanged math preparation and asset linking.
+  The 45 compared files matched. No PDFs were printed. Both papers keep their
+  current editions.
