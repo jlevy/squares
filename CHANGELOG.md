@@ -9,6 +9,38 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-11-23"></a>
+
+### 2026-11-23
+
+<a id="changelog-entry-distinguish-rare-violet-109-pinwheel"></a>
+
+#### A More Distinct Violet in the 109-Square Pinwheel
+
+Significance S2: A small rendering fix makes two angle groups easier to distinguish.
+
+The 109-square pinwheel uses a more distinct violet for its rare angle color. The usual pink still marks the same 21 squares in the regularized drawing.
+
+Published artifacts: [109-square case and pinwheel](https://squaremath.org/cases/109.html).
+
+First public: 2026-11-23 ([publication evidence](https://github.com/jlevy/squares/actions/runs/45119059616/job/137512140261)).
+
+PRs and supporting records: [PR \#1096](https://github.com/jlevy/squares/pull/1096).
+
+<a id="changelog-entry-evan-daniel-regularized-304-diagram"></a>
+
+#### A More Regular Diagram for the 304-Square Packing
+
+Significance S2: A visual refinement of an existing packing at its published bound.
+
+The atlas selects Evan Daniel’s original regularized diagram for 304 squares. The diagram uses seven angle colors, down from thirteen, and three exact checkers accepted all 46,056 square pairs at the published bound.
+
+Published artifacts: [304-square case and regularized drawing](https://squaremath.org/cases/304.html).
+
+[Publication evidence](https://github.com/jlevy/squares/actions/runs/45124879939).
+
+PRs and supporting records: [PR \#1097](https://github.com/jlevy/squares/pull/1097).
+
 <a id="changelog-date-2026-11-14"></a>
 
 ### 2026-11-14

@@ -1366,10 +1366,10 @@ def test_recently_added_reads_as_the_results_pages_days_with_and_without_scripts
         try:
             page.goto(f"{ORIGIN}{render_changelog.CHANGELOG_PAGE}", wait_until="load")
             section = page.locator("#changelog")
-            blocks = page.locator(".site-added details[data-day]")
+            blocks = page.locator('.site-added details[id^="changelog-date-"]')
             assert blocks.count() == len(days)
-            shown = [blocks.nth(index).get_attribute("data-day") for index in range(len(days))]
-            assert shown == days
+            shown = [blocks.nth(index).get_attribute("id") for index in range(len(days))]
+            assert shown == [f"changelog-date-{day}" for day in days]
             first = blocks.first.locator("li").first
             assert first.is_visible()
             assert not blocks.nth(1).locator("li").first.is_visible()

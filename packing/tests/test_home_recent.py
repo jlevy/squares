@@ -57,7 +57,7 @@ from tests import site_renders
 #: The anchor has to agree with the date, since `archived_news_targets` forwards retired
 #: day bookmarks to `changelog-date-<day>` on this page.
 DAY = re.compile(
-    r'<details data-day="(\d{4}-\d{2}-\d{2})" id="changelog-date-\1"( open)?>(.*?)</details>',
+    r'<details id="changelog-date-(\d{4}-\d{2}-\d{2})"( open)?>(.*?)</details>',
     re.DOTALL,
 )
 #: One result in a day (`added_entry`), linked to its row in All Results: its id, its V,
@@ -327,11 +327,15 @@ def test_one_window_bounds_every_kind_and_the_introduction_names_what_is_shown(
     introduction opens on the oldest day shown, so no block sits before it (#736's
     review A, finding A3, under the owner's wording of 26 October 2026)."""
     since, until = _window(overview)
+    document = render_changelog.load()
+    latest_change = max(
+        (date.fromisoformat(entry["date"]) for entry in document["entries"]), default=until
+    )
+    until = max(until, latest_change)
     shown = sorted(date.fromisoformat(day) for day in days)
     assert shown
     assert since <= shown[0]
     assert shown[-1] == until
-    document = render_changelog.load()
     assert overview_sections.changelog_since(overview, document) == overview_sections.day_label(
         shown[0]
     )
