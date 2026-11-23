@@ -1,0 +1,55 @@
+{
+  "format": "one-axis-graph-pilot-portable-retention-v1",
+  "preparation_head": "62c1100f406a2af5cd40f3216eceb0e6d8c4ea7f",
+  "scope": "Only the sixteen predeclared Boolean model sets; all-case enumeration and geometric bank coverage remain open.",
+  "source_input_not_duplicated": true,
+  "frozen_name_resolution": [
+    {
+      "original_local_name": "check_graph_pilot.py",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-graph-pilot/checker.py.txt"
+    },
+    {
+      "original_local_name": "case-clauses.json.gz",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-case-clauses/results/case-clauses.json.gz"
+    },
+    {
+      "original_local_name": "strict-supervisor.py",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-graph-pilot/strict-supervisor.py.txt"
+    }
+  ],
+  "receipt": {
+    "raw_bytes": 22344,
+    "raw_sha256": "d72757517d73ea27d483b5c10efe65de9b5072753a8b2c879f43ec7ecfe08352",
+    "raw_git_blob": "77ef180183fb3c82c1613db7b0197414c284a386",
+    "stored_bytes": 6818,
+    "stored_sha256": "e277730a5ba1db60d486cbc86843b763d1007130a78263994cb8a213c2c0944d",
+    "compression": "unchanged deterministic gzip"
+  },
+  "case_indices": [
+    0,
+    244,
+    489,
+    734,
+    978,
+    1223,
+    1468,
+    1712,
+    1957,
+    2202,
+    2446,
+    2691,
+    2936,
+    3180,
+    3425,
+    3670
+  ],
+  "counts": {
+    "complete_cases": 16,
+    "passed_controls": 17,
+    "retained_models": 1280,
+    "search_nodes": 16,
+    "selected_cases": 16
+  },
+  "original_timestamps_and_source_bytes_preserved": true,
+  "observed_limits": "Pressure1 admission, worker/guard0; single startup guard sample does not capture subsecond worker peak."
+}

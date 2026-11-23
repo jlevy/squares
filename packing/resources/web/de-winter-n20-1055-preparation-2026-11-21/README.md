@@ -93,6 +93,7 @@ modified.
 | `review-one-axis-general-paths/general-path-catalogue.json.gz` | receipt | `ed24a599b04023febdd50708c7b584fb7f326a9c` | `a60f45a70cb57d4e1a1e58bcbe01b1f9cf1c527fc80c0e931d7e856af22b33bb` |
 | `review-one-axis-path-covariance/path-covariance.json.gz` | receipt | `765b49a96829d2f5122a65f1af4475b3634deb21` | `2a9a4d4df1c2e42b345225ebb1dfc5417c3a121e1562056e3a2d30456a533a90` |
 | `review-one-axis-case-clauses/results/case-clauses.json.gz` | receipt | `731a840b602de44262fd81b2537642f6186313ef` | `d7dd3ba492405d5b9a61dbd6a18a21164dc9c18b9b1b64d6d4633de6c9f40237` |
+| `review-one-axis-graph-pilot/results/graph-pilot.json.gz` | receipt | `77ef180183fb3c82c1613db7b0197414c284a386` | `d72757517d73ea27d483b5c10efe65de9b5072753a8b2c879f43ec7ecfe08352` |
 
 ## Original Gzip Files
 
@@ -114,7 +115,10 @@ The [path covariance audit](review-one-axis-path-covariance/README.md) checks al
 occupied paths and their D4 maps.
 The [case-to-clause audit](review-one-axis-case-clauses/README.md) binds all 3,671
 canonical cases to 554,159 path applications: 339,191 are excluded and 214,968 remain
-not certified. Complete separation-graph enumeration, geometric rule extraction and
+not certified. A separate
+[sixteen-case graph pilot](review-one-axis-graph-pilot/README.md) completely enumerates
+1,280 Boolean models for its predeclared selection and passes 17 controls.
+Complete all-case separation-graph enumeration, geometric rule extraction and
 graph-to-certificate coverage remain open.
 
 <!-- This document follows common-doc-guidelines.md.

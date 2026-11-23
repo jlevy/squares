@@ -6,7 +6,9 @@ rational polynomial bounds, with 83 distinct bound polynomials.
 All twelve predeclared controls pass.
 This completes the local bridge obligation.
 The separate [sign and symmetry census](../review-one-axis-sign-census/README.md) now
-completes that finite roster; general-path and graph coverage remain open.
+completes that finite roster. The [case-to-clause audit](../review-one-axis-case-clauses/README.md)
+applies the general-path exclusions to every canonical case. Complete graph enumeration,
+rule extraction and graph-to-bank coverage remain open.
 
 The complete roster consists of 32 rank profiles and 112 sign profiles, or 3,584
 combinations. There are 992 exclusions without an aligned tile on the chain and 2,496

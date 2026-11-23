@@ -7,6 +7,7 @@ outputs:
 - papers/square-packing-methods-survey.md
 reason: >-
   Records the exact occupied-path covariance check and application of the local
-  criterion to all canonical census cases. Two candidate renders and one
+  criterion to all canonical census cases, plus the bounded graph pilot and
+  three corrected contributor receipt fields. Two candidate renders and one
   exact-base render from 3b75cfdb43d4 reproduced all 43 methods-survey output
   files byte for byte.

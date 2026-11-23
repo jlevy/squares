@@ -69,9 +69,12 @@ wall ceiling, 0.35 GiB process-tree ceiling and pressure-level-2 stop.
 The internal limits are 85 seconds and 0.33 GiB worker peak RSS. The raw output is
 capped at 64 MiB and its gzip at 16 MiB.
 
-The retained [supervisor source](strict-supervisor.py.txt) records the actual launcher;
-its memory-guard skill path is a host dependency.
-A replay may use the current coordinator’s supervisor with the same declared bounds.
+The [historical supervisor](strict-supervisor.py.txt) records the original launcher.
+Its retained admission reading and all seven journal samples report complete footprint
+measurements. For new runs, use [the replay supervisor](replay-with-memory-guard.py.txt).
+Pass the installed memory-guard script path, an external log prefix, the wall and GiB
+ceilings, and the checker command. The supervisor refuses incomplete footprint
+telemetry at admission and during execution.
 
 Worker and guard exited zero.
 The run took 7.199 supervised seconds, 6.887 worker seconds and 3.575 CPU seconds.
@@ -92,7 +95,9 @@ streamed decompression roundtrip.
 This receipt establishes the complete application of the accepted local path criterion
 to the canonical census cases, with explicit orbit binding.
 It does not enumerate Boolean models of the clauses.
-Complete separation-graph enumeration and the subsequent geometric-rule and
+A separate [sixteen-case graph pilot](../review-one-axis-graph-pilot/README.md) now
+retains all 1,280 models for its predeclared selection, with 17 passing controls.
+Complete all-case separation-graph enumeration and the subsequent geometric-rule and
 graph-to-bank application remain open.
 The source’s 273,584 graphs and 566 used certificates remain producer reports.
 

@@ -39363,9 +39363,11 @@ issues:
         covariance audit checks 18,128 occupied paths, 960 D4 geometry maps and 58,016 local
         profile comparisons with 13 controls. A complete case-to-clause audit binds all
         3,671 canonical cases to 554,159 path applications: 339,191 are excluded and 214,968
-        remain not certified; its 13 controls pass. Complete separation-graph enumeration,
-        geometric rule extraction and graph-to-certificate coverage remain open; these
-        restricted checks do not accept the full theorem.
+        remain not certified; its 13 controls pass. A separately frozen sixteen-case graph
+        pilot completely enumerates 1,280 Boolean models for that selection and passes
+        17 controls. Complete all-case separation-graph enumeration, geometric rule extraction
+        and graph-to-certificate coverage remain open; these restricted checks do not accept
+        the full theorem.
       queued: true
       bead: think-guls
     beads:
@@ -39399,7 +39401,6 @@ issues:
       kind: follow-up
       reported:
       - result: n20-one-axis-equal-magnitude
-      beads: [think-guls]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Read issuecomment-7058955337 on 21 November 2026. The new n20-proof-499755.zip (file
@@ -39464,7 +39465,6 @@ issues:
       kind: follow-up
       reported:
       - result: n26-n318-final-lower-166
-      beads: [think-uz7g]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
@@ -39597,7 +39597,6 @@ issues:
       - result: n232-rational-follow-up
         id: E-de-winter-1062-review-exact-feasibility
         status: confirmed
-      beads: [think-eumc]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Compare the submitted exact fraction and geometry with both T-307's adopted
