@@ -3,17 +3,21 @@ type: is
 id: is-01m8546rwwmm9pchka07tz22c0
 title: Separate packing and certificate credit at 127 and 305
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: codex-regularization-credit-1123
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-11-23T21:15:18.300Z
-updated_at: 2026-11-23T21:31:10.628Z
+updated_at: 2026-11-23T22:17:48.683Z
 started_at: 2026-11-23T21:15:19.009Z
+closed_at: 2026-11-23T22:17:48.681Z
+close_reason: "PR #1105 merged and production run 45275726364 verified the publication. Both live case credit panels and both selected SVG digests checked. The original #1020 and #1052 acknowledgements now point to the corrected live attribution."
+resolution: null
+duplicate_of: null
 ---
 Address the contributor asks in #1020 and #1052. Preserve the exact Option D houses T-341 and T-342 and their reviewed drawings. Keep the established construction credits from T-330 and T-336 in the case fields, and credit Joshua Levy with the regularized certificates and Evan Daniel with the method in the existing provenance records.
 
