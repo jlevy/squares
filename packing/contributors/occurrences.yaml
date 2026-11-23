@@ -35304,6 +35304,67 @@ occurrences:
   disposition: unresolved
   evidence: []
   note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 1042 public replay 2026-11-20]'
+    field: /authors/0
+  expected_text: de Winter
+  start: 0
+  end: 9
+  label: de Winter
+  role: source-author
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: >-
+    The retained issue comment identifies Joost de Winter as the person directing the work.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 1042 public replay 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Hosono, Levy
+  start: 0
+  end: 9
+  label: de Winter
+  role: credited-contributor
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: >-
+    The retained issue comment identifies Joost de Winter as the person directing the work.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 1042 public replay 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Hosono, Levy
+  start: 16
+  end: 22
+  label: Hosono
+  role: prerequisite
+  disposition: resolved
+  evidence:
+  - github-profile
+  - bibliography
+  contributor_id: hiroaki-hosono
+  note: >-
+    The issue comment credits Hiroaki Hosono for the underlying measures and T-180 coverage.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[de Winter issue 1042 public replay 2026-11-20]'
+    field: /credit
+  expected_text: de Winter after Hosono, Levy
+  start: 24
+  end: 28
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: >-
+    The packet names project measures and coverage receipts; this source does not identify a person for that dependency.
 inspections:
 - path: packing/resources/papers/addis-locatelli-schoen-2008-disk-packing-square.pdf
   status: pending
