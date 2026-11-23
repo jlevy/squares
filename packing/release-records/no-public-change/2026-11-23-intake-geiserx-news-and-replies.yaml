@@ -1,0 +1,12 @@
+components:
+- paper:square-packing-methods-survey
+paths:
+- packing/campaign/result-requests.yaml
+outputs:
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: >-
+  Reviewed the issue cross-references consumed by the Methods Survey. The maintained
+  reporting_issues projection and opening dates match main. The four ledger edits
+  record published replies, and the survey's cross-references depend on the
+  unchanged result-to-issue mapping and dates. The survey keeps its current edition.
