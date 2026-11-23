@@ -1731,22 +1731,16 @@ def changelog_since(overview: Overview, document: ChangelogDocument) -> str:
 # so that it "consistently shows both and shows last few days of changelog below the last
 # few news items, each with its own section and button to go to the dedicated page".
 # The section is the head of the Changelog page's own log (`changelog_rollup`), drawn by
-# the same code: the same day blocks, the same lines, the newest day open.
+# the same code: the same day blocks and lines, with more recent days open at home.
 
-#: How many days the home page's Changelog shows: the newest three on which the record
-#: holds anything, however long ago they were. Days that hold entries, not a span of the
-#: calendar, so the section is never empty after a quiet week: on 3 November 2026 the
-#: newest three were 31, 26 and 25 October, and the last three days of the calendar held
-#: none of them. Three shows the newest day open with two more closed under it, enough to
-#: read the log's pace without the section becoming the log.
-HOME_CHANGELOG_DAYS = 3
-#: The most lines the home page's Changelog holds before it stops adding older days.
-#: The newest day is always shown whole, so the section is never empty and never cuts a
-#: day short; an older day joins only while the total stays within this. Measured on
-#: 3 November 2026 over the 34 three-day stretches of the record's 36 days: the newest
-#: three held 37 lines, a stretch held 6 to 68, and 60 trims only the three stretches
-#: that hold the 46-line 14 October, to two days each.
-HOME_CHANGELOG_LINES = 60
+#: The newest seven days with entries. A quiet stretch leaves the latest activity visible.
+HOME_CHANGELOG_DAYS = 7
+#: Expand the two newest days in the preview so their entries are immediately readable.
+HOME_CHANGELOG_OPEN = 2
+#: The line cap keeps the longer preview compact. The newest day appears whole, and
+#: older days are included whole while they fit. The seven most recent days held
+#: 71 lines on November 22, 2026, when the homepage preview was expanded.
+HOME_CHANGELOG_LINES = 74
 #: A day block's address in the home page's Changelog. It is not the Changelog page's
 #: `changelog-date-<day>`, which the home page's News box already gives the first card
 #: of each of its days (`render_changelog.render_news`).
@@ -1773,7 +1767,7 @@ def changelog_window(days: Sequence[tuple[date, int]]) -> list[date]:
 
 def changelog_preview(overview: Overview, document: ChangelogDocument) -> str:
     """The home page's Changelog: the log's newest days (`changelog_window`), drawn as
-    the Changelog page draws them, the newest open. A day block is addressed
+    the Changelog page draws them, with the two newest open. A day block is addressed
     `home-changelog-<day>` and a change's line carries no anchor, since the News box
     above it holds the Changelog's day and story anchors on the same page."""
     return _changelog_log(overview, document, preview=True)
@@ -1799,6 +1793,7 @@ def _changelog_log(overview: Overview, document: ChangelogDocument, *, preview: 
         if not ordered:
             return CHANGELOG_NONE
     prefix = HOME_CHANGELOG_DAY if preview else render_changelog.DAY_ANCHOR
+    open_days = HOME_CHANGELOG_OPEN if preview else RECENT_OPEN
     blocks = []
     for index, day in enumerate(ordered):
         recent = recents.get(day)
@@ -1818,7 +1813,7 @@ def _changelog_log(overview: Overview, document: ChangelogDocument, *, preview: 
         if today:
             tally.append(tally_count(len(today), f"change{'' if len(today) == 1 else 's'}"))
         shown = added_day_link(day, len(recent.results)) if recent and recent.results else ""
-        state = " open" if index < RECENT_OPEN else ""
+        state = " open" if index < open_days else ""
         blocks.append(
             f'<details data-day="{day.isoformat()}" '
             f'id="{prefix}{day.isoformat()}"{state}>'
