@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: exact certificates of GeiserX's published packings
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -14,10 +14,11 @@ parent_id: is-01m7khxdfnc5tynb8cjr4z7862
 child_order_hints:
   - is-01m82ys3xpeksx83seqqc8ng68
   - is-01m82zjbdqksab55ygqn2eycmh
+  - is-01m83196x0q696bked7h2zdepa
 hold: null
 hold_until: null
 created_at: 2026-11-20T21:09:48.349Z
-updated_at: 2026-11-23T01:15:45.970Z
+updated_at: 2026-11-23T01:45:43.516Z
 started_at: 2026-11-20T22:45:07.840Z
 ---
 Issue jlevy/squares#1037 (Joost de Winter, 2026-11-18T20:06:25Z), a pointer: Sergio Fernández Rubio (GeiserX) published packings below the register at seven counts, in GeiserX/squares-in-squares (data/submission-best.csv.gz at c00281c2fb4b42a1c7071dc4fd493347cfd5a87b, CC BY 4.0 by the issue). De Winter says he is not the finder and asks that the packings be credited to Fernández Rubio.
