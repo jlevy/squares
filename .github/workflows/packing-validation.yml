@@ -1608,6 +1608,7 @@ jobs:
             /packing/resources/web/geiserx-n259-1040-2026-11-19/
             /packing/resources/web/de-winter-997-followup-2026-11-21/
             /packing/resources/web/de-winter-959-followup-2026-11-20/
+            /packing/resources/web/geiserx-exact-1037-2026-11-22/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg

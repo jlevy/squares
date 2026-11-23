@@ -27,7 +27,7 @@ The selected drawings keep those credits and the upper bounds.
 The original run names identify the three grid thresholds and the Evan Daniel driver.
 Gzip reports decode to the original report bytes.
 The Evan Daniel receipt retains the per-count parameters and original timings.
-The [selection](adopt-2026-11-22-n202-263-selection.md) shows the chosen views.
+The [selection](selection-2026-11-22-n202-263.md) shows the chosen views.
 Its complete structured receipt also gives the decisions for each other candidate.
 
 Historical absolute paths in the run records describe the execution environment.

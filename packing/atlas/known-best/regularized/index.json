@@ -68,7 +68,7 @@
     {"id":"grid-slack-adopt-2026-11-20-n228-grid-deg05","generator":"regularize_grid_slack/2","finished":"2026-11-20","parameters":{"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":1,"decisions":{"admit":1},"cost":{"cpu_seconds":11.25,"wall_seconds":11.25,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}},
     {"id":"grid-slack-n90-n179-write-and-strong-drawings-grid-deg05","generator":"regularize_grid_slack/2","finished":"2026-11-21","parameters":{"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":2,"decisions":{"admit":2},"cost":{"cpu_seconds":69.34,"wall_seconds":69.34,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}},
     {"id":"grid-slack-n90-n179-write-and-strong-drawings-grid-1","generator":"regularize_grid_slack/2","finished":"2026-11-21","parameters":{"near_axis_degrees":1.0,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":2,"decisions":{"admit":2},"cost":{"cpu_seconds":73.81,"wall_seconds":73.81,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}},
-    {"id":"grid-slack-adopt-2026-11-22-n202-263-grid-0.5","generator":"regularize_grid_slack/2","finished":"2026-11-22","parameters":{"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":2,"decisions":{"admit":2},"cost":{"cpu_seconds":38.77,"wall_seconds":38.77,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}}
+    {"id":"grid-slack-adopt-2026-11-22-n202-263-grid-half-degree","generator":"regularize_grid_slack/2","finished":"2026-11-22","parameters":{"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},"counts":2,"decisions":{"admit":2},"cost":{"cpu_seconds":38.77,"wall_seconds":38.77,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}}
   ],
   "totals": {"records":324,"statuses":{"refused":44,"regularized":102,"unchanged":178},"refusals":{"promotion-overlap":42,"unsupported-scalar-kind":2},"shades":{"house":{"green_before":44389,"light_before":8798,"green_after":45390,"light_after":5664},"stage":{"green_before":45430,"light_before":6730,"green_after":45454,"light_after":5534}},"shades_of_regularized_records":{"house":{"green_before":12352,"light_before":6553,"green_after":13353,"light_after":3419},"stage":{"green_before":13393,"light_before":4485,"green_after":13417,"light_after":3289}},"residual_regressions":{"house":0,"stage":0},"held_squares":86,"views_by_generator":{"regularize_axis_components/2":22,"evand-regularize":41,"regularize_grid_slack/1":11,"regularize_grid_slack/2":28}},
   "entries": [
@@ -1555,7 +1555,7 @@
       "n": 202,
       "status": "regularized",
       "generator": "regularize_grid_slack/2",
-      "run": {"id":"grid-slack-adopt-2026-11-22-n202-263-grid-0.5","output":"grid"},
+      "run": {"id":"grid-slack-adopt-2026-11-22-n202-263-grid-half-degree","output":"grid"},
       "source": {"witness":"packing/witnesses/known-best/n-202.yaml","id":"W-known-best-n202","scalar_kind":"algebraic-number-field","sha256":"68ecb46b5bbd77df8db16d15d00094ce94b5fb0a7d09d41446b74b2373fcb1f1"},
       "side": {"reported":"['1303/94', '-209/94']","view":"['1303/94', '-209/94']","relation":"same","view_minus_reported":"0.000e+00","view_minus_verified_upper_bound":"0.000e+00"},
       "view": {"path":"packing/atlas/known-best/regularized/n-202-regularized.yaml.gz","sha256":"f62d101eb9c306557f614c5fd9a1be1abd5f5b60617526437c46f74973e249e5"},
@@ -2234,7 +2234,7 @@
       "n": 263,
       "status": "regularized",
       "generator": "regularize_grid_slack/2",
-      "run": {"id":"grid-slack-adopt-2026-11-22-n202-263-grid-0.5","output":"grid"},
+      "run": {"id":"grid-slack-adopt-2026-11-22-n202-263-grid-half-degree","output":"grid"},
       "source": {"witness":"packing/witnesses/known-best/n-263.yaml","id":"W-known-best-n263","scalar_kind":"algebraic-number-field","sha256":"3949c70d7d2fdf6a722ec7a29b2b1adaeae55468e20add14d8cfdc69acef2330"},
       "side": {"reported":"['1491/94', '-209/94']","view":"['1491/94', '-209/94']","relation":"same","view_minus_reported":"0.000e+00","view_minus_verified_upper_bound":"0.000e+00"},
       "view": {"path":"packing/atlas/known-best/regularized/n-263-regularized.yaml.gz","sha256":"f57bf78c1ca778e1d294ac17db282b49c373ab8beb159e917ca1b9fd362f9159"},

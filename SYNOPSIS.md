@@ -1083,6 +1083,7 @@ case or experiment separately.
 | [Regularization Runs After the Adoption of Issue 1009 (think-i38n)](packing/cases/regularized_drawings/think-i38n-2026-11-18/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption at 127 of Issue 1020 (think-zqot)](packing/cases/regularized_drawings/think-zqot-2026-11-18/README.md) | source retention and archive policy | record | retained | — |
 | [Strong Drawing Runs for the Issue-1062 Adoption at 232](packing/cases/regularized_drawings/think-eumc-2026-11-21/README.md) | source retention and archive policy | record | retained | — |
+| [Strong Drawing Runs for T-341 at 202 and 263](packing/cases/regularized_drawings/think-36ui-2026-11-22/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs After the Adoption of Issues 1021, 1022 and 1031 (think-78aj)](packing/cases/regularized_drawings/think-78aj-2026-11-20/README.md) | source retention and archive policy | record | retained | — |
 | [Regularization Runs for the Adoption of Issue 1038 (think-91fu)](packing/cases/regularized_drawings/think-91fu-2026-11-20/README.md) | source retention and archive policy | record | retained | — |
 | [Drawing runs for the T-335 adoption at 109](packing/cases/regularized_drawings/think-wvr8-2026-11-21/README.md) | source retention and archive policy | record | retained | — |

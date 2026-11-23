@@ -116,6 +116,22 @@ def test_changed_receipt_copy_is_refused(packet: Path) -> None:
         fields.read_facts(packet, {263})
 
 
+def test_fact_schema_change_is_refused_before_schema_validation(
+    packet: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    witness = source.build_witness(packet, 202)
+    path = retained_data.compressed_path(packet / source.fact_path(202))
+    changed = witness_document(witness, schema="other.schema.yaml").encode()
+    path.write_bytes(gzip.compress(changed))
+
+    def unexpected_validation(*_args: object, **_kwargs: object) -> None:
+        pytest.fail("the fact's changed schema must be rejected before validation")
+
+    monkeypatch.setattr(source, "validate_witness_document", unexpected_validation)
+    with pytest.raises(fields.ReportError, match="does not rebuild"):
+        source.read_witness(packet, 202)
+
+
 def test_changed_scope_is_refused(packet: Path) -> None:
     with pytest.raises(fields.ReportError, match="only 202 and 263"):
         fields.read_facts(packet, {204})

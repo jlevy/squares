@@ -71,8 +71,8 @@ The 297-square algebraic witness, whose side is reported as a root of a degree-7
 polynomial, still awaits replay.
 At 297, the issue attributes a 66-square bottom portion to Asterios Panoras’s version 17
 compilation.
-Pose identity with the pinned upstream input, prior registered packings, and
-adoption are separate decisions.
+Pose identity with the pinned upstream input and earlier registered packings
+remains open.
 [Issue #1037](https://github.com/jlevy/squares/issues/1037)
 
 ## Comparison with the Current Retained Certificates
@@ -81,7 +81,11 @@ For 202 and 263, the submitted rational sides are strictly below the prior retai
 exact configurations at first contact. The gains are about 0.003549352 and
 0.008793299 respectively. The quadratic sides are smaller again.
 These comparisons check the predecessor's exact wall and pair inequalities.
-Report order against other submissions and the drawing decisions remain open.
+T-341 adopts both quadratic certificates. The two default drawings use the
+selected half-degree grid-slack views at their exact certificate sides.
+The [drawing record](../../../cases/regularized_drawings/think-36ui-2026-11-22/README.md)
+retains the candidate runs and the selection. Report order for the remaining
+counts and the degree-70 verification at 297 remain open.
 [202 comparison](receipts/n202-first-contact.json.xz),
 [263 comparison](receipts/n263-first-contact.json.xz)
 

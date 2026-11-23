@@ -238,11 +238,14 @@ def read_witness(packet: Path, n: int) -> dict[str, Any]:
     reports.ensure_private(plain)
     reports.ensure_private(stored)
     document = load_yaml(retained_data.read_retained_bytes(plain).decode("utf-8"))
-    actual = validate_witness_document(
-        document, path=stored, fallback_schema=fields.WITNESS_SCHEMA
-    )
-    if actual != expected or document != witness_envelope(expected, schema=fields.FACT_SCHEMA):
+    if not isinstance(document, dict) or document != witness_envelope(
+        expected, schema=fields.FACT_SCHEMA
+    ):
         raise fields.ReportError(f"n={n}: issue 1037 fact does not rebuild from its source")
+    actual = validate_witness_document(
+        witness_envelope(document["witness"], schema=fields.WITNESS_SCHEMA.name),
+        path=fields.WITNESS_SCHEMA,
+    )
     check_receipt_copy(packet, n)
     return copy.deepcopy(actual)
 
