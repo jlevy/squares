@@ -5,7 +5,7 @@ title: "Review #1055 extension: s(20) > 4.99755 and restricted angle theorems"
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: codex-intake-1119-01a1fb
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-21T13:44:38.577Z
-updated_at: 2026-11-23T01:32:48.585Z
+updated_at: 2026-11-23T02:23:45.779Z
 started_at: 2026-11-21T13:44:39.222Z
 ---
 Comment 7058955337 and dad9c3fd mirror report a stronger unrestricted lower bound 99951/20000 and restricted claims on equal absolute tilts, angle diversity and one axis-aligned square. Pin and map reused and new terminal premises and prepare independent review. Preserve the original 99/20 result and its proof/custody separately.
@@ -35,3 +35,5 @@ Comment 7058955337 and dad9c3fd mirror report a stronger unrestricted lower boun
 23:34 UTC. Independent sign/vacancy check verified 2,400 cases, 29,368 assignments, 234,944 D4 images and 3,671 orbits. Twelve controls passed. Both complete receipts agree except measurements; local bridge and census evidence are staged together. General-path proofs and graph-to-bank coverage remain.
 
 23 November UTC. #1087 exact head df252b6f5a holds the completed bridge and sign/D4 checks and three reply/closure dispositions; hosted gates and deployment remain pending. Separate frozen general-path replay completed all29,008 profiles and20 controls: 23,286 excluded, 5,722 not certified, 67,626 normal choices, 417 bound records. 3.594s supervised, 69,795,840-byte peak worker RSS. Preserve this local scope and await global graph/application checks.
+
+November 22 local evening. PR #1091 merged as bc2fb3c262 and production verification passed in run 45098131916 / job 137445381709. Posted progress reply https://github.com/jlevy/squares/issues/1055#issuecomment-7089871432 after verification. It names think-guls and think-6ul3 and covers the 3,671 case-to-clause audit and 16-case Boolean pilot. Record the reply on the next intake records change. Separately, the frozen full graph enumeration completed all 3,671 cases, directly checked 273,584 Boolean models in 29 chunks and passed 19 controls. Durable evidence: /Volumes/spud-ext2/agent-evidence/squares-intake-20261121-01a1fb/n20-graphs-full-independent-20261122/results/global/summary.json. The full run awaits review and import. Geometric graph-to-bank applicability remains open, and no theorem or verified new bound was registered.
