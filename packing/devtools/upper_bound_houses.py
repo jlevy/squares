@@ -1093,7 +1093,7 @@ def _sources() -> dict[str, Source]:
         # T-305 is no source here now.
         packet_source("T-306", "joegun-upper-bounds-2026-11-16"),
         # T-340 replaced T-307 at its only house.
-        # T-343 is Özden's refinement of the Kodaj–JoeGun arrangement at 264.
+        # T-343 is Özden's refinement of the packing by Kodaj and JoeGun at 264.
         replace(
             packet_source("T-343", "ozden-s264-upper-bound-2026-11-23"),
             rational_backend="gmp",
@@ -1943,9 +1943,19 @@ def _mutants(n: int) -> list[tuple[str, Path, Callable[[bytes], bytes]]]:
         kernel.save_xz(path, record)
         return path.read_bytes()
 
+    def certificate_bytes(raw: bytes) -> bytes:
+        if source.key not in reports.PROJECT_CANDIDATE_BATCHES:
+            return raw + b"\n"
+        # Project receipts bind exact inputs. Change a centre rather than whitespace
+        # the reader is expected to accept as another encoding of the same pose.
+        certificate = reports.evand_cert(raw, n, {})
+        first, *rest = certificate.poses
+        changed = replace(certificate, poses=(replace(first, x=first.x + 1), *rest))
+        return legacy.serialize(changed).encode("utf-8")
+
     return [
         ("outside-control verdict", receipt_of(n), verdict),
-        ("certificate bytes", source.stored(n), lambda raw: raw + b"\n"),
+        ("certificate bytes", source.stored(n), certificate_bytes),
     ]
 
 

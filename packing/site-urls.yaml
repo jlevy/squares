@@ -6763,7 +6763,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-11-16'
+  lastmod: '2026-11-23'
   status: live
 - path: cases/265.html
   canonical: cases/265.html
@@ -26704,6 +26704,37 @@ urls:
     - packing/cases/regularized_drawings/think-huum-2026-11-23/n305-nonlinear-restart/n-305/refined-decided.json.gz
     - packing/resources/web/de-winter-n305-1052-review-2026-11-20/out/contraction-1052.json
     - docs/project/reviews/review-2026-11-23-squares-project-regularized-n305.md
+- path: result/t-343.html
+  canonical: result/t-343.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-23'
+  lastmod: '2026-11-23'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 264
+    established: null
+    attribution:
+      source_keys:
+      - '[Özden s264 upper bound 2026-11-23]'
+      published: '2026-11-23'
+    builds_on: null
+    evidence:
+    - E-ozden-1099-certificate-report
+    - E-ozden-1099-exact-feasibility
+    - E-ozden-1099-review-exact-feasibility
+    artifacts:
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/README.md
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/acquisition/claims.json
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/acquisition/exact-comparison.json
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/source/n-264-candidate.yaml.gz
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/receipts/exact-certification.json.xz
+    - packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check-result.json.gz
+    - docs/project/reviews/review-2026-11-23-ozden-1099.md
 - path: results.html
   canonical: results.html
   kind: page
