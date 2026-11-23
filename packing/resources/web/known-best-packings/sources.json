@@ -1307,18 +1307,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-201.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Sergio Fernández Rubio (GeiserX); quadratic certificates by Joost de Winter, https://github.com/user-attachments/files/35051652/GeiserX_exact.zip#GeiserX_exact/algebraic/n202.minpoly.json at attachment-sha256:19c069b42d6a6fbe87dd419d358e7b046eadbba20dbaadd7f519faab1152c5e9",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         202
       ],
       "n": 202,
-      "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "path": "resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n202.minpoly.json.gz",
+      "raw_asset_retained": true,
+      "retention_policy": "The original mathematical attachment member is retained losslessly beside the derived field fact and checked against its pinned digest.",
+      "retrieved": "2026-11-22",
       "source_n": 202,
-      "url": "https://kingbird.myphotos.cc/packing/square-202.svg"
+      "url": "https://github.com/user-attachments/files/35051652/GeiserX_exact.zip#GeiserX_exact/algebraic/n202.minpoly.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1778,19 +1779,19 @@
       "url": "https://github.com/Mishapolk/square-packing-records/blob/b637e6cf59c23781c813e8442bfdccb5aa5f3954/certificates/0000-0999/n262.cert"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n263.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Sergio Fernández Rubio (GeiserX); quadratic certificates by Joost de Winter, https://github.com/user-attachments/files/35051652/GeiserX_exact.zip#GeiserX_exact/algebraic/n263.minpoly.json at attachment-sha256:19c069b42d6a6fbe87dd419d358e7b046eadbba20dbaadd7f519faab1152c5e9",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         263
       ],
       "n": 263,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-263.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n263.minpoly.json.gz",
+      "raw_asset_retained": true,
+      "retention_policy": "The original mathematical attachment member is retained losslessly beside the derived field fact and checked against its pinned digest.",
+      "retrieved": "2026-11-22",
       "source_n": 263,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n263.cert.json"
+      "url": "https://github.com/user-attachments/files/35051652/GeiserX_exact.zip#GeiserX_exact/algebraic/n263.minpoly.json"
     },
     {
       "attribution": "Doğa Özden, https://github.com/kenaznia-doga/s264-upper-bound-1677216830/blob/72c4d195c85b6099002ad6c675b27df40fdaceac/n-264-candidate.yaml at 72c4d195c85b6099002ad6c675b27df40fdaceac",

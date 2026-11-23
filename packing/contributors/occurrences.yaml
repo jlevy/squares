@@ -21608,6 +21608,34 @@ occurrences:
     span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
     metadata and owner confirmation bind wand125 to Hiroaki Hosono.
 - origin:
+    path: packing/frontier/n-202.md
+    record_key: '202'
+    field: /reported_upper_bound/found_by/0
+  expected_text: Sergio Fernández Rubio
+  start: 0
+  end: 22
+  label: Sergio Fernández Rubio
+  role: construction-finder
+  disposition: unresolved
+  evidence: []
+  note: Construction credit follows the retained issue 1037 source attribution.
+- origin:
+    path: packing/frontier/n-202.md
+    record_key: '202'
+    field: /reported_upper_bound/improved_by/0
+  expected_text: Joost de Winter
+  start: 0
+  end: 15
+  label: Joost de Winter
+  role: construction-improver
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: joost-de-winter
+  note: The retained exact attachment for issue 1037 credits Joost de Winter with
+    the refinement and certificate.
+- origin:
     path: packing/frontier/n-203.md
     record_key: '203'
     field: /reported_upper_bound/found_by/0
@@ -23364,19 +23392,14 @@ occurrences:
     path: packing/frontier/n-263.md
     record_key: '263'
     field: /reported_upper_bound/found_by/0
-  expected_text: Nate Chaoweeraprasit (itsnaka)
+  expected_text: Sergio Fernández Rubio
   start: 0
-  end: 30
-  label: Nate Chaoweeraprasit (itsnaka)
+  end: 22
+  label: Sergio Fernández Rubio
   role: construction-finder
-  disposition: resolved
-  evidence:
-  - source-intake
-  - bibliography
-  contributor_id: nate-chaoweeraprasit
-  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
-    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label
-    retained.
+  disposition: unresolved
+  evidence: []
+  note: Construction credit follows the retained issue 1037 source attribution.
 - origin:
     path: packing/frontier/n-263.md
     record_key: '263'
@@ -23398,34 +23421,18 @@ occurrences:
     path: packing/frontier/n-263.md
     record_key: '263'
     field: /reported_upper_bound/improved_by/0
-  expected_text: Evan Daniel
+  expected_text: Joost de Winter
   start: 0
-  end: 11
-  label: Evan Daniel
+  end: 15
+  label: Joost de Winter
   role: construction-improver
   disposition: resolved
   evidence:
-  - repository-license
+  - source-intake
   - bibliography
-  contributor_id: evan-daniel
-  note: Reviewed packing/frontier/n-263.md [263] /reported_upper_bound/improved_by/0
-    span 0:11. The specific evand/square-packing certificate, fq solver or regularizer
-    matches the repository whose retained licence names Evan Daniel. Keep finder,
-    improver and solver roles distinct.
-- origin:
-    path: packing/frontier/n-263.md
-    record_key: '263'
-    field: /reported_upper_bound/improved_by/1
-  expected_text: PingYou Ltd
-  start: 0
-  end: 11
-  label: PingYou Ltd
-  role: construction-improver
-  disposition: non-person
-  evidence: []
-  note: 'Corporate credit: the retained packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md
-    Credit section records the request to credit PingYou Ltd and identifies its unreleased
-    agentic AI offering. No individual identity is inferred from the company label.'
+  contributor_id: joost-de-winter
+  note: The retained exact attachment for issue 1037 credits Joost de Winter with
+    the refinement and certificate.
 - origin:
     path: packing/frontier/n-264.md
     record_key: '264'

@@ -1,0 +1,21 @@
+{
+  "id": "grid-slack-adopt-2026-11-22-n202-263-grid-half-degree",
+  "generator": "regularize_grid_slack/2",
+  "finished": "2026-11-22",
+  "parameters": {
+    "near_axis_degrees": 0.5,
+    "trust": 0.45,
+    "time_limit": 120.0,
+    "stage_margin": 0.0099
+  },
+  "counts": 2,
+  "decisions": {
+    "admit": 2
+  },
+  "cost": {
+    "cpu_seconds": 38.77,
+    "wall_seconds": 38.77,
+    "workers": 1,
+    "note": "per-count seconds the reports record, summed; no receipt of the run's own"
+  }
+}

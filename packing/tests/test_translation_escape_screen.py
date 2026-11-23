@@ -244,6 +244,8 @@ GOLDEN_UNSTABLE = {
         261,
         # 262 joined on 18 November 2026 with Polkovskyi's certificate there (T-319).
         262,
+        # T-344 at 263 changes the screen's outcome across tolerances.
+        263,
         264,
         266,
         267,

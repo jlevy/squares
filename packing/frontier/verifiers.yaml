@@ -10370,3 +10370,61 @@ verifiers:
       The retained reading copy matches the reviewed checker, with import ordering adjusted
       after the successful numerical run. The review describes the initial quoted-zero
       parser refusal and the completed execution.
+
+  - id: V-geiserx-1037-algebraic-reader
+    program: devtools.geiserx_1037_algebraic_report
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    source:
+    - packing/devtools/geiserx_1037_algebraic_report.py
+    - packing/tests/test_geiserx_1037_algebraic_report.py
+    summary: >-
+      Admits only issue 1037's original quadratic members at 202 and 263. Checks
+      attachment/member custody, rebuilds exact geometry through the maintained
+      minpoly reader, requires the entire fact to match, and binds the per-count
+      native job wrappers to their original six rows. It preserves the original
+      field, frame and witness identifiers and decides no geometric inequality.
+
+  - id: V-geiserx-1037-independent-review
+    program: verify_202_263.py.txt
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    source:
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/verify_202_263.py.txt
+    summary: >-
+      Independently checks the original rational and quadratic configurations at
+      202 and 263: unit squares, all contained vertices and every unordered pair
+      using exact projection separation, with a separate Fraction implementation
+      of Q(sqrt(3)). Checks exact side formulas, polynomial roots, isolating
+      intervals, rational-to-quadratic inequalities, lower-left restrictions and
+      predeclared equality and inward controls.
+    independence_record: docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format]
+      clean_room: true
+      shares: []
+      written_by:
+      - kind: ai
+        system: Codex (OpenAI)
+        setting: High reasoning, isolated Stage 4 mathematical review session.
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's production tooling and reviewer both use OpenAI systems.
+          The reviewer froze a separate plan and checker after the official issue,
+          process, inventory and raw mathematical data, before consulting any
+          producer code, producer validation output, project verifier or earlier
+          review. Python standard-library arithmetic and a safe duplicate-key
+          rejecting PyYAML parser are the only runtime dependencies.
+    note: >-
+      The reading copy preserves the frozen checker's bytes. Git holds this
+      first-party source; the retained frozen digests document the original review
+      boundary. The review excludes contact-system tightness and global optimality.

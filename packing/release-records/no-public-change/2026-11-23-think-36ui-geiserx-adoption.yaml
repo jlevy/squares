@@ -1,0 +1,42 @@
+components:
+- paper:n11-lower-bounds-explainer
+- paper:n11-optimality-review
+- paper:n11-threshold-bound-review
+- paper:square-packing-methods-survey
+paths:
+- packing/atlas/known-best/bound-citations.json
+- packing/atlas/known-best/composite-figure.json
+- packing/campaign/result-requests.yaml
+- packing/devtools/adopt_houses.py
+- packing/devtools/algebraic_witness_reports.py
+- packing/devtools/build_known_best_atlas.py
+- packing/devtools/default_drawings.py
+- packing/devtools/geiserx_1037_algebraic_report.py
+- packing/devtools/register_regularized_bounds.py
+- packing/devtools/select_houses.py
+- packing/devtools/upper_bound_houses.py
+- packing/devtools/upper_bound_reports.py
+- packing/frontier/results.yaml
+- packing/frontier/source-coverage.yaml
+- packing/src/sqpack/cli/validate.py
+outputs:
+- papers/n11-lower-bounds-explainer.html
+- papers/n11-lower-bounds-explainer.md
+- papers/n11-optimality-review.html
+- papers/n11-optimality-review.md
+- papers/n11-threshold-bound-review.html
+- papers/n11-threshold-bound-review.md
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: >-
+  Adopts the 202- and 263-square quadratic certificates as T-344. Two
+  candidate renders and one render from the exact final T-343 checkout
+  9bb725c47b1a used the maintained renderers, matching publication pins and
+  fixed link revisions. All eight HTML and Markdown outputs were deterministic.
+  The optimality review, threshold review and methods survey matched byte
+  for byte. The lower-bounds explainer differed only in its live register
+  count, from 343 to 344; replacing that one sentence fragment restored byte
+  equality in both outputs. The 34 apparently new results stayed unchanged.
+  This comparison covers maintained render output before math preparation,
+  asset linking and PDF printing. Both checkouts stayed unchanged, and the
+  printed editions keep their versions.

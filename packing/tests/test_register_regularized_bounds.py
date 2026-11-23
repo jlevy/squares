@@ -140,11 +140,13 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     catalogue's 45-degree packing on 15 November 2026, the first adoption there. At n = 262
     Mykhailo Polkovskyi's certificate of issue 1009 (T-319) replaced the catalogue's
     16 + sqrt(2)/2 packing on 18 November 2026, the first adoption there. Samanyu-dev's
-    T-335 replaced the prior n = 109 house on 21 November 2026."""
+    T-335 replaced the prior n = 109 house on 21 November 2026. At n = 202, Joost de
+    Winter's quadratic certificate (T-344) replaced T-155 on 22 November 2026."""
     assert [n for n in registered.committed() if registered.readopted(n)] == [
         29,
         109,
         147,
+        202,
         204,
         227,
         229,
@@ -154,11 +156,14 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
         293,
         299,
     ]
-    for n in (109, 293, 299):
+    for n in (109, 202, 293, 299):
         text = (registered.FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
         assert registered.apply_case(n, text) == text
     assert registered.readopted_by(109, "T-155")
     assert "the verified upper bound until 21 November 2026" in _flat(109)
+    assert registered.readopted_by(202, "T-155")
+    assert "the verified upper bound until 22 November 2026" in _flat(202)
+    assert "which the record still prints" not in _flat(202)
     assert registered.readopted_by(147, "T-155")
     assert not registered.readopted_by(147, "T-156")
     text = (registered.FRONTIER / "n-147.md").read_text(encoding="utf-8")

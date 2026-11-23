@@ -75,6 +75,7 @@ from devtools import algebraic_witness_reports as fields
 from devtools import couzo_678_replay as couzo_678
 from devtools import evand_arrangement_reports as kernel
 from devtools import exact_sides, n179_algebraic_report, retained_data
+from devtools import geiserx_1037_algebraic_report as geiserx_1037
 from devtools import squish_second_update_house_links as house
 from devtools import upper_bound_reports as reports
 from devtools.git_storage import stored_size
@@ -449,6 +450,23 @@ def _field_jobs(packet: Path, n: int, witness: Mapping[str, Any]) -> dict[str, A
 
 
 def _field_origin(packet: Path, n: int) -> Origin:
+    if geiserx_1037.accepts(packet):
+        witness = geiserx_1037.read_witness(packet, n)
+        metadata = witness["source"]
+        return Origin(
+            key=geiserx_1037.SOURCE_KEY,
+            path=packet / geiserx_1037.source_path(n),
+            url=metadata["url"],
+            revision=metadata["revision"],
+            retrieved=metadata["retrieved"],
+            author=_fields(packet)["author"],
+            licence_status=NO_LICENCE,
+            raw_asset_retained=True,
+            retention_policy=(
+                "The original mathematical attachment member is retained losslessly "
+                "beside the derived field fact and checked against its pinned digest."
+            ),
+        )
     if n179_algebraic_report.accepts(packet):
         witness = n179_algebraic_report.read_witness(packet, n)
         metadata = witness["source"]
@@ -486,6 +504,8 @@ def _field_inputs(packet: Path, numbers: Sequence[int]) -> tuple[Path, ...]:
     and each receipt."""
     if not numbers:
         return ()
+    if geiserx_1037.accepts(packet):
+        return geiserx_1037.inputs(packet, tuple(numbers))
     if n179_algebraic_report.accepts(packet):
         for n in numbers:
             n179_algebraic_report.require_count(n)
@@ -1127,6 +1147,8 @@ def _sources() -> dict[str, Source]:
     ]
     if result := n179_algebraic_report.registered_result():
         sources.append(field_source(result, n179_algebraic_report.PACKET_NAME, (179,)))
+    if result := geiserx_1037.registered_result():
+        sources.append(field_source(result, geiserx_1037.PACKET_NAME, geiserx_1037.COUNTS))
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
     # sources are keyed by result, not by source key.
@@ -1299,6 +1321,7 @@ ADOPTED: dict[int, str] = {
     182: "T-243",
     183: "T-220",
     199: "T-285",
+    202: "T-344",
     204: "T-306",
     206: "T-174",
     207: "T-174",
@@ -1321,7 +1344,7 @@ ADOPTED: dict[int, str] = {
     260: "T-318",
     261: "T-174",
     262: "T-319",
-    263: "T-174",
+    263: "T-344",
     264: "T-343",
     267: "T-134",
     268: "T-331",
@@ -1591,7 +1614,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-11-18": frozenset({147, 156, 180, 210, 260, 262, 268, 270, 272, 292, 295, 299, 307}),
     "2026-11-20": frozenset({127, 268, 270, 299}),
     "2026-11-21": frozenset({90, 109, 172, 179, 199, 228, 259, 305}),
-    "2026-11-22": frozenset({232}),
+    "2026-11-22": frozenset({202, 232, 263}),
     "2026-11-23": frozenset({127, 264, 305}),
 }
 

@@ -14124,17 +14124,24 @@ sources:
   disposition: current-report
   replay_disposition: case-specific
   represented_by:
+  - frontier/results.yaml
   - resources/web/geiserx-exact-1037-2026-11-22/acquisition/sources.json
   - resources/web/geiserx-exact-1037-2026-11-22/receipts/native-rational.json.xz
   - resources/web/geiserx-exact-1037-2026-11-22/receipts/native-quadratic-202-263.json.xz
   - docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
   evidence:
   - E-geiserx-1037-original-report
+  - E-geiserx-1037-quadratic-report
+  - E-geiserx-1037-quadratic-feasibility
+  - E-geiserx-1037-quadratic-independent-feasibility
   notes: >-
     The source identifies Sergio Fernández Rubio as the finder and Joost de Winter as the
-    certificate author. The independent review establishes finite rational and quadratic
-    feasibility at 202 and 263. Direct-source and earlier case identity, exact report order,
-    public registration and the drawing decisions remain on think-36ui.
+    certificate author. T-344 registers the independently reviewed standalone quadratic
+    upper bounds at 202 and 263, separately from the seven literal rational ceilings
+    retained in E-geiserx-1037-original-report. The native field route and independent
+    review each cover both quadratic configurations completely. The other five rational
+    counts and the degree-70 algebraic claim at 297 remain on think-36ui. Direct-source
+    historical pose identity and the house/drawing decisions remain separate.
 - id: squares-project-regularized-n127-2026-11-23
   title: The Squares Project’s verified regularization of Joost de Winter’s 127-square packing
   role: first-party-release
@@ -14442,6 +14449,12 @@ selected_overrides:
   evidence: E-de-winter-939-certificate-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-21 (T-285).
+- n: 202
+  source_id: geiserx-exact-1037-2026-11-22
+  value: '14.7243727091084185'
+  evidence: E-geiserx-1037-quadratic-report
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-11-22 (T-344).
 - n: 204
   source_id: joegun-upper-bounds-2026-11-16
   value: '14.8026468431066121'
@@ -14575,11 +14588,11 @@ selected_overrides:
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
     a replay here and an accepted review, adopted on 2026-11-18 (T-319).
 - n: 263
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '16.73316600789937898'
-  evidence: E-pingyou-574-certificate-report
+  source_id: geiserx-exact-1037-2026-11-22
+  value: '16.7243727091084185'
+  evidence: E-geiserx-1037-quadratic-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
+    a replay here and an accepted review, adopted on 2026-11-22 (T-344).
 - n: 264
   source_id: ozden-s264-upper-bound-2026-11-23
   value: '16.7721683050405464'
@@ -14742,7 +14755,7 @@ superseded_reports:
   value: '16.742270262025057683757892778345'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: geiserx-exact-1037-2026-11-22
 - n: 126
   source_id: squish-ten-packings-2026-10-07
   value: '11.7735852916961071'
@@ -15316,7 +15329,7 @@ superseded_reports:
 - n: 202
   source_id: evand-square-packing-2026-10-05
   value: '14.727922061357855439362477738501'
-  superseded_by: kingbird-current
+  superseded_by: geiserx-exact-1037-2026-11-22
   reason: Certifies the catalogue's packing at a side 5.4e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -15621,13 +15634,13 @@ superseded_reports:
 - n: 263
   source_id: franciscouzo-square-packing-2026
   value: '16.742280159187313'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: geiserx-exact-1037-2026-11-22
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 263
   source_id: franciscouzo-square-packing-2026-10-03
   value: '16.742270262031791'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: geiserx-exact-1037-2026-11-22
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 264
@@ -16002,7 +16015,7 @@ superseded_reports:
 - n: 263
   source_id: squish-update-2026-10-07
   value: '16.7404464800428692'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: geiserx-exact-1037-2026-11-22
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 302
@@ -16104,7 +16117,7 @@ superseded_reports:
 - n: 263
   source_id: ry-xu-new-packings-2026-10-08
   value: '16.7406234266167407'
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+  superseded_by: geiserx-exact-1037-2026-11-22
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 270
   source_id: evand-square-packing-2026-10-05
@@ -16879,8 +16892,8 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '16.7331660078993790'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-174's exact side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+    and T-344's exact side is smaller.
+  superseded_by: geiserx-exact-1037-2026-11-22
 - n: 268
   source_id: evand-square-packing-2026-10-05
   value: '16.878814821006764724747121053018'
@@ -17547,6 +17560,12 @@ superseded_reports:
   reason: The house from 2026-11-16 until 2026-11-23; its certificate stays retained and verified,
     and T-343's exact side is smaller.
   superseded_by: ozden-s264-upper-bound-2026-11-23
+- n: 263
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.73316600789937898'
+  reason: The house from 2026-10-17 until 2026-11-22; its certificate stays retained and verified,
+    and T-344's exact side is smaller.
+  superseded_by: geiserx-exact-1037-2026-11-22
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

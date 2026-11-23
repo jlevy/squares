@@ -98,8 +98,9 @@ from sqpack.yamlio import safe_load
 #: Francisco Couzo's issue 678 packet (T-223), and that of 15 November n = 147 onto Roberto
 #: Ono's issue 985 packet (T-302), and that of 18 November n = 262 onto Mykhailo
 #: Polkovskyi's issue 1009 packet (T-319). On 21 November n = 109 moved to Samanyu-dev's
-#: canonical packet (T-335).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 20, "n=1..324": 38}
+#: canonical packet (T-335); on 22 November n = 202 moved to the GeiserX quadratic
+#: packet (T-344).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 20, "n=1..324": 37}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -143,10 +144,11 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # (from the grid), to jazivxt's issue 989 packet (T-303), and on 18 November 262 (from
     # Kingbird), to Mykhailo Polkovskyi's issue 1009 packet (T-319). On 21 November 109
     # moved from Kingbird to Samanyu-dev's canonical packet (T-335).
+    # On 22 November n = 202 moved from Kingbird to the GeiserX quadratic packet.
     "n=1..324": {
         "exact-grid": 172,
-        "kingbird-derived-facts": 67,
-        "packet-derived-facts": 85,
+        "kingbird-derived-facts": 66,
+        "packet-derived-facts": 86,
     },
 }
 
@@ -384,7 +386,11 @@ def _assert_file_retains(row: dict[str, Any], path: Path) -> None:
             assert archive == record["attachment"]["url"], row["url"]
             (member,) = (entry for entry in record["members"] if entry["path"] == name)
             assert path == packet / member["retained_at"], row["url"]
-            data = path.read_bytes()
+            data = (
+                read_retained_bytes(path, limit=member["bytes"])
+                if member.get("storage") == "deterministic-gzip"
+                else path.read_bytes()
+            )
             assert len(data) == member["bytes"], row["url"]
             assert hashlib.sha256(data).hexdigest() == member["sha256"], row["url"]
             return
@@ -2550,7 +2556,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # other counts, so this is one additional source.
     # In the 23 November pass, T-341 and T-342 replaced the sources of 127 and 305.
     # T-343 adds Özden's source at 264, while JoeGun's packet still holds 204.
-    assert len(expected_sources) == 48
+    # T-344 adds the issue-1037 quadratic packet at 202 and 263. The earlier
+    # sources retain other houses, so the poster adds one source and holds the
+    # finder's name for the next poster edition.
+    assert len(expected_sources) == 49
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2730,7 +2739,7 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
     T-343 adds Özden's improvement credit at 264 and the print holds his name there too."""
     held = known_best_builder.PRINT_CREDIT_HELD
     assert held == {
-        259: ("Sergio Fernández Rubio",),
+        **dict.fromkeys((202, 259, 263), ("Sergio Fernández Rubio",)),
         **dict.fromkeys(
             (156, 172, 179, 180, 199, 237, 268, 269, 270, 299, 303, 307), ("Doğa Özden",)
         ),
@@ -2753,7 +2762,9 @@ def test_print_credit_hold_preserves_the_edition_and_current_case_credits(
         (199, ["Evan Daniel"], ["Doğa Özden", "Joost de Winter"]),
         (90, ["jazivxt"], ["Joost de Winter"]),
         (109, ["Samanyu-dev"], []),
+        (202, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
         (259, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
+        (263, ["Sergio Fernández Rubio"], ["Joost de Winter"]),
         (147, ["Roberto Ono"], ["Mishapolk"]),
         (228, [], []),
         (127, ["Joost de Winter"], ["Joshua Levy"]),

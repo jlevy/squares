@@ -2045,8 +2045,11 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
 
 def import_packet(reader: str) -> Path | None:
     """The import packet a house reader reads its sides from, or None for another reader."""
+    from devtools import geiserx_1037_algebraic_report as geiserx  # noqa: PLC0415
     from devtools import n179_algebraic_report as n179  # noqa: PLC0415
 
+    if reader == geiserx.SOURCE_KEY:
+        return packet_path(geiserx.PACKET_NAME)
     if reader == n179.SOURCE_KEY:
         return packet_path(n179.PACKET_NAME)
     function = HOUSES.get(reader)

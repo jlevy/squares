@@ -301,6 +301,7 @@
     "packing/tests/test_gap_ranking.py": 0.761,
     "packing/tests/test_gate_budgets.py": 0.66,
     "packing/tests/test_gate_repetition.py": 11.279,
+    "packing/tests/test_geiserx_1037_algebraic_report.py": 1.598,
     "packing/tests/test_general_pose_tree_census.py": 3.266,
     "packing/tests/test_generate_frontier_case.py": 146.803,
     "packing/tests/test_generated_table_typography.py": 0.568,
@@ -1213,6 +1214,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/first-party-houses-2026-11-23.json",
           "provenance": {},
           "tests": 9
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_geiserx_1037_algebraic_report.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/geiserx-quadratic-2026-11-23.json",
+          "provenance": {},
+          "tests": 7
         }
       ]
     }

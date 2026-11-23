@@ -6219,7 +6219,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-31'
+  lastmod: '2026-11-22'
   status: live
 - path: cases/203.html
   canonical: cases/203.html
@@ -6755,7 +6755,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-25'
+  lastmod: '2026-11-22'
   status: live
 - path: cases/264.html
   canonical: cases/264.html
@@ -26735,6 +26735,45 @@ urls:
     - packing/resources/web/ozden-s264-upper-bound-2026-11-23/receipts/exact-certification.json.xz
     - packing/resources/web/ozden-s264-upper-bound-2026-11-23/review/check-result.json.gz
     - docs/project/reviews/review-2026-11-23-ozden-1099.md
+- path: result/t-344.html
+  canonical: result/t-344.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-11-22'
+  lastmod: '2026-11-22'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 202
+      - 263
+    established: null
+    attribution:
+      source_keys:
+      - '[GeiserX issue 1037 2026-11-18]'
+      published: '2026-11-18'
+    builds_on: null
+    evidence:
+    - E-geiserx-1037-quadratic-report
+    - E-geiserx-1037-quadratic-feasibility
+    - E-geiserx-1037-quadratic-independent-feasibility
+    artifacts:
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/README.md
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/acquisition/sources.json
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/acquisition/algebraic.json
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n202.minpoly.json.gz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n263.minpoly.json.gz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/facts/alg-n-202.yaml.gz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/facts/alg-n-263.yaml.gz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/native-quadratic-202-263.json.xz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/n202-first-contact.json.xz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/receipts/n263-first-contact.json.xz
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/quadratic-standing.json
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/verification.json
+    - packing/resources/web/geiserx-exact-1037-2026-11-22/review/integration-replay.json
+    - docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md
 - path: results.html
   canonical: results.html
   kind: page

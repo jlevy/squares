@@ -21,6 +21,7 @@ import yaml
 from devtools import adopt_houses as adopt
 from devtools import apply_closed_form as closed_form
 from devtools import default_drawings as defaults
+from devtools import exact_sides
 from devtools import run_negative_controls as controls
 from devtools import select_houses as select
 from devtools import upper_bound_houses as houses
@@ -329,8 +330,16 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     assert 305 in previous
     assert 305 not in held_counts
     assert (houses.ADOPTED[305], houses.adopted_on(305)) == ("T-342", "2026-11-23")
+    # The archived 17 October case still holds T-174 at 263; T-344 superseded it
+    # only on 22 November, after the historical hold was lifted.
+    assert 263 in held_counts
+    assert houses.ADOPTED[263] == "T-344"
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) | t193 | set(OVERTAKEN) == (
-        set(select.PENDING_ADOPTION) | previous_t174 | set(OVERTAKEN) | set(ALGEBRAIC_ADOPTED)
+        set(select.PENDING_ADOPTION)
+        | previous_t174
+        | set(OVERTAKEN)
+        | set(ALGEBRAIC_ADOPTED)
+        | {263}
     )
     assert {n: houses.ADOPTED[n] for n in OVERTAKEN} == OVERTAKEN
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
@@ -345,6 +354,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
         180: "T-316",
         182: "T-243",
         210: "T-317",
+        263: "T-344",
         268: "T-331",
         269: "T-297",
         228: "T-334",
@@ -1773,8 +1783,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     # certificate (T-300) in the same pass; 20 since lane L187 moved 127 and 305 to JoeGun's
     # issue-1001 certificates (T-305, T-309) in the pass of 16 November 2026; 18 since the
     # pass of 18 November 2026 moved 210 and 272 to Mykhailo Polkovskyi's issue-1009
-    # certificates (T-317, T-322).
-    assert len(adopted) == 18
+    # certificates (T-317, T-322); 17 since the pass of 22 November moved 263 to
+    # GeiserX's quadratic certificate (T-344).
+    assert len(adopted) == 17
     assert not adopted & set(select.PENDING_ADOPTION)
     # The pass of 23 October 2026 took the writer's twelve off once it wrote an algebraic
     # side, at the nine counts a derived number-field fact holds (think-ot5c); the pass of
@@ -1886,6 +1897,8 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     # T-308 to Doğa Özden's refinement (T-343).
     later = {
         **ALGEBRAIC_ADOPTED,
+        202: "T-344",
+        263: "T-344",
         109: "T-335",
         105: "T-229",
         175: "T-267",
@@ -1930,6 +1943,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     }
     before = {
         **houses.ADOPTED,
+        263: "T-174",
         105: "T-174",
         154: "T-186",
         155: "T-174",
@@ -1973,8 +1987,9 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     }
     # 199 was first adopted on 9 November 2026 (T-284), 157 on 11 November 2026 (T-293) and
     # 147 and 90 on 15 November 2026 (T-302, T-303) and 262 on 18 November 2026 (T-319),
-    # after this receipt was retained, as was 109 on 21 November 2026 (T-335).
-    for n in (90, 109, 147, 157, 183, 199, 227, 229, 260, 262, 293, 299):
+    # after this receipt was retained, as was 109 on 21 November 2026 (T-335), and
+    # 202 on 22 November 2026 (T-344).
+    for n in (90, 109, 147, 157, 183, 199, 202, 227, 229, 260, 262, 293, 299):
         del before[n]
     assert "183" not in historical["houses"]
     assert "260" not in historical["houses"]
@@ -1983,7 +1998,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
         set(houses.numbers_of("T-174")) - {70, 153, 207}
         | {105, 127, 130, 132, 155, 172, 179, 180, 182, 210, 228, 268, 269, 270, 272, 297, 305}
-        | {307, 308}
+        | {263, 307, 308}
     )
 
 
@@ -3400,7 +3415,8 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     of 18 November 2026 replays 147 from T-302's record, whose two lanes agree, and replaced
     the catalogue's packing at 262, whose reported print of 16 + sqrt(2)/2 and the verified
     ceiling of T-101 and T-155 differ, with T-319, so 262 joins 29. The same distinction
-    applies at 109, where T-335 moved the house on 21 November 2026."""
+    applies at 109, where T-335 moved the house on 21 November 2026, and at 202,
+    where T-344 moved it to an algebraic side on 22 November 2026."""
     differing = {
         29: (
             Fraction(
@@ -3423,6 +3439,14 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "[Kingbird]",
             "lies `4.58e-04` above the new side",
         ),
+        202: (
+            Fraction("14727922061357855439362477738501/1000000000000000000000000000000"),
+            "14.72792206135785",
+            "14.72792206135786",
+            "T-101, T-155",
+            "[Kingbird]",
+            "lies `3.55e-03` above the new side",
+        ),
         262: (
             Fraction("16707106781186547524567915429917/1000000000000000000000000000000"),
             "16.70710678118654",
@@ -3444,8 +3468,14 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
         if n == 132:
             assert Fraction(str(reported["exact_form"])) == expected
         assert Fraction(str(bound["value"])) != verified
-        margin = verified - adopt.rational(move.side)
-        assert margin == move.selection.margin > 0
+        low, high = exact_sides.enclosure(move.side, Fraction(1, 10**65))
+        margin_low, margin_high = verified - high, verified - low
+        assert margin_low > 0
+        if isinstance(move.side, Fraction):
+            assert margin_low == move.selection.margin == margin_high
+        else:
+            # The selector reports a lower bound within 2e-60 of the exact gap.
+            assert margin_low - Fraction(2, 10**60) <= move.selection.margin <= margin_high
         opening = _flat(adopt.opening(move))
         baseline = re.search(r"The earlier exact ceiling, \$([^$]+)\$ from", opening)
         assert baseline is not None
@@ -3458,7 +3488,8 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
         assert stated_margin is not None
         rounded_margin = Decimal(stated_margin.group(1))
         last_place = Decimal(1).scaleb(int(rounded_margin.as_tuple().exponent))
-        assert abs(Fraction(rounded_margin) - margin) <= Fraction(last_place) / 2
+        assert margin_high - Fraction(rounded_margin) <= Fraction(last_place) / 2
+        assert Fraction(rounded_margin) - margin_low <= Fraction(last_place) / 2
         assert f"The earlier exact ceiling, ${printed}$ from" not in opening
         assert (
             f"the reported upper bound it replaces, ${printed}$ from {source}, {relation}"

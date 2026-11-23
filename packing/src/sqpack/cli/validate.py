@@ -325,10 +325,12 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: T-341 changed 127 from 8 separating and 41 translating squares to 7 and 22.
 #: T-342 changed 305 from 32 separating and 138 translating squares to 18 and 46.
 #: T-343 changed 264 from 152 separating and 223 translating squares to 72 and 91.
+#: T-344 changed 202 from 26 separating and 44 translating squares to 14 and 84,
+#: and 263 from 12 and 33 to 27 and 143.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (29, 112, 86, 584),
     "n=1..200": (70, 536, 182, 2443),
-    "n=1..324": (128, 2625, 302, 7315),
+    "n=1..324": (128, 2628, 302, 7465),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

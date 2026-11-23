@@ -135,6 +135,7 @@ from typing import Any
 from strif import atomic_output_file
 
 from devtools import check_rational_witness_independent as independent
+from devtools import exact_sides
 from devtools.migrate_math import markdown_math
 from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.yamlio import load_yaml
@@ -1314,7 +1315,11 @@ def problems(batch: Batch = FIRST) -> list[str]:
             found.append(f"n={n}: the side's decimal is not the rule's")
         case = case_front(n)
         if readopted(n):
-            if Fraction(str(case["verified_upper_bound"]["exact_form"])) >= side:
+            form = str(case["verified_upper_bound"]["exact_form"])
+            house_side = exact_sides.read_form(form)
+            if house_side is None:
+                house_side = Fraction(form)
+            if exact_sides.compare(house_side, side) >= 0:
                 found.append(f"n={n}: the later house's bound is not below the view")
         elif case["verified_upper_bound"] != verified_block(row, batch):
             found.append(f"n={n}: the case record's verified upper bound is not the view's")

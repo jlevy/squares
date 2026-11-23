@@ -222,6 +222,13 @@ allowlist:
       attachment is matched to its acquisition manifest's byte count and SHA-256
       before decoding. This binds the external archive member; complete geometry,
       native jobs and control membership are compared structurally.
+  - path: packing/devtools/geiserx_1037_algebraic_report.py
+    kind: download
+    boundary: >-
+      The original quadratic members from the issue 1037 attachment are checked
+      against their acquired byte counts and SHA-256 digests after bounded
+      decompression. The derived facts and native receipt rosters are compared
+      structurally.
   - path: packing/devtools/n179_algebraic_report.py
     kind: download
     boundary: >-

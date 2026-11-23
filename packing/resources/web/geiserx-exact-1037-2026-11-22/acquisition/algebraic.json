@@ -1,0 +1,34 @@
+{
+  "format": "algebraic-witness-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/1037",
+  "author": "Sergio Fernández Rubio (GeiserX); quadratic certificates by Joost de Winter",
+  "source_key": "[GeiserX issue 1037 2026-11-18]",
+  "receipt_format": "geiserx-1037-algebraic-route1-v1",
+  "witness_prefix": "W-geiserx-1037-quadratic-n",
+  "claim_limitations": "Finite feasibility of the submitted 202- and 263-square quadratic configurations. Construction credited to Sergio Fernández Rubio (GeiserX), refined and certified by Joost de Winter. No optimality, rigidity or stationarity claim. The 202-square restriction of the 263 witness is not the standalone quadratic 202 witness.",
+  "read_on": "2026-11-22",
+  "read_at_main": "5b0c694732a81d2e156733a1e6559bf8ec787f28",
+  "witnesses": [
+    {
+      "n": 202,
+      "path": "source/algebraic/n202.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-202.yaml",
+      "degree": 2,
+      "first_committed": "2026-11-18T20:06:25Z"
+    },
+    {
+      "n": 263,
+      "path": "source/algebraic/n263.minpoly.json.gz",
+      "form": "evand-exact-minpoly-v1",
+      "fact": "facts/alg-n-263.yaml",
+      "degree": 2,
+      "first_committed": "2026-11-18T20:06:25Z"
+    }
+  ],
+  "replayed": [
+    202,
+    263
+  ],
+  "pending": []
+}

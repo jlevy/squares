@@ -3093,6 +3093,35 @@ RESULTS: dict[str, Prose] = {
         ),
         retained="the rational half-angle certificate",
     ),
+    "T-344": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#1037](https://github.com/jlevy/squares/issues/1037)",
+        producer_route=False,
+        ai="A separately prompted Codex agent implemented the independent quadratic checker.",
+        retained="the original quadratic attachment and its derived exact field fact",
+        field_routes=(
+            "The maintained exact separating-axis verifier accepted each complete witness "
+            "and rejected its duplicate-square and outside-container controls. The "
+            "independently written checker verified every square, wall and pair using exact "
+            "arithmetic in the same quadratic field."
+        ),
+        lineage_at={
+            202: (
+                "Sergio Fernández Rubio (GeiserX) published the packing. Joost de Winter "
+                "refined it and supplied the quadratic certificate, crediting Evan Daniel’s "
+                "solver. The exact side is about 0.003549352 below the former house at "
+                "first contact. The submitted 263-square witness restricts to a 202-square "
+                "packing at the same side, with 119 poses in common with this standalone "
+                "certificate in the submitted frame."
+            ),
+            263: (
+                "Sergio Fernández Rubio (GeiserX) published the packing. Joost de Winter "
+                "refined it and supplied the quadratic certificate, crediting Evan Daniel’s "
+                "solver. The side is about 0.008793299 below T-174 at first contact and "
+                "lies below the lower endpoint of the interval isolating T-244’s side."
+            ),
+        },
+    ),
     "T-340": Prose(
         author="Joost de Winter",
         reported="on [jlevy/squares#1062](https://github.com/jlevy/squares/issues/1062)",
@@ -4369,6 +4398,11 @@ CREDITS: dict[int, Credit] = {
         "Siddharth Gupta refined it",
         construction="extension",
     ),
+    202: Credit(
+        ("Sergio Fernández Rubio",),
+        (DE_WINTER,),
+        "Joost de Winter’s quadratic certificate of Sergio Fernández Rubio’s packing",
+    ),
     # T-306 (adopted in the pass of 16 November 2026), JoeGun's issue 1001 at 204, a new
     # arrangement relative to T-268's packing (73 squares beyond a tenth); the issue says
     # JoeGun's part of the gain is 6.41e-8 and credit to Kodaj alone would be fair, an offer
@@ -4589,13 +4623,10 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s packing, his n = 262 arrangement in an L-shaped border "
         "solved again",
     ),
-    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
-    # 1e-12 (the 14 October review of PR 574).
     263: Credit(
-        (SQUISH,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
-        "Chaoweeraprasit’s SQUISH packing",
+        ("Sergio Fernández Rubio",),
+        (DE_WINTER,),
+        "Joost de Winter’s quadratic certificate of Sergio Fernández Rubio’s packing",
     ),
     # T-343 refines the T-308 packing and retains its finder and improvement credit.
     264: Credit(
@@ -5963,6 +5994,15 @@ def _earlier_ceiling(move: Move, text: str) -> str:
     """
     n, until = move.n, day_words(move.n)
     bound = rf"\$s\({n}\)\s+\\le\s+[0-9.]+\$"
+    # T-155 had already dated T-101's earlier rounded ceiling at n202; retain that
+    # original interval when the later house moves both lanes.
+    if n == 202:
+        text = re.sub(
+            rf":\s+it\s+proves\s+\$s\({n}\)\s+\\le\s+([0-9.]+)\$,"
+            r"\s+the\s+verified\s+upper\s+bound\s+from\b",
+            r". Its ceiling of $\1$ was the verified upper bound from",
+            text,
+        )
     text = re.sub(
         rf"\bit\s+proves\s+({bound}),\s+the\s+verified\s+upper\s+bound\s+\((T-\d+)\)\.",
         rf"it proved \1, the verified upper bound until {until} (\2).",

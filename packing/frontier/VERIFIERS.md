@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **294** programs: **57** external and **237** first-party; **206** decide claims and **88** check premises.
-- **826** of **1071** evidence entries name the programs that verified them: 416 independently re-implemented, 328 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
+- **296** programs: **57** external and **239** first-party; **207** decide claims and **89** check premises.
+- **828** of **1074** evidence entries name the programs that verified them: 418 independently re-implemented, 328 reproduced with the producer’s code, 58 re-implemented, sharing the producer’s components, 24 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -92,7 +92,7 @@ second implementation agrees.
 | [`V-ozden-910-review-premises`](#v-ozden-910-review-premises) | premises.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 19 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 1 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 161 | 168 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 162 | 169 |
 | [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 152 | 167 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
@@ -201,7 +201,7 @@ second implementation agrees.
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 127 | 144 |
-| [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 3 | 3 |
+| [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 4 | 4 |
 | [`V-build-field-configuration`](#v-build-field-configuration) | devtools.build_field_configuration | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 122 | 139 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
@@ -326,6 +326,8 @@ second implementation agrees.
 | [`V-n179-independent-review`](#v-n179-independent-review) | n179_replay.py.txt | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-n232-1062-review-check`](#v-n232-1062-review-check) | verify.py.txt (frozen source and portable input adapter) | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-ozden-1099-review-check`](#v-ozden-1099-review-check) | check_n264.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-geiserx-1037-algebraic-reader`](#v-geiserx-1037-algebraic-reader) | devtools.geiserx_1037_algebraic_report | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-geiserx-1037-independent-review`](#v-geiserx-1037-independent-review) | verify_202_263.py.txt | Squares Project (Levy) | first-party | decides | 1 | 1 |
 
 ## By Program
 
@@ -1667,6 +1669,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-squares-project-regularized-n127-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: all walls and unordered square pairs in the retained packing | T-341 |
 | `E-squares-project-regularized-n305-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: all walls and unordered square pairs in the retained packing | T-342 |
 | `E-ozden-1099-exact-feasibility` | replayed here | reproduced with the producer’s code | full, 1 of 1: Every square, wall and pair in the retained 264-square witness. | T-343 |
+| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-344 |
 
 ### `V-check-rational-witness-independent`
 
@@ -3912,6 +3915,7 @@ Imports a packet's algebraic-number-field witnesses from its declaration: derive
 | `E-pingyou-574-algebraic-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | T-174 |
 | `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
 | `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
+| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-344 |
 
 ### `V-build-field-configuration`
 
@@ -5970,6 +5974,35 @@ Independently parses the source’s rational-corners data, checks unit-square ge
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-ozden-1099-review-exact-feasibility` | replayed here | independently re-implemented, clean-room | full, 1 of 1: Every square, wall and pair in the pinned rational-corners witness. | T-343 |
+
+### `V-geiserx-1037-algebraic-reader`
+
+**devtools.geiserx_1037_algebraic_report** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Admits only issue 1037's original quadratic members at 202 and 263. Checks attachment/member custody, rebuilds exact geometry through the maintained minpoly reader, requires the entire fact to match, and binds the per-count native job wrappers to their original six rows. It preserves the original field, frame and witness identifiers and decides no geometric inequality.
+
+- Source: [`packing/devtools/geiserx_1037_algebraic_report.py`](../../packing/devtools/geiserx_1037_algebraic_report.py), [`packing/tests/test_geiserx_1037_algebraic_report.py`](../../packing/tests/test_geiserx_1037_algebraic_report.py)
+- Versions run: this repository's commits, which Git holds
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-344 |
+
+### `V-geiserx-1037-independent-review`
+
+**verify_202_263.py.txt** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Independently checks the original rational and quadratic configurations at 202 and 263: unit squares, all contained vertices and every unordered pair using exact projection separation, with a separate Fraction implementation of Q(sqrt(3)). Checks exact side formulas, polynomial roots, isolating intervals, rational-to-quadratic inequalities, lower-left restrictions and predeclared equality and inward controls.
+
+- Source: [`packing/resources/web/geiserx-exact-1037-2026-11-22/review/verify_202_263.py.txt`](../../packing/resources/web/geiserx-exact-1037-2026-11-22/review/verify_202_263.py.txt)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md`](../../docs/project/reviews/review-2026-11-22-geiserx-1037-202-263.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format; it shares none of the producer’s code; written by Codex (OpenAI) (High reasoning, isolated Stage 4 mathematical review session.), with its own prompt and code; authorship in common with the producer’s: system-family, The source's production tooling and reviewer both use OpenAI systems. The reviewer froze a separate plan and checker after the official issue, process, inventory and raw mathematical data, before consulting any producer code, producer validation output, project verifier or earlier review. Python standard-library arithmetic and a safe duplicate-key rejecting PyYAML parser are the only runtime dependencies.
+- Note: The reading copy preserves the frozen checker's bytes. Git holds this first-party source; the retained frozen digests document the original review boundary. The review excludes contact-system tightness and global optimality.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-geiserx-1037-quadratic-independent-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: Both standalone quadratic certificates, every square, contained vertex and unordered pair. | T-344 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

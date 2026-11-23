@@ -71,8 +71,8 @@ The 297-square algebraic witness, whose side is reported as a root of a degree-7
 polynomial, still awaits replay.
 At 297, the issue attributes a 66-square bottom portion to Asterios Panoras’s version 17
 compilation.
-Pose identity with the pinned upstream input, prior registered packings, and
-adoption are separate decisions.
+Pose identity with the pinned upstream input and earlier registered packings
+remains open.
 [Issue #1037](https://github.com/jlevy/squares/issues/1037)
 
 ## Comparison with the Current Retained Certificates
@@ -81,7 +81,11 @@ For 202 and 263, the submitted rational sides are strictly below the prior retai
 exact configurations at first contact. The gains are about 0.003549352 and
 0.008793299 respectively. The quadratic sides are smaller again.
 These comparisons check the predecessor's exact wall and pair inequalities.
-Report order against other submissions and the drawing decisions remain open.
+T-344 adopts both quadratic certificates. The two default drawings use the
+selected half-degree grid-slack views at their exact certificate sides.
+The [drawing record](../../../cases/regularized_drawings/think-36ui-2026-11-22/README.md)
+retains the candidate runs and the selection. Report order for the remaining
+counts and the degree-70 verification at 297 remain open.
 [202 comparison](receipts/n202-first-contact.json.xz),
 [263 comparison](receipts/n263-first-contact.json.xz)
 
@@ -119,10 +123,21 @@ original bytes. With the repository’s Python environment, run
 `python -m devtools.retained_data check resources/web/geiserx-exact-1037-2026-11-22`
 from `packing/` to check the stored files and the following table.
 
+## Derived number-field facts
+
+The maintained reader derives the 202- and 263-square facts in the original
+number field and coordinate frame. It preserves the original witness
+identifiers and every exact square pose. The per-count native receipts carry
+the original three job records for each witness.
+[202-square jobs](receipts/algebraic-route1-n202.json.xz),
+[263-square jobs](receipts/algebraic-route1-n263.json.xz)
+
 ## Compressed Files
 
 | Stored file | Origin | Git blob of uncompressed bytes | Decompressed SHA-256 |
 | --- | --- | --- | --- |
+| `facts/alg-n-202.yaml.gz` | receipt | `23c970b8910a9fea332d2b92de653cd40261c189` | `0ef261ed19a26fd14d6704380908f34d73aeeecc835f9f608713f875b581524f` |
+| `facts/alg-n-263.yaml.gz` | receipt | `4a3d9f0e260005f6104d59eb5ccf40c35537bb5f` | `40599d936846114c450454018aa3f79477d25e991fc9b1f505f9a09c330c9284` |
 | `review/inputs/rational/n202.yaml.gz` | upstream | `1e1a452ecbfcd684444c2e5a1ab0876dd29f60f1` | `480b7da10f09d4f4ae56fab1cd145e2a6deb80993263209e8e314c42a84d44d8` |
 | `review/inputs/rational/n263.yaml.gz` | upstream | `a13e5943ce3d2cfad3ab98c2ee01a3ea52a120ed` | `3600e8dadccd9208ffd2e90820f94506e807c4b137d81123ae2ef85fa3f546c7` |
 | `source/algebraic/n202.minpoly.json.gz` | upstream | `060a9012956ba6950a26c7fb5976f15966b397a0` | `f588cdc40027ff01c4b49f8ad1dbadacb50449b4941133a242e70974be908ffc` |
