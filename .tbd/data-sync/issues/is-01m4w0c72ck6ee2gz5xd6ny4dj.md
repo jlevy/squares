@@ -5,7 +5,7 @@ title: "Regularization follow-up: unify tilt angles in tilted blocks (176, 232 a
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: codex-drawing-follow-up
 labels:
   - stack-498-followup
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-14T01:28:06.988Z
-updated_at: 2026-11-23T15:14:35.386Z
+updated_at: 2026-11-23T16:10:22.602Z
 started_at: 2026-11-23T04:30:30.105Z
 ---
 Owner, 14 Oct 2026: 'some like 176 and 232 still look irregular'. After stack 498 merges: (1) rank every count by residual irregularity in its default drawing (tilt-angle classes and hues within tilted blocks, block misalignment, isolated tilted squares); (2) build an angle-unification generator: cluster each connected tilted block's angles, snap each cluster to one angle, re-solve positions exactly at s_W or U, admit only if exactly valid on both routes and the improvement rule (policy section 11) passes; (3) run Evan Daniel's re-solve where not yet tried on the ranked counts; (4) owner decisions: symmetry, sub-block alignment and point contacts as goals; the row-7 review queue (232, 297, 154, 175). Grid-slack keeps witness rotations and the axis tool only straightens near-axis squares, so neither can fix mixed angles.
@@ -37,3 +37,5 @@ The preceding drawing audit also checked T-336 at n=305. Its exact axis fallback
 At 305 a 100-digit nonlinear restart from the cleaner coincidence layout gave a rational certificate with padding 1e-84. It passes the two exact GMP routes plus the separate half-angle area route, and lies 5.40623344416e-81 below T-336 and 2.20196672468e-81 below T-336 shrunk to first contact. Uneven axis squares 63 -> 13, near-axis 1 -> 0. Three old per-square contacts fall, with both totals higher. This is a smaller exact result under option D and follows the house rule. The old-bound drawing-only path would need owner review. Independent review and retained integration work are in progress in codex/axis-regularization-adoption-20261123, T-342.
 
 At 259, exact contraction of the retained cleaner T-337-based regularizer pose stops 2.02057286662e-34 above the verified side, binding pair 22 and 26. At 131 the bounded 0.05 degree frozen-tilt grid-slack pass on the published view hit its 70-second wall cap without an exact result. 232 remains on the exact fallback with its prior no-fit findings. The n127 conservative replay restored the cleaner exact certificate, independently checked, tracked for adoption as T-341 under think-4z8z. Audit, mathematical receipts, and memory-guard logs are retained on spud-ext2 under agent-evidence/squares-intake-20261121-01a1fb/drawing-audit-20261122.
+
+PR #1100 contains the independent review and verified T-342 adoption at 305, with exact house drawing (2/13/0 light, uneven, near-axis; 829/871 full-side totals). The new 127 house is T-341 in the same PR under think-4z8z. The two positive and gross control replays and third area checks passed. The 305 sharp suite reached its wall cap and the report says so. The further 0.1-degree 232 grid-slack trial on T-340 had no exact result within its 40-second generation limit, evidence n232-grid-tenth-degree-report in the same external audit. All three unapplied counts remain attributable to their current exact drawings and this bead. PR #1100 is still under hosted checks.
