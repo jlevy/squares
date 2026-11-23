@@ -1814,9 +1814,10 @@ def _changelog_log(overview: Overview, document: ChangelogDocument, *, preview: 
             tally.append(tally_count(len(today), f"change{'' if len(today) == 1 else 's'}"))
         shown = added_day_link(day, len(recent.results)) if recent and recent.results else ""
         state = " open" if index < open_days else ""
+        day_key = day.isoformat()
+        day_attribute = f' data-day="{day_key}"' if preview else ""
         blocks.append(
-            f'<details data-day="{day.isoformat()}" '
-            f'id="{prefix}{day.isoformat()}"{state}>'
+            f'<details{day_attribute} id="{prefix}{day_key}"{state}>'
             f"{tallied_summary(day_label(day), tally)}"
             f"<ul>{''.join(entries)}</ul>{shown}</details>"
         )

@@ -21,10 +21,7 @@ async () => {
               rect.width > 0 && (rect.left < frame.left - 0.5 || rect.right > frame.right + 0.5),
           ),
       )
-      .map(
-        (element) =>
-          `${block.getAttribute("data-day")}: ${element.textContent?.trim().slice(0, 60)}`,
-      );
+      .map((element) => `${block.id}: ${element.textContent?.trim().slice(0, 60)}`);
   });
   const openers = [...(log?.querySelectorAll("li > a:first-child") ?? [])];
   /** @param {Element} link */
