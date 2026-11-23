@@ -2838,7 +2838,8 @@ PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     90: ("jazivxt",),
     109: ("Samanyu-dev",),
     **dict.fromkeys((202, 259, 263), ("Sergio Fernández Rubio",)),
-    **dict.fromkeys((204, 232, 264), ("Tomáš Kodaj", "JoeGun")),
+    **dict.fromkeys((204, 232), ("Tomáš Kodaj", "JoeGun")),
+    264: ("Tomáš Kodaj", "JoeGun", "Doğa Özden"),
     127: ("Joshua Levy",),
     305: ("Tomáš Kodaj", "JoeGun", "Joshua Levy"),
 }
