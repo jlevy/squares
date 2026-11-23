@@ -39289,7 +39289,7 @@ issues:
     - url: https://github.com/jlevy/squares/issues/1052#issuecomment-7087112747
       date: '2026-11-22'
       by: jlevy
-      kind: follow-up
+      kind: final
       reported:
       - result: n305-same-side-axis-variants
     close_when: The intake record gives the disposition and a reply records it on GitHub.
@@ -39372,7 +39372,12 @@ issues:
       not_registered: >-
         The source covers 0 <= tan(theta/2) <= 1/24 with 19 independently signed non-axis
         tilts. A separate checker accepted all 576 conditional polynomial certificates
-        and 16 controls. Complete sign, graph and bridge coverage remains open.
+        and 16 controls. A separate local replay excludes all 3,488 positive-cost bridge
+        profiles through 15,696 normal choices, with 12 controls. A further independent
+        census checks all 2,400 vacancy/aligned-position cases and 29,368 sign assignments,
+        verifies 234,944 D4 images and 3,671 orbits, and passes 12 controls. General-path
+        exclusions, separation graphs and graph-to-certificate coverage remain open;
+        these restricted checks do not accept the full theorem.
       queued: true
       bead: think-guls
     beads:
@@ -39458,6 +39463,13 @@ issues:
       kind: follow-up
       reported:
       - result: n26-n318-final-lower-166
+    - url: https://github.com/jlevy/squares/issues/1060#issuecomment-7087732969
+      date: '2026-11-22'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n26-n318-final-lower-166
+      beads: [think-uz7g]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       All four source ZIPs were downloaded and pinned. Attachment D inventories 166 distinct
@@ -39544,7 +39556,8 @@ issues:
     title: 'Exact rational witness at the previously reported local solution for n = 232 (side ≤ 15.759531623541)'
     author: JoostdeWinter
     opened: '2026-11-21'
-    state: open
+    state: closed
+    closed: '2026-11-22'
     kind: result-report
     triage: done
     summary: >-
@@ -39579,6 +39592,23 @@ issues:
       kind: follow-up
       reported:
       - result: n232-rational-follow-up
+    - url: https://github.com/jlevy/squares/issues/1062#issuecomment-7087507310
+      date: '2026-11-22'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n232-rational-follow-up
+        id: T-340
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: current
+      - result: n232-rational-follow-up
+        id: E-de-winter-1062-certificate-report
+      - result: n232-rational-follow-up
+        id: E-de-winter-1062-review-exact-feasibility
+        status: confirmed
+      beads: [think-eumc]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       Compare the submitted exact fraction and geometry with both T-307's adopted

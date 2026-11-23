@@ -1,0 +1,427 @@
+"""Independent one-axis paired-bridge sign census and D4 orbit audit.
+
+Read the frozen specification and accepted local-bridge receipt as data only.
+No contributor module, graph solver or general-path clause is executed.
+"""
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+from functools import lru_cache
+import gzip
+import hashlib
+from itertools import permutations, product
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+import tempfile
+import time
+from typing import Any, Callable
+
+SPEC_SHA256 = "d7261e5ecd4a9cc96b6d01e24ba1925c39946cb7235504ba6db1c828534d8df6"
+ALL_BITS = (1 << 20) - 1
+MAX_NODES = 1_000_000
+MAX_EMISSIONS = 2_000_000
+MAX_CASE_SOLUTIONS = 50_000
+MAX_ROSTER = 50_000
+MAX_INPUT_BYTES = 8 * 1024 * 1024
+INTERNAL_WALL_SECONDS = 55
+Point = tuple[int, int]
+Vacancy = tuple[int, ...]
+Case = tuple[Vacancy, int, int]
+Option = tuple[int, int]
+Clause = tuple[Option, ...]
+
+
+class Refusal(RuntimeError):
+    pass
+
+
+def require(condition: bool, reason: str) -> None:
+    if not condition:
+        raise Refusal(reason)
+
+
+class WorkBudget:
+    def __init__(self) -> None:
+        self.started = time.monotonic()
+        self.nodes = 0
+        self.emissions = 0
+
+    def check(self) -> None:
+        require(time.monotonic() - self.started < INTERNAL_WALL_SECONDS, "internal-wall-ceiling")
+        require(self.nodes <= MAX_NODES, "search-node-ceiling")
+        require(self.emissions <= MAX_EMISSIONS, "assignment-emission-ceiling")
+
+    def node(self) -> None:
+        self.nodes += 1
+        if self.nodes % 256 == 0:
+            self.check()
+
+    def emit(self) -> None:
+        self.emissions += 1
+        if self.emissions % 1024 == 0:
+            self.check()
+
+
+def occupied(p: Vacancy) -> tuple[Point, ...]:
+    require(tuple(sorted(p)) == tuple(range(5)), "vacancy-is-not-permutation")
+    return tuple((x, y) for x in range(5) for y in range(5) if y != p[x])
+
+
+def chain_cost(ranks: tuple[int, ...], signs: tuple[int, ...]) -> int:
+    require(len(ranks) == len(signs) == 5, "chain-size")
+    require(all(0 <= q < 5 for q in ranks), "rank-domain")
+    require(all(s in (-1, 0, 1) for s in signs) and signs.count(0) <= 1, "sign-domain")
+    delta = tuple(b - a for a, b in zip(ranks, ranks[1:]))
+    require(sum(d != 0 for d in delta) == 1 and all(abs(d) <= 1 for d in delta),
+            "not-a-single-jump-chain")
+    return abs(signs[0]) + abs(signs[-1]) + sum(
+        abs(b - a) if d == 0 else -d * (a + b)
+        for a, b, d in zip(signs, signs[1:], delta)
+    )
+
+
+@lru_cache(maxsize=120)
+def bridge_pairs(p: Vacancy) -> tuple[tuple[tuple[int, ...], tuple[int, ...],
+                                           tuple[int, ...], tuple[int, ...]], ...]:
+    """Construct both full chains directly from the two shared diagonal cells."""
+    points = occupied(p)
+    lookup = {q: i for i, q in enumerate(points)}
+    result = []
+    for x in range(4):
+        for y in range(5):
+            for step in (-1, 1):
+                if not 0 <= y + step < 5:
+                    continue
+                a, b = (x, y), (x + 1, y + step)
+                lower, upper = sorted((a, b), key=lambda q: q[1])
+                horizontal = tuple((k, y if k <= x else y + step) for k in range(5))
+                vertical = tuple((lower[0] if k <= lower[1] else upper[0], k) for k in range(5))
+                if not all(q in lookup for q in horizontal + vertical):
+                    continue
+                require(set(horizontal) & set(vertical) == {a, b}, "shared-diagonal")
+                result.append((
+                    tuple(lookup[q] for q in horizontal),
+                    tuple(q[1] for q in horizontal),
+                    tuple(lookup[q] for q in vertical),
+                    tuple(4 - q[0] for q in vertical),
+                ))
+    require(len(result) == len(set(result)), "duplicate-bridge")
+    return tuple(result)
+
+
+def chain_options(indices: tuple[int, ...], ranks: tuple[int, ...], zero: int) -> Clause:
+    """Enumerate literal local sign vectors; do not use the producer's arm shortcut."""
+    live = tuple(i for i in indices if i != zero)
+    options = []
+    for values in product((-1, 1), repeat=len(live)):
+        assignment = dict(zip(live, values))
+        signs = tuple(0 if i == zero else assignment[i] for i in indices)
+        cost = chain_cost(ranks, signs)
+        require(cost >= 0, "negative-bridge-cost")
+        if cost == 0:
+            positive = sum(1 << i for i, v in assignment.items() if v == 1)
+            negative = sum(1 << i for i, v in assignment.items() if v == -1)
+            options.append((positive, negative))
+    return tuple(sorted(set(options)))
+
+
+def constraints(p: Vacancy, zero: int) -> tuple[Clause, ...]:
+    return tuple(
+        tuple(sorted(set(chain_options(h, hr, zero) + chain_options(v, vr, zero))))
+        for h, hr, v, vr in bridge_pairs(p)
+    )
+
+
+def solutions(variables: int, clauses: tuple[Clause, ...], budget: WorkBudget) -> set[int]:
+    """Solve conjunctions of small disjunctions by forced assignments and branching."""
+    result: set[int] = set()
+    for clause in clauses:
+        for pos, neg in clause:
+            require(not pos & neg and not (pos | neg) & ~variables, "invalid-literal-option")
+
+    def visit(positive: int, negative: int) -> None:
+        budget.node()
+        if positive & negative:
+            return
+        while True:
+            forced_positive = forced_negative = 0
+            unresolved: list[Clause] = []
+            for clause in clauses:
+                viable = tuple((p, n) for p, n in clause
+                               if not p & negative and not n & positive)
+                if not viable:
+                    return
+                if any(p & positive == p and n & negative == n for p, n in viable):
+                    continue
+                if len(viable) == 1:
+                    p, n = viable[0]
+                    forced_positive |= p
+                    forced_negative |= n
+                else:
+                    unresolved.append(viable)
+            new_positive = positive | forced_positive
+            new_negative = negative | forced_negative
+            if new_positive & new_negative:
+                return
+            if (new_positive, new_negative) == (positive, negative):
+                break
+            positive, negative = new_positive, new_negative
+        if not unresolved:
+            free = variables & ~(positive | negative)
+            subset = free
+            while True:
+                budget.emit()
+                result.add(positive | subset)
+                require(len(result) <= MAX_CASE_SOLUTIONS, "case-roster-ceiling")
+                if not subset:
+                    break
+                subset = (subset - 1) & free
+            return
+        chosen = max(unresolved, key=lambda c: sum((p | n).bit_count() for p, n in c))
+        for p, n in chosen:
+            visit(positive | p, negative | n)
+
+    visit(0, 0)
+    budget.check()
+    return result
+
+
+def direct_case_valid(p: Vacancy, mask: int, zero: int) -> bool:
+    if not 0 <= zero < 20 or mask < 0 or mask & ~ALL_BITS or mask & (1 << zero):
+        return False
+    signs = tuple(0 if i == zero else 1 if mask & (1 << i) else -1 for i in range(20))
+    return all(
+        chain_cost(hr, tuple(signs[i] for i in h)) == 0
+        or chain_cost(vr, tuple(signs[i] for i in v)) == 0
+        for h, hr, v, vr in bridge_pairs(p)
+    )
+
+
+def transform_point(q: Point, turns: int, reflected: bool) -> Point:
+    x, y = q
+    for _ in range(turns):
+        x, y = 4 - y, x
+    if reflected:
+        x = 4 - x
+    return x, y
+
+
+@lru_cache(maxsize=120)
+def transports(p: Vacancy) -> tuple[tuple[Vacancy, tuple[int, ...], bool], ...]:
+    points = occupied(p)
+    out = []
+    for turns in range(4):
+        for reflected in (False, True):
+            holes = sorted(transform_point((x, p[x]), turns, reflected) for x in range(5))
+            require(tuple(x for x, _ in holes) == tuple(range(5)), "transformed-vacancies")
+            transformed_p = tuple(y for _, y in holes)
+            image_points = occupied(transformed_p)
+            lookup = {q: i for i, q in enumerate(image_points)}
+            mapping = tuple(lookup[transform_point(q, turns, reflected)] for q in points)
+            require(tuple(sorted(mapping)) == tuple(range(20)), "non-bijective-transport")
+            out.append((transformed_p, mapping, reflected))
+    require(len(set(out)) == 8, "D4-transform-count")
+    return tuple(out)
+
+
+def transport(case: Case, entry: tuple[Vacancy, tuple[int, ...], bool]) -> Case:
+    _, mask, zero = case
+    p, mapping, reflected = entry
+    new_zero = mapping[zero]
+    new_mask = sum(
+        1 << target for source, target in enumerate(mapping)
+        if source != zero and bool(mask & (1 << source)) != reflected
+    )
+    require(not new_mask & (1 << new_zero), "aligned-sign-under-transport")
+    return p, new_mask, new_zero
+
+
+def images(case: Case) -> tuple[Case, ...]:
+    return tuple(transport(case, entry) for entry in transports(case[0]))
+
+
+def controls() -> list[dict[str, Any]]:
+    result = []
+
+    def check(name: str, expected: bool, operation: Callable[[], bool]) -> None:
+        actual = operation()
+        require(actual is expected, "control-mismatch:" + name)
+        result.append({"control": name, "expected": "accept" if expected else "refuse",
+                       "passed": True})
+
+    ranks = (0, 0, 0, 1, 1)
+    check("upward-positive-chain", True, lambda: chain_cost(ranks, (1, 1, 1, 1, 1)) == 0)
+    check("downward-negative-chain", True,
+          lambda: chain_cost((4, 4, 4, 3, 3), (-1, -1, -1, -1, -1)) == 0)
+    check("aligned-first-arm-end", True, lambda: chain_cost(ranks, (0, 1, 1, 1, 1)) == 0)
+    p = (1, 2, 3, 4, 0)
+    case: Case = (p, ALL_BITS ^ 1, 0)
+
+    def four_turns() -> bool:
+        current = case
+        for _ in range(4):
+            current = transport(current, transports(current[0])[2])
+        return current == case
+
+    def two_reflections() -> bool:
+        once = transport(case, transports(p)[1])
+        return once[1] == 0 and transport(once, transports(once[0])[1]) == case
+
+    check("quarter-turn-preserves-sign-and-four-turns", True, four_turns)
+    check("reflection-flips-sign-and-squares-to-identity", True, two_reflections)
+    toy: tuple[Clause, ...] = (((0b011, 0), (0b100, 0b010)),)
+    brute = {m for m in range(8) if (m & 0b011 == 0b011) or (m & 0b100 and not m & 0b010)}
+    found = solutions(0b111, toy, WorkBudget())
+    check("constraint-solver-complete-toy-truth-table", True, lambda: found == brute == {3, 4, 5, 7})
+    check("wrong-sign-on-upward-chain", False, lambda: chain_cost(ranks, (-1, -1, -1, -1, -1)) == 0)
+    check("aligned-internal-arm-position", False, lambda: chain_cost(ranks, (1, 0, 1, 1, 1)) == 0)
+    reflected = transport(case, transports(p)[1])
+    no_flip = sum(1 << j for i, j in enumerate(transports(p)[1][1]) if i != case[2])
+    check("reflection-without-sign-flip", False, lambda: reflected[1] == no_flip)
+    check("nonzero-sign-on-aligned-square", False, lambda: direct_case_valid(p, ALL_BITS, 0))
+    check("deleted-toy-solution", False, lambda: found - {3} == brute)
+    check("added-invalid-toy-solution", False, lambda: found | {0} == brute)
+    require(len(result) == 12, "control-count")
+    return result
+
+
+def receipt_identity(path: Path, expected: str) -> dict[str, Any]:
+    digest = hashlib.sha256()
+    length = 0
+    with path.open("rb") as inp:
+        magic = inp.read(2)
+    opener = gzip.open if magic == b"\x1f\x8b" else open
+    with opener(path, "rb") as stream:
+        while block := stream.read(65536):
+            length += len(block)
+            require(length <= MAX_INPUT_BYTES, "accepted-receipt-size-ceiling")
+            digest.update(block)
+    require(digest.hexdigest() == expected, "accepted-bridge-receipt-digest")
+    return {"sha256_of_original_bytes": digest.hexdigest(), "original_bytes": length}
+
+
+def atomic_output(path: Path, value: dict[str, Any]) -> None:
+    require(not path.exists(), "output-already-exists")
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                         prefix=path.name + ".", suffix=".partial",
+                                         delete=False) as stream:
+            temporary = stream.name
+            json.dump(value, stream, indent=2, allow_nan=False)
+            stream.write("\n")
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+        temporary = None
+    finally:
+        if temporary:
+            Path(temporary).unlink(missing_ok=True)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--spec", type=Path, required=True)
+    parser.add_argument("--bridge-receipt", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    budget = WorkBudget()
+    cpu_started = time.process_time()
+    raw_spec = args.spec.read_bytes()
+    require(hashlib.sha256(raw_spec).hexdigest() == SPEC_SHA256, "spec-digest")
+    spec = json.loads(raw_spec)
+    binding = receipt_identity(args.bridge_receipt, spec["accepted_bridge_receipt"]["sha256"])
+    control_results = controls()
+    cases: set[Case] = set()
+    vacancies = list(permutations(range(5)))
+    per_case = []
+    bridge_hist: Counter[int] = Counter()
+    for p in vacancies:
+        bridges = bridge_pairs(p)
+        bridge_hist[len(bridges)] += 1
+        for zero in range(20):
+            budget.check()
+            found = solutions(ALL_BITS ^ (1 << zero), constraints(p, zero), budget)
+            require(all(direct_case_valid(p, mask, zero) for mask in found),
+                    "enumerated-assignment-fails-direct-cost")
+            cases.update((p, mask, zero) for mask in found)
+            require(len(cases) <= MAX_ROSTER, "global-roster-ceiling")
+            per_case.append({"vacancy": list(p), "aligned_index": zero, "assignments": len(found)})
+    require(len(per_case) == 2400, "missing-vacancy-aligned-case")
+    require(dict(bridge_hist) == {4: 92, 5: 24, 6: 4}, "paired-bridge-histogram")
+    require(len(cases) == 29368, "sign-assignment-count")
+    ordered = sorted(cases)
+    representative_for: dict[Case, Case] = {}
+    orbit_sizes: Counter[int] = Counter()
+    representatives: set[Case] = set()
+    image_count = 0
+    for number, case in enumerate(ordered):
+        if number % 128 == 0:
+            budget.check()
+        orbit = set(images(case))
+        image_count += 8
+        require(case in orbit, "missing-identity-image")
+        require(orbit <= cases, "D4-image-not-in-complete-census")
+        representative = min(orbit)
+        representative_for[case] = representative
+        if representative not in representatives:
+            require(set(images(representative)) == orbit, "orbit-not-closed")
+            representatives.add(representative)
+            orbit_sizes[len(orbit)] += 1
+    require(len(representatives) == 3671, "D4-representative-count")
+    require(sum(size * count for size, count in orbit_sizes.items()) == len(cases),
+            "orbit-partition-count")
+    require(dict(orbit_sizes) == {8: 3671}, "D4-orbit-size-histogram")
+    require(image_count == 234944, "D4-image-count")
+    sorted_reps = sorted(representatives)
+    rep_index = {case: i for i, case in enumerate(sorted_reps)}
+    roster = [
+        {"vacancy": list(p), "sign_mask": mask, "aligned_index": zero,
+         "orbit_index": rep_index[representative_for[(p, mask, zero)]]}
+        for p, mask, zero in ordered
+    ]
+    roster_bytes = json.dumps(roster, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    budget.check()
+    rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    result = {
+        "format": "independent-one-axis-sign-census-v1",
+        "status": "complete-paired-bridge-sign-census-and-D4-orbits",
+        "scope": spec["scope"],
+        "spec_sha256": SPEC_SHA256,
+        "checker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "accepted_bridge_receipt": binding,
+        "half_tangent_domain": "0 < tan(theta/2) <= 1/24, conditional on near-grid and paired-bridge premises",
+        "counts": {"vacancy_permutations": 120, "aligned_positions_per_vacancy": 20,
+                   "vacancy_aligned_cases": len(per_case), "sign_assignments": len(cases),
+                   "D4_images_checked": image_count, "D4_representatives": len(representatives)},
+        "bridge_histogram": dict(sorted(bridge_hist.items())),
+        "orbit_size_histogram": dict(sorted(orbit_sizes.items())),
+        "controls": control_results,
+        "enumeration_work": {"search_nodes": budget.nodes, "raw_assignment_emissions": budget.emissions},
+        "roster_sha256": hashlib.sha256(roster_bytes).hexdigest(),
+        "roster_serialization": "UTF-8 json.dumps(roster, sort_keys=True, separators=(',', ':')) without final newline",
+        "per_vacancy_aligned_counts": per_case,
+        "representatives": [{"vacancy": list(p), "sign_mask": s, "aligned_index": z} for p, s, z in sorted_reps],
+        "roster": roster,
+        "wall_seconds": time.monotonic() - budget.started,
+        "cpu_seconds": time.process_time() - cpu_started,
+        "peak_rss_bytes": rss if sys.platform == "darwin" else rss * 1024,
+        "guard": "External coordinator-owned supervisor required; this receipt does not assert guard status.",
+    }
+    atomic_output(args.output, result)
+    print(json.dumps({"status": result["status"], "counts": result["counts"],
+                      "controls": len(control_results), "wall_seconds": result["wall_seconds"],
+                      "peak_rss_bytes": result["peak_rss_bytes"]}))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print(json.dumps({"status": "failed", "error_type": type(error).__name__,
+                          "error": str(error)}), file=sys.stderr)
+        raise SystemExit(1) from error
