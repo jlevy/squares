@@ -3,15 +3,19 @@ type: is
 id: is-01m7x48wpcz40ejzsmwj32p7m8
 title: "Validation: phase 2 replay of the superseded claims of issues 1039 and 1041 (T-337, T-338), ~6.6-15 CPU-h"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: codex-intake-1119-01a1fb
 labels:
   - validation
 dependencies: []
 parent_id: is-01m7khxdfnc5tynb8cjr4z7862
+hold: null
+hold_until: null
 created_at: 2026-11-20T18:42:32.268Z
-updated_at: 2026-11-20T18:42:32.268Z
+updated_at: 2026-11-23T01:20:56.613Z
+started_at: 2026-11-23T01:20:56.600Z
 ---
 Phase 2 of think-fv42's replay plan (receipts/controls-plan.txt in packing/resources/web/de-winter-lower-bounds-2026-11-19, SHA-256 cc6a1bf4... on think-fv42): the superseded claims of issues 1039 and 1041, held off the 20 November session by the owner's coordinator (wall time on the shared box).
 
