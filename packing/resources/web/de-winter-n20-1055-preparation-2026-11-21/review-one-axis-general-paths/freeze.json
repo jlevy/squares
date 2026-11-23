@@ -1,0 +1,66 @@
+{
+  "format": "independent-one-axis-general-path-freeze-v1",
+  "frozen_utc": "2026-11-22T23:58:44.038909+00:00",
+  "status": "prepared-not-executed",
+  "coordinator_bead": "think-guls",
+  "files": {
+    "general-path-spec.json": {
+      "bytes": 5194,
+      "sha256": "73e09d72fa3094ee6e5eecb743428b3a3edb7ae20b3e1af598466fc662910a12"
+    },
+    "check_one_axis_general_paths.py": {
+      "bytes": 19323,
+      "sha256": "3b85d7e53b4e94a872450b9b61ed6177fca6be113065e067427c59ea05cdd395"
+    },
+    "frozen-plan.md": {
+      "bytes": 10427,
+      "sha256": "75f53a63275872bfc75ff70f2f6ba2f48684ac7a0fbeeeaa8baf47f19fe4be51"
+    }
+  },
+  "expected": {
+    "rank_profiles": 259,
+    "sign_profiles": 112,
+    "local_profiles": 29008,
+    "rank_histogram_by_jumps": {
+      "0": 5,
+      "1": 32,
+      "2": 84,
+      "3": 96,
+      "4": 42
+    },
+    "local_profile_histogram_by_jumps": {
+      "0": 560,
+      "1": 3584,
+      "2": 9408,
+      "3": 10752,
+      "4": 4704
+    },
+    "accepted_bridge_regression": {
+      "positive_cost_single_jump_profiles": 3488,
+      "normal_choices": 15696
+    },
+    "controls": 20,
+    "excluded_profile_count": "Not prescribed; derive all verdicts with complete per-profile evidence."
+  },
+  "limits": {
+    "workers": 1,
+    "target_wall_seconds": 30,
+    "target_peak_rss_gib": 0.15,
+    "hard_wall_seconds": 60,
+    "internal_wall_seconds": 55,
+    "sampled_tree_cost_gib": 0.25,
+    "stop_pressure": 2,
+    "max_choices_per_profile": 16,
+    "max_normal_choices": 464128,
+    "max_physical_bound_records": 8192
+  },
+  "scope": "Complete conditional local general five-tile path classification for 0-4 transverse jumps only. No application to a vacancy/sign case, separation graph enumeration, rule extraction, graph-to-polynomial-bank coverage, unrestricted result or full Stage 4 acceptance.",
+  "exposure": "Reviewer read the producer theorem, path formulas, full-path generator and positivity implementation in earlier slices and this one. Arithmetic/geometry reconstruction is first-party, partly reused from the independently implemented accepted bridge checker. Not blind and not a second independent implementation relative to that first-party bridge arithmetic.",
+  "execution": {
+    "checker_executed": false,
+    "checker_imported": false,
+    "compiled_or_syntax_checked": false,
+    "contributor_programs_executed": false,
+    "awaiting_serial_memory_guard_slot": true
+  }
+}

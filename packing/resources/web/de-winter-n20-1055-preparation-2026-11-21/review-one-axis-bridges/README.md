@@ -76,9 +76,10 @@ The separate sign/vacancy and D4 census now checks all 120 vacancy permutations
 and twenty aligned positions, retaining 29,368 assignments in 3,671 orbits.
 It uses only the paired-bridge conditions, not general-path clauses.
 
-General-path soundness must still be checked before using those clauses to prune
-a graph enumeration. Complete separation-graph enumeration, rule extraction and
-graph-to-bank coverage remain open. The source’s 273,584 graphs and 566 used
+The separate [general-path review](../review-one-axis-general-paths/README.md)
+now classifies all 29,008 local profiles, excluding 23,286 and leaving 5,722 not
+certified. Applying those local exclusions to global paths, complete separation-graph
+enumeration, rule extraction and graph-to-bank coverage remain open. The source’s 273,584 graphs and 566 used
 certificates remain producer reports.
 
 No unrestricted lower bound, angular-diversity theorem, registry value or selected

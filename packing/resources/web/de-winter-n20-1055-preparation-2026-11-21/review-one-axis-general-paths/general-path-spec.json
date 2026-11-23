@@ -1,0 +1,88 @@
+{
+  "format": "independent-one-axis-general-path-spec-v1",
+  "source": {
+    "issue": "https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337",
+    "upstream_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+    "archive_sha256": "475d7ef50e21ce4a83cfb4c8415c9e9852d619beeade5c4c8745c2c963d6c867",
+    "members_read": {
+      "geometry/one_axis_equal.md": "e83002429b3610630265d1b9a173f9f431bdf74ac874004b1a30df651a95eed5",
+      "geometry/one_axis_paths.py": "e285368bf574de9a697b990a1c538eb3f8ce97c24498d0ae4ff3065de02b8765",
+      "geometry/equal_path_polynomial.py": "35abbe0bbed597c769e65ece0141e7c72527ae99e91bf2656008c91dfd4926ae",
+      "geometry/verify_parallel.py": "9cd7cf9ac8f870ed8603c31afc3bebe78c50161b7876f745460d80ec562bfe33",
+      "geometry/check_signed_duals.py": "1138a3f0742eaaf027b1b833944a3044529e2a275253d34bf0305d694e6e12e6"
+    }
+  },
+  "first_party_reuse": {
+    "checker": "check_one_axis_bridges.py",
+    "sha256": "05be38c984078df7fc17c0444a4981c756d166b3f83743035a1ac88d6979eb16",
+    "scope": "Copy the previously independent first-party arithmetic, physical span and step-option functions as source text; no contributor helper imports.",
+    "accepted_bridge_receipt_sha256": "a8b48b5cff9b0b101174e3eb513bb3ed502c05bbfb825e1f8b376fb0c017d286",
+    "dependency": "Bridge receipt is a comparison target, not required at runtime or as a mathematical premise; the local formulas are decided afresh."
+  },
+  "domain": {
+    "half_tangent_lower": "0",
+    "half_tangent_upper": "1/24",
+    "geometry_positive_angle": true,
+    "scalar_bounds_include_zero": true,
+    "board_side": "S < 5",
+    "chain_length": 5,
+    "forward_rank_steps": "exactly one per edge",
+    "transverse_ranks": "Each r_i in {0,1,2,3,4}; adjacent differences in {-1,0,1}",
+    "signs": "Each sign in {-1,0,1}, at most one zero",
+    "coordinate_errors": "Transverse coordinate at rank r differs from nominal rank by d*eta, eta in [-r,4-r], d=(cos(theta)+sin(theta))*(cos(theta)+sin(theta)-1)",
+    "forward_separation": "All four pairs have a separating normal in the chain's forward direction.",
+    "mixed_prerequisite": "1-5d > ((1+cos(theta)+sin(theta))/2)*tan(theta/2)",
+    "vertical_frame": "Forward coordinate y and transverse rank 4-x; tilt sign unchanged."
+  },
+  "expected": {
+    "rank_profiles": 259,
+    "sign_profiles": 112,
+    "local_profiles": 29008,
+    "rank_histogram_by_jumps": {
+      "0": 5,
+      "1": 32,
+      "2": 84,
+      "3": 96,
+      "4": 42
+    },
+    "local_profile_histogram_by_jumps": {
+      "0": 560,
+      "1": 3584,
+      "2": 9408,
+      "3": 10752,
+      "4": 4704
+    },
+    "accepted_bridge_regression": {
+      "positive_cost_single_jump_profiles": 3488,
+      "normal_choices": 15696
+    },
+    "controls": 20,
+    "excluded_profile_count": "Not prescribed; derive all verdicts with complete per-profile evidence."
+  },
+  "normal_choice_order": {
+    "product": "Left-to-right Cartesian product of the four step-option lists below, as itertools.product order. Each profile retains one bound id per choice, without early stopping.",
+    "same_nonzero": "[('secant',sign)]",
+    "opposite_diagonal": "[('tilted-width',transverse_step)]",
+    "opposite_straight": "[('tilted-width',-1),('tilted-width',+1)]",
+    "aligned_mixed_favorable_diagonal": "[('mixed-inclined',nonzero_sign)]",
+    "aligned_mixed_unfavorable_diagonal": "[('mixed-flat',0)]",
+    "aligned_mixed_straight": "[('mixed-flat',0),('mixed-inclined',nonzero_sign)]",
+    "constants": "secant=1/c; tilted-width=c+s; mixed-inclined=(1+c+s)/(2c); mixed-flat=(1+c+s)/2."
+  },
+  "exclusion_rule": "Every normal choice must have all normalized Bernstein coefficients nonnegative for the trimmed-degree polynomial 2*(1-t^2)*(1+t^2)^2*(lower_span-5) on [0,1/24]. This implies span >=5 and excludes a strict S<5 board; zero polynomial is sufficient. A failed test means not certified by this predicate, not a feasible configuration.",
+  "producer_predicate_equivalence": "Producer integer Bernstein coefficient k equals 24^degree*binomial(degree,k) times the normalized coefficient, a strictly positive factor; both trim trailing zero power coefficients. No producer program is run.",
+  "limits": {
+    "workers": 1,
+    "target_wall_seconds": 30,
+    "target_peak_rss_gib": 0.15,
+    "hard_wall_seconds": 60,
+    "internal_wall_seconds": 55,
+    "sampled_tree_cost_gib": 0.25,
+    "stop_pressure": 2,
+    "max_choices_per_profile": 16,
+    "max_normal_choices": 464128,
+    "max_physical_bound_records": 8192
+  },
+  "exposure": "Reviewer read the producer theorem, path formulas, full-path generator and positivity implementation in earlier slices and this one. Arithmetic/geometry reconstruction is first-party, partly reused from the independently implemented accepted bridge checker. Not blind and not a second independent implementation relative to that first-party bridge arithmetic.",
+  "scope": "Complete conditional local general five-tile path classification for 0-4 transverse jumps only. No application to a vacancy/sign case, separation graph enumeration, rule extraction, graph-to-polynomial-bank coverage, unrestricted result or full Stage 4 acceptance."
+}

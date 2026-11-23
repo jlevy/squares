@@ -90,6 +90,7 @@ modified.
 | `review-one-axis-bridges/bridge-verification.json.gz` | receipt | `69f62be84b71b713500296344d8a6f8c629d8ccc` | `a8b48b5cff9b0b101174e3eb513bb3ed502c05bbfb825e1f8b376fb0c017d286` |
 | `review-one-axis-sign-census/sign-census.json.gz` | receipt | `ddda8efa9ec50b03d75cf444dcacc6547642dd93` | `45d16648622df9321d4ca3105bf3b2014b049e3774f3b89b3955fbd8ddd4654a` |
 | `review-one-axis-sign-census/sign-census-isolated.json.gz` | receipt | `3cd64b80b74221bfbd0302d5b1ac5af3ef1033a0` | `fc75c5853c16cc99e3cbdda6661ddcfb5a0d6d2b0698c47c9f7747351ccd96fe` |
+| `review-one-axis-general-paths/general-path-catalogue.json.gz` | receipt | `ed24a599b04023febdd50708c7b584fb7f326a9c` | `a60f45a70cb57d4e1a1e58bcbe01b1f9cf1c527fc80c0e931d7e856af22b33bb` |
 
 ## Original Gzip Files
 
@@ -103,7 +104,9 @@ The [independent one-axis polynomial-bank review](review-one-axis-bank/README.md
 now excludes all 3,488 positive-cost local profiles through 15,696 normal choices.
 The [independent sign and symmetry census](review-one-axis-sign-census/README.md)
 now checks all 2,400 vacancy/aligned-position cases, retains 29,368 assignments and
-verifies their 3,671 D4 orbits. General-path exclusions, separation graphs and
+verifies their 3,671 D4 orbits. The [general-path review](review-one-axis-general-paths/README.md)
+classifies all 29,008 local profiles: 23,286 are excluded and 5,722 are not certified.
+Application to global paths, separation-graph enumeration, rule extraction and
 graph-to-certificate coverage remain open.
 
 <!-- This document follows common-doc-guidelines.md.
