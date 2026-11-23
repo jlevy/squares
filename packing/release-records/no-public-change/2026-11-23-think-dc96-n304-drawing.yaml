@@ -6,6 +6,7 @@ components:
 paths:
   - packing/devtools/check_results.py
   - packing/devtools/default_drawings.py
+  - packing/devtools/overview_sections.py
   - packing/devtools/regularize_author_view.py
   - packing/devtools/regularize_axis_components.py
   - packing/devtools/regularize_evand.py
@@ -30,5 +31,7 @@ reason: >-
   produced byte-identical HTML before browser preparation and Markdown at a fixed link
   revision where supported. The explainer used its maintained walkthrough render with
   full_sweep disabled. Browser preparation, linked assets, and PDFs were outside this
-  comparison. The installer retry tests exercise local drawing installation. The four
-  papers keep their published editions.
+  comparison. The follow-up changes the tooltip in `_atlas_drawing`, which is called
+  only by the atlas grids on the homepage and Atlas page. The shared admission
+  measurements keep their existing behavior. The four papers keep their published
+  editions.

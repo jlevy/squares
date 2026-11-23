@@ -1120,7 +1120,8 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
     default picture, the Regularized title says it is turned to its canonical pose, and
     the Original credit stays the packing as published."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
-    from devtools.default_drawings import credit_line  # noqa: PLC0415
+    from devtools.default_drawings import credit_line, regularized_defaults  # noqa: PLC0415
+    from devtools.regularize_axis_components import EVAND_AUTHOR_CREDIT  # noqa: PLC0415
 
     page = overview_sections.atlas_grid()
     regularized = overview_sections.atlas_regularized()
@@ -1151,19 +1152,19 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         shown = re.findall(r' data-atlas-regularized-credit="([^"]*)"', drawing)[0]
         assert f' title="{shown}"' in drawing, n
         credit = html.unescape(shown)
-        assert ("Regularized by the Squares Project" in credit) is is_regularized
         original = html.unescape(
             re.findall(r' data-atlas-original-credit="([^"]*)"', drawing)[0]
         )
         assert original.startswith("Packing as published, "), n
         assert "canonical pose" not in original, n
-        drawn_as = (
-            original
-            if frontier.default_pose(n).identity
-            else original.replace(
-                "as published", "as published, turned to its canonical pose", 1
-            )
-        )
+        attribution = original.removeprefix("Packing as published, ")
+        turned = [] if frontier.default_pose(n).identity else ["turned to its canonical pose"]
+        label = "Packing as published"
+        if is_regularized:
+            label = "Regularized drawing"
+            if regularized_defaults()[n]["side"]["against_house"] == "same":
+                label += " at the published side"
+        drawn_as = ", ".join([label, *turned, attribution])
         assert credit == (f"{drawn_as}. {credit_line(n)}" if is_regularized else drawn_as), n
         titles[n] = (original, credit)
         assert "regularized" not in open_tag
@@ -1177,6 +1178,9 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         "Packing as published, John Bidwell 1998, [Kingbird]",
         "Packing as published, turned to its canonical pose, John Bidwell 1998, [Kingbird]",
     )
+
+    assert titles[304][1].startswith("Regularized drawing at the published side,")
+    assert titles[304][1].endswith(f". {EVAND_AUTHOR_CREDIT}")
 
     identical_thumbnails: set[int] = set()
     for n in regularized:

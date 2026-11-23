@@ -2085,7 +2085,7 @@ def pose_changes(m: Measured) -> list[str]:
 # --------------------------------------------------------------------------------------
 
 
-def _measure_view(
+def measure_view(
     *,
     n: int,
     witness: Mapping[str, Any],
@@ -2094,6 +2094,11 @@ def _measure_view(
     named: Sequence[int],
     of: str,
 ) -> tuple[dict[str, Any], dict[str, Any], Fraction | None, bool]:
+    """Measure identity, contacts, largest move and exact pose equality for admission.
+
+    Both the regularizer and the author-certificate importer measure the view against
+    its house frame. Contact measurements also include the currently retained view.
+    """
     side, placements, corners = view_geometry(document)
     reference = frame.side if frame.side is not None else Fraction(frame.side_text)
     measured = identity((side, placements), (reference, frame.placements), named, of)
@@ -2155,7 +2160,8 @@ def yield_to_bound(report: dict[str, Any]) -> bool:
     return True
 
 
-def _regression_count(shaded: Mapping[str, Any]) -> int:
+def regression_count(shaded: Mapping[str, Any]) -> int:
+    """Count contact losses against the house and the retained view for policy row 7."""
     current = shaded.get("against_current") or {}
     return len(shaded["regressions"]) + len(current.get("regressions") or [])
 
@@ -2373,7 +2379,7 @@ def _run_stages(
         block["minus_U"] = f"{bound.difference(side):.3e}" if bound is not None else None
         fields: dict[str, Any] = {}
         if name == chosen or relation != "solved":
-            ident, shaded, move, equal = _measure_view(
+            ident, shaded, move, equal = measure_view(
                 n=n, witness=witness, frame=frame, document=document, named=named, of=name
             )
             if name == chosen:
@@ -2386,7 +2392,7 @@ def _run_stages(
                 "pose_equals_witness": equal,
                 "one_to_one": bool(ident["one_to_one"]),
                 "unnamed_turns": tuple(ident.get("unnamed_turns") or ()),
-                "regressions": _regression_count(shaded),
+                "regressions": regression_count(shaded),
                 "totals_fall": totals_fall(shaded),
                 "max_move": move,
             }
@@ -2775,7 +2781,7 @@ def measured_from_report(report: Mapping[str, Any], name: Output) -> Measured:
             "pose_equals_witness": bool(equal),
             "one_to_one": bool(ident.get("one_to_one")),
             "unnamed_turns": tuple(ident.get("unnamed_turns") or ()),
-            "regressions": _regression_count(shaded),
+            "regressions": regression_count(shaded),
             "totals_fall": totals_fall(shaded),
             "max_move": move,
         }
@@ -3211,7 +3217,7 @@ def evand_admitted(
                 for rule in RULE_NAMES
             },
             "symmetry": int(ident.get("symmetry") or 0),
-            "regressions": _regression_count(shaded) if shaded else 0,
+            "regressions": regression_count(shaded) if shaded else 0,
             "level": regularized.get("level"),
             "groups": [
                 int(regularized["groups_before"]),

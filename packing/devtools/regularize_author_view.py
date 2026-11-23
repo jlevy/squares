@@ -208,10 +208,10 @@ def candidate(entry: Mapping[str, Any]) -> tuple[driver.Admitted, dict[str, Any]
 
     # Row 10 reads the author settings along with the measured identity and contacts.
     # Here `same` labels the exact side for the table. It does not claim a re-solve.
-    ident, contacts, move, equal = driver._measure_view(  # noqa: SLF001 -- same admission measurements
+    ident, contacts, move, equal = driver.measure_view(
         n=N, witness=house, frame=frame, document=view, named=(), of=OUTPUT
     )
-    regressions = driver._regression_count(contacts)  # noqa: SLF001 -- shared row 7 input
+    regressions = driver.regression_count(contacts)
     decision = driver.classify(
         driver.Measured(
             "same",

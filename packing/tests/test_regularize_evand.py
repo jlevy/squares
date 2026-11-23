@@ -2199,7 +2199,7 @@ def test_layer_decides_the_view_it_writes_rather_than_identifying_its_bytes(
         raise KeyboardInterrupt
 
     with monkeypatch.context() as patch:
-        patch.setattr(drive, "_measure_view", killed)
+        patch.setattr(drive, "measure_view", killed)
         with pytest.raises(KeyboardInterrupt):
             drive.run_count(26, Options(run_dir=run_dir, from_stage="import"))
     assert not (directory / "report.json").exists()
