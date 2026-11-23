@@ -36487,7 +36487,6 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
-      beads: [think-j9f4]
     close_when: >-
       T-305 to T-309 are on main with the stage 4 review mapped and each adopted as its case's
       house, and the reply on main says what was retained, replayed and reviewed and that the
@@ -39684,7 +39683,6 @@ issues:
       kind: follow-up
       reported:
       - result: thirteen-rational-enclosures
-      beads: [think-3iqa]
     close_when: The intake record gives the disposition and a reply records it on GitHub.
     notes: >-
       The exact feasibility and pose comparison receipts are indexed in
