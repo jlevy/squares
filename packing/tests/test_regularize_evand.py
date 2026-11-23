@@ -28,8 +28,10 @@ import mpmath
 import pytest
 from jsonschema import Draft202012Validator
 
+from devtools import regularize_author_view as author
 from devtools import regularize_axis_components as axis
 from devtools import regularize_evand as drive
+from devtools import render_regularized_atlas as drawings
 from devtools.regularize_axis_components import AtlasLayout
 from devtools.regularize_evand import Decision, Measured, Options, classify
 from devtools.retained_data import git_blob
@@ -2437,3 +2439,130 @@ def test_the_index_records_a_view_without_the_pairing() -> None:
     assert list(identity.iter_errors(paired))
     measured = {**paired, "moved": 3, "max_move": 0.125, "max_turn_deg": 0.0}
     assert list(identity.iter_errors(measured)) == []
+
+
+def test_author_view_keeps_its_source_geometry_and_credit() -> None:
+    entry = next(item for item in drawings.regularized_entries() if item["n"] == author.N)
+    assert entry["generator"] == axis.EVAND_AUTHOR_GENERATOR
+    assert entry["run"] == {"id": author.RUN, "output": author.OUTPUT}
+    assert entry["side"]["relation"] == "same"
+    assert entry["regularization"]["by"] == axis.EVAND_AUTHOR_SOURCE_KEY
+    assert entry["decision"]["row"] == axis.ADMITTING_ROW
+    assert entry["exact_verification"]["half_angle"] is True
+    view = drawings.view_witness(entry)
+    assert view["certificate"]["credit"] == axis.EVAND_AUTHOR_CREDIT
+    assert not author.source_problems(author.REPO, view)
+    view["squares"][0]["center"][0] = "0"
+    assert author.source_problems(author.REPO, view) == [
+        "n=304: author view changes the certificate's squares"
+    ]
+
+
+def test_admission_receipt_records_both_exact_routes_and_every_visual_gain() -> None:
+    receipt = drive.read_json(author.REPO / author.RECEIPT)
+    assert receipt["run"]["parameters"]["admission_receipt"] == author.RECEIPT.as_posix()
+    for route in ("repository_verifier", "independent_checker"):
+        check = receipt["fresh_gmp_checks"][route]
+        assert check["verification_passed"]
+        assert check["pairs_tested"] == 46_056
+        assert check["side"] == receipt["side"]["view"]
+    half_angle = receipt["half_angle_check"]
+    assert half_angle["passed"]
+    assert half_angle["pairs"] == 46_056
+    assert half_angle["side"] == receipt["side"]["view"]
+    comparison = receipt["comparison"]
+    assert len(comparison["gains"]) == 7
+    assert not comparison["losses"]
+    assert not receipt["contacts"]["regressions"]
+    assert not receipt["contacts"]["against_current"]["regressions"]
+
+
+@pytest.mark.parametrize("interrupted_after", ["view", "index"])
+def test_update_recovers_interrupted_install(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, interrupted_after: str
+) -> None:
+    monkeypatch.setattr(author, "REPO", tmp_path)
+    view = tmp_path / "n304.yaml.gz"
+    backup = view.with_name(f".{view.name}.before-author-install")
+    old = b"witness: {side: 1}\n"
+    new = (
+        "witness:\n  side: 1\n  certificate:\n"
+        f"    generator: {axis.EVAND_AUTHOR_GENERATOR}\n    run: {author.RUN}\n"
+    ).encode()
+    view.write_bytes(gzip.compress(old, mtime=0))
+    index = tmp_path / drive.LAYER_INDEX_PATH
+    prior = {"path": view.name, "sha256": axis.digest(old)}
+    previous_entry = {"n": author.N, "generator": axis.ALGORITHM, "view": prior}
+    author_entry = {
+        **previous_entry,
+        "generator": axis.EVAND_AUTHOR_GENERATOR,
+        "view": {"path": view.name, "sha256": axis.digest(new)},
+    }
+    drive.write_json(index, {"entries": [previous_entry]})
+
+    def measured(entry: dict) -> tuple[None, dict]:
+        before = entry["generator"] == axis.ALGORITHM
+        assert gzip.decompress(view.read_bytes()) == (old if before else new)
+        return None, {
+            "source": {"certificate": "retained.cert"},
+            "house": {"id": "n304"},
+            "prior_view": entry["view"],
+            "side": {"view": "1"},
+            "identity": {"one_to_one": True},
+            "contacts": {"regressions": []},
+            "decision": {"row": 10, "decision": "admit"},
+            "half_angle_check": {"passed": True},
+            "comparison": {
+                "before": {"hues": 13 if before else 7},
+                "after": {"hues": 7},
+                "gains": ["hues"] if before else [],
+                "losses": [],
+            },
+        }
+
+    installs = []
+
+    def install(_candidates, _root, *, generators, runs):
+        assert axis.EVAND_AUTHOR_GENERATOR in generators
+        assert backup.is_file()
+        assert (tmp_path / author.RECEIPT).is_file()
+        installs.append(runs[0])
+        view.write_bytes(gzip.compress(new, mtime=0))
+        if len(installs) == 1 and interrupted_after == "view":
+            raise OSError("interrupted after replacing the view")
+        drive.write_json(index, {"entries": [author_entry]})
+        if len(installs) == 1:
+            raise OSError("interrupted after replacing the index")
+        return {"written": [author.N]}
+
+    monkeypatch.setattr(author, "candidate", measured)
+    monkeypatch.setattr(author, "source_problems", lambda _repo, _view: [])
+    monkeypatch.setattr(drive, "admit_views", install)
+    with pytest.raises(OSError, match="interrupted"):
+        author.main(["--update"])
+    receipt_path = tmp_path / author.RECEIPT
+    first_receipt = receipt_path.read_bytes()
+    assert gzip.decompress(backup.read_bytes()) == old
+    assert gzip.decompress(view.read_bytes()) == new
+    if interrupted_after == "view":
+        altered = drive.read_json(receipt_path)
+        altered["comparison"]["before"]["hues"] = 14
+        drive.write_json(receipt_path, altered)
+        with pytest.raises(ValueError, match="original admission receipt"):
+            author.main(["--update"])
+        assert gzip.decompress(backup.read_bytes()) == old
+        assert gzip.decompress(view.read_bytes()) == old
+        assert drive.read_json(index)["entries"] == [previous_entry]
+        receipt_path.write_bytes(first_receipt)
+    assert author.main(["--update"]) == 0
+    assert not backup.exists()
+    assert drive.read_json(index)["entries"] == [author_entry]
+    assert gzip.decompress(view.read_bytes()) == new
+    assert receipt_path.read_bytes() == first_receipt
+    assert all(run == installs[0] for run in installs)
+    assert len(installs) == (2 if interrupted_after == "view" else 1)
+    assert author.main(["--update"]) == 0
+    assert receipt_path.read_bytes() == first_receipt
+    receipt_path.unlink()
+    with pytest.raises(FileNotFoundError, match=r"admission\.json"):
+        author.main(["--update"])

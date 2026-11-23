@@ -9,6 +9,7 @@ admission receipt. The original certificate and review stay in the source archiv
 from __future__ import annotations
 
 import argparse
+import gzip
 import json
 import math
 import time
@@ -17,6 +18,8 @@ from dataclasses import asdict
 from hashlib import sha256
 from pathlib import Path
 from typing import Any
+
+from strif import atomic_output_file
 
 from devtools import census_drawing_regularity as census
 from devtools import check_half_angle_area as area
@@ -113,11 +116,51 @@ def source_problems(root: Path, view: Mapping[str, Any]) -> list[str]:
     return problems
 
 
-def candidate() -> tuple[driver.Admitted, dict[str, Any]]:
+def current_entry() -> dict[str, Any]:
+    index = driver.read_json(REPO / driver.LAYER_INDEX_PATH)
+    return next(row for row in index["entries"] if row["n"] == N)
+
+
+def restore_previous(view: Path, backup: Path, prior_view: Mapping[str, str]) -> None:
+    """Recover the view named by the old index after an interrupted author install."""
+    original = backup.read_bytes()
+    if axis.digest(gzip.decompress(original)) != prior_view["sha256"]:
+        raise ValueError("the n304 recovery copy does not match the atlas index")
+    installed = view.read_bytes()
+    if installed == original:
+        return
+    interrupted = load_yaml(gzip.decompress(installed).decode("utf-8"))["witness"]
+    certificate = interrupted.get("certificate") or {}
+    if (
+        certificate.get("generator") != axis.EVAND_AUTHOR_GENERATOR
+        or certificate.get("run") != RUN
+        or source_problems(REPO, interrupted)
+    ):
+        raise ValueError("the n304 recovery copy would replace an unrelated drawing")
+    with atomic_output_file(view) as temporary:
+        temporary.write_bytes(original)
+
+
+def original_receipt(measured: Mapping[str, Any], *, recovering: bool) -> dict[str, Any]:
+    """Hold the saved receipt to the author, house and fresh admission measurements."""
+    original = driver.read_json(REPO / RECEIPT)
+    keys = ("source", "house", "side", "identity")
+    if recovering:
+        keys = (*keys, "prior_view", "comparison", "contacts", "decision")
+    if (
+        any(original.get(key) != measured[key] for key in keys)
+        or (original.get("run") or {}).get("id") != RUN
+        or not (original.get("half_angle_check") or {}).get("passed")
+        or not (original.get("comparison") or {}).get("gains")
+        or original["comparison"]["after"] != measured["comparison"]["after"]
+    ):
+        raise ValueError("the author view needs its original admission receipt")
+    return original
+
+
+def candidate(entry: Mapping[str, Any]) -> tuple[driver.Admitted, dict[str, Any]]:
     """Check the exact side and all three required routes, then apply selection."""
     certificate, report, provenance, raw = retained_source(REPO)
-    index = driver.read_json(REPO / driver.LAYER_INDEX_PATH)
-    entry = next(row for row in index["entries"] if row["n"] == N)
     reference = entry.get("reference") or entry
     source = reference["source"]
     house = load_yaml((REPO / source["witness"]).read_text(encoding="utf-8"))["witness"]
@@ -264,6 +307,7 @@ def candidate() -> tuple[driver.Admitted, dict[str, Any]]:
         "n": N,
         "source": provenance,
         "house": source,
+        "prior_view": entry["view"],
         "side": admitted.side,
         "author_settings": {
             key: report[key]
@@ -291,20 +335,29 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
     started, cpu = time.perf_counter(), time.process_time()
-    admitted, receipt = candidate()
+    entry = current_entry()
+    view = REPO / entry["view"]["path"]
+    backup = view.with_name(f".{view.name}.before-author-install")
+    recovering = (
+        args.update and backup.is_file() and entry["generator"] != axis.EVAND_AUTHOR_GENERATOR
+    )
+    if recovering:
+        restore_previous(view, backup, entry["view"])
+    admitted, receipt = candidate(entry)
     if not args.update:
         print(json.dumps(receipt, indent=2, default=str))
         return 0
     if not receipt["comparison"]["gains"]:
-        retained = driver.read_json(REPO / RECEIPT)
-        if (
-            retained.get("source") != receipt["source"]
-            or retained.get("house") != receipt["house"]
-            or (retained.get("run") or {}).get("id") != RUN
-            or not (retained.get("comparison") or {}).get("gains")
-            or not (retained.get("half_angle_check") or {}).get("passed")
-        ):
-            raise ValueError("the published author view needs its original admission receipt")
+        retained = original_receipt(receipt, recovering=False)
+        if backup.is_file():
+            if axis.digest(gzip.decompress(view.read_bytes())) != entry["view"]["sha256"]:
+                raise ValueError("the installed author drawing does not match the atlas index")
+            if (
+                axis.digest(gzip.decompress(backup.read_bytes()))
+                != retained["prior_view"]["sha256"]
+            ):
+                raise ValueError("unexpected n304 recovery copy after installation")
+            backup.unlink()
         print(f"n={N}: the original author drawing and admission receipt are already published")
         return 0
     generators = {
@@ -338,12 +391,23 @@ def main(argv: Sequence[str] | None = None) -> int:
             ),
         },
     }
-    # Preserve the prior drawing's comparison before the layer can replace its bytes.
-    receipt["run"] = run
-    driver.write_json(REPO / RECEIPT, receipt)
+    # The shared installer writes the view before the index. Keep the incumbent for
+    # recovery until both writes succeed, and retain its measured comparison first.
+    if not recovering:
+        original = view.read_bytes()
+        if axis.digest(gzip.decompress(original)) != entry["view"]["sha256"]:
+            raise ValueError("the current atlas drawing does not match its index")
+        with atomic_output_file(backup) as temporary:
+            temporary.write_bytes(original)
+    if recovering and (REPO / RECEIPT).is_file():
+        run = original_receipt(receipt, recovering=True)["run"]
+    else:
+        receipt["run"] = run
+        driver.write_json(REPO / RECEIPT, receipt)
     published = driver.admit_views([admitted], REPO, generators=generators, runs=[run])
     if published["written"] != [N]:
         raise ValueError(f"the layer refused the author view: {published}")
+    backup.unlink()
     print(f"n={N}: published the author certificate and admission receipt")
     return 0
 

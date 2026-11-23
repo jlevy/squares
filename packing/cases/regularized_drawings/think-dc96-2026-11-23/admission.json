@@ -14,6 +14,10 @@
   "scalar_kind": "rational",
   "sha256": "ad55d74bdcc417bfd9d0b4d584279e7e97986b2d493df78fc66e248d38b32ed3"
  },
+ "prior_view": {
+  "path": "packing/atlas/known-best/regularized/n-304-regularized.yaml.gz",
+  "sha256": "a3991a7dfb9a61b5fac950830df12132dc5b99bc0b389c7d31df58769052bb91"
+ },
  "side": {
   "reported": "17.920944093340242061198022152503",
   "view": "17920944093340242061198022152503/1000000000000000000000000000000",
