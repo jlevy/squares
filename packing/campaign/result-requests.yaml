@@ -39359,9 +39359,13 @@ issues:
         census checks all 2,400 vacancy/aligned-position cases and 29,368 sign assignments,
         verifies 234,944 D4 images and 3,671 orbits, and passes 12 controls. The independent
         general-path checker classifies 29,008 local profiles through 67,626 normal choices:
-        23,286 are excluded and 5,722 are not certified; all 20 controls pass. Application
-        to global paths, separation-graph enumeration, rule extraction and graph-to-certificate
-        coverage remain open; these restricted checks do not accept the full theorem.
+        23,286 are excluded and 5,722 are not certified; all 20 controls pass. A separate
+        covariance audit checks 18,128 occupied paths, 960 D4 geometry maps and 58,016 local
+        profile comparisons with 13 controls. A complete case-to-clause audit binds all
+        3,671 canonical cases to 554,159 path applications: 339,191 are excluded and 214,968
+        remain not certified; its 13 controls pass. Complete separation-graph enumeration,
+        geometric rule extraction and graph-to-certificate coverage remain open; these
+        restricted checks do not accept the full theorem.
       queued: true
       bead: think-guls
     beads:

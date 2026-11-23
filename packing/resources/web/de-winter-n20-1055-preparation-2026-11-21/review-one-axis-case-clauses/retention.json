@@ -1,0 +1,56 @@
+{
+  "format": "one-axis-case-clause-portable-retention-v1",
+  "preparation_base": "9d941fb44e7451de58bf9d47ee6f32f213d0c3b9",
+  "scope": "Complete canonical-case to path/profile/clause application; no graph enumeration, bank coverage or theorem promotion.",
+  "receipt": {
+    "original_bytes": 24888016,
+    "original_sha256": "d7dd3ba492405d5b9a61dbd6a18a21164dc9c18b9b1b64d6d4633de6c9f40237",
+    "original_git_blob": "731a840b602de44262fd81b2537642f6186313ef",
+    "stored_bytes": 785142,
+    "stored_sha256": "916f3c5692170312257d014126b6f64a4154648f0b474040ca7c771a97785808",
+    "compression": "unchanged original deterministic gzip"
+  },
+  "raw_roundtrip_verified": true,
+  "frozen_name_resolution": [
+    {
+      "original_local_name": "check_case_clauses.py",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-case-clauses/checker.py.txt"
+    },
+    {
+      "original_local_name": "general-path-catalogue.json.gz",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-general-paths/general-path-catalogue.json.gz"
+    },
+    {
+      "original_local_name": "sign-census-isolated.json.gz",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-sign-census/sign-census-isolated.json.gz"
+    },
+    {
+      "original_local_name": "path-covariance.json",
+      "maintained_repository_path": "packing/resources/web/de-winter-n20-1055-preparation-2026-11-21/review-one-axis-path-covariance/path-covariance.json.gz"
+    }
+  ],
+  "compressed_covariance_supported_by_unchanged_checker": true,
+  "accepted_input_bytes_duplicated": false,
+  "source_freeze_unchanged": true,
+  "counts": {
+    "canonical_cases": 3671,
+    "full_census_cases": 29368,
+    "path_applications": 554159,
+    "excluded_origins_and_clauses": 339191,
+    "not_certified_origins": 214968,
+    "horizontal_exclusions": 160115,
+    "vertical_exclusions": 179076,
+    "controls": 13
+  },
+  "execution": {
+    "worker_exit": 0,
+    "guard_exit": 0,
+    "supervised_seconds": 7.199,
+    "worker_seconds": 6.886745374999009,
+    "worker_peak_rss_bytes": 139329536,
+    "guard_samples": 7,
+    "maximum_pressure": 1,
+    "maximum_sampled_tree_gib": 0.12,
+    "interventions": 0
+  }
+}

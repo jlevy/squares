@@ -1,0 +1,58 @@
+{
+  "format": "independent-one-axis-case-clauses-freeze-v1",
+  "status": "prepared-before-first-execution",
+  "files": {
+    "check_case_clauses.py": {
+      "bytes": 21343,
+      "sha256": "2e544a7f6a1d3613d6ca4875887c62947461ad39a7e7c930b5d321c402cc9b59"
+    },
+    "frozen-plan.md": {
+      "bytes": 9207,
+      "sha256": "aadb67e695078bfafaff562d6e1d27ce7738f11188f3a66180687b512c18e794"
+    },
+    "general-path-catalogue.json.gz": {
+      "bytes": 444111,
+      "sha256": "32182f37724fe649925fdbf1710d69f42fe64ac42ab892f7ea571f10e581d17c",
+      "raw_bytes": 14993939,
+      "raw_sha256": "a60f45a70cb57d4e1a1e58bcbe01b1f9cf1c527fc80c0e931d7e856af22b33bb"
+    },
+    "sign-census-isolated.json.gz": {
+      "bytes": 254142,
+      "sha256": "0de4663e15d78c96c9ebe7ff64afa8d3059b7596ca61c904c1f214e0392532c7",
+      "raw_bytes": 5981113,
+      "raw_sha256": "fc75c5853c16cc99e3cbdda6661ddcfb5a0d6d2b0698c47c9f7747351ccd96fe"
+    },
+    "path-covariance.json": {
+      "bytes": 1489518,
+      "sha256": "2a9a4d4df1c2e42b345225ebb1dfc5417c3a121e1562056e3a2d30456a533a90"
+    }
+  },
+  "expected": {
+    "canonical_cases": 3671,
+    "full_census_cases": 29368,
+    "representative_D4_images": 29368,
+    "geometry_vacancies": 120,
+    "accepted_geometry_paths": 18128,
+    "local_profiles": 29008,
+    "excluded_local_profiles": 23286,
+    "not_certified_local_profiles": 5722,
+    "controls": 13
+  },
+  "limits": {
+    "workers": 1,
+    "admission_pressure": 1,
+    "stop_pressure": 2,
+    "supervised_wall_seconds": 90,
+    "internal_wall_seconds": 85,
+    "owned_tree_gib": 0.35,
+    "internal_worker_peak_rss_gib": 0.33,
+    "target_wall_seconds": 30,
+    "target_worker_rss_gib": 0.2,
+    "path_applications_cap": 1901578,
+    "raw_output_bytes": 67108864,
+    "gzip_output_bytes": 16777216,
+    "one_case_bytes": 262144
+  },
+  "input_trust": "Accepted first-party data receipts only; no producer imports or execution.",
+  "scope": "Case-to-path/profile/clause binding only; no graph enumeration, bank application or theorem promotion."
+}

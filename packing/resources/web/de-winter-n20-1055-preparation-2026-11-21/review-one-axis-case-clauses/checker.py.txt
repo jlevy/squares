@@ -1,0 +1,435 @@
+"""Bind every accepted canonical one-axis case to local paths and exclusion clauses."""
+import argparse
+from collections import Counter, defaultdict
+import gzip
+import hashlib
+import itertools
+import json
+import os
+from pathlib import Path
+import resource
+import sys
+import tempfile
+import time
+
+INPUTS = {
+    "catalogue": ("a60f45a70cb57d4e1a1e58bcbe01b1f9cf1c527fc80c0e931d7e856af22b33bb", 14993939, 32*1024*1024),
+    "census": ("fc75c5853c16cc99e3cbdda6661ddcfb5a0d6d2b0698c47c9f7747351ccd96fe", 5981113, 8*1024*1024),
+    "covariance": ("2a9a4d4df1c2e42b345225ebb1dfc5417c3a121e1562056e3a2d30456a533a90", 1489518, 4*1024*1024),
+}
+MAX_RAW_OUTPUT = 64*1024*1024
+MAX_GZIP_OUTPUT = 16*1024*1024
+MAX_CASE_BYTES = 256*1024
+MAX_PATH_LOOKUPS = 1901578
+
+
+class Refusal(Exception):
+    pass
+
+
+def require(condition, code):
+    if not condition:
+        raise Refusal(code)
+
+
+def encoded(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+
+
+def peak_rss():
+    return resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * (1 if sys.platform == "darwin" else 1024)
+
+
+def budget(started):
+    require(time.monotonic()-started < 85, "internal-wall-cap")
+    require(peak_rss() <= int(0.33*2**30), "worker-rss-cap")
+
+
+def read_input(path, name):
+    expected_hash, expected_bytes, maximum = INPUTS[name]
+    opener = gzip.open if path.suffix == ".gz" else open
+    with opener(path, "rb") as stream:
+        raw = stream.read(maximum+1)
+    require(len(raw) <= maximum, name+"-expanded-size-cap")
+    require(len(raw) == expected_bytes, name+"-byte-count")
+    require(hashlib.sha256(raw).hexdigest() == expected_hash, name+"-digest")
+    return json.loads(raw)
+
+
+def signs(mask, zero):
+    require(type(mask) is int and 0 <= mask < 1 << 20, "sign-mask-domain")
+    require(type(zero) is int and 0 <= zero < 20, "aligned-domain")
+    require(not mask >> zero & 1, "aligned-bit-set")
+    return tuple(0 if i == zero else 1 if mask >> i & 1 else -1 for i in range(20))
+
+
+def case_key(row):
+    vacancy = tuple(row["vacancy"])
+    require(sorted(vacancy) == list(range(5)), "vacancy-domain")
+    mask, zero = row["sign_mask"], row["aligned_index"]
+    signs(mask, zero)
+    return vacancy, mask, zero
+
+
+def add_unique(table, key, value, error):
+    require(key not in table, error)
+    table[key] = value
+
+
+def catalogue(data):
+    require(data["status"] == "complete-local-general-path-classification", "catalogue-status")
+    table = {}
+    decisions = []
+    for i, row in enumerate(data["profiles"]):
+        key = tuple(row["ranks"]), tuple(row["signs"])
+        require(row["index"] == i, "local-profile-index")
+        decision = row["excluded_from_strict_subfive_board"]
+        require(type(decision) is bool, "local-decision-type")
+        require(row["verdict"] == ("excluded" if decision else "not-certified-by-this-Bernstein-test"),
+                "local-decision-text")
+        add_unique(table, key, (i, decision), "duplicate-local-profile")
+        decisions.append(decision)
+    ranks = [r for r in itertools.product(range(5), repeat=5)
+             if all(abs(a-b) <= 1 for a, b in zip(r, r[1:]))]
+    local_signs = [s for s in itertools.product((-1, 0, 1), repeat=5) if s.count(0) <= 1]
+    require(len(ranks) == 259 and len(local_signs) == 112, "local-domain-size")
+    require(set(table) == {(r, s) for r in ranks for s in local_signs}, "complete-local-domain")
+    require(Counter(decisions) == {True: 23286, False: 5722}, "local-verdict-counts")
+    return table, decisions
+
+
+def census(data):
+    require(data["status"] == "complete-paired-bridge-sign-census-and-D4-orbits", "census-status")
+    representatives = [case_key(row) for row in data["representatives"]]
+    require(len(representatives) == 3671, "canonical-case-count")
+    require(representatives == sorted(set(representatives)), "canonical-order-uniqueness")
+    roster = {}
+    for row in data["roster"]:
+        orbit = row["orbit_index"]
+        require(type(orbit) is int and 0 <= orbit < 3671, "orbit-index-domain")
+        add_unique(roster, case_key(row), orbit, "duplicate-census-case")
+    require(len(roster) == 29368, "full-census-count")
+    for i, case in enumerate(representatives):
+        require(roster.get(case) == i, "representative-orbit-binding")
+    return representatives, roster
+
+
+def geometry(data):
+    require(data["status"] == "complete-geometry-and-local-covariance-audit", "covariance-status")
+    require(data["input_raw_sha256"] == INPUTS["catalogue"][0], "covariance-catalogue-binding")
+    geometries = {}
+    for row in data["geometries"]:
+        vacancy = tuple(row["vacancy"])
+        cells = tuple(map(tuple, row["cells"]))
+        expected_cells = tuple((x, y) for x in range(5) for y in range(5) if vacancy[x] != y)
+        require(cells == expected_cells, "occupied-cell-order")
+        index = {point: i for i, point in enumerate(cells)}
+        edges = tuple(map(tuple, row["edges"]))
+        expected_edges = tuple((i, j) for i, j in itertools.combinations(range(20), 2)
+                               if abs(cells[i][0]-cells[j][0]) == abs(cells[i][1]-cells[j][1]) == 1)
+        require(edges == expected_edges, "diagonal-edge-order")
+        edge_index = {edge: i for i, edge in enumerate(edges)}
+        paths = []
+        for axis, positions, ranks, mask in row["paths"]:
+            positions, ranks = tuple(positions), tuple(ranks)
+            require(axis in (0, 1) and len(positions) == len(ranks) == 5, "path-shape")
+            coordinates = tuple(cells[i] for i in positions)
+            require(tuple(point[axis] for point in coordinates) == tuple(range(5)), "path-forward-ranks")
+            independently_located = tuple(index[(k, ranks[k]) if axis == 0 else (4-ranks[k], k)]
+                                          for k in range(5))
+            require(independently_located == positions, "rank-cell-binding")
+            require(all(abs(a-b) <= 1 for a, b in zip(ranks, ranks[1:])), "path-step-domain")
+            literals = []
+            for a, b, i, j in zip(coordinates, coordinates[1:], positions, positions[1:]):
+                if a[0] != b[0] and a[1] != b[1]:
+                    literals.append(edge_index[tuple(sorted((i, j)))])
+            rebuilt = sum(1 << edge for edge in literals)
+            require(len(set(literals)) == len(literals) and rebuilt == mask and mask != 0,
+                    "path-mask-binding")
+            paths.append((axis, positions, ranks, mask, independently_located))
+        require(len(paths) <= 518, "path-count-bound")
+        add_unique(geometries, vacancy, (cells, edges, tuple(paths)), "duplicate-vacancy")
+    require(set(geometries) == set(itertools.permutations(range(5))), "geometry-vacancy-roster")
+    require(sum(len(g[2]) for g in geometries.values()) == 18128, "accepted-path-count")
+    transformations = defaultdict(list)
+    seen = set()
+    for row in data["D4_maps"]:
+        p, target = tuple(row["source_vacancy"]), tuple(row["target_vacancy"])
+        key = p, row["quarter_turns"], row["mirror_x_after_rotation"]
+        require(key not in seen, "duplicate-D4-map")
+        seen.add(key)
+        mapping = tuple(row["cell_permutation"])
+        require(set(mapping) == set(range(20)), "cell-permutation")
+        require(row["negate_tilt_signs"] == row["mirror_x_after_rotation"], "D4-tilt-flag")
+        require(target in geometries, "D4-target-geometry")
+        transformations[p].append((target, mapping, row["negate_tilt_signs"]))
+    require(len(seen) == 960 and all(len(transformations[p]) == 8 for p in geometries), "D4-map-count")
+    return geometries, transformations
+
+
+def transform_case(case, transformation):
+    p, mask, zero = case
+    target, mapping, negate = transformation
+    original = signs(mask, zero)
+    transformed = [None] * 20
+    for i, destination in enumerate(mapping):
+        transformed[destination] = -original[i] if negate else original[i]
+    target_zero = mapping[zero]
+    target_mask = sum(1 << i for i, value in enumerate(transformed) if value == 1)
+    require(signs(target_mask, target_zero) == tuple(transformed), "transformed-sign-binding")
+    return target, target_mask, target_zero
+
+
+def check_orbits(representatives, roster, transformations, started):
+    covered = set()
+    image_digest = hashlib.sha256()
+    for i, case in enumerate(representatives):
+        budget(started)
+        images = {transform_case(case, transform) for transform in transformations[case[0]]}
+        require(len(images) == 8 and min(images) == case, "canonical-orbit")
+        require(not covered.intersection(images), "overlapping-orbits")
+        for image in sorted(images):
+            require(roster.get(image) == i, "census-orbit-image")
+            image_digest.update(encoded([i, image]) + b"\n")
+        covered.update(images)
+    require(covered == set(roster), "incomplete-orbit-coverage")
+    return image_digest.hexdigest()
+
+
+def lookup(table, ranks, local_signs):
+    require((ranks, local_signs) in table, "missing-local-profile")
+    return table[(ranks, local_signs)]
+
+
+def exclusion(axis, mask, decision):
+    if not decision:
+        return None
+    return (0, mask) if axis == 0 else (mask, 0)
+
+
+def validate_origins(actual, expected):
+    require(actual == expected, "clause-origin-binding")
+
+
+def controls(table):
+    outcomes = []
+
+    def positive(name, condition):
+        require(condition, "control-" + name)
+        outcomes.append({"control": name, "expected": "accept", "passed": True})
+
+    def refusal(name, operation, expected):
+        try:
+            operation()
+        except Refusal as error:
+            require(str(error) == expected, "unexpected-control-refusal")
+            outcomes.append({"control": name, "expected": "refuse", "refusal": expected, "passed": True})
+        else:
+            raise Refusal("control-false-acceptance-" + name)
+
+    positive("aligned-decoding", signs(5, 1)[:4] == (1, 0, 1, -1))
+    refusal("aligned-positive-bit", lambda: signs(2, 1), "aligned-bit-set")
+    refusal("out-of-range-mask", lambda: signs(1 << 20, 1), "sign-mask-domain")
+    refusal("out-of-range-aligned-index", lambda: signs(0, 20), "aligned-domain")
+    refusal("duplicate-case", lambda: add_unique({(1,): 0}, (1,), 1, "duplicate-census-case"),
+            "duplicate-census-case")
+    key = (tuple(range(5)), (1,)*5)
+    positive("known-not-certified", table[key][1] is False)
+    refusal("missing-profile", lambda: lookup({}, *key), "missing-local-profile")
+    positive("not-certified-adds-no-clause", exclusion(0, 1, False) is None)
+    positive("horizontal-negative-polarity", exclusion(0, 5, True) == (0, 5))
+    positive("vertical-positive-polarity", exclusion(1, 5, True) == (5, 0))
+    refusal("lost-path-origin", lambda: validate_origins({(0, 5): [0]}, {(0, 5): [0, 1]}),
+            "clause-origin-binding")
+    refusal("reversed-clause-polarity", lambda: validate_origins({(5, 0): [0]}, {(0, 5): [0]}),
+            "clause-origin-binding")
+    synthetic = ((0, 1, 2, 3, 4), 1, 1)
+    reflection = ((0, 1, 2, 3, 4), tuple(reversed(range(20))), True)
+    image = transform_case(synthetic, reflection)
+    positive("aligned-position-and-reflection-sign", image[2] == 18
+             and image[1] == ((1 << 20)-1) ^ (1 << 18) ^ (1 << 19))
+    require(len(outcomes) == 13, "control-count")
+    return outcomes
+
+
+def apply_case(number, case, geometry_row, table, decisions):
+    vacancy, mask, zero = case
+    cells, edges, paths = geometry_row
+    global_signs = signs(mask, zero)
+    by_coordinate = {point: global_signs[i] for i, point in enumerate(cells)}
+    profiles = []
+    groups = defaultdict(list)
+    independently_grouped = defaultdict(list)
+    excluded_count = 0
+    for path_id, (axis, positions, ranks, edge_mask, located) in enumerate(paths):
+        selected = tuple(global_signs[i] for i in positions)
+        selected_by_coordinates = tuple(by_coordinate[(k, ranks[k]) if axis == 0 else (4-ranks[k], k)]
+                                        for k in range(5))
+        require(selected == selected_by_coordinates and selected.count(0) <= 1, "path-sign-binding")
+        profile_id, decision = lookup(table, ranks, selected)
+        require(decisions[profile_id] == decision, "profile-decision-binding")
+        profiles.append(profile_id)
+        value = exclusion(axis, edge_mask, decision)
+        if value is not None:
+            excluded_count += 1
+            groups[value].append(path_id)
+        # Reconstruct the literal pair from physical endpoint pairs, without the stored mask.
+        if decision:
+            used = set()
+            pairs = {tuple(sorted((a, b))) for a, b in zip(located, located[1:])}
+            for edge_id, endpoints in enumerate(edges):
+                if endpoints in pairs:
+                    used.add(edge_id)
+            direct_mask = sum(1 << i for i in used)
+            direct_pair = (direct_mask, 0) if axis == 1 else (0, direct_mask)
+            independently_grouped[direct_pair].append(path_id)
+    validate_origins(dict(groups), dict(independently_grouped))
+    flattened = [p for origins in groups.values() for p in origins]
+    require(len(flattened) == len(set(flattened)) == excluded_count, "exclusion-origin-partition")
+    require(set(flattened) == {p for p, profile_id in enumerate(profiles) if decisions[profile_id]},
+            "complete-excluded-origin-roster")
+    clauses = [{"positive_mask": positive, "negative_mask": negative, "path_origins": origins}
+               for (positive, negative), origins in sorted(groups.items())]
+    return {"case_index": number, "vacancy": vacancy, "sign_mask": mask, "aligned_index": zero,
+            "edge_count": len(edges), "path_profile_ids": profiles, "clauses": clauses,
+            "excluded_paths": excluded_count, "not_certified_paths": len(paths)-excluded_count}
+
+
+class ReceiptWriter:
+    def __init__(self, file, started):
+        self.raw_file = file
+        self.gzip = gzip.GzipFile(filename="", mode="wb", fileobj=file, mtime=0, compresslevel=6)
+        self.raw_hash = hashlib.sha256()
+        self.raw_bytes = 0
+        self.started = started
+
+    def write(self, raw):
+        self.raw_bytes += len(raw)
+        require(self.raw_bytes <= MAX_RAW_OUTPUT, "raw-output-cap")
+        self.raw_hash.update(raw)
+        self.gzip.write(raw)
+        require(self.raw_file.tell() <= MAX_GZIP_OUTPUT, "compressed-output-cap")
+
+    def finish(self):
+        self.gzip.close()
+        self.raw_file.flush()
+        os.fsync(self.raw_file.fileno())
+        require(self.raw_file.tell() <= MAX_GZIP_OUTPUT, "compressed-output-cap")
+        budget(self.started)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in INPUTS:
+        parser.add_argument("--"+name, type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    identity_path = Path(str(args.output)+".identity.json")
+    require(not args.output.exists() and not identity_path.exists(), "output-exists")
+    started, cpu_started = time.monotonic(), time.process_time()
+    table, decisions = catalogue(read_input(args.catalogue, "catalogue"))
+    budget(started)
+    representatives, roster = census(read_input(args.census, "census"))
+    geometries, transformations = geometry(read_input(args.covariance, "covariance"))
+    budget(started)
+    control_results = controls(table)
+    orbit_digest = check_orbits(representatives, roster, transformations, started)
+    del roster, transformations
+    counts = Counter()
+    profile_counts = Counter()
+    case_digest = hashlib.sha256()
+    temporary = None
+    summary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w+b", dir=args.output.parent,
+                                         prefix=args.output.name+".", suffix=".partial",
+                                         delete=False) as stream:
+            temporary = stream.name
+            writer = ReceiptWriter(stream, started)
+            header = {
+                "format": "independent-one-axis-case-clauses-v1",
+                "scope": "Complete canonical census-case to occupied-path/local-profile/exclusion-clause binding only. Not-certified profiles add no clauses. No separation-graph enumeration, graph-to-bank coverage or theorem promotion.",
+                "inputs_original_sha256": {name: values[0] for name, values in INPUTS.items()},
+                "checker_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                "path_order": "Exact path order in accepted covariance geometries for each vacancy.",
+                "profile_order": "Exact profile index in accepted general-path catalogue.",
+                "clause_convention": "Bit1=horizontal; positive_mask requires any bit1, negative_mask any bit0.",
+                "canonical_order": "Exact sorted representative order in accepted isolated sign census.",
+                "orbit_coverage": {"canonical_cases": 3671, "full_census_cases": 29368,
+                                   "generated_images": 29368, "ordered_images_sha256": orbit_digest},
+                "controls": control_results,
+            }
+            writer.write(encoded(header)[:-1] + b',"cases":[')
+            for number, case in enumerate(representatives):
+                budget(started)
+                row = apply_case(number, case, geometries[case[0]], table, decisions)
+                raw = encoded(row)
+                require(len(raw) <= MAX_CASE_BYTES, "case-output-cap")
+                if number:
+                    writer.write(b",")
+                writer.write(raw)
+                case_digest.update(raw + b"\n")
+                counts["canonical_cases"] += 1
+                counts["path_applications"] += len(row["path_profile_ids"])
+                counts["excluded_path_origins"] += row["excluded_paths"]
+                counts["not_certified_path_origins"] += row["not_certified_paths"]
+                counts["deduplicated_clauses"] += len(row["clauses"])
+                counts["horizontal_exclusion_clauses"] += sum(bool(c["negative_mask"]) for c in row["clauses"])
+                counts["vertical_exclusion_clauses"] += sum(bool(c["positive_mask"]) for c in row["clauses"])
+                profile_counts.update(row["path_profile_ids"])
+                require(counts["path_applications"] <= MAX_PATH_LOOKUPS, "path-application-cap")
+            require(counts["canonical_cases"] == 3671, "incomplete-case-roster")
+            require(counts["path_applications"] == counts["excluded_path_origins"]+counts["not_certified_path_origins"],
+                    "path-decision-partition")
+            summary = {"status": "complete-canonical-case-to-clause-audit", "counts": dict(counts),
+                       "distinct_local_profiles_used": len(profile_counts),
+                       "profile_use_counts": sorted(profile_counts.items()),
+                       "ordered_case_rows_sha256": case_digest.hexdigest(),
+                       "wall_seconds_before_final_output": time.monotonic()-started,
+                       "cpu_seconds_before_final_output": time.process_time()-cpu_started,
+                       "peak_rss_bytes_before_final_output": peak_rss()}
+            writer.write(b'],"summary":' + encoded(summary) + b"}\n")
+            writer.finish()
+            raw_identity = {"bytes": writer.raw_bytes, "sha256": writer.raw_hash.hexdigest()}
+        budget(started)
+        os.replace(temporary, args.output)
+        temporary = None
+    finally:
+        if temporary:
+            Path(temporary).unlink(missing_ok=True)
+    stored_hash = hashlib.sha256()
+    with args.output.open("rb") as source:
+        for block in iter(lambda: source.read(65536), b""):
+            stored_hash.update(block)
+    replay_hash = hashlib.sha256()
+    replay_bytes = 0
+    with gzip.open(args.output, "rb") as source:
+        for block in iter(lambda: source.read(65536), b""):
+            replay_bytes += len(block)
+            require(replay_bytes <= MAX_RAW_OUTPUT, "roundtrip-size-cap")
+            replay_hash.update(block)
+            budget(started)
+    require(replay_bytes == raw_identity["bytes"] and replay_hash.hexdigest() == raw_identity["sha256"],
+            "compressed-roundtrip-identity")
+    identity = {"format": "case-clause-receipt-identity-v1", "status": summary["status"],
+                "compressed_roundtrip_verified": True,
+                "raw": raw_identity,
+                "stored": {"bytes": args.output.stat().st_size, "sha256": stored_hash.hexdigest(),
+                           "compression": "gzip level6, mtime0, empty filename"},
+                "wall_seconds": time.monotonic()-started,
+                "cpu_seconds": time.process_time()-cpu_started, "peak_rss_bytes": peak_rss(),
+                "counts": summary["counts"], "controls": len(control_results),
+                "guard": "External memory guard required; inspect its independent receipt."}
+    with identity_path.open("x") as stream:
+        json.dump(identity, stream, indent=2)
+        stream.write("\n")
+    print(json.dumps(identity))
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except Exception as error:
+        print(json.dumps({"status": "failed", "error_type": type(error).__name__, "error": str(error)}),
+              file=sys.stderr)
+        raise SystemExit(1) from error
