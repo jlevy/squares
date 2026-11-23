@@ -3,15 +3,19 @@ type: is
 id: is-01m859v2drzgkxas4z184he310
 title: Diagnose failed grid-slack rows and test localized grid repairs
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: codex-exact-grid-repair-1123
 labels:
   - regularization
   - validation
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-11-23T22:53:46.287Z
-updated_at: 2026-11-23T22:53:46.287Z
+updated_at: 2026-11-23T23:20:33.414Z
+started_at: 2026-11-23T23:20:33.404Z
 ---
 The manual review of the deployed defaults measured 232 (112 uneven aligned squares),
 259 (65), 290 and 291 (31 each), 131 (21), 305 (13), and 127 (2). The retained
