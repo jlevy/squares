@@ -1,0 +1,124 @@
+{
+  "format": "external-sharp-control-execution-v1",
+  "source": {
+    "archive": "rational-enclosures.zip",
+    "archive_member": "105/candidate.json.gz",
+    "retained": "supplements/105/candidate.json.gz",
+    "source_stored_bytes": 18354,
+    "source_stored_sha256": "4151af49b3c6e6900f196912e38ff6f941b3c2e908fee8bc64bafd394e48964f"
+  },
+  "profile": {
+    "witness_prefix": "W-de-winter-1063-n",
+    "claim_limitations": "Finite feasibility controls on the original issue 1063 rational enclosure."
+  },
+  "rational_backend": "gmp",
+  "outcome": "complete roster",
+  "complete_standard_receipt": true,
+  "completed_controls": [
+    [
+      "side-lowered-past-wall-contact",
+      "at-contact"
+    ],
+    [
+      "tightest-pair-closed-past-contact",
+      "at-contact"
+    ],
+    [
+      "squares-moved-past-near-wall-contact",
+      "at-contact"
+    ],
+    [
+      "square-enlarged-past-pair-contact",
+      "at-contact"
+    ],
+    [
+      "square-enlarged-past-wall-contact",
+      "at-contact"
+    ],
+    [
+      "side-lowered-past-wall-contact",
+      "past-contact"
+    ],
+    [
+      "tightest-pair-closed-past-contact",
+      "past-contact"
+    ],
+    [
+      "squares-moved-past-near-wall-contact",
+      "past-contact"
+    ],
+    [
+      "square-enlarged-past-pair-contact",
+      "past-contact"
+    ],
+    [
+      "square-enlarged-past-wall-contact",
+      "past-contact"
+    ],
+    [
+      "duplicate-square",
+      "gross"
+    ]
+  ],
+  "stages": [
+    {
+      "phase": "plan:contacts",
+      "wall_seconds": 0.570507041993551
+    },
+    {
+      "phase": "plan:enlarged-pair",
+      "wall_seconds": 14.763429041951895
+    },
+    {
+      "phase": "plan:enlarged-wall",
+      "wall_seconds": 1.5147555830189958
+    },
+    {
+      "phase": "control:side-lowered-past-wall-contact:at-contact",
+      "wall_seconds": 2.706264041014947
+    },
+    {
+      "phase": "control:tightest-pair-closed-past-contact:at-contact",
+      "wall_seconds": 3.2818658750038594
+    },
+    {
+      "phase": "control:squares-moved-past-near-wall-contact:at-contact",
+      "wall_seconds": 2.5720070420065895
+    },
+    {
+      "phase": "control:square-enlarged-past-pair-contact:at-contact",
+      "wall_seconds": 3.329741209046915
+    },
+    {
+      "phase": "control:square-enlarged-past-wall-contact:at-contact",
+      "wall_seconds": 2.692685000016354
+    },
+    {
+      "phase": "control:side-lowered-past-wall-contact:past-contact",
+      "wall_seconds": 2.3966043749824166
+    },
+    {
+      "phase": "control:tightest-pair-closed-past-contact:past-contact",
+      "wall_seconds": 3.0923263329896145
+    },
+    {
+      "phase": "control:squares-moved-past-near-wall-contact:past-contact",
+      "wall_seconds": 3.252887875016313
+    },
+    {
+      "phase": "control:square-enlarged-past-pair-contact:past-contact",
+      "wall_seconds": 3.1334013750310987
+    },
+    {
+      "phase": "control:square-enlarged-past-wall-contact:past-contact",
+      "wall_seconds": 2.3715152500080876
+    },
+    {
+      "phase": "control:duplicate-square:gross",
+      "wall_seconds": 2.294596957974136
+    }
+  ],
+  "active_stage_when_stopped": null,
+  "wall_seconds": 47.982701124972664,
+  "peak_rss_bytes": 100532224
+}

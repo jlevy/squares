@@ -1,0 +1,3 @@
+15:32:08 swap volume /System/Volumes/VM: 20.0GB free, suspension distance 21.0GB
+15:32:08 observing pid=35444 with per-sample phys_footprint; no pause, shed, or termination actions
+15:32:09 logging measurements to /Volumes/spud-ext2/agent-evidence/squares-intake-20261121-01a1fb/n20-one-axis-sign-census-independent-20261122/execution.jsonl

@@ -1,0 +1,24 @@
+components:
+  - paper:n11-lower-bounds-explainer
+  - paper:n11-optimality-review
+  - paper:n11-threshold-bound-review
+  - paper:square-packing-methods-survey
+paths:
+  - packing/campaign/result-requests.yaml
+  - packing/devtools/upper_bound_sharp_controls.py
+outputs:
+  - papers/n11-lower-bounds-explainer.html
+  - papers/n11-lower-bounds-explainer.md
+  - papers/n11-optimality-review.html
+  - papers/n11-optimality-review.md
+  - papers/n11-threshold-bound-review.html
+  - papers/n11-threshold-bound-review.md
+  - papers/square-packing-methods-survey.html
+  - papers/square-packing-methods-survey.md
+reason: >-
+  Adds explicit GMP selection for sharp rational verdicts and retains the
+  105-square enclosure's completed control receipt. Fresh candidate renders
+  with fixed links and Chrome on macOS reproduced the 55, 43, 43 and 43
+  files retained from the deterministic comparison for #1083. Its reviewed
+  head has the same tree as the dc1b32fe47b7 merge on main. The live count
+  and the published paper editions stay unchanged.

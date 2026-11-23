@@ -1,0 +1,35 @@
+{
+  "format": "independent-one-axis-bank-freeze-v1",
+  "frozen_utc": "2026-11-22T22:25:34Z",
+  "status": "prepared-not-executed",
+  "coordinator_bead": "think-guls",
+  "files": {
+    "frozen-plan.md": "030d21b1e8df43c91c9890ce58cb64ec1c2c644f3eca7c5303a4edcbdd147d2e",
+    "check_one_axis_bank.py": "b71c4258d7d9e9a2f5d616ecbbb79bfa218876bc020c087b59390c0e650384d4",
+    "one_axis_24.json.gz": "451b1116cf5b6eaa78ecc8233ee4e4c931537e6dfd3bd4fba2a6d91b1922d257"
+  },
+  "expected": {
+    "certificates": 576,
+    "rule_uses": 9777,
+    "controls": 16,
+    "maximum_multiplier_degree": 12,
+    "maximum_margin_degree": 18
+  },
+  "exposure": "Producer proof statements, rule formulas, positivity routine, and literal certificate data read. Independent arithmetic implementation, not blind review.",
+  "execution": {
+    "checker_executed": false,
+    "checker_imported": false,
+    "syntax_checked": false,
+    "contributor_programs_executed": false,
+    "guard_clearance_required": true
+  },
+  "proposed_limits": {
+    "target_wall_seconds": 20,
+    "target_peak_rss_gib": 0.1,
+    "hard_wall_seconds": 60,
+    "sampled_tree_ceiling_gib": 0.25,
+    "stop_pressure_level": 2,
+    "workers": 1
+  },
+  "scope": "Conditional polynomial bank only; no graph or bridge enumeration, no full theorem acceptance."
+}

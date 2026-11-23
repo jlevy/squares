@@ -1,0 +1,81 @@
+{
+  "format": "independent-one-axis-sign-census-spec-v1",
+  "source": {
+    "issue": "https://github.com/jlevy/squares/issues/1055#issuecomment-7058955337",
+    "upstream_commit": "dad9c3fd3443bcb9f8950bc302445bdf1e3fbbcc",
+    "archive_sha256": "475d7ef50e21ce4a83cfb4c8415c9e9852d619beeade5c4c8745c2c963d6c867",
+    "source_members_read": {
+      "geometry/one_axis_equal.md": "e83002429b3610630265d1b9a173f9f431bdf74ac874004b1a30df651a95eed5",
+      "geometry/one_axis_equal.py": "7419551641e010498d2ce75b3032c83c320837be5e141f4d92a478caa111b980",
+      "geometry/one_axis_duals.py": "cec34686c11b6bab4b0cdc5df835e5a39d22163d5a6970b78e9559518497061f",
+      "geometry/one_axis_paths.py": "e285368bf574de9a697b990a1c538eb3f8ce97c24498d0ae4ff3065de02b8765",
+      "geometry/equal_path_polynomial.py": "35abbe0bbed597c769e65ece0141e7c72527ae99e91bf2656008c91dfd4926ae",
+      "geometry/near_grid.py": "1a0a9d2d7a88b9a965effb9c43875d6c5c7a57f87334cb0d4c9ce18fc8e41bfc",
+      "geometry/turning_orders.py": "2cae7debd11e40d166bd44f5f47100cce22b21e5eb4f3ee9d6df2525bd62f119",
+      "geometry/signed_angle_graphs.py": "87a1e69a64c43292060641fea35b4c497196a652b995c78f6415b20c18c51c0e"
+    }
+  },
+  "accepted_bridge_receipt": {
+    "local_copy": "bridge-verification.json.gz",
+    "sha256": "a8b48b5cff9b0b101174e3eb513bb3ed502c05bbfb825e1f8b376fb0c017d286",
+    "role": "Accepted complete conditional local bridge exclusions; byte identity checked, no polynomial rerun.",
+    "counts": {
+      "excluded_profiles": 3488,
+      "normal_choices": 15696,
+      "controls": 12
+    }
+  },
+  "domain": {
+    "half_tangent": "0 < tan(theta/2) <= 1/24",
+    "board_side": "S < 5",
+    "occupied_cells": "{(x,y) in {0,...,4}^2: y != p[x]}, with p a permutation of 0,...,4",
+    "aligned_square": "Exactly one of the twenty occupied cells; all other tilt signs independently +/-1",
+    "mathematical_premises": [
+      "Every hypothetical packing in the stated domain has the reviewed near-grid rank representation.",
+      "For a retained paired bridge, at least its horizontal or vertical forward-separating chain occurs.",
+      "The accepted local bridge result excludes every positive-cost chain; zero cost is necessary, not sufficient."
+    ],
+    "general_path_clauses_required": false,
+    "polynomial_certificate_bank_required": false
+  },
+  "encoding": {
+    "cells": "Lexicographic (x,y) order within each vacancy permutation",
+    "sign_mask": "Bit i=1 for positive tilt, bit i=0 for negative tilt, with the aligned cell's bit always zero",
+    "case_order": "(vacancy permutation, sign mask, aligned index)",
+    "D4": "Four successive rotations (x,y)->(4-y,x), each with or without reflection x->4-x; only reflections negate tilt signs",
+    "vertical_transverse_rank": "4-x, preserving tilt sign in the rotated frame"
+  },
+  "expected": {
+    "vacancy_permutations": 120,
+    "aligned_positions_per_vacancy": 20,
+    "vacancy_aligned_cases": 2400,
+    "bridge_histogram": {
+      "4": 92,
+      "5": 24,
+      "6": 4
+    },
+    "sign_assignments": 29368,
+    "D4_images": 234944,
+    "D4_representatives": 3671,
+    "orbit_size_histogram": {
+      "8": 3671
+    },
+    "controls": 12
+  },
+  "limits": {
+    "workers": 1,
+    "target_wall_seconds": 20,
+    "target_peak_rss_gib": 0.1,
+    "internal_wall_seconds": 55,
+    "supervised_wall_seconds": 60,
+    "sampled_tree_cost_gib": 0.25,
+    "stop_pressure": 2,
+    "search_nodes": 1000000,
+    "raw_assignment_emissions": 2000000,
+    "solutions_per_case": 50000,
+    "total_roster": 50000,
+    "maximum_expanded_input_bytes": 8388608
+  },
+  "exposure": "Reviewer previously read the contributor's theorem, path and sign/canonicalization programs and prior project review. Independent geometry construction, local integer-cost truth tables, constraint search and rotation/reflection implementation; not blind.",
+  "scope": "Complete sign/vacancy roster satisfying the accepted paired-bridge necessary conditions, and its D4 orbits. No general-path exclusions, separation-graph enumeration, graph-to-bank coverage, unrestricted theorem or Stage 4 acceptance."
+}

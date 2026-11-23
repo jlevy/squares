@@ -16,7 +16,7 @@ from __future__ import annotations
 import json
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, NoReturn
 
 import pytest
 
@@ -335,3 +335,65 @@ def test_it_reproduces_the_retained_204_receipt_route_for_route() -> None:
         for route, verdict in row["routes"].items():
             for key in ("passed", "wall", "gap"):
                 assert mine["routes"][route][key] == verdict[key], (row["control"], route, key)
+
+
+def _untimed_controls(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [{key: value for key, value in row.items() if key != "cpu_seconds"} for row in rows]
+
+
+@pytest.mark.parametrize("certificate", [ROOMY, TOUCHING])
+def test_explicit_gmp_preserves_all_control_verdicts(certificate: legacy.Certificate) -> None:
+    original = sharp.control_rows(certificate, PROFILE)
+    accelerated = sharp.control_rows(certificate, PROFILE, rational_backend="gmp")
+    assert len(original) == len(accelerated) == 11
+    assert all(row["as_expected"] for row in original)
+    assert _untimed_controls(accelerated) == _untimed_controls(original)
+
+
+def test_selected_control_runs_only_its_verdict_and_reports_stages(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[str] = []
+    stages: list[str] = []
+    decide = sharp.decide
+
+    def tracked(
+        certificate: legacy.Certificate, profile: dict[str, str], **options: Any
+    ) -> sharp.Verdicts:
+        calls.append(options["rational_backend"])
+        return decide(certificate, profile, **options)
+
+    def unexpected(*_args: Any, **_options: Any) -> NoReturn:
+        raise AssertionError("an unselected enlarged-square control ran")
+
+    monkeypatch.setattr(sharp, "decide", tracked)
+    monkeypatch.setattr(sharp, "decide_corners", unexpected)
+    selected = {(sharp.SIDE_LOWERED, "at-contact")}
+    rows = list(
+        sharp.iter_control_rows(
+            ROOMY,
+            PROFILE,
+            rational_backend="gmp",
+            selected=selected,
+            stage=stages.append,
+        )
+    )
+    assert calls == ["gmp"]
+    assert len(rows) == 1
+    assert rows[0]["as_expected"]
+    assert {(row["control"], row["where"]) for row in rows} == selected
+    assert stages[-2:] == [
+        f"control:{sharp.SIDE_LOWERED}:at-contact:start",
+        f"control:{sharp.SIDE_LOWERED}:at-contact:complete",
+    ]
+    assert len(stages) == 8
+
+
+@pytest.mark.parametrize("selected", [[], [("unknown", "gross")]])
+def test_invalid_selection_is_refused_before_planning(
+    selected: list[tuple[str, str]],
+) -> None:
+    stages: list[str] = []
+    with pytest.raises(sharp.reports.ReportError, match="selection"):
+        list(sharp.iter_control_rows(ROOMY, PROFILE, selected=selected, stage=stages.append))
+    assert stages == []
