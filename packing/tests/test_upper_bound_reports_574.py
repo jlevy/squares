@@ -523,7 +523,7 @@ def test_the_574_algebraic_sides_against_the_case_records() -> None:
     # 260 and 299 on to Mykhailo Polkovskyi's issue-1009 certificates (T-314, T-318, T-325)
     # and 262 from the Kingbird catalogue's 16 + sqrt(2)/2, which PR #574 states, to his
     # T-319, below it. On 21 November 2026, T-335 moved n109 below the algebraic side
-    # from PR #574. T-341 does the same at n202 with the GeiserX quadratic certificate.
+    # from PR #574. T-344 does the same at n202 with the GeiserX quadratic certificate.
     # The remaining sides are at or below their cases.
     assert {n for n, row in rows.items() if row["case"]["verified_relation"] == "above"} == {
         109,

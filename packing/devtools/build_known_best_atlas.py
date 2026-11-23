@@ -2827,7 +2827,7 @@ def _credit_date_key(value: date | int | None) -> tuple[int, int, int, int]:
 #: holds Özden alone as the certificate source author used by the poster's fallback.
 #: The same day's adoption of T-335 credits Samanyu-dev as finder at 109. The current
 #: case, site and citations credit Samanyu-dev, and the next print edition adds the name.
-#: T-337 credits Sergio Fernández Rubio at 259 and T-341 credits him at 202 and 263.
+#: T-337 credits Sergio Fernández Rubio at 259 and T-344 credits him at 202 and 263.
 #: The cases credit him now and the poster adds his name at its next cut.
 PRINT_CREDIT_HELD: Mapping[int, tuple[str, ...]] = {
     **dict.fromkeys(

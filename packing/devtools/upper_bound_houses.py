@@ -455,7 +455,7 @@ def _field_origin(packet: Path, n: int) -> Origin:
         metadata = witness["source"]
         return Origin(
             key=geiserx_1037.SOURCE_KEY,
-            path=_field_stored(packet, n),
+            path=packet / geiserx_1037.source_path(n),
             url=metadata["url"],
             revision=metadata["revision"],
             retrieved=metadata["retrieved"],
@@ -1267,7 +1267,7 @@ ADOPTED: dict[int, str] = {
     182: "T-243",
     183: "T-220",
     199: "T-285",
-    202: "T-341",
+    202: "T-344",
     204: "T-306",
     206: "T-174",
     207: "T-174",
@@ -1290,7 +1290,7 @@ ADOPTED: dict[int, str] = {
     260: "T-318",
     261: "T-174",
     262: "T-319",
-    263: "T-341",
+    263: "T-344",
     264: "T-308",
     267: "T-134",
     268: "T-331",

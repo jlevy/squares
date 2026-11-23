@@ -141,7 +141,7 @@ def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     Mykhailo Polkovskyi's certificate of issue 1009 (T-319) replaced the catalogue's
     16 + sqrt(2)/2 packing on 18 November 2026, the first adoption there. Samanyu-dev's
     T-335 replaced the prior n = 109 house on 21 November 2026. At n = 202, Joost de
-    Winter's quadratic certificate (T-341) replaced T-155 on 22 November 2026."""
+    Winter's quadratic certificate (T-344) replaced T-155 on 22 November 2026."""
     assert [n for n in registered.committed() if registered.readopted(n)] == [
         29,
         109,

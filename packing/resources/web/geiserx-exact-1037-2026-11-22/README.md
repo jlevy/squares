@@ -81,7 +81,7 @@ For 202 and 263, the submitted rational sides are strictly below the prior retai
 exact configurations at first contact. The gains are about 0.003549352 and
 0.008793299 respectively. The quadratic sides are smaller again.
 These comparisons check the predecessor's exact wall and pair inequalities.
-T-341 adopts both quadratic certificates. The two default drawings use the
+T-344 adopts both quadratic certificates. The two default drawings use the
 selected half-degree grid-slack views at their exact certificate sides.
 The [drawing record](../../../cases/regularized_drawings/think-36ui-2026-11-22/README.md)
 retains the candidate runs and the selection. Report order for the remaining

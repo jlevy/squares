@@ -38595,7 +38595,7 @@ issues:
       and 263, their exact side formulas and their two lower-left restrictions. The
       plus sign in the stated common tilt identity uses the positive tilt magnitude.
       The two submitted standalone quadratic packings and the restriction are
-      distinct provenance claims despite their compatible sides. T-341 registers
+      distinct provenance claims despite their compatible sides. T-344 registers
       only the two independently reviewed standalone quadratic bounds. The other
       five rational counts and the algebraic 297 claim remain queued separately.
     read_through: '2026-11-18T20:06:25Z'
@@ -38606,7 +38606,7 @@ issues:
       not_registered: >-
         The original rational 202-square certificate is retained and verified as
         part of the same submitted contribution as its strictly stronger standalone
-        quadratic counterpart, registered in T-341. This weaker rational form
+        quadratic counterpart, registered in T-344. This weaker rational form
         receives no separate result entry; this disposition does not assert pose identity.
       queued: false
     - key: geiserx-rational-204
@@ -38627,7 +38627,7 @@ issues:
       not_registered: >-
         The original rational 263-square certificate is retained and verified as
         part of the same submitted contribution as its strictly stronger standalone
-        quadratic counterpart, registered in T-341. This weaker rational form
+        quadratic counterpart, registered in T-344. This weaker rational form
         receives no separate result entry; this disposition does not assert pose identity.
       queued: false
     - key: geiserx-rational-264
@@ -38654,7 +38654,7 @@ issues:
         (1605 - 19 sqrt(3))/94. The 263-square witness has a lower-left box of side
         S263 - 2 containing 202 squares.
       source: body
-      register: [T-341]
+      register: [T-344]
       evidence:
       - E-geiserx-1037-quadratic-report
       - E-geiserx-1037-quadratic-feasibility

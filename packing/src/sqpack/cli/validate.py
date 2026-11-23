@@ -322,7 +322,7 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: T-338 changed 90 from zero separating and 12 translating squares to 1 and 17.
 #: T-339 changed 179 from 64 separating and translating squares to 16 and 64.
 #: T-340 changed 232 from 48 separating and 76 translating squares to 78 and 170.
-#: T-341 changed 202 from 26 separating and 44 translating squares to 14 and 84,
+#: T-344 changed 202 from 26 separating and 44 translating squares to 14 and 84,
 #: and 263 from 12 and 33 to 27 and 143.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (29, 112, 86, 584),

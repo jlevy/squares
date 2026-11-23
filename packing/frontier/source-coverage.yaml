@@ -14136,7 +14136,7 @@ sources:
   - E-geiserx-1037-quadratic-independent-feasibility
   notes: >-
     The source identifies Sergio Fernández Rubio as the finder and Joost de Winter as the
-    certificate author. T-341 registers the independently reviewed standalone quadratic
+    certificate author. T-344 registers the independently reviewed standalone quadratic
     upper bounds at 202 and 263, separately from the seven literal rational ceilings
     retained in E-geiserx-1037-original-report. The native field route and independent
     review each cover both quadratic configurations completely. The other five rational
@@ -14387,7 +14387,7 @@ selected_overrides:
   value: '14.7243727091084185'
   evidence: E-geiserx-1037-quadratic-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-22 (T-341).
+    a replay here and an accepted review, adopted on 2026-11-22 (T-344).
 - n: 204
   source_id: joegun-upper-bounds-2026-11-16
   value: '14.8026468431066121'
@@ -14525,7 +14525,7 @@ selected_overrides:
   value: '16.7243727091084185'
   evidence: E-geiserx-1037-quadratic-report
   reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
-    a replay here and an accepted review, adopted on 2026-11-22 (T-341).
+    a replay here and an accepted review, adopted on 2026-11-22 (T-344).
 - n: 264
   source_id: joegun-upper-bounds-2026-11-16
   value: '16.7738075980019989'
@@ -16825,7 +16825,7 @@ superseded_reports:
   source_id: evand-regularized-2026-10-10
   value: '16.7331660078993790'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-341's exact side is smaller.
+    and T-344's exact side is smaller.
   superseded_by: geiserx-exact-1037-2026-11-22
 - n: 268
   source_id: evand-square-packing-2026-10-05
@@ -17479,7 +17479,7 @@ superseded_reports:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.73316600789937898'
   reason: The house from 2026-10-17 until 2026-11-22; its certificate stays retained and verified,
-    and T-341's exact side is smaller.
+    and T-344's exact side is smaller.
   superseded_by: geiserx-exact-1037-2026-11-22
 beyond_horizon_claims:
 - n: 327

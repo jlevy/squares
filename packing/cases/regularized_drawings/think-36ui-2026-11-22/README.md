@@ -1,4 +1,4 @@
-# Strong Drawing Runs for T-341 at 202 and 263
+# Strong Drawing Runs for T-344 at 202 and 263
 
 The selector admitted the half-degree grid-slack views for both counts.
 Each view has exactly the side of its quadratic house witness and improves all seven

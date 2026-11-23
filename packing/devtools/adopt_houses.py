@@ -3053,7 +3053,7 @@ RESULTS: dict[str, Prose] = {
         diversity="by a Claude agent, a system family whose code made the coordinates",
         squares="its four rational corners",
     ),
-    "T-341": Prose(
+    "T-344": Prose(
         author="Joost de Winter",
         reported="on [jlevy/squares#1037](https://github.com/jlevy/squares/issues/1037)",
         producer_route=False,
@@ -5926,6 +5926,14 @@ def _earlier_ceiling(move: Move, text: str) -> str:
     """
     n, until = move.n, day_words(move.n)
     bound = rf"\$s\({n}\)\s+\\le\s+[0-9.]+\$"
+    # T-155 had already dated T-101's earlier rounded ceiling at n202; retain that
+    # original interval when the later house moves both lanes.
+    text = re.sub(
+        rf":\s+it\s+proves\s+\$s\({n}\)\s+\\le\s+([0-9.]+)\$,"
+        r"\s+the\s+verified\s+upper\s+bound\s+from\b",
+        r". Its ceiling of $\1$ was the verified upper bound from",
+        text,
+    )
     text = re.sub(
         rf"\bit\s+proves\s+({bound}),\s+the\s+verified\s+upper\s+bound\s+\((T-\d+)\)\.",
         rf"it proved \1, the verified upper bound until {until} (\2).",

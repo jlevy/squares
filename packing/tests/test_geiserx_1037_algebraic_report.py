@@ -67,7 +67,8 @@ def test_original_geometry_native_rows_and_house_agree(
         assert house["source"]["revision"] == f"attachment-sha256:{source.ARCHIVE_SHA256}"
         origin = house_source.origin(n)
         assert origin.raw_asset_retained
-        assert origin.path == retained_data.compressed_path(packet / source.fact_path(n))
+        assert origin.path == packet / source.source_path(n)
+        assert origin.path.read_bytes() == source.checked_source(packet, n)
         assert (
             validate_witness_document(
                 witness_envelope(house, schema="witness.schema.yaml"),

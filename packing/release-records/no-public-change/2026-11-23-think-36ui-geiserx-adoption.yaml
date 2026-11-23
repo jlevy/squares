@@ -29,7 +29,7 @@ outputs:
 - papers/square-packing-methods-survey.html
 - papers/square-packing-methods-survey.md
 reason: >-
-  Adopts the 202- and 263-square quadratic certificates as T-341. Two
+  Adopts the 202- and 263-square quadratic certificates as T-344. Two
   candidate renders and one render with inputs from exact main 3b75cfdb43d4
   used fixed link revisions and Chrome on macOS. The optimality review,
   threshold review and methods survey each reproduced 43 files byte for byte.

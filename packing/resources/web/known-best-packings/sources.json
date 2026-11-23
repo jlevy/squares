@@ -1314,7 +1314,7 @@
         202
       ],
       "n": 202,
-      "path": "resources/web/geiserx-exact-1037-2026-11-22/facts/alg-n-202.yaml.gz",
+      "path": "resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n202.minpoly.json.gz",
       "raw_asset_retained": true,
       "retention_policy": "The original mathematical attachment member is retained losslessly beside the derived field fact and checked against its pinned digest.",
       "retrieved": "2026-11-22",
@@ -1786,7 +1786,7 @@
         263
       ],
       "n": 263,
-      "path": "resources/web/geiserx-exact-1037-2026-11-22/facts/alg-n-263.yaml.gz",
+      "path": "resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n263.minpoly.json.gz",
       "raw_asset_retained": true,
       "retention_policy": "The original mathematical attachment member is retained losslessly beside the derived field fact and checked against its pinned digest.",
       "retrieved": "2026-11-22",

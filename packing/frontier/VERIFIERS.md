@@ -1665,7 +1665,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-geiserx-1040-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original certificate and every square, wall and pair in both maintained routes. | T-337 |
 | `E-de-winter-997-followup-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: Every square, wall and unordered square pair in the original certificate. | T-338 |
 | `E-de-winter-959-algebraic-feasibility` | replayed here | independently re-implemented | full, 1 of 1: The original n179 certificate and both full-n179 gross mutations on the native route. | T-339 |
-| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-341 |
+| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-344 |
 
 ### `V-check-rational-witness-independent`
 
@@ -3906,7 +3906,7 @@ Imports a packet's algebraic-number-field witnesses from its declaration: derive
 | `E-pingyou-574-algebraic-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | T-174 |
 | `E-hyukdongkim-804-configurations-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 2 of 2: the two exact configurations, every unit-square identity, wall and pair decided over each configuration's field on the one route, with its two controls each | T-244 |
 | `E-hyukdongkim-804-s297-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the author's exact configuration at 297, every unit-square identity, wall and pair decided over its field on the one route, with its two controls | T-247 |
-| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-341 |
+| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-344 |
 
 ### `V-build-field-configuration`
 
@@ -5961,7 +5961,7 @@ Admits only issue 1037's original quadratic members at 202 and 263. Checks attac
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-341 |
+| `E-geiserx-1037-quadratic-feasibility` | replayed here | independently re-implemented | full, 2 of 2: Both original quadratic configurations and their two full-certificate gross controls. | T-344 |
 
 ### `V-geiserx-1037-independent-review`
 
@@ -5977,7 +5977,7 @@ Independently checks the original rational and quadratic configurations at 202 a
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-geiserx-1037-quadratic-independent-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: Both standalone quadratic certificates, every square, contained vertex and unordered pair. | T-341 |
+| `E-geiserx-1037-quadratic-independent-feasibility` | replayed here | independently re-implemented, clean-room | full, 2 of 2: Both standalone quadratic certificates, every square, contained vertex and unordered pair. | T-344 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

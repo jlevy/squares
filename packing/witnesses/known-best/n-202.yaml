@@ -1800,7 +1800,7 @@ witness:
       quadratic 202 witness.
   source:
     key: '[GeiserX issue 1037 2026-11-18]'
-    path: resources/web/geiserx-exact-1037-2026-11-22/facts/alg-n-202.yaml.gz
+    path: resources/web/geiserx-exact-1037-2026-11-22/source/algebraic/n202.minpoly.json.gz
     url: https://github.com/user-attachments/files/35051652/GeiserX_exact.zip#GeiserX_exact/algebraic/n202.minpoly.json
     revision: attachment-sha256:19c069b42d6a6fbe87dd419d358e7b046eadbba20dbaadd7f519faab1152c5e9
     retrieved: '2026-11-22'

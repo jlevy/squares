@@ -486,7 +486,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-304",
         # T-339 replaces T-294 at its only count, 179.
         "T-294",
-        # T-341 replaces T-244 at its only count, 263, on 2026-11-22.
+        # T-344 replaces T-244 at its only count, 263, on 2026-11-22.
         "T-244",
         # Lane L187 took 204 and 232, the only houses of Evan Daniel's issue-914 certificate
         # there (T-268) and of Doğa Özden's issue-927 certificate (T-275), to JoeGun's
