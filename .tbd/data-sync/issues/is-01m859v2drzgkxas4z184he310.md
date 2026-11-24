@@ -5,7 +5,7 @@ title: Diagnose failed grid-slack rows and test localized grid repairs
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: codex-exact-grid-repair-1123
 labels:
   - regularization
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-23T22:53:46.287Z
-updated_at: 2026-11-24T01:32:32.134Z
+updated_at: 2026-11-24T01:37:04.939Z
 started_at: 2026-11-23T23:20:33.404Z
 ---
 The manual review of the deployed defaults measured 232 (112 uneven aligned squares),
@@ -71,3 +71,5 @@ Astra review B approved PR #1107 at b237acb437. The two-square 127 stack keeps T
 Follow-up narrow screen: 232 had 7 geometrically clear one-square snaps. The three misalignment moves lost contacts; of four slack closures, only 87→137 preserved all contact counts and its full exact replay exceeded the guarded wall before a verdict, so no candidate admitted. At 305 the exact T-342 source has 35 literal axis rotations and 178 nonzero rotations within the deep near-axis screen (component below 1e-60). Eight distinct visible soft pairs gave 16 directional candidate snaps to the anchor's native exact basis and each had a physical overlap with an adjacent square. Meaningful next local patch: 87→136 is blocked by 89, 89→137 by 104, and 104→139 by 103; allow coupled placements, check both exact routes and comparison with current public house. At 259 the exact verified combined 118→114, 99→101, 104→108 repair is in draft PR #1108 and child think-q3yr. Light aligned 23→19, house full sides 545→551, uneven 65 and stage 727 hold. The parent stays active for residual 131 / 232 / 259 / 305 and broader corpus work. Retained candidate and screen receipts are in grid-repair-20261123.
 
 Published and independently checked on 23 November Pacific. #1107 merged e2ec6b234f, green exact-head and full Pages audit 45299275264, followed by #1108 at b5c0bf6020 with green exact-head checks. Direct live SVGs and attribution match both certified renders at b5c0bf6020; live evidence under grid-repair-20261123/live-{127,259}-verification.json. The 259 exact base replays from the official house by semantic geometry. Same exact sides and no contact losses. The 127 completed diagnostics and atlas-consumer children and 259 adoption child are closed. Keep this parent open for residual grid work.
+
+Final Pages production audit 45304340749 passed deploy and verify-deployment. The selected atlas now has 62 of 324 drawings with uneven aligned squares. Required exact-head PR checks passed for both merges. The independent main slow cohort on #1107 reached its existing 1800-second limit, as on recent prior main commits (already tracked in think-m2th); its post-merge regularized-views check passed.
