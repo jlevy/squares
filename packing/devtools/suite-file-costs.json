@@ -599,6 +599,7 @@
     "packing/tests/test_regularize_evand.py": 12.753,
     "packing/tests/test_regularize_gallery.py": 0.728,
     "packing/tests/test_regularize_grid_slack.py": 0.647,
+    "packing/tests/test_regularize_local_stencil.py": 0.05,
     "packing/tests/test_regularize_same_side.py": 1.061,
     "packing/tests/test_regularize_select.py": 9.664,
     "packing/tests/test_regularized_drawings.py": 19.381,
@@ -1228,6 +1229,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/geiserx-quadratic-2026-11-23.json",
           "provenance": {},
           "tests": 7
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_regularize_local_stencil.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/local-stencil-2026-11-23.json",
+          "provenance": {},
+          "tests": 6
         }
       ]
     }

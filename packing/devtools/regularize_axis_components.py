@@ -183,7 +183,8 @@ GRID_GENERATOR_V2 = "regularize_grid_slack/2"
 """Its third version (think-mbdw, 26 October 2026): a witness over a number field is drawn
 in its own field, and each unchanged tilted square keeps its own exact rotation."""
 GRID_GENERATORS = (GRID_GENERATOR, GRID_GENERATOR_V1, GRID_GENERATOR_V2)
-GENERATORS = (ALGORITHM, EVAND_GENERATOR, EVAND_AUTHOR_GENERATOR, *GRID_GENERATORS)
+LOCAL_STENCIL_GENERATOR = "regularize_local_stencil/1"
+LOCAL_STENCIL_CREDIT = "Regularized by the Squares Project with exact local placement"
 POLICY_DOCUMENT = "docs/project/policies/regularization-policy.md"
 EVAND_CREDIT = (
     "Regularized by the Squares Project with Evan Daniel's regularizer "
@@ -191,6 +192,15 @@ EVAND_CREDIT = (
 )
 """The line the index and every drawing of a view his method made carry (policy section
 7): a view of the vendored generator, or of the grid-slack port of his placement."""
+ADMITTED_CREDITS = {
+    EVAND_GENERATOR: EVAND_CREDIT,
+    EVAND_AUTHOR_GENERATOR: EVAND_AUTHOR_CREDIT,
+    **dict.fromkeys(GRID_GENERATORS, EVAND_CREDIT),
+    LOCAL_STENCIL_GENERATOR: LOCAL_STENCIL_CREDIT,
+}
+"""The credit carried by a view admitted into the layer, by the method that made it."""
+GENERATORS = (ALGORITHM, *ADMITTED_CREDITS)
+
 PROJECT_REGULARIZER = "project"
 """A regularization's `by` for this project's own runs (`results.schema.yaml`)."""
 VIEW_SUFFIX = "-regularized.yaml.gz"
@@ -1909,8 +1919,8 @@ def atlas_totals(records: Sequence[dict[str, Any]]) -> dict[str, Any]:
 
 
 LAYER_GENERATED_BY = (
-    f"{ATLAS_GENERATOR}, then the other generators' admitted views by "
-    "python -m devtools.regularize_evand layer"
+    f"{ATLAS_GENERATOR}, then devtools.regularize_evand.admit_views "
+    "through the command in each admitted generator's block"
 )
 LAYER_POLICY = (
     "A derived drawing layer under the regularization policy, never a witness: each view "
@@ -2429,6 +2439,11 @@ def _generator_problems(index: dict[str, Any], records: Sequence[dict[str, Any]]
         f"entries draw from generator {generator}, which the index does not describe"
         for generator in sorted(used - named)
     )
+    problems.extend(
+        f"the {generator} block does not credit the method that made its views"
+        for generator in sorted(used.intersection(ADMITTED_CREDITS, named))
+        if index["generators"][generator].get("credit") != ADMITTED_CREDITS[generator]
+    )
     runs = [str(run.get("id")) for run in index.get("runs") or []]
     if len(runs) != len(set(runs)):
         problems.append("index runs are not named once each")
@@ -2586,11 +2601,7 @@ def _drawn_view_problems(
         "label": DRAWING_LABEL,
         "derived_from": record["source"]["id"],
         "generator": record["generator"],
-        "credit": (
-            EVAND_AUTHOR_CREDIT
-            if record["generator"] == EVAND_AUTHOR_GENERATOR
-            else EVAND_CREDIT
-        ),
+        "credit": ADMITTED_CREDITS.get(record["generator"]),
         "regularization": record["regularization"],
     }
     problems.extend(

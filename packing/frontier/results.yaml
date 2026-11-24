@@ -55286,15 +55286,15 @@ regularized_drawings:
     - n: 127
       of: T-341
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_local_stencil/1: exact axis-aligned stack from a fixed source square, with all other placements held and both exact verification routes applied"
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 6.519202e-20
-        max_turn_deg: 0.0
+        moved: 2
+        max_move: 0.1419948
+        max_turn_deg: 6.18434
       view: packing/atlas/known-best/regularized/n-127-regularized.yaml.gz
     - n: 129
       of: T-186

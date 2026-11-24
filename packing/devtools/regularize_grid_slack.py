@@ -96,9 +96,11 @@ less than the house's tolerance but are not one exact class cannot coincide here
 square straightened from a near-axis class loses the contacts it had with its own class
 until the placement closes them again, and the regression report says so.
 ``--wall-timeout`` gives each count a wall-clock limit for the whole generation and
-drawing on POSIX. On timeout the run records an incomplete refusal and leaves only
-the report. A native solver call finishes or reaches its own limit before Python
-handles a pending timeout.
+drawing on POSIX. On timeout the report records an incomplete refusal, the last entered
+phase and the completed stages of each attempt. A refused exact variant samples negative
+selected-row gaps by square and face or wall. The magnitude bounds cover gaps beyond the
+range of binary64. Only the report is retained on timeout. A native solver call finishes
+or reaches its own limit before Python handles a pending timeout.
 """
 
 from __future__ import annotations
@@ -113,6 +115,7 @@ import time
 import warnings
 from collections.abc import Iterator, Mapping, Sequence
 from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass, field, replace
 from fractions import Fraction
 from pathlib import Path
@@ -133,6 +136,7 @@ from devtools import regularize_same_side as same
 from devtools.build_known_best_atlas import frame_from_witness
 from devtools.regularized_drawings import grid_written_method
 from devtools.retained_data import git_blob
+from sqpack.field import FieldElement
 from sqpack.render import render_packing_svg
 from sqpack.render.model import RenderSpec
 from sqpack.witness import validate_witness_document, witness_document
@@ -197,6 +201,7 @@ UNMOVED = 1e-9
 BLOWUP = 1e-6
 """A re-solved centre this far from the placement means nearly parallel tight rows."""
 MAX_REOPEN_ROUNDS = 32
+NEGATIVE_ROW_SAMPLE_LIMIT = 32
 WATCH = 1e-6
 """Contacts this close to the placement are watched by the exact solve: see `BLOWUP`."""
 FLOAT_OVERLAP = 1e-12
@@ -221,6 +226,23 @@ STAGE = shades.RULES[1]
 
 type Vector = tuple[float, float]
 type Key = tuple[Fraction, Fraction]
+
+
+@dataclass
+class _TimedRun:
+    """References to the active run's report records, including the unfinished attempt."""
+
+    attempts: list[dict[str, Any]] = field(default_factory=list)
+    last_phase: dict[str, Any] = field(default_factory=lambda: {"name": "regularize"})
+
+
+_TIMED_RUN: ContextVar[_TimedRun | None] = ContextVar("grid_slack_timed_run", default=None)
+
+
+def _phase(name: str, **detail: Any) -> None:
+    progress = _TIMED_RUN.get()
+    if progress is not None:
+        progress.last_phase = {"name": name, **detail}
 
 
 class GridSlackError(ValueError):
@@ -725,6 +747,7 @@ def place(g: Geometry, kept: Rows, settings: Settings) -> Placement:
             np.array([-2.0 if c.kind == "pair" else -1.0 for c in found]),
         ]
     )
+    _phase("coincidence-milp")
     result = _milp(
         objective,
         rows,
@@ -749,6 +772,16 @@ def place(g: Geometry, kept: Rows, settings: Settings) -> Placement:
     chosen = [c for c, z in zip(found, result.x[4 * n :], strict=True) if z > 0.5]
     bound = getattr(result, "mip_dual_bound", None)
     detail["sides_switched_on"] = sum(2 if c.kind == "pair" else 1 for c in chosen)
+    progress = _TIMED_RUN.get()
+    if progress is not None and progress.attempts:
+        progress.attempts[-1]["placement"] = {
+            "status": "milp-complete",
+            "objective": float(result.fun),
+            "dual_bound": bound,
+            "coincidences": len(chosen),
+            **detail,
+        }
+    _phase("re-placement-lp")
     replaced = replace_flush(g, kept, chosen, settings)
     detail.update(replaced.detail)
     replaced.objective = float(result.fun)
@@ -1130,6 +1163,48 @@ def anchored_squares(
     ]
 
 
+def _magnitude_bounds(negative: scalars.Scalar) -> tuple[int, int]:
+    """Exponents strictly bounding |negative| after its exact sign was checked."""
+    if isinstance(negative, FieldElement):
+        low, high = negative.field.enclose(negative)
+    else:
+        low = high = negative
+    return (
+        high.numerator.bit_length() - high.denominator.bit_length() - 1,
+        low.numerator.bit_length() - low.denominator.bit_length() + 1,
+    )
+
+
+def negative_row_gaps(solution: same.Solution) -> dict[str, Any]:
+    """Exact negative selected-row gaps in elimination order, with a bounded sample.
+
+    For a rational magnitude p/q, the difference d of the two bit lengths gives
+    2**(d-1) < p/q < 2**(d+1). For a field element use the rational endpoints of
+    the enclosure which established its negative sign. Neither case prints large
+    integers or converts a potentially tiny or huge gap to binary64.
+    """
+    sample: list[dict[str, Any]] = []
+    total = 0
+    for row in solution.relaxed:
+        gap = row.gap(solution.values)
+        if gap >= 0:
+            continue
+        total += 1
+        if len(sample) >= NEGATIVE_ROW_SAMPLE_LIMIT:
+            continue
+        lower, upper = _magnitude_bounds(gap)
+        sample.append(
+            {
+                "kind": row.kind,
+                **row.label,
+                "sign": -1,
+                "abs_lower_pow2": lower,
+                "abs_upper_pow2": upper,
+            }
+        )
+    return {"total": total, "sample": sample}
+
+
 def settle_variant(
     rows: str,
     *,
@@ -1156,11 +1231,12 @@ def settle_variant(
     fixed = {2 * index + axis: frame.centers[index][axis] for index in held for axis in (0, 1)}
     solution, promoted, rounds, reopened = settle_reopening(closing, left, generator, fixed)
     centers = [(solution.values[2 * i], solution.values[2 * i + 1]) for i in range(len(poses))]
-    displacement = max(
+    distances = (
         math.hypot(float(x) - float(p.x), float(y) - float(p.y))
         for (x, y), p in zip(centers, poses, strict=True)
     )
-    penetrated = [row for row in solution.relaxed if row.gap(solution.values) < 0]
+    square, displacement = max(enumerate(distances, 1), key=lambda item: item[1])
+    penetrated = negative_row_gaps(solution)
     record: dict[str, Any] = {
         "rows": rows,
         "closed": len(closing) + reopened,
@@ -1174,10 +1250,14 @@ def settle_variant(
         "free_coordinates": len(solution.free_columns),
         "anchored": len(held),
         "displacement": displacement,
+        "max_displacement_square": square,
     }
     refusal = None
-    if penetrated:
-        refusal = f"penetrated: {len(penetrated)} relaxed rows overlap at this side"
+    if penetrated["total"]:
+        record["negative_row_gaps"] = penetrated
+        refusal = (
+            f"penetrated: {penetrated['total']} selected separation rows violated at this side"
+        )
     elif displacement > BLOWUP:
         refusal = f"ill-conditioned: a re-solved centre moved {displacement:.3g}"
     else:
@@ -1243,9 +1323,21 @@ def exact_view(
     """
     started = time.perf_counter()
     view_id = regularized_id(witness)
+    report: dict[str, Any] = {
+        "relation": relation,
+        "side": same.literal(frame.side),
+        "settled": [],
+    }
+    progress = _TIMED_RUN.get()
+    if progress is not None and progress.attempts:
+        progress.attempts[-1]["exact"] = report
+    _phase("match-rotations")
     matched = same.match_rotations(frame, poses, own=True)
+    _phase("tight-rows")
     tight = same.tight_rows(frame, poses, matched)
+    report["tight"] = len(tight)
     keys = {row.priority for row in tight}
+    _phase("watch-rows")
     watched = [
         row
         for row in same.tight_rows(frame, poses, matched, tight=WATCH)
@@ -1256,16 +1348,11 @@ def exact_view(
         if frame.kind in ("rational", scalars.NUMBER_FIELD)
         else ("all-tight", "witness-contacts", *ANCHORED)
     )
-    report: dict[str, Any] = {
-        "relation": relation,
-        "side": same.literal(frame.side),
-        "tight": len(tight),
-        "watched": len(watched),
-        "settled": [],
-    }
+    report["watched"] = len(watched)
     tried: list[Settled] = []
     found: tuple[Settled, dict[str, Any]] | None = None
     for rows in order:
+        _phase("settle-variant", rows=rows)
         variant = settle_variant(
             rows,
             frame=frame,
@@ -1278,6 +1365,7 @@ def exact_view(
         tried.append(variant)
         report["settled"].append(variant.record)
         if variant.refusal is None:
+            _phase("verify-variant", rows=rows)
             found = verified_variant(variant, witness, frame, matched, view_id)
             if found is not None:
                 break
@@ -1333,21 +1421,24 @@ def attempt(
 ) -> tuple[Exact | None, dict[str, Any], list[int]]:
     """One placement and its exact re-solve in one frame."""
     started = time.perf_counter()
+    record: dict[str, Any] = {"relation": relation, "frozen_tilted": freeze}
+    progress = _TIMED_RUN.get()
+    if progress is not None:
+        progress.attempts.append(record)
+    _phase("choose-snaps")
     snaps, unsnapped, tilts = choose_snaps(witness, frame, settings, freeze=freeze)
-    record: dict[str, Any] = {
-        "relation": relation,
-        "frozen_tilted": freeze,
-        "straightened": [
-            {"square": index + 1, "degrees": round(tilts[index], 6)} for index in snaps
-        ],
-        "not_straightened": [
-            {"square": index + 1, "degrees": round(tilts[index], 6)} for index in unsnapped
-        ],
-    }
+    record["straightened"] = [
+        {"square": index + 1, "degrees": round(tilts[index], 6)} for index in snaps
+    ]
+    record["not_straightened"] = [
+        {"square": index + 1, "degrees": round(tilts[index], 6)} for index in unsnapped
+    ]
+    _phase("placement-geometry")
     g = geometry(frame, snaps, freeze=freeze)
     kept = kept_contacts(witness, g)
     record["kept_rows"] = len(kept.rows.entries)
     record["unstated_contacts"] = kept.unstated
+    _phase("placement-model")
     placement = place(g, kept.rows, settings)
     record["placement"] = {
         "status": placement.status,
@@ -1366,6 +1457,7 @@ def attempt(
         "max": float(moves.max()),
         "moved_beyond_1e-6": int((moves > 1e-6).sum()),
     }
+    _phase("reconstruct-pose")
     poses, changed = float_poses(frame, g, placement)
     record["changed_squares"] = len(changed)
     exact = exact_view(witness, frame, poses, changed, relation)
@@ -1395,7 +1487,9 @@ def regularize(
     """The view of one witness at `s_W`, else at `U`, or why there is none; and the report."""
     started = time.perf_counter()
     report = _new_report(settings)
+    _phase("attempt-order")
     for relation, freeze in attempts_for(witness):
+        _phase("exact-frame", relation=relation, frozen_tilted=freeze)
         try:
             frame = frame_for(witness, relation)
         except same.SameSideError as error:
@@ -1600,10 +1694,13 @@ def run_one(
     witness = load_yaml(data.decode("utf-8"))["witness"]
     source = source_record(n, data, witness)
     started = time.perf_counter()
+    progress = _TimedRun()
+    token = _TIMED_RUN.set(progress if wall_timeout is not None else None)
     try:
         with _wall_timer(wall_timeout):
             view, report = regularize(witness, settings)
             if view is not None:
+                _phase("write-view")
                 text = witness_document(view)
                 validate_witness_document(
                     load_yaml(text),
@@ -1614,13 +1711,19 @@ def run_one(
                 _write(directory / "view.yaml.gz", stored)
                 report["view"] = {"path": "view.yaml.gz", "git_blob": git_blob(stored)}
                 straightened = [row["square"] for row in report["straightened"]]
+                _phase("measure")
                 report["measured"] = measure(n, witness, view, straightened)
+                _phase("drawing")
                 _write(directory / "drawing.svg", drawing(n, witness, view).encode("utf-8"))
     except _WallTimeoutError:
         for stale in ("view.yaml.gz", "drawing.svg"):
             (directory / stale).unlink(missing_ok=True)
         report = _new_report(settings)
+        report["attempts"] = progress.attempts
+        report["last_phase"] = progress.last_phase
         report["refusal"] = "wall-clock timeout; generator incomplete"
+    finally:
+        _TIMED_RUN.reset(token)
     if wall_timeout is not None:
         report["settings"]["wall_timeout"] = wall_timeout
         report["seconds"] = round(time.perf_counter() - started, 2)

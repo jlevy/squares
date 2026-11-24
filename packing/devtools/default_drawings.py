@@ -53,8 +53,8 @@ So the record's `states` gives every count n = 1..324 what is drawn, the drawn p
 measures, the witness it was decided on (its id, its source's key, path and revision, and
 its side), the runs that decided that witness, and one state:
 
-- `regularized`: a view of Evan Daniel's regularizer or the grid-slack generator is drawn
-  (`STRONG_GENERATORS`);
+- `regularized`: a view from Evan Daniel's regularizer, grid-slack or exact local placement
+  is drawn (`STRONG_GENERATORS`);
 - `regular-as-published`: the house drawing has no uneven and no near-axis square, no
   strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for the
   runs its bead owes;
@@ -177,6 +177,7 @@ from devtools.regularize_axis_components import (
     EVAND_AUTHOR_GENERATOR,
     EVAND_GENERATOR,
     LAPSED,
+    LOCAL_STENCIL_GENERATOR,
 )
 from sqpack import retained_json
 from sqpack.workers import worker_count
@@ -235,13 +236,14 @@ RETIRED = frozenset({OWED})
 #: How long after the owner's word an exemption stands before the owner reviews it (review E4 of
 #: the intake review of 26 October 2026).
 EXEMPTION_REVIEW_DAYS = 14
-#: The generators whose drawn view makes a count `regularized`: Evan Daniel's regularizer
-#: and the grid-slack port of his placement. The axis tool is the reference and fallback
-#: (policy section 4); a drawing it alone made waits for these to decide its witness.
+#: The generators whose drawn view makes a count `regularized`: Evan Daniel's regularizer,
+#: the grid-slack port of his placement, and exact local placement. The axis tool supplies
+#: the reference and fallback drawing (policy section 4).
 STRONG_GENERATORS = frozenset(
     {
         EVAND_GENERATOR,
         EVAND_AUTHOR_GENERATOR,
+        LOCAL_STENCIL_GENERATOR,
         "regularize_grid_slack/0",
         "regularize_grid_slack/1",
         "regularize_grid_slack/2",
@@ -1034,23 +1036,6 @@ SETTLED: dict[int, Settled] = {
         "solve, verified exactly 1.34e-15 below the side, is held at row 3 as a "
         "register candidate, never admitted here; the axis tool's view stays drawn",
         _README_I38N,
-    ),
-    127: Settled(
-        DECIDED,
-        "[squares project regularized n127 2026-11-23]",
-        "cases/register_candidates/think-4z8z-2026-11-23/certificates/n-127.cert",
-        "think-4z8z-2026-11-23",
-        "11800793726614962238623103308879/1000000000000000000000000000000",
-        (
-            ("evand-regularize", "evand-regularize-adopt-2026-11-23-n127-evand-finished"),
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-0.5"),
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-1"),
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-23-n127-305-grid-5"),
-        ),
-        "Daniel's post-adoption run makes no visible change. The 0.5° grid-slack view ties "
-        "the house on the drawing measures, and the two remaining grid attempts time out. "
-        "The exact house certificate supplies the selected drawing.",
-        "packing/cases/regularized_drawings/think-huum-2026-11-23/README.md",
     ),
 }
 

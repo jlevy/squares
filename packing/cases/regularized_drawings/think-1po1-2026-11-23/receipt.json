@@ -1,0 +1,229 @@
+{
+  "n": 127,
+  "source": {
+    "witness": "packing/witnesses/known-best/n-127.yaml",
+    "id": "W-known-best-n127",
+    "scalar_kind": "rational",
+    "sha256": "83191526aedaf9dd4300b3dad70b35e447f2469c75521e2969c0fc310aeb7485"
+  },
+  "construction": {
+    "native_frame": true,
+    "anchor": "108",
+    "right": "110",
+    "upper": "116"
+  },
+  "side": {
+    "reported": "11800793726614962238623103308879/1000000000000000000000000000000",
+    "view": "11800793726614962238623103308879/1000000000000000000000000000000",
+    "relation": "same",
+    "view_minus_reported": "0.000e+00",
+    "view_minus_verified_upper_bound": "0.000e+00"
+  },
+  "verdicts": {
+    "exact_verify": {
+      "passed": true,
+      "pairs_tested": 8001,
+      "touching_pairs": 4,
+      "container_contacts": 0,
+      "minimum_best_pair_gap": "0",
+      "failures": [],
+      "seconds": 2.748
+    },
+    "independent": {
+      "passed": true,
+      "pairs_tested": 8001,
+      "minimum_best_pair_gap": "0",
+      "minimum_containment_clearance": "1/200000000000000000000",
+      "failures": [],
+      "seconds": 2.558
+    }
+  },
+  "identity": {
+    "basis": "measured",
+    "measured_in": "devtools.check_half_angle_area.arrangement_gap",
+    "of": "witness",
+    "one_to_one": true,
+    "moved": 2,
+    "moved_beyond": {
+      "1e-9": 2,
+      "1e-6": 2,
+      "1e-3": 2,
+      "1e-2": 2,
+      "1e-1": 1
+    },
+    "max_move": "1.419948e-1",
+    "max_turn_deg": "6.18434",
+    "turned": [
+      115
+    ],
+    "unnamed_turns": [],
+    "symmetry": 0,
+    "side_difference": "0",
+    "own_pairing": {
+      "basis": "square for square, the generator's own pairing (symmetry 0)",
+      "max_move": "1.419948e-01",
+      "turned": [
+        115
+      ],
+      "unnamed_turns": []
+    }
+  },
+  "contacts": {
+    "of": "witness",
+    "measured_in": "devtools.census_atlas_contact_shades: edge_rule_contacts (house) and centre_rule_contacts (stage) on packings_from_witness",
+    "house": {
+      "before": [
+        34,
+        22,
+        17,
+        13,
+        41
+      ],
+      "after": [
+        32,
+        22,
+        18,
+        12,
+        43
+      ]
+    },
+    "stage": {
+      "before": [
+        15,
+        28,
+        28,
+        15,
+        41
+      ],
+      "after": [
+        13,
+        28,
+        29,
+        14,
+        43
+      ]
+    },
+    "regressions": [],
+    "against_current": {
+      "view": "packing/atlas/known-best/regularized/n-127-regularized.yaml.gz",
+      "regressions": [],
+      "histograms": {
+        "house": [
+          34,
+          22,
+          17,
+          13,
+          41
+        ],
+        "stage": [
+          15,
+          28,
+          28,
+          15,
+          41
+        ]
+      }
+    }
+  },
+  "decision": {
+    "row": 10,
+    "decision": "admit",
+    "index_record": "regularized",
+    "refusal": null,
+    "reason": "every admission condition holds"
+  },
+  "comparison": {
+    "before": {
+      "n": 127,
+      "drawing": {
+        "kind": "witness",
+        "path": "packing/witnesses/known-best/n-127.yaml",
+        "generator": null
+      },
+      "verified": true,
+      "side": "11800793726614962238623103308879/1000000000000000000000000000000",
+      "printed_side": null,
+      "light_axis": 1,
+      "uneven_axis": 2,
+      "near_axis": 0,
+      "classes": 13,
+      "hues": 13,
+      "house_total": 259,
+      "stage_total": 293,
+      "house": [
+        34,
+        22,
+        17,
+        13,
+        41
+      ],
+      "stage": [
+        15,
+        28,
+        28,
+        15,
+        41
+      ]
+    },
+    "after": {
+      "n": 127,
+      "drawing": {
+        "kind": "regularized-view",
+        "path": "packing/atlas/known-best/regularized/n-127-regularized.yaml.gz",
+        "generator": "regularize_local_stencil/1"
+      },
+      "verified": true,
+      "side": "11800793726614962238623103308879/1000000000000000000000000000000",
+      "printed_side": null,
+      "light_axis": 0,
+      "uneven_axis": 0,
+      "near_axis": 0,
+      "classes": 13,
+      "hues": 13,
+      "house_total": 266,
+      "stage_total": 300,
+      "house": [
+        32,
+        22,
+        18,
+        12,
+        43
+      ],
+      "stage": [
+        13,
+        28,
+        29,
+        14,
+        43
+      ]
+    },
+    "gains": [
+      "light_axis",
+      "uneven_axis",
+      "house_total",
+      "stage_total"
+    ],
+    "losses": []
+  },
+  "run": {
+    "id": "local-stencil-think-1po1-2026-11-23",
+    "generator": "regularize_local_stencil/1",
+    "finished": "2026-11-23",
+    "parameters": {
+      "native_frame": true,
+      "anchor": "108",
+      "right": "110",
+      "upper": "116",
+      "admission_receipt": "packing/cases/regularized_drawings/think-1po1-2026-11-23/receipt.json"
+    },
+    "counts": 1,
+    "decisions": {
+      "admit": 1
+    },
+    "cost": {
+      "wall_seconds": 6.128,
+      "cpu_seconds": 2.735,
+      "workers": 1
+    }
+  }
+}
