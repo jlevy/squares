@@ -5,7 +5,7 @@ title: Diagnose failed grid-slack rows and test localized grid repairs
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: codex-exact-grid-repair-1123
 labels:
   - regularization
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-23T22:53:46.287Z
-updated_at: 2026-11-24T00:03:33.654Z
+updated_at: 2026-11-24T00:20:43.099Z
 started_at: 2026-11-23T23:20:33.404Z
 ---
 The manual review of the deployed defaults measured 232 (112 uneven aligned squares),
@@ -64,3 +64,5 @@ Coordinate residual angle work with think-huum and manual review tooling with th
 ## Notes
 
 Astra review B approved PR #1107 at b237acb437. The two-square 127 stack keeps T-341's exact side and passes both 8001-pair routes and row 10. Uneven aligned 2 to 0, house and stage totals 259/293 to 266/300, no individual losses. At 259 the fixed-tilt fully anchored variant had 21 negative selected rows. All-axis exact verification confirmed overlap 227–228. The overlap row depends on four pair equations (228–229, 200–201, 200–231, 201–227) and fixed y on 229 and 231. Swapping 200–231 out for 227–228 closes the overlap exactly, opens the outgoing gap, moves four centers and leaves 20 negative selected rows with no new ones. A 12-swap screen found no further monotone move within eight changed centers. Other swaps reducing the count to 14 propagated to 39–45 centers. Next compare bounded coupled components or alternative true separating axes on remaining 259 rows. At 232 and 305 float placement finished and the first exact settling variant reached the wall limit. Use small component reconstruction with anchored boundaries for the next pass. All raw trials are retained under grid-repair-20261123 in the external drawing audit evidence. No 232, 259 or 305 view admitted.
+
+131 control: placement in 1.22 s, first global settle timed out. Moving 23, 35, 40 only, anchored-first held 128 exact source poses, left six candidate coordinates and nine selected boundary rows, and settled in 0.047 s. Both exact routes accepted all 8,515 pairs at the registered exact side. It ties the current selected drawing on all seven measures. A separate screen targeted 15 diagnosed open-face pairs on the selected view. Two valid one-square moves of 65 (to 64/66) reduce uneven 21 to 19, but lose an existing house and stage contact for 72. Holding the contact by translating 72 merely transfers the regression to 86, then 79. Continuing the contact-chain translation encounters exact overlaps 79–80 or 36–48. Refuse both uniform-translation branches. Next targeted model should allow coupled nonuniform movements at most one small patch at a time, keep exact exterior anchors and include current neighbor contact floors. Raw evidence in n131-targeted-*, n131-contact-chain-trials.json and replay-131-anchored-first, under the same external grid-repair-20261123 directory. No 131 replacement admitted.
