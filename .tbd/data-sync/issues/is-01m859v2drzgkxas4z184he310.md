@@ -5,7 +5,7 @@ title: Diagnose failed grid-slack rows and test localized grid repairs
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: codex-exact-grid-repair-1123
 labels:
   - regularization
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-11-23T22:53:46.287Z
-updated_at: 2026-11-23T23:41:59.603Z
+updated_at: 2026-11-24T00:03:33.654Z
 started_at: 2026-11-23T23:20:33.404Z
 ---
 The manual review of the deployed defaults measured 232 (112 uneven aligned squares),
@@ -63,4 +63,4 @@ Coordinate residual angle work with think-huum and manual review tooling with th
 
 ## Notes
 
-Astra review and guarded experiments: the exact two-square 127 stack on T-341 passes both 8001-pair routes and row 10, fixes both uneven squares, and improves totals 259/293 to 266/300 with no individual losses. On 596a0c7038 with release proof and pin at 8a7b8f1bc5. 259 anchored pair sample retains 21 exact selected-row violations in both variants; 232 and 305 reached the wall deadline within their first exact settling variant. Retained raw logs are in grid-repair-20261123 in the external drawing audit evidence. After publication, the next selected entry is 259 alternate axes on named conflicts before narrowing a local exact solve; no current view switches at those three counts.
+Astra review B approved PR #1107 at b237acb437. The two-square 127 stack keeps T-341's exact side and passes both 8001-pair routes and row 10. Uneven aligned 2 to 0, house and stage totals 259/293 to 266/300, no individual losses. At 259 the fixed-tilt fully anchored variant had 21 negative selected rows. All-axis exact verification confirmed overlap 227–228. The overlap row depends on four pair equations (228–229, 200–201, 200–231, 201–227) and fixed y on 229 and 231. Swapping 200–231 out for 227–228 closes the overlap exactly, opens the outgoing gap, moves four centers and leaves 20 negative selected rows with no new ones. A 12-swap screen found no further monotone move within eight changed centers. Other swaps reducing the count to 14 propagated to 39–45 centers. Next compare bounded coupled components or alternative true separating axes on remaining 259 rows. At 232 and 305 float placement finished and the first exact settling variant reached the wall limit. Use small component reconstruction with anchored boundaries for the next pass. All raw trials are retained under grid-repair-20261123 in the external drawing audit evidence. No 232, 259 or 305 view admitted.
