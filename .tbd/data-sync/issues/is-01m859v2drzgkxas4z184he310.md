@@ -5,7 +5,7 @@ title: Diagnose failed grid-slack rows and test localized grid repairs
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: codex-exact-grid-repair-1123
 labels:
   - regularization
@@ -14,10 +14,11 @@ dependencies: []
 child_order_hints:
   - is-01m85bk7fexs4he29m1qhwwy17
   - is-01m85bmw6rhtgxkj2vbngwkzf6
+  - is-01m85f8bbsspr36sk83c2p6agb
 hold: null
 hold_until: null
 created_at: 2026-11-23T22:53:46.287Z
-updated_at: 2026-11-24T00:20:43.099Z
+updated_at: 2026-11-24T00:28:24.304Z
 started_at: 2026-11-23T23:20:33.404Z
 ---
 The manual review of the deployed defaults measured 232 (112 uneven aligned squares),
