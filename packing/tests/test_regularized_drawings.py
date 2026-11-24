@@ -475,7 +475,7 @@ def test_an_exact_solve_of_the_house_is_called_one_and_an_owed_regularization_is
         assert own["of"] == result, n
         assert own["side"] == "same", n
         assert "exact solve" not in fields[n]["note"], n
-    assert fields[259]["items"][0]["generator"] == "regularize_axis_components/2"
+    assert fields[259]["items"][0]["generator"] == axis_layer.LOCAL_FACE_GENERATOR
     assert drawings.exact_solve("[Daniel exact current records 2026-10-16]", 259)
     for n, of in ((153, "T-148"), (207, "T-147")):
         (item,) = (found for found in fields[n]["items"] if found["by"] != "project")

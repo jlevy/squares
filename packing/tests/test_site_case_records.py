@@ -127,16 +127,15 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     assert "(T-101), so it proves no new bound" in earlier
     assert "the upper bound it proves" not in earlier
 
-    # The T-337 house at 259 uses the axis drawing at the exact witness side.
-    axis = regularization(cases[259])
-    assert axis.startswith(
+    # The selected local face drawing keeps the exact side and lineage of T-337.
+    local = regularization(cases[259])
+    assert local.startswith(
         '<div class="site-case-note"><span class="site-card-label">Regularized drawing</span>'
-        "<p>Regularized by the Squares Project"
+        "<p>Regularized by the Squares Project with exact local placement"
     )
-    assert "regularize_axis_components/2" in axis
-    assert "A drawing of T-337" in axis
-    assert "a pure regularization, which proves no new bound" in axis
-    assert "owed" not in axis
+    assert "A drawing of T-337" in local
+    assert "a pure regularization, which proves no new bound" in local
+    assert "owed" not in local
 
     # PR 574's exact solve of PingYou's own packing at 153 (T-174) is labelled
     # as an exact solve (review B1 of #756).

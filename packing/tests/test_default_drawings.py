@@ -439,8 +439,10 @@ def test_the_exact_algebraic_houses_are_regularized_and_nothing_is_owed() -> Non
         assert rows[n]["drawn"] == defaults.VIEW, n
         assert rows[n]["generator"] == "regularize_grid_slack/2", n
         assert n not in defaults.SETTLED, n
-    assert rows[259]["state"] == defaults.DECIDED
-    assert defaults.SETTLED[259].state == defaults.DECIDED
+    assert rows[259]["state"] == defaults.REGULARIZED_STATE
+    assert rows[259]["drawn"] == defaults.VIEW
+    assert rows[259]["generator"] == defaults.LOCAL_FACE_GENERATOR
+    assert 259 not in defaults.SETTLED
     totals = record["totals"]["states"]
     assert totals[defaults.OWED] == 0
     _found, listed = defaults.state_problems()

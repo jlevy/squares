@@ -213,7 +213,8 @@ def test_a_view_is_labelled_by_its_generator() -> None:
     assert census.source_label(drawn(axis.EVAND_GENERATOR)) == "Evan view"
     for grid in axis.GRID_GENERATORS:
         assert census.source_label(drawn(grid)) == "grid view"
-    assert census.source_label(drawn(axis.LOCAL_STENCIL_GENERATOR)) == "local placement"
+    for local in (axis.LOCAL_STENCIL_GENERATOR, axis.LOCAL_FACE_GENERATOR):
+        assert census.source_label(drawn(local)) == "local placement"
     assert census.source_label(drawn(axis.ALGORITHM)) == "axis view"
     assert census.source_label(drawn(None)) == "axis view"
     # An older tree's index, and a census written from one, name the driver's command.

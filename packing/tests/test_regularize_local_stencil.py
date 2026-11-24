@@ -1,5 +1,8 @@
 """Controls for the exact same-side local stack recipe."""
 
+import gzip
+import hashlib
+from dataclasses import replace
 from fractions import Fraction as Q
 from pathlib import Path
 
@@ -125,3 +128,147 @@ def test_installer_rolls_back_an_ordinary_write_failure(
         local.install(admitted, {}, receipt, elapsed=1, cpu=1)
     assert view.read_bytes() == b"previous"
     assert not any(path.exists() for path in (*local.pending_paths(receipt), receipt))
+
+
+def test_faces_close_in_native_coordinate_order_and_hold_the_exterior() -> None:
+    frame = fixture_frame()
+    pairs = [("3", "8"), ("2", "3")]
+    centers, steps = local.aligned_faces(frame, pairs)
+    assert centers == [(Q(1), Q(1)), (Q(2), Q(1)), frame.centers[2], (Q(2), Q(2))]
+    assert [step["offset"] for step in steps] == [[1, 0], [0, 1]]
+    assert [step["translation"] for step in steps] == [["0", "-1/4"], ["-2", "-2"]]
+    assert frame.centers[1] == (Q(2), Q(5, 4))
+    with pytest.raises(ValueError, match="already coincide"):
+        local.aligned_faces(replace(frame, centers=centers), pairs)
+    left, steps = local.aligned_faces(frame, [("8", "3")])
+    assert steps[0]["offset"] == [-1, 0]
+    assert left[0] == (Q(1), Q(5, 4))
+    below, steps = local.aligned_faces(frame, [("3", "2")])
+    assert steps[0]["offset"] == [0, -1]
+    assert below[1] == (Q(4), Q(3))
+
+
+def test_faces_refuse_ambiguous_tilted_and_reopened_contacts() -> None:
+    frame = fixture_frame()
+    for pairs, reason in (
+        ([("8", "12")], "axis aligned"),
+        ([("8", "2")], "dominant axis"),
+        ([("3", "8"), ("3", "2")], "reopened"),
+        ([("3", "3")], "distinct square IDs"),
+        ([("3", "99")], "distinct square IDs"),
+    ):
+        with pytest.raises(ValueError, match=reason):
+            local.aligned_faces(frame, pairs)
+
+
+def test_face_install_replays_the_axis_recipe_and_checks_its_base(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(local, "REPO", tmp_path)
+    frame = fixture_frame()
+    matched = [same.Matched(r, i, 0) for i, r in enumerate(frame.rotations)]
+    source = {
+        "witness": "packing/witnesses/known-best/n-004.yaml",
+        "id": "W-004",
+        "scalar_kind": "rational",
+        "sha256": "a" * 64,
+    }
+    view_id = "W-004-regularized"
+    base = same.same_side_witness({}, frame, frame.centers, matched, view_id=view_id)
+    base_text = local.witness_document(base)
+    reference = {
+        "n": 4,
+        "status": "regularized",
+        "generator": local.axis.ALGORITHM,
+        "source": source,
+        "exact_verification": {"passed": True},
+        "view": {
+            "path": local.view_path(4),
+            "sha256": hashlib.sha256(base_text.encode()).hexdigest(),
+        },
+    }
+    faces = [("3", "8")]
+    monkeypatch.setattr(local.axis, "manifest_entries", lambda _layout: [{"n": 4}])
+    replay_text = base_text
+
+    def regenerate(_row, _layout, *, smallest_dilation):
+        assert smallest_dilation is False
+        return reference, replay_text, 0
+
+    monkeypatch.setattr(local.axis, "atlas_record", regenerate)
+    digest = reference["view"]["sha256"]
+    saved_frame, base_record = local.face_base(
+        4, reference, source, base, selected=True, selection_digest=digest
+    )
+    centers, steps = local.aligned_faces(saved_frame, faces)
+    construction = {"native_frame": True, "base": base_record, "faces": steps}
+    placed = same.same_side_witness({}, frame, centers, matched, view_id=view_id)
+    placed["certificate"] = {"generated": construction}
+    target = tmp_path / local.view_path(4)
+    target.parent.mkdir(parents=True)
+    target.write_bytes(gzip.compress(local.witness_document(placed).encode()))
+    path = local.receipt_path(local.RECEIPTS / "test-face-alignment/receipt.json")
+    run = {
+        "id": local.run_id(path),
+        "generator": local.axis.LOCAL_FACE_GENERATOR,
+        "parameters": {
+            **construction,
+            "admission_receipt": path.relative_to(tmp_path).as_posix(),
+        },
+    }
+    entry = {
+        **reference,
+        "generator": run["generator"],
+        "run": {"id": run["id"]},
+        "reference": reference,
+    }
+    local.driver.write_json(
+        tmp_path / local.driver.LAYER_INDEX_PATH, {"entries": [entry], "runs": [run]}
+    )
+    local.driver.write_json(
+        path,
+        {
+            "run": run,
+            "construction": construction,
+            "source": source,
+            "n": 4,
+            "comparison": {"after": {"drawing": {"path": local.view_path(4)}}},
+            "verdicts": {
+                name: {"passed": True, "pairs_tested": 6}
+                for name in ("exact_verify", "independent")
+            },
+        },
+    )
+    assert local.already_installed(4, (), path, faces=faces)
+    with pytest.raises(ValueError, match="different face pairs"):
+        local.already_installed(4, (), path, faces=[("8", "3")])
+
+    replay_text += "\n"
+    assert local.already_installed(4, (), path, faces=faces)
+    _, replay_record = local.face_base(
+        4, reference, source, base, selected=True, selection_digest=digest
+    )
+    assert replay_record == base_record
+    with pytest.raises(ValueError, match="different sources"):
+        local.face_base(
+            4,
+            reference,
+            source,
+            {**base, "source": {"path": "other"}},
+            selected=True,
+            selection_digest=digest,
+        )
+
+    shifted = frame.centers.copy()
+    shifted[2] = (Q(3), Q(3))
+    turned = matched.copy()
+    turned[2] = same.Matched((Q(3, 5), Q(4, 5)), 2, 0)
+    for differing_base in (
+        same.same_side_witness({}, frame, shifted, matched, view_id=view_id),
+        same.same_side_witness({}, frame, frame.centers, turned, view_id=view_id),
+    ):
+        replay_text = local.witness_document(differing_base)
+        with pytest.raises(ValueError, match="selected geometry differs"):
+            local.face_base(4, reference, source, base, selected=True, selection_digest=digest)
+        with pytest.raises(ValueError, match="installed drawing does not match"):
+            local.already_installed(4, (), path, faces=faces)

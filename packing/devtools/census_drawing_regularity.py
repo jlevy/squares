@@ -73,7 +73,11 @@ from strif import atomic_output_file
 
 from devtools import census_atlas_contact_shades as shades
 from devtools.build_known_best_atlas import frame_from_witness
-from devtools.regularize_axis_components import EVAND_GENERATOR, LOCAL_STENCIL_GENERATOR
+from devtools.regularize_axis_components import (
+    EVAND_GENERATOR,
+    LOCAL_FACE_GENERATOR,
+    LOCAL_STENCIL_GENERATOR,
+)
 from sqpack.render.color import assign_square_colors
 from sqpack.render.model import RenderSpec
 from sqpack.yamlio import load_yaml
@@ -368,7 +372,7 @@ def source_label(drawing: Mapping[str, Any]) -> str:
     generator = str(drawing.get("generator") or "")
     if generator == EVAND_GENERATOR or "regularize_evand" in generator:
         return "Evan view"
-    if generator == LOCAL_STENCIL_GENERATOR:
+    if generator in (LOCAL_STENCIL_GENERATOR, LOCAL_FACE_GENERATOR):
         return "local placement"
     return "grid view" if "regularize_grid_slack" in generator else "axis view"
 

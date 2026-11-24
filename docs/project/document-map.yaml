@@ -1556,6 +1556,7 @@ documents:
   - {path: packing/cases/regularized_drawings/think-w0ca-2026-11-23/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-huum-2026-11-23/post-adoption-selection.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/cases/regularized_drawings/think-1po1-2026-11-23/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-q3yr-2026-11-23/README.md, role: source-index, authority: record, lifecycle: retained}
 collections:
   - pattern: packing/contributors/people/*.md
     role: registry

@@ -69,6 +69,7 @@ from devtools.regularize_axis_components import (
     GRID_GENERATOR,
     GRID_GENERATOR_V1,
     GRID_GENERATOR_V2,
+    LOCAL_FACE_GENERATOR,
     LOCAL_STENCIL_GENERATOR,
 )
 from sqpack.render import render_packing_svg
@@ -101,6 +102,9 @@ MADE_BY = {
     ),
     LOCAL_STENCIL_GENERATOR: (
         "a local alignment of grid squares verified at the witness's exact side"
+    ),
+    LOCAL_FACE_GENERATOR: (
+        "its axis-regularized drawing with selected shared sides aligned at the exact side"
     ),
     **dict.fromkeys(
         (GRID_GENERATOR, GRID_GENERATOR_V1, GRID_GENERATOR_V2),
