@@ -177,6 +177,7 @@ from devtools.regularize_axis_components import (
     EVAND_AUTHOR_GENERATOR,
     EVAND_GENERATOR,
     LAPSED,
+    LOCAL_FACE_GENERATOR,
     LOCAL_STENCIL_GENERATOR,
 )
 from sqpack import retained_json
@@ -244,6 +245,7 @@ STRONG_GENERATORS = frozenset(
         EVAND_GENERATOR,
         EVAND_AUTHOR_GENERATOR,
         LOCAL_STENCIL_GENERATOR,
+        LOCAL_FACE_GENERATOR,
         "regularize_grid_slack/0",
         "regularize_grid_slack/1",
         "regularize_grid_slack/2",
@@ -946,26 +948,6 @@ SETTLED: dict[int, Settled] = {
         "light and uneven squares than the axis tool's view of this witness (11 and 26 "
         "against 9 and 24), so that view stays drawn",
         _README_LRJ4,
-    ),
-    259: Settled(
-        DECIDED,
-        "[GeiserX issue 1040 2026-11-19]",
-        "resources/web/geiserx-n259-1040-2026-11-19/source/upper/n259/packing.json.gz",
-        "GitHub issue attachment 35066502",
-        "82950082196149947811435271841381576148654522689634730357809504950900164392299895"
-        "62287054368276315229730904537926946071561900959/50000000000000000000000000000000"
-        "00000000000000000000000000000000000000000000000000000000000000000000000000000000"
-        "00000000000000",
-        (
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n259-grid-0.5"),
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n259-grid-1"),
-            ("regularize_grid_slack/2", "grid-slack-adopt-2026-11-21-n259-grid-5"),
-            (EVAND_GENERATOR, "evand-regularize-adopt-2026-11-21-n259-evand"),
-        ),
-        "Grid-slack found no view at 0.5, 1 or 5 degrees. Evan Daniel's same-side "
-        "re-solve refused on unmatched-rotation. The solved view is held at row 4, "
-        "about 1.659e-19 above U. The axis view draws T-337 at its exact side.",
-        "packing/cases/regularized_drawings/think-squj-2026-11-21/README.md",
     ),
     305: Settled(
         DECIDED,

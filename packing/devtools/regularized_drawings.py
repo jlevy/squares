@@ -166,6 +166,7 @@ EVAND_AUTHOR_GENERATOR = "evand-author-regularize/1"
 GENERATOR_KINDS = {
     AXIS_GENERATOR: "axis",
     "regularize_local_stencil/1": "local",
+    "regularize_local_stencil/2": "local",
     EVAND_GENERATOR: "evand",
     EVAND_AUTHOR_GENERATOR: "evand",
     "regularize_grid_slack/0": "grid",

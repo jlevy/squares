@@ -184,6 +184,7 @@ GRID_GENERATOR_V2 = "regularize_grid_slack/2"
 in its own field, and each unchanged tilted square keeps its own exact rotation."""
 GRID_GENERATORS = (GRID_GENERATOR, GRID_GENERATOR_V1, GRID_GENERATOR_V2)
 LOCAL_STENCIL_GENERATOR = "regularize_local_stencil/1"
+LOCAL_FACE_GENERATOR = "regularize_local_stencil/2"
 LOCAL_STENCIL_CREDIT = "Regularized by the Squares Project with exact local placement"
 POLICY_DOCUMENT = "docs/project/policies/regularization-policy.md"
 EVAND_CREDIT = (
@@ -196,7 +197,7 @@ ADMITTED_CREDITS = {
     EVAND_GENERATOR: EVAND_CREDIT,
     EVAND_AUTHOR_GENERATOR: EVAND_AUTHOR_CREDIT,
     **dict.fromkeys(GRID_GENERATORS, EVAND_CREDIT),
-    LOCAL_STENCIL_GENERATOR: LOCAL_STENCIL_CREDIT,
+    **dict.fromkeys((LOCAL_STENCIL_GENERATOR, LOCAL_FACE_GENERATOR), LOCAL_STENCIL_CREDIT),
 }
 """The credit carried by a view admitted into the layer, by the method that made it."""
 GENERATORS = (ALGORITHM, *ADMITTED_CREDITS)

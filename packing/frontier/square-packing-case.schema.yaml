@@ -143,7 +143,8 @@ $defs:
             generator:
               enum: [regularize_axis_components/2, evand-regularize, evand-author-regularize/1,
                      regularize_grid_slack/0, regularize_grid_slack/1,
-                     regularize_grid_slack/2, regularize_local_stencil/1]
+                     regularize_grid_slack/2, regularize_local_stencil/1,
+                     regularize_local_stencil/2]
             modifications: {type: array, items: {type: string, minLength: 1}}
             modifications_unrecorded:
               type: array

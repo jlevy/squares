@@ -1,0 +1,481 @@
+{
+ "n": 259,
+ "source": {
+  "witness": "packing/witnesses/known-best/n-259.yaml",
+  "id": "W-known-best-n259",
+  "scalar_kind": "rational",
+  "sha256": "7513f626ff1f55889d278d3b179cd9df1ac12bb5b1a85d81ddd5ed151716c9fb"
+ },
+ "construction": {
+  "native_frame": true,
+  "base": {
+   "generator": "regularize_axis_components/2",
+   "recipe": "devtools.regularize_axis_components.atlas_record",
+   "smallest_dilation": false,
+   "source": {
+    "witness": "packing/witnesses/known-best/n-259.yaml",
+    "id": "W-known-best-n259",
+    "scalar_kind": "rational",
+    "sha256": "7513f626ff1f55889d278d3b179cd9df1ac12bb5b1a85d81ddd5ed151716c9fb"
+   },
+   "id": "W-known-best-n259-regularized",
+   "path_at_selection": "packing/atlas/known-best/regularized/n-259-regularized.yaml.gz",
+   "sha256": "884e67e91ffe287a11da7d67b35c812f7d591ab8f25f1b845f24b3e1da09f1b2"
+  },
+  "faces": [
+   {
+    "moved": "118",
+    "anchor": "114",
+    "offset": [
+     1,
+     0
+    ],
+    "translation": [
+     "0",
+     "-5181133836787924663191541607545424489245870904810287823481750010362267673575849326383083215090848978491741809620575646963/125000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    ]
+   },
+   {
+    "moved": "99",
+    "anchor": "101",
+    "offset": [
+     -1,
+     0
+    ],
+    "translation": [
+     "188240998550098120720532296262673658556832974938676481364258562876481997100196241441064592525347317113665949877352962728517/31250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "0"
+    ]
+   },
+   {
+    "moved": "104",
+    "anchor": "108",
+    "offset": [
+     -1,
+     0
+    ],
+    "translation": [
+     "484110395065329811882694685688793974804816105692417175035755750968220790130659623765389371377587949609632211384834350071511/125000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+     "0"
+    ]
+   }
+  ]
+ },
+ "side": {
+  "reported": "8295008219614994781143527184138157614865452268963473035780950495090016439229989562287054368276315229730904537926946071561900959/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "view": "8295008219614994781143527184138157614865452268963473035780950495090016439229989562287054368276315229730904537926946071561900959/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "relation": "same",
+  "view_minus_reported": "0.000e+00",
+  "view_minus_verified_upper_bound": "0.000e+00"
+ },
+ "verdicts": {
+  "exact_verify": {
+   "passed": true,
+   "pairs_tested": 33411,
+   "touching_pairs": 480,
+   "container_contacts": 100,
+   "minimum_best_pair_gap": "0",
+   "failures": [],
+   "seconds": 12.883
+  },
+  "independent": {
+   "passed": true,
+   "pairs_tested": 33411,
+   "minimum_best_pair_gap": "0",
+   "minimum_containment_clearance": "0",
+   "failures": [],
+   "seconds": 9.416
+  }
+ },
+ "identity": {
+  "basis": "measured",
+  "measured_in": "devtools.check_half_angle_area.arrangement_gap",
+  "of": "witness",
+  "one_to_one": true,
+  "moved": 8,
+  "moved_beyond": {
+   "1e-9": 144,
+   "1e-6": 143,
+   "1e-3": 8,
+   "1e-2": 2,
+   "1e-1": 0
+  },
+  "max_move": "1.229227e-2",
+  "max_turn_deg": "0.0017205",
+  "turned": [
+   62,
+   63,
+   70,
+   71,
+   79,
+   82,
+   90,
+   91,
+   109,
+   110,
+   113,
+   116,
+   117,
+   118,
+   123,
+   124,
+   127,
+   129,
+   130,
+   131,
+   132,
+   136,
+   176,
+   181,
+   182,
+   186,
+   187,
+   188,
+   192,
+   210,
+   211,
+   212,
+   213,
+   214,
+   215,
+   216,
+   217,
+   257,
+   258
+  ],
+  "unnamed_turns": [
+   62,
+   63,
+   70,
+   71,
+   79,
+   82,
+   90,
+   91,
+   109,
+   110,
+   113,
+   116,
+   117,
+   118,
+   123,
+   124,
+   127,
+   129,
+   130,
+   131,
+   132,
+   136,
+   176,
+   181,
+   182,
+   186,
+   187,
+   188,
+   192,
+   210,
+   211,
+   212,
+   213,
+   214,
+   215,
+   216,
+   217,
+   257,
+   258
+  ],
+  "symmetry": 0,
+  "side_difference": "0",
+  "own_pairing": {
+   "basis": "square for square, the generator's own pairing (symmetry 0)",
+   "max_move": "1.229227e-02",
+   "turned": [
+    62,
+    63,
+    70,
+    71,
+    79,
+    82,
+    90,
+    91,
+    109,
+    110,
+    113,
+    116,
+    117,
+    118,
+    123,
+    124,
+    127,
+    129,
+    130,
+    131,
+    132,
+    136,
+    176,
+    181,
+    182,
+    186,
+    187,
+    188,
+    192,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    257,
+    258
+   ],
+   "unnamed_turns": [
+    62,
+    63,
+    70,
+    71,
+    79,
+    82,
+    90,
+    91,
+    109,
+    110,
+    113,
+    116,
+    117,
+    118,
+    123,
+    124,
+    127,
+    129,
+    130,
+    131,
+    132,
+    136,
+    176,
+    181,
+    182,
+    186,
+    187,
+    188,
+    192,
+    210,
+    211,
+    212,
+    213,
+    214,
+    215,
+    216,
+    217,
+    257,
+    258
+   ]
+  }
+ },
+ "contacts": {
+  "of": "witness",
+  "measured_in": "devtools.census_atlas_contact_shades: edge_rule_contacts (house) and centre_rule_contacts (stage) on packings_from_witness",
+  "house": {
+   "before": [
+    194,
+    37,
+    13,
+    12,
+    3
+   ],
+   "after": [
+    86,
+    14,
+    37,
+    25,
+    97
+   ]
+  },
+  "stage": {
+   "before": [
+    34,
+    34,
+    28,
+    27,
+    136
+   ],
+   "after": [
+    34,
+    31,
+    27,
+    26,
+    141
+   ]
+  },
+  "regressions": [],
+  "against_current": {
+   "view": "packing/atlas/known-best/regularized/n-259-regularized.yaml.gz",
+   "regressions": [],
+   "histograms": {
+    "house": [
+     88,
+     16,
+     33,
+     25,
+     97
+    ],
+    "stage": [
+     34,
+     31,
+     27,
+     26,
+     141
+    ]
+   }
+  }
+ },
+ "decision": {
+  "row": 10,
+  "decision": "admit",
+  "index_record": "regularized",
+  "refusal": null,
+  "reason": "every admission condition holds; the pose changes: squares [62, 63, 70, 71, 79, 82, 90, 91, 109, 110, 113, 116, 117, 118, 123, 124, 127, 129, 130, 131, 132, 136, 176, 181, 182, 186, 187, 188, 192, 210, 211, 212, 213, 214, 215, 216, 217, 257, 258] turned without a recorded angle change"
+ },
+ "comparison": {
+  "before": {
+   "n": 259,
+   "drawing": {
+    "kind": "regularized-view",
+    "path": "packing/atlas/known-best/regularized/n-259-regularized.yaml.gz",
+    "generator": "regularize_axis_components/2"
+   },
+   "verified": true,
+   "side": "8295008219614994781143527184138157614865452268963473035780950495090016439229989562287054368276315229730904537926946071561900959/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "printed_side": null,
+   "light_axis": 23,
+   "uneven_axis": 65,
+   "near_axis": 22,
+   "classes": 57,
+   "hues": 19,
+   "house_total": 545,
+   "stage_total": 727,
+   "house": [
+    88,
+    16,
+    33,
+    25,
+    97
+   ],
+   "stage": [
+    34,
+    31,
+    27,
+    26,
+    141
+   ]
+  },
+  "after": {
+   "n": 259,
+   "drawing": {
+    "kind": "regularized-view",
+    "path": "packing/atlas/known-best/regularized/n-259-regularized.yaml.gz",
+    "generator": "regularize_local_stencil/2"
+   },
+   "verified": true,
+   "side": "8295008219614994781143527184138157614865452268963473035780950495090016439229989562287054368276315229730904537926946071561900959/500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+   "printed_side": null,
+   "light_axis": 19,
+   "uneven_axis": 65,
+   "near_axis": 22,
+   "classes": 57,
+   "hues": 19,
+   "house_total": 551,
+   "stage_total": 727,
+   "house": [
+    86,
+    14,
+    37,
+    25,
+    97
+   ],
+   "stage": [
+    34,
+    31,
+    27,
+    26,
+    141
+   ]
+  },
+  "gains": [
+   "light_axis",
+   "house_total"
+  ],
+  "losses": []
+ },
+ "run": {
+  "id": "local-stencil-think-q3yr-2026-11-23",
+  "generator": "regularize_local_stencil/2",
+  "finished": "2026-11-24",
+  "parameters": {
+   "native_frame": true,
+   "base": {
+    "generator": "regularize_axis_components/2",
+    "recipe": "devtools.regularize_axis_components.atlas_record",
+    "smallest_dilation": false,
+    "source": {
+     "witness": "packing/witnesses/known-best/n-259.yaml",
+     "id": "W-known-best-n259",
+     "scalar_kind": "rational",
+     "sha256": "7513f626ff1f55889d278d3b179cd9df1ac12bb5b1a85d81ddd5ed151716c9fb"
+    },
+    "id": "W-known-best-n259-regularized",
+    "path_at_selection": "packing/atlas/known-best/regularized/n-259-regularized.yaml.gz",
+    "sha256": "884e67e91ffe287a11da7d67b35c812f7d591ab8f25f1b845f24b3e1da09f1b2"
+   },
+   "faces": [
+    {
+     "moved": "118",
+     "anchor": "114",
+     "offset": [
+      1,
+      0
+     ],
+     "translation": [
+      "0",
+      "-5181133836787924663191541607545424489245870904810287823481750010362267673575849326383083215090848978491741809620575646963/125000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+     ]
+    },
+    {
+     "moved": "99",
+     "anchor": "101",
+     "offset": [
+      -1,
+      0
+     ],
+     "translation": [
+      "188240998550098120720532296262673658556832974938676481364258562876481997100196241441064592525347317113665949877352962728517/31250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "0"
+     ]
+    },
+    {
+     "moved": "104",
+     "anchor": "108",
+     "offset": [
+      -1,
+      0
+     ],
+     "translation": [
+      "484110395065329811882694685688793974804816105692417175035755750968220790130659623765389371377587949609632211384834350071511/125000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "0"
+     ]
+    }
+   ],
+   "admission_receipt": "packing/cases/regularized_drawings/think-q3yr-2026-11-23/receipt.json"
+  },
+  "counts": 1,
+  "decisions": {
+   "admit": 1
+  },
+  "cost": {
+   "wall_seconds": 23.718,
+   "cpu_seconds": 17.061,
+   "workers": 1
+  }
+ }
+}

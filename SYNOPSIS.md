@@ -1956,6 +1956,7 @@ case or experiment separately.
 | [Drawing runs for the T-343 adoption at 264](packing/cases/regularized_drawings/think-w0ca-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
 | [post-adoption-selection.md](packing/cases/regularized_drawings/think-huum-2026-11-23/post-adoption-selection.md) | source retention and archive policy | record | retained | — |
 | [Exact Local Stack at 127](packing/cases/regularized_drawings/think-1po1-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
+| [Three Exact Grid Contacts at 259](packing/cases/regularized_drawings/think-q3yr-2026-11-23/README.md) | source retention and archive policy | record | retained | — |
 | `packing/contributors/people/*.md` | hand-maintained registry | record | maintained | — |
 | `packing/site-changelog.yaml` | hand-maintained registry | current | maintained | — |
 | `packing/benchmarks/math-startup/experiments/*.md` | typed experiment record | record | retained | — |

@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
-"""Test an exact local stack at the house side and admit it if it improves the drawing.
+"""Test an exact local placement at the house side and admit it if it improves the drawing.
 
 From packing, preview with
 `python -m devtools.regularize_local_stencil --n 127 --stack 108 110 116`.
 The three square IDs name the fixed anchor, its right neighbor, and the square
 immediately above that neighbor in the witness's native frame. The upper square
 is straightened. The other 125 placements in this example stay fixed.
+
+To align faces on a selected first-party axis view, use `--n 259 --face 118 114`.
+Each `--face MOVED ANCHOR` places MOVED against ANCHOR along the dominant native
+coordinate. Multiple pairs are applied in order and checked together.
 
 Use `--install --receipt packing/cases/regularized_drawings/RUN/receipt.json`
 to write the verified view and its admission receipt. Regenerate the atlas and
@@ -15,6 +19,7 @@ case records through the normal regularization process.
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 import math
@@ -43,6 +48,11 @@ METHOD = (
     "regularize_local_stencil/1: exact axis-aligned stack from a fixed source square, "
     "with all other placements held and both exact verification routes applied"
 )
+FACE_METHOD = (
+    "regularize_local_stencil/2: aligned faces on the selected regularize_axis_components/2 "
+    "drawing, with its other squares and all its rotations held at the registered side"
+)
+AXIS_ORIENTATIONS = {(1, 0), (-1, 0), (0, 1), (0, -1)}
 RECEIPTS = Path("packing/cases/regularized_drawings")
 
 
@@ -69,8 +79,7 @@ def stack(
     if frame.kind != "rational":
         raise ValueError("the local stack requires a rational source")
     left, right, upper = [by_id[label] for label in labels]
-    axis_orientations = {(1, 0), (-1, 0), (0, 1), (0, -1)}
-    if any(frame.rotations[index] not in axis_orientations for index in (left, right)):
+    if any(frame.rotations[index] not in AXIS_ORIENTATIONS for index in (left, right)):
         raise ValueError("the stack's anchor and right neighbor must already be axis aligned")
     x, y = frame.centers[left]
     centers = list(frame.centers)
@@ -83,16 +92,68 @@ def stack(
     return centers, matched, [upper + 1]
 
 
+def aligned_faces(
+    frame: same.Frame, faces: Sequence[Sequence[str]]
+) -> tuple[list[same.Point], list[dict[str, Any]]]:
+    """Translate each moved square against the named anchor and keep every requested side."""
+    if frame.kind != "rational" or not faces:
+        raise ValueError("face alignment requires a rational frame and at least one pair")
+    indices = {str(label): i for i, label in enumerate(frame.ids)}
+    centers = frame.centers.copy()
+    steps: list[dict[str, Any]] = []
+    for pair in faces:
+        if len(pair) != 2 or pair[0] == pair[1] or not set(pair) <= indices.keys():
+            raise ValueError("each face needs two distinct square IDs from the base drawing")
+        moved, anchor = [indices[label] for label in pair]
+        if any(frame.rotations[i] not in AXIS_ORIENTATIONS for i in (moved, anchor)):
+            raise ValueError("both squares of each face must be exactly axis aligned")
+        x, y = centers[moved]
+        ax, ay = centers[anchor]
+        dx, dy = x - ax, y - ay
+        if abs(dx) == abs(dy):
+            raise ValueError("the two centers have no unique dominant axis")
+        offset = (1 if dx > 0 else -1, 0) if abs(dx) > abs(dy) else (0, 1 if dy > 0 else -1)
+        target = ax + offset[0], ay + offset[1]
+        centers[moved] = target
+        steps.append(
+            {
+                "moved": pair[0],
+                "anchor": pair[1],
+                "offset": list(offset),
+                "translation": [same.literal(target[0] - x), same.literal(target[1] - y)],
+            }
+        )
+    for step in steps:
+        x, y = centers[indices[step["moved"]]]
+        ax, ay = centers[indices[step["anchor"]]]
+        if [x - ax, y - ay] != step["offset"]:
+            raise ValueError("a later move reopened an earlier requested face")
+    if centers == frame.centers:
+        raise ValueError("the requested faces already coincide on the base drawing")
+    return centers, steps
+
+
 def certified_view(
-    witness: dict[str, Any], frame: same.Frame, labels: Sequence[str]
+    witness: dict[str, Any],
+    frame: same.Frame,
+    labels: Sequence[str],
+    *,
+    face_centers: list[same.Point] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], list[int]]:
     """Check the candidate read back from its witness representation, on both routes."""
-    centers, matched, straightened = stack(frame, labels)
+    if face_centers is None:
+        centers, matched, straightened = stack(frame, labels)
+        method = "local stack"
+    else:
+        centers = face_centers
+        matched = [same.Matched(rotation, i, 0) for i, rotation in enumerate(frame.rotations)]
+        straightened = []
+        method = "local face alignment"
     view = same.same_side_witness(
         witness, frame, centers, matched, view_id=grid.regularized_id(witness)
     )
     view["claim"]["limitations"] = (
-        "An exact same-side placement made by the local stack generator. "
+        f"An exact same-side placement made by the {method} generator. "
         "This certificate establishes feasibility."
     )
     document = load_yaml(witness_document(view))
@@ -109,13 +170,13 @@ def certified_view(
         or replay.centers != centers
         or replay.rotations != [item.rotation for item in matched]
     ):
-        raise ValueError("the serialized stack does not reproduce the proposed geometry")
+        raise ValueError("the serialized placement does not reproduce the proposed geometry")
     verdicts = same.verify_both(decoded, replay.centers, matched, replay.side)
     pairs = math.comb(len(centers), 2)
     if not all(
         route["passed"] and route["pairs_tested"] == pairs for route in verdicts.values()
     ):
-        raise ValueError(f"the proposed stack failed exact verification: {verdicts}")
+        raise ValueError(f"the proposed placement failed exact verification: {verdicts}")
     decoded["claim"]["coordinate_provenance"] = "verified"
     return decoded, verdicts, straightened
 
@@ -129,7 +190,68 @@ def drawing_before(n: int) -> tuple[census.Drawing, dict[str, Any]]:
     return census.drawing_for(REPO, n, {key: entries[key] for key in selected})
 
 
-def prepare(n: int, labels: Sequence[str], run: str) -> tuple[driver.Admitted, dict[str, Any]]:
+def face_base(
+    n: int,
+    reference: dict[str, Any],
+    source: dict[str, Any],
+    drawing: dict[str, Any],
+    *,
+    selected: bool,
+    selection_digest: str,
+) -> tuple[same.Frame, dict[str, Any]]:
+    """Replay the axis recipe from the house. The digest records the input as published."""
+    layout = driver.layer_layout(REPO)
+    manifest = next(row for row in axis.manifest_entries(layout) if row["n"] == n)
+    original, text, _seconds = axis.atlas_record(manifest, layout, smallest_dilation=False)
+    for entry in (reference, original):
+        if (
+            entry.get("n") != n
+            or entry.get("generator") != axis.ALGORITHM
+            or entry.get("status") != "regularized"
+            or (entry.get("view") or {}).get("path") != view_path(n)
+            or not (entry.get("exact_verification") or {}).get("passed")
+            or any(
+                entry["source"].get(k) != source[k] for k in ("witness", "id", "scalar_kind")
+            )
+        ):
+            raise ValueError(
+                "the base must match the verified axis drawing of the official house"
+            )
+    if text is None:
+        raise ValueError("the original axis drawing could not be regenerated from the house")
+    rebuilt = load_yaml(text)["witness"]
+    if (
+        rebuilt["n"] != n
+        or rebuilt["id"] != f"{source['id']}-regularized"
+        or any(drawing[k] != rebuilt[k] for k in ("id", "n", "source"))
+    ):
+        raise ValueError("the drawing and regenerated axis base name different sources")
+    frame = same.exact_frame(rebuilt)
+    if selected:
+        incumbent = same.exact_frame(drawing)
+        if (
+            incumbent.kind != "rational"
+            or incumbent.ids != frame.ids
+            or incumbent.side != frame.side
+            or incumbent.centers != frame.centers
+            or incumbent.rotations != frame.rotations
+        ):
+            raise ValueError("the selected geometry differs from the regenerated axis base")
+    provenance = {
+        "generator": axis.ALGORITHM,
+        "recipe": "devtools.regularize_axis_components.atlas_record",
+        "smallest_dilation": False,
+        "source": source,
+        "id": rebuilt["id"],
+        "path_at_selection": view_path(n),
+        "sha256": selection_digest,
+    }
+    return frame, provenance
+
+
+def prepare(
+    n: int, labels: Sequence[str], run: str, *, faces: Sequence[Sequence[str]] = ()
+) -> tuple[driver.Admitted, dict[str, Any]]:
     source_path = Path(f"packing/witnesses/known-best/n-{n:03d}.yaml")
     source_bytes = (REPO / source_path).read_bytes()
     house = load_yaml(source_bytes.decode("utf-8"))["witness"]
@@ -139,7 +261,46 @@ def prepare(n: int, labels: Sequence[str], run: str) -> tuple[driver.Admitted, d
     if bound is None or bound.compare(frame.side) != 0:
         raise ValueError("the exact house side must equal the registered bound")
 
-    view, verdicts, straightened = certified_view(house, frame, labels)
+    origin = {
+        "witness": source_path.as_posix(),
+        "id": str(house["id"]),
+        "scalar_kind": str(house["scalar"]["kind"]),
+        "sha256": hashlib.sha256(source_bytes).hexdigest(),
+    }
+    drawing, current = drawing_before(n)
+    generator = axis.LOCAL_STENCIL_GENERATOR
+    face_centers = None
+    if faces:
+        if labels or drawing.generator != axis.ALGORITHM or drawing.path != view_path(n):
+            raise ValueError("face alignment requires the selected first-party axis drawing")
+        entry = census.read_index(REPO)[n]
+        text = gzip.decompress((REPO / drawing.path).read_bytes())
+        base, base_record = face_base(
+            n,
+            entry,
+            origin,
+            current,
+            selected=True,
+            selection_digest=hashlib.sha256(text).hexdigest(),
+        )
+        if base.side != frame.side or base.ids != frame.ids:
+            raise ValueError("the axis base differs from the house side or square IDs")
+        frame = base
+        face_centers, steps = aligned_faces(base, faces)
+        generator = axis.LOCAL_FACE_GENERATOR
+        provenance = {"native_frame": True, "base": base_record, "faces": steps}
+    else:
+        if len(labels) != 3:
+            raise ValueError("the stack needs three distinct IDs from the witness")
+        provenance = {
+            "native_frame": True,
+            "anchor": labels[0],
+            "right": labels[1],
+            "upper": labels[2],
+        }
+    view, verdicts, straightened = certified_view(
+        house, frame, labels, face_centers=face_centers
+    )
     measured = grid.measure(n, house, view, straightened)
     report = {
         "n": n,
@@ -148,37 +309,24 @@ def prepare(n: int, labels: Sequence[str], run: str) -> tuple[driver.Admitted, d
     }
     decision = grid.decided(report, house)
     if decision.row != axis.ADMITTING_ROW or decision.decision != "admit":
-        raise ValueError(f"the stack did not pass row 10: {decision.reason}")
+        raise ValueError(f"the placement did not pass row 10: {decision.reason}")
     if measured["drawing"]["replica_disagrees"]:
         raise ValueError("the contact census disagrees with the renderer")
 
-    drawing, current = drawing_before(n)
     before = regularize_select.measured(n, drawing, current)
     after = regularize_select.measured(
         n,
-        census.Drawing(n, "regularized-view", view_path(n), axis.LOCAL_STENCIL_GENERATOR),
+        census.Drawing(n, "regularized-view", view_path(n), generator),
         view,
     )
     gains, losses = regularize_select.compare(after, before)
     if losses or not gains:
         raise ValueError(
-            f"the stack must improve the displayed drawing without losses: {losses}"
+            f"the placement must improve the displayed drawing without losses: {losses}"
         )
 
     ident = measured["identity"]
     contacts = measured["shades"]
-    origin = {
-        "witness": source_path.as_posix(),
-        "id": str(house["id"]),
-        "scalar_kind": str(house["scalar"]["kind"]),
-        "sha256": hashlib.sha256(source_bytes).hexdigest(),
-    }
-    provenance = {
-        "native_frame": True,
-        "anchor": labels[0],
-        "right": labels[1],
-        "upper": labels[2],
-    }
     identity = {
         "basis": "measured",
         "measured_in": driver.LAYER_INDEX_PATH,
@@ -200,13 +348,13 @@ def prepare(n: int, labels: Sequence[str], run: str) -> tuple[driver.Admitted, d
             facts, (house.get("source") or {}).get("key"), "same"
         ),
         "by": "project",
-        "method": METHOD,
+        "method": FACE_METHOD if faces else METHOD,
         "side": "same",
         "identity": identity,
     }
     admitted = driver.Admitted(
         n=n,
-        generator=axis.LOCAL_STENCIL_GENERATOR,
+        generator=generator,
         run={"id": run, "output": "same"},
         source=origin,
         side={
@@ -254,12 +402,13 @@ def run_id(receipt: Path) -> str:
     return f"local-stencil-{receipt.parent.name}"
 
 
-def already_installed(n: int, labels: Sequence[str], receipt: Path) -> bool:
+def already_installed(
+    n: int, labels: Sequence[str], receipt: Path, *, faces: Sequence[Sequence[str]] = ()
+) -> bool:
     """Recognize a completed install only after matching both the recipe and view."""
     entry = census.read_index(REPO).get(n) or {}
-    if entry.get("generator") != axis.LOCAL_STENCIL_GENERATOR or entry["run"]["id"] != run_id(
-        receipt
-    ):
+    generator = axis.LOCAL_FACE_GENERATOR if faces else axis.LOCAL_STENCIL_GENERATOR
+    if entry.get("generator") != generator or entry["run"]["id"] != run_id(receipt):
         return False
     if not receipt.is_file():
         raise ValueError("the installed stencil needs its original admission receipt")
@@ -281,18 +430,42 @@ def already_installed(n: int, labels: Sequence[str], receipt: Path) -> bool:
     construction = admitted["construction"]
     if admitted["n"] != n:
         raise ValueError("the retained receipt names a different count")
-    if [construction[key] for key in ("anchor", "right", "upper")] != list(labels):
-        raise ValueError("the retained receipt names a different stack")
-    _, house = census.drawing_for(REPO, n, {})
-    frame = same.exact_frame(house)
-    centers, matched, _ = stack(frame, labels)
     _, installed = census.drawing_for(REPO, n, {n: entry})
+    if faces:
+        if labels or [(s["moved"], s["anchor"]) for s in construction["faces"]] != [
+            tuple(pair) for pair in faces
+        ]:
+            raise ValueError("the retained receipt names different face pairs")
+        frame, base = face_base(
+            n,
+            entry["reference"],
+            admitted["source"],
+            installed,
+            selected=False,
+            selection_digest=construction["base"]["sha256"],
+        )
+        centers, steps = aligned_faces(frame, faces)
+        expected = {"native_frame": True, "base": base, "faces": steps}
+        if (
+            construction != expected
+            or installed["certificate"]["generated"] != expected
+            or {k: published["parameters"].get(k) for k in expected} != expected
+        ):
+            raise ValueError("the installed face recipe disagrees with the regenerated base")
+        rotations = frame.rotations
+    else:
+        if [construction[key] for key in ("anchor", "right", "upper")] != list(labels):
+            raise ValueError("the retained receipt names a different stack")
+        _, house = census.drawing_for(REPO, n, {})
+        frame = same.exact_frame(house)
+        centers, matched, _ = stack(frame, labels)
+        rotations = [item.rotation for item in matched]
     replay = same.exact_frame(installed)
     if (
         replay.side != frame.side
         or replay.ids != frame.ids
         or replay.centers != centers
-        or replay.rotations != [item.rotation for item in matched]
+        or replay.rotations != rotations
     ):
         raise ValueError("the installed drawing does not match its stencil")
     return True
@@ -330,7 +503,7 @@ def install(
         raise ValueError(f"receipt already exists: {path.relative_to(REPO)}")
     run = {
         "id": admitted.run["id"],
-        "generator": axis.LOCAL_STENCIL_GENERATOR,
+        "generator": admitted.generator,
         "finished": datetime.now(UTC).date().isoformat(),
         "parameters": {
             **admitted.provenance,
@@ -340,11 +513,13 @@ def install(
         "decisions": {"admit": 1},
         "cost": {"wall_seconds": round(elapsed, 3), "cpu_seconds": round(cpu, 3), "workers": 1},
     }
+    face = admitted.generator == axis.LOCAL_FACE_GENERATOR
+    arguments = "--face MOVED ANCHOR" if face else "--stack A B C"
     generator = {
         "tool": TOOL,
-        "generated_by": "python -m devtools.regularize_local_stencil --n N --stack A B C",
-        "method": METHOD,
-        "credit": axis.LOCAL_STENCIL_CREDIT,
+        "generated_by": f"python -m devtools.regularize_local_stencil --n N {arguments}",
+        "method": FACE_METHOD if face else METHOD,
+        "credit": axis.ADMITTED_CREDITS[admitted.generator],
     }
     # Stage the receipt first. If the writer stops between the view and the
     # index, a retry can restore just that count's view before measuring again.
@@ -362,7 +537,7 @@ def install(
     try:
         driver.write_json(path, {**receipt, "run": run})
         result = driver.admit_views(
-            [admitted], REPO, generators={axis.LOCAL_STENCIL_GENERATOR: generator}, runs=[run]
+            [admitted], REPO, generators={admitted.generator: generator}, runs=[run]
         )
     except Exception:
         if census.read_index(REPO).get(admitted.n) == prior["entry"]:
@@ -370,7 +545,7 @@ def install(
         raise
     if result["written"] != [admitted.n]:
         restore_interrupted(admitted.n, path)
-        raise ValueError(f"the atlas did not accept the stack: {result}")
+        raise ValueError(f"the atlas did not accept the placement: {result}")
     state.unlink()
     backup.unlink(missing_ok=True)
 
@@ -378,7 +553,9 @@ def install(
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--n", required=True, type=int)
-    parser.add_argument("--stack", required=True, nargs=3, metavar=("ANCHOR", "RIGHT", "UPPER"))
+    recipe = parser.add_mutually_exclusive_group(required=True)
+    recipe.add_argument("--stack", nargs=3, metavar=("ANCHOR", "RIGHT", "UPPER"), default=())
+    recipe.add_argument("--face", nargs=2, action="append", metavar=("MOVED", "ANCHOR"))
     parser.add_argument("--install", action="store_true")
     parser.add_argument(
         "--receipt", type=Path, help="repository-relative receipt.json for --install"
@@ -388,18 +565,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error("--install and --receipt are used together")
     start, cpu = time.perf_counter(), time.process_time()
     path = receipt_path(args.receipt) if args.receipt is not None else None
-    if path is not None and already_installed(args.n, args.stack, path):
+    if path is not None and already_installed(args.n, args.stack, path, faces=args.face or ()):
         for staged in pending_paths(path):
             staged.unlink(missing_ok=True)
-        print(f"n={args.n}: the verified stack is already in the layer")
+        print(f"n={args.n}: the verified placement is already in the layer")
         return 0
     if path is not None:
         restore_interrupted(args.n, path)
     run = run_id(path) if path is not None else "local-stencil-preview"
-    admitted, receipt = prepare(args.n, args.stack, run)
+    admitted, receipt = prepare(args.n, args.stack, run, faces=args.face or ())
     if path is not None:
         install(admitted, receipt, path, time.perf_counter() - start, time.process_time() - cpu)
-        print(f"n={args.n}: installed the verified local stack")
+        print(f"n={args.n}: installed the verified local placement")
     else:
         print(json.dumps(receipt, indent=2, default=str))
     return 0

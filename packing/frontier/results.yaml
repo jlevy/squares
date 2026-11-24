@@ -55940,13 +55940,13 @@ regularized_drawings:
     - n: 259
       of: T-337
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_local_stencil/2: aligned faces on the selected regularize_axis_components/2 drawing, with its other squares and all its rotations held at the registered side"
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 6
+        moved: 8
         max_move: 0.01229227
         max_turn_deg: 0.0017205
       view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz

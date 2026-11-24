@@ -52,6 +52,7 @@ properties:
       regularize_grid_slack/1: {$ref: '#/$defs/generator'}
       regularize_grid_slack/2: {$ref: '#/$defs/generator'}
       regularize_local_stencil/1: {$ref: '#/$defs/generator'}
+      regularize_local_stencil/2: {$ref: '#/$defs/generator'}
   runs:
     description: >-
       The generator runs whose views the layer draws, or whose reports supplied a drawn
@@ -68,7 +69,7 @@ $defs:
   generator_id:
     enum: [regularize_axis_components/2, evand-regularize, evand-author-regularize/1,
            regularize_grid_slack/0, regularize_grid_slack/1, regularize_grid_slack/2,
-           regularize_local_stencil/1]
+           regularize_local_stencil/1, regularize_local_stencil/2]
   axis_generator:
     type: object
     additionalProperties: false
@@ -297,7 +298,8 @@ $defs:
       status: {const: regularized}
       generator:
         enum: [evand-regularize, evand-author-regularize/1, regularize_grid_slack/0,
-               regularize_grid_slack/1, regularize_grid_slack/2, regularize_local_stencil/1]
+               regularize_grid_slack/1, regularize_grid_slack/2,
+               regularize_local_stencil/1, regularize_local_stencil/2]
       run:
         type: object
         additionalProperties: false
