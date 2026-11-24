@@ -106,6 +106,11 @@ DECLARED_CONSUMERS = {
         "house side. The comparison governs admission of a same-side drawing and makes "
         "no claim about optimality"
     ),
+    "packing/devtools/regularize_local_stencil.py": (
+        "requires the independently read exact house side to equal the verified ceiling "
+        "before making a fixed-side drawing. The recorded view-minus-ceiling value is "
+        "zero because the view keeps that exact side"
+    ),
     "packing/tests/test_regularize_evand.py": (
         "a synthetic report for the driver's tests carries U as the driver writes it, so the "
         "test can check a view at exactly U is decided as `bound`; it is a ceiling there, "
