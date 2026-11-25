@@ -26899,6 +26899,23 @@ issues:
         confirmation: C3
         status: confirmed
         position: superseded
+    - url: https://github.com/jlevy/squares/issues/804#issuecomment-7154815465
+      date: '2026-11-25'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: exact-sides-new
+        id: T-244
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
+      - result: configurations-172-263
+        id: T-244
+        verification: V3
+        confirmation: C3
+        status: confirmed
+        position: superseded
     close_when: >-
       The 88, 126 and 199 sides have been answered as values T-193 holds. The author's
       configurations at 172 and 263 are decided exactly (think-4rzl), and T-244 is validated, or
@@ -27011,6 +27028,24 @@ issues:
       "Corrections to earlier replies", which it uses for every moved field; that heading
       does not make the reply a correction. read_through stays at the author's comment of 31
       October, since replies are not read through.
+
+      The follow-up of 06:27:48Z on 25 November 2026 (issuecomment-7154815465), posted by
+      jlevy after #1109 merged at 06:27:38Z and recorded in lane rec804 (think-4og2), was
+      owed because the final reply stated T-244 pending adoption at 263 and the case there
+      has since adopted another packing: #1090, merged on 23 November, made Joost de
+      Winter's quadratic certificate of Sergio Fernández Rubio's packing (T-344, #1037) the
+      house, which the reply dates to 22 November as the case record does. It states T-244
+      unchanged at V3/C3, confirmed and still the exact side of T-174's packing at 263 (the
+      degree-17 root, 16.7331660078993789…), and its position at 263 superseded: T-344 is a
+      different packing with an exact side of about 16.7243727091084185, about 8.79e-3
+      below, so T-174's packing, and with it T-244, is no longer the best the record holds
+      at 263. At 172 it says nothing changes, T-244 being superseded there already. T-244
+      is recorded under its two results, exact-sides-new and configurations-172-263, with
+      those fields. T-344 and T-174 are named as context, and so is T-247, of which the
+      reply says only that the follow-up of 14 November stands; none of the three is
+      recorded under reported. It names no evidence id and no bead, says the issue stays
+      closed, and names no reply in `corrects`, for the reason given for the follow-up of
+      14 November.
   - number: 806
     title: 's(182) ≤ 13.970916436215: registration request'
     author: evand

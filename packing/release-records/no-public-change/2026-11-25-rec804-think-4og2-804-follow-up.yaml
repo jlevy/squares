@@ -1,0 +1,15 @@
+components:
+- paper:square-packing-methods-survey
+paths:
+- packing/campaign/result-requests.yaml
+outputs:
+- papers/square-packing-methods-survey.html
+- papers/square-packing-methods-survey.md
+reason: >-
+  Lane rec804 (think-4og2) records the jlevy follow-up of 25 November 2026 on #804
+  under that issue's replies: T-244 at V3/C3, confirmed, position superseded, with a
+  paragraph in the entry's notes. It adds no result and changes no rung.
+  devtools.compare_paper_renders rendered the Methods Survey with this ledger and with
+  the ledger of main bdc70e0e15603ed56dd341cca9462a9e3cd5f82a swapped in: 43 files,
+  byte-identical across the three renders. The candidate ledger was restored after the
+  baseline render. The paper keeps v0.2.7.
