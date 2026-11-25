@@ -2525,3 +2525,22 @@ repositories:
       18-square alternate construction. #1090 publishes T-344 and both
       exact same-side drawings at 202 and 263. Main retains these results
       and their reviewed source material.
+  - url: https://github.com/Mira-Cult/math
+    read_through: 357d26a23fbbee5c900098938744ab732b84d03a
+    read_on: '2026-11-25'
+    note: >-
+      The four commits after 14983194 concern finite simple Bol loops (407b889,
+      higher-rotation abelian minima) and a new note on joint normality of
+      Stoneham series with its index entry and a math-syntax edit (c5c1a96,
+      c7eca25, 357d26a). All eleven changed files are under notes/. The
+      square-packing files and the root README are unchanged.
+  - url: https://github.com/jlevy/squares
+    read_through: b5c0bf6020635fd062487be2a71e41ad048d564c
+    read_on: '2026-11-25'
+    note: >-
+      Main through #1108. #1104 publishes the News entry for the 202- and
+      263-square results and records intake follow-ups. #1105 separates
+      packing credit from certificate regularization at 127 and 305. #1106
+      adds a residual grid diagnosis to the manual regularization review.
+      #1107 and #1108 publish regularized drawings at 127 and 259. None
+      registers a new result, and main retains all of it.
