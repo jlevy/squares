@@ -2544,3 +2544,18 @@ repositories:
       adds a residual grid diagnosis to the manual regularization review.
       #1107 and #1108 publish regularized drawings at 127 and 259. None
       registers a new result, and main retains all of it.
+  - url: https://github.com/Mira-Cult/math
+    read_through: cf9e57fc955f5db8c65c16b3e04c103564cbee1b
+    read_on: '2026-11-25'
+    note: >-
+      The two commits after 357d26a2 concern finite simple Bol loops (c41ba46,
+      provisional higher-rotation proofs; cf9e57f, link text in the census).
+      All six changed files are under notes/finite-simple-bol-loops/. The
+      square-packing files and the root README are unchanged.
+  - url: https://github.com/jlevy/squares
+    read_through: 4aa6bd81ab9971d4255dc036bd03bc5cd3a38c01
+    read_on: '2026-11-25'
+    note: >-
+      Main through #1110. #1109 records the watch reads of Mira-Cult/math and
+      of main through #1108. #1110 records the follow-up on issue 804. Neither
+      registers a new result, and main retains both.
